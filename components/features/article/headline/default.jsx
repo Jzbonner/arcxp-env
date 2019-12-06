@@ -7,6 +7,7 @@ import './style.scss';
 const Headline = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
+  // console.log('test',globalContent);
 
   return (
     <div className="article-headline text-align">
