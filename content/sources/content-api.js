@@ -6,8 +6,8 @@ const params = {
 };
 
 const resolve = (query) => {
-  const { path, published } = query;
-  const requestUri = `/content/v4/stories/?website_url=${path}&website=ajc`;
+  const { 'arc-site': arcSite = 'ajc', path, published } = query;
+  const requestUri = `/content/v4/stories/?website_url=${path}&website=${arcSite}`;
   return published ? `${requestUri}&published=${published}` : requestUri;
 };
 

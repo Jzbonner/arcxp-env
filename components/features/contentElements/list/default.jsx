@@ -1,10 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const List = () => (
+const List = ({ src }) => (
     <div style={{ border: '1px solid #000', padding: '10px' }}>
       Content Element Type: <strong>List</strong>
-      <p dangerouslySetInnerHTML={{ __html: [this.props.src.content] }}></p>
+      <p>{src.content}</p>
     </div>
 );
+
+List.propTypes = {
+  src: PropTypes.node,
+};
 
 export default List;

@@ -1,10 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Paragraph = () => (
+const Paragraph = ({ src }) => (
     <div style={{ border: '1px solid #000', padding: '10px' }}>
       Content Element Type: <strong>Text / Paragraph</strong>
-      <p dangerouslySetInnerHTML={{ __html: [this.props.src.content] }}></p>
+      <p>{src.content}</p>
     </div>
 );
+
+Paragraph.propTypes = {
+  src: PropTypes.node,
+};
 
 export default Paragraph;

@@ -17,10 +17,12 @@ import Header from './header/default';
 const ContentElement = () => {
   const context = useAppContext();
   const { globalContent } = context;
+  const allElements = globalContent.content_elements ? globalContent.content_elements : [];
+  // console.log('CONTENT ELEMENTS', contentElements);
 
   return (
     <div>
-      {globalContent.content_elements.map((element, idx) => {
+      {allElements.map((element, idx) => {
         // console.log('ELEMENT TYPE', element.type)
         switch (element.type) {
           case 'blockquote':
@@ -61,4 +63,5 @@ const ContentElement = () => {
     </div>
   );
 };
+
 export default ContentElement;
