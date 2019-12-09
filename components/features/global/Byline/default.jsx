@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import './default.scss';
 
 const Byline = () => {
   const appContext = useAppContext();
@@ -21,10 +20,10 @@ const Byline = () => {
       }
 
       if ((i === authors.length - 1 && !hasOrganization) || i === authors.length - 2 || (authors[i + 1] && authors[i + 1].name === 'and')) {
-        return <a href="#">{element.name}</a>;
+        return <a key={element.name} href="#">{element.name}</a>;
       }
 
-      return <span key={i}><a href="#">{element.name ? `${element.name}` : null}</a>, </span>;
+      return <span key={element.name}><a href="#">{element.name ? `${element.name}` : null}</a>, </span>;
     });
 
     return bylineData;
@@ -39,15 +38,25 @@ const Byline = () => {
       }
 
       if (i === authorData.length - 1 && !element.orgName) {
-        return <a href="#">{element.name} </a>;
+        return <a key={element.name} href="#">{element.name} </a>;
       }
 
-      return <a key={i} href="#">{element.name}</a>;
+      return <a key={element.name} href="#">{element.name}</a>;
     });
 
     return bylineData;
   };
 
+  const handleOrganization = (authors, organization, isStaff) => {
+    if (!isStaff) {
+      if (organization.orgName !== '') {
+        authors.push(organization);
+      }
+    } else {
+      authors.push({ orgName: 'The Atlanta Journal-Constitution' });
+    }
+    return authors;
+  };
 
   const finalizeByline = (authors, organization, isStaff) => {
     let hasOrganization = false;
@@ -59,31 +68,20 @@ const Byline = () => {
       hasOrganization = false;
     }
 
-    // multiple authors
+    // multiple authors //
     if (authors.length > 1) {
       authors.splice(authors.length - 1, 0, { name: 'and' });
-      if (!isStaff) {
-        if (organization.orgName !== '') {
-          authors.push(organization);
-        }
-      } else {
-        authors.push({ orgName: 'The Atlanta Journal-Constitution' });
-      }
 
-      const bylineData = handleMultipleAuthors(authors, hasOrganization);
+      const finalAuthorData = handleOrganization(authors, organization, isStaff);
+
+      const bylineData = handleMultipleAuthors(finalAuthorData, hasOrganization);
 
       byline = bylineData;
     } else {
-      // only one author//
-      if (!isStaff) {
-        if (organization.orgName !== '') {
-          authors.push(organization);
-        }
-      } else {
-        authors.push({ orgName: 'The Atlanta Journal-Constitution' });
-      }
+    // only one author //
+      const finalAuthorData = handleOrganization(authors, organization, isStaff);
 
-      const bylineData = handleSingleAuthor(authors);
+      const bylineData = handleSingleAuthor(finalAuthorData);
 
       byline = bylineData;
     }
@@ -101,7 +99,7 @@ const Byline = () => {
         };
       }
 
-      if (element._id && element._id.includes('AJC')) {
+      if (element._id && element._id.toUpperCase().includes('AJC')) {
         isStaff = true;
       }
 
@@ -114,7 +112,7 @@ const Byline = () => {
   }
 
 
-  return <div>By {byline || 'no byline here'}</div>;
+  return <div>By {byline || null}</div>;
 };
 
 

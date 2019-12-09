@@ -1,13 +1,13 @@
 const schemaName = 'article';
 
 const params = {
-  website_url: 'text',
+  path: 'text',
   published: 'text',
 };
 
 const resolve = (query) => {
-  const { published, websiteURL } = query;
-  const requestUri = `/content/v4/?website=ajc&website_url=${websiteURL}`;
+  const { 'arc-site': arcSite = 'ajc', path, published } = query;
+  const requestUri = `/content/v4/stories/?website_url=${path}&website=${arcSite}`;
   return published ? `${requestUri}&published=${published}` : requestUri;
 };
 
