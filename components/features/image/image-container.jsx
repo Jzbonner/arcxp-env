@@ -1,9 +1,8 @@
 import React from 'react';
 import ImageComponent from './default';
 import demo from '../../../resources/images/demo.jpg';
-import './default.scss';
 
-
+// Demo purposes only, can be deleted in the future //
 const ImageContainer = () => <div>
         <ImageComponent url={demo} alt={'I am a building'} location={'head'}/>
         This is the image size for the head

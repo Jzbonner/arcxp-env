@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import './default.scss';
 
 const ImageComponent = ({
-  imageSource, alt, location, linkUrl,
+  imageSource, alt, outerComponentClassName, linkUrl,
 }) => {
   const component = (
-    <div className={`${location} default`}>
+    <div className={`${outerComponentClassName} default`}>
         <img src={imageSource} alt={alt} />
     </div>
   );
@@ -22,7 +22,7 @@ const ImageComponent = ({
 ImageComponent.propTypes = {
   imageSource: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
-  location: PropTypes.oneOf(['head', 'breaking', 'thumbnail']),
+  outerComponentClassName: PropTypes.oneOf(['head', 'breaking', 'thumbnail']),
   linkUrl: PropTypes.string,
 };
 export default ImageComponent;
