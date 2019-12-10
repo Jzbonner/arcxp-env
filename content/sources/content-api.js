@@ -1,4 +1,4 @@
-const schemaName = 'story';
+const schemaName = 'article';
 
 const params = {
   path: 'text',
