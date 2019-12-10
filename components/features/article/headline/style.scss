@@ -1,10 +1,6 @@
 /*  /components/features/article/headline/styles.scss  */
 
 .article-headline {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
@@ -20,7 +16,7 @@
   align-items: center;
   flex: 1 1 auto;
   padding: 1.25rem;
-  font-size: 2vw;
+  font-size: 1.3em;
 }
 
 .text-align {
