@@ -6,7 +6,6 @@ import Gallery from './gallery/default';
 import HTML from './html/default';
 import Image from './image/default';
 import InterstitialLink from './interstitial_link/default';
-import LinkList from './link_list/default';
 import List from './list/default';
 import Paragraph from './paragraph/default';
 import SocialURL from './social_url/default';
@@ -42,8 +41,6 @@ const ContentElement = () => {
             return <Paragraph src={element} />;
           case 'interstitial_link':
             return <InterstitialLink src={element} />;
-          case 'link_list':
-            return <LinkList src={element} />;
           case 'list':
             return <List src={element} />;
           case 'oembed_response':
