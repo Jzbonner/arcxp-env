@@ -9,7 +9,7 @@ const HTML = ({ src }) => (
 );
 
 HTML.propTypes = {
-  src: PropTypes.node,
+  src: PropTypes.any,
 };
 
 export default HTML;

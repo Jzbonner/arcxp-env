@@ -9,7 +9,7 @@ const Video = ({ src }) => (
 );
 
 Video.propTypes = {
-  src: PropTypes.node,
+  src: PropTypes.any,
 };
 
 export default Video;

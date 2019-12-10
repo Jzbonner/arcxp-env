@@ -9,7 +9,7 @@ const InterstitialLink = ({ src }) => (
 );
 
 InterstitialLink.propTypes = {
-  src: PropTypes.node,
+  src: PropTypes.any,
 };
 
 export default InterstitialLink;

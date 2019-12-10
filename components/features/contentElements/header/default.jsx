@@ -9,7 +9,7 @@ const Header = ({ src }) => (
 );
 
 Header.propTypes = {
-  src: PropTypes.node,
+  src: PropTypes.any,
 };
 
 export default Header;

@@ -9,7 +9,7 @@ const Gallery = ({ src }) => (
 );
 
 Gallery.propTypes = {
-  src: PropTypes.node,
+  src: PropTypes.any,
 };
 
 export default Gallery;

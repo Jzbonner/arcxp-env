@@ -9,7 +9,7 @@ const Correction = ({ src }) => (
 );
 
 Correction.propTypes = {
-  src: PropTypes.node,
+  src: PropTypes.any,
 };
 
 export default Correction;

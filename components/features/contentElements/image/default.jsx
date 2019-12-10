@@ -15,7 +15,7 @@ const Image = ({ src }) => (
 );
 
 Image.propTypes = {
-  src: PropTypes.node,
+  src: PropTypes.any,
 };
 
 export default Image;

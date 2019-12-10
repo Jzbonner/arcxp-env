@@ -9,7 +9,7 @@ const Table = ({ src }) => (
 );
 
 Table.propTypes = {
-  src: PropTypes.node,
+  src: PropTypes.any,
 };
 
 export default Table;
