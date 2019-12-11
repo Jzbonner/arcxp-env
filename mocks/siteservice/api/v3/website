@@ -1,7 +1,7 @@
 [
   {
     "_id": "ajc",
-    "display_name": "Atlanta Journal Constitution",
-    "is_default_website": false
+    "display_name": "AJC - Sandbox",
+    "is_default_website": true
   }
 ]
