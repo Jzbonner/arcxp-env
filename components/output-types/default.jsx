@@ -31,6 +31,7 @@ const DefaultOutputType = (props) => {
           type="image/x-icon"
           href={deployment(`${contextPath}/resources/favicon.ico`)}
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       </head>
       <body>
         <div id="fusion-app">{children}</div>
