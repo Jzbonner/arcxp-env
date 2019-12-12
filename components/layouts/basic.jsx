@@ -9,7 +9,6 @@ const StoryPageLayout = (props) => {
   return <>
     <header>
       <h1>
-        hello lisa
         { heading }
       </h1>
       <div>
