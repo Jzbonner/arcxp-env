@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppContext } from 'fusion:context';
 import './default.scss';
 
-// This function returns a AP format month
+// This function returns an AP format month
 const findAPMonth = (month = 12) => {
   const months = [
     'Jan',
@@ -49,21 +49,21 @@ const TimeStamp = () => {
   const days = Math.floor(timeAgoInMs / 86400000);
 
   if (days > 0) {
-    timeStamp = `${isUpdated ? 'updated ' : ''}${findAPMonth(pub.getMonth())} ${pub.getDate()}, ${pub.getFullYear()}`;
+    timeStamp = ` | ${isUpdated ? 'updated ' : ''}${findAPMonth(pub.getMonth())} ${pub.getDate()}, ${pub.getFullYear()}`;
   } else if (hours > 0) {
     const hourLabel = `hour${hours > 1 ? 's' : ''}`;
-    timeStamp = `${isUpdated ? 'updated ' : ''}${hours} ${hourLabel} ago`;
+    timeStamp = ` | ${isUpdated ? 'updated ' : ''}${hours} ${hourLabel} ago`;
   } else if (minutes > -1) {
     const minLabel = `minute${minutes !== 1 ? 's' : ''}`;
-    timeStamp = `${isUpdated ? 'updated ' : ''}${minutes} ${minLabel} ago`;
+    timeStamp = ` | ${isUpdated ? 'updated ' : ''}${minutes} ${minLabel} ago`;
   } else {
     return null;
   }
 
   return (
-    <div className={'.timestamp'}>
+    <span className={'article-timestamp'}>
       {timeStamp}
-    </div>
+    </span>
   );
 };
 
