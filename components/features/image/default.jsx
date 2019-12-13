@@ -6,16 +6,12 @@ const ImageComponent = ({
   imageSource, alt, outerComponentClassName, linkUrl,
 }) => {
   const component = (
-    <div className={`${outerComponentClassName} default`}>
-        <img src={imageSource} alt={alt} />
+    <div className={`image-${outerComponentClassName} image-default`}>
+      <img src={imageSource} alt={alt} />
     </div>
   );
   if (linkUrl) {
-    return (
-      <a href={linkUrl}>
-        {component}
-      </a>
-    );
+    return <a href={linkUrl}>{component}</a>;
   }
   return component;
 };
