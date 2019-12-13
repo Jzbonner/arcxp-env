@@ -13,8 +13,8 @@ const Headline = () => {
   if (globalContent.promo_items && globalContent.promo_items.basic) {
     promoData = globalContent.promo_items.basic;
   }
-
-  // show to see how the headline component dispays with a video promo type. Used because I was getting errors when trying to add a video as a featured element.
+  // Unhide to see how the headline component dispays with a video promo type.
+  // Used because I was getting errors when trying to add a video as a featured element.
   // promoData.type = 'video';
 
   return (

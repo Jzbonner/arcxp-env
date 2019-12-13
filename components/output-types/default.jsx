@@ -4,14 +4,7 @@ import getProperties from 'fusion:properties';
 
 const DefaultOutputType = (props) => {
   const {
-    arcSite = getProperties().sites[0],
-    children,
-    contextPath,
-    deployment,
-    CssLinks,
-    Fusion,
-    Libs,
-    MetaTags,
+    arcSite = getProperties().sites[0], children, contextPath, deployment, CssLinks, Fusion, Libs, MetaTags,
   } = props;
   return (
     <html>
@@ -20,17 +13,8 @@ const DefaultOutputType = (props) => {
         <MetaTags />
         <Libs />
         <CssLinks />
-        <link
-          rel="stylesheet"
-          href={deployment(
-            `${contextPath}/resources/dist/${arcSite}/css/style.css`,
-          )}
-        />
-        <link
-          rel="icon"
-          type="image/x-icon"
-          href={deployment(`${contextPath}/resources/favicon.ico`)}
-        />
+        <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
+        <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       </head>
       <body>
