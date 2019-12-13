@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppContext } from 'fusion:context';
+import PropTypes from 'prop-types';
 import './default.scss';
 
 // This function returns an AP format month
@@ -23,18 +23,8 @@ const findAPMonth = (month = 12) => {
   return months[month];
 };
 
-const TimeStamp = () => {
+const TimeStamp = ({ firstPublishDate, displayDate }) => {
   let timeStamp;
-
-  const appContext = useAppContext();
-  const { globalContent } = appContext;
-
-  if (!globalContent) return null;
-
-  const {
-    first_publish_date: firstPublishDate,
-    display_date: displayDate,
-  } = globalContent;
 
   if (!firstPublishDate && !displayDate) return null;
 
@@ -65,6 +55,11 @@ const TimeStamp = () => {
       {timeStamp}
     </span>
   );
+};
+
+TimeStamp.propTypes = {
+  firstPublishDate: PropTypes.string,
+  displayDate: PropTypes.string,
 };
 
 export default TimeStamp;
