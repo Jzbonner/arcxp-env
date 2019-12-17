@@ -10,12 +10,10 @@ const sectionLabel = () => {
       primary_section: { path, name },
     },
   } = globalContent || {};
-  const sectionPath = path || null;
-  const sectionName = name || null;
-
+  if (!path && !name) return null;
   return (
-    <a className="section-label" href={sectionPath}>
-      {sectionName}
+    <a className="section-label" href={path}>
+      {name}
     </a>
   );
 };
