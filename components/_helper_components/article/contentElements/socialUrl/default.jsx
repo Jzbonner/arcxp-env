@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './default.scss';
 
-const Oembed = ({ html, className, type }) => {
+const Oembed = ({ src }) => {
+  const {
+    html,
+    type,
+  } = src;
+
   let filteredHtml = html;
   let SCRIPT_URL;
   const scriptFilter = /<script[\s\S]*?>[\s\S]*?<\/script>/gi;
@@ -31,15 +36,13 @@ const Oembed = ({ html, className, type }) => {
   return (
     <div
     data-oembed-type={type}
-    className={className}
+    className='default'
     dangerouslySetInnerHTML={{ __html: filteredHtml }}/>
   );
 };
 
 Oembed.propTypes = {
-  html: PropTypes.string,
-  className: PropTypes.string,
-  type: PropTypes.string,
+  src: PropTypes.object,
 };
 
 export default Oembed;
