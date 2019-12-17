@@ -1,3 +1,9 @@
+$font: (
+  primary: "Output Black",
+  secondary: "Output Regular",
+  tertiary: "Output Light"
+) !default;
+
 /* stylelint-disable */
 // Declare your font faces in this file.
 // Make sure to put your font files within the ../fonts folder!
@@ -10,3 +16,11 @@
 // }
 
 /* stylelint-enable */
+
+@font-face {
+  font-family: 'Gordita';
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  src: url('./../../../resources/fonts/gordita/gorditaregular-webfont.woff') format('woff');
+}
