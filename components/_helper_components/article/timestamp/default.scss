@@ -1,12 +1,10 @@
 @import "../../../../src/base/framework/_breakpoints.scss";
+@import "../../../../src/base/framework/_fonts.scss";
 
 .article-timestamp {
   height: 24px;
   font-family: "Gordita";
   font-size: 1.125em;
-  font-weight: 400;
-  font-stretch: normal;
-  font-style: normal;
   line-height: normal;
   letter-spacing: normal;
   text-transform: capitalize;
