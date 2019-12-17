@@ -21,7 +21,7 @@ const Headline = () => {
     <div className="article-headline-container">
       <div className={`article-headline with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
         <div className="article-headline-body">
-          <h3>{globalContent.headlines.basic}</h3>
+          <h3 class="h3">{globalContent.headlines.basic}</h3>
         </div>
       </div>
       {promoData.type === 'image' && <Image imageSource={promoData.url} alt={promoData.caption} outerComponentClassName="head" />}
