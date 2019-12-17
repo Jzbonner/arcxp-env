@@ -21,8 +21,8 @@ const ContentElement = () => {
 
   return (
     <div>
-      {allElements.map((element, idx) => {
-        // console.log('ELEMENT TYPE', element.type)
+      {allElements.map((element) => {
+        // console.log('ELEMENT', element);
         switch (element.type) {
           case 'blockquote':
           case 'quote':
@@ -52,7 +52,7 @@ const ContentElement = () => {
           default:
             return (
               <ul>
-                <li key={idx}>{element.type}</li>
+                <li key={element.id}>{element.type}</li>
               </ul>
             );
         }
