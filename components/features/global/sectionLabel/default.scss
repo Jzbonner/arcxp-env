@@ -1,9 +1,9 @@
 .section-label {
-    font: 500 0.75em 'Gordita';
+    font: 500 0.75em 'Gordita', sans-serif;
     color: #2e81b7;
     text-transform: uppercase;
     text-decoration: none;
-    margin: auto;
+    width: auto;
     letter-spacing: normal;
 
     @media (min-width: 1024px) {

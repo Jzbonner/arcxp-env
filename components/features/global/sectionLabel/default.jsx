@@ -5,8 +5,13 @@ import './default.scss';
 const sectionLabel = () => {
   const context = useAppContext();
   const { globalContent } = context;
-  const sectionPath = globalContent.taxonomy.primary_section ? globalContent.taxonomy.primary_section.path : 'No section Label';
-  const sectionName = globalContent.taxonomy.primary_section ? globalContent.taxonomy.primary_section.name : 'No section Name';
+  const {
+    taxonomy: {
+      primary_section: { path, name },
+    },
+  } = globalContent || {};
+  const sectionPath = path || null;
+  const sectionName = name || null;
 
   return (
     <a className="section-label" href={sectionPath}>
