@@ -10,8 +10,6 @@ const HeadlineImage = ({ global }) => {
   const featuredCaption = global.promo_items.basic.caption;
   const author = global.promo_items.basic.credits ? `Photo: ${global.promo_items.basic.credits.by.name}` : '';
 
-  console.log(global);
-
   const toggle = () => {
     setToggle(!toggleButton);
   };
