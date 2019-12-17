@@ -1,17 +1,17 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import BlockQuote from './blockQuote/default';
-import Correction from './correction/default';
-import Gallery from './gallery/default';
-import HTML from './html/default';
-import Image from './image/default';
-import InterstitialLink from './interstitial_link/default';
-import List from './list/default';
-import Paragraph from './paragraph/default';
-import SocialURL from './social_url/default';
-import Table from './table/default';
-import Video from './video/default';
-import Header from './header/default';
+import BlockQuote from './components/blockQuote/default';
+import Correction from './components/correction/default';
+import Gallery from './components/gallery/default';
+import HTML from './components/html/default';
+import SecondaryImage from './components/image/default';
+import InterstitialLink from './components/interstitial_link/default';
+import List from './components/list/default';
+import Paragraph from './components/paragraph/default';
+import SocialURL from './components/social_url/default';
+import Table from './components/table/default';
+import Video from './components/video/default';
+import Header from './components/header/default';
 
 const ContentElement = () => {
   const context = useAppContext();
@@ -36,7 +36,7 @@ const ContentElement = () => {
           case 'header':
             return <Header src={element} />;
           case 'image':
-            return <Image src={element} />;
+            return <SecondaryImage src={element} />;
           case 'text':
             return <Paragraph src={element} />;
           case 'interstitial_link':
