@@ -1,11 +1,11 @@
-/*  /components/layouts/basic.jsx  */
+/*  /components/layouts/article-basic.jsx  */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import TimeStamp from '../_helper_components/article/timestamp/default';
 
-const BasicPageLayout = (props) => {
+const HomePageLayout = (props) => {
   const [heading, leadImage, byline, content] = props.children;
 
   const appContext = useAppContext();
@@ -40,15 +40,15 @@ const BasicPageLayout = (props) => {
   </>;
 };
 
-BasicPageLayout.sections = [
+HomePageLayout.sections = [
   'heading',
   'leadImage',
   'byline',
   'content',
 ];
 
-BasicPageLayout.propTypes = {
+HomePageLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default BasicPageLayout;
+export default HomePageLayout;
