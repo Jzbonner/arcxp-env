@@ -13,7 +13,20 @@ import Table from './components/table/default.jsx';
 import Video from './components/video/default.jsx';
 import Header from './components/header/default.jsx';
 
-const ContentElements = ({ contentElements }) => (
+const ContentElement = ({ content }) => {
+  /*
+     1. Because the blockquote element has the potential to have a list of the same elements that found in the article,
+     I imported this countElements component into the blockQuote element to also display that content.
+
+     When this component is used to display article elements, the content_elements array is a key on the passed-in Content prop.
+     When this component is used to display blockquote elements, the content_elements array is passed in directly.
+
+     2. Eslint Docs said the below method was the correct way to call hasOwnProperty.
+     I got an elslint error when doing content.hasOwnProperty('content_elements').
+  */
+  const allElements = Object.prototype.hasOwnProperty.call(content, 'content_elements') ? content.content_elements : content;
+
+  return (
     <div>
       {contentElements.map((element) => {
         switch (element.type) {
