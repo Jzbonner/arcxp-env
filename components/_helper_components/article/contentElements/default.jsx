@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppContext } from 'fusion:context';
+import PropTypes from 'prop-types';
 import BlockQuote from './components/blockQuote/default';
 import Correction from './components/correction/default';
 import Gallery from './components/gallery/default';
@@ -13,16 +13,13 @@ import Table from './components/table/default';
 import Video from './components/video/default';
 import Header from './components/header/default';
 
-const ContentElement = () => {
-  const context = useAppContext();
-  const { globalContent } = context;
-  const allElements = globalContent.content_elements ? globalContent.content_elements : [];
-  // console.log('CONTENT ELEMENTS', contentElements);
+const ContentElement = ({ global }) => {
+  const allElements = global.content_elements ? global.content_elements : [];
 
   return (
     <div>
-      {allElements.map((element, idx) => {
-        // console.log('ELEMENT TYPE', element.type)
+      {allElements.map((element) => {
+        // console.log('ELEMENT', element);
         switch (element.type) {
           case 'blockquote':
           case 'quote':
@@ -52,13 +49,17 @@ const ContentElement = () => {
           default:
             return (
               <ul>
-                <li key={idx}>{element.type}</li>
+                <li key={element.id}>{element.type}</li>
               </ul>
             );
         }
       })}
     </div>
   );
+};
+
+ContentElement.propTypes = {
+  global: PropTypes.any,
 };
 
 export default ContentElement;
