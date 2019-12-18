@@ -3,6 +3,7 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
 import TimeStamp from '../_helper_components/article/timestamp/default';
+import Byline from '../_helper_components/article/byline/default';
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -13,7 +14,8 @@ const StoryPageLayout = () => {
   const {
     first_publish_date: firstPublishDate,
     display_date: displayDate,
-  } = globalContent;
+    credits: { by = [] },
+  } = globalContent || {};
 
   return <>
     <header>
@@ -27,9 +29,10 @@ const StoryPageLayout = () => {
         sub heading
       </div>
       <TimeStamp
-        firstPublishDate={firstPublishDate}
-        displayDate={displayDate}
+        firstPublishDate={ firstPublishDate }
+        displayDate={ displayDate }
       />
+      <Byline by={ by }/>
     </header>
     <article>
       content
