@@ -1,4 +1,4 @@
-/*  /components/features/article/subheadline/default.jsx  */
+/*  /components/features/article/subheadline/default.jsx */
 
 import React from 'react';
 import { useAppContext } from 'fusion:context';
@@ -11,7 +11,7 @@ const SubHeadline = () => {
 
   return (
     <div className="article-subheadline">
-      <div className="article-subheadline-body text-align">
+      <div className="articgitle-subheadline-body">
         {subheadline && (
           <span>{subheadline}</span>
         )}
