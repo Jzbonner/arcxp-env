@@ -36,14 +36,19 @@ const Byline = ({ by = [] }) => {
 
       return <a key={element.name} href="#">{element.name}</a>;
     });
+
     return bylineData;
   };
 
   const handleOrganization = (authors = [], organization = {}, isStaff = false) => {
+    const [firstAuthor] = authors;
+
     if (!isStaff) {
       if (organization.orgName !== '') {
         authors.push(organization);
       }
+    } else if (isStaff && authors.length === 1 && firstAuthor && firstAuthor.affiliations) {
+      authors.push({ orgName: firstAuthor.affiliations });
     } else {
       authors.push({ orgName: 'The Atlanta Journal-Constitution' });
     }
@@ -80,13 +85,16 @@ const Byline = ({ by = [] }) => {
         };
       }
 
-      if (element._id && element._id.toUpperCase().includes('AJC')) {
+      if (element._id) {
         isStaff = true;
       }
 
       return {
         name: element.name,
         org: element.org,
+        affiliations: element.additional_properties
+          && element.additional_properties.original
+          && element.additional_properties.original.affiliations,
       };
     });
 

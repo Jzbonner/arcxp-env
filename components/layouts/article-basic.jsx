@@ -14,8 +14,10 @@ const StoryPageLayout = () => {
   const {
     first_publish_date: firstPublishDate,
     display_date: displayDate,
-    credits: { by = [] },
+    credits,
   } = globalContent || {};
+
+  const { by: authorData } = credits || {};
 
   return <>
     <header>
@@ -32,7 +34,7 @@ const StoryPageLayout = () => {
         firstPublishDate={ firstPublishDate }
         displayDate={ displayDate }
       />
-      <Byline by={ by }/>
+      <Byline by={ authorData } />
     </header>
     <article>
       content
