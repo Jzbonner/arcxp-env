@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const List = ({ src }) => (
+const Paragraph = ({ src }) => (
     <div style={{ border: '1px solid #000', padding: '10px' }}>
-      Content Element Type: <strong>List</strong>
+      Content Element Type: <strong>Text / Paragraph</strong>
       <p>{src.content}</p>
     </div>
 );
 
-List.propTypes = {
+Paragraph.propTypes = {
   src: PropTypes.any,
 };
 
-export default List;
+export default Paragraph;

@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const List = ({ src }) => (
+const BlockQuote = ({ src }) => (
     <div style={{ border: '1px solid #000', padding: '10px' }}>
-      Content Element Type: <strong>List</strong>
+      Content Element Type: <strong>Block Quote</strong>
       <p>{src.content}</p>
     </div>
 );
 
-List.propTypes = {
+BlockQuote.propTypes = {
   src: PropTypes.any,
 };
 
-export default List;
+export default BlockQuote;

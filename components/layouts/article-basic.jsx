@@ -3,6 +3,7 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
 import TimeStamp from '../_helper_components/article/timestamp/default';
+import ContentElements from '../_helper_components/article/contentElements/default';
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -13,6 +14,7 @@ const StoryPageLayout = () => {
   const {
     first_publish_date: firstPublishDate,
     display_date: displayDate,
+    content_elements: contentElements,
   } = globalContent;
 
   return <>
@@ -33,6 +35,9 @@ const StoryPageLayout = () => {
     </header>
     <article>
       content
+      <ContentElements
+        contentElements={contentElements}
+      />
     </article>
   </>;
 };
