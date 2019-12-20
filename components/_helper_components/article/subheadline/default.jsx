@@ -1,23 +1,24 @@
 /*  /components/features/article/subheadline/default.jsx  */
 
 import React from 'react';
-import { useAppContext } from 'fusion:context';
+import PropTypes from 'prop-types';
 import './style.scss';
 
-const SubHeadline = () => {
-  const appContext = useAppContext();
-  const { globalContent } = appContext;
-  const subheadline = globalContent.subheadlines.basic;
+const SubHeadline = ({ subheadlines }) => {
+  const { basic } = subheadlines || {};
+  if (!basic) return null;
 
   return (
     <div className="article-subheadline">
       <div className="article-subheadline-body text-align">
-        {subheadline && (
-          <span>{subheadline}</span>
-        )}
+        <span>{basic}</span>
       </div>
     </div>
   );
+};
+
+SubHeadline.propTypes = {
+  subheadlines: PropTypes.object,
 };
 
 export default SubHeadline;
