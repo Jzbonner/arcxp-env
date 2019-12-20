@@ -27,6 +27,7 @@ const StoryPageLayout = () => {
     subheadlines,
     credits,
   } = globalContent || {};
+
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
 
@@ -38,6 +39,7 @@ const StoryPageLayout = () => {
   return (
     <>
       <header>
+        <Headline headlines={headlines} basicItems={basicItems} />
         <div>
           <SubHeadline subheadlines={subheadlines} />
         </div>
