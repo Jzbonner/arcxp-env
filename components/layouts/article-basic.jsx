@@ -13,24 +13,26 @@ const StoryPageLayout = () => {
   const { globalContent } = appContext;
 
   if (!globalContent) return null;
+  let basicItems;
 
   const {
     first_publish_date: firstPublishDate,
     display_date: displayDate,
     content_elements: contentElements,
     headlines,
-    promo_items: {
-      basic: basicItems,
-    },
     subheadlines,
-    credits,    
+    credits,
   } = globalContent || {};
 
   const { by: authorData } = credits || {};
 
+  if (globalContent.promo_items) {
+    basicItems = globalContent.promo_items.basic;
+  }
+
   return <>
     <header>
-      <Headline headlines={headlines} basicItems={basicItems}/>
+      <Headline headlines={headlines} basicItems={basicItems} />
       <div>
         <SubHeadline subheadlines={subheadlines}/>
       </div>
