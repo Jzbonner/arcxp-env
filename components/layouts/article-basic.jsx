@@ -23,9 +23,8 @@ const StoryPageLayout = () => {
       basic: basicItems,
     },
     subheadlines,
-    credits,    
+    credits,
   } = globalContent || {};
-
   const { by: authorData } = credits || {};
 
   return <>

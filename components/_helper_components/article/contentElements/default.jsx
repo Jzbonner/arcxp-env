@@ -12,6 +12,7 @@ import Oembed from './components/social_url/default';
 import Table from './components/table/default';
 import Video from './components/video/default';
 import Header from './components/header/default';
+import './default.scss';
 
 const ContentElements = ({ contentElements }) => (
     <div className='story-text'>
