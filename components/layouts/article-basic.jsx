@@ -24,17 +24,17 @@ const StoryPageLayout = () => {
     subheadlines,
     credits,
   } = globalContent || {};
+
   const { by: authorData } = credits || {};
 
   if (globalContent.promo_items) {
     basicItems = globalContent.promo_items.basic;
   }
 
-  console.log(globalContent);
-
   return (
     <>
       <header>
+        <Headline headlines={headlines} basicItems={basicItems} />
         <div>
           <SubHeadline subheadlines={subheadlines} />
         </div>
