@@ -1,24 +1,76 @@
 /*  /components/features/article/headline/styles.scss  */
 
-.article-headline {
-  word-wrap: break-word;
-  background-color: #fff;
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, .13);
-  border-radius: .25rem;
-  width: 60%;
-  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
-}
+@import "./../../../../src/base/framework";
+@import "../../../../src/base/framework/breakpoints";
+@import "../../../../src/base/framework/_fonts.scss";
 
-.article-headline-body {
+.article-headline-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1 1 auto;
+  margin: -30px 0 30px;
+  width: 100%;
+  height: auto;
+  flex-direction: row;
+  position: relative;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+
+  .article-headline {
+    width: 36%;
+    padding: 0 40px;
+    justify-content: start;
+    order: 1;
+    left: 3%;
+    margin: auto;
+    position: relative;
+    background: #fff;
+    box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    z-index: 2;
+    border-radius: 6px;
+.article-headline-body {
   padding: 1.25rem;
-  font-size: 1.3em;
+  .h3 {
+    font-size: 3em;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+    @include breakpoint(desktop-sm) {
+      font-size: 2.5em;
+    }
+    @include breakpoint(tablet) {
+      font-size: 2em;
+    }
+    @include breakpoint(mobile) {
+      font-size: 3em;
+    }
+  }
 }
 
-.text-align {
-  text-align: center;
+    @media (max-width: 1024px) {
+      order: 2;
+      width: 90.64%;
+      margin: -6% auto 30px;
+      left: 0;
+    }
+
+    .article-headline-body {
+      padding: 20px 0;
+      margin: 0 auto;
+      position: relative;
+      top: 50%;
+
+      .article-heading {
+        font: 400 2.5vw Average, Georgia, serif;
+        color: #000;
+        text-align: left;
+
+        @media (max-width: 1024px) {
+          font: 400 1.4em Average, Georgia, serif;
+          text-align: center;
+        }
+      }
+    }
+  }
 }
+
