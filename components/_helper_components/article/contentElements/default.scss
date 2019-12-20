@@ -13,7 +13,7 @@
     }
     p {
         margin: 20px 0; 
-        @include breakpoint(desktop-sm) {
+        @media (min-width: desktop-sm) {
             width: calc(100% -300px -7%);
             margin-top: 0;
             margin-bottom: 40px;

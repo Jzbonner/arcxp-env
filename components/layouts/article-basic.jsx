@@ -27,7 +27,6 @@ const StoryPageLayout = () => {
     subheadlines,
     credits,
   } = globalContent || {};
-  // console.log('contentElements', contentElements);
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
 
