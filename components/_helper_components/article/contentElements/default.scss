@@ -1,0 +1,24 @@
+@import '../../../../src/base/framework/';
+
+.story-text  {
+    margin: 0 auto 40px;
+    font: 1rem/2.25 'Gordita', Arial, Sans-Serif;
+    color: #313132;
+    line-height: 40px;
+    letter-spacing: 0;
+    @include breakpoint(desktop-sm) {
+        font-size: 1.25rem;
+        line-height: 2;
+        margin-bottom: 60px;
+    }
+    p {
+        margin: 20px 0; 
+        @include breakpoint(desktop-sm) {
+            width: calc(100% -300px -7%);
+            margin-top: 0;
+            margin-bottom: 40px;
+            float: left;
+            clear: left;
+        }
+    }
+}

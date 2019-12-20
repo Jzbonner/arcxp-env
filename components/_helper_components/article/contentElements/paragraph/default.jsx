@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../default.scss';
 
-const Paragraph = ({ src }) => (
-    <div style={{ border: '1px solid #000', padding: '10px' }}>
-      Content Element Type: <strong>Text / Paragraph</strong>
-      <p>{src.content}</p>
-    </div>
-);
-
+const Paragraph = ({ src }) => {
+  console.log('[PARAGRAPH]:', src);
+  const { content } = src;
+  if (content === '<br/>') {
+    return <br />;
+  }
+  return <p className="" dangerouslySetInnerHTML={{ __html: content }} />;
+};
 Paragraph.propTypes = {
   src: PropTypes.any,
 };
-
 export default Paragraph;

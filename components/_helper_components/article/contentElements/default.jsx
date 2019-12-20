@@ -12,9 +12,10 @@ import Oembed from './socialUrl/default';
 import Table from './table/default';
 import Video from './video/default';
 import Header from './header/default';
+import './default.scss';
 
 const ContentElements = ({ contentElements }) => (
-    <div>
+    <div className='story-text'>
       {contentElements.map((element) => {
         // console.log('ELEMENT', element);
         switch (element.type) {
