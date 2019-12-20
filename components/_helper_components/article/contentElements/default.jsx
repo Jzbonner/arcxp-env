@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import BlockQuote from './components/blockQuote/default.jsx';
 import Correction from './components/correction/default.jsx';
 import Gallery from './components/gallery/default.jsx';
@@ -16,6 +17,24 @@ import Header from './components/header/default.jsx';
 const ContentElements = ({ contentElements }) => (
 
     <div>
+=======
+import BlockQuote from './blockQuote/default';
+import Correction from './correction/default';
+import Gallery from './gallery/default';
+import HTML from './html/default';
+import Image from './image/default';
+import InterstitialLink from './interstitial_link/default';
+import List from './list/default';
+import Paragraph from './paragraph/default';
+import Oembed from './socialUrl/default';
+import Table from './table/default';
+import Video from './video/default';
+import Header from './header/default';
+import './default.scss';
+
+const ContentElements = ({ contentElements }) => (
+    <div className='story-text'>
+>>>>>>> APD-28/addsParagraphStyling-Antonio
       {contentElements.map((element) => {
         switch (element.type) {
           case 'blockquote':
