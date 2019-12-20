@@ -3,8 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
-import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
-import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
+import SectionLabel from '../_helper_components/global/sectionLabel/default';
+import TimeStamp from '../_helper_components/article/timestamp/default';
+import ContentElements from '../features/contentElements/default';
 
 const BasicPageLayout = (props) => {
   const [heading, leadImage, byline, content] = props.children;
@@ -15,7 +16,11 @@ const BasicPageLayout = (props) => {
   if (!globalContent) return null;
 
   const {
-    first_publish_date: firstPublishDate, display_date: displayDate, label, taxonomy,
+    first_publish_date: firstPublishDate,
+    display_date: displayDate,
+    content_elements: contentElements,
+    label,
+    taxonomy,
   } = globalContent;
 
   return (
@@ -27,7 +32,9 @@ const BasicPageLayout = (props) => {
         <div>{leadImage}</div>
         <div>{byline}</div>
       </header>
-      <article>{content}</article>
+      <article>
+        <ContentElements contentElements={contentElements} />
+      </article>
     </>
   );
 };

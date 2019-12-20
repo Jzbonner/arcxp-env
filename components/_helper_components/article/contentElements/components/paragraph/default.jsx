@@ -7,9 +7,7 @@ const Paragraph = ({ src }) => {
   if (content === '<br/>') {
     return null;
   }
-  return (
-   <p className="story-text" dangerouslySetInnerHTML={{ __html: content }} />
-  );
+  return <p className="story-text" dangerouslySetInnerHTML={{ __html: content }} />;
 };
 
 Paragraph.propTypes = {

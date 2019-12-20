@@ -13,21 +13,12 @@ import Table from './components/table/default.jsx';
 import Video from './components/video/default.jsx';
 import Header from './components/header/default.jsx';
 
-const ContentElement = ({ content }) => {
-  /*
-     1. Because the blockquote element has the potential to have a list of the same elements that found in the article,
-     I imported this countElements component into the blockQuote element to also display that content.
-
-     When this component is used to display article elements, the content_elements array is a key on the passed-in Content prop.
-     When this component is used to display blockquote elements, the content_elements array is passed in directly.
-
-     2. Eslint Docs said the below method was the correct way to call hasOwnProperty.
-     I got an elslint error when doing content.hasOwnProperty('content_elements').
-  */
-  const allElements = Object.prototype.hasOwnProperty.call(content, 'content_elements') ? content.content_elements : content;
+const ContentElement = ({ contentElements }) => {
+  const allElements = contentElements || [];
 
   return (
     <div>
+<<<<<<< HEAD
       {contentElements.map((element) => {
         switch (element.type) {
           case 'blockquote':
@@ -58,6 +49,39 @@ const ContentElement = ({ content }) => {
           default:
             return (
               <ul>
+=======
+      {allElements.map((element, i) => {
+        // console.log('ELEMENT', element);
+        switch (element.type) {
+          case 'blockquote':
+          case 'quote':
+            return <BlockQuote key={i} src={element} />;
+          case 'correction':
+            return <Correction key={i} src={element} />;
+          case 'gallery':
+            return <Gallery key={i} src={element} />;
+          case 'raw_html':
+            return <HTML key={i} src={element} />;
+          case 'header':
+            return <Header key={i} src={element} />;
+          case 'image':
+            return <Image key={i} src={element} />;
+          case 'text':
+            return <Paragraph key={i} src={element} />;
+          case 'interstitial_link':
+            return <InterstitialLink key={i} src={element} />;
+          case 'list':
+            return <List key={i} src={element} />;
+          case 'oembed_response':
+            return <SocialURL key={i} src={element} />;
+          case 'table':
+            return <Table key={i} src={element} />;
+          case 'video':
+            return <Video key={i} src={element} />;
+          default:
+            return (
+              <ul key={i}>
+>>>>>>> ADP-29/UpatedLogicToSupportDisplayingOfListsAndParagraphs-Nicholas
                 <li key={element.id}>{element.type}</li>
               </ul>
             );
