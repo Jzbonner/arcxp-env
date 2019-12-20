@@ -38,7 +38,6 @@ const StoryPageLayout = () => {
   return (
     <>
       <header>
-        <Headline headlines={headlines} basicItems={basicItems} />
         <div>
           <SubHeadline subheadlines={subheadlines} />
         </div>
