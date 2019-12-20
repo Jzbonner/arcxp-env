@@ -1,12 +1,17 @@
-.section-label {
-    font: 500 0.75em 'Gordita', sans-serif;
-    color: #2e81b7;
-    text-transform: uppercase;
-    text-decoration: none;
-    width: auto;
-    letter-spacing: normal;
+@import "./../../../../src/base/framework";
 
-    @media (min-width: 1024px) {
-        font: 500 1em 'Gordita';
-    }
+.section-label {
+  font: 500 0.75em "Gordita", sans-serif;
+  text-transform: uppercase;
+  color: #000000;
+  width: auto;
+  letter-spacing: normal;
+
+  @include breakpoint(tablet) {
+    font-size: 1em;
+  }
+  &.section-label-link {
+    color: #2e81b7;
+    text-decoration: none;
+  }
 }

@@ -4,6 +4,8 @@ import React from 'react';
 import { useAppContext } from 'fusion:context';
 import TimeStamp from '../_helper_components/article/timestamp/default';
 import Byline from '../_helper_components/article/byline/default';
+import ContentElements from '../_helper_components/article/contentElements/default';
+import SubHeadline from '../_helper_components/article/subheadline/default';
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -14,6 +16,8 @@ const StoryPageLayout = () => {
   const {
     first_publish_date: firstPublishDate,
     display_date: displayDate,
+    content_elements: contentElements,
+    subheadlines,
     credits,
   } = globalContent || {};
 
@@ -28,7 +32,7 @@ const StoryPageLayout = () => {
         lead image
       </div>
       <div>
-        sub heading
+        <SubHeadline subheadlines={subheadlines}/>
       </div>
       <TimeStamp
         firstPublishDate={ firstPublishDate }
@@ -38,6 +42,9 @@ const StoryPageLayout = () => {
     </header>
     <article>
       content
+      <ContentElements
+        contentElements={contentElements}
+      />
     </article>
   </>;
 };

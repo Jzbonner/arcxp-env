@@ -202,5 +202,8 @@
   "bugs": {
     "url": "https://github.com/wapopartners/StarterPack-PageBuilder-Fusion-Features/issues"
   },
-  "homepage": "https://github.com/wapopartners/StarterPack-PageBuilder-Fusion-Features#readme"
+  "homepage": "https://github.com/wapopartners/StarterPack-PageBuilder-Fusion-Features#readme",
+  "dependencies": {
+    "scriptjs": "^2.5.9"
+  }
 }
