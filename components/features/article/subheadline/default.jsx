@@ -11,7 +11,7 @@ const SubHeadline = () => {
 
   return (
     <div className="article-subheadline">
-      <div className="articgitle-subheadline-body">
+      <div className="article-subheadline-body">
         {subheadline && (
           <span>{subheadline}</span>
         )}
