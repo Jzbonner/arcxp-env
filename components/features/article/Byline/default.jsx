@@ -14,9 +14,17 @@ const Byline = () => {
         return <span key={element.name}> {element.name} </span>;
       }
       if ((i === authors.length - 1 && !hasOrganization) || i === authors.length - 2 || (authors[i + 1] && authors[i + 1].name === 'and')) {
-        return <a key={element.name} href="#">{element.name}</a>;
+        return (
+          <a key={element.name} href="#">
+            {element.name}
+          </a>
+        );
       }
-      return <span key={element.name}><a href="#">{element.name ? `${element.name}` : null}</a>, </span>;
+      return (
+        <span key={element.name}>
+          <a href="#">{element.name ? `${element.name}` : null}</a>,{' '}
+        </span>
+      );
     });
     return bylineData;
   };
@@ -26,9 +34,17 @@ const Byline = () => {
         return <span key={element.name}>, {element.orgName}</span>;
       }
       if (i === authorData.length - 1 && !element.orgName) {
-        return <a key={element.name} href="#">{element.name} </a>;
+        return (
+          <a key={element.name} href="#">
+            {element.name}{' '}
+          </a>
+        );
       }
-      return <a key={element.name} href="#">{element.name}</a>;
+      return (
+        <a key={element.name} href="#">
+          {element.name}
+        </a>
+      );
     });
     return bylineData;
   };
@@ -52,7 +68,7 @@ const Byline = () => {
       const bylineData = handleMultipleAuthors(finalAuthorData, hasOrganization);
       byline = bylineData;
     } else {
-    // only one author //
+      // only one author //
       const finalAuthorData = handleOrganization(authors, organization, isStaff);
       const bylineData = handleSingleAuthor(finalAuthorData);
       byline = bylineData;
@@ -62,7 +78,9 @@ const Byline = () => {
   if (globalContent) {
     let organization = null;
     let isStaff = false;
-    const { credits: { by = [] } } = globalContent;
+    const {
+      credits: { by = [] },
+    } = globalContent;
     const authors = by.map((element) => {
       if (!organization && (typeof element.org !== 'undefined' || element.org !== '')) {
         organization = {

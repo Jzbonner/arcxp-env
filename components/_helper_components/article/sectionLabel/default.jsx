@@ -2,13 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './default.scss';
 
-const sectionLabel = ({ content }) => {
+const sectionLabel = ({ taxonomy, label }) => {
   const {
-    taxonomy: {
-      primary_section: { path: pathPrimary, name: namePrimary },
-    },
-    label: { custom_label: { text: nameCustom } = {} },
-  } = content || {};
+    primary_section: { path: pathPrimary, name: namePrimary },
+  } = taxonomy || {};
+
+  let nameCustom;
+
+  if (label.custom_label) {
+    nameCustom = label.custom_label.text;
+  }
 
   if (nameCustom) {
     return <span className="section-label">{nameCustom}</span>;
@@ -22,7 +25,8 @@ const sectionLabel = ({ content }) => {
 };
 
 sectionLabel.propTypes = {
-  content: PropTypes.object.isRequired,
+  taxonomy: PropTypes.object.isRequired,
+  label: PropTypes.object.isRequired,
 };
 
 export default sectionLabel;
