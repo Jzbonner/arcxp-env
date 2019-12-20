@@ -6,19 +6,22 @@
     color: #313132;
     line-height: 40px;
     letter-spacing: 0;
-    @include breakpoint(desktop-sm) {
+    @media only screen and (min-width: 1024px) {
         font-size: 1.25rem;
         line-height: 2;
         margin-bottom: 60px;
     }
-    p {
+    .paragraph {
         margin: 20px 0; 
-        @media (min-width: desktop-sm) {
+        @media only screen and (min-width: 1024px) {
             width: calc(100% -300px -7%);
             margin-top: 0;
             margin-bottom: 40px;
             float: left;
             clear: left;
+        }
+        @media (min-width: 1024) and (min-width:1280px) {
+            margin-bottom:60px;
         }
     }
 }
