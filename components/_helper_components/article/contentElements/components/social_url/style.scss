@@ -1,0 +1,10 @@
+.default {
+    display: flex;
+    justify-content: center;
+    text-align:center;
+    width: 100%;
+
+    @media (min-width: 1024px) {
+        width: calc(100% - 300px - 7%);
+    }
+}

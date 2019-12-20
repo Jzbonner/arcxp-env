@@ -1,17 +1,14 @@
-/*  /components/features/article/headline/default.jsx  */
-
 import React from 'react';
-import { useAppContext } from 'fusion:context';
 import './style.scss';
+import PropTypes from 'prop-types';
 import Image from '../../image/default';
 
-const Headline = () => {
-  const appContext = useAppContext();
-  const { globalContent } = appContext;
+const Headline = ({ basicItems = {}, headlines = {} }) => {
   let promoData = {};
+  console.log(basicItems);
 
-  if (globalContent.promo_items && globalContent.promo_items.basic) {
-    promoData = globalContent.promo_items.basic;
+  if (basicItems) {
+    promoData = basicItems;
   }
   // Unhide to see how the headline component dispays with a video promo type.
   // Used because I was getting errors when trying to add a video as a featured element.
@@ -21,14 +18,21 @@ const Headline = () => {
     <div className="article-headline-container">
       <div className={`article-headline with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
         <div className="article-headline-body">
-          <h3>{globalContent.headlines.basic}</h3>
+          <h3 className="article-heading">{headlines.basic}</h3>
         </div>
       </div>
-      {promoData.type === 'image' && <Image imageSource={promoData.url} alt={promoData.caption} outerComponentClassName="head" />}
+      {promoData.type === 'image' && (
+        <Image imageSource={promoData.url} alt={promoData.caption} outerComponentClassName="head" basicItems={basicItems} />
+      )}
       {promoData.type === 'gallery' && <div className="gallery-container placeholder">Gallery Placeholder</div>}
       {promoData.type === 'video' && <div className="video-container placeholder">Video Placeholder</div>}
     </div>
   );
+};
+
+Headline.propTypes = {
+  basicItems: PropTypes.object.isRequired,
+  headlines: PropTypes.object.isRequired,
 };
 
 export default Headline;
