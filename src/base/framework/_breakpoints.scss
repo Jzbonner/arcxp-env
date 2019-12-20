@@ -2,12 +2,11 @@
 $breakpoint: (
   mobile: 767px,
   tablet: 1023px,
-  desktop-sm: 1279px,
-  desktop-lg: 1280px
+  desktop-sm: 1279px
 ) !default;
 
 @mixin breakpoint($point) {
-  /* Between 0 and 767px */
+  /* Equal or less than 767px */
   @if $point == mobile {
     /* stylelint-disable-next-line */
     @media only screen and (max-width: map-get($breakpoint, mobile)) {
@@ -15,40 +14,27 @@ $breakpoint: (
     }
   }
 
-  /* Between 768px and 1023px */
+  /* Equal or less than 1023px */
   @if $point == tablet {
     /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, mobile) + 1) and (max-width: map-get($breakpoint, tablet)) {
+    @media only screen and (max-width: map-get($breakpoint, tablet)) {
       @content;
     }
   }
 
-  /* Between 1024px and 1279px */
+  /* Equal or less than 1279px */
   @if $point == desktop-sm {
-    /* stylelint-disable */
-    @media only screen and (min-width: map-get($breakpoint, tablet) + 1) and (max-width: map-get($breakpoint, desktop-sm)) {
+    /* stylelint-disable-next-line */
+    @media only screen and (max-width: map-get($breakpoint, desktop-sm)) {
       @content;
     }
-    /* stylelint-enable */
   }
 
-  /* At least 1280px+ */
+  /* Equal or greater than 1280px */
   @if $point == desktop-lg {
     /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint,desktop-sm)) {
+    @media only screen and (min-width: map-get($breakpoint, desktop-sm) + 1) {
       @content;
-    }
-  }
-}
-
-// Font Styling for different breakpoints
-@mixin text-styles-desktop($size, $line-height, $font: "") {
-  @include breakpoint(desktop) {
-    font-size: $size;
-    line-height: $line-height;
-
-    @if $font != "" {
-      font-family: $font;
     }
   }
 }

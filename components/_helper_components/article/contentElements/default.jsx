@@ -8,17 +8,14 @@ import SecondaryImage from './components/image/default';
 import InterstitialLink from './components/interstitial_link/default';
 import List from './components/list/default';
 import Paragraph from './components/paragraph/default';
-import SocialURL from './components/social_url/default';
+import Oembed from './components/social_url/default';
 import Table from './components/table/default';
 import Video from './components/video/default';
 import Header from './components/header/default';
 
-const ContentElement = ({ global }) => {
-  const allElements = global.content_elements ? global.content_elements : [];
-
-  return (
+const ContentElements = ({ contentElements }) => (
     <div>
-      {allElements.map((element) => {
+      {contentElements.map((element) => {
         // console.log('ELEMENT', element);
         switch (element.type) {
           case 'blockquote':
@@ -41,7 +38,7 @@ const ContentElement = ({ global }) => {
           case 'list':
             return <List src={element} />;
           case 'oembed_response':
-            return <SocialURL src={element} />;
+            return <Oembed src={element.raw_oembed} />;
           case 'table':
             return <Table src={element} />;
           case 'video':
@@ -55,11 +52,10 @@ const ContentElement = ({ global }) => {
         }
       })}
     </div>
-  );
+);
+
+ContentElements.propTypes = {
+  contentElements: PropTypes.Array,
 };
 
-ContentElement.propTypes = {
-  global: PropTypes.any,
-};
-
-export default ContentElement;
+export default ContentElements;

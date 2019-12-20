@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './default.scss';
 
-const ImageComponent = ({ outerComponentClassName, global }) => {
-  const featuredImage = global.promo_items.basic.url ? global.promo_items.basic.url : null;
+const Image = ({ outerComponentClassName, basicItems }) => {
+  const featuredImage = basicItems.url ? basicItems.url : null;
   const [toggleButton, setToggle] = useState(false);
-  const featuredCaption = global.promo_items.basic.caption;
-  const featuredAuthor = global.promo_items.basic.credits ? `Photo: ${global.promo_items.basic.credits.by[0].name}` : '';
+  const featuredCaption = basicItems.caption;
+  const featuredAuthor = basicItems.credits ? `Photo: ${basicItems.credits.by[0].name}` : '';
   const toggle = () => {
     setToggle(!toggleButton);
   };
@@ -50,11 +50,11 @@ const ImageComponent = ({ outerComponentClassName, global }) => {
   return featuredImageContent;
 };
 
-ImageComponent.propTypes = {
+Image.propTypes = {
   imageSource: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   outerComponentClassName: PropTypes.oneOf(['head', 'breaking', 'thumbnail']),
   // linkUrl: PropTypes.string,
-  global: PropTypes.any,
+  basicItems: PropTypes.object,
 };
-export default ImageComponent;
+export default Image;
