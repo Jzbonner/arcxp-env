@@ -7,46 +7,50 @@ import Byline from '../_helper_components/article/byline/default';
 import ContentElements from '../_helper_components/article/contentElements/default';
 import Headline from '../features/article/headline/default';
 import SubHeadline from '../_helper_components/article/subheadline/default';
+import SectionLabel from '../features/article/sectionLabel/default';
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
 
   if (!globalContent) return null;
+  let basicItems;
 
   const {
     first_publish_date: firstPublishDate,
     display_date: displayDate,
     content_elements: contentElements,
     headlines,
-    promo_items: {
-      basic: basicItems,
-    },
     subheadlines,
-    credits,    
+    credits,
   } = globalContent || {};
 
   const { by: authorData } = credits || {};
 
-  return <>
-    <header>
-      <Headline headlines={headlines} basicItems={basicItems}/>
-      <div>
-        <SubHeadline subheadlines={subheadlines}/>
-      </div>
-      <TimeStamp
-        firstPublishDate={ firstPublishDate }
-        displayDate={ displayDate }
-      />
-      <Byline by={ authorData } />
-    </header>
-    <article>
-      content
-      <ContentElements
-        contentElements={contentElements}
-      />
-    </article>
-  </>;
+  if (globalContent.promo_items) {
+    basicItems = globalContent.promo_items.basic;
+  }
+
+  console.log(globalContent);
+
+  return (
+    <>
+      <header>
+        <Headline headlines={headlines} basicItems={basicItems} />
+        <div>
+          <SubHeadline subheadlines={subheadlines} />
+        </div>
+        <div>
+          <SectionLabel content={globalContent}/>
+          <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} />
+        </div>
+        <Byline by={authorData} />
+      </header>
+      <article>
+        <ContentElements contentElements={contentElements} />
+      </article>
+    </>
+  );
 };
 
 export default StoryPageLayout;

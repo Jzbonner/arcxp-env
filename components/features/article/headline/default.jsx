@@ -5,8 +5,6 @@ import Image from '../../image/default';
 
 const Headline = ({ basicItems = {}, headlines = {} }) => {
   let promoData = {};
-  console.log(basicItems);
-
   if (basicItems) {
     promoData = basicItems;
   }
