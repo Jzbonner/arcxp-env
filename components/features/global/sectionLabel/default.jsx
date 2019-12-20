@@ -1,21 +1,28 @@
 import React from 'react';
-import { useAppContext } from 'fusion:context';
+import PropTypes from 'prop-types';
 import './default.scss';
 
-const sectionLabel = () => {
-  const context = useAppContext();
-  const { globalContent } = context;
+const sectionLabel = ({ content }) => {
   const {
     taxonomy: {
-      primary_section: { path, name },
+      primary_section: { path: pathPrimary, name: namePrimary },
     },
-  } = globalContent || {};
-  if (!path && !name) return null;
+    label: { custom_label: { text: nameCustom } = {} },
+  } = content || {};
+
+  if (nameCustom) {
+    return <span className="section-label">{nameCustom}</span>;
+  }
+
   return (
-    <a className="section-label" href={path}>
-      {name}
+    <a className="section-label section-label-link" href={pathPrimary}>
+      {namePrimary}
     </a>
   );
+};
+
+sectionLabel.propTypes = {
+  content: PropTypes.object.isRequired,
 };
 
 export default sectionLabel;
