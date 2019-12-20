@@ -3,6 +3,7 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
 import TimeStamp from '../_helper_components/article/timestamp/default';
+import Byline from '../_helper_components/article/byline/default';
 import ContentElements from '../_helper_components/article/contentElements/default';
 import SubHeadline from '../_helper_components/article/subheadline/default';
 
@@ -17,7 +18,10 @@ const StoryPageLayout = () => {
     display_date: displayDate,
     content_elements: contentElements,
     subheadlines,
-  } = globalContent;
+    credits,
+  } = globalContent || {};
+
+  const { by: authorData } = credits || {};
 
   return <>
     <header>
@@ -31,9 +35,10 @@ const StoryPageLayout = () => {
         <SubHeadline subheadlines={subheadlines}/>
       </div>
       <TimeStamp
-        firstPublishDate={firstPublishDate}
-        displayDate={displayDate}
+        firstPublishDate={ firstPublishDate }
+        displayDate={ displayDate }
       />
+      <Byline by={ authorData } />
     </header>
     <article>
       content
