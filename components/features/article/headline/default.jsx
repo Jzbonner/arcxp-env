@@ -13,10 +13,10 @@ const Headline = ({ basicItems = {}, headlines = {} }) => {
   // promoData.type = 'video';
 
   return (
-    <div className="article-headline-container">
-      <div className={`article-headline with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
+    <div className={`article-headline-container with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
+      <div className="article-headline">
         <div className="article-headline-body">
-          <h3 className="article-heading">{headlines.basic}</h3>
+          <h3 className="article-heading h3">{headlines.basic}</h3>
         </div>
       </div>
       {promoData.type === 'image' && (
