@@ -3,15 +3,10 @@ import PropTypes from 'prop-types';
 import './default.scss';
 
 const sectionLabel = ({ taxonomy, label }) => {
-  const {
-    primary_section: { path: pathPrimary, name: namePrimary },
-  } = taxonomy || {};
-
-  let nameCustom;
-
-  if (label.custom_label) {
-    nameCustom = label.custom_label.text;
-  }
+  const { primary_section: primarySection } = taxonomy || {};
+  const { path: pathPrimary, name: namePrimary } = primarySection || {};
+  const { custom_label: customLabel } = label || {};
+  const { text: nameCustom } = customLabel || {};
 
   if (nameCustom) {
     return <span className="section-label">{nameCustom}</span>;
