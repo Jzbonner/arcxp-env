@@ -7,7 +7,7 @@ import Byline from '../_helper_components/article/byline/default';
 import ContentElements from '../_helper_components/article/contentElements/default';
 import Headline from '../features/article/headline/default';
 import SubHeadline from '../_helper_components/article/subheadline/default';
-import SectionLabel from '../features/article/sectionLabel/default';
+import SectionLabel from '../_helper_components/global/sectionLabel/default';
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -21,6 +21,8 @@ const StoryPageLayout = () => {
     display_date: displayDate,
     content_elements: contentElements,
     headlines,
+    label,
+    taxonomy,
     subheadlines,
     credits,
   } = globalContent || {};
@@ -31,8 +33,6 @@ const StoryPageLayout = () => {
     basicItems = globalContent.promo_items.basic;
   }
 
-  console.log(globalContent);
-
   return (
     <>
       <header>
@@ -41,7 +41,7 @@ const StoryPageLayout = () => {
           <SubHeadline subheadlines={subheadlines} />
         </div>
         <div>
-          <SectionLabel content={globalContent}/>
+          <SectionLabel label={label} taxonomy={taxonomy} />
           <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} />
         </div>
         <Byline by={authorData} />
