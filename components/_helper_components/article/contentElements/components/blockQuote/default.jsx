@@ -4,8 +4,7 @@ import List from '../list/default';
 import Paragraph from '../paragraph/default';
 import './styles.scss';
 
-const BlockQuote = ({ src }) => {
-  console.log('[BLOCKQUOTE]: ', src);
+const Blockquote = ({ src }) => {
   const { content_elements: contentElements, citation } = src;
 
   return (
@@ -25,8 +24,8 @@ const BlockQuote = ({ src }) => {
   );
 };
 
-BlockQuote.propTypes = {
+Blockquote.propTypes = {
   src: PropTypes.any,
 };
 
-export default BlockQuote;
+export default Blockquote;

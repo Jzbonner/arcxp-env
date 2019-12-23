@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import SectionLabel from '../_helper_components/global/sectionLabel/default';
 import TimeStamp from '../_helper_components/article/timestamp/default';
-import ContentElements from '../features/contentElements/default';
+import ContentElements from '../_helper_components/article/contentElements/default';
 
 const BasicPageLayout = (props) => {
   const [heading, leadImage, byline, content] = props.children;
