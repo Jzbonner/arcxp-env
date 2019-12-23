@@ -7,7 +7,7 @@ import Byline from '../_helper_components/article/byline/default';
 import ContentElements from '../_helper_components/article/contentElements/default';
 import Headline from '../features/article/headline/default';
 import SubHeadline from '../_helper_components/article/subheadline/default';
-import SectionLabel from '../_helper_components/article/sectionLabel/default';
+import SectionLabel from '../_helper_components/global/sectionLabel/default';
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -32,8 +32,6 @@ const StoryPageLayout = () => {
   if (globalContent.promo_items) {
     basicItems = globalContent.promo_items.basic;
   }
-
-  console.log(globalContent);
 
   return (
     <>
