@@ -13,6 +13,32 @@ const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
 
+  // TODO: I don't know that types are considered social
+  const paragraphTypes = [
+    'text',
+    'video',
+    'image',
+    'raw_html',
+    'table',
+    'gallery',
+  ];
+
+  const isParagraph = element => paragraphTypes.contains(element);
+
+  const paragraphCounter = (elements = []) => {
+    let count = 0;
+
+    elements.forEach((element) => {
+      const { type } = element || {};
+
+      if (isParagraph(type)) {
+        count += 1;
+      }
+    });
+
+    return count;
+  };
+
   if (!globalContent) return null;
   let basicItems;
 
@@ -32,6 +58,12 @@ const StoryPageLayout = () => {
   if (globalContent.promo_items) {
     basicItems = globalContent.promo_items.basic;
   }
+
+  const paragraphCount = paragraphCounter(contentElements);
+
+  console.log(paragraphCount);
+
+  // with paragraphCount, we can now determine what ads are needed for the layout
 
   return (
     <>
