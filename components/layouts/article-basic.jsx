@@ -23,7 +23,7 @@ const StoryPageLayout = () => {
     'gallery',
   ];
 
-  const isParagraph = element => paragraphTypes.contains(element);
+  const isParagraph = type => paragraphTypes.includes(type);
 
   const paragraphCounter = (elements = []) => {
     let count = 0;
@@ -40,12 +40,12 @@ const StoryPageLayout = () => {
   };
 
   if (!globalContent) return null;
-  let basicItems;
 
   const {
     first_publish_date: firstPublishDate,
     display_date: displayDate,
     content_elements: contentElements,
+    promo_items: promoItems,
     headlines,
     label,
     taxonomy,
@@ -54,16 +54,12 @@ const StoryPageLayout = () => {
   } = globalContent || {};
 
   const { by: authorData } = credits || {};
-
-  if (globalContent.promo_items) {
-    basicItems = globalContent.promo_items.basic;
-  }
+  const { basic: basicItems } = promoItems || {};
 
   const paragraphCount = paragraphCounter(contentElements);
 
-  console.log(paragraphCount);
-
   // with paragraphCount, we can now determine what ads are needed for the layout
+  console.log('paragraphCount', paragraphCount);
 
   return (
     <>
