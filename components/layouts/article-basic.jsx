@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useAppContext } from 'fusion:context';
+import paragraphCounter from './_helper_functions/article/paragraphCounter';
 import TimeStamp from '../_helper_components/article/timestamp/default';
 import Byline from '../_helper_components/article/byline/default';
 import ContentElements from '../_helper_components/article/contentElements/default';
@@ -12,32 +13,6 @@ import SectionLabel from '../_helper_components/global/sectionLabel/default';
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
-
-  // TODO: I don't know that types are considered social
-  const paragraphTypes = [
-    'text',
-    'video',
-    'image',
-    'raw_html',
-    'table',
-    'gallery',
-  ];
-
-  const isParagraph = type => paragraphTypes.includes(type);
-
-  const paragraphCounter = (elements = []) => {
-    let count = 0;
-
-    elements.forEach((element) => {
-      const { type } = element || {};
-
-      if (isParagraph(type)) {
-        count += 1;
-      }
-    });
-
-    return count;
-  };
 
   if (!globalContent) return null;
 
