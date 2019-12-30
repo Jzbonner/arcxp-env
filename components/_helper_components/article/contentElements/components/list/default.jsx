@@ -1,18 +1,18 @@
 /*  /components/_helper_components/article/contentElements/components/list/default.jsx  */
 
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const listItems = {
-  unordered: "ul",
-  ordered: "ol",
-  ul: "ul",
-  ol: "ol",
+  unordered: 'ul',
+  ordered: 'ol',
+  ul: 'ul',
+  ol: 'ol',
 };
 
 const isList = (item) => {
   const { type } = item;
-  return type === "list";
+  return type === 'list';
 };
 
 const renderListItem = (item, index, nextItem = {}) => {
@@ -32,7 +32,7 @@ const renderListItem = (item, index, nextItem = {}) => {
 
 const List = (props) => {
   const { src = {} } = props;
-  const { list_type: listType, items = [] } = src;
+  const { list_type: items = [] } = src;
 
   if (!items.length) return null;
 
@@ -43,7 +43,7 @@ const List = (props) => {
         if (isList(item)) {
           return (
             <List
-              listType={listItems[item.list_type] || "ul"}
+              listType={listItems[item.list_type] || 'ul'}
               items={item.items}
             />
           );
@@ -59,6 +59,7 @@ List.propTypes = {
   listType: PropTypes.string,
   className: PropTypes.string,
   items: PropTypes.array,
+  src: PropTypes.string,
 };
 
 export default List;

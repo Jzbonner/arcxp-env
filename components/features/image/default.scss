@@ -19,7 +19,7 @@
     margin: 0 20px;
 
     .photo__credit__text {
-      font: 400 0.75em "Gordita_Regular", arial, sans-serif;
+      font: 400 .75em "Gordita_Regular", "Arial", sans-serif;
       color: #313132;
     }
 
@@ -61,8 +61,8 @@
     right: 3%;
     z-index: 11;
     cursor: pointer;
-    transition: transform 0.5s;
-    box-shadow: 0 2px 4px 0 rgba(149, 149, 149, 0.5);
+    transition: transform .5s;
+    box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
 
     @include breakpoint(mobile) {
       width: 40px;
@@ -109,10 +109,10 @@
     width: calc(100% - 135px);
     z-index: 10;
     border-radius: 6px;
-    background-color: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, .8);
+    box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
     padding: 60px;
-    transition: z-index 0.75s step-end, opacity 0.75s;
+    transition: z-index .75s step-end, opacity 0.75s;
     -webkit-animation: fadeinout 0.8s linear 1 forwards;
     animation: fadeinout 0.8s linear 1 forwards;
 
@@ -122,11 +122,11 @@
       }
 
       50% {
-        opacity: 0.5;
+        opacity: .5;
       }
 
       100% {
-        opacity: 0.8;
+        opacity: .8;
       }
     }
 
@@ -136,11 +136,11 @@
       }
 
       50% {
-        opacity: 0.5;
+        opacity: .5;
       }
 
       100% {
-        opacity: 0.8;
+        opacity: .8;
       }
     }
 
@@ -156,7 +156,7 @@
       text-align: right;
 
       .photo__credit__text {
-        font: 400 0.75em "Gordita_Regular", arial, sans-serif;
+        font: 400 .75em "Gordita_Regular", arial, sans-serif;
         color: #fff;
       }
 
@@ -172,7 +172,7 @@
       letter-spacing: normal;
 
       @include breakpoint(mobile) {
-        font: 400 0.875em "Gordita_Regular", arial, sans-serif;
+        font: 400 .875em "Gordita_Regular", arial, sans-serif;
       }
     }
   }

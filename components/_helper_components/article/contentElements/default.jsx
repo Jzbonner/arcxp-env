@@ -1,24 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BlockQuote from './components/blockQuote/default';
-import Correction from './components/correction/default';
-import Gallery from './components/gallery/default';
-import HTML from './components/html/default';
-import SecondaryImage from './components/image/default';
-import InterstitialLink from './components/interstitial_link/default';
-import List from './components/list/default';
-import Paragraph from './components/paragraph/default';
-import Oembed from './components/social_url/default';
-import Table from './components/table/default';
-import Video from './components/video/default';
-import Header from './components/header/default';
+import BlockQuote from './components/blockQuote/default.jsx';
+import Correction from './components/correction/default.jsx';
+import Gallery from './components/gallery/default.jsx';
+import HTML from './components/html/default.jsx';
+import SecondaryImage from './components/image/default.jsx';
+import InterstitialLink from './components/interstitial_link/default.jsx';
+import List from './components/list/default.jsx';
+import Paragraph from './components/paragraph/default.jsx';
+import Oembed from './components/social_url/default.jsx';
+import Table from './components/table/default.jsx';
+import Video from './components/video/default.jsx';
+import Header from './components/header/default.jsx';
 
 const ContentElements = ({ contentElements }) => (
 
     <div>
-      
       {contentElements.map((element) => {
-
         switch (element.type) {
           case 'blockquote':
           case 'quote':
