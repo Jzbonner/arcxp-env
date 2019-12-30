@@ -10,6 +10,6 @@ const Paragraph = ({ src }) => {
   return <p className="paragraph" dangerouslySetInnerHTML={{ __html: content }} />;
 };
 Paragraph.propTypes = {
-  src: PropTypes.any,
+  src: PropTypes.string,
 };
 export default Paragraph;
