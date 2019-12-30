@@ -31,14 +31,13 @@ const renderListItem = (item, index, nextItem = {}) => {
 };
 
 const List = (props) => {
-  const { listType = "ul", className, items = [] } = props;
+  const { src = {} } = props;
+  const { list_type: listType, items = [] } = src;
 
-  if (items.length === 0) return null;
-
-  const ListType = listItems[listType] || listType;
+  if (!items.length) return null;
 
   return (
-    <ListType className={className}>
+    <ol>
       {items.map((item, index) => {
         if (isList(item) && items[index - 1] && !isList(items[index - 1])) return null;
         if (isList(item)) {
@@ -52,7 +51,7 @@ const List = (props) => {
         const nextItem = items[index + 1];
         return renderListItem(item, index, nextItem);
       })}
-    </ListType>
+    </ol>
   );
 };
 

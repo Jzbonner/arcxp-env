@@ -14,9 +14,11 @@ import Video from './components/video/default';
 import Header from './components/header/default';
 
 const ContentElements = ({ contentElements }) => (
+
     <div>
+      
       {contentElements.map((element) => {
-        // console.log('ELEMENT', element);
+
         switch (element.type) {
           case 'blockquote':
           case 'quote':
