@@ -4,6 +4,38 @@
   min-height: 115px;
 }
 
+.container-headline {
+  max-width: 1600px;
+  width: 90%;
+  margin: 0 auto;
+  @include breakpoint(tablet) {
+    width: 95%;
+  }
+  @include breakpoint(mobile) {
+    width: 100%;
+    padding: 0 15px;
+  }
+}
+
+.container-article {
+  max-width: 1600px;
+  width: 67.5%;
+  margin: 0 auto;
+  @include breakpoint(tablet) {
+    width: 83.5%;
+  }
+  @include breakpoint(mobile) {
+    width: 95%;
+    padding: 0 15px;
+  }
+  .content-elements {
+    width: calc(100% - 300px);
+    @include breakpoint(mobile) {
+      width: 100%;
+    }
+  }
+}
+
 .breaking-news {
   min-height: 50px;
   width: 100%;
@@ -32,21 +64,9 @@
   height: 50px;
 }
 
-.article {
-  width: 75%;
-  margin: 0 auto 40px;
-  @include breakpoint(tablet) {
-    width: 88%;
-  }
-  @include breakpoint(mobile) {
-    width: 95%;
-  }
-}
-
-.rightrail {
-  float: right;
-  height: 1500px;
-  width: 300px;
+.right-rail {
+  min-height: 100%;
+  min-width: 300px;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -66,26 +86,4 @@
   min-height: 115px;
   width: 100%;
   text-align: center;
-}
-
-.container {
-  max-width: 1600px;
-  width: 90%;
-  margin: 0 auto;
-  @include breakpoint(tablet) {
-    width: 95%;
-  }
-  @include breakpoint(mobile) {
-    width: 100%;
-    padding: 0 15px;
-  }
-}
-
-.main-container {
-  max-width: 1600px;
-  width: 90%;
-  margin: 0 auto;
-  @include breakpoint(tablet) {
-    width: 100%;
-  }
 }

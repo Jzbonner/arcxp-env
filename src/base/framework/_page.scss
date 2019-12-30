@@ -36,3 +36,17 @@
   align-items: center;
   width: 100%;
 }
+
+.container-header {
+  max-width: 1600px;
+  width: 90%;
+  margin: 0 auto;
+  @include breakpoint(tablet) {
+    width: 100%;
+  }
+}
+
+.fullwidth-ad {
+  width: 100%;
+  min-height: 200px;
+}
