@@ -28,11 +28,8 @@ const StoryPageLayout = () => {
     credits,
   } = globalContent || {};
 
-<<<<<<< HEAD
-=======
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
->>>>>>> ADP-130/adPlacementLogic-Carlos
 
   const paragraphCount = paragraphCounter(contentElements);
 
