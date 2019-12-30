@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useAppContext } from 'fusion:context';
+import paragraphCounter from './_helper_functions/article/paragraphCounter';
 import TimeStamp from '../_helper_components/article/timestamp/default';
 import Byline from '../_helper_components/article/byline/default';
 import ContentElements from '../_helper_components/article/contentElements/default';
@@ -14,12 +15,12 @@ const StoryPageLayout = () => {
   const { globalContent } = appContext;
 
   if (!globalContent) return null;
-  let basicItems;
 
   const {
     first_publish_date: firstPublishDate,
     display_date: displayDate,
     content_elements: contentElements,
+    promo_items: promoItems,
     headlines,
     label,
     taxonomy,
@@ -27,10 +28,16 @@ const StoryPageLayout = () => {
     credits,
   } = globalContent || {};
 
+<<<<<<< HEAD
+=======
+  const { by: authorData } = credits || {};
+  const { basic: basicItems } = promoItems || {};
+>>>>>>> ADP-130/adPlacementLogic-Carlos
 
-  if (globalContent.promo_items) {
-    basicItems = globalContent.promo_items.basic;
-  }
+  const paragraphCount = paragraphCounter(contentElements);
+
+  // with paragraphCount, we can now determine what ads are needed for the layout
+  console.log('paragraphCount', paragraphCount);
 
   return (
     <>
