@@ -32,7 +32,7 @@ const renderListItem = (item, index, nextItem = {}) => {
 
 const List = (props) => {
   const { src = {} } = props;
-  const { list_type: items = [] } = src;
+  const { items = [] } = src;
 
   if (!items.length) return null;
 
