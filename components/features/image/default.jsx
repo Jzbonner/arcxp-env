@@ -6,7 +6,7 @@ const Image = ({ outerComponentClassName, basicItems }) => {
   const featuredImage = basicItems.url ? basicItems.url : null;
   const [toggleButton, setToggle] = useState(false);
   const featuredCaption = basicItems.caption;
-  const featuredAuthor = basicItems.credits ? `Photo: ${basicItems.credits.by[0].name}` : '';
+  const featuredAuthor = basicItems.credits.affiliation ? `Photo: ${basicItems.credits.affiliation[0].name}` : `Photo: ${basicItems.credits.by[0].name}`;
   const toggle = () => {
     setToggle(!toggleButton);
   };
