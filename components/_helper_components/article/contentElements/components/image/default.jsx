@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import './default.scss';
 
 const SecondaryImage = ({ src }) => {
-  // console.log(src);
   const secondaryImage = src.url ? src.url : '';
   const [toggleButton, setToggle] = useState(false);
   const { caption } = src;
-  const author = src.credits.by ? `Photo: ${src.credits.by[0].name}` : '';
+  const author = src.credits.affiliation ? `Photo: ${src.credits.affiliation[0].name}` : `Photo: ${src.credits.by[0].name}`;
   const toggle = () => {
     setToggle(!toggleButton);
   };
@@ -22,7 +21,7 @@ const SecondaryImage = ({ src }) => {
         <div className="fill-line fill-line--long"></div>
       </div>
       {toggleButton ? (
-        <div className='photo_caption_secondaryImage'>
+        <div className="photo_caption_secondaryImage">
           <div className="photo__caption__text">{caption}</div>
         </div>
       ) : (
