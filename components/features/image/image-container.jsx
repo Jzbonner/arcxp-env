@@ -1,5 +1,5 @@
 import React from 'react';
-import ImageComponent from './default';
+import ImageComponent from './default.jsx';
 import demo from '../../../resources/images/demo.jpg';
 
 // Demo purposes only, can be deleted in the future //

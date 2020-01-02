@@ -4,15 +4,18 @@
 
 .article-headline-container {
   display: flex;
+
   &.with-gallery {
     flex-direction: column;
     .article-headline {
       justify-content: center;
     }
   }
+
   &.with-just-headline .article-headline {
     margin: 0 auto;
   }
+
   &.with-image .article-headline,
   &.with-video .article-headline {
     height: 90%;
@@ -21,6 +24,7 @@
       width: 90%;
     }
   }
+
   &.with-image .article-headline {
     margin: 2% -2% 0 2%;
     text-align: left;
@@ -31,6 +35,7 @@
       height: auto;
     }
   }
+
   &.with-video .article-headline {
     margin: 2% 0 0 0;
     @include breakpoint(mobile) {
@@ -47,9 +52,9 @@
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.13);
-  border-radius: 0.25rem;
-  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, .13);
+  border-radius: .25rem;
+  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
   text-align: center;
   z-index: 1;
   display: flex;
@@ -58,10 +63,11 @@
 
 .article-headline-body {
   padding: 1.25rem;
+  
   .h3 {
     font-size: 3em;
     line-height: 1.3;
-    letter-spacing: -0.5px;
+    letter-spacing: -.5px;
     @include breakpoint(desktop-sm) {
       font-size: 2.5em;
     }

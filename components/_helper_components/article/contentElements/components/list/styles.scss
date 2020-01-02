@@ -1,0 +1,13 @@
+/*  /components/_helper_components/article/contentElements/components/list/styles.scss  */
+
+ol {
+  counter-reset: item;
+  padding-left: 10px;
+}
+li {
+  display: block
+}
+li:before {
+  content: counters(item, ".") " ";
+  counter-increment: item;
+}
