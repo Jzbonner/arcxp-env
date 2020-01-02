@@ -31,7 +31,7 @@ const ContentElements = ({ contentElements }) => (
           case 'image':
             return <SecondaryImage src={element} />;
           case 'text':
-            return <Paragraph src={element} />;
+            return <Paragraph src={element.content} />;
           case 'interstitial_link':
             return <InterstitialLink src={element} />;
           case 'list':
