@@ -1,0 +1,110 @@
+//@import "./../base/breakpoints";
+
+.c-header {
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+
+  @include breakpoint(desktop-sm) {
+    width: 90%;
+  }
+}
+
+.c-breakingNews {
+  min-height: 50px;
+  width: 100%;
+  text-align: center;
+}
+
+.c-logo {
+  min-height: 115px;
+}
+
+.c-headerNav {
+  display: flex;
+  justify-content: flex-start;
+  height: 60px;
+  & > div,
+  nav {
+    height: 100%;
+  }
+  & .c-headerNav-weather,
+  .c-headerNav-logIn {
+    flex: 2;
+  }
+  & .c-headerNav-menu {
+    min-width: 75%;
+  }
+}
+
+.c-subscribe {
+  height: 50px;
+}
+
+.c-headline {
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 15px;
+
+  @include breakpoint(tablet) {
+    padding: 0;
+    width: 95%;
+  }
+
+  @include breakpoint(desktop-lg) {
+    width: 90%;
+  }
+}
+
+.c-article {
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 95%;
+  padding: 0 15px;
+
+  @include breakpoint(tablet) {
+    width: 83.5%;
+    padding: 0;
+  }
+
+  @include breakpoint(desktop-lg) {
+    width: 67.5%;
+  }
+
+  .c-contentElements {
+    width: 100%;
+    @include breakpoint(tablet) {
+      width: calc(100% - 300px);
+    }
+  }
+}
+
+.c-rightRail {
+  min-height: 100%;
+  min-width: 300px;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  border: 1px solid #a8a8a8;
+  display: none;
+  @include breakpoint(tablet) {
+    display: flex;
+  }
+}
+
+.c-fullWidthAd {
+  width: 100%;
+  min-height: 200px;
+}
+
+.c-taboola {
+  min-height: 200px;
+}
+
+.c-footer {
+  min-height: 115px;
+  width: 100%;
+  text-align: center;
+}

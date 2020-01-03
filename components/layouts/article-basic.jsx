@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import './article-basic.scss';
 import TimeStamp from '../_helper_components/article/timestamp/default';
 import Byline from '../_helper_components/article/byline/default';
 import ContentElements from '../_helper_components/article/contentElements/default';
@@ -28,6 +27,8 @@ const StoryPageLayout = () => {
     credits,
   } = globalContent || {};
 
+  // console.log(globalContent);
+
   const { by: authorData } = credits || {};
 
   if (globalContent.promo_items) {
@@ -37,62 +38,60 @@ const StoryPageLayout = () => {
   return (
     <>
       <header>
-        <div className="breaking-news placeholder">
-          <div className="container-header">Breaking News</div>
-        </div>
-        <div className="header">
-          <div className="container-header">
-            <div className="logo placeholder">Logo</div>
-            <div className="header-nav placeholder">
-              <nav className="menu placeholder">Menu</nav>
-              <div className="weather placeholder">Weather</div>
-              <div className="log-in placeholder">Log In</div>
-            </div>
-            <div className="subscribe placeholder">Support Local Journalism. Subscribe today for 99¢.</div>
+        <div className="b-placeholder c-header c-breakingNews">Breaking News</div>
+
+        <div className="c-header">
+          <div className="b-placeholder c-logo">Logo</div>
+          <div className="b-placeholder c-headerNav">
+            <nav className="b-placeholder c-headerNav-menu">Menu</nav>
+            <div className="b-placeholder c-headerNav-weather">Weather</div>
+            <div className="b-placeholder c-headerNav-logIn">Log In</div>
           </div>
+          <div className="b-placeholder c-subscribe">Support Local Journalism. Subscribe today for 99¢.</div>
         </div>
       </header>
 
       <main>
-        <div className="container-headline">
-          <Headline headlines={headlines} basicItems={basicItems} />
-        </div>
+        <header>
+          <div className="c-headline">
+            <Headline headlines={headlines} basicItems={basicItems} />
+          </div>
+          <SubHeadline subheadlines={subheadlines} />
+          <div className="b-flexRow b-flexCenter">
+            <SectionLabel label={label} taxonomy={taxonomy} />
+            <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} />
+          </div>
+          <div className="b-flexRow b-flexCenter">
+            <Byline by={authorData} />
+          </div>
+        </header>
 
         <article>
-          <div className="container-article">
-            <SubHeadline subheadlines={subheadlines} />
-            <div className="flex-row flex-center">
-              <SectionLabel label={label} taxonomy={taxonomy} />
-              <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} />
-            </div>
-            <div className="flex-row flex-center">
-              <Byline by={authorData} />
-            </div>
-
+          <section className="c-article">
             <ContentElements contentElements={contentElements} stopIndex="1" />
-            <div className="flex-row">
-              <ContentElements contentElements={contentElements} startIndex="1" stopIndex="8" />
-              <div className="right-rail rpo01">RP01 Container</div>
+            <div className="b-flexRow">
+              <div className="c-contentElements">
+                <ContentElements contentElements={contentElements} startIndex="1" stopIndex="8" />
+              </div>
+              <aside className="c-rightRail c-rp01">RP01 Container</aside>
             </div>
-          </div>
+          </section>
 
-          <div className="flex-row flex-center placeholder fullwidth-ad">Full Width Ad Container</div>
+          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd">Full Width Ad Container</div>
 
-          <div className="container-article">
+          <section className="c-article">
             {contentElements.length > 8 && (
-              <div className="flex-row">
+              <div className="b-flexRow">
                 <ContentElements contentElements={contentElements} startIndex="8" />
-                <div className="right-rail rpo09">RP09 Container</div>
+                <div className="c-rightRail c-rp09">RP09 Container</div>
               </div>
             )}
-            <div className="placeholder taboola">Taboola</div>
-          </div>
+            <div className="b-placeholder c-taboola">Taboola</div>
+          </section>
         </article>
       </main>
 
-      <footer className="footer placeholder">
-        <div className="container">Footer</div>
-      </footer>
+      <footer className="b-placeholder c-footer">Footer</footer>
     </>
   );
 };

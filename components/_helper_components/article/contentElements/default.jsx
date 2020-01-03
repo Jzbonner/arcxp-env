@@ -14,54 +14,54 @@ import Table from './components/table/default';
 import Video from './components/video/default';
 import Header from './components/header/default';
 
-
 const ContentElements = ({ contentElements, startIndex = 0, stopIndex = contentElements.length }) => {
   let paragraphCount = 0;
 
   return (
-     <div className="content-elements">
-    {contentElements.map((element) => {
-      if (isParagraph(element.type)) {
-        paragraphCount += 1;
-      }
-      if (startIndex <= paragraphCount && paragraphCount < stopIndex) {
-        switch (element.type) {
-          case 'blockquote':
-          case 'quote':
-            return <BlockQuote src={element} />;
-          case 'correction':
-            return <Correction src={element} />;
-          case 'gallery':
-            return <Gallery src={element} />;
-          case 'raw_html':
-            return <HTML src={element} />;
-          case 'header':
-            return <Header src={element} />;
-          case 'image':
-            return <SecondaryImage src={element} />;
-          case 'text':
-            return <Paragraph src={element} />;
-          case 'interstitial_link':
-            return <InterstitialLink src={element} />;
-          case 'list':
-            return <List src={element} />;
-          case 'oembed_response':
-            return <Oembed src={element.raw_oembed} />;
-          case 'table':
-            return <Table src={element} />;
-          case 'video':
-            return <Video src={element} />;
-          default:
-            return (
-              <ul>
-                <li key={element.id}>{element.type}</li>
-              </ul>
-            );
+    <div>
+      {contentElements.map((element) => {
+        if (isParagraph(element.type)) {
+          paragraphCount += 1;
         }
-      }
-      return null;
-    })}
-  </div>);
+        if (startIndex <= paragraphCount && paragraphCount < stopIndex) {
+          switch (element.type) {
+            case 'blockquote':
+            case 'quote':
+              return <BlockQuote src={element} />;
+            case 'correction':
+              return <Correction src={element} />;
+            case 'gallery':
+              return <Gallery src={element} />;
+            case 'raw_html':
+              return <HTML src={element} />;
+            case 'header':
+              return <Header src={element} />;
+            case 'image':
+              return <SecondaryImage src={element} />;
+            case 'text':
+              return <Paragraph src={element} />;
+            case 'interstitial_link':
+              return <InterstitialLink src={element} />;
+            case 'list':
+              return <List src={element} />;
+            case 'oembed_response':
+              return <Oembed src={element.raw_oembed} />;
+            case 'table':
+              return <Table src={element} />;
+            case 'video':
+              return <Video src={element} />;
+            default:
+              return (
+                <ul>
+                  <li key={element.id}>{element.type}</li>
+                </ul>
+              );
+          }
+        }
+        return null;
+      })}
+    </div>
+  );
 };
 
 ContentElements.propTypes = {
