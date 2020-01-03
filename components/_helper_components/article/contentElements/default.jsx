@@ -14,11 +14,11 @@ import Table from './components/table/default';
 import Video from './components/video/default';
 import Header from './components/header/default';
 
-const ContentElements = ({ contentElements, startIndex = 0, stopIndex = contentElements.length }) => {
+const ContentElements = ({ contentElements }) => {
   let paragraphCount = 0;
 
   return (
-    <div>
+    <div className="c-contentElements">
       {contentElements.map((element) => {
         if (isParagraph(element.type)) {
           paragraphCount += 1;

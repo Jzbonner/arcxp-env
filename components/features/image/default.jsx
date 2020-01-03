@@ -35,11 +35,9 @@ const Image = ({ outerComponentClassName, basicItems }) => {
 
   const featuredImageContent = (
     <div className={`image-${outerComponentClassName} image-default`}>
-      <div className="tease__img tease__img--photo">
-        <div className="img-fluid">
-          <img src={featuredImage} alt={featuredCaption} />
-          {featuredCaptionContent}
-        </div>
+      <div className="img-fluid">
+        <img src={featuredImage} alt={featuredCaption} />
+        {featuredCaptionContent}
       </div>
       <div className="photo__credit">
         <p className="photo__credit__text">{featuredAuthor}</p>

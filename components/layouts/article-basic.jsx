@@ -38,9 +38,9 @@ const StoryPageLayout = () => {
   return (
     <>
       <header>
-        <div className="b-placeholder c-header c-breakingNews">Breaking News</div>
+        <div className="b-placeholder c-breakingNews">Breaking News</div>
 
-        <div className="c-header">
+        <div className="c-fixed-width">
           <div className="b-placeholder c-logo">Logo</div>
           <div className="b-placeholder c-headerNav">
             <nav className="b-placeholder c-headerNav-menu">Menu</nav>
@@ -53,7 +53,7 @@ const StoryPageLayout = () => {
 
       <main>
         <header>
-          <div className="c-headline">
+          <div className="c-fixed-width">
             <Headline headlines={headlines} basicItems={basicItems} />
           </div>
           <SubHeadline subheadlines={subheadlines} />
@@ -69,10 +69,10 @@ const StoryPageLayout = () => {
         <article>
           <section className="c-article">
             <ContentElements contentElements={contentElements} stopIndex="1" />
+
             <div className="b-flexRow">
-              <div className="c-contentElements">
-                <ContentElements contentElements={contentElements} startIndex="1" stopIndex="8" />
-              </div>
+              <ContentElements contentElements={contentElements} startIndex="1" stopIndex="8" />
+
               <aside className="c-rightRail c-rp01">RP01 Container</aside>
             </div>
           </section>

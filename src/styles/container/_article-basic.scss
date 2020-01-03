@@ -1,13 +1,8 @@
-//@import "./../base/breakpoints";
+@import "./../base/breakpoints";
+@import "./../base/mixins";
 
-.c-header {
-  max-width: 1600px;
-  width: 100%;
-  margin: 0 auto;
-
-  @include breakpoint(desktop-sm) {
-    width: 90%;
-  }
+.c-fixed-width {
+  @include fixed-width;
 }
 
 .c-breakingNews {
@@ -41,31 +36,10 @@
   height: 50px;
 }
 
-.c-headline {
-  max-width: 1600px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 0 15px;
-
-  @include breakpoint(tablet) {
-    padding: 0;
-    width: 95%;
-  }
-
-  @include breakpoint(desktop-lg) {
-    width: 90%;
-  }
-}
-
 .c-article {
-  max-width: 1600px;
-  margin: 0 auto;
-  width: 95%;
-  padding: 0 15px;
-
+  @include fixed-width;
   @include breakpoint(tablet) {
     width: 83.5%;
-    padding: 0;
   }
 
   @include breakpoint(desktop-lg) {
