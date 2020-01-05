@@ -18,7 +18,7 @@ const Header = ({ src }) => {
 };
 
 Header.propTypes = {
-  src: PropTypes.any,
+  src: PropTypes.object,
   content: PropTypes.string,
   level: PropTypes.number,
 };
