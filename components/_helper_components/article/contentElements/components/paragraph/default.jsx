@@ -4,11 +4,11 @@ import './default.scss';
 
 const Paragraph = ({ src }) => {
   const { content } = src;
-  if (src === '<br/>') {
+  if (content === '<br/>') {
     return null;
   }
   return (
-    <p className="story-text">{content}</p>
+   <p className="story-text" dangerouslySetInnerHTML={{ __html: content }} />
   );
 };
 
@@ -16,5 +16,4 @@ Paragraph.propTypes = {
   src: PropTypes.object,
   content: PropTypes.string,
 };
-
 export default Paragraph;
