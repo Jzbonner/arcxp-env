@@ -10,6 +10,7 @@ import Headline from '../features/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 
+
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;

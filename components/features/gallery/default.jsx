@@ -297,9 +297,7 @@ const Gallery = () => {
 
   // initializing the gallery w/ globalContent ~ runs only once
   if (globalContent && !elementData) {
-    console.log('contentElements', globalContent);
     const { content_elements: contentElements } = globalContent;
-    console.log(contentElements);
     const tempCaptionData = [];
     let galleryItem;
     let captionItem;
