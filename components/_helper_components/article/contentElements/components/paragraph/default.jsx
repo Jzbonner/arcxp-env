@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './default.scss';
 
-const Paragraph = ({ src }) => (
-    <div style={{ border: '1px solid #000', padding: '10px' }}>
-      Content Element Type: <strong>Text / Paragraph</strong>
-      <p>{src.content}</p>
-    </div>
-);
+const Paragraph = ({ src }) => {
+  if (src === '<br/>') {
+    return null;
+  }
+  return (
+    <p className="story-text">{src.content}</p>
+  );
+};
 
 Paragraph.propTypes = {
-  src: PropTypes.any,
+  src: PropTypes.string,
 };
 
 export default Paragraph;

@@ -4,7 +4,7 @@
     line-height: $line-height;
 
     @if $font != "" {
-      font-family: $font;
+      font-family: $font, "Arial", sans-serif;
     }
   }
 }
@@ -15,7 +15,7 @@
     line-height: $line-height;
 
     @if $font != "" {
-      font-family: $font;
+      font-family: $font, "Arial", sans-serif;
     }
   }
 }
@@ -25,7 +25,7 @@
   line-height: $line-height;
 
   @if $font != "" {
-    font-family: $font;
+    font-family: $font, "Arial", sans-serif;
   }
 }
 /* stylelint-disable */
