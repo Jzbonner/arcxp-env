@@ -1,0 +1,52 @@
+@import "./../base/breakpoints";
+@import "./../base/mixins";
+
+.c-fixed-width {
+  @include fixed-width;
+}
+
+.c-breakingNews {
+  min-height: 50px;
+  width: 100%;
+  text-align: center;
+}
+
+.c-logo {
+  min-height: 115px;
+}
+
+.c-headerNav {
+  display: flex;
+  justify-content: flex-start;
+  height: 60px;
+  & > div,
+  nav {
+    height: 100%;
+  }
+  & .c-headerNav-weather,
+  .c-headerNav-logIn {
+    flex: 2;
+  }
+  & .c-headerNav-menu {
+    min-width: 75%;
+  }
+}
+
+.c-subscribe {
+  height: 50px;
+}
+
+.c-fullWidthAd {
+  width: 100%;
+  min-height: 200px;
+}
+
+.c-taboola {
+  min-height: 200px;
+}
+
+.c-footer {
+  min-height: 115px;
+  width: 100%;
+  text-align: center;
+}
