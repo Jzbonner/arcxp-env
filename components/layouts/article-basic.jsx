@@ -13,6 +13,7 @@ import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx'
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
+  console.log(globalContent);
 
   if (!globalContent) return null;
 
