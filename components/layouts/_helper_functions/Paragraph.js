@@ -1,8 +1,8 @@
 const paragraphTypes = ['text', 'video', 'image', 'raw_html', 'table', 'gallery', 'oembed_response'];
 
-const isParagraph = type => paragraphTypes.includes(type);
+export const isParagraph = type => paragraphTypes.includes(type);
 
-const paragraphCounter = (elements = []) => {
+export const paragraphCounter = (elements = []) => {
   let count = 0;
 
   elements.forEach((element) => {
@@ -15,5 +15,3 @@ const paragraphCounter = (elements = []) => {
 
   return count;
 };
-
-export default paragraphCounter;

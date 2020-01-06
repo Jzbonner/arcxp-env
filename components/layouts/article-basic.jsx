@@ -4,10 +4,14 @@ import React from 'react';
 import { useAppContext } from 'fusion:context';
 import TimeStamp from '../_helper_components/article/timestamp/default';
 import Byline from '../_helper_components/article/byline/default';
-import ContentElements from '../_helper_components/article/contentElements/default';
 import Headline from '../features/article/headline/default';
 import SubHeadline from '../_helper_components/article/subheadline/default';
 import SectionLabel from '../_helper_components/global/sectionLabel/default';
+import Section from '../_helper_components/article/section/Section';
+
+const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
+const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
+const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -67,27 +71,21 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
-          <section className="c-article">
-            <ContentElements contentElements={contentElements} stopIndex="1" />
-
-            <div className="b-flexRow">
-              <ContentElements contentElements={contentElements} startIndex="1" stopIndex="8" />
-
-              <aside className="c-rightRail c-rp01">RP01 Container</aside>
-            </div>
-          </section>
+          <Section
+            elements={contentElements}
+            stopIndex={10}
+            rightRailAd={ExampleAdComponent}
+            insertedAds={[{ insertAfterParagraph: 3, ad: ExampleAdInsertion1 }, { insertAfterParagraph: 5, ad: ExampleAdInsertion2 }]}
+          />
 
           <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd">Full Width Ad Container</div>
 
-          <section className="c-article">
-            {contentElements.length > 8 && (
-              <div className="b-flexRow">
-                <ContentElements contentElements={contentElements} startIndex="8" />
-                <div className="c-rightRail c-rp09">RP09 Container</div>
-              </div>
-            )}
-            <div className="b-placeholder c-taboola">Taboola</div>
-          </section>
+          <Section
+            elements={contentElements}
+            startIndex={10}
+            rightRailAd={ExampleAdComponent}
+            insertedAds={[{ insertAfterParagraph: 12, ad: ExampleAdInsertion1 }, { insertAfterParagraph: 15, ad: ExampleAdInsertion2 }]}
+          />
         </article>
       </main>
 
