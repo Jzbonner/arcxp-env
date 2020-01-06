@@ -14,42 +14,6 @@ import Video from './components/video/default.jsx';
 import Header from './components/header/default.jsx';
 
 const ContentElements = ({ contentElements }) => (
-    <div>
-      {contentElements.map((element) => {
-        switch (element.type) {
-          case 'quote':
-            return <BlockQuote src={element} />;
-          case 'correction':
-            return <Correction src={element} />;
-          case 'gallery':
-            return <Gallery src={element} />;
-          case 'raw_html':
-            return <HTML src={element} />;
-          case 'header':
-            return <Header src={element} />;
-          case 'image':
-            return <SecondaryImage src={element} />;
-          case 'text':
-            return <Paragraph src={element} />;
-          case 'interstitial_link':
-            return <InterstitialLink src={element} />;
-          case 'list':
-            return <List src={element} />;
-          case 'oembed_response':
-            return <Oembed src={element.raw_oembed} />;
-          case 'table':
-            return <Table src={element} />;
-          case 'video':
-            return <Video src={element} />;
-          default:
-            return (
-              <ul>
-                <li key={element.id}>{element.type}</li>
-              </ul>
-            );
-        }
-      })}
-    </div>
   <div className="c-contentElements">
     {contentElements.map((element) => {
       switch (element.type) {

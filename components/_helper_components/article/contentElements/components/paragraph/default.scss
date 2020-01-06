@@ -1,14 +1,14 @@
-@import '../../../../../../src/base/framework/';
+@import "./../../../../../../src/styles/base";
 
-.story-text  {
-    margin: 20px 0; 
-    width: 100%;
-    @include text-styles(1rem, 2.25, 'Gordita');
-    @include breakpoint(desktop-sm) {
-        @include text-styles(1.25rem, 2, 'Gordita');
-            margin-top: 0;
-            margin-bottom: 40px;
-            float: left;
-            clear: left; 
-        }
+.story-text {
+  margin: 20px 0;
+  width: 100%;
+  @include text-styles(1rem, 2.25, "Gordita");
+  @include breakpoint(desktop-sm) {
+    @include text-styles(1.25rem, 2, "Gordita");
+    margin-top: 0;
+    margin-bottom: 40px;
+    float: left;
+    clear: left;
+  }
 }
