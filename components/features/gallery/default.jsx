@@ -38,18 +38,18 @@ const Gallery = () => {
 
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
-    const focusElement = document.getElementById(`gallery-item-${currentIndex}`);
-    const galleryWidth = document.getElementById('GALLERY').offsetWidth;
-
-    const translateAmount = parseInt(galleryWidth, 10)
+    const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
+    const galleryWidth = document.getElementById('GALLERY') ? document.getElementById('GALLERY').offsetWidth : null;
+    if (galleryWidth && focusElement) {
+      const translateAmount = parseInt(galleryWidth, 10)
       / 2 - parseInt(focusElement.offsetWidth, 10)
       / 2 - parseInt(focusElement.offsetLeft, 10);
 
-    if (translateX !== translateAmount) {
-      setTranslateX(translateAmount);
+      if (translateX !== translateAmount) {
+        setTranslateX(translateAmount);
+      }
     }
   };
-
 
   const changeIndex = (action) => {
     // change current image index by -1
@@ -297,7 +297,9 @@ const Gallery = () => {
 
   // initializing the gallery w/ globalContent ~ runs only once
   if (globalContent && !elementData) {
-    const { content_elements: contentElements } = globalContent.content_elements[0];
+    console.log('contentElements', globalContent);
+    const { content_elements: contentElements } = globalContent;
+    console.log(contentElements);
     const tempCaptionData = [];
     let galleryItem;
     let captionItem;
@@ -355,8 +357,8 @@ const Gallery = () => {
         />
       );
     });
-    const baseElementsForMobile = [...galleryData];
 
+    const baseElementsForMobile = [...galleryData];
     const finalizedGalleryItems = reorganizeElements(galleryData);
 
     if (!elementData) {
