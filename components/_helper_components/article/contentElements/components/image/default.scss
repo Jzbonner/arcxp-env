@@ -5,7 +5,7 @@ article {
     margin: 0 1.5%;
 }
 
-.img-component {
+.c-secondaryImage {
     position: relative;
     width: 100%;
     height: auto;
@@ -47,7 +47,7 @@ article {
     .photo_caption_secondaryImage {
         width: calc(100% - 100px);
         position: absolute;
-        top: 9%;
+        top: 7%;
         left: 0;
         right: 0;
         margin: auto;

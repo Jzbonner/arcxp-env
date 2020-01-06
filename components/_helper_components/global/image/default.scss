@@ -1,7 +1,7 @@
-@import "../../../src/base/framework/breakpoints";
-@import "../../../src/base/framework/_fonts.scss";
+@import "../../../../src/base/framework/breakpoints";
+@import "../../../../src/base/framework/_fonts.scss";
 
-.image-default {
+.c-mainImage {
   justify-content: end;
   width: 66%;
   flex: 1 0 66%;
@@ -96,7 +96,7 @@
     }
   }
 
-  .photo__caption__toggle.active {
+  .photo__caption__toggle.is-active {
     transform: rotate(90deg);
   }
 
