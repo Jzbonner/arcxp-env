@@ -1,11 +1,11 @@
 /* Import site specific variables */
 
 /* Imports and extends base stylesheet, only include overrides or site-specific scss here */
-//Fusison does not use this import. It uses the import in .fusion/build/components/fusion.json
-@import "./../../base/base.scss";
+@import "./../../styles/base/index.scss";
+@import "./../../styles/container/index.scss";
+@import "./../../styles/state/index.scss";
 
 /* Import all component styles */
-//Fusison does not use this import. It uses the import in .fusion/build/components/fusion.json
-@import "components/**/*.scss";
+//@import "components/**/*.scss";
 
 /* Import site specific overrides here */

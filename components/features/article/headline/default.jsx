@@ -13,17 +13,17 @@ const Headline = ({ basicItems = {}, headlines = {} }) => {
   // promoData.type = 'video';
 
   return (
-    <div className={`article-headline-container with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
-      <div className="article-headline">
-        <div className="article-headline-body">
-          <h3 className="article-heading h3">{headlines.basic}</h3>
+    <div className={`artical-headline-component with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
+      <div className="headline">
+        <div className="headline-body">
+          <h3 className="heading-body h3">{headlines.basic}</h3>
         </div>
       </div>
       {promoData.type === 'image' && (
         <Image imageSource={promoData.url} alt={promoData.caption} outerComponentClassName="head" basicItems={basicItems} />
       )}
-      {promoData.type === 'gallery' && <div className="gallery-container placeholder">Gallery Placeholder</div>}
-      {promoData.type === 'video' && <div className="video-container placeholder">Video Placeholder</div>}
+      {promoData.type === 'gallery' && <div className="c-gallery b-placeholder">Gallery Placeholder</div>}
+      {promoData.type === 'video' && <div className="c-video b-placeholder">Video Placeholder</div>}
     </div>
   );
 };
