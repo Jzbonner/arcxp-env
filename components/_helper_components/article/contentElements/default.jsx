@@ -14,7 +14,6 @@ import Video from './components/video/default.jsx';
 import Header from './components/header/default.jsx';
 
 const ContentElements = ({ contentElements }) => (
-
     <div>
       {contentElements.map((element) => {
         switch (element.type) {
