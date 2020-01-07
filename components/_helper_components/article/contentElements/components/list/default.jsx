@@ -23,9 +23,7 @@ const renderListItem = (item, index, nextItem = {}) => {
   return (
     <li key={index}>
       <span dangerouslySetInnerHTML={{ __html: content }} />
-      {nextItemIsAList ? (
-        <List key={index} items={nextItem.items} listType={properListType} />
-      ) : null}
+      {nextItemIsAList ? <List key={index} items={nextItem.items} listType={properListType} /> : null}
     </li>
   );
 };
@@ -41,12 +39,7 @@ const List = (props) => {
       {items.map((item, index) => {
         if (isList(item) && items[index - 1] && !isList(items[index - 1])) return null;
         if (isList(item)) {
-          return (
-            <List
-              listType={listItems[item.list_type] || 'ul'}
-              items={item.items}
-            />
-          );
+          return <List listType={listItems[item.list_type] || 'ul'} items={item.items} />;
         }
         const nextItem = items[index + 1];
         return renderListItem(item, index, nextItem);
