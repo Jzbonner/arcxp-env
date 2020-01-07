@@ -16,8 +16,6 @@ const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd inser
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
-  console.log(globalContent);
-
   if (!globalContent) return null;
 
   const {
