@@ -6,12 +6,12 @@ import './styles.scss';
 
 const Blockquote = ({ contentElements, citation }) => (
   <div className="blockquote">
-    {contentElements.map((el) => {
+    {contentElements.map((el, index) => {
       switch (el.type) {
         case 'list':
-          return <List src={el} />;
+          return <List key={`blockquote-${index}`} src={el} />;
         case 'text':
-          return <Paragraph src={el} />;
+          return <Paragraph key={`blockquote-${index}`} src={el} />;
         default:
           return null;
       }
