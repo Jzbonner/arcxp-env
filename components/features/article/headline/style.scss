@@ -1,8 +1,11 @@
 /*  /components/features/article/headline/styles.scss  */
 
-@import "./../../../../src/base/framework";
+@import "./../../../../src/styles/base/breakpoints";
 
-.article-headline-container {
+//////////////////
+// Component Module Styles
+/////////////////
+.artical-headline-component {
   display: flex;
   flex-direction: column-reverse;
 
@@ -16,8 +19,7 @@
       justify-content: center;
     }
   }
-
-  &.with-just-headline .article-headline {
+  &.with-just-headline .headline {
     margin: 0 auto;
   }
 
@@ -76,23 +78,15 @@
   }
 }
 
-/////////////
-//temporary styles. Will remove when video and gallery components are made and imported.
-///////////
-.placeholder {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: lightgray;
-  font-size: 20px;
-}
-
-.gallery-container {
+/////////////////
+// Component Container Styles
+////////////////
+.c-gallery {
   height: 400px;
   width: 100%;
 }
 
-.video-container {
+.c-video {
   width: 100%;
   height: 55vw;
   @include breakpoint(tablet) {

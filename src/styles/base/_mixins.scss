@@ -4,7 +4,7 @@
     line-height: $line-height;
 
     @if $font != "" {
-      font-family: $font;
+      font-family: $font, "Arial", sans-serif;
     }
   }
 }
@@ -15,7 +15,7 @@
     line-height: $line-height;
 
     @if $font != "" {
-      font-family: $font;
+      font-family: $font, "Arial", sans-serif;
     }
   }
 }
@@ -25,7 +25,7 @@
   line-height: $line-height;
 
   @if $font != "" {
-    font-family: $font;
+    font-family: $font, "Arial", sans-serif;
   }
 }
 /* stylelint-disable */
@@ -47,5 +47,19 @@
 @mixin render-custom($rule-map) {
   @each $prop, $value in $rule-map {
     #{$prop}: #{$value};
+  }
+}
+
+//Container Mixins
+@mixin fixed-width {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 767px;
+  @include breakpoint(tablet) {
+    max-width: 1023px;
+    width: 95%;
+  }
+  @include breakpoint(desktop-lg) {
+    max-width: 1600px;
   }
 }
