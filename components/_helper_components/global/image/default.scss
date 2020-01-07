@@ -76,18 +76,6 @@
             right: 3%;
           }
 
-          .fill-line--long {
-            height: 1px;
-            width: 15px !important;
-            margin-bottom: 3px;
-            background: #fff;
-
-            @include breakpoint(tablet) {
-              width: 20px !important;
-              margin-bottom: 4px;
-            }
-          }
-
           .fill-line {
             width: 10px;
             margin-bottom: 3px;
@@ -97,6 +85,18 @@
             @include breakpoint(tablet) {
               width: 15px;
               margin-bottom: 4px;
+            }
+
+            &--long {
+              height: 1px;
+              width: 15px;
+              margin-bottom: 3px;
+              background: #fff;
+
+              @include breakpoint(tablet) {
+                width: 20px !important;
+                margin-bottom: 4px;
+              }
             }
           }
         }

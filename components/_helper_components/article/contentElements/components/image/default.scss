@@ -43,19 +43,32 @@ article {
                 transition: transform .5s;
                 box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
 
-                .fill-line--long {
-                    height: 1px;
-                    width: 15px !important;
-                    margin-bottom: 3px;
-                    background: #fff;
-                }
+                // .fill-line--long {
+                //     height: 1px;
+                //     width: 15px !important;
+                //     margin-bottom: 3px;
+                //     background: #fff;
+                // }
+
+                // .fill-line {
+                //     width: 10px;
+                //     margin-bottom: 3px;
+                //     height: 1px;
+                //     background: #fff;
+                // }
 
                 .fill-line {
                     width: 10px;
                     margin-bottom: 3px;
                     height: 1px;
                     background: #fff;
-                }
+                    &--long {
+                      height: 1px;
+                      width: 15px;
+                      margin-bottom: 3px;
+                      background: #fff;
+                    }
+                  }
             }
 
             .photo__caption__toggle.is-active {
