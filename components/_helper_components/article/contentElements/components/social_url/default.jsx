@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.scss';
+import '../../../../../../src/styles/base/_utility.scss';
 
 const Oembed = ({ src }) => {
   const {
@@ -36,7 +36,7 @@ const Oembed = ({ src }) => {
   return (
     <div
     data-oembed-type={type}
-    className='default'
+    className='b-flexRow b-flexCenter'
     dangerouslySetInnerHTML={{ __html: filteredHtml }}/>
   );
 };
