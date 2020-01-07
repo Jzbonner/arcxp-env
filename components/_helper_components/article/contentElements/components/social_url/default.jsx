@@ -4,10 +4,12 @@ import '../../../../../../src/styles/base/_utility.scss';
 
 const Oembed = ({ src }) => {
   const {
-    html,
-    type,
+    raw_oembed: rawOembed,
   } = src;
-
+  const {
+    type,
+    html,
+  } = rawOembed;
   let filteredHtml = html;
   let SCRIPT_URL;
   const scriptFilter = /<script[\s\S]*?>[\s\S]*?<\/script>/gi;
@@ -43,6 +45,9 @@ const Oembed = ({ src }) => {
 
 Oembed.propTypes = {
   src: PropTypes.object,
+  rawOembed: PropTypes.object,
+  type: PropTypes.string,
+  html: PropTypes.string,
 };
 
 export default Oembed;

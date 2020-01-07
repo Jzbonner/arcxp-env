@@ -39,7 +39,7 @@ const ContentElements = ({ contentElements }) => (
         case 'list':
           return <List src={element} />;
         case 'oembed_response':
-          return <Oembed src={element.raw_oembed} />;
+          return <Oembed src={element} />;
         case 'table':
           return <Table src={element} />;
         case 'video':
