@@ -4,6 +4,7 @@ import leftArrow from '../../../resources/icons/gallery/left-arrow.svg';
 import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
 import GalleryItem from '../../_helper_components/global/gallery/galleryItem.jsx';
+import DesktopCaption from '../../_helper_components/global/gallery/desktopCaption.jsx';
 import './default.scss';
 
 
@@ -128,29 +129,24 @@ const Gallery = () => {
   // adds focus class to current gallery-item element
   const handleImageFocus = (arr) => {
     const elements = arr;
-    let isFocused = false;
-
     const finalElements = elements.map((element) => {
-      if (currentIndex === element.props.index) {
-        isFocused = true;
+      const elementItemData = { ...element.props.data };
+      const parentStates = {
+        isStickyVisible,
+        isMobile,
+        isCaptionOn,
+      };
+
+      elementItemData.states = { ...parentStates };
+
+      if (currentIndex === element.props.data.index) {
+        elementItemData.states.isFocused = true;
       } else {
-        isFocused = false;
+        elementItemData.states.isFocused = false;
       }
 
       return (
-        <GalleryItem
-          url={element.props.url}
-          key={`gallery-item-${element.props.url}`}
-          id={element.props.id}
-          alt={element.props.alt}
-          width={element.props.width}
-          index={element.props.index}
-          focus={isFocused}
-          isStickyVisible={isStickyVisible}
-          isMobile={isMobile}
-          isCaptionOn={isCaptionOn}
-          captionObj={element.props.captionObj}
-        />
+        <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`}/>
       );
     });
 
@@ -160,19 +156,12 @@ const Gallery = () => {
   const renderCaptionByCurrentIndex = () => {
     const captionToRender = baseCaptionData.map((element) => {
       if (element.index === currentIndex) {
-        return (
-          <div className="gallery-caption-container hidden-small hidden-medium">
-            <div className="gallery-credit hidden-small hidden-medium">
-              {element.credit && element.credit[0] ? `Photo: ${element.credit[0].name}` : ''}
-            </div>
-            {isCaptionOn
-              ? <div className="gallery-caption hidden-small hidden-medium">
-                {element.caption && <span>{element.caption}</span>}
-              </div>
-              : null
-            }
-          </div>
-        );
+        const propData = {
+          elementData: element,
+          isCaptionOn,
+        };
+
+        return <DesktopCaption data={propData} />;
       }
       return null;
     });
@@ -242,20 +231,19 @@ const Gallery = () => {
   };
 
   const getMobileElements = () => {
-    const finalElements = mobileElementData.map((element, i) => (
-      <GalleryItem
-        url={element.props.url}
-        id={`gallery-item-${i}`}
-        key={`gallery-item-${element.props.url}`}
-        alt={element.props.alt}
-        width={element.props.width}
-        index={element.props.index}
-        isStickyVisible={isStickyVisible}
-        isMobile={isMobile}
-        isCaptionOn={isCaptionOn}
-        captionObj={element.props.captionObj}
-      />
-    ));
+    const finalElements = mobileElementData.map((element) => {
+      const elementItemData = { ...element.props.data };
+      const parentStates = {
+        isStickyVisible,
+        isMobile,
+        isCaptionOn,
+      };
+      elementItemData.states = { ...parentStates };
+
+      return (
+          <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`}/>
+      );
+    });
     return finalElements;
   };
 
@@ -297,62 +285,43 @@ const Gallery = () => {
 
   // initializing the gallery w/ globalContent ~ runs only once
   if (globalContent && !elementData) {
+    // TODO: Seperate Mobile and Desktop prop processing
     const { content_elements: contentElements } = globalContent;
     const tempCaptionData = [];
-    let galleryItem;
-    let captionItem;
-    let isFocused;
     const galleryData = contentElements.map((element, i) => {
-      galleryItem = {};
-      captionItem = {};
-      isFocused = false;
+      let isFocused = false;
+      const {
+        url, copyright, caption, alt, credits, width,
+      } = element || {};
+      const { by } = credits || {};
 
-      if (element.url) {
-        galleryItem.url = element.url;
-      }
+      if (currentIndex === i) isFocused = true;
 
-      if (element.copyright) {
-        captionItem.copyright = element.copyright;
-      }
+      const galleryItem = {
+        url,
+        alt,
+        by,
+        width,
+        index: i,
+        id: `gallery-item-${i}`,
+        captionObj: {
+          copyright,
+          caption,
+          credit: by,
+          index: i,
+        },
+        states: {
+          isFocused,
+          isStickyVisible,
+          isMobile,
+          isCaptionOn,
+        },
+      };
 
-      if (element.caption) {
-        captionItem.caption = element.caption;
-      }
-
-      if (element.alt) {
-        galleryItem.alt = element.alt;
-      }
-
-      if (element.credits.by) {
-        captionItem.credit = element.credits.by;
-      }
-
-      if (element.width) {
-        galleryItem.width = element.width;
-      }
-
-      if (currentIndex === i) {
-        isFocused = true;
-      }
-
-      captionItem.index = i;
-
-      tempCaptionData.push(captionItem);
+      tempCaptionData.push(galleryItem.captionObj);
 
       return (
-        <GalleryItem
-          url={galleryItem.url}
-          key={`gallery-item-${galleryItem.url}`}
-          alt={galleryItem.alt}
-          index={i}
-          focus={isFocused}
-          id={`gallery-item-${i}`}
-          width={galleryItem.width}
-          isStickyVisible={isStickyVisible}
-          isMobile={isMobile}
-          isCaptionOn={isCaptionOn}
-          captionObj={captionItem}
-        />
+        <GalleryItem data={galleryItem} key={`gallery-item-${url}`}/>
       );
     });
 

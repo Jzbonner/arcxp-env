@@ -2,36 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const GalleryItem = (props) => {
+  const { data } = props;
   const {
-    url,
-    alt,
-    index,
-    focus,
-    id,
-    isStickyVisible,
-    isCaptionOn,
-    captionObj,
-  } = props;
-
+    url, alt, index, id, by, captionObj, states,
+  } = data;
   const { caption, credit } = captionObj;
+  const {
+    isFocused, isStickyVisible, isCaptionOn,
+  } = states;
 
   return (
     <div
       id={id}
       data-index={index}
-      key={url}
       className={`${isStickyVisible ? 'gallery-full-item' : 'gallery-image'} ${!isStickyVisible ? 'inherit--width mosiac-image' : ''}`}>
       <img
-        className={`${!isStickyVisible ? 'inherit--width mosiac-image' : ''} ${focus ? 'is-focused' : ''}`}
+        className={`${!isStickyVisible ? 'inherit--width mosiac-image' : ''} ${isFocused ? 'is-focused' : ''}`}
         src={url}
-
         alt={alt ? `${alt}` : ''}
       />
       {
         isStickyVisible
           ? <div>
             <div className="gallery-credit">
-              {credit && credit[0] ? credit[0].name : null}
+              {by && by[0] ? by[0].name : null}
             </div>
             {
               isCaptionOn
@@ -48,6 +42,7 @@ const GalleryItem = (props) => {
 };
 
 GalleryItem.propTypes = {
+  data: PropTypes.object,
   url: PropTypes.string,
   alt: PropTypes.string,
   index: PropTypes.number,
