@@ -1,0 +1,187 @@
+@import "../../../../src/base/framework/breakpoints";
+@import "../../../../src/base/framework/_fonts.scss";
+
+.c-mainImage {
+  order: 1;
+  width: 100%;
+  flex: 1 0 100%;
+  height: auto;
+  justify-content: end;
+
+  @include breakpoint(tablet) {
+    width: 66%;
+    flex: 1 0 66%;
+    order: 2;
+    height: auto;
+    justify-content: end;
+  }
+
+  .c-mainImage-content {
+
+    .photo__credit {
+      display: none;
+
+      @include breakpoint(tablet) {
+        text-align: right;
+        display: block;
+        margin: 0 20px;
+
+        .photo__credit__text {
+          font: 400 .75em "Gordita_Regular", "Arial", sans-serif;
+          color: #313132;
+        }
+      }
+    }
+
+    .image-head {
+      width: 100%;
+      height: 55vw;
+    }
+
+    .img-fluid {
+      width: 100%;
+      padding-bottom: 56.25%;
+      overflow: hidden;
+      position: relative;
+      height: 0;
+      display: block;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+
+      .c-mainCaption {
+
+        .photo__caption__toggle {
+          position: absolute;
+          display: block;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          padding: 12px;
+          background: linear-gradient(to top, #04befe, #4481eb);
+          top: 15%;
+          right: 4%;
+          z-index: 11;
+          cursor: pointer;
+          transition: transform .5s;
+          box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+
+          @include breakpoint(tablet) {
+            width: 60px;
+            height: 60px;
+            padding: 20px;
+            z-index: 11;
+            right: 3%;
+          }
+
+          .fill-line {
+            width: 10px;
+            margin-bottom: 3px;
+            height: 1px;
+            background: #fff;
+
+            @include breakpoint(tablet) {
+              width: 15px;
+              margin-bottom: 4px;
+            }
+
+            &--long {
+              height: 1px;
+              width: 15px;
+              margin-bottom: 3px;
+              background: #fff;
+
+              @include breakpoint(tablet) {
+                width: 20px !important;
+                margin-bottom: 4px;
+              }
+            }
+          }
+        }
+
+        .photo__caption__toggle.is-active {
+          transform: rotate(90deg);
+        }
+
+        .photo_caption {
+          position: absolute;
+          top: 20%;
+          left: 0;
+          right: 0;
+          margin: auto;
+          width: calc(100% - 135px);
+          z-index: 10;
+          border-radius: 6px;
+          background-color: rgba(0, 0, 0, .8);
+          box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+          padding: 60px;
+          transition: z-index .75s step-end, opacity 0.75s;
+          -webkit-animation: fadeinout 0.8s linear 1 forwards;
+          animation: fadeinout 0.8s linear 1 forwards;
+
+          @-webkit-keyframes fadeinout {
+            0% {
+              opacity: 0;
+            }
+
+            50% {
+              opacity: .5;
+            }
+
+            100% {
+              opacity: .8;
+            }
+          }
+
+          @keyframes fadeinout {
+            0% {
+              opacity: 0;
+            }
+
+            50% {
+              opacity: .5;
+            }
+
+            100% {
+              opacity: .8;
+            }
+          }
+
+          @media (max-width: 1024px) {
+            width: calc(100% - 100px);
+          }
+
+          .photo__credit__mobile {
+            display: block;
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            text-align: right;
+
+            .photo__credit__text {
+              font: 400 .75em "Gordita_Regular", arial, sans-serif;
+              color: #fff;
+            }
+
+            @include breakpoint(tablet) {
+              display: none;
+            }
+          }
+
+          .photo__caption__text {
+            font: 400 .875em "Gordita_Regular", arial, sans-serif;
+            color: #fff;
+            line-height: 1.58;
+            letter-spacing: normal;
+
+            @include breakpoint(tablet) {
+              font: 400 1.25em "Gordita_Regular", arial, sans-serif;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -3,17 +3,32 @@ import PropTypes from 'prop-types';
 import './default.scss';
 
 const Image = ({ outerComponentClassName, basicItems }) => {
-  const featuredImage = basicItems.url ? basicItems.url : null;
+  // console.log(basicItems);
+  const { url } = basicItems || null;
   const [toggleButton, setToggle] = useState(false);
-  const featuredCaption = basicItems.caption;
-  const featuredAuthor = basicItems.credits ? `Photo: ${basicItems.credits.by[0].name}` : '';
+  const { caption } = basicItems || null;
+  const name = basicItems.credits || null;
+  let mainCredit = null;
+  let secondaryCredit = null;
+  if (name) {
+    mainCredit = name.affiliation && name.affiliation.length ? name.affiliation[0].name : '';
+    secondaryCredit = name.by && name.by.length ? name.by[0].name : '';
+  }
+
+  let giveCredit = '';
+  if (mainCredit.length > 1) {
+    giveCredit = `Photo: ${mainCredit}`;
+  } else if (secondaryCredit.length > 1) {
+    giveCredit = `Photo: ${secondaryCredit}`;
+  }
+
   const toggle = () => {
     setToggle(!toggleButton);
   };
 
   const featuredCaptionContent = (
-    <div>
-      <div className={`${toggleButton ? 'photo__caption__toggle active' : 'photo__caption__toggle'}`} onClick={toggle}>
+    <div className="c-mainCaption">
+      <div className={`${toggleButton ? 'photo__caption__toggle is-active' : 'photo__caption__toggle'}`} onClick={toggle}>
         <div className="fill-line fill-line--long"></div>
         <div className="fill-line"></div>
         <div className="fill-line fill-line--long"></div>
@@ -22,9 +37,9 @@ const Image = ({ outerComponentClassName, basicItems }) => {
       </div>
       {toggleButton ? (
         <div className="photo_caption">
-          <div className="photo__caption__text">{featuredCaption}</div>
+          <div className="photo__caption__text">{caption}</div>
           <div className="photo__credit__mobile">
-            <p className="photo__credit__text">{featuredAuthor}</p>
+            <p className="photo__credit__text">{giveCredit}</p>
           </div>
         </div>
       ) : (
@@ -34,20 +49,18 @@ const Image = ({ outerComponentClassName, basicItems }) => {
   );
 
   const featuredImageContent = (
-    <div className={`image-${outerComponentClassName} image-default`}>
-      <div className="tease__img tease__img--photo">
+    <div className={`image-${outerComponentClassName} c-mainImage-content`}>
         <div className="img-fluid">
-          <img src={featuredImage} alt={featuredCaption} />
+          <img src={url} alt={caption} />
           {featuredCaptionContent}
         </div>
-      </div>
       <div className="photo__credit">
-        <p className="photo__credit__text">{featuredAuthor}</p>
+        <p className="photo__credit__text">{giveCredit}</p>
       </div>
     </div>
   );
 
-  return featuredImageContent;
+  return <div className="c-mainImage">{featuredImageContent}</div>;
 };
 
 Image.propTypes = {

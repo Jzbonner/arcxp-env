@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
-import TimeStamp from '../_helper_components/article/timestamp/default';
+import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 
 const HomePageLayout = (props) => {
   const [heading, leadImage, byline, content] = props.children;

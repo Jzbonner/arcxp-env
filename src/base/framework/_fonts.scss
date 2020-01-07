@@ -18,9 +18,10 @@ $font: (
 /* stylelint-enable */
 
 @font-face {
-  font-family: 'Gordita';
+  font-family: "Gordita";
   font-weight: 400;
   font-stretch: normal;
   font-style: normal;
-  src: url('./../../../resources/fonts/gordita/gorditaregular-webfont.woff') format('woff');
+  src: url("./../../../resources/fonts/gordita/gorditaregular-webfont.woff")
+    format("woff");
 }

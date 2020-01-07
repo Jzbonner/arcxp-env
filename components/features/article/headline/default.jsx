@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
-import Image from '../../image/default';
+import Image from '../../../_helper_components/global/image/default';
 
 const Headline = ({ basicItems = {}, headlines = {} }) => {
   let promoData = {};
@@ -29,7 +29,7 @@ const Headline = ({ basicItems = {}, headlines = {} }) => {
 };
 
 Headline.propTypes = {
-  basicItems: PropTypes.object.isRequired,
+  basicItems: PropTypes.object,
   headlines: PropTypes.object.isRequired,
 };
 
