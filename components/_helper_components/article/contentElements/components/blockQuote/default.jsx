@@ -22,7 +22,7 @@ const Blockquote = ({ contentElements, citation }) => (
 
 Blockquote.propTypes = {
   contentElements: PropTypes.array,
-  citation: PropTypes.string,
+  citation: PropTypes.obj,
 };
 
 export default Blockquote;

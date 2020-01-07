@@ -1,5 +1,5 @@
-@import "./../../../../../../src/base/framework/breakpoints";
-@import "./../../../../../../src/base/framework/mixins";
+@import "../../../../../../src/styles/base/breakpoints";
+@import "../../../../../../src/styles/base/mixins";
 
 .blockquote {
   border-left: 10px solid #2e81b7;
@@ -14,6 +14,7 @@
   }
   .blockquote-citation {
     @include text-styles(0.8em, 0.8, "Gordita");
+
     color: #313132;
     font-style: 400;
     @include breakpoint(desktop-sm) {
