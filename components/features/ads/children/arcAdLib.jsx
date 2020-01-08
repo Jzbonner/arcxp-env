@@ -30,7 +30,7 @@ export default class ArcAdLib {
     // if we don't have an instance yet create one
     if (!this.adInstance) {
       this.adInstance = new ArcAds({
-        dfp: { id: dfpID },
+        dfp: { id: 21849707860 },
       });
     }
 

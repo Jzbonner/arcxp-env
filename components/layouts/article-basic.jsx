@@ -8,6 +8,7 @@ import Headline from '../features/article/headline/default';
 import SubHeadline from '../_helper_components/article/subheadline/default';
 import SectionLabel from '../_helper_components/global/sectionLabel/default';
 import Section from '../_helper_components/article/section/Section';
+import ArcAd from '../features/ads/default';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
