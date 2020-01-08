@@ -1,214 +1,210 @@
 @import "./../../../../../../src/styles/base";
 
 article {
-    margin: 0 1.5%;
+  margin: 0 1.5%;
 }
 
 .c-secondaryImage {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  padding: 0;
+  .img-fluid {
     position: relative;
-    width: 100%;
-    height: auto;
-    overflow: visible;
-    padding: 0;
-
     img {
-        cursor: pointer;
-        border-radius: 6px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+  }
+
+  .photo__caption__toggle {
+    width: 40px;
+    height: 40px;
+    padding: 12px;
+    top: 5%;
+    right: 3%;
+    z-index: 11;
+
+    .fill-line--long {
+      width: 15px !important;
+      margin-bottom: 3px;
     }
 
-    .photo__caption__toggle {
-        width: 40px;
-        height: 40px;
-        padding: 12px;
-        top: 5%;
-        right: 3%;
-        z-index: 11;
-
-        .fill-line--long {
-            width: 15px !important;
-            margin-bottom: 3px;
-        }
-
-        .fill-line {
-            width: 10px;
-            margin-bottom: 3px;
-        }
+    .fill-line {
+      width: 10px;
+      margin-bottom: 3px;
     }
+  }
 }
 
 .c-secondaryCaption {
-
-    .photo__caption__toggle {
-        width: 40px;
-        height: 40px;
-        padding: 12px;
-        top: 5%;
-        right: 3%;
-        z-index: 11;
-        position: absolute;
-        display: block;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: linear-gradient(to top, #04befe, #4481eb);
-        cursor: pointer;
-        transition: transform .5s;
-        box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
-
-        .fill-line {
-            width: 10px;
-            margin-bottom: 3px;
-            height: 1px;
-            background: #fff;
-
-            &--long {
-                height: 1px;
-                width: 15px;
-                margin-bottom: 3px;
-                background: #fff;
-            }
-        }
-    }
-
-    .photo__caption__toggle.is-active {
-        transform: rotate(90deg);
-    }
-
-    .photo_caption {
-        position: absolute;
-        top: 20%;
-        left: 0;
-        right: 0;
-        margin: auto;
-        width: calc(100% - 135px);
-        z-index: 10;
-        border-radius: 6px;
-        background-color: rgba(0, 0, 0, .8);
-        box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
-        padding: 60px;
-        transition: z-index .75s step-end, opacity 0.75s;
-        -webkit-animation: fadeinout 0.8s linear 1 forwards;
-        animation: fadeinout 0.8s linear 1 forwards;
-
-        @-webkit-keyframes fadeinout {
-            0% {
-                opacity: 0;
-            }
-
-            50% {
-                opacity: .5;
-            }
-
-            100% {
-                opacity: .8;
-            }
-        }
-
-        @keyframes fadeinout {
-            0% {
-                opacity: 0;
-            }
-
-            50% {
-                opacity: .5;
-            }
-
-            100% {
-                opacity: .8;
-            }
-        }
-
-        @media (max-width: desktop-sm) {
-            width: calc(100% - 100px);
-        }
-
-        .photo__caption__text {
-            font: 400 .875em "Gordita_Regular", arial, sans-serif;
-            color: #fff;
-            line-height: 1.58;
-            letter-spacing: normal;
-
-            @include breakpoint(tablet) {
-                font: 400 1.25em "Gordita_Regular", arial, sans-serif;
-            }
-        }
-    }
-
-}
-
-
-.photo_caption_secondaryImage {
+  .photo__caption__toggle {
+    width: 40px;
+    height: 40px;
+    padding: 12px;
+    top: 5%;
+    right: 3%;
+    z-index: 11;
     position: absolute;
-    top: 7%;
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(to top, #04befe, #4481eb);
+    cursor: pointer;
+    transition: transform 0.5s;
+    box-shadow: 0 2px 4px 0 rgba(149, 149, 149, 0.5);
+
+    .fill-line {
+      width: 10px;
+      margin-bottom: 3px;
+      height: 1px;
+      background: #fff;
+
+      &--long {
+        height: 1px;
+        width: 15px;
+        margin-bottom: 3px;
+        background: #fff;
+      }
+    }
+  }
+
+  .photo__caption__toggle.is-active {
+    transform: rotate(90deg);
+  }
+
+  .photo_caption {
+    position: absolute;
+    top: 20%;
     left: 0;
     right: 0;
-    padding: 8%;
-    width: calc(100% - 80px);
     margin: auto;
+    width: calc(100% - 135px);
     z-index: 10;
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.8);
     box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
+    padding: 60px;
+    transition: z-index 0.75s step-end, opacity 0.75s;
     -webkit-animation: fadeinout 0.8s linear 1 forwards;
     animation: fadeinout 0.8s linear 1 forwards;
 
     @-webkit-keyframes fadeinout {
-        0% {
-            opacity: 0;
-        }
+      0% {
+        opacity: 0;
+      }
 
-        50% {
-            opacity: 0.5;
-        }
+      50% {
+        opacity: 0.5;
+      }
 
-        100% {
-            opacity: 0.8;
-        }
+      100% {
+        opacity: 0.8;
+      }
     }
 
     @keyframes fadeinout {
-        0% {
-            opacity: 0;
-        }
+      0% {
+        opacity: 0;
+      }
 
-        50% {
-            opacity: 0.5;
-        }
+      50% {
+        opacity: 0.5;
+      }
 
-        100% {
-            opacity: 0.8;
-        }
+      100% {
+        opacity: 0.8;
+      }
     }
 
-    @include breakpoint(tablet) {
-        width: calc(100% - 100px);
-        padding: 60px;
+    @media (max-width: desktop-sm) {
+      width: calc(100% - 100px);
     }
 
     .photo__caption__text {
-        font: 400 0.875em 'Gordita_Regular', arial, sans-serif;
-        color: #fff;
-        line-height: 1.58;
-        letter-spacing: normal;
+      font: 400 0.875em "Gordita_Regular", arial, sans-serif;
+      color: #fff;
+      line-height: 1.58;
+      letter-spacing: normal;
 
-        @include breakpoint(tablet) {
-            font: 400 1.25em 'Gordita_Regular', arial, sans-serif;
-        }
+      @include breakpoint(tablet) {
+        font: 400 1.25em "Gordita_Regular", arial, sans-serif;
+      }
     }
+  }
 }
 
+.photo_caption_secondaryImage {
+  position: absolute;
+  top: 7%;
+  left: 0;
+  right: 0;
+  padding: 8%;
+  width: calc(100% - 80px);
+  margin: auto;
+  z-index: 10;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
+  -webkit-animation: fadeinout 0.8s linear 1 forwards;
+  animation: fadeinout 0.8s linear 1 forwards;
 
+  @-webkit-keyframes fadeinout {
+    0% {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    100% {
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes fadeinout {
+    0% {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    100% {
+      opacity: 0.8;
+    }
+  }
+
+  @include breakpoint(tablet) {
+    width: calc(100% - 100px);
+    padding: 60px;
+  }
+
+  .photo__caption__text {
+    font: 400 0.875em "Gordita_Regular", arial, sans-serif;
+    color: #fff;
+    line-height: 1.58;
+    letter-spacing: normal;
+
+    @include breakpoint(tablet) {
+      font: 400 1.25em "Gordita_Regular", arial, sans-serif;
+    }
+  }
+}
 
 .photo__credit {
+  margin: 0;
+  text-align: right;
+
+  .photo__credit__text {
+    font: 400 0.75em "Gordita_Regular", arial, sans-serif;
+    color: #313132;
+    line-height: 2;
     margin: 0;
-    text-align: right;
-
-    .photo__credit__text {
-        font: 400 0.75em "Gordita_Regular", arial, sans-serif;
-        color: #313132;
-        line-height: 2;
-        margin: 0;
-        text-transform: capitalize;
-    }
+    text-transform: capitalize;
+  }
 }
-

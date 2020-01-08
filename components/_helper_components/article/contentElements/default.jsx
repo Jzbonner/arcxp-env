@@ -14,14 +14,11 @@ import Video from './components/video/default.jsx';
 import Header from './components/header/default.jsx';
 
 const ContentElements = ({ contentElements }) => (
-  <div className="c-contentElements">
+  <div>
     {contentElements.map((element) => {
       switch (element.type) {
-        case 'div':
-          return element;
-        case 'blockquote':
         case 'quote':
-          return <BlockQuote src={element} />;
+          return <BlockQuote contentElements={element.content_elements} citation={element.citation} />;
         case 'correction':
           return <Correction src={element} />;
         case 'gallery':
