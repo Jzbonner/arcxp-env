@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
+import ConnextInit from '../_helper_components/global/connext/default'
 
 const DefaultOutputType = (props) => {
   const {
-    arcSite = getProperties().sites[0], children, contextPath, deployment, CssLinks, Fusion, Libs, MetaTags,
+    arcSite = getProperties().sites[0],
+    children,
+    contextPath,
+    deployment,
+    CssLinks,
+    Fusion,
+    Libs,
+    MetaTags,
   } = props;
 
   return (
@@ -21,6 +29,9 @@ const DefaultOutputType = (props) => {
       <body>
         <div id="fusion-app">{children}</div>
         <Fusion />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://loader-cdn.azureedge.net/stage/ajc/loader.min.js"></script>
+        <ConnextInit />
       </body>
     </html>
   );
