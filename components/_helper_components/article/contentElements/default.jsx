@@ -12,6 +12,7 @@ import Oembed from './components/social_url/default.jsx';
 import Table from './components/table/default.jsx';
 import Video from './components/video/default.jsx';
 import Header from './components/header/default.jsx';
+import Divider from './components/divider/default.jsx';
 
 const ContentElements = ({ contentElements }) => (
     <div>
@@ -36,6 +37,8 @@ const ContentElements = ({ contentElements }) => (
             return <InterstitialLink src={element} />;
           case 'list':
             return <List src={element} />;
+          case 'divider':
+            return <Divider src={element} />;
           case 'oembed_response':
             return <Oembed src={element.raw_oembed} />;
           case 'table':
