@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import ConnextInit from '../_helper_components/global/connext/default'
+import ConnextInit from '../_helper_components/global/connext/default.jsx';
 
 const DefaultOutputType = (props) => {
   const {
