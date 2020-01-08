@@ -26,41 +26,31 @@ const Image = ({ outerComponentClassName, basicItems }) => {
     setToggle(!toggleButton);
   };
 
-  const featuredCaptionContent = (
-    <div className="c-mainCaption">
-      <div className={`${toggleButton ? 'photo__caption__toggle is-active' : 'photo__caption__toggle'}`} onClick={toggle}>
-        <div className="fill-line fill-line--long"></div>
-        <div className="fill-line"></div>
-        <div className="fill-line fill-line--long"></div>
-        <div className="fill-line"></div>
-        <div className="fill-line fill-line--long"></div>
-      </div>
-      {toggleButton ? (
-        <div className="photo_caption">
-          <div className="photo__caption__text">{caption}</div>
-          <div className="photo__credit__mobile">
-            <p className="photo__credit__text">{giveCredit}</p>
+  return (
+    <div className={`image-${outerComponentClassName} c-image-component`}>
+      <div className="image-component-image">
+        <img src={url} alt={caption} />
+        <div className="c-mainCaption">
+          <div className={`photo-caption-btn ${toggleButton ? 'is-active' : ''}`} onClick={toggle}>
+            <div className="fill-line fill-line-long"></div>
+            <div className="fill-line"></div>
+            <div className="fill-line fill-line-long"></div>
+            <div className="fill-line"></div>
+            <div className="fill-line fill-line-long"></div>
           </div>
+          {toggleButton ? (
+            <div className="photo-caption">
+              <div className="photo-caption-text">{caption}</div>
+              <p className="photo-credit-text">{giveCredit}</p>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
-      ) : (
-        ''
-      )}
-    </div>
-  );
-
-  const featuredImageContent = (
-    <div className={`image-${outerComponentClassName} c-mainImage-content`}>
-        <div className="img-fluid">
-          <img src={url} alt={caption} />
-          {featuredCaptionContent}
-        </div>
-      <div className="photo__credit">
-        <p className="photo__credit__text">{giveCredit}</p>
       </div>
+      <p className="photo-credit-text">{giveCredit}</p>
     </div>
   );
-
-  return <div className="c-mainImage">{featuredImageContent}</div>;
 };
 
 Image.propTypes = {
