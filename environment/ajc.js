@@ -1,9 +1,9 @@
 export default {
   connext: {
     clientCode: 'ajc',
-    environment: 'stage',
+    environment: 'prod',
     siteCode: 'AJC',
-    configCode: 'AJC_STAGE_DEFAULT',
+    configCode: 'AJC_PROD_DEFAULT',
     debug: false,
     tagManager: 'GTM',
     containerId: 'GTM-W3VLHBK',
