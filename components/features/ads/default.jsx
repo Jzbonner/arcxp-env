@@ -28,24 +28,10 @@ const AdSetup = ({
       prerender,
     });
   }
-  
-  const arcAds = new ArcAds({
-    dfp: {
-      id: '21849707860'
-    }
-  }, (event) => {
-    console.log('Advertisement has loaded...', event)
-  });
-
-  arcAds.registerAd({
-    id: id,
-    slotName: slotName,
-    dimensions: dimensions,
-  });
 
   return (
     <div className={className}>
-      <div id={id} className={`${slotName} arcad`}></div>
+      <div id={id} className={`${slotName} arcad`}>{id}</div>
     </div>
   );
 };
