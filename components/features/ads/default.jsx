@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ArcAdLib from './children/arcAdLib';
-import { ArcAds } from 'arcads';
 
 const AdSetup = ({
   customFields, breakpoints, dfpId, prerender, className, slotName, dimensions,
 }) => {
+
+
   window.arcAdsPrerenderer = adDetails => new Promise((resolve) => {
     if (prerender) {
       prerender.adDetails();
@@ -25,7 +26,7 @@ const AdSetup = ({
         breakpoints,
       },
       dfpId,
-      prerender,
+      prerender: window.arcAdsPrerenderer,
     });
   }
 
