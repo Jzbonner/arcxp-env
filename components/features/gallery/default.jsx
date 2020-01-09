@@ -7,6 +7,10 @@ import GalleryItem from '../../_helper_components/global/gallery/galleryItem.jsx
 import DesktopCaption from '../../_helper_components/global/gallery/desktopCaption.jsx';
 import './default.scss';
 
+/* TODO: Dom and Refs -- useRef hook */
+/* TODO: desktop & mobile seperate gallery helper components */
+/* const maxIndex --- if assigning inside an if block that doesn't run after a render, the original var
+value will be used instead --- becuase the entire functions re-runs per render */
 
 const Gallery = () => {
   // holds Gallery items
@@ -33,6 +37,13 @@ const Gallery = () => {
 
   const appContext = useAppContext();
   const { globalContent = {} } = appContext;
+
+  const actions = {
+    PREV: 'PREV',
+    NEXT: 'NEXT',
+    ON: 'ON',
+    OFF: 'OFF',
+  };
   let mobileElemData;
 
   /* HELPERS START */
@@ -54,7 +65,7 @@ const Gallery = () => {
 
   const changeIndex = (action) => {
     // change current image index by -1
-    if (action === 'PREV') {
+    if (action === actions.PREV) {
       setCurrentAction(action);
       if (currentIndex === 0) {
         setCurrentIndex(maxIndex);
@@ -63,7 +74,7 @@ const Gallery = () => {
       }
     }
     // change current image index by +1
-    if (action === 'NEXT') {
+    if (action === actions.NEXT) {
       setCurrentAction(action);
       if (currentIndex === maxIndex) {
         setCurrentIndex(0);
@@ -82,7 +93,7 @@ const Gallery = () => {
 
   // on & off buttons for mobile caption
   const handleCaptionToggle = (action) => {
-    if (action === 'ON') {
+    if (action === actions.ON) {
       setCaptionState(false);
     } else {
       setCaptionState(true);
@@ -97,33 +108,24 @@ const Gallery = () => {
   // organizes element array, where last element is right before the first
   // VISIBLE GALLERY = |semi-last ,last, [first], second, third...|
   const reorganizeElements = (arr) => {
-    const middle = Math.floor(arr.length / 2);
+    const elemArray = [...arr];
+    const middle = Math.floor(elemArray.length / 2);
     const temp = [];
 
-    for (let i = arr.length - 1; i >= 0; i -= 1) {
+    for (let i = elemArray.length - 1; i >= 0; i -= 1) {
       if (i > middle) {
-        temp.unshift(arr[i]);
-        arr.pop();
+        temp.unshift(elemArray[i]);
+        elemArray.pop();
       }
     }
 
-    for (let i = 0; i < arr.length; i += 1) {
+    for (let i = 0; i < elemArray.length; i += 1) {
       if (i <= middle) {
-        temp.push(arr[i]);
+        temp.push(elemArray[i]);
       }
     }
 
     return temp;
-  };
-
-  const handleNext = (arr) => {
-    arr.push(arr.shift());
-    return arr;
-  };
-
-  const handlePrevious = (arr) => {
-    arr.unshift(arr.pop());
-    return arr;
   };
 
   // adds focus class to current gallery-item element
@@ -154,19 +156,37 @@ const Gallery = () => {
   };
 
   const renderCaptionByCurrentIndex = () => {
-    const captionToRender = baseCaptionData.map((element) => {
-      if (element.index === currentIndex) {
-        const propData = {
-          elementData: element,
-          isCaptionOn,
-        };
+    if (baseCaptionData) {
+      const captionToRender = baseCaptionData.map((element) => {
+        if (element.index === currentIndex) {
+          const propData = {
+            elementData: element,
+            isCaptionOn,
+          };
 
-        return <DesktopCaption data={propData} />;
-      }
-      return null;
-    });
+          return <DesktopCaption data={propData} />;
+        }
+        return null;
+      });
 
-    setCaptionData(captionToRender);
+      setCaptionData(captionToRender);
+    }
+  };
+
+  const renderDesktopGalleryElements = (elements) => {
+    const finalizedElements = handleImageFocus(elements);
+    setElementData(finalizedElements);
+    renderCaptionByCurrentIndex();
+  };
+
+  const handleNext = (arr) => {
+    arr.push(arr.shift());
+    renderDesktopGalleryElements(arr);
+  };
+
+  const handlePrevious = (arr) => {
+    arr.unshift(arr.pop());
+    renderDesktopGalleryElements(arr);
   };
 
   const handleResizeEvent = () => {
@@ -190,7 +210,7 @@ const Gallery = () => {
       const targetHeight = testOffsetHeight + targetElementOffsetHeight;
       if (testOffsetHeight === 0 && (elementParent > targetElementOffsetHeight)) {
         setHeight(testOffsetHeight + targetElementOffsetHeight);
-        changeIndex('NEXT');
+        changeIndex(actions.NEXT);
       }
 
       if (testOffsetHeight > 0) {
@@ -204,12 +224,12 @@ const Gallery = () => {
         if ((elementParent < testOffsetHeight) && index !== 0) {
           newHeight = testOffsetHeight - previousTarget;
           setHeight(newHeight);
-          changeIndex('PREV');
+          changeIndex(actions.PREV);
         }
 
         if ((elementParent > targetHeight)) {
           setHeight(testOffsetHeight + targetElementOffsetHeight);
-          changeIndex('NEXT');
+          changeIndex(actions.NEXT);
         }
       }
     }
@@ -219,15 +239,11 @@ const Gallery = () => {
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
-    let elements;
-    if (currentAction === 'PREV') {
-      elements = handlePrevious([...elementData]);
+    if (currentAction === actions.PREV) {
+      handlePrevious([...elementData]);
     } else {
-      elements = handleNext([...elementData]);
+      handleNext([...elementData]);
     }
-    const finalizedElements = handleImageFocus(elements);
-    setElementData(finalizedElements);
-    renderCaptionByCurrentIndex();
   };
 
   const getMobileElements = () => {
@@ -263,7 +279,9 @@ const Gallery = () => {
 
   // runs only once since baseCaptionData will populate only once
   useEffect(() => {
-    renderCaptionByCurrentIndex();
+    if (!isMobile) {
+      renderCaptionByCurrentIndex();
+    }
   }, [baseCaptionData]);
 
   useEffect(() => {
@@ -284,10 +302,15 @@ const Gallery = () => {
   }, []);
 
   // initializing the gallery w/ globalContent ~ runs only once
-  if (globalContent && !elementData) {
+  if (globalContent && (!elementData && !mobileElementData)) {
+    let isWindowMobile = false;
+
+    if (window.innerWidth <= 1023) {
+      isWindowMobile = true;
+    }
     // TODO: Seperate Mobile and Desktop prop processing
     const { content_elements: contentElements } = globalContent;
-    const tempCaptionData = [];
+    const desktopCaptionData = [];
     const galleryData = contentElements.map((element, i) => {
       let isFocused = false;
       const {
@@ -318,30 +341,36 @@ const Gallery = () => {
         },
       };
 
-      tempCaptionData.push(galleryItem.captionObj);
+      if (!isWindowMobile) {
+        desktopCaptionData.push(galleryItem.captionObj);
+      }
 
       return (
         <GalleryItem data={galleryItem} key={`gallery-item-${url}`}/>
       );
     });
 
-    const baseElementsForMobile = [...galleryData];
-    const finalizedGalleryItems = reorganizeElements(galleryData);
-
-    if (!elementData) {
-      setElementData(finalizedGalleryItems);
-    }
-
     if (maxIndex === 0) {
-      setMaxIndex(finalizedGalleryItems.length - 1);
+      setMaxIndex(contentElements.length - 1);
     }
 
-    if (window.innerWidth <= 1023) {
-      setMobileState(true);
-    }
+    if (!isWindowMobile) {
+      if (!elementData) {
+        const finalizedGalleryItems = reorganizeElements(galleryData);
+        setElementData(finalizedGalleryItems);
+      }
+      if (!baseCaptionData) {
+        setBaseCaptionData(desktopCaptionData);
+      }
+    } else {
+      if (!mobileElementData) {
+        const baseElementsForMobile = [...galleryData];
+        setMobileState(true);
+        setMobileElementData(baseElementsForMobile);
+      }
 
-    setBaseCaptionData(tempCaptionData);
-    setMobileElementData(baseElementsForMobile);
+      return null;
+    }
   }
 
   if (isStickyVisible || isMobile) {
@@ -355,10 +384,10 @@ const Gallery = () => {
           ? <div className="gallery-immersive hidden-large">
             <div className="gallery-sticky">
               <div className="gallery-caption-toggle">
-                <a onClick={() => handleCaptionToggle('OFF')} href="#"
+                <a onClick={() => handleCaptionToggle(actions.OFF)} href="#"
                   title="captions on"
                   className={`gallery-caption-trigger ${isCaptionOn ? 'is-active' : ''}`}>on</a>
-                <a onClick={() => handleCaptionToggle('ON')} href="#"
+                <a onClick={() => handleCaptionToggle(actions.ON)} href="#"
                   title="captions off"
                   className={`gallery-caption-trigger 
                 ${!isCaptionOn ? 'is-active' : ''}`}>off</a>
@@ -401,7 +430,7 @@ const Gallery = () => {
         </div>
         <div className="gallery-count view-gallery">
           <div className="gallery-count-prev hidden-small hidden-medium">
-            <a onClick={() => changeIndex('PREV')}>
+            <a onClick={() => changeIndex(actions.PREV)}>
               <img src={leftArrow}></img>
             </a>
           </div>
@@ -412,7 +441,7 @@ const Gallery = () => {
             <div className="hidden-large">View Gallery</div>
           </div>
           <div className="gallery-count-next hidden-small hidden-medium">
-            <a onClick={() => changeIndex('NEXT')}>
+            <a onClick={() => changeIndex(actions.NEXT)}>
               <img src={rightArrow}></img>
             </a>
           </div>

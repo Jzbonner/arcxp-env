@@ -6,7 +6,7 @@ const GalleryItem = (props) => {
   const {
     url, alt, index, id, by, captionObj, states,
   } = data;
-  const { caption, credit } = captionObj;
+  const { caption } = captionObj;
   const {
     isFocused, isStickyVisible, isCaptionOn,
   } = states;
@@ -15,6 +15,7 @@ const GalleryItem = (props) => {
     <div
       id={id}
       data-index={index}
+      key={url}
       className={`${isStickyVisible ? 'gallery-full-item' : 'gallery-image'} ${!isStickyVisible ? 'inherit--width mosiac-image' : ''}`}>
       <img
         className={`${!isStickyVisible ? 'inherit--width mosiac-image' : ''} ${isFocused ? 'is-focused' : ''}`}
