@@ -1,13 +1,14 @@
 import React from 'react';
-import PropTypes from 'fusion:prop-types';
+import PropTypes from 'prop-types';
+import getProperties from 'fusion:properties';
 import AdSetup from './src/index';
-import { adTypes, adTypeOptions, defaultAdType } from './children/adtypes.jsx';
+import { adTypes } from './children/adtypes.jsx';
 import { NoDFPIdSupplied, PlaceholderAd } from './children/error_components.jsx';
 
-const ArcAd = (props) => {
-  const { siteProperties, isAdmin } = props;
-  const { dfp_id: dfpid, adBreakpoints } = siteProperties;
-  const { display, slot, type } = this.props.customFields;
+const ArcAd = ({ isAdmin, customFields }) => {
+  const { display, slot, type } = customFields;
+  const { dfp_id: dfpid } = getProperties();
+  console.log('DFPID ', dfpid);
 
   // If there is no DFP ID and we are in the Admin,
   if (!dfpid && isAdmin) return <NoDFPIdSupplied />;
@@ -30,7 +31,7 @@ const ArcAd = (props) => {
   const arcad = (
     <AdSetup
       adType={type}
-      breakpoints={adBreakpoints}
+      //   breakpoints={adBreakpoints}
       childrenPosition="top"
       className={`arc_ad | ${type}`}
       dimensions={adType.dimensions}
@@ -47,15 +48,10 @@ const ArcAd = (props) => {
 
 ArcAd.propTypes = {
   customFields: PropTypes.shape({
-    slot: PropTypes.string.tag({
-      defaultValue: defaultAdType.slotName || '',
-    }),
-    display: PropTypes.oneOf(['mobile', 'desktop', 'all']).tag({
-      defaultValue: 'all',
-    }),
-    type: PropTypes.oneOf(adTypeOptions(adTypes)).tag({
-      defaultValue: defaultAdType.name,
-    }),
+    slot: PropTypes.oneOf(['HP01', 'RP09', 'PX01']).tag({
+      label: 'Slot ID',
+      description: 'Choose a Slot ID for your AD',
+    }).isRequired,
   }),
   isAdmin: PropTypes.bool,
   isAmp: PropTypes.bool,
