@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAppContext } from 'fusion:context';
 import leftArrow from '../../../resources/icons/gallery/left-arrow.svg';
 import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
+import DesktopGallery from '../../_helper_components/global/gallery/desktopGallery.jsx';
+import MobileGallery from '../../_helper_components/global/gallery/mobileGallery.jsx';
 import GalleryItem from '../../_helper_components/global/gallery/galleryItem.jsx';
 import DesktopCaption from '../../_helper_components/global/gallery/desktopCaption.jsx';
 import './default.scss';
-
-/* TODO: Dom and Refs -- useRef hook */
-/* TODO: desktop & mobile seperate gallery helper components */
-/* const maxIndex --- if assigning inside an if block that doesn't run after a render, the original var
-value will be used instead --- becuase the entire functions re-runs per render */
 
 const Gallery = () => {
   // holds Gallery items
@@ -37,6 +34,8 @@ const Gallery = () => {
 
   const appContext = useAppContext();
   const { globalContent = {} } = appContext;
+  const galleryEl = useRef(null);
+  const galleryMobileEl = useRef(null);
 
   const actions = {
     PREV: 'PREV',
@@ -44,16 +43,17 @@ const Gallery = () => {
     ON: 'ON',
     OFF: 'OFF',
   };
+
   let mobileElemData;
 
   /* HELPERS START */
 
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
+    const galleryFullWidth = galleryEl.current.offsetWidth;
     const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
-    const galleryWidth = document.getElementById('GALLERY') ? document.getElementById('GALLERY').offsetWidth : null;
-    if (galleryWidth && focusElement) {
-      const translateAmount = parseInt(galleryWidth, 10)
+    if (galleryEl && focusElement) {
+      const translateAmount = parseInt(galleryFullWidth, 10)
       / 2 - parseInt(focusElement.offsetWidth, 10)
       / 2 - parseInt(focusElement.offsetLeft, 10);
 
@@ -202,13 +202,12 @@ const Gallery = () => {
 
   // tracks which photo user is on (scrolling mobile gallery)
   const handleScrollEvent = () => {
-    const elementParent = document.getElementById('MOBILE_GALLERY') ? document.getElementById('MOBILE_GALLERY').scrollTop : null;
-
-    if (elementParent) {
+    if (galleryMobileEl) {
       const index = currentIndex;
+      const galleryScrollTop = galleryMobileEl.current.scrollTop || null;
       const targetElementOffsetHeight = document.getElementById(`gallery-item-${index}`).offsetHeight;
       const targetHeight = testOffsetHeight + targetElementOffsetHeight;
-      if (testOffsetHeight === 0 && (elementParent > targetElementOffsetHeight)) {
+      if (testOffsetHeight === 0 && (galleryScrollTop > targetElementOffsetHeight)) {
         setHeight(testOffsetHeight + targetElementOffsetHeight);
         changeIndex(actions.NEXT);
       }
@@ -217,17 +216,17 @@ const Gallery = () => {
         let newHeight;
         const previousTarget = document.getElementById(`gallery-item-${index === 0 ? 0 : index - 1}`).offsetHeight;
 
-        if (currentIndex === maxIndex && elementParent > targetHeight) {
+        if (currentIndex === maxIndex && galleryScrollTop > targetHeight) {
           return null;
         }
 
-        if ((elementParent < testOffsetHeight) && index !== 0) {
+        if ((galleryScrollTop < testOffsetHeight) && index !== 0) {
           newHeight = testOffsetHeight - previousTarget;
           setHeight(newHeight);
           changeIndex(actions.PREV);
         }
 
-        if ((elementParent > targetHeight)) {
+        if ((galleryScrollTop > targetHeight)) {
           setHeight(testOffsetHeight + targetElementOffsetHeight);
           changeIndex(actions.NEXT);
         }
@@ -255,7 +254,6 @@ const Gallery = () => {
         isCaptionOn,
       };
       elementItemData.states = { ...parentStates };
-
       return (
           <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`}/>
       );
@@ -378,38 +376,27 @@ const Gallery = () => {
   }
 
   return (
-    <div id="GALLERY" className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
+    <div id="GALLERY" ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
       {
         isStickyVisible
-          ? <div className="gallery-immersive hidden-large">
-            <div className="gallery-sticky">
-              <div className="gallery-caption-toggle">
-                <a onClick={() => handleCaptionToggle(actions.OFF)} href="#"
-                  title="captions on"
-                  className={`gallery-caption-trigger ${isCaptionOn ? 'is-active' : ''}`}>on</a>
-                <a onClick={() => handleCaptionToggle(actions.ON)} href="#"
-                  title="captions off"
-                  className={`gallery-caption-trigger 
-                ${!isCaptionOn ? 'is-active' : ''}`}>off</a>
-                <div>Captions</div>
-              </div>
-              <div className="gallery-count">
-                <img src={middleBox} className="icon-sticky"></img>
-                <span className="gallery-index"> {currentIndex + 1}   /   {maxIndex + 1} </span>
-              </div>
-              <div onClick={handleStickyClose} className="gallery-immersive--close"></div>
-            </div>
-            <div id="MOBILE_GALLERY" className="gallery-full">
-              {isStickyVisible ? mobileElemData : null}
-            </div>
-          </div>
+          ? <MobileGallery
+            objectRef={galleryMobileEl}
+            data={mobileElemData}
+            states={{
+              isStickyVisible,
+              isCaptionOn,
+              currentIndex,
+              maxIndex,
+            }}
+            close={handleStickyClose}
+            toggleOff={() => handleCaptionToggle(actions.OFF)}
+            toggleOn={() => handleCaptionToggle(actions.ON)}
+            />
           : null
       }
       {
         !isMobile
-          ? <div className="gallery-container " style={{ transform: `translateX(${translateX}px)` }}>
-            {elementData}
-          </div>
+          ? <DesktopGallery data={elementData} translateX={translateX} />
           : null
       }
       <div

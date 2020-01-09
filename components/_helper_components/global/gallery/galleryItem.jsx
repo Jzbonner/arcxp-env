@@ -10,7 +10,6 @@ const GalleryItem = (props) => {
   const {
     isFocused, isStickyVisible, isCaptionOn,
   } = states;
-
   return (
     <div
       id={id}
