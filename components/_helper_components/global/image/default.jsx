@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './default.scss';
 
-const Image = ({ outerComponentClassName, basicItems }) => {
-  // console.log(basicItems);
-  const { url } = basicItems || null;
+const Image = ({ imageLocation, src }) => {
   const [toggleButton, setToggle] = useState(false);
-  const { caption } = basicItems || null;
-  const name = basicItems.credits || null;
+
+  const { url, caption, credits } = src || null;
+
   let mainCredit = null;
   let secondaryCredit = null;
-  if (name) {
-    mainCredit = name.affiliation && name.affiliation.length ? name.affiliation[0].name : '';
-    secondaryCredit = name.by && name.by.length ? name.by[0].name : '';
+  if (credits) {
+    mainCredit = credits.affiliation && credits.affiliation.length ? credits.affiliation[0].name : '';
+    secondaryCredit = credits.by && credits.by.length ? credits.by[0].name : '';
   }
 
   let giveCredit = '';
@@ -27,37 +26,30 @@ const Image = ({ outerComponentClassName, basicItems }) => {
   };
 
   return (
-    <div className={`image-${outerComponentClassName} c-image-component`}>
+    <div className={`image-${imageLocation} c-image-component`}>
       <div className="image-component-image">
         <img src={url} alt={caption} />
-        <div className="c-mainCaption">
-          <div className={`photo-caption-btn ${toggleButton ? 'is-active' : ''}`} onClick={toggle}>
+        <div className={`c-caption ${toggleButton ? 'is-active' : ''}`}>
+          <div className="photo-caption-btn" onClick={toggle}>
             <div className="fill-line fill-line-long"></div>
             <div className="fill-line"></div>
             <div className="fill-line fill-line-long"></div>
             <div className="fill-line"></div>
             <div className="fill-line fill-line-long"></div>
           </div>
-          {toggleButton ? (
-            <div className="photo-caption">
-              <div className="photo-caption-text">{caption}</div>
-              <p className="photo-credit-text">{giveCredit}</p>
-            </div>
-          ) : (
-            ''
-          )}
+          <div className="photo-caption">
+            <div className="photo-caption-text">{caption}</div>
+            <p className="photo-credit-text-mobile">{giveCredit}</p>
+          </div>
         </div>
       </div>
-      <p className="photo-credit-text">{giveCredit}</p>
+      <p className="photo-credit-text-desktop">{giveCredit}</p>
     </div>
   );
 };
 
 Image.propTypes = {
-  imageSource: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-  outerComponentClassName: PropTypes.oneOf(['head', 'breaking', 'thumbnail']),
-  // linkUrl: PropTypes.string,
-  basicItems: PropTypes.object,
+  imageLocation: PropTypes.oneOf(['head', 'breaking', 'thumbnail']),
+  src: PropTypes.object,
 };
 export default Image;
