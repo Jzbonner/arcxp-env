@@ -1,11 +1,11 @@
 hr.divider {
   height: 0;
   border-bottom: 0;
-  border-top: solid 1px #cdcdcd;
 }
 
 hr.divider + p.story-text {
   font-size: 0.75rem;
   line-height: 1.75rem;
   color:#707174;
+  border-top: solid 1px #cdcdcd;
 }

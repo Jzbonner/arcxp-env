@@ -4,13 +4,13 @@ import './styles.scss';
 
 const Divider = ({ src }) => (
     <>
-      <p className="info-box">{src.content}</p>
       <hr className="divider"/>
+      <p className="info-box">{src.content}</p>
     </>
 );
 
 Divider.propTypes = {
-  src: PropTypes.any,
+  src: PropTypes.object,
 };
 
 export default Divider;
