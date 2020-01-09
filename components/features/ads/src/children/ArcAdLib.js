@@ -25,12 +25,14 @@ export default class ArcAdLib {
    *
    * @param {Object} params the ad parameters
    * @param {Number} dfpID the google ads DFP ID
+   * @param {Object} bidding and prebid information
    */
-  registerAd(params, dfpID) {
+  registerAd(params, dfpID, bidding) {
     // if we don't have an instance yet create one
     if (!this.adInstance) {
       this.adInstance = new ArcAds({
-        dfp: { id: 21849707860 },
+        dfp: { id: dfpID },
+        bidding,
       });
     }
 
