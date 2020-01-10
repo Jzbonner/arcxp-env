@@ -4,8 +4,11 @@ import middleBox from '../../../../resources/icons/gallery/middle-box.svg';
 
 const MobileGallery = (props) => {
   const {
-    data, states, objectRef, toggleOff, toggleOn, close,
+    data, states, objectRef, funcs,
   } = props;
+  const {
+    handleStickyClose, captionOn, captionOff,
+  } = funcs;
   const {
     isStickyVisible, isCaptionOn, currentIndex, maxIndex,
   } = states;
@@ -14,10 +17,10 @@ const MobileGallery = (props) => {
     <div className="gallery-immersive hidden-large">
       <div className="gallery-sticky">
         <div className="gallery-caption-toggle">
-          <a onClick={toggleOff} href="#"
+          <a onClick={captionOff} href="#"
             title="captions on"
             className={`gallery-caption-trigger ${isCaptionOn ? 'is-active' : ''}`}>on</a>
-          <a onClick={toggleOn} href="#"
+          <a onClick={captionOn} href="#"
             title="captions off"
             className={`gallery-caption-trigger 
                 ${!isCaptionOn ? 'is-active' : ''}`}>off</a>
@@ -27,7 +30,7 @@ const MobileGallery = (props) => {
           <img src={middleBox} className="icon-sticky"></img>
           <span className="gallery-index"> {currentIndex + 1}   /   {maxIndex + 1} </span>
         </div>
-        <div onClick={close} className="gallery-immersive--close"></div>
+        <div onClick={handleStickyClose} className="gallery-immersive--close"></div>
       </div>
       <div id="MOBILE_GALLERY" ref={objectRef} className="gallery-full">
         {isStickyVisible ? data : null}
@@ -40,9 +43,7 @@ MobileGallery.propTypes = {
   data: PropTypes.array,
   states: PropTypes.object,
   objectRef: PropTypes.object,
-  close: PropTypes.func,
-  toggleOn: PropTypes.func,
-  toggleOff: PropTypes.func,
+  funcs: PropTypes.object,
 };
 
 export default MobileGallery;

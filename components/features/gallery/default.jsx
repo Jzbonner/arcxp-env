@@ -7,6 +7,7 @@ import DesktopGallery from '../../_helper_components/global/gallery/desktopGalle
 import MobileGallery from '../../_helper_components/global/gallery/mobileGallery.jsx';
 import GalleryItem from '../../_helper_components/global/gallery/galleryItem.jsx';
 import DesktopCaption from '../../_helper_components/global/gallery/desktopCaption.jsx';
+import debounce from './_helper_functions/debounce';
 import './default.scss';
 
 const Gallery = () => {
@@ -19,7 +20,7 @@ const Gallery = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   // holds max number of images
   const [maxIndex, setMaxIndex] = useState(0);
-  // holds string desc. which nav arrow was clicked
+  // holds string which nav arrow was just clicked
   const [currentAction, setCurrentAction] = useState('');
   // holds how far gallery needs to translate in order to center on the current image
   const [translateX, setTranslateX] = useState(0);
@@ -45,6 +46,8 @@ const Gallery = () => {
   };
 
   let mobileElemData;
+  let mobileFuncs = {};
+  let mobileState = {};
 
   /* HELPERS START */
 
@@ -115,7 +118,6 @@ const Gallery = () => {
     for (let i = elemArray.length - 1; i >= 0; i -= 1) {
       if (i > middle) {
         temp.unshift(elemArray[i]);
-        elemArray.pop();
       }
     }
 
@@ -156,7 +158,7 @@ const Gallery = () => {
   };
 
   const renderCaptionByCurrentIndex = () => {
-    if (baseCaptionData) {
+    if (baseCaptionData && !isMobile) {
       const captionToRender = baseCaptionData.map((element) => {
         if (element.index === currentIndex) {
           const propData = {
@@ -190,21 +192,16 @@ const Gallery = () => {
   };
 
   const handleResizeEvent = () => {
-    calculateTranslateX();
-
-    if (window.innerWidth <= 1023) {
-      setMobileState(true);
-    }
-    if (window.innerWidth > 1023) {
-      setMobileState(false);
-    }
+    if (!isMobile) calculateTranslateX();
+    if (window.innerWidth <= 1023) setMobileState(true);
+    if (window.innerWidth > 1023) setMobileState(false);
   };
 
   // tracks which photo user is on (scrolling mobile gallery)
-  const handleScrollEvent = () => {
-    if (galleryMobileEl) {
+  const handleScrollEvent = debounce(() => {
+    if (galleryMobileEl.current) {
       const index = currentIndex;
-      const galleryScrollTop = galleryMobileEl.current.scrollTop || null;
+      const galleryScrollTop = galleryMobileEl.current.scrollTop;
       const targetElementOffsetHeight = document.getElementById(`gallery-item-${index}`).offsetHeight;
       const targetHeight = testOffsetHeight + targetElementOffsetHeight;
       if (testOffsetHeight === 0 && (galleryScrollTop > targetElementOffsetHeight)) {
@@ -234,7 +231,7 @@ const Gallery = () => {
     }
 
     return null;
-  };
+  }, 15);
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
@@ -303,10 +300,8 @@ const Gallery = () => {
   if (globalContent && (!elementData && !mobileElementData)) {
     let isWindowMobile = false;
 
-    if (window.innerWidth <= 1023) {
-      isWindowMobile = true;
-    }
-    // TODO: Seperate Mobile and Desktop prop processing
+    if (window.innerWidth <= 1023) isWindowMobile = true;
+
     const { content_elements: contentElements } = globalContent;
     const desktopCaptionData = [];
     const galleryData = contentElements.map((element, i) => {
@@ -339,9 +334,7 @@ const Gallery = () => {
         },
       };
 
-      if (!isWindowMobile) {
-        desktopCaptionData.push(galleryItem.captionObj);
-      }
+      if (!isWindowMobile) desktopCaptionData.push(galleryItem.captionObj);
 
       return (
         <GalleryItem data={galleryItem} key={`gallery-item-${url}`}/>
@@ -357,9 +350,8 @@ const Gallery = () => {
         const finalizedGalleryItems = reorganizeElements(galleryData);
         setElementData(finalizedGalleryItems);
       }
-      if (!baseCaptionData) {
-        setBaseCaptionData(desktopCaptionData);
-      }
+
+      if (!baseCaptionData) setBaseCaptionData(desktopCaptionData);
     } else {
       if (!mobileElementData) {
         const baseElementsForMobile = [...galleryData];
@@ -372,6 +364,18 @@ const Gallery = () => {
   }
 
   if (isStickyVisible || isMobile) {
+    mobileFuncs = {
+      handleStickyClose,
+      captionOn: () => handleCaptionToggle(actions.ON),
+      captionOff: () => handleCaptionToggle(actions.OFF),
+    };
+    mobileState = {
+      isStickyVisible,
+      isCaptionOn,
+      currentIndex,
+      maxIndex,
+    };
+
     mobileElemData = getMobileElements();
   }
 
@@ -382,15 +386,8 @@ const Gallery = () => {
           ? <MobileGallery
             objectRef={galleryMobileEl}
             data={mobileElemData}
-            states={{
-              isStickyVisible,
-              isCaptionOn,
-              currentIndex,
-              maxIndex,
-            }}
-            close={handleStickyClose}
-            toggleOff={() => handleCaptionToggle(actions.OFF)}
-            toggleOn={() => handleCaptionToggle(actions.ON)}
+            states={mobileState}
+            funcs={mobileFuncs}
             />
           : null
       }
@@ -400,7 +397,7 @@ const Gallery = () => {
           : null
       }
       <div
-        onClick={() => handleStickyOpen()}
+        onClick={handleStickyOpen}
         className={`gallery-caption-container ${!isStickyVisible && isMobile ? 'mosiac-gallery' : ''}`}>
         <div className="gallery-overlay hidden-large">
           {
