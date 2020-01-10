@@ -44,6 +44,8 @@
       right: 4em;
       @include breakpoint(desktop-sm) {
         margin: 15% auto;
+        width: calc(100% - 10em);
+        right: 3em;
       }
       &.is-active {
         .photo-caption-btn {
