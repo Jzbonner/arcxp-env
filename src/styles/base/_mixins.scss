@@ -1,3 +1,12 @@
+@mixin text-styles($size, $line-height, $font: "") {
+  font-size: $size;
+  line-height: $line-height;
+
+  @if $font != "" {
+    font-family: $font, "Arial", sans-serif;
+  }
+}
+
 @mixin text-styles-tablet($size, $line-height, $font: "") {
   @include breakpoint(tablet) {
     font-size: $size;
@@ -9,8 +18,8 @@
   }
 }
 
-@mixin text-styles-mobile($size, $line-height, $font: "") {
-  @include breakpoint(mobile) {
+@mixin text-styles-desktop-sm($size, $line-height, $font: "") {
+  @include breakpoint(desktop-sm) {
     font-size: $size;
     line-height: $line-height;
 
@@ -20,14 +29,17 @@
   }
 }
 
-@mixin text-styles($size, $line-height, $font: "") {
-  font-size: $size;
-  line-height: $line-height;
+@mixin text-styles-desktop-lg($size, $line-height, $font: "") {
+  @include breakpoint(desktop-lg) {
+    font-size: $size;
+    line-height: $line-height;
 
-  @if $font != "" {
-    font-family: $font, "Arial", sans-serif;
+    @if $font != "" {
+      font-family: $font, "Arial", sans-serif;
+    }
   }
 }
+
 /* stylelint-disable */
 @mixin transparent-background($imagePath) {
   content: "";
