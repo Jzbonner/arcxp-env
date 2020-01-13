@@ -19,14 +19,17 @@
   display: flex;
   justify-content: flex-start;
   height: 60px;
+
   & > div,
   nav {
     height: 100%;
   }
+
   & .c-headerNav-weather,
   .c-headerNav-logIn {
     flex: 2;
   }
+
   & .c-headerNav-menu {
     min-width: 75%;
   }

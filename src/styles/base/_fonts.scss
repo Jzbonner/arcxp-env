@@ -22,8 +22,7 @@ $font: (
   font-weight: 400;
   font-stretch: normal;
   font-style: normal;
-  src: url("./../../../resources/fonts/gordita/gorditaregular-webfont.woff")
-    format("woff");
+  src: url("./../../../resources/fonts/gordita/gorditaregular-webfont.woff") format("woff");
 }
 
 @font-face {
@@ -31,8 +30,7 @@ $font: (
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
-  src: url("./../../../resources/fonts/gordita/gorditamedium-webfont.woff")
-    format("woff");
+  src: url("./../../../resources/fonts/gordita/gorditamedium-webfont.woff") format("woff");
 }
 
 @font-face {
@@ -40,6 +38,5 @@ $font: (
   font-weight: 800;
   font-stretch: normal;
   font-style: normal;
-  src: url("./../../../resources/fonts/gordita/gorditabold-webfont.woff")
-    format("woff");
+  src: url("./../../../resources/fonts/gordita/gorditabold-webfont.woff") format("woff");
 }
