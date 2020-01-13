@@ -73,18 +73,17 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
-          <Section
-            elements={contentElements}
-            stopIndex={10}
-            rightRailAd={ExampleAdComponent}
-            insertedAds={[{ insertAfterParagraph: 3, ad: ExampleAdInsertion1 }, { insertAfterParagraph: 5, ad: ExampleAdInsertion2 }]}
-          />
+          <Section elements={contentElements} stopIndex={1} />
+
+          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd">Full Width Ad Container</div>
+
+          <Section elements={contentElements} startIndex={1} stopIndex={5} rightRailAd={ExampleAdComponent} />
 
           <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd">Full Width Ad Container</div>
 
           <Section
             elements={contentElements}
-            startIndex={10}
+            startIndex={5}
             rightRailAd={ExampleAdComponent}
             insertedAds={[{ insertAfterParagraph: 12, ad: ExampleAdInsertion1 }, { insertAfterParagraph: 15, ad: ExampleAdInsertion2 }]}
           />
