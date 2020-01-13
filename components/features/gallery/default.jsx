@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAppContext } from 'fusion:context';
+import {
+  DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery,
+} from '../../_helper_components/global/gallery/index';
+import { debounce, createBaseGallery } from './_helper_functions/index';
 import leftArrow from '../../../resources/icons/gallery/left-arrow.svg';
 import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
-import DesktopGallery from '../../_helper_components/global/gallery/desktopGallery.jsx';
-import MobileGallery from '../../_helper_components/global/gallery/mobileGallery.jsx';
-import OverlayMosiac from '../../_helper_components/global/gallery/overlayMosiac.jsx';
-import GalleryItem from '../../_helper_components/global/gallery/galleryItem.jsx';
-import DesktopCaption from '../../_helper_components/global/gallery/desktopCaption.jsx';
-import debounce from './_helper_functions/debounce';
 import './default.scss';
 
 const Gallery = () => {
@@ -38,6 +36,7 @@ const Gallery = () => {
   const { globalContent = {} } = appContext;
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
+  const mobileBreakPoint = 1023;
 
   const actions = {
     PREV: 'PREV',
@@ -190,8 +189,8 @@ const Gallery = () => {
 
   const handleResizeEvent = () => {
     if (!isMobile) calculateTranslateX();
-    if (window.innerWidth <= 1023) setMobileState(true);
-    if (window.innerWidth > 1023) setMobileState(false);
+    if (window.innerWidth <= mobileBreakPoint) setMobileState(true);
+    if (window.innerWidth > mobileBreakPoint) setMobileState(false);
   };
 
   // tracks which photo user is on (scrolling mobile gallery)
@@ -292,54 +291,20 @@ const Gallery = () => {
 
   // initializing the gallery w/ globalContent ~ runs only once
   if (globalContent && (!elementData && !mobileElementData)) {
+    const { content_elements: contentElements } = globalContent;
     let isWindowMobile = false;
-
     if (window.innerWidth <= 1023) isWindowMobile = true;
 
-    const { content_elements: contentElements } = globalContent;
-    const desktopCaptionData = [];
-    const galleryData = contentElements.map((element, i) => {
-      let isFocused = false;
-      const {
-        url, copyright, caption, alt, credits, width,
-      } = element || {};
-      const { by } = credits || {};
-
-      if (currentIndex === i) isFocused = true;
-
-      const galleryItem = {
-        url,
-        alt,
-        by,
-        width,
-        index: i,
-        id: `gallery-item-${i}`,
-        captionObj: {
-          copyright,
-          caption,
-          credit: by,
-          index: i,
-        },
-        states: {
-          isFocused,
-          isStickyVisible,
-          isMobile,
-          isCaptionOn,
-        },
-      };
-
-      if (!isWindowMobile) desktopCaptionData.push(galleryItem.captionObj);
-
-      return (
-        <GalleryItem data={galleryItem} key={`gallery-item-${url}`}/>
-      );
+    const captionAndGalleryData = createBaseGallery(contentElements, {
+      isStickyVisible, isMobile, isCaptionOn, currentIndex,
     });
 
+    const { galleryData, desktopCaptionData } = captionAndGalleryData;
     if (maxIndex === 0) setMaxIndex(contentElements.length - 1);
 
     if (!isWindowMobile) {
       if (!elementData) {
-        const finalizedGalleryItems = reorganizeElements(galleryData);
+        const finalizedGalleryItems = reorganizeElements([...galleryData]);
         setElementData(finalizedGalleryItems);
       }
 
