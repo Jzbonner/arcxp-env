@@ -5,6 +5,7 @@ import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
 import DesktopGallery from '../../_helper_components/global/gallery/desktopGallery.jsx';
 import MobileGallery from '../../_helper_components/global/gallery/mobileGallery.jsx';
+import OverlayMosiac from '../../_helper_components/global/gallery/overlayMosiac.jsx';
 import GalleryItem from '../../_helper_components/global/gallery/galleryItem.jsx';
 import DesktopCaption from '../../_helper_components/global/gallery/desktopCaption.jsx';
 import debounce from './_helper_functions/debounce';
@@ -60,9 +61,7 @@ const Gallery = () => {
       / 2 - parseInt(focusElement.offsetWidth, 10)
       / 2 - parseInt(focusElement.offsetLeft, 10);
 
-      if (translateX !== translateAmount) {
-        setTranslateX(translateAmount);
-      }
+      if (translateX !== translateAmount) setTranslateX(translateAmount);
     }
   };
 
@@ -89,9 +88,7 @@ const Gallery = () => {
 
   // opens mobile sticky
   const handleStickyOpen = () => {
-    if (isMobile) {
-      setStickyState(true);
-    }
+    if (isMobile) setStickyState(true);
   };
 
   // on & off buttons for mobile caption
@@ -267,16 +264,13 @@ const Gallery = () => {
     }
   }, [currentIndex]);
 
-  // calculate translateX if currentIndex is changed
   useEffect(() => {
-    calculateTranslateX();
+    if (!isMobile) calculateTranslateX();
   }, [currentIndex, translateX, elementData]);
 
   // runs only once since baseCaptionData will populate only once
   useEffect(() => {
-    if (!isMobile) {
-      renderCaptionByCurrentIndex();
-    }
+    if (!isMobile) renderCaptionByCurrentIndex();
   }, [baseCaptionData]);
 
   useEffect(() => {
@@ -341,9 +335,7 @@ const Gallery = () => {
       );
     });
 
-    if (maxIndex === 0) {
-      setMaxIndex(contentElements.length - 1);
-    }
+    if (maxIndex === 0) setMaxIndex(contentElements.length - 1);
 
     if (!isWindowMobile) {
       if (!elementData) {
@@ -401,15 +393,7 @@ const Gallery = () => {
         className={`gallery-caption-container ${!isStickyVisible && isMobile ? 'mosiac-gallery' : ''}`}>
         <div className="gallery-overlay hidden-large">
           {
-            isMobile ? <div className="gallery-overlay-backdrop ">
-              <div className="left-backdrop">
-                {mobileElementData && mobileElementData[0]}
-              </div>
-              <div className="right-backdrop">
-                {mobileElementData && mobileElementData[1]}
-                {mobileElementData && mobileElementData[mobileElementData.length - 1]}
-              </div>
-            </div> : null
+            isMobile ? <OverlayMosiac data={mobileElemData} /> : null
           }
         </div>
         <div className="gallery-count view-gallery">
