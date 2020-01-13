@@ -4,7 +4,7 @@ import BlockQuote from './components/blockQuote/default.jsx';
 import Correction from './components/correction/default.jsx';
 import Gallery from './components/gallery/default.jsx';
 import HTML from './components/html/default.jsx';
-import SecondaryImage from './components/image/default.jsx';
+import Image from '../../global/image/default';
 import InterstitialLink from './components/interstitial_link/default.jsx';
 import List from './components/list/default.jsx';
 import Paragraph from './components/paragraph/default.jsx';
@@ -14,7 +14,7 @@ import Video from './components/video/default.jsx';
 import Header from './components/header/default.jsx';
 
 const ContentElements = ({ contentElements }) => (
-  <div>
+  <div className="c-contentElements">
     {contentElements.map((element) => {
       switch (element.type) {
         case 'quote':
@@ -28,7 +28,7 @@ const ContentElements = ({ contentElements }) => (
         case 'header':
           return <Header src={element} />;
         case 'image':
-          return <SecondaryImage src={element} />;
+          return <Image imageLocation="thumbnail" src={element} />;
         case 'text':
           return <Paragraph src={element} />;
         case 'interstitial_link':

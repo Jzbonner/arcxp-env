@@ -4,7 +4,7 @@ import React from 'react';
 import { useAppContext } from 'fusion:context';
 import TimeStamp from '../_helper_components/article/timestamp/default';
 import Byline from '../_helper_components/article/byline/default';
-import Headline from '../features/article/headline/default';
+import Headline from '../_helper_components/article/headline/default';
 import SubHeadline from '../_helper_components/article/subheadline/default';
 import SectionLabel from '../_helper_components/global/sectionLabel/default';
 import Section from '../_helper_components/article/section/Section';

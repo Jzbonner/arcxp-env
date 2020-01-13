@@ -19,9 +19,7 @@ const Headline = ({ basicItems = {}, headlines = {} }) => {
           <h3 className="heading-body h3">{headlines.basic}</h3>
         </div>
       </div>
-      {promoData.type === 'image' && (
-        <Image imageSource={promoData.url} alt={promoData.caption} outerComponentClassName="head" basicItems={basicItems} />
-      )}
+      {promoData.type === 'image' && <Image imageLocation="head" src={basicItems} />}
       {promoData.type === 'gallery' && <div className="c-gallery b-placeholder">Gallery Placeholder</div>}
       {promoData.type === 'video' && <div className="c-video b-placeholder">Video Placeholder</div>}
     </div>

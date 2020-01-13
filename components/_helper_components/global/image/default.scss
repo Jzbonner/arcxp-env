@@ -1,184 +1,131 @@
 @import "../../../../src/styles/base/breakpoints";
 @import "../../../../src/styles/base/fonts";
+@import "../../../../src/styles/base/mixins";
 
-.c-mainImage {
-  order: 1;
-  width: 100%;
+.c-image-component {
   flex: 1 0 100%;
-  height: auto;
+  width: 100%;
   justify-content: end;
-
-  @include breakpoint(tablet) {
-    width: 66%;
-    flex: 1 0 66%;
-    order: 2;
+  &.image-head {
+    height: 100%;
+    .photo-caption-text {
+      @include text-styles(0.875em, 1.58, "Gordita");
+      @include text-styles-tablet(1.25em, 1, "Gordita");
+    }
+  }
+  &.image-thumbnail {
     height: auto;
-    justify-content: end;
+    .photo-caption-text {
+      @include text-styles(1rem, 1.5, "Gordita");
+    }
   }
 
-  .c-mainImage-content {
-    .photo__credit {
-      display: none;
+  @include breakpoint(tablet) {
+    flex: 1 0 66%;
+  }
 
-      @include breakpoint(tablet) {
-        text-align: right;
-        display: block;
-        margin: 0 20px;
-
-        .photo__credit__text {
-          font: 400 0.75em "Gordita_Regular", "Arial", sans-serif;
-          color: #313132;
-        }
-      }
+  .image-component-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    img {
+      height: auto;
+      width: 100%;
     }
 
-    .image-head {
-      width: 100%;
-      height: 55vw;
-    }
-
-    .img-fluid {
-      width: 100%;
-      padding-bottom: 56.25%;
-      overflow: hidden;
+    .c-caption {
       position: relative;
-      height: 0;
-      display: block;
-
-      img {
-        width: 100%;
-        height: auto;
+      width: calc(100% - 8em);
+      margin: 5% auto;
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: 4em;
+      @include breakpoint(desktop-sm) {
+        margin: 15% auto;
+        width: calc(100% - 10em);
+        right: 3em;
       }
-
-      .c-mainCaption {
-        .photo__caption__toggle {
-          position: absolute;
-          display: block;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          padding: 12px;
-          background: linear-gradient(to top, #04befe, #4481eb);
-          top: 15%;
-          right: 4%;
-          z-index: 11;
-          cursor: pointer;
-          transition: transform 0.5s;
-          box-shadow: 0 2px 4px 0 rgba(149, 149, 149, 0.5);
-
-          @include breakpoint(tablet) {
-            width: 60px;
-            height: 60px;
-            padding: 20px;
-            z-index: 11;
-            right: 3%;
-          }
-
-          .fill-line {
-            width: 10px;
-            margin-bottom: 3px;
-            height: 1px;
-            background: #fff;
-
-            @include breakpoint(tablet) {
-              width: 15px;
-              margin-bottom: 4px;
-            }
-
-            &--long {
-              height: 1px;
-              width: 15px;
-              margin-bottom: 3px;
-              background: #fff;
-
-              @include breakpoint(tablet) {
-                width: 20px !important;
-                margin-bottom: 4px;
-              }
-            }
-          }
-        }
-
-        .photo__caption__toggle.is-active {
+      &.is-active {
+        .photo-caption-btn {
           transform: rotate(90deg);
         }
+        .photo-caption {
+          opacity: 1;
+        }
+      }
+      .photo-caption-btn {
+        position: absolute;
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(to top, #04befe, #4481eb);
+        top: calc(50% - 1.25em);
+        right: -1.25em;
+        z-index: 1;
+        cursor: pointer;
+        transition: transform 0.5s;
+        box-shadow: 0 2px 4px 0 rgba(149, 149, 149, 0.5);
+        padding: 12px;
+        @include breakpoint(desktop-sm) {
+          width: 60px;
+          height: 60px;
+          padding: 20px;
+          top: -1.875em;
+        }
 
-        .photo_caption {
-          position: absolute;
-          top: 20%;
-          left: 0;
-          right: 0;
-          margin: auto;
-          width: calc(100% - 135px);
-          z-index: 10;
-          border-radius: 6px;
-          background-color: rgba(0, 0, 0, 0.8);
-          box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
-          padding: 60px;
-          transition: z-index 0.75s step-end, opacity 0.75s;
-          -webkit-animation: fadeinout 0.8s linear 1 forwards;
-          animation: fadeinout 0.8s linear 1 forwards;
-
-          @-webkit-keyframes fadeinout {
-            0% {
-              opacity: 0;
-            }
-
-            50% {
-              opacity: 0.5;
-            }
-
-            100% {
-              opacity: 0.8;
-            }
+        .fill-line {
+          width: 10px;
+          height: 1px;
+          margin-bottom: 3px;
+          background: #fff;
+          @include breakpoint(desktop-sm) {
+            width: 15px;
+            margin-bottom: 4px;
           }
-
-          @keyframes fadeinout {
-            0% {
-              opacity: 0;
-            }
-
-            50% {
-              opacity: 0.5;
-            }
-
-            100% {
-              opacity: 0.8;
-            }
-          }
-
-          @media (max-width: 1024px) {
-            width: calc(100% - 100px);
-          }
-
-          .photo__credit__mobile {
-            display: block;
-            position: absolute;
-            bottom: 8px;
-            right: 10px;
-            text-align: right;
-
-            .photo__credit__text {
-              font: 400 0.75em "Gordita_Regular", arial, sans-serif;
-              color: #fff;
-            }
-
-            @include breakpoint(tablet) {
-              display: none;
-            }
-          }
-
-          .photo__caption__text {
-            font: 400 0.875em "Gordita_Regular", arial, sans-serif;
-            color: #fff;
-            line-height: 1.58;
-            letter-spacing: normal;
-
-            @include breakpoint(tablet) {
-              font: 400 1.25em "Gordita_Regular", arial, sans-serif;
+          &.fill-line-long {
+            width: 16px;
+            @include breakpoint(desktop-sm) {
+              width: 20px;
             }
           }
         }
+      }
+
+      .photo-caption {
+        opacity: 0;
+        border-radius: 6px;
+        background-color: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
+        transition: opacity 0.75s;
+        padding: 10px;
+      }
+    }
+    .photo-caption-text {
+      color: #fff;
+      padding: 4vw;
+      letter-spacing: normal;
+    }
+  }
+
+  .photo-credit-text {
+    &-mobile {
+      text-align: right;
+      color: white;
+      margin: 0;
+      @include text-styles(0.75rem, 1, "Gordita");
+      @include breakpoint(desktop-sm) {
+        display: none;
+      }
+    }
+    &-desktop {
+      text-align: right;
+      display: none;
+      @include text-styles(0.75rem, 1, "Gordita");
+      @include breakpoint(desktop-sm) {
+        display: block;
       }
     }
   }
