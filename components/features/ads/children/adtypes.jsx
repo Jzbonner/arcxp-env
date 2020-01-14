@@ -1,20 +1,29 @@
 export const defaultAdType = {
-  name: 'Cube',
-  slotName: 'homepage',
+  name: 'HP01',
+  slotName: 'HP01',
   display: 'all',
-  dimensions: [[300, 250]],
+  dimensions: [[728, 90]],
   targeting: {
-    pos: 1,
+    pos: 2,
   },
 };
 
 export const adTypes = [
   defaultAdType,
   {
-    name: 'Leaderboard',
-    slotName: 'homepage',
+    name: 'RP09',
+    slotName: 'RP09',
     display: 'all',
-    dimensions: [[728, 90]],
+    dimensions: [[300, 250]],
+    targeting: {
+      pos: 1,
+    },
+  },
+  {
+    name: 'PX01',
+    slotName: 'PX01',
+    display: 'all',
+    dimensions: [[350, 90]],
     targeting: {
       pos: 2,
     },

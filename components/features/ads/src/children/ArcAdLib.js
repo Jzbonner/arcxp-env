@@ -1,4 +1,4 @@
-import { ArcAds } from "arcads"; // eslint-disable-line
+import { ArcAds } from 'arcads';
 
 /**
  * Create an instance of the arc ads library to keep track of all the
