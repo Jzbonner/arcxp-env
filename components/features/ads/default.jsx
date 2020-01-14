@@ -8,7 +8,7 @@ import { NoDFPIdSupplied } from './children/error_components.jsx';
 const ArcAd = ({ customFields }) => {
   const { slot, type } = customFields;
   const { dfp_id: dfpid } = getProperties();
-  console.log('DFPID ', dfpid);
+  //   console.log('DFPID ', dfpid);
 
   // If there is no DFP ID and we are in the Admin,
   if (!dfpid) return <NoDFPIdSupplied />;
@@ -18,8 +18,8 @@ const ArcAd = ({ customFields }) => {
   // get the data for this particular ad type
   const adType = type ? adTypes.filter(ad => ad.name === type)[0] : {};
 
-  console.log('TYPE ', type);
-  console.log('SLOT ', slot);
+  //   console.log('TYPE ', type);
+  //   console.log('SLOT ', slot);
 
   // what to display if there is no ad
   const fallbackAd = null;

@@ -12,7 +12,7 @@ const AdSetup = ({
     resolve(adDetails);
   });
 
-  console.log('INNER COMPONENT', dfpId);
+  // console.log('INNER COMPONENT', dfpId);
 
   const instance = ArcAdLib.getInstance();
   if (instance) {
