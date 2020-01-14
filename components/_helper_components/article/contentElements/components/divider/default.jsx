@@ -1,16 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './styles.scss';
 
-const Divider = ({ src }) => (
-    <>
-      <hr className="divider"/>
-      <p className="info-box">{src.content}</p>
-    </>
+const Divider = () => (
+  <>
+    <hr className="divider"/>
+  </>
 );
-
-Divider.propTypes = {
-  src: PropTypes.object,
-};
 
 export default Divider;
