@@ -35,12 +35,15 @@ const Section = ({
     return null;
   });
 
-  return (
-    <div className={`c-section ${rightRailAd ? 'with-rightRail' : ''}`}>
-      <ContentElements contentElements={newContentElements} />
-      {rightRailAd && <div className="c-rightRail">{rightRailAd()}</div>}
-    </div>
-  );
+  if (newContentElements.length > 0) {
+    return (
+      <div className={`c-section ${rightRailAd ? 'with-rightRail' : ''}`}>
+        <ContentElements contentElements={newContentElements} />
+        {rightRailAd && <div className="c-rightRail">{rightRailAd()}</div>}
+      </div>
+    );
+  }
+  return null;
 };
 
 Section.propTypes = {
