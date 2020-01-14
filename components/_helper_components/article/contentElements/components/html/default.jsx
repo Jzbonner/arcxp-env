@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const HTML = ({ src }) => (
-    <div style={{ border: '1px solid #000', padding: '10px' }}>
-      Content Element Type: <strong>HTML</strong>
+    <div className="b-margin-bottom-60">
+      Content Element Type: <strong>HTML</strong> Not Worked. Content:
       <div dangerouslySetInnerHTML={{ __html: src.content }}></div>
     </div>
 );
 
 HTML.propTypes = {
-  src: PropTypes.any,
+  src: PropTypes.object,
 };
 
 export default HTML;

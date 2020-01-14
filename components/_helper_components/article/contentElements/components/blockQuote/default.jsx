@@ -16,7 +16,7 @@ const Blockquote = ({ contentElements, citation }) => (
           return null;
       }
     })}
-    {citation && <div className="blockquote-citation">- {citation.content}</div>}
+    {citation && <div className="blockquote-citation b-margin-bottom-60">- {citation.content}</div>}
   </div>
 );
 

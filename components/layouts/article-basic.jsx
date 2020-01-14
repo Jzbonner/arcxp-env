@@ -42,7 +42,7 @@ const StoryPageLayout = () => {
 
   return (
     <>
-      <header>
+      <header className="b-margin-bottom-60">
         <div className="b-placeholder c-breakingNews">Breaking News</div>
 
         <div className="c-fixed-width">
@@ -57,7 +57,7 @@ const StoryPageLayout = () => {
       </header>
 
       <main>
-        <header>
+        <header className="b-margin-bottom-20">
           <div className="c-fixed-width">
             <Headline headlines={headlines} basicItems={basicItems} />
           </div>
@@ -72,8 +72,13 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
+          <Section elements={contentElements} stopIndex={1} />
+
+          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-60">Full Width Ad Container</div>
+
           <Section
             elements={contentElements}
+            startIndex={1}
             stopIndex={10}
             rightRailAd={ExampleAdComponent}
             insertedAds={[
@@ -82,7 +87,7 @@ const StoryPageLayout = () => {
             ]}
           />
 
-          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd">Full Width Ad Container</div>
+          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-60">Full Width Ad Container</div>
 
           <Section
             elements={contentElements}

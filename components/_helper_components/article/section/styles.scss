@@ -12,8 +12,18 @@
     width: 67.5%;
   }
 
+  &:first-child {
+    .c-contentElements {
+      padding-right: 0;
+    }
+  }
+
   .c-contentElements {
     width: 100%;
+
+    @include breakpoint(tablet) {
+      padding-right: 100px;
+    }
   }
 
   &.with-rightRail {

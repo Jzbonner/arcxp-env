@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Correction = ({ src }) => (
-    <div style={{ border: '1px solid #000', padding: '10px' }}>
-      Content Element Type: <strong>Correction</strong>
-      <p>{src.content}</p>
+    <div className="b-margin-bottom-60">
+      <p>Content Element Type: <strong>Correction</strong> Not worked. Content: {src.content}</p>
     </div>
 );
 
 Correction.propTypes = {
-  src: PropTypes.any,
+  src: PropTypes.object,
 };
 
 export default Correction;
