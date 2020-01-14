@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import AdSetup from './src/index';
 import { adTypes, adTypeOptions, defaultAdType } from './children/adtypes.jsx';
-import { NoDFPIdSupplied } from './children/error_components.jsx';
 
 const ArcAd = ({ customFields }) => {
   const { slot, type } = customFields;
@@ -11,10 +10,8 @@ const ArcAd = ({ customFields }) => {
   //   console.log('DFPID ', dfpid);
 
   // If there is no DFP ID and we are in the Admin,
-  if (!dfpid) return <NoDFPIdSupplied />;
-
-  // If no DFP ad is supplied and we are not in the admin, render nothing.
   if (!dfpid) return null;
+
   // get the data for this particular ad type
   const adType = type ? adTypes.filter(ad => ad.name === type)[0] : {};
 

@@ -53,7 +53,7 @@ AdSetup.propTypes = {
 };
 
 AdSetup.defaultProps = {
-  dimensions: [0, 0],
+  dimensions: [1, 1],
 };
 
 export default AdSetup;

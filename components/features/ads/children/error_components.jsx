@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const NoDFPIdSupplied = () => <div>No DFP Publisher ID has been supplied via site properties.</div>;
+export const NoDFPIdSupplied = () => null;
 
 export const PlaceholderAd = (props) => {
   const { classes } = props;
