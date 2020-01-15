@@ -13,16 +13,25 @@
   }
 
   &:first-child {
-    .c-contentElements {
-      padding-right: 0;
+    @include breakpoint(tablet) {
+      .c-contentElements {
+        padding-right: 0;
+      }
     }
+  }
+
+  // Since c-section will have b-margin-bottom-d60-m40 applied to it,
+  // we remove margin from the bottom of the last paragraph
+  .b-margin-bottom-d60-m40:last-child {
+    margin-bottom: 0;
   }
 
   .c-contentElements {
     width: 100%;
+    padding: 0 30px;
 
     @include breakpoint(tablet) {
-      padding-right: 100px;
+      padding: 0 100px 0;
     }
   }
 

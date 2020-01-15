@@ -37,7 +37,7 @@ const Section = ({
 
   if (newContentElements.length > 0) {
     return (
-      <div className={`c-section ${rightRailAd ? 'with-rightRail' : ''} ${startIndex > 0 ? 'b-margin-bottom-60' : ''}`}>
+      <div className={`c-section ${rightRailAd ? 'with-rightRail' : ''} ${startIndex > 0 ? 'b-margin-bottom-d60-m40' : ''}`}>
         <ContentElements contentElements={newContentElements} />
         {rightRailAd && <div className="c-rightRail">{rightRailAd()}</div>}
       </div>

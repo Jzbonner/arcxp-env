@@ -28,7 +28,7 @@ const ContentElements = ({ contentElements }) => (
         case 'header':
           return <Header src={element} />;
         case 'image':
-          return <Image imageLocation="thumbnail" src={element} imageMarginBottom="b-margin-bottom-60" />;
+          return <Image imageLocation="thumbnail" src={element} imageMarginBottom="b-margin-bottom-d60-m40" />;
         case 'text':
           return <Paragraph src={element} />;
         case 'interstitial_link':

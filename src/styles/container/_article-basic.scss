@@ -12,11 +12,14 @@
 }
 
 .c-logo {
-  min-height: 115px;
+  min-height: 80px;
+  @include breakpoint(desktop-sm) {
+    min-height: 115px;
+  }
 }
 
 .c-headerNav {
-  display: flex;
+  display: none;
   justify-content: flex-start;
   height: 60px;
 
@@ -33,10 +36,18 @@
   & .c-headerNav-menu {
     min-width: 75%;
   }
+
+  @include breakpoint(desktop-sm) {
+    display: flex;
+  }
 }
 
 .c-subscribe {
   height: 50px;
+  display: none;
+  @include breakpoint(desktop-sm) {
+    display: block;
+  }
 }
 
 .c-fullWidthAd {

@@ -38,7 +38,7 @@ const Oembed = ({ src }) => {
   return (
     <div
     data-oembed-type={type}
-    className='b-flexRow b-flexCenter b-margin-bottom-60'
+    className='b-flexRow b-flexCenter b-margin-bottom-d60-m40'
     dangerouslySetInnerHTML={{ __html: filteredHtml }}/>
   );
 };

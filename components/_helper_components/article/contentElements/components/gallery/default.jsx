@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Gallery = ({ src }) => (
-    <div className="b-margin-bottom-60">
+    <div className="b-margin-bottom-d60-m40">
       <p>Content Element Type: <strong>Gallery</strong> Not Worked. Content: {src.content}</p>
     </div>
 );
