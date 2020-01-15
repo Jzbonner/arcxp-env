@@ -7,15 +7,10 @@ import './styles.scss';
 const Section = ({
   elements, startIndex = 0, stopIndex = elements.length, rightRailAd, insertedAds,
 }) => {
-  let paragraphCounter = startIndex;
+  let paragraphCounter = 0;
   const newContentElements = [];
 
   elements.forEach((element) => {
-    // keeps track of how many paragraphs have been mapped through
-    if (isParagraph(element.type)) {
-      paragraphCounter += 1;
-    }
-
     // filters the paragraphs to only show the ones inside the range specified by startIndex and stopIndex
     if (startIndex <= paragraphCounter && paragraphCounter < stopIndex) {
       newContentElements.push(element);
@@ -31,15 +26,24 @@ const Section = ({
         insertedAds.splice(insertIndex, 1);
       }
     }
+
+    // keeps track of how many paragraphs have been mapped through
+    if (isParagraph(element.type)) {
+      paragraphCounter += 1;
+    }
+
     return null;
   });
 
-  return (
-    <div className={`c-section ${rightRailAd ? 'with-rightRail' : ''}`}>
-      <ContentElements contentElements={newContentElements} />
-      {rightRailAd && <div className="c-rightRail">{rightRailAd()}</div>}
-    </div>
-  );
+  if (newContentElements.length > 0) {
+    return (
+      <div className={`c-section ${rightRailAd ? 'with-rightRail' : ''}`}>
+        <ContentElements contentElements={newContentElements} />
+        {rightRailAd && <div className="c-rightRail">{rightRailAd()}</div>}
+      </div>
+    );
+  }
+  return null;
 };
 
 Section.propTypes = {
