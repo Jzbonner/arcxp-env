@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
+import { connext } from 'fusion:environment';
 import ConnextInit from '../_helper_components/global/connext/default.jsx';
 
 const DefaultOutputType = (props) => {
@@ -14,7 +15,7 @@ const DefaultOutputType = (props) => {
     Libs,
     MetaTags,
   } = props;
-
+  const { isEnabled = false } = connext;
   return (
     <html>
       <head>
@@ -29,9 +30,12 @@ const DefaultOutputType = (props) => {
       <body>
         <div id="fusion-app">{children}</div>
         <Fusion />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="https://loader-cdn.azureedge.net/stage/ajc/loader.min.js"></script>
-        <ConnextInit />
+        {isEnabled && <>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script type="text/javascript" src="https://loader-cdn.azureedge.net/stage/ajc/loader.min.js"></script>
+            <ConnextInit />
+          </>
+        }
       </body>
     </html>
   );

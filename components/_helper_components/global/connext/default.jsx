@@ -3,6 +3,7 @@ import { connext } from 'fusion:environment';
 
 const ConnextInit = () => {
   const {
+    isEnabled = false,
     clientCode,
     environment,
     siteCode,
@@ -12,9 +13,17 @@ const ConnextInit = () => {
     containerId,
   } = connext;
 
+  if (!isEnabled) return null;
+
   return <script type='text/javascript' dangerouslySetInnerHTML={{
     __html: `
       const doc = window.document;
+
+      const connextLogger = (message) => {
+        if (${debug}) {
+          console.error(message);
+        }
+      };
 
       const mg2Logout = () => {
         const deleteCookie = (name) => {
@@ -33,7 +42,7 @@ const ConnextInit = () => {
       };
 
       doc.addEventListener('connextLoaded', () => {
-        console.error('connextLoaded from init');
+        connextLogger('connextLoaded from init');
       });
 
       doc.addEventListener('DOMContentLoaded', () => {
@@ -120,15 +129,15 @@ const ConnextInit = () => {
                 debug: ${debug},
                 silentmode: false,
                 publicEventHandlers: {
-                  onActionClosed: (e) => { console.error('>> onActionClosed', e); },
-                  onActionShown: (e) => { console.error('>> onActionShown', e); },
-                  onButtonClick: (e) => { console.error('>> onButtonClick', e); },
-                  onCampaignFound: (e) => { console.error('>> onCampaignFound', e); },
-                  onConversationDetermined: (e) => { console.error('>> onConversationDetermined', e); },
-                  onCriticalError: (e) => { console.error('>> onCriticalError', e); },
-                  onDebugNote: (e) => { console.error('>> onDebugNote', e); },
+                  onActionClosed: (e) => { connextLogger('>> onActionClosed', e); },
+                  onActionShown: (e) => { connextLogger('>> onActionShown', e); },
+                  onButtonClick: (e) => { connextLogger('>> onButtonClick', e); },
+                  onCampaignFound: (e) => { connextLogger('>> onCampaignFound', e); },
+                  onConversationDetermined: (e) => { connextLogger('>> onConversationDetermined', e); },
+                  onCriticalError: (e) => { connextLogger('>> onCriticalError', e); },
+                  onDebugNote: (e) => { connextLogger('>> onDebugNote', e); },
                   onInit: (e) => {
-                    console.error('>> onInit', e);
+                    connextLogger('>> onInit', e);
                     doc.querySelectorAll('.js-auth-logout').forEach((el) => {
                       el.addEventListener('click', mg2Logout);
                     });
@@ -137,39 +146,39 @@ const ConnextInit = () => {
                   onLoggedIn: (e) => {
                     toggleLoggedInState('show');
                     toggleLoggedOutState('hide');
-                    console.error('>> onLoggedIn', e);
+                    connextLogger('>> onLoggedIn', e);
                     doc.dispatchEvent(connextLoggedIn);
                   },
                   onNotAuthorized: (e) => {
                     // this event fires on every Engage loading if user is logged out
-                    console.error('>> onNotAuthorized', e);
+                    connextLogger('>> onNotAuthorized', e);
 
                     toggleLoggedInState('hide');
                     toggleLoggedOutState('show');
                     doc.dispatchEvent(connextLoggedOut);
                   },
                   onMeterLevelSet: (e) => {
-                    console.error('>> onMeterLevelSet', e);
+                    connextLogger('>> onMeterLevelSet', e);
                   },
                   onAuthorized: (e) => {
                     // this event fires on every Engage loading if user is logged in but doesn't have access to this product
-                    console.error('>> onAuthorized', e);
+                    connextLogger('>> onAuthorized', e);
                     toggleActivateLink('show');
                     doc.dispatchEvent(connextLoggedIn);
                   },
                   onHasNoActiveSubscription: (e) => {
                     // this event fires on every Engage loading if user is logged in but subscription is stopped or inactive
-                    console.error('>> onHasNoActiveSubscription', e);
+                    connextLogger('>> onHasNoActiveSubscription', e);
                     toggleActivateLink('show');
                   },
                   onHasAccessNotEntitled: (e) => {
                     // this event fires on every Engage loading if user is logged in
                     // and doesn't have access to this product but has access to another one
-                    console.error('>> onHasAccessNotEntitled', e);
+                    connextLogger('>> onHasAccessNotEntitled', e);
                   },
                   onHasAccess: (e) => {
                     // this event fires on every Engage loading if user is subscriber
-                    console.error('>> onHasAccess', e);
+                    connextLogger('>> onHasAccess', e);
                     toggleActivateLink('hide');
                     doc.dispatchEvent(connextIsSubscriber);
                   },
