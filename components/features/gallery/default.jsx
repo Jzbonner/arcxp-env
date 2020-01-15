@@ -27,7 +27,7 @@ const Gallery = () => {
   const [baseCaptionData, setBaseCaptionData] = useState(null);
 
   /* Mobile */
-  const [testOffsetHeight, setHeight] = useState(0);
+  const [offsetHeight, setHeight] = useState(0);
   const [isCaptionOn, setCaptionState] = useState(true);
   const [isStickyVisible, setStickyState] = useState(false);
   const [isMobile, setMobileState] = useState(false);
@@ -39,8 +39,6 @@ const Gallery = () => {
   const galleryMobileEl = useRef(null);
   const mobileBreakPoint = 1023;
   const maxIndex = contentElements.length - 1;
-  let baseElementsForMobile = null;
-
   const actions = {
     PREV: 'PREV',
     NEXT: 'NEXT',
@@ -154,14 +152,14 @@ const Gallery = () => {
     if (galleryMobileEl.current) {
       const index = currentIndex;
       const galleryScrollTop = galleryMobileEl.current.scrollTop;
-      const targetElementOffsetHeight = document.getElementById(`gallery-item-${index}`).offsetHeight;
-      const targetHeight = testOffsetHeight + targetElementOffsetHeight;
-      if (testOffsetHeight === 0 && (galleryScrollTop > targetElementOffsetHeight)) {
-        setHeight(testOffsetHeight + targetElementOffsetHeight);
+      const targetElementoffsetHeight = document.getElementById(`gallery-item-${index}`).offsetHeight;
+      const targetHeight = offsetHeight + targetElementoffsetHeight;
+      if (offsetHeight === 0 && (galleryScrollTop > targetElementoffsetHeight)) {
+        setHeight(offsetHeight + targetElementoffsetHeight);
         changeIndex(actions.NEXT);
       }
 
-      if (testOffsetHeight > 0) {
+      if (offsetHeight > 0) {
         let newHeight;
         const previousTarget = document.getElementById(`gallery-item-${index === 0 ? 0 : index - 1}`).offsetHeight;
 
@@ -169,14 +167,14 @@ const Gallery = () => {
           return null;
         }
 
-        if ((galleryScrollTop < testOffsetHeight) && index !== 0) {
-          newHeight = testOffsetHeight - previousTarget;
+        if ((galleryScrollTop < offsetHeight) && index !== 0) {
+          newHeight = offsetHeight - previousTarget;
           setHeight(newHeight);
           changeIndex(actions.PREV);
         }
 
         if ((galleryScrollTop > targetHeight)) {
-          setHeight(testOffsetHeight + targetElementOffsetHeight);
+          setHeight(offsetHeight + targetElementoffsetHeight);
           changeIndex(actions.NEXT);
         }
       }
@@ -241,7 +239,7 @@ const Gallery = () => {
     };
   }, []);
 
-  // initializing the gallery w/ globalContent ~ runs only once
+  // initializing the gallery w/ globalContent
   if (globalContent && (currentAction === actions.RESIZE || (!elementData && !mobileElementData))) {
     let isWindowMobile = false;
     if (window.innerWidth <= 1023) isWindowMobile = true;
@@ -259,7 +257,7 @@ const Gallery = () => {
 
       if (!baseCaptionData) setBaseCaptionData(desktopCaptionData);
     } else if (!mobileElementData) {
-      baseElementsForMobile = [...galleryData];
+      const baseElementsForMobile = [...galleryData];
       setMobileState(true);
       setMobileElementData(baseElementsForMobile);
     }

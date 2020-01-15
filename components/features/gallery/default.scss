@@ -1,3 +1,5 @@
+@import "../../../src/styles/base";
+
 .gallery-container {
   position: relative;
   display: flex;
@@ -10,7 +12,7 @@
 
 .gallery-count {
   width: 100px;
-  font: normal 1.4375rem Gordita_Regular, arial, sans-serif;
+  @include text-styles(1.4375rem, normal, "Gordita");
   letter-spacing: -2px;
   text-align: center;
   color: #2e81b7;
@@ -43,12 +45,13 @@
     height: 100%;
     width: auto;
     opacity: 0.5;
+    transition: opacity 0.3s !important;
   }
 }
 
 .gallery-credit {
   text-align: right;
-  font: 0.875rem Gordita_Regular, arial, sans-serif;
+  @include text-styles(0.875rem, normal, "Gordita");
 }
 
 .gallery-overlay {
@@ -110,7 +113,7 @@
     flex-direction: column;
 
     .gallery-index {
-      font: 0.75rem Gordita_Regular, arial, sans-serif !important;
+      @include text-styles(0.75rem, normal, "Gordita");
     }
   }
 
@@ -126,7 +129,7 @@
     width: auto;
     max-width: 100%;
     margin: 20px auto 60px;
-    font: 1rem/2.25 Gordita_Regular, arial, sans-serif;
+    @include text-styles(1rem, normal, "Gordita");
   }
 
   .gallery-immersive--close {
@@ -195,7 +198,7 @@
 }
 
 .gallery-caption {
-  font: 1.25rem/1.5 Gordita_Regular, arial, sans-serif;
+  @include text-styles(1.25rem, 1.5, "Gordita");
 }
 
 .gallery-sticky {
@@ -243,7 +246,6 @@
   }
   .is-focused {
     opacity: 1 !important;
-    /* transition: opacity 0.2s 0.2s; */
   }
   .icon-gallery {
     background-image: url(../../../resources/icons/Gallery/middle-box.svg);
@@ -332,7 +334,8 @@
       .gallery-credit:not(:empty) {
         text-align: right;
         margin: 10px 20px 0;
-        font: 0.75rem/1.3 Gordita_Regular, arial, sans-serif;
+        @include text-styles(0.75rem, normal, "Gordita");
+        /* font: 0.75rem/1.3 Gordita_Regular, arial, sans-serif; */
 
         &::before {
           content: "Photo: ";
@@ -367,7 +370,7 @@
   }
   .gallery-count {
     width: 100px;
-    font: normal 1.4375rem Gordita_Regular, arial, sans-serif;
+    @include text-styles(1.4375rem, normal, "Gordita");
     letter-spacing: -2px;
     text-align: center;
     color: #2e81b7;
