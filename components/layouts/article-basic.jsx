@@ -4,7 +4,7 @@ import React from 'react';
 import { useAppContext } from 'fusion:context';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
-import Headline from '../features/article/headline/default.jsx';
+import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 import Section from '../_helper_components/article/section/Section.jsx';
@@ -16,7 +16,6 @@ const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd inser
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
-
   if (!globalContent) return null;
 
   const {
@@ -87,7 +86,7 @@ const StoryPageLayout = () => {
 
           <Section
             elements={contentElements}
-            startIndex={10}
+            startIndex={5}
             rightRailAd={ExampleAdComponent}
             insertedAds={[
               { insertAfterParagraph: 12, ad: ExampleAdInsertion1 },

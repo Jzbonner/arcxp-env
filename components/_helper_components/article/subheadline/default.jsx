@@ -9,8 +9,10 @@ const SubHeadline = ({ subheadlines }) => {
   if (!basic) return null;
 
   return (
-    <div className="article-subheadline text-align">
-      <span>{basic}</span>
+    <div className="article-subheadline">
+      <div className="article-subheadline-body">
+        <span>{basic}</span>
+      </div>
     </div>
   );
 };

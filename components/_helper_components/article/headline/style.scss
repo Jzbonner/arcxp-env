@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column-reverse;
   height: auto;
-  @include breakpoint(tablet) {
+  @include breakpoint(desktop-sm) {
     flex-direction: row;
     align-items: center;
   }
@@ -22,24 +22,25 @@
   &.with-just-headline .headline {
     margin: 0 auto;
   }
-  &.with-image {
-    height: 40vw;
+  &.with-image,
+  &.with-video {
+    height: 50vw;
+    margin-bottom: 5%;
   }
   &.with-image .headline,
   &.with-video .headline {
     width: 90%;
-    height: 90%;
-    @include breakpoint(tablet) {
+    @include breakpoint(desktop-sm) {
       width: 35%;
     }
   }
   &.with-image .headline {
     width: 90%;
-    margin: -5% auto;
+    margin: -3.5vh auto;
     text-align: center;
     display: flex;
     justify-content: center;
-    @include breakpoint(tablet) {
+    @include breakpoint(desktop-sm) {
       width: 88%;
       height: 70%;
       text-align: left;
@@ -50,8 +51,6 @@
   &.with-video .headline {
     margin: 0 auto;
     height: 26vw;
-    @include breakpoint(tablet) {
-    }
   }
   .headline {
     word-wrap: break-word;
@@ -93,7 +92,7 @@
 .c-video {
   width: 100%;
   height: 55vw;
-  @include breakpoint(tablet) {
+  @include breakpoint(desktop-sm) {
     width: 65%;
     height: 33vw;
   }
