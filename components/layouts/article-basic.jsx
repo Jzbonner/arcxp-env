@@ -8,6 +8,8 @@ import Headline from '../_helper_components/article/headline/default';
 import SubHeadline from '../_helper_components/article/subheadline/default';
 import SectionLabel from '../_helper_components/global/sectionLabel/default';
 import Section from '../_helper_components/article/section/Section';
+import TaboolaFeed from '../features/taboolaFeed/default';
+import '../../src/styles/container/_article-basic.scss';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
@@ -88,9 +90,11 @@ const StoryPageLayout = () => {
             rightRailAd={ExampleAdComponent}
             insertedAds={[{ insertAfterParagraph: 12, ad: ExampleAdInsertion1 }, { insertAfterParagraph: 15, ad: ExampleAdInsertion2 }]}
           />
+          <div className="c-taboola">
+          <TaboolaFeed/>
+          </div>
         </article>
       </main>
-
       <footer className="b-placeholder c-footer">Footer</footer>
     </>
   );
