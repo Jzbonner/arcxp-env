@@ -2,7 +2,7 @@ export const defaultAdType = {
   name: 'HP01',
   slotName: 'HP01',
   display: 'all',
-  dimensions: [[728, 90]],
+  dimensions: [[920, 250], [728, 90]],
   targeting: {
     pos: 2,
   },
@@ -14,7 +14,7 @@ export const adTypes = [
     name: 'RP09',
     slotName: 'RP09',
     display: 'all',
-    dimensions: [[300, 250]],
+    dimensions: [[300, 600], [300, 250]],
     targeting: {
       pos: 1,
     },
