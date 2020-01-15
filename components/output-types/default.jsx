@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
+import { taboolaHeaderScript, taboolaFooterScript } from '../../src/js/taboola/taboolaScripts';
 
 const DefaultOutputType = (props) => {
   const {
@@ -14,27 +15,7 @@ const DefaultOutputType = (props) => {
         <Libs />
         <CssLinks />
         <script type='text/javascript' dangerouslySetInnerHTML={{
-          __html: `let taboolaCatObj = {
-            article:'auto'
-          };
-          if (location.pathname === '/' && 'article' !== 'home') {
-            taboolaCatObj = {home:'auto'};
-          }
-          window._taboola = window._taboola || [];
-          _taboola.push(taboolaCatObj);
-          !function (e, f, u, i) {
-            if (!document.getElementById(i)){
-              e.async = 1;
-              e.src = u;
-              e.id = i;
-              f.parentNode.insertBefore(e, f);
-            }
-          }(document.createElement('script'),
-          document.getElementsByTagName('script')[0],
-          '//cdn.taboola.com/libtrc/cox-network/loader.js',
-          'tb_loader_script');
-          if(window.performance && typeof window.performance.mark == 'function')
-            {window.performance.mark('tbl_ic');}`,
+          __html: taboolaHeaderScript,
         }}>
         </script>
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
@@ -45,40 +26,7 @@ const DefaultOutputType = (props) => {
         <div id="fusion-app">{children}</div>
         <Fusion />
         <script type='text/javascript' dangerouslySetInnerHTML={{
-          __html: `
-          window._taboola = window._taboola || [];
-          _taboola.push({flush: true});
-                    let renderedBoap = false;
-                    let renderedMoap = false;
-                    _taboola.push({
-                      listenTo: 'visible',
-                      handler: function (e) {
-                         if (typeof PostRelease !== 'undefined' && !renderedBoap) {
-                               console.error('taboola visible called');
-                             PostRelease.Start({
-                               ptd: [
-                                     1110597,1099013,//ajc qa/prod
-                                 ]
-                             });
-                             renderedBoap = true;
-                         }
-                      }
-                    },
-                    {
-                        listenTo: 'render',
-                        handler: function (e) {
-                           if (typeof PostRelease !== 'undefined' && !renderedMoap) {
-                             console.error('taboola render called');
-                               PostRelease.Start({
-                                 ptd: [
-                                       1110596,1099909,//ajc qa/prod
-                                   ]
-                               });
-                               renderedMoap = true;
-                           }
-                        }
-                    });
-                `,
+          __html: taboolaFooterScript,
         }}>
         </script>
       </body>
