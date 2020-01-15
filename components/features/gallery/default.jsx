@@ -3,7 +3,9 @@ import { useAppContext } from 'fusion:context';
 import {
   DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery,
 } from '../../_helper_components/global/gallery/index';
-import { debounce, createBaseGallery } from './_helper_functions/index';
+import {
+  debounce, createBaseGallery, handleImageFocus, reorganizeElements,
+} from './_helper_functions/index';
 import leftArrow from '../../../resources/icons/gallery/left-arrow.svg';
 import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
@@ -17,8 +19,6 @@ const Gallery = () => {
   const [captionData, setCaptionData] = useState(null);
   // holds current image position
   const [currentIndex, setCurrentIndex] = useState(0);
-  // holds max number of images
-  const [maxIndex, setMaxIndex] = useState(0);
   // holds string which nav arrow was just clicked
   const [currentAction, setCurrentAction] = useState('');
   // holds how far gallery needs to translate in order to center on the current image
@@ -34,33 +34,37 @@ const Gallery = () => {
 
   const appContext = useAppContext();
   const { globalContent = {} } = appContext;
+  const { content_elements: contentElements } = globalContent;
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
   const mobileBreakPoint = 1023;
+  const maxIndex = contentElements.length - 1;
+  let baseElementsForMobile = null;
 
   const actions = {
     PREV: 'PREV',
     NEXT: 'NEXT',
     ON: 'ON',
     OFF: 'OFF',
+    RESIZE: 'RESIZE',
   };
 
   let mobileElemData;
   let mobileFuncs = {};
   let mobileState = {};
 
-  /* HELPERS START */
-
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
-    const galleryFullWidth = galleryEl.current.offsetWidth;
-    const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
-    if (galleryEl && focusElement) {
-      const translateAmount = parseInt(galleryFullWidth, 10)
-      / 2 - parseInt(focusElement.offsetWidth, 10)
-      / 2 - parseInt(focusElement.offsetLeft, 10);
+    if (galleryEl.current) {
+      const galleryFullWidth = galleryEl.current.offsetWidth;
+      const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
+      if (galleryEl && focusElement) {
+        const translateAmount = parseInt(galleryFullWidth, 10)
+          / 2 - parseInt(focusElement.offsetWidth, 10)
+          / 2 - parseInt(focusElement.offsetLeft, 10);
 
-      if (translateX !== translateAmount) setTranslateX(translateAmount);
+        if (translateX !== translateAmount) setTranslateX(translateAmount);
+      }
     }
   };
 
@@ -104,55 +108,6 @@ const Gallery = () => {
     setStickyState(false);
   };
 
-  // organizes element array, where last element is right before the first
-  // VISIBLE GALLERY = |semi-last ,last, [first], second, third...|
-  const reorganizeElements = (arr) => {
-    const elemArray = [...arr];
-    const middle = Math.floor(elemArray.length / 2);
-    const temp = [];
-
-    for (let i = elemArray.length - 1; i >= 0; i -= 1) {
-      if (i > middle) {
-        temp.unshift(elemArray[i]);
-      }
-    }
-
-    for (let i = 0; i < elemArray.length; i += 1) {
-      if (i <= middle) {
-        temp.push(elemArray[i]);
-      }
-    }
-
-    return temp;
-  };
-
-  // adds focus class to current gallery-item element
-  const handleImageFocus = (arr) => {
-    const elements = arr;
-    const finalElements = elements.map((element) => {
-      const elementItemData = { ...element.props.data };
-      const parentStates = {
-        isStickyVisible,
-        isMobile,
-        isCaptionOn,
-      };
-
-      elementItemData.states = { ...parentStates };
-
-      if (currentIndex === element.props.data.index) {
-        elementItemData.states.isFocused = true;
-      } else {
-        elementItemData.states.isFocused = false;
-      }
-
-      return (
-        <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`}/>
-      );
-    });
-
-    return finalElements;
-  };
-
   const renderCaptionByCurrentIndex = () => {
     if (baseCaptionData && !isMobile) {
       const captionToRender = baseCaptionData.map((element) => {
@@ -161,18 +116,18 @@ const Gallery = () => {
             elementData: element,
             isCaptionOn,
           };
-
           return <DesktopCaption data={propData} />;
         }
         return null;
       });
-
       setCaptionData(captionToRender);
     }
   };
 
   const renderDesktopGalleryElements = (elements) => {
-    const finalizedElements = handleImageFocus(elements);
+    const finalizedElements = handleImageFocus(elements, {
+      isStickyVisible, isMobile, isCaptionOn, currentIndex,
+    });
     setElementData(finalizedElements);
     renderCaptionByCurrentIndex();
   };
@@ -191,6 +146,7 @@ const Gallery = () => {
     if (!isMobile) calculateTranslateX();
     if (window.innerWidth <= mobileBreakPoint) setMobileState(true);
     if (window.innerWidth > mobileBreakPoint) setMobileState(false);
+    setCurrentAction(actions.RESIZE);
   };
 
   // tracks which photo user is on (scrolling mobile gallery)
@@ -227,7 +183,7 @@ const Gallery = () => {
     }
 
     return null;
-  }, 15);
+  }, 12);
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
@@ -238,8 +194,8 @@ const Gallery = () => {
     }
   };
 
-  const getMobileElements = () => {
-    const finalElements = mobileElementData.map((element) => {
+  const getMobileElements = (arr) => {
+    const finalElements = arr.map((element) => {
       const elementItemData = { ...element.props.data };
       const parentStates = {
         isStickyVisible,
@@ -248,13 +204,11 @@ const Gallery = () => {
       };
       elementItemData.states = { ...parentStates };
       return (
-          <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`}/>
+        <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`} />
       );
     });
     return finalElements;
   };
-
-  /* HELPERS END */
 
   // only runs if currentIndex has changed
   useEffect(() => {
@@ -267,7 +221,6 @@ const Gallery = () => {
     if (!isMobile) calculateTranslateX();
   }, [currentIndex, translateX, elementData]);
 
-  // runs only once since baseCaptionData will populate only once
   useEffect(() => {
     if (!isMobile) renderCaptionByCurrentIndex();
   }, [baseCaptionData]);
@@ -283,24 +236,20 @@ const Gallery = () => {
 
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
-
     return () => {
       window.removeEventListener('resize', handleResizeEvent, true);
     };
   }, []);
 
   // initializing the gallery w/ globalContent ~ runs only once
-  if (globalContent && (!elementData && !mobileElementData)) {
-    const { content_elements: contentElements } = globalContent;
+  if (globalContent && (currentAction === actions.RESIZE || (!elementData && !mobileElementData))) {
     let isWindowMobile = false;
     if (window.innerWidth <= 1023) isWindowMobile = true;
 
     const captionAndGalleryData = createBaseGallery(contentElements, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
     });
-
     const { galleryData, desktopCaptionData } = captionAndGalleryData;
-    if (maxIndex === 0) setMaxIndex(contentElements.length - 1);
 
     if (!isWindowMobile) {
       if (!elementData) {
@@ -309,14 +258,10 @@ const Gallery = () => {
       }
 
       if (!baseCaptionData) setBaseCaptionData(desktopCaptionData);
-    } else {
-      if (!mobileElementData) {
-        const baseElementsForMobile = [...galleryData];
-        setMobileState(true);
-        setMobileElementData(baseElementsForMobile);
-      }
-
-      return null;
+    } else if (!mobileElementData) {
+      baseElementsForMobile = [...galleryData];
+      setMobileState(true);
+      setMobileElementData(baseElementsForMobile);
     }
   }
 
@@ -326,6 +271,7 @@ const Gallery = () => {
       captionOn: () => handleCaptionToggle(actions.ON),
       captionOff: () => handleCaptionToggle(actions.OFF),
     };
+
     mobileState = {
       isStickyVisible,
       isCaptionOn,
@@ -333,59 +279,61 @@ const Gallery = () => {
       maxIndex,
     };
 
-    mobileElemData = getMobileElements();
+    if (mobileElementData) {
+      mobileElemData = getMobileElements([...mobileElementData]);
+    }
   }
 
   return (
-    <div id="GALLERY" ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-      {
-        isStickyVisible
-          ? <MobileGallery
-            objectRef={galleryMobileEl}
-            data={mobileElemData}
-            states={mobileState}
-            funcs={mobileFuncs}
+      <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
+        {
+          isStickyVisible
+            ? <MobileGallery
+              objectRef={galleryMobileEl}
+              data={mobileElemData}
+              states={mobileState}
+              funcs={mobileFuncs}
             />
-          : null
-      }
-      {
-        !isMobile
-          ? <DesktopGallery data={elementData} translateX={translateX} />
-          : null
-      }
-      <div
-        onClick={handleStickyOpen}
-        className={`gallery-caption-container ${!isStickyVisible && isMobile ? 'mosiac-gallery' : ''}`}>
-        <div className="gallery-overlay hidden-large">
-          {
-            isMobile ? <OverlayMosiac data={mobileElemData} /> : null
-          }
+            : null
+        }
+        {
+          !isMobile
+            ? <DesktopGallery data={elementData} translateX={translateX} />
+            : null
+        }
+        <div
+          onClick={handleStickyOpen}
+          className={`gallery-caption-container ${!isStickyVisible && isMobile ? 'mosiac-gallery' : ''}`}>
+          <div className="gallery-overlay hidden-large">
+            {
+              isMobile ? <OverlayMosiac data={mobileElemData} /> : null
+            }
+          </div>
+          <div className="gallery-count view-gallery">
+            <div className="gallery-count-prev hidden-small hidden-medium">
+              <a onClick={() => changeIndex(actions.PREV)}>
+                <img src={leftArrow}></img>
+              </a>
+            </div>
+            <div className="mobile-change">
+              <a>
+                <img src={middleBox} className="icon-gallery"></img>
+              </a>
+              <div className="hidden-large">View Gallery</div>
+            </div>
+            <div className="gallery-count-next hidden-small hidden-medium">
+              <a onClick={() => changeIndex(actions.NEXT)}>
+                <img src={rightArrow}></img>
+              </a>
+            </div>
+            <div className="count--box hidden-small hidden-medium">
+              <span className="gallery-index">{currentIndex + 1} / </span>
+              <span>{maxIndex + 1}</span>
+            </div>
+          </div>
         </div>
-        <div className="gallery-count view-gallery">
-          <div className="gallery-count-prev hidden-small hidden-medium">
-            <a onClick={() => changeIndex(actions.PREV)}>
-              <img src={leftArrow}></img>
-            </a>
-          </div>
-          <div className="mobile-change">
-            <a>
-              <img src={middleBox} className="icon-gallery"></img>
-            </a>
-            <div className="hidden-large">View Gallery</div>
-          </div>
-          <div className="gallery-count-next hidden-small hidden-medium">
-            <a onClick={() => changeIndex(actions.NEXT)}>
-              <img src={rightArrow}></img>
-            </a>
-          </div>
-          <div className="count--box hidden-small hidden-medium">
-            <span className="gallery-index">{currentIndex + 1} / </span>
-            <span>{maxIndex + 1}</span>
-          </div>
-        </div>
+        {captionData}
       </div>
-      {captionData}
-    </div>
   );
 };
 
