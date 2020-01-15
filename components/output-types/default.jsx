@@ -58,10 +58,6 @@ const DefaultOutputType = (props) => {
                              PostRelease.Start({
                                ptd: [
                                      1110597,1099013,//ajc qa/prod
-                                     1058525,//ddn prod
-                                     1058553,//jn prod
-                                     1099904,1053969,//sns qa/prod
-                                     1058554// dayton prod
                                  ]
                              });
                              renderedBoap = true;
@@ -76,10 +72,6 @@ const DefaultOutputType = (props) => {
                                PostRelease.Start({
                                  ptd: [
                                        1110596,1099909,//ajc qa/prod
-                                       1087799,//ddn prod
-                                       1087801,//jn prod
-                                       1099905,1100010,//sns qa/prod
-                                       1087800// dayton prod
                                    ]
                                });
                                renderedMoap = true;
