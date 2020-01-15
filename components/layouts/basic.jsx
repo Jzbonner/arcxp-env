@@ -3,8 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
-import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
-import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
+import TimeStamp from '../_helper_components/article/timestamp/default';
+import SectionLabel from '../_helper_components/global/sectionLabel/default';
 
 const BasicPageLayout = (props) => {
   const [heading, leadImage, byline, content] = props.children;

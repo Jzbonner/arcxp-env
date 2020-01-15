@@ -1,0 +1,43 @@
+@import "./../../../../src/styles/base/breakpoints";
+@import "./../../../../src/styles/base/mixins";
+
+.c-section {
+  display: flex;
+  @include fixed-width;
+  @include breakpoint(tablet) {
+    width: 83.5%;
+  }
+
+  @include breakpoint(desktop-lg) {
+    width: 67.5%;
+  }
+
+  .c-contentElements {
+    width: 100%;
+  }
+
+  &.with-rightRail {
+    .c-contentElements {
+      @include breakpoint(tablet) {
+        width: calc(100% - 300px);
+      }
+    }
+    .c-rightRail {
+      min-height: 100%;
+      min-width: 300px;
+      background-color: white;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      border: 1px solid #a8a8a8;
+      display: none;
+      @include breakpoint(tablet) {
+        display: flex;
+      }
+    }
+  }
+
+  .insertedAd {
+    height: 200px;
+  }
+}
