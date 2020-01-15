@@ -31,13 +31,17 @@
     padding: 0 30px;
 
     @include breakpoint(tablet) {
-      padding: 0 100px 0;
+      padding: 0;
+    }
+
+    @include breakpoint(desktop-sm) {
+      padding: 0 80px 0 0;
     }
   }
 
   &.with-rightRail {
     .c-contentElements {
-      @include breakpoint(tablet) {
+      @include breakpoint(desktop-sm) {
         width: calc(100% - 300px);
       }
     }
@@ -50,7 +54,7 @@
       font-size: 20px;
       border: 1px solid #a8a8a8;
       display: none;
-      @include breakpoint(tablet) {
+      @include breakpoint(desktop-sm) {
         display: flex;
       }
     }
