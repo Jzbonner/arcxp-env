@@ -12,13 +12,36 @@
     width: 67.5%;
   }
 
+  &:first-child {
+    @include breakpoint(tablet) {
+      .c-contentElements {
+        padding-right: 0;
+      }
+    }
+  }
+
+  // Since c-section will have b-margin-bottom-d60-m40 applied to it,
+  // we remove margin from the bottom of the last paragraph
+  .b-margin-bottom-d60-m40:last-child {
+    margin-bottom: 0;
+  }
+
   .c-contentElements {
     width: 100%;
+    padding: 0 30px;
+
+    @include breakpoint(tablet) {
+      padding: 0;
+    }
+
+    @include breakpoint(desktop-sm) {
+      padding: 0 80px 0 0;
+    }
   }
 
   &.with-rightRail {
     .c-contentElements {
-      @include breakpoint(tablet) {
+      @include breakpoint(desktop-sm) {
         width: calc(100% - 300px);
       }
     }
@@ -31,7 +54,7 @@
       font-size: 20px;
       border: 1px solid #a8a8a8;
       display: none;
-      @include breakpoint(tablet) {
+      @include breakpoint(desktop-sm) {
         display: flex;
       }
     }

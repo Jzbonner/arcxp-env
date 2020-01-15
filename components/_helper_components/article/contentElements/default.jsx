@@ -28,7 +28,7 @@ const ContentElements = ({ contentElements }) => (
         case 'header':
           return <Header src={element} />;
         case 'image':
-          return <Image imageLocation="thumbnail" src={element} />;
+          return <Image imageLocation="thumbnail" src={element} imageMarginBottom="b-margin-bottom-d60-m40" />;
         case 'text':
           return <Paragraph src={element} />;
         case 'interstitial_link':
@@ -42,11 +42,7 @@ const ContentElements = ({ contentElements }) => (
         case 'video':
           return <Video src={element} />;
         default:
-          return (
-            <ul>
-              <li key={element.id}>{element.type}</li>
-            </ul>
-          );
+          return null;
       }
     })}
   </div>

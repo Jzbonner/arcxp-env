@@ -11,7 +11,7 @@ const Header = ({ src }) => {
   const CustomTag = `h${level}`;
   return (
     <CustomTag
-      className={`h${level}-heading`}
+      className={`h${level}-heading b-margin-bottom-d60-m40`}
       dangerouslySetInnerHTML={{ __html: content }}
     />
   );
