@@ -36,6 +36,8 @@ const ContentElements = ({ contentElements }) => (
           return <InterstitialLink src={element} />;
         case 'list':
           return <List src={element} />;
+        case 'divider':
+          return <Divider src={element} />;
         case 'oembed_response':
           return <Oembed src={element} />;
         case 'table':
