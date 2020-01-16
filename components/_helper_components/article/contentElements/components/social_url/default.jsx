@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.scss';
+import '../../../../../../src/styles/base/_utility.scss';
 
 const Oembed = ({ src }) => {
   const {
-    html,
-    type,
+    raw_oembed: rawOembed,
   } = src;
-
+  const {
+    type,
+    html,
+  } = rawOembed;
   let filteredHtml = html;
   let SCRIPT_URL;
   const scriptFilter = /<script[\s\S]*?>[\s\S]*?<\/script>/gi;
@@ -36,13 +38,16 @@ const Oembed = ({ src }) => {
   return (
     <div
     data-oembed-type={type}
-    className='default'
+    className='b-flexRow b-flexCenter b-margin-bottom-d60-m40'
     dangerouslySetInnerHTML={{ __html: filteredHtml }}/>
   );
 };
 
 Oembed.propTypes = {
   src: PropTypes.object,
+  rawOembed: PropTypes.object,
+  type: PropTypes.string,
+  html: PropTypes.string,
 };
 
 export default Oembed;

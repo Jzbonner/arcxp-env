@@ -1,15 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './default.scss';
 
-const Header = ({ src }) => (
-    <div style={{ border: '1px solid #000', padding: '10px' }}>
-      Content Element Type: <strong>Header</strong>
-      <p>{src.content}</p>
-    </div>
-);
+const Header = ({ src }) => {
+  const {
+    content,
+    level,
+  } = src;
+
+  const CustomTag = `h${level}`;
+  return (
+    <CustomTag
+      className={`h${level}-heading b-margin-bottom-d60-m40`}
+      dangerouslySetInnerHTML={{ __html: content }}
+    />
+  );
+};
 
 Header.propTypes = {
-  src: PropTypes.any,
+  src: PropTypes.object,
 };
 
 export default Header;

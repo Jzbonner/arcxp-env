@@ -1,0 +1,32 @@
+/* Breakpoints: */
+$breakpoint: (
+  tablet: 768px,
+  desktop-sm: 1024px,
+  desktop-lg: 1280px
+) !default;
+
+@mixin breakpoint($point) {
+  /* Equal or greater than 768px */
+  @if $point == tablet {
+    /* stylelint-disable-next-line */
+    @media only screen and (min-width: map-get($breakpoint, tablet)) {
+      @content;
+    }
+  }
+
+  /* Equal or greater than 1024px */
+  @if $point == desktop-sm {
+    /* stylelint-disable-next-line */
+    @media only screen and (min-width: map-get($breakpoint, desktop-sm)) {
+      @content;
+    }
+  }
+
+  /* Equal or greater than 1280px */
+  @if $point == desktop-lg {
+    /* stylelint-disable-next-line */
+    @media only screen and (min-width: map-get($breakpoint, desktop-lg)) {
+      @content;
+    }
+  }
+}

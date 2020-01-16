@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const InterstitialLink = ({ src }) => (
-    <div style={{ border: '1px solid #000', padding: '10px' }}>
-      Content Element Type: <strong>Interstitial Link</strong>
-      <p>{src.content}</p>
+    <div className="b-margin-bottom-d60-m40">
+      <p>Content Element Type: <strong>Interstitial Link</strong> Not Worked. Content: {src.content}</p>
     </div>
 );
 
 InterstitialLink.propTypes = {
-  src: PropTypes.any,
+  src: PropTypes.object,
 };
 
 export default InterstitialLink;
