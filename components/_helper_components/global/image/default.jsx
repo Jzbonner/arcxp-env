@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './default.scss';
 
-const Image = ({ imageLocation, src }) => {
+const Image = ({ imageLocation, src, imageMarginBottom }) => {
   const [toggleButton, setToggle] = useState(false);
 
   const { url, caption, credits } = src || null;
@@ -26,7 +26,7 @@ const Image = ({ imageLocation, src }) => {
   };
 
   return (
-    <div className={`image-${imageLocation} c-image-component`}>
+    <div className={`image-${imageLocation} c-image-component ${imageMarginBottom}`}>
       <div className="image-component-image">
         <img src={url} alt={caption} />
         <div className={`c-caption ${toggleButton ? 'is-active' : ''}`}>
@@ -51,5 +51,6 @@ const Image = ({ imageLocation, src }) => {
 Image.propTypes = {
   imageLocation: PropTypes.oneOf(['head', 'breaking', 'thumbnail']),
   src: PropTypes.object,
+  imageMarginBottom: PropTypes.string,
 };
 export default Image;

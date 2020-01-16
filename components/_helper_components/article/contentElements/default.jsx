@@ -4,7 +4,7 @@ import BlockQuote from './components/blockQuote/default.jsx';
 import Correction from './components/correction/default.jsx';
 import Gallery from './components/gallery/default.jsx';
 import HTML from './components/html/default.jsx';
-import Image from '../../global/image/default';
+import Image from '../../global/image/default.jsx';
 import InterstitialLink from './components/interstitial_link/default.jsx';
 import List from './components/list/default.jsx';
 import Paragraph from './components/paragraph/default.jsx';
@@ -28,7 +28,7 @@ const ContentElements = ({ contentElements }) => (
         case 'header':
           return <Header src={element} />;
         case 'image':
-          return <Image imageLocation="thumbnail" src={element} />;
+          return <Image imageLocation="thumbnail" src={element} imageMarginBottom="b-margin-bottom-d60-m40" />;
         case 'text':
           return <Paragraph src={element} />;
         case 'interstitial_link':
@@ -42,11 +42,7 @@ const ContentElements = ({ contentElements }) => (
         case 'video':
           return <Video src={element} />;
         default:
-          return (
-            <ul>
-              <li key={element.id}>{element.type}</li>
-            </ul>
-          );
+          return null;
       }
     })}
   </div>

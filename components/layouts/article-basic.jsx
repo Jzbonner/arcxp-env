@@ -2,14 +2,12 @@
 
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import TimeStamp from '../_helper_components/article/timestamp/default';
-import Byline from '../_helper_components/article/byline/default';
-import Headline from '../_helper_components/article/headline/default';
-import SubHeadline from '../_helper_components/article/subheadline/default';
-import SectionLabel from '../_helper_components/global/sectionLabel/default';
-import Section from '../_helper_components/article/section/Section';
-import TaboolaFeed from '../features/taboolaFeed/default';
-import '../../src/styles/container/_article-basic.scss';
+import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
+import Byline from '../_helper_components/article/byline/default.jsx';
+import Headline from '../_helper_components/article/headline/default.jsx';
+import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
+import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
+import Section from '../_helper_components/article/section/Section.jsx';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
@@ -59,7 +57,7 @@ const StoryPageLayout = () => {
       </header>
 
       <main>
-        <header>
+        <header className="b-margin-bottom-d15-m10">
           <div className="c-fixed-width">
             <Headline headlines={headlines} basicItems={basicItems} />
           </div>
@@ -76,17 +74,29 @@ const StoryPageLayout = () => {
         <article>
           <Section elements={contentElements} stopIndex={1} />
 
-          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd">Full Width Ad Container</div>
+          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-d60-m40">Full Width Ad Container</div>
 
-          <Section elements={contentElements} startIndex={1} stopIndex={5} rightRailAd={ExampleAdComponent} />
+          <Section
+            elements={contentElements}
+            startIndex={1}
+            stopIndex={10}
+            rightRailAd={ExampleAdComponent}
+            insertedAds={[
+              { insertAfterParagraph: 3, ad: ExampleAdInsertion1 },
+              { insertAfterParagraph: 5, ad: ExampleAdInsertion2 },
+            ]}
+          />
 
-          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd">Full Width Ad Container</div>
+          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-d60-m40">Full Width Ad Container</div>
 
           <Section
             elements={contentElements}
             startIndex={5}
             rightRailAd={ExampleAdComponent}
-            insertedAds={[{ insertAfterParagraph: 12, ad: ExampleAdInsertion1 }, { insertAfterParagraph: 15, ad: ExampleAdInsertion2 }]}
+            insertedAds={[
+              { insertAfterParagraph: 12, ad: ExampleAdInsertion1 },
+              { insertAfterParagraph: 15, ad: ExampleAdInsertion2 },
+            ]}
           />
           <div className="c-taboola">
           <TaboolaFeed/>

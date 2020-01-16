@@ -22,11 +22,6 @@
   &.with-just-headline .headline {
     margin: 0 auto;
   }
-  &.with-image,
-  &.with-video {
-    height: 50vw;
-    margin-bottom: 5%;
-  }
   &.with-image .headline,
   &.with-video .headline {
     width: 90%;

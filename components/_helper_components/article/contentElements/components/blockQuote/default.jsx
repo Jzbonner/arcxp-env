@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import List from '../list/default';
-import Paragraph from '../paragraph/default';
+import List from '../list/default.jsx';
+import Paragraph from '../paragraph/default.jsx';
 import './styles.scss';
 
 const Blockquote = ({ contentElements, citation }) => (
-  <div className="blockquote">
+  <div className="blockquote b-margin-bottom-d60-m40">
     {contentElements.map((el, index) => {
       switch (el.type) {
         case 'list':
