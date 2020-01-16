@@ -30,10 +30,14 @@ const StoryPageLayout = () => {
     credits,
   } = globalContent || {};
 
-  // console.log(globalContent);
+  console.log(globalContent);
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
+
+  // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
+  const { hide_timestamp: hideTimestamp } = label || {};
+  const { text: isHideTimestampTrue } = hideTimestamp || {};
 
   // const paragraphCount = paragraphCounter(contentElements);
 
@@ -64,7 +68,7 @@ const StoryPageLayout = () => {
           <SubHeadline subheadlines={subheadlines} />
           <div className="b-flexRow b-flexCenter">
             <SectionLabel label={label} taxonomy={taxonomy} />
-            <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} />
+            <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
           </div>
           <div className="b-flexRow b-flexCenter">
             <Byline by={authorData} />
