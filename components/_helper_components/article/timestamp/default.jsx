@@ -27,6 +27,7 @@ const TimeStamp = ({ firstPublishDate, displayDate, isHideTimestampTrue }) => {
   let timeStamp;
 
   if (!firstPublishDate && !displayDate) return null;
+  if (isHideTimestampTrue === 'Yes') return null;
 
   const isUpdated = !!firstPublishDate;
   const now = new Date();
@@ -47,9 +48,6 @@ const TimeStamp = ({ firstPublishDate, displayDate, isHideTimestampTrue }) => {
     const minLabel = `minute${minutes !== 1 ? 's' : ''}`;
     timeStamp = ` | ${isUpdated ? 'updated ' : ''}${minutes} ${minLabel} ago`;
   } else {
-    return null;
-  }
-  if (isHideTimestampTrue === 'Yes') {
     return null;
   }
   return (
