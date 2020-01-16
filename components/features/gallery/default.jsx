@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useAppContext } from 'fusion:context';
+import PropTypes from 'prop-types';
+import { useContent } from 'fusion:content';
 import {
   DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery,
 } from '../../_helper_components/global/gallery/index';
@@ -11,7 +12,8 @@ import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
 import './default.scss';
 
-const Gallery = () => {
+const Gallery = (props) => {
+  const { contentElements = [], customFields = {} } = props;
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
   const [mobileElementData, setMobileElementData] = useState(null);
@@ -19,7 +21,6 @@ const Gallery = () => {
   const [captionData, setCaptionData] = useState(null);
   // holds current image position
   const [currentIndex, setCurrentIndex] = useState(0);
-  // holds string which nav arrow was just clicked
   const [currentAction, setCurrentAction] = useState('');
   // holds how far gallery needs to translate in order to center on the current image
   const [translateX, setTranslateX] = useState(0);
@@ -32,13 +33,10 @@ const Gallery = () => {
   const [isStickyVisible, setStickyState] = useState(false);
   const [isMobile, setMobileState] = useState(false);
 
-  const appContext = useAppContext();
-  const { globalContent = {} } = appContext;
-  const { content_elements: contentElements } = globalContent;
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
   const mobileBreakPoint = 1023;
-  const maxIndex = contentElements.length - 1;
+
   const actions = {
     PREV: 'PREV',
     NEXT: 'NEXT',
@@ -50,6 +48,18 @@ const Gallery = () => {
   let mobileElemData;
   let mobileFuncs = {};
   let mobileState = {};
+
+  // if standalone feature, fetches a specific gallery
+  const { galleryUrl } = customFields;
+
+  const fetchedGalleryData = useContent({
+    source: 'content-api',
+    query: {
+      path: galleryUrl,
+    },
+  });
+
+  const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
 
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
@@ -114,7 +124,7 @@ const Gallery = () => {
             elementData: element,
             isCaptionOn,
           };
-          return <DesktopCaption data={propData} />;
+          return <DesktopCaption key={element.index} data={propData} />;
         }
         return null;
       });
@@ -192,6 +202,7 @@ const Gallery = () => {
     }
   };
 
+  // maps mobile elements with updated parent states
   const getMobileElements = (arr) => {
     const finalElements = arr.map((element) => {
       const elementItemData = { ...element.props.data };
@@ -208,6 +219,18 @@ const Gallery = () => {
     return finalElements;
   };
 
+  // finds the gallery obj within the contentElements prop
+  const handlePropContentElements = () => {
+    let relevantData = null;
+    contentElements.forEach((element) => {
+      if (element.type === 'gallery') {
+        relevantData = element;
+      }
+    });
+
+    return relevantData;
+  };
+
   // only runs if currentIndex has changed
   useEffect(() => {
     if (elementData && !isStickyVisible && currentAction !== '') {
@@ -217,7 +240,7 @@ const Gallery = () => {
 
   useEffect(() => {
     if (!isMobile) calculateTranslateX();
-  }, [currentIndex, translateX, elementData]);
+  }, [currentIndex, translateX, elementData, galleryEl]);
 
   useEffect(() => {
     if (!isMobile) renderCaptionByCurrentIndex();
@@ -239,15 +262,28 @@ const Gallery = () => {
     };
   }, []);
 
-  // initializing the gallery w/ globalContent
-  if (globalContent && (currentAction === actions.RESIZE || (!elementData && !mobileElementData))) {
+  // initializing the gallery w/ either propped or fetched content elements
+  if ((contentElements || fetchedGalleryData) && (currentAction === actions.RESIZE || (!elementData && !mobileElementData))) {
     let isWindowMobile = false;
-    if (window.innerWidth <= 1023) isWindowMobile = true;
+    let relevantGalleryData = null;
+    let galleryContentElements = null;
+    let fetchedContentElements = null;
+    if (window.innerWidth <= mobileBreakPoint) isWindowMobile = true;
 
-    const captionAndGalleryData = createBaseGallery(contentElements, {
+    if (contentElements) relevantGalleryData = handlePropContentElements();
+
+    if (!relevantGalleryData && !fetchedGalleryData) return null;
+
+    if (fetchedGalleryData) fetchedContentElements = fetchedGalleryData.content_elements;
+
+    if (relevantGalleryData) galleryContentElements = relevantGalleryData.content_elements;
+
+    const baseGalleryData = fetchedContentElements || galleryContentElements;
+
+    const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
     });
-    const { galleryData, desktopCaptionData } = captionAndGalleryData;
+    const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData;
 
     if (!isWindowMobile) {
       if (!elementData) {
@@ -333,6 +369,16 @@ const Gallery = () => {
         {captionData}
       </div>
   );
+};
+
+Gallery.propTypes = {
+  contentElements: PropTypes.object,
+  customFields: PropTypes.shape({
+    galleryUrl: PropTypes.string.tag({
+      label: 'Gallery URL',
+      description: 'Please enter a valid gallery url to fetch related content.',
+    }),
+  }),
 };
 
 export default Gallery;

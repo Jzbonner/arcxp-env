@@ -2,12 +2,13 @@
 
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import TimeStamp from '../_helper_components/article/timestamp/default';
-import Byline from '../_helper_components/article/byline/default';
-import Headline from '../_helper_components/article/headline/default';
-import SubHeadline from '../_helper_components/article/subheadline/default';
-import SectionLabel from '../_helper_components/global/sectionLabel/default';
-import Section from '../_helper_components/article/section/Section';
+import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
+import Byline from '../_helper_components/article/byline/default.jsx';
+import Headline from '../_helper_components/article/headline/default.jsx';
+import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
+import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
+import Section from '../_helper_components/article/section/Section.jsx';
+import Gallery from '../features/gallery/default.jsx';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
@@ -31,7 +32,6 @@ const StoryPageLayout = () => {
     credits,
   } = globalContent || {};
 
-  // console.log(globalContent);
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
@@ -89,7 +89,7 @@ const StoryPageLayout = () => {
           />
         </article>
       </main>
-
+      <Gallery contentElements={contentElements} />
       <footer className="b-placeholder c-footer">Footer</footer>
     </>
   );
