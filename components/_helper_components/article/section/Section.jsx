@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ContentElements from '../contentElements/default';
+import ContentElements from '../contentElements/default.jsx';
 import { isParagraph } from '../../../layouts/_helper_functions/Paragraph';
 import './styles.scss';
 
@@ -37,7 +37,7 @@ const Section = ({
 
   if (newContentElements.length > 0) {
     return (
-      <div className={`c-section ${rightRailAd ? 'with-rightRail' : ''}`}>
+      <div className={`c-section ${rightRailAd ? 'with-rightRail' : ''} b-margin-bottom-d60-m40`}>
         <ContentElements contentElements={newContentElements} />
         {rightRailAd && <div className="c-rightRail">{rightRailAd()}</div>}
       </div>

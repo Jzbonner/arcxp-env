@@ -58,7 +58,7 @@ const StoryPageLayout = () => {
       </header>
 
       <main>
-        <header>
+        <header className="b-margin-bottom-d15-m10">
           <div className="c-fixed-width">
             <Headline headlines={headlines} basicItems={basicItems} />
           </div>
@@ -75,17 +75,29 @@ const StoryPageLayout = () => {
         <article>
           <Section elements={contentElements} stopIndex={1} />
 
-          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd">Full Width Ad Container</div>
+          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-d60-m40">Full Width Ad Container</div>
 
-          <Section elements={contentElements} startIndex={1} stopIndex={5} rightRailAd={ExampleAdComponent} />
+          <Section
+            elements={contentElements}
+            startIndex={1}
+            stopIndex={10}
+            rightRailAd={ExampleAdComponent}
+            insertedAds={[
+              { insertAfterParagraph: 3, ad: ExampleAdInsertion1 },
+              { insertAfterParagraph: 5, ad: ExampleAdInsertion2 },
+            ]}
+          />
 
-          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd">Full Width Ad Container</div>
+          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-d60-m40">Full Width Ad Container</div>
 
           <Section
             elements={contentElements}
             startIndex={5}
             rightRailAd={ExampleAdComponent}
-            insertedAds={[{ insertAfterParagraph: 12, ad: ExampleAdInsertion1 }, { insertAfterParagraph: 15, ad: ExampleAdInsertion2 }]}
+            insertedAds={[
+              { insertAfterParagraph: 12, ad: ExampleAdInsertion1 },
+              { insertAfterParagraph: 15, ad: ExampleAdInsertion2 },
+            ]}
           />
         </article>
       </main>

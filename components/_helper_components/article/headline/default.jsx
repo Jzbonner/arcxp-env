@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
-import Image from '../../../_helper_components/global/image/default';
+import Image from '../../global/image/default.jsx';
 
 const Headline = ({ basicItems = {}, headlines = {} }) => {
   let promoData = {};
@@ -13,7 +13,7 @@ const Headline = ({ basicItems = {}, headlines = {} }) => {
   // promoData.type = 'video';
 
   return (
-    <div className={`artical-headline-component with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
+    <div className={`article-headline-component with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
       <div className="headline">
         <div className="headline-body">
           <h3 className="heading-body h3">{headlines.basic}</h3>
