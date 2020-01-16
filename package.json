@@ -204,6 +204,7 @@
   },
   "homepage": "https://github.com/wapopartners/StarterPack-PageBuilder-Fusion-Features#readme",
   "dependencies": {
-    "scriptjs": "^2.5.9"
+    "scriptjs": "^2.5.9",
+    "thumbor-lite": "^0.1.8"
   }
 }

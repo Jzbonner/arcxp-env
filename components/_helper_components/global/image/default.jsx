@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Caption from '../../../_helper_components/global/caption/default';
 import './default.scss';
+import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
-const Image = ({ imageLocation, src }) => {
-  const [toggleButton, setToggle] = useState(false);
-
+const Image = ({ src }) => {
   const { url, caption, credits } = src || null;
+  const [imageSrc, setImageSrc] = useState('');
+
+  useEffect(() => {
+    setImageSrc(imageResizer(url, 200, 200));
+  }, []);
 
   let mainCredit = null;
   let secondaryCredit = null;
@@ -21,35 +26,18 @@ const Image = ({ imageLocation, src }) => {
     giveCredit = `Photo: ${secondaryCredit}`;
   }
 
-  const toggle = () => {
-    setToggle(!toggleButton);
-  };
-
   return (
-    <div className={`image-${imageLocation} c-image-component`}>
+    <div className="c-image-component">
       <div className="image-component-image">
-        <img src={url} alt={caption} />
-        <div className={`c-caption ${toggleButton ? 'is-active' : ''}`}>
-          <div className="photo-caption-btn" onClick={toggle}>
-            <div className="fill-line fill-line-long"></div>
-            <div className="fill-line"></div>
-            <div className="fill-line fill-line-long"></div>
-            <div className="fill-line"></div>
-            <div className="fill-line fill-line-long"></div>
-          </div>
-          <div className="photo-caption">
-            <div className="photo-caption-text">{caption}</div>
-            <p className="photo-credit-text-mobile">{giveCredit}</p>
-          </div>
-        </div>
+        <img src={imageSrc} alt={caption} />
+        <Caption src={src} />
       </div>
-      <p className="photo-credit-text-desktop">{giveCredit}</p>
+      <p className="photo-credit-text">{giveCredit}</p>
     </div>
   );
 };
 
 Image.propTypes = {
-  imageLocation: PropTypes.oneOf(['head', 'breaking', 'thumbnail']),
   src: PropTypes.object,
 };
 export default Image;
