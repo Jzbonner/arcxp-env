@@ -37,7 +37,7 @@ const ContentElements = ({ contentElements }) => (
         case 'list':
           return <List src={element} />;
         case 'divider':
-          return <Divider src={element} />;
+          return <Divider />;
         case 'oembed_response':
           return <Oembed src={element} />;
         case 'table':
