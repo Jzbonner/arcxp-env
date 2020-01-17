@@ -10,6 +10,7 @@ import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx'
 import Section from '../_helper_components/article/section/Section.jsx';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
+
 const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
 const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
 
@@ -29,8 +30,6 @@ const StoryPageLayout = () => {
     subheadlines,
     credits,
   } = globalContent || {};
-
-  // console.log(globalContent);
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
@@ -72,14 +71,13 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
-          <Section elements={contentElements} stopIndex={1} />
+          <Section elements={contentElements} stopIndex={3} rightRailAd={ExampleAdComponent} />
 
           <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-d60-m40">Full Width Ad Container</div>
 
           <Section
             elements={contentElements}
-            startIndex={1}
-            stopIndex={10}
+            startIndex={3}
             rightRailAd={ExampleAdComponent}
             insertedAds={[
               { insertAfterParagraph: 3, ad: ExampleAdInsertion1 },
@@ -88,16 +86,6 @@ const StoryPageLayout = () => {
           />
 
           <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-d60-m40">Full Width Ad Container</div>
-
-          <Section
-            elements={contentElements}
-            startIndex={5}
-            rightRailAd={ExampleAdComponent}
-            insertedAds={[
-              { insertAfterParagraph: 12, ad: ExampleAdInsertion1 },
-              { insertAfterParagraph: 15, ad: ExampleAdInsertion2 },
-            ]}
-          />
         </article>
       </main>
 
