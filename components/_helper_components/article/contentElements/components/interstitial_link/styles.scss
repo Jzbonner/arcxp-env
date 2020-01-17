@@ -1,0 +1,39 @@
+.borders {
+  border-top: solid 1px #cdcdcd;
+  border-bottom: solid 1px #cdcdcd;
+  padding-left: 1.4em;
+  padding-top: 1.2em;
+  padding-bottom: 1.3em;
+  display: flex;
+}
+.prefix {
+  width: 1em;
+  height: .372em;
+  margin: 1.56em 1.1em 1.56em 0;
+  -webkit-text-stroke: 0.3px #000000;
+  font-family: Average;
+  font-size: 1.625rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #313132;
+}
+.interstitial{
+  padding-left: 1.1em; 
+  padding-right: 1.1em;
+  text-align: left;
+}
+.link {
+  width: 2.77em;
+  height: 5.25em;
+  font-family: "Gordita Regular", "Arial", sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.75;
+  letter-spacing: normal;
+  color: #000000;
+}
