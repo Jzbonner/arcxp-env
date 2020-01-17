@@ -8,6 +8,7 @@ import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 import Section from '../_helper_components/article/section/Section.jsx';
+import TaboolaFeed from '../features/taboolaFeed/default';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
@@ -28,8 +29,8 @@ const StoryPageLayout = () => {
     taxonomy,
     subheadlines,
     credits,
+    type,
   } = globalContent || {};
-
   // console.log(globalContent);
 
   const { by: authorData } = credits || {};
@@ -99,7 +100,7 @@ const StoryPageLayout = () => {
             ]}
           />
           <div className="c-taboola">
-          <TaboolaFeed/>
+          <TaboolaFeed type={type}/>
           </div>
         </article>
       </main>

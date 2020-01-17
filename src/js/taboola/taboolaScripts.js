@@ -20,10 +20,9 @@ const taboolaHeaderScript = `let taboolaCatObj = {
   if(window.performance && typeof window.performance.mark == 'function')
     {window.performance.mark('tbl_ic');}`;
 
-const taboolaModuleScript = `window._taboola = window._taboola || []; _taboola.push(
-    { mode: 'thumbnails-feed-4x1', container: 'taboola-ajc-custom-feed',placement: 'AJC Custom Feed',target_type: 'mix'});`;
-
-const taboolaFooterScript = ` window._taboola = window._taboola || [];
+const taboolaFooterScript = (type) => {
+  if (type === 'story' || type === 'blog') {
+    return ` window._taboola = window._taboola || [];
 _taboola.push({flush: true});
           let renderedBoap = false;
           let renderedMoap = false;
@@ -55,5 +54,9 @@ _taboola.push({flush: true});
                  }
               }
           });`;
+  }
+  return `window._taboola = window._taboola || [];
+_taboola.push({flush: true});`;
+};
 
-export { taboolaHeaderScript, taboolaModuleScript, taboolaFooterScript };
+export { taboolaHeaderScript, taboolaFooterScript };

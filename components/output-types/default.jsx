@@ -5,8 +5,11 @@ import { taboolaHeaderScript, taboolaFooterScript } from '../../src/js/taboola/t
 
 const DefaultOutputType = (props) => {
   const {
-    arcSite = getProperties().sites[0], children, contextPath, deployment, CssLinks, Fusion, Libs, MetaTags,
+    arcSite = getProperties().sites[0], children, contextPath, deployment, CssLinks, Fusion, Libs, MetaTags, globalContent,
   } = props;
+  const {
+    type,
+  } = globalContent;
 
   return (
     <html>
@@ -27,7 +30,7 @@ const DefaultOutputType = (props) => {
         <div id="fusion-app">{children}</div>
         <Fusion />
         <script type='text/javascript' dangerouslySetInnerHTML={{
-          __html: taboolaFooterScript,
+          __html: taboolaFooterScript(type),
         }}>
         </script>
       </body>
@@ -44,6 +47,7 @@ DefaultOutputType.propTypes = {
   Fusion: PropTypes.func,
   Libs: PropTypes.array,
   MetaTags: PropTypes.object,
+  globalContent: PropTypes.object,
 };
 
 export default DefaultOutputType;
