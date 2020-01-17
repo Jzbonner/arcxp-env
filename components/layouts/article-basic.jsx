@@ -71,7 +71,8 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
-          <Section elements={contentElements} stopIndex={3} rightRailAd={ExampleAdComponent} />
+          <Section elements={contentElements} stopIndex={1} />
+          <Section elements={contentElements} startIndex={1} stopIndex={3} rightRailAd={ExampleAdComponent} />
 
           <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-d60-m40">Full Width Ad Container</div>
 
