@@ -1,26 +1,45 @@
-const taboolaHeaderScript = `let taboolaCatObj = {
-    article:'auto'
-  };
-  if (location.pathname === '/' && 'article' !== 'home') {
-    taboolaCatObj = {home:'auto'};
+const taboolaHeaderScript = (type) => {
+  let taboolaCatObj = {};
+  let taboolaScript;
+  const partialScript = `window._taboola = window._taboola || [];
+    _taboola.push(taboolaCatObj);
+    !function (e, f, u, i) {
+      if (!document.getElementById(i)){
+        e.async = 1;
+        e.src = u;
+        e.id = i;
+        f.parentNode.insertBefore(e, f);
+      }
+    }(document.createElement('script'),
+    document.getElementsByTagName('script')[0],
+    '//cdn.taboola.com/libtrc/cox-network/loader.js',
+    'tb_loader_script');
+    if(window.performance && typeof window.performance.mark == 'function')
+      {window.performance.mark('tbl_ic');}`;
+  if (type === 'story' || type === 'blog') {
+    taboolaCatObj = `taboolaCatObj = {
+       article: 'auto' 
+    };`;
+    taboolaScript = `
+    let ${taboolaCatObj}
+    ${partialScript}`;
+  } else if (type === 'section') {
+    taboolaCatObj = `{ category: 'auto' 
+  };`;
+    taboolaScript = `
+    let ${taboolaCatObj}
+    ${partialScript}`;
+  } else if (type === 'home') {
+    taboolaCatObj = `{ home: 'auto' 
+  };`;
+    taboolaScript = `
+    let ${taboolaCatObj}
+    ${partialScript}`;
   }
-  window._taboola = window._taboola || [];
-  _taboola.push(taboolaCatObj);
-  !function (e, f, u, i) {
-    if (!document.getElementById(i)){
-      e.async = 1;
-      e.src = u;
-      e.id = i;
-      f.parentNode.insertBefore(e, f);
-    }
-  }(document.createElement('script'),
-  document.getElementsByTagName('script')[0],
-  '//cdn.taboola.com/libtrc/cox-network/loader.js',
-  'tb_loader_script');
-  if(window.performance && typeof window.performance.mark == 'function')
-    {window.performance.mark('tbl_ic');}`;
+  return taboolaScript;
+};
 
-const taboolaFooterScript = (type) => {
+const taboolaFooterScript = (type, moapPTD, boapPTD) => {
   if (type === 'story' || type === 'blog') {
     return ` window._taboola = window._taboola || [];
 _taboola.push({flush: true});
@@ -32,9 +51,7 @@ _taboola.push({flush: true});
                if (typeof PostRelease !== 'undefined' && !renderedBoap) {
                      console.error('taboola visible called');
                    PostRelease.Start({
-                     ptd: [
-                           1110597,1099013,//ajc qa/prod
-                       ]
+                     ptd: ${boapPTD}
                    });
                    renderedBoap = true;
                }
@@ -46,9 +63,7 @@ _taboola.push({flush: true});
                  if (typeof PostRelease !== 'undefined' && !renderedMoap) {
                    console.error('taboola render called');
                      PostRelease.Start({
-                       ptd: [
-                             1110596,1099909,//ajc qa/prod
-                         ]
+                       ptd: ${moapPTD}
                      });
                      renderedMoap = true;
                  }

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { taboolaHeaderScript, taboolaFooterScript } from '../../src/js/taboola/taboolaScripts';
+import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
+import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
 
 const DefaultOutputType = (props) => {
   const {
@@ -18,10 +19,7 @@ const DefaultOutputType = (props) => {
         <MetaTags />
         <Libs />
         <CssLinks />
-        <script type='text/javascript' dangerouslySetInnerHTML={{
-          __html: taboolaHeaderScript,
-        }}>
-        </script>
+        <TaboolaHeader type={type}/>
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -29,10 +27,7 @@ const DefaultOutputType = (props) => {
       <body>
         <div id="fusion-app">{children}</div>
         <Fusion />
-        <script type='text/javascript' dangerouslySetInnerHTML={{
-          __html: taboolaFooterScript(type),
-        }}>
-        </script>
+        <TaboolaFooter type ={type}/>
       </body>
     </html>
   );
