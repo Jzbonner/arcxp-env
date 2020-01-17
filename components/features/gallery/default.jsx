@@ -67,9 +67,13 @@ const Gallery = (props) => {
       const galleryFullWidth = galleryEl.current.offsetWidth;
       const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
       if (galleryEl && focusElement) {
+        console.log('full width of gallery', galleryFullWidth);
+
+        console.log('item offset', focusElement.offsetWidth);
         const translateAmount = parseInt(galleryFullWidth, 10)
           / 2 - parseInt(focusElement.offsetWidth, 10)
           / 2 - parseInt(focusElement.offsetLeft, 10);
+          console.log(translateX, translateAmount);
         if (translateX !== translateAmount) setTranslateX(translateAmount);
       }
     }
@@ -150,7 +154,7 @@ const Gallery = (props) => {
   };
 
   const handleResizeEvent = () => {
-    if (!isMobile) calculateTranslateX();
+    if (!isMobile && !galleryMobileEl) calculateTranslateX();
     if (window.innerWidth <= mobileBreakPoint) setMobileState(true);
     if (window.innerWidth > mobileBreakPoint) setMobileState(false);
     setCurrentAction(actions.RESIZE);
