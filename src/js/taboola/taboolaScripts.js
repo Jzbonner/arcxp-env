@@ -91,7 +91,7 @@ const taboolaModuleScript = (type) => {
     placementName = 'AJC Custom Feed - Home Page';
   }
   return `window._taboola = window._taboola || []; _taboola.push(
-    { mode: 'thumbnails-feed-4x1', container: '${containerName}',placement: '${placementName}',target_type: 'mix'});`
+    { mode: 'thumbnails-feed-4x1', container: '${containerName}',placement: '${placementName}',target_type: 'mix'});`;
 };
 
 export { taboolaHeaderScript, taboolaFooterScript, taboolaModuleScript };
