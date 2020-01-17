@@ -70,7 +70,6 @@ const Gallery = (props) => {
         const translateAmount = parseInt(galleryFullWidth, 10)
           / 2 - parseInt(focusElement.offsetWidth, 10)
           / 2 - parseInt(focusElement.offsetLeft, 10);
-
         if (translateX !== translateAmount) setTranslateX(translateAmount);
       }
     }

@@ -8,16 +8,17 @@ const GalleryItem = (props) => {
   } = data;
   const { caption } = captionObj;
   const {
-    isFocused, isStickyVisible, isCaptionOn,
+    isFocused, isStickyVisible, isCaptionOn, isMobile,
   } = states;
   return (
     <div
       id={id}
       data-index={index}
       key={url}
-      className={`${isStickyVisible ? 'gallery-full-item' : 'gallery-image'} ${!isStickyVisible ? 'inherit--width mosiac-image' : ''}`}>
+      className={`${isStickyVisible ? 'gallery-full-item' : 'gallery-image'} 
+      ${!isStickyVisible && isMobile ? 'inherit--width mosiac-container' : ''}`}>
       <img
-        className={`${!isStickyVisible ? 'inherit--width mosiac-image' : ''} ${isFocused ? 'is-focused' : ''}`}
+        className={`${!isStickyVisible && isMobile ? 'inherit--width mosiac-image' : ''} ${isFocused ? 'is-focused' : ''}`}
         src={url}
         alt={alt ? `${alt}` : ''}
       />
