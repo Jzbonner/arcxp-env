@@ -24,14 +24,16 @@ const taboolaHeaderScript = (type) => {
     let ${taboolaCatObj}
     ${partialScript}`;
   } else if (type === 'section') {
-    taboolaCatObj = `{ category: 'auto' 
-  };`;
+    taboolaCatObj = `taboolaCatObj = { 
+      category: 'auto' 
+    };`;
     taboolaScript = `
     let ${taboolaCatObj}
     ${partialScript}`;
   } else if (type === 'home') {
-    taboolaCatObj = `{ home: 'auto' 
-  };`;
+    taboolaCatObj = `taboolaCatObj = { 
+      home: 'auto' 
+    };`;
     taboolaScript = `
     let ${taboolaCatObj}
     ${partialScript}`;
@@ -74,4 +76,22 @@ _taboola.push({flush: true});
 _taboola.push({flush: true});`;
 };
 
-export { taboolaHeaderScript, taboolaFooterScript };
+const taboolaModuleScript = (type) => {
+  let containerName;
+  let placementName;
+  if (type === 'story' || type === 'blog') {
+    containerName = 'taboola-ajc-custom-feed';
+    placementName = 'AJC Custom Feed';
+    // next two cases are a work in progress will be dependent on architecture
+  } else if (type === 'section') {
+    containerName = 'taboola-ajc-custom-feed--sction-fronts';
+    placementName = 'AJC Custom Feed - Section Fronts';
+  } else if (type === 'homepage') {
+    containerName = 'taboola-ajc-custom-feed--home-page';
+    placementName = 'AJC Custom Feed - Home Page';
+  }
+  return `window._taboola = window._taboola || []; _taboola.push(
+    { mode: 'thumbnails-feed-4x1', container: '${containerName}',placement: '${placementName}',target_type: 'mix'});`
+};
+
+export { taboolaHeaderScript, taboolaFooterScript, taboolaModuleScript };
