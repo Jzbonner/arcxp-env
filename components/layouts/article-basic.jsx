@@ -8,6 +8,7 @@ import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 import Section from '../_helper_components/article/section/Section.jsx';
+import StickyDesktopNav from '../_helper_components/article/stickyNavDesktop/default';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
@@ -56,6 +57,7 @@ const StoryPageLayout = () => {
           </div>
           <div className="b-placeholder c-subscribe">Support Local Journalism. Subscribe today for 99¢.</div>
         </div>
+        <StickyDesktopNav />
       </header>
 
       <main>

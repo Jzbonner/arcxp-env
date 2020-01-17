@@ -1,0 +1,17 @@
+.c-stickyNav {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    background: red;
+    z-index: 999;
+
+    h2 {
+        color: #fff;
+        font-size: 30px;
+        text-align: center;
+    }
+}
