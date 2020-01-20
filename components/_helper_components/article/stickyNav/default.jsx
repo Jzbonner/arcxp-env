@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './default.scss';
+import StickyDesktopNav from './desktop/default';
 
-const StickyDesktopNav = () => {
+const StickyNav = () => {
   const startingPoint = 300;
   const minWidth = 1023;
   const currentWidth = window.innerWidth;
@@ -11,17 +11,14 @@ const StickyDesktopNav = () => {
     window.addEventListener('scroll', (e) => {
       const scroll = e.currentTarget.pageYOffset;
       setCurrentScroll(scroll);
-    //   console.log(scroll);
     });
   }, []);
 
   if (currentScroll > startingPoint && currentWidth > minWidth) {
     return (
-      <div className="c-stickyNav stickyNav-desktop">
-        <h2>STICKY NAV</h2>
-      </div>
+        <StickyDesktopNav />
     );
   }
   return null;
 };
-export default StickyDesktopNav;
+export default StickyNav;

@@ -1,0 +1,22 @@
+
+@mixin blue-button($dimension: 43px, $content: '', $font-size: 1rem) {
+  background: $blue-gradient;
+  border-radius: $dimension / 2;
+  width: $dimension;
+  height: $dimension;
+  font-size: 11px;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:after {
+    content: $content;
+    font-family: 'icon-fonts' !important;
+    display: block;
+    font-size: $font-size;
+    color: #fff;
+  }
+}
