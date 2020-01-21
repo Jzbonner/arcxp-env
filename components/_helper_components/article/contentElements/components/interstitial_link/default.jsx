@@ -10,7 +10,7 @@ const InterstitialLink = ({ src }) => {
 
   if (!(src)) return null;
   return (
-    <div className="borders b-margin-bottom-d60-m40">
+    <section className="borders b-margin-bottom-d60-m40">
       <span className="prefix">Explore</span>
       <a
         className="link"
@@ -19,7 +19,7 @@ const InterstitialLink = ({ src }) => {
         target="_self">
         {content}
       </a>
-    </div>
+    </section>
   );
 };
 
