@@ -20,19 +20,20 @@ const StoryPageLayout = () => {
   const { globalContent } = appContext;
   if (!globalContent) return null;
 
-  console.log(globalContent);
-
   const {
     first_publish_date: firstPublishDate,
     display_date: displayDate,
     content_elements: contentElements,
     promo_items: promoItems,
+    subtype,
     headlines,
     label,
     taxonomy,
     subheadlines,
     credits,
   } = globalContent || {};
+
+  console.log(globalContent);
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
@@ -93,7 +94,7 @@ const StoryPageLayout = () => {
             ]}
           />
 
-          <BlogAuthor authorData={authorData} />
+          <BlogAuthor subtype={subtype} authorData={authorData} />
           <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-d60-m40">Full Width Ad Container</div>
         </article>
       </main>
