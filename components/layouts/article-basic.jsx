@@ -26,12 +26,14 @@ const StoryPageLayout = () => {
     promo_items: promoItems,
     headlines,
     label,
+    comments,
     taxonomy,
     canonical_url: articleURL,
     subheadlines,
     credits,
   } = globalContent || {};
 
+  console.log(globalContent);
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
@@ -59,7 +61,7 @@ const StoryPageLayout = () => {
           </div>
           <div className="b-placeholder c-subscribe">Support Local Journalism. Subscribe today for 99¢.</div>
         </div>
-        <StickyNav articleURL={articleURL} headlines={headlines} />
+        <StickyNav articleURL={articleURL} headlines={headlines} comments={comments} />
       </header>
 
       <main>

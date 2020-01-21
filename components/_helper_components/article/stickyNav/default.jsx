@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import StickyDesktopNav from './desktop/default';
 
-const StickyNav = ({ articleURL, headlines }) => {
+const StickyNav = ({ articleURL, headlines, comments }) => {
   const startingPoint = 200;
   const minWidth = 1023;
   const currentWidth = window.innerWidth;
   const [currentScroll, setCurrentScroll] = useState(0);
-
   useEffect(() => {
     window.addEventListener('scroll', (e) => {
       const scroll = e.currentTarget.pageYOffset;
@@ -16,7 +15,7 @@ const StickyNav = ({ articleURL, headlines }) => {
   }, []);
 
   if (currentScroll > startingPoint && currentWidth > minWidth) {
-    return <StickyDesktopNav articleURL={articleURL} headlines={headlines} />;
+    return <StickyDesktopNav articleURL={articleURL} headlines={headlines} comments={comments} />;
   }
   return null;
 };
@@ -24,6 +23,7 @@ const StickyNav = ({ articleURL, headlines }) => {
 StickyNav.propTypes = {
   articleURL: PropTypes.string,
   headlines: PropTypes.object,
+  comments: PropTypes.object,
 };
 
 export default StickyNav;

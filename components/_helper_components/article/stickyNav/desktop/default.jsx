@@ -5,12 +5,13 @@ import logo from '../../../../../resources/images/stickyNav-logo.svg';
 import avatar from '../../../../../resources/images/stickyNav-avatar.svg';
 import './default.scss';
 
-const StickyDesktopNav = ({ articleURL, headlines }) => {
+const StickyDesktopNav = ({ articleURL, headlines, comments }) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
   } = getProperties();
 
-  const { basic: articleHeadline } = headlines;
+  const { basic: articleHeadline } = headlines || {};
+  const { allow_comments: commentsEnabled } = comments || {};
 
   return (
     <div className="c-stickyNav stickyNav-desktop">
@@ -35,9 +36,11 @@ const StickyDesktopNav = ({ articleURL, headlines }) => {
         <li className="stickyNav-item">
           <a href={`${mail}${articleHeadline}&body=${siteDomainURL}${articleURL}`} className="sticky-nav-icon mail-icon"></a>
         </li>
-        <li className="stickyNav-item">
-          <a href="#" className="sticky-nav-icon comments-icon"></a>
-        </li>
+        {commentsEnabled ? (
+          <li className="stickyNav-item">
+            <a href="#" className="sticky-nav-icon comments-icon"></a>
+          </li>
+        ) : null}
         <li className="stickyNav-item">
           <a href={`${siteDomainURL}/login`}>
             <img src={avatar} className="stickyNav-item login-avatar" alt={`${siteName} avatar`} />
@@ -52,6 +55,7 @@ const StickyDesktopNav = ({ articleURL, headlines }) => {
 StickyDesktopNav.propTypes = {
   articleURL: PropTypes.string,
   headlines: PropTypes.object,
+  comments: PropTypes.object,
 };
 
 export default StickyDesktopNav;
