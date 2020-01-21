@@ -27,9 +27,11 @@ const StoryPageLayout = () => {
     headlines,
     label,
     taxonomy,
+    canonical_url: articleURL,
     subheadlines,
     credits,
   } = globalContent || {};
+
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
@@ -57,7 +59,7 @@ const StoryPageLayout = () => {
           </div>
           <div className="b-placeholder c-subscribe">Support Local Journalism. Subscribe today for 99¢.</div>
         </div>
-        <StickyNav />
+        <StickyNav articleURL={articleURL} headlines={headlines} />
       </header>
 
       <main>

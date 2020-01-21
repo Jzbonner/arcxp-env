@@ -1,45 +1,35 @@
+@import '../../../../../src/styles/base/fonts';
+@import './stickyMixins.scss';
 
-// story page pinned header
-.wrapper--header.story-page {
-    .header__mobile-pinned-logo__image {
-        display: none;
-    }
-    .story-nav {
-        &__item {
-            height: 45px; // needs to be taller than icons so drop shadow is not cut off
-        }
-        &__facebook-icon {
-            @include blue-button($dimension: 35px, $content: '\e911', $font-size: 22px);
-            margin-left: 0 !important; // first item has no left margin
-        }
-        &__twitter-icon {
-            @include blue-button($dimension: 35px, $content: '\e908', $font-size: 22px);
-        }
-        &__down-arrow-icon {
-            @include blue-button($dimension: 35px, $content: '\e90c', $font-size: 22px);
-        }
-        &__up-arrow-icon {
-            @include blue-button($dimension: 35px, $content: '\e903', $font-size: 22px);
-        }
-        &__pinterest-icon {
-            @include blue-button($dimension: 35px, $content: '\e913', $font-size: 22px);
-        }
-        &__reddit-icon {
-            @include blue-button($dimension: 35px, $content: '\e909', $font-size: 21px);
-        }
-        &__email-icon {
-            @include blue-button($dimension: 35px, $content: '\e90f', $font-size: 22px);
-        }
-        &__comment-icon {
-            @include blue-button($dimension: 35px, $content: '\e90e', $font-size: 21px);
-        }
-        &__icon {
-            margin-left: 20px;
-            box-shadow: 0 2px 4px 0 rgba(149, 149, 149, 0.5);
-            &::after {
-                top: 10% !important;
-                left: -2.5px;
-            }
-        }
-    }
+
+.facebook-icon {
+    @include blue-button($dimension: 35px, $content: '\e911', $font-size: 22px);
 }
+
+.twitter-icon {
+    @include blue-button($dimension: 35px, $content: '\e908', $font-size: 22px);
+}
+
+.pinterest-icon {
+    @include blue-button($dimension: 35px, $content: '\e913', $font-size: 22px);
+}
+.reddit-icon {
+    @include blue-button($dimension: 35px, $content: '\e909', $font-size: 21px);
+}
+
+.mail-icon {
+    @include blue-button($dimension: 35px, $content: '\e90f', $font-size: 22px);
+}
+
+.comments-icon {
+    @include blue-button($dimension: 35px, $content: '\e90e', $font-size: 21px);
+}
+
+// &__down-arrow-icon {
+//     @include blue-button($dimension: 35px, $content: '\e90c', $font-size: 22px);
+// }
+
+// &__up-arrow-icon {
+//     @include blue-button($dimension: 35px, $content: '\e903', $font-size: 22px);
+// }
+
