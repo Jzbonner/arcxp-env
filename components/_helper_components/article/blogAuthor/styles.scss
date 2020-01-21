@@ -1,0 +1,27 @@
+@import "./../../../../src/styles/base/mixins";
+
+.c-blogAuthor {
+  display: block;
+  .componentTitle {
+    @include text-styles(1.5rem, 1, "Gordita");
+  }
+  .blogAuthor-content {
+    .row {
+      display: flex;
+      align-items: center;
+      .profileImg {
+        margin-right: 50px;
+        img {
+          border-radius: 50%;
+          height: 100px;
+        }
+      }
+      .authorName {
+        @include text-styles(1rem, 1, "Gordita");
+      }
+    }
+    .authorDescription {
+      @include text-styles(1.25rem, 1.88, "Gordita");
+    }
+  }
+}

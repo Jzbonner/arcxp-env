@@ -8,6 +8,7 @@ import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 import Section from '../_helper_components/article/section/Section.jsx';
+import BlogAuthor from '../_helper_components/article/blogAuthor/blogAuthor';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 
@@ -18,6 +19,8 @@ const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
   if (!globalContent) return null;
+
+  console.log(globalContent);
 
   const {
     first_publish_date: firstPublishDate,
@@ -90,6 +93,7 @@ const StoryPageLayout = () => {
             ]}
           />
 
+          <BlogAuthor authorData={authorData} />
           <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-d60-m40">Full Width Ad Container</div>
         </article>
       </main>
