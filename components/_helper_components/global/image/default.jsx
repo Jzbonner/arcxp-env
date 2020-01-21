@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Caption from '../../../_helper_components/global/caption/default';
+import Caption from '../caption/default.jsx';
 import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 

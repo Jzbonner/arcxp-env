@@ -1,4 +1,4 @@
-/*  /components/_helper_components/article/contentElements/components/list/default.jsx  */
+/*  /components/_helper_components/article/contentElements/components/list/default  */
 
 import React from 'react';
 import PropTypes from 'prop-types';

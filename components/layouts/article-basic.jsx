@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import TimeStamp from '../_helper_components/article/timestamp/default';
-import Byline from '../_helper_components/article/byline/default';
-import Headline from '../_helper_components/article/headline/default';
-import SubHeadline from '../_helper_components/article/subheadline/default';
-import SectionLabel from '../_helper_components/global/sectionLabel/default';
-import Section from '../_helper_components/article/section/Section';
+import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
+import Byline from '../_helper_components/article/byline/default.jsx';
+import Headline from '../_helper_components/article/headline/default.jsx';
+import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
+import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
+import Section from '../_helper_components/article/section/Section.jsx';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
@@ -84,7 +84,10 @@ const StoryPageLayout = () => {
             elements={contentElements}
             startIndex={5}
             rightRailAd={ExampleAdComponent}
-            insertedAds={[{ insertAfterParagraph: 12, ad: ExampleAdInsertion1 }, { insertAfterParagraph: 15, ad: ExampleAdInsertion2 }]}
+            insertedAds={[
+              { insertAfterParagraph: 12, ad: ExampleAdInsertion1 },
+              { insertAfterParagraph: 15, ad: ExampleAdInsertion2 },
+            ]}
           />
         </article>
       </main>

@@ -41,4 +41,8 @@ const Caption = ({ src }) => {
   );
 };
 
+Caption.propTypes = {
+  src: PropTypes.obj,
+};
+
 export default Caption;

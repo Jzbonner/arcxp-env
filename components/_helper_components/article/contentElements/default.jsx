@@ -4,7 +4,7 @@ import BlockQuote from './components/blockQuote/default.jsx';
 import Correction from './components/correction/default.jsx';
 import Gallery from './components/gallery/default.jsx';
 import HTML from './components/html/default.jsx';
-import Image from '../../global/image/default';
+import Image from '../../global/image/default.jsx';
 import InterstitialLink from './components/interstitial_link/default.jsx';
 import List from './components/list/default.jsx';
 import Paragraph from './components/paragraph/default.jsx';

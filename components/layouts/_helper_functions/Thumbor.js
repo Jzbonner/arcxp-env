@@ -1,7 +1,7 @@
 const Thumbor = require('thumbor-lite');
 const { RESIZER_SECRET_KEY } = require('./../../../environment/index');
 
-const thumbor = new Thumbor(RESIZER_SECRET_KEY, 'http://resizer.arcpublishing.com/');
+const thumbor = new Thumbor(RESIZER_SECRET_KEY, 'http://thumbor-prod-us-east-1.photo.aws.arc.pub');
 
 export default function (url, width, height) {
   return thumbor
@@ -9,11 +9,3 @@ export default function (url, width, height) {
     .resize(width, height)
     .buildUrl();
 }
-
-
-// const thumborUrl = thumbor
-//   .setImagePath('img.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2015/03/04/Style/Images/Britain_Glastonbury_Music_Festival_Day_4-0d9e1.jpg')
-//   .resize(150, 250)
-//   .buildUrl();
-
-//console.log(thumborUrl);
