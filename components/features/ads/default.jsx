@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import AdSetup from './src/index';
-import { adTypes, adTypeOptions, defaultAdType } from './children/adtypes.jsx';
+import { adTypes, adTypeOptions, defaultAdType } from './children/adtypes';
 
 const ArcAd = ({ customFields }) => {
   const { slot, type } = customFields;

@@ -23,10 +23,11 @@ const findAPMonth = (month = 12) => {
   return months[month];
 };
 
-const TimeStamp = ({ firstPublishDate, displayDate }) => {
+const TimeStamp = ({ firstPublishDate, displayDate, isHideTimestampTrue }) => {
   let timeStamp;
 
   if (!firstPublishDate && !displayDate) return null;
+  if (isHideTimestampTrue === 'Yes') return null;
 
   const isUpdated = !!firstPublishDate;
   const now = new Date();
@@ -49,7 +50,6 @@ const TimeStamp = ({ firstPublishDate, displayDate }) => {
   } else {
     return null;
   }
-
   return (
     <span className={'article-timestamp'}>
       {timeStamp}
@@ -60,6 +60,7 @@ const TimeStamp = ({ firstPublishDate, displayDate }) => {
 TimeStamp.propTypes = {
   firstPublishDate: PropTypes.string,
   displayDate: PropTypes.string,
+  isHideTimestampTrue: PropTypes.string,
 };
 
 export default TimeStamp;
