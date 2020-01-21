@@ -16,7 +16,7 @@ const InterstitialLink = ({ src }) => {
         className="link"
         href={url}
         rel="noopener noreferrer"
-        target="_blank">
+        target="_self">
         {content}
       </a>
     </div>
