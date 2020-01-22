@@ -92,6 +92,7 @@
       @include text-styles-tablet(1.25em, 1, "Gordita");
     }
     .photo-credit-text {
+      position: static;
       text-align: right;
       color: white;
       margin: 0;
