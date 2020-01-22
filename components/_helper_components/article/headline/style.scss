@@ -103,6 +103,15 @@
       }
     }
   }
+  &.with-video {
+    .headline-body {
+      // This padding is from Zeplin.
+      // Setting this padding on smaller screens makes the headline box taller than the video container.
+      @media (min-width: 1500px) {
+        padding: 115px 41px;
+      }
+    }
+  }
 }
 
 /////////////////
