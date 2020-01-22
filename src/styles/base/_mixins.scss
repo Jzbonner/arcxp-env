@@ -92,7 +92,7 @@
   align-items: center;
   &:after {
     content: $content;
-    font-family: "icon-fonts" !important;
+    font-family: "icon-fonts";
     display: block;
     font-size: $font-size;
     color: #fff;

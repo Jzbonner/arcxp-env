@@ -33,8 +33,6 @@ const StoryPageLayout = () => {
     credits,
   } = globalContent || {};
 
-  console.log(globalContent);
-
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
 
