@@ -29,7 +29,7 @@ const ContentElements = ({ contentElements }) => (
           return <Header src={element} />;
         case 'image':
           // a height of 0 makes the height proportional to the width
-          return <Image width={800} height={0} imageLocation="thumbnail" src={element} />;
+          return <Image width={800} height={0} src={element} />;
         case 'text':
           return <Paragraph src={element} />;
         case 'interstitial_link':
