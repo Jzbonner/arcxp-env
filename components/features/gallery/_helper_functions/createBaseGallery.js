@@ -1,7 +1,7 @@
 import React from 'react';
 import GalleryItem from '../../../_helper_components/global/gallery/galleryItem.jsx';
 
-const createBaseGallery = (elements = [], states = {}) => {
+const createBaseGallery = (elements = [], states = {}, refHook) => {
   const {
     isStickyVisible, isMobile, isCaptionOn, currentIndex,
   } = states;
@@ -45,8 +45,9 @@ const createBaseGallery = (elements = [], states = {}) => {
 
       if (!isWindowMobile) desktopCaptionData.push(galleryItem.captionObj);
 
+
       return (
-        <GalleryItem data={galleryItem} key={`gallery-item-${url}`} />
+        <GalleryItem refHook={i === 0 ? refHook : null} data={galleryItem} key={`gallery-item-${url}`} />
       );
     });
   } else {

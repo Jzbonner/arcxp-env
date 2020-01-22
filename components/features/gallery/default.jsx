@@ -23,7 +23,7 @@ const Gallery = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentAction, setCurrentAction] = useState('');
   // holds how far gallery needs to translate in order to center on the current image
-  const [translateX, setTranslateX] = useState(0);
+  const [translateX, setTranslateX] = useState(null);
   // holds all captions w/ the same index(id) as their image counter parts
   const [baseCaptionData, setBaseCaptionData] = useState(null);
 
@@ -35,6 +35,7 @@ const Gallery = (props) => {
 
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
+  const debugFixEl = useRef(null);
   const mobileBreakPoint = 1023;
 
   const actions = {
@@ -63,11 +64,18 @@ const Gallery = (props) => {
 
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
-    if (galleryEl.current) {
-      const galleryFullWidth = galleryEl.current.offsetWidth;
-      const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
-      if (galleryEl && focusElement) {
-        const translateAmount = parseInt(galleryFullWidth, 10)
+    let translateAmount;
+    const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
+    const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
+    if (galleryEl.current && focusElement && elementData.length >= maxIndex) {
+      // fixes initializing translate bug
+      if (focusElement.offsetWidth === 0) {
+        translateAmount = parseInt(galleryFullWidth, 10)
+          / 2 - parseInt(debugFixEl.current.offsetWidth, 10)
+          / 2 - parseInt(debugFixEl.current.offsetLeft, 10);
+        if (translateX !== translateAmount) setTranslateX(translateAmount);
+      } else {
+        translateAmount = parseInt(galleryFullWidth, 10)
           / 2 - parseInt(focusElement.offsetWidth, 10)
           / 2 - parseInt(focusElement.offsetLeft, 10);
         if (translateX !== translateAmount) setTranslateX(translateAmount);
@@ -239,7 +247,7 @@ const Gallery = (props) => {
 
   useEffect(() => {
     if (!isMobile) calculateTranslateX();
-  }, [currentIndex, translateX, elementData, galleryEl]);
+  }, [currentIndex, translateX, elementData, captionData, galleryEl]);
 
   useEffect(() => {
     if (!isMobile) renderCaptionByCurrentIndex();
@@ -281,7 +289,7 @@ const Gallery = (props) => {
 
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
-    });
+    }, debugFixEl);
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData;
 
     if (!isWindowMobile) {
@@ -316,57 +324,60 @@ const Gallery = (props) => {
       mobileElemData = getMobileElements([...mobileElementData]);
     }
   }
-
+  // init translate bug fix ~ run only once
+  if (elementData && captionData && galleryEl.current && currentAction === '' && debugFixEl.current.offsetWidth) {
+    calculateTranslateX();
+  }
   return (
-      <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-        {
-          isStickyVisible
-            ? <MobileGallery
-              objectRef={galleryMobileEl}
-              data={mobileElemData}
-              states={mobileState}
-              funcs={mobileFuncs}
-            />
-            : null
-        }
-        {
-          !isMobile
-            ? <DesktopGallery data={elementData} translateX={translateX} />
-            : null
-        }
-        <div
-          onClick={handleStickyOpen}
-          className={`gallery-caption-container ${!isStickyVisible && isMobile ? 'mosiac-gallery' : ''}`}>
-          <div className="gallery-overlay hidden-large">
-            {
-              isMobile ? <OverlayMosiac data={mobileElemData} /> : null
-            }
+    <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
+      {
+        isStickyVisible
+          ? <MobileGallery
+            objectRef={galleryMobileEl}
+            data={mobileElemData}
+            states={mobileState}
+            funcs={mobileFuncs}
+          />
+          : null
+      }
+      {
+        !isMobile
+          ? <DesktopGallery data={elementData} translateX={translateX} />
+          : null
+      }
+      <div
+        onClick={handleStickyOpen}
+        className={`gallery-caption-container ${!isStickyVisible && isMobile ? 'mosiac-gallery' : ''}`}>
+        <div className="gallery-overlay hidden-large">
+          {
+            isMobile ? <OverlayMosiac data={mobileElemData} /> : null
+          }
+        </div>
+        <div className="gallery-count view-gallery">
+          <div className="gallery-count-prev hidden-small hidden-medium">
+            <a onClick={() => changeIndex(actions.PREV)}>
+              <img src={leftArrow}></img>
+            </a>
           </div>
-          <div className="gallery-count view-gallery">
-            <div className="gallery-count-prev hidden-small hidden-medium">
-              <a onClick={() => changeIndex(actions.PREV)}>
-                <img src={leftArrow}></img>
-              </a>
-            </div>
-            <div className="mobile-change">
-              <a>
-                <img src={middleBox} className="icon-gallery"></img>
-              </a>
-              <div className="hidden-large">View Gallery</div>
-            </div>
-            <div className="gallery-count-next hidden-small hidden-medium">
-              <a onClick={() => changeIndex(actions.NEXT)}>
-                <img src={rightArrow}></img>
-              </a>
-            </div>
-            <div className="count--box hidden-small hidden-medium">
-              <span className="gallery-index">{currentIndex + 1} / </span>
-              <span>{maxIndex + 1}</span>
-            </div>
+          <div className="mobile-change">
+            <a>
+              <img src={middleBox} className="icon-gallery"></img>
+            </a>
+            <div className="hidden-large">View Gallery</div>
+          </div>
+          <div className="gallery-count-next hidden-small hidden-medium">
+            <a onClick={() => changeIndex(actions.NEXT)}>
+              <img src={rightArrow}></img>
+            </a>
+          </div>
+          <div className="count--box hidden-small hidden-medium">
+            <span className="gallery-index">{currentIndex + 1} / </span>
+            <span>{maxIndex + 1}</span>
           </div>
         </div>
-        {captionData}
       </div>
+      {captionData}
+    </div>
   );
 };
 
