@@ -78,7 +78,14 @@
         flex: 1 0 33%;
         height: 70%;
         text-align: left;
-        margin: 0 -3vw 0 3vw;
+        margin: 0 -3vw 0 3vw !important;
+      }
+      .headline-body {
+        // This padding is from Zeplin.
+        // Setting this padding on smaller screens makes the headline box taller than the image.
+        @media (min-width: 1500px) {
+          padding: 115px 41px;
+        }
       }
     }
   }
