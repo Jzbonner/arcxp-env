@@ -1,4 +1,4 @@
-/*  /components/_helper_components/article/contentElements/components/list/default  */
+/*  /components/_helper_components/article/contentElements/components/list/default.jsx  */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -9,14 +9,17 @@ const listItems = {
   ul: 'ul',
   ol: 'ol',
 };
+
 const isList = (item) => {
   const { type } = item;
   return type === 'list';
 };
+
 const renderListItem = (item, index, nextItem = {}) => {
   const { content } = item;
   const properListType = listItems[nextItem.list_type];
   const nextItemIsAList = isList(nextItem);
+
   return (
     <li key={index}>
       <span dangerouslySetInnerHTML={{ __html: content }} />
@@ -24,29 +27,32 @@ const renderListItem = (item, index, nextItem = {}) => {
     </li>
   );
 };
+
 const List = (props) => {
   const { src = {} } = props;
   const { items = [] } = src;
-  const listType = 'ul' || 'ol';
+
   if (!items.length) return null;
-  const ListType = listItems[listType];
+
   return (
-    <ListType>
+    <ol>
       {items.map((item, index) => {
         if (isList(item) && items[index - 1] && !isList(items[index - 1])) return null;
         if (isList(item)) {
-          return <List listType={listItems[item.list_type]} items={item.items} />;
+          return <List listType={listItems[item.list_type] || 'ul'} items={item.items} />;
         }
         const nextItem = items[index + 1];
         return renderListItem(item, index, nextItem);
       })}
-    </ListType>
+    </ol>
   );
 };
+
 List.propTypes = {
   listType: PropTypes.string,
   className: PropTypes.string,
   items: PropTypes.array,
   src: PropTypes.string,
 };
+
 export default List;
