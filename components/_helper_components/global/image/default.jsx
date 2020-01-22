@@ -4,12 +4,12 @@ import Caption from '../caption/default.jsx';
 import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
-const Image = ({ src }) => {
+const Image = ({ width, height, src }) => {
   const { url, caption, credits } = src || null;
   const [imageSrc, setImageSrc] = useState('');
 
   useEffect(() => {
-    setImageSrc(imageResizer(url, 200, 200));
+    setImageSrc(imageResizer(url, width, height));
   }, []);
 
   let mainCredit = null;
@@ -38,6 +38,8 @@ const Image = ({ src }) => {
 };
 
 Image.propTypes = {
-  src: PropTypes.object,
+  src: PropTypes.object.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
 };
 export default Image;

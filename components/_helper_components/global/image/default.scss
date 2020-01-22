@@ -27,6 +27,8 @@
 .article-headline-component {
   .photo-credit-text {
     display: none;
+    position: absolute;
+    right: 0;
     @include breakpoint(desktop-sm) {
       display: block;
     }

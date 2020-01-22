@@ -1,3 +1,5 @@
+@import "./_breakpoints";
+
 .b-placeholder {
   display: flex;
   justify-content: center;
@@ -34,4 +36,28 @@
 
 .b-margin-bottom-5 {
   margin-bottom: 5em;
+}
+
+// desktop margin-bottom 15, mobile margin-bottom 10
+.b-margin-bottom-d15-m10 {
+  margin-bottom: 0.63rem;
+  @include breakpoint(desktop-sm) {
+    margin-bottom: 0.94rem;
+  }
+}
+
+// desktop margin-bottom 30, mobile margin-bottom 20
+.b-margin-bottom-d30-m20 {
+  margin-bottom: 1.25rem;
+  @include breakpoint(desktop-sm) {
+    margin-bottom: 1.88rem;
+  }
+}
+
+// desktop margin-bottom 60, mobile margin-bottom 40
+.b-margin-bottom-d60-m40 {
+  margin-bottom: 2.5rem;
+  @include breakpoint(desktop-sm) {
+    margin-bottom: 3.75rem;
+  }
 }
