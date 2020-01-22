@@ -52,7 +52,7 @@ const ContentElements = ({ contentElements }) => (
 );
 
 ContentElements.propTypes = {
-  contentElements: PropTypes.Array,
+  contentElements: PropTypes.array,
 };
 
 export default ContentElements;
