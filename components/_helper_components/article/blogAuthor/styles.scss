@@ -3,7 +3,7 @@
 
 .c-blogAuthor {
   display: block;
-  .componentTitle {
+  .blogAuthor-title {
     @include text-styles(1.25rem, 1, "Gordita");
     margin-bottom: 10px;
     font-weight: 600;
@@ -13,15 +13,14 @@
     border-top: 1px solid #979797;
     border-bottom: 1px solid #979797;
     padding: 30px 0 25px;
-    .row {
-      display: flex;
-      align-items: center;
+    .b-flexRow {
+      margin-bottom: 20px;
       justify-content: center;
-      @include breakpoint(tablet) {
+      align-items: center;
+      @include breakpoint(desktop-sm) {
         justify-content: left;
       }
-      margin-bottom: 20px;
-      .imageContainer {
+      .content-profileImage {
         width: 97px;
         height: 97px;
         margin-right: 20px;
@@ -34,15 +33,15 @@
           box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
         }
       }
-      .authorName {
+      .content-authorName {
         @include text-styles(1.25rem, 1, "Gordita");
         font-weight: 600;
       }
     }
-    .row:last-child {
+    .b-flexRow:last-child {
       margin-bottom: 0;
     }
-    .authorDescription {
+    .content-authorDescription {
       padding: 0 20px;
       @include text-styles(1rem, 1.88, "Gordita");
       text-align: center;

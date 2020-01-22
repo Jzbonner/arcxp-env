@@ -3,24 +3,31 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 const BlogAuthor = ({ subtype, authorData }) => {
-  console.log(authorData);
   if (subtype === 'Blog' && authorData.length > 0) {
     return (
       <div className="c-blogAuthor c-section b-margin-bottom-d60-m40">
-        <p className="componentTitle">About the Author{authorData.length > 1 ? 's' : ''}</p>
+        <p className="blogAuthor-title">About the Author{authorData.length > 1 ? 's' : ''}</p>
         <div className="blogAuthor-content">
           {authorData.map((val, index) => (
             <React.Fragment key={`blog-author-${index}`}>
-              <div className="row">
+              <div className="b-flexRow">
                 {authorData[index].image.url && (
-                  <div className="imageContainer">
+                  <div className="content-profileImage">
                     <img src={authorData[index].image.url} alt={`${authorData[index].name}'s Profile Picture`} />
                   </div>
                 )}
-                <p className="authorName">{authorData[index].name}</p>
+                <p className="content-authorName">{authorData[index].name}</p>
               </div>
               {authorData.length < 2 && authorData[index].description && (
-                <p className="authorDescription">{authorData[index].description}</p>
+                <div className="b-flexRow">
+                  <p className="content-authorDescription">{authorData[index].description}</p>
+                </div>
+              )}
+              {authorData.length < 2 && (
+                <div className="b-flexRow b-flexCenter">
+                  {authorData[index].social_links[2].url && <a className="btn-facebook" href={authorData[index].social_links[2].url} />}
+                  {authorData[index].social_links[3].url && <a className="btn-twitter" href={authorData[index].social_links[3].url} />}
+                </div>
               )}
             </React.Fragment>
           ))}
