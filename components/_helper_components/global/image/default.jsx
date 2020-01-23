@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Caption from '../caption/default.jsx';
 import './default.scss';
+import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
-const Image = ({ imageLocation, src, imageMarginBottom }) => {
-  const [toggleButton, setToggle] = useState(false);
-
+const Image = ({ width, height, src }) => {
   const { url, caption, credits } = src || null;
+  const [imageSrc, setImageSrc] = useState('');
+
+  useEffect(() => {
+    setImageSrc(imageResizer(url, width, height));
+  }, []);
 
   let mainCredit = null;
   let secondaryCredit = null;
@@ -15,42 +20,26 @@ const Image = ({ imageLocation, src, imageMarginBottom }) => {
   }
 
   let giveCredit = '';
-  if (mainCredit.length > 1) {
+  if (mainCredit && mainCredit.length > 1) {
     giveCredit = `Photo: ${mainCredit}`;
-  } else if (secondaryCredit.length > 1) {
+  } else if (secondaryCredit && secondaryCredit.length > 1) {
     giveCredit = `Photo: ${secondaryCredit}`;
   }
 
-  const toggle = () => {
-    setToggle(!toggleButton);
-  };
-
   return (
-    <div className={`image-${imageLocation} c-image-component ${imageMarginBottom}`}>
+    <div className="c-image-component">
       <div className="image-component-image">
-        <img src={url} alt={caption} />
-        <div className={`c-caption ${toggleButton ? 'is-active' : ''}`}>
-          <div className="photo-caption-btn" onClick={toggle}>
-            <div className="fill-line fill-line-long"></div>
-            <div className="fill-line"></div>
-            <div className="fill-line fill-line-long"></div>
-            <div className="fill-line"></div>
-            <div className="fill-line fill-line-long"></div>
-          </div>
-          <div className="photo-caption">
-            <div className="photo-caption-text">{caption}</div>
-            <p className="photo-credit-text-mobile">{giveCredit}</p>
-          </div>
-        </div>
+        <img src={imageSrc} alt={caption} />
+        <Caption src={src} />
       </div>
-      <p className="photo-credit-text-desktop">{giveCredit}</p>
+      <p className="photo-credit-text">{giveCredit}</p>
     </div>
   );
 };
 
 Image.propTypes = {
-  imageLocation: PropTypes.oneOf(['head', 'breaking', 'thumbnail']),
-  src: PropTypes.object,
-  imageMarginBottom: PropTypes.string,
+  src: PropTypes.object.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
 };
 export default Image;

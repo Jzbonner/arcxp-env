@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'fusion:prop-types';
-import ArcAdLib from './children/arcAdLib';
+import ArcAdLib from './children/ArcAdLib';
 
 const AdSetup = ({
   id, slotName, dimensions, breakpoints, refresh, targeting, className, prerender, dfpId,

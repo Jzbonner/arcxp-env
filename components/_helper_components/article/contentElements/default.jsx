@@ -17,6 +17,9 @@ const ContentElements = ({ contentElements }) => (
   <div className="c-contentElements">
     {contentElements.map((element) => {
       switch (element.type) {
+        // case 'div':
+        // returns inserted ads
+        //  return element;
         case 'quote':
           return <BlockQuote contentElements={element.content_elements} citation={element.citation} />;
         case 'correction':
@@ -28,7 +31,8 @@ const ContentElements = ({ contentElements }) => (
         case 'header':
           return <Header src={element} />;
         case 'image':
-          return <Image imageLocation="thumbnail" src={element} imageMarginBottom="b-margin-bottom-d60-m40" />;
+          // a height of 0 makes the height proportional to the width
+          return <Image width={800} height={0} src={element} />;
         case 'text':
           return <Paragraph src={element} />;
         case 'interstitial_link':
@@ -49,7 +53,7 @@ const ContentElements = ({ contentElements }) => (
 );
 
 ContentElements.propTypes = {
-  contentElements: PropTypes.Array,
+  contentElements: PropTypes.array,
 };
 
 export default ContentElements;

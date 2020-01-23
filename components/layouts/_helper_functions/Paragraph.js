@@ -1,3 +1,5 @@
+import isNotBR from './BR';
+
 const paragraphTypes = ['text', 'video', 'image', 'raw_html', 'table', 'gallery', 'oembed_response'];
 
 export const isParagraph = type => paragraphTypes.includes(type);
@@ -8,7 +10,7 @@ export const paragraphCounter = (elements = []) => {
   elements.forEach((element) => {
     const { type } = element || {};
 
-    if (isParagraph(type)) {
+    if (isParagraph(type) && isNotBR(element)) {
       count += 1;
     }
   });
