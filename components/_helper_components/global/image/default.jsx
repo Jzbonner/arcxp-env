@@ -15,9 +15,9 @@ const Image = ({ imageLocation, src, imageMarginBottom }) => {
   }
 
   let giveCredit = '';
-  if (mainCredit.length > 1) {
+  if (mainCredit && mainCredit.length > 1) {
     giveCredit = `Photo: ${mainCredit}`;
-  } else if (secondaryCredit.length > 1) {
+  } else if (secondaryCredit && secondaryCredit.length > 1) {
     giveCredit = `Photo: ${secondaryCredit}`;
   }
 

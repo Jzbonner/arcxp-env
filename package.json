@@ -134,6 +134,12 @@
           "devDependencies": true
         }
       ],
+      "import/extensions": ["warning", "ignorePackages", 
+        {
+          "js": "never",
+          "jsx": "never"
+        }
+      ],
       "max-len": [
         "error",
         140

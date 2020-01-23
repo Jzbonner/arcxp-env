@@ -4,9 +4,6 @@ import './default.scss';
 
 const Paragraph = ({ src }) => {
   const { content } = src;
-  if (content === '<br/>') {
-    return null;
-  }
   return <p className="story-text b-margin-bottom-d60-m40" dangerouslySetInnerHTML={{ __html: content }} />;
 };
 

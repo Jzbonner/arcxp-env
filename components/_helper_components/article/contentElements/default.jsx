@@ -17,6 +17,9 @@ const ContentElements = ({ contentElements }) => (
   <div className="c-contentElements">
     {contentElements.map((element) => {
       switch (element.type) {
+        // case 'div':
+        // returns inserted ads
+        //  return element;
         case 'quote':
           return <BlockQuote contentElements={element.content_elements} citation={element.citation} />;
         case 'correction':
@@ -49,7 +52,7 @@ const ContentElements = ({ contentElements }) => (
 );
 
 ContentElements.propTypes = {
-  contentElements: PropTypes.Array,
+  contentElements: PropTypes.array,
 };
 
 export default ContentElements;

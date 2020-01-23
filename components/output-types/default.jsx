@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { connext } from 'fusion:environment';
 import ConnextInit from '../_helper_components/global/connext/default.jsx';
+import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
+import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
+
 
 const DefaultOutputType = (props) => {
   const {
@@ -14,8 +17,13 @@ const DefaultOutputType = (props) => {
     Fusion,
     Libs,
     MetaTags,
+    globalContent,
   } = props;
   const { isEnabled = false } = connext;
+  const {
+    type,
+  } = globalContent;
+
   return (
     <html>
       <head>
@@ -23,6 +31,7 @@ const DefaultOutputType = (props) => {
         <MetaTags />
         <Libs />
         <CssLinks />
+        <TaboolaHeader type={type}/>
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -30,6 +39,7 @@ const DefaultOutputType = (props) => {
       <body>
         <div id="fusion-app">{children}</div>
         <Fusion />
+        <TaboolaFooter type ={type}/>
         {isEnabled && <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <script type="text/javascript" src="https://loader-cdn.azureedge.net/stage/ajc/loader.min.js"></script>
@@ -50,6 +60,7 @@ DefaultOutputType.propTypes = {
   Fusion: PropTypes.func,
   Libs: PropTypes.array,
   MetaTags: PropTypes.object,
+  globalContent: PropTypes.object,
 };
 
 export default DefaultOutputType;
