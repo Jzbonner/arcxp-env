@@ -1,0 +1,118 @@
+@import "../../../../src/styles/base/breakpoints";
+@import "../../../../src/styles/base/fonts";
+@import "../../../../src/styles/base/mixins";
+
+///////////////
+// Default caption styles. Default scenario is assumed to be as part of thumbnail in main content.
+/////////////
+.c-caption {
+  position: absolute;
+  z-index: 1;
+  width: calc(100% - 3.75rem);
+  top: 1.875rem;
+  right: 1.875rem;
+  @include breakpoint(desktop-sm) {
+    width: calc(100% - 6.25rem);
+    top: 3.125rem;
+    right: 3.125rem;
+  }
+  &.is-active {
+    .photo-caption-btn {
+      transform: rotate(90deg);
+    }
+    .photo-caption {
+      opacity: 1;
+    }
+  }
+  .photo-caption-btn {
+    position: absolute;
+    display: block;
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    background: linear-gradient(to top, #04befe, #4481eb);
+    top: -1.25rem;
+    right: -1.25rem;
+    z-index: 1;
+    cursor: pointer;
+    transition: transform 0.5s;
+    box-shadow: 0 2px 4px 0 rgba(149, 149, 149, 0.5);
+    padding: 12px;
+    box-sizing: border-box;
+    @include breakpoint(desktop-sm) {
+      width: 61px;
+      height: 61px;
+      padding: 18px;
+      top: -1.875rem;
+      right: -1.875rem;
+    }
+
+    .fill-line {
+      width: 10px;
+      height: 1px;
+      margin-bottom: 3px;
+      background: #fff;
+      @include breakpoint(desktop-sm) {
+        width: 15.9px;
+        margin-bottom: 4px;
+        height: 2px;
+      }
+      &.fill-line-long {
+        width: 16.4px;
+        @include breakpoint(desktop-sm) {
+          width: 24.8px;
+          height: 2px;
+        }
+      }
+    }
+  }
+
+  .photo-caption {
+    opacity: 0;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.75s;
+    padding: 10px;
+    .photo-caption-text {
+      color: #fff;
+      padding: 20px;
+      letter-spacing: normal;
+      @include text-styles(1rem, 1.5, "Gordita");
+    }
+    .photo-credit-text {
+      display: none;
+    }
+  }
+}
+
+///////////////
+//styles for when images are on other areas besides main content. For example, the headline.
+///////////////
+.article-headline-component {
+  .photo-caption {
+    .photo-caption-text {
+      @include text-styles(0.875em, 1.58, "Gordita");
+      @include text-styles-tablet(1.25em, 1, "Gordita");
+    }
+    .photo-credit-text {
+      position: static;
+      text-align: right;
+      color: white;
+      margin: 0;
+      display: block;
+      @include text-styles(0.75rem, 1, "Gordita");
+      @include breakpoint(desktop-sm) {
+        display: none;
+      }
+    }
+  }
+  .c-caption {
+    @include breakpoint(desktop-sm) {
+      // 100% reduces caption to match the width of the image component
+      // 3.5rem accounts for the  right: 3.5em positioning of the caption
+      // 6vw ensures the distance between the caption and headline container is always equal to the overlap of the headline over the image, which is -3vw.
+      width: calc(100% - 3.125rem - 6vw);
+    }
+  }
+}

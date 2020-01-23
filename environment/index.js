@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
-export default {
+module.exports = {
+  RESIZER_SECRET_KEY: 'Fmkgru2rZ2uPZ5wXs7B2HbVDHS2SZuA7',
   taboolaID: {
     boapPTD: `[1110597, 1099013, // ajc qa/prod
     ]`,
