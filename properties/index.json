@@ -1,9 +1,11 @@
 {
   "dfp_id": 21849707860,
   "siteName": "AJC",
-  "siteDomainURL": "https://org.website",
-  "twitterURL": "https://twitter.com/orgUsername",
-  "facebookURL": "https://www.facebook.com/orgUsername",
-  "instagramURL": "https://www.instagram.com/orgUsername",
+  "siteDomainURL": "https://www.ajc.com",
+  "twitterURL": "https://twitter.com/intent/tweet?url=",
+  "facebookURL": "https://www.facebook.com/share.php?u=",
+  "pinterestURL": "https://www.pinterest.com/pin/create/button/?url=",
+  "redditURL": "https://www.reddit.com/submit?url=",
+  "mail": "mailto:?Subject=",
   "sites": ["ajc"]
 }

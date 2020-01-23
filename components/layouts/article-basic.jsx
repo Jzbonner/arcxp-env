@@ -9,6 +9,7 @@ import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 import Section from '../_helper_components/article/section/Section.jsx';
 import TaboolaFeed from '../features/taboolaFeed/default';
+import StickyNav from '../_helper_components/article/stickyNav/default';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 
@@ -27,7 +28,9 @@ const StoryPageLayout = () => {
     promo_items: promoItems,
     headlines,
     label,
+    comments,
     taxonomy,
+    canonical_url: articleURL,
     subheadlines,
     credits,
     type,
@@ -59,6 +62,13 @@ const StoryPageLayout = () => {
           </div>
           <div className="b-placeholder c-subscribe">Support Local Journalism. Subscribe today for 99¢.</div>
         </div>
+        <StickyNav
+          articleURL={articleURL}
+          headlines={headlines}
+          comments={comments}
+          promoItems={promoItems}
+          contentElements={contentElements}
+        />
       </header>
 
       <main>

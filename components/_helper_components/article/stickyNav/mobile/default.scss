@@ -1,0 +1,15 @@
+.stickyNav-mobile {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: 71px;
+    background: #f8f8f8;
+    z-index: 999;
+    opacity: 0.98;
+    border: 1px solid #d0d0d0;
+}
