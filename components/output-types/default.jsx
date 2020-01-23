@@ -1,12 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-<<<<<<< HEAD
-import { fbPagesId } from 'fusion:environment';
-=======
-import { connext } from 'fusion:environment';
+import { fbPagesId, connext } from 'fusion:environment';
 import ConnextInit from '../_helper_components/global/connext/default.jsx';
->>>>>>> origin/dev
 import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
 import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
 
