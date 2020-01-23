@@ -25,14 +25,20 @@ const findAPMonth = (month = 12) => {
 
 const TimeStamp = ({ firstPublishDate, displayDate, isHideTimestampTrue }) => {
   let timeStamp;
+  let isUpdated;
 
   if (!firstPublishDate && !displayDate) return null;
   if (isHideTimestampTrue === 'Yes') return null;
 
-  const isUpdated = !!firstPublishDate;
+  if (displayDate === firstPublishDate) {
+    isUpdated = false;
+  } else {
+    isUpdated = true;
+  }
+
   const now = new Date();
   const nowInMs = now.getTime();
-  const pub = isUpdated ? new Date(firstPublishDate) : new Date(displayDate);
+  const pub = isUpdated ? new Date(displayDate) : new Date(firstPublishDate);
   const pubInMs = pub.getTime();
   const timeAgoInMs = Math.floor(nowInMs - pubInMs);
   const minutes = Math.floor(timeAgoInMs / 60000);
