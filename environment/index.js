@@ -7,4 +7,14 @@ module.exports = {
     moapPTD: `[1110596, 1099909, // ajc qa/prod
     ]`,
   },
+  connext: {
+    isEnabled: true,
+    clientCode: 'ajc',
+    environment: 'stage',
+    siteCode: 'AJC',
+    configCode: 'AJC_STAGE_DEFAULT',
+    debug: true,
+    tagManager: 'GTM',
+    containerId: 'GTM-W3VLHBK',
+  },
 };

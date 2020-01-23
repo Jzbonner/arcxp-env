@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
-import Image from '../../global/image/default.jsx';
+import Image from '../../global/image/default';
 
 const Headline = ({ basicItems = {}, headlines = {} }) => {
   let promoData = {};
