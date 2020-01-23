@@ -1,4 +1,7 @@
 @import '../../../../../resources/fonts/icon-fonts/nav/stickyNav/stickyNav.scss';
+@import "../../../../../src/styles/base/fonts";
+@import "../../../../../src/styles/base/breakpoints";
+@import "../../../../../src/styles/base/mixins";
 
 .stickyNav-desktop {
     display: block;
@@ -19,7 +22,6 @@
         position: relative;
         display: flex;
         align-items: center;
-        margin: 0;
         padding: 10px 0;
         width: 100%;
         height: 100%;
@@ -47,9 +49,21 @@
                 height: 35px;
             }
 
+            &:first-child {
+                margin-left: 20px;
+            }
+
             &:last-child {
                 position: absolute;
                 right: 20px;
+
+                a {
+                    .stickyNav-user {
+                        @include text-styles(1.125em, 1, "Gordita");
+                        color: #2e81b7;
+                        font-weight: 600;
+                    }
+                }
             }
         }
     }

@@ -5,14 +5,47 @@ import logo from '../../../../../resources/images/stickyNav-logo.svg';
 import avatar from '../../../../../resources/images/stickyNav-avatar.svg';
 import './default.scss';
 
-const StickyDesktopNav = ({ articleURL, headlines, comments }) => {
+const StickyDesktopNav = ({
+  articleURL, headlines, comments, promoItems, contentElements,
+}) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
   } = getProperties();
 
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
+  const { url: featuredImage } = promoItems ? promoItems.basic : {};
+  const { url: videoThumbnail } = promoItems.basic.promo_image ? promoItems.basic.promo_image : {};
+  const { url: galleryThumbnail } = promoItems.basic.promo_items ? promoItems.basic.promo_items.basic : {};
+  const { url: inlineImage } = contentElements ? contentElements[0] : {};
+  const { url: inlineVideoThumbnail } = contentElements[0].promo_image ? contentElements[0].promo_image : {};
+  // secondary / inline video thumbnail
+  // Pinterest Image rendering logic
+  const renderImage = () => {
+    if (featuredImage) {
+      return featuredImage;
+    }
+    if (videoThumbnail) {
+      return videoThumbnail;
+    }
+    if (galleryThumbnail) {
+      return galleryThumbnail;
+    }
+    if (inlineImage) {
+      return inlineImage;
+    }
+    if (inlineVideoThumbnail) {
+      return inlineVideoThumbnail;
+    }
+    return logo;
+  };
 
+  const shareLinkFacebook = `${facebookURL}${siteDomainURL}${articleURL}`;
+  const shareLinkTwitter = `${twitterURL}${siteDomainURL}${articleURL}&text=${articleHeadline}`;
+  const shareLinkPinterest = `${pinterestURL}${siteDomainURL}${articleURL}&media=${renderImage()}&description=${articleHeadline}`;
+  const shareLinkReddit = `${redditURL}${siteDomainURL}${articleURL}&title=${articleHeadline}`;
+  const shareLinkEmail = `${mail}${articleHeadline}&body=${siteDomainURL}${articleURL}`;
+  const loginLink = `${siteDomainURL}/login`;
   return (
     <div className="c-stickyNav stickyNav-desktop">
       <ul className="c-stickyNav-list">
@@ -22,19 +55,19 @@ const StickyDesktopNav = ({ articleURL, headlines, comments }) => {
           </a>
         </li>
         <li className="stickyNav-item">
-          <a href={`${facebookURL}${siteDomainURL}${articleURL}`} className="sticky-nav-icon facebook-icon"></a>
+          <a href={shareLinkFacebook} className="sticky-nav-icon facebook-icon" target="__blank"></a>
         </li>
         <li className="stickyNav-item">
-          <a href={`${twitterURL}${siteDomainURL}${articleURL}&text=${articleHeadline}`} className="sticky-nav-icon twitter-icon"></a>
+          <a href={shareLinkTwitter} className="sticky-nav-icon twitter-icon" target="__blank"></a>
         </li>
         <li className="stickyNav-item">
-          <a href={`${pinterestURL}${siteDomainURL}${articleURL}&text=${articleHeadline}`} className="sticky-nav-icon pinterest-icon"></a>
+          <a href={shareLinkPinterest} className="sticky-nav-icon pinterest-icon" target="__blank"></a>
         </li>
         <li className="stickyNav-item">
-          <a href={`${redditURL}${siteDomainURL}${articleURL}&text=${articleHeadline}`} className="sticky-nav-icon reddit-icon"></a>
+          <a href={shareLinkReddit} className="sticky-nav-icon reddit-icon" target="__blank"></a>
         </li>
         <li className="stickyNav-item">
-          <a href={`${mail}${articleHeadline}&body=${siteDomainURL}${articleURL}`} className="sticky-nav-icon mail-icon"></a>
+          <a href={shareLinkEmail} className="sticky-nav-icon mail-icon" target="__blank"></a>
         </li>
         {commentsEnabled ? (
           <li className="stickyNav-item">
@@ -42,9 +75,9 @@ const StickyDesktopNav = ({ articleURL, headlines, comments }) => {
           </li>
         ) : null}
         <li className="stickyNav-item">
-          <a href={`${siteDomainURL}/login`}>
+          <a href={loginLink}>
             <img src={avatar} className="stickyNav-item login-avatar" alt={`${siteName} avatar`} />
-            <span>Log In</span>
+            <span className="stickyNav-user">Log In</span>
           </a>
         </li>
       </ul>
@@ -56,6 +89,8 @@ StickyDesktopNav.propTypes = {
   articleURL: PropTypes.string,
   headlines: PropTypes.object,
   comments: PropTypes.object,
+  promoItems: PropTypes.object,
+  contentElements: PropTypes.array,
 };
 
 export default StickyDesktopNav;

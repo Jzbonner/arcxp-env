@@ -33,8 +33,6 @@ const StoryPageLayout = () => {
     credits,
   } = globalContent || {};
 
-  console.log(globalContent);
-
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
 
@@ -61,7 +59,13 @@ const StoryPageLayout = () => {
           </div>
           <div className="b-placeholder c-subscribe">Support Local Journalism. Subscribe today for 99¢.</div>
         </div>
-        <StickyNav articleURL={articleURL} headlines={headlines} comments={comments} />
+        <StickyNav
+          articleURL={articleURL}
+          headlines={headlines}
+          comments={comments}
+          promoItems={promoItems}
+          contentElements={contentElements}
+        />
       </header>
 
       <main>
