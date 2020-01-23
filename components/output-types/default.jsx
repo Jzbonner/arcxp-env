@@ -1,20 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
+import { fbPagesId, connext } from 'fusion:environment';
+import ConnextInit from '../_helper_components/global/connext/default.jsx';
 import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
 import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
 import NativoScripts from '../_helper_components/article/nativo/NativoScripts.jsx';
 
+
 const DefaultOutputType = (props) => {
   const {
-    arcSite = getProperties().sites[0], children, contextPath, deployment, CssLinks, Fusion, Libs, MetaTags, globalContent,
+    arcSite = getProperties().sites[0],
+    children,
+    contextPath,
+    deployment,
+    CssLinks,
+    Fusion,
+    Libs,
+    MetaTags,
+    globalContent,
   } = props;
-  const { type } = globalContent;
+  const {
+    isEnabled = false,
+    clientCode,
+    environment,
+  } = connext;
+  const {
+    type,
+  } = globalContent || { type: null };
 
   return (
     <html>
       <head>
-        <title>Fusion Article</title>
+        <title>{arcSite}</title>
         <MetaTags />
         <Libs />
         <CssLinks />
@@ -22,7 +40,8 @@ const DefaultOutputType = (props) => {
         <TaboolaHeader type={type} />
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
-        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="fb:pages" content={fbPagesId} />
       </head>
       <body>
         <div id="fusion-app">{children}</div>

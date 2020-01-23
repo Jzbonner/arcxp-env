@@ -1,14 +1,22 @@
-@import "./../../../../src/styles/base/";
+@import "./../../../../src/styles/base/breakpoints";
+@import '../../../../src/styles/base/fonts';
+@import '../../../../src/styles/base/mixins';
 
 .section-label {
-  font: 500 0.75em "Gordita", sans-serif;
+  @include text-styles(0.75em, 1, "Gordita");
+  font-weight: 500;
   text-transform: uppercase;
   color: #000000;
   width: auto;
   letter-spacing: normal;
+  height: 21px;
+  display: flex;
+  align-items: center;
+  margin-right: 6px;
 
-  @include breakpoint(tablet) {
-    font-size: 1em;
+  @include breakpoint(desktop-sm) {
+    @include text-styles(1em, 1, "Gordita");
+    height: 26px;
   }
   &.section-label-link {
     color: #2e81b7;
