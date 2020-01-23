@@ -12,14 +12,15 @@ import Oembed from './components/social_url/default.jsx';
 import Table from './components/table/default.jsx';
 import Video from './components/video/default.jsx';
 import Header from './components/header/default.jsx';
+import Divider from './components/divider/default.jsx';
 
 const ContentElements = ({ contentElements }) => (
   <div className="c-contentElements">
     {contentElements.map((element) => {
       switch (element.type) {
-        // case 'div':
-        // returns inserted ads
-        //  return element;
+        case 'div':
+          // returns inserted ads
+          return element;
         case 'quote':
           return <BlockQuote contentElements={element.content_elements} citation={element.citation} />;
         case 'correction':
@@ -32,13 +33,15 @@ const ContentElements = ({ contentElements }) => (
           return <Header src={element} />;
         case 'image':
           // a height of 0 makes the height proportional to the width
-          return <Image width={800} height={0} src={element} />;
+          return <Image width={800} height={0} src={element} imageMarginBottom="b-margin-bottom-d60-m40" />;
         case 'text':
           return <Paragraph src={element} />;
         case 'interstitial_link':
           return <InterstitialLink src={element} />;
         case 'list':
           return <List src={element} />;
+        case 'divider':
+          return <Divider />;
         case 'oembed_response':
           return <Oembed src={element} />;
         case 'table':

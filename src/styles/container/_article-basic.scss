@@ -13,6 +13,7 @@
 
 .c-logo {
   min-height: 80px;
+
   @include breakpoint(desktop-sm) {
     min-height: 115px;
   }
@@ -45,6 +46,7 @@
 .c-subscribe {
   height: 50px;
   display: none;
+
   @include breakpoint(desktop-sm) {
     display: block;
   }
@@ -58,6 +60,7 @@
 .c-taboola {
   margin: 0 auto;
   width: 83.5%;
+
   @include breakpoint(desktop-sm) {
     width: 67.5%;
   }

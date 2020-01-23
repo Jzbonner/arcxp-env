@@ -7,6 +7,7 @@ module.exports = {
     moapPTD: `[1110596, 1099909, // ajc qa/prod
     ]`,
   },
+  fbPagesId: '13310147298', // ajc
   connext: {
     isEnabled: true,
     clientCode: 'ajc',
