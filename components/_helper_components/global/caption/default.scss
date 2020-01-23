@@ -38,6 +38,7 @@
     transition: transform 0.5s;
     box-shadow: 0 2px 4px 0 rgba(149, 149, 149, 0.5);
     padding: 12px;
+    box-sizing: border-box;
     @include breakpoint(desktop-sm) {
       width: 61px;
       height: 61px;
@@ -75,9 +76,12 @@
     padding: 10px;
     .photo-caption-text {
       color: #fff;
-      padding: 4vw;
+      padding: 20px;
       letter-spacing: normal;
       @include text-styles(1rem, 1.5, "Gordita");
+    }
+    .photo-credit-text {
+      display: none;
     }
   }
 }
