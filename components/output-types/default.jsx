@@ -19,10 +19,14 @@ const DefaultOutputType = (props) => {
     MetaTags,
     globalContent,
   } = props;
-  const { isEnabled = false } = connext;
+  const {
+    isEnabled = false,
+    clientCode,
+    environment,
+  } = connext;
   const {
     type,
-  } = globalContent;
+  } = globalContent || { type: null };
 
   return (
     <html>
@@ -42,7 +46,7 @@ const DefaultOutputType = (props) => {
         <TaboolaFooter type ={type}/>
         {isEnabled && <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script type="text/javascript" src="https://loader-cdn.azureedge.net/stage/ajc/loader.min.js"></script>
+            <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${environment}/${clientCode}/loader.min.js`}></script>
             <ConnextInit />
           </>
         }
