@@ -4,7 +4,9 @@ import Caption from '../caption/default.jsx';
 import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
-const Image = ({ width, height, src }) => {
+const Image = ({
+  width, height, src, imageMarginBottom,
+}) => {
   const { url, caption, credits } = src || null;
   const [imageSrc, setImageSrc] = useState('');
 
@@ -27,7 +29,7 @@ const Image = ({ width, height, src }) => {
   }
 
   return (
-    <div className="c-image-component">
+    <div className={`c-image-component ${imageMarginBottom}`}>
       <div className="image-component-image">
         <img src={imageSrc} alt={caption} />
         <Caption src={src} />
@@ -41,5 +43,6 @@ Image.propTypes = {
   src: PropTypes.object.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
+  imageMarginBottom: PropTypes.string,
 };
 export default Image;

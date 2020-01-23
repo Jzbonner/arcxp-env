@@ -10,6 +10,7 @@ import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 import Section from '../_helper_components/article/section/Section.jsx';
 import Nativo from '../_helper_components/article/nativo/Nativo.jsx';
+import BlogAuthor from '../_helper_components/article/blogAuthor/blogAuthor';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 
@@ -26,6 +27,7 @@ const StoryPageLayout = () => {
     display_date: displayDate,
     content_elements: contentElements,
     promo_items: promoItems,
+    subtype,
     headlines,
     label,
     taxonomy,
@@ -80,7 +82,6 @@ const StoryPageLayout = () => {
         <article>
           <Section elements={contentElements} stopIndex={1} />
           <Section elements={contentElements} startIndex={1} stopIndex={3} rightRailAd={ExampleAdComponent} />
-
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
 
           <Section
@@ -92,6 +93,8 @@ const StoryPageLayout = () => {
               { insertAfterParagraph: 5, ad: ExampleAdInsertion2 },
             ]}
           />
+
+          <BlogAuthor subtype={subtype} authorData={authorData} />
           <Nativo elements={contentElements} controllerClass="story-nativo_placeholder--boap" />
           <div className="c-taboola">
             <TaboolaFeed type={type} />
