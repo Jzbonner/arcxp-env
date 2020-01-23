@@ -1,16 +1,10 @@
-@import "./../../../../src/styles/base/";
+@import "./../../../../src/styles/base/breakpoints";
 
 .article-timestamp {
-  height: 24px;
   font-family: "Gordita";
-  font-size: 1.125em;
+  font-size: .75rem;
   line-height: normal;
   letter-spacing: normal;
   text-transform: capitalize;
   color: #9b9b9b;
-
-  @include breakpoint(mobile) {
-    height: 21px;
-    font-size: 1em;
-  }
 }

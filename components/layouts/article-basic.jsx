@@ -32,7 +32,6 @@ const StoryPageLayout = () => {
     credits,
     type,
   } = globalContent || {};
-
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
 
@@ -62,7 +61,7 @@ const StoryPageLayout = () => {
       </header>
 
       <main>
-        <header className="b-margin-bottom-d15-m10">
+        <header className="b-margin-bottom-d30-m20">
           <div className="c-fixed-width">
             <Headline headlines={headlines} basicItems={basicItems} />
           </div>

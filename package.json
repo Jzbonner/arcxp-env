@@ -121,7 +121,9 @@
       }
     },
     "rules": {
-      "import/extensions": ["warning", "ignorePackages",
+      "import/extensions": [
+        "warning",
+        "ignorePackages",
         {
           "js": "never",
           "jsx": "never"
@@ -132,14 +134,6 @@
         "error",
         {
           "devDependencies": true
-        }
-      ],
-      "import/extensions": [
-        "warning",
-        "ignorePackages",
-        {
-          "js": "never",
-          "jsx": "never"
         }
       ],
       "max-len": [
