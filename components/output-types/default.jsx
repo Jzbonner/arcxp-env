@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
 import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
+import NativoScripts from '../_helper_components/article/nativo/NativoScripts.jsx';
 
 const DefaultOutputType = (props) => {
   const {
     arcSite = getProperties().sites[0], children, contextPath, deployment, CssLinks, Fusion, Libs, MetaTags, globalContent,
   } = props;
-  const {
-    type,
-  } = globalContent;
+  const { type } = globalContent;
 
   return (
     <html>
@@ -19,7 +18,8 @@ const DefaultOutputType = (props) => {
         <MetaTags />
         <Libs />
         <CssLinks />
-        <TaboolaHeader type={type}/>
+        <NativoScripts />
+        <TaboolaHeader type={type} />
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -27,7 +27,7 @@ const DefaultOutputType = (props) => {
       <body>
         <div id="fusion-app">{children}</div>
         <Fusion />
-        <TaboolaFooter type ={type}/>
+        <TaboolaFooter type={type} />
       </body>
     </html>
   );

@@ -10,8 +10,8 @@ const Caption = ({ src }) => {
     setToggle(!toggleButton);
   };
 
-  let mainCredit = null;
-  let secondaryCredit = null;
+  let mainCredit = {};
+  let secondaryCredit = {};
   if (credits) {
     mainCredit = credits.affiliation && credits.affiliation.length ? credits.affiliation[0].name : '';
     secondaryCredit = credits.by && credits.by.length ? credits.by[0].name : '';
@@ -42,7 +42,7 @@ const Caption = ({ src }) => {
 };
 
 Caption.propTypes = {
-  src: PropTypes.obj,
+  src: PropTypes.object,
 };
 
 export default Caption;
