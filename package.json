@@ -128,7 +128,9 @@
           "devDependencies": true
         }
       ],
-      "import/extensions": ["warning", "ignorePackages", 
+      "import/extensions": [
+        "warning",
+        "ignorePackages",
         {
           "js": "never",
           "jsx": "never"
