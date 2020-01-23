@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
+<<<<<<< HEAD
 import { fbPagesId } from 'fusion:environment';
+=======
+import { connext } from 'fusion:environment';
+import ConnextInit from '../_helper_components/global/connext/default.jsx';
+>>>>>>> origin/dev
 import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
 import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
+
 
 const DefaultOutputType = (props) => {
   const {
@@ -17,6 +23,11 @@ const DefaultOutputType = (props) => {
     MetaTags,
     globalContent,
   } = props;
+  const {
+    isEnabled = false,
+    clientCode,
+    environment,
+  } = connext;
   const {
     type,
   } = globalContent || { type: null };
@@ -38,6 +49,12 @@ const DefaultOutputType = (props) => {
         <div id="fusion-app">{children}</div>
         <Fusion />
         {type && <TaboolaFooter type={type}/>}
+        {isEnabled && <>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${environment}/${clientCode}/loader.min.js`}></script>
+            <ConnextInit />
+          </>
+        }
       </body>
     </html>
   );
