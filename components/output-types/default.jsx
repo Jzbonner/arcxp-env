@@ -5,29 +5,14 @@ import { fbPagesId, connext } from 'fusion:environment';
 import ConnextInit from '../_helper_components/global/connext/default.jsx';
 import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
 import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
-import NativoScripts from '../_helper_components/article/nativo/NativoScripts.jsx';
-
+import NativoScripts from '../_helper_components/article/nativo/nativoScripts';
 
 const DefaultOutputType = (props) => {
   const {
-    arcSite = getProperties().sites[0],
-    children,
-    contextPath,
-    deployment,
-    CssLinks,
-    Fusion,
-    Libs,
-    MetaTags,
-    globalContent,
+    arcSite = getProperties().sites[0], children, contextPath, deployment, CssLinks, Fusion, Libs, MetaTags, globalContent,
   } = props;
-  const {
-    isEnabled = false,
-    clientCode,
-    environment,
-  } = connext;
-  const {
-    type,
-  } = globalContent || { type: null };
+  const { isEnabled = false, clientCode, environment } = connext;
+  const { type } = globalContent || { type: null };
 
   return (
     <html>
@@ -37,7 +22,7 @@ const DefaultOutputType = (props) => {
         <Libs />
         <CssLinks />
         <NativoScripts />
-        <TaboolaHeader type={type} />
+        {type && <TaboolaHeader type={type} />}
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,7 +31,14 @@ const DefaultOutputType = (props) => {
       <body>
         <div id="fusion-app">{children}</div>
         <Fusion />
-        <TaboolaFooter type={type} />
+        {type && <TaboolaFooter type={type} />}
+        {isEnabled && (
+          <>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${environment}/${clientCode}/loader.min.js`}></script>
+            <ConnextInit />
+          </>
+        )}
       </body>
     </html>
   );
