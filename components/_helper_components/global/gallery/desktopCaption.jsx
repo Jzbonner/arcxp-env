@@ -3,18 +3,17 @@ import PropTypes from 'prop-types';
 
 const DesktopCaption = (props) => {
   const { data } = props;
-  const { elementData, isCaptionOn } = data;
-  const { credit, caption } = elementData;
+  const { elementData } = data;
+  const { credit = [], caption } = elementData;
 
   return (
-    <div className="gallery-caption-container hidden-small hidden-medium">
-    <div className="gallery-credit hidden-small hidden-medium">
-      {credit && credit[0] ? `Photo: ${credit[0].name}` : ''}
+    <div className="gallery-caption-container ">
+      {credit[0] && credit[0].name
+        ? <div className="gallery-credit ">
+          `Photo: ${credit[0].name}`
+    </div> : null}
+      {caption && <div className="gallery-caption "><span>{caption}</span></div>}
     </div>
-    {isCaptionOn ? (
-      <div className="gallery-caption hidden-small hidden-medium">{caption && <span>{caption}</span>}</div>
-    ) : null}
-  </div>
   );
 };
 

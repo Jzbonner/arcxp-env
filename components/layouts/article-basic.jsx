@@ -100,8 +100,8 @@ const StoryPageLayout = () => {
             ]}
           />
         </article>
+        <Gallery contentElements={contentElements} />
       </main>
-      <Gallery contentElements={contentElements} />
       <footer className="b-placeholder c-footer">Footer</footer>
     </>
   );

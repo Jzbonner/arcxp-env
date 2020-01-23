@@ -1,14 +1,11 @@
 import React from 'react';
 import GalleryItem from '../../../_helper_components/global/gallery/galleryItem.jsx';
 
-const createBaseGallery = (elements = [], states = {}, refHook) => {
+const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile) => {
   const {
     isStickyVisible, isMobile, isCaptionOn, currentIndex,
   } = states;
-  let isWindowMobile = false;
   let galleryData = null;
-
-  if (window.innerWidth <= 1023) isWindowMobile = true;
 
   const desktopCaptionData = [];
 

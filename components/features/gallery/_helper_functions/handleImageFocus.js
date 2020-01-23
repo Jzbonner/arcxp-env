@@ -6,8 +6,8 @@ const handleImageFocus = (arr = [], states = {}) => {
   const {
     isStickyVisible, isMobile, isCaptionOn, currentIndex,
   } = states;
-  const elements = arr;
-  const finalElements = elements.map((element) => {
+
+  const finalElements = arr.map((element) => {
     const elementItemData = { ...element.props.data };
     const parentStates = {
       isStickyVisible,
@@ -17,11 +17,7 @@ const handleImageFocus = (arr = [], states = {}) => {
 
     elementItemData.states = { ...parentStates };
 
-    if (currentIndex === element.props.data.index) {
-      elementItemData.states.isFocused = true;
-    } else {
-      elementItemData.states.isFocused = false;
-    }
+    elementItemData.states.isFocused = (currentIndex === element.props.data.index);
 
     return (
       <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`} />

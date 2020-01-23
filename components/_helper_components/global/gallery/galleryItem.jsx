@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const GalleryItem = (props) => {
-  const { data, refHook } = props;
+const GalleryItem = ({ data, refHook }) => {
   const {
-    url, alt, index, id, by, captionObj, states,
+    url, alt, index, id, by = [], captionObj, states,
   } = data;
   const { caption } = captionObj;
   const {
@@ -17,9 +16,9 @@ const GalleryItem = (props) => {
       data-index={index}
       key={url}
       className={`${isStickyVisible ? 'gallery-full-item' : 'gallery-image'} 
-      ${!isStickyVisible && isMobile ? 'inherit--width mosiac-container' : ''}`}>
+      ${!isStickyVisible && isMobile ? 'mosiac-container' : ''}`}>
       <img
-        className={`${!isStickyVisible && isMobile ? 'inherit--width mosiac-image' : ''} ${isFocused ? 'is-focused' : ''}`}
+        className={`${!isStickyVisible && isMobile ? 'mosiac-image' : ''} ${isFocused ? 'is-focused' : ''}`}
         src={url}
         alt={alt ? `${alt}` : ''}
       />
@@ -27,7 +26,7 @@ const GalleryItem = (props) => {
         isStickyVisible
           ? <div>
             <div className="gallery-credit">
-              {by && by[0] ? by[0].name : null}
+              {by[0] && by[0].name ? by[0].name : null}
             </div>
             {
               isCaptionOn

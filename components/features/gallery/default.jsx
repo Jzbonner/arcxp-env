@@ -69,7 +69,7 @@ const Gallery = (props) => {
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
     if (galleryEl.current && focusElement && elementData.length >= maxIndex) {
       // fixes initializing translate bug
-      if (focusElement.offsetWidth === 0) {
+      if (debugFixEl.current && focusElement.offsetWidth === 0) {
         translateAmount = parseInt(galleryFullWidth, 10)
           / 2 - parseInt(debugFixEl.current.offsetWidth, 10)
           / 2 - parseInt(debugFixEl.current.offsetLeft, 10);
@@ -158,9 +158,12 @@ const Gallery = (props) => {
   };
 
   const handleResizeEvent = () => {
-    if (!isMobile && !galleryMobileEl) calculateTranslateX();
-    if (window.innerWidth <= mobileBreakPoint) setMobileState(true);
-    if (window.innerWidth > mobileBreakPoint) setMobileState(false);
+    if (window.innerWidth <= mobileBreakPoint) {
+      setMobileState(true);
+    } else {
+      setMobileState(false);
+    }
+    if (!isMobile) calculateTranslateX();
     setCurrentAction(actions.RESIZE);
   };
 
@@ -269,6 +272,7 @@ const Gallery = (props) => {
     };
   }, []);
 
+
   // initializing the gallery w/ either propped or fetched content elements
   if ((contentElements || fetchedGalleryData) && (currentAction === actions.RESIZE || (!elementData && !mobileElementData))) {
     let isWindowMobile = false;
@@ -289,7 +293,7 @@ const Gallery = (props) => {
 
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
-    }, debugFixEl);
+    }, debugFixEl, isWindowMobile);
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData;
 
     if (!isWindowMobile) {
@@ -324,10 +328,12 @@ const Gallery = (props) => {
       mobileElemData = getMobileElements([...mobileElementData]);
     }
   }
+
   // init translate bug fix ~ run only once
-  if (elementData && captionData && galleryEl.current && currentAction === '' && debugFixEl.current.offsetWidth) {
+  if (elementData && !isMobile && galleryEl && debugFixEl && currentAction === '') {
     calculateTranslateX();
   }
+
   return (
     <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
       {
