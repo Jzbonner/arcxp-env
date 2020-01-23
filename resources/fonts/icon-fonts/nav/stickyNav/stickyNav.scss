@@ -25,11 +25,11 @@
     @include blue-button($dimension: 35px, $content: '\e90e', $font-size: 21px);
 }
 
-// &__down-arrow-icon {
-//     @include blue-button($dimension: 35px, $content: '\e90c', $font-size: 22px);
-// }
+.arrow-down-icon {
+    @include blue-button($dimension: 35px, $content: '\e90c', $font-size: 22px);
+}
 
-// &__up-arrow-icon {
-//     @include blue-button($dimension: 35px, $content: '\e903', $font-size: 22px);
-// }
+.arrow-up-icon {
+    @include blue-button($dimension: 35px, $content: '\e903', $font-size: 22px);
+}
 

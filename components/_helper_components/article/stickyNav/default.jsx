@@ -65,27 +65,36 @@ const StickyNav = ({
 
   if (currentScroll > startingPoint && currentWidth > minWidth) {
     return (
-      <StickyDesktopNav
-        articleURL={articleURL}
-        headlines={headlines}
-        comments={comments}
-        promoItems={promoItems}
-        contentElements={contentElements}
-        siteDomainURL={siteDomainURL}
-        shareLinkFacebook={shareLinkFacebook}
-        shareLinkTwitter={shareLinkTwitter}
-        shareLinkPinterest={shareLinkPinterest}
-        shareLinkReddit={shareLinkReddit}
-        shareLinkEmail={shareLinkEmail}
-        loginLink={loginLink}
-        siteName={siteName}
-        logo={logo}
-        commentsEnabled={commentsEnabled}
-      />
+      <div className="c-stickyNav">
+        <StickyDesktopNav
+          siteDomainURL={siteDomainURL}
+          shareLinkFacebook={shareLinkFacebook}
+          shareLinkTwitter={shareLinkTwitter}
+          shareLinkPinterest={shareLinkPinterest}
+          shareLinkReddit={shareLinkReddit}
+          shareLinkEmail={shareLinkEmail}
+          loginLink={loginLink}
+          siteName={siteName}
+          logo={logo}
+          commentsEnabled={commentsEnabled}
+        />
+      </div>
     );
   }
   if (currentScroll > startingPoint && currentWidth < minWidth) {
-    return <StickyMobileNav />;
+    return (
+      <div className="c-stickyNav">
+        <StickyMobileNav
+          commentsEnabled={commentsEnabled}
+          shareLinkFacebook={shareLinkFacebook}
+          shareLinkTwitter={shareLinkTwitter}
+          shareLinkPinterest={shareLinkPinterest}
+          shareLinkReddit={shareLinkReddit}
+          shareLinkEmail={shareLinkEmail}
+        />
+        ;
+      </div>
+    );
   }
   return null;
 };

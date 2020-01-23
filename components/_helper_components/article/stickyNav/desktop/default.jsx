@@ -15,7 +15,7 @@ const StickyDesktopNav = ({
   loginLink,
   logo,
 }) => (
-    <div className="c-stickyNav stickyNav-desktop">
+    <div className="c-stickyNav-desktop">
       <ul className="c-stickyNav-list">
         <li className="stickyNav-item">
           <a href={siteDomainURL}>
@@ -53,10 +53,6 @@ const StickyDesktopNav = ({
 );
 
 StickyDesktopNav.propTypes = {
-  articleURL: PropTypes.string,
-  comments: PropTypes.object,
-  promoItems: PropTypes.object,
-  contentElements: PropTypes.array,
   siteDomainURL: PropTypes.string,
   shareLinkFacebook: PropTypes.string,
   shareLinkTwitter: PropTypes.string,
