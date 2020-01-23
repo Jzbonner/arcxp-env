@@ -134,7 +134,9 @@
           "devDependencies": true
         }
       ],
-      "import/extensions": ["warning", "ignorePackages", 
+      "import/extensions": [
+        "warning",
+        "ignorePackages",
         {
           "js": "never",
           "jsx": "never"
@@ -217,7 +219,8 @@
   "homepage": "https://github.com/wapopartners/StarterPack-PageBuilder-Fusion-Features#readme",
   "dependencies": {
     "arcads": "^1.5.0",
-    "react-helmet": "^5.2.1",
-    "scriptjs": "^2.5.9"
+    "thumbor-lite": "^0.1.8",
+    "scriptjs": "^2.5.9",
+    "react-helmet": "^5.2.1"
   }
 }
