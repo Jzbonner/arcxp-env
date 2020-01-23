@@ -19,7 +19,7 @@ const DefaultOutputType = (props) => {
   } = props;
   const {
     type,
-  } = globalContent || {type: null};
+  } = globalContent || { type: null };
 
   return (
     <html>
