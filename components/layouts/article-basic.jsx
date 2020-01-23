@@ -8,7 +8,8 @@ import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 import Section from '../_helper_components/article/section/Section.jsx';
-import TaboolaFeed from '../features/taboolaFeed/default';
+import TaboolaFeed from '../features/taboolaFeed/default.jsx';
+import Nativo from '../_helper_components/article/nativo/Nativo.jsx';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 
@@ -80,7 +81,7 @@ const StoryPageLayout = () => {
           <Section elements={contentElements} stopIndex={1} />
           <Section elements={contentElements} startIndex={1} stopIndex={3} rightRailAd={ExampleAdComponent} />
 
-          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-d60-m40">Full Width Ad Container</div>
+          <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
 
           <Section
             elements={contentElements}
@@ -91,19 +92,9 @@ const StoryPageLayout = () => {
               { insertAfterParagraph: 5, ad: ExampleAdInsertion2 },
             ]}
           />
-
-          <div className="b-placeholder b-flexRow b-flexCenter c-fullWidthAd b-margin-bottom-d60-m40">Full Width Ad Container</div>
-          <Section
-            elements={contentElements}
-            startIndex={5}
-            rightRailAd={ExampleAdComponent}
-            insertedAds={[
-              { insertAfterParagraph: 12, ad: ExampleAdInsertion1 },
-              { insertAfterParagraph: 15, ad: ExampleAdInsertion2 },
-            ]}
-          />
+          <Nativo elements={contentElements} controllerClass="story-nativo_placeholder--boap" />
           <div className="c-taboola">
-            <TaboolaFeed type={type}/>
+            <TaboolaFeed type={type} />
           </div>
         </article>
       </main>
