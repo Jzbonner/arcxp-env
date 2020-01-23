@@ -17,12 +17,9 @@ const DefaultOutputType = (props) => {
     MetaTags,
     globalContent,
   } = props;
-  if (globalContent) {
-    const {
-      type,
-    } = globalContent;
-  }
-  const contentType = typeof type !== 'undefined' ? type : null;
+  const {
+    type,
+  } = globalContent || {type: null};
 
   return (
     <html>
@@ -31,9 +28,7 @@ const DefaultOutputType = (props) => {
         <MetaTags />
         <Libs />
         <CssLinks />
-        {contentType &&
-          <TaboolaHeader type={contentType}/>
-        }
+        {type && <TaboolaHeader type={type}/>}
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -42,9 +37,7 @@ const DefaultOutputType = (props) => {
       <body>
         <div id="fusion-app">{children}</div>
         <Fusion />
-        {contentType &&
-          <TaboolaFooter type={contentType}/>
-        }
+        {type && <TaboolaFooter type={type}/>}
       </body>
     </html>
   );
