@@ -16,9 +16,9 @@ const GalleryItem = ({ data, refHook }) => {
       data-index={index}
       key={url}
       className={`${isStickyVisible ? 'gallery-full-item' : 'gallery-image'} 
-      ${!isStickyVisible && isMobile ? 'mosiac-container' : ''}`}>
+      ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}`}>
       <img
-        className={`${!isStickyVisible && isMobile ? 'mosiac-image' : ''} ${isFocused ? 'is-focused' : ''}`}
+        className={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused ? 'is-focused' : ''}`}
         src={url}
         alt={alt ? `${alt}` : ''}
       />

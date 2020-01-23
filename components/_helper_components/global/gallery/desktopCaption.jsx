@@ -10,7 +10,7 @@ const DesktopCaption = (props) => {
     <div className="gallery-caption-container ">
       {credit[0] && credit[0].name
         ? <div className="gallery-credit ">
-          `Photo: ${credit[0].name}`
+          Photo: {credit[0].name}
     </div> : null}
       {caption && <div className="gallery-caption "><span>{caption}</span></div>}
     </div>
