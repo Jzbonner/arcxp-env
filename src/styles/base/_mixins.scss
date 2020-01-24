@@ -77,3 +77,25 @@
     max-width: 1600px;
   }
 }
+
+@mixin blue-button($dimension, $content, $font-size) {
+  background: linear-gradient(to top, #04befe, #4481eb);
+  border-radius: 20px;
+  width: $dimension;
+  height: $dimension;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  margin-right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:after {
+    content: $content;
+    font-family: "icon-fonts";
+    display: block;
+    font-size: $font-size;
+    color: #fff;
+  }
+}

@@ -10,7 +10,7 @@
     "fusion": "fusion",
     "lint": "npm run eslint && npm run stylelint",
     "start": "fusion start",
-    "stylelint": "stylelint 'src/**/*.scss'",
+    "stylelint": "stylelint 'src/**/*.scss' 'src/properties/**/*.scss', 'src/styles/**/*.scss', 'components/features/**/*.scss'",
     "test": "jest --coverage"
   },
   "devDependencies": {
@@ -62,7 +62,7 @@
     "jest-enzyme": "^7.1.2",
     "lint-staged": "^8.1.0",
     "mini-css-extract-plugin": "^0.5.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "node-sass-glob-importer": "5.3.0",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.19.1",
@@ -75,7 +75,7 @@
     "resolve-url-loader": "^3.1.1",
     "sass-loader": "7.1.0",
     "style-loader": "^0.23.1",
-    "stylelint": "^10.0.1",
+    "stylelint": "^10.1.0",
     "stylelint-config-prettier": "^5.3.0",
     "stylelint-prettier": "^1.1.2",
     "stylelint-webpack-plugin": "^0.10.5",
@@ -92,6 +92,7 @@
   },
   "husky": {
     "hooks": {
+      "pre-commit": "npm run lint && npm run test",
       "pre-push": "npm run lint && npm run test"
     }
   },
@@ -121,6 +122,12 @@
       }
     },
     "rules": {
+      "import/extensions": ["warning", "ignorePackages",
+        {
+          "js": "never",
+          "jsx": "never"
+        }
+      ],
       "import/no-unresolved": "off",
       "import/no-extraneous-dependencies": [
         "error",
@@ -128,7 +135,9 @@
           "devDependencies": true
         }
       ],
-      "import/extensions": ["warning", "ignorePackages", 
+      "import/extensions": [
+        "warning",
+        "ignorePackages",
         {
           "js": "never",
           "jsx": "never"
@@ -211,7 +220,8 @@
   "homepage": "https://github.com/wapopartners/StarterPack-PageBuilder-Fusion-Features#readme",
   "dependencies": {
     "arcads": "^1.5.0",
-    "react-helmet": "^5.2.1",
-    "scriptjs": "^2.5.9"
+    "thumbor-lite": "^0.1.8",
+    "scriptjs": "^2.5.9",
+    "react-helmet": "^5.2.1"
   }
 }

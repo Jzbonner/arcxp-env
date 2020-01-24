@@ -16,8 +16,8 @@ const StickyNav = ({
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
   const { url: featuredImage } = promoItems ? promoItems.basic : {};
-  const { url: videoThumbnail } = promoItems.basic.promo_image ? promoItems.basic.promo_image : {};
-  const { url: galleryThumbnail } = promoItems.basic.promo_items ? promoItems.basic.promo_items.basic : {};
+  const { url: videoThumbnail } = promoItems && promoItems.basic.promo_image ? promoItems.basic.promo_image : {};
+  const { url: galleryThumbnail } = promoItems && promoItems.basic.promo_items ? promoItems.basic.promo_items.basic : {};
   const { url: inlineImage } = contentElements ? contentElements[0] : {};
   const { url: inlineVideoThumbnail } = contentElements[0].promo_image ? contentElements[0].promo_image : {};
   // secondary / inline video thumbnail
