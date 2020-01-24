@@ -1,15 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import List from '../list/default.jsx';
+import Paragraph from '../paragraph/default.jsx';
+import './styles.scss';
 
-const BlockQuote = ({ src }) => (
-    <div style={{ border: '1px solid #000', padding: '10px' }}>
-      Content Element Type: <strong>Block Quote</strong>
-      <p>{src.content}</p>
-    </div>
+const Blockquote = ({ contentElements, citation }) => (
+  <div className="blockquote b-margin-bottom-d60-m40">
+    {contentElements.map((el, index) => {
+      switch (el.type) {
+        case 'list':
+          return <List key={`blockquote-${index}`} src={el} />;
+        case 'text':
+          return <Paragraph key={`blockquote-${index}`} src={el} />;
+        default:
+          return null;
+      }
+    })}
+    {citation && <div className="blockquote-citation">- {citation.content}</div>}
+  </div>
 );
 
-BlockQuote.propTypes = {
-  src: PropTypes.any,
+Blockquote.propTypes = {
+  contentElements: PropTypes.array,
+  citation: PropTypes.obj,
 };
 
-export default BlockQuote;
+export default Blockquote;

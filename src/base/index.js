@@ -1,1 +1,0 @@
-/* Multisite global vanilla JS entry point */

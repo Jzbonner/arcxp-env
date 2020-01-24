@@ -1,0 +1,42 @@
+$font: (
+  primary: "Output Black",
+  secondary: "Output Regular",
+  tertiary: "Output Light"
+) !default;
+
+/* stylelint-disable */
+// Declare your font faces in this file.
+// Make sure to put your font files within the ../fonts folder!
+
+// Example font face:
+// @font-face {
+//   font-family: 'Montserrat';
+//   font-weight: 400;
+//   src:  url('./../../../resources/fonts/montserrat/Montserrat-Regular.woff') format('woff');
+// }
+
+/* stylelint-enable */
+
+@font-face {
+  font-family: "Gordita";
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  src: url("./../../../resources/fonts/gordita/gorditaregular-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Gordita";
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  src: url("./../../../resources/fonts/gordita/gorditamedium-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Gordita";
+  font-weight: 800;
+  font-stretch: normal;
+  font-style: normal;
+  src: url("./../../../resources/fonts/gordita/gorditabold-webfont.woff") format("woff");
+}

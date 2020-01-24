@@ -6,6 +6,7 @@ const DefaultOutputType = (props) => {
   const {
     arcSite = getProperties().sites[0], children, contextPath, deployment, CssLinks, Fusion, Libs, MetaTags,
   } = props;
+
   return (
     <html>
       <head>

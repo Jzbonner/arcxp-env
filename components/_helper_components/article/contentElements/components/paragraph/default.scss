@@ -1,0 +1,9 @@
+@import './../../../../../../src/styles/base';
+
+.story-text {
+  width: 100%;
+  @include text-styles(1rem, 2.25, "Gordita");
+  @include breakpoint(desktop-sm) {
+    @include text-styles(1.25rem, 2, "Gordita");
+  }
+}
