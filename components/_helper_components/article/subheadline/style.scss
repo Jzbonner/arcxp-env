@@ -1,4 +1,6 @@
 /*  /components/features/article/subheadline/styles.scss  */
+@import "../../../../../../src/styles/base/breakpoints";
+@import "../../../../../../src/styles/base/mixins";
 
 .article-subheadline {
   display: flex;
@@ -7,8 +9,11 @@
 }
   
 .article-subheadline-body {
+  @include text-styles(1.875rem, 2, "Gordita");
   width: 37%;
   padding: 1.25em;
-  font-size: 1.1em;
   text-align: center;
+  @include breakpoint(desktop-sm) {
+    @include text-styles(1em, 2, "Gordita");
+  }
 }

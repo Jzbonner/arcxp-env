@@ -10,7 +10,7 @@ const SubHeadline = ({ subheadlines }) => {
 
   return (
     <div className="article-subheadline">
-      <div className="article-subheadline-body text-align">
+      <div className="article-subheadline-body">
         <span>{basic}</span>
       </div>
     </div>
