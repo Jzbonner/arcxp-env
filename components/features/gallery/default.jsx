@@ -158,12 +158,13 @@ const Gallery = (props) => {
   };
 
   const handleResizeEvent = () => {
+    if (!isMobile) calculateTranslateX();
     if (window.innerWidth <= mobileBreakPoint) {
       setMobileState(true);
     } else {
       setMobileState(false);
     }
-    if (!isMobile) calculateTranslateX();
+
     setCurrentAction(actions.RESIZE);
   };
 
