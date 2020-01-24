@@ -10,7 +10,7 @@
     "fusion": "fusion",
     "lint": "npm run eslint && npm run stylelint",
     "start": "fusion start",
-    "stylelint": "stylelint 'src/**/*.scss'",
+    "stylelint": "stylelint 'src/**/*.scss' 'src/properties/**/*.scss', 'src/styles/**/*.scss', 'components/features/**/*.scss'",
     "test": "jest --coverage"
   },
   "devDependencies": {
@@ -92,6 +92,7 @@
   },
   "husky": {
     "hooks": {
+      "pre-commit": "npm run lint && npm run test",
       "pre-push": "npm run lint && npm run test"
     }
   },
