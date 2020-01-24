@@ -68,7 +68,6 @@ const StoryPageLayout = () => {
           <div className="c-fixed-width">
             <Headline headlines={headlines} basicItems={basicItems} />
           </div>
-          <SubHeadline subheadlines={subheadlines} />
           <div className="b-flexRow b-flexCenter">
             <SectionLabel label={label} taxonomy={taxonomy} />
             <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
@@ -76,6 +75,7 @@ const StoryPageLayout = () => {
           <div className="b-flexRow b-flexCenter">
             <Byline by={authorData} />
           </div>
+          <SubHeadline subheadlines={subheadlines} />
         </header>
 
         <article>
