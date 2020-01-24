@@ -9,7 +9,7 @@ import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 import Section from '../_helper_components/article/section/Section.jsx';
-import Nativo from '../_helper_components/article/nativo/Nativo/nativo.jsx';
+import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
