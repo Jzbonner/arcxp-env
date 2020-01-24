@@ -1,5 +1,5 @@
 {
-  "extends": ["./config/linters/.stylelintrc", "stylelint-config-prettier"],
+  "extends": ["stylelint-config-prettier", "./config/linters/.stylelintrc.json"],
   "rules": {
     "number-max-precision": 4
   }
