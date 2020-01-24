@@ -9,7 +9,6 @@ import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 import Section from '../_helper_components/article/section/Section.jsx';
-import Gallery from '../features/gallery/default.jsx';
 import Nativo from '../_helper_components/article/nativo/Nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/blogAuthor';
 
@@ -17,7 +16,6 @@ const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 
 const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
 const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
-
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -101,7 +99,6 @@ const StoryPageLayout = () => {
             <TaboolaFeed type={type} />
           </div>
         </article>
-        <Gallery contentElements={contentElements} />
       </main>
       <footer className="b-placeholder c-footer">Footer</footer>
     </>
