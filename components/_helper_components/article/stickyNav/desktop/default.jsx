@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import avatar from '../../../../../resources/images/stickyNav-avatar.svg';
 import './default.scss';
 
 const StickyDesktopNav = ({
@@ -12,7 +11,6 @@ const StickyDesktopNav = ({
   shareLinkPinterest,
   shareLinkReddit,
   shareLinkEmail,
-  loginLink,
   logo,
 }) => (
     <div className="c-stickyNav-desktop">
@@ -42,12 +40,6 @@ const StickyDesktopNav = ({
             <a href="#" className="sticky-nav-icon comments-icon"></a>
           </li>
         ) : null}
-        <li className="stickyNav-item">
-          <a href={loginLink}>
-            <img src={avatar} className="stickyNav-item login-avatar" alt={`${siteName} avatar`} />
-            <span className="stickyNav-user">Log In</span>
-          </a>
-        </li>
       </ul>
     </div>
 );

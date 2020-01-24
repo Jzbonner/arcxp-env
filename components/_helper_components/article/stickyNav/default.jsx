@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import StickyDesktopNav from './desktop/default';
 import StickyMobileNav from './mobile/default';
+import './default.scss';
 import logo from '../../../../resources/images/stickyNav-logo.svg';
+import tempMenu from '../../../../resources/images/tempMenu.jpg';
 
 const StickyNav = ({
   articleURL, headlines, comments, promoItems, contentElements,
@@ -47,7 +49,7 @@ const StickyNav = ({
   const loginLink = `${siteDomainURL}/login`;
 
   const startingPoint = 200;
-  const minWidth = 1023;
+  const desktopWidth = 1023;
   const currentWidth = window.innerWidth;
   const [currentScroll, setCurrentScroll] = useState(0);
   let scroll;
@@ -63,7 +65,7 @@ const StickyNav = ({
     };
   }, [currentScroll]);
 
-  if (currentScroll > startingPoint && currentWidth > minWidth) {
+  if (currentScroll > startingPoint && currentWidth > desktopWidth) {
     return (
       <div className="c-stickyNav">
         <StickyDesktopNav
@@ -81,9 +83,10 @@ const StickyNav = ({
       </div>
     );
   }
-  if (currentScroll > startingPoint && currentWidth < minWidth) {
+  if (currentScroll > startingPoint && currentWidth < desktopWidth) {
     return (
       <div className="c-stickyNav">
+        <img src={tempMenu} alt="temp-burger-menu" style={{ maxWidth: '50px' }}/>
         <StickyMobileNav
           commentsEnabled={commentsEnabled}
           shareLinkFacebook={shareLinkFacebook}
@@ -92,7 +95,6 @@ const StickyNav = ({
           shareLinkReddit={shareLinkReddit}
           shareLinkEmail={shareLinkEmail}
         />
-        ;
       </div>
     );
   }

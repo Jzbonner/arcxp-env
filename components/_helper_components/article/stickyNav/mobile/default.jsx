@@ -20,34 +20,39 @@ const StickyMobileNav = ({
         <li className="stickyNav-item">
           <a href={shareLinkTwitter} className="sticky-nav-icon twitter-icon" target="__blank"></a>
         </li>
-        <li className="stickyNav-item arrow-icon" onClick={e => handleClick(e)}>
-          <a href="#" className={`sticky-nav-icon ${isClicked ? 'arrow-up-icon' : 'arrow-down-icon'}`} target="__blank"></a>
-          {isClicked ? (
+        <li className={`stickyNav-item arrow-icon ${isClicked ? 'is-hidden' : ''}`} onClick={e => handleClick(e)}>
+          <a href="#" className="sticky-nav-icon arrow-down-icon" target="__blank"></a>
+        </li>
+        {isClicked ? (
+          <li className="stickyNav-item">
             <ul className="stickyNav-list-is-hidden">
+              <li className="stickyNav-item is-visible arrow-icon" onClick={e => handleClick(e)}>
+                <a href="#" className="sticky-nav-icon arrow-up-icon" target="__blank"></a>
+              </li>
               <li className="stickyNav-item is-visible">
                 <a href={shareLinkPinterest} className="sticky-nav-icon pinterest-icon" target="__blank"></a>
               </li>
               <li className="stickyNav-item is-visible">
                 <a href={shareLinkReddit} className="sticky-nav-icon reddit-icon" target="__blank"></a>
               </li>
-              <a className="stickyNav-item is-visible">
+              <li className="stickyNav-item is-visible">
                 <a href={shareLinkEmail} className="sticky-nav-icon mail-icon" target="__blank"></a>
-              </a>
+              </li>
               {commentsEnabled ? (
                 <li className="stickyNav-item is-visible">
                   <a href="#" className="sticky-nav-icon comments-icon"></a>
                 </li>
               ) : null}
             </ul>
-          ) : null}
-        </li>
+          </li>
+        ) : null}
       </ul>
     </div>
   );
 };
 
 StickyMobileNav.propTypes = {
-  commentsEnabled: PropTypes.object,
+  commentsEnabled: PropTypes.bool,
   shareLinkFacebook: PropTypes.string,
   shareLinkTwitter: PropTypes.string,
   shareLinkPinterest: PropTypes.string,

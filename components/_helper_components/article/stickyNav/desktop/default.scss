@@ -4,20 +4,6 @@
 @import "../../../../../src/styles/base/mixins";
 
 .c-stickyNav-desktop {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: 71px;
-    background: #f8f8f8;
-    z-index: 999;
-    opacity: 0.98;
-    border: 1px solid #d0d0d0;
-    
     .c-stickyNav-list {
         position: relative;
         display: flex;
@@ -44,26 +30,8 @@
                 height: 56px;
             }
 
-            .login-avatar {
-                width: 35px;
-                height: 35px;
-            }
-
             &:first-child {
                 margin-left: 20px;
-            }
-
-            &:last-child {
-                position: absolute;
-                right: 20px;
-
-                a {
-                    .stickyNav-user {
-                        @include text-styles(1.125em, 1, "Gordita");
-                        color: #2e81b7;
-                        font-weight: 600;
-                    }
-                }
             }
         }
     }
