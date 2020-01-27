@@ -1,40 +1,30 @@
+@import "../../../../../../src/styles/base/breakpoints";
+@import "../../../../../../src/styles/base/mixins";
+
 .borders {
   border-top: solid 1px #cdcdcd;
   border-bottom: solid 1px #cdcdcd;
-  padding-left: 1.4em;
-  padding-top: 1.2em;
-  padding-bottom: 1.3em;
+  padding: 1.2em 0 1.3em 1.4em;
   display: flex;
 }
 .prefix {
   width: 1em;
   height: .372em;
-  margin: 1.56em 1.1em 1.56em 0;
+  margin: 0 1.1em 1.56em 0;
   -webkit-text-stroke: 0.3px #000000;
-  font-family: Average;
-  font-size: 1.625rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
+  font: 1.625rem normal normal normal Average;
   letter-spacing: normal;
   color: #313132;
 }
 .interstitial{
-  padding-left: 1.1em; 
-  padding-right: 1.1em;
+  padding: 0 1.1em 0 1.1em;
   text-align: left;
 }
 .link {
   height: 5.25em;
   margin-bottom: 1.5em;
-  padding-left: 3.25em;
-  padding-right: .75em;
-  font-family: "Gordita Regular", "Arial", sans-serif;
-  font-size: 1rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
+  padding: 0 .75em 0 3.25em;
+  @include text-styles(1em, 1, "Gordita");
   line-height: 1.75;
   letter-spacing: normal;
   color: #000000;
