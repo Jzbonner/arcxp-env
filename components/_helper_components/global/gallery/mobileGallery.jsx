@@ -1,4 +1,3 @@
-// resolving git issues
 import React from 'react';
 import PropTypes from 'prop-types';
 import middleBox from '../../../../resources/icons/gallery/middle-box.svg';

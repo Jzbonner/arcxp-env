@@ -11,6 +11,7 @@ import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx'
 import Section from '../_helper_components/article/section/Section.jsx';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
+import Gallery from '../features/gallery/default.jsx';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 
@@ -99,6 +100,7 @@ const StoryPageLayout = () => {
             <TaboolaFeed type={type} />
           </div>
         </article>
+        <Gallery contentElements={contentElements}/>
       </main>
       <footer className="b-placeholder c-footer">Footer</footer>
     </>
