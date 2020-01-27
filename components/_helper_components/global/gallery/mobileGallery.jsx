@@ -1,3 +1,4 @@
+// resolving git issues
 import React from 'react';
 import PropTypes from 'prop-types';
 import middleBox from '../../../../resources/icons/gallery/middle-box.svg';
@@ -22,7 +23,7 @@ const MobileGallery = (props) => {
             className={`gallery-caption-trigger ${isCaptionOn ? 'is-active' : ''}`}>on</a>
           <a onClick={captionOn} href="#"
             title="captions off"
-            className={`gallery-caption-trigger 
+            className={`gallery-caption-trigger
                 ${!isCaptionOn ? 'is-active' : ''}`}>off</a>
           <div>Captions</div>
         </div>

@@ -1,3 +1,4 @@
+// resolving git issue
 import React from 'react';
 import GalleryItem from '../../../_helper_components/global/gallery/galleryItem.jsx';
 

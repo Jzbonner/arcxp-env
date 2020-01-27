@@ -1,5 +1,6 @@
 // organizes element array, where last element is right before the first
 // VISIBLE GALLERY = |semi-last ,last, [first], second, third...|
+// resolving git issue
 const reorganizeElements = (arr = []) => {
   const elemArray = [...arr];
   const middle = Math.floor(elemArray.length / 2);

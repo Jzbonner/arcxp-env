@@ -1,3 +1,4 @@
+// resolving git issues
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -15,7 +16,7 @@ const GalleryItem = ({ data, refHook }) => {
       id={id}
       data-index={index}
       key={url}
-      className={`${isStickyVisible ? 'gallery-full-item' : 'gallery-image'} 
+      className={`${isStickyVisible ? 'gallery-full-item' : 'gallery-image'}
       ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}`}>
       <img
         className={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused ? 'is-focused' : ''}`}
