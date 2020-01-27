@@ -12,7 +12,7 @@ const StickyMobileNav = ({
   };
 
   return (
-    <div className="c-stickyNav-mobile">
+    <nav className="c-stickyNav-mobile">
       <ul className="c-stickyNav-list">
         <li className="stickyNav-item">
           <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
@@ -47,7 +47,7 @@ const StickyMobileNav = ({
           </li>
         ) : null}
       </ul>
-    </div>
+    </nav>
   );
 };
 

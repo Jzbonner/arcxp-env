@@ -50,8 +50,8 @@ const StickyNav = ({
 
   const startingPoint = 200;
   const desktopWidth = 1023;
-  let currentWidth;
   let scroll;
+  const [currentWidth, setWidth] = useState(0);
   const [currentScroll, setCurrentScroll] = useState(0);
   const handleScroll = (e) => {
     scroll = e.currentTarget.pageYOffset;
@@ -59,13 +59,14 @@ const StickyNav = ({
   };
 
   useEffect(() => {
-    currentWidth = window.innerWidth;
+    setWidth(window.innerWidth);
     window.addEventListener('scroll', handleScroll, true);
     return () => {
       window.removeEventListener('scroll', handleScroll, true);
     };
   }, [currentScroll]);
-
+  
+  console.log(currentWidth);
   if (currentScroll > startingPoint && currentWidth > desktopWidth) {
     return (
       <div className="c-stickyNav">

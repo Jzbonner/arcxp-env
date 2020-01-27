@@ -13,7 +13,7 @@ const StickyDesktopNav = ({
   shareLinkEmail,
   logo,
 }) => (
-    <div className="c-stickyNav-desktop">
+    <nav className="c-stickyNav-desktop">
       <ul className="c-stickyNav-list">
         <li className="stickyNav-item">
           <a href={siteDomainURL}>
@@ -41,7 +41,7 @@ const StickyDesktopNav = ({
           </li>
         ) : null}
       </ul>
-    </div>
+    </nav>
 );
 
 StickyDesktopNav.propTypes = {
