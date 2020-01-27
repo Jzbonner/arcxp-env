@@ -21,23 +21,23 @@ const StickyDesktopNav = ({
           </a>
         </li>
         <li className="stickyNav-item">
-          <a href={shareLinkFacebook} className="sticky-nav-icon facebook-icon" target="__blank"></a>
+          <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
         </li>
         <li className="stickyNav-item">
-          <a href={shareLinkTwitter} className="sticky-nav-icon twitter-icon" target="__blank"></a>
+          <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
         </li>
         <li className="stickyNav-item">
-          <a href={shareLinkPinterest} className="sticky-nav-icon pinterest-icon" target="__blank"></a>
+          <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
         </li>
         <li className="stickyNav-item">
-          <a href={shareLinkReddit} className="sticky-nav-icon reddit-icon" target="__blank"></a>
+          <a href={shareLinkReddit} className="sticky-nav-icon btn-reddit" target="__blank"></a>
         </li>
         <li className="stickyNav-item">
-          <a href={shareLinkEmail} className="sticky-nav-icon mail-icon" target="__blank"></a>
+          <a href={shareLinkEmail} className="sticky-nav-icon btn-mail" target="__blank"></a>
         </li>
         {commentsEnabled ? (
           <li className="stickyNav-item">
-            <a href="#" className="sticky-nav-icon comments-icon"></a>
+            <a href="#" className="sticky-nav-icon btn-comments"></a>
           </li>
         ) : null}
       </ul>

@@ -1,7 +1,31 @@
 .btn-facebook {
-  @include blue-button(40px, "\e911", 20px);
+  @include blue-button(35px, "\e911", 22px);
 }
 
 .btn-twitter {
-  @include blue-button(40px, "\e908", 20px);
+  @include blue-button(35px, "\e908", 22px);
+}
+
+.btn-pinterest {
+  @include blue-button(35px, "\e913", 22px);
+}
+
+.btn-reddit {
+  @include blue-button(35px, "\e909", 22px);
+}
+
+.btn-mail {
+  @include blue-button(35px, "\e90f", 22px);
+}
+
+.btn-comments {
+  @include blue-button(35px, "\e90e", 22px);
+}
+
+.btn-arrow-down {
+  @include blue-button(35px, "\e90c", 22px);
+}
+
+.btn-arrow-up {
+  @include blue-button(35px, "\e903", 22px);
 }
