@@ -25,7 +25,6 @@ const findAPMonth = (month = 12) => {
 
 const TimeStamp = ({ firstPublishDate, displayDate, isHideTimestampTrue }) => {
   let timeStamp;
-  let isUpdated;
 
   if (!firstPublishDate && !displayDate) return null;
   if (isHideTimestampTrue === 'Yes') return null;
@@ -38,12 +37,7 @@ const TimeStamp = ({ firstPublishDate, displayDate, isHideTimestampTrue }) => {
   const displayDateInMilliSeconds = displayDateObject.getTime();
   const currentOffset = displayDateInMilliSeconds - firstPublishDateInMilliSeconds;
 
-  if (currentOffset > 60000) {
-    isUpdated = true;
-  } else {
-    isUpdated = false;
-  }
-
+  const isUpdated = (currentOffset >= 60000);
   const now = new Date();
   const nowInMs = now.getTime();
   const pub = isUpdated ? displayDateObject : firstPublishDateObject;
