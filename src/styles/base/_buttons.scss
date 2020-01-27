@@ -1,6 +1,7 @@
 .btn-facebook {
   @include blue-button(40px, "\e911", 20px);
 }
+
 .btn-twitter {
   @include blue-button(40px, "\e908", 20px);
 }

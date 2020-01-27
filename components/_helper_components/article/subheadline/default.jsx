@@ -1,4 +1,4 @@
-/*  /components/features/article/subheadline/default.jsx  */
+/*  /components/features/article/subheadline/default.jsx */
 
 import React from 'react';
 import PropTypes from 'prop-types';
