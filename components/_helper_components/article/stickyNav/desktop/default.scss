@@ -3,15 +3,17 @@
 @import '../../../../../src/styles/base/buttons';
 
 .c-stickyNav-desktop {
+    width: 100%;
+    max-width: 1152px;
+    margin: 0 auto;
     .c-stickyNav-list {
         position: relative;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: left;
         padding: 0;
         width: 100%;
         height: 100%;
-        margin: 0 auto;
         
         .stickyNav-item {
             list-style: none;
