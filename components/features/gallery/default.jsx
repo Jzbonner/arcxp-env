@@ -401,7 +401,7 @@ const Gallery = (props) => {
 };
 
 Gallery.propTypes = {
-  contentElements: PropTypes.object,
+  contentElements: PropTypes.array,
   customFields: PropTypes.shape({
     galleryUrl: PropTypes.string.tag({
       label: 'Gallery URL',
