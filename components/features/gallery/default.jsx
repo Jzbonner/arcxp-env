@@ -31,7 +31,7 @@ const Gallery = (props) => {
   const [offsetHeight, setHeight] = useState(0);
   const [isCaptionOn, setCaptionState] = useState(true);
   const [isStickyVisible, setStickyState] = useState(false);
-  const [isMobile, setMobileState] = useState(false);
+  const [isMobile, setMobileState] = useState('NOT INIT');
 
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
@@ -64,6 +64,7 @@ const Gallery = (props) => {
 
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
+    if (isMobile) return;
     let translateAmount;
     const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
@@ -158,7 +159,7 @@ const Gallery = (props) => {
   };
 
   const handleResizeEvent = () => {
-    if (!isMobile) calculateTranslateX();
+    calculateTranslateX();
     if (window.innerWidth <= mobileBreakPoint) {
       setMobileState(true);
     } else {
@@ -166,6 +167,14 @@ const Gallery = (props) => {
     }
 
     setCurrentAction(actions.RESIZE);
+  };
+
+  const getInitWindowSize = () => {
+    if (window.innerWidth <= mobileBreakPoint) {
+      setMobileState(true);
+    } else {
+      setMobileState(false);
+    }
   };
 
   // tracks which photo user is on (scrolling mobile gallery)
@@ -242,7 +251,10 @@ const Gallery = (props) => {
     return relevantData;
   };
 
-  // only runs if currentIndex has changed
+  useEffect(() => {
+    getInitWindowSize();
+  }, []);
+
   useEffect(() => {
     if (elementData && !isStickyVisible && currentAction !== '') {
       finalizeGalleryItems();
@@ -271,16 +283,16 @@ const Gallery = (props) => {
     return () => {
       window.removeEventListener('resize', handleResizeEvent, true);
     };
-  }, []);
-
+  }, [isMobile]);
 
   // initializing the gallery w/ either propped or fetched content elements
-  if ((contentElements || fetchedGalleryData) && (currentAction === actions.RESIZE || (!elementData && !mobileElementData))) {
-    let isWindowMobile = false;
+
+  if (isMobile !== 'NOT INIT' && ((contentElements || fetchedGalleryData)
+  && (currentAction === actions.RESIZE || (!elementData && !mobileElementData)))) {
     let relevantGalleryData = null;
     let galleryContentElements = null;
     let fetchedContentElements = null;
-    if (window.innerWidth <= mobileBreakPoint) isWindowMobile = true;
+    // if (window.innerWidth <= mobileBreakPoint) isWindowMobile = true;
 
     if (contentElements) relevantGalleryData = handlePropContentElements();
 
@@ -294,10 +306,10 @@ const Gallery = (props) => {
 
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
-    }, debugFixEl, isWindowMobile);
+    }, debugFixEl, isMobile);
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData;
 
-    if (!isWindowMobile) {
+    if (!isMobile) {
       if (!elementData) {
         const finalizedGalleryItems = reorganizeElements([...galleryData]);
         setElementData(finalizedGalleryItems);
