@@ -65,8 +65,7 @@ const StickyNav = ({
       window.removeEventListener('scroll', handleScroll, true);
     };
   }, [currentScroll]);
-  
-  console.log(currentWidth);
+
   if (currentScroll > startingPoint && currentWidth > desktopWidth) {
     return (
       <div className="c-stickyNav">

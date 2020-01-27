@@ -15,7 +15,7 @@ const StickyDesktopNav = ({
 }) => (
     <nav className="c-stickyNav-desktop">
       <ul className="c-stickyNav-list">
-        <li className="stickyNav-item">
+        <li className="stickyNav-item" style={{ paddingRight: '20px' }}>
           <a href={siteDomainURL}>
             <img src={logo} alt={`${siteName} logo`} />
           </a>
