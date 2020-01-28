@@ -21,7 +21,7 @@
 .link {
   padding: 0 0 0 3em;
   margin: auto;
-  @include text-styles(1.25em, 1.75, "Gordita");
+  @include text-styles(1.25rem, 1.75, "Gordita");
   letter-spacing: normal;
   color: #000000;
 }
