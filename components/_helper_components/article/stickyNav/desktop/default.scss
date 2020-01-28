@@ -4,7 +4,7 @@
 
 .c-stickyNav-desktop {
     width: 100%;
-    max-width: 1152px;
+    max-width: calc(100% - 128px);
     margin: 0 auto;
     .c-stickyNav-list {
         position: relative;
