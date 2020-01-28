@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './default.scss';
 
 const Byline = ({ by = [] }) => {
   let byline;
@@ -101,7 +102,7 @@ const Byline = ({ by = [] }) => {
     finalizeByline(authors, organization, isStaff);
   }
 
-  return byline ? <div>By {byline}</div> : null;
+  return byline ? <div className="byline">By {byline}</div> : null;
 };
 
 Byline.propTypes = {
