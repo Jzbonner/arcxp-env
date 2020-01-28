@@ -11,6 +11,7 @@ import TaboolaFeed from '../features/taboolaFeed/default';
 import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
+import Gallery from '../features/gallery/default.jsx';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 
@@ -77,7 +78,6 @@ const StoryPageLayout = () => {
           <div className="c-fixed-width">
             <Headline headlines={headlines} basicItems={basicItems} />
           </div>
-          <SubHeadline subheadlines={subheadlines} />
           <div className="b-flexRow b-flexCenter">
             <SectionLabel label={label} taxonomy={taxonomy} />
             <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
@@ -85,6 +85,7 @@ const StoryPageLayout = () => {
           <div className="b-flexRow b-flexCenter">
             <Byline by={authorData} />
           </div>
+          <SubHeadline subheadlines={subheadlines} />
         </header>
 
         <article>
@@ -108,6 +109,7 @@ const StoryPageLayout = () => {
             <TaboolaFeed type={type} />
           </div>
         </article>
+        <Gallery contentElements={contentElements} />
       </main>
       <footer className="b-placeholder c-footer">Footer</footer>
     </>
