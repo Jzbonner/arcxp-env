@@ -11,13 +11,7 @@
   margin: auto;
   padding-right: 2.5em;
   -webkit-text-stroke: 0.3px #000000;
-  // @include text-styles(2.5rem, 1, "Average");
-  font-family: Average;
-  font-size: 2.5rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: normal;
+  @include text-styles(2.5rem, 1, "Average");
   color: #313132;
 }
 .interstitial{
@@ -25,7 +19,8 @@
   text-align: left;
 }
 .link {
-  padding: 0 .75em 0 3.25em;
+  padding: 0 0 0 3em;
+  margin: auto;
   @include text-styles(1.25em, 1.75, "Gordita");
   letter-spacing: normal;
   color: #000000;
