@@ -23,9 +23,9 @@ const Image = ({
 
   let giveCredit = '';
   if (mainCredit.length > 1) {
-    giveCredit = `Photo: ${mainCredit}`;
+    giveCredit = `Credit: ${mainCredit}`;
   } else if (secondaryCredit.length > 1) {
-    giveCredit = `Photo: ${secondaryCredit}`;
+    giveCredit = `Credit: ${secondaryCredit}`;
   }
 
   return (
