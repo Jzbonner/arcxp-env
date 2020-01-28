@@ -1,4 +1,5 @@
 @import "../../../../../../src/styles/base/mixins";
+@import "../../../../../../src/styles/base/breakpoints";
 
 .borders {
   border-top: solid 1px #cdcdcd;
@@ -11,8 +12,11 @@
   margin: auto;
   padding-right: 2.5em;
   -webkit-text-stroke: 0.3px #000000;
-  @include text-styles(2.5rem, 1, "Average");
   color: #313132;
+  @include text-styles(1.75rem, 1, "Average");
+  @include breakpoint(tablet) {
+    @include text-styles(2.5rem, 1, "Average");
+  }
 }
 .interstitial{
   padding: 0 1.1em 0 1.1em;
@@ -21,7 +25,13 @@
 .link {
   padding: 0 0 0 3em;
   margin: auto;
-  @include text-styles(1.25rem, 1.75, "Gordita");
   letter-spacing: normal;
   color: #000000;
+  @include text-styles(1rem, 1.5, "Gordita");
+  @include breakpoint(tablet) {
+    @include text-styles(1.25rem, 1.75, "Gordita");
+  }
 }
+
+//1.75rem on mobile
+//adjust padding on one, two + lines of text
