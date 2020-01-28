@@ -8,8 +8,9 @@
   display: flex;
 }
 .prefix {
+  display: flex;
+  align-items: center;
   width: 1em;
-  margin: auto;
   padding-right: 2.5em;
   -webkit-text-stroke: 0.3px #000000;
   color: #313132;
@@ -23,8 +24,9 @@
   text-align: left;
 }
 .link {
-  padding: 0 0 0 3em;
-  margin: auto;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5em 0 3em;
   letter-spacing: normal;
   color: #000000;
   @include text-styles(1rem, 1.5, "Gordita");
@@ -32,6 +34,3 @@
     @include text-styles(1.25rem, 1.75, "Gordita");
   }
 }
-
-//1.75rem on mobile
-//adjust padding on one, two + lines of text
