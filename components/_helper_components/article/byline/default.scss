@@ -1,0 +1,21 @@
+@import "../../../../src/styles/base/";
+
+.byline {
+  color: #313132;
+  font-weight: 100;
+  letter-spacing: normal;
+  line-height: 30px;
+
+  @include text-styles(0.875rem, normal, "Gordita");
+
+  a {
+    color: #2e81b7;
+    display: inline-block;
+    text-transform: capitalize;
+  }
+
+  @include breakpoint(desktop-sm) {
+   font-size: 1.25rem;
+   line-height: normal;
+  }
+}
