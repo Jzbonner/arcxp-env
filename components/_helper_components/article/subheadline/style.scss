@@ -1,22 +1,20 @@
 /*  /components/features/article/subheadline/styles.scss  */
 @import "./../../../../src/styles/base/breakpoints";
 @import "./../../../../src/styles/base/mixins";
-
-.article-subheadline {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
   
-.article-subheadline-body {
-  @include text-styles(1rem, 2, "Gordita");
-    font-weight: 700;
-    width: 72.37%;
-    padding: 1.25em;
-    text-align: center;
-    font-stretch: normal;
-    font-weight: normal;
+.subheadline-content {
+  font-weight: 700;
+  width: 72.37%;
+  text-align: center;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: -0.45px;
+  @include text-styles(1rem, 1.88, "Gordita");
   @include breakpoint(tablet) {
-    @include text-styles(1.875em, 2, "Gordita");
+    @include text-styles(1.875em, normal, "Gordita");
+     font-weight: 700;
+     font-stretch: normal;
+     font-style: normal;
+     letter-spacing: -0.84px;
   }
 }
