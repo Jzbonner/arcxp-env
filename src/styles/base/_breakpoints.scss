@@ -2,8 +2,8 @@
 $breakpoint: (
   tablet: 768px,
   desktop-sm: 1024px,
-  desktop-lg: 1280px
-  ) !default;
+  desktop-lg: 1280px,
+) !default;
 
 @mixin breakpoint($point) {
   /* Equal or greater than 768px */
