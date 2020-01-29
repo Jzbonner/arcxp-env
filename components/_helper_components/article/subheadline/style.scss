@@ -9,12 +9,14 @@
 }
   
 .article-subheadline-body {
-  @include text-styles(1.825rem, 2, "Gordita");
+  @include text-styles(1rem, 2, "Gordita");
     font-weight: 700;
     width: 72.37%;
     padding: 1.25em;
     text-align: center;
+    font-stretch: normal;
+    font-weight: normal;
   @include breakpoint(tablet) {
-    @include text-styles(1.5em, 2, "Gordita");
+    @include text-styles(1.875em, 2, "Gordita");
   }
 }
