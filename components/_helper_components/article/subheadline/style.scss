@@ -1,7 +1,7 @@
 /*  /components/features/article/subheadline/styles.scss  */
 @import "./../../../../src/styles/base/breakpoints";
 @import "./../../../../src/styles/base/mixins";
-  
+
 .subheadline-content {
   font-weight: 700;
   width: 72.37%;
@@ -9,12 +9,12 @@
   font-stretch: normal;
   font-style: normal;
   letter-spacing: -0.45px;
-  @include text-styles(1rem, 1.88, "Gordita");
+  @include text-styles(1rem, 1.5, "Gordita");
   @include breakpoint(tablet) {
-    @include text-styles(1.875em, normal, "Gordita");
-     font-weight: 700;
-     font-stretch: normal;
-     font-style: normal;
-     letter-spacing: -0.84px;
+    @include text-styles(1.3rem, normal, "Gordita");
+    font-weight: 700;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: -0.84px;
   }
 }
