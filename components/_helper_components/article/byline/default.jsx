@@ -102,7 +102,7 @@ const Byline = ({ by = [] }) => {
     finalizeByline(authors, organization, isStaff);
   }
 
-  return byline ? <div className="byline">By {byline}</div> : null;
+  return byline ? <div className="byline b-margin-bottom-d60-m40">By {byline}</div> : null;
 };
 
 Byline.propTypes = {
