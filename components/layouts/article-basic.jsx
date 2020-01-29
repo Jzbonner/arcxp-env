@@ -12,6 +12,7 @@ import Section from '../_helper_components/article/section/Section.jsx';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
+import '../../src/styles/container/_article-basic.scss';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 
