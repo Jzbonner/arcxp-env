@@ -1,14 +1,14 @@
 /*  /components/layouts/article-basic.jsx  */
-
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import TaboolaFeed from '../features/taboolaFeed/default';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 import Section from '../_helper_components/article/section/Section.jsx';
+import TaboolaFeed from '../features/taboolaFeed/default';
+import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
@@ -31,7 +31,9 @@ const StoryPageLayout = () => {
     subtype,
     headlines,
     label,
+    comments,
     taxonomy,
+    canonical_url: articleURL,
     subheadlines,
     credits,
     type,
@@ -62,6 +64,13 @@ const StoryPageLayout = () => {
           </div>
           <div className="b-placeholder c-subscribe">Support Local Journalism. Subscribe today for 99¢.</div>
         </div>
+        <StickyNav
+          articleURL={articleURL}
+          headlines={headlines}
+          comments={comments}
+          promoItems={promoItems}
+          contentElements={contentElements}
+        />
       </header>
 
       <main>
@@ -100,7 +109,7 @@ const StoryPageLayout = () => {
             <TaboolaFeed type={type} />
           </div>
         </article>
-        <Gallery contentElements={contentElements}/>
+        <Gallery contentElements={contentElements} />
       </main>
       <footer className="b-placeholder c-footer">Footer</footer>
     </>
