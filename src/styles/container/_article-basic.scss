@@ -71,3 +71,11 @@
   width: 100%;
   text-align: center;
 }
+
+.c-articlePadding {
+  padding: 0 30px;
+  
+  @include breakpoint(desktop-sm) {
+    padding: 0;
+  }
+}

@@ -79,7 +79,7 @@ const StoryPageLayout = () => {
           <SubHeadline subheadlines={subheadlines} />
         </header>
 
-        <article>
+        <article className="c-articlePadding">
           <Section elements={contentElements} stopIndex={1} />
           <Section elements={contentElements} startIndex={1} stopIndex={3} rightRailAd={ExampleAdComponent} />
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
