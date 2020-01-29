@@ -13,6 +13,7 @@
     display: inline-block;
     padding-bottom: 1px;
     border-bottom: 1px solid transparent;
+    text-transform: capitalize;
   }
 
   @include breakpoint(desktop-sm) {
