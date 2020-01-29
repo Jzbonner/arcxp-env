@@ -69,7 +69,7 @@ const StoryPageLayout = () => {
           <div className="c-fixed-width">
             <Headline headlines={headlines} basicItems={basicItems} />
           </div>
-          <div className="b-flexRow b-flexCenter">
+          <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10">
             <SectionLabel label={label} taxonomy={taxonomy} />
             <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
           </div>
