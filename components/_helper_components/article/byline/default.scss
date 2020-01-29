@@ -14,4 +14,8 @@
     padding-bottom: 1px;
     border-bottom: 1px solid transparent;
   }
+
+  @include breakpoint(desktop-sm) {
+   font-size: 1.2vw;
+  }
 }
