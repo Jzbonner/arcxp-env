@@ -105,6 +105,11 @@ const Gallery = (props) => {
     }
   };
 
+  const clickFuncs = {
+    prev: () => changeIndex(actions.PREV),
+    next: () => changeIndex(actions.NEXT),
+  };
+
   // opens mobile sticky
   const handleStickyOpen = () => {
     if (isMobile) setStickyState(true);
@@ -142,8 +147,8 @@ const Gallery = (props) => {
 
   const renderDesktopGalleryElements = (elements) => {
     const finalizedElements = handleImageFocus(elements, {
-      isStickyVisible, isMobile, isCaptionOn, currentIndex,
-    });
+      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
+    }, clickFuncs);
     setElementData(finalizedElements);
     renderCaptionByCurrentIndex();
   };
@@ -284,7 +289,6 @@ const Gallery = (props) => {
       window.removeEventListener('resize', handleResizeEvent, true);
     };
   }, [isMobile]);
-
   // initializing the gallery w/ either propped or fetched content elements
 
   if (isMobile !== 'NOT INIT' && ((contentElements || fetchedGalleryData)
@@ -292,7 +296,6 @@ const Gallery = (props) => {
     let relevantGalleryData = null;
     let galleryContentElements = null;
     let fetchedContentElements = null;
-    // if (window.innerWidth <= mobileBreakPoint) isWindowMobile = true;
 
     if (contentElements) relevantGalleryData = handlePropContentElements();
 
@@ -306,7 +309,7 @@ const Gallery = (props) => {
 
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
-    }, debugFixEl, isMobile);
+    }, debugFixEl, isMobile, clickFuncs);
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData;
 
     if (!isMobile) {
