@@ -12,6 +12,7 @@ import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
 import './default.scss';
 
+
 const Gallery = (props) => {
   const { contentElements = [], customFields = {} } = props;
   // holds Gallery items
@@ -70,6 +71,7 @@ const Gallery = (props) => {
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
     if (galleryEl.current && focusElement) {
       // fixes initializing translate bug
+      console.log('running');
       if (debugFixEl.current && focusElement.offsetWidth === 0) {
         translateAmount = parseInt(galleryFullWidth, 10)
           / 2 - parseInt(debugFixEl.current.offsetWidth, 10)
@@ -84,12 +86,16 @@ const Gallery = (props) => {
     }
   };
 
-  const changeIndex = (action) => {
+  const changeIndex = (action, maxNumber) => {
     // change current image index by -1
     if (action === actions.PREV) {
       setCurrentAction(action);
-      if (currentIndex === 0) {
-        setCurrentIndex(maxIndex);
+      if (currentIndex <= 0) {
+        if (!maxIndex) {
+          setCurrentIndex(maxNumber);
+        } else {
+          setCurrentIndex(maxIndex);
+        }
       } else {
         setCurrentIndex(currentIndex - 1);
       }
@@ -268,7 +274,7 @@ const Gallery = (props) => {
 
   useEffect(() => {
     if (!isMobile) calculateTranslateX();
-  }, [currentIndex, translateX, elementData, captionData, galleryEl]);
+  }, [currentIndex, currentAction, translateX, elementData, captionData, galleryEl]);
 
   useEffect(() => {
     if (!isMobile) renderCaptionByCurrentIndex();
@@ -289,6 +295,7 @@ const Gallery = (props) => {
       window.removeEventListener('resize', handleResizeEvent, true);
     };
   }, [isMobile]);
+
   // initializing the gallery w/ either propped or fetched content elements
 
   if (isMobile !== 'NOT INIT' && ((contentElements || fetchedGalleryData)
@@ -309,7 +316,10 @@ const Gallery = (props) => {
 
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
-    }, debugFixEl, isMobile, clickFuncs);
+    }, debugFixEl, isMobile, {
+      prev: () => changeIndex(actions.PREV, baseGalleryData.length - 1),
+      next: () => changeIndex(actions.NEXT),
+    });
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData;
 
     if (!isMobile) {

@@ -34,7 +34,7 @@ const handleImageFocus = (arr = [], states = {}, funcs = {}) => {
     elementItemData.states = { ...parentStates };
 
     elementItemData.states.isFocused = (currentIndex === element.props.data.index);
-
+    console.log(element.props.data.index, functionToPass);
     return (
       <GalleryItem
       data={elementItemData}

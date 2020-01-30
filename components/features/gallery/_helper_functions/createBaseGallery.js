@@ -8,6 +8,7 @@ const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile, 
   const {
     prev, next,
   } = funcs;
+
   let galleryData = null;
 
   const desktopCaptionData = [];
