@@ -71,7 +71,6 @@ const Gallery = (props) => {
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
     if (galleryEl.current && focusElement) {
       // fixes initializing translate bug
-      console.log('running');
       if (debugFixEl.current && focusElement.offsetWidth === 0) {
         translateAmount = parseInt(galleryFullWidth, 10)
           / 2 - parseInt(debugFixEl.current.offsetWidth, 10)
