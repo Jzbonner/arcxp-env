@@ -68,7 +68,7 @@ const Gallery = (props) => {
     let translateAmount;
     const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
-    if (galleryEl.current && focusElement && elementData.length >= maxIndex) {
+    if (galleryEl.current && focusElement) {
       // fixes initializing translate bug
       if (debugFixEl.current && focusElement.offsetWidth === 0) {
         translateAmount = parseInt(galleryFullWidth, 10)
@@ -288,7 +288,7 @@ const Gallery = (props) => {
   // initializing the gallery w/ either propped or fetched content elements
 
   if (isMobile !== 'NOT INIT' && ((contentElements || fetchedGalleryData)
-  && (currentAction === actions.RESIZE || (!elementData && !mobileElementData)))) {
+    && (currentAction === actions.RESIZE || (!elementData && !mobileElementData)))) {
     let relevantGalleryData = null;
     let galleryContentElements = null;
     let fetchedContentElements = null;
@@ -382,7 +382,7 @@ const Gallery = (props) => {
             <a>
               <img src={middleBox} className="icon-gallery"></img>
             </a>
-            <div className="hidden-large">View Gallery</div>
+            <div className="icon-text hidden-large">View Gallery</div>
           </div>
           <div className="gallery-count-next hidden-small hidden-medium">
             <a onClick={() => changeIndex(actions.NEXT)}>
