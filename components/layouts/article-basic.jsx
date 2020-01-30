@@ -12,6 +12,7 @@ import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
+import '../../src/styles/container/_article-basic.scss';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
 
@@ -88,7 +89,7 @@ const StoryPageLayout = () => {
           <SubHeadline subheadlines={subheadlines} />
         </header>
 
-        <article>
+        <article className="c-articlePadding">
           <Section elements={contentElements} stopIndex={1} />
           <Section elements={contentElements} startIndex={1} stopIndex={3} rightRailAd={ExampleAdComponent} />
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
