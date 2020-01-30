@@ -86,6 +86,10 @@
     }
   }
   &.with-just-headline {
+    margin-top: 1.25rem;
+    @include breakpoint(desktop-sm) {
+      margin-top: 1.875rem;
+    }
     .headline-body {
       @include breakpoint(desktop-sm) {
         padding: 41px 103px;
