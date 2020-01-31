@@ -5,10 +5,11 @@ import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
 const Image = ({
-  width, height, src, imageMarginBottom,
+  width, height, src, imageMarginBottom, isInlineImage, isLeadImage,
 }) => {
   const { url, caption, credits } = src || null;
   const [imageSrc, setImageSrc] = useState('');
+  const imageALT = caption.length > 1 ? caption : 'story page inline image';
 
   useEffect(() => {
     setImageSrc(imageResizer(url, width, height));
@@ -31,8 +32,10 @@ const Image = ({
   return (
     <div className={`c-image-component ${imageMarginBottom}`}>
       <div className="image-component-image">
-        <img src={imageSrc} alt={caption} />
-        <Caption src={src} />
+        <img src={imageSrc} alt={imageALT} />
+        {(isInlineImage && caption.length < 1) || (isLeadImage && caption.length < 1 && giveCredit.length < 1) ? null : (
+          <Caption src={src} />
+        )}
       </div>
       <p className="photo-credit-text">{giveCredit}</p>
     </div>
@@ -44,5 +47,7 @@ Image.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   imageMarginBottom: PropTypes.string,
+  isInlineImage: PropTypes.bool,
+  isLeadImage: PropTypes.bool,
 };
 export default Image;

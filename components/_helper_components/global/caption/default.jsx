@@ -23,7 +23,6 @@ const Caption = ({ src }) => {
   } else if (secondaryCredit.length > 1) {
     giveCredit = `Credit: ${secondaryCredit}`;
   }
-
   return (
     <div className={`c-caption ${toggleButton ? 'is-active' : ''}`}>
       <div className="photo-caption-btn" onClick={toggle}>
