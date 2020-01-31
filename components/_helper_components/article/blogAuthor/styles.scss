@@ -13,17 +13,24 @@
     border-top: 1px solid #979797;
     border-bottom: 1px solid #979797;
     padding: 30px 0 25px;
-    .b-flexRow {
-      margin-bottom: 20px;
+    .blog-author-content-heading {
       justify-content: center;
       align-items: center;
-      @include breakpoint(desktop-sm) {
+      flex-direction: column;
+      @include breakpoint(tablet) {
         justify-content: left;
+        flex-direction: row;
       }
+    }
+    .b-flexRow {
+      margin-bottom: 20px;
       .content-profileImage {
         width: 97px;
         height: 97px;
-        margin-right: 20px;
+        margin: 0 0 20px 0;
+        @include breakpoint(tablet) {
+          margin: 0 20px 0 0;
+        }
         display: flex;
         justify-content: center;
         img {
