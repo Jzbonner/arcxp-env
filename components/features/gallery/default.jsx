@@ -12,6 +12,7 @@ import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
 import './default.scss';
 
+
 const Gallery = (props) => {
   const { contentElements = [], customFields = {} } = props;
   // holds Gallery items
@@ -68,7 +69,7 @@ const Gallery = (props) => {
     let translateAmount;
     const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
-    if (galleryEl.current && focusElement && elementData.length >= maxIndex) {
+    if (galleryEl.current && focusElement) {
       // fixes initializing translate bug
       if (debugFixEl.current && focusElement.offsetWidth === 0) {
         translateAmount = parseInt(galleryFullWidth, 10)
@@ -84,12 +85,16 @@ const Gallery = (props) => {
     }
   };
 
-  const changeIndex = (action) => {
+  const changeIndex = (action, maxNumber) => {
     // change current image index by -1
     if (action === actions.PREV) {
       setCurrentAction(action);
-      if (currentIndex === 0) {
-        setCurrentIndex(maxIndex);
+      if (currentIndex <= 0) {
+        if (!maxIndex) {
+          setCurrentIndex(maxNumber);
+        } else {
+          setCurrentIndex(maxIndex);
+        }
       } else {
         setCurrentIndex(currentIndex - 1);
       }
@@ -103,6 +108,11 @@ const Gallery = (props) => {
         setCurrentIndex(currentIndex + 1);
       }
     }
+  };
+
+  const clickFuncs = {
+    prev: () => changeIndex(actions.PREV),
+    next: () => changeIndex(actions.NEXT),
   };
 
   // opens mobile sticky
@@ -142,8 +152,8 @@ const Gallery = (props) => {
 
   const renderDesktopGalleryElements = (elements) => {
     const finalizedElements = handleImageFocus(elements, {
-      isStickyVisible, isMobile, isCaptionOn, currentIndex,
-    });
+      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
+    }, clickFuncs);
     setElementData(finalizedElements);
     renderCaptionByCurrentIndex();
   };
@@ -263,7 +273,7 @@ const Gallery = (props) => {
 
   useEffect(() => {
     if (!isMobile) calculateTranslateX();
-  }, [currentIndex, translateX, elementData, captionData, galleryEl]);
+  }, [currentIndex, currentAction, translateX, elementData, captionData, galleryEl]);
 
   useEffect(() => {
     if (!isMobile) renderCaptionByCurrentIndex();
@@ -288,11 +298,10 @@ const Gallery = (props) => {
   // initializing the gallery w/ either propped or fetched content elements
 
   if (isMobile !== 'NOT INIT' && ((contentElements || fetchedGalleryData)
-  && (currentAction === actions.RESIZE || (!elementData && !mobileElementData)))) {
+    && (currentAction === actions.RESIZE || (!elementData && !mobileElementData)))) {
     let relevantGalleryData = null;
     let galleryContentElements = null;
     let fetchedContentElements = null;
-    // if (window.innerWidth <= mobileBreakPoint) isWindowMobile = true;
 
     if (contentElements) relevantGalleryData = handlePropContentElements();
 
@@ -306,7 +315,10 @@ const Gallery = (props) => {
 
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
-    }, debugFixEl, isMobile);
+    }, debugFixEl, isMobile, {
+      prev: () => changeIndex(actions.PREV, baseGalleryData.length - 1),
+      next: () => changeIndex(actions.NEXT),
+    });
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData;
 
     if (!isMobile) {
@@ -382,7 +394,7 @@ const Gallery = (props) => {
             <a>
               <img src={middleBox} className="icon-gallery"></img>
             </a>
-            <div className="hidden-large">View Gallery</div>
+            <div className="icon-text hidden-large">View Gallery</div>
           </div>
           <div className="gallery-count-next hidden-small hidden-medium">
             <a onClick={() => changeIndex(actions.NEXT)}>

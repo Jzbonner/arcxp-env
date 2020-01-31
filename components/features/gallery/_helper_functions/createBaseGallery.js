@@ -1,10 +1,14 @@
 import React from 'react';
 import GalleryItem from '../../../_helper_components/global/gallery/galleryItem.jsx';
 
-const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile) => {
+const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile, funcs = {}) => {
   const {
     isStickyVisible, isMobile, isCaptionOn, currentIndex,
   } = states;
+  const {
+    prev, next,
+  } = funcs;
+
   let galleryData = null;
 
   const desktopCaptionData = [];
@@ -12,12 +16,18 @@ const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile) 
   if (elements) {
     galleryData = elements.map((element, i) => {
       let isFocused = false;
+      let isPrev = false;
+      let isNext = false;
+      let functionToPass = null;
       const {
         url, copyright, caption, alt, credits, width,
       } = element || {};
       const { by } = credits || {};
 
       if (currentIndex === i) isFocused = true;
+
+      isNext = (i === 1);
+      isPrev = (i === elements.length - 1);
 
       const galleryItem = {
         url,
@@ -42,9 +52,19 @@ const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile) 
 
       if (!isWindowMobile) desktopCaptionData.push(galleryItem.captionObj);
 
+      if (isPrev) {
+        functionToPass = prev;
+      } else if (isNext) {
+        functionToPass = next;
+      }
 
       return (
-        <GalleryItem refHook={i === 0 ? refHook : null} data={galleryItem} key={`gallery-item-${url}`} />
+        <GalleryItem
+          refHook={i === 0 ? refHook : null}
+          data={galleryItem}
+          func={functionToPass}
+          key={`gallery-item-${url}`}
+        />
       );
     });
   } else {
