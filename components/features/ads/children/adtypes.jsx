@@ -1,43 +1,96 @@
-export const defaultAdType = {
-  name: 'HP01',
-  slotName: 'HP01',
+export const defaultAdSlot = {
+  name: 'div-id-',
+  slotName: '',
   display: 'all',
-  dimensions: [[920, 250], [728, 90]],
+  dimensions: [
+    [
+      [1, 1],
+    ], // mobile
+    [
+      [1, 1],
+    ], // tablet
+    [
+      [1, 1],
+    ], // desktop
+  ],
+  breakpoints: [
+    [1, 0], // mobile
+    [768, 0], // tablet
+    [972, 0], // desktop
+  ],
   targeting: {
-    pos: 2,
+    // todo: add default targeting info (from content)
   },
 };
 
-export const adTypes = [
-  defaultAdType,
-  {
-    name: 'RP09',
-    slotName: 'RP09',
-    display: 'all',
-    dimensions: [[300, 600], [300, 250]],
-    targeting: {
-      pos: 1,
-    },
+export const adSlots = {
+  PX01: {},
+  HS01: {},
+  HP01: {
+    dimensions: [
+      [], // mobile
+      [
+        [728, 315],
+        [728, 90],
+      ], // tablet
+      [
+        [970, 250],
+        [728, 90],
+      ], // desktop
+    ],
   },
-  {
-    name: 'PX01',
-    slotName: 'PX01',
-    display: 'all',
-    dimensions: [[350, 90]],
-    targeting: {
-      pos: 2,
-    },
+  RP01: {
+    dimensions: [
+      [], // mobile
+      [
+        [300, 600],
+        [300, 250],
+      ], // tablet
+      [
+        [300, 600],
+        [300, 250],
+      ], // desktop
+    ],
   },
-];
-
-/**
- * Given an array of ad types, return a list of all the ad names
- *
- * @param {Array} types an array of adTypes
- * @return {Array} a list of adTypes.name values
- * */
-export const adTypeOptions = (types) => {
-  const result = [];
-  Object.keys(types).forEach(index => result.push(types[index].name));
-  return result;
+  RP09: {
+    dimensions: [
+      [], // mobile
+      [
+        [300, 600],
+        [300, 250],
+      ], // tablet
+      [
+        [300, 600],
+        [300, 250],
+      ], // desktop
+    ],
+  },
+  MP01: {
+    dimensions: [
+      [
+        [320, 150],
+        [320, 50],
+      ], // mobile
+      [], // tablet
+      [], // desktop
+    ],
+  },
+  MP02: {
+    dimensions: [
+      [
+        [320, 250],
+      ], // mobile
+      [], // tablet
+      [], // desktop
+    ],
+  },
+  MP03: {
+    dimensions: [
+      [
+        [320, 250],
+      ], // mobile
+      [], // tablet
+      [], // desktop
+    ],
+  },
 };

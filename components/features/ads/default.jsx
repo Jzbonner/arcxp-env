@@ -2,38 +2,41 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import AdSetup from './src/index';
-import { adTypes, adTypeOptions, defaultAdType } from './children/adtypes';
+import { adSlots, defaultAdSlot } from './children/adtypes';
 
 const ArcAd = ({ customFields }) => {
-  const { slot, type } = customFields;
+  const { slot } = customFields;
   const { dfp_id: dfpid } = getProperties();
   //   console.log('DFPID ', dfpid);
 
   // If there is no DFP ID and we are in the Admin,
   if (!dfpid) return null;
-
-  // get the data for this particular ad type
-  const adType = type ? adTypes.filter(ad => ad.name === type)[0] : {};
-
-  //   console.log('TYPE ', type);
   //   console.log('SLOT ', slot);
 
   // what to display if there is no ad
   const fallbackAd = null;
 
+  const adConfig = adSlots.slot || {};
+
+  // if there is no adConfig for the requested ad, abort
+  if (!adConfig) {
+    console.error(`Ad error: there was no config returned from the adtypes file for ${slot}`);
+    return null;
+  }
+
   // use their slotname if given, otherwise default to the slotname for this ad type
-  const slotName = slot || adType.slotName;
+  const slotName = slot || adConfig.slotName;
 
   const arcad = (
     <AdSetup
-      adType={type}
-      //   breakpoints={adBreakpoints}
-      className={`arc_ad | ${type}`}
-      dimensions={adType.dimensions}
+      adType={slot}
+      breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
+      className={`arc_ad | ${slot}`}
+      dimensions={adConfig.dimensions || defaultAdSlot.dimensions}
       dfpId={dfpid}
-      id={slotName}
+      id={adConfig.name || `${defaultAdSlot.name}${slotName}`}
       slotName={slotName}
-      targeting={adType.targeting}
+      targeting={adConfig.targeting || defaultAdSlot.targeting}
     />
   );
 
@@ -42,17 +45,13 @@ const ArcAd = ({ customFields }) => {
 
 ArcAd.propTypes = {
   customFields: PropTypes.shape({
-    slot: PropTypes.oneOf(['HP01', 'RP09', 'PX01']).tag({
+    slot: PropTypes.oneOf(['HP01', 'MP01', 'RP01', 'RP09']).tag({
       label: 'Slot ID',
       description: 'Choose a Slot ID for your AD',
     }).isRequired,
-    type: PropTypes.oneOf(adTypeOptions(adTypes)).tag({
-      defaultValue: defaultAdType.name,
-    }),
   }),
   siteProperties: PropTypes.shape({
     dfp_id: PropTypes.string,
-    // adBreakpoints: PropTypes.string,
   }),
 };
 
