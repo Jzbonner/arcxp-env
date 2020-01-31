@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const GalleryItem = ({ data, refHook }) => {
+const GalleryItem = ({ data, refHook, func }) => {
   const {
     url, alt, index, id, by = [], captionObj, states,
   } = data;
@@ -15,6 +15,7 @@ const GalleryItem = ({ data, refHook }) => {
       id={id}
       data-index={index}
       key={url}
+      onClick={func}
       className={`${isStickyVisible ? 'gallery-full-item' : 'gallery-image'}
       ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}`}>
       <img
@@ -53,6 +54,7 @@ GalleryItem.propTypes = {
   isStickyVisible: PropTypes.bool,
   isCaptionOn: PropTypes.bool,
   captionObj: PropTypes.object,
+  func: PropTypes.func,
 };
 
 export default GalleryItem;

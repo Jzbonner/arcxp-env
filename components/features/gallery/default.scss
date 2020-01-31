@@ -47,7 +47,7 @@
     height: 100%;
     width: auto;
     opacity: .5;
-    transition: opacity .3s .1s;
+    transition: opacity .2s .1s;
   }
 }
 
@@ -155,7 +155,7 @@
       content: "X";
       top: 50%;
       left: 50%;
-      font-size: 22px;
+      font-size: 1.38rem;
       font-weight: 400;
       position: absolute;
       transform: translate(-50%, -50%);
@@ -169,19 +169,23 @@
     width: 88px;
     text-align: center;
 
+    @include text-styles(.75rem, normal, "Gordita");
+
     .gallery-caption-trigger {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 44px;
       height: 26px;
       border-radius: 2px;
       background: #efefef;
       color: #545454;
-      display: block;
       text-align: center;
-      padding-top: 5px;
       text-transform: capitalize;
       margin-bottom: 4px;
       float: left;
       text-decoration: none;
+      letter-spacing: -.36px;
     }
 
     .is-active {
@@ -195,7 +199,7 @@
 .mobile-display {
   display: flex;
   height: fill-available;
-  min-height: 380px;
+  min-height: 40vw;
 }
 
 .gallery {
@@ -203,7 +207,7 @@
 }
 
 .gallery-caption {
-  @include text-styles(1.25rem, 1.5, "Gordita");
+  @include text-styles(1rem, 1.5, "Gordita");
 }
 
 .gallery-sticky {
@@ -309,8 +313,13 @@
     width: 150px;
     height: auto;
     font-weight: 300;
-    top: 35%;
-    transform: translate(-20%, 5%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .icon-text {
+      letter-spacing: -.33px;
+    }
   }
 
   .view-gallery {
@@ -324,7 +333,7 @@
 
   .icon-gallery {
     background-image: url("../../../resources/icons/Gallery/middle-box.svg");
-    filter: brightness(9);
+    filter: brightness(30);
   }
 
   .icon-sticky {
@@ -367,6 +376,7 @@
       .gallery-caption {
         text-align: left;
         margin: 10px 20px;
+        line-height: 2.25rem;
       }
     }
   }
@@ -390,6 +400,10 @@
     min-height: 75px;
     width: 70%;
     margin: 35px auto 5px;
+
+    .gallery-caption {
+      font-size: 1.25rem;
+    }
   }
 
   .gallery-count {
