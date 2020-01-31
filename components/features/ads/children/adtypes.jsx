@@ -19,13 +19,37 @@ export const defaultAdSlot = {
     [972, 0], // desktop
   ],
   targeting: {
-    // todo: add default targeting info (from content)
+    // key:value pairs; should be passed-in at ad-request time (e.g. article-basic)
   },
 };
 
 export const adSlots = {
-  PX01: {},
-  HS01: {},
+  PX01: {
+    dimensions: [
+      [
+        [1, 1],
+      ], // mobile
+      [
+        [1, 1],
+      ], // tablet
+      [
+        [1, 1],
+      ], // desktop
+    ],
+  },
+  HS01: {
+    dimensions: [
+      [
+        [1, 1],
+      ], // mobile
+      [
+        [1, 1],
+      ], // tablet
+      [
+        [1, 1],
+      ], // desktop
+    ],
+  },
   HP01: {
     dimensions: [
       [], // mobile
