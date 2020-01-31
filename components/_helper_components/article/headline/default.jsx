@@ -19,7 +19,7 @@ const Headline = ({ basicItems = {}, headlines = {} }) => {
           <h3 className="h3">{headlines.basic}</h3>
         </div>
       </div>
-      {promoData.type === 'image' && <Image width={1066} height={600} src={basicItems} />}
+      {promoData.type === 'image' && <Image width={1066} height={600} isLeadImage src={basicItems}/>}
       {promoData.type === 'gallery' && <div className="c-gallery b-placeholder">Gallery Placeholder</div>}
       {promoData.type === 'video' && <div className="c-video b-placeholder">Video Placeholder</div>}
     </div>
