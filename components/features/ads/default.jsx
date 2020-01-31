@@ -48,7 +48,7 @@ ArcAd.propTypes = {
     slot: PropTypes.oneOf(['HP01', 'MP01', 'RP01', 'RP09']).tag({
       label: 'Slot ID',
       description: 'Choose a Slot ID for your AD',
-    }).isRequired,
+    }),
   }),
   siteProperties: PropTypes.shape({
     dfp_id: PropTypes.string,
