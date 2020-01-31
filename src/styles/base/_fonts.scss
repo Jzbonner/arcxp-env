@@ -56,8 +56,11 @@ $font: (
 }
 
 @font-face {
-  font-family: "icon-fonts";
+  font-family: "Average";
+  font-weight: 400;
   font-stretch: normal;
   font-style: normal;
-  src: url("./../../../resources/fonts/icon-fonts/onesite.woff") format("woff");
+  src:
+    url("./../../../resources/fonts/average/Average-Regular.ttf")
+    format("truetype");
 }

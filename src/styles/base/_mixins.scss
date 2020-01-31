@@ -66,15 +66,14 @@
 @mixin fixed-width {
   width: 100%;
   margin: 0 auto;
-  max-width: 767px;
+  max-width: 1600px;
 
   @include breakpoint(tablet) {
-    max-width: 1023px;
-    width: 95%;
+    width: 94%;
   }
 
   @include breakpoint(desktop-lg) {
-    max-width: 1600px;
+    width: 90%;
   }
 }
 

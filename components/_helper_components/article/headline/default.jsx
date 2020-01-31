@@ -16,7 +16,7 @@ const Headline = ({ basicItems = {}, headlines = {} }) => {
     <div className={`article-headline-component b-margin-bottom-d30-m20 with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
       <div className="headline">
         <div className="headline-body">
-          <h3 className={`headline-text ${headlines.basic.length > 60 ? 'headline-text-long' : ''}`}>{headlines.basic}</h3>
+          <h3 className={`headline-text ${headlines.basic.length > 50 ? 'headline-text-long' : ''}`}>{headlines.basic}</h3>
         </div>
       </div>
       {promoData.type === 'image' && <Image width={1066} height={600} src={basicItems} />}
