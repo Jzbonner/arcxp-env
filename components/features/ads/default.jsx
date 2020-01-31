@@ -29,9 +29,9 @@ const ArcAd = ({ customFields }) => {
 
   const arcad = (
     <AdSetup
-      adType={slot}
+      adType={adConfig}
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
-      className={`arc_ad | ${slot}`}
+      className={`arc_ad | ${slotName}`}
       dimensions={adConfig.dimensions || defaultAdSlot.dimensions}
       dfpId={dfpid}
       id={adConfig.name || `${defaultAdSlot.name}${slotName}`}
