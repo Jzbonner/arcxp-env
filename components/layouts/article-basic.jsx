@@ -13,8 +13,9 @@ import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
 import '../../src/styles/container/_article-basic.scss';
+import ArcAd from '../features/ads/default';
 
-const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
+const RP01 = () => <ArcAd customFields={ { slot: 'RP01' } }/>;
 
 const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
 const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
@@ -91,13 +92,13 @@ const StoryPageLayout = () => {
 
         <article className="c-articlePadding">
           <Section elements={contentElements} stopIndex={1} />
-          <Section elements={contentElements} startIndex={1} stopIndex={3} rightRailAd={ExampleAdComponent} />
+          <Section elements={contentElements} startIndex={1} stopIndex={3} rightRailAd={RP01} />
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
 
           <Section
             elements={contentElements}
             startIndex={3}
-            rightRailAd={ExampleAdComponent}
+            rightRailAd={RP01}
             insertedAds={[
               { insertAfterParagraph: 3, ad: ExampleAdInsertion1 },
               { insertAfterParagraph: 5, ad: ExampleAdInsertion2 },
