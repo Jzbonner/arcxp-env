@@ -207,7 +207,7 @@
 }
 
 .gallery-caption {
-  @include text-styles(1.25rem, 1.5, "Gordita");
+  @include text-styles(1rem, 1.5, "Gordita");
 }
 
 .gallery-sticky {
@@ -333,7 +333,7 @@
 
   .icon-gallery {
     background-image: url("../../../resources/icons/Gallery/middle-box.svg");
-    filter: brightness(20);
+    filter: brightness(30);
   }
 
   .icon-sticky {
@@ -376,7 +376,7 @@
       .gallery-caption {
         text-align: left;
         margin: 10px 20px;
-        line-height: 36px;
+        line-height: 2.25rem;
       }
     }
   }
@@ -400,6 +400,10 @@
     min-height: 75px;
     width: 70%;
     margin: 35px auto 5px;
+
+    .gallery-caption {
+      font-size: 1.25rem;
+    }
   }
 
   .gallery-count {
