@@ -56,7 +56,7 @@ const StoryPageLayout = () => {
       <header>
         <div className="b-placeholder c-breakingNews">Breaking News</div>
 
-        <div className="c-fixed-width">
+        <div className="c-header">
           <div className="b-placeholder c-logo">Logo</div>
           <div className="b-placeholder c-headerNav">
             <nav className="b-placeholder c-headerNav-menu">Menu</nav>
@@ -76,7 +76,7 @@ const StoryPageLayout = () => {
 
       <main>
         <header className="b-margin-bottom-d30-m20">
-          <div className="c-fixed-width">
+          <div className="c-header">
             <Headline headlines={headlines} basicItems={basicItems} />
           </div>
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10">
@@ -89,7 +89,7 @@ const StoryPageLayout = () => {
           <SubHeadline subheadlines={subheadlines} />
         </header>
 
-        <article className="c-articlePadding">
+        <article>
           <Section elements={contentElements} stopIndex={1} />
           <Section elements={contentElements} startIndex={1} stopIndex={3} rightRailAd={ExampleAdComponent} />
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
