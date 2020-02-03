@@ -10,7 +10,7 @@ const BlogAuthor = ({ subtype, authorData }) => {
         <div className="blogAuthor-content">
           {authorData.map((val, index) => (
             <React.Fragment key={`blog-author-${index}`}>
-              <div className="b-flexRow">
+              <div className="b-flexRow blog-author-content-heading">
                 {val.image && val.image.url && (
                   <div className="content-profileImage">
                     <img src={val.image.url} alt={`${val.name}'s Profile Picture`} />
@@ -25,8 +25,8 @@ const BlogAuthor = ({ subtype, authorData }) => {
               )}
               {authorData.length < 2 && (
                 <div className="b-flexRow b-flexCenter">
-                  {val.social_links[2] && val.social_links[2].url && <a className="btn-facebook" href={val.social_links[2].url} />}
-                  {val.social_links[3] && val.social_links[3].url && <a className="btn-twitter" href={val.social_links[3].url} />}
+                  {val.social_links[1] && val.social_links[1].url && <a className="btn-facebook" href={val.social_links[1].url} />}
+                  {val.social_links[2] && val.social_links[2].url && <a className="btn-twitter" href={val.social_links[2].url} />}
                 </div>
               )}
             </React.Fragment>

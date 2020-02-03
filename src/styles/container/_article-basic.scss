@@ -1,8 +1,16 @@
 @import "./../base/breakpoints";
 @import "./../base/mixins";
 
-.c-fixed-width {
-  @include fixed-width;
+.c-header {
+  margin: 0 auto;
+
+  @include breakpoint(desktop-sm) {
+    width: 94%;
+  }
+
+  @include breakpoint(desktop-lg) {
+    width: 90%;
+  }
 }
 
 .c-breakingNews {
@@ -74,7 +82,7 @@
 
 .c-articlePadding {
   padding: 0 30px;
-  
+
   @include breakpoint(desktop-sm) {
     padding: 0;
   }
