@@ -49,6 +49,9 @@ const ContentElements = ({ contentElements }) => (
         case 'video':
           return <Video src={element} />;
         default:
+          if (element.type && element.type.name && element.type.name === 'ArcAd') {
+            return element;
+          }
           return null;
       }
     })}
