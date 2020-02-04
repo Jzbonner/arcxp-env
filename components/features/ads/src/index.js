@@ -5,12 +5,14 @@ import ArcAdLib from './children/ArcAdLib';
 const AdSetup = ({
   id, slotName, dimensions, breakpoints, refresh, targeting, className, prerender, dfpId,
 }) => {
-  window.arcAdsPrerenderer = adDetails => new Promise((resolve) => {
-    if (prerender) {
-      prerender.adDetails();
-    }
-    resolve(adDetails);
-  });
+  if (prerender) {
+    window.arcAdsPrerenderer = adDetails => new Promise((resolve) => {
+      if (prerender) {
+        prerender.adDetails();
+      }
+      resolve(adDetails);
+    });
+  }
 
   // console.log('INNER COMPONENT', dfpId);
 
@@ -26,7 +28,7 @@ const AdSetup = ({
           breakpoints,
           refresh,
         },
-        prerender: window.arcAdsPrerenderer,
+        prerender: window.arcAdsPrerenderer || null,
       },
       dfpId,
     );

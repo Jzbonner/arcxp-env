@@ -72,7 +72,11 @@ export const adSlots = {
       [
         [300, 600],
         [300, 250],
-      ], // desktop
+      ], // tablet
+    ],
+    breakpoints: [
+      [972, 0], // desktop
+      [768, 0], // tablet
     ],
   },
   'RP01-Story-Desktop': {
@@ -155,7 +159,7 @@ export const adSlots = {
       [320, 250],
     ],
     breakpoints: [
-      [0, 0], // mobile
+      [1, 0], // mobile
     ],
   },
 };
