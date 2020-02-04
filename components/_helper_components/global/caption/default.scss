@@ -93,7 +93,7 @@
   .photo-caption {
     .photo-caption-text {
       @include text-styles(0.875em, 1.58, "Gordita");
-      @include text-styles-tablet(1.25em, 1, "Gordita");
+      @include text-styles-tablet(1.25em, 1.5, "Gordita");
     }
     .photo-credit-text {
       position: static;
