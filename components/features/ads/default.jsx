@@ -30,9 +30,9 @@ const ArcAd = ({ customFields, staticSlot }) => {
       refresh={true}
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
       className={`arc_ad | ${slotName}`}
-      dimensions={ defaultAdSlot.dimensions}
+      dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
       dfpId={dfpid}
-      id={`${defaultAdSlot.name}${slotName}`}
+      id={`${defaultAdSlot.name}${(staticSlot || slot)}`}
       slotName={slotName}
       targeting={adConfig.targeting || defaultAdSlot.targeting}
     />
