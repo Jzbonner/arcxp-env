@@ -3,20 +3,14 @@ export const defaultAdSlot = {
   slotName: '',
   display: 'all',
   dimensions: [
-    [
-      [1, 1],
-    ], // mobile
-    [
-      [1, 1],
-    ], // tablet
-    [
-      [1, 1],
-    ], // desktop
+    [[1, 1]], // desktop
+    [[1, 1]], // tablet
+    [[1, 1]], // mobile
   ],
   breakpoints: [
-    [1, 0], // mobile
-    [768, 0], // tablet
     [972, 0], // desktop
+    [768, 0], // tablet
+    [1, 0], // mobile
   ],
   targeting: {
     // key:value pairs; should be passed-in at ad-request time (e.g. article-basic)
@@ -26,54 +20,37 @@ export const defaultAdSlot = {
 export const adSlots = {
   PX01: {
     dimensions: [
-      [
-        [1, 1],
-      ], // mobile
-      [
-        [1, 1],
-      ], // tablet
-      [
-        [1, 1],
-      ], // desktop
+      [[1, 1]], // desktop
+      [[1, 1]], // tablet
+      [[1, 1]], // mobile
     ],
   },
   HS01: {
     dimensions: [
-      [
-        [1, 1],
-      ], // mobile
-      [
-        [1, 1],
-      ], // tablet
-      [
-        [1, 1],
-      ], // desktop
+      [[1, 1]], // desktop
+      [[1, 1]], // tablet
+      [[1, 1]], // mobile
     ],
   },
   HP01: {
     dimensions: [
       [
-        [],
-      ], // mobile
+        [920, 250],
+        [728, 90],
+      ], // desktop
       [
         [728, 315],
         [728, 90],
       ], // tablet
-      [
-        [970, 250],
-        [728, 90],
-      ], // desktop
+      [], // mobile
     ],
   },
   RP01: {
     dimensions: [
       [
-        [],
-      ], // mobile
-      [
         [300, 600],
         [300, 250],
-      ], // tablet
+      ], // desktop
       [
         [300, 600],
         [300, 250],
@@ -84,85 +61,59 @@ export const adSlots = {
     slotName: 'RP01',
     dimensions: [
       [
-        [],
-      ], // mobile
-      [
-        [],
-      ], // tablet
-      [
         [300, 600],
         [300, 250],
       ], // desktop
+      [[0, 0]], // tablet
+      [[0, 0]], // mobile
     ],
   },
   'RP01-Story-Tablet': {
     slotName: 'RP01',
     dimensions: [
-      [
-        [],
-      ], // mobile
+      [[0, 0]], // desktop
       [
         [300, 600],
         [300, 250],
       ], // tablet
-      [
-        [],
-      ], // desktop
+      [[0, 0]], // mobile
     ],
   },
   RP09: {
     dimensions: [
       [
-        [],
-      ], // mobile
+        [300, 600],
+        [300, 250],
+      ], // desktop
       [
         [300, 600],
         [300, 250],
       ], // tablet
-      [
-        [300, 600],
-        [300, 250],
-      ], // desktop
+      [[0, 0]], // mobile
     ],
   },
   MP01: {
     dimensions: [
+      [], // desktop
+      [[0, 0]], // tablet
       [
         [320, 150],
         [320, 50],
       ], // mobile
-      [
-        [],
-      ], // tablet
-      [
-        [],
-      ], // desktop
     ],
   },
   MP02: {
     dimensions: [
-      [
-        [320, 250],
-      ], // mobile
-      [
-        [],
-      ], // tablet
-      [
-        [],
-      ], // desktop
+      [[0, 0]], // desktop
+      [[0, 0]], // tablet
+      [[320, 250]], // mobile
     ],
   },
   MP03: {
     dimensions: [
-      [
-        [320, 250],
-      ], // mobile
-      [
-        [],
-      ], // tablet
-      [
-        [],
-      ], // desktop
+      [[0, 0]], // desktop
+      [[0, 0]], // tablet
+      [[320, 250]], // mobile
     ],
   },
 };
