@@ -51,7 +51,7 @@ AdSetup.propTypes = {
   refresh: PropTypes.bool, // whether or not to refresh the ad for mobile breakpoint changes
   targeting: PropTypes.object, // key/value pairs attached to the ad request
   prerender: PropTypes.func, // a function to fire before the ad loads
-  dfpId: PropTypes.number,
+  dfpId: PropTypes.string,
 };
 
 AdSetup.defaultProps = {
