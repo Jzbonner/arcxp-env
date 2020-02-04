@@ -35,7 +35,7 @@ const List = (props) => {
   if (!items.length) return null;
 
   return (
-    <ol className="b-margin-bottom-d60-m40">
+    <ol className="b-margin-bottom-d40-m20">
       {items.map((item, index) => {
         if (isList(item) && items[index - 1] && !isList(items[index - 1])) return null;
         if (isList(item)) {
