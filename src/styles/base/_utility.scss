@@ -67,3 +67,18 @@
     margin-bottom: 2.5rem;
   }
 }
+
+// Advertisement Text for arcads
+
+.arc_ad .arcad {
+  position: relative;
+}
+
+.arc_ad .arcad:not(:empty):before {
+  content: "Advertisement";
+  position: absolute;
+  color: #313132;
+  font: 500 .75rem "Gordita", "arial", sans-serif;
+  left: 50%;
+  transform: translate(-50%, -20px);
+}
