@@ -10,7 +10,7 @@ const InterstitialLink = ({ src }) => {
 
   if (!(src)) return null;
   return (
-    <section className="borders b-margin-bottom-d60-m40">
+    <section className="borders b-margin-bottom-d40-m20">
       <span className="prefix">Explore</span>
       <a
         className="link"

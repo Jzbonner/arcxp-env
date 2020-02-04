@@ -11,9 +11,9 @@
     }
   }
 
-  // Since c-section will have b-margin-bottom-d60-m40 applied to it,
+  // Since c-section will have b-margin-bottom-d40-m20 applied to it,
   // we remove margin from the bottom of the last paragraph
-  .b-margin-bottom-d60-m40:last-child {
+  .b-margin-bottom-d40-m20:last-child {
     margin-bottom: 0;
   }
 
