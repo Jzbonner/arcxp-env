@@ -5,9 +5,19 @@
   .arc_ad {
     .HP01,
     .MP01 {
+      position: relative;
       div {
         margin: 0 auto;
         background: #ccc;
+      }
+
+      &:not(:empty):before {
+        content: "Advertisement";
+        position: absolute;
+        color: #313132;
+        font: 500 .75rem "Gordita", "arial", sans-serif;
+        left: 50%;
+        transform: translate(-50%, -20px);
       }
     }
   }
