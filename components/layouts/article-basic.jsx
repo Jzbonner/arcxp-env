@@ -43,7 +43,6 @@ const StoryPageLayout = () => {
   } = globalContent || {};
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
-
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
@@ -89,6 +88,7 @@ const StoryPageLayout = () => {
         <article>
           <div className="c-hp01-mp01">
             <ArcAd staticSlot={'HP01'} />
+            <ArcAd staticSlot={'MP01'} />
           </div>
           <Section elements={contentElements} stopIndex={1} />
           <Section

@@ -1,6 +1,18 @@
 @import "./../../../../src/styles/base/breakpoints";
 @import "./../../../../src/styles/base/mixins";
 
+.c-hp01-mp01 {
+  .arc_ad {
+    .HP01,
+    .MP01 {
+      div {
+        margin: 0 auto;
+        background: #ccc;
+      }
+    }
+  }
+}
+
 .c-section {
   @include section();
   &:first-child {

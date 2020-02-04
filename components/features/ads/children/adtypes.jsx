@@ -94,7 +94,7 @@ export const adSlots = {
   },
   MP01: {
     dimensions: [
-      [], // desktop
+      [[0, 0]], // desktop
       [[0, 0]], // tablet
       [
         [320, 150],
