@@ -12,6 +12,7 @@ import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
+import NavBar from '../_helper_components/global/navBar/default';
 import '../../src/styles/container/_article-basic.scss';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
@@ -55,16 +56,9 @@ const StoryPageLayout = () => {
     <>
       <header>
         <div className="b-placeholder c-breakingNews">Breaking News</div>
-
-        <div className="c-header">
-          <div className="b-placeholder c-logo">Logo</div>
-          <div className="b-placeholder c-headerNav">
-            <nav className="b-placeholder c-headerNav-menu">Menu</nav>
-            <div className="b-placeholder c-headerNav-weather">Weather</div>
-            <div className="b-placeholder c-headerNav-logIn">Log In</div>
-          </div>
+        <NavBar
+        />
           <div className="b-placeholder c-subscribe">Support Local Journalism. Subscribe today for 99¢.</div>
-        </div>
         <StickyNav
           articleURL={articleURL}
           headlines={headlines}
