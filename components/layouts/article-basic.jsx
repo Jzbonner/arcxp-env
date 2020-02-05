@@ -31,7 +31,17 @@ const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'}/>;
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
+
   if (!globalContent) return null;
+
+  const siteContent = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'BottomNav',
+    },
+  });
+
+  console.log('Navigation: ', siteContent);
 
   const {
     first_publish_date: firstPublishDate,
