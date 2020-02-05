@@ -14,10 +14,12 @@ import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
 import NavBar from '../_helper_components/global/navBar/default';
 import '../../src/styles/container/_article-basic.scss';
+import ArcAd from '../features/ads/default';
 
-const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
+const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
+const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
+const MP02 = () => <ArcAd staticSlot={'MP02'} />;
 
-const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
 const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
 
 const StoryPageLayout = () => {
@@ -42,15 +44,9 @@ const StoryPageLayout = () => {
   } = globalContent || {};
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
-
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
-
-  // const paragraphCount = paragraphCounter(contentElements);
-
-  // with paragraphCount, we can now determine what ads are needed for the layout
-  // console.log('paragraphCount', paragraphCount);
 
   return (
     <>
@@ -84,19 +80,21 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
+          <div className="c-hp01-mp01">
+            <ArcAd staticSlot={'HP01'} />
+            <ArcAd staticSlot={'MP01'} />
+          </div>
           <Section elements={contentElements} stopIndex={1} />
-          <Section elements={contentElements} startIndex={1} stopIndex={3} rightRailAd={ExampleAdComponent} />
-          <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
-
           <Section
             elements={contentElements}
-            startIndex={3}
-            rightRailAd={ExampleAdComponent}
-            insertedAds={[
-              { insertAfterParagraph: 3, ad: ExampleAdInsertion1 },
-              { insertAfterParagraph: 5, ad: ExampleAdInsertion2 },
-            ]}
+            startIndex={1}
+            stopIndex={3}
+            rightRailAd={RP01StoryDesktop}
+            insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
+          <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
+
+          <Section elements={contentElements} startIndex={3} rightRailAd={ExampleAdInsertion2} />
 
           <BlogAuthor subtype={subtype} authorData={authorData} />
           <Nativo elements={contentElements} controllerClass="story-nativo_placeholder--boap" />

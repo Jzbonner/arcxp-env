@@ -9,26 +9,25 @@ const NavBar = () => {
       hierarchy: 'TopNav',
     },
   });
-  console.log(sections);
+  const {
+    site_logo_image: siteLogoImage,
+    children,
+  } = sections;
+  console.log(siteLogoImage);
+
+  const sectionLi = children.map(section => (
+    <>
+     <Section key={section._id} config={section}/>
+     </>
+  ));
+
 
   return (
     <div>
       <header>
         <nav>
           <ul>
-            <Section/>
-            <li><a>Politics</a></li>
-            <li><a>County By County</a></li>
-            <li><a>Things To Do</a></li>
-            <li><a></a></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            {sectionLi}
           </ul>
         </nav>
       </header>

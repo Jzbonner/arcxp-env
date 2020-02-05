@@ -33,7 +33,7 @@ const ContentElements = ({ contentElements }) => (
           return <Header src={element} />;
         case 'image':
           // a height of 0 makes the height proportional to the width
-          return <Image width={800} height={0} src={element} isInlineImage imageMarginBottom="b-margin-bottom-d60-m40" />;
+          return <Image width={800} height={0} src={element} isInlineImage imageMarginBottom="b-margin-bottom-d40-m20" />;
         case 'text':
           return <Paragraph src={element} />;
         case 'interstitial_link':
@@ -49,6 +49,9 @@ const ContentElements = ({ contentElements }) => (
         case 'video':
           return <Video src={element} />;
         default:
+          if (element.type && element.type.name && element.type.name === 'ArcAd') {
+            return element;
+          }
           return null;
       }
     })}

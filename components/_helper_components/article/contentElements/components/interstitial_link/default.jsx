@@ -1,14 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './styles.scss';
 
-const InterstitialLink = ({ src }) => (
-    <div className="b-margin-bottom-d60-m40">
-      <p>Content Element Type: <strong>Interstitial Link</strong> Not Worked. Content: {src.content}</p>
-    </div>
-);
+const InterstitialLink = ({ src }) => {
+  const {
+    content,
+    url,
+  } = src;
+
+  if (!(src)) return null;
+  return (
+    <section className="borders b-margin-bottom-d40-m20">
+      <span className="prefix">Explore</span>
+      <a
+        className="link"
+        href={url}
+        target="_self">
+        {content}
+      </a>
+    </section>
+  );
+};
 
 InterstitialLink.propTypes = {
-  src: PropTypes.object,
+  src: PropTypes.string,
 };
 
 export default InterstitialLink;

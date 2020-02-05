@@ -5,7 +5,7 @@ import './styles.scss';
 const BlogAuthor = ({ subtype, authorData }) => {
   if (subtype === 'Blog' && authorData.length > 0) {
     return (
-      <div className="c-blogAuthor c-section b-margin-bottom-d60-m40">
+      <div className="c-blogAuthor c-section b-margin-bottom-d40-m20">
         <p className="blogAuthor-title">About the Author{authorData.length > 1 ? 's' : ''}</p>
         <div className="blogAuthor-content">
           {authorData.map((val, index) => (

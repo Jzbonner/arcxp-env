@@ -1,15 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Section = ({ section, link }) => (
+const Section = ({ config }) => {
+  const {
+    children: menuItems,
+    _id: link,
+    navigation,
+  } = config;
+  const {
+    nav_title: sectionName,
+  } = navigation;
+  return (
     <li>
-      <a href={link}>{section}</a>
+      <a href={link}>{sectionName}</a>
     </li>
-);
+  );
+};
 
 Section.propTypes = {
-  section: PropTypes.string,
-  link: PropTypes.string,
+  config: PropTypes.object,
 };
 
 export default Section;
