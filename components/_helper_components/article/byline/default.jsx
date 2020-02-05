@@ -68,7 +68,7 @@ const Byline = ({ by = [] }) => {
       const bylineData = handleMultipleAuthors(finalAuthorData, hasOrganization);
       byline = bylineData;
     } else {
-    // only one author //
+      // only one author //
       const finalAuthorData = handleOrganization(authors, organization, isStaff);
       const bylineData = handleSingleAuthor(finalAuthorData);
       byline = bylineData;
@@ -102,7 +102,7 @@ const Byline = ({ by = [] }) => {
     finalizeByline(authors, organization, isStaff);
   }
 
-  return byline ? <div className="byline">By {byline}</div> : null;
+  return byline ? <div className="byline b-margin-bottom-d40-m20">By {byline}</div> : null;
 };
 
 Byline.propTypes = {
