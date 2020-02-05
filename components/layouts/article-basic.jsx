@@ -1,6 +1,7 @@
 /*  /components/layouts/article-basic.jsx  */
 import React from 'react';
 import { useAppContext } from 'fusion:context';
+import { useContent } from 'fusion:content';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
@@ -22,7 +23,17 @@ const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd inser
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
+
   if (!globalContent) return null;
+
+  const siteContent = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'BottomNav',
+    },
+  });
+
+  console.log('Navigation: ', siteContent);
 
   const {
     first_publish_date: firstPublishDate,
