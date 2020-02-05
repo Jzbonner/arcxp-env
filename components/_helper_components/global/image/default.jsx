@@ -9,7 +9,7 @@ const Image = ({
 }) => {
   const { url, caption, credits } = src || null;
   const [imageSrc, setImageSrc] = useState('');
-  const imageALT = caption.length > 1 ? caption : 'story page inline image';
+  const imageALT = caption && caption.length > 1 ? caption : 'story page inline image';
 
   useEffect(() => {
     setImageSrc(imageResizer(url, width, height));
@@ -33,7 +33,7 @@ const Image = ({
     <div className={`c-image-component ${imageMarginBottom}`}>
       <div className="image-component-image">
         <img src={imageSrc} alt={imageALT} />
-        {(isInlineImage && caption.length < 1) || (isLeadImage && caption.length < 1 && giveCredit.length < 1) ? null : (
+        {(isInlineImage && !caption) || (isLeadImage && !caption && !giveCredit) ? null : (
           <Caption src={src} />
         )}
       </div>

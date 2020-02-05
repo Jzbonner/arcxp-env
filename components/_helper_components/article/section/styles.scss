@@ -1,6 +1,13 @@
 @import "./../../../../src/styles/base/breakpoints";
 @import "./../../../../src/styles/base/mixins";
 
+.c-hp01-mp01 {
+  padding: 2em 0;
+  @include breakpoint(tablet) {
+    padding: 3em 0;
+  }
+}
+
 .c-section {
   @include section();
   &:first-child {
@@ -40,7 +47,7 @@
       min-width: 300px;
       background-color: white;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       font-size: 20px;
       border: 1px solid #a8a8a8;
       display: none;
