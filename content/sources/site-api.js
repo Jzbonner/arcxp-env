@@ -1,8 +1,12 @@
+import getProperties from 'fusion:properties';
+
 const schemaName = 'site-service';
 const params = {
   hierarchy: 'text',
   section: 'text',
 };
+
+const arcSite = getProperties().sites[0];
 
 export const createContentSource = (query) => {
   const resolve = (key = {}) => {
@@ -19,4 +23,4 @@ export const createContentSource = (query) => {
   };
 };
 
-export default createContentSource('ajc');
+export default createContentSource(arcSite);
