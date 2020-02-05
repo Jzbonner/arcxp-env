@@ -6,23 +6,6 @@
   @include breakpoint(tablet) {
     padding: 3em 0;
   }
-  .arc_ad {
-    .HP01,
-    .MP01 {
-      position: relative;
-      div {
-        margin: 0 auto;
-        background: #ccc;
-      }
-    }
-
-    .MP01 {
-      display: block;
-      @include breakpoint(tablet) {
-        display: none;
-      }
-    }
-  }
 }
 
 .c-section {
