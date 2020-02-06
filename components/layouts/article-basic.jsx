@@ -13,6 +13,7 @@ import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
+import Footer from '../_helper_components/footer/footer';
 import '../../src/styles/container/_article-basic.scss';
 
 const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
@@ -25,15 +26,6 @@ const StoryPageLayout = () => {
   const { globalContent } = appContext;
 
   if (!globalContent) return null;
-
-  const siteContent = useContent({
-    source: 'site-api',
-    query: {
-      hierarchy: 'BottomNav',
-    },
-  });
-
-  console.log('Navigation: ', siteContent);
 
   const {
     first_publish_date: firstPublishDate,
@@ -61,6 +53,15 @@ const StoryPageLayout = () => {
 
   // with paragraphCount, we can now determine what ads are needed for the layout
   // console.log('paragraphCount', paragraphCount);
+
+  const siteContent = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'BottomNav',
+    },
+  });
+
+  console.log('SiteContent: ', siteContent);
 
   return (
     <>
@@ -123,7 +124,7 @@ const StoryPageLayout = () => {
         </article>
         <Gallery contentElements={contentElements} />
       </main>
-      <footer className="b-placeholder c-footer">Footer</footer>
+      <Footer />
     </>
   );
 };
