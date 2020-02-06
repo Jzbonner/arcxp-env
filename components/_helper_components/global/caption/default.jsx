@@ -30,11 +30,9 @@ const Caption = ({ src, isLeadVideo, videoCaption }) => {
       giveCredit = `Credit: ${secondaryCredit}`;
     }
   }
-
   if (isLeadVideo) {
     giveCredit = `Credit: ${mainCredit}`;
   }
-
   return (
     <div className={`c-caption ${toggleButton ? 'is-active' : ''}`}>
       <div className="photo-caption-btn" onClick={toggle}>

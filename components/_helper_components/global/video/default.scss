@@ -4,36 +4,44 @@
 
 //default image styles. Default scenario is assumed to be thumbnail in main content
 .c-video-component {
-  flex: 1 0 100%;
-  position: relative;
-  @include breakpoint(tablet) {
-    flex: 1 0 66%;
-  }
-
-  .c-caption {
-      top: 4.875rem;
-      @include breakpoint(tablet) {
-        .photo-caption-btn {
-          top: 1em;
-        }
-      }
-  }
-
-  .video-component {
+    flex: 1 0 100%;
     position: relative;
-    video {
-      width: 100%;
+
+    @include breakpoint(tablet) {
+        flex: 1 0 66%;
     }
-  }
-  .video-credit-text {
+
+    .c-caption {
+        top: 4.875rem;
+
+        .photo-caption-btn {
+            &:focus {
+                outline: none;
+                box-shadow: none;
+            }
+            @include breakpoint(tablet) {
+                top: 1em;
+            }
+        }
+    }
+}
+
+.video-component {
+    position: relative;
+
+    video {
+        width: 100%;
+    }
+}
+
+.video-credit-text {
     text-align: right;
     @include text-styles(0.75rem, 1, "Gordita");
     display: none;
     position: absolute;
     right: 0;
-    @include breakpoint(desktop-sm) {
-      display: block;
-    }
-  }
-}
 
+    @include breakpoint(desktop-sm) {
+        display: block;
+    }
+}
