@@ -31,7 +31,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
       className={`arc_ad | ${slotName}`}
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
-      dfpId={`${dfpid}/Atlanta_NP/ajc_web_default/`}
+      dfpId={`${dfpid}/TEST_atlanta_np/ajc_web_default`}
       id={`${defaultAdSlot.name}${(staticSlot || slot)}`}
       slotName={slotName}
       targeting={adConfig.targeting || defaultAdSlot.targeting}

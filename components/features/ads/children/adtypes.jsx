@@ -14,7 +14,7 @@ export const defaultAdSlot = {
     ], // mobile
   ],
   breakpoints: [
-    [972, 0], // desktop
+    [1024, 0], // desktop
     [768, 0], // tablet
     [1, 0], // mobile
   ],
@@ -62,7 +62,7 @@ export const adSlots = {
       ], // tablet
     ],
     breakpoints: [
-      [972, 0], // desktop
+      [1024, 0], // desktop
       [768, 0], // tablet
     ],
   },
@@ -78,7 +78,7 @@ export const adSlots = {
       ], // tablet
     ],
     breakpoints: [
-      [972, 0], // desktop
+      [1024, 0], // desktop
       [768, 0], // tablet
     ],
   },
@@ -91,14 +91,14 @@ export const adSlots = {
       ],
     ],
     breakpoints: [
-      [972, 0], // desktop
+      [1024, 0], // desktop
     ],
   },
   'RP01-Story-Tablet': {
     slotName: 'RP01',
     dimensions: [
       [
-        [],
+        [0, 0],
       ], // desktop
       [
         [300, 600],
@@ -106,7 +106,7 @@ export const adSlots = {
       ], // tablet
     ],
     breakpoints: [
-      [972, 0], // desktop
+      [1024, 0], // desktop
       [768, 0], // tablet
     ],
   },
@@ -123,7 +123,7 @@ export const adSlots = {
     ],
     breakpoints: [
       [
-        [972, 0], // desktop
+        [1024, 0], // desktop
         [768, 0], // tablet
       ],
     ],
@@ -147,10 +147,10 @@ export const adSlots = {
     dimensions: [
       [
         [],
-      ],
+      ], // tablet
       [
-        [320, 250], // mobile
-      ],
+        [320, 250],
+      ], // mobile
     ],
     breakpoints: [
       [768, 0], // tablet

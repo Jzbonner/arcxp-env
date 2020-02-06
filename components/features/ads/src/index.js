@@ -7,9 +7,7 @@ const AdSetup = ({
 }) => {
   if (prerender) {
     window.arcAdsPrerenderer = adDetails => new Promise((resolve) => {
-      if (prerender) {
-        prerender.adDetails();
-      }
+      prerender.adDetails();
       resolve(adDetails);
     });
   }
