@@ -2,13 +2,18 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './default.scss';
 
-const Caption = ({ src }) => {
+const Caption = ({ src, isLeadVideo, videoCaption }) => {
   const { caption, credits } = src || null;
   const [toggleButton, setToggle] = useState(false);
 
   const toggle = () => {
     setToggle(!toggleButton);
   };
+
+  let captionContent = caption;
+  if (isLeadVideo) {
+    captionContent = videoCaption;
+  }
 
   let mainCredit = {};
   let secondaryCredit = {};
@@ -18,11 +23,18 @@ const Caption = ({ src }) => {
   }
 
   let giveCredit = '';
-  if (mainCredit.length > 1) {
-    giveCredit = `Credit: ${mainCredit}`;
-  } else if (secondaryCredit.length > 1) {
-    giveCredit = `Credit: ${secondaryCredit}`;
+  if (!isLeadVideo) {
+    if (mainCredit.length > 1) {
+      giveCredit = `Credit: ${mainCredit}`;
+    } else if (secondaryCredit.length > 1) {
+      giveCredit = `Credit: ${secondaryCredit}`;
+    }
   }
+
+  if (isLeadVideo) {
+    giveCredit = `Credit: ${mainCredit}`;
+  }
+
   return (
     <div className={`c-caption ${toggleButton ? 'is-active' : ''}`}>
       <div className="photo-caption-btn" onClick={toggle}>
@@ -33,7 +45,7 @@ const Caption = ({ src }) => {
         <div className="fill-line fill-line-long"></div>
       </div>
       <div className="photo-caption">
-        <div className="photo-caption-text">{caption}</div>
+        <div className="photo-caption-text">{captionContent}</div>
         <p className="photo-credit-text">{giveCredit}</p>
       </div>
     </div>
@@ -42,6 +54,8 @@ const Caption = ({ src }) => {
 
 Caption.propTypes = {
   src: PropTypes.object,
+  isLeadVideo: PropTypes.bool,
+  videoCaption: PropTypes.string,
 };
 
 export default Caption;
