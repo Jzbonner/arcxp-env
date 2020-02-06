@@ -4,8 +4,11 @@
 .borders {
   border-top: solid 1px #cdcdcd;
   border-bottom: solid 1px #cdcdcd;
-  padding: 1.2em 0 1.3em 1.4em;
+  padding: 1.2em 0 1.2em 1.0625em;
   display: flex;
+  @include breakpoint(tablet) {
+    padding-left: 1.4em;
+  }
 }
 .prefix {
   display: flex;
@@ -25,12 +28,11 @@
 .link {
   display: flex;
   align-items: center;
-  padding: 0 1.5em 0 1.0625em; 
+  padding: 0 0.875em 0 1.0625em;
   letter-spacing: normal;
   color: #000000;
-  @include text-styles(1rem, 1.75, "Gordita");
+  @include text-styles(1rem, 1.5, "Gordita");
   @include breakpoint(tablet) {
     @include text-styles(1.25rem, 1.75, "Gordita");
-    padding: 0 1.5em 0 2.3125em;
   }
 }
