@@ -34,15 +34,6 @@ const StoryPageLayout = () => {
 
   if (!globalContent) return null;
 
-  const siteContent = useContent({
-    source: 'site-api',
-    query: {
-      hierarchy: 'BottomNav',
-    },
-  });
-
-  console.log('Navigation: ', siteContent);
-
   const {
     first_publish_date: firstPublishDate,
     display_date: displayDate,
