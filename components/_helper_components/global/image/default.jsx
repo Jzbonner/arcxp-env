@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Caption from '../caption/default.jsx';
+import checkWindowSize from '../utils/video_image_utils/default';
 import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
@@ -14,30 +15,6 @@ const Image = ({
   useEffect(() => {
     setImageSrc(imageResizer(url, width, height));
   }, []);
-
-  const checkWindowSize = () => {
-    const isClient = typeof window === 'object';
-
-    const getSize = () => ({
-      width: isClient ? window.innerWidth : undefined,
-    });
-
-    const [windowSize, setWindowSize] = useState(getSize);
-
-    useEffect(() => {
-      if (!isClient) {
-        return false;
-      }
-      const handleResize = () => {
-        setWindowSize(getSize());
-      };
-
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    });
-
-    return windowSize;
-  };
 
   const screenSize = checkWindowSize();
 

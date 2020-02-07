@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Caption from '../caption/default.jsx';
+import checkWindowSize from '../utils/video_image_utils/default';
 import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
@@ -11,30 +12,6 @@ const Video = ({
   const { basic: videoCaption } = src.description ? src.description : null;
   const { url: videoPlayer } = src.streams && src.streams[0] ? src.streams[0] : null;
   const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
-
-  const checkWindowSize = () => {
-    const isClient = typeof window === 'object';
-
-    const getSize = () => ({
-      width: isClient ? window.innerWidth : undefined,
-    });
-
-    const [windowSize, setWindowSize] = useState(getSize);
-
-    useEffect(() => {
-      if (!isClient) {
-        return false;
-      }
-      const handleResize = () => {
-        setWindowSize(getSize());
-      };
-
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    });
-
-    return windowSize;
-  };
 
   const screenSize = checkWindowSize();
 
