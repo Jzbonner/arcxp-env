@@ -34,7 +34,6 @@ const Video = ({ src, isLeadVideo, videoPlayerRules }) => {
   };
 
   const screenSize = checkWindowSize();
-  // console.log('SCREEN SIZE', screenSize);
 
   let mainCredit = {};
   if (credits) {
