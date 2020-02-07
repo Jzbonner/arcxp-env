@@ -78,10 +78,13 @@
 .b-searchInput {
     text-align: right;
     border: none;
+    outline: none;
     background-color: transparent;
     font-size: .875rem;
     line-height: 24px;
     width: calc(100% - 40px);
+    @include text-styles(.875rem, 1, "Gordita");
+
 }
 .b-searchIcon {
     height: 29px;
@@ -93,7 +96,7 @@
 }
 
 .b-weatherIconItem {
-    padding-left: 76px;
+    padding-left: 56px;
 
 }
 .c-weatherDisplay {
@@ -107,17 +110,17 @@
 }
 
 .b-weatherText {
-    padding-left: 6px;
+    padding-left: 4px;
 }
 
 .c-loginContainer {
     padding-top: 23px;
-    padding-left: 15px;
+    padding-left: 5px;
 }
 
 .b-loginText {
     font-weight: bold;
-    padding-left: 6px;
+    padding-left: 9px;
 }
 
 .c-subBar {

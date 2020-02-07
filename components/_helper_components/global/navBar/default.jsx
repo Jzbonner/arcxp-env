@@ -59,20 +59,20 @@ const NavBar = () => {
         <nav>
           <ul>
             {sectionLi}
-            <li className='c-searchContainer itemBottomBorder itemPadding'>
+            <li className='c-searchContainer itemBottomBorder'>
               <form className='b-flexRow b-formContainer'>
                 <input className='b-searchInput'></input>
                 <img className='b-searchIcon'
                 src='https://www.ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/search-icon.svg'></img>
               </form>
             </li>
-            <li className='b-weatherIconItem c-weatherDisplay itemPadding'>
+            <li className='b-weatherIconItem c-weatherDisplay'>
               <a>W</a>
             </li>
-            <li className='b-itemText b-weatherText c-weatherDisplay itemPadding'>
+            <li className='b-itemText b-weatherText c-weatherDisplay'>
               <a>89°</a>
             </li>
-            <li className='c-loginContainer itemPadding'>
+            <li className='c-loginContainer'>
               <div className='b-flexRow b-flexCenter'>
                 <img src='https://www.ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/user-icon.svg'></img>
                 <div className='b-itemText b-loginText'>Log in</div>
