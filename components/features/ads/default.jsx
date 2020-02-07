@@ -43,7 +43,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
 
 ArcAd.propTypes = {
   customFields: PropTypes.shape({
-    slot: PropTypes.oneOf(['HP01', 'MP01', 'RP09']).tag({
+    slot: PropTypes.oneOf(['HP01', 'MP01', 'RP01']).tag({
       label: 'Slot ID',
       description: 'Choose a Slot ID for your AD',
     }),
