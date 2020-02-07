@@ -6,11 +6,7 @@ import isNotBR from '../../../layouts/_helper_functions/BR';
 import './styles.scss';
 
 const Section = ({
-  insertedAds,
-  elements,
-  startIndex = 0,
-  stopIndex = elements.length,
-  rightRailAd,
+  insertedAds, elements, startIndex = 0, stopIndex = elements.length, rightRailAd,
 }) => {
   let paragraphCounter = 0;
   const newContentElements = [];
@@ -45,7 +41,7 @@ const Section = ({
 
   if (newContentElements.length > 0) {
     return (
-      <div className={`c-section ${rightRailAd ? 'with-rightRail' : ''} b-margin-bottom-d60-m40`}>
+      <div className={`c-section ${rightRailAd ? 'with-rightRail' : ''} b-margin-bottom-d40-m20`}>
         <ContentElements contentElements={newContentElements} />
         {rightRailAd && <div className="c-rightRail">{rightRailAd()}</div>}
       </div>

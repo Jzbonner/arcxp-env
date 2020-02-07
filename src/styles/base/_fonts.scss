@@ -64,3 +64,11 @@ $font: (
     url("./../../../resources/fonts/average/Average-Regular.ttf")
     format("truetype");
 }
+
+@font-face {
+  font-family: "Average";
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  src: url("./../../../resources/fonts/average/Average-Regular.ttf") format("truetype");
+}

@@ -6,7 +6,7 @@ import Byline from '../_helper_components/article/byline/default.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
-import Section from '../_helper_components/article/section/Section.jsx';
+import Section from '../_helper_components/article/section/Section';
 import TaboolaFeed from '../features/taboolaFeed/default';
 import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
@@ -17,9 +17,9 @@ import ArcAd from '../features/ads/default';
 import PX01 from '../_helper_components/global/ads/px01/default'; */
 import '../../src/styles/container/_article-basic.scss';
 
-const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'}/>;
-const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'}/>;
-const MP02 = () => <ArcAd staticSlot={'MP02'}/>;
+const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
+const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
+const MP02 = () => <ArcAd staticSlot={'MP02'} />;
 
 const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
 
@@ -47,11 +47,9 @@ const StoryPageLayout = () => {
   } = globalContent || {};
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
-
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
-
 
   return (
     <>
@@ -91,33 +89,23 @@ const StoryPageLayout = () => {
           <SubHeadline subheadlines={subheadlines} />
         </header>
 
-        <article className="c-articlePadding">
+        <article>
+          <div className="c-hp01-mp01">
+            <ArcAd staticSlot={'HP01'} />
+            <ArcAd staticSlot={'MP01'} />
+          </div>
           <Section elements={contentElements} stopIndex={1} />
           <Section
             elements={contentElements}
             startIndex={1}
             stopIndex={3}
             rightRailAd={RP01StoryDesktop}
-            insertedAds={[
-              { insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] },
-            ]}
+            insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
-{/*           {
-            paragraphCountForPX01 === 3 && <PX01 />
-          } */}
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
-{/*           {
-            paragraphCountForPX01 === 4 && <PX01 />
-          } */}
-          <Section
-            elements={contentElements}
-            startIndex={3}
-            rightRailAd={ExampleAdInsertion2}
-          />
-          {/*           {
-          // TODO: This is a placeholder. Might need to seperate the section above. Need confirmation w/ team.
-            paragraphCountForPX01 >= 5 && <PX01 />
-          } */}
+
+          <Section elements={contentElements} startIndex={3} rightRailAd={ExampleAdInsertion2} />
+
           <BlogAuthor subtype={subtype} authorData={authorData} />
           <Nativo elements={contentElements} controllerClass="story-nativo_placeholder--boap" />
           <div className="c-taboola">

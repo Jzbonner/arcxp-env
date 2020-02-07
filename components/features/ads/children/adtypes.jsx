@@ -53,16 +53,14 @@ export const adSlots = {
   HP01: {
     dimensions: [
       [
-        [970, 250],
+        [920, 250],
         [728, 90],
       ], // desktop
       [
         [728, 315],
         [728, 90],
       ], // tablet
-      [
-        [0, 0],
-      ], // mobile
+      [], // mobile
     ],
   },
   RP01: {
@@ -71,10 +69,6 @@ export const adSlots = {
         [300, 600],
         [300, 250],
       ], // desktop
-      [
-        [300, 600],
-        [300, 250],
-      ], // tablet
       [
         [0, 0],
       ], // mobile
@@ -86,10 +80,13 @@ export const adSlots = {
       [
         [300, 600],
         [300, 250],
-      ],
-    ],
-    breakpoints: [
-      [972, 0], // desktop
+      ], // desktop
+      [
+        [0, 0],
+      ], // tablet
+      [
+        [0, 0],
+      ], // mobile
     ],
   },
   'RP01-Story-Tablet': {
@@ -118,43 +115,49 @@ export const adSlots = {
         [300, 600],
         [300, 250],
       ], // tablet
-    ],
-    breakpoints: [
       [
-        [972, 0], // tablet
-        [768, 0], // mobile
-      ],
+        [0, 0],
+      ], // mobile
     ],
   },
   MP01: {
     dimensions: [
-      [320, 150],
-      [320, 50],
-    ],
-    breakpoints: [
-      [1, 0], // mobile
+      [
+        [0, 0],
+      ], // desktop
+      [
+        [0, 0],
+      ], // tablet
+      [
+        [320, 150],
+        [320, 50],
+      ], // mobile
     ],
   },
   MP02: {
     dimensions: [
       [
-        [0, 0], // tablet
-      ],
+        [0, 0],
+      ], // desktop
       [
-        [320, 250], // mobile
-      ],
-    ],
-    breakpoints: [
-      [768, 0], // tablet
-      [1, 0], // mobile
+        [0, 0],
+      ], // tablet
+      [
+        [320, 250],
+      ], // mobile
     ],
   },
   MP03: {
     dimensions: [
-      [320, 250],
-    ],
-    breakpoints: [
-      [0, 0], // mobile
+      [
+        [0, 0],
+      ], // desktop
+      [
+        [0, 0],
+      ], // tablet
+      [
+        [320, 250],
+      ], // mobile
     ],
   },
 };

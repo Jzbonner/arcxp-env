@@ -60,11 +60,11 @@
 
 // desktop margin-bottom 60, mobile margin-bottom 40
 
-.b-margin-bottom-d60-m40 {
-  margin-bottom: 2.5rem;
+.b-margin-bottom-d40-m20 {
+  margin-bottom: 1.13rem;
 
   @include breakpoint(desktop-sm) {
-    margin-bottom: 3.75rem;
+    margin-bottom: 2.5rem;
   }
 }
 

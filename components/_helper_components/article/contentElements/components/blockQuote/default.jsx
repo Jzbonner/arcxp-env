@@ -5,7 +5,7 @@ import Paragraph from '../paragraph/default.jsx';
 import './styles.scss';
 
 const Blockquote = ({ contentElements, citation }) => (
-  <div className="blockquote b-margin-bottom-d60-m40">
+  <div className="blockquote b-margin-bottom-d40-m20">
     {contentElements.map((el, index) => {
       switch (el.type) {
         case 'list':
