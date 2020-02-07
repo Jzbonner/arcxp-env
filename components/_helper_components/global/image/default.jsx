@@ -15,6 +15,33 @@ const Image = ({
     setImageSrc(imageResizer(url, width, height));
   }, []);
 
+  const checkWindowSize = () => {
+    const isClient = typeof window === 'object';
+
+    const getSize = () => ({
+      width: isClient ? window.innerWidth : undefined,
+    });
+
+    const [windowSize, setWindowSize] = useState(getSize);
+
+    useEffect(() => {
+      if (!isClient) {
+        return false;
+      }
+      const handleResize = () => {
+        setWindowSize(getSize());
+      };
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    });
+
+    return windowSize;
+  };
+
+  const screenSize = checkWindowSize();
+
+
   let mainCredit = {};
   let secondaryCredit = {};
   if (credits) {
@@ -29,13 +56,29 @@ const Image = ({
     giveCredit = `Credit: ${secondaryCredit}`;
   }
 
+  const smartChecker = () => {
+    if (isLeadImage && !giveCredit && !caption) {
+      return null;
+    }
+    if (isInlineImage && !caption) {
+      return null;
+    }
+    if (isLeadImage && giveCredit && !caption && screenSize.width < 1024) {
+      return <Caption src={src} />;
+    }
+
+    if (isLeadImage && giveCredit && !caption && screenSize.width > 1024) {
+      return null;
+    }
+
+    return <Caption src={src} />;
+  };
+
   return (
     <div className={`c-image-component ${imageMarginBottom}`}>
       <div className="image-component-image">
         <img src={imageSrc} alt={imageALT} />
-        {(isInlineImage && !caption) || (isLeadImage && !caption && !giveCredit) ? null : (
-          <Caption src={src} />
-        )}
+        {smartChecker()}
       </div>
       <p className="photo-credit-text">{giveCredit}</p>
     </div>
