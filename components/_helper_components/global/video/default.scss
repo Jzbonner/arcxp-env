@@ -15,11 +15,12 @@
         top: 4.875rem;
 
         .photo-caption-btn {
+            top: -1.5em;
             &:focus {
-                outline: none;
-                box-shadow: none;
+                outline: none !important;
+                box-shadow: none !important;
             }
-            @include breakpoint(tablet) {
+            @include breakpoint(desktop-sm) {
                 top: 1em;
             }
         }
