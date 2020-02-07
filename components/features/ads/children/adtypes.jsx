@@ -141,7 +141,7 @@ export const adSlots = {
   MP01: {
     dimensions: [
       [
-        [],
+        [0, 0],
       ], // tablet+
       [
         [320, 150],
@@ -152,11 +152,12 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
+    display: 'mobile',
   },
   MP02: {
     dimensions: [
       [
-        [],
+        [0, 0],
       ], // tablet+
       [
         [300, 250],
@@ -166,11 +167,12 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
+    display: 'mobile',
   },
   MP03: {
     dimensions: [
       [
-        [],
+        [0, 0],
       ], // tablet+
       [
         [320, 250],
@@ -180,5 +182,6 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
+    display: 'mobile',
   },
 };
