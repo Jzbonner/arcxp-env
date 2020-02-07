@@ -1,6 +1,5 @@
 import getProperties from 'fusion:properties';
 
-const schemaName = 'site-service';
 const params = {
   hierarchy: 'text',
   section: 'text',
@@ -19,7 +18,6 @@ export const createContentSource = (query) => {
   return {
     resolve,
     params,
-    schemaName,
   };
 };
 

@@ -1,24 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../default.scss';
 
-const Section = ({ config }) => {
+const Section = ({ navigation, link }) => {
+  console.log(link);
   const {
-    children: menuItems,
-    _id: link,
-    navigation,
-  } = config;
-  const {
-    nav_title: sectionName,
+    nav_title: name,
   } = navigation;
   return (
-    <li>
-      <a href={link}>{sectionName}</a>
+    <li className='itemPadding itemBottomBorder b-itemText'>
+      <a>{name}</a>
     </li>
   );
 };
 
 Section.propTypes = {
-  config: PropTypes.object,
+  navigation: PropTypes.object,
+  link: PropTypes.string,
 };
 
 export default Section;

@@ -51,10 +51,7 @@ const StoryPageLayout = () => {
   return (
     <>
       <header>
-        <div className="b-placeholder c-breakingNews">Breaking News</div>
-        <NavBar
-        />
-          <div className="b-placeholder c-subscribe">Support Local Journalism. Subscribe today for 99¢.</div>
+        <NavBar/>
         <StickyNav
           articleURL={articleURL}
           headlines={headlines}

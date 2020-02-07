@@ -1,0 +1,78 @@
+@import '../../../../src/styles/base/_mixins.scss';
+
+.c-headerNav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 30px;
+    min-height: 313px;
+    background-image: linear-gradient(to bottom, #fff 66%, #d8d8d8);
+  
+      nav {
+      padding-bottom: 20px;
+
+       ul {
+        display: flex;
+        height: 42px;
+        flex-direction: row;
+        list-style-type: none;
+    }
+    }
+  }
+.itemPadding {
+    padding-right:20px;
+}
+.itemBottomBorder {
+    border-bottom: solid 1px #cdcdcd;
+}
+
+.b-itemText {
+    @include text-styles(1.125rem, 1, "Gordita");
+    color: #2e81b7;
+}
+
+.b-separatorContainer {
+    display: flex;
+}
+
+.separatorBar {
+    background-color: #2e81b7;
+    width: 2px;
+    height: 20px;
+    margin-bottom: 8px;
+}
+.b-formContainer {
+    height:28px;
+}
+.b-searchInput {
+    text-align: right;
+    border: none;
+    background-color: transparent;
+    font-size: .875rem;
+    line-height: 24px;
+    width: calc(100% - 40px);
+}
+.b-searchIcon {
+    height: 29px;
+    width: 29px;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-left: 10px;
+    font-size: 1rem;
+}
+
+.c-subBar {
+    height: 57px;
+    width: 100%;
+    border-radius: 6px;
+    background-image: linear-gradient(to top, #04befe, #4481eb);
+}
+.b-subscribeText {
+    @include text-styles(1.25rem, 1, "Gordita");
+    color: #ffffff;
+}
+.b-subscribeBold {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 5px;
+}
