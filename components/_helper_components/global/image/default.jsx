@@ -18,7 +18,6 @@ const Image = ({
 
   const screenSize = checkWindowSize();
 
-
   let mainCredit = {};
   let secondaryCredit = {};
   if (credits) {
