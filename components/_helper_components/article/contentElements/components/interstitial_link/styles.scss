@@ -31,7 +31,7 @@
   padding: 0 0.875em 0 1.0625em;
   letter-spacing: normal;
   color: #000000;
-  @include text-styles(1rem, 1.5, "Gordita");
+  @include text-styles(1rem, 1.75, "Gordita");
   @include breakpoint(tablet) {
     @include text-styles(1.25rem, 1.75, "Gordita");
   }
