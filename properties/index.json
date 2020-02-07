@@ -8,8 +8,12 @@
   "redditURL": "https://www.reddit.com/submit?url=",
   "mail": "mailto:?Subject=",
   "sites": ["ajc"],
-  "videoPlayerRules": {
+  "featuredVideoPlayerRules": {
     "startPlaying": true,
+    "muteON": true
+  },
+  "inlineVideoPlayerRules": {
+    "startPlaying": false,
     "muteON": true
   }
 }

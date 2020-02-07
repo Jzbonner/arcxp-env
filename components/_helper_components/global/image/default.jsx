@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Caption from '../caption/default.jsx';
+import checkWindowSize from '../utils/video_image_utils/default';
 import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
@@ -14,6 +15,9 @@ const Image = ({
   useEffect(() => {
     setImageSrc(imageResizer(url, width, height));
   }, []);
+
+  const screenSize = checkWindowSize();
+
 
   let mainCredit = {};
   let secondaryCredit = {};
@@ -29,13 +33,29 @@ const Image = ({
     giveCredit = `Credit: ${secondaryCredit}`;
   }
 
+  const smartChecker = () => {
+    if (isLeadImage && !giveCredit && !caption) {
+      return null;
+    }
+    if (isInlineImage && !caption) {
+      return null;
+    }
+    if (isLeadImage && giveCredit && !caption && screenSize.width < 1024) {
+      return <Caption src={src} />;
+    }
+
+    if (isLeadImage && giveCredit && !caption && screenSize.width > 1024) {
+      return null;
+    }
+
+    return <Caption src={src} />;
+  };
+
   return (
     <div className={`c-image-component ${imageMarginBottom}`}>
       <div className="image-component-image">
         <img src={imageSrc} alt={imageALT} />
-        {(isInlineImage && !caption) || (isLeadImage && !caption && !giveCredit) ? null : (
-          <Caption src={src} />
-        )}
+        {smartChecker()}
       </div>
       <p className="photo-credit-text">{giveCredit}</p>
     </div>
