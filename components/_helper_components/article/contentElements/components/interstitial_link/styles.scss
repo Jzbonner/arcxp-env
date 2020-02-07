@@ -34,5 +34,6 @@
   @include text-styles(1rem, 1.75, "Gordita");
   @include breakpoint(tablet) {
     @include text-styles(1.25rem, 1.75, "Gordita");
+    padding: 0 1.5em 0 2.3125em;
   }
 }
