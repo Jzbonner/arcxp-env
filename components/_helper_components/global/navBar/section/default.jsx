@@ -7,8 +7,12 @@ const Section = ({ navigation, link }) => {
   const {
     nav_title: name,
   } = navigation;
+  let ePaperClass = '';
+  if (name === 'ePaper') {
+    ePaperClass = 'b-ePaper';
+  }
   return (
-    <li className='itemPadding itemBottomBorder b-itemText'>
+    <li className={`itemPadding itemBottomBorder b-itemText ${ePaperClass}`}>
       <a>{name}</a>
     </li>
   );
