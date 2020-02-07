@@ -6,7 +6,7 @@ import isNotBR from '../../../layouts/_helper_functions/BR';
 import './styles.scss';
 
 const Section = ({
-  /* insertedAds, */
+  insertedAds,
   elements,
   startIndex = 0,
   stopIndex = elements.length,
@@ -18,19 +18,17 @@ const Section = ({
   elements.forEach((element) => {
     // filters the paragraphs to only show the ones inside the range specified by startIndex and stopIndex
     if (startIndex <= paragraphCounter && paragraphCounter < stopIndex) {
-      // ////////
-      // Inserts Ads into the contentElements. Commented out for now so QA is not confused.
-      // ///////
+      if (insertedAds) {
+        const insertIndex = insertedAds.findIndex(el => paragraphCounter === el.insertAfterParagraph);
+        if (insertIndex > -1) {
+          insertedAds[insertIndex].adArray.forEach((el) => {
+            newContentElements.push(el());
+          });
 
-      // if (insertedAds) {
-      //   const insertIndex = insertedAds.findIndex(el => paragraphCounter === el.insertAfterParagraph);
-      //   if (insertIndex > -1) {
-      //     newContentElements.push(insertedAds[insertIndex].ad());
-
-      //     // removes the ad from the array to make sure we don't accidentally display it again
-      //     insertedAds.splice(insertIndex, 1);
-      //   }
-      // }
+          // removes the ad from the array to make sure we don't accidentally display it again
+          insertedAds.splice(insertIndex, 1);
+        }
+      }
 
       if (isNotBR(element)) {
         newContentElements.push(element);

@@ -12,12 +12,18 @@ import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
+import ArcAd from '../features/ads/default';
+/* import handlePx01Placement from './_helper_functions/handlePx01Placement';
+import PX01 from '../_helper_components/global/ads/px01/default'; */
 import '../../src/styles/container/_article-basic.scss';
 
-const ExampleAdComponent = () => <div className="railAd">RP01 Ad</div>;
+const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'}/>;
+const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'}/>;
+const MP02 = () => <ArcAd staticSlot={'MP02'}/>;
 
-const ExampleAdInsertion1 = () => <div className="b-placeholder insertedAd insertionAd1">Inserted Ad A</div>;
 const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
+
+/* const paragraphCountForPX01 = handlePx01Placement(); */
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -46,17 +52,13 @@ const StoryPageLayout = () => {
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
 
-  // const paragraphCount = paragraphCounter(contentElements);
-
-  // with paragraphCount, we can now determine what ads are needed for the layout
-  // console.log('paragraphCount', paragraphCount);
 
   return (
     <>
       <header>
         <div className="b-placeholder c-breakingNews">Breaking News</div>
 
-        <div className="c-header">
+        <div className="c-fixed-width">
           <div className="b-placeholder c-logo">Logo</div>
           <div className="b-placeholder c-headerNav">
             <nav className="b-placeholder c-headerNav-menu">Menu</nav>
@@ -76,7 +78,7 @@ const StoryPageLayout = () => {
 
       <main>
         <header className="b-margin-bottom-d30-m20">
-          <div className="c-header">
+          <div className="c-fixed-width">
             <Headline headlines={headlines} basicItems={basicItems} />
           </div>
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10">
@@ -89,21 +91,33 @@ const StoryPageLayout = () => {
           <SubHeadline subheadlines={subheadlines} />
         </header>
 
-        <article>
+        <article className="c-articlePadding">
           <Section elements={contentElements} stopIndex={1} />
-          <Section elements={contentElements} startIndex={1} stopIndex={3} rightRailAd={ExampleAdComponent} />
+          <Section
+            elements={contentElements}
+            startIndex={1}
+            stopIndex={3}
+            rightRailAd={RP01StoryDesktop}
+            insertedAds={[
+              { insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] },
+            ]}
+          />
+{/*           {
+            paragraphCountForPX01 === 3 && <PX01 />
+          } */}
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
-
+{/*           {
+            paragraphCountForPX01 === 4 && <PX01 />
+          } */}
           <Section
             elements={contentElements}
             startIndex={3}
-            rightRailAd={ExampleAdComponent}
-            insertedAds={[
-              { insertAfterParagraph: 3, ad: ExampleAdInsertion1 },
-              { insertAfterParagraph: 5, ad: ExampleAdInsertion2 },
-            ]}
+            rightRailAd={ExampleAdInsertion2}
           />
-
+          {/*           {
+          // TODO: This is a placeholder. Might need to seperate the section above. Need confirmation w/ team.
+            paragraphCountForPX01 >= 5 && <PX01 />
+          } */}
           <BlogAuthor subtype={subtype} authorData={authorData} />
           <Nativo elements={contentElements} controllerClass="story-nativo_placeholder--boap" />
           <div className="c-taboola">
@@ -116,5 +130,4 @@ const StoryPageLayout = () => {
     </>
   );
 };
-
 export default StoryPageLayout;
