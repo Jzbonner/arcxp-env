@@ -34,7 +34,7 @@ const AdSetup = ({
 
   return (
     <div className={className}>
-      <div id={id} className={`${slotName} arcad`} />
+      <div id={id} className={`${slotName} arcad b-margin-bottom-d40-m20`} />
     </div>
   );
 };
