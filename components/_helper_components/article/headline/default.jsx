@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Image from '../../global/image/default';
 import Video from '../../global/video/default';
 
-const Headline = ({ basicItems = {}, headlines = {}, videoPlayerRules }) => {
+const Headline = ({ basicItems = {}, headlines = {}, featuredVideoPlayerRules }) => {
   let promoData = {};
   if (basicItems) {
     promoData = basicItems;
@@ -22,7 +22,7 @@ const Headline = ({ basicItems = {}, headlines = {}, videoPlayerRules }) => {
       </div>
       {promoData.type === 'image' && <Image width={1066} height={600} isLeadImage src={basicItems}/>}
       {promoData.type === 'gallery' && <div className="c-gallery b-placeholder">Gallery Placeholder</div>}
-      {promoData.type === 'video' && <Video isLeadVideo src={basicItems} videoPlayerRules={videoPlayerRules}/>}
+      {promoData.type === 'video' && <Video isLeadVideo src={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules}/>}
     </div>
   );
 };
@@ -30,7 +30,7 @@ const Headline = ({ basicItems = {}, headlines = {}, videoPlayerRules }) => {
 Headline.propTypes = {
   basicItems: PropTypes.object,
   headlines: PropTypes.object.isRequired,
-  videoPlayerRules: PropTypes.object,
+  featuredVideoPlayerRules: PropTypes.object,
 };
 
 export default Headline;

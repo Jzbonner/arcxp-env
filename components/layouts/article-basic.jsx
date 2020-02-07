@@ -26,7 +26,7 @@ const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
   if (!globalContent) return null;
-  const { videoPlayerRules } = getProperties();
+  const { featuredVideoPlayerRules } = getProperties();
 
   const {
     first_publish_date: firstPublishDate,
@@ -75,7 +75,7 @@ const StoryPageLayout = () => {
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className="c-header">
-            <Headline headlines={headlines} basicItems={basicItems} videoPlayerRules={videoPlayerRules} />
+            <Headline headlines={headlines} basicItems={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules} />
           </div>
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10">
             <SectionLabel label={label} taxonomy={taxonomy} />
