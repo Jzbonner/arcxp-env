@@ -13,6 +13,9 @@ import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
+import BreakingNews from '../_helper_components/global/breakingNews/default';
+import Header from '../_helper_components/global/header/default';
+import Footer from '../_helper_components/global/footer/default';
 import '../../src/styles/container/_article-basic.scss';
 import ArcAd from '../features/ads/default';
 
@@ -22,6 +25,8 @@ const MP02 = () => <ArcAd staticSlot={'MP02'} />;
 
 const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
 const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
+const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'}/>;
+const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'}/>;
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -52,17 +57,10 @@ const StoryPageLayout = () => {
   return (
     <>
       <header>
-        <div className="b-placeholder c-breakingNews">Breaking News</div>
+        <BreakingNews />
 
-        <div className="c-header">
-          <div className="b-placeholder c-logo">Logo</div>
-          <div className="b-placeholder c-headerNav">
-            <nav className="b-placeholder c-headerNav-menu">Menu</nav>
-            <div className="b-placeholder c-headerNav-weather">Weather</div>
-            <div className="b-placeholder c-headerNav-logIn">Log In</div>
-          </div>
-          <div className="b-placeholder c-subscribe">Support Local Journalism. Subscribe today for 99¢.</div>
-        </div>
+        <Header />
+
         <StickyNav
           articleURL={articleURL}
           headlines={headlines}
@@ -107,7 +105,14 @@ const StoryPageLayout = () => {
           />
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
 
-          <Section elements={contentElements} startIndex={3} rightRailAd={ExampleAdInsertion2} />
+          <Section
+            elements={contentElements}
+            startIndex={3}
+            rightRailAd={RP09StoryDesktop}
+            insertedAds={[
+              { insertAfterParagraph: 7, adArray: [RP09StoryTablet] },
+            ]}
+          />
 
           <BlogAuthor subtype={subtype} authorData={authorData} />
           <Nativo elements={contentElements} controllerClass="story-nativo_placeholder--boap" />
@@ -117,7 +122,7 @@ const StoryPageLayout = () => {
         </article>
         <Gallery contentElements={contentElements} />
       </main>
-      <footer className="b-placeholder c-footer">Footer</footer>
+      <Footer/>
     </>
   );
 };

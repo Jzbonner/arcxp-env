@@ -8,7 +8,7 @@ import logo from '../../../../resources/images/stickyNav-logo.svg';
 import tempMenu from '../../../../resources/images/tempMenu.jpg';
 
 const StickyNav = ({
-  articleURL, headlines, comments, promoItems, contentElements,
+  articleURL, headlines, comments = false, promoItems, contentElements = [],
 }) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
@@ -18,8 +18,9 @@ const StickyNav = ({
   const { url: featuredImage } = promoItems ? promoItems.basic : {};
   const { url: videoThumbnail } = promoItems && promoItems.basic.promo_image ? promoItems.basic.promo_image : {};
   const { url: galleryThumbnail } = promoItems && promoItems.basic.promo_items ? promoItems.basic.promo_items.basic : {};
-  const { url: inlineImage } = contentElements ? contentElements[0] : {};
-  const { url: inlineVideoThumbnail } = contentElements[0].promo_image ? contentElements[0].promo_image : {};
+  const { url: inlineImage } = contentElements && contentElements[0] ? contentElements[0] : {};
+  const { url: inlineVideoThumbnail } = contentElements
+  && contentElements[0] && contentElements[0].promo_image ? contentElements[0].promo_image : {};
   // secondary / inline video thumbnail
   // Pinterest Image rendering logic
   const renderImage = () => {
