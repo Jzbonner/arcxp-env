@@ -11,6 +11,7 @@
   width: calc(100% - 3.75rem);
   top: 1.875rem;
   right: 1.875rem;
+  -webkit-tap-highlight-color: transparent;
   @include breakpoint(desktop-sm) {
     width: calc(100% - 6.25rem);
     top: 3.125rem;
