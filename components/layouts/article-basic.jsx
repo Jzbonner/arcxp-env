@@ -55,29 +55,38 @@ const StoryPageLayout = () => {
   const maxNumberofParagraphs = paragraphCounter(contentElements);
 
   const handleFinalPX01Cases = () => {
+    const start = 3;
+    let stop = 0;
     let dataToRender = null;
 
     if (maxNumberofParagraphs === 4) {
-      dataToRender = (
-          <>
-            <Section elements={contentElements} startIndex={3} stopIndex={4} rightRailAd={RP09StoryDesktop} />
-            <PX01 adSlot={PX01AdSlot}/>
-            <Section elements={contentElements} startIndex={4} rightRailAd={RP09StoryDesktop} insertedAds={[
-              { insertAfterParagraph: 7, adArray: [RP09StoryTablet] },
-            ]} />
-          </>);
+      stop = 4;
     } else if (maxNumberofParagraphs >= 5) {
-      dataToRender = (
-          <>
-            <Section elements={contentElements} startIndex={4} stopIndex={5} rightRailAd={RP09StoryDesktop} />
-            <PX01 adSlot={PX01AdSlot} />
-            <Section elements={contentElements} startIndex={5} rightRailAd={RP09StoryDesktop} insertedAds={[
-              { insertAfterParagraph: 7, adArray: [RP09StoryTablet] },
-            ]} />
-          </>
-      );
+      stop = 5;
     }
 
+    if (!stop) {
+      dataToRender = (
+        <Section
+        elements={contentElements}
+        startIndex={3}
+        rightRailAd={RP09StoryDesktop}
+        insertedAds={[
+          { insertAfterParagraph: 7, adArray: [RP09StoryTablet] },
+        ]}
+      />
+      );
+    } else {
+      dataToRender = (
+        <>
+        <Section elements={contentElements} startIndex={start} stopIndex={stop} rightRailAd={RP09StoryDesktop} />
+        <PX01 adSlot={PX01AdSlot} />
+        <Section elements={contentElements} startIndex={stop} rightRailAd={RP09StoryDesktop} insertedAds={[
+          { insertAfterParagraph: 7, adArray: [RP09StoryTablet] },
+        ]} />
+      </>
+      );
+    }
     return dataToRender;
   };
 
