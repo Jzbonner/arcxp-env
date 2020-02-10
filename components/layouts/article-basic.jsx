@@ -1,6 +1,7 @@
 /*  /components/layouts/article-basic.jsx  */
 import React from 'react';
 import { useAppContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
@@ -18,9 +19,12 @@ import Footer from '../_helper_components/global/footer/default';
 import '../../src/styles/container/_article-basic.scss';
 import ArcAd from '../features/ads/default';
 
-const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'}/>;
-const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'}/>;
-const MP02 = () => <ArcAd staticSlot={'MP02'}/>;
+const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
+const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
+const MP02 = () => <ArcAd staticSlot={'MP02'} />;
+
+const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
+const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'}/>;
 const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'}/>;
 
@@ -69,7 +73,12 @@ const StoryPageLayout = () => {
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className="c-header">
-            <Headline headlines={headlines} basicItems={basicItems} />
+            <Headline
+              headlines={headlines}
+              basicItems={basicItems}
+              featuredVideoPlayerRules={featuredVideoPlayerRules}
+              maxTabletViewWidth={maxTabletViewWidth}
+            />
           </div>
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10">
             <SectionLabel label={label} taxonomy={taxonomy} />

@@ -7,5 +7,14 @@
   "pinterestURL": "https://www.pinterest.com/pin/create/button/?url=",
   "redditURL": "https://www.reddit.com/submit?url=",
   "mail": "mailto:?Subject=",
-  "sites": ["ajc"]
+  "sites": ["ajc"],
+  "featuredVideoPlayerRules": {
+    "startPlaying": true,
+    "muteON": true
+  },
+  "inlineVideoPlayerRules": {
+    "startPlaying": false,
+    "muteON": true
+  },
+  "maxTabletViewWidth": 1024
 }
