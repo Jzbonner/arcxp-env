@@ -2,8 +2,9 @@ import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
 import Image from '../../global/image/default';
+import Video from '../../global/video/default';
 
-const Headline = ({ basicItems = {}, headlines = {} }) => {
+const Headline = ({ basicItems = {}, headlines = {}, featuredVideoPlayerRules }) => {
   let promoData = {};
   if (basicItems) {
     promoData = basicItems;
@@ -21,7 +22,7 @@ const Headline = ({ basicItems = {}, headlines = {} }) => {
       </div>
       {promoData.type === 'image' && <Image width={1066} height={600} isLeadImage src={basicItems}/>}
       {promoData.type === 'gallery' && <div className="c-gallery b-placeholder">Gallery Placeholder</div>}
-      {promoData.type === 'video' && <div className="c-video b-placeholder">Video Placeholder</div>}
+      {promoData.type === 'video' && <Video isLeadVideo src={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules}/>}
     </div>
   );
 };
@@ -29,6 +30,7 @@ const Headline = ({ basicItems = {}, headlines = {} }) => {
 Headline.propTypes = {
   basicItems: PropTypes.object,
   headlines: PropTypes.object.isRequired,
+  featuredVideoPlayerRules: PropTypes.object,
 };
 
 export default Headline;

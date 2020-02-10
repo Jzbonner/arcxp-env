@@ -12,6 +12,7 @@ resources/dist/**
 !/data/dumps/.gitkeep
 /data/restore/**
 !/data/restore/.gitkeep
+/config/deploy
 
 /dist
 /coverage
