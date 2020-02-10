@@ -1,4 +1,4 @@
-/*  /components/layouts/article-basic.jsx  */
+/*  /components/layouts/video-basic.jsx  */
 import React from 'react';
 import { useAppContext } from 'fusion:context';
 import Headline from '../_helper_components/article/headline/default.jsx';
@@ -8,7 +8,7 @@ import Header from '../_helper_components/global/header/default';
 import Footer from '../_helper_components/global/footer/default';
 import '../../src/styles/container/_article-basic.scss';
 
-const VideoStoryPageLayout = () => {
+const VideoPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
   if (!globalContent) return null;
@@ -49,4 +49,4 @@ const VideoStoryPageLayout = () => {
   );
 };
 
-export default VideoStoryPageLayout;
+export default VideoPageLayout;
