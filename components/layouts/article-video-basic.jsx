@@ -40,11 +40,9 @@ const VideoStoryPageLayout = () => {
       </header>
 
       <main>
-        <header>
-          <div className="c-header">
-            <Headline headlines={headlines} basicItems={basicItems} />
-          </div>
-        </header>
+        <div className="c-header">
+          <Headline headlines={headlines} basicItems={basicItems} />
+        </div>
       </main>
       <Footer/>
     </>
