@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Caption from '../caption/default.jsx';
-import checkWindowSize from '../utils/video_image_utils/default';
+import checkWindowSize from '../utils/check_window_size/default';
 import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
@@ -26,19 +26,16 @@ const Video = ({
   const giveCredit = mainCredit.length > 1 ? `Credit: ${mainCredit}` : '';
 
   const smartChecker = () => {
-    if (isLeadVideo && !giveCredit && !videoCaption) {
+    if (
+      (isLeadVideo && !giveCredit && !videoCaption)
+      || (isLeadVideo && giveCredit && !videoCaption && screenSize.width > 1024)
+      || (isInlineVideo && !videoCaption)
+    ) {
       return null;
     }
+
     if (isLeadVideo && giveCredit && !videoCaption && screenSize.width < 1024) {
       return <Caption src={src} isLeadVideo videoCaption={videoCaption} />;
-    }
-
-    if (isLeadVideo && giveCredit && !videoCaption && screenSize.width > 1024) {
-      return null;
-    }
-
-    if (isInlineVideo && !videoCaption) {
-      return null;
     }
 
     return <Caption src={src} isLeadVideo videoCaption={videoCaption} />;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Caption from '../caption/default.jsx';
-import checkWindowSize from '../utils/video_image_utils/default';
+import checkWindowSize from '../utils/check_window_size/default';
 import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
@@ -33,20 +33,16 @@ const Image = ({
   }
 
   const smartChecker = () => {
-    if (isLeadImage && !giveCredit && !caption) {
-      return null;
-    }
-    if (isInlineImage && !caption) {
+    if (
+      (isLeadImage && !giveCredit && !caption)
+      || (isInlineImage && !caption)
+      || (isLeadImage && giveCredit && !caption && screenSize.width > 1024)
+    ) {
       return null;
     }
     if (isLeadImage && giveCredit && !caption && screenSize.width < 1024) {
       return <Caption src={src} />;
     }
-
-    if (isLeadImage && giveCredit && !caption && screenSize.width > 1024) {
-      return null;
-    }
-
     return <Caption src={src} />;
   };
 
