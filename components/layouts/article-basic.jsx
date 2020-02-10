@@ -13,17 +13,16 @@ import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
 import ArcAd from '../features/ads/default';
-/* import handlePx01Placement from './_helper_functions/handlePx01Placement';
-import PX01 from '../_helper_components/global/ads/px01/default'; */
+import { paragraphCounter } from './_helper_functions/Paragraph';
+import PX01 from '../_helper_components/global/ads/px01/default';
 import '../../src/styles/container/_article-basic.scss';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
 const MP02 = () => <ArcAd staticSlot={'MP02'} />;
+/* const PX01Ad = () => <ArcAd staticSlot={'PX01'} />; */
 
 const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
-
-/* const paragraphCountForPX01 = handlePx01Placement(); */
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -50,6 +49,31 @@ const StoryPageLayout = () => {
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
+
+  const maxNumberofParagraphs = paragraphCounter(contentElements);
+
+  const handleFinalPX01Cases = () => {
+    let dataToRender = null;
+
+    if (maxNumberofParagraphs === 4) {
+      dataToRender = (
+          <>
+            <Section elements={contentElements} startIndex={3} stopIndex={4} rightRailAd={ExampleAdInsertion2} />
+            <PX01 />
+            <Section elements={contentElements} startIndex={4} rightRailAd={ExampleAdInsertion2} />
+          </>);
+    } else if (maxNumberofParagraphs >= 5) {
+      dataToRender = (
+          <>
+            <Section elements={contentElements} startIndex={4} stopIndex={5} rightRailAd={ExampleAdInsertion2} />
+            <PX01 />
+            <Section elements={contentElements} startIndex={5} rightRailAd={ExampleAdInsertion2} />
+          </>
+      );
+    }
+
+    return dataToRender;
+  };
 
   return (
     <>
@@ -102,10 +126,11 @@ const StoryPageLayout = () => {
             rightRailAd={RP01StoryDesktop}
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
+          {
+            maxNumberofParagraphs === 3 && <PX01 />
+          }
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
-
-          <Section elements={contentElements} startIndex={3} rightRailAd={ExampleAdInsertion2} />
-
+          {handleFinalPX01Cases()}
           <BlogAuthor subtype={subtype} authorData={authorData} />
           <Nativo elements={contentElements} controllerClass="story-nativo_placeholder--boap" />
           <div className="c-taboola">

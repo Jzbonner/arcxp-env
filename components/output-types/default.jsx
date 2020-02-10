@@ -6,7 +6,7 @@ import ConnextInit from '../_helper_components/global/connext/default.jsx';
 import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
 import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
 import NativoScripts from '../_helper_components/article/nativo/nativoScripts';
-/* import ArcAd from '../features/ads/default'; */
+import ArcAd from '../features/ads/default';
 
 const DefaultOutputType = (props) => {
   const {
@@ -15,7 +15,9 @@ const DefaultOutputType = (props) => {
   const { isEnabled = false, clientCode, environment } = connext;
   const { type } = globalContent || { type: null };
 
-  /* const PX01 = () => <ArcAd staticSlot={'PX01'}/>; */
+  const PX01 = () => <ArcAd staticSlot={'PX01'}/>;
+
+  PX01();
 
   return (
     <html>
