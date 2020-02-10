@@ -21,12 +21,12 @@ const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
 const MP02 = () => <ArcAd staticSlot={'MP02'} />;
 
 const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
+const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
   if (!globalContent) return null;
-  const { featuredVideoPlayerRules } = getProperties();
 
   const {
     first_publish_date: firstPublishDate,
@@ -75,7 +75,12 @@ const StoryPageLayout = () => {
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className="c-header">
-            <Headline headlines={headlines} basicItems={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules} />
+            <Headline
+              headlines={headlines}
+              basicItems={basicItems}
+              featuredVideoPlayerRules={featuredVideoPlayerRules}
+              maxTabletViewWidth={maxTabletViewWidth}
+            />
           </div>
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10">
             <SectionLabel label={label} taxonomy={taxonomy} />

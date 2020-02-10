@@ -15,5 +15,6 @@
   "inlineVideoPlayerRules": {
     "startPlaying": false,
     "muteON": true
-  }
+  },
+  "maxTabletViewWidth": 1024
 }
