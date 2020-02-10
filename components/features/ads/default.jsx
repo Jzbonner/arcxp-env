@@ -31,7 +31,8 @@ const ArcAd = ({ customFields, staticSlot }) => {
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
       className={`arc_ad | ${slotName}`}
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
-      dfpId={dfpid}
+      dfpId={`${dfpid}/TEST_atlanta_np/ajc_web_default`}
+      display={ adConfig.display || defaultAdSlot.display }
       id={`${defaultAdSlot.name}${(staticSlot || slot)}`}
       slotName={slotName}
       targeting={adConfig.targeting || defaultAdSlot.targeting}
@@ -43,7 +44,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
 
 ArcAd.propTypes = {
   customFields: PropTypes.shape({
-    slot: PropTypes.oneOf(['HP01', 'MP01', 'RP09']).tag({
+    slot: PropTypes.oneOf(['HP01', 'MP01', 'RP01']).tag({
       label: 'Slot ID',
       description: 'Choose a Slot ID for your AD',
     }),

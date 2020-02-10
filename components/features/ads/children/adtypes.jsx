@@ -14,7 +14,7 @@ export const defaultAdSlot = {
     ], // mobile
   ],
   breakpoints: [
-    [972, 0], // desktop
+    [1024, 0], // desktop
     [768, 0], // tablet
     [1, 0], // mobile
   ],
@@ -60,7 +60,10 @@ export const adSlots = {
         [728, 315],
         [728, 90],
       ], // tablet
-      [], // mobile
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
     ],
   },
   RP01: {
@@ -72,7 +75,11 @@ export const adSlots = {
       [
         [300, 600],
         [300, 250],
-      ], // desktop
+      ], // tablet
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
     ],
   },
   'RP01-Story-Desktop': {
@@ -81,13 +88,10 @@ export const adSlots = {
       [
         [300, 600],
         [300, 250],
-      ], // desktop
-      [
-        [0, 0],
-      ], // tablet
-      [
-        [0, 0],
-      ], // mobile
+      ],
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
     ],
   },
   'RP01-Story-Tablet': {
@@ -100,64 +104,84 @@ export const adSlots = {
         [300, 600],
         [300, 250],
       ], // tablet
-      [
-        [0, 0],
-      ], // mobile
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
     ],
   },
-  RP09: {
+  'RP09-Story-Desktop': {
+    slotName: 'RP09',
     dimensions: [
       [
         [300, 600],
         [300, 250],
+      ],
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+    ],
+  },
+  'RP09-Story-Tablet': {
+    slotName: 'RP09',
+    dimensions: [
+      [
+        [],
       ], // desktop
       [
         [300, 600],
         [300, 250],
       ], // tablet
-      [
-        [0, 0],
-      ], // mobile
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
     ],
   },
   MP01: {
     dimensions: [
       [
         [0, 0],
-      ], // desktop
-      [
-        [0, 0],
-      ], // tablet
+      ], // tablet+
       [
         [320, 150],
         [320, 50],
       ], // mobile
     ],
+    breakpoints: [
+      [768, 0], // tablet+
+      [1, 0], // mobile
+    ],
+    display: 'mobile',
   },
   MP02: {
     dimensions: [
       [
         [0, 0],
-      ], // desktop
+      ], // tablet+
       [
-        [0, 0],
-      ], // tablet
-      [
-        [320, 250],
+        [300, 250],
       ], // mobile
     ],
+    breakpoints: [
+      [768, 0], // tablet+
+      [1, 0], // mobile
+    ],
+    display: 'mobile',
   },
   MP03: {
     dimensions: [
       [
         [0, 0],
-      ], // desktop
-      [
-        [0, 0],
-      ], // tablet
+      ], // tablet+
       [
         [320, 250],
       ], // mobile
     ],
+    breakpoints: [
+      [768, 0], // tablet+
+      [1, 0], // mobile
+    ],
+    display: 'mobile',
   },
 };

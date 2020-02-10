@@ -15,11 +15,11 @@ import Gallery from '../features/gallery/default.jsx';
 import '../../src/styles/container/_article-basic.scss';
 import ArcAd from '../features/ads/default';
 
-const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
-const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
-const MP02 = () => <ArcAd staticSlot={'MP02'} />;
-
-const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
+const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'}/>;
+const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'}/>;
+const MP02 = () => <ArcAd staticSlot={'MP02'}/>;
+const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'}/>;
+const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'}/>;
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -100,7 +100,14 @@ const StoryPageLayout = () => {
           />
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
 
-          <Section elements={contentElements} startIndex={3} rightRailAd={ExampleAdInsertion2} />
+          <Section
+            elements={contentElements}
+            startIndex={3}
+            rightRailAd={RP09StoryDesktop}
+            insertedAds={[
+              { insertAfterParagraph: 7, adArray: [RP09StoryTablet] },
+            ]}
+          />
 
           <BlogAuthor subtype={subtype} authorData={authorData} />
           <Nativo elements={contentElements} controllerClass="story-nativo_placeholder--boap" />
