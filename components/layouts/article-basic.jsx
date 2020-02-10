@@ -130,6 +130,7 @@ const StoryPageLayout = () => {
             maxNumberofParagraphs === 3 && <PX01 />
           }
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
+          {/* section / px01 splitting logic */}
           {handleFinalPX01Cases()}
           <BlogAuthor subtype={subtype} authorData={authorData} />
           <Nativo elements={contentElements} controllerClass="story-nativo_placeholder--boap" />
