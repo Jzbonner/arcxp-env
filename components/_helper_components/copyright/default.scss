@@ -1,0 +1,13 @@
+@import "./../../../src/styles/base/mixins";
+@import "./../../../src/styles/base/breakpoints";
+
+.c-copyright {
+  padding: 35px 20px;
+  text-align: center;
+  margin: 0 auto;
+  @include text-styles(0.75rem, 1.75, "Gordita");
+  @include breakpoint(desktop-sm) {
+    padding: 55px 30px;
+    max-width: 1600px;
+  }
+}
