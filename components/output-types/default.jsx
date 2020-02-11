@@ -6,8 +6,6 @@ import ConnextInit from '../_helper_components/global/connext/default.jsx';
 import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
 import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
 import NativoScripts from '../_helper_components/article/nativo/nativoScripts';
-// import ArcAd from '../features/ads/default';
-// import PX01 from './_helper_components/PX01.jsx';
 
 const DefaultOutputType = (props) => {
   const {
