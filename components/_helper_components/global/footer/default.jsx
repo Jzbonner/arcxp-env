@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useContent } from 'fusion:content';
 import './default.scss';
 import menuArrow from '../../../../resources/images/menu-arrow.svg';
-import ajcLogo from '../../../../resources/images/ajc-logo.svg';
+import logo from '../../../../resources/images/ajc-logo.svg';
 import facebookIcon from '../../../../resources/images/facebook-icon.svg';
 import twitterIcon from '../../../../resources/images/twitter-icon.svg';
 import roundButton from '../../../../resources/images/round-button.svg';
@@ -51,7 +51,7 @@ const Footer = () => {
       <div className="logo-row">
         <div className="col">
           <a href={homepageUrl}>
-            <img className="logo" src={ajcLogo} alt={`${websiteName} Logo`} />
+            <img className="logo" src={logo} alt={`${websiteName} Logo`} />
           </a>
         </div>
         <div className="col">
