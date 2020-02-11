@@ -2,19 +2,13 @@
 
 @import "../../../../../../src/styles/base/mixins";
 
-ul {
-  margin: 0;
-}
-ul.dashed {
-  list-style-type: none;
-}
-ul.dashed > li {
-  text-indent: -5px;
-}
-ul.dashed > li:before {
-  content: "-";
-  text-indent: -5px;
-}
+// ul, li:before {
+//   content: '\2013';
+//   list-style-type: none;
+//   line-height: 2.5;
+//   margin-left: 20px;
+//   font-size: 1.5rem;
+// }
 
 ol {
   list-style-type: decimal-leading-zero;
@@ -24,11 +18,15 @@ ol {
 ol>li {
   display: block;
 }
-li:before {
-  content: counters(item, ".") " ";
-  counter-increment: item;
-}
 
 .list {
   @include text-styles(1rem, 2.25, "Gordita");
+
+  ul, li:before {
+    content: '\2013';
+    list-style-type: none;
+    line-height: 2.5;
+    margin: 1.4em 0.5em;
+    font-size: 1.3rem;
+  }
 }
