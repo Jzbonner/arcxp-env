@@ -17,6 +17,13 @@ const Footer = () => {
     },
   });
 
+  const siteSocial = useContent({
+    source: 'site-api',
+  });
+
+  const { social } = siteSocial || {};
+  const { twitter: twitterLink = {}, facebook: facebookLink = {} } = social || {};
+
   const { children } = siteContent || {};
   const [row1 = []] = children || [];
 
@@ -34,10 +41,12 @@ const Footer = () => {
     <footer className="c-footer">
       <div className="logo-row">
         <div className="col">
-          <a href="https://www.ajc.com/"><img className="logo" src={ajcLogo} alt="logo" /></a>
+          <a href="https://www.ajc.com/">
+            <img className="logo" src={ajcLogo} alt="logo" />
+          </a>
         </div>
         <div className="col">
-          <a href="https://myaccount.ajc.com/ajc/preference" className="newsletter-signup">
+          <a href={getLinkURL(row1)} className="newsletter-signup">
             <p>{row1.navigation && row1.navigation.nav_title}</p>
             <img src={roundButton} alt="" />
           </a>
@@ -75,12 +84,12 @@ const Footer = () => {
           <span className="header-text">Follow</span>
           <ul className="social-media-icons">
             <li>
-              <a href="https://www.facebook.com/ajc">
+              <a href={facebookLink}>
                 <img src={facebookIcon} alt="" />
               </a>
             </li>
             <li>
-              <a href="https://twitter.com/ajc">
+              <a href={twitterLink}>
                 <img src={twitterIcon} alt="" />
               </a>
             </li>
@@ -91,6 +100,5 @@ const Footer = () => {
     </footer>
   );
 };
-
 
 export default Footer;
