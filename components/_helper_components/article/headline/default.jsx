@@ -35,7 +35,7 @@ Headline.propTypes = {
   basicItems: PropTypes.object,
   headlines: PropTypes.object.isRequired,
   featuredVideoPlayerRules: PropTypes.object,
-  maxTabletViewWidth: PropTypes.integer,
+  maxTabletViewWidth: PropTypes.number,
 };
 
 export default Headline;
