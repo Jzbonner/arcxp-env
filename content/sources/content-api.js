@@ -8,10 +8,7 @@ const params = {
 
 const resolve = (query) => {
   const {
-    'arc-site': arcSite = 'ajc',
-    path,
-    published,
-    id,
+    'arc-site': arcSite = 'ajc', path, published, id,
   } = query;
   let requestUri = `/content/v4/?website=${arcSite}`;
   requestUri += path ? `&website_url=${path}` : '';

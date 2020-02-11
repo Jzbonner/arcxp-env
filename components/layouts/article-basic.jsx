@@ -24,12 +24,13 @@ const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
 const MP02 = () => <ArcAd staticSlot={'MP02'} />;
 
 const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
-const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'}/>;
-const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'}/>;
+const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} />;
+const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} />;
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
+
   if (!globalContent) return null;
 
   const {
@@ -121,7 +122,7 @@ const StoryPageLayout = () => {
         </article>
         <Gallery contentElements={contentElements} />
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 };
