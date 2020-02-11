@@ -23,7 +23,6 @@ const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
 const MP02 = () => <ArcAd staticSlot={'MP02'} />;
 
-const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
 const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'}/>;
 const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'}/>;

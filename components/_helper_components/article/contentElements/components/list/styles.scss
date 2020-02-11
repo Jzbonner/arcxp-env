@@ -1,13 +1,34 @@
 /*  /components/_helper_components/article/contentElements/components/list/styles.scss  */
 
+@import "../../../../../../src/styles/base/mixins";
+
+ul {
+  margin: 0;
+}
+ul.dashed {
+  list-style-type: none;
+}
+ul.dashed > li {
+  text-indent: -5px;
+}
+ul.dashed > li:before {
+  content: "-";
+  text-indent: -5px;
+}
+
 ol {
+  list-style-type: decimal-leading-zero;
   counter-reset: item;
   padding-left: 10px;
 }
-li {
-  display: block
+ol>li {
+  display: block;
 }
 li:before {
   content: counters(item, ".") " ";
   counter-increment: item;
+}
+
+.list {
+  @include text-styles(1rem, 2.25, "Gordita");
 }
