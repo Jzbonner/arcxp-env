@@ -10,14 +10,14 @@ import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
 import Copyright from '../copyright/default';
 
 const Footer = () => {
-  const siteContent = useContent({
+  const siteNavigation = useContent({
     source: 'site-api',
     query: {
       hierarchy: 'BottomNav',
     },
   });
 
-  const siteSocial = useContent({
+  const siteSocialMedia = useContent({
     source: 'site-api',
   });
 
@@ -28,10 +28,10 @@ const Footer = () => {
     },
   });
 
-  const { social } = siteSocial || {};
+  const { social } = siteSocialMedia || {};
   const { twitter: twitterLink = {}, facebook: facebookLink = {} } = social || {};
 
-  const { children } = siteContent || {};
+  const { children } = siteNavigation || {};
   const [row1 = []] = children || [];
 
   const { base_path: homepageUrl, display_name: websiteName } = siteWebsite || {};
