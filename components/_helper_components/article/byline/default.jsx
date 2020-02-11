@@ -8,7 +8,7 @@ const Byline = ({ by = [] }) => {
   const handleMultipleAuthors = (authors = [], hasOrganization = false) => {
     const bylineData = authors.map((element, i) => {
       if (element.orgName && element.orgName !== '') {
-        return <span key={element.name}>, {element.orgName}</span>;
+        return <span key={element.name}> - {element.orgName}</span>;
       }
 
       if (element.name === 'and') {
@@ -28,7 +28,7 @@ const Byline = ({ by = [] }) => {
   const handleSingleAuthor = (authorData = []) => {
     const bylineData = authorData.map((element, i) => {
       if (element.orgName) {
-        return <span key={element.name}>, {element.orgName}</span>;
+        return <span key={element.name}> - {element.orgName}</span>;
       }
 
       if (i === authorData.length - 1 && !element.orgName) {
