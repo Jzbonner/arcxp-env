@@ -33,7 +33,6 @@ const DefaultOutputType = (props) => {
       <body>
         <div id="fusion-app">{children}</div>
         <Fusion />
-{/*         <PX01 /> */}
         {type && <TaboolaFooter type={type} />}
         {isEnabled && (
           <>

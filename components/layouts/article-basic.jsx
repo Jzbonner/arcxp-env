@@ -66,6 +66,7 @@ const StoryPageLayout = () => {
     }
 
     if (!stop) {
+      // unalterted section
       dataToRender = (
         <Section
         elements={contentElements}
@@ -77,8 +78,9 @@ const StoryPageLayout = () => {
       />
       );
     } else {
+      // split section
       dataToRender = (
-        <>
+      <>
         <Section elements={contentElements} startIndex={start} stopIndex={stop} rightRailAd={RP09StoryDesktop} />
         <PX01 adSlot={PX01AdSlot} />
         <Section elements={contentElements} startIndex={stop} rightRailAd={RP09StoryDesktop} insertedAds={[
@@ -142,7 +144,7 @@ const StoryPageLayout = () => {
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
           {
-            maxNumberofParagraphs === 3 && <PX01 />
+            maxNumberofParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />
           }
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
           {/* section / px01 splitting logic */}
