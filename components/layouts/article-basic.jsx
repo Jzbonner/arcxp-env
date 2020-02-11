@@ -13,6 +13,9 @@ import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
+import BreakingNews from '../_helper_components/global/breakingNews/default';
+import Header from '../_helper_components/global/header/default';
+import Footer from '../_helper_components/global/footer/default';
 import ArcAd from '../features/ads/default';
 import { paragraphCounter } from './_helper_functions/Paragraph';
 import PX01 from '../_helper_components/global/ads/px01/default';
@@ -21,15 +24,16 @@ import '../../src/styles/container/_article-basic.scss';
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
 const MP02 = () => <ArcAd staticSlot={'MP02'} />;
-const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} />;
-const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} />;
+
+const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
+const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'}/>;
+const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'}/>;
 const PX01AdSlot = () => <ArcAd staticSlot={'PX01'} />;
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
   if (!globalContent) return null;
-  const { featuredVideoPlayerRules } = getProperties();
 
   const {
     first_publish_date: firstPublishDate,
@@ -95,17 +99,10 @@ const StoryPageLayout = () => {
   return (
     <>
       <header>
-        <div className="b-placeholder c-breakingNews">Breaking News</div>
+        <BreakingNews />
 
-        <div className="c-fixed-width">
-          <div className="b-placeholder c-logo">Logo</div>
-          <div className="b-placeholder c-headerNav">
-            <nav className="b-placeholder c-headerNav-menu">Menu</nav>
-            <div className="b-placeholder c-headerNav-weather">Weather</div>
-            <div className="b-placeholder c-headerNav-logIn">Log In</div>
-          </div>
-          <div className="b-placeholder c-subscribe">Support Local Journalism. Subscribe today for 99¢.</div>
-        </div>
+        <Header />
+
         <StickyNav
           articleURL={articleURL}
           headlines={headlines}
@@ -118,7 +115,12 @@ const StoryPageLayout = () => {
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className="c-header">
-            <Headline headlines={headlines} basicItems={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules} />
+            <Headline
+              headlines={headlines}
+              basicItems={basicItems}
+              featuredVideoPlayerRules={featuredVideoPlayerRules}
+              maxTabletViewWidth={maxTabletViewWidth}
+            />
           </div>
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10">
             <SectionLabel label={label} taxonomy={taxonomy} />
@@ -156,7 +158,7 @@ const StoryPageLayout = () => {
         </article>
         <Gallery contentElements={contentElements} />
       </main>
-      <footer className="b-placeholder c-footer">Footer</footer>
+      <Footer/>
     </>
   );
 };

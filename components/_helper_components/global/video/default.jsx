@@ -6,7 +6,7 @@ import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
 const Video = ({
-  src, isLeadVideo, featuredVideoPlayerRules, inlineVideoPlayerRules, isInlineVideo,
+  src, isLeadVideo, featuredVideoPlayerRules, inlineVideoPlayerRules, isInlineVideo, maxTabletViewWidth,
 }) => {
   const { credits } = src || null;
   const { basic: videoCaption } = src.description ? src.description : null;
@@ -28,13 +28,13 @@ const Video = ({
   const smartChecker = () => {
     if (
       (isLeadVideo && !giveCredit && !videoCaption)
-      || (isLeadVideo && giveCredit && !videoCaption && screenSize.width > 1024)
+      || (isLeadVideo && giveCredit && !videoCaption && screenSize.width > maxTabletViewWidth)
       || (isInlineVideo && !videoCaption)
     ) {
       return null;
     }
 
-    if (isLeadVideo && giveCredit && !videoCaption && screenSize.width < 1024) {
+    if (isLeadVideo && giveCredit && !videoCaption && screenSize.width < maxTabletViewWidth) {
       return <Caption src={src} isLeadVideo videoCaption={videoCaption} />;
     }
 
@@ -60,6 +60,7 @@ Video.propTypes = {
   isInlineVideo: PropTypes.bool,
   featuredVideoPlayerRules: PropTypes.object,
   inlineVideoPlayerRules: PropTypes.object,
+  maxTabletViewWidth: PropTypes.integer,
 };
 
 export default Video;
