@@ -39,7 +39,7 @@ const Section = ({ navigation, link, childSections }) => {
 
   return (
     <>
-      <li className={`itemPadding itemBottomBorder b-itemText ${ePaperClass} ${menuActivated} c-itemFlex`}
+      <li className={`itemPadding itemBottomBorder b-itemText ${ePaperClass} ${menuActivated}`}
       onMouseEnter={() => flyoutVisible(true)}
       onMouseLeave={() => flyoutVisible(false)}>
         <a>{name}</a>
