@@ -79,7 +79,7 @@ const StoryPageLayout = () => {
               maxTabletViewWidth={maxTabletViewWidth}
             />
           </div>
-          <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10">
+          <div className="b-margin-bottom-d15-m10 c-label-wrapper">
             <SectionLabel label={label} taxonomy={taxonomy} />
             <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
           </div>

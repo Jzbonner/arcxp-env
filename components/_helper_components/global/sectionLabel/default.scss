@@ -1,23 +1,19 @@
 @import "./../../../../src/styles/base/breakpoints";
-@import '../../../../src/styles/base/fonts';
-@import '../../../../src/styles/base/mixins';
+@import "../../../../src/styles/base/fonts";
+@import "../../../../src/styles/base/mixins";
 
 .section-label {
-  @include text-styles(0.75em, 1, "Gordita");
+  @include text-styles(0.75em, 1.5, "Gordita");
   font-weight: 500;
   text-transform: uppercase;
   color: #000000;
-  width: auto;
   letter-spacing: normal;
-  height: 21px;
-  display: flex;
-  align-items: center;
   margin-right: 6px;
 
   @include breakpoint(desktop-sm) {
     @include text-styles(1em, 1, "Gordita");
-    height: 26px;
   }
+
   &.section-label-link {
     color: #2e81b7;
     text-decoration: none;
