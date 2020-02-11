@@ -21,11 +21,20 @@ const Footer = () => {
     source: 'site-api',
   });
 
+  const siteWebsite = useContent({
+    source: 'site-api',
+    query: {
+      type: 'website',
+    },
+  });
+
   const { social } = siteSocial || {};
   const { twitter: twitterLink = {}, facebook: facebookLink = {} } = social || {};
 
   const { children } = siteContent || {};
   const [row1 = []] = children || [];
+
+  const { base_path: homepageUrl, display_name: websiteName } = siteWebsite || {};
 
   const [openMenu, setOpenMenu] = useState('');
 
@@ -41,8 +50,8 @@ const Footer = () => {
     <footer className="c-footer">
       <div className="logo-row">
         <div className="col">
-          <a href="https://www.ajc.com/">
-            <img className="logo" src={ajcLogo} alt="logo" />
+          <a href={homepageUrl}>
+            <img className="logo" src={ajcLogo} alt={`${websiteName} Logo`} />
           </a>
         </div>
         <div className="col">
