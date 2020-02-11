@@ -63,6 +63,14 @@ const StoryPageLayout = () => {
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
+  let numberOfDividers = 0;
+  const reducedContentElements = contentElements.map((element) => {
+    // we reconstruct contentElements to remove any extraneous Divider elements, per the logic in APD-96
+    if (element.type === 'divider') {
+      numberOfDividers += 1;
+    }
+    return (element.type !== 'divider' || (element.type === 'divider' && numberOfDividers <= 1)) ? element : {};
+  });
 
   const maxNumberOfParagraphs = paragraphCounter(contentElements);
 
@@ -78,7 +86,7 @@ const StoryPageLayout = () => {
           headlines={headlines}
           comments={comments}
           promoItems={promoItems}
-          contentElements={contentElements}
+          contentElements={reducedContentElements}
         />
       </header>
 
@@ -109,9 +117,9 @@ const StoryPageLayout = () => {
             <ArcAd staticSlot={'HP01'} />
             <ArcAd staticSlot={'MP01'} />
           </div>
-          <Section elements={contentElements} stopIndex={1} />
+          <Section elements={reducedContentElements} stopIndex={1} />
           <Section
-            elements={contentElements}
+            elements={reducedContentElements}
             startIndex={1}
             stopIndex={3}
             rightRailAd={RP01StoryDesktop}
@@ -120,15 +128,15 @@ const StoryPageLayout = () => {
           {
             maxNumberOfParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />
           }
-          <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
-          {handleFinalPX01Cases(contentElements, maxNumberOfParagraphs, sectionAds)}
+          <Nativo elements={reducedContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
+          {handleFinalPX01Cases(reducedContentElements, maxNumberOfParagraphs, sectionAds)}
           <BlogAuthor subtype={subtype} authorData={authorData} />
-          <Nativo elements={contentElements} controllerClass="story-nativo_placeholder--boap" />
+          <Nativo elements={reducedContentElements} controllerClass="story-nativo_placeholder--boap" />
           <div className="c-taboola">
             <TaboolaFeed type={type} />
           </div>
         </article>
-        <Gallery contentElements={contentElements} />
+        <Gallery contentElements={reducedContentElements} />
       </main>
       <Footer />
     </>

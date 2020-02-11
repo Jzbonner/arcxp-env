@@ -3,13 +3,9 @@ hr.divider {
   border: 0;
   border-top: solid 1px #cdcdcd;
 
-  &:nth-child(1) ~ p.story-text {
+  ~ p.story-text {
     font-size: 0.75rem;
     line-height: 1.75rem;
     color:#707174;
-  }
-
-  &:nth-child(n+2) {
-    display: none;
   }
 }
