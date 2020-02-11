@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContent } from 'fusion:content';
 import './default.scss';
-import getLinkURL from '../../layouts/_helper_functions/getLinkUrl';
+import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
 
 const Copyright = () => {
   const siteContent = useContent({
