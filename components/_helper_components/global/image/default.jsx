@@ -64,6 +64,6 @@ Image.propTypes = {
   imageMarginBottom: PropTypes.string,
   isInlineImage: PropTypes.bool,
   isLeadImage: PropTypes.bool,
-  maxTabletViewWidth: PropTypes.integer,
+  maxTabletViewWidth: PropTypes.number,
 };
 export default Image;
