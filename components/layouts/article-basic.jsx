@@ -1,6 +1,7 @@
 /*  /components/layouts/article-basic.jsx  */
 import React from 'react';
 import { useAppContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
@@ -13,6 +14,8 @@ import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
 import NavBar from '../_helper_components/global/navBar/default';
+import BreakingNews from '../_helper_components/global/breakingNews/default';
+import Footer from '../_helper_components/global/footer/default';
 import '../../src/styles/container/_article-basic.scss';
 import ArcAd from '../features/ads/default';
 
@@ -20,7 +23,9 @@ const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
 const MP02 = () => <ArcAd staticSlot={'MP02'} />;
 
-const ExampleAdInsertion2 = () => <div className="b-placeholder insertedAd insertionAs2">Inserted Ad B</div>;
+const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
+const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'}/>;
+const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'}/>;
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -50,7 +55,8 @@ const StoryPageLayout = () => {
 
   return (
     <>
-      <header className="c-nav">
+        <header className="c-nav">
+        <BreakingNews />
         <NavBar/>
         <StickyNav
           articleURL={articleURL}
@@ -64,7 +70,12 @@ const StoryPageLayout = () => {
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className="c-header">
-            <Headline headlines={headlines} basicItems={basicItems} />
+            <Headline
+              headlines={headlines}
+              basicItems={basicItems}
+              featuredVideoPlayerRules={featuredVideoPlayerRules}
+              maxTabletViewWidth={maxTabletViewWidth}
+            />
           </div>
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10">
             <SectionLabel label={label} taxonomy={taxonomy} />
@@ -91,7 +102,14 @@ const StoryPageLayout = () => {
           />
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
 
-          <Section elements={contentElements} startIndex={3} rightRailAd={ExampleAdInsertion2} />
+          <Section
+            elements={contentElements}
+            startIndex={3}
+            rightRailAd={RP09StoryDesktop}
+            insertedAds={[
+              { insertAfterParagraph: 7, adArray: [RP09StoryTablet] },
+            ]}
+          />
 
           <BlogAuthor subtype={subtype} authorData={authorData} />
           <Nativo elements={contentElements} controllerClass="story-nativo_placeholder--boap" />
@@ -101,7 +119,7 @@ const StoryPageLayout = () => {
         </article>
         <Gallery contentElements={contentElements} />
       </main>
-      <footer className="b-placeholder c-footer">Footer</footer>
+      <Footer/>
     </>
   );
 };
