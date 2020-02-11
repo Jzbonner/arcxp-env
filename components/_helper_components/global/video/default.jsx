@@ -60,7 +60,7 @@ Video.propTypes = {
   isInlineVideo: PropTypes.bool,
   featuredVideoPlayerRules: PropTypes.object,
   inlineVideoPlayerRules: PropTypes.object,
-  maxTabletViewWidth: PropTypes.integer,
+  maxTabletViewWidth: PropTypes.number,
 };
 
 export default Video;

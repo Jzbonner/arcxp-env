@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useContent } from 'fusion:content';
 import './default.scss';
-import menuArrow from '../../../../resources/images/menu-arrow.svg';
-import ajcLogo from '../../../../resources/images/ajc-logo.svg';
-import facebookIcon from '../../../../resources/images/facebook-icon.svg';
-import twitterIcon from '../../../../resources/images/twitter-icon.svg';
-import roundButton from '../../../../resources/images/round-button.svg';
-import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
-import Copyright from '../copyright/default';
+import menuArrow from '../../../resources/images/menu-arrow.svg';
+import ajcLogo from '../../../resources/images/ajc-logo.svg';
+import facebookIcon from '../../../resources/images/facebook-icon.svg';
+import twitterIcon from '../../../resources/images/twitter-icon.svg';
+import roundButton from '../../../resources/images/round-button.svg';
+import getLinkURL from '../../layouts/_helper_functions/getLinkUrl';
+import Copyright from '../copyright/copyright';
 
 const Footer = () => {
   const siteContent = useContent({
@@ -34,7 +34,7 @@ const Footer = () => {
     <footer className="c-footer">
       <div className="logo-row">
         <div className="col">
-          <a href="https://www.ajc.com/"><img className="logo" src={ajcLogo} alt="logo" /></a>
+          <img className="logo" src={ajcLogo} alt="logo" />
         </div>
         <div className="col">
           <a href="https://myaccount.ajc.com/ajc/preference" className="newsletter-signup">
@@ -91,6 +91,5 @@ const Footer = () => {
     </footer>
   );
 };
-
 
 export default Footer;
