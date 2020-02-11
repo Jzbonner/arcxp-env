@@ -13,6 +13,16 @@
   }
 }
 
+.c-nav {
+  background-image: linear-gradient(to bottom, #fff 66%, #d8d8d8);
+  padding-bottom: 31px;
+
+  @include breakpoint(desktop-nav) {
+    width: 100%;
+    padding: 0 32px 32px;
+  }
+}
+
 .c-breakingNews {
   min-height: 50px;
   width: 100%;

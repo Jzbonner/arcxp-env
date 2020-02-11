@@ -50,7 +50,7 @@ const StoryPageLayout = () => {
 
   return (
     <>
-      <header>
+      <header className="c-nav">
         <NavBar/>
         <StickyNav
           articleURL={articleURL}

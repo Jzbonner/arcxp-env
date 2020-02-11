@@ -16,6 +16,9 @@ children {
             site {
                 site_url
             }
+            navigation {
+                nav_title
+            }
         }
         
 }

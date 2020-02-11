@@ -4,33 +4,35 @@
 .c-headerNav {
     display: flex;
     flex-direction: column;
-    min-height: 313px;
-    padding: 0 32px;
-    background-image: linear-gradient(to bottom, #fff 66%, #d8d8d8);
+    // min-height: 313px;
+    width: 90%;
+    margin: 0 auto;
+    // padding: 0 32px;
+    // background-image: linear-gradient(to bottom, #fff 66%, #d8d8d8);
     @include breakpoint(desktop-nav) {
-        padding: 0 30px;
+        width: 100%;
     }
 
     nav {
     display: block;
     width: 100%;
     padding-bottom: 20px;
-
-
-        ul {
-        display: flex;
-        height: 60px;
-        flex-direction: row;
-        list-style-type: none;
-        }
     }
   }
-.itemPadding {
-    padding-top: 23px;
-    padding-right:20px;
+
+.c-navItemContainer {
     display: flex;
-    flex: 0 0 auto;
-    
+    height: 60px;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+.itemPadding {
+
+    padding-top: 20px;
+    padding-right: 1.3vw;
+    display: flex;
+    flex: 0 0 auto;  
 }
 
 .itemBottomBorder {
@@ -38,9 +40,10 @@
 }
 
 .b-itemText {
-    font-weight: 500;
+    font-weight: 600;
     color: #2e81b7;
     text-transform: capitalize;
+    align-items: center;
     @include breakpoint(desktop-sm) {
         @include text-styles(.875rem, 1, "Gordita");
     }
@@ -51,6 +54,7 @@
 
 .b-separatorContainer {
     display: flex;
+    align-items: center;
 }
 
 .separatorBar {
@@ -64,12 +68,15 @@
 .b-ePaper {
     text-transform: none;
 }
-
+.c-itemFlex {
+    flex-direction: column;
+    align-items: flex-start;
+}
 .c-searchContainer {
     flex-grow: 1;
     flex-basis: 180px;
-    padding-top: 23px;
-
+    padding-top: 20px;
+    padding-bottom: 4px;
 }
 
 .b-formContainer {
@@ -100,7 +107,7 @@
 
 }
 .c-weatherDisplay {
-    padding-top: 23px;
+    padding-top: 20px;
     display: none;
     @include breakpoint(desktop-nav) {
         display: flex;
@@ -114,13 +121,13 @@
 }
 
 .c-loginContainer {
-    padding-top: 23px;
-    padding-left: 5px;
+    padding-top: 20px;
+    padding-left: 15px;
 }
 
 .b-loginText {
     font-weight: bold;
-    padding-left: 9px;
+    padding-left: 6px;
 }
 
 .c-subBar {

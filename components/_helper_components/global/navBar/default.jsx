@@ -24,6 +24,7 @@ const NavBar = () => {
   const sectionLi = children.map((section) => {
     const {
       _id: id,
+      children: childSections,
       site,
       navigation,
     } = section || {};
@@ -35,7 +36,7 @@ const NavBar = () => {
     if (children[verticalBarIndex] === section) {
       return (
       <>
-     <Section key={section._id} navigation={navigation} link={destination}/>
+     <Section key={section._id} navigation={navigation} link={destination} childSections={childSections}/>
      <li className='itemPadding itemBottomBorder b-separatorContainer'>
        <span className='separatorBar'></span>
      </li>
@@ -45,7 +46,7 @@ const NavBar = () => {
 
     return (
     <>
-     <Section key={section._id} navigation={navigation} link={destination}/>
+     <Section key={section._id} navigation={navigation} link={destination} childSections={childSections}/>
      </>
     );
   });
@@ -57,7 +58,7 @@ const NavBar = () => {
           <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
         </div>
         <nav>
-          <ul>
+          <ul className='c-navItemContainer'>
             {sectionLi}
             <li className='c-searchContainer itemBottomBorder'>
               <form className='b-flexRow b-formContainer'>

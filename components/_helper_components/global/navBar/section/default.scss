@@ -1,0 +1,44 @@
+@import '../../../../../src/styles/base/_mixins.scss';
+
+.subNavInvisible {
+    visibility: hidden;
+}
+
+.menuActivated {
+    background-color: #fff;
+    border-radius: 0.375rem;
+    padding: 0.3125rem 0.625rem 0.9375rem 0.625rem;
+    box-shadow: 0 2px 26px 4px rgba(0,0,0,.1);
+    z-index: 3;
+}
+
+.c-subNavContainer {
+    margin-top: 20px;
+    transition: opacity 0.15s;
+    width: 365.812px;
+    opacity: 1; 
+    background-color: #fff;
+    position: absolute;
+    border-radius: 0.375rem;
+    padding: 1.125rem 1.5625rem 0.3125rem 1.5625rem;
+    box-shadow: 0 2px 26px 4px rgba(0,0,0,.1);
+    z-index: 2;
+    overflow: hidden;
+}
+
+.flyoutSubNav {
+    display: inline-flex;
+    writing-mode: vertical-lr;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    list-style-type: none;
+}
+
+.flyoutSubNavItem {
+    writing-mode: horizontal-tb;
+    height: 1.875rem;
+    margin-right: 3vw;
+    white-space: nowrap;
+    @include text-styles(.875rem, 1, "Gordita");
+    font-weight: 400;
+}
