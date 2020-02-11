@@ -34,7 +34,7 @@ const Footer = () => {
     <footer className="c-footer">
       <div className="logo-row">
         <div className="col">
-          <img className="logo" src={ajcLogo} alt="logo" />
+          <a href="https://www.ajc.com/"><img className="logo" src={ajcLogo} alt="logo" /></a>
         </div>
         <div className="col">
           <a href="https://myaccount.ajc.com/ajc/preference" className="newsletter-signup">
@@ -91,5 +91,6 @@ const Footer = () => {
     </footer>
   );
 };
+
 
 export default Footer;

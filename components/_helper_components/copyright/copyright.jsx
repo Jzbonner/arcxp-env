@@ -11,6 +11,7 @@ const Copyright = () => {
     },
   });
 
+
   const { children } = siteContent || {};
   const [ajc = [], visitor_agreement = [], privacy_policy = [], ad_choices = [], careers = []] = children || [];
 
