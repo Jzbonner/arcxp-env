@@ -9,15 +9,8 @@
 }
 
 .b-flexRow {
-  display: inline-block;
-  text-align: center;
-  padding: 0 1em;
-  
-  @include breakpoint(tablet) {
-    display: flex;
-    width: 100%;
-    padding: 0;
-  }
+  display: flex;
+  width: 100%;
 }
 
 .b-flexCenter {
