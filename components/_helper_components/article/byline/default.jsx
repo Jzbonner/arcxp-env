@@ -46,21 +46,16 @@ const Byline = ({ by = [] }) => {
     return bylineData;
   };
 
-  /*   const handleSingleAuthor = (author = []) => {
-    const bylineData = author.map((element, i) => {
-      if (element.orgName) {
-        return <span key={element.name}>, {element.org}</span>;
+  const handleSingleAuthor = (authors = []) => {
+    const bylineData = authors.map((author, i) => {
+      if (author.name) {
+        return <span key={author.name}>{i === 0 && 'By '}<a href="#">{author.name}</a>{author.org ? `,  ${author.org}` : ''}</span>;
       }
 
-      if (i === author.length - 1 && !element.orgName) {
-        return <a key={element.name} href="#">{element.name} </a>;
-      }
-
-      return <a key={element.name} href="#">{element.name}</a>;
+      return null;
     });
-
     return bylineData;
-  }; */
+  };
 
   const finalizeByline = (authors = []) => {
     // multiple authors //
@@ -70,16 +65,14 @@ const Byline = ({ by = [] }) => {
       byline = bylineData;
     } else {
       // only one author //
-      /* const finalAuthorData = handleOrganization(authors, organization, isStaff); */
-      // const bylineData = handleSingleAuthor(finalAuthorData);
-      // byline = bylineData;
+      const finalAuthorData = handleOrganization(authors);
+      const bylineData = handleSingleAuthor(finalAuthorData);
+      byline = bylineData;
     }
   };
 
   if (by.length > 0) {
     let organization = null;
-    // let isStaff = false;
-    // console.log('byline data', by);
     const authors = by.map((element) => {
       if (!organization && (typeof element.org !== 'undefined' || element.org !== '')) {
         organization = {
@@ -95,8 +88,8 @@ const Byline = ({ by = [] }) => {
           && element.additional_properties.original.affiliations,
       };
     });
-    console.log('authors', authors);
-    finalizeByline(authors, organization);
+
+    finalizeByline(authors);
   }
 
   return byline ? <div className="byline b-margin-bottom-d40-m20">{byline}</div> : null;

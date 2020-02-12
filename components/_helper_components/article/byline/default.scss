@@ -4,12 +4,10 @@
   color: #313132;
   font-weight: 100;
   letter-spacing: normal;
-  line-height: 2rem;
+  line-height: 2.25rem;
   text-align: center;
   display: flex;
   flex-direction: column;
-  
-
 
   @include text-styles(0.875rem, normal, "Gordita");
 
