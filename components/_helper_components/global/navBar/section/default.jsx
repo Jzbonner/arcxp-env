@@ -4,14 +4,25 @@ import './default.scss';
 import '../default.scss';
 
 const Section = ({ navigation, link, childSections }) => {
-  console.log(link);
   const [isVisible, flyoutVisible] = useState(false);
   const subNavVisible = !isVisible ? 'subNavInvisible' : '';
-  const menuActivated = !isVisible ? '' : 'menuActivated';
+  const menuActivated = !isVisible ? 'menuInactive' : 'menuActivated';
   const {
     nav_title: name,
   } = navigation;
 
+  let ePaperClass = '';
+  if (name === 'ePaper') {
+    ePaperClass = 'b-ePaper';
+  }
+  // Added protection if there are no subsections
+  if (childSections.length === 0) {
+    return <>
+      <li className={`itemPadding itemBottomBorder b-itemText ${ePaperClass}`}>
+            <a href={link}>{name}</a>
+      </li>
+        </>;
+  }
   const childList = childSections.map((childSection) => {
     const {
       _id: id,
@@ -21,33 +32,35 @@ const Section = ({ navigation, link, childSections }) => {
 
     const {
       nav_title: childName,
-    } = childNav || 'Undefined';
+    } = childNav || {};
     const {
       site_url: childURL,
     } = site || {};
 
-    return (
-      <li key={id} className='flyoutSubNavItem'>
-        <a href={childURL}>{childName}</a>
-      </li>
-    );
+    if (childName) {
+      return (
+        <li key={id} className='flyoutSubNavItem'>
+          <a href={childURL}>{childName}</a>
+        </li>
+      );
+    }
+    return null;
   });
-  let ePaperClass = '';
-  if (name === 'ePaper') {
-    ePaperClass = 'b-ePaper';
-  }
 
   return (
     <>
-      <li className={`itemPadding itemBottomBorder b-itemText ${ePaperClass} ${menuActivated}`}
+      <li className={`itemPadding itemBottomBorder b-itemText ${ePaperClass}`}
       onMouseEnter={() => flyoutVisible(true)}
       onMouseLeave={() => flyoutVisible(false)}>
         <a>{name}</a>
+        <div className={`${menuActivated}`}>
+          <a>{name}</a>
+        </div>
         <div className={`c-subNavContainer ${subNavVisible}`}>
-        <ul className='flyoutSubNav'>
-          {childList}
-        </ul>
-      </div>
+          <ul className='flyoutSubNav'>
+            {childList}
+          </ul>
+        </div>
       </li>
     </>
   );

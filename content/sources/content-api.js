@@ -3,7 +3,7 @@ const schemaName = 'article';
 const params = {
   path: 'text',
   published: 'text',
-  id: 'text',
+  // id: 'text',
 };
 
 const resolve = (query) => {
@@ -11,11 +11,11 @@ const resolve = (query) => {
     'arc-site': arcSite = 'ajc',
     path,
     published,
-    id,
+    // id,
   } = query;
   let requestUri = `/content/v4/?website=${arcSite}`;
   requestUri += path ? `&website_url=${path}` : '';
-  requestUri += id ? `&_id=${id}` : '';
+  // requestUri += id ? `&_id=${id}` : '';
   return published ? `${requestUri}&published=${published}` : requestUri;
 };
 

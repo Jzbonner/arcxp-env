@@ -17,6 +17,10 @@
     display: block;
     width: 100%;
     padding-bottom: 20px;
+        a {
+            color: #2e81b7;
+            text-decoration: none;;
+        }
     }
   }
 
@@ -73,24 +77,24 @@
     align-items: flex-start;
 }
 .c-searchContainer {
+    display: flex;
+    align-items: center;
     flex-grow: 1;
     flex-basis: 180px;
     padding-top: 20px;
-    padding-bottom: 4px;
 }
 
 .b-formContainer {
     height: 28px;
+    width: 100%;
 }
 .b-searchInput {
     text-align: right;
     border: none;
     outline: none;
     background-color: transparent;
-    font-size: .875rem;
-    line-height: 24px;
     width: calc(100% - 40px);
-    @include text-styles(.875rem, 1, "Gordita");
+    @include text-styles(.625rem, 1, "Gordita");
 
 }
 .b-searchIcon {
@@ -121,6 +125,7 @@
 }
 
 .c-loginContainer {
+    min-width: 100px;
     padding-top: 20px;
     padding-left: 15px;
 }

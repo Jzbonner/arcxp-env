@@ -3,6 +3,7 @@ import { useContent } from 'fusion:content';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
+import weatherIcon from '../../../../resources/images/cloudy.png';
 import '../../../../src/styles/base/_utility.scss';
 import './default.scss';
 
@@ -14,11 +15,13 @@ const NavBar = () => {
     },
     filter: topNavFilter,
   });
+
   const {
     site: siteLogoImage,
     children,
     _id: rootDirectory,
   } = sections || {};
+
   const verticalBarIndex = children.length - 2;
 
   const sectionLi = children.map((section) => {
@@ -61,14 +64,14 @@ const NavBar = () => {
           <ul className='c-navItemContainer'>
             {sectionLi}
             <li className='c-searchContainer itemBottomBorder'>
-              <form className='b-flexRow b-formContainer'>
+              <form className='b-formContainer'>
                 <input className='b-searchInput'></input>
                 <img className='b-searchIcon'
                 src='https://www.ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/search-icon.svg'></img>
               </form>
             </li>
             <li className='b-weatherIconItem c-weatherDisplay'>
-              <a>W</a>
+              <img height='35px' src={weatherIcon}></img>
             </li>
             <li className='b-itemText b-weatherText c-weatherDisplay'>
               <a>89°</a>
