@@ -21,6 +21,7 @@ import { paragraphCounter } from './_helper_functions/Paragraph';
 import PX01 from '../_helper_components/global/ads/px01/default';
 import handleFinalPX01Cases from './_helper_functions/handleFinalPX01Cases';
 import '../../src/styles/container/_article-basic.scss';
+import filterContentElements from './_helper_functions/article/filterContentElements';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
@@ -63,14 +64,7 @@ const StoryPageLayout = () => {
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
-  let numberOfDividers = 0;
-  const reducedContentElements = contentElements.map((element) => {
-    // we reconstruct contentElements to remove any extraneous Divider elements, per the logic in APD-96
-    if (element.type === 'divider') {
-      numberOfDividers += 1;
-    }
-    return (element.type !== 'divider' || (element.type === 'divider' && numberOfDividers <= 1)) ? element : {};
-  });
+  const filteredContentElements = filterContentElements({ contentElements });
 
   const maxNumberOfParagraphs = paragraphCounter(contentElements);
 
@@ -86,7 +80,7 @@ const StoryPageLayout = () => {
           headlines={headlines}
           comments={comments}
           promoItems={promoItems}
-          contentElements={reducedContentElements}
+          contentElements={filteredContentElements}
         />
       </header>
 
@@ -117,9 +111,9 @@ const StoryPageLayout = () => {
             <ArcAd staticSlot={'HP01'} />
             <ArcAd staticSlot={'MP01'} />
           </div>
-          <Section elements={reducedContentElements} stopIndex={1} />
+          <Section elements={filteredContentElements} stopIndex={1} />
           <Section
-            elements={reducedContentElements}
+            elements={filteredContentElements}
             startIndex={1}
             stopIndex={3}
             rightRailAd={RP01StoryDesktop}
@@ -128,15 +122,15 @@ const StoryPageLayout = () => {
           {
             maxNumberOfParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />
           }
-          <Nativo elements={reducedContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
-          {handleFinalPX01Cases(reducedContentElements, maxNumberOfParagraphs, sectionAds)}
+          <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
+          {handleFinalPX01Cases(filteredContentElements, maxNumberOfParagraphs, sectionAds)}
           <BlogAuthor subtype={subtype} authorData={authorData} />
-          <Nativo elements={reducedContentElements} controllerClass="story-nativo_placeholder--boap" />
+          <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />
           <div className="c-taboola">
             <TaboolaFeed type={type} />
           </div>
         </article>
-        <Gallery contentElements={reducedContentElements} />
+        <Gallery contentElements={filteredContentElements} />
       </main>
       <Footer />
     </>
