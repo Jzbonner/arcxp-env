@@ -40,6 +40,7 @@ const renderListItem = (item, index, nextItem = {}) => {
 };
 
 const List = (props) => {
+  // console.log('list props', props);
   const { src = {}, listType = 'ul' } = props;
   const { items = [] } = src;
 
