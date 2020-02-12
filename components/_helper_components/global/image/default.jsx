@@ -8,7 +8,7 @@ import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 const Image = ({
   width, height, src, imageMarginBottom, isInlineImage, isLeadImage, maxTabletViewWidth,
 }) => {
-  const { url, caption, credits } = src || null;
+  const { url, caption, credits } = src || {};
   const [imageSrc, setImageSrc] = useState('');
   const imageALT = caption && caption.length > 1 ? caption : 'story page inline image';
 

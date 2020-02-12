@@ -92,14 +92,16 @@ const StoryPageLayout = () => {
               maxTabletViewWidth={maxTabletViewWidth}
             />
           </div>
-          <div className="b-margin-bottom-d15-m10 c-label-wrapper">
+          <div className="b-margin-bottom-d15-m10 c-label-wrapper b-pageContainer">
             <SectionLabel label={label} taxonomy={taxonomy} />
             <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
           </div>
-          <div className="b-flexRow b-flexCenter">
+          <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
           </div>
-          <SubHeadline subheadlines={subheadlines} />
+          <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
+            <SubHeadline subheadlines={subheadlines} />
+          </div>
         </header>
 
         <article>
