@@ -5,7 +5,7 @@ import menuArrow from '../../../../resources/images/menu-arrow.svg';
 import logo from '../../../../resources/images/ajc-logo.svg';
 import facebookIcon from '../../../../resources/images/facebook-icon.svg';
 import twitterIcon from '../../../../resources/images/twitter-icon.svg';
-import roundButton from '../../../../resources/images/round-button.svg';
+import rightArrow from '../../../../resources/images/right-arrow.svg';
 import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
 import Copyright from '../copyright/default';
 
@@ -57,7 +57,7 @@ const Footer = () => {
         <div className="col">
           <a href={getLinkURL(row1)} className="newsletter-signup">
             <p>{row1.navigation && row1.navigation.nav_title}</p>
-            <img src={roundButton} alt="" />
+            <img src={rightArrow} alt="" />
           </a>
         </div>
       </div>
@@ -90,7 +90,7 @@ const Footer = () => {
             return null;
           })}
         <li className="menu social-media">
-          <span className="header-text">Follow</span>
+          <span className="header-menu">Follow</span>
           <ul className="social-media-icons">
             <li>
               <a href={facebookLink}>
