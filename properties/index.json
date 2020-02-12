@@ -9,7 +9,7 @@
   "facebookPage": "https://www.facebook.com/ajc",
   "pinterestURL": "https://www.pinterest.com/pin/create/button/?url=",
   "redditURL": "https://www.reddit.com/submit?url=",
-  "logo": "./../resources/images/ajc-logo.svg",
+  "logo": "/pf/resources/images/ajc-logo.svg",
   "mail": "mailto:?Subject=",
   "sites": ["ajc"],
   "featuredVideoPlayerRules": {
