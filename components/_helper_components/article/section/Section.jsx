@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ContentElements from '../contentElements/default.jsx';
 import { isParagraph } from '../../../layouts/_helper_functions/Paragraph';
-import isNotBR from '../../../layouts/_helper_functions/BR';
 import './styles.scss';
 
 const Section = ({
@@ -25,14 +24,11 @@ const Section = ({
           insertedAds.splice(insertIndex, 1);
         }
       }
-
-      if (isNotBR(element)) {
-        newContentElements.push(element);
-      }
+      newContentElements.push(element);
     }
 
     // keeps track of how many paragraphs have been mapped through
-    if (isParagraph(element.type) && isNotBR(element)) {
+    if (isParagraph(element.type)) {
       paragraphCounter += 1;
     }
 
