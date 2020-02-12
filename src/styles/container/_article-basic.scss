@@ -66,7 +66,6 @@
 }
 
 .c-label-wrapper {
-  padding: 0 30px;
   text-align: center;
 }
 
@@ -77,12 +76,6 @@
   @include breakpoint(desktop-sm) {
     width: 67.5%;
   }
-}
-
-.c-footer {
-  min-height: 115px;
-  width: 100%;
-  text-align: center;
 }
 
 .c-articlePadding {

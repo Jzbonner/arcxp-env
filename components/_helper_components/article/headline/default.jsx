@@ -22,7 +22,9 @@ const Headline = ({
           <h3 className={`headline-text ${headlines.basic.length > 50 ? 'headline-text-long' : ''}`}>{headlines.basic}</h3>
         </div>
       </div>
-      {promoData.type === 'image' && <Image width={1066} height={600} isLeadImage src={basicItems} />}
+      {promoData.type === 'image' && (
+        <Image width={1066} height={600} isLeadImage src={basicItems} maxTabletViewWidth={maxTabletViewWidth} />
+      )}
       {promoData.type === 'gallery' && <div className="c-gallery b-placeholder">Gallery Placeholder</div>}
       {promoData.type === 'video' && (
         <Video isLeadVideo src={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules} maxTabletViewWidth={maxTabletViewWidth} />
@@ -35,7 +37,7 @@ Headline.propTypes = {
   basicItems: PropTypes.object,
   headlines: PropTypes.object.isRequired,
   featuredVideoPlayerRules: PropTypes.object,
-  maxTabletViewWidth: PropTypes.integer,
+  maxTabletViewWidth: PropTypes.number,
 };
 
 export default Headline;

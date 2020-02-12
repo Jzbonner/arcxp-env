@@ -7,7 +7,7 @@ import Byline from '../_helper_components/article/byline/default.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
-import Section from '../_helper_components/article/section/Section.jsx';
+import Section from '../_helper_components/article/section/Section';
 import TaboolaFeed from '../features/taboolaFeed/default';
 import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
@@ -16,8 +16,11 @@ import Gallery from '../features/gallery/default.jsx';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Header from '../_helper_components/global/header/default';
 import Footer from '../_helper_components/global/footer/default';
-import '../../src/styles/container/_article-basic.scss';
 import ArcAd from '../features/ads/default';
+import { paragraphCounter } from './_helper_functions/Paragraph';
+import PX01 from '../_helper_components/global/ads/px01/default';
+import handleFinalPX01Cases from './_helper_functions/handleFinalPX01Cases';
+import '../../src/styles/container/_article-basic.scss';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
@@ -26,10 +29,18 @@ const MP02 = () => <ArcAd staticSlot={'MP02'} />;
 const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'}/>;
 const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'}/>;
+const PX01AdSlot = () => <ArcAd staticSlot={'PX01'} />;
+
+const sectionAds = {
+  RP09StoryDesktop,
+  RP09StoryTablet,
+  PX01AdSlot,
+};
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
+
   if (!globalContent) return null;
 
   const {
@@ -52,6 +63,8 @@ const StoryPageLayout = () => {
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
+
+  const maxNumberOfParagraphs = paragraphCounter(contentElements);
 
   return (
     <>
@@ -79,14 +92,16 @@ const StoryPageLayout = () => {
               maxTabletViewWidth={maxTabletViewWidth}
             />
           </div>
-          <div className="b-margin-bottom-d15-m10 c-label-wrapper">
+          <div className="b-margin-bottom-d15-m10 c-label-wrapper b-pageContainer">
             <SectionLabel label={label} taxonomy={taxonomy} />
             <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
           </div>
-          <div className="b-flexRow b-flexCenter">
+          <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
           </div>
-          <SubHeadline subheadlines={subheadlines} />
+          <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
+            <SubHeadline subheadlines={subheadlines} />
+          </div>
         </header>
 
         <article>
@@ -102,17 +117,11 @@ const StoryPageLayout = () => {
             rightRailAd={RP01StoryDesktop}
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
+          {
+            maxNumberOfParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />
+          }
           <Nativo elements={contentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
-
-          <Section
-            elements={contentElements}
-            startIndex={3}
-            rightRailAd={RP09StoryDesktop}
-            insertedAds={[
-              { insertAfterParagraph: 7, adArray: [RP09StoryTablet] },
-            ]}
-          />
-
+          {handleFinalPX01Cases(contentElements, maxNumberOfParagraphs, sectionAds)}
           <BlogAuthor subtype={subtype} authorData={authorData} />
           <Nativo elements={contentElements} controllerClass="story-nativo_placeholder--boap" />
           <div className="c-taboola">
@@ -121,9 +130,8 @@ const StoryPageLayout = () => {
         </article>
         <Gallery contentElements={contentElements} />
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 };
-
 export default StoryPageLayout;
