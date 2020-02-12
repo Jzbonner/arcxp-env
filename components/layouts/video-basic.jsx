@@ -1,6 +1,7 @@
 /*  /components/layouts/video-basic.jsx  */
 import React from 'react';
 import { useAppContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import StickyNav from '../_helper_components/article/stickyNav/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
@@ -19,9 +20,20 @@ const VideoPageLayout = () => {
     headlines,
     comments,
     canonical_url: articleURL,
+    type,
+    credits,
+    description,
+    streams,
   } = globalContent || {};
 
-  const { basic: basicItems } = promoItems || {};
+  const basicItems = {
+    type,
+    credits,
+    description,
+    streams,
+  };
+
+  const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 
   return (
     <>
@@ -41,7 +53,12 @@ const VideoPageLayout = () => {
 
       <main>
         <div className="c-header">
-          <Headline headlines={headlines} basicItems={basicItems} />
+          <Headline
+            headlines={headlines}
+            basicItems={basicItems}
+            featuredVideoPlayerRules={featuredVideoPlayerRules}
+            maxTabletViewWidth={maxTabletViewWidth}
+          />
         </div>
       </main>
       <Footer/>
