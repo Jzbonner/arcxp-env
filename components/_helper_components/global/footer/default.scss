@@ -31,7 +31,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 100%;
+    @include breakpoint(desktop-sm) {
+      width: 50%;
+    }
     &:first-child {
       @include breakpoint(desktop-sm) {
         border-right: 1px solid #9b9b9b;
@@ -49,12 +52,10 @@
 
   .logo {
     width: 165px;
-    height: 95px;
     margin: 2rem 0 1.3rem 0;
     @include breakpoint(desktop-sm) {
-      width: 253px;
-      height: 155px;
-      margin: 27px 0;
+      width: 185px;
+      margin: 0;
     }
   }
   .newsletter-signup {
@@ -65,17 +66,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
     img {
       width: 2.8rem;
       cursor: pointer;
+      margin-top: 3px;
     }
     @include breakpoint(desktop-sm) {
-      @include text-styles(1.875rem, 1, "Gordita");
+      @include text-styles(1.2rem, 1, "Gordita");
       font-weight: 500;
       margin: 0;
       img {
-        width: 3.8rem;
+        width: 3rem;
       }
     }
   }
@@ -113,8 +114,8 @@
   }
   &.is-visible-mobile {
     padding-bottom: 0;
-    .header-text .menu-arrow {
-      transform: scale(0.9) translate(0, 5px);
+    .menu-header .menu-arrow {
+      transform: scale(0.9) translate(0, 1px);
     }
     .menu-body {
       display: block;
@@ -136,7 +137,7 @@
     }
     .menu-arrow {
       float: right;
-      transform: rotate(180deg) scale(0.9) translate(0, -5px);
+      transform: rotate(180deg) scale(0.9) translate(0, -1px);
       @include breakpoint(desktop-sm) {
         display: none;
       }
@@ -170,11 +171,11 @@
     text-align: left;
     flex: 0.5;
   }
-  .header-text {
+  .header-menu {
+    margin-top: 2.6rem;
     display: inline-block;
-    margin-top: 38px;
     @include breakpoint(desktop-sm) {
-      margin-top: 0;
+      margin: 0;
     }
   }
   .social-media-icons {
@@ -185,10 +186,9 @@
       justify-content: left;
     }
     img {
-      height: 31px;
+      height: 30px;
       margin: 0 1rem;
       @include breakpoint(desktop-sm) {
-        height: 40px;
         margin: 0 1.25rem 0 0;
       }
     }

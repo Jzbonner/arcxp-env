@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
 import { useContent } from 'fusion:content';
+import getProperties from 'fusion:properties';
 import './default.scss';
 import menuArrow from '../../../../resources/images/menu-arrow.svg';
-import ajcLogo from '../../../../resources/images/ajc-logo.svg';
 import facebookIcon from '../../../../resources/images/facebook-icon.svg';
 import twitterIcon from '../../../../resources/images/twitter-icon.svg';
-import roundButton from '../../../../resources/images/round-button.svg';
+import rightArrow from '../../../../resources/images/right-arrow.svg';
 import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
 import Copyright from '../copyright/default';
 
 const Footer = () => {
-  const siteContent = useContent({
+  const siteNavigation = useContent({
     source: 'site-api',
     query: {
       hierarchy: 'BottomNav',
     },
   });
 
-  const { children } = siteContent || {};
+  const {
+    facebookPage, twitterPage, logo, homeURL,
+  } = getProperties();
+
+  const { children } = siteNavigation || {};
   const [row1 = []] = children || [];
 
   const [openMenu, setOpenMenu] = useState('');
@@ -34,12 +38,14 @@ const Footer = () => {
     <footer className="c-footer">
       <div className="logo-row">
         <div className="col">
-          <a href="https://www.ajc.com/"><img className="logo" src={ajcLogo} alt="logo" /></a>
+          <a href={homeURL}>
+            <img className="logo" src={logo} alt="logo" />
+          </a>
         </div>
         <div className="col">
-          <a href="https://myaccount.ajc.com/ajc/preference" className="newsletter-signup">
+          <a href={getLinkURL(row1)} className="newsletter-signup">
             <p>{row1.navigation && row1.navigation.nav_title}</p>
-            <img src={roundButton} alt="" />
+            <img src={rightArrow} alt="" />
           </a>
         </div>
       </div>
@@ -72,15 +78,15 @@ const Footer = () => {
             return null;
           })}
         <li className="menu social-media">
-          <span className="header-text">Follow</span>
+          <span className="header-menu">Follow</span>
           <ul className="social-media-icons">
             <li>
-              <a href="https://www.facebook.com/ajc">
+              <a href={facebookPage}>
                 <img src={facebookIcon} alt="" />
               </a>
             </li>
             <li>
-              <a href="https://twitter.com/ajc">
+              <a href={twitterPage}>
                 <img src={twitterIcon} alt="" />
               </a>
             </li>
@@ -91,6 +97,5 @@ const Footer = () => {
     </footer>
   );
 };
-
 
 export default Footer;
