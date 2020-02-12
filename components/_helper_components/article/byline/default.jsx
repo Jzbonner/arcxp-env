@@ -5,33 +5,54 @@ import './default.scss';
 const Byline = ({ by = [] }) => {
   let byline;
 
-  const handleMultipleAuthors = (authors = [], hasOrganization = false) => {
-    const bylineData = authors.map((element, i) => {
-      if (element.orgName && element.orgName !== '') {
-        return <span key={element.name}> - {element.orgName}</span>;
+  const handleOrganization = (authors = []) => {
+    // cleans up authors array items
+
+    const authorsAndOrgs = authors.map((author) => {
+      if (author.affiliations) {
+        return {
+          name: author.name,
+          org: author.affiliations,
+        };
+      }
+      if (author.org && !author.affiliations) {
+        return {
+          name: author.name,
+          org: author.org,
+        };
+      }
+      if (!author.org && !author.affiliations) {
+        return {
+          name: author.name,
+          org: null,
+        };
       }
 
-      if (element.name === 'and') {
-        return <span key={element.name}> {element.name} </span>;
-      }
-
-      if ((i === authors.length - 1 && !hasOrganization) || i === authors.length - 2 || (authors[i + 1] && authors[i + 1].name === 'and')) {
-        return <a key={element.name} href="#">{element.name}</a>;
-      }
-
-      return <span key={element.name}><a href="#">{element.name ? `${element.name}` : null}</a>, </span>;
+      return null;
     });
 
+    console.log('authors after organize', authorsAndOrgs);
+
+    return authorsAndOrgs;
+  };
+
+  const handleMultipleAuthors = (authors = []) => {
+    const bylineData = authors.map((author, i) => {
+      if (author.name) {
+        return <span key={author.name}>{i === 0 && 'By '}<a href="#">{author.name}</a>{author.org ? `  -  ${author.org}` : ''}</span>;
+      }
+      return null;
+    });
     return bylineData;
   };
 
-  const handleSingleAuthor = (authorData = []) => {
-    const bylineData = authorData.map((element, i) => {
+  /*   const handleSingleAuthor = (author = []) => {
+    const bylineData = author.map((element, i) => {
       if (element.orgName) {
-        return <span key={element.name}> - {element.orgName}</span>;
+        return <span key={element.name}>, {element.org}</span>;
       }
 
-      if (i === authorData.length - 1 && !element.orgName) {
+      if (i === author.length - 1 && !element.orgName) {
         return <a key={element.name} href="#">{element.name} </a>;
       }
 
@@ -39,55 +60,31 @@ const Byline = ({ by = [] }) => {
     });
 
     return bylineData;
-  };
+  }; */
 
-  const handleOrganization = (authors = [], organization = {}, isStaff = false) => {
-    const [firstAuthor] = authors;
-
-    if (!isStaff) {
-      if (organization.orgName !== '') {
-        authors.push(organization);
-      }
-    } else if (isStaff && authors.length === 1 && firstAuthor && firstAuthor.affiliations) {
-      authors.push({ orgName: firstAuthor.affiliations });
-    } else {
-      authors.push({ orgName: 'The Atlanta Journal-Constitution' });
-    }
-
-    return authors;
-  };
-
-  const finalizeByline = (authors = [], organization = {}, isStaff = false) => {
-    const { orgName = '' } = organization;
-    const hasOrganization = !!orgName;
-
+  const finalizeByline = (authors = []) => {
     // multiple authors //
     if (authors.length > 1) {
-      authors.splice(authors.length - 1, 0, { name: 'and' });
-      const finalAuthorData = handleOrganization(authors, organization, isStaff);
-      const bylineData = handleMultipleAuthors(finalAuthorData, hasOrganization);
+      const finalAuthorData = handleOrganization(authors);
+      const bylineData = handleMultipleAuthors(finalAuthorData);
       byline = bylineData;
     } else {
       // only one author //
-      const finalAuthorData = handleOrganization(authors, organization, isStaff);
-      const bylineData = handleSingleAuthor(finalAuthorData);
-      byline = bylineData;
+      /* const finalAuthorData = handleOrganization(authors, organization, isStaff); */
+      // const bylineData = handleSingleAuthor(finalAuthorData);
+      // byline = bylineData;
     }
   };
 
   if (by.length > 0) {
     let organization = null;
-    let isStaff = false;
-
+    // let isStaff = false;
+    // console.log('byline data', by);
     const authors = by.map((element) => {
       if (!organization && (typeof element.org !== 'undefined' || element.org !== '')) {
         organization = {
           orgName: element.org,
         };
-      }
-
-      if (element._id) {
-        isStaff = true;
       }
 
       return {
@@ -98,11 +95,11 @@ const Byline = ({ by = [] }) => {
           && element.additional_properties.original.affiliations,
       };
     });
-
-    finalizeByline(authors, organization, isStaff);
+    console.log('authors', authors);
+    finalizeByline(authors, organization);
   }
 
-  return byline ? <div className="byline b-margin-bottom-d40-m20">By {byline}</div> : null;
+  return byline ? <div className="byline b-margin-bottom-d40-m20">{byline}</div> : null;
 };
 
 Byline.propTypes = {
