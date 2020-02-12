@@ -19,6 +19,11 @@
   align-items: center;
 }
 
+.b-pageContainer {
+  width: calc(100% - 60px);
+  margin: 0 auto;
+}
+
 .b-margin-bottom-1 {
   margin-bottom: 1em;
 }
