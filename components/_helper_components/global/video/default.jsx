@@ -8,9 +8,9 @@ import '../../../../src/styles/base/_utility.scss';
 const Video = ({
   src, isLeadVideo, featuredVideoPlayerRules, inlineVideoPlayerRules, isInlineVideo, maxTabletViewWidth,
 }) => {
-  const { credits } = src || null;
-  const { basic: videoCaption } = src.description ? src.description : null;
-  const { url: videoPlayer } = src.streams && src.streams[0] ? src.streams[0] : null;
+  const { credits } = src || {};
+  const { basic: videoCaption } = src.description ? src.description : {};
+  const { url: videoPlayer } = src.streams && src.streams[0] ? src.streams[0] : {};
   const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
 
   const screenSize = checkWindowSize();
@@ -60,7 +60,7 @@ Video.propTypes = {
   isInlineVideo: PropTypes.bool,
   featuredVideoPlayerRules: PropTypes.object,
   inlineVideoPlayerRules: PropTypes.object,
-  maxTabletViewWidth: PropTypes.integer,
+  maxTabletViewWidth: PropTypes.number,
 };
 
 export default Video;
