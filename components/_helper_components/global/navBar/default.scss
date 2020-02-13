@@ -4,30 +4,28 @@
 .c-headerNav {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 94%;
     margin: 0 auto;
     @include breakpoint(desktop-nav) {
-        width: 100%;
+        width: 90%;
     }
     nav {
-    display: block;
-    width: 100%;
     padding-bottom: 20px;
         a {
             color: #2e81b7;
-            text-decoration: none;;
+            text-decoration: none;
         }
     }
   }
 
-.c-navItemContainer {
+.nav-row {
     display: flex;
     height: 60px;
     flex-direction: row;
     list-style-type: none;
 }
 
-.itemPadding {
+.nav-items {
     padding-right: 1.3vw;
     display: flex;
     flex: 0 0 auto; 
@@ -36,12 +34,12 @@
     } 
 }
 
-.itemBottomBorder {
+.nav-itemBottomBorder {
     border-bottom: solid 1px #cdcdcd;
 }
 
-.b-itemText {
-    font-weight: 600;
+.nav-itemText {
+    font-weight: 500;
     color: #2e81b7;
     text-transform: capitalize;
     align-items: center;
@@ -53,42 +51,40 @@
     }
 }
 
-.b-separatorContainer {
+.nav-separator {
     display: flex;
     align-items: center;
-}
-
-.separatorBar {
-    background-color: #2e81b7;
-    width: 2px;
-    height: 15px;
-    @include breakpoint(desktop-nav) {
-        height: 20px;
+    span {
+        background-color: #2e81b7;
+        width: 2px;
+        height: 15px;
+        @include breakpoint(desktop-nav) {
+            height: 20px;
+        }
     }
 }
-.b-ePaper {
+
+.nav-ePaper {
     text-transform: none;
     cursor: pointer;
 }
-.c-itemFlex {
-    flex-direction: column;
-    align-items: flex-start;
-}
-.c-searchContainer {
+
+.nav-search {
     display: flex;
     align-items: center;
     flex-grow: 1;
     flex-basis: 180px;
     @include breakpoint(desktop-nav) {
         padding-top: 2px;
-    }}
+    }
+}
 
-.b-formContainer {
+.search-form {
     display: flex;
     height: 28px;
     width: 100%;
 }
-.b-searchInput {
+.search-input {
     text-align: right;
     border: none;
     outline: none;
@@ -97,7 +93,7 @@
     @include text-styles(.625rem, 1, "Gordita");
 
 }
-.b-searchIcon {
+.search-icon {
     height: 29px;
     width: 29px;
     cursor: pointer;
@@ -106,25 +102,24 @@
     font-size: 1rem;
 }
 
-.b-weatherIconItem {
-    padding-left: 56px;
-
-}
-.c-weatherDisplay {
+.nav-weather {
     display: none;
     @include breakpoint(desktop-nav) {
         display: flex;
         padding-top: 2px;
         align-items: center;
     }
-   
 }
 
-.b-weatherText {
+.weather-icon {
+    padding-left: 56px;
+}
+
+.weather-text {
     padding-left: 4px;
 }
 
-.c-loginContainer {
+.nav-login {
     display: flex;
     min-width: 100px;
     padding-left: 15px;
@@ -133,23 +128,91 @@
     }    
 }
 
-.b-loginText {
+.login-text {
     font-weight: bold;
     padding-left: 6px;
 }
 
-.c-subBar {
+.sub {
     height: 57px;
     width: 100%;
     border-radius: 6px;
     background-image: linear-gradient(to top, #04befe, #4481eb);
 }
-.b-subscribeText {
+.sub-text {
     @include text-styles(1.25rem, 1, "Gordita");
     color: #ffffff;
 }
-.b-subscribeBold {
+.sub-bold {
     font-weight: bold;
     text-transform: uppercase;
     margin-left: 5px;
+}
+
+.subNav-inactive {
+    visibility: hidden;
+}
+
+.menu-inactive {
+    display: none;
+}
+
+.menu-active {
+    cursor: default;
+    // border-radius: 0.375rem 0.375rem 0 0;
+    border-radius: 6px;
+    // height: 60px;
+    // width: 100%;
+    // padding: 0.3125rem 0.625rem 0.9375rem 0.625rem;
+    box-shadow: 0px -8px 30px -8px rgba(0, 0, 0, 0.1);  
+    display: flex;
+    // align-items:center;
+    // padding: 0 .45rem;
+    // z-index: 3;
+    position: absolute;
+    margin-left: -.45rem;
+    flex-flow: column;
+}
+
+.menu-item {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0 .45rem;
+    background-color: #fff;
+    border-radius: 6px 6px 0 0;
+    z-index: 3
+
+}
+
+.subNav {
+    background-color: #fff;
+    top: 44px;
+    transition: opacity 0.15s;
+    opacity: 1; 
+    border-radius: 0 6px 6px 6px;
+    padding: 1.125rem 1.5625rem 0.3125rem 1.5625rem;
+    position: absolute;
+    box-shadow: 0 2px 26px 4px rgba(0,0,0,.1);
+    z-index: 2;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.subNav-flyout {
+    display: inline-flex;
+    writing-mode: vertical-lr;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    list-style-type: none;
+}
+
+.flyout-item {
+    writing-mode: horizontal-tb;
+    height: 1.875rem;
+    margin-right: 3vw;
+    white-space: nowrap;
+    @include text-styles(.875rem, 1, "Gordita");
+    font-weight: 400;
 }

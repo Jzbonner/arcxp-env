@@ -39,7 +39,7 @@ const NavBar = () => {
       return (
       <>
      <Section key={section._id} navigation={navigation} link={destination} childSections={childSections}/>
-     <li className='itemPadding itemBottomBorder b-separatorContainer'>
+     <li className='nav-items nav-itemBottomBorder nav-separator'>
        <span className='separatorBar'></span>
      </li>
      </>
@@ -60,31 +60,31 @@ const NavBar = () => {
           <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
         </div>
         <nav>
-          <ul className='c-navItemContainer'>
+          <ul className='nav-row'>
             {sectionLi}
-            <li className='c-searchContainer itemBottomBorder'>
-              <form className='b-formContainer'>
-                <input className='b-searchInput'></input>
-                <img className='b-searchIcon'
+            <li className='nav-search nav-itemBottomBorder'>
+              <form className='search-form'>
+                <input className='search-input'></input>
+                <img className='search-icon'
                 src='https://www.ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/search-icon.svg'></img>
               </form>
             </li>
-            <li className='b-weatherIconItem c-weatherDisplay'>
+            <li className='nav-weather weather-icon'>
               <img height='35px' src={weatherIcon}></img>
             </li>
-            <li className='b-itemText b-weatherText c-weatherDisplay'>
+            <li className='nav-itemText nav-weather weather-text'>
               <a>89°</a>
             </li>
-            <li className='c-loginContainer'>
+            <li className='nav-login'>
               <div className='b-flexRow b-flexCenter'>
                 <img src='https://www.ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/user-icon.svg'></img>
-                <div className='b-itemText b-loginText'>Log in</div>
+                <div className='nav-itemText login-text'>Log in</div>
               </div>
             </li>
           </ul>
         </nav>
-        <div className='c-subBar b-flexRow b-flexCenter b-subscribeText'><span>Worth knowing. Worth Supporting.</span>
-        <span className='b-subscribeBold'>Subscribe today for $1.00</span></div>
+        <div className='sub b-flexRow b-flexCenter sub-text'><span>Worth knowing. Worth Supporting.</span>
+        <span className='sub-bold'>Subscribe today for $1.00</span></div>
     </div>
   );
 };

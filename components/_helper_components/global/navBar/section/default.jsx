@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import './default.scss';
+// import './default.scss';
 import '../default.scss';
 
 const Section = ({ navigation, link, childSections }) => {
   const [isVisible, flyoutVisible] = useState(false);
-  const subNavVisible = !isVisible ? 'subNavInvisible' : '';
-  const menuActivated = !isVisible ? 'menuInactive' : 'menuActivated';
+  const subNavVisible = !isVisible ? 'subNav-inactive' : '';
+  const menuActivated = !isVisible ? 'menu-inactive' : 'menu-active';
   const {
     nav_title: name,
   } = navigation;
 
   let ePaperClass = '';
   if (name === 'ePaper') {
-    ePaperClass = 'b-ePaper';
+    ePaperClass = 'nav-ePaper';
   }
   // Added protection if there are no subsections
   if (childSections.length === 0) {
     return <>
-      <li className={`itemPadding itemBottomBorder b-itemText ${ePaperClass}`}>
+      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
             <a href={link}>{name}</a>
       </li>
         </>;
@@ -39,7 +39,7 @@ const Section = ({ navigation, link, childSections }) => {
 
     if (childName) {
       return (
-        <li key={id} className='flyoutSubNavItem'>
+        <li key={id} className='flyout-item'>
           <a href={childURL}>{childName}</a>
         </li>
       );
@@ -49,16 +49,16 @@ const Section = ({ navigation, link, childSections }) => {
 
   return (
     <>
-      <li className={`itemPadding itemBottomBorder b-itemText ${ePaperClass}`}
+      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
       onMouseEnter={() => flyoutVisible(true)}
       onMouseLeave={() => flyoutVisible(false)}>
         <a>{name}</a>
         <div className={`${menuActivated}`}>
-          <div className='c-menuItemContainer'>
+          <div className='menu-item'>
             <a>{name}</a>
           </div>
-          <div className={`c-subNavContainer ${subNavVisible}`}>
-          <ul className='flyoutSubNav'>
+          <div className={`subNav ${subNavVisible}`}>
+          <ul className='subNav-flyout'>
             {childList}
           </ul>
         </div>
