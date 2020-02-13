@@ -12,12 +12,13 @@
   }
   ul {
     list-style-type: none;
-    margin-left: 1em;
+    margin-left: 2.3em;
   }
   ul li:before {
     content: '-';
     margin-right: 0.3em;
     font-weight: bolder;
+    margin-left: -0.7em;
   }
   ol{
     list-style: none;
@@ -30,6 +31,6 @@
   ol li::before {
     content: counter(item)". ";
     font-weight: bold;
-    margin-left: -1.5em;
+    margin-left: -1.2em;
   }
 }
