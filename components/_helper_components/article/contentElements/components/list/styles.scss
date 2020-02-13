@@ -6,22 +6,23 @@
   @include text-styles(1rem, 2.25, "Gordita");
 
   ul, ol, li {
-    list-style-type: none;
     line-height: 2.5;
     margin: 1.4em 0.5em;
     font-size: 1.3rem;
-    padding-left: 0.8em;
+    padding-left: 0.3em;
   }
-
-  ul, li:before {
-    content: '\2013';
-    margin-right: 0.5em;
+  ul {
+    list-style-type: none;
   }
-  ol {
+  ul li:before {
+    content: '-';
+    margin-right: 0.3em;
+    font-weight: bolder;
+  }
+  ol li:before {
     list-style-type: decimal;
     counter-reset: item;
-  }
-  ol>li {
-    display: block;
+    margin-right: 0.3em;
+    font-weight: bold;
   }
 }
