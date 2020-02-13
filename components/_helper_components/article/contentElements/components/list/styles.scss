@@ -2,31 +2,26 @@
 
 @import "../../../../../../src/styles/base/mixins";
 
-// ul, li:before {
-//   content: '\2013';
-//   list-style-type: none;
-//   line-height: 2.5;
-//   margin-left: 20px;
-//   font-size: 1.5rem;
-// }
-
-ol {
-  list-style-type: decimal-leading-zero;
-  counter-reset: item;
-  padding-left: 10px;
-}
-ol>li {
-  display: block;
-}
-
 .list {
   @include text-styles(1rem, 2.25, "Gordita");
 
-  ul, li:before {
-    content: '\2013';
+  ul, ol, li {
     list-style-type: none;
     line-height: 2.5;
     margin: 1.4em 0.5em;
     font-size: 1.3rem;
+    padding-left: 10px;
+  }
+
+  ul, li:before {
+    content: '\2013';
+  }
+  ol {
+    list-style-type: decimal-leading-zero;
+    counter-reset: item;
+    padding-left: 10px;
+  }
+  ol>li {
+    display: block;
   }
 }

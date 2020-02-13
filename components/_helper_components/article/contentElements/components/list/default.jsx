@@ -37,9 +37,10 @@ const renderListItem = (item, index, nextItem = {}) => {
 };
 
 const List = (props) => {
-  const { src = {}, listType = 'ul' } = props;
-  const { items = [] } = src;
-
+  // console.log('list props', props);
+  const { src = {} } = props;
+  const { items = [], list_type: listType } = src;
+  // console.log(listType);
   if (!items.length) return null;
 
   const ListType = listItems[listType] || listType;
