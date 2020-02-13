@@ -15,7 +15,6 @@ const NavBar = () => {
     },
     filter: topNavFilter,
   });
-
   const {
     site: siteLogoImage,
     children,
