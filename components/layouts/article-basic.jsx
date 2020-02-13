@@ -119,9 +119,8 @@ const StoryPageLayout = () => {
             rightRailAd={RP01StoryDesktop}
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
-          {
-            maxNumberOfParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />
-          }
+          {maxNumberOfParagraphs <= 2 && PX01AdSlot()}
+          {maxNumberOfParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />}
           <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
           {handleFinalPX01Cases(filteredContentElements, maxNumberOfParagraphs, sectionAds)}
           <BlogAuthor subtype={subtype} authorData={authorData} />
