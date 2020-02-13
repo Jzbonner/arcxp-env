@@ -64,7 +64,7 @@ const ContentElements = ({ contentElements }) => {
               <Video src={element} isInlineVideo maxTabletViewWidth={maxTabletViewWidth} inlineVideoPlayerRules={inlineVideoPlayerRules} />
             );
           default:
-            if (element.type && element.type.name && element.type.name === 'ArcAd') {
+            if (element.type && element.type.name && (element.type.name === 'ArcAd' || element.type.name === 'conextEndOfStory')) {
               return element;
             }
             return null;
