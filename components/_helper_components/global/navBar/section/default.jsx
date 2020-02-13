@@ -54,12 +54,14 @@ const Section = ({ navigation, link, childSections }) => {
       onMouseLeave={() => flyoutVisible(false)}>
         <a>{name}</a>
         <div className={`${menuActivated}`}>
-          <a>{name}</a>
-        </div>
-        <div className={`c-subNavContainer ${subNavVisible}`}>
+          <div className='c-menuItemContainer'>
+            <a>{name}</a>
+          </div>
+          <div className={`c-subNavContainer ${subNavVisible}`}>
           <ul className='flyoutSubNav'>
             {childList}
           </ul>
+        </div>
         </div>
       </li>
     </>

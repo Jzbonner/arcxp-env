@@ -15,13 +15,13 @@
 
 .c-nav {
   max-width: 1600px;
-  margin: auto;
+  // margin: auto;
   background-image: linear-gradient(to bottom, #fff 66%, #d8d8d8);
-  padding-bottom: 31px;
+  padding-bottom: 30px;
   
   @include breakpoint(desktop-nav) {
     width: 100%;
-    padding: 0 32px 32px;
+    padding: 0 32px 30px;
   }
 }
 

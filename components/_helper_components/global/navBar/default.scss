@@ -4,15 +4,11 @@
 .c-headerNav {
     display: flex;
     flex-direction: column;
-    // min-height: 313px;
     width: 90%;
     margin: 0 auto;
-    // padding: 0 32px;
-    // background-image: linear-gradient(to bottom, #fff 66%, #d8d8d8);
     @include breakpoint(desktop-nav) {
         width: 100%;
     }
-
     nav {
     display: block;
     width: 100%;
@@ -32,11 +28,12 @@
 }
 
 .itemPadding {
-
-    padding-top: 20px;
     padding-right: 1.3vw;
     display: flex;
-    flex: 0 0 auto;  
+    flex: 0 0 auto; 
+    @include breakpoint(desktop-nav) {
+        padding-top: 2px;
+    } 
 }
 
 .itemBottomBorder {
@@ -71,6 +68,7 @@
 }
 .b-ePaper {
     text-transform: none;
+    cursor: pointer;
 }
 .c-itemFlex {
     flex-direction: column;
@@ -81,8 +79,9 @@
     align-items: center;
     flex-grow: 1;
     flex-basis: 180px;
-    padding-top: 20px;
-}
+    @include breakpoint(desktop-nav) {
+        padding-top: 2px;
+    }}
 
 .b-formContainer {
     display: flex;
@@ -112,10 +111,10 @@
 
 }
 .c-weatherDisplay {
-    padding-top: 20px;
     display: none;
     @include breakpoint(desktop-nav) {
         display: flex;
+        padding-top: 2px;
         align-items: center;
     }
    
@@ -126,9 +125,12 @@
 }
 
 .c-loginContainer {
+    display: flex;
     min-width: 100px;
-    padding-top: 20px;
     padding-left: 15px;
+    @include breakpoint(desktop-nav) {
+        padding-top: 2px;
+    }    
 }
 
 .b-loginText {
