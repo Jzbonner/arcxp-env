@@ -1,9 +1,9 @@
 @import "./../../../../src/styles/base/breakpoints";
 @import "./../../../../src/styles/base/mixins";
 
-
 .article-timestamp {
   @include text-styles(.75rem, "normal", "Gordita");
+
   letter-spacing: normal;
   text-transform: capitalize;
   color: #9b9b9b;

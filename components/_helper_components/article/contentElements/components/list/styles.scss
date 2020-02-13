@@ -5,31 +5,38 @@
 .list {
   @include text-styles(1rem, 2.25, "Gordita");
 
-  ul, ol, li {
+  ul,
+  ol,
+  li {
     font-size: 1.3rem;
-    padding-left: 0.3em;
+    padding-left: .3em;
   }
+
   ul {
     list-style-type: none;
     margin-left: 2.3em;
   }
+
   ul li:before {
-    content: '-';
-    margin-right: 0.3em;
-    font-weight: bolder;
-    margin-left: -0.7em;
+    content: "-";
+    margin-right: .3em;
+    font-weight: 700;
+    margin-left: -.7em;
   }
-  ol{
+
+  ol {
     list-style: none;
     margin-left: 2.3em;
     counter-reset: item;
   }
+
   ol li {
     counter-increment: item;
   }
-  ol li::before {
-    content: counter(item)". ";
-    font-weight: bold;
+
+  ol li:before {
+    content: counter(item) ". ";
+    font-weight: 700;
     margin-left: -1.2em;
   }
 }
