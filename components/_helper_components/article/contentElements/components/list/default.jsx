@@ -22,9 +22,6 @@ const renderListItem = (item, index, nextItem = {}) => {
   const properListType = listItems[nextItem.list_type];
   const nextItemIsAList = isList(nextItem);
 
-  // child lists
-
-  // returns each list node
   return (
       <li key={index}>
         <span dangerouslySetInnerHTML={{ __html: content }} />
@@ -40,7 +37,6 @@ const renderListItem = (item, index, nextItem = {}) => {
 };
 
 const List = (props) => {
-  // console.log('list props', props);
   const { src = {}, listType = 'ul' } = props;
   const { items = [] } = src;
 
