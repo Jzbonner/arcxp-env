@@ -7,22 +7,25 @@
 
   ul, ol, li {
     line-height: 2.5;
-    margin: 1.4em 0.5em;
     font-size: 1.3rem;
     padding-left: 0.3em;
   }
   ul {
     list-style-type: none;
+    margin-left: 1em;
   }
   ul li:before {
     content: '-';
     margin-right: 0.3em;
     font-weight: bolder;
   }
+  ol{
+    margin-left: 2.3em;
+  }
+
   ol li:before {
     list-style-type: decimal;
     counter-reset: item;
-    margin-right: 0.3em;
-    font-weight: bold;
+    margin-left: 5em;
   }
 }
