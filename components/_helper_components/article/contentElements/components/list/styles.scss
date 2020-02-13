@@ -10,16 +10,16 @@
     line-height: 2.5;
     margin: 1.4em 0.5em;
     font-size: 1.3rem;
-    padding-left: 10px;
+    padding-left: 0.8em;
   }
 
   ul, li:before {
     content: '\2013';
+    margin-right: 0.5em;
   }
   ol {
-    list-style-type: decimal-leading-zero;
+    list-style-type: decimal;
     counter-reset: item;
-    padding-left: 10px;
   }
   ol>li {
     display: block;
