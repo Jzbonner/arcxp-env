@@ -20,12 +20,16 @@
     font-weight: bolder;
   }
   ol{
+    list-style: none;
     margin-left: 2.3em;
-  }
-
-  ol li:before {
-    list-style-type: decimal;
     counter-reset: item;
-    margin-left: 5em;
+  }
+  ol li {
+    counter-increment: item;
+  }
+  ol li::before {
+    content: counter(item)". ";
+    font-weight: bold;
+    margin-left: -1.5em;
   }
 }
