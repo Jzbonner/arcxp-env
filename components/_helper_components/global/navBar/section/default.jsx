@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import './default.scss';
 import '../default.scss';
 
 const Section = ({ navigation, link, childSections }) => {

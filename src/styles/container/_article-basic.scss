@@ -16,7 +16,7 @@
 .c-nav {
   margin: 0 auto;
   max-width: 1600px;
-  background-image: linear-gradient(to bottom, #fff 66%, #d8d8d8);
+  background-image: linear-gradient(180deg, #fff 67%, #f1f1f1 100%);
   padding-bottom: 30px;
   
   @include breakpoint(desktop-nav) {
