@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../default.scss';
 
-const Section = ({ navigation, link, childSections }) => {
+const Section = ({
+  navigation,
+  link,
+  childSections,
+  keyName,
+}) => {
   const [isVisible, flyoutVisible] = useState(false);
   const subNavVisible = !isVisible ? 'subNav-inactive' : '';
   const menuActivated = !isVisible ? 'menu-inactive' : 'menu-active';
@@ -17,7 +22,7 @@ const Section = ({ navigation, link, childSections }) => {
   // Added protection if there are no subsections
   if (childSections.length === 0) {
     return <>
-      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
+      <li key={keyName} className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
             <a href={link}>{name}</a>
       </li>
         </>;
@@ -48,7 +53,7 @@ const Section = ({ navigation, link, childSections }) => {
 
   return (
     <>
-      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
+      <li key={keyName} className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
       onMouseEnter={() => flyoutVisible(true)}
       onMouseLeave={() => flyoutVisible(false)}>
         <a>{name}</a>
@@ -57,10 +62,10 @@ const Section = ({ navigation, link, childSections }) => {
             <a>{name}</a>
           </div>
           <div className={`subNav ${subNavVisible}`}>
-          <ul className='subNav-flyout'>
-            {childList}
-          </ul>
-        </div>
+            <ul className='subNav-flyout'>
+              {childList}
+            </ul>
+          </div>
         </div>
       </li>
     </>
@@ -72,6 +77,7 @@ Section.propTypes = {
   link: PropTypes.string,
   childSections: PropTypes.array,
   visible: PropTypes.bool,
+  keyName: PropTypes.string,
 };
 
 export default Section;

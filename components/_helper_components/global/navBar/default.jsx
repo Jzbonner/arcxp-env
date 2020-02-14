@@ -38,7 +38,7 @@ const NavBar = () => {
     if (children[verticalBarIndex] === section) {
       return (
       <>
-     <Section key={section._id} navigation={navigation} link={destination} childSections={childSections}/>
+     <Section keyName={id} navigation={navigation} link={destination} childSections={childSections}/>
      <li className='nav-items nav-itemBottomBorder nav-separator'>
        <span className='separatorBar'></span>
      </li>
@@ -48,7 +48,7 @@ const NavBar = () => {
 
     return (
     <>
-     <Section key={section._id} navigation={navigation} link={destination} childSections={childSections}/>
+     <Section keyName={id} navigation={navigation} link={destination} childSections={childSections}/>
      </>
     );
   });
