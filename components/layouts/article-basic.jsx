@@ -21,6 +21,7 @@ import { paragraphCounter } from './_helper_functions/Paragraph';
 import PX01 from '../_helper_components/global/ads/px01/default';
 import '../../src/styles/container/_article-basic.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
+import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
@@ -120,10 +121,14 @@ const StoryPageLayout = () => {
           <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
           <Section elements={contentElements} startIndex={start} stopIndex={stop} rightRailAd={RP09StoryDesktop} />
           {maxNumberOfParagraphs >= 4 && <PX01 adSlot={PX01AdSlot} />}
-          <Section elements={contentElements} startIndex={stop} rightRailAd={RP09StoryDesktop} insertedAds={[
-            { insertAfterParagraph: 7, adArray: [RP09StoryTablet] },
-          ]} />
-          <BlogAuthor subtype={subtype} authorData={authorData} />
+          <Section
+            elements={contentElements}
+            startIndex={stop}
+            rightRailAd={RP09StoryDesktop}
+            insertedAds={[{ insertAfterParagraph: 7, adArray: [RP09StoryTablet] }]}
+            insertAtSectionEnd={[<ConnextEndOfStory key={1} />, <BlogAuthor key={2} subtype={subtype} authorData={authorData} />]}
+          />
+
           <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />
           <div className="c-taboola">
             <TaboolaFeed type={type} />
