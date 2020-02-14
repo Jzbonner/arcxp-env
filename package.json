@@ -10,7 +10,7 @@
     "fusion": "fusion",
     "lint": "npm run eslint && npm run stylelint",
     "start": "fusion start",
-    "stylelint": "stylelint 'src/**/*.scss' 'src/properties/**/*.scss', 'src/styles/**/*.scss', 'components/features/**/*.scss'",
+    "stylelint": "stylelint 'src/**/*.scss' 'src/properties/**/*.scss', 'src/styles/**/*.scss', 'components/**/*.scss'",
     "test": "jest --coverage"
   },
   "devDependencies": {

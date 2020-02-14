@@ -8,13 +8,16 @@
   text-align: center;
   font-stretch: normal;
   font-style: normal;
-  letter-spacing: -0.45px;
+  letter-spacing: -.45px;
+
   @include text-styles(1rem, 1.5, "Gordita");
+
   @include breakpoint(tablet) {
     @include text-styles(1.3rem, normal, "Gordita");
+
     font-weight: 700;
     font-stretch: normal;
     font-style: normal;
-    letter-spacing: -0.84px;
+    letter-spacing: -.84px;
   }
 }

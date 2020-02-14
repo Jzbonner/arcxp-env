@@ -1,7 +1,7 @@
 @import "./../../../../src/styles/base";
 
 .c-nativo {
-  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
   padding: 60px 0;
   position: relative;
   // This margin-top is insurance in case the element above the nativo component don't have a utility margin class.
@@ -9,20 +9,25 @@
   // Because of margin collapse, it does not add to the distance between the elements.
   margin-top: 50px;
   display: none;
+
   &:not(:empty) {
     display: block;
   }
+
   &.story-nativo_placeholder--moap:before {
     display: none;
     padding: 0 30px;
     content: "Article continues below";
+
     @include text-styles(1rem, 2.25, "Gordita");
     @include text-styles-desktop-sm(1.125rem, 2, "Gordita");
+
     font-style: italic;
     position: absolute;
     top: -2rem;
     left: 0;
     right: 0;
+
     @include section();
   }
 }
