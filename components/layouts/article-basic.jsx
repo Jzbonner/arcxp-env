@@ -65,6 +65,9 @@ const StoryPageLayout = () => {
   const maxNumberOfParagraphs = paragraphCounter(contentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
 
+  const ConnextEndStory = () => <ConnextEndOfStory />;
+  const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} />;
+
   return (
     <>
       <header>
@@ -126,7 +129,7 @@ const StoryPageLayout = () => {
             startIndex={stop}
             rightRailAd={RP09StoryDesktop}
             insertedAds={[{ insertAfterParagraph: 7, adArray: [RP09StoryTablet] }]}
-            insertAtSectionEnd={[<ConnextEndOfStory key={1} />, <BlogAuthor key={2} subtype={subtype} authorData={authorData} />]}
+            insertAtSectionEnd={[ConnextEndStory, BlogAuthorComponent]}
           />
 
           <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />

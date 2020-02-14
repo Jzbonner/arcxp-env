@@ -65,7 +65,7 @@ Section.propTypes = {
   stopIndex: PropTypes.number,
   rightRailAd: PropTypes.func,
   insertedAds: PropTypes.array,
-  insertAtSectionEnd: PropTypes.adArray,
+  insertAtSectionEnd: PropTypes.array,
 };
 
 export default Section;
