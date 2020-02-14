@@ -19,7 +19,6 @@ import Footer from '../_helper_components/global/footer/default';
 import ArcAd from '../features/ads/default';
 import { paragraphCounter } from './_helper_functions/Paragraph';
 import PX01 from '../_helper_components/global/ads/px01/default';
-import handleFinalPX01Cases from './_helper_functions/handleFinalPX01Cases';
 import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
@@ -29,15 +28,11 @@ const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
 const MP02 = () => <ArcAd staticSlot={'MP02'} />;
 
 const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
-const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'}/>;
-const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'}/>;
+const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} />;
+const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} />;
 const PX01AdSlot = () => <ArcAd staticSlot={'PX01'} />;
 
-const sectionAds = {
-  RP09StoryDesktop,
-  RP09StoryTablet,
-  PX01AdSlot,
-};
+const start = 3;
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
@@ -68,6 +63,7 @@ const StoryPageLayout = () => {
   const filteredContentElements = filterContentElements({ contentElements });
 
   const maxNumberOfParagraphs = paragraphCounter(contentElements);
+  const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
 
   return (
     <>
@@ -118,11 +114,14 @@ const StoryPageLayout = () => {
             rightRailAd={RP01StoryDesktop}
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
-          {
-            maxNumberOfParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />
-          }
+          {maxNumberOfParagraphs <= 2 && PX01AdSlot()}
+          {maxNumberOfParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />}
           <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
-          {handleFinalPX01Cases(filteredContentElements, maxNumberOfParagraphs, sectionAds)}
+          <Section elements={contentElements} startIndex={start} stopIndex={stop} rightRailAd={RP09StoryDesktop} />
+          {maxNumberOfParagraphs >= 4 && <PX01 adSlot={PX01AdSlot} />}
+          <Section elements={contentElements} startIndex={stop} rightRailAd={RP09StoryDesktop} insertedAds={[
+            { insertAfterParagraph: 7, adArray: [RP09StoryTablet] },
+          ]} />
           <BlogAuthor subtype={subtype} authorData={authorData} />
           <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />
           <div className="c-taboola">

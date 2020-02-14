@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useContent } from 'fusion:content';
+import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import './default.scss';
 import menuArrow from '../../../../resources/images/menu-arrow.svg';
@@ -10,6 +11,9 @@ import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
 import Copyright from '../copyright/default';
 
 const Footer = () => {
+  const appContext = useAppContext();
+  const { deployment, contextPath } = appContext;
+
   const siteNavigation = useContent({
     source: 'site-api',
     query: {
@@ -39,7 +43,7 @@ const Footer = () => {
       <div className="logo-row">
         <div className="col">
           <a href={homeURL}>
-            <img className="logo" src={logo} alt="logo" />
+            <img className="logo" src={deployment(`${contextPath}${logo}`)} alt="logo" />
           </a>
         </div>
         <div className="col">

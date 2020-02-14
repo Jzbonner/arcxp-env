@@ -4,7 +4,10 @@
   color: #313132;
   font-weight: 100;
   letter-spacing: normal;
-  line-height: 30px;
+  line-height: 1.4rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 
   @include text-styles(0.875rem, normal, "Gordita");
 
@@ -16,6 +19,6 @@
 
   @include breakpoint(desktop-sm) {
    font-size: 1.25rem;
-   line-height: normal;
+   line-height: 2.25rem;
   }
 }
