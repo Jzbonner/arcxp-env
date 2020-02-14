@@ -7,4 +7,8 @@
   color: #707174;
   border-top: 1px solid #707174;
   padding-top: 1.125rem;
+  display: none;
+  &:not(:empty) {
+    display: block;
+  }
 }
