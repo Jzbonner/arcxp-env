@@ -1,6 +1,6 @@
 import React from 'react';
 import './default.scss';
 
-const connextEndOfStory = () => <p className="c-connext eos-msg__nolog-or-nosub"></p>;
+const ConnextEndOfStory = () => <p className="c-connext eos-msg__nolog-or-nosub b-margin-bottom-d40-m20">sdfsdfsdf</p>;
 
-export default connextEndOfStory;
+export default ConnextEndOfStory;

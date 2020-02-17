@@ -129,7 +129,7 @@ const StoryPageLayout = () => {
             startIndex={stop}
             rightRailAd={RP09StoryDesktop}
             insertedAds={[{ insertAfterParagraph: 7, adArray: [RP09StoryTablet] }]}
-            insertAtSectionEnd={[ConnextEndStory, BlogAuthorComponent]}
+            insertAtSectionEnd={[BlogAuthorComponent, ConnextEndStory]}
           />
 
           <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />
