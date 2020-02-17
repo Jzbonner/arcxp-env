@@ -1,214 +1,231 @@
-@import '../../../../src/styles/base/_mixins.scss';
-@import '../../../../src//styles/base/breakpoints';
+@import "../../../../src/styles/base/_mixins.scss";
+@import "../../../../src//styles/base/breakpoints";
 
 .c-headerNav {
-    display: flex;
-    flex-direction: column;
-    width: 94%;
-    margin: 0 auto;
-    @include breakpoint(desktop-nav) {
-        width: 90%;
-    }
-    nav {
-    padding-bottom: 20px;
-        a {
-            color: #2e81b7;
-            text-decoration: none;
-        }
-    }
+  display: flex;
+  flex-direction: column;
+  width: 94%;
+  margin: 0 auto;
+
+  @include breakpoint(desktop-nav) {
+    width: 90%;
   }
 
+  nav {
+    padding-bottom: 20px;
+
+    a {
+      color: #2e81b7;
+      text-decoration: none;
+    }
+  }
+}
+
 .logo {
-padding-top: 30px;
-height: 110px;
+  padding-top: 30px;
+  height: 110px;
 }
 
 .nav-row {
-    display: flex;
-    height: 60px;
-    flex-direction: row;
-    list-style-type: none;
+  display: flex;
+  height: 60px;
+  flex-direction: row;
+  list-style-type: none;
 }
 
 .nav-items {
-    padding-right: 1.3vw;
-    display: flex;
-    flex: 0 0 auto; 
-    @include breakpoint(desktop-nav) {
-        padding-top: 2px;
-    } 
+  padding-right: 1.3vw;
+  display: flex;
+  flex: 0 0 auto;
+
+  @include breakpoint(desktop-nav) {
+    padding-top: 2px;
+  }
 }
 
 .nav-itemBottomBorder {
-    border-bottom: solid 1px #cdcdcd;
+  border-bottom: solid 1px #cdcdcd;
 }
 
 .nav-itemText {
-    font-weight: 600;
-    color: #2e81b7;
-    text-transform: capitalize;
-    align-items: center;
-    @include breakpoint(desktop-sm) {
-        @include text-styles(.875rem, 1, "Gordita");
-    }
-    @include breakpoint(desktop-nav) {
-        @include text-styles(1.125rem, 1, "Gordita");
-    }
+  font-weight: 600;
+  color: #2e81b7;
+  text-transform: capitalize;
+  align-items: center;
+
+  @include breakpoint(desktop-sm) {
+    @include text-styles(.875rem, 1, "Gordita");
+  }
+
+  @include breakpoint(desktop-nav) {
+    @include text-styles(1.125rem, 1, "Gordita");
+  }
 }
 
 .nav-separator {
-    display: flex;
-    align-items: center;
-    span {
-        background-color: #2e81b7;
-        width: 2px;
-        height: 15px;
-        @include breakpoint(desktop-nav) {
-            height: 20px;
-        }
+  display: flex;
+  align-items: center;
+
+  span {
+    background-color: #2e81b7;
+    width: 2px;
+    height: 15px;
+
+    @include breakpoint(desktop-nav) {
+      height: 20px;
     }
+  }
 }
 
 .nav-ePaper {
-    text-transform: none;
-    cursor: pointer;
+  text-transform: none;
+  cursor: pointer;
 }
 
 .nav-search {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    flex-basis: 180px;
-    @include breakpoint(desktop-nav) {
-        padding-top: 2px;
-    }
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  flex-basis: 180px;
+
+  @include breakpoint(desktop-nav) {
+    padding-top: 2px;
+  }
 }
 
 .search-form {
-    display: flex;
-    height: 28px;
-    width: 100%;
+  display: flex;
+  height: 28px;
+  width: 100%;
 }
-.search-input {
-    text-align: right;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    width: calc(100% - 40px);
-    @include text-styles(.625rem, 1, "Gordita");
 
+.search-input {
+  text-align: right;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: calc(100% - 40px);
+
+  @include text-styles(.625rem, 1, "Gordita");
 }
+
 .search-icon {
-    height: 29px;
-    width: 29px;
-    cursor: pointer;
-    vertical-align: middle;
-    margin-left: 10px;
-    font-size: 1rem;
+  height: 29px;
+  width: 29px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 10px;
+  font-size: 1rem;
 }
 
 .nav-weather {
-    display: none;
-    @include breakpoint(desktop-nav) {
-        display: flex;
-        padding-top: 2px;
-        align-items: center;
-    }
+  display: none;
+
+  @include breakpoint(desktop-nav) {
+    display: flex;
+    padding-top: 2px;
+    align-items: center;
+  }
 }
 
 .weather-icon {
-    padding-left: 56px;
+  padding-left: 56px;
 }
 
 .weather-text {
-    padding-left: 4px;
+  padding-left: 4px;
 }
 
 .nav-login {
-    display: flex;
-    min-width: 100px;
-    padding-left: 15px;
-    @include breakpoint(desktop-nav) {
-        padding-top: 2px;
-    }    
+  display: flex;
+  min-width: 100px;
+  padding-left: 15px;
+
+  @include breakpoint(desktop-nav) {
+    padding-top: 2px;
+  }
 }
 
 .login-text {
-    font-weight: bold;
-    padding-left: 6px;
+  font-weight: 700;
+  padding-left: 6px;
 }
 
 .sub {
-    height: 57px;
-    width: 100%;
-    border-radius: 6px;
-    background-image: linear-gradient(to top, #04befe, #4481eb);
+  height: 57px;
+  width: 100%;
+  border-radius: 6px;
+  background-image: linear-gradient(to top, #04befe, #4481eb);
 }
+
 .sub-text {
-    @include text-styles(1.25rem, 1, "Gordita");
-    color: #ffffff;
+  color: #fff;
+
+  @include text-styles(1.25rem, 1, "Gordita");
 }
+
 .sub-bold {
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-left: 5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-left: 5px;
 }
 
 .subNav-inactive {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .menu-inactive {
-    display: none;
+  display: none;
 }
 
 .menu-active {
-    display: flex;
-    cursor: default;
-    border-radius: 6px;
-    box-shadow: 0px -8px 30px -8px rgba(0, 0, 0, 0.1);  
-    position: absolute;
-    margin-left: -.45rem;
+  display: flex;
+  cursor: default;
+  border-radius: 6px;
+  box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
+  position: absolute;
+  margin-left: -.45rem;
 }
 
 .menu-item {
-    height: 44px;
-    display: flex;
-    align-items: center;
-    padding: 0 .45rem;
-    background-color: #fff;
-    border-radius: 6px 6px 0 0;
-    z-index: 3;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 .45rem;
+  background-color: #fff;
+  border-radius: 6px 6px 0 0;
+  z-index: 3;
 }
 
 .subNav {
-    background-color: #fff;
-    top: 44px;
-    transition: opacity 0.15s;
-    opacity: 1; 
-    border-radius: 0 6px 6px 6px;
-    padding: 1.125rem 1.5625rem 0.3125rem 1.5625rem;
-    position: absolute;
-    box-shadow: 0 2px 26px 4px rgba(0,0,0,.1);
-    z-index: 2;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
+  background-color: #fff;
+  top: 44px;
+  transition: opacity .15s;
+  opacity: 1;
+  border-radius: 0 6px 6px;
+  padding: 1.125rem 1.5625rem .3125rem;
+  position: absolute;
+  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+  z-index: 2;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .subNav-flyout {
-    display: inline-flex;
-    writing-mode: vertical-lr;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    list-style-type: none;
+  display: inline-flex;
+  writing-mode: vertical-lr;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  list-style-type: none;
 }
 
 .flyout-item {
-    writing-mode: horizontal-tb;
-    height: 1.875rem;
-    margin-right: 3vw;
-    white-space: nowrap;
-    @include text-styles(.875rem, 1, "Gordita");
-    font-weight: 400;
+  writing-mode: horizontal-tb;
+  height: 1.875rem;
+  margin-right: 3vw;
+  white-space: nowrap;
+  font-weight: 400;
+
+  @include text-styles(.875rem, 1, "Gordita");
 }
