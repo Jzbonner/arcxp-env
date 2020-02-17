@@ -14,7 +14,8 @@ import './default.scss';
 
 
 const Gallery = (props) => {
-  const { contentElements = [], customFields = {} } = props;
+  const { contentElements = [], promoItems = {}, customFields = {} } = props;
+  const { basic = {} } = promoItems;
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
   const [mobileElementData, setMobileElementData] = useState(null);
@@ -62,6 +63,12 @@ const Gallery = (props) => {
   });
 
   const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
+  const featuredGalleryData = basic.type && basic.type === 'gallery' ? basic : null;
+  console.log('featuredGalleryData', featuredGalleryData);
+
+
+  // console.log('contentElements', contentElements);
+  // console.log('basic', basic);
 
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
@@ -297,21 +304,24 @@ const Gallery = (props) => {
 
   // initializing the gallery w/ either propped or fetched content elements
 
-  if (isMobile !== 'NOT INIT' && ((contentElements || fetchedGalleryData)
+  if (isMobile !== 'NOT INIT' && ((contentElements || fetchedGalleryData || featuredGalleryData)
     && (currentAction === actions.RESIZE || (!elementData && !mobileElementData)))) {
     let relevantGalleryData = null;
     let galleryContentElements = null;
     let fetchedContentElements = null;
+    let featuredContentElements = null;
 
     if (contentElements) relevantGalleryData = handlePropContentElements();
 
-    if (!relevantGalleryData && !fetchedGalleryData) return null;
+    if (!relevantGalleryData && !fetchedGalleryData && !featuredGalleryData) return null;
 
     if (fetchedGalleryData) fetchedContentElements = fetchedGalleryData.content_elements;
 
     if (relevantGalleryData) galleryContentElements = relevantGalleryData.content_elements;
 
-    const baseGalleryData = fetchedContentElements || galleryContentElements;
+    if (featuredGalleryData) featuredContentElements = featuredGalleryData.content_elements;
+
+    const baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
 
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
@@ -414,6 +424,7 @@ const Gallery = (props) => {
 
 Gallery.propTypes = {
   contentElements: PropTypes.array,
+  promoItems: PropTypes.object,
   customFields: PropTypes.shape({
     galleryUrl: PropTypes.string.tag({
       label: 'Gallery URL',
