@@ -48,17 +48,17 @@
 }
 
 .nav-itemText {
-  font-weight: 600;
+  font-weight: 400;
   color: #2e81b7;
   text-transform: capitalize;
   align-items: center;
 
   @include breakpoint(desktop-sm) {
-    @include text-styles(.875rem, 1, "Gordita");
+    @include text-styles(.875rem, 1, "Gordita-Medium");
   }
 
   @include breakpoint(desktop-nav) {
-    @include text-styles(1.125rem, 1, "Gordita");
+    @include text-styles(1.125rem, 1, "Gordita-Medium");
   }
 }
 
