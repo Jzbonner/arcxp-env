@@ -9,7 +9,6 @@ const Section = ({
   keyName,
 }) => {
   const [isVisible, flyoutVisible] = useState(false);
-  const subNavVisible = !isVisible ? 'subNav-inactive' : '';
   const menuActivated = !isVisible ? 'menu-inactive' : 'menu-active';
   const {
     nav_title: name,
@@ -61,7 +60,7 @@ const Section = ({
           <div className='menu-item'>
             <a>{name}</a>
           </div>
-          <div className={`subNav ${subNavVisible}`}>
+          <div className={'subNav'}>
             <ul className='subNav-flyout'>
               {childList}
             </ul>

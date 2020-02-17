@@ -147,8 +147,16 @@
 }
 
 .login-text {
-  font-weight: 700;
+  font-weight: 800;
   padding-left: 6px;
+
+  @include breakpoint(desktop-sm) {
+    @include text-styles(.875rem, 1, "Gordita");
+  }
+
+  @include breakpoint(desktop-nav) {
+    @include text-styles(1.125rem, 1, "Gordita");
+  }
 }
 
 .sub {
@@ -170,10 +178,6 @@
   margin-left: 5px;
 }
 
-.subNav-inactive {
-  visibility: hidden;
-}
-
 .menu-inactive {
   display: none;
 }
@@ -185,6 +189,15 @@
   box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
   position: absolute;
   margin-left: -.45rem;
+  padding: 8px 0;
+
+  &:hover {
+    
+    .subNav {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
 }
 
 .menu-item {
@@ -201,7 +214,7 @@
   background-color: #fff;
   top: 44px;
   transition: opacity .15s;
-  opacity: 1;
+  opacity: 0;
   border-radius: 0 6px 6px;
   padding: 1.125rem 1.5625rem .3125rem;
   position: absolute;
@@ -210,6 +223,7 @@
   overflow: hidden;
   display: flex;
   align-items: center;
+  visibility: hidden;
 }
 
 .subNav-flyout {
