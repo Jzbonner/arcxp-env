@@ -5,7 +5,7 @@ import { isParagraph } from '../../../layouts/_helper_functions/Paragraph';
 import './styles.scss';
 
 const Section = ({
-  insertedAds, elements, startIndex = 0, stopIndex = elements.length, rightRailAd,
+  insertedAds, elements, insertAtSectionEnd, startIndex = 0, stopIndex = elements.length, rightRailAd,
 }) => {
   let paragraphCounter = 0;
   const newContentElements = [];
@@ -35,6 +35,19 @@ const Section = ({
     return null;
   });
 
+  // Inserts components at end of section.
+  // Most useful for inserting components like connext end-of-story and blog author info at the end of the last section
+  // The two conditionals here allow components to be inserted directly or to be returned from functions
+  if (insertAtSectionEnd) {
+    insertAtSectionEnd.forEach((component) => {
+      if (React.isValidElement(component)) {
+        newContentElements.push(component);
+      } else if (typeof component === 'function' && React.isValidElement(component())) {
+        newContentElements.push(component());
+      }
+    });
+  }
+
   if (newContentElements.length > 0) {
     return (
       <div className={`c-section ${rightRailAd ? 'with-rightRail' : ''} b-margin-bottom-d40-m20`}>
@@ -52,6 +65,7 @@ Section.propTypes = {
   stopIndex: PropTypes.number,
   rightRailAd: PropTypes.func,
   insertedAds: PropTypes.array,
+  insertAtSectionEnd: PropTypes.array,
 };
 
 export default Section;
