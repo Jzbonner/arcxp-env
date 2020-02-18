@@ -122,10 +122,10 @@ const StoryPageLayout = () => {
           {maxNumberOfParagraphs <= 2 && PX01AdSlot()}
           {maxNumberOfParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />}
           <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
-          <Section elements={contentElements} startIndex={start} stopIndex={stop} rightRailAd={RP09StoryDesktop} />
+          <Section elements={filteredContentElements} startIndex={start} stopIndex={stop} rightRailAd={RP09StoryDesktop} />
           {maxNumberOfParagraphs >= 4 && <PX01 adSlot={PX01AdSlot} />}
           <Section
-            elements={contentElements}
+            elements={filteredContentElements}
             startIndex={stop}
             rightRailAd={RP09StoryDesktop}
             insertedAds={[{ insertAfterParagraph: 7, adArray: [RP09StoryTablet] }]}
