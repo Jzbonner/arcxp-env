@@ -12,6 +12,8 @@
   }
 
   nav {
+    display: flex;
+    align-items: flex-end;
     padding-bottom: 20px;
 
     a {
@@ -22,13 +24,16 @@
 }
 
 .logo {
-  padding-top: 30px;
   height: 110px;
+  padding-top: 30px;
+  width: 100%;
+  max-height: 8vw;
 }
 
 .nav-row {
   display: flex;
-  height: 60px;
+  height: 65px;
+  width: 100%;
   flex-direction: row;
   list-style-type: none;
 }
@@ -37,10 +42,7 @@
   padding-right: 1.3vw;
   display: flex;
   flex: 0 0 auto;
-
-  @include breakpoint(desktop-nav) {
-    padding-top: 2px;
-  }
+  padding-top: 10px;
 }
 
 .nav-itemBottomBorder {
@@ -89,7 +91,7 @@
   flex-basis: 180px;
 
   @include breakpoint(desktop-nav) {
-    padding-top: 2px;
+    padding-top: 10px;
   }
 }
 
@@ -194,7 +196,6 @@
   box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
   position: absolute;
   margin-left: -.45rem;
-  padding: 8px 0;
 
   @media (hover: none) {
 
@@ -203,7 +204,7 @@
       opacity: 1;
     }
   }
-  
+
   &:hover {
 
     .subNav {
