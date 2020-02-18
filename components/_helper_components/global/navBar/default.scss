@@ -180,6 +180,11 @@
 
 .menu-inactive {
   display: none;
+
+  .subNav {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .menu-active {
@@ -191,8 +196,16 @@
   margin-left: -.45rem;
   padding: 8px 0;
 
+  @media (hover: none) {
+
+    .subNav {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  
   &:hover {
-    
+
     .subNav {
       visibility: visible;
       opacity: 1;
