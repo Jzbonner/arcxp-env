@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const HTML = ({ src }) => (
-  <div className="b-margin-bottom-d40-m20">
-    Content Element Type: <strong>HTML</strong> Not Worked. Content:
-      <div dangerouslySetInnerHTML={{ __html: src.content }}></div>
-  </div>
-);
+const HTML = ({ src }) => {
+  const { content } = src || {};
+  if (!content) return null;
+  return <div className="b-margin-bottom-d40-m20" dangerouslySetInnerHTML={{ __html: content }}></div>;
+};
 
 HTML.propTypes = {
   src: PropTypes.object,
