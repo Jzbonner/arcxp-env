@@ -1,0 +1,13 @@
+@import "../../../../src/styles/base/breakpoints";
+@import "../../../../src/styles/base/mixins";
+
+.c-connext {
+  @include text-styles(0.875rem, 2, "Gordita");
+  color: #707174;
+  border-top: 1px solid #707174;
+  padding-top: 1.125rem;
+  display: none;
+  &:not(:empty) {
+    display: block;
+  }
+}
