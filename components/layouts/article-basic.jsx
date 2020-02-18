@@ -64,8 +64,6 @@ const StoryPageLayout = () => {
   const maxNumberOfParagraphs = paragraphCounter(contentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
 
-  console.log(globalContent);
-
   return (
     <>
       <header>
@@ -131,7 +129,7 @@ const StoryPageLayout = () => {
             <TaboolaFeed type={type} />
           </div>
         </article>
-        <Gallery contentElements={filteredContentElements} promoItems={promoItems} />
+        {basicItems.type !== 'gallery' && <Gallery contentElements={filteredContentElements} />}
       </main>
       <Footer />
     </>

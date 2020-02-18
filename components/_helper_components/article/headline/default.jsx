@@ -3,6 +3,7 @@ import './style.scss';
 import PropTypes from 'prop-types';
 import Image from '../../global/image/default';
 import Video from '../../global/video/default';
+import Gallery from '../../../features/gallery/default';
 
 const Headline = ({
   basicItems = {}, headlines = {}, featuredVideoPlayerRules, maxTabletViewWidth,
@@ -11,6 +12,7 @@ const Headline = ({
   if (basicItems) {
     promoData = basicItems;
   }
+  console.log('promoData', promoData);
   // Uncomment to see how the headline component displays with a video promo type.
   // Used because I was getting errors when trying to add a video as a featured element.
   // promoData.type = 'video';
@@ -25,7 +27,7 @@ const Headline = ({
       {promoData.type === 'image' && (
         <Image width={1066} height={600} isLeadImage src={basicItems} maxTabletViewWidth={maxTabletViewWidth} />
       )}
-      {promoData.type === 'gallery' && <div className="c-gallery b-placeholder">Gallery Placeholder</div>}
+      {promoData.type === 'gallery' && <Gallery promoItems={promoData} />}
       {promoData.type === 'video' && (
         <Video isLeadVideo src={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules} maxTabletViewWidth={maxTabletViewWidth} />
       )}
@@ -38,6 +40,7 @@ Headline.propTypes = {
   headlines: PropTypes.object.isRequired,
   featuredVideoPlayerRules: PropTypes.object,
   maxTabletViewWidth: PropTypes.number,
+  contentElements: PropTypes.array,
 };
 
 export default Headline;

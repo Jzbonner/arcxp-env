@@ -7,7 +7,6 @@ const Byline = ({ by = [] }) => {
 
   const handleOrganization = (authors = []) => {
     const authorsAndOrgs = authors.map((author) => {
-      if (!author.name) return null;
 
       // staff
       if (author.isStaff && author.affiliations) return { name: author.name, org: author.affiliations };

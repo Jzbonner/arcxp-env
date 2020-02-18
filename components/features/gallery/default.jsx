@@ -28,6 +28,8 @@ const Gallery = (props) => {
   const [translateX, setTranslateX] = useState(null);
   // holds all captions w/ the same index(id) as their image counter parts
   const [baseCaptionData, setBaseCaptionData] = useState(null);
+  // only used if 'raw' contentElements are proped down from article
+  const [galHeadline, setHeadline] = useState(null);
 
   /* Mobile */
   const [offsetHeight, setHeight] = useState(0);
@@ -38,7 +40,6 @@ const Gallery = (props) => {
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
   const debugFixEl = useRef(null);
-  // let headline = useRef(null);
   const mobileBreakPoint = 1023;
 
   const actions = {
@@ -64,10 +65,10 @@ const Gallery = (props) => {
   });
 
   const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
-  const featuredGalleryData = basic.type && basic.type === 'gallery' ? basic : null;
+  const featuredGalleryData = promoItems || null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
-  console.log('featuredGalleryData', featuredGalleryData);
-  const headline = headlines.basic ? headlines.basic : null;
+  console.log('featuredGalleryData', promoItems);
+  let headline = headlines.basic ? headlines.basic : null;
 
   // console.log('contentElements', contentElements);
   // console.log('basic', basic);
@@ -320,8 +321,10 @@ const Gallery = (props) => {
     if (fetchedGalleryData) fetchedContentElements = fetchedGalleryData.content_elements;
 
     if (relevantGalleryData) galleryContentElements = relevantGalleryData.content_elements;
-
+      console.log('featured Gal data', featuredGalleryData);
     if (featuredGalleryData) featuredContentElements = featuredGalleryData.content_elements;
+
+    if (!headline && !galHeadline) headline = relevantGalleryData.headlines.basic ? setHeadline(relevantGalleryData.headlines.basic) : null;
 
     const baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
 
@@ -371,11 +374,11 @@ const Gallery = (props) => {
     calculateTranslateX();
   }
 
-  console.log('headline', headline);
+  console.log('contentElements', contentElements);
 
   return (
     <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-      {headline ? <div className="gallery-headline">{headline}</div> : null}
+      {!isMobile && (galHeadline || headline) ? <div className="gallery-headline">{galHeadline || headline}</div> : null}
       {
         isStickyVisible
           ? <MobileGallery
@@ -391,6 +394,10 @@ const Gallery = (props) => {
           ? <DesktopGallery data={elementData} translateX={translateX} />
           : null
       }
+    <>
+{/*       {
+        (galHeadline || headline) ? <div className="gallery-headline">{galHeadline || headline}</div> : null
+      } */}
       <div
         onClick={handleStickyOpen}
         className={`gallery-caption-container ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
@@ -423,6 +430,7 @@ const Gallery = (props) => {
         </div>
       </div>
       {captionData}
+      </>
     </div>
   );
 };
