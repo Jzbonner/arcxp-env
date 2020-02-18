@@ -38,6 +38,7 @@ const Gallery = (props) => {
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
   const debugFixEl = useRef(null);
+  // let headline = useRef(null);
   const mobileBreakPoint = 1023;
 
   const actions = {
@@ -64,8 +65,9 @@ const Gallery = (props) => {
 
   const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
   const featuredGalleryData = basic.type && basic.type === 'gallery' ? basic : null;
+  const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   console.log('featuredGalleryData', featuredGalleryData);
-
+  const headline = headlines.basic ? headlines.basic : null;
 
   // console.log('contentElements', contentElements);
   // console.log('basic', basic);
@@ -369,8 +371,11 @@ const Gallery = (props) => {
     calculateTranslateX();
   }
 
+  console.log('headline', headline);
+
   return (
     <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
+      {headline ? <div className="gallery-headline">{headline}</div> : null}
       {
         isStickyVisible
           ? <MobileGallery
