@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useContent } from 'fusion:content';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
@@ -20,6 +20,17 @@ const Footer = () => {
       hierarchy: 'BottomNav',
     },
   });
+
+  // const siteService = useContent({
+  //   source: 'site-api',
+  //   query: {
+  //     hierarchy: 'BottomNav',
+  //   },
+  // });
+
+  // useEffect(() => {
+  //   console.log('NAV: ', siteNavigation);
+  // });
 
   const {
     facebookPage, twitterPage, logo, homeURL,
@@ -56,25 +67,32 @@ const Footer = () => {
       <ul className="menu-row">
         {children
           && children.map((parent, i) => {
+            const parentListTitle = (parent.navigation && parent.navigation.nav_title) || '';
             if (parent.children.length > 0) {
               return (
                 <li
                   key={`footerParentLink-${i}`}
-                  className={`menu ${openMenu === parent.name ? 'is-visible-mobile' : ''}`}
-                  onClick={() => handleClick(parent.name)}
+                  className={`menu ${openMenu === parentListTitle ? 'is-visible-mobile' : ''}`}
+                  onClick={() => handleClick(parentListTitle)}
                 >
                   <div className="menu-header">
-                    {parent.name}
+                    {parentListTitle}
                     <img className="menu-arrow" src={menuArrow} alt="" />
                   </div>
 
                   <ul className="menu-body">
                     {parent.children
-                      && parent.children.map((child, e) => (
-                        <li key={`footerChildLink-${e}`} className="menu-body-links">
-                          <a href={getLinkURL(child)}>{child.name}</a>
-                        </li>
-                      ))}
+                      && parent.children.map((child, e) => {
+                        const childListTitle = (child.navigation && child.navigation.nav_title) || '';
+                        const openInNewTab = child.site && child.site.section_url_open_new_tab === 'true' ? '_blank' : '';
+                        return (
+                          <li key={`footerChildLink-${e}`} className="menu-body-links">
+                            <a href={getLinkURL(child)} target={openInNewTab}>
+                              {childListTitle}
+                            </a>
+                          </li>
+                        );
+                      })}
                   </ul>
                 </li>
               );
