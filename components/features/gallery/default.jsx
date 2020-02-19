@@ -15,7 +15,6 @@ import './default.scss';
 
 const Gallery = (props) => {
   const { contentElements = [], promoItems = {}, customFields = {} } = props;
-  // const { } = promoItems;
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
   const [mobileElementData, setMobileElementData] = useState(null);
@@ -388,7 +387,6 @@ const Gallery = (props) => {
           ? <DesktopGallery data={elementData} translateX={translateX} />
           : null
       }
-    <>
       <div
         onClick={handleStickyOpen}
         className={`gallery-caption-container ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
@@ -421,7 +419,6 @@ const Gallery = (props) => {
         </div>
       </div>
       {captionData}
-      </>
     </div>
   );
 };
