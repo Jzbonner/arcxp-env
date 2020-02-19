@@ -2,23 +2,29 @@
 @import "../../../../src//styles/base/breakpoints";
 
 .c-headerNav {
-  display: flex;
-  flex-direction: column;
-  width: 94%;
-  margin: 0 auto;
+  display: none;
+
+  @include breakpoint(desktop-sm) {
+    display: flex;
+    flex-direction: column;
+    width: 94%;
+    margin: 0 auto;
+  }
 
   @include breakpoint(desktop-nav) {
     width: 90%;
   }
 
   nav {
-    display: flex;
-    align-items: flex-end;
-    padding-bottom: 20px;
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 20px;
 
-    a {
-      color: #2e81b7;
-      text-decoration: none;
+      a {
+        color: #2e81b7;
+        text-decoration: none;
+      }
     }
   }
 }
@@ -57,7 +63,7 @@
   
     &:hover {
       opacity: 1;
-      
+
       .subNav {
         visibility: visible;
         opacity: 1;
