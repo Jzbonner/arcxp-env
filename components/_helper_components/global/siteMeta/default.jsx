@@ -18,6 +18,7 @@ const SiteMeta = () => {
   const {
     headlines,
     description,
+    subtype,
     canonical_url: canonicalURL,
   } = globalContent || {};
 
@@ -44,7 +45,7 @@ const SiteMeta = () => {
       <meta property='og:image:width' content='200' />
       <meta property='og:title' content='{headlines.basic}' />
       {/* content should be website for article */}
-      <meta property='og:type' content='website' />
+      <meta property='og:type' content={subtype} />
       <meta property='og:url' content={canonicalURL} />
       <meta property='og:description' content={description.basic} />
       <meta property='og:site_name' content={siteName} />
@@ -75,7 +76,7 @@ const SiteMeta = () => {
       <meta property='og:image:width' content='800' />
       {/* content should headline, video title, or gallery title */}
       <meta property='og:title' content={headlines.basic} />
-      <meta property='og:type' content='article' />
+      <meta property='og:type' content={subtype} />
       <meta property='og:url' content={canonicalURL} />
       {/* the article Description (if an article page), video Caption (if a video page),
       OR gallery Description (if a gallery page); if no value exists in the article Description field,
@@ -101,6 +102,7 @@ SiteMeta.propTypes = {
   canonical_url: PropTypes.object,
   headlines: PropTypes.object,
   description: PropTypes.object,
+  subtype: PropTypes.object,
   siteName: PropTypes.object,
   metaValue: PropTypes.func,
 };
