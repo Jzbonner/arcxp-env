@@ -22,6 +22,7 @@ import PX01 from '../_helper_components/global/ads/px01/default';
 import handleFinalPX01Cases from './_helper_functions/handleFinalPX01Cases';
 import '../../src/styles/container/_article-basic.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
+import SiteMeta from '../_helper_components/global/siteMeta/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
@@ -70,6 +71,7 @@ const StoryPageLayout = () => {
 
   return (
     <>
+    <SiteMeta contentElements={filteredContentElements}/>
       <header>
         <BreakingNews />
 
