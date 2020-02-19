@@ -48,14 +48,35 @@ const Section = ({
     });
   }
 
+  if (rightRailAd) {
+    let contentBeforeRightRailIndex = 0;
+    newContentElements.forEach((el, index) => {
+      if (isParagraph(el.type) && contentBeforeRightRailIndex < rightRailAd.insertAfterParagraph) {
+        contentBeforeRightRailIndex = index;
+      }
+      return null;
+    });
+    return (
+      <>
+        <div className='c-section with-rightRail b-margin-bottom-d40-m20'>
+          <ContentElements contentElements={newContentElements.slice(0, contentBeforeRightRailIndex)} />
+        </div>
+        <div className='c-section with-rightRail b-margin-bottom-d40-m20'>
+          <ContentElements contentElements={newContentElements.slice(contentBeforeRightRailIndex)} />
+          <div className='c-rightRail'>{rightRailAd.ad()}</div>
+        </div>
+      </>
+    );
+  }
+
   if (newContentElements.length > 0) {
     return (
-      <div className={`c-section ${rightRailAd ? 'with-rightRail' : ''} b-margin-bottom-d40-m20`}>
+      <div className='c-section b-margin-bottom-d40-m20'>
         <ContentElements contentElements={newContentElements} />
-        {rightRailAd && <div className="c-rightRail">{rightRailAd()}</div>}
       </div>
     );
   }
+
   return null;
 };
 
@@ -63,7 +84,7 @@ Section.propTypes = {
   elements: PropTypes.array,
   startIndex: PropTypes.number,
   stopIndex: PropTypes.number,
-  rightRailAd: PropTypes.func,
+  rightRailAd: PropTypes.object,
   insertedAds: PropTypes.array,
   insertAtSectionEnd: PropTypes.array,
 };
