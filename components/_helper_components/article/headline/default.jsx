@@ -12,7 +12,7 @@ const Headline = ({
   if (basicItems) {
     promoData = basicItems;
   }
-  console.log('promoData', promoData);
+
   // Uncomment to see how the headline component displays with a video promo type.
   // Used because I was getting errors when trying to add a video as a featured element.
   // promoData.type = 'video';

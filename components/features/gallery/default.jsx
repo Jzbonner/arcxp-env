@@ -67,11 +67,7 @@ const Gallery = (props) => {
   const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
   const featuredGalleryData = promoItems || null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
-  console.log('featuredGalleryData', promoItems);
   let headline = headlines.basic ? headlines.basic : null;
-
-  // console.log('contentElements', contentElements);
-  // console.log('basic', basic);
 
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
@@ -321,7 +317,7 @@ const Gallery = (props) => {
     if (fetchedGalleryData) fetchedContentElements = fetchedGalleryData.content_elements;
 
     if (relevantGalleryData) galleryContentElements = relevantGalleryData.content_elements;
-    // console.log('featured Gal data', featuredGalleryData);
+
     if (featuredGalleryData) featuredContentElements = featuredGalleryData.content_elements;
 
     if (!headline && !galHeadline) headline = relevantGalleryData.headlines.basic ? setHeadline(relevantGalleryData.headlines.basic) : null;
@@ -374,8 +370,6 @@ const Gallery = (props) => {
     calculateTranslateX();
   }
 
-  console.log('contentElements', contentElements);
-
   return (
     <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
       {!isMobile && (galHeadline) ? <div className="gallery-headline">{galHeadline}</div> : null}
@@ -395,9 +389,6 @@ const Gallery = (props) => {
           : null
       }
     <>
-{/*       {
-        (galHeadline || headline) ? <div className="gallery-headline">{galHeadline || headline}</div> : null
-      } */}
       <div
         onClick={handleStickyOpen}
         className={`gallery-caption-container ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
