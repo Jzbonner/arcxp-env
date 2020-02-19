@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useContent } from 'fusion:content';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
@@ -13,6 +13,8 @@ import Copyright from '../copyright/default';
 const Footer = () => {
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
+  let twitterURL = '';
+  let facebookURL = '';
 
   const siteNavigation = useContent({
     source: 'site-api',
@@ -21,20 +23,7 @@ const Footer = () => {
     },
   });
 
-  // const siteService = useContent({
-  //   source: 'site-api',
-  //   query: {
-  //     hierarchy: 'BottomNav',
-  //   },
-  // });
-
-  // useEffect(() => {
-  //   console.log('NAV: ', siteNavigation);
-  // });
-
-  const {
-    facebookPage, twitterPage, logo, homeURL,
-  } = getProperties();
+  const { logo, homeURL } = getProperties();
 
   const { children } = siteNavigation || {};
   const [row1 = []] = children || [];
@@ -48,6 +37,15 @@ const Footer = () => {
       setOpenMenu(menu);
     }
   };
+
+  if (siteNavigation && siteNavigation.children[5]) {
+    if (siteNavigation.children[5].children[0] && siteNavigation.children[5].children[0].url) {
+      twitterURL = siteNavigation.children[5].children[0].url;
+    }
+    if (siteNavigation.children[5].children[1] && siteNavigation.children[5].children[1].url) {
+      facebookURL = siteNavigation.children[5].children[1].url;
+    }
+  }
 
   return (
     <footer className="c-footer">
@@ -68,7 +66,7 @@ const Footer = () => {
         {children
           && children.map((parent, i) => {
             const parentListTitle = (parent.navigation && parent.navigation.nav_title) || '';
-            if (parent.children.length > 0) {
+            if (parent.children.length > 0 && parent.navigation.nav_title !== 'Follow') {
               return (
                 <li
                   key={`footerParentLink-${i}`}
@@ -103,12 +101,12 @@ const Footer = () => {
           <span className="header-menu">Follow</span>
           <ul className="social-media-icons">
             <li>
-              <a href={facebookPage}>
+              <a href={facebookURL}>
                 <img src={facebookIcon} alt="" />
               </a>
             </li>
             <li>
-              <a href={twitterPage}>
+              <a href={twitterURL}>
                 <img src={twitterIcon} alt="" />
               </a>
             </li>
