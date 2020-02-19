@@ -1,25 +1,23 @@
-@import '../../../../src/styles/base/breakpoints';
+@import "../../../../src/styles/base/breakpoints";
 
 .c-stickyNav {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: auto;
-    height: 100%;
-    margin: auto;
-    // padding: 0 1.25em;
-    max-height: 90px;
-    background: #F8F8F8;
-    opacity: 0.98;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    border: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: auto;
+  height: 100%;
+  margin: auto;
+  max-height: 90px;
+  background: #f8f8f8;
+  opacity: .98;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  border: none;
 
-    @include breakpoint(desktop-sm) {
-        border-bottom: solid 1px #d0d0d0;
-        max-height: 70px;
-    }
+  @include breakpoint(desktop-sm) {
+    border-bottom: solid 1px #d0d0d0;
+    max-height: 70px;
+  }
 }

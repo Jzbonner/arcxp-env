@@ -24,6 +24,7 @@ const Byline = ({ by = [] }) => {
 
   const handleAuthors = (authors = []) => {
     const bylineData = authors.map((author, i) => {
+      if (!author.name) return null;
       // multiple authors
       if (authors.length > 1) {
         return <span key={author.name}>{i === 0 && 'By '}<a href="#">{author.name}</a>{author.org ? `  -  ${author.org}` : ''}</span>;
@@ -47,7 +48,9 @@ const Byline = ({ by = [] }) => {
       if (element._id) isStaff = true;
 
       return {
-        name: element.name,
+        name: (element.additional_properties
+              && element.additional_properties.original
+              && element.additional_properties.original.byline) || element.name,
         org: element.org,
         affiliations: element.additional_properties
           && element.additional_properties.original
