@@ -52,6 +52,7 @@
   // modifier styles for different headline scenarios(video, gallery, etc)
   &.with-gallery {
     flex-direction: column;
+    overflow: hidden;
     .article-headline {
       justify-content: center;
     }

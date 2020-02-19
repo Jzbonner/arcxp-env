@@ -15,7 +15,7 @@ import './default.scss';
 
 const Gallery = (props) => {
   const { contentElements = [], promoItems = {}, customFields = {} } = props;
-  const { basic = {} } = promoItems;
+  // const { } = promoItems;
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
   const [mobileElementData, setMobileElementData] = useState(null);
@@ -321,7 +321,7 @@ const Gallery = (props) => {
     if (fetchedGalleryData) fetchedContentElements = fetchedGalleryData.content_elements;
 
     if (relevantGalleryData) galleryContentElements = relevantGalleryData.content_elements;
-      console.log('featured Gal data', featuredGalleryData);
+    // console.log('featured Gal data', featuredGalleryData);
     if (featuredGalleryData) featuredContentElements = featuredGalleryData.content_elements;
 
     if (!headline && !galHeadline) headline = relevantGalleryData.headlines.basic ? setHeadline(relevantGalleryData.headlines.basic) : null;
@@ -378,7 +378,7 @@ const Gallery = (props) => {
 
   return (
     <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-      {!isMobile && (galHeadline || headline) ? <div className="gallery-headline">{galHeadline || headline}</div> : null}
+      {!isMobile && (galHeadline) ? <div className="gallery-headline">{galHeadline}</div> : null}
       {
         isStickyVisible
           ? <MobileGallery
