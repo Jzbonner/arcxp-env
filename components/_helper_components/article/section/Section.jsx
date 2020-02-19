@@ -5,7 +5,7 @@ import { isParagraph } from '../../../layouts/_helper_functions/Paragraph';
 import './styles.scss';
 
 const Section = ({
-  insertedAds, elements, insertAtSectionEnd, startIndex = 0, stopIndex = elements.length, rightRailAd,
+  insertedAds, elements, insertAtSectionEnd, startIndex = 0, stopIndex = elements.length, rightRail,
 }) => {
   let paragraphCounter = 0;
   const newContentElements = [];
@@ -48,10 +48,10 @@ const Section = ({
     });
   }
 
-  if (rightRailAd) {
+  if (rightRail) {
     let contentBeforeRightRailIndex = 0;
     newContentElements.forEach((el, index) => {
-      if (isParagraph(el.type) && contentBeforeRightRailIndex < rightRailAd.insertAfterParagraph) {
+      if (isParagraph(el.type) && contentBeforeRightRailIndex < rightRail.insertAfterParagraph) {
         contentBeforeRightRailIndex = index;
       }
       return null;
@@ -63,7 +63,7 @@ const Section = ({
         </div>
         <div className='c-section with-rightRail b-margin-bottom-d40-m20'>
           <ContentElements contentElements={newContentElements.slice(contentBeforeRightRailIndex)} />
-          <div className='c-rightRail'>{rightRailAd.ad()}</div>
+          <div className='c-rightRail'>{rightRail.ad()}</div>
         </div>
       </>
     );
@@ -84,7 +84,7 @@ Section.propTypes = {
   elements: PropTypes.array,
   startIndex: PropTypes.number,
   stopIndex: PropTypes.number,
-  rightRailAd: PropTypes.object,
+  rightRail: PropTypes.object,
   insertedAds: PropTypes.array,
   insertAtSectionEnd: PropTypes.array,
 };

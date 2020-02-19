@@ -115,7 +115,7 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             startIndex={1}
             stopIndex={3}
-            rightRailAd={{ insertAfterParagraph: 2, ad: RP01StoryDesktop }}
+            rightRail={{ insertAfterParagraph: 2, ad: RP01StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
           {maxNumberOfParagraphs <= 2 && PX01AdSlot()}
@@ -125,12 +125,12 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             startIndex={start}
             stopIndex={stop}
-            rightRailAd={{ insertAfterParagraph: 7, ad: RP09StoryDesktop }} />
+            rightRail={{ insertAfterParagraph: 7, ad: RP09StoryDesktop }} />
           {maxNumberOfParagraphs >= 4 && <PX01 adSlot={PX01AdSlot} />}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
-            rightRailAd={{ insertAfterParagraph: 7, ad: RP09StoryDesktop }}
+            rightRail={{ insertAfterParagraph: 7, ad: RP09StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 7, adArray: [RP09StoryTablet] }]}
             insertAtSectionEnd={[BlogAuthorComponent, ConnextEndStory]}
           />
