@@ -7,9 +7,9 @@ const Logo = ({ source, rootDirectory }) => {
     site_logo_image: sourceURL,
   } = source;
   return (
-            <a href={rootDirectory}>
-                <img src={sourceURL} className='logo'></img>
-            </a>
+    <a href={rootDirectory}>
+      <img src={sourceURL} className='logo'></img>
+    </a>
   );
 };
 

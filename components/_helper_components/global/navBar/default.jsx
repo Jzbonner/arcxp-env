@@ -3,7 +3,8 @@ import { useContent } from 'fusion:content';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
-import weatherIcon from '../../../../resources/images/cloudy.png';
+import Subscribe from './subscribe/default';
+import DesktopNav from './desktopNav/default';
 import '../../../../src/styles/base/_utility.scss';
 import './default.scss';
 
@@ -56,35 +57,13 @@ const NavBar = () => {
 
   return (
     <div className='c-headerNav'>
-        <div className='b-flexRow b-flexCenter'>
-          <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
+      <div className='b-flexRow b-flexCenter'>
+        <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
+      </div>
+        <DesktopNav sections={sectionLi}/>
+        <div className='sub b-flexRow b-flexCenter sub-text'>
+          <Subscribe/>
         </div>
-        <nav>
-          <ul className='nav-row'>
-            {sectionLi}
-            <li className='nav-search nav-itemBottomBorder'>
-              <form className='search-form'>
-                <input className='search-input'></input>
-                <img className='search-icon'
-                src='https://www.ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/search-icon.svg'></img>
-              </form>
-            </li>
-            <li className='nav-weather weather-icon'>
-              <img height='35px' src={weatherIcon}></img>
-            </li>
-            <li className='nav-itemText nav-weather weather-text'>
-              <a>89°</a>
-            </li>
-            <li className='nav-login'>
-              <div className='b-flexRow b-flexCenter'>
-                <img src='https://www.ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/user-icon.svg'></img>
-                <div className='nav-itemText login-text'>Log in</div>
-              </div>
-            </li>
-          </ul>
-        </nav>
-        <div className='sub b-flexRow b-flexCenter sub-text'><span>Worth knowing. Worth Supporting.</span>
-        <span className='sub-bold'>Subscribe today for $1.00</span></div>
     </div>
   );
 };
