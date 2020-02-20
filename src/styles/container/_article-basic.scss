@@ -10,6 +10,7 @@
 
   @include breakpoint(desktop-lg) {
     width: 90%;
+    max-width: 1600px;
   }
 }
 
@@ -18,7 +19,7 @@
   background-image: linear-gradient(180deg, #fff 67%, #f1f1f1 100%);
   padding-bottom: 30px;
   
-  @include breakpoint(desktop-nav) {
+  @include breakpoint(desktop-sm) {
     width: 100%;
   }
 }
