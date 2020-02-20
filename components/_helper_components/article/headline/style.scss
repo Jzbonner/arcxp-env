@@ -63,6 +63,7 @@
 
   &.with-gallery {
     flex-direction: column;
+    overflow: hidden;
 
     .article-headline {
       justify-content: center;

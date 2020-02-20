@@ -14,7 +14,7 @@ import './default.scss';
 
 
 const Gallery = (props) => {
-  const { contentElements = [], customFields = {} } = props;
+  const { contentElements = [], promoItems = {}, customFields = {} } = props;
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
   const [mobileElementData, setMobileElementData] = useState(null);
@@ -27,6 +27,8 @@ const Gallery = (props) => {
   const [translateX, setTranslateX] = useState(null);
   // holds all captions w/ the same index(id) as their image counter parts
   const [baseCaptionData, setBaseCaptionData] = useState(null);
+  // only used if 'raw' contentElements are proped down from article
+  const [galHeadline, setHeadline] = useState(null);
 
   /* Mobile */
   const [offsetHeight, setHeight] = useState(0);
@@ -62,6 +64,9 @@ const Gallery = (props) => {
   });
 
   const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
+  const featuredGalleryData = promoItems || null;
+  const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
+  let headline = headlines.basic ? headlines.basic : null;
 
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
@@ -297,21 +302,26 @@ const Gallery = (props) => {
 
   // initializing the gallery w/ either propped or fetched content elements
 
-  if (isMobile !== 'NOT INIT' && ((contentElements || fetchedGalleryData)
+  if (isMobile !== 'NOT INIT' && ((contentElements || fetchedGalleryData || featuredGalleryData)
     && (currentAction === actions.RESIZE || (!elementData && !mobileElementData)))) {
     let relevantGalleryData = null;
     let galleryContentElements = null;
     let fetchedContentElements = null;
+    let featuredContentElements = null;
 
     if (contentElements) relevantGalleryData = handlePropContentElements();
 
-    if (!relevantGalleryData && !fetchedGalleryData) return null;
+    if (!relevantGalleryData && !fetchedGalleryData && !featuredGalleryData) return null;
 
     if (fetchedGalleryData) fetchedContentElements = fetchedGalleryData.content_elements;
 
     if (relevantGalleryData) galleryContentElements = relevantGalleryData.content_elements;
 
-    const baseGalleryData = fetchedContentElements || galleryContentElements;
+    if (featuredGalleryData) featuredContentElements = featuredGalleryData.content_elements;
+
+    if (!headline && !galHeadline) headline = relevantGalleryData.headlines.basic ? setHeadline(relevantGalleryData.headlines.basic) : null;
+
+    const baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
 
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
@@ -360,7 +370,10 @@ const Gallery = (props) => {
   }
 
   return (
+    <>
+    {isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
     <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
+      {!isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
       {
         isStickyVisible
           ? <MobileGallery
@@ -409,11 +422,13 @@ const Gallery = (props) => {
       </div>
       {captionData}
     </div>
+    </>
   );
 };
 
 Gallery.propTypes = {
   contentElements: PropTypes.array,
+  promoItems: PropTypes.object,
   customFields: PropTypes.shape({
     galleryUrl: PropTypes.string.tag({
       label: 'Gallery URL',
