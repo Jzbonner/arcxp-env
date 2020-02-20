@@ -28,10 +28,16 @@ const Caption = ({ src, isLeadVideo, videoCaption }) => {
       giveCredit = `Credit: ${mainCredit}`;
     } else if (secondaryCredit.length > 1) {
       giveCredit = `Credit: ${secondaryCredit}`;
+    } else {
+      giveCredit = '';
     }
   }
   if (isLeadVideo) {
-    giveCredit = `Credit: ${mainCredit}`;
+    if (mainCredit.length > 1) {
+      giveCredit = `Credit: ${mainCredit}`;
+    } else {
+      giveCredit = '';
+    }
   }
   return (
     <div className={`c-caption ${toggleButton ? 'is-active' : ''}`}>
@@ -42,7 +48,7 @@ const Caption = ({ src, isLeadVideo, videoCaption }) => {
         <div className="fill-line"></div>
         <div className="fill-line fill-line-long"></div>
       </div>
-      <div className="photo-caption">
+      <div className={` photo-caption ${toggleButton ? 'is-active' : ''}`}>
         <div className="photo-caption-text">{captionContent}</div>
         <p className="photo-credit-text">{giveCredit}</p>
       </div>
