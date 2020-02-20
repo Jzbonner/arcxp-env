@@ -64,7 +64,7 @@ const Gallery = (props) => {
   });
 
   const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
-  const featuredGalleryData = promoItems || null;
+  const featuredGalleryData = promoItems.length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic ? headlines.basic : null;
 

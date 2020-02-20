@@ -5,6 +5,7 @@ import Headline from '../_helper_components/article/headline/default.jsx';
 import StickyNav from '../_helper_components/article/stickyNav/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Header from '../_helper_components/global/header/default';
+import Gallery from '../features/gallery/default';
 import Footer from '../_helper_components/global/footer/default';
 import '../../src/styles/container/_article-basic.scss';
 
@@ -59,6 +60,7 @@ const GalleryPageLayout = () => {
             maxTabletViewWidth={maxTabletViewWidth}
           />
         </div>
+        <Gallery contentElements={contentElements} />
       </main>
       <Footer />
     </>
