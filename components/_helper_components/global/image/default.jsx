@@ -18,17 +18,20 @@ const Image = ({
 
   const screenSize = checkWindowSize();
 
-  let mainCredit = {};
-  let secondaryCredit = {};
+  let mainCredit;
+  let secondaryCredit;
   if (credits) {
-    mainCredit = credits.affiliation && credits.affiliation.length ? credits.affiliation[0].name : '';
-    secondaryCredit = credits.by && credits.by.length ? credits.by[0].name : '';
+    mainCredit = credits.affiliation
+    && credits.affiliation[0]
+    && credits.affiliation[0].name ? credits.affiliation[0].name : null;
+    secondaryCredit = credits.by
+    && credits.by.length && credits.by[0] && credits.by[0].name ? credits.by[0].name : null;
   }
 
-  let giveCredit = '';
-  if (mainCredit.length > 1) {
+  let giveCredit;
+  if (mainCredit) {
     giveCredit = `Credit: ${mainCredit}`;
-  } else if (secondaryCredit.length > 1) {
+  } else if (secondaryCredit) {
     giveCredit = `Credit: ${secondaryCredit}`;
   }
 
