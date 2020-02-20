@@ -11,7 +11,7 @@
     margin: 0 auto;
   }
 
-  @include breakpoint(desktop-nav) {
+  @include breakpoint(desktop-lg) {
     width: 90%;
   }
 
