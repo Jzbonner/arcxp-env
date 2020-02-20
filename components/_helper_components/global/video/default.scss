@@ -19,13 +19,6 @@
     .photo-caption-btn {
       top: -1.5em;
 
-      &:focus {
-        /* stylelint-disable */
-        outline: none !important;
-        box-shadow: none !important;
-        /* stylelint-enable */
-      }
-
       @include breakpoint(desktop-sm) {
         top: 1em;
       }
