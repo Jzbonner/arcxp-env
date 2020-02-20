@@ -13,6 +13,8 @@ import Copyright from '../copyright/default';
 const Footer = () => {
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
+  let twitterURL = '';
+  let facebookURL = '';
 
   const siteNavigation = useContent({
     source: 'site-api',
@@ -21,12 +23,10 @@ const Footer = () => {
     },
   });
 
-  const {
-    facebookPage, twitterPage, logo, homeURL,
-  } = getProperties();
+  const { logo, homeURL } = getProperties();
 
-  const { children } = siteNavigation || {};
-  const [row1 = []] = children || [];
+  const { children: linkCategories } = siteNavigation || {};
+  const [row1 = []] = linkCategories || [];
 
   const [openMenu, setOpenMenu] = useState('');
 
@@ -37,6 +37,15 @@ const Footer = () => {
       setOpenMenu(menu);
     }
   };
+
+  if (siteNavigation && siteNavigation.children[5]) {
+    if (siteNavigation.children[5].children[0] && siteNavigation.children[5].children[0].url) {
+      twitterURL = siteNavigation.children[5].children[0].url;
+    }
+    if (siteNavigation.children[5].children[1] && siteNavigation.children[5].children[1].url) {
+      facebookURL = siteNavigation.children[5].children[1].url;
+    }
+  }
 
   return (
     <footer className="c-footer">
@@ -54,27 +63,34 @@ const Footer = () => {
         </div>
       </div>
       <ul className="menu-row">
-        {children
-          && children.map((parent, i) => {
-            if (parent.children.length > 0) {
+        {linkCategories
+          && linkCategories.map((linkCategory, i) => {
+            const parentListTitle = (linkCategory.navigation && linkCategory.navigation.nav_title) || '';
+            if (linkCategory.children.length > 0 && i !== linkCategories.length - 1) {
               return (
                 <li
                   key={`footerParentLink-${i}`}
-                  className={`menu ${openMenu === parent.name ? 'is-visible-mobile' : ''}`}
-                  onClick={() => handleClick(parent.name)}
+                  className={`menu ${openMenu === parentListTitle ? 'is-visible-mobile' : ''}`}
+                  onClick={() => handleClick(parentListTitle)}
                 >
                   <div className="menu-header">
-                    {parent.name}
+                    {parentListTitle}
                     <img className="menu-arrow" src={menuArrow} alt="" />
                   </div>
 
                   <ul className="menu-body">
-                    {parent.children
-                      && parent.children.map((child, e) => (
-                        <li key={`footerChildLink-${e}`} className="menu-body-links">
-                          <a href={getLinkURL(child)}>{child.name}</a>
-                        </li>
-                      ))}
+                    {linkCategory.children
+                      && linkCategory.children.map((link, e) => {
+                        const childListTitle = (link.navigation && link.navigation.nav_title) || '';
+                        const openInNewTab = link.site && link.site.section_url_open_new_tab === 'true' ? '_blank' : '';
+                        return (
+                          <li key={`footerChildLink-${e}`} className="menu-body-links">
+                            <a href={getLinkURL(link)} target={openInNewTab}>
+                              {childListTitle}
+                            </a>
+                          </li>
+                        );
+                      })}
                   </ul>
                 </li>
               );
@@ -85,12 +101,12 @@ const Footer = () => {
           <span className="header-menu">Follow</span>
           <ul className="social-media-icons">
             <li>
-              <a href={facebookPage}>
+              <a href={facebookURL}>
                 <img src={facebookIcon} alt="" />
               </a>
             </li>
             <li>
-              <a href={twitterPage}>
+              <a href={twitterURL}>
                 <img src={twitterIcon} alt="" />
               </a>
             </li>
