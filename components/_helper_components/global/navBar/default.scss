@@ -160,16 +160,22 @@
 
 .weather-icon {
   padding-left: 56px;
+  cursor: pointer;
 }
 
 .weather-text {
   padding-left: 4px;
+  cursor: pointer;
 }
 
 .nav-login {
   display: flex;
   min-width: 100px;
   padding-left: 15px;
+
+  img {
+    cursor: pointer;
+  }
 
   @include breakpoint(desktop-nav) {
     padding-top: 2px;
@@ -179,6 +185,7 @@
 .login-text {
   font-weight: 800;
   padding-left: 6px;
+  cursor: pointer;
 
   @include breakpoint(desktop-sm) {
     @include text-styles(.875rem, 1, "Gordita");
