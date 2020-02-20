@@ -27,6 +27,7 @@ import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/de
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
 const MP02 = () => <ArcAd staticSlot={'MP02'} />;
+const MP03 = () => <ArcAd staticSlot={'MP03'} />;
 
 const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} />;
@@ -125,13 +126,13 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             startIndex={start}
             stopIndex={stop}
-            rightRail={{ insertAfterParagraph: 7, ad: RP09StoryDesktop }} />
+            rightRail={{ insertAfterParagraph: 8, ad: RP09StoryDesktop }} />
           {maxNumberOfParagraphs >= 4 && <PX01 adSlot={PX01AdSlot} />}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
-            rightRail={{ insertAfterParagraph: 7, ad: RP09StoryDesktop }}
-            insertedAds={[{ insertAfterParagraph: 7, adArray: [RP09StoryTablet] }]}
+            rightRail={{ insertAfterParagraph: 8, ad: RP09StoryDesktop }}
+            insertedAds={[{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }]}
             insertAtSectionEnd={[BlogAuthorComponent, ConnextEndStory]}
           />
 

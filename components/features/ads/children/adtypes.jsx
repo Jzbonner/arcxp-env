@@ -175,7 +175,7 @@ export const adSlots = {
         [0, 0],
       ], // tablet+
       [
-        [320, 250],
+        [300, 250],
       ], // mobile
     ],
     breakpoints: [
