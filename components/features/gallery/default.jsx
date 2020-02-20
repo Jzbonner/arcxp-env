@@ -370,8 +370,10 @@ const Gallery = (props) => {
   }
 
   return (
+    <>
+    {isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
     <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-      {!isMobile && (galHeadline) ? <div className="gallery-headline">{galHeadline}</div> : null}
+      {!isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
       {
         isStickyVisible
           ? <MobileGallery
@@ -420,6 +422,7 @@ const Gallery = (props) => {
       </div>
       {captionData}
     </div>
+    </>
   );
 };
 
