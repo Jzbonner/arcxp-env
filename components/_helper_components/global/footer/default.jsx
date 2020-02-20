@@ -25,8 +25,8 @@ const Footer = () => {
 
   const { logo, homeURL } = getProperties();
 
-  const { children } = siteNavigation || {};
-  const [row1 = []] = children || [];
+  const { children: linkCategories } = siteNavigation || {};
+  const [row1 = []] = linkCategories || [];
 
   const [openMenu, setOpenMenu] = useState('');
 
@@ -63,10 +63,10 @@ const Footer = () => {
         </div>
       </div>
       <ul className="menu-row">
-        {children
-          && children.map((parent, i) => {
-            const parentListTitle = (parent.navigation && parent.navigation.nav_title) || '';
-            if (parent.children.length > 0 && parent.navigation.nav_title !== 'Follow') {
+        {linkCategories
+          && linkCategories.map((linkCategory, i) => {
+            const parentListTitle = (linkCategory.navigation && linkCategory.navigation.nav_title) || '';
+            if (linkCategory.children.length > 0 && i !== linkCategories.length - 1) {
               return (
                 <li
                   key={`footerParentLink-${i}`}
@@ -79,13 +79,13 @@ const Footer = () => {
                   </div>
 
                   <ul className="menu-body">
-                    {parent.children
-                      && parent.children.map((child, e) => {
-                        const childListTitle = (child.navigation && child.navigation.nav_title) || '';
-                        const openInNewTab = child.site && child.site.section_url_open_new_tab === 'true' ? '_blank' : '';
+                    {linkCategory.children
+                      && linkCategory.children.map((link, e) => {
+                        const childListTitle = (link.navigation && link.navigation.nav_title) || '';
+                        const openInNewTab = link.site && link.site.section_url_open_new_tab === 'true' ? '_blank' : '';
                         return (
                           <li key={`footerChildLink-${e}`} className="menu-body-links">
-                            <a href={getLinkURL(child)} target={openInNewTab}>
+                            <a href={getLinkURL(link)} target={openInNewTab}>
                               {childListTitle}
                             </a>
                           </li>
