@@ -79,8 +79,6 @@ const StoryPageLayout = () => {
           articleURL={articleURL}
           headlines={headlines}
           comments={comments}
-          promoItems={promoItems}
-          contentElements={filteredContentElements}
         />
       </header>
 
