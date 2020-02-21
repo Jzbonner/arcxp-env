@@ -26,7 +26,7 @@ const Section = ({
       }
       if (rightRail) {
         // we check to be sure the current element is a "paragraph"
-        // and that it's the paragraph (index) that we want our right rail ad insterted before
+        // and that it's the paragraph (index) that we want our right rail ad inserted before
         const rightRailInsertIndex = isParagraph(element.type) && paragraphCounter + 1 === rightRail.insertBeforeParagraph;
         if (rightRailInsertIndex && typeof rightRail.ad === 'function') {
           newContentElements.push(rightRail.ad());
