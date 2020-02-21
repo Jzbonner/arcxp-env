@@ -14,7 +14,9 @@ import './default.scss';
 
 
 const Gallery = (props) => {
-  const { contentElements = [], promoItems = {}, customFields = {} } = props;
+  const {
+    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {},
+  } = props;
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
   const [mobileElementData, setMobileElementData] = useState(null);
@@ -65,6 +67,7 @@ const Gallery = (props) => {
 
   const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
+  console.log('gallery promo itmes', promoItems);
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic ? headlines.basic : null;
 
@@ -258,11 +261,8 @@ const Gallery = (props) => {
   const handlePropContentElements = () => {
     let relevantData = null;
     contentElements.forEach((element) => {
-      if (element.type === 'gallery') {
-        relevantData = element;
-      }
+      if (element.type === 'gallery') relevantData = element;
     });
-
     return relevantData;
   };
 
@@ -301,28 +301,47 @@ const Gallery = (props) => {
   }, [isMobile]);
 
   // initializing the gallery w/ either propped or fetched content elements
-
-  if (isMobile !== 'NOT INIT' && ((contentElements || fetchedGalleryData || featuredGalleryData)
+  // NOTE: leafContentElements = Gallery-page-only propped contentElements array
+  if (isMobile !== 'NOT INIT' && ((contentElements || leafContentElements || fetchedGalleryData || featuredGalleryData)
     && (currentAction === actions.RESIZE || (!elementData && !mobileElementData)))) {
     let relevantGalleryData = null;
     let galleryContentElements = null;
     let fetchedContentElements = null;
     let featuredContentElements = null;
+    console.log(leafContentElements);
+    console.log(contentElements);
+    console.log(fetchedGalleryData);
+    console.log('featued gallery', featuredGalleryData);
 
-    if (contentElements) relevantGalleryData = handlePropContentElements();
+    if (contentElements.length > 0 && !leafContentElements) relevantGalleryData = handlePropContentElements();
 
-    if (!relevantGalleryData && !fetchedGalleryData && !featuredGalleryData) return null;
+    // if (!relevantGalleryData && !fetchedGalleryData && !featuredGalleryData && !leafContentElements) return null;
 
-    if (fetchedGalleryData) fetchedContentElements = fetchedGalleryData.content_elements;
+    if (leafContentElements.length > 0) {
+      // relevantGalleryData = leafContentElements;
+      galleryContentElements = leafContentElements;
+    } else if (featuredGalleryData) {
+      featuredContentElements = featuredGalleryData.content_elements;
+    } else if (fetchedGalleryData) {
+      fetchedContentElements = fetchedGalleryData.content_elements;
+    } else if (!contentElements) {
+      return null;
+    }
 
-    if (relevantGalleryData) galleryContentElements = relevantGalleryData.content_elements;
+    if (relevantGalleryData && !galleryContentElements) {
+      galleryContentElements = relevantGalleryData.content_elements;
+    }
 
-    if (featuredGalleryData) featuredContentElements = featuredGalleryData.content_elements;
+    //  if (fetchedGalleryData) fetchedContentElements = fetchedGalleryData.content_elements;
 
-    if (!headline && !galHeadline) headline = relevantGalleryData.headlines.basic ? setHeadline(relevantGalleryData.headlines.basic) : null;
+    // if (featuredGalleryData) featuredContentElements = featuredGalleryData.content_elements;
+
+    if (relevantGalleryData && !headline && !galHeadline) {
+      headline = relevantGalleryData.headlines && relevantGalleryData.headlines.basic
+        ? setHeadline(relevantGalleryData.headlines.basic) : null;
+    }
 
     const baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
-
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
     }, debugFixEl, isMobile, {
@@ -428,6 +447,7 @@ const Gallery = (props) => {
 
 Gallery.propTypes = {
   contentElements: PropTypes.array,
+  leafContentElements: PropTypes.array,
   promoItems: PropTypes.object,
   customFields: PropTypes.shape({
     galleryUrl: PropTypes.string.tag({

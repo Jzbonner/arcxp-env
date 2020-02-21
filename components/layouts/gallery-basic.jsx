@@ -34,7 +34,8 @@ const GalleryPageLayout = () => {
   };
 
   const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
-
+  console.log('globalContent', globalContent);
+  console.log('contentElements', contentElements);
   return (
     <>
       <header>
@@ -60,7 +61,7 @@ const GalleryPageLayout = () => {
             maxTabletViewWidth={maxTabletViewWidth}
           />
         </div>
-        <Gallery contentElements={contentElements} />
+        <Gallery leafContentElements={contentElements} />
       </main>
       <Footer />
     </>

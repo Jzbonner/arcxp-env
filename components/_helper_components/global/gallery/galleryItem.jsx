@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const GalleryItem = ({ data, refHook, func }) => {
+const GalleryItem = ({
+  data, refHook, func,
+}) => {
   const {
-    url, alt, index, id, by = [], captionObj, states,
+    url, alt, index, id, by = [], captionObj, states, lastItemClass,
   } = data;
   const { caption } = captionObj;
   const {
     isFocused, isStickyVisible, isCaptionOn, isMobile,
   } = states;
+  console.log('lastItemCalss', lastItemClass);
   return (
     <div
       ref={refHook}
@@ -16,7 +19,7 @@ const GalleryItem = ({ data, refHook, func }) => {
       data-index={index}
       key={url}
       onClick={func}
-      className={`${isStickyVisible ? 'gallery-full-item' : 'gallery-image'}
+      className={`${isStickyVisible ? `gallery-full-item ${lastItemClass}` : 'gallery-image'}
       ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}`}>
       <img
         className={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused ? 'is-focused' : ''}`}
@@ -55,6 +58,7 @@ GalleryItem.propTypes = {
   isCaptionOn: PropTypes.bool,
   captionObj: PropTypes.object,
   func: PropTypes.func,
+  lastItemClass: PropTypes.string,
 };
 
 export default GalleryItem;
