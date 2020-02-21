@@ -8,6 +8,11 @@
   flex: 1 0 100%;
   position: relative;
 
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
   @include breakpoint(tablet) {
     flex: 1 0 66%;
   }
@@ -29,8 +34,18 @@
 .video-component {
   position: relative;
 
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
   video {
     width: 100%;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
   }
 }
 
