@@ -34,7 +34,7 @@ const renderImage = () => {
   if (inlineVideoThumbnail) {
     return inlineVideoThumbnail;
   }
-  return deployment(`${contextPath}resources/images/logo-ogimage.png`);
+  return deployment(`${contextPath}/resources/images/logo-ogimage.png`);
 };
 
 export default renderImage;

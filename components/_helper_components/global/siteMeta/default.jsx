@@ -5,7 +5,11 @@ import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js'
 
 const SiteMeta = () => {
   const appContext = useAppContext();
-  const { globalContent } = appContext;
+  const {
+    globalContent,
+    deployment,
+    contextPath,
+  } = appContext;
   const {
     headlines, description, canonical_url: canonicalURL, type,
   } = globalContent || {};
@@ -14,8 +18,8 @@ const SiteMeta = () => {
 
   return (
     <>
-      <link rel="apple-touch-icon" href="resources/images/favicon-apple-touch-icon.png" />
-      <link rel="shortcut icon" href="resources/images/favicon.ico" />
+      <link rel="apple-touch-icon" href={deployment(`${contextPath}/resources/images/favicon-apple-touch-icon.png`)} />
+      <link rel="shortcut icon" href={deployment(`${contextPath}/resources/images/favicon.ico`)} />
       <link rel="canonical" href={`${type === 'home' ? homeURL : canonicalURL}`} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={description.basic} />
