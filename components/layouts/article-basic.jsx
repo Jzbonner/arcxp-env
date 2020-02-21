@@ -27,6 +27,7 @@ import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/de
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
 const MP02 = () => <ArcAd staticSlot={'MP02'} />;
+const MP03 = () => <ArcAd staticSlot={'MP03'} />;
 
 const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} />;
@@ -110,24 +111,31 @@ const StoryPageLayout = () => {
             <ArcAd staticSlot={'HP01'} />
             <ArcAd staticSlot={'MP01'} />
           </div>
-          <Section elements={filteredContentElements} stopIndex={1} />
+          <Section
+            elements={filteredContentElements}
+            stopIndex={1}
+            fullWidth={true}
+          />
           <Section
             elements={filteredContentElements}
             startIndex={1}
             stopIndex={3}
-            rightRailAd={RP01StoryDesktop}
+            rightRail={{ insertBeforeParagraph: 2, ad: RP01StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
           {maxNumberOfParagraphs <= 2 && PX01AdSlot()}
           {maxNumberOfParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />}
           <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
-          <Section elements={filteredContentElements} startIndex={start} stopIndex={stop} rightRailAd={RP09StoryDesktop} />
+          <Section
+            elements={filteredContentElements}
+            startIndex={start}
+            stopIndex={stop} />
           {maxNumberOfParagraphs >= 4 && <PX01 adSlot={PX01AdSlot} />}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
-            rightRailAd={RP09StoryDesktop}
-            insertedAds={[{ insertAfterParagraph: 7, adArray: [RP09StoryTablet] }]}
+            rightRail={{ insertBeforeParagraph: 8, ad: RP09StoryDesktop }}
+            insertedAds={[{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }]}
             insertAtSectionEnd={[BlogAuthorComponent, ConnextEndStory]}
           />
 
