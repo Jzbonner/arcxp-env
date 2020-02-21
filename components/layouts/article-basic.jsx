@@ -136,7 +136,7 @@ const StoryPageLayout = () => {
             <TaboolaFeed type={type} />
           </div>
         </article>
-        {basicItems.type !== 'gallery' && <Gallery contentElements={filteredContentElements} />}
+        {basicItems && basicItems.type && basicItems.type !== 'gallery' && <Gallery contentElements={filteredContentElements} />}
       </main>
       <Footer />
     </>
