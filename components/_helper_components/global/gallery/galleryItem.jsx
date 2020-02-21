@@ -21,8 +21,11 @@ const GalleryItem = ({
       data-index={index}
       key={url}
       onClick={func}
-      className={`${isStickyVisible ? `gallery-full-item ${lastItemClass}` : 'gallery-image'}
-      ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}`}>
+      // eslint-disable-next-line max-len
+      className={`${isStickyVisible ? `gallery-full-item ${lastItemClass}` : 'gallery-image'}${lastItemClass && isStickyVisible && !isCaptionOn ? '-no-caption' : ''}
+      ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}
+      `}
+      >
       <img
         className={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused ? 'is-focused' : ''}`}
         src={url}

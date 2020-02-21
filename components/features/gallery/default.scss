@@ -21,10 +21,18 @@
 
 .last-item-height-fix {
   height: 100%;
+
+  .gallery-subtitle {
+    height: 100%;
+  }
 }
 
-.gallery-subtitle {
-  height: 100%;
+.last-item-height-fix-no-caption {
+  height: 27%;
+
+  .gallery-subtitle {
+    height: 100%;
+  }
 }
 
 .gallery-count {
