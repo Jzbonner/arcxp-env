@@ -111,12 +111,16 @@ const StoryPageLayout = () => {
             <ArcAd staticSlot={'HP01'} />
             <ArcAd staticSlot={'MP01'} />
           </div>
-          <Section elements={filteredContentElements} stopIndex={1} />
+          <Section
+            elements={filteredContentElements}
+            stopIndex={1}
+            fullWidth={true}
+          />
           <Section
             elements={filteredContentElements}
             startIndex={1}
             stopIndex={3}
-            rightRail={{ insertAfterParagraph: 2, ad: RP01StoryDesktop }}
+            rightRail={{ insertBeforeParagraph: 2, ad: RP01StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
           {maxNumberOfParagraphs <= 2 && PX01AdSlot()}
@@ -125,13 +129,12 @@ const StoryPageLayout = () => {
           <Section
             elements={filteredContentElements}
             startIndex={start}
-            stopIndex={stop}
-            rightRail={{ insertAfterParagraph: 8, ad: RP09StoryDesktop }} />
+            stopIndex={stop} />
           {maxNumberOfParagraphs >= 4 && <PX01 adSlot={PX01AdSlot} />}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
-            rightRail={{ insertAfterParagraph: 8, ad: RP09StoryDesktop }}
+            rightRail={{ insertBeforeParagraph: 8, ad: RP09StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }]}
             insertAtSectionEnd={[BlogAuthorComponent, ConnextEndStory]}
           />

@@ -5,7 +5,7 @@ import { isParagraph } from '../../../layouts/_helper_functions/Paragraph';
 import './styles.scss';
 
 const Section = ({
-  insertedAds, elements, insertAtSectionEnd, startIndex = 0, stopIndex = elements.length, rightRail,
+  insertedAds, elements, insertAtSectionEnd, startIndex = 0, stopIndex = elements.length, fullWidth = false, rightRail,
 }) => {
   let paragraphCounter = 0;
   const newContentElements = [];
@@ -22,6 +22,14 @@ const Section = ({
 
           // removes the ad from the array to make sure we don't accidentally display it again
           insertedAds.splice(insertIndex, 1);
+        }
+      }
+      if (rightRail) {
+        // we check to be sure the current element is a "paragraph"
+        // and that it's the paragraph (index) that we want our right rail ad insterted before
+        const rightRailInsertIndex = isParagraph(element.type) && paragraphCounter + 1 === rightRail.insertBeforeParagraph;
+        if (rightRailInsertIndex && typeof rightRail.ad === 'function') {
+          newContentElements.push(rightRail.ad());
         }
       }
       newContentElements.push(element);
@@ -48,30 +56,9 @@ const Section = ({
     });
   }
 
-  if (rightRail) {
-    let contentBeforeRightRailIndex = 0;
-    newContentElements.forEach((el, index) => {
-      if (isParagraph(el.type) && contentBeforeRightRailIndex < rightRail.insertAfterParagraph) {
-        contentBeforeRightRailIndex = index;
-      }
-      return null;
-    });
-    return (
-      <>
-        <div className='c-section with-rightRail b-margin-bottom-d40-m20'>
-          <ContentElements contentElements={newContentElements.slice(0, contentBeforeRightRailIndex)} />
-        </div>
-        <div className='c-section with-rightRail b-margin-bottom-d40-m20'>
-          <ContentElements contentElements={newContentElements.slice(contentBeforeRightRailIndex)} />
-          <div className='c-rightRail'>{rightRail.ad()}</div>
-        </div>
-      </>
-    );
-  }
-
   if (newContentElements.length > 0) {
     return (
-      <div className='c-section b-margin-bottom-d40-m20'>
+      <div className={`c-section ${fullWidth ? 'fullWidth' : ''} b-margin-bottom-d40-m20`}>
         <ContentElements contentElements={newContentElements} />
       </div>
     );
@@ -84,6 +71,7 @@ Section.propTypes = {
   elements: PropTypes.array,
   startIndex: PropTypes.number,
   stopIndex: PropTypes.number,
+  fullWidth: PropTypes.boolean,
   rightRail: PropTypes.object,
   insertedAds: PropTypes.array,
   insertAtSectionEnd: PropTypes.array,
