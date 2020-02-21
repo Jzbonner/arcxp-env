@@ -24,6 +24,7 @@ const StickyNav = ({
   // secondary / inline video thumbnail
   // Pinterest Image rendering logic
   const renderImage = () => {
+    console.log('WOOORKS');
     if (featuredImage) {
       return featuredImage;
     }
