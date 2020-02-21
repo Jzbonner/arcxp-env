@@ -4,7 +4,6 @@ import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import NavBar from '../_helper_components/global/navBar/default';
-import StickyNav from '../_helper_components/article/stickyNav/default';
 import Footer from '../_helper_components/global/footer/default';
 import '../../src/styles/container/_article-basic.scss';
 
@@ -38,14 +37,12 @@ const VideoPageLayout = () => {
   return (
     <>
       <header className="c-nav">
-        <NavBar/>
-        <StickyNav
+        <NavBar
           articleURL={articleURL}
           headlines={headlines}
           comments={comments}
           promoItems={promoItems}
-          contentElements={contentElements}
-        />
+          contentElements={contentElements}/>
       </header>
 
       <main>

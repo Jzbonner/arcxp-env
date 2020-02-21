@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import StickyDesktopNav from './desktop/default';
 import StickyMobileNav from './mobile/default';
 import './default.scss';
-import logo from '../../../../resources/images/stickyNav-logo.svg';
-import tempMenu from '../../../../resources/images/tempMenu.jpg';
+import logo from '../../../../../resources/images/stickyNav-logo.svg';
+import tempMenu from '../../../../../resources/images/tempMenu.jpg';
 
 const StickyNav = ({
-  articleURL, headlines, comments = false, promoItems, contentElements = [],
+  articleURL, headlines, comments = false, promoItems, contentElements = [], visible, resolution,
 }) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
@@ -49,25 +49,25 @@ const StickyNav = ({
   const shareLinkEmail = `${mail}${articleHeadline}&body=${siteDomainURL}${articleURL}`;
   const loginLink = `${siteDomainURL}/login`;
 
-  const startingPoint = 200;
-  const desktopWidth = 1023;
-  let scroll;
-  const [currentWidth, setWidth] = useState(0);
-  const [currentScroll, setCurrentScroll] = useState(0);
-  const handleScroll = (e) => {
-    scroll = e.currentTarget.pageYOffset;
-    setCurrentScroll(scroll);
-  };
+  // const startingPoint = 200;
+  // const desktopWidth = 1023;
+  // let scroll;
+  // const [currentWidth, setWidth] = useState(0);
+  // const [currentScroll, setCurrentScroll] = useState(0);
+  // const handleScroll = (e) => {
+  //   scroll = e.currentTarget.pageYOffset;
+  //   setCurrentScroll(scroll);
+  // };
 
-  useEffect(() => {
-    setWidth(window.innerWidth);
-    window.addEventListener('scroll', handleScroll, true);
-    return () => {
-      window.removeEventListener('scroll', handleScroll, true);
-    };
-  }, [currentScroll]);
+  // useEffect(() => {
+  //   setWidth(window.innerWidth);
+  // window.addEventListener('scroll', handleScroll, true);
+  // return () => {
+  //   window.removeEventListener('scroll', handleScroll, true);
+  // };
+  // }, []);
 
-  if (currentScroll > startingPoint && currentWidth > desktopWidth) {
+  if (resolution > 1023 && visible) {
     return (
       <div className="c-stickyNav">
         <StickyDesktopNav
@@ -85,7 +85,7 @@ const StickyNav = ({
       </div>
     );
   }
-  if (currentScroll > startingPoint && currentWidth < desktopWidth) {
+  if (resolution <= 1023 && visible) {
     return (
       <div className="c-stickyNav">
         <img src={tempMenu} alt="temp-burger-menu" style={{ maxWidth: '50px' }}/>
@@ -104,6 +104,7 @@ const StickyNav = ({
 };
 
 StickyNav.propTypes = {
+  ref: PropTypes.any,
   articleURL: PropTypes.string,
   headlines: PropTypes.object,
   comments: PropTypes.object,
@@ -117,6 +118,8 @@ StickyNav.propTypes = {
   shareLinkEmail: PropTypes.string,
   loginLink: PropTypes.string,
   commentsEnabled: PropTypes.bool,
+  visible: PropTypes.bool,
+  resolution: PropTypes.number,
 };
 
 export default StickyNav;
