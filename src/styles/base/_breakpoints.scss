@@ -3,6 +3,7 @@ $breakpoint: (
   tablet: 768px,
   desktop-sm: 1024px,
   desktop-lg: 1280px,
+  desktop-nav: 1340px,
 ) !default;
 
 @mixin breakpoint($point) {
@@ -26,6 +27,14 @@ $breakpoint: (
   @if $point == desktop-lg {
     /* stylelint-disable-next-line */
     @media only screen and (min-width: map-get($breakpoint, desktop-lg)) {
+      @content;
+    }
+  }
+
+  /* Equal or greater than 1340px */
+  @if $point == desktop-nav {
+    /* stylelint-disable-next-line */
+    @media only screen and (min-width: map-get($breakpoint, desktop-nav)) {
       @content;
     }
   }

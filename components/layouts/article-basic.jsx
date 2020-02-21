@@ -13,13 +13,14 @@ import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
+import NavBar from '../_helper_components/global/navBar/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
-import Header from '../_helper_components/global/header/default';
 import Footer from '../_helper_components/global/footer/default';
 import ArcAd from '../features/ads/default';
 import { paragraphCounter } from './_helper_functions/Paragraph';
 import PX01 from '../_helper_components/global/ads/px01/default';
 import '../../src/styles/container/_article-basic.scss';
+import '../../src/styles/base/_utility.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
 
@@ -70,11 +71,9 @@ const StoryPageLayout = () => {
 
   return (
     <>
-      <header>
-        <BreakingNews />
-
-        <Header />
-
+      <BreakingNews />
+      <header className="c-nav">
+        <NavBar/>
         <StickyNav
           articleURL={articleURL}
           headlines={headlines}
