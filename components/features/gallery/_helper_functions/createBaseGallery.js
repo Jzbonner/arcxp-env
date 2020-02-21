@@ -28,7 +28,7 @@ const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile, 
 
       isNext = (i === 1);
       isPrev = (i === elements.length - 1);
-      const lastItemClass = i === elements.length - 1 ? ' last-item-padding-fix' : '';
+      const lastItemClass = i === elements.length - 1 ? ' last-item-height-fix' : '';
 
       const galleryItem = {
         url,

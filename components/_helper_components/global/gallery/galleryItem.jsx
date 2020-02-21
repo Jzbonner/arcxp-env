@@ -7,7 +7,9 @@ const GalleryItem = ({
   const {
     url, alt, index, id, by = [], captionObj, states, lastItemClass,
   } = data;
-  const { caption } = captionObj;
+  const { affiliation, caption } = captionObj;
+  console.log('captionOBJ', captionObj);
+
   const {
     isFocused, isStickyVisible, isCaptionOn, isMobile,
   } = states;
@@ -28,9 +30,12 @@ const GalleryItem = ({
       />
       {
         isStickyVisible
-          ? <div>
+          ? <div className='gallery-subtitle'>
             <div className="gallery-credit">
-              {by[0] && by[0].name ? by[0].name : null}
+              {
+              (affiliation && affiliation[0] && affiliation[0].name) || (by && by[0] && by[0].name)
+                ? (affiliation && affiliation[0] && affiliation[0].name) || `Credit: ${by && by[0] && by[0].name}` : null
+              }
             </div>
             {
               isCaptionOn

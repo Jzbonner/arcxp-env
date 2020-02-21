@@ -19,7 +19,11 @@
   padding: 1.25rem 1.88rem;
 }
 
-.last-item-padding-fix {
+.last-item-height-fix {
+  height: 100%;
+}
+
+.gallery-subtitle {
   height: 100%;
 }
 
@@ -384,10 +388,6 @@
         margin: 10px 20px 0;
 
         @include text-styles(.75rem, normal, "Gordita");
-
-        &:before {
-          content: "Photo: ";
-        }
       }
 
       .gallery-caption {
