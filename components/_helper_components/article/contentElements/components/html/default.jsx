@@ -31,7 +31,7 @@ const HTML = ({ src }) => {
   }, []);
 
   if (!content) return null;
-  return <div className="b-margin-bottom-d40-m20 html" dangerouslySetInnerHTML={{ __html: content }}></div>;
+  return <div className="b-margin-bottom-d40-m20" dangerouslySetInnerHTML={{ __html: content }}></div>;
 };
 
 HTML.propTypes = {
