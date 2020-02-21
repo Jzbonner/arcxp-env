@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const HTML = ({ src }) => {
   const { content } = src || {};
+  if (!content) return null;
 
   useEffect(() => {
     // powers external scripts and iframes
@@ -34,7 +35,6 @@ const HTML = ({ src }) => {
     }
   }, []);
 
-  if (!content) return null;
   return <div className="b-margin-bottom-d40-m20" dangerouslySetInnerHTML={{ __html: content }}></div>;
 };
 
