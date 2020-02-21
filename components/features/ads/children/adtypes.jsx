@@ -93,6 +93,7 @@ export const adSlots = {
     breakpoints: [
       [1024, 0], // desktop
     ],
+    isRightRailAd: true,
   },
   'RP01-Story-Tablet': {
     slotName: 'RP01',
@@ -121,6 +122,7 @@ export const adSlots = {
     breakpoints: [
       [1024, 0], // desktop
     ],
+    isRightRailAd: true,
   },
   'RP09-Story-Tablet': {
     slotName: 'RP09',
