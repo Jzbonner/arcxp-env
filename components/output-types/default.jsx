@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { fbPagesId, connext } from 'fusion:environment';
+import SiteMeta from '../_helper_components/global/siteMeta/default';
 import ConnextInit from '../_helper_components/global/connext/default.jsx';
 import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
 import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
 import NativoScripts from '../_helper_components/article/nativo/nativoScripts';
-import SiteMeta from '../_helper_components/global/siteMeta/default';
 
 const DefaultOutputType = (props) => {
   const {
