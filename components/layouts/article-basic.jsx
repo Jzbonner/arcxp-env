@@ -13,19 +13,21 @@ import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
+import NavBar from '../_helper_components/global/navBar/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
-import Header from '../_helper_components/global/header/default';
 import Footer from '../_helper_components/global/footer/default';
 import ArcAd from '../features/ads/default';
 import { paragraphCounter } from './_helper_functions/Paragraph';
 import PX01 from '../_helper_components/global/ads/px01/default';
 import '../../src/styles/container/_article-basic.scss';
+import '../../src/styles/base/_utility.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
 const MP02 = () => <ArcAd staticSlot={'MP02'} />;
+const MP03 = () => <ArcAd staticSlot={'MP03'} />;
 
 const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} />;
@@ -70,17 +72,13 @@ const StoryPageLayout = () => {
 
   return (
     <>
-      <header>
-        <BreakingNews />
-
-        <Header />
-
+      <BreakingNews />
+      <header className="c-nav">
+        <NavBar/>
         <StickyNav
           articleURL={articleURL}
           headlines={headlines}
           comments={comments}
-          promoItems={promoItems}
-          contentElements={filteredContentElements}
         />
       </header>
 
@@ -111,24 +109,31 @@ const StoryPageLayout = () => {
             <ArcAd staticSlot={'HP01'} />
             <ArcAd staticSlot={'MP01'} />
           </div>
-          <Section elements={filteredContentElements} stopIndex={1} />
+          <Section
+            elements={filteredContentElements}
+            stopIndex={1}
+            fullWidth={true}
+          />
           <Section
             elements={filteredContentElements}
             startIndex={1}
             stopIndex={3}
-            rightRailAd={RP01StoryDesktop}
+            rightRail={{ insertBeforeParagraph: 2, ad: RP01StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
           {maxNumberOfParagraphs <= 2 && PX01AdSlot()}
           {maxNumberOfParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />}
           <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
-          <Section elements={filteredContentElements} startIndex={start} stopIndex={stop} rightRailAd={RP09StoryDesktop} />
+          <Section
+            elements={filteredContentElements}
+            startIndex={start}
+            stopIndex={stop} />
           {maxNumberOfParagraphs >= 4 && <PX01 adSlot={PX01AdSlot} />}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
-            rightRailAd={RP09StoryDesktop}
-            insertedAds={[{ insertAfterParagraph: 7, adArray: [RP09StoryTablet] }]}
+            rightRail={{ insertBeforeParagraph: 8, ad: RP09StoryDesktop }}
+            insertedAds={[{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }]}
             insertAtSectionEnd={[BlogAuthorComponent, ConnextEndStory]}
           />
 
