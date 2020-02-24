@@ -229,7 +229,7 @@ const Gallery = (props) => {
     }
 
     return null;
-  }, 12);
+  }, 10);
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
@@ -308,34 +308,26 @@ const Gallery = (props) => {
     let galleryContentElements = null;
     let fetchedContentElements = null;
     let featuredContentElements = null;
-    console.log(leafContentElements);
+    console.log('leaf', leafContentElements);
     console.log('contentElements', contentElements);
-    console.log(fetchedGalleryData);
+    console.log('fetched', fetchedGalleryData);
     console.log('featued gallery', featuredGalleryData);
 
     if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements();
     console.log('relevantPROPEDeLEMENTS', relevantGalleryData);
 
-    // if (!relevantGalleryData && !fetchedGalleryData && !featuredGalleryData && !leafContentElements) return null;
-
+    // checks if other gallery sources exists, else do not render
     if (leafContentElements.length > 0) {
-      // relevantGalleryData = leafContentElements;
       galleryContentElements = leafContentElements;
     } else if (featuredGalleryData) {
       featuredContentElements = featuredGalleryData.content_elements;
     } else if (fetchedGalleryData) {
       fetchedContentElements = fetchedGalleryData.content_elements;
-    } else if (!contentElements) {
+    } else if (!relevantGalleryData) {
       return null;
     }
 
-    if (relevantGalleryData && !galleryContentElements) {
-      galleryContentElements = relevantGalleryData.content_elements;
-    }
-
-    //  if (fetchedGalleryData) fetchedContentElements = fetchedGalleryData.content_elements;
-
-    // if (featuredGalleryData) featuredContentElements = featuredGalleryData.content_elements;
+    if (relevantGalleryData && !galleryContentElements) galleryContentElements = relevantGalleryData.content_elements;
 
     if (relevantGalleryData && !headline && !galHeadline) {
       headline = relevantGalleryData.headlines && relevantGalleryData.headlines.basic
