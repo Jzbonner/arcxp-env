@@ -4,43 +4,18 @@ import getProperties from 'fusion:properties';
 import StickyDesktopNav from './desktop/default';
 import StickyMobileNav from './mobile/default';
 import './default.scss';
-import logo from '../../../../resources/images/stickyNav-logo.svg';
 import tempMenu from '../../../../resources/images/tempMenu.jpg';
+import logo from '../../../../resources/images/stickyNav-logo.svg';
+import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 
 const StickyNav = ({
-  articleURL, headlines, comments = false, promoItems, contentElements = [],
+  articleURL, headlines, comments = false,
 }) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
   } = getProperties();
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
-  const { url: featuredImage } = promoItems ? promoItems.basic : {};
-  const { url: videoThumbnail } = promoItems && promoItems.basic.promo_image ? promoItems.basic.promo_image : {};
-  const { url: galleryThumbnail } = promoItems && promoItems.basic.promo_items ? promoItems.basic.promo_items.basic : {};
-  const { url: inlineImage } = contentElements && contentElements[0] ? contentElements[0] : {};
-  const { url: inlineVideoThumbnail } = contentElements
-  && contentElements[0] && contentElements[0].promo_image ? contentElements[0].promo_image : {};
-  // secondary / inline video thumbnail
-  // Pinterest Image rendering logic
-  const renderImage = () => {
-    if (featuredImage) {
-      return featuredImage;
-    }
-    if (videoThumbnail) {
-      return videoThumbnail;
-    }
-    if (galleryThumbnail) {
-      return galleryThumbnail;
-    }
-    if (inlineImage) {
-      return inlineImage;
-    }
-    if (inlineVideoThumbnail) {
-      return inlineVideoThumbnail;
-    }
-    return logo;
-  };
 
   const shareLinkFacebook = `${facebookURL}${siteDomainURL}${articleURL}`;
   const shareLinkTwitter = `${twitterURL}${siteDomainURL}${articleURL}&text=${articleHeadline}`;
@@ -107,8 +82,6 @@ StickyNav.propTypes = {
   articleURL: PropTypes.string,
   headlines: PropTypes.object,
   comments: PropTypes.object,
-  promoItems: PropTypes.object,
-  contentElements: PropTypes.array,
   siteName: PropTypes.string,
   shareLinkFacebook: PropTypes.string,
   shareLinkTwitter: PropTypes.string,
