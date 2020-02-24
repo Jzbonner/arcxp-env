@@ -309,11 +309,12 @@ const Gallery = (props) => {
     let fetchedContentElements = null;
     let featuredContentElements = null;
     console.log(leafContentElements);
-    console.log(contentElements);
+    console.log('contentElements', contentElements);
     console.log(fetchedGalleryData);
     console.log('featued gallery', featuredGalleryData);
 
-    if (contentElements.length > 0 && !leafContentElements) relevantGalleryData = handlePropContentElements();
+    if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements();
+    console.log('relevantPROPEDeLEMENTS', relevantGalleryData);
 
     // if (!relevantGalleryData && !fetchedGalleryData && !featuredGalleryData && !leafContentElements) return null;
 
