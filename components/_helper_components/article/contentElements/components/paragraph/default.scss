@@ -1,7 +1,18 @@
-@import "./../../../../../../src/styles/base";
+@import "./../../../../../../src/styles/base/colors";
+@import "./../../../../../../src/styles/base/mixins";
+@import "./../../../../../../src/styles/base/breakpoints";
 
 .story-text {
   width: 100%;
+
+  a {
+    color: $blue-text;
+    padding-bottom: 1px;
+
+    &:hover {
+      border-bottom: 1px solid $blue-text;
+    }
+  }
 
   @include text-styles(1rem, 2.25, "Gordita");
 
