@@ -64,10 +64,8 @@ const Gallery = (props) => {
       path: galleryUrl,
     },
   });
-
   const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
-  console.log('gallery promo itmes', promoItems);
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic ? headlines.basic : null;
 
@@ -78,7 +76,7 @@ const Gallery = (props) => {
     const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
     if (galleryEl.current && focusElement) {
-      // fixes initializing translate bug
+      // fixes initializing translate bug...?
       if (debugFixEl.current && focusElement.offsetWidth === 0) {
         translateAmount = parseInt(galleryFullWidth, 10)
           / 2 - parseInt(debugFixEl.current.offsetWidth, 10)
@@ -308,13 +306,8 @@ const Gallery = (props) => {
     let galleryContentElements = null;
     let fetchedContentElements = null;
     let featuredContentElements = null;
-    console.log('leaf', leafContentElements);
-    console.log('contentElements', contentElements);
-    console.log('fetched', fetchedGalleryData);
-    console.log('featued gallery', featuredGalleryData);
 
     if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements();
-    console.log('relevantPROPEDeLEMENTS', relevantGalleryData);
 
     // checks if other gallery sources exists, else do not render
     if (leafContentElements.length > 0) {

@@ -60,8 +60,6 @@ const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile, 
       } else if (isNext) {
         functionToPass = next;
       }
-      // const lastItemClass = i === elements.length - 1 ? ' last-item-padding-fix' : null;
-      console.log(i, elements.length - 1, lastItemClass);
 
       return (
         <GalleryItem

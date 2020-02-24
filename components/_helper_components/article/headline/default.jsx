@@ -16,7 +16,6 @@ const Headline = ({
   // Uncomment to see how the headline component displays with a video promo type.
   // Used because I was getting errors when trying to add a video as a featured element.
   // promoData.type = 'video';
-  console.log('promoData', promoData);
 
   return (
     <div className={`article-headline-component b-margin-bottom-d30-m20 with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>

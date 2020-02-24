@@ -8,12 +8,11 @@ const GalleryItem = ({
     url, alt, index, id, by = [], captionObj, states, lastItemClass,
   } = data;
   const { affiliation, caption } = captionObj;
-  console.log('captionOBJ', captionObj);
 
   const {
     isFocused, isStickyVisible, isCaptionOn, isMobile,
   } = states;
-  console.log('lastItemCalss', lastItemClass);
+
   return (
     <div
       ref={refHook}
