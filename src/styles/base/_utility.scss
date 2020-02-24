@@ -76,24 +76,33 @@
 
 // Advertisement Text for arcads
 
-.arc_ad .arcad {
-  position: relative;
-  text-align: center;
-  display: none;
+.arc_ad {
 
-  &:not(:empty) {
-    display: block;
+  // for sticky (e.g. right rail) ads
 
-    &:before {
-      content: "Advertisement";
-      position: absolute;
-      color: #313132;
+  &.is-sticky {
+    @include position-sticky(85px);
+  }
 
-      @include text-styles(.75rem, 1, "Gordita");
+  .arcad {
+    position: relative;
+    text-align: center;
+    display: none;
 
-      font-weight: 500;
-      left: 50%;
-      transform: translate(-50%, -20px);
+    &:not(:empty) {
+      display: block;
+
+      &:before {
+        content: "Advertisement";
+        position: absolute;
+        color: #313132;
+
+        @include text-styles(.75rem, 1, "Gordita");
+
+        font-weight: 500;
+        left: 50%;
+        transform: translate(-50%, -20px);
+      }
     }
   }
 }

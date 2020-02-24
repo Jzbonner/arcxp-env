@@ -119,3 +119,39 @@
     }
   }
 }
+
+// applies sticky position to element(s), accepting a [top, right, bottom, left] position arg (which defaults to top: 0 if not otherwise specified).  There is extensive browser support except for IE (which we can gracefully degrade for): https://caniuse.com/#feat=css-sticky
+
+// Example calls:
+// for a desired TOP position of 10px, you would pass the following:
+// @include position-sticky(10px);
+
+// for a desired RIGHT position of 20px, you would pass the following:
+// @include position-sticky(null, 20px);
+
+// for a desired BOTTOM position of 30px, you would pass the following:
+// @include position-sticky(null, null, 30px);
+
+// with a desired LEFT position of 40px, you would pass the following:
+// @include position-sticky(null, null, null, 40px);
+
+@mixin position-sticky($top_position: 0, $right_position: null, $bottom_position: null, $left_position: null) {
+  @if $top_position {
+    top: $top_position;
+  }
+
+  @if $right_position {
+    right: $right_position;
+  }
+
+  @if $bottom_position {
+    bottom: $bottom_position;
+  }
+
+  @if $left_position {
+    left: $left_position;
+  }
+
+  -webkit-position: sticky;
+  position: sticky;
+}
