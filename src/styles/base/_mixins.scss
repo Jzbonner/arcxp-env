@@ -112,10 +112,17 @@
 
 @mixin arc-ad-spacing {
 
-  .arc_ad .arcad {
+  .arc_ad {
 
-    &:not(:empty) {
-      padding-top: 10px;
+    .arcad:not(:empty) {
+      padding-top: 20px;
+    }
+
+    &.c-rightRail {
+
+      .arcad {
+        padding-top: 0;
+      }
     }
   }
 }
