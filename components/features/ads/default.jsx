@@ -29,7 +29,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
     <AdSetup
       refresh={true}
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
-      className={`arc_ad | ${slotName} ${adConfig.isRightRailAd ? 'c-rightRail' : ''}`}
+      className={`arc_ad | ${slotName} ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
       dfpId={`${dfpid}/TEST_atlanta_np/ajc_web_default`}
       display={ adConfig.display || defaultAdSlot.display }
