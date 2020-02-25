@@ -123,12 +123,13 @@ export const adSlots = {
       [1024, 0], // desktop
     ],
     isRightRailAd: true,
+    isSticky: true,
   },
   'RP09-Story-Tablet': {
     slotName: 'RP09',
     dimensions: [
       [
-        [],
+        [0, 0],
       ], // desktop
       [
         [300, 600],
