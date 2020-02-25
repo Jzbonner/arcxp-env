@@ -12,7 +12,7 @@ import './default.scss';
 import './stickyNav/default.scss';
 
 const NavBar = ({
-  articleURL, headlines, comments, promoItems, contentElements,
+  articleURL, headlines, comments,
 }) => {
   let scroll;
   const [isSticky, setSticky] = useState(false);
@@ -130,8 +130,6 @@ const NavBar = ({
         articleURL={articleURL}
         headlines={headlines}
         comments={comments}
-        promoItems={promoItems}
-        contentElements={contentElements}
         visible={isSticky}
         resolution={currentWidth}
         />
@@ -146,8 +144,6 @@ NavBar.propTypes = {
   articleURL: PropTypes.string,
   headlines: PropTypes.object,
   comments: PropTypes.object,
-  promoItems: PropTypes.object,
-  contentElements: PropTypes.array,
 };
 
 export default NavBar;
