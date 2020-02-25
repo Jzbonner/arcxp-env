@@ -35,9 +35,9 @@ export default class ArcAdLib {
         bidding,
       }, (event) => {
         // callback (after each ad load) which will hide slots with an empty dfp response
-        if (window.location.search.indexOf('debugAds') > -1) {
+        if (!event.isEmpty) {
           const slotId = event.slot.getSlotElementId();
-          document.querySelector(`#${slotId}`).style.display = 'none';
+          document.querySelector(`#${slotId}`).style.display = 'block';
         }
       });
     }

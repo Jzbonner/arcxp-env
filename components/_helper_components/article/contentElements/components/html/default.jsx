@@ -7,15 +7,15 @@ const HTML = ({ src }) => {
 
   useEffect(() => {
     // powers external scripts and iframes
-    const externalScriptFilter = /(?<=src=")[^"]*/gi;
+    const externalScriptFilter = /src="[^"]*/g;
     const externalScripts = content.match(externalScriptFilter);
 
     if (Array.isArray(externalScripts)) {
       externalScripts.forEach((scriptSrc) => {
         const imgFilter = /(.svg|.png|.jpg|.jpeg|.gif)/;
-        if (!scriptSrc.search(imgFilter)) {
+        if (scriptSrc.search(imgFilter) === -1) {
           const script = document.createElement('script');
-          script.src = scriptSrc;
+          script.src = scriptSrc.slice(5);
           script.async = true;
           document.body.appendChild(script);
         }
@@ -23,13 +23,13 @@ const HTML = ({ src }) => {
     }
 
     // powers inline scripts
-    const internalScriptFilter = /(?<=<script>)([\s\S]*)(?=<\/script>)/gi;
+    const internalScriptFilter = /<script>([\s|\S]+?)(?=<\/script>)/g;
     const internalScripts = content.match(internalScriptFilter);
 
     if (Array.isArray(internalScripts)) {
       internalScripts.forEach((scriptSrc) => {
         const script = document.createElement('script');
-        script.innerHTML = scriptSrc;
+        script.innerHTML = scriptSrc.slice(8);
         document.body.appendChild(script);
       });
     }
