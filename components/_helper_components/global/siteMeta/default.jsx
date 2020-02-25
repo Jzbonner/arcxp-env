@@ -13,6 +13,7 @@ const SiteMeta = () => {
   const {
     headlines, description, canonical_url: canonicalURL, type,
   } = globalContent || {};
+
   const { siteName, homeURL } = getProperties();
   const homeAndSection = type === ('home' || 'section' || 'page');
 
