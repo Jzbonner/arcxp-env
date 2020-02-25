@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 const HTML = ({ src }) => {
-  const { content } = src || {};
+  const { content } = src || '';
   if (!content) return null;
 
   const [html, setHtml] = useState(content);
