@@ -52,7 +52,7 @@ const Footer = () => {
       <div className="logo-row">
         <div className="col">
           <a href={homeURL}>
-            <img className="logo" src={deployment(`${contextPath}${logo}`)} alt="logo" />
+            <img className="footer-logo" src={deployment(`${contextPath}${logo}`)} alt="logo" />
           </a>
         </div>
         <div className="col">
