@@ -5,7 +5,6 @@ import StickyDesktopNav from './desktop/default';
 import StickyMobileNav from './mobile/default';
 import './default.scss';
 import logo from '../../../../../resources/images/stickyNav-logo.svg';
-import tempMenu from '../../../../../resources/images/tempMenu.jpg';
 
 const StickyNav = ({
   articleURL, headlines, comments = false, promoItems, contentElements = [], visible, resolution,
@@ -49,27 +48,8 @@ const StickyNav = ({
   const shareLinkEmail = `${mail}${articleHeadline}&body=${siteDomainURL}${articleURL}`;
   const loginLink = `${siteDomainURL}/login`;
 
-  // const startingPoint = 200;
-  // const desktopWidth = 1023;
-  // let scroll;
-  // const [currentWidth, setWidth] = useState(0);
-  // const [currentScroll, setCurrentScroll] = useState(0);
-  // const handleScroll = (e) => {
-  //   scroll = e.currentTarget.pageYOffset;
-  //   setCurrentScroll(scroll);
-  // };
-
-  // useEffect(() => {
-  //   setWidth(window.innerWidth);
-  // window.addEventListener('scroll', handleScroll, true);
-  // return () => {
-  //   window.removeEventListener('scroll', handleScroll, true);
-  // };
-  // }, []);
-
   if (resolution > 1023 && visible) {
     return (
-      <div className="c-stickyNav">
         <StickyDesktopNav
           siteDomainURL={siteDomainURL}
           shareLinkFacebook={shareLinkFacebook}
@@ -82,13 +62,10 @@ const StickyNav = ({
           logo={logo}
           commentsEnabled={commentsEnabled}
         />
-      </div>
     );
   }
   if (resolution <= 1023 && visible) {
     return (
-      <div className="c-stickyNav">
-        <img src={tempMenu} alt="temp-burger-menu" style={{ maxWidth: '50px' }}/>
         <StickyMobileNav
           commentsEnabled={commentsEnabled}
           shareLinkFacebook={shareLinkFacebook}
@@ -97,14 +74,12 @@ const StickyNav = ({
           shareLinkReddit={shareLinkReddit}
           shareLinkEmail={shareLinkEmail}
         />
-      </div>
     );
   }
   return null;
 };
 
 StickyNav.propTypes = {
-  ref: PropTypes.any,
   articleURL: PropTypes.string,
   headlines: PropTypes.object,
   comments: PropTypes.object,

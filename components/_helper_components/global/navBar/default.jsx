@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import topNavFilter from '../../../../content/filters/top-nav';
@@ -9,42 +9,35 @@ import DesktopNav from './desktopNav/default';
 import StickyNav from './stickyNav/default';
 import '../../../../src/styles/base/_utility.scss';
 import './default.scss';
+import './stickyNav/default.scss';
 
 const NavBar = ({
   articleURL, headlines, comments, promoItems, contentElements,
 }) => {
   let scroll;
   const [isSticky, setSticky] = useState(false);
-  // const ref = useRef(null);
+  const ref = useRef(null);
   const startingPoint = 200;
   const desktopWidth = 1023;
   const [currentWidth, setWidth] = useState(0);
   const [currentScroll, setCurrentScroll] = useState(0);
+  // const stickyActive = isSticky ? 'c-stickyNav-active' : '';
   const handleScroll = (e) => {
     scroll = e.currentTarget.pageYOffset;
     setCurrentScroll(scroll);
-    // if (scroll > startingPoint) {
-    //   setSticky(true);
-    // }
-    // if (isSticky === true && scroll < startingPoint) {
-    //   console.log('scrolling back to regular nav')
-    //   setSticky(false);
-    // }
+    // setSticky(ref.current.getBoundingClientRect().bottom <= 0);
   };
 
-  // const handleScroll = () => {
-  //   setSticky(ref.current.getBoundingClientRect().top <= 0);
-  // };
+  // useEffect(() => {
+  //   setWidth(window.innerWidth);
+  // }, []);
 
   useEffect(() => {
     setWidth(window.innerWidth);
-  }, [currentWidth]);
-
-  useEffect(() => {
     window.addEventListener('scroll', handleScroll, true);
-    // return () => {
-    //   window.removeEventListener('scroll', handleScroll, true);
-    // };
+    return () => {
+      window.removeEventListener('scroll', handleScroll, true);
+    };
   }, []);
 
   useEffect(() => {
@@ -55,16 +48,6 @@ const NavBar = ({
       setSticky(false);
     }
   }, [currentScroll]);
-  // if (currentScroll > startingPoint) {
-  //   setSticky(true);
-  // }
-  // if (scroll > startingPoint) {
-  //   setSticky(true);
-  // }
-  // if (isSticky === true && scroll < startingPoint) {
-  //   console.log('scrolling back to regular nav');
-  //   setSticky(false);
-  // }
 
   const sections = useContent({
     source: 'site-api',
@@ -113,8 +96,9 @@ const NavBar = ({
 
   if (currentWidth > desktopWidth && !isSticky) {
     return (
-        <div className='c-headerNav'>
-          <div className='b-flexRow b-flexCenter'>
+      <>
+        <div className='c-headerNav' ref={ref}>
+          <div className='c-logo b-flexRow b-flexCenter'>
             <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
           </div>
             <DesktopNav sections={sectionLi}/>
@@ -122,9 +106,11 @@ const NavBar = ({
               <Subscribe/>
             </div>
         </div>
+      </>
     );
   }
-  if (currentWidth < desktopWidth && !isSticky) {
+
+  if (currentWidth <= desktopWidth && !isSticky) {
     return (
         <div className='c-headerNav'>
           <div className='b-flexRow b-flexCenter'>
@@ -136,9 +122,11 @@ const NavBar = ({
         </div>
     );
   }
+
   if (isSticky) {
     return (
-      <StickyNav
+      <div className='c-stickyNav' ref={ref}>
+        <StickyNav
         articleURL={articleURL}
         headlines={headlines}
         comments={comments}
@@ -147,8 +135,10 @@ const NavBar = ({
         visible={isSticky}
         resolution={currentWidth}
         />
+      </div>
     );
   }
+
   return null;
 };
 

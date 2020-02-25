@@ -2,13 +2,13 @@
 @import "../../../../src//styles/base/breakpoints";
 
 .c-headerNav {
-  display: none;
+  width: 90%;
+  margin: 0 auto;
 
   @include breakpoint(desktop-sm) {
     display: flex;
     flex-direction: column;
     width: 94%;
-    margin: 0 auto;
   }
 
   @include breakpoint(desktop-lg) {
@@ -17,25 +17,36 @@
   }
 
   nav {
-    @include breakpoint(desktop-sm) {
-      display: flex;
-      align-items: flex-end;
-      padding-bottom: 20px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 20px;
 
-      a {
-        color: #2e81b7;
-        text-decoration: none;
-      }
+    a {
+      color: #2e81b7;
+      text-decoration: none;
     }
   }
 }
 
+.c-logo {
+  @include breakpoint(mobile) {
+    padding-top: 18px 0;
+  }
+}
+
 .logo {
-  box-sizing: border-box;
-  height: 110px;
-  padding-top: 30px;
+  max-width: 320px;
+  max-height: 65px;
+  height: 100%;
   width: 100%;
-  max-height: 8vw;
+  box-sizing: border-box;
+
+  @include breakpoint(desktop-sm) {
+    height: 110px;
+    padding-top: 30px;
+    width: 100%;
+    max-height: 8vw;
+  }
 }
 
 .nav-row {
@@ -197,16 +208,24 @@
 }
 
 .sub {
-  height: 57px;
+  height: 88px;
   width: 100%;
   border-radius: 6px;
   background-image: linear-gradient(to top, #04befe, #4481eb);
+
+  @include breakpoint(desktop-sm) {
+    height: 57px;
+  }
 }
 
 .sub-text {
   color: #fff;
 
-  @include text-styles(1.25rem, 1, "Gordita");
+  @include text-styles(1rem, 1, "Gordita");
+
+  @include breakpoint(desktop-sm) {
+    @include text-styles(1.25rem, 1, "Gordita");
+  }
 }
 
 .sub-bold {

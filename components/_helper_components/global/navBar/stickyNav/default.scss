@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   border: none;
-
+  
   @include breakpoint(desktop-sm) {
     border-bottom: solid 1px #d0d0d0;
     max-height: 70px;
