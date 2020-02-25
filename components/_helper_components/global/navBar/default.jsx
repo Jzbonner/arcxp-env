@@ -30,11 +30,9 @@ const NavBar = ({
     if (topRef && topRef.current) {
       setHeight(topRef.current.getBoundingClientRect().bottom);
     }
-    console.log(stickyHeight);
   }, []);
 
   useEffect(() => {
-    // setWidth(window.innerWidth);
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -42,7 +40,6 @@ const NavBar = ({
   }, []);
 
   useEffect(() => {
-    console.log(currentScroll);
     if (topRef.current && currentScroll > stickyHeight) {
       setSticky(true);
     }
