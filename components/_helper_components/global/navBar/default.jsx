@@ -25,14 +25,12 @@ const NavBar = ({
     scroll = e.currentTarget.pageYOffset;
     setCurrentScroll(scroll);
   };
-  useEffect(() => {
-    setWidth(window.innerWidth);
-    if (topRef && topRef.current) {
-      setHeight(topRef.current.getBoundingClientRect().bottom);
-    }
-  }, []);
+  // useEffect(() => {
+  //   setWidth(window.innerWidth);
+  // }, []);
 
   useEffect(() => {
+    setWidth(window.innerWidth);
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -43,10 +41,16 @@ const NavBar = ({
     if (topRef.current && currentScroll > stickyHeight) {
       setSticky(true);
     }
-    if (isSticky === true && currentScroll < stickyHeight) {
-      setSticky(false);
-    }
+    // if (isSticky === true && currentScroll < stickyHeight) {
+    //   setSticky(false);
+    // }
   }, [currentScroll]);
+
+  useEffect(() => {
+    if (topRef && topRef.current) {
+      setHeight(topRef.current.getBoundingClientRect().bottom);
+    }
+  }, [topRef.current]);
 
   const sections = useContent({
     source: 'site-api',
@@ -97,8 +101,8 @@ const NavBar = ({
     return (
       <>
         <div className='c-headerNav'>
-          <div className='c-logo b-flexRow b-flexCenter' ref={topRef}>
-            <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
+          <div className='c-logo b-flexRow b-flexCenter'>
+            <Logo source={siteLogoImage} rootDirectory={rootDirectory} topRef={topRef}/>
           </div>
             <DesktopNav sections={sectionLi}/>
             <div className='sub b-flexRow b-flexCenter sub-text'>
