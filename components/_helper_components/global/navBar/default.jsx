@@ -8,6 +8,7 @@ import Subscribe from './subscribe/default';
 import DesktopNav from './desktopNav/default';
 import StickyNav from './stickyNav/default';
 import '../../../../src/styles/base/_utility.scss';
+import '../../../../src/styles/container/_article-basic.scss';
 import './default.scss';
 import './stickyNav/default.scss';
 
@@ -20,14 +21,12 @@ const NavBar = ({
   const [currentWidth, setWidth] = useState(0);
   const [currentScroll, setCurrentScroll] = useState(0);
   const topRef = useRef(null);
+  const bottomRef = useRef(null);
   const desktopWidth = 1023;
   const handleScroll = (e) => {
     scroll = e.currentTarget.pageYOffset;
     setCurrentScroll(scroll);
   };
-  // useEffect(() => {
-  //   setWidth(window.innerWidth);
-  // }, []);
 
   useEffect(() => {
     setWidth(window.innerWidth);
@@ -40,8 +39,9 @@ const NavBar = ({
   useEffect(() => {
     if (topRef.current && currentScroll > stickyHeight) {
       setSticky(true);
+      setCurrentScroll(currentScroll + 10);
     }
-    // if (isSticky === true && currentScroll < stickyHeight) {
+    // if (isSticky === true && currentScroll <= bottomRef.current.getBoundingClientRect().top) {
     //   setSticky(false);
     // }
   }, [currentScroll]);
@@ -99,22 +99,23 @@ const NavBar = ({
 
   if (currentWidth > desktopWidth && !isSticky) {
     return (
-      <>
+      <header className="c-nav">
         <div className='c-headerNav'>
           <div className='c-logo b-flexRow b-flexCenter'>
             <Logo source={siteLogoImage} rootDirectory={rootDirectory} topRef={topRef}/>
           </div>
-            <DesktopNav sections={sectionLi}/>
-            <div className='sub b-flexRow b-flexCenter sub-text'>
-              <Subscribe/>
-            </div>
+          <DesktopNav sections={sectionLi}/>
+          <div className='sub b-flexRow b-flexCenter sub-text'>
+            <Subscribe/>
+          </div>
         </div>
-      </>
+      </header>
     );
   }
 
   if (currentWidth <= desktopWidth && !isSticky) {
     return (
+      <header className="c-nav">
         <div className='c-headerNav'>
           <div className='b-flexRow b-flexCenter'>
             <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
@@ -123,24 +124,21 @@ const NavBar = ({
             <Subscribe/>
           </div>
         </div>
+      </header>
     );
   }
 
-  if (isSticky) {
-    return (
-      <div className='c-stickyNav'>
-        <StickyNav
-        articleURL={articleURL}
-        headlines={headlines}
-        comments={comments}
-        visible={isSticky}
-        resolution={currentWidth}
-        />
-      </div>
-    );
-  }
-
-  return null;
+  return (
+  <div className='c-stickyNav' ref={bottomRef}>
+    <StickyNav
+    articleURL={articleURL}
+    headlines={headlines}
+    comments={comments}
+    visible={isSticky}
+    resolution={currentWidth}
+    />
+  </div>
+  );
 };
 
 NavBar.propTypes = {

@@ -72,14 +72,11 @@ const StoryPageLayout = () => {
   return (
     <>
       <BreakingNews />
-      <header className="c-nav">
         <NavBar
           articleURL={articleURL}
           headlines={headlines}
           comments={comments}
         />
-      </header>
-
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className="c-header">
