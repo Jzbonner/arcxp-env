@@ -16,35 +16,37 @@ const NavBar = ({
 }) => {
   let scroll;
   const [isSticky, setSticky] = useState(false);
-  const ref = useRef(null);
-  const startingPoint = 200;
-  const desktopWidth = 1023;
+  const [stickyHeight, setHeight] = useState(0);
   const [currentWidth, setWidth] = useState(0);
   const [currentScroll, setCurrentScroll] = useState(0);
-  // const stickyActive = isSticky ? 'c-stickyNav-active' : '';
+  const topRef = useRef(null);
+  const desktopWidth = 1023;
   const handleScroll = (e) => {
     scroll = e.currentTarget.pageYOffset;
     setCurrentScroll(scroll);
-    // setSticky(ref.current.getBoundingClientRect().bottom <= 0);
   };
-
-  // useEffect(() => {
-  //   setWidth(window.innerWidth);
-  // }, []);
-
   useEffect(() => {
     setWidth(window.innerWidth);
-    window.addEventListener('scroll', handleScroll, true);
+    if (topRef && topRef.current) {
+      setHeight(topRef.current.getBoundingClientRect().bottom);
+    }
+    console.log(stickyHeight);
+  }, []);
+
+  useEffect(() => {
+    // setWidth(window.innerWidth);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll, true);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   useEffect(() => {
-    if (currentScroll > startingPoint) {
+    console.log(currentScroll);
+    if (topRef.current && currentScroll > stickyHeight) {
       setSticky(true);
     }
-    if (isSticky === true && currentScroll < startingPoint) {
+    if (isSticky === true && currentScroll < stickyHeight) {
       setSticky(false);
     }
   }, [currentScroll]);
@@ -97,8 +99,8 @@ const NavBar = ({
   if (currentWidth > desktopWidth && !isSticky) {
     return (
       <>
-        <div className='c-headerNav' ref={ref}>
-          <div className='c-logo b-flexRow b-flexCenter'>
+        <div className='c-headerNav'>
+          <div className='c-logo b-flexRow b-flexCenter' ref={topRef}>
             <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
           </div>
             <DesktopNav sections={sectionLi}/>
@@ -125,7 +127,7 @@ const NavBar = ({
 
   if (isSticky) {
     return (
-      <div className='c-stickyNav' ref={ref}>
+      <div className='c-stickyNav'>
         <StickyNav
         articleURL={articleURL}
         headlines={headlines}

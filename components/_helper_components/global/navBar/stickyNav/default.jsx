@@ -4,8 +4,8 @@ import getProperties from 'fusion:properties';
 import StickyDesktopNav from './desktop/default';
 import StickyMobileNav from './mobile/default';
 import './default.scss';
-import logo from '../../../../resources/images/stickyNav-logo.svg';
-import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
+import logo from '../../../../../resources/images/stickyNav-logo.svg';
+import renderImage from '../../../../layouts/_helper_functions/getFeaturedImage.js';
 
 const StickyNav = ({
   articleURL, headlines, comments = false, resolution, visible,
