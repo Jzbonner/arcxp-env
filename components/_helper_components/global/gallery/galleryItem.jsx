@@ -20,8 +20,8 @@ const GalleryItem = ({
       data-index={index}
       key={url}
       onClick={func}
-      // eslint-disable-next-line max-len
-      className={`${isStickyVisible ? `gallery-full-item ${isCaptionOn ? lastItemClass : ''}` : 'gallery-image'}${lastItemClass && isStickyVisible && !isCaptionOn ? 'last-item-height-fix-no-caption' : ''}
+      className={`${isStickyVisible ? `gallery-full-item ${isCaptionOn ? lastItemClass : ''}` : 'gallery-image'}
+      ${lastItemClass && isStickyVisible && !isCaptionOn ? 'last-item-height-fix-no-caption' : ''}
       ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}
       `}
       >
