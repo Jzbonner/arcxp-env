@@ -4,7 +4,7 @@ import getProperties from 'fusion:properties';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import StickyNav from '../_helper_components/article/stickyNav/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
-import Header from '../_helper_components/global/header/default';
+import NavBar from '../_helper_components/global/navBar/default';
 import Gallery from '../features/gallery/default';
 import Footer from '../_helper_components/global/footer/default';
 import '../../src/styles/container/_article-basic.scss';
@@ -37,10 +37,9 @@ const GalleryPageLayout = () => {
 
   return (
     <>
-      <header>
+      <header className="c-nav">
         <BreakingNews />
-
-        <Header />
+        <NavBar />
 
         <StickyNav
           articleURL={articleURL}
@@ -52,7 +51,7 @@ const GalleryPageLayout = () => {
       </header>
 
       <main>
-        <div className="c-header">
+        <div>
           <Headline
             headlines={headlines}
             basicItems={basicItems}
