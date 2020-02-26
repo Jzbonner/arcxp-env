@@ -5,7 +5,7 @@ import { paragraphCounter } from '../../../layouts/_helper_functions/Paragraph';
 
 const Nativo = ({ elements = [], displayIfAtLeastXParagraphs, controllerClass }) => {
   if (paragraphCounter(elements) >= displayIfAtLeastXParagraphs || controllerClass === 'story-nativo_placeholder--boap') {
-    return <div className={`c-nativo b-margin-bottom-d40-m20 ${controllerClass}`}></div>;
+    return <div className={`${controllerClass}`}></div>;
   }
   return null;
 };
