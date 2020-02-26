@@ -12,7 +12,7 @@ const List = (props) => {
 
   if (props.src.list_type === 'unordered') {
     return (
-      <div className="list b-margin-bottom-d40-m20">
+      <div className="list">
         <ul>
           {props.src.items.map((e) => {
             if (e.type === 'text') {
@@ -28,7 +28,7 @@ const List = (props) => {
   }
   if (listType === 'ordered') {
     return (
-      <div className="list b-margin-bottom-d40-m20">
+      <div className="list">
         <ol>
           {props.src.items.map((e) => {
             if (e.type === 'text') {
