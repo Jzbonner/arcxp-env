@@ -6,12 +6,20 @@ const DesktopCaption = (props) => {
   const { elementData } = data;
   const { affiliation = [], credit = [], caption } = elementData;
 
+  let affiliationCredit = affiliation[0] && affiliation[0].name ? affiliation[0].name : null;
+
+  console.log('affiliation', affiliationCredit);
+
+  if (affiliationCredit && !affiliationCredit.includes('Credit:')) {
+    affiliationCredit = `Credit: ${affiliationCredit}`;
+  }
+
   return (
     <div className="gallery-caption-container ">
-      {(affiliation[0] && affiliation[0].name) || (credit[0] && credit[0].name)
+      {affiliationCredit || (credit[0] && credit[0].name)
         ? <div className="gallery-credit ">
-          {(affiliation[0] && affiliation[0].name) || `Credit: ${credit[0] && credit[0].name}`}
-    </div> : null}
+          {affiliationCredit || `Credit: ${credit[0] && credit[0].name}`}
+        </div> : null}
       {caption && <div className="gallery-caption "><span>{caption}</span></div>}
     </div>
   );
