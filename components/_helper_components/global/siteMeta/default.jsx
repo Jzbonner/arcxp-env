@@ -22,6 +22,7 @@ const SiteMeta = () => {
       <link rel="apple-touch-icon" href={deployment(`${contextPath}/resources/images/favicon-apple-touch-icon.png`)} />
       <link rel="shortcut icon" href={deployment(`${contextPath}/resources/images/favicon.ico`)} />
       <link rel="canonical" href={`${type === 'home' ? homeURL : canonicalURL}`} />
+      <meta name="language" content="English" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={description.basic} />
       <meta name="twitter:image" content={renderImage()} />
