@@ -15,222 +15,226 @@
     color: #2e81b7;
     cursor: pointer;
   }
-}
 
-//unique styles for different parts of footer
+  //unique styles for different parts of footer
 
-.logo-row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  padding: 0 30px;
-  max-width: 1600px;
-
-  @include breakpoint(desktop-sm) {
-    flex-direction: row;
-    justify-content: center;
-    padding: 60px 30px;
-  }
-
-  .col {
+  .logo-row {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-
-    @include breakpoint(desktop-sm) {
-      width: 50%;
-    }
-
-    &:first-child {
-      @include breakpoint(desktop-sm) {
-        border-right: 1px solid #9b9b9b;
-        padding-right: 4rem;
-        justify-content: flex-end;
-      }
-    }
-
-    &:nth-child(2) {
-      @include breakpoint(desktop-sm) {
-        padding-left: 4rem;
-        justify-content: left;
-      }
-    }
-  }
-
-  .logo {
-    width: 165px;
-    margin: 2rem 0 1.3rem;
-
-    @include breakpoint(desktop-sm) {
-      width: 185px;
-      margin: 0;
-    }
-  }
-
-  .newsletter-signup {
-    @include text-styles(1.125rem, 1, "Gordita");
-
-    color: #545454;
-    margin-bottom: 1.6rem;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      width: 2.8rem;
-      cursor: pointer;
-      margin-top: 3px;
-    }
-
-    @include breakpoint(desktop-sm) {
-      @include text-styles(1.2rem, 1, "Gordita");
-
-      font-weight: 500;
-      margin: 0;
-
-      img {
-        width: 3rem;
-      }
-    }
-  }
-}
-
-.menu-row {
-  @include breakpoint(desktop-sm) {
-    display: flex;
-    border-bottom: 1px solid #9b9b9b;
-    padding: 0 70px 60px;
-    box-sizing: border-box;
-    max-width: 1600px;
-    flex-wrap: wrap;
     margin: 0 auto;
-    width: calc(100% - 60px);
-  }
-}
+    padding: 0 30px;
+    max-width: 1600px;
 
-.menu {
-  @include text-styles(1rem, 1, "Gordita");
-
-  font-weight: 500;
-  border-top: 1px solid #ccc;
-  color: #545454;
-  padding: 15px 0;
-
-  @include breakpoint(desktop-sm) {
-    border-top: none;
-    flex: 1;
-    padding: 0 30px 0 0;
-
-    &:last-child {
-      padding: 0;
-    }
-  }
-
-  &:first-child {
-    border-top: none;
-  }
-
-  &.is-visible-mobile {
-    padding-bottom: 0;
-
-    .menu-header .menu-arrow {
-      transform: scale(.9) translate(0, 1px);
+    @include breakpoint(desktop-sm) {
+      flex-direction: row;
+      justify-content: center;
+      padding: 60px 30px;
     }
 
-    .menu-body {
-      display: block;
-      margin-top: 15px;
-      padding-top: 15px;
-      border-top: 1px solid #ccc;
+    .col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
 
       @include breakpoint(desktop-sm) {
-        border: none;
+        width: 50%;
+      }
+
+      &:first-child {
+        @include breakpoint(desktop-sm) {
+          border-right: 1px solid #9b9b9b;
+          padding: 2rem 4rem 2rem 0;
+          justify-content: flex-end;
+        }
+      }
+
+      &:nth-child(2) {
+        @include breakpoint(desktop-sm) {
+          padding-left: 4rem;
+          justify-content: left;
+        }
       }
     }
-  }
 
-  .menu-header {
-    max-width: 1600px;
-    padding: 0 20px;
-    margin: 0 auto;
-
-    @include breakpoint(desktop-sm) {
-      padding: 0;
-    }
-
-    .menu-arrow {
-      float: right;
-      transform: rotate(180deg) scale(.9) translate(0, -1px);
+    .footer-logo {
+      width: 165px;
+      margin: 4rem 0 1.3rem;
 
       @include breakpoint(desktop-sm) {
-        display: none;
+        width: 185px;
+        margin: 0;
       }
     }
-  }
 
-  .menu-body {
-    display: none;
-    max-width: 1600px;
-    padding: 0 20px;
+    .newsletter-signup {
+      @include text-styles(1.125rem, 1, "Gordita");
 
-    @include breakpoint(desktop-sm) {
-      display: block;
-      margin-top: 1.25rem;
-      padding: 0;
-    }
+      color: #545454;
+      margin-bottom: 1.6rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-    .menu-body-links {
-      @include text-styles(.85rem, 1.25, "Gordita");
-
-      color: #2e81b7;
-      margin: 0 auto 1.25rem;
+      img {
+        width: 2.8rem;
+        cursor: pointer;
+        margin-top: 3px;
+      }
 
       @include breakpoint(desktop-sm) {
+        @include text-styles(1.2rem, 1, "Gordita");
 
-        &:last-child {
-          margin-bottom: 0;
+        font-weight: 500;
+        margin: 0;
+
+        img {
+          width: 3rem;
         }
       }
     }
   }
-}
 
-.menu.social-media {
-  text-align: center;
-
-  @include breakpoint(desktop-sm) {
-    text-align: left;
-    flex: .5;
-  }
-
-  .header-menu {
-    margin-top: 2.6rem;
-    display: inline-block;
-
+  .menu-row {
     @include breakpoint(desktop-sm) {
-      margin: 0;
+      display: flex;
+      border-bottom: 1px solid #9b9b9b;
+      padding: 0 70px 60px;
+      box-sizing: border-box;
+      max-width: 1600px;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      width: calc(100% - 60px);
     }
   }
 
-  .social-media-icons {
-    display: flex;
-    justify-content: center;
-    margin: 1.25rem auto 0;
+  .menu {
+    @include text-styles(1rem, 1, "Gordita");
+
+    font-weight: 500;
+    border-top: 1px solid #ccc;
+    color: #545454;
+    padding: 15px 0;
 
     @include breakpoint(desktop-sm) {
-      justify-content: left;
+      border-top: none;
+      flex: 1;
+      padding: 0 30px 0 0;
+
+      &:last-child {
+        padding: 0;
+      }
     }
 
-    img {
-      height: 30px;
-      margin: 0 1rem;
+    &:first-child {
+      border-top: none;
+    }
+
+    &.is-visible-mobile {
+      padding-bottom: 0;
+
+      .menu-header .menu-arrow {
+        transform: scale(.9) translate(0, 1px);
+      }
+
+      .menu-body {
+        display: block;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #ccc;
+        width: 100%;
+
+        @include breakpoint(desktop-sm) {
+          border: none;
+        }
+      }
+    }
+
+    .menu-header {
+      max-width: 1600px;
+      padding: 0 20px;
+      margin: 0 auto;
 
       @include breakpoint(desktop-sm) {
-        margin: 0 1.25rem 0 0;
+        padding: 0;
+      }
+
+      .menu-arrow {
+        float: right;
+        transform: rotate(180deg) scale(.9) translate(0, -1px);
+
+        @include breakpoint(desktop-sm) {
+          display: none;
+        }
+      }
+    }
+
+    .menu-body {
+      display: none;
+      max-width: 1600px;
+      padding: 0 20px;
+
+      @include breakpoint(desktop-sm) {
+        display: block;
+        margin-top: 1.25rem;
+        padding: 0;
+      }
+
+      .menu-body-links {
+        @include text-styles(.85rem, 1.25, "Gordita");
+
+        color: #2e81b7;
+        margin: 0 auto 1.25rem;
+
+        @include breakpoint(desktop-sm) {
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .menu.social-media {
+    text-align: center;
+
+    @include breakpoint(desktop-sm) {
+      text-align: left;
+      flex: .5;
+    }
+
+    .header-menu {
+      margin-top: 2.6rem;
+      display: none;
+
+      @include breakpoint(tablet) {
+        display: inline-block;
+      }
+
+      @include breakpoint(desktop-sm) {
+        margin: 0;
+      }
+    }
+
+    .social-media-icons {
+      display: flex;
+      justify-content: center;
+      margin: 1.25rem auto 0;
+
+      @include breakpoint(desktop-sm) {
+        justify-content: left;
+      }
+
+      img {
+        height: 30px;
+        margin: 0 1rem;
+
+        @include breakpoint(desktop-sm) {
+          margin: 0 1.25rem 0 0;
+        }
       }
     }
   }
