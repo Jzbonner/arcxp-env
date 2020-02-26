@@ -2,8 +2,10 @@
 module.exports = {
   RESIZER_SECRET_KEY: 'Fmkgru2rZ2uPZ5wXs7B2HbVDHS2SZuA7',
   taboolaID: {
-    boapPTD: '[1110597, 1099013 // ajc qa/prod ]',
-    moapPTD: '[1110596, 1099909 // ajc qa/prod ]',
+    boapPTD: `[1110597, 1099013 // ajc qa/prod
+    ]`,
+    moapPTD: `[1110596, 1099909 // ajc qa/prod
+    ]`,
   },
   fbPagesId: '13310147298', // ajc
   connext: {
