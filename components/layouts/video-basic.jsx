@@ -3,9 +3,8 @@ import React from 'react';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import Headline from '../_helper_components/article/headline/default.jsx';
+import NavBar from '../_helper_components/global/navBar/default';
 import StickyNav from '../_helper_components/article/stickyNav/default';
-import BreakingNews from '../_helper_components/global/breakingNews/default';
-import Header from '../_helper_components/global/header/default';
 import Footer from '../_helper_components/global/footer/default';
 import '../../src/styles/container/_article-basic.scss';
 
@@ -27,6 +26,7 @@ const VideoPageLayout = () => {
   } = globalContent || {};
 
   const basicItems = {
+    promo_items: promoItems,
     type,
     credits,
     description,
@@ -37,11 +37,8 @@ const VideoPageLayout = () => {
 
   return (
     <>
-      <header>
-        <BreakingNews />
-
-        <Header />
-
+      <header className="c-nav">
+        <NavBar/>
         <StickyNav
           articleURL={articleURL}
           headlines={headlines}

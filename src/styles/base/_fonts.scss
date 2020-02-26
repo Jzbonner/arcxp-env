@@ -38,6 +38,16 @@ $font: (
 }
 
 @font-face {
+  font-family: "Gordita-Medium";
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  src:
+    url("./../../../resources/fonts/gordita/gorditamedium-webfont.woff")
+    format("woff");
+}
+
+@font-face {
   font-family: "Gordita";
   font-weight: 800;
   font-stretch: normal;
@@ -63,12 +73,4 @@ $font: (
   src:
     url("./../../../resources/fonts/average/Average-Regular.ttf")
     format("truetype");
-}
-
-@font-face {
-  font-family: "Average";
-  font-weight: 400;
-  font-stretch: normal;
-  font-style: normal;
-  src: url("./../../../resources/fonts/average/Average-Regular.ttf") format("truetype");
 }

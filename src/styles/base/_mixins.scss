@@ -63,7 +63,7 @@
 }
 
 @mixin section() {
-  display: flex;
+  display: block;
   max-width: 1080px;
   padding: 0 30px;
   margin: 0 auto;
@@ -102,5 +102,20 @@
     display: block;
     font-size: $font-size;
     color: #fff;
+  }
+}
+
+// The pseudo :before element applied to all ad classes
+// causes spacing issues in the story content well.
+// This mixin can be used when ad spacing is required in content wells.
+// Examples: story page, home and section pages in mobile view
+
+@mixin arc-ad-spacing {
+
+  .arc_ad .arcad {
+
+    &:not(:empty) {
+      padding-top: 20px;
+    }
   }
 }

@@ -1,7 +1,7 @@
 @import "./../../../../src/styles/base";
 
 .c-nativo {
-  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
   padding: 60px 0;
   position: relative;
   // This margin-top is insurance in case the element above the nativo component don't have a utility margin class.
@@ -9,20 +9,83 @@
   // Because of margin collapse, it does not add to the distance between the elements.
   margin-top: 50px;
   display: none;
+
   &:not(:empty) {
     display: block;
   }
+
   &.story-nativo_placeholder--moap:before {
     display: none;
     padding: 0 30px;
     content: "Article continues below";
+
     @include text-styles(1rem, 2.25, "Gordita");
     @include text-styles-desktop-sm(1.125rem, 2, "Gordita");
+
     font-style: italic;
     position: absolute;
     top: -2rem;
     left: 0;
     right: 0;
+
     @include section();
+  }
+}
+
+article {
+
+  .ntv-moap,
+  .ntv-boap {
+    @media (max-width: 747px) {
+      max-width: initial;
+    }
+
+    .ntv-enter {
+      box-sizing: border-box;
+      padding-left: calc((100% - 340px) / 2);
+      padding-right: calc((100% - 340px) / 2);
+      margin-bottom: 1.13rem;
+
+      @include breakpoint(tablet) {
+        padding-right: calc((100% - 88.3%) / 2);
+        padding-left: calc((100% - 88.3%) / 2);
+      }
+
+      @include breakpoint(desktop-sm) {
+        padding-left: calc((100% - 83.9%) / 2);
+        padding-right: calc((100% - 83.9%) / 2);
+        margin-bottom: 2.5rem;
+      }
+
+      @include breakpoint(desktop-lg) {
+        padding-left: calc(((100% - 60.7%) / 2));
+        padding-right: calc(((100% - 60.7%) / 2));
+      }
+
+      /*
+  1780px comes from 1080px / .607 (60.7%)
+  1780px is the screen width at which 60.7% of the screen width becomes more than 1080px
+  Since 1080px is the max width of the contentElements, to keep the content of the Nativo element within
+  this boundary, our padding calculations changes at 1780px.
+  */
+
+      @media (min-width: 1780px) {
+        padding-left: calc(((100% - 1080px) / 2));
+        padding-right: calc(((100% - 1080px) / 2));
+      }
+
+      .ntv-disclaimer {
+        @include text-styles(.625rem, 1.25, "Gordita");
+
+        display: inline-flex;
+        margin-top: 7px;
+      }
+
+      .ntv-byline {
+        box-sizing: border-box;
+
+        @include text-styles(1rem, 1.25, "Gordita");
+      }
+    }
   }
 }

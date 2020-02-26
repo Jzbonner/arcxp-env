@@ -3,51 +3,66 @@
 @import "../../../../src/styles/base/mixins";
 
 //default image styles. Default scenario is assumed to be thumbnail in main content
+
 .c-video-component {
-    flex: 1 0 100%;
-    position: relative;
+  flex: 1 0 100%;
+  position: relative;
 
-    @include breakpoint(tablet) {
-        flex: 1 0 66%;
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  @include breakpoint(tablet) {
+    flex: 1 0 66%;
+  }
+
+  .c-caption {
+    top: 4.875rem;
+    -webkit-tap-highlight-color: transparent;
+
+    .photo-caption-btn {
+      top: -1.5em;
+
+      @include breakpoint(desktop-sm) {
+        top: 1em;
+      }
     }
-
-    .c-caption {
-        top: 4.875rem;
-        -webkit-tap-highlight-color: transparent;
-
-        .photo-caption-btn {
-            top: -1.5em;
-            &:focus {
-                outline: none !important;
-                box-shadow: none !important;
-            }
-            @include breakpoint(desktop-sm) {
-                top: 1em;
-            }
-        }
-    }
+  }
 }
 
 .video-component {
-    position: relative;
+  position: relative;
 
-    video {
-        width: 100%;
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  video {
+    width: 100%;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
     }
+  }
 }
 
 .video-credit-text {
-    text-align: right;
-    @include text-styles(0.75rem, 1, "Gordita");
-    display: none;
-    position: absolute;
-    right: 0;
+  text-align: right;
 
-    @include breakpoint(desktop-sm) {
-        display: block;
-    }
+  @include text-styles(.75rem, 1, "Gordita");
 
-    &.is-inline {
-        display: block;
-    }
+  display: none;
+  position: absolute;
+  right: 0;
+
+  @include breakpoint(desktop-sm) {
+    display: block;
+  }
+
+  &.is-inline {
+    display: block;
+  }
 }

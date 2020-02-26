@@ -3,32 +3,40 @@
 @import "../../../../src/styles/base/mixins";
 
 //default image styles. Default scenario is assumed to be thumbnail in main content
+
 .c-image-component {
   flex: 1 0 100%;
+
   @include breakpoint(tablet) {
     flex: 1 0 66%;
   }
 
   .image-component-image {
     position: relative;
+
     img {
       width: 100%;
     }
   }
+
   .photo-credit-text {
     text-align: right;
-    @include text-styles(0.75rem, 1, "Gordita");
+
+    @include text-styles(.75rem, 1, "Gordita");
   }
 }
 
 ///////////////
 //styles for when images are on other areas besides main content. For example, the headline.
 ///////////////
+
 .article-headline-component {
+
   .photo-credit-text {
     display: none;
     position: absolute;
     right: 0;
+
     @include breakpoint(desktop-sm) {
       display: block;
     }

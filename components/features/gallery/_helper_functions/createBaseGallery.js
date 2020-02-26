@@ -22,7 +22,7 @@ const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile, 
       const {
         url, copyright, caption, alt, credits, width,
       } = element || {};
-      const { by } = credits || {};
+      const { affiliation, by } = credits || {};
 
       if (currentIndex === i) isFocused = true;
 
@@ -37,6 +37,7 @@ const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile, 
         index: i,
         id: `gallery-item-${i}`,
         captionObj: {
+          affiliation,
           copyright,
           caption,
           credit: by,

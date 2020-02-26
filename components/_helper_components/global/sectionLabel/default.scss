@@ -3,10 +3,11 @@
 @import "../../../../src/styles/base/mixins";
 
 .section-label {
-  @include text-styles(0.75em, 1.5, "Gordita");
+  @include text-styles(.75em, 1.5, "Gordita");
+
   font-weight: 500;
   text-transform: uppercase;
-  color: #000000;
+  color: #000;
   letter-spacing: normal;
   margin-right: 6px;
 

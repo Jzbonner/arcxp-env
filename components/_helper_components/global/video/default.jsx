@@ -12,18 +12,20 @@ const Video = ({
   const { basic: videoCaption } = src.description ? src.description : {};
   const { url: videoPlayer } = src.streams && src.streams[0] ? src.streams[0] : {};
   const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
-
+  const { url: inlineVideoThumb } = src && src.promo_items ? src.promo_items.basic : {};
   const screenSize = checkWindowSize();
 
-  let mainCredit = {};
+  let mainCredit;
   if (credits) {
-    mainCredit = credits.affiliation && credits.affiliation[0].name ? credits.affiliation[0].name : '';
+    mainCredit = credits.affiliation
+    && credits.affiliation[0]
+    && credits.affiliation[0].name ? credits.affiliation[0].name : null;
   }
   let videoMarginBottom;
   if (isInlineVideo) {
     videoMarginBottom = 'b-margin-bottom-d40-m20';
   }
-  const giveCredit = mainCredit.length > 1 ? `Credit: ${mainCredit}` : '';
+  const giveCredit = mainCredit ? `Credit: ${mainCredit}` : null;
 
   const smartChecker = () => {
     if (
@@ -44,12 +46,12 @@ const Video = ({
   return (
     <div className={`c-video-component ${videoMarginBottom}`}>
       <div className="video-component">
-        <video controls autoPlay={startPlaying} muted={muteON}>
+        <video controls playsinline="true" poster={inlineVideoThumb} autoPlay={startPlaying} muted={muteON}>
           <source src={videoPlayer} type="video/mp4" />
         </video>
       </div>
-      {smartChecker()}
       <p className={`video-credit-text ${isInlineVideo ? 'is-inline' : null}`}>{giveCredit}</p>
+      {smartChecker()}
     </div>
   );
 };
