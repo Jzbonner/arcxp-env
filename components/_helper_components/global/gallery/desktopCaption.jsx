@@ -8,11 +8,7 @@ const DesktopCaption = (props) => {
 
   let affiliationCredit = affiliation[0] && affiliation[0].name ? affiliation[0].name : null;
 
-  console.log('affiliation', affiliationCredit);
-
-  if (affiliationCredit && !affiliationCredit.includes('Credit:')) {
-    affiliationCredit = `Credit: ${affiliationCredit}`;
-  }
+  if (affiliationCredit && !affiliationCredit.includes('Credit:')) affiliationCredit = `Credit: ${affiliationCredit}`;
 
   return (
     <div className="gallery-caption-container ">
