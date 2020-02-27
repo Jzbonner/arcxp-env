@@ -63,8 +63,7 @@ const StoryPageLayout = () => {
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
   const filteredContentElements = filterContentElements({ contentElements });
-
-  const maxNumberOfParagraphs = paragraphCounter(contentElements);
+  const maxNumberOfParagraphs = paragraphCounter(filteredContentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
 
   const ConnextEndStory = () => <ConnextEndOfStory />;
