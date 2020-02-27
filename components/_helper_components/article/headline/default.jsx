@@ -27,7 +27,7 @@ const Headline = ({
       {promoData.type === 'image' && (
         <Image width={1066} height={600} isLeadImage src={basicItems} maxTabletViewWidth={maxTabletViewWidth} />
       )}
-      {promoData.type === 'gallery' && <Gallery promoItems={promoData} />}
+      {promoData.type === 'gallery' && promoData.content_elements && <Gallery promoItems={promoData} />}
       {promoData.type === 'video' && (
         <Video isLeadVideo src={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules} maxTabletViewWidth={maxTabletViewWidth} />
       )}

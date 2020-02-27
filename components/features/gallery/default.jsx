@@ -14,7 +14,9 @@ import './default.scss';
 
 
 const Gallery = (props) => {
-  const { contentElements = [], promoItems = {}, customFields = {} } = props;
+  const {
+    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {},
+  } = props;
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
   const [mobileElementData, setMobileElementData] = useState(null);
@@ -62,7 +64,6 @@ const Gallery = (props) => {
       path: galleryUrl,
     },
   });
-
   const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
@@ -75,7 +76,7 @@ const Gallery = (props) => {
     const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
     if (galleryEl.current && focusElement) {
-      // fixes initializing translate bug
+      // fixes initializing translate bug...?
       if (debugFixEl.current && focusElement.offsetWidth === 0) {
         translateAmount = parseInt(galleryFullWidth, 10)
           / 2 - parseInt(debugFixEl.current.offsetWidth, 10)
@@ -226,7 +227,7 @@ const Gallery = (props) => {
     }
 
     return null;
-  }, 12);
+  }, 10);
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
@@ -258,11 +259,8 @@ const Gallery = (props) => {
   const handlePropContentElements = () => {
     let relevantData = null;
     contentElements.forEach((element) => {
-      if (element.type === 'gallery') {
-        relevantData = element;
-      }
+      if (element.type === 'gallery') relevantData = element;
     });
-
     return relevantData;
   };
 
@@ -301,28 +299,35 @@ const Gallery = (props) => {
   }, [isMobile]);
 
   // initializing the gallery w/ either propped or fetched content elements
-
-  if (isMobile !== 'NOT INIT' && ((contentElements || fetchedGalleryData || featuredGalleryData)
+  // NOTE: leafContentElements = Gallery-page-only propped contentElements array
+  if (isMobile !== 'NOT INIT' && ((contentElements || leafContentElements || fetchedGalleryData || featuredGalleryData)
     && (currentAction === actions.RESIZE || (!elementData && !mobileElementData)))) {
     let relevantGalleryData = null;
     let galleryContentElements = null;
     let fetchedContentElements = null;
     let featuredContentElements = null;
 
-    if (contentElements) relevantGalleryData = handlePropContentElements();
+    if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements();
 
-    if (!relevantGalleryData && !fetchedGalleryData && !featuredGalleryData) return null;
+    // checks if other gallery sources exists, else do not render
+    if (leafContentElements.length > 0) {
+      galleryContentElements = leafContentElements;
+    } else if (featuredGalleryData) {
+      featuredContentElements = featuredGalleryData.content_elements;
+    } else if (fetchedGalleryData) {
+      fetchedContentElements = fetchedGalleryData.content_elements;
+    } else if (!relevantGalleryData) {
+      return null;
+    }
 
-    if (fetchedGalleryData) fetchedContentElements = fetchedGalleryData.content_elements;
+    if (relevantGalleryData && !galleryContentElements) galleryContentElements = relevantGalleryData.content_elements;
 
-    if (relevantGalleryData) galleryContentElements = relevantGalleryData.content_elements;
-
-    if (featuredGalleryData) featuredContentElements = featuredGalleryData.content_elements;
-
-    if (!headline && !galHeadline) headline = relevantGalleryData.headlines.basic ? setHeadline(relevantGalleryData.headlines.basic) : null;
+    if (relevantGalleryData && !headline && !galHeadline) {
+      headline = relevantGalleryData.headlines && relevantGalleryData.headlines.basic
+        ? setHeadline(relevantGalleryData.headlines.basic) : null;
+    }
 
     const baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
-
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
     }, debugFixEl, isMobile, {
@@ -391,7 +396,7 @@ const Gallery = (props) => {
       }
       <div
         onClick={handleStickyOpen}
-        className={`gallery-caption-container ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
+        className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
         <div className="gallery-overlay hidden-large">
           {
             isMobile ? <OverlayMosiac data={mobileElemData} /> : null
@@ -428,6 +433,7 @@ const Gallery = (props) => {
 
 Gallery.propTypes = {
   contentElements: PropTypes.array,
+  leafContentElements: PropTypes.array,
   promoItems: PropTypes.object,
   customFields: PropTypes.shape({
     galleryUrl: PropTypes.string.tag({
