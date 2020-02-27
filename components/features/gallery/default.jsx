@@ -396,7 +396,7 @@ const Gallery = (props) => {
       }
       <div
         onClick={handleStickyOpen}
-        className={`gallery-caption-container ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
+        className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
         <div className="gallery-overlay hidden-large">
           {
             isMobile ? <OverlayMosiac data={mobileElemData} /> : null

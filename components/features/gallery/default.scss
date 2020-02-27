@@ -417,20 +417,26 @@
     height: 480px;
   }
 
+  .gallery-caption-icons-box {
+    position: relative;
+    top: auto;
+    bottom: 0;
+    box-sizing: border-box;
+    height: auto;
+    min-width: 1000px;
+    max-width: 58vw;
+    margin: 2.18rem auto .5rem;
+  }
+
   .gallery-caption-container {
     position: relative;
     top: auto;
     bottom: 0;
     box-sizing: border-box;
     height: auto;
-    min-height: 75px;
     min-width: 1000px;
     max-width: 58vw;
-    margin: 35px auto 5px;
-
-    &:empty {
-      display: none;
-    }
+    margin: 1.25rem auto 6rem;
 
     .gallery-caption {
       font-size: 1.25rem;
