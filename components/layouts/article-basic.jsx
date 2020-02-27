@@ -68,6 +68,7 @@ const StoryPageLayout = () => {
 
   const ConnextEndStory = () => <ConnextEndOfStory />;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} />;
+  const interscrollerPlaceholder = () => <div className='story-interscroller__placeholder full-width c-clear-both'></div>;
 
   return (
     <>
@@ -125,7 +126,7 @@ const StoryPageLayout = () => {
             rightRail={{ insertBeforeParagraph: 2, ad: RP01StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
-        {maxNumberOfParagraphs === 3 && <div className='story-interscroller__placeholder full-width c-clear-both' ></div>}
+          {maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
           <Nativo
             elements={filteredContentElements}
             displayIfAtLeastXParagraphs={4}
@@ -135,7 +136,7 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             startIndex={start}
             stopIndex={stop} />
-          {maxNumberOfParagraphs >= 4 && <div className='story-interscroller__placeholder full-width c-clear-both' ></div>}
+          {maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
