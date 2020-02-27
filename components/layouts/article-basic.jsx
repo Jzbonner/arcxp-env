@@ -2,6 +2,7 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import GlobalAdSlots from '../_helper_components/global/ads/default';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
@@ -18,7 +19,6 @@ import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Footer from '../_helper_components/global/footer/default';
 import ArcAd from '../features/ads/default';
 import { paragraphCounter } from './_helper_functions/Paragraph';
-import PX01 from '../_helper_components/global/ads/px01/default';
 import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
@@ -32,7 +32,6 @@ const MP03 = () => <ArcAd staticSlot={'MP03'} />;
 const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} />;
 const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} />;
-const PX01AdSlot = () => <ArcAd staticSlot={'PX01'} />;
 
 const start = 3;
 
@@ -72,6 +71,7 @@ const StoryPageLayout = () => {
 
   return (
     <>
+      <GlobalAdSlots />
       <BreakingNews />
       <header className="c-nav">
         <NavBar/>
@@ -125,18 +125,17 @@ const StoryPageLayout = () => {
             rightRail={{ insertBeforeParagraph: 2, ad: RP01StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
-          {maxNumberOfParagraphs <= 2 && PX01AdSlot()}
-          {maxNumberOfParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />}
+        {maxNumberOfParagraphs === 3 && <div className='story-interscroller__placeholder full-width c-clear-both' ></div>}
           <Nativo
             elements={filteredContentElements}
             displayIfAtLeastXParagraphs={4}
-            controllerClass="story-nativo_placeholder--moap b-clear-both"
+            controllerClass="story-nativo_placeholder--moap"
           />
           <Section
             elements={filteredContentElements}
             startIndex={start}
             stopIndex={stop} />
-          {maxNumberOfParagraphs >= 4 && <PX01 adSlot={PX01AdSlot} />}
+          {maxNumberOfParagraphs >= 4 && <div className='story-interscroller__placeholder full-width c-clear-both' ></div>}
           <Section
             elements={filteredContentElements}
             startIndex={stop}

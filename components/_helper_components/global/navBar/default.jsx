@@ -22,6 +22,10 @@ const NavBar = () => {
     _id: rootDirectory,
   } = sections || {};
 
+  if (!children) {
+    return null;
+  }
+
   const verticalBarIndex = children.length - 2;
 
   const sectionLi = children.map((section) => {

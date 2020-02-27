@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import GlobalAdSlots from '../_helper_components/global/ads/default';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import StickyNav from '../_helper_components/article/stickyNav/default';
 import NavBar from '../_helper_components/global/navBar/default';
@@ -36,6 +37,7 @@ const GalleryPageLayout = () => {
 
   return (
     <>
+      <GlobalAdSlots />
       <header className="c-nav">
         <NavBar />
 
