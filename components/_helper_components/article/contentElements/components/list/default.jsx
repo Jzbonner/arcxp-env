@@ -6,20 +6,20 @@ import SubList from '../list/default';
 import './styles.scss';
 
 const List = (props) => {
-  const { src = {} } = props;
+  const { src = {}, childList = false } = props;
   const { items = [], list_type: listType } = src;
   if (!items.length) return null;
 
   if (props.src.list_type === 'unordered') {
     return (
-      <div className="list">
+      <div className={`list ${childList ? null : 'b-margin-bottom-d40-m20'}`}>
         <ul>
           {props.src.items.map((e) => {
             if (e.type === 'text') {
               return <li>{e.content}</li>;
             }
             // eslint-disable-next-line react/jsx-key
-            return <SubList src={e} />;
+            return <SubList src={e} childList={true} />;
           })}
         </ul>
       </div>
@@ -28,14 +28,14 @@ const List = (props) => {
   }
   if (listType === 'ordered') {
     return (
-      <div className="list">
+      <div className={`list ${childList ? null : 'b-margin-bottom-d40-m20'}`}>
         <ol>
           {props.src.items.map((e) => {
             if (e.type === 'text') {
               return <li>{e.content}</li>;
             }
             // eslint-disable-next-line react/jsx-key
-            return <SubList src={e} />;
+            return <SubList src={e} childList={true} />;
           })}
         </ol>
       </div>
@@ -49,6 +49,7 @@ List.propTypes = {
   listType: PropTypes.string,
   items: PropTypes.array,
   src: PropTypes.object,
+  childList: PropTypes.bool,
 };
 
 export default List;
