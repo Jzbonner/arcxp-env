@@ -94,7 +94,11 @@ const StoryPageLayout = () => {
           </div>
           <div className="b-margin-bottom-d15-m10 c-label-wrapper b-pageContainer">
             <SectionLabel label={label} taxonomy={taxonomy} />
-            <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
+            <TimeStamp
+              firstPublishDate={firstPublishDate}
+              displayDate={displayDate}
+              isHideTimestampTrue={isHideTimestampTrue}
+            />
           </div>
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
@@ -123,7 +127,11 @@ const StoryPageLayout = () => {
           />
           {maxNumberOfParagraphs <= 2 && PX01AdSlot()}
           {maxNumberOfParagraphs === 3 && <PX01 adSlot={PX01AdSlot} />}
-          <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
+          <Nativo
+            elements={filteredContentElements}
+            displayIfAtLeastXParagraphs={4}
+            controllerClass="story-nativo_placeholder--moap b-clear-both"
+          />
           <Section
             elements={filteredContentElements}
             startIndex={start}
@@ -137,7 +145,10 @@ const StoryPageLayout = () => {
             insertAtSectionEnd={[BlogAuthorComponent, ConnextEndStory]}
           />
 
-          <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />
+          <Nativo
+            elements={filteredContentElements}
+            controllerClass="story-nativo_placeholder--boap"
+          />
           <div className="c-taboola">
             <TaboolaFeed type={type} />
           </div>

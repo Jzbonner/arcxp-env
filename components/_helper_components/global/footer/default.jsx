@@ -48,7 +48,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="c-footer">
+    <footer className="c-footer b-clear-both">
       <div className="logo-row">
         <div className="col">
           <a href={homeURL}>
