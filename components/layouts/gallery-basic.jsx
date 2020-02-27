@@ -3,7 +3,6 @@ import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import StickyNav from '../_helper_components/article/stickyNav/default';
-import BreakingNews from '../_helper_components/global/breakingNews/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import Gallery from '../features/gallery/default';
 import Footer from '../_helper_components/global/footer/default';
@@ -38,7 +37,6 @@ const GalleryPageLayout = () => {
   return (
     <>
       <header className="c-nav">
-        <BreakingNews />
         <NavBar />
 
         <StickyNav
