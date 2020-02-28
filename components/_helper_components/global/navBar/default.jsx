@@ -96,7 +96,7 @@ const NavBar = () => {
     return (
       <header className="c-nav">
         <div className='c-headerNav'>
-          <div className='c-logo b-flexRow b-flexCenter'>
+          <div className='b-flexRow b-flexCenter'>
             <Logo source={siteLogoImage} rootDirectory={rootDirectory} topRef={topRef}/>
           </div>
           <DesktopNav sections={sectionLi}/>
@@ -108,14 +108,18 @@ const NavBar = () => {
     );
   }
 
-  if (currentWidth <= desktopWidth && !isSticky) {
+  if (currentWidth <= desktopWidth) {
     return (
       <header className="c-nav">
         <div className='c-headerNav'>
-          <div className='b-flexRow b-flexCenter c-logo'>
+          <div className='b-flexRow b-flexCenter nav-logo'>
+            <div className='nav-menu-toggle'>
+              <div className='nav-flyout-button'>
+              </div>
+            </div>
             <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
+            <Login/>
           </div>
-          <Login/>
           <div className='sub b-flexCenter b-flexRow sub-text'>
             <Subscribe/>
           </div>

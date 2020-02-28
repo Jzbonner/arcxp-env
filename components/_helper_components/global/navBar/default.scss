@@ -27,23 +27,24 @@
     }
   }
 
-  .c-logo {
-    @include breakpoint(mobile) {
-      padding-top: 18px 0;
-    }
+  .nav-logo {
+    padding: 18px 0;
+    flex-direction: row;
+    position: relative;
   }
   
   .logo {
     max-width: 320px;
     max-height: 65px;
     height: 100%;
-    width: 100%;
     box-sizing: border-box;
-  
+    width: 100%;
+    padding-left: 30px;
+
     @include breakpoint(desktop-sm) {
+      padding-left: 0;
       height: 110px;
       padding-top: 30px;
-      width: 100%;
       max-height: 8vw;
     }
   }
@@ -180,15 +181,15 @@
   
   .nav-login {
     display: flex;
-    min-width: 100px;
-    padding-left: 15px;
-  
+
     img {
       cursor: pointer;
     }
   
     @include breakpoint(desktop-nav) {
+      padding-left: 15px;
       padding-top: 2px;
+      min-width: 100px;
     }
   }
   
@@ -196,12 +197,17 @@
     font-weight: 800;
     padding-left: 6px;
     cursor: pointer;
+    display: none;
   
     @include breakpoint(desktop-sm) {
+      display: flex;
+
       @include text-styles(.875rem, 1, "Gordita");
     }
   
     @include breakpoint(desktop-nav) {
+      display: flex;
+      
       @include text-styles(1.125rem, 1, "Gordita");
     }
   }
@@ -273,6 +279,52 @@
     display: flex;
     align-items: center;
     visibility: hidden;
+  }
+  
+  .nav-menu-toggle {
+    z-index: 10;
+    width: 30px;
+    height: 32px;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+  }
+
+  .nav-flyout-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 3px;
+    border-radius: 10px;
+    background: #000;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -400%;
+      right: 0;
+      width: 100%;
+      height: 3px;
+      background: #000;
+      border-radius: inherit;
+      transition: all .2s;
+      transform: rotate(0);
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      right: 0;
+      width: 100%;
+      height: 3px;
+      background: #000;
+      border-radius: inherit;
+      transition: all .2s;
+      transform: rotate(0);
+      top: auto;
+      bottom: -400%;
+    }
   }
 
   .flyout-item {
