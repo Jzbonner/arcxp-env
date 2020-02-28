@@ -31,8 +31,8 @@ const SiteMeta = () => {
       <meta name="twitter:title" content={headlines.basic} />
       <meta name="twitter:url" content={`${type === 'home' ? homeURL : canonicalURL}`} />
       <meta property="og:image" content={thumbnailImage} />
-      <meta property="og:image:height" content="200" />
-      <meta property="og:image:width" content={`${homeAndSection || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '800'}`} />
+      <meta property="og:image:height" content={`${homeAndSection || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '526'}`} />
+      <meta property="og:image:width" content={`${homeAndSection || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '1000'}`} />
       <meta property="og:title" content={headlines.basic} />
       <meta property="og:type" content={`${homeAndSection ? 'website' : 'article'}`} />
       <meta property="og:url" content={`${type === 'home' ? homeURL : canonicalURL}`} />

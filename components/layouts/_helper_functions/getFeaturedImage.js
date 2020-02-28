@@ -1,4 +1,5 @@
 import { useAppContext } from 'fusion:context';
+import imageResizer from './Thumbor';
 
 const renderImage = () => {
   const appContext = useAppContext();
@@ -15,11 +16,15 @@ const renderImage = () => {
   const { url: featuredImage } = promoItems ? promoItems.basic : {};
   const { url: videoThumbnail } = promoItems && promoItems.basic.promo_image ? promoItems.basic.promo_image : {};
   const { url: galleryThumbnail } = promoItems && promoItems.basic.promo_items ? promoItems.basic.promo_items.basic : {};
-  let inlineImage = null;
-  let inlineVideoThumbnail = null;
+  let ogContentImage = null;
 
-  // if there isn't any featured media, we parse through the contentElements to check for inline images and/or videos
-  if (!featuredImage && !videoThumbnail && !galleryThumbnail && contentElements) {
+  if (featuredImage) {
+    ogContentImage = featuredImage;
+  } else if (videoThumbnail) {
+    ogContentImage = videoThumbnail;
+  } else if (galleryThumbnail) {
+    ogContentImage = galleryThumbnail;
+  } else if (contentElements) {
     let foundFirstInline = false;
     contentElements.forEach((el) => {
       if (!foundFirstInline) {
@@ -29,31 +34,19 @@ const renderImage = () => {
           promo_items: inlinePromoItems = {},
         } = el;
         if (type === 'image') {
-          inlineImage = url;
+          ogContentImage = url;
           foundFirstInline = true;
         }
         if (type === 'video' && inlinePromoItems.basic && inlinePromoItems.basic.url) {
-          inlineVideoThumbnail = inlinePromoItems.basic.url;
+          ogContentImage = inlinePromoItems.basic.url;
           foundFirstInline = true;
         }
       }
     });
   }
 
-  if (featuredImage) {
-    return featuredImage;
-  }
-  if (videoThumbnail) {
-    return videoThumbnail;
-  }
-  if (galleryThumbnail) {
-    return galleryThumbnail;
-  }
-  if (inlineImage) {
-    return inlineImage;
-  }
-  if (inlineVideoThumbnail) {
-    return inlineVideoThumbnail;
+  if (ogContentImage) {
+    return imageResizer(ogContentImage, 1000, 526);
   }
   return deployment(`${contextPath}/resources/images/logo-ogimage.png`);
 };
