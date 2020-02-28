@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { topRef } from 'react';
 import { useContent } from 'fusion:content';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
@@ -11,37 +11,37 @@ import '../../../../src/styles/container/_article-basic.scss';
 import './default.scss';
 
 const NavBar = () => {
-  let scroll;
-  const [isSticky, setSticky] = useState(false);
-  const [stickyHeight, setHeight] = useState(0);
-  const [currentWidth, setWidth] = useState(0);
-  const [currentScroll, setCurrentScroll] = useState(0);
-  const topRef = useRef(null);
-  const desktopWidth = 1023;
-  const handleScroll = (e) => {
-    scroll = e.currentTarget.pageYOffset;
-    setCurrentScroll(scroll);
-  };
+  // let scroll;
+  // const [isSticky, setSticky] = useState(false);
+  // const [stickyHeight, setHeight] = useState(0);
+  // const [currentWidth, setWidth] = useState(0);
+  // const [currentScroll, setCurrentScroll] = useState(0);
+  // const topRef = useRef(null);
+  // const desktopWidth = 1023;
+  // const handleScroll = (e) => {
+  //   scroll = e.currentTarget.pageYOffset;
+  //   setCurrentScroll(scroll);
+  // };
 
-  useEffect(() => {
-    setWidth(window.innerWidth);
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  // useEffect(() => {
+  //   setWidth(window.innerWidth);
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    if (topRef.current && currentScroll > stickyHeight) {
-      setSticky(true);
-    }
-  }, [currentScroll]);
+  // useEffect(() => {
+  //   if (topRef.current && currentScroll > stickyHeight) {
+  //     setSticky(true);
+  //   }
+  // }, [currentScroll]);
 
-  useEffect(() => {
-    if (topRef && topRef.current) {
-      setHeight(topRef.current.getBoundingClientRect().bottom);
-    }
-  }, [topRef.current]);
+  // useEffect(() => {
+  //   if (topRef && topRef.current) {
+  //     setHeight(topRef.current.getBoundingClientRect().bottom);
+  //   }
+  // }, [topRef.current]);
 
   const sections = useContent({
     source: 'site-api',
@@ -92,24 +92,8 @@ const NavBar = () => {
     );
   });
 
-  if (currentWidth > desktopWidth && !isSticky) {
-    return (
-      <header className="c-nav">
-        <div className='c-headerNav'>
-          <div className='b-flexRow b-flexCenter'>
-            <Logo source={siteLogoImage} rootDirectory={rootDirectory} topRef={topRef}/>
-          </div>
-          <DesktopNav sections={sectionLi}/>
-          <div className='sub b-flexRow b-flexCenter sub-text'>
-            <Subscribe/>
-          </div>
-        </div>
-      </header>
-    );
-  }
-
-  if (currentWidth <= desktopWidth) {
-    return (
+  // if (currentWidth > desktopWidth) {
+  return (
       <header className="c-nav">
         <div className='c-headerNav'>
           <div className='b-flexRow b-flexCenter nav-logo'>
@@ -117,17 +101,38 @@ const NavBar = () => {
               <div className='nav-flyout-button'>
               </div>
             </div>
-            <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
+            <Logo source={siteLogoImage} rootDirectory={rootDirectory} topRef={topRef}/>
             <Login/>
           </div>
-          <div className='sub b-flexCenter b-flexRow sub-text'>
+          <DesktopNav sections={sectionLi}/>
+          <div className='sub b-flexRow b-flexCenter sub-text'>
             <Subscribe/>
           </div>
         </div>
       </header>
-    );
-  }
-  return null;
+  );
+  // }
+
+  // if (currentWidth <= desktopWidth) {
+  //   return (
+  //     <header className="c-nav">
+  //       <div className='c-headerNav'>
+  //         <div className='b-flexRow b-flexCenter nav-logo'>
+  //           <div className='nav-menu-toggle'>
+  //             <div className='nav-flyout-button'>
+  //             </div>
+  //           </div>
+  //           <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
+  //           <Login/>
+  //         </div>
+  //         <div className='sub b-flexCenter b-flexRow sub-text'>
+  //           <Subscribe/>
+  //         </div>
+  //       </div>
+  //     </header>
+  //   );
+  // }
+  // return null;
 };
 
 export default NavBar;

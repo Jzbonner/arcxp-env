@@ -17,20 +17,36 @@
   }
 
   nav {
-    display: flex;
-    align-items: flex-end;
-    padding-bottom: 20px;
+    display: none;
 
     a {
       color: #2e81b7;
       text-decoration: none;
     }
+
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 20px;
+    }
   }
+
+  
 
   .nav-logo {
     padding: 18px 0;
     flex-direction: row;
     position: relative;
+    
+    @include breakpoint(desktop-sm) {
+      padding: 0;
+    }
+
+    .nav-login {
+      @include breakpoint(desktop-sm) {
+        display: none;
+      }
+    }
   }
   
   .logo {
@@ -207,7 +223,7 @@
   
     @include breakpoint(desktop-nav) {
       display: flex;
-      
+
       @include text-styles(1.125rem, 1, "Gordita");
     }
   }
@@ -221,6 +237,7 @@
 
     @include breakpoint(desktop-sm) {
       height: 57px;
+      flex-direction: row;
     }
   }
   
@@ -288,6 +305,10 @@
     cursor: pointer;
     position: absolute;
     left: 0;
+
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
   }
 
   .nav-flyout-button {
