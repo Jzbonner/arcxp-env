@@ -5,7 +5,7 @@ import '../../../src/styles/base/_utility.scss';
 
 const TaboolaFeed = ({ type }) => (
     <>
-      <div id='taboola-ajc-custom-feed'></div>
+      <div id='taboola-ajc-custom-feed' className='b-clear-both'></div>
       <script type='text/javascript' dangerouslySetInnerHTML={{
         __html: taboolaModuleScript(type),
       }}></script>

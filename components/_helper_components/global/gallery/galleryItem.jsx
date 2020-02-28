@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const GalleryItem = ({ data, refHook, func }) => {
+const GalleryItem = ({
+  data, refHook, func,
+}) => {
   const {
-    url, alt, index, id, by = [], captionObj, states,
+    url, alt, index, id, by = [], captionObj, states, lastItemClass,
   } = data;
-  const { caption } = captionObj;
+  const { affiliation, caption } = captionObj;
+
   const {
     isFocused, isStickyVisible, isCaptionOn, isMobile,
   } = states;
+
   return (
     <div
       ref={refHook}
@@ -16,8 +20,11 @@ const GalleryItem = ({ data, refHook, func }) => {
       data-index={index}
       key={url}
       onClick={func}
-      className={`${isStickyVisible ? 'gallery-full-item' : 'gallery-image'}
-      ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}`}>
+      className={`${isStickyVisible ? `gallery-full-item ${isCaptionOn ? lastItemClass : ''}` : 'gallery-image'}
+      ${lastItemClass && isStickyVisible && !isCaptionOn ? 'last-item-height-fix-no-caption' : ''}
+      ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}
+      `}
+      >
       <img
         className={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused ? 'is-focused' : ''}`}
         src={url}
@@ -25,9 +32,12 @@ const GalleryItem = ({ data, refHook, func }) => {
       />
       {
         isStickyVisible
-          ? <div>
+          ? <div className='gallery-subtitle'>
             <div className="gallery-credit">
-              {by[0] && by[0].name ? by[0].name : null}
+              {
+              (affiliation && affiliation[0] && affiliation[0].name) || (by && by[0] && by[0].name)
+                ? (affiliation && affiliation[0] && affiliation[0].name) || `Credit: ${by && by[0] && by[0].name}` : null
+              }
             </div>
             {
               isCaptionOn
@@ -55,6 +65,7 @@ GalleryItem.propTypes = {
   isCaptionOn: PropTypes.bool,
   captionObj: PropTypes.object,
   func: PropTypes.func,
+  lastItemClass: PropTypes.string,
 };
 
 export default GalleryItem;

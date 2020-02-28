@@ -13,8 +13,10 @@ const SiteMeta = () => {
   const {
     headlines, description, canonical_url: canonicalURL, type,
   } = globalContent || {};
+
   const { siteName, homeURL } = getProperties();
   const homeAndSection = type === ('home' || 'section' || 'page');
+  const site = siteName.toLowerCase();
 
   return (
     <>
@@ -24,7 +26,7 @@ const SiteMeta = () => {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={description.basic} />
       <meta name="twitter:image" content={renderImage()} />
-      <meta name="twitter:site" content={siteName} />
+      <meta name="twitter:site" content={`@${site}`} />
       <meta name="twitter:title" content={headlines.basic} />
       <meta name="twitter:url" content={`${type === 'home' ? homeURL : canonicalURL}`} />
       <meta property="og:image" content={renderImage()} />
@@ -36,6 +38,8 @@ const SiteMeta = () => {
       <meta property="og:description" content={description.basic} />
       <meta property="og:site_name" content={siteName} />
       <title>{headlines.basic}</title>
+      <meta name="thumbnail" content={renderImage()} />
+      <meta name="language" content="English" />
     </>
   );
 };

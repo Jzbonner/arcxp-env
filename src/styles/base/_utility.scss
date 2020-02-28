@@ -74,6 +74,12 @@
   }
 }
 
+// ensure we only clear for non-empty items (special case for things like storypage ad placeholder divs)
+
+.b-clear-both:not(:empty) {
+  clear: both;
+}
+
 // Advertisement Text for arcads
 
 .arc_ad {
