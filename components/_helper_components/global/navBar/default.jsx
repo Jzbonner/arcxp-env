@@ -1,27 +1,22 @@
 import React, { useEffect, useState, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
 import Subscribe from './subscribe/default';
 import DesktopNav from './desktopNav/default';
-import StickyNav from './stickyNav/default';
+import Login from './login/default';
 import '../../../../src/styles/base/_utility.scss';
 import '../../../../src/styles/container/_article-basic.scss';
 import './default.scss';
-import './stickyNav/default.scss';
 
-const NavBar = ({
-  articleURL, headlines, comments,
-}) => {
+const NavBar = () => {
   let scroll;
   const [isSticky, setSticky] = useState(false);
   const [stickyHeight, setHeight] = useState(0);
   const [currentWidth, setWidth] = useState(0);
   const [currentScroll, setCurrentScroll] = useState(0);
   const topRef = useRef(null);
-  const bottomRef = useRef(null);
   const desktopWidth = 1023;
   const handleScroll = (e) => {
     scroll = e.currentTarget.pageYOffset;
@@ -39,11 +34,7 @@ const NavBar = ({
   useEffect(() => {
     if (topRef.current && currentScroll > stickyHeight) {
       setSticky(true);
-      setCurrentScroll(currentScroll + 10);
     }
-    // if (isSticky === true && currentScroll <= bottomRef.current.getBoundingClientRect().top) {
-    //   setSticky(false);
-    // }
   }, [currentScroll]);
 
   useEffect(() => {
@@ -117,34 +108,18 @@ const NavBar = ({
     return (
       <header className="c-nav">
         <div className='c-headerNav'>
-          <div className='b-flexRow b-flexCenter'>
+          <div className='b-flexRow b-flexCenter c-logo'>
             <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
           </div>
-          <div className='sub b-flexRow b-flexCenter sub-text'>
+          <Login/>
+          <div className='sub b-flexCenter b-flexRow sub-text'>
             <Subscribe/>
           </div>
         </div>
       </header>
     );
   }
-
-  return (
-  <div className='c-stickyNav' ref={bottomRef}>
-    <StickyNav
-    articleURL={articleURL}
-    headlines={headlines}
-    comments={comments}
-    visible={isSticky}
-    resolution={currentWidth}
-    />
-  </div>
-  );
-};
-
-NavBar.propTypes = {
-  articleURL: PropTypes.string,
-  headlines: PropTypes.object,
-  comments: PropTypes.object,
+  return null;
 };
 
 export default NavBar;

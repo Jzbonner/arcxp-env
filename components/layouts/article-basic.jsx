@@ -13,6 +13,7 @@ import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
 import NavBar from '../_helper_components/global/navBar/default';
+import StickyNav from '../_helper_components/global/navBar/stickyNav/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Footer from '../_helper_components/global/footer/default';
 import ArcAd from '../features/ads/default';
@@ -72,7 +73,8 @@ const StoryPageLayout = () => {
   return (
     <>
       <BreakingNews />
-        <NavBar
+        <NavBar/>
+        <StickyNav
           articleURL={articleURL}
           headlines={headlines}
           comments={comments}
