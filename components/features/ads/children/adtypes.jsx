@@ -187,4 +187,25 @@ export const adSlots = {
     ],
     display: 'mobile',
   },
+  PG01: {
+    dimensions: [
+      [
+        [600, 400],
+      ],
+    ],
+  },
+  PG02: {
+    dimensions: [
+      [
+        [88, 31],
+      ],
+    ],
+  },
+  MPG01: {
+    dimensions: [
+      [
+        [300, 250],
+      ],
+    ],
+  },
 };
