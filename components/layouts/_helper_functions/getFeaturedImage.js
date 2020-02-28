@@ -46,7 +46,7 @@ const renderImage = () => {
   }
 
   if (ogContentImage) {
-    return imageResizer(ogContentImage, 1000, 526);
+    return imageResizer(ogContentImage, 1200, 630);
   }
   return deployment(`${contextPath}/resources/images/logo-ogimage.png`);
 };
