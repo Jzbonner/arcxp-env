@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import StickyDesktopNav from './desktop/default';
-import StickyMobileNav from './mobile/default';
 import './default.scss';
 import tempMenu from '../../../../resources/images/tempMenu.jpg';
 import logo from '../../../../resources/images/stickyNav-logo.svg';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 
-const StickyNav = ({
-  articleURL, headlines, comments = false,
-}) => {
+const StickyNav = ({ articleURL, headlines, comments = false }) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
   } = getProperties();
@@ -22,74 +18,90 @@ const StickyNav = ({
   const shareLinkPinterest = `${pinterestURL}${siteDomainURL}${articleURL}&media=${renderImage()}&description=${articleHeadline}`;
   const shareLinkReddit = `${redditURL}${siteDomainURL}${articleURL}&title=${articleHeadline}`;
   const shareLinkEmail = `${mail}${articleHeadline}&body=${siteDomainURL}${articleURL}`;
-  const loginLink = `${siteDomainURL}/login`;
 
-  const startingPoint = 200;
-  const desktopWidth = 1023;
-  let scroll;
-  const [currentWidth, setWidth] = useState(0);
-  const [currentScroll, setCurrentScroll] = useState(0);
+  // Handles stick nav visibility
+  const [stickyNavVisibility, setStickyNavVisibility] = useState(false);
   const handleScroll = (e) => {
-    scroll = e.currentTarget.pageYOffset;
-    setCurrentScroll(scroll);
+    if (e.currentTarget.pageYOffset > 200) {
+      setStickyNavVisibility(true);
+    } else {
+      setStickyNavVisibility(false);
+    }
   };
-
   useEffect(() => {
-    setWidth(window.innerWidth);
     window.addEventListener('scroll', handleScroll, true);
     return () => {
       window.removeEventListener('scroll', handleScroll, true);
     };
-  }, [currentScroll]);
+  }, []);
 
-  if (currentScroll > startingPoint && currentWidth > desktopWidth) {
-    return (
-      <div className="c-stickyNav">
-        <StickyDesktopNav
-          siteDomainURL={siteDomainURL}
-          shareLinkFacebook={shareLinkFacebook}
-          shareLinkTwitter={shareLinkTwitter}
-          shareLinkPinterest={shareLinkPinterest}
-          shareLinkReddit={shareLinkReddit}
-          shareLinkEmail={shareLinkEmail}
-          loginLink={loginLink}
-          siteName={siteName}
-          logo={logo}
-          commentsEnabled={commentsEnabled}
-        />
+  // Handles dropdown visibility
+  const [dropdownVisibility, setDropdownVisibility] = useState(false);
+
+  // Handles comments window visibility.
+  // This state is managed in this component because the window's visibility is controlled
+  // by a click on the comment button in the sticky nav bar
+  const [commentVisibility, setCommentVisibility] = useState(false);
+
+  const handleClick = (e, callback) => {
+    e.preventDefault();
+    if (callback instanceof Function) {
+      callback();
+    }
+  };
+
+  return (
+    <nav className={`c-stickyNav ${stickyNavVisibility ? 'is-visible' : ''}`}>
+      <div className="stickyNav">
+        <img src={tempMenu} alt="temp-burger-menu" className="desktop-hidden" style={{ maxWidth: '50px' }} />
+        <ul className="c-stickyNav-list">
+          <li className="stickyNav-item mobile-hidden">
+            <a href={siteDomainURL}>
+              <img className="logo" src={logo} alt={`${siteName} logo`} />
+            </a>
+          </li>
+          <li className="stickyNav-item">
+            <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
+          </li>
+          <li className="stickyNav-item">
+            <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
+          </li>
+          <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
+            <li
+              className="stickyNav-item arrow-icon desktop-hidden"
+              onClick={e => handleClick(e, setDropdownVisibility(!dropdownVisibility))}
+            >
+              <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
+            </li>
+            <li className="stickyNav-item">
+              <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
+            </li>
+            <li className="stickyNav-item">
+              <a href={shareLinkReddit} className="sticky-nav-icon btn-reddit" target="__blank"></a>
+            </li>
+            <li className="stickyNav-item">
+              <a href={shareLinkEmail} className="sticky-nav-icon btn-mail" target="__blank"></a>
+            </li>
+            {commentsEnabled ? (
+              <li className="stickyNav-item">
+                <a
+                  href="#"
+                  className="sticky-nav-icon btn-comments"
+                  onClick={e => handleClick(e, setCommentVisibility(!commentVisibility))}
+                ></a>
+              </li>
+            ) : null}
+          </ul>
+        </ul>
       </div>
-    );
-  }
-  if (currentScroll > startingPoint && currentWidth < desktopWidth) {
-    return (
-      <div className="c-stickyNav">
-        <img src={tempMenu} alt="temp-burger-menu" style={{ maxWidth: '50px' }}/>
-        <StickyMobileNav
-          commentsEnabled={commentsEnabled}
-          shareLinkFacebook={shareLinkFacebook}
-          shareLinkTwitter={shareLinkTwitter}
-          shareLinkPinterest={shareLinkPinterest}
-          shareLinkReddit={shareLinkReddit}
-          shareLinkEmail={shareLinkEmail}
-        />
-      </div>
-    );
-  }
-  return null;
+    </nav>
+  );
 };
 
 StickyNav.propTypes = {
   articleURL: PropTypes.string,
   headlines: PropTypes.object,
   comments: PropTypes.object,
-  siteName: PropTypes.string,
-  shareLinkFacebook: PropTypes.string,
-  shareLinkTwitter: PropTypes.string,
-  shareLinkPinterest: PropTypes.string,
-  shareLinkReddit: PropTypes.string,
-  shareLinkEmail: PropTypes.string,
-  loginLink: PropTypes.string,
-  commentsEnabled: PropTypes.bool,
 };
 
 export default StickyNav;
