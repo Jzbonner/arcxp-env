@@ -10,21 +10,23 @@
   right: 0;
   height: 90px;
   background: #f8f8f8;
-  opacity: 0.98;
+  opacity: .98;
   z-index: 999;
-  display: flex;
   align-items: center;
   border: none;
   display: none;
 
   .mobile-hidden {
     display: none;
+
     @include breakpoint(desktop-sm) {
       display: block;
     }
   }
+
   .desktop-hidden {
     display: block;
+
     @include breakpoint(desktop-sm) {
       display: none;
     }
@@ -46,6 +48,7 @@
     display: flex;
     align-items: center;
   }
+
   .logo {
     display: block;
     margin-top: 10px;
@@ -61,17 +64,21 @@
   @include breakpoint(desktop-sm) {
     justify-content: left;
   }
+
   .stickyNav-item {
     list-style: none;
-    padding-bottom: 0.313em;
+    padding-bottom: .313em;
     margin: 0 6px;
+
     @include breakpoint(desktop-sm) {
       margin-right: 15px;
     }
+
     img {
       width: 75px;
       height: 56px;
     }
+
     a {
       margin: 0;
     }
@@ -85,18 +92,22 @@
       top: -5px;
       overflow: hidden;
       height: 45px;
+
       .stickyNav-item:first-child {
-        padding-top: 0.313em;
+        padding-top: .313em;
       }
+
       &.is-open {
         height: auto;
         border-radius: 6px;
-        box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
         background: #fff;
+
         .arrow-icon {
           transform: rotate(180deg);
         }
       }
+
       .arrow-icon {
         display: block;
       }
