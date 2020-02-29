@@ -101,7 +101,9 @@ const NavBar = () => {
               <div className='nav-flyout-button'>
               </div>
             </div>
-            <Logo source={siteLogoImage} rootDirectory={rootDirectory} topRef={topRef}/>
+            <div className='nav-mobile-logo'>
+              <Logo source={siteLogoImage} rootDirectory={rootDirectory} topRef={topRef}/>
+            </div>
             <Login/>
           </div>
           <DesktopNav sections={sectionLi}/>

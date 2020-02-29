@@ -7,6 +7,8 @@ import '../default.scss';
 
 const DesktopNav = ({ sections }) => (
   <nav>
+    {/* <div>X</div>
+    <div>AJC</div> */}
     <ul className='nav-row'>
       {sections}
       <Search/>
