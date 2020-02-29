@@ -13,7 +13,9 @@ const DesktopNav = ({ sections }) => (
       {sections}
       <Search/>
       <Weather/>
-      <Login/>
+      <div className='nav-mobile-login'>
+        <Login/>
+      </div>
     </ul>
   </nav>
 );

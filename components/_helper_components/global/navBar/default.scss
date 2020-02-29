@@ -26,11 +26,15 @@
     position: fixed;
     top: 0;
     z-index: 3;
-    left: -1000px;
-    
+    left: -10px;
+
     a {
-      color: #2e81b7;
+      color: #fff;
       text-decoration: none;
+
+      @include breakpoint(desktop-sm) {
+        color: #2e81b7;
+      }
     }
 
     @include breakpoint(desktop-sm) {
@@ -85,10 +89,14 @@
   
   .nav-row {
     display: flex;
-    height: 65px;
-    width: 100%;
-    flex-direction: row;
+    flex-direction: column;
     list-style-type: none;
+
+    @include breakpoint(desktop-sm) {
+      height: 65px;
+      width: 100%;
+      flex-direction: row;
+    }
   }
 
   .nav-items {
@@ -119,7 +127,11 @@
   }
   
   .nav-itemBottomBorder {
-    border-bottom: solid 1px #cdcdcd;
+    border-bottom: none;
+
+    @include breakpoint(dekstop-sm) {
+      border-bottom: solid 1px #cdcdcd;
+    }
   }
   
   .nav-itemText {
@@ -158,13 +170,14 @@
   }
   
   .nav-search {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    flex-basis: 180px;
-  
+    display: none;
+
     @include breakpoint(desktop-nav) {
       padding-top: 10px;
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      flex-basis: 180px;
     }
   }
   
@@ -213,6 +226,14 @@
   .weather-text {
     padding-left: 4px;
     cursor: pointer;
+  }
+  
+  .nav-mobile-login {
+    display: none;
+    
+    @include breakpoint(desktop-sm) {
+      display: flex;
+    }
   }
   
   .nav-login {
