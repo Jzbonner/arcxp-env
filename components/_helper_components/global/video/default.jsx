@@ -46,7 +46,7 @@ const Video = ({
   return (
     <div className={`c-video-component ${videoMarginBottom}`}>
       <div className="video-component">
-        <video controls playsinline="true" poster={inlineVideoThumb} autoPlay={startPlaying} muted={muteON}>
+        <video controls playsInline="true" poster={inlineVideoThumb} autoPlay={startPlaying} muted={muteON}>
           <source src={videoPlayer} type="video/mp4" />
         </video>
       </div>
