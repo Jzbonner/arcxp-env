@@ -5,7 +5,6 @@ import './default.scss';
 import tempMenu from '../../../../resources/images/tempMenu.jpg';
 import logo from '../../../../resources/images/stickyNav-logo.svg';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
-import Comments from '../comments/comments';
 
 const StickyNav = ({ articleURL, headlines, comments = false }) => {
   const {
@@ -20,17 +19,6 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   const shareLinkReddit = `${redditURL}${siteDomainURL}${articleURL}&title=${articleHeadline}`;
   const shareLinkEmail = `${mail}${articleHeadline}&body=${siteDomainURL}${articleURL}`;
 
-  // Handles comments window visibility.
-  // This state is managed in this component because the window's visibility is controlled
-  // by a click on the comment button in the sticky nav bar
-  const [commentVisibility, _setCommentVisibility] = useState(false);
-  const commentVisibilityRef = React.useRef(commentVisibility);
-
-  const setCommentVisibility = (data) => {
-    commentVisibilityRef.current = data;
-    _setCommentVisibility(data);
-  };
-
   const handleClick = (e, callback) => {
     e.preventDefault();
     if (callback instanceof Function) {
@@ -44,7 +32,7 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   const handleScroll = (e) => {
     if (e.currentTarget.pageYOffset > 200) {
       setStickyNavVisibility(true);
-    } else if (!commentVisibilityRef.current) {
+    } else {
       setStickyNavVisibility(false);
     }
   };
@@ -82,7 +70,7 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
                 )
                 }
               >
-                <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
+                <a href="#" className="sticky-nav-icon btn-arrow-down" target="__blank"></a>
               </li>
               <li className="stickyNav-item">
                 <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
@@ -98,7 +86,6 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
                   <a
                     href="#"
                     className="sticky-nav-icon btn-comments"
-                    onClick={e => handleClick(e, setCommentVisibility(!commentVisibilityRef.current))}
                   ></a>
                 </li>
               ) : null}
@@ -106,7 +93,6 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
           </ul>
         </div>
       </nav>
-      <Comments commentVisibility={commentVisibility} />
     </>
   );
 };
