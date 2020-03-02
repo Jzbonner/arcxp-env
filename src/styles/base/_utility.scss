@@ -96,7 +96,7 @@
         position: absolute;
         color: #313132;
 
-        @include text-styles(0.75rem, 1, "Gordita");
+        @include text-styles(.75rem, 1, "Gordita");
 
         font-weight: 500;
         left: 50%;
