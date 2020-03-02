@@ -18,7 +18,9 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   const shareLinkPinterest = `${pinterestURL}${siteDomainURL}${articleURL}&media=${renderImage()}&description=${articleHeadline}`;
   const shareLinkReddit = `${redditURL}${siteDomainURL}${articleURL}&title=${articleHeadline}`;
   const shareLinkEmail = `${mail}${articleHeadline}&body=${siteDomainURL}${articleURL}`;
-  // const loginLink = `${siteDomainURL}/login`; this is not being used anywhere right now
+  // const loginLink = `${siteDomainURL}/login;
+  // In the previous version of this component, loginLink was being passed as a prop to the desktop version
+  // but that prop was not being used anywhere in the component.
 
   const handleClick = (e, callback) => {
     e.preventDefault();
