@@ -1,7 +1,4 @@
-@import "../../../../src/styles/base/breakpoints";
-@import "../../../../src/styles/base/fonts";
-@import "../../../../src/styles/base/mixins";
-@import "../../../../src/styles/base/buttons";
+@import "../../../../src/styles/base/";
 
 .c-stickyNav {
   position: fixed;
@@ -15,22 +12,6 @@
   align-items: center;
   border: none;
   display: none;
-
-  .mobile-hidden {
-    display: none;
-
-    @include breakpoint(desktop-sm) {
-      display: block;
-    }
-  }
-
-  .desktop-hidden {
-    display: block;
-
-    @include breakpoint(desktop-sm) {
-      display: none;
-    }
-  }
 
   @include breakpoint(desktop-sm) {
     border-bottom: solid 1px #d0d0d0;
