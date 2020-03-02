@@ -18,6 +18,7 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   const shareLinkPinterest = `${pinterestURL}${siteDomainURL}${articleURL}&media=${renderImage()}&description=${articleHeadline}`;
   const shareLinkReddit = `${redditURL}${siteDomainURL}${articleURL}&title=${articleHeadline}`;
   const shareLinkEmail = `${mail}${articleHeadline}&body=${siteDomainURL}${articleURL}`;
+  // const loginLink = `${siteDomainURL}/login`; this is not being used anywhere right now
 
   const handleClick = (e, callback) => {
     e.preventDefault();
