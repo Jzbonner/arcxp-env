@@ -23,7 +23,7 @@ const InterstitialLink = ({ src }) => {
 };
 
 InterstitialLink.propTypes = {
-  src: PropTypes.string,
+  src: PropTypes.object,
 };
 
 export default InterstitialLink;
