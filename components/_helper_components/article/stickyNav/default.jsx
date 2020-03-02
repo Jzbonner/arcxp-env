@@ -5,6 +5,7 @@ import './default.scss';
 import tempMenu from '../../../../resources/images/tempMenu.jpg';
 import logo from '../../../../resources/images/stickyNav-logo.svg';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
+import Comments from '../comments/comments';
 
 const StickyNav = ({ articleURL, headlines, comments = false }) => {
   const {
@@ -19,29 +20,16 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   const shareLinkReddit = `${redditURL}${siteDomainURL}${articleURL}&title=${articleHeadline}`;
   const shareLinkEmail = `${mail}${articleHeadline}&body=${siteDomainURL}${articleURL}`;
 
-  // Handles stick nav visibility
-  const [stickyNavVisibility, setStickyNavVisibility] = useState(false);
-  const handleScroll = (e) => {
-    if (e.currentTarget.pageYOffset > 200) {
-      setStickyNavVisibility(true);
-    } else {
-      setStickyNavVisibility(false);
-    }
-  };
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll, true);
-    return () => {
-      window.removeEventListener('scroll', handleScroll, true);
-    };
-  }, []);
-
-  // Handles dropdown visibility
-  const [dropdownVisibility, setDropdownVisibility] = useState(false);
-
   // Handles comments window visibility.
   // This state is managed in this component because the window's visibility is controlled
   // by a click on the comment button in the sticky nav bar
-  const [commentVisibility, setCommentVisibility] = useState(false);
+  const [commentVisibility, _setCommentVisibility] = useState(false);
+  const commentVisibilityRef = React.useRef(commentVisibility);
+
+  const setCommentVisibility = (data) => {
+    commentVisibilityRef.current = data;
+    _setCommentVisibility(data);
+  };
 
   const handleClick = (e, callback) => {
     e.preventDefault();
@@ -50,51 +38,76 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
     }
   };
 
+  // Handles stick nav visibility
+  const [stickyNavVisibility, setStickyNavVisibility] = useState(false);
+
+  const handleScroll = (e) => {
+    if (e.currentTarget.pageYOffset > 200) {
+      setStickyNavVisibility(true);
+    } else if (!commentVisibilityRef.current) {
+      setStickyNavVisibility(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+  }, []);
+
+  // Handles dropdown visibility
+  const [dropdownVisibility, setDropdownVisibility] = useState(false);
+
   return (
-    <nav className={`c-stickyNav ${stickyNavVisibility ? 'is-visible' : ''}`}>
-      <div className="stickyNav">
-        <img src={tempMenu} alt="temp-burger-menu" className="desktop-hidden" style={{ maxWidth: '50px' }} />
-        <ul className="c-stickyNav-list">
-          <li className="stickyNav-item mobile-hidden">
-            <a href={siteDomainURL}>
-              <img className="logo" src={logo} alt={`${siteName} logo`} />
-            </a>
-          </li>
-          <li className="stickyNav-item">
-            <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
-          </li>
-          <li className="stickyNav-item">
-            <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
-          </li>
-          <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
-            <li
-              className="stickyNav-item arrow-icon desktop-hidden"
-              onClick={e => handleClick(e, setDropdownVisibility(!dropdownVisibility))}
-            >
-              <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
+    <>
+      <nav className={`c-stickyNav ${stickyNavVisibility ? 'is-visible' : ''}`}>
+        <div className="stickyNav">
+          <img src={tempMenu} alt="temp-burger-menu" className="desktop-hidden" style={{ maxWidth: '50px' }} />
+          <ul className="c-stickyNav-list">
+            <li className="stickyNav-item mobile-hidden">
+              <a href={siteDomainURL}>
+                <img className="logo" src={logo} alt={`${siteName} logo`} />
+              </a>
             </li>
             <li className="stickyNav-item">
-              <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
+              <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
             </li>
             <li className="stickyNav-item">
-              <a href={shareLinkReddit} className="sticky-nav-icon btn-reddit" target="__blank"></a>
+              <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
             </li>
-            <li className="stickyNav-item">
-              <a href={shareLinkEmail} className="sticky-nav-icon btn-mail" target="__blank"></a>
-            </li>
-            {commentsEnabled ? (
-              <li className="stickyNav-item">
-                <a
-                  href="#"
-                  className="sticky-nav-icon btn-comments"
-                  onClick={e => handleClick(e, setCommentVisibility(!commentVisibility))}
-                ></a>
+            <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
+              <li
+                className="stickyNav-item arrow-icon desktop-hidden"
+                onClick={e => handleClick(
+                  e,
+                  setDropdownVisibility(prev => !prev),
+                )
+                }
+              >
+                <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
               </li>
-            ) : null}
+              <li className="stickyNav-item">
+                <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
+              </li>
+              <li className="stickyNav-item">
+                <a href={shareLinkReddit} className="sticky-nav-icon btn-reddit" target="__blank"></a>
+              </li>
+              <li className="stickyNav-item">
+                <a href={shareLinkEmail} className="sticky-nav-icon btn-mail" target="__blank"></a>
+              </li>
+              {commentsEnabled ? (
+                <li className="stickyNav-item">
+                  <a
+                    href="#"
+                    className="sticky-nav-icon btn-comments"
+                    onClick={e => handleClick(e, setCommentVisibility(!commentVisibilityRef.current))}
+                  ></a>
+                </li>
+              ) : null}
+            </ul>
           </ul>
-        </ul>
-      </div>
-    </nav>
+        </div>
+      </nav>
+      <Comments commentVisibility={commentVisibility} />
+    </>
   );
 };
 
