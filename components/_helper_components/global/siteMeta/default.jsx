@@ -17,6 +17,7 @@ const SiteMeta = () => {
   const { siteName, homeURL } = getProperties();
   const homeAndSection = type === ('home' || 'section' || 'page');
   const site = siteName.toLowerCase();
+  const thumbnailImage = renderImage();
 
   return (
     <>
@@ -25,20 +26,20 @@ const SiteMeta = () => {
       <link rel="canonical" href={`${type === 'home' ? homeURL : canonicalURL}`} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={description.basic} />
-      <meta name="twitter:image" content={renderImage()} />
+      <meta name="twitter:image" content={thumbnailImage} />
       <meta name="twitter:site" content={`@${site}`} />
       <meta name="twitter:title" content={headlines.basic} />
       <meta name="twitter:url" content={`${type === 'home' ? homeURL : canonicalURL}`} />
-      <meta property="og:image" content={renderImage()} />
-      <meta property="og:image:height" content="200" />
-      <meta property="og:image:width" content={`${homeAndSection ? '200' : '800'}`} />
+      <meta property="og:image" content={thumbnailImage} />
+      <meta property="og:image:height" content={`${homeAndSection || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '630'}`} />
+      <meta property="og:image:width" content={`${homeAndSection || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '1200'}`} />
       <meta property="og:title" content={headlines.basic} />
       <meta property="og:type" content={`${homeAndSection ? 'website' : 'article'}`} />
       <meta property="og:url" content={`${type === 'home' ? homeURL : canonicalURL}`} />
       <meta property="og:description" content={description.basic} />
       <meta property="og:site_name" content={siteName} />
       <title>{headlines.basic}</title>
-      <meta name="thumbnail" content={renderImage()} />
+      <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
     </>
   );
