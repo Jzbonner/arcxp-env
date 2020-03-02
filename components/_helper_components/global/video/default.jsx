@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
@@ -15,16 +15,16 @@ const Video = ({
   // const { url: inlineVideoThumb } = src && src.promo_items ? src.promo_items.basic : {};
   const screenSize = checkWindowSize();
 
-  console.log('SRC', src);
-
   let mainCredit;
   if (credits) {
     mainCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
   }
-  let videoMarginBottom;
-  if (isInlineVideo) {
-    videoMarginBottom = 'b-margin-bottom-d40-m20';
-  }
+
+  useEffect(() => {
+    window.powaBoot();
+  }, []);
+
+  const videoMarginBottom = 'b-margin-bottom-d40-m20';
   const giveCredit = mainCredit ? `Credit: ${mainCredit}` : null;
 
   const smartChecker = () => {
@@ -44,10 +44,14 @@ const Video = ({
   };
 
   return (
-    <div className={`c-video-component ${videoMarginBottom}`}>
+    <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
       <div className="video-component">
-        <div className="powa" data-org="ajc" data-uuid={videoID} style={{ paddingBottom: '56.25%' }}>
-          <script src="https://d2w3jw6424abwq.cloudfront.net/sandbox/powaBoot.js?org=ajc"></script>
+        <div 
+          className="powa"
+          data-org="ajc" 
+          data-api="sandbox" 
+          data-uuid={videoID} 
+          data-aspect-ratio="0.5625">
         </div>
       </div>
       <p className={`video-credit-text ${isInlineVideo ? 'is-inline' : null}`}>{giveCredit}</p>
