@@ -5,10 +5,12 @@ import Login from '../login/default';
 import Weather from '../weather/default';
 import '../default.scss';
 
-const DesktopNav = ({ sections }) => (
-  <nav>
-    {/* <div>X</div>
-    <div>AJC</div> */}
+const DesktopNav = ({ sections, mobile, setToggle }) => (
+  <nav className={mobile}>
+    <div className='nav-menu-toggle' onClick={() => { setToggle(false); }}>
+      <div className='nav-flyout-button'></div>
+    </div>
+    <div>AJC</div>
     <ul className='nav-row'>
       {sections}
       <Search/>
@@ -22,6 +24,8 @@ const DesktopNav = ({ sections }) => (
 
 DesktopNav.propTypes = {
   sections: PropTypes.array,
+  mobile: PropTypes.string,
+  setToggle: PropTypes.func,
 };
 
 export default DesktopNav;

@@ -15,7 +15,7 @@ import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
 import NavBar from '../_helper_components/global/navBar/default';
 import StickyNav from '../_helper_components/global/navBar/stickyNav/default';
-// import BreakingNews from '../_helper_components/global/breakingNews/default';
+import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Footer from '../_helper_components/global/footer/default';
 import ArcAd from '../features/ads/default';
 import { paragraphCounter } from './_helper_functions/Paragraph';
@@ -72,7 +72,7 @@ const StoryPageLayout = () => {
   return (
     <>
       <GlobalAdSlots />
-      {/* <BreakingNews /> */}
+      <BreakingNews />
         <NavBar/>
         <StickyNav
           articleURL={articleURL}

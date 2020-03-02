@@ -15,7 +15,30 @@
     width: 90%;
     max-width: 1600px;
   }
+  
+  .mobile-nav-activated {
+    transform: translateX(1000px);
 
+    .nav-menu-toggle {
+
+      .nav-flyout-button {
+        background: none;
+
+        &:before {
+          transform: rotate(-135deg);
+          top: 0;
+          background: #fff;
+        }
+
+        &:after {
+          transform: rotate(135deg);
+          bottom: 0;
+          background: #fff;
+        }
+      }
+    }
+  }
+  
   nav {
     display: flex;
     background-image: linear-gradient(to top, #04befe, #4481eb);
@@ -26,7 +49,9 @@
     position: fixed;
     top: 0;
     z-index: 3;
-    left: -10px;
+    left: -1000px;
+    transform: translateX(0);
+    transition: transform .5s ease;
 
     a {
       color: #fff;
@@ -235,7 +260,7 @@
       display: flex;
     }
   }
-  
+
   .nav-login {
     display: flex;
 
