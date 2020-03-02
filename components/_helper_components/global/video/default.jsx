@@ -46,13 +46,7 @@ const Video = ({
   return (
     <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
       <div className="video-component">
-        <div 
-          className="powa"
-          data-org="ajc" 
-          data-api="sandbox" 
-          data-uuid={videoID} 
-          data-aspect-ratio="0.5625">
-        </div>
+        <div className="powa" data-org="ajc" data-api="sandbox" data-uuid={videoID} data-aspect-ratio="0.5625"></div>
       </div>
       <p className={`video-credit-text ${isInlineVideo ? 'is-inline' : null}`}>{giveCredit}</p>
       {smartChecker()}
