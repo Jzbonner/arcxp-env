@@ -34,6 +34,10 @@ const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} />;
 const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} />;
 const PX01AdSlot = () => <ArcAd staticSlot={'PX01'} />;
 
+const PG01 = () => <ArcAd staticSlot={'PG01'} />;
+const PG02 = () => <ArcAd staticSlot={'PG02'} />;
+const MPG01 = () => <ArcAd staticSlot={'MPG01'} />;
+
 const start = 3;
 
 const StoryPageLayout = () => {
@@ -144,7 +148,7 @@ const StoryPageLayout = () => {
        {(!basicItems)
           || (basicItems
             && basicItems.type
-            && basicItems.type !== 'gallery') ? <Gallery contentElements={filteredContentElements} /> : null}
+            && basicItems.type !== 'gallery') ? <Gallery contentElements={filteredContentElements} ads={[PG01, PG02, MPG01]} /> : null}
       </main>
       <Footer />
     </>

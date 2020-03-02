@@ -15,7 +15,7 @@ import './default.scss';
 
 const Gallery = (props) => {
   const {
-    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {},
+    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, ads = [],
   } = props;
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
@@ -68,7 +68,7 @@ const Gallery = (props) => {
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic ? headlines.basic : null;
-
+  console.log('ADS', ads);
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
     if (isMobile) return;
@@ -435,6 +435,7 @@ Gallery.propTypes = {
   contentElements: PropTypes.array,
   leafContentElements: PropTypes.array,
   promoItems: PropTypes.object,
+  ads: PropTypes.array,
   customFields: PropTypes.shape({
     galleryUrl: PropTypes.string.tag({
       label: 'Gallery URL',
