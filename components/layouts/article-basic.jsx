@@ -23,6 +23,7 @@ import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
+import Divider from '../../components/_helper_components/article/contentElements/components/divider/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
@@ -65,6 +66,7 @@ const StoryPageLayout = () => {
   const maxNumberOfParagraphs = paragraphCounter(filteredContentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
 
+  const DividerInfo = () => <Divider />;
   const ConnextEndStory = () => <ConnextEndOfStory />;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} />;
   const interscrollerPlaceholder = () => <div className='story-interscroller__placeholder full-width c-clear-both'></div>;
@@ -141,7 +143,7 @@ const StoryPageLayout = () => {
             startIndex={stop}
             rightRail={{ insertBeforeParagraph: 8, ad: RP09StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }]}
-            insertAtSectionEnd={[BlogAuthorComponent, ConnextEndStory]}
+            insertAtSectionEnd={[BlogAuthorComponent, ConnextEndStory, DividerInfo]}
           />
 
           <Nativo
