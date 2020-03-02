@@ -2,6 +2,10 @@ html {
   text-size-adjust: 100%; /* Prevent font scaling in landscape on safari */
 }
 
+body {
+  word-break: break-word;
+}
+
 body,
 figure {
   margin: 0;

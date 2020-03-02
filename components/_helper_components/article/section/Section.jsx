@@ -58,7 +58,7 @@ const Section = ({
 
   if (newContentElements.length > 0) {
     return (
-      <div className={`c-section ${fullWidth ? 'fullWidth' : ''} b-margin-bottom-d40-m20`}>
+      <div className={`c-section ${fullWidth ? 'full-width b-clear-both' : ''} b-margin-bottom-d40-m20`}>
         <ContentElements contentElements={newContentElements} />
       </div>
     );

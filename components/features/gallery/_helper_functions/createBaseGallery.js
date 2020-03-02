@@ -28,6 +28,7 @@ const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile, 
 
       isNext = (i === 1);
       isPrev = (i === elements.length - 1);
+      const lastItemClass = i === elements.length - 1 ? ' last-item-height-fix' : '';
 
       const galleryItem = {
         url,
@@ -35,6 +36,7 @@ const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile, 
         by,
         width,
         index: i,
+        lastItemClass,
         id: `gallery-item-${i}`,
         captionObj: {
           affiliation,
@@ -61,10 +63,10 @@ const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile, 
 
       return (
         <GalleryItem
+          key={`gallery-item-${url}`}
           refHook={i === 0 ? refHook : null}
           data={galleryItem}
           func={functionToPass}
-          key={`gallery-item-${url}`}
         />
       );
     });

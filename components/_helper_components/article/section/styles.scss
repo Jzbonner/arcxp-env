@@ -42,7 +42,7 @@
     @include arc-ad-spacing;
   }
 
-  &:not(.fullWidth) {
+  &:not(.full-width) {
 
     .c-contentElements {
       @include breakpoint(desktop-sm) {

@@ -19,6 +19,23 @@
   padding: 1.25rem 1.88rem;
 }
 
+.last-item-height-fix {
+  overflow: auto;
+
+  .gallery-subtitle {
+    padding-bottom: 3rem;
+  }
+}
+
+.last-item-height-fix-no-caption {
+  overflow: auto;
+
+  .gallery-subtitle {
+    height: 100%;
+    padding-bottom: 4rem;
+  }
+}
+
 .gallery-count {
   width: 100px;
 
@@ -380,10 +397,6 @@
         margin: 10px 20px 0;
 
         @include text-styles(.75rem, normal, "Gordita");
-
-        &:before {
-          content: "Photo: ";
-        }
       }
 
       .gallery-caption {
@@ -404,20 +417,26 @@
     height: 480px;
   }
 
+  .gallery-caption-icons-box {
+    position: relative;
+    top: auto;
+    bottom: 0;
+    box-sizing: border-box;
+    height: auto;
+    min-width: 1000px;
+    max-width: 58vw;
+    margin: 2.18rem auto .5rem;
+  }
+
   .gallery-caption-container {
     position: relative;
     top: auto;
     bottom: 0;
     box-sizing: border-box;
     height: auto;
-    min-height: 75px;
     min-width: 1000px;
     max-width: 58vw;
-    margin: 35px auto 5px;
-
-    &:empty {
-      display: none;
-    }
+    margin: 1.25rem auto 6rem;
 
     .gallery-caption {
       font-size: 1.25rem;
