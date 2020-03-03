@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import middleBox from '../../../../resources/icons/gallery/middle-box.svg';
+import close from '../../../../resources/icons/gallery/close.svg';
 
 const MobileGallery = (props) => {
   const {
@@ -30,7 +31,9 @@ const MobileGallery = (props) => {
           <img src={middleBox} className="icon-sticky"></img>
           <span className="gallery-index"> {currentIndex + 1}   /   {maxIndex + 1} </span>
         </div>
-        <div onClick={handleStickyClose} className="gallery-immersive--close"></div>
+        <div onClick={handleStickyClose} className="gallery-immersive--close">
+          <img src={close} />
+        </div>
       </div>
       <div id="MOBILE_GALLERY" ref={objectRef} className="gallery-full">
         {isStickyVisible ? data : null}

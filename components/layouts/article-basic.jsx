@@ -85,7 +85,7 @@ const StoryPageLayout = () => {
 
       <main>
         <header className="b-margin-bottom-d30-m20">
-          <div className={(promoType === 'gallery') ? 'c-header-gallery' : 'c-header'}>
+          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
             <Headline
               headlines={headlines}
               basicItems={basicItems}
@@ -153,10 +153,7 @@ const StoryPageLayout = () => {
             <TaboolaFeed type={type} />
           </div>
         </article>
-       {(!basicItems)
-          || (basicItems
-            && basicItems.type
-            && basicItems.type !== 'gallery') ? <Gallery contentElements={filteredContentElements} /> : null}
+       {!basicItems || promoType !== 'gallery' ? <Gallery contentElements={filteredContentElements} /> : null}
       </main>
       <Footer />
     </>

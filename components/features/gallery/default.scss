@@ -177,14 +177,10 @@
     position: absolute;
     cursor: pointer;
 
-    &:before {
-      content: "X";
-      top: 50%;
-      left: 50%;
-      font-size: 1.38rem;
-      font-weight: 400;
-      position: absolute;
-      transform: translate(-50%, -50%);
+    img {
+      position: relative;
+      top: 28%;
+      left: 30%;
     }
   }
 
