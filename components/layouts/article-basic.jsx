@@ -58,6 +58,7 @@ const StoryPageLayout = () => {
   } = globalContent || {};
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
+  const { type: promoType = '' } = basicItems;
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
@@ -84,7 +85,7 @@ const StoryPageLayout = () => {
 
       <main>
         <header className="b-margin-bottom-d30-m20">
-          <div className="c-header">
+          <div className={(promoType === 'gallery') ? 'c-header-gallery' : 'c-header'}>
             <Headline
               headlines={headlines}
               basicItems={basicItems}
