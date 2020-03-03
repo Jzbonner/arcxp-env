@@ -31,8 +31,6 @@ const DefaultOutputType = (props) => {
         <meta property="fb:pages" content={fbPagesId} />
       </head>
       <body>
-        <div id="fb-root"></div>
-        <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
         <div id="fusion-app">{children}</div>
         <Fusion />
         {type && <TaboolaFooter type={type} />}
@@ -44,6 +42,8 @@ const DefaultOutputType = (props) => {
             <ConnextInit />
           </>
         )}
+         <div id="fb-root"></div>
+        <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
       </body>
     </html>
   );

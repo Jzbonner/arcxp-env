@@ -8,7 +8,7 @@ const Comments = ({ commentVisibility, toggleCommentsWindow }) => (
       <div className="close" onClick={toggleCommentsWindow}>
         X
       </div>
-      <div className="fb-comments" data-href={window.location.href} data-width="100%" data-numposts="5"></div>
+      <div className="fb-comments" data-href={window.location.href} data-width="100%" data-numposts="10"></div>
     </div>
 );
 
