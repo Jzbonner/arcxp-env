@@ -1,4 +1,4 @@
-import React, { useState, topRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useContent } from 'fusion:content';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
@@ -12,7 +12,17 @@ import './default.scss';
 
 const NavBar = () => {
   const [mobileMenuToggled, setToggle] = useState(false);
+  const [isMobile, setMobile] = useState(false);
   const mobileMenu = mobileMenuToggled ? 'mobile-nav-activated' : '';
+  const mobileBreakpoint = 1023;
+  const handleResizeEvent = () => {
+    if (window.innerWidth <= mobileBreakpoint) {
+      setMobile(true);
+    } else {
+      setMobile(false);
+    }
+  };
+
   const sections = useContent({
     source: 'site-api',
     query: {
@@ -21,10 +31,31 @@ const NavBar = () => {
     filter: topNavFilter,
   });
   const {
-    site: siteLogoImage,
+    site: logos,
     children,
     _id: rootDirectory,
   } = sections || {};
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResizeEvent, true);
+    return () => {
+      window.removeEventListener('resize', handleResizeEvent, true);
+    };
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (window.innerWidth <= mobileBreakpoint) {
+      setMobile(true);
+    } else {
+      setMobile(false);
+    }
+  }, []);
+
+  const {
+    site_logo_image: siteLogoImage,
+    site_logo_image_small: siteLogoImageSmall,
+    // site_logo_image_small_inverse: siteLogoImageSmallInverse,
+  } = logos || {};
 
   if (!children) {
     return null;
@@ -62,7 +93,6 @@ const NavBar = () => {
     );
   });
 
-  // if (currentWidth > desktopWidth) {
   return (
       <header className="c-nav">
         <div className='c-headerNav'>
@@ -72,39 +102,23 @@ const NavBar = () => {
               </div>
             </div>
             <div className='nav-mobile-logo'>
-              <Logo source={siteLogoImage} rootDirectory={rootDirectory} topRef={topRef}/>
+              <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
             </div>
             <Login/>
           </div>
-          <DesktopNav sections={sectionLi} mobile={mobileMenu} setToggle={setToggle}/>
+          <DesktopNav
+            sections={sectionLi}
+            isMobile={isMobile}
+            hamburgerToggle={mobileMenu}
+            setToggle={setToggle}
+            smallLogoUrl={siteLogoImageSmall}
+            rootDirectory={rootDirectory}/>
           <div className='sub b-flexRow b-flexCenter sub-text'>
             <Subscribe/>
           </div>
         </div>
       </header>
   );
-  // }
-
-  // if (currentWidth <= desktopWidth) {
-  //   return (
-  //     <header className="c-nav">
-  //       <div className='c-headerNav'>
-  //         <div className='b-flexRow b-flexCenter nav-logo'>
-  //           <div className='nav-menu-toggle'>
-  //             <div className='nav-flyout-button'>
-  //             </div>
-  //           </div>
-  //           <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
-  //           <Login/>
-  //         </div>
-  //         <div className='sub b-flexCenter b-flexRow sub-text'>
-  //           <Subscribe/>
-  //         </div>
-  //       </div>
-  //     </header>
-  //   );
-  // }
-  // return null;
 };
 
 export default NavBar;

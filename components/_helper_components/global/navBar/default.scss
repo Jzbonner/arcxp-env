@@ -15,43 +15,33 @@
     width: 90%;
     max-width: 1600px;
   }
+
   
-  .mobile-nav-activated {
-    transform: translateX(1000px);
+  nav {
 
-    .nav-menu-toggle {
-
-      .nav-flyout-button {
-        background: none;
-
-        &:before {
-          transform: rotate(-135deg);
-          top: 0;
-          background: #fff;
-        }
-
-        &:after {
-          transform: rotate(135deg);
-          bottom: 0;
-          background: #fff;
+    &.mobile-nav-activated {
+      transform: translateX(1000px);
+  
+      .nav-menu-toggle {
+        left: 15px;
+  
+        .nav-flyout-button {
+          background: none;
+  
+          &:before {
+            transform: rotate(-135deg);
+            top: 0;
+            background: #fff;
+          }
+  
+          &:after {
+            transform: rotate(135deg);
+            bottom: 0;
+            background: #fff;
+          }
         }
       }
     }
-  }
-  
-  nav {
-    display: flex;
-    background-image: linear-gradient(to top, #04befe, #4481eb);
-    box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
-    height: 100%;
-    width: 100%;
-    max-width: 408px;
-    position: fixed;
-    top: 0;
-    z-index: 3;
-    left: -1000px;
-    transform: translateX(0);
-    transition: transform .5s ease;
 
     a {
       color: #fff;
@@ -67,6 +57,24 @@
       align-items: flex-end;
       padding-bottom: 20px;
     }
+  }
+
+  .nav-mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    background-image: linear-gradient(to top, #04befe, #4481eb);
+    box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+    height: 100%;
+    width: 100vw;
+    max-width: 408px;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+    left: -1000px;
+    transform: translateX(0);
+    transition: transform .5s ease;
+    box-sizing: border-box;
   }
 
   
@@ -112,9 +120,31 @@
     }
   }
   
+  .nav-menu-header {
+    height: 90px;
+    margin-left: 40px;
+    
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+
+  .nav-menu-logo {
+    width: 100%;
+    max-width: 80px;
+    margin-top: -2px;
+  }
+  
+  .nav-sections {
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
   .nav-row {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     list-style-type: none;
 
     @include breakpoint(desktop-sm) {
@@ -125,11 +155,9 @@
   }
 
   .nav-items {
-    padding-right: 1.3vw;
-    display: flex;
-    flex: 0 0 auto;
-    padding-top: 10px;
-  
+    padding-left: 50px;
+    padding-bottom: 25px;
+
     .menu-active {
       @media (hover: none) {
         opacity: 1;
@@ -149,23 +177,32 @@
         }
       }
     }
+
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      flex: 0 0 auto;
+      padding: 10px 1.3vw 0 0;
+    }
   }
   
   .nav-itemBottomBorder {
     border-bottom: none;
 
-    @include breakpoint(dekstop-sm) {
+    @include breakpoint(desktop-sm) {
       border-bottom: solid 1px #cdcdcd;
     }
   }
   
   .nav-itemText {
+    @include text-styles(1.125rem, 1.44, "Gordita");
+
     font-weight: 400;
-    color: #2e81b7;
     text-transform: capitalize;
     align-items: center;
   
     @include breakpoint(desktop-sm) {
+      color: #2e81b7;
+
       @include text-styles(.875rem, 1, "Gordita-Medium");
     }
   
@@ -175,8 +212,12 @@
   }
   
   .nav-separator {
-    display: flex;
-    align-items: center;
+    display: none;
+
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      align-items: center;
+    }
   
     span {
       background-color: #2e81b7;
@@ -195,40 +236,70 @@
   }
   
   .nav-search {
-    display: none;
+    height: 3.3rem;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .24), 0 1px 4px 0 rgba(0, 0, 0, .24);
+    margin-bottom: 25px;
 
-    @include breakpoint(desktop-nav) {
+    @include breakpoint(desktop-sm) {
       padding-top: 10px;
+      margin-bottom: 0;
       display: flex;
       align-items: center;
       flex-grow: 1;
       flex-basis: 180px;
+      box-shadow: none;
+      border-radius: 0;
+      height: auto;
     }
   }
   
   .search-form {
     display: flex;
-    height: 28px;
-    width: 100%;
+    height: 3.25rem;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    @include breakpoint(desktop-sm) {
+      height: 28px;
+      width: 100%;
+      flex-direction: row;
+    }
   }
   
   .search-input {
-    text-align: right;
+    width: 90%;
+    position: relative;
+    border-radius: 6px;
     border: none;
     outline: none;
-    background-color: transparent;
-    width: calc(100% - 40px);
-  
-    @include text-styles(.625rem, 1, "Gordita");
+
+    @include text-styles(1rem, 1, "Gordita");
+
+    @include breakpoint(desktop-sm) {
+      text-align: right;
+      border: none;
+      background-color: transparent;
+      width: calc(100% - 40px);
+
+      @include text-styles(.625rem, 1, "Gordita");
+    }
   }
   
   .search-icon {
     height: 29px;
-    width: 29px;
-    cursor: pointer;
-    vertical-align: middle;
-    margin-left: 10px;
-    font-size: 1rem;
+    max-width: 20%;
+    padding: 0 .5rem;
+
+    @include breakpoint(desktop-sm) {
+      width: 29px;
+      cursor: pointer;
+      vertical-align: middle;
+      margin-left: 10px;
+      font-size: 1rem;
+      padding: 0;
+    }
   }
   
   .nav-weather {
@@ -254,8 +325,6 @@
   }
   
   .nav-mobile-login {
-    display: none;
-    
     @include breakpoint(desktop-sm) {
       display: flex;
     }
@@ -331,37 +400,50 @@
     display: flex;
     cursor: default;
     border-radius: 6px;
-    box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
-    position: absolute;
-    margin-left: -.45rem;
     opacity: 0;
     transition: opacity .15s;
+    margin-top: 20px;
+    margin-left: 20px;
+
+    @include breakpoint(desktop-sm) {
+      margin-left: -.45rem;
+      position: absolute;
+      box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
+    }
   }
   
   .menu-item {
-    height: 44px;
-    display: flex;
-    align-items: center;
-    padding: 0 .45rem;
-    background-color: #fff;
-    border-radius: 6px 6px 0 0;
-    z-index: 3;
+    display: none;
+
+    @include breakpoint(desktop-sm) {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 .45rem;
+      background-color: #fff;
+      border-radius: 6px 6px 0 0;
+      z-index: 3;
+    }
   }
   
   .subNav {
-    background-color: #fff;
-    top: 44px;
     transition: opacity .15s;
     opacity: 0;
     border-radius: 0 6px 6px;
-    padding: 1.125rem 1.5625rem .3125rem;
-    position: absolute;
-    box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
-    z-index: 2;
+    box-shadow: none;
     overflow: hidden;
     display: flex;
     align-items: center;
     visibility: hidden;
+
+    @include breakpoint(desktop-sm) {
+      padding: 1.125rem 1.5625rem .3125rem;
+      position: absolute;
+      z-index: 2;
+      top: 44px;
+      background-color: #fff;
+      box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+    }
   }
   
   .nav-menu-toggle {
@@ -425,10 +507,13 @@
   }
   
   .subNav-flyout {
-    display: inline-flex;
-    writing-mode: vertical-lr;
     flex-wrap: wrap;
     align-content: flex-start;
     list-style-type: none;
+
+    @include breakpoint(desktop-sm) {
+      display: inline-flex;
+      writing-mode: vertical-lr;
+    }
   }
 }
