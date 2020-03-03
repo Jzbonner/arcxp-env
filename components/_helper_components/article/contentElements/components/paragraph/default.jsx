@@ -9,6 +9,5 @@ const Paragraph = ({ src }) => {
 
 Paragraph.propTypes = {
   src: PropTypes.object,
-  content: PropTypes.string,
 };
 export default Paragraph;
