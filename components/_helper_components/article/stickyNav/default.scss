@@ -68,7 +68,7 @@
       position: relative;
     }
 
-    .fb-comments-count {
+    [class*="fb-comments-count"] {
       @include text-styles(.75rem, 1, "Gordita");
 
       position: absolute;
