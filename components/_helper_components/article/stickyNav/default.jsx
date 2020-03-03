@@ -22,11 +22,9 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   // In the previous version of this component, loginLink was being passed as a prop to the desktop version
   // but that prop was not being used anywhere in the component.
 
-  const handleClick = (e, callback) => {
+  const toggleCommentsWindow = (e) => {
     e.preventDefault();
-    if (callback instanceof Function) {
-      callback();
-    }
+    setCommentVisibility(!commentVisibilityRef.current);
   };
 
   // Handles stick nav visibility
@@ -40,15 +38,28 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-  }, []);
-
-  // Handles dropdown visibility
+  // Handles mobile dropdown visibility
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
 
+  const toggleMobileDropdownMenu = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDropdownVisibility(prev => !prev);
+  };
+
+  // Sets event listeners
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('click', () => {
+      setDropdownVisibility(false);
+      if (commentVisibilityRef.current) {
+        setCommentVisibility(false);
+      }
+    });
+  }, []);
+
   return (
-    <>
+    <div className="c-fixedContainer">
       <nav className={`c-stickyNav ${stickyNavVisibility ? 'is-visible' : ''}`}>
         <div className="stickyNav">
           <img src={tempMenu} alt="temp-burger-menu" className="desktop-hidden" style={{ maxWidth: '50px' }} />
@@ -64,6 +75,7 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
             <li className="stickyNav-item">
               <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
             </li>
+<<<<<<< HEAD
             <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
               <li
                 className="stickyNav-item arrow-icon desktop-hidden"
@@ -74,6 +86,14 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
                 }
               >
                 <a href="#" className="sticky-nav-icon btn-arrow-down" target="__blank"></a>
+=======
+            <ul
+              onClick={e => toggleMobileDropdownMenu(e)}
+              className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}
+            >
+              <li className="stickyNav-item arrow-icon desktop-hidden">
+                <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
+>>>>>>> APD-136/AddedFacebookCommentsPlugin-Nicholas
               </li>
               <li className="stickyNav-item">
                 <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
@@ -86,17 +106,28 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
               </li>
               {commentsEnabled ? (
                 <li className="stickyNav-item">
+<<<<<<< HEAD
                   <a
                     href="#"
                     className="sticky-nav-icon btn-comments"
                   ></a>
+=======
+                  <a href="#" className="sticky-nav-icon btn-comments" onClick={e => toggleCommentsWindow(e)}>
+                    <span className="fb-comments-count" data-href={window.location.href}></span>
+                  </a>
+>>>>>>> APD-136/AddedFacebookCommentsPlugin-Nicholas
                 </li>
               ) : null}
             </ul>
           </ul>
         </div>
       </nav>
+<<<<<<< HEAD
     </>
+=======
+      <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} />
+    </div>
+>>>>>>> APD-136/AddedFacebookCommentsPlugin-Nicholas
   );
 };
 
