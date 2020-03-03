@@ -12,7 +12,7 @@ const renderImage = () => {
   const {
     promo_items: promoItems,
     content_elements: contentElements,
-  } = globalContent;
+  } = globalContent || {};
   const { url: featuredImage } = promoItems ? promoItems.basic : {};
   const { url: videoThumbnail } = promoItems && promoItems.basic.promo_image ? promoItems.basic.promo_image : {};
   const { url: galleryThumbnail } = promoItems && promoItems.basic.promo_items ? promoItems.basic.promo_items.basic : {};
