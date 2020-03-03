@@ -128,9 +128,7 @@ export const adSlots = {
   'RP01-Story-Tablet': {
     slotName: 'RP01',
     dimensions: [
-      [
-        [0, 0],
-      ], // desktop
+      [], // desktop
       [
         [300, 600],
         [300, 250],
@@ -173,9 +171,7 @@ export const adSlots = {
   'RP09-Story-Tablet': {
     slotName: 'RP09',
     dimensions: [
-      [
-        [0, 0],
-      ], // desktop
+      [], // desktop
       [
         [300, 600],
         [300, 250],
@@ -188,9 +184,7 @@ export const adSlots = {
   },
   MP01: {
     dimensions: [
-      [
-        [0, 0],
-      ], // tablet+
+      [], // tablet+
       [
         [320, 150],
         [320, 50],
@@ -204,9 +198,7 @@ export const adSlots = {
   },
   MP02: {
     dimensions: [
-      [
-        [0, 0],
-      ], // tablet+
+      [], // tablet+
       [
         [300, 250],
       ], // mobile
@@ -219,9 +211,7 @@ export const adSlots = {
   },
   MP03: {
     dimensions: [
-      [
-        [0, 0],
-      ], // tablet+
+      [], // tablet+
       [
         [300, 250],
       ], // mobile
