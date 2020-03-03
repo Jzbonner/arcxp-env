@@ -9,11 +9,9 @@ const TaboolaFooter = ({ type }) => {
     boapPTD,
     moapPTD,
   } = taboolaID;
-  return (
-    <script type='text/javascript' dangerouslySetInnerHTML={{
-      __html: taboolaFooterScript(type, boapPTD, moapPTD),
-    }}></script>
-  );
+  return <script type='text/javascript' dangerouslySetInnerHTML={{
+    __html: taboolaFooterScript(type, boapPTD, moapPTD),
+  }}></script>;
 };
 
 TaboolaFooter.propTypes = {
