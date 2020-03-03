@@ -31,11 +31,9 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
     _setCommentVisibility(data);
   };
 
-  const handleClick = (e, callback) => {
+  const toggleCommentsWindow = (e) => {
     e.preventDefault();
-    if (callback instanceof Function) {
-      callback();
-    }
+    setCommentVisibility(!commentVisibilityRef.current);
   };
 
   // Handles stick nav visibility
@@ -49,15 +47,28 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-  }, []);
-
-  // Handles dropdown visibility
+  // Handles mobile dropdown visibility
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
 
+  const toggleMobileDropdownMenu = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDropdownVisibility(prev => !prev);
+  };
+
+  // Sets event listeners
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('click', () => {
+      setDropdownVisibility(false);
+      if (commentVisibilityRef.current) {
+        setCommentVisibility(false);
+      }
+    });
+  }, []);
+
   return (
-    <>
+    <div className="c-fixedContainer">
       <nav className={`c-stickyNav ${stickyNavVisibility ? 'is-visible' : ''}`}>
         <div className="stickyNav">
           <img src={tempMenu} alt="temp-burger-menu" className="desktop-hidden" style={{ maxWidth: '50px' }} />
@@ -73,15 +84,11 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
             <li className="stickyNav-item">
               <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
             </li>
-            <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
-              <li
-                className="stickyNav-item arrow-icon desktop-hidden"
-                onClick={e => handleClick(
-                  e,
-                  setDropdownVisibility(prev => !prev),
-                )
-                }
-              >
+            <ul
+              onClick={e => toggleMobileDropdownMenu(e)}
+              className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}
+            >
+              <li className="stickyNav-item arrow-icon desktop-hidden">
                 <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
               </li>
               <li className="stickyNav-item">
@@ -95,19 +102,17 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
               </li>
               {commentsEnabled ? (
                 <li className="stickyNav-item">
-                  <a
-                    href="#"
-                    className="sticky-nav-icon btn-comments"
-                    onClick={e => handleClick(e, setCommentVisibility(!commentVisibilityRef.current))}
-                  ></a>
+                  <a href="#" className="sticky-nav-icon btn-comments" onClick={e => toggleCommentsWindow(e)}>
+                    <span className="fb-comments-count" data-href={window.location.href}></span>
+                  </a>
                 </li>
               ) : null}
             </ul>
           </ul>
         </div>
       </nav>
-      <Comments commentVisibility={commentVisibility} />
-    </>
+      <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} />
+    </div>
   );
 };
 
