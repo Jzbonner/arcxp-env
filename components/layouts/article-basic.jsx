@@ -57,7 +57,7 @@ const StoryPageLayout = () => {
     type,
   } = globalContent || {};
 
-  if (subtype === 'Flatpage') return <FlatPage />;
+  if (subtype === 'Flatpage') return <FlatPage globalContent />;
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
