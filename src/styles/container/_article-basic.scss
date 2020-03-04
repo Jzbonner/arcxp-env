@@ -14,7 +14,7 @@
   }
 }
 
-.c-header-gallery {
+.c-header-gallery, .c-main-gallery {
   margin: 0 auto;
 
   @include breakpoint(desktop-lg) {

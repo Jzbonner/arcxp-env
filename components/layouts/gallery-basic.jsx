@@ -33,6 +33,7 @@ const GalleryPageLayout = () => {
     streams,
   };
 
+
   const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 
   return (
@@ -51,7 +52,7 @@ const GalleryPageLayout = () => {
       </header>
 
       <main>
-        <div>
+        <div className="c-header-gallery">
           <Headline
             headlines={headlines}
             basicItems={basicItems}
@@ -59,7 +60,9 @@ const GalleryPageLayout = () => {
             maxTabletViewWidth={maxTabletViewWidth}
           />
         </div>
-        <Gallery leafContentElements={contentElements} />
+        <div className="c-main-gallery">
+          <Gallery leafContentElements={contentElements} />
+        </div>
       </main>
       <Footer />
     </>
