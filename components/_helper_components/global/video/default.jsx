@@ -6,12 +6,12 @@ import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
 const Video = ({
-  src, isLeadVideo, isInlineVideo, maxTabletViewWidth,
+  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules,
 }) => {
   const { credits, _id: videoID } = src || {};
   const { basic: videoCaption } = src.description ? src.description : {};
   // const { url: videoPlayer } = src.streams && src.streams[0] ? src.streams[0] : {};
-  // const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
+  const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
   // const { url: inlineVideoThumb } = src && src.promo_items ? src.promo_items.basic : {};
   const screenSize = checkWindowSize();
 
@@ -46,7 +46,15 @@ const Video = ({
   return (
     <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
       <div className="video-component">
-        <div className="powa" data-org="ajc" data-api="sandbox" data-uuid={videoID} data-aspect-ratio="0.5625"></div>
+        <div
+          className="powa"
+          data-org="ajc"
+          data-api="sandbox"
+          data-aspect-ratio="0.5625"
+          data-uuid={videoID}
+          data-autoplay={startPlaying}
+          data-muted={muteON}
+        ></div>
       </div>
       <p className={`video-credit-text ${isInlineVideo ? 'is-inline' : null}`}>{giveCredit}</p>
       {smartChecker()}
