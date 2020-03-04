@@ -39,7 +39,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
     // there is a query string, let's see if it includes "testads"
     const queryString = requestUri.substring(requestUri.indexOf('?'));
     if (queryString.indexOf('testads') > -1) {
-      // "testads" exists, let's set a flag to update targeting
+      // "testads" exists, let's (re)set the "environ" value
       targeting.environ = 'debug';
     }
   }
