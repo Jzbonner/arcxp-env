@@ -18,6 +18,7 @@
 
   
   nav {
+    z-index: 10;
 
     &.mobile-nav-activated {
       transform: translateX(1000px);
@@ -453,6 +454,7 @@
     margin-left: 25px;
 
     @include breakpoint(desktop-sm) {
+      margin-top: 0;
       margin-left: -.45rem;
       position: absolute;
       box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
