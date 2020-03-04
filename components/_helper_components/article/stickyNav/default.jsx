@@ -68,7 +68,7 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   }, []);
 
   return (
-    <div className="c-fixedContainer">
+    <>
       <nav className={`c-stickyNav ${stickyNavVisibility ? 'is-visible' : ''}`}>
         <div className="stickyNav">
           <img src={tempMenu} alt="temp-burger-menu" className="desktop-hidden" style={{ maxWidth: '50px', marginRight: '6px' }} />
@@ -112,7 +112,7 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
         </div>
       </nav>
       <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} />
-    </div>
+    </>
   );
 };
 
