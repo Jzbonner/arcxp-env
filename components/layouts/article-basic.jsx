@@ -23,6 +23,7 @@ import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
+import FlatPage from '../_helper_components/flatpage/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
@@ -40,7 +41,6 @@ const StoryPageLayout = () => {
   const { globalContent } = appContext;
 
   if (!globalContent) return null;
-
   const {
     first_publish_date: firstPublishDate,
     display_date: displayDate,
@@ -56,6 +56,9 @@ const StoryPageLayout = () => {
     credits,
     type,
   } = globalContent || {};
+
+  if (subtype === 'Flatpage') return <FlatPage />;
+
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
