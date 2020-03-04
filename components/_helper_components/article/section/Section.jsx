@@ -5,7 +5,14 @@ import { isParagraph } from '../../../layouts/_helper_functions/Paragraph';
 import './styles.scss';
 
 const Section = ({
-  insertedAds, elements, insertAtSectionEnd, startIndex = 0, stopIndex = elements.length, fullWidth = false, rightRail, comesAfterDivider,
+  insertedAds,
+  elements,
+  insertAtSectionEnd,
+  startIndex = 0,
+  stopIndex = elements.length,
+  fullWidth = false,
+  rightRail,
+  comesAfterDivider = false,
 }) => {
   let paragraphCounter = 0;
   const newContentElements = [];
