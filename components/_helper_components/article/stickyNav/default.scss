@@ -3,15 +3,14 @@
 .c-stickyNav {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
   height: 90px;
   background: #f8f8f8;
   opacity: .98;
-  z-index: 999;
   align-items: center;
   border: none;
   display: none;
+  width: 100%;
+  z-index: 1000;
 
   @include breakpoint(desktop-sm) {
     border-bottom: solid 1px #d0d0d0;
@@ -62,6 +61,16 @@
 
     a {
       margin: 0;
+      position: relative;
+    }
+
+    [class*="fb-comments-count"] {
+      @include text-styles(.75rem, 1, "Gordita");
+
+      position: absolute;
+      top: 9.5px;
+      font-weight: 800;
+      color: #4481eb;
     }
   }
 
