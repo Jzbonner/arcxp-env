@@ -375,59 +375,59 @@ const Gallery = (props) => {
   }
 
   return (
-    <>
-    {isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
-    <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-      {!isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
-      {
-        isStickyVisible
-          ? <MobileGallery
-            objectRef={galleryMobileEl}
-            data={mobileElemData}
-            states={mobileState}
-            funcs={mobileFuncs}
-          />
-          : null
-      }
-      {
-        !isMobile
-          ? <DesktopGallery data={elementData} translateX={translateX} />
-          : null
-      }
-      <div
-        onClick={handleStickyOpen}
-        className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
-        <div className="gallery-overlay hidden-large">
-          {
-            isMobile ? <OverlayMosiac data={mobileElemData} /> : null
-          }
+    <div className="gallery-parent">
+      {isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
+      <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
+        {!isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
+        {
+          isStickyVisible
+            ? <MobileGallery
+              objectRef={galleryMobileEl}
+              data={mobileElemData}
+              states={mobileState}
+              funcs={mobileFuncs}
+            />
+            : null
+        }
+        {
+          !isMobile
+            ? <DesktopGallery data={elementData} translateX={translateX} />
+            : null
+        }
+        <div
+          onClick={handleStickyOpen}
+          className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
+          <div className="gallery-overlay hidden-large">
+            {
+              isMobile ? <OverlayMosiac data={mobileElemData} /> : null
+            }
+          </div>
+          <div className="gallery-count view-gallery">
+            <div className="gallery-count-prev hidden-small hidden-medium">
+              <a onClick={() => changeIndex(actions.PREV)}>
+                <img src={leftArrow}></img>
+              </a>
+            </div>
+            <div className="mobile-change">
+              <a>
+                <img src={middleBox} className="icon-gallery"></img>
+              </a>
+              <div className="icon-text hidden-large">View Gallery</div>
+            </div>
+            <div className="gallery-count-next hidden-small hidden-medium">
+              <a onClick={() => changeIndex(actions.NEXT)}>
+                <img src={rightArrow}></img>
+              </a>
+            </div>
+            <div className="count--box hidden-small hidden-medium">
+              <span className="gallery-index">{currentIndex + 1} / </span>
+              <span>{maxIndex + 1}</span>
+            </div>
+          </div>
         </div>
-        <div className="gallery-count view-gallery">
-          <div className="gallery-count-prev hidden-small hidden-medium">
-            <a onClick={() => changeIndex(actions.PREV)}>
-              <img src={leftArrow}></img>
-            </a>
-          </div>
-          <div className="mobile-change">
-            <a>
-              <img src={middleBox} className="icon-gallery"></img>
-            </a>
-            <div className="icon-text hidden-large">View Gallery</div>
-          </div>
-          <div className="gallery-count-next hidden-small hidden-medium">
-            <a onClick={() => changeIndex(actions.NEXT)}>
-              <img src={rightArrow}></img>
-            </a>
-          </div>
-          <div className="count--box hidden-small hidden-medium">
-            <span className="gallery-index">{currentIndex + 1} / </span>
-            <span>{maxIndex + 1}</span>
-          </div>
-        </div>
+        {captionData}
       </div>
-      {captionData}
     </div>
-    </>
   );
 };
 
