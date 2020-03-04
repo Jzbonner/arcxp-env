@@ -9,7 +9,7 @@
   }
 }
 
-#div-id-MP01 {
+.MP01 {
   @include breakpoint(tablet) {
     display: none;
   }
