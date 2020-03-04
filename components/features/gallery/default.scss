@@ -11,7 +11,9 @@
 }
 
 .gallery-parent {
- padding: 0 .875rem .875rem .875rem;
+  padding-left: .875rem;
+  padding-right: .875rem;
+  padding-bottom: .875rem;
 }
 
 .gallery-headline {
@@ -348,6 +350,7 @@
     transform: translate(-50%, -50%);
 
     .icon-text {
+      font-size: 1.25rem;
       letter-spacing: -.33px;
     }
   }

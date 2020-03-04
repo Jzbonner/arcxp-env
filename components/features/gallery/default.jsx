@@ -375,7 +375,7 @@ const Gallery = (props) => {
   }
 
   return (
-    <div className="gallery-parent">
+    <div className={isMobile && !isStickyVisible ? 'gallery-parent' : ''}>
       {isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
       <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
         {!isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
