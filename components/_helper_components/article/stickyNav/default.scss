@@ -1,20 +1,16 @@
 @import "../../../../src/styles/base/";
 
-.c-fixedContainer {
+.c-stickyNav {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
-
-.c-stickyNav {
   height: 90px;
   background: #f8f8f8;
   opacity: .98;
   align-items: center;
   border: none;
   display: none;
+  width: 100%;
+  z-index: 1000;
 
   @include breakpoint(desktop-sm) {
     border-bottom: solid 1px #d0d0d0;
