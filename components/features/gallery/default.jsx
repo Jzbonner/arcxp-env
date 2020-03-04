@@ -5,7 +5,7 @@ import {
   DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery,
 } from '../../_helper_components/global/gallery/index';
 import {
-  debounce, createBaseGallery, handleImageFocus, reorganizeElements,
+  debounce, createBaseGallery, handleImageFocus, reorganizeElements, insertGalleryAd,
 } from './_helper_functions/index';
 import leftArrow from '../../../resources/icons/gallery/left-arrow.svg';
 import middleBox from '../../../resources/icons/gallery/middle-box.svg';
@@ -17,6 +17,12 @@ const Gallery = (props) => {
   const {
     contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, ads = [],
   } = props;
+
+  const [PG01 = {}] = ads;
+  // , PG02 = {}, MPG01 = {}
+  // console.log('propped ads', PG02());
+
+
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
   const [mobileElementData, setMobileElementData] = useState(null);
@@ -31,6 +37,10 @@ const Gallery = (props) => {
   const [baseCaptionData, setBaseCaptionData] = useState(null);
   // only used if 'raw' contentElements are proped down from article
   const [galHeadline, setHeadline] = useState(null);
+
+  /* Ads */
+  const [clickCount, setClickCount] = useState(0);
+  // const [scrollCount, setScrollCount] = useState(0);
 
   /* Mobile */
   const [offsetHeight, setHeight] = useState(0);
@@ -68,7 +78,7 @@ const Gallery = (props) => {
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic ? headlines.basic : null;
-  console.log('ADS', ads);
+
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
     if (isMobile) return;
@@ -157,9 +167,20 @@ const Gallery = (props) => {
   };
 
   const renderDesktopGalleryElements = (elements) => {
-    const finalizedElements = handleImageFocus(elements, {
+    let adInsertedElems = null;
+
+    if (clickCount && clickCount % 4 === 0) {
+      // run ad insertions
+      adInsertedElems = insertGalleryAd(elements, PG01);
+      console.log('condition met');
+    }
+    // testing
+
+    // console.log('inserted', insertGalleryAd([...elements], PG01));
+    const finalizedElements = handleImageFocus((adInsertedElems || elements), {
       isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
-    }, clickFuncs);
+    }, clickFuncs, ads);
+
     setElementData(finalizedElements);
     renderCaptionByCurrentIndex();
   };
@@ -231,6 +252,7 @@ const Gallery = (props) => {
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
+    setClickCount(clickCount + 1);
     if (currentAction === actions.PREV) {
       handlePrevious([...elementData]);
     } else {
@@ -373,6 +395,8 @@ const Gallery = (props) => {
   if (elementData && !isMobile && galleryEl && debugFixEl && currentAction === '') {
     calculateTranslateX();
   }
+
+  console.log('click count', clickCount);
 
   return (
     <>
