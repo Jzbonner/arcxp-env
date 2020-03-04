@@ -1,23 +1,106 @@
-@import "../../../../src/styles/base/breakpoints";
+@import "../../../../src/styles/base/";
 
 .c-stickyNav {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  width: auto;
-  height: 100%;
-  margin: auto;
-  max-height: 90px;
+  height: 90px;
   background: #f8f8f8;
   opacity: .98;
-  z-index: 999;
-  display: flex;
   align-items: center;
   border: none;
+  display: none;
+  width: 100%;
+  z-index: 1000;
 
   @include breakpoint(desktop-sm) {
     border-bottom: solid 1px #d0d0d0;
-    max-height: 70px;
+    height: 70px;
+  }
+
+  &.is-visible {
+    display: flex;
+  }
+
+  .stickyNav {
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 94%;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    display: block;
+    margin-top: 10px;
+  }
+}
+
+.c-stickyNav-list {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: min-content;
+
+  @include breakpoint(desktop-sm) {
+    justify-content: left;
+  }
+
+  .stickyNav-item {
+    list-style: none;
+    padding-bottom: .313em;
+    margin: 0 6px;
+
+    @include breakpoint(desktop-sm) {
+      margin-right: 15px;
+    }
+
+    img {
+      width: 75px;
+      height: 56px;
+    }
+
+    a {
+      margin: 0;
+      position: relative;
+    }
+
+    [class*="fb-comments-count"] {
+      @include text-styles(.75rem, 1, "Gordita");
+
+      position: absolute;
+      top: 9.5px;
+      font-weight: 800;
+      color: #4481eb;
+    }
+  }
+
+  &.dropdown-stickyNav {
+    @media (max-width: 1023px) {
+      flex-direction: column;
+      position: absolute;
+      right: -50px;
+      top: -5px;
+      overflow: hidden;
+      height: 45px;
+
+      .stickyNav-item:first-child {
+        padding-top: .313em;
+      }
+
+      &.is-open {
+        height: auto;
+        border-radius: 6px;
+        box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+        background: #fff;
+
+        .arrow-icon {
+          transform: rotate(180deg);
+        }
+      }
+
+      .arrow-icon {
+        display: block;
+      }
+    }
   }
 }

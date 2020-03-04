@@ -20,7 +20,7 @@ const ContentElements = ({ contentElements }) => {
 
   return (
     <div className="c-contentElements">
-      {contentElements.map((element) => {
+      {contentElements.map((element, i) => {
         switch (element.type) {
           case 'div':
             // returns inserted ads
@@ -48,7 +48,7 @@ const ContentElements = ({ contentElements }) => {
               />
             );
           case 'text':
-            return <Paragraph src={element} />;
+            return <Paragraph src={element} key={i} />;
           case 'interstitial_link':
             return <InterstitialLink src={element} />;
           case 'list':

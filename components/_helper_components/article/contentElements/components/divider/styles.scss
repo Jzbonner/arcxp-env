@@ -2,10 +2,11 @@ hr.divider {
   height: 0;
   border: 0;
   border-top: solid 1px #cdcdcd;
+}
 
-  ~ p.info-box { // this was .story-text, this class is attached to the paragraph component
-    font-size: .75rem;
-    line-height: 1.75rem;
-    color: #707174;
-  }
+.after-divider p.story-text,
+hr.divider ~ p.story-text {
+  font-size: .75rem;
+  line-height: 1.75rem;
+  color: #707174;
 }

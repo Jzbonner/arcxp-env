@@ -5,7 +5,14 @@ import { isParagraph } from '../../../layouts/_helper_functions/Paragraph';
 import './styles.scss';
 
 const Section = ({
-  insertedAds, elements, insertAtSectionEnd, startIndex = 0, stopIndex = elements.length, fullWidth = false, rightRail,
+  insertedAds,
+  elements,
+  insertAtSectionEnd,
+  startIndex = 0,
+  stopIndex = elements.length,
+  fullWidth = false,
+  rightRail,
+  comesAfterDivider = false,
 }) => {
   let paragraphCounter = 0;
   const newContentElements = [];
@@ -58,7 +65,12 @@ const Section = ({
 
   if (newContentElements.length > 0) {
     return (
-      <div className={`c-section ${fullWidth ? 'fullWidth' : ''} b-margin-bottom-d40-m20`}>
+      <div className={
+          `c-section
+          ${fullWidth ? 'full-width b-clear-both' : ''}
+          b-margin-bottom-d40-m20
+          ${comesAfterDivider ? 'after-divider' : ''}`
+        }>
         <ContentElements contentElements={newContentElements} />
       </div>
     );
@@ -75,6 +87,7 @@ Section.propTypes = {
   rightRail: PropTypes.object,
   insertedAds: PropTypes.array,
   insertAtSectionEnd: PropTypes.array,
+  comesAfterDivider: PropTypes.boolean,
 };
 
 export default Section;

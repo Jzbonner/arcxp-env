@@ -38,9 +38,12 @@ const DefaultOutputType = (props) => {
           <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${environment}/${clientCode}/loader.min.js`}></script>
+            <script async src="https://d328y0m0mtvzqc.cloudfront.net/sandbox/powaBoot.js?org=ajc"></script>
             <ConnextInit />
           </>
         )}
+         <div id="fb-root"></div>
+        <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
       </body>
     </html>
   );
