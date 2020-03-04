@@ -69,8 +69,7 @@ const ContentElements = ({ contentElements }) => {
               && element.type.name
               && (element.type.name === 'ArcAd'
                 || element.type.name === 'BlogAuthor'
-                || element.type.name === 'ConnextEndOfStory'
-                || element.type.name === 'Divider')
+                || element.type.name === 'ConnextEndOfStory')
             ) {
               return element;
             }
