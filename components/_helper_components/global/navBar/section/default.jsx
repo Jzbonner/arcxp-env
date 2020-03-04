@@ -55,7 +55,10 @@ const Section = ({
       <li key={keyName} className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
       onMouseEnter={() => flyoutVisible(true)}
       onMouseLeave={() => flyoutVisible(false)}>
-        <a>{name}</a>
+        <div style={{ display: 'flex' }}>
+          <a>{name}</a>
+          <div className='nav-item-circle'></div>
+        </div>
         <div className={`${menuActivated}`}>
           <div className='menu-item'>
             <a>{name}</a>

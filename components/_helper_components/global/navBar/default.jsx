@@ -36,6 +36,8 @@ const NavBar = () => {
     _id: rootDirectory,
   } = sections || {};
 
+  // console.log(sections);
+
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
     return () => {
@@ -53,8 +55,8 @@ const NavBar = () => {
 
   const {
     site_logo_image: siteLogoImage,
-    site_logo_image_small: siteLogoImageSmall,
-    // site_logo_image_small_inverse: siteLogoImageSmallInverse,
+    // site_logo_image_small: siteLogoImageSmall,
+    site_logo_image_small_inverse: siteLogoImageSmallInverse,
   } = logos || {};
 
   if (!children) {
@@ -104,14 +106,14 @@ const NavBar = () => {
             <div className='nav-mobile-logo'>
               <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
             </div>
-            <Login/>
+            <Login isMobile={true} isFlyout={false}/>
           </div>
           <DesktopNav
             sections={sectionLi}
             isMobile={isMobile}
             hamburgerToggle={mobileMenu}
             setToggle={setToggle}
-            smallLogoUrl={siteLogoImageSmall}
+            smallLogoUrl={siteLogoImageSmallInverse}
             rootDirectory={rootDirectory}/>
           <div className='sub b-flexRow b-flexCenter sub-text'>
             <Subscribe/>

@@ -76,6 +76,16 @@
     transition: transform .5s ease;
     box-sizing: border-box;
     overflow-y: auto;
+    
+    .nav-mobile-login {
+
+      .login-text {
+        display: flex;
+        color: #fff;
+        padding-left: 15px;
+        padding-bottom: 3px;
+      }
+    }
   }
 
   
@@ -122,8 +132,9 @@
   }
   
   .nav-menu-header {
-    height: 90px;
-    margin-left: 40px;
+    min-height: 90px;
+    padding-left: 40px;
+    padding-bottom: 10px;
     
     @include breakpoint(desktop-sm) {
       display: none;
@@ -159,6 +170,13 @@
     padding-left: 50px;
     padding-bottom: 25px;
 
+    &:hover {
+
+      .nav-item-circle {
+        visibility: visible;
+      }
+    }
+
     .menu-active {
       @media (hover: none) {
         opacity: 1;
@@ -183,6 +201,27 @@
       display: flex;
       flex: 0 0 auto;
       padding: 10px 1.3vw 0 0;
+    }
+  }
+
+  .nav-item-circle {
+    background: linear-gradient(to top, #ff8787, #ff55b8);
+    border-radius: .875rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    cursor: pointer;
+    position: relative;
+    visibility: hidden;
+
+    &:after {
+      content: ">";
+      transform: scale(.5, 1.1);
+      width: .875rem;
+      color: #fff;
+    }
+
+    @include breakpoint(desktop-sm) {
+      display: none;
     }
   }
   
@@ -326,8 +365,11 @@
   }
   
   .nav-mobile-login {
+    padding-bottom: 26px;
+
     @include breakpoint(desktop-sm) {
       display: flex;
+      padding-bottom: 0;
     }
   }
 
@@ -346,19 +388,23 @@
   }
   
   .login-text {
-    font-weight: 800;
+    font-weight: 600;
     padding-left: 6px;
     cursor: pointer;
     display: none;
+
+    @include text-styles(1rem, 1, "Gordita");
   
     @include breakpoint(desktop-sm) {
       display: flex;
+      font-weight: 800;
 
       @include text-styles(.875rem, 1, "Gordita");
     }
   
     @include breakpoint(desktop-nav) {
       display: flex;
+      font-weight: 800;
 
       @include text-styles(1.125rem, 1, "Gordita");
     }
@@ -403,8 +449,8 @@
     border-radius: 6px;
     opacity: 0;
     transition: opacity .15s;
-    margin-top: 20px;
-    margin-left: 20px;
+    margin-top: 33px;
+    margin-left: 25px;
 
     @include breakpoint(desktop-sm) {
       margin-left: -.45rem;
@@ -499,12 +545,18 @@
 
   .flyout-item {
     writing-mode: horizontal-tb;
-    height: 1.875rem;
+    height: 2rem;
     margin-right: 3vw;
     white-space: nowrap;
     font-weight: 400;
-  
-    @include text-styles(.875rem, 1, "Gordita");
+    
+    @include text-styles(1rem, 1.44, "Gordita");
+
+    @include breakpoint(desktop-sm) {
+      height: 1.875rem;
+
+      @include text-styles(.875rem, 1, "Gordita");
+    }
   }
   
   .subNav-flyout {
