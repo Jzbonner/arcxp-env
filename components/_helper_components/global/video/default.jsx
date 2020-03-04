@@ -6,13 +6,11 @@ import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
 const Video = ({
-  src, isLeadVideo, isInlineVideo, maxTabletViewWidth,
+  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules,
 }) => {
   const { credits, _id: videoID } = src || {};
   const { basic: videoCaption } = src.description ? src.description : {};
-  // const { url: videoPlayer } = src.streams && src.streams[0] ? src.streams[0] : {};
-  // const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
-  // const { url: inlineVideoThumb } = src && src.promo_items ? src.promo_items.basic : {};
+  const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
   const screenSize = checkWindowSize();
 
   let mainCredit;
@@ -21,7 +19,20 @@ const Video = ({
   }
 
   useEffect(() => {
-    window.powaBoot();
+    const loadVideoScript = () => new Promise((resolve, reject) => {
+      const videoScript = document.createElement('script');
+      videoScript.type = 'text/javascript';
+      videoScript.src = 'https://d328y0m0mtvzqc.cloudfront.net/sandbox/powaBoot.js?org=ajc';
+      videoScript.async = true;
+      videoScript.addEventListener('load', () => {
+        resolve(window.powaBoot());
+      });
+      videoScript.addEventListener('error', () => {
+        reject(console.log('error'));
+      });
+      document.body.appendChild(videoScript);
+    });
+    loadVideoScript();
   }, []);
 
   const videoMarginBottom = 'b-margin-bottom-d40-m20';
@@ -46,7 +57,15 @@ const Video = ({
   return (
     <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
       <div className="video-component">
-        <div className="powa" data-org="ajc" data-api="sandbox" data-uuid={videoID} data-aspect-ratio="0.5625"></div>
+        <div
+          className="powa"
+          data-org="ajc"
+          data-api="sandbox"
+          data-aspect-ratio="0.5625"
+          data-uuid={videoID}
+          data-autoplay={startPlaying}
+          data-muted={muteON}
+        ></div>
       </div>
       <p className={`video-credit-text ${isInlineVideo ? 'is-inline' : null}`}>{giveCredit}</p>
       {smartChecker()}
