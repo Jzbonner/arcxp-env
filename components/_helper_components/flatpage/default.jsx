@@ -26,7 +26,7 @@ const FlatPage = ({ globalContent }) => {
 
   const { tags = [] } = taxonomy || {};
 
-  const RP01StoryFlatPage = () => <ArcAd staticSlot={'RP01-Story-FlatPage'} />;
+  const RP01StoryFlatPage = () => <ArcAd staticSlot={'RP01-Story-FlatPage'} key={'RP01-Story-FlatPage'} />;
 
   // Both checks return true if the tag is present and false if not.
   const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');

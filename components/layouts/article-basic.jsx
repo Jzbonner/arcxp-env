@@ -25,14 +25,14 @@ import filterContentElements from './_helper_functions/article/filterContentElem
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
 import FlatPage from '../_helper_components/flatpage/default';
 
-const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
-const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
-const MP02 = () => <ArcAd staticSlot={'MP02'} />;
-const MP03 = () => <ArcAd staticSlot={'MP03'} />;
+const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
+const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
+const MP02 = () => <ArcAd staticSlot={'MP02'} key={'MP02'} />;
+const MP03 = () => <ArcAd staticSlot={'MP03'} key={'MP03'} />;
 
 const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
-const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} />;
-const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} />;
+const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} key={'RP09-Story-Desktop'} />;
+const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} key={'RP09-Story-Tablet'} />;
 
 const start = 3;
 
@@ -68,9 +68,11 @@ const StoryPageLayout = () => {
   const maxNumberOfParagraphs = paragraphCounter(filteredContentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
 
-  const ConnextEndStory = () => <ConnextEndOfStory />;
-  const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} />;
-  const interscrollerPlaceholder = () => <div className='story-interscroller__placeholder full-width c-clear-both'></div>;
+  const ConnextEndStory = () => <ConnextEndOfStory key={'ConnextEndOfStory'}/>;
+  const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
+  const interscrollerPlaceholder = () => <div
+    className='story-interscroller__placeholder full-width c-clear-both'
+    key={'interscrollerPlaceholder'}></div>;
 
   return (
     <>
