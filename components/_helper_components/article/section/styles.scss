@@ -2,11 +2,14 @@
 @import "./../../../../src/styles/base/mixins";
 
 .c-hp01-mp01,
-.c-hp05-mp05 .arcad:not(:empty) {
-  padding: 2em 0 0;
+.c-hp05-mp05 {
 
-  @include breakpoint(tablet) {
-    padding: 3em 0 0;
+  .arcad:not(:empty) {
+    padding: 2em 0 0;
+
+    @include breakpoint(tablet) {
+      padding: 3em 0 0;
+    }
   }
 }
 
