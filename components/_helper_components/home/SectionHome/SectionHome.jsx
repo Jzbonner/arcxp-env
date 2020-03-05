@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './sectionHome.scss';
 
 const SectionHomepage = ({ feature, rightRailAd }) => {
   if (feature) {

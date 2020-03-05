@@ -30,6 +30,7 @@ const MP02 = () => <ArcAd staticSlot={'MP02'} />;
 const MP03 = () => <ArcAd staticSlot={'MP03'} />;
 
 // const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
+
 const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} />;
 const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} />;
 

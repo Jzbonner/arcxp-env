@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 
 const List = ({ customFields = {} }) => {
   if (customFields.number) {
-    return Array.from(customFields.number).map((item, index) => <div key={index}> List Feature</div>);
+    const lists = [];
+    // eslint-disable-next-line no-plusplus
+    for (let i = 1; i <= customFields.number; i++) {
+      lists.push(<div>List Feature</div>);
+    }
+    return lists;
   }
   return null;
 };
