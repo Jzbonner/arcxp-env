@@ -64,17 +64,22 @@ const StoryPageLayout = () => {
   const filteredContentElements = filterContentElements({ contentElements });
   const maxNumberOfParagraphs = paragraphCounter(filteredContentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
-  let infoBoxIndex = -1;
-  const ConnextEndStory = () => <ConnextEndOfStory />;
+  let infoBoxIndex = null;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} />;
   const interscrollerPlaceholder = () => <div className='story-interscroller__placeholder full-width c-clear-both'></div>;
 
   filteredContentElements.forEach((el, i) => {
-    if (el.type === 'divider' && infoBoxIndex === -1) {
+    if (el.type === 'divider' && infoBoxIndex === null) {
       infoBoxIndex = i;
     }
     return null;
   });
+
+  if (infoBoxIndex !== null) {
+    // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
+    filteredContentElements.splice(infoBoxIndex, 0, <ConnextEndOfStory />);
+    infoBoxIndex += 1;
+  }
 
   return (
     <>
@@ -124,7 +129,7 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             stopIndex={1}
             fullWidth={true}
-            comesAfterDivider={false}
+            comesAfterDivider={infoBoxIndex === 0}
           />
           <Section
             elements={filteredContentElements}
@@ -132,8 +137,7 @@ const StoryPageLayout = () => {
             stopIndex={3}
             rightRail={{ insertBeforeParagraph: 2, ad: RP01StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
-            comesAfterDivider={infoBoxIndex < 1}
-            infoBoxIndex={infoBoxIndex - 1}
+            comesAfterDivider={infoBoxIndex <= 1}
           />
           {maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
           <Nativo
@@ -145,8 +149,7 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             startIndex={start}
             stopIndex={stop}
-            comesAfterDivider={infoBoxIndex < start}
-            infoBoxIndex={infoBoxIndex - start}
+            comesAfterDivider={infoBoxIndex <= start}
           />
           {maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
           <Section
@@ -154,9 +157,8 @@ const StoryPageLayout = () => {
             startIndex={stop}
             rightRail={{ insertBeforeParagraph: 8, ad: RP09StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }]}
-            insertAtSectionEnd={[BlogAuthorComponent, ConnextEndStory]}
-            comesAfterDivider={infoBoxIndex < stop}
-            infoBoxIndex={infoBoxIndex - stop}
+            insertAtSectionEnd={[BlogAuthorComponent]}
+            comesAfterDivider={infoBoxIndex <= stop}
           />
 
           <Nativo
