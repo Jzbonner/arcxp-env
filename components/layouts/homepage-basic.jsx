@@ -2,50 +2,39 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useAppContext } from 'fusion:context';
-import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
+
+import GlobalAdSlots from '../_helper_components/global/ads/default';
+import BreakingNews from '../_helper_components/global/breakingNews/default';
+import NavBar from '../_helper_components/global/navBar/default';
+import SectionHome from '../_helper_components/home/SectionHome/SectionHome';
+import Footer from '../_helper_components/global/footer/default';
 
 const HomePageLayout = (props) => {
-  const [heading, leadImage, byline, content] = props.children;
+  const [zone1, zone2, zone3, zone4, zone5, zone6] = props.children;
 
-  const appContext = useAppContext();
-  const { globalContent } = appContext;
+  const Ad = () => <div>Placeholder Ad</div>;
 
-  if (!globalContent) return null;
-
-  const {
-    first_publish_date: firstPublishDate,
-    display_date: displayDate,
-  } = globalContent;
-
-  return <>
-    <header>
-      <h1>
-        { heading }
-      </h1>
-      <TimeStamp
-        firstPublishDate={firstPublishDate}
-        displayDate={displayDate}
-      />
-      <div>
-        { leadImage }
-      </div>
-      <div>
-        { byline }
-      </div>
-    </header>
-    <article>
-      { content }
-    </article>
-  </>;
+  return (
+    <>
+      <GlobalAdSlots />
+      <BreakingNews />
+      <header className="c-nav">
+        <NavBar />
+      </header>
+      <main>
+        <SectionHome feature={zone1} rightRailAd={Ad} />
+        <SectionHome feature={zone2} />
+        <SectionHome feature={zone3} rightRailAd={Ad} />
+        <SectionHome feature={zone4} />
+        <SectionHome feature={zone5} rightRailAd={Ad} />
+        <SectionHome feature={zone6} />
+      </main>
+      <Footer />
+    </>
+  );
 };
 
-HomePageLayout.sections = [
-  'heading',
-  'leadImage',
-  'byline',
-  'content',
-];
+HomePageLayout.sections = ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5', 'Zone 6'];
 
 HomePageLayout.propTypes = {
   children: PropTypes.node.isRequired,

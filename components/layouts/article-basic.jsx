@@ -1,11 +1,11 @@
 /*  /components/layouts/article-basic.jsx  */
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
+// import getProperties from 'fusion:properties';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
-import Headline from '../_helper_components/article/headline/default.jsx';
+// import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 import Section from '../_helper_components/article/section/Section';
@@ -29,7 +29,7 @@ const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
 const MP02 = () => <ArcAd staticSlot={'MP02'} />;
 const MP03 = () => <ArcAd staticSlot={'MP03'} />;
 
-const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
+// const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} />;
 const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} />;
 
@@ -67,38 +67,30 @@ const StoryPageLayout = () => {
 
   const ConnextEndStory = () => <ConnextEndOfStory />;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} />;
-  const interscrollerPlaceholder = () => <div className='story-interscroller__placeholder full-width c-clear-both'></div>;
+  const interscrollerPlaceholder = () => <div className="story-interscroller__placeholder full-width c-clear-both"></div>;
 
   return (
     <>
       <GlobalAdSlots />
       <BreakingNews />
       <header className="c-nav">
-        <NavBar/>
-        <StickyNav
-          articleURL={articleURL}
-          headlines={headlines}
-          comments={comments}
-        />
+        <NavBar />
+        <StickyNav articleURL={articleURL} headlines={headlines} comments={comments} />
       </header>
 
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className="c-header">
-            <Headline
+            {/* <Headline
               headlines={headlines}
               basicItems={basicItems}
               featuredVideoPlayerRules={featuredVideoPlayerRules}
               maxTabletViewWidth={maxTabletViewWidth}
-            />
+            /> */}
           </div>
           <div className="b-margin-bottom-d15-m10 c-label-wrapper b-pageContainer">
             <SectionLabel label={label} taxonomy={taxonomy} />
-            <TimeStamp
-              firstPublishDate={firstPublishDate}
-              displayDate={displayDate}
-              isHideTimestampTrue={isHideTimestampTrue}
-            />
+            <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
           </div>
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
@@ -113,11 +105,7 @@ const StoryPageLayout = () => {
             <ArcAd staticSlot={'HP01'} />
             <ArcAd staticSlot={'MP01'} />
           </div>
-          <Section
-            elements={filteredContentElements}
-            stopIndex={1}
-            fullWidth={true}
-          />
+          <Section elements={filteredContentElements} stopIndex={1} fullWidth={true} />
           <Section
             elements={filteredContentElements}
             startIndex={1}
@@ -126,15 +114,8 @@ const StoryPageLayout = () => {
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
           />
           {maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
-          <Nativo
-            elements={filteredContentElements}
-            displayIfAtLeastXParagraphs={4}
-            controllerClass="story-nativo_placeholder--moap"
-          />
-          <Section
-            elements={filteredContentElements}
-            startIndex={start}
-            stopIndex={stop} />
+          <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
+          <Section elements={filteredContentElements} startIndex={start} stopIndex={stop} />
           {maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
           <Section
             elements={filteredContentElements}
@@ -144,18 +125,14 @@ const StoryPageLayout = () => {
             insertAtSectionEnd={[BlogAuthorComponent, ConnextEndStory]}
           />
 
-          <Nativo
-            elements={filteredContentElements}
-            controllerClass="story-nativo_placeholder--boap"
-          />
+          <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />
           <div className="c-taboola">
             <TaboolaFeed type={type} />
           </div>
         </article>
-       {(!basicItems)
-          || (basicItems
-            && basicItems.type
-            && basicItems.type !== 'gallery') ? <Gallery contentElements={filteredContentElements} /> : null}
+        {!basicItems || (basicItems && basicItems.type && basicItems.type !== 'gallery') ? (
+          <Gallery contentElements={filteredContentElements} />
+        ) : null}
       </main>
       <Footer />
     </>
