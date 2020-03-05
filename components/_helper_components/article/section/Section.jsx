@@ -13,6 +13,7 @@ const Section = ({
   fullWidth = false,
   rightRail,
   comesAfterDivider = false,
+  infoBoxIndex = -1,
 }) => {
   let paragraphCounter = 0;
   const newContentElements = [];
@@ -55,10 +56,21 @@ const Section = ({
   // The two conditionals here allow components to be inserted directly or to be returned from functions
   if (insertAtSectionEnd) {
     insertAtSectionEnd.forEach((component) => {
+      const insertBeforeInfoBox = component.name
+        && infoBoxIndex > -1
+        && (component.name === 'ConnextEndOfStory' || component.name === 'ConnextEndStory');
       if (React.isValidElement(component)) {
-        newContentElements.push(component);
+        if (insertBeforeInfoBox) {
+          newContentElements.splice(infoBoxIndex - 1, 0, component);
+        } else {
+          newContentElements.push(component);
+        }
       } else if (typeof component === 'function' && React.isValidElement(component())) {
-        newContentElements.push(component());
+        if (insertBeforeInfoBox) {
+          newContentElements.splice(infoBoxIndex - 1, 0, component());
+        } else {
+          newContentElements.push(component());
+        }
       }
     });
   }
@@ -88,6 +100,7 @@ Section.propTypes = {
   insertedAds: PropTypes.array,
   insertAtSectionEnd: PropTypes.array,
   comesAfterDivider: PropTypes.boolean,
+  infoBoxIndex: PropTypes.number,
 };
 
 export default Section;

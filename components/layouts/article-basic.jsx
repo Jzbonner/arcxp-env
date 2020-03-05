@@ -64,14 +64,14 @@ const StoryPageLayout = () => {
   const filteredContentElements = filterContentElements({ contentElements });
   const maxNumberOfParagraphs = paragraphCounter(filteredContentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
-  let dividerIndex = null;
+  let infoBoxIndex = -1;
   const ConnextEndStory = () => <ConnextEndOfStory />;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} />;
   const interscrollerPlaceholder = () => <div className='story-interscroller__placeholder full-width c-clear-both'></div>;
 
   filteredContentElements.forEach((el, i) => {
-    if (el.type === 'divider' && dividerIndex === null) {
-      dividerIndex = i;
+    if (el.type === 'divider' && infoBoxIndex === -1) {
+      infoBoxIndex = i;
     }
     return null;
   });
@@ -132,7 +132,8 @@ const StoryPageLayout = () => {
             stopIndex={3}
             rightRail={{ insertBeforeParagraph: 2, ad: RP01StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
-            comesAfterDivider={dividerIndex < 1}
+            comesAfterDivider={infoBoxIndex < 1}
+            infoBoxIndex={infoBoxIndex - 1}
           />
           {maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
           <Nativo
@@ -144,7 +145,9 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             startIndex={start}
             stopIndex={stop}
-            comesAfterDivider={dividerIndex < start} />
+            comesAfterDivider={infoBoxIndex < start}
+            infoBoxIndex={infoBoxIndex - start}
+          />
           {maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
           <Section
             elements={filteredContentElements}
@@ -152,7 +155,8 @@ const StoryPageLayout = () => {
             rightRail={{ insertBeforeParagraph: 8, ad: RP09StoryDesktop }}
             insertedAds={[{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }]}
             insertAtSectionEnd={[BlogAuthorComponent, ConnextEndStory]}
-            comesAfterDivider={dividerIndex < stop}
+            comesAfterDivider={infoBoxIndex < stop}
+            infoBoxIndex={infoBoxIndex - stop}
           />
 
           <Nativo
