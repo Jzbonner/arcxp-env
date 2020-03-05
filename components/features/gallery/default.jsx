@@ -5,8 +5,9 @@ import {
   DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery,
 } from '../../_helper_components/global/gallery/index';
 import {
-  debounce, createBaseGallery, handleImageFocus, reorganizeElements, insertGalleryAd,
+  debounce, createBaseGallery, handleImageFocus, reorganizeElements,
 } from './_helper_functions/index';
+import PGO1Element from '../../_helper_components/global/ads/pg01/default';
 import leftArrow from '../../../resources/icons/gallery/left-arrow.svg';
 import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
@@ -47,10 +48,12 @@ const Gallery = (props) => {
   const [isCaptionOn, setCaptionState] = useState(true);
   const [isStickyVisible, setStickyState] = useState(false);
   const [isMobile, setMobileState] = useState('NOT INIT');
+  const [isAdVisible, setAdVisibleState] = useState(false);
 
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
   const debugFixEl = useRef(null);
+  const PG01Ref = useRef(null);
   const mobileBreakPoint = 1023;
 
   const actions = {
@@ -83,7 +86,10 @@ const Gallery = (props) => {
   const calculateTranslateX = () => {
     if (isMobile) return;
     let translateAmount;
-    const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
+    // const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
+
+    const focusElement = isAdVisible ? PG01Ref.current : (document.getElementById(`gallery-item-${currentIndex}`) || null);
+
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
     if (galleryEl.current && focusElement) {
       // fixes initializing translate bug...?
@@ -102,33 +108,62 @@ const Gallery = (props) => {
   };
 
   const changeIndex = (action, maxNumber) => {
-    // change current image index by -1
-    if (action === actions.PREV) {
-      setCurrentAction(action);
-      if (currentIndex <= 0) {
-        if (!maxIndex) {
-          setCurrentIndex(maxNumber);
+    if (!(clickCount && clickCount % 4 === 0)) {
+      // change current image index by -1
+      if (action === actions.PREV) {
+        setCurrentAction(action);
+        if (currentIndex <= 0) {
+          if (!maxIndex) {
+            setCurrentIndex(maxNumber);
+          } else {
+            setCurrentIndex(maxIndex);
+          }
         } else {
-          setCurrentIndex(maxIndex);
+          setCurrentIndex(currentIndex - 1);
         }
-      } else {
-        setCurrentIndex(currentIndex - 1);
       }
-    }
-    // change current image index by +1
-    if (action === actions.NEXT) {
-      setCurrentAction(action);
-      if (currentIndex === maxIndex) {
-        setCurrentIndex(0);
-      } else {
-        setCurrentIndex(currentIndex + 1);
+      // change current image index by +1
+      if (action === actions.NEXT) {
+        setCurrentAction(action);
+        if (currentIndex === maxIndex) {
+          setCurrentIndex(0);
+        } else {
+          setCurrentIndex(currentIndex + 1);
+        }
       }
+    } else {
+      setCurrentIndex(currentIndex);
     }
   };
 
   const clickFuncs = {
     prev: () => changeIndex(actions.PREV),
     next: () => changeIndex(actions.NEXT),
+  };
+
+  const insertGalleryAd = () => {
+    const elements = [...elementData];
+    console.log('starting elements', elements);
+
+    elementData.forEach((element, i) => {
+      if (element.props.data.states.isFocused) elements.splice(i, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} />);
+    });
+
+    console.log('ad inserted', elements);
+    return elements;
+  };
+
+  const removeGalleryAd = () => {
+    const elements = [...elementData];
+
+    elementData.forEach((element, i) => {
+      if (element.props.adSlot) {
+        elements.splice(i, 1);
+        console.log(element.props.adSlot);
+      }
+    });
+    console.log('removed ad from array', elements);
+    return elements;
   };
 
   // opens mobile sticky
@@ -167,22 +202,15 @@ const Gallery = (props) => {
   };
 
   const renderDesktopGalleryElements = (elements) => {
-    let adInsertedElems = null;
+    // let adInsertedElems = null;
+    if (!isAdVisible) {
+      const finalizedElements = handleImageFocus((elements), {
+        isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
+      }, clickFuncs, ads);
 
-    if (clickCount && clickCount % 4 === 0) {
-      // run ad insertions
-      adInsertedElems = insertGalleryAd(elements, PG01);
-      console.log('condition met');
+      setElementData(finalizedElements);
+      renderCaptionByCurrentIndex();
     }
-    // testing
-
-    // console.log('inserted', insertGalleryAd([...elements], PG01));
-    const finalizedElements = handleImageFocus((adInsertedElems || elements), {
-      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
-    }, clickFuncs, ads);
-
-    setElementData(finalizedElements);
-    renderCaptionByCurrentIndex();
   };
 
   const handleNext = (arr) => {
@@ -305,6 +333,19 @@ const Gallery = (props) => {
   }, [baseCaptionData]);
 
   useEffect(() => {
+    if (!isAdVisible && clickCount && clickCount % 4 === 0) {
+      const adInsertedElementArray = insertGalleryAd();
+      setElementData(adInsertedElementArray);
+      setAdVisibleState(true);
+    } else if (isAdVisible && (clickCount % 4) === 1) {
+      console.log('removeing ad');
+      const adRemovedElementArray = removeGalleryAd();
+      setElementData(adRemovedElementArray);
+      setAdVisibleState(false);
+    }
+  }, [clickCount]);
+
+  useEffect(() => {
     window.addEventListener('scroll', handleScrollEvent, true);
 
     // returned function will be called when component unmounts
@@ -397,60 +438,61 @@ const Gallery = (props) => {
   }
 
   console.log('click count', clickCount);
+  console.log('elements', elementData);
 
   return (
     <>
-    {isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
-    <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-      {!isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
-      {
-        isStickyVisible
-          ? <MobileGallery
-            objectRef={galleryMobileEl}
-            data={mobileElemData}
-            states={mobileState}
-            funcs={mobileFuncs}
-          />
-          : null
-      }
-      {
-        !isMobile
-          ? <DesktopGallery data={elementData} translateX={translateX} />
-          : null
-      }
-      <div
-        onClick={handleStickyOpen}
-        className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
-        <div className="gallery-overlay hidden-large">
-          {
-            isMobile ? <OverlayMosiac data={mobileElemData} /> : null
-          }
+      {isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
+      <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
+        {!isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
+        {
+          isStickyVisible
+            ? <MobileGallery
+              objectRef={galleryMobileEl}
+              data={mobileElemData}
+              states={mobileState}
+              funcs={mobileFuncs}
+            />
+            : null
+        }
+        {
+          !isMobile
+            ? <DesktopGallery data={elementData} translateX={translateX} />
+            : null
+        }
+        <div
+          onClick={handleStickyOpen}
+          className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
+          <div className="gallery-overlay hidden-large">
+            {
+              isMobile ? <OverlayMosiac data={mobileElemData} /> : null
+            }
+          </div>
+          <div className="gallery-count view-gallery">
+            <div className="gallery-count-prev hidden-small hidden-medium">
+              <a onClick={() => changeIndex(actions.PREV)}>
+                <img src={leftArrow}></img>
+              </a>
+            </div>
+            <div className="mobile-change">
+              <a>
+                <img src={middleBox} className="icon-gallery"></img>
+              </a>
+              <div className="icon-text hidden-large">View Gallery</div>
+            </div>
+            <div className="gallery-count-next hidden-small hidden-medium">
+              <a onClick={() => changeIndex(actions.NEXT)}>
+                <img src={rightArrow}></img>
+              </a>
+            </div>
+            <div className="count--box hidden-small hidden-medium">
+              <span className="gallery-index">{currentIndex + 1} / </span>
+              <span>{maxIndex + 1}</span>
+            </div>
+          </div>
         </div>
-        <div className="gallery-count view-gallery">
-          <div className="gallery-count-prev hidden-small hidden-medium">
-            <a onClick={() => changeIndex(actions.PREV)}>
-              <img src={leftArrow}></img>
-            </a>
-          </div>
-          <div className="mobile-change">
-            <a>
-              <img src={middleBox} className="icon-gallery"></img>
-            </a>
-            <div className="icon-text hidden-large">View Gallery</div>
-          </div>
-          <div className="gallery-count-next hidden-small hidden-medium">
-            <a onClick={() => changeIndex(actions.NEXT)}>
-              <img src={rightArrow}></img>
-            </a>
-          </div>
-          <div className="count--box hidden-small hidden-medium">
-            <span className="gallery-index">{currentIndex + 1} / </span>
-            <span>{maxIndex + 1}</span>
-          </div>
-        </div>
+        {captionData}
       </div>
-      {captionData}
-    </div>
     </>
   );
 };
