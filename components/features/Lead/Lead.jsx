@@ -6,14 +6,15 @@ import { useContent } from 'fusion:content';
 import leadFilter from '../../../content/filters/lead';
 
 const Lead = (customFields = {}) => {
-  const { displayClass, columns } = customFields;
-  const { contentService, contentConfigValues } = props.customFields.content;
+  const {
+    customFields: { displayClass = '', columns = 1 },
+    contentConfig: { contentService = 'collections-api', contentConfigValue = { id: '' } },
+  } = customFields;
 
   const data = useContent({
-    source: 'collections-api',
-    query: {
-      id: 'VUZWAJ63INFP3P7OM5OIYLKEKA',
-    },
+    source: contentService,
+    query: contentConfigValue,
+    filter: leadFilter,
   });
 
   console.log(data);
