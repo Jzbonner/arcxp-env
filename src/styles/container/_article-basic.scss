@@ -20,10 +20,6 @@
 
 .c-header-gallery {
   margin: 0 auto;
-
-  @include breakpoint(desktop-lg) {
-    max-width: 1600px;
-  }
 }
 
 .c-nav {
