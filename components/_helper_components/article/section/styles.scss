@@ -13,6 +13,12 @@
   }
 }
 
+.MP01 {
+  @include breakpoint(tablet) {
+    display: none;
+  }
+}
+
 .c-section {
   @include section();
 

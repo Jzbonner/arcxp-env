@@ -78,7 +78,9 @@ const ContentElements = ({ contentElements }) => {
             if (
               element.type
               && element.type.name
-              && (element.type.name === 'ArcAd' || element.type.name === 'BlogAuthor' || element.type.name === 'ConnextEndOfStory')
+              && (element.type.name === 'ArcAd'
+                || element.type.name === 'BlogAuthor'
+                || element.type.name === 'ConnextEndOfStory')
             ) {
               return element;
             }

@@ -13,9 +13,19 @@ const renderImage = () => {
     promo_items: promoItems,
     content_elements: contentElements,
   } = globalContent || {};
-  const { url: featuredImage } = promoItems ? promoItems.basic : {};
-  const { url: videoThumbnail } = promoItems && promoItems.basic.promo_image ? promoItems.basic.promo_image : {};
-  const { url: galleryThumbnail } = promoItems && promoItems.basic.promo_items ? promoItems.basic.promo_items.basic : {};
+  const {
+    url: featuredImage,
+    promo_image: promoImage,
+  } = promoItems && promoItems.basic ? promoItems.basic : {};
+  const {
+    url: videoThumbnail,
+  } = promoImage || {};
+  const {
+    promo_items: galleryPromoItems,
+  } = promoItems && promoItems.basic && promoItems.basic.promo_items ? promoItems.basic.promo_items : {};
+  const {
+    url: galleryThumbnail,
+  } = galleryPromoItems && galleryPromoItems.basic ? galleryPromoItems.basic : {};
   let ogContentImage = null;
 
   if (featuredImage) {
