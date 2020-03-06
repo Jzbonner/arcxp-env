@@ -1,8 +1,7 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-// import getProperties from 'fusion:properties';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
-// import Headline from '../_helper_components/article/headline/default.jsx';
+import Headline from '../_helper_components/article/headline/default.jsx';
 import StickyNav from '../_helper_components/article/stickyNav/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import Gallery from '../features/gallery/default';
@@ -20,20 +19,18 @@ const GalleryPageLayout = () => {
     headlines,
     comments,
     canonical_url: articleURL,
-    // type,
-    // credits,
-    // description,
-    // streams,
+    type,
+    credits,
+    description,
+    streams,
   } = globalContent || {};
 
-  // const basicItems = {
-  //   type,
-  //   credits,
-  //   description,
-  //   streams,
-  // };
-
-  // const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
+  const basicItems = {
+    type,
+    credits,
+    description,
+    streams,
+  };
 
   return (
     <>
@@ -52,12 +49,7 @@ const GalleryPageLayout = () => {
 
       <main>
         <div>
-          {/* <Headline
-            headlines={headlines}
-            basicItems={basicItems}
-            featuredVideoPlayerRules={featuredVideoPlayerRules}
-            maxTabletViewWidth={maxTabletViewWidth}
-          /> */}
+          <Headline headlines={headlines} basicItems={basicItems} />
         </div>
         <Gallery leafContentElements={contentElements} />
       </main>

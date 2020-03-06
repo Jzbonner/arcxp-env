@@ -1,9 +1,8 @@
 /*  /components/layouts/video-basic.jsx  */
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-// import getProperties from 'fusion:properties';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
-// import Headline from '../_helper_components/article/headline/default';
+import Headline from '../_helper_components/article/headline/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import StickyNav from '../_helper_components/article/stickyNav/default';
 import Footer from '../_helper_components/global/footer/default';
@@ -20,21 +19,19 @@ const VideoPageLayout = () => {
     headlines,
     comments,
     canonical_url: articleURL,
-    // type,
-    // credits,
-    // description,
-    // streams,
+    type,
+    credits,
+    description,
+    streams,
   } = globalContent || {};
 
-  // const basicItems = {
-  //   promo_items: promoItems,
-  //   type,
-  //   credits,
-  //   description,
-  //   streams,
-  // };
-
-  // const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
+  const basicItems = {
+    promo_items: promoItems,
+    type,
+    credits,
+    description,
+    streams,
+  };
 
   return (
     <>
@@ -52,12 +49,7 @@ const VideoPageLayout = () => {
 
       <main>
         <div className="c-header">
-          {/* <Headline
-            headlines={headlines}
-            basicItems={basicItems}
-            featuredVideoPlayerRules={featuredVideoPlayerRules}
-            maxTabletViewWidth={maxTabletViewWidth}
-          /> */}
+          <Headline headlines={headlines} basicItems={basicItems} />
         </div>
       </main>
       <Footer />
