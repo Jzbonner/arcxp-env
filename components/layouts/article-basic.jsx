@@ -23,15 +23,16 @@ import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
+import FlatPage from '../_helper_components/flatpage/default';
 
-const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} />;
-const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} />;
-const MP02 = () => <ArcAd staticSlot={'MP02'} />;
-const MP03 = () => <ArcAd staticSlot={'MP03'} />;
+const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
+const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
+const MP02 = () => <ArcAd staticSlot={'MP02'} key={'MP02'} />;
+const MP03 = () => <ArcAd staticSlot={'MP03'} key={'MP03'} />;
 
 const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
-const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} />;
-const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} />;
+const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} key={'RP09-Story-Desktop'} />;
+const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} key={'RP09-Story-Tablet'} />;
 
 const start = 3;
 
@@ -40,7 +41,6 @@ const StoryPageLayout = () => {
   const { globalContent } = appContext;
 
   if (!globalContent) return null;
-
   const {
     first_publish_date: firstPublishDate,
     display_date: displayDate,
@@ -56,6 +56,9 @@ const StoryPageLayout = () => {
     credits,
     type,
   } = globalContent || {};
+
+  if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} />;
+
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
@@ -64,9 +67,12 @@ const StoryPageLayout = () => {
   const filteredContentElements = filterContentElements({ contentElements });
   const maxNumberOfParagraphs = paragraphCounter(filteredContentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
+
   let infoBoxIndex = null;
-  const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} />;
-  const interscrollerPlaceholder = () => <div className='story-interscroller__placeholder full-width c-clear-both'></div>;
+  const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
+  const interscrollerPlaceholder = () => <div
+    className='story-interscroller__placeholder full-width c-clear-both'
+    key={'interscrollerPlaceholder'}></div>;
 
   filteredContentElements.forEach((el, i) => {
     if (el.type === 'divider' && infoBoxIndex === null) {
@@ -77,7 +83,7 @@ const StoryPageLayout = () => {
 
   if (infoBoxIndex !== null) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
-    filteredContentElements.splice(infoBoxIndex, 0, <ConnextEndOfStory />);
+    filteredContentElements.splice(infoBoxIndex, 0, <ConnextEndOfStory key={'ConnextEndOfStory'} />);
     infoBoxIndex += 1;
   }
 
