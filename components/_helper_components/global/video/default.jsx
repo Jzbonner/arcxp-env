@@ -19,7 +19,7 @@ const Video = ({
   }
 
   useEffect(() => {
-    const loadVideoScript = () => new Promise((resolve, reject) => {
+    const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
       const videoScript = document.createElement('script');
       videoScript.type = 'text/javascript';
       videoScript.src = 'https://d328y0m0mtvzqc.cloudfront.net/sandbox/powaBoot.js?org=ajc';
@@ -27,8 +27,8 @@ const Video = ({
       videoScript.addEventListener('load', () => {
         resolve(window.powaBoot());
       });
-      videoScript.addEventListener('error', () => {
-        reject(console.log('error'));
+      videoScript.addEventListener('error', (e) => {
+        reject(rejectCallBack(e));
       });
       document.body.appendChild(videoScript);
     });
@@ -61,6 +61,7 @@ const Video = ({
           className="powa"
           data-org="ajc"
           data-api="sandbox"
+          data-env="sandbox"
           data-aspect-ratio="0.5625"
           data-uuid={videoID}
           data-autoplay={startPlaying}
