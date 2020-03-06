@@ -14,8 +14,11 @@
   }
 }
 
-.c-header-gallery,
 .c-main-gallery {
+  margin: 0 auto;
+}
+
+.c-header-gallery {
   margin: 0 auto;
 
   @include breakpoint(desktop-lg) {
