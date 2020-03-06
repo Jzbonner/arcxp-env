@@ -2,7 +2,7 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import GlobalAdSlots from '../_helper_components/global/ads/default';
+// import GlobalAdSlots from '../_helper_components/global/ads/default';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
@@ -14,7 +14,7 @@ import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
 import NavBar from '../_helper_components/global/navBar/default';
-import StickyNav from '../_helper_components/article/stickyNav/default';
+// import StickyNav from '../_helper_components/article/stickyNav/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Footer from '../_helper_components/global/footer/default';
 import ArcAd from '../features/ads/default';
@@ -71,10 +71,9 @@ const StoryPageLayout = () => {
 
   return (
     <>
-      <GlobalAdSlots />
+      {/* <GlobalAdSlots /> */}
       <BreakingNews />
-        <NavBar/>
-        <StickyNav
+        <NavBar
           articleURL={articleURL}
           headlines={headlines}
           comments={comments}

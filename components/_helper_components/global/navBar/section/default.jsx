@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../default.scss';
+import '../../../../../src/styles/base/_utility.scss';
 
 const Section = ({
   navigation,
   link,
   childSections,
-  keyName,
 }) => {
   const [isVisible, flyoutVisible] = useState(false);
   const menuActivated = !isVisible ? 'menu-inactive' : 'menu-active';
@@ -21,7 +21,7 @@ const Section = ({
   // Added protection if there are no subsections
   if (childSections.length === 0) {
     return <>
-      <li key={keyName} className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
+      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
             <a href={link}>{name}</a>
       </li>
         </>;
@@ -52,12 +52,13 @@ const Section = ({
 
   return (
     <>
-      <li key={keyName} className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
+      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
       onMouseEnter={() => flyoutVisible(true)}
-      onMouseLeave={() => flyoutVisible(false)}>
+      onMouseLeave={() => flyoutVisible(false)}
+      >
         <div style={{ display: 'flex' }}>
           <a>{name}</a>
-          <div className='nav-item-circle'></div>
+          <div className='nav-item-circle b-flexCenter'></div>
         </div>
         <div className={`${menuActivated}`}>
           <div className='menu-item'>
@@ -79,7 +80,6 @@ Section.propTypes = {
   link: PropTypes.string,
   childSections: PropTypes.array,
   visible: PropTypes.bool,
-  keyName: PropTypes.string,
 };
 
 export default Section;

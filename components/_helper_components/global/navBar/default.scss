@@ -15,7 +15,6 @@
     width: 90%;
     max-width: 1600px;
   }
-
   
   nav {
     z-index: 10;
@@ -71,12 +70,12 @@
     max-width: 408px;
     position: fixed;
     top: 0;
-    z-index: 3;
+    z-index: 10002;
     left: -1000px;
     transform: translateX(0);
     transition: transform .5s ease;
     box-sizing: border-box;
-    overflow-y: auto;
+    overflow-y: scroll;
     
     .nav-mobile-login {
 
@@ -174,26 +173,46 @@
     &:hover {
 
       .nav-item-circle {
+        display: flex;
         visibility: visible;
+
+        @include breakpoint(desktop-sm) {
+          display: none;
+        }
       }
     }
 
     .menu-active {
       @media (hover: none) {
-        opacity: 1;
+        @include breakpoint(desktop-sm) {
+          opacity: 1;
+        }
   
         .subNav {
           visibility: visible;
-          opacity: 1;
+          // position: relative;
+          display: flex;
+
+          @include breakpoint(desktop-sm) {
+            opacity: 1;
+          }
         }
       }
     
       &:hover {
-        opacity: 1;
-  
-        .subNav {
-          visibility: visible;
+        @include breakpoint(desktop-sm) {
           opacity: 1;
+        }
+
+        .subNav {
+          display: flex;
+          visibility: visible;
+          position: absolute;
+
+          @include breakpoint(desktop-sm) {
+            visibility: visible;
+            opacity: 1;
+          }
         }
       }
     }
@@ -213,6 +232,7 @@
     cursor: pointer;
     position: relative;
     visibility: hidden;
+    margin-left: 10px;
 
     &:after {
       content: ">";
@@ -311,7 +331,7 @@
   
   .search-input {
     width: 90%;
-    position: relative;
+    // position: relative;
     border-radius: 6px;
     border: none;
     outline: none;
@@ -365,6 +385,47 @@
     cursor: pointer;
   }
   
+  .nav-weather-widget {
+    width: 100%;
+    height: 260px;
+    background-color: #fff;
+    margin-bottom: 60px;
+
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+
+  .nav-social {
+    width: 160px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 55px;
+  }
+
+  .nav-mobile-footer {
+    color: #fff;
+    text-transform: capitalize;
+
+    @include text-styles(.875rem, 1, "Gordita");
+
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+  
+  .nav-copyright {
+    margin-bottom: 20px;
+  }
+
+  .nav-copyright-links {
+    margin-bottom: 10px;
+
+    a {
+      padding: 0 5px;
+    }
+  }
+
   .nav-mobile-login {
     padding-bottom: 26px;
 
@@ -448,12 +509,12 @@
     display: flex;
     cursor: default;
     border-radius: 6px;
-    opacity: 0;
-    transition: opacity .15s;
     margin-top: 33px;
     margin-left: 25px;
 
     @include breakpoint(desktop-sm) {
+      opacity: 0;
+      transition: opacity .15s;
       margin-top: 0;
       margin-left: -.45rem;
       position: absolute;
@@ -476,16 +537,18 @@
   }
   
   .subNav {
-    transition: opacity .15s;
-    opacity: 0;
     border-radius: 0 6px 6px;
     box-shadow: none;
-    overflow: hidden;
-    display: flex;
+    // display: flex;
     align-items: center;
-    visibility: hidden;
+    display: none;
 
     @include breakpoint(desktop-sm) {
+      overflow: hidden;
+      visibility: hidden;
+      display: flex;
+      transition: opacity .15s;
+      opacity: 0;
       padding: 1.125rem 1.5625rem .3125rem;
       position: absolute;
       z-index: 2;

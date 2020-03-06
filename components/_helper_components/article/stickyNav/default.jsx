@@ -7,7 +7,9 @@ import logo from '../../../../resources/images/stickyNav-logo.svg';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import Comments from '../comments/comments';
 
-const StickyNav = ({ articleURL, headlines, comments = false }) => {
+const StickyNav = ({
+  articleURL, headlines, comments = false, toggle,
+}) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
   } = getProperties();
@@ -68,7 +70,7 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   }, []);
 
   return (
-    <div className="c-fixedContainer">
+    <div className={`c-fixedContainer ${toggle ? 'nav-wrapper' : ''}`}>
       <nav className={`c-stickyNav ${stickyNavVisibility ? 'is-visible' : ''}`}>
         <div className="stickyNav">
           <img src={tempMenu} alt="temp-burger-menu" className="desktop-hidden" style={{ maxWidth: '50px', marginRight: '6px' }} />
@@ -120,6 +122,7 @@ StickyNav.propTypes = {
   articleURL: PropTypes.string,
   headlines: PropTypes.object,
   comments: PropTypes.object,
+  toggle: PropTypes.bool,
 };
 
 export default StickyNav;
