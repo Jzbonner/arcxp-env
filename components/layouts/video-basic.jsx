@@ -1,7 +1,6 @@
 /*  /components/layouts/video-basic.jsx  */
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import Headline from '../_helper_components/article/headline/default';
 import NavBar from '../_helper_components/global/navBar/default';
@@ -34,13 +33,11 @@ const VideoPageLayout = () => {
     streams,
   };
 
-  const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
-
   return (
     <>
       <GlobalAdSlots />
       <header className="c-nav">
-        <NavBar/>
+        <NavBar />
         <StickyNav
           articleURL={articleURL}
           headlines={headlines}
@@ -52,15 +49,10 @@ const VideoPageLayout = () => {
 
       <main>
         <div className="c-header">
-          <Headline
-            headlines={headlines}
-            basicItems={basicItems}
-            featuredVideoPlayerRules={featuredVideoPlayerRules}
-            maxTabletViewWidth={maxTabletViewWidth}
-          />
+          <Headline headlines={headlines} basicItems={basicItems} />
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 };

@@ -1,7 +1,6 @@
 /*  /components/layouts/article-basic.jsx  */
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
@@ -30,7 +29,6 @@ const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01
 const MP02 = () => <ArcAd staticSlot={'MP02'} key={'MP02'} />;
 const MP03 = () => <ArcAd staticSlot={'MP03'} key={'MP03'} />;
 
-const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} key={'RP09-Story-Desktop'} />;
 const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} key={'RP09-Story-Tablet'} />;
 
@@ -98,12 +96,8 @@ const StoryPageLayout = () => {
       {!noAds && <GlobalAdSlots />}
       <BreakingNews />
       <header className="c-nav">
-        <NavBar/>
-        <StickyNav
-          articleURL={articleURL}
-          headlines={headlines}
-          comments={comments}
-        />
+        <NavBar />
+        <StickyNav articleURL={articleURL} headlines={headlines} comments={comments} />
       </header>
 
       <main>
@@ -112,17 +106,11 @@ const StoryPageLayout = () => {
             <Headline
               headlines={headlines}
               basicItems={basicItems}
-              featuredVideoPlayerRules={featuredVideoPlayerRules}
-              maxTabletViewWidth={maxTabletViewWidth}
             />
           </div>
           <div className="b-margin-bottom-d15-m10 c-label-wrapper b-pageContainer">
             <SectionLabel label={label} taxonomy={taxonomy} />
-            <TimeStamp
-              firstPublishDate={firstPublishDate}
-              displayDate={displayDate}
-              isHideTimestampTrue={isHideTimestampTrue}
-            />
+            <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
           </div>
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
