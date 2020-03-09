@@ -69,6 +69,11 @@ const StoryPageLayout = () => {
   const maxNumberOfParagraphs = paragraphCounter(filteredContentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
 
+  const { tags = [] } = taxonomy || {};
+
+  // Both checks return true if the tag is present and false if not.
+  const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
+
   let infoBoxIndex = null;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
   const interscrollerPlaceholder = () => <div
@@ -90,7 +95,7 @@ const StoryPageLayout = () => {
 
   return (
     <>
-      <GlobalAdSlots />
+      {!noAds && <GlobalAdSlots />}
       <BreakingNews />
       <header className="c-nav">
         <NavBar/>
@@ -128,10 +133,12 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
-          <div className="c-hp01-mp01">
-            <ArcAd staticSlot={'HP01'} />
-            <ArcAd staticSlot={'MP01'} />
-          </div>
+          {!noAds
+            && <div className="c-hp01-mp01">
+              <ArcAd staticSlot={'HP01'} />
+              <ArcAd staticSlot={'MP01'} />
+            </div>
+          }
           <Section
             elements={filteredContentElements}
             stopIndex={1}
@@ -142,36 +149,42 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             startIndex={1}
             stopIndex={3}
-            rightRail={{ insertBeforeParagraph: 2, ad: RP01StoryDesktop }}
-            insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
+            rightRail={(!noAds ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null)}
+            insertedAds={(!noAds ? [{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }] : null)}
+            fullWidth={noAds}
             comesAfterDivider={infoBoxIndex <= 1}
           />
-          {maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
-          <Nativo
-            elements={filteredContentElements}
-            displayIfAtLeastXParagraphs={4}
-            controllerClass="story-nativo_placeholder--moap"
-          />
+          {(!noAds && maxNumberOfParagraphs === 3) && interscrollerPlaceholder()}
+          {!noAds
+            && <Nativo
+              elements={filteredContentElements}
+              displayIfAtLeastXParagraphs={4}
+              controllerClass="story-nativo_placeholder--moap"
+            />
+          }
           <Section
             elements={filteredContentElements}
             startIndex={start}
             stopIndex={stop}
+            fullWidth={noAds}
             comesAfterDivider={infoBoxIndex <= start}
           />
-          {maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
+          {(!noAds && maxNumberOfParagraphs >= 4) && interscrollerPlaceholder()}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
-            rightRail={{ insertBeforeParagraph: 8, ad: RP09StoryDesktop }}
-            insertedAds={[{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }]}
+            rightRail={(!noAds ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null)}
+            insertedAds={(!noAds ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : null)}
+            fullWidth={noAds}
             insertAtSectionEnd={[BlogAuthorComponent]}
             comesAfterDivider={infoBoxIndex <= stop}
           />
-
-          <Nativo
-            elements={filteredContentElements}
-            controllerClass="story-nativo_placeholder--boap"
-          />
+          {!noAds
+            && <Nativo
+              elements={filteredContentElements}
+              controllerClass="story-nativo_placeholder--boap"
+            />
+          }
           <div className="c-taboola">
             <TaboolaFeed type={type} />
           </div>
