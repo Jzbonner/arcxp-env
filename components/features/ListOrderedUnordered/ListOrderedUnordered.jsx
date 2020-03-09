@@ -4,13 +4,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 
-const Mosaic = (customFields = {}) => {
+const ListOrderedUnordered = (customFields = {}) => {
   let {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
+      displayClass = '',
       startIndex = 1,
       itemLimit = 100,
-      displayClass = '',
     },
   } = customFields;
 
@@ -19,10 +19,10 @@ const Mosaic = (customFields = {}) => {
     query: contentConfigValues,
   });
 
-  return <div>Mosaic Feature</div>;
+  return <div>Ordered or Un-ordered List Feature</div>;
 };
 
-Mosaic.propTypes = {
+ListOrderedUnordered.propTypes = {
   customFields: PropTypes.shape({
     content: PropTypes.contentConfig('collections').tag({
       name: 'Content',
@@ -35,11 +35,11 @@ Mosaic.propTypes = {
       name: 'Item Limit',
       defaultValue: 1,
     }),
-    displayClass: PropTypes.oneOf(['Mosaic']).tag({
+    displayClass: PropTypes.oneOf(['Ordered List', 'Un-ordered List']).tag({
       name: 'Display Class',
-      defaultValue: 'Mosaic',
+      defaultValue: 'Ordered List',
     }),
   }),
 };
 
-export default Mosaic;
+export default ListOrderedUnordered;

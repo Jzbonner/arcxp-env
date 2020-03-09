@@ -3,30 +3,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import leadFilter from '../../../content/filters/lead';
 
 const Lead = (customFields = {}) => {
-  const {
-    customFields: { displayClass = '', columns = 1 },
-    contentConfig: { contentService = 'collections-api', contentConfigValue = { id: '' } },
+  let {
+    customFields: {
+      content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
+      startIndex = 1,
+      displayClass = '',
+      columns = 1,
+    },
   } = customFields;
 
   const data = useContent({
     source: contentService,
-    query: contentConfigValue,
-    filter: leadFilter,
+    query: contentConfigValues,
   });
 
-  console.log(data);
-
-  return <div>placeholder</div>;
+  return <div>Lead Feature</div>;
 };
 
 Lead.propTypes = {
   customFields: PropTypes.shape({
-    displayClass: PropTypes.oneOf(['1', '2']).tag({
+    content: PropTypes.contentConfig('collections').tag({
+      name: 'Content',
+    }),
+    startIndex: PropTypes.number.tag({
+      name: 'Start Index',
+      defaultValue: 1,
+    }),
+    displayClass: PropTypes.oneOf([
+      '5-item Feature - No Photo',
+      '5-item Feature - Left Photo',
+      '5-item Feature - Top Photo',
+      '5-item Feature - Center Lead Top Photo',
+      '1 or 2-item Feature',
+    ]).tag({
       name: 'Display Class',
-      defaultValue: '2',
+      defaultValue: '5-item Feature - No Photo',
     }),
     columns: PropTypes.number.tag({
       name: 'Columns',
