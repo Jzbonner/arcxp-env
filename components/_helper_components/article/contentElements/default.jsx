@@ -26,15 +26,19 @@ const ContentElements = ({ contentElements }) => {
             // returns inserted ads
             return element;
           case 'quote':
-            return <BlockQuote contentElements={element.content_elements} citation={element.citation} />;
+            return <BlockQuote
+              contentElements={element.content_elements}
+              citation={element.citation}
+              key={`BlockQuote-${i}`}
+            />;
           case 'correction':
-            return <Correction src={element} />;
+            return <Correction src={element} key={`Correction-${i}`} />;
           case 'gallery':
-            return <Gallery src={element} />;
+            return <Gallery src={element} key={`Gallery-${i}`} />;
           case 'raw_html':
-            return <HTML src={element} />;
+            return <HTML src={element} key={`Raw_HTML-${i}`} />;
           case 'header':
-            return <Header src={element} />;
+            return <Header src={element} key={`Header-${i}`} />;
           case 'image':
             // a height of 0 makes the height proportional to the width
             return (
@@ -45,29 +49,38 @@ const ContentElements = ({ contentElements }) => {
                 isInlineImage
                 imageMarginBottom="b-margin-bottom-d40-m20"
                 maxTabletViewWidth={maxTabletViewWidth}
+                key={`Image-${i}`}
               />
             );
           case 'text':
-            return <Paragraph src={element} key={i} />;
+            return <Paragraph src={element} key={`Paragraph-${i}`} />;
           case 'interstitial_link':
-            return <InterstitialLink src={element} />;
+            return <InterstitialLink src={element} key={`InterstitialLink-${i}`} />;
           case 'list':
-            return <List src={element} />;
+            return <List src={element} key={`List-${i}`} />;
           case 'divider':
-            return <Divider />;
+            return <Divider key={`Divider-${i}`} />;
           case 'oembed_response':
-            return <Oembed src={element} />;
+            return <Oembed src={element} key={`Oembed-${i}`} />;
           case 'table':
-            return <Table src={element} />;
+            return <Table src={element} key={`Table-${i}`} />;
           case 'video':
             return (
-              <Video src={element} isInlineVideo maxTabletViewWidth={maxTabletViewWidth} inlineVideoPlayerRules={inlineVideoPlayerRules} />
+              <Video
+                src={element}
+                isInlineVideo
+                maxTabletViewWidth={maxTabletViewWidth}
+                inlineVideoPlayerRules={inlineVideoPlayerRules}
+                key={`Video-${i}`}
+              />
             );
           default:
             if (
               element.type
               && element.type.name
-              && (element.type.name === 'ArcAd' || element.type.name === 'BlogAuthor' || element.type.name === 'ConnextEndOfStory')
+              && (element.type.name === 'ArcAd'
+                || element.type.name === 'BlogAuthor'
+                || element.type.name === 'ConnextEndOfStory')
             ) {
               return element;
             }
