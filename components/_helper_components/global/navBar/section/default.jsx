@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import '../default.scss';
 import '../../../../../src/styles/base/_utility.scss';
@@ -8,8 +8,8 @@ const Section = ({
   link,
   childSections,
 }) => {
-  const [isVisible, flyoutVisible] = useState(false);
-  const menuActivated = !isVisible ? 'menu-inactive' : 'menu-active';
+  // const [isVisible, flyoutVisible] = useState(false);
+  // const menuActivated = !isVisible ? 'menu-inactive' : 'menu-active';
   const {
     nav_title: name,
   } = navigation;
@@ -53,14 +53,14 @@ const Section = ({
   return (
     <>
       <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
-      onMouseEnter={() => flyoutVisible(true)}
-      onMouseLeave={() => flyoutVisible(false)}
+      // onMouseEnter={() => flyoutVisible(true)}
+      // onMouseLeave={() => flyoutVisible(false)}
       >
         <div style={{ display: 'flex' }}>
           <a>{name}</a>
           <div className='nav-item-circle b-flexCenter'></div>
         </div>
-        <div className={`${menuActivated}`}>
+        <div className='menu-active'>
           <div className='menu-item'>
             <a>{name}</a>
           </div>

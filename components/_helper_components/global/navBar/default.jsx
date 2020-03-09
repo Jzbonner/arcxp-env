@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import topNavFilter from '../../../../content/filters/top-nav';
+// import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
 import Subscribe from './subscribe/default';
 import DesktopNav from './desktopNav/default';
 import Login from './login/default';
-import StickyNav from '../../article/stickyNav/default';
+// import StickyNav from '../../article/stickyNav/default';
 import '../../../../src/styles/base/_utility.scss';
 import '../../../../src/styles/container/_article-basic.scss';
 import './default.scss';
 
-const NavBar = ({ articleURL, headlines, comments }) => {
+const NavBar = () => {
   const [mobileMenuToggled, setToggle] = useState(false);
   const [isMobile, setMobile] = useState(false);
   const mobileMenu = mobileMenuToggled ? 'mobile-nav-activated' : '';
@@ -30,7 +30,7 @@ const NavBar = ({ articleURL, headlines, comments }) => {
     query: {
       hierarchy: 'TopNav',
     },
-    filter: topNavFilter,
+    // filter: topNavFilter,
   });
   const {
     site: logos,
@@ -119,22 +119,20 @@ const NavBar = ({ articleURL, headlines, comments }) => {
           <div className='sub b-flexRow b-flexCenter sub-text'>
             <Subscribe/>
           </div>
-          <StickyNav
+          {/* <StickyNav
               articleURL={articleURL}
               headlines={headlines}
               comments={comments}
-              toggle={mobileMenuToggled}
-
-        />
+              toggle={mobileMenuToggled} */}
         </div>
       </header>
   );
 };
 
-NavBar.propTypes = {
-  articleURL: PropTypes.string,
-  headlines: PropTypes.object,
-  comments: PropTypes.object,
-};
+// NavBar.propTypes = {
+//   articleURL: PropTypes.string,
+//   headlines: PropTypes.object,
+//   comments: PropTypes.object,
+// };
 
 export default NavBar;

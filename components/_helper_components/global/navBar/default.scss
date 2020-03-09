@@ -505,21 +505,25 @@
     display: none;
   }
   
-  .menu-active {
-    display: flex;
-    cursor: default;
-    border-radius: 6px;
-    margin-top: 33px;
-    margin-left: 25px;
+  // .menu-active {
+  //   display: flex;
+  //   cursor: default;
+  //   border-radius: 6px;
+  //   margin-top: 33px;
+  //   margin-left: 25px;
 
-    @include breakpoint(desktop-sm) {
-      opacity: 0;
-      transition: opacity .15s;
-      margin-top: 0;
-      margin-left: -.45rem;
-      position: absolute;
-      box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
-    }
+  //   @include breakpoint(desktop-sm) {
+  //     opacity: 0;
+  //     transition: opacity .15s;
+  //     margin-top: 0;
+  //     margin-left: -.45rem;
+  //     position: absolute;
+  //     box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
+  //   }
+  // }
+
+  .menu-active {
+    display: none;
   }
   
   .menu-item {
