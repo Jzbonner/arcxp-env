@@ -11,7 +11,9 @@
   &:focus {
     outline: none;
     box-shadow: none;
+    -webkit-tap-highlight-color: transparent;
   }
+
 
   @include breakpoint(tablet) {
     flex: 1 0 66%;
@@ -54,6 +56,14 @@
       outline: none;
       box-shadow: none;
     }
+  }
+}
+
+.powa {
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
