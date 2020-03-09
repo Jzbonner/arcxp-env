@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 
 const List = (customFields = {}) => {
-  let {
+  const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
       displayClass = '',
