@@ -6,7 +6,6 @@ const Section = ({
   navigation,
   link,
   childSections,
-  keyName,
   newTab,
 }) => {
   const [isVisible, flyoutVisible] = useState(false);
@@ -22,7 +21,7 @@ const Section = ({
   // Added protection if there are no subsections
   if (childSections.length === 0) {
     return <>
-      <li key={keyName} className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
+      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
             <a href={link} target={newTab === 'true' ? '_blank' : '_self'}>{name}</a>
       </li>
         </>;
@@ -53,7 +52,7 @@ const Section = ({
 
   return (
     <>
-      <li key={keyName} className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
+      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
       onMouseEnter={() => flyoutVisible(true)}
       onMouseLeave={() => flyoutVisible(false)}>
         <a>{name}</a>
@@ -77,7 +76,6 @@ Section.propTypes = {
   link: PropTypes.string,
   childSections: PropTypes.array,
   visible: PropTypes.bool,
-  keyName: PropTypes.string,
   newTab: PropTypes.string,
 };
 

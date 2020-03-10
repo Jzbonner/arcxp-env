@@ -43,19 +43,17 @@ const NavBar = () => {
     const destination = id.includes('/configsection') ? siteURL : id;
     if (children[verticalBarIndex] === section) {
       return (
-      <>
-     <Section keyName={id} navigation={navigation} link={destination} childSections={childSections} newTab={newTab}/>
-     <li className='nav-items nav-itemBottomBorder nav-separator'>
-       <span className='separatorBar'></span>
-     </li>
-     </>
+        <React.Fragment key={id}>
+          <Section navigation={navigation} link={destination} childSections={childSections} newTab={newTab}/>
+          <li className='nav-items nav-itemBottomBorder nav-separator'>
+            <span className='separatorBar'></span>
+          </li>
+        </React.Fragment>
       );
     }
 
     return (
-    <>
-     <Section keyName={id} navigation={navigation} link={destination} childSections={childSections} newTab={newTab}/>
-     </>
+     <Section key={id} navigation={navigation} link={destination} childSections={childSections} newTab={newTab}/>
     );
   });
 
