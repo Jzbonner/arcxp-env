@@ -7,12 +7,15 @@ const Section = ({
   link,
   childSections,
   keyName,
+  newTab,
 }) => {
   const [isVisible, flyoutVisible] = useState(false);
   const menuActivated = !isVisible ? 'menu-inactive' : 'menu-active';
   const {
     nav_title: name,
   } = navigation;
+
+  console.log(newTab);
 
   let ePaperClass = '';
   if (name === 'ePaper') {
@@ -22,7 +25,7 @@ const Section = ({
   if (childSections.length === 0) {
     return <>
       <li key={keyName} className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
-            <a href={link}>{name}</a>
+            <a href={link} target={newTab === 'true' ? '_blank' : '_self'}>{name}</a>
       </li>
         </>;
   }
@@ -77,6 +80,7 @@ Section.propTypes = {
   childSections: PropTypes.array,
   visible: PropTypes.bool,
   keyName: PropTypes.string,
+  newTab: PropTypes.string,
 };
 
 export default Section;

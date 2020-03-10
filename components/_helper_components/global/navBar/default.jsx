@@ -37,13 +37,14 @@ const NavBar = () => {
     } = section || {};
     const {
       site_url: siteURL,
+      section_url_open_new_tab: newTab,
     } = site || {};
 
     const destination = id.includes('/configsection') ? siteURL : id;
     if (children[verticalBarIndex] === section) {
       return (
       <>
-     <Section keyName={id} navigation={navigation} link={destination} childSections={childSections}/>
+     <Section keyName={id} navigation={navigation} link={destination} childSections={childSections} newTab={newTab}/>
      <li className='nav-items nav-itemBottomBorder nav-separator'>
        <span className='separatorBar'></span>
      </li>
@@ -53,7 +54,7 @@ const NavBar = () => {
 
     return (
     <>
-     <Section keyName={id} navigation={navigation} link={destination} childSections={childSections}/>
+     <Section keyName={id} navigation={navigation} link={destination} childSections={childSections} newTab={newTab}/>
      </>
     );
   });
