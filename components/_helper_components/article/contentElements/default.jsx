@@ -80,7 +80,8 @@ const ContentElements = ({ contentElements }) => {
               && element.type.name
               && (element.type.name === 'ArcAd'
                 || element.type.name === 'BlogAuthor'
-                || element.type.name === 'ConnextEndOfStory')
+                || element.type.name === 'ConnextEndOfStory'
+                || element.type.name === 'ConnextInlinePromoSubscription')
             ) {
               return element;
             }

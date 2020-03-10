@@ -23,6 +23,7 @@ import '../../src/styles/base/_utility.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
 import FlatPage from '../_helper_components/flatpage/default';
+import ConnextInlinePromoSubscription from '../_helper_components/global/connextInlinePromo/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -94,6 +95,9 @@ const StoryPageLayout = () => {
     insertAtEndOfStory.push(<ConnextEndOfStory />);
   }
 
+  if (paragraphCounter(contentElements) > 4) {
+    filteredContentElements.splice(4, 0, <ConnextInlinePromoSubscription />);
+  }
   return (
     <>
       {!noAds && <GlobalAdSlots />}
