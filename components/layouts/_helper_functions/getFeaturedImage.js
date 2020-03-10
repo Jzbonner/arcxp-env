@@ -13,6 +13,7 @@ const renderImage = () => {
     promo_items: promoItems,
     content_elements: contentElements,
   } = globalContent || {};
+
   const {
     url: featuredImage,
     promo_image: promoImage,

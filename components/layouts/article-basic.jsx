@@ -1,7 +1,6 @@
 /*  /components/layouts/article-basic.jsx  */
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
@@ -30,7 +29,6 @@ const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01
 const MP02 = () => <ArcAd staticSlot={'MP02'} key={'MP02'} />;
 const MP03 = () => <ArcAd staticSlot={'MP03'} key={'MP03'} />;
 
-const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} key={'RP09-Story-Desktop'} />;
 const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} key={'RP09-Story-Tablet'} />;
 
@@ -61,6 +59,7 @@ const StoryPageLayout = () => {
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
+  const { type: promoType = '' } = basicItems || {};
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
@@ -68,14 +67,20 @@ const StoryPageLayout = () => {
   const maxNumberOfParagraphs = paragraphCounter(filteredContentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
 
+  const { tags = [] } = taxonomy || {};
+
+  // Both checks return true if the tag is present and false if not.
+  const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
+
   let infoBoxIndex = null;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
+  const insertAtEndOfStory = [BlogAuthorComponent];
   const interscrollerPlaceholder = () => <div
     className='story-interscroller__placeholder full-width c-clear-both'
     key={'interscrollerPlaceholder'}></div>;
 
   filteredContentElements.forEach((el, i) => {
-    if (el.type === 'divider' && infoBoxIndex === null) {
+    if (el && el.type === 'divider' && infoBoxIndex === null) {
       infoBoxIndex = i;
     }
     return null;
@@ -83,37 +88,32 @@ const StoryPageLayout = () => {
 
   if (infoBoxIndex !== null) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
-    filteredContentElements.splice(infoBoxIndex, 0, <ConnextEndOfStory key={'ConnextEndOfStory'} />);
+    filteredContentElements.splice(infoBoxIndex, 0, <ConnextEndOfStory />);
     infoBoxIndex += 1;
+  } else {
+    insertAtEndOfStory.push(<ConnextEndOfStory />);
   }
 
   return (
     <>
-      <GlobalAdSlots />
+      {!noAds && <GlobalAdSlots />}
       <BreakingNews />
-        <NavBar/>
-        <StickyNav
-          articleURL={articleURL}
-          headlines={headlines}
-          comments={comments}
-        />
+      <header className="c-nav">
+        <NavBar />
+        <StickyNav articleURL={articleURL} headlines={headlines} comments={comments} />
+      </header>
+
       <main>
         <header className="b-margin-bottom-d30-m20">
-          <div className="c-header">
+          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
             <Headline
               headlines={headlines}
               basicItems={basicItems}
-              featuredVideoPlayerRules={featuredVideoPlayerRules}
-              maxTabletViewWidth={maxTabletViewWidth}
             />
           </div>
           <div className="b-margin-bottom-d15-m10 c-label-wrapper b-pageContainer">
             <SectionLabel label={label} taxonomy={taxonomy} />
-            <TimeStamp
-              firstPublishDate={firstPublishDate}
-              displayDate={displayDate}
-              isHideTimestampTrue={isHideTimestampTrue}
-            />
+            <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
           </div>
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
@@ -124,58 +124,63 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
-          <div className="c-hp01-mp01">
-            <ArcAd staticSlot={'HP01'} />
-            <ArcAd staticSlot={'MP01'} />
-          </div>
+          {!noAds
+            && <div className="c-hp01-mp01">
+              <ArcAd staticSlot={'HP01'} />
+              <ArcAd staticSlot={'MP01'} />
+            </div>
+          }
           <Section
             elements={filteredContentElements}
             stopIndex={1}
             fullWidth={true}
-            comesAfterDivider={infoBoxIndex === 0}
+            comesAfterDivider={infoBoxIndex && infoBoxIndex === 0}
           />
           <Section
             elements={filteredContentElements}
             startIndex={1}
             stopIndex={3}
-            rightRail={{ insertBeforeParagraph: 2, ad: RP01StoryDesktop }}
-            insertedAds={[{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }]}
-            comesAfterDivider={infoBoxIndex <= 1}
+            rightRail={(!noAds ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null)}
+            insertedAds={(!noAds ? [{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }] : null)}
+            fullWidth={noAds}
+            comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
           />
-          {maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
-          <Nativo
-            elements={filteredContentElements}
-            displayIfAtLeastXParagraphs={4}
-            controllerClass="story-nativo_placeholder--moap"
-          />
+          {(!noAds && maxNumberOfParagraphs === 3) && interscrollerPlaceholder()}
+          {!noAds
+            && <Nativo
+              elements={filteredContentElements}
+              displayIfAtLeastXParagraphs={4}
+              controllerClass="story-nativo_placeholder--moap"
+            />
+          }
           <Section
             elements={filteredContentElements}
             startIndex={start}
             stopIndex={stop}
-            comesAfterDivider={infoBoxIndex <= start}
+            fullWidth={noAds}
+            comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
           />
-          {maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
+          {(!noAds && maxNumberOfParagraphs >= 4) && interscrollerPlaceholder()}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
-            rightRail={{ insertBeforeParagraph: 8, ad: RP09StoryDesktop }}
-            insertedAds={[{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }]}
-            insertAtSectionEnd={[BlogAuthorComponent]}
-            comesAfterDivider={infoBoxIndex <= stop}
+            rightRail={(!noAds ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null)}
+            insertedAds={(!noAds ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : null)}
+            fullWidth={noAds}
+            insertAtSectionEnd={insertAtEndOfStory}
+            comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
           />
-
-          <Nativo
-            elements={filteredContentElements}
-            controllerClass="story-nativo_placeholder--boap"
-          />
+          {!noAds
+            && <Nativo
+              elements={filteredContentElements}
+              controllerClass="story-nativo_placeholder--boap"
+            />
+          }
           <div className="c-taboola">
             <TaboolaFeed type={type} />
           </div>
         </article>
-       {(!basicItems)
-          || (basicItems
-            && basicItems.type
-            && basicItems.type !== 'gallery') ? <Gallery contentElements={filteredContentElements} /> : null}
+       {!basicItems || promoType !== 'gallery' ? <Gallery contentElements={filteredContentElements} /> : null}
       </main>
       <Footer />
     </>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import StickyNav from '../_helper_components/article/stickyNav/default';
@@ -33,8 +32,6 @@ const GalleryPageLayout = () => {
     streams,
   };
 
-  const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
-
   return (
     <>
       <GlobalAdSlots />
@@ -51,15 +48,15 @@ const GalleryPageLayout = () => {
       </header>
 
       <main>
-        <div>
+        <div className="c-header-gallery">
           <Headline
             headlines={headlines}
             basicItems={basicItems}
-            featuredVideoPlayerRules={featuredVideoPlayerRules}
-            maxTabletViewWidth={maxTabletViewWidth}
           />
         </div>
-        <Gallery leafContentElements={contentElements} />
+        <div className="c-main-gallery">
+          <Gallery leafContentElements={contentElements} />
+        </div>
       </main>
       <Footer />
     </>

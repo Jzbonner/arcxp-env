@@ -34,9 +34,9 @@ const NavBar = () => {
     // filter: topNavFilter,
   });
 
-  if (!sections) {
-    return null;
-  }
+  // if (!sections) {
+  //   return null;
+  // }
   const {
     site: logos,
     social,
@@ -47,19 +47,20 @@ const NavBar = () => {
   console.log(sections);
 
   useEffect(() => {
+    if (window.innerWidth <= mobileBreakpoint) {
+      setMobile(true);
+    }
+    // else {
+    //   setMobile(false);
+    // }
+  }, []);
+
+  useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
     return () => {
       window.removeEventListener('resize', handleResizeEvent, true);
     };
   }, [isMobile]);
-
-  useEffect(() => {
-    if (window.innerWidth <= mobileBreakpoint) {
-      setMobile(true);
-    } else {
-      setMobile(false);
-    }
-  }, []);
 
   const {
     site_logo_image: siteLogoImage,
@@ -106,7 +107,7 @@ const NavBar = () => {
   });
 
   return (
-      <header className='c-nav'>
+  // <header className='c-nav'>
         <div className='c-headerNav'>
           <div className='b-flexRow b-flexCenter nav-logo'>
             <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
@@ -135,7 +136,7 @@ const NavBar = () => {
               comments={comments}
               toggle={mobileMenuToggled} */}
         </div>
-      </header>
+  // </header>
   );
 };
 

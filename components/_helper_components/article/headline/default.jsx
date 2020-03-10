@@ -1,17 +1,18 @@
 import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
+import getProperties from 'fusion:properties';
 import Image from '../../global/image/default';
 import Video from '../../global/video/default';
 import Gallery from '../../../features/gallery/default';
 
-const Headline = ({
-  basicItems = {}, headlines = {}, featuredVideoPlayerRules, maxTabletViewWidth,
-}) => {
+const Headline = ({ basicItems = {}, headlines = {} }) => {
   let promoData = {};
   if (basicItems) {
     promoData = basicItems;
   }
+
+  const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 
   // Uncomment to see how the headline component displays with a video promo type.
   // Used because I was getting errors when trying to add a video as a featured element.

@@ -11,6 +11,7 @@
   &:focus {
     outline: none;
     box-shadow: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   @include breakpoint(tablet) {
@@ -25,8 +26,16 @@
       top: -1.5em;
 
       @include breakpoint(desktop-sm) {
-        top: 1em;
+        top: -2em;
       }
+    }
+  }
+
+  .powa-bar-time-and-scrubbers {
+    justify-content: center;
+
+    .powa-bar-scrubbers {
+      width: 85%;
     }
   }
 }
@@ -46,6 +55,15 @@
       outline: none;
       box-shadow: none;
     }
+  }
+}
+
+.powa {
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 

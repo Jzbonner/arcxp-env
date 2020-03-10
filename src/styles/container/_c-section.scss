@@ -1,0 +1,61 @@
+.c-section {
+  @include section();
+
+  &:first-child {
+    @include breakpoint(tablet) {
+
+      .c-contentElements {
+        padding-right: 0;
+      }
+    }
+  }
+
+  // Since c-section will have b-margin-bottom-d40-m20 applied to it,
+  // we remove margin from the bottom of the last paragraph (as long as it isn't an arcad container)
+
+  .b-margin-bottom-d40-m20:last-child:not(.arcad) {
+    margin-bottom: 0;
+  }
+
+  .c-contentElements {
+    width: 100%;
+
+    @include breakpoint(tablet) {
+      padding: 0;
+    }
+
+    @include breakpoint(desktop-sm) {
+      padding: 0 80px 0 0;
+    }
+
+    @include arc-ad-spacing;
+  }
+
+  &:not(.full-width) {
+
+    .c-contentElements {
+      @include breakpoint(desktop-sm) {
+        width: calc(100% - 300px);
+      }
+    }
+
+    .c-rightRail {
+      min-height: 100%;
+      min-width: 300px;
+      background: #fff;
+      text-align: center;
+      font-size: 20px;
+      display: none;
+
+      @include breakpoint(desktop-sm) {
+        display: block;
+        float: right;
+        margin-right: -380px;
+      }
+    }
+  }
+
+  .insertedAd {
+    height: 200px;
+  }
+}
