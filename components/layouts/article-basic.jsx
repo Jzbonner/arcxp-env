@@ -71,8 +71,10 @@ const StoryPageLayout = () => {
 
   // Both checks return true if the tag is present and false if not.
   const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
+
   let infoBoxIndex = null;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
+  const insertAtEndOfStory = [BlogAuthorComponent];
   const interscrollerPlaceholder = () => <div
     className='story-interscroller__placeholder full-width c-clear-both'
     key={'interscrollerPlaceholder'}></div>;
@@ -86,8 +88,10 @@ const StoryPageLayout = () => {
 
   if (infoBoxIndex !== null) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
-    filteredContentElements.splice(infoBoxIndex, 0, <ConnextEndOfStory key={'ConnextEndOfStory'} />);
+    filteredContentElements.splice(infoBoxIndex, 0, <ConnextEndOfStory />);
     infoBoxIndex += 1;
+  } else {
+    insertAtEndOfStory.push(<ConnextEndOfStory />);
   }
 
   return (
@@ -130,7 +134,7 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             stopIndex={1}
             fullWidth={true}
-            comesAfterDivider={infoBoxIndex === 0}
+            comesAfterDivider={infoBoxIndex && infoBoxIndex === 0}
           />
           <Section
             elements={filteredContentElements}
@@ -163,7 +167,7 @@ const StoryPageLayout = () => {
             rightRail={(!noAds ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null)}
             insertedAds={(!noAds ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : null)}
             fullWidth={noAds}
-            insertAtSectionEnd={[BlogAuthorComponent]}
+            insertAtSectionEnd={insertAtEndOfStory}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
           />
           {!noAds
