@@ -71,7 +71,6 @@ const StoryPageLayout = () => {
 
   // Both checks return true if the tag is present and false if not.
   const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
-
   let infoBoxIndex = null;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
   const interscrollerPlaceholder = () => <div
@@ -79,7 +78,7 @@ const StoryPageLayout = () => {
     key={'interscrollerPlaceholder'}></div>;
 
   filteredContentElements.forEach((el, i) => {
-    if (el.type === 'divider' && infoBoxIndex === null) {
+    if (el && el.type === 'divider' && infoBoxIndex === null) {
       infoBoxIndex = i;
     }
     return null;
@@ -140,7 +139,7 @@ const StoryPageLayout = () => {
             rightRail={(!noAds ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null)}
             insertedAds={(!noAds ? [{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }] : null)}
             fullWidth={noAds}
-            comesAfterDivider={infoBoxIndex <= 1}
+            comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
           />
           {(!noAds && maxNumberOfParagraphs === 3) && interscrollerPlaceholder()}
           {!noAds
@@ -155,7 +154,7 @@ const StoryPageLayout = () => {
             startIndex={start}
             stopIndex={stop}
             fullWidth={noAds}
-            comesAfterDivider={infoBoxIndex <= start}
+            comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
           />
           {(!noAds && maxNumberOfParagraphs >= 4) && interscrollerPlaceholder()}
           <Section
@@ -165,7 +164,7 @@ const StoryPageLayout = () => {
             insertedAds={(!noAds ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : null)}
             fullWidth={noAds}
             insertAtSectionEnd={[BlogAuthorComponent]}
-            comesAfterDivider={infoBoxIndex <= stop}
+            comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
           />
           {!noAds
             && <Nativo
