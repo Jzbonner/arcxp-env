@@ -8,7 +8,7 @@ import '../../../../src/styles/base/_utility.scss';
 const Video = ({
   src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules,
 }) => {
-  const { credits, _id: videoID } = src || {};
+  const { credits, _id: videoID, videoPageId } = src || {};
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
   const screenSize = checkWindowSize();
@@ -63,7 +63,7 @@ const Video = ({
           data-api="sandbox"
           data-env="sandbox"
           data-aspect-ratio="0.5625"
-          data-uuid={videoID}
+          data-uuid={videoID || videoPageId}
           data-autoplay={startPlaying}
           data-muted={muteON}
         ></div>
