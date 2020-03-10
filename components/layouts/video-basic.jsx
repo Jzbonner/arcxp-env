@@ -16,6 +16,7 @@ const VideoPageLayout = () => {
   const {
     content_elements: contentElements,
     promo_items: promoItems,
+    _id: videoPageId,
     headlines,
     comments,
     canonical_url: articleURL,
@@ -31,6 +32,7 @@ const VideoPageLayout = () => {
     credits,
     description,
     streams,
+    videoPageId,
   };
 
   return (

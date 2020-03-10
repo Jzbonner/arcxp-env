@@ -8,11 +8,9 @@ import '../../../../src/styles/base/_utility.scss';
 const Video = ({
   src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules,
 }) => {
-  const { credits, _id: videoID } = src || {};
+  const { credits, _id: videoID, videoPageId } = src || {};
   const { basic: videoCaption } = src.description ? src.description : {};
-  // const { url: videoPlayer } = src.streams && src.streams[0] ? src.streams[0] : {};
   const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
-  // const { url: inlineVideoThumb } = src && src.promo_items ? src.promo_items.basic : {};
   const screenSize = checkWindowSize();
 
   let mainCredit;
@@ -21,7 +19,20 @@ const Video = ({
   }
 
   useEffect(() => {
-    window.powaBoot();
+    const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
+      const videoScript = document.createElement('script');
+      videoScript.type = 'text/javascript';
+      videoScript.src = 'https://d328y0m0mtvzqc.cloudfront.net/sandbox/powaBoot.js?org=ajc';
+      videoScript.async = true;
+      videoScript.addEventListener('load', () => {
+        resolve(window.powaBoot());
+      });
+      videoScript.addEventListener('error', (e) => {
+        reject(rejectCallBack(e));
+      });
+      document.body.appendChild(videoScript);
+    });
+    loadVideoScript();
   }, []);
 
   const videoMarginBottom = 'b-margin-bottom-d40-m20';
@@ -50,8 +61,9 @@ const Video = ({
           className="powa"
           data-org="ajc"
           data-api="sandbox"
+          data-env="sandbox"
           data-aspect-ratio="0.5625"
-          data-uuid={videoID}
+          data-uuid={videoID || videoPageId}
           data-autoplay={startPlaying}
           data-muted={muteON}
         ></div>

@@ -38,7 +38,6 @@ const DefaultOutputType = (props) => {
           <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${environment}/${clientCode}/loader.min.js`}></script>
-            <script async src="https://d328y0m0mtvzqc.cloudfront.net/sandbox/powaBoot.js?org=ajc"></script>
             <ConnextInit />
           </>
         )}
