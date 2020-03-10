@@ -15,8 +15,6 @@ const Section = ({
     nav_title: name,
   } = navigation;
 
-  console.log(newTab);
-
   let ePaperClass = '';
   if (name === 'ePaper') {
     ePaperClass = 'nav-ePaper';
