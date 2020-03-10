@@ -8,7 +8,7 @@ const Byline = ({ by = [] }) => {
   const handleOrganization = (authors = []) => {
     const authorsAndOrgs = authors.map((author) => {
       // staff
-      if (author.isStaff && author.affiliations) return { name: author.name, org: author.affiliations };
+      if (author.isStaff && author.affiliations) return { name: author.name, org: author.affiliations, url: author.url };
 
       // external
       if (author.org && !author.affiliations) return { name: author.name, org: author.org };
@@ -24,13 +24,25 @@ const Byline = ({ by = [] }) => {
 
   const handleAuthors = (authors = []) => {
     const bylineData = authors.map((author, i) => {
+      const { url } = author || {};
+
       if (!author.name) return null;
       // multiple authors
       if (authors.length > 1) {
-        return <span key={author.name}>{i === 0 && 'By '}<a href="#">{author.name}</a>{author.org ? `  -  ${author.org}` : ''}</span>;
+        return <span key={author.name}>
+          {i === 0 && 'By '}
+          { url && <a href={url || '/staff'}>{author.name}</a> }
+          { !url && author.name }
+          {author.org ? `  -  ${author.org}` : ''}
+        </span>;
       }
       // only one author
-      return <span key={author.name}>{i === 0 && 'By '}<a href="#">{author.name}</a>{author.org ? `,  ${author.org}` : ''}</span>;
+      return <span key={author.name}>
+        {i === 0 && 'By '}
+        { url && <a href={url || '/staff'}>{author.name}</a> }
+        { !url && author.name }
+        {author.org ? `,  ${author.org}` : ''}
+      </span>;
     });
     return bylineData;
   };
@@ -56,6 +68,7 @@ const Byline = ({ by = [] }) => {
           && element.additional_properties.original
           && element.additional_properties.original.affiliations,
         isStaff,
+        url: element.url,
       };
     });
     finalizeByline(authors);
