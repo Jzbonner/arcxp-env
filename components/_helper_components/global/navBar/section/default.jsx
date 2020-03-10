@@ -7,12 +7,19 @@ const Section = ({
   navigation,
   link,
   childSections,
+  index,
+  setSection,
+  activeSection,
 }) => {
-  // const [isVisible, flyoutVisible] = useState(false);
-  // const menuActivated = !isVisible ? 'menu-inactive' : 'menu-active';
   const {
     nav_title: name,
   } = navigation;
+  function handleClick(e) {
+    setSection(index);
+    e.preventDefault();
+  }
+
+  const isActive = index === activeSection ? 'section-active' : '';
 
   let ePaperClass = '';
   if (name === 'ePaper') {
@@ -22,7 +29,7 @@ const Section = ({
   if (childSections.length === 0) {
     return <>
       <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
-            <a href={link}>{name}</a>
+        <a href={link}>{name}</a>
       </li>
         </>;
   }
@@ -52,19 +59,16 @@ const Section = ({
 
   return (
     <>
-      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
-      // onMouseEnter={() => flyoutVisible(true)}
-      // onMouseLeave={() => flyoutVisible(false)}
-      >
-        <div style={{ display: 'flex' }}>
-          <a>{name}</a>
+      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
+        <div className='nav-item-link'>
+          <a onTouchEnd={handleClick}>{name}</a>
           <div className='nav-item-circle b-flexCenter'></div>
         </div>
-        <div className='menu-active'>
+        <div className={`section ${isActive}`}>
           <div className='menu-item'>
             <a>{name}</a>
           </div>
-          <div className={'subNav'}>
+          <div className={`subNav ${isActive}`}>
             <ul className='subNav-flyout'>
               {childList}
             </ul>
@@ -80,6 +84,9 @@ Section.propTypes = {
   link: PropTypes.string,
   childSections: PropTypes.array,
   visible: PropTypes.bool,
+  index: PropTypes.number,
+  setSection: PropTypes.func,
+  activeSection: PropTypes.number,
 };
 
 export default Section;

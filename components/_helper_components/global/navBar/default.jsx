@@ -15,6 +15,7 @@ import './default.scss';
 const NavBar = () => {
   const [mobileMenuToggled, setToggle] = useState(false);
   const [isMobile, setMobile] = useState(false);
+  const [activeSection, setSection] = useState(-1);
   const mobileMenu = mobileMenuToggled ? 'mobile-nav-activated' : '';
   const mobileBreakpoint = 1023;
   const handleResizeEvent = () => {
@@ -32,6 +33,10 @@ const NavBar = () => {
     },
     // filter: topNavFilter,
   });
+
+  if (!sections) {
+    return null;
+  }
   const {
     site: logos,
     social,
@@ -39,7 +44,7 @@ const NavBar = () => {
     _id: rootDirectory,
   } = sections || {};
 
-  // console.log(sections);
+  console.log(sections);
 
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
@@ -78,25 +83,30 @@ const NavBar = () => {
     const {
       site_url: siteURL,
     } = site || {};
+
+    const sectionIndex = children.indexOf(section);
+
     const destination = id.includes('/configsection') ? siteURL : id;
     if (children[verticalBarIndex] === section) {
       return (
       <React.Fragment key={id}>
-        <Section navigation={navigation} link={destination} childSections={childSections}/>
+        <Section navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
+        setSection={setSection} activeSection={activeSection}/>
         <li className='nav-items nav-itemBottomBorder nav-separator' key='nav-separator'>
-          <span className='separatorBar' key='spanm'></span>
+          <span className='separatorBar'></span>
         </li>
       </React.Fragment>
       );
     }
 
     return (
-     <Section key={id} navigation={navigation} link={destination} childSections={childSections}/>
+      <Section key={id} navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
+      setSection={setSection} activeSection={activeSection}/>
     );
   });
 
   return (
-      <header className="c-nav">
+      <header className='c-nav'>
         <div className='c-headerNav'>
           <div className='b-flexRow b-flexCenter nav-logo'>
             <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>

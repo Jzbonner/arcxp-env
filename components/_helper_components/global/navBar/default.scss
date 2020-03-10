@@ -148,6 +148,8 @@
   }
   
   .nav-sections {
+    // display: inline-flex;
+
     @include breakpoint(desktop-sm) {
       display: flex;
       flex-direction: row;
@@ -155,7 +157,7 @@
   }
 
   .nav-row {
-    display: flex;
+    display: inline-flex;
     flex-direction: column-reverse;
     list-style-type: none;
 
@@ -166,56 +168,104 @@
     }
   }
 
+  .nav-item-link {
+    display: flex;
+    // @media (hover: none) {
+    //   &:hover {
+    //     + .menu-active {
+    //         display: flex;
+    //         position: relative;
+
+    //         .subNav {
+    //           display: flex;
+    //           position: relative;
+    //         }
+    //       }
+    //     }
+    //   }
+  }
+
+  
   .nav-items {
     padding-left: 50px;
     padding-bottom: 25px;
+    // position: relative;
 
-    &:hover {
+    @media (hover: none) {
 
-      .nav-item-circle {
-        display: flex;
-        visibility: visible;
+      &:hover {
 
-        @include breakpoint(desktop-sm) {
-          display: none;
+        .section {
+          display: flex;
+          // position: relative;
+        }
+
+        .subNav {
+          display: flex;
+          opacity: 1;
+          visibility: visible;
+          // position: relative;
         }
       }
     }
 
-    .menu-active {
-      @media (hover: none) {
+    &:hover {
+
+      .section {
         @include breakpoint(desktop-sm) {
+          visibility: visible;
+          display: flex;
           opacity: 1;
         }
-  
+
         .subNav {
-          visibility: visible;
+          display: flex;
           // position: relative;
-          display: flex;
-
           @include breakpoint(desktop-sm) {
-            opacity: 1;
-          }
-        }
-      }
-    
-      &:hover {
-        @include breakpoint(desktop-sm) {
-          opacity: 1;
-        }
-
-        .subNav {
-          display: flex;
-          visibility: visible;
-          position: absolute;
-
-          @include breakpoint(desktop-sm) {
+            display: flex;
             visibility: visible;
             opacity: 1;
           }
         }
       }
+    
+
+      //   .nav-item-circle {
+      //     display: flex;
+      //     visibility: visible;
+
+      //     @include breakpoint(desktop-sm) {
+      //       display: none;
+      //     }
+      //   }
     }
+
+    .section {
+      @media (hover: none) {
+  
+        .subNav {
+          visibility: visible;
+          // position: relative;
+          display: flex;
+        }
+      }
+    }
+    // &:hover {
+    //   @include breakpoint(desktop-sm) {
+    //     opacity: 1;
+    //   }
+
+    //   .subNav {
+    //     display: flex;
+    //     visibility: visible;
+    //     // position: absolute;
+
+    //     @include breakpoint(desktop-sm) {
+    //       visibility: visible;
+    //       opacity: 1;
+    //     }
+    //   }
+    // }
 
     @include breakpoint(desktop-sm) {
       display: flex;
@@ -501,33 +551,34 @@
     margin-left: 5px;
   }
   
-  .menu-inactive {
-    display: none;
+  .section-active {
+    display: flex;
   }
   
-  // .menu-active {
-  //   display: flex;
-  //   cursor: default;
-  //   border-radius: 6px;
-  //   margin-top: 33px;
-  //   margin-left: 25px;
-
-  //   @include breakpoint(desktop-sm) {
-  //     opacity: 0;
-  //     transition: opacity .15s;
-  //     margin-top: 0;
-  //     margin-left: -.45rem;
-  //     position: absolute;
-  //     box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
-  //   }
-  // }
-
-  .menu-active {
+  .section {
     display: none;
+    cursor: default;
+    border-radius: 6px;
+    margin-top: 33px;
+    margin-left: 25px;
+
+    @include breakpoint(desktop-sm) {
+      opacity: 0;
+      transition: opacity .15s;
+      margin-top: 0;
+      margin-left: -.45rem;
+      position: absolute;
+      box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
+    }
   }
+
+  // .menu-active {
+  //   display: none;
+  // }
   
   .menu-item {
     display: none;
+    position: relative;
 
     @include breakpoint(desktop-sm) {
       height: 44px;
@@ -543,7 +594,7 @@
   .subNav {
     border-radius: 0 6px 6px;
     box-shadow: none;
-    // display: flex;
+    // display: inline-flex;
     align-items: center;
     display: none;
 
@@ -629,11 +680,11 @@
   }
   
   .subNav-flyout {
-    flex-wrap: wrap;
-    align-content: flex-start;
     list-style-type: none;
 
     @include breakpoint(desktop-sm) {
+      flex-wrap: wrap;
+      align-content: flex-start;
       display: inline-flex;
       writing-mode: vertical-lr;
     }
