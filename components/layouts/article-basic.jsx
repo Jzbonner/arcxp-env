@@ -95,7 +95,7 @@ const StoryPageLayout = () => {
     insertAtEndOfStory.push(<ConnextEndOfStory />);
   }
 
-  if (paragraphCounter(contentElements) > 4) {
+  if (paragraphCounter(contentElements) > 5) {
     filteredContentElements.splice(4, 0, <ConnextInlinePromoSubscription />);
   }
   return (
