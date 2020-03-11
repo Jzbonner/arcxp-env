@@ -38,9 +38,12 @@ const Gallery = (props) => {
   const [baseCaptionData, setBaseCaptionData] = useState(null);
   // only used if 'raw' contentElements are proped down from article
   const [galHeadline, setHeadline] = useState(null);
+  // holds true max # of photos ( w/o changing value when adding ads into Element array)
+  const [maxIndex, setMaxIndex] = useState(null);
 
   /* Ads */
   const [clickCount, setClickCount] = useState(0);
+  const [rerender, setRenderTrigger] = useState(0);
   // const [scrollCount, setScrollCount] = useState(0);
 
   /* Mobile */
@@ -77,10 +80,18 @@ const Gallery = (props) => {
       path: galleryUrl,
     },
   });
-  const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
+  // const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic ? headlines.basic : null;
+
+  if (!maxIndex) {
+    if (elementData && elementData.length > 1) {
+      setMaxIndex(elementData.length - 1);
+    } else if (mobileElementData && mobileElementData.length > 1) {
+      setMaxIndex(mobileElementData.length - 1);
+    }
+  }
 
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
@@ -108,31 +119,43 @@ const Gallery = (props) => {
   };
 
   const changeIndex = (action, maxNumber) => {
-    if (!(clickCount && clickCount % 4 === 0)) {
+    const currentClickCount = clickCount;
+    setClickCount(clickCount + 1);
+    if (((currentClickCount === 0 || currentClickCount % 3 !== 0))) {
       // change current image index by -1
       if (action === actions.PREV) {
         setCurrentAction(action);
-        if (currentIndex <= 0) {
-          if (!maxIndex) {
-            setCurrentIndex(maxNumber);
+        if (!isAdVisible) {
+          if (currentIndex <= 0) {
+            if (!maxIndex) {
+              setCurrentIndex(maxNumber);
+            } else {
+              setCurrentIndex(maxIndex);
+            }
           } else {
-            setCurrentIndex(maxIndex);
+            setCurrentIndex(currentIndex - 1);
           }
-        } else {
-          setCurrentIndex(currentIndex - 1);
         }
       }
       // change current image index by +1
       if (action === actions.NEXT) {
         setCurrentAction(action);
-        if (currentIndex === maxIndex) {
-          setCurrentIndex(0);
-        } else {
-          setCurrentIndex(currentIndex + 1);
+        if (!isAdVisible) {
+          if (currentIndex === maxIndex) {
+            setCurrentIndex(0);
+          } else {
+            setCurrentIndex(currentIndex + 1);
+          }
         }
       }
+      debugger;
     } else {
-      setCurrentIndex(currentIndex);
+      debugger;
+      // setCurrentIndex(currentIndex);
+      setCurrentAction('POOPOO');
+      setRenderTrigger(rerender + 1);
+      
+      calculateTranslateX();
     }
   };
 
@@ -146,7 +169,7 @@ const Gallery = (props) => {
     console.log('starting elements', elements);
 
     elementData.forEach((element, i) => {
-      if (element.props.data.states.isFocused) elements.splice(i, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} />);
+      if (element.props.data.states.isFocused) elements.splice(i + 1, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} />);
     });
 
     console.log('ad inserted', elements);
@@ -280,7 +303,7 @@ const Gallery = (props) => {
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
-    setClickCount(clickCount + 1);
+    // setClickCount(clickCount + 1);
     if (currentAction === actions.PREV) {
       handlePrevious([...elementData]);
     } else {
@@ -326,24 +349,28 @@ const Gallery = (props) => {
 
   useEffect(() => {
     if (!isMobile) calculateTranslateX();
-  }, [currentIndex, currentAction, translateX, elementData, captionData, galleryEl]);
+  }, [isAdVisible, currentIndex, currentAction, translateX, elementData, captionData, galleryEl]);
 
   useEffect(() => {
-    if (!isMobile) renderCaptionByCurrentIndex();
+    if (!isAdVisible && !isMobile) renderCaptionByCurrentIndex();
   }, [baseCaptionData]);
 
   useEffect(() => {
+    debugger;
+    if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
     if (!isAdVisible && clickCount && clickCount % 4 === 0) {
       const adInsertedElementArray = insertGalleryAd();
       setElementData(adInsertedElementArray);
       setAdVisibleState(true);
+      debugger;
     } else if (isAdVisible && (clickCount % 4) === 1) {
       console.log('removeing ad');
       const adRemovedElementArray = removeGalleryAd();
       setElementData(adRemovedElementArray);
       setAdVisibleState(false);
+      calculateTranslateX();
     }
-  }, [clickCount]);
+  }, [isAdVisible, clickCount]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScrollEvent, true);
@@ -438,7 +465,9 @@ const Gallery = (props) => {
   }
 
   console.log('click count', clickCount);
-  console.log('elements', elementData);
+  // console.log('elements', elementData);
+  console.log('is ad visisble', isAdVisible);
+  console.log('currentaction', currentAction);
 
   return (
     <>
@@ -487,7 +516,7 @@ const Gallery = (props) => {
             </div>
             <div className="count--box hidden-small hidden-medium">
               <span className="gallery-index">{currentIndex + 1} / </span>
-              <span>{maxIndex + 1}</span>
+              <span>{maxIndex && maxIndex + 1}</span>
             </div>
           </div>
         </div>
