@@ -77,6 +77,7 @@ const ContentElements = ({ contentElements }) => {
               && (element.type.name === 'ArcAd'
                 || element.type.name === 'BlogAuthor'
                 || element.type.name === 'ConnextEndOfStory'
+                || element.type.name === 'ConnextInlinePromoSubscription')
                 || element.type.name === 'ConnextHyperLocalSubscription')
             ) {
               return element;

@@ -17,11 +17,14 @@ import NavBar from '../_helper_components/global/navBar/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Footer from '../_helper_components/global/footer/default';
 import ArcAd from '../features/ads/default';
-import { paragraphCounter } from './_helper_functions/Paragraph';
+import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
+import '../../src/styles/container/_article-basic.scss';
+import '../../src/styles/base/_utility.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
 import ConnextHyperLocalSubscription from '../_helper_components/global/ConnextHyperLocalSubscription/ConnextHyperLocalSubscription';
 import FlatPage from '../_helper_components/flatpage/default';
+import ConnextInlinePromoSubscription from '../_helper_components/global/connextInlinePromo/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -72,6 +75,7 @@ const StoryPageLayout = () => {
   const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
 
   let infoBoxIndex = null;
+  let paragraphIndex = 0;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
   const insertAtEndOfStory = [BlogAuthorComponent];
   const interscrollerPlaceholder = () => (
@@ -81,6 +85,12 @@ const StoryPageLayout = () => {
   filteredContentElements.forEach((el, i) => {
     if (el && el.type === 'divider' && infoBoxIndex === null) {
       infoBoxIndex = i;
+    }
+    if (isParagraph(el.type)) {
+      paragraphIndex += 1;
+      if (paragraphIndex === 6) {
+        filteredContentElements.splice(i, 0, <ConnextInlinePromoSubscription />);
+      }
     }
     return null;
   });
@@ -92,7 +102,6 @@ const StoryPageLayout = () => {
   } else {
     insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
   }
-
   return (
     <>
       {!noAds && <GlobalAdSlots />}
