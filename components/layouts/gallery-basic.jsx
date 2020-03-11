@@ -6,7 +6,6 @@ import StickyNav from '../_helper_components/article/stickyNav/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import Gallery from '../features/gallery/default';
 import Footer from '../_helper_components/global/footer/default';
-import '../../src/styles/container/_article-basic.scss';
 
 const GalleryPageLayout = () => {
   const appContext = useAppContext();
@@ -49,10 +48,7 @@ const GalleryPageLayout = () => {
 
       <main>
         <div className="c-header-gallery">
-          <Headline
-            headlines={headlines}
-            basicItems={basicItems}
-          />
+          <Headline headlines={headlines} basicItems={basicItems} />
         </div>
         <div className="c-main-gallery">
           <Gallery leafContentElements={contentElements} />
