@@ -27,9 +27,19 @@
     transform: translateX(0);
   }
 
+  .fb-comments > span {
+    max-height: 75vh;
+    overflow-y: scroll;
+
+    @include breakpoint(tablet) {
+      max-height: 85vh;
+    }
+  }
+
   .close {
     @include text-styles(1.75rem, 1, "Gordita");
 
     cursor: pointer;
+    margin-bottom: 15px;
   }
 }

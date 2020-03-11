@@ -4,14 +4,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 
-const List = (customFields = {}) => {
+const ListOrderedUnordered = (customFields = {}) => {
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
       displayClass = '',
       startIndex = 1,
       itemLimit = 100,
-      columns = 1,
     },
   } = customFields;
 
@@ -20,10 +19,10 @@ const List = (customFields = {}) => {
     query: contentConfigValues,
   });
 
-  return <div>List Feature</div>;
+  return <div>Ordered or Un-ordered List Feature</div>;
 };
 
-List.propTypes = {
+ListOrderedUnordered.propTypes = {
   customFields: PropTypes.shape({
     content: PropTypes.contentConfig('collections').tag({
       name: 'Content',
@@ -36,15 +35,11 @@ List.propTypes = {
       name: 'Item Limit',
       defaultValue: 1,
     }),
-    displayClass: PropTypes.oneOf(['Top Photo', 'Left Photo', 'No Photo', 'Link']).tag({
+    displayClass: PropTypes.oneOf(['Ordered List', 'Un-ordered List']).tag({
       name: 'Display Class',
-      defaultValue: 'Top Photo',
-    }),
-    columns: PropTypes.number.tag({
-      name: 'Columns',
-      defaultValue: 1,
+      defaultValue: 'Ordered List',
     }),
   }),
 };
 
-export default List;
+export default ListOrderedUnordered;

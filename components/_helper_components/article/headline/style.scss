@@ -77,6 +77,10 @@
       .headline-body {
         padding: 20px 30px;
         max-width: 1600px;
+        
+        .headline-text-long {
+          max-width: 63vw;
+        }
       }
     }
   }

@@ -22,6 +22,7 @@ import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
+import ConnextHyperLocalSubscription from '../_helper_components/global/ConnextHyperLocalSubscription/ConnextHyperLocalSubscription';
 import FlatPage from '../_helper_components/flatpage/default';
 import ConnextInlinePromoSubscription from '../_helper_components/global/connextInlinePromo/default';
 
@@ -96,10 +97,10 @@ const StoryPageLayout = () => {
 
   if (infoBoxIndex !== null) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
-    filteredContentElements.splice(infoBoxIndex, 0, <ConnextEndOfStory />);
+    filteredContentElements.splice(infoBoxIndex, 0, <ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
     infoBoxIndex += 1;
   } else {
-    insertAtEndOfStory.push(<ConnextEndOfStory />);
+    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
   }
   return (
     <>

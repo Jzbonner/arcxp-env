@@ -438,6 +438,10 @@
     .gallery-caption {
       font-size: 1.25rem;
     }
+
+    @include breakpoint(desktop-sm) {
+      min-width: auto;
+    }
   }
 
   .gallery-count {
