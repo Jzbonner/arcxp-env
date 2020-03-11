@@ -4,9 +4,6 @@ let numberOfElements = 0;
 const filterContentElements = ({ contentElements, elementToRemove = 'divider', indexToStartRemoving = 1 }) => {
   const newContentElements = contentElements.filter((element) => {
     // we reconstruct contentElements to remove any extraneous elements (e.g. Divider), per the logic in APD-96
-    // if (paragraphCounter(contentElements) >= 4) {
-    //   contentElements.splice(4, 0, <ConnextInlinePromoSubscription />);
-    // }
 
     if (element.type === elementToRemove) {
       numberOfElements += 1; // it's a removable content type, increment the total count
