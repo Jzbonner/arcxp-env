@@ -6,7 +6,6 @@ import Headline from '../_helper_components/article/headline/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import StickyNav from '../_helper_components/article/stickyNav/default';
 import Footer from '../_helper_components/global/footer/default';
-import '../../src/styles/container/_article-basic.scss';
 
 const VideoPageLayout = () => {
   const appContext = useAppContext();

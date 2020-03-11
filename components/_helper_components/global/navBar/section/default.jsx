@@ -10,11 +10,11 @@ const Section = ({
   index,
   setSection,
   activeSection,
+  newTab,
 }) => {
   const {
     nav_title: name,
   } = navigation;
-
   function handleClick(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -31,7 +31,7 @@ const Section = ({
   if (childSections.length === 0) {
     return <>
       <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
-        <a href={link}>{name}</a>
+            <a href={link} target={newTab === 'true' ? '_blank' : '_self'}>{name}</a>
       </li>
         </>;
   }
@@ -85,10 +85,10 @@ Section.propTypes = {
   navigation: PropTypes.object,
   link: PropTypes.string,
   childSections: PropTypes.array,
-  visible: PropTypes.bool,
   index: PropTypes.number,
   setSection: PropTypes.func,
   activeSection: PropTypes.number,
+  newTab: PropTypes.string,
 };
 
 export default Section;

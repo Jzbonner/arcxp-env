@@ -17,12 +17,14 @@ import StickyNav from '../_helper_components/article/stickyNav/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Footer from '../_helper_components/global/footer/default';
 import ArcAd from '../features/ads/default';
-import { paragraphCounter } from './_helper_functions/Paragraph';
+import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
+import ConnextHyperLocalSubscription from '../_helper_components/global/ConnextHyperLocalSubscription/ConnextHyperLocalSubscription';
 import FlatPage from '../_helper_components/flatpage/default';
+import ConnextInlinePromoSubscription from '../_helper_components/global/connextInlinePromo/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -73,27 +75,33 @@ const StoryPageLayout = () => {
   const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
 
   let infoBoxIndex = null;
+  let paragraphIndex = 0;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
   const insertAtEndOfStory = [BlogAuthorComponent];
-  const interscrollerPlaceholder = () => <div
-    className='story-interscroller__placeholder full-width c-clear-both'
-    key={'interscrollerPlaceholder'}></div>;
+  const interscrollerPlaceholder = () => (
+    <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>
+  );
 
   filteredContentElements.forEach((el, i) => {
     if (el && el.type === 'divider' && infoBoxIndex === null) {
       infoBoxIndex = i;
+    }
+    if (isParagraph(el.type)) {
+      paragraphIndex += 1;
+      if (paragraphIndex === 6) {
+        filteredContentElements.splice(i, 0, <ConnextInlinePromoSubscription />);
+      }
     }
     return null;
   });
 
   if (infoBoxIndex !== null) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
-    filteredContentElements.splice(infoBoxIndex, 0, <ConnextEndOfStory />);
+    filteredContentElements.splice(infoBoxIndex, 0, <ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
     infoBoxIndex += 1;
   } else {
-    insertAtEndOfStory.push(<ConnextEndOfStory />);
+    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
   }
-
   return (
     <>
       {!noAds && <GlobalAdSlots />}
@@ -106,10 +114,7 @@ const StoryPageLayout = () => {
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
-            <Headline
-              headlines={headlines}
-              basicItems={basicItems}
-            />
+            <Headline headlines={headlines} basicItems={basicItems} />
           </div>
           <div className="b-margin-bottom-d15-m10 c-label-wrapper b-pageContainer">
             <SectionLabel label={label} taxonomy={taxonomy} />
@@ -124,12 +129,12 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
-          {!noAds
-            && <div className="c-hp01-mp01">
+          {!noAds && (
+            <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />
               <ArcAd staticSlot={'MP01'} />
             </div>
-          }
+          )}
           <Section
             elements={filteredContentElements}
             stopIndex={1}
@@ -140,19 +145,15 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             startIndex={1}
             stopIndex={3}
-            rightRail={(!noAds ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null)}
-            insertedAds={(!noAds ? [{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }] : null)}
+            rightRail={!noAds ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null}
+            insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }] : null}
             fullWidth={noAds}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
           />
-          {(!noAds && maxNumberOfParagraphs === 3) && interscrollerPlaceholder()}
-          {!noAds
-            && <Nativo
-              elements={filteredContentElements}
-              displayIfAtLeastXParagraphs={4}
-              controllerClass="story-nativo_placeholder--moap"
-            />
-          }
+          {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
+          {!noAds && (
+            <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
+          )}
           <Section
             elements={filteredContentElements}
             startIndex={start}
@@ -160,27 +161,22 @@ const StoryPageLayout = () => {
             fullWidth={noAds}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
           />
-          {(!noAds && maxNumberOfParagraphs >= 4) && interscrollerPlaceholder()}
+          {!noAds && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
-            rightRail={(!noAds ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null)}
-            insertedAds={(!noAds ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : null)}
+            rightRail={!noAds ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
+            insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : null}
             fullWidth={noAds}
             insertAtSectionEnd={insertAtEndOfStory}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
           />
-          {!noAds
-            && <Nativo
-              elements={filteredContentElements}
-              controllerClass="story-nativo_placeholder--boap"
-            />
-          }
+          {!noAds && <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />}
           <div className="c-taboola">
             <TaboolaFeed type={type} />
           </div>
         </article>
-       {!basicItems || promoType !== 'gallery' ? <Gallery contentElements={filteredContentElements} /> : null}
+        {!basicItems || promoType !== 'gallery' ? <Gallery contentElements={filteredContentElements} /> : null}
       </main>
       <Footer />
     </>

@@ -9,6 +9,7 @@ children {
         _id
         site {
             site_url
+            section_url_open_new_tab
         }
         navigation {
             nav_title

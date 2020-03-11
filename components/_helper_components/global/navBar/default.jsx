@@ -16,7 +16,6 @@ const NavBar = () => {
   const [mobileMenuToggled, setToggle] = useState(false);
   const [isMobile, setMobile] = useState(false);
   const [activeSection, setSection] = useState(-1);
-  const mobileMenu = mobileMenuToggled ? 'mobile-nav-activated' : '';
   const mobileBreakpoint = 1023;
   const handleResizeEvent = () => {
     if (window.innerWidth <= mobileBreakpoint) {
@@ -25,7 +24,6 @@ const NavBar = () => {
       setMobile(false);
     }
   };
-
   const sections = useContent({
     source: 'site-api',
     query: {
@@ -75,6 +73,7 @@ const NavBar = () => {
     } = section || {};
     const {
       site_url: siteURL,
+      section_url_open_new_tab: newTab,
     } = site || {};
 
     const sectionIndex = children.indexOf(section);
@@ -82,19 +81,19 @@ const NavBar = () => {
     const destination = id.includes('/configsection') ? siteURL : id;
     if (children[verticalBarIndex] === section) {
       return (
-      <React.Fragment key={id}>
-        <Section navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
-        setSection={setSection} activeSection={activeSection}/>
-        <li className='nav-items nav-itemBottomBorder nav-separator' key='nav-separator'>
-          <span className='separatorBar'></span>
-        </li>
-      </React.Fragment>
+        <React.Fragment key={id}>
+          <Section navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
+          setSection={setSection} activeSection={activeSection} newTab={newTab}/>
+          <li className='nav-items nav-itemBottomBorder nav-separator'>
+            <span className='separatorBar'></span>
+          </li>
+        </React.Fragment>
       );
     }
 
     return (
       <Section key={id} navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
-      setSection={setSection} activeSection={activeSection}/>
+      setSection={setSection} activeSection={activeSection} newTab={newTab}/>
     );
   });
 
@@ -114,7 +113,7 @@ const NavBar = () => {
           <DesktopNav
             sections={sectionLi}
             isMobile={isMobile}
-            hamburgerToggle={mobileMenu}
+            hamburgerToggle={mobileMenuToggled}
             setToggle={setToggle}
             smallLogoUrl={siteLogoImageSmallInverse}
             rootDirectory={rootDirectory}

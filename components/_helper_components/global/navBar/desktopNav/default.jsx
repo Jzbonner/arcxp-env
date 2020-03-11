@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Search from '../search/default';
 import Login from '../login/default';
@@ -13,9 +13,15 @@ const DesktopNav = ({
     twitter,
     facebook,
   } = social;
+
+  useEffect(() => {
+    document.body.style.position = hamburgerToggle && isMobile ? 'fixed' : '';
+  }, [hamburgerToggle, isMobile]);
+
   return (
-  <nav className={`${hamburgerToggle} ${isMobile ? 'nav-mobile' : ''}`}>
-    {/* <div className={'nav-wrapper'}></div> */}
+  <>
+  <div className={`nav-wrapper ${hamburgerToggle && isMobile ? 'isVisible' : ''}`}></div>
+  <nav className={`${hamburgerToggle && isMobile ? 'mobile-nav-activated' : ''} ${isMobile ? 'nav-mobile' : ''}`}>
     <div className='nav-menu-toggle' onClick={() => { setToggle(false); }}>
       <div className='nav-flyout-button'></div>
     </div>
@@ -35,13 +41,14 @@ const DesktopNav = ({
       </div>
     </ul>
   </nav>
+  </>
   );
 };
 
 DesktopNav.propTypes = {
   sections: PropTypes.array,
   isMobile: PropTypes.bool,
-  hamburgerToggle: PropTypes.string,
+  hamburgerToggle: PropTypes.bool,
   setToggle: PropTypes.func,
   smallLogoUrl: PropTypes.string,
   rootDirectory: PropTypes.small,

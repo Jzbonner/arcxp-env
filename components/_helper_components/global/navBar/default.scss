@@ -151,6 +151,11 @@
     @include breakpoint(desktop-sm) {
       display: flex;
       flex-direction: row;
+      min-width: 683px;
+    }
+
+    @include breakpoint(desktop-nav) {
+      min-width: 880px;
     }
   }
 
@@ -247,9 +252,9 @@
   .nav-itemText {
     @include text-styles(1.125rem, 1.44, "Gordita");
 
-    font-weight: 400;
     text-transform: capitalize;
     align-items: center;
+    -webkit-font-smoothing: antialiased;
   
     @include breakpoint(desktop-sm) {
       color: #2e81b7;
@@ -344,6 +349,7 @@
     padding: 0 .5rem;
 
     @include breakpoint(desktop-sm) {
+      max-width: 100%;
       width: 29px;
       cursor: pointer;
       vertical-align: middle;
@@ -351,6 +357,10 @@
       font-size: 1rem;
       padding: 0;
     }
+
+    // @include breakpoint(desktop-nav) {
+    //   max-width: 30%;
+    // }
   }
   
   .nav-weather {
@@ -440,7 +450,7 @@
   }
   
   .login-text {
-    font-weight: 600;
+    font-weight: 700;
     padding-left: 6px;
     cursor: pointer;
     display: none;
@@ -599,15 +609,15 @@
   }
 
   .flyout-item {
-    writing-mode: horizontal-tb;
-    height: 2rem;
-    margin-right: 3vw;
-    white-space: nowrap;
+    // height: 2rem;
     font-weight: 400;
     
-    @include text-styles(1rem, 1.44, "Gordita");
+    @include text-styles(1rem, 2, "Gordita");
 
     @include breakpoint(desktop-sm) {
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+      margin-right: 3vw;
       height: 1.875rem;
 
       @include text-styles(.875rem, 1, "Gordita");
@@ -622,6 +632,24 @@
       align-content: flex-start;
       display: inline-flex;
       writing-mode: vertical-lr;
+    }
+  }
+
+  .nav-wrapper {
+    background: transparent;
+    content: " ";
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10001;
+    background-color: #808080;
+    opacity: .55;
+    display: none;
+
+    &.isVisible {
+      display: flex;
     }
   }
 }

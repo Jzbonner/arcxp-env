@@ -26,11 +26,7 @@ const ContentElements = ({ contentElements }) => {
             // returns inserted ads
             return element;
           case 'quote':
-            return <BlockQuote
-              contentElements={element.content_elements}
-              citation={element.citation}
-              key={`BlockQuote-${i}`}
-            />;
+            return <BlockQuote contentElements={element.content_elements} citation={element.citation} key={`BlockQuote-${i}`} />;
           case 'correction':
             return <Correction src={element} key={`Correction-${i}`} />;
           case 'gallery':
@@ -80,8 +76,10 @@ const ContentElements = ({ contentElements }) => {
               && element.type.name
               && (element.type.name === 'ArcAd'
                 || element.type.name === 'BlogAuthor'
-                || element.type.name === 'ConnextEndOfStory')
-            ) {
+                || element.type.name === 'ConnextEndOfStory'
+                || element.type.name === 'ConnextInlinePromoSubscription'
+                || element.type.name === 'ConnextHyperLocalSubscription'
+              )) {
               return element;
             }
             return null;
