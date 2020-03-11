@@ -125,7 +125,7 @@ const Gallery = (props) => {
       // change current image index by -1
       if (action === actions.PREV) {
         setCurrentAction(action);
-        if (!isAdVisible) {
+        if (!isAdVisible || (clickCount % 4) === 1) {
           if (currentIndex <= 0) {
             if (!maxIndex) {
               setCurrentIndex(maxNumber);
@@ -140,7 +140,7 @@ const Gallery = (props) => {
       // change current image index by +1
       if (action === actions.NEXT) {
         setCurrentAction(action);
-        if (!isAdVisible) {
+        if (!isAdVisible || (clickCount % 4) === 1) {
           if (currentIndex === maxIndex) {
             setCurrentIndex(0);
           } else {
@@ -152,9 +152,8 @@ const Gallery = (props) => {
     } else {
       debugger;
       // setCurrentIndex(currentIndex);
-      setCurrentAction('POOPOO');
       setRenderTrigger(rerender + 1);
-      
+
       calculateTranslateX();
     }
   };
@@ -368,7 +367,8 @@ const Gallery = (props) => {
       const adRemovedElementArray = removeGalleryAd();
       setElementData(adRemovedElementArray);
       setAdVisibleState(false);
-      calculateTranslateX();
+      changeIndex(currentAction);
+      // calculateTranslateX();
     }
   }, [isAdVisible, clickCount]);
 
