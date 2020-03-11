@@ -14,12 +14,14 @@ const Section = ({
   const {
     nav_title: name,
   } = navigation;
+
   function handleClick(e) {
-    setSection(index);
     e.preventDefault();
+    e.stopPropagation();
+    setSection(index);
   }
 
-  const isActive = index === activeSection ? 'section-active' : '';
+  const isActive = index === activeSection ? 'isVisible' : '';
 
   let ePaperClass = '';
   if (name === 'ePaper') {
@@ -61,14 +63,14 @@ const Section = ({
     <>
       <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
         <div className='nav-item-link'>
-          <a onTouchEnd={handleClick}>{name}</a>
-          <div className='nav-item-circle b-flexCenter'></div>
+          <a onClick={ e => handleClick(e)}>{name}</a>
+          <div className={`nav-item-circle b-flexCenter ${isActive}`}></div>
         </div>
         <div className={`section ${isActive}`}>
           <div className='menu-item'>
             <a>{name}</a>
           </div>
-          <div className={`subNav ${isActive}`}>
+          <div className='subNav'>
             <ul className='subNav-flyout'>
               {childList}
             </ul>

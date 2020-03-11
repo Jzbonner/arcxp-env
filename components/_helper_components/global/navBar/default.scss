@@ -148,8 +148,6 @@
   }
   
   .nav-sections {
-    // display: inline-flex;
-
     @include breakpoint(desktop-sm) {
       display: flex;
       flex-direction: row;
@@ -170,103 +168,40 @@
 
   .nav-item-link {
     display: flex;
-    // @media (hover: none) {
-    //   &:hover {
-    //     + .menu-active {
-    //         display: flex;
-    //         position: relative;
-
-    //         .subNav {
-    //           display: flex;
-    //           position: relative;
-    //         }
-    //       }
-    //     }
-    //   }
   }
 
   
   .nav-items {
     padding-left: 50px;
     padding-bottom: 25px;
-    // position: relative;
-
-    @media (hover: none) {
-
-      &:hover {
-
-        .section {
-          display: flex;
-          // position: relative;
-        }
-
-        .subNav {
-          display: flex;
-          opacity: 1;
-          visibility: visible;
-          // position: relative;
-        }
-      }
-    }
-
-    &:hover {
-
-      .section {
-        @include breakpoint(desktop-sm) {
-          visibility: visible;
-          display: flex;
-          opacity: 1;
-        }
-
-        .subNav {
-          display: flex;
-          // position: relative;
-          @include breakpoint(desktop-sm) {
-            display: flex;
-            visibility: visible;
-            opacity: 1;
-          }
-        }
-      }
-    
-
-      //   .nav-item-circle {
-      //     display: flex;
-      //     visibility: visible;
-
-      //     @include breakpoint(desktop-sm) {
-      //       display: none;
-      //     }
-      //   }
-    }
 
     .section {
       @media (hover: none) {
-  
+
+        &:hover {
+
+          .subNav {
+            @include breakpoint(desktop-sm) {
+              display: flex;
+              opacity: 1;
+              visibility: visible;
+              // position: relative;
+            }
+          }
+        }
+      }
+
+      &:hover {
+        display: flex;
+        opacity: 1;
+
         .subNav {
           visibility: visible;
-          // position: relative;
-          display: flex;
+          opacity: 1;
         }
       }
     }
-    // &:hover {
-    //   @include breakpoint(desktop-sm) {
-    //     opacity: 1;
-    //   }
-
-    //   .subNav {
-    //     display: flex;
-    //     visibility: visible;
-    //     // position: absolute;
-
-    //     @include breakpoint(desktop-sm) {
-    //       visibility: visible;
-    //       opacity: 1;
-    //     }
-    //   }
-    // }
-
+    
     @include breakpoint(desktop-sm) {
       display: flex;
       flex: 0 0 auto;
@@ -275,6 +210,7 @@
   }
 
   .nav-item-circle {
+    display: flex;
     background: linear-gradient(to top, #ff8787, #ff55b8);
     border-radius: .875rem;
     width: 1.75rem;
@@ -282,13 +218,17 @@
     cursor: pointer;
     position: relative;
     visibility: hidden;
-    margin-left: 10px;
+    margin-left: 15px;
 
     &:after {
       content: ">";
       transform: scale(.5, 1.1);
       width: .875rem;
       color: #fff;
+    }
+
+    &.isVisible {
+      visibility: visible;
     }
 
     @include breakpoint(desktop-sm) {
@@ -551,10 +491,6 @@
     margin-left: 5px;
   }
   
-  .section-active {
-    display: flex;
-  }
-  
   .section {
     display: none;
     cursor: default;
@@ -562,7 +498,12 @@
     margin-top: 33px;
     margin-left: 25px;
 
+    &.isVisible {
+      display: flex;
+    }
+
     @include breakpoint(desktop-sm) {
+      display: flex;
       opacity: 0;
       transition: opacity .15s;
       margin-top: 0;
@@ -571,10 +512,6 @@
       box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
     }
   }
-
-  // .menu-active {
-  //   display: none;
-  // }
   
   .menu-item {
     display: none;
@@ -594,9 +531,7 @@
   .subNav {
     border-radius: 0 6px 6px;
     box-shadow: none;
-    // display: inline-flex;
     align-items: center;
-    display: none;
 
     @include breakpoint(desktop-sm) {
       overflow: hidden;

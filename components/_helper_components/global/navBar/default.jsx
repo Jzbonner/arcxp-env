@@ -34,9 +34,6 @@ const NavBar = () => {
     // filter: topNavFilter,
   });
 
-  // if (!sections) {
-  //   return null;
-  // }
   const {
     site: logos,
     social,
@@ -44,15 +41,10 @@ const NavBar = () => {
     _id: rootDirectory,
   } = sections || {};
 
-  console.log(sections);
-
   useEffect(() => {
     if (window.innerWidth <= mobileBreakpoint) {
       setMobile(true);
     }
-    // else {
-    //   setMobile(false);
-    // }
   }, []);
 
   useEffect(() => {
