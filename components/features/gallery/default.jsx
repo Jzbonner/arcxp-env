@@ -13,6 +13,7 @@ import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
 import './default.scss';
 
+// TODO: remove module and cap clickcount to 4 / 0-4
 
 const Gallery = (props) => {
   const {
@@ -43,7 +44,6 @@ const Gallery = (props) => {
 
   /* Ads */
   const [clickCount, setClickCount] = useState(0);
-  const [rerender, setRenderTrigger] = useState(0);
   // const [scrollCount, setScrollCount] = useState(0);
 
   /* Mobile */
@@ -118,14 +118,26 @@ const Gallery = (props) => {
     }
   };
 
+  const handleClickCount = () => {
+    // clickCount === 4 ? setClickCount(1) : setClickCount(clickCount + 1)
+
+    if (clickCount === 4) {
+      setClickCount(1);
+    } else {
+      setClickCount(clickCount + 1);
+    }
+  };
+
   const changeIndex = (action, maxNumber) => {
+    // debugger;
     const currentClickCount = clickCount;
-    setClickCount(clickCount + 1);
-    if (((currentClickCount === 0 || currentClickCount % 3 !== 0))) {
+    handleClickCount();
+    if ((!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0))
+      || (isAdVisible && currentClickCount === 4)) {
       // change current image index by -1
       if (action === actions.PREV) {
         setCurrentAction(action);
-        if (!isAdVisible || (clickCount % 4) === 1) {
+        if (!isAdVisible || (currentClickCount % 4) === 0) {
           if (currentIndex <= 0) {
             if (!maxIndex) {
               setCurrentIndex(maxNumber);
@@ -135,27 +147,30 @@ const Gallery = (props) => {
           } else {
             setCurrentIndex(currentIndex - 1);
           }
+          // debugger;
         }
       }
       // change current image index by +1
       if (action === actions.NEXT) {
         setCurrentAction(action);
-        if (!isAdVisible || (clickCount % 4) === 1) {
+        if (!isAdVisible || ((currentClickCount % 4) === 0)) {
           if (currentIndex === maxIndex) {
             setCurrentIndex(0);
           } else {
             setCurrentIndex(currentIndex + 1);
           }
+          // debugger;
         }
       }
-      debugger;
+      // debugger;
     } else {
-      debugger;
-      // setCurrentIndex(currentIndex);
-      setRenderTrigger(rerender + 1);
+      // debugger;
+      setCurrentIndex(currentIndex);
+      // setRenderTrigger(rerender + 1);
 
-      calculateTranslateX();
+      // calculateTranslateX();
     }
+    // debugger;
   };
 
   const clickFuncs = {
@@ -336,6 +351,7 @@ const Gallery = (props) => {
     return relevantData;
   };
 
+
   useEffect(() => {
     getInitWindowSize();
   }, []);
@@ -355,20 +371,31 @@ const Gallery = (props) => {
   }, [baseCaptionData]);
 
   useEffect(() => {
-    debugger;
-    if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
+    // debugger;
+    if (clickCount !== 0 && clickCount % 4 === 0) {
+      setAdVisibleState(true);
+      // setAdRenderState(true);
+    }
+
     if (!isAdVisible && clickCount && clickCount % 4 === 0) {
       const adInsertedElementArray = insertGalleryAd();
       setElementData(adInsertedElementArray);
       setAdVisibleState(true);
-      debugger;
+      // debugger;
     } else if (isAdVisible && (clickCount % 4) === 1) {
       console.log('removeing ad');
       const adRemovedElementArray = removeGalleryAd();
-      setElementData(adRemovedElementArray);
       setAdVisibleState(false);
-      changeIndex(currentAction);
+      // changeIndex(currentAction);
+      // renderDesktopGalleryElements();
       // calculateTranslateX();
+      const finalizedElements = handleImageFocus((adRemovedElementArray), {
+        isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
+      }, clickFuncs, ads);
+
+      setElementData(finalizedElements);
+      renderCaptionByCurrentIndex();
+      // debugger;
     }
   }, [isAdVisible, clickCount]);
 
