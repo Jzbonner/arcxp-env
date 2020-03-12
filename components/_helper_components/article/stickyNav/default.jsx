@@ -24,6 +24,7 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   // This state is managed in this component because the window's visibility is controlled
   // by a click on the comment button in the sticky nav bar
   const [commentVisibility, _setCommentVisibility] = useState(false);
+  const [dropdownVisibility, setDropdownVisibility] = useState(false);
   const commentVisibilityRef = React.useRef(commentVisibility);
 
   const setCommentVisibility = (data) => {
@@ -34,6 +35,12 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   const toggleCommentsWindow = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    if (!commentVisibilityRef.current) {
+      document.getElementsByTagName('body')[0].classList.add('scrollLock-mobile');
+      setDropdownVisibility(false);
+    } else {
+      document.getElementsByTagName('body')[0].classList.remove('scrollLock-mobile');
+    }
     setCommentVisibility(!commentVisibilityRef.current);
   };
 
@@ -49,7 +56,6 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   };
 
   // Handles mobile dropdown visibility
-  const [dropdownVisibility, setDropdownVisibility] = useState(false);
 
   const toggleMobileDropdownMenu = (e) => {
     e.preventDefault();
