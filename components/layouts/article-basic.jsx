@@ -73,6 +73,7 @@ const StoryPageLayout = () => {
   const ConnextEndStory = () => <ConnextEndOfStory />;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} />;
 
+  console.log('globalContent', globalContent);
   return (
     <>
       <BreakingNews />
@@ -148,7 +149,11 @@ const StoryPageLayout = () => {
        {(!basicItems)
           || (basicItems
             && basicItems.type
-            && basicItems.type !== 'gallery') ? <Gallery contentElements={filteredContentElements} ads={[PG01, PG02, MPG01]} /> : null}
+            && basicItems.type !== 'gallery')
+         ? <Gallery
+              contentElements={filteredContentElements}
+              ads={[PG01, PG02, MPG01]}
+              pageType={subtype} /> : null}
       </main>
       <Footer />
     </>

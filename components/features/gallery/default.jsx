@@ -17,12 +17,14 @@ import './default.scss';
 
 const Gallery = (props) => {
   const {
-    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, ads = [],
+    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, ads = [], pageType = '',
   } = props;
 
-  const [PG01 = {}] = ads;
+  const [PG01 = {}, PG02 = {}] = ads;
   // , PG02 = {}, MPG01 = {}
   // console.log('propped ads', PG02());
+  console.log(PG02);
+  console.log('pageTYPE', pageType);
 
 
   // holds Gallery items
@@ -97,11 +99,9 @@ const Gallery = (props) => {
   const calculateTranslateX = () => {
     if (isMobile) return;
     let translateAmount;
-    // const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
-
     const focusElement = isAdVisible ? PG01Ref.current : (document.getElementById(`gallery-item-${currentIndex}`) || null);
-
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
+
     if (galleryEl.current && focusElement) {
       // fixes initializing translate bug...?
       if (debugFixEl.current && focusElement.offsetWidth === 0) {
@@ -119,8 +119,6 @@ const Gallery = (props) => {
   };
 
   const handleClickCount = () => {
-    // clickCount === 4 ? setClickCount(1) : setClickCount(clickCount + 1)
-
     if (clickCount === 4) {
       setClickCount(1);
     } else {
@@ -131,7 +129,7 @@ const Gallery = (props) => {
   const changeIndex = (action, maxNumber) => {
     // debugger;
     const currentClickCount = clickCount;
-    handleClickCount();
+    if (!isMobile) handleClickCount();
     if ((!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0))
       || (isAdVisible && currentClickCount === 4)) {
       // change current image index by -1
@@ -372,30 +370,26 @@ const Gallery = (props) => {
 
   useEffect(() => {
     // debugger;
-    if (clickCount !== 0 && clickCount % 4 === 0) {
-      setAdVisibleState(true);
-      // setAdRenderState(true);
-    }
+    if (!isMobile) {
+      if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
 
-    if (!isAdVisible && clickCount && clickCount % 4 === 0) {
-      const adInsertedElementArray = insertGalleryAd();
-      setElementData(adInsertedElementArray);
-      setAdVisibleState(true);
-      // debugger;
-    } else if (isAdVisible && (clickCount % 4) === 1) {
-      console.log('removeing ad');
-      const adRemovedElementArray = removeGalleryAd();
-      setAdVisibleState(false);
-      // changeIndex(currentAction);
-      // renderDesktopGalleryElements();
-      // calculateTranslateX();
-      const finalizedElements = handleImageFocus((adRemovedElementArray), {
-        isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
-      }, clickFuncs, ads);
+      if (!isAdVisible && clickCount && clickCount % 4 === 0) {
+        const adInsertedElementArray = insertGalleryAd();
+        setElementData(adInsertedElementArray);
+        setAdVisibleState(true);
+        // debugger;
+      } else if (isAdVisible && (clickCount % 4) === 1) {
+        console.log('removeing ad');
+        const adRemovedElementArray = removeGalleryAd();
+        setAdVisibleState(false);
+        const finalizedElements = handleImageFocus((adRemovedElementArray), {
+          isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
+        }, clickFuncs, ads);
 
-      setElementData(finalizedElements);
-      renderCaptionByCurrentIndex();
-      // debugger;
+        setElementData(finalizedElements);
+        renderCaptionByCurrentIndex();
+        // debugger;
+      }
     }
   }, [isAdVisible, clickCount]);
 
@@ -499,6 +493,7 @@ const Gallery = (props) => {
   return (
     <>
       {isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
+      {pageType !== 'Article' ? <div className="gallery-ads-PG02">{PG02 && PG02()}</div> : null}
       <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
         {!isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
         {
@@ -558,6 +553,7 @@ Gallery.propTypes = {
   leafContentElements: PropTypes.array,
   promoItems: PropTypes.object,
   ads: PropTypes.array,
+  pageType: PropTypes.string,
   customFields: PropTypes.shape({
     galleryUrl: PropTypes.string.tag({
       label: 'Gallery URL',

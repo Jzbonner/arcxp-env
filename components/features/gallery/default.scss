@@ -83,6 +83,13 @@
   @include text-styles(.88rem, normal, "Gordita");
 }
 
+.gallery-ads-PG02 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
 .gallery-overlay {
   position: absolute;
   top: 0;
