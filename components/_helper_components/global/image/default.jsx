@@ -35,7 +35,7 @@ const Image = ({
   const renderCaption = () => {
     if (
       (imageType === 'isLeadImage' && !giveCredit && !caption)
-      || (imageType === 'isInlineImage ' && !caption)
+      || (imageType === 'isInlineImage' && !caption)
       || (imageType === 'isLeadImage' && giveCredit && !caption && screenSize.width > maxTabletViewWidth)
     ) {
       return null;
