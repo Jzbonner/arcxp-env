@@ -13,7 +13,9 @@ const DefaultOutputType = (props) => {
     arcSite = getProperties().sites[0], children, contextPath, deployment, CssLinks, Fusion, Libs, MetaTags, globalContent,
   } = props;
   const { isEnabled = false, clientCode, environment } = connext;
-  const { type } = globalContent || { type: null };
+  const { type, taxonomy } = globalContent || { type: null };
+  const { tags = [] } = taxonomy || {};
+  const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
 
   return (
     <html>
@@ -23,7 +25,7 @@ const DefaultOutputType = (props) => {
         <SiteMeta />
         <Libs />
         <CssLinks />
-        <NativoScripts />
+        {!noAds && <NativoScripts />}
         {type && <TaboolaHeader type={type} />}
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
