@@ -24,6 +24,7 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   // This state is managed in this component because the window's visibility is controlled
   // by a click on the comment button in the sticky nav bar
   const [commentVisibility, _setCommentVisibility] = useState(false);
+  const [dropdownVisibility, setDropdownVisibility] = useState(false);
   const commentVisibilityRef = React.useRef(commentVisibility);
 
   const setCommentVisibility = (data) => {
@@ -33,6 +34,13 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
 
   const toggleCommentsWindow = (e) => {
     e.preventDefault();
+    e.stopPropagation();
+    if (!commentVisibilityRef.current) {
+      document.getElementsByTagName('body')[0].classList.add('scrollLock-mobile');
+      setDropdownVisibility(false);
+    } else {
+      document.getElementsByTagName('body')[0].classList.remove('scrollLock-mobile');
+    }
     setCommentVisibility(!commentVisibilityRef.current);
   };
 
@@ -48,7 +56,6 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   };
 
   // Handles mobile dropdown visibility
-  const [dropdownVisibility, setDropdownVisibility] = useState(false);
 
   const toggleMobileDropdownMenu = (e) => {
     e.preventDefault();
@@ -84,11 +91,8 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
             <li className="stickyNav-item">
               <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
             </li>
-            <ul
-              onClick={e => toggleMobileDropdownMenu(e)}
-              className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}
-            >
-              <li className="stickyNav-item arrow-icon desktop-hidden">
+            <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
+              <li className="stickyNav-item arrow-icon desktop-hidden" onClick={e => toggleMobileDropdownMenu(e)}>
                 <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
               </li>
               <li className="stickyNav-item">

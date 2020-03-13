@@ -127,3 +127,11 @@
     display: none;
   }
 }
+
+.scrollLock-mobile {
+  overflow: hidden;
+
+  @include breakpoint(desktop-sm) {
+    overflow: initial;
+  }
+}
