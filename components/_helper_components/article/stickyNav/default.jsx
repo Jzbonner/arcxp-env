@@ -33,6 +33,7 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
 
   const toggleCommentsWindow = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     setCommentVisibility(!commentVisibilityRef.current);
   };
 
@@ -84,11 +85,8 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
             <li className="stickyNav-item">
               <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
             </li>
-            <ul
-              onClick={e => toggleMobileDropdownMenu(e)}
-              className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}
-            >
-              <li className="stickyNav-item arrow-icon desktop-hidden">
+            <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
+              <li className="stickyNav-item arrow-icon desktop-hidden" onClick={e => toggleMobileDropdownMenu(e)}>
                 <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
               </li>
               <li className="stickyNav-item">
