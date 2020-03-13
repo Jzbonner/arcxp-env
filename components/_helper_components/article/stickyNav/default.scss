@@ -104,3 +104,17 @@
     }
   }
 }
+
+.sticky-padding {
+  width: 100%;
+  min-height: 170px;
+  display: none;
+
+  @include breakpoint(desktop-sm) {
+    min-height: 155px;
+  }
+
+  &.is-visible {
+    display: flex;
+  }
+}

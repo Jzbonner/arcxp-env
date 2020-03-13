@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../default.scss';
 import '../../../../../src/styles/base/_utility.scss';
@@ -20,6 +20,25 @@ const Section = ({
     e.stopPropagation();
     setSection(index);
   }
+  const subNavRef = React.createRef(null);
+  const [width, setWidth] = useState(null);
+  // width = subNavRef.current.offsetWidth;
+
+
+  // console.log(subNavRef);
+  // if (subNavRef.current) {
+  //   console.log(subNavRef.current);
+  //   console.log(subNavRef.current.offsetWidth);
+  // } else {
+  //   console.log("NO BUENOOOOO")
+  // }
+  useEffect(() => {
+    if (subNavRef.current) {
+      setWidth(subNavRef.current.offsetWidth);
+    }
+  }, [subNavRef.current]);
+
+  console.log(width);
 
   const isActive = index === activeSection ? 'isVisible' : '';
 
@@ -61,17 +80,18 @@ const Section = ({
 
   return (
     <>
-      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
+      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
+       onMouseEnter={ e => handleClick(e)} onClick={ e => handleClick(e)}>
         <div className='nav-item-link'>
-          <a onClick={ e => handleClick(e)}>{name}</a>
+          <a>{name}</a>
           <div className={`nav-item-circle b-flexCenter ${isActive}`}></div>
         </div>
         <div className={`section ${isActive}`}>
           <div className='menu-item'>
             <a>{name}</a>
           </div>
-          <div className='subNav'>
-            <ul className='subNav-flyout'>
+          <div className={`subNav ${isActive}`} style={{ width: `${width}px` }} ref={subNavRef}>
+            <ul className={`subNav-flyout itemCount-${childSections.length}`}>
               {childList}
             </ul>
           </div>

@@ -4,6 +4,7 @@
 .c-headerNav {
   width: 90%;
   margin: 0 auto;
+  padding-bottom: 30px;
 
   @include breakpoint(desktop-sm) {
     display: flex;
@@ -14,6 +15,10 @@
   @include breakpoint(desktop-lg) {
     width: 90%;
     max-width: 1600px;
+  }
+
+  &.not-visible {
+    display: none;
   }
   
   nav {
@@ -180,32 +185,32 @@
     padding-left: 50px;
     padding-bottom: 25px;
 
-    .section {
-      @media (hover: none) {
+    // .section {
+    // @media (hover: none) {
 
-        &:hover {
+    //   &:hover {
 
-          .subNav {
-            @include breakpoint(desktop-sm) {
-              display: flex;
-              opacity: 1;
-              visibility: visible;
-              // position: relative;
-            }
-          }
-        }
-      }
+    //     .subNav {
+    //       @include breakpoint(desktop-sm) {
+    //         // display: flex;
+    //         opacity: 1;
+    //         visibility: visible;
+    //         // position: relative;
+    //       }
+    //     }
+    //   }
+    // }
 
-      &:hover {
-        display: flex;
-        opacity: 1;
+    // &:hover {
+    //   display: flex;
+    //   opacity: 1;
 
-        .subNav {
-          visibility: visible;
-          opacity: 1;
-        }
-      }
-    }
+    //   .subNav {
+    //     visibility: visible;
+    //     opacity: 1;
+    //   }
+    // }
+    // }
     
     @include breakpoint(desktop-sm) {
       display: flex;
@@ -510,6 +515,10 @@
 
     &.isVisible {
       display: flex;
+
+      @include breakpoint(desktop-sm) {
+        opacity: 1;
+      }
     }
 
     @include breakpoint(desktop-sm) {
@@ -534,7 +543,7 @@
       padding: 0 .45rem;
       background-color: #fff;
       border-radius: 6px 6px 0 0;
-      z-index: 3;
+      z-index: 4;
     }
   }
   
@@ -543,15 +552,24 @@
     box-shadow: none;
     align-items: center;
 
+    &.isVisible {
+      visibility: visible;
+      opacity: 1;
+    }
+
     @include breakpoint(desktop-sm) {
       overflow: hidden;
       visibility: hidden;
-      display: flex;
+      // display: flex;
+      // display:-webkit-flex;
+      // width: 10;
+      // flex: 0 0 20%;
+      // width: 100px;
       transition: opacity .15s;
       opacity: 0;
       padding: 1.125rem 1.5625rem .3125rem;
       position: absolute;
-      z-index: 2;
+      z-index: 3;
       top: 44px;
       background-color: #fff;
       box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
@@ -630,8 +648,39 @@
     @include breakpoint(desktop-sm) {
       flex-wrap: wrap;
       align-content: flex-start;
-      display: inline-flex;
+      display: flex;
       writing-mode: vertical-lr;
+      height: 13.125rem;
+      width: 100%;
+      flex: 1 1 auto;
+
+      &.itemCount-1 {
+        height: 1.875rem;
+      }
+
+      &.itemCount-2 {
+        height: 3.75rem;
+      }
+
+      &.itemCount-3 {
+        height: 5.625rem;
+      }
+
+      &.itemCount-4,
+      &.itemCount-8 {
+        height: 7.5rem;
+      }
+
+      &.itemCount-5,
+      &.itemcount-9 {
+        height: 9.37rem;
+      }
+
+      &.itemCount-6,
+      &.itemCount-11,
+      &.itemCount-12 {
+        height: 11.25rem;
+      }
     }
   }
 

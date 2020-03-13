@@ -7,7 +7,9 @@ import logo from '../../../../resources/images/stickyNav-logo.svg';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import Comments from '../comments/comments';
 
-const StickyNav = ({ articleURL, headlines, comments = false }) => {
+const StickyNav = ({
+  articleURL, headlines, comments = false, setStickyNavVisibility, stickyNavVisibility, isMobile, logoRef,
+}) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
   } = getProperties();
@@ -25,6 +27,7 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   // by a click on the comment button in the sticky nav bar
   const [commentVisibility, _setCommentVisibility] = useState(false);
   const commentVisibilityRef = React.useRef(commentVisibility);
+  const paddingRef = React.useRef(null);
 
   const setCommentVisibility = (data) => {
     commentVisibilityRef.current = data;
@@ -37,10 +40,15 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
   };
 
   // Handles stick nav visibility
-  const [stickyNavVisibility, setStickyNavVisibility] = useState(false);
+  // const [stickyNavVisibility, setStickyNavVisibility] = useState(false);
 
-  const handleScroll = (e) => {
-    if (e.currentTarget.pageYOffset > 100) {
+  const handleScroll = () => {
+    // Handles sticky visibility if scrolling up past
+    if (!isMobile && paddingRef.current && paddingRef.current.getBoundingClientRect().bottom >= 71) {
+      setStickyNavVisibility(false);
+    }
+
+    if (logoRef.current && logoRef.current.getBoundingClientRect().bottom <= 0) {
       setStickyNavVisibility(true);
     } else if (!commentVisibilityRef.current) {
       setStickyNavVisibility(false);
@@ -111,6 +119,7 @@ const StickyNav = ({ articleURL, headlines, comments = false }) => {
           </ul>
         </div>
       </nav>
+      <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
       <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} />
     </>
   );
@@ -120,6 +129,10 @@ StickyNav.propTypes = {
   articleURL: PropTypes.string,
   headlines: PropTypes.object,
   comments: PropTypes.object,
+  setStickyNavVisibility: PropTypes.func,
+  stickyNavVisibility: PropTypes.bool,
+  isMobile: PropTypes.bool,
+  logoRef: PropTypes.any,
 };
 
 export default StickyNav;
