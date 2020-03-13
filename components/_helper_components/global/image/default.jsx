@@ -6,7 +6,7 @@ import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
 const Image = ({
-  width, height, src, imageMarginBottom, isInlineImage, isLeadImage, maxTabletViewWidth,
+  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth,
 }) => {
   const { url, caption, credits } = src || {};
   const [imageSrc, setImageSrc] = useState('');
@@ -21,11 +21,8 @@ const Image = ({
   let mainCredit;
   let secondaryCredit;
   if (credits) {
-    mainCredit = credits.affiliation
-    && credits.affiliation[0]
-    && credits.affiliation[0].name ? credits.affiliation[0].name : null;
-    secondaryCredit = credits.by
-    && credits.by.length && credits.by[0] && credits.by[0].name ? credits.by[0].name : null;
+    mainCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
+    secondaryCredit = credits.by && credits.by.length && credits.by[0] && credits.by[0].name ? credits.by[0].name : null;
   }
 
   let giveCredit;
@@ -35,15 +32,15 @@ const Image = ({
     giveCredit = `Credit: ${secondaryCredit}`;
   }
 
-  const smartChecker = () => {
+  const renderCaption = () => {
     if (
-      (isLeadImage && !giveCredit && !caption)
-      || (isInlineImage && !caption)
-      || (isLeadImage && giveCredit && !caption && screenSize.width > maxTabletViewWidth)
+      (imageType === 'isLeadImage' && !giveCredit && !caption)
+      || (imageType === 'isInlineImage ' && !caption)
+      || (imageType === 'isLeadImage' && giveCredit && !caption && screenSize.width > maxTabletViewWidth)
     ) {
       return null;
     }
-    if (isLeadImage && giveCredit && !caption && screenSize.width < maxTabletViewWidth) {
+    if (imageType === 'isLeadImage' && giveCredit && !caption && screenSize.width < maxTabletViewWidth) {
       return <Caption src={src} />;
     }
     return <Caption src={src} />;
@@ -53,9 +50,9 @@ const Image = ({
     <div className={`c-image-component ${imageMarginBottom}`}>
       <div className="image-component-image">
         <img src={imageSrc} alt={imageALT} />
-        {smartChecker()}
+        {imageType !== 'isHomepageImage' && renderCaption()}
       </div>
-      <p className="photo-credit-text">{giveCredit}</p>
+      {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
     </div>
   );
 };
@@ -65,8 +62,7 @@ Image.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   imageMarginBottom: PropTypes.string,
-  isInlineImage: PropTypes.bool,
-  isLeadImage: PropTypes.bool,
+  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage']),
   maxTabletViewWidth: PropTypes.number,
 };
 export default Image;

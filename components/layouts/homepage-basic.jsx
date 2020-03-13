@@ -21,7 +21,7 @@ const HomePageLayout = (props) => {
       <header className="c-nav">
         <NavBar />
       </header>
-      <main>
+      <main className="c-homepageContent">
         <SectionHome feature={zone1} rightRailAd={Ad} />
         <SectionHome feature={zone2} />
         <SectionHome feature={zone3} rightRailAd={Ad} />
