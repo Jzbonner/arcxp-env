@@ -2,10 +2,7 @@ import React from 'react';
 import '../default.scss';
 
 const Subscribe = () => (
-  <>
-    <span>Worth knowing. Worth Supporting.</span>
-    <span className='sub-bold'>Subscribe today for $1.00</span>
-  </>
+  <div className="connext-sub-bar eos-msg__nolog-or-nosub b-margin-bottom-d40-m20"></div>
 );
 
 export default Subscribe;
