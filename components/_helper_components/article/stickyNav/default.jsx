@@ -63,7 +63,7 @@ const StickyNav = ({
       && !stickyVisibilityRef
       && logoRef.current
       && logoRef.current.getBoundingClientRect().bottom <= 1) {
-      setStickyNavVisibility(true);
+      setStickyVisibility(true);
     }
 
     // Handles sticky visibility if scrolling up past bottom of padding between sticky nav and page content.
@@ -76,7 +76,7 @@ const StickyNav = ({
       && stickyVisibilityRef.current
       && paddingRef.current
       && paddingRef.current.getBoundingClientRect().bottom >= 71) {
-      setStickyNavVisibility(false);
+      setStickyVisibility(false);
     }
   };
 

@@ -194,6 +194,18 @@
       flex: 0 0 auto;
       padding: 10px 1.3vw 0 0;
     }
+
+    &:hover {
+
+      .section {
+        opacity: 1;
+
+        .subNav {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+    }
   }
 
   .nav-item-circle {

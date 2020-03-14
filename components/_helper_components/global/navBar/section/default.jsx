@@ -74,8 +74,7 @@ const Section = ({
   });
   return (
     <>
-      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
-       onMouseEnter={ e => activateMenu(e)}>
+      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
         <div className='nav-item-link' onTouchEnd={ e => activateMenu(e)}>
           <a>{name}</a>
           <div className={`nav-item-circle b-flexCenter ${isActive}`}></div>
