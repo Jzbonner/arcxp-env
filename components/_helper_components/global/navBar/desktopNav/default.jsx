@@ -51,7 +51,7 @@ DesktopNav.propTypes = {
   hamburgerToggle: PropTypes.bool,
   setToggle: PropTypes.func,
   smallLogoUrl: PropTypes.string,
-  rootDirectory: PropTypes.small,
+  rootDirectory: PropTypes.string,
   social: PropTypes.object,
 };
 

@@ -11,34 +11,26 @@ const Section = ({
   setSection,
   activeSection,
   newTab,
+  isMobile,
 }) => {
   const {
     nav_title: name,
   } = navigation;
-  function handleClick(e) {
+  function activateMenu(e) {
     e.preventDefault();
     e.stopPropagation();
     setSection(index);
   }
   const subNavRef = React.createRef(null);
   const [width, setWidth] = useState(null);
-  // width = subNavRef.current.offsetWidth;
+  let childSectionLength = 0;
 
-
-  // console.log(subNavRef);
-  // if (subNavRef.current) {
-  //   console.log(subNavRef.current);
-  //   console.log(subNavRef.current.offsetWidth);
-  // } else {
-  //   console.log("NO BUENOOOOO")
-  // }
+  // manually sets the width for the parent container, was having issues with safari when no width was being set.
   useEffect(() => {
-    if (subNavRef.current) {
-      setWidth(subNavRef.current.offsetWidth);
+    if (subNavRef.current && !isMobile) {
+      setWidth(subNavRef.current.getBoundingClientRect().width);
     }
   }, [subNavRef.current]);
-
-  console.log(width);
 
   const isActive = index === activeSection ? 'isVisible' : '';
 
@@ -61,9 +53,12 @@ const Section = ({
       site,
     } = childSection || {};
 
+    childSectionLength = childNav ? childSectionLength + 1 : childSectionLength + 0;
+
     const {
       nav_title: childName,
     } = childNav || {};
+
     const {
       site_url: childURL,
     } = site || {};
@@ -71,27 +66,26 @@ const Section = ({
     if (childName) {
       return (
         <li key={id} className='flyout-item'>
-          <a href={childURL}>{childName}</a>
+          <a href={childURL} target='_self'>{childName}</a>
         </li>
       );
     }
     return null;
   });
-
   return (
     <>
       <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}
-       onMouseEnter={ e => handleClick(e)} onClick={ e => handleClick(e)}>
-        <div className='nav-item-link'>
+       onMouseEnter={ e => activateMenu(e)}>
+        <div className='nav-item-link' onTouchEnd={ e => activateMenu(e)}>
           <a>{name}</a>
           <div className={`nav-item-circle b-flexCenter ${isActive}`}></div>
         </div>
         <div className={`section ${isActive}`}>
-          <div className='menu-item'>
+          <div className='section-item'>
             <a>{name}</a>
           </div>
-          <div className={`subNav ${isActive}`} style={{ width: `${width}px` }} ref={subNavRef}>
-            <ul className={`subNav-flyout itemCount-${childSections.length}`}>
+          <div className={`subNav ${isActive}`} style={{ width: `${width}px` }}>
+            <ul className={`subNav-flyout itemCount-${childSectionLength}`} ref={subNavRef}>
               {childList}
             </ul>
           </div>
@@ -109,6 +103,7 @@ Section.propTypes = {
   setSection: PropTypes.func,
   activeSection: PropTypes.number,
   newTab: PropTypes.string,
+  isMobile: PropTypes.bool,
 };
 
 export default Section;

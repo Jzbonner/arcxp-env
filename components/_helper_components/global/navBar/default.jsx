@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-// import topNavFilter from '../../../../content/filters/top-nav';
+import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
 import Subscribe from './subscribe/default';
@@ -18,26 +18,36 @@ const NavBar = ({ articleURL, headlines, comments }) => {
   const [activeSection, setSection] = useState(-1);
   const [stickyNavVisibility, setStickyNavVisibility] = useState(false);
   const logoRef = useRef(null);
+  const isMobileVisibilityRef = React.useRef(isMobile);
   const mobileBreakpoint = 1023;
 
-  // if(logoRef.current) {
-  //   console.log(logoRef.current.scrollTop);
-  //   console.log(logoRef.current.getBoundingClientRect().height);
-  //   console.log(logoRef.current.offsetTop);
+  const sections = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'TopNav',
+    },
+    filter: topNavFilter,
+  });
 
-  // };
+  const setStickyMobileRef = (data) => {
+    isMobileVisibilityRef.current = data;
+    setMobile(data);
+  };
 
   const handleResizeEvent = () => {
     if (window.innerWidth <= mobileBreakpoint) {
       setMobile(true);
+      setStickyMobileRef(true);
     } else {
       setMobile(false);
+      setStickyMobileRef(false);
     }
   };
 
   useEffect(() => {
     if (window.innerWidth <= mobileBreakpoint) {
       setMobile(true);
+      setStickyMobileRef(true);
     }
   }, []);
 
@@ -48,14 +58,6 @@ const NavBar = ({ articleURL, headlines, comments }) => {
     };
   }, [isMobile]);
 
-  const sections = useContent({
-    source: 'site-api',
-    query: {
-      hierarchy: 'TopNav',
-    },
-    // filter: topNavFilter,
-  });
-
   const {
     site: logos,
     social,
@@ -65,7 +67,6 @@ const NavBar = ({ articleURL, headlines, comments }) => {
 
   const {
     site_logo_image: siteLogoImage,
-    // site_logo_image_small: siteLogoImageSmall,
     site_logo_image_small_inverse: siteLogoImageSmallInverse,
   } = logos || {};
 
@@ -95,7 +96,7 @@ const NavBar = ({ articleURL, headlines, comments }) => {
       return (
         <React.Fragment key={id}>
           <Section navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
-          setSection={setSection} activeSection={activeSection} newTab={newTab}/>
+          setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile}/>
           <li className='nav-items nav-itemBottomBorder nav-separator'>
             <span className='separatorBar'></span>
           </li>
@@ -105,13 +106,12 @@ const NavBar = ({ articleURL, headlines, comments }) => {
 
     return (
       <Section key={id} navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
-      setSection={setSection} activeSection={activeSection} newTab={newTab}/>
+      setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile}/>
     );
   });
 
   return (
-  // <header className='c-nav'>
-      <>
+    <header className="c-nav">
         <div className={`c-headerNav ${stickyNavVisibility ? 'not-visible' : ''}`}>
           <div className='b-flexRow b-flexCenter nav-logo'>
             <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
@@ -143,9 +143,10 @@ const NavBar = ({ articleURL, headlines, comments }) => {
           setStickyNavVisibility={setStickyNavVisibility}
           stickyNavVisibility={stickyNavVisibility}
           isMobile={isMobile}
-          logoRef={logoRef}/>
-      </>
-  /* // </header> */
+          isMobileVisibilityRef={isMobileVisibilityRef}
+          logoRef={logoRef}
+          setToggle={setToggle}/>
+      </header>
   );
 };
 

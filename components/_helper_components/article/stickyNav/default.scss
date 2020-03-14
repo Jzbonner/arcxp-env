@@ -4,7 +4,7 @@
   position: fixed;
   top: 0;
   height: 90px;
-  background: #f8f8f8;
+  background-image: linear-gradient(180deg, #fff 67%, #f1f1f1 100%);
   opacity: .98;
   align-items: center;
   border: none;
@@ -24,7 +24,7 @@
   .stickyNav {
     max-width: 1600px;
     margin: 0 auto;
-    width: 94%;
+    width: 90%;
     display: flex;
     align-items: center;
   }
@@ -40,8 +40,10 @@
   display: flex;
   align-items: center;
   width: min-content;
+  // margin-left: 25px;
 
   @include breakpoint(desktop-sm) {
+    margin-left: 0;
     justify-content: left;
   }
 
@@ -103,15 +105,21 @@
       }
     }
   }
+
+  .nav-menu-toggle {
+    position: relative;
+    margin-right: 6px;
+    margin-bottom: .313em;
+  }
 }
 
 .sticky-padding {
   width: 100%;
-  min-height: 170px;
+  min-height: 92px;
   display: none;
 
   @include breakpoint(desktop-sm) {
-    min-height: 155px;
+    min-height: 160px;
   }
 
   &.is-visible {

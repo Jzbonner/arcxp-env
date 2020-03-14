@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import './default.scss';
-import tempMenu from '../../../../resources/images/tempMenu.jpg';
 import logo from '../../../../resources/images/stickyNav-logo.svg';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import Comments from '../comments/comments';
+import '../../global/navBar/default.scss';
 
 const StickyNav = ({
-  articleURL, headlines, comments = false, setStickyNavVisibility, stickyNavVisibility, isMobile, logoRef,
+  articleURL, headlines, comments = false, setStickyNavVisibility, stickyNavVisibility, isMobileVisibilityRef, logoRef, setToggle,
 }) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
@@ -28,32 +28,50 @@ const StickyNav = ({
   const [commentVisibility, _setCommentVisibility] = useState(false);
   const commentVisibilityRef = React.useRef(commentVisibility);
   const paddingRef = React.useRef(null);
+  const stickyVisibilityRef = React.useRef(stickyNavVisibility);
 
   const setCommentVisibility = (data) => {
     commentVisibilityRef.current = data;
     _setCommentVisibility(data);
   };
 
+  const setStickyVisibility = (data) => {
+    stickyVisibilityRef.current = data;
+    setStickyNavVisibility(data);
+  };
   const toggleCommentsWindow = (e) => {
     e.preventDefault();
     setCommentVisibility(!commentVisibilityRef.current);
   };
 
-  // Handles stick nav visibility
-  // const [stickyNavVisibility, setStickyNavVisibility] = useState(false);
-
   const handleScroll = () => {
-    // Handles sticky visibility if scrolling up past
-    if (!isMobile && paddingRef.current && paddingRef.current.getBoundingClientRect().bottom >= 71) {
-      setStickyNavVisibility(false);
+    // Handles sticky visibility if scrolling down past top(mobile) or bottom(desktop) of logo.
+    if (isMobileVisibilityRef.current
+      && !stickyVisibilityRef.current
+      && logoRef.current
+      && logoRef.current.getBoundingClientRect().top < 17) {
+      setStickyVisibility(true);
+    } else if (!isMobileVisibilityRef.current
+      && !stickyVisibilityRef
+      && logoRef.current
+      && logoRef.current.getBoundingClientRect().bottom <= 1) {
+      setStickyNavVisibility(true);
     }
 
-    if (logoRef.current && logoRef.current.getBoundingClientRect().bottom <= 0) {
-      setStickyNavVisibility(true);
-    } else if (!commentVisibilityRef.current) {
+    // Handles sticky visibility if scrolling up past bottom of padding between sticky nav and page content.
+    if (isMobileVisibilityRef.current
+      && stickyVisibilityRef.current
+      && paddingRef.current
+      && paddingRef.current.getBoundingClientRect().bottom >= 90) {
+      setStickyVisibility(false);
+    } else if (!isMobileVisibilityRef.current
+      && stickyVisibilityRef.current
+      && paddingRef.current
+      && paddingRef.current.getBoundingClientRect().bottom >= 71) {
       setStickyNavVisibility(false);
     }
   };
+
 
   // Handles mobile dropdown visibility
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
@@ -77,10 +95,13 @@ const StickyNav = ({
 
   return (
     <>
-      <nav className={`c-stickyNav ${stickyNavVisibility ? 'is-visible' : ''}`}>
+      <nav className={`c-stickyNav ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
         <div className="stickyNav">
-          <img src={tempMenu} alt="temp-burger-menu" className="desktop-hidden" style={{ maxWidth: '50px', marginRight: '6px' }} />
           <ul className="c-stickyNav-list">
+          <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
+            <div className='nav-flyout-button'>
+            </div>
+          </div>
             <li className="stickyNav-item mobile-hidden">
               <a href={siteDomainURL}>
                 <img className="logo" src={logo} alt={`${siteName} logo`} />
@@ -132,7 +153,9 @@ StickyNav.propTypes = {
   setStickyNavVisibility: PropTypes.func,
   stickyNavVisibility: PropTypes.bool,
   isMobile: PropTypes.bool,
+  isMobileVisibilityRef: PropTypes.object,
   logoRef: PropTypes.any,
+  setToggle: PropTypes.func,
 };
 
 export default StickyNav;
