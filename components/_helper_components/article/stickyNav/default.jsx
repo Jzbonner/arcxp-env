@@ -60,7 +60,7 @@ const StickyNav = ({
       && logoRef.current.getBoundingClientRect().top < 17) {
       setStickyVisibility(true);
     } else if (!isMobileVisibilityRef.current
-      && !stickyVisibilityRef
+      && !stickyVisibilityRef.current
       && logoRef.current
       && logoRef.current.getBoundingClientRect().bottom <= 1) {
       setStickyVisibility(true);
