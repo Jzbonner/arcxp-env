@@ -38,9 +38,11 @@ const NavBar = ({ articleURL, headlines, comments }) => {
     if (window.innerWidth <= mobileBreakpoint) {
       setMobile(true);
       setStickyMobileRef(true);
+      setSection(-1);
     } else {
       setMobile(false);
       setStickyMobileRef(false);
+      setSection(-1);
     }
   };
 
