@@ -29,7 +29,12 @@
 
   .fb-comments > span {
     max-height: 75vh;
-    overflow-y: scroll;
+    overflow-y: auto;
+
+    iframe {
+      //this !important is to override an inline style created by the facebook script
+      width: 100% !important; /* stylelint-disable-line declaration-no-important */
+    }
 
     @include breakpoint(tablet) {
       max-height: 85vh;

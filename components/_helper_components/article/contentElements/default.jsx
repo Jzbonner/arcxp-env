@@ -78,8 +78,8 @@ const ContentElements = ({ contentElements }) => {
                 || element.type.name === 'BlogAuthor'
                 || element.type.name === 'ConnextEndOfStory'
                 || element.type.name === 'ConnextInlinePromoSubscription'
-                || element.type.name === 'ConnextHyperLocalSubscription'
-              )) {
+                || element.type.name === 'ConnextHyperLocalSubscription')
+            ) {
               return element;
             }
             return null;
