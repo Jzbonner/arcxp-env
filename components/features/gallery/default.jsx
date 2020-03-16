@@ -8,6 +8,7 @@ import {
   debounce, createBaseGallery, handleImageFocus, reorganizeElements,
 } from './_helper_functions/index';
 import PGO1Element from '../../_helper_components/global/ads/pg01/default';
+import MPGO1Element from '../../_helper_components/global/ads/mpg01/default';
 import leftArrow from '../../../resources/icons/gallery/left-arrow.svg';
 import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
@@ -20,9 +21,7 @@ const Gallery = (props) => {
     contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, ads = [], pageType = '',
   } = props;
 
-  const [PG01 = {}, PG02 = {}] = ads;
-  // , PG02 = {}, MPG01 = {}
-  // console.log('propped ads', PG02());
+  const [PG01 = {}, PG02 = {}, MPG01 = {}] = ads;
   console.log(PG02);
   console.log('pageTYPE', pageType);
 
@@ -46,14 +45,16 @@ const Gallery = (props) => {
 
   /* Ads */
   const [clickCount, setClickCount] = useState(0);
-  // const [scrollCount, setScrollCount] = useState(0);
+  const [isAdVisible, setAdVisibleState] = useState(false);
 
   /* Mobile */
   const [offsetHeight, setHeight] = useState(0);
   const [isCaptionOn, setCaptionState] = useState(true);
   const [isStickyVisible, setStickyState] = useState(false);
   const [isMobile, setMobileState] = useState('NOT INIT');
-  const [isAdVisible, setAdVisibleState] = useState(false);
+  const [mobileAdsIndices, setMobileAdsIndices] = useState([]);
+  const [photosScrolled, setPhotosScrolled] = useState(0);
+  const [isAdInsertionAble, setAdInsertionAbleState] = useState(true);
 
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
@@ -67,6 +68,7 @@ const Gallery = (props) => {
     ON: 'ON',
     OFF: 'OFF',
     RESIZE: 'RESIZE',
+    AD_RESET: 'AD_RESET',
   };
 
   let mobileElemData;
@@ -126,10 +128,22 @@ const Gallery = (props) => {
     }
   };
 
+  const handleScrollCount = () => {
+    if (photosScrolled === 4) {
+      setPhotosScrolled(0);
+    } else {
+      setPhotosScrolled(photosScrolled + 1);
+    }
+  };
+
   const changeIndex = (action, maxNumber) => {
-    // debugger;
     const currentClickCount = clickCount;
-    if (!isMobile) handleClickCount();
+    if (!isMobile) {
+      handleClickCount();
+    } else {
+      handleScrollCount();
+    }
+
     if ((!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0))
       || (isAdVisible && currentClickCount === 4)) {
       // change current image index by -1
@@ -145,7 +159,6 @@ const Gallery = (props) => {
           } else {
             setCurrentIndex(currentIndex - 1);
           }
-          // debugger;
         }
       }
       // change current image index by +1
@@ -157,18 +170,11 @@ const Gallery = (props) => {
           } else {
             setCurrentIndex(currentIndex + 1);
           }
-          // debugger;
         }
       }
-      // debugger;
     } else {
-      // debugger;
       setCurrentIndex(currentIndex);
-      // setRenderTrigger(rerender + 1);
-
-      // calculateTranslateX();
     }
-    // debugger;
   };
 
   const clickFuncs = {
@@ -176,16 +182,28 @@ const Gallery = (props) => {
     next: () => changeIndex(actions.NEXT),
   };
 
-  const insertGalleryAd = () => {
+  const insertDesktopGalleryAd = () => {
     const elements = [...elementData];
-    console.log('starting elements', elements);
 
     elementData.forEach((element, i) => {
       if (element.props.data.states.isFocused) elements.splice(i + 1, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} />);
     });
 
-    console.log('ad inserted', elements);
     return elements;
+  };
+
+  const insertMobileGalleryAd = () => {
+    const mobileElements = [...mobileElementData];
+    let hasAdBeenInserted = false;
+
+    mobileElementData.forEach((element) => {
+      console.log('index', (element.props.data && element.props.data.index) || 'this element does not have an index');
+      if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted && photosScrolled === 3) {
+        mobileElements.splice(element.props.data.index + 1, 0, <MPGO1Element adSlot={MPG01} />);
+        hasAdBeenInserted = true;
+      }
+    });
+    return mobileElements;
   };
 
   const removeGalleryAd = () => {
@@ -194,10 +212,10 @@ const Gallery = (props) => {
     elementData.forEach((element, i) => {
       if (element.props.adSlot) {
         elements.splice(i, 1);
-        console.log(element.props.adSlot);
+        // console.log(element.props.adSlot);
       }
     });
-    console.log('removed ad from array', elements);
+
     return elements;
   };
 
@@ -218,6 +236,7 @@ const Gallery = (props) => {
   // close mobile sticky
   const handleStickyClose = () => {
     setStickyState(false);
+    setCurrentAction(actions.AD_RESET);
   };
 
   const renderCaptionByCurrentIndex = () => {
@@ -277,6 +296,14 @@ const Gallery = (props) => {
     }
   };
 
+  const addIndexToListForAds = (index) => {
+    const indexArray = [...mobileAdsIndices];
+
+    if (!mobileAdsIndices.includes(index)) indexArray.push(index);
+
+    return setMobileAdsIndices(indexArray);
+  };
+
   // tracks which photo user is on (scrolling mobile gallery)
   const handleScrollEvent = debounce(() => {
     if (galleryMobileEl.current) {
@@ -284,6 +311,15 @@ const Gallery = (props) => {
       const galleryScrollTop = galleryMobileEl.current.scrollTop;
       const targetElementoffsetHeight = document.getElementById(`gallery-item-${index}`).offsetHeight;
       const targetHeight = offsetHeight + targetElementoffsetHeight;
+
+      // lazy loading ads
+      if (isAdInsertionAble && !mobileAdsIndices.includes(index) && mobileElementData && photosScrolled === 3) {
+        const adInsertedMobileArray = insertMobileGalleryAd();
+        setMobileElementData(adInsertedMobileArray);
+        setAdInsertionAbleState(false);
+        // debugger;
+      }
+
       if (offsetHeight === 0 && (galleryScrollTop > targetElementoffsetHeight)) {
         setHeight(offsetHeight + targetElementoffsetHeight);
         changeIndex(actions.NEXT);
@@ -308,6 +344,8 @@ const Gallery = (props) => {
           changeIndex(actions.NEXT);
         }
       }
+
+      addIndexToListForAds(index);
     }
 
     return null;
@@ -315,7 +353,6 @@ const Gallery = (props) => {
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
-    // setClickCount(clickCount + 1);
     if (currentAction === actions.PREV) {
       handlePrevious([...elementData]);
     } else {
@@ -326,6 +363,9 @@ const Gallery = (props) => {
   // maps mobile elements with updated parent states
   const getMobileElements = (arr) => {
     const finalElements = arr.map((element) => {
+      if (element.props.adSlot && element.props.adSlot.name && element.props.adSlot.name === 'MPG01') {
+        return element;
+      }
       const elementItemData = { ...element.props.data };
       const parentStates = {
         isStickyVisible,
@@ -333,6 +373,7 @@ const Gallery = (props) => {
         isCaptionOn,
       };
       elementItemData.states = { ...parentStates };
+
       return (
         <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`} />
       );
@@ -349,15 +390,13 @@ const Gallery = (props) => {
     return relevantData;
   };
 
-
   useEffect(() => {
     getInitWindowSize();
   }, []);
 
   useEffect(() => {
-    if (elementData && !isStickyVisible && currentAction !== '') {
-      finalizeGalleryItems();
-    }
+    if (elementData && !isStickyVisible && currentAction !== '') finalizeGalleryItems();
+    if (isMobile && isStickyVisible) setAdInsertionAbleState(true);
   }, [currentIndex]);
 
   useEffect(() => {
@@ -369,17 +408,14 @@ const Gallery = (props) => {
   }, [baseCaptionData]);
 
   useEffect(() => {
-    // debugger;
     if (!isMobile) {
       if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
 
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
-        const adInsertedElementArray = insertGalleryAd();
+        const adInsertedElementArray = insertDesktopGalleryAd();
         setElementData(adInsertedElementArray);
         setAdVisibleState(true);
-        // debugger;
       } else if (isAdVisible && (clickCount % 4) === 1) {
-        console.log('removeing ad');
         const adRemovedElementArray = removeGalleryAd();
         setAdVisibleState(false);
         const finalizedElements = handleImageFocus((adRemovedElementArray), {
@@ -388,7 +424,6 @@ const Gallery = (props) => {
 
         setElementData(finalizedElements);
         renderCaptionByCurrentIndex();
-        // debugger;
       }
     }
   }, [isAdVisible, clickCount]);
@@ -412,7 +447,7 @@ const Gallery = (props) => {
   // initializing the gallery w/ either propped or fetched content elements
   // NOTE: leafContentElements = Gallery-page-only propped contentElements array
   if (isMobile !== 'NOT INIT' && ((contentElements || leafContentElements || fetchedGalleryData || featuredGalleryData)
-    && (currentAction === actions.RESIZE || (!elementData && !mobileElementData)))) {
+    && ((currentAction === actions.RESIZE || currentAction === actions.AD_RESET) || (!elementData && !mobileElementData)))) {
     let relevantGalleryData = null;
     let galleryContentElements = null;
     let fetchedContentElements = null;
@@ -454,10 +489,12 @@ const Gallery = (props) => {
       }
 
       if (!baseCaptionData) setBaseCaptionData(desktopCaptionData);
-    } else if (!mobileElementData) {
+    } else if (!mobileElementData || currentAction === actions.AD_RESET) {
       const baseElementsForMobile = [...galleryData];
-      setMobileState(true);
+      if (!isMobile) setMobileState(true);
       setMobileElementData(baseElementsForMobile);
+      setMobileAdsIndices([]);
+      setCurrentAction('');
     }
   }
 
@@ -484,11 +521,6 @@ const Gallery = (props) => {
   if (elementData && !isMobile && galleryEl && debugFixEl && currentAction === '') {
     calculateTranslateX();
   }
-
-  console.log('click count', clickCount);
-  // console.log('elements', elementData);
-  console.log('is ad visisble', isAdVisible);
-  console.log('currentaction', currentAction);
 
   return (
     <>
