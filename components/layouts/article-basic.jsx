@@ -76,7 +76,7 @@ const StoryPageLayout = () => {
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
-  const BlogAuthorComponent = () => <BlogAuthor componentName="BlogAuthor" subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
+  const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
   const insertAtEndOfStory = [BlogAuthorComponent];
   const interscrollerPlaceholder = () => (
     <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>
@@ -89,7 +89,7 @@ const StoryPageLayout = () => {
     if (isParagraph(el.type)) {
       paragraphIndex += 1;
       if (paragraphIndex === 6) {
-        filteredContentElements.splice(i, 0, <ConnextInlinePromoSubscription componentName="ConnextInlinePromoSubscription" />);
+        filteredContentElements.splice(i, 0, <ConnextInlinePromoSubscription />);
       }
     }
     return null;
@@ -97,18 +97,10 @@ const StoryPageLayout = () => {
 
   if (infoBoxIndex !== null) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
-    filteredContentElements.splice(
-      infoBoxIndex,
-      0,
-      <ConnextHyperLocalSubscription componentName="ConnextHyperLocalSubscription" />,
-      <ConnextEndOfStory componentName="ConnextEndOfStory" />,
-    );
+    filteredContentElements.splice(infoBoxIndex, 0, <ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
     infoBoxIndex += 1;
   } else {
-    insertAtEndOfStory.push(
-      <ConnextHyperLocalSubscription componentName="ConnextHyperLocalSubscription" />,
-      <ConnextEndOfStory componentName="ConnextEndOfStory" />,
-    );
+    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
   }
 
   return (
