@@ -114,7 +114,7 @@ const NavBar = ({ articleURL, headlines, comments }) => {
 
   return (
     <header className="c-nav">
-        <div className={`c-headerNav ${stickyNavVisibility ? 'not-visible' : ''}`}>
+        <div className={`c-headerNav ${stickyNavVisibility || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
           <div className='b-flexRow b-flexCenter nav-logo'>
             <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
               <div className='nav-flyout-button'>
