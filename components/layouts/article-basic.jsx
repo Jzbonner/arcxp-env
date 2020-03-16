@@ -105,7 +105,7 @@ const StoryPageLayout = () => {
     <>
       {!noAds && <GlobalAdSlots />}
       <BreakingNews />
-        <NavBar articleURL={articleURL} headlines={headlines} comments={comments}/>
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments}/>
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>

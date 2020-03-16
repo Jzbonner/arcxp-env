@@ -18,9 +18,7 @@ const HomePageLayout = (props) => {
     <>
       <GlobalAdSlots />
       <BreakingNews />
-      <header className="c-nav">
-        <NavBar />
-      </header>
+      <NavBar/>
       <main>
         <SectionHome feature={zone1} rightRailAd={Ad} />
         <SectionHome feature={zone2} />
