@@ -7,10 +7,7 @@ import { adSlots, defaultAdSlot } from './children/adtypes';
 
 const ArcAd = ({ customFields, staticSlot }) => {
   const appContext = useAppContext();
-  const {
-    globalContent,
-    requestUri,
-  } = appContext;
+  const { globalContent, requestUri } = appContext;
   const { _id: uuid } = globalContent || {};
   const { slot: customFieldsSlot } = customFields || {};
   const { dfp_id: dfpid } = getProperties();
@@ -52,10 +49,10 @@ const ArcAd = ({ customFields, staticSlot }) => {
       refresh={true}
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
       className={`arc_ad | ${slotName} ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
-      dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
+      dimensions={adConfig.dimensions || defaultAdSlot.dimensions}
       dfpId={`${dfpid}/TEST_atlanta_np/ajc_web_default`}
-      display={ adConfig.display || defaultAdSlot.display }
-      id={`${defaultAdSlot.name}${(staticSlot || slot)}`}
+      display={adConfig.display || defaultAdSlot.display}
+      id={`${defaultAdSlot.name}${staticSlot || slot}`}
       slotName={slotName}
       targeting={targeting}
     />
@@ -72,6 +69,10 @@ ArcAd.propTypes = {
     }),
   }),
   staticSlot: PropTypes.string,
+};
+
+ArcAd.defaultProps = {
+  componentName: 'ArcAd',
 };
 
 export default ArcAd;
