@@ -1,0 +1,156 @@
+@import "./../../../src/styles/base";
+
+//styles that are the same
+
+.c-homeListContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  a {
+    color: inherit;
+  }
+
+  .c-homeList {
+    width: 100%;
+    margin-bottom: 30px;
+
+    .image-component-image img {
+      border-radius: 6px;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .24);
+    }
+
+    .c-label-wrapper {
+
+      .section-label {
+        font-size: .75rem;
+      }
+    }
+
+    .headline {
+      @include text-styles(1rem, 1.38, "Average");
+
+      letter-spacing: -.24px;
+    }
+  }
+
+  //Top Photo
+
+  &.top-photo-display-class {
+
+    .c-label-wrapper {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .headline {
+      text-align: center;
+    }
+
+    &.three-columns {
+
+      .c-homeList {
+        @include breakpoint(desktop-sm) {
+          width: 32%;
+        }
+      }
+    }
+
+    &.four-columns {
+
+      .c-homeList {
+        @include breakpoint(desktop-sm) {
+          width: 23%;
+        }
+      }
+    }
+  }
+
+  //left photo
+
+  &.left-photo-display-class {
+    display: flex;
+
+    .c-homeList {
+      display: flex;
+    }
+
+    .homeList-text {
+      margin-left: 10px;
+    }
+
+    .c-label-wrapper {
+      text-align: left;
+      margin-bottom: 7px;
+    }
+
+    .homeList-image,
+    .homeList-text {
+      max-width: 50%;
+    }
+
+    .headline {
+      @include text-styles(1.1rem, 1.25, "Average");
+    }
+
+    &.one-column {
+      flex-direction: column;
+    }
+
+    &.two-columns {
+
+      .c-homeList {
+        @include breakpoint(desktop-sm) {
+          max-width: 50%;
+        }
+      }
+
+      .homeList-image,
+      .homeList-text {
+        @include breakpoint(desktop-sm) {
+          max-width: 42%;
+        }
+      }
+    }
+  }
+
+  // no photo
+
+  &.no-photo-display-class {
+
+    .c-homeList {
+
+      .c-label-wrapper {
+        text-align: left;
+        margin-bottom: 7px;
+      }
+
+      .headline {
+        @include text-styles(1.1rem, 1.25, "Average");
+      }
+
+      .homeList-image {
+        display: none;
+      }
+
+      .homeList-text {
+        max-width: 84%;
+        padding-bottom: 25px;
+        border-bottom: 2px solid #f1f1f2;
+      }
+    }
+
+    &.one-column {
+      flex-direction: column;
+    }
+
+    &.two-columns {
+
+      .c-homeList {
+        @include breakpoint(desktop-sm) {
+          width: 50%;
+        }
+      }
+    }
+  }
+}

@@ -41,9 +41,9 @@ Lead.propTypes = {
       name: 'Display Class',
       defaultValue: '5-item Feature - No Photo',
     }),
-    columns: PropTypes.number.tag({
+    columns: PropTypes.oneOf([3, 4]).tag({
       name: 'Columns',
-      defaultValue: 1,
+      defaultValue: 3,
     }),
   }),
 };
