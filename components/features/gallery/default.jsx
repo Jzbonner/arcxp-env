@@ -135,6 +135,7 @@ const Gallery = (props) => {
 
   const changeIndex = (action, maxNumber) => {
     const currentClickCount = clickCount;
+
     if (!isMobile) {
       handleClickCount();
     } else {
@@ -254,7 +255,6 @@ const Gallery = (props) => {
   };
 
   const renderDesktopGalleryElements = (elements) => {
-    // let adInsertedElems = null;
     if (!isAdVisible) {
       const finalizedElements = handleImageFocus((elements), {
         isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
@@ -294,6 +294,7 @@ const Gallery = (props) => {
     }
   };
 
+  // keeps tracks of which photos have already been scrolled through to prevent redundent ad insetions (mobile)
   const addIndexToListForAds = (index) => {
     const indexArray = [...mobileAdsIndices];
 
