@@ -58,9 +58,8 @@ const GalleryPageLayout = () => {
           <Headline headlines={headlines} basicItems={basicItems} />
         </div>
         <div className="c-main-gallery">
-          <Gallery leafContentElements={contentElements} />
+          <Gallery leafContentElements={contentElements} ads={[PG01, PG02, MPG01]} pageType={subtype} />
         </div>
-        <Gallery leafContentElements={contentElements} ads={[PG01, PG02, MPG01]} pageType={subtype} />
       </main>
       <Footer />
     </>

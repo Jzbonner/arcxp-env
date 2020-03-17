@@ -21,7 +21,7 @@ const Gallery = (props) => {
     contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, ads = [], pageType = '',
   } = props;
 
-  const [PG01 = {}, PG02 = {}, MPG01 = {}] = ads;
+  const [PG01, PG02, MPG01] = ads;
 
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
