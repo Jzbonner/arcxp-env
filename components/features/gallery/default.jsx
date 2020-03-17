@@ -233,6 +233,8 @@ const Gallery = (props) => {
   const handleStickyClose = () => {
     setStickyState(false);
     setCurrentAction(actions.AD_RESET);
+    setCurrentIndex(0);
+    setHeight(0);
   };
 
   const renderCaptionByCurrentIndex = () => {
@@ -313,7 +315,6 @@ const Gallery = (props) => {
         const adInsertedMobileArray = insertMobileGalleryAd();
         setMobileElementData(adInsertedMobileArray);
         setAdInsertionAbleState(false);
-        // debugger;
       }
 
       if (offsetHeight === 0 && (galleryScrollTop > targetElementoffsetHeight)) {

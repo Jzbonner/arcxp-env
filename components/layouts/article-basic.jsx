@@ -78,8 +78,6 @@ const StoryPageLayout = () => {
   // Both checks return true if the tag is present and false if not.
   const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
 
-  console.log('subtype', subtype);
-
   let infoBoxIndex = null;
   let paragraphIndex = 0;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
