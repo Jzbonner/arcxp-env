@@ -1,31 +1,6 @@
 @import "../../../../src/styles/base/";
 
-// .c-stickyNav {
-//   position: fixed;
-//   top: 0;
-//   height: 90px;
-//   background-image: linear-gradient(180deg, #fff 67%, #f1f1f1 100%);
-//   opacity: .98;
-//   align-items: center;
-//   border: none;
-//   display: none;
-//   width: 100%;
-//   z-index: 1000;
-
-//   @include breakpoint(desktop-sm) {
-//     border-bottom: solid 1px #d0d0d0;
-//     height: 70px;
-//   }
-
-// &.is-visible {
-//   display: flex;
-// }
-
 .stickyNav {
-  // position: fixed;
-  // top: 0;
-  // height: 90px;
-  // background-image: linear-gradient(180deg, #fff 67%, #f1f1f1 100%);
   height: 100%;
   border: none;
   max-width: 1600px;
@@ -43,18 +18,20 @@
   }
 }
 
-.logo {
+.sticky-logo {
   display: block;
   margin-top: 10px;
 }
-// }
+
+.c-stickyLogin {
+  justify-content: flex-end;
+}
 
 .c-stickyNav-list {
   position: relative;
   display: flex;
   align-items: center;
   width: min-content;
-  // margin-left: 25px;
 
   @include breakpoint(desktop-sm) {
     margin-left: 0;

@@ -8,7 +8,7 @@ import '../default.scss';
 
 const DesktopNav = ({
   sections, hamburgerToggle, isMobile, setToggle, rootDirectory, smallLogoUrl, social,
-  // stickyActive,
+  stickyActive,
 }) => {
   const {
     twitter,
@@ -16,18 +16,15 @@ const DesktopNav = ({
   } = social;
 
   useEffect(() => {
-    const scrollPos = window.scrollY;
-    document.body.style.top = hamburgerToggle && isMobile ? `-${scrollPos}px` : '';
-    document.body.style.position = hamburgerToggle && isMobile ? 'fixed' : '';
-    document.body.style.overflow = hamburgerToggle && isMobile ? 'visible' : '';
-    document.body.style.width = hamburgerToggle && isMobile ? '100vw' : '';
-    // document.querySelector('main').className = hamburgerToggle && isMobile ? 'nav-wrapper isVisible' : '';
+    document.body.style.position = hamburgerToggle && isMobile ? 'static' : '';
+    document.body.style.overflowY = hamburgerToggle && isMobile ? 'hidden' : '';
   }, [hamburgerToggle, isMobile]);
 
   return (
   <>
   <div className={`nav-wrapper ${hamburgerToggle && isMobile ? 'isVisible' : ''}`}></div>
-  <nav className={`${hamburgerToggle && isMobile ? 'mobile-nav-activated' : ''} ${isMobile ? 'nav-mobile' : ''}`}>
+  <nav className={`${hamburgerToggle && isMobile ? 'mobile-nav-activated' : ''}
+  ${isMobile ? 'nav-mobile' : ''}${stickyActive && !isMobile ? 'is-hidden' : ''}`}>
     <div className='nav-menu-toggle' onClick={(e) => { e.preventDefault(); setToggle(false); }}>
       <div className='nav-flyout-button'></div>
     </div>

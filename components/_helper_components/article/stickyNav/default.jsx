@@ -5,12 +5,12 @@ import './default.scss';
 import logo from '../../../../resources/images/stickyNav-logo.svg';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import Comments from '../comments/comments';
+import Login from '../../global/navBar/login/default';
 import '../../global/navBar/default.scss';
 
 const StickyNav = ({
   articleURL, headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
   isMobileVisibilityRef, logoRef, setToggle, paddingRef,
-  //  hamburgerToggle,
 }) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
@@ -103,49 +103,49 @@ const StickyNav = ({
 
   return (
     <>
-      {/* <nav className={`c-stickyNav ${stickyVisibilityRef.current ? 'is-visible' : ''}`}> */}
-        <div className={`stickyNav  ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
-          <ul className="c-stickyNav-list">
-          <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
-            <div className='nav-flyout-button'>
-            </div>
+      <div className={`stickyNav  ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
+        <ul className="c-stickyNav-list">
+        <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
+          <div className='nav-flyout-button'>
           </div>
-            <li className="stickyNav-item mobile-hidden">
-              <a href={siteDomainURL}>
-                <img className="logo" src={logo} alt={`${siteName} logo`} />
-              </a>
-            </li>
-            <li className="stickyNav-item">
-              <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
-            </li>
-            <li className="stickyNav-item">
-              <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
-            </li>
-            <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
-              <li className="stickyNav-item arrow-icon desktop-hidden" onClick={e => toggleMobileDropdownMenu(e)}>
-                <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
-              </li>
-              <li className="stickyNav-item">
-                <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
-              </li>
-              <li className="stickyNav-item">
-                <a href={shareLinkReddit} className="sticky-nav-icon btn-reddit" target="__blank"></a>
-              </li>
-              <li className="stickyNav-item">
-                <a href={shareLinkEmail} className="sticky-nav-icon btn-mail" target="__blank"></a>
-              </li>
-              {commentsEnabled ? (
-                <li className="stickyNav-item">
-                  <a href="#" className="sticky-nav-icon btn-comments" onClick={e => toggleCommentsWindow(e)}>
-                    <span className="fb-comments-count" data-href={window.location.href}></span>
-                  </a>
-                </li>
-              ) : null}
-            </ul>
-          </ul>
         </div>
-      {/* </nav> */}
-      {/* <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div> */}
+          <li className="stickyNav-item mobile-hidden">
+            <a href={siteDomainURL}>
+              <img className="sticky-logo" src={logo} alt={`${siteName} logo`} />
+            </a>
+          </li>
+          <li className="stickyNav-item">
+            <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
+          </li>
+          <li className="stickyNav-item">
+            <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
+          </li>
+          <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
+            <li className="stickyNav-item arrow-icon desktop-hidden" onClick={e => toggleMobileDropdownMenu(e)}>
+              <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
+            </li>
+            <li className="stickyNav-item">
+              <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
+            </li>
+            <li className="stickyNav-item">
+              <a href={shareLinkReddit} className="sticky-nav-icon btn-reddit" target="__blank"></a>
+            </li>
+            <li className="stickyNav-item">
+              <a href={shareLinkEmail} className="sticky-nav-icon btn-mail" target="__blank"></a>
+            </li>
+            {commentsEnabled ? (
+              <li className="stickyNav-item">
+                <a href="#" className="sticky-nav-icon btn-comments" onClick={e => toggleCommentsWindow(e)}>
+                  <span className="fb-comments-count" data-href={window.location.href}></span>
+                </a>
+              </li>
+            ) : null}
+          </ul>
+        </ul>
+        <div className='b-flexRow c-stickyLogin'>
+          <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
+        </div>
+      </div>
       <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} />
     </>
   );

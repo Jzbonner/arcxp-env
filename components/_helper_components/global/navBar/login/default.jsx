@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../default.scss';
+import userIcon from '../../../../../resources/icons/login/user-icon.svg';
+import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 
-const Login = ({ isMobile, isFlyout }) => {
+const Login = ({ isMobile, isFlyout, isSticky }) => {
   let source;
   if (!isMobile || !isFlyout) {
-    source = 'https://www.ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/user-icon.svg';
+    source = userIcon;
   } else {
-    source = 'https://ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/user-icon-white.svg';
+    source = userIconWhite;
   }
+
   return (
-    <li className='nav-login'>
+    <li className={`nav-login ${isSticky ? 'isSticky' : ''}`}>
       <img src={source}></img>
       <div className='nav-itemText login-text'>Log in</div>
     </li>
@@ -21,6 +24,7 @@ const Login = ({ isMobile, isFlyout }) => {
 Login.propTypes = {
   isMobile: PropTypes.bool,
   isFlyout: PropTypes.bool,
+  isSticky: PropTypes.bool,
 };
 
 export default Login;
