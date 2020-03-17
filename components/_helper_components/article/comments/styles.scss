@@ -13,6 +13,8 @@
   position: fixed;
   right: 0;
   top: 90px;
+  overflow: auto;
+  max-height: calc(100vh - 90px + 4px);
 
   @include breakpoint(tablet) {
     width: 600px;
@@ -20,6 +22,7 @@
   }
 
   @include breakpoint(desktop-sm) {
+    max-height: calc(100vh - 70px);
     top: 70px;
   }
 
@@ -27,18 +30,9 @@
     transform: translateX(0);
   }
 
-  .fb-comments > span {
-    max-height: 75vh;
-    overflow-y: auto;
-
-    iframe {
-      //this !important is to override an inline style created by the facebook script
-      width: 100% !important; /* stylelint-disable-line declaration-no-important */
-    }
-
-    @include breakpoint(tablet) {
-      max-height: 85vh;
-    }
+  iframe {
+    //this !important is to override an inline style created by the facebook script
+    width: 100% !important; /* stylelint-disable-line declaration-no-important */
   }
 
   .close {

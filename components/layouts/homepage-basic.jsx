@@ -18,8 +18,8 @@ const HomePageLayout = (props) => {
     <>
       <GlobalAdSlots />
       <BreakingNews />
-      <NavBar/>
-      <main>
+      <NavBar />
+      <main className="c-homepageContent">
         <SectionHome feature={zone1} rightRailAd={Ad} />
         <SectionHome feature={zone2} />
         <SectionHome feature={zone3} rightRailAd={Ad} />

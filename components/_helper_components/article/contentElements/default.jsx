@@ -42,7 +42,7 @@ const ContentElements = ({ contentElements }) => {
                 width={800}
                 height={0}
                 src={element}
-                isInlineImage
+                imageType="isInlineImage"
                 imageMarginBottom="b-margin-bottom-d40-m20"
                 maxTabletViewWidth={maxTabletViewWidth}
                 key={`Image-${i}`}
@@ -72,13 +72,13 @@ const ContentElements = ({ contentElements }) => {
             );
           default:
             if (
-              element.type
-              && element.type.name
-              && (element.type.name === 'ArcAd'
-                || element.type.name === 'BlogAuthor'
-                || element.type.name === 'ConnextEndOfStory'
-                || element.type.name === 'ConnextInlinePromoSubscription'
-                || element.type.name === 'ConnextHyperLocalSubscription')
+              element.props
+              && element.props.componentName
+              && (element.props.componentName === 'ArcAd'
+                || element.props.componentName === 'BlogAuthor'
+                || element.props.componentName === 'ConnextEndOfStory'
+                || element.props.componentName === 'ConnextInlinePromoSubscription'
+                || element.props.componentName === 'ConnextHyperLocalSubscription')
             ) {
               return element;
             }
