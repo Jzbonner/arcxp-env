@@ -22,9 +22,6 @@ const Gallery = (props) => {
   } = props;
 
   const [PG01 = {}, PG02 = {}, MPG01 = {}] = ads;
-  console.log(PG02);
-  console.log('pageTYPE', pageType);
-
 
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
@@ -197,7 +194,6 @@ const Gallery = (props) => {
     let hasAdBeenInserted = false;
 
     mobileElementData.forEach((element) => {
-      console.log('index', (element.props.data && element.props.data.index) || 'this element does not have an index');
       if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted && photosScrolled === 3) {
         mobileElements.splice(element.props.data.index + 1, 0, <MPGO1Element adSlot={MPG01} />);
         hasAdBeenInserted = true;
@@ -554,18 +550,18 @@ const Gallery = (props) => {
           <div className="gallery-count view-gallery">
             <div className="gallery-count-prev hidden-small hidden-medium">
               <a onClick={() => changeIndex(actions.PREV)}>
-                <img src={leftArrow}></img>
+                <img src={leftArrow} />
               </a>
             </div>
             <div className="mobile-change">
               <a>
-                <img src={middleBox} className="icon-gallery"></img>
+                <img src={middleBox} className="icon-gallery" />
               </a>
               <div className="icon-text hidden-large">View Gallery</div>
             </div>
             <div className="gallery-count-next hidden-small hidden-medium">
               <a onClick={() => changeIndex(actions.NEXT)}>
-                <img src={rightArrow}></img>
+                <img src={rightArrow} />
               </a>
             </div>
             <div className="count--box hidden-small hidden-medium">

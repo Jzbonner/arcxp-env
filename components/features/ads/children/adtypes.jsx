@@ -66,6 +66,20 @@ export const adSlots = {
       [768, 0], // tablet
     ],
   },
+  HP05: {
+    dimensions: [
+      [
+        [0, 0],
+      ], // desktop
+      [
+        [728, 90],
+      ], // tablet
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
+    ],
+  },
   RP01: {
     dimensions: [
       [
@@ -94,6 +108,20 @@ export const adSlots = {
       [1024, 0], // desktop
     ],
     isRightRailAd: true,
+  },
+  'RP01-Story-FlatPage': {
+    slotName: 'RP01',
+    dimensions: [
+      [
+        [300, 600],
+        [300, 250],
+      ],
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+    ],
+    isRightRailAd: true,
+    isSticky: true,
   },
   'RP01-Story-Tablet': {
     slotName: 'RP01',
@@ -187,25 +215,19 @@ export const adSlots = {
     ],
     display: 'mobile',
   },
-  PG01: {
+  MP05: {
     dimensions: [
       [
-        [600, 400],
-      ],
-    ],
-  },
-  PG02: {
-    dimensions: [
-      [
-        [88, 31],
-      ],
-    ],
-  },
-  MPG01: {
-    dimensions: [
+        [0, 0],
+      ], // tablet+
       [
         [300, 250],
-      ],
+      ], // mobile
     ],
+    breakpoints: [
+      [768, 0], // tablet+
+      [1, 0], // mobile
+    ],
+    display: 'mobile',
   },
 };

@@ -74,10 +74,15 @@
   }
 }
 
+// ensure we only clear for non-empty items (special case for things like storypage ad placeholder divs)
+
+.b-clear-both:not(:empty) {
+  clear: both;
+}
+
 // Advertisement Text for arcads
 
 .arc_ad {
-
   // for sticky (e.g. right rail) ads
 
   &.is-sticky {
@@ -104,5 +109,29 @@
         transform: translate(-50%, -20px);
       }
     }
+  }
+}
+
+.mobile-hidden {
+  display: none;
+
+  @include breakpoint(desktop-sm) {
+    display: block;
+  }
+}
+
+.desktop-hidden {
+  display: block;
+
+  @include breakpoint(desktop-sm) {
+    display: none;
+  }
+}
+
+.scrollLock-mobile {
+  overflow: hidden;
+
+  @include breakpoint(desktop-sm) {
+    overflow: initial;
   }
 }

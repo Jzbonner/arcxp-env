@@ -1,0 +1,44 @@
+@import "../../../../src/styles/base/mixins";
+@import "./../../../../src/styles/base/breakpoints";
+
+.c-comments {
+  height: 100vh;
+  width: 100%;
+  transform: translateX(100vw);
+  transition: all .3s ease-in-out;
+  z-index: 10;
+  background-color: rgb(255, 255, 255);
+  padding: 18px;
+  box-sizing: border-box;
+  position: fixed;
+  right: 0;
+  top: 90px;
+  overflow: auto;
+  max-height: calc(100vh - 90px + 4px);
+
+  @include breakpoint(tablet) {
+    width: 600px;
+    border-left: 1px solid #000;
+  }
+
+  @include breakpoint(desktop-sm) {
+    max-height: calc(100vh - 70px);
+    top: 70px;
+  }
+
+  &.showComments {
+    transform: translateX(0);
+  }
+
+  iframe {
+    //this !important is to override an inline style created by the facebook script
+    width: 100% !important; /* stylelint-disable-line declaration-no-important */
+  }
+
+  .close {
+    @include text-styles(1.75rem, 1, "Gordita");
+
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+}

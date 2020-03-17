@@ -351,6 +351,7 @@
     transform: translate(-50%, -50%);
 
     .icon-text {
+      font-size: 1.25rem;
       letter-spacing: -.33px;
     }
   }
@@ -443,6 +444,10 @@
 
     .gallery-caption {
       font-size: 1.25rem;
+    }
+
+    @include breakpoint(desktop-sm) {
+      min-width: auto;
     }
   }
 

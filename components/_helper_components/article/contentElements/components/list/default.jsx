@@ -14,12 +14,12 @@ const List = (props) => {
     return (
       <div className={`list ${childList ? null : 'b-margin-bottom-d40-m20'}`}>
         <ul>
-          {props.src.items.map((e) => {
+          {props.src.items.map((e, i) => {
             if (e.type === 'text') {
-              return <li>{e.content}</li>;
+              return <li key={`li-${i}`}>{e.content}</li>;
             }
             // eslint-disable-next-line react/jsx-key
-            return <SubList src={e} childList={true} />;
+            return <SubList src={e} childList={true} key={i} />;
           })}
         </ul>
       </div>
@@ -30,12 +30,12 @@ const List = (props) => {
     return (
       <div className={`list ${childList ? null : 'b-margin-bottom-d40-m20'}`}>
         <ol>
-          {props.src.items.map((e) => {
+          {props.src.items.map((e, i) => {
             if (e.type === 'text') {
-              return <li>{e.content}</li>;
+              return <li key={`li-${i}`}>{e.content}</li>;
             }
             // eslint-disable-next-line react/jsx-key
-            return <SubList src={e} childList={true} />;
+            return <SubList src={e} childList={true} key={i} />;
           })}
         </ol>
       </div>

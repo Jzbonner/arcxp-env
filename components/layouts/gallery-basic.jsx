@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
+import GlobalAdSlots from '../_helper_components/global/ads/default';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import StickyNav from '../_helper_components/article/stickyNav/default';
 import NavBar from '../_helper_components/global/navBar/default';
@@ -34,14 +34,13 @@ const GalleryPageLayout = () => {
     streams,
   };
 
-  const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
-
   const PG01 = () => <ArcAd staticSlot={'PG01'} />;
   const PG02 = () => <ArcAd staticSlot={'PG02'} />;
   const MPG01 = () => <ArcAd staticSlot={'MPG01'} />;
 
   return (
     <>
+      <GlobalAdSlots />
       <header className="c-nav">
         <NavBar />
 
@@ -55,13 +54,11 @@ const GalleryPageLayout = () => {
       </header>
 
       <main>
-        <div>
-          <Headline
-            headlines={headlines}
-            basicItems={basicItems}
-            featuredVideoPlayerRules={featuredVideoPlayerRules}
-            maxTabletViewWidth={maxTabletViewWidth}
-          />
+        <div className="c-header-gallery">
+          <Headline headlines={headlines} basicItems={basicItems} />
+        </div>
+        <div className="c-main-gallery">
+          <Gallery leafContentElements={contentElements} />
         </div>
         <Gallery leafContentElements={contentElements} ads={[PG01, PG02, MPG01]} pageType={subtype} />
       </main>
