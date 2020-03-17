@@ -8,6 +8,7 @@ import '../default.scss';
 
 const DesktopNav = ({
   sections, hamburgerToggle, isMobile, setToggle, rootDirectory, smallLogoUrl, social,
+  // stickyActive,
 }) => {
   const {
     twitter,
@@ -15,14 +16,19 @@ const DesktopNav = ({
   } = social;
 
   useEffect(() => {
+    const scrollPos = window.scrollY;
+    document.body.style.top = hamburgerToggle && isMobile ? `-${scrollPos}px` : '';
     document.body.style.position = hamburgerToggle && isMobile ? 'fixed' : '';
+    document.body.style.overflow = hamburgerToggle && isMobile ? 'visible' : '';
+    document.body.style.width = hamburgerToggle && isMobile ? '100vw' : '';
+    // document.querySelector('main').className = hamburgerToggle && isMobile ? 'nav-wrapper isVisible' : '';
   }, [hamburgerToggle, isMobile]);
 
   return (
   <>
   <div className={`nav-wrapper ${hamburgerToggle && isMobile ? 'isVisible' : ''}`}></div>
   <nav className={`${hamburgerToggle && isMobile ? 'mobile-nav-activated' : ''} ${isMobile ? 'nav-mobile' : ''}`}>
-    <div className='nav-menu-toggle' onClick={() => { setToggle(false); }}>
+    <div className='nav-menu-toggle' onClick={(e) => { e.preventDefault(); setToggle(false); }}>
       <div className='nav-flyout-button'></div>
     </div>
     <div className='nav-menu-header'>
@@ -53,6 +59,7 @@ DesktopNav.propTypes = {
   smallLogoUrl: PropTypes.string,
   rootDirectory: PropTypes.string,
   social: PropTypes.object,
+  stickyActive: PropTypes.bool,
 };
 
 export default DesktopNav;

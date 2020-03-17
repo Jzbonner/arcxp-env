@@ -8,7 +8,9 @@ import Comments from '../comments/comments';
 import '../../global/navBar/default.scss';
 
 const StickyNav = ({
-  articleURL, headlines, comments = false, setStickyNavVisibility, stickyNavVisibility, isMobileVisibilityRef, logoRef, setToggle,
+  articleURL, headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
+  isMobileVisibilityRef, logoRef, setToggle, paddingRef,
+  //  hamburgerToggle,
 }) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
@@ -28,7 +30,6 @@ const StickyNav = ({
   const [commentVisibility, _setCommentVisibility] = useState(false);
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
   const commentVisibilityRef = React.useRef(commentVisibility);
-  const paddingRef = React.useRef(null);
   const stickyVisibilityRef = React.useRef(stickyNavVisibility);
 
   const setCommentVisibility = (data) => {
@@ -102,8 +103,8 @@ const StickyNav = ({
 
   return (
     <>
-      <nav className={`c-stickyNav ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
-        <div className="stickyNav">
+      {/* <nav className={`c-stickyNav ${stickyVisibilityRef.current ? 'is-visible' : ''}`}> */}
+        <div className={`stickyNav  ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
           <ul className="c-stickyNav-list">
           <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
             <div className='nav-flyout-button'>
@@ -143,8 +144,8 @@ const StickyNav = ({
             </ul>
           </ul>
         </div>
-      </nav>
-      <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
+      {/* </nav> */}
+      {/* <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div> */}
       <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} />
     </>
   );
@@ -160,6 +161,8 @@ StickyNav.propTypes = {
   isMobileVisibilityRef: PropTypes.object,
   logoRef: PropTypes.any,
   setToggle: PropTypes.func,
+  paddingRef: PropTypes.object,
+  hamburgerToggle: PropTypes.bool,
 };
 
 export default StickyNav;

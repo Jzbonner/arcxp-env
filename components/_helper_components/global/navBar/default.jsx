@@ -18,6 +18,7 @@ const NavBar = ({ articleURL, headlines, comments }) => {
   const [activeSection, setSection] = useState(-1);
   const [stickyNavVisibility, setStickyNavVisibility] = useState(false);
   const logoRef = useRef(null);
+  const paddingRef = React.useRef(null);
   const isMobileVisibilityRef = React.useRef(isMobile);
   const mobileBreakpoint = 1023;
 
@@ -114,13 +115,15 @@ const NavBar = ({ articleURL, headlines, comments }) => {
 
   return (
     <header className="c-nav">
-        <div className={`c-headerNav ${stickyNavVisibility || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
-          <div className='b-flexRow b-flexCenter nav-logo'>
+        <div className={`c-headerNav ${stickyNavVisibility ? 'stickyActive' : ''}`}>
+          <div className={`b-flexRow b-flexCenter nav-logo ${stickyNavVisibility || (stickyNavVisibility
+            && mobileMenuToggled) ? 'not-visible' : ''}`}>
             <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
               <div className='nav-flyout-button'>
               </div>
             </div>
-            <div className='nav-mobile-logo' ref={logoRef}>
+            <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
+              && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
               <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
             </div>
             <Login isMobile={true} isFlyout={false}/>
@@ -132,22 +135,26 @@ const NavBar = ({ articleURL, headlines, comments }) => {
             setToggle={setToggle}
             smallLogoUrl={siteLogoImageSmallInverse}
             rootDirectory={rootDirectory}
-            social={social}/>
-          <div className='sub b-flexRow b-flexCenter sub-text'>
+            social={social}
+            stickyActive={stickyNavVisibility}/>
+          <div className={`sub b-flexRow b-flexCenter sub-text ${stickyNavVisibility || (stickyNavVisibility
+            && mobileMenuToggled) ? 'not-visible' : ''}`}>
             <Subscribe/>
           </div>
-        </div>
-        <StickyNav
+          <StickyNav
           articleURL={articleURL}
           headlines={headlines}
           comments={comments}
-          toggle={mobileMenuToggled}
+          hamburgerToggle={mobileMenuToggled}
           setStickyNavVisibility={setStickyNavVisibility}
           stickyNavVisibility={stickyNavVisibility}
           isMobile={isMobile}
           isMobileVisibilityRef={isMobileVisibilityRef}
           logoRef={logoRef}
-          setToggle={setToggle}/>
+          setToggle={setToggle}
+          paddingRef={paddingRef}/>
+        </div>
+        <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
       </header>
   );
 };

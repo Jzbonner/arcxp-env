@@ -1,39 +1,53 @@
 @import "../../../../src/styles/base/";
 
-.c-stickyNav {
-  position: fixed;
-  top: 0;
-  height: 90px;
-  background-image: linear-gradient(180deg, #fff 67%, #f1f1f1 100%);
-  opacity: .98;
-  align-items: center;
-  border: none;
-  display: none;
-  width: 100%;
-  z-index: 1000;
+// .c-stickyNav {
+//   position: fixed;
+//   top: 0;
+//   height: 90px;
+//   background-image: linear-gradient(180deg, #fff 67%, #f1f1f1 100%);
+//   opacity: .98;
+//   align-items: center;
+//   border: none;
+//   display: none;
+//   width: 100%;
+//   z-index: 1000;
 
-  @include breakpoint(desktop-sm) {
-    border-bottom: solid 1px #d0d0d0;
-    height: 70px;
-  }
+//   @include breakpoint(desktop-sm) {
+//     border-bottom: solid 1px #d0d0d0;
+//     height: 70px;
+//   }
+
+// &.is-visible {
+//   display: flex;
+// }
+
+.stickyNav {
+  // position: fixed;
+  // top: 0;
+  // height: 90px;
+  // background-image: linear-gradient(180deg, #fff 67%, #f1f1f1 100%);
+  height: 100%;
+  border: none;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 90%;
+  display: none;
+  align-items: center;
 
   &.is-visible {
     display: flex;
   }
 
-  .stickyNav {
-    max-width: 1600px;
-    margin: 0 auto;
-    width: 90%;
-    display: flex;
-    align-items: center;
-  }
-
-  .logo {
-    display: block;
-    margin-top: 10px;
+  &.not-visible {
+    display: none;
   }
 }
+
+.logo {
+  display: block;
+  margin-top: 10px;
+}
+// }
 
 .c-stickyNav-list {
   position: relative;
@@ -110,19 +124,5 @@
     position: relative;
     margin-right: 6px;
     margin-bottom: .313em;
-  }
-}
-
-.sticky-padding {
-  width: 100%;
-  min-height: 92px;
-  display: none;
-
-  @include breakpoint(desktop-sm) {
-    min-height: 160px;
-  }
-
-  &.is-visible {
-    display: flex;
   }
 }
