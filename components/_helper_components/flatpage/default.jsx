@@ -6,7 +6,6 @@ import NavBar from '../global/navBar/default';
 import ArcAd from '../../features/ads/default';
 import Section from '../article/section/Section';
 import GlobalAdSlots from '../global/ads/default';
-import StickyNav from '../article/stickyNav/default';
 import BreakingNews from '../global/breakingNews/default';
 
 import './default.scss';
@@ -36,16 +35,9 @@ const FlatPage = ({ globalContent }) => {
 
   return (
     <>
-      <header className="c-nav">
-        { !noAds && <GlobalAdSlots /> }
-        <BreakingNews />
-        <NavBar/>
-        <StickyNav
-          articleURL={articleURL}
-          headlines={headlines}
-          comments={comments}
-        />
-      </header>
+      { !noAds && <GlobalAdSlots /> }
+      <BreakingNews/>
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments}/>
       <main>
         <article>
           {
