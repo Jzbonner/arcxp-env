@@ -42,7 +42,7 @@ const ContentElements = ({ contentElements }) => {
                 width={800}
                 height={0}
                 src={element}
-                isInlineImage
+                imageType="isInlineImage"
                 imageMarginBottom="b-margin-bottom-d40-m20"
                 maxTabletViewWidth={maxTabletViewWidth}
                 key={`Image-${i}`}
