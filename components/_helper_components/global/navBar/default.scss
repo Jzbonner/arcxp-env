@@ -223,7 +223,12 @@
     }
 
     &:hover {
+      cursor: pointer;
 
+      @include breakpoint(desktop-sm) {
+        cursor: none;
+      }
+      
       .section {
         opacity: 1;
 
