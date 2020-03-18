@@ -73,7 +73,7 @@ const FlatPage = ({ globalContent }) => {
           }
 
           {
-            noRightRail && !noAds
+            !noRightRail && !noAds
             && <div className="c-hp05-mp05 b-margin-bottom-d40-m20">
               <ArcAd staticSlot={'HP05'} />
               <ArcAd staticSlot={'MP05'} />
