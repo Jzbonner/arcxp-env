@@ -56,7 +56,7 @@ const resolve = (query) => {
           },
           {
             nested: {
-              path: ['taxonomy.sections', 'source', 'type', 'taxonomy.tags', 'type.subtype'],
+              path: ['taxonomy.sections', 'source', 'type', 'taxonomy.tags', 'subtype'],
               query: {
                 bool: {
                   must: [
@@ -66,7 +66,7 @@ const resolve = (query) => {
                         source: sourcesIncluded,
                         type: contentTypesIncluded,
                         'taxonomy.tags': tagsIncluded,
-                        'type.subtype': subtypesIncluded,
+                        subtype: subtypesIncluded,
                       },
                     },
                     {
@@ -83,7 +83,7 @@ const resolve = (query) => {
         must_not: [
           {
             nested: {
-              path: ['taxonomy.sections', 'source', 'type', 'taxonomy.tags', 'type.subtype'],
+              path: ['taxonomy.sections', 'source', 'type', 'taxonomy.tags', 'subtype'],
               query: {
                 bool: {
                   must: [
@@ -93,7 +93,7 @@ const resolve = (query) => {
                         source: souresExcluded,
                         type: contentTypesExcluded,
                         'taxonomy.tags': tagsExcluded,
-                        'type.subtype': subtypesExcluded,
+                        subtype: subtypesExcluded,
                       },
                     },
                     {
