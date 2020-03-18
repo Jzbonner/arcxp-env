@@ -2,13 +2,14 @@
 @import "../../../../src//styles/base/breakpoints";
 
 .c-headerNav {
-  display: none;
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 30px;
 
   @include breakpoint(desktop-sm) {
     display: flex;
     flex-direction: column;
     width: 94%;
-    margin: 0 auto;
   }
 
   @include breakpoint(desktop-lg) {
@@ -16,54 +17,221 @@
     max-width: 1600px;
   }
 
+  &.stickyActive {
+    padding-bottom: 0;
+    position: fixed;
+    top: 0;
+    opacity: .98;
+    z-index: 1000;
+    width: 100%;
+    height: 90px;
+    background-image: linear-gradient(180deg, #fff 67%, #f1f1f1 100%);
+
+    @include breakpoint(desktop-sm) {
+      border-bottom: solid 1px #d0d0d0;
+      height: 70px;
+    }
+  }
+  
   nav {
+    z-index: 10;
+
+    &.mobile-nav-activated {
+      transform: translateX(1000px);
+  
+      .nav-menu-toggle {
+        left: 15px;
+  
+        .nav-flyout-button {
+          background: none;
+  
+          &:before {
+            transform: rotate(-135deg);
+            top: 0;
+            background: #fff;
+          }
+  
+          &:after {
+            transform: rotate(135deg);
+            bottom: 0;
+            background: #fff;
+          }
+        }
+      }
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+
+      @include breakpoint(desktop-sm) {
+        color: #2e81b7;
+      }
+    }
+
     @include breakpoint(desktop-sm) {
       display: flex;
       align-items: flex-end;
       padding-bottom: 20px;
+    }
 
-      a {
-        color: #2e81b7;
-        text-decoration: none;
+    &.is-hidden {
+      display: none;
+    }
+  }
+
+  .nav-mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    background-image: linear-gradient(to top, #04befe, #4481eb);
+    box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+    height: 100%;
+    width: 100%;
+    max-width: 408px;
+    position: fixed;
+    top: 0;
+    z-index: 10002;
+    left: -1000px;
+    transform: translateX(0);
+    transition: transform .5s ease;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    
+    .nav-mobile-login {
+
+      .login-text {
+        display: flex;
+        color: #fff;
+        padding-left: 15px;
+        padding-bottom: 3px;
       }
+    }
+
+    &.mobile-nav-deactivated {
+      transform: translateX(-1000px);
+    }
+  }
+
+  
+  .nav-mobile-logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    @include breakpoint(dekstop-sm) {
+      display: none;
+    }
+
+    &.not-visible {
+      display: none;
+    }
+  }
+
+  .nav-logo {
+    padding: 18px 0;
+    flex-direction: row;
+    position: relative;
+
+    @include breakpoint(desktop-sm) {
+      padding: 0;
+    }
+
+    .nav-login {
+      @include breakpoint(desktop-sm) {
+        display: none;
+      }
+    }
+
+    &.not-visible {
+      display: none;
     }
   }
   
   .logo {
+    max-width: 320px;
+    max-height: 65px;
+    height: 100%;
     box-sizing: border-box;
-    height: 110px;
-    padding-top: 30px;
     width: 100%;
-    max-height: 8vw;
+    padding-left: 30px;
+
+    @include breakpoint(desktop-sm) {
+      padding-left: 0;
+      height: 110px;
+      padding-top: 30px;
+      max-height: 8vw;
+    }
   }
   
+  .nav-menu-header {
+    min-height: 90px;
+    padding-left: 40px;
+    padding-bottom: 10px;
+    
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+
+  .nav-menu-logo {
+    width: 100%;
+    max-width: 80px;
+    margin-top: -2px;
+  }
+  
+  .nav-sections {
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      flex-direction: row;
+      min-width: 683px;
+    }
+
+    @include breakpoint(desktop-nav) {
+      min-width: 880px;
+    }
+  }
+
   .nav-row {
     display: flex;
-    height: 65px;
-    width: 100%;
-    flex-direction: row;
+    flex-direction: column-reverse;
     list-style-type: none;
+    min-height: fit-content;
+
+    @include breakpoint(desktop-sm) {
+      height: 65px;
+      width: 100%;
+      flex-direction: row;
+    }
   }
+
+  .nav-item-link {
+    display: flex;
+  }
+
   
   .nav-items {
-    padding-right: 1.3vw;
-    display: flex;
-    flex: 0 0 auto;
-    padding-top: 10px;
-  
-    .menu-active {
-      @media (hover: none) {
-        opacity: 1;
-  
-        .subNav {
-          visibility: visible;
-          opacity: 1;
-        }
+    padding-left: 50px;
+    padding-bottom: 25px;
+
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      flex: 0 0 auto;
+      padding: 10px 1.3vw 0 0;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      @include breakpoint(desktop-sm) {
+        cursor: none;
       }
-    
-      &:hover {
+      
+      .section {
         opacity: 1;
-  
+
         .subNav {
           visibility: visible;
           opacity: 1;
@@ -71,18 +239,52 @@
       }
     }
   }
+
+  .nav-item-circle {
+    display: flex;
+    background: linear-gradient(to top, #ff8787, #ff55b8);
+    border-radius: .875rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    cursor: pointer;
+    position: relative;
+    visibility: hidden;
+    margin-left: 15px;
+
+    &:after {
+      content: ">";
+      transform: scale(.5, 1.1);
+      width: .875rem;
+      color: #fff;
+    }
+
+    &.isVisible {
+      visibility: visible;
+    }
+
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
   
   .nav-itemBottomBorder {
-    border-bottom: solid 1px #cdcdcd;
+    border-bottom: none;
+
+    @include breakpoint(desktop-sm) {
+      border-bottom: solid 1px #cdcdcd;
+    }
   }
   
   .nav-itemText {
-    font-weight: 400;
-    color: #2e81b7;
+    @include text-styles(1.125rem, 1.44, "Gordita");
+
     text-transform: capitalize;
     align-items: center;
+    -webkit-font-smoothing: antialiased;
   
     @include breakpoint(desktop-sm) {
+      color: #2e81b7;
+
       @include text-styles(.875rem, 1, "Gordita-Medium");
     }
   
@@ -92,8 +294,12 @@
   }
   
   .nav-separator {
-    display: flex;
-    align-items: center;
+    display: none;
+
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      align-items: center;
+    }
   
     span {
       background-color: #2e81b7;
@@ -112,39 +318,70 @@
   }
   
   .nav-search {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    flex-basis: 180px;
-  
-    @include breakpoint(desktop-nav) {
+    height: 3.3rem;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .24), 0 1px 4px 0 rgba(0, 0, 0, .24);
+    margin-bottom: 25px;
+
+    @include breakpoint(desktop-sm) {
       padding-top: 10px;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      flex-basis: 180px;
+      box-shadow: none;
+      border-radius: 0;
+      height: auto;
     }
   }
   
   .search-form {
     display: flex;
-    height: 28px;
-    width: 100%;
+    height: 3.25rem;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    @include breakpoint(desktop-sm) {
+      height: 28px;
+      width: 100%;
+      flex-direction: row;
+    }
   }
   
   .search-input {
-    text-align: right;
+    width: 90%;
+    border-radius: 6px;
     border: none;
     outline: none;
-    background-color: transparent;
-    width: calc(100% - 40px);
-  
-    @include text-styles(.625rem, 1, "Gordita");
+
+    @include text-styles(1rem, 1, "Gordita");
+
+    @include breakpoint(desktop-sm) {
+      text-align: right;
+      border: none;
+      background-color: transparent;
+      width: calc(100% - 40px);
+
+      @include text-styles(.625rem, 1, "Gordita");
+    }
   }
   
   .search-icon {
     height: 29px;
-    width: 29px;
-    cursor: pointer;
-    vertical-align: middle;
-    margin-left: 10px;
-    font-size: 1rem;
+    max-width: 20%;
+    padding: 0 .5rem;
+
+    @include breakpoint(desktop-sm) {
+      max-width: 100%;
+      width: 29px;
+      cursor: pointer;
+      vertical-align: middle;
+      margin-left: 10px;
+      font-size: 1rem;
+      padding: 0;
+    }
   }
   
   .nav-weather {
@@ -152,13 +389,15 @@
   
     @include breakpoint(desktop-nav) {
       display: flex;
-      padding-top: 2px;
+      padding-top: 10px;
       align-items: center;
+      min-width: 35px;
     }
   }
   
   .weather-icon {
     padding-left: 56px;
+    padding-top: 10px;
     cursor: pointer;
   }
   
@@ -167,45 +406,104 @@
     cursor: pointer;
   }
   
-  .nav-login {
-    display: flex;
-    min-width: 100px;
-    padding-left: 15px;
-  
-    img {
-      cursor: pointer;
+  .nav-weather-widget {
+    width: 100%;
+    height: 260px;
+    background-color: #fff;
+    margin-bottom: 60px;
+
+    @include breakpoint(desktop-sm) {
+      display: none;
     }
+  }
+
+  .nav-social {
+    width: 160px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 55px;
+  }
+
+  .nav-mobile-footer {
+    color: #fff;
+    text-transform: capitalize;
+
+    @include text-styles(.875rem, 1, "Gordita");
+
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
   
-    @include breakpoint(desktop-nav) {
-      padding-top: 2px;
+  .nav-copyright {
+    margin-bottom: 20px;
+  }
+
+  .nav-copyright-links {
+    margin-bottom: 10px;
+
+    a {
+      padding: 0 5px;
+    }
+  }
+
+  .nav-mobile-login {
+    padding-bottom: 26px;
+
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      padding-bottom: 0;
     }
   }
   
   .login-text {
-    font-weight: 800;
+    font-weight: 700;
     padding-left: 6px;
     cursor: pointer;
+    display: none;
+
+    @include text-styles(1rem, 1, "Gordita");
   
     @include breakpoint(desktop-sm) {
+      display: flex;
+      font-weight: 800;
+
       @include text-styles(.875rem, 1, "Gordita");
     }
   
     @include breakpoint(desktop-nav) {
+      display: flex;
+      font-weight: 800;
+
       @include text-styles(1.125rem, 1, "Gordita");
     }
   }
   
   .sub {
-    height: 57px;
+    height: 88px;
     width: 100%;
     border-radius: 6px;
     background-image: linear-gradient(to top, #04befe, #4481eb);
+    flex-direction: column;
+
+    @include breakpoint(desktop-sm) {
+      height: 57px;
+      flex-direction: row;
+    }
+
+    &.not-visible {
+      display: none;
+    }
   }
   
   .sub-text {
     color: #fff;
   
-    @include text-styles(1.25rem, 1, "Gordita");
+    @include text-styles(1rem, 1.5, "Gordita");
+  
+    @include breakpoint(desktop-sm) {
+      @include text-styles(1.25rem, 1, "Gordita");
+    }
   }
   
   .sub-bold {
@@ -214,62 +512,221 @@
     margin-left: 5px;
   }
   
-  .menu-inactive {
+  .section {
     display: none;
-  }
-  
-  .menu-active {
-    display: flex;
     cursor: default;
     border-radius: 6px;
-    box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
-    position: absolute;
-    margin-left: -.45rem;
-    opacity: 0;
-    transition: opacity .15s;
+    margin-top: 33px;
+    margin-left: 25px;
+
+    &.isVisible {
+      display: flex;
+
+      @include breakpoint(desktop-sm) {
+        opacity: 1;
+      }
+    }
+
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      opacity: 0;
+      transition: opacity .15s;
+      margin-top: 0;
+      margin-left: -.45rem;
+      position: absolute;
+      box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
+    }
   }
   
-  .menu-item {
-    height: 44px;
-    display: flex;
-    align-items: center;
-    padding: 0 .45rem;
-    background-color: #fff;
-    border-radius: 6px 6px 0 0;
-    z-index: 3;
+  .section-item {
+    display: none;
+
+    @include breakpoint(desktop-sm) {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 .45rem;
+      background-color: #fff;
+      border-radius: 6px 6px 0 0;
+      z-index: 4;
+    }
   }
   
   .subNav {
-    background-color: #fff;
-    top: 44px;
-    transition: opacity .15s;
-    opacity: 0;
     border-radius: 0 6px 6px;
-    padding: 1.125rem 1.5625rem .3125rem;
-    position: absolute;
-    box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
-    z-index: 2;
-    overflow: hidden;
-    display: flex;
+    box-shadow: none;
     align-items: center;
-    visibility: hidden;
-  }
-  
-  .subNav-flyout {
-    display: inline-flex;
-    writing-mode: vertical-lr;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    list-style-type: none;
+
+    &.isVisible {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    @include breakpoint(desktop-sm) {
+      overflow: hidden;
+      visibility: hidden;
+      min-width: 120px;
+      transition: opacity .15s;
+      opacity: 0;
+      padding: 1.125rem 1.5625rem .3125rem;
+      position: absolute;
+      z-index: 3;
+      top: 44px;
+      background-color: #fff;
+      box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+    }
   }
   
   .flyout-item {
-    writing-mode: horizontal-tb;
-    height: 1.875rem;
-    margin-right: 3vw;
-    white-space: nowrap;
-    font-weight: 400;
+    @include text-styles(1rem, 2, "Gordita");
+
+    @include breakpoint(desktop-sm) {
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+      margin-right: 3vw;
+      height: 1.875rem;
+
+      @include text-styles(.875rem, 1, "Gordita");
+    }
+  }
   
-    @include text-styles(.875rem, 1, "Gordita");
+  .subNav-flyout {
+    list-style-type: none;
+
+    @include breakpoint(desktop-sm) {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      writing-mode: vertical-lr;
+      height: 13.125rem;
+
+      &.itemCount-1 {
+        height: 1.875rem;
+      }
+
+      &.itemCount-2 {
+        height: 3.75rem;
+      }
+
+      &.itemCount-3 {
+        height: 5.625rem;
+      }
+
+      &.itemCount-4,
+      &.itemCount-8 {
+        height: 7.5rem;
+      }
+
+      &.itemCount-5,
+      &.itemcount-9 {
+        height: 9.37rem;
+      }
+
+      &.itemCount-6,
+      &.itemCount-11,
+      &.itemCount-12 {
+        height: 11.25rem;
+      }
+    }
+  }
+
+  .nav-wrapper {
+    background: transparent;
+    content: " ";
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10001;
+    background-color: #808080;
+    opacity: .55;
+    display: none;
+
+    &.isVisible {
+      display: flex;
+    }
+  }
+}
+
+.nav-menu-toggle {
+  z-index: 2;
+  width: 30px;
+  height: 32px;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+
+  @include breakpoint(desktop-sm) {
+    display: none;
+  }
+}
+
+.nav-flyout-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 3px;
+  border-radius: 10px;
+  background: #000;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -400%;
+    right: 0;
+    width: 100%;
+    height: 3px;
+    background: #000;
+    border-radius: inherit;
+    transition: all .2s;
+    transform: rotate(0);
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 100%;
+    height: 3px;
+    background: #000;
+    border-radius: inherit;
+    transition: all .2s;
+    transform: rotate(0);
+    top: auto;
+    bottom: -400%;
+  }
+}
+
+.sticky-padding {
+  width: 100%;
+  min-height: 92px;
+  display: none;
+
+  @include breakpoint(desktop-sm) {
+    min-height: 160px;
+  }
+
+  &.is-visible {
+    display: flex;
+  }
+}
+
+.nav-login {
+  display: flex;
+
+  img {
+    cursor: pointer;
+  }
+
+  @include breakpoint(desktop-sm) {
+    padding-left: 15px;
+    padding-top: 10px;
+    min-width: 100px;
+  }
+  
+  &.isSticky {
+    padding-bottom: .313em;
   }
 }

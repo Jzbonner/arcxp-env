@@ -1,13 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../default.scss';
+import userIcon from '../../../../../resources/icons/login/user-icon.svg';
+import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 
-const Login = () => (
-  <li className='nav-login'>
-    <div className='b-flexRow b-flexCenter'>
-      <img src='https://www.ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/user-icon.svg'></img>
+const Login = ({ isMobile, isFlyout, isSticky }) => {
+  let source;
+  if (!isMobile || !isFlyout) {
+    source = userIcon;
+  } else {
+    source = userIconWhite;
+  }
+
+  return (
+    <li className={`nav-login ${isSticky ? 'isSticky' : ''}`}>
+      <img src={source}></img>
       <div className='nav-itemText login-text'>Log in</div>
-    </div>
-  </li>
-);
+    </li>
+  );
+};
+
+
+Login.propTypes = {
+  isMobile: PropTypes.bool,
+  isFlyout: PropTypes.bool,
+  isSticky: PropTypes.bool,
+};
 
 export default Login;
