@@ -237,6 +237,9 @@ export const adSlots = {
         [600, 400],
       ],
     ],
+    breakpoints: [
+      [1024, 0], // desktop
+    ],
   },
   PG02: {
     slotName: 'PG02',
@@ -245,6 +248,9 @@ export const adSlots = {
         [88, 31],
       ],
     ],
+    breakpoints: [
+      [1024, 0], // desktop
+    ],
   },
   MPG01: {
     slotName: 'MPG01',
@@ -252,6 +258,9 @@ export const adSlots = {
       [
         [300, 250],
       ],
+    ],
+    breakpoints: [
+      [1, 0], // mobile
     ],
   },
 };

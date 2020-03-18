@@ -34,10 +34,6 @@ const MP03 = () => <ArcAd staticSlot={'MP03'} key={'MP03'} />;
 const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} key={'RP09-Story-Desktop'} />;
 const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} key={'RP09-Story-Tablet'} />;
 
-const PG01 = () => <ArcAd staticSlot={'PG01'} key={'PG01'} />;
-const PG02 = () => <ArcAd staticSlot={'PG02'} key={'PG02'} />;
-const MPG01 = () => <ArcAd staticSlot={'MPG01'} key={'MPG01'} />;
-
 const start = 3;
 
 const StoryPageLayout = () => {
@@ -186,7 +182,6 @@ const StoryPageLayout = () => {
             && basicItems.type !== 'gallery')
          ? <Gallery
               contentElements={filteredContentElements}
-              ads={[PG01, PG02, MPG01]}
               pageType={subtype} /> : null}
       </main>
       <Footer />

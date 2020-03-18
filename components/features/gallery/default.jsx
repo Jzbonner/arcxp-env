@@ -7,6 +7,7 @@ import {
 import {
   debounce, createBaseGallery, handleImageFocus, reorganizeElements,
 } from './_helper_functions/index';
+import ArcAd from '../ads/default';
 import PGO1Element from '../../_helper_components/global/ads/pg01/default';
 import MPGO1Element from '../../_helper_components/global/ads/mpg01/default';
 import leftArrow from '../../../resources/icons/gallery/left-arrow.svg';
@@ -14,14 +15,16 @@ import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
 import './default.scss';
 
-// TODO: remove module and cap clickcount to 4 / 0-4
+const PG01 = () => <ArcAd staticSlot={'PG01'} key={'PG01'} />;
+const PG02 = () => <ArcAd staticSlot={'PG02'} key={'PG02'} />;
+const MPG01 = () => <ArcAd staticSlot={'MPG01'} key={'MPG01'} />;
 
 const Gallery = (props) => {
   const {
     contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, ads = [], pageType = '',
   } = props;
 
-  const [PG01, PG02, MPG01] = ads;
+  // const [PG01, PG02, MPG01] = ads;
 
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
@@ -179,6 +182,7 @@ const Gallery = (props) => {
     prev: () => changeIndex(actions.PREV),
     next: () => changeIndex(actions.NEXT),
   };
+
 
   const insertDesktopGalleryAd = () => {
     const elements = [...elementData];
