@@ -119,29 +119,27 @@ const NavBar = ({
     <header className="c-nav">
         <div className={`c-headerNav
         ${stickyNavVisibility ? 'stickyActive' : ''}`}>
-          <div>
-            <div className={`b-flexRow b-flexCenter nav-logo 
-            ${stickyNavVisibility || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
-              <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
-                <div className='nav-flyout-button'>
-                </div>
-              </div>
-              <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
-                && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
-                <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
-              </div>
-              <Login isMobile={true} isFlyout={false}/>
+          <div className={`b-flexRow b-flexCenter nav-logo 
+          ${stickyNavVisibility || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
+            <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
+              <div className='nav-flyout-button'></div>
             </div>
-            <DesktopNav
-              sections={sectionLi}
-              isMobile={isMobile}
-              hamburgerToggle={mobileMenuToggled}
-              setToggle={setToggle}
-              smallLogoUrl={siteLogoImageSmallInverse}
-              rootDirectory={rootDirectory}
-              social={social}
-              stickyActive={stickyNavVisibility}/>
+            <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
+              && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
+              <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
             </div>
+            <Login isMobile={true} isFlyout={false}/>
+          </div>
+          <DesktopNav
+            sections={sectionLi}
+            isMobile={isMobile}
+            hamburgerToggle={mobileMenuToggled}
+            setToggle={setToggle}
+            smallLogoUrl={siteLogoImageSmallInverse}
+            rootDirectory={rootDirectory}
+            social={social}
+            stickyActive={stickyNavVisibility}
+            type={type}/>
           <div className={`sub b-flexRow b-flexCenter sub-text ${stickyNavVisibility || (stickyNavVisibility
             && mobileMenuToggled) ? 'not-visible' : ''}`}>
             <Subscribe/>
@@ -158,7 +156,9 @@ const NavBar = ({
           logoRef={logoRef}
           setToggle={setToggle}
           paddingRef={paddingRef}
-          type={type}/>
+          type={type}
+          sections={sectionLi}
+          />
         </div>
         <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
       </header>

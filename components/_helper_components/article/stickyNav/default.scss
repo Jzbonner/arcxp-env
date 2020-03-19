@@ -27,6 +27,14 @@
   justify-content: flex-end;
 }
 
+.stickyNav-social {
+  display: flex;
+
+  &.hidden {
+    display: none;
+  }
+}
+
 .c-stickyNav-list {
   position: relative;
   display: flex;

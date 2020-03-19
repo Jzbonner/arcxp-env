@@ -703,3 +703,11 @@
     padding-bottom: .313em;
   }
 }
+
+.sticky-home {
+  display: block;
+
+  &.isActive {
+    display: flex;
+  }
+}

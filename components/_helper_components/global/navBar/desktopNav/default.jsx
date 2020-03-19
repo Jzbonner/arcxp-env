@@ -9,7 +9,6 @@ import '../default.scss';
 const DesktopNav = ({
   sections, hamburgerToggle, isMobile, setToggle, rootDirectory, smallLogoUrl, social,
   stickyActive,
-  // type,
 }) => {
   const {
     twitter,
@@ -60,7 +59,6 @@ DesktopNav.propTypes = {
   rootDirectory: PropTypes.string,
   social: PropTypes.object,
   stickyActive: PropTypes.bool,
-  // type: PropTypes.string,
 };
 
 export default DesktopNav;
