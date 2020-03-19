@@ -239,33 +239,6 @@
       }
     }
   }
-
-  .nav-item-circle {
-    display: flex;
-    background: linear-gradient(to top, #ff8787, #ff55b8);
-    border-radius: .875rem;
-    width: 1.75rem;
-    height: 1.75rem;
-    cursor: pointer;
-    position: relative;
-    visibility: hidden;
-    margin-left: 15px;
-
-    &:after {
-      content: ">";
-      transform: scale(.5, 1.1);
-      width: .875rem;
-      color: #fff;
-    }
-
-    &.isVisible {
-      visibility: visible;
-    }
-
-    @include breakpoint(desktop-sm) {
-      display: none;
-    }
-  }
   
   .nav-itemBottomBorder {
     border-bottom: none;
