@@ -35,7 +35,7 @@ const VideoPageLayout = () => {
   return (
     <>
       <GlobalAdSlots />
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments}/>
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
       <main>
         <div className="c-header">
           <Headline headlines={headlines} basicItems={basicItems} />

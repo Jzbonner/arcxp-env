@@ -12,7 +12,9 @@ import '../../../../src/styles/base/_utility.scss';
 import '../../../../src/styles/container/_article-basic.scss';
 import './default.scss';
 
-const NavBar = ({ articleURL, headlines, comments }) => {
+const NavBar = ({
+  articleURL, headlines, comments, type,
+}) => {
   const [mobileMenuToggled, setToggle] = useState(false);
   const [isMobile, setMobile] = useState(false);
   const [activeSection, setSection] = useState(-1);
@@ -115,28 +117,31 @@ const NavBar = ({ articleURL, headlines, comments }) => {
 
   return (
     <header className="c-nav">
-        <div className={`c-headerNav ${stickyNavVisibility ? 'stickyActive' : ''}`}>
-          <div className={`b-flexRow b-flexCenter nav-logo ${stickyNavVisibility || (stickyNavVisibility
-            && mobileMenuToggled) ? 'not-visible' : ''}`}>
-            <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
-              <div className='nav-flyout-button'>
+        <div className={`c-headerNav
+        ${stickyNavVisibility ? 'stickyActive' : ''}`}>
+          <div>
+            <div className={`b-flexRow b-flexCenter nav-logo 
+            ${stickyNavVisibility || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
+              <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
+                <div className='nav-flyout-button'>
+                </div>
               </div>
+              <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
+                && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
+                <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
+              </div>
+              <Login isMobile={true} isFlyout={false}/>
             </div>
-            <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
-              && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
-              <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
+            <DesktopNav
+              sections={sectionLi}
+              isMobile={isMobile}
+              hamburgerToggle={mobileMenuToggled}
+              setToggle={setToggle}
+              smallLogoUrl={siteLogoImageSmallInverse}
+              rootDirectory={rootDirectory}
+              social={social}
+              stickyActive={stickyNavVisibility}/>
             </div>
-            <Login isMobile={true} isFlyout={false}/>
-          </div>
-          <DesktopNav
-            sections={sectionLi}
-            isMobile={isMobile}
-            hamburgerToggle={mobileMenuToggled}
-            setToggle={setToggle}
-            smallLogoUrl={siteLogoImageSmallInverse}
-            rootDirectory={rootDirectory}
-            social={social}
-            stickyActive={stickyNavVisibility}/>
           <div className={`sub b-flexRow b-flexCenter sub-text ${stickyNavVisibility || (stickyNavVisibility
             && mobileMenuToggled) ? 'not-visible' : ''}`}>
             <Subscribe/>
@@ -152,7 +157,8 @@ const NavBar = ({ articleURL, headlines, comments }) => {
           isMobileVisibilityRef={isMobileVisibilityRef}
           logoRef={logoRef}
           setToggle={setToggle}
-          paddingRef={paddingRef}/>
+          paddingRef={paddingRef}
+          type={type}/>
         </div>
         <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
       </header>
@@ -163,6 +169,7 @@ NavBar.propTypes = {
   articleURL: PropTypes.string,
   headlines: PropTypes.object,
   comments: PropTypes.object,
+  type: PropTypes.string,
 };
 
 export default NavBar;

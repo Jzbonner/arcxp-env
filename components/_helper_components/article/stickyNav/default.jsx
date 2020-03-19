@@ -10,7 +10,7 @@ import '../../global/navBar/default.scss';
 
 const StickyNav = ({
   articleURL, headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
-  isMobileVisibilityRef, logoRef, setToggle, paddingRef,
+  isMobileVisibilityRef, logoRef, setToggle, paddingRef, type,
 }) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
@@ -103,7 +103,8 @@ const StickyNav = ({
 
   return (
     <>
-      <div className={`stickyNav  ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
+      <div className={`stickyNav 
+      ${stickyVisibilityRef.current && (type !== 'homepage-basic' && type !== 'section-basic') ? 'is-visible' : ''}`}>
         <ul className="c-stickyNav-list">
         <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
           <div className='nav-flyout-button'>
@@ -163,6 +164,7 @@ StickyNav.propTypes = {
   setToggle: PropTypes.func,
   paddingRef: PropTypes.object,
   hamburgerToggle: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 export default StickyNav;

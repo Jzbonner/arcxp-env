@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useAppContext } from 'fusion:context';
 
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
@@ -11,14 +12,15 @@ import Footer from '../_helper_components/global/footer/default';
 
 const HomePageLayout = (props) => {
   const [zone1, zone2, zone3, zone4, zone5, zone6] = props.children;
-
+  const appContext = useAppContext();
+  const { layout } = appContext;
   const Ad = () => <div>Placeholder Ad</div>;
 
   return (
     <>
       <GlobalAdSlots />
       <BreakingNews />
-      <NavBar />
+      <NavBar type={layout} />
       <main className="c-homepageContent">
         <SectionHome feature={zone1} rightRailAd={Ad} />
         <SectionHome feature={zone2} />

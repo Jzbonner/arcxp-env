@@ -9,6 +9,7 @@ import '../default.scss';
 const DesktopNav = ({
   sections, hamburgerToggle, isMobile, setToggle, rootDirectory, smallLogoUrl, social,
   stickyActive,
+  // type,
 }) => {
   const {
     twitter,
@@ -23,8 +24,10 @@ const DesktopNav = ({
   return (
   <>
   <div className={`nav-wrapper ${hamburgerToggle && isMobile ? 'isVisible' : ''}`}></div>
-  <nav className={`${hamburgerToggle && isMobile ? 'mobile-nav-activated' : ''}
-  ${isMobile ? 'nav-mobile' : ''}${stickyActive && !isMobile ? 'is-hidden' : ''}`}>
+  <nav className={`
+  ${hamburgerToggle && isMobile ? 'mobile-nav-activated' : ''}
+  ${isMobile ? 'nav-mobile' : ''}
+  ${stickyActive && !isMobile ? 'is-hidden' : ''}`}>
     <div className='nav-menu-toggle' onClick={(e) => { e.preventDefault(); setToggle(false); }}>
       <div className='nav-flyout-button'></div>
     </div>
@@ -37,8 +40,8 @@ const DesktopNav = ({
       <NavFooter facebook={facebook} twitter={twitter}/>
       <li className='nav-weather-widget'> Weather Widget</li>
       <div className='nav-sections'>{sections}</div>
-      <Search/>
-      <Weather/>
+      <Search sticky={stickyActive}/>
+      <Weather sticky={stickyActive}/>
       <div className='nav-mobile-login'>
         <Login isMobile={isMobile} isFlyout={isMobile}/>
       </div>
@@ -57,6 +60,7 @@ DesktopNav.propTypes = {
   rootDirectory: PropTypes.string,
   social: PropTypes.object,
   stickyActive: PropTypes.bool,
+  // type: PropTypes.string,
 };
 
 export default DesktopNav;
