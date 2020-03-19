@@ -77,7 +77,6 @@ const Section = ({
       <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
         <div className='nav-item-link' onClick={ e => activateMenu(e)}>
           <a>{name}</a>
-          <div className={`nav-item-circle b-flexCenter ${isActive}`}></div>
         </div>
         <div className={`section ${isActive}`}>
           <div className='section-item'>
