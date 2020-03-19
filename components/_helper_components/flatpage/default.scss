@@ -79,7 +79,7 @@ article {
     }
 
     strong {
-      @include text-styles(1rem, 30px, "Gordita");
+      @include text-styles(1rem, 2, "Gordita");
 
       font-weight: 800;
     }
@@ -87,9 +87,8 @@ article {
     p {
       line-height: 30px;
       margin-bottom: 20px;
-      font-weight: 400;
 
-      @include text-styles(1rem, 30px, "Gordita-Regular");
+      @include text-styles(1rem, 2, "Gordita");
     }
 
     a {
