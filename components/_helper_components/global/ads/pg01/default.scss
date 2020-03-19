@@ -3,12 +3,13 @@
   background: #000;
   min-width: 720px;
   width: 40vw;
-  height: 480px;
+  max-height: 480px;
   margin: 0 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 1.125rem;
+  padding-top: 3.125rem;
+  overflow-y: hidden;
 
   .arc_ad {
 

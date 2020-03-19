@@ -13,6 +13,8 @@ const handleImageFocus = (arr = [], states = {}, funcs = {}) => {
   let prevIndex = currentIndex - 1;
   let nextIndex = currentIndex + 1;
 
+  console.log('previous index', prevIndex, 'next index', nextIndex);
+
   if (prevIndex < 0) prevIndex = maxIndex;
   if (nextIndex > maxIndex) nextIndex = 0;
 
@@ -26,8 +28,10 @@ const handleImageFocus = (arr = [], states = {}, funcs = {}) => {
     let functionToPass = null;
 
     if (element.props.data.index === prevIndex) {
+      console.log('passing to prev');
       functionToPass = prev;
     } else if (element.props.data.index === nextIndex) {
+      console.log('passing to next');
       functionToPass = next;
     }
 
