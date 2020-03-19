@@ -233,9 +233,7 @@ export const adSlots = {
   PG01: {
     slotName: 'PG01',
     dimensions: [
-      [
-        [600, 400],
-      ],
+      [600, 400],
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -244,9 +242,7 @@ export const adSlots = {
   PG02: {
     slotName: 'PG02',
     dimensions: [
-      [
-        [88, 31],
-      ],
+      [88, 31],
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -262,5 +258,6 @@ export const adSlots = {
     breakpoints: [
       [1, 0], // mobile
     ],
+    display: 'mobile',
   },
 };
