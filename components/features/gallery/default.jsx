@@ -186,7 +186,6 @@ const Gallery = (props) => {
 
   const insertDesktopGalleryAd = () => {
     const elements = [...elementData];
-
     elementData.forEach((element, i) => {
       if (element.props.data.states.isFocused) elements.splice(i + 1, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} />);
     });
@@ -197,7 +196,7 @@ const Gallery = (props) => {
   const insertMobileGalleryAd = () => {
     const mobileElements = [...mobileElementData];
     let hasAdBeenInserted = false;
-
+    console.log('running');
     mobileElementData.forEach((element) => {
       if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted && photosScrolled === 3) {
         mobileElements.splice(element.props.data.index + 1, 0, <MPGO1Element adSlot={MPG01} />);
@@ -240,6 +239,9 @@ const Gallery = (props) => {
     setCurrentAction(actions.AD_RESET);
     setCurrentIndex(0);
     setHeight(0);
+    setMobileAdsIndices([]);
+    setAdInsertionAbleState(true);
+    setPhotosScrolled(0);
   };
 
   const renderCaptionByCurrentIndex = () => {
@@ -317,6 +319,7 @@ const Gallery = (props) => {
 
       // lazy loading ads
       if (isAdInsertionAble && !mobileAdsIndices.includes(index) && mobileElementData && photosScrolled === 3) {
+        // debugger;
         const adInsertedMobileArray = insertMobileGalleryAd();
         setMobileElementData(adInsertedMobileArray);
         setAdInsertionAbleState(false);
@@ -437,7 +440,7 @@ const Gallery = (props) => {
     return () => {
       window.removeEventListener('scroll', handleScrollEvent, true);
     };
-  }, [currentIndex, isCaptionOn]);
+  }, [currentIndex, isCaptionOn, isAdInsertionAble]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);

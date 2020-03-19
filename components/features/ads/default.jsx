@@ -12,6 +12,9 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const { slot: customFieldsSlot } = customFields || {};
   const { dfp_id: dfpid } = getProperties();
   const slot = customFieldsSlot || staticSlot;
+  let rng = 0;
+
+  console.log('staticSlot', staticSlot);
 
   // If there is no DFP ID and we are in the Admin,
   if (!dfpid) return null;
@@ -44,6 +47,9 @@ const ArcAd = ({ customFields, staticSlot }) => {
   // use their slotname if given, otherwise default to the slot for this ad type
   const slotName = adConfig.slotName || slot;
 
+  if (staticSlot && staticSlot.includes('MPG01')) rng = Math.floor(Math.random() * 9999999);
+
+  console.log('rng', rng);
   const arcad = (
     <AdSetup
       refresh={true}
@@ -52,7 +58,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
       dimensions={adConfig.dimensions || defaultAdSlot.dimensions}
       dfpId={`${dfpid}/TEST_atlanta_np/ajc_web_default`}
       display={adConfig.display || defaultAdSlot.display}
-      id={`${defaultAdSlot.name}${staticSlot || slot}`}
+      id={`${defaultAdSlot.name}${staticSlot || slot}-${rng !== 0 && rng}`}
       slotName={slotName}
       targeting={targeting}
     />
