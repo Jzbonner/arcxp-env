@@ -88,6 +88,19 @@
   justify-content: center;
   align-items: center;
   margin: 20px auto;
+
+  .arc_ad {
+
+    .arcad {
+
+      &:not(:empty) {
+
+        &:before {
+          content: "";
+        }
+      }
+    }
+  }
 }
 
 .gallery-overlay {
@@ -419,6 +432,7 @@
     display: flex;
     align-items: stretch;
     height: 480px;
+    overflow-y: hidden;
   }
 
   .gallery-caption-icons-box {

@@ -14,8 +14,6 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const slot = customFieldsSlot || staticSlot;
   let rng = 0;
 
-  console.log('staticSlot', staticSlot);
-
   // If there is no DFP ID and we are in the Admin,
   if (!dfpid) return null;
 
@@ -49,7 +47,6 @@ const ArcAd = ({ customFields, staticSlot }) => {
 
   if (staticSlot && staticSlot.includes('MPG01')) rng = Math.floor(Math.random() * 9999999);
 
-  console.log('rng', rng);
   const arcad = (
     <AdSetup
       refresh={true}

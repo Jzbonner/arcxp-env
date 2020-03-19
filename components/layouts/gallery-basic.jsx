@@ -6,7 +6,6 @@ import StickyNav from '../_helper_components/article/stickyNav/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import Gallery from '../features/gallery/default';
 import Footer from '../_helper_components/global/footer/default';
-import ArcAd from '../features/ads/default';
 import '../../src/styles/container/_article-basic.scss';
 
 const GalleryPageLayout = () => {
@@ -34,10 +33,6 @@ const GalleryPageLayout = () => {
     streams,
   };
 
-  const PG01 = () => <ArcAd staticSlot={'PG01'} />;
-  const PG02 = () => <ArcAd staticSlot={'PG02'} />;
-  const MPG01 = () => <ArcAd staticSlot={'MPG01'} />;
-
   return (
     <>
       <GlobalAdSlots />
@@ -58,7 +53,7 @@ const GalleryPageLayout = () => {
           <Headline headlines={headlines} basicItems={basicItems} />
         </div>
         <div className="c-main-gallery">
-          <Gallery leafContentElements={contentElements} ads={[PG01, PG02, MPG01]} pageType={subtype} />
+          <Gallery leafContentElements={contentElements} pageType={subtype} />
         </div>
       </main>
       <Footer />

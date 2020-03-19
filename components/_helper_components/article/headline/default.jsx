@@ -5,17 +5,12 @@ import getProperties from 'fusion:properties';
 import Image from '../../global/image/default';
 import Video from '../../global/video/default';
 import Gallery from '../../../features/gallery/default';
-import ArcAd from '../../../features/ads/default';
 
 const Headline = ({ basicItems = {}, headlines = {} }) => {
   let promoData = {};
   if (basicItems) {
     promoData = basicItems;
   }
-
-  const PG01 = () => <ArcAd staticSlot={'PG01'} key={'PG01'} />;
-  const PG02 = () => <ArcAd staticSlot={'PG02'} key={'PG02'} />;
-  const MPG01 = () => <ArcAd staticSlot={'MPG01'} key={'MPG01'} />;
 
   const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
 
@@ -33,7 +28,7 @@ const Headline = ({ basicItems = {}, headlines = {} }) => {
       {promoData.type === 'image' && (
         <Image width={1066} height={600} imageType="isLeadImage" src={basicItems} maxTabletViewWidth={maxTabletViewWidth} />
       )}
-      {promoData.type === 'gallery' && promoData.content_elements && <Gallery promoItems={promoData} ads={[PG01, PG02, MPG01]}/>}
+      {promoData.type === 'gallery' && promoData.content_elements && <Gallery promoItems={promoData}/>}
       {promoData.type === 'video' && (
         <Video isLeadVideo src={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules} maxTabletViewWidth={maxTabletViewWidth} />
       )}

@@ -8,4 +8,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 1.125rem;
+
+  .arc_ad {
+
+    .arcad {
+
+      &:not(:empty) {
+        
+        &:before {
+          color: #fff;
+        }
+      }
+    }
+  }
 }

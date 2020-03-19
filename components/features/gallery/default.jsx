@@ -21,10 +21,8 @@ const MPG01 = () => <ArcAd staticSlot={'MPG01'} key={'MPG01'} />;
 
 const Gallery = (props) => {
   const {
-    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, ads = [], pageType = '',
+    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '',
   } = props;
-
-  // const [PG01, PG02, MPG01] = ads;
 
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
@@ -52,6 +50,8 @@ const Gallery = (props) => {
   const [isCaptionOn, setCaptionState] = useState(true);
   const [isStickyVisible, setStickyState] = useState(false);
   const [isMobile, setMobileState] = useState('NOT INIT');
+
+  /* Mobile Ads */
   const [mobileAdsIndices, setMobileAdsIndices] = useState([]);
   const [photosScrolled, setPhotosScrolled] = useState(0);
   const [isAdInsertionAble, setAdInsertionAbleState] = useState(true);
@@ -84,7 +84,7 @@ const Gallery = (props) => {
       path: galleryUrl,
     },
   });
-  // const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
+
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic ? headlines.basic : null;
@@ -120,6 +120,7 @@ const Gallery = (props) => {
     }
   };
 
+  // manages click count for desktop ads
   const handleClickCount = () => {
     if (clickCount === 4) {
       setClickCount(1);
@@ -128,6 +129,7 @@ const Gallery = (props) => {
     }
   };
 
+  // manages photo scrolling count for mobile ads
   const handleScrollCount = () => {
     if (photosScrolled === 4) {
       setPhotosScrolled(0);
@@ -187,7 +189,8 @@ const Gallery = (props) => {
   const insertDesktopGalleryAd = () => {
     const elements = [...elementData];
     elementData.forEach((element, i) => {
-      if (element.props.data.states.isFocused) elements.splice(i + 1, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} />);
+      // inserts add after current photo
+      if (element.props.data.states.isFocused) elements.splice(i + 1, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} key={`${i}-PG01`} />);
     });
 
     return elements;
@@ -196,10 +199,10 @@ const Gallery = (props) => {
   const insertMobileGalleryAd = () => {
     const mobileElements = [...mobileElementData];
     let hasAdBeenInserted = false;
-    console.log('running');
-    mobileElementData.forEach((element) => {
+
+    mobileElementData.forEach((element, i) => {
       if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted && photosScrolled === 3) {
-        mobileElements.splice(element.props.data.index + 1, 0, <MPGO1Element adSlot={MPG01} />);
+        mobileElements.splice(element.props.data.index + 1, 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
         hasAdBeenInserted = true;
       }
     });
@@ -210,10 +213,7 @@ const Gallery = (props) => {
     const elements = [...elementData];
 
     elementData.forEach((element, i) => {
-      if (element.props.adSlot) {
-        elements.splice(i, 1);
-        // console.log(element.props.adSlot);
-      }
+      if (element.props.adSlot) elements.splice(i, 1);
     });
 
     return elements;
@@ -264,7 +264,7 @@ const Gallery = (props) => {
     if (!isAdVisible) {
       const finalizedElements = handleImageFocus((elements), {
         isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
-      }, clickFuncs, ads);
+      }, clickFuncs);
 
       setElementData(finalizedElements);
       renderCaptionByCurrentIndex();
@@ -319,7 +319,6 @@ const Gallery = (props) => {
 
       // lazy loading ads
       if (isAdInsertionAble && !mobileAdsIndices.includes(index) && mobileElementData && photosScrolled === 3) {
-        // debugger;
         const adInsertedMobileArray = insertMobileGalleryAd();
         setMobileElementData(adInsertedMobileArray);
         setAdInsertionAbleState(false);
@@ -368,9 +367,9 @@ const Gallery = (props) => {
   // maps mobile elements with updated parent states
   const getMobileElements = (arr) => {
     const finalElements = arr.map((element) => {
-      if (element.props.adSlot && element.props.adSlot.name && element.props.adSlot.name === 'MPG01') {
-        return element;
-      }
+      // if the element is an ad, just return it
+      if (element.props.adSlot && element.props.adSlot.name && element.props.adSlot.name === 'MPG01') return element;
+
       const elementItemData = { ...element.props.data };
       const parentStates = {
         isStickyVisible,
@@ -412,6 +411,7 @@ const Gallery = (props) => {
     if (!isAdVisible && !isMobile) renderCaptionByCurrentIndex();
   }, [baseCaptionData]);
 
+  // handles ad intertions and removals for desktop gallery
   useEffect(() => {
     if (!isMobile) {
       if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
@@ -419,13 +419,12 @@ const Gallery = (props) => {
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
         const adInsertedElementArray = insertDesktopGalleryAd();
         setElementData(adInsertedElementArray);
-        setAdVisibleState(true);
       } else if (isAdVisible && (clickCount % 4) === 1) {
         const adRemovedElementArray = removeGalleryAd();
         setAdVisibleState(false);
         const finalizedElements = handleImageFocus((adRemovedElementArray), {
           isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
-        }, clickFuncs, ads);
+        }, clickFuncs);
 
         setElementData(finalizedElements);
         renderCaptionByCurrentIndex();
