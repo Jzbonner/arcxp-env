@@ -54,7 +54,7 @@ const Gallery = (props) => {
   /* Mobile Ads */
   const [mobileAdsIndices, setMobileAdsIndices] = useState([]);
   const [photosScrolled, setPhotosScrolled] = useState(0);
-  const [isAdInsertionAble, setAdInsertionAbleState] = useState(true);
+  const [isAdInsertable, setAdInsertionAbleState] = useState(true);
 
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
@@ -317,7 +317,7 @@ const Gallery = (props) => {
       const targetHeight = offsetHeight + targetElementoffsetHeight;
 
       // lazy loading ads
-      if (isAdInsertionAble && !mobileAdsIndices.includes(index) && mobileElementData && photosScrolled === 3) {
+      if (isAdInsertable && !mobileAdsIndices.includes(index) && mobileElementData && photosScrolled === 3) {
         const adInsertedMobileArray = insertMobileGalleryAd();
         setMobileElementData(adInsertedMobileArray);
         setAdInsertionAbleState(false);
@@ -439,7 +439,7 @@ const Gallery = (props) => {
     return () => {
       window.removeEventListener('scroll', handleScrollEvent, true);
     };
-  }, [currentIndex, isCaptionOn, isAdInsertionAble]);
+  }, [currentIndex, isCaptionOn, isAdInsertable]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
@@ -529,7 +529,7 @@ const Gallery = (props) => {
   return (
     <>
       {isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
-      {pageType !== 'Article' ? <div className="gallery-ads-PG02">{PG02 && PG02()}</div> : null}
+      {pageType !== 'Article' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02()}</div> : null}
       <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
         {!isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
         {
