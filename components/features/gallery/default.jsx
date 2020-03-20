@@ -140,7 +140,6 @@ const Gallery = (props) => {
 
   const changeIndex = (action, maxNumber) => {
     const currentClickCount = clickCount;
-
     if (!isMobile) {
       handleClickCount();
     } else {
@@ -263,8 +262,9 @@ const Gallery = (props) => {
   const renderDesktopGalleryElements = (elements) => {
     if (!isAdVisible) {
       const finalizedElements = handleImageFocus((elements), {
-        isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
+        isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, clickCount,
       }, clickFuncs);
+      console.log(elements);
 
       setElementData(finalizedElements);
       renderCaptionByCurrentIndex();
@@ -401,7 +401,7 @@ const Gallery = (props) => {
   useEffect(() => {
     if (elementData && !isStickyVisible && currentAction !== '') finalizeGalleryItems();
     if (isMobile && isStickyVisible) setAdInsertionAbleState(true);
-  }, [currentIndex]);
+  }, [currentIndex, isAdVisible]);
 
   useEffect(() => {
     if (!isMobile) calculateTranslateX();
@@ -419,6 +419,7 @@ const Gallery = (props) => {
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
         const adInsertedElementArray = insertDesktopGalleryAd();
         setElementData(adInsertedElementArray);
+        renderDesktopGalleryElements([...adInsertedElementArray]);
       } else if (isAdVisible && (clickCount % 4) === 1) {
         const adRemovedElementArray = removeGalleryAd();
         setAdVisibleState(false);
