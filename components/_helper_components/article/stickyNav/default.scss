@@ -25,9 +25,30 @@
 
 .c-stickyLogin {
   justify-content: flex-end;
+  margin-bottom: 10px;
+
+  .nav-items {
+    padding-top: 0;
+  }
+
+  .nav-login {
+    padding-bottom: 0;
+  }
+
+  .stickyNav-social {
+    margin-bottom: 10px;
+  }
 }
 
 .stickyNav-social {
+  display: flex;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.stickyNav-homepage {
   display: flex;
 
   &.hidden {
@@ -56,8 +77,8 @@
     }
 
     img {
-      width: 75px;
-      height: 56px;
+      width: 71px;
+      height: 39px;
     }
 
     a {

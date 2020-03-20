@@ -14,6 +14,7 @@ const HomePageLayout = (props) => {
   const [zone1, zone2, zone3, zone4, zone5, zone6] = props.children;
   const appContext = useAppContext();
   const { layout } = appContext;
+
   const Ad = () => <div>Placeholder Ad</div>;
 
   return (

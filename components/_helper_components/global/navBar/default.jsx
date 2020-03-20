@@ -101,7 +101,7 @@ const NavBar = ({
       return (
         <React.Fragment key={id}>
           <Section navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
-          setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile}/>
+          setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile} isSticky={stickyNavVisibility}/>
           <li className='nav-items nav-itemBottomBorder nav-separator'>
             <span className='separatorBar'></span>
           </li>
@@ -111,7 +111,7 @@ const NavBar = ({
 
     return (
       <Section key={id} navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
-      setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile}/>
+      setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile} isSticky={stickyNavVisibility}/>
     );
   });
 

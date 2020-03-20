@@ -144,11 +144,11 @@ const StickyNav = ({
               ) : null}
             </ul>
           </div>
-          <div className={`stickyNav-social ${type !== 'homepage-basic' || type !== 'section-basic' ? '' : 'hidden'}`}>
-            {sections}
-          </div>
         </ul>
         <div className='b-flexRow c-stickyLogin'>
+          <div className={`stickyNav-homepage b-flexRow ${type === 'homepage-basic' || type === 'section-basic' ? '' : 'hidden'}`}>
+            {sections}
+          </div>
           <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
         </div>
       </div>
