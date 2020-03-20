@@ -2,7 +2,6 @@ import React from 'react';
 import { useAppContext } from 'fusion:context';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import Headline from '../_helper_components/article/headline/default.jsx';
-import StickyNav from '../_helper_components/article/stickyNav/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import Gallery from '../features/gallery/default';
 import Footer from '../_helper_components/global/footer/default';
@@ -15,7 +14,6 @@ const GalleryPageLayout = () => {
 
   const {
     content_elements: contentElements,
-    promo_items: promoItems,
     headlines,
     comments,
     canonical_url: articleURL,
@@ -36,18 +34,7 @@ const GalleryPageLayout = () => {
   return (
     <>
       <GlobalAdSlots />
-      <header className="c-nav">
-        <NavBar />
-
-        <StickyNav
-          articleURL={articleURL}
-          headlines={headlines}
-          comments={comments}
-          promoItems={promoItems}
-          contentElements={contentElements}
-        />
-      </header>
-
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments}/>
       <main>
         <div className="c-header-gallery">
           <Headline headlines={headlines} basicItems={basicItems} />

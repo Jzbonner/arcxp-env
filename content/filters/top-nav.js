@@ -2,6 +2,12 @@ export default `
 {
 site {
     site_logo_image
+    site_logo_image_small
+    site_logo_image_small_inverse
+}
+social {
+    twitter
+    facebook
 }
 children {
         _id
@@ -23,4 +29,5 @@ children {
         }
         
 }
+_id
 }`;

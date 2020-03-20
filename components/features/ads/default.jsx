@@ -2,17 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import { ENVIRONMENT } from 'fusion:environment';
 import AdSetup from './src/index';
 import { adSlots, defaultAdSlot } from './children/adtypes';
 
 const ArcAd = ({ customFields, staticSlot }) => {
   const appContext = useAppContext();
   const { globalContent, requestUri } = appContext;
-  const { _id: uuid } = globalContent || {};
+  const {
+    _id: uuid,
+    type,
+    taxonomy,
+  } = globalContent || {};
+  const { tags = [] } = taxonomy || {};
+  const targetingTopics = [];
+  tags.forEach((tag) => {
+    if (tag && tag.text) {
+      targetingTopics.push(tag.text);
+    }
+  });
   const { slot: customFieldsSlot } = customFields || {};
-  const { dfp_id: dfpid } = getProperties();
+  const { dfp_id: dfpid, siteName } = getProperties();
   const slot = customFieldsSlot || staticSlot;
   let randomIdMPG01 = null;
+  const currentEnv = ENVIRONMENT || 'unknown';
 
   // If there is no DFP ID and we are in the Admin,
   if (!dfpid) return null;
@@ -46,18 +59,27 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const slotName = adConfig.slotName || slot;
 
   if (staticSlot && staticSlot.includes('MPG01')) randomIdMPG01 = Math.floor(Math.random() * 999999);
+  // define global targeting values
+  const globalTargeting = {
+    obj_type: type,
+    environ: currentEnv.toLowerCase(),
+    mediaType: 'Arc',
+    sitepath: siteName.toLowerCase(),
+    ad_slot: slotName,
+    topics: targetingTopics,
+  };
 
   const arcad = (
     <AdSetup
       refresh={true}
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
       className={`arc_ad | ${slotName} ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
-      dimensions={adConfig.dimensions || defaultAdSlot.dimensions}
-      dfpId={`${dfpid}/TEST_atlanta_np/ajc_web_default`}
+      dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
+      dfpId={`${dfpid}/${currentEnv.toLowerCase().indexOf('prod') === -1 ? 'TEST_' : ''}atlanta_np/ajc_web_default`}
       display={adConfig.display || defaultAdSlot.display}
       id={`${defaultAdSlot.name}${staticSlot || slot}${randomIdMPG01 && `-${randomIdMPG01}`}`}
       slotName={slotName}
-      targeting={targeting}
+      targeting={{ ...globalTargeting, ...targeting }}
     />
   );
 

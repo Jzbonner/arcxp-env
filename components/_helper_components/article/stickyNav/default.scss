@@ -1,38 +1,30 @@
 @import "../../../../src/styles/base/";
 
-.c-stickyNav {
-  position: fixed;
-  top: 0;
-  height: 90px;
-  background: #f8f8f8;
-  opacity: .98;
-  align-items: center;
+.stickyNav {
+  height: 100%;
   border: none;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 90%;
   display: none;
-  width: 100%;
-  z-index: 1000;
-
-  @include breakpoint(desktop-sm) {
-    border-bottom: solid 1px #d0d0d0;
-    height: 70px;
-  }
+  align-items: center;
 
   &.is-visible {
     display: flex;
   }
 
-  .stickyNav {
-    max-width: 1600px;
-    margin: 0 auto;
-    width: 94%;
-    display: flex;
-    align-items: center;
+  &.not-visible {
+    display: none;
   }
+}
 
-  .logo {
-    display: block;
-    margin-top: 10px;
-  }
+.sticky-logo {
+  display: block;
+  margin-top: 10px;
+}
+
+.c-stickyLogin {
+  justify-content: flex-end;
 }
 
 .c-stickyNav-list {
@@ -42,6 +34,7 @@
   width: min-content;
 
   @include breakpoint(desktop-sm) {
+    margin-left: 0;
     justify-content: left;
   }
 
@@ -102,5 +95,11 @@
         display: block;
       }
     }
+  }
+
+  .nav-menu-toggle {
+    position: relative;
+    margin-right: 6px;
+    margin-bottom: .313em;
   }
 }
