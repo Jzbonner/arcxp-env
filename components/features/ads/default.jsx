@@ -11,6 +11,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const { globalContent, requestUri } = appContext;
   const {
     _id: uuid,
+    subtype,
     type,
     taxonomy,
   } = globalContent || {};
@@ -25,6 +26,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const { dfp_id: dfpid, siteName } = getProperties();
   const slot = customFieldsSlot || staticSlot;
   const currentEnv = ENVIRONMENT || 'unknown';
+  const contentType = subtype || type;
 
   // If there is no DFP ID and we are in the Admin,
   if (!dfpid) return null;
@@ -59,7 +61,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
 
   // define global targeting values
   const globalTargeting = {
-    obj_type: type,
+    obj_type: contentType,
     environ: currentEnv.toLowerCase(),
     mediaType: 'Arc',
     sitepath: siteName.toLowerCase(),
