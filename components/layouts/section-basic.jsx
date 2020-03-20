@@ -1,4 +1,4 @@
-/*  /components/layouts/article-basic.jsx  */
+/*  /components/layouts/section-basic.jsx  */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -9,7 +9,7 @@ import NavBar from '../_helper_components/global/navBar/default';
 import SectionHome from '../_helper_components/home/SectionHome/SectionHome';
 import Footer from '../_helper_components/global/footer/default';
 
-const StandardLayout = (props) => {
+const SectionLayout = (props) => {
   const [zone1, zone2, zone3, zone4, zone5] = props.children;
 
   const Ad = () => <div>Placeholder Ad</div>;
@@ -19,7 +19,7 @@ const StandardLayout = (props) => {
       <GlobalAdSlots />
       <BreakingNews />
       <NavBar />
-      <main className="c-standardContent">
+      <main className="c-sectionContent">
         <SectionHome feature={zone1} />
         <SectionHome feature={zone2} rightRailAd={Ad} />
         <SectionHome feature={zone3} />
@@ -31,10 +31,10 @@ const StandardLayout = (props) => {
   );
 };
 
-StandardLayout.sections = ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5'];
+SectionLayout.sections = ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5'];
 
-StandardLayout.propTypes = {
+SectionLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default StandardLayout;
+export default SectionLayout;
