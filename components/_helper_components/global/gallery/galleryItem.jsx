@@ -17,8 +17,6 @@ const GalleryItem = ({
 
   if (affiliationCredit && !affiliationCredit.includes('Credit:')) affiliationCredit = `Credit: ${affiliationCredit}`;
 
-  console.log('funcsiont given', func, index);
-
   return (
     <div
       ref={refHook}

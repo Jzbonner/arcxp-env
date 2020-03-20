@@ -262,9 +262,8 @@ const Gallery = (props) => {
   const renderDesktopGalleryElements = (elements) => {
     if (!isAdVisible) {
       const finalizedElements = handleImageFocus((elements), {
-        isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, clickCount,
+        isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
       }, clickFuncs);
-      console.log(elements);
 
       setElementData(finalizedElements);
       renderCaptionByCurrentIndex();
