@@ -27,7 +27,6 @@ const AmpPageLayout = () => {
       <AmpNavBar />
       <main>
         <header>
-          <Headline headlines={headlines} basicItems={basicItems} />
           <div className="b-margin-bottom-d15-m10 c-label-wrapper b-pageContainer">
             <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
           </div>
