@@ -2,14 +2,14 @@ const schemaName = 'query-feed';
 
 const params = {
   includeSources: 'text',
-  excludeSources: 'text',
   includeContentTypes: 'text',
-  excludeContentTypes: 'text',
   includeSections: 'text',
-  excludeSections: 'text',
   includeTags: 'text',
-  excludeTags: 'text',
   includeSubtypes: 'text',
+  excludeSources: 'text',
+  excludeContentTypes: 'text',
+  excludeSections: 'text',
+  excludeTags: 'text',
   exludeSubtypes: 'text',
 };
 
@@ -17,7 +17,6 @@ export const itemsToArray = (itemString = '') => itemString.split(',').map(item 
 
 const resolve = (query) => {
   const {
-    'arc-site': arcSite = 'ajc',
     includeSources = '',
     excludeSources = '',
     includeContentTypes = '',
@@ -31,7 +30,7 @@ const resolve = (query) => {
   } = query;
 
   const sourcesIncluded = itemsToArray(includeSources);
-  const souresExcluded = itemsToArray(excludeSources);
+  const sourcesExcluded = itemsToArray(excludeSources);
 
   const contentTypesIncluded = itemsToArray(includeContentTypes);
   const contentTypesExcluded = itemsToArray(excludeContentTypes);
@@ -56,22 +55,37 @@ const resolve = (query) => {
           },
           {
             nested: {
-              path: ['taxonomy.sections', 'source', 'type', 'taxonomy.tags', 'subtype'],
               query: {
                 bool: {
                   must: [
                     {
                       terms: {
                         'taxonomy.sections._id': sectionsIncluded,
-                        source: sourcesIncluded,
+                      },
+                    },
+                    {
+                      terms: {
+                        'source.system': sourcesIncluded,
+                      },
+                    },
+                    {
+                      terms: {
                         type: contentTypesIncluded,
-                        'taxonomy.tags': tagsIncluded,
+                      },
+                    },
+                    {
+                      terms: {
+                        'taxonomy.tags.text': tagsIncluded,
+                      },
+                    },
+                    {
+                      terms: {
                         subtype: subtypesIncluded,
                       },
                     },
                     {
                       term: {
-                        'taxonomy.sections._website': arcSite,
+                        'taxonomy.primary_section._website': 'ajc',
                       },
                     },
                   ],
@@ -83,22 +97,37 @@ const resolve = (query) => {
         must_not: [
           {
             nested: {
-              path: ['taxonomy.sections', 'source', 'type', 'taxonomy.tags', 'subtype'],
               query: {
                 bool: {
                   must: [
                     {
                       terms: {
                         'taxonomy.sections._id': sectionsExcluded,
-                        source: souresExcluded,
+                      },
+                    },
+                    {
+                      terms: {
+                        'source.system': sourcesExcluded,
+                      },
+                    },
+                    {
+                      terms: {
                         type: contentTypesExcluded,
-                        'taxonomy.tags': tagsExcluded,
+                      },
+                    },
+                    {
+                      terms: {
+                        'taxonomy.tags.text': tagsExcluded,
+                      },
+                    },
+                    {
+                      terms: {
                         subtype: subtypesExcluded,
                       },
                     },
                     {
                       term: {
-                        'taxonomy.sections._website': arcSite,
+                        'taxonomy.primary_section._website': 'ajc',
                       },
                     },
                   ],
@@ -113,7 +142,7 @@ const resolve = (query) => {
 
   const encodedBody = encodeURI(JSON.stringify(body));
 
-  return `/content/v4/search/published?body=${encodedBody}&website=${arcSite}`;
+  return `/content/v4/search/published?body=${encodedBody}&website=ajc`;
 };
 
 export default {
