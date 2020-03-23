@@ -1,0 +1,320 @@
+@import "./../../../src//styles/base/";
+
+.c-homeLeadContainer {
+  /////////////////
+  // Common styles
+  ////////////////
+
+  a {
+    color: inherit;
+  }
+
+  img {
+    border-radius: 6px;
+  }
+
+  .column-2 {
+    margin-bottom: 25px;
+  }
+
+  .homeList-image {
+    margin-right: 20px;
+  }
+
+  @include breakpoint(desktop-sm) {
+    display: flex;
+    justify-content: space-between;
+
+    .column-2 {
+      width: 52%;
+      margin-bottom: 0;
+    }
+
+    .column-3 {
+      width: 46%;
+    }
+  }
+
+  .c-homeList {
+    display: flex;
+    align-items: center;
+
+    @include breakpoint(tablet) {
+      align-items: flex-start;
+    }
+
+    @include breakpoint(desktop-sm) {
+      display: block;
+    }
+
+    .homeList-text {
+
+      .c-label-wrapper {
+        @include text-styles(.75rem, 1, "Average");
+      }
+
+      .headline {
+        @include text-styles(1.125rem, 1.25, "Average");
+
+        letter-spacing: -.24px;
+
+        @media (min-width: 1600px) {
+          @include text-styles(1.25rem, 1.25, "Average");
+        }
+      }
+    }
+  }
+
+  /////////////////////
+  // Top Display Class Styles
+  /////////////////////
+
+  &.top-photo-display-class {
+
+    .column-3 {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .c-homeList {
+        box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+        margin: 0 -30px 20px;
+        padding: 20px;
+
+        @include breakpoint(tablet) {
+          margin-right: 0;
+          margin-left: 0;
+        }
+
+        @include breakpoint(desktop-sm) {
+          box-shadow: none;
+          padding: 0;
+          width: 48%;
+          margin: 0 0 40px;
+        }
+
+        .homeList-image {
+          max-width: 35%;
+
+          @include breakpoint(desktop-sm) {
+            max-width: 100%;
+          }
+        }
+
+        .homeList-text {
+          max-width: 65%;
+
+          @include breakpoint(desktop-sm) {
+            max-width: 100%;
+          }
+
+          .c-label-wrapper {
+            text-align: left;
+            margin: 0 0 7px;
+
+            @include breakpoint(desktop-sm) {
+              margin: 0 auto 12px;
+              text-align: center;
+              min-height: 25px;
+            }
+
+            @include breakpoint(desktop-lg) {
+              text-align: center;
+              min-height: initial;
+            }
+          }
+
+          .headline {
+            margin-bottom: 0;
+
+            @include breakpoint(desktop-sm) {
+              text-align: center;
+            }
+          }
+        }
+      }
+
+      @include breakpoint(desktop-sm) {
+
+        .c-homeList:nth-child(3),
+        .c-homeList:nth-child(4) {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  /////////////////////
+  // Left Photo Display Class Styles
+  /////////////////////
+
+  &.left-photo-display-class {
+
+    .c-homeList {
+      margin-bottom: 20px;
+      box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+      padding: 20px;
+      margin-left: -30px;
+      margin-right: -30px;
+
+      @include breakpoint(tablet) {
+        margin-right: 0;
+        margin-left: 0;
+      }
+
+      @include breakpoint(desktop-sm) {
+        display: flex;
+        padding: 0;
+        box-shadow: none;
+      }
+
+      .homeList-image {
+        max-width: 50%;
+
+        @include breakpoint(desktop-sm) {
+          max-width: 35%;
+        }
+      }
+
+      .homeList-text {
+        @include breakpoint(desktop-sm) {
+          max-width: 50%;
+        }
+
+        @include breakpoint(desktop-sm) {
+          max-width: 65%;
+        }
+
+        .c-label-wrapper {
+          text-align: left;
+          margin: 0 0 7px;
+        }
+
+        .headline {
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  /////////////////////
+  //  No Photo Display Class Styles
+  /////////////////////
+
+  &.no-photo-display-class {
+
+    .title {
+      @include text-styles(2rem, 1, "Average");
+    }
+
+    .c-homeList {
+
+      .c-label-wrapper {
+        text-align: left;
+        margin: 20px 0 7px;
+      }
+
+      .headline {
+        text-align: left;
+      }
+
+      .homeList-image {
+        display: none;
+      }
+
+      .homeList-text {
+        padding-bottom: 20px;
+        border-bottom: 2px solid #f1f1f2;
+        width: 100%;
+
+        .headline {
+          @include breakpoint(tablet) {
+            @include text-styles(1.125rem, 1.25, "Average");
+          }
+        }
+      }
+    }
+  }
+
+  /////////////////////
+  // Center Lead Display Class Styles
+  /////////////////////
+
+  &.center-lead-display-class {
+    flex-direction: column;
+    display: flex;
+
+    @include breakpoint(desktop-sm) {
+      flex-direction: row;
+    }
+
+    .column-1,
+    .column-3 {
+      margin-right: -30px;
+      margin-left: -30px;
+
+      @include breakpoint(tablet) {
+        margin-right: 0;
+        margin-left: 0;
+      }
+
+      @include breakpoint(desktop-sm) {
+        width: 22%;
+      }
+    }
+
+    .column-2 {
+      order: -1;
+
+      @include breakpoint(desktop-sm) {
+        width: 52%;
+        order: 0;
+      }
+    }
+
+    .c-homeList {
+      margin-bottom: 20px;
+      box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+      padding: 20px;
+
+      @include breakpoint(desktop-sm) {
+        box-shadow: none;
+        padding: 0;
+      }
+
+      .homeList-text {
+        width: 50%;
+
+        @include breakpoint(desktop-sm) {
+          width: 100%;
+        }
+
+        .c-label-wrapper {
+          text-align: left;
+          margin: 0 0 7px;
+
+          @include breakpoint(desktop-sm) {
+            margin: 0 auto 12px;
+            text-align: center;
+          }
+
+          @include breakpoint(desktop-lg) {
+            text-align: center;
+          }
+        }
+
+        .headline {
+          margin-bottom: 0;
+
+          @include breakpoint(desktop-sm) {
+            text-align: center;
+          }
+        }
+      }
+
+      .homeList-image {
+        width: 50%;
+      }
+    }
+  }
+}
