@@ -66,6 +66,79 @@
   }
 
   /////////////////////
+  // One-Two Item Display Class Styles
+  /////////////////////
+
+  &.one-two-item-display-class {
+
+    .column-1 {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      width: 100%;
+
+      @include breakpoint(desktop-sm) {
+        flex-direction: row;
+      }
+
+      .home-headline {
+        flex: 1;
+        margin-bottom: 40px;
+
+        @include breakpoint(desktop-sm) {
+          margin: 0 2% 0 0;
+        }
+
+        .headline {
+          @include text-styles(1.25rem, 1.25, "Average");
+        }
+      }
+
+      .home-headline:last-child {
+        margin-right: 0;
+      }
+    }
+
+    &.one-column {
+
+      .home-headline {
+        padding-top: 48%;
+
+        @include breakpoint(tablet) {
+          padding-top: 53%;
+        }
+      }
+    }
+
+    &.two-columns {
+
+      .home-headline {
+        @include breakpoint(desktop-sm) {
+          padding-top: 24%;
+        }
+      }
+    }
+
+    &.three-columns {
+
+      .home-headline {
+        @include breakpoint(desktop-sm) {
+          padding-top: 14%;
+        }
+      }
+    }
+
+    &.four-columns {
+
+      .home-headline {
+        @include breakpoint(desktop-sm) {
+          padding-top: 10%;
+        }
+      }
+    }
+  }
+
+  /////////////////////
   // Top Display Class Styles
   /////////////////////
 

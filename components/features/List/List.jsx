@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import './List.scss';
+import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
+import getDisplayClassMap from '../../layouts/_helper_functions/homepage/getDisplayClassMap';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
+import './List.scss';
 
 const List = (customFields = {}) => {
   const {
@@ -14,36 +16,6 @@ const List = (customFields = {}) => {
       columns = 1,
     },
   } = customFields;
-
-  function getDisplayClassMap(displayC) {
-    switch (displayC) {
-      case 'Top Photo':
-        return 'top-photo-display-class';
-      case 'Left Photo':
-        return 'left-photo-display-class';
-      case 'No Photo':
-        return 'no-photo-display-class';
-      case 'Link':
-        return 'link-display-class';
-      default:
-        return 'top-photo-display-class';
-    }
-  }
-
-  function getColumnsMap(columnsC) {
-    switch (columnsC) {
-      case 1:
-        return 'one-column';
-      case 2:
-        return 'two-columns';
-      case 3:
-        return 'three-columns';
-      case 4:
-        return 'four-columns';
-      default:
-        return 'one-column';
-    }
-  }
 
   const data = useContent({
     source: contentService,
