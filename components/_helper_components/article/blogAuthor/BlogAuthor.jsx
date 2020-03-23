@@ -29,7 +29,7 @@ const BlogAuthor = ({ subtype, authorData }) => {
                     <a className="btn-facebook" href={val.social_links[1].url} />
                   )}
                   {val.social_links && val.social_links[2] && val.social_links[2].url && (
-                    <a className="btn-twitter" href={val.social_links[2].url} />
+                    <a className="btn-twitter" href={`https://twitter.com/${val.social_links[2].url}`} />
                   )}
                 </div>
               )}
