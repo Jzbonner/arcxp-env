@@ -5,7 +5,7 @@
   border: none;
   max-width: 1600px;
   margin: 0 auto;
-  width: 90%;
+  width: 94%;
   display: none;
   align-items: center;
 
@@ -23,9 +23,34 @@
   margin-top: 10px;
 }
 
+.sticky-logo-homepage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+
+  @include breakpoint(desktop-sm) {
+    display: none;
+  }
+
+  img {
+    width: 75px;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
 .c-stickyLogin {
   justify-content: flex-end;
-  margin-bottom: 10px;
+  align-items: center;
+  // margin-bottom: 10px;
+
+  @include breakpoint (desktop-sm) {
+    margin-bottom: 10px;
+  }
 
   .nav-items {
     padding-top: 0;
@@ -45,11 +70,21 @@
 
   &.hidden {
     display: none;
+
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
   }
 }
 
 .stickyNav-homepage {
-  display: flex;
+  display: none;
+  width: 100%;
+
+  @include breakpoint (desktop-sm) {
+    display: flex;
+    height: 45px;
+  }
 
   &.hidden {
     display: none;
@@ -69,7 +104,6 @@
 
   .stickyNav-item {
     list-style: none;
-    padding-bottom: .313em;
     margin: 0 6px;
 
     @include breakpoint(desktop-sm) {
@@ -77,8 +111,8 @@
     }
 
     img {
-      width: 71px;
-      height: 39px;
+      width: 75px;
+      height: 56px;
     }
 
     a {
@@ -105,6 +139,10 @@
       overflow: hidden;
       height: 45px;
 
+      .stickyNav-item {
+        padding-bottom: .313em;
+      }
+      
       .stickyNav-item:first-child {
         padding-top: .313em;
       }
@@ -122,13 +160,14 @@
 
       .arrow-icon {
         display: block;
+        padding-bottom: .313em;
       }
     }
   }
 
   .nav-menu-toggle {
     position: relative;
-    margin-right: 6px;
-    margin-bottom: .313em;
+    margin-right: 5px;
+    // margin-bottom: .313em;
   }
 }

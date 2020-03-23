@@ -146,7 +146,12 @@ const StickyNav = ({
           </div>
         </ul>
         <div className='b-flexRow c-stickyLogin'>
-          <div className={`stickyNav-homepage b-flexRow ${type === 'homepage-basic' || type === 'section-basic' ? '' : 'hidden'}`}>
+          <div className={`sticky-logo-homepage ${type === 'homepage-basic' || type === 'section-basic' ? '' : 'hidden'}`}>
+            <a href={siteDomainURL}>
+              <img src={logo} alt={`${siteName} logo`} />
+            </a>
+          </div>
+          <div className={`stickyNav-homepage ${type === 'homepage-basic' || type === 'section-basic' ? '' : 'hidden'}`}>
             {sections}
           </div>
           <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
