@@ -46,7 +46,6 @@
 .c-stickyLogin {
   justify-content: flex-end;
   align-items: center;
-  // margin-bottom: 10px;
 
   @include breakpoint (desktop-sm) {
     margin-bottom: 10px;
