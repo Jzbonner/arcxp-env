@@ -251,9 +251,7 @@ export const adSlots = {
   MPG01: {
     slotName: 'MPG01',
     dimensions: [
-      [
-        [300, 250],
-      ],
+      [300, 250],
     ],
     breakpoints: [
       [1, 0], // mobile

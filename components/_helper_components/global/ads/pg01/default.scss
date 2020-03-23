@@ -11,16 +11,7 @@
   padding-top: 3.125rem;
   overflow-y: hidden;
 
-  .arc_ad {
-
-    .arcad {
-
-      &:not(:empty) {
-        
-        &:before {
-          color: #fff;
-        }
-      }
-    }
+  .arc_ad .arcad:not(:empty):before {
+    color: #fff;
   }
 }

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './default.scss';
 
 const MPGO1Element = ({ adSlot, refHook }) => (
     <div id="ad-mpgo1-parent" ref={refHook} className="mpg01-container">
-      <>{adSlot && adSlot()}</>
+      {adSlot && adSlot()}
     </div>
 );
 

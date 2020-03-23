@@ -4,7 +4,7 @@ import './default.scss';
 
 const PGO1Element = ({ adSlot, refHook }) => (
     <div id="ad-pgo1-parent" ref={refHook} className="pg01-container">
-      <>{adSlot && adSlot()}</>
+      {adSlot && adSlot()}
     </div>
 );
 

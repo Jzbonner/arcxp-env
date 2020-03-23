@@ -439,7 +439,7 @@ const Gallery = (props) => {
     return () => {
       window.removeEventListener('scroll', handleScrollEvent, true);
     };
-  }, [currentIndex, isCaptionOn, isAdInsertable]);
+  }, [currentIndex, isCaptionOn, isAdInsertable, mobileAdsIndices, isAdInsertable, offsetHeight]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
