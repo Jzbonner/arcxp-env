@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
@@ -24,7 +23,7 @@ const Lead = (customFields = {}) => {
 
 Lead.propTypes = {
   customFields: PropTypes.shape({
-    content: PropTypes.contentConfig('collections').tag({
+    content: PropTypes.contentConfig('collections', 'query-feed').tag({
       name: 'Content',
     }),
     startIndex: PropTypes.number.tag({
