@@ -104,7 +104,7 @@ const StickyNav = ({
   return (
     <>
       <div className={`stickyNav 
-      ${stickyVisibilityRef.current && (type !== 'homepage-basic' || type !== 'section-basic') ? 'is-visible' : ''}`}>
+      ${stickyVisibilityRef.current && (type !== 'homepage-basic' && type !== 'section-basic') ? 'is-visible' : ''}`}>
         <ul className="c-stickyNav-list">
         <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
           <div className='nav-flyout-button'>
