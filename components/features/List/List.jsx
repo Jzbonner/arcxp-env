@@ -4,7 +4,7 @@ import { useContent } from 'fusion:content';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
 import getDisplayClassMap from '../../layouts/_helper_functions/homepage/getDisplayClassMap';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
-import './List.scss';
+import './list.scss';
 
 const List = (customFields = {}) => {
   const {
