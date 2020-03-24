@@ -17,6 +17,9 @@ const handleImageFocus = (arr = [], states = {}, funcs = {}) => {
   if (nextIndex > maxIndex) nextIndex = 0;
 
   const finalElements = arr.map((element) => {
+    // if it's an ad, return it
+    if (element.props.adSlot) return element;
+
     const elementItemData = { ...element.props.data };
     const parentStates = {
       isStickyVisible,

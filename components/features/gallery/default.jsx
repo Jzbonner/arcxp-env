@@ -7,16 +7,23 @@ import {
 import {
   debounce, createBaseGallery, handleImageFocus, reorganizeElements,
 } from './_helper_functions/index';
+import ArcAd from '../ads/default';
+import PGO1Element from '../../_helper_components/global/ads/pg01/default';
+import MPGO1Element from '../../_helper_components/global/ads/mpg01/default';
 import leftArrow from '../../../resources/icons/gallery/left-arrow.svg';
 import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
 import './default.scss';
 
+const PG01 = () => <ArcAd staticSlot={'PG01'} key={'PG01'} />;
+const PG02 = () => <ArcAd staticSlot={'PG02'} key={'PG02'} />;
+const MPG01 = () => <ArcAd staticSlot={'MPG01'} key={'MPG01'} />;
 
 const Gallery = (props) => {
   const {
-    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {},
+    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '',
   } = props;
+
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
   const [mobileElementData, setMobileElementData] = useState(null);
@@ -31,6 +38,12 @@ const Gallery = (props) => {
   const [baseCaptionData, setBaseCaptionData] = useState(null);
   // only used if 'raw' contentElements are proped down from article
   const [galHeadline, setHeadline] = useState(null);
+  // holds true max # of photos ( w/o changing value when adding ads into Element array)
+  const [maxIndex, setMaxIndex] = useState(null);
+
+  /* Ads */
+  const [clickCount, setClickCount] = useState(0);
+  const [isAdVisible, setAdVisibleState] = useState(false);
 
   /* Mobile */
   const [offsetHeight, setHeight] = useState(0);
@@ -38,9 +51,18 @@ const Gallery = (props) => {
   const [isStickyVisible, setStickyState] = useState(false);
   const [isMobile, setMobileState] = useState('NOT INIT');
 
+  /* Mobile Ads */
+  const [mobileAdsIndices, setMobileAdsIndices] = useState([]);
+  const [photosScrolled, setPhotosScrolled] = useState(0);
+  const [isAdInsertable, setAdInsertionAbleState] = useState(true);
+  const [adOffsetHeight, setAdOffsetHeight] = useState(0);
+  const [currentAdCount, setCurrentAdCount] = useState(0);
+
+
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
   const debugFixEl = useRef(null);
+  const PG01Ref = useRef(null);
   const mobileBreakPoint = 1023;
 
   const actions = {
@@ -49,6 +71,7 @@ const Gallery = (props) => {
     ON: 'ON',
     OFF: 'OFF',
     RESIZE: 'RESIZE',
+    AD_RESET: 'AD_RESET',
   };
 
   let mobileElemData;
@@ -64,17 +87,26 @@ const Gallery = (props) => {
       path: galleryUrl,
     },
   });
-  const maxIndex = elementData && elementData.length > 1 ? elementData.length - 1 : mobileElementData && mobileElementData.length - 1;
+
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic ? headlines.basic : null;
+
+  if (!maxIndex) {
+    if (elementData && elementData.length > 1) {
+      setMaxIndex(elementData.length - 1);
+    } else if (mobileElementData && mobileElementData.length > 1) {
+      setMaxIndex(mobileElementData.length - 1);
+    }
+  }
 
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
     if (isMobile) return;
     let translateAmount;
-    const focusElement = document.getElementById(`gallery-item-${currentIndex}`) || null;
+    const focusElement = isAdVisible ? PG01Ref.current : (document.getElementById(`gallery-item-${currentIndex}`) || null);
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
+
     if (galleryEl.current && focusElement) {
       // fixes initializing translate bug...?
       if (debugFixEl.current && focusElement.offsetWidth === 0) {
@@ -91,34 +123,102 @@ const Gallery = (props) => {
     }
   };
 
-  const changeIndex = (action, maxNumber) => {
-    // change current image index by -1
-    if (action === actions.PREV) {
-      setCurrentAction(action);
-      if (currentIndex <= 0) {
-        if (!maxIndex) {
-          setCurrentIndex(maxNumber);
-        } else {
-          setCurrentIndex(maxIndex);
-        }
-      } else {
-        setCurrentIndex(currentIndex - 1);
-      }
+  // manages click count for desktop ads
+  const handleClickCount = () => {
+    if (clickCount === 4) {
+      setClickCount(1);
+    } else {
+      setClickCount(clickCount + 1);
     }
-    // change current image index by +1
-    if (action === actions.NEXT) {
-      setCurrentAction(action);
-      if (currentIndex === maxIndex) {
-        setCurrentIndex(0);
-      } else {
-        setCurrentIndex(currentIndex + 1);
+  };
+
+  // manages photo scrolling count for mobile ads
+  const handleScrollCount = () => {
+    if (photosScrolled === 4) {
+      setPhotosScrolled(0);
+    } else {
+      setPhotosScrolled(photosScrolled + 1);
+    }
+  };
+
+  const changeIndex = (action, maxNumber) => {
+    const currentClickCount = clickCount;
+    if (!isMobile) {
+      handleClickCount();
+    } else {
+      handleScrollCount();
+    }
+
+    if ((!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0))
+      || (isAdVisible && currentClickCount === 4)) {
+      // change current image index by -1
+      if (action === actions.PREV) {
+        setCurrentAction(action);
+        if (!isAdVisible || (currentClickCount % 4) === 0) {
+          if (currentIndex <= 0) {
+            if (!maxIndex) {
+              setCurrentIndex(maxNumber);
+            } else {
+              setCurrentIndex(maxIndex);
+            }
+          } else {
+            setCurrentIndex(currentIndex - 1);
+          }
+        }
       }
+      // change current image index by +1
+      if (action === actions.NEXT) {
+        setCurrentAction(action);
+        if (!isAdVisible || ((currentClickCount % 4) === 0)) {
+          if (currentIndex === maxIndex) {
+            setCurrentIndex(0);
+          } else {
+            setCurrentIndex(currentIndex + 1);
+          }
+        }
+      }
+    } else {
+      setCurrentIndex(currentIndex);
     }
   };
 
   const clickFuncs = {
     prev: () => changeIndex(actions.PREV),
     next: () => changeIndex(actions.NEXT),
+  };
+
+
+  const insertDesktopGalleryAd = () => {
+    const elements = [...elementData];
+    elementData.forEach((element, i) => {
+      // inserts add after current photo
+      if (element.props.data.states.isFocused) elements.splice(i + 1, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} key={`${i}-PG01`} />);
+    });
+
+    return elements;
+  };
+
+  const insertMobileGalleryAd = () => {
+    const mobileElements = [...mobileElementData];
+    let hasAdBeenInserted = false;
+
+    mobileElementData.forEach((element, i) => {
+      if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted && photosScrolled === 3) {
+        mobileElements.splice(element.props.data.index + 1, 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
+        hasAdBeenInserted = true;
+      }
+    });
+    return mobileElements;
+  };
+
+  const removeGalleryAd = () => {
+    const elements = [...elementData];
+
+    elementData.forEach((element, i) => {
+      if (element.props.adSlot) elements.splice(i, 1);
+    });
+
+    return elements;
   };
 
   // opens mobile sticky
@@ -138,6 +238,14 @@ const Gallery = (props) => {
   // close mobile sticky
   const handleStickyClose = () => {
     setStickyState(false);
+    setCurrentAction(actions.AD_RESET);
+    setCurrentIndex(0);
+    setHeight(0);
+    setMobileAdsIndices([]);
+    setAdInsertionAbleState(true);
+    setPhotosScrolled(0);
+    setAdOffsetHeight(0);
+    setCurrentAdCount(0);
   };
 
   const renderCaptionByCurrentIndex = () => {
@@ -157,11 +265,14 @@ const Gallery = (props) => {
   };
 
   const renderDesktopGalleryElements = (elements) => {
-    const finalizedElements = handleImageFocus(elements, {
-      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
-    }, clickFuncs);
-    setElementData(finalizedElements);
-    renderCaptionByCurrentIndex();
+    if (!isAdVisible) {
+      const finalizedElements = handleImageFocus((elements), {
+        isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
+      }, clickFuncs);
+
+      setElementData(finalizedElements);
+      renderCaptionByCurrentIndex();
+    }
   };
 
   const handleNext = (arr) => {
@@ -193,13 +304,38 @@ const Gallery = (props) => {
     }
   };
 
+  // keeps tracks of which photos have already been scrolled through to prevent redundent ad insetions (mobile)
+  const addIndexToListForAds = (index) => {
+    const indexArray = [...mobileAdsIndices];
+
+    if (!mobileAdsIndices.includes(index)) indexArray.push(index);
+
+    return setMobileAdsIndices(indexArray);
+  };
+
   // tracks which photo user is on (scrolling mobile gallery)
   const handleScrollEvent = debounce(() => {
     if (galleryMobileEl.current) {
       const index = currentIndex;
       const galleryScrollTop = galleryMobileEl.current.scrollTop;
-      const targetElementoffsetHeight = document.getElementById(`gallery-item-${index}`).offsetHeight;
-      const targetHeight = offsetHeight + targetElementoffsetHeight;
+      const targetElementoffsetHeight = document.getElementById(`gallery-item-${index}`).scrollHeight;
+
+      const mpg01AdHeight = (document.getElementById('ad-mpgo1-parent')
+      && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
+
+      // accounts for height of ad * number of ads
+      const targetHeight = offsetHeight + (targetElementoffsetHeight) + ((adOffsetHeight) * currentAdCount);
+
+      if (!adOffsetHeight && mpg01AdHeight) setAdOffsetHeight(mpg01AdHeight);
+
+      // lazy loading ads
+      if (isAdInsertable && !mobileAdsIndices.includes(index) && mobileElementData && photosScrolled === 3) {
+        const adInsertedMobileArray = insertMobileGalleryAd();
+        setMobileElementData(adInsertedMobileArray);
+        setAdInsertionAbleState(false);
+        setCurrentAdCount(currentAdCount + 1);
+      }
+
       if (offsetHeight === 0 && (galleryScrollTop > targetElementoffsetHeight)) {
         setHeight(offsetHeight + targetElementoffsetHeight);
         changeIndex(actions.NEXT);
@@ -215,6 +351,7 @@ const Gallery = (props) => {
 
         if ((galleryScrollTop < offsetHeight) && index !== 0) {
           newHeight = offsetHeight - previousTarget;
+
           setHeight(newHeight);
           changeIndex(actions.PREV);
         }
@@ -224,10 +361,12 @@ const Gallery = (props) => {
           changeIndex(actions.NEXT);
         }
       }
+
+      addIndexToListForAds(index);
     }
 
     return null;
-  }, 10);
+  }, 4);
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
@@ -241,6 +380,9 @@ const Gallery = (props) => {
   // maps mobile elements with updated parent states
   const getMobileElements = (arr) => {
     const finalElements = arr.map((element) => {
+      // if the element is an ad, just return it
+      if (element.props.adSlot && element.props.adSlot.name && element.props.adSlot.name === 'MPG01') return element;
+
       const elementItemData = { ...element.props.data };
       const parentStates = {
         isStickyVisible,
@@ -248,6 +390,7 @@ const Gallery = (props) => {
         isCaptionOn,
       };
       elementItemData.states = { ...parentStates };
+
       return (
         <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`} />
       );
@@ -269,18 +412,39 @@ const Gallery = (props) => {
   }, []);
 
   useEffect(() => {
-    if (elementData && !isStickyVisible && currentAction !== '') {
-      finalizeGalleryItems();
-    }
-  }, [currentIndex]);
+    if (elementData && !isStickyVisible && currentAction !== '') finalizeGalleryItems();
+    if (isMobile && isStickyVisible) setAdInsertionAbleState(true);
+  }, [currentIndex, isAdVisible]);
 
   useEffect(() => {
     if (!isMobile) calculateTranslateX();
-  }, [currentIndex, currentAction, translateX, elementData, captionData, galleryEl]);
+  }, [isAdVisible, currentIndex, currentAction, translateX, elementData, captionData, galleryEl]);
 
   useEffect(() => {
-    if (!isMobile) renderCaptionByCurrentIndex();
+    if (!isAdVisible && !isMobile) renderCaptionByCurrentIndex();
   }, [baseCaptionData]);
+
+  // handles ad intertions and removals for desktop gallery
+  useEffect(() => {
+    if (!isMobile) {
+      if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
+
+      if (!isAdVisible && clickCount && clickCount % 4 === 0) {
+        const adInsertedElementArray = insertDesktopGalleryAd();
+        setElementData(adInsertedElementArray);
+        renderDesktopGalleryElements([...adInsertedElementArray]);
+      } else if (isAdVisible && (clickCount % 4) === 1) {
+        const adRemovedElementArray = removeGalleryAd();
+        setAdVisibleState(false);
+        const finalizedElements = handleImageFocus((adRemovedElementArray), {
+          isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
+        }, clickFuncs);
+
+        setElementData(finalizedElements);
+        renderCaptionByCurrentIndex();
+      }
+    }
+  }, [isAdVisible, clickCount]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScrollEvent, true);
@@ -289,7 +453,7 @@ const Gallery = (props) => {
     return () => {
       window.removeEventListener('scroll', handleScrollEvent, true);
     };
-  }, [currentIndex, isCaptionOn]);
+  }, [currentIndex, isCaptionOn, isAdInsertable, mobileAdsIndices, isAdInsertable, offsetHeight, adOffsetHeight, currentAdCount]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
@@ -301,7 +465,7 @@ const Gallery = (props) => {
   // initializing the gallery w/ either propped or fetched content elements
   // NOTE: leafContentElements = Gallery-page-only propped contentElements array
   if (isMobile !== 'NOT INIT' && ((contentElements || leafContentElements || fetchedGalleryData || featuredGalleryData)
-    && (currentAction === actions.RESIZE || (!elementData && !mobileElementData)))) {
+    && ((currentAction === actions.RESIZE || currentAction === actions.AD_RESET) || (!elementData && !mobileElementData)))) {
     let relevantGalleryData = null;
     let galleryContentElements = null;
     let fetchedContentElements = null;
@@ -343,10 +507,12 @@ const Gallery = (props) => {
       }
 
       if (!baseCaptionData) setBaseCaptionData(desktopCaptionData);
-    } else if (!mobileElementData) {
+    } else if (!mobileElementData || currentAction === actions.AD_RESET) {
       const baseElementsForMobile = [...galleryData];
-      setMobileState(true);
+      if (!isMobile) setMobileState(true);
       setMobileElementData(baseElementsForMobile);
+      setMobileAdsIndices([]);
+      setCurrentAction('');
     }
   }
 
@@ -377,6 +543,7 @@ const Gallery = (props) => {
   return (
     <>
       {isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
+      {pageType !== 'Article' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02()}</div> : null}
       <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
         {!isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
         {
@@ -421,7 +588,7 @@ const Gallery = (props) => {
             </div>
             <div className="count--box hidden-small hidden-medium">
               <span className="gallery-index">{currentIndex + 1} / </span>
-              <span>{maxIndex + 1}</span>
+              <span>{maxIndex && maxIndex + 1}</span>
             </div>
           </div>
         </div>
@@ -435,6 +602,8 @@ Gallery.propTypes = {
   contentElements: PropTypes.array,
   leafContentElements: PropTypes.array,
   promoItems: PropTypes.object,
+  ads: PropTypes.array,
+  pageType: PropTypes.string,
   customFields: PropTypes.shape({
     galleryUrl: PropTypes.string.tag({
       label: 'Gallery URL',

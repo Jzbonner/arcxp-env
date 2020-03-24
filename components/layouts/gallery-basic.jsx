@@ -5,6 +5,7 @@ import Headline from '../_helper_components/article/headline/default.jsx';
 import NavBar from '../_helper_components/global/navBar/default';
 import Gallery from '../features/gallery/default';
 import Footer from '../_helper_components/global/footer/default';
+import '../../src/styles/container/_article-basic.scss';
 
 const GalleryPageLayout = () => {
   const appContext = useAppContext();
@@ -17,6 +18,7 @@ const GalleryPageLayout = () => {
     comments,
     canonical_url: articleURL,
     type,
+    subtype,
     credits,
     description,
     streams,
@@ -38,7 +40,7 @@ const GalleryPageLayout = () => {
           <Headline headlines={headlines} basicItems={basicItems} />
         </div>
         <div className="c-main-gallery">
-          <Gallery leafContentElements={contentElements} />
+          <Gallery leafContentElements={contentElements} pageType={subtype} />
         </div>
       </main>
       <Footer />

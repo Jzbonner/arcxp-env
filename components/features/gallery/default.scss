@@ -83,6 +83,16 @@
   @include text-styles(.88rem, normal, "Gordita");
 }
 
+.gallery-ads-PG02 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .arc_ad .arcad:not(:empty):before {
+    content: "";
+  }
+}
+
 .gallery-overlay {
   position: absolute;
   top: 0;

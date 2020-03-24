@@ -25,6 +25,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const { slot: customFieldsSlot } = customFields || {};
   const { dfp_id: dfpid, siteName } = getProperties();
   const slot = customFieldsSlot || staticSlot;
+  let randomIdMPG01 = null;
   const currentEnv = ENVIRONMENT || 'unknown';
   const contentType = subtype || type;
 
@@ -59,6 +60,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
   // use their slotname if given, otherwise default to the slot for this ad type
   const slotName = adConfig.slotName || slot;
 
+  if (staticSlot && staticSlot.includes('MPG01')) randomIdMPG01 = Math.floor(Math.random() * 999999);
   // define global targeting values
   const globalTargeting = {
     obj_type: contentType,
@@ -77,7 +79,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
       dfpId={`${dfpid}/${currentEnv.toLowerCase().indexOf('prod') === -1 ? 'TEST_' : ''}atlanta_np/ajc_web_default`}
       display={adConfig.display || defaultAdSlot.display}
-      id={`${defaultAdSlot.name}${staticSlot || slot}`}
+      id={`${defaultAdSlot.name}${staticSlot || slot}${randomIdMPG01 && `-${randomIdMPG01}`}`}
       slotName={slotName}
       targeting={{ ...globalTargeting, ...targeting }}
     />

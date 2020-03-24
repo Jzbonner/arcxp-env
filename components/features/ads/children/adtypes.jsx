@@ -230,4 +230,32 @@ export const adSlots = {
     ],
     display: 'mobile',
   },
+  PG01: {
+    slotName: 'PG01',
+    dimensions: [
+      [600, 400],
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+    ],
+  },
+  PG02: {
+    slotName: 'PG02',
+    dimensions: [
+      [88, 31],
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+    ],
+  },
+  MPG01: {
+    slotName: 'MPG01',
+    dimensions: [
+      [300, 250],
+    ],
+    breakpoints: [
+      [1, 0], // mobile
+    ],
+    display: 'mobile',
+  },
 };
