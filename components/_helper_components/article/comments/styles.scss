@@ -13,8 +13,11 @@
   position: fixed;
   right: 0;
   top: 90px;
-  overflow: auto;
+  overflow-y: scroll;
   max-height: calc(100vh - 90px + 4px);
+
+  // Needed for scolling on iOS12
+  -webkit-overflow-scrolling: touch;
 
   @include breakpoint(tablet) {
     width: 600px;

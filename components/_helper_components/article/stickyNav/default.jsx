@@ -10,7 +10,7 @@ import '../../global/navBar/default.scss';
 
 const StickyNav = ({
   articleURL, headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
-  isMobileVisibilityRef, logoRef, setToggle, paddingRef,
+  isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections,
 }) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
@@ -103,7 +103,8 @@ const StickyNav = ({
 
   return (
     <>
-      <div className={`stickyNav  ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
+      <div className={`stickyNav 
+      ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
         <ul className="c-stickyNav-list">
         <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
           <div className='nav-flyout-button'>
@@ -114,35 +115,45 @@ const StickyNav = ({
               <img className="sticky-logo" src={logo} alt={`${siteName} logo`} />
             </a>
           </li>
-          <li className="stickyNav-item">
-            <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
-          </li>
-          <li className="stickyNav-item">
-            <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
-          </li>
-          <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
-            <li className="stickyNav-item arrow-icon desktop-hidden" onClick={e => toggleMobileDropdownMenu(e)}>
-              <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
+          <div className={`stickyNav-social ${type === 'homepage-basic' || type === 'section-basic' ? 'hidden' : ''}`}>
+            <li className="stickyNav-item">
+              <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
             </li>
             <li className="stickyNav-item">
-              <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
+              <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
             </li>
-            <li className="stickyNav-item">
-              <a href={shareLinkReddit} className="sticky-nav-icon btn-reddit" target="__blank"></a>
-            </li>
-            <li className="stickyNav-item">
-              <a href={shareLinkEmail} className="sticky-nav-icon btn-mail" target="__blank"></a>
-            </li>
-            {commentsEnabled ? (
-              <li className="stickyNav-item">
-                <a href="#" className="sticky-nav-icon btn-comments" onClick={e => toggleCommentsWindow(e)}>
-                  <span className="fb-comments-count" data-href={window.location.href}></span>
-                </a>
+            <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
+              <li className="stickyNav-item arrow-icon desktop-hidden" onClick={e => toggleMobileDropdownMenu(e)}>
+                <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
               </li>
-            ) : null}
-          </ul>
+              <li className="stickyNav-item">
+                <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
+              </li>
+              <li className="stickyNav-item">
+                <a href={shareLinkReddit} className="sticky-nav-icon btn-reddit" target="__blank"></a>
+              </li>
+              <li className="stickyNav-item">
+                <a href={shareLinkEmail} className="sticky-nav-icon btn-mail" target="__blank"></a>
+              </li>
+              {commentsEnabled ? (
+                <li className="stickyNav-item">
+                  <a href="#" className="sticky-nav-icon btn-comments" onClick={e => toggleCommentsWindow(e)}>
+                    <span className="fb-comments-count" data-href={window.location.href}></span>
+                  </a>
+                </li>
+              ) : null}
+            </ul>
+          </div>
         </ul>
         <div className='b-flexRow c-stickyLogin'>
+          <div className={`sticky-logo-homepage ${type === 'homepage-basic' || type === 'section-basic' ? '' : 'hidden'}`}>
+            <a href={siteDomainURL}>
+              <img src={logo} alt={`${siteName} logo`} />
+            </a>
+          </div>
+          <div className={`stickyNav-homepage ${type === 'homepage-basic' || type === 'section-basic' ? '' : 'hidden'}`}>
+            {sections}
+          </div>
           <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
         </div>
       </div>
@@ -163,6 +174,8 @@ StickyNav.propTypes = {
   setToggle: PropTypes.func,
   paddingRef: PropTypes.object,
   hamburgerToggle: PropTypes.bool,
+  type: PropTypes.string,
+  sections: PropTypes.array,
 };
 
 export default StickyNav;

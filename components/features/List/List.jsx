@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import Image from '../../_helper_components/global/image/default';
-import SectionLabel from '../../_helper_components/global/sectionLabel/default';
-import TimeStamp from '../../_helper_components/article/timestamp/default';
+import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
+import getDisplayClassMap from '../../layouts/_helper_functions/homepage/getDisplayClassMap';
+import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import './list.scss';
 
 const List = (customFields = {}) => {
@@ -17,49 +17,6 @@ const List = (customFields = {}) => {
     },
   } = customFields;
 
-  function getDisplayClassMap(displayC) {
-    switch (displayC) {
-      case 'Top Photo':
-        return 'top-photo-display-class';
-      case 'Left Photo':
-        return 'left-photo-display-class';
-      case 'No Photo':
-        return 'no-photo-display-class';
-      case 'Link':
-        return 'link-display-class';
-      default:
-        return 'top-photo-display-class';
-    }
-  }
-
-  function getColumnsMap(columnsC) {
-    switch (columnsC) {
-      case 1:
-        return 'one-column';
-      case 2:
-        return 'two-columns';
-      case 3:
-        return 'three-columns';
-      case 4:
-        return 'four-columns';
-      default:
-        return 'one-column';
-    }
-  }
-
-  function truncateHeadline(headline) {
-    if (headline.length > 72) {
-      let newHeadline = '';
-      headline.split(' ').forEach((word) => {
-        if (newHeadline.length + word.length + 1 < 72) {
-          newHeadline = newHeadline.concat(word, ' ');
-        }
-      });
-      return newHeadline.slice(0, -1).concat('...');
-    }
-    return headline;
-  }
-
   const data = useContent({
     source: contentService,
     query: contentConfigValues,
@@ -70,42 +27,7 @@ const List = (customFields = {}) => {
       <div className={`c-homeListContainer b-margin-bottom-d15-m10 ${getColumnsMap(columns)} ${getDisplayClassMap(displayClass)}`}>
         {data.data.map((el, i) => {
           if (startIndex - 1 <= i && i < itemLimit + startIndex - 1) {
-            const {
-              promo_items: promoItems,
-              label,
-              taxonomy,
-              first_publish_date: firstPublishDate,
-              display_date: displayDate,
-              headlines,
-              website_url: relativeURL,
-            } = el;
-
-            const { hide_timestamp: hideTimestamp } = label || {};
-            const { text: isHideTimestampTrue } = hideTimestamp || {};
-
-            return (
-              <div key={`homeListItem-${i}`} className="c-homeList">
-                {promoItems.basic && (
-                  <a href={relativeURL} className="homeList-image">
-                    <Image
-                      src={promoItems.basic || promoItems.lead_art.promo_items.basic}
-                      width={1066}
-                      height={600}
-                      imageType="isHomepageImage"
-                    />
-                  </a>
-                )}
-                <div className="homeList-text">
-                  <div className="c-label-wrapper">
-                    <SectionLabel label={label} taxonomy={taxonomy} />
-                    <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
-                  </div>
-                  <div className="headline">
-                    <a href={relativeURL}>{truncateHeadline(headlines.basic)}</a>
-                  </div>
-                </div>
-              </div>
-            );
+            return <ListItem key={`ListItem-${i}`} {...el} />;
           }
           return null;
         })}

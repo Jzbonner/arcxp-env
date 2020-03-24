@@ -1,7 +1,5 @@
 @import "./../../../src/styles/base";
 
-//styles that are the same
-
 .c-homeListContainer {
   display: flex;
   flex-wrap: wrap;
@@ -11,114 +9,187 @@
     color: inherit;
   }
 
+  // Common Styles Used By ALl the Display Classes
+
   .c-homeList {
     width: 100%;
     margin-bottom: 30px;
 
+    @include breakpoint(desktop-sm) {
+      margin-bottom: 20px;
+    }
+
     .image-component-image img {
-      border-radius: 6px;
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .24);
+      border-radius: 6px;
     }
 
-    .c-label-wrapper {
+    .homeList-text {
 
-      .section-label {
-        font-size: .75rem;
+      .c-label-wrapper {
+        margin: 12px auto 8px;
+
+        .section-label {
+          font-size: .75rem;
+        }
       }
-    }
 
-    .headline {
-      @include text-styles(1rem, 1.38, "Average");
+      .headline {
+        @include text-styles(1.125rem, 1.25, "Average");
 
-      letter-spacing: -.24px;
+        letter-spacing: -.24px;
+        text-align: center;
+
+        @include breakpoint(desktop-lg) {
+          @include text-styles(1.25rem, 1.25, "Average");
+        }
+      }
     }
   }
 
-  //Top Photo
+  //////////////////
+  // Column Styles
+  //////////////////
+
+  &.one-column {
+    flex-direction: column;
+  }
+
+  &.two-columns {
+
+    .c-homeList {
+      @include breakpoint(tablet) {
+        width: 47%;
+      }
+    }
+  }
+
+  &.three-columns {
+
+    .c-homeList {
+      @include breakpoint(tablet) {
+        width: 47%;
+      }
+
+      @include breakpoint(desktop-sm) {
+        width: 32%;
+      }
+    }
+  }
+
+  &.four-columns {
+
+    .c-homeList {
+      @include breakpoint(tablet) {
+        width: 47%;
+      }
+
+      @include breakpoint(desktop-sm) {
+        width: 23.5%;
+      }
+    }
+  }
+
+  //////////////////////
+  // Display Class Styles
+  //////////////////////
+
+  // Top Photo styles
 
   &.top-photo-display-class {
+    margin-left: -30px;
+    margin-right: -30px;
+
+    @include breakpoint(tablet) {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .image-component-image img {
+      border-radius: 0;
+
+      @include breakpoint(desktop-sm) {
+        border-radius: 6px;
+      }
+    }
 
     .c-label-wrapper {
-      margin-top: 10px;
-      margin-bottom: 10px;
+      @include breakpoint(desktop-sm) {
+        min-height: 25px;
+      }
+
+      @include breakpoint(desktop-lg) {
+        min-height: initial;
+      }
+    }
+
+    .homeList-text {
+      width: 90%;
+      margin: 0 auto;
     }
 
     .headline {
       text-align: center;
     }
-
-    &.three-columns {
-
-      .c-homeList {
-        @include breakpoint(desktop-sm) {
-          width: 32%;
-        }
-      }
-    }
-
-    &.four-columns {
-
-      .c-homeList {
-        @include breakpoint(desktop-sm) {
-          width: 23%;
-        }
-      }
-    }
   }
 
-  //left photo
+  // Left photo styles
 
   &.left-photo-display-class {
-    display: flex;
 
     .c-homeList {
-      display: flex;
-    }
+      margin-bottom: 30px;
 
-    .homeList-text {
-      margin-left: 10px;
-    }
+      @include breakpoint(tablet) {
+        display: flex;
+      }
 
-    .c-label-wrapper {
-      text-align: left;
-      margin-bottom: 7px;
-    }
+      .homeList-image {
+        max-width: 50%;
+        margin-right: 20px;
 
-    .homeList-image,
-    .homeList-text {
-      max-width: 50%;
-    }
-
-    .headline {
-      @include text-styles(1.1rem, 1.25, "Average");
-    }
-
-    &.one-column {
-      flex-direction: column;
-    }
-
-    &.two-columns {
-
-      .c-homeList {
-        @include breakpoint(desktop-sm) {
-          max-width: 50%;
+        @include breakpoint(tablet) {
+          max-width: 35%;
         }
       }
 
-      .homeList-image,
       .homeList-text {
+        @include breakpoint(tablet) {
+          max-width: 50%;
+        }
+
         @include breakpoint(desktop-sm) {
-          max-width: 42%;
+          max-width: 55%;
+        }
+
+        @include breakpoint(desktop-lg) {
+          max-width: 60%;
+        }
+
+        .c-label-wrapper {
+          margin-top: -6px;
+
+          @include breakpoint(tablet) {
+            margin: 0 0 7px;
+            text-align: left;
+          }
+        }
+
+        .headline {
+          @include breakpoint(tablet) {
+            text-align: left;
+          }
         }
       }
     }
   }
 
-  // no photo
+  // No photo Display Class
 
   &.no-photo-display-class {
 
     .c-homeList {
+      margin-bottom: 10px;
 
       .c-label-wrapper {
         text-align: left;
@@ -126,7 +197,7 @@
       }
 
       .headline {
-        @include text-styles(1.1rem, 1.25, "Average");
+        text-align: left;
       }
 
       .homeList-image {
@@ -134,21 +205,14 @@
       }
 
       .homeList-text {
-        max-width: 84%;
-        padding-bottom: 25px;
+        padding-bottom: 20px;
         border-bottom: 2px solid #f1f1f2;
-      }
-    }
+        width: 100%;
 
-    &.one-column {
-      flex-direction: column;
-    }
-
-    &.two-columns {
-
-      .c-homeList {
-        @include breakpoint(desktop-sm) {
-          width: 50%;
+        .headline {
+          @include breakpoint(tablet) {
+            @include text-styles(1.125rem, 1.25, "Average");
+          }
         }
       }
     }

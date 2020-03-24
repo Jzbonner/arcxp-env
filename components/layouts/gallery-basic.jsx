@@ -34,7 +34,7 @@ const GalleryPageLayout = () => {
   return (
     <>
       <GlobalAdSlots />
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments}/>
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
       <main>
         <div className="c-header-gallery">
           <Headline headlines={headlines} basicItems={basicItems} />

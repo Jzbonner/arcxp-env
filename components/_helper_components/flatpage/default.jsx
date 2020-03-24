@@ -14,11 +14,11 @@ import '../../../src/styles/container/_article-basic.scss';
 
 const FlatPage = ({ globalContent }) => {
   if (!globalContent) return null;
-
   const {
     headlines,
     comments,
     taxonomy,
+    type,
     canonical_url: articleURL,
     content_elements: contentElements,
   } = globalContent || {};
@@ -37,7 +37,7 @@ const FlatPage = ({ globalContent }) => {
     <>
       { !noAds && <GlobalAdSlots /> }
       <BreakingNews/>
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments}/>
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
       <main>
         <article>
           {

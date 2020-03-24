@@ -12,6 +12,7 @@ const Section = ({
   activeSection,
   newTab,
   isMobile,
+  isSticky,
 }) => {
   const {
     nav_title: name,
@@ -31,6 +32,12 @@ const Section = ({
       setWidth(subNavRef.current.getBoundingClientRect().width);
     }
   }, [subNavRef.current]);
+
+  useEffect(() => {
+    if (subNavRef.current && isSticky) {
+      setWidth(subNavRef.current.getBoundingClientRect().width);
+    }
+  }, [isSticky]);
 
   const isActive = index === activeSection ? 'isVisible' : '';
 
@@ -102,6 +109,7 @@ Section.propTypes = {
   activeSection: PropTypes.number,
   newTab: PropTypes.string,
   isMobile: PropTypes.bool,
+  isSticky: PropTypes.bool,
 };
 
 export default Section;
