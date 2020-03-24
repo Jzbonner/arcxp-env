@@ -36,7 +36,7 @@ const VideoPageLayout = () => {
   return (
     <>
       <GlobalAdSlots />
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments}/>
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
       <main>
         <div className="c-hp01-mp01 b-margin-top-d40-m20">
           <ArcAd staticSlot={'HP01'} />
