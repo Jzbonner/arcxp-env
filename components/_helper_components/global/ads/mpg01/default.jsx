@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const MPGO1Element = ({ adSlot, refHook }) => (
-    <div id="ad-mpgo1-parent" ref={refHook} className="mpg01-container">
+    <div id="ad-mpgo1-parent" ref={refHook} className="mobile-ad-bottom-padding">
       {adSlot && adSlot()}
     </div>
 );

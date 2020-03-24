@@ -199,6 +199,7 @@ const Gallery = (props) => {
     const mobileElements = [...mobileElementData];
     let hasAdBeenInserted = false;
 
+    // <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />
     mobileElementData.forEach((element, i) => {
       if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted && photosScrolled === 3) {
         mobileElements.splice(element.props.data.index + 1, 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
