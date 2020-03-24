@@ -19,10 +19,10 @@ const resolve = (query) => {
   const {
     includeSources = '',
     excludeSources = '',
-    includeContentTypes = '',
-    excludeContentTypes = '',
     includeSections = '',
     excludeSections = '',
+    includeContentTypes = '',
+    excludeContentTypes = '',
     includeTags = '',
     excludeTags = '',
     includeSubtypes = '',
@@ -49,12 +49,23 @@ const resolve = (query) => {
       bool: {
         must: [
           {
-            term: {
-              'revision.published': 'true',
+            terms: {
+              type: contentTypesIncluded,
+            },
+          },
+          {
+            terms: {
+              subtype: subtypesIncluded,
+            },
+          },
+          {
+            terms: {
+              'taxonomy.tags.text': tagsIncluded,
             },
           },
           {
             nested: {
+              path: 'taxonomy.sections',
               query: {
                 bool: {
                   must: [
@@ -64,28 +75,8 @@ const resolve = (query) => {
                       },
                     },
                     {
-                      terms: {
-                        'source.system': sourcesIncluded,
-                      },
-                    },
-                    {
-                      terms: {
-                        type: contentTypesIncluded,
-                      },
-                    },
-                    {
-                      terms: {
-                        'taxonomy.tags.text': tagsIncluded,
-                      },
-                    },
-                    {
-                      terms: {
-                        subtype: subtypesIncluded,
-                      },
-                    },
-                    {
                       term: {
-                        'taxonomy.primary_section._website': 'ajc',
+                        'taxonomy.sections._website': 'ajc',
                       },
                     },
                   ],
@@ -96,7 +87,23 @@ const resolve = (query) => {
         ],
         must_not: [
           {
+            terms: {
+              type: contentTypesExcluded,
+            },
+          },
+          {
+            terms: {
+              subtype: subtypesExcluded,
+            },
+          },
+          {
+            terms: {
+              'taxonomy.tags.text': tagsExcluded,
+            },
+          },
+          {
             nested: {
+              path: 'taxonomy.sections',
               query: {
                 bool: {
                   must: [
@@ -106,28 +113,8 @@ const resolve = (query) => {
                       },
                     },
                     {
-                      terms: {
-                        'source.system': sourcesExcluded,
-                      },
-                    },
-                    {
-                      terms: {
-                        type: contentTypesExcluded,
-                      },
-                    },
-                    {
-                      terms: {
-                        'taxonomy.tags.text': tagsExcluded,
-                      },
-                    },
-                    {
-                      terms: {
-                        subtype: subtypesExcluded,
-                      },
-                    },
-                    {
                       term: {
-                        'taxonomy.primary_section._website': 'ajc',
+                        'taxonomy.sections._website': 'ajc',
                       },
                     },
                   ],
