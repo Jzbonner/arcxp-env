@@ -1,37 +1,92 @@
 @import "../../../../src/styles/base/";
 
-.c-stickyNav {
-  position: fixed;
-  top: 0;
-  height: 90px;
-  background: #f8f8f8;
-  opacity: .98;
-  align-items: center;
+.stickyNav {
+  height: 100%;
   border: none;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 94%;
   display: none;
-  width: 100%;
-  z-index: 1000;
-
-  @include breakpoint(desktop-sm) {
-    border-bottom: solid 1px #d0d0d0;
-    height: 70px;
-  }
+  align-items: center;
 
   &.is-visible {
     display: flex;
   }
 
-  .stickyNav {
-    max-width: 1600px;
-    margin: 0 auto;
-    width: 94%;
-    display: flex;
-    align-items: center;
+  &.not-visible {
+    display: none;
+  }
+}
+
+.sticky-logo {
+  display: block;
+  margin-top: 10px;
+}
+
+.sticky-logo-homepage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+
+  @include breakpoint(desktop-sm) {
+    display: none;
   }
 
-  .logo {
-    display: block;
-    margin-top: 10px;
+  img {
+    width: 75px;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.c-stickyLogin {
+  justify-content: flex-end;
+  align-items: center;
+
+  @include breakpoint (desktop-sm) {
+    margin-bottom: 10px;
+  }
+
+  .nav-items {
+    padding-top: 0;
+  }
+
+  .nav-login {
+    padding-bottom: 0;
+  }
+
+  .stickyNav-social {
+    margin-bottom: 10px;
+  }
+}
+
+.stickyNav-social {
+  display: flex;
+
+  &.hidden {
+    display: none;
+
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+}
+
+.stickyNav-homepage {
+  display: none;
+  width: 100%;
+
+  @include breakpoint (desktop-sm) {
+    display: flex;
+    height: 45px;
+  }
+
+  &.hidden {
+    display: none;
   }
 }
 
@@ -42,12 +97,12 @@
   width: min-content;
 
   @include breakpoint(desktop-sm) {
+    margin-left: 0;
     justify-content: left;
   }
 
   .stickyNav-item {
     list-style: none;
-    padding-bottom: .313em;
     margin: 0 6px;
 
     @include breakpoint(desktop-sm) {
@@ -83,6 +138,10 @@
       overflow: hidden;
       height: 45px;
 
+      .stickyNav-item {
+        padding-bottom: .313em;
+      }
+      
       .stickyNav-item:first-child {
         padding-top: .313em;
       }
@@ -100,7 +159,14 @@
 
       .arrow-icon {
         display: block;
+        padding-bottom: .313em;
       }
     }
+  }
+
+  .nav-menu-toggle {
+    position: relative;
+    margin-right: 5px;
+    // margin-bottom: .313em;
   }
 }

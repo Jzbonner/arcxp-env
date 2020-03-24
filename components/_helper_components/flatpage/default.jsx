@@ -6,7 +6,6 @@ import NavBar from '../global/navBar/default';
 import ArcAd from '../../features/ads/default';
 import Section from '../article/section/Section';
 import GlobalAdSlots from '../global/ads/default';
-import StickyNav from '../article/stickyNav/default';
 import BreakingNews from '../global/breakingNews/default';
 
 import './default.scss';
@@ -15,11 +14,11 @@ import '../../../src/styles/container/_article-basic.scss';
 
 const FlatPage = ({ globalContent }) => {
   if (!globalContent) return null;
-
   const {
     headlines,
     comments,
     taxonomy,
+    type,
     canonical_url: articleURL,
     content_elements: contentElements,
   } = globalContent || {};
@@ -36,16 +35,9 @@ const FlatPage = ({ globalContent }) => {
 
   return (
     <>
-      <header className="c-nav">
-        { !noAds && <GlobalAdSlots /> }
-        <BreakingNews />
-        <NavBar/>
-        <StickyNav
-          articleURL={articleURL}
-          headlines={headlines}
-          comments={comments}
-        />
-      </header>
+      { !noAds && <GlobalAdSlots /> }
+      <BreakingNews/>
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
       <main>
         <article>
           {
@@ -73,7 +65,7 @@ const FlatPage = ({ globalContent }) => {
           }
 
           {
-            noRightRail && !noAds
+            !noRightRail && !noAds
             && <div className="c-hp05-mp05 b-margin-bottom-d40-m20">
               <ArcAd staticSlot={'HP05'} />
               <ArcAd staticSlot={'MP05'} />

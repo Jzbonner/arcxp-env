@@ -9,7 +9,6 @@ import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
 import Section from '../_helper_components/article/section/Section';
 import TaboolaFeed from '../features/taboolaFeed/default';
-import StickyNav from '../_helper_components/article/stickyNav/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
 import Gallery from '../features/gallery/default.jsx';
@@ -106,11 +105,7 @@ const StoryPageLayout = () => {
     <>
       {!noAds && <GlobalAdSlots />}
       <BreakingNews />
-      <header className="c-nav">
-        <NavBar />
-        <StickyNav articleURL={articleURL} headlines={headlines} comments={comments} />
-      </header>
-
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>

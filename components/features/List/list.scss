@@ -1,0 +1,220 @@
+@import "./../../../src/styles/base";
+
+.c-homeListContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  a {
+    color: inherit;
+  }
+
+  // Common Styles Used By ALl the Display Classes
+
+  .c-homeList {
+    width: 100%;
+    margin-bottom: 30px;
+
+    @include breakpoint(desktop-sm) {
+      margin-bottom: 20px;
+    }
+
+    .image-component-image img {
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .24);
+      border-radius: 6px;
+    }
+
+    .homeList-text {
+
+      .c-label-wrapper {
+        margin: 12px auto 8px;
+
+        .section-label {
+          font-size: .75rem;
+        }
+      }
+
+      .headline {
+        @include text-styles(1.125rem, 1.25, "Average");
+
+        letter-spacing: -.24px;
+        text-align: center;
+
+        @include breakpoint(desktop-lg) {
+          @include text-styles(1.25rem, 1.25, "Average");
+        }
+      }
+    }
+  }
+
+  //////////////////
+  // Column Styles
+  //////////////////
+
+  &.one-column {
+    flex-direction: column;
+  }
+
+  &.two-columns {
+
+    .c-homeList {
+      @include breakpoint(tablet) {
+        width: 47%;
+      }
+    }
+  }
+
+  &.three-columns {
+
+    .c-homeList {
+      @include breakpoint(tablet) {
+        width: 47%;
+      }
+
+      @include breakpoint(desktop-sm) {
+        width: 32%;
+      }
+    }
+  }
+
+  &.four-columns {
+
+    .c-homeList {
+      @include breakpoint(tablet) {
+        width: 47%;
+      }
+
+      @include breakpoint(desktop-sm) {
+        width: 23.5%;
+      }
+    }
+  }
+
+  //////////////////////
+  // Display Class Styles
+  //////////////////////
+
+  // Top Photo styles
+
+  &.top-photo-display-class {
+    margin-left: -30px;
+    margin-right: -30px;
+
+    @include breakpoint(tablet) {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .image-component-image img {
+      border-radius: 0;
+
+      @include breakpoint(desktop-sm) {
+        border-radius: 6px;
+      }
+    }
+
+    .c-label-wrapper {
+      @include breakpoint(desktop-sm) {
+        min-height: 25px;
+      }
+
+      @include breakpoint(desktop-lg) {
+        min-height: initial;
+      }
+    }
+
+    .homeList-text {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .headline {
+      text-align: center;
+    }
+  }
+
+  // Left photo styles
+
+  &.left-photo-display-class {
+
+    .c-homeList {
+      margin-bottom: 30px;
+
+      @include breakpoint(tablet) {
+        display: flex;
+      }
+
+      .homeList-image {
+        max-width: 50%;
+        margin-right: 20px;
+
+        @include breakpoint(tablet) {
+          max-width: 35%;
+        }
+      }
+
+      .homeList-text {
+        @include breakpoint(tablet) {
+          max-width: 50%;
+        }
+
+        @include breakpoint(desktop-sm) {
+          max-width: 55%;
+        }
+
+        @include breakpoint(desktop-lg) {
+          max-width: 60%;
+        }
+
+        .c-label-wrapper {
+          margin-top: -6px;
+
+          @include breakpoint(tablet) {
+            margin: 0 0 7px;
+            text-align: left;
+          }
+        }
+
+        .headline {
+          @include breakpoint(tablet) {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+
+  // No photo Display Class
+
+  &.no-photo-display-class {
+
+    .c-homeList {
+      margin-bottom: 10px;
+
+      .c-label-wrapper {
+        text-align: left;
+        margin-bottom: 7px;
+      }
+
+      .headline {
+        text-align: left;
+      }
+
+      .homeList-image {
+        display: none;
+      }
+
+      .homeList-text {
+        padding-bottom: 20px;
+        border-bottom: 2px solid #f1f1f2;
+        width: 100%;
+
+        .headline {
+          @include breakpoint(tablet) {
+            @include text-styles(1.125rem, 1.25, "Average");
+          }
+        }
+      }
+    }
+  }
+}

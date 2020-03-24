@@ -2,9 +2,9 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
+import ArcAd from '../features/ads/default';
 import Headline from '../_helper_components/article/headline/default';
 import NavBar from '../_helper_components/global/navBar/default';
-import StickyNav from '../_helper_components/article/stickyNav/default';
 import Footer from '../_helper_components/global/footer/default';
 
 const VideoPageLayout = () => {
@@ -13,7 +13,6 @@ const VideoPageLayout = () => {
   if (!globalContent) return null;
 
   const {
-    content_elements: contentElements,
     promo_items: promoItems,
     _id: videoPageId,
     headlines,
@@ -37,18 +36,12 @@ const VideoPageLayout = () => {
   return (
     <>
       <GlobalAdSlots />
-      <header className="c-nav">
-        <NavBar />
-        <StickyNav
-          articleURL={articleURL}
-          headlines={headlines}
-          comments={comments}
-          promoItems={promoItems}
-          contentElements={contentElements}
-        />
-      </header>
-
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
       <main>
+        <div className="c-hp01-mp01 b-margin-top-d40-m20">
+          <ArcAd staticSlot={'HP01'} />
+          <ArcAd staticSlot={'MP01'} />
+        </div>
         <div className="c-header">
           <Headline headlines={headlines} basicItems={basicItems} />
         </div>

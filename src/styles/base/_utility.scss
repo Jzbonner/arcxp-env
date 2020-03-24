@@ -64,13 +64,23 @@
   }
 }
 
-// desktop margin-bottom 60, mobile margin-bottom 40
+// desktop margin-bottom 40, mobile margin-bottom 20
 
 .b-margin-bottom-d40-m20 {
   margin-bottom: 1.13rem;
 
   @include breakpoint(desktop-sm) {
     margin-bottom: 2.5rem;
+  }
+}
+
+// desktop margin-top 40, mobile margin-top 20
+
+.b-margin-top-d40-m20 {
+  margin-top: 1.13rem;
+
+  @include breakpoint(desktop-sm) {
+    margin-top: 2.5rem;
   }
 }
 
@@ -125,5 +135,13 @@
 
   @include breakpoint(desktop-sm) {
     display: none;
+  }
+}
+
+.scrollLock-mobile {
+  overflow: hidden;
+
+  @include breakpoint(desktop-sm) {
+    overflow: initial;
   }
 }
