@@ -55,6 +55,9 @@ const Gallery = (props) => {
   const [mobileAdsIndices, setMobileAdsIndices] = useState([]);
   const [photosScrolled, setPhotosScrolled] = useState(0);
   const [isAdInsertable, setAdInsertionAbleState] = useState(true);
+  const [adOffsetHeight, setAdOffsetHeight] = useState(0);
+  const [currentAdCount, setCurrentAdCount] = useState(0);
+
 
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
@@ -200,8 +203,9 @@ const Gallery = (props) => {
     let hasAdBeenInserted = false;
 
     mobileElementData.forEach((element, i) => {
-      if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted && photosScrolled === 3) {
-        mobileElements.splice(element.props.data.index + 1, 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
+      // when 2 photos have been scrolled, preemptively insert ad after the 4th image
+      if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted && photosScrolled === 2) {
+        mobileElements.splice(element.props.data.index + 2, 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
         hasAdBeenInserted = true;
       }
     });
@@ -241,6 +245,8 @@ const Gallery = (props) => {
     setMobileAdsIndices([]);
     setAdInsertionAbleState(true);
     setPhotosScrolled(0);
+    setAdOffsetHeight(0);
+    setCurrentAdCount(0);
   };
 
   const renderCaptionByCurrentIndex = () => {
@@ -314,13 +320,21 @@ const Gallery = (props) => {
       const index = currentIndex;
       const galleryScrollTop = galleryMobileEl.current.scrollTop;
       const targetElementoffsetHeight = document.getElementById(`gallery-item-${index}`).offsetHeight;
-      const targetHeight = offsetHeight + targetElementoffsetHeight;
+
+      const mpg01AdHeight = (document.getElementById('ad-mpgo1-parent')
+      && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
+
+      // accounts for height of ad * number of ads
+      const targetHeight = offsetHeight + targetElementoffsetHeight + (adOffsetHeight * currentAdCount);
+
+      if (!adOffsetHeight && mpg01AdHeight) setAdOffsetHeight(mpg01AdHeight);
 
       // lazy loading ads
-      if (isAdInsertable && !mobileAdsIndices.includes(index) && mobileElementData && photosScrolled === 3) {
+      if (isAdInsertable && !mobileAdsIndices.includes(index) && mobileElementData && photosScrolled === 2) {
         const adInsertedMobileArray = insertMobileGalleryAd();
         setMobileElementData(adInsertedMobileArray);
         setAdInsertionAbleState(false);
+        setCurrentAdCount(currentAdCount + 1);
       }
 
       if (offsetHeight === 0 && (galleryScrollTop > targetElementoffsetHeight)) {
@@ -352,7 +366,7 @@ const Gallery = (props) => {
     }
 
     return null;
-  }, 10);
+  }, 8);
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
@@ -439,7 +453,7 @@ const Gallery = (props) => {
     return () => {
       window.removeEventListener('scroll', handleScrollEvent, true);
     };
-  }, [currentIndex, isCaptionOn, isAdInsertable, mobileAdsIndices, isAdInsertable, offsetHeight]);
+  }, [currentIndex, isCaptionOn, isAdInsertable, mobileAdsIndices, isAdInsertable, offsetHeight, adOffsetHeight, currentAdCount]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
