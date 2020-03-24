@@ -1,0 +1,42 @@
+@import "./../../../../src//styles/base";
+
+.home-headline {
+  position: relative;
+  padding-top: 50%;
+
+  .c-image-component {
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .headline-box {
+    word-wrap: break-word;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+    text-align: center;
+    max-width: 90%;
+    padding: 20px;
+    position: relative;
+    margin: 0 auto;
+    box-sizing: border-box;
+
+    .c-label-wrapper {
+      @include text-styles(.75rem, 1, "Average");
+    }
+
+    .headline {
+      display: block;
+
+      @include text-styles(1.4rem, 1.23, "Average");
+
+      @include breakpoint(desktop-sm) {
+        @include text-styles(2vw, 1.3, "Average");
+      }
+
+      margin-top: 10px;
+      letter-spacing: -.4px;
+    }
+  }
+}
