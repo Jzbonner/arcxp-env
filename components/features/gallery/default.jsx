@@ -203,9 +203,8 @@ const Gallery = (props) => {
     let hasAdBeenInserted = false;
 
     mobileElementData.forEach((element, i) => {
-      // when 2 photos have been scrolled, preemptively insert ad after the 4th image
-      if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted && photosScrolled === 2) {
-        mobileElements.splice(element.props.data.index + 2, 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
+      if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted && photosScrolled === 3) {
+        mobileElements.splice(element.props.data.index + 1, 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
         hasAdBeenInserted = true;
       }
     });
@@ -319,18 +318,18 @@ const Gallery = (props) => {
     if (galleryMobileEl.current) {
       const index = currentIndex;
       const galleryScrollTop = galleryMobileEl.current.scrollTop;
-      const targetElementoffsetHeight = document.getElementById(`gallery-item-${index}`).offsetHeight;
+      const targetElementoffsetHeight = document.getElementById(`gallery-item-${index}`).scrollHeight;
 
       const mpg01AdHeight = (document.getElementById('ad-mpgo1-parent')
       && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
 
       // accounts for height of ad * number of ads
-      const targetHeight = offsetHeight + targetElementoffsetHeight + (adOffsetHeight * currentAdCount);
+      const targetHeight = offsetHeight + (targetElementoffsetHeight) + ((adOffsetHeight) * currentAdCount);
 
       if (!adOffsetHeight && mpg01AdHeight) setAdOffsetHeight(mpg01AdHeight);
 
       // lazy loading ads
-      if (isAdInsertable && !mobileAdsIndices.includes(index) && mobileElementData && photosScrolled === 2) {
+      if (isAdInsertable && !mobileAdsIndices.includes(index) && mobileElementData && photosScrolled === 3) {
         const adInsertedMobileArray = insertMobileGalleryAd();
         setMobileElementData(adInsertedMobileArray);
         setAdInsertionAbleState(false);
@@ -352,6 +351,7 @@ const Gallery = (props) => {
 
         if ((galleryScrollTop < offsetHeight) && index !== 0) {
           newHeight = offsetHeight - previousTarget;
+
           setHeight(newHeight);
           changeIndex(actions.PREV);
         }
@@ -366,7 +366,7 @@ const Gallery = (props) => {
     }
 
     return null;
-  }, 8);
+  }, 4);
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
