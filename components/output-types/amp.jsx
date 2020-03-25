@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import BaseMarkup from '../_helper_components/amp/BaseMarkup';
 import Html from '../_helper_components/amp/Html';
 import AmpCustomStyles from '../_helper_components/amp/AmpCustomStyle';
-import AmpPageLayout from '../layouts/article-amp';
 
 const AmpOutputType = (props) => {
   const {
     globalContent,
+    children,
   } = props;
 
   const {
@@ -21,7 +21,7 @@ const AmpOutputType = (props) => {
       <AmpCustomStyles/>
     </head>
     <body>
-      <AmpPageLayout />
+      { children }
     </body>
     </Html>
   );

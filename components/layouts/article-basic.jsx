@@ -37,7 +37,14 @@ const start = 3;
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
-  const { globalContent } = appContext;
+  const { globalContent, requestUri } = appContext;
+
+  // if (requestUri && requestUri.indexOf('?') > -1) {
+  //   const queryString = requestUri.substring(requestUri.indexOf('?'));
+  //   if (queryString.indexOf('amp') > -1) {
+  //     return <h1>Hello AMP</h1>;
+  //   }
+  // }
 
   if (!globalContent) return null;
   const {
@@ -107,7 +114,7 @@ const StoryPageLayout = () => {
     <>
       {!noAds && <GlobalAdSlots />}
       <BreakingNews />
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
+      {/*<NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>*/}
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
