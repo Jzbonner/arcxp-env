@@ -95,6 +95,7 @@
   display: flex;
   align-items: center;
   width: min-content;
+  z-index: 11;
 
   @include breakpoint(desktop-sm) {
     margin-left: 0;
