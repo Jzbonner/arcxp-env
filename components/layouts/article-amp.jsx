@@ -2,8 +2,8 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
 import AmpNavBar from '../_helper_components/article/ampNavBar/default';
-import Headline from '../_helper_components/article/headline/default.jsx';
-import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
+import AmpHeadline from '../_helper_components/article/headline/amp.jsx';
+import AmpTimeStamp from '../_helper_components/article/timestamp/amp.jsx';
 
 const AmpPageLayout = () => {
   const appContext = useAppContext();
@@ -27,9 +27,8 @@ const AmpPageLayout = () => {
       <AmpNavBar />
       <main>
         <header>
-          <div className="b-margin-bottom-d15-m10 c-label-wrapper b-pageContainer">
-            <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
-          </div>
+          <AmpHeadline headlines={headlines} />
+          <AmpTimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
         </header>
         <article>
 
