@@ -4,7 +4,6 @@ import { useContent } from 'fusion:content';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import Headline from '../../_helper_components/home/Headline/Headline';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
-import getDisplayClassMap from '../../layouts/_helper_functions/homepage/getDisplayClassMap';
 import './Lead.scss';
 
 const Lead = (customFields = {}) => {
@@ -13,6 +12,7 @@ const Lead = (customFields = {}) => {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
       displayClass = '',
       startIndex = 1,
+      itemLimit = 100,
       title = '',
       columns = 1,
     },
@@ -23,9 +23,26 @@ const Lead = (customFields = {}) => {
     query: contentConfigValues,
   });
 
+  function getDisplayClassMap(displayC) {
+    switch (displayC) {
+      case '5-Item Feature - Top Photo':
+        return 'top-photo-display-class';
+      case '5-Item Feature - Left Photo':
+        return 'left-photo-display-class';
+      case '5-Item Feature - No Photo':
+        return 'no-photo-display-class';
+      case '5-Item Feature - Center Lead Top Photo':
+        return 'center-lead-display-class';
+      case '1 or 2 Item Feature':
+        return 'one-two-item-display-class';
+      default:
+        return 'top-photo-display-class';
+    }
+  }
+
   function getLists(listData, start, limit) {
     return listData.data.map((el, i) => {
-      if (start <= i && i < start + limit) {
+      if (start <= i && i <= start + limit - 2) {
         return <ListItem key={`ListItem-${i}`} {...el} />;
       }
       return null;
@@ -34,10 +51,10 @@ const Lead = (customFields = {}) => {
 
   function renderColumn1(displayC, apiData) {
     switch (displayC) {
-      case 'Center Lead Top Photo':
-        return getLists(apiData, startIndex, 2);
+      case '5-Item Feature - Center Lead Top Photo':
+        return getLists(apiData, startIndex, 3);
       case '1 or 2 Item Feature':
-        return [...Array(columns).keys()].map(i => <Headline key={i} {...apiData.data[i]} />);
+        return [...Array(columns).keys()].map(i => <Headline key={i} {...apiData.data[startIndex - 1 + i]} />);
       default:
         return null;
     }
@@ -45,11 +62,11 @@ const Lead = (customFields = {}) => {
 
   function renderColumn2(displayC, apiData) {
     switch (displayC) {
-      case 'Top Photo':
-      case 'Left Photo':
-      case 'No Photo':
-      case 'Center Lead Top Photo':
-        return <Headline {...apiData.data[0]} />;
+      case '5-Item Feature - Top Photo':
+      case '5-Item Feature - Left Photo':
+      case '5-Item Feature - No Photo':
+      case '5-Item Feature - Center Lead Top Photo':
+        return <Headline {...apiData.data[startIndex - 1]} />;
       default:
         return null;
     }
@@ -57,18 +74,18 @@ const Lead = (customFields = {}) => {
 
   function renderColumn3(displayC, apiData) {
     switch (displayC) {
-      case 'Top Photo':
-      case 'Left Photo':
-        return getLists(apiData, startIndex, 4);
-      case 'No Photo':
+      case '5-Item Feature - Top Photo':
+      case '5-Item Feature - Left Photo':
+        return getLists(apiData, startIndex, itemLimit);
+      case '5-Item Feature - No Photo':
         return (
           <>
             {title && <div className="title">{title}</div>}
-            {getLists(data, startIndex, 4)}
+            {getLists(data, startIndex, itemLimit)}
           </>
         );
-      case 'Center Lead Top Photo':
-        return getLists(data, startIndex + 2, 2);
+      case '5-Item Feature - Center Lead Top Photo':
+        return getLists(data, startIndex + 2, itemLimit - 2);
       default:
         return null;
     }
@@ -97,11 +114,17 @@ Lead.propTypes = {
     }),
     itemLimit: PropTypes.number.tag({
       name: 'Item Limit',
-      defaultValue: 100,
+      defaultValue: 5,
     }),
-    displayClass: PropTypes.oneOf(['Top Photo', 'Left Photo', 'No Photo', 'Center Lead Top Photo', '1 or 2 Item Feature']).tag({
+    displayClass: PropTypes.oneOf([
+      '5-Item Feature - Top Photo',
+      '5-Item Feature - Left Photo',
+      '5-Item Feature - No Photo',
+      '5-Item Feature - Center Lead Top Photo',
+      '1 or 2 Item Feature',
+    ]).tag({
       name: 'Display Class',
-      defaultValue: 'Top Photo',
+      defaultValue: '5-Item Feature - Top Photo',
     }),
     columns: PropTypes.oneOf([1, 2, 3, 4]).tag({
       name: 'Columns',
