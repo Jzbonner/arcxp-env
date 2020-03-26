@@ -320,7 +320,7 @@ const Gallery = (props) => {
       const targetElementoffsetHeight = document.getElementById(`gallery-item-${index}`).scrollHeight;
 
       const mpg01AdHeight = (document.getElementById('ad-mpgo1-parent')
-        && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
+      && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
 
       // accounts for height of ad * number of ads
       const targetHeight = offsetHeight + (targetElementoffsetHeight) + ((adOffsetHeight) * currentAdCount);
