@@ -265,14 +265,13 @@ const Gallery = (props) => {
   };
 
   const renderDesktopGalleryElements = (elements) => {
-    if (!isAdVisible) {
-      const finalizedElements = handleImageFocus((elements), {
-        isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
-      }, clickFuncs);
+    const finalizedElements = handleImageFocus((elements), {
+      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible,
+    }, clickFuncs);
 
-      setElementData(finalizedElements);
-      renderCaptionByCurrentIndex();
-    }
+    setElementData(finalizedElements);
+
+    if (!isAdVisible) renderCaptionByCurrentIndex();
   };
 
   const handleNext = (arr) => {

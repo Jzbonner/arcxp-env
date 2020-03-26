@@ -10,7 +10,7 @@ const GalleryItem = ({
   const { affiliation = [], caption = [] } = captionObj;
 
   const {
-    isFocused, isStickyVisible, isCaptionOn, isMobile,
+    isFocused, isStickyVisible, isCaptionOn, isMobile, isAdVisible,
   } = states;
 
   let affiliationCredit = affiliation[0] && affiliation[0].name ? affiliation[0].name : null;
@@ -30,7 +30,7 @@ const GalleryItem = ({
       `}
       >
       <img
-        className={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused ? 'is-focused' : ''}`}
+        className={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
         src={url}
         alt={alt ? `${alt}` : ''}
       />
@@ -65,6 +65,7 @@ GalleryItem.propTypes = {
   index: PropTypes.number,
   focus: PropTypes.bool,
   id: PropTypes.string,
+  isAdVisible: PropTypes.bool,
   isStickyVisible: PropTypes.bool,
   isCaptionOn: PropTypes.bool,
   captionObj: PropTypes.object,
