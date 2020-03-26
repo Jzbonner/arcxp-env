@@ -55,28 +55,22 @@ const StickyNav = ({
 
   const handleScroll = () => {
     // Handles sticky visibility if scrolling down past top(mobile) or bottom(desktop) of logo.
-    if (isMobileVisibilityRef.current
-      && !stickyVisibilityRef.current
+    if (!stickyVisibilityRef.current
       && logoRef.current
-      && logoRef.current.getBoundingClientRect().top < 17) {
-      setStickyVisibility(true);
-    } else if (!isMobileVisibilityRef.current
-      && !stickyVisibilityRef.current
-      && logoRef.current
-      && logoRef.current.getBoundingClientRect().bottom <= 1) {
+      && (
+        (isMobileVisibilityRef.current && logoRef.current.getBoundingClientRect().top < 17)
+        || (!isMobileVisibilityRef.current && logoRef.current.getBoundingClientRect().bottom <= 1)
+      )) {
       setStickyVisibility(true);
     }
 
     // Handles sticky visibility if scrolling up past bottom of padding between sticky nav and page content.
-    if (isMobileVisibilityRef.current
-      && stickyVisibilityRef.current
+    if (stickyVisibilityRef.current
       && paddingRef.current
-      && paddingRef.current.getBoundingClientRect().bottom >= 90) {
-      setStickyVisibility(false);
-    } else if (!isMobileVisibilityRef.current
-      && stickyVisibilityRef.current
-      && paddingRef.current
-      && paddingRef.current.getBoundingClientRect().bottom >= 71) {
+      && (
+        (isMobileVisibilityRef.current && paddingRef.current.getBoundingClientRect().bottom >= 90)
+        || (!isMobileVisibilityRef.current && paddingRef.current.getBoundingClientRect().bottom >= 71 && !commentVisibilityRef.current)
+      )) {
       setStickyVisibility(false);
     }
   };
@@ -103,7 +97,7 @@ const StickyNav = ({
 
   return (
     <>
-      <div className={`stickyNav 
+      <div className={`stickyNav
       ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
         <ul className="c-stickyNav-list">
         <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
