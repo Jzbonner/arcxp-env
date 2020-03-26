@@ -19,7 +19,17 @@ const Slider = (customFields = {}) => {
     query: contentConfigValues,
   });
 
-  return <div>Slider Feature</div>;
+  return (
+    <div className="slider-wrapper">
+      <div className="slider-background">
+        <ul className="slider-content"></ul>
+        <div className="slider-button-box">
+          <button className="slider-button-left"></button>
+          <button className="slider-button-right"></button>
+        </div>
+      </div>
+    </div>
+  )
 };
 
 Slider.propTypes = {
