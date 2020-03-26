@@ -265,14 +265,13 @@ const Gallery = (props) => {
   };
 
   const renderDesktopGalleryElements = (elements) => {
-    if (!isAdVisible) {
-      const finalizedElements = handleImageFocus((elements), {
-        isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
-      }, clickFuncs);
+    const finalizedElements = handleImageFocus((elements), {
+      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible,
+    }, clickFuncs);
 
-      setElementData(finalizedElements);
-      renderCaptionByCurrentIndex();
-    }
+    setElementData(finalizedElements);
+
+    if (!isAdVisible) renderCaptionByCurrentIndex();
   };
 
   const handleNext = (arr) => {
@@ -321,7 +320,7 @@ const Gallery = (props) => {
       const targetElementoffsetHeight = document.getElementById(`gallery-item-${index}`).scrollHeight;
 
       const mpg01AdHeight = (document.getElementById('ad-mpgo1-parent')
-      && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
+        && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
 
       // accounts for height of ad * number of ads
       const targetHeight = offsetHeight + (targetElementoffsetHeight) + ((adOffsetHeight) * currentAdCount);

@@ -4,7 +4,7 @@ import GalleryItem from '../../../_helper_components/global/gallery/galleryItem.
 // adds focus class to current gallery-item element
 const handleImageFocus = (arr = [], states = {}, funcs = {}) => {
   const {
-    isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
+    isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible,
   } = states;
   const {
     prev, next,
@@ -25,7 +25,9 @@ const handleImageFocus = (arr = [], states = {}, funcs = {}) => {
       isStickyVisible,
       isMobile,
       isCaptionOn,
+      isAdVisible,
     };
+
     let functionToPass = null;
 
     if (element.props.data.index === prevIndex) {
