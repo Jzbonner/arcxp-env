@@ -1,4 +1,3 @@
-// This function returns an AP format month
 const findAPMonth = (month = 12) => {
   const months = [
     'Jan',
@@ -19,15 +18,29 @@ const findAPMonth = (month = 12) => {
   return months[month];
 };
 
-
 const formatTime = (date) => {
   let hours = date.getHours();
   let minutes = date.getMinutes();
-  const ampm = hours >= 12 ? 'pm' : 'am';
+  const ampm = hours >= 12 ? 'PM' : 'AM';
   hours %= 12;
   hours = hours || 12;
   minutes = minutes < 10 ? `0${minutes}` : minutes;
   return `${hours}:${minutes} ${ampm}`;
+};
+
+const dayOfTheWeek = (day = 7) => {
+  const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    null,
+  ];
+
+  return days[day];
 };
 
 const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, articleType = 'normal') => {
@@ -69,7 +82,7 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, ar
   }
 
   if (articleType === 'amp') {
-    timeStamp = `${pub.getDay()}, ${findAPMonth(pub.getMonth())} ${pub.getDate()}, ${pub.getFullYear()} @ ${formatTime(pub)}`;
+    timeStamp = `${dayOfTheWeek(pub.getDay())}, ${findAPMonth(pub.getMonth())} ${pub.getDate()}, ${pub.getFullYear()} @ ${formatTime(pub)}`;
   }
 
   return timeStamp;

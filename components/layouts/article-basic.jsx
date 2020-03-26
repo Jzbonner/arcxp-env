@@ -24,6 +24,7 @@ import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/de
 import ConnextHyperLocalSubscription from '../_helper_components/global/ConnextHyperLocalSubscription/ConnextHyperLocalSubscription';
 import FlatPage from '../_helper_components/flatpage/default';
 import ConnextInlinePromoSubscription from '../_helper_components/global/connextInlinePromo/default';
+import getQueryParams from './_helper_functions/getQueryParams';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -38,13 +39,6 @@ const start = 3;
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent, requestUri } = appContext;
-
-  // if (requestUri && requestUri.indexOf('?') > -1) {
-  //   const queryString = requestUri.substring(requestUri.indexOf('?'));
-  //   if (queryString.indexOf('amp') > -1) {
-  //     return <h1>Hello AMP</h1>;
-  //   }
-  // }
 
   if (!globalContent) return null;
   const {
@@ -64,6 +58,10 @@ const StoryPageLayout = () => {
   } = globalContent || {};
 
   if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} />;
+
+  const queryParams = getQueryParams(requestUri);
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
@@ -114,15 +112,18 @@ const StoryPageLayout = () => {
     <>
       {!noAds && <GlobalAdSlots />}
       <BreakingNews />
-      {/*<NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>*/}
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage}/>
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
-            <Headline headlines={headlines} basicItems={basicItems} />
+            <Headline headlines={headlines} basicItems={basicItems} ampPage={ampPage}/>
           </div>
           <div className="b-margin-bottom-d15-m10 c-label-wrapper b-pageContainer">
-            <SectionLabel label={label} taxonomy={taxonomy} />
-            <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
+            <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage}/>
+            <TimeStamp firstPublishDate={firstPublishDate}
+                       displayDate={displayDate}
+                       isHideTimestampTrue={isHideTimestampTrue}
+                       ampPage={ampPage} />
           </div>
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
