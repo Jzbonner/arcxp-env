@@ -1,6 +1,7 @@
 /*  /components/layouts/section-basic.jsx  */
 
 import React from 'react';
+import { useAppContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 
 import GlobalAdSlots from '../_helper_components/global/ads/default';
@@ -11,14 +12,15 @@ import Footer from '../_helper_components/global/footer/default';
 
 const SectionLayout = (props) => {
   const [zone1, zone2, zone3, zone4, zone5] = props.children;
+  const appContext = useAppContext();
+  const { layout } = appContext;
 
   const Ad = () => <div>Placeholder Ad</div>;
-
   return (
     <>
       <GlobalAdSlots />
       <BreakingNews />
-      <NavBar />
+      <NavBar type={layout} />
       <main className="c-sectionContent">
         <SectionHome feature={zone1} />
         <SectionHome feature={zone2} rightRailAd={Ad} />
