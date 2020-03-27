@@ -20,7 +20,7 @@ const Video = (customFields = {}) => {
   if (data) {
     return (
       <div className="b-margin-bottom-d30-m20">
-        {title && <div className="sectionTitle">{title}</div>}
+        {title && <div className="b-sectionTitle">{title}</div>}
         <VideoComponent
           src={data}
           isInlineVideo={true}
