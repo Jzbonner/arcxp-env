@@ -1,10 +1,8 @@
-/* eslint-disable */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import VideoComponent from '../../_helper_components/global/video/default';
 import getProperties from 'fusion:properties';
+import VideoComponent from '../../_helper_components/global/video/default';
 
 const Video = (customFields = {}) => {
   const { maxTabletViewWidth } = getProperties();
@@ -29,9 +27,8 @@ const Video = (customFields = {}) => {
         />
       </div>
     );
-  } else {
-    return null;
   }
+  return null;
 };
 
 Video.propTypes = {
