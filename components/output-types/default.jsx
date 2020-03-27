@@ -20,7 +20,6 @@ const DefaultOutputType = (props) => {
   return (
     <html>
       <head>
-        <title>{arcSite}</title>
         <MetaTags />
         <SiteMeta />
         <Libs />
