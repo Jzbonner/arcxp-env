@@ -1,0 +1,14 @@
+@import "./../../../src/styles/base";
+
+.sectionTitle {
+  letter-spacing: -.5px;
+  margin-bottom: 20px;
+  color: #313132;
+  text-align: center;
+
+  @include text-styles(2.5rem, 1, "Average");
+
+  @include breakpoint(desktop-sm) {
+    text-align: left;
+  }
+}
