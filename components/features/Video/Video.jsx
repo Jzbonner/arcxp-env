@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import VideoComponent from '../../_helper_components/global/video/default';
 import getProperties from 'fusion:properties';
-import './Video.scss';
 
 const Video = (customFields = {}) => {
   const { maxTabletViewWidth } = getProperties();
@@ -20,7 +19,7 @@ const Video = (customFields = {}) => {
 
   if (data) {
     return (
-      <div className=" b-margin-bottom-d30-m20">
+      <div className="b-margin-bottom-d30-m20">
         {title && <div className="sectionTitle">{title}</div>}
         <VideoComponent
           src={data}
