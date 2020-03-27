@@ -33,7 +33,7 @@ const Video = (customFields = {}) => {
 
 Video.propTypes = {
   customFields: PropTypes.shape({
-    content: PropTypes.contentConfig('collections', 'query-feed', 'video').tag({
+    content: PropTypes.contentConfig('video').tag({
       name: 'Content',
     }),
     autoplay: PropTypes.bool.tag({
