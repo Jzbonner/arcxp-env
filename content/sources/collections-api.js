@@ -5,6 +5,8 @@ const params = {
   id: 'text',
 };
 
+console.log('ID', params.id);
+
 const resolve = (query) => {
   const { id = '' } = query;
   return `websked/collections/v1/collections/contents/${id}`;
