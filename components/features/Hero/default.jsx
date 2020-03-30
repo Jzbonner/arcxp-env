@@ -5,7 +5,7 @@ import './default.scss';
 
 const Hero = (customFields = {}) => {
   const {
-    customFields: { content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {}, startIndex = 0 },
+    customFields: { content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {}, startIndex = 1 },
   } = customFields;
 
   const data = useContent({
@@ -14,17 +14,20 @@ const Hero = (customFields = {}) => {
   });
 
   const { data: innerData } = data || {};
-
-  console.log('DATA', innerData);
+  console.log(innerData);
 
   if (data && innerData) {
-    const singleItem = innerData[startIndex] ? innerData[startIndex] : null;
-    const { url: heroBackground } = singleItem && singleItem.promo_items.basic ? singleItem.promo_items.basic : {};
-    const { basic: headline } = singleItem && singleItem.headlines ? singleItem.headlines : {};
+    const singleItem = innerData[startIndex] ? innerData[startIndex - 1] : null;
+    const { url: heroBackground } = singleItem && singleItem.promo_items.basic ? singleItem.promo_items.basic : '';
+    const { basic: headline } = singleItem && singleItem.headlines ? singleItem.headlines : '';
+    const { canonical_url: heroURL } = singleItem || '';
     const limitHeadline = () => {
       const dots = '...';
       if (headline.length > 72) {
-        const newHeadline = headline.substring(0, 72) + dots;
+        // add dots if the length is more than 72 characters
+        let newHeadline = headline.substring(0, 72);
+        // don't truncate mid-word
+        newHeadline = newHeadline.substring(0, Math.min(newHeadline.length, newHeadline.lastIndexOf(' '))) + dots;
         return newHeadline;
       }
       return headline;
@@ -32,8 +35,12 @@ const Hero = (customFields = {}) => {
 
     return (
       <div className="c-heroFeature">
-        <img className="hero-img" src={heroBackground} alt={headline} />
-        <h2 className="hero-headline">{limitHeadline()}</h2>
+        <a href={heroURL} className="hero-url"/>
+        <div className="hero-img" style={{ backgroundImage: `url(${heroBackground})` }}>
+          <div className="hero-headline">
+            <h2 className="headline-text">{limitHeadline()}</h2>
+          </div>
+        </div>
       </div>
     );
   }
@@ -47,7 +54,7 @@ Hero.propTypes = {
     }),
     startIndex: PropTypes.number.tag({
       name: 'Start Index',
-      defaultValue: 0,
+      defaultValue: 1,
     }),
   }),
 };
