@@ -53,10 +53,10 @@ const Gallery = (props) => {
 
   /* Mobile Ads */
   const [mobileAdsIndices, setMobileAdsIndices] = useState([]);
-  const [photosScrolled, setPhotosScrolled] = useState(0);
   const [isAdInsertable, setAdInsertionAbleState] = useState(true);
   const [adOffsetHeight, setAdOffsetHeight] = useState(0);
   const [currentAdCount, setCurrentAdCount] = useState(0);
+  const [nextAdRendering, setNextAdRendering] = useState(4);
 
 
   const galleryEl = useRef(null);
@@ -132,22 +132,9 @@ const Gallery = (props) => {
     }
   };
 
-  // manages photo scrolling count for mobile ads
-  const handleScrollCount = () => {
-    if (photosScrolled === 4) {
-      setPhotosScrolled(0);
-    } else {
-      setPhotosScrolled(photosScrolled + 1);
-    }
-  };
-
   const changeIndex = (action, maxNumber) => {
     const currentClickCount = clickCount;
-    if (!isMobile) {
-      handleClickCount();
-    } else {
-      handleScrollCount();
-    }
+    if (!isMobile) handleClickCount();
 
     if ((!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0))
       || (isAdVisible && currentClickCount === 4)) {
@@ -200,14 +187,16 @@ const Gallery = (props) => {
 
   const insertMobileGalleryAd = () => {
     const mobileElements = [...mobileElementData];
+    const insertionBuffer = nextAdRendering === 4 ? 1 : 2;
     let hasAdBeenInserted = false;
 
     mobileElementData.forEach((element, i) => {
-      if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted && photosScrolled === 3) {
-        mobileElements.splice(element.props.data.index + 1, 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
+      if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted) {
+        mobileElements.splice(element.props.data.index + insertionBuffer, 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
         hasAdBeenInserted = true;
       }
     });
+
     return mobileElements;
   };
 
@@ -243,9 +232,9 @@ const Gallery = (props) => {
     setHeight(0);
     setMobileAdsIndices([]);
     setAdInsertionAbleState(true);
-    setPhotosScrolled(0);
     setAdOffsetHeight(0);
     setCurrentAdCount(0);
+    setNextAdRendering(4);
   };
 
   const renderCaptionByCurrentIndex = () => {
@@ -320,22 +309,20 @@ const Gallery = (props) => {
       const targetElementoffsetHeight = document.getElementById(`gallery-item-${index}`).scrollHeight;
 
       const mpg01AdHeight = (document.getElementById('ad-mpgo1-parent')
-      && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
+        && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
 
       // accounts for height of ad * number of ads
       const targetHeight = offsetHeight + (targetElementoffsetHeight) + ((adOffsetHeight) * currentAdCount);
 
       if (!adOffsetHeight && mpg01AdHeight) setAdOffsetHeight(mpg01AdHeight);
-      // console.log(mobileAdsIndices);
-      // console.log('currentIndex', index, 'is index missing from array?', !mobileAdsIndices.includes(index));
+
       // lazy loading ads
-      if (isAdInsertable && !mobileAdsIndices.includes(index) && mobileElementData && photosScrolled === 3) {
-        // console.log('currentIndex', index, 'does index alreadyexist in array?', mobileAdsIndices.includes(index));
-        // debugger;
+      if (isAdInsertable && !mobileAdsIndices.includes(index) && mobileElementData && (currentIndex + 1) === nextAdRendering) {
         const adInsertedMobileArray = insertMobileGalleryAd();
         setMobileElementData(adInsertedMobileArray);
         setAdInsertionAbleState(false);
         setCurrentAdCount(currentAdCount + 1);
+        setNextAdRendering(nextAdRendering + 4);
       }
 
       if (offsetHeight === 0 && (galleryScrollTop > targetElementoffsetHeight)) {
@@ -455,7 +442,8 @@ const Gallery = (props) => {
     return () => {
       window.removeEventListener('scroll', handleScrollEvent, true);
     };
-  }, [currentIndex, isCaptionOn, isAdInsertable, mobileAdsIndices, isAdInsertable, offsetHeight, adOffsetHeight, currentAdCount]);
+  }, [currentIndex, isCaptionOn, isAdInsertable, mobileAdsIndices, isAdInsertable,
+    offsetHeight, adOffsetHeight, currentAdCount, nextAdRendering]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
