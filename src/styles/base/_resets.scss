@@ -6,14 +6,6 @@ body {
   word-break: break-word;
 }
 
-/* hack for edge only, because it's from microsoft (thus, it's stupid) */
-@supports (-ms-ime-align:auto) {
-
-  body {
-    word-break: break-all;
-  }
-}
-
 body,
 figure {
   margin: 0;
