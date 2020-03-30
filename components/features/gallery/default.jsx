@@ -326,9 +326,12 @@ const Gallery = (props) => {
       const targetHeight = offsetHeight + (targetElementoffsetHeight) + ((adOffsetHeight) * currentAdCount);
 
       if (!adOffsetHeight && mpg01AdHeight) setAdOffsetHeight(mpg01AdHeight);
-
+      // console.log(mobileAdsIndices);
+      // console.log('currentIndex', index, 'is index missing from array?', !mobileAdsIndices.includes(index));
       // lazy loading ads
       if (isAdInsertable && !mobileAdsIndices.includes(index) && mobileElementData && photosScrolled === 3) {
+        // console.log('currentIndex', index, 'does index alreadyexist in array?', mobileAdsIndices.includes(index));
+        // debugger;
         const adInsertedMobileArray = insertMobileGalleryAd();
         setMobileElementData(adInsertedMobileArray);
         setAdInsertionAbleState(false);

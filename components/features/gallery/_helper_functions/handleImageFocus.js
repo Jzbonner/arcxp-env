@@ -10,7 +10,7 @@ const handleImageFocus = (arr = [], states = {}, funcs = {}) => {
     prev, next,
   } = funcs;
 
-  let prevIndex = currentIndex - 1;
+  let prevIndex = isAdVisible ? currentIndex : currentIndex - 1;
   let nextIndex = currentIndex + 1;
 
   if (prevIndex < 0) prevIndex = maxIndex;
