@@ -231,11 +231,15 @@
       }
       
       .section {
-        opacity: 1;
+        @include breakpoint(desktop-sm) {
+          opacity: 1;
+        }
 
         .subNav {
-          visibility: visible;
-          opacity: 1;
+          @include breakpoint(desktop-sm) {
+            visibility: visible;
+            opacity: 1;
+          }
         }
       }
     }
