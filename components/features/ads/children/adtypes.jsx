@@ -3,20 +3,10 @@ export const defaultAdSlot = {
   slotName: '',
   display: 'all',
   dimensions: [
-    [
-      [1, 1],
-    ], // desktop
-    [
-      [1, 1],
-    ], // tablet
-    [
-      [1, 1],
-    ], // mobile
+    [1, 1],
   ],
   breakpoints: [
-    [1024, 0], // desktop
-    [768, 0], // tablet
-    [1, 0], // mobile
+    [0, 0], // mobile
   ],
   targeting: {
     // key:value pairs; should be passed-in at ad-request time (e.g. article-basic)
@@ -26,28 +16,12 @@ export const defaultAdSlot = {
 export const adSlots = {
   PX01: {
     dimensions: [
-      [
-        [1, 1],
-      ], // desktop
-      [
-        [1, 1],
-      ], // tablet
-      [
-        [1, 1],
-      ], // mobile
+      [1, 1],
     ],
   },
   HS01: {
     dimensions: [
-      [
-        [1, 1],
-      ], // desktop
-      [
-        [1, 1],
-      ], // tablet
-      [
-        [1, 1],
-      ], // mobile
+      [1, 1],
     ],
   },
   HP01: {
@@ -99,10 +73,8 @@ export const adSlots = {
   'RP01-Story-Desktop': {
     slotName: 'RP01',
     dimensions: [
-      [
-        [300, 600],
-        [300, 250],
-      ],
+      [300, 600],
+      [300, 250],
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -112,10 +84,8 @@ export const adSlots = {
   'RP01-Story-FlatPage': {
     slotName: 'RP01',
     dimensions: [
-      [
-        [300, 600],
-        [300, 250],
-      ],
+      [300, 600],
+      [300, 250],
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -142,10 +112,8 @@ export const adSlots = {
   'RP09-Story-Desktop': {
     slotName: 'RP09',
     dimensions: [
-      [
-        [300, 600],
-        [300, 250],
-      ],
+      [300, 600],
+      [300, 250],
     ],
     breakpoints: [
       [1024, 0], // desktop

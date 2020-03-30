@@ -191,7 +191,7 @@
     }
 
     @include breakpoint(desktop-nav) {
-      min-width: 880px;
+      min-width: 859px;
     }
   }
 
@@ -231,11 +231,15 @@
       }
       
       .section {
-        opacity: 1;
+        @include breakpoint(desktop-sm) {
+          opacity: 1;
+        }
 
         .subNav {
-          visibility: visible;
-          opacity: 1;
+          @include breakpoint(desktop-sm) {
+            visibility: visible;
+            opacity: 1;
+          }
         }
       }
     }
@@ -289,6 +293,10 @@
   .nav-ePaper {
     text-transform: none;
     cursor: pointer;
+
+    @include breakpoint(desktop-sm) {
+      padding-right: 0;
+    }
   }
   
   .nav-search {
@@ -299,6 +307,7 @@
     margin-bottom: 25px;
 
     @include breakpoint(desktop-sm) {
+      padding-left: 15px;
       padding-top: 10px;
       margin-bottom: 0;
       display: flex;
@@ -338,7 +347,7 @@
       background-color: transparent;
       width: calc(100% - 40px);
 
-      @include text-styles(.625rem, 1, "Gordita");
+      @include text-styles(.875rem, 1, "Gordita");
     }
   }
   
@@ -370,7 +379,7 @@
   }
   
   .weather-icon {
-    padding-left: 56px;
+    padding-left: 26px;
     padding-top: 10px;
     cursor: pointer;
   }

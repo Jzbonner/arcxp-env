@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
-import getDisplayClassMap from '../../layouts/_helper_functions/homepage/getDisplayClassMap';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import './list.scss';
 
@@ -22,6 +21,23 @@ const List = (customFields = {}) => {
     query: contentConfigValues,
   });
 
+  function getDisplayClassMap(displayC) {
+    switch (displayC) {
+      case 'Top Photo':
+        return 'top-photo-display-class';
+      case 'Left Photo':
+        return 'left-photo-display-class';
+      case 'No Photo':
+        return 'no-photo-display-class';
+      case 'Center Lead Top Photo':
+        return 'center-lead-display-class';
+      case '1 or 2 Item Feature':
+        return 'one-two-item-display-class';
+      default:
+        return 'top-photo-display-class';
+    }
+  }
+
   if (data && data.data) {
     return (
       <div className={`c-homeListContainer b-margin-bottom-d15-m10 ${getColumnsMap(columns)} ${getDisplayClassMap(displayClass)}`}>
@@ -39,7 +55,7 @@ const List = (customFields = {}) => {
 
 List.propTypes = {
   customFields: PropTypes.shape({
-    content: PropTypes.contentConfig('collections').tag({
+    content: PropTypes.contentConfig('collections', 'query-feed').tag({
       name: 'Content',
     }),
     startIndex: PropTypes.number.tag({

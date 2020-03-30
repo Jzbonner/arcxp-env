@@ -96,7 +96,7 @@
   // for sticky (e.g. right rail) ads
 
   &.is-sticky {
-    @include position-sticky(91px);
+    @include position-sticky(110px);
   }
 
   .arcad {

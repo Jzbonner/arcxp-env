@@ -24,7 +24,7 @@ const Slider = (customFields = {}) => {
 
 Slider.propTypes = {
   customFields: PropTypes.shape({
-    content: PropTypes.contentConfig('collections').tag({
+    content: PropTypes.contentConfig('collections','query-feed').tag({
       name: 'Content',
     }),
     startIndex: PropTypes.number.tag({
