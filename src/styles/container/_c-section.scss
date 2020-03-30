@@ -24,11 +24,13 @@
       padding: 0;
     }
 
-    @include breakpoint(desktop-sm) {
-      padding: 0 80px 0 0;
-    }
-
     @include arc-ad-spacing;
+  }
+
+  &.full-width {
+    @include breakpoint(desktop-sm) {
+      clear: both;
+    }
   }
 
   &:not(.full-width) {
@@ -36,6 +38,7 @@
     .c-contentElements {
       @include breakpoint(desktop-sm) {
         width: calc(100% - 300px);
+        padding: 0 80px 0 0;
       }
     }
 
