@@ -109,7 +109,7 @@ export const adSlots = {
       [768, 0], // tablet
     ],
   },
-  'RP01-List-Tablet': {
+  'RP01-List-Page': {
     slotName: 'RP01',
     dimensions: [
       [
@@ -124,6 +124,8 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
+    isRightRailAd: true,
+    isSticky: true,
   },
   'RP09-Story-Desktop': {
     slotName: 'RP09',

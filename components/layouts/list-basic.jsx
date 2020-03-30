@@ -16,10 +16,9 @@ const ListPageLayout = () => {
   const {
     content_elements: contentElements,
   } = globalContent;
-  console.log(appContext);
-  console.log(globalContent);
-  const RP01StoryFlatPage = () => <ArcAd staticSlot={'RP01-List-Tablet'} key={'RP01-List-Tablet'} />;
 
+  const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
+  const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
   return (
     <>
       <GlobalAdSlots/>
@@ -29,7 +28,8 @@ const ListPageLayout = () => {
         <div className='c-section'>
           <div className='c-contentElements'>
             <div className='c-rightRail'>
-              {RP01StoryFlatPage()}
+              {RP01()}
+              {MP05()}
             </div>
             <div className='c-homeListContainer b-margin-bottom-d15-m10 one-column left-photo-display-class'>
               {contentElements.map((el, i) => <ListItem key={`ListItem-${i}`} {...el} />)}
