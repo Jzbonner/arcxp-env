@@ -44,6 +44,7 @@ const Gallery = (props) => {
   /* Ads */
   const [clickCount, setClickCount] = useState(0);
   const [isAdVisible, setAdVisibleState] = useState(false);
+  const [previousClickAction, setPreviousClickAction] = useState(null);
 
   /* Mobile */
   const [offsetHeight, setHeight] = useState(0);
@@ -135,6 +136,7 @@ const Gallery = (props) => {
   const changeIndex = (action, maxNumber) => {
     const currentClickCount = clickCount;
     if (!isMobile) handleClickCount();
+    setPreviousClickAction(currentAction);
 
     if ((!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0))
       || (isAdVisible && currentClickCount === 4)) {
@@ -148,17 +150,20 @@ const Gallery = (props) => {
             } else {
               setCurrentIndex(maxIndex);
             }
+          } else if (isAdVisible && previousClickAction === actions.NEXT) {
+            setCurrentIndex(currentIndex);
           } else {
             setCurrentIndex(currentIndex - 1);
           }
         }
-      }
-      // change current image index by +1
-      if (action === actions.NEXT) {
+      } else if (action === actions.NEXT) {
+        // change current image index by +1
         setCurrentAction(action);
         if (!isAdVisible || ((currentClickCount % 4) === 0)) {
           if (currentIndex === maxIndex) {
             setCurrentIndex(0);
+          } else if (isAdVisible && previousClickAction === actions.PREV) {
+            setCurrentIndex(currentIndex);
           } else {
             setCurrentIndex(currentIndex + 1);
           }
@@ -167,6 +172,8 @@ const Gallery = (props) => {
     } else {
       setCurrentIndex(currentIndex);
     }
+
+    return null;
   };
 
   const clickFuncs = {
@@ -177,9 +184,14 @@ const Gallery = (props) => {
 
   const insertDesktopGalleryAd = () => {
     const elements = [...elementData];
+
+    const insertionBuffer = currentAction === actions.PREV ? 0 : 1;
+
     elementData.forEach((element, i) => {
       // inserts add after current photo
-      if (element.props.data.states.isFocused) elements.splice(i + 1, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} key={`${i}-PG01`} />);
+      if (element.props.data.states.isFocused) {
+        elements.splice(i + insertionBuffer, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} key={`${i}-PG01`} />);
+      }
     });
 
     return elements;
@@ -255,7 +267,7 @@ const Gallery = (props) => {
 
   const renderDesktopGalleryElements = (elements) => {
     const finalizedElements = handleImageFocus((elements), {
-      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible,
+      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction,
     }, clickFuncs);
 
     setElementData(finalizedElements);
