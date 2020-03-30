@@ -321,7 +321,7 @@ const Gallery = (props) => {
       const targetElementoffsetHeight = document.getElementById(`gallery-item-${index}`).scrollHeight;
 
       const mpg01AdHeight = (document.getElementById('ad-mpgo1-parent')
-        && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
+      && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
 
       // accounts for height of ad * number of ads
       const targetHeight = offsetHeight + (targetElementoffsetHeight) + ((adOffsetHeight) * currentAdCount);
@@ -454,8 +454,7 @@ const Gallery = (props) => {
     return () => {
       window.removeEventListener('scroll', handleScrollEvent, true);
     };
-  }, [currentIndex, isCaptionOn, isAdInsertable, mobileAdsIndices, isAdInsertable,
-    offsetHeight, adOffsetHeight, currentAdCount, nextAdRendering]);
+  }, [currentIndex, isCaptionOn, mobileAdsIndices, isAdInsertable, offsetHeight, adOffsetHeight, currentAdCount, nextAdRendering]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
