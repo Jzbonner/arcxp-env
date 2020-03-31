@@ -26,7 +26,8 @@
     width: 100%;
     height: 90px;
     background-image: linear-gradient(180deg, #fff 67%, #f1f1f1 100%);
-
+    max-width: 100%;
+    
     @include breakpoint(desktop-sm) {
       box-sizing: border-box;
       border-bottom: solid 1px #d0d0d0;
