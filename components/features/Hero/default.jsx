@@ -18,8 +18,6 @@ const Hero = (customFields = {}) => {
   const { basic: headline } = singleItem && singleItem.headlines ? singleItem.headlines : '';
   const { canonical_url: heroURL } = singleItem || '';
 
-  console.log(innerData);
-
   if (data && innerData && heroBackground) {
     const limitHeadline = () => {
       const dots = '...';
