@@ -76,7 +76,7 @@ const StoryPageLayout = () => {
   let infoBoxIndex = null;
   let paragraphIndex = 0;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
-  const insertAtEndOfStory = [BlogAuthorComponent];
+  const insertAtEndOfStory = [];
   const interscrollerPlaceholder = () => (
     <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>
   );
@@ -101,6 +101,8 @@ const StoryPageLayout = () => {
   } else {
     insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
   }
+  // about the author should be the last component of the story
+  insertAtEndOfStory.push(BlogAuthorComponent);
   return (
     <>
       {!noAds && <GlobalAdSlots />}
