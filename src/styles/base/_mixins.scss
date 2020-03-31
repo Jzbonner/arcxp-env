@@ -81,6 +81,30 @@
   }
 }
 
+@mixin home-and-section() {
+  padding-top: 30px;
+
+  .c-section {
+    max-width: 1600px;
+    width: 90%;
+
+    &.with-rightRail {
+      @include breakpoint(desktop-sm) {
+        display: flex;
+
+        .c-contentElements {
+          width: calc(100% - 380px);
+          float: left;
+        }
+
+        .c-rightRail {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
 //Container Mixins
 @mixin blue-button($dimension, $content, $font-size) {
   background: linear-gradient(to top, #04befe, #4481eb);

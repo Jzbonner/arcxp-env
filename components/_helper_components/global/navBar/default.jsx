@@ -13,7 +13,7 @@ import '../../../../src/styles/container/_article-basic.scss';
 import './default.scss';
 
 const NavBar = ({
-  articleURL, headlines, comments, type,
+  articleURL, headlines, comments, type, subtype,
 }) => {
   const [mobileMenuToggled, setToggle] = useState(false);
   const [isMobile, setMobile] = useState(false);
@@ -118,8 +118,9 @@ const NavBar = ({
   return (
     <header className="c-nav">
         <div className={`c-headerNav
-        ${stickyNavVisibility ? 'stickyActive' : ''}`}>
-          <div className={`b-flexRow b-flexCenter nav-logo 
+        ${stickyNavVisibility ? 'stickyActive' : ''}
+        ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`}>
+          <div className={`b-flexRow b-flexCenter nav-logo
           ${stickyNavVisibility || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
             <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
               <div className='nav-flyout-button'></div>
@@ -170,6 +171,7 @@ NavBar.propTypes = {
   headlines: PropTypes.object,
   comments: PropTypes.object,
   type: PropTypes.string,
+  subtype: PropTypes.string,
 };
 
 export default NavBar;

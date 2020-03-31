@@ -44,6 +44,10 @@
   margin-bottom: 5em;
 }
 
+.b-margin-bottom-40 {
+  margin-bottom: 2.5rem;
+}
+
 // desktop margin-bottom 15, mobile margin-bottom 10
 
 .b-margin-bottom-d15-m10 {
@@ -143,5 +147,18 @@
 
   @include breakpoint(desktop-sm) {
     overflow: initial;
+  }
+}
+
+.b-sectionTitle {
+  letter-spacing: -.5px;
+  margin-bottom: 20px;
+  color: #313132;
+  text-align: center;
+
+  @include text-styles(2.5rem, 1, "Average");
+
+  @include breakpoint(desktop-sm) {
+    text-align: left;
   }
 }

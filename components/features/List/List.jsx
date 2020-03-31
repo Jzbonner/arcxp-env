@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
-import './list.scss';
+import './List.scss';
 
 const List = (customFields = {}) => {
   const {
