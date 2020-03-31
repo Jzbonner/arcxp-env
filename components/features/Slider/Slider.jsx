@@ -1,8 +1,10 @@
 /* eslint-disable */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import SliderItem from '../../_helper_components/home/Slider/SliderItem';
+import ListItem from '../../_helper_components/home/ListItem/ListItem';
 
 const Slider = (customFields = {}) => {
   const {
@@ -14,10 +16,45 @@ const Slider = (customFields = {}) => {
     },
   } = customFields;
 
+  const [translateX, setTranslateX] = useState(0);
+
   const data = useContent({
     source: contentService,
     query: contentConfigValues,
   });
+
+
+
+
+
+  const buildSliderItemArray = () => {
+
+    const sliderItems = data.data.map((elem) => {
+      let data = {};
+      data.timestampData = {};
+      data.sectionLabelData = {};
+
+      data.headline = elem.headlines && elem.headlines.basic ? elem.headlines.basic : null;
+
+      data.canonicalUrl = elem.canonical_url ? elem.canonical_url : null;
+
+      data.timestampData.displayDate = elem.display_date ? elem.display_date : null;
+
+      data.timestampData.firstPublishDate = elem.first_publish_date ? elem.first_publish_date : null;
+
+      data.sectionLabelData.taxonomy = elem.taxonomy ? elem.taxonomy : null;
+
+      data.sectionLabelData.label = elem.label ? elem.label : null;
+
+      return <SliderItem data={data}/>;
+
+    });
+
+    return sliderItems;
+  };
+
+  // console.log('slider items mapped', buildSliderItemArray());
+  return null;
 
 /*   return (
     <div className="slider-wrapper">
