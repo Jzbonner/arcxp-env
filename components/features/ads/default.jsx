@@ -25,7 +25,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const { slot: customFieldsSlot } = customFields || {};
   const { dfp_id: dfpid, siteName } = getProperties();
   const slot = customFieldsSlot || staticSlot;
-  let randomIdMPG01 = null;
+  let randomIdMPG01 = '';
   const currentEnv = ENVIRONMENT || 'unknown';
   const contentType = subtype || type;
 
@@ -79,7 +79,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
       dfpId={`${dfpid}/${currentEnv.toLowerCase().indexOf('prod') === -1 ? 'TEST_' : ''}atlanta_np/ajc_web_default`}
       display={adConfig.display || defaultAdSlot.display}
-      id={`${defaultAdSlot.name}${staticSlot || slot}${randomIdMPG01 && `-${randomIdMPG01}`}`}
+      id={`${defaultAdSlot.name}${staticSlot || slot}${randomIdMPG01 !== '' ? `-${randomIdMPG01}` : ''}`}
       slotName={slotName}
       targeting={{ ...globalTargeting, ...targeting }}
     />
@@ -90,9 +90,9 @@ const ArcAd = ({ customFields, staticSlot }) => {
 
 ArcAd.propTypes = {
   customFields: PropTypes.shape({
-    slot: PropTypes.oneOf(['HP01', 'MP01', 'RP01']).tag({
+    slot: PropTypes.oneOf(['HP01', 'HP02', 'MP01', 'MP03', 'MP04', 'RP01', 'RP02', 'RP09']).tag({
       label: 'Slot ID',
-      description: 'Choose a Slot ID for your AD',
+      description: 'Select the ad slot to be inserted',
     }),
   }),
   staticSlot: PropTypes.string,
