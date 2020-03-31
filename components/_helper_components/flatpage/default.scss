@@ -1,22 +1,24 @@
 @import "../../../src/styles/base/fonts";
+@import "./../../../src/styles/base/breakpoints";
 @import "../../../src/styles/base/mixins";
 
 .RP01.arcad.b-margin-bottom-d40-m20 {
   margin-bottom: 0;
 }
 
+.c-headerNav {
+  margin-bottom: 40px;
+}
+
+.c-hp01-mp01,
+.c-hp05-mp05 {
+  margin-bottom: 40px;
+}
+
 article {
 
-  .HP01 {
-    margin: 30px 0 40px;
-  }
-
-  .MP01 {
-    margin-bottom: 40px;
-  }
-
   .c-section {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 
     .MP02 {
       margin-top: 30px;
@@ -72,6 +74,8 @@ article {
     ol,
     ul {
       list-style: initial;
+
+      @include text-styles(1rem, 2.11, "Gordita");
     }
 
     td {
