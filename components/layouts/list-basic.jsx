@@ -1,21 +1,45 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
+import { useContent } from 'fusion:content';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import ArcAd from '../features/ads/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import Footer from '../_helper_components/global/footer/default';
-// import Section from '../_helper_components/article/section/Section';
-import ListItem from '../_helper_components/home/ListItem/ListItem';
+import CollectionList from '../_helper_components/listpage/collectionList/default';
 import '../features/List/list.scss';
+import collectionListFilter from '../../content/filters/collection-list';
 
 const ListPageLayout = () => {
   const appContext = useAppContext();
-  const { globalContent } = appContext;
+  const { globalContent, globalContentConfig } = appContext;
   if (!globalContent) return null;
   const {
-    content_elements: contentElements,
+    data,
   } = globalContent;
+
+  const {
+    query,
+  } = globalContentConfig;
+
+  const {
+    id: queryID,
+  } = query;
+
+  const collection = useContent({
+    source: 'content-api',
+    query: {
+      id: queryID,
+    },
+    filter: collectionListFilter,
+  });
+
+  const {
+    content_elements: contentElements,
+  } = collection;
+
+  console.log(data);
+
 
   const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
   const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
@@ -32,7 +56,7 @@ const ListPageLayout = () => {
               {MP05()}
             </div>
             <div className='c-homeListContainer b-margin-bottom-d15-m10 one-column left-photo-display-class'>
-              {contentElements.map((el, i) => <ListItem key={`ListItem-${i}`} {...el} />)}
+              <CollectionList listItems={data} collectionLength={contentElements.length} />
             </div>
           </div>
         </div>

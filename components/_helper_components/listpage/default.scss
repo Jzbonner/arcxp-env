@@ -1,0 +1,39 @@
+@import "../../../src/styles/base/_mixins.scss";
+@import "../../../src/styles/base/breakpoints";
+
+.c-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 102px;
+  width: fit-content;
+  border-radius: 6px;
+  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+  background-color: #fff;
+  padding: 40px 30px;
+  box-sizing: border-box;
+
+  .right-button {
+    @include blue-button(35px, "\e902", 21px);
+  }
+}
+
+.c-pageNums {
+  display: flex;
+  height: 26px;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  color: #2e81b7;
+
+  @include text-styles(1.25rem, .875, "Gordita");
+
+  .page {
+    padding: 0 10px;
+  }
+}
+
+.c-right-button {
+  padding-left: 10px;
+}

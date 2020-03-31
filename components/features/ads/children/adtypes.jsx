@@ -124,7 +124,6 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
-    isRightRailAd: true,
     isSticky: true,
   },
   'RP09-Story-Desktop': {
