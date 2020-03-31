@@ -1,9 +1,0 @@
-@import "./../../../../src/styles/base/";
-
-.c-sectionHome.c-section {
-  max-width: 1600px;
-
-  @include breakpoint(desktop-sm) {
-    width: 90%;
-  }
-}

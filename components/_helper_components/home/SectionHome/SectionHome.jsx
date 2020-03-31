@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './SectionHome.scss';
 
-const SectionHomepage = ({ feature, rightRailAd }) => {
-  if (feature) {
+const SectionHomepage = ({ feature, rightRailContent }) => {
+  if (feature || rightRailContent) {
     return (
-      <div className={`c-section c-sectionHome ${rightRailAd ? 'with-rightRail' : 'full-width'} b-margin-bottom-d40-m20`}>
+      <div className={`c-section c-sectionHome ${rightRailContent ? 'with-rightRail' : 'full-width'} b-margin-bottom-d40-m20`}>
         <div className="c-contentElements">
-          {rightRailAd && <div className="c-rightRail">{rightRailAd()}</div>}
           {feature}
         </div>
+        {rightRailContent && <div className="c-rightRail">{rightRailContent}</div>}
       </div>
     );
   }
@@ -18,7 +17,7 @@ const SectionHomepage = ({ feature, rightRailAd }) => {
 
 SectionHomepage.propTypes = {
   feature: PropTypes.object,
-  rightRailAd: PropTypes.func,
+  rightRailContent: PropTypes.object,
 };
 
 export default SectionHomepage;
