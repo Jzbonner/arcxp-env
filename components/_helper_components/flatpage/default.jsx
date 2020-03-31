@@ -19,6 +19,7 @@ const FlatPage = ({ globalContent }) => {
     comments,
     taxonomy,
     type,
+    subtype,
     canonical_url: articleURL,
     content_elements: contentElements,
   } = globalContent || {};
@@ -37,7 +38,7 @@ const FlatPage = ({ globalContent }) => {
     <>
       { !noAds && <GlobalAdSlots /> }
       <BreakingNews/>
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype}/>
       <main>
         <article>
           {
