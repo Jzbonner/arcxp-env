@@ -1,0 +1,126 @@
+@import "./../../../src/styles/base";
+
+.c-mosaic {
+  @include breakpoint(desktop-sm) {
+    margin: 0 -1%;
+  }
+
+  a {
+    cursor: pointer;
+  }
+
+  .title {
+    letter-spacing: -.5px;
+    margin: 0 0 20px 15px;
+
+    @include text-styles(2.5rem, 1, "Average");
+  }
+
+  .c-mosaic-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .mosaic-box {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      color: #fff;
+      border-radius: 6px;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      height: 100%;
+      margin-bottom: 20px;
+      width: 100%;
+      letter-spacing: -.2px;
+
+      @include text-styles(1.875rem, 1.43, "Average");
+
+      @include breakpoint(desktop-sm) {
+        width: initial;
+        height: 400px;
+        margin: 0 1% 2%;
+      }
+
+      &.size-1 {
+        background: linear-gradient(110deg, rgba(4, 79, 103, 1) 0%, rgba(32, 133, 165, 1) 98%);
+
+        @include breakpoint(desktop-sm) {
+          flex: 15%;
+
+          .headline {
+            letter-spacing: -.2px;
+
+            @include text-styles(1.95vw, 1.43, "Average");
+          }
+        }
+      }
+
+      &.size-2 {
+        background: linear-gradient(110deg, rgba(4, 79, 103, 1) 0%, rgba(32, 133, 165, 1) 98%);
+
+        @include breakpoint(desktop-sm) {
+          flex: 24%;
+
+          .headline {
+            letter-spacing: -.2px;
+
+            @include text-styles(1.95vw, 1.43, "Average");
+          }
+        }
+      }
+
+      &.size-3 {
+        background: linear-gradient(325deg, rgba(4, 79, 103, 1) 0%, rgba(32, 133, 165, 1) 98%);
+
+        @include breakpoint(desktop-sm) {
+          flex: 41%;
+
+          .headline {
+            letter-spacing: -.4px;
+
+            @include text-styles(3vw, 1.26, "Average");
+          }
+        }
+      }
+
+      &.size-4 {
+        background: linear-gradient(325deg, rgba(4, 79, 103, 1) 0%, rgba(32, 133, 165, 1) 98%);
+
+        @include breakpoint(desktop-sm) {
+          flex: 50%;
+
+          .headline {
+            letter-spacing: -.4px;
+
+            @include text-styles(3vw, 1.26, "Average");
+          }
+        }
+      }
+
+      .headline {
+        color: #fff;
+      }
+
+      .c-sectionLabel {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: .475rem;
+
+        .section-label,
+        .article-timestamp {
+          color: #fff;
+        }
+
+        .section-label {
+          @include text-styles(1.125rem, 1.5, "Gordita");
+        }
+
+        .article-timestamp {
+          @include text-styles(.75rem, 1, "Gordita");
+        }
+      }
+    }
+  }
+}
