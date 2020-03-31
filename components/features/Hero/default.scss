@@ -1,88 +1,90 @@
 @import "./../../../src/styles/base";
 
 .c-heroFeature {
-    height: 466px;
-    overflow: hidden;
-    
+  height: 466px;
+  overflow: hidden;
+
+  @include breakpoint(tablet) {
+    height: 232px;
+  }
+
+  @include breakpoint(desktop-sm) {
+    height: 310px;
+  }
+
+  @include breakpoint(desktop-lg) {
+    height: 503px;
+  }
+
+  .hero-url {
+    position: absolute;
+    width: 100%;
+    height: inherit;
+    left: 0;
+    right: 0;
+  }
+
+  .hero-img {
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    max-width: 1660px;
+    height: inherit;
+    left: 0;
+    right: 0;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-headline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 90%;
+    transform: translateY(-90%);
+    width: calc(100% - 40px);
+    height: auto;
+    margin: 0 auto;
+    max-width: 636px;
+    opacity: .9;
+    border-radius: 12px;
+    box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+    background-color: #fff;
+
     @include breakpoint(tablet) {
-        height: 232px;
+      width: 100%;
+      max-width: 365px;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     @include breakpoint(desktop-sm) {
-        height: 310px;
+      max-width: 423px;
     }
 
     @include breakpoint(desktop-lg) {
-        height: 503px;
+      max-width: 636px;
     }
 
-    .hero-url {
-        position: absolute;
-        width: 100%;
-        height: inherit;
-        left: 0;
-        right: 0;
+    .headline-text {
+      @include text-styles(1.875rem, 1.23, "Average");
+
+      padding: 1.4375em;
+      letter-spacing: -.25px;
+      text-align: center;
+      color: #000;
+
+      @include breakpoint(tablet) {
+        @include text-styles(1.25rem, 1.25, "Average");
+      }
+
+      @include breakpoint(desktop-sm) {
+        @include text-styles(1.5625rem, 1.2, "Average");
+      }
+
+      @include breakpoint(desktop-lg) {
+        @include text-styles(2.1875rem, 1.29, "Average");
+      }
     }
-
-    .hero-img {
-        position: absolute;
-        margin: auto;
-        width: 100%;
-        max-width: 1660px;
-        height: inherit;
-        left: 0;
-        right: 0;
-        background-size: cover;
-        background-position: center;
-    }
-    .hero-headline {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 90%; 
-        transform: translateY(-90%);
-        width: calc(100% - 40px);
-        height: auto;
-        margin: 0 auto;
-        max-width: 636px;
-        opacity: 0.9;
-        border-radius: 12px;
-        box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
-        background-color: #ffffff;
-
-        @include breakpoint(tablet) {
-            width: 100%;
-            max-width: 365px;
-            top: 50%; 
-            transform: translateY(-50%);
-        }
-
-        @include breakpoint(desktop-sm) {
-            max-width: 423px;
-        }
-
-        @include breakpoint(desktop-lg) {
-            max-width: 636px;
-        }
-
-        .headline-text {
-            padding: 1.4375em;
-            @include text-styles(1.875rem, 1.23, "Average");
-            letter-spacing: -0.25px;
-            text-align: center;
-            color: #000000;
-
-            @include breakpoint(tablet) {
-                @include text-styles(1.25rem, 1.25, "Average");
-            }
-
-            @include breakpoint(desktop-sm) {
-                @include text-styles(1.5625rem, 1.2, "Average");
-            }
-
-            @include breakpoint(desktop-lg) {
-                @include text-styles(2.1875rem, 1.29, "Average");
-            }
-        }
-    }
+  }
 }

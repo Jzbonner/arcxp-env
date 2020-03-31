@@ -143,14 +143,11 @@
 
   .gallery-count {
     color: #393f4d;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     text-align: center;
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-top: 1rem;
 
     .gallery-index {
       @include text-styles(.75rem, normal, "Gordita");
@@ -243,6 +240,7 @@
 }
 
 .gallery-sticky {
+  display: flex;
   width: 100%;
   position: sticky;
   height: 84px;

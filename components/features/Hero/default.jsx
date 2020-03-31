@@ -12,15 +12,15 @@ const Hero = (customFields = {}) => {
     source: contentService,
     query: contentConfigValues,
   });
-
   const { data: innerData } = data || {};
+  const singleItem = innerData[startIndex] ? innerData[startIndex - 1] : null; // adding "-1" so the array index always starts from 0
+  const { url: heroBackground } = singleItem && singleItem.promo_items ? singleItem.promo_items.basic : '';
+  const { basic: headline } = singleItem && singleItem.headlines ? singleItem.headlines : '';
+  const { canonical_url: heroURL } = singleItem || '';
+
   console.log(innerData);
 
-  if (data && innerData) {
-    const singleItem = innerData[startIndex] ? innerData[startIndex - 1] : null;
-    const { url: heroBackground } = singleItem && singleItem.promo_items.basic ? singleItem.promo_items.basic : '';
-    const { basic: headline } = singleItem && singleItem.headlines ? singleItem.headlines : '';
-    const { canonical_url: heroURL } = singleItem || '';
+  if (data && innerData && heroBackground) {
     const limitHeadline = () => {
       const dots = '...';
       if (headline.length > 72) {
@@ -32,10 +32,9 @@ const Hero = (customFields = {}) => {
       }
       return headline;
     };
-
     return (
       <div className="c-heroFeature">
-        <a href={heroURL} className="hero-url"/>
+        <a href={heroURL} className="hero-url" />
         <div className="hero-img" style={{ backgroundImage: `url(${heroBackground})` }}>
           <div className="hero-headline">
             <h2 className="headline-text">{limitHeadline()}</h2>
