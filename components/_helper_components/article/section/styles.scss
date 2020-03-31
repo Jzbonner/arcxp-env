@@ -5,11 +5,7 @@
 .c-hp05-mp05 {
 
   .arcad:not(:empty) {
-    padding: 2em 0 0;
-
-    @include breakpoint(tablet) {
-      padding: 3em 0 0;
-    }
+    padding: 1.125em 0 0;
   }
 }
 

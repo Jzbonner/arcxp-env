@@ -8,9 +8,9 @@ import Section from '../article/section/Section';
 import GlobalAdSlots from '../global/ads/default';
 import BreakingNews from '../global/breakingNews/default';
 
-import './default.scss';
 import '../../../src/styles/base/_utility.scss';
 import '../../../src/styles/container/_article-basic.scss';
+import './default.scss';
 
 const FlatPage = ({ globalContent }) => {
   if (!globalContent) return null;
@@ -66,7 +66,7 @@ const FlatPage = ({ globalContent }) => {
 
           {
             !noRightRail && !noAds
-            && <div className="c-hp05-mp05 b-margin-bottom-d40-m20">
+            && <div className="c-hp05-mp05">
               <ArcAd staticSlot={'HP05'} />
               <ArcAd staticSlot={'MP05'} />
             </div>
