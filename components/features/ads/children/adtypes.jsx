@@ -40,6 +40,22 @@ export const adSlots = {
       [768, 0], // tablet
     ],
   },
+  HP02: {
+    dimensions: [
+      [
+        [920, 250],
+        [728, 90],
+      ], // desktop
+      [
+        [728, 315],
+        [728, 90],
+      ], // tablet
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
+    ],
+  },
   HP05: {
     dimensions: [
       [
@@ -55,6 +71,22 @@ export const adSlots = {
     ],
   },
   RP01: {
+    dimensions: [
+      [
+        [300, 600],
+        [300, 250],
+      ], // desktop
+      [
+        [300, 600],
+        [300, 250],
+      ], // tablet
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
+    ],
+  },
+  RP02: {
     dimensions: [
       [
         [300, 600],
@@ -186,6 +218,21 @@ export const adSlots = {
     display: 'mobile',
   },
   MP03: {
+    dimensions: [
+      [
+        [0, 0],
+      ], // tablet+
+      [
+        [300, 250],
+      ], // mobile
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+      [1, 0], // mobile
+    ],
+    display: 'mobile',
+  },
+  MP04: {
     dimensions: [
       [
         [0, 0],
