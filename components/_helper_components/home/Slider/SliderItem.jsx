@@ -16,7 +16,7 @@ const SliderItem = ({ data }) => {
   const { text: isHideTimestampTrue } = hideTimestamp || {};
 
   return (
-    <div className="">
+    <div className="c-slider-item">
         <a href={canonicalUrl} className="slider-item-image">
           <Image src={image} imageType="isHomepageImage" />
         </a>
