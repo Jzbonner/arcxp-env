@@ -88,6 +88,15 @@
   &.hidden {
     display: none;
   }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+
+    @include breakpoint(desktop-sm) {
+      color: #2e81b7;
+    }
+  }
 }
 
 .c-stickyNav-list {
