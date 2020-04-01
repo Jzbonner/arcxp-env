@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import './default.scss';
 
 const Hero = (customFields = {}) => {
@@ -12,34 +13,26 @@ const Hero = (customFields = {}) => {
     source: contentService,
     query: contentConfigValues,
   });
-  const { data: innerData } = data || {};
-  const singleItem = innerData[startIndex] ? innerData[startIndex - 1] : null; // adding "-1" so the array index always starts from 0
-  const { url: heroBackground } = singleItem && singleItem.promo_items ? singleItem.promo_items.basic : '';
-  const { basic: headline } = singleItem && singleItem.headlines ? singleItem.headlines : '';
-  const { canonical_url: heroURL } = singleItem || '';
 
-  if (data && innerData && heroBackground) {
-    const limitHeadline = () => {
-      const dots = '...';
-      if (headline.length > 72) {
-        // add dots if the length is more than 72 characters
-        let newHeadline = headline.substring(0, 72);
-        // don't truncate mid-word
-        newHeadline = newHeadline.substring(0, Math.min(newHeadline.length, newHeadline.lastIndexOf(' '))) + dots;
-        return newHeadline;
-      }
-      return headline;
-    };
-    return (
-      <div className="c-heroFeature">
-        <a href={heroURL} className="hero-url" />
-        <div className="hero-img" style={{ backgroundImage: `url(${heroBackground})` }}>
-          <div className="hero-headline">
-            <h2 className="headline-text">{limitHeadline()}</h2>
+  if (data) {
+    const { content_elements: innerData } = data || {};
+    const singleItem = innerData[startIndex] ? innerData[startIndex - 1] : null; // adding "-1" so the array index always starts from 0
+    const { url: heroBackground } = singleItem && singleItem.promo_items ? singleItem.promo_items.basic : '';
+    const { basic: headline } = singleItem && singleItem.headlines ? singleItem.headlines : '';
+    const { canonical_url: heroURL } = singleItem || '';
+
+    if (innerData && heroBackground) {
+      return (
+        <div className="c-heroFeature">
+          <a href={heroURL} className="hero-url" />
+          <div className="hero-img" style={{ backgroundImage: `url(${heroBackground})` }}>
+            <div className="hero-headline">
+              <h2 className="headline-text">{truncateHeadline(headline)}</h2>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
   return null;
 };

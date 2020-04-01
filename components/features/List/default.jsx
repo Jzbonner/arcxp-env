@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
-import './List.scss';
+import './default.scss';
 
 const List = (customFields = {}) => {
   const {
@@ -13,6 +13,7 @@ const List = (customFields = {}) => {
       startIndex = 1,
       itemLimit = 100,
       columns = 1,
+      title = '',
     },
   } = customFields;
 
@@ -38,15 +39,18 @@ const List = (customFields = {}) => {
     }
   }
 
-  if (data && data.data) {
+  if (data) {
     return (
-      <div className={`c-homeListContainer b-margin-bottom-d15-m10 ${getColumnsMap(columns)} ${getDisplayClassMap(displayClass)}`}>
-        {data.data.map((el, i) => {
-          if (startIndex - 1 <= i && i < itemLimit + startIndex - 1) {
-            return <ListItem key={`ListItem-${i}`} {...el} />;
-          }
-          return null;
-        })}
+      <div className="b-margin-bottom-d15-m10">
+        {title && <div className="b-sectionTitle">{title}</div>}
+        <div className={`c-homeListContainer ${getColumnsMap(columns)} ${getDisplayClassMap(displayClass)}`}>
+          {data.content_elements.map((el, i) => {
+            if (startIndex - 1 <= i && i < itemLimit + startIndex - 1) {
+              return <ListItem key={`ListItem-${i}`} {...el} />;
+            }
+            return null;
+          })}
+        </div>
       </div>
     );
   }
@@ -73,6 +77,9 @@ List.propTypes = {
     columns: PropTypes.oneOf([1, 2, 3, 4]).tag({
       name: 'Columns',
       defaultValue: 1,
+    }),
+    title: PropTypes.string.tag({
+      name: 'Title - Top, Left, No Photo Display Classes Only',
     }),
   }),
 };
