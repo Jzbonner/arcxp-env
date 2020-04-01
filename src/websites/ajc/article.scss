@@ -8,5 +8,8 @@
 /* Import all component styles */
 //@import "components/**/*.scss";
 @import "./../../../components/_helper_components/article/**/*.scss";
+@import "./../../../components/_helper_components/global/breakingNews/default.scss";
+@import "./../../../components/_helper_components/global/navBar/amp.scss";
+@import "./../../../components/_helper_components/global/footer/default.scss";
 
 /* Import site specific overrides here */

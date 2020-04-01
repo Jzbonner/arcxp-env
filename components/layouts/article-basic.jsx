@@ -76,7 +76,8 @@ const StoryPageLayout = () => {
   const { tags = [] } = taxonomy || {};
 
   // Both checks return true if the tag is present and false if not.
-  const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
+  let noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
+  if (ampPage) noAds = true;
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
@@ -118,7 +119,7 @@ const StoryPageLayout = () => {
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
             <Headline headlines={headlines} basicItems={basicItems} ampPage={ampPage}/>
           </div>
-          <div className="b-margin-bottom-d15-m10 c-label-wrapper b-pageContainer">
+          <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
             <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage}/>
             <TimeStamp firstPublishDate={firstPublishDate}
                        displayDate={displayDate}
