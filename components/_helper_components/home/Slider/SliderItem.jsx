@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import Image from '../../global/image/default';
+import Image from '../../global/image/default';
 import TimeStamp from '../../article/timestamp/default';
 import SectionLabel from '../../global/sectionLabel/default';
 import truncateHeadline from '../../../layouts/_helper_functions/homepage/truncateHeadline';
@@ -8,7 +8,7 @@ import truncateHeadline from '../../../layouts/_helper_functions/homepage/trunca
 
 const SliderItem = ({ data }) => {
   const {
-    headline, canonicalUrl, timestampData, sectionLabelData,
+    headline, image, canonicalUrl, timestampData, sectionLabelData,
   } = data;
   const { displayDate, firstPublishDate } = timestampData;
   const { taxonomy, label } = sectionLabelData;
@@ -17,11 +17,9 @@ const SliderItem = ({ data }) => {
 
   return (
     <div className="">
-{/*       {promoItems.basic && (
-        <a href={canonicalUrl} className="homeList-image">
-          <Image src={promoItems.basic || promoItems.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />
+        <a href={canonicalUrl} className="slider-item-image">
+          <Image src={image} imageType="isHomepageImage" />
         </a>
-      )} */}
       <div className="homeList-text">
         <div className="c-label-wrapper">
           <SectionLabel label={label} taxonomy={taxonomy} />
@@ -37,6 +35,7 @@ const SliderItem = ({ data }) => {
 
 SliderItem.propTypes = {
   data: PropTypes.object,
+  image: PropTypes.string,
   headline: PropTypes.string,
   canonicalUrl: PropTypes.string,
   timestampData: PropTypes.object,
