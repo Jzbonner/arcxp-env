@@ -1,18 +1,18 @@
 const schemaName = 'collections';
-const ttl = 120;
 
 const params = {
   id: 'text',
 };
 
 const resolve = (query) => {
-  const { id = '' } = query;
-  return `websked/collections/v1/collections/contents/${id}`;
+  const { 'arc-site': arcSite = 'ajc', id } = query;
+  let requestUri = `/content/v4/collections/?website=${arcSite}`;
+  requestUri += id ? `&_id=${id}` : '';
+  return requestUri;
 };
 
 export default {
-  schemaName,
-  ttl,
   resolve,
   params,
+  schemaName,
 };

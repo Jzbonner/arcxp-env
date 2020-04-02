@@ -4,7 +4,7 @@ import { useContent } from 'fusion:content';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import Headline from '../../_helper_components/home/Headline/Headline';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
-import './Lead.scss';
+import './default.scss';
 
 const Lead = (customFields = {}) => {
   const {
@@ -40,8 +40,8 @@ const Lead = (customFields = {}) => {
     }
   }
 
-  function getLists(listData, start, limit) {
-    return listData.data.map((el, i) => {
+  function getLists(apiData, start, limit) {
+    return apiData.map((el, i) => {
       if (start <= i && i <= start + limit - 2) {
         return <ListItem key={`ListItem-${i}`} {...el} />;
       }
@@ -54,7 +54,7 @@ const Lead = (customFields = {}) => {
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex, 3);
       case '1 or 2 Item Feature':
-        return [...Array(columns).keys()].map(i => <Headline key={i} {...apiData.data[startIndex - 1 + i]} />);
+        return [...Array(columns).keys()].map(i => <Headline key={i} {...apiData[startIndex - 1 + i]} />);
       default:
         return null;
     }
@@ -66,7 +66,7 @@ const Lead = (customFields = {}) => {
       case '5-Item Feature - Left Photo':
       case '5-Item Feature - No Photo':
       case '5-Item Feature - Center Lead Top Photo':
-        return <Headline {...apiData.data[startIndex - 1]} />;
+        return <Headline {...apiData[startIndex - 1]} />;
       default:
         return null;
     }
@@ -92,11 +92,12 @@ const Lead = (customFields = {}) => {
   }
 
   if (data) {
+    const { content_elements: contentElements } = data;
     return (
       <div className={`c-homeLeadContainer b-margin-bottom-d30-m20 ${getDisplayClassMap(displayClass)} ${getColumnsMap(columns)}`}>
-        {renderColumn1(displayClass, data) && <div className="column-1">{renderColumn1(displayClass, data)}</div>}
-        {renderColumn2(displayClass, data) && <div className="column-2">{renderColumn2(displayClass, data)}</div>}
-        {renderColumn3(displayClass, data) && <div className="column-3">{renderColumn3(displayClass, data)}</div>}
+        {renderColumn1(displayClass, contentElements) && <div className="column-1">{renderColumn1(displayClass, contentElements)}</div>}
+        {renderColumn2(displayClass, contentElements) && <div className="column-2">{renderColumn2(displayClass, contentElements)}</div>}
+        {renderColumn3(displayClass, contentElements) && <div className="column-3">{renderColumn3(displayClass, contentElements)}</div>}
       </div>
     );
   }

@@ -34,7 +34,7 @@ const Section = ({
   }, [subNavRef.current]);
 
   useEffect(() => {
-    if (subNavRef.current && isSticky) {
+    if (subNavRef.current && !isMobile) {
       setWidth(subNavRef.current.getBoundingClientRect().width);
     }
   }, [isSticky]);

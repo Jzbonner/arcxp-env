@@ -144,8 +144,12 @@
 
 .scrollLock-mobile {
   overflow: hidden;
+  position: fixed;
+  max-height: 100vh;
 
   @include breakpoint(desktop-sm) {
+    position: initial;
+    max-height: initial;
     overflow: initial;
   }
 }

@@ -225,7 +225,9 @@
     }
 
     &:hover {
-      cursor: pointer;
+      @include breakpoint(desktop-sm) {
+        cursor: pointer;
+      }
 
       @include breakpoint(desktop-sm) {
         cursor: none;

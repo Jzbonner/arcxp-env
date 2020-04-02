@@ -77,6 +77,8 @@ const StoryPageLayout = () => {
 
   // Both checks return true if the tag is present and false if not.
   let noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
+  const hyperlocalTags = ['alpharetta', 'roswell', 'sandy springs', 'dunwoody'];
+  const isHyperlocalContent = tags.some(tag => tag && tag.text && hyperlocalTags.includes(tag.text.toLowerCase()));
   if (ampPage) noAds = true;
 
   let infoBoxIndex = null;
@@ -135,7 +137,7 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
-          {!noAds && (
+          {!noAds && !isHyperlocalContent && (
             <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />
               <ArcAd staticSlot={'MP01'} />
@@ -147,6 +149,12 @@ const StoryPageLayout = () => {
             fullWidth={true}
             comesAfterDivider={infoBoxIndex && infoBoxIndex === 0}
           />
+          {!noAds && isHyperlocalContent && (
+            <div className="c-hp01-mp01">
+              <ArcAd staticSlot={'HP01'} />
+              <ArcAd staticSlot={'MP01'} />
+            </div>
+          )}
           <Section
             elements={filteredContentElements}
             startIndex={1}
@@ -157,7 +165,7 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
           />
           {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
-          {!noAds && (
+          {!noAds && !isHyperlocalContent && (
             <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
           )}
           <Section
@@ -177,10 +185,12 @@ const StoryPageLayout = () => {
             insertAtSectionEnd={insertAtEndOfStory}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
           />
-          {!noAds && <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />}
-          <div className="c-taboola">
-            <TaboolaFeed type={type} />
-          </div>
+          {!noAds && !isHyperlocalContent && <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />}
+          {!isHyperlocalContent && (
+            <div className="c-taboola">
+              <TaboolaFeed type={type} />
+            </div>
+          )}
         </article>
        {!basicItems || promoType !== 'gallery' ? <Gallery contentElements={filteredContentElements} pageType={subtype} /> : null}
       </main>
