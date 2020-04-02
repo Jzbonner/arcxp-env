@@ -18,7 +18,7 @@ const SliderItem = ({ data }) => {
   return (
     <div className="c-slider-item">
         <a href={canonicalUrl} className="slider-item-image">
-          <Image src={image} imageType="isHomepageImage" />
+          <Image src={image} imageType={'isInlineImage'}/>
         </a>
       <div className="homeList-text">
         <div className="c-label-wrapper">

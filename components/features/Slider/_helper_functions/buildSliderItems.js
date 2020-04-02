@@ -3,7 +3,7 @@ import SliderItem from '../../../_helper_components/home/Slider/SliderItem';
 import getItemThumbnail from './getItemThumbnail';
 
 const buildSliderItems = (sliderCollection) => {
-  const sliderItems = sliderCollection.data.map((elem, i) => {
+  const sliderItems = sliderCollection.content_elements.map((elem, i) => {
     const itemThumbnail = getItemThumbnail(elem.promo_items);
 
     if (!itemThumbnail) return null;
@@ -31,7 +31,10 @@ const buildSliderItems = (sliderCollection) => {
     return <SliderItem key={`tease-${i}`} data={data} />;
   });
 
+  console.log('sldier items array', sliderItems);
+
   return sliderItems;
+
 };
 
 export default buildSliderItems;

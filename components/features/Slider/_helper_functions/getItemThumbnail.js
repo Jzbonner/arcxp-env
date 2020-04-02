@@ -1,5 +1,5 @@
 export default function getItemThumbnail(promoItems) {
-  if (!promoItems.basic) return null;
+  if (!promoItems || !promoItems.basic) return null;
 
   if (promoItems.basic.type && promoItems.basic.type === 'image' && promoItems.basic.url) return promoItems.basic.url;
 

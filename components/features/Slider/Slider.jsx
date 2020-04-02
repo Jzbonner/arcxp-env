@@ -23,6 +23,7 @@ const Slider = (customFields = {}) => {
     query: contentConfigValues,
   });
 
+  console.log(data);
 
   if (data && !sliderItems) setSliderItems(buildSliderItems(data));
 
