@@ -21,7 +21,9 @@ const Headline = ({
   return (
     <div className="home-headline">
       <a href={relativeURL}>
-        <Image src={promoItems.basic || promoItems.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />
+        {promoItems && (
+          <Image src={promoItems.basic || promoItems.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />
+        )}
       </a>
       <div className="headline-box">
         <SectionLabel label={label} taxonomy={taxonomy} />
