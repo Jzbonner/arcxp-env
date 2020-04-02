@@ -19,8 +19,8 @@ const SectionOutput = ({ zones, layout }) => (
     <main className="c-sectionContent">
       {zones && (
         zones.map((zone, i) => {
-          const { content, rightRailZone } = zone;
-          return <SectionHome feature={content} rightRailContent={rightRailZone} key={`section${i}`}/>;
+          const { content, rightRailZone, rightHalfZone } = zone;
+          return <SectionHome feature={content} rightRailContent={rightRailZone} rightColContent={rightHalfZone} key={`section${i}`}/>;
         })
       )}
     </main>
