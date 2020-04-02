@@ -17,6 +17,7 @@ const ListPageLayout = () => {
   const {
     data,
   } = globalContent;
+  console.log(data);
 
   const {
     query,
@@ -34,12 +35,10 @@ const ListPageLayout = () => {
     filter: collectionListFilter,
   });
 
+
   const {
     content_elements: contentElements,
   } = collection;
-
-  console.log(data);
-
 
   const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
   const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
@@ -56,7 +55,7 @@ const ListPageLayout = () => {
               {MP05()}
             </div>
             <div className='c-homeListContainer b-margin-bottom-d15-m10 one-column left-photo-display-class'>
-              <CollectionList listItems={data} collectionLength={contentElements.length} />
+              <CollectionList listItems={data} collectionLength={contentElements.length} collectionID={queryID} />
             </div>
           </div>
         </div>
