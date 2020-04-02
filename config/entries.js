@@ -13,7 +13,7 @@ console.log(chalk.yellow("Building assets for: ") + chalk.green(buildSites));
 // Render into webpack entry format
 buildSites.forEach(site => {
   entries[site] = `./src/websites/${site}/${site}.scss`;
-  entries[`${site}-article`] = `./src/websites/${site}/article.scss`;
+  entries[`${site}-amp`] = `./src/websites/${site}/amp.scss`;
 });
 
 module.exports = entries;
