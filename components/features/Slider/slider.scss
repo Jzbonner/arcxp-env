@@ -1,4 +1,17 @@
-.slider-wrapper {
+.c-slider-wrapper {
   display: flex;
+  flex-direction: column;
   width: 100%;
+
+  .slider-title {
+    font-family: "Average", "Georgia", serif;
+    font-size: 2.5rem;
+    letter-spacing: -.5px;
+    color: #313132;
+    margin-bottom: 1.25rem;
+  }
+
+  .c-slider-content {
+    display: flex;
+  }
 }

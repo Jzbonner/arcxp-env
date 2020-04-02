@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import buildSliderItems from './_helper_functions/buildSliderItems';
+import './slider.scss';
 
 const Slider = (customFields = {}) => {
   const {
@@ -12,6 +13,7 @@ const Slider = (customFields = {}) => {
       startIndex = 1,
       itemLimit = 100,
       displayClass = '',
+      title = '',
     },
   } = customFields;
 
@@ -30,9 +32,10 @@ const Slider = (customFields = {}) => {
   // console.log('slider items mapped', buildSliderItemArray());
 
   return (
-    <div className="slider-wrapper">
-      <div className="slider-content">{sliderItems}</div>
-      <div className="slider-button-box">
+    <div className="c-slider-wrapper">
+      <h1 className="slider-title">{title}</h1>
+      <div className="c-slider-content">{sliderItems}</div>
+      <div className="c-slider-button">
         <button className="slider-button-left"></button>
         <button className="slider-button-right"></button>
       </div>
@@ -52,6 +55,10 @@ Slider.propTypes = {
     itemLimit: PropTypes.number.tag({
       name: 'Item Limit',
       defaultValue: 1,
+    }),
+    title: PropTypes.string.tag({
+      name: 'Slider Title',
+      defaultValue: 'Special Features',
     }),
     displayClass: PropTypes.oneOf(['Slider', 'Slider - Special Features']).tag({
       name: 'Display Class',

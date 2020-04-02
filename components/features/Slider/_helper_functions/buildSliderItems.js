@@ -3,12 +3,20 @@ import SliderItem from '../../../_helper_components/home/Slider/SliderItem';
 import getItemThumbnail from './getItemThumbnail';
 
 const buildSliderItems = (sliderCollection) => {
-  const sliderItems = sliderCollection.content_elements.map((elem, i) => {
+  // temp
+  let elCount = 0;
+
+  const sliderItems = sliderCollection.content_elements.map((elem) => {
     const itemThumbnail = getItemThumbnail(elem.promo_items);
 
     if (!itemThumbnail) return null;
 
     const data = {};
+    data.classes = elCount === 0 ? 'is-firstItem' : '';
+
+    // refactor to filter func
+    elCount += 1;
+
     data.timestampData = {};
     data.sectionLabelData = {};
 
@@ -28,13 +36,12 @@ const buildSliderItems = (sliderCollection) => {
 
     console.log(data);
 
-    return <SliderItem key={`tease-${i}`} data={data} />;
+    return <SliderItem key={`tease-${elCount}`} data={data} />;
   });
 
   console.log('sldier items array', sliderItems);
 
   return sliderItems;
-
 };
 
 export default buildSliderItems;

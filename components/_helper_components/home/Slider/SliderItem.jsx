@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from '../../global/image/default';
+// import Image from '../../global/image/default';
 import TimeStamp from '../../article/timestamp/default';
 import SectionLabel from '../../global/sectionLabel/default';
 import truncateHeadline from '../../../layouts/_helper_functions/homepage/truncateHeadline';
+import './SliderItem.scss';
 
 
 const SliderItem = ({ data }) => {
   const {
-    headline, image, canonicalUrl, timestampData, sectionLabelData,
+    classes, headline, image, canonicalUrl, timestampData, sectionLabelData,
   } = data;
   const { displayDate, firstPublishDate } = timestampData;
   const { taxonomy, label } = sectionLabelData;
@@ -16,18 +17,16 @@ const SliderItem = ({ data }) => {
   const { text: isHideTimestampTrue } = hideTimestamp || {};
 
   return (
-    <div className="c-slider-item">
+    <div className={`c-slider-item ${classes || ''}`}>
         <a href={canonicalUrl} className="slider-item-image">
-          <Image src={image} imageType={'isInlineImage'}/>
+          <img src={image} width={500} height={280}/>
         </a>
-      <div className="homeList-text">
+      <div className="sliderList-text">
         <div className="c-label-wrapper">
           <SectionLabel label={label} taxonomy={taxonomy} />
           <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
         </div>
-        <div className="headline">
-          <a href={canonicalUrl}>{truncateHeadline(headline)}</a>
-        </div>
+        <a className="headline" href={canonicalUrl}>{truncateHeadline(headline)}</a>
       </div>
     </div>
   );
@@ -35,6 +34,7 @@ const SliderItem = ({ data }) => {
 
 SliderItem.propTypes = {
   data: PropTypes.object,
+  classes: PropTypes.string,
   image: PropTypes.string,
   headline: PropTypes.string,
   canonicalUrl: PropTypes.string,

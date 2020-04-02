@@ -1,0 +1,41 @@
+@import "../../../../src/styles/base/";
+
+.c-slider-item.is-firstItem {
+  margin-left: 0;
+}
+
+.c-slider-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: .938rem;
+  margin-left: .938rem;
+  text-align: center;
+
+  .slider-item-image {
+    
+    img {
+      margin-bottom: 1.063rem;
+      border-radius: 6px;
+    }
+  }
+
+  .sliderList-text {
+    margin-bottom: 2.063rem;
+
+    .c-label-wrapper {
+      margin-bottom: .35rem;
+    }
+
+    a.headline {
+      line-height: 1.17;
+      letter-spacing: normal;
+      color: #000;
+      font-family: "Average", "Georgia", serif;
+      font-size: .875rem;
+      margin-bottom: 2.3125rem;
+      text-decoration: none;
+    }
+  }
+}
