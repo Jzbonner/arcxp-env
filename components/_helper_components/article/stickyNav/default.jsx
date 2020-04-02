@@ -35,8 +35,9 @@ const StickyNav = ({
   const stickyShouldBeVisible = () => (isMobileVisibilityRef.current && logoRef.current.getBoundingClientRect().top < 17)
     || (!isMobileVisibilityRef.current && logoRef.current.getBoundingClientRect().bottom <= 1);
 
-  const stickyShouldBeHidden = () => (isMobileVisibilityRef.current && paddingRef.current.getBoundingClientRect().bottom >= 90)
-    || (!isMobileVisibilityRef.current && paddingRef.current.getBoundingClientRect().bottom >= 71 && !commentVisibilityRef.current);
+  const stickyShouldBeHidden = () => (isMobileVisibilityRef.current
+        && paddingRef.current.getBoundingClientRect().bottom >= 90 && !commentVisibilityRef.current)
+        || (!isMobileVisibilityRef.current && paddingRef.current.getBoundingClientRect().bottom >= 71 && !commentVisibilityRef.current);
 
   const setCommentVisibility = (data) => {
     commentVisibilityRef.current = data;
@@ -119,7 +120,7 @@ const StickyNav = ({
             </li>
             <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
               <li className="stickyNav-item arrow-icon desktop-hidden" onClick={e => toggleMobileDropdownMenu(e)}>
-                <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
+                <a href="#" className="sticky-nav-icon btn-arrow-down" target="__blank"></a>
               </li>
               <li className="stickyNav-item">
                 <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>

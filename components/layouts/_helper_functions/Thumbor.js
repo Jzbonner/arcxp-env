@@ -6,6 +6,7 @@ const thumbor = new Thumbor(RESIZER_SECRET_KEY, 'http://resizer.arcpublishing.co
 export default function (url, width = 1000, height = 600) {
   if (url) {
     return thumbor
+      .smartCrop(true)
       .setImagePath(url)
       .resize(width, height)
       .buildUrl();

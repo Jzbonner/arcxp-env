@@ -44,6 +44,10 @@
   margin-bottom: 5em;
 }
 
+.b-margin-bottom-40 {
+  margin-bottom: 2.5rem;
+}
+
 // desktop margin-bottom 15, mobile margin-bottom 10
 
 .b-margin-bottom-d15-m10 {
@@ -140,8 +144,12 @@
 
 .scrollLock-mobile {
   overflow: hidden;
+  position: fixed;
+  max-height: 100vh;
 
   @include breakpoint(desktop-sm) {
+    position: initial;
+    max-height: initial;
     overflow: initial;
   }
 }

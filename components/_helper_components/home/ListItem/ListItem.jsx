@@ -19,7 +19,7 @@ const ListItem = ({
 
   return (
     <div className="c-homeList">
-      {promoItems.basic && (
+      {promoItems && (
         <a href={relativeURL} className="homeList-image">
           <Image src={promoItems.basic || promoItems.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />
         </a>

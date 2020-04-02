@@ -4,9 +4,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
-import SectionLabel from './../../_helper_components/global/sectionLabel/default';
+import SectionLabel from '../../_helper_components/global/sectionLabel/default';
 import TimeStamp from '../../_helper_components/article/timestamp/default';
-import './Mosaic.scss';
+import './default.scss';
 
 const Mosaic = (customFields = {}) => {
   const {
@@ -49,7 +49,7 @@ const Mosaic = (customFields = {}) => {
       <div className="c-mosaic">
         {title && <div className="title">{title}</div>}
         <div className="c-mosaic-box">
-          {data.data.map((el, i) => {
+          {data.content_elements.map((el, i) => {
             const {
               website_url: relativeURL,
               headlines,
