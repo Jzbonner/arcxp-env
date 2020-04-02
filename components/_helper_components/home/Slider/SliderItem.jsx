@@ -7,7 +7,7 @@ import truncateHeadline from '../../../layouts/_helper_functions/homepage/trunca
 import './SliderItem.scss';
 
 
-const SliderItem = ({ data }) => {
+const SliderItem = ({ data, refHook }) => {
   const {
     classes, headline, image, canonicalUrl, timestampData, sectionLabelData,
   } = data;
@@ -17,7 +17,7 @@ const SliderItem = ({ data }) => {
   const { text: isHideTimestampTrue } = hideTimestamp || {};
 
   return (
-    <div className={`c-slider-item ${classes || ''}`}>
+    <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
         <a href={canonicalUrl} className="slider-item-image">
           <img src={image} width={500} height={280}/>
         </a>
@@ -34,6 +34,7 @@ const SliderItem = ({ data }) => {
 
 SliderItem.propTypes = {
   data: PropTypes.object,
+  refHook: PropTypes.object,
   classes: PropTypes.string,
   image: PropTypes.string,
   headline: PropTypes.string,

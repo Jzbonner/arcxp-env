@@ -1,6 +1,7 @@
 .c-slider-wrapper {
   display: flex;
   flex-direction: column;
+  position: relative;
   width: 100%;
 
   .slider-title {
@@ -11,7 +12,40 @@
     margin-bottom: 1.25rem;
   }
 
-  .c-slider-content {
-    display: flex;
+  .c-slider {
+    position: relative;
+
+    .c-slider-content {
+      display: flex;
+      overflow-x: hidden;
+    }
+
+    .c-slider-arrows {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+
+      .left-arrow {
+        position: relative;
+        width: 8rem;
+        transform: rotate(180deg);
+        z-index: 10;
+      }
+
+      .right-arrow {
+        position: relative;
+        height: 8rem;
+        width: 8rem;
+        cursor: pointer;
+        z-index: 10;
+        left: 79vw;
+        top: 20%;
+      }
+    }
   }
 }
