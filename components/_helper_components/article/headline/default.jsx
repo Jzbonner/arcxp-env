@@ -6,7 +6,7 @@ import Image from '../../global/image/default';
 import Video from '../../global/video/default';
 import Gallery from '../../../features/gallery/default';
 
-const Headline = ({ basicItems = {}, headlines = {} }) => {
+const Headline = ({ basicItems = {}, headlines = {}, ampPage = false }) => {
   let promoData = {};
   if (basicItems) {
     promoData = basicItems;
@@ -25,11 +25,11 @@ const Headline = ({ basicItems = {}, headlines = {} }) => {
           <h3 className={`headline-text ${headlines.basic.length > 50 ? 'headline-text-long' : ''}`}>{headlines.basic}</h3>
         </div>
       </div>
-      {promoData.type === 'image' && (
+      {!ampPage && promoData.type === 'image' && (
         <Image width={1066} height={600} imageType="isLeadImage" src={basicItems} maxTabletViewWidth={maxTabletViewWidth} />
       )}
-      {promoData.type === 'gallery' && promoData.content_elements && <Gallery promoItems={promoData}/>}
-      {promoData.type === 'video' && (
+      {!ampPage && promoData.type === 'gallery' && promoData.content_elements && <Gallery promoItems={promoData}/>}
+      {!ampPage && promoData.type === 'video' && (
         <Video isLeadVideo src={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules} maxTabletViewWidth={maxTabletViewWidth} />
       )}
     </div>
@@ -41,6 +41,7 @@ Headline.propTypes = {
   headlines: PropTypes.object.isRequired,
   featuredVideoPlayerRules: PropTypes.object,
   maxTabletViewWidth: PropTypes.number,
+  ampPage: PropTypes.bool,
 };
 
 export default Headline;
