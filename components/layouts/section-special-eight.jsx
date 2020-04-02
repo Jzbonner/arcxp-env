@@ -1,4 +1,4 @@
-/*  /components/layouts/section-basic.jsx  */
+/*  /components/layouts/section-special-eight.jsx  */
 
 import React from 'react';
 import { useAppContext } from 'fusion:context';
@@ -14,6 +14,11 @@ const SectionLayout = (props) => {
     zone4,
     zone4RightRail,
     zone5,
+    zone6,
+    zone6RightRail,
+    zone7,
+    zone8,
+    zone8RightRail,
   ] = props.children;
   const appContext = useAppContext();
   const { layout } = appContext;
@@ -23,6 +28,9 @@ const SectionLayout = (props) => {
     { content: zone3 },
     { content: zone4, rightRailZone: zone4RightRail },
     { content: zone5 },
+    { content: zone6, rightRailZone: zone6RightRail },
+    { content: zone7 },
+    { content: zone8, rightRailZone: zone8RightRail },
   ];
 
   return <SectionOutput zones={zonesCollection} layout={layout} />;
@@ -36,6 +44,11 @@ SectionLayout.sections = [
   'Zone 4',
   'Right Rail (zone 4)',
   'Zone 5',
+  'Zone 6',
+  'Right Rail (zone 6)',
+  'Zone 7',
+  'Zone 8',
+  'Right Rail (zone 8)',
 ];
 
 SectionLayout.propTypes = {
