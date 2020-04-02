@@ -119,7 +119,7 @@ const StickyNav = ({
             </li>
             <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
               <li className="stickyNav-item arrow-icon desktop-hidden" onClick={e => toggleMobileDropdownMenu(e)}>
-                <a href="#" className="sticky-nav-icon btn-arrow-up" target="__blank"></a>
+                <a href="#" className="sticky-nav-icon btn-arrow-down" target="__blank"></a>
               </li>
               <li className="stickyNav-item">
                 <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
