@@ -2,7 +2,7 @@ import React from 'react';
 import SliderItem from '../../../_helper_components/home/Slider/SliderItem';
 import getItemThumbnail from './getItemThumbnail';
 
-const buildSliderItems = (sliderCollection) => {
+const buildSliderItems = (sliderCollection, ref) => {
   // temp
   let elCount = 0;
 
@@ -13,9 +13,11 @@ const buildSliderItems = (sliderCollection) => {
 
     const data = {};
     data.classes = elCount === 0 ? 'is-firstItem' : '';
+    const refHook = elCount === 0 ? ref : null;
 
     // refactor to filter func
     elCount += 1;
+
 
     data.timestampData = {};
     data.sectionLabelData = {};
@@ -36,7 +38,7 @@ const buildSliderItems = (sliderCollection) => {
 
     console.log(data);
 
-    return <SliderItem key={`tease-${elCount}`} data={data} />;
+    return <SliderItem key={`tease-${elCount}`} data={data} refHook={refHook} />;
   });
 
   console.log('sldier items array', sliderItems);

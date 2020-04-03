@@ -4,8 +4,10 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import buildSliderItems from './_helper_functions/buildSliderItems';
+import getAmount from './_helper_functions/getAmount';
 import rightArrow from '../../../resources/images/right-arrow.svg';
 import './slider.scss';
+import { debug } from 'webpack';
 
 const Slider = (customFields = {}) => {
   const {
@@ -25,10 +27,13 @@ const Slider = (customFields = {}) => {
   const actions = {
     LEFT: 'LEFT',
     RIGHT: 'RIGHT',
+    ADD: 'ADD',
+    SUB: 'SUB',
   };
 
   const contentRef = useRef(null);
   const itemRef = useRef(null);
+  const marginOffset = 30;
 
   const data = useContent({
     source: contentService,
@@ -43,8 +48,10 @@ const Slider = (customFields = {}) => {
     switch (direction) {
       case actions.RIGHT:
         calculateTranslateX(actions.RIGHT);
+        // debugger;
         break;
       case actions.LEFT:
+        calculateTranslateX(actions.LEFT);
         break;
       default:
         break;
@@ -52,30 +59,48 @@ const Slider = (customFields = {}) => {
   };
 
   const calculateTranslateX = (direction) => {
-    if (isMobile) return null;
-    const contentFullWidth = contentRef.current ? content.current.offsetWidth : null;
-    const itemOffsetWidth = itemRef.current ? itemRef.current.offsetWidth : null;
+    // if (isMobile) return null;
+
+    //
+    const itemOffsetWidth = itemRef.current ? itemRef.current.scrollWidth + marginOffset : null;
+    // account for margins and last items so slider doesn't over transform and leave whitespace
+    const contentFullWidth = contentRef.current ? contentRef.current.offsetWidth - (marginOffset * sliderItems.length) - (itemOffsetWidth / 1.2) : null;
+
+    console.log('contentRef', contentRef);
+    console.log('itemRef', itemRef);
 
 
+    // debugger;
     if (direction === actions.LEFT) {
-      // TODO sub logic
-
+      const change = getAmount(contentFullWidth, itemOffsetWidth, translateX, actions.SUB);
+      if (change) setTranslateX(translateX + change);
     } else if (direction === actions.RIGHT) {
-      // TODO finish add logic
-      if (translateX <= contentFullWidth) {
-        setTranslateX(translateX + itemOffsetWidth);
-      }
+      const change = getAmount(contentFullWidth, itemOffsetWidth, translateX, actions.ADD);
+      console.log('change after calc', change);
+      if (change) setTranslateX(translateX - change);
     }    
+
+     // debugger;
   };
+
+  console.log(translateX);
 
   return (
     <div className="c-slider-wrapper">
       <h1 className="slider-title">{title}</h1>
       <div className="c-slider">
-        <div ref={contentRef} className="c-slider-content" style={{ transform: `translateX(${translateX}px)` }}>{sliderItems}</div>
+        <div id="slider" className="c-slider-content" >
+          <div ref={contentRef} className="itemList" style={{ transform: `translateX(${translateX}px)` }}>{sliderItems}</div>
+        </div>
         { !isMobile && <div className="c-slider-arrows">
-          {translateX !== 0 ? <a className="left-arrow"><img src={rightArrow} /></a> : null}
-          <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}><img src={rightArrow} /></a>
+          {translateX !== 0 ? 
+            <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
+              <img src={rightArrow} />
+            </a> 
+          : null}
+          <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
+            <img src={rightArrow} />
+          </a>
         </div>}
       </div>
     </div>
