@@ -44,6 +44,10 @@ const Slider = (customFields = {}) => {
 
   if (data && !sliderItems) setSliderItems(buildSliderItems(data, itemRef));
 
+  const itemOffsetWidth = itemRef.current ? itemRef.current.scrollWidth + marginOffset : null;
+  // account for margins and last items so slider doesn't over transform and leave whitespace
+  const contentFullWidth = contentRef.current && sliderItems ? contentRef.current.offsetWidth - (marginOffset * sliderItems.length) - (itemOffsetWidth / 1.2) : null;
+
   const handleArrowClick = (direction) => {
     switch (direction) {
       case actions.RIGHT:
@@ -60,12 +64,6 @@ const Slider = (customFields = {}) => {
 
   const calculateTranslateX = (direction) => {
     // if (isMobile) return null;
-
-    //
-    const itemOffsetWidth = itemRef.current ? itemRef.current.scrollWidth + marginOffset : null;
-    // account for margins and last items so slider doesn't over transform and leave whitespace
-    const contentFullWidth = contentRef.current ? contentRef.current.offsetWidth - (marginOffset * sliderItems.length) - (itemOffsetWidth / 1.2) : null;
-
     console.log('contentRef', contentRef);
     console.log('itemRef', itemRef);
 
@@ -83,7 +81,7 @@ const Slider = (customFields = {}) => {
      // debugger;
   };
 
-  console.log(translateX);
+  console.log(translateX, contentFullWidth);
 
   return (
     <div className="c-slider-wrapper">
@@ -98,9 +96,9 @@ const Slider = (customFields = {}) => {
               <img src={rightArrow} />
             </a> 
           : null}
-          <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
+          { Math.abs(translateX) < contentFullWidth ? <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
             <img src={rightArrow} />
-          </a>
+          </a> : null}
         </div>}
       </div>
     </div>
