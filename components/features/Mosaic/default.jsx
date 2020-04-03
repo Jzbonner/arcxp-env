@@ -52,7 +52,6 @@ const Mosaic = (customFields = {}) => {
           {data.content_elements.map((el, i) => {
             const {
               website_url: relativeURL,
-
               headlines,
               label,
               taxonomy,
