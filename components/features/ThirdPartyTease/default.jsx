@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useComponentContext } from 'fusion:context';
+import renderCustomHtml from '../../_helper_components/article/contentElements/components/html/renderCustomHtml';
 
 const TPT = () => {
   /* retrieve custom fields from fusion's component context */
@@ -9,11 +10,12 @@ const TPT = () => {
 
   if (content !== '') {
     const regex = /(<?\/body><?\/head><?\/html>)/ig;
+    const src = content.replace(regex, '');
     return (
       <div className="b-margin-bottom-d30-m20">
         {title && <div className="b-sectionTitle">{title}</div>}
         <div className="custom-html" dangerouslySetInnerHTML={{
-          __html: content.replace(regex, ''),
+          __html: renderCustomHtml(src),
         }} />
       </div>
     );
