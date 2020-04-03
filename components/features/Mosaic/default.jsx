@@ -52,10 +52,11 @@ const Mosaic = (customFields = {}) => {
           {data.content_elements.map((el, i) => {
             const {
               website_url: relativeURL,
+
               headlines,
               label,
               taxonomy,
-              first_publish_date: firstPublishDate,
+              publish_date: firstPublishDate,
               display_date: displayDate,
             } = el;
             const { hide_timestamp: hideTimestamp } = el.label || {};
