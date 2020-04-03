@@ -39,7 +39,7 @@ const FlatPage = ({ globalContent }) => {
       { !noAds && <GlobalAdSlots /> }
       <BreakingNews/>
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype}/>
-      <main>
+      <main className="c-flatpage">
         <article>
           {
             !noAds
