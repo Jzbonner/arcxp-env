@@ -55,7 +55,7 @@ const Mosaic = (customFields = {}) => {
               headlines,
               label,
               taxonomy,
-              first_publish_date: firstPublishDate,
+              publish_date: firstPublishDate,
               display_date: displayDate,
             } = el;
             const { hide_timestamp: hideTimestamp } = el.label || {};
