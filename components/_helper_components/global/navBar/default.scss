@@ -260,7 +260,6 @@
     text-transform: capitalize;
     align-items: center;
     -webkit-font-smoothing: antialiased;
-    font-weight: 600;
 
     @include breakpoint(desktop-sm) {
       color: #2e81b7;
