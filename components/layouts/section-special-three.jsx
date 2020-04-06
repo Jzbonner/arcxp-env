@@ -1,4 +1,4 @@
-/*  /components/layouts/section-basic.jsx  */
+/*  /components/layouts/section-special-three.jsx  */
 
 import React from 'react';
 import { useAppContext } from 'fusion:context';
@@ -11,9 +11,6 @@ const SectionLayout = (props) => {
     zone2,
     zone2RightRail,
     zone3,
-    zone4,
-    zone4RightRail,
-    zone5,
   ] = props.children;
   const appContext = useAppContext();
   const { layout } = appContext;
@@ -21,8 +18,6 @@ const SectionLayout = (props) => {
     { content: zone1 },
     { content: zone2, rightRailZone: zone2RightRail },
     { content: zone3 },
-    { content: zone4, rightRailZone: zone4RightRail },
-    { content: zone5 },
   ];
 
   return <SectionOutput zones={zonesCollection} layout={layout} />;
@@ -33,9 +28,6 @@ SectionLayout.sections = [
   'Zone 2',
   'Right Rail (zone 2)',
   'Zone 3',
-  'Zone 4',
-  'Right Rail (zone 4)',
-  'Zone 5',
 ];
 
 SectionLayout.propTypes = {

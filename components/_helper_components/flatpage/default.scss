@@ -2,109 +2,116 @@
 @import "./../../../src/styles/base/breakpoints";
 @import "../../../src/styles/base/mixins";
 
-.RP01.arcad.b-margin-bottom-d40-m20 {
-  margin-bottom: 0;
-}
+.c-flatpage {
 
-.c-hp01-mp01,
-.c-hp05-mp05 {
-  margin-bottom: 40px;
-}
-
-article {
-
-  .c-section {
-    margin-bottom: 40px;
-
-    .MP02 {
-      margin-top: 30px;
-    }
-
-    h1 {
-      font-size: 1.875rem;
-    }
-
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      @include text-styles(1.2rem, 2.11, "Gordita");
-
-      margin: 0;
-      clear: left;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-    }
-
-    h3 {
-      font-size: 1.3rem;
-    }
-
-    h4 {
-      font-size: 1.2rem;
-    }
-
-    i {
-      font-style: italic;
-    }
-
-    b {
-      @include text-styles(1.2rem, 2.11, "Gordita");
-
-      font-weight: 800;
-    }
-
-    blockquote {
-      @include text-styles(1.2rem, 2.11, "Gordita");
-
-      font-weight: 800;
-      clear: left;
-      padding-left: 18px;
-      border-left: 10px solid #2e81b7;
-      border-radius: 2px;
-    }
-
-    ol,
-    ul {
-      list-style: initial;
-
-      @include text-styles(1rem, 2.11, "Gordita");
-    }
-
-    td {
-      vertical-align: top;
-    }
-
-    strong {
-      @include text-styles(1rem, 2, "Gordita");
-
-      font-weight: 800;
-    }
-
-    p {
-      line-height: 30px;
-      margin-bottom: 20px;
-
-      @include text-styles(1rem, 2, "Gordita");
-    }
-
-    a {
-      color: #2e81b7;
-    }
+  .RP01.arcad.b-margin-bottom-d40-m20 {
+    margin-bottom: 0;
   }
-}
 
-@media (min-width: 1024px) {
+  .c-hp01-mp01,
+  .c-hp05-mp05 {
+    margin-bottom: 40px;
+  }
 
   article {
 
     .c-section {
+      margin-bottom: 40px;
+
+      .c-customHTML {
+        @include text-styles(1rem, 2.11, "Gordita");
+      }
+
+      .MP02 {
+        margin-top: 30px;
+      }
 
       h1 {
-        font-size: 2.5vw;
+        font-size: 1.875rem;
+      }
+
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        @include text-styles(1.2rem, 2.11px, "Gordita");
+
+        margin: 0;
+        clear: left;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1.3rem;
+      }
+
+      h4 {
+        font-size: 1.2rem;
+      }
+
+      i {
+        font-style: italic;
+      }
+
+      b {
+        @include text-styles(1.2rem, 2.11, "Gordita-Bold");
+
+        font-weight: 800;
+      }
+
+      blockquote {
+        @include text-styles(1.2rem, 2.11, "Gordita-Bold");
+
+        font-weight: 800;
+        clear: left;
+        padding-left: 18px;
+        border-left: 10px solid #2e81b7;
+        border-radius: 2px;
+      }
+
+      ol,
+      ul {
+        list-style: initial;
+
+        @include text-styles(1rem, 2.11, "Gordita");
+      }
+
+      td {
+        vertical-align: top;
+      }
+
+      strong {
+        @include text-styles(1rem, 2, "Gordita-Bold");
+
+        font-weight: 800;
+      }
+
+      p {
+        line-height: 30px;
+        margin-bottom: 20px;
+
+        @include text-styles(1rem, 2, "Gordita");
+
+        a {
+          color: #2e81b7;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+
+    article {
+
+      .c-section {
+
+        h1 {
+          font-size: 2.5vw;
+        }
       }
     }
   }
