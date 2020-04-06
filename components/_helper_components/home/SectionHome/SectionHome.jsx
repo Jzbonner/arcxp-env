@@ -11,9 +11,7 @@ const SectionHomepage = ({ feature, rightColContent, rightRailContent }) => {
     }
     return (
       <div className={parentClass}>
-        <div className="c-contentElements">
-          {feature}
-        </div>
+        <div className="c-contentElements">{feature}</div>
         {rightColContent && <div className="c-contentElements">{rightColContent}</div>}
         {rightRailContent && <div className="c-rightRail">{rightRailContent}</div>}
       </div>
