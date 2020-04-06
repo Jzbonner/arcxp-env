@@ -9,7 +9,7 @@ const ListItem = ({
   promo_items: promoItems,
   label,
   taxonomy,
-  first_publish_date: firstPublishDate,
+  publish_date: publishDate,
   display_date: displayDate,
   headlines,
   website_url: relativeURL,
@@ -27,7 +27,7 @@ const ListItem = ({
       <div className="homeList-text">
         <div className="c-label-wrapper">
           <SectionLabel label={label} taxonomy={taxonomy} />
-          <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
+          <TimeStamp firstPublishDate={publishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
         </div>
         <div className="headline">
           <a href={relativeURL}>{truncateHeadline(headlines.basic)}</a>
@@ -41,7 +41,7 @@ ListItem.propTypes = {
   promo_items: PropTypes.object,
   label: PropTypes.object,
   taxonomy: PropTypes.object,
-  first_publish_date: PropTypes.string,
+  publish_date: PropTypes.string,
   display_date: PropTypes.string,
   headlines: PropTypes.object,
   website_url: PropTypes.string,
