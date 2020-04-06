@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const SectionHomepage = ({ feature, rightRailContent }) => {
   if (feature || rightRailContent) {
     return (
-      <div className={`c-section c-sectionHome ${rightRailContent ? 'with-rightRail' : 'full-width'} b-margin-bottom-d40-m20`}>
+      <div className={`c-sectionHome ${rightRailContent ? 'with-rightRail' : 'full-width'} b-margin-bottom-d40-m20`}>
         <div className="c-contentElements">
           {feature}
         </div>

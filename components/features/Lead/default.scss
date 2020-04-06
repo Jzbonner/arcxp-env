@@ -17,8 +17,27 @@
     margin-bottom: 25px;
   }
 
+  .home-headline {
+    margin-left: -30px;
+    margin-right: -30px;
+
+    img {
+      border-radius: 0;
+    }
+
+    @include breakpoint(tablet) {
+      margin-left: 0;
+      margin-right: 0;
+
+      img {
+        border-radius: 6px;
+      }
+    }
+  }
+
   .homeList-image {
-    margin-right: 20px;
+    margin-right: 1rem;
+    display: inline-block;
   }
 
   @include breakpoint(desktop-sm) {
@@ -26,18 +45,17 @@
     justify-content: space-between;
 
     .column-2 {
-      width: 52%;
+      width: 49%;
       margin-bottom: 0;
     }
 
     .column-3 {
-      width: 46%;
+      width: 49%;
     }
   }
 
   .c-homeList {
     display: flex;
-    align-items: center;
 
     @include breakpoint(tablet) {
       align-items: flex-start;
@@ -49,17 +67,21 @@
 
     .homeList-text {
 
-      .c-label-wrapper {
-        @include text-styles(.75rem, 1, "Average");
+      .section-label {
+        @include text-styles(.75rem, 1, "Gordita");
+
+        font-weight: 700;
       }
 
       .headline {
-        @include text-styles(1.125rem, 1.25, "Average");
+        @include text-styles(1.125rem, 1.28, "Average");
 
-        letter-spacing: -.24px;
+        @include breakpoint(desktop-sm) {
+          @include text-styles(1.4vw, 1.28, "Average");
+        }
 
         @media (min-width: 1600px) {
-          @include text-styles(1.25rem, 1.25, "Average");
+          @include text-styles(1.125rem, 1.28, "Average");
         }
       }
     }
@@ -95,7 +117,9 @@
       }
 
       .home-headline:last-child {
-        margin-right: 0;
+        @include breakpoint(desktop-sm) {
+          margin-right: 0;
+        }
       }
     }
 
@@ -143,16 +167,36 @@
   /////////////////////
 
   &.top-photo-display-class {
+    @include breakpoint(desktop-sm) {
+      display: block;
+    }
+
+    @include breakpoint(desktop-lg) {
+      display: flex;
+    }
+
+    .column-2 {
+      @include between-breakpoints(desktop-sm, desktop-lg) {
+        width: 100%;
+        margin-bottom: 3rem;
+      }
+    }
 
     .column-3 {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
 
+      @include between-breakpoints(desktop-sm, desktop-lg) {
+        width: calc(100% + 20px);
+        flex-wrap: nowrap;
+        margin: 0 -10px;
+      }
+
       .c-homeList {
         box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
-        margin: 0 -30px 20px;
-        padding: 20px;
+        padding: 20px 15px;
+        margin: 0 -30px 1.5rem;
 
         @include breakpoint(tablet) {
           margin-right: 0;
@@ -161,16 +205,20 @@
 
         @include breakpoint(desktop-sm) {
           box-shadow: none;
-          padding: 0;
+          padding: 0 10px;
+        }
+
+        @include breakpoint(desktop-lg) {
           width: 48%;
-          margin: 0 0 40px;
+          padding: 0;
         }
 
         .homeList-image {
-          max-width: 35%;
+          max-width: calc(45% - 7.5px);
 
           @include breakpoint(desktop-sm) {
             max-width: 100%;
+            margin: 0 0 .6rem;
           }
         }
 
@@ -186,9 +234,8 @@
             margin: 0 0 7px;
 
             @include breakpoint(desktop-sm) {
-              margin: 0 auto 12px;
+              margin: 0 auto .4rem;
               text-align: center;
-              min-height: 25px;
             }
 
             @include breakpoint(desktop-lg) {
@@ -206,14 +253,6 @@
           }
         }
       }
-
-      @include breakpoint(desktop-sm) {
-
-        .c-homeList:nth-child(3),
-        .c-homeList:nth-child(4) {
-          margin-bottom: 0;
-        }
-      }
     }
   }
 
@@ -224,7 +263,7 @@
   &.left-photo-display-class {
 
     .c-homeList {
-      margin-bottom: 20px;
+      margin-bottom: 1rem;
       box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
       padding: 20px;
       margin-left: -30px;
@@ -242,7 +281,7 @@
       }
 
       .homeList-image {
-        max-width: 50%;
+        max-width: calc(45% - 7.5px);
 
         @include breakpoint(desktop-sm) {
           max-width: 35%;
@@ -276,15 +315,15 @@
 
   &.no-photo-display-class {
 
-    .title {
-      @include text-styles(2rem, 1, "Average");
+    .b-sectionTitle {
+      text-align: left;
     }
 
     .c-homeList {
 
       .c-label-wrapper {
         text-align: left;
-        margin: 20px 0 7px;
+        margin: .6rem 0 .4rem;
       }
 
       .headline {
@@ -296,15 +335,9 @@
       }
 
       .homeList-text {
-        padding-bottom: 20px;
+        padding-bottom: .6rem;
         border-bottom: 2px solid #f1f1f2;
         width: 100%;
-
-        .headline {
-          @include breakpoint(tablet) {
-            @include text-styles(1.125rem, 1.25, "Average");
-          }
-        }
       }
     }
   }
@@ -346,13 +379,22 @@
     }
 
     .c-homeList {
-      margin-bottom: 20px;
+      margin-bottom: 1rem;
       box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
       padding: 20px;
 
       @include breakpoint(desktop-sm) {
         box-shadow: none;
         padding: 0;
+      }
+
+      .homeList-image {
+        max-width: calc(45% - 7.5px);
+
+        @include breakpoint(desktop-sm) {
+          max-width: 100%;
+          margin: 0 0 .6rem;
+        }
       }
 
       .homeList-text {
@@ -367,7 +409,7 @@
           margin: 0 0 7px;
 
           @include breakpoint(desktop-sm) {
-            margin: 0 auto 12px;
+            margin: 0 auto .4rem;
             text-align: center;
           }
 
@@ -383,10 +425,6 @@
             text-align: center;
           }
         }
-      }
-
-      .homeList-image {
-        width: 50%;
       }
     }
   }
