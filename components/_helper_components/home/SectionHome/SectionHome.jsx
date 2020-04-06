@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const SectionHomepage = ({ feature, rightColContent, rightRailContent }) => {
   if (feature || rightColContent || rightRailContent) {
-    let parentClass = 'c-section c-sectionHome b-margin-bottom-d40-m20 ';
+    let parentClass = 'c-sectionHome b-margin-bottom-d40-m20 ';
     if (rightColContent) {
       parentClass += ' halves';
     } else {
@@ -11,7 +11,9 @@ const SectionHomepage = ({ feature, rightColContent, rightRailContent }) => {
     }
     return (
       <div className={parentClass}>
-        <div className="c-contentElements">{feature}</div>
+        <div className="c-contentElements">
+          {feature}
+        </div>
         {rightColContent && <div className="c-contentElements">{rightColContent}</div>}
         {rightRailContent && <div className="c-rightRail">{rightRailContent}</div>}
       </div>
