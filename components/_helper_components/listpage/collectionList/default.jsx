@@ -59,7 +59,11 @@ const CollectionList = ({
         );
       }));
       if (fetchRef.current) {
-        window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height));
+        if (window.innerWidth > 1023) {
+          window.scrollTo(0, (fetchRef.current.offsetTop));
+        } else {
+          window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height));
+        }
       }
     }
   }, [newItems, index]);
