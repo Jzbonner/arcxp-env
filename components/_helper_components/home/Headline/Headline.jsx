@@ -10,7 +10,7 @@ const Headline = ({
   promo_items: promoItems,
   label,
   taxonomy,
-  first_publish_date: firstPublishDate,
+  publish_date: publishDate,
   display_date: displayDate,
   headlines,
   website_url: relativeURL,
@@ -27,7 +27,7 @@ const Headline = ({
       </a>
       <div className="headline-box">
         <SectionLabel label={label} taxonomy={taxonomy} />
-        <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
+        <TimeStamp firstPublishDate={publishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
         <a href={relativeURL} className="headline">
           {truncateHeadline(headlines.basic)}
         </a>
@@ -40,7 +40,7 @@ Headline.propTypes = {
   promo_items: PropTypes.object,
   label: PropTypes.object,
   taxonomy: PropTypes.object,
-  first_publish_date: PropTypes.string,
+  publish_date: PropTypes.string,
   display_date: PropTypes.string,
   headlines: PropTypes.object,
   website_url: PropTypes.string,

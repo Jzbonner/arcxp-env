@@ -80,12 +80,12 @@ const Lead = (customFields = {}) => {
       case '5-Item Feature - No Photo':
         return (
           <>
-            {title && <div className="title">{title}</div>}
-            {getLists(data, startIndex, itemLimit)}
+            {title && <div className="b-sectionTitle">{title}</div>}
+            {getLists(apiData, startIndex, itemLimit)}
           </>
         );
       case '5-Item Feature - Center Lead Top Photo':
-        return getLists(data, startIndex + 2, itemLimit - 2);
+        return getLists(apiData, startIndex + 2, itemLimit - 2);
       default:
         return null;
     }
