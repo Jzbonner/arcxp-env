@@ -94,8 +94,8 @@
 
       @include text-styles(.875rem, 1.58, "Gordita");
 
-      @include breakpoint (tablet) {
-        @include text-styles-tablet(1.25rem, 1.5, "Gordita");
+      @include breakpoint(tablet) {
+        @include text-styles(1.25rem, 1.5, "Gordita");
       }
     }
 
@@ -115,7 +115,10 @@
 
     .photo-caption-text {
       @include text-styles(.875rem, 1.58, "Gordita");
-      @include text-styles-tablet(1.25rem, 1.5, "Gordita");
+
+      @include breakpoint(tablet) {
+        @include text-styles(1.25rem, 1.5, "Gordita");
+      }
     }
 
     .photo-credit-text {

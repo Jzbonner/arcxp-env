@@ -45,17 +45,15 @@
         font-size: 1.5rem;
       }
 
-      h3 {
-        font-size: 1.3rem;
-      }
+    b {
+      @include text-styles(1.2rem, 2.11, "Gordita-Bold");
 
       h4 {
         font-size: 1.2rem;
       }
 
-      i {
-        font-style: italic;
-      }
+    blockquote {
+      @include text-styles(1.2rem, 2.11, "Gordita-Bold");
 
       b {
         @include text-styles(1.2rem, 2.11, "Gordita");
@@ -73,9 +71,8 @@
         border-radius: 2px;
       }
 
-      ol,
-      ul {
-        list-style: initial;
+    strong {
+      @include text-styles(1rem, 2, "Gordita-Bold");
 
         @include text-styles(1rem, 2.11, "Gordita");
       }
