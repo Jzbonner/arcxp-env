@@ -13,7 +13,7 @@
 
   .c-homeList {
     width: 100%;
-    margin-bottom: 3rem;
+    margin-bottom: 30px;
 
     @include breakpoint(desktop-sm) {
       margin-bottom: 20px;
@@ -31,18 +31,17 @@
 
         .section-label {
           font-size: .75rem;
-          font-weight: 700;
         }
       }
 
       .headline {
-        @include text-styles(1.4rem, 1.25, "Average");
+        @include text-styles(1.125rem, 1.25, "Average");
 
         letter-spacing: -.24px;
         text-align: center;
 
-        @include breakpoint(desktop-sm) {
-          @include text-styles(1.3vw, 1.28, "Average");
+        @include breakpoint(desktop-lg) {
+          @include text-styles(1.25rem, 1.25, "Average");
         }
       }
     }
@@ -59,7 +58,7 @@
   &.two-columns {
 
     .c-homeList {
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         width: 47%;
       }
     }
@@ -68,12 +67,12 @@
   &.three-columns {
 
     .c-homeList {
-      // @include breakpoint(tablet) {
-      //   width: 47%;
-      // }
+      @include breakpoint(tablet) {
+        width: 47%;
+      }
 
       @include breakpoint(desktop-sm) {
-        width: 31%;
+        width: 32%;
       }
     }
   }
@@ -81,12 +80,12 @@
   &.four-columns {
 
     .c-homeList {
-      // @include breakpoint(tablet) {
-      //   width: 47%;
-      // }
+      @include breakpoint(tablet) {
+        width: 47%;
+      }
 
       @include breakpoint(desktop-sm) {
-        width: 22.5%;
+        width: 23.5%;
       }
     }
   }
@@ -109,7 +108,7 @@
     .image-component-image img {
       border-radius: 0;
 
-      @include breakpoint(tablet) {
+      @include breakpoint(desktop-sm) {
         border-radius: 6px;
       }
     }
@@ -125,11 +124,8 @@
     }
 
     .homeList-text {
-      margin: 0 15px;
-
-      @include breakpoint(tablet) {
-        margin: 0;
-      }
+      width: 90%;
+      margin: 0 auto;
     }
 
     .headline {
@@ -142,23 +138,26 @@
   &.left-photo-display-class {
 
     .c-homeList {
-      margin-bottom: 3rem;
+      margin-bottom: 30px;
 
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         display: flex;
-        margin-bottom: 1rem;
       }
 
       .homeList-image {
         max-width: 50%;
         margin-right: 20px;
 
-        @include breakpoint(desktop-sm) {
+        @include breakpoint(tablet) {
           max-width: 35%;
         }
       }
 
       .homeList-text {
+        @include breakpoint(tablet) {
+          max-width: 50%;
+        }
+
         @include breakpoint(desktop-sm) {
           max-width: 55%;
         }
@@ -170,14 +169,14 @@
         .c-label-wrapper {
           margin-top: -6px;
 
-          @include breakpoint(desktop-sm) {
+          @include breakpoint(tablet) {
             margin: 0 0 7px;
             text-align: left;
           }
         }
 
         .headline {
-          @include breakpoint(desktop-sm) {
+          @include breakpoint(tablet) {
             text-align: left;
           }
         }
@@ -190,11 +189,11 @@
   &.no-photo-display-class {
 
     .c-homeList {
-      margin-bottom: .6rem;
+      margin-bottom: 10px;
 
       .c-label-wrapper {
         text-align: left;
-        margin-bottom: .4rem;
+        margin-bottom: 7px;
       }
 
       .headline {
