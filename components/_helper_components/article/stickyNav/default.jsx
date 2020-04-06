@@ -35,8 +35,9 @@ const StickyNav = ({
   const stickyShouldBeVisible = () => (isMobileVisibilityRef.current && logoRef.current.getBoundingClientRect().top < 17)
     || (!isMobileVisibilityRef.current && logoRef.current.getBoundingClientRect().bottom <= 1);
 
-  const stickyShouldBeHidden = () => (isMobileVisibilityRef.current && paddingRef.current.getBoundingClientRect().bottom >= 90)
-    || (!isMobileVisibilityRef.current && paddingRef.current.getBoundingClientRect().bottom >= 71 && !commentVisibilityRef.current);
+  const stickyShouldBeHidden = () => (isMobileVisibilityRef.current
+        && paddingRef.current.getBoundingClientRect().bottom >= 90 && !commentVisibilityRef.current)
+        || (!isMobileVisibilityRef.current && paddingRef.current.getBoundingClientRect().bottom >= 71 && !commentVisibilityRef.current);
 
   const setCommentVisibility = (data) => {
     commentVisibilityRef.current = data;

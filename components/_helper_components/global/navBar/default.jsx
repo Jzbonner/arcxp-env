@@ -8,13 +8,17 @@ import Subscribe from './subscribe/default';
 import DesktopNav from './desktopNav/default';
 import Login from './login/default';
 import StickyNav from '../../article/stickyNav/default';
+import AmpNavBar from './amp';
 import '../../../../src/styles/base/_utility.scss';
 import '../../../../src/styles/container/_article-basic.scss';
 import './default.scss';
 
 const NavBar = ({
-  articleURL, headlines, comments, type, subtype,
+  articleURL, headlines, comments, type, subtype, ampPage = false,
 }) => {
+  // amp hijack
+  if (ampPage) return <AmpNavBar />;
+
   const [mobileMenuToggled, setToggle] = useState(false);
   const [isMobile, setMobile] = useState(false);
   const [activeSection, setSection] = useState(-1);
@@ -172,6 +176,7 @@ NavBar.propTypes = {
   comments: PropTypes.object,
   type: PropTypes.string,
   subtype: PropTypes.string,
+  ampPage: PropTypes.bool,
 };
 
 export default NavBar;

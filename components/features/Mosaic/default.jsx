@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
@@ -14,7 +12,6 @@ const Mosaic = (customFields = {}) => {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
       startIndex = 1,
       itemLimit = 100,
-      displayClass = '',
       title = '',
     },
   } = customFields;
@@ -24,8 +21,8 @@ const Mosaic = (customFields = {}) => {
     query: contentConfigValues,
   });
 
-  function patternMap(startIndex, i) {
-    const patternSpot = (startIndex + i - 1) % 6;
+  function patternMap(index, i) {
+    const patternSpot = (index + i - 1) % 6;
     switch (patternSpot) {
       case 0:
         return 'size-2';
@@ -51,12 +48,7 @@ const Mosaic = (customFields = {}) => {
         <div className="c-mosaic-box">
           {data.content_elements.map((el, i) => {
             const {
-              website_url: relativeURL,
-              headlines,
-              label,
-              taxonomy,
-              first_publish_date: firstPublishDate,
-              display_date: displayDate,
+              website_url: relativeURL, headlines, label, taxonomy, publish_date: firstPublishDate, display_date: displayDate,
             } = el;
             const { hide_timestamp: hideTimestamp } = el.label || {};
             const { text: isHideTimestampTrue } = hideTimestamp || {};
@@ -73,16 +65,14 @@ const Mosaic = (customFields = {}) => {
                   </a>
                 </div>
               );
-            } else {
-              return null;
             }
+            return null;
           })}
         </div>
       </div>
     );
-  } else {
-    return null;
   }
+  return null;
 };
 
 Mosaic.propTypes = {
