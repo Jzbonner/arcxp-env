@@ -16,7 +16,7 @@
     margin-bottom: 3rem;
 
     @include breakpoint(desktop-sm) {
-      margin-bottom: 20px;
+      margin-bottom: 2rem;
     }
 
     .image-component-image img {
@@ -31,7 +31,7 @@
 
         .section-label {
           font-size: .75rem;
-          font-weight: 700;
+          font-weight: 600;
         }
       }
 
