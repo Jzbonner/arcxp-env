@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const SectionHomepage = ({ feature, rightColContent, rightRailContent }) => {
   if (feature || rightColContent || rightRailContent) {
-    let parentClass = 'c-section c-sectionHome b-margin-bottom-d40-m20 ';
+    let parentClass = 'c-sectionHome b-margin-bottom-d40-m20 ';
     if (rightColContent) {
       parentClass += ' halves';
     } else {
