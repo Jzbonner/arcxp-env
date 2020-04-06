@@ -1,4 +1,4 @@
-@import "./../../../../src//styles/base";
+@import "./../../../../src/styles/base";
 
 .home-headline {
   position: relative;
@@ -32,6 +32,8 @@
 
     .section-label {
       @include text-styles(.75rem, 1, "Gordita");
+
+      font-weight: 700;
     }
 
     .headline {
