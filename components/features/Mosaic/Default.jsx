@@ -50,14 +50,7 @@ const Mosaic = (customFields = {}) => {
         {title && <div className="title">{title}</div>}
         <div className="c-mosaic-box">
           {data.content_elements.map((el, i) => {
-            const {
-              website_url: relativeURL,
-              headlines,
-              label,
-              taxonomy,
-              first_publish_date: firstPublishDate,
-              display_date: displayDate,
-            } = el;
+            const { website_url: relativeURL, headlines, label, taxonomy, publish_date: firstPublishDate, display_date: displayDate } = el;
             const { hide_timestamp: hideTimestamp } = el.label || {};
             const { text: isHideTimestampTrue } = hideTimestamp || {};
 
