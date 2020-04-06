@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import ListItem from '../../home/ListItem/ListItem';
 import Pagination from '../../listpage/pagination/default';
 
-const CollectionList = ({ listItems, collectionLength, collectionID }) => {
+const CollectionList = ({
+  listItems, collectionLength, collectionID, fetchRef,
+}) => {
   const [list, setItems] = useState(null);
-  // const [fetch, fetchContent] = useState(false);
   const [index, setIndex] = useState(null);
-  // console.log(index);
   const paginationCount = Math.ceil(collectionLength / 20);
   const newItems = useContent({
     source: 'content-api',
@@ -19,20 +19,19 @@ const CollectionList = ({ listItems, collectionLength, collectionID }) => {
       size: 20,
     },
   });
-  // console.log(newItems);
 
   useEffect(() => {
     setItems(listItems.map((el, i) => {
       const {
         promo_items: promoItems,
-      } = el;
-      // console.log(el);
+      } = el || {};
       const {
         basic,
-        // lead_art: leadArt,
-      } = promoItems;
-      // console.log(promoItems);
-      const leadArtVisible = (basic.type === 'image') ? '' : 'noPhoto';
+      } = promoItems || {};
+      const {
+        type,
+      } = basic || {};
+      const leadArtVisible = (type === 'image') ? '' : 'noPhoto';
       return (
     <div className={`listPage-item ${leadArtVisible}`} key={`ListItem-${i}`}><ListItem {...el} /></div>
       );
@@ -44,9 +43,24 @@ const CollectionList = ({ listItems, collectionLength, collectionID }) => {
       const {
         content_elements: contentElements,
       } = newItems;
-      setItems(contentElements.map((el, i) => <ListItem key={`ListItem-${i}`} {...el} />));
-      window.scrollTo(0, 400);
-      // console.log(list);
+      setItems(contentElements.map((el, i) => {
+        const {
+          promo_items: promoItems,
+        } = el || {};
+        const {
+          basic,
+        } = promoItems || {};
+        const {
+          type,
+        } = basic || {};
+        const leadArtVisible = (type === 'image') ? '' : 'noPhoto';
+        return (
+      <div className={`listPage-item ${leadArtVisible}`} key={`ListItem-${i}`}><ListItem {...el} /></div>
+        );
+      }));
+      if (fetchRef.current) {
+        window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height));
+      }
     }
   }, [newItems, index]);
   return (
@@ -63,6 +77,7 @@ CollectionList.propTypes = {
   listItems: PropTypes.array,
   collectionLength: PropTypes.number,
   collectionID: PropTypes.string,
+  fetchRef: PropTypes.object,
 };
 
 export default CollectionList;

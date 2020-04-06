@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useAppContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
@@ -19,11 +19,9 @@ const ListPageLayout = () => {
     _id: queryID,
     content_elements: data,
     taxonomy,
-  } = globalContent;
-  console.log(globalContent);
+  } = globalContent || {};
 
   const { tags = [] } = taxonomy || {};
-
 
   const collection = useContent({
     source: 'content-api',
@@ -36,6 +34,8 @@ const ListPageLayout = () => {
   const {
     content_elements: contentElements,
   } = collection;
+
+  const fetchRef = useRef(null);
 
   const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
 
@@ -53,12 +53,12 @@ const ListPageLayout = () => {
               {RP01()}
             </div> : null }
             <div className='b-flexCenter c-homeListContainer b-margin-bottom-d15-m10 one-column left-photo-display-class'>
-              <div className='b-flexCenter b-flexRow tease-listHeading b-margin-bottom-d30-m20'>List Page</div>
-              <CollectionList listItems={data} collectionLength={contentElements.length} collectionID={queryID} />
+              <div className='b-flexCenter b-flexRow tease-listHeading b-margin-bottom-d30-m20' ref={fetchRef}>List Page</div>
+              <CollectionList listItems={data} collectionLength={contentElements.length} collectionID={queryID} fetchRef={fetchRef} />
             </div>
           </div>
         </div>
-        { !noAds ? <div>{MP05()}</div> : null}
+        { !noAds ? <div className='list-mp05'>{MP05()}</div> : null}
       </main>
       <Footer />
   </>

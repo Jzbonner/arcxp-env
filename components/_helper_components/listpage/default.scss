@@ -78,9 +78,16 @@
   }
 
   &.noPhoto {
-    
+    width: 100%;
+
     .homeList-image {
       display: none;
     }
+  }
+}
+
+.list-mp05 {
+  @include breakpoint(desktop-sm) {
+    display: none;
   }
 }
