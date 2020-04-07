@@ -28,8 +28,8 @@ const ListOrderedUnordered = (customFields = {}) => {
 
     if (innerData) {
       return (
-        <div className={`c-${displayClass}`}>
-          {title && <div className="title">{title}</div>}
+        <div className={`c-${displayClass} b-margin-bottom-d30-m20`}>
+          {title && <div className="b-sectionTitle">{title}</div>}
           <ul className="c-list-box">
             {filteredData.map((el, i) => {
               const { basic: headline } = el.headlines ? el.headlines : '';
