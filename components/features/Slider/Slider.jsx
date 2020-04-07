@@ -1,21 +1,20 @@
 /* eslint-disable */
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import buildSliderItems from './_helper_functions/buildSliderItems';
 import getAmount from './_helper_functions/getAmount';
 import rightArrow from '../../../resources/images/right-arrow.svg';
-import './slider.scss';
-import { debug } from 'webpack';
+import './Slider.scss';
 
 const Slider = (customFields = {}) => {
   const {
     customFields: {
-      content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
-      startIndex = 1,
+      content: { contentService = 'collections-api', contentConfigValues = { id: '', startIndex: '' } } = {},
       itemLimit = 100,
       displayClass = '',
+      startIndex = 1,
       title = '',
     },
   } = customFields;
@@ -33,20 +32,28 @@ const Slider = (customFields = {}) => {
 
   const contentRef = useRef(null);
   const itemRef = useRef(null);
-  const marginOffset = 30;
+  const marginOffset = 15;
+
+  console.log('config', contentConfigValues);
 
   const data = useContent({
     source: contentService,
-    query: contentConfigValues,
+    query: contentConfigValues
   });
 
-  console.log(data);
+  console.log('fetched ', data, 'length', data.length);
 
-  if (data && !sliderItems) setSliderItems(buildSliderItems(data, itemRef));
+  if (data && !sliderItems) {
+    // debugger;
+    setSliderItems(buildSliderItems(data, itemRef));
+  } 
 
   const itemOffsetWidth = itemRef.current ? itemRef.current.scrollWidth + marginOffset : null;
+  
   // account for margins and last items so slider doesn't over transform and leave whitespace
   const contentFullWidth = contentRef.current && sliderItems ? contentRef.current.offsetWidth - (marginOffset * sliderItems.length) - (itemOffsetWidth / 1.2) : null;
+
+  console.log(contentFullWidth);
 
   const handleArrowClick = (direction) => {
     switch (direction) {
@@ -84,7 +91,7 @@ const Slider = (customFields = {}) => {
   console.log(translateX, contentFullWidth);
 
   return (
-    <div className="c-slider-wrapper">
+    <div className={`c-slider-wrapper ${displayClass.toLowerCase().includes('special feature') ? 'is-special-feature' : ''}`}>
       <h1 className="slider-title">{title}</h1>
       <div className="c-slider">
         <div id="slider" className="c-slider-content" >
@@ -96,7 +103,7 @@ const Slider = (customFields = {}) => {
               <img src={rightArrow} />
             </a> 
           : null}
-          { Math.abs(translateX) < contentFullWidth ? <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
+          {Math.abs(translateX) < contentFullWidth ? <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
             <img src={rightArrow} />
           </a> : null}
         </div>}

@@ -7,6 +7,7 @@ const buildSliderItems = (sliderCollection, ref) => {
   let elCount = 0;
 
   const sliderItems = sliderCollection.content_elements.map((elem) => {
+    // if (startIndex > 1 && i + 1 < startIndex) return null;
     const itemThumbnail = getItemThumbnail(elem.promo_items);
 
     if (!itemThumbnail) return null;

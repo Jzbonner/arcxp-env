@@ -5,14 +5,13 @@ export default function getItemThumbnail(promoItems) {
     // debugger;
     return promoItems.basic.url;
   }
-
-  // getting nested image url if parent promo_item is type video
-  if (promoItems.basic && promoItems.basic.type === 'video' && promoItems.basic.promo_items
+  // lead video or gallery
+  if (promoItems.basic && (promoItems.basic.type === 'video' || promoItems.basic.type === 'gallery') && promoItems.basic.promo_items
     && promoItems.basic.promo_items.basic && promoItems.basic.promo_items.basic.type === 'image'
     && promoItems.basic.promo_items.basic.url) {
+    // debugger;
     return promoItems.basic.promo_items.basic.url;
   }
-  // debugger;
 
   return null;
 }
