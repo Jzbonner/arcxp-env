@@ -35,6 +35,11 @@ module.exports = (env, multisite) => {
         maxSize: 45000,
         warningSize: 40000,
       });
+      sizeCheckEntries.push({
+        fileName: `${site}-amp/css/style.css`,
+        maxSize: 45000,
+        warningSize: 40000,
+      });
     });
     plugins.push(new SizeCheckPlugin(sizeCheckEntries));
   }

@@ -1,6 +1,7 @@
 /*  /components/layouts/article-basic.jsx  */
 import React from 'react';
 import { useAppContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
@@ -24,6 +25,8 @@ import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/de
 import ConnextHyperLocalSubscription from '../_helper_components/global/ConnextHyperLocalSubscription/ConnextHyperLocalSubscription';
 import FlatPage from '../_helper_components/flatpage/default';
 import ConnextInlinePromoSubscription from '../_helper_components/global/connextInlinePromo/default';
+import getQueryParams from './_helper_functions/getQueryParams';
+import checkTags from './_helper_functions/checkTags';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -37,7 +40,7 @@ const start = 3;
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
-  const { globalContent } = appContext;
+  const { globalContent, requestUri } = appContext;
 
   if (!globalContent) return null;
   const {
@@ -58,6 +61,10 @@ const StoryPageLayout = () => {
 
   if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} />;
 
+  const queryParams = getQueryParams(requestUri);
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
+
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
@@ -69,11 +76,11 @@ const StoryPageLayout = () => {
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
 
   const { tags = [] } = taxonomy || {};
-
+  const hyperlocalTags = getProperties().hyperlocalTags || [];
   // Both checks return true if the tag is present and false if not.
-  const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
-  const hyperlocalTags = ['alpharetta', 'roswell', 'sandy springs', 'dunwoody'];
-  const isHyperlocalContent = tags.some(tag => tag && tag.text && hyperlocalTags.includes(tag.text.toLowerCase()));
+  let noAds = checkTags(tags, 'no-ads');
+  const isHyperlocalContent = checkTags(tags, hyperlocalTags);
+  if (ampPage) noAds = true;
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
@@ -109,15 +116,18 @@ const StoryPageLayout = () => {
     <>
       {!noAds && <GlobalAdSlots />}
       <BreakingNews />
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage}/>
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
-            <Headline headlines={headlines} basicItems={basicItems} />
+            <Headline headlines={headlines} basicItems={basicItems} ampPage={ampPage}/>
           </div>
-          <div className="b-margin-bottom-d15-m10 c-label-wrapper b-pageContainer">
-            <SectionLabel label={label} taxonomy={taxonomy} />
-            <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
+          <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
+            <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage}/>
+            <TimeStamp firstPublishDate={firstPublishDate}
+                       displayDate={displayDate}
+                       isHideTimestampTrue={isHideTimestampTrue}
+                       ampPage={ampPage} />
           </div>
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />

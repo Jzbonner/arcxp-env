@@ -1,0 +1,74 @@
+@import "./../../../src/styles/base";
+
+.c-Ordered,
+.c-Un-ordered {
+  width: calc(100% - 45px);
+  max-width: 408px;
+  margin: auto;
+
+  @include breakpoint(desktop-sm) {
+    width: calc(100% - 150px);
+    max-width: 745px;
+  }
+
+  .b-sectionTitle {
+    @include text-styles(2.1875em, 1, "Average");
+
+    letter-spacing: -.44px;
+    color: #313132;
+    padding-bottom: 10px;
+
+    @include breakpoint(desktop-sm) {
+      @include text-styles(2.5em, 1, "Average");
+
+      letter-spacing: -.5px;
+    }
+  }
+
+  .c-list-box {
+    width: 100%;
+
+    .list-item {
+      list-style: none;
+      padding: 5px 0;
+
+      @include breakpoint(desktop-sm) {
+        padding: 5px 0;
+      }
+
+      .item-index-Ordered {
+        display: block;
+        color: #2e81b7;
+
+        @include text-styles(1.5625em, 1, "Average");
+        
+        @include breakpoint(desktop-sm) {
+          @include text-styles(1.875em, 1, "Average");
+        }
+      }
+
+      .item-index-Un-ordered {
+        display: block;
+        width: 40px;
+        height: 3px;
+        border-radius: 2.5px;
+        background-color: #2e81b7;
+
+        @include breakpoint(desktop-sm) {
+          width: 50px;
+          height: 5px;
+        }
+      }
+
+      .item-title {
+        color: #000;
+
+        @include text-styles(1em, 1.44, "Average");
+
+        @include breakpoint(desktop-sm) {
+          @include text-styles(1.25em, 1.25, "Average");
+        }
+      }
+    }
+  }
+}

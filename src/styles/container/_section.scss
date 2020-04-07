@@ -3,4 +3,19 @@
 
 .c-sectionContent {
   @include home-and-section();
+
+  @include breakpoint(desktop-sm) {
+
+    .c-section.halves {
+      display: flex;
+
+      .c-contentElements {
+        width: calc(50% - 40px);
+
+        &:last-of-type {
+          padding-right: 0;
+        }
+      }
+    }
+  }
 }

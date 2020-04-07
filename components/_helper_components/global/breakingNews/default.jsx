@@ -1,5 +1,6 @@
 import React from 'react';
+import './default.scss';
 
-const BreakingNews = () => <div className="b-placeholder c-breakingNews">Breaking News</div>;
+const BreakingNews = () => <div className="c-breakingNews">Breaking News</div>;
 
 export default BreakingNews;

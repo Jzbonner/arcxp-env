@@ -27,7 +27,7 @@
       flex-direction: column;
       color: #fff;
       border-radius: 6px;
-      padding: 40px 20px;
+      padding: 80px 20px;
       box-sizing: border-box;
       height: 100%;
       margin-bottom: 20px;
@@ -37,6 +37,7 @@
       @include text-styles(1.875rem, 1.43, "Average");
 
       @include breakpoint(desktop-sm) {
+        padding: 40px 20px;
         width: initial;
         height: 400px;
         margin: 0 1% 2%;
