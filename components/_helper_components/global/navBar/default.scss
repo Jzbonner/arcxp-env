@@ -26,12 +26,12 @@
     width: 100%;
     height: 90px;
     background-color: #f8f8f8;
-    border-bottom: solid 1px #d0d0d0;
     max-width: 100%;
 
     @include breakpoint(desktop-sm) {
       box-sizing: border-box;
       height: 75px;
+      border-bottom: solid 1px #d0d0d0;
     }
   }
 
@@ -318,6 +318,7 @@
       box-shadow: none;
       border-radius: 0;
       height: auto;
+      background-color: #f8f8f8;
     }
   }
 
