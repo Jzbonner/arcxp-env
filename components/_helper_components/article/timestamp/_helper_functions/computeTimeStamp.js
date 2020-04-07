@@ -28,6 +28,8 @@ const formatTime = (date) => {
   return `${hours}:${minutes} ${ampm}`;
 };
 
+const formatDate = date => (date.getDate() < 10 ? `0${date.getDate()}` : date.getDate());
+
 const dayOfTheWeek = (day = 7) => {
   const days = [
     'Sunday',
@@ -82,7 +84,13 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, ar
   }
 
   if (articleType === 'amp') {
-    timeStamp = `${dayOfTheWeek(pub.getDay())}, ${findAPMonth(pub.getMonth())} ${pub.getDate()}, ${pub.getFullYear()} @ ${formatTime(pub)}`;
+    const weekday = `${dayOfTheWeek(pub.getDay())}`;
+    const month = `${findAPMonth(pub.getMonth())}`;
+    const dayOfTheMonth = `${formatDate(pub)}`;
+    const year = `${pub.getFullYear()}`;
+    const time = `${formatTime(pub)}`;
+
+    timeStamp = `${weekday}, ${month} ${dayOfTheMonth}, ${year} @ ${time}`;
   }
 
   return timeStamp;
