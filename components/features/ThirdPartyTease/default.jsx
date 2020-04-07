@@ -6,9 +6,9 @@ import renderCustomHtml from '../../_helper_components/article/contentElements/c
 const TPT = () => {
   /* retrieve custom fields from fusion's component context */
   const componentContext = useComponentContext();
-  const { title, content } = componentContext.customFields;
+  const { title, content = '' } = componentContext.customFields;
 
-  if (content !== '') {
+  if (content && content !== '') {
     const regex = /(<?\/body><?\/head><?\/html>)/ig;
     const src = content.replace(regex, '');
     return (
