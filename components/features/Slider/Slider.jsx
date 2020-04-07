@@ -30,6 +30,7 @@ const Slider = (customFields = {}) => {
     SUB: 'SUB',
   };
 
+  const wrapperRef = useRef(null);
   const contentRef = useRef(null);
   const itemRef = useRef(null);
   const marginOffset = 15;
@@ -43,17 +44,12 @@ const Slider = (customFields = {}) => {
 
   console.log('fetched ', data, 'length', data.length);
 
-  if (data && !sliderItems) {
-    // debugger;
-    setSliderItems(buildSliderItems(data, itemRef));
-  } 
+  if (data && !sliderItems) setSliderItems(buildSliderItems(data, itemRef));
+  
 
   const itemOffsetWidth = itemRef.current ? itemRef.current.scrollWidth + marginOffset : null;
-  
-  // account for margins and last items so slider doesn't over transform and leave whitespace
-  const contentFullWidth = contentRef.current && sliderItems ? contentRef.current.offsetWidth - (marginOffset * sliderItems.length) - (itemOffsetWidth / 1.2) : null;
-
-  console.log(contentFullWidth);
+  const wrapperClientWidth = wrapperRef.current ? wrapperRef.current.clientWidth : null;
+  const contentFullWidth = contentRef.current && sliderItems ? contentRef.current.offsetWidth  - wrapperClientWidth : null;
 
   const handleArrowClick = (direction) => {
     switch (direction) {
@@ -88,10 +84,8 @@ const Slider = (customFields = {}) => {
      // debugger;
   };
 
-  console.log(translateX, contentFullWidth);
-
   return (
-    <div className={`c-slider-wrapper ${displayClass.toLowerCase().includes('special feature') ? 'is-special-feature' : ''}`}>
+    <div ref={wrapperRef} className={`c-slider-wrapper ${displayClass.toLowerCase().includes('special feature') ? 'is-special-feature' : ''}`}>
       <h1 className="slider-title">{title}</h1>
       <div className="c-slider">
         <div id="slider" className="c-slider-content" >
