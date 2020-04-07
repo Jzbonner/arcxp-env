@@ -13,10 +13,10 @@
 
   .c-homeList {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 3rem;
 
     @include breakpoint(desktop-sm) {
-      margin-bottom: 20px;
+      margin-bottom: 2rem;
     }
 
     .image-component-image img {
@@ -31,17 +31,18 @@
 
         .section-label {
           font-size: .75rem;
+          font-weight: 600;
         }
       }
 
       .headline {
-        @include text-styles(1.125rem, 1.25, "Average");
+        @include text-styles(1.4rem, 1.25, "Average");
 
         letter-spacing: -.24px;
         text-align: center;
 
-        @include breakpoint(desktop-lg) {
-          @include text-styles(1.25rem, 1.25, "Average");
+        @include breakpoint(desktop-sm) {
+          @include text-styles(1.3vw, 1.28, "Average");
         }
       }
     }
@@ -58,7 +59,7 @@
   &.two-columns {
 
     .c-homeList {
-      @include breakpoint(tablet) {
+      @include breakpoint(desktop-sm) {
         width: 47%;
       }
     }
@@ -67,12 +68,12 @@
   &.three-columns {
 
     .c-homeList {
-      @include breakpoint(tablet) {
-        width: 47%;
-      }
+      // @include breakpoint(tablet) {
+      //   width: 47%;
+      // }
 
       @include breakpoint(desktop-sm) {
-        width: 32%;
+        width: 31%;
       }
     }
   }
@@ -80,12 +81,12 @@
   &.four-columns {
 
     .c-homeList {
-      @include breakpoint(tablet) {
-        width: 47%;
-      }
+      // @include breakpoint(tablet) {
+      //   width: 47%;
+      // }
 
       @include breakpoint(desktop-sm) {
-        width: 23.5%;
+        width: 22.5%;
       }
     }
   }
@@ -108,7 +109,7 @@
     .image-component-image img {
       border-radius: 0;
 
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         border-radius: 6px;
       }
     }
@@ -124,8 +125,11 @@
     }
 
     .homeList-text {
-      width: 90%;
-      margin: 0 auto;
+      margin: 0 15px;
+
+      @include breakpoint(tablet) {
+        margin: 0;
+      }
     }
 
     .headline {
@@ -138,26 +142,23 @@
   &.left-photo-display-class {
 
     .c-homeList {
-      margin-bottom: 30px;
+      margin-bottom: 3rem;
 
-      @include breakpoint(tablet) {
+      @include breakpoint(desktop-sm) {
         display: flex;
+        margin-bottom: 1rem;
       }
 
       .homeList-image {
         max-width: 50%;
         margin-right: 20px;
 
-        @include breakpoint(tablet) {
+        @include breakpoint(desktop-sm) {
           max-width: 35%;
         }
       }
 
       .homeList-text {
-        @include breakpoint(tablet) {
-          max-width: 50%;
-        }
-
         @include breakpoint(desktop-sm) {
           max-width: 55%;
         }
@@ -169,14 +170,14 @@
         .c-label-wrapper {
           margin-top: -6px;
 
-          @include breakpoint(tablet) {
+          @include breakpoint(desktop-sm) {
             margin: 0 0 7px;
             text-align: left;
           }
         }
 
         .headline {
-          @include breakpoint(tablet) {
+          @include breakpoint(desktop-sm) {
             text-align: left;
           }
         }
@@ -189,11 +190,11 @@
   &.no-photo-display-class {
 
     .c-homeList {
-      margin-bottom: 10px;
+      margin-bottom: .6rem;
 
       .c-label-wrapper {
         text-align: left;
-        margin-bottom: 7px;
+        margin-bottom: .4rem;
       }
 
       .headline {
@@ -206,7 +207,7 @@
 
       .homeList-text {
         padding-bottom: 20px;
-        border-bottom: 2px solid #f1f1f2;
+        border-bottom: 1px solid #cdcdcd;
         width: 100%;
 
         .headline {
