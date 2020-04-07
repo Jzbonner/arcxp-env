@@ -42,14 +42,12 @@ const Slider = (customFields = {}) => {
     query: contentConfigValues
   });
 
-  console.log('fetched ', data, 'length', data.length);
-
   if (data && !sliderItems) setSliderItems(buildSliderItems(data, itemRef));
   
 
   const itemOffsetWidth = itemRef.current ? itemRef.current.scrollWidth + marginOffset : null;
   const wrapperClientWidth = wrapperRef.current ? wrapperRef.current.clientWidth : null;
-  const contentFullWidth = contentRef.current && sliderItems ? contentRef.current.offsetWidth  - wrapperClientWidth : null;
+  const contentFullWidth = contentRef.current && sliderItems ? (contentRef.current.offsetWidth - wrapperClientWidth) + (marginOffset * 2) : null;
 
   const handleArrowClick = (direction) => {
     switch (direction) {
@@ -67,10 +65,6 @@ const Slider = (customFields = {}) => {
 
   const calculateTranslateX = (direction) => {
     // if (isMobile) return null;
-    console.log('contentRef', contentRef);
-    console.log('itemRef', itemRef);
-
-
     // debugger;
     if (direction === actions.LEFT) {
       const change = getAmount(contentFullWidth, itemOffsetWidth, translateX, actions.SUB);

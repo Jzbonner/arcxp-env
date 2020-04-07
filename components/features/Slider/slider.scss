@@ -7,6 +7,7 @@
   flex-direction: column;
   position: relative;
   width: 100%;
+  overflow: hidden;
 
   .slider-title {
     font-family: "Average", "Georgia", serif;
@@ -14,10 +15,12 @@
     letter-spacing: -.5px;
     color: #313132;
     margin-bottom: 1.25rem;
+    margin-left: 1.87rem;
   }
 
   .c-slider {
     position: relative;
+    margin-left: 1.87rem;
 
     .c-slider-content {
       display: flex;

@@ -37,12 +37,8 @@ const buildSliderItems = (sliderCollection, ref) => {
 
     data.sectionLabelData.label = elem.label ? elem.label : null;
 
-    console.log(data);
-
     return <SliderItem key={`tease-${elCount}`} data={data} refHook={refHook} />;
   });
-
-  console.log('sldier items array', sliderItems);
 
   return sliderItems;
 };
