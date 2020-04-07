@@ -18,15 +18,13 @@ const findAPMonth = (month = 12) => {
   return months[month];
 };
 
-const formatTime = (date, pageType = '') => {
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  hours %= 12;
-  hours = hours || 12;
-  if (pageType === 'amp') hours -= 4;
-  minutes = minutes < 10 ? `0${minutes}` : minutes;
-  return `${hours}:${minutes} ${ampm}`;
+const formatTime = (date) => {
+  const dateOptions = {
+    timeZone: 'America/New_York',
+    hour: 'numeric',
+    minute: 'numeric',
+  };
+  return new Intl.DateTimeFormat('en-US', dateOptions).format(date);
 };
 
 const formatDate = date => (date.getDate() < 10 ? `0${date.getDate()}` : date.getDate());
@@ -89,7 +87,7 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, ar
     const month = `${findAPMonth(pub.getMonth())}`;
     const dayOfTheMonth = `${formatDate(pub)}`;
     const year = `${pub.getFullYear()}`;
-    const time = `${formatTime(pub, 'amp')}`;
+    const time = `${formatTime(pub)}`;
 
     timeStamp = `${weekday}, ${month} ${dayOfTheMonth}, ${year} @ ${time}`;
   }
