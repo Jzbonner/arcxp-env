@@ -26,7 +26,7 @@ const SliderItem = ({ data, refHook }) => {
           <SectionLabel label={label} taxonomy={taxonomy} />
           <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
         </div>
-        <a className="headline" href={canonicalUrl}>{truncateHeadline(headline)}</a>
+          <a className="headline" href={canonicalUrl}>{truncateHeadline(headline)}</a>
       </div>
     </div>
   );
