@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import getProperties from 'fusion:properties';
 import Image from '../../global/image/default';
 import SectionLabel from '../../global/sectionLabel/default';
 import TimeStamp from '../../article/timestamp/default';
@@ -12,10 +13,13 @@ const ListItem = ({
   publish_date: publishDate,
   display_date: displayDate,
   headlines,
-  website_url: relativeURL,
+  websites,
 }) => {
+  const { sites } = getProperties();
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
+
+  const relativeURL = websites[sites] && websites[sites].website_url;
 
   return (
     <div className="c-homeList">
@@ -44,7 +48,7 @@ ListItem.propTypes = {
   publish_date: PropTypes.string,
   display_date: PropTypes.string,
   headlines: PropTypes.object,
-  website_url: PropTypes.string,
+  websites: PropTypes.object,
 };
 
 export default ListItem;
