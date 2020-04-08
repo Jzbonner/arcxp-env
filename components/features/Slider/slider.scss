@@ -1,3 +1,5 @@
+@import "../../../src/styles/base/breakpoints";
+
 .is-special-feature {
   background-color: #ebebef;
 }
@@ -24,11 +26,20 @@
 
     .c-slider-content {
       display: flex;
-      overflow-x: hidden;
+      
+
+      @include breakpoint(desktop-sm) {
+        overflow-x: hidden;
+      }
+
+      @include breakpoint(mobile) {
+        -webkit-overflow-scrolling: touch;
+      }
 
       .itemList {
         display: flex;
-        transition: all .1s;
+        position: relative;
+        transition: transform .1s ease-in-out;
       }
     }
 

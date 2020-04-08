@@ -5,7 +5,6 @@ import getItemThumbnail from './getItemThumbnail';
 const buildSliderItems = (sliderCollection, ref) => {
   // temp
   let elCount = 0;
-
   const sliderItems = sliderCollection.content_elements.map((elem) => {
     // if (startIndex > 1 && i + 1 < startIndex) return null;
     const itemThumbnail = getItemThumbnail(elem.promo_items);
@@ -14,7 +13,8 @@ const buildSliderItems = (sliderCollection, ref) => {
 
     const data = {};
     data.classes = elCount === 0 ? 'is-firstItem' : '';
-    const refHook = elCount === 0 ? ref : null;
+    data.index = elCount;
+    // const refHook = elCount === 0 ? ref : null;
 
     // refactor to filter func
     elCount += 1;
@@ -37,7 +37,7 @@ const buildSliderItems = (sliderCollection, ref) => {
 
     data.sectionLabelData.label = elem.label ? elem.label : null;
 
-    return <SliderItem key={`tease-${elCount}`} data={data} refHook={refHook} />;
+    return <SliderItem key={`tease-${elCount}`} data={data} refHook={ref} />;
   });
 
   return sliderItems;

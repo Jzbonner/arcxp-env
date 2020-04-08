@@ -1,23 +1,24 @@
-@import "../../../../src/styles/base/";
+@import "../../../../src/styles/base/breakpoints";
 
 .c-slider-item.is-firstItem {
   margin-left: 0;
 }
 
 .c-slider-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-right: .5rem;
   margin-left: .5rem;
   text-align: center;
+  width: 100%;
 
-  .slider-item-image {
-    
-    img {
-      margin-bottom: 1.063rem;
-      border-radius: 6px;
+  .slider-item-image img {
+    margin-bottom: 1.063rem;
+    border-radius: 6px;
+    width: 57vw;
+    height: 16vh;
+
+    @include breakpoint(desktop-sm) {
+      width: 500px;
+      height: 280px;
     }
   }
 

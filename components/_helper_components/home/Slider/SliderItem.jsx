@@ -19,7 +19,7 @@ const SliderItem = ({ data, refHook }) => {
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
         <a href={canonicalUrl} className="slider-item-image">
-          <img src={image} width={500} height={280}/>
+          <img src={image} />
         </a>
       <div className="sliderList-text">
         <div className="c-label-wrapper">
@@ -34,6 +34,7 @@ const SliderItem = ({ data, refHook }) => {
 
 SliderItem.propTypes = {
   data: PropTypes.object,
+  index: PropTypes.number,
   refHook: PropTypes.object,
   classes: PropTypes.string,
   image: PropTypes.string,
