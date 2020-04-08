@@ -218,4 +218,48 @@
       }
     }
   }
+
+  // Link Display Class
+
+  &.link-display-class {
+
+    .c-label-wrapper {
+      display: none;
+    }
+
+    .c-homeList {
+      box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+      border-radius: 6px;
+      height: 90px;
+      box-sizing: border-box;
+
+      .homeList-image {
+        display: none;
+      }
+
+      .homeList-text {
+
+        .headline {
+          @include text-styles(1.25rem, 90px, "Gordita");
+
+          @include breakpoint(desktop-sm) {
+            @include text-styles(1.875rem, 90px, "Gordita");
+          }
+
+          letter-spacing: -.3px;
+          color: #2e81b7;
+          width: 100%;
+          height: 90px;
+          overflow: hidden;
+
+          a {
+            display: inline-block;
+            height: 100%;
+            padding: 0 30px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
 }
