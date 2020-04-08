@@ -19,13 +19,12 @@ const findAPMonth = (month = 12) => {
 };
 
 const formatTime = (date) => {
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  hours %= 12;
-  hours = hours || 12;
-  minutes = minutes < 10 ? `0${minutes}` : minutes;
-  return `${hours}:${minutes} ${ampm}`;
+  const dateOptions = {
+    timeZone: 'America/New_York',
+    hour: 'numeric',
+    minute: 'numeric',
+  };
+  return new Intl.DateTimeFormat('en-US', dateOptions).format(date);
 };
 
 const formatDate = date => (date.getDate() < 10 ? `0${date.getDate()}` : date.getDate());
