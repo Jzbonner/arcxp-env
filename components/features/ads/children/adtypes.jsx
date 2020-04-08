@@ -145,7 +145,8 @@ export const adSlots = {
     slotName: 'RP01',
     dimensions: [
       [
-        [0, 0],
+        [300, 600],
+        [300, 250],
       ], // desktop
       [
         [300, 600],

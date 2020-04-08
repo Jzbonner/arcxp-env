@@ -11,12 +11,10 @@ const CollectionList = ({
   const [index, setIndex] = useState(null);
   const paginationCount = Math.ceil(collectionLength / 20);
   const newItems = useContent({
-    source: 'content-api',
+    source: 'collections-api',
     query: {
-      type: 'collections',
       id: collectionID,
       from: index,
-      size: 20,
     },
   });
 
@@ -40,9 +38,11 @@ const CollectionList = ({
 
   useEffect(() => {
     if (index || index === 0) {
+      console.log(list);
       const {
         content_elements: contentElements,
       } = newItems;
+      console.log(contentElements);
       setItems(contentElements.map((el, i) => {
         const {
           promo_items: promoItems,
@@ -65,6 +65,7 @@ const CollectionList = ({
           window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height));
         }
       }
+      console.log(list);
     }
   }, [newItems, index]);
   return (

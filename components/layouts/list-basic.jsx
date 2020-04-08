@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
 import { useAppContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
+import checkTags from './_helper_functions/checkTags';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import ArcAd from '../features/ads/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import Footer from '../_helper_components/global/footer/default';
 import CollectionList from '../_helper_components/listpage/collectionList/default';
-import collectionListFilter from '../../content/filters/collection-list';
 import '../features/List/default.scss';
 import '../../src/styles/container/_homepage.scss';
 
@@ -16,28 +16,36 @@ const ListPageLayout = () => {
   const { globalContent } = appContext;
   if (!globalContent) return null;
   const {
-    _id: queryID,
-    content_elements: data,
+    data,
     taxonomy,
   } = globalContent || {};
 
-  const { tags = [] } = taxonomy || {};
-
-  const collection = useContent({
-    source: 'content-api',
-    query: {
-      id: queryID,
-    },
-    filter: collectionListFilter,
-  });
+  const {
+    id: queryID,
+    name,
+    document,
+  } = data || {};
 
   const {
     content_elements: contentElements,
-  } = collection;
+  } = document;
+
+  const { tags = [] } = taxonomy || {};
+  const noAds = checkTags(tags, 'no-ads');
+
+  const initialList = useContent({
+    source: 'collections-api',
+    query: {
+      id: queryID,
+      from: 0,
+    },
+  });
+
+  const {
+    content_elements: listItems,
+  } = initialList;
 
   const fetchRef = useRef(null);
-
-  const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
 
   const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
   const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
@@ -47,14 +55,14 @@ const ListPageLayout = () => {
       <BreakingNews/>
       <NavBar/>
       <main className='c-listPage'>
-        <div className='c-section'>
-          <div className='c-contentElements'>
-            { !noAds ? <div className='c-rightRail'>
+        <div className='c-section with-rightRail'>
+          <div className='c-contentElements list-contentElements'>
+            { !noAds ? <div className='arc_ad | c-rightRail is-sticky list-rp01'>
               {RP01()}
             </div> : null }
             <div className='b-flexCenter c-homeListContainer b-margin-bottom-d15-m10 one-column left-photo-display-class'>
-              <div className='b-flexCenter b-flexRow tease-listHeading b-margin-bottom-d30-m20' ref={fetchRef}>List Page</div>
-              <CollectionList listItems={data} collectionLength={contentElements.length} collectionID={queryID} fetchRef={fetchRef} />
+              <div className='b-flexCenter b-flexRow tease-listHeading b-margin-bottom-d30-m20' ref={fetchRef}>{name}</div>
+              <CollectionList listItems={listItems} collectionLength={contentElements.length} collectionID={queryID} fetchRef={fetchRef} />
             </div>
           </div>
         </div>
