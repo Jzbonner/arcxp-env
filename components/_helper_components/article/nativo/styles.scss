@@ -9,7 +9,11 @@ article {
 
   .ntv-moap:before {
     @include text-styles(1rem, 1, "Gordita");
-    @include text-styles-desktop-sm(1.125rem, 1, "Gordita");
+
+    @include breakpoint(desktop-sm) {
+      @include text-styles(1.125rem, 1, "Gordita");
+    }
+
     @include section();
 
     font-style: italic;

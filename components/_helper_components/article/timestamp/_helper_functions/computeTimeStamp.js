@@ -19,14 +19,15 @@ const findAPMonth = (month = 12) => {
 };
 
 const formatTime = (date) => {
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  hours %= 12;
-  hours = hours || 12;
-  minutes = minutes < 10 ? `0${minutes}` : minutes;
-  return `${hours}:${minutes} ${ampm}`;
+  const dateOptions = {
+    timeZone: 'America/New_York',
+    hour: 'numeric',
+    minute: 'numeric',
+  };
+  return new Intl.DateTimeFormat('en-US', dateOptions).format(date);
 };
+
+const formatDate = date => (date.getDate() < 10 ? `0${date.getDate()}` : date.getDate());
 
 const dayOfTheWeek = (day = 7) => {
   const days = [
@@ -82,7 +83,13 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, ar
   }
 
   if (articleType === 'amp') {
-    timeStamp = `${dayOfTheWeek(pub.getDay())}, ${findAPMonth(pub.getMonth())} ${pub.getDate()}, ${pub.getFullYear()} @ ${formatTime(pub)}`;
+    const weekday = `${dayOfTheWeek(pub.getDay())}`;
+    const month = `${findAPMonth(pub.getMonth())}`;
+    const dayOfTheMonth = `${formatDate(pub)}`;
+    const year = `${pub.getFullYear()}`;
+    const time = `${formatTime(pub)}`;
+
+    timeStamp = `${weekday}, ${month} ${dayOfTheMonth}, ${year} @ ${time}`;
   }
 
   return timeStamp;

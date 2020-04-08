@@ -34,6 +34,8 @@ const List = (customFields = {}) => {
         return 'center-lead-display-class';
       case '1 or 2 Item Feature':
         return 'one-two-item-display-class';
+      case 'Link':
+        return 'link-display-class';
       default:
         return 'top-photo-display-class';
     }

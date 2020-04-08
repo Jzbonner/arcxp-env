@@ -58,13 +58,13 @@
       }
 
       b {
-        @include text-styles(1.2rem, 2.11, "Gordita");
+        @include text-styles(1.2rem, 2.11, "Gordita-Bold");
 
         font-weight: 800;
       }
 
       blockquote {
-        @include text-styles(1.2rem, 2.11, "Gordita");
+        @include text-styles(1.2rem, 2.11, "Gordita-Bold");
 
         font-weight: 800;
         clear: left;
@@ -85,7 +85,7 @@
       }
 
       strong {
-        @include text-styles(1rem, 2, "Gordita");
+        @include text-styles(1rem, 2, "Gordita-Bold");
 
         font-weight: 800;
       }
