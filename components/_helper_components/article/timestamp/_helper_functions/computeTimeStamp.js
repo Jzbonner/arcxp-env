@@ -48,15 +48,15 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
 
   if (articleType === 'normal') {
     if (days > 0) {
-      timeStamp = `${!isHyperlocalContent ? ' |' : ''} ${isUpdated ? 'updated ' : ''}${findAPMonth(
+      timeStamp = `${!isHyperlocalContent ? ' | ' : ''}${isUpdated ? 'updated ' : ''}${findAPMonth(
         pub.getMonth(),
       )} ${pub.getDate()}, ${pub.getFullYear()}`;
     } else if (hours > 0) {
       const hourLabel = `hour${hours > 1 ? 's' : ''}`;
-      timeStamp = `${!isHyperlocalContent ? ' |' : ''} ${isUpdated ? 'updated ' : ''}${hours} ${hourLabel} ago`;
+      timeStamp = `${!isHyperlocalContent ? ' | ' : ''}${isUpdated ? 'updated ' : ''}${hours} ${hourLabel} ago`;
     } else if (minutes > -1) {
       const minLabel = `minute${minutes !== 1 ? 's' : ''}`;
-      timeStamp = `${!isHyperlocalContent ? ' |' : ''} ${isUpdated ? 'updated ' : ''}${minutes} ${minLabel} ago`;
+      timeStamp = `${!isHyperlocalContent ? ' | ' : ''}${isUpdated ? 'updated ' : ''}${minutes} ${minLabel} ago`;
     } else {
       return null;
     }
