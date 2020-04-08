@@ -60,7 +60,7 @@ const ListPageLayout = () => {
             { !noAds ? <div className='arc_ad | c-rightRail is-sticky list-rp01'>
               {RP01()}
             </div> : null }
-            <div className='b-flexCenter c-homeListContainer b-margin-bottom-d15-m10 one-column left-photo-display-class'>
+            <div className='b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column'>
               <div className='b-flexCenter b-flexRow tease-listHeading b-margin-bottom-d30-m20' ref={fetchRef}>{name}</div>
               <CollectionList listItems={listItems} collectionLength={contentElements.length} collectionID={queryID} fetchRef={fetchRef} />
             </div>

@@ -97,10 +97,21 @@
 
   .c-homeList {
     display: flex;
+    margin-bottom: 20px;
+
+    .c-label-wrapper {
+      text-align: left;
+    }
+
+    // .headline {
+    //   text-align: left;
+    //   // @include text-styles(1rem, 1.33, "Average");
+    // }
   }
 
   &.noPhoto {
     width: 100%;
+    margin-bottom: 15px;
 
     .homeList-image {
       display: none;

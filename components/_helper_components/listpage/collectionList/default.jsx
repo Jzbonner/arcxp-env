@@ -31,20 +31,19 @@ const CollectionList = ({
       } = basic || {};
       const leadArtVisible = (type === 'image') ? '' : 'noPhoto';
       return (
-    <div className={`listPage-item ${leadArtVisible}`} key={`ListItem-${i}`}><ListItem {...el} /></div>
+    <div className={`listPage-item ${leadArtVisible}`} key={`ListItem-${i}`}><ListItem {...el} listPage={true} /></div>
       );
     }));
   }, []);
 
   useEffect(() => {
     if (index || index === 0) {
-      console.log(list);
       const {
         content_elements: contentElements,
       } = newItems;
-      console.log(contentElements);
-      setItems(contentElements.map((el, i) => {
+      const newContent = contentElements.map((el) => {
         const {
+          _id: id,
           promo_items: promoItems,
         } = el || {};
         const {
@@ -55,9 +54,10 @@ const CollectionList = ({
         } = basic || {};
         const leadArtVisible = (type === 'image') ? '' : 'noPhoto';
         return (
-      <div className={`listPage-item ${leadArtVisible}`} key={`ListItem-${i}`}><ListItem {...el} /></div>
+      <div className={`listPage-item ${leadArtVisible}`} key={`ListItem-${id}`}><ListItem {...el} listPage={true} /></div>
         );
-      }));
+      });
+      setItems(newContent);
       if (fetchRef.current) {
         if (window.innerWidth > 1023) {
           window.scrollTo(0, (fetchRef.current.offsetTop));
@@ -65,9 +65,9 @@ const CollectionList = ({
           window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height));
         }
       }
-      console.log(list);
     }
   }, [newItems, index]);
+
   return (
         <>
         {list}
