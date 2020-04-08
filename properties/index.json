@@ -12,7 +12,7 @@
   "logo": "/resources/images/ajc-logo.svg",
   "mail": "mailto:?Subject=",
   "sites": ["ajc"],
-  "hyperlocalTags": ["alpharetta", "roswell", "sandy springs", "dunwoody"],
+  "hyperlocalTags": ["community contributor", "alpharetta", "roswell", "sandy springs", "dunwoody"],
   "featuredVideoPlayerRules": {
     "startPlaying": true,
     "muteON": true

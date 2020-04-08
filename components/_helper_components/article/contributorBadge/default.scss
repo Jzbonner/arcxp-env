@@ -1,0 +1,17 @@
+@import "../../../../src/styles/base/mixins";
+@import "./../../../../src/styles/base/breakpoints";
+
+.c-contributorBadge {
+  width: 150px;
+  margin: 0 auto;
+  display: flex;
+
+  @include breakpoint(desktop-sm) {
+    width: 244px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
