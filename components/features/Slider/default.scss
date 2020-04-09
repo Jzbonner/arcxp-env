@@ -1,0 +1,82 @@
+@import "../../../src/styles/base/breakpoints";
+
+.is-special-feature {
+  background-color: #ebebef;
+}
+
+.c-slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  .slider-title {
+    text-align: center;
+    font-family: "Average", "Georgia", serif;
+    font-size: 2.5rem;
+    letter-spacing: -.5px;
+    color: #313132;
+    margin-bottom: 1.25rem;
+
+    @include breakpoint(desktop-sm) {
+      text-align: start;
+      margin-left: 1.87rem;
+    }
+  }
+
+  .c-slider {
+    position: relative;
+    margin-left: 1.87rem;
+
+    .c-slider-content {
+      display: flex;
+
+      @include breakpoint(desktop-sm) {
+        overflow-x: hidden;
+      }
+
+      @include breakpoint(mobile) {
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .itemList {
+        display: flex;
+        position: relative;
+        transition: transform .1s;
+      }
+    }
+
+    .left-arrow,
+    .right-arrow {
+      width: 8rem;
+      outline: none;
+      cursor: pointer;
+      position: absolute;
+      user-select: none;
+
+      &:focus {
+        text-decoration: none;
+        outline: none;
+      }
+    }
+
+    .left-arrow {
+      transform: rotate(180deg);
+      z-index: 10;
+      top: 10%;
+
+      @include breakpoint(tablet) {
+        top: 16%;
+      }
+    }
+
+    .right-arrow {
+      height: 8rem;
+      cursor: pointer;
+      z-index: 10;
+      top: 20%;
+      right: 0;
+    }
+  }
+}
