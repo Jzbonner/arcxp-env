@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 
 const NavFooter = ({ facebook, twitter }) => {
-  const { ajcFacebookURL, ajcTwitterURL, siteDomainURL } = getProperties();
+  const { ajcFacebookURL, ajcTwitterURL } = getProperties();
   return (
   <li className='nav-mobile-footer'>
     <div className='b-flexCenter b-flexRow'>
@@ -17,8 +17,8 @@ const NavFooter = ({ facebook, twitter }) => {
       </div>
     </div>
     <div className='nav-copyright b-flexRow b-flexCenter'>
-      <span>© 2020</span>
-      <a href={siteDomainURL} target='_blank' rel='noopener noreferrer'>The Atlanta Journal-Constitution</a>
+      <span>&copy; {new Date().getFullYear()}</span>
+      <a href="/">The Atlanta Journal-Constitution</a>
     </div>
     <div className='b-flexRow b-flexCenter nav-copyright-links'>
       <a>Visitor Agreement</a>|

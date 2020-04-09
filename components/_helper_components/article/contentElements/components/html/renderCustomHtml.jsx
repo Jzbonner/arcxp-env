@@ -6,33 +6,24 @@ const renderCustomHtml = (content) => {
   const [html, setHtml] = useState(content);
 
   useEffect(() => {
-    // powers external scripts and iframes
-    const externalScriptFilter = /src="[^"]*/g;
-    const externalScripts = html.match(externalScriptFilter);
+    // powers all inline & external scripts in embedded html
+    const scriptFilter = /[^<script.+>][\s\S][^<]*<\/script>/gi;
+    const scripts = html.match(scriptFilter);
+    setHtml(html.replace(scriptFilter, ''));
 
-
-    if (Array.isArray(externalScripts)) {
-      externalScripts.forEach((scriptSrc) => {
-        const imgFilter = /(.svg|.png|.jpg|.jpeg|.gif)/;
-        if (scriptSrc.search(imgFilter) === -1) {
-          const script = document.createElement('script');
-          script.src = scriptSrc.slice(5);
-          script.async = true;
-          document.body.appendChild(script);
+    if (Array.isArray(scripts)) {
+      scripts.forEach((script) => {
+        const newScript = document.createElement('script');
+        const externalFilter = /src=(['"].+['"])/gi;
+        if (script.search(externalFilter) !== -1) {
+          let scriptSrc = script.match(externalFilter);
+          scriptSrc = scriptSrc[0].replace(/src=|['"]/g, '');
+          newScript.src = scriptSrc;
+        } else {
+          const scriptVal = script.replace(/<script.*>|<\/script>/g, '');
+          newScript.innerHTML = scriptVal;
         }
-      });
-    }
-
-    // powers inline scripts
-    const internalScriptFilter = /<script>([\s|\S]+?)<\/script>/g;
-    const internalScripts = html.match(internalScriptFilter);
-    setHtml(html.replace(internalScriptFilter, ''));
-
-    if (Array.isArray(internalScripts)) {
-      internalScripts.forEach((scriptSrc) => {
-        const script = document.createElement('script');
-        script.innerHTML = scriptSrc.slice(8, -9);
-        document.body.appendChild(script);
+        document.body.appendChild(newScript);
       });
     }
   }, []);
