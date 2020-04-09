@@ -1,5 +1,9 @@
-export default function getTeaseLabel(taxonomy, nameCustom) {
-  if (nameCustom || !taxonomy.sections || taxonomy.sections.length === 0) return null;
+export default function getTeaseLabel(taxonomy, label) {
+  const { basic = {} } = label || {};
+
+  if (basic && basic.text) return basic.text;
+
+  if (!taxonomy.sections || taxonomy.sections.length === 0) return null;
 
   let correctLabel = null;
 
