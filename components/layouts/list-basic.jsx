@@ -40,6 +40,7 @@ const ListPageLayout = () => {
     query: {
       id: queryID,
       from: 0,
+      size: 10,
     },
   });
 
