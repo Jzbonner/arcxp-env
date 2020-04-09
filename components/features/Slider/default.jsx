@@ -18,7 +18,7 @@ const Slider = (customFields = {}) => {
 
   // general
   const [sliderItems, setSliderItems] = useState(null);
-  const [isNotDesktop, setDesktopState] = useState(false);
+  const [isNotDesktop, setNotDesktopState] = useState(false);
   const [translateX, setTranslateX] = useState(0);
 
   // mobile touch swiping
@@ -37,11 +37,10 @@ const Slider = (customFields = {}) => {
   const contentRef = useRef(null);
   const elRefs = useRef([]);
 
-  // TODO: get from elRef
   const marginOffset = 15;
   const tabletBreakPoint = 1023;
 
-  contentConfigValues.startIndex = startIndex > 1 ? startIndex : null;
+  contentConfigValues.from = startIndex > 1 ? startIndex : null;
   contentConfigValues.size = itemLimit > 3 || null;
 
   const data = useContent({
@@ -82,9 +81,9 @@ const Slider = (customFields = {}) => {
 
   const getInitWindowSize = () => {
     if (window.innerWidth <= tabletBreakPoint) {
-      setDesktopState(true);
+      setNotDesktopState(true);
     } else {
-      setDesktopState(false);
+      setNotDesktopState(false);
     }
   };
 
@@ -136,7 +135,7 @@ const Slider = (customFields = {}) => {
       className={`c-slider-wrapper ${displayClass.toLowerCase().includes('special feature') ? 'is-special-feature' : ''}`}>
       <h1 className="slider-title">{title}</h1>
       <div className="c-slider">
-        <div id="slider" className="c-slider-content" >
+        <div className="c-slider-content" >
           <div ref={contentRef}
             onTouchStart={e => handleTouchStart(e)}
             onTouchMove={e => handleTouchMove(e)}

@@ -6,11 +6,11 @@ const params = {
 
 const resolve = (query) => {
   const {
-    'arc-site': arcSite = 'ajc', id, startIndex, size,
+    'arc-site': arcSite = 'ajc', id, from, size,
   } = query;
   let requestUri = `/content/v4/collections/?website=${arcSite}`;
   requestUri += id ? `&_id=${id}` : '';
-  requestUri += startIndex ? `&from=${startIndex}` : '';
+  requestUri += from ? `&from=${from}` : '';
   requestUri += size ? `&size=${size}` : '';
 
   return requestUri;
