@@ -9,7 +9,7 @@ const Slider = (customFields = {}) => {
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
-      itemLimit = 20,
+      itemLimit = 100,
       displayClass = '',
       startIndex = 1,
       title = '',
@@ -18,7 +18,7 @@ const Slider = (customFields = {}) => {
 
   // general
   const [sliderItems, setSliderItems] = useState(null);
-  const [isMobile, setMobileState] = useState(false);
+  const [isNotDesktop, setDesktopState] = useState(false);
   const [translateX, setTranslateX] = useState(0);
 
   // mobile touch swiping
@@ -39,10 +39,10 @@ const Slider = (customFields = {}) => {
 
   // TODO: get from elRef
   const marginOffset = 15;
-  const mobileBreakPoint = 768;
+  const tabletBreakPoint = 768;
 
   contentConfigValues.startIndex = startIndex > 1 ? startIndex : null;
-  contentConfigValues.size = itemLimit || null;
+  contentConfigValues.size = itemLimit > 3 || null;
 
   const data = useContent({
     source: contentService,
@@ -81,10 +81,10 @@ const Slider = (customFields = {}) => {
   };
 
   const getInitWindowSize = () => {
-    if (window.innerWidth <= mobileBreakPoint) {
-      setMobileState(true);
+    if (window.innerWidth <= tabletBreakPoint) {
+      setDesktopState(true);
     } else {
-      setMobileState(false);
+      setDesktopState(false);
     }
   };
 
@@ -146,7 +146,7 @@ const Slider = (customFields = {}) => {
             {sliderItems}
           </div>
         </div>
-        {!isMobile && <div className="c-slider-arrows">
+        {!isNotDesktop && <>
           {translateX !== 0
             ? <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
               <img src={rightArrow} />
@@ -155,7 +155,8 @@ const Slider = (customFields = {}) => {
           {Math.abs(translateX) < contentFullWidth ? <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
             <img src={rightArrow} />
           </a> : null}
-        </div>}
+          </>
+        }
       </div>
     </div>
   );
