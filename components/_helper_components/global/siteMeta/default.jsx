@@ -14,7 +14,7 @@ const SiteMeta = () => {
     headlines, description, canonical_url: canonicalURL, type,
   } = globalContent || {};
 
-  const { siteName, homeURL } = getProperties();
+  const { siteName } = getProperties();
   const homeAndSection = type === ('home' || 'section' || 'page');
   const site = siteName.toLowerCase();
   const thumbnailImage = renderImage();
@@ -25,19 +25,19 @@ const SiteMeta = () => {
     <>
       <link rel="apple-touch-icon" href={deployment(`${contextPath}/resources/images/favicon-apple-touch-icon.png`)} />
       <link rel="shortcut icon" href={deployment(`${contextPath}/resources/images/favicon.ico`)} />
-      <link rel="canonical" href={`${type === 'home' ? homeURL : canonicalURL}`} />
+      <link rel="canonical" href={`${type === 'home' ? '/' : canonicalURL}`} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={desc} />
       <meta name="twitter:image" content={thumbnailImage} />
       <meta name="twitter:site" content={`@${site}`} />
       <meta name="twitter:title" content={title} />
-      <meta name="twitter:url" content={`${type === 'home' ? homeURL : canonicalURL}`} />
+      <meta name="twitter:url" content={`${type === 'home' ? '/' : canonicalURL}`} />
       <meta property="og:image" content={thumbnailImage} />
       <meta property="og:image:height" content={`${homeAndSection || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '630'}`} />
       <meta property="og:image:width" content={`${homeAndSection || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '1200'}`} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content={`${homeAndSection ? 'website' : 'article'}`} />
-      <meta property="og:url" content={`${type === 'home' ? homeURL : canonicalURL}`} />
+      <meta property="og:url" content={`${type === 'home' ? '/' : canonicalURL}`} />
       <meta property="og:description" content={desc} />
       <meta property="og:site_name" content={siteName} />
       <title>{title}</title>

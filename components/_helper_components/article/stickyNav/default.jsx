@@ -9,20 +9,20 @@ import Login from '../../global/navBar/login/default';
 import '../../global/navBar/default.scss';
 
 const StickyNav = ({
-  articleURL, headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
+  headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
   isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections,
 }) => {
   const {
-    facebookURL, pinterestURL, twitterURL, redditURL, mail, siteDomainURL, siteName,
+    facebookURL, pinterestURL, twitterURL, redditURL, mail, siteName,
   } = getProperties();
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
 
-  const shareLinkFacebook = `${facebookURL}${siteDomainURL}${articleURL}`;
-  const shareLinkTwitter = `${twitterURL}${siteDomainURL}${articleURL}&text=${articleHeadline}`;
-  const shareLinkPinterest = `${pinterestURL}${siteDomainURL}${articleURL}&media=${renderImage()}&description=${articleHeadline}`;
-  const shareLinkReddit = `${redditURL}${siteDomainURL}${articleURL}&title=${articleHeadline}`;
-  const shareLinkEmail = `${mail}${articleHeadline}&body=${siteDomainURL}${articleURL}`;
+  const shareLinkFacebook = `${facebookURL}${window.location.href}`;
+  const shareLinkTwitter = `${twitterURL}${window.location.href}&text=${articleHeadline}`;
+  const shareLinkPinterest = `${pinterestURL}${window.location.href}&media=${renderImage()}&description=${articleHeadline}`;
+  const shareLinkReddit = `${redditURL}${window.location.href}&title=${articleHeadline}`;
+  const shareLinkEmail = `${mail}${articleHeadline}&body=${window.location.href}`;
 
   // Handles comments window visibility.
   // This state is managed in this component because the window's visibility is controlled
@@ -107,7 +107,7 @@ const StickyNav = ({
           </div>
         </div>
           <li className="stickyNav-item mobile-hidden">
-            <a href={siteDomainURL}>
+            <a href="/">
               <img className="sticky-logo" src={logo} alt={`${siteName} logo`} />
             </a>
           </li>
@@ -143,7 +143,7 @@ const StickyNav = ({
         </ul>
         <div className='b-flexRow c-stickyLogin'>
           <div className={`sticky-logo-homepage ${type === 'homepage-basic' || type === 'section-basic' ? '' : 'hidden'}`}>
-            <a href={siteDomainURL}>
+            <a href="/">
               <img src={logo} alt={`${siteName} logo`} />
             </a>
           </div>
