@@ -157,6 +157,7 @@ const StoryPageLayout = () => {
             stopIndex={1}
             fullWidth={true}
             comesAfterDivider={infoBoxIndex && infoBoxIndex === 0}
+            ampPage={ampPage}
           />
           {!noAds && isHyperlocalContent && (
             <div className="c-hp01-mp01">
@@ -172,6 +173,7 @@ const StoryPageLayout = () => {
             insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }] : null}
             fullWidth={noAds}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
+            ampPage={ampPage}
           />
           {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
           {!noAds && !isHyperlocalContent && (
@@ -183,6 +185,7 @@ const StoryPageLayout = () => {
             stopIndex={stop}
             fullWidth={noAds}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
+            ampPage={ampPage}
           />
           {!noAds && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
           <Section
@@ -193,6 +196,7 @@ const StoryPageLayout = () => {
             fullWidth={noAds}
             insertAtSectionEnd={insertAtEndOfStory}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
+            ampPage={ampPage}
           />
           {!noAds && !isHyperlocalContent && <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />}
           {!isHyperlocalContent && (
@@ -201,9 +205,10 @@ const StoryPageLayout = () => {
             </div>
           )}
         </article>
-        {!basicItems || promoType !== 'gallery' ? <Gallery contentElements={filteredContentElements} pageType={subtype} /> : null}
+        {(!basicItems || promoType !== 'gallery')
+        && !ampPage ? <Gallery contentElements={filteredContentElements} pageType={subtype} /> : null}
       </main>
-      <Footer />
+      {!ampPage && <Footer /> }
     </>
   );
 };
