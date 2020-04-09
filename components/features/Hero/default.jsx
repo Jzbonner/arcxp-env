@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import { useAppContext } from 'fusion:context';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import './default.scss';
 
@@ -8,6 +9,9 @@ const Hero = (customFields = {}) => {
   const {
     customFields: { content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {}, startIndex = 1 },
   } = customFields;
+
+  const appContext = useAppContext();
+  const { contextPath } = appContext;
 
   const data = useContent({
     source: contentService,
@@ -24,7 +28,7 @@ const Hero = (customFields = {}) => {
     if (innerData && heroBackground) {
       return (
         <div className="c-heroFeature">
-          <a href={heroURL} className="hero-url" />
+          <a href={`${contextPath}${heroURL}`} className="hero-url" />
           <div className="hero-img" style={{ backgroundImage: `url(${heroBackground})` }}>
             <div className="hero-headline">
               <h2 className="headline-text">{truncateHeadline(headline)}</h2>
