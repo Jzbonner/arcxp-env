@@ -9,7 +9,7 @@ const Slider = (customFields = {}) => {
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
-      // itemLimit = 100,
+      itemLimit = 20,
       displayClass = '',
       startIndex = 1,
       title = '',
@@ -37,10 +37,12 @@ const Slider = (customFields = {}) => {
   const contentRef = useRef(null);
   const elRefs = useRef([]);
 
+  // TODO: get from elRef
   const marginOffset = 15;
   const mobileBreakPoint = 768;
 
-  if (startIndex > 1) contentConfigValues.startIndex = startIndex;
+  contentConfigValues.startIndex = startIndex > 1 ? startIndex : null;
+  contentConfigValues.size = itemLimit || null;
 
   const data = useContent({
     source: contentService,
