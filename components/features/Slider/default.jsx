@@ -39,7 +39,7 @@ const Slider = (customFields = {}) => {
 
   // TODO: get from elRef
   const marginOffset = 15;
-  const tabletBreakPoint = 768;
+  const tabletBreakPoint = 1023;
 
   contentConfigValues.startIndex = startIndex > 1 ? startIndex : null;
   contentConfigValues.size = itemLimit > 3 || null;
