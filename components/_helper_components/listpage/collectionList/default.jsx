@@ -9,12 +9,13 @@ const CollectionList = ({
 }) => {
   const [list, setItems] = useState(null);
   const [index, setIndex] = useState(null);
-  const paginationCount = Math.ceil(collectionLength / 20);
+  const paginationCount = Math.ceil(collectionLength / 10);
   const newItems = useContent({
     source: 'collections-api',
     query: {
       id: collectionID,
       from: index,
+      size: 10,
     },
   });
 
@@ -71,7 +72,7 @@ const CollectionList = ({
   return (
         <>
         {list}
-        {collectionLength > 19 ? <Pagination
+        {collectionLength > 9 ? <Pagination
         count={paginationCount} setItems={setItems}
         collectionID={collectionID} setIndex={setIndex} /> : null }
         </>

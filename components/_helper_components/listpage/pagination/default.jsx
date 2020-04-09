@@ -28,21 +28,21 @@ const Pagination = ({ count, setIndex }) => {
   const fetchPage = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setIndex((e.target.textContent * 20 - 20));
+    setIndex((e.target.textContent * 10 - 10));
     setPage(parseInt(e.target.textContent, 10));
   };
 
   const rightClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setIndex((activePage + 1) * 20 - 20);
+    setIndex((activePage + 1) * 10 - 10);
     setPage(activePage + 1);
   };
 
   const leftClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setIndex((activePage - 1) * 20 - 20);
+    setIndex((activePage - 1) * 10 - 10);
     setPage(activePage - 1);
   };
 
@@ -56,7 +56,7 @@ const Pagination = ({ count, setIndex }) => {
             ? <div onClick={ e => leftClick(e)} ><a className='left-button'></a></div> : null}
           <div className='c-pageNums'>{pageNumbers}</div>
           { activePage !== count
-            ? <div onClick={ e => rightClick(e)} className='c-right-button'><a className='right-button'></a></div> : null}
+            ? <div onClick={ e => rightClick(e)} ><a className='right-button'></a></div> : null}
         </div>
   );
 };

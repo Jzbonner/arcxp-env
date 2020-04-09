@@ -3,6 +3,7 @@ const schemaName = 'collections';
 const params = {
   id: 'text',
   from: 'text',
+  size: 'text',
 };
 
 const resolve = (query) => {
