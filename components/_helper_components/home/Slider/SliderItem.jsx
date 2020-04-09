@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import Image from '../../global/image/default';
 import TimeStamp from '../../article/timestamp/default';
 import SectionLabel from '../../global/sectionLabel/default';
 import truncateHeadline from '../../../layouts/_helper_functions/homepage/truncateHeadline';
@@ -35,7 +34,7 @@ const SliderItem = ({ data, refHook }) => {
 SliderItem.propTypes = {
   data: PropTypes.object,
   index: PropTypes.number,
-  refHook: PropTypes.object,
+  refHook: PropTypes.func,
   classes: PropTypes.string,
   image: PropTypes.string,
   headline: PropTypes.string,

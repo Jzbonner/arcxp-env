@@ -3,10 +3,8 @@ import SliderItem from '../../../_helper_components/home/Slider/SliderItem';
 import getItemThumbnail from './getItemThumbnail';
 
 const buildSliderItems = (sliderCollection, ref) => {
-  // temp
   let elCount = 0;
   const sliderItems = sliderCollection.content_elements.map((elem) => {
-    // if (startIndex > 1 && i + 1 < startIndex) return null;
     const itemThumbnail = getItemThumbnail(elem.promo_items);
 
     if (!itemThumbnail) return null;
@@ -14,11 +12,8 @@ const buildSliderItems = (sliderCollection, ref) => {
     const data = {};
     data.classes = elCount === 0 ? 'is-firstItem' : '';
     data.index = elCount;
-    // const refHook = elCount === 0 ? ref : null;
 
-    // refactor to filter func
     elCount += 1;
-
 
     data.timestampData = {};
     data.sectionLabelData = {};

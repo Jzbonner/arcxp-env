@@ -70,11 +70,14 @@
         width: 8rem;
         transform: rotate(180deg);
         z-index: 10;
-        top: 20%;
         cursor: pointer;
 
         @include breakpoint(tablet) {
           top: 16%;
+        }
+
+        @include breakpoint(desktop-sm) {
+          top: 20%;
         }
       }
 
@@ -84,11 +87,14 @@
         width: 8rem;
         cursor: pointer;
         z-index: 10;
-        left: 90%;
         top: 20%;
 
         @include breakpoint(tablet) {
           left: 84%;
+        }
+
+        @include breakpoint(desktop-sm) {
+          left: 90%;
         }
       }
     }

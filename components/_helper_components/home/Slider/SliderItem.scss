@@ -16,13 +16,13 @@
     width: 56vw;
     height: 17vh;
 
+    @include breakpoint(tablet) {
+      height: 25vh;
+    }
+
     @include breakpoint(desktop-sm) {
       width: 500px;
       height: 280px;
-    }
-
-    @include breakpoint(tablet) {
-      height: 25vh;
     }
   }
 
