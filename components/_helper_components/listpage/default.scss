@@ -1,0 +1,121 @@
+@import "../../../src/styles/base/_mixins.scss";
+@import "../../../src/styles/base/breakpoints";
+
+.c-listPage {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  
+  .c-section {
+
+    .c-contentElements {
+      @include breakpoint(tablet) {
+        width: calc(100% - 330px);
+        padding: 0 30px 0 0;
+      }
+
+      .c-rightRail {
+        @include breakpoint(tablet) {
+          display: block;
+          float: right;
+          margin-right: -330px;
+        }
+      }
+    }
+  }
+}
+
+.c-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 102px;
+  width: fit-content;
+  border-radius: 6px;
+  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+  background-color: #fff;
+  padding: 40px 30px;
+  box-sizing: border-box;
+  margin-bottom: 50px;
+
+  @include breakpoint(desktop-sm) {
+    margin-bottom: 0;
+  }
+
+  .right-button {
+    @include blue-button(35px, "\e902", 21px);
+  }
+
+  .left-button {
+    @include blue-button(35px, "\e901" , 21px);
+  }
+}
+
+.c-pageNums {
+  display: flex;
+  height: 26px;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  color: #2e81b7;
+
+  @include text-styles(1.25rem, .875, "Gordita");
+
+  .page {
+    padding: 0 10px;
+    cursor: pointer;
+
+    &.active {
+      color: #313132;
+      cursor: none;
+      font-weight: 700;
+    }
+  }
+}
+
+.c-right-button {
+  padding-left: 10px;
+}
+
+.tease-listHeading {
+  text-align: center;
+  border-bottom: 1px solid #cdcdcd;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  text-transform: capitalize;
+
+  @include text-styles(1.875rem, 1, "Average");
+  
+  @include breakpoint(desktop-sm) {
+    padding-bottom: 20px;
+
+    @include text-styles(2.5rem, 1, "Average");
+  }
+}
+
+.listPage-item {
+
+  .c-homeList {
+    display: flex;
+    margin-bottom: 20px;
+
+    .c-label-wrapper {
+      text-align: left;
+    }
+  }
+
+  &.noPhoto {
+    width: 100%;
+    margin-bottom: 15px;
+
+    .homeList-image {
+      display: none;
+    }
+  }
+}
+
+.list-mp05 {
+  @include breakpoint(tablet) {
+    display: none;
+  }
+}

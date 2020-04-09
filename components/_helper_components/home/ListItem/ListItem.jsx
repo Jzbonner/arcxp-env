@@ -14,15 +14,17 @@ const ListItem = ({
   display_date: displayDate,
   headlines,
   websites,
+  listPage,
 }) => {
   const { sites } = getProperties();
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
 
   const relativeURL = websites[sites] && websites[sites].website_url;
+  const isListPage = listPage ? 'listPage' : '';
 
   return (
-    <div className="c-homeList">
+    <div className={`c-homeList ${isListPage}`}>
       {promoItems && (
         <a href={relativeURL} className="homeList-image">
           <Image src={promoItems.basic || promoItems.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />
@@ -33,7 +35,7 @@ const ListItem = ({
           <SectionLabel label={label} taxonomy={taxonomy} />
           <TimeStamp firstPublishDate={publishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
         </div>
-        <div className="headline">
+        <div className={`headline ${isListPage}`}>
           <a href={relativeURL}>{truncateHeadline(headlines.basic)}</a>
         </div>
       </div>
@@ -49,6 +51,7 @@ ListItem.propTypes = {
   display_date: PropTypes.string,
   headlines: PropTypes.object,
   websites: PropTypes.object,
+  listPage: PropTypes.bool,
 };
 
 export default ListItem;
