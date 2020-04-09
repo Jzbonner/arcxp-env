@@ -17,6 +17,7 @@ import NavBar from '../_helper_components/global/navBar/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Footer from '../_helper_components/global/footer/default';
 import ArcAd from '../features/ads/default';
+import ContributorBadge from '../_helper_components/article/contributorBadge/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
@@ -40,7 +41,9 @@ const start = 3;
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
-  const { globalContent, requestUri } = appContext;
+  const {
+    globalContent, requestUri, deployment, contextPath,
+  } = appContext;
 
   if (!globalContent) return null;
   const {
@@ -80,6 +83,7 @@ const StoryPageLayout = () => {
   // Both checks return true if the tag is present and false if not.
   let noAds = checkTags(tags, 'no-ads');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
+
   if (ampPage) noAds = true;
 
   let infoBoxIndex = null;
@@ -116,22 +120,26 @@ const StoryPageLayout = () => {
     <>
       {!noAds && <GlobalAdSlots />}
       <BreakingNews />
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage}/>
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
-            <Headline headlines={headlines} basicItems={basicItems} ampPage={ampPage}/>
+            <Headline headlines={headlines} basicItems={basicItems} ampPage={ampPage} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
-            <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage}/>
-            <TimeStamp firstPublishDate={firstPublishDate}
-                       displayDate={displayDate}
-                       isHideTimestampTrue={isHideTimestampTrue}
-                       ampPage={ampPage} />
+            {!isHyperlocalContent && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} />}
+            <TimeStamp
+              firstPublishDate={firstPublishDate}
+              displayDate={displayDate}
+              isHideTimestampTrue={isHideTimestampTrue}
+              ampPage={ampPage}
+              isHyperlocalContent={isHyperlocalContent}
+            />
           </div>
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
           </div>
+          <ContributorBadge tags={tags} deployment={deployment} contextPath={contextPath} />
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
             <SubHeadline subheadlines={subheadlines} />
           </div>
@@ -193,7 +201,7 @@ const StoryPageLayout = () => {
             </div>
           )}
         </article>
-       {!basicItems || promoType !== 'gallery' ? <Gallery contentElements={filteredContentElements} pageType={subtype} /> : null}
+        {!basicItems || promoType !== 'gallery' ? <Gallery contentElements={filteredContentElements} pageType={subtype} /> : null}
       </main>
       <Footer />
     </>
