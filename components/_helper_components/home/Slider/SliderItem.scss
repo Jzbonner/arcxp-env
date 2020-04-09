@@ -13,12 +13,16 @@
   .slider-item-image img {
     margin-bottom: 1.063rem;
     border-radius: 6px;
-    width: 52vw;
+    width: 56vw;
     height: 17vh;
 
     @include breakpoint(desktop-sm) {
       width: 500px;
       height: 280px;
+    }
+
+    @include breakpoint(tablet) {
+      height: 25vh;
     }
   }
 

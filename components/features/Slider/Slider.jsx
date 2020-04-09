@@ -195,7 +195,7 @@ const Slider = (customFields = {}) => {
             onTouchMove={e => handleTouchMove(e)}
             onTouchEnd={e => handleTouchEnd(e)}
             className="itemList"
-            style={{ left: `${-changeX}px`, transform: `translateX(${translateX}px)` }}>
+            style={{ transform: `translateX(${translateX - changeX}px)` }}>
             {sliderItems}
           </div>
         </div>
