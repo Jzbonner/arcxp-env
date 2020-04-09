@@ -48,7 +48,7 @@
   justify-content: flex-end;
   align-items: center;
 
-  @include breakpoint (desktop-sm) {
+  @include breakpoint(desktop-sm) {
     margin-bottom: 10px;
   }
 
@@ -81,7 +81,7 @@
   display: none;
   width: 100%;
 
-  @include breakpoint (desktop-sm) {
+  @include breakpoint(desktop-sm) {
     display: flex;
     height: 45px;
   }
@@ -132,7 +132,7 @@
     }
 
     [class*="fb-comments-count"] {
-      @include text-styles(.6rem, 1, "Gordita");
+      @include text-styles(.6rem, 1, "Gordita-Bold");
 
       position: absolute;
       top: 12px;

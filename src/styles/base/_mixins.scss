@@ -1,42 +1,16 @@
 @mixin text-styles($size, $line-height, $font: "") {
   font-size: $size;
   line-height: $line-height;
+  text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 
-  @if $font != "" {
+  @if $font == "Average" {
+    font-family: "Average", "Georgia", serif;
+  }
+
+  @else if $font != "" {
     font-family: $font, "Arial", sans-serif;
-  }
-}
-
-@mixin text-styles-tablet($size, $line-height, $font: "") {
-  @include breakpoint(tablet) {
-    font-size: $size;
-    line-height: $line-height;
-
-    @if $font != "" {
-      font-family: $font, "Arial", sans-serif;
-    }
-  }
-}
-
-@mixin text-styles-desktop-sm($size, $line-height, $font: "") {
-  @include breakpoint(desktop-sm) {
-    font-size: $size;
-    line-height: $line-height;
-
-    @if $font != "" {
-      font-family: $font, "Arial", sans-serif;
-    }
-  }
-}
-
-@mixin text-styles-desktop-lg($size, $line-height, $font: "") {
-  @include breakpoint(desktop-lg) {
-    font-size: $size;
-    line-height: $line-height;
-
-    @if $font != "" {
-      font-family: $font, "Arial", sans-serif;
-    }
   }
 }
 
@@ -87,7 +61,6 @@
 
   .c-section {
     max-width: 1600px;
-    width: 90%;
 
     &.with-rightRail {
       @include breakpoint(desktop-sm) {
