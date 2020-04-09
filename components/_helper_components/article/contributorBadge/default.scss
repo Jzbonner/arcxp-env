@@ -2,16 +2,17 @@
 @import "./../../../../src/styles/base/breakpoints";
 
 .c-contributorBadge {
-  width: 150px;
+  height: 54px;
   margin: 0 auto;
   display: flex;
+  justify-content: center;
 
   @include breakpoint(desktop-sm) {
-    width: 244px;
+    height: 90px;
   }
 
   img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100%;
   }
 }
