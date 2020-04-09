@@ -13,6 +13,7 @@ const Section = ({
   fullWidth = false,
   rightRail,
   comesAfterDivider = false,
+  ampPage = false,
 }) => {
   let paragraphCounter = 0;
   const newContentElements = [];
@@ -71,7 +72,7 @@ const Section = ({
           b-margin-bottom-d40-m20
           ${comesAfterDivider ? 'after-divider' : ''}`
         }>
-        <ContentElements contentElements={newContentElements} />
+        <ContentElements contentElements={newContentElements} ampPage={ampPage} />
       </div>
     );
   }
@@ -88,6 +89,7 @@ Section.propTypes = {
   insertedAds: PropTypes.array,
   insertAtSectionEnd: PropTypes.array,
   comesAfterDivider: PropTypes.boolean,
+  ampPage: PropTypes.boolean,
 };
 
 export default Section;
