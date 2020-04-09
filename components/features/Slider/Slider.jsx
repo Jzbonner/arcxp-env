@@ -118,7 +118,7 @@ const Slider = (customFields = {}) => {
 
   const handleMove = (clientX) => {
     if (isTouched) {
-      console.log(clientX);
+      // console.log(clientX);
       const currentTime = Date.now();
       const elapsed = currentTime - timeOfLastDrag;
       const deltaX = startX - clientX;
@@ -146,12 +146,12 @@ const Slider = (customFields = {}) => {
   }
 
   const handleTouchStart = (event) => {
-    console.log('touching', event.targetTouches[0].clientX);
+    // console.log('touching', event.targetTouches[0].clientX);
     handleStart(event.targetTouches[0].clientX);
   }
 
   const handleTouchMove = (event) => {
-    console.log('moving', event.targetTouches[0]);
+    // console.log('moving', event.targetTouches[0]);
 
     handleMove(event.targetTouches[0].clientX);
     // handleMove(event.targetTouches[0].clientX)
@@ -159,7 +159,7 @@ const Slider = (customFields = {}) => {
 
 
   const handleTouchEnd = (event) => {
-    console.log('ending');
+    // console.log('ending');
     handleEnd();
   }
 
@@ -183,7 +183,7 @@ const Slider = (customFields = {}) => {
       }
     }, [isMobile]); */
 
-  console.log('refs', elRefs);
+  // console.log('refs', elRefs);
 
   return (
     <div ref={wrapperRef} className={`c-slider-wrapper ${displayClass.toLowerCase().includes('special feature') ? 'is-special-feature' : ''}`}>

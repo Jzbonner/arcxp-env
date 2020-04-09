@@ -13,8 +13,8 @@
   .slider-item-image img {
     margin-bottom: 1.063rem;
     border-radius: 6px;
-    width: 57vw;
-    height: 16vh;
+    width: 52vw;
+    height: 17vh;
 
     @include breakpoint(desktop-sm) {
       width: 500px;
@@ -23,6 +23,10 @@
   }
 
   .sliderList-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     margin-bottom: 2.063rem;
 
     .c-label-wrapper {
@@ -30,12 +34,17 @@
     }
 
     a.headline {
+      max-width: 80%;
       line-height: 1.17;
       letter-spacing: normal;
       color: #000;
       font-family: "Average", "Georgia", serif;
       margin-bottom: 2.3125rem;
       text-decoration: none;
+
+      @include breakpoint(desktop-sm) {
+        max-width: 90%;
+      }
     }
   }
 }
