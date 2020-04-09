@@ -28,12 +28,6 @@ const Pagination = ({ count, setIndex }) => {
   const fetchPage = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    // //Remove condition later when stories verified for test
-    // if ((e.target.textContent) > 6) {
-    //   setIndex((e.target.textContent - 6) * 20 - 20);
-    // } else {
-    //   setIndex((e.target.textContent * 20 - 20));
-    // }
     setIndex((e.target.textContent * 20 - 20));
     setPage(parseInt(e.target.textContent, 10));
   };
