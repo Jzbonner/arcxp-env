@@ -20,6 +20,8 @@ const ListPageLayout = () => {
     taxonomy,
   } = globalContent || {};
 
+  if (!data) return null;
+
   const {
     id: queryID,
     name,
