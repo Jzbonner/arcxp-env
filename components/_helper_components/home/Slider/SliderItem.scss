@@ -8,21 +8,21 @@
   margin-right: .5rem;
   margin-left: .5rem;
   text-align: center;
-  width: 100%;
 
   .slider-item-image img {
     margin-bottom: 1.063rem;
     border-radius: 6px;
+    height: 18vh;
     width: 56vw;
-    height: 17vh;
 
     @include breakpoint(tablet) {
-      height: 25vh;
+      height: 23vh;
+      width: 55vw;
     }
 
     @include breakpoint(desktop-sm) {
-      width: 500px;
-      height: 280px;
+      max-width: 500px;
+      min-height: 280px;
     }
   }
 
@@ -50,5 +50,15 @@
         max-width: 90%;
       }
     }
+  }
+}
+
+/* pagebuilder size fix */
+@media only screen and (min-width: 948px) and (max-width: 1023px) {
+  
+  .c-slider-item .slider-item-image img {
+    min-height: 40vh;
+    max-height: 45vh;
+    width: 50vw;
   }
 }

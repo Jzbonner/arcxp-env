@@ -58,6 +58,9 @@
 
       .left-arrow,
       .right-arrow {
+        width: 8rem;
+        outline: none;
+        cursor: pointer;
 
         &:focus {
           text-decoration: none;
@@ -67,10 +70,8 @@
 
       .left-arrow {
         position: absolute;
-        width: 8rem;
         transform: rotate(180deg);
         z-index: 10;
-        cursor: pointer;
 
         @include breakpoint(tablet) {
           top: 16%;
@@ -84,7 +85,6 @@
       .right-arrow {
         position: absolute;
         height: 8rem;
-        width: 8rem;
         cursor: pointer;
         z-index: 10;
         top: 20%;
