@@ -215,6 +215,7 @@
   .nav-items {
     padding-left: 50px;
     padding-bottom: 25px;
+    position: relative;
 
     @include breakpoint(desktop-sm) {
       display: flex;
@@ -242,6 +243,25 @@
             opacity: 1;
           }
         }
+      }
+    }
+
+    .activeSelection {
+      @include breakpoint(tablet) {
+        display: none;
+      }
+
+      @include breakpoint(desktop-sm) {
+        background-color: #2e81b7;
+        border-radius: 2px;
+        display: block;
+        height: 7px;
+        left: 0;
+        margin-right: 15px;
+        margin-top: 61px;
+        position: absolute;
+        right: 0;
+        top: 0;
       }
     }
   }
