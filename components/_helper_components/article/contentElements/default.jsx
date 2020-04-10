@@ -15,7 +15,7 @@ import Video from '../../global/video/default';
 import Header from './components/header/default.jsx';
 import Divider from './components/divider/default.jsx';
 
-const ContentElements = ({ contentElements }) => {
+const ContentElements = ({ contentElements, ampPage = false }) => {
   const { inlineVideoPlayerRules, maxTabletViewWidth } = getProperties();
 
   return (
@@ -32,10 +32,12 @@ const ContentElements = ({ contentElements }) => {
           case 'gallery':
             return <Gallery src={element} key={`Gallery-${i}`} />;
           case 'raw_html':
+            if (ampPage) return null;
             return <HTML src={element} key={`Raw_HTML-${i}`} />;
           case 'header':
             return <Header src={element} key={`Header-${i}`} />;
           case 'image':
+            if (ampPage) return null;
             // a height of 0 makes the height proportional to the width
             return (
               <Image
@@ -57,10 +59,12 @@ const ContentElements = ({ contentElements }) => {
           case 'divider':
             return <Divider key={`Divider-${i}`} />;
           case 'oembed_response':
+            if (ampPage) return null;
             return <Oembed src={element} key={`Oembed-${i}`} />;
           case 'table':
             return <Table src={element} key={`Table-${i}`} />;
           case 'video':
+            if (ampPage) return null;
             return (
               <Video
                 src={element}
@@ -91,6 +95,7 @@ const ContentElements = ({ contentElements }) => {
 
 ContentElements.propTypes = {
   contentElements: PropTypes.array,
+  ampPage: PropTypes.boolean,
 };
 
 export default ContentElements;

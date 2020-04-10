@@ -40,6 +40,7 @@ const ListPageLayout = () => {
     query: {
       id: queryID,
       from: 0,
+      size: 10,
     },
   });
 
@@ -59,7 +60,7 @@ const ListPageLayout = () => {
       <main className='c-listPage'>
         <div className='c-section with-rightRail'>
           <div className='c-contentElements list-contentElements'>
-            { !noAds ? <div className='arc_ad | c-rightRail is-sticky list-rp01'>
+            { !noAds ? <div className='c-rightRail list-rp01'>
               {RP01()}
             </div> : null }
             <div className='b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column'>

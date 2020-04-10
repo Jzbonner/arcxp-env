@@ -157,7 +157,6 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
-    isSticky: true,
   },
   'RP09-Story-Desktop': {
     slotName: 'RP09',

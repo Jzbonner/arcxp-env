@@ -6,10 +6,25 @@
 @import "./../../styles/state/index.scss";
 
 /* Import all component styles */
-//@import "components/**/*.scss";
-@import "./../../../components/_helper_components/article/**/*.scss";
+// start components
+@import "./../../../components/_helper_components/article/byline/default.scss";
+@import "./../../../components/_helper_components/article/headline/style.scss";
+@import "./../../../components/_helper_components/article/section/styles.scss";
+@import "./../../../components/_helper_components/article/subheadline/style.scss";
+@import "./../../../components/_helper_components/article/timestamp/default.scss";
+@import "./../../../components/_helper_components/article/contentElements/components/blockQuote/styles.scss";
+@import "./../../../components/_helper_components/article/contentElements/components/divider/styles.scss";
+@import "./../../../components/_helper_components/article/contentElements/components/header/default.scss";
+@import "./../../../components/_helper_components/article/contentElements/components/interstitial_link/styles.scss";
+@import "./../../../components/_helper_components/article/contentElements/components/list/styles.scss";
+@import "./../../../components/_helper_components/article/contentElements/components/paragraph/default.scss";
+@import "./../../../components/_helper_components/article/contentElements/components/interstitial_link/styles.scss";
+// end components
+
+// start global
 @import "./../../../components/_helper_components/global/breakingNews/default.scss";
 @import "./../../../components/_helper_components/global/navBar/amp.scss";
 @import "./../../../components/_helper_components/global/footer/default.scss";
+// end global
 
 /* Import site specific overrides here */
