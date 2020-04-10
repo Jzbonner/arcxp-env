@@ -66,7 +66,12 @@ const Mosaic = (customFields = {}) => {
                 <a key={`Mosaic-${i}`} className={`mosaic-box ${patternMap(startIndex, i)}`} href={`${contextPath}${relativeURL}`}>
                   <div className="c-sectionLabel">
                     <SectionLabel label={label} taxonomy={taxonomy} />
-                    <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
+                    <TimeStamp
+                      firstPublishDate={firstPublishDate}
+                      displayDate={displayDate}
+                      isHideTimestampTrue={isHideTimestampTrue}
+                      isTease={true}
+                    />
                   </div>
                   <span className="headline">{truncateHeadline(headlines.basic)}</span>
                 </a>
