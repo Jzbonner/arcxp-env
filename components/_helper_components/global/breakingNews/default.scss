@@ -25,7 +25,7 @@
     display: block;
     right: 10px;
     top: 50%;
-    transform: translateY(-50%);    
+    transform: translateY(-50%);
     width: 19px;
     height: 20px;
     border-radius: 50%;
@@ -36,10 +36,10 @@
       height: 30px;
     }
 
-    &::before,
+    &:before,
     &:after {
       position: absolute;
-      content: '';
+      content: "";
       left: 0;
       right: 0;
       top: 50%;
@@ -53,12 +53,12 @@
       }
     }
 
-    &::before {
+    &:before {
       transform: rotate(45deg);
     }
   
-    &::after {
-        transform: rotate(-45deg);
+    &:after {
+      transform: rotate(-45deg);
     }
     
     @include breakpoint(desktop-sm) {
@@ -70,6 +70,7 @@
     display: block;
     color: #fff;
     text-transform: uppercase;
+
     @include text-styles(1em, 2, "Gordita-Bold");
 
     @include breakpoint(desktop-sm) {
@@ -78,8 +79,9 @@
   }
 
   .c-breakingNews-content {
-    @include text-styles(0.875em, 1.29, "Gordita-Medium");
-    color: #fff;  
+    @include text-styles(.875em, 1.29, "Gordita-Medium");
+
+    color: #fff;
     width: 100%;
     max-width: 302px;
     margin: auto;

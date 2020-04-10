@@ -21,8 +21,6 @@ const BreakingNews = () => {
     setVisibility(false);
   };
 
-  console.log(breakingNewsData);
-
   const { content_elements: breakingNewsItem } = breakingNewsData && breakingNewsData.content_elements[0] ? breakingNewsData : [];
   const { content_elements: liveVideoItem } = liveVideoData && liveVideoData.content_elements[0] ? liveVideoData : [];
 
