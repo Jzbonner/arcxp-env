@@ -21,5 +21,7 @@
     "startPlaying": false,
     "muteON": true
   },
-  "maxTabletViewWidth": 1024
+  "maxTabletViewWidth": 1024,
+  "breakingNewsID": "FFQQGJZMN5A3RHYWFUIESE3RYI",
+  "breakingLiveVideoID": "PI5DD6OFEVFMHNDHZKI3XU7SSQ"
 }
