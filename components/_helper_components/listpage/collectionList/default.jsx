@@ -30,7 +30,7 @@ const CollectionList = ({
       const {
         type,
       } = basic || {};
-      const leadArtVisible = (type === 'image') ? '' : 'noPhoto';
+      const leadArtVisible = type === 'image' || type === 'video' || type === 'gallery' ? '' : 'noPhoto';
       return (
     <div className={`listPage-item ${leadArtVisible}`} key={`ListItem-${i}`}><ListItem {...el} listPage={true} /></div>
       );
@@ -53,7 +53,7 @@ const CollectionList = ({
         const {
           type,
         } = basic || {};
-        const leadArtVisible = (type === 'image') ? '' : 'noPhoto';
+        const leadArtVisible = type === 'image' || type === 'video' || type === 'gallery' ? '' : 'noPhoto';
         return (
       <div className={`listPage-item ${leadArtVisible}`} key={`ListItem-${id}`}><ListItem {...el} listPage={true} /></div>
         );
