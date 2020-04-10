@@ -17,15 +17,20 @@ const SliderItem = ({ data, refHook }) => {
 
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
-        <a href={canonicalUrl} className="slider-item-image">
-          <img src={image} />
-        </a>
+      <a href={canonicalUrl} className="slider-item-image">
+        <img src={image} />
+      </a>
       <div className="sliderList-text">
         <div className="c-label-wrapper">
           <SectionLabel label={label} taxonomy={taxonomy} />
-          <TimeStamp firstPublishDate={firstPublishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
+          <TimeStamp
+            firstPublishDate={firstPublishDate}
+            displayDate={displayDate}
+            isHideTimestampTrue={isHideTimestampTrue}
+            isTease={true}
+          />
         </div>
-          <a className="headline" href={canonicalUrl}>{truncateHeadline(headline)}</a>
+        <a className="headline" href={canonicalUrl}>{truncateHeadline(headline)}</a>
       </div>
     </div>
   );

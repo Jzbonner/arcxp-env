@@ -4,11 +4,13 @@ import computeTimeStamp from './_helper_functions/computeTimeStamp';
 import './default.scss';
 
 const TimeStamp = ({
-  firstPublishDate, displayDate, isHideTimestampTrue, ampPage = false,
+  firstPublishDate, displayDate, isHideTimestampTrue, ampPage = false, isTease = false,
 }) => {
   let pageType = 'normal';
 
   if (ampPage) pageType = 'amp';
+
+  if (isTease) pageType = 'tease';
 
   const timeStamp = computeTimeStamp(firstPublishDate, displayDate, isHideTimestampTrue, pageType);
 
@@ -26,6 +28,7 @@ TimeStamp.propTypes = {
   displayDate: PropTypes.string,
   isHideTimestampTrue: PropTypes.string,
   ampPage: PropTypes.bool,
+  isTease: PropTypes.bool,
 };
 
 export default TimeStamp;
