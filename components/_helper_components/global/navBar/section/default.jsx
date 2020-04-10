@@ -17,7 +17,15 @@ const Section = ({
 }) => {
   const fusionContext = useFusionContext();
   const { globalContent } = fusionContext;
-  const primarySection = globalContent && globalContent.taxonomy && globalContent.taxonomy.primary_section;
+  const {
+    taxonomy,
+  } = globalContent || {};
+  const {
+    primary_section: primarySection,
+  } = taxonomy || {};
+  const {
+    _id: primarySectionID,
+  } = primarySection || {};
 
   const {
     nav_title: name,
@@ -55,7 +63,7 @@ const Section = ({
   if (childSections.length === 0) {
     return <>
       <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
-        {primarySection._id === link ? <div className="activeSelection" /> : null}
+        {primarySectionID === link ? <div className="activeSelection" /> : null}
         <a href={link} target={newTab === 'true' ? '_blank' : '_self'}>{name}</a>
       </li>
         </>;
@@ -89,7 +97,7 @@ const Section = ({
   return (
     <>
       <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
-      {primarySection._id === link ? <div className="activeSelection" /> : null}
+      {primarySectionID === link ? <div className="activeSelection" /> : null}
         <div className='nav-item-link' onClick={ e => activateMenu(e)}>
           <a>{name}</a>
         </div>
