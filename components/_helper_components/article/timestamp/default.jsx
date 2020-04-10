@@ -17,7 +17,7 @@ const TimeStamp = ({
   if (timeStamp === null) return null;
 
   return (
-    <span className={'article-timestamp'}>
+    <span className={isTease ? 'isTease article-timestamp' : 'article-timestamp'}>
       {timeStamp}
     </span>
   );
