@@ -11,29 +11,25 @@ const BreakingNews = () => {
     source: 'collections-api',
     query: { id: `${breakingNewsID}` },
   });
-  let liveVideoData;
+
   const hideBar = () => {
     setVisibility(false);
   };
 
-  const { content_elements: breakingNewsItem } = breakingNewsData && breakingNewsData.content_elements[0] ? breakingNewsData : [];
+  const breakingNewsItem = breakingNewsData && breakingNewsData.content_elements[0] ? breakingNewsData.content_elements : false;
   let breakingHeadline;
   let breakingURL;
   let mainTitle;
 
-  const secondContentCall = () => {
-    liveVideoData = useContent({
+  if (breakingNewsItem) {
+    breakingHeadline = breakingNewsData && breakingNewsItem[0] ? breakingNewsItem[0].headlines.basic : '';
+    breakingURL = breakingNewsItem && breakingNewsItem[0] ? breakingNewsItem[0].canonical_url : '';
+    mainTitle = 'Breaking News';
+  } else {
+    const liveVideoData = useContent({
       source: 'collections-api',
       query: { id: `${breakingLiveVideoID}` },
     });
-  };
-
-  if (breakingNewsItem) {
-    breakingHeadline = breakingNewsData && breakingNewsItem[0] ? breakingNewsItem[0].headlines.basic : '';
-    breakingURL = breakingNewsItem[0] ? breakingNewsItem[0].canonical_url : '';
-    mainTitle = 'Breaking News';
-  } else {
-    secondContentCall();
     const liveVideoItem = liveVideoData && liveVideoData.content_elements[0] ? liveVideoData.content_elements : [];
     breakingHeadline = liveVideoData && liveVideoItem[0] ? liveVideoItem[0].headlines.basic : '';
     breakingURL = liveVideoItem && liveVideoItem[0] ? liveVideoItem[0].canonical_url : '';
