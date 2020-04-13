@@ -17,6 +17,8 @@ export const itemsToArray = (itemString = '') => itemString.split(',').map(item 
 
 const resolve = (query) => {
   const {
+    includeSources = '',
+    excludeSources = '',
     includeSections = '',
     excludeSections = '',
     includeContentTypes = '',
@@ -26,6 +28,9 @@ const resolve = (query) => {
     includeSubtypes = '',
     exludeSubtypes = '',
   } = query;
+
+  const sourcesIncluded = itemsToArray(includeSources);
+  const sourcesExcluded = itemsToArray(excludeSources);
 
   const contentTypesIncluded = itemsToArray(includeContentTypes);
   const contentTypesExcluded = itemsToArray(excludeContentTypes);
@@ -43,6 +48,11 @@ const resolve = (query) => {
     query: {
       bool: {
         must: [
+          {
+            terms: {
+              source: sourcesIncluded,
+            },
+          },
           {
             terms: {
               type: contentTypesIncluded,
@@ -81,6 +91,11 @@ const resolve = (query) => {
           },
         ],
         must_not: [
+          {
+            terms: {
+              source: sourcesExcluded,
+            },
+          },
           {
             terms: {
               type: contentTypesExcluded,

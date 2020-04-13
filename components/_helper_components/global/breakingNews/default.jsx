@@ -12,14 +12,15 @@ const BreakingNews = () => {
     query: { id: `${breakingNewsID}` },
   });
 
-  const breakingNewsItem = breakingNewsData && breakingNewsData.content_elements[0] ? breakingNewsData.content_elements : false;
+  const { content_elements: contentElements } = breakingNewsData || {};
+  const [breakingNewsItem] = contentElements || [];
   let breakingHeadline;
   let breakingURL;
   let mainTitle;
 
   if (breakingNewsItem) {
-    breakingHeadline = breakingNewsData && breakingNewsItem[0] ? breakingNewsItem[0].headlines.basic : '';
-    breakingURL = breakingNewsItem && breakingNewsItem[0] ? breakingNewsItem[0].canonical_url : '';
+    breakingHeadline = breakingNewsItem && breakingNewsItem.headlines && breakingNewsItem.headlines.basic;
+    breakingURL = breakingNewsItem && breakingNewsItem.canonical_url;
     mainTitle = 'Breaking News';
   }
 
