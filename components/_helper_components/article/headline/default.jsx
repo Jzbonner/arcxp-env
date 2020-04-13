@@ -20,6 +20,10 @@ const Headline = ({ basicItems = {}, headlines = {}, ampPage = false }) => {
 
   return (
     <div className={`article-headline-component b-margin-bottom-d30-m20 with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
+      <amp-position-observer on='enter:stickyAnimation.start'
+        intersection-ratios="0.8"
+        layout="nodisplay">
+      </amp-position-observer>
       <div className="headline">
         <div className="headline-body">
           <h3 className={`headline-text ${headlines.basic.length > 50 ? 'headline-text-long' : ''}`}>{headlines.basic}</h3>
