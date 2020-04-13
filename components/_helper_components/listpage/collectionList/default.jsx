@@ -42,11 +42,14 @@ const CollectionList = ({
       const {
         content_elements: contentElements,
       } = newItems;
+
       const newContent = contentElements.map((el) => {
         const {
           _id: id,
           promo_items: promoItems,
         } = el || {};
+        if (!promoItems) return null;
+
         const {
           basic,
         } = promoItems || {};
