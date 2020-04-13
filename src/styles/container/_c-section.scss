@@ -1,3 +1,6 @@
+@import "./../base/breakpoints";
+@import "./../base/mixins";
+
 .c-section {
   @include section();
 }
