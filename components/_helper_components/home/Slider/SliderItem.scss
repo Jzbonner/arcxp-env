@@ -9,7 +9,7 @@
   margin-left: .5rem;
   text-align: center;
 
-  .slider-item-image img {
+  .slider-item-image .c-image-component .image-component-image .tease-image {
     margin-bottom: 1.063rem;
     border-radius: 6px;
     height: 18vh;
@@ -23,6 +23,27 @@
     @include breakpoint(desktop-sm) {
       max-width: 500px;
       min-height: 280px;
+    }
+  }
+
+  .slider-item-image .c-image-component .image-component-image .c-tease-icon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(to top, #04befe, #4481eb);
+    border-radius: 25px;
+    box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+    top: 72%;
+    right: 0;
+    margin-right: .875rem;
+    z-index: 25;
+    overflow: hidden;
+
+    .tease-icon img {
+      position: relative;
+      top: 29%;
+      width: 27px;
+      height: 22px;
     }
   }
 
@@ -55,7 +76,7 @@
 
 /* pagebuilder size fix */
 @media only screen and (min-width: 948px) and (max-width: 1023px) {
-  
+
   .c-slider-item .slider-item-image img {
     min-height: 40vh;
     max-height: 45vh;

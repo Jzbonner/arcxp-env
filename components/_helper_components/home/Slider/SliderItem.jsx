@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TimeStamp from '../../article/timestamp/default';
+import Image from '../../global/image/default';
 import SectionLabel from '../../global/sectionLabel/default';
 import truncateHeadline from '../../../layouts/_helper_functions/homepage/truncateHeadline';
 import './SliderItem.scss';
@@ -8,17 +9,25 @@ import './SliderItem.scss';
 
 const SliderItem = ({ data, refHook }) => {
   const {
-    classes, headline, image, canonicalUrl, timestampData, sectionLabelData,
+    classes, headline, image, canonicalUrl, timestampData, sectionLabelData, contentType,
   } = data;
   const { displayDate, firstPublishDate } = timestampData;
   const { taxonomy, label } = sectionLabelData;
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
 
+  const imageData = { url: image };
+  console.log('content type: ', contentType);
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
       <a href={canonicalUrl} className="slider-item-image">
-        <img src={image} />
+        {/* <img src={image} /> */}
+        <Image
+          height={280}
+          width={500}
+          src={imageData}
+          teaseContentType={contentType}
+        />
       </a>
       <div className="sliderList-text">
         <div className="c-label-wrapper">

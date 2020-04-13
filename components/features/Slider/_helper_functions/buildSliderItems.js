@@ -8,7 +8,7 @@ const buildSliderItems = (sliderCollection, ref) => {
     const itemThumbnail = getItemThumbnail(elem.promo_items);
 
     if (!itemThumbnail) return null;
-
+    // console.log('promo',elem);
     const data = {};
     data.classes = elCount === 0 ? 'is-firstItem' : '';
     data.index = elCount;
@@ -19,6 +19,8 @@ const buildSliderItems = (sliderCollection, ref) => {
     data.sectionLabelData = {};
 
     data.image = itemThumbnail;
+
+    data.contentType = elem.type || null;
 
     data.headline = elem.headlines && elem.headlines.basic ? elem.headlines.basic : null;
 
