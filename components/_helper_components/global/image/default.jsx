@@ -51,13 +51,15 @@ const Image = ({
   return (
     <div className={`c-image-component ${imageMarginBottom || ''}`}>
       <div className="image-component-image">
-        <img
-          className={teaseContentType ? 'tease-image' : ''}
-          src={imageSrc}
-          alt={imageALT}
-        />
+        <a>
+          <img
+            className={teaseContentType ? 'tease-image' : ''}
+            src={imageSrc}
+            alt={imageALT}
+          />
+          {teaseContentType && getTeaseIcon(teaseContentType, url)}
+        </a>
         {imageType !== 'isHomepageImage' && renderCaption()}
-        {teaseContentType && getTeaseIcon(teaseContentType, url)}
       </div>
       {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
     </div>
