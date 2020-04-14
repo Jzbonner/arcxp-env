@@ -12,6 +12,7 @@ const SiteMeta = () => {
     contextPath,
     layout,
     requestUri,
+    metaValue,
   } = appContext;
   const {
     headlines, description, canonical_url: canonicalURL, type,
@@ -31,8 +32,8 @@ const SiteMeta = () => {
   const { isHomeOrSectionPage } = pageType || {};
   const site = siteName.toLowerCase();
   const thumbnailImage = renderImage();
-  const title = headlines ? headlines.basic : siteName;
-  const desc = description ? description.basic : '';
+  const title = headlines ? headlines.basic : metaValue('title') || siteName;
+  const desc = description ? description.basic : metaValue('description') || '';
 
   return (
     <>
