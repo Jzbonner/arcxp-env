@@ -49,7 +49,7 @@ const Image = ({
   };
 
   return (
-    <div className={`c-image-component ${imageMarginBottom}`}>
+    <div className={`c-image-component ${imageMarginBottom || ''}`}>
       <div className="image-component-image">
         <img
           className={teaseContentType ? 'tease-image' : ''}
