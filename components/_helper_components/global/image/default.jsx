@@ -7,7 +7,7 @@ import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
 
 const Image = ({
-  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType,
+  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, canonicalUrl,
 }) => {
   const { url, caption, credits } = src || {};
   const [imageSrc, setImageSrc] = useState('');
@@ -51,7 +51,7 @@ const Image = ({
   return (
     <div className={`c-image-component ${imageMarginBottom || ''}`}>
       <div className="image-component-image">
-        <a>
+        <a href={ canonicalUrl ? `${canonicalUrl}` : null}>
           <img
             className={teaseContentType ? 'tease-image' : ''}
             src={imageSrc}
@@ -74,5 +74,6 @@ Image.propTypes = {
   imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage']),
   maxTabletViewWidth: PropTypes.number,
   teaseContentType: PropTypes.string,
+  canonicalUrl: PropTypes.string,
 };
 export default Image;

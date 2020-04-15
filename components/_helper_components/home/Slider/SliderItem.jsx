@@ -17,18 +17,16 @@ const SliderItem = ({ data, refHook }) => {
   const { text: isHideTimestampTrue } = hideTimestamp || {};
 
   const imageData = { url: image };
-  console.log('content type: ', contentType);
+
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
-      <a href={canonicalUrl} className="slider-item-image">
-        {/* <img src={image} /> */}
         <Image
-          height={280}
-          width={500}
+          height={660}
+          width={1066}
           src={imageData}
           teaseContentType={contentType}
+          canonicalUrl={canonicalUrl || null}
         />
-      </a>
       <div className="sliderList-text">
         <div className="c-label-wrapper">
           <SectionLabel label={label} taxonomy={taxonomy} />
