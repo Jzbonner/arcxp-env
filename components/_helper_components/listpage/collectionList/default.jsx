@@ -66,7 +66,6 @@ const CollectionList = ({
         if (window.innerWidth > 1023) {
           window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height - 25));
         } else {
-          console.log(fetchRef.current.getBoundingClientRect().height);
           window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height - 60));
         }
       }
