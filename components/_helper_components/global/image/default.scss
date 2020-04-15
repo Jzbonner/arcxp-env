@@ -42,8 +42,6 @@
       }
 
       @include breakpoint(tablet) {
-        max-width: 50px;
-        max-height: 50px;
         width: 9%;
         height: 11%;
 
@@ -58,8 +56,6 @@
       }
 
       @include breakpoint(desktop-sm) {
-        max-width: 50px;
-        max-height: 50px;
         width: 50%;
         height: 30%;
       }

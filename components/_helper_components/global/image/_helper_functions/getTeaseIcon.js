@@ -11,7 +11,6 @@ export default function getTeaseIcon(teaseContentType, url) {
     iconToRender = galleryIcon;
   }
 
-  // debugger;
   if (iconToRender) {
     return (
       <div className="c-tease-icon">
