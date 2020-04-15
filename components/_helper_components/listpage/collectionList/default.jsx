@@ -64,9 +64,10 @@ const CollectionList = ({
       setItems(newContent);
       if (fetchRef.current) {
         if (window.innerWidth > 1023) {
-          window.scrollTo(0, (fetchRef.current.offsetTop));
+          window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height - 25));
         } else {
-          window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height));
+          console.log(fetchRef.current.getBoundingClientRect().height);
+          window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height - 60));
         }
       }
     }
