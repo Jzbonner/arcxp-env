@@ -213,7 +213,7 @@
   },
   "homepage": "https://github.com/wapopartners/StarterPack-PageBuilder-Fusion-Features#readme",
   "dependencies": {
-    "arcads": "^1.5.0",
+    "arcads": "https://github.com/washingtonpost/ArcAds/archive/dimensions-depth-check.tar.gz",
     "scriptjs": "^2.5.9",
     "thumbor-lite": "^0.1.8"
   }
