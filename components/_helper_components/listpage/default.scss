@@ -22,7 +22,7 @@
         @include breakpoint(tablet) {
           display: block;
           float: right;
-          margin-right: -330px;
+          margin-right: -384px;
         }
       }
     }
@@ -123,8 +123,7 @@
 }
 
 .listPage-item {
-  width: 100%;
-
+  
   .c-homeList {
     display: flex;
     margin-bottom: 20px;
@@ -140,6 +139,10 @@
 
     .homeList-image {
       display: none;
+    }
+
+    .homeList-text {
+      max-width: 100%;
     }
   }
 }
