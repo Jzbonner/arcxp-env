@@ -12,6 +12,7 @@
 @import "./../../../components/_helper_components/article/section/styles.scss";
 @import "./../../../components/_helper_components/article/subheadline/style.scss";
 @import "./../../../components/_helper_components/article/timestamp/default.scss";
+@import "./../../../components/_helper_components/article/contributorBadge/default.scss";
 @import "./../../../components/_helper_components/article/contentElements/components/blockQuote/styles.scss";
 @import "./../../../components/_helper_components/article/contentElements/components/divider/styles.scss";
 @import "./../../../components/_helper_components/article/contentElements/components/header/default.scss";
@@ -23,8 +24,8 @@
 
 // start global
 @import "./../../../components/_helper_components/global/breakingNews/default.scss";
-@import "./../../../components/_helper_components/global/navBar/amp.scss";
-@import "./../../../components/_helper_components/global/footer/default.scss";
+@import "./../../../components/_helper_components/global/image/default.scss";
+@import "./../../../components/_helper_components/global/caption/default.scss";
 // end global
 
 /* Import site specific overrides here */

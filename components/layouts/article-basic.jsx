@@ -42,7 +42,7 @@ const start = 3;
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const {
-    globalContent, requestUri, deployment, contextPath,
+    globalContent, requestUri,
   } = appContext;
 
   if (!globalContent) return null;
@@ -139,7 +139,7 @@ const StoryPageLayout = () => {
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
           </div>
-          <ContributorBadge tags={tags} deployment={deployment} contextPath={contextPath} />
+          <ContributorBadge tags={tags} ampPage={ampPage} />
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
             <SubHeadline subheadlines={subheadlines} />
           </div>
@@ -205,10 +205,11 @@ const StoryPageLayout = () => {
             </div>
           )}
         </article>
-        {(!basicItems || promoType !== 'gallery')
-        && !ampPage ? <Gallery contentElements={filteredContentElements} pageType={subtype} /> : null}
+        {(!basicItems || promoType !== 'gallery') && !ampPage ? (
+          <Gallery contentElements={filteredContentElements} pageType={subtype} />
+        ) : null}
       </main>
-      {!ampPage && <Footer /> }
+      {!ampPage && <Footer />}
     </>
   );
 };

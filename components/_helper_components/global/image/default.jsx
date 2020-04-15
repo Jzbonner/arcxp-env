@@ -6,9 +6,11 @@ import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
 const Image = ({
-  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth,
+  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, ampPage,
 }) => {
-  const { url, caption, credits } = src || {};
+  const {
+    url, height: originalHeight, width: originalWidth, caption, credits,
+  } = src || {};
   const [imageSrc, setImageSrc] = useState('');
   const imageALT = caption && caption.length > 1 ? caption : 'story page inline image';
 
@@ -49,7 +51,17 @@ const Image = ({
   return (
     <div className={`c-image-component ${imageMarginBottom}`}>
       <div className="image-component-image">
-        <img src={imageSrc} alt={imageALT} />
+        {!ampPage ? (
+          <img src={imageSrc} alt={imageALT} />
+        ) : (
+          <amp-img
+            src={imageResizer(url, width, height)}
+            alt={imageALT}
+            width={width}
+            height={height !== 0 ? height : (width / originalWidth) * originalHeight}
+            layout="responsive"
+          />
+        )}
         {imageType !== 'isHomepageImage' && renderCaption()}
       </div>
       {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
@@ -64,5 +76,6 @@ Image.propTypes = {
   imageMarginBottom: PropTypes.string,
   imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage']),
   maxTabletViewWidth: PropTypes.number,
+  ampPage: PropTypes.bool,
 };
 export default Image;

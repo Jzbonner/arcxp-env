@@ -37,7 +37,6 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
           case 'header':
             return <Header src={element} key={`Header-${i}`} />;
           case 'image':
-            if (ampPage) return null;
             // a height of 0 makes the height proportional to the width
             return (
               <Image
@@ -45,6 +44,7 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
                 height={0}
                 src={element}
                 imageType="isInlineImage"
+                ampPage={ampPage}
                 imageMarginBottom="b-margin-bottom-d40-m20"
                 maxTabletViewWidth={maxTabletViewWidth}
                 key={`Image-${i}`}

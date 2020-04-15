@@ -25,10 +25,17 @@ const Headline = ({ basicItems = {}, headlines = {}, ampPage = false }) => {
           <h3 className={`headline-text ${headlines.basic.length > 50 ? 'headline-text-long' : ''}`}>{headlines.basic}</h3>
         </div>
       </div>
-      {!ampPage && promoData.type === 'image' && (
-        <Image width={1066} height={600} imageType="isLeadImage" src={basicItems} maxTabletViewWidth={maxTabletViewWidth} />
+      {promoData.type === 'image' && (
+        <Image
+          width={1066}
+          height={600}
+          imageType="isLeadImage"
+          src={basicItems}
+          maxTabletViewWidth={maxTabletViewWidth}
+          ampPage={ampPage}
+        />
       )}
-      {!ampPage && promoData.type === 'gallery' && promoData.content_elements && <Gallery promoItems={promoData}/>}
+      {!ampPage && promoData.type === 'gallery' && promoData.content_elements && <Gallery promoItems={promoData} />}
       {!ampPage && promoData.type === 'video' && (
         <Video isLeadVideo src={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules} maxTabletViewWidth={maxTabletViewWidth} />
       )}
