@@ -47,15 +47,15 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
 
   if (articleType === 'normal') {
     if (days > 0) {
-      timeStamp = `${!isHyperlocalContent ? ' | ' : ''}${isUpdated ? 'updated ' : ''}${findAPMonth(
+      timeStamp = `${!isHyperlocalContent ? ' | ' : ''}${isUpdated ? 'Updated ' : ''}${findAPMonth(
         pub.getMonth(),
       )} ${pub.getDate()}, ${pub.getFullYear()}`;
     } else if (hours > 0) {
       const hourLabel = `hour${hours > 1 ? 's' : ''}`;
-      timeStamp = `${!isHyperlocalContent ? ' | ' : ''}${isUpdated ? 'updated ' : ''}${hours} ${hourLabel} ago`;
+      timeStamp = `${!isHyperlocalContent ? ' | ' : ''}${isUpdated ? 'Updated ' : ''}${hours} ${hourLabel} ago`;
     } else if (minutes > -1) {
       const minLabel = `minute${minutes !== 1 ? 's' : ''}`;
-      timeStamp = `${!isHyperlocalContent ? ' | ' : ''}${isUpdated ? 'updated ' : ''}${minutes} ${minLabel} ago`;
+      timeStamp = `${!isHyperlocalContent ? ' | ' : ''}${isUpdated ? 'Updated ' : ''}${minutes} ${minLabel} ago`;
     } else {
       return null;
     }
@@ -68,7 +68,7 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
     const year = `${pub.getFullYear()}`;
     const time = `${formatTime(pub)}`;
 
-    timeStamp = `${weekday}, ${month} ${dayOfTheMonth}, ${year} @ ${time}`;
+    timeStamp = `${weekday}, ${month} ${dayOfTheMonth}, ${year} at ${time}`;
   }
 
   if (articleType === 'tease') {
