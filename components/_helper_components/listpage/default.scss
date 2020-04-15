@@ -42,6 +42,7 @@
   padding: 0 30px;
   box-sizing: border-box;
   margin-bottom: 50px;
+  margin-top: 24px;
 
   @include breakpoint(tablet) {
     width: fit-content;
