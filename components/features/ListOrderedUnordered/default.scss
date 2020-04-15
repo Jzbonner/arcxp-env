@@ -5,6 +5,7 @@
   width: calc(100% - 45px);
   max-width: 408px;
   margin: auto;
+  line-height: 1.7;
 
   @include breakpoint(desktop-sm) {
     width: calc(100% - 150px);
