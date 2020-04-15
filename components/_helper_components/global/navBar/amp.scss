@@ -1,12 +1,25 @@
-.c-amp-nav {
-  margin: 0 auto;
-  height: 100px;
+.c-amp-header {
   background-color: #f8f8f8;
   position: sticky;
   top: 0;
-  width: 100%;
+  left: 0;
+  // width: 100%;
   z-index: 2;
+  // padding: 20px;
   // position: -webkit-sticky;  
+}
+
+.amp-nav {
+  padding: 20px;
+  height: 101px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.amp-nav-padding {
+  padding: 0;
 }
 
 .amp-content {
@@ -60,4 +73,14 @@
     top: auto;
     bottom: -400%;
   }
+}
+
+.amp-logo-pinned {
+  opacity: 0;
+}
+
+.amp-logo {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
 }
