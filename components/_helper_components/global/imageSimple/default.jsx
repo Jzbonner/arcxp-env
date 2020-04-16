@@ -12,13 +12,13 @@ This image component is for icons, badges and logos that:
 const ImageSimple = ({
   src, ampPage, alt, classes, ampMobileHeight, ampMobileMinWidth,
 }) => {
-  const { contextPath } = useAppContext();
+  const { deployment, contextPath } = useAppContext();
 
   const getPath = () => {
     if (src.includes('data:image/svg+xml')) {
       return src;
     }
-    return `${contextPath}${src}`;
+    return deployment(`${contextPath}${src}`);
   };
 
   if (ampPage) {
@@ -29,7 +29,7 @@ const ImageSimple = ({
 
 ImageSimple.propTypes = {
   src: PropTypes.string,
-  ampPage: PropTypes.bool,
+  ampPage: PropTypes.bool.isRequired,
   alt: PropTypes.string,
   classes: PropTypes.string,
   ampMobileMinWidth: PropTypes.string,
