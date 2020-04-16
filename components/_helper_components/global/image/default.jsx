@@ -4,9 +4,10 @@ import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import getTeaseIcon from './_helper_functions/getTeaseIcon';
 
 const Image = ({
-  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth,
+  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, canonicalUrl,
 }) => {
   const { url, caption, credits } = src || {};
   const [imageSrc, setImageSrc] = useState('');
@@ -37,6 +38,7 @@ const Image = ({
       (imageType === 'isLeadImage' && !giveCredit && !caption)
       || (imageType === 'isInlineImage' && !caption)
       || (imageType === 'isLeadImage' && giveCredit && !caption && screenSize.width > maxTabletViewWidth)
+      || teaseContentType
     ) {
       return null;
     }
@@ -47,9 +49,16 @@ const Image = ({
   };
 
   return (
-    <div className={`c-image-component ${imageMarginBottom}`}>
+    <div className={`c-image-component ${imageMarginBottom || ''}`}>
       <div className="image-component-image">
-        <img src={imageSrc} alt={imageALT} />
+        <a href={ canonicalUrl ? `${canonicalUrl}` : null}>
+          <img
+            className={teaseContentType ? 'tease-image' : ''}
+            src={imageSrc}
+            alt={imageALT}
+          />
+          {teaseContentType && getTeaseIcon(teaseContentType, url)}
+        </a>
         {imageType !== 'isHomepageImage' && renderCaption()}
       </div>
       {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
@@ -64,5 +73,7 @@ Image.propTypes = {
   imageMarginBottom: PropTypes.string,
   imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage']),
   maxTabletViewWidth: PropTypes.number,
+  teaseContentType: PropTypes.string,
+  canonicalUrl: PropTypes.string,
 };
 export default Image;

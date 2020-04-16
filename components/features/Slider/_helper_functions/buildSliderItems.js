@@ -20,6 +20,8 @@ const buildSliderItems = (sliderCollection, ref) => {
 
     data.image = itemThumbnail;
 
+    data.contentType = elem.type || null;
+
     data.headline = elem.headlines && elem.headlines.basic ? elem.headlines.basic : null;
 
     data.canonicalUrl = elem.canonical_url ? elem.canonical_url : null;
