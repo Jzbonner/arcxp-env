@@ -11,15 +11,22 @@ const LiveVideo = () => {
     query: { id: `${breakingLiveVideoID}` },
   });
 
-  const { content_elements: contentElements } = liveVideoData || {};
-  const [liveVideoItem] = contentElements || [];
+  const { id: storyID } = liveVideoData && liveVideoData.data.document && liveVideoData.data.document.content_elements[0]
+    ? liveVideoData.data.document.content_elements[0].referent
+    : {};
+
+  const videoData = useContent({
+    source: 'storyContent',
+    query: { id: `${storyID}` },
+  });
+
   let breakingHeadline;
   let breakingURL;
   let mainTitle;
 
-  if (liveVideoItem) {
-    breakingHeadline = liveVideoItem && liveVideoItem.headlines && liveVideoItem.headlines.basic;
-    breakingURL = liveVideoItem && liveVideoItem.canonical_url;
+  if (videoData) {
+    breakingHeadline = videoData && videoData.headlines && videoData.headlines.basic;
+    breakingURL = videoData && videoData.canonical_url;
     mainTitle = 'Live Video';
   }
 
