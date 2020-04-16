@@ -184,7 +184,7 @@
           &.listPage {
             text-align: left;
 
-            @include text-styles(1.125rem, 1.33, "Average");
+            @include text-styles(1rem, 1.33, "Average");
 
             @include breakpoint(desktop-sm) {
               @include text-styles(1.375rem, 1.25, "Average");
@@ -198,6 +198,30 @@
 
         @include breakpoint(desktop-sm) {
           margin-bottom: 2rem;
+        }
+
+        .homeList-image {
+          max-width: 40%;
+          margin-right: 10px;
+
+          @include breakpoint(desktop-sm) {
+            max-width: 35%;
+            margin-right: 20px;
+          }
+        }
+
+        .homeList-text {
+          max-width: 100%;
+        }
+
+        .c-label-wrapper {
+          margin-bottom: 2px;
+          margin-top: -3px;
+
+          @include breakpoint(desktop-sm) {
+            margin-bottom: 7px;
+            margin-top: 0;
+          }
         }
       }
     }

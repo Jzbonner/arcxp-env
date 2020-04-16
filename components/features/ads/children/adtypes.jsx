@@ -3,14 +3,28 @@ export const defaultAdSlot = {
   slotName: '',
   display: 'all',
   dimensions: [
-    [1, 1],
+    [
+      [1, 1],
+    ], // all
   ],
   breakpoints: [
-    [0, 0], // mobile
+    [0, 0], // all
   ],
   targeting: {
-    // key:value pairs; should be passed-in at ad-request time (e.g. article-basic)
+    // key:value pairs; should be global; currently set in components/features/ads/default.jsx
   },
+  // bidding: {
+  //   prebid: {
+  //     enabled: true,
+  //     bids: [{
+  //       bidder: 'appnexus',
+  //       labels: ['desktop', 'tablet', 'phone']
+  //       params: {
+  //         placementId: '10433394'
+  //       }
+  //     }]
+  //   }
+  // },
 };
 
 export const adSlots = {
@@ -59,7 +73,7 @@ export const adSlots = {
   HP05: {
     dimensions: [
       [
-        [0, 0],
+        [],
       ], // desktop
       [
         [728, 90],
@@ -75,14 +89,9 @@ export const adSlots = {
       [
         [300, 600],
         [300, 250],
-      ], // desktop
-      [
-        [300, 600],
-        [300, 250],
-      ], // tablet
+      ], // tablet+
     ],
     breakpoints: [
-      [1024, 0], // desktop
       [768, 0], // tablet
     ],
   },
@@ -91,22 +100,19 @@ export const adSlots = {
       [
         [300, 600],
         [300, 250],
-      ], // desktop
-      [
-        [300, 600],
-        [300, 250],
-      ], // tablet
+      ], // tablet+
     ],
     breakpoints: [
-      [1024, 0], // desktop
-      [768, 0], // tablet
+      [768, 0], // tablet+
     ],
   },
   'RP01-Story-Desktop': {
     slotName: 'RP01',
     dimensions: [
-      [300, 600],
-      [300, 250],
+      [
+        [300, 600],
+        [300, 250],
+      ], // desktop
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -116,8 +122,10 @@ export const adSlots = {
   'RP01-Story-FlatPage': {
     slotName: 'RP01',
     dimensions: [
-      [300, 600],
-      [300, 250],
+      [
+        [300, 600],
+        [300, 250],
+      ], // desktop
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -129,7 +137,7 @@ export const adSlots = {
     slotName: 'RP01',
     dimensions: [
       [
-        [0, 0],
+        [],
       ], // desktop
       [
         [300, 600],
@@ -147,22 +155,19 @@ export const adSlots = {
       [
         [300, 600],
         [300, 250],
-      ], // desktop
-      [
-        [300, 600],
-        [300, 250],
-      ], // tablet
+      ], // tablet +
     ],
     breakpoints: [
-      [1024, 0], // desktop
-      [768, 0], // tablet
+      [768, 0], // tablet+
     ],
   },
   'RP09-Story-Desktop': {
     slotName: 'RP09',
     dimensions: [
-      [300, 600],
-      [300, 250],
+      [
+        [300, 600],
+        [300, 250],
+      ], // desktop
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -174,7 +179,7 @@ export const adSlots = {
     slotName: 'RP09',
     dimensions: [
       [
-        [0, 0],
+        [],
       ], // desktop
       [
         [300, 600],
@@ -189,7 +194,7 @@ export const adSlots = {
   MP01: {
     dimensions: [
       [
-        [0, 0],
+        [],
       ], // tablet+
       [
         [320, 150],
@@ -200,12 +205,11 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
-    display: 'mobile',
   },
   MP02: {
     dimensions: [
       [
-        [0, 0],
+        [],
       ], // tablet+
       [
         [300, 250],
@@ -215,12 +219,11 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
-    display: 'mobile',
   },
   MP03: {
     dimensions: [
       [
-        [0, 0],
+        [],
       ], // tablet+
       [
         [300, 250],
@@ -230,12 +233,11 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
-    display: 'mobile',
   },
   MP04: {
     dimensions: [
       [
-        [0, 0],
+        [],
       ], // tablet+
       [
         [300, 250],
@@ -245,12 +247,11 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
-    display: 'mobile',
   },
   MP05: {
     dimensions: [
       [
-        [0, 0],
+        [],
       ], // tablet+
       [
         [300, 250],
@@ -260,12 +261,13 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
-    display: 'mobile',
   },
   PG01: {
     slotName: 'PG01',
     dimensions: [
-      [600, 400],
+      [
+        [600, 400],
+      ], // desktop
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -274,7 +276,9 @@ export const adSlots = {
   PG02: {
     slotName: 'PG02',
     dimensions: [
-      [88, 31],
+      [
+        [88, 31],
+      ], // desktop
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -283,11 +287,16 @@ export const adSlots = {
   MPG01: {
     slotName: 'MPG01',
     dimensions: [
-      [300, 250],
+      [
+        [],
+      ], // tablet+
+      [
+        [300, 250],
+      ], // mobile
     ],
     breakpoints: [
+      [768, 0], // tablet+
       [1, 0], // mobile
     ],
-    display: 'mobile',
   },
 };
