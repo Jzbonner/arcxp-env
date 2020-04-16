@@ -21,8 +21,8 @@ const SliderItem = ({ data, refHook }) => {
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
         <Image
-          height={660}
-          width={1066}
+          height={282}
+          width={500}
           src={imageData}
           teaseContentType={contentType}
           canonicalUrl={canonicalUrl || null}

@@ -73,9 +73,9 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
 
   if (articleType === 'tease') {
     if (hours >= 24) return null;
-    if (hours > 1 && hours < 24) {
+    if (hours >= 1 && hours < 24) {
       timeStamp = `| ${hours}h ago`;
-    } else if (minutes > -1) {
+    } else if (hours < 1 && minutes > -1) {
       timeStamp = `| ${minutes}m ago`;
     } else {
       return null;

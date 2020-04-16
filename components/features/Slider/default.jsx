@@ -130,32 +130,35 @@ const Slider = (customFields = {}) => {
   }, []);
 
   return (
-    <div
-      ref={wrapperRef}
-      className={`c-slider-wrapper ${displayClass.toLowerCase().includes('special feature') ? 'is-special-feature' : ''}`}>
-      <h1 className="slider-title">{title}</h1>
-      <div className="c-slider">
-        <div className="c-slider-content" >
-          <div ref={contentRef}
-            onTouchStart={e => handleTouchStart(e)}
-            onTouchMove={e => handleTouchMove(e)}
-            onTouchEnd={handleTouchEnd}
-            className="itemList"
-            style={{ transform: `translateX(${translateX - changeX}px)` }}>
-            {sliderItems}
+    <div className="c-slider-master">
+      <div
+        ref={wrapperRef}
+        className={`c-slider-wrapper ${displayClass.toLowerCase().includes('special feature') ? 'is-special-feature' : ''}`}
+      >
+        <h1 className="slider-title">{title}</h1>
+        <div className="c-slider">
+          <div className="c-slider-content" >
+            <div ref={contentRef}
+              onTouchStart={e => handleTouchStart(e)}
+              onTouchMove={e => handleTouchMove(e)}
+              onTouchEnd={handleTouchEnd}
+              className="itemList"
+              style={{ transform: `translateX(${translateX - changeX}px)` }}>
+              {sliderItems}
+            </div>
           </div>
-        </div>
-        {!isNotDesktop && <>
-          {translateX !== 0
-            ? <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
+          {!isNotDesktop && <>
+            {translateX !== 0
+              ? <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
+                <img src={rightArrow} />
+              </a>
+              : null}
+            {Math.abs(translateX) < contentFullWidth ? <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
               <img src={rightArrow} />
-            </a>
-            : null}
-          {Math.abs(translateX) < contentFullWidth ? <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
-            <img src={rightArrow} />
-          </a> : null}
+            </a> : null}
           </>
-        }
+          }
+        </div>
       </div>
     </div>
   );
