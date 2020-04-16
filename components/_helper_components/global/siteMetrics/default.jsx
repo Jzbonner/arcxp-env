@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import { connext, dtmLibraryURL } from 'fusion:environment';
+import { connext, metrics } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import checkPageType from '../../../layouts/_helper_functions/getPageType.js';
 
@@ -10,7 +10,13 @@ const SiteMetrics = () => {
   const { headlines, type } = globalContent || {};
 
   const pageType = checkPageType(type, layout);
-  const { isHomeOrSectionPage } = pageType || {};
+  const { isHomeOrSectionPage, isHome, isSection } = pageType || {};
+  let pageContentType = type;
+  if (isHome) {
+    pageContentType = 'homepage';
+  } else if (isSection) {
+    pageContentType = 'section front';
+  }
 
   const { siteName } = getProperties();
 
@@ -20,7 +26,7 @@ const SiteMetrics = () => {
   return (
     <script type='text/javascript' dangerouslySetInnerHTML={{
       __html: `var DDO = DDO || {};
-        DDO.DTMLibraryURL = ${dtmLibraryURL};
+        DDO.DTMLibraryURL = '${metrics && metrics.dtmLibraryURL ? metrics.dtmLibraryURL : ''}';
 
         DDO.hasLocalStorage = () => {
           const isDefined = typeof(localStorage) != 'undefined';
@@ -32,24 +38,24 @@ const SiteMetrics = () => {
           return isDefined && canRetrieve;
         }
 
-        DDO.connextActive = ${connext && connext.isEnabled ? connext.isEnabled : 'false'};
+        DDO.connextActive = '${connext && connext.isEnabled ? connext.isEnabled : 'false'}';
 
         DDO.pageData: {
-          'pageName': ${isHomeOrSectionPage ? 'website' : 'article'},
+          'pageName': '${isHomeOrSectionPage ? 'website' : 'article'}',
           'pageSiteSection': '<string>',
           'pageCategory': '<string>',
           'pageSubCategory': '<string>',
-          'pageContentType': '<string>',
-          'pageTitle': ${title}
+          'pageContentType': '${pageContentType}',
+          'pageTitle': '${title.replace('\'', '"')}'
         };
 
         DDO.siteData: {
-          'siteID': ${site},
+          'siteID': '${site}',
           'siteDomain': '<string>',
-          'siteVersion': '<string>',
+          'siteVersion': 'responsive site',
           'siteFormat': '<string>',
           'siteMetro': '<string>',
-          'siteMedium': '<string>',
+          'siteMedium': 'np',
           'siteType': '',
           'siteCMS': 'arc'
         };
