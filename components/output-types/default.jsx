@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { fbPagesId, connext } from 'fusion:environment';
 import SiteMeta from '../_helper_components/global/siteMeta/default';
+import SiteMetrics from '../_helper_components/global/siteMetrics/default';
 import ConnextInit from '../_helper_components/global/connext/default.jsx';
 import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
 import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
@@ -41,6 +42,7 @@ const DefaultOutputType = (props) => {
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
+        <SiteMetrics />
       </head>
       <body>
         <div id="fusion-app">{children}</div>
