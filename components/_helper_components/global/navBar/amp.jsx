@@ -73,6 +73,7 @@ const AmpNavBar = () => {
 
   return (
     <>
+      <amp-sidebar id="sidebar" layout="nodisplay" side="left"></amp-sidebar>
       <div id="page-header-anim-marker">
         <amp-position-observer on="enter:headerGrowAnim.start; exit:headerShrinkAnim.start"
         intersection-ratios=".5"
