@@ -1,13 +1,18 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import { connext, metrics } from 'fusion:environment';
+import { connext, envMetrics } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import checkPageType from '../../../layouts/_helper_functions/getPageType.js';
 
 const SiteMetrics = () => {
   const appContext = useAppContext();
-  const { globalContent, layout, metaValue } = appContext;
-  const { headlines, type } = globalContent || {};
+  const {
+    globalContent,
+    layout,
+    metaValue,
+    requestUri,
+  } = appContext;
+  const { headlines, canonical_url: canonicalURL, type } = globalContent || {};
 
   const pageType = checkPageType(type, layout);
   const { isHomeOrSectionPage, isHome, isSection } = pageType || {};
@@ -18,7 +23,18 @@ const SiteMetrics = () => {
     pageContentType = 'section front';
   }
 
-  const { siteName } = getProperties();
+  let uri = requestUri;
+  if (!canonicalURL) {
+    // only jump through these hoops if canonical_url is undefined (i.e. pagebuilder pages)
+    if (uri.indexOf('?')) {
+      uri = uri.substring(0, uri.indexOf('?'));
+    } else if (uri.indexOf('#')) {
+      uri = uri.substring(0, uri.indexOf('#'));
+    }
+  }
+  const url = canonicalURL || uri;
+
+  const { siteName, siteDomainURL, metrics } = getProperties() || {};
 
   const site = siteName.toLowerCase();
   const title = headlines ? headlines.basic : metaValue('title') || siteName;
@@ -26,7 +42,7 @@ const SiteMetrics = () => {
   return (
     <script type='text/javascript' dangerouslySetInnerHTML={{
       __html: `var DDO = DDO || {};
-        DDO.DTMLibraryURL = '${metrics && metrics.dtmLibraryURL ? metrics.dtmLibraryURL : ''}';
+        DDO.DTMLibraryURL = '${envMetrics && envMetrics.dtmLibraryURL ? envMetrics.dtmLibraryURL : ''}';
 
         DDO.hasLocalStorage = () => {
           const isDefined = typeof(localStorage) != 'undefined';
@@ -42,6 +58,7 @@ const SiteMetrics = () => {
 
         DDO.pageData: {
           'pageName': '${isHomeOrSectionPage ? 'website' : 'article'}',
+          'pageURL': '${url}',
           'pageSiteSection': '<string>',
           'pageCategory': '<string>',
           'pageSubCategory': '<string>',
@@ -50,13 +67,13 @@ const SiteMetrics = () => {
         };
 
         DDO.siteData: {
-          'siteID': '${site}',
-          'siteDomain': '<string>',
+          'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
+          'siteDomain': '${siteDomainURL || site}',
           'siteVersion': 'responsive site',
-          'siteFormat': '<string>',
-          'siteMetro': '<string>',
+          'siteFormat': '${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}',
+          'siteMetro': '${metrics && metrics.siteMetro ? metrics.siteMetro : ''}',
           'siteMedium': 'np',
-          'siteType': '',
+          'siteType': 'free',
           'siteCMS': 'arc'
         };
 
