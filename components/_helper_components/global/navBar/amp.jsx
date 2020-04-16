@@ -73,7 +73,7 @@ const AmpNavBar = () => {
 
   return (
     <>
-      <amp-sidebar id="sidebar" layout="nodisplay" side="left"></amp-sidebar>
+      <amp-sidebar id="sidebar" layout="nodisplay" side="left" class="amp-sidebar"></amp-sidebar>
       <div id="page-header-anim-marker">
         <amp-position-observer on="enter:headerGrowAnim.start; exit:headerShrinkAnim.start"
         intersection-ratios=".5"
@@ -88,7 +88,7 @@ const AmpNavBar = () => {
           {outputAnimationScript('headerGrowAnim')}
         </amp-animation>
         <div className='amp-nav'>
-          <div className='amp-hamburger'>
+          <div className='amp-hamburger' on="tap:sidebar.toggle">
             <div className='amp-hamburger-button'></div>
           </div>
           <div id="logo-pinned" className="amp-logo amp-logo-pinned">
