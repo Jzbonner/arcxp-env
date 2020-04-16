@@ -43,7 +43,14 @@
         display: flex;
         justify-content: center;
 
-        img {
+        .c-image-component,
+        .image-component-image {
+          height: 100%;
+          width: 100%;
+        }
+
+        img,
+        amp-img {
           height: 100%;
           width: auto;
           border-radius: 50%;
