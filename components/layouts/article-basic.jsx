@@ -41,9 +41,7 @@ const start = 3;
 
 const StoryPageLayout = () => {
   const appContext = useAppContext();
-  const {
-    globalContent, requestUri,
-  } = appContext;
+  const { globalContent, requestUri } = appContext;
 
   if (!globalContent) return null;
   const {
@@ -88,7 +86,7 @@ const StoryPageLayout = () => {
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
-  const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} />;
+  const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />;
   const insertAtEndOfStory = [];
   const interscrollerPlaceholder = () => (
     <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>

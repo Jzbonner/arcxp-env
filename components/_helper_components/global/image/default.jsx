@@ -74,8 +74,8 @@ Image.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   imageMarginBottom: PropTypes.string,
-  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage']),
+  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage']).isRequired,
   maxTabletViewWidth: PropTypes.number,
-  ampPage: PropTypes.bool,
+  ampPage: PropTypes.bool.isRequired,
 };
 export default Image;
