@@ -18,6 +18,11 @@ const AmpScripts = () => (
     />
     <script
       async
+      custom-element="amp-sidebar"
+      src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"
+    />
+    <script
+      async
       custom-element="amp-ad"
       src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"
     />
