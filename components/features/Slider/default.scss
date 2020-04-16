@@ -1,9 +1,5 @@
 @import "../../../src/styles/base/breakpoints";
 
-.is-special-feature {
-  background-color: #ebebef;
-}
-
 .c-slider-master {
   min-height: 350px;
   height: auto;
@@ -23,6 +19,13 @@
     margin-left: 0;
     padding-bottom: 1.875rem;
   }
+}
+
+.c-slider-master.is-special-feature .c-slider-wrapper {
+  position: relative;
+  left: auto;
+  margin: auto;
+  background-color: #ebebef;
 }
 
 .c-slider-wrapper {

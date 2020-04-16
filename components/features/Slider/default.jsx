@@ -91,8 +91,14 @@ const Slider = (customFields = {}) => {
     }
   };
 
-  /* mobile slider touch funcs */
+  const getIsSpecial = () => {
+    if (displayClass.toLowerCase().includes('special feature')) return true;
+
+    return null;
+  };
+
   // the following might be removed if UX wants smoothing scrolling instead of swipe gestures
+  /* mobile slider touch funcs */
 
   /*  const handleStart = (clientX) => {
     setStartX(clientX);
@@ -135,10 +141,10 @@ const Slider = (customFields = {}) => {
   }, []);
 
   return (
-    <div className="c-slider-master">
+    <div className={`c-slider-master ${getIsSpecial() ? 'is-special-feature' : ''}`}>
       <div
         ref={wrapperRef}
-        className={`c-slider-wrapper ${displayClass.toLowerCase().includes('special feature') ? 'is-special-feature' : ''}`}
+        className="c-slider-wrapper"
       >
         <h1 className="slider-title">{title}</h1>
         <div className="c-slider">
