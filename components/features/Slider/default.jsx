@@ -142,10 +142,7 @@ const Slider = (customFields = {}) => {
 
   return (
     <div className={`c-slider-master ${getIsSpecial() ? 'is-special-feature' : ''}`}>
-      <div
-        ref={wrapperRef}
-        className="c-slider-wrapper"
-      >
+      <div ref={wrapperRef} className="c-slider-wrapper">
         <h1 className="slider-title">{title}</h1>
         <div className="c-slider">
           <div className="c-slider-content" >
