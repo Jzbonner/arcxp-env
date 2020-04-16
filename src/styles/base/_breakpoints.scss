@@ -6,6 +6,8 @@ $breakpoint: (
   desktop-nav: 1340px
 ) !default;
 
+$is-amp: false !default;
+
 @mixin breakpoint($point) {
   @if $is-amp == false {
     /* Equal or greater than 768px */
