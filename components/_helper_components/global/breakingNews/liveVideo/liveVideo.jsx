@@ -7,7 +7,7 @@ const LiveVideo = () => {
   const { breakingLiveVideoID } = getProperties();
 
   const liveVideoData = useContent({
-    source: 'collections-api',
+    source: 'list',
     query: { id: `${breakingLiveVideoID}` },
   });
 

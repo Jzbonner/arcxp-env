@@ -8,11 +8,24 @@ const BreakingNews = () => {
   const { breakingNewsID } = getProperties();
 
   const breakingNewsData = useContent({
-    source: 'collections-api',
+    source: 'list',
     query: { id: `${breakingNewsID}` },
   });
 
-  const { content_elements: contentElements } = breakingNewsData || {};
+  const { type: itemType } = breakingNewsData && breakingNewsData.data.document && breakingNewsData.data.document.content_elements[0]
+    ? breakingNewsData.data.document.content_elements[0].referent
+    : {};
+  const { id: storyID } = breakingNewsData && breakingNewsData.data.document && breakingNewsData.data.document.content_elements[0]
+    ? breakingNewsData.data.document.content_elements[0].referent
+    : {};
+
+  const storyData = useContent({
+    source: 'draft-api',
+    query: { id: `${storyID}`, type: `${itemType}` },
+  });
+
+  console.log('DRAFT API', storyData);
+  const { content_elements: contentElements } = storyData || {};
   const [breakingNewsItem] = contentElements || [];
   let breakingHeadline;
   let breakingURL;
