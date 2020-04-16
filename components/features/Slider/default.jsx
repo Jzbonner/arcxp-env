@@ -19,12 +19,15 @@ const Slider = (customFields = {}) => {
   // general
   const [sliderItems, setSliderItems] = useState(null);
   const [isNotDesktop, setNotDesktopState] = useState(false);
+  // const [isTablet, setTabletState] = useState(false);
+  // const [isMobile, setMobileState] = useState(false);
   const [translateX, setTranslateX] = useState(0);
 
   // mobile touch swiping
-  const [startX, setStartX] = useState(0);
-  const [isTouched, setTouchState] = useState(null);
-  const [changeX, setChangeValue] = useState(0);
+
+  // const [startX, setStartX] = useState(0);
+  // const [isTouched, setTouchState] = useState(null);
+  // const [changeX, setChangeValue] = useState(0);
 
   const actions = {
     LEFT: 'LEFT',
@@ -39,6 +42,7 @@ const Slider = (customFields = {}) => {
 
   const marginOffset = 15;
   const tabletBreakPoint = 1023;
+  // const mobielBreakPoint = 768;
 
   contentConfigValues.from = startIndex > 1 ? startIndex : null;
   contentConfigValues.size = itemLimit > 3 || null;
@@ -88,8 +92,9 @@ const Slider = (customFields = {}) => {
   };
 
   /* mobile slider touch funcs */
+  // the following might be removed if UX wants smoothing scrolling instead of swipe gestures
 
-  const handleStart = (clientX) => {
+  /*  const handleStart = (clientX) => {
     setStartX(clientX);
     setTouchState(true);
   };
@@ -123,7 +128,7 @@ const Slider = (customFields = {}) => {
 
   const handleTouchEnd = () => {
     handleEnd();
-  };
+  }; */
 
   useEffect(() => {
     getInitWindowSize();
@@ -139,11 +144,11 @@ const Slider = (customFields = {}) => {
         <div className="c-slider">
           <div className="c-slider-content" >
             <div ref={contentRef}
-              onTouchStart={e => handleTouchStart(e)}
+/*            onTouchStart={e => handleTouchStart(e)}
               onTouchMove={e => handleTouchMove(e)}
-              onTouchEnd={handleTouchEnd}
+              onTouchEnd={handleTouchEnd} */
               className="itemList"
-              style={{ transform: `translateX(${translateX - changeX}px)` }}>
+              style={{ transform: `translateX(${translateX}px)` }}>
               {sliderItems}
             </div>
           </div>

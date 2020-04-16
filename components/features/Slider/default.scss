@@ -54,19 +54,23 @@
 
     .c-slider-content {
       display: flex;
+      scroll-behavior: smooth;
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
 
       @include breakpoint(desktop-sm) {
         overflow-x: hidden;
-      }
-
-      @include breakpoint(mobile) {
-        -webkit-overflow-scrolling: touch;
       }
 
       .itemList {
         display: flex;
         position: relative;
         transition: transform .1s;
+        margin-bottom: 1.275rem;
+
+        @include breakpoint(desktop-sm) {
+          margin-bottom: 0;
+        }
       }
     }
 
