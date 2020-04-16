@@ -42,11 +42,14 @@ const CollectionList = ({
       const {
         content_elements: contentElements,
       } = newItems;
+
       const newContent = contentElements.map((el) => {
         const {
           _id: id,
           promo_items: promoItems,
         } = el || {};
+        if (!promoItems) return null;
+
         const {
           basic,
         } = promoItems || {};
@@ -61,9 +64,9 @@ const CollectionList = ({
       setItems(newContent);
       if (fetchRef.current) {
         if (window.innerWidth > 1023) {
-          window.scrollTo(0, (fetchRef.current.offsetTop));
+          window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height - 25));
         } else {
-          window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height));
+          window.scrollTo(0, (fetchRef.current.offsetTop - fetchRef.current.getBoundingClientRect().height - 60));
         }
       }
     }

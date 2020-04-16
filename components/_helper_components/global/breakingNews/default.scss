@@ -1,10 +1,94 @@
+@import "../../../../src/styles/base/breakpoints";
+@import "../../../../src/styles/base/mixins";
+
 .c-breakingNews {
-  min-height: 50px;
+  min-height: 59px;
   width: 100%;
+  margin: auto;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  border: 1px solid #a8a8a8;
+  background: #e74c3c;
+  position: relative;
+
+  &.is-hidden {
+    display: none;
+  }
+
+  .breakingURL {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  .c-breakingNews-hide {
+    position: absolute;
+    display: block;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 19px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+
+    @include breakpoint(desktop-sm) {
+      width: 29px;
+      height: 30px;
+    }
+
+    &:before,
+    &:after {
+      position: absolute;
+      content: "";
+      left: 0;
+      right: 0;
+      top: 50%;
+      margin: auto;
+      width: 12px;
+      height: 1px;
+      background: #fff;
+
+      @include breakpoint(desktop-sm) {
+        width: 19px;
+      }
+    }
+
+    &:before {
+      transform: rotate(45deg);
+    }
+  
+    &:after {
+      transform: rotate(-45deg);
+    }
+    
+    @include breakpoint(desktop-sm) {
+      cursor: pointer;
+    }
+  }
+
+  .c-breakingNews-heading {
+    display: block;
+    color: #fff;
+    text-transform: uppercase;
+
+    @include text-styles(1em, 2, "Gordita-Bold");
+
+    @include breakpoint(desktop-sm) {
+      @include text-styles(1.125em, 1.78, "Gordita-Bold");
+    }
+  }
+
+  .c-breakingNews-content {
+    @include text-styles(.875em, 1.29, "Gordita-Medium");
+
+    color: #fff;
+    width: 100%;
+    max-width: 302px;
+    margin: auto;
+
+    @include breakpoint(desktop-sm) {
+      max-width: 885px;
+    }
+  }
 }

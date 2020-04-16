@@ -16,6 +16,7 @@ const ListItem = ({
   headlines,
   websites,
   listPage,
+  type,
 }) => {
   const appContext = useAppContext();
   const { contextPath } = appContext;
@@ -26,23 +27,32 @@ const ListItem = ({
   const relativeURL = (websites && websites[sites] && websites[sites].website_url) || '/';
   const isListPage = listPage ? 'listPage' : '';
 
-  function getPromoItem(items) {
-    if (items.basic.type === 'image') {
+  const getPromoItem = (items, contentType) => {
+    // standalone video/gallery
+    if (contentType === 'video' || contentType === 'gallery') {
+      if (items.basic) {
+        return <Image src={items.basic} width={1066} height={600} imageType="isHomepageImage" teaseContentType={contentType} />;
+      }
+    }
+
+    if (items.basic && items.basic.type === 'image') {
       return <Image src={items.basic || items.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />;
     }
-    if (items.basic.type === 'video' || items.basic.type === 'gallery') {
+
+    if ((items.basic && items.basic.type === 'video') || (items.basic && items.basic.type === 'gallery')) {
       if (items.basic.promo_items && items.basic.promo_items.basic) {
         return <Image src={items.basic.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />;
       }
     }
+
     return null;
-  }
+  };
 
   return (
     <div className={`c-homeList ${isListPage}`}>
       {promoItems && (
         <a href={`${contextPath}${relativeURL}`} className="homeList-image">
-          {getPromoItem(promoItems)}
+          {getPromoItem(promoItems, type)}
         </a>
       )}
       <div className="homeList-text">
@@ -67,6 +77,7 @@ ListItem.propTypes = {
   headlines: PropTypes.object,
   websites: PropTypes.object,
   listPage: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 export default ListItem;

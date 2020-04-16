@@ -8,7 +8,7 @@ import BreakingNews from '../global/breakingNews/default';
 import NavBar from '../global/navBar/default';
 import SectionHome from '../home/SectionHome/SectionHome';
 import Footer from '../global/footer/default';
-import '../../../src/styles/container/_section.scss';
+import '../../../src/styles/container/_c-section.scss';
 import '../../../src/styles/base/_utility.scss';
 
 const SectionOutput = ({ zones, layout }) => (

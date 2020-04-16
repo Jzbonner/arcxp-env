@@ -1,24 +1,28 @@
 const schemaName = 'query-feed';
 
 const params = {
-  includeSources: 'text',
+  includeDistributor: 'text',
   includeContentTypes: 'text',
   includeSections: 'text',
   includeTags: 'text',
   includeSubtypes: 'text',
-  excludeSources: 'text',
+  excludeDistributor: 'text',
   excludeContentTypes: 'text',
   excludeSections: 'text',
   excludeTags: 'text',
   exludeSubtypes: 'text',
 };
 
-export const itemsToArray = (itemString = '') => itemString.split(',').map(item => item.replace(/"/g, ''));
+export const itemsToArray = (itemString = '') => {
+  if (itemString.length > 0) {
+    itemString.split(',').map(item => item.replace(/"/g, ''));
+  }
+};
 
 const resolve = (query) => {
   const {
-    includeSources = '',
-    excludeSources = '',
+    includeDistributor = '',
+    excludeDistributor = '',
     includeSections = '',
     excludeSections = '',
     includeContentTypes = '',
@@ -29,8 +33,8 @@ const resolve = (query) => {
     exludeSubtypes = '',
   } = query;
 
-  const sourcesIncluded = itemsToArray(includeSources);
-  const sourcesExcluded = itemsToArray(excludeSources);
+  const distributorIncluded = itemsToArray(includeDistributor);
+  const distributorExcluded = itemsToArray(excludeDistributor);
 
   const contentTypesIncluded = itemsToArray(includeContentTypes);
   const contentTypesExcluded = itemsToArray(excludeContentTypes);
@@ -50,7 +54,7 @@ const resolve = (query) => {
         must: [
           {
             terms: {
-              type: sourcesIncluded,
+              'distributor.reference_id': distributorIncluded,
             },
           },
           {
@@ -93,7 +97,7 @@ const resolve = (query) => {
         must_not: [
           {
             terms: {
-              type: sourcesExcluded,
+              'distributor.reference_id': distributorExcluded,
             },
           },
           {
