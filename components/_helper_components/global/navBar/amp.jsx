@@ -20,6 +20,57 @@ const AmpNavBar = () => {
     site_logo_image: siteLogoImage,
     site_logo_image_small: siteLogoImageSmall,
   } = logos || {};
+
+  const outputAnimationScript = (shrinkOrGrow) => {
+    const translateY1 = shrinkOrGrow === 'headerShrinkAnim' ? '-35px' : '0';
+    const translateY2 = shrinkOrGrow === 'headerShrinkAnim' ? '20px' : '0';
+    const logoMainOpacity = shrinkOrGrow === 'headerShrinkAnim' ? '0' : '1';
+    const logoPinnedOpacity = shrinkOrGrow === 'headerShrinkAnim' ? '1' : '0';
+    return <script type="application/json" dangerouslySetInnerHTML={{
+      __html: `
+            {
+              "duration": "300ms",
+              "fill": "both",
+              "iterations": "1",
+              "direction": "alternate",
+              "animations": [
+                {
+                  "selector": "#stickySelector",
+                  "keyframes": [
+                    {
+                      "transform": "translateY(${translateY1})"
+                    }
+                  ]
+                },
+                {
+                  "selector": "#stickySelector .amp-nav",
+                  "keyframes": [
+                    {
+                      "transform": "translateY(${translateY2})"
+                    }
+                  ]
+                },
+                {
+                  "selector": "#logo-main, .sub-header .live-play",
+                  "keyframes": [
+                    {
+                      "opacity": ${logoMainOpacity}
+                    }
+                  ]
+                },
+                {
+                  "selector": "#logo-pinned, #stickySelector .amp-nav .live-play",
+                  "keyframes": [
+                    {
+                      "opacity": ${logoPinnedOpacity}
+                    }
+                  ]
+                }
+              ]
+            }`,
+    }}></script>;
+  };
+
   return (
     <>
       <div id="page-header-anim-marker">
@@ -30,98 +81,10 @@ const AmpNavBar = () => {
       </div>
       <header className="c-amp-header" id="stickySelector">
         <amp-animation id="headerShrinkAnim" layout="nodisplay">
-          <script type="application/json"
-          dangerouslySetInnerHTML={{
-            __html: `
-          {
-            "duration": "300ms",
-            "fill": "both",
-            "iterations": "1",
-            "direction": "alternate",
-            "animations": [
-              {
-                "selector": "#stickySelector",
-                "keyframes": [
-                  {
-                    "transform": "translateY(-35px)"
-                  }
-                ]
-              },
-              {
-                "selector": "#stickySelector .amp-nav",
-                "keyframes": [
-                  {
-                    "transform": "translateY(20px)"
-                  }
-                ]
-              },
-              {
-                "selector": "#logo-main, .sub-header .live-play",
-                "keyframes": [
-                  {
-                    "opacity": 0
-                  }
-                ]
-              },
-              {
-                "selector": "#logo-pinned, #stickySelector .amp-nav .live-play",
-                "keyframes": [
-                  {
-                    "opacity": 1
-                  }
-                ]
-              }
-            ]
-          }`,
-          }}>
-          </script>
+          {outputAnimationScript('headerShrinkAnim')}
         </amp-animation>
         <amp-animation id="headerGrowAnim" layout="nodisplay">
-          <script type="application/json"
-          dangerouslySetInnerHTML={{
-            __html: `
-              {
-                "duration": "300ms",
-                "fill": "both",
-                "iterations": "1",
-                "direction": "alternate",
-                "animations": [
-                  {
-                    "selector": "#stickySelector",
-                    "keyframes": [
-                      {
-                        "transform": "translateY(0)"
-                      }
-                    ]
-                  },
-                  {
-                    "selector": "#stickySelector .amp-nav",
-                    "keyframes": [
-                      {
-                        "transform": "translateY(0)"
-                      }
-                    ]
-                  },
-                  {
-                    "selector": "#logo-main, .sub-header .live-play",
-                    "keyframes": [
-                      {
-                        "opacity": 1
-                      }
-                    ]
-                  },
-                  {
-                    "selector": "#logo-pinned, #stickySelector .amp-nav .live-play",
-                    "keyframes": [
-                      {
-                        "opacity": 0
-                      }
-                    ]
-                  }
-                ]
-              }`,
-          }}>
-          </script>
+          {outputAnimationScript('headerGrowAnim')}
         </amp-animation>
         <div className='amp-nav'>
           <div className='amp-hamburger'>
