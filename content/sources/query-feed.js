@@ -4,6 +4,7 @@ const params = {
   includeDistributor: 'text',
   includeContentTypes: 'text',
   includeSections: 'text',
+  mustIncludeAllTags: 'text',
   includeTags: 'text',
   includeSubtypes: 'text',
   excludeDistributor: 'text',
@@ -13,11 +14,7 @@ const params = {
   exludeSubtypes: 'text',
 };
 
-export const itemsToArray = (itemString = '') => {
-  if (itemString.length > 0) {
-    itemString.split(',').map(item => item.replace(/"/g, ''));
-  }
-};
+export const itemsToArray = (itemString = '') => itemString.split(',').map(item => item.replace(/"/g, ''));
 
 const resolve = (query) => {
   const {
@@ -27,6 +24,7 @@ const resolve = (query) => {
     excludeSections = '',
     includeContentTypes = '',
     excludeContentTypes = '',
+    mustIncludeAllTags = '',
     includeTags = '',
     excludeTags = '',
     includeSubtypes = '',
@@ -42,7 +40,7 @@ const resolve = (query) => {
   const sectionsIncluded = itemsToArray(includeSections);
   const sectionsExcluded = itemsToArray(excludeSections);
 
-  const tagsIncluded = itemsToArray(includeTags);
+  const tagsIncluded = mustIncludeAllTags === 'yes' ? includeTags : itemsToArray(includeTags);
   const tagsExcluded = itemsToArray(excludeTags);
 
   const subtypesIncluded = itemsToArray(includeSubtypes);
@@ -51,7 +49,7 @@ const resolve = (query) => {
   const body = {
     query: {
       bool: {
-        must: [
+        should: [
           {
             terms: {
               'distributor.reference_id': distributorIncluded,
@@ -94,7 +92,7 @@ const resolve = (query) => {
             },
           },
         ],
-        must_not: [
+        should_not: [
           {
             terms: {
               'distributor.reference_id': distributorExcluded,
