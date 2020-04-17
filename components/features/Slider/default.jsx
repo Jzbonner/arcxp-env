@@ -19,12 +19,15 @@ const Slider = (customFields = {}) => {
   // general
   const [sliderItems, setSliderItems] = useState(null);
   const [isNotDesktop, setNotDesktopState] = useState(false);
+  // const [isTablet, setTabletState] = useState(false);
+  // const [isMobile, setMobileState] = useState(false);
   const [translateX, setTranslateX] = useState(0);
 
   // mobile touch swiping
-  const [startX, setStartX] = useState(0);
-  const [isTouched, setTouchState] = useState(null);
-  const [changeX, setChangeValue] = useState(0);
+
+  // const [startX, setStartX] = useState(0);
+  // const [isTouched, setTouchState] = useState(null);
+  // const [changeX, setChangeValue] = useState(0);
 
   const actions = {
     LEFT: 'LEFT',
@@ -39,6 +42,7 @@ const Slider = (customFields = {}) => {
 
   const marginOffset = 15;
   const tabletBreakPoint = 1023;
+  // const mobielBreakPoint = 768;
 
   contentConfigValues.from = startIndex > 1 ? startIndex : null;
   contentConfigValues.size = itemLimit > 3 || null;
@@ -87,9 +91,16 @@ const Slider = (customFields = {}) => {
     }
   };
 
+  const getIsSpecial = () => {
+    if (displayClass.toLowerCase().includes('special feature')) return true;
+
+    return null;
+  };
+
+  // the following might be removed if UX wants smoothing scrolling instead of swipe gestures
   /* mobile slider touch funcs */
 
-  const handleStart = (clientX) => {
+  /*  const handleStart = (clientX) => {
     setStartX(clientX);
     setTouchState(true);
   };
@@ -123,39 +134,39 @@ const Slider = (customFields = {}) => {
 
   const handleTouchEnd = () => {
     handleEnd();
-  };
+  }; */
 
   useEffect(() => {
     getInitWindowSize();
   }, []);
 
   return (
-    <div
-      ref={wrapperRef}
-      className={`c-slider-wrapper ${displayClass.toLowerCase().includes('special feature') ? 'is-special-feature' : ''}`}>
-      <h1 className="slider-title">{title}</h1>
-      <div className="c-slider">
-        <div className="c-slider-content" >
-          <div ref={contentRef}
-            onTouchStart={e => handleTouchStart(e)}
-            onTouchMove={e => handleTouchMove(e)}
-            onTouchEnd={handleTouchEnd}
-            className="itemList"
-            style={{ transform: `translateX(${translateX - changeX}px)` }}>
-            {sliderItems}
+    <div className={`c-slider-master ${getIsSpecial() ? 'is-special-feature' : ''}`}>
+      <div ref={wrapperRef} className="c-slider-wrapper">
+        <h1 className="slider-title">{title}</h1>
+        <div className="c-slider">
+          <div className="c-slider-content" >
+            <div ref={contentRef}
+/*            onTouchStart={e => handleTouchStart(e)}
+              onTouchMove={e => handleTouchMove(e)}
+              onTouchEnd={handleTouchEnd} */
+              className="itemList"
+              style={{ transform: `translateX(${translateX}px)` }}>
+              {sliderItems}
+            </div>
           </div>
-        </div>
-        {!isNotDesktop && <>
-          {translateX !== 0
-            ? <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
+          {!isNotDesktop && <>
+            {translateX !== 0
+              ? <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
+                <img src={rightArrow} />
+              </a>
+              : null}
+            {Math.abs(translateX) < contentFullWidth ? <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
               <img src={rightArrow} />
-            </a>
-            : null}
-          {Math.abs(translateX) < contentFullWidth ? <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
-            <img src={rightArrow} />
-          </a> : null}
+            </a> : null}
           </>
-        }
+          }
+        </div>
       </div>
     </div>
   );
