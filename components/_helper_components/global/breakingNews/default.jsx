@@ -12,29 +12,28 @@ const BreakingNews = () => {
     query: { id: `${breakingNewsID}` },
   });
 
-  const { id: storyID } = breakingNewsData && breakingNewsData.data.document && breakingNewsData.data.document.content_elements[0]
-    ? breakingNewsData.data.document.content_elements[0].referent
-    : {};
+  const storyID = breakingNewsData && breakingNewsData.data.document && breakingNewsData.data.document.content_elements[0]
+    ? breakingNewsData.data.document.content_elements[0].referent.id
+    : '';
 
   const storyData = useContent({
     source: 'storyContent',
     query: { id: `${storyID}` },
   });
 
-  // console.log('DRAFT API', storyData);
   let breakingHeadline;
   let breakingURL;
   let mainTitle;
 
-  if (storyData) {
+  if (storyID) {
     breakingHeadline = storyData && storyData.headlines && storyData.headlines.basic;
     breakingURL = storyData && storyData.canonical_url;
     mainTitle = 'Breaking News';
   }
+
   if (breakingHeadline) {
     return <RenderBreakingNews breakingHeadline={breakingHeadline} breakingURL={breakingURL} mainTitle={mainTitle} />;
-  }
-  return <LiveVideo />;
+  } return <LiveVideo />;
 };
 
 export default BreakingNews;
