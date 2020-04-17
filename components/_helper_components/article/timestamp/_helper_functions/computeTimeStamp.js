@@ -4,12 +4,15 @@ const findAPMonth = (month = 12) => {
   return months[month];
 };
 
-const formatTime = (date) => {
+const formatTime = (date, showSeconds = false) => {
   const dateOptions = {
     timeZone: 'America/New_York',
     hour: 'numeric',
     minute: 'numeric',
   };
+  if (showSeconds) {
+    dateOptions.second = 'numeric';
+  }
   return new Intl.DateTimeFormat('en-US', dateOptions).format(date);
 };
 
@@ -86,3 +89,4 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
 };
 
 export default computeTimeStamp;
+export { formatTime, formatDate };
