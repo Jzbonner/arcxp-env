@@ -10,9 +10,19 @@ const SiteMetrics = () => {
     globalContent,
     layout,
     metaValue,
-    requestUri,
   } = appContext;
-  const { headlines, canonical_url: canonicalURL, type } = globalContent || {};
+  const {
+    headlines,
+    _id: uuid,
+    taxonomy,
+    type,
+  } = globalContent || {};
+
+  const { primary_section: section } = taxonomy || {};
+  const { _id: primarySectionId, name: primarySectionName, parent_id: parentSectionId } = section || {};
+  const isTopMostSection = (primarySectionId === parentSectionId || parentSectionId === '/');
+  const topSection = isTopMostSection ? primarySectionName : parentSectionId;
+  const secondarySection = isTopMostSection ? '' : primarySectionName;
 
   const pageType = checkPageType(type, layout);
   const { isHomeOrSectionPage, isHome, isSection } = pageType || {};
@@ -22,17 +32,6 @@ const SiteMetrics = () => {
   } else if (isSection) {
     pageContentType = 'section front';
   }
-
-  let uri = requestUri;
-  if (!canonicalURL) {
-    // only jump through these hoops if canonical_url is undefined (i.e. pagebuilder pages)
-    if (uri.indexOf('?')) {
-      uri = uri.substring(0, uri.indexOf('?'));
-    } else if (uri.indexOf('#')) {
-      uri = uri.substring(0, uri.indexOf('#'));
-    }
-  }
-  const url = canonicalURL || uri;
 
   const { siteName, siteDomainURL, metrics } = getProperties() || {};
 
@@ -56,17 +55,16 @@ const SiteMetrics = () => {
 
         DDO.connextActive = '${connext && connext.isEnabled ? connext.isEnabled : 'false'}';
 
-        DDO.pageData: {
+        DDO.pageData = {
           'pageName': '${isHomeOrSectionPage ? 'website' : 'article'}',
-          'pageURL': '${url}',
-          'pageSiteSection': '<string>',
-          'pageCategory': '<string>',
-          'pageSubCategory': '<string>',
+          'pageSiteSection': '${topSection}',
+          'pageCategory': '${secondarySection}',
+          'pageSubCategory': '',
           'pageContentType': '${pageContentType}',
           'pageTitle': '${title.replace('\'', '"')}'
         };
 
-        DDO.siteData: {
+        DDO.siteData = {
           'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
           'siteDomain': '${siteDomainURL || site}',
           'siteVersion': 'responsive site',
@@ -77,24 +75,24 @@ const SiteMetrics = () => {
           'siteCMS': 'arc'
         };
 
-        DDO.contentData: {
+        DDO.contentData = {
           'contentTopics': '<string>',
           'contentByline': '<string>',
           'contentOriginatingSite': '<string>',
-          'contentID': '<string>',
+          'contentID': '${uuid}',
           'contentVendor': '<string>',
           'contentPublishDate': '<string>',
           'blogName': '<string>',
           'galleryName': '<string>'
         };
-        DDO.userData: {
+        DDO.userData = {
           'userStatus': '<string>',
           'userProfileID': '<string>',
           'userType': '<string>',
           'userActive': '<string>'
         };
 
-        DDO.eventData: {
+        DDO.eventData = {
           'action': '<string>'
         };
       `,
