@@ -1,8 +1,9 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import { connext, envMetrics } from 'fusion:environment';
+import { connext, ENVIRONMENT } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import checkPageType from '../../../layouts/_helper_functions/getPageType.js';
+import { formatTime, formatDate } from '../../article/timestamp/_helper_functions/computeTimeStamp';
 
 const SiteMetrics = () => {
   const appContext = useAppContext();
@@ -15,14 +16,48 @@ const SiteMetrics = () => {
     headlines,
     _id: uuid,
     taxonomy,
+    source,
     type,
+    publish_date: firstPublishDate,
   } = globalContent || {};
+  const {
+    system: sourceSystem,
+    type: sourceType,
+  } = source || {};
+  const {
+    primary_section: section,
+    tags = [],
+  } = taxonomy || {};
+  const {
+    _id: primarySectionId,
+    name: primarySectionName,
+    parent_id: parentSectionId,
+    referent: primarySectionReference,
+  } = section || {};
 
-  const { primary_section: section } = taxonomy || {};
-  const { _id: primarySectionId, name: primarySectionName, parent_id: parentSectionId } = section || {};
+  const currentEnv = ENVIRONMENT || 'unknown';
+  const isNotProd = currentEnv.toLowerCase().indexOf('prod') === -1;
+
+  const topics = [];
+  tags.forEach((tag) => {
+    if (tag && tag.text) {
+      topics.push(tag.text);
+    }
+  });
+
+  if (primarySectionReference) {
+    // TODO: sort out referenced sections, for non-native content (e.g. wires)
+  }
   const isTopMostSection = (primarySectionId === parentSectionId || parentSectionId === '/');
   const topSection = isTopMostSection ? primarySectionName : parentSectionId;
   const secondarySection = isTopMostSection ? '' : primarySectionName;
+  const firstPubDateObj = new Date(firstPublishDate);
+  const month = `${firstPubDateObj.getMonth()}`;
+  const dayOfTheMonth = `${formatDate(firstPubDateObj)}`;
+  const year = `${firstPubDateObj.getFullYear()}`;
+  const time = `${formatTime(firstPubDateObj, true)}`;
+  /* eslint-disable-next-line max-len */
+  const firstPublishDateConverted = `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}${time.replace(/:/g, '').replace(/\s[A|P]M/g, '')}`;
 
   const pageType = checkPageType(type, layout);
   const { isHomeOrSectionPage, isHome, isSection } = pageType || {};
@@ -34,6 +69,7 @@ const SiteMetrics = () => {
   }
 
   const { siteName, siteDomainURL, metrics } = getProperties() || {};
+  const dtmLibraryJs = metrics && metrics.dtmLibraryURL ? `${metrics.dtmLibraryURL}${isNotProd ? '-staging' : ''}.js` : '';
 
   const site = siteName.toLowerCase();
   const title = headlines ? headlines.basic : metaValue('title') || siteName;
@@ -41,7 +77,7 @@ const SiteMetrics = () => {
   return (
     <script type='text/javascript' dangerouslySetInnerHTML={{
       __html: `var DDO = DDO || {};
-        DDO.DTMLibraryURL = '${envMetrics && envMetrics.dtmLibraryURL ? envMetrics.dtmLibraryURL : ''}';
+        DDO.DTMLibraryURL = '${dtmLibraryJs}';
 
         DDO.hasLocalStorage = () => {
           const isDefined = typeof(localStorage) != 'undefined';
@@ -76,20 +112,21 @@ const SiteMetrics = () => {
         };
 
         DDO.contentData = {
-          'contentTopics': '<string>',
-          'contentByline': '<string>',
-          'contentOriginatingSite': '<string>',
+          'contentTopics': '${topics.join()}',
+          'contentByline': '//TODO',
+          'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
           'contentID': '${uuid}',
-          'contentVendor': '<string>',
-          'contentPublishDate': '<string>',
-          'blogName': '<string>',
-          'galleryName': '<string>'
+          'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
+          'contentPublishDate': '${firstPublishDateConverted}',
+          'blogName': '//TODO',
+          'galleryName': '//TODO'
         };
+
         DDO.userData = {
-          'userStatus': '<string>',
-          'userProfileID': '<string>',
-          'userType': '<string>',
-          'userActive': '<string>'
+          'userStatus': '',
+          'userProfileID': '',
+          'userType': '',
+          'userActive': ''
         };
 
         DDO.eventData = {
