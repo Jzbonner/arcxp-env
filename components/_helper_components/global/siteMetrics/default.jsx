@@ -78,7 +78,6 @@ const SiteMetrics = () => {
     <script type='text/javascript' dangerouslySetInnerHTML={{
       __html: `var DDO = DDO || {};
         DDO.DTMLibraryURL = '${dtmLibraryJs}';
-
         DDO.hasLocalStorage = () => {
           const isDefined = typeof(localStorage) != 'undefined';
           if (isDefined) {
@@ -88,9 +87,7 @@ const SiteMetrics = () => {
           localStorage.removeItem('test');
           return isDefined && canRetrieve;
         }
-
         DDO.connextActive = '${connext && connext.isEnabled ? connext.isEnabled : 'false'}';
-
         DDO.pageData = {
           'pageName': '${isHomeOrSectionPage ? 'website' : 'article'}',
           'pageSiteSection': '${topSection}',
@@ -99,7 +96,6 @@ const SiteMetrics = () => {
           'pageContentType': '${pageContentType}',
           'pageTitle': '${title.replace('\'', '"')}'
         };
-
         DDO.siteData = {
           'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
           'siteDomain': '${siteDomainURL || site}',
@@ -110,27 +106,13 @@ const SiteMetrics = () => {
           'siteType': 'free',
           'siteCMS': 'arc'
         };
-
         DDO.contentData = {
           'contentTopics': '${topics.join()}',
           'contentByline': '//TODO',
           'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
           'contentID': '${uuid}',
           'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
-          'contentPublishDate': '${firstPublishDateConverted}',
-          'blogName': '//TODO',
-          'galleryName': '//TODO'
-        };
-
-        DDO.userData = {
-          'userStatus': '',
-          'userProfileID': '',
-          'userType': '',
-          'userActive': ''
-        };
-
-        DDO.eventData = {
-          'action': '<string>'
+          'contentPublishDate': '${firstPublishDateConverted}'
         };
       `,
     }}></script>
