@@ -8,7 +8,7 @@ import facebookIcon from '../../../../resources/images/facebook-icon.svg';
 import twitterIcon from '../../../../resources/images/twitter-icon.svg';
 import rightArrow from '../../../../resources/images/right-arrow.svg';
 import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
-import Copyright from '../copyright/default';
+
 
 const Footer = () => {
   const appContext = useAppContext();
@@ -113,7 +113,6 @@ const Footer = () => {
           </ul>
         </li>
       </ul>
-      <Copyright />
     </footer>
   );
 };
