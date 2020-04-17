@@ -4,20 +4,20 @@
   min-height: 350px;
   height: auto;
   left: 0;
+  margin-bottom: 3.75rem;
 
   @include breakpoint(tablet) {
     min-height: 500px;
   }
 
   @include breakpoint(desktop-lg) {
-    min-height: 550px;
+    margin-bottom: 0;
   }
 
   .c-slider-wrapper {
     position: absolute;
     left: 0;
     margin-left: 0;
-    padding-bottom: 1.875rem;
   }
 }
 
@@ -61,7 +61,7 @@
       overflow-x: scroll;
       -webkit-overflow-scrolling: touch;
 
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(desktop-lg) {
         overflow-x: hidden;
       }
 

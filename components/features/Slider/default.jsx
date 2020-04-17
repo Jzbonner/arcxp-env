@@ -23,12 +23,6 @@ const Slider = (customFields = {}) => {
   // const [isMobile, setMobileState] = useState(false);
   const [translateX, setTranslateX] = useState(0);
 
-  // mobile touch swiping
-
-  // const [startX, setStartX] = useState(0);
-  // const [isTouched, setTouchState] = useState(null);
-  // const [changeX, setChangeValue] = useState(0);
-
   const actions = {
     LEFT: 'LEFT',
     RIGHT: 'RIGHT',
@@ -41,8 +35,7 @@ const Slider = (customFields = {}) => {
   const elRefs = useRef([]);
 
   const marginOffset = 15;
-  const tabletBreakPoint = 1023;
-  // const mobielBreakPoint = 768;
+  const tabletBreakPoint = 1024;
 
   contentConfigValues.from = startIndex > 1 ? startIndex : null;
   contentConfigValues.size = itemLimit > 3 || null;
@@ -97,45 +90,6 @@ const Slider = (customFields = {}) => {
     return null;
   };
 
-  // the following might be removed if UX wants smoothing scrolling instead of swipe gestures
-  /* mobile slider touch funcs */
-
-  /*  const handleStart = (clientX) => {
-    setStartX(clientX);
-    setTouchState(true);
-  };
-
-  const handleMove = (clientX) => {
-    if (isTouched) {
-      const deltaX = startX - clientX;
-      setChangeValue(deltaX);
-    }
-  };
-
-  const handleEnd = () => {
-    if (changeX < 0) {
-      calculateTranslateX(actions.LEFT);
-    } else if (changeX > 0) {
-      calculateTranslateX(actions.RIGHT);
-    }
-
-    setChangeValue(0);
-    setStartX(0);
-    setTouchState(false);
-  };
-
-  const handleTouchStart = (event) => {
-    handleStart(event.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (event) => {
-    handleMove(event.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    handleEnd();
-  }; */
-
   useEffect(() => {
     getInitWindowSize();
   }, []);
@@ -147,9 +101,6 @@ const Slider = (customFields = {}) => {
         <div className="c-slider">
           <div className="c-slider-content" >
             <div ref={contentRef}
-/*            onTouchStart={e => handleTouchStart(e)}
-              onTouchMove={e => handleTouchMove(e)}
-              onTouchEnd={handleTouchEnd} */
               className="itemList"
               style={{ transform: `translateX(${translateX}px)` }}>
               {sliderItems}
