@@ -9,5 +9,6 @@ export default {
     siteID: 'ajc',
     siteMetro: 'ga: atlanta',
     siteFormat: 'newspaper',
+    gtmContainerKey: 'GTM-WT4CBT7',
   },
 };
