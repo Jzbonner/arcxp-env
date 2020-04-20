@@ -18,8 +18,10 @@ const SiteMetrics = () => {
     taxonomy,
     source,
     type,
+    credits,
     publish_date: firstPublishDate,
   } = globalContent || {};
+  const { by: authorData } = credits || {};
   const {
     system: sourceSystem,
     type: sourceType,
@@ -39,25 +41,31 @@ const SiteMetrics = () => {
   const isNotProd = currentEnv.toLowerCase().indexOf('prod') === -1;
 
   const topics = [];
-  tags.forEach((tag) => {
-    if (tag && tag.text) {
-      topics.push(tag.text);
-    }
-  });
+  tags.forEach(tag => tag && tag.text && topics.push(tag.text));
 
-  if (primarySectionReference) {
-    // TODO: sort out referenced sections, for non-native content (e.g. wires)
+  const authors = [];
+  authorData.forEach(author => author.name && authors.push(author.name));
+
+  let topSection = '';
+  let secondarySection = '';
+  if (primarySectionReference && !primarySectionId) {
+    const { id: refSectionId } = primarySectionReference;
+    const lastSlashIndex = refSectionId.lastIndexOf('/');
+    const isTopMostSection = refSectionId === '/';
+    topSection = isTopMostSection ? refSectionId : refSectionId.substring(1, lastSlashIndex);
+    secondarySection = isTopMostSection ? '' : refSectionId.substring(lastSlashIndex + 1).replace(/-/g, ' ');
+  } else {
+    const isTopMostSection = (primarySectionId === parentSectionId || parentSectionId === '/');
+    topSection = isTopMostSection ? primarySectionName : parentSectionId;
+    secondarySection = isTopMostSection ? '' : primarySectionName;
   }
-  const isTopMostSection = (primarySectionId === parentSectionId || parentSectionId === '/');
-  const topSection = isTopMostSection ? primarySectionName : parentSectionId;
-  const secondarySection = isTopMostSection ? '' : primarySectionName;
   const firstPubDateObj = new Date(firstPublishDate);
   const month = `${firstPubDateObj.getMonth()}`;
   const dayOfTheMonth = `${formatDate(firstPubDateObj)}`;
   const year = `${firstPubDateObj.getFullYear()}`;
   const time = `${formatTime(firstPubDateObj, true)}`;
   /* eslint-disable-next-line max-len */
-  const firstPublishDateConverted = `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}${time.replace(/:/g, '').replace(/\s[A|P]M/g, '')}`;
+  const firstPublishDateConverted = `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}${time.indexOf('1') !== 0 ? '0' : ''}${time.replace(/:/g, '').replace(/\s[A|P]M/g, '')}`;
 
   const pageType = checkPageType(type, layout);
   const { isHomeOrSectionPage, isHome, isSection } = pageType || {};
@@ -90,8 +98,8 @@ const SiteMetrics = () => {
         DDO.connextActive = '${connext && connext.isEnabled ? connext.isEnabled : 'false'}';
         DDO.pageData = {
           'pageName': '${isHomeOrSectionPage ? 'website' : 'article'}',
-          'pageSiteSection': '${topSection}',
-          'pageCategory': '${secondarySection}',
+          'pageSiteSection': '${topSection.toLowerCase()}',
+          'pageCategory': '${secondarySection.toLowerCase()}',
           'pageSubCategory': '',
           'pageContentType': '${pageContentType}',
           'pageTitle': '${title.replace('\'', '"')}'
@@ -108,11 +116,12 @@ const SiteMetrics = () => {
         };
         DDO.contentData = {
           'contentTopics': '${topics.join()}',
-          'contentByline': '//TODO',
+          'contentByline': '${authors.join()}',
           'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
           'contentID': '${uuid}',
           'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
-          'contentPublishDate': '${firstPublishDateConverted}'
+          'contentPublishDate': '${firstPublishDateConverted}',
+          'blogName': '${type === 'blog' ? secondarySection : ''}'
         };
       `,
     }}></script>
