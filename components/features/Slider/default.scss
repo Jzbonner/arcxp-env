@@ -22,10 +22,15 @@
 }
 
 .c-slider-master.is-special-feature .c-slider-wrapper {
-  position: relative;
-  left: auto;
+  position: absolute;
+  left: 0;
   margin: auto;
   background-color: #ebebef;
+
+  @include breakpoint(tablet) {
+    position: relative;
+    left: auto;
+  }
 }
 
 .c-slider-wrapper {
