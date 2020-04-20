@@ -15,7 +15,11 @@ const SiteMeta = () => {
     metaValue,
   } = appContext;
   const {
-    headlines, description, canonical_url: canonicalURL, type,
+    headlines,
+    description,
+    canonical_url: canonicalURL,
+    type,
+    data: contentData,
   } = globalContent || {};
   const { siteName } = getProperties();
   let uri = requestUri;
@@ -29,11 +33,24 @@ const SiteMeta = () => {
   }
   const url = canonicalURL || uri;
   const pageType = checkPageType(type, layout);
-  const { isHomeOrSectionPage } = pageType || {};
-  const site = siteName.toLowerCase();
+  const { isNonContentPage } = pageType || {};
   const thumbnailImage = renderImage();
-  const title = headlines ? headlines.basic : metaValue('title') || siteName;
-  const desc = description ? description.basic : metaValue('description') || '';
+  let site = siteName ? siteName.toLowerCase() : '';
+  let title = headlines ? headlines.basic : metaValue('title') || siteName;
+  let desc = description ? description.basic : metaValue('description') || '';
+  if (contentData) {
+    // it's a list or list-type page, let's re-set some values
+    const {
+      name,
+      canonical_website: canonicalSite,
+      description: contentDesc,
+    } = contentData || {};
+    title = name;
+    if (contentDesc) {
+      desc = contentDesc;
+    }
+    site = canonicalSite;
+  }
 
   return (
     <>
@@ -47,12 +64,12 @@ const SiteMeta = () => {
       <meta name="twitter:title" content={title} />
       <meta name="twitter:url" content={url} />
       <meta property="og:image" content={thumbnailImage} />
-      <meta property="og:image:height" content={`${isHomeOrSectionPage
+      <meta property="og:image:height" content={`${isNonContentPage
           || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '630'}`} />
-      <meta property="og:image:width" content={`${isHomeOrSectionPage
+      <meta property="og:image:width" content={`${isNonContentPage
           || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '1200'}`} />
       <meta property="og:title" content={title} />
-      <meta property="og:type" content={`${isHomeOrSectionPage ? 'website' : 'article'}`} />
+      <meta property="og:type" content={`${isNonContentPage ? 'website' : 'article'}`} />
       <meta property="og:url" content={url} />
       <meta property="og:description" content={desc} />
       <meta property="og:site_name" content={siteName} />
