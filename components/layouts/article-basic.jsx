@@ -29,6 +29,7 @@ import FlatPage from '../_helper_components/flatpage/default';
 import ConnextInlinePromoSubscription from '../_helper_components/global/connextInlinePromo/default';
 import getQueryParams from './_helper_functions/getQueryParams';
 import checkTags from './_helper_functions/checkTags';
+import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -46,6 +47,7 @@ const StoryPageLayout = () => {
 
   if (!globalContent) return null;
   const {
+    _id: uuid,
     first_publish_date: firstPublishDate,
     display_date: displayDate,
     content_elements: contentElements,
@@ -80,10 +82,8 @@ const StoryPageLayout = () => {
   const { tags = [] } = taxonomy || {};
   const hyperlocalTags = getProperties().hyperlocalTags || [];
   // Both checks return true if the tag is present and false if not.
-  let noAds = checkTags(tags, 'no-ads');
+  const noAds = checkTags(tags, 'no-ads');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
-
-  if (ampPage) noAds = true;
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
@@ -115,9 +115,20 @@ const StoryPageLayout = () => {
   }
   // about the author should be the last component of the story
   insertAtEndOfStory.push(BlogAuthorComponent);
+
+  const AmpMP03 = () => (
+    <AmpAd
+      adSlot='MP03'
+      uuid={uuid}
+      topics={[]}
+      width={'350'}
+      height={'250'}
+      taxonomy={taxonomy}
+    />
+  );
   return (
     <>
-      {!noAds && <GlobalAdSlots />}
+      {(noAds && !ampPage) && <GlobalAdSlots />}
       <BreakingNews />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
       <main>
@@ -145,11 +156,21 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
-          {!noAds && !isHyperlocalContent && (
+          {(noAds && !ampPage) && !isHyperlocalContent && (
             <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />
               <ArcAd staticSlot={'MP01'} />
             </div>
+          )}
+          {(noAds && ampPage) && (
+            <AmpAd
+              adSlot='MP01'
+              uuid={uuid}
+              topics={[]}
+              width={'350'}
+              height={'50'}
+              taxonomy={taxonomy}
+            />
           )}
           <Section
             elements={filteredContentElements}
@@ -158,11 +179,21 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex === 0}
             ampPage={ampPage}
           />
-          {!noAds && isHyperlocalContent && (
+          {(!noAds && !ampPage) && isHyperlocalContent && (
             <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />
               <ArcAd staticSlot={'MP01'} />
             </div>
+          )}
+          {(noAds && ampPage) && (
+            <AmpAd
+              adSlot='MP02'
+              uuid={uuid}
+              topics={[]}
+              width={'350'}
+              height={'250'}
+              taxonomy={taxonomy}
+            />
           )}
           <Section
             elements={filteredContentElements}
@@ -174,8 +205,8 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
             ampPage={ampPage}
           />
-          {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
-          {!noAds && !isHyperlocalContent && (
+          {(noAds && !ampPage) && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
+          {(noAds && !ampPage) && !isHyperlocalContent && (
             <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
           )}
           <Section
@@ -186,18 +217,19 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
             ampPage={ampPage}
           />
-          {!noAds && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
+          {(noAds && !ampPage) && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
             rightRail={!noAds ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
-            insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : null}
+            insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : (noAds && ampPage) ? [AmpMP03] : null}
             fullWidth={noAds}
             insertAtSectionEnd={insertAtEndOfStory}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
             ampPage={ampPage}
           />
-          {!noAds && !isHyperlocalContent && <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />}
+          {(noAds && !ampPage) && !isHyperlocalContent
+          && <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />}
           {!isHyperlocalContent && (
             <div className="c-taboola">
               <TaboolaFeed type={type} />
