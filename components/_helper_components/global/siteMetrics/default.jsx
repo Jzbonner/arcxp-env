@@ -11,6 +11,7 @@ const SiteMetrics = () => {
     globalContent,
     layout,
     metaValue,
+    requestUri,
   } = appContext;
   const {
     headlines,
@@ -32,8 +33,6 @@ const SiteMetrics = () => {
   } = taxonomy || {};
   const {
     _id: primarySectionId,
-    name: primarySectionName,
-    parent_id: parentSectionId,
     referent: primarySectionReference,
   } = section || {};
 
@@ -41,31 +40,52 @@ const SiteMetrics = () => {
   const isNotProd = currentEnv.toLowerCase().indexOf('prod') === -1;
 
   const topics = [];
-  tags.forEach(tag => tag && tag.text && topics.push(tag.text));
+  if (tags) {
+    tags.forEach(tag => tag && tag.text && topics.push(tag.text));
+  }
 
   const authors = [];
-  authorData.forEach(author => author.name && authors.push(author.name));
+  if (authorData) {
+    authorData.forEach(author => author.name && authors.push(author.name));
+  }
 
   let topSection = '';
   let secondarySection = '';
-  if (primarySectionReference && !primarySectionId) {
-    const { id: refSectionId } = primarySectionReference;
-    const lastSlashIndex = refSectionId.lastIndexOf('/');
-    const isTopMostSection = refSectionId === '/';
-    topSection = isTopMostSection ? refSectionId : refSectionId.substring(1, lastSlashIndex);
-    secondarySection = isTopMostSection ? '' : refSectionId.substring(lastSlashIndex + 1).replace(/-/g, ' ');
+  let tertiarySection = '';
+  const setSectionOutput = (sectionId) => {
+    const sectionArray = sectionId.toLowerCase().replace(/-/g, ' ').split('/');
+    if (sectionArray[0] === '') {
+      sectionArray.splice(0, 1);
+    }
+    const {
+      0: mainSection,
+      1: subSection,
+      2: thirdSection,
+    } = sectionArray;
+    topSection = mainSection;
+    secondarySection = subSection || '';
+    tertiarySection = thirdSection || '';
+  };
+  if (!section) {
+    // there is no section object, so it's likely a pagebuilder page (without a true "section" associated)
+    setSectionOutput(requestUri);
+  } else if (primarySectionReference && !primarySectionId) {
+    // it's imported content with (only) a section reference
+    setSectionOutput(primarySectionReference.id);
   } else {
-    const isTopMostSection = (primarySectionId === parentSectionId || parentSectionId === '/');
-    topSection = isTopMostSection ? primarySectionName : parentSectionId;
-    secondarySection = isTopMostSection ? '' : primarySectionName;
+    // it's native content with true section object(s) associated
+    setSectionOutput(primarySectionId);
   }
   const firstPubDateObj = new Date(firstPublishDate);
-  const month = `${firstPubDateObj.getMonth()}`;
-  const dayOfTheMonth = `${formatDate(firstPubDateObj)}`;
-  const year = `${firstPubDateObj.getFullYear()}`;
-  const time = `${formatTime(firstPubDateObj, true)}`;
-  /* eslint-disable-next-line max-len */
-  const firstPublishDateConverted = `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}${time.indexOf('1') !== 0 ? '0' : ''}${time.replace(/:/g, '').replace(/\s[A|P]M/g, '')}`;
+  let firstPublishDateConverted = '';
+  if (firstPublishDate) {
+    const month = `${firstPubDateObj.getMonth()}`;
+    const dayOfTheMonth = `${formatDate(firstPubDateObj)}`;
+    const year = `${firstPubDateObj.getFullYear()}`;
+    const time = `${formatTime(firstPubDateObj, true)}`;
+    /* eslint-disable-next-line max-len */
+    firstPublishDateConverted = `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}${time.indexOf('1') !== 0 ? '0' : ''}${time.replace(/:/g, '').replace(/\s[A|P]M/g, '')}`;
+  }
 
   const pageType = checkPageType(type, layout);
   const { isHomeOrSectionPage, isHome, isSection } = pageType || {};
@@ -98,9 +118,9 @@ const SiteMetrics = () => {
         DDO.connextActive = '${connext && connext.isEnabled ? connext.isEnabled : 'false'}';
         DDO.pageData = {
           'pageName': '${isHomeOrSectionPage ? 'website' : 'article'}',
-          'pageSiteSection': '${topSection.toLowerCase()}',
-          'pageCategory': '${secondarySection.toLowerCase()}',
-          'pageSubCategory': '',
+          'pageSiteSection': '${topSection}',
+          'pageCategory': '${secondarySection}',
+          'pageSubCategory': '${tertiarySection}',
           'pageContentType': '${pageContentType}',
           'pageTitle': '${title.replace('\'', '"')}'
         };
