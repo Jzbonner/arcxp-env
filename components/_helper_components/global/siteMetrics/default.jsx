@@ -21,7 +21,13 @@ const SiteMetrics = () => {
     type,
     credits,
     publish_date: firstPublishDate,
+    data: contentData,
   } = globalContent || {};
+  const {
+    siteName,
+    siteDomainURL,
+    metrics,
+  } = getProperties() || {};
   const { by: authorData } = credits || {};
   const {
     system: sourceSystem,
@@ -49,6 +55,23 @@ const SiteMetrics = () => {
     authorData.forEach(author => author.name && authors.push(author.name));
   }
 
+  const pageType = checkPageType(type, layout);
+  const {
+    isHomeOrSectionPage,
+    isNonContentPage,
+    isHome,
+    isSection,
+    type: typeOfPage,
+  } = pageType || {};
+  let pageContentType = type;
+  if (isHome) {
+    pageContentType = 'homepage';
+  } else if (isSection) {
+    pageContentType = 'section front';
+  } else {
+    pageContentType = typeOfPage;
+  }
+
   let topSection = '';
   let secondarySection = '';
   let tertiarySection = '';
@@ -72,13 +95,31 @@ const SiteMetrics = () => {
   } else if (primarySectionReference && !primarySectionId) {
     // it's imported content with (only) a section reference
     setSectionOutput(primarySectionReference.id);
-  } else {
+  } else if (isHomeOrSectionPage) {
     // it's native content with true section object(s) associated
     setSectionOutput(primarySectionId);
   }
-  const firstPubDateObj = new Date(firstPublishDate);
+  let site = siteName ? siteName.toLowerCase() : '';
+  let title = headlines ? headlines.basic : metaValue('title') || site;
+  let contentId = uuid;
+  let pubDate = firstPublishDate;
+  if (contentData) {
+    // it's a list or list-type page, let's re-set some values
+    const {
+      id,
+      normalized_name: normalizedName,
+      name,
+      last_updated_date: lastUpdatedDate,
+      canonical_website: canonicalSite,
+    } = contentData || {};
+    contentId = id;
+    title = normalizedName || name;
+    site = canonicalSite;
+    pubDate = lastUpdatedDate;
+  }
+  const firstPubDateObj = new Date(pubDate);
   let firstPublishDateConverted = '';
-  if (firstPublishDate) {
+  if (pubDate) {
     const month = `${firstPubDateObj.getMonth()}`;
     const dayOfTheMonth = `${formatDate(firstPubDateObj)}`;
     const year = `${firstPubDateObj.getFullYear()}`;
@@ -87,20 +128,7 @@ const SiteMetrics = () => {
     firstPublishDateConverted = `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}${time.indexOf('1') !== 0 ? '0' : ''}${time.replace(/:/g, '').replace(/\s[A|P]M/g, '')}`;
   }
 
-  const pageType = checkPageType(type, layout);
-  const { isHomeOrSectionPage, isHome, isSection } = pageType || {};
-  let pageContentType = type;
-  if (isHome) {
-    pageContentType = 'homepage';
-  } else if (isSection) {
-    pageContentType = 'section front';
-  }
-
-  const { siteName, siteDomainURL, metrics } = getProperties() || {};
   const dtmLibraryJs = metrics && metrics.dtmLibraryURL ? `${metrics.dtmLibraryURL}${isNotProd ? '-staging' : ''}.js` : '';
-
-  const site = siteName.toLowerCase();
-  const title = headlines ? headlines.basic : metaValue('title') || siteName;
 
   return (
     <script type='text/javascript' dangerouslySetInnerHTML={{
@@ -117,7 +145,7 @@ const SiteMetrics = () => {
         }
         DDO.connextActive = '${connext && connext.isEnabled ? connext.isEnabled : 'false'}';
         DDO.pageData = {
-          'pageName': '${isHomeOrSectionPage ? 'website' : 'article'}',
+          'pageName': '${isNonContentPage ? 'website' : 'article'}',
           'pageSiteSection': '${topSection}',
           'pageCategory': '${secondarySection}',
           'pageSubCategory': '${tertiarySection}',
@@ -126,7 +154,7 @@ const SiteMetrics = () => {
         };
         DDO.siteData = {
           'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
-          'siteDomain': '${siteDomainURL || site}',
+          'siteDomain': '${siteDomainURL || `${site}.com`}',
           'siteVersion': 'responsive site',
           'siteFormat': '${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}',
           'siteMetro': '${metrics && metrics.siteMetro ? metrics.siteMetro : ''}',
@@ -138,7 +166,7 @@ const SiteMetrics = () => {
           'contentTopics': '${topics.join()}',
           'contentByline': '${authors.join()}',
           'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
-          'contentID': '${uuid}',
+          'contentID': '${contentId || ''}',
           'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
           'contentPublishDate': '${firstPublishDateConverted}',
           'blogName': '${type === 'blog' ? secondarySection : ''}'
