@@ -16,11 +16,8 @@ const Slider = (customFields = {}) => {
     },
   } = customFields;
 
-  // general
   const [sliderItems, setSliderItems] = useState(null);
-  const [isNotDesktop, setNotDesktopState] = useState(false);
-  // const [isTablet, setTabletState] = useState(false);
-  // const [isMobile, setMobileState] = useState(false);
+  const [isDesktop, setDesktopState] = useState(true);
   const [translateX, setTranslateX] = useState(0);
 
   const actions = {
@@ -51,6 +48,7 @@ const Slider = (customFields = {}) => {
 
   if (data && !sliderItems) setSliderItems(buildSliderItems(data, el => addToRefs(el, elRefs)));
 
+  const isPad = navigator.userAgent.match(/iPad|Tablet/i) != null;
   const itemOffsetWidth = elRefs.current && elRefs.current[0] ? elRefs.current[0].scrollWidth + marginOffset : null;
   const wrapperClientWidth = wrapperRef.current ? wrapperRef.current.clientWidth : null;
   const contentFullWidth = contentRef.current && sliderItems
@@ -78,9 +76,9 @@ const Slider = (customFields = {}) => {
 
   const getInitWindowSize = () => {
     if (window.innerWidth <= tabletBreakPoint) {
-      setNotDesktopState(true);
+      setDesktopState(false);
     } else {
-      setNotDesktopState(false);
+      setDesktopState(true);
     }
   };
 
@@ -99,14 +97,14 @@ const Slider = (customFields = {}) => {
       <div ref={wrapperRef} className="c-slider-wrapper">
         <h1 className="slider-title">{title}</h1>
         <div className="c-slider">
-          <div className="c-slider-content" >
+          <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`} >
             <div ref={contentRef}
               className="itemList"
               style={{ transform: `translateX(${translateX}px)` }}>
               {sliderItems}
             </div>
           </div>
-          {!isNotDesktop && <>
+          {isDesktop && !isPad && <>
             {translateX !== 0
               ? <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
                 <img src={rightArrow} />

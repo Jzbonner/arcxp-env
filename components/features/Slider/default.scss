@@ -1,13 +1,13 @@
 @import "../../../src/styles/base/breakpoints";
 
 .c-slider-master {
-  min-height: 350px;
+  min-height: 320px;
   height: auto;
   left: 0;
   margin-bottom: 3.75rem;
 
   @include breakpoint(tablet) {
-    min-height: 500px;
+    min-height: 450px;
   }
 
   @include breakpoint(desktop-lg) {
@@ -55,13 +55,19 @@
   .c-slider {
     position: relative;
 
+    .c-slider-content.is-Tablet {
+      scroll-behavior: smooth;
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+
     .c-slider-content {
       display: flex;
       scroll-behavior: smooth;
       overflow-x: scroll;
       -webkit-overflow-scrolling: touch;
 
-      @include breakpoint(desktop-lg) {
+      @include breakpoint(desktop-sm) {
         overflow-x: hidden;
       }
 
