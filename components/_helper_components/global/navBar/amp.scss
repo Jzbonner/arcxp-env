@@ -81,3 +81,25 @@
   left: 50%;
   transform: translate(-50%);
 }
+
+.amp-sidebar {
+  background-image: linear-gradient(to top, #04befe, #4481eb);
+  max-width: 408px;
+  width: 100%;
+  
+  .close {
+    padding: 31px 16px 0 8px;
+    display: inline-block;
+  }
+
+  .amp-nav-section {
+    padding: 15px 0;
+  }
+
+  .amp-nav-link {
+    padding: 16px 32px 16px 16px;
+    color: #fff;
+
+    @include text-styles(1.125rem, 1.44, "Gordita");
+  }
+}

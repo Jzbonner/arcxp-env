@@ -1,6 +1,7 @@
 import React from 'react';
 import { useContent } from 'fusion:content';
 import topNavFilter from '../../../../content/filters/top-nav';
+import closeButton from '../../../../resources/images/amp-close.png';
 
 const AmpNavBar = () => {
   const sections = useContent({
@@ -14,12 +15,31 @@ const AmpNavBar = () => {
   const {
     site: logos,
     _id: rootDirectory,
+    children,
   } = sections || {};
 
   const {
     site_logo_image: siteLogoImage,
     site_logo_image_small: siteLogoImageSmall,
   } = logos || {};
+
+  const sectionLi = children.map((section) => {
+    const {
+      _id: id,
+      site,
+      navigation,
+    } = section || {};
+    const {
+      site_url: siteURL,
+    } = site || {};
+    const {
+      nav_title: sectionName,
+    } = navigation;
+
+    return (
+      <li key={id}><div className='amp-nav-section'><a className='amp-nav-link' href={siteURL}>{sectionName}</a></div></li>
+    );
+  });
 
   const outputAnimationScript = (shrinkOrGrow) => {
     const translateY1 = shrinkOrGrow === 'headerShrinkAnim' ? '-35px' : '0';
@@ -73,6 +93,14 @@ const AmpNavBar = () => {
 
   return (
     <>
+      <amp-sidebar id="sidebar" layout="nodisplay" side="left" class="amp-sidebar">
+        <a className="close" on="tap:sidebar.close">
+          <amp-img width='44px' height='44px' src={closeButton}></amp-img>
+        </a>
+        <ul>
+        {sectionLi}
+        </ul>
+      </amp-sidebar>
       <div id="page-header-anim-marker">
         <amp-position-observer on="enter:headerGrowAnim.start; exit:headerShrinkAnim.start"
         intersection-ratios=".5"
@@ -87,7 +115,7 @@ const AmpNavBar = () => {
           {outputAnimationScript('headerGrowAnim')}
         </amp-animation>
         <div className='amp-nav'>
-          <div className='amp-hamburger'>
+          <div className='amp-hamburger' role='button' tabIndex='0' on="tap:sidebar.toggle">
             <div className='amp-hamburger-button'></div>
           </div>
           <div id="logo-pinned" className="amp-logo amp-logo-pinned">
