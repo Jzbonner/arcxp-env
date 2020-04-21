@@ -62,11 +62,24 @@ const StoryPageLayout = () => {
     type,
   } = globalContent || {};
 
+  console.log(uuid);
+  console.log(taxonomy);
+
   if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} />;
 
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
+  const ampMP03 = () => (
+    <AmpAd
+      adSlot='MP03'
+      uuid={uuid}
+      width={'350'}
+      height={'250'}
+      taxonomy={taxonomy}
+      componentName={'ArcAd'}
+    />
+  );
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
@@ -124,9 +137,7 @@ const StoryPageLayout = () => {
   insertAtEndOfStory.push(BlogAuthorComponent);
   return (
     <>
-     {(!noAds && !ampPage) && <GlobalAdSlots />}
-     {(!noAds && ampPage) && <div className="b-hidden">
-       <AmpAd adSlot='PX01' uuid={uuid} topics={[]} width={'1'} height={'1'} taxonomy={taxonomy}/></div>}
+     {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} />}
       <BreakingNews />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
       <main>
@@ -203,7 +214,7 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
             ampPage={ampPage}
           />
-          {(!noAds && ampPage) && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
+          {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
           {(noAds && !ampPage) && !isHyperlocalContent && (
             <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
           )}
@@ -215,12 +226,12 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
             ampPage={ampPage}
           />
-          {(!noAds && ampPage) && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
+          {!noAds && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
             rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
-            insertedAds={!noAds && !ampPage ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : null}
+            insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [RP09StoryTablet, MP03] : [ampMP03] }] : null}
             fullWidth={noAds}
             insertAtSectionEnd={insertAtEndOfStory}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
