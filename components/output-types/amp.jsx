@@ -4,6 +4,7 @@ import getProperties from 'fusion:properties';
 import BaseMarkup from '../_helper_components/amp/BaseMarkup';
 import Html from '../_helper_components/amp/Html';
 import AmpCustomStyles from '../_helper_components/amp/AmpCustomStyle';
+import AmpScripts from '../_helper_components/amp/AmpScripts';
 
 const AmpOutputType = (props) => {
   const {
@@ -20,6 +21,7 @@ const AmpOutputType = (props) => {
     <Html>
     <head>
       <BaseMarkup canonicalUrl={articleURL} />
+      <AmpScripts />
       <AmpCustomStyles arcSite={arcSite} outputTypeProps={props} />
     </head>
     <body>
