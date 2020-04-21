@@ -213,9 +213,15 @@ const StoryPageLayout = () => {
             ampPage={ampPage}
           />
           {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
-          {(noAds && !ampPage) && !isHyperlocalContent && (
-            <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
+          {!isHyperlocalContent && (
+            <Nativo
+              elements={filteredContentElements}
+              displayIfAtLeastXParagraphs={4}
+              controllerClass="story-nativo_placeholder--moap"
+              ampPage={ampPage}
+            />
           )}
+
           <Section
             elements={filteredContentElements}
             startIndex={start}
@@ -235,8 +241,9 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
             ampPage={ampPage}
           />
-          {(!noAds && !ampPage) && !isHyperlocalContent
-          && <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />}
+          {!noAds && !isHyperlocalContent && (
+            <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
+          )}
           {!isHyperlocalContent && (
             <div className="c-taboola">
               <TaboolaFeed type={type} />
