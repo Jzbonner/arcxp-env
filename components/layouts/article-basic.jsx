@@ -68,6 +68,16 @@ const StoryPageLayout = () => {
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
+  const ampMP03 = () => (
+    <AmpAd
+      adSlot='MP03'
+      uuid={uuid}
+      width={'350'}
+      height={'250'}
+      taxonomy={taxonomy}
+      componentName={'ArcAd'}
+    />
+  );
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
@@ -211,7 +221,7 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             startIndex={stop}
             rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
-            insertedAds={!noAds && !ampPage ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : null}
+            insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [RP09StoryTablet, MP03] : [ampMP03] }] : null}
             fullWidth={noAds}
             insertAtSectionEnd={insertAtEndOfStory}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
