@@ -99,10 +99,18 @@ const StoryPageLayout = () => {
   let paragraphIndex = 0;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />;
   const insertAtEndOfStory = [];
-  const interscrollerPlaceholder = () => (
+  const interscrollerPlaceholder = () => {
+    if (isHyperlocalContent && ampPage) {
+      return (
+        <amp-fx-flying-carpet height="300px">
+          <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>
+        </amp-fx-flying-carpet>
+      );
+    }
+    return (
     <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>
-  );
-
+    );
+  };
   filteredContentElements.forEach((el, i) => {
     if (el && el.type === 'divider' && infoBoxIndex === null) {
       infoBoxIndex = i;
@@ -127,7 +135,7 @@ const StoryPageLayout = () => {
   insertAtEndOfStory.push(BlogAuthorComponent);
   return (
     <>
-      {(!noAds && !ampPage) && <GlobalAdSlots />}
+     {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} />}
       <BreakingNews />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
       <main>
@@ -204,8 +212,8 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
             ampPage={ampPage}
           />
-          {(!noAds && !ampPage) && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
-          {(!noAds && !ampPage) && !isHyperlocalContent && (
+          {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
+          {(noAds && !ampPage) && !isHyperlocalContent && (
             <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
           )}
           <Section
@@ -216,7 +224,7 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
             ampPage={ampPage}
           />
-          {(!noAds && !ampPage) && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
+          {!noAds && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
