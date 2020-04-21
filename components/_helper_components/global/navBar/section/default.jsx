@@ -59,11 +59,14 @@ const Section = ({
     ePaperClass = 'nav-ePaper';
   }
 
+  const isHighlighted = primarySectionID === link;
+  const highlitClass = isHighlighted ? 'bold' : '';
+
   // Added protection if there are no subsections
   if (childSections.length === 0) {
     return <>
       <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
-        {primarySectionID === link ? <div className="activeSelection" /> : null}
+        {isHighlighted ? <div className="activeSelection" /> : null}
         <a href={link} target={newTab === 'true' ? '_blank' : '_self'}>{name}</a>
       </li>
         </>;
@@ -94,11 +97,12 @@ const Section = ({
     }
     return null;
   });
+
   return (
     <>
       <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
-      {primarySectionID === link ? <div className="activeSelection" /> : null}
-        <div className='nav-item-link' onClick={ e => activateMenu(e)}>
+      {isHighlighted ? <div className="activeSelection" /> : null}
+        <div className={`nav-item-link ${highlitClass}`} onClick={ e => activateMenu(e)}>
           <a>{name}</a>
         </div>
         <div className={`section ${isActive}`}>

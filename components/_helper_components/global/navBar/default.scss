@@ -210,6 +210,10 @@
 
   .nav-item-link {
     display: flex;
+
+    &.bold {
+      font-weight: 700;
+    }
   }
 
   .nav-items {
@@ -247,21 +251,23 @@
     }
 
     .activeSelection {
-      @include breakpoint(tablet) {
-        display: none;
-      }
+      width: 5px;
+      height: 24px;
+      border-radius: 2px;
+      background-color: #fff;
+      position: absolute;
+      left: 0;
+      top: 0;
 
       @include breakpoint(desktop-sm) {
         background-color: #2e81b7;
         border-radius: 2px;
         display: block;
         height: 7px;
-        left: 0;
         margin-right: 15px;
         margin-top: 61px;
-        position: absolute;
         right: 0;
-        top: 0;
+        width: auto;
       }
     }
   }
