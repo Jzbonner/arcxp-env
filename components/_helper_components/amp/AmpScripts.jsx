@@ -21,6 +21,10 @@ const AmpScripts = () => (
       custom-element="amp-sidebar"
       src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"
     />
+    <script async
+      custom-element="amp-fx-flying-carpet"
+      src="https://cdn.ampproject.org/v0/amp-fx-flying-carpet-0.1.js"
+    />
     <script
       async
       custom-element="amp-ad"

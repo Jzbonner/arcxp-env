@@ -88,10 +88,18 @@ const StoryPageLayout = () => {
   let paragraphIndex = 0;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />;
   const insertAtEndOfStory = [];
-  const interscrollerPlaceholder = () => (
+  const interscrollerPlaceholder = () => {
+    if (isHyperlocalContent && ampPage) {
+      return (
+        <amp-fx-flying-carpet height="300px">
+          <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>
+        </amp-fx-flying-carpet>
+      );
+    }
+    return (
     <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>
-  );
-
+    );
+  };
   filteredContentElements.forEach((el, i) => {
     if (el && el.type === 'divider' && infoBoxIndex === null) {
       infoBoxIndex = i;
@@ -128,6 +136,8 @@ const StoryPageLayout = () => {
   return (
     <>
      {(noAds && !ampPage) && <GlobalAdSlots />}
+     {(!noAds && ampPage) && <div className="b-hidden">
+       <AmpAd adSlot='PX01' uuid={uuid} topics={[]} width={'1'} height={'1'} taxonomy={taxonomy}/></div>}
       <BreakingNews />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
       <main>
@@ -198,13 +208,13 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             startIndex={1}
             stopIndex={3}
-            rightRail={!noAds ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null}
-            insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }] : null}
+            rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null}
+            insertedAds={!noAds && !ampPage ? [{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }] : null}
             fullWidth={noAds}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
             ampPage={ampPage}
           />
-          {(noAds && !ampPage) && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
+          {(!noAds && ampPage) && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
           {(noAds && !ampPage) && !isHyperlocalContent && (
             <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
           )}
@@ -216,13 +226,13 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
             ampPage={ampPage}
           />
-          {(noAds && !ampPage) && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
+          {(!noAds && ampPage) && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
-            rightRail={!noAds ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
+            rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
             // eslint-disable-next-line
-            insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : (noAds && ampPage) ? [AmpMP03] : null}
+            insertedAds={!noAds && !ampPage ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : (noAds && ampPage) ? [AmpMP03] : null}
             fullWidth={noAds}
             insertAtSectionEnd={insertAtEndOfStory}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
