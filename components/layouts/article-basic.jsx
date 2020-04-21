@@ -62,9 +62,6 @@ const StoryPageLayout = () => {
     type,
   } = globalContent || {};
 
-  console.log(uuid);
-  console.log(taxonomy);
-
   if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} />;
 
   const queryParams = getQueryParams(requestUri);

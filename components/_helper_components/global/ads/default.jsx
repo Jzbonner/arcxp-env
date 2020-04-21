@@ -13,8 +13,8 @@ const GlobalAdSlots = ({ ampPage, uuid, taxonomy }) => (
 
 GlobalAdSlots.propTypes = {
   ampPage: PropTypes.bool,
-  uuid: PropTypes.any,
-  taxonomy: PropTypes.any,
+  uuid: PropTypes.string,
+  taxonomy: PropTypes.object,
 };
 
 export default GlobalAdSlots;
