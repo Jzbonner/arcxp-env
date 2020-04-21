@@ -109,18 +109,18 @@ const StoryPageLayout = () => {
     }
     if (isParagraph(el.type)) {
       paragraphIndex += 1;
-      if (paragraphIndex === 6) {
+      if (paragraphIndex === 6 && !ampPage) {
         filteredContentElements.splice(i, 0, <ConnextInlinePromoSubscription />);
       }
     }
     return null;
   });
 
-  if (infoBoxIndex !== null) {
+  if (infoBoxIndex !== null && !ampPage) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
     filteredContentElements.splice(infoBoxIndex, 0, <ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
     infoBoxIndex += 1;
-  } else {
+  } else if (!ampPage) {
     insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
   }
   // about the author should be the last component of the story
