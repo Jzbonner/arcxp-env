@@ -32,7 +32,7 @@ const Slider = (customFields = {}) => {
   const elRefs = useRef([]);
 
   const marginOffset = 15;
-  const tabletBreakPoint = 1024;
+  const tabletBreakPoint = 1023;
 
   contentConfigValues.from = startIndex > 1 ? startIndex : null;
   contentConfigValues.size = itemLimit > 3 || null;
