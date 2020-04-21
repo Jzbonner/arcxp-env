@@ -56,8 +56,8 @@
       }
 
       @include breakpoint(desktop-sm) {
-        width: 50%;
-        height: 30%;
+        width: 50px;
+        height: 50px;
       }
     }
   }
@@ -92,8 +92,10 @@
 
 .four-columns .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
   @include breakpoint(desktop-sm) {
-    height: 50%;
-    width: 30%;
+    // height: 50%;
+    // width: 30%;
+    height: 50px;
+    width: 50px;
 
     .tease-icon img {
       top: 22%;
@@ -112,7 +114,13 @@
   }
 
   @include breakpoint(desktop-sm) {
-    bottom: 90px;
+    bottom: 20%;
+  }
+}
+
+.column-1 .home-headline .c-image-component .image-component-image .c-tease-icon {
+  @include breakpoint(desktop-sm) {
+    bottom: 40px;
   }
 }
 
