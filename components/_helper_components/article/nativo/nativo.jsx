@@ -7,23 +7,19 @@ const Nativo = ({
   elements = [], displayIfAtLeastXParagraphs, controllerClass, ampPage,
 }) => {
   if (paragraphCounter(elements) >= displayIfAtLeastXParagraphs || controllerClass === 'story-nativo_placeholder--boap') {
-    if (!ampPage) {
+    if (ampPage) {
       return (
-        <div className={`${controllerClass} ${controllerClass === 'story-nativo_placeholder--moap' ? 'b-clear-both' : ''}`}>Nativo</div>
+        <amp-ad
+          type="nativo"
+          width="300"
+          height="300"
+          layout="fixed"
+          data-loading-strategy="1.25"
+          data-request-url={`https://amp.ajc.com/amp/nativo-${controllerClass === 'story-nativo_placeholder--moap' ? 'moap' : 'boap'}`}
+        ></amp-ad>
       );
     }
-    return (
-      <amp-embed
-        type="taboola"
-        width="1000"
-        height="300"
-        layout="responsive"
-        data-publisher={`"${controllerClass}"`}
-        data-mode={`"${controllerClass}"`}
-        data-placement="Taboola Content"
-        data-article="auto"
-      />
-    );
+    return <div className={`${controllerClass} ${controllerClass === 'story-nativo_placeholder--moap' ? 'b-clear-both' : ''}`}></div>;
   }
   return null;
 };
