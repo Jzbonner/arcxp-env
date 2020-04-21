@@ -19,19 +19,20 @@ const LiveVideo = () => {
     source: 'storyContent',
     query: { id: `${videoID}` },
   });
-
   let breakingHeadline;
   let breakingURL;
   let mainTitle;
 
-  if (videoID) {
+  if (videoData) {
     breakingHeadline = videoData && videoData.headlines && videoData.headlines.basic;
     breakingURL = videoData && videoData.canonical_url;
     mainTitle = 'Live Video';
   }
-  if (breakingHeadline) {
+
+  if (videoData && breakingHeadline) {
     return <RenderBreakingNews breakingHeadline={breakingHeadline} breakingURL={breakingURL} mainTitle={mainTitle} />;
-  } return null;
+  }
+  return null;
 };
 
 export default LiveVideo;

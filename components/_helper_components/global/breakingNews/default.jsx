@@ -25,15 +25,16 @@ const BreakingNews = () => {
   let breakingURL;
   let mainTitle;
 
-  if (storyID) {
+  if (storyData) {
     breakingHeadline = storyData && storyData.headlines && storyData.headlines.basic;
     breakingURL = storyData && storyData.canonical_url;
     mainTitle = 'Breaking News';
   }
 
-  if (breakingHeadline) {
+  if (storyData && breakingHeadline) {
     return <RenderBreakingNews breakingHeadline={breakingHeadline} breakingURL={breakingURL} mainTitle={mainTitle} />;
-  } return <LiveVideo />;
+  }
+  return <LiveVideo />;
 };
 
 export default BreakingNews;
