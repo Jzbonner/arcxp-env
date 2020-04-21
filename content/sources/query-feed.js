@@ -14,7 +14,7 @@ const params = {
   exludeSubtypes: 'text',
 };
 
-export const itemsToArray = (itemString = '') => itemString.split(',').map(item => item.replace(/"/g, ''));
+export const itemsToArray = (itemString = '') => (itemString.length ? itemString.split(',').map(item => item.replace(/"/g, '')) : '?*');
 
 const resolve = (query) => {
   const {
@@ -31,9 +31,6 @@ const resolve = (query) => {
     exludeSubtypes = '',
   } = query;
 
-  const distributorIncluded = itemsToArray(includeDistributor);
-  const distributorExcluded = itemsToArray(excludeDistributor);
-
   const contentTypesIncluded = itemsToArray(includeContentTypes);
   const contentTypesExcluded = itemsToArray(excludeContentTypes);
 
@@ -49,25 +46,33 @@ const resolve = (query) => {
   const body = {
     query: {
       bool: {
-        should: [
+        must: [
           {
             terms: {
-              'distributor.reference_id': distributorIncluded,
+              exists: {
+                'distributor.reference_id': includeDistributor,
+              },
             },
           },
           {
             terms: {
-              type: contentTypesIncluded,
+              exists: {
+                type: contentTypesIncluded,
+              },
             },
           },
           {
             terms: {
-              subtype: subtypesIncluded,
+              exists: {
+                subtype: subtypesIncluded,
+              },
             },
           },
           {
             terms: {
-              'taxonomy.tags.text': tagsIncluded,
+              exists: {
+                'taxonomy.tags.text': tagsIncluded,
+              },
             },
           },
           {
@@ -78,7 +83,9 @@ const resolve = (query) => {
                   must: [
                     {
                       terms: {
-                        'taxonomy.sections._id': sectionsIncluded,
+                        exists: {
+                          'taxonomy.sections._id': sectionsIncluded,
+                        },
                       },
                     },
                     {
@@ -92,10 +99,10 @@ const resolve = (query) => {
             },
           },
         ],
-        should_not: [
+        must_not: [
           {
             terms: {
-              'distributor.reference_id': distributorExcluded,
+              'distributor.reference_id': excludeDistributor,
             },
           },
           {
