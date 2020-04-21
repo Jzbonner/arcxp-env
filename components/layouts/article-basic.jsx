@@ -122,20 +122,9 @@ const StoryPageLayout = () => {
   }
   // about the author should be the last component of the story
   insertAtEndOfStory.push(BlogAuthorComponent);
-
-  const AmpMP03 = () => (
-    <AmpAd
-      adSlot='MP03'
-      uuid={uuid}
-      topics={[]}
-      width={'350'}
-      height={'250'}
-      taxonomy={taxonomy}
-    />
-  );
   return (
     <>
-     {(noAds && !ampPage) && <GlobalAdSlots />}
+     {(!noAds && !ampPage) && <GlobalAdSlots />}
      {(!noAds && ampPage) && <div className="b-hidden">
        <AmpAd adSlot='PX01' uuid={uuid} topics={[]} width={'1'} height={'1'} taxonomy={taxonomy}/></div>}
       <BreakingNews />
@@ -165,20 +154,20 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
-          {(noAds && !ampPage) && !isHyperlocalContent && (
+          {(!noAds && !ampPage) && !isHyperlocalContent && (
             <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />
               <ArcAd staticSlot={'MP01'} />
             </div>
           )}
-          {(noAds && ampPage) && (
+          {(!noAds && ampPage) && (
             <AmpAd
               adSlot='MP01'
               uuid={uuid}
-              topics={[]}
               width={'350'}
               height={'50'}
               taxonomy={taxonomy}
+              componentName={'ArcAd'}
             />
           )}
           <Section
@@ -194,14 +183,14 @@ const StoryPageLayout = () => {
               <ArcAd staticSlot={'MP01'} />
             </div>
           )}
-          {(noAds && ampPage) && (
+          {(!noAds && ampPage) && (
             <AmpAd
               adSlot='MP02'
               uuid={uuid}
-              topics={[]}
               width={'350'}
               height={'250'}
               taxonomy={taxonomy}
+              componentName={'ArcAd'}
             />
           )}
           <Section
@@ -231,14 +220,13 @@ const StoryPageLayout = () => {
             elements={filteredContentElements}
             startIndex={stop}
             rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
-            // eslint-disable-next-line
-            insertedAds={!noAds && !ampPage ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : (noAds && ampPage) ? [AmpMP03] : null}
+            insertedAds={!noAds && !ampPage ? [{ insertAfterParagraph: 8, adArray: [RP09StoryTablet, MP03] }] : null}
             fullWidth={noAds}
             insertAtSectionEnd={insertAtEndOfStory}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
             ampPage={ampPage}
           />
-          {(noAds && !ampPage) && !isHyperlocalContent
+          {(!noAds && !ampPage) && !isHyperlocalContent
           && <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />}
           {!isHyperlocalContent && (
             <div className="c-taboola">
