@@ -224,7 +224,7 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
             ampPage={ampPage}
           />
-          {(!noAds && !ampPage) && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
+          {!noAds && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
