@@ -150,3 +150,7 @@ video {
   font-family: inherit;
   vertical-align: baseline;
 }
+
+amp-img img {
+  object-fit: contain;
+}

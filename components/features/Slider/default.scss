@@ -1,0 +1,112 @@
+@import "../../../src/styles/base/breakpoints";
+
+.c-slider-master {
+  min-height: 350px;
+  height: auto;
+  left: 0;
+
+  @include breakpoint(tablet) {
+    min-height: 500px;
+  }
+
+  @include breakpoint(desktop-lg) {
+    min-height: 550px;
+  }
+
+  .c-slider-wrapper {
+    position: absolute;
+    left: 0;
+    margin-left: 0;
+    padding-bottom: 1.875rem;
+  }
+}
+
+.c-slider-master.is-special-feature .c-slider-wrapper {
+  position: relative;
+  left: auto;
+  margin: auto;
+  background-color: #ebebef;
+}
+
+.c-slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+
+  .slider-title {
+    text-align: center;
+    font-family: "Average", "Georgia", serif;
+    font-size: 2.5rem;
+    letter-spacing: -.5px;
+    color: #313132;
+    margin-bottom: 1.25rem;
+    margin-top: 1.75rem;
+
+    @include breakpoint(desktop-sm) {
+      text-align: start;
+      margin-bottom: 1.75rem;
+      margin-left: 1.87rem;
+    }
+  }
+
+  .c-slider {
+    position: relative;
+
+    .c-slider-content {
+      display: flex;
+      scroll-behavior: smooth;
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
+
+      @include breakpoint(desktop-sm) {
+        overflow-x: hidden;
+      }
+
+      .itemList {
+        display: flex;
+        position: relative;
+        transition: transform .1s;
+        margin-bottom: 1.275rem;
+
+        @include breakpoint(desktop-sm) {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .left-arrow,
+    .right-arrow {
+      width: 8rem;
+      outline: none;
+      cursor: pointer;
+      position: absolute;
+      user-select: none;
+
+      &:focus {
+        text-decoration: none;
+        outline: none;
+      }
+    }
+
+    .left-arrow {
+      transform: rotate(180deg);
+      z-index: 10;
+      top: 10%;
+
+      @include breakpoint(tablet) {
+        top: 16%;
+      }
+    }
+
+    .right-arrow {
+      height: 8rem;
+      cursor: pointer;
+      z-index: 10;
+      top: 20%;
+      right: 0;
+    }
+  }
+}

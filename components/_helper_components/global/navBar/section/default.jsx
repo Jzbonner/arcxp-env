@@ -17,7 +17,15 @@ const Section = ({
 }) => {
   const fusionContext = useFusionContext();
   const { globalContent } = fusionContext;
-  const primarySection = globalContent && globalContent.taxonomy && globalContent.taxonomy.primary_section;
+  const {
+    taxonomy,
+  } = globalContent || {};
+  const {
+    primary_section: primarySection,
+  } = taxonomy || {};
+  const {
+    _id: primarySectionID,
+  } = primarySection || {};
 
   const {
     nav_title: name,
@@ -51,7 +59,7 @@ const Section = ({
     ePaperClass = 'nav-ePaper';
   }
 
-  const isHighlighted = primarySection._id === link;
+  const isHighlighted = primarySectionID === link;
   const highlitClass = isHighlighted ? 'bold' : '';
 
   // Added protection if there are no subsections

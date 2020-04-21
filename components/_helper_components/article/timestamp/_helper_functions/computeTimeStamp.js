@@ -1,19 +1,5 @@
 const findAPMonth = (month = 12) => {
-  const months = [
-    'Jan',
-    'Feb',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec',
-    null,
-  ];
+  const months = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec', null];
 
   return months[month];
 };
@@ -30,21 +16,12 @@ const formatTime = (date) => {
 const formatDate = date => (date.getDate() < 10 ? `0${date.getDate()}` : date.getDate());
 
 const dayOfTheWeek = (day = 7) => {
-  const days = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    null,
-  ];
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', null];
 
   return days[day];
 };
 
-const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, articleType = 'normal') => {
+const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, isHyperlocalContent, articleType = 'normal') => {
   let timeStamp = null;
 
   if (!firstPublishDate && !displayDate) return null;
@@ -58,7 +35,7 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, ar
   const displayDateInMilliSeconds = displayDateObject.getTime();
   const currentOffset = displayDateInMilliSeconds - firstPublishDateInMilliSeconds;
 
-  const isUpdated = (currentOffset >= 60000);
+  const isUpdated = currentOffset >= 60000;
   const now = new Date();
   const nowInMs = now.getTime();
   const pub = isUpdated ? displayDateObject : firstPublishDateObject;
@@ -70,13 +47,15 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, ar
 
   if (articleType === 'normal') {
     if (days > 0) {
-      timeStamp = ` | ${isUpdated ? 'updated ' : ''}${findAPMonth(pub.getMonth())} ${pub.getDate()}, ${pub.getFullYear()}`;
+      timeStamp = `${!isHyperlocalContent ? ' | ' : ''}${isUpdated ? 'Updated ' : ''}${findAPMonth(
+        pub.getMonth(),
+      )} ${pub.getDate()}, ${pub.getFullYear()}`;
     } else if (hours > 0) {
       const hourLabel = `hour${hours > 1 ? 's' : ''}`;
-      timeStamp = ` | ${isUpdated ? 'updated ' : ''}${hours} ${hourLabel} ago`;
+      timeStamp = `${!isHyperlocalContent ? ' | ' : ''}${isUpdated ? 'Updated ' : ''}${hours} ${hourLabel} ago`;
     } else if (minutes > -1) {
       const minLabel = `minute${minutes !== 1 ? 's' : ''}`;
-      timeStamp = ` | ${isUpdated ? 'updated ' : ''}${minutes} ${minLabel} ago`;
+      timeStamp = `${!isHyperlocalContent ? ' | ' : ''}${isUpdated ? 'Updated ' : ''}${minutes} ${minLabel} ago`;
     } else {
       return null;
     }
@@ -89,7 +68,18 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, ar
     const year = `${pub.getFullYear()}`;
     const time = `${formatTime(pub)}`;
 
-    timeStamp = `${weekday}, ${month} ${dayOfTheMonth}, ${year} @ ${time}`;
+    timeStamp = `${weekday}, ${month} ${dayOfTheMonth}, ${year} at ${time}`;
+  }
+
+  if (articleType === 'tease') {
+    if (hours >= 24) return null;
+    if (hours >= 1 && hours < 24) {
+      timeStamp = `| ${hours}h ago`;
+    } else if (hours < 1 && minutes > -1) {
+      timeStamp = `| ${minutes}m ago`;
+    } else {
+      return null;
+    }
   }
 
   return timeStamp;

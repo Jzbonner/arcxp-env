@@ -4,7 +4,7 @@ import { useAppContext } from 'fusion:context';
 import ArcAdLib from './children/ArcAdLib';
 
 const AdSetup = ({
-  id, slotName, dimensions, display, breakpoints, refresh, targeting, className, prerender, dfpId,
+  id, slotName, dimensions, display, breakpoints, refresh, targeting, bidding, className, prerender, dfpId,
 }) => {
   const appContext = useAppContext();
   const { isAdmin } = appContext;
@@ -14,8 +14,6 @@ const AdSetup = ({
       resolve(adDetails);
     });
   }
-
-  // console.log('INNER COMPONENT', dfpId);
 
   const instance = ArcAdLib.getInstance();
   if (instance) {
@@ -30,9 +28,46 @@ const AdSetup = ({
           breakpoints,
           refresh,
         },
+        bidding,
         prerender: window.arcAdsPrerenderer || null,
       },
       dfpId,
+      // {
+      //   prebid: {
+      //     enabled: true,
+      //     sizeConfig: [
+      //       {
+      //         'mediaQuery': '(min-width: 1024px)',
+      //         'sizesSupported': [
+      //           [970, 250],
+      //           [970, 90],
+      //           [728, 90],
+      //           [300, 250],
+      //           [300, 600]
+      //         ],
+      //         'labels': ['desktop']
+      //       },
+      //       {
+      //         'mediaQuery': '(min-width: 768px) and (max-width: 1023px)',
+      //         'sizesSupported': [
+      //           [728, 90],
+      //           [728, 315],
+      //           [300, 250],
+      //           [300, 600]
+      //         ],
+      //         'labels': ['tablet']
+      //       },
+      //       {
+      //         'mediaQuery': '(min-width: 0px)',
+      //         'sizesSupported': [
+      //           [320, 100],
+      //           [320, 50]
+      //         ],
+      //         'labels': ['phone']
+      //       }
+      //     ]
+      //   }
+      // },
     );
   }
 
@@ -65,6 +100,7 @@ AdSetup.propTypes = {
   refresh: PropTypes.bool, // whether or not to refresh the ad for mobile breakpoint changes
   targeting: PropTypes.object, // key/value pairs attached to the ad request
   prerender: PropTypes.func, // a function to fire before the ad loads
+  bidding: PropTypes.object, // bidding information. see https://github.com/washingtonpost/ArcAds#header-bidding
   dfpId: PropTypes.string,
 };
 

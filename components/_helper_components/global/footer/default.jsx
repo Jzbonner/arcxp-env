@@ -23,7 +23,7 @@ const Footer = () => {
     },
   });
 
-  const { logo, homeURL } = getProperties();
+  const { logo } = getProperties();
 
   const { children: linkCategories } = siteNavigation || {};
   const [row1 = []] = linkCategories || [];
@@ -51,7 +51,7 @@ const Footer = () => {
     <footer className="c-footer b-clear-both">
       <div className="logo-row">
         <div className="col">
-          <a href={homeURL}>
+          <a href="/">
             <img className="footer-logo" src={deployment(`${contextPath}${logo}`)} alt="logo" />
           </a>
         </div>
