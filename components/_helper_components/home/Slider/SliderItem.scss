@@ -121,6 +121,7 @@
       max-width: 80%;
       line-height: 1.17;
       letter-spacing: normal;
+      font-size: 1rem;
       color: #000;
       font-family: "Average", "Georgia", serif;
       text-decoration: none;
@@ -131,6 +132,11 @@
 
       @include breakpoint(desktop-sm) {
         max-width: 90%;
+        font-size: 1.75vw;
+      }
+
+      @media (min-width: 1024px) and (min-width: 1600px) {
+        font-size: 1.5rem;
       }
     }
   }

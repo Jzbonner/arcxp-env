@@ -1,31 +1,36 @@
 @import "../../../src/styles/base/breakpoints";
 
 .c-slider-master {
-  min-height: 350px;
+  min-height: 320px;
   height: auto;
   left: 0;
+  margin-bottom: 3.75rem;
 
   @include breakpoint(tablet) {
-    min-height: 500px;
-  }
-
-  @include breakpoint(desktop-lg) {
-    min-height: 550px;
+    min-height: 505px;
   }
 
   .c-slider-wrapper {
     position: absolute;
     left: 0;
     margin-left: 0;
-    padding-bottom: 1.875rem;
   }
 }
 
+.c-slider-master.is-special-feature {
+  margin-bottom: 0;
+}
+
 .c-slider-master.is-special-feature .c-slider-wrapper {
-  position: relative;
-  left: auto;
+  position: absolute;
+  left: 0;
   margin: auto;
   background-color: #ebebef;
+
+  @include breakpoint(tablet) {
+    position: relative;
+    left: auto;
+  }
 }
 
 .c-slider-wrapper {
@@ -54,6 +59,12 @@
 
   .c-slider {
     position: relative;
+
+    .c-slider-content.is-Tablet {
+      scroll-behavior: smooth;
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
 
     .c-slider-content {
       display: flex;
