@@ -110,12 +110,12 @@
   }
 
   @include breakpoint(desktop-sm) {
-    bottom: 20%;
+    bottom: 14%;
   }
 }
 
 .column-1 .home-headline .c-image-component .image-component-image .c-tease-icon {
-  bottom: 32%;
+  bottom: 34%;
 
   @include breakpoint(tablet) {
     bottom: 40px;
