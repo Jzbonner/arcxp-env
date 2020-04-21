@@ -160,3 +160,16 @@
   -webkit-position: sticky;
   position: sticky;
 }
+
+// /* Amp */
+@mixin amp-exclude {
+  @if $is-amp == false {
+    @content;
+  }
+}
+
+@mixin amp-only {
+  @if $is-amp == true {
+    @content;
+  }
+}

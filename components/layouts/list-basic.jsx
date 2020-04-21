@@ -7,6 +7,7 @@ import BreakingNews from '../_helper_components/global/breakingNews/default';
 import ArcAd from '../features/ads/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import Footer from '../_helper_components/global/footer/default';
+import Copyright from '../_helper_components/global/copyright/default';
 import CollectionList from '../_helper_components/listpage/collectionList/default';
 import '../features/List/default.scss';
 import '../../src/styles/container/_homepage.scss';
@@ -72,6 +73,7 @@ const ListPageLayout = () => {
         { !noAds ? <div className='list-mp05'>{MP05()}</div> : null}
       </main>
       <Footer />
+      <Copyright />
   </>
   );
 };

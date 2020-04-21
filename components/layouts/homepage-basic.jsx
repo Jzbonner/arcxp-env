@@ -9,6 +9,7 @@ import BreakingNews from '../_helper_components/global/breakingNews/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import SectionHome from '../_helper_components/home/SectionHome/SectionHome';
 import Footer from '../_helper_components/global/footer/default';
+import Copyright from '../_helper_components/global/copyright/default';
 import '../../src/styles/container/_homepage.scss';
 import '../../src/styles/base/_utility.scss';
 
@@ -41,6 +42,7 @@ const HomePageLayout = (props) => {
         <SectionHome feature={zone6} />
       </main>
       <Footer />
+      <Copyright />
     </>
   );
 };

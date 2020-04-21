@@ -6,6 +6,7 @@ import ArcAd from '../features/ads/default';
 import Headline from '../_helper_components/article/headline/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import Footer from '../_helper_components/global/footer/default';
+import Copyright from '../_helper_components/global/copyright/default';
 
 const VideoPageLayout = () => {
   const appContext = useAppContext();
@@ -47,6 +48,7 @@ const VideoPageLayout = () => {
         </div>
       </main>
       <Footer />
+      <Copyright />
     </>
   );
 };
