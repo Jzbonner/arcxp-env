@@ -16,6 +16,7 @@ import Gallery from '../features/gallery/default.jsx';
 import NavBar from '../_helper_components/global/navBar/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Footer from '../_helper_components/global/footer/default';
+import Copyright from '../_helper_components/global/copyright/default';
 import ArcAd from '../features/ads/default';
 import ContributorBadge from '../_helper_components/article/contributorBadge/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
@@ -223,7 +224,7 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
             ampPage={ampPage}
           />
-          {!noAds && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
+          {(!noAds && !ampPage) && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
@@ -247,6 +248,7 @@ const StoryPageLayout = () => {
         ) : null}
       </main>
       {!ampPage && <Footer />}
+      <Copyright />
     </>
   );
 };

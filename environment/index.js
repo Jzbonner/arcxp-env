@@ -16,6 +16,6 @@ module.exports = {
     configCode: 'AJC_STAGE_DEFAULT',
     debug: false,
     tagManager: 'GTM',
-    containerId: 'GTM-W3VLHBK',
+    containerId: 'GTM-WT4CBT7',
   },
 };
