@@ -39,6 +39,7 @@
         top: 29%;
         left: 22%;
         border-radius: 0;
+        box-shadow: none;
       }
 
       @include breakpoint(tablet) {
