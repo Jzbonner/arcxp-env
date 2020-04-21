@@ -127,7 +127,7 @@ const StoryPageLayout = () => {
   );
   return (
     <>
-      {(noAds && !ampPage) && <GlobalAdSlots />}
+     {(noAds && !ampPage) && <GlobalAdSlots />}
       <BreakingNews />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
       <main>
