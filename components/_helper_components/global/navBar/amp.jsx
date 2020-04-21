@@ -23,7 +23,7 @@ const AmpNavBar = () => {
     site_logo_image_small: siteLogoImageSmall,
   } = logos || {};
 
-  const sectionLi = children.map((section) => {
+  const sectionLi = children && children.map((section) => {
     const {
       _id: id,
       site,
