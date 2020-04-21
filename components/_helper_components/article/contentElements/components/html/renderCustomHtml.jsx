@@ -20,7 +20,7 @@ const renderCustomHtml = (content) => {
           scriptSrc = scriptSrc[0].replace(/src=|['"]/g, '');
           newScript.src = scriptSrc;
         } else {
-          const scriptVal = script.replace(/<script.*>|<\/script>/g, '');
+          const scriptVal = script.replace(/<script.+?>|<\/script>/g, '');
           newScript.innerHTML = scriptVal;
         }
         document.body.appendChild(newScript);
