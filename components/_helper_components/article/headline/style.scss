@@ -40,7 +40,7 @@
     }
 
     .headline-text {
-      @include text-styles(1.4rem, 1.23, "Average");
+      @include text-styles(1.4rem, 1.25, "Average");
 
       letter-spacing: -.3px;
       margin: 0;
@@ -77,7 +77,7 @@
       .headline-body {
         padding: 20px 30px;
         max-width: 1600px;
-        
+
         .headline-text-long {
           max-width: 63vw;
         }
