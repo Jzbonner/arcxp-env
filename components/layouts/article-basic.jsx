@@ -213,7 +213,7 @@ const StoryPageLayout = () => {
             ampPage={ampPage}
           />
           {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
-          {noAds && !isHyperlocalContent && (
+          {!noAds && !isHyperlocalContent && (
             <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
           )}
           <Section
