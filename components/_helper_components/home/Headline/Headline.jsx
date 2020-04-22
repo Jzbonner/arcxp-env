@@ -48,7 +48,7 @@ const Headline = ({
       <a href={`${contextPath}${relativeURL}`}>{promoItems && getPromoItem(promoItems, type)}</a>
       <div className="headline-box">
         <SectionLabel label={label} taxonomy={taxonomy} />
-        <TimeStamp firstPublishDate={publishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
+        <TimeStamp firstPublishDate={publishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} isTease={true} />
         <a href={`${contextPath}${relativeURL}`} className="headline">
           {truncateHeadline(headlines.basic)}
         </a>

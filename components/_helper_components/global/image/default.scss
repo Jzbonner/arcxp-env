@@ -20,8 +20,6 @@
 
     .c-tease-icon {
       position: absolute;
-      max-width: 50px;
-      max-height: 50px;
       width: 50px;
       height: 50px;
       background: linear-gradient(to top, #04befe, #4481eb);
@@ -43,8 +41,6 @@
       }
 
       @include breakpoint(tablet) {
-        width: 50px;
-        height: 50px;
 
         .tease-icon img {
           max-width: 27px;
@@ -92,12 +88,21 @@
 ///////////////
 
 .two-columns .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon,
+.three-columns .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon,
 .four-columns .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
   @include breakpoint(desktop-sm) {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     right: 8px;
     bottom: 12px;
+
+    .tease-icon img {
+      width: 52%;
+      height: 52%;
+      top: 0;
+      left: 0;
+      transform: translate(9px, 10px);
+    }
   }
 }
 
@@ -120,12 +125,36 @@
 
   @include breakpoint(tablet) {
     bottom: 40px;
+    right: 5%;
+  }
+
+  @include breakpoint(desktop-sm) {
+    bottom: 50px;
+  }
+}
+
+.column-2 .home-headline .c-image-component .image-component-image .c-tease-icon {
+  @include breakpoint(desktop-sm) {
+    right: 5%;
   }
 }
 
 .column-3 .c-homeList .c-image-component .image-component-image .c-tease-icon {
   right: 8px;
   bottom: 12px;
+
+  @include breakpoint(desktop-sm) {
+    width: 40px;
+    height: 40px;
+
+    .tease-icon img {
+      width: 52%;
+      height: 52%;
+      top: 0;
+      left: 0;
+      transform: translate(9px, 10px);
+    }
+  }
 }
 
 ///////////////
@@ -134,10 +163,8 @@
 
 .hero-img .c-tease-icon {
   position: absolute;
-  max-width: 50px;
-  max-height: 50px;
-  width: 30%;
-  height: 55%;
+  width: 50px;
+  height: 50px;
   background: linear-gradient(to top, #04befe, #4481eb);
   border-radius: 25px;
   box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
