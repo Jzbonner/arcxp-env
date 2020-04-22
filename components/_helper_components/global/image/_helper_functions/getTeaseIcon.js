@@ -1,6 +1,7 @@
 import React from 'react';
 import galleryIcon from '../../../../../resources/icons/tease/gallery.svg';
 import videoIcon from '../../../../../resources/icons/tease/video.svg';
+import '../default.scss';
 
 export default function getTeaseIcon(teaseContentType, url) {
   let iconToRender = null;
