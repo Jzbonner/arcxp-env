@@ -16,6 +16,7 @@ const Headline = ({
   display_date: displayDate,
   headlines,
   websites,
+  type,
 }) => {
   const appContext = useAppContext();
   const { contextPath } = appContext;
@@ -25,7 +26,12 @@ const Headline = ({
 
   const relativeURL = (websites && websites[sites] && websites[sites].website_url) || '/';
 
-  function getPromoItem(items) {
+  function getPromoItem(items, contentType) {
+    if (contentType === 'video' || contentType === 'gallery') {
+      if (items.basic) {
+        return <Image src={items.basic} width={1066} height={600} imageType="isHomepageImage" teaseContentType={contentType} />;
+      }
+    }
     if (items.basic.type === 'image') {
       return <Image src={items.basic || items.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />;
     }
@@ -39,7 +45,7 @@ const Headline = ({
 
   return (
     <div className="home-headline">
-      <a href={`${contextPath}${relativeURL}`}>{promoItems && getPromoItem(promoItems)}</a>
+      <a href={`${contextPath}${relativeURL}`}>{promoItems && getPromoItem(promoItems, type)}</a>
       <div className="headline-box">
         <SectionLabel label={label} taxonomy={taxonomy} />
         <TimeStamp firstPublishDate={publishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
@@ -59,6 +65,7 @@ Headline.propTypes = {
   display_date: PropTypes.string,
   headlines: PropTypes.object,
   websites: PropTypes.object,
+  type: PropTypes.string,
 };
 
 export default Headline;

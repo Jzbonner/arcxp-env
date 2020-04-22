@@ -22,13 +22,13 @@
       position: absolute;
       max-width: 50px;
       max-height: 50px;
-      width: 30%;
-      height: 55%;
+      width: 50px;
+      height: 50px;
       background: linear-gradient(to top, #04befe, #4481eb);
       border-radius: 25px;
       box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
-      right: 14px;
-      bottom: 14px;
+      right: 8px;
+      bottom: 12px;
       z-index: 25;
       overflow: hidden;
 
@@ -39,11 +39,12 @@
         top: 29%;
         left: 22%;
         border-radius: 0;
+        box-shadow: none;
       }
 
       @include breakpoint(tablet) {
-        width: 9%;
-        height: 11%;
+        width: 50px;
+        height: 50px;
 
         .tease-icon img {
           max-width: 27px;
@@ -56,8 +57,8 @@
       }
 
       @include breakpoint(desktop-sm) {
-        width: 50%;
-        height: 30%;
+        width: 50px;
+        height: 50px;
       }
     }
   }
@@ -90,14 +91,67 @@
 // HOME && SECTION specific styles for tease icons.
 ///////////////
 
+.two-columns .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon,
 .four-columns .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
   @include breakpoint(desktop-sm) {
-    height: 50%;
-    width: 30%;
+    height: 50px;
+    width: 50px;
+    right: 8px;
+    bottom: 12px;
+  }
+}
 
-    .tease-icon img {
-      top: 22%;
-      left: 20%;
-    }
+.home-headline .c-image-component .image-component-image .c-tease-icon {
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
+
+  @include breakpoint(tablet) {
+    bottom: 35px;
+  }
+
+  @include breakpoint(desktop-sm) {
+    bottom: 14%;
+  }
+}
+
+.column-1 .home-headline .c-image-component .image-component-image .c-tease-icon {
+  bottom: 34%;
+
+  @include breakpoint(tablet) {
+    bottom: 40px;
+  }
+}
+
+.column-3 .c-homeList .c-image-component .image-component-image .c-tease-icon {
+  right: 8px;
+  bottom: 12px;
+}
+
+///////////////
+// HERO specific styles for tease icons.
+///////////////
+
+.hero-img .c-tease-icon {
+  position: absolute;
+  max-width: 50px;
+  max-height: 50px;
+  width: 30%;
+  height: 55%;
+  background: linear-gradient(to top, #04befe, #4481eb);
+  border-radius: 25px;
+  box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+  right: 14px;
+  bottom: 14px;
+  z-index: 25;
+  overflow: hidden;
+
+  .tease-icon img {
+    position: relative;
+    max-width: 27px;
+    max-height: 27px;
+    top: 29%;
+    left: 22%;
+    border-radius: 0;
   }
 }
