@@ -32,7 +32,7 @@ const TaboolaFeed = ({ type, ampPage }) => {
 
 TaboolaFeed.propTypes = {
   type: PropTypes.string,
-  ampPage: PropTypes.string,
+  ampPage: PropTypes.bool,
 };
 
 export default TaboolaFeed;
