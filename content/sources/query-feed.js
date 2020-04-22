@@ -35,74 +35,53 @@ const resolve = (query) => {
   const builder = bodybuilder();
   if (includeDistributor) {
     const distributors = itemsToArray(includeDistributor);
-    distributors.forEach((distributor) => {
-      builder.orQuery('term', 'distributor.reference_id', distributor);
-    });
+    builder.andQuery('terms', 'distributor.reference_id', distributors);
   }
   if (includeContentTypes) {
     const types = itemsToArray(includeContentTypes);
-    types.forEach((type) => {
-      builder.orQuery('term', 'type', type);
-    });
+    builder.andQuery('terms', 'type', types);
   }
   if (includeSubtypes) {
     const subtypes = itemsToArray(includeSubtypes);
-    subtypes.forEach((subtype) => {
-      builder.orQuery('term', 'subtype', subtype);
-    });
+    builder.andQuery('terms', 'subtype', subtypes);
   }
   if (includeSections) {
     const sections = itemsToArray(includeSections);
-    sections.forEach((section) => {
-      builder.orQuery('term', 'taxonomy.sections._id', section);
-    });
+    builder.andQuery('nested', { path: 'taxonomy.sections' }, b => b.query('terms', 'taxonomy.sections._id', sections));
   }
   if (includeTags) {
-    if (mustIncludeAllTags.toLowerCase() === 'yes') {
+    if (mustIncludeAllTags && mustIncludeAllTags.toLowerCase() === 'yes') {
       const tags = itemsToArray(includeTags);
       tags.forEach((tag) => {
         builder.andQuery('term', 'taxonomy.tags.text', tag);
       });
     } else {
       const tags = itemsToArray(includeTags);
-      tags.forEach((tag) => {
-        builder.orQuery('term', 'taxonomy.tags.text', tag);
-      });
+      builder.andQuery('terms', 'taxonomy.tags.text', tags);
     }
   }
   if (excludeDistributor) {
     const distributors = itemsToArray(excludeDistributor);
-    distributors.forEach((distributor) => {
-      builder.notQuery('term', 'distributor.reference_id', distributor);
-    });
+    builder.notQuery('terms', 'distributor.reference_id', distributors);
   }
   if (excludeContentTypes) {
     const types = itemsToArray(excludeContentTypes);
-    types.forEach((type) => {
-      builder.notQuery('term', 'type', type);
-    });
+    builder.notQuery('terms', 'type', types);
   }
   if (excludeSubtypes) {
     const subtypes = itemsToArray(excludeSubtypes);
-    subtypes.forEach((subtype) => {
-      builder.notQuery('term', 'subtype', subtype);
-    });
+    builder.notQuery('terms', 'subtype', subtypes);
   }
   if (excludeSections) {
     const sections = itemsToArray(excludeSections);
-    sections.forEach((section) => {
-      builder.notQuery('term', 'taxonomy.sections._id', section);
-    });
+    builder.notQuery('terms', 'taxonomy.sections._id', sections);
   }
   if (excludeTags) {
     const tags = itemsToArray(includeTags);
-    tags.forEach((tag) => {
-      builder.notQuery('term', 'taxonomy.tags.text', tag);
-    });
+    builder.notQuery('terms', 'taxonomy.tags.text', tags);
   }
   const body = builder.build();
   const newBody = JSON.stringify(body);
-  console.log('BODY', newBody);
 
   return `/content/v4/search/published?body=${newBody}&website=ajc`;
 };
