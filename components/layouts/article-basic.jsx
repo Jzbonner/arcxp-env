@@ -238,9 +238,7 @@ const StoryPageLayout = () => {
           {(!noAds && !ampPage) && !isHyperlocalContent
           && <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />}
           {!isHyperlocalContent && (
-            <div className="c-taboola">
-              <TaboolaFeed type={type} />
-            </div>
+              <TaboolaFeed type={type} ampPage={ampPage} />
           )}
         </article>
         {(!basicItems || promoType !== 'gallery') && !ampPage ? (
