@@ -464,6 +464,31 @@
     @include breakpoint(desktop-sm) {
       display: flex;
       padding-bottom: 0;
+      margin-left: 20px;
+
+      .section .subNav {
+        right: 0;
+        border-radius: 6px 0 6px 6px;
+
+        &-flyout {
+          height: auto;
+        }
+      }
+    }
+
+    .btn-logout {
+      height: auto;
+      width: 100%;
+      padding: 8px 0;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      background-image: linear-gradient(to top, #04befe, #4481eb);
+      box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+      color: #fff;
+      text-align: center;
+      display: inline-block;
+
+      @include text-styles(.875rem, 1, "Gordita-Bold");
     }
   }
 
