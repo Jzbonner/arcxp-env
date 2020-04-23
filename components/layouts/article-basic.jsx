@@ -219,6 +219,9 @@ const StoryPageLayout = () => {
           {!isHyperlocalContent && (
               <TaboolaFeed type={type} ampPage={ampPage} />
           )}
+          {!noAds && ampPage && (
+            <AmpAd adSlot="MSW01" uuid={uuid} width={'350'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
+          )}
         </article>
         {(!basicItems || promoType !== 'gallery') && !ampPage ? (
           <Gallery contentElements={filteredContentElements} pageType={subtype} />
