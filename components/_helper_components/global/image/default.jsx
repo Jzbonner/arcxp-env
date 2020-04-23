@@ -7,7 +7,7 @@ import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
 
 const Image = ({
-  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, canonicalUrl, ampPage,
+  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage,
 }) => {
   const {
     url, height: originalHeight, width: originalWidth, caption, credits,
@@ -53,7 +53,7 @@ const Image = ({
   return (
     <div className={`c-image-component ${imageMarginBottom || ''}`}>
       <div className="image-component-image">
-        <a href={canonicalUrl ? `${canonicalUrl}` : null}>
+        <>
           {!ampPage ? (
             <img src={imageSrc} alt={imageALT} className={teaseContentType ? 'tease-image' : ''} />
           ) : (
@@ -67,7 +67,7 @@ const Image = ({
             />
           )}
           {teaseContentType && getTeaseIcon(teaseContentType, url)}
-        </a>
+        </>
         {imageType !== 'isHomepageImage' && renderCaption()}
       </div>
       {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
