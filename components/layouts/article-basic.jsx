@@ -30,6 +30,7 @@ import ConnextInlinePromoSubscription from '../_helper_components/global/connext
 import getQueryParams from './_helper_functions/getQueryParams';
 import checkTags from './_helper_functions/checkTags';
 import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
+import Carousel from '../features/carousel/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -94,6 +95,8 @@ const StoryPageLayout = () => {
   // Both checks return true if the tag is present and false if not.
   const noAds = checkTags(tags, 'no-ads');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
+
+  console.log(taxonomy);
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
@@ -249,6 +252,7 @@ const StoryPageLayout = () => {
       </main>
       {!ampPage && <Footer />}
       <Copyright />
+      {ampPage && <Carousel data={taxonomy} />}
     </>
   );
 };
