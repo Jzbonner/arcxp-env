@@ -15,7 +15,7 @@ const params = {
   excludeSubtypes: 'text',
 };
 
-export const itemsToArray = (itemString = '') => itemString.split(',').map(item => item.replace(/"/g, ''));
+export const itemsToArray = (itemString = '') => itemString.split(',').map(item => item.replace(/\s/g, ''));
 
 const resolve = (query) => {
   const {
@@ -74,7 +74,7 @@ const resolve = (query) => {
   }
   if (excludeSections) {
     const sections = itemsToArray(excludeSections);
-    builder.notQuery('terms', 'taxonomy.sections._id', sections);
+    builder.notQuery('nested', { path: 'taxonomy.sections' }, b => b.query('terms', 'taxonomy.sections._id', sections));
   }
   if (excludeTags) {
     const tags = itemsToArray(includeTags);
