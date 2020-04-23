@@ -5,6 +5,7 @@ import getProperties from 'fusion:properties';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
+import SocialShare from '../_helper_components/article/socialShare/amp.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
@@ -156,6 +157,7 @@ const StoryPageLayout = () => {
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
           </div>
+          {ampPage && <SocialShare/>}
           <ContributorBadge tags={tags} ampPage={ampPage} />
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
             <SubHeadline subheadlines={subheadlines} />
