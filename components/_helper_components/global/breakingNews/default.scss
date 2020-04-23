@@ -84,11 +84,10 @@
 
     color: #fff;
     width: 100%;
-    max-width: 302px;
-    margin: auto;
+    margin: 0 20px;
 
     @include breakpoint(desktop-sm) {
-      max-width: 885px;
+      margin: auto;
     }
   }
 }

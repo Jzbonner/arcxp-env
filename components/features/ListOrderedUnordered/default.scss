@@ -30,11 +30,7 @@
 
     .list-item {
       list-style: none;
-      padding: 5px 0;
-
-      @include breakpoint(desktop-sm) {
-        padding: 5px 0;
-      }
+      padding: 10px 0;
 
       .item-index-Ordered {
         display: block;
@@ -53,7 +49,6 @@
         height: 3px;
         border-radius: 2.5px;
         background-color: #2e81b7;
-        margin: 0 0 10px;
 
         @include breakpoint(desktop-sm) {
           width: 50px;
@@ -63,6 +58,8 @@
 
       .item-title {
         color: #000;
+        position: relative;
+        top: 3px;
 
         @include text-styles(1em, 1.44, "Average");
 
