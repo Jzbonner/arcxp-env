@@ -1,0 +1,9 @@
+.social-share-buttons {
+  display: flex;
+  justify-content: center;
+
+  amp-social-share {
+    margin: 0 5px;
+    outline: none;
+  }
+}
