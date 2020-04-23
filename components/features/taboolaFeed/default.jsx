@@ -11,7 +11,7 @@ const TaboolaFeed = ({ type, ampPage }) => {
   } = getProperties();
   if (ampPage) {
     return (
-      <div className="c-section">
+      <div className="c-section b-margin-bottom-d40-m20">
         <amp-embed width='100' height='100'
           type='taboola'
           layout='responsive'

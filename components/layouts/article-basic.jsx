@@ -160,7 +160,9 @@ const StoryPageLayout = () => {
               <ArcAd staticSlot={'MP01'} />
             </div>
           )}
-          {!noAds && ampPage && <AmpAd adSlot="MP01" uuid={uuid} width={'350'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />}
+          {!noAds && ampPage && (
+            <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
+          )}
           <Section
             elements={filteredContentElements}
             stopIndex={1}
@@ -220,6 +222,9 @@ const StoryPageLayout = () => {
           )}
           {!isHyperlocalContent && (
               <TaboolaFeed type={type} ampPage={ampPage} />
+          )}
+          {!noAds && ampPage && (
+            <AmpAd adSlot="MSW01" uuid={uuid} width={'350'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
         </article>
         {(!basicItems || promoType !== 'gallery') && !ampPage ? (

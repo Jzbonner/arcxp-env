@@ -28,11 +28,11 @@ export const AmpAd = ({
       <amp-ad
         width={width}
         height={height}
-        layout="responsive"
+        layout="fixed"
         type="doubleclick"
         data-loading-strategy ="1.25"
         data-slot={dataSlot}
-        json={JSON.stringify(jsonObject)}
+        json={jsonObject}
       >
       </amp-ad>
     </div>
