@@ -3,7 +3,7 @@ import galleryIcon from '../../../../../resources/icons/tease/gallery.svg';
 import videoIcon from '../../../../../resources/icons/tease/video.svg';
 import '../default.scss';
 
-export default function getTeaseIcon(teaseContentType, url) {
+export default function getTeaseIcon(teaseContentType) {
   let iconToRender = null;
 
   if (teaseContentType && teaseContentType.toLowerCase() === 'video') {
@@ -15,9 +15,7 @@ export default function getTeaseIcon(teaseContentType, url) {
   if (iconToRender) {
     return (
       <div className="c-tease-icon">
-        <a className="tease-icon" href={url || null}>
-          <img src={iconToRender}></img>
-        </a>
+          <img className="tease-icon" src={iconToRender} />
       </div>
     );
   }
