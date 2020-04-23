@@ -1,145 +1,89 @@
 const schemaName = 'query-feed';
+const bodybuilder = require('bodybuilder');
 
 const params = {
-  includeSources: 'text',
+  includeDistributor: 'text',
   includeContentTypes: 'text',
   includeSections: 'text',
+  mustIncludeAllTags: 'text',
   includeTags: 'text',
   includeSubtypes: 'text',
-  excludeSources: 'text',
+  excludeDistributor: 'text',
   excludeContentTypes: 'text',
   excludeSections: 'text',
   excludeTags: 'text',
-  exludeSubtypes: 'text',
+  excludeSubtypes: 'text',
 };
 
 export const itemsToArray = (itemString = '') => itemString.split(',').map(item => item.replace(/"/g, ''));
 
 const resolve = (query) => {
   const {
-    includeSources = '',
-    excludeSources = '',
+    includeDistributor = '',
+    excludeDistributor = '',
     includeSections = '',
     excludeSections = '',
     includeContentTypes = '',
     excludeContentTypes = '',
+    mustIncludeAllTags = '',
     includeTags = '',
     excludeTags = '',
     includeSubtypes = '',
-    exludeSubtypes = '',
+    excludeSubtypes = '',
   } = query;
 
-  const sourcesIncluded = itemsToArray(includeSources);
-  const sourcesExcluded = itemsToArray(excludeSources);
+  const builder = bodybuilder();
+  if (includeDistributor) {
+    const distributors = itemsToArray(includeDistributor);
+    builder.andQuery('terms', 'distributor.reference_id', distributors);
+  }
+  if (includeContentTypes) {
+    const types = itemsToArray(includeContentTypes);
+    builder.andQuery('terms', 'type', types);
+  }
+  if (includeSubtypes) {
+    const subtypes = itemsToArray(includeSubtypes);
+    builder.andQuery('terms', 'subtype', subtypes);
+  }
+  if (includeSections) {
+    const sections = itemsToArray(includeSections);
+    builder.andQuery('nested', { path: 'taxonomy.sections' }, b => b.query('terms', 'taxonomy.sections._id', sections));
+  }
+  if (includeTags) {
+    if (mustIncludeAllTags && mustIncludeAllTags.toLowerCase() === 'yes') {
+      const tags = itemsToArray(includeTags);
+      tags.forEach((tag) => {
+        builder.andQuery('term', 'taxonomy.tags.text', tag);
+      });
+    } else {
+      const tags = itemsToArray(includeTags);
+      builder.andQuery('terms', 'taxonomy.tags.text', tags);
+    }
+  }
+  if (excludeDistributor) {
+    const distributors = itemsToArray(excludeDistributor);
+    builder.notQuery('terms', 'distributor.reference_id', distributors);
+  }
+  if (excludeContentTypes) {
+    const types = itemsToArray(excludeContentTypes);
+    builder.notQuery('terms', 'type', types);
+  }
+  if (excludeSubtypes) {
+    const subtypes = itemsToArray(excludeSubtypes);
+    builder.notQuery('terms', 'subtype', subtypes);
+  }
+  if (excludeSections) {
+    const sections = itemsToArray(excludeSections);
+    builder.notQuery('terms', 'taxonomy.sections._id', sections);
+  }
+  if (excludeTags) {
+    const tags = itemsToArray(includeTags);
+    builder.notQuery('terms', 'taxonomy.tags.text', tags);
+  }
+  const body = builder.build();
+  const newBody = JSON.stringify(body);
 
-  const contentTypesIncluded = itemsToArray(includeContentTypes);
-  const contentTypesExcluded = itemsToArray(excludeContentTypes);
-
-  const sectionsIncluded = itemsToArray(includeSections);
-  const sectionsExcluded = itemsToArray(excludeSections);
-
-  const tagsIncluded = itemsToArray(includeTags);
-  const tagsExcluded = itemsToArray(excludeTags);
-
-  const subtypesIncluded = itemsToArray(includeSubtypes);
-  const subtypesExcluded = itemsToArray(exludeSubtypes);
-
-  const body = {
-    query: {
-      bool: {
-        must: [
-          {
-            terms: {
-              source: sourcesIncluded,
-            },
-          },
-          {
-            terms: {
-              type: contentTypesIncluded,
-            },
-          },
-          {
-            terms: {
-              subtype: subtypesIncluded,
-            },
-          },
-          {
-            terms: {
-              'taxonomy.tags.text': tagsIncluded,
-            },
-          },
-          {
-            nested: {
-              path: 'taxonomy.sections',
-              query: {
-                bool: {
-                  must: [
-                    {
-                      terms: {
-                        'taxonomy.sections._id': sectionsIncluded,
-                      },
-                    },
-                    {
-                      term: {
-                        'taxonomy.sections._website': 'ajc',
-                      },
-                    },
-                  ],
-                },
-              },
-            },
-          },
-        ],
-        must_not: [
-          {
-            terms: {
-              source: sourcesExcluded,
-            },
-          },
-          {
-            terms: {
-              type: contentTypesExcluded,
-            },
-          },
-          {
-            terms: {
-              subtype: subtypesExcluded,
-            },
-          },
-          {
-            terms: {
-              'taxonomy.tags.text': tagsExcluded,
-            },
-          },
-          {
-            nested: {
-              path: 'taxonomy.sections',
-              query: {
-                bool: {
-                  must: [
-                    {
-                      terms: {
-                        'taxonomy.sections._id': sectionsExcluded,
-                      },
-                    },
-                    {
-                      term: {
-                        'taxonomy.sections._website': 'ajc',
-                      },
-                    },
-                  ],
-                },
-              },
-            },
-          },
-        ],
-      },
-    },
-  };
-
-  const encodedBody = encodeURI(JSON.stringify(body));
-
-  return `/content/v4/search/published?body=${encodedBody}&website=ajc`;
+  return `/content/v4/search/published?body=${newBody}&website=ajc`;
 };
 
 export default {
