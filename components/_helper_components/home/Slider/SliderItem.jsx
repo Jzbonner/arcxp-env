@@ -20,6 +20,7 @@ const SliderItem = ({ data, refHook }) => {
 
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
+      <a href={canonicalUrl || null}>
         <Image
           height={282}
           width={500}
@@ -27,6 +28,7 @@ const SliderItem = ({ data, refHook }) => {
           teaseContentType={contentType}
           canonicalUrl={canonicalUrl || null}
         />
+      </a>
       <div className="sliderList-text">
         <div className="c-label-wrapper">
           <SectionLabel label={label} taxonomy={taxonomy} />
