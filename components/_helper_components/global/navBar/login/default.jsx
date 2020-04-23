@@ -13,7 +13,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   }
 
   return (
-    <li className={`nav-login ${isSticky ? 'isSticky' : ''}`}>
+    <li className={`nav-login ${isSticky ? 'isSticky' : ''}`} data-mg2-action="register">
       <img src={source}></img>
       <div className='nav-itemText login-text'>Log in</div>
     </li>
