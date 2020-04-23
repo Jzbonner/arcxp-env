@@ -7,24 +7,38 @@ const renderCustomHtml = (content) => {
 
   useEffect(() => {
     // powers all inline & external scripts in embedded html
-    const scriptFilter = /[^<script.+>][\s\S][^<]*<\/script>/gi;
-    const scripts = html.match(scriptFilter);
-    setHtml(html.replace(scriptFilter, ''));
+    if (html.search(/<script/gi) !== -1) {
+      // only proceed if it actually contains a script (added because <style /> blocks were triggering)
+      const scriptFilter = /(<script.*?>.*?<\/script>)/gi;
+      let scriptBlocks = html.split(scriptFilter);
+      setHtml(html.replace(scriptFilter, ''));
 
-    if (Array.isArray(scripts)) {
-      scripts.forEach((script) => {
-        const newScript = document.createElement('script');
-        const externalFilter = /src=(['"].+['"])/gi;
-        if (script.search(externalFilter) !== -1) {
-          let scriptSrc = script.match(externalFilter);
-          scriptSrc = scriptSrc[0].replace(/src=|['"]/g, '');
-          newScript.src = scriptSrc;
-        } else {
-          const scriptVal = script.replace(/<script.+?>|<\/script>/g, '');
-          newScript.innerHTML = scriptVal;
-        }
-        document.body.appendChild(newScript);
-      });
+      if (Array.isArray(scriptBlocks)) {
+        scriptBlocks = scriptBlocks.filter(script => script !== '');
+        scriptBlocks.forEach((scriptBlock) => {
+          let scriptTags = scriptBlock.split(/<\/script>/gi);
+          // we do a second script check/split because in some cases it doesn't split ALL on the first go-round
+          // mostly an issue in Third Party Tease features, where all of the code is in a single `html` block
+          scriptTags = scriptTags ? scriptTags.filter(scriptTag => scriptTag !== '') : [];
+          scriptTags.forEach((script) => {
+            if (script.indexOf('<script') > -1) {
+              // we ensure it's actually a script, and not html or something else (as is sometimes the case)
+              // before we (re)create it as a new script tag
+              const newScript = document.createElement('script');
+              const externalFilter = /[script|type=".*"] src=['"](.*?)['"]/gmi;
+              if (script.search(externalFilter) !== -1) {
+                let scriptSrc = script.match(externalFilter);
+                scriptSrc = scriptSrc[0].replace(/.*?src=|['"]/gmi, '');
+                newScript.src = scriptSrc;
+              } else {
+                const scriptVal = script.replace(/<script.*?>|<\/script>/gi, '');
+                newScript.innerHTML = scriptVal;
+              }
+              document.body.appendChild(newScript);
+            }
+          });
+        });
+      }
     }
   }, []);
 
