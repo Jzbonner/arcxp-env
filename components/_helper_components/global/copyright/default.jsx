@@ -25,10 +25,10 @@ const Copyright = () => {
   return (
     <div className="c-copyright">
       <div className="copyright">
-      &copy; {year} <a href="/">{ajcName}.</a> All Rights Reserved. By using this website, you accept the terms of our{' '}
-      <a href={getLinkURL(visitor_agreement)}>{visitorAgreementName}</a> and <a href={getLinkURL(privacy_policy)}>{privacyPolicyName}</a>,
-      and understand your options regarding <a href={getLinkURL(ad_choices)}>{adChoicesName}</a>. Learn about{' '}
-      <a href={getLinkURL(careers)}>{careersName}</a> at Cox Enterprises.
+        &copy; {year} <a href="/">{ajcName}.</a> All Rights Reserved. By using this website, you accept the terms of our{' '}
+        <a href={getLinkURL(visitor_agreement)}>{visitorAgreementName}</a> and <a href={getLinkURL(privacy_policy)}>{privacyPolicyName}</a>,
+        and understand your options regarding <a href={getLinkURL(ad_choices)}>{adChoicesName}</a>. Learn about{' '}
+        <a href={getLinkURL(careers)}>{careersName}</a>.
       </div>
     </div>
   );
