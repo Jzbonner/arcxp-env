@@ -214,7 +214,8 @@ const StoryPageLayout = () => {
           />
           {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
           {!noAds && !isHyperlocalContent && (
-            <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
+            <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4}
+            controllerClass="story-nativo_placeholder--moap" ampPage={ampPage} />
           )}
           <Section
             elements={filteredContentElements}
@@ -236,11 +237,10 @@ const StoryPageLayout = () => {
             ampPage={ampPage}
           />
           {!noAds && !isHyperlocalContent
-          && <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />}
+          && <Nativo elements={filteredContentElements}
+          controllerClass="story-nativo_placeholder--boap" ampPage={ampPage}/>}
           {!isHyperlocalContent && (
-            <div className="c-taboola">
-              <TaboolaFeed type={type} />
-            </div>
+              <TaboolaFeed type={type} ampPage={ampPage} />
           )}
         </article>
         {(!basicItems || promoType !== 'gallery') && !ampPage ? (
