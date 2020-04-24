@@ -31,6 +31,7 @@ import ConnextInlinePromoSubscription from '../_helper_components/global/connext
 import getQueryParams from './_helper_functions/getQueryParams';
 import checkTags from './_helper_functions/checkTags';
 import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
+import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -45,6 +46,8 @@ const start = 3;
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent, requestUri } = appContext;
+
+  console.log('GLOBAL', globalContent);
 
   if (!globalContent) return null;
   const {
@@ -131,6 +134,7 @@ const StoryPageLayout = () => {
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
+            <SponsorBanner />
             <Headline headlines={headlines} basicItems={basicItems} ampPage={ampPage} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
