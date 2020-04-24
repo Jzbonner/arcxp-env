@@ -82,8 +82,6 @@ const resolve = (query) => {
   }
   const body = builder.build();
   const newBody = JSON.stringify(body);
-  console.log('BODY', newBody);
-
   return `/content/v4/search/published?body=${newBody}&website=ajc`;
 };
 
