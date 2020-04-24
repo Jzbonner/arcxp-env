@@ -5,6 +5,7 @@ import getProperties from 'fusion:properties';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
+import SocialShare from '../_helper_components/article/socialShare/amp.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
@@ -68,16 +69,7 @@ const StoryPageLayout = () => {
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
-  const ampMP03 = () => (
-    <AmpAd
-      adSlot='MP03'
-      uuid={uuid}
-      width={'350'}
-      height={'250'}
-      taxonomy={taxonomy}
-      componentName={'ArcAd'}
-    />
-  );
+  const ampMP03 = () => <AmpAd adSlot="MP03" uuid={uuid} width={'350'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
@@ -107,9 +99,7 @@ const StoryPageLayout = () => {
         </amp-fx-flying-carpet>
       );
     }
-    return (
-    <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>
-    );
+    return <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>;
   };
   filteredContentElements.forEach((el, i) => {
     if (el && el.type === 'divider' && infoBoxIndex === null) {
@@ -135,7 +125,7 @@ const StoryPageLayout = () => {
   insertAtEndOfStory.push(BlogAuthorComponent);
   return (
     <>
-     {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} />}
+      {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} />}
       <BreakingNews />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
       <main>
@@ -156,6 +146,7 @@ const StoryPageLayout = () => {
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
           </div>
+          {ampPage && <SocialShare/>}
           <ContributorBadge tags={tags} ampPage={ampPage} />
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
             <SubHeadline subheadlines={subheadlines} />
@@ -163,21 +154,14 @@ const StoryPageLayout = () => {
         </header>
 
         <article>
-          {(!noAds && !ampPage) && !isHyperlocalContent && (
+          {!noAds && !ampPage && !isHyperlocalContent && (
             <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />
               <ArcAd staticSlot={'MP01'} />
             </div>
           )}
-          {(!noAds && ampPage) && (
-            <AmpAd
-              adSlot='MP01'
-              uuid={uuid}
-              width={'350'}
-              height={'50'}
-              taxonomy={taxonomy}
-              componentName={'ArcAd'}
-            />
+          {!noAds && ampPage && (
+            <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
           <Section
             elements={filteredContentElements}
@@ -186,21 +170,14 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex === 0}
             ampPage={ampPage}
           />
-          {(!noAds && !ampPage) && isHyperlocalContent && (
+          {!noAds && !ampPage && isHyperlocalContent && (
             <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />
               <ArcAd staticSlot={'MP01'} />
             </div>
           )}
-          {(!noAds && ampPage) && (
-            <AmpAd
-              adSlot='MP02'
-              uuid={uuid}
-              width={'350'}
-              height={'250'}
-              taxonomy={taxonomy}
-              componentName={'ArcAd'}
-            />
+          {!noAds && ampPage && (
+            <AmpAd adSlot="MP02" uuid={uuid} width={'350'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
           <Section
             elements={filteredContentElements}
@@ -214,7 +191,12 @@ const StoryPageLayout = () => {
           />
           {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
           {!noAds && !isHyperlocalContent && (
-            <Nativo elements={filteredContentElements} displayIfAtLeastXParagraphs={4} controllerClass="story-nativo_placeholder--moap" />
+            <Nativo
+              elements={filteredContentElements}
+              displayIfAtLeastXParagraphs={4}
+              controllerClass="story-nativo_placeholder--moap"
+              ampPage={ampPage}
+            />
           )}
           <Section
             elements={filteredContentElements}
@@ -235,12 +217,14 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
             ampPage={ampPage}
           />
-          {!noAds && !isHyperlocalContent
-          && <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" />}
+          {!noAds && !isHyperlocalContent && (
+            <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
+          )}
           {!isHyperlocalContent && (
-            <div className="c-taboola">
-              <TaboolaFeed type={type} />
-            </div>
+              <TaboolaFeed type={type} ampPage={ampPage} />
+          )}
+          {!noAds && ampPage && (
+            <AmpAd adSlot="MSW01" uuid={uuid} width={'350'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
         </article>
         {(!basicItems || promoType !== 'gallery') && !ampPage ? (

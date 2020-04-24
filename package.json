@@ -214,6 +214,7 @@
   "homepage": "https://github.com/wapopartners/StarterPack-PageBuilder-Fusion-Features#readme",
   "dependencies": {
     "arcads": "https://github.com/washingtonpost/ArcAds/archive/dimensions-depth-check.tar.gz",
+    "bodybuilder": "^2.2.21",
     "scriptjs": "^2.5.9",
     "thumbor-lite": "^0.1.8"
   }
