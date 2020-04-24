@@ -1,5 +1,5 @@
 export default function (columnsC) {
-  switch (columnsC) {
+  switch (parseInt(columnsC, 10)) {
     case 1:
       return 'one-column';
     case 2:

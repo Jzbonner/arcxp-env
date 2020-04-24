@@ -24,18 +24,17 @@ export const AmpAd = ({
   const dataSlot = `${dfpid}/${currentEnv.toLowerCase().indexOf('prod') === -1 ? 'TEST_' : ''}atlanta_np/ajc_web_default${path}`;
 
   return (
-    <div className={`ampAd ${adSlot} b-margin-bottom-d40-m20`}>
-      <amp-ad
-        width={width}
-        height={height}
-        layout="responsive"
-        type="doubleclick"
-        data-loading-strategy ="1.25"
-        data-slot={dataSlot}
-        json={JSON.stringify(jsonObject)}
-      >
-      </amp-ad>
-    </div>
+    <amp-ad
+      width={width}
+      height={height}
+      layout="fixed"
+      type="doubleclick"
+      data-loading-strategy ="1.25"
+      data-slot={dataSlot}
+      json={jsonObject}
+      class="ampAd"
+    >
+    </amp-ad>
   );
 };
 

@@ -6,6 +6,8 @@ import './default.scss';
 const TimeStamp = ({
   firstPublishDate, displayDate, isHideTimestampTrue, isHyperlocalContent, ampPage = false, isTease = false,
 }) => {
+  if (firstPublishDate === undefined || !firstPublishDate) return null;
+
   let pageType = 'normal';
 
   if (ampPage) pageType = 'amp';

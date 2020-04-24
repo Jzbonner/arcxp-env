@@ -5,7 +5,6 @@
   width: calc(100% - 45px);
   max-width: 408px;
   margin: auto;
-  line-height: 1.7;
 
   @include breakpoint(desktop-sm) {
     width: calc(100% - 150px);
@@ -31,11 +30,7 @@
 
     .list-item {
       list-style: none;
-      padding: 5px 0;
-
-      @include breakpoint(desktop-sm) {
-        padding: 5px 0;
-      }
+      padding: 10px 0;
 
       .item-index-Ordered {
         display: block;
@@ -63,6 +58,8 @@
 
       .item-title {
         color: #000;
+        position: relative;
+        top: 3px;
 
         @include text-styles(1em, 1.44, "Average");
 
