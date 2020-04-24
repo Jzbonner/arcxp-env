@@ -220,6 +220,15 @@
     right: 4px;
     bottom: 8px;
   }
+
+  @include breakpoint(desktop-lg) {
+    height: 60%;
+    width: 35%;
+    max-width: 40px;
+    max-height: 40px;
+    right: 4px;
+    bottom: 8px;
+  }
 }
 
 ///////////////
