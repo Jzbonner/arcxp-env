@@ -50,6 +50,7 @@ const StoryPageLayout = () => {
   const {
     _id: uuid,
     first_publish_date: firstPublishDate,
+    last_updated_date: lastUpdatedDate,
     display_date: displayDate,
     content_elements: contentElements,
     promo_items: promoItems,
@@ -137,7 +138,7 @@ const StoryPageLayout = () => {
           <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
             {!isHyperlocalContent && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} />}
             <TimeStamp
-              firstPublishDate={firstPublishDate}
+              firstPublishDate={firstPublishDate || lastUpdatedDate || displayDate}
               displayDate={displayDate}
               isHideTimestampTrue={isHideTimestampTrue}
               ampPage={ampPage}
