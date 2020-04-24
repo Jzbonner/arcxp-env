@@ -159,6 +159,10 @@
   @include breakpoint(desktop-sm) {
     bottom: 50px;
   }
+
+  @include breakpoint(desktop-lg) {
+    bottom: calc(1.5% + 50px);
+  }
 }
 
 .column-2 .home-headline .c-image-component .image-component-image .c-tease-icon {
