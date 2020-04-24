@@ -77,11 +77,12 @@ const resolve = (query) => {
     builder.notQuery('nested', { path: 'taxonomy.sections' }, b => b.query('terms', 'taxonomy.sections._id', sections));
   }
   if (excludeTags) {
-    const tags = itemsToArray(includeTags);
+    const tags = itemsToArray(excludeTags);
     builder.notQuery('terms', 'taxonomy.tags.text', tags);
   }
   const body = builder.build();
   const newBody = JSON.stringify(body);
+  console.log('BODY', newBody);
 
   return `/content/v4/search/published?body=${newBody}&website=ajc`;
 };
