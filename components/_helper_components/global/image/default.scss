@@ -19,6 +19,9 @@
     }
 
     .c-tease-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: absolute;
       width: 50px;
       height: 50px;
@@ -34,8 +37,6 @@
         position: relative;
         max-width: 27px;
         max-height: 27px;
-        top: 29%;
-        left: 22%;
         border-radius: 0;
         box-shadow: none;
       }
@@ -47,8 +48,6 @@
           max-height: 22px;
           width: 60%;
           height: 60%;
-          top: 29%;
-          left: 22%;
         }
       }
 
@@ -101,8 +100,37 @@
       height: 52%;
       top: 0;
       left: 0;
-      transform: translate(9px, 10px);
     }
+  }
+}
+
+.with-rightrail .two-columns.left-photo-display-class .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
+  @include breakpoint(desktop-sm) {
+    height: 60%;
+    width: 35%;
+    max-width: 30px;
+    max-height: 30px;
+  }
+}
+
+.two-columns.left-photo-display-class .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
+  @include breakpoint(desktop-sm) {
+    height: 60%;
+    width: 35%;
+    max-width: 40px;
+    max-height: 40px;
+  }
+}
+
+.three-columns.left-photo-display-class .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon,
+.four-columns.left-photo-display-class .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
+  @include breakpoint(desktop-sm) {
+    height: 60%;
+    width: 35%;
+    max-width: 30px;
+    max-height: 30px;
+    right: 4px;
+    bottom: 8px;
   }
 }
 
@@ -131,6 +159,10 @@
   @include breakpoint(desktop-sm) {
     bottom: 50px;
   }
+
+  @include breakpoint(desktop-lg) {
+    bottom: calc(1.5% + 50px);
+  }
 }
 
 .column-2 .home-headline .c-image-component .image-component-image .c-tease-icon {
@@ -141,6 +173,7 @@
   }
 }
 
+.column-1 .c-homeList .c-image-component .image-component-image .c-tease-icon,
 .column-3 .c-homeList .c-image-component .image-component-image .c-tease-icon {
   right: 8px;
   bottom: 12px;
@@ -152,7 +185,6 @@
     height: 52%;
     top: 0;
     left: 0;
-    transform: translate(9px, 10px);
   }
 
   @include breakpoint(tablet) {
@@ -162,8 +194,6 @@
     .tease-icon {
       width: 52%;
       height: 52%;
-      top: 29%;
-      left: 22%;
       transform: none;
     }
   }
@@ -177,8 +207,23 @@
       height: 52%;
       top: 0;
       left: 0;
-      transform: translate(9px, 10px);
     }
+  }
+}
+
+.left-photo-display-class .column-3 .c-homeList .c-image-component .image-component-image .c-tease-icon {
+  @include breakpoint(desktop-sm) {
+    height: 60%;
+    width: 35%;
+    max-width: 35px;
+    max-height: 35px;
+    right: 4px;
+    bottom: 8px;
+  }
+
+  @include breakpoint(desktop-lg) {
+    max-width: 40px;
+    max-height: 40px;
   }
 }
 
