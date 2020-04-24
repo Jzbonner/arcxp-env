@@ -57,7 +57,7 @@ const ListItem = ({
       )}
       <div className="homeList-text">
         <div className="c-label-wrapper">
-          <SectionLabel label={label} taxonomy={taxonomy} />
+          <SectionLabel label={label || {}} taxonomy={taxonomy} />
           <TimeStamp firstPublishDate={publishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} isTease={true} />
         </div>
         <div className={`headline ${isListPage}`}>
