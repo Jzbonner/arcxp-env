@@ -211,6 +211,17 @@
   }
 }
 
+.left-photo-display-class .column-3 .c-homeList .c-image-component .image-component-image .c-tease-icon {
+  @include breakpoint(desktop-sm) {
+    height: 60%;
+    width: 35%;
+    max-width: 35px;
+    max-height: 35px;
+    right: 4px;
+    bottom: 8px;
+  }
+}
+
 ///////////////
 // HERO specific styles for tease icons.
 ///////////////
