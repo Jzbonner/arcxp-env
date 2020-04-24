@@ -1,42 +1,31 @@
-import React from 'react';
-import getProperties from 'fusion:properties';
+/* eslint-disable no-console */
+import React, { useState } from 'react';
+
 import { useContent } from 'fusion:content';
-import LiveVideo from './liveVideo/liveVideo';
-import RenderBreakingNews from './renderBreakingNews/renderBreakingNews';
+import './default.scss';
 
 const BreakingNews = () => {
-  const { breakingNewsID } = getProperties();
+  const [isVisible, setVisibility] = useState(true);
+  const hideBar = () => {
+    setVisibility(false);
+  };
 
-  const breakingNewsData = useContent({
-    source: 'list',
-    query: { id: `${breakingNewsID}` },
+  const newsData = useContent({
+    source: 'breaking-news-video-alert',
   });
 
-  const storyID = breakingNewsData && breakingNewsData.data.document && breakingNewsData.data.document.content_elements[0]
-    ? breakingNewsData.data.document.content_elements[0].referent.id
-    : 'NYEMCXC2UFCG3D6KSMDOZJAFCM';
-  // Temporary default value of a story that is verified to exist
-  // Without this valid value, the Content API inside the below hook will throw an Error,
-  // even if '' is passed.This makes the component dismount.
-  // Enclosing the below hook in a conditional is not an option because React will throw an error
-  // if the same number of hooks don't run on every render
+  console.log('[Breaking News]:', newsData);
 
-  const storyData = useContent({
-    source: 'storyContent',
-    query: { id: `${storyID}` },
-  });
-
-  if (breakingNewsData && breakingNewsData.data.booked > 0) {
-    if (storyData) {
-      const breakingHeadline = storyData && storyData.headlines && storyData.headlines.basic;
-      const breakingURL = storyData && storyData.canonical_url;
-      const mainTitle = 'Breaking News';
-
-      return <RenderBreakingNews breakingHeadline={breakingHeadline} breakingURL={breakingURL} mainTitle={mainTitle} />;
-    }
-  }
-  if (breakingNewsData && breakingNewsData.data.booked === 0) {
-    return <LiveVideo />;
+  if (newsData) {
+    // const { name } = newsData;
+    return (
+      <div className={`c-breakingNews ${!isVisible ? 'is-hidden' : ''}`}>
+        <a href="" className="breakingURL" />
+        <span className="c-breakingNews-hide" onClick={hideBar} />
+        {/* <h2 className="c-breakingNews-heading">{name}</h2> */}
+        <h2 className="c-breakingNews-content">Headline</h2>
+      </div>
+    );
   }
   return null;
 };
