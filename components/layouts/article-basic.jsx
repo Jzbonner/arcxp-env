@@ -69,7 +69,8 @@ const StoryPageLayout = () => {
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
-  const ampMP03 = () => <AmpAd adSlot="MP03" uuid={uuid} width={'350'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
+  const ampMP02 = () => <AmpAd adSlot="MP02" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
+  const ampMP03 = () => <AmpAd adSlot="MP03" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
@@ -176,15 +177,12 @@ const StoryPageLayout = () => {
               <ArcAd staticSlot={'MP01'} />
             </div>
           )}
-          {!noAds && ampPage && (
-            <AmpAd adSlot="MP02" uuid={uuid} width={'350'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
-          )}
           <Section
             elements={filteredContentElements}
             startIndex={1}
             stopIndex={3}
             rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null}
-            insertedAds={!noAds && !ampPage ? [{ insertAfterParagraph: 2, adArray: [RP01StoryTablet, MP02] }] : null}
+            insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [RP01StoryTablet, MP02] : [ampMP02] }] : null}
             fullWidth={noAds}
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
             ampPage={ampPage}
@@ -224,7 +222,7 @@ const StoryPageLayout = () => {
               <TaboolaFeed type={type} ampPage={ampPage} />
           )}
           {!noAds && ampPage && (
-            <AmpAd adSlot="MSW01" uuid={uuid} width={'350'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
+            <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
         </article>
         {(!basicItems || promoType !== 'gallery') && !ampPage ? (

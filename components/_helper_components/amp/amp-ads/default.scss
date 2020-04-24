@@ -1,4 +1,15 @@
+@import "./../../../../src/styles/base/mixins";
+
 .ampAd {
-  display: flex;
-  justify-content: center;
+  display: none;
+
+  &:not([hidden]) {
+    position: relative;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    padding: 20px 0;
+
+    @include advertisement-label;
+  }
 }
