@@ -21,8 +21,9 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   return isEnabled && (
     <li className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`} data-mg2-action='register'>
       <img src={source} />
-      <div className='nav-itemText login-text'>Log in</div>
-      <div className={'section'} style={{ display: 'none' }}>
+      <div className='nav-itemText login-text is-profileAnon hidden'>Log in</div>
+      <div className='nav-itemText login-text is-profileAuthed hidden'>My Profile</div>
+      <div className={'section is-profileAuthed hidden'}>
         <div className={'section-item'}>
           <a href={`//myaccount.${clientCode}.com/${clientCode}/myprofile`}>
             <img src={source} />
@@ -47,7 +48,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
               <a href='#' data-mg2-action='activation'>Activate My Account</a>
             </li>
           </ul>
-          <a href='#' className='btn-logout' onClick='mg2Logout' data-mg2-action='logout'>Logout</a>
+          <a href='#' className='btn-logout nav-profileLogout' data-mg2-action='logout'>Logout</a>
         </div>
       </div>
     </li>
