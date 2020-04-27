@@ -460,11 +460,9 @@
 
   .nav-mobile-login {
     padding-bottom: 26px;
+  }
 
-    .hidden {
-      display: none;
-    }
-
+  .nav-login {
     @include breakpoint(desktop-sm) {
       display: flex;
       padding-bottom: 0;
@@ -472,7 +470,25 @@
       min-width: 150px;
 
       .section {
+        top: 7px;
+
+        .isSticky & {
+          top: -2px;
+        }
+      }
+
+      .section,
+      .section-item {
         min-width: 100%;
+
+        .login-text,
+        img {
+          display: inline;
+        }
+
+        .login-text {
+          line-height: 1.9;
+        }
 
         .subNav {
           right: 0;
@@ -483,6 +499,10 @@
           }
         }
       }
+    }
+
+    .hidden {
+      display: none;
     }
 
     .btn-logout {
@@ -513,14 +533,14 @@
       display: flex;
       font-weight: 800;
 
-      @include text-styles(.875rem, 1, "Gordita-Bold");
+      @include text-styles(.875rem, 3, "Gordita-Bold");
     }
 
     @include breakpoint(desktop-nav) {
       display: flex;
       font-weight: 800;
 
-      @include text-styles(1.125rem, 1, "Gordita-Bold");
+      @include text-styles(1.125rem, 3, "Gordita-Bold");
     }
   }
 

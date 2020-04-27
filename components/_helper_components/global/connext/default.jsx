@@ -58,6 +58,7 @@ const ConnextInit = () => {
           const elToShow = el;
           elToShow.style.display = 'block';
           elToShow.className = elToShow.className.replace('hidden', ' ');
+          console.error('connext, elToShow', elToShow);
         };
         const hideThisEl = (el) => {
           const elToHide = el;
@@ -65,6 +66,7 @@ const ConnextInit = () => {
           if (elToHide.className.indexOf('hidden') === -1) {
             elToHide.className += ' hidden';
           }
+          console.error('connext, elToHide', elToHide);
         };
         const toggleActivateLink = (showOrHide) => {
           if (showOrHide === 'show') {
