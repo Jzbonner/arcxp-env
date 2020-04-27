@@ -73,14 +73,17 @@ const Video = ({
     const [mp4Stream] = src.streams.filter(item => item.stream_type === 'mp4');
     const [webmStream] = src.streams.filter(item => item.stream_type === 'webm');
     const posterImage = get(src, 'promo_image.url');
+
+    const controls = {
+      controls: '',
+      width: '640',
+      height: '360',
+      layout: 'responsive',
+      poster: posterImage,
+    };
+
     if (mp4Stream || webmStream) {
-      return <amp-video
-        controls=""
-        autoplay={isLeadVideo}
-        width="640"
-        height="360"
-        layout="responsive"
-        poster={posterImage}>
+      return <amp-video {...controls}>
         {webmStream ? <source src={get(webmStream, 'url')} type="video/webm" /> : null}
         {mp4Stream ? <source src={get(mp4Stream, 'url')} type="video/mp4" /> : null}
       </amp-video>;
