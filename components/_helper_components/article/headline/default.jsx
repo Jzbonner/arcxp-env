@@ -36,7 +36,7 @@ const Headline = ({ basicItems = {}, headlines = {}, ampPage = false }) => {
         />
       )}
       {!ampPage && promoData.type === 'gallery' && promoData.content_elements && <Gallery promoItems={promoData} />}
-      {!ampPage && promoData.type === 'video' && (
+      {promoData.type === 'video' && (
         <Video isLeadVideo src={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules} maxTabletViewWidth={maxTabletViewWidth} />
       )}
     </div>

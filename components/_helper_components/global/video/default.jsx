@@ -76,15 +76,13 @@ const Video = ({
     if (mp4Stream || webmStream) {
       return <amp-video
         controls=""
+        autoplay={isLeadVideo}
         width="640"
         height="360"
         layout="responsive"
         poster={posterImage}>
         {webmStream ? <source src={get(webmStream, 'url')} type="video/webm" /> : null}
         {mp4Stream ? <source src={get(mp4Stream, 'url')} type="video/mp4" /> : null}
-        <div fallback>
-          <p>This browser does not support the video element.</p>
-        </div>
       </amp-video>;
     }
     return null;

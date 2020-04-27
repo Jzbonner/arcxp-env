@@ -19,6 +19,10 @@
   align-items: center;
 }
 
+.b-hidden {
+  display: none;
+}
+
 .b-pageContainer {
   width: calc(100% - 60px);
   margin: 0 auto;
@@ -111,17 +115,7 @@
     &:not(:empty) {
       display: block;
 
-      &:before {
-        content: "Advertisement";
-        position: absolute;
-        color: #313132;
-
-        @include text-styles(.75rem, 1, "Gordita");
-
-        font-weight: 500;
-        left: 50%;
-        transform: translate(-50%, -20px);
-      }
+      @include advertisement-label;
     }
   }
 }

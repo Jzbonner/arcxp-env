@@ -51,8 +51,8 @@ const ConnextInit = () => {
         const connextLoggedOut = new Event('connextLoggedOut');
         const connextIsSubscriber = new Event('connextIsSubscriber');
 
-        const loggedOutState = doc.querySelectorAll('.nav-auth__anon-user');
-        const loggedInState = doc.querySelectorAll('.nav-auth__authed-user');
+        const loggedOutState = doc.querySelectorAll('.is-profileAnon');
+        const loggedInState = doc.querySelectorAll('.is-profileAuthed');
         const activationLinks = doc.querySelectorAll('.MG2activation');
         const showThisEl = (el) => {
           const elToShow = el;
@@ -138,7 +138,7 @@ const ConnextInit = () => {
                   onDebugNote: (e) => { connextLogger('>> onDebugNote', e); },
                   onInit: (e) => {
                     connextLogger('>> onInit', e);
-                    doc.querySelectorAll('.js-auth-logout').forEach((el) => {
+                    doc.querySelectorAll('.nav-profileLogout').forEach((el) => {
                       el.addEventListener('click', mg2Logout);
                     });
                     doc.dispatchEvent(connextLoaded);

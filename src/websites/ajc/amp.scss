@@ -9,7 +9,9 @@ $is-amp: true;
 
 /* Import all component styles */
 // start components
+@import "./../../../components/_helper_components/amp/amp-ads/default";
 @import "./../../../components/_helper_components/article/byline/default.scss";
+@import "./../../../components//_helper_components/article/socialShare/amp.scss";
 @import "./../../../components/_helper_components/article/headline/style.scss";
 @import "./../../../components/_helper_components/article/section/styles.scss";
 @import "./../../../components/_helper_components/article/subheadline/style.scss";
