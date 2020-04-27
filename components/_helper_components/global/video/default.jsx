@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import get from 'lodash.get';
+import fetchEnv from '../utils/environment';
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import './default.scss';
@@ -15,7 +16,7 @@ const Video = ({
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
   const screenSize = checkWindowSize();
-  const { outputType } = fusionContext;
+  const { outputType, arcSite = 'ajc' } = fusionContext;
 
   let mainCredit;
   if (credits) {
@@ -60,14 +61,14 @@ const Video = ({
   };
 
   const rendePowaPlayer = () => <div
-      className="powa"
-      data-org="ajc"
-      data-api="sandbox"
-      data-env="sandbox"
-      data-aspect-ratio="0.5625"
-      data-uuid={videoID || videoPageId}
-      data-autoplay={startPlaying}
-      data-muted={muteON} />;
+    className="powa"
+    data-org={arcSite}
+    data-api="sandbox"
+    data-env={fetchEnv()}
+    data-aspect-ratio="0.5625"
+    data-uuid={videoID || videoPageId}
+    data-autoplay={startPlaying}
+    data-muted={muteON} />;
 
   const renderAmpPlayer = () => {
     const [mp4Stream] = src.streams.filter(item => item.stream_type === 'mp4');
