@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { CONTENT_BASE } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import axios from 'axios';
