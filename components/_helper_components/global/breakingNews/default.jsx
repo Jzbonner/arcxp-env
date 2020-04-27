@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-
 import { useContent } from 'fusion:content';
 import './default.scss';
 
@@ -14,16 +13,15 @@ const BreakingNews = () => {
     source: 'breaking-news-video-alert',
   });
 
-  console.log('[Breaking News]:', newsData);
+  const { url, headline, typeOfHeadline } = newsData || {};
 
-  if (newsData) {
-    // const { name } = newsData;
+  if (url && headline && typeOfHeadline) {
     return (
       <div className={`c-breakingNews ${!isVisible ? 'is-hidden' : ''}`}>
-        <a href="" className="breakingURL" />
+        <a href={url} className="breakingURL" />
         <span className="c-breakingNews-hide" onClick={hideBar} />
-        {/* <h2 className="c-breakingNews-heading">{name}</h2> */}
-        <h2 className="c-breakingNews-content">Headline</h2>
+        <h2 className="c-breakingNews-heading">{headline}</h2>
+        <h2 className="c-breakingNews-content">{typeOfHeadline}</h2>
       </div>
     );
   }

@@ -10,39 +10,60 @@ const params = {
 
 const { breakingNewsID, breakingLiveVideoID } = getProperties();
 
-const fetch = () => {
-  if (breakingNewsID && breakingLiveVideoID) {
-    const url = `${CONTENT_BASE}/websked/collections/v1/collections/${breakingNewsID}`;
-    return axios
-      .get(url)
-      .then(({ data }) => {
-        if (data.data && data.data.booked && data.data.booked > 0) {
-          const storyID = data.data
-            && data.data.document
-            && data.data.document.content_elements
-            && data.data.document.content_elements[0]
-            && data.data.document.content_elements[0].referent;
+const getStoryData = (data) => {
+  const storyID = data.data
+    && data.data.document
+    && data.data.document.content_elements
+    && data.data.document.content_elements[0]
+    && data.data.document.content_elements[0].referent
+    && data.data.document.content_elements[0].referent.id;
 
-          return storyID._id;
-        }
-        return data;
+  if (storyID) {
+    const storyURL = `${CONTENT_BASE}/content/v4/?website=ajc&_id=${storyID}`;
+    return axios
+      .get(storyURL)
+      .then(({ data: storyData }) => {
+        const {
+          canonical_url: url = '',
+          headlines: { basic: headline = {} },
+        } = storyData;
+        return { url, headline };
       })
       .catch((error) => {
-        if (error.response) {
-          // Request made and server responded
-          // console.log(error.response.data);
-          // console.log(error.response.status);
-          // console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          // console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          // console.log('Error', error.message);
-        }
+        console.error(error);
       });
   }
-  return null;
+  return {};
+};
+
+const fetch = () => {
+  if (breakingNewsID && breakingLiveVideoID) {
+    const urlBreaking = `${CONTENT_BASE}/websked/collections/v1/collections/${breakingNewsID}`;
+    return axios
+      .get(urlBreaking)
+      .then(({ data: breakingData }) => ({ breakingData, numOfBreakingStories: breakingData.data && breakingData.data.booked }))
+      .then(({ breakingData, numOfBreakingStories }) => {
+        if (numOfBreakingStories > 0) {
+          const typeOfHeadline = 'Breaking News';
+          return getStoryData(breakingData).then(data => ({ ...data, typeOfHeadline }));
+        }
+        if (numOfBreakingStories === 0) {
+          const urlLiveVideo = `${CONTENT_BASE}/websked/collections/v1/collections/${breakingLiveVideoID}`;
+          return axios.get(urlLiveVideo).then(({ data: videoData }) => {
+            if (videoData.data && videoData.data.booked && videoData.data.booked > 0) {
+              const typeOfHeadline = 'Video News';
+              return getStoryData(videoData).then(data => ({ ...data, typeOfHeadline }));
+            }
+            return {};
+          });
+        }
+        return {};
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  return {};
 };
 
 export default {
