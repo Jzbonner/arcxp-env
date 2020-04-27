@@ -9,7 +9,7 @@ const params = {
   id: 'text',
 };
 
-const { breakingNewsID, breakingLiveVideoID } = getProperties();
+const { breakingNewsID, breakingLiveVideoID, sites } = getProperties();
 
 const getStoryData = (data) => {
   const storyID = data.data
@@ -20,7 +20,7 @@ const getStoryData = (data) => {
     && data.data.document.content_elements[0].referent.id;
 
   if (storyID) {
-    const storyURL = `${CONTENT_BASE}/content/v4/?website=ajc&_id=${storyID}`;
+    const storyURL = `${CONTENT_BASE}/content/v4/?website=${sites[0]}&_id=${storyID}`;
     return axios
       .get(storyURL)
       .then(({ data: storyData }) => {
