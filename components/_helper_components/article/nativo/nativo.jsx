@@ -11,11 +11,10 @@ const Nativo = ({
       return (
         <amp-ad
           type="nativo"
-          width="300"
-          height="300"
-          layout="fixed"
-          data-loading-strategy="1.25"
-          data-request-url={`https://amp.ajc.com/amp/nativo-${controllerClass === 'story-nativo_placeholder--moap' ? 'moap' : 'boap'}`}
+          width="400"
+          height="350"
+          layout="responsive"
+          data-request-url={`https://amp.ajc.com/amp/ntv-${controllerClass === 'story-nativo_placeholder--moap' ? 'moap' : 'boap'}`}
         ></amp-ad>
       );
     }
