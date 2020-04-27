@@ -17,7 +17,7 @@ const Nativo = ({
           width="400"
           height="350"
           layout="responsive"
-          data-request-url={`https://amp.${sites}.com/amp/ntv-${controllerClass === 'story-nativo_placeholder--moap' ? 'moap' : 'boap'}`}
+          data-request-url={`https://amp.${sites[0]}.com/amp/ntv-${controllerClass === 'story-nativo_placeholder--moap' ? 'moap' : 'boap'}`}
         ></amp-ad>
       );
     }
