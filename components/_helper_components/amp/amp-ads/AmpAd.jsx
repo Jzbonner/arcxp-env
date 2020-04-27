@@ -5,7 +5,7 @@ import { ENVIRONMENT } from 'fusion:environment';
 import buildJsonObject from './_helper_functions/buildJsonObject';
 
 export const AmpAd = ({
-  adSlot = '', uuid = '', width = '', height = '', taxonomy,
+  adSlot = '', uuid = '', width = '', height = '', taxonomy, multiSize, multiSizeValidation,
 }) => {
   const { dfp_id: dfpid } = getProperties();
   if (!dfpid) return null;
@@ -33,6 +33,8 @@ export const AmpAd = ({
       data-slot={dataSlot}
       json={jsonObject}
       class="ampAd"
+      data-multi-size={multiSize}
+      data-multi-size-validation={multiSizeValidation}
     >
     </amp-ad>
   );
@@ -44,6 +46,8 @@ AmpAd.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   taxonomy: PropTypes.object,
+  multiSize: PropTypes.string,
+  multiSizeValidation: PropTypes.string,
 };
 
 export default AmpAd;
