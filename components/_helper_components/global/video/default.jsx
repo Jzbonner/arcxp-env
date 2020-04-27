@@ -76,7 +76,6 @@ const Video = ({
     if (mp4Stream || webmStream) {
       return <amp-video
         controls=""
-        autoplay=""
         width="640"
         height="360"
         layout="responsive"
