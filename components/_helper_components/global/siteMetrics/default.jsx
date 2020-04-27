@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import { connext, ENVIRONMENT } from 'fusion:environment';
+import { connext } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import checkPageType from '../../../layouts/_helper_functions/getPageType.js';
 import { formatTime, formatDate } from '../../article/timestamp/_helper_functions/computeTimeStamp';
@@ -42,9 +42,6 @@ const SiteMetrics = () => {
     referent: primarySectionReference,
   } = section || {};
 
-  const currentEnv = ENVIRONMENT || 'unknown';
-  const isNotProd = currentEnv.toLowerCase().indexOf('prod') === -1;
-
   const topics = [];
   if (tags) {
     tags.forEach(tag => tag && tag.text && topics.push(tag.text));
@@ -58,18 +55,15 @@ const SiteMetrics = () => {
   const pageType = checkPageType(type, layout);
   const {
     isHomeOrSectionPage,
-    isNonContentPage,
     isHome,
     isSection,
     type: typeOfPage,
   } = pageType || {};
-  let pageContentType = type;
+  let pageContentType = typeOfPage === 'story' ? 'article' : typeOfPage;
   if (isHome) {
     pageContentType = 'homepage';
   } else if (isSection) {
     pageContentType = 'section front';
-  } else {
-    pageContentType = typeOfPage;
   }
 
   let topSection = '';
@@ -128,31 +122,19 @@ const SiteMetrics = () => {
     firstPublishDateConverted = `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}${time.indexOf('1') !== 0 ? '0' : ''}${time.replace(/:/g, '').replace(/\s[A|P]M/g, '')}`;
   }
 
-  const dtmLibraryJs = metrics && metrics.dtmLibraryURL ? `${metrics.dtmLibraryURL}${isNotProd ? '-staging' : ''}.js` : '';
-
   return (
     <script type='text/javascript' dangerouslySetInnerHTML={{
-      __html: `var DDO = DDO || {};
-        DDO.DTMLibraryURL = '${dtmLibraryJs}';
-        DDO.hasLocalStorage = () => {
-          const isDefined = typeof(localStorage) != 'undefined';
-          if (isDefined) {
-            localStorage.setItem('test', 'test');
-            canRetrieve = localStorage.getItem('test') == 'test';
-          }
-          localStorage.removeItem('test');
-          return isDefined && canRetrieve;
-        }
-        DDO.connextActive = '${connext && connext.isEnabled ? connext.isEnabled : 'false'}';
-        DDO.pageData = {
-          'pageName': '${isNonContentPage ? 'website' : 'article'}',
+      __html: `var dataLayer = dataLayer || {};
+        dataLayer.connextActive = '${connext && connext.isEnabled ? connext.isEnabled : 'false'}';
+        dataLayer.pageData = {
+          'pageName': '${requestUri}',
           'pageSiteSection': '${topSection}',
           'pageCategory': '${secondarySection}',
           'pageSubCategory': '${tertiarySection}',
           'pageContentType': '${pageContentType}',
           'pageTitle': '${title.replace('\'', '"')}'
         };
-        DDO.siteData = {
+        dataLayer.siteData = {
           'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
           'siteDomain': '${siteDomainURL || `${site}.com`}',
           'siteVersion': 'responsive site',
@@ -162,7 +144,7 @@ const SiteMetrics = () => {
           'siteType': 'free',
           'siteCMS': 'arc'
         };
-        DDO.contentData = {
+        dataLayer.contentData = {
           'contentTopics': '${topics.join()}',
           'contentByline': '${authors.join()}',
           'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
@@ -170,6 +152,12 @@ const SiteMetrics = () => {
           'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
           'contentPublishDate': '${firstPublishDateConverted}',
           'blogName': '${type === 'blog' ? secondarySection : ''}'
+        };
+        dataLayer.userData = {
+          'userStatus': '<string>',
+          'userProfileID': '<string>',
+          'userType': '<string>',
+          'userActive': '<string>'
         };
       `,
     }}></script>
