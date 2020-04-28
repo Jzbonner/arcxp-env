@@ -1,21 +1,23 @@
 import React from 'react';
 import './styles.scss';
 import PropTypes from 'prop-types';
+import getProperties from 'fusion:properties';
 import { paragraphCounter } from '../../../layouts/_helper_functions/Paragraph';
 
 const Nativo = ({
   elements = [], displayIfAtLeastXParagraphs, controllerClass, ampPage,
 }) => {
+  const { sites } = getProperties();
+
   if (paragraphCounter(elements) >= displayIfAtLeastXParagraphs || controllerClass === 'story-nativo_placeholder--boap') {
     if (ampPage) {
       return (
         <amp-ad
           type="nativo"
-          width="300"
-          height="300"
-          layout="fixed"
-          data-loading-strategy="1.25"
-          data-request-url={`https://amp.ajc.com/amp/nativo-${controllerClass === 'story-nativo_placeholder--moap' ? 'moap' : 'boap'}`}
+          width="400"
+          height="350"
+          layout="responsive"
+          data-request-url={`https://amp.${sites[0]}.com/amp/ntv-${controllerClass === 'story-nativo_placeholder--moap' ? 'moap' : 'boap'}`}
         ></amp-ad>
       );
     }
