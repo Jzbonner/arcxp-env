@@ -69,16 +69,14 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
             // return <Table src={element} key={`Table-${i}`} />;
             return null;
           case 'video':
-            if (ampPage) return null;
-            return (
-              <Video
+            // if (ampPage) return null;
+            return <Video
                 src={element}
                 isInlineVideo
                 maxTabletViewWidth={maxTabletViewWidth}
                 inlineVideoPlayerRules={inlineVideoPlayerRules}
                 key={`Video-${i}`}
-              />
-            );
+              />;
           default:
             if (
               element.props
