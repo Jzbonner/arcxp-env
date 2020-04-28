@@ -469,25 +469,23 @@
       margin-left: 20px;
       min-width: 150px;
 
-      .section {
-        top: 7px;
+      a {
+        color: #2e81b7;
+      }
 
-        .isSticky & {
-          top: -2px;
-        }
+      .section-item {
+        height: 54px;
       }
 
       .section,
       .section-item {
         min-width: 100%;
+        box-sizing: border-box;
 
         .login-text,
         img {
-          display: inline;
-        }
-
-        .login-text {
-          line-height: 1.9;
+          display: inline-block;
+          vertical-align: middle;
         }
 
         .subNav {
