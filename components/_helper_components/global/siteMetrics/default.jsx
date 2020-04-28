@@ -124,6 +124,7 @@ const SiteMetrics = () => {
           'pageName': '${requestUri}',
           'pageURL': '${siteDomainURL || `https://${site}.com`}${canonicalUrl || requestUri}',
           'pageSiteSection': '${topSection}',
+          'pageMainSection': '${topSection}',
           'pageCategory': '${secondarySection}',
           'pageContentType': '${pageContentType}',
           'pageTitle': '${title.replace('\'', '"')}'
