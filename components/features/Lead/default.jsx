@@ -54,7 +54,7 @@ const Lead = (customFields = {}) => {
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex, 3);
       case '1 or 2 Item Feature':
-        return [...Array(columns).keys()].map(i => <Headline key={i} {...apiData[startIndex - 1 + i]} />);
+        return [...Array(parseInt(columns, 10)).keys()].map(i => <Headline key={i} {...apiData[startIndex - 1 + i]} />);
       default:
         return null;
     }
