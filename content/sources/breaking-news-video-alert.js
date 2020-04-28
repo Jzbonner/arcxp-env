@@ -58,6 +58,9 @@ const fetch = () => {
             return {};
           });
         }
+        // If the the useContent hook receives a falsy value from  a content source, it uses the most recent data in its cache.
+        // So for when both the breaking new and video alert collections are empty,
+        // the content source returns an empty object instead of null
         return {};
       })
       .catch((error) => {
