@@ -44,7 +44,7 @@ const Headline = ({
   }
 
   return (
-    <div className="home-headline">
+    <div className={`home-headline ${type === 'video' || type === 'content' ? 'with-icon' : ''}`}>
       <a href={`${contextPath}${relativeURL}`}>{promoItems && getPromoItem(promoItems, type)}</a>
       <div className="headline-box">
         <SectionLabel label={label} taxonomy={taxonomy} />

@@ -90,7 +90,7 @@ const StoryPageLayout = () => {
   const noAds = checkTags(tags, 'no-ads');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
 
-  console.log(taxonomy);
+  console.log(taxonomy ? 'taxonomy exists' : 'no tax');
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
@@ -233,9 +233,9 @@ const StoryPageLayout = () => {
           <Gallery contentElements={filteredContentElements} pageType={subtype} />
         ) : null}
       </main>
+      <Carousel taxonomy={taxonomy} ampPage={ampPage} />
       {!ampPage && <Footer />}
       <Copyright />
-      {ampPage && <Carousel data={taxonomy} />}
     </>
   );
 };
