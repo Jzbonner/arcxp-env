@@ -7,7 +7,7 @@ import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
 
 const Image = ({
-  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage,
+  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage = false,
 }) => {
   const {
     url, height: originalHeight, width: originalWidth, caption, credits,
@@ -84,6 +84,6 @@ Image.propTypes = {
   maxTabletViewWidth: PropTypes.number,
   teaseContentType: PropTypes.string,
   canonicalUrl: PropTypes.string,
-  ampPage: PropTypes.bool.isRequired,
+  ampPage: PropTypes.bool,
 };
 export default Image;
