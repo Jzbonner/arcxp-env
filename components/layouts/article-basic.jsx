@@ -47,8 +47,6 @@ const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent, requestUri } = appContext;
 
-  console.log('GLOBAL', globalContent);
-
   if (!globalContent) return null;
   const {
     _id: uuid,
@@ -134,7 +132,7 @@ const StoryPageLayout = () => {
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
-            <SponsorBanner />
+            <SponsorBanner taxonomy={taxonomy}/>
             <Headline headlines={headlines} basicItems={basicItems} ampPage={ampPage} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
