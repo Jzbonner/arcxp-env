@@ -9,7 +9,7 @@ const SponsorBanner = ({ taxonomy }) => {
   const { minTabletViewWidth } = getProperties();
   const [currentWidth, setWidth] = useState();
   let sponsorSection;
-  let sponsorSectionName;
+  let sponsorSectionName = null;
 
   useEffect(() => {
     const width = window.innerWidth;
@@ -18,8 +18,12 @@ const SponsorBanner = ({ taxonomy }) => {
 
   if (articleSections) {
     sponsorSection = articleSections.filter(section => section.path.includes('/sponsor/'));
-    sponsorSectionName = sponsorSection ? sponsorSection[0].path : '';
+    sponsorSectionName = sponsorSection ? sponsorSection[0].path : null;
   }
+  if (!sponsorSectionName) {
+    return null;
+  }
+
   const data = useContent({
     source: 'site-api',
     query: { section: `${sponsorSectionName}` },
