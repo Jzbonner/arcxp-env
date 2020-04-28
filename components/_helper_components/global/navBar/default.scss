@@ -104,7 +104,7 @@
 
     .nav-mobile-login {
 
-      .login-text {
+      .login-text:not(.hidden) {
         display: flex;
         color: #fff;
         padding-left: 15px;
@@ -233,7 +233,10 @@
       }
 
       @include breakpoint(desktop-sm) {
-        cursor: none;
+
+        &:not(.nav-login) {
+          cursor: none;
+        }
       }
 
       .section {
@@ -460,14 +463,22 @@
 
   .nav-mobile-login {
     padding-bottom: 26px;
+
+    @include breakpoint(desktop-sm) {
+      padding-bottom: 0;
+    }
   }
 
   .nav-login {
     @include breakpoint(desktop-sm) {
       display: flex;
+      padding-top: 0;
       padding-bottom: 0;
       margin-left: 20px;
+      margin-bottom: 0;
+      margin-top: 11px;
       min-width: 150px;
+      height: 54px;
 
       a {
         color: #2e81b7;
@@ -481,6 +492,9 @@
       .section-item {
         min-width: 100%;
         box-sizing: border-box;
+      }
+
+      .section {
 
         .login-text,
         img {
@@ -491,6 +505,7 @@
         .subNav {
           right: 0;
           border-radius: 6px 0 6px 6px;
+          top: 52px;
 
           &-flyout {
             height: auto;
