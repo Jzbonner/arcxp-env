@@ -14,7 +14,7 @@ const SponsorBanner = ({ taxonomy }) => {
   useEffect(() => {
     const width = window.innerWidth;
     setWidth(width);
-  });
+  }, []);
 
   if (articleSections) {
     sponsorSection = articleSections.filter(section => section.path.includes('/sponsor/'));
