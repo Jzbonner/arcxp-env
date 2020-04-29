@@ -514,10 +514,6 @@
       }
     }
 
-    .hidden {
-      display: none;
-    }
-
     .btn-logout {
       height: auto;
       width: 100%;
@@ -531,6 +527,22 @@
       display: inline-block;
 
       @include text-styles(.875rem, 1, "Gordita-Bold");
+    }
+
+    /* various user state display styles */
+
+    body:not(.is-loggedIn):not(.is-loggedOut) & {
+
+      .is-profileAnon,
+      .is-profileAuthed {
+        display: none;
+      }
+    }
+
+    body.is-loggedIn & .is-profileAnon,
+    body.is-loggedOut & .is-profileAuthed,
+    body.is-authenticated & .MG2activation {
+      display: none;
     }
   }
 
