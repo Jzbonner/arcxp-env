@@ -6,43 +6,47 @@ $breakpoint: (
   desktop-nav: 1340px
 ) !default;
 
+$is-amp: false !default;
+
 @mixin breakpoint($point) {
-  /* Equal or greater than 768px */
-  @if $point == tablet {
-    /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, tablet)) {
-      @content;
+  @if $is-amp == false {
+    /* Equal or greater than 768px */
+    @if $point == tablet {
+      /* stylelint-disable-next-line */
+      @media only screen and (min-width: map-get($breakpoint, tablet)) {
+        @content;
+      }
     }
-  }
 
-  /* Equal or greater than 1024px */
-  @if $point == desktop-sm {
-    /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, desktop-sm)) {
-      @content;
+    /* Equal or greater than 1024px */
+    @if $point == desktop-sm {
+      /* stylelint-disable-next-line */
+      @media only screen and (min-width: map-get($breakpoint, desktop-sm)) {
+        @content;
+      }
     }
-  }
 
-  /* Equal or greater than 1280px */
-  @if $point == desktop-lg {
-    /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, desktop-lg)) {
-      @content;
+    /* Equal or greater than 1280px */
+    @if $point == desktop-lg {
+      /* stylelint-disable-next-line */
+      @media only screen and (min-width: map-get($breakpoint, desktop-lg)) {
+        @content;
+      }
     }
-  }
 
-  /* Equal or greater than 1340px */
-  @if $point == desktop-nav {
-    /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, desktop-nav)) {
-      @content;
+    /* Equal or greater than 1340px */
+    @if $point == desktop-nav {
+      /* stylelint-disable-next-line */
+      @media only screen and (min-width: map-get($breakpoint, desktop-nav)) {
+        @content;
+      }
     }
   }
 }
 
 @mixin between-breakpoints($pointA, $pointB) {
   /* stylelint-disable-next-line */
-  @media only screen and (min-width: map-get($breakpoint, $pointA)) and (max-width: map-get($breakpoint, $pointB)) {
+  @media only screen and (min-width: map-get($breakpoint, $pointA)) and (max-width: map-get($breakpoint, $pointB) - 1) {
     @content;
   }
 }

@@ -4,12 +4,15 @@ const findAPMonth = (month = 12) => {
   return months[month];
 };
 
-const formatTime = (date) => {
+const formatTime = (date, showSeconds = false) => {
   const dateOptions = {
     timeZone: 'America/New_York',
     hour: 'numeric',
     minute: 'numeric',
   };
+  if (showSeconds) {
+    dateOptions.second = 'numeric';
+  }
   return new Intl.DateTimeFormat('en-US', dateOptions).format(date);
 };
 
@@ -73,9 +76,9 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
 
   if (articleType === 'tease') {
     if (hours >= 24) return null;
-    if (hours > 1 && hours < 24) {
+    if (hours >= 1 && hours < 24) {
       timeStamp = `| ${hours}h ago`;
-    } else if (minutes > -1) {
+    } else if (hours < 1 && minutes > -1) {
       timeStamp = `| ${minutes}m ago`;
     } else {
       return null;
@@ -86,3 +89,4 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
 };
 
 export default computeTimeStamp;
+export { formatTime, formatDate };

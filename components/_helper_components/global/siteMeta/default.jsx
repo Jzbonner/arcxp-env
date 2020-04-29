@@ -2,6 +2,7 @@ import React from 'react';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
+import checkPageType from '../../../layouts/_helper_functions/getPageType.js';
 
 const SiteMeta = () => {
   const appContext = useAppContext();
@@ -9,35 +10,67 @@ const SiteMeta = () => {
     globalContent,
     deployment,
     contextPath,
+    layout,
+    requestUri,
+    metaValue,
   } = appContext;
   const {
-    headlines, description, canonical_url: canonicalURL, type,
+    headlines,
+    description,
+    canonical_url: canonicalURL,
+    type,
+    data: contentData,
   } = globalContent || {};
-
   const { siteName } = getProperties();
-  const homeAndSection = type === ('home' || 'section' || 'page');
-  const site = siteName.toLowerCase();
+  let uri = requestUri;
+  if (!canonicalURL) {
+    // only jump through these hoops if canonical_url is undefined (i.e. pagebuilder pages)
+    if (uri.indexOf('?')) {
+      uri = uri.substring(0, uri.indexOf('?'));
+    } else if (uri.indexOf('#')) {
+      uri = uri.substring(0, uri.indexOf('#'));
+    }
+  }
+  const url = canonicalURL || uri;
+  const pageType = checkPageType(type, layout);
+  const { isNonContentPage } = pageType || {};
   const thumbnailImage = renderImage();
-  const title = headlines ? headlines.basic : siteName;
-  const desc = description ? description.basic : '';
+  let site = siteName ? siteName.toLowerCase() : '';
+  let title = headlines ? headlines.basic : metaValue('title') || siteName;
+  let desc = description ? description.basic : metaValue('description') || '';
+  if (contentData) {
+    // it's a list or list-type page, let's re-set some values
+    const {
+      name,
+      canonical_website: canonicalSite,
+      description: contentDesc,
+    } = contentData || {};
+    title = name;
+    if (contentDesc) {
+      desc = contentDesc;
+    }
+    site = canonicalSite;
+  }
 
   return (
     <>
       <link rel="apple-touch-icon" href={deployment(`${contextPath}/resources/images/favicon-apple-touch-icon.png`)} />
       <link rel="shortcut icon" href={deployment(`${contextPath}/resources/images/favicon.ico`)} />
-      <link rel="canonical" href={`${type === 'home' ? '/' : canonicalURL}`} />
+      <link rel="canonical" href={url} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={desc} />
       <meta name="twitter:image" content={thumbnailImage} />
       <meta name="twitter:site" content={`@${site}`} />
       <meta name="twitter:title" content={title} />
-      <meta name="twitter:url" content={`${type === 'home' ? '/' : canonicalURL}`} />
+      <meta name="twitter:url" content={url} />
       <meta property="og:image" content={thumbnailImage} />
-      <meta property="og:image:height" content={`${homeAndSection || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '630'}`} />
-      <meta property="og:image:width" content={`${homeAndSection || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '1200'}`} />
+      <meta property="og:image:height" content={`${isNonContentPage
+          || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '630'}`} />
+      <meta property="og:image:width" content={`${isNonContentPage
+          || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '1200'}`} />
       <meta property="og:title" content={title} />
-      <meta property="og:type" content={`${homeAndSection ? 'website' : 'article'}`} />
-      <meta property="og:url" content={`${type === 'home' ? '/' : canonicalURL}`} />
+      <meta property="og:type" content={`${isNonContentPage ? 'website' : 'article'}`} />
+      <meta property="og:url" content={url} />
       <meta property="og:description" content={desc} />
       <meta property="og:site_name" content={siteName} />
       <title>{title}</title>

@@ -85,7 +85,6 @@ export function BaseMarkup({ canonicalUrl }) {
         name="viewport"
         content="width=device-width,minimum-scale=1,initial-scale=1"
       />
-      <script async src="https://cdn.ampproject.org/v0.js" />
       <link rel="canonical" href={canonicalUrl} />
       <AmpBoilerplateStyle />
       <AmpNoScript />

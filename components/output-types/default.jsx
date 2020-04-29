@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { fbPagesId, connext } from 'fusion:environment';
 import SiteMeta from '../_helper_components/global/siteMeta/default';
+import SiteMetrics from '../_helper_components/global/siteMetrics/default';
 import ConnextInit from '../_helper_components/global/connext/default.jsx';
 import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
 import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
@@ -19,18 +20,31 @@ const DefaultOutputType = (props) => {
     Fusion,
     globalContent,
     hyperlocalTags = getProperties().hyperlocalTags,
+    metrics = getProperties().metrics,
     Libs,
     MetaTags,
   } = props;
-  const { isEnabled = false, clientCode, environment } = connext;
+  const { isEnabled = false, clientCode, environment: connextEnv } = connext;
   const { type, taxonomy } = globalContent || { type: null };
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
+  const includeGtm = metrics && metrics.gtmContainerKey;
 
   return (
     <html>
       <head>
+        {includeGtm && (
+          <>
+            <SiteMetrics />
+            {/* Google Tag Manager */}
+            <script type='text/javascript' dangerouslySetInnerHTML={{
+              /* eslint-disable-next-line max-len */
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${metrics.gtmContainerKey}');`,
+            }}></script>
+            {/* End Google Tag Manager */}
+          </>
+        )}
         <MetaTags />
         <SiteMeta />
         <Libs />
@@ -43,17 +57,25 @@ const DefaultOutputType = (props) => {
         <meta property="fb:pages" content={fbPagesId} />
       </head>
       <body>
+        {includeGtm && (
+          /* Google Tag Manager (noscript) */
+          <noscript dangerouslySetInnerHTML={{
+            /* eslint-disable-next-line max-len */
+            __html: `<iframe src='https://www.googletagmanager.com/ns.html?id=${metrics.gtmContainerKey}' height='0' width='0' style='display:none;visibility:hidden'></iframe>`,
+          }}></noscript>
+          /* End Google Tag Manager (noscript) */
+        )}
         <div id="fusion-app">{children}</div>
         <Fusion />
         {!isHyperlocalContent && type && <TaboolaFooter type={type} />}
         {isEnabled && (
           <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${environment}/${clientCode}/loader.min.js`}></script>
+            <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${connextEnv}/${clientCode}/loader.min.js`}></script>
             <ConnextInit />
           </>
         )}
-         <div id="fb-root"></div>
+        <div id="fb-root"></div>
         <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
       </body>
     </html>
@@ -69,6 +91,7 @@ DefaultOutputType.propTypes = {
   Fusion: PropTypes.func,
   globalContent: PropTypes.object,
   hyperlocalTags: PropTypes.object,
+  metrics: PropTypes.object,
   Libs: PropTypes.array,
   MetaTags: PropTypes.object,
 };

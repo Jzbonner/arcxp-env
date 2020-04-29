@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Image from '../../global/image/default.jsx';
 import './styles.scss';
 
-const BlogAuthor = ({ subtype, authorData }) => {
+const BlogAuthor = ({ subtype, authorData, ampPage }) => {
   if (subtype === 'Blog' && authorData.length > 0) {
     return (
       <div className="c-blogAuthor b-margin-bottom-d40-m20">
@@ -13,7 +14,7 @@ const BlogAuthor = ({ subtype, authorData }) => {
               <div className="b-flexRow blog-author-content-heading">
                 {val.image && val.image.url && (
                   <div className="content-profileImage">
-                    <img src={val.image.url} alt={`${val.name}'s Profile Picture`} />
+                    <Image src={val.image} ampPage={ampPage} imageType="isInlineImage" width={150} height={150} />
                   </div>
                 )}
                 <p className="content-authorName">{val.name}</p>
@@ -49,6 +50,7 @@ BlogAuthor.defaultProps = {
 BlogAuthor.propTypes = {
   subtype: PropTypes.string,
   authorData: PropTypes.array,
+  ampPage: PropTypes.bool,
 };
 
 export default BlogAuthor;

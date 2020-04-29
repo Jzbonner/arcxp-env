@@ -160,3 +160,31 @@
   -webkit-position: sticky;
   position: sticky;
 }
+
+// /* Amp */
+@mixin amp-exclude {
+  @if $is-amp == false {
+    @content;
+  }
+}
+
+@mixin amp-only {
+  @if $is-amp == true {
+    @content;
+  }
+}
+
+@mixin advertisement-label {
+
+  &:before {
+    content: "Advertisement";
+    position: absolute;
+    color: #313132;
+
+    @include text-styles(.75rem, 1, "Gordita");
+
+    font-weight: 500;
+    left: 50%;
+    transform: translate(-50%, -20px);
+  }
+}

@@ -4,11 +4,14 @@ import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import getTeaseIcon from './_helper_functions/getTeaseIcon';
 
 const Image = ({
-  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth,
+  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage = false,
 }) => {
-  const { url, caption, credits } = src || {};
+  const {
+    url, height: originalHeight, width: originalWidth, caption, credits,
+  } = src || {};
   const [imageSrc, setImageSrc] = useState('');
   const imageALT = caption && caption.length > 1 ? caption : 'story page inline image';
 
@@ -37,6 +40,7 @@ const Image = ({
       (imageType === 'isLeadImage' && !giveCredit && !caption)
       || (imageType === 'isInlineImage' && !caption)
       || (imageType === 'isLeadImage' && giveCredit && !caption && screenSize.width > maxTabletViewWidth)
+      || teaseContentType
     ) {
       return null;
     }
@@ -47,9 +51,23 @@ const Image = ({
   };
 
   return (
-    <div className={`c-image-component ${imageMarginBottom}`}>
+    <div className={`c-image-component ${imageMarginBottom || ''}`}>
       <div className="image-component-image">
-        <img src={imageSrc} alt={imageALT} />
+        <>
+          {!ampPage ? (
+            <img src={imageSrc} alt={imageALT} className={teaseContentType ? 'tease-image' : ''} />
+          ) : (
+            <amp-img
+              src={imageResizer(url, width, height)}
+              alt={imageALT}
+              width={width}
+              height={height !== 0 ? height : (width / originalWidth) * originalHeight}
+              layout="responsive"
+              class={teaseContentType ? 'tease-image' : ''}
+            />
+          )}
+          {teaseContentType && getTeaseIcon(teaseContentType, url)}
+        </>
         {imageType !== 'isHomepageImage' && renderCaption()}
       </div>
       {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
@@ -62,7 +80,10 @@ Image.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   imageMarginBottom: PropTypes.string,
-  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage']),
+  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage']).isRequired,
   maxTabletViewWidth: PropTypes.number,
+  teaseContentType: PropTypes.string,
+  canonicalUrl: PropTypes.string,
+  ampPage: PropTypes.bool,
 };
 export default Image;

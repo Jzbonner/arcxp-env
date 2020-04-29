@@ -5,6 +5,7 @@ import Headline from '../_helper_components/article/headline/default.jsx';
 import NavBar from '../_helper_components/global/navBar/default';
 import Gallery from '../features/gallery/default';
 import Footer from '../_helper_components/global/footer/default';
+import Copyright from '../_helper_components/global/copyright/default';
 import '../../src/styles/container/_article-basic.scss';
 
 const GalleryPageLayout = () => {
@@ -34,7 +35,7 @@ const GalleryPageLayout = () => {
   return (
     <>
       <GlobalAdSlots />
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} />
       <main>
         <div className="c-header-gallery">
           <Headline headlines={headlines} basicItems={basicItems} />
@@ -44,6 +45,7 @@ const GalleryPageLayout = () => {
         </div>
       </main>
       <Footer />
+      <Copyright />
     </>
   );
 };

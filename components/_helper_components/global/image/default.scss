@@ -17,6 +17,45 @@
     img {
       width: 100%;
     }
+
+    .c-tease-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(to top, #04befe, #4481eb);
+      border-radius: 25px;
+      box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+      right: 8px;
+      bottom: 12px;
+      z-index: 25;
+      overflow: hidden;
+
+      .tease-icon {
+        position: relative;
+        max-width: 27px;
+        max-height: 27px;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      @include breakpoint(tablet) {
+
+        .tease-icon {
+          max-width: 27px;
+          max-height: 22px;
+          width: 60%;
+          height: 60%;
+        }
+      }
+
+      @include breakpoint(desktop-sm) {
+        width: 50px;
+        height: 50px;
+      }
+    }
   }
 
   .photo-credit-text {
@@ -40,5 +79,176 @@
     @include breakpoint(desktop-sm) {
       display: block;
     }
+  }
+}
+
+///////////////
+// HOME && SECTION specific styles for tease icons.
+///////////////
+
+.two-columns .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon,
+.three-columns .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon,
+.four-columns .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
+  @include breakpoint(desktop-sm) {
+    height: 40px;
+    width: 40px;
+    right: 8px;
+    bottom: 12px;
+
+    .tease-icon {
+      width: 52%;
+      height: 52%;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+.with-rightrail .two-columns.left-photo-display-class .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
+  @include breakpoint(desktop-sm) {
+    height: 60%;
+    width: 35%;
+    max-width: 30px;
+    max-height: 30px;
+  }
+}
+
+.two-columns.left-photo-display-class .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
+  @include breakpoint(desktop-sm) {
+    height: 60%;
+    width: 35%;
+    max-width: 40px;
+    max-height: 40px;
+  }
+}
+
+.three-columns.left-photo-display-class .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon,
+.four-columns.left-photo-display-class .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
+  @include breakpoint(desktop-sm) {
+    height: 60%;
+    width: 35%;
+    max-width: 30px;
+    max-height: 30px;
+    right: 4px;
+    bottom: 8px;
+  }
+}
+
+.home-headline .c-image-component .image-component-image .c-tease-icon {
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
+
+  @include breakpoint(tablet) {
+    bottom: 35px;
+  }
+
+  @include breakpoint(desktop-sm) {
+    bottom: 14%;
+  }
+}
+
+.column-1 .home-headline .c-image-component .image-component-image .c-tease-icon {
+  bottom: 34%;
+  right: 5%;
+
+  @include breakpoint(tablet) {
+    bottom: 40px;
+  }
+
+  @include breakpoint(desktop-sm) {
+    bottom: 50px;
+  }
+
+  @include breakpoint(desktop-lg) {
+    bottom: calc(1.5% + 50px);
+  }
+}
+
+.column-2 .home-headline .c-image-component .image-component-image .c-tease-icon {
+  right: 5%;
+
+  @include breakpoint(desktop-sm) {
+    bottom: 15%;
+  }
+}
+
+.column-1 .c-homeList .c-image-component .image-component-image .c-tease-icon,
+.column-3 .c-homeList .c-image-component .image-component-image .c-tease-icon {
+  right: 8px;
+  bottom: 12px;
+  width: 40px;
+  height: 40px;
+
+  .tease-icon {
+    width: 52%;
+    height: 52%;
+    top: 0;
+    left: 0;
+  }
+
+  @include breakpoint(tablet) {
+    width: 50px;
+    height: 50px;
+    
+    .tease-icon {
+      width: 52%;
+      height: 52%;
+      transform: none;
+    }
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: 40px;
+    height: 40px;
+
+    .tease-icon {
+      width: 52%;
+      height: 52%;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+.left-photo-display-class .column-3 .c-homeList .c-image-component .image-component-image .c-tease-icon {
+  @include breakpoint(desktop-sm) {
+    height: 60%;
+    width: 35%;
+    max-width: 35px;
+    max-height: 35px;
+    right: 4px;
+    bottom: 8px;
+  }
+
+  @include breakpoint(desktop-lg) {
+    max-width: 40px;
+    max-height: 40px;
+  }
+}
+
+///////////////
+// HERO specific styles for tease icons.
+///////////////
+
+.hero-img .c-tease-icon {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(to top, #04befe, #4481eb);
+  border-radius: 25px;
+  box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+  right: 14px;
+  bottom: 14px;
+  z-index: 25;
+  overflow: hidden;
+
+  .tease-icon {
+    position: relative;
+    max-width: 27px;
+    max-height: 27px;
+    top: 29%;
+    left: 22%;
+    border-radius: 0;
   }
 }

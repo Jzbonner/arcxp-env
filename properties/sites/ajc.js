@@ -5,4 +5,10 @@ export default {
   twitterURL: '//twitter.com/ajc',
   facebookURL: '//facebook.com/ajc',
   instagramURL: '//instagram.com/ajcnews',
+  metrics: {
+    siteID: 'ajc',
+    siteMetro: 'ga: atlanta',
+    siteFormat: 'newspaper',
+    gtmContainerKey: 'GTM-WT4CBT7',
+  },
 };

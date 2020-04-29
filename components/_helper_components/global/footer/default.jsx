@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useContent } from 'fusion:content';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import footerFilter from '../../../../content/filters/bottom-nav';
 import './default.scss';
 import menuArrow from '../../../../resources/images/menu-arrow.svg';
 import facebookIcon from '../../../../resources/images/facebook-icon.svg';
 import twitterIcon from '../../../../resources/images/twitter-icon.svg';
 import rightArrow from '../../../../resources/images/right-arrow.svg';
 import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
-import Copyright from '../copyright/default';
+
 
 const Footer = () => {
   const appContext = useAppContext();
@@ -21,8 +22,8 @@ const Footer = () => {
     query: {
       hierarchy: 'BottomNav',
     },
+    filter: footerFilter,
   });
-
   const { logo } = getProperties();
 
   const { children: linkCategories } = siteNavigation || {};
@@ -113,7 +114,6 @@ const Footer = () => {
           </ul>
         </li>
       </ul>
-      <Copyright />
     </footer>
   );
 };

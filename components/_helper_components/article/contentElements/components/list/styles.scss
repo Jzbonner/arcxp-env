@@ -1,6 +1,7 @@
 /*  /components/_helper_components/article/contentElements/components/list/styles.scss  */
 
 @import "../../../../../../src/styles/base/mixins";
+@import "../../../../../../src/styles/base/breakpoints";
 
 .list {
   @include text-styles(1rem, 2.25, "Gordita");
@@ -8,9 +9,14 @@
   ul,
   ol,
   li {
-    font-size: 1.25rem;
+    @include text-styles(1rem, 2.25, "Gordita");
+
     padding-left: .3em;
     list-style: none;
+
+    @include breakpoint(desktop-sm) {
+      @include text-styles(1.25rem, 2.25, "Gordita");
+    }
   }
 
   ul {

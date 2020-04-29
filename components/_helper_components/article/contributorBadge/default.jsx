@@ -1,10 +1,14 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
+import { useAppContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import checkTags from '../../../layouts/_helper_functions/checkTags';
+import ImageSimple from '../../global/imageSimple/default.jsx';
 import './default.scss';
 
-const ContributorBadge = ({ tags, deployment, contextPath }) => {
+const ContributorBadge = ({ tags, ampPage }) => {
+  const { contextPath } = useAppContext();
+
   const hyperlocalTags = getProperties().hyperlocalTags.filter((tag) => {
     if (tag !== 'community contributor') {
       return tag;
@@ -30,7 +34,13 @@ const ContributorBadge = ({ tags, deployment, contextPath }) => {
   if (checkTags(tags, 'community contributor')) {
     return (
       <a href={`${contextPath}${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
-        <img src={deployment(`${contextPath}${getContributorProps().image}`)} alt="Contributor Badge Logo" />
+        <ImageSimple
+          src={getContributorProps().image}
+          ampPage={ampPage}
+          alt="Contributor Badge Logo"
+          ampMobileHeight="54px"
+          ampMobileMinWidth="300px"
+        />
       </a>
     );
   }
@@ -39,8 +49,7 @@ const ContributorBadge = ({ tags, deployment, contextPath }) => {
 
 ContributorBadge.propTypes = {
   tags: PropTypes.array,
-  deployment: PropTypes.func,
-  contextPath: PropTypes.string,
+  ampPage: PropTypes.bool,
 };
 
 export default ContributorBadge;

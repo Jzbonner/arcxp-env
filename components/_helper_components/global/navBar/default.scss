@@ -210,6 +210,10 @@
 
   .nav-item-link {
     display: flex;
+
+    &.bold {
+      font-weight: 700;
+    }
   }
 
   .nav-items {
@@ -247,21 +251,23 @@
     }
 
     .activeSelection {
-      @include breakpoint(tablet) {
-        display: none;
-      }
+      width: 5px;
+      height: 24px;
+      border-radius: 2px;
+      background-color: #fff;
+      position: absolute;
+      left: 0;
+      top: 0;
 
       @include breakpoint(desktop-sm) {
         background-color: #2e81b7;
         border-radius: 2px;
         display: block;
         height: 7px;
-        left: 0;
         margin-right: 15px;
         margin-top: 61px;
-        position: absolute;
         right: 0;
-        top: 0;
+        width: auto;
       }
     }
   }
@@ -455,9 +461,43 @@
   .nav-mobile-login {
     padding-bottom: 26px;
 
+    .hidden {
+      display: none;
+    }
+
     @include breakpoint(desktop-sm) {
       display: flex;
       padding-bottom: 0;
+      margin-left: 20px;
+      min-width: 150px;
+
+      .section {
+        min-width: 100%;
+
+        .subNav {
+          right: 0;
+          border-radius: 6px 0 6px 6px;
+
+          &-flyout {
+            height: auto;
+          }
+        }
+      }
+    }
+
+    .btn-logout {
+      height: auto;
+      width: 100%;
+      padding: 8px 0;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      background-image: linear-gradient(to top, #04befe, #4481eb);
+      box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+      color: #fff;
+      text-align: center;
+      display: inline-block;
+
+      @include text-styles(.875rem, 1, "Gordita-Bold");
     }
   }
 
