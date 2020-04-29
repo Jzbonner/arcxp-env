@@ -6,7 +6,7 @@ import './default.scss';
 
 const PageTitle = () => {
   const componentContext = useComponentContext();
-  const { pageTitle } = componentContext.customFields;
+  const { pageTitle } = useComponentContext && componentContext.customFields;
   const { editableField } = useEditableContent();
 
   return (
