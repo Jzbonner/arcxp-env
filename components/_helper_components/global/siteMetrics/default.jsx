@@ -121,40 +121,40 @@ const SiteMetrics = () => {
     <script type='text/javascript' dangerouslySetInnerHTML={{
       __html: `var dataLayer = dataLayer || [];
         dataLayer.push({
-          connextActive: '${connext && connext.isEnabled ? connext.isEnabled : 'false'}',
-          pageData: {
-            pageName: '${requestUri}',
-            pageURL: '${siteDomainURL || `https://${site}.com`}${canonicalUrl || requestUri}',
-            pageSiteSection: '${topSection}',
-            pageMainSection: '${topSection}',
-            pageCategory: '${secondarySection}',
-            pageContentType: '${pageContentType}',
-            pageTitle: '${title.replace('\'', '"')}'
+          'connextActive': '${connext && connext.isEnabled ? connext.isEnabled : 'false'}',
+          'pageData': {
+            'pageName': '${requestUri}',
+            'pageURL': '${siteDomainURL || `https://${site}.com`}${canonicalUrl || requestUri}',
+            'pageSiteSection': '${topSection}',
+            'pageMainSection': '${topSection}',
+            'pageCategory': '${secondarySection}',
+            'pageContentType': '${pageContentType}',
+            'pageTitle': '${title.replace('\'', '"')}'
           },
-          siteData: {
-            siteID: '${metrics && metrics.siteID ? metrics.siteID : site}',
-            siteDomain: '${siteDomainURL || `${site}.com`}',
-            siteVersion: 'responsive site',
-            siteFormat: '${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}',
-            siteMetro: '${metrics && metrics.siteMetro ? metrics.siteMetro : ''}',
-            siteMedium: 'np',
-            siteType: 'free',
-            siteCMS: 'arc'
+          'siteData': {
+            'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
+            'siteDomain': '${siteDomainURL || `${site}.com`}',
+            'siteVersion': 'responsive site',
+            'siteFormat': '${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}',
+            'siteMetro': '${metrics && metrics.siteMetro ? metrics.siteMetro : ''}',
+            'siteMedium': 'np',
+            'siteType': 'free',
+            'siteCMS': 'arc'
           },
-          contentData: {
-            contentTopics: '${topics.join()}',
-            contentByline: '${authors.join()}',
-            contentOriginatingSite: '${metrics && metrics.siteID ? metrics.siteID : site}',
-            contentID: '${contentId || ''}',
-            contentVendor: '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
-            contentPublishDate: '${firstPublishDateConverted}',
-            blogName: '${pageContentType === 'blog' ? topSectionName : ''}'
+          'contentData': {
+            'contentTopics': '${topics.join()}',
+            'contentByline': '${authors.join()}',
+            'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
+            'contentID': '${contentId || ''}',
+            'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
+            'contentPublishDate': '${firstPublishDateConverted}',
+            'blogName': '${pageContentType === 'blog' ? topSectionName : ''}'
           },
-          userData: {
-            userStatus: '<string>',
-            userProfileID: '<string>',
-            userType: '<string>',
-            userActive: '<string>'
+          'userData': {
+            'userStatus': '<string>',
+            'userProfileID': '<string>',
+            'userType': '<string>',
+            'userActive': '<string>'
           }
         });
       `,
