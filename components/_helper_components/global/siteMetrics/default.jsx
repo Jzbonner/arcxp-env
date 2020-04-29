@@ -80,6 +80,7 @@ const SiteMetrics = () => {
   if (delimitedSections.length) {
     secondarySection = delimitedSections[0]._id || '';
   }
+  const topSectionName = topSection.substring(topSection.lastIndexOf('/') + 1).replace(/-/g, ' ');
   let site = siteName ? siteName.toLowerCase() : '';
   let title = headlines ? headlines.basic : metaValue('title') || site;
   let contentId = uuid;
@@ -118,42 +119,44 @@ const SiteMetrics = () => {
 
   return (
     <script type='text/javascript' dangerouslySetInnerHTML={{
-      __html: `var dataLayer = dataLayer || {};
-        dataLayer.connextActive = '${connext && connext.isEnabled ? connext.isEnabled : 'false'}';
-        dataLayer.pageData = {
-          'pageName': '${requestUri}',
-          'pageURL': '${siteDomainURL || `https://${site}.com`}${canonicalUrl || requestUri}',
-          'pageSiteSection': '${topSection}',
-          'pageMainSection': '${topSection}',
-          'pageCategory': '${secondarySection}',
-          'pageContentType': '${pageContentType}',
-          'pageTitle': '${title.replace('\'', '"')}'
-        };
-        dataLayer.siteData = {
-          'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
-          'siteDomain': '${siteDomainURL || `${site}.com`}',
-          'siteVersion': 'responsive site',
-          'siteFormat': '${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}',
-          'siteMetro': '${metrics && metrics.siteMetro ? metrics.siteMetro : ''}',
-          'siteMedium': 'np',
-          'siteType': 'free',
-          'siteCMS': 'arc'
-        };
-        dataLayer.contentData = {
-          'contentTopics': '${topics.join()}',
-          'contentByline': '${authors.join()}',
-          'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
-          'contentID': '${contentId || ''}',
-          'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
-          'contentPublishDate': '${firstPublishDateConverted}',
-          'blogName': '${pageContentType === 'blog' ? topSection.substring(topSection.lastIndexOf('/') + 1).replace(/-/g, ' ') : ''}'
-        };
-        dataLayer.userData = {
-          'userStatus': '<string>',
-          'userProfileID': '<string>',
-          'userType': '<string>',
-          'userActive': '<string>'
-        };
+      __html: `var dataLayer = dataLayer || [];
+        dataLayer.push({
+          'connextActive': '${connext && connext.isEnabled ? connext.isEnabled : 'false'}',
+          'pageData': {
+            'pageName': '${requestUri}',
+            'pageURL': '${siteDomainURL || `https://${site}.com`}${canonicalUrl || requestUri}',
+            'pageSiteSection': '${topSection}',
+            'pageMainSection': '${topSection}',
+            'pageCategory': '${secondarySection}',
+            'pageContentType': '${pageContentType}',
+            'pageTitle': '${title.replace('\'', '"')}'
+          },
+          'siteData': {
+            'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
+            'siteDomain': '${siteDomainURL || `${site}.com`}',
+            'siteVersion': 'responsive site',
+            'siteFormat': '${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}',
+            'siteMetro': '${metrics && metrics.siteMetro ? metrics.siteMetro : ''}',
+            'siteMedium': 'np',
+            'siteType': 'free',
+            'siteCMS': 'arc'
+          },
+          'contentData': {
+            'contentTopics': '${topics.join()}',
+            'contentByline': '${authors.join()}',
+            'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
+            'contentID': '${contentId || ''}',
+            'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
+            'contentPublishDate': '${firstPublishDateConverted}',
+            'blogName': '${pageContentType === 'blog' ? topSectionName : ''}'
+          },
+          'userData': {
+            'userStatus': '<string>',
+            'userProfileID': '<string>',
+            'userType': '<string>',
+            'userActive': '<string>'
+          }
+        });
       `,
     }}></script>
   );
