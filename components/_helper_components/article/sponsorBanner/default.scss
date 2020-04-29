@@ -1,0 +1,33 @@
+@import "../../../../src/styles/base/breakpoints";
+@import "./../../../../src/styles/base/mixins";
+
+.c-sponsorBanner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 576px;
+  max-height: 260px;
+  margin: auto;
+
+  @include breakpoint(tablet) {
+    max-width: calc(100% - 40px);
+  }
+
+  @include breakpoint(desktop-sm) {
+    max-width: 1200px;
+  }
+
+  .c-sponsorImg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .c-sponsorUrl {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
