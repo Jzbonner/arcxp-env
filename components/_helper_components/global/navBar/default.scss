@@ -104,7 +104,7 @@
 
     .nav-mobile-login {
 
-      .login-text {
+      .login-text:not(.hidden) {
         display: flex;
         color: #fff;
         padding-left: 15px;
@@ -233,7 +233,10 @@
       }
 
       @include breakpoint(desktop-sm) {
-        cursor: none;
+
+        &:not(.nav-login) {
+          cursor: none;
+        }
       }
 
       .section {
@@ -461,22 +464,48 @@
   .nav-mobile-login {
     padding-bottom: 26px;
 
-    .hidden {
-      display: none;
+    @include breakpoint(desktop-sm) {
+      padding-bottom: 0;
     }
+  }
 
+  .nav-login {
     @include breakpoint(desktop-sm) {
       display: flex;
+      padding-top: 0;
       padding-bottom: 0;
       margin-left: 20px;
+      margin-bottom: 0;
+      margin-top: 11px;
       min-width: 150px;
+      height: 54px;
+
+      a {
+        color: #2e81b7;
+      }
+
+      .section-item {
+        height: 54px;
+      }
+
+      .section,
+      .section-item {
+        min-width: 100%;
+        box-sizing: border-box;
+      }
 
       .section {
-        min-width: 100%;
+
+        .login-text,
+        img {
+          display: inline-block;
+          vertical-align: middle;
+        }
 
         .subNav {
           right: 0;
           border-radius: 6px 0 6px 6px;
+          top: 52px;
 
           &-flyout {
             height: auto;
@@ -499,6 +528,22 @@
 
       @include text-styles(.875rem, 1, "Gordita-Bold");
     }
+
+    /* various user state display styles */
+
+    body:not(.is-loggedIn):not(.is-loggedOut) & {
+
+      .is-profileAnon,
+      .is-profileAuthed {
+        display: none;
+      }
+    }
+
+    body.is-loggedIn & .is-profileAnon,
+    body.is-loggedOut & .is-profileAuthed,
+    body.is-authenticated & .MG2activation {
+      display: none;
+    }
   }
 
   .login-text {
@@ -513,14 +558,14 @@
       display: flex;
       font-weight: 800;
 
-      @include text-styles(.875rem, 1, "Gordita-Bold");
+      @include text-styles(.875rem, 3, "Gordita-Bold");
     }
 
     @include breakpoint(desktop-nav) {
       display: flex;
       font-weight: 800;
 
-      @include text-styles(1.125rem, 1, "Gordita-Bold");
+      @include text-styles(1.125rem, 3, "Gordita-Bold");
     }
   }
 

@@ -21,9 +21,9 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   return isEnabled && (
     <li className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`} data-mg2-action='register'>
       <img src={source} />
-      <div className='nav-itemText login-text is-profileAnon hidden'>Log in</div>
-      <div className='nav-itemText login-text is-profileAuthed hidden'>My Profile</div>
-      <div className={'section is-profileAuthed hidden'}>
+      <div className='nav-itemText login-text is-profileAnon'>Log in</div>
+      <div className='nav-itemText login-text is-profileAuthed'>My Profile</div>
+      <div className={'section is-profileAuthed'}>
         <div className={'section-item'}>
           <a href={`//myaccount.${clientCode}.com/${clientCode}/myprofile`}>
             <img src={source} />
