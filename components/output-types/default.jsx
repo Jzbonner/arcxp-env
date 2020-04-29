@@ -34,6 +34,9 @@ const DefaultOutputType = (props) => {
   return (
     <html>
       <head>
+        <MetaTags />
+        <SiteMeta />
+        <CssLinks />
         {includeGtm && (
           <>
             <SiteMetrics />
@@ -45,10 +48,7 @@ const DefaultOutputType = (props) => {
             {/* End Google Tag Manager */}
           </>
         )}
-        <MetaTags />
-        <SiteMeta />
         <Libs />
-        <CssLinks />
         {!noAds && !isHyperlocalContent && <NativoScripts />}
         {!isHyperlocalContent && type && <TaboolaHeader type={type} />}
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
