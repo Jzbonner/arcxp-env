@@ -17,7 +17,7 @@ const SponsorBanner = ({ taxonomy }) => {
   }, []);
 
   if (articleSections) {
-    sponsorSection = articleSections.filter(section => section.path.includes('/sponsor/'));
+    sponsorSection = articleSections.filter(section => section && section.path && section.path.includes('/sponsor/'));
     sponsorSectionName = sponsorSection && sponsorSection[0] && sponsorSection[0].path ? sponsorSection[0].path : null;
   }
   if (!sponsorSectionName) {
