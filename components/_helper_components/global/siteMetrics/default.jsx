@@ -20,6 +20,7 @@ const SiteMetrics = () => {
     taxonomy,
     source,
     type,
+    subtype,
     credits,
     canonical_url: canonicalUrl,
     publish_date: firstPublishDate,
@@ -55,13 +56,13 @@ const SiteMetrics = () => {
     authorData.forEach(author => author.name && authors.push(author.name));
   }
 
-  const pageType = checkPageType(type, layout);
+  const pageType = checkPageType(subtype || type, layout);
   const {
     isHome,
     isSection,
     type: typeOfPage,
   } = pageType || {};
-  let pageContentType = typeOfPage === 'story' ? 'article' : typeOfPage;
+  let pageContentType = typeOfPage === 'story' ? 'article' : typeOfPage.toLowerCase();
   if (isHome) {
     pageContentType = 'homepage';
   } else if (isSection) {
@@ -123,6 +124,7 @@ const SiteMetrics = () => {
           'pageName': '${requestUri}',
           'pageURL': '${siteDomainURL || `https://${site}.com`}${canonicalUrl || requestUri}',
           'pageSiteSection': '${topSection}',
+          'pageMainSection': '${topSection}',
           'pageCategory': '${secondarySection}',
           'pageContentType': '${pageContentType}',
           'pageTitle': '${title.replace('\'', '"')}'
@@ -144,7 +146,7 @@ const SiteMetrics = () => {
           'contentID': '${contentId || ''}',
           'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
           'contentPublishDate': '${firstPublishDateConverted}',
-          'blogName': '${type === 'blog' ? secondarySection : ''}'
+          'blogName': '${pageContentType === 'blog' ? topSection.substring(topSection.lastIndexOf('/') + 1).replace(/-/g, ' ') : ''}'
         };
         dataLayer.userData = {
           'userStatus': '<string>',
