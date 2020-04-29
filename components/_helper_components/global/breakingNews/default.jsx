@@ -1,33 +1,31 @@
-import React from 'react';
-import getProperties from 'fusion:properties';
+/* eslint-disable no-console */
+import React, { useState } from 'react';
 import { useContent } from 'fusion:content';
-import LiveVideo from './liveVideo/liveVideo';
-import RenderBreakingNews from './renderBreakingNews/renderBreakingNews';
+import './default.scss';
 
 const BreakingNews = () => {
-  const { breakingNewsID } = getProperties();
+  const [isVisible, setVisibility] = useState(true);
+  const hideBar = () => {
+    setVisibility(false);
+  };
 
-  const breakingNewsData = useContent({
-    source: 'collections-api',
-    query: { id: `${breakingNewsID}` },
+  const newsData = useContent({
+    source: 'breaking-news-video-alert',
   });
 
-  const { content_elements: contentElements } = breakingNewsData || {};
-  const [breakingNewsItem] = contentElements || [];
-  let breakingHeadline;
-  let breakingURL;
-  let mainTitle;
+  const { url, headline, typeOfHeadline } = newsData || {};
 
-  if (breakingNewsItem) {
-    breakingHeadline = breakingNewsItem && breakingNewsItem.headlines && breakingNewsItem.headlines.basic;
-    breakingURL = breakingNewsItem && breakingNewsItem.canonical_url;
-    mainTitle = 'Breaking News';
+  if (url && headline && typeOfHeadline) {
+    return (
+      <div className={`c-breakingNews ${!isVisible ? 'is-hidden' : ''}`}>
+        <a href={url} className="breakingURL" />
+        <span className="c-breakingNews-hide" onClick={hideBar} />
+        <h2 className="c-breakingNews-heading">{headline}</h2>
+        <h2 className="c-breakingNews-content">{typeOfHeadline}</h2>
+      </div>
+    );
   }
-
-  if (breakingHeadline) {
-    return <RenderBreakingNews breakingHeadline={breakingHeadline} breakingURL={breakingURL} mainTitle={mainTitle} />;
-  }
-  return <LiveVideo />;
+  return null;
 };
 
 export default BreakingNews;
