@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { useContent } from 'fusion:content';
+// import { useContent } from 'fusion:content';
 import './default.scss';
 
 const BreakingNews = () => {
@@ -9,9 +9,11 @@ const BreakingNews = () => {
     setVisibility(false);
   };
 
-  const newsData = useContent({
-    source: 'breaking-news-video-alert',
-  });
+  // const newsData = useContent({
+  //   source: 'breaking-news-video-alert',
+  // });
+
+  const newsData = [];
 
   const { url, headline, typeOfHeadline } = newsData || {};
 
