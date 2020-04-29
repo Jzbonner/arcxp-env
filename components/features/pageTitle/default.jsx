@@ -10,7 +10,7 @@ const PageTitle = () => {
   const { editableField } = useEditableContent();
 
   return (
-    <div className="c-page-title">
+    <div className="c-page-title b-margin-bottom-d40-m20 b-margin-top-d40-m20">
       <h2 className="c-title-content" {...editableField('Page Title')} suppressContentEditableWarning value="Add Page Title">
         {pageTitle}
       </h2>
