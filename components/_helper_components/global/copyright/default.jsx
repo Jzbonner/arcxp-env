@@ -1,5 +1,6 @@
 import React from 'react';
 import { useContent } from 'fusion:content';
+import copyrightFilter from '../../../../content/filters/copyright';
 import './default.scss';
 import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
 
@@ -9,6 +10,7 @@ const Copyright = () => {
     query: {
       hierarchy: 'BottomNavTermsOfUse',
     },
+    filter: copyrightFilter,
   });
 
   const { children } = siteContent || {};
