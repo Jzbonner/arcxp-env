@@ -18,8 +18,23 @@ const ConnextInit = () => {
   return <script type='text/javascript' dangerouslySetInnerHTML={{
     __html: `
       const doc = window.document;
+      const docBody = doc.querySelector('body');
+      const userIsLoggedInClass = ' is-loggedIn';
+      const userIsLoggedOutClass = ' is-loggedOut';
+      const userIsAuthenticatedClass = ' is-authenticated';
+      const toggleUserState = (action) => {
+        if (action === 'logged-in') {
+          docBody.className.replace(userIsLoggedOutClass, '');
+          docBody.className += userIsLoggedInClass;
+        } else if (action === 'logged-out') {
+          docBody.className.replace(userIsLoggedInClass, '');
+          docBody.className += userIsLoggedOutClass;
+        } else if (action === 'authenticated') {
+          docBody.className += userIsAuthenticatedClass;
+        }
+      };
       const connextLogger = (message) => {
-        if (${debug} || window.location.hostname.indexOf('sandbox') > -1) {
+        if (${debug} || window.location.search.indexOf('connextDebug') > -1) {
           console.log(message);
         }
       };
@@ -55,32 +70,6 @@ const ConnextInit = () => {
         const connextLoggedIn = new Event('connextLoggedIn');
         const connextLoggedOut = new Event('connextLoggedOut');
         const connextIsSubscriber = new Event('connextIsSubscriber');
-        const docBody = doc.querySelector('body');
-        const userIsLoggedInClass = ' is-loggedIn';
-        const userIsLoggedOutClass = ' is-loggedOut';
-        const userIsAuthenticatedClass = ' is-authenticated';
-        const toggleActivateLink = (showOrHide) => {
-          if (showOrHide === 'show') {
-            activationLinks.forEach((child) => {
-              showThisEl(child);
-            });
-          } else {
-            activationLinks.forEach((child) => {
-              hideThisEl(child);
-            });
-          }
-        };
-        const toggleUserState = (action) => {
-          if (action === 'logged-in') {
-            docBody.className.replace(userIsLoggedOutClass, '');
-            docBody.className += userIsLoggedInClass;
-          } else if (action === 'logged-out') {
-            docBody.className.replace(userIsLoggedInClass, '');
-            docBody.className += userIsLoggedOutClass;
-          } else if (action === 'authenticated') {
-            docBody.className += userIsAuthenticatedClass;
-          }
-        };
         Promise.resolve(window.MG2Loader.init({
           plugins: [
             {
