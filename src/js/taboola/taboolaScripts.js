@@ -1,10 +1,10 @@
-const taboolaHeaderScript = (type) => {
+const taboolaHeaderScript = (layout, cdnLink) => {
   let taboolaCatType;
-  if (type === 'story' || type === 'blog') {
+  if (layout === 'article-basic') {
     taboolaCatType = 'article';
-  } else if (type === 'section') {
+  } else if (layout.includes('section')) {
     taboolaCatType = 'category';
-  } else if (type === 'home') {
+  } else if (layout === 'home-basic') {
     taboolaCatType = 'home';
   }
   return `window._taboola = window._taboola || [];
@@ -20,15 +20,15 @@ const taboolaHeaderScript = (type) => {
       }
     }(document.createElement('script'),
     document.getElementsByTagName('script')[0],
-    '//cdn.taboola.com/libtrc/cox-network/loader.js',
+    ${cdnLink}
     'tb_loader_script');
     if (window.performance && typeof window.performance.mark == 'function') {
       window.performance.mark('tbl_ic');
     }`;
 };
 
-const taboolaFooterScript = (type, moapPTD, boapPTD) => {
-  if (type === 'story' || type === 'blog') {
+const taboolaFooterScript = (layout, moapPTD, boapPTD) => {
+  if (layout === 'article-basic') {
     return ` window._taboola = window._taboola || [];
       _taboola.push({flush: true});
       let renderedBoap = false;
@@ -59,19 +59,18 @@ const taboolaFooterScript = (type, moapPTD, boapPTD) => {
   return 'window._taboola = window._taboola || []; _taboola.push({flush: true});';
 };
 
-const taboolaModuleScript = (type) => {
+const taboolaModuleScript = (layout, container, placement) => {
   let containerName;
   let placementName;
-  if (type === 'story' || type === 'blog') {
-    containerName = 'taboola-ajc-custom-feed';
-    placementName = 'AJC Custom Feed';
-    // next two cases are a work in progress will be dependent on architecture
-  } else if (type === 'section') {
-    containerName = 'taboola-ajc-custom-feed--sction-fronts';
-    placementName = 'AJC Custom Feed - Section Fronts';
-  } else if (type === 'homepage') {
-    containerName = 'taboola-ajc-custom-feed--home-page';
-    placementName = 'AJC Custom Feed - Home Page';
+  if (layout === 'article-basic') {
+    containerName = container;
+    placementName = placement;
+  } else if (layout.includes('section')) {
+    containerName = `${container}--section-fronts`;
+    placementName = `${placement} - Section Fronts`;
+  } else if (layout === 'homepage-basic') {
+    containerName = `${container}--home-page`;
+    placementName = `${placement} - Home Page`;
   }
   return `window._taboola = window._taboola || [];
     _taboola.push({

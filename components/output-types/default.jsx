@@ -25,7 +25,7 @@ const DefaultOutputType = (props) => {
     MetaTags,
   } = props;
   const { isEnabled = false, clientCode, environment: connextEnv } = connext;
-  const { type, taxonomy } = globalContent || { type: null };
+  const { taxonomy } = globalContent || {};
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
@@ -50,7 +50,7 @@ const DefaultOutputType = (props) => {
         )}
         <Libs />
         {!noAds && !isHyperlocalContent && <NativoScripts />}
-        {!isHyperlocalContent && type && <TaboolaHeader type={type} />}
+        {!isHyperlocalContent && <TaboolaHeader/>}
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -67,7 +67,7 @@ const DefaultOutputType = (props) => {
         )}
         <div id="fusion-app">{children}</div>
         <Fusion />
-        {!isHyperlocalContent && type && <TaboolaFooter type={type} />}
+        {!isHyperlocalContent && <TaboolaFooter/>}
         {isEnabled && (
           <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

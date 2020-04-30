@@ -1,21 +1,27 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
+import { useAppContext } from 'fusion:context';
 import { taboolaModuleScript } from '../../../src/js/taboola/taboolaScripts';
 import '../../../src/styles/base/_utility.scss';
 
-const TaboolaFeed = ({ type, ampPage }) => {
+const TaboolaFeed = ({ ampPage }) => {
+  const appContext = useAppContext();
+  const { layout } = appContext;
+  const { taboola } = getProperties();
   const {
-    taboolaDataPublisher,
+    dataPublisher,
     taboolaID,
-  } = getProperties();
+    containerName,
+    placementName,
+  } = taboola;
   if (ampPage) {
     return (
       <div className="c-section b-margin-bottom-d40-m20">
         <amp-embed width='100' height='100'
           type='taboola'
           layout='responsive'
-          data-publisher={taboolaDataPublisher}
+          data-publisher={dataPublisher}
           data-mode='thumbnails-f-amp'
           data-placement='Below Article Thumbnails AMP - Redesign'
           data-target_type='mix'
@@ -27,7 +33,7 @@ const TaboolaFeed = ({ type, ampPage }) => {
 
   useEffect(() => {
     const taboolaScript = document.createElement('script');
-    taboolaScript.innerHTML = taboolaModuleScript(type);
+    taboolaScript.innerHTML = taboolaModuleScript(layout, containerName, placementName);
     taboolaScript.async = true;
     document.body.appendChild(taboolaScript);
   }, []);
@@ -36,7 +42,6 @@ const TaboolaFeed = ({ type, ampPage }) => {
 };
 
 TaboolaFeed.propTypes = {
-  type: PropTypes.string,
   ampPage: PropTypes.bool,
 };
 
