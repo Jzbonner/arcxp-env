@@ -47,7 +47,7 @@ const ListPageLayout = () => {
 
   const {
     content_elements: listItems,
-  } = initialList;
+  } = initialList || {};
 
   const fetchRef = useRef(null);
 
@@ -66,7 +66,8 @@ const ListPageLayout = () => {
             </div> : null }
             <div className='b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column'>
               <div className='b-flexCenter b-flexRow tease-listHeading b-margin-bottom-d30-m20' ref={fetchRef}>{name}</div>
-              <CollectionList listItems={listItems} collectionLength={contentElements.length} collectionID={queryID} fetchRef={fetchRef} />
+              {/* eslint-disable-next-line max-len */}
+              <CollectionList listItems={listItems} collectionLength={contentElements ? contentElements.length : 0} collectionID={queryID} fetchRef={fetchRef} />
             </div>
           </div>
         </div>
