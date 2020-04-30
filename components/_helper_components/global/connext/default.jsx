@@ -15,22 +15,23 @@ const ConnextInit = () => {
 
   if (!isEnabled) return null;
 
+  const userIsLoggedInClass = 'is-loggedIn';
+  const userIsLoggedOutClass = 'is-loggedOut';
+  const userIsAuthenticatedClass = 'is-authenticated';
+
   return <script type='text/javascript' dangerouslySetInnerHTML={{
     __html: `
       const doc = window.document;
       const docBody = doc.querySelector('body');
-      const userIsLoggedInClass = ' is-loggedIn';
-      const userIsLoggedOutClass = ' is-loggedOut';
-      const userIsAuthenticatedClass = ' is-authenticated';
       const toggleUserState = (action) => {
         if (action === 'logged-in') {
-          docBody.className.replace(userIsLoggedOutClass, '');
-          docBody.className += userIsLoggedInClass;
+          docBody.className.replace(/${userIsLoggedOutClass}/g, '');
+          docBody.className += docBody.className.indexOf('${userIsLoggedInClass}') === -1 ? ' ${userIsLoggedInClass}' : '';
         } else if (action === 'logged-out') {
-          docBody.className.replace(userIsLoggedInClass, '');
-          docBody.className += userIsLoggedOutClass;
-        } else if (action === 'authenticated') {
-          docBody.className += userIsAuthenticatedClass;
+          docBody.className = docBody.className.replace(/${userIsLoggedInClass}/g, '').replace(/${userIsAuthenticatedClass}/g, '');
+          docBody.className += docBody.className.indexOf('${userIsLoggedOutClass}') === -1 ? ' ${userIsLoggedOutClass}' : '';
+        } else if (action === 'authenticated' && docBody.className.indexOf('${userIsAuthenticatedClass}') === -1) {
+          docBody.className += ' ${userIsAuthenticatedClass}';
         }
       };
       const connextLogger = (message) => {
@@ -43,8 +44,8 @@ const ConnextInit = () => {
           const arr = location.host.split('.');
           const rootdomain = arr[arr.length - 2] + '.' + arr[arr.length - 1];
           doc.cookie = name + '=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT';
-          doc.cookie = name + '=;path=/;domain=' + host + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
-          doc.cookie = name + '=;path=/;domain=.' + host + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
+          doc.cookie = name + '=;path=/;domain=' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
+          doc.cookie = name + '=;path=/;domain=.' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
           doc.cookie = name + '=;path=/;domain=' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
           doc.cookie = name + '=;path=/;domain=.' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
         };
