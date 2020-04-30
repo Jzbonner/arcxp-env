@@ -31,7 +31,7 @@ import ConnextInlinePromoSubscription from '../_helper_components/global/connext
 import getQueryParams from './_helper_functions/getQueryParams';
 import checkTags from './_helper_functions/checkTags';
 import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
-import Carousel from '../features/carousel/default';
+import Carousel from '../_helper_components/article/carousel/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -233,9 +233,9 @@ const StoryPageLayout = () => {
           <Gallery contentElements={filteredContentElements} pageType={subtype} />
         ) : null}
       </main>
-      <Carousel taxonomy={taxonomy} ampPage={ampPage} />
       {!ampPage && <Footer />}
       <Copyright />
+      {ampPage && <Carousel storyId={uuid} taxonomy={taxonomy} ampPage={ampPage} />}
     </>
   );
 };

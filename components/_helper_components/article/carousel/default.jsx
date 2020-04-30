@@ -4,16 +4,13 @@ import { useContent } from 'fusion:content';
 import buildCarouselItem from './_helper_functions/buildCarouselItems';
 import './default.scss';
 
-const Carousel = ({ taxonomy/* , ampPage */ }) => {
+const Carousel = ({ storyId, taxonomy, ampPage }) => {
   const { primary_section: primarySection } = taxonomy || {};
   const { path } = primarySection || {};
-  // console.log(taxonomy ? 'carsoul got taxes' : 'carsoul DID NOT ge taxes');
 
   const formattedPath = path ? path.substring(1) : null;
 
-  // console.log('path without first:', formattedPath);
-
-  if (!formattedPath) return null;
+  if (!ampPage || !formattedPath) return null;
 
   const relatedStoryData = useContent({
     source: 'search-api',
@@ -21,20 +18,23 @@ const Carousel = ({ taxonomy/* , ampPage */ }) => {
       published: true,
       section: formattedPath,
       sort: true,
-      size: 12,
+      size: 18,
     },
   });
 
   if (!relatedStoryData) return null;
 
-  // console.log('relatedData', relatedStoryData);
+  const carouselItems = buildCarouselItem(relatedStoryData, storyId);
 
-  const carouselItems = buildCarouselItem(relatedStoryData);
-
-  return <amp-carousel height="200" layout="responsive">{carouselItems}</amp-carousel>;
+  return (
+    <div className="c-carousel">
+      <amp-carousel width="100vw" height="200" layout="responsive" type="carousel">{carouselItems}</amp-carousel>
+    </div>
+  );
 };
 
 Carousel.propTypes = {
+  storyId: PropTypes.string,
   taxonomy: PropTypes.object,
   ampPage: PropTypes.bool,
 };
