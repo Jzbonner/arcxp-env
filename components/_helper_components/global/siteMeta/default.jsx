@@ -25,13 +25,12 @@ const SiteMeta = () => {
   let uri = requestUri;
   if (!canonicalURL) {
     // only jump through these hoops if canonical_url is undefined (i.e. pagebuilder pages)
-    if (uri.indexOf('?')) {
-      uri = uri.substring(0, uri.indexOf('?'));
-    } else if (uri.indexOf('#')) {
-      uri = uri.substring(0, uri.indexOf('#'));
-    }
+    // remove query string & hashes from uri
+    uri = uri.replace(/\?.*/g, '');
+    uri = uri.replace(/#.*/g, '');
   }
   const url = canonicalURL || uri;
+  const isNativoLandingPage = url === '/native/';
   const pageType = checkPageType(type, layout);
   const { isNonContentPage } = pageType || {};
   const thumbnailImage = renderImage();
@@ -56,7 +55,7 @@ const SiteMeta = () => {
     <>
       <link rel="apple-touch-icon" href={deployment(`${contextPath}/resources/images/favicon-apple-touch-icon.png`)} />
       <link rel="shortcut icon" href={deployment(`${contextPath}/resources/images/favicon.ico`)} />
-      <link rel="canonical" href={url} />
+      {!isNativoLandingPage && <link rel="canonical" href={url} />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={desc} />
       <meta name="twitter:image" content={thumbnailImage} />
@@ -70,7 +69,7 @@ const SiteMeta = () => {
           || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '1200'}`} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content={`${isNonContentPage ? 'website' : 'article'}`} />
-      <meta property="og:url" content={url} />
+      {!isNativoLandingPage && <meta property="og:url" content={url} />}
       <meta property="og:description" content={desc} />
       <meta property="og:site_name" content={siteName} />
       <title>{title}</title>
