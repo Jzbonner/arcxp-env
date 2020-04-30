@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-// import { useContent } from 'fusion:content';
+import { useContent } from 'fusion:content';
+import getProperties from 'fusion:properties';
 import './default.scss';
 
 const BreakingNews = () => {
@@ -8,12 +9,18 @@ const BreakingNews = () => {
   const hideBar = () => {
     setVisibility(false);
   };
+  const {
+    breakingNewsID, breakingLiveVideoID, sites,
+  } = getProperties();
 
-  // const newsData = useContent({
-  //   source: 'breaking-news-video-alert',
-  // });
-
-  const newsData = [];
+  const newsData = useContent({
+    source: 'breaking-news-video-alert',
+    query: {
+      breakingNewsID,
+      breakingLiveVideoID,
+      site: sites[0],
+    },
+  });
 
   const { url, headline, typeOfHeadline } = newsData || {};
 
