@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 import './default.scss';
 
 const BreakingNews = () => {
@@ -10,15 +11,17 @@ const BreakingNews = () => {
     setVisibility(false);
   };
   const {
-    breakingNewsID, breakingLiveVideoID, sites,
+    breakingNewsID, breakingLiveVideoID,
   } = getProperties();
+  const fusionContext = useFusionContext();
+  const { arcSite = 'ajc' } = fusionContext;
 
   const newsData = useContent({
     source: 'breaking-news-video-alert',
     query: {
       breakingNewsID,
       breakingLiveVideoID,
-      site: sites[0],
+      site: arcSite,
     },
   });
 
