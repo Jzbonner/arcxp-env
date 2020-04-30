@@ -8,9 +8,7 @@ const taboolaHeaderScript = (layout, cdnLink) => {
     taboolaCatType = 'home';
   }
   return `window._taboola = window._taboola || [];
-    _taboola.push({
-      ${taboolaCatType}: 'auto'
-    });
+    _taboola.push({${taboolaCatType}:'auto'});
     !function (e, f, u, i) {
       if (!document.getElementById(i)){
         e.async = 1;
@@ -20,7 +18,7 @@ const taboolaHeaderScript = (layout, cdnLink) => {
       }
     }(document.createElement('script'),
     document.getElementsByTagName('script')[0],
-    ${cdnLink}
+    '${cdnLink}',
     'tb_loader_script');
     if (window.performance && typeof window.performance.mark == 'function') {
       window.performance.mark('tbl_ic');
