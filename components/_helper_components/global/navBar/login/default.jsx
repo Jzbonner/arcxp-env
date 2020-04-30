@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connext } from 'fusion:environment';
 import '../default.scss';
@@ -18,20 +18,55 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
     clientCode,
   } = connext;
 
+  const [userState, _setUserState] = useState('');
+  const [showUserMenu, _setShowUserMenu] = useState(false);
+  const userStateRef = React.useRef(userState);
+  const showUserMenuRef = React.useRef(showUserMenu);
+
+  const setUserState = (data) => {
+    userStateRef.current = data;
+    _setUserState(data);
+  };
+
+  const setShowUserMenu = (data) => {
+    if (isMobile) {
+      showUserMenuRef.current = data;
+      _setShowUserMenu(data);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('connextLoggedIn', () => {
+      setUserState('logged-in');
+    });
+    window.addEventListener('connextLoggedOut', () => {
+      setUserState('logged-out');
+    });
+    window.addEventListener('connextIsSubscriber', () => {
+      setUserState('authenticated');
+    });
+  }, [userState]);
+
   return isEnabled && (
-    <li className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`} data-mg2-action='register'>
+    <li
+      className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`}
+      data-mg2-action={userStateRef.current === 'logged-out' ? 'register' : ''}
+      onClick={(e) => { e.preventDefault(); setShowUserMenu(!showUserMenuRef.current); }}>
       <img src={source} />
       <div className='nav-itemText login-text is-profileAnon'>Log in</div>
       <div className='nav-itemText login-text is-profileAuthed'>My Profile</div>
-      <div className={'section is-profileAuthed'}>
+      <div className={`section is-profileAuthed ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
         <div className={'section-item'}>
           <a href={`//myaccount.${clientCode}.com/${clientCode}/myprofile`}>
             <img src={source} />
             <div className='nav-itemText login-text'>My Profile</div>
           </a>
         </div>
-        <div className={'subNav'}>
+        <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
           <ul className={'subNav-flyout'}>
+            {isMobile && <li className={'flyout-item'}>
+              <a href='#' className='nav-profileLogout' data-mg2-action='logout'><b>Logout</b></a>
+            </li>}
             <li className={'flyout-item'}>
               <a href={`//myaccount.${clientCode}.com/${clientCode}/dashboard`} target='_blank'>My Account</a>
             </li>
@@ -44,11 +79,11 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
             <li className={'flyout-item'}>
               <a href='/our-products/'>Our Products</a>
             </li>
-            <li className={'flyout-item MG2activation'}>
-              <a href='#' data-mg2-action='activation'>Activate My Account</a>
-            </li>
+            {userStateRef.current !== 'authenticated' && <li className={'flyout-item MG2activation'}>
+                <a href='#' data-mg2-action='activation'>Activate My Account</a>
+            </li>}
           </ul>
-          <a href='#' className='btn-logout nav-profileLogout' data-mg2-action='logout'>Logout</a>
+          {!isMobile && <a href='#' className='btn-logout nav-profileLogout' data-mg2-action='logout'>Logout</a>}
         </div>
       </div>
     </li>
