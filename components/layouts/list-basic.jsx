@@ -67,7 +67,7 @@ const ListPageLayout = () => {
             <div className='b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column'>
               <div className='b-flexCenter b-flexRow tease-listHeading b-margin-bottom-d30-m20' ref={fetchRef}>{name}</div>
               {/* eslint-disable-next-line max-len */}
-              <CollectionList listItems={listItems} collectionLength={contentElements ? contentElements.length : 0} collectionID={queryID} fetchRef={fetchRef} />
+              <CollectionList source={'collections-api'} listItems={listItems} collectionLength={contentElements ? contentElements.length : 0} collectionID={queryID} fetchRef={fetchRef} />
             </div>
           </div>
         </div>

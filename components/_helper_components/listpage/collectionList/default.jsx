@@ -5,13 +5,13 @@ import ListItem from '../../home/ListItem/ListItem';
 import Pagination from '../../listpage/pagination/default';
 
 const CollectionList = ({
-  listItems, collectionLength, collectionID, fetchRef,
+  listItems, collectionLength, collectionID, fetchRef, source,
 }) => {
   const [list, setItems] = useState(null);
   const [index, setIndex] = useState(null);
   const paginationCount = Math.ceil(collectionLength / 10);
   const newItems = useContent({
-    source: 'collections-api',
+    source: `${source}`,
     query: {
       id: collectionID,
       from: index,
@@ -87,6 +87,7 @@ CollectionList.propTypes = {
   collectionLength: PropTypes.number,
   collectionID: PropTypes.string,
   fetchRef: PropTypes.object,
+  source: PropTypes.string,
 };
 
 export default CollectionList;

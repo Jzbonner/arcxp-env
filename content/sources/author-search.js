@@ -2,6 +2,7 @@ const schemaName = 'author-search';
 
 const params = {
   name: 'text',
+  from: 'text',
 };
 
 const resolve = (query) => {
