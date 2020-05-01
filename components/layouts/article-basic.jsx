@@ -90,8 +90,6 @@ const StoryPageLayout = () => {
   const noAds = checkTags(tags, 'no-ads');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
 
-  console.log(taxonomy ? 'taxonomy exists' : 'no tax');
-
   let infoBoxIndex = null;
   let paragraphIndex = 0;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />;

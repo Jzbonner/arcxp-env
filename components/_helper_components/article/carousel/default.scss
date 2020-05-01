@@ -25,6 +25,10 @@
       margin-left: .625rem;
     }
 
+    img.is-Logo {
+      width: 76px;
+    }
+
     .c-itemText {
       width: 50%;
       white-space: normal;
@@ -33,4 +37,8 @@
       @include text-styles(.625rem, normal, "Gordita");
     }
   }
+}
+
+.c-carouselItem.is-first {
+  margin-left: .625rem;
 }

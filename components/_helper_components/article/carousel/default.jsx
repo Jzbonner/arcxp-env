@@ -22,9 +22,22 @@ const Carousel = ({ storyId, taxonomy, ampPage }) => {
     },
   });
 
+  const siteLogoData = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'TopNav',
+    },
+    filter: 'logo',
+  });
+
+  const fetchedSiteLogo = siteLogoData
+    && siteLogoData.site
+    && siteLogoData.site.site_logo_image_small
+    ? siteLogoData.site.site_logo_image_small : null;
+
   if (!relatedStoryData) return null;
 
-  const carouselItems = buildCarouselItem(relatedStoryData, storyId);
+  const carouselItems = buildCarouselItem(relatedStoryData, storyId, fetchedSiteLogo);
 
   return (
     <div className="c-carousel">
