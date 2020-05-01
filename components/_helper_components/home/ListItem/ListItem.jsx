@@ -16,7 +16,8 @@ const ListItem = ({
   headlines,
   websites,
   listPage,
-  type,
+  type: contentType,
+  firstInlineImage,
 }) => {
   const appContext = useAppContext();
   const { contextPath } = appContext;
@@ -27,22 +28,30 @@ const ListItem = ({
   const relativeURL = (websites && websites[sites] && websites[sites].website_url) || '/';
   const isListPage = listPage ? 'listPage' : '';
 
-  const getPromoItem = (items, contentType) => {
+  const getPromoItem = () => {
     // standalone video/gallery
     if (contentType === 'video' || contentType === 'gallery') {
-      if (items.basic) {
-        return <Image src={items.basic} width={1066} height={600} imageType="isHomepageImage" teaseContentType={contentType} />;
+      if (promoItems.basic) {
+        return <Image src={promoItems.basic} width={1066} height={600} imageType="isHomepageImage" teaseContentType={contentType} />;
       }
     }
 
-    if (items.basic && items.basic.type === 'image') {
-      return <Image src={items.basic || items.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />;
+    if (promoItems) {
+      if (promoItems.basic && promoItems.basic.type === 'image') {
+        return (
+          <Image src={promoItems.basic || promoItems.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />
+        );
+      }
+
+      if ((promoItems.basic && promoItems.basic.type === 'video') || (promoItems.basic && promoItems.basic.type === 'gallery')) {
+        if (promoItems.basic.promo_items && promoItems.basic.promo_items.basic) {
+          return <Image src={promoItems.basic.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />;
+        }
+      }
     }
 
-    if ((items.basic && items.basic.type === 'video') || (items.basic && items.basic.type === 'gallery')) {
-      if (items.basic.promo_items && items.basic.promo_items.basic) {
-        return <Image src={items.basic.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />;
-      }
+    if (firstInlineImage) {
+      return <Image src={firstInlineImage} width={1066} height={600} imageType="isHomepageImage" />;
     }
 
     return null;
@@ -50,11 +59,10 @@ const ListItem = ({
 
   return (
     <div className={`c-homeList ${isListPage}`}>
-      {promoItems && (
-        <a href={`${contextPath}${relativeURL}`} className="homeList-image">
-          {getPromoItem(promoItems, type)}
-        </a>
-      )}
+      <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+        {getPromoItem()}
+      </a>
+
       <div className="homeList-text">
         <div className="c-label-wrapper">
           <SectionLabel label={label || {}} taxonomy={taxonomy} />
@@ -78,6 +86,7 @@ ListItem.propTypes = {
   websites: PropTypes.object,
   listPage: PropTypes.bool,
   type: PropTypes.string,
+  firstInlineImage: PropTypes.object,
 };
 
 export default ListItem;

@@ -1,9 +1,12 @@
-import React from 'react';
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import Headline from '../../_helper_components/home/Headline/Headline';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
+import getFirstInlineImage from '../../layouts/_helper_functions/homepage/getFirstInlineImage';
 import './default.scss';
 
 const Lead = (customFields = {}) => {
@@ -17,6 +20,8 @@ const Lead = (customFields = {}) => {
       columns = 1,
     },
   } = customFields;
+
+  const [filteredElements, setFilteredElements] = useState('');
 
   const data = useContent({
     source: contentService,
@@ -54,7 +59,7 @@ const Lead = (customFields = {}) => {
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex, 3);
       case '1 or 2 Item Feature':
-        return [...Array(parseInt(columns, 10)).keys()].map(i => <Headline key={i} {...apiData[startIndex - 1 + i]} />);
+        return [...Array(columns).keys()].map(i => <Headline key={i} {...apiData[startIndex - 1 + i]} />);
       default:
         return null;
     }
@@ -91,13 +96,75 @@ const Lead = (customFields = {}) => {
     }
   }
 
-  if (data) {
-    const { content_elements: contentElements } = data;
+  function addInlineImageToContentElements(elements) {
+    // If no promo data, adds first inline image as new property to the content elements object
+    const newElements = elements;
+    const promiseArray = [];
+    if (newElements) {
+      newElements.forEach((el, i) => {
+        if (el.type === 'story' && !el.promo_items) {
+          getFirstInlineImage(el._id).then((firstInlineImage) => {
+            if (firstInlineImage) {
+              newElements[i].firstInlineImage = firstInlineImage;
+            }
+          });
+          promiseArray.push(getFirstInlineImage);
+        }
+      });
+    }
+    return Promise.all(promiseArray).then(() => newElements);
+  }
+
+  function requireImages(elements, requiredClasses) {
+    if (elements) {
+      if (requiredClasses.some(requiredClass => requiredClass === displayClass)) {
+        return elements.filter((el) => {
+          if (el.type === 'story') {
+            // if (el.promo_items && el.promo_items.basic && el.promo_items.basic.promo_image && el.promo_items.basic.promo_image.url) {
+            //   return true;
+            // }
+            // if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
+            //   return true;
+            // }
+
+            if (el.firstInlineImage) {
+              console.log('has inline');
+              return true;
+            }
+          }
+          if (el.type === 'video' || el.type === 'gallery') {
+            if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
+              return true;
+            }
+          }
+          return false;
+        });
+      }
+    }
+    return null;
+  }
+
+  function processContentElements() {
+    const { content_elements: contentElements } = data || {};
+    const displayClassesRequiringImg = ['5-Item Feature - Top Photo', '5-Item Feature - Left Photo'];
+
+    return addInlineImageToContentElements(contentElements).then((el) => {
+      //  console.log(el[0]);
+      // console.log(Object.keys(el[0]));
+      // if (!filteredElements) {
+      //   setFilteredElements(requireImages(el, displayClassesRequiringImg));
+      // }
+    });
+  }
+
+  processContentElements();
+
+  if (filteredElements && Array.isArray(filteredElements)) {
     return (
       <div className={`c-homeLeadContainer b-margin-bottom-d30-m20 ${getDisplayClassMap(displayClass)} ${getColumnsMap(columns)}`}>
-        {renderColumn1(displayClass, contentElements) && <div className="column-1">{renderColumn1(displayClass, contentElements)}</div>}
-        {renderColumn2(displayClass, contentElements) && <div className="column-2">{renderColumn2(displayClass, contentElements)}</div>}
-        {renderColumn3(displayClass, contentElements) && <div className="column-3">{renderColumn3(displayClass, contentElements)}</div>}
+        {renderColumn1(displayClass, filteredElements) && <div className="column-1">{renderColumn1(displayClass, filteredElements)}</div>}
+        {renderColumn2(displayClass, filteredElements) && <div className="column-2">{renderColumn2(displayClass, filteredElements)}</div>}
+        {renderColumn3(displayClass, filteredElements) && <div className="column-3">{renderColumn3(displayClass, filteredElements)}</div>}
       </div>
     );
   }
