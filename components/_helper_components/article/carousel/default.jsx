@@ -9,6 +9,7 @@ const Carousel = ({ storyId, taxonomy, ampPage }) => {
   const { path } = primarySection || {};
 
   const formattedPath = path ? path.substring(1) : null;
+  console.log('formatted', formattedPath);
 
   if (!ampPage || !formattedPath) return null;
 

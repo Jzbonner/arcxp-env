@@ -25,8 +25,10 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
 
     temp.headline = el.headlines && el.headlines.basic ? el.headlines.basic : null;
 
+    console.log('carousel', filteredContentElements);
+
     return (
-      <a key={`key-${i}`}>
+      <a key={`key-${i}`} href={`${temp.url ? `${temp.url} + ?outputType=amp` : null}`}>
         <div id={`carousel-item-${i}`} className={`c-carouselItem ${i === 0 ? 'is-first' : ''}`}>
           <img className={`${!temp.src ? 'is-Logo' : ''}`} src={temp.src ? imageResizer(temp.src, 256, 144) : logo} />
           <div className="c-itemText">
