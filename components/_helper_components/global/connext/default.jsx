@@ -55,9 +55,6 @@ const ConnextInit = () => {
         deleteCookie('igmRegID');
         window.Connext.Logout();
       };
-      window.addEventListener('connextLoaded', () => {
-        connextLogger('connextLoaded from init');
-      });
       window.addEventListener('connextLoggedIn', () => {
         toggleUserState('logged-in');
       });

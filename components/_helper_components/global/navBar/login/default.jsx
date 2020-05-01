@@ -18,6 +18,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
     clientCode,
   } = connext;
 
+  const profileLink = `//myaccount.${clientCode}.com/${clientCode}/myprofile`;
   const [userState, _setUserState] = useState('');
   const [showUserMenu, _setShowUserMenu] = useState(false);
   const userStateRef = React.useRef(userState);
@@ -30,8 +31,12 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
 
   const setShowUserMenu = (data) => {
     if (isMobile) {
-      showUserMenuRef.current = data;
-      _setShowUserMenu(data);
+      if (!isSticky) {
+        showUserMenuRef.current = data;
+        _setShowUserMenu(data);
+      } else {
+        window.location.href = profileLink;
+      }
     }
   };
 
@@ -45,7 +50,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
     window.addEventListener('connextIsSubscriber', () => {
       setUserState('authenticated');
     });
-  }, [userState]);
+  }, [userState, userStateRef]);
 
   return isEnabled && (
     <li
@@ -57,7 +62,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
       <div className='nav-itemText login-text is-profileAuthed'>My Profile</div>
       <div className={`section is-profileAuthed ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
         <div className={'section-item'}>
-          <a href={`//myaccount.${clientCode}.com/${clientCode}/myprofile`}>
+          <a href={profileLink}>
             <img src={source} />
             <div className='nav-itemText login-text'>My Profile</div>
           </a>
