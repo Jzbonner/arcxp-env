@@ -10,7 +10,7 @@ const taboolaHeaderScript = (layout, cdnLink) => {
   return `window._taboola = window._taboola || [];
     _taboola.push({${taboolaCatType}:'auto'});
     !function (e, f, u, i) {
-      if (!document.getElementById(i)){
+      if (!document.getElementById(i)) {
         e.async = 1;
         e.src = u;
         e.id = i;

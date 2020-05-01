@@ -7,14 +7,15 @@ import { taboolaFooterScript } from '../../../src/js/taboola/taboolaScripts';
 
 const TaboolaFooter = () => {
   const { appContext } = useAppContext();
-  const { layout } = appContext || {};
+  const { layout } = appContext || { layout: null };
   const {
     boapPTD,
     moapPTD,
   } = taboolaID;
-  return <script type='text/javascript' dangerouslySetInnerHTML={{
+  return (<script type='text/javascript' dangerouslySetInnerHTML={{
     __html: taboolaFooterScript(layout, boapPTD, moapPTD),
-  }}></script>;
+  }}></script>
+  );
 };
 
 TaboolaFooter.propTypes = {
