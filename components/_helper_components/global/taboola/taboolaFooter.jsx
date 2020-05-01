@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import { taboolaID } from 'fusion:environment';
-import { taboolaFooterScript } from '../../../src/js/taboola/taboolaScripts';
+import { taboolaFooterScript } from '../../../../src/js/taboola/taboolaScripts';
 
 
 const TaboolaFooter = () => {

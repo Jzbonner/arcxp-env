@@ -1,7 +1,7 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
 import { useAppContext } from 'fusion:context';
-import { taboolaHeaderScript } from '../../../src/js/taboola/taboolaScripts';
+import { taboolaHeaderScript } from '../../../../src/js/taboola/taboolaScripts';
 
 const TaboolaHeader = () => {
   const { taboola } = getProperties();
