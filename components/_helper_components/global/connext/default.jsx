@@ -18,19 +18,34 @@ const ConnextInit = () => {
   const userIsLoggedInClass = 'is-loggedIn';
   const userIsLoggedOutClass = 'is-loggedOut';
   const userIsAuthenticatedClass = 'is-authenticated';
+  const connextLSLookup = `connext_user_data_${siteCode}_${configCode}_${environment.toUpperCase()}`;
 
   return <script type='text/javascript' dangerouslySetInnerHTML={{
     __html: `
       const doc = window.document;
       const docBody = doc.querySelector('body');
       const toggleUserState = (action) => {
+        let dataLayer = window.dataLayer || [];
         if (action === 'logged-in') {
           docBody.className = docBody.className.replace(/${userIsLoggedOutClass}/g, '');
           docBody.className += docBody.className.indexOf('${userIsLoggedInClass}') === -1 ? ' ${userIsLoggedInClass}' : '';
-
+          if (typeof(window.localStorage) !== 'undefined') {
+            const connextLS = window.localStorage.getItem('${connextLSLookup}');
+            if (connextLS) {
+              const { UserId } = JSON.parse(connextLS);
+              dataLayer.push({'userData': {
+                'userStatus': 'logged in',
+                'userProfileID': UserId
+              }});
+            }
+          }
         } else if (action === 'logged-out') {
           docBody.className = docBody.className.replace(/${userIsLoggedInClass}/g, '').replace(/${userIsAuthenticatedClass}/g, '');
           docBody.className += docBody.className.indexOf('${userIsLoggedOutClass}') === -1 ? ' ${userIsLoggedOutClass}' : '';
+          dataLayer.push('userData', {
+            'userStatus': 'not logged in',
+            'userProfileID': null
+          });
         } else if (action === 'authenticated' && docBody.className.indexOf('${userIsAuthenticatedClass}') === -1) {
           docBody.className += ' ${userIsAuthenticatedClass}';
         }

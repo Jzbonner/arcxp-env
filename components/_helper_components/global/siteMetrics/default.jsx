@@ -119,7 +119,7 @@ const SiteMetrics = () => {
 
   return (
     <script type='text/javascript' dangerouslySetInnerHTML={{
-      __html: `var dataLayer = dataLayer || [];
+      __html: `let dataLayer = window.dataLayer || [];
         dataLayer.push({
           'connextActive': '${connext && connext.isEnabled ? connext.isEnabled : 'false'}',
           'pageData': {
@@ -149,12 +149,6 @@ const SiteMetrics = () => {
             'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
             'contentPublishDate': '${firstPublishDateConverted}',
             'blogName': '${pageContentType === 'blog' ? topSectionName : ''}'
-          },
-          'userData': {
-            'userStatus': '<string>',
-            'userProfileID': '<string>',
-            'userType': '<string>',
-            'userActive': '<string>'
           }
         });
       `,

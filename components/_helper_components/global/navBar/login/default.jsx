@@ -18,6 +18,10 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
     clientCode,
   } = connext;
 
+  if (!isEnabled) {
+    return null;
+  }
+
   const profileLink = `//myaccount.${clientCode}.com/${clientCode}/myprofile`;
   const [userState, _setUserState] = useState('');
   const [showUserMenu, _setShowUserMenu] = useState(false);
@@ -52,7 +56,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
     });
   }, [userState, userStateRef]);
 
-  return isEnabled && (
+  return (
     <li className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`}>
       <div
         data-mg2-action={userStateRef.current === 'logged-out' ? 'register' : ''}
