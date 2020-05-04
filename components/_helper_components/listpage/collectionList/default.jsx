@@ -15,7 +15,6 @@ const CollectionList = ({
     query: {
       id: collectionID,
       from: index,
-      size: 10,
     },
   });
 
@@ -42,7 +41,6 @@ const CollectionList = ({
       const {
         content_elements: contentElements,
       } = newItems;
-
       const newContent = contentElements.map((el) => {
         const {
           _id: id,
