@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
+import filterElementsWithoutImages from '../../layouts/_helper_functions/homepage/filterElementsWithoutImages';
 import './default.scss';
 
 const List = (customFields = {}) => {
@@ -17,10 +18,13 @@ const List = (customFields = {}) => {
     },
   } = customFields;
 
-  const data = useContent({
+  let data = useContent({
     source: contentService,
     query: contentConfigValues,
   });
+
+  const displayClassesRequiringImg = ['Top Photo', '1 or 2 Item Feature'];
+  data = filterElementsWithoutImages(data, displayClass, displayClassesRequiringImg);
 
   function getDisplayClassMap(displayC) {
     switch (displayC) {

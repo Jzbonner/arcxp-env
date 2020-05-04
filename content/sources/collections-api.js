@@ -1,4 +1,10 @@
+/* eslint-disable no-console */
+import { CONTENT_BASE } from 'fusion:environment';
+import axios from 'axios';
+import AddFirstInlineImageToContentElements from './helper_functions/AddFirstImage';
+
 const schemaName = 'collections';
+const ttl = 120;
 
 const params = {
   id: 'text',
@@ -6,20 +12,30 @@ const params = {
   size: 'text',
 };
 
-const resolve = (query) => {
+const fetch = (query) => {
   const {
     'arc-site': arcSite = 'ajc', id, from, size,
   } = query;
-  let requestUri = `/content/v4/collections/?website=${arcSite}`;
+
+  let requestUri = `${CONTENT_BASE}/content/v4/collections/?website=${arcSite}`;
   requestUri += id ? `&_id=${id}` : '';
   requestUri += from ? `&from=${from}` : '';
   requestUri += size ? `&size=${size}` : '';
 
-  return requestUri;
+  if (id) {
+    return axios
+      .get(requestUri)
+      .then(({ data }) => AddFirstInlineImageToContentElements(data, arcSite))
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  return null;
 };
 
 export default {
-  resolve,
-  params,
+  fetch,
   schemaName,
+  ttl,
+  params,
 };
