@@ -1,14 +1,10 @@
-
 const params = {
-  name: 'text',
+  id: 'text',
 };
 
 const resolve = (query) => {
-  const {
-    'arc-site': arcSite = 'ajc', name,
-  } = query;
-  let requestUri = `/content/v4/search/published?website=${arcSite}`;
-  requestUri += name ? `&q=type:story+AND+credits.by._id:${name}&sort=display_date:desc&size=10` : '';
+  const { id = '' } = query;
+  const requestUri = `/author/v1/author-service/?_id=${id}`;
   return requestUri;
 };
 
