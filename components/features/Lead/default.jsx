@@ -6,7 +6,7 @@ import { useContent } from 'fusion:content';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import Headline from '../../_helper_components/home/Headline/Headline';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
-import getFirstInlineImage from '../../layouts/_helper_functions/homepage/getFirstInlineImage';
+import filterElementsWithoutImages from '../../layouts/_helper_functions/homepage/filterElementsWithoutImages';
 import './default.scss';
 
 const Lead = (customFields = {}) => {
@@ -21,12 +21,18 @@ const Lead = (customFields = {}) => {
     },
   } = customFields;
 
-  const [filteredElements, setFilteredElements] = useState('');
-
-  const data = useContent({
+  let data = useContent({
     source: contentService,
     query: contentConfigValues,
   });
+
+  const displayClassesRequiringImg = [
+    '5-Item Feature - Top Photo',
+    '5-Item Feature - Left Photo',
+    '5-Item Feature - Center Lead Top Photo',
+    '5-Item Feature - No Photo',
+  ];
+  data = filterElementsWithoutImages(data, displayClass, displayClassesRequiringImg);
 
   function getDisplayClassMap(displayC) {
     switch (displayC) {
@@ -96,75 +102,13 @@ const Lead = (customFields = {}) => {
     }
   }
 
-  function addInlineImageToContentElements(elements) {
-    // If no promo data, adds first inline image as new property to the content elements object
-    const newElements = elements;
-    const promiseArray = [];
-    if (newElements) {
-      newElements.forEach((el, i) => {
-        if (el.type === 'story' && !el.promo_items) {
-          getFirstInlineImage(el._id).then((firstInlineImage) => {
-            if (firstInlineImage) {
-              newElements[i].firstInlineImage = firstInlineImage;
-            }
-          });
-          promiseArray.push(getFirstInlineImage);
-        }
-      });
-    }
-    return Promise.all(promiseArray).then(() => newElements);
-  }
-
-  function requireImages(elements, requiredClasses) {
-    if (elements) {
-      if (requiredClasses.some(requiredClass => requiredClass === displayClass)) {
-        return elements.filter((el) => {
-          if (el.type === 'story') {
-            // if (el.promo_items && el.promo_items.basic && el.promo_items.basic.promo_image && el.promo_items.basic.promo_image.url) {
-            //   return true;
-            // }
-            // if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
-            //   return true;
-            // }
-
-            if (el.firstInlineImage) {
-              console.log('has inline');
-              return true;
-            }
-          }
-          if (el.type === 'video' || el.type === 'gallery') {
-            if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
-              return true;
-            }
-          }
-          return false;
-        });
-      }
-    }
-    return null;
-  }
-
-  function processContentElements() {
-    const { content_elements: contentElements } = data || {};
-    const displayClassesRequiringImg = ['5-Item Feature - Top Photo', '5-Item Feature - Left Photo'];
-
-    return addInlineImageToContentElements(contentElements).then((el) => {
-      //  console.log(el[0]);
-      // console.log(Object.keys(el[0]));
-      // if (!filteredElements) {
-      //   setFilteredElements(requireImages(el, displayClassesRequiringImg));
-      // }
-    });
-  }
-
-  processContentElements();
-
-  if (filteredElements && Array.isArray(filteredElements)) {
+  if (data) {
+    const { content_elements: contentElements } = data;
     return (
       <div className={`c-homeLeadContainer b-margin-bottom-d30-m20 ${getDisplayClassMap(displayClass)} ${getColumnsMap(columns)}`}>
-        {renderColumn1(displayClass, filteredElements) && <div className="column-1">{renderColumn1(displayClass, filteredElements)}</div>}
-        {renderColumn2(displayClass, filteredElements) && <div className="column-2">{renderColumn2(displayClass, filteredElements)}</div>}
-        {renderColumn3(displayClass, filteredElements) && <div className="column-3">{renderColumn3(displayClass, filteredElements)}</div>}
+        {renderColumn1(displayClass, contentElements) && <div className="column-1">{renderColumn1(displayClass, contentElements)}</div>}
+        {renderColumn2(displayClass, contentElements) && <div className="column-2">{renderColumn2(displayClass, contentElements)}</div>}
+        {renderColumn3(displayClass, contentElements) && <div className="column-3">{renderColumn3(displayClass, contentElements)}</div>}
       </div>
     );
   }

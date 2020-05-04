@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { buildSliderItems, getAmount } from './_helper_functions/index';
 import rightArrow from '../../../resources/images/right-arrow.svg';
+import filterElementsWithoutImages from '../../layouts/_helper_functions/homepage/filterElementsWithoutImages';
 import './default.scss';
 
 const Slider = (customFields = {}) => {
@@ -37,10 +38,13 @@ const Slider = (customFields = {}) => {
   contentConfigValues.from = startIndex > 1 ? startIndex : null;
   contentConfigValues.size = itemLimit > 3 || null;
 
-  const data = useContent({
+  let data = useContent({
     source: contentService,
     query: contentConfigValues,
   });
+
+  const displayClassesRequiringImg = ['Slider', 'Slider - Special Features'];
+  data = filterElementsWithoutImages(data, displayClass, displayClassesRequiringImg);
 
   const addToRefs = (el, refArray) => {
     if (el && !refArray.current.includes(el)) refArray.current.push(el);
