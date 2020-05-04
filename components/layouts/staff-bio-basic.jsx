@@ -29,18 +29,6 @@ const staffBioPage = () => {
     expertise,
   } = globalContent || {};
 
-  //   if (!data) return null;
-
-  // const {
-  //   id: queryID,
-  //   name,
-  //   document,
-  // } = data || {};
-
-  // const {
-  //   content_elements: contentElements,
-  // } = document;
-
   //   const { tags = [] } = taxonomy || {};
   //   const noAds = checkTags(tags, 'no-ads');
 
@@ -73,6 +61,7 @@ const staffBioPage = () => {
               <ArcAd staticSlot={'HP01'} />
               <ArcAd staticSlot={'MP01'} />
             </div>}
+        <div className='c-section with-rightRail'>
         <StaffBio role={role}
         authorPhoto={authorPhoto}
         byline={byline}
@@ -80,7 +69,6 @@ const staffBioPage = () => {
         twitter={twitter}
         facebook={facebook}
         expertise={expertise}/>
-        <div className='c-section with-rightRail'>
           <div className='c-contentElements list-contentElements'>
             { !noAds ? <div className='c-rightRail list-rp01'>
               {RP01()}

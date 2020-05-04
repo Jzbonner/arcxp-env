@@ -1,0 +1,14 @@
+.staff-image {
+  height: 160px;
+  width: 160px;
+  
+  img {
+    border-radius: 50%;
+  }
+}
+
+.c-staffInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
