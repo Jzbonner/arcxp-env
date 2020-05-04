@@ -34,7 +34,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
       if (!isSticky) {
         showUserMenuRef.current = data;
         _setShowUserMenu(data);
-      } else {
+      } else if (userStateRef.current !== 'logged-out') {
         window.location.href = profileLink;
       }
     }
@@ -53,13 +53,14 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   }, [userState, userStateRef]);
 
   return isEnabled && (
-    <li
-      className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`}
-      data-mg2-action={userStateRef.current === 'logged-out' ? 'register' : ''}
-      onClick={(e) => { e.preventDefault(); setShowUserMenu(!showUserMenuRef.current); }}>
-      <img src={source} />
-      <div className='nav-itemText login-text is-profileAnon'>Log in</div>
-      <div className='nav-itemText login-text is-profileAuthed'>My Profile</div>
+    <li className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`}>
+      <div
+        data-mg2-action={userStateRef.current === 'logged-out' ? 'register' : ''}
+        onClick={(e) => { e.preventDefault(); setShowUserMenu(!showUserMenuRef.current); }}>
+        <img src={source} />
+        <div className='nav-itemText login-text is-profileAnon'>Log in</div>
+        <div className='nav-itemText login-text is-profileAuthed'>My Profile</div>
+      </div>
       <div className={`section is-profileAuthed ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
         <div className={'section-item'}>
           <a href={profileLink}>
