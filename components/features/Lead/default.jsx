@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
@@ -32,6 +30,7 @@ const Lead = (customFields = {}) => {
     '5-Item Feature - Center Lead Top Photo',
     '5-Item Feature - No Photo',
   ];
+
   data = filterElementsWithoutImages(data, displayClass, displayClassesRequiringImg);
 
   function getDisplayClassMap(displayC) {
