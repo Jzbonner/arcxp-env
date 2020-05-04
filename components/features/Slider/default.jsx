@@ -4,7 +4,6 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import { buildSliderItems, getAmount } from './_helper_functions/index';
 import rightArrow from '../../../resources/images/right-arrow.svg';
-import filterElementsWithoutImages from '../../layouts/_helper_functions/homepage/filterElementsWithoutImages';
 import './default.scss';
 
 const Slider = (customFields = {}) => {
@@ -43,7 +42,7 @@ const Slider = (customFields = {}) => {
 
   const displayClassesRequiringImg = ['Slider', 'Slider - Special Features'];
 
-  let data = useContent({
+  const data = useContent({
     source: contentService,
     query: {
       ...contentConfigValues,
@@ -52,8 +51,6 @@ const Slider = (customFields = {}) => {
       displayClassesRequiringImg,
     },
   });
-
-  data = filterElementsWithoutImages(data, displayClass, displayClassesRequiringImg);
 
   const addToRefs = (el, refArray) => {
     if (el && !refArray.current.includes(el)) refArray.current.push(el);

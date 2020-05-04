@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import { CONTENT_BASE } from 'fusion:environment';
 import axios from 'axios';
-import AddFirstInlineImageToContentElements from './helper_functions/AddFirstImage';
+import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
+import FilterElements from './helper_functions/FilterElements';
 
 const schemaName = 'query-feed';
 const bodybuilder = require('bodybuilder');
@@ -36,7 +37,7 @@ const fetch = (query) => {
     includeSubtypes = '',
     excludeSubtypes = '',
     arcSite = 'ajc',
-    currentDisplayClass = '',
+    displayClass = '',
     displayClassesRequiringImg = [],
   } = query;
 
@@ -94,12 +95,8 @@ const fetch = (query) => {
 
   return axios
     .get(requestUri)
-    .then(({ data }) => {
-      if (displayClassesRequiringImg.some(requiredClass => requiredClass === currentDisplayClass)) {
-        return AddFirstInlineImageToContentElements(data, arcSite);
-      }
-      return data;
-    })
+    .then(({ data }) => AddFirstInlineImage(data, arcSite, displayClass, displayClassesRequiringImg))
+    .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
     .catch((error) => {
       console.error(error);
     });

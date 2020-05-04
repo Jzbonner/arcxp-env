@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import { CONTENT_BASE } from 'fusion:environment';
 import axios from 'axios';
-import AddFirstInlineImageToContentElements from './helper_functions/AddFirstImage';
+import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
+import FilterElements from './helper_functions/FilterElements';
 
 const schemaName = 'collections';
 const ttl = 120;
@@ -26,12 +27,8 @@ const fetch = (query) => {
   if (id) {
     return axios
       .get(requestUri)
-      .then(({ data }) => {
-        if (displayClassesRequiringImg.some(requiredClass => requiredClass === displayClass)) {
-          return AddFirstInlineImageToContentElements(data, arcSite);
-        }
-        return data;
-      })
+      .then(({ data }) => AddFirstInlineImage(data, arcSite, displayClass, displayClassesRequiringImg))
+      .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
       .catch((error) => {
         console.error(error);
       });

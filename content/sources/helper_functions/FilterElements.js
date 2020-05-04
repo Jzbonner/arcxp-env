@@ -1,4 +1,4 @@
-export default (apiData, currentDisplayClass, requiredClasses) => {
+export default (apiData, currentDisplayClass = '', requiredClasses = []) => {
   if (apiData && apiData.content_elements) {
     const newData = apiData;
     if (requiredClasses.some(requiredClass => requiredClass === currentDisplayClass)) {
