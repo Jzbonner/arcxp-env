@@ -65,7 +65,6 @@ const StoryPageLayout = () => {
     credits,
     type,
   } = globalContent || {};
-
   if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} />;
 
   const queryParams = getQueryParams(requestUri);
@@ -150,7 +149,7 @@ const StoryPageLayout = () => {
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
           </div>
-          {ampPage && <SocialShare/>}
+          {ampPage && <SocialShare headlines={headlines}/>}
           <ContributorBadge tags={tags} ampPage={ampPage} />
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
             <SubHeadline subheadlines={subheadlines} />
