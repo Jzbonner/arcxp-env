@@ -49,7 +49,6 @@ const Carousel = ({ storyId, taxonomy }) => {
 Carousel.propTypes = {
   storyId: PropTypes.string,
   taxonomy: PropTypes.object,
-  ampPage: PropTypes.bool,
 };
 
 export default Carousel;
