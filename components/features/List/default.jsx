@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import filterElementsWithoutImages from '../../layouts/_helper_functions/homepage/filterElementsWithoutImages';
 import './default.scss';
 
 const List = (customFields = {}) => {
+  const fusionContext = useFusionContext();
+  const { arcSite = 'ajc' } = fusionContext;
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
@@ -18,12 +21,18 @@ const List = (customFields = {}) => {
     },
   } = customFields;
 
+  const displayClassesRequiringImg = ['Top Photo', '1 or 2 Item Feature'];
+
   let data = useContent({
     source: contentService,
-    query: contentConfigValues,
+    query: {
+      ...contentConfigValues,
+      arcSite,
+      displayClass,
+      displayClassesRequiringImg,
+    },
   });
 
-  const displayClassesRequiringImg = ['Top Photo', '1 or 2 Item Feature'];
   data = filterElementsWithoutImages(data, displayClass, displayClassesRequiringImg);
 
   function getDisplayClassMap(displayC) {

@@ -1,5 +1,5 @@
 export default (apiData, currentDisplayClass, requiredClasses) => {
-  if (apiData.content_elements) {
+  if (apiData && apiData.content_elements) {
     const newData = apiData;
     if (requiredClasses.some(requiredClass => requiredClass === currentDisplayClass)) {
       newData.content_elements = apiData.content_elements.filter((el) => {

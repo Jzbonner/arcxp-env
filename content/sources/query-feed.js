@@ -1,3 +1,8 @@
+/* eslint-disable no-console */
+import { CONTENT_BASE } from 'fusion:environment';
+import axios from 'axios';
+import AddFirstInlineImageToContentElements from './helper_functions/AddFirstImage';
+
 const schemaName = 'query-feed';
 const bodybuilder = require('bodybuilder');
 
@@ -17,7 +22,7 @@ const params = {
 
 export const itemsToArray = (itemString = '') => itemString.split(',').map(item => item.replace(/\s/g, ''));
 
-const resolve = (query) => {
+const fetch = (query) => {
   const {
     includeDistributor = '',
     excludeDistributor = '',
@@ -30,6 +35,9 @@ const resolve = (query) => {
     excludeTags = '',
     includeSubtypes = '',
     excludeSubtypes = '',
+    arcSite = 'ajc',
+    currentDisplayClass = '',
+    displayClassesRequiringImg = [],
   } = query;
 
   const builder = bodybuilder();
@@ -82,11 +90,23 @@ const resolve = (query) => {
   }
   const body = builder.build();
   const newBody = JSON.stringify(body);
-  return `/content/v4/search/published?body=${newBody}&website=ajc`;
+  const requestUri = `${CONTENT_BASE}/content/v4/search/published?body=${newBody}&website=ajc`;
+
+  return axios
+    .get(requestUri)
+    .then(({ data }) => {
+      if (displayClassesRequiringImg.some(requiredClass => requiredClass === currentDisplayClass)) {
+        return AddFirstInlineImageToContentElements(data, arcSite);
+      }
+      return data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
 
 export default {
   schemaName,
-  resolve,
+  fetch,
   params,
 };

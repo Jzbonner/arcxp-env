@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import './default.scss';
 
 const ListOrderedUnordered = (customFields = {}) => {
+  const fusionContext = useFusionContext();
+  const { arcSite = 'ajc' } = fusionContext;
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
@@ -17,7 +20,7 @@ const ListOrderedUnordered = (customFields = {}) => {
 
   const data = useContent({
     source: contentService,
-    query: contentConfigValues,
+    query: { ...contentConfigValues, arcSite },
   });
 
   if (data) {
@@ -36,7 +39,7 @@ const ListOrderedUnordered = (customFields = {}) => {
               const { canonical_url: itemURL } = el || '';
               const countOrdered = i + 1 > 9 ? i + 1 : `0${i + 1}`;
               return (
-                <li className='list-item' key={i}>
+                <li className="list-item" key={i}>
                   <span className={`item-index-${displayClass}`}>{displayClass === 'Ordered List' ? countOrdered : ''}</span>
                   <a href={itemURL} className="item-title">
                     {truncateHeadline(headline)}

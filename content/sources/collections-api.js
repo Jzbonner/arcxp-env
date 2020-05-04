@@ -10,11 +10,12 @@ const params = {
   id: 'text',
   from: 'text',
   size: 'text',
+  arcSite: 'text',
 };
 
 const fetch = (query) => {
   const {
-    'arc-site': arcSite = 'ajc', id, from, size,
+    arcSite = 'ajc', id, from, size, displayClass = '', displayClassesRequiringImg = [],
   } = query;
 
   let requestUri = `${CONTENT_BASE}/content/v4/collections/?website=${arcSite}`;
@@ -25,7 +26,12 @@ const fetch = (query) => {
   if (id) {
     return axios
       .get(requestUri)
-      .then(({ data }) => AddFirstInlineImageToContentElements(data, arcSite))
+      .then(({ data }) => {
+        if (displayClassesRequiringImg.some(requiredClass => requiredClass === displayClass)) {
+          return AddFirstInlineImageToContentElements(data, arcSite);
+        }
+        return data;
+      })
       .catch((error) => {
         console.error(error);
       });

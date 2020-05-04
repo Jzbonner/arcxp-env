@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import imageResizer from '../../layouts/_helper_functions/Thumbor';
 import getTeaseIcon from '../../_helper_components/global/image/_helper_functions/getTeaseIcon';
 import './default.scss';
 
 const Hero = (customFields = {}) => {
+  const fusionContext = useFusionContext();
+  const { arcSite = 'ajc' } = fusionContext;
+
   const {
     customFields: { content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {}, startIndex = 1 },
   } = customFields;
@@ -17,7 +20,7 @@ const Hero = (customFields = {}) => {
 
   const data = useContent({
     source: contentService,
-    query: contentConfigValues,
+    query: { ...contentConfigValues, arcSite },
   });
 
   if (data) {

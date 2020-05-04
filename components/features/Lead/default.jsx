@@ -1,8 +1,7 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import Headline from '../../_helper_components/home/Headline/Headline';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
@@ -10,6 +9,9 @@ import filterElementsWithoutImages from '../../layouts/_helper_functions/homepag
 import './default.scss';
 
 const Lead = (customFields = {}) => {
+  const fusionContext = useFusionContext();
+  const { arcSite = 'ajc' } = fusionContext;
+
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
@@ -21,17 +23,22 @@ const Lead = (customFields = {}) => {
     },
   } = customFields;
 
-  let data = useContent({
-    source: contentService,
-    query: contentConfigValues,
-  });
-
   const displayClassesRequiringImg = [
     '5-Item Feature - Top Photo',
     '5-Item Feature - Left Photo',
     '5-Item Feature - Center Lead Top Photo',
     '5-Item Feature - No Photo',
   ];
+
+  let data = useContent({
+    source: contentService,
+    query: {
+      ...contentConfigValues,
+      arcSite,
+      displayClass,
+      displayClassesRequiringImg,
+    },
+  });
 
   data = filterElementsWithoutImages(data, displayClass, displayClassesRequiringImg);
 
