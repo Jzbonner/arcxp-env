@@ -30,7 +30,11 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
     return (
       <a key={`key-${i}`} href={`${temp.url ? `${temp.url} + ?outputType=amp` : null}`}>
         <div id={`carousel-item-${i}`} className={`c-carouselItem ${i === 0 ? 'is-first' : ''}`}>
-          <img className={`${!temp.src ? 'is-Logo' : ''}`} src={temp.src ? imageResizer(temp.src, 256, 144) : logo} />
+          <amp-img
+            width={`${temp.src ? '90' : '76'}`}
+            height="50"
+            src={temp.src ? imageResizer(temp.src, 256, 144) : logo}
+          ></amp-img>
           <div className="c-itemText">
             {truncateHeadline(temp.headline)}
           </div>

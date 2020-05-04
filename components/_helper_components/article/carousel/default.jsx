@@ -42,7 +42,7 @@ const Carousel = ({ storyId, taxonomy, ampPage }) => {
 
   return (
     <div className="c-carousel">
-      <amp-carousel width="100vw" height="200" layout="responsive" type="carousel">{carouselItems}</amp-carousel>
+      <amp-carousel width="auto" height="94" layout="fixed-height" type="carousel">{carouselItems}</amp-carousel>
     </div>
   );
 };

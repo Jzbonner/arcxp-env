@@ -46,11 +46,6 @@ const AmpScripts = () => (
       custom-element="amp-carousel"
       src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"
     />
-    <script
-      async
-      custom-element="amp-fit-text"
-      src="https://cdn.ampproject.org/v0/amp-fit-text-0.1.js"
-    />
   </>
 );
 
