@@ -93,7 +93,8 @@ export const adSlots = {
       [768, 0], // tablet
     ],
   },
-  RP02: {
+  'RP01 sticky': {
+    slotName: 'RP01',
     dimensions: [
       [
         [300, 600],
@@ -103,6 +104,7 @@ export const adSlots = {
     breakpoints: [
       [768, 0], // tablet+
     ],
+    isSticky: true,
   },
   'RP01-Story-Desktop': {
     slotName: 'RP01',
@@ -157,6 +159,29 @@ export const adSlots = {
       [768, 0], // tablet+
     ],
   },
+  RP02: {
+    dimensions: [
+      [
+        [300, 100],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+  },
+  'RP03 sticky': {
+    slotName: 'RP03',
+    dimensions: [
+      [
+        [300, 250],
+        [300, 600],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+    isSticky: true,
+  },
   'RP09-Story-Desktop': {
     slotName: 'RP09',
     dimensions: [
@@ -184,6 +209,19 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
+  },
+  'RP09 sticky': {
+    slotName: 'RP09',
+    dimensions: [
+      [
+        [300, 250],
+        [300, 600],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+    isSticky: true,
   },
   MP01: {
     dimensions: [

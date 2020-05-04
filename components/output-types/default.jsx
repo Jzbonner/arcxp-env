@@ -34,25 +34,27 @@ const DefaultOutputType = (props) => {
   return (
     <html>
       <head>
-        {includeGtm && (
-          /* Google Tag Manager */
-          <script type='text/javascript' dangerouslySetInnerHTML={{
-            /* eslint-disable-next-line max-len */
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${metrics.gtmContainerKey}');`,
-          }}></script>
-          /* End Google Tag Manager */
-        )}
         <MetaTags />
         <SiteMeta />
-        <Libs />
         <CssLinks />
+        {includeGtm && (
+          <>
+            <SiteMetrics />
+            {/* Google Tag Manager */}
+            <script type='text/javascript' dangerouslySetInnerHTML={{
+              /* eslint-disable-next-line max-len */
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${metrics.gtmContainerKey}');`,
+            }}></script>
+            {/* End Google Tag Manager */}
+          </>
+        )}
+        <Libs />
         {!noAds && !isHyperlocalContent && <NativoScripts />}
         {!isHyperlocalContent && type && <TaboolaHeader type={type} />}
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
-        <SiteMetrics />
       </head>
       <body>
         {includeGtm && (

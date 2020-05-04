@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import { ENVIRONMENT } from 'fusion:environment';
+import fetchEnv from '../../_helper_components/global/utils/environment.js';
 import AdSetup from './src/index';
+import checkPageType from '../../layouts/_helper_functions/getPageType.js';
 import { adSlots, defaultAdSlot } from './children/adtypes';
 
 const ArcAd = ({ customFields, staticSlot }) => {
   const appContext = useAppContext();
-  const { globalContent, requestUri } = appContext;
+  const { globalContent, layout, requestUri } = appContext;
   const {
     _id: uuid,
     subtype,
@@ -26,8 +27,19 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const { dfp_id: dfpid, siteName } = getProperties();
   const slot = customFieldsSlot || staticSlot;
   let randomIdMPG01 = '';
-  const currentEnv = ENVIRONMENT || 'unknown';
-  const contentType = subtype || type;
+  const currentEnv = fetchEnv();
+  const pageType = checkPageType(subtype || type, layout);
+  const {
+    isHome,
+    isSection,
+    type: typeOfPage,
+  } = pageType || {};
+  let contentType = typeOfPage === 'story' ? 'article' : typeOfPage.toLowerCase();
+  if (isHome) {
+    contentType = 'homepage';
+  } else if (isSection) {
+    contentType = 'sectionPage';
+  }
 
   // If there is no DFP ID and we are in the Admin,
   if (!dfpid) return null;
@@ -90,7 +102,21 @@ const ArcAd = ({ customFields, staticSlot }) => {
 
 ArcAd.propTypes = {
   customFields: PropTypes.shape({
-    slot: PropTypes.oneOf(['', 'HP01', 'HP02', 'MP01', 'MP03', 'MP04', 'RP01', 'RP02', 'RP09']).tag({
+    slot: PropTypes.oneOf([
+      '',
+      'HP01',
+      'HP02',
+      'MP01',
+      'MP02',
+      'MP03',
+      'MP04',
+      'MP05',
+      'RP01',
+      'RP01 sticky',
+      'RP02',
+      'RP03 sticky',
+      'RP09 sticky',
+    ]).tag({
       label: 'Slot ID',
       description: 'Select the ad slot to be inserted',
     }),

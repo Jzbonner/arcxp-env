@@ -32,6 +32,7 @@ import getQueryParams from './_helper_functions/getQueryParams';
 import checkTags from './_helper_functions/checkTags';
 import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
 import Carousel from '../_helper_components/article/carousel/default';
+import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -134,6 +135,7 @@ const StoryPageLayout = () => {
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
+            <SponsorBanner taxonomy={taxonomy}/>
             <Headline headlines={headlines} basicItems={basicItems} ampPage={ampPage} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
@@ -233,7 +235,7 @@ const StoryPageLayout = () => {
       </main>
       {!ampPage && <Footer />}
       <Copyright />
-      {ampPage && <Carousel storyId={uuid} taxonomy={taxonomy} ampPage={ampPage} />}
+      {ampPage && <Carousel storyId={uuid} taxonomy={taxonomy} />}
     </>
   );
 };

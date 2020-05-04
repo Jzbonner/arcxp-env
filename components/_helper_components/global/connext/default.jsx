@@ -15,23 +15,37 @@ const ConnextInit = () => {
 
   if (!isEnabled) return null;
 
+  const userIsLoggedInClass = 'is-loggedIn';
+  const userIsLoggedOutClass = 'is-loggedOut';
+  const userIsAuthenticatedClass = 'is-authenticated';
+
   return <script type='text/javascript' dangerouslySetInnerHTML={{
     __html: `
       const doc = window.document;
-
-      const connextLogger = (message) => {
-        if (${debug}) {
-          console.error(message);
+      const docBody = doc.querySelector('body');
+      const toggleUserState = (action) => {
+        if (action === 'logged-in') {
+          docBody.className.replace(/${userIsLoggedOutClass}/g, '');
+          docBody.className += docBody.className.indexOf('${userIsLoggedInClass}') === -1 ? ' ${userIsLoggedInClass}' : '';
+        } else if (action === 'logged-out') {
+          docBody.className = docBody.className.replace(/${userIsLoggedInClass}/g, '').replace(/${userIsAuthenticatedClass}/g, '');
+          docBody.className += docBody.className.indexOf('${userIsLoggedOutClass}') === -1 ? ' ${userIsLoggedOutClass}' : '';
+        } else if (action === 'authenticated' && docBody.className.indexOf('${userIsAuthenticatedClass}') === -1) {
+          docBody.className += ' ${userIsAuthenticatedClass}';
         }
       };
-
+      const connextLogger = (message) => {
+        if (${debug} || window.location.search.indexOf('connextDebug') > -1) {
+          console.log(message);
+        }
+      };
       const mg2Logout = () => {
         const deleteCookie = (name) => {
           const arr = location.host.split('.');
           const rootdomain = arr[arr.length - 2] + '.' + arr[arr.length - 1];
           doc.cookie = name + '=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT';
-          doc.cookie = name + '=;path=/;domain=' + host + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
-          doc.cookie = name + '=;path=/;domain=.' + host + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
+          doc.cookie = name + '=;path=/;domain=' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
+          doc.cookie = name + '=;path=/;domain=.' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
           doc.cookie = name + '=;path=/;domain=' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
           doc.cookie = name + '=;path=/;domain=.' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
         };
@@ -40,66 +54,23 @@ const ConnextInit = () => {
         deleteCookie('igmRegID');
         window.Connext.Logout();
       };
-
       doc.addEventListener('connextLoaded', () => {
         connextLogger('connextLoaded from init');
       });
-
+      doc.addEventListener('connextLoggedIn', () => {
+        toggleUserState('logged-in');
+      });
+      doc.addEventListener('connextLoggedOut', () => {
+        toggleUserState('logged-out');
+      });
+      doc.addEventListener('connextIsSubscriber', () => {
+        toggleUserState('authenticated');
+      });
       doc.addEventListener('DOMContentLoaded', () => {
         const connextLoaded = new Event('connextLoaded');
         const connextLoggedIn = new Event('connextLoggedIn');
         const connextLoggedOut = new Event('connextLoggedOut');
         const connextIsSubscriber = new Event('connextIsSubscriber');
-
-        const loggedOutState = doc.querySelectorAll('.is-profileAnon');
-        const loggedInState = doc.querySelectorAll('.is-profileAuthed');
-        const activationLinks = doc.querySelectorAll('.MG2activation');
-        const showThisEl = (el) => {
-          const elToShow = el;
-          elToShow.style.display = 'block';
-          elToShow.className = elToShow.className.replace('hidden', ' ');
-        };
-        const hideThisEl = (el) => {
-          const elToHide = el;
-          elToHide.style.display = 'none';
-          if (elToHide.className.indexOf('hidden') === -1) {
-            elToHide.className += ' hidden';
-          }
-        };
-        const toggleActivateLink = (showOrHide) => {
-          if (showOrHide === 'show') {
-            activationLinks.forEach((child) => {
-              showThisEl(child);
-            });
-          } else {
-            activationLinks.forEach((child) => {
-              hideThisEl(child);
-            });
-          }
-        };
-        const toggleLoggedInState = (showOrHide) => {
-          if (showOrHide === 'show') {
-            loggedInState.forEach((child) => {
-              showThisEl(child);
-            });
-          } else {
-            loggedInState.forEach((child) => {
-              hideThisEl(child);
-            });
-          }
-        };
-        const toggleLoggedOutState = (showOrHide) => {
-          if (showOrHide === 'show') {
-            loggedOutState.forEach((child) => {
-              showThisEl(child);
-            });
-          } else {
-            loggedOutState.forEach((child) => {
-              hideThisEl(child);
-            });
-          }
-        };
-
         Promise.resolve(window.MG2Loader.init({
           plugins: [
             {
@@ -144,17 +115,12 @@ const ConnextInit = () => {
                     doc.dispatchEvent(connextLoaded);
                   },
                   onLoggedIn: (e) => {
-                    toggleLoggedInState('show');
-                    toggleLoggedOutState('hide');
                     connextLogger('>> onLoggedIn', e);
                     doc.dispatchEvent(connextLoggedIn);
                   },
                   onNotAuthorized: (e) => {
                     // this event fires on every Engage loading if user is logged out
                     connextLogger('>> onNotAuthorized', e);
-
-                    toggleLoggedInState('hide');
-                    toggleLoggedOutState('show');
                     doc.dispatchEvent(connextLoggedOut);
                   },
                   onMeterLevelSet: (e) => {
@@ -163,13 +129,10 @@ const ConnextInit = () => {
                   onAuthorized: (e) => {
                     // this event fires on every Engage loading if user is logged in but doesn't have access to this product
                     connextLogger('>> onAuthorized', e);
-                    toggleActivateLink('show');
-                    doc.dispatchEvent(connextLoggedIn);
                   },
                   onHasNoActiveSubscription: (e) => {
                     // this event fires on every Engage loading if user is logged in but subscription is stopped or inactive
                     connextLogger('>> onHasNoActiveSubscription', e);
-                    toggleActivateLink('show');
                   },
                   onHasAccessNotEntitled: (e) => {
                     // this event fires on every Engage loading if user is logged in
@@ -179,7 +142,6 @@ const ConnextInit = () => {
                   onHasAccess: (e) => {
                     // this event fires on every Engage loading if user is subscriber
                     connextLogger('>> onHasAccess', e);
-                    toggleActivateLink('hide');
                     doc.dispatchEvent(connextIsSubscriber);
                   },
                 },

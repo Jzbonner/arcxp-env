@@ -4,13 +4,13 @@ import { useContent } from 'fusion:content';
 import buildCarouselItem from './_helper_functions/buildCarouselItems';
 import './default.scss';
 
-const Carousel = ({ storyId, taxonomy, ampPage }) => {
+const Carousel = ({ storyId, taxonomy }) => {
   const { primary_section: primarySection } = taxonomy || {};
   const { path } = primarySection || {};
 
   const formattedPath = path ? path.substring(1) : null;
 
-  if (!ampPage || !formattedPath) return null;
+  if (!formattedPath) return null;
 
   const relatedStoryData = useContent({
     source: 'search-api',
