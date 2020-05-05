@@ -1,12 +1,38 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
 import PropTypes from 'prop-types';
+import { useContent } from 'fusion:content';
+import getItemThumbNail from '../../../features/Slider/_helper_functions/getItemThumbnail';
 
 
-const SocialShare = ({ headlines, basicItems }) => {
+const SocialShare = ({ headlines, promoItems }) => {
   const { basic: headline } = headlines || {};
-  const { url: pinterestUrl } = basicItems || {};
+  const { basic: basicItems } = promoItems || {};
+  const { url: headlineImage } = basicItems || {};
   const { facebookAppID } = getProperties();
+
+  const siteLogoData = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'TopNav',
+    },
+    filter: 'logo',
+  });
+
+  const fetchedSiteLogo = siteLogoData
+    && siteLogoData.site
+    && siteLogoData.site.site_logo_image_small
+    ? siteLogoData.site.site_logo_image_small : null;
+
+  let pinterestUrl = headlineImage;
+
+  if (!headlineImage) {
+    pinterestUrl = getItemThumbNail(promoItems);
+  }
+  if (!pinterestUrl) {
+    pinterestUrl = fetchedSiteLogo;
+  }
+
   return (
     <div className="social-share-buttons b-margin-bottom-d40-m20">
         { facebookAppID
@@ -20,7 +46,7 @@ const SocialShare = ({ headlines, basicItems }) => {
 
 SocialShare.propTypes = {
   headlines: PropTypes.object,
-  basicItems: PropTypes.object,
+  promoItems: PropTypes.array,
 };
 
 export default SocialShare;
