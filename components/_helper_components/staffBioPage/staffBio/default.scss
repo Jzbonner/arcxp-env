@@ -1,14 +1,49 @@
+@import "../../../../src//styles/base/mixins";
+
 .staff-image {
-  height: 160px;
-  width: 160px;
-  
+  padding-right: 32px;
+
   img {
+    height: 160px;
+    width: 160px;
     border-radius: 50%;
   }
 }
 
 .c-staffInfo {
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: uppercase;
+  margin-bottom: 37px;
+}
+
+.staff-byline {
+  @include text-styles(2.8rem, 1.317, "Gordita-Bold");
+}
+
+.staff-role {
+  color: #4a4a4a;
+
+  @include text-styles(1rem, 1.313, "Gordita-Medium");
+}
+
+.staff-social-icons {
+  display: flex;
   justify-content: center;
+  height: 46px;
+
+  a:first-child {
+    margin-right: 34px;
+  }
+
+  img {
+    height: 46px;
+    width: 46px;
+  }
+}
+
+.staff-bio {
+  @include text-styles(1.125rem, 1.77, "Gordita");
 }
