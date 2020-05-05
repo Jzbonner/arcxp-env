@@ -27,7 +27,7 @@ const StaffBio = ({ role, authorPhoto, byline, longBio, twitter, facebook, exper
           </div>
         </div>
       </div>
-      <div className='staff-bio b-margin-bottom-d15-m10'>{longBio}</div>
+      <div className='staff-bio'>{longBio}</div>
     </>
   );
 };
