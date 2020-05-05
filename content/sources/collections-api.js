@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { CONTENT_BASE } from 'fusion:environment';
+import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
@@ -26,7 +26,11 @@ const fetch = (query) => {
 
   if (id) {
     return axios
-      .get(requestUri)
+      .get(requestUri, {
+        headers: {
+          Bearer: ARC_ACCESS_TOKEN,
+        },
+      })
       .then(({ data }) => AddFirstInlineImage(data, arcSite, displayClass, displayClassesRequiringImg))
       .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
       .catch((error) => {

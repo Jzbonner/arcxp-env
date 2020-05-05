@@ -1,4 +1,4 @@
-import { CONTENT_BASE } from 'fusion:environment';
+import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 
 export default (data, arcSite, currentDisplayClass = '', requiredClasses = []) => {
@@ -11,7 +11,11 @@ export default (data, arcSite, currentDisplayClass = '', requiredClasses = []) =
         const storyURL = `${CONTENT_BASE}/content/v4/?website=${arcSite}&_id=${el._id}`;
 
         const promise = axios
-          .get(storyURL)
+          .get(storyURL, {
+            headers: {
+              Bearer: ARC_ACCESS_TOKEN,
+            },
+          })
           .then(({ data: storyData }) => storyData)
           .then((storyData) => {
             if (storyData.content_elements) {
