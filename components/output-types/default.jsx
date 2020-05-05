@@ -9,6 +9,7 @@ import TaboolaFooter from '../features/taboolaFeed/taboolaFooter.jsx';
 import TaboolaHeader from '../features/taboolaFeed/taboolaHeader.jsx';
 import NativoScripts from '../_helper_components/article/nativo/nativoScripts';
 import checkTags from '../layouts/_helper_functions/checkTags';
+import AmpRelLink from '../_helper_components/amp/AmpRelLink';
 
 const DefaultOutputType = (props) => {
   const {
@@ -25,9 +26,10 @@ const DefaultOutputType = (props) => {
     MetaTags,
   } = props;
   const { isEnabled = false, clientCode, environment: connextEnv } = connext;
-  const { type, taxonomy } = globalContent || { type: null };
+  const { type, taxonomy, canonical_url: articleURL } = globalContent || { type: null };
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
+  const noAmp = checkTags(tags, 'no-amp');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
   const includeGtm = metrics && metrics.gtmContainerKey;
 
@@ -36,6 +38,7 @@ const DefaultOutputType = (props) => {
       <head>
         <MetaTags />
         <SiteMeta />
+        <AmpRelLink type={type} url={articleURL} noAmp={noAmp} />
         <CssLinks />
         {includeGtm && (
           <>
