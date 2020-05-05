@@ -1,0 +1,51 @@
+@import "../../../../src/styles/base/mixins";
+
+.c-carousel {
+  position: sticky;
+  bottom: 0;
+  z-index: 9000;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:visited {
+      color: inherit;
+    }
+
+    &:hover {
+      color: inherit;
+    }
+
+    div[id^="carousel-item"].c-carouselItem {
+      display: flex;
+      white-space: normal;
+      flex-wrap: nowrap;
+      align-items: center;
+      width: 281px;
+      height: 70px;
+      border-radius: 6px;
+      box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .15);
+      background-color: #fff;
+      margin-top: .75rem;
+      margin-bottom: .75rem;
+      padding-left: .625rem;
+
+      img {
+        border-radius: 6px;
+      }
+
+      .c-itemText {
+        width: 50%;
+        white-space: normal;
+        padding-left: .625rem;
+
+        @include text-styles(.625rem, 1.8, "Gordita");
+      }
+    }
+  }
+}
+
+.c-carouselItem.is-first {
+  margin-left: .625rem;
+}

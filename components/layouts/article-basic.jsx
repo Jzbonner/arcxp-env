@@ -31,6 +31,7 @@ import ConnextInlinePromoSubscription from '../_helper_components/global/connext
 import getQueryParams from './_helper_functions/getQueryParams';
 import checkTags from './_helper_functions/checkTags';
 import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
+import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
@@ -233,6 +234,7 @@ const StoryPageLayout = () => {
       </main>
       {!ampPage && <Footer />}
       <Copyright />
+      {ampPage && <Carousel storyId={uuid} taxonomy={taxonomy} />}
     </>
   );
 };
