@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-// import { AmpOembed } from "@arc-core-components/feature_article-body"
 import BlockQuote from './components/blockQuote/default.jsx';
 import Gallery from './components/gallery/default.jsx';
 import HTML from './components/html/default.jsx';
@@ -13,7 +12,7 @@ import Oembed from './components/social_url/default.jsx';
 import Video from '../../global/video/default';
 import Header from './components/header/default.jsx';
 import Divider from './components/divider/default.jsx';
-// import AmpHtmlEmbedParser from '../../global/utils/amp-html/raw-html';
+import AmpEmbedWrapper from '../../global/utils/amp-html/amp-embed-wrapper';
 // import Correction from './components/correction/default.jsx';
 // import Table from './components/table/default.jsx';
 
@@ -23,8 +22,6 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
   return (
     <div className="c-contentElements">
       {contentElements.map((element, i) => {
-        // console.log("content element => ", element.type)
-
         switch (element.type) {
           case 'div':
             // returns inserted ads
@@ -39,8 +36,7 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
             if (ampPage) return null;
             return <Gallery src={element} key={`Gallery-${i}`} />;
           case 'raw_html':
-            // if (ampPage) return null;
-            // if (ampPage) return <AmpEmbedWrapper element={element} />;
+            if (ampPage) return <AmpEmbedWrapper element={element} key={`Raw_HTML-${i}`} />;
             return <HTML src={element} key={`Raw_HTML-${i}`} />;
           case 'header':
             return <Header src={element} key={`Header-${i}`} />;
@@ -67,15 +63,13 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
           case 'divider':
             return <Divider key={`Divider-${i}`} />;
           case 'oembed_response':
-            // console.log("content element subtype => ", element.subtype)
-            // if (ampPage) <AmpOembed rawOembed={element.raw_oembed} subtype={element.subtype}/>;
+            if (ampPage) return <AmpEmbedWrapper element={element.raw_oembed} key={`Oembed-${i}`} />;
             return <Oembed src={element} key={`Oembed-${i}`} />;
           case 'table':
             // See APD-451, this element will be worked at a later time.
             // return <Table src={element} key={`Table-${i}`} />;
             return null;
           case 'video':
-            // if (ampPage) return null;
             return <Video
                 src={element}
                 isInlineVideo

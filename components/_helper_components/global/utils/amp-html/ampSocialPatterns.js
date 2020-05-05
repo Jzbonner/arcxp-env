@@ -1,6 +1,41 @@
 export default [
   // instagram:
   /*
+  <amp-twitter
+    width="375"
+    height="472"
+    layout="responsive"
+    data-tweetid="xxxx">
+  </amp-twitter>
+  */
+  {
+    name: 'twitter',
+    ampTag: 'amp-twitter',
+    selfClosing: true,
+    internalTags: [],
+    idRegex: 'https?://twitter.com/[a-zA-Z_]{1,20}/status/([0-9]*)',
+    idRefAttribute: 'data-tweetid',
+    ampTagAttributes: [
+      {
+        name: 'width',
+        defaultvalue: 375,
+      },
+      {
+        name: 'height',
+        defaultvalue: 472,
+      },
+      {
+        name: 'layout',
+        defaultvalue: 'responsive',
+      },
+      {
+        name: 'data-block-on-consent',
+        defaultvalue: '',
+      },
+    ],
+  },
+  // instagram:
+  /*
   <amp-instagram
       data-shortcode=''
       data-captioned
@@ -136,7 +171,7 @@ export default [
     ampTag: 'amp-youtube',
     selfClosing: true,
     internalTags: [],
-    idRegex: 'www.youtube.com/embed/(.*?)',
+    idRegex: 'https?://www.youtube.com/embed/([a-zA-Z0-9-]{11})',
     idRefAttribute: 'data-videoid',
     ampTagAttributes: [
       {
@@ -154,6 +189,89 @@ export default [
       {
         name: 'data-block-on-consent',
         defaultvalue: '',
+      },
+    ],
+  },
+  /*
+  <amp-reddit
+    layout="responsive"
+    width="300"
+    height="400"
+    data-embedtype="post"
+    data-src="https://www.reddit.com/r/me_irl/comments/52rmir/me_irl/?ref=share&amp;ref_source=embed">
+  </amp-reddit>
+  */
+  {
+    name: 'reddit',
+    ampTag: 'amp-reddit',
+    selfClosing: true,
+    internalTags: [],
+    idRegex: '"https?://www.reddit.com/r/(.+?)"',
+    idRefAttribute: 'data-src',
+    ampTagAttributes: [
+      {
+        name: 'data-src',
+        defaultvalue: 'https://www.reddit.com/r/',
+      },
+      {
+        name: 'data-embedtype',
+        defaultvalue: 'post',
+      },
+      {
+        name: 'width',
+        defaultvalue: 300,
+      },
+      {
+        name: 'height',
+        defaultvalue: 400,
+      },
+      {
+        name: 'layout',
+        defaultvalue: 'responsive',
+      },
+      {
+        name: 'data-block-on-consent',
+        defaultvalue: '',
+      },
+    ],
+  },
+  /*
+  <amp-soundcloud
+    width="480"
+    height="480"
+    layout="responsive"
+    data-trackid="243169232"
+    data-visual="true">
+  </amp-soundcloud>
+  https://soundcloud.com/ikmacgregor/popriot-unbreakable
+  */
+  {
+    name: 'soundcloud',
+    ampTag: 'amp-soundcloud',
+    selfClosing: true,
+    internalTags: [],
+    // idRegex: 'https?://api.soundcloud.com/tracks/(\d+){9}',
+    idRefAttribute: 'data-trackid',
+    ampTagAttributes: [
+      {
+        name: 'width',
+        defaultvalue: 480,
+      },
+      {
+        name: 'height',
+        defaultvalue: 270,
+      },
+      {
+        name: 'layout',
+        defaultvalue: 'responsive',
+      },
+      {
+        name: 'data-block-on-consent',
+        defaultvalue: '',
+      },
+      {
+        name: 'data-visual',
+        defaultvalue: 'true',
       },
     ],
   },
