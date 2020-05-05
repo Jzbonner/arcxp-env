@@ -8,7 +8,7 @@ import './default.scss';
 
 const List = (customFields = {}) => {
   const fusionContext = useFusionContext();
-  const { arcSite = 'ajc' } = fusionContext;
+  const { arcSite = 'ajc', layout } = fusionContext;
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
@@ -20,7 +20,8 @@ const List = (customFields = {}) => {
     },
   } = customFields;
 
-  const displayClassesRequiringImg = ['Top Photo', '1 or 2 Item Feature'];
+  const displayClassesRequiringImg = layout !== 'list-basic'
+    ? ['Top Photo', '1 or 2 Item Feature', 'Left Photo'] : ['Top Photo', '1 or 2 Item Feature'];
 
   const data = useContent({
     source: contentService,
