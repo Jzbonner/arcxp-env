@@ -78,8 +78,6 @@ const StoryPageLayout = () => {
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
 
-  console.log(basicItems);
-
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
