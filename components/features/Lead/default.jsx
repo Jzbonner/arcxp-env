@@ -5,7 +5,6 @@ import { useFusionContext } from 'fusion:context';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import Headline from '../../_helper_components/home/Headline/Headline';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
-import filterElementsWithoutImages from '../../layouts/_helper_functions/homepage/filterElementsWithoutImages';
 import './default.scss';
 
 const Lead = (customFields = {}) => {
@@ -30,7 +29,7 @@ const Lead = (customFields = {}) => {
     '5-Item Feature - No Photo',
   ];
 
-  let data = useContent({
+  const data = useContent({
     source: contentService,
     query: {
       ...contentConfigValues,
@@ -39,8 +38,6 @@ const Lead = (customFields = {}) => {
       displayClassesRequiringImg,
     },
   });
-
-  data = filterElementsWithoutImages(data, displayClass, displayClassesRequiringImg);
 
   function getDisplayClassMap(displayC) {
     switch (displayC) {
