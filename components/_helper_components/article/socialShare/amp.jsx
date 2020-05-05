@@ -11,18 +11,18 @@ const SocialShare = ({ headlines, promoItems }) => {
   const { url: headlineImage } = basicItems || {};
   const { facebookAppID } = getProperties();
 
-  // const siteLogoData = useContent({
-  //   source: 'site-api',
-  //   query: {
-  //     hierarchy: 'TopNav',
-  //   },
-  //   filter: 'logo',
-  // });
+  const siteLogoData = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'TopNav',
+    },
+    filter: 'logo',
+  });
 
-  // const fetchedSiteLogo = siteLogoData
-  //   && siteLogoData.site
-  //   && siteLogoData.site.site_logo_image_small
-  //   ? siteLogoData.site.site_logo_image_small : null;
+  const fetchedSiteLogo = siteLogoData
+    && siteLogoData.site
+    && siteLogoData.site.site_logo_image_small
+    ? siteLogoData.site.site_logo_image_small : null;
 
   let pinterestUrl = headlineImage;
 
@@ -30,19 +30,6 @@ const SocialShare = ({ headlines, promoItems }) => {
     pinterestUrl = getItemThumbNail(promoItems);
   }
   if (!pinterestUrl) {
-    const siteLogoData = useContent({
-      source: 'site-api',
-      query: {
-        hierarchy: 'TopNav',
-      },
-      filter: 'logo',
-    });
-
-    const fetchedSiteLogo = siteLogoData
-      && siteLogoData.site
-      && siteLogoData.site.site_logo_image_small
-      ? siteLogoData.site.site_logo_image_small : null;
-
     pinterestUrl = fetchedSiteLogo;
   }
 
