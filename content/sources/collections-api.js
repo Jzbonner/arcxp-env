@@ -1,25 +1,44 @@
+/* eslint-disable no-console */
+import { CONTENT_BASE } from 'fusion:environment';
+import axios from 'axios';
+import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
+import FilterElements from './helper_functions/FilterElements';
+
 const schemaName = 'collections';
+const ttl = 120;
 
 const params = {
   id: 'text',
   from: 'text',
   size: 'text',
+  arcSite: 'text',
 };
 
-const resolve = (query) => {
+const fetch = (query) => {
   const {
-    'arc-site': arcSite = 'ajc', id, from, size,
+    arcSite = 'ajc', id, from, size, displayClass = '', displayClassesRequiringImg = [],
   } = query;
-  let requestUri = `/content/v4/collections/?website=${arcSite}`;
+
+  let requestUri = `${CONTENT_BASE}/content/v4/collections/?website=${arcSite}`;
   requestUri += id ? `&_id=${id}` : '';
   requestUri += from ? `&from=${from}` : '';
   requestUri += size ? `&size=${size}` : '';
 
-  return requestUri;
+  if (id) {
+    return axios
+      .get(requestUri)
+      .then(({ data }) => AddFirstInlineImage(data, arcSite, displayClass, displayClassesRequiringImg))
+      .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  return null;
 };
 
 export default {
-  resolve,
-  params,
+  fetch,
   schemaName,
+  ttl,
+  params,
 };

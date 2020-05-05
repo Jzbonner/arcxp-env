@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
 import { buildSliderItems, getAmount } from './_helper_functions/index';
 import rightArrow from '../../../resources/images/right-arrow.svg';
 import './default.scss';
 
 const Slider = (customFields = {}) => {
+  const fusionContext = useFusionContext();
+  const { arcSite = 'ajc' } = fusionContext;
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
@@ -37,9 +40,16 @@ const Slider = (customFields = {}) => {
   contentConfigValues.from = startIndex > 1 ? startIndex : null;
   contentConfigValues.size = itemLimit > 3 || null;
 
+  const displayClassesRequiringImg = ['Slider', 'Slider - Special Features'];
+
   const data = useContent({
     source: contentService,
-    query: contentConfigValues,
+    query: {
+      ...contentConfigValues,
+      arcSite,
+      displayClass,
+      displayClassesRequiringImg,
+    },
   });
 
   const addToRefs = (el, refArray) => {
