@@ -18,18 +18,33 @@ const Hero = (customFields = {}) => {
   const appContext = useAppContext();
   const { contextPath } = appContext;
 
+  const displayClass = 'all';
+  const displayClassesRequiringImg = ['all'];
+
   const data = useContent({
     source: contentService,
-    query: { ...contentConfigValues, arcSite },
+    query: {
+      ...contentConfigValues,
+      arcSite,
+      displayClass,
+      displayClassesRequiringImg,
+    },
   });
 
   if (data) {
     const { content_elements: innerData } = data || {};
     const singleItem = innerData[startIndex] ? innerData[startIndex - 1] : null; // adding "-1" so the array index always starts from 0
-    const { url: heroBackground } = singleItem && singleItem.promo_items ? singleItem.promo_items.basic : '';
+    // const { url: heroBackground } = singleItem && singleItem.promo_items ? singleItem.promo_items.basic : '';
     const { basic: headline } = singleItem && singleItem.headlines ? singleItem.headlines : '';
     const { canonical_url: heroURL } = singleItem || '';
     const contentType = innerData[startIndex - 1] ? innerData[startIndex - 1].type : null;
+    let heroBackground = '';
+    if (singleItem && singleItem.promo_items && singleItem.promo_items.basic) {
+      heroBackground = singleItem.promo_items.basic.url;
+    }
+    if (singleItem && singleItem.firstInlineImage && singleItem.firstInlineImage.url) {
+      heroBackground = singleItem.firstInlineImage.url;
+    }
 
     if (innerData && heroBackground) {
       return (
