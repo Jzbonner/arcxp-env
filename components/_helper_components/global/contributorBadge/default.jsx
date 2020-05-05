@@ -3,8 +3,9 @@ import getProperties from 'fusion:properties';
 import { useAppContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import checkTags from '../../../layouts/_helper_functions/checkTags';
-import ImageSimple from '../../global/imageSimple/default.jsx';
+import ImageSimple from '../imageSimple/default';
 import './default.scss';
+
 
 const ContributorBadge = ({ tags, ampPage }) => {
   const { contextPath } = useAppContext();
