@@ -6,6 +6,9 @@ import Image from '../../global/image/default';
 import SectionLabel from '../../global/sectionLabel/default';
 import TimeStamp from '../../article/timestamp/default';
 import truncateHeadline from '../../../layouts/_helper_functions/homepage/truncateHeadline';
+import getQueryParams from '../../../layouts/_helper_functions/getQueryParams';
+import ContributorBadge from '../../../_helper_components/article/contributorBadge/default';
+import checkTags from '../../../layouts/_helper_functions/checkTags';
 import './Headline.scss';
 
 const Headline = ({
@@ -19,10 +22,16 @@ const Headline = ({
   type,
 }) => {
   const appContext = useAppContext();
-  const { contextPath } = appContext;
+  const { contextPath, requestUri } = appContext;
+  const { tags = [] } = taxonomy || {};
+  const queryParams = getQueryParams(requestUri);
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
   const { sites } = getProperties();
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
+  const hyperlocalTags = getProperties().hyperlocalTags || [];
+  const isHyperlocalContent = checkTags(tags, hyperlocalTags);
 
   const relativeURL = (websites && websites[sites] && websites[sites].website_url) || '/';
 
@@ -47,8 +56,13 @@ const Headline = ({
     <div className="home-headline">
       <a href={`${contextPath}${relativeURL}`}>{promoItems && getPromoItem(promoItems, type)}</a>
       <div className="headline-box">
-        <SectionLabel label={label} taxonomy={taxonomy} />
-        <TimeStamp firstPublishDate={publishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} isTease={true} />
+        {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} />}
+        {!isHyperlocalContent && (
+          <>
+            <SectionLabel label={label} taxonomy={taxonomy} />
+            <TimeStamp firstPublishDate={publishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} isTease={true} />
+          </>
+        )}
         <a href={`${contextPath}${relativeURL}`} className="headline">
           {truncateHeadline(headlines.basic)}
         </a>
