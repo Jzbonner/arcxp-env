@@ -44,17 +44,17 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener('connextLoggedIn', () => {
-      setUserState('logged-in');
-    });
-    window.addEventListener('connextLoggedOut', () => {
-      setUserState('logged-out');
-    });
-    window.addEventListener('connextIsSubscriber', () => {
-      setUserState('authenticated');
-    });
-  }, [userState, userStateRef]);
+  const useWindowEvent = (event, trigger) => {
+    const callback = () => setUserState(trigger);
+    useEffect(() => {
+      window.addEventListener(event, callback);
+      return () => window.removeEventListener(event, callback);
+    }, [event, trigger]);
+  };
+
+  useWindowEvent('connextLoggedIn', 'logged-in');
+  useWindowEvent('connextLoggedOut', 'logged-out');
+  useWindowEvent('connextIsSubscriber', 'authenticated');
 
   return (
     <li className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`}>
