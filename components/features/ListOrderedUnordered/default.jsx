@@ -39,7 +39,7 @@ const ListOrderedUnordered = (customFields = {}) => {
               const { canonical_url: itemURL } = el || '';
               const countOrdered = i + 1 > 9 ? i + 1 : `0${i + 1}`;
               return (
-                <li className="list-item" key={i}>
+                <li className='list-item' key={i}>
                   <span className={`item-index-${displayClass}`}>{displayClass === 'Ordered List' ? countOrdered : ''}</span>
                   <a href={itemURL} className="item-title">
                     {truncateHeadline(headline)}

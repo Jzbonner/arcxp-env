@@ -4,7 +4,6 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import { buildSliderItems, getAmount } from './_helper_functions/index';
 import rightArrow from '../../../resources/images/right-arrow.svg';
-import filterElementsWithoutImages from '../../layouts/_helper_functions/homepage/filterElementsWithoutImages';
 import './default.scss';
 
 const Slider = (customFields = {}) => {
@@ -43,7 +42,7 @@ const Slider = (customFields = {}) => {
 
   const displayClassesRequiringImg = ['Slider', 'Slider - Special Features'];
 
-  let data = useContent({
+  const data = useContent({
     source: contentService,
     query: {
       ...contentConfigValues,
@@ -52,8 +51,6 @@ const Slider = (customFields = {}) => {
       displayClassesRequiringImg,
     },
   });
-
-  data = filterElementsWithoutImages(data, displayClass, displayClassesRequiringImg);
 
   const addToRefs = (el, refArray) => {
     if (el && !refArray.current.includes(el)) refArray.current.push(el);
@@ -65,7 +62,7 @@ const Slider = (customFields = {}) => {
   const itemOffsetWidth = elRefs.current && elRefs.current[0] ? elRefs.current[0].scrollWidth + marginOffset : null;
   const wrapperClientWidth = wrapperRef.current ? wrapperRef.current.clientWidth : null;
   const contentFullWidth = contentRef.current && sliderItems
-    ? contentRef.current.offsetWidth - wrapperClientWidth + marginOffset * 2 : null;
+    ? (contentRef.current.offsetWidth - wrapperClientWidth) + (marginOffset * 2) : null;
 
   const calculateTranslateX = (direction) => {
     if (direction === actions.LEFT) {
@@ -110,25 +107,24 @@ const Slider = (customFields = {}) => {
       <div ref={wrapperRef} className="c-slider-wrapper">
         <h1 className="slider-title">{title}</h1>
         <div className="c-slider">
-          <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`}>
-            <div ref={contentRef} className="itemList" style={{ transform: `translateX(${translateX}px)` }}>
+          <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`} >
+            <div ref={contentRef}
+              className="itemList"
+              style={{ transform: `translateX(${translateX}px)` }}>
               {sliderItems}
             </div>
           </div>
-          {isDesktop && !isPad && (
-            <>
-              {translateX !== 0 ? (
-                <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
-                  <img src={rightArrow} />
-                </a>
-              ) : null}
-              {Math.abs(translateX) < contentFullWidth ? (
-                <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
-                  <img src={rightArrow} />
-                </a>
-              ) : null}
-            </>
-          )}
+          {isDesktop && !isPad && <>
+            {translateX !== 0
+              ? <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
+                <img src={rightArrow} />
+              </a>
+              : null}
+            {Math.abs(translateX) < contentFullWidth ? <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
+              <img src={rightArrow} />
+            </a> : null}
+          </>
+          }
         </div>
       </div>
     </div>
