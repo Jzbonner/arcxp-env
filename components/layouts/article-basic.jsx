@@ -77,6 +77,9 @@ const StoryPageLayout = () => {
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
+
+  console.log(basicItems);
+
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
@@ -150,7 +153,7 @@ const StoryPageLayout = () => {
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
           </div>
-          {ampPage && <SocialShare headlines={headlines}/>}
+          {ampPage && <SocialShare headlines={headlines} basicItems={basicItems}/>}
           <ContributorBadge tags={tags} ampPage={ampPage} />
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
             <SubHeadline subheadlines={subheadlines} />
