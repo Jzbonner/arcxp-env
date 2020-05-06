@@ -2,7 +2,6 @@ import getProperties from 'fusion:properties';
 import { ENVIRONMENT } from 'fusion:environment';
 
 const gamAdTagBuilder = (taxonomy) => {
-  console.log('carlos', taxonomy);
   const { dfp_id: dfpid, adsPath } = getProperties();
   const { primary_section: primarySection, tags = [] } = taxonomy || {};
   const { path = '/' } = primarySection || {};

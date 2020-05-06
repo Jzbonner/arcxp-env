@@ -30,10 +30,10 @@ const Video = ({
     window.PoWaSettings.advertising.adBar = true;
     window.PoWaSettings.advertising.adTag = gamAdTagBuilder(taxonomy);
 
-    window.addEventListener('powaReady', (event) => {
-      console.log('carlos', event);
-      console.log('carlos', window.PoWaSettings.advertising);
-    });
+    // window.addEventListener('powaReady', (event) => {
+    //   console.log('carlos', event);
+    //   console.log('carlos', window.PoWaSettings.advertising);
+    // });
     const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
       const videoScript = document.createElement('script');
       videoScript.type = 'text/javascript';
@@ -46,7 +46,7 @@ const Video = ({
         reject(rejectCallBack(e));
       });
       document.body.appendChild(videoScript);
-      console.log('carlos', window.PoWaSettings.advertising);
+      // console.log('carlos', window.PoWaSettings.advertising);
     });
 
     loadVideoScript();
