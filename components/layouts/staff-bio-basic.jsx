@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useAppContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
-// import checkTags from './_helper_functions/checkTags';
+import checkTags from './_helper_functions/checkTags';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import ArcAd from '../features/ads/default';
@@ -27,10 +27,13 @@ const staffBioPage = () => {
     twitter,
     facebook,
     expertise,
+    taxonomy,
+    email,
+    custom_ajc_phone: phoneNumber,
   } = globalContent || {};
 
-  //   const { tags = [] } = taxonomy || {};
-  //   const noAds = checkTags(tags, 'no-ads');
+  const { tags = [] } = taxonomy || {};
+  const noAds = checkTags(tags, 'no-ads');
 
   const initialList = useContent({
     source: 'author-stories-list',
@@ -46,7 +49,6 @@ const staffBioPage = () => {
   } = initialList || {};
 
   const fetchRef = useRef(null);
-  const noAds = false;
 
   const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
   const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
@@ -68,7 +70,9 @@ const staffBioPage = () => {
         longBio={longBio}
         twitter={twitter}
         facebook={facebook}
-        expertise={expertise}/>
+        expertise={expertise}
+        email={email}
+        phoneNumber={phoneNumber}/>
           <div className='c-contentElements list-contentElements'>
             { !noAds ? <div className='c-rightRail list-rp01'>
               {RP01()}
