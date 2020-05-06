@@ -4,29 +4,23 @@ export default function getGalleryThumbnail(gallerySources) {
   const {
     article, featuredGallery, leaf, fetched,
   } = gallerySources;
-
-  console.log('gallerySources', gallerySources);
+  let basic = null;
 
   if (article) {
     const articleGallery = handlePropContentElements(article);
-    console.log('articleGallery', articleGallery);
     if (!articleGallery) return null;
-    const basic = articleGallery.promo_items
-    && articleGallery.promo_items.basic ? articleGallery.promo_items.basic : null;
-
-    return {
-      exists: !!(basic.type === 'image'),
-      id: basic._id || null,
-    };
+    basic = articleGallery.promo_items
+      && articleGallery.promo_items.basic ? articleGallery.promo_items.basic : null;
   }
 
   if (featuredGallery) {
-    const basic = featuredGallery.promo_items
-    && featuredGallery.promo_items.basic ? featuredGallery.promo_items.basic : null;
-    return {
-      exists: !!(basic.type === 'image'),
-      id: basic._id || null,
-    };
+    basic = featuredGallery.promo_items
+      && featuredGallery.promo_items.basic ? featuredGallery.promo_items.basic : null;
+  }
+
+  if (fetched) {
+    basic = fetched.promo_items
+      && fetched.promo_items.basic ? fetched.promo_items.basic : null;
   }
 
   if (leaf) {
@@ -36,14 +30,8 @@ export default function getGalleryThumbnail(gallerySources) {
     };
   }
 
-  if (fetched) {
-    const basic = fetched.promo_items
-    && fetched.promo_items.basic ? fetched.promo_items.basic : null;
-    return {
-      exists: !!(basic.type === 'image'),
-      id: basic._id || null,
-    };
-  }
-
-  return null;
+  return {
+    exists: !!(basic && basic.type === 'image'),
+    id: basic ? basic._id : null,
+  };
 }

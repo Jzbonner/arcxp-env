@@ -96,13 +96,11 @@ const Gallery = (props) => {
   const gallerySources = {
     article: contentElements.length !== 0 ? contentElements : null,
     featuredGallery: leafContentElements.length === 0 && featuredGalleryData ? featuredGalleryData : null,
-    leaf: leafContentElements && featuredGalleryData ? featuredGalleryData : null,
+    leaf: leafContentElements.length !== 0 && featuredGalleryData ? featuredGalleryData : null,
     fetched: fetchedGalleryData || null,
   };
 
   const thumbnailData = getGalleryThumbnail(gallerySources);
-
-  console.log('does gallery have thumbnail?', thumbnailData);
 
   if (!maxIndex) {
     if (elementData && elementData.length > 1) {
@@ -495,11 +493,9 @@ const Gallery = (props) => {
     }
 
     let baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
-    // console.log('baseGalleryData', baseGalleryData);
-    // debugger;
+
     if (thumbnailData && thumbnailData.exists) baseGalleryData = prioritizeThumbnail(baseGalleryData, thumbnailData.id);
 
-    // console.log('baseGallery NEW POSSIBLY', baseGalleryData);
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
     }, debugFixEl, isMobile, {

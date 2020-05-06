@@ -35,9 +35,6 @@ const GalleryPageLayout = () => {
     streams,
   };
 
-  console.log('leaf global content', globalContent);
-  console.log('leaf basic', basic);
-
   return (
     <>
       <GlobalAdSlots />
