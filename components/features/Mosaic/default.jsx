@@ -63,9 +63,11 @@ const Mosaic = (customFields = {}) => {
 
             if (startIndex - 1 <= i && i < startIndex - 1 + itemLimit) {
               return (
-                <a key={`Mosaic-${i}`} className={`mosaic-box ${patternMap(startIndex, i)}`} href={`${contextPath}${relativeURL}`}>
+                <div key={`Mosaic-${i}`} className={`mosaic-box ${patternMap(startIndex, i)}`}>
+                  {/* the link is empty - 100% coverage of content via css - because sectionLabel outputs a link as well */}
+                  <a href={`${contextPath}${relativeURL}`}></a>
                   <div className="c-sectionLabel">
-                    <SectionLabel label={label} taxonomy={taxonomy} />
+                    <SectionLabel label={label || {}} taxonomy={taxonomy} />
                     <TimeStamp
                       firstPublishDate={firstPublishDate}
                       displayDate={displayDate}
@@ -74,7 +76,7 @@ const Mosaic = (customFields = {}) => {
                     />
                   </div>
                   <span className="headline">{truncateHeadline(headlines.basic)}</span>
-                </a>
+                </div>
               );
             }
             return null;

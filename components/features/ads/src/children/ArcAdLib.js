@@ -36,7 +36,7 @@ export default class ArcAdLib {
         if (!event.isEmpty) {
           const slotId = event.slot.getSlotElementId();
           const slotDiv = document.querySelector(`#${slotId}`);
-          if (typeof slotDiv !== 'undefined') {
+          if (slotDiv) {
             slotDiv.style.display = 'block';
           }
           if (slotId.indexOf('PG01') > -1) {
