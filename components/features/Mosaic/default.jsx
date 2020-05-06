@@ -5,12 +5,18 @@ import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import SectionLabel from '../../_helper_components/global/sectionLabel/default';
+import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
 import TimeStamp from '../../_helper_components/article/timestamp/default';
+import checkTags from '../../layouts/_helper_functions/checkTags';
+import ContributorBadge from '../../_helper_components/global/contributorBadge/default';
 import './default.scss';
 
 const Mosaic = (customFields = {}) => {
   const appContext = useAppContext();
-  const { contextPath } = appContext;
+  const { contextPath, requestUri } = appContext;
+  const queryParams = getQueryParams(requestUri);
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
   const { sites } = getProperties();
 
   const {
@@ -58,6 +64,9 @@ const Mosaic = (customFields = {}) => {
             } = el;
             const { hide_timestamp: hideTimestamp } = el.label || {};
             const { text: isHideTimestampTrue } = hideTimestamp || {};
+            const { tags = [] } = taxonomy || {};
+            const hyperlocalTags = getProperties().hyperlocalTags || [];
+            const isHyperlocalContent = checkTags(tags, hyperlocalTags);
 
             const relativeURL = (websites && websites[sites] && websites[sites].website_url) || '/';
 
@@ -65,13 +74,18 @@ const Mosaic = (customFields = {}) => {
               return (
                 <a key={`Mosaic-${i}`} className={`mosaic-box ${patternMap(startIndex, i)}`} href={`${contextPath}${relativeURL}`}>
                   <div className="c-sectionLabel">
-                    <SectionLabel label={label} taxonomy={taxonomy} />
-                    <TimeStamp
-                      firstPublishDate={firstPublishDate}
-                      displayDate={displayDate}
-                      isHideTimestampTrue={isHideTimestampTrue}
-                      isTease={true}
-                    />
+                    {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} useWhiteLogos={true} />}
+                    {!isHyperlocalContent && (
+                      <>
+                        <SectionLabel label={label || {}} taxonomy={taxonomy} />
+                        <TimeStamp
+                          firstPublishDate={firstPublishDate}
+                          displayDate={displayDate}
+                          isHideTimestampTrue={isHideTimestampTrue}
+                          isTease={true}
+                        />
+                      </>
+                    )}
                   </div>
                   <span className="headline">{truncateHeadline(headlines.basic)}</span>
                 </a>

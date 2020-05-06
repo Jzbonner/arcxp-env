@@ -7,7 +7,7 @@ import SectionLabel from '../../global/sectionLabel/default';
 import TimeStamp from '../../article/timestamp/default';
 import truncateHeadline from '../../../layouts/_helper_functions/homepage/truncateHeadline';
 import getQueryParams from '../../../layouts/_helper_functions/getQueryParams';
-import ContributorBadge from '../../../_helper_components/article/contributorBadge/default';
+import ContributorBadge from '../../../_helper_components/global/contributorBadge/default';
 import checkTags from '../../../layouts/_helper_functions/checkTags';
 import './Headline.scss';
 

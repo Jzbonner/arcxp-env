@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import getProperties from 'fusion:properties';
 import { useAppContext } from 'fusion:context';
@@ -6,8 +7,7 @@ import checkTags from '../../../layouts/_helper_functions/checkTags';
 import ImageSimple from '../imageSimple/default';
 import './default.scss';
 
-
-const ContributorBadge = ({ tags, ampPage }) => {
+const ContributorBadge = ({ tags, ampPage, useWhiteLogos }) => {
   const { contextPath } = useAppContext();
 
   const hyperlocalTags = getProperties().hyperlocalTags.filter((tag) => {
@@ -51,6 +51,7 @@ const ContributorBadge = ({ tags, ampPage }) => {
 ContributorBadge.propTypes = {
   tags: PropTypes.array,
   ampPage: PropTypes.bool,
+  useWhiteLogos: PropTypes.bool,
 };
 
 export default ContributorBadge;

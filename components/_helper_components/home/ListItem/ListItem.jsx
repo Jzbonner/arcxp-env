@@ -8,7 +8,7 @@ import getQueryParams from '../../../layouts/_helper_functions/getQueryParams';
 import TimeStamp from '../../article/timestamp/default';
 import checkTags from '../../../layouts/_helper_functions/checkTags';
 import truncateHeadline from '../../../layouts/_helper_functions/homepage/truncateHeadline';
-import ContributorBadge from '../../../_helper_components/article/contributorBadge/default';
+import ContributorBadge from '../../../_helper_components/global/contributorBadge/default';
 
 const ListItem = ({
   promo_items: promoItems,

@@ -19,7 +19,7 @@ import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import ArcAd from '../features/ads/default';
-import ContributorBadge from '../_helper_components/article/contributorBadge/default';
+import ContributorBadge from '../_helper_components/global/contributorBadge/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
