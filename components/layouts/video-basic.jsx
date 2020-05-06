@@ -23,6 +23,7 @@ const VideoPageLayout = () => {
     credits,
     description,
     streams,
+    taxonomy,
   } = globalContent || {};
 
   const basicItems = {
@@ -44,7 +45,7 @@ const VideoPageLayout = () => {
           <ArcAd staticSlot={'MP01'} />
         </div>
         <div className="c-header">
-          <Headline headlines={headlines} basicItems={basicItems} />
+          <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} />
         </div>
       </main>
       <Footer />

@@ -37,5 +37,6 @@
     "containerName": "taboola-ajc-custom-feed",
     "placementName": "AJC Custom Feed"
   },
-  "facebookAppID": "366816260017522"
+  "facebookAppID": "366816260017522",
+  "adsPath": "atlanta_np/ajc_web_default"
 }

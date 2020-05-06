@@ -5,11 +5,12 @@ import get from 'lodash.get';
 import fetchEnv from '../utils/environment';
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
+import gamAdTagBuilder from './_helper_functions/gamAdTagBuilder';
 import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
 const Video = ({
-  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules,
+  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, taxonomy,
 }) => {
   const fusionContext = useFusionContext();
   const { credits, _id: videoID, videoPageId } = src || {};
@@ -24,18 +25,28 @@ const Video = ({
   }
 
   useEffect(() => {
+    window.PoWaSettings = window.PoWaSettings || {};
+    window.PoWaSettings.advertising = window.PoWaSettings.advertising || {};
+    window.PoWaSettings.advertising.adBar = true;
+    window.PoWaSettings.advertising.adTag = gamAdTagBuilder(taxonomy);
+
+    window.addEventListener('powaReady', (event) => {
+      console.log('carlos', event);
+      console.log('carlos', window.PoWaSettings.advertising);
+    });
     const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
       const videoScript = document.createElement('script');
       videoScript.type = 'text/javascript';
       videoScript.src = 'https://d328y0m0mtvzqc.cloudfront.net/sandbox/powaBoot.js?org=ajc';
       videoScript.async = true;
       videoScript.addEventListener('load', () => {
-        resolve(window.powaBoot());
+        resolve();
       });
       videoScript.addEventListener('error', (e) => {
         reject(rejectCallBack(e));
       });
       document.body.appendChild(videoScript);
+      console.log('carlos', window.PoWaSettings.advertising);
     });
 
     loadVideoScript();
@@ -110,6 +121,7 @@ Video.propTypes = {
   featuredVideoPlayerRules: PropTypes.object,
   inlineVideoPlayerRules: PropTypes.object,
   maxTabletViewWidth: PropTypes.number,
+  taxonomy: PropTypes.object,
 };
 
 export default Video;

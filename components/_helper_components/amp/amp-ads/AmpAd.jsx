@@ -7,7 +7,7 @@ import buildJsonObject from './_helper_functions/buildJsonObject';
 export const AmpAd = ({
   adSlot = '', uuid = '', width = '', height = '', taxonomy, multiSize, multiSizeValidation,
 }) => {
-  const { dfp_id: dfpid } = getProperties();
+  const { dfp_id: dfpid, adsPath } = getProperties();
   if (!dfpid) return null;
 
   const { primary_section: primarySection, tags = [] } = taxonomy || {};
@@ -21,7 +21,7 @@ export const AmpAd = ({
 
   const currentEnv = ENVIRONMENT || 'unknown';
   const jsonObject = buildJsonObject(adSlot, uuid, topics);
-  const dataSlot = `${dfpid}/${currentEnv.toLowerCase().indexOf('prod') === -1 ? 'TEST_' : ''}atlanta_np/ajc_web_default${path}`;
+  const dataSlot = `${dfpid}/${currentEnv.toLowerCase().indexOf('prod') === -1 ? 'TEST_' : ''}${adsPath}${path}`;
 
   return (
     <amp-ad
