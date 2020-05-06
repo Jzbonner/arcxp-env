@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import buildCarouselItem from './_helper_functions/buildCarouselItems';
-import './default.scss';
+import './amp.scss';
 
 const Carousel = ({ storyId, taxonomy }) => {
   const { primary_section: primarySection } = taxonomy || {};

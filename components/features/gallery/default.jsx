@@ -5,7 +5,7 @@ import {
   DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery,
 } from '../../_helper_components/global/gallery/index';
 import {
-  debounce, createBaseGallery, handleImageFocus, reorganizeElements,
+  debounce, createBaseGallery, handleImageFocus, reorganizeElements, handlePropContentElements, prioritizeThumbnail, getGalleryThumbnail,
 } from './_helper_functions/index';
 import ArcAd from '../ads/default';
 import PGO1Element from '../../_helper_components/global/ads/pg01/default';
@@ -92,6 +92,17 @@ const Gallery = (props) => {
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic ? headlines.basic : null;
+
+  const gallerySources = {
+    article: contentElements.length !== 0 ? contentElements : null,
+    featuredGallery: leafContentElements.length === 0 && featuredGalleryData ? featuredGalleryData : null,
+    leaf: leafContentElements && featuredGalleryData ? featuredGalleryData : null,
+    feature: fetchedGalleryData || null,
+  };
+
+  const thumbnailData = getGalleryThumbnail(gallerySources);
+
+  console.log('does gallery have thumbnail?', thumbnailData);
 
   if (!maxIndex) {
     if (elementData && elementData.length > 1) {
@@ -399,15 +410,6 @@ const Gallery = (props) => {
     return finalElements;
   };
 
-  // finds the gallery obj within the contentElements prop
-  const handlePropContentElements = () => {
-    let relevantData = null;
-    contentElements.forEach((element) => {
-      if (element.type === 'gallery') relevantData = element;
-    });
-    return relevantData;
-  };
-
   useEffect(() => {
     getInitWindowSize();
   }, []);
@@ -472,7 +474,7 @@ const Gallery = (props) => {
     let fetchedContentElements = null;
     let featuredContentElements = null;
 
-    if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements();
+    if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements(contentElements);
 
     // checks if other gallery sources exists, else do not render
     if (leafContentElements.length > 0) {
@@ -492,7 +494,12 @@ const Gallery = (props) => {
         ? setHeadline(relevantGalleryData.headlines.basic) : null;
     }
 
-    const baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
+    let baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
+    // console.log('baseGalleryData', baseGalleryData);
+    // debugger;
+    if (thumbnailData && thumbnailData.exists) baseGalleryData = prioritizeThumbnail(baseGalleryData, thumbnailData.id);
+
+    // console.log('baseGallery NEW POSSIBLY', baseGalleryData);
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
     }, debugFixEl, isMobile, {
