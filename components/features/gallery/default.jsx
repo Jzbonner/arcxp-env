@@ -97,7 +97,7 @@ const Gallery = (props) => {
     article: contentElements.length !== 0 ? contentElements : null,
     featuredGallery: leafContentElements.length === 0 && featuredGalleryData ? featuredGalleryData : null,
     leaf: leafContentElements && featuredGalleryData ? featuredGalleryData : null,
-    feature: fetchedGalleryData || null,
+    fetched: fetchedGalleryData || null,
   };
 
   const thumbnailData = getGalleryThumbnail(gallerySources);
