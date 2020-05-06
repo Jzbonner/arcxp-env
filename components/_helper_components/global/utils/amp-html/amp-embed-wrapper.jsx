@@ -2,17 +2,18 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash.get';
 import socialPatterns from './ampSocialPatterns';
+import { decodeString } from '../stringUtils';
 
 class AmpEmbedWrapper extends PureComponent {
   constructor(props) {
     super(props);
 
     const { element } = this.props;
-    const html = decodeURI(get(element, 'content', get(element, 'html')));
+    const html = decodeString(get(element, 'content', get(element, 'html', '')));
     this.data = {};
 
-    // console.log("----------------------------------------------------------------")
-    // console.log("AmpEmbedWrapper => ", html)
+    // console.log("----------------------------------------------------------------");
+    // console.log("AmpEmbedWrapper decode => ", html);
 
     socialPatterns.map((item) => {
       const reg = new RegExp(item.idRegex);
@@ -20,8 +21,8 @@ class AmpEmbedWrapper extends PureComponent {
       // console.log("AmpEmbedWrapper map => ", reg, regArr)
 
       if (regArr) {
-        const socialId = regArr[1];
-
+        const socialId = regArr[item.idIndex];
+        // console.log("REGARR => ", socialId)
         if (socialId) {
           this.data.socialId = socialId;
           this.data.pattern = item;

@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default [
   // instagram:
   /*
@@ -15,6 +16,7 @@ export default [
     internalTags: [],
     idRegex: 'https?://twitter.com/[a-zA-Z_]{1,20}/status/([0-9]*)',
     idRefAttribute: 'data-tweetid',
+    idIndex: 1,
     ampTagAttributes: [
       {
         name: 'width',
@@ -51,6 +53,7 @@ export default [
     internalTags: [],
     idRegex: 'www.instagram.com/p/(.*?)/',
     idRefAttribute: 'data-shortcode',
+    idIndex: 1,
     ampTagAttributes: [
       {
         name: 'data-captioned',
@@ -89,8 +92,9 @@ export default [
     ampTag: 'amp-vimeo',
     selfClosing: true,
     internalTags: [],
-    idRegex: '"https://vimeo.com/(.+?)"',
+    idRegex: 'https?://player.vimeo.com/video/([0-9]{1,20})',
     idRefAttribute: 'data-videoid',
+    idIndex: 1,
     ampTagAttributes: [
       {
         name: 'width',
@@ -130,6 +134,7 @@ export default [
     internalTags: [],
     idRegex: 'www.dailymotion.com/embed/video/(.*?)?',
     idRefAttribute: 'data-videoid',
+    idIndex: 1,
     ampTagAttributes: [
       {
         name: 'width',
@@ -157,7 +162,6 @@ export default [
       },
     ],
   },
-
   /*
   <amp-youtube
     data-videoid=''
@@ -173,6 +177,7 @@ export default [
     internalTags: [],
     idRegex: 'https?://www.youtube.com/embed/([a-zA-Z0-9-]{11})',
     idRefAttribute: 'data-videoid',
+    idIndex: 1,
     ampTagAttributes: [
       {
         name: 'width',
@@ -208,6 +213,7 @@ export default [
     internalTags: [],
     idRegex: '"https?://www.reddit.com/r/(.+?)"',
     idRefAttribute: 'data-src',
+    idIndex: 1,
     ampTagAttributes: [
       {
         name: 'data-src',
@@ -250,8 +256,9 @@ export default [
     ampTag: 'amp-soundcloud',
     selfClosing: true,
     internalTags: [],
-    // idRegex: 'https?://api.soundcloud.com/tracks/(\d+){9}',
+    idRegex: 'https?://api.soundcloud.com/tracks/(.{9})',
     idRefAttribute: 'data-trackid',
+    idIndex: 1,
     ampTagAttributes: [
       {
         name: 'width',
@@ -275,4 +282,80 @@ export default [
       },
     ],
   },
+  /*
+  <amp-facebook
+    width="476"
+    height="316"
+    layout="responsive"
+    data-embed-as="video"
+    data-href="https://www.facebook.com/nasaearth/videos/10155187938052139">
+  </amp-facebook>
+  */
+  {
+    name: 'facebook_video',
+    ampTag: 'amp-facebook',
+    selfClosing: true,
+    internalTags: [],
+    idRegex: 'https?://www.facebook.com/(.+?)/videos/([0-9]{1,25})',
+    idRefAttribute: 'data-href',
+    idIndex: 0,
+    ampTagAttributes: [
+      {
+        name: 'width',
+        defaultvalue: 476,
+      },
+      {
+        name: 'height',
+        defaultvalue: 316,
+      },
+      {
+        name: 'data-embed-as',
+        defaultvalue: 'video',
+      },
+      {
+        name: 'layout',
+        defaultvalue: 'responsive',
+      },
+      {
+        name: 'data-block-on-consent',
+        defaultvalue: '',
+      },
+    ],
+  },
+  /*
+  <amp-facebook
+    width="552"
+    height="310"
+    layout="responsive"
+    data-href="https://www.facebook.com/.../.../1712989015384373">
+  </amp-facebook>
+  */
+  {
+    name: 'facebook_post',
+    ampTag: 'amp-facebook',
+    selfClosing: true,
+    internalTags: [],
+    idRegex: 'https?://www.facebook.com/(.+?)/posts/([0-9]{1,25})',
+    idRefAttribute: 'data-href',
+    idIndex: 0, // 0 is the full url match
+    ampTagAttributes: [
+      {
+        name: 'width',
+        defaultvalue: 552,
+      },
+      {
+        name: 'height',
+        defaultvalue: 310,
+      },
+      {
+        name: 'layout',
+        defaultvalue: 'responsive',
+      },
+      {
+        name: 'data-block-on-consent',
+        defaultvalue: '',
+      },
+    ],
+  },
 ];
+/* eslint-enable */
