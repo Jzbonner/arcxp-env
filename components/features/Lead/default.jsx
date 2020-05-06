@@ -143,7 +143,7 @@ Lead.propTypes = {
       name: 'Display Class',
       defaultValue: '5-Item Feature - Top Photo',
     }),
-    columns: PropTypes.oneOf([1, 2, 3, 4]).tag({
+    columns: PropTypes.oneOf(['1', '2', '3', '4']).tag({
       name: 'Columns',
       defaultValue: 1,
     }),
