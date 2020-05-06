@@ -2,7 +2,7 @@ import React from 'react';
 import imageResizer from '../../../../layouts/_helper_functions/Thumbor';
 import truncateHeadline from '../../../../layouts/_helper_functions/homepage/truncateHeadline';
 import getDaysSincePublished from './getDaysSincePublished';
-import '../amp.scss';
+import '../default.scss';
 
 const filterCurrentStory = (contentElements, storyId) => contentElements.filter((el) => {
   if (el._id === storyId || getDaysSincePublished(el.first_publish_date) > 30) return null;
