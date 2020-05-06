@@ -513,8 +513,7 @@
         height: 54px;
       }
 
-      .login-text,
-      img {
+      .login-text {
         display: inline-block;
         vertical-align: middle;
         cursor: pointer;
@@ -553,13 +552,24 @@
       @include text-styles(.875rem, 1, "Gordita-Bold");
     }
 
-    /* various user state display styles */
+    /*
+      various user state default 'hidden' display conditions:
+      when logged-in: anonymous text
+      when logged-out: auth text
+      when not-logged-in: auth text
+      when not-logged-out: anonymous text
+      when authenticated: activation link
+     */
 
     body.is-loggedIn & .is-profileAnon,
     body.is-loggedOut & .is-profileAuthed,
     body.is-authenticated & .MG2activation,
     body.is-loggedIn & .nav-mobile-login .login-text.is-profileAnon,
-    body.is-loggedOut & .nav-mobile-login .login-text.is-profileAuthed {
+    body.is-loggedOut & .nav-mobile-login .login-text.is-profileAuthed,
+    body:not(.is-loggedIn) & .is-profileAuthed,
+    body:not(.is-loggedOut) & .is-profileAnon,
+    body:not(.is-loggedIn) & .nav-mobile-login .is-profileAuthed,
+    body:not(.is-loggedOut) & .nav-mobile-login .is-profileAnon {
       display: none;
     }
   }
@@ -834,6 +844,11 @@
     padding-left: 15px;
     padding-top: 10px;
     min-width: 100px;
+
+    img {
+      vertical-align: top;
+      margin-top: 8.5px;
+    }
   }
 
   &.isSticky {
