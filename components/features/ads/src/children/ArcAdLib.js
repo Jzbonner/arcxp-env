@@ -35,7 +35,10 @@ export default class ArcAdLib {
       }, (event) => {
         if (!event.isEmpty) {
           const slotId = event.slot.getSlotElementId();
-          document.querySelector(`#${slotId}`).style.display = 'block';
+          const slotDiv = document.querySelector(`#${slotId}`);
+          if (slotDiv) {
+            slotDiv.style.display = 'block';
+          }
           if (slotId.indexOf('PG01') > -1) {
             window.pg01 = event.slot;
           }

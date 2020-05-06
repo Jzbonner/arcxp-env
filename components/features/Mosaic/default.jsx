@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import { useAppContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import SectionLabel from '../../_helper_components/global/sectionLabel/default';
 import TimeStamp from '../../_helper_components/article/timestamp/default';
 import './default.scss';
 
 const Mosaic = (customFields = {}) => {
+  const fusionContext = useFusionContext();
+  const { arcSite = 'ajc' } = fusionContext;
   const appContext = useAppContext();
   const { contextPath } = appContext;
-  const { sites } = getProperties();
 
   const {
     customFields: {
@@ -24,7 +24,7 @@ const Mosaic = (customFields = {}) => {
 
   const data = useContent({
     source: contentService,
-    query: contentConfigValues,
+    query: { ...contentConfigValues, arcSite },
   });
 
   function patternMap(index, i) {
@@ -59,13 +59,15 @@ const Mosaic = (customFields = {}) => {
             const { hide_timestamp: hideTimestamp } = el.label || {};
             const { text: isHideTimestampTrue } = hideTimestamp || {};
 
-            const relativeURL = (websites && websites[sites] && websites[sites].website_url) || '/';
+            const relativeURL = (websites && websites[arcSite] && websites[arcSite].website_url) || '/';
 
             if (startIndex - 1 <= i && i < startIndex - 1 + itemLimit) {
               return (
-                <a key={`Mosaic-${i}`} className={`mosaic-box ${patternMap(startIndex, i)}`} href={`${contextPath}${relativeURL}`}>
+                <div key={`Mosaic-${i}`} className={`mosaic-box ${patternMap(startIndex, i)}`}>
+                  {/* the link is empty - 100% coverage of content via css - because sectionLabel outputs a link as well */}
+                  <a href={`${contextPath}${relativeURL}`}></a>
                   <div className="c-sectionLabel">
-                    <SectionLabel label={label} taxonomy={taxonomy} />
+                    <SectionLabel label={label || {}} taxonomy={taxonomy} />
                     <TimeStamp
                       firstPublishDate={firstPublishDate}
                       displayDate={displayDate}
@@ -74,7 +76,7 @@ const Mosaic = (customFields = {}) => {
                     />
                   </div>
                   <span className="headline">{truncateHeadline(headlines.basic)}</span>
-                </a>
+                </div>
               );
             }
             return null;

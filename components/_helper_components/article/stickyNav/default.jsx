@@ -99,8 +99,7 @@ const StickyNav = ({
 
   return (
     <>
-      <div className={`stickyNav
-      ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
+      <div className={`stickyNav ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
         <ul className="c-stickyNav-list">
         <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
           <div className='nav-flyout-button'>
