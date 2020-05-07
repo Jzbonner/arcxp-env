@@ -12,17 +12,12 @@ class AmpEmbedWrapper extends PureComponent {
     const html = decodeString(get(element, 'content', get(element, 'html', '')));
     this.data = {};
 
-    // console.log("----------------------------------------------------------------");
-    // console.log("AmpEmbedWrapper decode => ", html);
-
     socialPatterns.map((item) => {
       const reg = new RegExp(item.idRegex);
       const regArr = html.match(reg);
-      // console.log("AmpEmbedWrapper map => ", reg, regArr)
 
       if (regArr) {
         const socialId = regArr[item.idIndex];
-        // console.log("REGARR => ", socialId)
         if (socialId) {
           this.data.socialId = socialId;
           this.data.pattern = item;
@@ -43,7 +38,6 @@ class AmpEmbedWrapper extends PureComponent {
         if (item.name === pattern.idRefAttribute) return;
         tagAttributes[item.name] = item.defaultvalue;
       });
-      // console.log("=== tagAttributes => ", tagAttributes)
       return <TagName {...tagAttributes} />;
     }
 

@@ -1,3 +1,25 @@
+/*
+  Social pattern configurations
+
+  name: STRING - Simple human readable name to describe the configuration pattern. Field not used.
+  ampTag: STRING - The amp social html tag this should create. https://amp.dev/documentation/components/
+  selfClosing: BOOLEAN - Current unused; Intent is for future additions. If this amp tag should have inner
+                          content elements or close itself.
+  internalTags: COMPLEX ARRAY - Currently unused; The intent for this was to create inner configuration
+                          objects such as an amp-img placeholder for a video. Should rely on the selfClosing boolean.
+  isRegex: STRING - A regular expressions pattern to look for in the content to determine the social
+                    configuration to use and to extract the appropriate id for the network.
+  idRefAttribute: STRING - The amp html tag attribute to add the extracted id to.
+  idIndex: NUMBER - The regular expression array index in which to pull for the ID; 0 - full pattern; 1... - individual index part
+  ampTagAttributes: COMPLEX ARRAY - An array of objects describing data attributes that this amp tag uses to configure itself
+
+  =ampTagAttributes Child Object= OBJECT - An object that outlines a key/value amp tag attribute; width="123" or data-embedtype="post"
+                            for example. If the object name string matches the idRefAttribute then the defaultvalue is prepended to the
+                            network id extracted by the regex.
+    -- name: STRING - a data attribute key
+    -- defaultvalue: [STRING|BOOLEAN|NUMBER] - A value assigned to this attribute;
+*/
+
 /* eslint-disable */
 export default [
   // instagram:
@@ -118,7 +140,6 @@ export default [
       },
     ],
   },
-
   /*
   <amp-dailymotion
     data-videoid=''
@@ -229,7 +250,7 @@ export default [
       },
       {
         name: 'height',
-        defaultvalue: 400,
+        defaultvalue: 300,
       },
       {
         name: 'layout',
@@ -335,17 +356,17 @@ export default [
     ampTag: 'amp-facebook',
     selfClosing: true,
     internalTags: [],
-    idRegex: 'https?://www.facebook.com/(.+?)/posts/([0-9]{1,25})',
+    idRegex: 'https?:\/\/www\.facebook\.com\/(.+?)\/(posts|photos)\/([a?.?0-9]{1,40})(\/([0-9]{1,20}))?',
     idRefAttribute: 'data-href',
     idIndex: 0, // 0 is the full url match
     ampTagAttributes: [
       {
         name: 'width',
-        defaultvalue: 552,
+        defaultvalue: 476,
       },
       {
         name: 'height',
-        defaultvalue: 310,
+        defaultvalue: 316,
       },
       {
         name: 'layout',
