@@ -25,14 +25,14 @@
   
   .c-homeList .c-contributorBadge {
     justify-content: left;
-    height: 25px;
   }
 }
 
-.c-homepageContent {
+.c-homepageContent,
+.c-homeList {
 
   .c-contributorBadge {
-    height: 38px;
+    height: 25px;
     margin: 0;
   }
 }
