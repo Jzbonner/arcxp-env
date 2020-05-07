@@ -10,20 +10,27 @@ import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
 const Video = ({
-  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, taxonomy,
+  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, pageTaxonomy,
 }) => {
   const fusionContext = useFusionContext();
-  const { credits, _id: videoID, videoPageId } = src || {};
+  const {
+    credits,
+    _id: videoID,
+    videoPageId,
+    taxonomy: videoTaxonomy,
+  } = src || {};
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
   const screenSize = checkWindowSize();
   const { outputType, arcSite = 'ajc' } = fusionContext;
+  const vidId = videoID || videoPageId;
+  const currentEnv = fetchEnv();
 
   let mainCredit;
   if (credits) {
     mainCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
   }
-  const adTag = gamAdTagBuilder(taxonomy);
+  const adTag = gamAdTagBuilder(pageTaxonomy, videoTaxonomy, vidId, currentEnv);
 
   useEffect(() => {
     const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
@@ -73,9 +80,9 @@ const Video = ({
     className="powa"
     data-org={arcSite}
     data-api="sandbox"
-    data-env={fetchEnv()}
+    data-env={currentEnv}
     data-aspect-ratio="0.5625"
-    data-uuid={videoID || videoPageId}
+    data-uuid={vidId}
     data-autoplay={startPlaying}
     data-muted={muteON} />;
 
@@ -119,7 +126,7 @@ Video.propTypes = {
   featuredVideoPlayerRules: PropTypes.object,
   inlineVideoPlayerRules: PropTypes.object,
   maxTabletViewWidth: PropTypes.number,
-  taxonomy: PropTypes.object,
+  pageTaxonomy: PropTypes.object,
 };
 
 export default Video;
