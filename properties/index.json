@@ -31,7 +31,8 @@
   },
   "taboola": {
     "dataPublisher": "cox-atlantajournal-constitution",
-    "taboolaID": "taboola-ajc-custom-feed",
+    "taboolaStoryID": "taboola-ajc-custom-feed",
+    "taboolaSectionID": "taboola-ajc-custom-feed---section-fronts",
     "cdnLink": "//cdn.taboola.com/libtrc/cox-atlantajournal-constitution/loader.js",
     "containerName": "taboola-ajc-custom-feed",
     "placementName": "AJC Custom Feed"

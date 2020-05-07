@@ -11,7 +11,8 @@ const TaboolaFeed = ({ ampPage }) => {
   const { taboola } = getProperties();
   const {
     dataPublisher,
-    taboolaID,
+    taboolaStoryID,
+    taboolaSectionID,
     containerName,
     placementName,
   } = taboola;
@@ -38,7 +39,10 @@ const TaboolaFeed = ({ ampPage }) => {
     document.body.appendChild(taboolaScript);
   }, []);
 
-  return <div className="c-section"><div id={taboolaID} className='b-clear-both'></div></div>;
+  return (
+      <div className="c-section">
+        <div id={ layout === 'article-basic' ? taboolaStoryID : taboolaSectionID } className='b-clear-both'></div>
+      </div>);
 };
 
 TaboolaFeed.propTypes = {

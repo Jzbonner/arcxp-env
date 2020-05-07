@@ -64,7 +64,7 @@ const taboolaModuleScript = (layout, container, placement) => {
     containerName = container;
     placementName = placement;
   } else if (layout.includes('section')) {
-    containerName = `${container}--section-fronts`;
+    containerName = `${container}---section-fronts`;
     placementName = `${placement} - Section Fronts`;
   } else if (layout === 'homepage-basic') {
     containerName = `${container}--home-page`;
