@@ -71,7 +71,8 @@
       clear: both;
     }
 
-    .arc_ad {
+    .arc_ad[class*="HP0"],
+    .arc_ad[class*="MP0"] {
       @include arc-ad-full-width;
     }
   }
@@ -84,11 +85,8 @@
         padding: 0 30px 0 0;
       }
 
-      .arc_ad {
-
-        &[class*="MP"] {
-          @include arc-ad-full-width;
-        }
+      .arc_ad[class*="MP"] {
+        @include arc-ad-full-width;
       }
     }
 

@@ -28,7 +28,7 @@ const fetch = (query) => {
     return axios
       .get(requestUri, {
         headers: {
-          Bearer: ARC_ACCESS_TOKEN,
+          Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
         },
       })
       .then(({ data }) => AddFirstInlineImage(data, arcSite, displayClass, displayClassesRequiringImg))

@@ -19,7 +19,6 @@ const List = (customFields = {}) => {
       title = '',
     },
   } = customFields;
-
   const displayClassesRequiringImg = layout !== 'list-basic'
     ? ['Top Photo', '1 or 2 Item Feature', 'Left Photo'] : ['Top Photo', '1 or 2 Item Feature'];
 
@@ -72,7 +71,7 @@ const List = (customFields = {}) => {
 
 List.propTypes = {
   customFields: PropTypes.shape({
-    content: PropTypes.contentConfig('collections', 'query-feed').tag({
+    content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
       name: 'Content',
     }),
     startIndex: PropTypes.number.tag({
