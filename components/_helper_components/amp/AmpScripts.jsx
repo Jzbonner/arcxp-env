@@ -81,6 +81,11 @@ const AmpScripts = () => (
       custom-element="amp-soundcloud"
       src="https://cdn.ampproject.org/v0/amp-soundcloud-0.1.js"
     />
+    <script
+      async
+      custom-element="amp-carousel"
+      src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"
+    />
   </>
 );
 

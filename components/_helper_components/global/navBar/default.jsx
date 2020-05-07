@@ -6,7 +6,6 @@ import Section from './section/default';
 import Logo from './logo/default';
 import Subscribe from './subscribe/default';
 import DesktopNav from './desktopNav/default';
-import Login from './login/default';
 import StickyNav from '../../article/stickyNav/default';
 import AmpNavBar from './amp';
 import '../../../../src/styles/base/_utility.scss';
@@ -133,7 +132,6 @@ const NavBar = ({
               && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
               <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
             </div>
-            <Login isMobile={true} isFlyout={false}/>
           </div>
           <DesktopNav
             sections={sectionLi}
@@ -150,20 +148,19 @@ const NavBar = ({
             <Subscribe/>
           </div>
           <StickyNav
-          articleURL={articleURL}
-          headlines={headlines}
-          comments={comments}
-          hamburgerToggle={mobileMenuToggled}
-          setStickyNavVisibility={setStickyNavVisibility}
-          stickyNavVisibility={stickyNavVisibility}
-          isMobile={isMobile}
-          isMobileVisibilityRef={isMobileVisibilityRef}
-          logoRef={logoRef}
-          setToggle={setToggle}
-          paddingRef={paddingRef}
-          type={type}
-          sections={sectionLi}
-          />
+            articleURL={articleURL}
+            headlines={headlines}
+            comments={comments}
+            hamburgerToggle={mobileMenuToggled}
+            setStickyNavVisibility={setStickyNavVisibility}
+            stickyNavVisibility={stickyNavVisibility}
+            isMobile={isMobile}
+            isMobileVisibilityRef={isMobileVisibilityRef}
+            logoRef={logoRef}
+            setToggle={setToggle}
+            paddingRef={paddingRef}
+            type={type}
+            sections={sectionLi}/>
         </div>
         <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
       </header>

@@ -8,12 +8,12 @@
   .c-title-content {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-    grid-template-rows: 42px 0;
-    grid-gap: 20px;
+    grid-template-rows: 34px 0;
+    grid-gap: 10px;
     text-align: center;
     color: #313132;
 
-    @include text-styles(3.125em, 1, "Average");
+    @include text-styles(2.5em, 1, "Average");
 
     &:before,
     &:after {
@@ -23,9 +23,9 @@
     }
 
     @include breakpoint(desktop-sm) {
-      grid-template-rows: 67px 0;
+      grid-template-rows: 47px 0;
 
-      @include text-styles(5em, 1, "Average");
+      @include text-styles(3.5em, 1, "Average");
     }
   }
 }

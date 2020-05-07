@@ -23,7 +23,10 @@ const GalleryPageLayout = () => {
     credits,
     description,
     streams,
+    promo_items: promoItems,
   } = globalContent || {};
+
+  const { basic } = promoItems || {};
 
   const basicItems = {
     type,
@@ -41,7 +44,7 @@ const GalleryPageLayout = () => {
           <Headline headlines={headlines} basicItems={basicItems} />
         </div>
         <div className="c-main-gallery">
-          <Gallery leafContentElements={contentElements} pageType={subtype} />
+          <Gallery leafContentElements={contentElements} promoItems={basic} pageType={subtype} />
         </div>
       </main>
       <Footer />

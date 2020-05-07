@@ -102,18 +102,29 @@
     -webkit-overflow-scrolling: touch;
     white-space: nowrap;
 
-    .nav-mobile-login {
-
-      .login-text:not(.hidden) {
-        display: flex;
-        color: #fff;
-        padding-left: 15px;
-        padding-bottom: 3px;
-      }
-    }
-
     &.mobile-nav-deactivated {
       transform: translateX(-1000px);
+    }
+
+    .nav-mobile-login {
+
+      .login-text {
+        color: #fff;
+        padding-left: 15px;
+      }
+
+      .section {
+        margin-top: 20px;
+        margin-left: 50px;
+
+        .flyout-item {
+          margin-bottom: 15px;
+
+          .nav-profileLogout {
+            @include text-styles(1, 2, "Gordita-Bold");
+          }
+        }
+      }
     }
   }
 
@@ -467,9 +478,23 @@
     @include breakpoint(desktop-sm) {
       padding-bottom: 0;
     }
+
+    @include between-breakpoints(mobile, desktop-sm) {
+
+      .nav-login {
+        display: block;
+      }
+    }
   }
 
   .nav-login {
+    @include between-breakpoints(mobile, desktop-sm) {
+
+      &.isSticky .login-text {
+        display: none;
+      }
+    }
+
     @include breakpoint(desktop-sm) {
       display: flex;
       padding-top: 0;
@@ -488,28 +513,26 @@
         height: 54px;
       }
 
+      .login-text {
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+      }
+
       .section,
       .section-item {
         min-width: 100%;
         box-sizing: border-box;
       }
 
-      .section {
+      .section .subNav {
+        right: 0;
+        border-radius: 6px 0 6px 6px;
+        top: 52px;
+        min-width: 170px;
 
-        .login-text,
-        img {
-          display: inline-block;
-          vertical-align: middle;
-        }
-
-        .subNav {
-          right: 0;
-          border-radius: 6px 0 6px 6px;
-          top: 52px;
-
-          &-flyout {
-            height: auto;
-          }
+        &-flyout {
+          height: auto;
         }
       }
     }
@@ -529,30 +552,35 @@
       @include text-styles(.875rem, 1, "Gordita-Bold");
     }
 
-    /* various user state display styles */
-
-    body:not(.is-loggedIn):not(.is-loggedOut) & {
-
-      .is-profileAnon,
-      .is-profileAuthed {
-        display: none;
-      }
-    }
+    /*
+      various user state default 'hidden' display conditions:
+      when logged-in: anonymous text
+      when logged-out: auth text
+      when not-logged-in: auth text
+      when not-logged-out: anonymous text
+      when authenticated: activation link
+     */
 
     body.is-loggedIn & .is-profileAnon,
     body.is-loggedOut & .is-profileAuthed,
-    body.is-authenticated & .MG2activation {
+    body.is-authenticated & .MG2activation,
+    body.is-loggedIn & .nav-mobile-login .login-text.is-profileAnon,
+    body.is-loggedOut & .nav-mobile-login .login-text.is-profileAuthed,
+    body:not(.is-loggedIn) & .is-profileAuthed,
+    body:not(.is-loggedOut) & .is-profileAnon,
+    body:not(.is-loggedIn) & .nav-mobile-login .is-profileAuthed,
+    body:not(.is-loggedOut) & .nav-mobile-login .is-profileAnon {
       display: none;
     }
   }
 
   .login-text {
-    font-weight: 700;
     padding-left: 6px;
     cursor: pointer;
-    display: none;
+    display: inline-block;
+    vertical-align: middle;
 
-    @include text-styles(1rem, 1, "Gordita");
+    @include text-styles(1rem, 1, "Gordita-Bold");
 
     @include breakpoint(desktop-sm) {
       display: flex;
@@ -807,6 +835,8 @@
   display: flex;
 
   img {
+    display: inline-block;
+    vertical-align: middle;
     cursor: pointer;
   }
 
@@ -814,6 +844,11 @@
     padding-left: 15px;
     padding-top: 10px;
     min-width: 100px;
+
+    img {
+      vertical-align: top;
+      margin-top: 8.5px;
+    }
   }
 
   &.isSticky {
