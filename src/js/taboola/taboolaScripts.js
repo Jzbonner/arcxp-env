@@ -1,10 +1,14 @@
+const isHome = 'home-basic';
+const isArticle = 'article-basic';
+const isSection = 'section';
+
 const taboolaHeaderScript = (layout, cdnLink) => {
   let taboolaCatType;
-  if (layout === 'article-basic') {
+  if (layout === isArticle) {
     taboolaCatType = 'article';
-  } else if (layout.includes('section')) {
+  } else if (layout.includes(isSection)) {
     taboolaCatType = 'category';
-  } else if (layout === 'home-basic') {
+  } else if (layout === isHome) {
     taboolaCatType = 'home';
   }
   return `window._taboola = window._taboola || [];
@@ -26,7 +30,7 @@ const taboolaHeaderScript = (layout, cdnLink) => {
 };
 
 const taboolaFooterScript = (layout, moapPTD, boapPTD) => {
-  if (layout === 'article-basic') {
+  if (layout === isHome) {
     return ` window._taboola = window._taboola || [];
       _taboola.push({flush: true});
       let renderedBoap = false;
@@ -60,13 +64,13 @@ const taboolaFooterScript = (layout, moapPTD, boapPTD) => {
 const taboolaModuleScript = (layout, container, placement) => {
   let containerName;
   let placementName;
-  if (layout === 'article-basic') {
+  if (layout === isArticle) {
     containerName = container;
     placementName = placement;
-  } else if (layout.includes('section')) {
+  } else if (layout.includes(isSection)) {
     containerName = `${container}---section-fronts`;
     placementName = `${placement} - Section Fronts`;
-  } else if (layout === 'homepage-basic') {
+  } else if (layout === isHome) {
     containerName = `${container}--home-page`;
     placementName = `${placement} - Home Page`;
   }
