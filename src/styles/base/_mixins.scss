@@ -125,6 +125,45 @@
   }
 }
 
+// styling for "full width" ads on home/section pages
+
+@mixin arc-ad-full-width {
+  margin: 40px 0;
+  padding: 20px 0;
+  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+
+  .arcad {
+    width: 100vw;
+    max-width: 1600px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  @include between-breakpoints(mobile, desktop-lg) {
+    margin-left: -30px;
+    margin-right: -30px;
+    width: calc(100% + 60px);
+  }
+
+  @include breakpoint(tablet) {
+
+    .arcad {
+      margin: 0 auto;
+      padding-bottom: 20px;
+    }
+  }
+
+  @include breakpoint(desktop-lg) {
+    width: 111.1112%;
+    margin-left: -5.5556%;
+    margin-right: -5.5556%;
+  }
+}
+
 // applies sticky position to element(s), accepting a [top, right, bottom, left] position arg (which defaults to top: 0 if not otherwise specified).  There is extensive browser support except for IE (which we can gracefully degrade for): https://caniuse.com/#feat=css-sticky
 
 // Example calls:

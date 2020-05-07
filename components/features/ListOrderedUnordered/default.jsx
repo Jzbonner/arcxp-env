@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import './default.scss';
 
 const ListOrderedUnordered = (customFields = {}) => {
+  const fusionContext = useFusionContext();
+  const { arcSite = 'ajc' } = fusionContext;
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
@@ -17,7 +20,7 @@ const ListOrderedUnordered = (customFields = {}) => {
 
   const data = useContent({
     source: contentService,
-    query: contentConfigValues,
+    query: { ...contentConfigValues, arcSite },
   });
 
   if (data) {

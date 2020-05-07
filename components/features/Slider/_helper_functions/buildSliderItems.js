@@ -5,7 +5,7 @@ import getItemThumbnail from './getItemThumbnail';
 const buildSliderItems = (sliderCollection, ref) => {
   let elCount = 0;
   const sliderItems = sliderCollection.content_elements.map((elem) => {
-    const itemThumbnail = getItemThumbnail(elem.promo_items);
+    const itemThumbnail = getItemThumbnail(elem.promo_items || elem.firstInlineImage);
 
     if (!itemThumbnail) return null;
 

@@ -31,6 +31,7 @@ import ConnextInlinePromoSubscription from '../_helper_components/global/connext
 import getQueryParams from './_helper_functions/getQueryParams';
 import checkTags from './_helper_functions/checkTags';
 import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
+import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
@@ -65,7 +66,6 @@ const StoryPageLayout = () => {
     credits,
     type,
   } = globalContent || {};
-
   if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} />;
 
   const queryParams = getQueryParams(requestUri);
@@ -77,6 +77,7 @@ const StoryPageLayout = () => {
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
+
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
@@ -150,7 +151,7 @@ const StoryPageLayout = () => {
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
           </div>
-          {ampPage && <SocialShare/>}
+          {ampPage && <SocialShare headlines={headlines} promoItems={promoItems}/>}
           <ContributorBadge tags={tags} ampPage={ampPage} />
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
             <SubHeadline subheadlines={subheadlines} />
@@ -234,6 +235,7 @@ const StoryPageLayout = () => {
       </main>
       {!ampPage && <Footer />}
       <Copyright />
+      {ampPage && <Carousel storyId={uuid} taxonomy={taxonomy} />}
     </>
   );
 };

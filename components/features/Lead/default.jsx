@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import Headline from '../../_helper_components/home/Headline/Headline';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
 import './default.scss';
 
 const Lead = (customFields = {}) => {
+  const fusionContext = useFusionContext();
+  const { arcSite = 'ajc' } = fusionContext;
+
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
@@ -18,9 +22,21 @@ const Lead = (customFields = {}) => {
     },
   } = customFields;
 
+  const displayClassesRequiringImg = [
+    '5-Item Feature - Top Photo',
+    '5-Item Feature - Left Photo',
+    '5-Item Feature - Center Lead Top Photo',
+    '5-Item Feature - No Photo',
+  ];
+
   const data = useContent({
     source: contentService,
-    query: contentConfigValues,
+    query: {
+      ...contentConfigValues,
+      arcSite,
+      displayClass,
+      displayClassesRequiringImg,
+    },
   });
 
   function getDisplayClassMap(displayC) {
@@ -127,7 +143,7 @@ Lead.propTypes = {
       name: 'Display Class',
       defaultValue: '5-Item Feature - Top Photo',
     }),
-    columns: PropTypes.oneOf([1, 2, 3, 4]).tag({
+    columns: PropTypes.oneOf(['1', '2', '3', '4']).tag({
       name: 'Columns',
       defaultValue: 1,
     }),

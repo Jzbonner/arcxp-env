@@ -15,11 +15,43 @@ const ConnextInit = () => {
 
   if (!isEnabled) return null;
 
+  const userIsLoggedInClass = 'is-loggedIn';
+  const userIsLoggedOutClass = 'is-loggedOut';
+  const userIsAuthenticatedClass = 'is-authenticated';
+  const connextLSLookup = `connext_user_data_${siteCode}_${configCode}_${environment.toUpperCase()}`;
+
   return <script type='text/javascript' dangerouslySetInnerHTML={{
     __html: `
       const doc = window.document;
+      const docBody = doc.querySelector('body');
+      const toggleUserState = (action) => {
+        let dataLayer = window.dataLayer || [];
+        if (action === 'logged-in') {
+          docBody.className = docBody.className.replace(/${userIsLoggedOutClass}/g, '');
+          docBody.className += docBody.className.indexOf('${userIsLoggedInClass}') === -1 ? ' ${userIsLoggedInClass}' : '';
+          if (typeof(window.localStorage) !== 'undefined') {
+            const connextLS = window.localStorage.getItem('${connextLSLookup}');
+            if (connextLS) {
+              const { UserId } = JSON.parse(connextLS);
+              dataLayer.push({'userData': {
+                'userStatus': 'logged in',
+                'userProfileID': UserId
+              }});
+            }
+          }
+        } else if (action === 'logged-out') {
+          docBody.className = docBody.className.replace(/${userIsLoggedInClass}/g, '').replace(/${userIsAuthenticatedClass}/g, '');
+          docBody.className += docBody.className.indexOf('${userIsLoggedOutClass}') === -1 ? ' ${userIsLoggedOutClass}' : '';
+          dataLayer.push('userData', {
+            'userStatus': 'not logged in',
+            'userProfileID': null
+          });
+        } else if (action === 'authenticated' && docBody.className.indexOf('${userIsAuthenticatedClass}') === -1) {
+          docBody.className += ' ${userIsAuthenticatedClass}';
+        }
+      };
       const connextLogger = (message) => {
-        if (${debug} || window.location.hostname.indexOf('sandbox') > -1) {
+        if (${debug} || window.location.search.indexOf('connextDebug') > -1) {
           console.log(message);
         }
       };
@@ -28,8 +60,8 @@ const ConnextInit = () => {
           const arr = location.host.split('.');
           const rootdomain = arr[arr.length - 2] + '.' + arr[arr.length - 1];
           doc.cookie = name + '=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT';
-          doc.cookie = name + '=;path=/;domain=' + host + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
-          doc.cookie = name + '=;path=/;domain=.' + host + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
+          doc.cookie = name + '=;path=/;domain=' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
+          doc.cookie = name + '=;path=/;domain=.' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
           doc.cookie = name + '=;path=/;domain=' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
           doc.cookie = name + '=;path=/;domain=.' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
         };
@@ -38,16 +70,13 @@ const ConnextInit = () => {
         deleteCookie('igmRegID');
         window.Connext.Logout();
       };
-      doc.addEventListener('connextLoaded', () => {
-        connextLogger('connextLoaded from init');
-      });
-      doc.addEventListener('connextLoggedIn', () => {
+      window.addEventListener('connextLoggedIn', () => {
         toggleUserState('logged-in');
       });
-      doc.addEventListener('connextLoggedOut', () => {
+      window.addEventListener('connextLoggedOut', () => {
         toggleUserState('logged-out');
       });
-      doc.addEventListener('connextIsSubscriber', () => {
+      window.addEventListener('connextIsSubscriber', () => {
         toggleUserState('authenticated');
       });
       doc.addEventListener('DOMContentLoaded', () => {
@@ -55,32 +84,6 @@ const ConnextInit = () => {
         const connextLoggedIn = new Event('connextLoggedIn');
         const connextLoggedOut = new Event('connextLoggedOut');
         const connextIsSubscriber = new Event('connextIsSubscriber');
-        const docBody = doc.querySelector('body');
-        const userIsLoggedInClass = ' is-loggedIn';
-        const userIsLoggedOutClass = ' is-loggedOut';
-        const userIsAuthenticatedClass = ' is-authenticated';
-        const toggleActivateLink = (showOrHide) => {
-          if (showOrHide === 'show') {
-            activationLinks.forEach((child) => {
-              showThisEl(child);
-            });
-          } else {
-            activationLinks.forEach((child) => {
-              hideThisEl(child);
-            });
-          }
-        };
-        const toggleUserState = (action) => {
-          if (action === 'logged-in') {
-            docBody.className.replace(userIsLoggedOutClass, '');
-            docBody.className += userIsLoggedInClass;
-          } else if (action === 'logged-out') {
-            docBody.className.replace(userIsLoggedInClass, '');
-            docBody.className += userIsLoggedOutClass;
-          } else if (action === 'authenticated') {
-            docBody.className += userIsAuthenticatedClass;
-          }
-        };
         Promise.resolve(window.MG2Loader.init({
           plugins: [
             {
@@ -122,16 +125,16 @@ const ConnextInit = () => {
                     doc.querySelectorAll('.nav-profileLogout').forEach((el) => {
                       el.addEventListener('click', mg2Logout);
                     });
-                    doc.dispatchEvent(connextLoaded);
+                    window.dispatchEvent(connextLoaded);
                   },
                   onLoggedIn: (e) => {
                     connextLogger('>> onLoggedIn', e);
-                    doc.dispatchEvent(connextLoggedIn);
+                    window.dispatchEvent(connextLoggedIn);
                   },
                   onNotAuthorized: (e) => {
                     // this event fires on every Engage loading if user is logged out
                     connextLogger('>> onNotAuthorized', e);
-                    doc.dispatchEvent(connextLoggedOut);
+                    window.dispatchEvent(connextLoggedOut);
                   },
                   onMeterLevelSet: (e) => {
                     connextLogger('>> onMeterLevelSet', e);
@@ -152,7 +155,7 @@ const ConnextInit = () => {
                   onHasAccess: (e) => {
                     // this event fires on every Engage loading if user is subscriber
                     connextLogger('>> onHasAccess', e);
-                    doc.dispatchEvent(connextIsSubscriber);
+                    window.dispatchEvent(connextIsSubscriber);
                   },
                 },
               },

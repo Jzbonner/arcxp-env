@@ -11,7 +11,7 @@ $is-amp: true;
 // start components
 @import "./../../../components/_helper_components/amp/amp-ads/default";
 @import "./../../../components/_helper_components/article/byline/default.scss";
-@import "./../../../components//_helper_components/article/socialShare/amp.scss";
+@import "./../../../components/_helper_components/article/socialShare/amp.scss";
 @import "./../../../components/_helper_components/article/headline/style.scss";
 @import "./../../../components/_helper_components/article/section/styles.scss";
 @import "./../../../components/_helper_components/article/subheadline/style.scss";
@@ -25,6 +25,7 @@ $is-amp: true;
 @import "./../../../components/_helper_components/article/contentElements/components/list/styles.scss";
 @import "./../../../components/_helper_components/article/contentElements/components/paragraph/default.scss";
 @import "./../../../components/_helper_components/article/contentElements/components/interstitial_link/styles.scss";
+@import "./../../../components/_helper_components/article/carousel/default.scss";
 // end components
 
 // start global

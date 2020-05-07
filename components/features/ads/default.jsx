@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import { ENVIRONMENT } from 'fusion:environment';
+import fetchEnv from '../../_helper_components/global/utils/environment.js';
 import AdSetup from './src/index';
+import checkPageType from '../../layouts/_helper_functions/getPageType.js';
 import { adSlots, defaultAdSlot } from './children/adtypes';
 
 const ArcAd = ({ customFields, staticSlot }) => {
   const appContext = useAppContext();
-  const { globalContent, requestUri } = appContext;
+  const { globalContent, layout, requestUri } = appContext;
   const {
     _id: uuid,
     subtype,
@@ -26,8 +27,19 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const { dfp_id: dfpid, siteName } = getProperties();
   const slot = customFieldsSlot || staticSlot;
   let randomIdMPG01 = '';
-  const currentEnv = ENVIRONMENT || 'unknown';
-  const contentType = subtype || type;
+  const currentEnv = fetchEnv();
+  const pageType = checkPageType(subtype || type, layout);
+  const {
+    isHome,
+    isSection,
+    type: typeOfPage,
+  } = pageType || {};
+  let contentType = typeOfPage === 'story' ? 'article' : typeOfPage.toLowerCase();
+  if (isHome) {
+    contentType = 'homepage';
+  } else if (isSection) {
+    contentType = 'sectionPage';
+  }
 
   // If there is no DFP ID and we are in the Admin,
   if (!dfpid) return null;
