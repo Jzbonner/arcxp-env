@@ -21,7 +21,7 @@ const getStoryData = (site, data) => {
     return axios
       .get(storyURL, {
         headers: {
-          Bearer: ARC_ACCESS_TOKEN,
+          Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
         },
       })
       .then(({ data: storyData }) => {
@@ -45,7 +45,7 @@ const fetch = (query) => {
     return axios
       .get(urlBreaking, {
         headers: {
-          Bearer: ARC_ACCESS_TOKEN,
+          Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
         },
       })
       .then(({ data: breakingData }) => ({ breakingData, numOfBreakingStories: breakingData.data && breakingData.data.booked }))
@@ -59,7 +59,7 @@ const fetch = (query) => {
           return axios
             .get(urlLiveVideo, {
               headers: {
-                Bearer: ARC_ACCESS_TOKEN,
+                Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
               },
             })
             .then(({ data: videoData }) => {
