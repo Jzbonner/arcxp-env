@@ -34,7 +34,7 @@ const sectionLabel = ({ taxonomy, label, ampPage = false }) => {
   // if can't find label or custom label anywhere, get label from top level id
   if (!nameCustom && !namePrimary && !teaseLabel && id) {
     const resultArr = pathRegTest.exec(id);
-    const [firstResult] = resultArr;
+    const [firstResult] = resultArr || [];
     labelFromPath = firstResult || null;
   }
 
