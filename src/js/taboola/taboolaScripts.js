@@ -71,7 +71,7 @@ const taboolaModuleScript = (layout, container, placement) => {
     containerName = `${container}---section-fronts`;
     placementName = `${placement} - Section Fronts`;
   } else if (layout === isHome) {
-    containerName = `${container}--home-page`;
+    containerName = `${container}---home-page`;
     placementName = `${placement} - Home Page`;
   }
   return `window._taboola = window._taboola || [];
