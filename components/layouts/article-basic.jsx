@@ -151,8 +151,8 @@ const StoryPageLayout = () => {
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
           </div>
-          {ampPage && <SocialShare headlines={headlines} promoItems={promoItems}/>}
           <ContributorBadge tags={tags} ampPage={ampPage} />
+          {ampPage && <SocialShare headlines={headlines} promoItems={promoItems}/>}
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
             <SubHeadline subheadlines={subheadlines} />
           </div>
