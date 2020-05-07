@@ -1,9 +1,14 @@
 import getProperties from 'fusion:properties';
-import { ENVIRONMENT } from 'fusion:environment';
+import getContentMeta from '../../siteMeta/_helper_functions/getContentMeta';
+import checkTags from '../../../../layouts/_helper_functions/checkTags';
 
 const gamAdTagBuilder = (taxonomy) => {
-  const { dfp_id: dfpid, adsPath } = getProperties();
+  const { dfp_id: dfpId, adsPath } = getProperties();
   const { primary_section: primarySection, tags = [] } = taxonomy || {};
+  const noAds = checkTags(tags, 'no-ads');
+  if (noAds) {
+    return null;
+  }
   const { path = '/' } = primarySection || {};
   const topics = [];
   tags.forEach((tag) => {
@@ -11,16 +16,21 @@ const gamAdTagBuilder = (taxonomy) => {
       topics.push(tag.text);
     }
   });
-  const currentEnv = ENVIRONMENT || 'unknown';
-  const gamUrl = 'https://pubads.g.doubleclick.net/gampad/ads';
+  const contentMeta = getContentMeta();
+  const {
+    environ = '',
+    pageContentType,
+    topics: pageTopics = [],
+    contentId,
+  } = contentMeta || {};
+  const gamUrl = 'https://securepubads.g.doubleclick.net/gampad/ads';
   const size = 'sz=400x300';
+  const uuid = contentId;
+  const pageUuid = contentId || uuid;
+  const kw = topics.concat(pageTopics);
 
-  return `${gamUrl}?${size}&iu=/${dfpid}/${currentEnv.toLowerCase().indexOf('prod') === -1 ? 'TEST_' : ''}${adsPath}${path}`;
+  // eslint-disable-next-line max-len
+  return `${gamUrl}?${size}&iu=/${dfpId}/${environ !== 'prod' ? 'TEST_' : ''}${adsPath}${path}&kw=${kw.join()}&video=${uuid}&cmsid=2511993&obj_type=${pageContentType}&description_url=[description_url]‌&uuid=${pageUuid}&environ=${environ}`;
 };
 
 export default gamAdTagBuilder;
-
-
-// https://pubads.g.doubleclick.net/gampad/ads
-// ?sz=400x300&iu=/21849707860/atlanta_np/ajc_web_default
-// &cmsid=2511993&vid=ANV_ANV_[[VIDEO_ID

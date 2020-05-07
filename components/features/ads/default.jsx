@@ -8,7 +8,7 @@ import getContentMeta from '../../_helper_components/global/siteMeta/_helper_fun
 
 const ArcAd = ({ customFields, staticSlot }) => {
   const { slot: customFieldsSlot } = customFields || {};
-  const { dfp_id: dfpid } = getProperties();
+  const { dfp_id: dfpid, adsPath } = getProperties();
   const slot = customFieldsSlot || staticSlot;
   let randomIdMPG01 = '';
   const currentEnv = fetchEnv();
@@ -60,7 +60,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
       className={`arc_ad | ${slotName} ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
-      dfpId={`${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}atlanta_np/ajc_web_default${topSection}`}
+      dfpId={`${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${topSection}`}
       display={adConfig.display || defaultAdSlot.display}
       id={`${defaultAdSlot.name}${staticSlot || slot}${randomIdMPG01 !== '' ? `-${randomIdMPG01}` : ''}`}
       slotName={slotName}
