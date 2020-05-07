@@ -39,8 +39,7 @@ export default [
     idRegex: 'https?://twitter.com/[a-zA-Z_]{1,20}/status/([0-9]*)',
     idRefAttribute: 'data-tweetid',
     idIndex: 1,
-    ampTagAttributes: [
-      {
+    ampTagAttributes: [{
         name: 'width',
         defaultvalue: 375,
       },
@@ -76,8 +75,7 @@ export default [
     idRegex: 'www.instagram.com/p/(.*?)/',
     idRefAttribute: 'data-shortcode',
     idIndex: 1,
-    ampTagAttributes: [
-      {
+    ampTagAttributes: [{
         name: 'data-captioned',
         defaultvalue: '',
       },
@@ -117,8 +115,7 @@ export default [
     idRegex: 'https?://player.vimeo.com/video/([0-9]{1,20})',
     idRefAttribute: 'data-videoid',
     idIndex: 1,
-    ampTagAttributes: [
-      {
+    ampTagAttributes: [{
         name: 'width',
         defaultvalue: 640,
       },
@@ -156,8 +153,7 @@ export default [
     idRegex: 'www.dailymotion.com/embed/video/(.*?)?',
     idRefAttribute: 'data-videoid',
     idIndex: 1,
-    ampTagAttributes: [
-      {
+    ampTagAttributes: [{
         name: 'width',
         defaultvalue: 640,
       },
@@ -199,8 +195,7 @@ export default [
     idRegex: 'https?://www.youtube.com/embed/([a-zA-Z0-9-]{11})',
     idRefAttribute: 'data-videoid',
     idIndex: 1,
-    ampTagAttributes: [
-      {
+    ampTagAttributes: [{
         name: 'width',
         defaultvalue: 480,
       },
@@ -235,8 +230,7 @@ export default [
     idRegex: '"https?://www.reddit.com/r/(.+?)"',
     idRefAttribute: 'data-src',
     idIndex: 1,
-    ampTagAttributes: [
-      {
+    ampTagAttributes: [{
         name: 'data-src',
         defaultvalue: 'https://www.reddit.com/r/',
       },
@@ -280,8 +274,7 @@ export default [
     idRegex: 'https?://api.soundcloud.com/tracks/(.{9})',
     idRefAttribute: 'data-trackid',
     idIndex: 1,
-    ampTagAttributes: [
-      {
+    ampTagAttributes: [{
         name: 'width',
         defaultvalue: 480,
       },
@@ -320,8 +313,7 @@ export default [
     idRegex: 'https?://www.facebook.com/(.+?)/videos/([0-9]{1,25})',
     idRefAttribute: 'data-href',
     idIndex: 0,
-    ampTagAttributes: [
-      {
+    ampTagAttributes: [{
         name: 'width',
         defaultvalue: 476,
       },
@@ -359,14 +351,52 @@ export default [
     idRegex: 'https?:\/\/www\.facebook\.com\/(.+?)\/(posts|photos)\/([a?.?0-9]{1,40})(\/([0-9]{1,20}))?',
     idRefAttribute: 'data-href',
     idIndex: 0, // 0 is the full url match
-    ampTagAttributes: [
-      {
+    ampTagAttributes: [{
         name: 'width',
         defaultvalue: 476,
       },
       {
         name: 'height',
         defaultvalue: 316,
+      },
+      {
+        name: 'layout',
+        defaultvalue: 'responsive',
+      },
+      {
+        name: 'data-block-on-consent',
+        defaultvalue: '',
+      },
+    ],
+  },
+  /*
+  <amp-pinterest
+    width="245"
+    height="330"
+    data-do="embedPin"
+    data-url="https://www.pinterest.com/pin/99360735500167749/">
+  </amp-pinterest>
+  */
+  {
+    name: 'pinterest',
+    ampTag: 'amp-pinterest',
+    selfClosing: true,
+    internalTags: [],
+    idRegex: 'https?://www.pinterest.com/pin/([0-9]{1,25})/?',
+    idRefAttribute: 'data-url',
+    idIndex: 0,
+    ampTagAttributes: [
+      {
+        name: 'width',
+        defaultvalue: 236,
+      },
+      {
+        name: 'height',
+        defaultvalue: 430,
+      },
+      {
+        name: 'data-do',
+        defaultvalue: 'embedPin',
       },
       {
         name: 'layout',
