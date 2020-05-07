@@ -4,11 +4,11 @@ import getProperties from 'fusion:properties';
 import AdSetup from './src/index';
 import fetchEnv from '../../_helper_components/global/utils/environment.js';
 import { adSlots, defaultAdSlot } from './children/adtypes';
-import getAdTargeting from './_helper_functions/getAdTargeting';
+import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
 
 const ArcAd = ({ customFields, staticSlot }) => {
   const { slot: customFieldsSlot } = customFields || {};
-  const { dfp_id: dfpid, siteName } = getProperties();
+  const { dfp_id: dfpid } = getProperties();
   const slot = customFieldsSlot || staticSlot;
   let randomIdMPG01 = '';
   const currentEnv = fetchEnv();
@@ -33,7 +33,26 @@ const ArcAd = ({ customFields, staticSlot }) => {
 
   const targeting = adConfig.targeting || defaultAdSlot.targeting || {};
   // get global targeting values
-  const globalTargeting = getAdTargeting(slotName, siteName, currentEnv);
+
+  const contentMeta = getContentMeta();
+  const {
+    topSection = '',
+    environ = '',
+    pageContentType,
+    site,
+    topics = [],
+    contentId,
+  } = contentMeta || {};
+
+  const globalTargeting = {
+    uuid: contentId,
+    obj_type: pageContentType,
+    environ,
+    mediaType: 'Arc',
+    sitepath: site.toLowerCase(),
+    ad_slot: slotName,
+    topics,
+  };
 
   const arcad = (
     <AdSetup
@@ -41,7 +60,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
       className={`arc_ad | ${slotName} ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
-      dfpId={`${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}atlanta_np/ajc_web_default`}
+      dfpId={`${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}atlanta_np/ajc_web_default${topSection}`}
       display={adConfig.display || defaultAdSlot.display}
       id={`${defaultAdSlot.name}${staticSlot || slot}${randomIdMPG01 !== '' ? `-${randomIdMPG01}` : ''}`}
       slotName={slotName}
