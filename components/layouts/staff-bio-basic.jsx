@@ -32,6 +32,7 @@ const staffBioPage = () => {
     custom_ajc_phone: phoneNumber,
   } = globalContent || {};
 
+
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
 
@@ -50,7 +51,7 @@ const staffBioPage = () => {
 
   const fetchRef = useRef(null);
 
-  const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
+  const RP01 = () => <ArcAd staticSlot={'RP01 sticky'} key={'RP01 sticky'} />;
   const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
   return (
     <>

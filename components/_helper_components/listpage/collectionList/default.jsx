@@ -7,6 +7,7 @@ import Pagination from '../../listpage/pagination/default';
 const CollectionList = ({
   listItems, collectionLength, collectionID, fetchRef, source,
 }) => {
+  if (!listItems) return null;
   const [list, setItems] = useState(null);
   const [index, setIndex] = useState(null);
   const paginationCount = Math.ceil(collectionLength / 10);

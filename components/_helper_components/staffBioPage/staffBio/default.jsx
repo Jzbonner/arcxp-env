@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import facebookIcon from '../../../../resources/icons/staff/staff-facebook-icon.svg';
 import twitterIcon from '../../../../resources/icons/staff/staff-twitter-icon.svg';
 import contributorArray from '../../../layouts/_helper_functions/contributorBadges';
-import ContributorBadge from '../../../_helper_components/article/contributorBadge/default';
+import ContributorBadge from '../../../_helper_components/global/contributorBadge/default';
 import './default.scss';
 
 const StaffBio = ({
