@@ -9,12 +9,12 @@ const renderCustomHtml = (content) => {
     // powers all inline & external scripts in embedded html
     if (html.search(/<script/gi) !== -1) {
       // only proceed if it actually contains a script (added because <style /> blocks were triggering)
-      const scriptFilter = /(<script.*?>.*?<\/script>)/gi;
+      const scriptFilter = /(<script\b[^>]*>[\s\S]*?<\/script>)/gmi;
       let scriptBlocks = html.split(scriptFilter);
       setHtml(html.replace(scriptFilter, ''));
 
       if (Array.isArray(scriptBlocks)) {
-        scriptBlocks = scriptBlocks.filter(script => script !== '');
+        scriptBlocks = scriptBlocks.filter(script => script.length > 1);
         scriptBlocks.forEach((scriptBlock) => {
           let scriptTags = scriptBlock.split(/<\/script>/gi);
           // we do a second script check/split because in some cases it doesn't split ALL on the first go-round

@@ -18,18 +18,34 @@ const ConnextInit = () => {
   const userIsLoggedInClass = 'is-loggedIn';
   const userIsLoggedOutClass = 'is-loggedOut';
   const userIsAuthenticatedClass = 'is-authenticated';
+  const connextLSLookup = `connext_user_data_${siteCode}_${configCode}_${environment.toUpperCase()}`;
 
   return <script type='text/javascript' dangerouslySetInnerHTML={{
     __html: `
       const doc = window.document;
       const docBody = doc.querySelector('body');
       const toggleUserState = (action) => {
+        let dataLayer = window.dataLayer || [];
         if (action === 'logged-in') {
-          docBody.className.replace(/${userIsLoggedOutClass}/g, '');
+          docBody.className = docBody.className.replace(/${userIsLoggedOutClass}/g, '');
           docBody.className += docBody.className.indexOf('${userIsLoggedInClass}') === -1 ? ' ${userIsLoggedInClass}' : '';
+          if (typeof(window.localStorage) !== 'undefined') {
+            const connextLS = window.localStorage.getItem('${connextLSLookup}');
+            if (connextLS) {
+              const { UserId } = JSON.parse(connextLS);
+              dataLayer.push({'userData': {
+                'userStatus': 'logged in',
+                'userProfileID': UserId
+              }});
+            }
+          }
         } else if (action === 'logged-out') {
           docBody.className = docBody.className.replace(/${userIsLoggedInClass}/g, '').replace(/${userIsAuthenticatedClass}/g, '');
           docBody.className += docBody.className.indexOf('${userIsLoggedOutClass}') === -1 ? ' ${userIsLoggedOutClass}' : '';
+          dataLayer.push('userData', {
+            'userStatus': 'not logged in',
+            'userProfileID': null
+          });
         } else if (action === 'authenticated' && docBody.className.indexOf('${userIsAuthenticatedClass}') === -1) {
           docBody.className += ' ${userIsAuthenticatedClass}';
         }
@@ -54,16 +70,13 @@ const ConnextInit = () => {
         deleteCookie('igmRegID');
         window.Connext.Logout();
       };
-      doc.addEventListener('connextLoaded', () => {
-        connextLogger('connextLoaded from init');
-      });
-      doc.addEventListener('connextLoggedIn', () => {
+      window.addEventListener('connextLoggedIn', () => {
         toggleUserState('logged-in');
       });
-      doc.addEventListener('connextLoggedOut', () => {
+      window.addEventListener('connextLoggedOut', () => {
         toggleUserState('logged-out');
       });
-      doc.addEventListener('connextIsSubscriber', () => {
+      window.addEventListener('connextIsSubscriber', () => {
         toggleUserState('authenticated');
       });
       doc.addEventListener('DOMContentLoaded', () => {
@@ -112,16 +125,16 @@ const ConnextInit = () => {
                     doc.querySelectorAll('.nav-profileLogout').forEach((el) => {
                       el.addEventListener('click', mg2Logout);
                     });
-                    doc.dispatchEvent(connextLoaded);
+                    window.dispatchEvent(connextLoaded);
                   },
                   onLoggedIn: (e) => {
                     connextLogger('>> onLoggedIn', e);
-                    doc.dispatchEvent(connextLoggedIn);
+                    window.dispatchEvent(connextLoggedIn);
                   },
                   onNotAuthorized: (e) => {
                     // this event fires on every Engage loading if user is logged out
                     connextLogger('>> onNotAuthorized', e);
-                    doc.dispatchEvent(connextLoggedOut);
+                    window.dispatchEvent(connextLoggedOut);
                   },
                   onMeterLevelSet: (e) => {
                     connextLogger('>> onMeterLevelSet', e);
@@ -142,7 +155,7 @@ const ConnextInit = () => {
                   onHasAccess: (e) => {
                     // this event fires on every Engage loading if user is subscriber
                     connextLogger('>> onHasAccess', e);
-                    doc.dispatchEvent(connextIsSubscriber);
+                    window.dispatchEvent(connextIsSubscriber);
                   },
                 },
               },

@@ -98,9 +98,27 @@
   clear: both;
 }
 
-// Advertisement Text for arcads
+// ad styles
 
 .arc_ad {
+
+  // hide HP0x & RP0x ads below tablet
+  @include between-breakpoints(mobile, tablet) {
+
+    &[class*="HP0"],
+    &[class*="RP0"] {
+      display: none;
+    }
+  }
+
+  // hide MP0x ads on tablet+
+  @include breakpoint(tablet) {
+
+    &[class*="MP0"] {
+      display: none;
+    }
+  }
+
   // for sticky (e.g. right rail) ads
 
   &.is-sticky {

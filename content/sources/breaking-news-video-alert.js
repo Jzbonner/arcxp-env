@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { CONTENT_BASE } from 'fusion:environment';
+import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 
 const schemaName = 'collections';
@@ -19,7 +19,11 @@ const getStoryData = (site, data) => {
   if (storyID) {
     const storyURL = `${CONTENT_BASE}/content/v4/?website=${site}&_id=${storyID}`;
     return axios
-      .get(storyURL)
+      .get(storyURL, {
+        headers: {
+          Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+        },
+      })
       .then(({ data: storyData }) => {
         const {
           canonical_url: url = '',
@@ -39,7 +43,11 @@ const fetch = (query) => {
   if (breakingNewsID && breakingLiveVideoID && site) {
     const urlBreaking = `${CONTENT_BASE}/websked/collections/v1/collections/${breakingNewsID}`;
     return axios
-      .get(urlBreaking)
+      .get(urlBreaking, {
+        headers: {
+          Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+        },
+      })
       .then(({ data: breakingData }) => ({ breakingData, numOfBreakingStories: breakingData.data && breakingData.data.booked }))
       .then(({ breakingData, numOfBreakingStories }) => {
         if (numOfBreakingStories > 0) {
@@ -48,13 +56,19 @@ const fetch = (query) => {
         }
         if (numOfBreakingStories === 0) {
           const urlLiveVideo = `${CONTENT_BASE}/websked/collections/v1/collections/${breakingLiveVideoID}`;
-          return axios.get(urlLiveVideo).then(({ data: videoData }) => {
-            if (videoData.data && videoData.data.booked && videoData.data.booked > 0) {
-              const typeOfHeadline = 'Video News';
-              return getStoryData(site, videoData).then(data => ({ ...data, typeOfHeadline }));
-            }
-            return {};
-          });
+          return axios
+            .get(urlLiveVideo, {
+              headers: {
+                Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+              },
+            })
+            .then(({ data: videoData }) => {
+              if (videoData.data && videoData.data.booked && videoData.data.booked > 0) {
+                const typeOfHeadline = 'Video News';
+                return getStoryData(site, videoData).then(data => ({ ...data, typeOfHeadline }));
+              }
+              return {};
+            });
         }
         // If the the useContent hook receives a falsy value from  a content source, it uses the most recent data in its cache.
         // So for when both the breaking new and video alert collections are empty,
