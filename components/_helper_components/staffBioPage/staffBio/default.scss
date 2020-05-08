@@ -1,0 +1,197 @@
+@import "../../../../src//styles/base/mixins";
+@import "../../../../src//styles//base/breakpoints";
+
+.staff-image {
+  padding-right: 18px;
+
+  @include breakpoint(desktop-sm) {
+    padding-right: 32px;
+  }
+
+  img {
+    border-radius: 50%;
+    height: 123px;
+
+    @include breakpoint(desktop-sm) {
+      height: 160px;
+    }
+  }
+}
+
+.c-staffInfo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  text-transform: uppercase;
+
+  @include breakpoint(desktop-sm) {
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+.staff-byline {
+  @include text-styles(1.375rem, 1.32, "Gordita-Bold");
+
+  @include breakpoint(desktop-sm) {
+    @include text-styles(2.8rem, 1.317, "Gordita-Bold");
+  }
+}
+
+.staff-role {
+  color: #4a4a4a;
+
+  @include text-styles(.75rem, 1.75, "Gordita-Medium");
+
+  @include breakpoint(desktop-sm) {
+    padding-bottom: 7px;
+
+    @include text-styles(1rem, 1.313, "Gordita-Medium");
+  }
+}
+
+.staff-social-icons {
+  display: flex;
+  justify-content: center;
+
+  @include breakpoint(desktop-sm) {
+    height: 46px;
+  }
+
+  a:first-child {
+    margin-right: 12px;
+
+    @include breakpoint(desktop-sm) {
+      margin-right: 34px;
+    }
+  }
+
+  img {
+    height: 17px;
+
+    @include breakpoint(desktop-sm) {
+      height: 46px;
+    }
+  }
+}
+
+.staff-bio {
+  padding-bottom: 11px;
+  border-bottom: 1px solid #cdcdcd;
+  margin-bottom: 33px;
+
+  &.hasBadges {
+    margin-bottom: 8px;
+  }
+
+  @include text-styles(.875rem, 1.57, "Gordita");
+
+  @include breakpoint(desktop-sm) {
+
+    &.hasBadges {
+      margin-bottom: 25px;
+    }
+
+    padding-bottom: 17px;
+    margin-bottom: 51px;
+
+    @include text-styles(1.125rem, 1.77, "Gordita");
+  }
+}
+
+.staff-contact {
+  align-items: center;
+  padding-bottom: 2px;
+
+  @include text-styles(.75rem, 1.75, "Gordita");
+
+  @include breakpoint(desktop-sm) {
+    padding-bottom: 0;
+
+    @include text-styles(1rem, 1.313, "Gordita");
+  }
+
+  span {
+    background-color: #313132;
+    width: 1px;
+    height: 15px;
+    margin-right: 10px;
+
+    @include breakpoint(desktop-nav) {
+      height: 20px;
+    }
+  }
+}
+
+.staff-phone {
+  margin-right: 10px;
+}
+
+.staff-email {
+
+  a {
+    color: #2e81b7;
+    text-transform: capitalize;
+  }
+}
+
+.staff-badges {
+  margin-top: 15px;
+
+  @include breakpoint(desktop-sm) {
+    display: flex;
+  }
+
+  .c-contributorBadge {
+    height: 30px;
+    display: inline-flex;
+  }
+
+  a {
+    margin: 0 19px 0 0;
+
+    @include breakpoint(desktop-sm) {
+      margin-right: 24px;
+    }
+  }
+
+  img {
+    height: 30px;
+
+    @include breakpoint(desktop-sm) {
+      height: 40px;
+    }
+  }
+
+  span {
+    width: 1px;
+    height: 19px;
+    margin-right: 18px;
+    background-color: #979797;
+    display: inline-flex;
+    margin-bottom: 11px;
+
+    @include breakpoint(desktop-sm) {
+      height: 42px;
+      margin-right: 24px;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.c-staff-badges {
+  display: flex;
+  flex-direction: column;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+
+  @include text-styles(.875rem, 1.5rem, "Gordita");
+  
+  @include breakpoint(desktop-sm) {
+    margin-bottom: 59px;
+
+    @include text-styles(1rem, 1.313, "Gordita");
+  }
+}

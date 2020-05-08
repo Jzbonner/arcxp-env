@@ -24,6 +24,7 @@ const Footer = () => {
     },
     filter: footerFilter,
   });
+
   const { logo } = getProperties();
 
   const { children: linkCategories } = siteNavigation || {};
