@@ -3,10 +3,12 @@ import getProperties from 'fusion:properties';
 import { useAppContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import checkTags from '../../../layouts/_helper_functions/checkTags';
-import ImageSimple from '../../global/imageSimple/default.jsx';
+import ImageSimple from '../imageSimple/default';
 import './default.scss';
 
-const ContributorBadge = ({ tags, ampPage, staffBio }) => {
+const ContributorBadge = ({
+  tags, ampPage, useWhiteLogos, staffBio,
+}) => {
   const { contextPath } = useAppContext();
 
   const hyperlocalTags = getProperties().hyperlocalTags.filter((tag) => {
@@ -19,15 +21,21 @@ const ContributorBadge = ({ tags, ampPage, staffBio }) => {
   function getContributorProps() {
     switch (checkTags(tags, hyperlocalTags)) {
       case 'alpharetta':
-        return { link: '/neighborhoods/alpharetta', image: '/resources/images/contributors/alpharetta.png' };
+        return {
+          link: '/neighborhoods/alpharetta',
+          image: `/resources/images/contributors/alpharetta${useWhiteLogos ? '-white' : ''}.png`,
+        };
       case 'roswell':
-        return { link: '/neighborhoods/roswell', image: '/resources/images/contributors/roswell.png' };
+        return { link: '/neighborhoods/roswell', image: `/resources/images/contributors/roswell${useWhiteLogos ? '-white' : ''}.png` };
       case 'sandy springs':
-        return { link: '/neighborhoods/sandy-springs', image: '/resources/images/contributors/sandy_springs.png' };
+        return {
+          link: '/neighborhoods/sandy-springs',
+          image: `/resources/images/contributors/sandy_springs${useWhiteLogos ? '-white' : ''}.png`,
+        };
       case 'dunwoody':
-        return { link: '/neighborhoods/dunwoody', image: '/resources/images/contributors/dunwoody.png' };
+        return { link: '/neighborhoods/dunwoody', image: `/resources/images/contributors/dunwoody${useWhiteLogos ? '-white' : ''}.png` };
       default:
-        return { link: '/neighborhoods/', image: '/resources/images/contributors/community.png' };
+        return { link: '/neighborhoods/', image: `/resources/images/contributors/community.png${useWhiteLogos ? '-white' : ''}` };
     }
   }
   if (staffBio) {
@@ -65,6 +73,7 @@ ContributorBadge.propTypes = {
   tags: PropTypes.array,
   ampPage: PropTypes.bool,
   staffBio: PropTypes.bool,
+  useWhiteLogos: PropTypes.bool,
 };
 
 export default ContributorBadge;

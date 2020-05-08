@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import getProperties from 'fusion:properties';
+import { useAppContext } from 'fusion:context';
 import TimeStamp from '../../article/timestamp/default';
 import Image from '../../global/image/default';
 import SectionLabel from '../../global/sectionLabel/default';
 import truncateHeadline from '../../../layouts/_helper_functions/homepage/truncateHeadline';
+import getQueryParams from '../../../layouts/_helper_functions/getQueryParams';
+import checkTags from '../../../layouts/_helper_functions/checkTags';
+import ContributorBadge from '../../../_helper_components/global/contributorBadge/default';
 import './SliderItem.scss';
 
 
@@ -11,10 +16,18 @@ const SliderItem = ({ data, refHook }) => {
   const {
     classes, headline, image, canonicalUrl, timestampData, sectionLabelData, contentType,
   } = data;
+  const appContext = useAppContext();
+  const { requestUri } = appContext;
   const { displayDate, firstPublishDate } = timestampData;
   const { taxonomy, label } = sectionLabelData;
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
+  const hyperlocalTags = getProperties().hyperlocalTags || [];
+  const { tags = [] } = taxonomy || {};
+  const isHyperlocalContent = checkTags(tags, hyperlocalTags);
+  const queryParams = getQueryParams(requestUri);
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
 
   const imageData = { url: image };
 
@@ -31,13 +44,18 @@ const SliderItem = ({ data, refHook }) => {
       </a>
       <div className="sliderList-text">
         <div className="c-label-wrapper">
-          <SectionLabel label={label} taxonomy={taxonomy} />
-          <TimeStamp
-            firstPublishDate={firstPublishDate}
-            displayDate={displayDate}
-            isHideTimestampTrue={isHideTimestampTrue}
-            isTease={true}
-          />
+        {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} />}
+          {!isHyperlocalContent && (
+            <>
+              <SectionLabel label={label || {}} taxonomy={taxonomy} />
+              <TimeStamp
+                firstPublishDate={firstPublishDate}
+                displayDate={displayDate}
+                isHideTimestampTrue={isHideTimestampTrue}
+                isTease={true}
+              />
+            </>
+          )}
         </div>
         <a className="headline" href={canonicalUrl}>{truncateHeadline(headline)}</a>
       </div>

@@ -13,7 +13,7 @@ export default (data, arcSite, currentDisplayClass = '', requiredClasses = []) =
         const promise = axios
           .get(storyURL, {
             headers: {
-              Bearer: ARC_ACCESS_TOKEN,
+              Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
             },
           })
           .then(({ data: storyData }) => storyData)

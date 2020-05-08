@@ -19,7 +19,7 @@ import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import ArcAd from '../features/ads/default';
-import ContributorBadge from '../_helper_components/article/contributorBadge/default';
+import ContributorBadge from '../_helper_components/global/contributorBadge/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
@@ -151,8 +151,8 @@ const StoryPageLayout = () => {
           <div className="b-flexRow b-flexCenter b-pageContainer">
             <Byline by={authorData} />
           </div>
-          {ampPage && <SocialShare headlines={headlines} promoItems={promoItems}/>}
           <ContributorBadge tags={tags} ampPage={ampPage} />
+          {ampPage && <SocialShare headlines={headlines} promoItems={promoItems}/>}
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
             <SubHeadline subheadlines={subheadlines} />
           </div>
@@ -223,7 +223,7 @@ const StoryPageLayout = () => {
             <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
           )}
           {!isHyperlocalContent && (
-              <TaboolaFeed type={type} ampPage={ampPage} />
+              <TaboolaFeed ampPage={ampPage} />
           )}
           {!noAds && ampPage && (
             <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />

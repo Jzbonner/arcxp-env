@@ -13,12 +13,9 @@
   margin-left: auto;
 
   @include breakpoint(tablet) {
-    width: 90%;
-    display: flex;
-  }
-
-  @include breakpoint(desktop-sm) {
     width: 94%;
+    display: flex;
+    padding: 0;
   }
 
   @include breakpoint(desktop-lg) {
@@ -74,7 +71,8 @@
       clear: both;
     }
 
-    .arc_ad {
+    .arc_ad[class*="HP0"],
+    .arc_ad[class*="MP0"] {
       @include arc-ad-full-width;
     }
   }
@@ -82,16 +80,13 @@
   &:not(.full-width) {
 
     .c-contentElements {
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         width: calc(100% - 330px);
         padding: 0 30px 0 0;
       }
 
-      .arc_ad {
-
-        &[class*="MP"] {
-          @include arc-ad-full-width;
-        }
+      .arc_ad[class*="MP"] {
+        @include arc-ad-full-width;
       }
     }
 
@@ -102,7 +97,7 @@
       text-align: center;
       font-size: 20px;
 
-      :first-child:not(.arc_ad) {
+      > :first-child:not(.arc_ad) {
         margin-top: 2.26rem;
       }
 
@@ -110,7 +105,7 @@
         float: right;
         margin-right: -330px;
 
-        :first-child:not(.arc_ad) {
+        > :first-child:not(.arc_ad) {
           margin-top: 0;
         }
       }
