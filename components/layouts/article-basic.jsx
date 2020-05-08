@@ -223,7 +223,7 @@ const StoryPageLayout = () => {
             <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
           )}
           {!isHyperlocalContent && (
-              <TaboolaFeed type={type} ampPage={ampPage} />
+              <TaboolaFeed ampPage={ampPage} />
           )}
           {!noAds && ampPage && (
             <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
