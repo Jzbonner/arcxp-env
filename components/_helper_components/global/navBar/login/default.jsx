@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connext } from 'fusion:environment';
+import fetchEnv from '../../utils/environment';
 import '../default.scss';
 import userIcon from '../../../../../resources/icons/login/user-icon.svg';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
@@ -22,7 +23,10 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
     return null;
   }
 
-  const profileLink = `//myaccount.${clientCode}.com/${clientCode}/myprofile`;
+  const currentEnv = fetchEnv();
+  const accountSubdomain = `//${currentEnv !== 'prod' ? 'test-' : ''}myaccount`;
+
+  const profileLink = `${accountSubdomain}.${clientCode}.com/${clientCode}/myprofile`;
   const [userState, _setUserState] = useState('');
   const [showUserMenu, _setShowUserMenu] = useState(false);
   const userStateRef = React.useRef(userState);
@@ -78,10 +82,10 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
               <a href='#' className='nav-profileLogout' data-mg2-action='logout'><b>Logout</b></a>
             </li>}
             <li className={'flyout-item'}>
-              <a href={`//myaccount.${clientCode}.com/${clientCode}/dashboard`} target='_blank'>My Account</a>
+              <a href={`${accountSubdomain}.${clientCode}.com/${clientCode}/dashboard`} target='_blank'>My Account</a>
             </li>
             <li className={'flyout-item'}>
-              <a href={`//myaccount.${clientCode}.com/${clientCode}/preference`} target='_blank'>Newsletters</a>
+              <a href={`${accountSubdomain}.${clientCode}.com/${clientCode}/preference`} target='_blank'>Newsletters</a>
             </li>
             <li className={'flyout-item'}>
               <a href={`//events.${clientCode}.com`}>Events</a>
