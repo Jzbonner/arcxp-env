@@ -18,3 +18,21 @@
     max-width: 100%;
   }
 }
+
+.left-photo-display-class,
+.no-photo-display-class,
+.c-mosaic {
+  
+  .c-homeList .c-contributorBadge {
+    justify-content: left;
+  }
+}
+
+.c-homepageContent,
+.c-homeList {
+
+  .c-contributorBadge {
+    height: 25px;
+    margin: 0;
+  }
+}

@@ -2,16 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useAppContext, useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import SectionLabel from '../../_helper_components/global/sectionLabel/default';
+import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
 import TimeStamp from '../../_helper_components/article/timestamp/default';
+import checkTags from '../../layouts/_helper_functions/checkTags';
+import ContributorBadge from '../../_helper_components/global/contributorBadge/default';
 import './default.scss';
 
 const Mosaic = (customFields = {}) => {
   const fusionContext = useFusionContext();
   const { arcSite = 'ajc' } = fusionContext;
   const appContext = useAppContext();
-  const { contextPath } = appContext;
+  const { contextPath, requestUri } = appContext;
+  const queryParams = getQueryParams(requestUri);
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
 
   const {
     customFields: {
@@ -58,6 +65,9 @@ const Mosaic = (customFields = {}) => {
             } = el;
             const { hide_timestamp: hideTimestamp } = el.label || {};
             const { text: isHideTimestampTrue } = hideTimestamp || {};
+            const { tags = [] } = taxonomy || {};
+            const hyperlocalTags = getProperties().hyperlocalTags || [];
+            const isHyperlocalContent = checkTags(tags, hyperlocalTags);
 
             const relativeURL = (websites && websites[arcSite] && websites[arcSite].website_url) || '/';
 
@@ -67,13 +77,18 @@ const Mosaic = (customFields = {}) => {
                   {/* the link is empty - 100% coverage of content via css - because sectionLabel outputs a link as well */}
                   <a href={`${contextPath}${relativeURL}`}></a>
                   <div className="c-sectionLabel">
-                    <SectionLabel label={label || {}} taxonomy={taxonomy} />
-                    <TimeStamp
-                      firstPublishDate={firstPublishDate}
-                      displayDate={displayDate}
-                      isHideTimestampTrue={isHideTimestampTrue}
-                      isTease={true}
-                    />
+                    {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} useWhiteLogos={true} />}
+                    {!isHyperlocalContent && (
+                      <>
+                        <SectionLabel label={label || {}} taxonomy={taxonomy} />
+                        <TimeStamp
+                          firstPublishDate={firstPublishDate}
+                          displayDate={displayDate}
+                          isHideTimestampTrue={isHideTimestampTrue}
+                          isTease={true}
+                        />
+                      </>
+                    )}
                   </div>
                   <span className="headline">{truncateHeadline(headlines.basic)}</span>
                 </div>
