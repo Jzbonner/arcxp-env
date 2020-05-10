@@ -1,0 +1,17 @@
+@import "./../base/breakpoints";
+@import "./../base/mixins";
+
+.c-homepageContent {
+  @include home-and-section();
+}
+
+.author-menu-overlay {
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #000;
+  z-index: 10;
+  overflow: hidden;
+}
