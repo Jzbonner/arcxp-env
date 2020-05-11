@@ -24,50 +24,68 @@
     z-index: -1;
     bottom: 15px;
   }
+
+  @include breakpoint(desktop-sm) {
+    height: 97px;
+    margin: 0 auto 26px;
+    width: calc(100% - 196px);
+
+    h2 {
+      font-size: 5rem;
+      padding: 0 36px;
+    }
+
+    &:after {
+      bottom: 24px;
+    }
+  }
 }
 
 .c-staff-page-main {
   width: calc(100% - 38px);
   display: flex;
   margin: 0 19px;
-  padding: 43px 0;
   position: relative;
   border-radius: 4px;
-  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
   background-color: #fff;
+
+  .menu-button {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    background-color: #2e81b7;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    top: -27.5px;
+    right: 8px;
+    box-shadow: 0 2px 18px 0 rgba(0, 0, 0, .21);
+
+    &:after {
+      content: "\ea23";
+      font-family: "icon-fonts";
+      display: block;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+
+  .c-menu {
+    // I guess this can be the flyout menu as well.
+    display: none;
+  }
 
   .c-staffers {
     width: calc(100% - 20px);
-    margin-left: 20px;
-    position: relative;
     display: flex;
     flex-wrap: wrap;
-
-    .menu-button {
-      height: 55px;
-      width: 55px;
-      border-radius: 50%;
-      background-color: #2e81b7;
-      display: flex;
-      justify-content: center;
-      align-content: center;
-      position: absolute;
-      top: -70.5px;
-      right: 8px;
-      box-shadow: 0 2px 18px 0 rgba(0, 0, 0, .21);
-
-      &:after {
-        content: "\ea23";
-        font-family: "icon-fonts";
-        display: block;
-        font-size: 1rem;
-        color: #fff;
-      }
-
-      @include breakpoint(desktop-sm) {
-        display: none;
-      }
-    }
+    padding: 43px 0 0 20px;
+    box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
 
     .c-staffers-header {
       margin: 0 0 16px 6px;
@@ -78,16 +96,78 @@
         position: relative;
 
         @include text-styles(1.25rem, normal, "Gordita-Bold");
-      }
 
-      h3:before {
-        content: "";
-        border-top: solid 1px #9b9b9b;
-        position: absolute;
-        bottom: 6px;
-        left: 40px;
-        width: calc(100% - 70px);
-        height: 0;
+        &:before {
+          content: "";
+          border-top: solid 1px #9b9b9b;
+          position: absolute;
+          bottom: 6px;
+          left: 40px;
+          width: calc(100% - 70px);
+          height: 0;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: calc(100% - 196px);
+    margin-left: auto;
+    margin-right: auto;
+
+    .c-menu {
+      display: flex;
+      width: 223px;
+      align-self: stretch;
+      background-color: #fefefe;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        list-style-type: none;
+
+        li {
+          border-bottom: 1px solid #9b9b9b;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          padding-left: 18px;
+          color: #9b9b9b;
+          text-transform: capitalize;
+          font-weight: 500;
+
+          @include text-styles(.875rem, 3.5, "Gordita-Bold");
+        }
+
+        li.active {
+          background-color: #fefefe;
+          color: #2e81b7;
+          border-bottom: none;
+          box-shadow: 0 0 18px 0 rgba(0, 0, 0, .21);
+
+          @include text-styles(1rem, normal, "Gordita-Bold");
+        }
+      }
+    }
+
+    .c-staffers {
+      padding-left: 84px;
+      width: calc(100% - 307px);
+
+      .c-staffers-header {
+        margin: 0 0 22px 10px;
+
+        h3 {
+          font-size: 1.875rem;
+
+          &:before {
+            bottom: 10px;
+            left: 56px;
+            width: calc(100% - 132px);
+          }
+        }
       }
     }
   }

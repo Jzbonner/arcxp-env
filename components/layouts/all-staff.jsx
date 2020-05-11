@@ -71,12 +71,17 @@ export const AllStaffPage = () => {
         </h2>
       </header>
       <main className={'c-staff-page-main b-margin-bottom-d30-m20'}>
-        <aside>
-          <div className={'c-menu'}>
-          </div>
+        <button className={'menu-button'}></button>
+        <aside className={'c-menu'}>
+          <ul>
+            <li className={'active'}>test</li>
+            <li>test</li>
+            <li>test</li>
+            <li>test</li>
+            <li>test</li>
+          </ul>
         </aside>
         <section className={'c-staffers'}>
-          <button className={'menu-button'}></button>
           <header className={'c-staffers-header'}>
             <h3>
               <span>All</span>
