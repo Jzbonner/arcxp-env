@@ -2,7 +2,7 @@ const isHome = 'home-basic';
 const isArticle = 'article-basic';
 const isSection = 'section';
 
-const taboolaHeaderScript = (layout, cdnLink) => {
+const taboolaHeaderScript = (layout = '', cdnLink) => {
   let taboolaCatType;
   if (layout === isArticle) {
     taboolaCatType = 'article';
@@ -29,7 +29,7 @@ const taboolaHeaderScript = (layout, cdnLink) => {
     }`;
 };
 
-const taboolaFooterScript = (layout, moapPTD, boapPTD) => {
+const taboolaFooterScript = (layout = '', moapPTD, boapPTD) => {
   if (layout === isHome) {
     return ` window._taboola = window._taboola || [];
       _taboola.push({flush: true});

@@ -1,4 +1,7 @@
 const contributorArray = (expertise) => {
+  if (!expertise) {
+    return null;
+  }
   // Replace any alphabetic characters //
   const onlyNums = expertise.replace(/[a-zA-z]/g, '');
   let expertiseArr = onlyNums.split(',');

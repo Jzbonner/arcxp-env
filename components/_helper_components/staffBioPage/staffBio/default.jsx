@@ -9,7 +9,7 @@ import './default.scss';
 const StaffBio = ({
   role, authorPhoto, byline, longBio, twitter, facebook, expertise, phoneNumber, email,
 }) => {
-  const expertiseArr = contributorArray(expertise);
+  const expertiseArr = contributorArray(expertise) || [];
   const dividerIndex = expertiseArr.length - 1;
 
   const badges = expertiseArr.map((el, i) => {
