@@ -6,7 +6,9 @@ import Image from '../../global/image/default';
 import Video from '../../global/video/default';
 import Gallery from '../../../features/gallery/default';
 
-const Headline = ({ basicItems = {}, headlines = {}, ampPage = false }) => {
+const Headline = ({
+  basicItems = {}, headlines = {}, taxonomy = {}, ampPage = false,
+}) => {
   let promoData = {};
   if (basicItems) {
     promoData = basicItems;
@@ -37,7 +39,13 @@ const Headline = ({ basicItems = {}, headlines = {}, ampPage = false }) => {
       )}
       {!ampPage && promoData.type === 'gallery' && promoData.content_elements && <Gallery promoItems={promoData} />}
       {promoData.type === 'video' && (
-        <Video isLeadVideo src={basicItems} featuredVideoPlayerRules={featuredVideoPlayerRules} maxTabletViewWidth={maxTabletViewWidth} />
+        <Video
+          isLeadVideo
+          src={basicItems}
+          featuredVideoPlayerRules={featuredVideoPlayerRules}
+          maxTabletViewWidth={maxTabletViewWidth}
+          taxonomy={taxonomy}
+        />
       )}
     </div>
   );
@@ -48,6 +56,7 @@ Headline.propTypes = {
   headlines: PropTypes.object.isRequired,
   featuredVideoPlayerRules: PropTypes.object,
   maxTabletViewWidth: PropTypes.number,
+  taxonomy: PropTypes.object,
   ampPage: PropTypes.bool,
 };
 

@@ -11,4 +11,5 @@ export default {
     siteFormat: 'newspaper',
     gtmContainerKey: 'GTM-WT4CBT7',
   },
+  adsPath: 'atlanta_np/ajc_web_default',
 };

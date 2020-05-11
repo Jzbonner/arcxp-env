@@ -6,7 +6,9 @@ import checkTags from '../../../layouts/_helper_functions/checkTags';
 import ImageSimple from '../imageSimple/default';
 import './default.scss';
 
-const ContributorBadge = ({ tags, ampPage, useWhiteLogos }) => {
+const ContributorBadge = ({
+  tags, ampPage, useWhiteLogos, staffBio,
+}) => {
   const { contextPath } = useAppContext();
 
   const hyperlocalTags = getProperties().hyperlocalTags.filter((tag) => {
@@ -36,7 +38,21 @@ const ContributorBadge = ({ tags, ampPage, useWhiteLogos }) => {
         return { link: '/neighborhoods/', image: `/resources/images/contributors/community.png${useWhiteLogos ? '-white' : ''}` };
     }
   }
-
+  if (staffBio) {
+    if (checkTags(tags, hyperlocalTags)) {
+      return (
+        <a href={`${contextPath}${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
+          <ImageSimple
+            src={getContributorProps().image}
+            ampPage={ampPage}
+            alt="Contributor Badge Logo"
+            ampMobileHeight="54px"
+            ampMobileMinWidth="300px"
+          />
+        </a>
+      );
+    }
+  }
   if (checkTags(tags, 'community contributor')) {
     return (
       <a href={`${contextPath}${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
@@ -56,6 +72,7 @@ const ContributorBadge = ({ tags, ampPage, useWhiteLogos }) => {
 ContributorBadge.propTypes = {
   tags: PropTypes.array,
   ampPage: PropTypes.bool,
+  staffBio: PropTypes.bool,
   useWhiteLogos: PropTypes.bool,
 };
 

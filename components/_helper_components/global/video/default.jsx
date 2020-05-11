@@ -5,32 +5,48 @@ import get from 'lodash.get';
 import fetchEnv from '../utils/environment';
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
+import gamAdTagBuilder from './_helper_functions/gamAdTagBuilder';
 import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
 const Video = ({
-  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules,
+  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, pageTaxonomy,
 }) => {
   const fusionContext = useFusionContext();
-  const { credits, _id: videoID, videoPageId } = src || {};
+  const {
+    credits,
+    _id: videoID,
+    videoPageId,
+    taxonomy: videoTaxonomy,
+  } = src || {};
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
   const screenSize = checkWindowSize();
   const { outputType, arcSite = 'ajc' } = fusionContext;
+  const vidId = videoID || videoPageId;
+  const currentEnv = fetchEnv();
 
   let mainCredit;
   if (credits) {
     mainCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
   }
+  const adTag = gamAdTagBuilder(pageTaxonomy, videoTaxonomy, vidId, currentEnv);
 
   useEffect(() => {
     const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
+      if (adTag) {
+        window.PoWaSettings = window.PoWaSettings || {};
+        window.PoWaSettings.advertising = window.PoWaSettings.advertising || {};
+        window.PoWaSettings.advertising.adBar = true;
+        window.PoWaSettings.advertising.adTag = adTag;
+      }
+
       const videoScript = document.createElement('script');
       videoScript.type = 'text/javascript';
       videoScript.src = 'https://d328y0m0mtvzqc.cloudfront.net/sandbox/powaBoot.js?org=ajc';
       videoScript.async = true;
       videoScript.addEventListener('load', () => {
-        resolve(window.powaBoot());
+        resolve();
       });
       videoScript.addEventListener('error', (e) => {
         reject(rejectCallBack(e));
@@ -64,9 +80,9 @@ const Video = ({
     className="powa"
     data-org={arcSite}
     data-api="sandbox"
-    data-env={fetchEnv()}
+    data-env={currentEnv}
     data-aspect-ratio="0.5625"
-    data-uuid={videoID || videoPageId}
+    data-uuid={vidId}
     data-autoplay={startPlaying}
     data-muted={muteON} />;
 
@@ -110,6 +126,7 @@ Video.propTypes = {
   featuredVideoPlayerRules: PropTypes.object,
   inlineVideoPlayerRules: PropTypes.object,
   maxTabletViewWidth: PropTypes.number,
+  pageTaxonomy: PropTypes.object,
 };
 
 export default Video;

@@ -2,6 +2,7 @@ import React from 'react';
 import imageResizer from '../../../../layouts/_helper_functions/Thumbor';
 import truncateHeadline from '../../../../layouts/_helper_functions/homepage/truncateHeadline';
 import getDaysSincePublished from './getDaysSincePublished';
+import getFirstInlineImage from './getFirstInlineImage';
 import '../default.scss';
 
 const filterCurrentStory = (contentElements, storyId) => contentElements.filter((el) => {
@@ -26,6 +27,8 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
         && el.promo_items.basic.url ? el.promo_items.basic.url : null;
 
       temp.headline = el.headlines && el.headlines.basic ? el.headlines.basic : null;
+
+      if (!temp.src && el.content_elements) temp.src = getFirstInlineImage(el.content_elements);
 
       return (
         <a key={`key-${i}`} href={`${temp.url ? `${temp.url} + ?outputType=amp` : null}`}>
