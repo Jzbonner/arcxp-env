@@ -108,7 +108,7 @@ const getContentMeta = () => {
     site = canonicalSite;
     pubDate = lastUpdatedDate;
   }
-  if (template.indexOf('page/') > -1) {
+  if (template && template.indexOf('page/') > -1) {
     // it's a pagebuilder page, so grab & update the id
     const pageId = template.replace('page/', '');
     if (pageId !== '') {
