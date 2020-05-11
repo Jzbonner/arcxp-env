@@ -55,7 +55,7 @@ const getContentMeta = () => {
   const {
     isHome,
     isSection,
-    type: typeOfPage,
+    type: typeOfPage = '',
     isNonContentPage,
   } = pageType || {};
   let pageContentType = typeOfPage === 'story' ? 'article' : typeOfPage.toLowerCase();
