@@ -30,7 +30,6 @@ const HomePageLayout = () => {
 
   return (
     <>
-      <div className="author-menu-overlay"></div>
       <GlobalAdSlots />
       <BreakingNews />
       <NavBar type={layout} />

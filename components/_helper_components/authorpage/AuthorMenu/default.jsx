@@ -7,6 +7,7 @@ const AuthorMenu = () => {
 
   return (
     <>
+    <div className="author-menu-container">
       <ul className="author-menu">
         {AREAS_OF_EXPERTISE().atlanta.map(areas => (
           <li
@@ -18,6 +19,7 @@ const AuthorMenu = () => {
           </li>
         ))}
       </ul>
+      </div>
       <div className="staff">
         <button>Toggle Mobile Menu</button>
         Staff
