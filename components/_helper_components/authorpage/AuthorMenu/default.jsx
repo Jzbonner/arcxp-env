@@ -7,23 +7,23 @@ const AuthorMenu = () => {
 
   return (
     <>
-    <div className="author-menu-container">
-      <ul className="author-menu">
-        {AREAS_OF_EXPERTISE().atlanta.map(areas => (
-          <li
-            key={areas.name}
-            className={`author-menu-item ${areas.id === activeMenu ? 'active' : ''}`}
-            onClick={() => setActiveMenu(areas.id)}
-          >
-            {areas.name}
-          </li>
-        ))}
-      </ul>
+      <div className="author-menu-container">
+        <button className="author-btn open-btn">X</button>
+        <ul className="author-menu">
+          {AREAS_OF_EXPERTISE().atlanta.map(areas => (
+            <li
+              key={areas.name}
+              className={`author-menu-item ${areas.id === activeMenu ? 'active' : ''}`}
+              onClick={() => setActiveMenu(areas.id)}
+            >
+              {areas.name}
+            </li>
+          ))}
+        </ul>
+        <div className="mobile-fader"></div>
       </div>
-      <div className="staff">
-        <button>Toggle Mobile Menu</button>
-        Staff
-      </div>
+      <button className="menu-button"></button>
+      <div className="staff">Staff</div>
     </>
   );
 };

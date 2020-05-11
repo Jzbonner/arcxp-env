@@ -1,6 +1,10 @@
 export default () => ({
   atlanta: [
     {
+      name: 'All',
+      id: 0,
+    },
+    {
       name: 'Newsroom Leadership',
       id: 1,
     },
