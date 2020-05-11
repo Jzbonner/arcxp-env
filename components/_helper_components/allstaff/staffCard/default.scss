@@ -1,0 +1,65 @@
+@import "../../../../src/styles/base/mixins";
+@import "../../../../src/styles/base/breakpoints";
+
+.c-staff-card {
+  width: 100%;
+  //flex-basis: max-content;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 37px;
+
+  .c-profile-picture {
+
+    img {
+      height: 68px;
+      width: 68px;
+      border-radius: 50%;
+      margin-right: 12px;
+    }
+  }
+
+  .c-staff-info {
+    display: flex;
+    flex-direction: column;
+
+    .name {
+      @include text-styles(1.125rem, "normal", "Gordita-Bold");
+
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+    }
+
+    .role {
+      @include text-styles(.875rem, "normal", "Gordita");
+
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+    }
+
+    .phone-email {
+      @include text-styles(.875rem, "normal", "Gordita");
+
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+
+      .divider {
+        margin: 0 10px;
+      }
+
+      .phone {
+        color: #000;
+      }
+
+      .email {
+        color: #2e81b7;
+      }
+    }
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: 33%;
+  }
+}

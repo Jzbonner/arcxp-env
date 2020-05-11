@@ -1,0 +1,94 @@
+@import "./../base/breakpoints";
+@import "./../base/mixins";
+
+.c-staff-page-header {
+  height: 61px;
+  width: calc(100% - 38px);
+  margin: 0 auto 25px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  h2 {
+    background-color: #fefefe;
+    padding: 0 12px;
+
+    @include text-styles(3.125rem, normal, "Average");
+  }
+
+  &:after {
+    content: "";
+    border-top: solid 1px #9b9b9b;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    bottom: 15px;
+  }
+}
+
+.c-staff-page-main {
+  width: calc(100% - 38px);
+  display: flex;
+  margin: 0 19px;
+  padding: 43px 0;
+  position: relative;
+  border-radius: 4px;
+  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+  background-color: #fff;
+
+  .c-staffers {
+    width: calc(100% - 20px);
+    margin-left: 20px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+
+    .menu-button {
+      height: 55px;
+      width: 55px;
+      border-radius: 50%;
+      background-color: #2e81b7;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      position: absolute;
+      top: -70.5px;
+      right: 8px;
+      box-shadow: 0 2px 18px 0 rgba(0, 0, 0, .21);
+
+      &:after {
+        content: "\ea23";
+        font-family: "icon-fonts";
+        display: block;
+        font-size: 1rem;
+        color: #fff;
+      }
+
+      @include breakpoint(desktop-sm) {
+        display: none;
+      }
+    }
+
+    .c-staffers-header {
+      margin: 0 0 16px 6px;
+      width: 100%;
+
+      h3 {
+        width: 100%;
+        position: relative;
+
+        @include text-styles(1.25rem, normal, "Gordita-Bold");
+      }
+
+      h3:before {
+        content: "";
+        border-top: solid 1px #9b9b9b;
+        position: absolute;
+        bottom: 6px;
+        left: 40px;
+        width: calc(100% - 70px);
+        height: 0;
+      }
+    }
+  }
+}
