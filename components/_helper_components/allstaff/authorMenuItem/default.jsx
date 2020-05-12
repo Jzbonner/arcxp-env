@@ -15,7 +15,7 @@ const AuthorMenuItem = ({
         className={`author-menu-item ${area.id === selectedLeftMenuItem.id ? 'active' : ''}`}
         onClick={() => setSelectedLeftMenuItem(area)}
       >
-        <a href={`${contextPath}/newsroom/${area.tag}/`}>{area.name}</a>
+        <a href={`${contextPath}/newsroom?area=${area.tag}/`}>{area.name}</a>
         <button className={'btn-left-menu-menu'} onClick={() => setLeftMenuVisibility()}></button>
       </li>
     );
@@ -27,7 +27,7 @@ const AuthorMenuItem = ({
       className={`author-menu-item ${area.id === selectedLeftMenuItem.id ? 'active' : ''}`}
       onClick={() => setSelectedLeftMenuItem(area)}
     >
-      <a href={`${contextPath}/newsroom/${area.tag}/`}>{area.name}</a>
+      <a href={`${contextPath}/newsroom?area=${area.tag}/`}>{area.name}</a>
     </li>
   );
 };
