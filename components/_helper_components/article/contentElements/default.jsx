@@ -36,7 +36,7 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
             if (ampPage) return null;
             return <Gallery src={element} key={`Gallery-${i}`} />;
           case 'raw_html':
-            if (ampPage) return <AmpEmbedWrapper element={element} key={`Raw_HTML-${i}`} />;
+            if (ampPage) return <AmpEmbedWrapper isHtml={true} element={element} key={`Raw_HTML-${i}`} />;
             return <HTML src={element} key={`Raw_HTML-${i}`} />;
           case 'header':
             return <Header src={element} key={`Header-${i}`} />;

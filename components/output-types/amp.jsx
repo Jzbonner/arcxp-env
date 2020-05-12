@@ -15,13 +15,14 @@ const AmpOutputType = (props) => {
 
   const {
     canonical_url: articleURL,
+    content_elements: contentElements,
   } = globalContent || {};
 
   return (
     <Html>
     <head>
       <BaseMarkup canonicalUrl={articleURL} />
-      <AmpScripts />
+      <AmpScripts contentElements={contentElements} />
       <AmpCustomStyles arcSite={arcSite} outputTypeProps={props} />
     </head>
     <body>
