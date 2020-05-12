@@ -1,8 +1,6 @@
 /*  /components/_helper_components/section/SectionOutput.jsx  */
-
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import GlobalAdSlots from '../global/ads/default';
 import BreakingNews from '../global/breakingNews/default';
 import NavBar from '../global/navBar/default';
@@ -14,7 +12,7 @@ import '../../../src/styles/base/_utility.scss';
 
 const SectionOutput = ({ zones, layout }) => (
   <>
-    <GlobalAdSlots />
+    <GlobalAdSlots pbPage={true} />
     <BreakingNews />
     <NavBar type={layout} />
     <main className="c-sectionContent">
