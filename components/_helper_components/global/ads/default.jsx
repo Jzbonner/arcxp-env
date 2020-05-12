@@ -10,7 +10,6 @@ const GlobalAdSlots = ({
   taxonomy,
   pbPage = false,
 }) => {
-  console.error('dave', pbPage);
   if (ampPage) {
     return <div className="b-hidden">
             <AmpAd
