@@ -18,6 +18,7 @@ const Video = ({
     _id: videoID,
     videoPageId,
     taxonomy: videoTaxonomy,
+    canonical_url: videoPageUrl,
   } = src || {};
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
@@ -30,7 +31,7 @@ const Video = ({
   if (credits) {
     mainCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
   }
-  const adTag = gamAdTagBuilder(pageTaxonomy, videoTaxonomy, vidId, currentEnv);
+  const adTag = gamAdTagBuilder(pageTaxonomy, videoTaxonomy, vidId, currentEnv, videoPageUrl);
 
   useEffect(() => {
     const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
