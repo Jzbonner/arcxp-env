@@ -38,6 +38,21 @@ export const adSlots = {
       [1, 1],
     ],
   },
+  HS02: {
+    dimensions: [
+      [1, 1],
+    ],
+  },
+  NS01: {
+    dimensions: [
+      [1, 1],
+    ],
+  },
+  NS02: {
+    dimensions: [
+      [1, 1],
+    ],
+  },
   HP01: {
     dimensions: [
       [
