@@ -37,7 +37,7 @@ export default () => ({
       id: 8,
     },
     {
-      name: 'Inestigations',
+      name: 'Investigations',
       id: 9,
     },
     {
@@ -69,7 +69,7 @@ export default () => ({
       id: 16,
     },
     {
-      name: 'Community Contributer',
+      name: 'Community Contributor',
       id: 17,
     },
     {
