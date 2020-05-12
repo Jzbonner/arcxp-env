@@ -29,20 +29,22 @@ const SponsorBanner = ({ taxonomy }) => {
     query: { section: `${sponsorSectionName}` },
   });
 
-  if (data) {
+  if (data && data.Sponsor) {
     const { sponsor_desktop_banner: desktopBanner, sponsor_mobile_banner: mobileBanner, sponsor_url: bannerURL } = data && data.Sponsor;
     const checkForMobileBanner = mobileBanner || desktopBanner;
-    return desktopBanner && (
-      <div className="c-sponsorBanner b-margin-bottom-d40-m20 b-margin-top-d40-m20">
-        {bannerURL ? (
-          <a href={bannerURL} className="c-sponsorUrl" rel="noopener noreferrer" target="_blank"></a>
-        ) : null}
-        <img
-          src={currentWidth < minTabletViewWidth ? checkForMobileBanner : desktopBanner}
-          className="c-sponsorImg"
-        />
-      </div>
-    );
+    if (desktopBanner) {
+      return (
+        <div className="c-sponsorBanner b-margin-bottom-d40-m20 b-margin-top-d40-m20">
+          {bannerURL ? (
+            <a href={bannerURL} className="c-sponsorUrl" rel="noopener noreferrer" target="_blank"></a>
+          ) : null}
+          <img
+            src={currentWidth < minTabletViewWidth ? checkForMobileBanner : desktopBanner}
+            className="c-sponsorImg"
+          />
+        </div>
+      );
+    }
   }
   return null;
 };
