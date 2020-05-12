@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './default.scss';
+import missingStaffIcon from '../../../../resources/icons/staff/missing-staff-avatar.svg';
 
 export const StaffCard = ({
   name, role, telephone, email, image,
 }) => (
   <div className={'c-staff-card'}>
     <div className={'c-profile-picture'}>
-      <img src={image} className={'profile-picture'}/>
+      <img src={image || missingStaffIcon} alt={'staff image'} className={'profile-picture'}/>
     </div>
     <div className={'c-staff-info'}>
       <h2 className={'name'}>{name}</h2>

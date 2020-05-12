@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
+import close from '../../../../resources/icons/staff/close.svg';
 
 const AuthorMenuItem = ({
   selectedLeftMenuItem, area, setSelectedLeftMenuItem, setLeftMenuVisibility,
@@ -16,7 +17,9 @@ const AuthorMenuItem = ({
         onClick={() => setSelectedLeftMenuItem(area)}
       >
         <a href={`${contextPath}/newsroom?area=${area.tag}`}>{area.name}</a>
-        <button className={'btn-left-menu-menu'} onClick={() => setLeftMenuVisibility()}></button>
+        <button className={'btn-left-menu-menu'} onClick={() => setLeftMenuVisibility()}>
+          <img src={close} alt={'close-button'}/>
+        </button>
       </li>
     );
   }

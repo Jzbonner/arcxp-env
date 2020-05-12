@@ -1,13 +1,9 @@
 @import "./../base/breakpoints";
 @import "./../base/mixins";
 
-.c-homepageContent {
-  @include home-and-section();
-}
-
 .c-staff-page-header {
   height: 61px;
-  width: calc(100% - 38px);
+  width: calc(100% - 48px);
   margin: 0 auto 25px;
   display: flex;
   justify-content: center;
@@ -46,9 +42,9 @@
 }
 
 .c-staff-page-main {
-  width: calc(100% - 38px);
+  width: calc(100% - 28px);
   display: flex;
-  margin: 0 19px;
+  margin: 0 24px;
   position: relative;
   border-radius: 4px;
 
@@ -66,14 +62,6 @@
     box-shadow: 0 2px 18px 0 rgba(0, 0, 0, .21);
     padding: 0;
 
-    &:after {
-      content: "\ea23";
-      font-family: "icon-fonts";
-      display: block;
-      font-size: 1rem;
-      color: #fff;
-    }
-
     @include breakpoint(desktop-sm) {
       display: none;
     }
@@ -83,7 +71,8 @@
     width: calc(100% - 40px);
     display: flex;
     flex-wrap: wrap;
-    padding: 43px 0 0 20px;
+    align-content: baseline;
+    padding: 40px 0 0 20px;
     position: relative;
     background-color: #fff;
 

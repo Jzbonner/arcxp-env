@@ -9,6 +9,7 @@ import BreakingNews from '../_helper_components/global/breakingNews/default';
 import AuthorMenu from '../_helper_components/allstaff/authorMenu/default';
 import getQueryParams from './_helper_functions/getQueryParams';
 import findArea from './_helper_functions/staffpage/findArea';
+import plus from '../../resources/icons/staff/plus.svg';
 
 import '../../src/styles/container/_all-staff.scss';
 import '../../src/styles/base/_utility.scss';
@@ -51,7 +52,7 @@ export const AllStaffPage = () => {
       <header className={'c-staff-page-header'}>
         <h2>Newsroom</h2>
       </header>
-      <main className={'c-staff-page-main c-sectionHome b-margin-bottom-d30-m20'}>
+      <main className={'c-staff-page-main b-margin-bottom-d30-m20'}>
         <AuthorMenu
           selectedLeftMenuItem={selectedLeftMenuItem}
           setSelectedLeftMenuItem={setStaffFilter}
@@ -59,7 +60,9 @@ export const AllStaffPage = () => {
           setLeftMenuVisibility={() => setLeftMenuVisibility(false)}
         />
         <section className={'c-staffers'}>
-          <button className={'menu-button'} onClick={() => setLeftMenuVisibility(true)}></button>
+          <button className={'menu-button'} onClick={() => setLeftMenuVisibility(true)}>
+            <img src={plus} alt={'plus sign'}/>
+          </button>
           <header className={'c-staffers-header'}>
             <h3>{selectedLeftMenuItem.name}</h3>
             <span className="border"></span>
