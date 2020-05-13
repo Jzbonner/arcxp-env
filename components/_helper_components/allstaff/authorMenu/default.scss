@@ -35,14 +35,9 @@
     position: absolute;
     right: -85px;
     top: -5px;
-
-    &:after {
-      content: "\ea23";
-      font-family: "icon-fonts";
-      display: block;
-      font-size: 1rem;
-      color: #fff;
-    }
+    display: flex;
+    justify-content: center;
+    align-content: center;
 
     @include breakpoint(desktop-sm) {
       display: none;

@@ -1,21 +1,26 @@
 @import "./../base/breakpoints";
 @import "./../base/mixins";
 
-.c-homepageContent {
-  @include home-and-section();
-}
-
 .c-staff-page-header {
-  height: 61px;
-  width: calc(100% - 38px);
+  min-height: 61px;
+  height: auto;
+  width: calc(100% - 48px);
   margin: 0 auto 25px;
+  padding-top: 20px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   position: relative;
+
+  .c-hp01-mp01 {
+    padding-top: 11px;
+  }
 
   h2 {
     background-color: #fefefe;
-    padding: 0 12px;
+    display: flex;
+    justify-content: center;
+    width: 265px;
 
     @include text-styles(3.125rem, normal, "Average");
   }
@@ -26,29 +31,30 @@
     position: absolute;
     width: 100%;
     z-index: -1;
-    bottom: 15px;
+    bottom: 11px;
   }
 
   @include breakpoint(desktop-sm) {
-    height: 97px;
+    min-height: 97px;
     margin: 0 auto 26px;
     width: calc(100% - 196px);
+    padding-top: 40px;
 
     h2 {
       font-size: 5rem;
-      padding: 0 36px;
+      width: 429px;
     }
 
     &:after {
-      bottom: 24px;
+      bottom: 18px;
     }
   }
 }
 
 .c-staff-page-main {
-  width: calc(100% - 38px);
+  width: calc(100% - 28px);
   display: flex;
-  margin: 0 19px;
+  margin: 0 24px;
   position: relative;
   border-radius: 4px;
 
@@ -66,14 +72,6 @@
     box-shadow: 0 2px 18px 0 rgba(0, 0, 0, .21);
     padding: 0;
 
-    &:after {
-      content: "\ea23";
-      font-family: "icon-fonts";
-      display: block;
-      font-size: 1rem;
-      color: #fff;
-    }
-
     @include breakpoint(desktop-sm) {
       display: none;
     }
@@ -83,7 +81,8 @@
     width: calc(100% - 40px);
     display: flex;
     flex-wrap: wrap;
-    padding: 43px 0 0 20px;
+    align-content: baseline;
+    padding: 40px 0 0 20px;
     position: relative;
     background-color: #fff;
 
