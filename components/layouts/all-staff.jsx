@@ -9,6 +9,8 @@ import BreakingNews from '../_helper_components/global/breakingNews/default';
 import AuthorMenu from '../_helper_components/allstaff/authorMenu/default';
 import getQueryParams from './_helper_functions/getQueryParams';
 import findArea from './_helper_functions/staffpage/findArea';
+import GlobalAdSlots from '../_helper_components/global/ads/default';
+import ArcAd from '../features/ads/default';
 import plus from '../../resources/icons/staff/plus.svg';
 
 import '../../src/styles/container/_all-staff.scss';
@@ -47,9 +49,14 @@ export const AllStaffPage = () => {
 
   return (
     <>
+      <GlobalAdSlots />
       <BreakingNews />
       <NavBar />
       <header className={'c-staff-page-header'}>
+        <div className="c-hp01-mp01">
+          <ArcAd staticSlot={'HP01'} />
+          <ArcAd staticSlot={'MP01'} />
+        </div>
         <h2>Newsroom</h2>
       </header>
       <main className={'c-staff-page-main b-margin-bottom-d30-m20'}>
