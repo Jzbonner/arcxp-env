@@ -135,7 +135,7 @@ const StoryPageLayout = () => {
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
-            <SponsorBanner taxonomy={taxonomy}/>
+            <SponsorBanner taxonomy={taxonomy} />
             <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
@@ -152,7 +152,7 @@ const StoryPageLayout = () => {
             <Byline by={authorData} />
           </div>
           <ContributorBadge tags={tags} ampPage={ampPage} />
-          {ampPage && <SocialShare headlines={headlines} promoItems={promoItems}/>}
+          {ampPage && <SocialShare headlines={headlines} promoItems={promoItems} />}
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
             <SubHeadline subheadlines={subheadlines} />
           </div>
@@ -222,16 +222,16 @@ const StoryPageLayout = () => {
           {!noAds && !isHyperlocalContent && (
             <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
           )}
+          {(!basicItems || promoType !== 'gallery') && !ampPage ? (
+            <Gallery contentElements={filteredContentElements} pageType={subtype} />
+          ) : null}
           {!isHyperlocalContent && (
-              <TaboolaFeed ampPage={ampPage} />
+            <TaboolaFeed ampPage={ampPage} />
           )}
           {!noAds && ampPage && (
             <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
         </article>
-        {(!basicItems || promoType !== 'gallery') && !ampPage ? (
-          <Gallery contentElements={filteredContentElements} pageType={subtype} />
-        ) : null}
       </main>
       {!ampPage && <Footer />}
       <Copyright />
