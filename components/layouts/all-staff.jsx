@@ -32,10 +32,9 @@ export const AllStaffPage = () => {
   useEffect(() => {
     const selectedAreaTag = getQueryParams(window.location.href).area;
     const selectedArea = findArea(selectedAreaTag, sites[0]);
-
-    if (requestUri === '/newsroom' || selectedArea.tag === 'all') {
+    if (requestUri === '/newsroom' || (selectedArea && selectedArea.tag === 'all')) {
       setSelectedStaff(globalContent.q_results);
-    } else {
+    } else if (selectedArea) {
       setSelectedLeftMenuItem(selectedArea);
       const staffers = globalContent.q_results.filter((staff) => {
         if (staff.expertise) {
@@ -68,7 +67,7 @@ export const AllStaffPage = () => {
         />
         <section className={'c-staffers'}>
           <button className={'menu-button'} onClick={() => setLeftMenuVisibility(true)}>
-            <img src={plus} alt={'plus sign'}/>
+            <img src={plus} alt={'plus sign'} />
           </button>
           <header className={'c-staffers-header'}>
             <h3>{selectedLeftMenuItem.name}</h3>
