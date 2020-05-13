@@ -33,7 +33,7 @@ export const AllStaffPage = () => {
     const selectedAreaTag = getQueryParams(window.location.href).area;
     const selectedArea = findArea(selectedAreaTag, sites[0]);
 
-    if (requestUri === '/newsroom/' || requestUri === '/newsroom'(selectedArea && selectedArea.tag === 'all')) {
+    if (requestUri === '/newsroom/' || requestUri === '/newsroom' || (selectedArea && selectedArea.tag === 'all')) {
       setSelectedStaff(globalContent.q_results);
     } else if (selectedArea) {
       setSelectedLeftMenuItem(selectedArea);
