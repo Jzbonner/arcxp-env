@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
 import StaffCard from '../_helper_components/allstaff/staffCard/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import Footer from '../_helper_components/global/footer/default';
@@ -14,7 +15,8 @@ import '../../src/styles/base/_utility.scss';
 
 export const AllStaffPage = () => {
   const appContext = useAppContext();
-  const { globalContent } = appContext;
+  const { globalContent, requestUri } = appContext;
+  const { sites } = getProperties();
 
   const [leftMenuMenuVisibility, setLeftMenuVisibility] = useState(false);
   const [selectedLeftMenuItem, setSelectedLeftMenuItem] = useState({ name: 'All', id: 0 });
@@ -26,22 +28,19 @@ export const AllStaffPage = () => {
 
   useEffect(() => {
     const selectedAreaTag = getQueryParams(window.location.href).area;
-    const selectedArea = findArea(selectedAreaTag);
+    const selectedArea = findArea(selectedAreaTag, sites[0]);
 
-    if (selectedArea) {
+    if (requestUri === '/newsroom' || selectedArea.tag === 'all') {
+      setSelectedStaff(globalContent.q_results);
+    } else {
       setSelectedLeftMenuItem(selectedArea);
-
-      if (selectedArea.tag === 'all') {
-        setSelectedStaff(globalContent.q_results);
-      } else {
-        const staffers = globalContent.q_results.filter((staff) => {
-          if (staff.expertise) {
-            return staff.expertise.split(',').some(ext => parseInt(ext, 10) === selectedArea.id);
-          }
-          return false;
-        });
-        setSelectedStaff(staffers);
-      }
+      const staffers = globalContent.q_results.filter((staff) => {
+        if (staff.expertise) {
+          return staff.expertise.split(',').some(ext => parseInt(ext, 10) === selectedArea.id);
+        }
+        return false;
+      });
+      setSelectedStaff(staffers);
     }
   }, []);
 

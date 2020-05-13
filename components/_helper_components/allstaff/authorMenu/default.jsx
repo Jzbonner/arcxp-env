@@ -17,27 +17,28 @@ const AuthorMenu = ({
         <ul className="author-menu">
           <li className="spacer"></li>
           <AuthorMenuItem
-            area={AREAS_OF_EXPERTISE()[sites[0]].all}
+            area={AREAS_OF_EXPERTISE()[sites[0]] && AREAS_OF_EXPERTISE()[sites[0]].all}
             selectedLeftMenuItem={selectedLeftMenuItem}
             setSelectedLeftMenuItem={setSelectedLeftMenuItem}
             setLeftMenuVisibility={setLeftMenuVisibility}
           />
           <AuthorMenuItem
-            area={AREAS_OF_EXPERTISE()[sites[0]].newsroom}
+            area={AREAS_OF_EXPERTISE()[sites[0]] && AREAS_OF_EXPERTISE()[sites[0]].newsroom}
             selectedLeftMenuItem={selectedLeftMenuItem}
             setSelectedLeftMenuItem={setSelectedLeftMenuItem}
             setLeftMenuVisibility={setLeftMenuVisibility}
           />
-          {AREAS_OF_EXPERTISE()[sites[0]].areas.sort((a, b) => a.tag.localeCompare(b.tag))
-            .map(area => (
-              <AuthorMenuItem
-                key={`key-${area.tag}`}
-                area={area}
-                selectedLeftMenuItem={selectedLeftMenuItem}
-                setSelectedLeftMenuItem={setSelectedLeftMenuItem}
-                setLeftMenuVisibility={setLeftMenuVisibility}
-              />
-            ))}
+          {AREAS_OF_EXPERTISE()[sites[0]]
+            && AREAS_OF_EXPERTISE()[sites[0]].areas.sort((a, b) => a.tag.localeCompare(b.tag))
+              .map(area => (
+                <AuthorMenuItem
+                  key={`key-${area.tag}`}
+                  area={area}
+                  selectedLeftMenuItem={selectedLeftMenuItem}
+                  setSelectedLeftMenuItem={setSelectedLeftMenuItem}
+                  setLeftMenuVisibility={setLeftMenuVisibility}
+                />
+              ))}
           <li className="spacer"></li>
         </ul>
         <div className="mobile-fader bottom-fader"></div>
