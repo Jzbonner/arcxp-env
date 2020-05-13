@@ -30,7 +30,7 @@ const HomePageLayout = (props) => {
 
   return (
     <>
-      <GlobalAdSlots />
+      <GlobalAdSlots pbPage={true} />
       <BreakingNews />
       <NavBar type={layout} />
       <main className="c-homepageContent">

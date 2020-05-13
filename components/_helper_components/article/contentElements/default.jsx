@@ -12,6 +12,7 @@ import Oembed from './components/social_url/default.jsx';
 import Video from '../../global/video/default';
 import Header from './components/header/default.jsx';
 import Divider from './components/divider/default.jsx';
+import AmpEmbedWrapper from '../../global/utils/amp-html/amp-embed-wrapper';
 // import Correction from './components/correction/default.jsx';
 // import Table from './components/table/default.jsx';
 
@@ -35,7 +36,7 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
             if (ampPage) return null;
             return <Gallery src={element} key={`Gallery-${i}`} />;
           case 'raw_html':
-            if (ampPage) return null;
+            if (ampPage) return <AmpEmbedWrapper isHtml={true} element={element} key={`Raw_HTML-${i}`} />;
             return <HTML src={element} key={`Raw_HTML-${i}`} />;
           case 'header':
             return <Header src={element} key={`Header-${i}`} />;
@@ -62,14 +63,13 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
           case 'divider':
             return <Divider key={`Divider-${i}`} />;
           case 'oembed_response':
-            if (ampPage) return null;
+            if (ampPage) return <AmpEmbedWrapper element={element.raw_oembed} key={`Oembed-${i}`} />;
             return <Oembed src={element} key={`Oembed-${i}`} />;
           case 'table':
             // See APD-451, this element will be worked at a later time.
             // return <Table src={element} key={`Table-${i}`} />;
             return null;
           case 'video':
-            // if (ampPage) return null;
             return <Video
                 src={element}
                 isInlineVideo

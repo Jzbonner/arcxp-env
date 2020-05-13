@@ -1,6 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import ampScriptSwitch from '../../../src/js/ampScriptSwitch';
 
-const AmpScripts = () => (
+const AmpScripts = ({ contentElements }) => {
+  const scriptsArr = [];
+  const oembedScripts = contentElements.map((element) => {
+    if (element.type === 'oembed_response') {
+      const { raw_oembed: rawOembed } = element || {};
+      const { type } = rawOembed || {};
+      return ampScriptSwitch(type, scriptsArr);
+    }
+    if (element.type === 'raw_html') {
+      const pinReg = RegExp('https?://www.pinterest.com/pin/([0-9]{1,25})/?');
+      if (pinReg.test(element.content)) {
+        return <script
+          async
+          custom-element="amp-pinterest"
+          src="https://cdn.ampproject.org/v0/amp-pinterest-0.1.js"
+        />;
+      }
+    }
+    return null;
+  });
+
+  return (
   <>
     <script
       async
@@ -43,10 +66,21 @@ const AmpScripts = () => (
     />
     <script
       async
+      custom-element="amp-iframe"
+      src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"
+    />
+    <script
+      async
       custom-element="amp-carousel"
       src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"
     />
+    {oembedScripts}
   </>
-);
+  );
+};
+
+AmpScripts.propTypes = {
+  contentElements: PropTypes.array,
+};
 
 export default AmpScripts;

@@ -6,13 +6,11 @@
     color: #313132;
     letter-spacing: -.45px;
     font-weight: 600;
-    text-align: center;
 
     @include text-styles(1em, 1.88, "Gordita");
 
     @include breakpoint(desktop-sm) {
       letter-spacing: -.84px;
-      text-align: left;
 
       @include text-styles(1.5em, normal, "Gordita");
     }
