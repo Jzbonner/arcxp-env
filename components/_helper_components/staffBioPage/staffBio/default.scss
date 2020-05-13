@@ -36,7 +36,7 @@
   @include text-styles(1.375rem, 1.32, "Gordita-Bold");
 
   @include breakpoint(desktop-sm) {
-    @include text-styles(2.8rem, 1.317, "Gordita-Bold");
+    @include text-styles(2.5625rem, 1.317, "Gordita-Bold");
   }
 }
 
