@@ -550,7 +550,8 @@ const Gallery = (props) => {
 
   return (
     <>
-      {(isMobile || pageType !== 'Article') && galHeadline ? <div className="gallery-headline with-ad">{galHeadline}</div> : null}
+      {(isMobile || pageType !== 'Article')
+      && galHeadline ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}>{galHeadline}</div> : null}
       {pageType !== 'Article' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02()}</div> : null}
       <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
         {!isMobile && galHeadline && pageType === 'Article' ? <div className="gallery-headline">{galHeadline}</div> : null}
