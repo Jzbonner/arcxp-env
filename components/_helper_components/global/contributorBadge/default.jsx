@@ -35,7 +35,7 @@ const ContributorBadge = ({
       case 'dunwoody':
         return { link: '/neighborhoods/dunwoody', image: `/resources/images/contributors/dunwoody${useWhiteLogos ? '-white' : ''}.png` };
       default:
-        return { link: '/neighborhoods/', image: `/resources/images/contributors/community.png${useWhiteLogos ? '-white' : ''}` };
+        return { link: '/neighborhoods/', image: '/resources/images/contributors/community.png' };
     }
   }
   if (staffBio) {
