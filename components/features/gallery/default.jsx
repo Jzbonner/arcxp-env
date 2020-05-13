@@ -330,7 +330,7 @@ const Gallery = (props) => {
       const targetElementoffsetHeight = document.getElementById(`gallery-item-${index}`).scrollHeight;
 
       const mpg01AdHeight = (document.getElementById('ad-mpgo1-parent')
-      && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
+        && document.getElementById('ad-mpgo1-parent').scrollHeight) || null;
 
       // accounts for height of ad * number of ads
       const targetHeight = offsetHeight + (targetElementoffsetHeight) + ((adOffsetHeight) * currentAdCount);
@@ -487,9 +487,13 @@ const Gallery = (props) => {
 
     if (relevantGalleryData && !galleryContentElements) galleryContentElements = relevantGalleryData.content_elements;
 
-    if (relevantGalleryData && !headline && !galHeadline) {
-      headline = relevantGalleryData.headlines && relevantGalleryData.headlines.basic
-        ? setHeadline(relevantGalleryData.headlines.basic) : null;
+    if (!headline && !galHeadline) {
+      const headlineData = relevantGalleryData || fetchedGalleryData;
+
+      if (headlineData) {
+        headline = headlineData.headlines && headlineData.headlines.basic
+          ? setHeadline(headlineData.headlines.basic) : null;
+      }
     }
 
     let baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
@@ -546,10 +550,11 @@ const Gallery = (props) => {
 
   return (
     <>
-      {isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
+      {(isMobile || pageType !== 'Article')
+      && galHeadline ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}>{galHeadline}</div> : null}
       {pageType !== 'Article' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02()}</div> : null}
       <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-        {!isMobile && galHeadline ? <div className="gallery-headline">{galHeadline}</div> : null}
+        {!isMobile && galHeadline && pageType === 'Article' ? <div className="gallery-headline">{galHeadline}</div> : null}
         {
           isStickyVisible
             ? <MobileGallery
