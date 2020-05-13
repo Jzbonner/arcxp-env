@@ -84,6 +84,10 @@
   @include breakpoint(desktop-sm) {
     display: flex;
     height: 45px;
+
+    li {
+      border-bottom: solid 1px #cdcdcd;
+    }
   }
 
   &.hidden {
