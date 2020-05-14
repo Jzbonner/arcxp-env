@@ -35,7 +35,7 @@ const StaffBio = ({
           <img src={authorPhoto}/>
         </div> }
         <div className='c-staffInfo'>
-          <div>
+          <div className='staff-text'>
             <div className='staff-byline'>{byline}</div>
             <div className='staff-role'>{role}</div>
             <div className='b-flexRow staff-contact'>
