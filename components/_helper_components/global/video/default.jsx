@@ -18,6 +18,7 @@ const Video = ({
     _id: videoID,
     videoPageId,
     taxonomy: videoTaxonomy,
+    canonical_url: videoPageUrl,
   } = src || {};
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
@@ -30,17 +31,16 @@ const Video = ({
   if (credits) {
     mainCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
   }
-  const adTag = gamAdTagBuilder(pageTaxonomy, videoTaxonomy, vidId, currentEnv);
+  const adTag = gamAdTagBuilder(pageTaxonomy, videoTaxonomy, vidId, currentEnv, videoPageUrl);
 
   useEffect(() => {
+    if (adTag) {
+      window.PoWaSettings = window.PoWaSettings || {};
+      window.PoWaSettings.advertising = window.PoWaSettings.advertising || {};
+      window.PoWaSettings.advertising.adBar = true;
+      window.PoWaSettings.advertising.adTag = adTag;
+    }
     const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
-      if (adTag) {
-        window.PoWaSettings = window.PoWaSettings || {};
-        window.PoWaSettings.advertising = window.PoWaSettings.advertising || {};
-        window.PoWaSettings.advertising.adBar = true;
-        window.PoWaSettings.advertising.adTag = adTag;
-      }
-
       const videoScript = document.createElement('script');
       videoScript.type = 'text/javascript';
       videoScript.src = 'https://d328y0m0mtvzqc.cloudfront.net/sandbox/powaBoot.js?org=ajc';
