@@ -5,7 +5,6 @@ import getDaysSincePublished from './getDaysSincePublished';
 import getFirstInlineImage from './getFirstInlineImage';
 import getTeaseIcon from '../../../global/image/_helper_functions/getTeaseIcon';
 import '../default.scss';
-import '../../../global/image/default.scss';
 
 const filterCurrentStory = (contentElements, storyId) => contentElements.filter((el) => {
   if (el._id === storyId || getDaysSincePublished(el.first_publish_date) > 30) return null;
@@ -37,8 +36,6 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
 
       if (!temp.src && el.content_elements) temp.src = getFirstInlineImage(el.content_elements);
 
-      console.log('el', temp.teaseIcon);
-
       return (
         <a key={`key-${i}`} href={`${temp.url ? `${temp.url} + ?outputType=amp` : null}`}>
           <div id={`carousel-item-${i}`} className={`c-carouselItem ${i === 0 ? 'is-first' : ''}`}>
@@ -48,7 +45,7 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
               src={temp.src ? imageResizer(temp.src, 256, 144) : logo}
             />
             {temp.teaseIcon || null}
-            <div className="c-itemText">
+            <div className={`c-itemText ${!temp.src && temp.teaseIcon ? 'with-icon' : ''}`}>
               {truncateHeadline(temp.headline)}
             </div>
           </div>

@@ -42,6 +42,10 @@
 
         @include text-styles(.625rem, 1.8, "Gordita");
       }
+      
+      .c-itemText.with-icon {
+        padding-left: 1.625rem;
+      }
 
       .c-tease-icon {
         display: flex;
