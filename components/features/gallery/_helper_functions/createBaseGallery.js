@@ -1,7 +1,7 @@
 import React from 'react';
 import GalleryItem from '../../../_helper_components/global/gallery/galleryItem.jsx';
 
-const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile, funcs = {}) => {
+const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {}) => {
   const {
     isStickyVisible, isMobile, isCaptionOn, currentIndex,
   } = states;
@@ -64,7 +64,6 @@ const createBaseGallery = (elements = [], states = {}, refHook, isWindowMobile, 
       return (
         <GalleryItem
           key={`gallery-item-${url}`}
-          refHook={i === 0 ? refHook : null}
           data={galleryItem}
           func={functionToPass}
         />
