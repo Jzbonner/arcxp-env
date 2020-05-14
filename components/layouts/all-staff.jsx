@@ -93,7 +93,7 @@ export const AllStaffPage = () => {
             .sort((a = { lastName: '' }, b = { lastName: '' }) => a.lastName.localeCompare(b.lastName))
             .map((staffer) => {
               const {
-                byline = '', role, custom_ajc_phone: telephone, email, image,
+                byline = '', role, custom_ajc_phone: telephone, email, image, _id: id,
               } = staffer || {};
               return (
                 <StaffCard
@@ -102,7 +102,7 @@ export const AllStaffPage = () => {
                   telephone={telephone}
                   email={email}
                   image={image}
-                  key={email}
+                  key={id}
                 />
               );
             })}
