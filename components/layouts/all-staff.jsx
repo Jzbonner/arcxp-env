@@ -76,7 +76,7 @@ export const AllStaffPage = () => {
           </header>
           {selectedStaff.map((staffer) => {
             const {
-              firstName = '', middleName = '', lastName = '', role, telephone, email, image,
+              firstName = '', middleName = '', lastName = '', role, custom_ajc_phone: telephone, email, image,
             } = staffer || {};
             return (
               <StaffCard

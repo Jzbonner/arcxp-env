@@ -21,7 +21,7 @@ export const StaffCard = ({
         >
           {telephone}
         </a>
-        <span className={'divider'}>|</span>
+        { telephone && email && <span className={'divider'}>|</span> }
         <a
           target="_self"
           href={`mailto:${email}`}
