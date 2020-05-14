@@ -6,7 +6,7 @@ import AuthorMenuItem from '../authorMenuItem/default';
 import './default.scss';
 
 const AuthorMenu = ({
-  selectedLeftMenuItem, setSelectedLeftMenuItem, leftMenuMenuVisibility, setLeftMenuVisibility,
+  selectedLeftMenuItem, setSelectedLeftMenuItem, leftMenuMenuVisibility, setLeftMenuVisibility, pageUri,
 }) => {
   const { sites } = getProperties();
 
@@ -21,12 +21,14 @@ const AuthorMenu = ({
             selectedLeftMenuItem={selectedLeftMenuItem}
             setSelectedLeftMenuItem={setSelectedLeftMenuItem}
             setLeftMenuVisibility={setLeftMenuVisibility}
+            pageUri={pageUri}
           />
           <AuthorMenuItem
             area={AREAS_OF_EXPERTISE()[sites[0]] && AREAS_OF_EXPERTISE()[sites[0]].newsroom}
             selectedLeftMenuItem={selectedLeftMenuItem}
             setSelectedLeftMenuItem={setSelectedLeftMenuItem}
             setLeftMenuVisibility={setLeftMenuVisibility}
+            pageUri={pageUri}
           />
           {AREAS_OF_EXPERTISE()[sites[0]]
             && AREAS_OF_EXPERTISE()[sites[0]].areas.sort((a, b) => a.tag.localeCompare(b.tag))
@@ -37,6 +39,7 @@ const AuthorMenu = ({
                   selectedLeftMenuItem={selectedLeftMenuItem}
                   setSelectedLeftMenuItem={setSelectedLeftMenuItem}
                   setLeftMenuVisibility={setLeftMenuVisibility}
+                  pageUri={pageUri}
                 />
               ))}
           <li className="spacer"></li>
@@ -52,6 +55,7 @@ AuthorMenu.propTypes = {
   selectedLeftMenuItem: PropTypes.object,
   setLeftMenuVisibility: PropTypes.func,
   leftMenuMenuVisibility: PropTypes.bool,
+  pageUri: PropTypes.string,
 };
 
 export default AuthorMenu;

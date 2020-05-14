@@ -25,6 +25,8 @@ export const AllStaffPage = () => {
   const [selectedLeftMenuItem, setSelectedLeftMenuItem] = useState({ name: 'All', id: 0 });
   const [selectedStaff, setSelectedStaff] = useState([]);
 
+  const pageUri = 'staff';
+
   const setStaffFilter = () => {
     setLeftMenuVisibility(false);
   };
@@ -33,8 +35,20 @@ export const AllStaffPage = () => {
     const selectedAreaTag = getQueryParams(window.location.href).area;
     const selectedArea = findArea(selectedAreaTag, sites[0]);
 
-    if (requestUri === '/newsroom/' || requestUri === '/newsroom' || (selectedArea && selectedArea.tag === 'all')) {
-      setSelectedStaff(globalContent.q_results);
+    if (requestUri === `/${pageUri}/` || requestUri === `/${pageUri}` || (selectedArea && selectedArea.tag === 'all')) {
+      const staffers = globalContent.q_results.filter((staff) => {
+        if (staff.expertise) {
+          return staff.expertise.split(',').every((expertise) => {
+            // filters out Hyperlocal and all types of Community Contributors from the 'All' tab
+            if ([8, 17, 18, 19, 20, 21].indexOf(parseInt(expertise, 10)) === -1) {
+              return true;
+            }
+            return false;
+          });
+        }
+        return false;
+      });
+      setSelectedStaff(staffers);
     } else if (selectedArea) {
       setSelectedLeftMenuItem(selectedArea);
       const staffers = globalContent.q_results.filter((staff) => {
@@ -65,6 +79,7 @@ export const AllStaffPage = () => {
           setSelectedLeftMenuItem={setStaffFilter}
           leftMenuMenuVisibility={leftMenuMenuVisibility}
           setLeftMenuVisibility={() => setLeftMenuVisibility(false)}
+          pageUri={pageUri}
         />
         <section className={'c-staffers'}>
           <button className={'menu-button'} onClick={() => setLeftMenuVisibility(true)}>
