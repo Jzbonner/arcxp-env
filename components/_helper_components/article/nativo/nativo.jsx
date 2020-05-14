@@ -11,15 +11,20 @@ const Nativo = ({
 
   if (paragraphCounter(elements) >= displayIfAtLeastXParagraphs || controllerClass === 'story-nativo_placeholder--boap') {
     if (ampPage) {
-      return (
-        <amp-ad
-          type="nativo"
-          width="400"
-          height="350"
-          layout="responsive"
-          data-request-url={`https://amp.${sites[0]}.com/amp/ntv-${controllerClass === 'story-nativo_placeholder--moap' ? 'moap' : 'boap'}`}
-        ></amp-ad>
-      );
+      if (controllerClass === 'story-nativo_placeholder--moap') {
+        return (
+          <amp-ad
+            type="nativo"
+            width="400"
+            height="350"
+            layout="responsive"
+            data-request-url={`https://amp.${sites[0]}.com/amp/ntv-${
+              controllerClass === 'story-nativo_placeholder--moap' ? 'moap' : 'boap'
+            }`}
+          ></amp-ad>
+        );
+      }
+      return null;
     }
     return <div className={`${controllerClass} ${controllerClass === 'story-nativo_placeholder--moap' ? 'b-clear-both' : ''}`}></div>;
   }
