@@ -10,6 +10,16 @@ export default (apiData, currentDisplayClass = '', requiredClasses = []) => {
           if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
             return true;
           }
+
+          if (
+            (el.promo_items && el.promo_items.basic && el.promo_items.basic.type === 'video')
+            || (el.promo_items && el.promo_items.basic && el.promo_items.basic.type === 'gallery')
+          ) {
+            if (el.promo_items.basic.promo_items && el.promo_items.basic.promo_items.basic && el.promo_items.basic.promo_items.basic.url) {
+              return true;
+            }
+          }
+
           if (el.firstInlineImage) {
             return true;
           }
