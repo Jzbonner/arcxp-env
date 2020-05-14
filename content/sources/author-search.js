@@ -4,7 +4,8 @@ const params = {
 
 const resolve = (query) => {
   const { id = '' } = query;
-  const requestUri = `/author/v1/author-service/?_id=${id}`;
+  let requestUri = '/author/v1/author-service/';
+  requestUri += id ? `?_id=${id}` : '';
   return requestUri;
 };
 

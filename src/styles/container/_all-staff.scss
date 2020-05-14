@@ -1,0 +1,146 @@
+@import "./../base/breakpoints";
+@import "./../base/mixins";
+
+.c-staff-page-header {
+  min-height: 61px;
+  height: auto;
+  width: calc(100% - 48px);
+  margin: 0 auto 25px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  .c-hp01-mp01 {
+    padding-top: 11px;
+  }
+
+  h2 {
+    background-color: #fefefe;
+    display: flex;
+    justify-content: center;
+    width: 265px;
+
+    @include text-styles(3.125rem, normal, "Average");
+  }
+
+  &:after {
+    content: "";
+    border-top: solid 1px #9b9b9b;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    bottom: 11px;
+  }
+
+  @include breakpoint(desktop-sm) {
+    min-height: 97px;
+    margin: 0 auto 26px;
+    width: calc(100% - 196px);
+    max-width: 1600px;
+    padding-top: 40px;
+
+    h2 {
+      font-size: 5rem;
+      width: 429px;
+    }
+
+    &:after {
+      bottom: 18px;
+    }
+  }
+}
+
+.c-staff-page-main {
+  width: calc(100% - 28px);
+  display: flex;
+  margin: 0 24px;
+  position: relative;
+  border-radius: 4px;
+
+  .menu-button {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    background-color: #2e81b7;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    top: -27.5px;
+    right: 8px;
+    box-shadow: 0 2px 18px 0 rgba(0, 0, 0, .21);
+    padding: 0;
+
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+
+  .c-staffers {
+    width: calc(100% - 40px);
+    display: flex;
+    flex-wrap: wrap;
+    align-content: baseline;
+    padding: 40px 0 0 20px;
+    position: relative;
+    background-color: #fff;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+    }
+
+    .c-staffers-header {
+      margin: 0 0 16px 6px;
+      width: calc(100% - 30px);
+      display: flex;
+
+      h3 {
+        @include text-styles(1.25rem, normal, "Gordita-Bold");
+
+        display: inline-block;
+        margin-right: 40px;
+        width: auto;
+      }
+
+      .border {
+        height: 1.25rem;
+        flex-grow: 1;
+        border-bottom: 1px solid #9b9b9b;
+      }
+    }
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: calc(100% - 196px);
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .c-staffers {
+      padding-left: 84px;
+      width: calc(100% - 307px);
+
+      .c-staffers-header {
+        margin: 0 0 22px 10px;
+        width: calc(100% - 40px);
+
+        h3 {
+          font-size: 1.875rem;
+        }
+
+        .border {
+          height: 1.875rem;
+        }
+      }
+    }
+  }
+}
