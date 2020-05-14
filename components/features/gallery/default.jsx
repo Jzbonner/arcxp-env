@@ -60,10 +60,10 @@ const Gallery = (props) => {
   const [nextAdRendering, setNextAdRendering] = useState(4);
 
 
-  const galleryEl = useRef(null);
+  const galleryEl = React.createRef(null);
   const galleryMobileEl = useRef(null);
-  const debugFixEl = useRef(null);
-  const PG01Ref = useRef(null);
+  const debugFixEl = React.useRef(null);
+  const PG01Ref = React.useRef(null);
   const mobileBreakPoint = 1023;
 
   const actions = {
