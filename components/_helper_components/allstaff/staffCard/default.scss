@@ -3,9 +3,10 @@
 
 .c-staff-card {
   width: 100%;
+  max-width: 330px;
   display: flex;
   flex-direction: row;
-  margin-bottom: 37px;
+  margin: 0 auto 37px 0;
 
   .c-profile-picture {
 
@@ -58,7 +59,7 @@
     }
   }
 
-  @include breakpoint(desktop-sm) {
-    width: 33%;
-  }
+  //@include breakpoint(desktop-sm) {
+  //  width: 33%;
+  //}
 }

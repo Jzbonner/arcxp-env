@@ -74,21 +74,23 @@ export const AllStaffPage = () => {
             <h3>{selectedLeftMenuItem.name}</h3>
             <span className="border"></span>
           </header>
-          {selectedStaff.map((staffer) => {
-            const {
-              firstName = '', middleName = '', lastName = '', role, custom_ajc_phone: telephone, email, image,
-            } = staffer || {};
-            return (
-              <StaffCard
-                name={`${firstName} ${middleName} ${lastName}`}
-                role={role}
-                telephone={telephone}
-                email={email}
-                image={image}
-                key={email}
-              />
-            );
-          })}
+          {selectedStaff
+            .sort((a = { lastName: '' }, b = { lastName: '' }) => a.lastName.localeCompare(b.lastName))
+            .map((staffer) => {
+              const {
+                byline = '', role, custom_ajc_phone: telephone, email, image,
+              } = staffer || {};
+              return (
+                <StaffCard
+                  name={byline}
+                  role={role}
+                  telephone={telephone}
+                  email={email}
+                  image={image}
+                  key={email}
+                />
+              );
+            })}
         </section>
       </main>
       <Footer />
