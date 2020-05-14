@@ -21,7 +21,7 @@ const Video = ({
     canonical_url: videoPageUrl,
   } = src || {};
   const { basic: videoCaption } = src.description ? src.description : {};
-  const { startPlaying, muteON } = featuredVideoPlayerRules || inlineVideoPlayerRules;
+  const { startPlaying, muteON, autoplayNext } = featuredVideoPlayerRules || inlineVideoPlayerRules;
   const screenSize = checkWindowSize();
   const { outputType, arcSite = 'ajc' } = fusionContext;
   const vidId = videoID || videoPageId;
@@ -40,6 +40,14 @@ const Video = ({
       window.PoWaSettings.advertising.adBar = true;
       window.PoWaSettings.advertising.adTag = adTag;
     }
+    const triggerDiscovery = (e) => {
+      if (typeof Discovery !== 'undefined') {
+        const id = get(e, 'detail.id');
+        const powa = get(e, 'detail.powa');
+        window.Discovery({ id, powa });
+      }
+    };
+    window.addEventListener('powaRender', e => triggerDiscovery(e));
     const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
       const videoScript = document.createElement('script');
       videoScript.type = 'text/javascript';
@@ -55,6 +63,7 @@ const Video = ({
     });
 
     loadVideoScript();
+    window.removeEventListener('powaRender', e => triggerDiscovery(e));
   }, []);
 
   const videoMarginBottom = 'b-margin-bottom-d40-m20';
@@ -84,7 +93,9 @@ const Video = ({
     data-aspect-ratio="0.5625"
     data-uuid={vidId}
     data-autoplay={startPlaying}
-    data-muted={muteON} />;
+    data-muted={muteON}
+    data-playthrough={autoplayNext || true}
+    data-discovery={autoplayNext || true} />;
 
   const renderAmpPlayer = () => {
     const [mp4Stream] = src.streams.filter(item => item.stream_type === 'mp4');
