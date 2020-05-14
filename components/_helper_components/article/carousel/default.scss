@@ -42,6 +42,33 @@
 
         @include text-styles(.625rem, 1.8, "Gordita");
       }
+      
+      .c-itemText.with-icon {
+        padding-left: 1.625rem;
+      }
+
+      .c-tease-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(to top, #04befe, #4481eb);
+        border-radius: 25px;
+        box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+        transform: translate(55px, 5px);
+        z-index: 25;
+        overflow: hidden;
+
+        .tease-icon {
+          position: relative;
+          max-width: 18px;
+          max-height: 18px;
+          border-radius: 0;
+          box-shadow: none;
+        }
+      }
     }
   }
 }

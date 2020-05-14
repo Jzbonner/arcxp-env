@@ -3,6 +3,7 @@ import imageResizer from '../../../../layouts/_helper_functions/Thumbor';
 import truncateHeadline from '../../../../layouts/_helper_functions/homepage/truncateHeadline';
 import getDaysSincePublished from './getDaysSincePublished';
 import getFirstInlineImage from './getFirstInlineImage';
+import getTeaseIcon from '../../../global/image/_helper_functions/getTeaseIcon';
 import '../default.scss';
 
 const filterCurrentStory = (contentElements, storyId) => contentElements.filter((el) => {
@@ -22,9 +23,14 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
       temp = {};
       temp.firstPublishDate = el.first_publish_date ? el.first_publish_date : null;
       temp.url = el.canonical_url || null;
-      temp.src = el.promo_items
-        && el.promo_items.basic && el.promo_items.basic.type === 'image'
-        && el.promo_items.basic.url ? el.promo_items.basic.url : null;
+
+      if (el.promo_items && el.promo_items.basic) {
+        const basicPromo = el.promo_items.basic;
+        temp.src = basicPromo.type === 'image'
+        && basicPromo.url ? basicPromo.url : null;
+
+        if (basicPromo.type) temp.teaseIcon = getTeaseIcon(basicPromo.type, true);
+      }
 
       temp.headline = el.headlines && el.headlines.basic ? el.headlines.basic : null;
 
@@ -38,7 +44,8 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
               height="50"
               src={temp.src ? imageResizer(temp.src, 256, 144) : logo}
             />
-            <div className="c-itemText">
+            {temp.teaseIcon || null}
+            <div className={`c-itemText ${!temp.src && temp.teaseIcon ? 'with-icon' : ''}`}>
               {truncateHeadline(temp.headline)}
             </div>
           </div>

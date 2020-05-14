@@ -66,7 +66,7 @@ const Image = ({
               class={teaseContentType ? 'tease-image' : ''}
             />
           )}
-          {teaseContentType && getTeaseIcon(teaseContentType, url)}
+          {teaseContentType && getTeaseIcon(teaseContentType)}
         </>
         {imageType !== 'isHomepageImage' && renderCaption()}
       </div>
