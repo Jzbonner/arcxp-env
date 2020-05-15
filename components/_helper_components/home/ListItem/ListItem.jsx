@@ -82,11 +82,11 @@ const ListItem = ({
 
   return (
     <div className={`c-homeList ${isListPage}`}>
-        {getPromoItem()}
+      {getPromoItem()}
 
       <div className="homeList-text">
         <div className="c-label-wrapper">
-          {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} />}
+          {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} tease={true} />}
           {!isHyperlocalContent && (
             <>
               <SectionLabel label={label || {}} taxonomy={taxonomy} />

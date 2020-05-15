@@ -11,7 +11,6 @@ import checkTags from '../../../layouts/_helper_functions/checkTags';
 import ContributorBadge from '../../../_helper_components/global/contributorBadge/default';
 import './SliderItem.scss';
 
-
 const SliderItem = ({ data, refHook }) => {
   const {
     classes, headline, image, canonicalUrl, timestampData, sectionLabelData, contentType,
@@ -34,17 +33,11 @@ const SliderItem = ({ data, refHook }) => {
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
       <a href={canonicalUrl || null}>
-        <Image
-          height={282}
-          width={500}
-          src={imageData}
-          teaseContentType={contentType}
-          canonicalUrl={canonicalUrl || null}
-        />
+        <Image height={282} width={500} src={imageData} teaseContentType={contentType} canonicalUrl={canonicalUrl || null} />
       </a>
       <div className="sliderList-text">
         <div className="c-label-wrapper">
-        {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} />}
+          {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} tease={true} />}
           {!isHyperlocalContent && (
             <>
               <SectionLabel label={label || {}} taxonomy={taxonomy} />
@@ -57,7 +50,9 @@ const SliderItem = ({ data, refHook }) => {
             </>
           )}
         </div>
-        <a className="headline" href={canonicalUrl}>{truncateHeadline(headline)}</a>
+        <a className="headline" href={canonicalUrl}>
+          {truncateHeadline(headline)}
+        </a>
       </div>
     </div>
   );
