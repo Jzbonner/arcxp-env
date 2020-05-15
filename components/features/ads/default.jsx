@@ -17,7 +17,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const currentEnv = fetchEnv();
 
   // If there is no DFP ID and we are in the Admin,
-  if (!dfpid || typeof window === 'undefined') return null;
+  if (!dfpid || (!isAdmin && typeof window === 'undefined')) return null;
 
   // what to display if there is no ad
   const fallbackAd = null;
@@ -57,6 +57,17 @@ const ArcAd = ({ customFields, staticSlot }) => {
     topics,
   };
 
+  if (isAdmin && adConfig.dimensions[0][0] !== 1) {
+    return <div style={{
+      background: '#efefef',
+      fontSize: '30px',
+      color: '#000',
+      border: '1px solid #000',
+      padding: '20px',
+      width: 'auto',
+    }}>{slotName} placeholder</div>;
+  }
+
   const arcad = (
     <AdSetup
       refresh={true}
@@ -70,17 +81,6 @@ const ArcAd = ({ customFields, staticSlot }) => {
       targeting={{ ...globalTargeting, ...targeting }}
     />
   );
-
-  if (isAdmin && adConfig.dimensions[0][0] !== 1) {
-    return <div style={{
-      background: '#efefef',
-      fontSize: '30px',
-      color: '#000',
-      border: '1px solid #000',
-      padding: '20px',
-      width: 'auto',
-    }}>{slotName} placeholder</div>;
-  }
 
   return slotName ? arcad : fallbackAd;
 };
