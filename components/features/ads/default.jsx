@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
+import { useAppContext } from 'fusion:context';
 import AdSetup from './src/index';
 import fetchEnv from '../../_helper_components/global/utils/environment.js';
 import { adSlots, defaultAdSlot } from './children/adtypes';
 import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
 
 const ArcAd = ({ customFields, staticSlot }) => {
+  const appContext = useAppContext();
+  const { isAdmin } = appContext;
   const { slot: customFieldsSlot } = customFields || {};
   const { dfp_id: dfpid, adsPath } = getProperties();
   const slot = customFieldsSlot || staticSlot;
@@ -14,7 +17,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const currentEnv = fetchEnv();
 
   // If there is no DFP ID and we are in the Admin,
-  if (!dfpid) return null;
+  if (!dfpid || typeof window === 'undefined') return null;
 
   // what to display if there is no ad
   const fallbackAd = null;
@@ -67,6 +70,17 @@ const ArcAd = ({ customFields, staticSlot }) => {
       targeting={{ ...globalTargeting, ...targeting }}
     />
   );
+
+  if (isAdmin && adConfig.dimensions[0][0] !== 1) {
+    return <div style={{
+      background: '#efefef',
+      fontSize: '30px',
+      color: '#000',
+      border: '1px solid #000',
+      padding: '20px',
+      width: 'auto',
+    }}>{slotName} placeholder</div>;
+  }
 
   return slotName ? arcad : fallbackAd;
 };
