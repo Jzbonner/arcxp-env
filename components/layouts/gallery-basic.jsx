@@ -53,4 +53,6 @@ const GalleryPageLayout = () => {
   );
 };
 
+GalleryPageLayout.sections = [];
+
 export default GalleryPageLayout;
