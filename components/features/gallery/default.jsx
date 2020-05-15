@@ -60,10 +60,9 @@ const Gallery = (props) => {
   const [nextAdRendering, setNextAdRendering] = useState(4);
 
 
-  const galleryEl = useRef(null);
+  const galleryEl = React.createRef(null);
   const galleryMobileEl = useRef(null);
-  const debugFixEl = useRef(null);
-  const PG01Ref = useRef(null);
+  const PG01Ref = React.useRef(null);
   const mobileBreakPoint = 1023;
 
   const actions = {
@@ -119,17 +118,10 @@ const Gallery = (props) => {
 
     if (galleryEl.current && focusElement) {
       // fixes initializing translate bug...?
-      if (debugFixEl.current && focusElement.offsetWidth === 0) {
-        translateAmount = parseInt(galleryFullWidth, 10)
-          / 2 - parseInt(debugFixEl.current.offsetWidth, 10)
-          / 2 - parseInt(debugFixEl.current.offsetLeft, 10);
-        if (translateX !== translateAmount) setTranslateX(translateAmount);
-      } else {
-        translateAmount = parseInt(galleryFullWidth, 10)
-          / 2 - parseInt(focusElement.offsetWidth, 10)
-          / 2 - parseInt(focusElement.offsetLeft, 10);
-        if (translateX !== translateAmount) setTranslateX(translateAmount);
-      }
+      translateAmount = parseInt(galleryFullWidth, 10)
+        / 2 - parseInt(focusElement.offsetWidth, 10)
+        / 2 - parseInt(focusElement.offsetLeft, 10);
+      if (translateX !== translateAmount) setTranslateX(translateAmount);
     }
   };
 
@@ -418,7 +410,7 @@ const Gallery = (props) => {
   }, [currentIndex, isAdVisible]);
 
   useEffect(() => {
-    if (!isMobile) calculateTranslateX();
+    if (!isMobile && galleryEl && galleryEl.current) calculateTranslateX();
   }, [isAdVisible, currentIndex, currentAction, translateX, elementData, captionData, galleryEl]);
 
   useEffect(() => {
@@ -502,7 +494,7 @@ const Gallery = (props) => {
 
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
-    }, debugFixEl, isMobile, {
+    }, isMobile, {
       prev: () => changeIndex(actions.PREV, baseGalleryData.length - 1),
       next: () => changeIndex(actions.NEXT),
     });
@@ -541,11 +533,6 @@ const Gallery = (props) => {
     if (mobileElementData) {
       mobileElemData = getMobileElements([...mobileElementData]);
     }
-  }
-
-  // init translate bug fix ~ run only once
-  if (elementData && !isMobile && galleryEl && debugFixEl && currentAction === '') {
-    calculateTranslateX();
   }
 
   return (
