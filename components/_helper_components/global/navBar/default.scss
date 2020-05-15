@@ -198,11 +198,6 @@
     @include breakpoint(desktop-sm) {
       display: flex;
       flex-direction: row;
-      min-width: 680px;
-    }
-
-    @include breakpoint(desktop-nav) {
-      min-width: 859px;
     }
   }
 

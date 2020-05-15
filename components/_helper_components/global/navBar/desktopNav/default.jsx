@@ -38,7 +38,7 @@ const DesktopNav = ({
     <ul className='nav-row'>
       <NavFooter facebook={facebook} twitter={twitter}/>
       <li className='nav-weather-widget'> Weather Widget</li>
-      <div className='nav-sections'>{sections}</div>
+      <div className='nav-sections nav-itemBottomBorder'>{sections}</div>
       <Search sticky={stickyActive}/>
       <Weather sticky={stickyActive}/>
       <div className='nav-mobile-login'>

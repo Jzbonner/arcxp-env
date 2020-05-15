@@ -8,9 +8,10 @@ class AmpEmbedWrapper extends PureComponent {
   constructor(props) {
     super(props);
 
-    const { element } = this.props;
+    const { element, isHtml } = this.props;
     const html = decodeString(get(element, 'content', get(element, 'html', '')));
     this.data = {};
+    this.isHtml = isHtml;
 
     socialPatterns.map((item) => {
       const reg = new RegExp(item.idRegex);
@@ -30,6 +31,9 @@ class AmpEmbedWrapper extends PureComponent {
   render() {
     if (this.data.socialId && this.data.pattern) {
       const { pattern, socialId } = this.data;
+      if (this.isHtml && pattern.name !== 'pinterest') {
+        return null;
+      }
       const TagName = pattern.ampTag;
       const tagAttributes = {};
       const [idRefAttributeItem] = pattern.ampTagAttributes.filter(item => item.name === pattern.idRefAttribute);
@@ -48,6 +52,7 @@ class AmpEmbedWrapper extends PureComponent {
 
 AmpEmbedWrapper.propTypes = {
   element: PropTypes.object,
+  isHtml: PropTypes.bool,
   render: PropTypes.func,
 };
 

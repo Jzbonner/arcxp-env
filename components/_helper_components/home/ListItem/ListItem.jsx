@@ -41,26 +41,40 @@ const ListItem = ({
     // standalone video/gallery
     if (contentType === 'video' || contentType === 'gallery') {
       if (promoItems.basic) {
-        return <Image src={promoItems.basic} width={1066} height={600} imageType="isHomepageImage" teaseContentType={contentType} />;
+        return (
+          <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+            <Image src={promoItems.basic} width={1066} height={600} imageType="isHomepageImage" teaseContentType={contentType} />
+          </a>
+        );
       }
     }
 
     if (promoItems) {
       if (promoItems.basic && promoItems.basic.type === 'image') {
         return (
-          <Image src={promoItems.basic || promoItems.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />
+          <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+            <Image src={promoItems.basic || promoItems.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />
+          </a>
         );
       }
 
       if ((promoItems.basic && promoItems.basic.type === 'video') || (promoItems.basic && promoItems.basic.type === 'gallery')) {
         if (promoItems.basic.promo_items && promoItems.basic.promo_items.basic) {
-          return <Image src={promoItems.basic.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />;
+          return (
+            <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+              <Image src={promoItems.basic.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />
+            </a>
+          );
         }
       }
     }
 
     if (firstInlineImage) {
-      return <Image src={firstInlineImage} width={1066} height={600} imageType="isHomepageImage" />;
+      return (
+        <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+          <Image src={firstInlineImage} width={1066} height={600} imageType="isHomepageImage" />
+        </a>
+      );
     }
 
     return null;
@@ -68,9 +82,7 @@ const ListItem = ({
 
   return (
     <div className={`c-homeList ${isListPage}`}>
-      <a href={`${contextPath}${relativeURL}`} className="homeList-image">
         {getPromoItem()}
-      </a>
 
       <div className="homeList-text">
         <div className="c-label-wrapper">

@@ -4,7 +4,7 @@
 .c-listPage {
   margin-top: 30px;
   margin-bottom: 30px;
-  
+
   .c-section {
     padding: 0 20px;
 
@@ -64,7 +64,7 @@
   .left-button {
     margin-right: 15px;
 
-    @include blue-button(35px, "\e901" , 21px);
+    @include blue-button(35px, "\e901", 21px);
   }
 
   a {
@@ -114,7 +114,7 @@
   text-transform: capitalize;
 
   @include text-styles(1.875rem, 1, "Average");
-  
+
   @include breakpoint(desktop-sm) {
     padding-bottom: 20px;
 
@@ -123,6 +123,7 @@
 }
 
 .listPage-item {
+  width: 100%;
   
   .c-homeList {
     display: flex;
@@ -130,19 +131,6 @@
 
     .c-label-wrapper {
       text-align: left;
-    }
-  }
-
-  &.noPhoto {
-    width: 100%;
-    margin-bottom: 15px;
-
-    .homeList-image {
-      display: none;
-    }
-
-    .homeList-text {
-      max-width: 100%;
     }
   }
 }

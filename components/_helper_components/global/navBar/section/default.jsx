@@ -29,7 +29,7 @@ const Section = ({
 
   const {
     nav_title: name,
-  } = navigation;
+  } = navigation || {};
   function activateMenu(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -65,7 +65,7 @@ const Section = ({
   // Added protection if there are no subsections
   if (childSections.length === 0) {
     return <>
-      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
+      <li className={`nav-items nav-itemText ${ePaperClass}`}>
         {isHighlighted ? <div className="activeSelection" /> : null}
         <a href={link} target={newTab === 'true' ? '_blank' : '_self'}>{name}</a>
       </li>
@@ -100,7 +100,7 @@ const Section = ({
 
   return (
     <>
-      <li className={`nav-items nav-itemBottomBorder nav-itemText ${ePaperClass}`}>
+    <li className={`nav-items nav-itemText ${ePaperClass}`}>
       {isHighlighted ? <div className="activeSelection" /> : null}
         <div className={`nav-item-link ${highlitClass}`} onClick={ e => activateMenu(e)}>
           <a>{name}</a>
