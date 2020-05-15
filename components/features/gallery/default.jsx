@@ -5,7 +5,7 @@ import {
   DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery,
 } from '../../_helper_components/global/gallery/index';
 import {
-  debounce, createBaseGallery, handleImageFocus, reorganizeElements, handlePropContentElements, prioritizeThumbnail, getGalleryThumbnail,
+  debounce, createBaseGallery, handleImageFocus, reorganizeElements, handlePropContentElements,
 } from './_helper_functions/index';
 import ArcAd from '../ads/default';
 import PGO1Element from '../../_helper_components/global/ads/pg01/default';
@@ -91,15 +91,6 @@ const Gallery = (props) => {
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic ? headlines.basic : null;
-
-  const gallerySources = {
-    article: contentElements.length !== 0 ? contentElements : null,
-    featuredGallery: leafContentElements.length === 0 && featuredGalleryData ? featuredGalleryData : null,
-    leaf: leafContentElements.length !== 0 && featuredGalleryData ? featuredGalleryData : null,
-    fetched: fetchedGalleryData || null,
-  };
-
-  const thumbnailData = getGalleryThumbnail(gallerySources);
 
   if (!maxIndex) {
     if (elementData && elementData.length > 1) {
@@ -488,9 +479,7 @@ const Gallery = (props) => {
       }
     }
 
-    let baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
-
-    if (thumbnailData && thumbnailData.exists) baseGalleryData = prioritizeThumbnail(baseGalleryData, thumbnailData.id);
+    const baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
 
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex,
