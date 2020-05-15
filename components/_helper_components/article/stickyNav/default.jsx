@@ -132,7 +132,7 @@ const StickyNav = ({
               {commentsEnabled ? (
                 <li className="stickyNav-item">
                   <a href="#" className="sticky-nav-icon btn-comments" onClick={e => toggleCommentsWindow(e)}>
-                    <span className="fb-comments-count" data-href={window.location.href}></span>
+                    <span className="fb-comments-count" data-href={articleUrl}></span>
                   </a>
                 </li>
               ) : null}
