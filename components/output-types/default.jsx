@@ -10,6 +10,7 @@ import TaboolaHeader from '../_helper_components/global/taboola/taboolaHeader.js
 import NativoScripts from '../_helper_components/article/nativo/nativoScripts';
 import checkTags from '../layouts/_helper_functions/checkTags';
 import AmpRelLink from '../_helper_components/amp/AmpRelLink';
+import GoogleStructuredData from '../_helper_components/article/googleData/default';
 
 const DefaultOutputType = (props) => {
   const {
@@ -38,6 +39,7 @@ const DefaultOutputType = (props) => {
       <head>
         <MetaTags />
         <SiteMeta />
+        <GoogleStructuredData />
         <AmpRelLink type={type} url={articleURL} noAmp={noAmp} />
         <CssLinks />
         {includeGtm && (
