@@ -32,7 +32,7 @@ export const AllStaffPage = () => {
   };
 
   useEffect(() => {
-    const selectedAreaTag = getQueryParams(window.location.href).area;
+    const selectedAreaTag = getQueryParams(requestUri).area;
     const selectedArea = findArea(selectedAreaTag, sites[0]);
 
     if (requestUri === `/${pageUri}/` || requestUri === `/${pageUri}` || (selectedArea && selectedArea.tag === 'all')) {
@@ -95,16 +95,7 @@ export const AllStaffPage = () => {
               const {
                 byline = '', role, custom_ajc_phone: telephone, email, image, _id: id,
               } = staffer || {};
-              return (
-                <StaffCard
-                  name={byline}
-                  role={role}
-                  telephone={telephone}
-                  email={email}
-                  image={image}
-                  key={id}
-                />
-              );
+              return <StaffCard name={byline} role={role} telephone={telephone} email={email} image={image} key={id} />;
             })}
         </section>
       </main>

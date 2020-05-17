@@ -12,6 +12,14 @@
   display: none;
   justify-content: center;
 
+  .menu-container {
+    display: flex;
+
+    @include breakpoint(desktop-sm) {
+      display: initial;
+    }
+  }
+
   &.is-visible {
     display: flex;
     z-index: 10;
@@ -28,16 +36,16 @@
   }
 
   .btn-left-menu-menu {
-    height: 55px;
-    width: 55px;
+    min-height: 55px;
+    min-width: 55px;
+    max-height: 55px;
+    max-width: 55px;
     border-radius: 50%;
     background-color: #2e81b7;
-    position: absolute;
-    right: -85px;
-    top: -5px;
     display: flex;
     justify-content: center;
     align-content: center;
+    margin: calc(35vh - .5rem) 25px 0 0;
 
     @include breakpoint(desktop-sm) {
       display: none;
@@ -46,20 +54,22 @@
 }
 
 .author-menu {
-  height: 60%;
-  margin: 30% 20px 0 0;
+  height: 80%;
+  max-height: 600px;
+  margin: 0;
   overflow: scroll;
-  padding: 25px 90px;
+  padding: 0 30px;
 
   @include breakpoint(desktop-sm) {
     height: 100%;
+    max-height: initial;
     margin: 0;
     padding: 0;
     overflow: initial;
   }
 
   .spacer {
-    height: 25%;
+    height: 35vh;
 
     @include breakpoint(desktop-sm) {
       display: none;
@@ -67,12 +77,13 @@
   }
 
   .author-menu-item {
-    @include text-styles(1.25rem, 2.25, "Gordita-Medium");
+    @include text-styles(1.25rem, 1.25, "Gordita-Medium");
 
     color: #fff;
     text-align: right;
     list-style-type: none;
     font-weight: 500;
+    padding: .5rem 0;
 
     a {
       color: inherit;
@@ -82,9 +93,9 @@
     }
 
     @include breakpoint(desktop-sm) {
-      @include text-styles(.875rem, 3rem, "Gordita-Medium");
+      @include text-styles(.875rem, 1.5, "Gordita-Medium");
 
-      padding: 0 13px;
+      padding: 1rem 13px;
       color: #9b9b9b;
       cursor: pointer;
       text-align: left;
@@ -95,7 +106,7 @@
       position: relative;
 
       @include breakpoint(desktop-sm) {
-        @include text-styles(1rem, 3rem, "Gordita-Medium");
+        @include text-styles(1rem, 1.5, "Gordita-Medium");
 
         background-color: #fff;
         border-top: none;
@@ -137,7 +148,7 @@
 
   &.bottom-fader {
     bottom: 0;
-    height: 45%;
+    height: 35%;
     background: linear-gradient(0deg, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0));
   }
 
