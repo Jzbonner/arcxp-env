@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ampScriptSwitch = (type, embedArr, content) => {
-  if (type === 'raw_html') {
+  if (content) {
     const pinReg = RegExp('https?://www.pinterest.com/pin/([0-9]{1,25})/?');
     if (pinReg.test(content)) {
       if (!embedArr.some(matchType => matchType === 'pinterest')) {
