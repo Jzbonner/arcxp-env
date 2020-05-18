@@ -19,10 +19,13 @@ const SocialShare = ({ headlines, promoItems }) => {
     filter: 'logo',
   });
 
+
   const fetchedSiteLogo = siteLogoData
     && siteLogoData.site
     && siteLogoData.site.site_logo_image_small
     ? siteLogoData.site.site_logo_image_small : null;
+
+  if (!fetchedSiteLogo) return null;
 
   let pinterestUrl = headlineImage;
 
@@ -33,13 +36,36 @@ const SocialShare = ({ headlines, promoItems }) => {
     pinterestUrl = fetchedSiteLogo;
   }
 
+
   return (
     <div className="social-share-buttons b-margin-bottom-d40-m20">
         { facebookAppID
-          && <amp-social-share class="btn-facebook" type="facebook" width="35" height="35" data-param-app_id={facebookAppID}/>}
-        <amp-social-share class="btn-twitter" type="twitter" width="35" height="35"/>
-        <amp-social-share class="btn-pinterest" type="pinterest" width="35" height="35" data-param-media={pinterestUrl}/>
-        <amp-social-share class="btn-mail" type="email" width="35" height="35" data-param-subject={headline}/>
+        && <amp-social-share
+            class="btn-facebook"
+            type="facebook"
+            width="35" height="35"
+            data-param-app_id={facebookAppID}/>}
+
+        <amp-social-share
+          class="btn-twitter"
+          type="twitter"
+          width="35"
+          height="35"/>
+
+        <amp-social-share
+          class="btn-pinterest"
+          type="pinterest"
+          width="35"
+          height="35"
+          data-param-media={pinterestUrl}
+          data-param-description={headline}/>
+
+        <amp-social-share
+          class="btn-mail"
+          type="email"
+          width="35"
+          height="35"
+          data-param-subject={headline}/>
     </div>
   );
 };
