@@ -36,6 +36,7 @@ const SocialShare = ({ headlines, promoItems }) => {
     pinterestUrl = fetchedSiteLogo;
   }
 
+
   return (
     <div className="social-share-buttons b-margin-bottom-d40-m20">
         { facebookAppID
