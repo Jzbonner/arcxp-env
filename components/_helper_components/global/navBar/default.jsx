@@ -160,7 +160,8 @@ const NavBar = ({
             setToggle={setToggle}
             paddingRef={paddingRef}
             type={type}
-            sections={sectionLi}/>
+            sections={sectionLi}
+            articleUrl={articleURL} />
         </div>
         <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
       </header>

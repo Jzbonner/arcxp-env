@@ -81,4 +81,6 @@ const ListPageLayout = () => {
   );
 };
 
+ListPageLayout.sections = [];
+
 export default ListPageLayout;

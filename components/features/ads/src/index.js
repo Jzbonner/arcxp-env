@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'fusion:prop-types';
-import { useAppContext } from 'fusion:context';
 import ArcAdLib from './children/ArcAdLib';
 
 const AdSetup = ({
   id, slotName, dimensions, display, breakpoints, refresh, targeting, bidding, className, prerender, dfpId,
 }) => {
-  const appContext = useAppContext();
-  const { isAdmin } = appContext;
-  if (prerender) {
+  if (prerender && typeof window !== 'undefined') {
     window.arcAdsPrerenderer = adDetails => new Promise((resolve) => {
       prerender.adDetails();
       resolve(adDetails);
@@ -29,7 +26,7 @@ const AdSetup = ({
           refresh,
         },
         bidding,
-        prerender: window.arcAdsPrerenderer || null,
+        prerender: typeof window !== 'undefined' ? window.arcAdsPrerenderer : null,
       },
       dfpId,
       // {
@@ -69,17 +66,6 @@ const AdSetup = ({
       //   }
       // },
     );
-  }
-
-  if (isAdmin && dimensions[0][0] !== 1) {
-    return <div style={{
-      background: '#efefef',
-      fontSize: '30px',
-      color: '#000',
-      border: '1px solid #000',
-      padding: '20px',
-      width: 'auto',
-    }}>{slotName} placeholder</div>;
   }
 
   return (

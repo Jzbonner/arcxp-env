@@ -10,19 +10,18 @@ import '../../global/navBar/default.scss';
 
 const StickyNav = ({
   headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
-  isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections,
+  isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections, articleUrl,
 }) => {
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteName,
   } = getProperties();
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
-
-  const shareLinkFacebook = `${facebookURL}${window.location.href}`;
-  const shareLinkTwitter = `${twitterURL}${window.location.href}&text=${articleHeadline}`;
-  const shareLinkPinterest = `${pinterestURL}${window.location.href}&media=${renderImage()}&description=${articleHeadline}`;
-  const shareLinkReddit = `${redditURL}${window.location.href}&title=${articleHeadline}`;
-  const shareLinkEmail = `${mail}${articleHeadline}&body=${window.location.href}`;
+  const shareLinkFacebook = `${facebookURL}${articleUrl}`;
+  const shareLinkTwitter = `${twitterURL}${articleUrl}&text=${articleHeadline}`;
+  const shareLinkPinterest = `${pinterestURL}${articleUrl}&media=${renderImage()}&description=${articleHeadline}`;
+  const shareLinkReddit = `${redditURL}${articleUrl}&title=${articleHeadline}`;
+  const shareLinkEmail = `${mail}${articleHeadline}&body=${articleUrl}`;
 
   // Handles comments window visibility.
   // This state is managed in this component because the window's visibility is controlled
@@ -133,7 +132,7 @@ const StickyNav = ({
               {commentsEnabled ? (
                 <li className="stickyNav-item">
                   <a href="#" className="sticky-nav-icon btn-comments" onClick={e => toggleCommentsWindow(e)}>
-                    <span className="fb-comments-count" data-href={window.location.href}></span>
+                    <span className="fb-comments-count" data-href={articleUrl}></span>
                   </a>
                 </li>
               ) : null}
@@ -152,13 +151,12 @@ const StickyNav = ({
           <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
         </div>
       </div>
-      <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} />
+      <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} articleUrl={articleUrl} />
     </>
   );
 };
 
 StickyNav.propTypes = {
-  articleURL: PropTypes.string,
   headlines: PropTypes.object,
   comments: PropTypes.object,
   setStickyNavVisibility: PropTypes.func,
@@ -171,6 +169,7 @@ StickyNav.propTypes = {
   hamburgerToggle: PropTypes.bool,
   type: PropTypes.string,
   sections: PropTypes.array,
+  articleUrl: PropTypes.string,
 };
 
 export default StickyNav;

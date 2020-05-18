@@ -239,4 +239,7 @@ const StoryPageLayout = () => {
     </>
   );
 };
+
+StoryPageLayout.sections = [];
+
 export default StoryPageLayout;

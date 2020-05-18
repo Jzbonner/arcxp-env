@@ -54,4 +54,6 @@ const VideoPageLayout = () => {
   );
 };
 
+VideoPageLayout.sections = [];
+
 export default VideoPageLayout;
