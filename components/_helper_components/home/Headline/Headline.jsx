@@ -64,7 +64,7 @@ const Headline = ({
     <div className="home-headline">
       <a href={`${contextPath}${relativeURL}`}>{getPromoItem(type)}</a>
       <div className="headline-box">
-        {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} />}
+        {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} tease={true} />}
         {!isHyperlocalContent && (
           <>
             <SectionLabel label={label} taxonomy={taxonomy} />
