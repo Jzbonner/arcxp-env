@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import AREAS_OF_EXPERTISE from '../AREAS_OF_EXPERTISE';
@@ -10,26 +10,26 @@ import './default.scss';
 const AuthorMenu = ({
   selectedLeftMenuItem, setSelectedLeftMenuItem, leftMenuMenuVisibility, setLeftMenuVisibility, pageUri,
 }) => {
-  const { sites } = getProperties();
-
+  const { sites, maxTabletViewWidth } = getProperties();
   const windowWidth = getWindowSize();
 
-  useEffect(() => {
-    if (windowWidth.width < 1024) {
+  useLayoutEffect(() => {
+    if (windowWidth.width < maxTabletViewWidth) {
       const authorMenu = document.querySelector('.author-menu');
-      const items = document.querySelectorAll('.author-menu-item');
-      const heightOfOneLine = items[0].offsetHeight;
+      const items = document.querySelectorAll('.c-author-menu-item');
 
       let height = 0;
       let offset = 0;
-      if (items) {
-        for (let i = 0; i < items.length; i += 1) {
+      if (Array.isArray(items)) {
+        const heightOfOneLine = items[0].offsetHeight;
+
+        for (let i = 1; i < items.length; i += 1) {
           height += items[i].offsetHeight;
           if (items[i].classList.contains('active')) {
             if (items[i].offsetHeight > heightOfOneLine) {
               offset = 15;
             } else {
-              offset = 5;
+              offset = 0;
             }
             break;
           }
@@ -37,7 +37,7 @@ const AuthorMenu = ({
       }
 
       if (authorMenu) {
-        authorMenu.scrollTop = height - offset - heightOfOneLine;
+        authorMenu.scrollTop = height - offset;
       }
     }
   });
@@ -45,10 +45,10 @@ const AuthorMenu = ({
   return (
     <>
       <aside className={`c-author-menu ${leftMenuMenuVisibility ? 'is-visible' : ''}`}>
-        <div className="menu-container">
+        <div className="menu-wrapper">
           <div className="mobile-fader top-fader"></div>
-          <ul className="author-menu" style={{}}>
-            <li className="spacer"></li>
+          <ul className="author-menu">
+            <li className="spacer top-space"></li>
             <AuthorMenuItem
               area={AREAS_OF_EXPERTISE()[sites[0]] && AREAS_OF_EXPERTISE()[sites[0]].all}
               selectedLeftMenuItem={selectedLeftMenuItem}
@@ -75,11 +75,11 @@ const AuthorMenu = ({
                     pageUri={pageUri}
                   />
                 ))}
-            <li className="spacer"></li>
+            <li className="spacer bottom-space"></li>
           </ul>
           <div className="mobile-fader bottom-fader"></div>
         </div>
-        <button className={'btn-left-menu-menu'} onClick={() => setLeftMenuVisibility()}>
+        <button className={'close-mobile-menu-btn'} onClick={() => setLeftMenuVisibility()}>
           <img src={close} alt={'close-button'} />
         </button>
       </aside>
