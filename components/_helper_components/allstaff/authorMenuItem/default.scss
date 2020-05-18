@@ -18,7 +18,7 @@
   }
 
   @include breakpoint(desktop-sm) {
-    @include text-styles(.875rem, 1.5, "Gordita-Medium");
+    @include text-styles(.875rem, 1, "Gordita-Medium");
 
     color: #9b9b9b;
     cursor: pointer;
@@ -35,7 +35,7 @@
     position: relative;
 
     @include breakpoint(desktop-sm) {
-      @include text-styles(1rem, 1.5, "Gordita-Medium");
+      @include text-styles(1rem, 1, "Gordita-Medium");
 
       background-color: #fff;
       border-top: none;
