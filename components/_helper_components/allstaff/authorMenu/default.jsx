@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import AREAS_OF_EXPERTISE from '../AREAS_OF_EXPERTISE';
@@ -12,27 +12,26 @@ const AuthorMenu = ({
 }) => {
   const { sites, maxTabletViewWidth } = getProperties();
   const windowWidth = getWindowSize();
+  const menuData = AREAS_OF_EXPERTISE()[sites[0]];
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (windowWidth.width < maxTabletViewWidth) {
       const authorMenu = document.querySelector('.author-menu');
-      const items = document.querySelectorAll('.c-author-menu-item');
+      const items = document.querySelectorAll('.c-author-menu-item') || [];
+      const heightOfOneLine = items[0] && items[0].offsetHeight;
 
       let height = 0;
       let offset = 0;
-      if (Array.isArray(items)) {
-        const heightOfOneLine = items[0].offsetHeight;
 
-        for (let i = 1; i < items.length; i += 1) {
-          height += items[i].offsetHeight;
-          if (items[i].classList.contains('active')) {
-            if (items[i].offsetHeight > heightOfOneLine) {
-              offset = 15;
-            } else {
-              offset = 0;
-            }
-            break;
+      for (let i = 1; i < items.length; i += 1) {
+        height += items[i].offsetHeight;
+        if (items[i].classList.contains('active')) {
+          if (items[i].offsetHeight > heightOfOneLine) {
+            offset = 10;
+          } else {
+            offset = -3;
           }
+          break;
         }
       }
 
@@ -50,21 +49,22 @@ const AuthorMenu = ({
           <ul className="author-menu">
             <li className="spacer top-space"></li>
             <AuthorMenuItem
-              area={AREAS_OF_EXPERTISE()[sites[0]] && AREAS_OF_EXPERTISE()[sites[0]].all}
+              area={menuData && menuData.all}
               selectedLeftMenuItem={selectedLeftMenuItem}
               setSelectedLeftMenuItem={setSelectedLeftMenuItem}
               setLeftMenuVisibility={setLeftMenuVisibility}
               pageUri={pageUri}
             />
             <AuthorMenuItem
-              area={AREAS_OF_EXPERTISE()[sites[0]] && AREAS_OF_EXPERTISE()[sites[0]].newsroom}
+              area={menuData && menuData.newsroom}
               selectedLeftMenuItem={selectedLeftMenuItem}
               setSelectedLeftMenuItem={setSelectedLeftMenuItem}
               setLeftMenuVisibility={setLeftMenuVisibility}
               pageUri={pageUri}
             />
-            {AREAS_OF_EXPERTISE()[sites[0]]
-              && AREAS_OF_EXPERTISE()[sites[0]].areas.sort((a, b) => a.tag.localeCompare(b.tag))
+            {menuData
+              && menuData.areas
+                .sort((a, b) => a.tag.localeCompare(b.tag))
                 .map(area => (
                   <AuthorMenuItem
                     key={`key-${area.tag}`}
