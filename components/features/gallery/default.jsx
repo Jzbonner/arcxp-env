@@ -40,7 +40,7 @@ const Gallery = (props) => {
   const [galHeadline, setHeadline] = useState(null);
   // holds true max # of photos ( w/o changing value when adding ads into Element array)
   const [maxIndex, setMaxIndex] = useState(null);
-  const [canonicalUrl, setConanicalUrl] = useState('');
+  const [canonicalUrl, setCanonicalUrl] = useState('');
 
   /* Ads */
   const [clickCount, setClickCount] = useState(0);
@@ -477,8 +477,7 @@ const Gallery = (props) => {
         headline = mainData.headlines && mainData.headlines.basic
           ? setHeadline(mainData.headlines.basic) : null;
 
-        if (!canonicalUrl && mainData && mainData.canonical_url) setConanicalUrl(mainData.canonical_url);
-        // debugger;
+        if (mainData && mainData.canonical_url) setCanonicalUrl(mainData.canonical_url);
       }
     }
 
