@@ -7,7 +7,7 @@ import ImageSimple from '../imageSimple/default';
 import './default.scss';
 
 const ContributorBadge = ({
-  tags, ampPage, useWhiteLogos, staffBio,
+  tags, ampPage, useWhiteLogos, staffBio, tease,
 }) => {
   const { contextPath } = useAppContext();
 
@@ -35,7 +35,7 @@ const ContributorBadge = ({
       case 'dunwoody':
         return { link: '/neighborhoods/dunwoody', image: `/resources/images/contributors/dunwoody${useWhiteLogos ? '-white' : ''}.png` };
       default:
-        return { link: '/neighborhoods/', image: '/resources/images/contributors/community.png' };
+        return { type: 'default', link: '/neighborhoods/', image: '/resources/images/contributors/community.png' };
     }
   }
   if (staffBio) {
@@ -54,17 +54,19 @@ const ContributorBadge = ({
     }
   }
   if (checkTags(tags, 'community contributor')) {
-    return (
-      <a href={`${contextPath}${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
-        <ImageSimple
-          src={getContributorProps().image}
-          ampPage={ampPage}
-          alt="Contributor Badge Logo"
-          ampMobileHeight="54px"
-          ampMobileMinWidth="300px"
-        />
-      </a>
-    );
+    if (!tease || (tease && getContributorProps().type !== 'default')) {
+      return (
+        <a href={`${contextPath}${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
+          <ImageSimple
+            src={getContributorProps().image}
+            ampPage={ampPage}
+            alt="Contributor Badge Logo"
+            ampMobileHeight="54px"
+            ampMobileMinWidth="300px"
+          />
+        </a>
+      );
+    }
   }
   return null;
 };
@@ -74,6 +76,7 @@ ContributorBadge.propTypes = {
   ampPage: PropTypes.bool,
   staffBio: PropTypes.bool,
   useWhiteLogos: PropTypes.bool,
+  tease: PropTypes.bool,
 };
 
 export default ContributorBadge;

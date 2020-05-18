@@ -96,4 +96,6 @@ const staffBioPage = () => {
   );
 };
 
+staffBioPage.sections = [];
+
 export default staffBioPage;

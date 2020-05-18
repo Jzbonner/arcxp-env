@@ -114,4 +114,6 @@ export const AllStaffPage = () => {
   );
 };
 
+AllStaffPage.sections = [];
+
 export default AllStaffPage;

@@ -127,6 +127,7 @@ const StoryPageLayout = () => {
   }
   // about the author should be the last component of the story
   insertAtEndOfStory.push(BlogAuthorComponent);
+
   return (
     <>
       {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} />}
@@ -239,4 +240,7 @@ const StoryPageLayout = () => {
     </>
   );
 };
+
+StoryPageLayout.sections = [];
+
 export default StoryPageLayout;

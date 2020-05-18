@@ -44,7 +44,7 @@ const gamAdTagBuilder = (pageTaxonomy = {}, videoTaxonomy = {}, videoId, current
   const size = 'sz=400x300';
   const pageUuid = contentId || videoId;
   const kw = videoTopics.concat(pageTopics);
-  let descriptionUrl = videoPageUrl ? `https://${window.location.hostname}${videoPageUrl}` : window.location.href;
+  let descriptionUrl = `${typeof window !== 'undefined' ? `https://${window.location.hostname}` : ''}${videoPageUrl}`;
   descriptionUrl = encodeURIComponent(descriptionUrl);
 
   // eslint-disable-next-line max-len

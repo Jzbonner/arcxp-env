@@ -39,14 +39,14 @@ export default class ArcAdLib {
           if (slotDiv) {
             slotDiv.style.display = 'block';
           }
-          if (slotId.indexOf('PG01') > -1) {
+          if (slotId.indexOf('PG01') > -1 && window) {
             window.pg01 = event.slot;
           }
         }
       });
     }
 
-    if (params && params.slotName === 'PG01' && window.pg01) {
+    if (params && params.slotName === 'PG01' && window && window.pg01) {
       window.googletag.destroySlots([window.pg01]);
     }
     // register the ad with the ArcAds library

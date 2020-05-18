@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useFusionContext } from 'fusion:context';
+import { useFusionContext, useAppContext } from 'fusion:context';
 import get from 'lodash.get';
 import fetchEnv from '../utils/environment';
 import Caption from '../caption/default.jsx';
@@ -12,6 +12,8 @@ import '../../../../src/styles/base/_utility.scss';
 const Video = ({
   src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, pageTaxonomy,
 }) => {
+  const appContext = useAppContext();
+  const { requestUri } = appContext;
   const fusionContext = useFusionContext();
   const {
     credits,
@@ -27,11 +29,12 @@ const Video = ({
   const vidId = videoID || videoPageId;
   const currentEnv = fetchEnv();
 
+
   let mainCredit;
   if (credits) {
     mainCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
   }
-  const adTag = gamAdTagBuilder(pageTaxonomy, videoTaxonomy, vidId, currentEnv, videoPageUrl);
+  const adTag = gamAdTagBuilder(pageTaxonomy, videoTaxonomy, vidId, currentEnv, videoPageUrl || requestUri);
 
   useEffect(() => {
     if (adTag) {

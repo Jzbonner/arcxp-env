@@ -77,7 +77,7 @@ const Mosaic = (customFields = {}) => {
                   {/* the link is empty - 100% coverage of content via css - because sectionLabel outputs a link as well */}
                   <a href={`${contextPath}${relativeURL}`}></a>
                   <div className="c-sectionLabel">
-                    {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} useWhiteLogos={true} />}
+                    {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} useWhiteLogos={true} tease={true} />}
                     {!isHyperlocalContent && (
                       <>
                         <SectionLabel label={label || {}} taxonomy={taxonomy} />
