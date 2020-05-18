@@ -1,9 +1,9 @@
 const checkPageType = (type, layout) => {
   const page = {};
 
-  if (type) {
+  if (type && type !== 'collection') {
     page.type = type;
-    page.isHomeOrSectionPage = type === ('home' || 'section' || 'page');
+    page.isHomeOrSectionPage = false;
   } else if (layout) {
     const isHome = layout.indexOf('home') > -1;
     const isSection = layout.indexOf('section') > -1;
