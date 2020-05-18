@@ -3,7 +3,6 @@ import imageResizer from '../../../../layouts/_helper_functions/Thumbor';
 import truncateHeadline from '../../../../layouts/_helper_functions/homepage/truncateHeadline';
 import getDaysSincePublished from './getDaysSincePublished';
 import getFirstInlineImage from './getFirstInlineImage';
-import getTeaseIcon from '../../../global/image/_helper_functions/getTeaseIcon';
 import '../default.scss';
 
 const filterCurrentStory = (contentElements, storyId) => contentElements.filter((el) => {
@@ -26,10 +25,16 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
 
       if (el.promo_items && el.promo_items.basic) {
         const basicPromo = el.promo_items.basic;
-        temp.src = basicPromo.type === 'image'
-        && basicPromo.url ? basicPromo.url : null;
-
-        if (basicPromo.type) temp.teaseIcon = getTeaseIcon(basicPromo.type, true);
+        if (basicPromo.type === 'gallery') {
+          temp.src = basicPromo.promo_items && basicPromo.promo_items.basic
+          && basicPromo.promo_items.basic.type && basicPromo.promo_items.basic.type === 'image'
+          && basicPromo.promo_items.basic.url ? basicPromo.promo_items.basic.url : null;
+        } else if (basicPromo.type === 'video') {
+          temp.src = basicPromo.promo_image && basicPromo.promo_image.url ? basicPromo.promo_image.url : null;
+        } else {
+          temp.src = basicPromo.type === 'image'
+          && basicPromo.url ? basicPromo.url : null;
+        }
       }
 
       temp.headline = el.headlines && el.headlines.basic ? el.headlines.basic : null;
@@ -44,7 +49,6 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
               height="50"
               src={temp.src ? imageResizer(temp.src, 256, 144) : logo}
             />
-            {temp.teaseIcon || null}
             <div className={`c-itemText ${!temp.src && temp.teaseIcon ? 'with-icon' : ''}`}>
               {truncateHeadline(temp.headline)}
             </div>
