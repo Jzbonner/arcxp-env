@@ -46,7 +46,7 @@ export const AllStaffPage = () => {
             return false;
           });
         }
-        return false;
+        return true;
       });
       setSelectedStaff(staffers);
     } else if (selectedArea) {
@@ -95,16 +95,7 @@ export const AllStaffPage = () => {
               const {
                 byline = '', role, custom_ajc_phone: telephone, email, image, _id: id,
               } = staffer || {};
-              return (
-                <StaffCard
-                  name={byline}
-                  role={role}
-                  telephone={telephone}
-                  email={email}
-                  image={image}
-                  key={id}
-                />
-              );
+              return <StaffCard name={byline} role={role} telephone={telephone} email={email} image={image} key={id} />;
             })}
         </section>
       </main>
