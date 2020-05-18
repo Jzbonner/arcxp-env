@@ -40,6 +40,7 @@ const Gallery = (props) => {
   const [galHeadline, setHeadline] = useState(null);
   // holds true max # of photos ( w/o changing value when adding ads into Element array)
   const [maxIndex, setMaxIndex] = useState(null);
+  const [canonicalUrl, setCanonicalUrl] = useState('');
 
   /* Ads */
   const [clickCount, setClickCount] = useState(0);
@@ -457,7 +458,6 @@ const Gallery = (props) => {
 
     if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements(contentElements);
 
-    // checks if other gallery sources exists, else do not render
     if (leafContentElements.length > 0) {
       galleryContentElements = leafContentElements;
     } else if (featuredGalleryData) {
@@ -470,12 +470,14 @@ const Gallery = (props) => {
 
     if (relevantGalleryData && !galleryContentElements) galleryContentElements = relevantGalleryData.content_elements;
 
-    if (!headline && !galHeadline) {
-      const headlineData = relevantGalleryData || fetchedGalleryData;
+    if ((!headline && !galHeadline) || !canonicalUrl) {
+      const mainData = relevantGalleryData || fetchedGalleryData;
 
-      if (headlineData) {
-        headline = headlineData.headlines && headlineData.headlines.basic
-          ? setHeadline(headlineData.headlines.basic) : null;
+      if (mainData) {
+        headline = mainData.headlines && mainData.headlines.basic
+          ? setHeadline(mainData.headlines.basic) : null;
+
+        if (mainData && mainData.canonical_url) setCanonicalUrl(mainData.canonical_url);
       }
     }
 
@@ -527,10 +529,12 @@ const Gallery = (props) => {
   return (
     <>
       {(isMobile || pageType !== 'Article')
-      && galHeadline ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}>{galHeadline}</div> : null}
+        && galHeadline
+        ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
       {pageType !== 'Article' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02()}</div> : null}
       <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-        {!isMobile && galHeadline && pageType === 'Article' ? <div className="gallery-headline">{galHeadline}</div> : null}
+        {!isMobile && galHeadline && pageType === 'Article'
+          ? <div className="gallery-headline"><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
         {
           isStickyVisible
             ? <MobileGallery

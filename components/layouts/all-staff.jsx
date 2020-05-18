@@ -46,7 +46,7 @@ export const AllStaffPage = () => {
             return false;
           });
         }
-        return false;
+        return true;
       });
       setSelectedStaff(staffers);
     } else if (selectedArea) {
