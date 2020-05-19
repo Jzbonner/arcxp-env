@@ -8,6 +8,7 @@ const decodeString = (str) => {
   return parsed;
 }
 
+// https://github.com/apostrophecms/sanitize-html
 const safeHtml = (str) => {
   const parsedHtml = sanitizeHtml(str, {
     allowedAttributes: {
