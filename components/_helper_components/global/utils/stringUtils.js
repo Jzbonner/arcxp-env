@@ -1,3 +1,5 @@
+import sanitizeHtml from 'sanitize-html';
+
 /* eslint-disable */
 const decodeString = (str) => {
   const REGNewline = new RegExp("\n", 'gm');
@@ -6,7 +8,17 @@ const decodeString = (str) => {
   return parsed;
 }
 
+const safeHtml = (str) => {
+  const parsedHtml = sanitizeHtml(str, {
+    allowedAttributes: {
+      'a': ['href', 'data-*', 'target', 'class', 'on']
+    }
+  });
+  return parsedHtml;
+}
+
 export {
-  decodeString
+  decodeString,
+  safeHtml
 }
 /* eslint-enable */
