@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import './default.scss';
+import fetchEnv from '../../global/utils/environment.js';
 import logo from '../../../../resources/images/stickyNav-logo.svg';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import Comments from '../comments/comments';
@@ -17,11 +18,19 @@ const StickyNav = ({
   } = getProperties();
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
-  const shareLinkFacebook = `${facebookURL}${articleUrl}`;
-  const shareLinkTwitter = `${twitterURL}${articleUrl}&text=${articleHeadline}`;
-  const shareLinkPinterest = `${pinterestURL}${articleUrl}&media=${renderImage()}&description=${articleHeadline}`;
-  const shareLinkReddit = `${redditURL}${articleUrl}&title=${articleHeadline}`;
-  const shareLinkEmail = `${mail}${articleHeadline}&body=${articleUrl}`;
+  let sharedUrl = articleUrl;
+  let site = siteName.toLowerCase();
+  site = site.replace(/w/gi, '');
+  if (sharedUrl.indexOf('.com') === -1) {
+    const env = fetchEnv();
+    // we must fully-qualify the url for sharing
+    sharedUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${sharedUrl}`;
+  }
+  const shareLinkFacebook = `${facebookURL}${sharedUrl}`;
+  const shareLinkTwitter = `${twitterURL}${sharedUrl}&text=${articleHeadline}`;
+  const shareLinkPinterest = `${pinterestURL}${sharedUrl}&media=${renderImage()}&description=${articleHeadline}`;
+  const shareLinkReddit = `${redditURL}${sharedUrl}&title=${articleHeadline}`;
+  const shareLinkEmail = `${mail}${articleHeadline}&body=${sharedUrl}`;
 
   // Handles comments window visibility.
   // This state is managed in this component because the window's visibility is controlled
@@ -132,7 +141,7 @@ const StickyNav = ({
               {commentsEnabled ? (
                 <li className="stickyNav-item">
                   <a href="#" className="sticky-nav-icon btn-comments" onClick={e => toggleCommentsWindow(e)}>
-                    <span className="fb-comments-count" data-href={articleUrl}></span>
+                    <span className="fb-comments-count" data-href={sharedUrl}></span>
                   </a>
                 </li>
               ) : null}
@@ -151,7 +160,7 @@ const StickyNav = ({
           <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
         </div>
       </div>
-      <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} articleUrl={articleUrl} />
+      <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} articleUrl={sharedUrl} />
     </>
   );
 };
