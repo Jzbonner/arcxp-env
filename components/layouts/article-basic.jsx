@@ -33,6 +33,7 @@ import checkTags from './_helper_functions/checkTags';
 import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
 import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
+import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -226,6 +227,7 @@ const StoryPageLayout = () => {
           {(!basicItems || promoType !== 'gallery') && !ampPage ? (
             <Gallery contentElements={filteredContentElements} pageType={subtype} />
           ) : null}
+          {<SponsorRelatedBox taxonomy={taxonomy} />}
           {!isHyperlocalContent && (
             <TaboolaFeed ampPage={ampPage} />
           )}
