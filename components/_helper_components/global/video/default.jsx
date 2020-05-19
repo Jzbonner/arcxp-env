@@ -25,7 +25,7 @@ const Video = ({
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON, autoplayNext } = featuredVideoPlayerRules || inlineVideoPlayerRules;
   const screenSize = checkWindowSize();
-  const { outputType, arcSite = 'ajc' } = fusionContext;
+  const { outputType, arcSite = 'ajc', layout: pageLayout } = fusionContext;
   const vidId = videoID || videoPageId;
   const currentEnv = fetchEnv();
 
@@ -43,14 +43,61 @@ const Video = ({
       window.PoWaSettings.advertising.adBar = true;
       window.PoWaSettings.advertising.adTag = adTag;
     }
-    const triggerDiscovery = (e) => {
+    const powaRendered = (e) => {
+      const id = get(e, 'detail.id');
+      const powa = get(e, 'detail.powa');
+
+      // protect against the player not existing (just in case)
+      if (typeof powa !== 'undefined') {
+        powa.on('start', (event) => {
+          // video start: update various elements (if/when necessary)
+          const { id: playerId, videoData } = event || {};
+          const {
+            canonical_url: vidCanonical,
+            credits: vidCredits,
+            description,
+            headlines,
+            _id: vId,
+          } = videoData || {};
+          const { basic: headline } = headlines || {};
+          const { basic: vidCaption } = description || {};
+          let vidCredit = '';
+          if (vidCredits) {
+            vidCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
+          }
+          // make everything relative to the player's container, in case there are multiple players on the page
+          const playerEl = document.querySelector(`#${playerId}`);
+          const videoComponent = playerEl.parentNode.parentNode;
+          const captionContainer = videoComponent.querySelector('.c-caption') || null;
+          const captionText = captionContainer ? captionContainer.querySelector('.photo-caption-text') : null;
+          const creditContainer = videoComponent.querySelector('.video-credit-text');
+          const creditContainerMobile = videoComponent.querySelector('.photo-credit-text');
+          if (pageLayout.indexOf('video') > -1 && vidCanonical && headline) {
+            // only update url & headline if it's a video page
+            window.history.pushState({ vId }, headline, vidCanonical);
+            document.querySelector('.article-headline-component .headline-body .headline-text').innerHTML = headline;
+          }
+          if (vidCaption && captionContainer) {
+            captionText.innerHTML = vidCaption;
+            captionContainer.style.display = 'block';
+          } else if (captionContainer) {
+            captionContainer.style.display = 'none';
+          }
+          if (creditContainer) {
+            creditContainer.innerHTML = vidCredit;
+          }
+          if (creditContainerMobile) {
+            creditContainerMobile.innerHTML = vidCredit;
+          }
+        });
+      }
+
+      // kick off playlist discovery
       if (typeof Discovery !== 'undefined') {
-        const id = get(e, 'detail.id');
-        const powa = get(e, 'detail.powa');
         window.Discovery({ id, powa });
       }
     };
-    window.addEventListener('powaRender', e => triggerDiscovery(e));
+    window.addEventListener('powaRender', e => powaRendered(e));
     const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
       const videoScript = document.createElement('script');
       videoScript.type = 'text/javascript';
@@ -66,7 +113,7 @@ const Video = ({
     });
 
     loadVideoScript();
-    window.removeEventListener('powaRender', e => triggerDiscovery(e));
+    window.removeEventListener('powaRender', e => powaRendered(e));
   }, []);
 
   const videoMarginBottom = 'b-margin-bottom-d40-m20';
