@@ -7,7 +7,6 @@ import getItemThumbNail from '../../../features/Slider/_helper_functions/getItem
 
 
 const SocialShare = ({ headlines, promoItems, articleURL }) => {
-  console.log(articleURL);
   const { basic: headline } = headlines || {};
   const { basic: basicItems } = promoItems || {};
   const { url: headlineImage } = basicItems || {};
