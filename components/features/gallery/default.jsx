@@ -61,9 +61,9 @@ const Gallery = (props) => {
   const [nextAdRendering, setNextAdRendering] = useState(4);
 
 
-  const galleryEl = React.createRef(null);
+  const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
-  const PG01Ref = React.useRef(null);
+  const PG01Ref = useRef(null);
   const mobileBreakPoint = 1023;
 
   const actions = {
@@ -103,6 +103,7 @@ const Gallery = (props) => {
 
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
+    if (currentAction === '') setTranslateX(null);
     if (isMobile) return;
     let translateAmount;
     const focusElement = isAdVisible ? PG01Ref.current : (document.getElementById(`gallery-item-${currentIndex}`) || null);
