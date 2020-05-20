@@ -25,7 +25,7 @@ const Mosaic = (customFields = {}) => {
   } = customFields;
 
   let { from: startIndex, size: itemLimit } = contentConfigValues || {};
-  startIndex = parseInt(startIndex, 10) - 1 || 0;
+  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
   itemLimit = parseInt(itemLimit, 10) || 12;
 
   const data = useContent({

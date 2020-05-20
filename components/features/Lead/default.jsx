@@ -13,15 +13,12 @@ const Lead = (customFields = {}) => {
 
   const {
     customFields: {
-      content: { contentService = 'collections-api', contentConfigValues = { id: '', from: 1 } } = {},
-      displayClass = '',
-      title = '',
-      columns = 1,
+      content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', title = '', columns = 1,
     },
   } = customFields;
 
   let { from: startIndex = 1 } = contentConfigValues || {};
-  startIndex = parseInt(startIndex, 10) - 1 || 0;
+  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
 
   const displayClassesRequiringImg = [
     '5-Item Feature - Top Photo',
@@ -30,14 +27,13 @@ const Lead = (customFields = {}) => {
     '5-Item Feature - No Photo',
   ];
 
-  // Makes sure at least 10 additional items are always fetched to account for stories missing images
-  const size = startIndex + 15;
+  // // Makes sure at least 10 additional items are always fetched to account for stories missing images
+  // const size = startIndex + 15;
 
   const data = useContent({
     source: contentService,
     query: {
       ...contentConfigValues,
-      size,
       arcSite,
       displayClass,
       displayClassesRequiringImg,
@@ -141,7 +137,7 @@ Lead.propTypes = {
     }),
     columns: PropTypes.oneOf(['1', '2', '3', '4']).tag({
       name: 'Columns',
-      defaultValue: 1,
+      defaultValue: '1',
     }),
     title: PropTypes.string.tag({
       name: 'Title - No Photo Display Class Only',

@@ -12,14 +12,16 @@ export default (arcSite, id, size = 20, from = 0) => {
   const promiseArray = [];
   const contentElements = [];
 
-  const numberOfFetches = (fromInt + sizeInt) < 20 ? 1 : Math.ceil((fromInt + sizeInt) / 20);
-  let start = 0;
+  const buffer = 3;
+  const numberOfFetches = fromInt + sizeInt + buffer < 20 ? 1 : Math.ceil((fromInt + sizeInt + buffer) / 20);
+  let fetchStart = 0;
+  const fetchSize = 20;
   let i = 1;
 
   while (i <= numberOfFetches && i < 10) {
     let requestUri = `${CONTENT_BASE}/content/v4/collections/?website=${arcSite}`;
     requestUri += `&_id=${id}`;
-    requestUri += `&from=${start}`;
+    requestUri += `&from=${fetchStart}`;
     requestUri += '&size=20';
 
     const promise = axios
@@ -28,11 +30,13 @@ export default (arcSite, id, size = 20, from = 0) => {
           Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
         },
       })
-      .then(({ data }) => contentElements.push(...data.content_elements));
+      .then(({ data }) => {
+        contentElements.push(...data.content_elements);
+      });
 
     promiseArray.push(promise);
 
-    start += sizeInt;
+    fetchStart += fetchSize;
     i += 1;
   }
 
