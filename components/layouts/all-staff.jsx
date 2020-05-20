@@ -93,10 +93,8 @@ export const AllStaffPage = () => {
             && selectedStaff
               .sort((a = { lastName: '' }, b = { lastName: '' }) => a.lastName.localeCompare(b.lastName))
               .map((staffer) => {
-                const {
-                  byline = '', role, custom_ajc_phone: telephone, email, image, _id: id,
-                } = staffer || {};
-                return <StaffCard name={byline} role={role} telephone={telephone} email={email} image={image} key={id} />;
+                const { _id: id } = staffer || {};
+                return <StaffCard staffer={staffer} key={id} />;
               })}
         </section>
       </main>

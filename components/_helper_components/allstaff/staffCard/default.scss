@@ -28,6 +28,7 @@
       font-stretch: normal;
       font-style: normal;
       letter-spacing: normal;
+      color: #000;
     }
 
     .role {
@@ -58,8 +59,4 @@
       }
     }
   }
-
-  //@include breakpoint(desktop-sm) {
-  //  width: 33%;
-  //}
 }
