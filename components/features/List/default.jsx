@@ -80,7 +80,7 @@ List.propTypes = {
     }),
     columns: PropTypes.oneOf(['1', '2', '3', '4']).tag({
       name: 'Columns',
-      defaultValue: 1,
+      defaultValue: '1',
     }),
     title: PropTypes.string.tag({
       name: 'Title - Top, Left, No Photo Display Classes Only',

@@ -27,9 +27,6 @@ const Lead = (customFields = {}) => {
     '5-Item Feature - No Photo',
   ];
 
-  // // Makes sure at least 10 additional items are always fetched to account for stories missing images
-  // const size = startIndex + 15;
-
   const data = useContent({
     source: contentService,
     query: {

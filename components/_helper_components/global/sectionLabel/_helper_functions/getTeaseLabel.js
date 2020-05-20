@@ -1,12 +1,9 @@
 export default function getTeaseLabel(taxonomy, label) {
-  if (!taxonomy) {
-    return null;
-  }
   const { basic = {} } = label || {};
 
   if (basic && basic.text) return basic.text;
 
-  if (!taxonomy.sections || taxonomy.sections.length === 0) return null;
+  if (!taxonomy || !taxonomy.sections || taxonomy.sections.length === 0) return null;
 
   let correctLabel = null;
 
