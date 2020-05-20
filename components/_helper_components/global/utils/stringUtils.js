@@ -9,13 +9,20 @@ const decodeString = (str) => {
 }
 
 // https://github.com/apostrophecms/sanitize-html
-const safeHtml = (str) => {
-  const parsedHtml = sanitizeHtml(str, {
+const safeHtml = (str, opt = {}) => {
+  const preconfig = {
     allowedAttributes: {
       'a': ['href', 'data-*', 'target', 'class', 'on']
     }
-  });
-  return parsedHtml;
+  };
+
+  const cfg = {
+    ...preconfig,
+    ...opt
+  };
+
+  const parsed = sanitizeHtml(str, cfg);
+  return parsed;
 }
 
 export {
