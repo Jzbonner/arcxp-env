@@ -22,7 +22,7 @@ const safeHtml = (str, opt = {}) => {
   };
 
   const parsed = sanitizeHtml(str, cfg);
-  console.log("safeHtml => ", parsed, cfg)
+  // console.log("safeHtml => ", parsed, cfg)
 
   return parsed;
 }
