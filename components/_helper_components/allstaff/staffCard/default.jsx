@@ -14,13 +14,17 @@ export const StaffCard = ({ staffer = {} }) => {
     firstName,
     lastName,
   } = staffer;
+  const staffBioPageLink = `/staff/${`${firstName}-${lastName}`}/${id}/`;
   return (
     <div className={'c-staff-card'}>
-      <div className={'c-profile-picture'}>
+      <a
+        href={staffBioPageLink}
+        className={'c-profile-picture'}
+      >
         <img src={image || missingStaffIcon} alt={'staff image'} className={'profile-picture'}/>
-      </div>
+      </a>
       <div className={'c-staff-info'}>
-        <a href={`/staff/${`${firstName}-${lastName}`}/${id}/`} className={'name'}>{name}</a>
+        <a href={staffBioPageLink} className={'name'}>{name}</a>
         <div className={'role'}>{role}</div>
         <div className={'phone-email'}>
           <a
