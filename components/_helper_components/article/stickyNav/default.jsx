@@ -21,7 +21,7 @@ const StickyNav = ({
   let sharedUrl = articleUrl;
   let site = siteName.toLowerCase();
   site = site.replace(/w/gi, '');
-  if (sharedUrl.indexOf('.com') === -1) {
+  if (sharedUrl && sharedUrl.indexOf('.com') === -1) {
     const env = fetchEnv();
     // we must fully-qualify the url for sharing
     sharedUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${sharedUrl}`;
@@ -105,6 +105,8 @@ const StickyNav = ({
     });
   }, []);
 
+  const isNonShareablePage = !articleUrl || !type || type === 'homepage-basic' || type === 'section-basic';
+
   return (
     <>
       <div className={`stickyNav ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
@@ -118,7 +120,7 @@ const StickyNav = ({
               <img className="sticky-logo" src={logo} alt={`${siteName} logo`} />
             </a>
           </li>
-          <div className={`stickyNav-social ${type === 'homepage-basic' || type === 'section-basic' ? 'hidden' : ''}`}>
+          <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
             <li className="stickyNav-item">
               <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
             </li>
@@ -149,12 +151,12 @@ const StickyNav = ({
           </div>
         </ul>
         <div className='b-flexRow c-stickyLogin'>
-          <div className={`sticky-logo-homepage ${type === 'homepage-basic' || type === 'section-basic' ? '' : 'hidden'}`}>
+          <div className={`sticky-logo-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
             <a href="/">
               <img src={logo} alt={`${siteName} logo`} />
             </a>
           </div>
-          <div className={`stickyNav-homepage ${type === 'homepage-basic' || type === 'section-basic' ? '' : 'hidden'}`}>
+          <div className={`stickyNav-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
             {sections}
           </div>
           <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
