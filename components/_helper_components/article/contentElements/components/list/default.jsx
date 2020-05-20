@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SubList from '../list/default';
+import { safeHtml } from '../../../../global/utils/stringUtils';
 import './styles.scss';
 
 const List = (props) => {
@@ -12,8 +13,9 @@ const List = (props) => {
   if (!items.length) return null;
 
   const itemsOutput = () => items.map((e, i) => {
-    if (e.type === 'text') {
-      return <li key={`li-${i}`} dangerouslySetInnerHTML={{ __html: e.content }}></li>;
+    const { type, content } = e;
+    if (type === 'text') {
+      return <li key={`li-${i}`} dangerouslySetInnerHTML={{ __html: safeHtml(content) }}></li>;
     }
     // eslint-disable-next-line react/jsx-key
     return <SubList src={e} childList={true} key={i} />;
