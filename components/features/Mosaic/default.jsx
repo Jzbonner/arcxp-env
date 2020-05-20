@@ -21,13 +21,12 @@ const Mosaic = (customFields = {}) => {
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
 
   const {
-    customFields: {
-      content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
-      startIndex = 1,
-      itemLimit = 100,
-      title = '',
-    },
+    customFields: { content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {}, title = '' },
   } = customFields;
+
+  let { from: startIndex, size: itemLimit } = contentConfigValues || {};
+  startIndex = parseInt(startIndex, 10) - 1 || 0;
+  itemLimit = parseInt(itemLimit, 10) || 12;
 
   const data = useContent({
     source: contentService,
@@ -35,7 +34,7 @@ const Mosaic = (customFields = {}) => {
   });
 
   function patternMap(index, i) {
-    const patternSpot = (index + i - 1) % 6;
+    const patternSpot = (index + i) % 6;
     switch (patternSpot) {
       case 0:
         return 'size-2';
@@ -54,12 +53,12 @@ const Mosaic = (customFields = {}) => {
     }
   }
 
-  if (data) {
+  if (Array.isArray(data)) {
     return (
       <div className="c-mosaic">
         {title && <div className="title">{title}</div>}
         <div className="c-mosaic-box">
-          {data.content_elements.map((el, i) => {
+          {data.map((el, i) => {
             const {
               websites, headlines, label, taxonomy, publish_date: firstPublishDate, display_date: displayDate,
             } = el;
@@ -71,7 +70,7 @@ const Mosaic = (customFields = {}) => {
 
             const relativeURL = (websites && websites[arcSite] && websites[arcSite].website_url) || '/';
 
-            if (startIndex - 1 <= i && i < startIndex - 1 + itemLimit) {
+            if (startIndex <= i && i < startIndex + itemLimit) {
               return (
                 <div key={`Mosaic-${i}`} className={`mosaic-box ${patternMap(startIndex, i)}`}>
                   {/* the link is empty - 100% coverage of content via css - because sectionLabel outputs a link as well */}
@@ -107,14 +106,6 @@ Mosaic.propTypes = {
   customFields: PropTypes.shape({
     content: PropTypes.contentConfig('collections', 'query-feed').tag({
       name: 'Content',
-    }),
-    startIndex: PropTypes.number.tag({
-      name: 'Start Index',
-      defaultValue: 1,
-    }),
-    itemLimit: PropTypes.number.tag({
-      name: 'Item Limit',
-      defaultValue: 100,
     }),
     displayClass: PropTypes.oneOf(['Mosaic']).tag({
       name: 'Display Class',

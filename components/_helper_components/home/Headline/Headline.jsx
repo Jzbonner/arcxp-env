@@ -72,7 +72,7 @@ const Headline = ({
           </>
         )}
         <a href={`${contextPath}${relativeURL}`} className="headline">
-          {truncateHeadline(headlines.basic)}
+          {truncateHeadline(headlines && headlines.basic)}
         </a>
       </div>
     </div>

@@ -11,14 +11,13 @@ const List = (customFields = {}) => {
   const { arcSite = 'ajc', layout } = fusionContext;
   const {
     customFields: {
-      content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
-      displayClass = '',
-      startIndex = 1,
-      itemLimit = 100,
-      columns = 1,
-      title = '',
+      content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', columns = 1, title = '',
     },
   } = customFields;
+  let { from: startIndex, size: itemLimit } = contentConfigValues || {};
+  startIndex = parseInt(startIndex, 10) - 1 || 0;
+  itemLimit = parseInt(itemLimit, 10) || 12;
+
   const displayClassesRequiringImg = layout !== 'list-basic'
     ? ['Top Photo', '1 or 2 Item Feature', 'Left Photo'] : ['Top Photo', '1 or 2 Item Feature'];
 
@@ -51,13 +50,13 @@ const List = (customFields = {}) => {
     }
   }
 
-  if (data) {
+  if (Array.isArray(data)) {
     return (
       <div className="b-margin-bottom-d15-m10">
         {title && <div className="b-sectionTitle">{title}</div>}
         <div className={`c-homeListContainer ${getColumnsMap(columns)} ${getDisplayClassMap(displayClass)}`}>
-          {data.content_elements.map((el, i) => {
-            if (startIndex - 1 <= i && i < itemLimit + startIndex - 1) {
+          {data.map((el, i) => {
+            if (startIndex <= i && i < itemLimit + startIndex) {
               return <ListItem key={`ListItem-${i}`} {...el} />;
             }
             return null;
@@ -73,14 +72,6 @@ List.propTypes = {
   customFields: PropTypes.shape({
     content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
       name: 'Content',
-    }),
-    startIndex: PropTypes.number.tag({
-      name: 'Start Index',
-      defaultValue: 1,
-    }),
-    itemLimit: PropTypes.number.tag({
-      name: 'Item Limit',
-      defaultValue: 100,
     }),
     displayClass: PropTypes.oneOf(['Top Photo', 'Left Photo', 'No Photo', 'Link']).tag({
       name: 'Display Class',

@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
-import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
-import axios from 'axios';
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
+import GetCollectionData from './helper_functions/GetCollectionData';
 
 const schemaName = 'collections';
 const ttl = 120;
@@ -16,22 +15,12 @@ const params = {
 
 const fetch = (query) => {
   const {
-    arcSite = 'ajc', id, from, size, displayClass = '', displayClassesRequiringImg = [],
+    arcSite = 'ajc', id, from = 0, size = 10, displayClass = '', displayClassesRequiringImg = [],
   } = query;
 
-  let requestUri = `${CONTENT_BASE}/content/v4/collections/?website=${arcSite}`;
-  requestUri += id ? `&_id=${id}` : '';
-  requestUri += from ? `&from=${from}` : '';
-  requestUri += size ? `&size=${size}` : '';
-
   if (id) {
-    return axios
-      .get(requestUri, {
-        headers: {
-          Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
-        },
-      })
-      .then(({ data }) => AddFirstInlineImage(data, arcSite, displayClass, displayClassesRequiringImg))
+    return GetCollectionData(arcSite, id, size, from)
+      .then(data => AddFirstInlineImage(data, arcSite, displayClass, displayClassesRequiringImg))
       .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
       .catch((error) => {
         console.error(error);
