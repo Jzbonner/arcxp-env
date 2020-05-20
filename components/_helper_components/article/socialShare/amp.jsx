@@ -2,14 +2,23 @@ import React from 'react';
 import getProperties from 'fusion:properties';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import fetchEnv from '../../global/utils/environment';
 import getItemThumbNail from '../../../features/Slider/_helper_functions/getItemThumbnail';
 
 
-const SocialShare = ({ headlines, promoItems }) => {
+const SocialShare = ({ headlines, promoItems, articleURL }) => {
   const { basic: headline } = headlines || {};
   const { basic: basicItems } = promoItems || {};
   const { url: headlineImage } = basicItems || {};
-  const { facebookAppID } = getProperties();
+  const { facebookAppID, siteName } = getProperties();
+  let sharedUrl = articleURL;
+  let site = siteName.toLowerCase();
+  site = site.replace(/w/gi, '');
+  if (sharedUrl.indexOf('.com') === -1) {
+    const env = fetchEnv();
+    // we must fully-qualify the url for sharing
+    sharedUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${sharedUrl}`;
+  }
 
   const siteLogoData = useContent({
     source: 'site-api',
@@ -36,7 +45,6 @@ const SocialShare = ({ headlines, promoItems }) => {
     pinterestUrl = fetchedSiteLogo;
   }
 
-
   return (
     <div className="social-share-buttons b-margin-bottom-d40-m20">
         { facebookAppID
@@ -50,7 +58,9 @@ const SocialShare = ({ headlines, promoItems }) => {
           class="btn-twitter"
           type="twitter"
           width="35"
-          height="35"/>
+          height="35"
+          data-param-text={headline}
+          data-param-url={sharedUrl}/>
 
         <amp-social-share
           class="btn-pinterest"
@@ -65,6 +75,7 @@ const SocialShare = ({ headlines, promoItems }) => {
           type="email"
           width="35"
           height="35"
+          data-param-body={sharedUrl}
           data-param-subject={headline}/>
     </div>
   );
@@ -73,6 +84,7 @@ const SocialShare = ({ headlines, promoItems }) => {
 SocialShare.propTypes = {
   headlines: PropTypes.object,
   promoItems: PropTypes.object,
+  articleURL: PropTypes.string,
 };
 
 export default SocialShare;
