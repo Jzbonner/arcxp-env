@@ -32,7 +32,11 @@ const ListItem = ({
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
   const hyperlocalTags = getProperties().hyperlocalTags || [];
-  const isHyperlocalContent = checkTags(tags, hyperlocalTags);
+  const isHyperlocalContent = checkTags(
+    tags,
+    hyperlocalTags.filter(tag => tag !== 'community contributor'),
+  );
+  const isCommunityContributor = checkTags(tags, 'community contributor');
 
   const relativeURL = (websites && websites[sites] && websites[sites].website_url) || '/';
   const isListPage = listPage ? 'listPage' : '';
@@ -80,14 +84,16 @@ const ListItem = ({
     return null;
   };
 
+  console.log('LABEL: ', isHyperlocalContent);
+
   return (
     <div className={`c-homeList ${isListPage}`}>
       {getPromoItem()}
 
       <div className="homeList-text">
         <div className="c-label-wrapper">
-          {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} tease={true} />}
-          {!isHyperlocalContent && (
+          {isHyperlocalContent && isCommunityContributor && <ContributorBadge tags={tags} ampPage={ampPage} />}
+          {(!isHyperlocalContent || !isCommunityContributor) && (
             <>
               <SectionLabel label={label || {}} taxonomy={taxonomy} />
               <TimeStamp
