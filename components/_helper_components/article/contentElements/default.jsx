@@ -85,7 +85,9 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
                 || element.props.componentName === 'BlogAuthor'
                 || element.props.componentName === 'ConnextEndOfStory'
                 || element.props.componentName === 'ConnextInlinePromoSubscription'
-                || element.props.componentName === 'ConnextHyperLocalSubscription')
+                || element.props.componentName === 'ConnextHyperLocalSubscription'
+                || element.props.componentName === 'SponsorRelatedBox'
+              )
             ) {
               return element;
             }

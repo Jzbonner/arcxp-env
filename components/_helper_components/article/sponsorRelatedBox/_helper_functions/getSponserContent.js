@@ -18,6 +18,6 @@ export default function getSponserContent(limit, queryFeed, siteData = {}) {
 
     return null;
   });
-
+  console.log('data', data);
   return data;
 }

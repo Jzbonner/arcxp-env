@@ -4,7 +4,10 @@ import { useContent } from 'fusion:content';
 // import getProperties from 'fusion:properties';
 import mapTagStrings from './_helper_functions/mapTagStrings';
 import getSponsorContent from './_helper_functions/getSponserContent';
+import ArcAd from '../../../features/ads/default';
 import './default.scss';
+
+const SP01 = () => <ArcAd staticSlot={'SP01'} key={'SP01'} />;
 
 const SponsorRelatedBox = ({ taxonomy }) => {
   const { sections: articleSections, tags } = taxonomy || {};
@@ -38,6 +41,7 @@ const SponsorRelatedBox = ({ taxonomy }) => {
     sponsor_related_box_include_tags: includeTags,
     sponsor_related_box_must_include_all_tags: includeAllTags,
     sponsor_related_box_title: boxTitle,
+    disable_advertiser_content_label: disableAd,
   } = Sponsor;
 
   console.log('tags', excludeTags, includeTags, includeAllTags);
@@ -47,7 +51,7 @@ const SponsorRelatedBox = ({ taxonomy }) => {
     source: 'query-feed',
     query: {
       includeTags: `${sponsorTags}`,
-      // mustIncludeAllTags: '',
+      mustIncludeAllTags: `${includeAllTags}`,
       excludeTags: `${excludeTags || ''}`,
     },
   });
@@ -59,19 +63,22 @@ const SponsorRelatedBox = ({ taxonomy }) => {
   const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor);
   console.log('mapped sponsor content', boxContent);
 
+  console.log('disable ad?', typeof disableAd);
+
   if (boxContent) {
     return (
       <div className={'c-sponsor-box'}>
         {boxTitle && <div className={'sponsor-header'}>
-            {boxTitle}
+          <h1>{`More from ${boxTitle}`}</h1>
         </div>}
+        {disableAd === 'false' ? <div className='sponsor-ad'>{SP01()}</div> : null}
         <ul className={'sponsor-content'}>
           {boxContent.map((el) => {
             if (el && el.url && el.headline) {
               return (
                 <li className="sponsor-item">
                   <a href={el.url}>
-                    <h3>{el.headline}</h3>
+                    <h2>{el.headline}</h2>
                   </a>
                 </li>
               );
@@ -88,6 +95,10 @@ const SponsorRelatedBox = ({ taxonomy }) => {
 
 SponsorRelatedBox.propTypes = {
   taxonomy: PropTypes.object,
+};
+
+SponsorRelatedBox.defaultProps = {
+  componentName: 'SponsorRelatedBox',
 };
 
 export default SponsorRelatedBox;

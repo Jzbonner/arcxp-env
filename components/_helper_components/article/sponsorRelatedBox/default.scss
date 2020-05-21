@@ -9,22 +9,47 @@
   .sponsor-header {
     border-bottom: solid 1px #cdcdcd;
     padding: 1.2em 0 1.2em 1.0625em;
-    display: flex;
+    margin-bottom: .35rem;
+
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      color: #313132;
+      letter-spacing: normal;
+      width: auto;
+      line-height: normal;
+    }
+  }
+
+  .sponsor-ad .arc_ad .arcad {
+    margin-bottom: 1.2rem;
+
+    &:not(:empty):before {
+      content: "";
+    }
   }
 
   .sponsor-content {
     display: flex;
     flex-direction: column;
+    list-style-type: none;
 
     .sponsor-item {
       width: 100%;
       position: relative;
       font-family: "Average", "Georgia", serif;
+      margin-bottom: 1.2rem;
 
       a {
         color: #000;
         text-decoration: none;
         line-height: 1.15;
+
+        h2 {
+          line-height: 1.15;
+          font-size: 1.25rem;
+          font-family: "Average", "Georgia", serif;
+        }
       }
 
       &:before {
@@ -35,10 +60,8 @@
         width: 50px;
         height: 5px;
         font-size: 11px;
-        margin: 0;
-        position: absolute;
-        left: 0;
-        top: -8px;
+        margin-top: .7rem;
+        margin-bottom: .2rem;
       }
     }
   }

@@ -118,13 +118,16 @@ const StoryPageLayout = () => {
     }
     return null;
   });
-
+  console.log('taxonomy', taxonomy);
   if (infoBoxIndex !== null && !ampPage) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
-    filteredContentElements.splice(infoBoxIndex, 0, <ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
+    filteredContentElements.splice(infoBoxIndex, 0,
+    <ConnextHyperLocalSubscription />,
+    <ConnextEndOfStory />,
+    <SponsorRelatedBox taxonomy={taxonomy} />);
     infoBoxIndex += 1;
   } else if (!ampPage) {
-    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
+    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />, <SponsorRelatedBox taxonomy={taxonomy} />);
   }
   // about the author should be the last component of the story
   insertAtEndOfStory.push(BlogAuthorComponent);
@@ -227,7 +230,6 @@ const StoryPageLayout = () => {
           {(!basicItems || promoType !== 'gallery') && !ampPage ? (
             <Gallery contentElements={filteredContentElements} pageType={subtype} />
           ) : null}
-          {<SponsorRelatedBox taxonomy={taxonomy} />}
           {!isHyperlocalContent && (
             <TaboolaFeed ampPage={ampPage} />
           )}
