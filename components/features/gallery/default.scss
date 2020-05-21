@@ -4,6 +4,11 @@
   position: relative;
   display: flex;
   height: 480px;
+  visibility: hidden;
+
+  &.is-Visible {
+    visibility: visible;
+  }
 }
 
 .gallery-wrapper {
