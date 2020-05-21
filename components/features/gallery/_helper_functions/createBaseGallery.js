@@ -20,7 +20,7 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
       let isNext = false;
       let functionToPass = null;
       const {
-        url, copyright, caption, alt, credits, width,
+        url, copyright, caption, alt, credits, width, height,
       } = element || {};
       const { affiliation, by } = credits || {};
 
@@ -35,6 +35,7 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
         alt,
         by,
         width,
+        height,
         index: i,
         lastItemClass,
         id: `gallery-item-${i}`,
