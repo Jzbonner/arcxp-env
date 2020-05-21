@@ -4,7 +4,7 @@ import { useContent } from 'fusion:content';
 // import getProperties from 'fusion:properties';
 import mapTagStrings from './_helper_functions/mapTagStrings';
 import getSponsorContent from './_helper_functions/getSponserContent';
-// import './default.scss';
+import './default.scss';
 
 const SponsorRelatedBox = ({ taxonomy }) => {
   const { sections: articleSections, tags } = taxonomy || {};
@@ -25,46 +25,63 @@ const SponsorRelatedBox = ({ taxonomy }) => {
   console.log('sponsorTags', sponsorTags);
   console.log('sponsor section', sponsorSection);
 
-  const feed = useContent({
-    source: 'query-feed',
-    query: { includeTags: `${sponsorTags}` },
-  });
 
   const siteData = useContent({
     source: 'site-api',
-    query: { section: sponsorSection[0].path || null },
+    query: { section: (sponsorSection && sponsorSection[0] && sponsorSection[0].path) || null },
+  });
+
+  const { Sponsor = {} } = siteData;
+
+  const {
+    sponsor_related_box_exclude_tags: excludeTags,
+    sponsor_related_box_include_tags: includeTags,
+    sponsor_related_box_must_include_all_tags: includeAllTags,
+    sponsor_related_box_title: boxTitle,
+  } = Sponsor;
+
+  console.log('tags', excludeTags, includeTags, includeAllTags);
+
+
+  const feed = useContent({
+    source: 'query-feed',
+    query: {
+      includeTags: `${sponsorTags}`,
+      // mustIncludeAllTags: '',
+      excludeTags: `${excludeTags || ''}`,
+    },
   });
 
   console.log('site', siteData);
 
   console.log('tags return from useContent', feed);
 
-  const boxContent = getSponsorContent(5, feed, siteData.Sponsor);
+  const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor);
   console.log('mapped sponsor content', boxContent);
 
   if (boxContent) {
     return (
       <div className={'c-sponsor-box'}>
-        <div className={'sponsor-header'}>
-
-        </div>
-        <div className={'sponsor-content'}>
-
-        </div>
+        {boxTitle && <div className={'sponsor-header'}>
+            {boxTitle}
+        </div>}
+        <ul className={'sponsor-content'}>
+          {boxContent.map((el) => {
+            if (el && el.url && el.headline) {
+              return (
+                <li className="sponsor-item">
+                  <a href={el.url}>
+                    <h3>{el.headline}</h3>
+                  </a>
+                </li>
+              );
+            }
+            return null;
+          })}
+        </ul>
       </div>
     );
   }
-  /*
-    if (data && data.Sponsor) {
-      const { sponsor_desktop_banner: desktopBanner, sponsor_mobile_banner: mobileBanner, sponsor_url: bannerURL } = data && data.Sponsor;
-
-      if (desktopBanner) {
-        return (
-          <div></div>
-        );
-      }
-    } */
-
 
   return null;
 };

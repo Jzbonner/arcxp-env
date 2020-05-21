@@ -1,10 +1,11 @@
 export default function getSponserContent(limit, queryFeed, siteData = {}) {
   const { sponsor_url: sponsorUrl, sponsor_related_box_title: sponsorTitle } = siteData;
+  if (!queryFeed) return null;
   console.log('func site data', siteData);
   const data = queryFeed.content_elements.map((el, i) => {
-    if (i <= limit) {
+    if (i < limit) {
       const temp = {};
-      if (sponsorTitle && sponsorUrl && i === limit) {
+      if (sponsorTitle && sponsorUrl && i === limit - 1) {
         temp.url = sponsorUrl || null;
         temp.headline = sponsorTitle || null;
       } else {
