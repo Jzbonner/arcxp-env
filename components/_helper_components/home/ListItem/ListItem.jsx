@@ -84,8 +84,6 @@ const ListItem = ({
     return null;
   };
 
-  console.log('LABEL: ', isHyperlocalContent);
-
   return (
     <div className={`c-homeList ${isListPage}`}>
       {getPromoItem()}
