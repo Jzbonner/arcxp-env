@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
+import { CONTENT_BASE } from 'fusion:environment';
 
 @Consumer
 class Api {
@@ -28,25 +29,33 @@ class Api {
     if (data) {
       const { data: arrayData } = data;
 
-      const formatedForXml = arrayData.map((item) => {
+      return arrayData.map((item) => {
         const {
           content_elements: contentElements = [],
           canonical_url: canonicalUrl,
           _id: guid,
-          type = '',
           headlines,
           first_publish_date,
           description,
-          credits = {},
+          credits,
         } = item || {};
 
-        const xmlObject = {};
+        const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
+        const author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
+        const formattedDescription = description && description.basic ? `<![CDATA[${description.basic}]]>` : '';
 
+        const xmlObject = {
+          item: {
+            guid: `urn:uuid:${guid}`,
+            link: `${CONTENT_BASE}${canonicalUrl}`,
+            description: formattedDescription,
+            title,
+            author,
+          },
+        };
 
         return xmlObject;
       });
-
-      return formatedForXml;
     }
 
     return [];

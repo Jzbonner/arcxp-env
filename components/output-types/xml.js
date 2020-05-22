@@ -1,5 +1,4 @@
 /* /components/output-types/xml.js */
-
 import { toXML } from 'jstoxml';
 
 const Xml = ({ children }) => {
@@ -22,7 +21,7 @@ const Xml = ({ children }) => {
           title: 'RSS FEED',
         },
         {
-          'atom:link': 'We need to get the link here',
+          link: `${'need to get website url'}/common/feeds/${'need_to_get_id_here?'}`,
         },
         {
           description: 'Description',
@@ -30,15 +29,17 @@ const Xml = ({ children }) => {
         {
           language: 'en-us',
         },
-
         {
-          item: [{
-            title: 'Item title',
-            link: 'Item link',
-            description: 'Item Description',
-            pubDate: () => new Date(),
-          }] || children[0],
+          _name: 'atom:link',
+          _attrs: {
+            href: `${'need to get website url'}/common/feeds/${'need_to_get_id_here?'}`,
+            rel: 'self',
+          },
         },
+        {
+          lastBuildDate: () => new Date(),
+        },
+        Array.isArray(children) ? children[0] : [],
       ],
     },
   }, xmlOptions);
