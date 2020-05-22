@@ -65,6 +65,8 @@ const SponsorRelatedBox = ({ taxonomy }) => {
 
   console.log('disable ad?', typeof disableAd);
 
+  if (boxContent && boxContent.length < 1) return null;
+
   if (boxContent) {
     return (
       <div className={'c-sponsor-box'}>

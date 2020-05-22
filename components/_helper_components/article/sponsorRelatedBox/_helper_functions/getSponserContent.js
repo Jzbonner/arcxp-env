@@ -1,19 +1,20 @@
 export default function getSponserContent(limit, queryFeed, siteData = {}) {
   const { sponsor_url: sponsorUrl, sponsor_related_box_title: sponsorTitle } = siteData;
   if (!queryFeed) return null;
-  console.log('func site data', siteData);
-  const data = queryFeed.content_elements.map((el, i) => {
+  const data = [];
+
+  queryFeed.content_elements.forEach((el, i) => {
     if (i < limit) {
       const temp = {};
       if (sponsorTitle && sponsorUrl && i === limit - 1) {
         temp.url = sponsorUrl || null;
         temp.headline = sponsorTitle || null;
-      } else {
-        temp.url = el.canonical_url ? el.canonical_url : null;
-        temp.headline = el.headlines && el.headlines.basic ? el.headlines.basic : null;
+      } else if (el.canonical_url && (el.headlines && el.headlines.basic)) {
+        temp.url = el.canonical_url;
+        temp.headline = el.headlines.basic;
       }
 
-      return temp;
+      if (temp.url && temp.headline) return data.push(temp);
     }
 
     return null;
