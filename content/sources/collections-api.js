@@ -15,7 +15,7 @@ const params = {
 
 const fetch = (query) => {
   const {
-    arcSite = 'ajc', id, from = 0, size = 10, displayClass = '', displayClassesRequiringImg = [],
+    arcSite = 'ajc', id, from = 0, size = 12, displayClass = '', displayClassesRequiringImg = [],
   } = query;
 
   if (id) {

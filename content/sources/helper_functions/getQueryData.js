@@ -1,8 +1,8 @@
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 
-export default (arcSite, id, size = 20, from = 0) => {
-  if (!arcSite || !id) {
+export default (arcSite, newBody, from = 0, size = 100) => {
+  if (!arcSite || !newBody) {
     return null;
   }
 
@@ -12,18 +12,17 @@ export default (arcSite, id, size = 20, from = 0) => {
   const promiseArray = [];
   const contentElements = [];
 
-  const buffer = 3;
-  const fetchSize = 20;
+  const buffer = 0;
+  const fetchSize = 100;
   const numberOfFetches = fromInt + sizeInt + buffer <= fetchSize ? 1 : Math.ceil((fromInt + sizeInt + buffer) / fetchSize);
 
   let fetchStart = 0;
   let i = 1;
 
   while (i <= numberOfFetches && i < 10) {
-    let requestUri = `${CONTENT_BASE}/content/v4/collections/?website=${arcSite}`;
-    requestUri += `&_id=${id}`;
+    let requestUri = `${CONTENT_BASE}/content/v4/search/published?body=${newBody}&website=${arcSite}`;
     requestUri += `&from=${fetchStart}`;
-    requestUri += '&size=20';
+    requestUri += `&size=${fetchSize}`;
 
     const promise = axios
       .get(requestUri, {
