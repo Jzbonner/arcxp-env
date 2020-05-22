@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 
+const schemaName = 'collections';
 const ttl = 120;
 const params = {
   id: 'text',
@@ -53,4 +54,5 @@ export default {
   fetch,
   params,
   ttl,
+  schemaName,
 };

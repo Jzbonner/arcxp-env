@@ -1,17 +1,47 @@
 /* /components/output-types/xml.js */
 
-import xmlbuilder from 'xmlbuilder';
+import { toXML } from 'jstoxml';
 
 const Xml = ({ children }) => {
-  // Only return the data from the first child.
-  console.log('carlos children from output type', children);
-  return xmlbuilder.create({
-    service: children[0] || '',
-  }, {
-    separateArrayItems: true,
-  }).end({
-    pretty: true,
-  });
+  const xmlOptions = {
+    header: true,
+    indent: '  ',
+  };
+
+  return toXML({
+    _name: 'rss',
+    _attrs: {
+      'xmlns:content': 'http://purl.org/rss/1.0/modules/content/',
+      'xmlns:media': 'http://search.yahoo.com/mrss/',
+      'xmlns:atom': 'http://www.w3.org/2005/Atom',
+      version: '2.0',
+    },
+    _content: {
+      channel: [
+        {
+          title: 'RSS FEED',
+        },
+        {
+          'atom:link': 'We need to get the link here',
+        },
+        {
+          description: 'Description',
+        },
+        {
+          language: 'en-us',
+        },
+
+        {
+          item: [{
+            title: 'Item title',
+            link: 'Item link',
+            description: 'Item Description',
+            pubDate: () => new Date(),
+          }] || children[0],
+        },
+      ],
+    },
+  }, xmlOptions);
 };
 
 // XML content type

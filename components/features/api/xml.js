@@ -28,12 +28,28 @@ class Api {
     if (data) {
       const { data: arrayData } = data;
 
-      return {
-        ...arrayData,
-      };
+      const formatedForXml = arrayData.map((item) => {
+        const {
+          content_elements: contentElements = [],
+          canonical_url: canonicalUrl,
+          _id: guid,
+          type = '',
+          headlines,
+          first_publish_date,
+          description,
+          credits = {},
+        } = item || {};
+
+        const xmlObject = {};
+
+
+        return xmlObject;
+      });
+
+      return formatedForXml;
     }
 
-    return ['no data'];
+    return [];
   }
 }
 

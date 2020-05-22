@@ -216,9 +216,8 @@
     "arcads": "^1.6.0",
     "axios": "^0.19.2",
     "bodybuilder": "^2.2.21",
-    "lodash": "^4.17.15",
+    "jstoxml": "^1.6.7",
     "sanitize-html": "^1.23.0",
-    "thumbor-lite": "^0.1.8",
-    "xmlbuilder": "^15.1.1"
+    "thumbor-lite": "^0.1.8"
   }
 }
