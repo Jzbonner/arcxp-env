@@ -23,6 +23,6 @@ export default function getSponserContent(limit, queryFeed, siteData = {}, refId
 
     return null;
   });
-  console.log('data', data);
+
   return data;
 }

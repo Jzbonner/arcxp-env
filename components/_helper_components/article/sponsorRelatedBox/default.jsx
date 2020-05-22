@@ -16,18 +16,12 @@ const SponsorRelatedBox = ({ taxonomy, uuid }) => {
 
   if (primarySection) {
     sponsorSection = primarySection.path && primarySection.path.includes('/sponsor/') ? primarySection.path : null;
-    console.log('primarySection', sponsorSection);
   }
   if (!sponsorSection) {
-    console.log('not a sponsor article');
     return null;
   }
 
   sponsorTags = tags && tags.length >= 1 ? mapTagStrings([...tags]) : null;
-
-  console.log('sponsorTags', sponsorTags);
-  console.log('sponsor section', sponsorSection);
-
 
   const siteData = useContent({
     source: 'site-api',
@@ -52,23 +46,15 @@ const SponsorRelatedBox = ({ taxonomy, uuid }) => {
   const feed = useContent({
     source: 'query-feed',
     query: {
-      includeTags: `${sponsorTags}`,
+      includeTags: `${sponsorTags} ${includeTags}`,
       mustIncludeAllTags: `${includeAllTags}`,
       excludeTags: `${excludeTags}`,
     },
   });
 
-  console.log('site', siteData);
-
-  console.log('tags return from useContent', feed);
-
   const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor, uuid);
 
   if (!boxContent || (boxContent && boxContent.length < 1)) return null;
-  console.log('id', uuid);
-  console.log('mapped sponsor content', boxContent);
-
-  console.log('disable ad?', typeof disableAd);
 
   if (boxContent) {
     return (
