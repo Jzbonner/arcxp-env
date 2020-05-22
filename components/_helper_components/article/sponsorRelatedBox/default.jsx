@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-// import getProperties from 'fusion:properties';
 import mapTagStrings from './_helper_functions/mapTagStrings';
 import getSponsorContent from './_helper_functions/getSponserContent';
 import ArcAd from '../../../features/ads/default';
@@ -34,19 +33,16 @@ const SponsorRelatedBox = ({ taxonomy, uuid }) => {
 
   const {
     sponsor_related_box_exclude_tags: excludeTags,
-    sponsor_related_box_include_tags: includeTags,
+    // sponsor_related_box_include_tags: includeTags,
     sponsor_related_box_must_include_all_tags: includeAllTags,
     sponsor_related_box_title: boxTitle,
     disable_advertiser_content_label: disableAd,
   } = Sponsor;
 
-  console.log('tags', excludeTags, includeTags, includeAllTags);
-
-
   const feed = useContent({
     source: 'query-feed',
     query: {
-      includeTags: `${sponsorTags} ${includeTags}`,
+      includeTags: `${sponsorTags}`,
       mustIncludeAllTags: `${includeAllTags}`,
       excludeTags: `${excludeTags}`,
     },
