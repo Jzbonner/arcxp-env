@@ -118,7 +118,7 @@ const StoryPageLayout = () => {
     }
     return null;
   });
-  console.log('taxonomy', taxonomy);
+
   if (infoBoxIndex !== null && !ampPage) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
     filteredContentElements.splice(infoBoxIndex, 0,

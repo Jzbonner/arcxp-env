@@ -64,7 +64,7 @@ const Section = ({
     });
   }
 
-  console.log('new content elements', newContentElements);
+
   if (newContentElements.length > 0) {
     return (
       <div className={
