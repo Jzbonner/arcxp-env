@@ -7,7 +7,7 @@ import ImageSimple from '../imageSimple/default';
 import './default.scss';
 
 const ContributorBadge = ({
-  tags, ampPage, useWhiteLogos, staffBio, tease,
+  tags, ampPage, useWhiteLogos, staffBio,
 }) => {
   const { contextPath } = useAppContext();
 
@@ -54,19 +54,17 @@ const ContributorBadge = ({
     }
   }
   if (checkTags(tags, 'community contributor')) {
-    if (!tease || (tease && getContributorProps().type !== 'default')) {
-      return (
-        <a href={`${contextPath}${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
-          <ImageSimple
-            src={getContributorProps().image}
-            ampPage={ampPage}
-            alt="Contributor Badge Logo"
-            ampMobileHeight="54px"
-            ampMobileMinWidth="300px"
-          />
-        </a>
-      );
-    }
+    return (
+      <a href={`${contextPath}${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
+        <ImageSimple
+          src={getContributorProps().image}
+          ampPage={ampPage}
+          alt="Contributor Badge Logo"
+          ampMobileHeight="54px"
+          ampMobileMinWidth="300px"
+        />
+      </a>
+    );
   }
   return null;
 };
