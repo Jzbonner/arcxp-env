@@ -1,4 +1,7 @@
 export default function (headline) {
+  if (!headline) {
+    return null;
+  }
   if (headline.length > 72) {
     let newHeadline = '';
     headline.split(' ').forEach((word) => {
