@@ -16,7 +16,7 @@ const ListItem = ({
   taxonomy,
   publish_date: publishDate,
   display_date: displayDate,
-  headlines,
+  headlines = [],
   websites,
   listPage,
   type: contentType,
@@ -40,7 +40,7 @@ const ListItem = ({
   const getPromoItem = () => {
     // standalone video/gallery
     if (contentType === 'video' || contentType === 'gallery') {
-      if (promoItems.basic) {
+      if (promoItems && promoItems.basic) {
         return (
           <a href={`${contextPath}${relativeURL}`} className="homeList-image">
             <Image src={promoItems.basic} width={1066} height={600} imageType="isHomepageImage" teaseContentType={contentType} />

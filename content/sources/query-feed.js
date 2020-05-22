@@ -1,13 +1,16 @@
 /* eslint-disable no-console */
-import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
-import axios from 'axios';
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
+import getQueryData from './helper_functions/getQueryData';
 
 const schemaName = 'query-feed';
 const bodybuilder = require('bodybuilder');
 
+const ttl = 120;
+
 const params = {
+  from: 'number',
+  size: 'number',
   includeDistributor: 'text',
   includeContentTypes: 'text',
   includeSections: 'text',
@@ -37,6 +40,8 @@ const fetch = (query) => {
     includeSubtypes = '',
     excludeSubtypes = '',
     arcSite = 'ajc',
+    from = 0,
+    size = 100,
     displayClass = '',
     displayClassesRequiringImg = [],
   } = query;
@@ -91,15 +96,9 @@ const fetch = (query) => {
   }
   const body = builder.build();
   const newBody = JSON.stringify(body);
-  const requestUri = `${CONTENT_BASE}/content/v4/search/published?body=${newBody}&website=ajc`;
 
-  return axios
-    .get(requestUri, {
-      headers: {
-        Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
-      },
-    })
-    .then(({ data }) => AddFirstInlineImage(data, arcSite, displayClass, displayClassesRequiringImg))
+  return getQueryData(arcSite, newBody, from, size)
+    .then(data => AddFirstInlineImage(data, arcSite, displayClass, displayClassesRequiringImg))
     .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
     .catch((error) => {
       console.error(error);
@@ -110,4 +109,5 @@ export default {
   schemaName,
   fetch,
   params,
+  ttl,
 };
