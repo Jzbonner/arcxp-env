@@ -1,23 +1,32 @@
-@import "../../../../src/styles/base/fonts";
+@import "../../../../src/styles/base";
 
 .c-sponsor-box {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100vw - 50px);
   height: auto;
+
+  @include breakpoint(tablet) {
+    width: calc(100vw - 100px);
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: 100%;
+  }
 
   .sponsor-header {
     border-bottom: solid 1px #cdcdcd;
-    padding: 1.2em 0 1.2em 1.0625em;
+    padding: 1.2em 0;
     margin-bottom: .35rem;
 
     h1 {
-      font-size: 2.5rem;
       text-align: center;
       color: #313132;
-      letter-spacing: normal;
       width: auto;
       line-height: normal;
+      letter-spacing: -.5px;
+
+      @include text-styles(2.5rem, 1.44, "Average");
     }
   }
 
@@ -37,7 +46,6 @@
     .sponsor-item {
       width: 100%;
       position: relative;
-      font-family: "Average", "Georgia", serif;
       margin-bottom: 1.2rem;
 
       a {
@@ -47,8 +55,12 @@
 
         h2 {
           line-height: 1.15;
-          font-size: 1.25rem;
-          font-family: "Average", "Georgia", serif;
+
+          @include text-styles(1.25rem, 1.44, "Average");
+
+          @include breakpoint(desktop-sm) {
+            @include text-styles(1.25em, 1.25, "Average");
+          }
         }
       }
 

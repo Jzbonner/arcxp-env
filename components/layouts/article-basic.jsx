@@ -123,14 +123,17 @@ const StoryPageLayout = () => {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
     filteredContentElements.splice(infoBoxIndex, 0,
     <ConnextHyperLocalSubscription />,
-    <ConnextEndOfStory />,
-    <SponsorRelatedBox taxonomy={taxonomy} />);
+    <ConnextEndOfStory />);
     infoBoxIndex += 1;
   } else if (!ampPage) {
-    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />, <SponsorRelatedBox taxonomy={taxonomy} />);
+    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />,
+    <ConnextEndOfStory />);
   }
   // about the author should be the last component of the story
   insertAtEndOfStory.push(BlogAuthorComponent);
+  // sponsor box should appear right after blog author component
+  insertAtEndOfStory.push(<SponsorRelatedBox taxonomy={taxonomy} uuid={uuid} />);
+
 
   return (
     <>

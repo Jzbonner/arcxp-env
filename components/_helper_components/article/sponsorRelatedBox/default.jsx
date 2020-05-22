@@ -9,14 +9,14 @@ import './default.scss';
 
 const SP01 = () => <ArcAd staticSlot={'SP01'} key={'SP01'} />;
 
-const SponsorRelatedBox = ({ taxonomy }) => {
-  const { sections: articleSections, tags } = taxonomy || {};
-  let sponsorSection;
+const SponsorRelatedBox = ({ taxonomy, uuid }) => {
+  const { primary_section: primarySection, tags } = taxonomy || {};
+  let sponsorSection = null;
   let sponsorTags = null;
 
-  if (articleSections) {
-    sponsorSection = articleSections.filter(section => section && section.path && section.path.includes('/sponsor/'));
-    console.log('articleSections', sponsorSection);
+  if (primarySection) {
+    sponsorSection = primarySection.path && primarySection.path.includes('/sponsor/') ? primarySection.path : null;
+    console.log('primarySection', sponsorSection);
   }
   if (!sponsorSection) {
     console.log('not a sponsor article');
@@ -31,8 +31,10 @@ const SponsorRelatedBox = ({ taxonomy }) => {
 
   const siteData = useContent({
     source: 'site-api',
-    query: { section: (sponsorSection && sponsorSection[0] && sponsorSection[0].path) || null },
+    query: { section: sponsorSection || null },
   });
+
+  if (!siteData) return null;
 
   const { Sponsor = {} } = siteData;
 
@@ -52,7 +54,7 @@ const SponsorRelatedBox = ({ taxonomy }) => {
     query: {
       includeTags: `${sponsorTags}`,
       mustIncludeAllTags: `${includeAllTags}`,
-      excludeTags: `${excludeTags || ''}`,
+      excludeTags: `${excludeTags}`,
     },
   });
 
@@ -60,12 +62,13 @@ const SponsorRelatedBox = ({ taxonomy }) => {
 
   console.log('tags return from useContent', feed);
 
-  const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor);
+  const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor, uuid);
+
+  if (!boxContent || (boxContent && boxContent.length < 1)) return null;
+  console.log('id', uuid);
   console.log('mapped sponsor content', boxContent);
 
   console.log('disable ad?', typeof disableAd);
-
-  if (boxContent && boxContent.length < 1) return null;
 
   if (boxContent) {
     return (
@@ -97,6 +100,7 @@ const SponsorRelatedBox = ({ taxonomy }) => {
 
 SponsorRelatedBox.propTypes = {
   taxonomy: PropTypes.object,
+  uuid: PropTypes.string,
 };
 
 SponsorRelatedBox.defaultProps = {
