@@ -1,6 +1,9 @@
 export default function filterDuplicateStory(baseElements, refId) {
-  return baseElements.map((el) => {
-    if (el.id === refId) return null;
-    return el;
+  const newBaseElements = [...baseElements];
+
+  baseElements.forEach((el, i) => {
+    if (el._id === refId) newBaseElements.splice(i, 1);
   });
+
+  return newBaseElements;
 }

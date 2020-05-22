@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import mapTagStrings from './_helper_functions/mapTagStrings';
 import getSponsorContent from './_helper_functions/getSponserContent';
 import ArcAd from '../../../features/ads/default';
 import './default.scss';
@@ -9,9 +8,8 @@ import './default.scss';
 const SP01 = () => <ArcAd staticSlot={'SP01'} key={'SP01'} />;
 
 const SponsorRelatedBox = ({ taxonomy, uuid }) => {
-  const { primary_section: primarySection, tags } = taxonomy || {};
+  const { primary_section: primarySection } = taxonomy || {};
   let sponsorSection = null;
-  let sponsorTags = null;
 
   if (primarySection) {
     sponsorSection = primarySection.path && primarySection.path.includes('/sponsor/') ? primarySection.path : null;
@@ -19,8 +17,6 @@ const SponsorRelatedBox = ({ taxonomy, uuid }) => {
   if (!sponsorSection) {
     return null;
   }
-
-  sponsorTags = tags && tags.length >= 1 ? mapTagStrings([...tags]) : null;
 
   const siteData = useContent({
     source: 'site-api',
@@ -33,7 +29,7 @@ const SponsorRelatedBox = ({ taxonomy, uuid }) => {
 
   const {
     sponsor_related_box_exclude_tags: excludeTags,
-    // sponsor_related_box_include_tags: includeTags,
+    sponsor_related_box_include_tags: includeTags,
     sponsor_related_box_must_include_all_tags: includeAllTags,
     sponsor_related_box_title: boxTitle,
     disable_advertiser_content_label: disableAd,
@@ -42,7 +38,7 @@ const SponsorRelatedBox = ({ taxonomy, uuid }) => {
   const feed = useContent({
     source: 'query-feed',
     query: {
-      includeTags: `${sponsorTags}`,
+      includeTags: `${includeTags}`,
       mustIncludeAllTags: `${includeAllTags}`,
       excludeTags: `${excludeTags}`,
     },
