@@ -91,6 +91,7 @@ ArcAd.propTypes = {
       '',
       'HP01',
       'HP02',
+      'HP05',
       'HS02',
       'MP01',
       'MP02',
