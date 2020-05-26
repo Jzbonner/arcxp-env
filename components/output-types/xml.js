@@ -7,6 +7,10 @@ const Xml = ({ children }) => {
     indent: '  ',
   };
 
+  // how am I going to fetch the feed here?
+  // The examples have the feed id tied to the feature? maybe a resolver?
+  // I need the description, link, and last build date.
+
   return toXML({
     _name: 'rss',
     _attrs: {

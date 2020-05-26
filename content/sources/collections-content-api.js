@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 
