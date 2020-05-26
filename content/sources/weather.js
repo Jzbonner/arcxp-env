@@ -12,12 +12,12 @@ const fetch = (query) => {
   return axios
     .get(weatherAPIlink, {
       headers: {
-        Authorization: `x-api-key ${weatherAlertsAPIkey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Api-Key': `${weatherAlertsAPIkey}`,
       },
     })
-    .then((res) => {
-      console.log('SOURCE RESPONSE', res);
-    })
+    .then(({ data }) => data)
     .catch((error) => {
       console.error(error);
     });
