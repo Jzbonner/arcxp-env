@@ -168,7 +168,12 @@
 .column-2 .home-headline .c-image-component .image-component-image .c-tease-icon {
   right: 5%;
 
+  @include breakpoint(tablet) {
+    margin-bottom: 1.25rem;
+  }
+
   @include breakpoint(desktop-sm) {
+    margin-bottom: 0;
     bottom: 15%;
   }
 }
