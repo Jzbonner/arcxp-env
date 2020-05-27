@@ -33,6 +33,7 @@ import checkTags from './_helper_functions/checkTags';
 import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
 import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
+import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -121,13 +122,19 @@ const StoryPageLayout = () => {
 
   if (infoBoxIndex !== null && !ampPage) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
-    filteredContentElements.splice(infoBoxIndex, 0, <ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
+    filteredContentElements.splice(infoBoxIndex, 0,
+    <ConnextHyperLocalSubscription />,
+    <ConnextEndOfStory />);
     infoBoxIndex += 1;
   } else if (!ampPage) {
-    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
+    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />,
+    <ConnextEndOfStory />);
   }
   // about the author should be the last component of the story
   insertAtEndOfStory.push(BlogAuthorComponent);
+  // sponsor box should appear right after blog author component
+  insertAtEndOfStory.push(<SponsorRelatedBox taxonomy={taxonomy} uuid={uuid} />);
+
 
   return (
     <>
