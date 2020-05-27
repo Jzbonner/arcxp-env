@@ -3,46 +3,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SubList from '../list/default';
+import { safeHtml } from '../../../../global/utils/stringUtils';
 import './styles.scss';
 
 const List = (props) => {
   const { src = {}, childList = false } = props;
   const { items = [], list_type: listType } = src;
+  const isUnorderedList = listType === 'unordered';
   if (!items.length) return null;
 
-  if (props.src.list_type === 'unordered') {
-    return (
-      <div className={`list ${childList ? null : 'b-margin-bottom-d40-m20'}`}>
-        <ul>
-          {props.src.items.map((e, i) => {
-            if (e.type === 'text') {
-              return <li key={`li-${i}`}>{e.content}</li>;
-            }
-            // eslint-disable-next-line react/jsx-key
-            return <SubList src={e} childList={true} key={i} />;
-          })}
-        </ul>
-      </div>
+  const itemsOutput = () => items.map((e, i) => {
+    const { type, content } = e;
+    if (type === 'text') {
+      return <li key={`li-${i}`} dangerouslySetInnerHTML={{ __html: safeHtml(content) }}></li>;
+    }
+    // eslint-disable-next-line react/jsx-key
+    return <SubList src={e} childList={true} key={i} />;
+  });
 
-    );
-  }
-  if (listType === 'ordered') {
-    return (
-      <div className={`list ${childList ? null : 'b-margin-bottom-d40-m20'}`}>
-        <ol>
-          {props.src.items.map((e, i) => {
-            if (e.type === 'text') {
-              return <li key={`li-${i}`}>{e.content}</li>;
-            }
-            // eslint-disable-next-line react/jsx-key
-            return <SubList src={e} childList={true} key={i} />;
-          })}
-        </ol>
-      </div>
-
-    );
-  }
-  return null;
+  return (
+    <div className={`list ${childList ? '' : 'b-margin-bottom-d40-m20'}`}>
+      {isUnorderedList && <ul>
+        {itemsOutput()}
+      </ul>}
+      {!isUnorderedList && <ol>
+        {itemsOutput()}
+      </ol>}
+    </div>
+  );
 };
 
 List.propTypes = {

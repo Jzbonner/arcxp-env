@@ -5,6 +5,7 @@ import BaseMarkup from '../_helper_components/amp/BaseMarkup';
 import Html from '../_helper_components/amp/Html';
 import AmpCustomStyles from '../_helper_components/amp/AmpCustomStyle';
 import AmpScripts from '../_helper_components/amp/AmpScripts';
+import GoogleStructuredData from '../_helper_components/article/googleData/default';
 
 const AmpOutputType = (props) => {
   const {
@@ -24,6 +25,7 @@ const AmpOutputType = (props) => {
       <BaseMarkup canonicalUrl={articleURL} />
       <AmpScripts contentElements={contentElements} />
       <AmpCustomStyles arcSite={arcSite} outputTypeProps={props} />
+      <GoogleStructuredData />
     </head>
     <body>
       { children }

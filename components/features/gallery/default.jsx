@@ -41,6 +41,7 @@ const Gallery = (props) => {
   // holds true max # of photos ( w/o changing value when adding ads into Element array)
   const [maxIndex, setMaxIndex] = useState(null);
   const [canonicalUrl, setCanonicalUrl] = useState('');
+  const [galleryVisible, setVisibility] = useState(false);
 
   /* Ads */
   const [clickCount, setClickCount] = useState(0);
@@ -61,9 +62,9 @@ const Gallery = (props) => {
   const [nextAdRendering, setNextAdRendering] = useState(4);
 
 
-  const galleryEl = React.createRef(null);
+  const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
-  const PG01Ref = React.useRef(null);
+  const PG01Ref = useRef(null);
   const mobileBreakPoint = 1023;
 
   const actions = {
@@ -402,7 +403,15 @@ const Gallery = (props) => {
   }, [currentIndex, isAdVisible]);
 
   useEffect(() => {
-    if (!isMobile && galleryEl && galleryEl.current) calculateTranslateX();
+    if (!isMobile && galleryEl && galleryEl.current) {
+      calculateTranslateX();
+      document.onreadystatechange = () => {
+        if (document.readyState === 'complete') {
+          calculateTranslateX();
+          setVisibility(true);
+        }
+      };
+    }
   }, [isAdVisible, currentIndex, currentAction, translateX, elementData, captionData, galleryEl]);
 
   useEffect(() => {
@@ -547,7 +556,7 @@ const Gallery = (props) => {
         }
         {
           !isMobile
-            ? <DesktopGallery data={elementData} translateX={translateX} />
+            ? <DesktopGallery data={elementData} translateX={translateX} visibility={galleryVisible}/>
             : null
         }
         <div

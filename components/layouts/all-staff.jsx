@@ -23,7 +23,7 @@ export const AllStaffPage = () => {
 
   const [leftMenuMenuVisibility, setLeftMenuVisibility] = useState(false);
   const [selectedLeftMenuItem, setSelectedLeftMenuItem] = useState({ name: 'All', id: 0 });
-  const [selectedStaff, setSelectedStaff] = useState([]);
+  const [selectedStaff, setSelectedStaff] = useState(globalContent.q_results);
 
   const pageUri = 'staff';
 
@@ -32,7 +32,7 @@ export const AllStaffPage = () => {
   };
 
   useEffect(() => {
-    const selectedAreaTag = getQueryParams(window.location.href).area;
+    const selectedAreaTag = getQueryParams(requestUri).area;
     const selectedArea = findArea(selectedAreaTag, sites[0]);
 
     if (requestUri === `/${pageUri}/` || requestUri === `/${pageUri}` || (selectedArea && selectedArea.tag === 'all')) {
@@ -46,7 +46,7 @@ export const AllStaffPage = () => {
             return false;
           });
         }
-        return false;
+        return true;
       });
       setSelectedStaff(staffers);
     } else if (selectedArea) {
@@ -89,23 +89,13 @@ export const AllStaffPage = () => {
             <h3>{selectedLeftMenuItem.name}</h3>
             <span className="border"></span>
           </header>
-          {selectedStaff
-            .sort((a = { lastName: '' }, b = { lastName: '' }) => a.lastName.localeCompare(b.lastName))
-            .map((staffer) => {
-              const {
-                byline = '', role, custom_ajc_phone: telephone, email, image, _id: id,
-              } = staffer || {};
-              return (
-                <StaffCard
-                  name={byline}
-                  role={role}
-                  telephone={telephone}
-                  email={email}
-                  image={image}
-                  key={id}
-                />
-              );
-            })}
+          {Array.isArray(selectedStaff)
+            && selectedStaff
+              .sort((a = { lastName: '' }, b = { lastName: '' }) => a.lastName.localeCompare(b.lastName))
+              .map((staffer) => {
+                const { _id: id } = staffer || {};
+                return <StaffCard staffer={staffer} key={id} />;
+              })}
         </section>
       </main>
       <Footer />

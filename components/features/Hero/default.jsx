@@ -12,8 +12,11 @@ const Hero = (customFields = {}) => {
   const { arcSite = 'ajc' } = fusionContext;
 
   const {
-    customFields: { content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {}, startIndex = 1 },
+    customFields: { content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {} },
   } = customFields;
+
+  let { from: startIndex } = contentConfigValues || {};
+  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
 
   const appContext = useAppContext();
   const { contextPath } = appContext;
@@ -31,12 +34,11 @@ const Hero = (customFields = {}) => {
     },
   });
 
-  if (data) {
-    const { content_elements: innerData } = data || {};
-    const singleItem = innerData[startIndex] ? innerData[startIndex - 1] : null; // adding "-1" so the array index always starts from 0
+  if (Array.isArray(data)) {
+    const singleItem = data[startIndex] ? data[startIndex] : null; // adding "-1" so the array index always starts from 0
     const { basic: headline } = singleItem && singleItem.headlines ? singleItem.headlines : '';
     const { canonical_url: heroURL } = singleItem || '';
-    const contentType = innerData[startIndex - 1] ? innerData[startIndex - 1].type : null;
+    const contentType = data[startIndex] ? data[startIndex].type : null;
     let heroBackground = '';
     if (singleItem && singleItem.promo_items && singleItem.promo_items.basic) {
       heroBackground = singleItem.promo_items.basic.url;
@@ -45,7 +47,7 @@ const Hero = (customFields = {}) => {
       heroBackground = singleItem.firstInlineImage.url;
     }
 
-    if (innerData && heroBackground) {
+    if (data && heroBackground) {
       return (
         <div className="c-heroFeature">
           <a href={`${contextPath}${heroURL}`} className="hero-url" />
@@ -67,10 +69,6 @@ Hero.propTypes = {
   customFields: PropTypes.shape({
     content: PropTypes.contentConfig('collections').tag({
       name: 'Content',
-    }),
-    startIndex: PropTypes.number.tag({
-      name: 'Start Index',
-      defaultValue: 1,
     }),
   }),
 };

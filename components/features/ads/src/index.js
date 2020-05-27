@@ -30,6 +30,9 @@ const AdSetup = ({
       },
       dfpId,
       // {
+      //   amazon: {
+      //     enabled: true
+      //   },
       //   prebid: {
       //     enabled: true,
       //     sizeConfig: [

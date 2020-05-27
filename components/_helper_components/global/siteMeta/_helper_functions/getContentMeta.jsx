@@ -133,6 +133,7 @@ const getContentMeta = () => {
   return {
     url,
     contentId,
+    typeOfPage,
     pageContentType,
     environ,
     topics,

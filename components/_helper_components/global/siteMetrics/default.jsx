@@ -33,6 +33,7 @@ const SiteMetrics = () => {
     secondarySection,
     topSectionName,
     pageContentType,
+    typeOfPage,
     site,
     title,
     topics,
@@ -52,7 +53,7 @@ const SiteMetrics = () => {
             'pageSiteSection': '${topSection}',
             'pageMainSection': '${topSection}',
             'pageCategory': '${secondarySection}',
-            'pageContentType': '${pageContentType}',
+            'pageContentType': '${typeOfPage || pageContentType}',
             'pageTitle': '${title.replace('\'', '"')}'
           },
           'siteData': {
