@@ -100,7 +100,7 @@ const StoryPageLayout = () => {
   const interscrollerPlaceholder = () => {
     if (isHyperlocalContent && ampPage) {
       return (
-        <amp-fx-flying-carpet height="300px">
+        <amp-fx-flying-carpet>
           <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>
         </amp-fx-flying-carpet>
       );
@@ -122,19 +122,15 @@ const StoryPageLayout = () => {
 
   if (infoBoxIndex !== null && !ampPage) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
-    filteredContentElements.splice(infoBoxIndex, 0,
-    <ConnextHyperLocalSubscription />,
-    <ConnextEndOfStory />);
+    filteredContentElements.splice(infoBoxIndex, 0, <ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
     infoBoxIndex += 1;
   } else if (!ampPage) {
-    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />,
-    <ConnextEndOfStory />);
+    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
   }
   // about the author should be the last component of the story
   insertAtEndOfStory.push(BlogAuthorComponent);
   // sponsor box should appear right after blog author component
   insertAtEndOfStory.push(<SponsorRelatedBox taxonomy={taxonomy} uuid={uuid} />);
-
 
   return (
     <>
@@ -174,7 +170,9 @@ const StoryPageLayout = () => {
               <ArcAd staticSlot={'MP01'} />
             </div>
           )}
-          {!noAds && ampPage && <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />}
+          {!noAds && ampPage && !isHyperlocalContent && (
+            <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
+          )}
           <Section
             elements={filteredContentElements}
             stopIndex={1}
@@ -187,6 +185,9 @@ const StoryPageLayout = () => {
               <ArcAd staticSlot={'HP01'} />
               <ArcAd staticSlot={'MP01'} />
             </div>
+          )}
+          {!noAds && ampPage && isHyperlocalContent && (
+            <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
           <Section
             elements={filteredContentElements}
