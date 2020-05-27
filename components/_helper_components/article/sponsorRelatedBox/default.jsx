@@ -56,10 +56,10 @@ const SponsorRelatedBox = ({ taxonomy, uuid }) => {
         </div>}
         {disableAd === 'false' ? <div className='sponsor-ad'>{SP01()}</div> : null}
         <ul className={'sponsor-content'}>
-          {boxContent.map((el) => {
+          {boxContent.map((el, i) => {
             if (el && el.url && el.headline) {
               return (
-                <li className="sponsor-item">
+                <li key={`sp-item-${i}`} className="sponsor-item">
                   <a href={el.url}>
                     <h2>{el.headline}</h2>
                   </a>
