@@ -38,6 +38,7 @@ const SponsorRelatedBox = ({ taxonomy, uuid }) => {
   const feed = useContent({
     source: 'query-feed',
     query: {
+      size: 10,
       includeTags: `${includeTags}`,
       mustIncludeAllTags: `${includeAllTags}`,
       excludeTags: `${excludeTags}`,

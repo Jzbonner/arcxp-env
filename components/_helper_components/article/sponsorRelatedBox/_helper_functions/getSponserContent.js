@@ -2,9 +2,9 @@ import filterDuplicateStory from './filterDuplicateStory';
 
 export default function getSponserContent(limit, queryFeed, siteData = {}, refId) {
   const { sponsor_url: sponsorUrl, sponsor_related_box_title: sponsorTitle } = siteData;
-  if (!queryFeed || !queryFeed.content_elements || queryFeed.content_elements.length < 1) return null;
+  if (!queryFeed || queryFeed.length < 1) return null;
   const data = [];
-  const filteredQueryFeed = filterDuplicateStory(queryFeed.content_elements, refId);
+  const filteredQueryFeed = filterDuplicateStory(queryFeed, refId);
 
   filteredQueryFeed.forEach((el, i) => {
     if (i < limit) {
