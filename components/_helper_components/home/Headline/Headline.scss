@@ -5,10 +5,6 @@
   padding-top: 52vw;
 
   @include breakpoint(tablet) {
-    padding-top: 48vw;
-  }
-
-  @include breakpoint(desktop-sm) {
     padding-top: 50%;
   }
 
