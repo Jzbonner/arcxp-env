@@ -22,8 +22,8 @@ export const AllStaffPage = () => {
   const { sites } = getProperties();
 
   const [leftMenuMenuVisibility, setLeftMenuVisibility] = useState(false);
-  const [selectedLeftMenuItem, setSelectedLeftMenuItem] = useState({ name: 'All', id: 0 });
-  const [selectedStaff, setSelectedStaff] = useState(globalContent.q_results);
+  const [selectedLeftMenuItem, setSelectedLeftMenuItem] = useState({});
+  const [selectedStaff, setSelectedStaff] = useState([]);
 
   const pageUri = 'staff';
 
@@ -35,7 +35,17 @@ export const AllStaffPage = () => {
     const selectedAreaTag = getQueryParams(requestUri).area;
     const selectedArea = findArea(selectedAreaTag, sites[0]);
 
-    if (requestUri === `/${pageUri}/` || requestUri === `/${pageUri}` || (selectedArea && selectedArea.tag === 'all')) {
+    if (selectedArea && selectedArea.name !== 'All') {
+      setSelectedLeftMenuItem(selectedArea);
+      const staffers = globalContent.q_results.filter((staff) => {
+        if (staff.expertise) {
+          return staff.expertise.split(',').some(ext => parseInt(ext, 10) === selectedArea.id);
+        }
+        return false;
+      });
+      setSelectedStaff(staffers);
+    } else {
+      setSelectedLeftMenuItem({ name: 'All', id: 0 });
       const staffers = globalContent.q_results.filter((staff) => {
         if (staff.expertise) {
           return staff.expertise.split(',').every((expertise) => {
@@ -47,15 +57,6 @@ export const AllStaffPage = () => {
           });
         }
         return true;
-      });
-      setSelectedStaff(staffers);
-    } else if (selectedArea) {
-      setSelectedLeftMenuItem(selectedArea);
-      const staffers = globalContent.q_results.filter((staff) => {
-        if (staff.expertise) {
-          return staff.expertise.split(',').some(ext => parseInt(ext, 10) === selectedArea.id);
-        }
-        return false;
       });
       setSelectedStaff(staffers);
     }

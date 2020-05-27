@@ -57,9 +57,6 @@
     max-width: 55px;
     border-radius: 50%;
     background-color: #2e81b7;
-    display: flex;
-    justify-content: center;
-    align-content: center;
     margin: calc(35vh - .5rem) 25px 0 25px;
 
     @include breakpoint(desktop-sm) {
