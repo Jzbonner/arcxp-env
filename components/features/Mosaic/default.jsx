@@ -66,7 +66,11 @@ const Mosaic = (customFields = {}) => {
             const { text: isHideTimestampTrue } = hideTimestamp || {};
             const { tags = [] } = taxonomy || {};
             const hyperlocalTags = getProperties().hyperlocalTags || [];
-            const isHyperlocalContent = checkTags(tags, hyperlocalTags);
+            const isHyperlocalContent = checkTags(
+              tags,
+              hyperlocalTags.filter(tag => tag !== 'community contributor'),
+            );
+            const isCommunityContributor = checkTags(tags, 'community contributor');
 
             const relativeURL = (websites && websites[arcSite] && websites[arcSite].website_url) || '/';
 
@@ -76,8 +80,10 @@ const Mosaic = (customFields = {}) => {
                   {/* the link is empty - 100% coverage of content via css - because sectionLabel outputs a link as well */}
                   <a href={`${contextPath}${relativeURL}`}></a>
                   <div className="c-sectionLabel">
-                    {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} useWhiteLogos={true} tease={true} />}
-                    {!isHyperlocalContent && (
+                    {isHyperlocalContent && isCommunityContributor && (
+                      <ContributorBadge tags={tags} ampPage={ampPage} useWhiteLogos={true} />
+                    )}
+                    {(!isHyperlocalContent || !isCommunityContributor) && (
                       <>
                         <SectionLabel label={label || {}} taxonomy={taxonomy} />
                         <TimeStamp

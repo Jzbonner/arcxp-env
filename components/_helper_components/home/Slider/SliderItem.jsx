@@ -23,7 +23,11 @@ const SliderItem = ({ data, refHook }) => {
   const { text: isHideTimestampTrue } = hideTimestamp || {};
   const hyperlocalTags = getProperties().hyperlocalTags || [];
   const { tags = [] } = taxonomy || {};
-  const isHyperlocalContent = checkTags(tags, hyperlocalTags);
+  const isHyperlocalContent = checkTags(
+    tags,
+    hyperlocalTags.filter(tag => tag !== 'community contributor'),
+  );
+  const isCommunityContributor = checkTags(tags, 'community contributor');
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
@@ -37,8 +41,8 @@ const SliderItem = ({ data, refHook }) => {
       </a>
       <div className="sliderList-text">
         <div className="c-label-wrapper">
-          {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} tease={true} />}
-          {!isHyperlocalContent && (
+          {isHyperlocalContent && isCommunityContributor && <ContributorBadge tags={tags} ampPage={ampPage} />}
+          {(!isHyperlocalContent || !isCommunityContributor) && (
             <>
               <SectionLabel label={label || {}} taxonomy={taxonomy} />
               <TimeStamp

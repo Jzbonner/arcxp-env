@@ -133,6 +133,12 @@
         .article-timestamp {
           @include text-styles(.75rem, 1, "Gordita");
         }
+
+        .c-contributorBadge {
+          height: 1.75rem;
+          line-height: 1.5;
+          margin: 0 0 .475rem;
+        }
       }
     }
   }
