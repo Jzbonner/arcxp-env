@@ -133,12 +133,12 @@ const StoryPageLayout = () => {
     <>
       {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} />}
       <BreakingNews />
+      <WeatherAlerts />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
             <SponsorBanner taxonomy={taxonomy} />
-            <WeatherAlerts />
             <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">

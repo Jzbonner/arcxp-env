@@ -6,6 +6,7 @@ import { useAppContext } from 'fusion:context';
 
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
+import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import SectionHome from '../_helper_components/home/SectionHome/SectionHome';
 import Footer from '../_helper_components/global/footer/default';
@@ -32,6 +33,7 @@ const HomePageLayout = (props) => {
     <>
       <GlobalAdSlots pbPage={true} />
       <BreakingNews />
+      <WeatherAlerts />
       <NavBar type={layout} />
       <main className="c-homepageContent">
         <SectionHome feature={zone1} rightRailContent={zone1rightrail} />

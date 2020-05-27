@@ -7,6 +7,7 @@ import NavBar from '../global/navBar/default';
 import SectionHome from '../home/SectionHome/SectionHome';
 import Footer from '../global/footer/default';
 import Copyright from '../global/copyright/default';
+import WeatherAlerts from '../global/weatherAlerts/default';
 import '../../../src/styles/container/_c-section.scss';
 import '../../../src/styles/base/_utility.scss';
 
@@ -14,6 +15,7 @@ const SectionOutput = ({ zones, layout }) => (
   <>
     <GlobalAdSlots pbPage={true} />
     <BreakingNews />
+    <WeatherAlerts />
     <NavBar type={layout} />
     <main className="c-sectionContent">
       {zones && (
