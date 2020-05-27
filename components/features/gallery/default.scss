@@ -135,6 +135,10 @@
       flex-direction: column;
       flex-grow: 1;
       width: 92%;
+
+      .mosaic-container .mosaic-image {
+        width: 125%;
+      }
     }
   }
 }
