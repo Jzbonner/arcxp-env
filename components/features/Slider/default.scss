@@ -60,6 +60,10 @@
   .c-slider {
     position: relative;
 
+    .c-contributorBadge {
+      height: 1.25rem;
+    }
+
     .c-slider-content.is-Tablet {
       scroll-behavior: smooth;
       overflow-x: scroll;
