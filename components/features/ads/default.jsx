@@ -91,6 +91,8 @@ ArcAd.propTypes = {
       '',
       'HP01',
       'HP02',
+      'HP05',
+      'HS02',
       'MP01',
       'MP02',
       'MP03',
@@ -101,6 +103,7 @@ ArcAd.propTypes = {
       'RP02',
       'RP03 sticky',
       'RP09 sticky',
+      'SP01',
     ]).tag({
       label: 'Slot ID',
       description: 'Select the ad slot to be inserted',

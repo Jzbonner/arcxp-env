@@ -28,7 +28,6 @@ const GlobalAdSlots = ({
     <ArcAd staticSlot={'PX01'} />
     <ArcAd staticSlot={'HS01'} />
     {pbPage && <>
-        <ArcAd staticSlot={'HS02'} />
         <ArcAd staticSlot={'NS01'} />
         <ArcAd staticSlot={'NS02'} />
     </>}

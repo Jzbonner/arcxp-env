@@ -148,7 +148,6 @@ const NavBar = ({
             <Subscribe/>
           </div>
           <StickyNav
-            articleURL={articleURL}
             headlines={headlines}
             comments={comments}
             hamburgerToggle={mobileMenuToggled}

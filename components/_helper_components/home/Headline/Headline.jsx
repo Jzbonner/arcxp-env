@@ -32,7 +32,11 @@ const Headline = ({
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
   const hyperlocalTags = getProperties().hyperlocalTags || [];
-  const isHyperlocalContent = checkTags(tags, hyperlocalTags);
+  const isHyperlocalContent = checkTags(
+    tags,
+    hyperlocalTags.filter(tag => tag !== 'community contributor'),
+  );
+  const isCommunityContributor = checkTags(tags, 'community contributor');
 
   const relativeURL = (websites && websites[sites] && websites[sites].website_url) || '/';
 
@@ -64,15 +68,15 @@ const Headline = ({
     <div className="home-headline">
       <a href={`${contextPath}${relativeURL}`}>{getPromoItem(type)}</a>
       <div className="headline-box">
-        {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} tease={true} />}
-        {!isHyperlocalContent && (
+        {isHyperlocalContent && isCommunityContributor && <ContributorBadge tags={tags} ampPage={ampPage} />}
+        {(!isHyperlocalContent || !isCommunityContributor) && (
           <>
             <SectionLabel label={label} taxonomy={taxonomy} />
-            <TimeStamp firstPublishDate={publishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} isTease={true} />
+            <TimeStamp firstPublishDate={publishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
           </>
         )}
         <a href={`${contextPath}${relativeURL}`} className="headline">
-          {truncateHeadline(headlines.basic)}
+          {headlines && truncateHeadline(headlines.basic)}
         </a>
       </div>
     </div>

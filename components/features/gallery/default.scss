@@ -4,6 +4,11 @@
   position: relative;
   display: flex;
   height: 480px;
+  visibility: hidden;
+
+  &.is-Visible {
+    visibility: visible;
+  }
 }
 
 .gallery-wrapper {
@@ -130,6 +135,10 @@
       flex-direction: column;
       flex-grow: 1;
       width: 92%;
+
+      .mosaic-container .mosaic-image {
+        width: 125%;
+      }
     }
   }
 }

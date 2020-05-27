@@ -334,4 +334,17 @@ export const adSlots = {
       [1, 0], // mobile
     ],
   },
+  SP01: {
+    slotName: 'SP01',
+    dimensions: [
+      [
+        [88, 31],
+      ], // desktop
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet+
+      [1, 0], // mobile
+    ],
+  },
 };

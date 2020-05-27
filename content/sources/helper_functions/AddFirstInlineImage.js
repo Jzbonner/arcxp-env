@@ -6,7 +6,7 @@ export default (data, arcSite, currentDisplayClass = '', requiredClasses = []) =
   const promiseArray = [];
 
   if (requiredClasses.some(requiredClass => requiredClass === currentDisplayClass)) {
-    collectionElements.content_elements.forEach((el, e) => {
+    collectionElements.forEach((el, e) => {
       if (el.type === 'story' && !el.promo_items) {
         const storyURL = `${CONTENT_BASE}/content/v4/?website=${arcSite}&_id=${el._id}`;
 
@@ -29,7 +29,7 @@ export default (data, arcSite, currentDisplayClass = '', requiredClasses = []) =
           })
           .then((firstInlineImage) => {
             if (firstInlineImage) {
-              collectionElements.content_elements[e].firstInlineImage = firstInlineImage;
+              collectionElements[e].firstInlineImage = firstInlineImage;
               return collectionElements;
             }
             return null;

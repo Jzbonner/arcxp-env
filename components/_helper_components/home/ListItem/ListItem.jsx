@@ -16,7 +16,7 @@ const ListItem = ({
   taxonomy,
   publish_date: publishDate,
   display_date: displayDate,
-  headlines,
+  headlines = [],
   websites,
   listPage,
   type: contentType,
@@ -32,7 +32,11 @@ const ListItem = ({
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
   const hyperlocalTags = getProperties().hyperlocalTags || [];
-  const isHyperlocalContent = checkTags(tags, hyperlocalTags);
+  const isHyperlocalContent = checkTags(
+    tags,
+    hyperlocalTags.filter(tag => tag !== 'community contributor'),
+  );
+  const isCommunityContributor = checkTags(tags, 'community contributor');
 
   const relativeURL = (websites && websites[sites] && websites[sites].website_url) || '/';
   const isListPage = listPage ? 'listPage' : '';
@@ -40,7 +44,7 @@ const ListItem = ({
   const getPromoItem = () => {
     // standalone video/gallery
     if (contentType === 'video' || contentType === 'gallery') {
-      if (promoItems.basic) {
+      if (promoItems && promoItems.basic) {
         return (
           <a href={`${contextPath}${relativeURL}`} className="homeList-image">
             <Image src={promoItems.basic} width={1066} height={600} imageType="isHomepageImage" teaseContentType={contentType} />
@@ -86,8 +90,8 @@ const ListItem = ({
 
       <div className="homeList-text">
         <div className="c-label-wrapper">
-          {isHyperlocalContent && <ContributorBadge tags={tags} ampPage={ampPage} tease={true} />}
-          {!isHyperlocalContent && (
+          {isHyperlocalContent && isCommunityContributor && <ContributorBadge tags={tags} ampPage={ampPage} />}
+          {(!isHyperlocalContent || !isCommunityContributor) && (
             <>
               <SectionLabel label={label || {}} taxonomy={taxonomy} />
               <TimeStamp

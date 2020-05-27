@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
 const GalleryItem = ({
   data, func,
 }) => {
   const {
-    url, alt, index, id, by = [], captionObj, states, lastItemClass,
+    url, width, height, alt, index, id, by = [], captionObj, states, lastItemClass,
   } = data;
   const { affiliation = [], caption = [] } = captionObj;
 
@@ -16,6 +17,19 @@ const GalleryItem = ({
   let affiliationCredit = affiliation[0] && affiliation[0].name ? affiliation[0].name : null;
 
   if (affiliationCredit && !affiliationCredit.includes('Credit:')) affiliationCredit = `Credit: ${affiliationCredit}`;
+
+  const [resizeUrl, setUrl] = useState(null);
+
+  useEffect(() => {
+    if (!isMobile) {
+      const galleryHeight = 480;
+      const newWidth = (width / height) * galleryHeight;
+      const thumborUrl = imageResizer(url, Math.round(newWidth), galleryHeight);
+      setUrl(thumborUrl);
+    } else {
+      setUrl(url);
+    }
+  }, []);
 
   return (
     <div
@@ -30,7 +44,7 @@ const GalleryItem = ({
       >
       <img
         className={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
-        src={url}
+        src={resizeUrl}
         alt={alt ? `${alt}` : ''}
       />
       {

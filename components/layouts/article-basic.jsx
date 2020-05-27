@@ -34,6 +34,7 @@ import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
 import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
 import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
+import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -91,6 +92,7 @@ const StoryPageLayout = () => {
   // Both checks return true if the tag is present and false if not.
   const noAds = checkTags(tags, 'no-ads');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
+  const isCommunityContributor = checkTags(tags, 'community contributor');
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
@@ -121,13 +123,19 @@ const StoryPageLayout = () => {
 
   if (infoBoxIndex !== null && !ampPage) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
-    filteredContentElements.splice(infoBoxIndex, 0, <ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
+    filteredContentElements.splice(infoBoxIndex, 0,
+    <ConnextHyperLocalSubscription />,
+    <ConnextEndOfStory />);
     infoBoxIndex += 1;
   } else if (!ampPage) {
-    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
+    insertAtEndOfStory.push(<ConnextHyperLocalSubscription />,
+    <ConnextEndOfStory />);
   }
   // about the author should be the last component of the story
   insertAtEndOfStory.push(BlogAuthorComponent);
+  // sponsor box should appear right after blog author component
+  insertAtEndOfStory.push(<SponsorRelatedBox taxonomy={taxonomy} uuid={uuid} />);
+
 
   return (
     <>
@@ -142,13 +150,13 @@ const StoryPageLayout = () => {
             <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
-            {!isHyperlocalContent && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} />}
+            {!isCommunityContributor && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} />}
             <TimeStamp
               firstPublishDate={firstPublishDate || lastUpdatedDate || displayDate}
               displayDate={displayDate}
               isHideTimestampTrue={isHideTimestampTrue}
               ampPage={ampPage}
-              isHyperlocalContent={isHyperlocalContent}
+              isHyperlocalContent={isHyperlocalContent && isCommunityContributor}
             />
           </div>
           <div className="b-flexRow b-flexCenter b-pageContainer">
@@ -168,9 +176,7 @@ const StoryPageLayout = () => {
               <ArcAd staticSlot={'MP01'} />
             </div>
           )}
-          {!noAds && ampPage && (
-            <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
-          )}
+          {!noAds && ampPage && <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />}
           <Section
             elements={filteredContentElements}
             stopIndex={1}
@@ -228,9 +234,7 @@ const StoryPageLayout = () => {
           {(!basicItems || promoType !== 'gallery') && !ampPage ? (
             <Gallery contentElements={filteredContentElements} pageType={subtype} />
           ) : null}
-          {!isHyperlocalContent && (
-            <TaboolaFeed ampPage={ampPage} />
-          )}
+          {!isHyperlocalContent && <TaboolaFeed ampPage={ampPage} />}
           {!noAds && ampPage && (
             <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
