@@ -7,6 +7,7 @@ import Headline from '../_helper_components/article/headline/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
+import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 
 const VideoPageLayout = () => {
   const appContext = useAppContext();
@@ -39,6 +40,7 @@ const VideoPageLayout = () => {
     <>
       <GlobalAdSlots />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
+      <WeatherAlerts />
       <main>
         <div className="c-hp01-mp01 b-margin-top-d40-m20">
           <ArcAd staticSlot={'HP01'} />

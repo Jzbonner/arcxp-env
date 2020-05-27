@@ -33,6 +33,7 @@ import checkTags from './_helper_functions/checkTags';
 import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
 import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
+import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
@@ -140,6 +141,7 @@ const StoryPageLayout = () => {
     <>
       {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} />}
       <BreakingNews />
+      <WeatherAlerts />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
       <main>
         <header className="b-margin-bottom-d30-m20">

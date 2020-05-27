@@ -4,6 +4,7 @@ import { useContent } from 'fusion:content';
 import checkTags from './_helper_functions/checkTags';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
+import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 import ArcAd from '../features/ads/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import StaffBio from '../_helper_components/staffBioPage/staffBio/default';
@@ -57,6 +58,7 @@ const staffBioPage = () => {
     <>
       <GlobalAdSlots/>
       <BreakingNews/>
+      <WeatherAlerts />
       <NavBar/>
       <main className='c-listPage'>
           {!noAds

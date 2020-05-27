@@ -7,6 +7,7 @@ import ArcAd from '../../features/ads/default';
 import Section from '../article/section/Section';
 import GlobalAdSlots from '../global/ads/default';
 import BreakingNews from '../global/breakingNews/default';
+import WeatherAlerts from '../global/weatherAlerts/default';
 
 import '../../../src/styles/base/_utility.scss';
 import '../../../src/styles/container/_article-basic.scss';
@@ -38,6 +39,7 @@ const FlatPage = ({ globalContent }) => {
     <>
       { !noAds && <GlobalAdSlots /> }
       <BreakingNews/>
+      <WeatherAlerts />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype}/>
       <main className="c-flatpage">
         <article>

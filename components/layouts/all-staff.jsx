@@ -6,6 +6,7 @@ import NavBar from '../_helper_components/global/navBar/default';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
+import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 import AuthorMenu from '../_helper_components/allstaff/authorMenu/default';
 import getQueryParams from './_helper_functions/getQueryParams';
 import findArea from './_helper_functions/staffpage/findArea';
@@ -66,6 +67,7 @@ export const AllStaffPage = () => {
     <>
       <GlobalAdSlots />
       <BreakingNews />
+      <WeatherAlerts />
       <NavBar />
       <header className={'c-staff-page-header'}>
         <div className="c-hp01-mp01">

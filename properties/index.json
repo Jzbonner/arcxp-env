@@ -15,6 +15,7 @@
   "mail": "mailto:?Subject=",
   "sites": ["ajc"],
   "hyperlocalTags": ["community contributor", "alpharetta", "roswell", "sandy springs", "dunwoody"],
+  "weatherAlertsAPIkey": "dJWlnHeXb06XuqExRDXpJ3fk4vOTzxyg4Um7TG5Z",
   "featuredVideoPlayerRules": {
     "startPlaying": true,
     "muteON": true,
