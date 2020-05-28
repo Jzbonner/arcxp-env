@@ -26,10 +26,11 @@ const Byline = ({ by = [] }) => {
     const bylineData = authors.map((author, i) => {
       const { url, org, name } = author || {};
 
+
       if (!name) return null;
 
       return <span key={name}>
-        { i === 0 && 'By ' }
+        { i === 0 && !name.includes('By ') && 'By ' }
         { url && <a href={url}>{name}</a> }
         { !url && name }
         { org ? `${authors.length > 1 ? ' - ' : ', '}${org}` : null }
