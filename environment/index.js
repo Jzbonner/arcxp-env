@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 module.exports = {
   RESIZER_SECRET_KEY: 'Fmkgru2rZ2uPZ5wXs7B2HbVDHS2SZuA7',
+  weatherAlertsAPIkey: 'dJWlnHeXb06XuqExRDXpJ3fk4vOTzxyg4Um7TG5Z',
   taboolaID: {
     boapPTD: `[1110597, 1099013 // ajc qa/prod
     ]`,
