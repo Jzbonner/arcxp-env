@@ -339,12 +339,10 @@ export const adSlots = {
     dimensions: [
       [
         [88, 31],
-      ], // desktop
+      ],
     ],
     breakpoints: [
-      [1024, 0], // desktop
-      [768, 0], // tablet+
-      [1, 0], // mobile
+      [1, 0],
     ],
   },
 };
