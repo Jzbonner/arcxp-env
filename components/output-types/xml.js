@@ -1,15 +1,22 @@
 /* /components/output-types/xml.js */
 import { toXML } from 'jstoxml';
+import { formatApiTime } from '../layouts/_helper_functions/api/formatTime';
 
-const Xml = ({ children }) => {
+const Xml = (props) => {
+  const {
+    children,
+    siteProperties,
+    globalContentConfig,
+  } = props || {};
+
+  const { orgName, websiteURL } = siteProperties || {};
+  const { query } = globalContentConfig || {};
+  const { id: queryId } = query || {};
+
   const xmlOptions = {
     header: true,
     indent: '  ',
   };
-
-  // how am I going to fetch the feed here?
-  // The examples have the feed id tied to the feature? maybe a resolver?
-  // I need the description, link, and last build date.
 
   return toXML({
     _name: 'rss',
@@ -25,10 +32,10 @@ const Xml = ({ children }) => {
           title: 'RSS FEED',
         },
         {
-          link: `${'need to get website url'}/common/feeds/${'need_to_get_id_here?'}`,
+          link: `${websiteURL}/list/${queryId}`,
         },
         {
-          description: 'Description',
+          description: `${orgName}`,
         },
         {
           language: 'en-us',
@@ -36,12 +43,12 @@ const Xml = ({ children }) => {
         {
           _name: 'atom:link',
           _attrs: {
-            href: `${'need to get website url'}/common/feeds/${'need_to_get_id_here?'}`,
+            href: `${websiteURL}/list/${queryId}`,
             rel: 'self',
           },
         },
         {
-          lastBuildDate: () => new Date(),
+          lastBuildDate: () => formatApiTime(),
         },
         Array.isArray(children) ? children[0] : [],
       ],

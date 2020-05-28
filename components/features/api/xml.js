@@ -1,32 +1,17 @@
-import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
+import { formatApiTime } from '../../layouts/_helper_functions/api/formatTime';
 
 @Consumer
 class Api {
   constructor(props) {
     this.props = props;
-    const {
-      customFields: {
-        content: { contentService = 'collections-content-api', contentConfigValues = { id: '' } } = {},
-      } = {},
-    } = props;
-
-    this.fetchContent({
-      data: {
-        source: contentService,
-        query: {
-          ...contentConfigValues,
-          site: 'ajc',
-        },
-      },
-    });
   }
 
   render() {
-    const { data } = this.state || {};
+    const { globalContent } = this.props || {};
 
-    if (data) {
-      const { data: arrayData } = data;
+    if (globalContent) {
+      const { data: arrayData } = globalContent || {};
 
       return arrayData.map((item) => {
         const {
@@ -46,27 +31,7 @@ class Api {
           const author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
           const formattedDescription = description && description.basic ? `<![CDATA[${description.basic}]]>` : '';
 
-          const firstPublishDateObject = new Date(Date.parse(firstPubDate));
-          const displayDateObject = new Date(Date.parse(displayDate));
-          const firstPublishDateInMilliSeconds = firstPublishDateObject.getTime();
-          const displayDateInMilliSeconds = displayDateObject.getTime();
-          const currentOffset = displayDateInMilliSeconds - firstPublishDateInMilliSeconds;
-
-          const isUpdated = currentOffset >= 60000;
-          const pubDate = isUpdated ? displayDateObject : firstPublishDateObject;
-
-          const weekDay = new Intl.DateTimeFormat('en', { weekday: 'short' }).format(pubDate);
-          const day = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(pubDate);
-          const month = new Intl.DateTimeFormat('en', { month: 'long' }).format(pubDate);
-          const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(pubDate);
-          const hour = new Intl.DateTimeFormat('en', { hour: '2-digit', hour12: false }).format(pubDate);
-          const min = new Intl.DateTimeFormat('en', { minute: '2-digit' }).format(pubDate);
-          const sec = new Intl.DateTimeFormat('en', { second: '2-digit' }).format(pubDate);
-          const timeZoneName = new Intl.DateTimeFormat('en', { timeZoneName: 'short' }).format(pubDate);
-
-          const [, timezone] = timeZoneName.split(' ');
-
-          const formattedDate = `${weekDay}, ${day} ${month} ${year} ${hour}:${min}:${sec} ${timezone}`;
+          const formattedDate = formatApiTime(firstPubDate, displayDate);
 
           const formatContentElements = contentElements
             .filter(el => el && el.type && el.type === 'text')
@@ -127,13 +92,5 @@ class Api {
     return [];
   }
 }
-
-Api.propTypes = {
-  customFields: PropTypes.shape({
-    content: PropTypes.contentConfig(['collections']).tag({
-      name: 'Content',
-    }),
-  }),
-};
 
 export default Api;
