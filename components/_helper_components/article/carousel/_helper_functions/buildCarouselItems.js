@@ -42,7 +42,7 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
       if (!temp.src && el.content_elements) temp.src = getFirstInlineImage(el.content_elements);
 
       return (
-        <a key={`key-${i}`} href={`${temp.url ? `${temp.url} + ?outputType=amp` : null}`}>
+        <a key={`key-${i}`} href={`${temp.url ? `${temp.url}` : null}`}>
           <div id={`carousel-item-${i}`} className={`c-carouselItem ${i === 0 ? 'is-first' : ''}`}>
             <amp-img
               width={`${temp.src ? '90' : '76'}`}
