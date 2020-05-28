@@ -10,8 +10,8 @@ const OverlayMosiac = ({ data }) => {
   const secondImgSrc = second && second.props && second.props.data && second.props.data.url ? second.props.data.url : null;
   const finalImgSrc = final && final.props && final.props.data && final.props.data.url ? final.props.data.url : null;
 
-  const resizedSecond = secondImgSrc ? imageResizer(secondImgSrc, 157, 106) : null;
-  const resizedFinal = finalImgSrc ? imageResizer(finalImgSrc, 157, 106) : null;
+  const resizedSecond = secondImgSrc ? imageResizer(secondImgSrc, 300, 300 * 0.58) : null;
+  const resizedFinal = finalImgSrc ? imageResizer(finalImgSrc, 300, 300 * 0.58) : null;
 
   return (
     <div className="gallery-overlay-backdrop ">
