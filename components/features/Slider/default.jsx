@@ -53,7 +53,7 @@ const Slider = (customFields = {}) => {
 
   if (data && !sliderItems) setSliderItems(buildSliderItems(data, el => addToRefs(el, elRefs), startIndex, itemLimit));
 
-  const isPad = navigator.userAgent.match(/iPad|Tablet/i) != null;
+  const isPad = typeof navigator !== 'undefined' ? navigator.userAgent.match(/iPad|Tablet/i) != null : false;
   const itemOffsetWidth = elRefs.current && elRefs.current[0] ? elRefs.current[0].scrollWidth + marginOffset : null;
   const wrapperClientWidth = wrapperRef.current ? wrapperRef.current.clientWidth : null;
   const contentFullWidth = contentRef.current && sliderItems
