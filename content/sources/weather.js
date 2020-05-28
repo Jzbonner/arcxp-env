@@ -1,13 +1,17 @@
-import getProperties from 'fusion:properties';
+/* eslint-disable no-console */
 import axios from 'axios';
+
+const { weatherAlertsAPIkey } = require('../../environment/index');
 
 const params = {
   zones: 'text',
 };
-const { weatherAlertsAPIkey } = getProperties();
 
 const fetch = (query) => {
   const { zones } = query;
+  if (!zones || !weatherAlertsAPIkey) {
+    return null;
+  }
   const weatherAPIlink = `https://services.coxnewspapers.com/weatheralerts?zones=${zones}`;
   return axios
     .get(weatherAPIlink, {
