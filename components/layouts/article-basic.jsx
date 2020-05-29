@@ -101,7 +101,7 @@ const StoryPageLayout = () => {
   const interscrollerPlaceholder = () => {
     if (isHyperlocalContent && ampPage) {
       return (
-        <amp-fx-flying-carpet>
+        <amp-fx-flying-carpet height="auto">
           <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>
         </amp-fx-flying-carpet>
       );
