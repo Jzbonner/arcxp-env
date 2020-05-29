@@ -38,27 +38,31 @@ export const AllStaffPage = () => {
 
     if (selectedArea && selectedArea.name !== 'All') {
       setSelectedLeftMenuItem(selectedArea);
-      const staffers = globalContent.q_results.filter((staff) => {
-        if (staff.expertise) {
-          return staff.expertise.split(',').some(ext => parseInt(ext, 10) === selectedArea.id);
-        }
-        return false;
-      });
+      const staffers = globalContent
+        && globalContent.q_results
+        && globalContent.q_results.filter((staff) => {
+          if (staff.expertise) {
+            return staff.expertise.split(',').some(ext => parseInt(ext, 10) === selectedArea.id);
+          }
+          return false;
+        });
       setSelectedStaff(staffers);
     } else {
       setSelectedLeftMenuItem({ name: 'All', id: 0 });
-      const staffers = globalContent.q_results.filter((staff) => {
-        if (staff.expertise) {
-          return staff.expertise.split(',').every((expertise) => {
-            // filters out Hyperlocal and all types of Community Contributors from the 'All' tab
-            if ([8, 17, 18, 19, 20, 21].indexOf(parseInt(expertise, 10)) === -1) {
-              return true;
-            }
-            return false;
-          });
-        }
-        return true;
-      });
+      const staffers = globalContent
+        && globalContent.q_results
+        && globalContent.q_results.filter((staff) => {
+          if (staff.expertise) {
+            return staff.expertise.split(',').every((expertise) => {
+              // filters out Hyperlocal and all types of Community Contributors from the 'All' tab
+              if ([8, 17, 18, 19, 20, 21].indexOf(parseInt(expertise, 10)) === -1) {
+                return true;
+              }
+              return false;
+            });
+          }
+          return true;
+        });
       setSelectedStaff(staffers);
     }
   }, []);
