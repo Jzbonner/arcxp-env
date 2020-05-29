@@ -45,8 +45,6 @@ const ListPageLayout = () => {
     },
   });
 
-  const { content_elements: listItems } = initialList || {};
-
   const fetchRef = useRef(null);
 
   const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
@@ -67,7 +65,7 @@ const ListPageLayout = () => {
               </div>
               <CollectionList
                 source={'collections-api'}
-                listItems={listItems}
+                listItems={initialList}
                 collectionLength={contentElements ? contentElements.length : 0}
                 collectionID={queryID}
                 fetchRef={fetchRef}
