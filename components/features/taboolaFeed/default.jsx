@@ -40,7 +40,7 @@ const TaboolaFeed = ({ ampPage }) => {
   }, []);
 
   return (
-      <div className="c-section">
+      <div className={layout === 'article-basic' ? 'c-section' : ''}>
         <div id={ layout === 'article-basic' ? taboolaStoryID : taboolaSectionID } className='b-clear-both'></div>
       </div>);
 };
