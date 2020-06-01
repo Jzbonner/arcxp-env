@@ -21,7 +21,7 @@ const Weather = () => {
           {icon && <img height='35px' src={iconPath} alt={text} />}
         </li>
         <li className='nav-itemText nav-weather weather-text'>
-          {temp && <a href='/weather/'>${temp}&deg;</a>}
+          {temp && <a href='/weather/'>{temp}&deg;</a>}
         </li>
       </>
     );
