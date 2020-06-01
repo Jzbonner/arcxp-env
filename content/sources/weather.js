@@ -4,15 +4,18 @@ import axios from 'axios';
 const { weatherAlertsAPIkey } = require('../../environment/index');
 
 const params = {
-  zones: 'text',
+  endpoint: 'text',
+  lookup: 'text',
 };
 
 const fetch = (query) => {
-  const { zones } = query;
-  if (!zones || !weatherAlertsAPIkey) {
+  const { endpoint, lookup } = query;
+
+  if (!endpoint || !lookup || !weatherAlertsAPIkey) {
     return null;
   }
-  const weatherAPIlink = `https://services.coxnewspapers.com/weather/alerts?zones=${zones}`;
+
+  const weatherAPIlink = `https://services.coxnewspapers.com/weather/${endpoint}?${lookup}`;
   return axios
     .get(weatherAPIlink, {
       headers: {
