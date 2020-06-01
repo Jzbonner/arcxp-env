@@ -9,7 +9,7 @@ const params = {
   site: 'text',
 };
 
-const getStoryData = (site, { data: collectionsData }) => {
+const getStoryData = (site = 'ajc', { data: collectionsData }) => {
   const { document } = collectionsData || {};
   const { content_elements: contentElements = [] } = document || {};
   if (contentElements.length) {
@@ -36,7 +36,7 @@ const getStoryData = (site, { data: collectionsData }) => {
 };
 
 const fetch = (query) => {
-  const { site, id } = query || { site: 'ajc', id: '' };
+  const { site = 'ajc', id = '' } = query || {};
 
   if (id) {
     const requestUri = `${CONTENT_BASE}/websked/collections/v1/collections/${id}`;
