@@ -128,6 +128,11 @@
       flex-grow: 3;
       width: 208%;
       height: 200%;
+
+      .mosaic-container .mosaic-image {
+        opacity: .5;
+        transition: opacity .2s .1s;
+      }
     }
 
     .right-backdrop {
@@ -137,7 +142,7 @@
       width: 92%;
 
       .mosaic-container .mosaic-image {
-        width: 125%;
+        width: 145%;
         opacity: .5;
         transition: opacity .2s .1s;
       }
