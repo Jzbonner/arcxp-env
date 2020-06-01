@@ -4,30 +4,21 @@ import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import './default.scss';
 
-const SponsorBanner = ({ taxonomy, sectionFeatureID }) => {
-  const { sections: articleSections } = taxonomy || {};
+const SponsorBanner = ({ sponsorID }) => {
   const { minTabletViewWidth } = getProperties();
   const [currentWidth, setWidth] = useState();
-  let sponsorSection;
-  let sponsorSectionName;
-
   useEffect(() => {
     const width = window.innerWidth;
     setWidth(width);
   }, []);
 
-  if (articleSections) {
-    sponsorSection = articleSections.filter(section => section && section.path && section.path.includes('/sponsor/'));
-    sponsorSectionName = sponsorSection && sponsorSection[0] && sponsorSection[0].path ? sponsorSection[0].path : null;
-  }
-
-  if (!sponsorSectionName && !sectionFeatureID) {
+  if (!sponsorID) {
     return null;
   }
 
   const data = useContent({
     source: 'site-api',
-    query: { section: `${sectionFeatureID || sponsorSectionName}` },
+    query: { section: `${sponsorID}` },
   });
 
   if (data && data.Sponsor) {
@@ -51,8 +42,7 @@ const SponsorBanner = ({ taxonomy, sectionFeatureID }) => {
 };
 
 SponsorBanner.propTypes = {
-  taxonomy: PropTypes.object,
-  sectionFeatureID: PropTypes.string,
+  sponsorID: PropTypes.string,
 };
 
 export default SponsorBanner;
