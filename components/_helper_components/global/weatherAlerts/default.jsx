@@ -28,7 +28,8 @@ const WeatherAlerts = () => {
   const weatherData = useContent({
     source: 'weather',
     query: {
-      zones: `${gaCounties}`,
+      endpoint: 'alerts',
+      lookup: `zones=${gaCounties}`,
     },
   });
 
