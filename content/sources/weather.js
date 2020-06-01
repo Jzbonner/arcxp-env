@@ -12,7 +12,7 @@ const fetch = (query) => {
   if (!zones || !weatherAlertsAPIkey) {
     return null;
   }
-  const weatherAPIlink = `https://services.coxnewspapers.com/weatheralerts?zones=${zones}`;
+  const weatherAPIlink = `https://services.coxnewspapers.com/weather/alerts?zones=${zones}`;
   return axios
     .get(weatherAPIlink, {
       headers: {

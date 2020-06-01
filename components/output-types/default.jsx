@@ -27,7 +27,9 @@ const DefaultOutputType = (props) => {
     MetaTags,
   } = props;
   const { isEnabled = false, clientCode, environment: connextEnv } = connext;
-  const { type, taxonomy, canonical_url: articleURL } = globalContent || { type: null };
+  const {
+    type, taxonomy, canonical_url: articleURL, _id: uuid,
+  } = globalContent || { type: null };
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
   const noAmp = checkTags(tags, 'no-amp');
@@ -54,7 +56,7 @@ const DefaultOutputType = (props) => {
           </>
         )}
         <Libs />
-        {!noAds && !isHyperlocalContent && <NativoScripts />}
+        {!noAds && !isHyperlocalContent && <NativoScripts tags={tags} uuid={uuid} />}
         {!isHyperlocalContent && <TaboolaHeader/>}
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
