@@ -12,28 +12,18 @@ const Weather = () => {
   });
 
   if (weatherData) {
-    alert('dave', weatherData);
+    const { Temperature: temp, WeatherIcon: icon, WeatherText: text } = weatherData[0] || {};
+    // icons are integers but the file path has leading zeroes, per https://developer.accuweather.com/weather-icons
+    const iconPath = `https://developer.accuweather.com/sites/default/files/${icon < 10 ? `0${icon}` : icon}-s.png`;
     return (
       <>
         <li className='nav-weather weather-icon'>
-          <img height='35px' src='weatherIcon'></img>
-         </li>
+          {icon && <img height='35px' src={iconPath} alt={text} />}
+        </li>
         <li className='nav-itemText nav-weather weather-text'>
-          <a>89°</a>
+          {temp && <a href='/weather/'>${temp}&deg;</a>}
         </li>
       </>
-      // <div className="c-weatherAlert">
-      //   {weatherData.map((zone) => {
-      //     const { headline: alertHeadline } = zone || {};
-      //     const { areaDesc: alertArea } = zone || {};
-      //     return (
-      //       <>
-      //         THIS IS MY WEATHER DATA {alertHeadline} {alertArea}
-      //       </>
-      //     );
-      //   })}
-      //   ;
-      // </div>
     );
   }
   return null;
