@@ -13,6 +13,7 @@ import MPGO1Element from '../../_helper_components/global/ads/mpg01/default';
 import leftArrow from '../../../resources/icons/gallery/left-arrow.svg';
 import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
+import SiteMetrics from '../../_helper_components/global/siteMetrics/default';
 import './default.scss';
 
 const PG01 = () => <ArcAd staticSlot={'PG01'} key={'PG01'} />;
@@ -93,6 +94,10 @@ const Gallery = (props) => {
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic ? headlines.basic : null;
+
+  const dataLayer = window && window.dataLayer ? window.dataLayer : [];
+
+  console.log('dataLayer', dataLayer || 'no data');
 
   if (!maxIndex) {
     if (elementData && elementData.length > 1) {
@@ -556,7 +561,7 @@ const Gallery = (props) => {
         }
         {
           !isMobile
-            ? <DesktopGallery data={elementData} translateX={translateX} visibility={galleryVisible}/>
+            ? <DesktopGallery data={elementData} translateX={translateX} visibility={galleryVisible} />
             : null
         }
         <div
@@ -580,7 +585,10 @@ const Gallery = (props) => {
               <div className="icon-text hidden-large">View Gallery</div>
             </div>
             <div className="gallery-count-next hidden-small hidden-medium">
-              <a onClick={() => changeIndex(actions.NEXT)}>
+              <a onClick={() => {
+                changeIndex(actions.NEXT);
+                //dataLayer.push('' : )
+              }}>
                 <img src={rightArrow} />
               </a>
             </div>
