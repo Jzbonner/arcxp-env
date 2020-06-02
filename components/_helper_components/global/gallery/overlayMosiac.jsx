@@ -8,8 +8,8 @@ const OverlayMosiac = ({ data }) => {
   const final = data && data.length ? data[data.length - 1] : null;
 
   const firstImgSrc = first && first.props && first.props.data && first.props.data.url ? first.props.data.url : null;
-  const firstWidth = first && first.props && first.props.data && first.props.data.width ? first.props.data.firstWidth : null;
-  const firstHeight = first && first.props && first.props.data && first.props.data.height ? first.props.data.firstHeight : null;
+  const firstWidth = first && first.props && first.props.data && first.props.data.width ? first.props.data.width : null;
+  const firstHeight = first && first.props && first.props.data && first.props.data.height ? first.props.data.height : null;
 
   const secondImgSrc = second && second.props && second.props.data && second.props.data.url ? second.props.data.url : null;
   const finalImgSrc = final && final.props && final.props.data && final.props.data.url ? final.props.data.url : null;
