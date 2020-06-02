@@ -8,7 +8,6 @@ import Copyright from '../_helper_components/global/copyright/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 import AuthorMenu from '../_helper_components/allstaff/authorMenu/default';
-import getQueryParams from './_helper_functions/getQueryParams';
 import findArea from './_helper_functions/staffpage/findArea';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import ArcAd from '../features/ads/default';
@@ -19,8 +18,9 @@ import '../../src/styles/base/_utility.scss';
 
 export const AllStaffPage = () => {
   const appContext = useAppContext();
-  const { globalContent, requestUri } = appContext;
+  const { globalContent, globalContentConfig } = appContext;
   const { sites } = getProperties();
+  const { query } = globalContentConfig || {};
 
   const [leftMenuMenuVisibility, setLeftMenuVisibility] = useState(false);
   const [selectedLeftMenuItem, setSelectedLeftMenuItem] = useState({});
@@ -33,7 +33,7 @@ export const AllStaffPage = () => {
   };
 
   useEffect(() => {
-    const selectedAreaTag = getQueryParams(requestUri).area;
+    const selectedAreaTag = query && query.id;
     const selectedArea = findArea(selectedAreaTag, sites[0]);
 
     if (selectedArea && selectedArea.name !== 'All') {
@@ -41,6 +41,9 @@ export const AllStaffPage = () => {
       const staffers = globalContent
         && globalContent.q_results
         && globalContent.q_results.filter((staff) => {
+          if (!staff.status) {
+            return false;
+          }
           if (staff.expertise) {
             return staff.expertise.split(',').some(ext => parseInt(ext, 10) === selectedArea.id);
           }
@@ -52,6 +55,9 @@ export const AllStaffPage = () => {
       const staffers = globalContent
         && globalContent.q_results
         && globalContent.q_results.filter((staff) => {
+          if (!staff.status) {
+            return false;
+          }
           if (staff.expertise) {
             return staff.expertise.split(',').every((expertise) => {
               // filters out Hyperlocal and all types of Community Contributors from the 'All' tab

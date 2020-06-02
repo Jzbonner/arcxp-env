@@ -95,7 +95,7 @@ const Lead = (customFields = {}) => {
         return (
           <>
             {title && <div className="b-sectionTitle">{title}</div>}
-            {getLists(apiData, startIndex + 1, 5)}
+            {getLists(apiData, startIndex + 1, 4)}
           </>
         );
       case '5-Item Feature - Center Lead Top Photo':

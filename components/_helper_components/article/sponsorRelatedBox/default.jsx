@@ -8,19 +8,22 @@ import './default.scss';
 const SP01 = () => <ArcAd staticSlot={'SP01'} key={'SP01'} />;
 
 const SponsorRelatedBox = ({ taxonomy, uuid }) => {
-  const { primary_section: primarySection } = taxonomy || {};
+  const { sections } = taxonomy || {};
   let sponsorSection = null;
 
-  if (primarySection) {
-    sponsorSection = primarySection.path && primarySection.path.includes('/sponsor/') ? primarySection.path : null;
+  if (sections) {
+    sponsorSection = sections.filter(section => section && section.path && section.path.includes('/sponsor/'));
   }
-  if (!sponsorSection) {
+
+  const sectionPath = sponsorSection && sponsorSection[0] && sponsorSection[0].path ? sponsorSection[0].path : null;
+
+  if (!sectionPath) {
     return null;
   }
 
   const siteData = useContent({
     source: 'site-api',
-    query: { section: sponsorSection || null },
+    query: { section: sectionPath || null },
   });
 
   if (!siteData) return null;
