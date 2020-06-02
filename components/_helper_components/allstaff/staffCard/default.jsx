@@ -27,21 +27,21 @@ export const StaffCard = ({ staffer = {} }) => {
         <a href={staffBioPageLink} className={'name'}>{name}</a>
         <div className={'role'}>{role}</div>
         <div className={'phone-email'}>
-          <a
+          { telephone && <a
             target="_self"
             href={`tel:${email}`}
             className={'phone'}
           >
             {telephone}
-          </a>
+          </a> }
           {telephone && email && <span className={'divider'}>|</span>}
-          <a
+          { email && <a
             target="_self"
             href={`mailto:${email}`}
             className={'email'}
           >
             Email
-          </a>
+          </a> }
         </div>
       </div>
     </div>
