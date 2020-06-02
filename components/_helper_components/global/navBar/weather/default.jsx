@@ -1,13 +1,15 @@
 import React from 'react';
 import '../default.scss';
 import { useContent } from 'fusion:content';
+import getProperties from 'fusion:properties';
 
 const Weather = () => {
+  const { weatherLocationId } = getProperties();
   const weatherData = useContent({
     source: 'weather',
     query: {
       endpoint: 'currentconditions',
-      lookup: 'location=30303',
+      lookup: `location=${weatherLocationId || 348181}`,
     },
   });
 
