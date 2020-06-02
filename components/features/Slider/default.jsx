@@ -100,7 +100,7 @@ const Slider = (customFields = {}) => {
   return (
     <div className={`c-slider-master ${getIsSpecial() ? 'is-special-feature' : ''}`}>
       <div ref={wrapperRef} className="c-slider-wrapper">
-        <h1 className="slider-title">{title}</h1>
+        {title ? <h1 className="slider-title">{title}</h1> : null }
         <div className="c-slider">
           <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`}>
             <div ref={contentRef} className="itemList" style={{ transform: `translateX(${translateX}px)` }}>
@@ -134,7 +134,6 @@ Slider.propTypes = {
     }),
     title: PropTypes.string.tag({
       name: 'Slider Title',
-      defaultValue: 'Special Features',
     }),
     displayClass: PropTypes.oneOf(['Slider', 'Slider - Special Features']).tag({
       name: 'Display Class',
