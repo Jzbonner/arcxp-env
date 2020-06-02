@@ -41,6 +41,9 @@ export const AllStaffPage = () => {
       const staffers = globalContent
         && globalContent.q_results
         && globalContent.q_results.filter((staff) => {
+          if (!staff.status) {
+            return false;
+          }
           if (staff.expertise) {
             return staff.expertise.split(',').some(ext => parseInt(ext, 10) === selectedArea.id);
           }
@@ -52,6 +55,9 @@ export const AllStaffPage = () => {
       const staffers = globalContent
         && globalContent.q_results
         && globalContent.q_results.filter((staff) => {
+          if (!staff.status) {
+            return false;
+          }
           if (staff.expertise) {
             return staff.expertise.split(',').every((expertise) => {
               // filters out Hyperlocal and all types of Community Contributors from the 'All' tab
