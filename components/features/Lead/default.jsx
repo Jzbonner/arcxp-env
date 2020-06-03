@@ -5,6 +5,7 @@ import { useFusionContext } from 'fusion:context';
 import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import Headline from '../../_helper_components/home/Headline/Headline';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
+import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import './default.scss';
 
 const Lead = (customFields = {}) => {
@@ -13,7 +14,11 @@ const Lead = (customFields = {}) => {
 
   const {
     customFields: {
-      content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', title = '', columns = 1,
+      content: { contentService = 'collections-api', contentConfigValues } = {},
+      displayClass = '',
+      title = '',
+      columns = 1,
+      moreURL,
     },
   } = customFields;
 
@@ -68,7 +73,9 @@ const Lead = (customFields = {}) => {
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex + 1, 2);
       case '1 or 2 Item Feature':
-        return [...Array(parseInt(columns, 10)).keys()].map(i => <Headline key={i} {...apiData[startIndex + i]} />);
+        return [...Array(parseInt(columns, 10)).keys()].map(i => (
+          <Headline key={i} {...apiData[startIndex + i]} />
+        ));
       default:
         return null;
     }
@@ -94,7 +101,7 @@ const Lead = (customFields = {}) => {
       case '5-Item Feature - No Photo':
         return (
           <>
-            {title && <div className="b-sectionTitle">{title}</div>}
+            <FeatureTitle title={title} moreURL={moreURL} />
             {getLists(apiData, startIndex + 1, 5)}
           </>
         );
@@ -107,10 +114,20 @@ const Lead = (customFields = {}) => {
 
   if (Array.isArray(data)) {
     return (
-      <div className={`c-homeLeadContainer b-margin-bottom-d30-m20 ${getDisplayClassMap(displayClass)} ${getColumnsMap(columns)}`}>
-        {renderColumn1(displayClass, data) && <div className="column-1">{renderColumn1(displayClass, data)}</div>}
-        {renderColumn2(displayClass, data) && <div className="column-2">{renderColumn2(displayClass, data)}</div>}
-        {renderColumn3(displayClass, data) && <div className="column-3">{renderColumn3(displayClass, data)}</div>}
+      <div
+        className={`c-homeLeadContainer b-margin-bottom-d30-m20 ${getDisplayClassMap(
+          displayClass,
+        )} ${getColumnsMap(columns)}`}
+      >
+        {renderColumn1(displayClass, data) && (
+          <div className="column-1">{renderColumn1(displayClass, data)}</div>
+        )}
+        {renderColumn2(displayClass, data) && (
+          <div className="column-2">{renderColumn2(displayClass, data)}</div>
+        )}
+        {renderColumn3(displayClass, data) && (
+          <div className="column-3">{renderColumn3(displayClass, data)}</div>
+        )}
       </div>
     );
   }
@@ -138,6 +155,9 @@ Lead.propTypes = {
     }),
     title: PropTypes.string.tag({
       name: 'Title - No Photo Display Class Only',
+    }),
+    moreURL: PropTypes.string.tag({
+      name: 'More URL',
     }),
   }),
 };

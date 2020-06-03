@@ -29,3 +29,10 @@
 .btn-arrow-up {
   @include blue-button(35px, "\e903", 21px);
 }
+
+.btn-arrow-right {
+  @include blue-button(35px, "\e903", 21px);
+
+  transform: rotate(90deg);
+  display: inline-flex;
+}

@@ -4,13 +4,16 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import { buildSliderItems, getAmount } from './_helper_functions/index';
 import rightArrow from '../../../resources/images/right-arrow.svg';
+import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import './default.scss';
 
 const Slider = (customFields = {}) => {
   const fusionContext = useFusionContext();
   const { arcSite = 'ajc' } = fusionContext;
   const {
-    customFields: { content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {}, displayClass = '', title = '' },
+    customFields: {
+      content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {}, displayClass = '', title = '', moreURL = '',
+    },
   } = customFields;
 
   let { from: startIndex, size: itemLimit } = contentConfigValues || {};
@@ -100,7 +103,7 @@ const Slider = (customFields = {}) => {
   return (
     <div className={`c-slider-master ${getIsSpecial() ? 'is-special-feature' : ''}`}>
       <div ref={wrapperRef} className="c-slider-wrapper">
-        {title ? <h1 className="slider-title">{title}</h1> : null }
+      <FeatureTitle title={title} moreURL={moreURL} />
         <div className="c-slider">
           <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`}>
             <div ref={contentRef} className="itemList" style={{ transform: `translateX(${translateX}px)` }}>
@@ -134,6 +137,9 @@ Slider.propTypes = {
     }),
     title: PropTypes.string.tag({
       name: 'Slider Title',
+    }),
+    moreURL: PropTypes.string.tag({
+      name: 'More URL',
     }),
     displayClass: PropTypes.oneOf(['Slider', 'Slider - Special Features']).tag({
       name: 'Display Class',
