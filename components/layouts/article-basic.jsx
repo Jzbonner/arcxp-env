@@ -137,7 +137,7 @@ const StoryPageLayout = () => {
   // about the author should be the last component of the story
   insertAtEndOfStory.push(BlogAuthorComponent);
   // sponsor box should appear right after blog author component
-  insertAtEndOfStory.push(<SponsorRelatedBox taxonomy={taxonomy} uuid={uuid} />);
+  insertAtEndOfStory.push(<SponsorRelatedBox sponsorID={sponsorSectionID} uuid={uuid} />);
 
   return (
     <>
