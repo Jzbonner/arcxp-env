@@ -15,6 +15,7 @@ import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
 import './default.scss';
 
+
 const PG01 = () => <ArcAd staticSlot={'PG01'} key={'PG01'} />;
 const PG02 = () => <ArcAd staticSlot={'PG02'} key={'PG02'} />;
 const MPG01 = () => <ArcAd staticSlot={'MPG01'} key={'MPG01'} />;
@@ -95,8 +96,6 @@ const Gallery = (props) => {
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic || leafHeadline ? headlines.basic || leafHeadline : null;
-  // console.log(promoItems)
-  // console.log('featured gallery headline', storyHeadlines);
 
   const dataLayer = window && window.dataLayer ? window.dataLayer : [];
 
