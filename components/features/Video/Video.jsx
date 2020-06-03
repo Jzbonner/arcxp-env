@@ -3,11 +3,20 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import VideoComponent from '../../_helper_components/global/video/default';
+import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 
 const Video = (customFields = {}) => {
   const { maxTabletViewWidth } = getProperties();
   const {
-    customFields: { autoplay = false, title = '', content: { contentService = 'video-api', contentConfigValues = { uuid: '' } } = {} },
+    customFields: {
+      autoplay = false,
+      title = '',
+      moreURL = '',
+      content: {
+        contentService = 'video-api',
+        contentConfigValues = { uuid: '' },
+      } = {},
+    },
   } = customFields;
 
   const data = useContent({
@@ -18,7 +27,7 @@ const Video = (customFields = {}) => {
   if (data) {
     return (
       <div className="b-margin-bottom-d30-m20">
-        {title && <div className="b-sectionTitle">{title}</div>}
+        <FeatureTitle title={title} moreURL={moreURL} />
         <VideoComponent
           src={data}
           isInlineVideo={true}
@@ -42,6 +51,9 @@ Video.propTypes = {
     }),
     title: PropTypes.string.tag({
       name: 'Title',
+    }),
+    moreURL: PropTypes.string.tag({
+      name: 'More URL',
     }),
   }),
 };

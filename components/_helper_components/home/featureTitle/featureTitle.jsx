@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './default.scss';
 
 const FeatureTitle = ({ title, moreURL }) => {
   if (title) {
     return (
-      <div className="b-sectionTitle">
+      <div className="c-sectionTitle">
         {moreURL ? (
-          <a href={moreURL} className="b-titleURL">
+          <a href={moreURL} className="titleURL">
             {title}
             <span className="btn-arrow-right btn-readmore"></span>
           </a>

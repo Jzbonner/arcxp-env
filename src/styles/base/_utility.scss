@@ -166,34 +166,3 @@
     overflow: initial;
   }
 }
-
-.b-sectionTitle {
-  letter-spacing: -.5px;
-  margin-bottom: 20px;
-  color: #313132;
-  text-align: center;
-  display: flex;
-  align-items: center;
-
-  @include text-styles(2.5rem, 1, "Average");
-
-  @include breakpoint(desktop-sm) {
-    text-align: left;
-  }
-}
-
-.btn-arrow-right.btn-readmore {
-  margin: 3px 0 0 15px;
-  display: none;
-
-  @include breakpoint(desktop-sm) {
-    display: inline-flex;
-  }
-}
-
-.b-titleURL {
-  display: flex;
-  align-items: center;
-  color: inherit;
-  cursor: pointer;
-}
