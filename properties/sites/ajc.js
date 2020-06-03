@@ -1,3 +1,5 @@
+import adstxt from './adstxt/ajc.com.json';
+
 export default {
   defaultSiteTitle: 'AJC',
   dfpId: '21849707860',
@@ -12,5 +14,5 @@ export default {
     gtmContainerKey: 'GTM-WT4CBT7',
   },
   adsPath: 'atlanta_np/ajc_web_default',
-  domain: 'ajc.com',
+  adsTxt: adstxt,
 };
