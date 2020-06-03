@@ -3,7 +3,6 @@ import { useAppContext } from 'fusion:context';
 import { connext } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import getContentMeta from '../siteMeta/_helper_functions/getContentMeta';
-import handlePropContentElements from '../../../features/gallery/_helper_functions/handlePropContentElements';
 
 const SiteMetrics = () => {
   const appContext = useAppContext();
@@ -15,13 +14,11 @@ const SiteMetrics = () => {
     promo_items: promoItems,
     headlines: contentHeadlines,
   } = globalContent || {};
-  const { basic } = promoItems || {};
+
+  const { basic = {} } = promoItems || {};
   const { headlines: promoHeadlines } = basic;
   const { type: promoType = '' } = basic || {};
   const { by: authorData } = credits || {};
-
-  console.log('contentType is', contentType);
-  console.log('promoType is ', promoType);
 
   const {
     system: sourceSystem,

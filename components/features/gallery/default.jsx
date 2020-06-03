@@ -1,8 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useAppContext } from 'fusion:context';
-/* import { connext } from 'fusion:environment';
-import getProperties from 'fusion:properties';
-import getContentMeta from '../siteMeta/_helper_functions/getContentMeta'; */
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import {
@@ -25,12 +21,8 @@ const MPG01 = () => <ArcAd staticSlot={'MPG01'} key={'MPG01'} />;
 
 const Gallery = (props) => {
   const {
-    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '',
+    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '', leafHeadline = '',
   } = props;
-
-  const appContext = useAppContext();
-  const { globalContent } = appContext;
-  console.log(globalContent);
 
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
@@ -102,7 +94,9 @@ const Gallery = (props) => {
 
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
-  let headline = headlines.basic ? headlines.basic : null;
+  let headline = headlines.basic || leafHeadline ? headlines.basic || leafHeadline : null;
+  // console.log(promoItems)
+  // console.log('featured gallery headline', storyHeadlines);
 
   const dataLayer = window && window.dataLayer ? window.dataLayer : [];
 
@@ -131,12 +125,12 @@ const Gallery = (props) => {
   };
 
   const dispatchGalleryOpenEvent = () => {
+    if (!hasOpened) dataLayer.push({ event: 'photoGalleryOpened' }, { galleryName: `${galHeadline || headline || ''}` });
     setOpenedState(true);
-    if (!hasOpened) dataLayer.push({ event: 'photoGalleryOpened' }, { galleryName: `${galHeadline || ''}` });
   };
 
   const dispatchPhotoViewedEvent = () => {
-    dataLayer.push({ event: 'gallerySecondaryPhotoViewed' }, { galleryName: `${galHeadline || ''}` });
+    dataLayer.push({ event: 'gallerySecondaryPhotoViewed' }, { galleryName: `${galHeadline || headline || ''}` });
   };
 
   // manages click count for desktop ads
@@ -418,8 +412,6 @@ const Gallery = (props) => {
     return finalElements;
   };
 
-  console.log(dataLayer);
-
   useEffect(() => {
     getInitWindowSize();
   }, []);
@@ -629,6 +621,7 @@ Gallery.propTypes = {
   promoItems: PropTypes.object,
   ads: PropTypes.array,
   pageType: PropTypes.string,
+  leafHeadline: PropTypes.string,
   customFields: PropTypes.shape({
     galleryUrl: PropTypes.string.tag({
       label: 'Gallery URL',
