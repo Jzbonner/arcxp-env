@@ -102,7 +102,7 @@ const Lead = (customFields = {}) => {
         return (
           <>
             <FeatureTitle title={title} moreURL={moreURL} />
-            {getLists(apiData, startIndex + 1, 5)}
+            {getLists(apiData, startIndex + 1, 4)}
           </>
         );
       case '5-Item Feature - Center Lead Top Photo':

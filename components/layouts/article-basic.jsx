@@ -87,12 +87,18 @@ const StoryPageLayout = () => {
   const maxNumberOfParagraphs = paragraphCounter(filteredContentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
 
-  const { tags = [] } = taxonomy || {};
+  const { tags = [], sections: articleSections } = taxonomy || {};
+
+  // Check if sections includes /sponsor
+  const sponsorSection = articleSections.filter(section => section && section.path && section.path.includes('/sponsor/'));
+  const sponsorSectionID = sponsorSection && sponsorSection[0] && sponsorSection[0].path ? sponsorSection[0].path : null;
+
   const hyperlocalTags = getProperties().hyperlocalTags || [];
   // Both checks return true if the tag is present and false if not.
   const noAds = checkTags(tags, 'no-ads');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
   const isCommunityContributor = checkTags(tags, 'community contributor');
+  const isSponsoredContent = sponsorSectionID;
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
@@ -131,7 +137,7 @@ const StoryPageLayout = () => {
   // about the author should be the last component of the story
   insertAtEndOfStory.push(BlogAuthorComponent);
   // sponsor box should appear right after blog author component
-  insertAtEndOfStory.push(<SponsorRelatedBox taxonomy={taxonomy} uuid={uuid} />);
+  insertAtEndOfStory.push(<SponsorRelatedBox sponsorID={sponsorSectionID} uuid={uuid} />);
 
   return (
     <>
@@ -142,7 +148,7 @@ const StoryPageLayout = () => {
       <main>
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
-            <SponsorBanner taxonomy={taxonomy} />
+            <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
             <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
@@ -202,7 +208,7 @@ const StoryPageLayout = () => {
             ampPage={ampPage}
           />
           {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
-          {!noAds && !isHyperlocalContent && (
+          {!noAds && !isHyperlocalContent && !isSponsoredContent && (
             <Nativo
               elements={filteredContentElements}
               displayIfAtLeastXParagraphs={4}
@@ -229,7 +235,7 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
             ampPage={ampPage}
           />
-          {!noAds && !isHyperlocalContent && (
+          {!noAds && !isHyperlocalContent && !isSponsoredContent && (
             <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
           )}
           {(!basicItems || promoType !== 'gallery') && !ampPage ? (
