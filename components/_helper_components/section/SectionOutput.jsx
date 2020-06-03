@@ -17,16 +17,19 @@ const SectionOutput = ({ zones, layout }) => (
     <BreakingNews />
     <WeatherAlerts />
     <NavBar type={layout} />
-    <main className="c-sectionContent">
-      {zones && (
-        zones.map((zone, i) => {
-          const { content, rightRailZone, rightHalfZone } = zone;
-          return <SectionHome feature={content} rightRailContent={rightRailZone} rightColContent={rightHalfZone} key={`section${i}`}/>;
-        })
-      )}
-    </main>
-    <Footer />
-    <Copyright />
+    {layout !== 'wrap-header_only' && <>
+        <main className="c-sectionContent">
+          {zones && (
+            zones.map((zone, i) => {
+              const { content, rightRailZone, rightHalfZone } = zone;
+              return <SectionHome feature={content} rightRailContent={rightRailZone} rightColContent={rightHalfZone} key={`section${i}`}/>;
+            })
+          )}
+        </main>
+        <Footer />
+        <Copyright />
+      </>
+    }
   </>
 );
 
