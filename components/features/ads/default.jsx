@@ -47,9 +47,30 @@ const ArcAd = ({ customFields, staticSlot }) => {
     contentId,
   } = contentMeta || {};
 
+  // rewrite content types for ads reporting purposes (see APD-520)
+  let objType;
+  switch (pageContentType) {
+    case 'article':
+    case 'wire':
+    case 'story':
+      objType = 'story';
+      break;
+    case 'blog':
+      objType = 'BlogEntry';
+      break;
+    case 'video':
+      objType = 'VideoProxy';
+      break;
+    case 'section front':
+      objType = 'SectionPage';
+      break;
+    default:
+      objType = pageContentType;
+  }
+
   const globalTargeting = {
     uuid: contentId,
-    obj_type: pageContentType,
+    obj_type: objType,
     environ,
     mediaType: 'Arc',
     sitepath: site.toLowerCase(),

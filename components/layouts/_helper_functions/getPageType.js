@@ -6,7 +6,7 @@ const checkPageType = (type, layout) => {
     page.isHomeOrSectionPage = false;
   } else if (layout) {
     const isHome = layout.indexOf('home') > -1;
-    const isSection = layout.indexOf('section') > -1;
+    const isSection = layout.indexOf('section') > -1 || layout.indexOf('staff') > -1 || layout.indexOf('wrap') > -1;
     const isList = layout.indexOf('list') > -1;
     const isAuthor = layout.indexOf('author') > -1;
     page.type = layout.substring(0, layout.indexOf('-'));
