@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-/* import { useAppContext } from 'fusion:context';
-import { connext } from 'fusion:environment';
+import { useAppContext } from 'fusion:context';
+/* import { connext } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import getContentMeta from '../siteMeta/_helper_functions/getContentMeta'; */
 import PropTypes from 'prop-types';
@@ -27,6 +27,10 @@ const Gallery = (props) => {
   const {
     contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '',
   } = props;
+
+  const appContext = useAppContext();
+  const { globalContent } = appContext;
+  console.log(globalContent);
 
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
