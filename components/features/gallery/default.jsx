@@ -1,4 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+/* import { useAppContext } from 'fusion:context';
+import { connext } from 'fusion:environment';
+import getProperties from 'fusion:properties';
+import getContentMeta from '../siteMeta/_helper_functions/getContentMeta'; */
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import {
@@ -13,7 +17,6 @@ import MPGO1Element from '../../_helper_components/global/ads/mpg01/default';
 import leftArrow from '../../../resources/icons/gallery/left-arrow.svg';
 import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
-import SiteMetrics from '../../_helper_components/global/siteMetrics/default';
 import './default.scss';
 
 const PG01 = () => <ArcAd staticSlot={'PG01'} key={'PG01'} />;
@@ -62,6 +65,8 @@ const Gallery = (props) => {
   const [currentAdCount, setCurrentAdCount] = useState(0);
   const [nextAdRendering, setNextAdRendering] = useState(4);
 
+  /* Metrics */
+  const [hasOpened, setOpenedState] = useState(null);
 
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
@@ -97,8 +102,6 @@ const Gallery = (props) => {
 
   const dataLayer = window && window.dataLayer ? window.dataLayer : [];
 
-  console.log('dataLayer', dataLayer || 'no data');
-
   if (!maxIndex) {
     if (elementData && elementData.length > 1) {
       setMaxIndex(elementData.length - 1);
@@ -123,6 +126,15 @@ const Gallery = (props) => {
     }
   };
 
+  const dispatchGalleryOpenEvent = () => {
+    setOpenedState(true);
+    if (!hasOpened) dataLayer.push({ event: 'photoGalleryOpened' }, { galleryName: `${galHeadline || ''}` });
+  };
+
+  const dispatchPhotoViewedEvent = () => {
+    dataLayer.push({ event: 'gallerySecondaryPhotoViewed' }, { galleryName: `${galHeadline || ''}` });
+  };
+
   // manages click count for desktop ads
   const handleClickCount = () => {
     if (clickCount === 4) {
@@ -133,6 +145,9 @@ const Gallery = (props) => {
   };
 
   const changeIndex = (action, maxNumber) => {
+    if (!hasOpened && currentIndex === 0) dispatchGalleryOpenEvent();
+    if (currentIndex !== 0) dispatchPhotoViewedEvent();
+
     const currentClickCount = clickCount;
     if (!isMobile) handleClickCount();
     setPreviousClickAction(currentAction);
@@ -224,6 +239,7 @@ const Gallery = (props) => {
   // opens mobile sticky
   const handleStickyOpen = () => {
     if (isMobile) setStickyState(true);
+    dispatchGalleryOpenEvent();
   };
 
   // on & off buttons for mobile caption
@@ -397,6 +413,8 @@ const Gallery = (props) => {
     });
     return finalElements;
   };
+
+  console.log(dataLayer);
 
   useEffect(() => {
     getInitWindowSize();
@@ -585,10 +603,7 @@ const Gallery = (props) => {
               <div className="icon-text hidden-large">View Gallery</div>
             </div>
             <div className="gallery-count-next hidden-small hidden-medium">
-              <a onClick={() => {
-                changeIndex(actions.NEXT);
-                //dataLayer.push('' : )
-              }}>
+              <a onClick={() => changeIndex(actions.NEXT)}>
                 <img src={rightArrow} />
               </a>
             </div>
