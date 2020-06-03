@@ -101,8 +101,8 @@
 // ad styles
 
 .arc_ad {
-
   // hide HP0x & RP0x ads below tablet
+
   @include between-breakpoints(mobile, tablet) {
 
     &[class*="HP0"],
@@ -112,6 +112,7 @@
   }
 
   // hide MP0x ads on tablet+
+
   @include breakpoint(tablet) {
 
     &[class*="MP0"] {
@@ -163,18 +164,5 @@
     position: initial;
     max-height: initial;
     overflow: initial;
-  }
-}
-
-.b-sectionTitle {
-  letter-spacing: -.5px;
-  margin-bottom: 20px;
-  color: #313132;
-  text-align: center;
-
-  @include text-styles(2.5rem, 1, "Average");
-
-  @include breakpoint(desktop-sm) {
-    text-align: left;
   }
 }

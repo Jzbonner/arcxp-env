@@ -3,13 +3,16 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
+import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import './default.scss';
 
 const ListOrderedUnordered = (customFields = {}) => {
   const fusionContext = useFusionContext();
   const { arcSite = 'ajc' } = fusionContext;
   const {
-    customFields: { content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {}, displayClass = '', title = '' },
+    customFields: {
+      content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {}, displayClass = '', title = '', moreURL = '',
+    },
   } = customFields;
 
   let { from: startIndex, size: itemLimit } = contentConfigValues || {};
@@ -27,7 +30,7 @@ const ListOrderedUnordered = (customFields = {}) => {
 
     return (
       <div className={`c-${displayClass} b-margin-bottom-d30-m20`}>
-        {title && <div className="b-sectionTitle">{title}</div>}
+        <FeatureTitle title={title} moreURL={moreURL} />
         <ul className="c-list-box">
           {filteredData.map((el, i) => {
             const { basic: headline } = el.headlines ? el.headlines : '';
@@ -60,6 +63,9 @@ ListOrderedUnordered.propTypes = {
     }),
     title: PropTypes.string.tag({
       name: 'Title',
+    }),
+    moreURL: PropTypes.string.tag({
+      name: 'More URL',
     }),
   }),
 };
