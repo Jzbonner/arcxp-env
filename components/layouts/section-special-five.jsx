@@ -31,8 +31,9 @@ const SectionLayout = (props) => {
 
 SectionLayout.sections = [
   'Zone 1',
-  '50/50 Left (zone 2)',
-  '50/50 Right (zone 2)',
+  'Left Col (zone 2)',
+  'Right Col (zone 2)',
+  'Right Rail (zone 2)',
   'Zone 3',
   'Zone 4',
   'Right Rail (zone 4)',
