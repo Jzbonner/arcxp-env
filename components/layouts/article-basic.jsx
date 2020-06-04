@@ -30,6 +30,7 @@ import FlatPage from '../_helper_components/flatpage/default';
 import ConnextInlinePromoSubscription from '../_helper_components/global/connextInlinePromo/default';
 import getQueryParams from './_helper_functions/getQueryParams';
 import checkTags from './_helper_functions/checkTags';
+import checkSponsor from './_helper_functions/checkSponsor';
 import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
 import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
@@ -87,18 +88,14 @@ const StoryPageLayout = () => {
   const maxNumberOfParagraphs = paragraphCounter(filteredContentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
 
-  const { tags = [], sections: articleSections } = taxonomy || {};
-
-  // Check if sections includes /sponsor
-  const sponsorSection = articleSections.filter(section => section && section.path && section.path.includes('/sponsor/'));
-  const sponsorSectionID = sponsorSection && sponsorSection[0] && sponsorSection[0].path ? sponsorSection[0].path : null;
+  const { tags = [], sections } = taxonomy || {};
 
   const hyperlocalTags = getProperties().hyperlocalTags || [];
   // Both checks return true if the tag is present and false if not.
   const noAds = checkTags(tags, 'no-ads');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
   const isCommunityContributor = checkTags(tags, 'community contributor');
-  const isSponsoredContent = sponsorSectionID;
+  const sponsorSectionID = checkSponsor(sections);
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
@@ -208,7 +205,7 @@ const StoryPageLayout = () => {
             ampPage={ampPage}
           />
           {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
-          {!noAds && !isHyperlocalContent && !isSponsoredContent && (
+          {!noAds && !isHyperlocalContent && !sponsorSectionID && (
             <Nativo
               elements={filteredContentElements}
               displayIfAtLeastXParagraphs={4}
@@ -235,7 +232,7 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
             ampPage={ampPage}
           />
-          {!noAds && !isHyperlocalContent && !isSponsoredContent && (
+          {!noAds && !isHyperlocalContent && !sponsorSectionID && (
             <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
           )}
           {(!basicItems || promoType !== 'gallery') && !ampPage ? (
