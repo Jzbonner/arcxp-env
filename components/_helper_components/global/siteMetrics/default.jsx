@@ -53,6 +53,7 @@ const SiteMetrics = () => {
     typeOfPage,
     site,
     title,
+    seoTitle,
     topics,
     contentId,
     firstPublishDateConverted,
@@ -71,7 +72,7 @@ const SiteMetrics = () => {
             'pageMainSection': '${topSection}',
             'pageCategory': '${secondarySection}',
             'pageContentType': '${typeOfPage || pageContentType}',
-            'pageTitle': '${title.replace('\'', '"')}'
+            'pageTitle': '${seoTitle ? seoTitle.replace(/'/g, '"') : title.replace(/'/g, '"')}'
           },
           'siteData': {
             'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',

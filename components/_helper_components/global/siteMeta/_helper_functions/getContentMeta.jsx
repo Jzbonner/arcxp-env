@@ -80,14 +80,15 @@ const getContentMeta = () => {
   if (delimitedSections.length) {
     secondarySection = delimitedSections[0]._id || '';
   }
-  const topSectionName = topSection.substring(topSection.lastIndexOf('/') + 1).replace(/-/g, ' ');
+  const topSectionName = topSection ? topSection.substring(topSection.lastIndexOf('/') + 1).replace(/-/g, ' ') : '';
   let site = siteName ? siteName.toLowerCase() : '';
   let title = headlines ? headlines.basic : metaValue('title') || site;
+  const seoTitle = headlines ? headlines.meta_title : null;
   let desc = description ? description.basic : metaValue('description') || '';
   let contentId = uuid;
   let pubDate = firstPublishDate;
   let uri = requestUri;
-  if (!canonicalUrl) {
+  if (!canonicalUrl && uri) {
     // only jump through these hoops if canonical_url is undefined (i.e. pagebuilder pages)
     // remove query string & hashes from uri
     uri = uri.replace(/\?.*/g, '');
@@ -125,7 +126,7 @@ const getContentMeta = () => {
     const month = `${firstPubDateObj.getMonth()}`;
     const dayOfTheMonth = `${formatDate(firstPubDateObj)}`;
     const year = `${firstPubDateObj.getFullYear()}`;
-    const time = `${formatTime(firstPubDateObj, true)}`;
+    const time = `${formatTime(firstPubDateObj, true)}` || '';
     /* eslint-disable-next-line max-len */
     firstPublishDateConverted = `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}${time.indexOf('1') !== 0 ? '0' : ''}${time.replace(/:/g, '').replace(/\s[A|P]M/g, '')}`;
   }
@@ -139,6 +140,7 @@ const getContentMeta = () => {
     topics,
     firstPublishDateConverted,
     title,
+    seoTitle,
     description: desc,
     site,
     promoItems,
