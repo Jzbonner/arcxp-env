@@ -21,6 +21,7 @@ const Headline = ({
   websites,
   type,
   firstInlineImage,
+  isTease,
 }) => {
   const appContext = useAppContext();
   const { contextPath, requestUri } = appContext;
@@ -72,7 +73,11 @@ const Headline = ({
         {(!isHyperlocalContent || !isCommunityContributor) && (
           <>
             <SectionLabel label={label} taxonomy={taxonomy} />
-            <TimeStamp firstPublishDate={publishDate} displayDate={displayDate} isHideTimestampTrue={isHideTimestampTrue} />
+            <TimeStamp
+            firstPublishDate={publishDate}
+            displayDate={displayDate}
+            isHideTimestampTrue={isHideTimestampTrue}
+            isTease={isTease} />
           </>
         )}
         <a href={`${contextPath}${relativeURL}`} className="headline">
@@ -93,6 +98,7 @@ Headline.propTypes = {
   websites: PropTypes.object,
   type: PropTypes.string,
   firstInlineImage: PropTypes.object,
+  isTease: PropTypes.bool,
 };
 
 export default Headline;
