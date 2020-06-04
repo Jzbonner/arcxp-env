@@ -64,6 +64,7 @@ const Gallery = (props) => {
 
   /* Metrics */
   const [hasOpened, setOpenedState] = useState(null);
+  const [isContentDataHeadlineFilled, setContentDataHeadlineState] = useState(false);
 
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
@@ -96,8 +97,23 @@ const Gallery = (props) => {
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic || leafHeadline ? headlines.basic || leafHeadline : null;
+  const fetchedHeadline = !headline
+    && fetchedGalleryData
+    && fetchedGalleryData.headlines
+    && fetchedGalleryData.headlines.basic ? fetchedGalleryData.headlines.basic : '';
 
   const dataLayer = window && window.dataLayer ? window.dataLayer : [];
+
+  // push headline for home/section galleries
+  if (!galHeadline && !headline && !isContentDataHeadlineFilled && fetchedHeadline) {
+    dataLayer.push({
+      contentData: {
+        galleryName: `${fetchedHeadline}`,
+      },
+    });
+
+    setContentDataHeadlineState(true);
+  }
 
   if (!maxIndex) {
     if (elementData && elementData.length > 1) {
