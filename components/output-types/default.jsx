@@ -9,6 +9,7 @@ import TaboolaFooter from '../_helper_components/global/taboola/taboolaFooter.js
 import TaboolaHeader from '../_helper_components/global/taboola/taboolaHeader.jsx';
 import NativoScripts from '../_helper_components/article/nativo/nativoScripts';
 import checkTags from '../layouts/_helper_functions/checkTags';
+import checkSponsor from '../layouts/_helper_functions/checkSponsor';
 import AmpRelLink from '../_helper_components/amp/AmpRelLink';
 import GoogleStructuredData from '../_helper_components/article/googleData/default';
 
@@ -30,10 +31,11 @@ const DefaultOutputType = (props) => {
   const {
     type, taxonomy, canonical_url: articleURL, _id: uuid,
   } = globalContent || { type: null };
-  const { tags = [] } = taxonomy || {};
+  const { tags = [], sections } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
   const noAmp = checkTags(tags, 'no-amp');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
+  const isSponsoredContent = checkSponsor(sections);
   const includeGtm = metrics && metrics.gtmContainerKey;
 
   return (
@@ -56,7 +58,7 @@ const DefaultOutputType = (props) => {
           </>
         )}
         <Libs />
-        {!noAds && !isHyperlocalContent && <NativoScripts tags={tags} uuid={uuid} />}
+        {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} />}
         {!isHyperlocalContent && <TaboolaHeader/>}
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
