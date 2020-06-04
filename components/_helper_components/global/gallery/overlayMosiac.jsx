@@ -8,15 +8,17 @@ const OverlayMosiac = ({ data }) => {
   const final = data && data.length ? data[data.length - 1] : null;
 
   const firstImgSrc = first && first.props && first.props.data && first.props.data.url ? first.props.data.url : null;
-  const firstWidth = first && first.props && first.props.data && first.props.data.width ? first.props.data.width : null;
-  const firstHeight = first && first.props && first.props.data && first.props.data.height ? first.props.data.height : null;
+  const firstWidth = 500;
+  const firstHeight = Math.floor(firstWidth * 0.58);
+  const rightImageWidth = 200;
+  const rightImageHeight = Math.floor(200 * 0.58);
 
   const secondImgSrc = second && second.props && second.props.data && second.props.data.url ? second.props.data.url : null;
   const finalImgSrc = final && final.props && final.props.data && final.props.data.url ? final.props.data.url : null;
 
   const resizedFirst = firstImgSrc ? imageResizer(firstImgSrc, firstWidth, firstHeight) : null;
-  const resizedSecond = secondImgSrc ? imageResizer(secondImgSrc, 300, 300 * 0.58) : null;
-  const resizedFinal = finalImgSrc ? imageResizer(finalImgSrc, 300, 300 * 0.58) : null;
+  const resizedSecond = secondImgSrc ? imageResizer(secondImgSrc, rightImageWidth, rightImageHeight) : null;
+  const resizedFinal = finalImgSrc ? imageResizer(finalImgSrc, rightImageWidth, rightImageHeight) : null;
 
   return (
     <div className="gallery-overlay-backdrop ">
