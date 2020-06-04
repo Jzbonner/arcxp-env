@@ -6,8 +6,10 @@ import AdSetup from './src/index';
 import fetchEnv from '../../_helper_components/global/utils/environment.js';
 import { adSlots, defaultAdSlot } from './children/adtypes';
 import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
+import currentConditions from '../../_helper_components/global/utils/weather/currentConditions';
 
 const ArcAd = ({ customFields, staticSlot }) => {
+  const { temp, text: sky, precipitation: weather } = currentConditions() || {};
   const appContext = useAppContext();
   const { isAdmin } = appContext;
   const { slot: customFieldsSlot } = customFields || {};
@@ -76,6 +78,9 @@ const ArcAd = ({ customFields, staticSlot }) => {
     sitepath: site.toLowerCase(),
     ad_slot: slotName,
     topics,
+    temp,
+    weather,
+    sky,
   };
 
   if (isAdmin && adConfig.dimensions[0][0] !== 1) {
