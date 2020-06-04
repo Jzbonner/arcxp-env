@@ -15,13 +15,14 @@ import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
 import './default.scss';
 
+
 const PG01 = () => <ArcAd staticSlot={'PG01'} key={'PG01'} />;
 const PG02 = () => <ArcAd staticSlot={'PG02'} key={'PG02'} />;
 const MPG01 = () => <ArcAd staticSlot={'MPG01'} key={'MPG01'} />;
 
 const Gallery = (props) => {
   const {
-    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '',
+    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '', leafHeadline = '',
   } = props;
 
   // holds Gallery items
@@ -61,6 +62,9 @@ const Gallery = (props) => {
   const [currentAdCount, setCurrentAdCount] = useState(0);
   const [nextAdRendering, setNextAdRendering] = useState(4);
 
+  /* Metrics */
+  const [hasOpened, setOpenedState] = useState(null);
+  const [isContentDataHeadlineFilled, setContentDataHeadlineState] = useState(false);
 
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
@@ -92,7 +96,24 @@ const Gallery = (props) => {
 
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
-  let headline = headlines.basic ? headlines.basic : null;
+  let headline = headlines.basic || leafHeadline ? headlines.basic || leafHeadline : null;
+  const fetchedHeadline = !headline
+    && fetchedGalleryData
+    && fetchedGalleryData.headlines
+    && fetchedGalleryData.headlines.basic ? fetchedGalleryData.headlines.basic : '';
+
+  const dataLayer = window && window.dataLayer ? window.dataLayer : [];
+
+  // push headline for home/section galleries
+  if (!galHeadline && !headline && !isContentDataHeadlineFilled && fetchedHeadline) {
+    dataLayer.push({
+      contentData: {
+        galleryName: `${fetchedHeadline}`,
+      },
+    });
+
+    setContentDataHeadlineState(true);
+  }
 
   if (!maxIndex) {
     if (elementData && elementData.length > 1) {
@@ -118,6 +139,15 @@ const Gallery = (props) => {
     }
   };
 
+  const dispatchGalleryOpenEvent = () => {
+    if (!hasOpened) dataLayer.push({ event: 'photoGalleryOpened' }, { galleryName: `${galHeadline || headline || ''}` });
+    setOpenedState(true);
+  };
+
+  const dispatchPhotoViewedEvent = () => {
+    dataLayer.push({ event: 'gallerySecondaryPhotoViewed' }, { galleryName: `${galHeadline || headline || ''}` });
+  };
+
   // manages click count for desktop ads
   const handleClickCount = () => {
     if (clickCount === 4) {
@@ -128,6 +158,9 @@ const Gallery = (props) => {
   };
 
   const changeIndex = (action, maxNumber) => {
+    if (!hasOpened && currentIndex === 0) dispatchGalleryOpenEvent();
+    if (currentIndex !== 0) dispatchPhotoViewedEvent();
+
     const currentClickCount = clickCount;
     if (!isMobile) handleClickCount();
     setPreviousClickAction(currentAction);
@@ -219,6 +252,7 @@ const Gallery = (props) => {
   // opens mobile sticky
   const handleStickyOpen = () => {
     if (isMobile) setStickyState(true);
+    dispatchGalleryOpenEvent();
   };
 
   // on & off buttons for mobile caption
@@ -556,7 +590,7 @@ const Gallery = (props) => {
         }
         {
           !isMobile
-            ? <DesktopGallery data={elementData} translateX={translateX} visibility={galleryVisible}/>
+            ? <DesktopGallery data={elementData} translateX={translateX} visibility={galleryVisible} />
             : null
         }
         <div
@@ -602,6 +636,7 @@ Gallery.propTypes = {
   promoItems: PropTypes.object,
   ads: PropTypes.array,
   pageType: PropTypes.string,
+  leafHeadline: PropTypes.string,
   customFields: PropTypes.shape({
     galleryUrl: PropTypes.string.tag({
       label: 'Gallery URL',

@@ -24,7 +24,10 @@ const SponsorBanner = ({ sponsorID, ampPage }) => {
   if (data && data.Sponsor) {
     const { sponsor_desktop_banner: desktopBanner, sponsor_mobile_banner: mobileBanner, sponsor_url: bannerURL } = data && data.Sponsor;
     const checkForMobileBanner = mobileBanner || desktopBanner;
-    if (ampPage) return <a href={bannerURL}><amp-img height='1' width='1.75' src={checkForMobileBanner} layout='responsive'/></a>;
+    if (ampPage && checkForMobileBanner) {
+      return (
+        <a href={bannerURL}><amp-img height='1' width='1.75' src={checkForMobileBanner} layout='responsive'/></a>);
+    }
     if (desktopBanner) {
       return (
         <div className="c-sponsorBanner b-margin-bottom-d40-m20 b-margin-top-d40-m20">
