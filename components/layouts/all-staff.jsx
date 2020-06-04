@@ -32,12 +32,10 @@ export const AllStaffPage = () => {
     setLeftMenuVisibility(false);
   };
 
-  useEffect(() => {
-    const selectedAreaTag = query && query.id;
+  const updateStaffers = (selectedAreaTag) => {
     const selectedArea = findArea(selectedAreaTag, sites[0]);
 
     if (selectedArea && selectedArea.name !== 'All') {
-      setSelectedLeftMenuItem(selectedArea);
       const staffers = globalContent
         && globalContent.q_results
         && globalContent.q_results.filter((staff) => {
@@ -45,13 +43,14 @@ export const AllStaffPage = () => {
             return false;
           }
           if (staff.expertise) {
-            return staff.expertise.split(',').some(ext => parseInt(ext, 10) === selectedArea.id);
+            return staff.expertise
+              .split(',')
+              .some(ext => parseInt(ext, 10) === selectedArea.id);
           }
           return false;
         });
       setSelectedStaff(staffers);
     } else {
-      setSelectedLeftMenuItem({ name: 'All', id: 0 });
       const staffers = globalContent
         && globalContent.q_results
         && globalContent.q_results.filter((staff) => {
@@ -61,7 +60,9 @@ export const AllStaffPage = () => {
           if (staff.expertise) {
             return staff.expertise.split(',').every((expertise) => {
               // filters out Hyperlocal and all types of Community Contributors from the 'All' tab
-              if ([8, 17, 18, 19, 20, 21].indexOf(parseInt(expertise, 10)) === -1) {
+              if (
+                [8, 17, 18, 19, 20, 21].indexOf(parseInt(expertise, 10)) === -1
+              ) {
                 return true;
               }
               return false;
@@ -71,7 +72,25 @@ export const AllStaffPage = () => {
         });
       setSelectedStaff(staffers);
     }
+  };
+
+  useEffect(() => {
+    updateStaffers(query.id);
+    const selectedArea = findArea(query.id, sites[0]);
+    if (selectedArea && selectedArea.name !== 'All') {
+      setSelectedLeftMenuItem(selectedArea);
+    } else {
+      setSelectedLeftMenuItem({ name: 'All', id: 0 });
+    }
   }, []);
+
+  const setCategory = (e, area) => {
+    e.preventDefault();
+    setSelectedLeftMenuItem(area);
+    updateStaffers(area.tag);
+    setLeftMenuVisibility(false);
+    window.history.pushState({}, null, `${area.tag}`);
+  };
 
   return (
     <>
@@ -89,13 +108,17 @@ export const AllStaffPage = () => {
       <main className={'c-staff-page-main b-margin-bottom-d30-m20'}>
         <AuthorMenu
           selectedLeftMenuItem={selectedLeftMenuItem}
+          setCategory={setCategory}
           setSelectedLeftMenuItem={setStaffFilter}
           leftMenuMenuVisibility={leftMenuMenuVisibility}
           setLeftMenuVisibility={() => setLeftMenuVisibility(false)}
           pageUri={pageUri}
         />
         <section className={'c-staffers'}>
-          <button className={'menu-button'} onClick={() => setLeftMenuVisibility(true)}>
+          <button
+            className={'menu-button'}
+            onClick={() => setLeftMenuVisibility(true)}
+          >
             <img src={plus} alt={'plus sign'} />
           </button>
           <header className={'c-staffers-header'}>
