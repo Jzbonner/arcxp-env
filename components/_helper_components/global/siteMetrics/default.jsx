@@ -10,16 +10,33 @@ const SiteMetrics = () => {
   const {
     source,
     credits,
+    type: contentType,
+    promo_items: promoItems,
+    headlines: contentHeadlines,
   } = globalContent || {};
+
+  const { basic = {} } = promoItems || {};
+  const { headlines: promoHeadlines } = basic;
+  const { type: promoType = '' } = basic || {};
   const { by: authorData } = credits || {};
+
   const {
     system: sourceSystem,
     type: sourceType,
   } = source || {};
   const authors = [];
+  let galleryHeadline = '';
+
   if (authorData) {
     authorData.forEach(author => author.name && authors.push(author.name));
   }
+
+  if (contentType === 'gallery') {
+    galleryHeadline = contentHeadlines && contentHeadlines.basic ? contentHeadlines.basic : '';
+  } else if (promoType === 'gallery') {
+    galleryHeadline = promoHeadlines && promoHeadlines.basic ? promoHeadlines.basic : '';
+  }
+
   const { metrics, siteDomainURL } = getProperties() || {};
   const contentMeta = getContentMeta();
 
@@ -73,7 +90,8 @@ const SiteMetrics = () => {
             'contentID': '${contentId || ''}',
             'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
             'contentPublishDate': '${firstPublishDateConverted}',
-            'blogName': '${pageContentType === 'blog' ? topSectionName : ''}'
+            'blogName': '${pageContentType === 'blog' ? topSectionName : ''}',
+            'galleryName': '${galleryHeadline}'
           }
         });
       `,
