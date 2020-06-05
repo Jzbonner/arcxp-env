@@ -8,6 +8,7 @@ import getContentMeta from '../siteMeta/_helper_functions/getContentMeta';
 const SiteMetrics = ({ isAmp }) => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
+  // console.log(appContext);
   const {
     source,
     credits,
@@ -15,11 +16,16 @@ const SiteMetrics = ({ isAmp }) => {
     promo_items: promoItems,
     headlines: contentHeadlines,
   } = globalContent || {};
+  console.log(globalContent);
 
   const { basic = {} } = promoItems || {};
   const { headlines: promoHeadlines } = basic;
   const { type: promoType = '' } = basic || {};
+  const { canonical_url: canonicalUrl } = basic || {};
   const { by: authorData } = credits || {};
+  console.log(authorData);
+  const { additional_properties: additionalProperties } = authorData[0] || {};
+  console.log(additionalProperties);
 
   const {
     system: sourceSystem,
@@ -59,6 +65,8 @@ const SiteMetrics = ({ isAmp }) => {
     contentId,
     firstPublishDateConverted,
   } = contentMeta || {};
+  console.log(contentMeta);
+  console.log(authors);
   const siteDomain = siteDomainURL || `//www.${site}.com`;
 
   if (isAmp) {
@@ -69,36 +77,33 @@ const SiteMetrics = ({ isAmp }) => {
         <script type='application/json' dangerouslySetInnerHTML={{
           __html: `{'vars': 
           {'adTarget': 'Atlanta_TV/wsbtv_web_default/news/local/atlanta',
-          'authors': [{'_id': 'matt-johnson','name': 'Matt Johnson','type': 'author'}],
-          'canonicalUrl':
-          '/news/local/atlanta/daycares-summer-camps-allowed-reopen-parents-wonder-if-its-safe-send-their-kids/2RUIKPTBFVGWLGYQEP7434ZLJQ/',
+          'authors': '${authors}',
+          'canonicalUrl':'${canonicalUrl}',
           'groups': 'default',
-          'pageName': '',
-          'pageSiteSection': 'newslocal',
-          'pageCategory': 'atlanta',
-          'pageContentType': 'story',
-          'pageTitle': 'Day cares, summer camps allowed to reopen but parents wonder if it’s safe to send their kids',
+          'pageName': '${url}',
+          'pageSiteSection': '${topSection}',
+          'pageCategory': '${secondarySection}',
+          'pageContentType': '${typeOfPage || pageContentType}',
+          'pageTitle': '${seoTitle ? seoTitle.replace(/'/g, '"') : title.replace(/'/g, '"')}',
           'pageFlow': '',
           'pageNumber': '',
           'siteVersion': 'instant',
-          'siteDomain': 'ajc.com',
-          'siteMetro': 'ga: atlanta',
-          'siteFormat': 'news',
+          'siteDomain': '${siteDomain}',
+          'siteMetro': '${metrics && metrics.siteMetro ? metrics.siteMetro : ''}',
+          'siteFormat': '${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}',
           'siteMedium': 'np',
-          'siteID': 'ajc',
+          'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
           'siteType': 'free',
           'siteCMS': 'arc',
-          'contentTopics': ['coronaviruswsb'],
-          'contentByline': ['Matt Johnson, WSBTV'],
-          'contentOriginatingSite': '',
-          'contentID': '2RUIKPTBFVGWLGYQEP7434ZLJQ',
-          'contentVendor': '',
-          'contentPublishDate': '20200513230103',
-          'blogName': '',
-          'galleryName': '',
-          'authorName': [
-            'Matt Johnson'
-        ],
+          'contentTopics': '${topics.join()}',
+          'contentByline': '${authors.join()}',
+          'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
+          'contentID': '${contentId || ''}',
+          'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
+          'contentPublishDate': '${firstPublishDateConverted}',
+          'blogName': '${pageContentType === 'blog' ? topSectionName : ''}',
+          'galleryName': '${galleryHeadline}',
+          'authorName': '${authors}',
         'pageNameStr': '',
         'pageUrlStr': ''
           }
