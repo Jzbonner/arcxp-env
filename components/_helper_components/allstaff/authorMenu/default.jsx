@@ -8,7 +8,7 @@ import close from '../../../../resources/icons/staff/close.svg';
 import './default.scss';
 
 const AuthorMenu = ({
-  selectedLeftMenuItem, setSelectedLeftMenuItem, leftMenuMenuVisibility, setLeftMenuVisibility, pageUri,
+  selectedLeftMenuItem, setCategory, leftMenuMenuVisibility, setLeftMenuVisibility, pageUri,
 }) => {
   const { sites, maxTabletViewWidth } = getProperties();
   const windowWidth = getWindowSize();
@@ -23,16 +23,16 @@ const AuthorMenu = ({
       let height = 0;
       let offset = 0;
 
-      for (let i = 1; i < items.length; i += 1) {
-        height += items[i].offsetHeight;
+      for (let i = 0; i < items.length; i += 1) {
         if (items[i].classList.contains('active')) {
           if (items[i].offsetHeight > heightOfOneLine) {
-            offset = 10;
+            offset = -15;
           } else {
-            offset = -3;
+            offset = -5;
           }
           break;
         }
+        height += items[i].offsetHeight;
       }
 
       if (authorMenu) {
@@ -51,14 +51,14 @@ const AuthorMenu = ({
             <AuthorMenuItem
               area={menuData && menuData.all}
               selectedLeftMenuItem={selectedLeftMenuItem}
-              setSelectedLeftMenuItem={setSelectedLeftMenuItem}
+              setCategory={setCategory}
               setLeftMenuVisibility={setLeftMenuVisibility}
               pageUri={pageUri}
             />
             <AuthorMenuItem
               area={menuData && menuData.newsroom}
               selectedLeftMenuItem={selectedLeftMenuItem}
-              setSelectedLeftMenuItem={setSelectedLeftMenuItem}
+              setCategory={setCategory}
               setLeftMenuVisibility={setLeftMenuVisibility}
               pageUri={pageUri}
             />
@@ -70,7 +70,7 @@ const AuthorMenu = ({
                     key={`key-${area.tag}`}
                     area={area}
                     selectedLeftMenuItem={selectedLeftMenuItem}
-                    setSelectedLeftMenuItem={setSelectedLeftMenuItem}
+                    setCategory={setCategory}
                     setLeftMenuVisibility={setLeftMenuVisibility}
                     pageUri={pageUri}
                   />
@@ -88,7 +88,7 @@ const AuthorMenu = ({
 };
 
 AuthorMenu.propTypes = {
-  setSelectedLeftMenuItem: PropTypes.func,
+  setCategory: PropTypes.func,
   selectedLeftMenuItem: PropTypes.object,
   setLeftMenuVisibility: PropTypes.func,
   leftMenuMenuVisibility: PropTypes.bool,

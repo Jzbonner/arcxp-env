@@ -30,9 +30,10 @@ export default (arcSite, id, size = 20, from = 0) => {
         headers: {
           Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
         },
+        id: i,
       })
-      .then(({ data }) => {
-        contentElements.push(...data.content_elements);
+      .then(({ data, config }) => {
+        contentElements.push({ id: config.id, data: data.content_elements });
       });
 
     promiseArray.push(promise);
@@ -41,5 +42,13 @@ export default (arcSite, id, size = 20, from = 0) => {
     i += 1;
   }
 
-  return Promise.all(promiseArray).then(() => contentElements);
+  return Promise.all(promiseArray).then(() => {
+    let sortedContentElements = [];
+    contentElements
+      .sort((a, b) => a.id - b.id)
+      .forEach((content) => {
+        sortedContentElements = [...sortedContentElements, ...content.data];
+      });
+    return sortedContentElements;
+  });
 };

@@ -37,6 +37,13 @@
           padding-right: 0;
         }
       }
+
+      &.with-rightRail {
+
+        .c-contentElements {
+          width: calc((100% - 300px) / 2 - 40px);
+        }
+      }
     }
   }
 

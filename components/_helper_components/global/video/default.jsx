@@ -26,7 +26,7 @@ const Video = ({
   const { startPlaying, muteON, autoplayNext } = featuredVideoPlayerRules || inlineVideoPlayerRules;
   const screenSize = checkWindowSize();
   const { outputType, arcSite = 'ajc', layout: pageLayout } = fusionContext;
-  const vidId = videoID || videoPageId;
+  let vidId = videoID || videoPageId;
   const currentEnv = fetchEnv();
 
 
@@ -43,6 +43,32 @@ const Video = ({
       window.PoWaSettings.advertising.adBar = true;
       window.PoWaSettings.advertising.adTag = adTag;
     }
+    let videoTotalTime;
+    let videoTitle;
+    let videoPlayType;
+    let videoPlayerVersion;
+    let videoContentType;
+    let videoTopics;
+    const fireGtmEvent = (evt) => {
+      const { time, type } = evt || {};
+      // fire GTM events for various player events
+      const dataLayer = window.dataLayer || [];
+      dataLayer.push({
+        event: type,
+        videoPayload: {
+          videoSource: 'arc',
+          videoTitle,
+          videoID: vidId,
+          videoContentType,
+          videoPlayType,
+          videoTotalTime,
+          videoPlayerVersion,
+          videoTopics,
+          videoAccountID: '',
+          videoSeekTime: time,
+        },
+      });
+    };
     const powaRendered = (e) => {
       const id = get(e, 'detail.id');
       const powa = get(e, 'detail.powa');
@@ -51,20 +77,39 @@ const Video = ({
       if (typeof powa !== 'undefined') {
         powa.on('start', (event) => {
           // video start: update various elements (if/when necessary)
-          const { id: playerId, videoData } = event || {};
+          const {
+            id: playerId,
+            videoData,
+            autoplay,
+            autoplayStatus,
+          } = event || {};
           const {
             canonical_url: vidCanonical,
             credits: vidCredits,
             description,
+            duration = 0,
             headlines,
+            taxonomy,
             _id: vId,
+            version,
+            video_type: vidType,
           } = videoData || {};
           const { basic: headline } = headlines || {};
           const { basic: vidCaption } = description || {};
+          const { tags = [] } = taxonomy || {};
           let vidCredit = '';
           if (vidCredits) {
             vidCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
           }
+          // (re)set video-specific values, for use in gtm
+          videoTotalTime = typeof duration === 'number' && duration > 0 ? duration / 1000 : duration;
+          vidId = vId;
+          videoTitle = headline;
+          videoPlayType = autoplay ? autoplayStatus : 'manual-play';
+          videoTopics = tags;
+          videoPlayerVersion = version;
+          videoContentType = vidType;
+
           // make everything relative to the player's container, in case there are multiple players on the page
           const playerEl = document.querySelector(`#${playerId}`);
           const videoComponent = playerEl.parentNode.parentNode;
@@ -89,7 +134,18 @@ const Video = ({
           if (creditContainerMobile) {
             creditContainerMobile.innerHTML = vidCredit;
           }
+
+          fireGtmEvent(event);
         });
+        powa.on('playback25', evt => fireGtmEvent(evt));
+        powa.on('playback50', evt => fireGtmEvent(evt));
+        powa.on('playback75', evt => fireGtmEvent(evt));
+        powa.on('playback100', evt => fireGtmEvent(evt));
+        powa.on('error', evt => fireGtmEvent(evt));
+        powa.on('adStart', evt => fireGtmEvent(evt));
+        powa.on('adSkip', evt => fireGtmEvent(evt));
+        powa.on('adError', evt => fireGtmEvent(evt));
+        powa.on('adComplete', evt => fireGtmEvent(evt));
       }
 
       // kick off playlist discovery

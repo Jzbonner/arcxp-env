@@ -4,14 +4,25 @@ import { useAppContext } from 'fusion:context';
 import './default.scss';
 
 const AuthorMenuItem = ({
-  selectedLeftMenuItem, area, setSelectedLeftMenuItem, pageUri,
+  selectedLeftMenuItem,
+  area,
+  setCategory,
+  pageUri,
 }) => {
   const appContext = useAppContext();
   const { contextPath } = appContext;
 
   return (
-    <li key={area.name} className={`c-author-menu-item ${area.id === selectedLeftMenuItem.id ? 'active' : ''}`}>
-      <a href={`${contextPath}/${pageUri}/${area.tag}`} onClick={() => setSelectedLeftMenuItem(area)}>
+    <li
+      key={area.name}
+      className={`c-author-menu-item ${
+        area.id === selectedLeftMenuItem.id ? 'active' : ''
+      }`}
+    >
+      <a
+        href={`${contextPath}/${pageUri}/${area.tag}`}
+        onClick={e => setCategory(e, area)}
+      >
         {area.name}
       </a>
     </li>
@@ -19,7 +30,7 @@ const AuthorMenuItem = ({
 };
 
 AuthorMenuItem.propTypes = {
-  setSelectedLeftMenuItem: PropTypes.func,
+  setCategory: PropTypes.func,
   selectedLeftMenuItem: PropTypes.object,
   area: PropTypes.object,
   pageUri: PropTypes.string,
