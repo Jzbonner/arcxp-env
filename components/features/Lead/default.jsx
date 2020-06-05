@@ -74,7 +74,7 @@ const Lead = (customFields = {}) => {
         return getLists(apiData, startIndex + 1, 2);
       case '1 or 2 Item Feature':
         return [...Array(parseInt(columns, 10)).keys()].map(i => (
-          <Headline key={i} {...apiData[startIndex + i]} />
+          <Headline key={i} {...apiData[startIndex + i]} isTease={true} />
         ));
       default:
         return null;
@@ -87,7 +87,7 @@ const Lead = (customFields = {}) => {
       case '5-Item Feature - Left Photo':
       case '5-Item Feature - No Photo':
       case '5-Item Feature - Center Lead Top Photo':
-        return <Headline {...apiData[startIndex]} />;
+        return <Headline {...apiData[startIndex]} isTease={true} />;
       default:
         return null;
     }
