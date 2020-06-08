@@ -12,9 +12,8 @@
 }
 
 .c-gallery {
-  width: 100vw;
-
   @include breakpoint(desktop-sm) {
+    width: 100vw;
     margin-left: calc(-100vw / 2 + 100% / 2);
   }
 
