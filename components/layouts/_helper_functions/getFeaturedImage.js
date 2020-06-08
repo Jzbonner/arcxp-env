@@ -23,7 +23,7 @@ const renderImage = () => {
   } = promoImage || {};
   const {
     promo_items: galleryPromoItems,
-  } = promoItems && promoItems.basic && promoItems.basic.promo_items ? promoItems.basic.promo_items : {};
+  } = promoItems && promoItems.basic ? promoItems.basic : {};
   const {
     url: galleryThumbnail,
   } = galleryPromoItems && galleryPromoItems.basic ? galleryPromoItems.basic : {};
