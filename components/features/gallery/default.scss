@@ -11,8 +11,20 @@
   }
 }
 
-.gallery-wrapper {
-  overflow: hidden;
+.c-gallery {
+  width: 100vw;
+
+  @include breakpoint(desktop-sm) {
+    margin-left: -3%;
+  }
+
+  @include breakpoint(desktop-lg) {
+    margin-left: calc(-100vw / 2 + 100% / 2);
+  }
+
+  .gallery-wrapper {
+    overflow: hidden;
+  }
 }
 
 .gallery-headline {
