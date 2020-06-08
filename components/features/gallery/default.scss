@@ -12,10 +12,8 @@
 }
 
 .c-gallery-homeSection {
-  @include breakpoint(desktop-sm) {
-    width: 100vw;
-    margin-left: calc(-100vw / 2 + 100% / 2);
-  }
+  width: 100vw;
+  margin-left: calc(-100vw / 2 + 100% / 2);
 }
 
 .gallery-wrapper {
