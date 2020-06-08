@@ -59,7 +59,7 @@ const Video = ({
           videoSource: 'arc',
           videoTitle,
           videoID: vidId,
-          videoContentType,
+          videoContentType: videoContentType === 'clip' ? 'vod' : videoContentType,
           videoPlayType,
           videoTotalTime,
           videoPlayerVersion,
@@ -81,7 +81,6 @@ const Video = ({
             id: playerId,
             videoData,
             autoplay,
-            autoplayStatus,
           } = event || {};
           const {
             canonical_url: vidCanonical,
@@ -105,7 +104,7 @@ const Video = ({
           videoTotalTime = typeof duration === 'number' && duration > 0 ? duration / 1000 : duration;
           vidId = vId;
           videoTitle = headline;
-          videoPlayType = autoplay ? autoplayStatus : 'manual-play';
+          videoPlayType = autoplay ? 'auto-play' : 'manual-play';
           videoTopics = tags;
           videoPlayerVersion = version;
           videoContentType = vidType;
@@ -137,6 +136,7 @@ const Video = ({
 
           fireGtmEvent(event);
         });
+        powa.on('playback0', evt => fireGtmEvent(evt));
         powa.on('playback25', evt => fireGtmEvent(evt));
         powa.on('playback50', evt => fireGtmEvent(evt));
         powa.on('playback75', evt => fireGtmEvent(evt));
