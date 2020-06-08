@@ -6,8 +6,7 @@ import Html from '../_helper_components/amp/Html';
 import AmpCustomStyles from '../_helper_components/amp/AmpCustomStyle';
 import AmpScripts from '../_helper_components/amp/AmpScripts';
 import GoogleStructuredData from '../_helper_components/article/googleData/default';
-import AmpAnalytics from '../_helper_components/amp/AmpAnalytics';
-
+import SiteMetrics from '../_helper_components/global/siteMetrics/default';
 
 const AmpOutputType = (props) => {
   const {
@@ -30,7 +29,7 @@ const AmpOutputType = (props) => {
       <GoogleStructuredData />
     </head>
     <body>
-      <AmpAnalytics />
+      <SiteMetrics isAmp={true} />
       { children }
     </body>
     </Html>

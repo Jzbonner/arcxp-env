@@ -8,7 +8,6 @@ import getContentMeta from '../siteMeta/_helper_functions/getContentMeta';
 const SiteMetrics = ({ isAmp }) => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
-  // console.log(appContext);
   const {
     source,
     credits,
@@ -16,26 +15,30 @@ const SiteMetrics = ({ isAmp }) => {
     promo_items: promoItems,
     headlines: contentHeadlines,
   } = globalContent || {};
-  console.log(globalContent);
 
   const { basic = {} } = promoItems || {};
   const { headlines: promoHeadlines } = basic;
   const { type: promoType = '' } = basic || {};
   const { canonical_url: canonicalUrl } = basic || {};
-  const { by: authorData } = credits || {};
-  console.log(authorData);
-  const { additional_properties: additionalProperties } = authorData[0] || {};
-  console.log(additionalProperties);
 
+  const { by: authorData } = credits || {};
   const {
     system: sourceSystem,
     type: sourceType,
   } = source || {};
   const authors = [];
+  const ampAuthors = [];
   let galleryHeadline = '';
 
   if (authorData) {
-    authorData.forEach(author => author.name && authors.push(author.name));
+    authorData.forEach((author) => {
+      const { _id: authorID, name: authorName, type } = author || {};
+      if (isAmp) {
+        // eslint-disable-next-line quote-props
+        ampAuthors.push({ '_id': authorID, 'name': authorName, 'type': type });
+      }
+      authors.push(authorName);
+    });
   }
 
   if (contentType === 'gallery') {
@@ -65,19 +68,17 @@ const SiteMetrics = ({ isAmp }) => {
     contentId,
     firstPublishDateConverted,
   } = contentMeta || {};
-  console.log(contentMeta);
-  console.log(authors);
   const siteDomain = siteDomainURL || `//www.${site}.com`;
 
   if (isAmp) {
     return (
       <amp-analytics
-        config='https://www.googletagmanager.com/amp.json?id=GTM-WQBXD72&gtm.url=SOURCE_URL'
+        config={`https://www.googletagmanager.com/amp.json?id=${metrics.ampGtmID}&gtm.url=SOURCE_URL`}
         data-credentials='include'>
         <script type='application/json' dangerouslySetInnerHTML={{
           __html: `{'vars': 
           {'adTarget': 'Atlanta_TV/wsbtv_web_default/news/local/atlanta',
-          'authors': '${authors}',
+          'authors': '${ampAuthors}',
           'canonicalUrl':'${canonicalUrl}',
           'groups': 'default',
           'pageName': '${url}',
