@@ -62,8 +62,8 @@ const SiteMetrics = () => {
 
   return (
     <script type='text/javascript' dangerouslySetInnerHTML={{
-      __html: `let dataLayer = window.dataLayer || [];
-        dataLayer.push({
+      __html: `
+        const initialDataObj = {
           'connextActive': '${connext && connext.isEnabled ? connext.isEnabled : 'false'}',
           'pageData': {
             'pageName': '${url}',
@@ -94,7 +94,14 @@ const SiteMetrics = () => {
             'blogName': '${pageContentType === 'blog' ? topSectionName : ''}',
             'galleryName': '${galleryHeadline}'
           }
-        });
+        };
+        // we do a check just in case dataLayer has already been created
+        if (window.dataLayer) {
+          dataLayer.push(initialDataObj);
+        } else {
+          dataLayer = [initialDataObj];
+        }
+
       `,
     }}></script>
   );
