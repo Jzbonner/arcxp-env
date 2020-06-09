@@ -77,7 +77,6 @@ const SiteMetrics = ({ isAmp }) => {
         data-credentials='include'>
         <script type='application/json' dangerouslySetInnerHTML={{
           __html: `{'vars': 
-          {'adTarget': 'Atlanta_TV/wsbtv_web_default/news/local/atlanta',
           'authors': '${ampAuthors}',
           'canonicalUrl':'${canonicalUrl}',
           'groups': 'default',
