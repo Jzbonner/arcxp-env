@@ -18,3 +18,4 @@ resources/dist/**
 /coverage
 
 .vscode/
+config/bundle.zip
