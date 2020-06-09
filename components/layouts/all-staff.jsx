@@ -18,6 +18,7 @@ import '../../src/styles/base/_utility.scss';
 
 export const AllStaffPage = () => {
   const appContext = useAppContext();
+  const { contextPath } = appContext;
   const { globalContent, globalContentConfig } = appContext;
   const { sites } = getProperties();
   const { query } = globalContentConfig || {};
@@ -45,7 +46,7 @@ export const AllStaffPage = () => {
           if (staff.expertise) {
             return staff.expertise
               .split(',')
-              .some(ext => parseInt(ext, 10) === selectedArea.id);
+              .some(ext => parseInt(ext.trim(), 10) === parseInt(selectedArea.id, 10));
           }
           return false;
         });
@@ -61,7 +62,7 @@ export const AllStaffPage = () => {
             return staff.expertise.split(',').every((expertise) => {
               // filters out Hyperlocal and all types of Community Contributors from the 'All' tab
               if (
-                [8, 17, 18, 19, 20, 21].indexOf(parseInt(expertise, 10)) === -1
+                [8, 17, 18, 19, 20, 21].indexOf(parseInt(expertise.trim(), 10)) === -1
               ) {
                 return true;
               }
@@ -89,7 +90,7 @@ export const AllStaffPage = () => {
     setSelectedLeftMenuItem(area);
     updateStaffers(area.tag);
     setLeftMenuVisibility(false);
-    window.history.pushState({}, null, `${area.tag}`);
+    window.history.pushState({}, null, `${contextPath}/${pageUri}/${area.tag}`);
   };
 
   return (
