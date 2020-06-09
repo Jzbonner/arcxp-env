@@ -19,10 +19,14 @@ const SiteMeta = () => {
     url,
     site,
     title,
+    seoTitle,
     description,
     isNonContentPage,
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
+
+  let pageTitle = seoTitle;
+  if (!seoTitle) pageTitle = title;
 
   return (
     <>
@@ -37,15 +41,15 @@ const SiteMeta = () => {
       <meta name="twitter:url" content={url} />
       <meta property="og:image" content={thumbnailImage} />
       <meta property="og:image:height" content={`${isNonContentPage
-          || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '630'}`} />
+        || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '630'}`} />
       <meta property="og:image:width" content={`${isNonContentPage
-          || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '1200'}`} />
+        || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '1200'}`} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content={`${isNonContentPage ? 'website' : 'article'}`} />
       {!isNativoLandingPage && <meta property="og:url" content={url} />}
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content={site} />
-      <title>{title}</title>
+      <title>{pageTitle}</title>
       <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
     </>

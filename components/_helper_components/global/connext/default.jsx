@@ -33,19 +33,25 @@ const ConnextInit = () => {
             const connextLS = window.localStorage.getItem('${connextLSLookup}');
             if (connextLS) {
               const { UserId } = JSON.parse(connextLS);
-              dataLayer.push({'userData': {
-                'userStatus': 'logged in',
-                'userProfileID': UserId
-              }});
+              const userDataObj = {
+                'userData': {
+                  'userStatus': 'logged in',
+                  'userProfileID': UserId
+                }
+              };
+              dataLayer.push(userDataObj);
             }
           }
         } else if (action === 'logged-out') {
           docBody.className = docBody.className.replace(/${userIsLoggedInClass}/g, '').replace(/${userIsAuthenticatedClass}/g, '');
           docBody.className += docBody.className.indexOf('${userIsLoggedOutClass}') === -1 ? ' ${userIsLoggedOutClass}' : '';
-          dataLayer.push('userData', {
-            'userStatus': 'not logged in',
-            'userProfileID': null
-          });
+          const userDataObj = {
+            'userData': {
+              'userStatus': 'not logged in',
+              'userProfileID': null
+            }
+          };
+          dataLayer.push(userDataObj);
         } else if (action === 'authenticated' && docBody.className.indexOf('${userIsAuthenticatedClass}') === -1) {
           docBody.className += ' ${userIsAuthenticatedClass}';
         }

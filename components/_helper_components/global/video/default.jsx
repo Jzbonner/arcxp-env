@@ -59,7 +59,7 @@ const Video = ({
           videoSource: 'arc',
           videoTitle,
           videoID: vidId,
-          videoContentType,
+          videoContentType: videoContentType === 'clip' ? 'vod' : videoContentType,
           videoPlayType,
           videoTotalTime,
           videoPlayerVersion,
@@ -75,13 +75,39 @@ const Video = ({
 
       // protect against the player not existing (just in case)
       if (typeof powa !== 'undefined') {
+        // go ahead and define vars for use in subsequent events/metrics
+        const { detail: videoDetails } = e || {};
+        const {
+          videoData: ogVideoData,
+          autoplay: ogAutoplay,
+        } = videoDetails || {};
+        const {
+          duration: ogDuration = 0,
+          headlines: ogHeadlines,
+          taxonomy: ogTaxonomy,
+          _id: ogVidId,
+          version: ogVersion,
+          video_type: ogVidType,
+        } = ogVideoData || {};
+        const { basic: ogHeadline } = ogHeadlines || {};
+        const { tags: ogTags = [] } = ogTaxonomy || {};
+
+        // (re)set video-specific values, for use in gtm
+        videoTotalTime = typeof ogDuration === 'number' && ogDuration > 0 ? ogDuration / 1000 : ogDuration;
+        vidId = ogVidId;
+        videoTitle = ogHeadline;
+        videoPlayType = ogAutoplay ? 'auto-play' : 'manual-play';
+        videoTopics = ogTags;
+        videoPlayerVersion = ogVersion;
+        videoContentType = ogVidType;
+
+        fireGtmEvent(videoDetails);
+
         powa.on('start', (event) => {
-          // video start: update various elements (if/when necessary)
           const {
             id: playerId,
             videoData,
             autoplay,
-            autoplayStatus,
           } = event || {};
           const {
             canonical_url: vidCanonical,
@@ -101,42 +127,45 @@ const Video = ({
           if (vidCredits) {
             vidCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
           }
-          // (re)set video-specific values, for use in gtm
-          videoTotalTime = typeof duration === 'number' && duration > 0 ? duration / 1000 : duration;
-          vidId = vId;
-          videoTitle = headline;
-          videoPlayType = autoplay ? autoplayStatus : 'manual-play';
-          videoTopics = tags;
-          videoPlayerVersion = version;
-          videoContentType = vidType;
-
-          // make everything relative to the player's container, in case there are multiple players on the page
-          const playerEl = document.querySelector(`#${playerId}`);
-          const videoComponent = playerEl.parentNode.parentNode;
-          const captionContainer = videoComponent.querySelector('.c-caption') || null;
-          const captionText = captionContainer ? captionContainer.querySelector('.photo-caption-text') : null;
-          const creditContainer = videoComponent.querySelector('.video-credit-text');
-          const creditContainerMobile = videoComponent.querySelector('.photo-credit-text');
-          if (pageLayout.indexOf('video') > -1 && vidCanonical && headline) {
-            // only update url & headline if it's a video page
-            window.history.pushState({ vId }, headline, vidCanonical);
-            document.querySelector('.article-headline-component .headline-body .headline-text').innerHTML = headline;
-          }
-          if (vidCaption && captionContainer) {
-            captionText.innerHTML = vidCaption;
-            captionContainer.style.display = 'block';
-          } else if (captionContainer) {
-            captionContainer.style.display = 'none';
-          }
-          if (creditContainer) {
-            creditContainer.innerHTML = vidCredit;
-          }
-          if (creditContainerMobile) {
-            creditContainerMobile.innerHTML = vidCredit;
+          // video start: update various elements if/when necessary (i.e. subsequent video (playlist) start event)
+          if (vidId !== vId) {
+            // (re)set video-specific values, for use in gtm
+            videoTotalTime = typeof duration === 'number' && duration > 0 ? duration / 1000 : duration;
+            vidId = vId;
+            videoTitle = headline;
+            videoPlayType = autoplay ? 'auto-play' : 'manual-play';
+            videoTopics = tags;
+            videoPlayerVersion = version;
+            videoContentType = vidType;
+            // make everything relative to the player's container, in case there are multiple players on the page
+            const playerEl = document.querySelector(`#${playerId}`);
+            const videoComponent = playerEl.parentNode.parentNode;
+            const captionContainer = videoComponent.querySelector('.c-caption') || null;
+            const captionText = captionContainer ? captionContainer.querySelector('.photo-caption-text') : null;
+            const creditContainer = videoComponent.querySelector('.video-credit-text');
+            const creditContainerMobile = videoComponent.querySelector('.photo-credit-text');
+            if (pageLayout.indexOf('video') > -1 && vidCanonical && headline) {
+              // only update url & headline if it's a video page
+              window.history.pushState({ vId }, headline, vidCanonical);
+              document.querySelector('.article-headline-component .headline-body .headline-text').innerHTML = headline;
+            }
+            if (vidCaption && captionContainer) {
+              captionText.innerHTML = vidCaption;
+              captionContainer.style.display = 'block';
+            } else if (captionContainer) {
+              captionContainer.style.display = 'none';
+            }
+            if (creditContainer) {
+              creditContainer.innerHTML = vidCredit;
+            }
+            if (creditContainerMobile) {
+              creditContainerMobile.innerHTML = vidCredit;
+            }
           }
 
           fireGtmEvent(event);
         });
+        powa.on('playback0', evt => fireGtmEvent(evt));
         powa.on('playback25', evt => fireGtmEvent(evt));
         powa.on('playback50', evt => fireGtmEvent(evt));
         powa.on('playback75', evt => fireGtmEvent(evt));

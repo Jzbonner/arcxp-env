@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useAppContext } from 'fusion:context';
 import './default.scss';
 import missingStaffIcon from '../../../../resources/icons/staff/missing-staff-avatar.svg';
 
@@ -14,7 +15,10 @@ export const StaffCard = ({ staffer = {} }) => {
     firstName,
     lastName,
   } = staffer;
-  const staffBioPageLink = `/staff/${`${firstName}-${lastName}`}/${id}/`;
+  const appContext = useAppContext();
+  const { contextPath } = appContext;
+
+  const staffBioPageLink = `${contextPath}/staff/${`${firstName}-${lastName}`}/${id}/`;
   return (
     <div className={'c-staff-card'}>
       <a

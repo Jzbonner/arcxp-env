@@ -12,6 +12,7 @@ export default {
     siteMetro: 'ga: atlanta',
     siteFormat: 'newspaper',
     gtmContainerKey: 'GTM-WT4CBT7',
+    ampGtmID: 'GTM-WQBXD72',
   },
   adsPath: 'atlanta_np/ajc_web_default',
   adsTxt: adstxt,

@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import { connext } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import getContentMeta from '../siteMeta/_helper_functions/getContentMeta';
 
-const SiteMetrics = () => {
+const SiteMetrics = ({ isAmp }) => {
   const appContext = useAppContext();
   const { globalContent } = appContext;
   const {
@@ -18,17 +19,26 @@ const SiteMetrics = () => {
   const { basic = {} } = promoItems || {};
   const { headlines: promoHeadlines } = basic;
   const { type: promoType = '' } = basic || {};
-  const { by: authorData } = credits || {};
+  const { canonical_url: canonicalUrl } = basic || {};
 
+  const { by: authorData } = credits || {};
   const {
     system: sourceSystem,
     type: sourceType,
   } = source || {};
   const authors = [];
+  const ampAuthors = [];
   let galleryHeadline = '';
 
   if (authorData) {
-    authorData.forEach(author => author.name && authors.push(author.name));
+    authorData.forEach((author) => {
+      const { _id: authorID, name: authorName, type } = author || {};
+      if (isAmp) {
+        // eslint-disable-next-line quote-props
+        ampAuthors.push({ '_id': authorID, 'name': authorName, 'type': type });
+      }
+      authors.push(authorName);
+    });
   }
 
   if (contentType === 'gallery') {
@@ -60,10 +70,54 @@ const SiteMetrics = () => {
   } = contentMeta || {};
   const siteDomain = siteDomainURL || `//www.${site}.com`;
 
+  if (isAmp) {
+    return (
+      <amp-analytics
+        config={`https://www.googletagmanager.com/amp.json?id=${metrics.ampGtmID}&gtm.url=SOURCE_URL`}
+        data-credentials='include'>
+        <script type='application/json' dangerouslySetInnerHTML={{
+          __html: `{'vars': 
+          'authors': '${ampAuthors}',
+          'canonicalUrl':'${canonicalUrl}',
+          'groups': 'default',
+          'pageName': '${url}',
+          'pageSiteSection': '${topSection}',
+          'pageCategory': '${secondarySection}',
+          'pageContentType': '${typeOfPage || pageContentType}',
+          'pageTitle': '${seoTitle ? seoTitle.replace(/'/g, '"') : title.replace(/'/g, '"')}',
+          'pageFlow': '',
+          'pageNumber': '',
+          'siteVersion': 'instant',
+          'siteDomain': '${siteDomain}',
+          'siteMetro': '${metrics && metrics.siteMetro ? metrics.siteMetro : ''}',
+          'siteFormat': '${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}',
+          'siteMedium': 'np',
+          'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
+          'siteType': 'free',
+          'siteCMS': 'arc',
+          'contentTopics': '${topics.join()}',
+          'contentByline': '${authors.join()}',
+          'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
+          'contentID': '${contentId || ''}',
+          'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
+          'contentPublishDate': '${firstPublishDateConverted}',
+          'blogName': '${pageContentType === 'blog' ? topSectionName : ''}',
+          'galleryName': '${galleryHeadline}',
+          'authorName': '${authors}',
+        'pageNameStr': '',
+        'pageUrlStr': ''
+          }
+        }
+        `,
+        }}></script>
+    </amp-analytics>
+    );
+  }
+
   return (
     <script type='text/javascript' dangerouslySetInnerHTML={{
-      __html: `let dataLayer = window.dataLayer || [];
-        dataLayer.push({
+      __html: `
+        const initialDataObj = {
           'connextActive': '${connext && connext.isEnabled ? connext.isEnabled : 'false'}',
           'pageData': {
             'pageName': '${url}',
@@ -94,10 +148,20 @@ const SiteMetrics = () => {
             'blogName': '${pageContentType === 'blog' ? topSectionName : ''}',
             'galleryName': '${galleryHeadline}'
           }
-        });
+        };
+        // we do a check just in case dataLayer has already been created
+        if (window.dataLayer) {
+          dataLayer.push(initialDataObj);
+        } else {
+          dataLayer = [initialDataObj];
+        }
+
       `,
     }}></script>
   );
 };
 
+SiteMetrics.propTypes = {
+  isAmp: PropTypes.bool,
+};
 export default SiteMetrics;
