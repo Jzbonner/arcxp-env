@@ -11,6 +11,11 @@
   }
 }
 
+.c-gallery-homeSection {
+  width: 100vw;
+  margin-left: calc(-100vw / 2 + 100% / 2);
+}
+
 .gallery-wrapper {
   overflow: hidden;
 }

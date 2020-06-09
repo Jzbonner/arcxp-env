@@ -24,7 +24,13 @@
 
   .btn-arrow-right.btn-readmore {
     margin: 3px 0 0 15px;
+    height: 25px;
+    width: 25px;
     display: none;
+    
+    &:after {
+      font-size: 15px;
+    }
 
     @include breakpoint(desktop-sm) {
       display: inline-flex;

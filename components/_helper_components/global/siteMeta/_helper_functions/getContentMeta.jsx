@@ -25,9 +25,11 @@ const getContentMeta = () => {
     credits,
     first_publish_date: initialPublishDate,
     display_date: dateModified,
+    distributor,
     canonical_url: canonicalUrl,
     publish_date: firstPublishDate,
     data: contentData,
+    additional_properties: additionalProperties,
   } = globalContent || {};
   const {
     sections,
@@ -94,7 +96,9 @@ const getContentMeta = () => {
     uri = uri.replace(/\?.*/g, '');
     uri = uri.replace(/#.*/g, '');
   }
-  const url = canonicalUrl || uri;
+  const newCanonicalUrl = distributor && distributor.subcategory === 'canonical'
+    ? additionalProperties && additionalProperties.originalUrl : '';
+  const url = newCanonicalUrl || canonicalUrl || uri;
   if (contentData) {
     // it's a list or list-type page, let's re-set some values
     const {
