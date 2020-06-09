@@ -35,7 +35,7 @@ const SiteMetrics = ({ isAmp }) => {
       const { _id: authorID, name: authorName, type } = author || {};
       if (isAmp) {
         // eslint-disable-next-line quote-props
-        ampAuthors.push({ '_id': authorID, 'name': authorName, 'type': type });
+        ampAuthors.push(`{ "_id": "${authorID}", "name": "${authorName}", "type": "${type}"}`);
       }
       authors.push(authorName);
     });
@@ -76,39 +76,40 @@ const SiteMetrics = ({ isAmp }) => {
         config={`https://www.googletagmanager.com/amp.json?id=${metrics.ampGtmID}&gtm.url=SOURCE_URL`}
         data-credentials='include'>
         <script type='application/json' dangerouslySetInnerHTML={{
-          __html: `{'vars': 
-          'authors': '${ampAuthors}',
-          'canonicalUrl':'${canonicalUrl}',
-          'groups': 'default',
-          'pageName': '${url}',
-          'pageSiteSection': '${topSection}',
-          'pageCategory': '${secondarySection}',
-          'pageContentType': '${typeOfPage || pageContentType}',
-          'pageTitle': '${seoTitle ? seoTitle.replace(/'/g, '"') : title.replace(/'/g, '"')}',
-          'pageFlow': '',
-          'pageNumber': '',
-          'siteVersion': 'instant',
-          'siteDomain': '${siteDomain}',
-          'siteMetro': '${metrics && metrics.siteMetro ? metrics.siteMetro : ''}',
-          'siteFormat': '${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}',
-          'siteMedium': 'np',
-          'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
-          'siteType': 'free',
-          'siteCMS': 'arc',
-          'contentTopics': '${topics.join()}',
-          'contentByline': '${authors.join()}',
-          'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
-          'contentID': '${contentId || ''}',
-          'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
-          'contentPublishDate': '${firstPublishDateConverted}',
-          'blogName': '${pageContentType === 'blog' ? topSectionName : ''}',
-          'galleryName': '${galleryHeadline}',
-          'authorName': '${authors}',
-        'pageNameStr': '',
-        'pageUrlStr': ''
-          }
-        }
-        `,
+          __html: `{
+            "vars": {
+              "authors": [${ampAuthors}],
+              "canonicalUrl":"${canonicalUrl}",
+              "groups": "default",
+              "pageName": "${url}",
+              "pageSiteSection": "${topSection}",
+              "pageCategory": "${secondarySection}",
+              "pageContentType": "${typeOfPage || pageContentType}",
+              "pageTitle": "${seoTitle ? seoTitle.replace(/'/g, '"') : title.replace(/'/g, '"')}",
+              "pageFlow": "",
+              "pageNumber": "",
+              "siteVersion": "instant",
+              "siteDomain": "${siteDomain}",
+              "siteMetro": "${metrics && metrics.siteMetro ? metrics.siteMetro : ''}",
+              "siteFormat": "${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}",
+              "siteMedium": "np",
+              "siteID": "${metrics && metrics.siteID ? metrics.siteID : site}",
+              "siteType": "free",
+              "siteCMS": "arc",
+              "contentTopics": "${topics.join()}",
+              "contentByline": "${authors.join()}",
+              "contentOriginatingSite": "${metrics && metrics.siteID ? metrics.siteID : site}",
+              "contentID": "${contentId || ''}",
+              "contentVendor": "${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}",
+              "contentPublishDate": "${firstPublishDateConverted}",
+              "blogName": "${pageContentType === 'blog' ? topSectionName : ''}",
+              "galleryName": "${galleryHeadline}",
+              "authorName": "${authors}",
+              "pageNameStr": "",
+              "pageUrlStr": ""
+              }
+            }
+          `,
         }}></script>
     </amp-analytics>
     );
