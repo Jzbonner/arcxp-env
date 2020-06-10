@@ -68,7 +68,7 @@ const SiteMetrics = ({ isAmp }) => {
     contentId,
     firstPublishDateConverted,
   } = contentMeta || {};
-  const siteDomain = siteDomainURL || `//www.${site}.com`;
+  const siteDomain = siteDomainURL || `https://www.${site}.com`;
 
   if (isAmp) {
     return (
@@ -131,7 +131,7 @@ const SiteMetrics = ({ isAmp }) => {
           },
           'siteData': {
             'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
-            'siteDomain': '${siteDomain}',
+            'siteDomain': '${siteDomain.replace('https://www.', '')}',
             'siteVersion': 'responsive site',
             'siteFormat': '${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}',
             'siteMetro': '${metrics && metrics.siteMetro ? metrics.siteMetro : ''}',

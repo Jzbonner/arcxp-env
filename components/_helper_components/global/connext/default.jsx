@@ -35,7 +35,7 @@ const ConnextInit = () => {
               const { UserId } = JSON.parse(connextLS);
               const userDataObj = {
                 'userData': {
-                  'userStatus': 'logged in',
+                  'userActive': 'logged in',
                   'userProfileID': UserId
                 }
               };
