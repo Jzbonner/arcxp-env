@@ -158,8 +158,8 @@ const Gallery = (props) => {
   };
 
   const changeIndex = (action, maxNumber) => {
-    if (!hasOpened && currentIndex === 0) dispatchGalleryOpenEvent();
-    if (currentIndex !== 0) dispatchPhotoViewedEvent();
+    if (!hasOpened && (currentIndex === 1 || currentIndex === maxIndex)) dispatchGalleryOpenEvent();
+    if ((currentIndex === 0 || clickCount % 3 !== 0)) dispatchPhotoViewedEvent();
 
     const currentClickCount = clickCount;
     if (!isMobile) handleClickCount();
