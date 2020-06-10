@@ -62,7 +62,7 @@ export const AllStaffPage = () => {
             return staff.expertise.split(',').every((expertise) => {
               // filters out Hyperlocal and all types of Community Contributors from the 'All' tab
               if (
-                [8, 17, 18, 19, 20, 21].indexOf(parseInt(expertise.trim(), 10)) === -1
+                [8, 17].indexOf(parseInt(expertise.trim(), 10)) === -1
               ) {
                 return true;
               }
