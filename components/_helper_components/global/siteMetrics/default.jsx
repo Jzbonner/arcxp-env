@@ -19,7 +19,6 @@ const SiteMetrics = ({ isAmp }) => {
   const { basic = {} } = promoItems || {};
   const { headlines: promoHeadlines } = basic;
   const { type: promoType = '' } = basic || {};
-  const { canonical_url: canonicalUrl } = basic || {};
 
   const { by: authorData } = credits || {};
   const {
@@ -28,6 +27,7 @@ const SiteMetrics = ({ isAmp }) => {
   } = source || {};
   const authors = [];
   const ampAuthors = [];
+  const ampAuthorNames = [];
   let galleryHeadline = '';
 
   if (authorData) {
@@ -36,8 +36,9 @@ const SiteMetrics = ({ isAmp }) => {
       if (isAmp) {
         // eslint-disable-next-line quote-props
         ampAuthors.push(`{ "_id": "${authorID}", "name": "${authorName}", "type": "${type}"}`);
+        ampAuthorNames.push(`"${authorName.toLowerCase()}"`);
       }
-      authors.push(authorName);
+      authors.push(authorName.toLowerCase());
     });
   }
 
@@ -79,13 +80,13 @@ const SiteMetrics = ({ isAmp }) => {
           __html: `{
             "vars": {
               "authors": [${ampAuthors}],
-              "canonicalUrl":"${canonicalUrl}",
+              "canonicalUrl": "${url}",
               "groups": "default",
               "pageName": "${url}",
               "pageSiteSection": "${topSection}",
               "pageCategory": "${secondarySection}",
-              "pageContentType": "${typeOfPage || pageContentType}",
-              "pageTitle": "${seoTitle ? seoTitle.replace(/'/g, '"') : title.replace(/'/g, '"')}",
+              "pageContentType": "instant article",
+              "pageTitle": "${seoTitle ? seoTitle.replace(/'/g, '"').toLowerCase() : title.replace(/'/g, '"').toLowerCase()}",
               "pageFlow": "",
               "pageNumber": "",
               "siteVersion": "instant",
@@ -104,7 +105,7 @@ const SiteMetrics = ({ isAmp }) => {
               "contentPublishDate": "${firstPublishDateConverted}",
               "blogName": "${pageContentType === 'blog' ? topSectionName : ''}",
               "galleryName": "${galleryHeadline}",
-              "authorName": "${authors}",
+              "authorName": [${ampAuthorNames}],
               "pageNameStr": "",
               "pageUrlStr": ""
               }
