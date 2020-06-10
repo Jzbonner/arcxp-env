@@ -103,6 +103,7 @@ const Gallery = (props) => {
     && fetchedGalleryData.headlines.basic ? fetchedGalleryData.headlines.basic : '';
 
   const dataLayer = window && window.dataLayer ? window.dataLayer : [];
+  console.log('dataLayer', dataLayer);
 
   // push headline for home/section galleries
   if (!galHeadline && !headline && !isContentDataHeadlineFilled && fetchedHeadline) {
@@ -159,7 +160,8 @@ const Gallery = (props) => {
 
   const changeIndex = (action, maxNumber) => {
     if (!hasOpened && (currentIndex === 1 || currentIndex === maxIndex)) dispatchGalleryOpenEvent();
-    if ((currentIndex === 0 || clickCount % 3 !== 0)) dispatchPhotoViewedEvent();
+    if (!isMobile && (currentIndex === 0 || clickCount % 3 !== 0)) dispatchPhotoViewedEvent();
+    if (isMobile) dispatchPhotoViewedEvent();
 
     const currentClickCount = clickCount;
     if (!isMobile) handleClickCount();
