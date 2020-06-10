@@ -60,10 +60,7 @@ const StickyNav = ({
     e.preventDefault();
     e.stopPropagation();
     if (!commentVisibilityRef.current) {
-      document.getElementsByTagName('body')[0].classList.add('scrollLock-mobile');
       setDropdownVisibility(false);
-    } else {
-      document.getElementsByTagName('body')[0].classList.remove('scrollLock-mobile');
     }
     setCommentVisibility(!commentVisibilityRef.current);
     setStickyVisibility(!stickyShouldBeHidden());
