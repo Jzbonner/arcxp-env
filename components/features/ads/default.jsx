@@ -44,6 +44,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
     topSection = '',
     environ = '',
     pageContentType,
+    isWrap,
     site,
     topics = [],
     contentId,
@@ -82,6 +83,11 @@ const ArcAd = ({ customFields, staticSlot }) => {
     weather,
     sky,
   };
+  if (isWrap && typeof window.location !== 'undefined') {
+    // we set these dynamic values for Wraps
+    globalTargeting.wrap_token = window.location.pathname.split('/');
+    globalTargeting.wrap_url = window.location.hostname;
+  }
 
   if (isAdmin && adConfig.dimensions[0][0] !== 1) {
     return <div style={{
