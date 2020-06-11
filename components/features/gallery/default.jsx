@@ -157,8 +157,9 @@ const Gallery = (props) => {
     }
   };
 
-  const changeIndex = (action, maxNumber) => {
-    if (!hasOpened && (currentIndex === 1 || currentIndex === maxIndex)) dispatchGalleryOpenEvent();
+  const changeIndex = (action, maxNumber, isPhoto = true) => {
+    const targetIndex = isPhoto ? 0 : 1;
+    if (!hasOpened && (currentIndex === targetIndex || currentIndex === maxIndex)) dispatchGalleryOpenEvent();
 
     if (!isMobile && (currentIndex === 0 || clickCount % 3 !== 0)) {
       dispatchPhotoViewedEvent();
@@ -209,8 +210,8 @@ const Gallery = (props) => {
   };
 
   const clickFuncs = {
-    prev: () => changeIndex(actions.PREV),
-    next: () => changeIndex(actions.NEXT),
+    prev: () => changeIndex(actions.PREV, null, true),
+    next: () => changeIndex(actions.NEXT, null, true),
   };
 
 
@@ -609,7 +610,7 @@ const Gallery = (props) => {
             </div>
             <div className="gallery-count view-gallery">
               <div className="gallery-count-prev hidden-small hidden-medium">
-                <a onClick={() => changeIndex(actions.PREV)}>
+                <a onClick={() => changeIndex(actions.PREV, null, false)}>
                   <img src={leftArrow} />
                 </a>
               </div>
@@ -620,7 +621,7 @@ const Gallery = (props) => {
                 <div className="icon-text hidden-large">View Gallery</div>
               </div>
               <div className="gallery-count-next hidden-small hidden-medium">
-                <a onClick={() => changeIndex(actions.NEXT)}>
+                <a onClick={() => changeIndex(actions.NEXT, null, false)}>
                   <img src={rightArrow} />
                 </a>
               </div>
