@@ -4,6 +4,7 @@
 .c-Un-ordered {
   width: calc(100% - 45px);
   max-width: 408px;
+  //width: 100%;
   margin: auto;
 
   @include breakpoint(desktop-sm) {
@@ -27,6 +28,44 @@
 
   .c-list-box {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    //////////////////
+    // Column Styles
+    //////////////////
+
+    &.one-column {
+      flex-direction: column;
+    }
+
+    &.two-columns {
+
+      .list-item {
+        @include breakpoint(desktop-sm) {
+          width: 47%;
+        }
+      }
+    }
+
+    &.three-columns {
+
+      .list-item {
+        @include breakpoint(desktop-sm) {
+          width: 31%;
+        }
+      }
+    }
+
+    &.four-columns {
+      
+      .list-item {
+        @include breakpoint(desktop-sm) {
+          width: 22.5%;
+        }
+      }
+    }
 
     .list-item {
       list-style: none;
@@ -37,7 +76,7 @@
         color: #2e81b7;
 
         @include text-styles(1.5625em, 1, "Average");
-        
+
         @include breakpoint(desktop-sm) {
           @include text-styles(1.875em, 1, "Average");
         }
