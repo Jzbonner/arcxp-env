@@ -61,6 +61,7 @@ const getContentMeta = () => {
   const {
     isHome,
     isSection,
+    isWrap,
     type: typeOfPage = '',
     isNonContentPage,
   } = pageType || {};
@@ -144,6 +145,7 @@ const getContentMeta = () => {
     contentId,
     typeOfPage,
     pageContentType,
+    isWrap,
     environ,
     topics,
     firstPublishDateConverted,
