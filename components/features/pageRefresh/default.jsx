@@ -27,7 +27,7 @@ pageRefresh.propTypes = {
     }).isRequired,
     refreshInterval: PropTypes.number.tag({
       name: 'Page Refresh Interval (in seconds)',
-      description: 'default is 300 (5 minutes)',
+      description: 'Default, when active, is 300 (5 minutes)',
       value: '',
     }),
   }),
