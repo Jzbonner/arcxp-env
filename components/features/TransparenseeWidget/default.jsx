@@ -1,42 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useContent } from 'fusion:content';
+import checkWindowSize from '../../_helper_components/global/utils/check_window_size/default';
+import renderCustomHtml from '../../_helper_components/article/contentElements/components/html/renderCustomHtml';
+import './default.scss';
 
 const TransparenseeWidget = () => {
-  const widgetURL = 'https://events.ajc.com/api/v1/streams?guid=methode-search-widget';
-  const [callback, setData] = useState();
-  const fetchData = () => axios
-    .get(widgetURL)
-    .then(res => setData(res))
-    .catch(error => console.log(error));
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const callback = useContent({
+    source: 'widget',
+  });
 
   if (callback) {
-    const { data } = callback || {};
+    const screenSize = checkWindowSize();
+    const isMobile = screenSize.width < 768;
+    const { payload } = callback || {};
     return (
-      <div className="c-widget">
+      <div className="c-transparenseeWidget">
         <link href="https://fonts.googleapis.com/css?family=Oswald:400,300,700" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
-        <div
-          id="ttd-search-widget"
-          className="hidden--small"
-          data-searchurl="events.ajc.com"
-          dangerouslySetInnerHTML={{ __html: data.payload }}
-        ></div>
-        <div className="hidden--medium hidden--large">
-          <form className="ttd-search" action="//events.ajc.com/events" method="get">
-            <input className="ttd-search__input" type="text" name="search" placeholder="Search for an event or movie" />
-            <input
-              className="ttd-search__submit"
-              alt="submit"
-              name="submit"
-              type="image"
-              src="https://www.ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/search-icon.svg"
-            />
-          </form>
-        </div>
+          {!isMobile ? (
+            <div
+            id="ttd-search-widget"
+            className="hidden--small"
+            data-searchurl="events.ajc.com"
+            dangerouslySetInnerHTML={{ __html: renderCustomHtml(payload) }}
+          ></div>
+          ) : ''}
+          {isMobile ? (
+            <div className="hidden--medium hidden--large">
+            <form className="ttd-search" action="//events.ajc.com/events" method="get">
+              <input className="ttd-search__input" type="text" name="search" placeholder="Search for an event or movie" />
+              <input
+                className="ttd-search__submit"
+                alt="submit"
+                name="submit"
+                type="image"
+                src="https://www.ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/search-icon.svg"
+              />
+            </form>
+          </div>
+          ) : ''}
       </div>
     );
   }
