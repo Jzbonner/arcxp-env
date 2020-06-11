@@ -18,12 +18,10 @@ const currentConditions = () => {
       WeatherText: text,
       PrecipitationType: precipitation = '',
     } = weatherData[0] || {};
-    // icons are integers but the file path has leading zeroes, per https://developer.accuweather.com/weather-icons
-    const iconPath = `https://developer.accuweather.com/sites/default/files/${icon < 10 ? `0${icon}` : icon}-s.png`;
 
     return {
       temp,
-      iconPath,
+      icon,
       text,
       precipitation,
     };
