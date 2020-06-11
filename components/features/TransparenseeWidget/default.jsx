@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const TransparenseeWidget = () => {
   const widgetURL = 'https://events.ajc.com/api/v1/streams?guid=methode-search-widget';
-  return axios
+  const [callback, setData] = useState();
+  const fetchData = () => axios
     .get(widgetURL)
-    .then(({ data }) => (
+    .then(res => setData(res))
+    .catch(error => console.log(error));
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (callback) {
+    const { data } = callback || {};
+    return (
       <div className="c-widget">
         <link href="https://fonts.googleapis.com/css?family=Oswald:400,300,700" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
@@ -28,8 +38,9 @@ const TransparenseeWidget = () => {
           </form>
         </div>
       </div>
-    ))
-    .catch(error => console.log(error));
+    );
+  }
+  return null;
 };
 
 export default TransparenseeWidget;
