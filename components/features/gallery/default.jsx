@@ -158,8 +158,13 @@ const Gallery = (props) => {
   };
 
   const changeIndex = (action, maxNumber) => {
-    if (!hasOpened && currentIndex === 0) dispatchGalleryOpenEvent();
-    if (currentIndex !== 0) dispatchPhotoViewedEvent();
+    if (!hasOpened && (currentIndex === 1 || currentIndex === maxIndex)) dispatchGalleryOpenEvent();
+
+    if (!isMobile && (currentIndex === 0 || clickCount % 3 !== 0)) {
+      dispatchPhotoViewedEvent();
+    } else if (isMobile) {
+      dispatchPhotoViewedEvent();
+    }
 
     const currentClickCount = clickCount;
     if (!isMobile) handleClickCount();
@@ -315,7 +320,7 @@ const Gallery = (props) => {
 
   const handleResizeEvent = () => {
     calculateTranslateX();
-    if (window.innerWidth <= mobileBreakPoint) {
+    if (window && window.innerWidth <= mobileBreakPoint) {
       setMobileState(true);
     } else {
       setMobileState(false);
@@ -325,7 +330,7 @@ const Gallery = (props) => {
   };
 
   const getInitWindowSize = () => {
-    if (window.innerWidth <= mobileBreakPoint) {
+    if (window && window.innerWidth <= mobileBreakPoint) {
       setMobileState(true);
     } else {
       setMobileState(false);

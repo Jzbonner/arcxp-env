@@ -13,7 +13,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const appContext = useAppContext();
   const { isAdmin } = appContext;
   const { slot: customFieldsSlot } = customFields || {};
-  const { dfp_id: dfpid, adsPath } = getProperties();
+  const { dfp_id: dfpid, adsPath, siteName } = getProperties();
   const slot = customFieldsSlot || staticSlot;
   let randomIdMPG01 = '';
   const currentEnv = fetchEnv();
@@ -75,7 +75,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
     obj_type: objType,
     environ,
     mediaType: 'Arc',
-    sitepath: site.toLowerCase(),
+    sitepath: site ? site.toLowerCase() : siteName.toLowerCase(),
     ad_slot: slotName,
     topics,
     temp,

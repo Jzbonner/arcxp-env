@@ -32,8 +32,9 @@
   "metrics": {
     "siteID": "ajc",
     "siteMetro": "ga: atlanta",
-    "siteFormat": "newspaper",
-    "gtmContainerKey": "GTM-WT4CBT7"
+    "siteFormat": "news",
+    "gtmContainerKey": "GTM-WT4CBT7",
+    "ampGtmID": "GTM-WQBXD72"
   },
   "taboola": {
     "dataPublisher": "cox-atlantajournal-constitution",
