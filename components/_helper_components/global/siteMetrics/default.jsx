@@ -63,7 +63,7 @@ const SiteMetrics = ({ isAmp }) => {
     pageContentType,
     typeOfPage,
     site,
-    title,
+    title: pageTitle = '',
     seoTitle,
     topics,
     contentId,
@@ -86,7 +86,7 @@ const SiteMetrics = ({ isAmp }) => {
               "pageSiteSection": "${topSection}",
               "pageCategory": "${secondarySection}",
               "pageContentType": "instant article",
-              "pageTitle": "${seoTitle ? seoTitle.replace(/'/g, '"').toLowerCase() : title.replace(/'/g, '"').toLowerCase()}",
+              "pageTitle": "${seoTitle ? seoTitle.replace(/'/g, '"').toLowerCase() : pageTitle.replace(/'/g, '"').toLowerCase()}",
               "pageFlow": "",
               "pageNumber": "",
               "siteVersion": "instant",
@@ -128,7 +128,7 @@ const SiteMetrics = ({ isAmp }) => {
             'pageMainSection': '${topSection}',
             'pageCategory': '${secondarySection}',
             'pageContentType': '${typeOfPage || pageContentType}',
-            'pageTitle': '${seoTitle ? seoTitle.replace(/'/g, '"') : title.replace(/'/g, '"')}'
+            'pageTitle': '${seoTitle ? seoTitle.replace(/'/g, '"') : pageTitle.replace(/'/g, '"')}'
           },
           'siteData': {
             'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',

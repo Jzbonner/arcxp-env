@@ -20,7 +20,7 @@ const StickyNav = ({
   const { allow_comments: commentsEnabled } = comments || {};
   let sharedUrl = articleUrl;
   let site = siteName.toLowerCase();
-  site = site.replace(/w/gi, '');
+  site = site ? site.replace(/w/gi, '') : '';
   if (sharedUrl && sharedUrl.indexOf('.com') === -1) {
     const env = fetchEnv();
     // we must fully-qualify the url for sharing

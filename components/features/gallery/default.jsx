@@ -320,7 +320,7 @@ const Gallery = (props) => {
 
   const handleResizeEvent = () => {
     calculateTranslateX();
-    if (window.innerWidth <= mobileBreakPoint) {
+    if (window && window.innerWidth <= mobileBreakPoint) {
       setMobileState(true);
     } else {
       setMobileState(false);
@@ -330,7 +330,7 @@ const Gallery = (props) => {
   };
 
   const getInitWindowSize = () => {
-    if (window.innerWidth <= mobileBreakPoint) {
+    if (window && window.innerWidth <= mobileBreakPoint) {
       setMobileState(true);
     } else {
       setMobileState(false);

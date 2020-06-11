@@ -25,7 +25,7 @@ const ListPageLayout = () => {
 
   const { id: queryID, name, document } = data || {};
 
-  const { content_elements: contentElements } = document;
+  const { content_elements: contentElements } = document || {};
 
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
