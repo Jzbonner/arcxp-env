@@ -47,7 +47,7 @@ const ConnextInit = () => {
           docBody.className += docBody.className.indexOf('${userIsLoggedOutClass}') === -1 ? ' ${userIsLoggedOutClass}' : '';
           const userDataObj = {
             'userData': {
-              'userStatus': 'not logged in',
+              'userActive': 'not logged in',
               'userProfileID': null
             }
           };
