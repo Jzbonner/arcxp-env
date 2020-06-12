@@ -2,7 +2,6 @@ import React from 'react';
 import { useContent } from 'fusion:content';
 import checkWindowSize from '../../_helper_components/global/utils/check_window_size/default';
 import renderCustomHtml from '../../_helper_components/article/contentElements/components/html/renderCustomHtml';
-import './default.scss';
 
 const TransparenseeWidget = () => {
   const callback = useContent({
