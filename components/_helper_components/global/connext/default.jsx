@@ -35,7 +35,7 @@ const ConnextInit = () => {
               const { UserId } = JSON.parse(connextLS);
               const userDataObj = {
                 'userData': {
-                  'userStatus': 'logged in',
+                  'userActive': 'logged in',
                   'userProfileID': UserId
                 }
               };
@@ -47,7 +47,7 @@ const ConnextInit = () => {
           docBody.className += docBody.className.indexOf('${userIsLoggedOutClass}') === -1 ? ' ${userIsLoggedOutClass}' : '';
           const userDataObj = {
             'userData': {
-              'userStatus': 'not logged in',
+              'userActive': 'not logged in',
               'userProfileID': null
             }
           };

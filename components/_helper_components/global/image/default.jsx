@@ -10,10 +10,9 @@ const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage = false,
 }) => {
   const {
-    url, height: originalHeight, width: originalWidth, caption, credits,
+    url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText,
   } = src || {};
   const [imageSrc, setImageSrc] = useState('');
-  const imageALT = caption && caption.length > 1 ? caption : 'story page inline image';
 
   useEffect(() => {
     setImageSrc(imageResizer(url, width, height));
@@ -35,6 +34,16 @@ const Image = ({
     giveCredit = `Credit: ${secondaryCredit}`;
   }
 
+  const getAltText = (altT, captionT) => {
+    if (altT && altT !== '') {
+      return altT;
+    }
+    if (captionT && captionT.length > 1) {
+      return captionT;
+    }
+    return 'story page inline image';
+  };
+
   const renderCaption = () => {
     if (
       (imageType === 'isLeadImage' && !giveCredit && !caption)
@@ -55,11 +64,11 @@ const Image = ({
       <div className="image-component-image">
         <>
           {!ampPage ? (
-            <img src={imageSrc} alt={imageALT} className={teaseContentType ? 'tease-image' : ''} />
+            <img src={imageSrc} alt={getAltText(altText, caption)} className={teaseContentType ? 'tease-image' : ''} />
           ) : (
             <amp-img
               src={imageResizer(url, width, height)}
-              alt={imageALT}
+              alt={getAltText(altText, caption)}
               width={width}
               height={height !== 0 ? height : (width / originalWidth) * originalHeight}
               layout="responsive"

@@ -419,6 +419,137 @@
     padding-left: 26px;
     padding-top: 10px;
     cursor: pointer;
+
+    &:before {
+      font-family: "weather-icons";
+      font-size: 1.875rem;
+      top: 0;
+      padding: 0;
+      content: " ";
+      color: #2e81b7;
+    }
+
+    &.weather-1:before {
+      content: "\e901";
+    }
+
+    &.weather-2:before,
+    &.weather-3:before,
+    &.weather-4:before {
+      content: "\e910";
+    }
+
+    &.weather-5:before {
+      content: "\e919";
+    }
+
+    &.weather-6:before,
+    &.weather-7:before,
+    &.weather-8:before,
+    &.weather-13:before {
+      content: "\e902";
+    }
+
+    &.weather-11:before {
+      content: "\e918";
+    }
+
+    &.weather-12:before,
+    &.weather-18:before {
+      content: "\e908";
+    }
+
+    &.weather-14:before {
+      content: "\e914";
+    }
+
+    &.weather-15:before,
+    &.weather-16:before {
+      content: "\e917";
+    }
+
+    &.weather-17:before {
+      content: "\e915";
+    }
+
+    &.weather-18:before {
+      content: "\e908";
+    }
+
+    &.weather-19:before,
+    &.weather-25:before {
+      content: "\e906";
+    }
+
+    &.weather-20:before,
+    &.weather-21:before,
+    &.weather-23:before {
+      content: "\e913";
+    }
+
+    &.weather-22:before {
+      content: "\e909";
+    }
+
+    &.weather-24:before {
+      content: "\e952";
+    }
+
+    &.weather-26:before {
+      content: "\e903";
+    }
+
+    &.weather-29:before {
+      content: "\e904";
+    }
+
+    &.weather-30:before {
+      content: "\e963";
+    }
+
+    &.weather-31:before {
+      content: "\e962";
+    }
+
+    &.weather-32:before {
+      content: "\e939";
+    }
+
+    &.weather-33:before {
+      content: "\e921";
+    }
+
+    &.weather-34:before {
+      content: "\e930";
+    }
+
+    &.weather-35:before,
+    &.weather-36:before,
+    &.weather-38:before {
+      content: "\e922";
+    }
+
+    &.weather-37:before {
+      content: "\e939";
+    }
+
+    &.weather-39:before,
+    &.weather-40:before {
+      content: "\e925";
+    }
+
+    &.weather-41:before,
+    &.weather-42:before {
+      content: "\e935";
+    }
+
+    &.weather-43:before {
+      content: "\e926";
+    }
+
+    &.weather-44:before {
+      content: "\e929";
+    }
   }
 
   .weather-text {

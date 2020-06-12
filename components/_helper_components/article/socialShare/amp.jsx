@@ -13,7 +13,7 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
   const { facebookAppID, siteName } = getProperties();
   let sharedUrl = articleURL;
   let site = siteName.toLowerCase();
-  site = site.replace(/w/gi, '');
+  site = site ? site.replace(/w/gi, '') : '';
   if (sharedUrl.indexOf('.com') === -1) {
     const env = fetchEnv();
     // we must fully-qualify the url for sharing

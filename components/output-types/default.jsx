@@ -27,7 +27,7 @@ const DefaultOutputType = (props) => {
     Libs,
     MetaTags,
   } = props;
-  const { isEnabled = false, clientCode, environment: connextEnv } = connext;
+  const { isEnabled: connextIsEnabled = false, clientCode, environment: connextEnv } = connext;
   const {
     type, taxonomy, canonical_url: articleURL, _id: uuid,
   } = globalContent || { type: null };
@@ -77,7 +77,7 @@ const DefaultOutputType = (props) => {
         <div id="fusion-app">{children}</div>
         <Fusion />
         {!isHyperlocalContent && <TaboolaFooter/>}
-        {isEnabled && (
+        {connextIsEnabled && (
           <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${connextEnv}/${clientCode}/loader.min.js`}></script>
@@ -86,6 +86,7 @@ const DefaultOutputType = (props) => {
         )}
         <div id="fb-root"></div>
         <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
+        <script type="text/javascript" src={deployment(`${contextPath}/resources/scripts/weather.js`)} />
       </body>
     </html>
   );

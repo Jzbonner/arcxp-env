@@ -18,6 +18,7 @@ const DesktopNav = ({
   useEffect(() => {
     document.body.style.position = hamburgerToggle && isMobile ? 'static' : '';
     document.body.style.overflowY = hamburgerToggle && isMobile ? 'hidden' : '';
+    window.isMobileBP = isMobile;
   }, [hamburgerToggle, isMobile]);
 
   return (
@@ -37,7 +38,13 @@ const DesktopNav = ({
     </div>
     <ul className='nav-row'>
       <NavFooter facebook={facebook} twitter={twitter}/>
-      <li className='nav-weather-widget'> Weather Widget</li>
+      <li className='nav-weather-widget'>
+        {
+          // we're loading the widget in /resources/scripts/weather.js for now, to get around React's js-parsing limitations
+          // this (all) will eventually change when we move to API-generated weather data sitewide
+        }
+        <div id='aw-widget-st'></div>
+      </li>
       <div className='nav-sections nav-itemBottomBorder'>{sections}</div>
       <Search sticky={stickyActive}/>
       <Weather sticky={stickyActive}/>
