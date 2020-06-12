@@ -13,7 +13,7 @@ const DesktopNav = ({
   const {
     twitter,
     facebook,
-  } = social;
+  } = social || {};
 
   useEffect(() => {
     document.body.style.position = hamburgerToggle && isMobile ? 'static' : '';
