@@ -1,12 +1,20 @@
 import React from 'react';
+import getProperties from 'fusion:properties';
 import { useContent } from 'fusion:content';
 import checkWindowSize from '../../_helper_components/global/utils/check_window_size/default';
 import renderCustomHtml from '../../_helper_components/article/contentElements/components/html/renderCustomHtml';
 
 const TransparenseeWidget = () => {
+  const { siteName } = getProperties();
+  const widgetURL = `https://events.${siteName}.com/api/v1/streams?guid=methode-search-widget`;
+
   const callback = useContent({
     source: 'widget',
+    query: {
+      url: `${widgetURL}`,
+    },
   });
+
 
   if (callback) {
     const screenSize = checkWindowSize();
