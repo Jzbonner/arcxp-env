@@ -1,13 +1,21 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
+import PropTypes from 'prop-types';
 import get from 'lodash.get';
 
-const AdsTxt = () => {
+const AdsTxt = (customFields = {}) => {
   const fusionContext = useFusionContext();
   const { arcSite = 'ajc' } = fusionContext;
   const siteProps = getProperties(arcSite);
-  const adsTxtJson = get(siteProps, 'adsTxt', {});
+  const {
+    customFields: {
+      type,
+    },
+  } = customFields;
+  const typeOfTxt = type === 'ads.txt' ? 'adsTxt' : 'appAdsTxt';
+  if (!typeOfTxt) return null;
+  const adsTxtJson = get(siteProps, typeOfTxt, {});
   const list = [];
   let csvOutput = '';
 
@@ -19,6 +27,18 @@ const AdsTxt = () => {
   }
 
   return <>{csvOutput}</>;
+};
+
+AdsTxt.propTypes = {
+  customFields: PropTypes.shape({
+    type: PropTypes.oneOf([
+      'ads.txt',
+      'app-ads.txt',
+    ]).tag({
+      name: 'Ads or App-Ads',
+      defaultValue: 'ads.txt',
+    }),
+  }),
 };
 
 export default AdsTxt;

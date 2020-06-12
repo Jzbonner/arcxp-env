@@ -1,0 +1,122 @@
+[
+  {
+    "domain": "taboola.com",
+    "accountId": "1166545",
+    "relationshipType": "DIRECT",
+    "certId": "c228e6794e811952"
+  },
+  {
+    "domain": "taboola.com",
+    "accountId": "1166543",
+    "relationshipType": "DIRECT",
+    "certId": "c228e6794e811952"
+  },
+  {
+    "domain": "advertising.com",
+    "accountId": "8603",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "appnexus.com",
+    "accountId": "3364",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "contextweb.com",
+    "accountId": "560382",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "Indexechange.com",
+    "accountId": "183756",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "openx.com",
+    "accountId": "539154393",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "156307",
+    "relationshipType": "RESELLER",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "16698",
+    "relationshipType": "RESELLER",
+    "certId": "0bfd66d529a55807"
+  },
+  {
+    "domain": "spotx.tv",
+    "accountId": "71451",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "spotxchange.com",
+    "accountId": "71451",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "tremorhub.com",
+    "accountId": "z87wm",
+    "relationshipType": "RESELLER",
+    "certId": "1a4e959a1b50034a"
+  },
+  {
+    "domain": "freewheel.tv",
+    "accountId": "799841",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "freewheel.tv",
+    "accountId": "799921",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "aol.com",
+    "accountId": "53392",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "rhythmone.com",
+    "accountId": "1166984029",
+    "relationshipType": "RESELLER",
+    "certId": "a670c89d4a324e47"
+  },
+  {
+    "domain": "inmobi.com",
+    "accountId": "a985e39014a94721a8e97c929d32ef9d",
+    "relationshipType": "RESELLER",
+    "certId": "83e75a7ae333ca9d"
+  },
+  {
+    "domain": "pubnative.net",
+    "accountId": "1007180",
+    "relationshipType": "RESELLER",
+    "certId": "d641df8625486a7b"
+  },
+  {
+    "domain": "google.com",
+    "accountId": "1007180",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "19160",
+    "relationshipType": "DIRECT",
+    "certId": "0bfd66d529a55807 #ebda"
+  }
+]
