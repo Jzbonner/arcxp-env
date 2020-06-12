@@ -1,4 +1,5 @@
 import adstxt from './adstxt/ajc.com.json';
+import appadstxt from './appadstxt/ajc.com.json';
 
 export default {
   defaultSiteTitle: 'AJC',
@@ -16,4 +17,5 @@ export default {
   },
   adsPath: 'atlanta_np/ajc_web_default',
   adsTxt: adstxt,
+  appAdsTxt: appadstxt,
 };
