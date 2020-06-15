@@ -58,7 +58,7 @@ const Pagination = ({
         ))}
       </div>
       {activePage < pages.length && (
-        <btn
+        <a
           className="right-button"
           onClick={() => changePage(activePage + 1)}
         />

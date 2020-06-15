@@ -60,7 +60,7 @@
   .page {
     padding: 0 10px;
     cursor: pointer;
-    min-width: 30px;
+    width: max-content;
 
     &.active {
       color: #313132;

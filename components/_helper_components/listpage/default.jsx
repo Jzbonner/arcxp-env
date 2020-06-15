@@ -37,7 +37,7 @@ const ListPage = ({ globalContent, globalContentConfig }) => {
   });
 
   const { data } = collectionMetaData || {};
-  const storiesPerPage = 10;
+  const storiesPerPage = 5;
 
   return (
     <main className="c-listPage">
@@ -54,7 +54,7 @@ const ListPage = ({ globalContent, globalContentConfig }) => {
               {filteredStories.map((el, i) => {
                 const startIndex = (activePage - 1) * storiesPerPage;
                 if (startIndex <= i && i < startIndex + storiesPerPage) {
-                  return <ListItem {...el} listPage={true} />;
+                  return <ListItem key={`key-${i}`} {...el} listPage={true} />;
                 }
                 return null;
               })}
@@ -77,7 +77,7 @@ const ListPage = ({ globalContent, globalContentConfig }) => {
 };
 
 ListPage.propTypes = {
-  globalContent: PropTypes.object,
+  globalContent: PropTypes.array,
   globalContentConfig: PropTypes.object,
 };
 
