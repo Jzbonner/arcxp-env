@@ -1,11 +1,14 @@
 import React from 'react';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
+import { useAppContext } from 'fusion:context';
 import topNavFilter from '../../../../content/filters/top-nav';
 import closeButton from '../../../../resources/images/amp-close.png';
 
 const AmpNavBar = () => {
   const { logo, logoShort } = getProperties();
+  const appContext = useAppContext();
+  const { deployment, contextPath } = appContext;
   const sections = useContent({
     source: 'site-api',
     query: {
@@ -116,12 +119,12 @@ const AmpNavBar = () => {
           </div>
           <div id="logo-pinned" className="amp-logo amp-logo-pinned">
             <a href={rootDirectory}>
-            <amp-img height='37px' width='72px' src={logoShort}></amp-img>
+            <amp-img height='37px' width='72px' src={deployment(`${contextPath}${logoShort}`)}></amp-img>
             </a>
           </div>
           <div id="logo-main" className="amp-logo">
             <a href={rootDirectory}>
-              <amp-img height='59px' width='109px' src={logo}></amp-img>
+              <amp-img height='59px' width='109px' src={deployment(`${contextPath}${logo}`)}></amp-img>
             </a>
           </div>
         </div>

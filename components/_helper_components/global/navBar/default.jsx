@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
+import { useAppContext } from 'fusion:context';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
@@ -29,6 +30,8 @@ const NavBar = ({
   const mobileBreakpoint = 1023;
 
   const { logo, logoHamburger } = getProperties();
+  const appContext = useAppContext();
+  const { deployment, contextPath } = appContext;
 
   const sections = useContent({
     source: 'site-api',
@@ -127,7 +130,7 @@ const NavBar = ({
             </div>
             <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
               && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
-              <Logo source={logo} rootDirectory={rootDirectory}/>
+              <Logo source={deployment(`${contextPath}${logo}`)} rootDirectory={rootDirectory}/>
             </div>
           </div>
           <DesktopNav
@@ -135,7 +138,7 @@ const NavBar = ({
             isMobile={isMobile}
             hamburgerToggle={mobileMenuToggled}
             setToggle={setToggle}
-            smallLogoUrl={logoHamburger}
+            smallLogoUrl={deployment(`${contextPath}${logoHamburger}`)}
             rootDirectory={rootDirectory}
             social={social}
             stickyActive={stickyNavVisibility}

@@ -1,5 +1,6 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
+import { useAppContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import fetchEnv from '../../global/utils/environment';
 import getItemThumbNail from '../../../features/Slider/_helper_functions/getItemThumbnail';
@@ -10,6 +11,8 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
   const { basic: basicItems } = promoItems || {};
   const { url: headlineImage } = basicItems || {};
   const { facebookAppID, siteName, logoShort } = getProperties();
+  const appContext = useAppContext();
+  const { deployment, contextPath } = appContext;
   let sharedUrl = articleURL;
   let site = siteName.toLowerCase();
   site = site ? site.replace(/w/gi, '') : '';
@@ -26,7 +29,7 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
     pinterestUrl = getItemThumbNail(promoItems);
   }
   if (!pinterestUrl) {
-    pinterestUrl = logoShort;
+    pinterestUrl = deployment(`${contextPath}${logoShort}`);
   }
 
   return (

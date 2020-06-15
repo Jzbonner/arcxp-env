@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
+import { useAppContext } from 'fusion:context';
 import './default.scss';
 import fetchEnv from '../../global/utils/environment.js';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
@@ -15,6 +16,8 @@ const StickyNav = ({
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteName, logoShort,
   } = getProperties();
+  const appContext = useAppContext();
+  const { deployment, contextPath } = appContext;
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
   let sharedUrl = articleUrl;
@@ -113,7 +116,7 @@ const StickyNav = ({
         </div>
           <li className="stickyNav-item mobile-hidden">
             <a href="/">
-              <img className="sticky-logo" src={logoShort} alt={`${siteName} logo`} />
+              <img className="sticky-logo" src={deployment(`${contextPath}${logoShort}`)} alt={`${siteName} logo`} />
             </a>
           </li>
           <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
@@ -149,7 +152,7 @@ const StickyNav = ({
         <div className='b-flexRow c-stickyLogin'>
           <div className={`sticky-logo-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
             <a href="/">
-              <img src={logoShort} alt={`${siteName} logo`} />
+              <img src={deployment(`${contextPath}${logoShort}`)} alt={`${siteName} logo`} />
             </a>
           </div>
           <div className={`stickyNav-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
