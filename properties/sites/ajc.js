@@ -18,4 +18,6 @@ export default {
   adsPath: 'atlanta_np/ajc_web_default',
   adsTxt: adstxt,
   appAdsTxt: appadstxt,
+  adsA9Enabled: true,
+  adsA9Id: '3970',
 };

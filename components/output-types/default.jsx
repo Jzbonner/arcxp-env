@@ -15,18 +15,22 @@ import GoogleStructuredData from '../_helper_components/article/googleData/defau
 
 const DefaultOutputType = (props) => {
   const {
-    arcSite = getProperties().sites[0],
     children,
+    arcSite,
     contextPath,
     CssLinks,
     deployment,
     Fusion,
     globalContent,
-    hyperlocalTags = getProperties().hyperlocalTags,
-    metrics = getProperties().metrics,
     Libs,
     MetaTags,
   } = props;
+  const {
+    sites,
+    hyperlocalTags,
+    metrics,
+    adsA9Enabled,
+  } = getProperties() || {};
   const { isEnabled: connextIsEnabled = false, clientCode, environment: connextEnv } = connext;
   const {
     type, taxonomy, canonical_url: articleURL, _id: uuid,
@@ -58,6 +62,7 @@ const DefaultOutputType = (props) => {
           </>
         )}
         <Libs />
+        {!noAds && adsA9Enabled && <script src='https://c.amazon-adsystem.com/aax2/apstag.js'></script>}
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} />}
         {!isHyperlocalContent && <TaboolaHeader/>}
         <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />

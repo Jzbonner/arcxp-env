@@ -46,5 +46,7 @@
   },
   "facebookAppID": "366816260017522",
   "adsPath": "atlanta_np/ajc_web_default",
+  "adsA9Enabled": true,
+  "adsA9Id": "3970",
   "weatherLocationId": 348181
 }
