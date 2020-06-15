@@ -26,7 +26,6 @@ const DefaultOutputType = (props) => {
     MetaTags,
   } = props;
   const {
-    sites,
     hyperlocalTags,
     metrics,
     adsA9Enabled,
