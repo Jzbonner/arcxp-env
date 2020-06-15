@@ -37,7 +37,7 @@ const ListPage = ({ globalContent, globalContentConfig }) => {
   });
 
   const { data } = collectionMetaData || {};
-  const storiesPerPage = 5;
+  const storiesPerPage = 10;
 
   return (
     <main className="c-listPage">
