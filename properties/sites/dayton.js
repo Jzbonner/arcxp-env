@@ -17,6 +17,5 @@ export default {
   logo: '/resources/images/dayton-logo.svg',
   mail: 'mailto:?Subject=',
   sites: ['dayton'],
-  maxTabletViewWidth: 1024,
   weatherLocationId: 330120,
 };

@@ -17,6 +17,5 @@ export default {
   logo: '/resources/images/journal-news-logo.svg',
   mail: 'mailto:?Subject=',
   sites: ['journal-news'],
-  maxTabletViewWidth: 1024,
   weatherLocationId: 330109,
 };

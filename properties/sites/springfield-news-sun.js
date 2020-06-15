@@ -17,6 +17,5 @@ export default {
   logo: '/resources/images/springfieldnewssun-logo.svg',
   mail: 'mailto:?Subject=',
   sites: ['springfieldnewssun'],
-  maxTabletViewWidth: 1024,
   weatherLocationId: 330116,
 };

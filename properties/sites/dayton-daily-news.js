@@ -17,6 +17,5 @@ export default {
   logo: '/resources/images/daytondailynews-logo.svg',
   mail: 'mailto:?Subject=',
   sites: ['daytondailynews'],
-  maxTabletViewWidth: 1024,
   weatherLocationId: 330120,
 };
