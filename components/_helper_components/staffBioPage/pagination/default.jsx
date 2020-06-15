@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import PageNumber from '../pageNumber/default';
-import '../default.scss';
+import '../../global/pagination/default.scss';
 
 const Pagination = ({ count, setIndex }) => {
   const [activePage, setPage] = useState(1);

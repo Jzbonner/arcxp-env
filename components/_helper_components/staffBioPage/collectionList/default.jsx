@@ -3,7 +3,7 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import ListItem from '../../home/ListItem/ListItem';
-import Pagination from '../../listpage/pagination/default';
+import Pagination from '../pagination/default';
 
 const CollectionList = ({
   listItems, collectionLength, collectionID, fetchRef, source,
