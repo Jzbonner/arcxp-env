@@ -16,7 +16,7 @@ import GoogleStructuredData from '../_helper_components/article/googleData/defau
 const DefaultOutputType = (props) => {
   const {
     children,
-    arcSite,
+    arcSite = getProperties().sites[0],
     contextPath,
     CssLinks,
     deployment,
