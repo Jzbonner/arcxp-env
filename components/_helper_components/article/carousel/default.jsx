@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import getProperties from 'fusion:properties';
 import { useContent } from 'fusion:content';
 import buildCarouselItem from './_helper_functions/buildCarouselItems';
 import './default.scss';
@@ -7,6 +8,7 @@ import './default.scss';
 const Carousel = ({ storyId, taxonomy }) => {
   const { primary_section: primarySection } = taxonomy || {};
   const { path } = primarySection || {};
+  const { logoShort } = getProperties() || {};
 
   const formattedPath = path ? path.substring(1) : null;
 
@@ -22,22 +24,9 @@ const Carousel = ({ storyId, taxonomy }) => {
     },
   });
 
-  const siteLogoData = useContent({
-    source: 'site-api',
-    query: {
-      hierarchy: 'TopNav',
-    },
-    filter: 'logo',
-  });
-
-  const fetchedSiteLogo = siteLogoData
-    && siteLogoData.site
-    && siteLogoData.site.site_logo_image_small
-    ? siteLogoData.site.site_logo_image_small : null;
-
   if (!relatedStoryData) return null;
 
-  const carouselItems = buildCarouselItem(relatedStoryData, storyId, fetchedSiteLogo);
+  const carouselItems = buildCarouselItem(relatedStoryData, storyId, logoShort);
 
   return (
     <div className="c-carousel">

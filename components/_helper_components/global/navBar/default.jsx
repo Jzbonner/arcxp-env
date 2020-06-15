@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import getProperties from 'fusion:properties';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
@@ -26,6 +27,8 @@ const NavBar = ({
   const paddingRef = React.useRef(null);
   const isMobileVisibilityRef = React.useRef(isMobile);
   const mobileBreakpoint = 1023;
+
+  const { logo, logoHamburger } = getProperties();
 
   const sections = useContent({
     source: 'site-api',
@@ -67,16 +70,10 @@ const NavBar = ({
   }, [isMobile]);
 
   const {
-    site: logos,
     social,
     children,
     _id: rootDirectory,
   } = sections || {};
-
-  const {
-    site_logo_image: siteLogoImage,
-    site_logo_image_small_inverse: siteLogoImageSmallInverse,
-  } = logos || {};
 
   if (!children) {
     return null;
@@ -130,7 +127,7 @@ const NavBar = ({
             </div>
             <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
               && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
-              <Logo source={siteLogoImage} rootDirectory={rootDirectory}/>
+              <Logo source={logo} rootDirectory={rootDirectory}/>
             </div>
           </div>
           <DesktopNav
@@ -138,7 +135,7 @@ const NavBar = ({
             isMobile={isMobile}
             hamburgerToggle={mobileMenuToggled}
             setToggle={setToggle}
-            smallLogoUrl={siteLogoImageSmallInverse}
+            smallLogoUrl={logoHamburger}
             rootDirectory={rootDirectory}
             social={social}
             stickyActive={stickyNavVisibility}

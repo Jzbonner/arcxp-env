@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import './default.scss';
 import fetchEnv from '../../global/utils/environment.js';
-import logo from '../../../../resources/images/stickyNav-logo.svg';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import Comments from '../comments/comments';
 import Login from '../../global/navBar/login/default';
@@ -14,7 +13,7 @@ const StickyNav = ({
   isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections, articleUrl,
 }) => {
   const {
-    facebookURL, pinterestURL, twitterURL, redditURL, mail, siteName,
+    facebookURL, pinterestURL, twitterURL, redditURL, mail, siteName, logoShort,
   } = getProperties();
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
@@ -114,7 +113,7 @@ const StickyNav = ({
         </div>
           <li className="stickyNav-item mobile-hidden">
             <a href="/">
-              <img className="sticky-logo" src={logo} alt={`${siteName} logo`} />
+              <img className="sticky-logo" src={logoShort} alt={`${siteName} logo`} />
             </a>
           </li>
           <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
@@ -150,7 +149,7 @@ const StickyNav = ({
         <div className='b-flexRow c-stickyLogin'>
           <div className={`sticky-logo-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
             <a href="/">
-              <img src={logo} alt={`${siteName} logo`} />
+              <img src={logoShort} alt={`${siteName} logo`} />
             </a>
           </div>
           <div className={`stickyNav-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
