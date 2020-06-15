@@ -14,7 +14,7 @@ export default {
   pinterestURL: 'https://www.pinterest.com/pin/create/button/?url=',
   domainRedditURL: '',
   redditURL: 'https://www.reddit.com/submit?url=',
-  logo: '/resources/images/springfieldnewssun-logo.svg',
+  logo: '/resources/images/journal-news-logo.svg',
   mail: 'mailto:?Subject=',
   sites: ['journal-news'],
   featuredVideoPlayerRules: {
@@ -28,4 +28,5 @@ export default {
     autoplayNext: true,
   },
   maxTabletViewWidth: 1024,
+  weatherLocationId: 330109,
 };

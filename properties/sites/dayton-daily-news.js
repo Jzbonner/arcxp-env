@@ -28,4 +28,5 @@ export default {
     autoplayNext: true,
   },
   maxTabletViewWidth: 1024,
+  weatherLocationId: 330120,
 };
