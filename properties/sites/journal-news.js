@@ -17,16 +17,6 @@ export default {
   logo: '/resources/images/journal-news-logo.svg',
   mail: 'mailto:?Subject=',
   sites: ['journal-news'],
-  featuredVideoPlayerRules: {
-    startPlaying: true,
-    muteON: true,
-    autoplayNext: true,
-  },
-  inlineVideoPlayerRules: {
-    startPlaying: false,
-    muteON: true,
-    autoplayNext: true,
-  },
   maxTabletViewWidth: 1024,
   weatherLocationId: 330109,
 };

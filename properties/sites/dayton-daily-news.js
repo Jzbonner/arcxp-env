@@ -17,16 +17,6 @@ export default {
   logo: '/resources/images/daytondailynews-logo.svg',
   mail: 'mailto:?Subject=',
   sites: ['daytondailynews'],
-  featuredVideoPlayerRules: {
-    startPlaying: true,
-    muteON: true,
-    autoplayNext: true,
-  },
-  inlineVideoPlayerRules: {
-    startPlaying: false,
-    muteON: true,
-    autoplayNext: true,
-  },
   maxTabletViewWidth: 1024,
   weatherLocationId: 330120,
 };

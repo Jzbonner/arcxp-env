@@ -17,16 +17,6 @@ export default {
   logo: '/resources/images/dayton-logo.svg',
   mail: 'mailto:?Subject=',
   sites: ['dayton'],
-  featuredVideoPlayerRules: {
-    startPlaying: true,
-    muteON: true,
-    autoplayNext: true,
-  },
-  inlineVideoPlayerRules: {
-    startPlaying: false,
-    muteON: true,
-    autoplayNext: true,
-  },
   maxTabletViewWidth: 1024,
   weatherLocationId: 330120,
 };
