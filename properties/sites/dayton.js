@@ -21,4 +21,7 @@ export default {
   mail: 'mailto:?Subject=',
   sites: ['dayton'],
   weatherLocationId: 330120,
+  taboola: {
+    dataPublisher: 'cox-dayton',
+  },
 };

@@ -21,4 +21,12 @@ export default {
   mail: 'mailto:?Subject=',
   sites: ['daytondailynews'],
   weatherLocationId: 330120,
+  taboola: {
+    dataPublisher: 'cox-daytondailynews',
+    taboolaStoryID: 'taboola-dayton-daily-news-custom-feed',
+    taboolaSectionID: 'taboola-dayton-daily-news-custom-feed---section-fronts',
+    cdnLink: '//cdn.taboola.com/libtrc/cox-daytondailynews/loader.js',
+    containerName: 'taboola-dayton-daily-news-custom-feed',
+    placementName: 'Dayton Daily News Custom Feed',
+  },
 };
