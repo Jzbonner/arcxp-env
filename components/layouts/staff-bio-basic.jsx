@@ -10,7 +10,7 @@ import NavBar from '../_helper_components/global/navBar/default';
 import StaffBio from '../_helper_components/staffBioPage/staffBio/default';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
-import CollectionList from '../_helper_components/listpage/collectionList/default';
+import CollectionList from '../_helper_components/staffBioPage/collectionList/default';
 import '../features/List/default.scss';
 import '../../src/styles/container/_homepage.scss';
 
