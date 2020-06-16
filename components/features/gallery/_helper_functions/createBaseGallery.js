@@ -1,5 +1,6 @@
 import React from 'react';
 import GalleryItem from '../../../_helper_components/global/gallery/galleryItem.jsx';
+import getAltText from '../../../layouts/_helper_functions/getAltText';
 
 const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {}) => {
   const {
@@ -20,8 +21,9 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
       let isNext = false;
       let functionToPass = null;
       const {
-        url, copyright, caption, alt, credits, width, height,
+        url, copyright, caption, alt_text: alt, credits, width, height,
       } = element || {};
+
       const { affiliation, by } = credits || {};
 
       if (currentIndex === i) isFocused = true;
@@ -32,7 +34,7 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
 
       const galleryItem = {
         url,
-        alt,
+        alt: getAltText(alt, caption),
         by,
         width,
         height,

@@ -4,7 +4,9 @@ import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
+
 
 const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage = false,
@@ -33,16 +35,6 @@ const Image = ({
   } else if (secondaryCredit) {
     giveCredit = `Credit: ${secondaryCredit}`;
   }
-
-  const getAltText = (altT, captionT) => {
-    if (altT && altT !== '') {
-      return altT;
-    }
-    if (captionT && captionT.length > 1) {
-      return captionT;
-    }
-    return 'story page inline image';
-  };
 
   const renderCaption = () => {
     if (
