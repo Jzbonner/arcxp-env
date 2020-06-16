@@ -1,13 +1,13 @@
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 
-export default (arcSite, newBody, from = 0, size = 100) => {
+export default (arcSite, newBody, size = 100) => {
   if (!arcSite || !newBody) {
     return null;
   }
 
   const sizeInt = parseInt(size, 10);
-  const fromInt = parseInt(from, 10);
+  const fromInt = 0;
 
   const promiseArray = [];
   const contentElements = [];
