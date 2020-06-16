@@ -41,7 +41,7 @@ const Pagination = ({
   return (
     <div className="c-pagination">
       {activePage > 1 && (
-        <btn
+        <a
           className="left-button"
           onClick={() => changePage(activePage - 1)}
         />

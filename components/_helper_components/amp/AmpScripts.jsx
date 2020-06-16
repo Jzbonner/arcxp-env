@@ -4,7 +4,7 @@ import ampScriptSwitch from '../../../src/js/ampScriptSwitch';
 
 const AmpScripts = ({ contentElements }) => {
   const scriptsArr = [];
-  const oembedScripts = contentElements.map((element) => {
+  const oembedScripts = contentElements && contentElements.map((element) => {
     if (element.type === 'oembed_response' || element.type === 'raw_html') {
       const { raw_oembed: rawOembed, content } = element || {};
       const { type } = rawOembed || {};
