@@ -5,7 +5,7 @@ export default {
   websiteURL: 'https://www.journal-news.com/',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/CFSFLNZIUJBB3EVHSGSJCOHOJM.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/TXGQ6XIXWNACDAKSABXGTXAKU4.png',
-  orgName: 'The Atlanta Journal-Constitution',
+  orgName: 'Journal News',
   domainTwitterURL: 'https://twitter.com/journalnews',
   twitterURL: 'https://twitter.com/intent/tweet?url=',
   domainFacebookURL: 'https://www.facebook.com/journalnews',
