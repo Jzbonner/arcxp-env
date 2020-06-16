@@ -1,7 +1,23 @@
+@import "../../../../../../src/styles/base/mixins";
+@import "../../../../../../src/styles/base/breakpoints";
+
 .c-customHTML {
 
   img,
   iframe {
     max-width: 100%;
+  }
+
+  iframe.scriptIframe {
+    width: 95%;
+    height: 1170px;
+
+    @include breakpoint(tablet) {
+      height: 400px;
+    }
+
+    @media (orientation: landscape) {
+      height: 400px;
+    }
   }
 }

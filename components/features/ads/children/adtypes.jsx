@@ -13,18 +13,6 @@ export const defaultAdSlot = {
   targeting: {
     // key:value pairs; should be global; currently set in components/features/ads/default.jsx
   },
-  // bidding: {
-  //   prebid: {
-  //     enabled: true,
-  //     bids: [{
-  //       bidder: 'appnexus',
-  //       labels: ['desktop', 'tablet', 'phone']
-  //       params: {
-  //         placementId: '10433394'
-  //       }
-  //     }]
-  //   }
-  // },
 };
 
 export const adSlots = {
@@ -68,6 +56,11 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   HP02: {
     dimensions: [
@@ -84,6 +77,11 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   HP05: {
     dimensions: [
@@ -96,6 +94,11 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   RP01: {
     dimensions: [
@@ -107,6 +110,11 @@ export const adSlots = {
     breakpoints: [
       [768, 0], // tablet
     ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   'RP01 sticky': {
     slotName: 'RP01',
@@ -120,6 +128,11 @@ export const adSlots = {
       [768, 0], // tablet+
     ],
     isSticky: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   'RP01-Story-Desktop': {
     slotName: 'RP01',
@@ -133,6 +146,11 @@ export const adSlots = {
       [1024, 0], // desktop
     ],
     isRightRailAd: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   'RP01-Story-FlatPage': {
     slotName: 'RP01',
@@ -147,6 +165,11 @@ export const adSlots = {
     ],
     isRightRailAd: true,
     isSticky: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   'RP01-Story-Tablet': {
     slotName: 'RP01',
@@ -161,6 +184,11 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   'RP01-List-Page': {
     slotName: 'RP01',
@@ -173,6 +201,11 @@ export const adSlots = {
     breakpoints: [
       [768, 0], // tablet+
     ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   RP02: {
     dimensions: [
@@ -196,6 +229,11 @@ export const adSlots = {
       [768, 0], // tablet+
     ],
     isSticky: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   'RP09-Story-Desktop': {
     slotName: 'RP09',
@@ -210,6 +248,11 @@ export const adSlots = {
     ],
     isRightRailAd: true,
     isSticky: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   'RP09-Story-Tablet': {
     slotName: 'RP09',
@@ -224,6 +267,11 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   'RP09 sticky': {
     slotName: 'RP09',
@@ -237,6 +285,11 @@ export const adSlots = {
       [768, 0], // tablet+
     ],
     isSticky: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   MP01: {
     dimensions: [
@@ -250,6 +303,11 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   MP02: {
     dimensions: [
@@ -262,6 +320,11 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   MP03: {
     dimensions: [
@@ -274,6 +337,11 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   MP04: {
     dimensions: [
@@ -286,6 +354,11 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   MP05: {
     dimensions: [
@@ -298,6 +371,11 @@ export const adSlots = {
       [768, 0], // tablet+
       [1, 0], // mobile
     ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
   },
   PG01: {
     slotName: 'PG01',

@@ -19,7 +19,6 @@ const SiteMetrics = ({ isAmp }) => {
   const { basic = {} } = promoItems || {};
   const { headlines: promoHeadlines } = basic;
   const { type: promoType = '' } = basic || {};
-  const { canonical_url: canonicalUrl } = basic || {};
 
   const { by: authorData } = credits || {};
   const {
@@ -28,6 +27,7 @@ const SiteMetrics = ({ isAmp }) => {
   } = source || {};
   const authors = [];
   const ampAuthors = [];
+  const ampAuthorNames = [];
   let galleryHeadline = '';
 
   if (authorData) {
@@ -36,8 +36,9 @@ const SiteMetrics = ({ isAmp }) => {
       if (isAmp) {
         // eslint-disable-next-line quote-props
         ampAuthors.push(`{ "_id": "${authorID}", "name": "${authorName}", "type": "${type}"}`);
+        ampAuthorNames.push(`"${authorName.toLowerCase()}"`);
       }
-      authors.push(authorName);
+      authors.push(authorName.toLowerCase());
     });
   }
 
@@ -62,13 +63,13 @@ const SiteMetrics = ({ isAmp }) => {
     pageContentType,
     typeOfPage,
     site,
-    title,
+    title: pageTitle = '',
     seoTitle,
     topics,
     contentId,
     firstPublishDateConverted,
   } = contentMeta || {};
-  const siteDomain = siteDomainURL || `//www.${site}.com`;
+  const siteDomain = siteDomainURL || `https://www.${site}.com`;
 
   if (isAmp) {
     return (
@@ -79,24 +80,24 @@ const SiteMetrics = ({ isAmp }) => {
           __html: `{
             "vars": {
               "authors": [${ampAuthors}],
-              "canonicalUrl":"${canonicalUrl}",
+              "canonicalUrl": "${url}",
               "groups": "default",
               "pageName": "${url}",
               "pageSiteSection": "${topSection}",
               "pageCategory": "${secondarySection}",
-              "pageContentType": "${typeOfPage || pageContentType}",
-              "pageTitle": "${seoTitle ? seoTitle.replace(/'/g, '"') : title.replace(/'/g, '"')}",
+              "pageContentType": "instant article",
+              "pageTitle": "${seoTitle ? seoTitle.replace(/'/g, '"').toLowerCase() : pageTitle.replace(/'/g, '"').toLowerCase()}",
               "pageFlow": "",
               "pageNumber": "",
               "siteVersion": "instant",
-              "siteDomain": "${siteDomain}",
+              "siteDomain": "${siteDomain.replace('https://www.', '')}",
               "siteMetro": "${metrics && metrics.siteMetro ? metrics.siteMetro : ''}",
               "siteFormat": "${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}",
               "siteMedium": "np",
               "siteID": "${metrics && metrics.siteID ? metrics.siteID : site}",
               "siteType": "free",
               "siteCMS": "arc",
-              "contentTopics": "${topics.join()}",
+              "contentTopics": "${topics.join().toLowerCase()}",
               "contentByline": "${authors.join()}",
               "contentOriginatingSite": "${metrics && metrics.siteID ? metrics.siteID : site}",
               "contentID": "${contentId || ''}",
@@ -104,7 +105,7 @@ const SiteMetrics = ({ isAmp }) => {
               "contentPublishDate": "${firstPublishDateConverted}",
               "blogName": "${pageContentType === 'blog' ? topSectionName : ''}",
               "galleryName": "${galleryHeadline}",
-              "authorName": "${authors}",
+              "authorName": [${ampAuthorNames}],
               "pageNameStr": "",
               "pageUrlStr": ""
               }
@@ -127,11 +128,11 @@ const SiteMetrics = ({ isAmp }) => {
             'pageMainSection': '${topSection}',
             'pageCategory': '${secondarySection}',
             'pageContentType': '${typeOfPage || pageContentType}',
-            'pageTitle': '${seoTitle ? seoTitle.replace(/'/g, '"') : title.replace(/'/g, '"')}'
+            'pageTitle': '${seoTitle ? seoTitle.replace(/'/g, '"') : pageTitle.replace(/'/g, '"')}'
           },
           'siteData': {
             'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
-            'siteDomain': '${siteDomain}',
+            'siteDomain': '${siteDomain.replace('https://www.', '')}',
             'siteVersion': 'responsive site',
             'siteFormat': '${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}',
             'siteMetro': '${metrics && metrics.siteMetro ? metrics.siteMetro : ''}',

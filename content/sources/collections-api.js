@@ -10,7 +10,6 @@ const params = {
   id: 'text',
   from: 'text',
   size: 'text',
-  arcSite: 'text',
 };
 
 const fetch = (query) => {

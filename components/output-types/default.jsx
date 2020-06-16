@@ -22,12 +22,15 @@ const DefaultOutputType = (props) => {
     deployment,
     Fusion,
     globalContent,
-    hyperlocalTags = getProperties().hyperlocalTags,
-    metrics = getProperties().metrics,
     Libs,
     MetaTags,
   } = props;
-  const { isEnabled = false, clientCode, environment: connextEnv } = connext;
+  const {
+    hyperlocalTags,
+    metrics,
+    adsA9Enabled,
+  } = getProperties() || {};
+  const { isEnabled: connextIsEnabled = false, clientCode, environment: connextEnv } = connext;
   const {
     type, taxonomy, canonical_url: articleURL, _id: uuid,
   } = globalContent || { type: null };
@@ -58,9 +61,10 @@ const DefaultOutputType = (props) => {
           </>
         )}
         <Libs />
+        {!noAds && adsA9Enabled && <script src='https://c.amazon-adsystem.com/aax2/apstag.js'></script>}
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} />}
         {!isHyperlocalContent && <TaboolaHeader/>}
-        <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />
+        {arcSite && <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />}
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
@@ -77,7 +81,7 @@ const DefaultOutputType = (props) => {
         <div id="fusion-app">{children}</div>
         <Fusion />
         {!isHyperlocalContent && <TaboolaFooter/>}
-        {isEnabled && (
+        {connextIsEnabled && (
           <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${connextEnv}/${clientCode}/loader.min.js`}></script>
@@ -86,6 +90,7 @@ const DefaultOutputType = (props) => {
         )}
         <div id="fb-root"></div>
         <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
+        <script type="text/javascript" src={deployment(`${contextPath}/resources/scripts/weather.js`)} />
       </body>
     </html>
   );

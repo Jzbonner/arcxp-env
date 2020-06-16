@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../default.scss';
+import '../../global/pagination/default.scss';
 
 const PageNumber = ({ num, activePage, fetchPage }) => {
   const pageActive = num === activePage ? 'active' : '';

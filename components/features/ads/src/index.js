@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'fusion:prop-types';
+import getProperties from 'fusion:properties';
 import ArcAdLib from './children/ArcAdLib';
 
 const AdSetup = ({
   id, slotName, dimensions, display, breakpoints, refresh, targeting, bidding, className, prerender, dfpId,
 }) => {
+  const { adsA9Enabled, adsA9Id } = getProperties();
   if (prerender && typeof window !== 'undefined') {
     window.arcAdsPrerenderer = adDetails => new Promise((resolve) => {
       prerender.adDetails();
@@ -29,10 +31,12 @@ const AdSetup = ({
         prerender: typeof window !== 'undefined' ? window.arcAdsPrerenderer : null,
       },
       dfpId,
-      // {
-      //   amazon: {
-      //     enabled: true
-      //   },
+      {
+        amazon: {
+          enabled: adsA9Enabled,
+          id: adsA9Id,
+        },
+      },
       //   prebid: {
       //     enabled: true,
       //     sizeConfig: [

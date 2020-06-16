@@ -29,83 +29,6 @@
   }
 }
 
-.c-pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  width: 100%;
-  max-width: 335px;
-  border-radius: 6px;
-  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
-  background-color: #fff;
-  padding: 0 30px;
-  box-sizing: border-box;
-  margin-bottom: 50px;
-  margin-top: 24px;
-
-  @include breakpoint(tablet) {
-    width: fit-content;
-    max-width: 100%;
-    height: 102px;
-    padding: 40px 30px;
-  }
-
-  @include breakpoint(desktop-sm) {
-    margin-bottom: 0;
-  }
-
-  .right-button {
-    margin-left: 15px;
-
-    @include blue-button(35px, "\e902", 21px);
-  }
-
-  .left-button {
-    margin-right: 15px;
-
-    @include blue-button(35px, "\e901", 21px);
-  }
-
-  a {
-
-    &.right-button {
-      margin-right: 0;
-    }
-  }
-}
-
-.c-pageNums {
-  display: flex;
-  height: 26px;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  color: #2e81b7;
-
-  @include text-styles(1.25rem, .875, "Gordita");
-
-  .page {
-    padding: 0 10px;
-    cursor: pointer;
-
-    &.active {
-      color: #313132;
-      cursor: none;
-      font-weight: 700;
-    }
-
-    &:first-child {
-      padding-left: 0;
-    }
-
-    &:last-child {
-      padding-right: 0;
-    }
-  }
-}
-
 .tease-listHeading {
   text-align: center;
   border-bottom: 1px solid #cdcdcd;
@@ -124,7 +47,7 @@
 
 .listPage-item {
   width: 100%;
-  
+
   .c-homeList {
     display: flex;
     margin-bottom: 20px;

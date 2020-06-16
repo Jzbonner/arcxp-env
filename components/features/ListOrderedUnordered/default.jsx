@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
+import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import './default.scss';
 
@@ -11,7 +12,8 @@ const ListOrderedUnordered = (customFields = {}) => {
   const { arcSite = 'ajc' } = fusionContext;
   const {
     customFields: {
-      content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {}, displayClass = '', title = '', moreURL = '',
+      content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},
+      displayClass = '', columns = 1, title = '', moreURL = '',
     },
   } = customFields;
 
@@ -31,7 +33,7 @@ const ListOrderedUnordered = (customFields = {}) => {
     return (
       <div className={`c-${displayClass} b-margin-bottom-d30-m20`}>
         <FeatureTitle title={title} moreURL={moreURL} />
-        <ul className="c-list-box">
+        <ul className={`c-list-box ${getColumnsMap(columns)}`}>
           {filteredData.map((el, i) => {
             const { basic: headline } = el.headlines ? el.headlines : '';
             const { canonical_url: itemURL } = el || '';
@@ -54,12 +56,16 @@ const ListOrderedUnordered = (customFields = {}) => {
 
 ListOrderedUnordered.propTypes = {
   customFields: PropTypes.shape({
-    content: PropTypes.contentConfig('collections').tag({
+    content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
       name: 'Content',
     }),
     displayClass: PropTypes.oneOf(['Ordered List', 'Un-ordered List']).tag({
       name: 'Display Class',
       defaultValue: 'Ordered List',
+    }),
+    columns: PropTypes.oneOf(['1', '2', '3', '4']).tag({
+      name: 'Columns',
+      defaultValue: '1',
     }),
     title: PropTypes.string.tag({
       name: 'Title',

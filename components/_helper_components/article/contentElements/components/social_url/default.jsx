@@ -5,17 +5,17 @@ import '../../../../../../src/styles/base/_utility.scss';
 const Oembed = ({ src }) => {
   const {
     raw_oembed: rawOembed,
-  } = src;
+  } = src || {};
   const {
     type,
     html,
-  } = rawOembed;
+  } = rawOembed || {};
   let filteredHtml = html;
   let SCRIPT_URL;
   const scriptFilter = /<script[\s\S]*?>[\s\S]*?<\/script>/gi;
 
   if (type === 'reddit' || type === 'facebook-post' || type === 'facebook-video' || type === 'twitter' || type === 'instagram') {
-    filteredHtml = html.replace(scriptFilter, '');
+    filteredHtml = html ? html.replace(scriptFilter, '') : '';
     if (type === 'reddit') {
       SCRIPT_URL = 'https://embed.redditmedia.com/widgets/platform.js';
       /* eslint-disable-next-line global-require */

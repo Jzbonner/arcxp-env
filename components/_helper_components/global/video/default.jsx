@@ -53,8 +53,39 @@ const Video = ({
       const { time, type } = evt || {};
       // fire GTM events for various player events
       const dataLayer = window.dataLayer || [];
+      let eventType = type;
+      switch (type) {
+        case 'powaRender':
+          eventType = 'videoPlayerLoad';
+          break;
+        case 'playback0':
+          eventType = 'videoContentStart';
+          break;
+        case 'playback25':
+          eventType = 'videoView25Checkpoint';
+          break;
+        case 'playback50':
+          eventType = 'videoView50Checkpoint';
+          break;
+        case 'playback75':
+          eventType = 'videoView75Checkpoint';
+          break;
+        case 'playback100':
+          eventType = 'videoComplete';
+          break;
+
+        case 'start':
+        case 'error':
+        case 'adStart':
+        case 'adComplete':
+        case 'adError':
+        case 'adSkip':
+        default:
+          // naming convention remains, we simply prepend "video" and capitalize the first letter
+          eventType = `video${eventType.charAt(0).toUpperCase()}${eventType.slice(1)}`;
+      }
       dataLayer.push({
-        event: type,
+        event: eventType,
         videoPayload: {
           videoSource: 'arc',
           videoTitle,

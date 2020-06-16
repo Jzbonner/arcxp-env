@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
+import { useAppContext } from 'fusion:context';
 import './default.scss';
 import fetchEnv from '../../global/utils/environment.js';
-import logo from '../../../../resources/images/stickyNav-logo.svg';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import Comments from '../comments/comments';
 import Login from '../../global/navBar/login/default';
@@ -14,13 +14,15 @@ const StickyNav = ({
   isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections, articleUrl,
 }) => {
   const {
-    facebookURL, pinterestURL, twitterURL, redditURL, mail, siteName,
+    facebookURL, pinterestURL, twitterURL, redditURL, mail, siteName, logoShort,
   } = getProperties();
+  const appContext = useAppContext();
+  const { deployment, contextPath } = appContext;
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
   let sharedUrl = articleUrl;
   let site = siteName.toLowerCase();
-  site = site.replace(/w/gi, '');
+  site = site ? site.replace(/w/gi, '') : '';
   if (sharedUrl && sharedUrl.indexOf('.com') === -1) {
     const env = fetchEnv();
     // we must fully-qualify the url for sharing
@@ -31,6 +33,8 @@ const StickyNav = ({
   const shareLinkPinterest = `${pinterestURL}${sharedUrl}&media=${renderImage()}&description=${articleHeadline}`;
   const shareLinkReddit = `${redditURL}${sharedUrl}&title=${articleHeadline}`;
   const shareLinkEmail = `${mail}${articleHeadline}&body=${sharedUrl}`;
+
+  const logoPath = deployment(`${contextPath}${logoShort}`);
 
   // Handles comments window visibility.
   // This state is managed in this component because the window's visibility is controlled
@@ -60,10 +64,7 @@ const StickyNav = ({
     e.preventDefault();
     e.stopPropagation();
     if (!commentVisibilityRef.current) {
-      document.getElementsByTagName('body')[0].classList.add('scrollLock-mobile');
       setDropdownVisibility(false);
-    } else {
-      document.getElementsByTagName('body')[0].classList.remove('scrollLock-mobile');
     }
     setCommentVisibility(!commentVisibilityRef.current);
     setStickyVisibility(!stickyShouldBeHidden());
@@ -117,7 +118,7 @@ const StickyNav = ({
         </div>
           <li className="stickyNav-item mobile-hidden">
             <a href="/">
-              <img className="sticky-logo" src={logo} alt={`${siteName} logo`} />
+              <img className="sticky-logo" src={logoPath} alt={`${siteName} logo`} />
             </a>
           </li>
           <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
@@ -153,7 +154,7 @@ const StickyNav = ({
         <div className='b-flexRow c-stickyLogin'>
           <div className={`sticky-logo-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
             <a href="/">
-              <img src={logo} alt={`${siteName} logo`} />
+              <img src={logoPath} alt={`${siteName} logo`} />
             </a>
           </div>
           <div className={`stickyNav-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
