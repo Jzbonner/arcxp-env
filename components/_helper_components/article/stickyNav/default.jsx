@@ -34,6 +34,8 @@ const StickyNav = ({
   const shareLinkReddit = `${redditURL}${sharedUrl}&title=${articleHeadline}`;
   const shareLinkEmail = `${mail}${articleHeadline}&body=${sharedUrl}`;
 
+  const logoPath = deployment(`${contextPath}${logoShort}`);
+
   // Handles comments window visibility.
   // This state is managed in this component because the window's visibility is controlled
   // by a click on the comment button in the sticky nav bar
@@ -116,7 +118,7 @@ const StickyNav = ({
         </div>
           <li className="stickyNav-item mobile-hidden">
             <a href="/">
-              <img className="sticky-logo" src={deployment(`${contextPath}${logoShort}`)} alt={`${siteName} logo`} />
+              <img className="sticky-logo" src={logoPath} alt={`${siteName} logo`} />
             </a>
           </li>
           <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
@@ -152,7 +154,7 @@ const StickyNav = ({
         <div className='b-flexRow c-stickyLogin'>
           <div className={`sticky-logo-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
             <a href="/">
-              <img src={deployment(`${contextPath}${logoShort}`)} alt={`${siteName} logo`} />
+              <img src={logoPath} alt={`${siteName} logo`} />
             </a>
           </div>
           <div className={`stickyNav-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
