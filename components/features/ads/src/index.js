@@ -36,42 +36,64 @@ const AdSetup = ({
           enabled: adsA9Enabled,
           id: adsA9Id,
         },
+        prebid: {
+          enabled: true,
+          sizeConfig: [
+            {
+              mediaQuery: '(min-width: 972px)',
+              sizesSupported: [
+                [300, 250],
+                [300, 600],
+              ],
+              labels: ['desktop'],
+            },
+            {
+              mediaQuery: '(min-width: 972px)',
+              sizesSupported: [
+                [970, 250],
+                [728, 90],
+              ],
+              labels: ['desktop1'],
+            },
+            {
+              mediaQuery: '(min-width: 972px)',
+              sizesSupported: [
+                [728, 90],
+              ],
+              labels: ['desktop2'],
+            },
+            {
+              mediaQuery: '(min-width: 768px) and (max-width: 971px)',
+              sizesSupported: [
+                [300, 250],
+                [300, 600],
+              ],
+              labels: ['tablet'],
+            },
+            {
+              mediaQuery: '(min-width: 768px) and (max-width: 971px)',
+              sizesSupported: [
+                [728, 90],
+              ],
+              labels: ['tablet1'],
+            },
+            {
+              mediaQuery: '(min-width: 0px) and (max-width: 767px)',
+              sizesSupported: [
+                [320, 250],
+              ],
+              labels: ['phone'],
+            },
+            {
+              mediaQuery: '(min-width: 0px) and (max-width: 767px)',
+              sizesSupported: [
+                [320, 50],
+              ],
+              labels: ['phone1'],
+            },
+          ],
+        },
       },
-      //   prebid: {
-      //     enabled: true,
-      //     sizeConfig: [
-      //       {
-      //         'mediaQuery': '(min-width: 1024px)',
-      //         'sizesSupported': [
-      //           [970, 250],
-      //           [970, 90],
-      //           [728, 90],
-      //           [300, 250],
-      //           [300, 600]
-      //         ],
-      //         'labels': ['desktop']
-      //       },
-      //       {
-      //         'mediaQuery': '(min-width: 768px) and (max-width: 1023px)',
-      //         'sizesSupported': [
-      //           [728, 90],
-      //           [728, 315],
-      //           [300, 250],
-      //           [300, 600]
-      //         ],
-      //         'labels': ['tablet']
-      //       },
-      //       {
-      //         'mediaQuery': '(min-width: 0px)',
-      //         'sizesSupported': [
-      //           [320, 100],
-      //           [320, 50]
-      //         ],
-      //         'labels': ['phone']
-      //       }
-      //     ]
-      //   }
-      // },
     );
   }
 

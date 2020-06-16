@@ -29,6 +29,7 @@ const DefaultOutputType = (props) => {
     hyperlocalTags,
     metrics,
     adsA9Enabled,
+    adsPrebidEnabled,
   } = getProperties() || {};
   const { isEnabled: connextIsEnabled = false, clientCode, environment: connextEnv } = connext;
   const {
@@ -62,6 +63,7 @@ const DefaultOutputType = (props) => {
         )}
         <Libs />
         {!noAds && adsA9Enabled && <script src='https://c.amazon-adsystem.com/aax2/apstag.js'></script>}
+        {!noAds && adsPrebidEnabled && <script src={deployment(`${contextPath}/resources/scripts/prebid3.23.0.js`)}></script>}
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} />}
         {!isHyperlocalContent && <TaboolaHeader/>}
         {arcSite && <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />}

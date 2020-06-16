@@ -51,5 +51,7 @@
   "adsPath": "atlanta_np/ajc_web_default",
   "adsA9Enabled": true,
   "adsA9Id": "3970",
+  "adsPrebidEnabled": true,
+  "adsPrebidTimeout": 1500,
   "weatherLocationId": 348181
 }

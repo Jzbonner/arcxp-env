@@ -60,6 +60,50 @@ export const adSlots = {
       amazon: {
         enabled: true,
       },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop1', 'tablet1'],
+            params: {
+              placementId: '17657462',
+              placementName: 'AJC_ROS_DesktopTablet_HP01',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop1'],
+            params: {
+              placementId: '5174475',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet1'],
+            params: {
+              placementId: '5174480',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop1', 'tablet1'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529034',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop1', 'tablet1'],
+            params: {
+              unit: '540941866',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
     },
   },
   HP02: {
