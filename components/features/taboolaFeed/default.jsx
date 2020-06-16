@@ -32,7 +32,7 @@ const TaboolaFeed = ({ ampPage }) => {
     );
   }
 
-  if (siteName !== 'dayton') return null;
+  if (siteName === 'dayton') return null;
 
   useEffect(() => {
     const taboolaScript = document.createElement('script');
