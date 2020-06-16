@@ -25,7 +25,7 @@ const Footer = () => {
     filter: footerFilter,
   });
 
-  const { logo } = getProperties();
+  const { footerLogo } = getProperties();
 
   const { children: linkCategories } = siteNavigation || {};
   const [row1 = []] = linkCategories || [];
@@ -54,7 +54,7 @@ const Footer = () => {
       <div className="logo-row">
         <div className="col">
           <a href="/">
-            <img className="footer-logo" src={deployment(`${contextPath}${logo}`)} alt="logo" />
+            <img className="footer-logo" src={deployment(`${contextPath}${footerLogo}`)} alt="logo" />
           </a>
         </div>
         <div className="col">

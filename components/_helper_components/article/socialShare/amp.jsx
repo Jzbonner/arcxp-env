@@ -1,7 +1,7 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
+import { useAppContext } from 'fusion:context';
 import PropTypes from 'prop-types';
-import { useContent } from 'fusion:content';
 import fetchEnv from '../../global/utils/environment';
 import getItemThumbNail from '../../../features/Slider/_helper_functions/getItemThumbnail';
 
@@ -10,7 +10,9 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
   const { basic: headline } = headlines || {};
   const { basic: basicItems } = promoItems || {};
   const { url: headlineImage } = basicItems || {};
-  const { facebookAppID, siteName } = getProperties();
+  const { facebookAppID, siteName, logoShort } = getProperties();
+  const appContext = useAppContext();
+  const { deployment, contextPath } = appContext;
   let sharedUrl = articleURL;
   let site = siteName.toLowerCase();
   site = site ? site.replace(/w/gi, '') : '';
@@ -20,21 +22,6 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
     sharedUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${sharedUrl}`;
   }
 
-  const siteLogoData = useContent({
-    source: 'site-api',
-    query: {
-      hierarchy: 'TopNav',
-    },
-    filter: 'logo',
-  });
-
-
-  const fetchedSiteLogo = siteLogoData
-    && siteLogoData.site
-    && siteLogoData.site.site_logo_image_small
-    ? siteLogoData.site.site_logo_image_small : null;
-
-  if (!fetchedSiteLogo) return null;
 
   let pinterestUrl = headlineImage;
 
@@ -42,7 +29,7 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
     pinterestUrl = getItemThumbNail(promoItems);
   }
   if (!pinterestUrl) {
-    pinterestUrl = fetchedSiteLogo;
+    pinterestUrl = deployment(`${contextPath}${logoShort}`);
   }
 
   return (
