@@ -60,6 +60,52 @@ export const adSlots = {
       amazon: {
         enabled: true,
       },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop1', 'tablet1'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657462',
+              placementName: 'AJC_ROS_DesktopTablet_HP01',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop1'],
+            params: {
+              placement: '5174475',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet1'],
+            params: {
+              placement: '5174480',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop1', 'tablet1'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529034',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop1', 'tablet1'],
+            params: {
+              unit: '540941866',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
     },
   },
   HP02: {
@@ -81,6 +127,59 @@ export const adSlots = {
       amazon: {
         enabled: true,
       },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop1', 'tablet1', 'phone'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657464',
+              placementName: 'AJC_ROS_HP02',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop1'],
+            params: {
+              placement: '5174478',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet1'],
+            params: {
+              placement: '5174479',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['phone'],
+            params: {
+              placement: '5174489',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop1', 'tablet1'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529036',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop1', 'tablet1', 'phone'],
+            params: {
+              unit: '540941867',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
     },
   },
   HP05: {
@@ -98,6 +197,52 @@ export const adSlots = {
       amazon: {
         enabled: true,
       },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop2', 'tablet1'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657465',
+              placementName: 'AJC_ROS_DesktopTablet_HP05',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop2'],
+            params: {
+              placement: '5174472',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet1'],
+            params: {
+              placement: '5174484',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop2', 'tablet1'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529038',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop2', 'tablet1'],
+            params: {
+              unit: '540941868',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
     },
   },
   RP01: {
@@ -113,6 +258,52 @@ export const adSlots = {
     bidding: {
       amazon: {
         enabled: true,
+      },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop', 'tablet'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657466',
+              placementName: 'AJC_ROS_DesktopTablet_RP01',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop'],
+            params: {
+              placement: '5174477',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet'],
+            params: {
+              placement: '5174486',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop', 'tablet'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529040',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop', 'tablet'],
+            params: {
+              unit: '540941869',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
       },
     },
   },
@@ -132,6 +323,52 @@ export const adSlots = {
       amazon: {
         enabled: true,
       },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop', 'tablet'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657466',
+              placementName: 'AJC_ROS_DesktopTablet_RP01',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop'],
+            params: {
+              placement: '5174477',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet'],
+            params: {
+              placement: '5174486',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop', 'tablet'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529040',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop', 'tablet'],
+            params: {
+              unit: '540941869',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
     },
   },
   'RP01-Story-Desktop': {
@@ -149,6 +386,52 @@ export const adSlots = {
     bidding: {
       amazon: {
         enabled: true,
+      },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop', 'tablet'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657466',
+              placementName: 'AJC_ROS_DesktopTablet_RP01',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop'],
+            params: {
+              placement: '5174477',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet'],
+            params: {
+              placement: '5174486',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop', 'tablet'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529040',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop', 'tablet'],
+            params: {
+              unit: '540941869',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
       },
     },
   },
@@ -169,6 +452,52 @@ export const adSlots = {
       amazon: {
         enabled: true,
       },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop', 'tablet'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657466',
+              placementName: 'AJC_ROS_DesktopTablet_RP01',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop'],
+            params: {
+              placement: '5174477',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet'],
+            params: {
+              placement: '5174486',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop', 'tablet'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529040',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop', 'tablet'],
+            params: {
+              unit: '540941869',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
     },
   },
   'RP01-Story-Tablet': {
@@ -188,6 +517,45 @@ export const adSlots = {
       amazon: {
         enabled: true,
       },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['tablet'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657467',
+              placementName: 'AJC_ROS_Tablet_RP01h2',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet'],
+            params: {
+              placement: '5174483',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['tablet'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529040',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['tablet'],
+            params: {
+              unit: '540941871',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
     },
   },
   'RP01-List-Page': {
@@ -204,6 +572,52 @@ export const adSlots = {
     bidding: {
       amazon: {
         enabled: true,
+      },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop', 'tablet'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657466',
+              placementName: 'AJC_ROS_DesktopTablet_RP01',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop'],
+            params: {
+              placement: '5174477',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet'],
+            params: {
+              placement: '5174486',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop', 'tablet'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529040',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop', 'tablet'],
+            params: {
+              unit: '540941869',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
       },
     },
   },
