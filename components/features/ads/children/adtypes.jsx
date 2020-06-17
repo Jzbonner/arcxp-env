@@ -647,6 +647,52 @@ export const adSlots = {
       amazon: {
         enabled: true,
       },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop', 'tablet'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657468',
+              placementName: 'AJC_ROS_DesktopTablet_RP03',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop'],
+            params: {
+              placement: '5174471',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet'],
+            params: {
+              placement: '5174485',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop', 'tablet'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529044',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop', 'tablet'],
+            params: {
+              unit: '540941873',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
     },
   },
   'RP09-Story-Desktop': {
@@ -665,6 +711,45 @@ export const adSlots = {
     bidding: {
       amazon: {
         enabled: true,
+      },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657470',
+              placementName: 'AJC_ROS_Desktop_RP09h2',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop'],
+            params: {
+              placement: '5174474',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529050',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop'],
+            params: {
+              unit: '540941875',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
       },
     },
   },
@@ -685,6 +770,52 @@ export const adSlots = {
       amazon: {
         enabled: true,
       },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop', 'tablet'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657469',
+              placementName: 'AJC_ROS_DesktopTablet_RP09',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop'],
+            params: {
+              placement: '5174476',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet'],
+            params: {
+              placement: '5174482',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop', 'tablet'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529048',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop', 'tablet'],
+            params: {
+              unit: '540941874',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
     },
   },
   'RP09 sticky': {
@@ -702,6 +833,52 @@ export const adSlots = {
     bidding: {
       amazon: {
         enabled: true,
+      },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop', 'tablet'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657469',
+              placementName: 'AJC_ROS_DesktopTablet_RP09',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop'],
+            params: {
+              placement: '5174476',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet'],
+            params: {
+              placement: '5174482',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop', 'tablet'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529048',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop', 'tablet'],
+            params: {
+              unit: '540941874',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
       },
     },
   },
@@ -721,6 +898,45 @@ export const adSlots = {
       amazon: {
         enabled: true,
       },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['phone1'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657472',
+              placementName: 'AJC_ROS_Phone_MP01',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['phone1'],
+            params: {
+              placement: '5174488',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['phone1'],
+            params: {
+              accountId: '21858',
+              siteId: '303390',
+              zoneId: '1529052',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['phone1'],
+            params: {
+              unit: '540941877',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
     },
   },
   MP02: {
@@ -737,6 +953,45 @@ export const adSlots = {
     bidding: {
       amazon: {
         enabled: true,
+      },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['phone'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657473',
+              placementName: 'AJC_ROS_Phone_MP02',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['phone'],
+            params: {
+              placement: '5174492',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['phone'],
+            params: {
+              accountId: '21858',
+              siteId: '303390',
+              zoneId: '1529054',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['phone'],
+            params: {
+              unit: '540941879',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
       },
     },
   },
@@ -755,6 +1010,45 @@ export const adSlots = {
       amazon: {
         enabled: true,
       },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['phone'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657474',
+              placementName: 'AJC_ROS_Phone_MP03',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['phone'],
+            params: {
+              placement: '5174487',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['phone'],
+            params: {
+              accountId: '21858',
+              siteId: '303390',
+              zoneId: '1529056',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['phone'],
+            params: {
+              unit: '540941880',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
     },
   },
   MP04: {
@@ -772,6 +1066,45 @@ export const adSlots = {
       amazon: {
         enabled: true,
       },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['phone'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657475',
+              placementName: 'AJC_ROS_Phone_MP04',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['phone'],
+            params: {
+              placement: '5174491',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['phone'],
+            params: {
+              accountId: '21858',
+              siteId: '303390',
+              zoneId: '1529058',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['phone'],
+            params: {
+              unit: '540941881',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
     },
   },
   MP05: {
@@ -788,6 +1121,45 @@ export const adSlots = {
     bidding: {
       amazon: {
         enabled: true,
+      },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['phone'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657476',
+              placementName: 'AJC_ROS_Phone_MP05',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['phone'],
+            params: {
+              placement: '5174490',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['phone'],
+            params: {
+              accountId: '21858',
+              siteId: '303390',
+              zoneId: '1529060',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['phone'],
+            params: {
+              unit: '540941882',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
       },
     },
   },
