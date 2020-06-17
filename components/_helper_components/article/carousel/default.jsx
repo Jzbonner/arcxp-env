@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import buildCarouselItem from './_helper_functions/buildCarouselItems';
 import './default.scss';
@@ -9,9 +9,12 @@ import './default.scss';
 const Carousel = ({ storyId, taxonomy }) => {
   const { primary_section: primarySection } = taxonomy || {};
   const { path } = primarySection || {};
+
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
-  const { logoShort } = getProperties() || {};
+  const { logoShort } = getProperties(arcSite) || {};
   const logoPath = deployment(`${contextPath}${logoShort}`);
 
   const formattedPath = path ? path.substring(1) : null;

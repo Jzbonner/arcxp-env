@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import './default.scss';
 import fetchEnv from '../../global/utils/environment.js';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
@@ -13,9 +13,11 @@ const StickyNav = ({
   headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
   isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections, articleUrl,
 }) => {
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
   const {
     facebookURL, pinterestURL, twitterURL, redditURL, mail, siteName, logoShort,
-  } = getProperties();
+  } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
   const { basic: articleHeadline } = headlines || {};

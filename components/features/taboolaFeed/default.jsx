@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import { taboolaModuleScript } from '../../../src/js/taboola/taboolaScripts';
 import '../../../src/styles/base/_utility.scss';
 
 const TaboolaFeed = ({ ampPage }) => {
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
   const appContext = useAppContext();
   const { layout } = appContext;
-  const { taboola, siteName } = getProperties();
+  const { taboola, siteName } = getProperties(arcSite);
   const {
     dataPublisher,
     taboolaStoryID,

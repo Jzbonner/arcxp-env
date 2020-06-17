@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useContent } from 'fusion:content';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import footerFilter from '../../../../content/filters/bottom-nav';
 import './default.scss';
@@ -12,6 +12,8 @@ import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
 
 
 const Footer = () => {
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
   let twitterURL = '';
@@ -25,7 +27,7 @@ const Footer = () => {
     filter: footerFilter,
   });
 
-  const { footerLogo } = getProperties();
+  const { footerLogo } = getProperties(arcSite);
 
   const { children: linkCategories } = siteNavigation || {};
   const [row1 = []] = linkCategories || [];

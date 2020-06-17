@@ -1,6 +1,6 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import fetchEnv from '../../global/utils/environment';
 import getItemThumbNail from '../../../features/Slider/_helper_functions/getItemThumbnail';
@@ -10,7 +10,10 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
   const { basic: headline } = headlines || {};
   const { basic: basicItems } = promoItems || {};
   const { url: headlineImage } = basicItems || {};
-  const { facebookAppID, siteName, logoShort } = getProperties();
+
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const { facebookAppID, siteName, logoShort } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
   let sharedUrl = articleURL;
