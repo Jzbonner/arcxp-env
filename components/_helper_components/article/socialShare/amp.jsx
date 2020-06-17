@@ -57,7 +57,8 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
           width="35"
           height="35"
           data-param-media={pinterestUrl}
-          data-param-description={headline}/>
+          data-param-description={headline}
+          data-param-url={sharedUrl}/>
 
         <amp-social-share
           class="btn-mail"
