@@ -4,7 +4,7 @@ export default {
   siteDomainURL: 'https://sandbox.daytondailynews.arcpublishing.com/pf',
   websiteURL: 'https://www.daytondailynews.com/',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/CFSFLNZIUJBB3EVHSGSJCOHOJM.png',
-  googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/TXGQ6XIXWNACDAKSABXGTXAKU4.png',
+  googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/V5MMRTL6OBFBFBNB3N4HBFITLQ.png',
   orgName: 'Dayton Daily News',
   domainTwitterURL: 'https://twitter.com/daytondailynews',
   twitterURL: 'https://twitter.com/intent/tweet?url=',
