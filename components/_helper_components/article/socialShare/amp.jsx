@@ -24,8 +24,6 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
     // we must fully-qualify the url for sharing
     sharedUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${sharedUrl}`;
   }
-
-
   let pinterestUrl = headlineImage;
 
   if (!headlineImage) {
@@ -42,7 +40,8 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
             class="btn-facebook"
             type="facebook"
             width="35" height="35"
-            data-param-app_id={facebookAppID}/>}
+            data-param-app_id={facebookAppID}
+            data-param-href={sharedUrl}/>}
 
         <amp-social-share
           class="btn-twitter"
@@ -58,7 +57,8 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
           width="35"
           height="35"
           data-param-media={pinterestUrl}
-          data-param-description={headline}/>
+          data-param-description={headline}
+          data-param-url={sharedUrl}/>
 
         <amp-social-share
           class="btn-mail"
