@@ -1,10 +1,12 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import { taboolaHeaderScript } from '../../../../src/js/taboola/taboolaScripts';
 
 const TaboolaHeader = () => {
-  const { taboola } = getProperties();
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const { taboola } = getProperties(arcSite);
   const {
     cdnLink,
   } = taboola;
