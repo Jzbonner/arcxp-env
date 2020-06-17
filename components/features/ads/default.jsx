@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import AdSetup from './src/index';
 import fetchEnv from '../../_helper_components/global/utils/environment.js';
 import { adSlots, defaultAdSlot } from './children/adtypes';
@@ -11,9 +11,11 @@ import currentConditions from '../../_helper_components/global/utils/weather/cur
 const ArcAd = ({ customFields, staticSlot }) => {
   const { temp, text: sky, precipitation: weather } = currentConditions() || {};
   const appContext = useAppContext();
+  const fusionContext = useFusionContext();
   const { isAdmin } = appContext;
+  const { arcSite } = fusionContext;
   const { slot: customFieldsSlot } = customFields || {};
-  const { dfp_id: dfpid, adsPath, siteName } = getProperties();
+  const { dfp_id: dfpid, adsPath, siteName } = getProperties(arcSite);
   const slot = customFieldsSlot || staticSlot;
   let randomIdMPG01 = '';
   const currentEnv = fetchEnv();
@@ -120,7 +122,6 @@ const ArcAd = ({ customFields, staticSlot }) => {
 ArcAd.propTypes = {
   customFields: PropTypes.shape({
     slot: PropTypes.oneOf([
-      '',
       'HP01',
       'HP02',
       'HP05',
@@ -137,8 +138,9 @@ ArcAd.propTypes = {
       'RP09 sticky',
       'SP01',
     ]).tag({
-      label: 'Slot ID',
+      name: 'Slot ID',
       description: 'Select the ad slot to be inserted',
+      value: '',
     }),
   }),
   staticSlot: PropTypes.string,
