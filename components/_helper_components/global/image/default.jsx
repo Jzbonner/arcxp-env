@@ -4,16 +4,17 @@ import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
+
 
 const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage = false,
 }) => {
   const {
-    url, height: originalHeight, width: originalWidth, caption, credits,
+    url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText,
   } = src || {};
   const [imageSrc, setImageSrc] = useState('');
-  const imageALT = caption && caption.length > 1 ? caption : 'story page inline image';
 
   useEffect(() => {
     setImageSrc(imageResizer(url, width, height));
@@ -55,11 +56,11 @@ const Image = ({
       <div className="image-component-image">
         <>
           {!ampPage ? (
-            <img src={imageSrc} alt={imageALT} className={teaseContentType ? 'tease-image' : ''} />
+            <img src={imageSrc} alt={getAltText(altText, caption)} className={teaseContentType ? 'tease-image' : ''} />
           ) : (
             <amp-img
               src={imageResizer(url, width, height)}
-              alt={imageALT}
+              alt={getAltText(altText, caption)}
               width={width}
               height={height !== 0 ? height : (width / originalWidth) * originalHeight}
               layout="responsive"

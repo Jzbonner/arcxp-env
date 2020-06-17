@@ -12,6 +12,7 @@ const decodeString = (str) => {
 const safeHtml = (str, opt = {}) => {
   const preconfig = {
     allowedAttributes: {
+      '*': ['id'],
       'a': ['href', 'data-*', 'target', 'class', 'on']
     }
   };

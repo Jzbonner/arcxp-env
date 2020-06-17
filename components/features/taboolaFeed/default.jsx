@@ -8,7 +8,7 @@ import '../../../src/styles/base/_utility.scss';
 const TaboolaFeed = ({ ampPage }) => {
   const appContext = useAppContext();
   const { layout } = appContext;
-  const { taboola } = getProperties();
+  const { taboola, siteName } = getProperties();
   const {
     dataPublisher,
     taboolaStoryID,
@@ -31,6 +31,8 @@ const TaboolaFeed = ({ ampPage }) => {
       </div>
     );
   }
+
+  if (siteName === 'dayton') return null;
 
   useEffect(() => {
     const taboolaScript = document.createElement('script');

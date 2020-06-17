@@ -83,7 +83,7 @@
 @mixin blue-button($dimension, $content, $font-size) {
   background: linear-gradient(to top, #04befe, #4481eb);
   border-radius: 20px;
-  width: $dimension;
+  min-width: $dimension;
   height: $dimension;
   position: relative;
   text-align: center;

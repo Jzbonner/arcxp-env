@@ -74,7 +74,7 @@ class Api {
             const mediaType = localType === 'image' ? 'image/JPEG' : 'video/mp4';
             const mediaMedium = localType === 'image' ? 'image' : 'video';
 
-            xmlObject.mediacontent = `
+            xmlObject.item.mediacontent = `
               <media:content type="${mediaType}" medium="${mediaMedium}" url="${url}">
               <media:title><![CDATA[${subtitle}]]></media:title>
               <media:description><![CDATA[${caption}]]></media:description>

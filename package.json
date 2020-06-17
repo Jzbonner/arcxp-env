@@ -11,7 +11,9 @@
     "lint": "npm run eslint && npm run stylelint",
     "start": "fusion start",
     "stylelint": "stylelint 'src/**/*.scss' 'src/properties/**/*.scss', 'src/styles/**/*.scss', 'components/**/*.scss'",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "bundle": "npm run build && npm run zip",
+    "zip": "zip config/deploy/bundle.zip -r . -x .git/\\* node_modules/\\* coverage/\\* .github/\\* .fusion/\\* .circleci/\\* .dist/\\* .stylelintrc.json data/db/\\*"
   },
   "devDependencies": {
     "@arc-fusion/cli": "^1.0.7",
@@ -217,7 +219,7 @@
     "axios": "^0.19.2",
     "bodybuilder": "^2.2.21",
     "jstoxml": "^1.6.7",
-    "sanitize-html": "^1.23.0",
+    "sanitize-html": "^1.26.0",
     "scriptjs": "^2.5.9",
     "thumbor-lite": "^0.1.8"
   }
