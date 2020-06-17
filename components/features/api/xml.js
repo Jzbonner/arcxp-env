@@ -11,9 +11,7 @@ class Api {
     const { globalContent } = this.props || {};
 
     if (globalContent) {
-      const { data: arrayData } = globalContent || {};
-
-      return arrayData.map((item) => {
+      return globalContent.map((item) => {
         const {
           content_elements: contentElements = [],
           first_publish_date: firstPubDate,
