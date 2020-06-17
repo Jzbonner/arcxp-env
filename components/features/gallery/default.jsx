@@ -65,6 +65,7 @@ const Gallery = (props) => {
   /* Metrics */
   const [hasOpened, setOpenedState] = useState(null);
   const [isContentDataHeadlineFilled, setContentDataHeadlineState] = useState(false);
+  const windowExists = typeof window !== 'undefined';
 
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
@@ -102,7 +103,7 @@ const Gallery = (props) => {
     && fetchedGalleryData.headlines
     && fetchedGalleryData.headlines.basic ? fetchedGalleryData.headlines.basic : '';
 
-  const dataLayer = window && window.dataLayer ? window.dataLayer : [];
+  const dataLayer = windowExists ? window.dataLayer : [];
 
   // push headline for home/section galleries
   if (!galHeadline && !headline && !isContentDataHeadlineFilled && fetchedHeadline) {
@@ -321,7 +322,7 @@ const Gallery = (props) => {
 
   const handleResizeEvent = () => {
     calculateTranslateX();
-    if (window && window.innerWidth <= mobileBreakPoint) {
+    if (windowExists && window.innerWidth <= mobileBreakPoint) {
       setMobileState(true);
     } else {
       setMobileState(false);
@@ -331,7 +332,7 @@ const Gallery = (props) => {
   };
 
   const getInitWindowSize = () => {
-    if (window && window.innerWidth <= mobileBreakPoint) {
+    if (windowExists && window.innerWidth <= mobileBreakPoint) {
       setMobileState(true);
     } else {
       setMobileState(false);
