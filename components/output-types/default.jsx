@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 import { fbPagesId, connext } from 'fusion:environment';
 import SiteMeta from '../_helper_components/global/siteMeta/default';
 import SiteMetrics from '../_helper_components/global/siteMetrics/default';
@@ -15,7 +16,6 @@ import GoogleStructuredData from '../_helper_components/article/googleData/defau
 
 const DefaultOutputType = (props) => {
   const {
-    arcSite = getProperties().sites[0],
     children,
     contextPath,
     CssLinks,
@@ -25,12 +25,16 @@ const DefaultOutputType = (props) => {
     Libs,
     MetaTags,
   } = props;
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
   const {
     hyperlocalTags,
     metrics,
     adsA9Enabled,
     adsPrebidEnabled,
-  } = getProperties() || {};
+    devconActive,
+    devconKey,
+  } = getProperties(arcSite) || {};
   const { isEnabled: connextIsEnabled = false, clientCode, environment: connextEnv } = connext;
   const {
     type, taxonomy, canonical_url: articleURL, _id: uuid,
@@ -93,6 +97,11 @@ const DefaultOutputType = (props) => {
         <div id="fb-root"></div>
         <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
         <script type="text/javascript" src={deployment(`${contextPath}/resources/scripts/weather.js`)} />
+        {devconActive && <script id='ns_script_dc'
+          data-key={devconKey || '2a1556f7-d788-4b8b-943a-dd77f5f0d472'}
+          data-e='5'
+          src='//includemodal.global.ssl.fastly.net/sp.js'
+          type='text/javascript'></script>}
       </body>
     </html>
   );
