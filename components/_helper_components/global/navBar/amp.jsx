@@ -1,12 +1,14 @@
 import React from 'react';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import topNavFilter from '../../../../content/filters/top-nav';
 import closeButton from '../../../../resources/images/amp-close.png';
 
 const AmpNavBar = () => {
-  const { logo, logoShort } = getProperties();
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const { logo, logoShort } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
   const sections = useContent({

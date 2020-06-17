@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
@@ -29,7 +29,9 @@ const NavBar = ({
   const isMobileVisibilityRef = React.useRef(isMobile);
   const mobileBreakpoint = 1023;
 
-  const { logo, logoHamburger } = getProperties();
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const { logo, logoHamburger } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
 
