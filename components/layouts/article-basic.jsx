@@ -232,13 +232,13 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
             ampPage={ampPage}
           />
-          {!noAds && !isHyperlocalContent && !sponsorSectionID && (
-            <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
-          )}
           {(!basicItems || promoType !== 'gallery') && !ampPage ? (
             <Gallery contentElements={filteredContentElements} pageType={subtype} />
           ) : null}
           {!isHyperlocalContent && <TaboolaFeed ampPage={ampPage} />}
+          {!noAds && !isHyperlocalContent && !sponsorSectionID && (
+            <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
+          )}
           {!noAds && ampPage && (
             <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
