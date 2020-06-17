@@ -1,5 +1,6 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 import getContentMeta from '../../global/siteMeta/_helper_functions/getContentMeta';
 
 const GoogleStructuredData = () => {
@@ -12,9 +13,11 @@ const GoogleStructuredData = () => {
   } = contentMeta;
 
   if (pageContentType && pageContentType === 'article') {
+    const fusionContext = useFusionContext();
+    const { arcSite } = fusionContext;
     const {
       websiteURL, websiteLogo, googleLogo, orgName,
-    } = getProperties();
+    } = getProperties(arcSite);
 
     const { url: featuredIMG } = promoItems && promoItems.basic && promoItems.basic.url ? promoItems.basic : {};
     const { url: videoThumbnail } = promoItems && promoItems.lead_art && promoItems.lead_art.promo_image
