@@ -21,4 +21,12 @@ export default {
   mail: 'mailto:?Subject=',
   sites: ['springfieldnewssun'],
   weatherLocationId: 330116,
+  taboola: {
+    dataPublisher: 'cox-springfieldnewssun',
+    taboolaStoryID: 'taboola-springfield-news-sun-custom-feed',
+    taboolaSectionID: 'taboola-springfield-news-sun-custom-feed---section-fronts',
+    cdnLink: '//cdn.taboola.com/libtrc/cox-springfieldnewssun/loader.js',
+    containerName: 'taboola-springfield-news-sun-custom-feed',
+    placementName: 'Springfield News Sun Custom Feed',
+  },
 };

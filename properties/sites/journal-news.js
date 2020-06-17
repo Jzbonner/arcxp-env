@@ -21,4 +21,12 @@ export default {
   mail: 'mailto:?Subject=',
   sites: ['journal-news'],
   weatherLocationId: 330109,
+  taboola: {
+    dataPublisher: 'cox-journal-news',
+    taboolaStoryID: 'taboola-journal-news-custom-feed',
+    taboolaSectionID: 'taboola-journal-news-custom-feed---section-fronts',
+    cdnLink: '//cdn.taboola.com/libtrc/cox-journal-news/loader.js',
+    containerName: 'taboola-journal-news-custom-feed',
+    placementName: 'Journal News Custom Feed',
+  },
 };

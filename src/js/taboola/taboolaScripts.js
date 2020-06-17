@@ -29,8 +29,8 @@ const taboolaHeaderScript = (layout = '', cdnLink) => {
     }`;
 };
 
-const taboolaFooterScript = (layout = '', moapPTD, boapPTD) => {
-  if (layout === isHome) {
+const taboolaFooterScript = (layout = '', moapPTD, boapPTD, siteName) => {
+  if (layout === isHome && siteName.toLowerCase() === 'ajc') {
     return ` window._taboola = window._taboola || [];
       _taboola.push({flush: true});
       let renderedBoap = false;
