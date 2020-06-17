@@ -1,12 +1,14 @@
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import checkPageType from '../../../../layouts/_helper_functions/getPageType.js';
 import fetchEnv from '../../utils/environment.js';
 import { formatTime, formatDate } from '../../../article/timestamp/_helper_functions/computeTimeStamp';
 
 const getContentMeta = () => {
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
   const appContext = useAppContext();
-  const { siteName } = getProperties() || {};
+  const { siteName } = getProperties(arcSite) || {};
   const {
     globalContent,
     layout,
