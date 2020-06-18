@@ -388,19 +388,24 @@
     }
   }
 
-  .search-icon {
-    height: 29px;
-    max-width: 20%;
-    padding: 0 .5rem;
+  .c-search-icon {
+    border: none;
+    background: transparent;
 
-    @include breakpoint(desktop-sm) {
-      max-width: 100%;
-      width: 29px;
-      cursor: pointer;
-      vertical-align: middle;
-      margin-left: 10px;
-      font-size: 1rem;
-      padding: 0;
+    .search-icon {
+      height: 29px;
+      max-width: 20%;
+      padding: 0 .5rem;
+
+      @include breakpoint(desktop-sm) {
+        max-width: 100%;
+        width: 29px;
+        cursor: pointer;
+        vertical-align: middle;
+        margin-left: 10px;
+        font-size: 1rem;
+        padding: 0;
+      }
     }
   }
 
