@@ -12,11 +12,14 @@ const TaboolaHeader = () => {
   } = taboola;
   const appContext = useAppContext();
   const { layout } = appContext || {};
-  return (
-    <script type='text/javascript' dangerouslySetInnerHTML={{
-      __html: taboolaHeaderScript(layout, cdnLink),
-    }}></script>
-  );
+  if (layout) {
+    return (
+      <script type='text/javascript' dangerouslySetInnerHTML={{
+        __html: taboolaHeaderScript(layout, cdnLink),
+      }}></script>
+    );
+  }
+  return <></>;
 };
 
 export default TaboolaHeader;
