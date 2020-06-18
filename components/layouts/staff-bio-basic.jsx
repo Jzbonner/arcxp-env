@@ -13,6 +13,7 @@ import Copyright from '../_helper_components/global/copyright/default';
 import CollectionList from '../_helper_components/staffBioPage/collectionList/default';
 import '../features/List/default.scss';
 import '../../src/styles/container/_homepage.scss';
+import '../_helper_components/listpage/default.scss';
 
 const staffBioPage = () => {
   const appContext = useAppContext();
