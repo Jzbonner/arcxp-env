@@ -7,6 +7,7 @@ import AmpCustomStyles from '../_helper_components/amp/AmpCustomStyle';
 import AmpScripts from '../_helper_components/amp/AmpScripts';
 import GoogleStructuredData from '../_helper_components/article/googleData/default';
 import SiteMetrics from '../_helper_components/global/siteMetrics/default';
+import SiteMetaAmp from '../_helper_components/global/siteMeta/amp';
 
 const AmpOutputType = (props) => {
   const {
@@ -27,6 +28,7 @@ const AmpOutputType = (props) => {
       <AmpScripts contentElements={contentElements} />
       <AmpCustomStyles arcSite={arcSite} outputTypeProps={props} />
       <GoogleStructuredData />
+      <SiteMetaAmp />
     </head>
     <body>
       <SiteMetrics isAmp={true} />
