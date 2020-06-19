@@ -11,9 +11,11 @@
   img {
     border-radius: 50%;
     height: 123px;
+    width: 123px;
 
     @include breakpoint(desktop-sm) {
       height: 160px;
+      width: 160px;
     }
   }
 }
