@@ -7,7 +7,7 @@ const handleImageFocus = (arr = [], states = {}, funcs = {}) => {
     isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction,
   } = states;
   const {
-    prev, next,
+    prev, next, modal,
   } = funcs;
 
   let prevIndex = null;
@@ -53,6 +53,7 @@ const handleImageFocus = (arr = [], states = {}, funcs = {}) => {
       data={elementItemData}
       key={`gallery-item-${elementItemData.url}`}
       func={functionToPass}
+      modalFunc={currentIndex === element.props.data.index ? modal : null}
       />
     );
   });
