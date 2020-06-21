@@ -89,8 +89,8 @@ const Headline = ({
   }
 
   return (
-    <div className="home-headline">
-      <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+    <div className={`home-headline ${sponsorName ? 'sponsored' : ''}`}>
+      <a href={`${contextPath}${relativeURL}`} className='homeList-image'>
         {getPromoItem(type)}
         {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
         </a>

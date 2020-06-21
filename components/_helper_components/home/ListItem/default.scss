@@ -24,6 +24,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 
   @include text-styles(.625rem, 1, "Gordita");
 }

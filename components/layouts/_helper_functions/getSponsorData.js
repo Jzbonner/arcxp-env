@@ -5,12 +5,16 @@ import checkSponsor from './checkSponsor';
 export default (sections) => {
   const { sponsorSectionID, sponsorName } = checkSponsor(sections);
 
-  // const siteData = useContent({
-  //   source: 'site-api',
-  //   query: { section: sponsorSectionID || null },
-  // });
+  const siteData = useContent({
+    source: 'site-api',
+    query: { section: sponsorSectionID || null },
+  });
 
-  // const { Sponsor: { disable_advertiser_content_label: disableAd } = {} } = siteData || {};
+  const { Sponsor: { disable_advertiser_content_label: disableAd } = {} } = siteData || {};
 
-  return sponsorName;
+  if (disableAd === 'true') {
+    return sponsorName;
+  }
+
+  return null;
 };
