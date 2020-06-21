@@ -1,6 +1,1 @@
-@import "./../base/breakpoints";
-@import "./../base/mixins";
-
-.c-homepageContent {
-  @include home-and-section();
-}
+@import "./c-section";

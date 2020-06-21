@@ -10,6 +10,7 @@ import TimeStamp from '../../_helper_components/article/timestamp/default';
 import checkTags from '../../layouts/_helper_functions/checkTags';
 import ContributorBadge from '../../_helper_components/global/contributorBadge/default';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
+import getSponsorData from '../../layouts/_helper_functions/getSponsorData';
 import './default.scss';
 
 const Mosaic = (customFields = {}) => {
@@ -63,6 +64,46 @@ const Mosaic = (customFields = {}) => {
     }
   }
 
+  function getLabelContent({
+    /* eslint-disable react/prop-types */
+    sponsorName,
+    isHyperlocalContent,
+    isCommunityContributor,
+    label,
+    taxonomy,
+    firstPublishDate,
+    displayDate,
+    isHideTimestampTrue,
+    tags,
+    /* eslint-enable react/prop-types */
+  }) {
+    if (sponsorName) {
+      return <div className="c-sponsor">Advertiser Content</div>;
+    }
+
+    if (isHyperlocalContent && isCommunityContributor) {
+      return (
+        <ContributorBadge
+        tags={tags}
+        ampPage={ampPage}
+        useWhiteLogos={true}
+      />
+      );
+    }
+
+    return (
+      <>
+      <SectionLabel label={label || {}} taxonomy={taxonomy} />
+      <TimeStamp
+        firstPublishDate={firstPublishDate}
+        displayDate={displayDate}
+        isHideTimestampTrue={isHideTimestampTrue}
+        isTease={true}
+      />
+    </>
+    );
+  }
+
   if (Array.isArray(data)) {
     return (
       <div className="c-mosaic">
@@ -79,7 +120,8 @@ const Mosaic = (customFields = {}) => {
             } = el;
             const { hide_timestamp: hideTimestamp } = el.label || {};
             const { text: isHideTimestampTrue } = hideTimestamp || {};
-            const { tags = [] } = taxonomy || {};
+            const { tags = [], sections } = taxonomy || {};
+            const sponsorName = getSponsorData(sections);
             const hyperlocalTags = getProperties().hyperlocalTags || [];
             const isHyperlocalContent = checkTags(
               tags,
@@ -95,6 +137,18 @@ const Mosaic = (customFields = {}) => {
                 && websites[arcSite].website_url)
               || '/';
 
+            const getLabelContentConfig = {
+              sponsorName,
+              isHyperlocalContent,
+              isCommunityContributor,
+              label,
+              taxonomy,
+              firstPublishDate,
+              displayDate,
+              isHideTimestampTrue,
+              tags,
+            };
+
             if (startIndex <= i && i < startIndex + itemLimit) {
               return (
                 <div
@@ -104,24 +158,7 @@ const Mosaic = (customFields = {}) => {
                   {/* the link is empty - 100% coverage of content via css - because sectionLabel outputs a link as well */}
                   <a href={`${contextPath}${relativeURL}`}></a>
                   <div className="c-sectionLabel">
-                    {isHyperlocalContent && isCommunityContributor && (
-                      <ContributorBadge
-                        tags={tags}
-                        ampPage={ampPage}
-                        useWhiteLogos={true}
-                      />
-                    )}
-                    {(!isHyperlocalContent || !isCommunityContributor) && (
-                      <>
-                        <SectionLabel label={label || {}} taxonomy={taxonomy} />
-                        <TimeStamp
-                          firstPublishDate={firstPublishDate}
-                          displayDate={displayDate}
-                          isHideTimestampTrue={isHideTimestampTrue}
-                          isTease={true}
-                        />
-                      </>
-                    )}
+                   {getLabelContent(getLabelContentConfig)}
                   </div>
                   <span className="headline">
                     {truncateHeadline(headlines.basic)}

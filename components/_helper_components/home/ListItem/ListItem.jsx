@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext } from 'fusion:context';
-import { useContent } from 'fusion:content';
 import Image from '../../global/image/default';
 import SectionLabel from '../../global/sectionLabel/default';
 import getQueryParams from '../../../layouts/_helper_functions/getQueryParams';
@@ -10,7 +9,7 @@ import TimeStamp from '../../article/timestamp/default';
 import checkTags from '../../../layouts/_helper_functions/checkTags';
 import truncateHeadline from '../../../layouts/_helper_functions/homepage/truncateHeadline';
 import ContributorBadge from '../../../_helper_components/global/contributorBadge/default';
-import checkSponsor from '../../../layouts/_helper_functions/checkSponsor';
+import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import './default.scss';
 
 const ListItem = ({
@@ -42,24 +41,13 @@ const ListItem = ({
     hyperlocalTags.filter(tag => tag !== 'community contributor'),
   );
   const isCommunityContributor = checkTags(tags, 'community contributor');
-  const sponsorID = checkSponsor(sections);
+  const sponsorName = getSponsorData(sections);
 
-  const siteData = useContent({
-    source: 'site-api',
-    query: { section: sponsorID || null },
-  });
-
-  const {
-    Sponsor: {
-      sponsor_related_box_title: boxTitle,
-    //  disable_advertiser_content_label: disableAd,
-    } = {},
-  } = siteData || {};
 
   const relativeURL = (websites && websites[sites] && websites[sites].website_url) || '/';
   const isListPage = listPage ? 'listPage' : '';
 
-  const getPromoItem = (sponsorName) => {
+  function getPromoItem(sponsor) {
     // standalone video/gallery
     if (contentType === 'video' || contentType === 'gallery') {
       if (promoItems && promoItems.basic) {
@@ -72,8 +60,8 @@ const ListItem = ({
               imageType="isHomepageImage"
               teaseContentType={contentType}
             />
-            {sponsorName && (
-              <div className="c-sponsorOverlay">{sponsorName}</div>
+            {sponsor && (
+              <div className="c-sponsorOverlay">{sponsor}</div>
             )}
           </a>
         );
@@ -90,8 +78,8 @@ const ListItem = ({
               height={600}
               imageType="isHomepageImage"
             />
-            {sponsorName && (
-              <div className="c-sponsorOverlay">{sponsorName}</div>
+            {sponsor && (
+              <div className="c-sponsorOverlay">{sponsor}</div>
             )}
           </a>
         );
@@ -113,8 +101,8 @@ const ListItem = ({
                 height={600}
                 imageType="isHomepageImage"
               />
-              {sponsorName && (
-                <div className="c-sponsorOverlay">{sponsorName}</div>
+              {sponsor && (
+                <div className="c-sponsorOverlay">{sponsor}</div>
               )}
             </a>
           );
@@ -131,16 +119,16 @@ const ListItem = ({
             height={600}
             imageType="isHomepageImage"
           />
-          {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
+          {sponsor && <div className="c-sponsorOverlay">{sponsor}</div>}
         </a>
       );
     }
 
     return null;
-  };
+  }
 
-  const getLabelContent = (sponsorName) => {
-    if (sponsorName) {
+  function getLabelContent(sponsor) {
+    if (sponsor) {
       return <div className="c-sponsor">Advertiser Content</div>;
     }
 
@@ -159,13 +147,13 @@ const ListItem = ({
         />
       </>
     );
-  };
+  }
 
   return (
     <div className={`c-homeList ${isListPage}`}>
-      {getPromoItem(boxTitle)}
+      {getPromoItem(sponsorName)}
       <div className="homeList-text">
-        <div className="c-label-wrapper">{getLabelContent(boxTitle)}</div>
+        <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
         <div className={`headline ${isListPage}`}>
           <a href={`${contextPath}${relativeURL}`}>
             {truncateHeadline(headlines.basic)}

@@ -9,6 +9,7 @@ import truncateHeadline from '../../../layouts/_helper_functions/homepage/trunca
 import getQueryParams from '../../../layouts/_helper_functions/getQueryParams';
 import ContributorBadge from '../../../_helper_components/global/contributorBadge/default';
 import checkTags from '../../../layouts/_helper_functions/checkTags';
+import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import './Headline.scss';
 
 const Headline = ({
@@ -25,7 +26,7 @@ const Headline = ({
 }) => {
   const appContext = useAppContext();
   const { contextPath, requestUri } = appContext;
-  const { tags = [] } = taxonomy || {};
+  const { tags = [], sections } = taxonomy || {};
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
@@ -38,6 +39,7 @@ const Headline = ({
     hyperlocalTags.filter(tag => tag !== 'community contributor'),
   );
   const isCommunityContributor = checkTags(tags, 'community contributor');
+  const sponsorName = getSponsorData(sections);
 
   const relativeURL = (websites && websites[sites] && websites[sites].website_url) || '/';
 
@@ -65,21 +67,35 @@ const Headline = ({
     return null;
   }
 
+  function getLabelContent(sponsor) {
+    if (sponsor) {
+      return <div className="c-sponsor">Advertiser Content</div>;
+    }
+
+    if (isHyperlocalContent && isCommunityContributor) {
+      return <ContributorBadge tags={tags} ampPage={ampPage} />;
+    }
+
+    return (
+       <>
+        <SectionLabel label={label} taxonomy={taxonomy} />
+        <TimeStamp
+         firstPublishDate={publishDate}
+         displayDate={displayDate}
+         isHideTimestampTrue={isHideTimestampTrue}
+         isTease={isTease} />
+       </>
+    );
+  }
+
   return (
     <div className="home-headline">
-      <a href={`${contextPath}${relativeURL}`}>{getPromoItem(type)}</a>
+      <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+        {getPromoItem(type)}
+        {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
+        </a>
       <div className="headline-box">
-        {isHyperlocalContent && isCommunityContributor && <ContributorBadge tags={tags} ampPage={ampPage} />}
-        {(!isHyperlocalContent || !isCommunityContributor) && (
-          <>
-            <SectionLabel label={label} taxonomy={taxonomy} />
-            <TimeStamp
-            firstPublishDate={publishDate}
-            displayDate={displayDate}
-            isHideTimestampTrue={isHideTimestampTrue}
-            isTease={isTease} />
-          </>
-        )}
+       {getLabelContent(sponsorName)}
         <a href={`${contextPath}${relativeURL}`} className="headline">
           {headlines && truncateHeadline(headlines.basic)}
         </a>

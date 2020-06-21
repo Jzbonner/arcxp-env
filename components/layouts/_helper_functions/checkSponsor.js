@@ -1,8 +1,10 @@
 const checkSponsor = (sections) => {
   if (!sections) {
-    return null;
+    return {};
   }
+
   let sponsorSectionID = null;
+  let sponsorName = null;
   const sponsorSection = sections.filter(section => section && section.path && section.path.includes('/sponsor/'));
 
   sponsorSection.forEach((el) => {
@@ -12,10 +14,11 @@ const checkSponsor = (sections) => {
 
     if (!sponsorSectionID && !inactive) {
       sponsorSectionID = el.path || null;
+      sponsorName = el.name || null;
     }
   });
 
-  return sponsorSectionID;
+  return { sponsorSectionID, sponsorName };
 };
 
 export default checkSponsor;
