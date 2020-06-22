@@ -5,5 +5,5 @@ export default (alt, caption) => {
   if (caption && caption.length > 1) {
     return caption;
   }
-  return 'story page inline image';
+  return 'ajc.com';
 };
