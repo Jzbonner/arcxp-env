@@ -9,14 +9,19 @@
     color: inherit;
   }
 
-  // Common Styles Used By ALl the Display Classes
+  // Common Styles Used By All the Display Classes
 
   .c-homeList {
-    width: 100%;
     margin-bottom: 3rem;
+    width: fit-content;
 
     @include breakpoint(desktop-sm) {
       margin-bottom: 2rem;
+    }
+
+    .homeList-image {
+      position: relative;
+      display: inline-block;
     }
 
     .image-component-image img {
@@ -180,7 +185,7 @@
           @include breakpoint(desktop-sm) {
             text-align: left;
           }
-          
+
           &.listPage {
             text-align: left;
 

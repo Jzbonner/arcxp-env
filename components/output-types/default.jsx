@@ -43,7 +43,7 @@ const DefaultOutputType = (props) => {
   const noAds = checkTags(tags, 'no-ads');
   const noAmp = checkTags(tags, 'no-amp');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
-  const isSponsoredContent = checkSponsor(sections);
+  const { sponsorSectionID: isSponsoredContent } = checkSponsor(sections);
   const includeGtm = metrics && metrics.gtmContainerKey;
 
   return (

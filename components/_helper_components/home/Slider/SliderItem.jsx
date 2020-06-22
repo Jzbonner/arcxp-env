@@ -9,6 +9,7 @@ import truncateHeadline from '../../../layouts/_helper_functions/homepage/trunca
 import getQueryParams from '../../../layouts/_helper_functions/getQueryParams';
 import checkTags from '../../../layouts/_helper_functions/checkTags';
 import ContributorBadge from '../../../_helper_components/global/contributorBadge/default';
+import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import './SliderItem.scss';
 
 const SliderItem = ({ data, refHook }) => {
@@ -22,7 +23,7 @@ const SliderItem = ({ data, refHook }) => {
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
   const hyperlocalTags = getProperties().hyperlocalTags || [];
-  const { tags = [] } = taxonomy || {};
+  const { tags = [], sections } = taxonomy || {};
   const isHyperlocalContent = checkTags(
     tags,
     hyperlocalTags.filter(tag => tag !== 'community contributor'),
@@ -31,27 +32,40 @@ const SliderItem = ({ data, refHook }) => {
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
+  const sponsorName = getSponsorData(sections);
+
+  function getLabelContent() {
+    if (sponsorName) {
+      return <div className="c-sponsor">Advertiser Content</div>;
+    }
+
+    if (isHyperlocalContent && isCommunityContributor) {
+      return <ContributorBadge tags={tags} ampPage={ampPage} />;
+    }
+
+    return (
+      <>
+        <SectionLabel label={label || {}} taxonomy={taxonomy} />
+        <TimeStamp
+          firstPublishDate={firstPublishDate}
+          displayDate={displayDate}
+          isHideTimestampTrue={isHideTimestampTrue}
+          isTease={true}
+        />
+      </>
+    );
+  }
 
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
-      <a href={canonicalUrl || null}>
+      <a href={canonicalUrl || null} className="homeList-image">
         <Image height={282} width={500} src={imageData} teaseContentType={contentType} canonicalUrl={canonicalUrl || null} />
+        {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
       </a>
 
       <div className="sliderList-text">
         <div className="c-label-wrapper">
-          {isHyperlocalContent && isCommunityContributor && <ContributorBadge tags={tags} ampPage={ampPage} />}
-          {(!isHyperlocalContent || !isCommunityContributor) && (
-            <>
-              <SectionLabel label={label || {}} taxonomy={taxonomy} />
-              <TimeStamp
-                firstPublishDate={firstPublishDate}
-                displayDate={displayDate}
-                isHideTimestampTrue={isHideTimestampTrue}
-                isTease={true}
-              />
-            </>
-          )}
+         {getLabelContent()}
         </div>
         <a className="headline" href={canonicalUrl}>
           {truncateHeadline(headline)}

@@ -8,6 +8,40 @@
     padding-top: 50%;
   }
 
+  &.sponsored {
+    padding-top: 54vw;
+
+    @include breakpoint(tablet) {
+      padding-top: 54%;
+    }
+
+    .homeList-image {
+      position: absolute;
+      top: 0;
+      width: 100%;
+
+      .c-image-component {
+        position: initial;
+      }
+
+      .c-sponsorOverlay {
+        height: 40px;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 10px;
+
+        @media (min-width: 400px) {
+          height: 45px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          height: 55px;
+          padding-top: 13px;
+        }
+      }
+    }
+  }
+
   .c-image-component {
     position: absolute;
     top: 0;
@@ -47,4 +81,8 @@
       }
     }
   }
+}
+
+.c-homeLeadContainer .home-headline:not(.sponsored) .homeList-image {
+  position: initial;
 }

@@ -95,7 +95,7 @@ const StoryPageLayout = () => {
   const noAds = checkTags(tags, 'no-ads');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
   const isCommunityContributor = checkTags(tags, 'community contributor');
-  const sponsorSectionID = checkSponsor(sections);
+  const { sponsorSectionID } = checkSponsor(sections);
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
