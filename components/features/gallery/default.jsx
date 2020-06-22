@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import {
-  DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery,
+  DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery, ImageModal,
 } from '../../_helper_components/global/gallery/index';
 import {
   debounce, createBaseGallery, handleImageFocus, reorganizeElements, handlePropContentElements,
@@ -43,6 +43,8 @@ const Gallery = (props) => {
   const [maxIndex, setMaxIndex] = useState(null);
   const [canonicalUrl, setCanonicalUrl] = useState('');
   const [galleryVisible, setVisibility] = useState(false);
+  const [modalVisible, setModalVisibility] = useState(false);
+  const [currentImageSrc, setCurrectImageSrc] = useState('');
 
   /* Ads */
   const [clickCount, setClickCount] = useState(0);
@@ -149,6 +151,17 @@ const Gallery = (props) => {
     dataLayer.push({ event: 'gallerySecondaryPhotoViewed' }, { galleryName: `${galHeadline || headline || ''}` });
   };
 
+  const handelImageModalView = (imageSrc) => {
+    if (!modalVisible) {
+      setModalVisibility(true);
+    } else {
+      setModalVisibility(false);
+    }
+
+
+    if (imageSrc) setCurrectImageSrc(imageSrc);
+  };
+
   // manages click count for desktop ads
   const handleClickCount = () => {
     if (clickCount === 4) {
@@ -213,6 +226,7 @@ const Gallery = (props) => {
   const clickFuncs = {
     prev: () => changeIndex(actions.PREV, null, true),
     next: () => changeIndex(actions.NEXT, null, true),
+    modal: src => handelImageModalView(src),
   };
 
 
@@ -538,6 +552,7 @@ const Gallery = (props) => {
     }, isMobile, {
       prev: () => changeIndex(actions.PREV, baseGalleryData.length - 1),
       next: () => changeIndex(actions.NEXT),
+      modal: src => handelImageModalView(src),
     });
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData;
 
@@ -583,6 +598,10 @@ const Gallery = (props) => {
         ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
       {pageType !== 'Article' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02()}</div> : null}
       <div className={`${pageType !== 'Article' ? 'c-gallery-homeSection' : ''}`}>
+        {!isMobile
+          ? <div onClick={handelImageModalView}>
+            <ImageModal src={currentImageSrc} isVisible={modalVisible} />
+          </div> : null}
         <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
           {!isMobile && galHeadline && pageType === 'Article'
             ? <div className="gallery-headline"><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}

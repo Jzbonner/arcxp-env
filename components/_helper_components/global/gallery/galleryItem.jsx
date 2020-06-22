@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
 const GalleryItem = ({
-  data, func,
+  data, func, modalFunc,
 }) => {
   const {
     url, width, height, alt, index, id, by = [], captionObj, states, lastItemClass,
@@ -40,11 +40,13 @@ const GalleryItem = ({
       className={`${isStickyVisible ? `gallery-full-item ${isCaptionOn ? lastItemClass : ''}` : 'gallery-image'}
       ${lastItemClass && isStickyVisible && !isCaptionOn ? 'last-item-height-fix-no-caption' : ''}
       ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}
+      ${!isMobile ? 'desktop-image' : ''}
       `}
       >
       <img
         className={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
         src={resizeUrl}
+        onClick={modalFunc ? () => modalFunc(url) : null}
         alt={alt ? `${alt}` : ''}
       />
       {
@@ -83,6 +85,7 @@ GalleryItem.propTypes = {
   captionObj: PropTypes.object,
   func: PropTypes.func,
   lastItemClass: PropTypes.string,
+  modalFunc: PropTypes.func,
 };
 
 export default GalleryItem;
