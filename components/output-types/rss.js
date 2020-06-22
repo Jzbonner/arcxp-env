@@ -1,13 +1,17 @@
 /* /components/output-types/xml.js */
 import { toXML } from 'jstoxml';
+import Api from '../features/api/rss';
 import { formatApiTime } from '../layouts/_helper_functions/api/formatTime';
 
 const Xml = (props) => {
   const {
-    children,
+    globalContent,
     siteProperties,
     globalContentConfig,
   } = props || {};
+
+  const rssApi = new Api({ globalContent });
+  const rssApiContent = rssApi.render();
 
   const { orgName, websiteURL } = siteProperties || {};
   const { query } = globalContentConfig || {};
@@ -50,7 +54,7 @@ const Xml = (props) => {
         {
           lastBuildDate: () => formatApiTime(),
         },
-        Array.isArray(children) ? children[0] : [],
+        rssApiContent,
       ],
     },
   }, xmlOptions);
