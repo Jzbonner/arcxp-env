@@ -59,7 +59,12 @@ const SliderItem = ({ data, refHook }) => {
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
       <a href={canonicalUrl || null} className="homeList-image">
-        <Image height={282} width={500} src={imageData} teaseContentType={contentType} canonicalUrl={canonicalUrl || null} />
+        <Image height={282}
+               width={500}
+               src={imageData}
+               teaseContentType={contentType}
+               canonicalUrl={canonicalUrl || null}
+               imageType="isHomepageImage"/>
         {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
       </a>
 
