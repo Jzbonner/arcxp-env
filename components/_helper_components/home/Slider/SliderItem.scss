@@ -10,6 +10,14 @@
   margin-left: .5rem;
   text-align: center;
 
+  .c-sponsorOverlay {
+    bottom: 0;
+
+    @include breakpoint(tablet) {
+      bottom: 3px;
+    }
+  }
+
   .homeList-image {
     position: relative;
     display: block;
