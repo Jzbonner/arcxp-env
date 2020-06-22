@@ -10,7 +10,6 @@ import checkTags from '../../../layouts/_helper_functions/checkTags';
 import truncateHeadline from '../../../layouts/_helper_functions/homepage/truncateHeadline';
 import ContributorBadge from '../../../_helper_components/global/contributorBadge/default';
 import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
-import './default.scss';
 
 const ListItem = ({
   promo_items: promoItems,
