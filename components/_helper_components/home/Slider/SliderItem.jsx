@@ -13,7 +13,7 @@ import './SliderItem.scss';
 
 const SliderItem = ({ data, refHook }) => {
   const {
-    classes, headline, image, canonicalUrl, timestampData, sectionLabelData, contentType,
+    classes, headline, image: imageData, canonicalUrl, timestampData, sectionLabelData, contentType,
   } = data;
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -32,13 +32,12 @@ const SliderItem = ({ data, refHook }) => {
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
 
-  const imageData = { url: image };
-
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
       <a href={canonicalUrl || null}>
         <Image height={282} width={500} src={imageData} teaseContentType={contentType} canonicalUrl={canonicalUrl || null} />
       </a>
+
       <div className="sliderList-text">
         <div className="c-label-wrapper">
           {isHyperlocalContent && isCommunityContributor && <ContributorBadge tags={tags} ampPage={ampPage} />}
