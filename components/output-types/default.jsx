@@ -16,6 +16,7 @@ import GoogleStructuredData from '../_helper_components/article/googleData/defau
 
 const DefaultOutputType = (props) => {
   const {
+    arcSite: arcSiteFromProps = getProperties().sites[0],
     children,
     contextPath,
     CssLinks,
@@ -27,6 +28,7 @@ const DefaultOutputType = (props) => {
   } = props;
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
+  const currentSite = arcSite || arcSiteFromProps;
   const {
     hyperlocalTags,
     metrics,
@@ -34,7 +36,7 @@ const DefaultOutputType = (props) => {
     adsPrebidEnabled,
     devconActive,
     devconKey,
-  } = getProperties(arcSite) || {};
+  } = getProperties(currentSite) || {};
   const { isEnabled: connextIsEnabled = false, clientCode, environment: connextEnv } = connext;
   const {
     type, taxonomy, canonical_url: articleURL, _id: uuid,
@@ -70,7 +72,7 @@ const DefaultOutputType = (props) => {
         {!noAds && adsPrebidEnabled && <script src={deployment(`${contextPath}/resources/scripts/prebid3.23.0.js`)}></script>}
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} />}
         {!isHyperlocalContent && <TaboolaHeader/>}
-        {arcSite && <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${arcSite}/css/style.css`)} />}
+        {currentSite && <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)} />}
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
