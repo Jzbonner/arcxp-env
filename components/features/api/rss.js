@@ -132,6 +132,36 @@ class Api {
 
           return vidoeXmlObject;
         }
+
+        if (type === 'gallery') {
+          const galleryMediaArray = getMediaContent(contentElements);
+
+          const galleryXmlObject = {
+            item: [
+              {
+                guid: `urn:uuid:${guid}`,
+              },
+              {
+                link: `${canonicalUrl}`,
+              },
+              {
+                description: formattedDescription,
+              },
+              {
+                pubDate: formattedDate,
+              },
+              {
+                title,
+              },
+              {
+                author,
+              },
+              galleryMediaArray,
+            ],
+          };
+
+          return galleryXmlObject;
+        }
         return {};
       });
     }
