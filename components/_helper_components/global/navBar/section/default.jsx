@@ -69,7 +69,9 @@ const Section = ({
     return <>
       <li className={`nav-items nav-itemText ${ePaperClass}`}>
         {isHighlighted ? <div className="activeSelection" /> : null}
-        <a href={`${contextPath}${link}`} target={newTab === 'true' ? '_blank' : '_self'}>{name}</a>
+        <a href={link.indexOf('/') === 0 ? `${contextPath}${link}` : link} target={newTab === 'true' ? '_blank' : '_self'}>
+          {name}
+        </a>
       </li>
         </>;
   }
@@ -114,7 +116,7 @@ const Section = ({
         </div>
         <div className={`section ${isActive}`}>
           <div className='section-item'>
-            <a>{name}</a>
+            <a href={link.indexOf('/') === 0 ? `${contextPath}${link}` : link}>{name}</a>
           </div>
           <div className={`subNav ${isActive}`} style={{ width: `${width}px` }}>
             <ul className={`subNav-flyout itemCount-${childSectionLength}`} ref={subNavRef}>
