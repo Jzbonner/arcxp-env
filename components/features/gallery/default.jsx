@@ -107,6 +107,8 @@ const Gallery = (props) => {
 
   const dataLayer = windowExists ? window.dataLayer : [];
 
+  console.log('dataLayer', dataLayer);
+
   // push headline for home/section galleries
   if (!galHeadline && !headline && !isContentDataHeadlineFilled && fetchedHeadline) {
     dataLayer.push({
@@ -158,7 +160,7 @@ const Gallery = (props) => {
       setModalVisibility(false);
     }
 
-
+    if (!hasOpened) dispatchGalleryOpenEvent();
     if (imageSrc) setCurrectImageSrc(imageSrc);
   };
 
