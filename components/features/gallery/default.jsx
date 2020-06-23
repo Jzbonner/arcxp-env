@@ -158,7 +158,7 @@ const Gallery = (props) => {
       setModalVisibility(false);
     }
 
-
+    if (!hasOpened) dispatchGalleryOpenEvent();
     if (imageSrc) setCurrectImageSrc(imageSrc);
   };
 
