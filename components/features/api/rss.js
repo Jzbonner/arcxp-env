@@ -10,7 +10,8 @@ class Api {
   }
 
   render() {
-    const { globalContent } = this.props || {};
+    const { globalContent, siteProperties } = this.props || {};
+    const { websiteURL } = siteProperties || {};
 
     if (globalContent) {
       return globalContent.map((item) => {
@@ -43,7 +44,7 @@ class Api {
                 guid: `urn:uuid:${guid}`,
               },
               {
-                link: `${canonicalUrl}`,
+                link: `${websiteURL}${canonicalUrl}`,
               },
               {
                 description: formattedDescription,
@@ -82,7 +83,7 @@ class Api {
                 guid: `urn:uuid:${guid}`,
               },
               {
-                link: `${canonicalUrl}`,
+                link: `${websiteURL}${canonicalUrl}`,
               },
               {
                 description: formattedDescription,
@@ -142,7 +143,7 @@ class Api {
                 guid: `urn:uuid:${guid}`,
               },
               {
-                link: `${canonicalUrl}`,
+                link: `${websiteURL}${canonicalUrl}`,
               },
               {
                 description: formattedDescription,
