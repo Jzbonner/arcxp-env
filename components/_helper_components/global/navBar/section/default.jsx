@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useFusionContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import '../default.scss';
 import '../../../../../src/styles/base/_utility.scss';
 
@@ -15,6 +15,8 @@ const Section = ({
   isMobile,
   isSticky,
 }) => {
+  const appContext = useAppContext();
+  const { contextPath } = appContext;
   const fusionContext = useFusionContext();
   const { globalContent } = fusionContext;
   const {
@@ -67,7 +69,9 @@ const Section = ({
     return <>
       <li className={`nav-items nav-itemText ${ePaperClass}`}>
         {isHighlighted ? <div className="activeSelection" /> : null}
-        <a href={link} target={newTab === 'true' ? '_blank' : '_self'}>{name}</a>
+        <a href={link.indexOf('/') === 0 ? `${contextPath}${link}` : link} target={newTab === 'true' ? '_blank' : '_self'}>
+          {name}
+        </a>
       </li>
         </>;
   }
@@ -88,10 +92,15 @@ const Section = ({
       site_url: childURL,
     } = site || {};
 
+    if (id.indexOf('/configsection/links/') !== -1 && !childURL) {
+      // if it's a section link (not a true section) but has no URL defined, skip it
+      return null;
+    }
+
     if (childName) {
       return (
         <li key={id} className='flyout-item'>
-          <a href={childURL} target='_self'>{childName}</a>
+          <a href={childURL || `${contextPath}${id}/`} target='_self'>{childName}</a>
         </li>
       );
     }
@@ -107,7 +116,7 @@ const Section = ({
         </div>
         <div className={`section ${isActive}`}>
           <div className='section-item'>
-            <a>{name}</a>
+            <a href={link.indexOf('/') === 0 ? `${contextPath}${link}` : link}>{name}</a>
           </div>
           <div className={`subNav ${isActive}`} style={{ width: `${width}px` }}>
             <ul className={`subNav-flyout itemCount-${childSectionLength}`} ref={subNavRef}>
