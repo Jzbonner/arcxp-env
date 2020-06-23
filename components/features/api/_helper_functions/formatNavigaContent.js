@@ -36,6 +36,7 @@ export const formatNavigaContent = contentElements => contentElements.map((el) =
         || oType === 'reddit'
         || oType === 'instagram'
         || oType === 'facebook-post'
+        || oType === 'soundcloud'
     ) {
       const {
         _id: id,
