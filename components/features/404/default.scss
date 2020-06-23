@@ -1,6 +1,12 @@
-.four-zero-four-feature {
+.page-not-found-feature {
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
+  .page-not-found-background-image {
+    background-image: url("https://www.ajc.com/rw/PortalConfig/np-ajc/assets-one/images/keyboard-404.png");
+  }
 }
