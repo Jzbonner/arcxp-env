@@ -5,12 +5,11 @@ import { formatApiTime } from '../layouts/_helper_functions/api/formatTime';
 
 const Xml = (props) => {
   const {
-    globalContent,
     siteProperties,
     globalContentConfig,
   } = props || {};
 
-  const rssApi = new Api({ globalContent });
+  const rssApi = new Api(props);
   const rssApiContent = rssApi.render();
 
   const { orgName, websiteURL } = siteProperties || {};
