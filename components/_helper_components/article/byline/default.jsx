@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import './default.scss';
 
-const Byline = ({ by = [] }) => {
+const Byline = ({ by = [], sections }) => {
   let byline;
 
   const handleOrganization = (authors = []) => {
@@ -44,6 +45,8 @@ const Byline = ({ by = [] }) => {
     return bylineData;
   };
 
+  const sponsorContentLabel = getSponsorData(sections);
+
   const finalizeByline = (authors = []) => {
     const finalAuthorData = handleOrganization(authors);
     const bylineData = handleAuthors(finalAuthorData);
@@ -74,11 +77,15 @@ const Byline = ({ by = [] }) => {
     finalizeByline(authors);
   }
 
+  if (sponsorContentLabel !== null) {
+    return <div className="byline b-margin-bottom-d40-m20">By {sponsorContentLabel}</div>;
+  }
   return byline ? <div className="byline b-margin-bottom-d40-m20">{byline}</div> : null;
 };
 
 Byline.propTypes = {
   by: PropTypes.array,
+  sections: PropTypes.array,
 };
 
 export default Byline;

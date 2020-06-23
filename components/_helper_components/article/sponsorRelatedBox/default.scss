@@ -75,6 +75,22 @@
         margin-top: .7rem;
         margin-bottom: .2rem;
       }
+
+      &.enabled {
+        h2 {
+          &:before {
+            content: 'ADVERTISER CONTENT';
+            max-width: 115px;
+            border-radius: 6px;
+            background-color: #2e81b7;
+            color: #fff;
+            padding: 6px 15px;
+            display: block;
+            margin-bottom: .5rem;
+            @include text-styles(0.625rem, 1.44, "Gordita_Medium");
+          }
+        }
+      }
     }
   }
 }
