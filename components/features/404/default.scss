@@ -1,12 +1,45 @@
+@import "./../../../src/styles/base/mixins";
+@import "./../../../src/styles/base/fonts";
+
 .page-not-found-feature {
-  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  .page-not-found-background-image {
-    background-image: url("https://www.ajc.com/rw/PortalConfig/np-ajc/assets-one/images/keyboard-404.png");
+  .text {
+    font-family: Gordita;
+    font-size: 30px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #373a3c;
+
+    a {
+      font-weight: 600;
+      color: #2e81b7;
+      text-decoration: none;
+    }
+  }
+
+  .background-image {
+    background-repeat: no-repeat;
+    background-position: center;
+    flex: 1;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+
+
+    .number-text {
+      @include text-styles(2.5em, 1, "Average");
+      color: #ffffff;
+      font-size: 16rem;
+    }
   }
 }
