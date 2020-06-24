@@ -149,7 +149,7 @@ const StoryPageLayout = () => {
             <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
-            {!isCommunityContributor && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} />}
+            {!isCommunityContributor && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sections={sections}/>}
             <TimeStamp
               firstPublishDate={firstPublishDate || lastUpdatedDate || displayDate}
               displayDate={displayDate}
@@ -159,7 +159,7 @@ const StoryPageLayout = () => {
             />
           </div>
           <div className="b-flexRow b-flexCenter b-pageContainer">
-            <Byline by={authorData} />
+            <Byline by={authorData} sections={sections}/>
           </div>
           <ContributorBadge tags={tags} ampPage={ampPage} />
           {ampPage && <SocialShare headlines={headlines} promoItems={promoItems} articleURL={articleURL} />}
