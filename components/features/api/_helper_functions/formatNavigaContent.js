@@ -36,6 +36,7 @@ export const formatNavigaContent = contentElements => contentElements.map((el) =
         || oType === 'reddit'
         || oType === 'instagram'
         || oType === 'facebook-post'
+        || oType === 'facebook-video'
         || oType === 'soundcloud'
     ) {
       const {
@@ -46,6 +47,26 @@ export const formatNavigaContent = contentElements => contentElements.map((el) =
                  ${id}
                </embed>`;
     }
+  }
+
+  if (type === 'div' || type === 'quote' || type === 'header') {
+    return content;
+  }
+
+  if (type === 'raw_html' || type === 'interstitial_link' || type === 'list' || type === 'divider' || type === 'table') {
+    return `<embed type="raw">
+             ${content}
+           </embed>`;
+  }
+
+  if (type === 'image') {
+    const { url = '', caption: imageCaption = '' } = el || {};
+
+    return `
+      <embed type="raw"> 
+        <img id="story-inline-media-1" class="story-inline-media image-large" src="${url}" title="${imageCaption}" /> 
+      </embed>
+    `;
   }
 
   return null;

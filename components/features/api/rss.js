@@ -25,6 +25,7 @@ class Api {
           headlines,
           description,
           credits,
+          promo_items: promoItems,
         } = item || {};
 
         const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
@@ -36,7 +37,7 @@ class Api {
         if (type === 'story') {
           const formatContentElements = formatNavigaContent(contentElements);
 
-          const mediaArray = getMediaContent(contentElements);
+          const mediaArray = getMediaContent(contentElements, promoItems);
 
           const xmlObject = {
             item: [
