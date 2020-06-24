@@ -1,6 +1,6 @@
 export default {
   dfp_id: 21849707860,
-  siteName: 'journal-news',
+  siteName: 'journalnews',
   siteDomainURL: 'https://sandbox.journal-news.arcpublishing.com/pf',
   websiteURL: 'https://www.journal-news.com/',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/CFSFLNZIUJBB3EVHSGSJCOHOJM.png',

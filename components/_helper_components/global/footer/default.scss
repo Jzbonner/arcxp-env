@@ -66,6 +66,16 @@
         width: 185px;
         margin: 0;
       }
+
+      &.dayton {
+        width: 58vw;
+        max-width: 300px;
+        margin: 4rem 0;
+
+        @include breakpoint(desktop-sm) {
+          width: 28vw;
+        }
+      }
     }
 
     .newsletter-signup {

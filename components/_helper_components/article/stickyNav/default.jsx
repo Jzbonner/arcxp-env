@@ -120,7 +120,7 @@ const StickyNav = ({
         </div>
           <li className="stickyNav-item mobile-hidden">
             <a href="/">
-              <img className="sticky-logo" src={logoPath} alt={`${siteName} logo`} />
+              <img className={`sticky-logo ${siteName}`} src={logoPath} alt={`${siteName} logo`} />
             </a>
           </li>
           <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>

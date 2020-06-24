@@ -22,6 +22,10 @@
 .sticky-logo {
   display: block;
   margin-top: 10px;
+  
+  &.dayton {
+    margin-top: 0;
+  }
 }
 
 .sticky-logo-homepage {
@@ -127,6 +131,10 @@
     img {
       width: 75px;
       height: 56px;
+
+      &.dayton {
+        width: 156px;
+      }
     }
 
     a {

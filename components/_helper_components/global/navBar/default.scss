@@ -175,6 +175,11 @@
       height: 110px;
       padding-top: 30px;
       max-height: 8vw;
+      
+      &.dayton {
+        max-height: 5.8vw;
+        min-height: 80px;
+      }
     }
   }
 
@@ -192,6 +197,11 @@
     width: 100%;
     max-width: 80px;
     margin-top: -2px;
+
+    &.dayton {
+      max-width: 230px;
+      margin-top: -5px;
+    }
   }
 
   .nav-sections {
