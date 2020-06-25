@@ -4,10 +4,6 @@ export const formatNavigaContent = contentElements => contentElements.map((el) =
     content = '',
   } = el || {};
 
-  if (type === 'interstitial_link') {
-    console.log('carlos interstitial_link', el);
-  }
-
   if (type === 'text' && content !== '<br/>') {
     return `<div class="text">
                 <p>
