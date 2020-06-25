@@ -217,7 +217,7 @@ const Video = ({
     const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
       const videoScript = document.createElement('script');
       videoScript.type = 'text/javascript';
-      videoScript.src = 'https://d328y0m0mtvzqc.cloudfront.net/sandbox/powaBoot.js?org=ajc';
+      videoScript.src = `https://d328y0m0mtvzqc.cloudfront.net/${currentEnv}/powaBoot.js?org=${arcSite}`;
       videoScript.async = true;
       videoScript.addEventListener('load', () => {
         resolve();
@@ -254,7 +254,6 @@ const Video = ({
   const rendePowaPlayer = () => <div
     className="powa"
     data-org={arcSite}
-    data-api="sandbox"
     data-env={currentEnv}
     data-aspect-ratio="0.5625"
     data-uuid={vidId}

@@ -31,6 +31,7 @@ import ConnextInlinePromoSubscription from '../_helper_components/global/connext
 import getQueryParams from './_helper_functions/getQueryParams';
 import checkTags from './_helper_functions/checkTags';
 import checkSponsor from './_helper_functions/checkSponsor';
+import getSponsorData from './_helper_functions/getSponsorData';
 import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
 import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
@@ -96,6 +97,7 @@ const StoryPageLayout = () => {
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
   const isCommunityContributor = checkTags(tags, 'community contributor');
   const { sponsorSectionID } = checkSponsor(sections);
+  const sponsorContentLabel = getSponsorData(sections);
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
@@ -109,7 +111,7 @@ const StoryPageLayout = () => {
         </amp-fx-flying-carpet>
       );
     }
-    return <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>;
+    return <div className="story-interscroller__placeholder full-width c-clear-both c-section" key={'interscrollerPlaceholder'}></div>;
   };
   filteredContentElements.forEach((el, i) => {
     if (el && el.type === 'divider' && infoBoxIndex === null) {
@@ -149,13 +151,15 @@ const StoryPageLayout = () => {
             <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
-            {!isCommunityContributor && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sections={sections}/>}
+            {!isCommunityContributor
+            && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel}/>}
             <TimeStamp
               firstPublishDate={firstPublishDate || lastUpdatedDate || displayDate}
               displayDate={displayDate}
               isHideTimestampTrue={isHideTimestampTrue}
               ampPage={ampPage}
               isHyperlocalContent={isHyperlocalContent && isCommunityContributor}
+              sponsorContentLabel={sponsorContentLabel}
             />
           </div>
           <div className="b-flexRow b-flexCenter b-pageContainer">

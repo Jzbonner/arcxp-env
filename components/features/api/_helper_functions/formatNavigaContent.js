@@ -53,10 +53,17 @@ export const formatNavigaContent = contentElements => contentElements.map((el) =
     return content;
   }
 
-  if (type === 'raw_html' || type === 'interstitial_link' || type === 'list' || type === 'divider' || type === 'table') {
+  if (type === 'raw_html' || type === 'list' || type === 'divider') {
     return `<embed type="raw">
              ${content}
            </embed>`;
+  }
+
+  if (type === 'interstitial_link') {
+    const { url: linkUrl, content: linkContent } = el || {};
+    return `<embed type="raw">
+           <a href="${linkUrl}">${linkContent}</a>
+         </embed>`;
   }
 
   if (type === 'image') {
@@ -64,7 +71,7 @@ export const formatNavigaContent = contentElements => contentElements.map((el) =
 
     return `
       <embed type="raw"> 
-        <img id="story-inline-media-1" class="story-inline-media image-large" src="${url}" title="${imageCaption}" /> 
+        <img src="${url}" title="${imageCaption}" /> 
       </embed>
     `;
   }
