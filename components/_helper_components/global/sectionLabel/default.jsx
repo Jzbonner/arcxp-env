@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getTeaseLabel from './_helper_functions/getTeaseLabel';
-import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import './default.scss';
 
 const sectionLabel = ({
-  taxonomy, label, ampPage = false, sections,
+  taxonomy, label, ampPage = false, sponsorContentLabel,
 }) => {
-  if (ampPage) return null;
+  if (ampPage && !sponsorContentLabel) return null;
 
   const { primary_section: primarySection } = taxonomy || {};
   const { path: pathPrimary, name: namePrimary, referent = {} } = primarySection || {};
@@ -41,7 +40,6 @@ const sectionLabel = ({
     labelFromPath = firstResult || null;
   }
 
-  const sponsorContentLabel = getSponsorData(sections);
   if (sponsorContentLabel !== null) {
     return (
       <p className="section-label">
@@ -60,7 +58,7 @@ sectionLabel.propTypes = {
   taxonomy: PropTypes.object.isRequired,
   label: PropTypes.object.isRequired,
   ampPage: PropTypes.bool,
-  sections: PropTypes.array,
+  sponsorContentLabel: PropTypes.string,
 };
 
 export default sectionLabel;
