@@ -6,7 +6,7 @@ import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
-import loadingImage from '../../../../resources/images/loading.jpg';
+import defaultImage from '../../../../resources/images/default.svg';
 
 
 const Image = ({
@@ -64,7 +64,7 @@ const Image = ({
               alt={getAltText(altText, caption)}
               className={teaseContentType ? 'tease-image' : ''}
               onLoad={() => setLoaded(true)}/>
-            <img src={loadingImage} style={ loaded ? { display: 'none' } : { width, height }}/>
+            <img src={defaultImage} style={ loaded ? { display: 'none' } : { width, height }}/>
             </>
           ) : (
             <amp-img
@@ -75,7 +75,7 @@ const Image = ({
               layout="responsive"
               class={teaseContentType ? 'tease-image' : ''}>
               <amp-img
-                src={loadingImage}
+                src={defaultImage}
                 alt={getAltText(altText, caption)}
                 fallback=""
                 width={width}
