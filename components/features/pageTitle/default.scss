@@ -6,10 +6,6 @@
   text-align: center;
 
   .c-title-content {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    grid-template-rows: 34px 0;
-    grid-gap: 10px;
     text-align: center;
     color: #313132;
 
@@ -23,8 +19,6 @@
     }
 
     @include breakpoint(desktop-sm) {
-      grid-template-rows: 47px 0;
-
       @include text-styles(3.5em, 1, "Average");
     }
   }
