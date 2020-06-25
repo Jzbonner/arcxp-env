@@ -28,7 +28,21 @@ export const adSlots = {
   },
   HS02: {
     dimensions: [
-      [1, 1],
+      [
+        [970, 250],
+        [728, 90],
+      ], // desktop
+      [
+        [728, 90],
+      ], // tablet
+      [
+        [300, 250],
+      ], // mobile
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
+      [0, 0], // mobile
     ],
   },
   NS01: {
@@ -44,7 +58,7 @@ export const adSlots = {
   HP01: {
     dimensions: [
       [
-        [920, 250],
+        [970, 250],
         [728, 90],
       ], // desktop
       [
@@ -111,17 +125,23 @@ export const adSlots = {
   HP02: {
     dimensions: [
       [
-        [920, 250],
+        [970, 250],
         [728, 90],
+        [1, 1],
       ], // desktop
       [
-        [728, 315],
         [728, 90],
+        [1, 1],
       ], // tablet
+      [
+        [300, 250],
+        [1, 1],
+      ],
     ],
     breakpoints: [
       [1024, 0], // desktop
       [768, 0], // tablet
+      [0, 0], // mobile
     ],
     bidding: {
       amazon: {
@@ -1168,6 +1188,7 @@ export const adSlots = {
     dimensions: [
       [
         [600, 400],
+        [300, 250],
       ], // desktop
     ],
     breakpoints: [
