@@ -17,7 +17,7 @@ const gamAdTagBuilder = (pageTaxonomy = {}, videoTaxonomy = {}, videoId, current
   if (noVideoAds || noPageAds) {
     return null;
   }
-  const { path = '/' } = primarySection || {};
+  const { path = '' } = primarySection || {};
   const pageTopics = [];
   if (pageTags) {
     pageTags.forEach((pageTag) => {
