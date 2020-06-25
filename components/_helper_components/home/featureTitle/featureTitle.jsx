@@ -8,13 +8,10 @@ const FeatureTitle = ({ title, moreURL }) => {
   const { contextPath } = appContext;
 
   const getLink = () => {
-    if (!moreURL.includes('https://www')) {
-      if (window.location.hostname !== 'ajc.com') {
-        return `${contextPath}${moreURL}/?_website=ajc`;
-      }
-      return `${contextPath}${moreURL}`;
+    if (moreURL.includes('https://www')) {
+      return moreURL;
     }
-    return moreURL;
+    return `${contextPath}${moreURL}`;
   };
 
   if (title) {
