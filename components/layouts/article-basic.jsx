@@ -111,7 +111,7 @@ const StoryPageLayout = () => {
         </amp-fx-flying-carpet>
       );
     }
-    return <div className="story-interscroller__placeholder full-width c-clear-both c-section" key={'interscrollerPlaceholder'}></div>;
+    return <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>;
   };
   filteredContentElements.forEach((el, i) => {
     if (el && el.type === 'divider' && infoBoxIndex === null) {
