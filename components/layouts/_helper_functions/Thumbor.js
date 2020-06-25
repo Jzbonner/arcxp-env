@@ -13,3 +13,10 @@ export default function (url, width = 1000, height = 600) {
   }
   return null;
 }
+
+// export default function (id, width = 1000, height = 600) {
+//   if (id) {
+//     return `https://ajc.arcpublishing.com/resizer/sandbox.ajc/${id}.jpg`
+//   }
+//   return null;
+// }
