@@ -180,6 +180,15 @@
         max-height: 5.8vw;
         min-height: 80px;
       }
+
+      &.daytondailynews {
+        max-width: 400px;
+        min-width: 300px;
+      }
+
+      &.journalnews {
+        min-width: 300px;
+      }
     }
   }
 
@@ -201,6 +210,15 @@
     &.dayton {
       max-width: 230px;
       margin-top: -5px;
+    }
+
+    &.daytondailynews {
+      max-width: 313px;
+    }
+
+    &.journalnews {
+      max-width: 250px;
+      margin-top: 5px;
     }
   }
 
