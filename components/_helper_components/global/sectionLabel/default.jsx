@@ -40,7 +40,7 @@ const sectionLabel = ({
     labelFromPath = firstResult || null;
   }
 
-  if (sponsorContentLabel !== null) {
+  if (sponsorContentLabel) {
     return (
       <p className="section-label">
         ADVERTISER CONTENT
