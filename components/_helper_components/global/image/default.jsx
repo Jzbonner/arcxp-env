@@ -6,6 +6,7 @@ import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
+import placeholder from '../../../../resources/images/placeholder.svg';
 
 
 const Image = ({
@@ -15,6 +16,7 @@ const Image = ({
     url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText,
   } = src || {};
   const [imageSrc, setImageSrc] = useState('');
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setImageSrc(imageResizer(url, width, height));
@@ -56,7 +58,15 @@ const Image = ({
       <div className="image-component-image">
         <>
           {!ampPage ? (
-            <img src={imageSrc} alt={getAltText(altText, caption)} className={teaseContentType ? 'tease-image' : ''} />
+            <>
+            <img src={imageSrc}
+              style={ loaded ? {} : { display: 'none' }}
+              alt={getAltText(altText, caption)}
+              className={teaseContentType ? 'tease-image' : ''}
+              onLoad={() => setLoaded(true)}/>
+            <img src={placeholder}
+              style={ loaded ? { display: 'none' } : { width, height }}/>
+            </>
           ) : (
             <amp-img
               src={imageResizer(url, width, height)}
@@ -64,8 +74,18 @@ const Image = ({
               width={width}
               height={height !== 0 ? height : (width / originalWidth) * originalHeight}
               layout="responsive"
-              class={teaseContentType ? 'tease-image' : ''}
-            />
+              class={teaseContentType ? 'tease-image' : ''}>
+              <amp-img
+                src={placeholder}
+                alt={getAltText(altText, caption)}
+                fallback=""
+                width={width}
+                height={height !== 0 ? height : (width / originalWidth) * originalHeight}
+                layout="responsive"
+                class={teaseContentType ? 'tease-image' : ''}
+                >
+              </amp-img>
+            </amp-img>
           )}
           {teaseContentType && getTeaseIcon(teaseContentType)}
         </>
