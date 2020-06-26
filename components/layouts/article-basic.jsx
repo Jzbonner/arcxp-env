@@ -104,11 +104,18 @@ const StoryPageLayout = () => {
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />;
   const insertAtEndOfStory = [];
   const interscrollerPlaceholder = () => {
-    if (isHyperlocalContent && ampPage) {
-      return (
-        <amp-fx-flying-carpet height="auto">
-          <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>
+    if (ampPage) {
+      if (isHyperlocalContent) {
+        return (
+        <amp-fx-flying-carpet height="300px">
+          <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'300'} taxonomy={taxonomy} componentName='ArcAd' multiSize={'300x1'}
+          multiSizeValidation={'false'}/>
         </amp-fx-flying-carpet>
+        );
+      }
+      return (
+        <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'300'} taxonomy={taxonomy} componentName='ArcAd' multiSize={'300x1'}
+        multiSizeValidation={'false'} />
       );
     }
     return <div className="story-interscroller__placeholder full-width c-clear-both c-section" key={'interscrollerPlaceholder'}></div>;
