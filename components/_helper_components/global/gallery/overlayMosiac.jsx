@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import imageResizer from '../../../layouts/_helper_functions/Resizer';
 
 const OverlayMosiac = ({ data }) => {
   const first = data && data[0] ? data[0] : null;

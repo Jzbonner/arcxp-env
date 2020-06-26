@@ -1,5 +1,5 @@
 import React from 'react';
-import imageResizer from '../../../../layouts/_helper_functions/Thumbor';
+import imageResizer from '../../../../layouts/_helper_functions/Resizer';
 import truncateHeadline from '../../../../layouts/_helper_functions/homepage/truncateHeadline';
 import getDaysSincePublished from './getDaysSincePublished';
 import getFirstInlineImage from './getFirstInlineImage';

@@ -1,5 +1,5 @@
 import { useAppContext } from 'fusion:context';
-import imageResizer from './Thumbor';
+import imageResizer from './Resizer';
 
 const renderImage = () => {
   const appContext = useAppContext();

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import imageResizer from '../../../layouts/_helper_functions/Resizer';
 
 const GalleryItem = ({
   data, func, modalFunc,
@@ -24,8 +24,8 @@ const GalleryItem = ({
     if (!isMobile) {
       const galleryHeight = 480;
       const newWidth = (width / height) * galleryHeight;
-      const thumborUrl = imageResizer(url, Math.round(newWidth), galleryHeight);
-      setUrl(thumborUrl);
+      const resizerUrl = imageResizer(url, Math.round(newWidth), galleryHeight);
+      setUrl(resizerUrl);
     } else {
       setUrl(url);
     }
