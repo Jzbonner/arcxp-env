@@ -30,6 +30,10 @@
   &.daytondailynews {
     margin-top: 0;
   }
+
+  &.journalnews {
+    margin-top: 0;
+  }
 }
 
 .sticky-logo-homepage {
@@ -138,6 +142,16 @@
 
       &.dayton {
         width: 156px;
+      }
+
+      &.daytondailynews {
+        width: 210px;
+        height: 30px;
+      }
+
+      &.journalnews {
+        height: 30px;
+        width: 151px;
       }
     }
 

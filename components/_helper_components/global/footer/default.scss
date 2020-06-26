@@ -83,9 +83,10 @@
         max-width: 100%;
       }
 
-      // &.journalnews {
-      //   max-wi
-      // }
+      &.journalnews {
+        width: 58vw;
+        max-width: 300px;
+      }
     }
 
     .newsletter-signup {
