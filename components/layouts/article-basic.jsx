@@ -108,13 +108,13 @@ const StoryPageLayout = () => {
       if (isHyperlocalContent) {
         return (
         <amp-fx-flying-carpet height="300px">
-          <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'300'} taxonomy={taxonomy} componentName='ArcAd' multiSize={'300x1'}
+          <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'500'} taxonomy={taxonomy} componentName='ArcAd'
           multiSizeValidation={'false'}/>
         </amp-fx-flying-carpet>
         );
       }
       return (
-        <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'300'} taxonomy={taxonomy} componentName='ArcAd' multiSize={'300x1'}
+        <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'1'} taxonomy={taxonomy} componentName='ArcAd'
         multiSizeValidation={'false'} />
       );
     }
