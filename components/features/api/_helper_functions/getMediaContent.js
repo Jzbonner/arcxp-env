@@ -90,6 +90,11 @@ export const getMediaContent = (globalContent, promoItems) => {
         streams: mediaStreams = [],
       } = media || {};
 
+      // per Surendra, we are not adding inline images to media:content.
+      if (localType === 'image') {
+        return null;
+      }
+
       let mp4Stream;
 
       const mediaAuthor = mediaCredits.affiliation && mediaCredits.affiliation.by ? mediaCredits.affiliation.by.id : '';
