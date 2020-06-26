@@ -107,15 +107,19 @@ const StoryPageLayout = () => {
     if (ampPage) {
       if (isHyperlocalContent) {
         return (
-        <amp-fx-flying-carpet height="300px">
+        <div className='c-section'>
+          <amp-fx-flying-carpet height="300px">
           <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'500'} taxonomy={taxonomy} componentName='ArcAd'
           multiSizeValidation={'false'}/>
         </amp-fx-flying-carpet>
+        </div>
         );
       }
       return (
-        <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'1'} taxonomy={taxonomy} componentName='ArcAd'
-        multiSizeValidation={'false'} />
+        <div className='c-section'>
+          <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'1'} taxonomy={taxonomy} componentName='ArcAd'
+          multiSizeValidation={'false'} />
+        </div>
       );
     }
     return <div className="story-interscroller__placeholder full-width c-clear-both c-section" key={'interscrollerPlaceholder'}></div>;
