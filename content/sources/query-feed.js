@@ -66,11 +66,13 @@ const fetch = (query) => {
     if (mustIncludeAllTags && mustIncludeAllTags.toLowerCase() === 'yes') {
       const tags = itemsToArray(includeTags);
       tags.forEach((tag) => {
-        builder.andQuery('term', 'taxonomy.tags.text', tag);
+        builder.andQuery('term', `${tag.includes('-') ? 'taxonomy.tags._id' : 'taxonomy.tags.text'}`, tag);
       });
     } else {
       const tags = itemsToArray(includeTags);
-      builder.andQuery('terms', 'taxonomy.tags.text', tags);
+      tags.forEach((tag) => {
+        builder.andQuery('terms', `${tag.includes('-') ? 'taxonomy.tags._id' : 'taxonomy.tags.text'}`, tags);
+      });
     }
   }
   if (excludeDistributor) {
