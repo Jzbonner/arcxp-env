@@ -17,11 +17,14 @@
 .teads-ad {
 
   &.c-section {
-    
+
     .ampAd {
 
       &:not([hidden]) {
-        display: none;
+        
+        &:before {
+          content: "";
+        }
       }
     }
   }
