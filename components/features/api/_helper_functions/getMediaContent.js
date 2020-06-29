@@ -66,7 +66,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems) => {
         {
           _name: 'media:thumbnail',
           _attrs: {
-            url: `${basicThumbNailImage}`,
+            url: `${imageResizer(basicThumbNailImage, siteID)}`,
           },
         },
         {
@@ -98,7 +98,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems) => {
       }
 
       let mp4Stream;
-      let resizerUrl;
+      let resizerUrl = url;
 
       const mediaAuthor = mediaCredits.affiliation && mediaCredits.affiliation.by ? mediaCredits.affiliation.by.id : '';
       const mediaType = localType === 'image' ? 'image/JPEG' : 'video/mp4';
