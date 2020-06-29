@@ -55,7 +55,7 @@
           .headline {
             letter-spacing: -.2px;
 
-            @include text-styles(1.95vw, 1.43, "Average");
+            @include text-styles(1.1rem, 1.43, "Average");
           }
         }
       }
@@ -69,7 +69,7 @@
           .headline {
             letter-spacing: -.2px;
 
-            @include text-styles(1.95vw, 1.43, "Average");
+            @include text-styles(1.5rem, 1.43, "Average");
           }
         }
       }
@@ -83,7 +83,7 @@
           .headline {
             letter-spacing: -.4px;
 
-            @include text-styles(3vw, 1.26, "Average");
+            @include text-styles(2.65rem, 1.26, "Average");
           }
         }
       }
@@ -97,7 +97,7 @@
           .headline {
             letter-spacing: -.4px;
 
-            @include text-styles(3vw, 1.26, "Average");
+            @include text-styles(2.65rem, 1.26, "Average");
           }
         }
       }
