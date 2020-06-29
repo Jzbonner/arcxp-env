@@ -7,6 +7,7 @@ const Search = () => {
   const [isEditing, setEditingState] = useState(false);
 
   const inputRef = useRef(null);
+  const windowExists = typeof window !== 'undefined';
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -26,10 +27,13 @@ const Search = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('keydown', handleEnterPress, true);
-    return () => {
-      window.removeEventListener('keydown', handleEnterPress, true);
-    };
+    if (windowExists) {
+      window.addEventListener('keydown', handleEnterPress, true);
+      return () => {
+        window.removeEventListener('keydown', handleEnterPress, true);
+      };
+    }
+    return null;
   }, [searchTerm]);
 
   useLayoutEffect(() => {
