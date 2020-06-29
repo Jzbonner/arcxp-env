@@ -93,7 +93,9 @@ const fetch = (query) => {
   }
   if (excludeTags) {
     const tags = itemsToArray(excludeTags);
-    builder.notQuery('terms', 'taxonomy.tags.text', tags);
+    tags.forEach((tag) => {
+      builder.notQuery('terms', `${tag.includes('-') ? 'taxonomy.tags._id' : 'taxonomy.tags.text'}`, tags);
+    });
   }
   const body = builder.build();
   const newBody = JSON.stringify(body);
