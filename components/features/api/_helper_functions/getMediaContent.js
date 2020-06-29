@@ -1,4 +1,6 @@
-export const getMediaContent = (type, globalContent, promoItems) => {
+import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+
+export const getMediaContent = (type, siteID, globalContent, promoItems) => {
   let formattedMediaContent = [];
   let leadObject = {};
 
@@ -22,7 +24,7 @@ export const getMediaContent = (type, globalContent, promoItems) => {
       _attrs: {
         type: 'image/JPEG',
         medium: 'image',
-        url: `${basicUrl}`,
+        url: `${imageResizer(basicUrl, siteID)}`,
       },
       _content: [
         {
@@ -91,11 +93,12 @@ export const getMediaContent = (type, globalContent, promoItems) => {
       } = media || {};
 
       // per Surendra: For stories, we are not adding inline images to media:content.
-      if (localType === 'image' && type === 'story') {
+      if (type === 'story') {
         return {};
       }
 
       let mp4Stream;
+      let resizerUrl;
 
       const mediaAuthor = mediaCredits.affiliation && mediaCredits.affiliation.by ? mediaCredits.affiliation.by.id : '';
       const mediaType = localType === 'image' ? 'image/JPEG' : 'video/mp4';
@@ -105,6 +108,10 @@ export const getMediaContent = (type, globalContent, promoItems) => {
         [mp4Stream = []] = mediaStreams.filter(item => item && item.stream_type && item.stream_type === 'mp4');
       }
 
+      if (mediaMedium === 'image') {
+        resizerUrl = imageResizer(url, siteID);
+      }
+
       const { url: mp4Url } = mp4Stream || {};
 
       return {
@@ -112,7 +119,7 @@ export const getMediaContent = (type, globalContent, promoItems) => {
         _attrs: {
           type: `${mediaType}`,
           medium: `${mediaMedium}`,
-          url: `${localType === 'image' ? url : mp4Url}`,
+          url: `${localType === 'image' ? resizerUrl : mp4Url}`,
         },
         _content: [
           {

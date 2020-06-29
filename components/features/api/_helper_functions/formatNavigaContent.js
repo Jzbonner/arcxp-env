@@ -1,4 +1,6 @@
-export const formatNavigaContent = contentElements => contentElements.map((el) => {
+import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+
+export const formatNavigaContent = (siteID, contentElements) => contentElements.map((el) => {
   const {
     type,
     content = '',
@@ -71,7 +73,7 @@ export const formatNavigaContent = contentElements => contentElements.map((el) =
 
     return `
       <embed type="raw"> 
-        <img src="${url}" title="${imageCaption}" /> 
+        <img src="${imageResizer(url, siteID)}" title="${imageCaption}" /> 
       </embed>
     `;
   }
