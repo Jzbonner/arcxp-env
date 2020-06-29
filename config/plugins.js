@@ -32,13 +32,13 @@ module.exports = (env, multisite) => {
     Object.keys(multisite).forEach((site) => {
       sizeCheckEntries.push({
         fileName: `${site}/css/style.css`,
-        maxSize: 45000,
-        warningSize: 40000,
+        maxSize: 75000,
+        warningSize: 70000,
       });
       sizeCheckEntries.push({
         fileName: `${site}-amp/css/style.css`,
-        maxSize: 45000,
-        warningSize: 40000,
+        maxSize: 75000,
+        warningSize: 70000,
       });
     });
     plugins.push(new SizeCheckPlugin(sizeCheckEntries));
