@@ -116,7 +116,7 @@ const StoryPageLayout = () => {
         );
       }
       return (
-        <div className='c-section'>
+        <div className='c-section teads-ad'>
           <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'1'} taxonomy={taxonomy} componentName='ArcAd'
           multiSizeValidation={'false'} />
         </div>

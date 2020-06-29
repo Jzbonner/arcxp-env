@@ -13,3 +13,16 @@
     @include advertisement-label;
   }
 }
+
+.teads-ad {
+
+  &.c-section {
+    
+    .ampAd {
+
+      &:not([hidden]) {
+        display: none;
+      }
+    }
+  }
+}
