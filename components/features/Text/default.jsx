@@ -10,8 +10,9 @@ const Text = () => {
   const { editableField } = useEditableContent();
 
   if (TextFeatureContent && TextFeatureContent !== '') {
-    const regex = /<\/?(?!a)(?!p)\w*\b[^>]*>/ig;
-    const src = TextFeatureContent.replace(regex, '');
+    const regex = /<\/?(?!a)(?!p)\w*\b[^>]*>/gi;
+    let src = TextFeatureContent.replace(regex, '');
+    src = src.replace(/<\/p>/g, '</p><br />');
     return (
       <div className="c-textFeature b-margin-bottom-d40-m20">
         <h2

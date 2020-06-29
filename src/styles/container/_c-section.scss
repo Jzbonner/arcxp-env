@@ -120,6 +120,41 @@
     }
   }
 
+  &.three-col {
+    @include breakpoint(tablet) {
+      width: 90%;
+    }
+
+    @include breakpoint(desktop-sm) {
+      width: calc(94% + 20px);
+    }
+
+    @include breakpoint(desktop-lg) {
+      width: calc(90% + 20px);
+      max-width: 1620px;
+    }
+
+    .c-contentElements {
+      display: flex;
+      flex-wrap: wrap;
+
+      @include breakpoint(desktop-sm) {
+        flex-wrap: initial;
+      }
+
+      .c-homeListContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include breakpoint(desktop-sm) {
+          margin-right: 10px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
   .insertedAd {
     height: 200px;
   }
