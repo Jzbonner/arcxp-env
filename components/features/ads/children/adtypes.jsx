@@ -18,12 +18,16 @@ export const defaultAdSlot = {
 export const adSlots = {
   PX01: {
     dimensions: [
-      [1, 1],
+      [
+        [1, 1],
+      ],
     ],
   },
   HS01: {
     dimensions: [
-      [1, 1],
+      [
+        [1, 1],
+      ],
     ],
   },
   HS02: {
@@ -47,12 +51,26 @@ export const adSlots = {
   },
   NS01: {
     dimensions: [
-      [1, 1],
+      [
+        [1, 1],
+      ],
     ],
   },
   NS02: {
     dimensions: [
-      [1, 1],
+      [
+        [1, 1],
+      ],
+    ],
+  },
+  HP00: {
+    dimensions: [
+      [
+        [728, 90],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
     ],
   },
   HP01: {

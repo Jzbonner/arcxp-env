@@ -122,6 +122,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
 ArcAd.propTypes = {
   customFields: PropTypes.shape({
     slot: PropTypes.oneOf([
+      'HP00',
       'HP01',
       'HP02',
       'HP05',
