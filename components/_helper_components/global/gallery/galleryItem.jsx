@@ -29,8 +29,8 @@ const GalleryItem = ({
     if (!isMobile) {
       const galleryHeight = 480;
       const newWidth = (width / height) * galleryHeight;
-      const resizerUrl = imageResizer(url, arcSite, Math.round(newWidth), galleryHeight);
-      setUrl(resizerUrl);
+      const thumborUrl = imageResizer(url, arcSite, Math.round(newWidth), galleryHeight);
+      setUrl(thumborUrl);
     } else {
       setUrl(url);
     }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
-import imageResizer from '../../layouts/_helper_functions/Resizer';
+import imageResizer from '../../layouts/_helper_functions/Thumbor';
 import getTeaseIcon from '../../_helper_components/global/image/_helper_functions/getTeaseIcon';
 import './default.scss';
 

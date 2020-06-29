@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import './default.scss';
-import imageResizer from '../../../layouts/_helper_functions/Resizer';
+import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
 import placeholder from '../../../../resources/images/placeholder.svg';
