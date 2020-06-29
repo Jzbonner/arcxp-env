@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import imageResizer from '../../../layouts/_helper_functions/Resizer';
+import { useFusionContext } from 'fusion:context';
+import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+
 
 const GalleryItem = ({
   data, func, modalFunc,
@@ -9,6 +11,9 @@ const GalleryItem = ({
     url, width, height, alt, index, id, by = [], captionObj, states, lastItemClass,
   } = data;
   const { affiliation = [], caption = [] } = captionObj;
+
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
 
   const {
     isFocused, isStickyVisible, isCaptionOn, isMobile, isAdVisible,
@@ -24,7 +29,7 @@ const GalleryItem = ({
     if (!isMobile) {
       const galleryHeight = 480;
       const newWidth = (width / height) * galleryHeight;
-      const resizerUrl = imageResizer(url, Math.round(newWidth), galleryHeight);
+      const resizerUrl = imageResizer(url, arcSite, Math.round(newWidth), galleryHeight);
       setUrl(resizerUrl);
     } else {
       setUrl(url);

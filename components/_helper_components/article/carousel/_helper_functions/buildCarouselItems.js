@@ -1,5 +1,5 @@
 import React from 'react';
-import imageResizer from '../../../../layouts/_helper_functions/Resizer';
+import imageResizer from '../../../../layouts/_helper_functions/Thumbor';
 import truncateHeadline from '../../../../layouts/_helper_functions/homepage/truncateHeadline';
 import getDaysSincePublished from './getDaysSincePublished';
 import getFirstInlineImage from './getFirstInlineImage';
@@ -10,7 +10,7 @@ const filterCurrentStory = (contentElements, storyId) => contentElements.filter(
   return el;
 });
 
-export default function buildCarouselItems(relatedContentElements, storyId, logo) {
+export default function buildCarouselItems(relatedContentElements, storyId, logo, arcSite) {
   if (!relatedContentElements.content_elements) return null;
 
   const filteredContentElements = filterCurrentStory(relatedContentElements.content_elements, storyId);
@@ -47,7 +47,7 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
             <amp-img
               width={`${temp.src ? '90' : '76'}`}
               height="50"
-              src={temp.src ? imageResizer(temp.src, 256, 144) : logo}
+              src={temp.src ? imageResizer(temp.src, arcSite, 256, 144) : logo}
             />
             <div className={`c-itemText ${!temp.src && temp.teaseIcon ? 'with-icon' : ''}`}>
               {truncateHeadline(temp.headline)}

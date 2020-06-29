@@ -1,6 +1,8 @@
 export default {
   dfp_id: 21849707860,
   siteName: 'dayton',
+  cdnOrg: 'coxohio',
+  cdnSite: 'dayton',
   siteDomainURL: 'https://sandbox.dayton.arcpublising.com/pf',
   websiteURL: 'https://www.dayton.com/',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/CFSFLNZIUJBB3EVHSGSJCOHOJM.png',

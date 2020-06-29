@@ -1,7 +1,10 @@
-import { useAppContext } from 'fusion:context';
-import imageResizer from './Resizer';
+import { useAppContext, useFusionContext } from 'fusion:context';
+import imageResizer from './Thumbor';
 
 const renderImage = () => {
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+
   const appContext = useAppContext();
   const {
     globalContent,
@@ -57,7 +60,7 @@ const renderImage = () => {
   }
 
   if (ogContentImage) {
-    return imageResizer(ogContentImage, 1200, 630);
+    return imageResizer(ogContentImage, arcSite, 1200, 630);
   }
   return deployment(`${contextPath}/resources/images/logo-ogimage.png`);
 };

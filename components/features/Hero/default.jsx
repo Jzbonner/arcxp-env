@@ -51,7 +51,8 @@ const Hero = (customFields = {}) => {
       return (
         <div className="c-heroFeature">
           <a href={`${contextPath}${heroURL}`} className="hero-url" />
-          <div className="hero-img" style={{ backgroundImage: `url(${imageResizer(heroBackground)})`, backgroundRepeat: 'no-repeat' }}>
+          <div className="hero-img"
+          style={{ backgroundImage: `url(${imageResizer(heroBackground, arcSite)})`, backgroundRepeat: 'no-repeat' }}>
             <div className="hero-headline">
               <h2 className="headline-text">{truncateHeadline(headline)}</h2>
             </div>
