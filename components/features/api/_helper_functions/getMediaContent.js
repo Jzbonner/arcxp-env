@@ -1,4 +1,4 @@
-export const getMediaContent = (globalContent, promoItems) => {
+export const getMediaContent = (type, globalContent, promoItems) => {
   let formattedMediaContent = [];
   let leadObject = {};
 
@@ -90,9 +90,9 @@ export const getMediaContent = (globalContent, promoItems) => {
         streams: mediaStreams = [],
       } = media || {};
 
-      // per Surendra, we are not adding inline images to media:content.
-      if (localType === 'image') {
-        return null;
+      // per Surendra: For stories, we are not adding inline images to media:content.
+      if (localType === 'image' && type === 'story') {
+        return {};
       }
 
       let mp4Stream;

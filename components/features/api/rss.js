@@ -37,7 +37,7 @@ class Api {
         if (type === 'story') {
           const formatContentElements = formatNavigaContent(contentElements);
 
-          const mediaArray = getMediaContent(contentElements, promoItems);
+          const mediaArray = getMediaContent(type, contentElements, promoItems);
 
           const xmlObject = {
             item: [
@@ -136,7 +136,7 @@ class Api {
         }
 
         if (type === 'gallery') {
-          const galleryMediaArray = getMediaContent(contentElements);
+          const galleryMediaArray = getMediaContent(type, contentElements);
 
           const galleryXmlObject = {
             item: [
