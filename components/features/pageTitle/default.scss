@@ -11,7 +11,6 @@
 
     @include text-styles(2.5em, 1, "Average");
 
-    &:before,
     &:after {
       content: "";
       display: block;
