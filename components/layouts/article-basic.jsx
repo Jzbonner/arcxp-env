@@ -108,7 +108,7 @@ const StoryPageLayout = () => {
       if (isHyperlocalContent) {
         return (
         <div className='c-section'>
-          <amp-fx-flying-carpet height="300px">
+          <amp-fx-flying-carpet height="300px" class="ampAd">
           <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'500'} taxonomy={taxonomy} componentName='ArcAd'
           multiSizeValidation={'false'}/>
         </amp-fx-flying-carpet>
@@ -116,7 +116,7 @@ const StoryPageLayout = () => {
         );
       }
       return (
-        <div className='c-section teads-ad'>
+        <div className='teads-ad'>
           <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'1'} taxonomy={taxonomy} componentName='ArcAd'
           multiSizeValidation={'false'} />
         </div>
