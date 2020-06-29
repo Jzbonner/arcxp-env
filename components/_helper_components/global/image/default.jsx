@@ -55,7 +55,7 @@ const Image = ({
 
   return (
     <div className={`c-image-component ${imageMarginBottom || ''}`}>
-      <div className="image-component-image">
+      <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
         <>
           {!ampPage ? (
             <>
