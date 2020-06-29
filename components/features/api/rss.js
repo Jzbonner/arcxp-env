@@ -11,7 +11,8 @@ class Api {
 
   render() {
     const { globalContent, siteProperties } = this.props || {};
-    const { websiteURL } = siteProperties || {};
+    const { websiteURL, metrics } = siteProperties || {};
+    const { siteID = 'ajc' } = metrics || {};
 
     if (globalContent) {
       return globalContent.map((item) => {
@@ -35,9 +36,9 @@ class Api {
         const formattedDate = formatApiTime(firstPubDate, displayDate);
 
         if (type === 'story') {
-          const formatContentElements = formatNavigaContent(contentElements);
+          const formatContentElements = formatNavigaContent(siteID, contentElements);
 
-          const mediaArray = getMediaContent(type, contentElements, promoItems);
+          const mediaArray = getMediaContent(type, siteID, contentElements, promoItems);
 
           const xmlObject = {
             item: [
@@ -136,7 +137,7 @@ class Api {
         }
 
         if (type === 'gallery') {
-          const galleryMediaArray = getMediaContent(type, contentElements);
+          const galleryMediaArray = getMediaContent(type, siteID, contentElements);
 
           const galleryXmlObject = {
             item: [
