@@ -1,6 +1,8 @@
 export default {
   dfp_id: 21849707860,
   siteName: 'daytondailynews',
+  cdnOrg: 'coxohio',
+  cdnSite: 'dayton-daily-news',
   siteDomainURL: 'https://sandbox.daytondailynews.arcpublishing.com/pf',
   websiteURL: 'https://www.daytondailynews.com/',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/CFSFLNZIUJBB3EVHSGSJCOHOJM.png',

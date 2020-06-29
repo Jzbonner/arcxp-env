@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
 import {
   DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery, ImageModal,
 } from '../../_helper_components/global/gallery/index';
@@ -24,6 +25,9 @@ const Gallery = (props) => {
   const {
     contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '', leafHeadline = '',
   } = props;
+
+  const fusionContext = useFusionContext();
+  const { arcSite = 'ajc' } = fusionContext;
 
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
@@ -625,7 +629,7 @@ const Gallery = (props) => {
             className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
             <div className="gallery-overlay hidden-large">
               {
-                isMobile ? <OverlayMosiac data={mobileElemData} /> : null
+                isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite}/> : null
               }
             </div>
             <div className="gallery-count view-gallery">
