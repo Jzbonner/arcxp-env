@@ -1,7 +1,8 @@
 @import "./../base/mixins";
 @import "./c-section";
 
-.c-sponsor {
+.c-sponsor,
+.section-label.sponsored-story {
   background: #2e81b7;
   border-radius: 6px;
   font-weight: 600;
@@ -15,7 +16,7 @@
 }
 
 .c-sponsorOverlay,
-.sponsored-story {
+.image-component-image .sponsored-story {
   position: absolute;
   bottom: 3px;
   width: 100%;
