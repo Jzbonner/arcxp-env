@@ -69,7 +69,7 @@ const Image = ({
               className={teaseContentType ? 'tease-image' : ''}
               onLoad={() => setLoaded(true)}/>
             <img src={placeholder}
-              style={ loaded ? { display: 'none' } : { width, height }}/>
+              style={ loaded ? { display: 'none' } : {}}/>
             </>
           ) : (
             <amp-img
