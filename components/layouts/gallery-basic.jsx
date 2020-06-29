@@ -1,11 +1,15 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
+import ArcAd from '../features/ads/default';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import NavBar from '../_helper_components/global/navBar/default';
 import Gallery from '../features/gallery/default';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
+import BreakingNews from '../_helper_components/global/breakingNews/default';
+import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
+import checkTags from './_helper_functions/checkTags';
 import '../../src/styles/container/_article-basic.scss';
 
 const GalleryPageLayout = () => {
@@ -24,6 +28,7 @@ const GalleryPageLayout = () => {
     description,
     streams,
     promo_items: promoItems,
+    taxonomy,
   } = globalContent || {};
 
   const { basic } = promoItems || {};
@@ -35,12 +40,20 @@ const GalleryPageLayout = () => {
     description,
     streams,
   };
+  const { tags = [] } = taxonomy || {};
+  const noAds = checkTags(tags, 'no-ads');
 
   return (
     <>
-      <GlobalAdSlots />
+      {!noAds && <GlobalAdSlots />}
+      <BreakingNews />
+      <WeatherAlerts />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} />
       <main>
+        {!noAds && <div className="c-hp01-mp01 b-margin-top-d40-m20">
+          <ArcAd staticSlot={'HP00'} />
+          <ArcAd staticSlot={'MP01'} />
+        </div>}
         <div className="c-header-gallery">
           <Headline headlines={headlines} basicItems={basicItems} />
         </div>
