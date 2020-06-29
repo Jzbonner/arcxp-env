@@ -182,6 +182,7 @@
 
       &.listPage {
         margin-bottom: 1rem;
+        width: 100%;
 
         @include breakpoint(desktop-sm) {
           margin-bottom: 2rem;
