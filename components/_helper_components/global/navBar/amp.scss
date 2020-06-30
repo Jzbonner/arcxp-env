@@ -74,12 +74,44 @@
 
 .amp-logo-pinned {
   opacity: 0;
+
+  &.dayton {
+    width: 200px;
+  }
+
+  &.daytondailynews {
+    width: 220px;
+  }
+
+  &.journal-news {
+    width: 220px;
+  }
+
+  &.springfieldnewssun {
+    width: 230px;
+  }
 }
 
 .amp-logo {
   position: absolute;
   left: 50%;
   transform: translate(-50%);
+
+  &.dayton {
+    width: 200px;
+  }
+
+  &.daytondailynews {
+    width: 220px;
+  }
+
+  &.journal-news {
+    width: 220px;
+  }
+
+  &.springfieldnewssun {
+    width: 230px;
+  }
 }
 
 .amp-sidebar {

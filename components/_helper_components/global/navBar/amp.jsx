@@ -8,7 +8,7 @@ import closeButton from '../../../../resources/images/amp-close.png';
 const AmpNavBar = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
-  const { logo, logoShort } = getProperties(arcSite);
+  const { logo, logoShort, siteName } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
   const sections = useContent({
@@ -119,12 +119,12 @@ const AmpNavBar = () => {
           <div className='amp-hamburger' role='button' tabIndex='0' on="tap:sidebar.toggle">
             <div className='amp-hamburger-button'></div>
           </div>
-          <div id="logo-pinned" className="amp-logo amp-logo-pinned">
+          <div id="logo-pinned" className={`amp-logo amp-logo-pinned ${siteName}`}>
             <a href={rootDirectory}>
             <amp-img height='37px' width='72px' src={deployment(`${contextPath}${logoShort}`)}></amp-img>
             </a>
           </div>
-          <div id="logo-main" className="amp-logo">
+          <div id="logo-main" className={`amp-logo ${siteName}`}>
             <a href={rootDirectory}>
               <amp-img height='59px' width='109px' src={deployment(`${contextPath}${logo}`)}></amp-img>
             </a>
