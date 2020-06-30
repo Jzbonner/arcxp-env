@@ -29,3 +29,7 @@
     }
   }
 }
+
+amp-fx-flying-carpet:not([hidden]) {
+  @include advertisement-label;
+}
