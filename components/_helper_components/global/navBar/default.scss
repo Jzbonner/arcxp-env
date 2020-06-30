@@ -450,8 +450,6 @@
     background: transparent;
 
     .search-icon {
-      height: 29px;
-      max-width: 20%;
       padding: 0 .5rem;
 
       @include breakpoint(desktop-sm) {

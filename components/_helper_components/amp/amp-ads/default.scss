@@ -13,3 +13,24 @@
     @include advertisement-label;
   }
 }
+
+.teads-ad {
+
+  &.c-section {
+
+    .ampAd {
+
+      &:not([hidden]) {
+        
+        &:before {
+          content: "";
+        }
+      }
+    }
+  }
+}
+
+amp-fx-flying-carpet.ampAd:not([hidden]) {
+  margin: 0;
+  padding: 0;
+}

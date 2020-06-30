@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useFusionContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
@@ -15,11 +16,14 @@ const Image = ({
   const {
     url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText,
   } = src || {};
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+
   const [imageSrc, setImageSrc] = useState('');
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    setImageSrc(imageResizer(url, width, height));
+    setImageSrc(imageResizer(url, arcSite, width, height));
   }, []);
 
   const screenSize = checkWindowSize();
@@ -55,7 +59,7 @@ const Image = ({
 
   return (
     <div className={`c-image-component ${imageMarginBottom || ''}`}>
-      <div className="image-component-image">
+      <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
         <>
           {!ampPage ? (
             <>
@@ -65,11 +69,11 @@ const Image = ({
               className={teaseContentType ? 'tease-image' : ''}
               onLoad={() => setLoaded(true)}/>
             <img src={placeholder}
-              style={ loaded ? { display: 'none' } : { width, height }}/>
+              style={ loaded ? { display: 'none' } : {}}/>
             </>
           ) : (
             <amp-img
-              src={imageResizer(url, width, height)}
+              src={imageResizer(url, arcSite, width, height)}
               alt={getAltText(altText, caption)}
               width={width}
               height={height !== 0 ? height : (width / originalWidth) * originalHeight}

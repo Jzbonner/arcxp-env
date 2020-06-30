@@ -133,6 +133,14 @@
           padding-top: 53%;
         }
       }
+
+      .home-headline.sponsored {
+        padding-top: 60%;
+
+        @include breakpoint(tablet) {
+          padding-top: 54%;
+        }
+      }
     }
 
     &.two-columns {
@@ -140,6 +148,12 @@
       .home-headline {
         @include breakpoint(desktop-sm) {
           padding-top: 24%;
+        }
+      }
+
+      .home-headline.sponsored {
+        @include breakpoint(desktop-sm) {
+          padding-top: 26%;
         }
       }
     }
@@ -151,6 +165,12 @@
           padding-top: 14%;
         }
       }
+
+      .home-headline.sponsored {
+        @include breakpoint(desktop-sm) {
+          padding-top: 16%;
+        }
+      }
     }
 
     &.four-columns {
@@ -158,6 +178,12 @@
       .home-headline {
         @include breakpoint(desktop-sm) {
           padding-top: 10%;
+        }
+      }
+      
+      .home-headline.sponsored {
+        @include breakpoint(desktop-sm) {
+          padding-top: 12%;
         }
       }
     }

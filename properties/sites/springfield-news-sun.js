@@ -1,6 +1,8 @@
 export default {
   dfp_id: 21849707860,
   siteName: 'springfieldnewssun',
+  cdnOrg: 'coxohio',
+  cdnSite: 'springfield-news-sun',
   siteDomainURL: 'https://sandbox.springfieldnewssun.arcpublishing.com/pf',
   websiteURL: 'https://www.springfieldnewssun.com/',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/CFSFLNZIUJBB3EVHSGSJCOHOJM.png',

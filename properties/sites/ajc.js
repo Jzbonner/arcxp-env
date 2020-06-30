@@ -3,6 +3,9 @@ import appadstxt from './appadstxt/ajc.com.json';
 
 export default {
   defaultSiteTitle: 'AJC',
+  siteTag: 'ajc',
+  cdnOrg: 'ajc',
+  cdnSite: 'ajc',
   dfpId: '21849707860',
   siteDomainURL: 'https://www.ajc.com',
   twitterURL: '//twitter.com/ajc',

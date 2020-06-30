@@ -104,11 +104,22 @@ const StoryPageLayout = () => {
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />;
   const insertAtEndOfStory = [];
   const interscrollerPlaceholder = () => {
-    if (isHyperlocalContent && ampPage) {
+    if (ampPage) {
+      if (isHyperlocalContent) {
+        return (
+          <div className='c-section'>
+            <amp-fx-flying-carpet height="300px" class="ampAd">
+            <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'500'} taxonomy={taxonomy} componentName='ArcAd'
+            multiSizeValidation={'false'}/>
+          </amp-fx-flying-carpet>
+        </div>
+        );
+      }
       return (
-        <amp-fx-flying-carpet height="auto">
-          <div className="story-interscroller__placeholder full-width c-clear-both" key={'interscrollerPlaceholder'}></div>
-        </amp-fx-flying-carpet>
+        <div className='c-section teads-ad'>
+          <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'1'} taxonomy={taxonomy} componentName='ArcAd'
+          multiSizeValidation={'false'} />
+        </div>
       );
     }
     return <div className="story-interscroller__placeholder full-width c-clear-both c-section" key={'interscrollerPlaceholder'}></div>;
@@ -239,7 +250,7 @@ const StoryPageLayout = () => {
           {(!basicItems || promoType !== 'gallery') && !ampPage ? (
             <Gallery contentElements={filteredContentElements} pageType={subtype} />
           ) : null}
-          {!isHyperlocalContent && <TaboolaFeed ampPage={ampPage} />}
+          {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} />}
           {!noAds && !isHyperlocalContent && !sponsorSectionID && (
             <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
           )}

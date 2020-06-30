@@ -1,27 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ArcAd from '../../../features/ads/default';
-import AmpAd from '../../amp/amp-ads/AmpAd';
 import '../../../../src/styles/base/_utility.scss';
 
 const GlobalAdSlots = ({
   ampPage,
-  uuid,
-  taxonomy,
   pbPage = false,
 }) => {
   if (ampPage) {
-    return <div className="b-hidden">
-            <AmpAd
-            adSlot='PX01'
-            uuid={uuid}
-            width={'300'}
-            height={'300'}
-            taxonomy={taxonomy}
-            componentName='ArcAd'
-            multiSize={'300x1'}
-            multiSizeValidation={'false'}/>
-        </div>;
+    return null;
   }
 
   return <div className="b-hidden">
