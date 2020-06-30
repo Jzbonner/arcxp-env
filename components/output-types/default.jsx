@@ -68,6 +68,7 @@ const DefaultOutputType = (props) => {
           </>
         )}
         <Libs />
+        {!noAds && <script async src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>}
         {!noAds && adsA9Enabled && <script src='https://c.amazon-adsystem.com/aax2/apstag.js'></script>}
         {!noAds && adsPrebidEnabled && <script src={deployment(`${contextPath}/resources/scripts/prebid3.23.0.js`)}></script>}
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} />}
