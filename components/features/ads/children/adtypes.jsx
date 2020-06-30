@@ -2,9 +2,7 @@ export const defaultAdSlot = {
   name: 'div-id-',
   slotName: '',
   dimensions: [
-    [
-      [1, 1],
-    ], // all
+    [1, 1], // all
   ],
   breakpoints: [
     [0, 0], // all
@@ -17,16 +15,12 @@ export const defaultAdSlot = {
 export const adSlots = {
   PX01: {
     dimensions: [
-      [
-        [1, 1],
-      ],
+      [1, 1],
     ],
   },
   HS01: {
     dimensions: [
-      [
-        [1, 1],
-      ],
+      [1, 1],
     ],
   },
   HS02: {
@@ -50,23 +44,17 @@ export const adSlots = {
   },
   NS01: {
     dimensions: [
-      [
-        [1, 1],
-      ],
+      [1, 1],
     ],
   },
   NS02: {
     dimensions: [
-      [
-        [1, 1],
-      ],
+      [1, 1],
     ],
   },
   HP00: {
     dimensions: [
-      [
-        [728, 90],
-      ], // tablet+
+      [728, 90], // tablet+
     ],
     breakpoints: [
       [768, 0], // tablet+
@@ -284,10 +272,8 @@ export const adSlots = {
   },
   RP01: {
     dimensions: [
-      [
-        [300, 600],
-        [300, 250],
-      ], // tablet+
+      [300, 600],
+      [300, 250], // tablet+
     ],
     breakpoints: [
       [768, 0], // tablet
@@ -347,10 +333,8 @@ export const adSlots = {
   'RP01 sticky': {
     slotName: 'RP01',
     dimensions: [
-      [
-        [300, 600],
-        [300, 250],
-      ], // tablet+
+      [300, 600],
+      [300, 250], // tablet+
     ],
     breakpoints: [
       [768, 0], // tablet+
@@ -411,10 +395,8 @@ export const adSlots = {
   'RP01-Story-Desktop': {
     slotName: 'RP01',
     dimensions: [
-      [
-        [300, 600],
-        [300, 250],
-      ], // desktop
+      [300, 600],
+      [300, 250], // desktop
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -475,10 +457,8 @@ export const adSlots = {
   'RP01-Story-FlatPage': {
     slotName: 'RP01',
     dimensions: [
-      [
-        [300, 600],
-        [300, 250],
-      ], // desktop
+      [300, 600],
+      [300, 250], // desktop
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -598,10 +578,8 @@ export const adSlots = {
   'RP01-List-Page': {
     slotName: 'RP01',
     dimensions: [
-      [
-        [300, 600],
-        [300, 250],
-      ], // tablet +
+      [300, 600],
+      [300, 250], // tablet +
     ],
     breakpoints: [
       [768, 0], // tablet+
@@ -660,9 +638,7 @@ export const adSlots = {
   },
   RP02: {
     dimensions: [
-      [
-        [300, 100],
-      ], // tablet+
+      [300, 100], // tablet+
     ],
     breakpoints: [
       [768, 0], // tablet+
@@ -671,10 +647,8 @@ export const adSlots = {
   'RP03 sticky': {
     slotName: 'RP03',
     dimensions: [
-      [
-        [300, 250],
-        [300, 600],
-      ], // tablet+
+      [300, 250],
+      [300, 600], // tablet+
     ],
     breakpoints: [
       [768, 0], // tablet+
@@ -735,10 +709,8 @@ export const adSlots = {
   'RP09-Story-Desktop': {
     slotName: 'RP09',
     dimensions: [
-      [
-        [300, 600],
-        [300, 250],
-      ], // desktop
+      [300, 600],
+      [300, 250], // desktop
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -858,10 +830,8 @@ export const adSlots = {
   'RP09 sticky': {
     slotName: 'RP09',
     dimensions: [
-      [
-        [300, 250],
-        [300, 600],
-      ], // tablet+
+      [300, 250],
+      [300, 600], // tablet+
     ],
     breakpoints: [
       [768, 0], // tablet+
@@ -1203,10 +1173,8 @@ export const adSlots = {
   PG01: {
     slotName: 'PG01',
     dimensions: [
-      [
-        [600, 400],
-        [300, 250],
-      ], // desktop
+      [600, 400],
+      [300, 250], // desktop
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -1215,9 +1183,7 @@ export const adSlots = {
   PG02: {
     slotName: 'PG02',
     dimensions: [
-      [
-        [88, 31],
-      ], // desktop
+      [88, 31], // desktop
     ],
     breakpoints: [
       [1024, 0], // desktop
@@ -1239,12 +1205,7 @@ export const adSlots = {
   SP01: {
     slotName: 'SP01',
     dimensions: [
-      [
-        [88, 31],
-      ],
-    ],
-    breakpoints: [
-      [1, 0],
+      [88, 31],
     ],
   },
 };
