@@ -99,7 +99,6 @@ const fetch = (query) => {
   }
   const body = builder.build();
   const newBody = JSON.stringify(body);
-  console.log('NEW BODY ', newBody);
 
   return getQueryData(arcSite, newBody, size)
     .then(data => AddFirstInlineImage(data, arcSite, displayClass, displayClassesRequiringImg))
