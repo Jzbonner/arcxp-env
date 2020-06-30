@@ -8,18 +8,21 @@ import SectionOutput from '../_helper_components/section/SectionOutput';
 const SectionLayout = (props) => {
   const [
     zone1,
-    zone1RightRail,
+    zone2,
+    zone2RightRail,
   ] = props.children;
   const appContext = useAppContext();
   const { layout } = appContext;
   const zonesCollection = [
-    { content: zone1, rightRailZone: zone1RightRail },
+    { content: zone1 },
+    { content: zone2, rightRailZone: zone2RightRail },
   ];
 
   return <SectionOutput zones={zonesCollection} layout={layout} />;
 };
 
 SectionLayout.sections = [
+  'Full Width (top ad)',
   'Wrap content',
   'Right Rail',
 ];
