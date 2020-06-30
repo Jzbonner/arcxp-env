@@ -250,7 +250,7 @@ const StoryPageLayout = () => {
           {(!basicItems || promoType !== 'gallery') && !ampPage ? (
             <Gallery contentElements={filteredContentElements} pageType={subtype} />
           ) : null}
-          {!isHyperlocalContent && <TaboolaFeed ampPage={ampPage} />}
+          {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} />}
           {!noAds && !isHyperlocalContent && !sponsorSectionID && (
             <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
           )}
