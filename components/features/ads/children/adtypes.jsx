@@ -1,7 +1,6 @@
 export const defaultAdSlot = {
   name: 'div-id-',
   slotName: '',
-  display: 'all',
   dimensions: [
     [
       [1, 1],
