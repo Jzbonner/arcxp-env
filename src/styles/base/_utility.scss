@@ -105,7 +105,7 @@
 
   @include between-breakpoints(mobile, tablet) {
 
-    &[class*="HP0"],
+    &[class*="HP0"]:not(.HP02),
     &[class*="RP0"] {
       display: none;
     }
