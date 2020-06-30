@@ -24,7 +24,7 @@ const params = {
   excludeSubtypes: 'text',
 };
 
-export const itemsToArray = (itemString = '') => itemString.split(',').map(item => item.replace(/\s/g, ''));
+export const itemsToArray = (itemString = '') => itemString.split(',').map(item => item.replace(/^\s+/g, ''));
 
 const fetch = (query) => {
   const {
@@ -66,12 +66,12 @@ const fetch = (query) => {
     if (mustIncludeAllTags && mustIncludeAllTags.toLowerCase() === 'yes') {
       const tags = itemsToArray(includeTags);
       tags.forEach((tag) => {
-        builder.andQuery('term', `${tag.includes('-') ? 'taxonomy.tags._id' : 'taxonomy.tags.text'}`, tag);
+        builder.andQuery('term', `${tag.includes('-') || tag.includes(' ') ? 'taxonomy.tags._id' : 'taxonomy.tags.text'}`, tag);
       });
     } else {
       const tags = itemsToArray(includeTags);
       tags.forEach((tag) => {
-        builder.andQuery('terms', `${tag.includes('-') ? 'taxonomy.tags._id' : 'taxonomy.tags.text'}`, tags);
+        builder.andQuery('terms', `${tag.includes('-') || tag.includes(' ') ? 'taxonomy.tags._id' : 'taxonomy.tags.text'}`, tags);
       });
     }
   }
@@ -94,7 +94,7 @@ const fetch = (query) => {
   if (excludeTags) {
     const tags = itemsToArray(excludeTags);
     tags.forEach((tag) => {
-      builder.notQuery('terms', `${tag.includes('-') ? 'taxonomy.tags._id' : 'taxonomy.tags.text'}`, tags);
+      builder.notQuery('terms', `${tag.includes('-') || tag.includes(' ') ? 'taxonomy.tags._id' : 'taxonomy.tags.text'}`, tags);
     });
   }
   const body = builder.build();

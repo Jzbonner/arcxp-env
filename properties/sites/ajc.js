@@ -18,6 +18,7 @@ export default {
     gtmContainerKey: 'GTM-WT4CBT7',
     ampGtmID: 'GTM-WQBXD72',
   },
+  weatherPageURL: '/atlanta-weather/',
   adsPath: 'atlanta_np/ajc_web_default',
   adsTxt: adstxt,
   appAdsTxt: appadstxt,
