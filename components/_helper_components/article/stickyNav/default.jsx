@@ -154,9 +154,9 @@ const StickyNav = ({
           </div>
         </ul>
         <div className='b-flexRow c-stickyLogin'>
-          <div className={`sticky-logo-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
+          <div className={`sticky-logo-homepage ${siteName} ${isNonShareablePage ? '' : 'hidden'}`}>
             <a href="/">
-              <img src={logoPath} alt={`${siteName} logo`} />
+              <img src={logoPath} className={siteName} alt={`${siteName} logo`} />
             </a>
           </div>
           <div className={`stickyNav-homepage ${isNonShareablePage ? '' : 'hidden'}`}>

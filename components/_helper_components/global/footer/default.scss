@@ -86,6 +86,14 @@
       &.journal-news {
         width: 58vw;
         max-width: 300px;
+
+        @include breakpoint(desktop-sm) {
+          width: 28vw;
+        }
+      }
+
+      &.springfieldnewssun {
+        width: 400px;
       }
     }
 
