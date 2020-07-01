@@ -1,3 +1,5 @@
+@import "./variables";
+
 @mixin text-styles($size, $line-height, $font: "") {
   font-size: $size;
   line-height: $line-height;
@@ -39,7 +41,7 @@
 @mixin section() {
   display: block;
   max-width: 1080px;
-  padding: 0 15px;
+  padding: 0 $min-margin;
   margin-right: auto;
   margin-left: auto;
 
@@ -149,8 +151,8 @@
   }
 
   @include between-breakpoints(mobile, desktop-lg) {
-    margin-left: -30px;
-    margin-right: -30px;
+    margin-left: -$min-margin;
+    margin-right: -$min-margin;
     width: calc(100% + 60px);
   }
 

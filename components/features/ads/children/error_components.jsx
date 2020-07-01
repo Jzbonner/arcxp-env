@@ -15,7 +15,7 @@ export const PlaceholderAd = (props) => {
   };
 
   return (
-    <div className={`arc_ad | ${classes} placeholder text_align_center width_full b-margin-bottom-d40-m20`} style={placeholderStyles}>
+    <div className={`arc_ad | ${classes} placeholder text_align_center width_full`} style={placeholderStyles}>
       Advertisement
     </div>
   );
