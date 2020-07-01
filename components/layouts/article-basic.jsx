@@ -107,7 +107,7 @@ const StoryPageLayout = () => {
     if (ampPage) {
       if (isHyperlocalContent) {
         return (
-          <div className='c-section'>
+          <div className='c-section b-margin-bottom-d30-m20'>
             <amp-fx-flying-carpet height="300px" class="ampAd">
             <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'500'} taxonomy={taxonomy} componentName='ArcAd'
             multiSizeValidation={'false'}/>
