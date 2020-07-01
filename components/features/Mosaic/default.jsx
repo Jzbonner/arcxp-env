@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useAppContext, useFusionContext } from 'fusion:context';
+import get from 'lodash.get';
 import getProperties from 'fusion:properties';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import SectionLabel from '../../_helper_components/global/sectionLabel/default';
@@ -161,7 +162,7 @@ const Mosaic = (customFields = {}) => {
                    {getLabelContent(getLabelContentConfig)}
                   </div>
                   <span className="headline">
-                    {truncateHeadline(headlines.basic)}
+                    {truncateHeadline(get(headlines, 'basic', ''))}
                   </span>
                 </div>
               );
