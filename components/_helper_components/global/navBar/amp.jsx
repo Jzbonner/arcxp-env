@@ -119,12 +119,12 @@ const AmpNavBar = () => {
           <div className='amp-hamburger' role='button' tabIndex='0' on="tap:sidebar.toggle">
             <div className='amp-hamburger-button'></div>
           </div>
-          <div id="logo-pinned" className={`amp-logo amp-logo-pinned ${siteName}`}>
+          <div id="logo-pinned" className={`amp-logo amp-logo-pinned ${siteName.toLowerCase()}`}>
             <a href={rootDirectory}>
             <amp-img height='37px' width='72px' src={deployment(`${contextPath}${logoShort}`)}></amp-img>
             </a>
           </div>
-          <div id="logo-main" className={`amp-logo ${siteName}`}>
+          <div id="logo-main" className={`amp-logo ${siteName.toLowerCase()}`}>
             <a href={rootDirectory}>
               <amp-img height='59px' width='109px' src={deployment(`${contextPath}${logo}`)}></amp-img>
             </a>

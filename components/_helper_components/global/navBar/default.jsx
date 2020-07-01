@@ -132,7 +132,7 @@ const NavBar = ({
             </div>
             <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
               && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
-              <Logo source={deployment(`${contextPath}${logo}`)} rootDirectory={rootDirectory} siteName={siteName}/>
+              <Logo source={deployment(`${contextPath}${logo}`)} rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}/>
             </div>
           </div>
           <DesktopNav
@@ -145,7 +145,7 @@ const NavBar = ({
             social={social}
             stickyActive={stickyNavVisibility}
             type={type}
-            siteName={siteName}/>
+            siteName={siteName.toLowerCase()}/>
           <div className={`sub b-flexRow b-flexCenter sub-text ${stickyNavVisibility || (stickyNavVisibility
             && mobileMenuToggled) ? 'not-visible' : ''}`}>
             <Subscribe/>

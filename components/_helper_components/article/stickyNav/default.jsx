@@ -120,7 +120,7 @@ const StickyNav = ({
         </div>
           <li className="stickyNav-item mobile-hidden">
             <a href="/">
-              <img className={`sticky-logo ${siteName}`} src={logoPath} alt={`${siteName} logo`} />
+              <img className={`sticky-logo ${site}`} src={logoPath} alt={`${siteName} logo`} />
             </a>
           </li>
           <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
@@ -154,9 +154,9 @@ const StickyNav = ({
           </div>
         </ul>
         <div className='b-flexRow c-stickyLogin'>
-          <div className={`sticky-logo-homepage ${siteName} ${isNonShareablePage ? '' : 'hidden'}`}>
+          <div className={`sticky-logo-homepage ${site} ${isNonShareablePage ? '' : 'hidden'}`}>
             <a href="/">
-              <img src={logoPath} className={siteName} alt={`${siteName} logo`} />
+              <img src={logoPath} className={site} alt={`${siteName} logo`} />
             </a>
           </div>
           <div className={`stickyNav-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
