@@ -1,7 +1,27 @@
 [
   {
     "_id": "ajc",
-    "display_name": "AJC - Sandbox",
+    "display_name": "AJC",
     "is_default_website": true
+  },
+  {
+    "_id": "dayton",
+    "display_name": "Dayton",
+    "is_default_website": false
+  },
+  {
+    "_id": "daytondailynews",
+    "display_name": "Dayton Daily News",
+    "is_default_website": false
+  },
+  {
+    "_id": "journal-news",
+    "display_name": "Journal News",
+    "is_default_website": false
+  },
+  {
+    "_id": "springfieldnewssun",
+    "display_name": "Springfield News-Sun",
+    "is_default_website": false
   }
 ]
