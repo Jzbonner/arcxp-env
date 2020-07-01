@@ -2,9 +2,11 @@ export default {
   connext: {
     isEnabled: true,
     clientCode: 'ajc',
-    environment: 'prod',
+    environment: 'stage',
+    configCode: 'AJC_STAGE_DEFAULT',
+    // environment: 'prod',
+    // configCode: 'AJC_PROD_DEFAULT',
     siteCode: 'AJC',
-    configCode: 'AJC_PROD_DEFAULT',
     debug: false,
     tagManager: 'GTM',
     containerId: 'GTM-W3VLHBK',
