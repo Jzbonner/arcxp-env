@@ -31,7 +31,7 @@ const NavBar = ({
 
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
-  const { logo, logoHamburger } = getProperties(arcSite);
+  const { logo, logoHamburger, siteName } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
 
@@ -132,7 +132,7 @@ const NavBar = ({
             </div>
             <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
               && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
-              <Logo source={deployment(`${contextPath}${logo}`)} rootDirectory={rootDirectory}/>
+              <Logo source={deployment(`${contextPath}${logo}`)} rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}/>
             </div>
           </div>
           <DesktopNav
@@ -144,7 +144,8 @@ const NavBar = ({
             rootDirectory={rootDirectory}
             social={social}
             stickyActive={stickyNavVisibility}
-            type={type}/>
+            type={type}
+            siteName={siteName.toLowerCase()}/>
           <div className={`sub b-flexRow b-flexCenter sub-text ${stickyNavVisibility || (stickyNavVisibility
             && mobileMenuToggled) ? 'not-visible' : ''}`}>
             <Subscribe/>
@@ -162,7 +163,7 @@ const NavBar = ({
             paddingRef={paddingRef}
             type={type}
             sections={sectionLi}
-            articleUrl={articleURL} />
+            articleUrl={articleURL}/>
         </div>
         <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
       </header>

@@ -10,7 +10,7 @@ import '../default.scss';
 
 const DesktopNav = ({
   sections, hamburgerToggle, isMobile, setToggle, rootDirectory, smallLogoUrl, social,
-  stickyActive,
+  stickyActive, siteName,
 }) => {
   const {
     twitter,
@@ -44,7 +44,7 @@ const DesktopNav = ({
     </div>
     <div className='nav-menu-header'>
       <a href={rootDirectory}>
-        <img src={smallLogoUrl} className='nav-menu-logo'></img>
+        <img src={smallLogoUrl} className={`nav-menu-logo ${siteName}`}></img>
       </a>
     </div>
     <ul className='nav-row'>
@@ -78,6 +78,7 @@ DesktopNav.propTypes = {
   rootDirectory: PropTypes.string,
   social: PropTypes.object,
   stickyActive: PropTypes.bool,
+  siteName: PropTypes.string,
 };
 
 export default DesktopNav;

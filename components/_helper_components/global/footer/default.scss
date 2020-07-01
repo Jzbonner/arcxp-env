@@ -66,6 +66,35 @@
         width: 185px;
         margin: 0;
       }
+
+      &.dayton {
+        width: 58vw;
+        max-width: 300px;
+        margin: 4rem 0;
+
+        @include breakpoint(desktop-sm) {
+          width: 28vw;
+        }
+      }
+
+      &.daytondailynews {
+        margin: 4rem 0;
+        width: 300px;
+        max-width: 100%;
+      }
+
+      &.journal-news {
+        width: 58vw;
+        max-width: 300px;
+
+        @include breakpoint(desktop-sm) {
+          width: 28vw;
+        }
+      }
+
+      &.springfieldnewssun {
+        width: 400px;
+      }
     }
 
     .newsletter-signup {
