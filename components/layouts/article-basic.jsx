@@ -155,7 +155,7 @@ const StoryPageLayout = () => {
       <BreakingNews />
       <WeatherAlerts />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
-      <main>
+      <main className="l-article-basic">
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
             <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
