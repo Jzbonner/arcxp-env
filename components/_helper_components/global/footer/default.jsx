@@ -27,7 +27,7 @@ const Footer = () => {
     filter: footerFilter,
   });
 
-  const { footerLogo } = getProperties(arcSite);
+  const { footerLogo, siteName } = getProperties(arcSite);
 
   const { children: linkCategories } = siteNavigation || {};
   const [row1 = []] = linkCategories || [];
@@ -56,7 +56,7 @@ const Footer = () => {
       <div className="logo-row">
         <div className="col">
           <a href="/">
-            <img className="footer-logo" src={deployment(`${contextPath}${footerLogo}`)} alt="logo" />
+            <img className={`footer-logo ${siteName}`} src={deployment(`${contextPath}${footerLogo}`)} alt="logo" />
           </a>
         </div>
         <div className="col">
