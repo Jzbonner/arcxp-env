@@ -8,11 +8,13 @@
   text-align: center;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   @include text-styles(2.5rem, 1, "Average");
 
   @include breakpoint(desktop-sm) {
     text-align: left;
+    justify-content: start;
   }
 
   .titleURL {

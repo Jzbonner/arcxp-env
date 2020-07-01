@@ -106,7 +106,8 @@ const ArcAd = ({ customFields, staticSlot }) => {
     <AdSetup
       refresh={true}
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
-      className={`arc_ad | ${slotName} ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
+      className={`arc_ad | ${slotName} b-margin-bottom-d40-m20 
+      ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
       dfpId={`${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${topSection}`}
       display={adConfig.display || defaultAdSlot.display}

@@ -116,10 +116,6 @@
       font-family: "Average", "Georgia", serif;
       text-decoration: none;
 
-      @include breakpoint(tablet) {
-        margin-bottom: 2.3125rem;
-      }
-
       @include breakpoint(desktop-sm) {
         max-width: 90%;
         font-size: 1.75vw;

@@ -5,7 +5,7 @@ const SectionHomepage = ({
   feature, rightColContent, rightRailContent, threeCol,
 }) => {
   if (feature || rightColContent || rightRailContent) {
-    let parentClass = 'c-sectionHome b-margin-bottom-d40-m20 ';
+    let parentClass = 'c-sectionHome ';
     if (rightColContent) {
       parentClass += ` halves ${rightRailContent ? ' with-rightRail' : ''}`;
     } else {

@@ -82,6 +82,14 @@
   }
 }
 
+.b-padding-d30-m20 {
+  padding: 1.25rem 0;
+
+  @include breakpoint(desktop-sm) {
+    padding: 1.88rem 0;
+  }
+}
+
 // desktop margin-top 40, mobile margin-top 20
 
 .b-margin-top-d40-m20 {

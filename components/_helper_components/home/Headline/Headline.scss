@@ -2,17 +2,17 @@
 
 .home-headline {
   position: relative;
-  padding-top: 52vw;
+  padding-top: 52%;
 
   @include breakpoint(tablet) {
-    padding-top: 50%;
+    padding-top: 46%;
   }
 
   &.sponsored {
-    padding-top: 54vw;
+    padding-top: 54%;
 
     @include breakpoint(tablet) {
-      padding-top: 54%;
+      padding-top: 53%;
     }
 
     .homeList-image {

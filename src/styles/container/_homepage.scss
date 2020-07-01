@@ -33,3 +33,11 @@
 
   @include text-styles(.625rem, 1, "Gordita");
 }
+
+.c-homepageContent {
+  padding-top: 1.25rem;
+
+  @include breakpoint(desktop-sm) {
+    padding-top: 2.5rem;
+  }
+}

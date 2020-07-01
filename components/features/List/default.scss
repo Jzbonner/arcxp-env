@@ -14,11 +14,11 @@
   .c-homeList {
     margin-bottom: 3rem;
     width: fit-content;
-
+    
     @include breakpoint(desktop-sm) {
       margin-bottom: 2rem;
     }
-
+    
     .homeList-image {
       position: relative;
       display: inline-block;
@@ -41,13 +41,13 @@
       }
 
       .headline {
-        @include text-styles(1.4rem, 1.25, "Average");
+        @include text-styles(1.2rem, 1.25, "Average");
 
         letter-spacing: -.24px;
         text-align: center;
 
         @include breakpoint(desktop-sm) {
-          @include text-styles(1.3vw, 1.28, "Average");
+          @include text-styles(1.4vw, 1.28, "Average");
         }
       }
     }
@@ -59,6 +59,10 @@
 
   &.one-column {
     flex-direction: column;
+
+    .c-homeList:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &.two-columns {
@@ -67,18 +71,26 @@
       @include breakpoint(desktop-sm) {
         width: 47%;
       }
+
+      &:nth-last-child(-n + 2) {
+        @include breakpoint(desktop-sm) {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 
   &.three-columns {
 
     .c-homeList {
-      // @include breakpoint(tablet) {
-      //   width: 47%;
-      // }
-
       @include breakpoint(desktop-sm) {
         width: 31%;
+      }
+
+      &:nth-last-child(-n + 3) {
+        @include breakpoint(desktop-sm) {
+          margin-bottom: 0;
+        }
       }
     }
   }
@@ -86,12 +98,14 @@
   &.four-columns {
 
     .c-homeList {
-      // @include breakpoint(tablet) {
-      //   width: 47%;
-      // }
-
       @include breakpoint(desktop-sm) {
         width: 22.5%;
+      }
+
+      &:nth-last-child(-n + 4) {
+        @include breakpoint(desktop-sm) {
+          margin-bottom: 0;
+        }
       }
     }
   }
@@ -147,12 +161,12 @@
   &.left-photo-display-class {
 
     .c-homeList {
-      margin-bottom: 3rem;
+      margin-bottom: 40px;
       display: flex;
 
       .homeList-image {
-        margin-right: 20px;
-        max-width: 35%;
+        margin-right: 15px;
+        max-width: calc(45% - 7.5px);
       }
 
       .homeList-text {
@@ -168,14 +182,10 @@
         }
 
         .headline {
-          @include text-styles(1.2rem, 1.25, "Average");
-
           text-align: left;
 
           &.listPage {
             text-align: left;
-
-            @include text-styles(1.375rem, 1.25, "Average");
           }
         }
       }
@@ -188,29 +198,29 @@
           margin-bottom: 2rem;
         }
 
-        .homeList-image {
-          max-width: 40%;
-          margin-right: 10px;
+        // .homeList-image {
+        //   max-width: 40%;
+        //   margin-right: 10px;
 
-          @include breakpoint(desktop-sm) {
-            max-width: 35%;
-            margin-right: 20px;
-          }
-        }
+        //   @include breakpoint(desktop-sm) {
+        //     max-width: 35%;
+        //     margin-right: 20px;
+        //   }
+        // }
 
-        .homeList-text {
-          max-width: 100%;
-        }
+        // .homeList-text {
+        //   max-width: 100%;
+        // }
 
-        .c-label-wrapper {
-          margin-bottom: 2px;
-          margin-top: -3px;
+        // .c-label-wrapper {
+        //   margin-bottom: 2px;
+        //   margin-top: -3px;
 
-          @include breakpoint(desktop-sm) {
-            margin-bottom: 7px;
-            margin-top: 0;
-          }
-        }
+        //   @include breakpoint(desktop-sm) {
+        //     margin-bottom: 7px;
+        //     margin-top: 0;
+        //   }
+        // }
       }
     }
   }
@@ -221,6 +231,7 @@
 
     .c-homeList {
       margin-bottom: .6rem;
+      border-bottom: 1px solid #cdcdcd;
 
       .c-label-wrapper {
         text-align: left;
@@ -237,14 +248,7 @@
 
       .homeList-text {
         padding-bottom: 20px;
-        border-bottom: 1px solid #cdcdcd;
         width: 100%;
-
-        .headline {
-          @include breakpoint(tablet) {
-            @include text-styles(1.125rem, 1.25, "Average");
-          }
-        }
       }
     }
   }
@@ -285,7 +289,7 @@
           a {
             display: inline-block;
             height: 100%;
-            padding: 0 30px;
+            padding: 0 px;
             cursor: pointer;
           }
         }

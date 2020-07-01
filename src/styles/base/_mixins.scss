@@ -39,7 +39,7 @@
 @mixin section() {
   display: block;
   max-width: 1080px;
-  padding: 0 30px;
+  padding: 0 15px;
   margin-right: auto;
   margin-left: auto;
 
@@ -128,7 +128,6 @@
 // styling for "full width" ads on home/section pages
 
 @mixin arc-ad-full-width {
-  margin: 40px 0;
   padding: 20px 0;
   box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
 
