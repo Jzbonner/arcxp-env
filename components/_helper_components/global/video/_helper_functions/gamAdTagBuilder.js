@@ -1,4 +1,5 @@
 import getProperties from 'fusion:properties';
+import { video } from 'fusion:environment';
 import getContentMeta from '../../siteMeta/_helper_functions/getContentMeta';
 import checkTags from '../../../../layouts/_helper_functions/checkTags';
 
@@ -6,6 +7,7 @@ const gamAdTagBuilder = (pageTaxonomy = {}, videoTaxonomy = {}, videoId, current
   const { dfp_id: dfpId, adsPath } = getProperties();
   const { primary_section: primarySection, tags: pageTags } = pageTaxonomy || {};
   const { tags: videoTags } = videoTaxonomy || {};
+  const { cmsId = '' } = video || {};
   let noPageAds = false;
   let noVideoAds = false;
   if (videoTags) {
@@ -48,7 +50,7 @@ const gamAdTagBuilder = (pageTaxonomy = {}, videoTaxonomy = {}, videoId, current
   descriptionUrl = encodeURIComponent(descriptionUrl);
 
   // eslint-disable-next-line max-len
-  return `${gamUrl}?${size}&iu_parts=${dfpId},${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath.replace(/\//, ',')}${path.replace(/\//, ',')}&kw=${kw.join()}&video=${videoId}&cmsid=2531688&obj_type=${pageContentType}&description_url=${descriptionUrl}‌&uuid=${pageUuid}&environ=${environ}`;
+  return `${gamUrl}?${size}&iu=${dfpId}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${path}&kw=${kw.join()}&video=${videoId}&cmsid=${cmsId}&obj_type=${pageContentType}&description_url=${descriptionUrl}‌&uuid=${pageUuid}&environ=${environ}`;
 };
 
 export default gamAdTagBuilder;
