@@ -132,6 +132,7 @@
 @mixin arc-ad-full-width {
   padding: 20px 0;
   box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+  width: 100vw;
 
   .arcad {
     width: 100vw;
@@ -146,24 +147,12 @@
     }
   }
 
-  @include between-breakpoints(mobile, desktop-lg) {
-    margin-left: -$min-margin;
-    margin-right: -$min-margin;
-    width: calc(100% + #{2 * $min-margin});
-  }
-
   @include breakpoint(tablet) {
 
     .arcad {
       margin: 0 auto;
       padding-bottom: 20px;
     }
-  }
-
-  @include breakpoint(desktop-lg) {
-    width: 100vw;
-    margin-left: -5.5556%;
-    margin-right: -5.5556%;
   }
 }
 
