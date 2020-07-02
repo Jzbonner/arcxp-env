@@ -1,18 +1,16 @@
-/* eslint-disable no-console */
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 import checkSponsor from '../../../components/layouts/_helper_functions/checkSponsor';
 
 const getSponsorData = (sections, query) => {
-  const { sponsorSectionID /* sponsorName */ } = checkSponsor(sections);
+  const { sponsorSectionID, sponsorName } = checkSponsor(sections);
   const {
     arcSite = 'ajc', type = 'navigation', hierarchy = 'default',
   } = query;
 
   if (!sponsorSectionID) return null;
 
-  console.log('content_base', CONTENT_BASE);
-  console.log('access token', ARC_ACCESS_TOKEN);
+  let siteData = null;
 
   const endpoint = `${CONTENT_BASE}/site/v3/${type}/${arcSite}/?hierarchy=${hierarchy}`;
 
@@ -25,16 +23,17 @@ const getSponsorData = (sections, query) => {
       },
     })
     .then(({ data }) => {
-      console.log('returned data', data);
+      siteData = { ...data };
     });
 
-  console.log('promise', promise);
+  Promise.all([promise]).then(() => {
+    const { Sponsor: { disable_advertiser_content_label: disableAd } = {} } = siteData || {};
 
-  // const { Sponsor: { disable_advertiser_content_label: disableAd } = {} } = siteData || {};
-
-  /* if (disableAd === 'false') {
-    return sponsorName;
-  } */
+    if (disableAd === 'false') {
+      return sponsorName;
+    }
+    return null;
+  });
 
   return null;
 };
