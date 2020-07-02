@@ -55,7 +55,7 @@
 }
 
 .c-articlePadding {
-  padding: 0 30px;
+  padding: 0 $min-margin;
 
   @include breakpoint(desktop-sm) {
     padding: 0;

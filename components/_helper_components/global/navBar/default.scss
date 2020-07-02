@@ -44,7 +44,9 @@
       .nav-menu-toggle {
         left: 15px;
 
-        .nav-flyout-button {
+        .nav-flyout-button,
+        .nav-close-button {
+          display: block;
           background: none;
 
           &:before {
@@ -168,7 +170,6 @@
     height: 100%;
     box-sizing: border-box;
     width: 100%;
-    padding-left: 30px;
 
     @include breakpoint(desktop-sm) {
       padding-left: 0;
@@ -364,8 +365,8 @@
       @include text-styles(.875rem, 1, "Gordita-Medium");
     }
 
-    @include breakpoint(desktop-nav) {
-      @include text-styles(1.125rem, 1, "Gordita-Medium");
+    @include breakpoint(desktop-lg) {
+      @include text-styles(1rem, 1, "Gordita-Medium");
     }
   }
 
@@ -661,16 +662,11 @@
   }
 
   .nav-mobile-login {
-    padding-bottom: 26px;
-
-    @include breakpoint(desktop-sm) {
-      padding-bottom: 0;
-    }
-
     @include between-breakpoints(mobile, desktop-sm) {
 
       .nav-login {
         display: block;
+        padding-left: 0;
       }
     }
   }
@@ -685,12 +681,11 @@
 
     @include breakpoint(desktop-sm) {
       display: flex;
-      padding-top: 0;
+      padding: 0;
       padding-bottom: 0;
       margin-left: 20px;
       margin-bottom: 0;
       margin-top: 11px;
-      min-width: 150px;
       height: 54px;
 
       a {
@@ -786,7 +781,7 @@
   }
 
   .sub {
-    height: 88px;
+    min-height: 50px;
     width: 100%;
     border-radius: 6px;
     background-image: linear-gradient(to top, #04befe, #4481eb);
@@ -968,7 +963,8 @@
   }
 }
 
-.nav-flyout-button {
+.nav-flyout-button,
+.nav-close-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -1005,6 +1001,10 @@
   }
 }
 
+.nav-close-button {
+  display: none;
+}
+
 .sticky-padding {
   width: 100%;
   min-height: 92px;
@@ -1031,7 +1031,6 @@
   @include breakpoint(desktop-sm) {
     padding-left: 15px;
     padding-top: 10px;
-    min-width: 100px;
 
     img {
       vertical-align: top;

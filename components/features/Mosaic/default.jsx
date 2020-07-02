@@ -106,7 +106,7 @@ const Mosaic = (customFields = {}) => {
   }
   if (Array.isArray(data)) {
     return (
-      <div className="c-mosaic">
+      <div className="c-mosaic b-margin-bottom-d40-m20">
       <FeatureTitle title={title} moreURL={moreURL} />
         <div className="c-mosaic-box">
           {data.map((el, i) => {

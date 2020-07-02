@@ -8,7 +8,7 @@
 .c-sectionHome {
   display: block;
   max-width: 1600px;
-  padding: 0 30px;
+  padding: 0 $min-margin;
   margin-right: auto;
   margin-left: auto;
 
@@ -20,6 +20,12 @@
 
   @include breakpoint(desktop-lg) {
     width: 90%;
+  }
+
+  .c-contentElements {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -59,12 +65,11 @@
   // Since c-section will have b-margin-bottom-d40-m20 applied to it,
   // we remove margin from the bottom of the last paragraph (as long as it isn't an arcad container)
 
-  .b-margin-bottom-d40-m20:last-child:not(.arcad) {
-    margin-bottom: 0;
-  }
-
   .c-contentElements {
     width: 100%;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
 
     @include breakpoint(tablet) {
       padding: 0;
@@ -89,7 +94,7 @@
     .c-contentElements {
       @include breakpoint(tablet) {
         width: calc(100% - 330px);
-        padding: 0 30px 0 0;
+        padding: 0 $min-margin 0 0;
       }
 
       .arc_ad[class*="MP"] {
@@ -111,12 +116,12 @@
 
       @include breakpoint(tablet) {
         width: 300px;
+        float: right;
+        margin-right: -330px;
       }
 
       @include breakpoint(desktop-sm) {
-        float: right;
-        margin-right: -330px;
-
+    
         > :first-child:not(.arc_ad) {
           margin-top: 0;
         }

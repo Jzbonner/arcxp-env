@@ -59,7 +59,7 @@ const List = (customFields = {}) => {
 
   if (Array.isArray(data)) {
     return (
-      <div className="b-margin-bottom-d15-m10">
+      <div className="b-margin-bottom-d40-m20">
       <FeatureTitle title={title} moreURL={moreURL} />
         <div
           className={`c-homeListContainer ${getColumnsMap(

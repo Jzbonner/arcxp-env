@@ -55,6 +55,9 @@ a:visited {
 /* stylelint-disable */
 * {
   box-sizing: content-box;
+  &:focus {
+    outline: none;
+  }
 }
 /* stylelint-enable */
 

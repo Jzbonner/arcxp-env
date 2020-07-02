@@ -2,14 +2,12 @@
 @import "../../../src/styles/base/breakpoints";
 
 .c-listPage {
-  margin-top: 30px;
-  margin-bottom: 30px;
 
   .c-section {
     padding: 0 20px;
 
     @include breakpoint(desktop-sm) {
-      padding: 0 30px;
+      padding: 0 $min-margin;
     }
 
     .c-contentElements {
@@ -22,7 +20,7 @@
         @include breakpoint(tablet) {
           display: block;
           float: right;
-          margin-right: -384px;
+          margin-right: -330px;
         }
       }
     }

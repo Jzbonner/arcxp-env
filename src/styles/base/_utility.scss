@@ -24,7 +24,7 @@
 }
 
 .b-pageContainer {
-  width: calc(100% - 60px);
+  width: calc(100% - #{2 * $min-margin});
   margin: 0 auto;
 }
 
@@ -79,6 +79,14 @@
 
   @include breakpoint(desktop-sm) {
     margin-bottom: 2.5rem;
+  }
+}
+
+.b-padding-d30-m20 {
+  padding: 1.25rem 0;
+
+  @include breakpoint(desktop-sm) {
+    padding: 1.88rem 0;
   }
 }
 
