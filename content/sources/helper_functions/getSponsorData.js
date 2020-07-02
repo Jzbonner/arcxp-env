@@ -9,8 +9,8 @@ const getSponsorData = (sections, query) => {
     arcSite = 'ajc', type = 'navigation', hierarchy = 'default',
   } = query;
 
-  // console.log('access token', ARC_ACCESS_TOKEN);
   if (!sponsorSectionID) return null;
+
   console.log('content_base', CONTENT_BASE);
   console.log('access token', ARC_ACCESS_TOKEN);
 
