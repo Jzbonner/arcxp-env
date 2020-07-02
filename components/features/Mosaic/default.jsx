@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useAppContext, useFusionContext } from 'fusion:context';
+import get from 'lodash.get';
 import getProperties from 'fusion:properties';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import SectionLabel from '../../_helper_components/global/sectionLabel/default';
@@ -103,7 +104,6 @@ const Mosaic = (customFields = {}) => {
     </>
     );
   }
-
   if (Array.isArray(data)) {
     return (
       <div className="c-mosaic">
@@ -131,12 +131,10 @@ const Mosaic = (customFields = {}) => {
               tags,
               'community contributor',
             );
-
             const relativeURL = (websites
                 && websites[arcSite]
                 && websites[arcSite].website_url)
               || '/';
-
             const getLabelContentConfig = {
               sponsorName,
               isHyperlocalContent,
@@ -148,7 +146,6 @@ const Mosaic = (customFields = {}) => {
               isHideTimestampTrue,
               tags,
             };
-
             if (startIndex <= i && i < startIndex + itemLimit) {
               return (
                 <div
@@ -161,7 +158,7 @@ const Mosaic = (customFields = {}) => {
                    {getLabelContent(getLabelContentConfig)}
                   </div>
                   <span className="headline">
-                    {truncateHeadline(headlines.basic)}
+                    {truncateHeadline(get(headlines, 'basic', ''))}
                   </span>
                 </div>
               );
@@ -174,7 +171,6 @@ const Mosaic = (customFields = {}) => {
   }
   return null;
 };
-
 Mosaic.propTypes = {
   customFields: PropTypes.shape({
     content: PropTypes.contentConfig('collections', 'query-feed').tag({
@@ -192,5 +188,4 @@ Mosaic.propTypes = {
     }),
   }),
 };
-
 export default Mosaic;

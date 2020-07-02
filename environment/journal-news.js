@@ -10,4 +10,7 @@ export default {
     tagManager: 'GTM',
     containerId: 'GTM-W3VLHBK',
   },
+  video: {
+    cmsId: 2536851,
+  },
 };

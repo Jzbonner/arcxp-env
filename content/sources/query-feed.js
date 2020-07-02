@@ -66,13 +66,11 @@ const fetch = (query) => {
     if (mustIncludeAllTags && mustIncludeAllTags.toLowerCase() === 'yes') {
       const tags = itemsToArray(includeTags);
       tags.forEach((tag) => {
-        builder.andQuery('term', `${tag.includes('-') || tag.includes(' ') ? 'taxonomy.tags._id' : 'taxonomy.tags.text'}`, tag);
+        builder.andQuery('term', 'taxonomy.tags._id', tag);
       });
     } else {
       const tags = itemsToArray(includeTags);
-      tags.forEach((tag) => {
-        builder.andQuery('terms', `${tag.includes('-') || tag.includes(' ') ? 'taxonomy.tags._id' : 'taxonomy.tags.text'}`, tags);
-      });
+      builder.andQuery('terms', 'taxonomy.tags._id', tags);
     }
   }
   if (excludeDistributor) {
@@ -93,9 +91,7 @@ const fetch = (query) => {
   }
   if (excludeTags) {
     const tags = itemsToArray(excludeTags);
-    tags.forEach((tag) => {
-      builder.notQuery('terms', `${tag.includes('-') || tag.includes(' ') ? 'taxonomy.tags._id' : 'taxonomy.tags.text'}`, tags);
-    });
+    builder.notQuery('terms', 'taxonomy.tags._id', tags);
   }
   const body = builder.build();
   const newBody = JSON.stringify(body);
