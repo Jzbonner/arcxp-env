@@ -7,30 +7,27 @@
     position: relative;
     text-align: center;
     display: block;
-    margin: 0 auto;
-    padding: 20px 0;
-
-    @include advertisement-label;
+    margin: 30px auto 20px;
   }
 }
 
-.teads-ad {
+amp-ad:not([hidden]) + .ampAdLabel {
+  @include advertisement-label;
+}
 
-  &.c-section {
+amp-fx-flying-carpet:not([hidden]) + .ampAdLabel {
+  @include advertisement-label;
+}
 
-    .ampAd {
+.teads-ad.c-section {
 
-      &:not([hidden]) {
-        
-        &:before {
-          content: "";
-        }
+  .ampAd {
+
+    &:not([hidden]) {
+    
+      &:before {
+        content: "";
       }
     }
   }
-}
-
-amp-fx-flying-carpet.ampAd:not([hidden]) {
-  margin: 0;
-  padding: 0;
 }
