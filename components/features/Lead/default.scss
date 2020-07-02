@@ -4,6 +4,11 @@
   /////////////////
   // Common styles
   ////////////////
+  width: 100%;
+  
+  @include between-breakpoints(tablet, desktop-sm) {
+    margin-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
+  }
 
   a {
     color: inherit;
