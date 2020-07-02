@@ -26,10 +26,6 @@
 .sticky-logo {
   display: block;
   margin-top: 0;
-  
-  &.ajc {
-    margin-top: 10px;
-  }
 }
 
 .sticky-logo-homepage {
@@ -37,7 +33,6 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 7px;
   position: absolute;
   left: 0;
   right: 0;
@@ -46,28 +41,28 @@
     display: none;
   }
 
+  &.ajc {
+    margin-top: 7px;
+  }
+
   img {
     width: 75px;
 
     &.dayton {
       width: 210px;
-      margin-top: 7px;
     }
   
     &.daytondailynews {
       width: 210px;
-      margin-top: 14px;
     }
   
     &.journal-news {
       width: 100%;
       max-width: 151px;
-      margin-top: 15px;
     }
   
     &.springfieldnewssun {
       width: 240px;
-      margin-top: 16px;
     }
   }
 
@@ -144,6 +139,14 @@
   z-index: 11;
   margin-top: 5px;
 
+  &.ajc {
+    margin-top: 5px;
+  }
+
+  &.margin-top {
+    margin-top: 0;
+  }
+
   @include breakpoint(desktop-sm) {
     margin-left: 0;
     margin-top: 0;
@@ -168,6 +171,7 @@
       &.dayton {
         width: 156px;
         height: 35px;
+        margin-top: 5px;
       }
 
       &.daytondailynews {
