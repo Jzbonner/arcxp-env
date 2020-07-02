@@ -302,6 +302,10 @@
 
       @include text-styles(.875rem, 1, "Gordita-Medium");
     }
+
+    @include breakpoint(desktop-lg) {
+      @include text-styles(1rem, 1, "Gordita-Medium");
+    }
   }
 
   .nav-separator {

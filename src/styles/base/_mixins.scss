@@ -133,10 +133,6 @@
   padding: 20px 0;
   box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
 
-  &:not(:first-child) {
-    margin-top: 20px;
-  }
-
   .arcad {
     width: 100vw;
     max-width: 1600px;
@@ -165,7 +161,7 @@
   }
 
   @include breakpoint(desktop-lg) {
-    width: 111.1112%;
+    width: 100vw;
     margin-left: -5.5556%;
     margin-right: -5.5556%;
   }

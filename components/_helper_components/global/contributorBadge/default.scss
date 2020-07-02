@@ -35,5 +35,9 @@
   .c-contributorBadge {
     height: 25px;
     margin: 0;
+    
+    img {
+      border-radius: 0;
+    }
   }
-}
+}   

@@ -12,7 +12,7 @@
   display: inline-block;
   padding: 5px 13px;
 
-  @include text-styles(.875rem, 1, "Gordita");
+  @include text-styles(.5rem, 1, "Gordita");
 }
 
 .c-sponsorOverlay,
@@ -23,25 +23,18 @@
   background: rgba(55, 58, 60, .9);
   color: #fff;
   font-weight: 600;
-  height: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
+  text-align: center;
+  padding: 5px;
 
-  @include text-styles(.625rem, 1, "Gordita");
+  @include text-styles(.625rem, 1.25, "Gordita");
 
   @include breakpoint(tablet) {
     bottom: 3px;
-  }
-}
-
-.c-homepageContent {
-  padding-top: 1.25rem;
-
-  @include breakpoint(desktop-sm) {
-    padding-top: 2.5rem;
   }
 }

@@ -28,8 +28,8 @@
       background: linear-gradient(to top, #04befe, #4481eb);
       border-radius: 25px;
       box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
-      right: 12px;
-      bottom: 12px;
+      right: 10px;
+      bottom: 10px;
       z-index: 25;
       overflow: hidden;
 
@@ -96,8 +96,8 @@
   @include breakpoint(desktop-sm) {
     height: 40px;
     width: 40px;
-    right: 12px;
-    bottom: 12px;
+    right: 10px;
+    bottom: 10px;
 
     .tease-icon {
       width: 52%;
@@ -184,8 +184,8 @@
 
 .column-1 .c-homeList .c-image-component .image-component-image .c-tease-icon,
 .column-3 .c-homeList .c-image-component .image-component-image .c-tease-icon {
-  right: 8px;
-  bottom: 12px;
+  right: 10px;
+  bottom: 10px;
   width: 30px;
   height: 30px;
 
