@@ -94,7 +94,7 @@
     .c-contentElements {
       @include breakpoint(tablet) {
         width: calc(100% - 330px);
-        padding: 0 15px 0 0;
+        padding: 0 $min-margin 0 0;
       }
 
       .arc_ad[class*="MP"] {

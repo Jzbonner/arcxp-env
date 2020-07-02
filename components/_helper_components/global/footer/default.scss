@@ -121,7 +121,7 @@
     @include breakpoint(desktop-sm) {
       border-top: none;
       flex: 1;
-      padding: 0 15px 0 0;
+      padding: 0 $min-margin 0 0;
 
       &:last-child {
         padding: 0;
