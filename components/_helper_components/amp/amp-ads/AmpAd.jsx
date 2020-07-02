@@ -5,7 +5,7 @@ import { ENVIRONMENT } from 'fusion:environment';
 import buildJsonObject from './_helper_functions/buildJsonObject';
 
 export const AmpAd = ({
-  adSlot = '', uuid = '', width = '', height = '', taxonomy, multiSize, multiSizeValidation,
+  adSlot = '', uuid = '', width = '', height = '', taxonomy, multiSize, multiSizeValidation, flyingCarpet = false,
 }) => {
   const { dfp_id: dfpid, adsPath } = getProperties();
   if (!dfpid) return null;
@@ -23,20 +23,25 @@ export const AmpAd = ({
   const jsonObject = buildJsonObject(adSlot, uuid, topics);
   const dataSlot = `${dfpid}/${currentEnv.toLowerCase().indexOf('prod') === -1 ? 'TEST_' : ''}${adsPath}${path}`;
 
+  const offsetHeight = parseInt(height, 10) + 20;
+
   return (
-    <amp-ad
-      width={width}
-      height={height}
-      layout="fixed"
-      type="doubleclick"
-      data-loading-strategy ="1.25"
-      data-slot={dataSlot}
-      json={jsonObject}
-      class="ampAd"
-      data-multi-size={multiSize}
-      data-multi-size-validation={multiSizeValidation}
-    >
-    </amp-ad>
+    <>
+      <amp-ad
+        width={width}
+        height={height}
+        layout="fixed"
+        type="doubleclick"
+        data-loading-strategy ="1.25"
+        data-slot={dataSlot}
+        json={jsonObject}
+        class="ampAd"
+        data-multi-size={multiSize}
+        data-multi-size-validation={multiSizeValidation}
+      >
+      </amp-ad>
+      { !flyingCarpet && <div style={{ transform: `translate(0, -${offsetHeight}px)` }}className='ampAdLabel'></div> }
+    </>
   );
 };
 
@@ -48,6 +53,7 @@ AmpAd.propTypes = {
   taxonomy: PropTypes.object,
   multiSize: PropTypes.string,
   multiSizeValidation: PropTypes.string,
+  flyingCarpet: PropTypes.bool,
 };
 
 export default AmpAd;

@@ -75,7 +75,9 @@ const StoryPageLayout = () => {
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
-  const ampMP02 = () => <AmpAd adSlot="MP02" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
+  const ampMP02 = () => <div className='ampAd'>
+    <AmpAd adSlot="MP02" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
+    </div>;
   const ampMP03 = () => <AmpAd adSlot="MP03" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
 
   const { by: authorData } = credits || {};
@@ -107,11 +109,12 @@ const StoryPageLayout = () => {
     if (ampPage) {
       if (isHyperlocalContent) {
         return (
-          <div className='c-section b-margin-bottom-d30-m20'>
+          <div className='c-section'>
             <amp-fx-flying-carpet height="300px" class="ampAd">
             <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'500'} taxonomy={taxonomy} componentName='ArcAd'
-            multiSizeValidation={'false'}/>
+            multiSizeValidation={'false'} flyingCarpet={true}/>
           </amp-fx-flying-carpet>
+          <div style={{ transform: `translate(0, -${320}px)` }}className='ampAdLabel'></div>
         </div>
         );
       }
@@ -191,7 +194,7 @@ const StoryPageLayout = () => {
             </div>
           )}
           {!noAds && ampPage && !isHyperlocalContent && (
-            <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
+              <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
           <Section
             elements={filteredContentElements}
@@ -207,7 +210,7 @@ const StoryPageLayout = () => {
             </div>
           )}
           {!noAds && ampPage && isHyperlocalContent && (
-            <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
+              <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
           <Section
             elements={filteredContentElements}
@@ -255,7 +258,7 @@ const StoryPageLayout = () => {
             <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
           )}
           {!noAds && ampPage && (
-            <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
+              <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
         </article>
       </main>
