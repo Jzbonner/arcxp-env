@@ -20,7 +20,7 @@ export default (arcSite, newBody, size = 100) => {
   let i = 1;
 
   while (i <= numberOfFetches && i < 10) {
-    let requestUri = `${CONTENT_BASE}/content/v4/search/published?body=${newBody}&website=${arcSite}`;
+    let requestUri = `${CONTENT_BASE}/content/v4/search/published?body=${newBody}&website=${arcSite}&sort=display_date:desc`;
     requestUri += `&from=${fetchStart}`;
     requestUri += `&size=${fetchSize}`;
 
