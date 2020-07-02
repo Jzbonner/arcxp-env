@@ -31,4 +31,5 @@ export default {
     containerName: 'taboola-dayton-daily-news-custom-feed',
     placementName: 'Dayton Daily News Custom Feed',
   },
+  favicon: '/resources/icons/favicons/Ohio/dayton-daily-news-favicon.ico',
 };

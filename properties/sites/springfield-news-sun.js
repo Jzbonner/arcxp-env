@@ -31,4 +31,5 @@ export default {
     containerName: 'taboola-springfield-news-sun-custom-feed',
     placementName: 'Springfield News Sun Custom Feed',
   },
+  favicon: '/resources/icons/favicons/Ohio/springfield-news-sun-favicon.ico',
 };

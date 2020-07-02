@@ -22,6 +22,7 @@ const SiteMetaAmp = () => {
     seoTitle,
     description,
     isNonContentPage,
+    favicon,
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
 
@@ -31,7 +32,7 @@ const SiteMetaAmp = () => {
   return (
     <>
       <link rel="apple-touch-icon" href={deployment(`${contextPath}/resources/images/favicon-apple-touch-icon.png`)} />
-      <link rel="shortcut icon" href={deployment(`${contextPath}/resources/images/favicon.ico`)} />
+      <link rel="shortcut icon" href={deployment(`${contextPath}${favicon}`)} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={thumbnailImage} />

@@ -26,4 +26,5 @@ export default {
   taboola: {
     dataPublisher: 'cox-dayton',
   },
+  favicon: '/resources/icons/favicons/Ohio/dayton-favicon.ico',
 };
