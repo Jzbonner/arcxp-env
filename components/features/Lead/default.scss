@@ -224,7 +224,7 @@
       .c-homeList {
         box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
         padding: 20px 15px;
-        margin: 0 -$min-margin 1.5rem;
+        margin-bottom: 1rem;
 
         @include breakpoint(tablet) {
           margin-right: 0;
