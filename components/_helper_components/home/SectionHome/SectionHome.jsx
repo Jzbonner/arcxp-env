@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SectionHomepage = ({
-  feature, rightColContent, rightRailContent, threeCol,
+  feature, rightColContent, rightRailContent, colLayout,
 }) => {
   if (feature || rightColContent || rightRailContent) {
     let parentClass = 'c-sectionHome ';
@@ -11,12 +11,15 @@ const SectionHomepage = ({
     } else {
       parentClass += rightRailContent ? ' with-rightRail' : ' full-width';
     }
-    if (threeCol) {
-      parentClass += ' three-col';
+    if (colLayout) {
+      parentClass += ' col-layout';
     }
     return (
       <div className={parentClass}>
-        <div className="c-contentElements">{feature}</div>
+        <div className="c-contentElements">
+          {!Array.isArray(feature) && feature}
+          {Array.isArray(feature) && feature.map(feat => feat)}
+        </div>
         {rightColContent && <div className="c-contentElements">{rightColContent}</div>}
         {rightRailContent && <div className="c-rightRail">{rightRailContent}</div>}
       </div>
@@ -29,7 +32,7 @@ SectionHomepage.propTypes = {
   feature: PropTypes.object,
   rightColContent: PropTypes.object,
   rightRailContent: PropTypes.object,
-  threeCol: PropTypes.bool,
+  colLayout: PropTypes.bool,
 };
 
 export default SectionHomepage;

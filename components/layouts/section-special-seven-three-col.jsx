@@ -8,7 +8,9 @@ import SectionOutput from '../_helper_components/section/SectionOutput';
 const SectionLayout = (props) => {
   const [
     zone1,
-    zone2,
+    zone2Column1,
+    zone2Column2,
+    zone2Column3,
     zone3,
     zone4,
     zone4RightRail,
@@ -21,7 +23,7 @@ const SectionLayout = (props) => {
   const { layout } = appContext;
   const zonesCollection = [
     { content: zone1 },
-    { content: zone2, threeCol: true },
+    { content: [zone2Column1, zone2Column2, zone2Column3], colLayout: true },
     { content: zone3 },
     { content: zone4, rightRailZone: zone4RightRail },
     { content: zone5 },
@@ -34,7 +36,9 @@ const SectionLayout = (props) => {
 
 SectionLayout.sections = [
   'Zone 1',
-  'Zone 2 Three Column',
+  'Zone 2 (column 1)',
+  'Zone 2 (column 2)',
+  'Zone 2 (column 3)',
   'Zone 3',
   'Zone 4',
   'Right Rail (zone 4)',

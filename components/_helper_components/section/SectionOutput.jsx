@@ -21,12 +21,12 @@ const SectionOutput = ({ zones, layout }) => (
       {zones && (
         zones.map((zone, i) => {
           const {
-            content, rightRailZone, rightHalfZone, threeCol,
+            content, rightRailZone, rightHalfZone, colLayout,
           } = zone;
           return <SectionHome feature={content}
           rightRailContent={rightRailZone}
           rightColContent={rightHalfZone}
-          threeCol={threeCol}
+          colLayout={colLayout}
           key={`section${i}`}/>;
         })
       )}
