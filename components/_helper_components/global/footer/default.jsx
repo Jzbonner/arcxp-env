@@ -56,7 +56,7 @@ const Footer = () => {
       <div className="logo-row">
         <div className="col">
           <a href="/">
-            <img className={`footer-logo ${siteName}`} src={deployment(`${contextPath}${footerLogo}`)} alt="logo" />
+            <img className={`footer-logo ${siteName.toLowerCase()}`} src={deployment(`${contextPath}${footerLogo}`)} alt="logo" />
           </a>
         </div>
         <div className="col">
