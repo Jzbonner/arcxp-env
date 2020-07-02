@@ -30,8 +30,6 @@ const getSponsorData = (sections, query) => {
 
   console.log('promise', promise);
 
-  // console.log('siteData', siteData);
-
   // const { Sponsor: { disable_advertiser_content_label: disableAd } = {} } = siteData || {};
 
   /* if (disableAd === 'false') {
