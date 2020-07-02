@@ -85,6 +85,7 @@ const Gallery = (props) => {
     OFF: 'OFF',
     RESIZE: 'RESIZE',
     AD_RESET: 'AD_RESET',
+    UPDATE_CLICK_FUNCS: 'UPDATE_CLICK_FUNCS',
   };
 
   let mobileElemData;
@@ -148,6 +149,7 @@ const Gallery = (props) => {
 
   const dispatchGalleryOpenEvent = () => {
     if (!hasOpened) dataLayer.push({ event: 'photoGalleryOpened' }, { galleryName: `${galHeadline || headline || ''}` });
+    setCurrentAction(actions.UPDATE_CLICK_FUNCS);
     setOpenedState(true);
   };
 
@@ -156,13 +158,13 @@ const Gallery = (props) => {
   };
 
   const handelImageModalView = (imageSrc) => {
+    if (!hasOpened) dispatchGalleryOpenEvent();
     if (!modalVisible) {
       setModalVisibility(true);
     } else {
       setModalVisibility(false);
     }
 
-    if (!hasOpened) dispatchGalleryOpenEvent();
     if (imageSrc) setCurrectImageSrc(imageSrc);
   };
 
@@ -228,8 +230,8 @@ const Gallery = (props) => {
   };
 
   const clickFuncs = {
-    prev: () => changeIndex(actions.PREV, null, true),
-    next: () => changeIndex(actions.NEXT, null, true),
+    prev: () => changeIndex(actions.PREV, null, true, hasOpened),
+    next: () => changeIndex(actions.NEXT, null, true, hasOpened),
     modal: src => handelImageModalView(src),
   };
 
@@ -320,7 +322,7 @@ const Gallery = (props) => {
 
   const renderDesktopGalleryElements = (elements) => {
     const finalizedElements = handleImageFocus((elements), {
-      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction,
+      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction, hasOpened,
     }, clickFuncs);
 
     setElementData(finalizedElements);
@@ -470,8 +472,13 @@ const Gallery = (props) => {
           setVisibility(true);
         }
       };
+
+      if (elementData && hasOpened && !isMobile && currentAction === actions.UPDATE_CLICK_FUNCS) {
+        renderDesktopGalleryElements([...elementData]);
+        setCurrentAction('');
+      }
     }
-  }, [isAdVisible, currentIndex, currentAction, translateX, elementData, captionData, galleryEl]);
+  }, [isAdVisible, currentIndex, currentAction, translateX, elementData, captionData, galleryEl, hasOpened]);
 
   useEffect(() => {
     if (!isAdVisible && !isMobile) renderCaptionByCurrentIndex();
@@ -490,7 +497,7 @@ const Gallery = (props) => {
         const adRemovedElementArray = removeGalleryAd();
         setAdVisibleState(false);
         const finalizedElements = handleImageFocus((adRemovedElementArray), {
-          isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex,
+          isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, hasOpened,
         }, clickFuncs);
 
         setElementData(finalizedElements);
