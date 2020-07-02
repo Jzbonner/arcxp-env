@@ -124,7 +124,7 @@
     }
   }
 
-  &.three-col {
+  &.col-layout {
     @include breakpoint(tablet) {
       width: 90%;
     }
@@ -140,7 +140,8 @@
 
     .c-contentElements {
       display: flex;
-      flex-wrap: wrap;
+      align-items: flex-start;
+      flex-flow: row wrap;
 
       @include breakpoint(desktop-sm) {
         flex-wrap: initial;
