@@ -53,5 +53,6 @@
   "adsA9Id": "3970",
   "adsPrebidEnabled": true,
   "adsPrebidTimeout": 1500,
-  "weatherLocationId": 348181
+  "weatherLocationId": 348181,
+  "favicon": "/resources/icons/favicons/AJC/favicon.ico"
 }

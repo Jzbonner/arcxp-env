@@ -36,7 +36,9 @@ const DefaultOutputType = (props) => {
     adsPrebidEnabled,
     devconActive,
     devconKey,
+    favicon,
   } = getProperties(currentSite) || {};
+
   const { isEnabled: connextIsEnabled = false, clientCode, environment: connextEnv } = connext;
   const {
     type, taxonomy, canonical_url: articleURL, _id: uuid,
@@ -74,7 +76,7 @@ const DefaultOutputType = (props) => {
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} />}
         {!isHyperlocalContent && <TaboolaHeader/>}
         {currentSite && <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)} />}
-        <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
+        <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}${favicon}`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
       </head>

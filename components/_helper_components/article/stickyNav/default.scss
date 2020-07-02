@@ -50,23 +50,24 @@
     width: 75px;
 
     &.dayton {
-      width: 260px;
-      margin-top: -3px;
+      width: 210px;
+      margin-top: 7px;
     }
   
     &.daytondailynews {
-      width: 260px;
-      margin-top: -2px;
+      width: 210px;
+      margin-top: 14px;
     }
   
     &.journal-news {
-      width: 260px;
-      margin-top: -10px;
+      width: 100%;
+      max-width: 151px;
+      margin-top: 15px;
     }
   
     &.springfieldnewssun {
-      width: 256px;
-      margin-top: 5px;
+      width: 240px;
+      margin-top: 16px;
     }
   }
 

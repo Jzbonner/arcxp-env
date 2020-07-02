@@ -8,7 +8,7 @@ const getContentMeta = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
-  const { siteName } = getProperties(arcSite) || {};
+  const { siteName, favicon } = getProperties(arcSite) || {};
   const {
     globalContent,
     layout,
@@ -163,6 +163,7 @@ const getContentMeta = () => {
     secondarySection,
     topSectionName,
     isNonContentPage,
+    favicon,
   };
 };
 

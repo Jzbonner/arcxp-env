@@ -31,4 +31,5 @@ export default {
     containerName: 'taboola-journal-news-custom-feed',
     placementName: 'Journal News Custom Feed',
   },
+  favicon: '/resources/icons/favicons/Ohio/journal-news-favicon.ico',
 };

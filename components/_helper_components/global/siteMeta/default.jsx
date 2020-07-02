@@ -22,6 +22,7 @@ const SiteMeta = () => {
     seoTitle,
     description,
     isNonContentPage,
+    favicon,
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
 
@@ -31,7 +32,7 @@ const SiteMeta = () => {
   return (
     <>
       <link rel="apple-touch-icon" href={deployment(`${contextPath}/resources/images/favicon-apple-touch-icon.png`)} />
-      <link rel="shortcut icon" href={deployment(`${contextPath}/resources/images/favicon.ico`)} />
+      <link rel="shortcut icon" href={deployment(`${contextPath}${favicon}`)} />
       {!isNativoLandingPage && <link rel="canonical" href={url} />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={description} />

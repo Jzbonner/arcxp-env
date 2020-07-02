@@ -134,6 +134,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    min-height: 52px;
 
     @include breakpoint(dekstop-sm) {
       display: none;
@@ -168,7 +169,6 @@
     max-width: 320px;
     max-height: 65px;
     height: 100%;
-    box-sizing: border-box;
     width: 100%;
 
     @include breakpoint(desktop-sm) {
@@ -176,6 +176,11 @@
       height: 110px;
       padding-top: 30px;
       max-height: 8vw;
+      box-sizing: border-box;
+    }
+
+    &.ajc {
+      box-sizing: border-box;
     }
 
     &.dayton {
@@ -190,8 +195,8 @@
     }
 
     &.daytondailynews {
-      width: 210px;
-      margin-top: 14px;
+      width: 260px;
+      margin-top: -2px;
 
       @include breakpoint(desktop-sm) {
         max-width: 400px;
@@ -202,7 +207,6 @@
 
     &.journal-news {
       width: 260px;
-      margin-top: -10px;
 
       @include breakpoint(desktop-sm) {
         min-width: 300px;
@@ -211,13 +215,12 @@
     }
 
     &.springfieldnewssun {
-      margin-top: 5px;
       width: 265px;
       
       @include breakpoint(desktop-sm) {
+        width: 400px;
         max-width: 400px;
         min-width: 300px;
-        margin-top: 0;
       }
     }
   }
@@ -248,7 +251,7 @@
 
     &.journal-news {
       max-width: 250px;
-      margin-top: 5px;
+      margin-top: -5px;
     }
 
     &.springfieldnewssun {
