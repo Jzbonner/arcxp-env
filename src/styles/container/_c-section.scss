@@ -21,6 +21,12 @@
   @include breakpoint(desktop-lg) {
     width: 90%;
   }
+
+  .c-contentElements {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .c-section,
@@ -110,12 +116,12 @@
 
       @include breakpoint(tablet) {
         width: 300px;
+        float: right;
+        margin-right: -330px;
       }
 
       @include breakpoint(desktop-sm) {
-        float: right;
-        margin-right: -330px;
-
+    
         > :first-child:not(.arc_ad) {
           margin-top: 0;
         }
@@ -160,14 +166,5 @@
 
   .insertedAd {
     height: 200px;
-  }
-}
-
-main:not(l-article-basic) {
-  
-  .c-contentElements {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 }

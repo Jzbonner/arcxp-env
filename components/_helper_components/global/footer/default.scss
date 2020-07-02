@@ -106,7 +106,7 @@
       max-width: 1600px;
       flex-wrap: wrap;
       margin: 0 auto;
-      width: calc(100% - 60px);
+      width: calc(100% - #{2 * $min-margin});
     }
   }
 

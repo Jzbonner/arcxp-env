@@ -101,7 +101,7 @@
 
     .c-staffers-header {
       margin-bottom: 16px;
-      width: calc(100% - 30px);
+      width: calc(100% - #{2 * $min-margin});
       display: flex;
 
       h3 {

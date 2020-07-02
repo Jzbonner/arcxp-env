@@ -24,7 +24,7 @@
 }
 
 .b-pageContainer {
-  width: calc(100% - 60px);
+  width: calc(100% - #{2 * $min-margin});
   margin: 0 auto;
 }
 

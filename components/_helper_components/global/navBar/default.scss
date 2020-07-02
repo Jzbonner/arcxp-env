@@ -44,7 +44,9 @@
       .nav-menu-toggle {
         left: 15px;
 
-        .nav-flyout-button {
+        .nav-flyout-button,
+        .nav-close-button {
+          display: block;
           background: none;
 
           &:before {
@@ -594,12 +596,6 @@
   }
 
   .nav-mobile-login {
-    padding-bottom: 26px;
-
-    @include breakpoint(desktop-sm) {
-      padding-bottom: 0;
-    }
-
     @include between-breakpoints(mobile, desktop-sm) {
 
       .nav-login {
@@ -901,7 +897,8 @@
   }
 }
 
-.nav-flyout-button {
+.nav-flyout-button,
+.nav-close-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -936,6 +933,10 @@
     top: auto;
     bottom: -400%;
   }
+}
+
+.nav-close-button {
+  display: none;
 }
 
 .sticky-padding {
