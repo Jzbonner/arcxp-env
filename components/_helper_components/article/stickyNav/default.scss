@@ -37,7 +37,7 @@
   left: 0;
   right: 0;
   margin-top: 7px;
-  
+
   @include breakpoint(desktop-sm) {
     display: none;
   }
@@ -136,10 +136,6 @@
   z-index: 11;
   margin-top: 5px;
 
-  &.ajc {
-    margin-top: 5px;
-  }
-
   @include breakpoint(desktop-sm) {
     margin-left: 0;
     margin-top: 0;
@@ -164,7 +160,6 @@
       &.dayton {
         width: 156px;
         height: 35px;
-        margin-top: 5px;
       }
 
       &.daytondailynews {
