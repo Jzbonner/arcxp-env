@@ -23,7 +23,7 @@ amp-fx-flying-carpet:not([hidden]) + .ampAdLabel {
 
   .ampAd {
 
-    &:not([hidden]) {
+    &:not([hidden]) + .ampAdLabel {
     
       &:before {
         content: "";
