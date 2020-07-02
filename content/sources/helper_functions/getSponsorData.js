@@ -26,7 +26,7 @@ const getSponsorData = (sections, query) => {
       siteData = { ...data };
     });
 
-  Promise.all([promise]).then(() => {
+  return Promise.all([promise]).then(() => {
     const { Sponsor: { disable_advertiser_content_label: disableAd } = {} } = siteData || {};
 
     if (disableAd === 'false') {
@@ -34,8 +34,6 @@ const getSponsorData = (sections, query) => {
     }
     return null;
   });
-
-  return null;
 };
 
 export default getSponsorData;
