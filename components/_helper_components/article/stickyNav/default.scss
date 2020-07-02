@@ -6,9 +6,13 @@
   border: none;
   max-width: 1600px;
   margin: 0 auto;
-  width: 94%;
+  width: calc(100% - #{2 * $min-margin});
   display: none;
   align-items: center;
+
+  @include breakpoint(tablet) {
+    width: calc(100% - 85px);
+  }
 
   &.is-visible {
     display: flex;
@@ -33,10 +37,10 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-
-  &.ajc {
-    margin-top: 10px;
-  }
+  margin-top: 7px;
+  position: absolute;
+  left: 0;
+  right: 0;
 
   @include breakpoint(desktop-sm) {
     display: none;
@@ -138,9 +142,11 @@
   align-items: center;
   width: min-content;
   z-index: 11;
+  margin-top: 5px;
 
   @include breakpoint(desktop-sm) {
     margin-left: 0;
+    margin-top: 0;
     justify-content: left;
   }
 
@@ -196,7 +202,7 @@
       flex-direction: column;
       position: absolute;
       right: -50px;
-      top: -5px;
+      top: -10px;
       overflow: hidden;
       height: 45px;
 

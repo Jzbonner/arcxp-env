@@ -19,7 +19,7 @@ article {
     font-style: italic;
     content: "Article continues below";
     margin-bottom: 25px;
-    padding: 0 30px;
+    padding: 0 $min-margin;
   }
 
   .ntv-moap,

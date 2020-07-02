@@ -40,7 +40,7 @@ const DesktopNav = ({
   ${isMobile ? 'nav-mobile' : ''}
   ${stickyActive && !isMobile ? 'is-hidden' : ''}`}>
     <div className='nav-menu-toggle' onClick={(e) => { e.preventDefault(); setToggle(false); }}>
-      <div className='nav-flyout-button'></div>
+        <div className='nav-close-button'></div>
     </div>
     <div className='nav-menu-header'>
       <a href={rootDirectory}>

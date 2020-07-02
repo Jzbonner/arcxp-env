@@ -1,3 +1,5 @@
+@import "./variables";
+
 @mixin text-styles($size, $line-height, $font: "") {
   font-size: $size;
   line-height: $line-height;
@@ -39,7 +41,7 @@
 @mixin section() {
   display: block;
   max-width: 1080px;
-  padding: 0 30px;
+  padding: 0 $min-margin;
   margin-right: auto;
   margin-left: auto;
 
@@ -128,13 +130,9 @@
 // styling for "full width" ads on home/section pages
 
 @mixin arc-ad-full-width {
-  margin: 40px 0;
   padding: 20px 0;
   box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
-
-  &:not(:first-child) {
-    margin-top: 20px;
-  }
+  width: 100vw;
 
   .arcad {
     width: 100vw;
@@ -149,24 +147,12 @@
     }
   }
 
-  @include between-breakpoints(mobile, desktop-lg) {
-    margin-left: -30px;
-    margin-right: -30px;
-    width: calc(100% + 60px);
-  }
-
   @include breakpoint(tablet) {
 
     .arcad {
       margin: 0 auto;
       padding-bottom: 20px;
     }
-  }
-
-  @include breakpoint(desktop-lg) {
-    width: 111.1112%;
-    margin-left: -5.5556%;
-    margin-right: -5.5556%;
   }
 }
 
