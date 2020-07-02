@@ -104,7 +104,6 @@ const Mosaic = (customFields = {}) => {
     </>
     );
   }
-
   if (Array.isArray(data)) {
     return (
       <div className="c-mosaic">
@@ -132,12 +131,10 @@ const Mosaic = (customFields = {}) => {
               tags,
               'community contributor',
             );
-
             const relativeURL = (websites
                 && websites[arcSite]
                 && websites[arcSite].website_url)
               || '/';
-
             const getLabelContentConfig = {
               sponsorName,
               isHyperlocalContent,
@@ -149,7 +146,6 @@ const Mosaic = (customFields = {}) => {
               isHideTimestampTrue,
               tags,
             };
-
             if (startIndex <= i && i < startIndex + itemLimit) {
               return (
                 <div
@@ -175,7 +171,6 @@ const Mosaic = (customFields = {}) => {
   }
   return null;
 };
-
 Mosaic.propTypes = {
   customFields: PropTypes.shape({
     content: PropTypes.contentConfig('collections', 'query-feed').tag({
@@ -193,5 +188,4 @@ Mosaic.propTypes = {
     }),
   }),
 };
-
 export default Mosaic;
