@@ -36,13 +36,10 @@
   position: absolute;
   left: 0;
   right: 0;
-
+  margin-top: 7px;
+  
   @include breakpoint(desktop-sm) {
     display: none;
-  }
-
-  &.ajc {
-    margin-top: 7px;
   }
 
   img {
@@ -141,10 +138,6 @@
 
   &.ajc {
     margin-top: 5px;
-  }
-
-  &.margin-top {
-    margin-top: 0;
   }
 
   @include breakpoint(desktop-sm) {
