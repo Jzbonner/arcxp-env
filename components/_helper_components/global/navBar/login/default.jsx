@@ -61,8 +61,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   useWindowEvent('connextIsSubscriber', 'authenticated');
 
   return (
-    <li className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}
-    ${userStateRef.current === 'logged-out' ? 'logged-out' : 'logged-in'}`}>
+    <li className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`}>
       <div
         data-mg2-action={userStateRef.current === 'logged-out' ? 'register' : ''}
         onClick={(e) => { e.preventDefault(); setShowUserMenu(!showUserMenuRef.current); }}>

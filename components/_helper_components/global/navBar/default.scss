@@ -687,14 +687,6 @@
       margin-top: 11px;
       height: 54px;
 
-      &.logged-out {
-        min-width: 86px;
-      }
-
-      &.logged-in {
-        min-width: 116px;
-      }
-
       a {
         color: #2e81b7;
       }
@@ -724,17 +716,6 @@
         &-flyout {
           height: auto;
         }
-      }
-    }
-
-    @include breakpoint(desktop-nav) {
-
-      &.logged-out {
-        min-width: 99px;
-      }
-
-      &.logged-in {
-        min-width: 138px;
       }
     }
 
