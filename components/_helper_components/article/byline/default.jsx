@@ -1,20 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useFusionContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
-import fetchEnv from '../../global/utils/environment';
+import { useAppContext } from 'fusion:context';
 import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import './default.scss';
 
 const Byline = ({ by = [], sections }) => {
   let byline;
 
-  const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
-  const { siteName } = getProperties(arcSite);
-  let site = siteName.toLowerCase();
-  site = site ? site.replace(/w/gi, '') : '';
-  const env = fetchEnv();
+  const appContext = useAppContext();
+  const { contextPath } = appContext;
 
   const handleOrganization = (authors = []) => {
     const authorsAndOrgs = authors.map((author) => {
@@ -52,7 +46,7 @@ const Byline = ({ by = [], sections }) => {
       if (!name) return null;
 
       let authorUrl = `/staff/${firstName}-${lastName}/${id}`;
-      authorUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${authorUrl}/`;
+      authorUrl = `${contextPath}/${authorUrl}/`;
 
       return <span key={name}>
         {i === 0 && !name.includes('By ') && 'By '}
