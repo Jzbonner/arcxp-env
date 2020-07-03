@@ -26,10 +26,6 @@
 .sticky-logo {
   display: block;
   margin-top: 0;
-  
-  &.ajc {
-    margin-top: 10px;
-  }
 }
 
 .sticky-logo-homepage {
@@ -37,10 +33,10 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 7px;
   position: absolute;
   left: 0;
   right: 0;
+  margin-top: 7px;
 
   @include breakpoint(desktop-sm) {
     display: none;
@@ -51,23 +47,19 @@
 
     &.dayton {
       width: 210px;
-      margin-top: 7px;
     }
   
     &.daytondailynews {
       width: 210px;
-      margin-top: 14px;
     }
   
     &.journal-news {
       width: 100%;
       max-width: 151px;
-      margin-top: 15px;
     }
   
     &.springfieldnewssun {
       width: 240px;
-      margin-top: 16px;
     }
   }
 

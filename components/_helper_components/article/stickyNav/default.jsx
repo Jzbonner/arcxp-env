@@ -38,6 +38,8 @@ const StickyNav = ({
 
   const logoPath = deployment(`${contextPath}${logoShort}`);
 
+  const siteNameLower = siteName.toLowerCase();
+
   // Handles comments window visibility.
   // This state is managed in this component because the window's visibility is controlled
   // by a click on the comment button in the sticky nav bar
@@ -113,14 +115,14 @@ const StickyNav = ({
   return (
     <>
       <div className={`stickyNav ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
-        <ul className="c-stickyNav-list">
+        <ul className={`c-stickyNav-list ${siteNameLower}`}>
         <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
           <div className='nav-flyout-button'>
           </div>
         </div>
           <li className="stickyNav-item mobile-hidden">
             <a href="/">
-              <img className={`sticky-logo ${siteName.toLowerCase()}`} src={logoPath} alt={`${siteName} logo`} />
+              <img className={`sticky-logo ${siteNameLower}`} src={logoPath} alt={`${siteName} logo`} />
             </a>
           </li>
           <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
@@ -154,9 +156,9 @@ const StickyNav = ({
           </div>
         </ul>
         <div className='b-flexRow c-stickyLogin'>
-          <div className={`sticky-logo-homepage ${siteName.toLowerCase()} ${isNonShareablePage ? '' : 'hidden'}`}>
+          <div className={`sticky-logo-homepage ${siteNameLower} ${isNonShareablePage ? '' : 'hidden'}`}>
             <a href="/">
-              <img src={logoPath} className={siteName.toLowerCase()} alt={`${siteName} logo`} />
+              <img src={logoPath} className={siteNameLower} alt={`${siteName} logo`} />
             </a>
           </div>
           <div className={`stickyNav-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
