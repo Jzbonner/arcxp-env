@@ -45,8 +45,7 @@ const Byline = ({ by = [], sections }) => {
 
       if (!name) return null;
 
-      let authorUrl = `/staff/${firstName}-${lastName}/${id}`;
-      authorUrl = `${contextPath}/${authorUrl}/`;
+      const authorUrl = `${contextPath}/staff/${firstName}-${lastName}/${id}/`;
 
       return <span key={name}>
         {i === 0 && !name.includes('By ') && 'By '}
