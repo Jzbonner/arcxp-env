@@ -33,6 +33,12 @@ export default class ArcAdLib {
         dfp: { id: dfpID, collapseEmptyDivs: true },
         bidding,
       }, (event) => {
+        if (event.slot.getSlotElementId().indexOf('HS01') > -1 && event.isEmpty && window && window.HS02SlotConfig) {
+          // HS01 is empty, so we register HS02 (which was prevented from registering in components/features/ads/src/index.js)
+          // see https://ajc.atlassian.net/browse/APD-123 for more details/info
+          const hs02Config = window.HS02SlotConfig;
+          this.adInstance.registerAd(hs02Config[0], hs02Config[1], hs02Config[2]);
+        }
         if (!event.isEmpty) {
           const slotId = event.slot.getSlotElementId();
           const slotDiv = document ? document.querySelector(`#${slotId}`) : null;
