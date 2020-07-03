@@ -16,86 +16,109 @@ const AdSetup = ({
 
   useEffect(() => {
     const instance = ArcAdLib.getInstance();
+    const windowWidth = window.outerWidth;
     if (instance) {
-      instance.registerAd(
-        {
-          id,
-          slotName,
-          dimensions,
-          display,
-          targeting,
-          sizemap: {
-            breakpoints,
-            refresh,
+      let adIsGood = false;
+      breakpoints.forEach((breakpoint, i) => {
+        const bpSizes = dimensions[i];
+        if (windowWidth >= breakpoint[0] && !adIsGood && bpSizes.length > 0) {
+          adIsGood = true;
+          return false;
+        }
+        return true;
+      });
+      if (adIsGood) {
+        /*
+          we store the slot config in an array so that we don't have to duplicate it...
+          since we reference the same output twice: for the `HS02SlotConfig` object, and in teh registerAd call
+        */
+        const adSlotConfig = [
+          {
+            id,
+            slotName,
+            dimensions,
+            display,
+            targeting,
+            sizemap: {
+              breakpoints,
+              refresh,
+            },
+            bidding,
+            prerender: typeof window !== 'undefined' ? window.arcAdsPrerenderer : null,
           },
-          bidding,
-          prerender: typeof window !== 'undefined' ? window.arcAdsPrerenderer : null,
-        },
-        dfpId,
-        {
-          amazon: {
-            enabled: adsA9Enabled,
-            id: adsA9Id,
+          dfpId,
+          {
+            amazon: {
+              enabled: adsA9Enabled,
+              id: adsA9Id,
+            },
+            prebid: {
+              enabled: true,
+              sizeConfig: [
+                {
+                  mediaQuery: '(min-width: 972px)',
+                  sizesSupported: [
+                    [300, 250],
+                    [300, 600],
+                  ],
+                  labels: ['desktop'],
+                },
+                {
+                  mediaQuery: '(min-width: 972px)',
+                  sizesSupported: [
+                    [970, 250],
+                    [728, 90],
+                  ],
+                  labels: ['desktop1'],
+                },
+                {
+                  mediaQuery: '(min-width: 972px)',
+                  sizesSupported: [
+                    [728, 90],
+                  ],
+                  labels: ['desktop2'],
+                },
+                {
+                  mediaQuery: '(min-width: 768px) and (max-width: 971px)',
+                  sizesSupported: [
+                    [300, 250],
+                    [300, 600],
+                  ],
+                  labels: ['tablet'],
+                },
+                {
+                  mediaQuery: '(min-width: 768px) and (max-width: 971px)',
+                  sizesSupported: [
+                    [728, 90],
+                  ],
+                  labels: ['tablet1'],
+                },
+                {
+                  mediaQuery: '(min-width: 0px) and (max-width: 767px)',
+                  sizesSupported: [
+                    [320, 250],
+                  ],
+                  labels: ['phone'],
+                },
+                {
+                  mediaQuery: '(min-width: 0px) and (max-width: 767px)',
+                  sizesSupported: [
+                    [320, 50],
+                  ],
+                  labels: ['phone1'],
+                },
+              ],
+            },
           },
-          prebid: {
-            enabled: true,
-            sizeConfig: [
-              {
-                mediaQuery: '(min-width: 972px)',
-                sizesSupported: [
-                  [300, 250],
-                  [300, 600],
-                ],
-                labels: ['desktop'],
-              },
-              {
-                mediaQuery: '(min-width: 972px)',
-                sizesSupported: [
-                  [970, 250],
-                  [728, 90],
-                ],
-                labels: ['desktop1'],
-              },
-              {
-                mediaQuery: '(min-width: 972px)',
-                sizesSupported: [
-                  [728, 90],
-                ],
-                labels: ['desktop2'],
-              },
-              {
-                mediaQuery: '(min-width: 768px) and (max-width: 971px)',
-                sizesSupported: [
-                  [300, 250],
-                  [300, 600],
-                ],
-                labels: ['tablet'],
-              },
-              {
-                mediaQuery: '(min-width: 768px) and (max-width: 971px)',
-                sizesSupported: [
-                  [728, 90],
-                ],
-                labels: ['tablet1'],
-              },
-              {
-                mediaQuery: '(min-width: 0px) and (max-width: 767px)',
-                sizesSupported: [
-                  [320, 250],
-                ],
-                labels: ['phone'],
-              },
-              {
-                mediaQuery: '(min-width: 0px) and (max-width: 767px)',
-                sizesSupported: [
-                  [320, 50],
-                ],
-                labels: ['phone1'],
-              },
-            ],
-          },
-        },
-      );
+        ];
+        // there are matching sizes for this bp, so proceed (ads that do NOT have bp-relevant dimensions are ignored)
+        if (slotName === 'HS02') {
+          // we exclude HS02 from being registered because it is dependent upon the rendering of HS01 (see ./children/ArcAdLib.js)
+          window.HS02SlotConfig = adSlotConfig;
+        } else {
+          instance.registerAd(adSlotConfig[0], adSlotConfig[1], adSlotConfig[2]);
+        }
+      }
     }
   }, []);
 
