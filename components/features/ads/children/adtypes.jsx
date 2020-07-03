@@ -10,6 +10,7 @@ export const defaultAdSlot = {
   targeting: {
     // key:value pairs; should be global; currently set in components/features/ads/default.jsx
   },
+  display: 'all',
 };
 
 export const adSlots = {
@@ -70,10 +71,12 @@ export const adSlots = {
         [728, 315],
         [728, 90],
       ], // tablet
+      [], // mobile
     ],
     breakpoints: [
       [1024, 0], // desktop
       [768, 0], // tablet
+      [0, 0], // mobile
     ],
     bidding: {
       amazon: {
@@ -272,7 +275,7 @@ export const adSlots = {
       [300, 250], // tablet+
     ],
     breakpoints: [
-      [768, 0], // tablet
+      [768, 0], // tablet+
     ],
     bidding: {
       amazon: {
@@ -391,11 +394,15 @@ export const adSlots = {
   'RP01-Story-Desktop': {
     slotName: 'RP01',
     dimensions: [
-      [300, 600],
-      [300, 250], // desktop
+      [
+        [300, 600],
+        [300, 250],
+      ], // desktop
+      [], // tablet
     ],
     breakpoints: [
       [1024, 0], // desktop
+      [768, 0], // tablet
     ],
     isRightRailAd: true,
     bidding: {
@@ -453,11 +460,15 @@ export const adSlots = {
   'RP01-Story-FlatPage': {
     slotName: 'RP01',
     dimensions: [
-      [300, 600],
-      [300, 250], // desktop
+      [
+        [300, 600],
+        [300, 250],
+      ], // desktop
+      [], // tablet
     ],
     breakpoints: [
       [1024, 0], // desktop
+      [768, 0], // tablet
     ],
     isRightRailAd: true,
     isSticky: true,
@@ -516,16 +527,17 @@ export const adSlots = {
   'RP01-Story-Tablet': {
     slotName: 'RP01',
     dimensions: [
-      [], // desktop
       [
         [300, 600],
-        [300, 250],
-      ], // tablet
+        [300, 250], // tablet
+      ],
+      [], // mobile
     ],
     breakpoints: [
-      [1024, 0], // desktop
       [768, 0], // tablet
+      [0, 0], // mobile
     ],
+    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -705,11 +717,15 @@ export const adSlots = {
   'RP09-Story-Desktop': {
     slotName: 'RP09',
     dimensions: [
-      [300, 600],
-      [300, 250], // desktop
+      [
+        [300, 600],
+        [300, 250], // desktop
+      ],
+      [], // tablet
     ],
     breakpoints: [
       [1024, 0], // desktop
+      [0, 0], // tablet
     ],
     isRightRailAd: true,
     isSticky: true,
@@ -761,16 +777,17 @@ export const adSlots = {
   'RP09-Story-Tablet': {
     slotName: 'RP09',
     dimensions: [
-      [], // desktop
       [
         [300, 600],
         [300, 250],
       ], // tablet
+      [], // mobile
     ],
     breakpoints: [
-      [1024, 0], // desktop
       [768, 0], // tablet
+      [0, 0], // mobile
     ],
+    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -895,8 +912,9 @@ export const adSlots = {
     ],
     breakpoints: [
       [768, 0], // tablet+
-      [1, 0], // mobile
+      [0, 0], // mobile
     ],
+    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -951,8 +969,9 @@ export const adSlots = {
     ],
     breakpoints: [
       [768, 0], // tablet+
-      [1, 0], // mobile
+      [0, 0], // mobile
     ],
+    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -1007,8 +1026,9 @@ export const adSlots = {
     ],
     breakpoints: [
       [768, 0], // tablet+
-      [1, 0], // mobile
+      [0, 0], // mobile
     ],
+    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -1063,8 +1083,9 @@ export const adSlots = {
     ],
     breakpoints: [
       [768, 0], // tablet+
-      [1, 0], // mobile
+      [0, 0], // mobile
     ],
+    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -1119,8 +1140,9 @@ export const adSlots = {
     ],
     breakpoints: [
       [768, 0], // tablet+
-      [1, 0], // mobile
+      [0, 0], // mobile
     ],
+    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -1195,7 +1217,7 @@ export const adSlots = {
     ],
     breakpoints: [
       [768, 0], // tablet+
-      [1, 0], // mobile
+      [0, 0], // mobile
     ],
   },
   SP01: {
