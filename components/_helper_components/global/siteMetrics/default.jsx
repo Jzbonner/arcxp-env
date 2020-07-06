@@ -32,7 +32,7 @@ const SiteMetrics = ({ isAmp }) => {
 
   if (authorData) {
     authorData.forEach((author) => {
-      const { _id: authorID, name: authorName, type } = author || {};
+      const { _id: authorID, name: authorName = '', type } = author || {};
       if (isAmp) {
         // eslint-disable-next-line quote-props
         ampAuthors.push(`{ "_id": "${authorID}", "name": "${authorName}", "type": "${type}"}`);
@@ -101,7 +101,7 @@ const SiteMetrics = ({ isAmp }) => {
               "contentByline": "${authors.join()}",
               "contentOriginatingSite": "${metrics && metrics.siteID ? metrics.siteID : site}",
               "contentID": "${contentId || ''}",
-              "contentVendor": "${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}",
+              "contentVendor": "${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}",
               "contentPublishDate": "${firstPublishDateConverted}",
               "blogName": "${pageContentType === 'blog' ? topSectionName : ''}",
               "galleryName": "${galleryHeadline}",
@@ -145,7 +145,7 @@ const SiteMetrics = ({ isAmp }) => {
             'contentByline': '${authors.join()}',
             'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
             'contentID': '${contentId || ''}',
-            'contentVendor': '${sourceType && sourceType === 'wires' ? sourceSystem.toLowerCase() : ''}',
+            'contentVendor': '${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}',
             'contentPublishDate': '${firstPublishDateConverted}',
             'blogName': '${pageContentType === 'blog' ? topSectionName : ''}',
             'galleryName': '${galleryHeadline}'
