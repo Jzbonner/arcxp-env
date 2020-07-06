@@ -10,7 +10,7 @@ import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
 const Video = ({
-  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, pageTaxonomy,
+  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, pageTaxonomy = [],
 }) => {
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -19,7 +19,7 @@ const Video = ({
     credits,
     _id: videoID,
     videoPageId,
-    taxonomy: videoTaxonomy,
+    taxonomy: videoTaxonomy = [],
     canonical_url: videoPageUrl,
   } = src || {};
   const { basic: videoCaption } = src.description ? src.description : {};
