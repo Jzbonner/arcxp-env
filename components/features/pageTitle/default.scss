@@ -9,6 +9,7 @@
     color: #313132;
     display: flex;
     flex-direction: row;
+    margin-bottom: 20px;
 
     @include text-styles(2.5em, 1, "Average");
 
