@@ -8,7 +8,6 @@ const AdsTxt = (customFields = {}) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const siteProps = getProperties(arcSite);
-  console.log(siteProps);
   const {
     customFields: {
       type,
