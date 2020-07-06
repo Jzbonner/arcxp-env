@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
 import { useContent } from 'fusion:content';
-import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
+import { breakingNewsID, breakingLiveVideoID } from 'fusion:environment';
 import './default.scss';
 
 const BreakingNews = () => {
@@ -12,7 +12,6 @@ const BreakingNews = () => {
   };
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
-  const { breakingNewsID, breakingLiveVideoID } = getProperties(arcSite);
 
   const newsData = useContent({
     source: 'breaking-news-video-alert',

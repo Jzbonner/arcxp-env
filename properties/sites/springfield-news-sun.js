@@ -12,8 +12,6 @@ export default {
   twitterURL: 'https://twitter.com/intent/tweet?url=',
   domainFacebookURL: 'https://www.facebook.com/springfieldnewssun',
   facebookURL: 'https://www.facebook.com/share.php?u=',
-  breakingNewsID: 'MDEEBOSQDNEZRK6ZZELXGDVG2E',
-  breakingLiveVideoID: 'HV4DOKFKSZF35CA4XLCK4BHIPY',
   domainPinterestURL: '',
   pinterestURL: 'https://www.pinterest.com/pin/create/button/?url=',
   domainRedditURL: 'https://www.reddit.com/domain/springfieldnewssun.com/',

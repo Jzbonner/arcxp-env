@@ -11,8 +11,6 @@ export default {
   twitterURL: '//twitter.com/ajc',
   facebookURL: '//facebook.com/ajc',
   instagramURL: '//instagram.com/ajcnews',
-  breakingNewsID: 'USNZPBNLV5EULFTENZZP52ECZQ',
-  breakingLiveVideoID: '2UPLSZACARBEVG2PQVZLQLO7D4',
   metrics: {
     siteID: 'ajc',
     siteMetro: 'ga: atlanta',

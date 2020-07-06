@@ -8,8 +8,6 @@ export default {
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/CFSFLNZIUJBB3EVHSGSJCOHOJM.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/V5MMRTL6OBFBFBNB3N4HBFITLQ.png',
   orgName: 'Dayton Daily News',
-  breakingNewsID: 'WTQBLH3PYBFTNC2KW3EVREG5OA',
-  breakingLiveVideoID: 'ONIHRIDEANDIJD2AX2WWO3NUQA',
   domainTwitterURL: 'https://twitter.com/daytondailynews',
   twitterURL: 'https://twitter.com/intent/tweet?url=',
   domainFacebookURL: 'https://www.facebook.com/daytondailynews/',

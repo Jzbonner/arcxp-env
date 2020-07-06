@@ -12,8 +12,6 @@ export default {
   twitterURL: 'https://twitter.com/intent/tweet?url=',
   domainFacebookURL: 'https://www.facebook.com/journalnews',
   facebookURL: 'https://www.facebook.com/share.php?u=',
-  breakingNewsID: 'FIQH7IEKK5H5LHRAII5AY7VDCU',
-  breakingLiveVideoID: '52EEYZZB6BDYZDOFFNPJBO2ZJA',
   domainPinterestURL: '',
   pinterestURL: 'https://www.pinterest.com/pin/create/button/?url=',
   domainRedditURL: '',

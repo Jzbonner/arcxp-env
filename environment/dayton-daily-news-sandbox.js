@@ -4,8 +4,8 @@ export default {
     moapPTD: '[1058525, 380629, 77511]',
   },
   fbPagesId: '168815400507', // dayton-daily-news
-  breakingNewsID: 'WTQBLH3PYBFTNC2KW3EVREG5OA',
-  breakingLiveVideoID: 'ONIHRIDEANDIJD2AX2WWO3NUQA',
+  breakingNewsID: 'BDA3AIXKOBAMNPZ6GIWW7IXPD4',
+  breakingLiveVideoID: 'D5V3Q4JLGNFSJCNS3BN4V4XPGI',
   connext: {
     isEnabled: true,
     clientCode: 'daytondailynews',
