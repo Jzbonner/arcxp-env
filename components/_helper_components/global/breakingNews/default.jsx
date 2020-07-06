@@ -10,11 +10,9 @@ const BreakingNews = () => {
   const hideBar = () => {
     setVisibility(false);
   };
-  const {
-    breakingNewsID, breakingLiveVideoID,
-  } = getProperties();
   const fusionContext = useFusionContext();
-  const { arcSite = 'ajc' } = fusionContext;
+  const { arcSite } = fusionContext;
+  const { breakingNewsID, breakingLiveVideoID } = getProperties(arcSite);
 
   const newsData = useContent({
     source: 'breaking-news-video-alert',
