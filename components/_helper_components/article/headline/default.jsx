@@ -7,7 +7,7 @@ import Video from '../../global/video/default';
 import Gallery from '../../../features/gallery/default';
 
 const Headline = ({
-  basicItems = {}, headlines = {}, taxonomy = {}, ampPage = false,
+  basicItems = {}, headlines = {}, taxonomy = {}, ampPage = false, contentType = '',
 }) => {
   let promoData = {};
   if (basicItems) {
@@ -37,7 +37,7 @@ const Headline = ({
           ampPage={ampPage}
         />
       )}
-      {!ampPage && promoData.type === 'gallery' && promoData.content_elements && <Gallery promoItems={promoData} />}
+      {!ampPage && promoData.type === 'gallery' && promoData.content_elements && <Gallery promoItems={promoData} pageType={contentType} />}
       {promoData.type === 'video' && (
         <Video
           isLeadVideo
@@ -58,6 +58,7 @@ Headline.propTypes = {
   maxTabletViewWidth: PropTypes.number,
   taxonomy: PropTypes.object,
   ampPage: PropTypes.bool,
+  contentType: PropTypes.string,
 };
 
 export default Headline;

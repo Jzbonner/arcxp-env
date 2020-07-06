@@ -604,17 +604,17 @@ const Gallery = (props) => {
 
   return (
     <>
-      {(isMobile || pageType !== 'Article')
+      {(isMobile || pageType !== 'story')
         && galHeadline
         ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
-      {pageType !== 'Article' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02()}</div> : null}
-      <div className={`${pageType !== 'Article' ? 'c-gallery-homeSection' : ''}`}>
+      {pageType !== 'story' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02()}</div> : null}
+      <div className={`${pageType !== 'story' ? 'c-gallery-homeSection' : ''}`}>
         {!isMobile
           ? <div onClick={handelImageModalView}>
             <ImageModal src={currentImageSrc} isVisible={modalVisible} />
           </div> : null}
         <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-          {!isMobile && galHeadline && pageType === 'Article'
+          {!isMobile && galHeadline && pageType === 'story'
             ? <div className="gallery-headline"><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
           {
             isStickyVisible
