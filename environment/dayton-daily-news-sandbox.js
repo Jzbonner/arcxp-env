@@ -8,7 +8,7 @@ export default {
   breakingLiveVideoID: 'D5V3Q4JLGNFSJCNS3BN4V4XPGI',
   connext: {
     isEnabled: true,
-    clientCode: 'daytondailynews',
+    clientCode: 'dayton-daily-news',
     environment: 'prod',
     siteCode: 'DN',
     configCode: 'DN_PROD_DEFAULT',
