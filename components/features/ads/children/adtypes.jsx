@@ -537,7 +537,6 @@ export const adSlots = {
       [768, 0], // tablet
       [0, 0], // mobile
     ],
-    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -787,7 +786,6 @@ export const adSlots = {
       [768, 0], // tablet
       [0, 0], // mobile
     ],
-    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -914,7 +912,6 @@ export const adSlots = {
       [768, 0], // tablet+
       [0, 0], // mobile
     ],
-    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -971,7 +968,6 @@ export const adSlots = {
       [768, 0], // tablet+
       [0, 0], // mobile
     ],
-    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -1028,7 +1024,6 @@ export const adSlots = {
       [768, 0], // tablet+
       [0, 0], // mobile
     ],
-    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -1085,7 +1080,6 @@ export const adSlots = {
       [768, 0], // tablet+
       [0, 0], // mobile
     ],
-    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
@@ -1142,7 +1136,6 @@ export const adSlots = {
       [768, 0], // tablet+
       [0, 0], // mobile
     ],
-    display: 'mobile',
     bidding: {
       amazon: {
         enabled: true,
