@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import '../default.scss';
 import currentConditions from '../../utils/weather/currentConditions';
 
-const Weather = () => {
+const Weather = ({ weatherPageUrl }) => {
   const { temp = '', icon = '', text = '' } = currentConditions() || {};
+
+  useEffect(() => {
+    const callback = () => {
+      window.location.href = weatherPageUrl;
+    };
+    const weatherIcon = document.querySelector('.nav-weather.weather-icon');
+
+    weatherIcon.addEventListener('click', callback);
+    return () => weatherIcon.removeEventListener('click', callback);
+  }, []);
+
   return (
     <>
       <li className={`nav-weather weather-icon weather-${icon}`} title={text}></li>
       <li className='nav-itemText nav-weather weather-text'>
-        {temp && <a href='/weather/'>{temp}&deg;</a>}
+        {temp && <a href={weatherPageUrl}>{temp}&deg;</a>}
       </li>
     </>
   );
+};
+
+Weather.propTypes = {
+  weatherPageUrl: PropTypes.string,
 };
 
 export default Weather;
