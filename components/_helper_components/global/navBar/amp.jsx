@@ -38,7 +38,7 @@ const AmpNavBar = () => {
     } = navigation;
 
     return (
-      <li key={id}><div className='amp-nav-section'><a className='amp-nav-link' href={siteURL}>{sectionName}</a></div></li>
+      <li key={id}><div className='amp-nav-section'><a className='amp-nav-link' href={siteURL || id}>{sectionName}</a></div></li>
     );
   });
 
