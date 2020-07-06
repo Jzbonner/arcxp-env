@@ -11,7 +11,8 @@ import TimeStamp from '../../_helper_components/article/timestamp/default';
 import checkTags from '../../layouts/_helper_functions/checkTags';
 import ContributorBadge from '../../_helper_components/global/contributorBadge/default';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
-import getSponsorData from '../../layouts/_helper_functions/getSponsorData';
+// import getSponsorData from '../../layouts/_helper_functions/getSponsorData';
+import getSponsorData from '../../../content/sources/helper_functions/getSponsorData';
 import './default.scss';
 
 const Mosaic = (customFields = {}) => {
@@ -121,7 +122,7 @@ const Mosaic = (customFields = {}) => {
             const { hide_timestamp: hideTimestamp } = el.label || {};
             const { text: isHideTimestampTrue } = hideTimestamp || {};
             const { tags = [], sections } = taxonomy || {};
-            const sponsorName = getSponsorData(sections);
+            const sponsorName = getSponsorData(sections, { arcSite: 'ajc', type: 'navigation', hierarchy: 'default' });
             const hyperlocalTags = getProperties().hyperlocalTags || [];
             const isHyperlocalContent = checkTags(
               tags,
