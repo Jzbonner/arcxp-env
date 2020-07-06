@@ -257,6 +257,8 @@
   }
 
   .nav-sections {
+    width: 100%;
+    
     @include breakpoint(desktop-sm) {
       display: flex;
       flex-direction: row;
