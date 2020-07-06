@@ -257,6 +257,9 @@
   }
 
   .nav-sections {
+    display: flex;
+    flex-direction: column;
+
     @include breakpoint(desktop-sm) {
       display: flex;
       flex-direction: row;
@@ -403,6 +406,7 @@
     background-color: #fff;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .24), 0 1px 4px 0 rgba(0, 0, 0, .24);
     margin-bottom: 25px;
+    order: -1;
 
     @include breakpoint(desktop-sm) {
       padding-left: 15px;
@@ -416,6 +420,7 @@
       border-radius: 0;
       height: auto;
       background-color: #f8f8f8;
+      order: 0;
     }
   }
 
