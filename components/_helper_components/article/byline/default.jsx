@@ -1,17 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useAppContext } from 'fusion:context';
 import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import './default.scss';
 
 const Byline = ({ by = [], sections }) => {
   let byline;
 
+  const appContext = useAppContext();
+  const { contextPath } = appContext;
+
   const handleOrganization = (authors = []) => {
     const authorsAndOrgs = authors.map((author) => {
       // staff
       if (author.isStaff && author.affiliations) {
         return {
-          name: author.name, org: author.affiliations, url: author.url, status: author.status,
+          id: author.id,
+          name: author.name,
+          org: author.affiliations,
+          url: author.url,
+          status: author.status,
+          firstName: author.firstName,
+          lastName: author.lastName,
         };
       }
 
@@ -30,15 +40,17 @@ const Byline = ({ by = [], sections }) => {
   const handleAuthors = (authors = []) => {
     const bylineData = authors.map((author, i) => {
       const {
-        url, org, name, status,
+        id, org, name, status, firstName, lastName,
       } = author || {};
 
       if (!name) return null;
 
+      const authorUrl = `${contextPath}/staff/${firstName}-${lastName}/${id}/`;
+
       return <span key={name}>
         {i === 0 && !name.includes('By ') && 'By '}
-        {url && status && <a href={url}>{name}</a>}
-        {(!url || !status) && name}
+        {authorUrl && status && <a href={authorUrl}>{name}</a>}
+        {(!authorUrl || !status) && name}
         {org ? `${authors.length > 1 ? ' - ' : ', '}${org}` : null}
       </span>;
     });
@@ -60,6 +72,9 @@ const Byline = ({ by = [], sections }) => {
       if (element._id) isStaff = true;
 
       return {
+        id: (element.additional_properties
+          && element.additional_properties.original
+          && element.additional_properties.original._id) || element._id,
         name: (element.additional_properties
           && element.additional_properties.original
           && element.additional_properties.original.byline) || element.name,
@@ -72,6 +87,12 @@ const Byline = ({ by = [], sections }) => {
           && element.additional_properties.original.status,
         isStaff,
         url: element.url,
+        firstName: (element.additional_properties
+          && element.additional_properties.original
+          && element.additional_properties.original.firstName) || element.firstName,
+        lastName: (element.additional_properties
+          && element.additional_properties.original
+          && element.additional_properties.original.lastName) || element.lastName,
       };
     });
     finalizeByline(authors);
