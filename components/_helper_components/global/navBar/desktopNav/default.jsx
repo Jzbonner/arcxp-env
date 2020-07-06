@@ -57,8 +57,10 @@ const DesktopNav = ({
         }
         <div id='aw-widget-st'></div>
       </li>}
-      <div className='nav-sections nav-itemBottomBorder'>{sections}</div>
+      <div className='nav-itemBottomBorder nav-sections'>
+      {sections}
       <Search sticky={stickyActive}/>
+      </div>
       <Weather sticky={stickyActive}/>
       <div className='nav-mobile-login'>
         <Login isMobile={isMobile} isFlyout={isMobile}/>

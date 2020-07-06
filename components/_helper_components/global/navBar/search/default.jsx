@@ -41,7 +41,7 @@ const Search = () => {
   }, [isEditing]);
 
   return (
-    <li className='nav-search nav-itemBottomBorder'>
+    <li className='nav-search'>
       <form onSubmit={handleSubmit} className='search-form'>
         <input
           onClick={toggleEditing}
