@@ -15,7 +15,7 @@ const StickyNav = ({
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    pinterestURL, redditURL, mail, siteName, logoShort,
+    facebookURL, twitterURL, pinterestURL, redditURL, mail, siteName, logoShort,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
@@ -23,8 +23,8 @@ const StickyNav = ({
   const { allow_comments: commentsEnabled } = comments || {};
   const articleShareUrl = `${contextPath}${articleUrl}`;
 
-  const shareLinkFacebook = `https://facebook.com/share.php?u=${articleShareUrl}`;
-  const shareLinkTwitter = `https://twitter.com/intent/tweet?url=${articleShareUrl}&text=${articleHeadline}`;
+  const shareLinkFacebook = `${facebookURL}${articleShareUrl}`;
+  const shareLinkTwitter = `${twitterURL}${articleShareUrl}&text=${articleHeadline}`;
   const shareLinkPinterest = `${pinterestURL}${articleShareUrl}&media=${renderImage()}&description=${articleHeadline}`;
   const shareLinkReddit = `${redditURL}${articleShareUrl}&title=${articleHeadline}`;
   const shareLinkEmail = `${mail}${articleHeadline}&body=${articleShareUrl}`;
