@@ -8,7 +8,9 @@ import './default.scss';
 
 const Carousel = ({ storyId, taxonomy }) => {
   const { primary_section: primarySection } = taxonomy || {};
-  const { path } = primarySection || {};
+  console.log('primarySection');
+  const { path, referent } = primarySection || {};
+  const { id: referentId } = referent || {};
 
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -17,7 +19,12 @@ const Carousel = ({ storyId, taxonomy }) => {
   const { logoShort } = getProperties(arcSite) || {};
   const logoPath = deployment(`${contextPath}${logoShort}`);
 
-  const formattedPath = path ? path.substring(1) : null;
+  let finalReferentId;
+  if (referentId) {
+    [, finalReferentId] = referentId.split('/');
+  }
+
+  const formattedPath = path ? path.substring(1) : finalReferentId || null;
 
   if (!formattedPath) return null;
 
@@ -27,7 +34,7 @@ const Carousel = ({ storyId, taxonomy }) => {
       published: true,
       section: formattedPath,
       sort: true,
-      size: 18,
+      size: 100,
     },
   });
 
