@@ -6,25 +6,25 @@
   text-align: center;
 
   .c-title-content {
-    text-align: center;
     color: #313132;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    grid-template-rows: 34px 0;
-    grid-gap: 10px;
+    display: flex;
+    flex-direction: row;
 
     @include text-styles(2.5em, 1, "Average");
 
     &:before,
     &:after {
       content: "";
-      display: block;
+      flex: 1 1;
+      margin: 0 10px 5px;
       border-bottom: 2px solid #aeaeae;
+
+      @include breakpoint(desktop-sm) {
+        margin: 0 10px 9px;
+      }
     }
 
     @include breakpoint(desktop-sm) {
-      grid-template-rows: 47px 0;
-
       @include text-styles(3.5em, 1, "Average");
     }
   }
