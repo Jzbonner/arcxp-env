@@ -61,7 +61,7 @@ const DesktopNav = ({
       {sections}
       <Search sticky={stickyActive}/>
       </div>
-      <Weather sticky={stickyActive}/>
+      <Weather weatherPageUrl={weatherPageUrl}/>
       <div className='nav-mobile-login'>
         <Login isMobile={isMobile} isFlyout={isMobile}/>
       </div>
