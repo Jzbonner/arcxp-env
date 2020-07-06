@@ -7,7 +7,8 @@
   {
     "domain": "rubiconproject.com",
     "accountId": "19160",
-    "relationshipType": "DIRECT"
+    "relationshipType": "DIRECT",
+    "certId": "0bfd66d529a55807 #ebda"
   },
   {
     "domain": "taboola.com",

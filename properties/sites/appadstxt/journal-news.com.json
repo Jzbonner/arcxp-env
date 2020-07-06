@@ -7,27 +7,32 @@
   {
     "domain": "rubiconproject.com",
     "accountId": "19160",
-    "relationshipType": "DIRECT"
+    "relationshipType": "DIRECT",
+    "certId": "0bfd66d529a55807 #ebda"
   },
   {
     "domain": "taboola.com",
     "accountId": "1177126",
-    "relationshipType": "DIRECT"
+    "relationshipType": "DIRECT",
+    "certId": "c228e6794e811952"
   },
   {
     "domain": "taboola.com",
     "accountId": "1177127",
-    "relationshipType": "DIRECT"
+    "relationshipType": "DIRECT",
+    "certId": "c228e6794e811952"
   },
   {
     "domain": "taboola.com",
     "accountId": "1190475",
-    "relationshipType": "DIRECT"
+    "relationshipType": "DIRECT",
+    "certId": "c228e6794e811952"
   },
   {
     "domain": "taboola.com",
     "accountId": "1190473",
-    "relationshipType": "DIRECT"
+    "relationshipType": "DIRECT",
+    "certId": "c228e6794e811952"
   },
   {
     "domain": "spotx.tv",
@@ -47,7 +52,8 @@
   {
     "domain": "pubmatic.com",
     "accountId": "156307",
-    "relationshipType": "RESELLER"
+    "relationshipType": "RESELLER",
+    "certId": "5d62403b186f2ace"
   },
   {
     "domain": "appnexus.com",
@@ -72,12 +78,14 @@
   {
     "domain": "tremorhub.com",
     "accountId": "z87wm",
-    "relationshipType": "RESELLER"
+    "relationshipType": "RESELLER",
+    "certId": "1a4e959a1b50034a"
   },
   {
     "domain": "rubiconproject.com",
     "accountId": "16698",
-    "relationshipType": "RESELLER"
+    "relationshipType": "RESELLER",
+    "certId": "0bfd66d529a55807"
   },
   {
     "domain": "freewheel.tv",
@@ -97,7 +105,8 @@
   {
     "domain": "rhythmone.com",
     "accountId": "1166984029",
-    "relationshipType": "RESELLER"
+    "relationshipType": "RESELLER",
+    "certId": "a670c89d4a324e47"
   },
   {
     "domain": "smartadserver.com",
@@ -107,7 +116,8 @@
   {
     "domain": "beachfront.com",
     "accountId": "13749",
-    "relationshipType": "RESELLER"
+    "relationshipType": "RESELLER",
+    "certId": "e2541279e8e2ca4d"
   },
   {
     "domain": "advertising.com",
@@ -122,11 +132,13 @@
   {
     "domain": "inmobi.com",
     "accountId": "a985e39014a94721a8e97c929d32ef9d",
-    "relationshipType": "RESELLER"
+    "relationshipType": "RESELLER",
+    "certId": "83e75a7ae333ca9d"
   },
   {
     "domain": "pubnative.net",
     "accountId": "1007180",
-    "relationshipType": "RESELLER"
+    "relationshipType": "RESELLER",
+    "certId": "d641df8625486a7b"
   }
 ]
