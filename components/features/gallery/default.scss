@@ -142,6 +142,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  .arc_ad {
+    margin: 0;
+  }
 
   .arc_ad .arcad:not(:empty):before {
     content: "";

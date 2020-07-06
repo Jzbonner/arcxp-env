@@ -18,7 +18,7 @@
 .c-sponsorOverlay,
 .image-component-image .sponsored-story {
   position: absolute;
-  bottom: 0;
+  bottom: 3px;
   width: 100%;
   background: rgba(55, 58, 60, .9);
   color: #fff;
@@ -27,14 +27,19 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
   text-align: center;
   padding: 5px;
 
   @include text-styles(.625rem, 1.25, "Gordita");
 
   @include breakpoint(tablet) {
-    bottom: 3px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+}
+
+.c-homepageContent {
+  @media (max-width: 768px) {
+    padding-top: 0;
   }
 }
