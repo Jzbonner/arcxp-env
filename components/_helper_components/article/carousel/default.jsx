@@ -8,7 +8,6 @@ import './default.scss';
 
 const Carousel = ({ storyId, taxonomy }) => {
   const { primary_section: primarySection } = taxonomy || {};
-  console.log('primarySection');
   const { path, referent } = primarySection || {};
   const { id: referentId } = referent || {};
 
