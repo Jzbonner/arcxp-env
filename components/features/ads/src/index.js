@@ -18,14 +18,41 @@ const AdSetup = ({
     const instance = ArcAdLib.getInstance();
     const windowWidth = window.outerWidth;
     if (instance) {
-      let adIsGood = false;
+      let adIsGood = null;
+      let hasDimensionsMatch = false;
+      let bpTarget;
+      if (windowWidth >= 1024) {
+        bpTarget = 1024;
+      } else if (windowWidth >= 768) {
+        bpTarget = 768;
+      } else {
+        bpTarget = 0;
+      }
       breakpoints.forEach((breakpoint, i) => {
         const bpSizes = dimensions[i];
-        if (windowWidth >= breakpoint[0] && !adIsGood && bpSizes.length > 0) {
-          adIsGood = true;
-          return false;
+        const bpWidth = breakpoint[0];
+        if (windowWidth >= bpWidth) {
+          // do not consolidate the following test cases... they must be checked in order, to respect breakpoint sizemappings
+          if (bpWidth === bpTarget && bpSizes && bpSizes.length > 0) {
+            // the ad is specified and has sizes for this breakpoint, so ensure it gets rendered
+            adIsGood = true;
+            hasDimensionsMatch = true;
+          } else if (bpWidth === bpTarget && (!bpSizes || bpSizes.length === 0)) {
+            // the ad is specifically excluded at this breakpoint, so ensure it does not render
+            adIsGood = false;
+            hasDimensionsMatch = true;
+          } else if (!adIsGood && !hasDimensionsMatch && bpSizes && bpSizes.length > 0) {
+            // the ad is specified and has sizes at a non-matching breakpoint (e.g. 768+ for 1024 bp) so render it
+            adIsGood = true;
+            hasDimensionsMatch = true;
+          } else if (!adIsGood && !hasDimensionsMatch && (!bpSizes || bpSizes.length === 0)) {
+            // the ad is excluded at a non-matching breakpoint, so do not render it (e.g. 768+ override for MP0x ads)
+            adIsGood = false;
+            hasDimensionsMatch = true;
+          }
+        } else {
+          // window is smaller than the breakpoint, so just ignore it
         }
-        return true;
       });
       if (adIsGood) {
         /*
