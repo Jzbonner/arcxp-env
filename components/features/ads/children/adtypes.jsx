@@ -1203,11 +1203,11 @@ export const adSlots = {
   MPG01: {
     slotName: 'MPG01',
     dimensions: [
-      [300, 250], // tablet+
-      [300, 250], // mobile
+      [], // desktop
+      [300, 250], // mobile+
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop
       [0, 0], // mobile
     ],
   },
