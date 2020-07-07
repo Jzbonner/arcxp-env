@@ -79,6 +79,17 @@
   }
 
   &.full-width {
+    @include between-breakpoints(mobile, desktop-sm) {
+
+      .arc_ad.HS02 {
+        width: 100vw;
+
+        .arcad.HS02 + div {
+          padding-bottom: 20px;
+        }
+      }
+    }
+
     @include breakpoint(desktop-sm) {
       clear: both;
     }
