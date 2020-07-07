@@ -6,6 +6,7 @@ import './default.scss';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import Comments from '../comments/comments';
 import Login from '../../global/navBar/login/default';
+import fetchEnv from '../../global/utils/environment';
 import '../../global/navBar/default.scss';
 
 const StickyNav = ({
@@ -21,7 +22,15 @@ const StickyNav = ({
   const { deployment, contextPath } = appContext;
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
-  const articleShareUrl = `${contextPath}${articleUrl}`;
+
+  let articleShareUrl = articleUrl;
+  let site = siteName.toLowerCase();
+  site = site ? site.replace(/w/gi, '') : '';
+  if (articleShareUrl.indexOf('.com') === -1) {
+    const env = fetchEnv();
+    // we must fully-qualify the url for sharing
+    articleShareUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${articleShareUrl}`;
+  }
 
   const shareLinkFacebook = `${facebookURL}${articleShareUrl}`;
   const shareLinkTwitter = `${twitterURL}${articleShareUrl}&text=${articleHeadline}`;
