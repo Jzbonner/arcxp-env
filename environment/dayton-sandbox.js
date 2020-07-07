@@ -4,8 +4,8 @@ export default {
     moapPTD: '[1087800, 382325, 62055]',
   },
   fbPagesId: '1431445090472096', // dayton
-  breakingNewsID: '3FTP2S6SRVFG7M3T2VUKR7B2CY',
-  breakingLiveVideoID: 'NSVDX4ZQ7BEGHDFVFT26WQSOEE',
+  breakingNewsID: '63KAPZZLQRABDAB7I7PZ4KNYVA',
+  breakingLiveVideoID: 'VYXS5V6CBFEKFG6YEQ7YHU7BEE',
   connext: {
     isEnabled: true,
     clientCode: 'dayton',
