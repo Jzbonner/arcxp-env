@@ -12,10 +12,6 @@
     width: 95%;
     height: 1170px;
 
-    @include breakpoint(tablet) {
-      height: 400px;
-    }
-
     @media (orientation: landscape) {
       height: 400px;
     }
