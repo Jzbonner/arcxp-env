@@ -6,7 +6,7 @@ import ArcAdLib from './children/ArcAdLib';
 const AdSetup = ({
   id, slotName, dimensions, display, breakpoints, refresh, targeting, bidding, className, prerender, dfpId,
 }) => {
-  const { adsA9Enabled, adsA9Id } = getProperties();
+  const { adsA9Enabled, adsA9Id, adsPrebidEnabled } = getProperties();
   if (prerender && typeof window !== 'undefined') {
     window.arcAdsPrerenderer = adDetails => new Promise((resolve) => {
       prerender.adDetails();
@@ -80,7 +80,7 @@ const AdSetup = ({
               id: adsA9Id,
             },
             prebid: {
-              enabled: true,
+              enabled: adsPrebidEnabled,
               sizeConfig: [
                 {
                   mediaQuery: '(min-width: 972px)',

@@ -11,6 +11,14 @@ export const defaultAdSlot = {
     // key:value pairs; should be global; currently set in components/features/ads/default.jsx
   },
   display: 'all',
+  bidding: {
+    amazon: {
+      enabled: false,
+    },
+    prebid: {
+      enabled: false,
+    },
+  },
 };
 
 export const adSlots = {
