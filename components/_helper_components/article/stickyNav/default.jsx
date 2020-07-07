@@ -26,7 +26,7 @@ const StickyNav = ({
   let articleShareUrl = articleUrl;
   let site = siteName.toLowerCase();
   site = site ? site.replace(/w/gi, '') : '';
-  if (articleShareUrl.indexOf('.com') === -1) {
+  if (articleShareUrl && articleShareUrl.indexOf('.com') === -1) {
     const env = fetchEnv();
     // we must fully-qualify the url for sharing
     articleShareUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${articleShareUrl}`;
