@@ -60,7 +60,7 @@ const Footer = () => {
           </a>
         </div>
         <div className="col">
-          <a href={getLinkURL(row1)} className="newsletter-signup">
+          <a href={row1 && row1.site && row1.site.site_url} className="newsletter-signup">
             <p>{row1.navigation && row1.navigation.nav_title}</p>
             <img src={rightArrow} alt="" />
           </a>
