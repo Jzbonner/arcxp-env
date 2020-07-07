@@ -114,6 +114,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
       id={`${defaultAdSlot.name}${staticSlot || slot}${randomIdMPG01 !== '' ? `-${randomIdMPG01}` : ''}`}
       slotName={slotName}
       targeting={{ ...globalTargeting, ...targeting }}
+      bidding={adConfig.bidding}
     />
   );
 
