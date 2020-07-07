@@ -11,9 +11,5 @@
   iframe.scriptIframe {
     width: 95%;
     height: 1170px;
-
-    @media (orientation: landscape) {
-      height: 400px;
-    }
   }
 }
