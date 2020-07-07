@@ -1,0 +1,144 @@
+[
+  {
+    "domain": "google.com",
+    "accountId": "pub-2224462346614446",
+    "relationshipType": "DIRECT"
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "19160",
+    "relationshipType": "DIRECT",
+    "certId": "0bfd66d529a55807 #ebda"
+  },
+  {
+    "domain": "taboola.com",
+    "accountId": "1177126",
+    "relationshipType": "DIRECT",
+    "certId": "c228e6794e811952"
+  },
+  {
+    "domain": "taboola.com",
+    "accountId": "1177127",
+    "relationshipType": "DIRECT",
+    "certId": "c228e6794e811952"
+  },
+  {
+    "domain": "taboola.com",
+    "accountId": "1190475",
+    "relationshipType": "DIRECT",
+    "certId": "c228e6794e811952"
+  },
+  {
+    "domain": "taboola.com",
+    "accountId": "1190473",
+    "relationshipType": "DIRECT",
+    "certId": "c228e6794e811952"
+  },
+  {
+    "domain": "spotx.tv",
+    "accountId": "71451",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "spotxchange.com",
+    "accountId": "71451",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "advertising.com",
+    "accountId": "8603",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "156307",
+    "relationshipType": "RESELLER",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "appnexus.com",
+    "accountId": "3364",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "Indexexchange.com",
+    "accountId": "183756",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "contextweb.com",
+    "accountId": "560382",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "openx.com",
+    "accountId": "539154393",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "tremorhub.com",
+    "accountId": "z87wm",
+    "relationshipType": "RESELLER",
+    "certId": "1a4e959a1b50034a"
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "16698",
+    "relationshipType": "RESELLER",
+    "certId": "0bfd66d529a55807"
+  },
+  {
+    "domain": "freewheel.tv",
+    "accountId": "799841",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "freewheel.tv",
+    "accountId": "799921",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "aol.com",
+    "accountId": "53392",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "rhythmone.com",
+    "accountId": "1166984029",
+    "relationshipType": "RESELLER",
+    "certId": "a670c89d4a324e47"
+  },
+  {
+    "domain": "smartadserver.com",
+    "accountId": "3563",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "beachfront.com",
+    "accountId": "13749",
+    "relationshipType": "RESELLER",
+    "certId": "e2541279e8e2ca4d"
+  },
+  {
+    "domain": "advertising.com",
+    "accountId": "28458",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "admanmedia.com",
+    "accountId": "556",
+    "relationshipType": "RESELLER"
+  },
+  {
+    "domain": "inmobi.com",
+    "accountId": "a985e39014a94721a8e97c929d32ef9d",
+    "relationshipType": "RESELLER",
+    "certId": "83e75a7ae333ca9d"
+  },
+  {
+    "domain": "pubnative.net",
+    "accountId": "1007180",
+    "relationshipType": "RESELLER",
+    "certId": "d641df8625486a7b"
+  }
+]
