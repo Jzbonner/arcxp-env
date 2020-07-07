@@ -422,7 +422,7 @@ const Gallery = (props) => {
     }
 
     return null;
-  }, 4);
+  }, 2);
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
