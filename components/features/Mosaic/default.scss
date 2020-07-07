@@ -62,7 +62,7 @@
         @include breakpoint(desktop-lg) {
 
           .headline {
-            @include text-styles(1.3rem, 1.43, "Average");
+            @include text-styles(1.55rem, 1.43, "Average");
           }
         }
       }
@@ -76,7 +76,7 @@
           .headline {
             letter-spacing: -.2px;
 
-            @include text-styles(1.5rem, 1.43, "Average");
+            @include text-styles(1.8rem, 1.43, "Average");
           }
         }
       }
@@ -90,7 +90,7 @@
           .headline {
             letter-spacing: -.4px;
 
-            @include text-styles(2.65rem, 1.26, "Average");
+            @include text-styles(3.2rem, 1.26, "Average");
           }
         }
       }
@@ -104,7 +104,7 @@
           .headline {
             letter-spacing: -.4px;
 
-            @include text-styles(2.65rem, 1.26, "Average");
+            @include text-styles(3.2rem, 1.26, "Average");
           }
         }
       }
