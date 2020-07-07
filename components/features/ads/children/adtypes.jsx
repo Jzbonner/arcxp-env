@@ -527,15 +527,15 @@ export const adSlots = {
   'RP01-Story-Tablet': {
     slotName: 'RP01',
     dimensions: [
+      [], // desktop
       [
         [300, 600],
         [300, 250], // tablet
       ],
-      [], // mobile
     ],
     breakpoints: [
+      [1024, 0], // desktop
       [768, 0], // tablet
-      [0, 0], // mobile
     ],
     bidding: {
       amazon: {
@@ -776,15 +776,15 @@ export const adSlots = {
   'RP09-Story-Tablet': {
     slotName: 'RP09',
     dimensions: [
+      [], // desktop
       [
         [300, 600],
         [300, 250],
       ], // tablet
-      [], // mobile
     ],
     breakpoints: [
+      [1024, 0], // desktop
       [768, 0], // tablet
-      [0, 0], // mobile
     ],
     bidding: {
       amazon: {
