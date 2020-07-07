@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useFusionContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import Caption from '../caption/default.jsx';
@@ -20,10 +20,17 @@ const Image = ({
   const { arcSite } = fusionContext;
 
   const [imageSrc, setImageSrc] = useState('');
+  const [placeholderWidth, setPlaceholderWidth] = useState('100%');
   const [loaded, setLoaded] = useState(false);
+  const imageEl = useRef(null);
 
   useEffect(() => {
     setImageSrc(imageResizer(url, arcSite, width, height));
+  }, []);
+
+  useEffect(() => {
+    const styles = window.getComputedStyle(imageEl.current);
+    setPlaceholderWidth(styles.width);
   }, []);
 
   const screenSize = checkWindowSize();
@@ -67,9 +74,10 @@ const Image = ({
               style={ loaded ? {} : { display: 'none' }}
               alt={getAltText(altText, caption)}
               className={teaseContentType ? 'tease-image' : ''}
+              ref={imageEl}
               onLoad={() => setLoaded(true)}/>
             <img src={placeholder}
-              style={ loaded ? { display: 'none' } : { width: '100%' }}/>
+              style={ loaded ? { display: 'none' } : { width: placeholderWidth }}/>
             </>
           ) : (
             <amp-img
