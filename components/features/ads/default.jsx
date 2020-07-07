@@ -43,6 +43,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
 
   const contentMeta = getContentMeta();
   const {
+    url,
     topSection = '',
     environ = '',
     pageContentType,
@@ -101,7 +102,6 @@ const ArcAd = ({ customFields, staticSlot }) => {
       width: 'auto',
     }}>{slotName} placeholder</div>;
   }
-
   const arcad = (
     <AdSetup
       refresh={false}
@@ -109,7 +109,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
       className={`arc_ad | ${slotName} b-margin-bottom-d40-m20
       ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
-      dfpId={`${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${topSection}`}
+      dfpId={`${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${url === '/homepage' ? '/home' : topSection}`}
       display={adConfig.display || defaultAdSlot.display}
       id={`${defaultAdSlot.name}${staticSlot || slot}${randomIdMPG01 !== '' ? `-${randomIdMPG01}` : ''}`}
       slotName={slotName}
