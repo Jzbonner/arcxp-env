@@ -58,6 +58,13 @@
             @include text-styles(1.1rem, 1.43, "Average");
           }
         }
+
+        @include breakpoint(desktop-lg) {
+
+          .headline {
+            @include text-styles(1.3rem, 1.43, "Average");
+          }
+        }
       }
 
       &.size-2 {
@@ -129,7 +136,7 @@
         }
 
         .section-label {
-          @include text-styles(1.125rem, 1.5, "Gordita");
+          @include text-styles(.75rem, 1.5, "Gordita");
         }
 
         .article-timestamp {

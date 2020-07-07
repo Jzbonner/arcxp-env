@@ -1,3 +1,5 @@
+import appadstxt from './appadstxt/journal-news.com.json';
+
 export default {
   dfp_id: 21849707860,
   siteName: 'journal-news',
@@ -32,4 +34,5 @@ export default {
     placementName: 'Journal News Custom Feed',
   },
   favicon: '/resources/icons/favicons/Ohio/journal-news-favicon.ico',
+  appAdsTxt: appadstxt,
 };

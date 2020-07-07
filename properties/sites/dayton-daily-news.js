@@ -1,3 +1,5 @@
+import appadstxt from './appadstxt/daytondailynews.com.json';
+
 export default {
   dfp_id: 21849707860,
   siteName: 'daytondailynews',
@@ -32,4 +34,5 @@ export default {
     placementName: 'Dayton Daily News Custom Feed',
   },
   favicon: '/resources/icons/favicons/Ohio/dayton-daily-news-favicon.ico',
+  appAdsTxt: appadstxt,
 };

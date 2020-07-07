@@ -6,7 +6,7 @@ import get from 'lodash.get';
 
 const AdsTxt = (customFields = {}) => {
   const fusionContext = useFusionContext();
-  const { arcSite = 'ajc' } = fusionContext;
+  const { arcSite } = fusionContext;
   const siteProps = getProperties(arcSite);
   const {
     customFields: {
@@ -18,10 +18,9 @@ const AdsTxt = (customFields = {}) => {
   const adsTxtJson = get(siteProps, typeOfTxt, {});
   const list = [];
   let csvOutput = '';
-
   if (adsTxtJson) {
     adsTxtJson.forEach((item) => {
-      list.push(`${item.domain}, ${item.accountId}, ${item.relationshipType}${item.certId ? ', ' : ''}${item.certId}`);
+      list.push(`${item.domain}, ${item.accountId}, ${item.relationshipType}${item && item.certId ? `, ${item.certId}` : ''}`);
     });
     csvOutput = list.join('\n');
   }

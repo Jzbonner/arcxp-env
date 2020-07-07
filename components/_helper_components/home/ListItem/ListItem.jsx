@@ -54,8 +54,8 @@ const ListItem = ({
           <a href={`${contextPath}${relativeURL}`} className="homeList-image">
             <Image
               src={promoItems.basic}
-              width={1066}
-              height={600}
+              width={500}
+              height={282}
               imageType="isHomepageImage"
               teaseContentType={contentType}
             />
@@ -73,8 +73,8 @@ const ListItem = ({
           <a href={`${contextPath}${relativeURL}`} className="homeList-image">
             <Image
               src={promoItems.basic || promoItems.lead_art.promo_items.basic}
-              width={1066}
-              height={600}
+              width={500}
+              height={282}
               imageType="isHomepageImage"
             />
             {sponsor && (
@@ -96,8 +96,8 @@ const ListItem = ({
             <a href={`${contextPath}${relativeURL}`} className="homeList-image">
               <Image
                 src={promoItems.basic.promo_items.basic}
-                width={1066}
-                height={600}
+                width={500}
+                height={282}
                 imageType="isHomepageImage"
               />
               {sponsor && (
@@ -114,8 +114,8 @@ const ListItem = ({
         <a href={`${contextPath}${relativeURL}`} className="homeList-image">
           <Image
             src={firstInlineImage}
-            width={1066}
-            height={600}
+            width={500}
+            height={282}
             imageType="isHomepageImage"
           />
           {sponsor && <div className="c-sponsorOverlay">{sponsor}</div>}

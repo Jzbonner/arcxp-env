@@ -160,7 +160,7 @@ const StoryPageLayout = () => {
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
             <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
-            <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} />
+            <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} contentType={type} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
             {!isCommunityContributor
@@ -249,7 +249,7 @@ const StoryPageLayout = () => {
             ampPage={ampPage}
           />
           {(!basicItems || promoType !== 'gallery') && !ampPage ? (
-            <Gallery contentElements={filteredContentElements} pageType={subtype} />
+            <Gallery contentElements={filteredContentElements} pageType={type} />
           ) : null}
           {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} />}
           {!noAds && !isHyperlocalContent && !sponsorSectionID && (
