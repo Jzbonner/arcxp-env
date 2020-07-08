@@ -33,6 +33,7 @@ const getContentMeta = () => {
     data: contentData,
     additional_properties: additionalProperties,
   } = globalContent || {};
+  const articleDesc = description;
   const {
     sections,
     primary_section: primarySection,
@@ -154,6 +155,7 @@ const getContentMeta = () => {
     title,
     seoTitle,
     description: desc,
+    articleDesc,
     site,
     promoItems,
     credits,

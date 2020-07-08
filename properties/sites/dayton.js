@@ -24,6 +24,16 @@ export default {
   logoHamburger: '/resources/logos/Dayton/logo-mobile-hamburger.svg',
   mail: 'mailto:?Subject=',
   sites: ['dayton'],
+  featuredVideoPlayerRules: {
+    startPlaying: true,
+    muteON: true,
+    autoplayNext: true,
+  },
+  inlineVideoPlayerRules: {
+    startPlaying: false,
+    muteON: true,
+    autoplayNext: true,
+  },
   weatherLocationId: 330120,
   taboola: {
     dataPublisher: 'cox-dayton',

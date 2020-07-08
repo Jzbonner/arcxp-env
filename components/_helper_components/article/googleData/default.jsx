@@ -9,12 +9,13 @@ const GoogleStructuredData = () => {
     return null;
   }
   const {
-    title, pageContentType, initialPublishDate, url, topSectionName, promoItems, credits, dateModified,
+    title, pageContentType, initialPublishDate, url, topSectionName, promoItems, credits, dateModified, articleDesc,
   } = contentMeta;
 
   if (pageContentType && pageContentType === 'article') {
     const fusionContext = useFusionContext();
     const { arcSite } = fusionContext;
+    const desc = articleDesc && articleDesc.basic ? articleDesc.basic : '';
     const {
       websiteURL, websiteLogo, googleLogo, orgName,
     } = getProperties(arcSite);
@@ -40,7 +41,10 @@ const GoogleStructuredData = () => {
       '@context': 'http://schema.org',
       '@type': 'NewsArticle',
       inLanguage: 'en_US',
-      mainEntityofPage: `${websiteURL}${url}`,
+      mainEntityofPage: {
+        '@type': 'WebPage',
+        '@id': `${websiteURL}${url}`,
+      },
       publisher: {
         '@type': 'Organization',
         name: `${orgName}`,
@@ -61,6 +65,7 @@ const GoogleStructuredData = () => {
         '@type': 'ImageObject',
         url: `${articleIMG}`,
       },
+      description: `${desc}`,
     };
 
     return (
