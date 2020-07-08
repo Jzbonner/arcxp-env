@@ -24,6 +24,16 @@ export default {
   logoHamburger: '/resources/logos/JournalNews/logo-mobile-hamburger.svg',
   mail: 'mailto:?Subject=',
   sites: ['journal-news'],
+  featuredVideoPlayerRules: {
+    startPlaying: true,
+    muteON: true,
+    autoplayNext: true,
+  },
+  inlineVideoPlayerRules: {
+    startPlaying: false,
+    muteON: true,
+    autoplayNext: true,
+  },
   weatherLocationId: 330109,
   taboola: {
     dataPublisher: 'cox-journal-news',

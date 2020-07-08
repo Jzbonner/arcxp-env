@@ -22,6 +22,16 @@ export default {
   logoHamburger: '/resources/logos/SpringfieldNews/logo-mobile-hamburger.svg',
   mail: 'mailto:?Subject=',
   sites: ['springfieldnewssun'],
+  featuredVideoPlayerRules: {
+    startPlaying: true,
+    muteON: true,
+    autoplayNext: true,
+  },
+  inlineVideoPlayerRules: {
+    startPlaying: false,
+    muteON: true,
+    autoplayNext: true,
+  },
   weatherLocationId: 330116,
   taboola: {
     dataPublisher: 'cox-springfieldnewssun',

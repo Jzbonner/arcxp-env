@@ -18,6 +18,16 @@ export default {
     gtmContainerKey: 'GTM-WT4CBT7',
     ampGtmID: 'GTM-WQBXD72',
   },
+  featuredVideoPlayerRules: {
+    startPlaying: true,
+    muteON: true,
+    autoplayNext: true,
+  },
+  inlineVideoPlayerRules: {
+    startPlaying: false,
+    muteON: true,
+    autoplayNext: true,
+  },
   weatherPageURL: '/atlanta-weather/',
   adsPath: 'atlanta_np/ajc_web_default',
   adsTxt: adstxt,
