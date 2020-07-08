@@ -789,6 +789,24 @@
     }
   }
 
+  .connext-subscribe,
+  .Mg2-connext[data-display-type] {
+    max-height: 52px;
+    overflow: hidden;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    margin: 0;
+
+    @include breakpoint(desktop-sm) {
+      max-height: 58px;
+    }
+
+    &.not-visible {
+      display: none;
+    }
+  }
+
   .section {
     display: none;
     cursor: default;
