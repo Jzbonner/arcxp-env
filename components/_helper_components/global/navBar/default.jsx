@@ -6,7 +6,6 @@ import { useAppContext, useFusionContext } from 'fusion:context';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
-import Subscribe from './subscribe/default';
 import DesktopNav from './desktopNav/default';
 import StickyNav from '../../article/stickyNav/default';
 import AmpNavBar from './amp';
@@ -146,9 +145,8 @@ const NavBar = ({
             stickyActive={stickyNavVisibility}
             type={type}
             siteName={siteName.toLowerCase()}/>
-          <div className={`sub b-flexRow b-flexCenter sub-text ${stickyNavVisibility || (stickyNavVisibility
+          <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
             && mobileMenuToggled) ? 'not-visible' : ''}`}>
-            <Subscribe/>
           </div>
           <StickyNav
             headlines={headlines}
