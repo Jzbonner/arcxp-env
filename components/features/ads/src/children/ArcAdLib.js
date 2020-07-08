@@ -50,6 +50,7 @@ export default class ArcAdLib {
           }
         }
       });
+      window.arcBiddingReady = true;
     }
 
     if (params && params.slotName === 'PG01' && window && window.pg01) {
