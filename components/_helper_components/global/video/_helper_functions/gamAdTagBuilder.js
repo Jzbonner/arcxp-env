@@ -50,7 +50,7 @@ const gamAdTagBuilder = (pageTaxonomy = {}, videoTaxonomy = {}, videoId, current
   descriptionUrl = encodeURIComponent(descriptionUrl);
 
   // eslint-disable-next-line max-len
-  return `${gamUrl}?${size}&iu=/${dfpId}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${path === '/' ? '' : path}&env=vp&gdfp_req=1&output=vast&impl=s&unviewed_position_start=1&cmsid=${cmsId}&vid=[[VIDEO_ID]‌]&description_url=${descriptionUrl}‌&cust_params=kw=${kw.join()}%26topics=${kw.join()}%26video=${videoId}%26uuid=${pageUuid}%26obj_type=${pageContentType}%26environ=${environ}`;
+  return `${gamUrl}?${size}&iu=/${dfpId}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${path === '/' ? '' : path}&env=vp&gdfp_req=1&output=vast&impl=s&unviewed_position_start=1&cmsid=${cmsId}&vid=${videoId}&description_url=${descriptionUrl}‌&cust_params=kw=${kw.join()}%26topics=${kw.join()}%26video=${videoId}%26uuid=${pageUuid}%26obj_type=${pageContentType}%26environ=${environ}`;
 };
 
 export default gamAdTagBuilder;
