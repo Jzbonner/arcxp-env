@@ -73,7 +73,7 @@ const AdSetup = ({
             bidding,
             prerender: typeof window !== 'undefined' ? window.arcAdsPrerenderer : null,
           },
-          dfpId,
+          dfpId.replace(/-/g, '_'),
           {
             amazon: {
               enabled: adsA9Enabled,
