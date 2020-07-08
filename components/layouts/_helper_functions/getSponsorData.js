@@ -4,6 +4,8 @@ import checkSponsor from './checkSponsor';
 export default (sections) => {
   const { sponsorSectionID, sponsorName } = checkSponsor(sections);
 
+  if (sponsorSectionID === null) return null;
+
   const siteData = useContent({
     source: 'site-api',
     query: { section: sponsorSectionID || null },
