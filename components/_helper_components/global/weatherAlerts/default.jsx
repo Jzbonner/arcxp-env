@@ -1,7 +1,10 @@
-import React from 'react';
-import { useContent } from 'fusion:content';
+// import React from 'react';
+// import { useContent } from 'fusion:content';
 
-const WeatherAlerts = () => {
+const WeatherAlerts = () => null;
+/* "blanking out" weather alerts until we get the UI developed
+  {
+
   let gaCounties = [
     'GAZ034',
     'GAZ093',
@@ -50,5 +53,6 @@ const WeatherAlerts = () => {
   }
   return null;
 };
+*/
 
 export default WeatherAlerts;
