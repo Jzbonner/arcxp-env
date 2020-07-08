@@ -13,7 +13,7 @@ const TPT = () => {
     const regex = /(<?\/body><?\/head><?\/html>)/ig;
     const src = content.replace(regex, '');
     return (
-      <div className="b-margin-bottom-d30-m20">
+      <div className="b-margin-bottom-d30-m20 b-full-width">
         <FeatureTitle title={title} moreURL={moreURL} />
         <div className="custom-html" dangerouslySetInnerHTML={{
           __html: renderCustomHtml(src),

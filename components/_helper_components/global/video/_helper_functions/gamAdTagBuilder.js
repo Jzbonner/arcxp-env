@@ -7,7 +7,7 @@ const gamAdTagBuilder = (pageTaxonomy = {}, videoTaxonomy = {}, videoId, current
   const { dfp_id: dfpId, adsPath } = getProperties();
   const { primary_section: primarySection, tags: pageTags } = pageTaxonomy || {};
   const { tags: videoTags } = videoTaxonomy || {};
-  const { cmsId = '' } = video || {};
+  const { cmsId } = video || {};
   let noPageAds = false;
   let noVideoAds = false;
   if (videoTags) {
@@ -50,7 +50,7 @@ const gamAdTagBuilder = (pageTaxonomy = {}, videoTaxonomy = {}, videoId, current
   descriptionUrl = encodeURIComponent(descriptionUrl);
 
   // eslint-disable-next-line max-len
-  return `${gamUrl}?${size}&iu=/${dfpId}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${path === '/' ? '' : path}&kw=${kw.join()}&env=vp&gdfp_req=1&output=vast&impl=s&unviewed_position_start=1&video=${videoId}&cmsid=${cmsId}&obj_type=${pageContentType}&description_url=${descriptionUrl}‌&uuid=${pageUuid}&environ=${environ}`;
+  return `${gamUrl}?${size}&iu=/${dfpId}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${path === '/' ? '' : path}&env=vp&gdfp_req=1&output=vast&impl=s&unviewed_position_start=1&cmsid=${cmsId}&vid=${videoId}&description_url=${descriptionUrl}‌&cust_params=kw=${kw.join()}%26topics=${kw.join()}%26video=${videoId}%26uuid=${pageUuid}%26obj_type=${pageContentType}%26environ=${environ}`;
 };
 
 export default gamAdTagBuilder;

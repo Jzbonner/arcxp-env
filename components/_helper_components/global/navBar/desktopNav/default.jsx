@@ -28,7 +28,6 @@ const DesktopNav = ({
 
   useEffect(() => {
     document.body.style.position = hamburgerToggle && isMobile ? 'static' : '';
-    document.body.style.overflowY = hamburgerToggle && isMobile ? 'hidden' : '';
     window.isMobileBP = isMobile;
   }, [hamburgerToggle, isMobile]);
 

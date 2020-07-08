@@ -79,6 +79,17 @@
   }
 
   &.full-width {
+    @include between-breakpoints(mobile, desktop-sm) {
+
+      .arc_ad.HS02 {
+        width: 100vw;
+
+        .arcad.HS02 + div {
+          padding-bottom: 20px;
+        }
+      }
+    }
+
     @include breakpoint(desktop-sm) {
       clear: both;
     }
@@ -86,6 +97,17 @@
     .arc_ad[class*="HP0"],
     .arc_ad[class*="MP0"] {
       @include arc-ad-full-width;
+    }
+
+    // override for HP02 when interscroller loads in place of a display ad
+
+    .arc_ad[class*="HP0"].ccad-noslotshadow .arcad {
+      margin: 0;
+      padding: 0;
+
+      &:before {
+        display: none;
+      }
     }
   }
 
@@ -121,7 +143,7 @@
       }
 
       @include breakpoint(desktop-sm) {
-    
+
         > :first-child:not(.arc_ad) {
           margin-top: 0;
         }
@@ -150,6 +172,10 @@
 
       @include breakpoint(desktop-sm) {
         flex-wrap: initial;
+      }
+
+      > div {
+        width: 100%;
       }
 
       .c-homeListContainer {

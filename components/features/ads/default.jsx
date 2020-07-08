@@ -109,11 +109,12 @@ const ArcAd = ({ customFields, staticSlot }) => {
       className={`arc_ad | ${slotName} b-margin-bottom-d40-m20
       ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
-      dfpId={`${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${url === '/homepage' ? '/home' : topSection}`}
+      dfpId={`${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${url === '/homepage' || url === '/' ? '/home' : topSection}`}
       display={adConfig.display || defaultAdSlot.display}
       id={`${defaultAdSlot.name}${staticSlot || slot}${randomIdMPG01 !== '' ? `-${randomIdMPG01}` : ''}`}
       slotName={slotName}
       targeting={{ ...globalTargeting, ...targeting }}
+      bidding={adConfig.bidding || { prebid: false, amazon: false }}
     />
   );
 
