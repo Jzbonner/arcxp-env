@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import './default.scss';
-import fetchEnv from '../../global/utils/environment.js';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import Comments from '../comments/comments';
 import Login from '../../global/navBar/login/default';
+import fetchEnv from '../../global/utils/environment';
 import '../../global/navBar/default.scss';
 
 const StickyNav = ({
@@ -16,25 +16,27 @@ const StickyNav = ({
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    facebookURL, pinterestURL, twitterURL, redditURL, mail, siteName, logoShort,
+    facebookURL, twitterURL, pinterestURL, redditURL, mail, siteName, logoShort,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
-  let sharedUrl = articleUrl;
+
+  let articleShareUrl = articleUrl;
   let site = siteName.toLowerCase();
   site = site ? site.replace(/w/gi, '') : '';
-  if (sharedUrl && sharedUrl.indexOf('.com') === -1) {
+  if (articleShareUrl.indexOf('.com') === -1) {
     const env = fetchEnv();
     // we must fully-qualify the url for sharing
-    sharedUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${sharedUrl}`;
+    articleShareUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${articleShareUrl}`;
   }
-  const shareLinkFacebook = `${facebookURL}${sharedUrl}`;
-  const shareLinkTwitter = `${twitterURL}${sharedUrl}&text=${articleHeadline}`;
-  const shareLinkPinterest = `${pinterestURL}${sharedUrl}&media=${renderImage()}&description=${articleHeadline}`;
-  const shareLinkReddit = `${redditURL}${sharedUrl}&title=${articleHeadline}`;
-  const shareLinkEmail = `${mail}${articleHeadline}&body=${sharedUrl}`;
+
+  const shareLinkFacebook = `${facebookURL}${articleShareUrl}`;
+  const shareLinkTwitter = `${twitterURL}${articleShareUrl}&text=${articleHeadline}`;
+  const shareLinkPinterest = `${pinterestURL}${articleShareUrl}&media=${renderImage()}&description=${articleHeadline}`;
+  const shareLinkReddit = `${redditURL}${articleShareUrl}&title=${articleHeadline}`;
+  const shareLinkEmail = `${mail}${articleHeadline}&body=${articleShareUrl}`;
 
   const logoPath = deployment(`${contextPath}${logoShort}`);
 
@@ -148,7 +150,7 @@ const StickyNav = ({
               {commentsEnabled ? (
                 <li className="stickyNav-item">
                   <a href="#" className="sticky-nav-icon btn-comments" onClick={e => toggleCommentsWindow(e)}>
-                    <span className="fb-comments-count" data-href={sharedUrl}></span>
+                    <span className="fb-comments-count" data-href={articleShareUrl}></span>
                   </a>
                 </li>
               ) : null}
@@ -167,7 +169,7 @@ const StickyNav = ({
           <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
         </div>
       </div>
-      <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} articleUrl={sharedUrl} />
+      <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} articleUrl={articleShareUrl} />
     </>
   );
 };

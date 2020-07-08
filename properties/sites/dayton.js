@@ -1,3 +1,5 @@
+import appadstxt from './appadstxt/dayton.com.json';
+
 export default {
   dfp_id: 21849707860,
   siteName: 'dayton',
@@ -27,4 +29,5 @@ export default {
     dataPublisher: 'cox-dayton',
   },
   favicon: '/resources/icons/favicons/Ohio/dayton-favicon.ico',
+  appAdsTxt: appadstxt,
 };
