@@ -13,6 +13,7 @@ const AdSetup = ({
       resolve(adDetails);
     });
   }
+  const name = slotName;
 
   useEffect(() => {
     const instance = ArcAdLib.getInstance();
@@ -62,7 +63,8 @@ const AdSetup = ({
         const adSlotConfig = [
           {
             id,
-            slotName,
+            slotName: '',
+            name,
             dimensions,
             display,
             targeting,
@@ -73,7 +75,7 @@ const AdSetup = ({
             bidding,
             prerender: typeof window !== 'undefined' ? window.arcAdsPrerenderer : null,
           },
-          dfpId.replace(/-/g, '_'),
+          dfpId,
           {
             amazon: {
               enabled: adsA9Enabled,
