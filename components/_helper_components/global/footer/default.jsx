@@ -42,7 +42,7 @@ const Footer = () => {
     }
   };
 
-  if (siteNavigation && siteNavigation.children[5]) {
+  if (siteNavigation && siteNavigation.children && siteNavigation.children[5]) {
     if (siteNavigation.children[5].children[0] && siteNavigation.children[5].children[0].url) {
       twitterURL = siteNavigation.children[5].children[0].url;
     }
