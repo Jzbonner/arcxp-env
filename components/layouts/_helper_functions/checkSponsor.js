@@ -5,7 +5,7 @@ const checkSponsor = (sections) => {
 
   let sponsorSectionID = null;
   let sponsorName = null;
-  const sponsorSection = sections.filter(section => section && section.path && section.path.includes('/sponsor/'));
+  const sponsorSection = sections.filter(section => section && section.path && section.path.toLowerCase().includes('/sponsor/'));
 
   sponsorSection.forEach((el) => {
     const inactive = el.additional_properties
