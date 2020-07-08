@@ -213,7 +213,7 @@
 
     &.springfieldnewssun {
       width: 265px;
-      
+
       @include breakpoint(desktop-sm) {
         width: 400px;
         max-width: 400px;
@@ -256,7 +256,7 @@
       margin-top: 4px;
     }
   }
-  
+
   .nav-sections {
     display: flex;
     flex-direction: column;
@@ -787,39 +787,6 @@
 
       @include text-styles(1.125rem, 3, "Gordita-Bold");
     }
-  }
-
-  .sub {
-    min-height: 50px;
-    width: 100%;
-    border-radius: 6px;
-    background-image: linear-gradient(to top, #04befe, #4481eb);
-    flex-direction: column;
-
-    @include breakpoint(desktop-sm) {
-      height: 57px;
-      flex-direction: row;
-    }
-
-    &.not-visible {
-      display: none;
-    }
-  }
-
-  .sub-text {
-    color: #fff;
-
-    @include text-styles(1rem, 1.5, "Gordita");
-
-    @include breakpoint(desktop-sm) {
-      @include text-styles(1.25rem, 1, "Gordita");
-    }
-  }
-
-  .sub-bold {
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-left: 5px;
   }
 
   .section {
