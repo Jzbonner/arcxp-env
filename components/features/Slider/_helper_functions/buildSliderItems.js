@@ -8,8 +8,6 @@ const buildSliderItems = (sliderCollection, ref, startIndex, itemLimit) => {
     if (startIndex <= i && elCount < itemLimit) {
       const itemThumbnail = getItemThumbnail(elem.promo_items || elem.firstInlineImage);
 
-      if (!itemThumbnail) return null;
-
       const data = {};
       data.classes = elCount === 0 ? 'is-firstItem' : '';
       data.index = elCount;
@@ -19,13 +17,13 @@ const buildSliderItems = (sliderCollection, ref, startIndex, itemLimit) => {
       data.timestampData = {};
       data.sectionLabelData = {};
 
-      data.image = itemThumbnail;
+      data.image = itemThumbnail || null;
 
       data.contentType = elem.type || null;
 
       data.headline = elem.headlines && elem.headlines.basic ? elem.headlines.basic : null;
 
-      data.canonicalUrl = elem.canonical_url ? elem.canonical_url : null;
+      data.canonicalUrl = elem.canonical_url || null;
 
       data.timestampData.displayDate = elem.display_date ? elem.display_date : null;
 
