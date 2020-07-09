@@ -93,7 +93,8 @@
       @include breakpoint(tablet) {
         width: 300px;
         float: right;
-        margin-right: -330px;
+        position: relative;
+        right: -30px;
       }
 
       @include breakpoint(desktop-sm) {
