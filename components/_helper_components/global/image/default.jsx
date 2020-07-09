@@ -20,18 +20,36 @@ const Image = ({
   const { arcSite } = fusionContext;
 
   const [imageSrc, setImageSrc] = useState('');
+
   const [placeholderWidth, setPlaceholderWidth] = useState('100%');
   const [loaded, setLoaded] = useState(false);
   const imageEl = useRef(null);
+  const placeholderEl = useRef(null);
 
-  useEffect(() => {
-    setImageSrc(imageResizer(url, arcSite, width, height));
-  }, []);
+  const lazyLoadImage = () => {
+    const imagePosition = placeholderEl.current.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+
+    const buffer = 300;
+
+    if (!imageSrc && (imagePosition < windowHeight + buffer)) {
+      setImageSrc(imageResizer(url, arcSite, width, height));
+    }
+  };
 
   useEffect(() => {
     const styles = window.getComputedStyle(imageEl.current);
     setPlaceholderWidth(styles.width);
   }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', lazyLoadImage);
+    window.addEventListener('load', lazyLoadImage);
+    return () => {
+      window.removeEventListener('scroll', lazyLoadImage);
+      window.addEventListener('load', lazyLoadImage);
+    };
+  });
 
   const screenSize = checkWindowSize();
 
@@ -76,7 +94,7 @@ const Image = ({
               className={teaseContentType ? 'tease-image' : ''}
               ref={imageEl}
               onLoad={() => setLoaded(true)}/>
-            <img src={placeholder}
+            <img src={placeholder} ref={placeholderEl}
               style={ loaded ? { display: 'none' } : { width: placeholderWidth }}/>
             </>
           ) : (
