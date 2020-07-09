@@ -43,6 +43,14 @@ export default {
     containerName: 'taboola-journal-news-custom-feed',
     placementName: 'Journal News Custom Feed',
   },
+  metrics: {
+    siteID: 'journalnews',
+    siteMetro: 'oh: dayton',
+    siteFormat: 'news',
+    gtmContainerKey: 'GTM-W3VLHBK',
+    ampGtmID: 'GTM-WQBXD72',
+  },
+  adsPath: 'dayton_np/jnws_web_default',
   favicon: '/resources/icons/favicons/Ohio/journal-news-favicon.ico',
   appAdsTxt: appadstxt,
 };

@@ -21,7 +21,7 @@ export const AmpAd = ({
 
   const currentEnv = ENVIRONMENT || 'unknown';
   const jsonObject = buildJsonObject(adSlot, uuid, topics);
-  const dataSlot = `${dfpid}/${currentEnv.toLowerCase().indexOf('prod') === -1 ? 'TEST_' : ''}${adsPath}${path}`;
+  const dataSlot = `${dfpid}/${currentEnv.toLowerCase().indexOf('prod') === -1 ? 'TEST_' : ''}${adsPath}${path.replace(/-/g, '_')}`;
 
   const offsetHeight = parseInt(height, 10) + 20;
 

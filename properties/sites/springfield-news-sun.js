@@ -41,5 +41,13 @@ export default {
     containerName: 'taboola-springfield-news-sun-custom-feed',
     placementName: 'Springfield News Sun Custom Feed',
   },
+  metrics: {
+    siteID: 'springfieldnews',
+    siteMetro: 'oh: dayton',
+    siteFormat: 'news',
+    gtmContainerKey: 'GTM-W3VLHBK',
+    ampGtmID: 'GTM-WQBXD72',
+  },
+  adsPath: 'dayton_np/spns_web_default',
   favicon: '/resources/icons/favicons/Ohio/springfield-news-sun-favicon.ico',
 };

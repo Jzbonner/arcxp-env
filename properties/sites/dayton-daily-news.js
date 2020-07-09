@@ -43,6 +43,14 @@ export default {
     containerName: 'taboola-dayton-daily-news-custom-feed',
     placementName: 'Dayton Daily News Custom Feed',
   },
+  metrics: {
+    siteID: 'daytondaily',
+    siteMetro: 'oh: dayton',
+    siteFormat: 'news',
+    gtmContainerKey: 'GTM-W3VLHBK',
+    ampGtmID: 'GTM-WQBXD72',
+  },
+  adsPath: 'dayton_np/ddn_web_default',
   favicon: '/resources/icons/favicons/Ohio/dayton-daily-news-favicon.ico',
   appAdsTxt: appadstxt,
 };
