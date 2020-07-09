@@ -8,7 +8,7 @@ const GalleryItem = ({
   data, func, modalFunc,
 }) => {
   const {
-    url, width, height, alt, index, id, by = [], captionObj, states, lastItemClass,
+    url, width, height, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass,
   } = data;
   const { affiliation = [], caption = [] } = captionObj;
 
