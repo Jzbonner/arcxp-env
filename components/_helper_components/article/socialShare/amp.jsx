@@ -13,7 +13,7 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
 
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
-  const { facebookAppID, siteName, logoShort } = getProperties(arcSite);
+  const { facebookAppID, siteName, logoShortPng } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
   let sharedUrl = articleURL;
@@ -30,7 +30,7 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
     pinterestUrl = getItemThumbNail(promoItems);
   }
   if (!pinterestUrl) {
-    pinterestUrl = deployment(`${contextPath}${logoShort}`);
+    pinterestUrl = deployment(`${contextPath}${logoShortPng}`);
   }
 
   return (

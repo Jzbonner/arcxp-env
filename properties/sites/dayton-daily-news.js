@@ -21,6 +21,7 @@ export default {
   footerLogo: '/resources/logos/DaytonDailyNews/logo-full.svg',
   logo: '/resources/logos/DaytonDailyNews/logo-full.svg',
   logoShort: '/resources/logos/DaytonDailyNews/logo-short.svg',
+  logoShortPng: '/resources/logos/DaytonDailyNews/logo-short.png',
   logoHamburger: '/resources/logos/DaytonDailyNews/logo-mobile-hamburger.svg',
   mail: 'mailto:?Subject=',
   sites: ['daytondailynews'],
