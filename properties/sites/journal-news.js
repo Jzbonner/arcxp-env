@@ -21,7 +21,6 @@ export default {
   footerLogo: '/resources/logos/JournalNews/logo-full.svg',
   logo: '/resources/logos/JournalNews/logo-full.svg',
   logoShort: '/resources/logos/JournalNews/logo-short.svg',
-  logoShortPng: '/resources/logos/JournalNews/logo-short.png',
   logoHamburger: '/resources/logos/JournalNews/logo-mobile-hamburger.svg',
   mail: 'mailto:?Subject=',
   sites: ['journal-news'],

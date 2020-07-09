@@ -14,7 +14,6 @@
   "footerLogo": "/resources/logos/AJC/logo-footer.svg",
   "logo": "/resources/logos/AJC/logo-full.svg",
   "logoShort": "/resources/logos/AJC/logo-short.svg",
-  "logoShortPng": "/resources/logos/AJC/logo-short.png",
   "logoHamburger": "/resources/logos/AJC/logo-mobile-hamburger.svg",
   "mail": "mailto:?Subject=",
   "sites": ["ajc", "dayton-daily-news", "dayton", "journal-news", "springfield-news-sun"],

@@ -21,7 +21,6 @@ export default {
   footerLogo: '/resources/logos/Dayton/logo-full.svg',
   logo: '/resources/logos/Dayton/logo-full.svg',
   logoShort: '/resources/logos/Dayton/logo-short.svg',
-  logoShortPng: '/resources/logos/Dayton/logo-short.png',
   logoHamburger: '/resources/logos/Dayton/logo-mobile-hamburger.svg',
   mail: 'mailto:?Subject=',
   sites: ['dayton'],

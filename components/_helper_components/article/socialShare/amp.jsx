@@ -1,6 +1,6 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useFusionContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import fetchEnv from '../../global/utils/environment';
 import getItemThumbNail from '../../../features/Slider/_helper_functions/getItemThumbnail';
@@ -13,9 +13,9 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
 
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
-  const { facebookAppID, siteName, logoShortPng } = getProperties(arcSite);
-  const appContext = useAppContext();
-  const { deployment, contextPath } = appContext;
+  const {
+    facebookAppID, siteName, googleLogo, websiteLogo,
+  } = getProperties(arcSite);
   let sharedUrl = articleURL;
   let site = siteName.toLowerCase();
   site = site ? site.replace(/w/gi, '') : '';
@@ -30,7 +30,7 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
     pinterestUrl = getItemThumbNail(promoItems);
   }
   if (!pinterestUrl) {
-    pinterestUrl = deployment(`${contextPath}${logoShortPng}`);
+    pinterestUrl = siteName.toLowerCase() === 'ajc' ? websiteLogo : googleLogo;
   }
 
   return (

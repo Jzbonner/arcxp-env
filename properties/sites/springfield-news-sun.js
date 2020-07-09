@@ -19,7 +19,6 @@ export default {
   footerLogo: '/resources/logos/SpringfieldNews/logo-full.svg',
   logo: '/resources/logos/SpringfieldNews/logo-full.svg',
   logoShort: '/resources/logos/SpringfieldNews/logo-short.svg',
-  logoShortPng: '/resources/logos/SpringfieldNews/logo-short.png',
   logoHamburger: '/resources/logos/SpringfieldNews/logo-mobile-hamburger.svg',
   mail: 'mailto:?Subject=',
   sites: ['springfieldnewssun'],
