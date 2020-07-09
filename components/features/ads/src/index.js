@@ -4,7 +4,7 @@ import getProperties from 'fusion:properties';
 import ArcAdLib from './children/ArcAdLib';
 
 const AdSetup = ({
-  id, slotName, dimensions, display, breakpoints, refresh, targeting, bidding, className, prerender, dfpId,
+  id, slotName, adSlotNameForArcAds, dimensions, display, breakpoints, refresh, targeting, bidding, className, prerender, dfpId,
 }) => {
   const { adsA9Enabled, adsA9Id, adsPrebidEnabled } = getProperties();
   if (prerender && typeof window !== 'undefined') {
@@ -63,7 +63,7 @@ const AdSetup = ({
         const adSlotConfig = [
           {
             id,
-            slotName: '',
+            slotName: adSlotNameForArcAds,
             name,
             dimensions,
             display,
@@ -172,6 +172,7 @@ AdSetup.propTypes = {
   prerender: PropTypes.func, // a function to fire before the ad loads
   bidding: PropTypes.object, // bidding information. see https://github.com/washingtonpost/ArcAds#header-bidding
   dfpId: PropTypes.string,
+  adSlotNameForArcAds: PropTypes.string.isRequired, // slot name for this ad, to be passed to arc ads (i.e. `topSection` value)
 };
 
 AdSetup.defaultProps = {

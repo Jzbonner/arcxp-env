@@ -52,8 +52,12 @@ const ArcAd = ({ customFields, staticSlot }) => {
     topics = [],
     contentId,
   } = contentMeta || {};
-  /* eslint-disable-next-line max-len */
-  const dfpIdFormatted = `${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${url === '/homepage' || url === '/' ? '/home' : topSection.replace(/-/g, '_')}`;
+  const dfpIdFormatted = `${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}`;
+  let adSlotNameForArcAds = url === '/homepage' || url === '/' ? 'home' : topSection.replace(/-/g, '_');
+  if (adSlotNameForArcAds.indexOf('/') === 0) {
+    // we remove the leading `/` if it exists, since the ArcAds lib will add it back in
+    adSlotNameForArcAds = adSlotNameForArcAds.substring(1);
+  }
 
   // rewrite content types for ads reporting purposes (see APD-520)
   let objType;
@@ -87,7 +91,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
     temp,
     weather,
     sky,
-    slotName: `/${dfpIdFormatted}/`,
+    slotName: `/${dfpIdFormatted}/${adSlotNameForArcAds}`,
   };
   if (isWrap && typeof window.location !== 'undefined') {
     // we set these dynamic values for Wraps
@@ -116,6 +120,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
       display={adConfig.display || defaultAdSlot.display}
       id={`${defaultAdSlot.name}${staticSlot || slot}${randomIdMPG01 !== '' ? `-${randomIdMPG01}` : ''}`}
       slotName={slotName}
+      adSlotNameForArcAds={adSlotNameForArcAds}
       targeting={{ ...globalTargeting, ...targeting }}
       bidding={adConfig.bidding || { prebid: false, amazon: false }}
     />
