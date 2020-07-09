@@ -118,7 +118,7 @@ const Section = ({
         </div>
         <div className={`section ${isActive}`}>
           <div className='section-item'>
-            <a href={link.indexOf('/') === 0 ? `${contextPath}${link}` : link}>{name}</a>
+            <a href={link.indexOf('/') === 0 ? `${contextPath}${link}/` : link}>{name}</a>
           </div>
           <div className={`subNav ${isActive}`} style={{ width: `${width}px` }}>
             <ul className={`subNav-flyout itemCount-${childSectionLength}`} ref={subNavRef}>
