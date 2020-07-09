@@ -1,18 +1,12 @@
 import React from 'react';
-import { useAppContext } from 'fusion:context';
 import SliderItem from '../../../_helper_components/home/Slider/SliderItem';
 import getItemThumbnail from './getItemThumbnail';
 
 const buildSliderItems = (sliderCollection, ref, startIndex, itemLimit) => {
-  const appContext = useAppContext();
-  const { contextPath } = appContext;
   let elCount = 0;
   const sliderItems = sliderCollection.map((elem, i) => {
     if (startIndex <= i && elCount < itemLimit) {
       const itemThumbnail = getItemThumbnail(elem.promo_items || elem.firstInlineImage);
-
-      // ignore this item if it doesn't have an image or a canonical url
-      if (!itemThumbnail || !elem.canonical_url) return null;
 
       const data = {};
       data.classes = elCount === 0 ? 'is-firstItem' : '';
@@ -23,13 +17,13 @@ const buildSliderItems = (sliderCollection, ref, startIndex, itemLimit) => {
       data.timestampData = {};
       data.sectionLabelData = {};
 
-      data.image = itemThumbnail;
+      data.image = itemThumbnail || null;
 
       data.contentType = elem.type || null;
 
       data.headline = elem.headlines && elem.headlines.basic ? elem.headlines.basic : null;
 
-      data.canonicalUrl = `${contextPath}${elem.canonical_url}`;
+      data.canonicalUrl = elem.canonical_url || null;
 
       data.timestampData.displayDate = elem.display_date ? elem.display_date : null;
 
