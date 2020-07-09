@@ -27,6 +27,47 @@
     flex-direction: column;
     align-items: center;
   }
+
+  &.full-width {
+    @include between-breakpoints(mobile, desktop-sm) {
+
+      .arc_ad.HS02 {
+        width: 100vw;
+
+        .arcad.HS02 + div {
+          padding-bottom: 20px;
+        }
+      }
+    }
+
+    .c-contentElements {
+      @include arc-ad-spacing;
+
+      .arc_ad[class*="HP0"],
+      .arc_ad[class*="MP0"] {
+        @include arc-ad-full-width;
+      }
+
+      // override for HP02 when interscroller loads in place of a display ad
+
+      .arc_ad[class*="HP0"].ccad-noslotshadow .arcad {
+        margin: 0;
+        padding: 0;
+
+        &:before {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &:not(.full-width) .c-contentElements .arc_ad[class*="MP"] {
+    @include arc-ad-full-width;
+
+    .arcad:not(:empty) {
+      padding-top: 20px;
+    }
+  }
 }
 
 .c-section,
@@ -74,40 +115,11 @@
     @include breakpoint(tablet) {
       padding: 0;
     }
-
-    @include arc-ad-spacing;
   }
 
   &.full-width {
-    @include between-breakpoints(mobile, desktop-sm) {
-
-      .arc_ad.HS02 {
-        width: 100vw;
-
-        .arcad.HS02 + div {
-          padding-bottom: 20px;
-        }
-      }
-    }
-
     @include breakpoint(desktop-sm) {
       clear: both;
-    }
-
-    .arc_ad[class*="HP0"],
-    .arc_ad[class*="MP0"] {
-      @include arc-ad-full-width;
-    }
-
-    // override for HP02 when interscroller loads in place of a display ad
-
-    .arc_ad[class*="HP0"].ccad-noslotshadow .arcad {
-      margin: 0;
-      padding: 0;
-
-      &:before {
-        display: none;
-      }
     }
   }
 
@@ -117,10 +129,6 @@
       @include breakpoint(tablet) {
         width: calc(100% - 330px);
         padding: 0 $min-margin 0 0;
-      }
-
-      .arc_ad[class*="MP"] {
-        @include arc-ad-full-width;
       }
     }
 
