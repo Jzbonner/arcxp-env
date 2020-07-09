@@ -26,7 +26,7 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
   }
   let pinterestUrl = headlineImage;
 
-  if (!headlineImage) {
+  if (!headlineImage && promoItems) {
     pinterestUrl = getItemThumbNail(promoItems);
   }
   if (!pinterestUrl) {
