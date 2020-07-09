@@ -1,18 +1,16 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import AREAS_OF_EXPERTISE from '../AREAS_OF_EXPERTISE';
 import AuthorMenuItem from '../authorMenuItem/default';
 import getWindowSize from '../../global/utils/check_window_size/default';
 import close from '../../../../resources/icons/staff/close.svg';
 import './default.scss';
 
 const AuthorMenu = ({
-  selectedLeftMenuItem, setCategory, leftMenuMenuVisibility, setLeftMenuVisibility, pageUri,
+  selectedLeftMenuItem, setCategory, leftMenuMenuVisibility, setLeftMenuVisibility, pageUri, menuData,
 }) => {
-  const { sites, maxTabletViewWidth } = getProperties();
+  const { maxTabletViewWidth } = getProperties();
   const windowWidth = getWindowSize();
-  const menuData = AREAS_OF_EXPERTISE()[sites[0]];
 
   useEffect(() => {
     if (windowWidth.width < maxTabletViewWidth) {
@@ -43,25 +41,25 @@ const AuthorMenu = ({
 
   return (
     <>
-      <aside className={`c-author-menu ${leftMenuMenuVisibility ? 'is-visible' : ''}`}>
+      {menuData && <aside className={`c-author-menu ${leftMenuMenuVisibility ? 'is-visible' : ''}`}>
         <div className="menu-wrapper">
           <div className="mobile-fader top-fader"></div>
           <ul className="author-menu">
             <li className="spacer top-space"></li>
-            <AuthorMenuItem
-              area={menuData && menuData.all}
+            {menuData.all && <AuthorMenuItem
+              area={menuData.all}
               selectedLeftMenuItem={selectedLeftMenuItem}
               setCategory={setCategory}
               setLeftMenuVisibility={setLeftMenuVisibility}
               pageUri={pageUri}
-            />
-            <AuthorMenuItem
-              area={menuData && menuData.newsroom}
+            />}
+            {menuData.newsroom && <AuthorMenuItem
+              area={menuData.newsroom}
               selectedLeftMenuItem={selectedLeftMenuItem}
               setCategory={setCategory}
               setLeftMenuVisibility={setLeftMenuVisibility}
               pageUri={pageUri}
-            />
+            />}
             {menuData
               && menuData.areas
                 .sort((a, b) => a.tag.localeCompare(b.tag))
@@ -82,7 +80,7 @@ const AuthorMenu = ({
         <button className={'close-mobile-menu-btn'} onClick={() => setLeftMenuVisibility()}>
           <img src={close} alt={'close-button'} />
         </button>
-      </aside>
+      </aside>}
     </>
   );
 };
@@ -93,6 +91,7 @@ AuthorMenu.propTypes = {
   setLeftMenuVisibility: PropTypes.func,
   leftMenuMenuVisibility: PropTypes.bool,
   pageUri: PropTypes.string,
+  menuData: PropTypes.object,
 };
 
 export default AuthorMenu;
