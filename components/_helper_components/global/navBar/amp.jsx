@@ -119,14 +119,16 @@ const AmpNavBar = () => {
           <div className='amp-hamburger' role='button' tabIndex='0' on="tap:sidebar.toggle">
             <div className='amp-hamburger-button'></div>
           </div>
-          <div id="logo-pinned" className={`amp-logo amp-logo-pinned ${siteName.toLowerCase()}`}>
+          <div id="logo-pinned" className='amp-logo amp-logo-pinned'>
             <a href={rootDirectory}>
-            <amp-img height='37px' width='72px' src={deployment(`${contextPath}${logoShort}`)}></amp-img>
+            <amp-img height='1' width='1' class={siteName.toLowerCase()}
+            src={deployment(`${contextPath}${logoShort}`)} layout='responsive'></amp-img>
             </a>
           </div>
-          <div id="logo-main" className={`amp-logo ${siteName.toLowerCase()}`}>
+          <div id="logo-main" className='amp-logo amp-logo-main'>
             <a href={rootDirectory}>
-              <amp-img height='59px' width='109px' src={deployment(`${contextPath}${logo}`)}></amp-img>
+              <amp-img height='1' width='1' class={siteName.toLowerCase()}
+              src={deployment(`${contextPath}${logo}`)} layout='responsive'></amp-img>
             </a>
           </div>
         </div>
