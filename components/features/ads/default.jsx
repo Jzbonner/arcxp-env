@@ -58,6 +58,10 @@ const ArcAd = ({ customFields, staticSlot }) => {
     // we remove the leading `/` if it exists, since the ArcAds lib will add it back in
     adSlotNameForArcAds = adSlotNameForArcAds.substring(1);
   }
+  if (adSlotNameForArcAds.indexOf('/') === adSlotNameForArcAds.length - 1) {
+    // we remove the trailing `/` if it exists, because it will mess up GAM targeting if it exists
+    adSlotNameForArcAds = adSlotNameForArcAds.substring(0, adSlotNameForArcAds.length - 1);
+  }
 
   // rewrite content types for ads reporting purposes (see APD-520)
   let objType;
