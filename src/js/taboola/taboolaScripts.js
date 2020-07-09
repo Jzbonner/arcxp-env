@@ -1,4 +1,4 @@
-const isHome = 'home-basic';
+const isHome = 'homepage-basic';
 const isArticle = 'article-basic';
 const isSection = 'section';
 
