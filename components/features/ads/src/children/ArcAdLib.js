@@ -53,7 +53,7 @@ export default class ArcAdLib {
       window.arcBiddingReady = true;
     }
 
-    if (params && params.slotName === 'PG01' && window && window.pg01) {
+    if (params && params.name === 'PG01' && window && window.pg01) {
       window.googletag.destroySlots([window.pg01]);
     }
     // register the ad with the ArcAds library
