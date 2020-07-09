@@ -38,6 +38,14 @@ export default {
   taboola: {
     dataPublisher: 'cox-dayton',
   },
+  metrics: {
+    siteID: 'daytondotcom',
+    siteMetro: 'oh: dayton',
+    siteFormat: 'entertainment',
+    gtmContainerKey: 'GTM-W3VLHBK',
+    ampGtmID: 'GTM-WQBXD72',
+  },
+  adsPath: 'dayton_np/daytoncom_web_default',
   favicon: '/resources/icons/favicons/Ohio/dayton-favicon.ico',
   appAdsTxt: appadstxt,
 };
