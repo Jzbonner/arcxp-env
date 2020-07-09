@@ -73,18 +73,17 @@ export const adSlots = {
     dimensions: [
       [
         [970, 250],
+        [970, 90], // dayton size requirement.  TODO: apply for dayton sites ONLY
         [728, 90],
       ], // desktop
       [
         [728, 315],
         [728, 90],
       ], // tablet
-      [], // mobile
     ],
     breakpoints: [
       [1024, 0], // desktop
       [768, 0], // tablet
-      [0, 0], // mobile
     ],
     bidding: {
       amazon: {
@@ -342,8 +341,10 @@ export const adSlots = {
   'RP01 sticky': {
     slotName: 'RP01',
     dimensions: [
-      [300, 600],
-      [300, 250], // tablet+
+      [
+        [300, 600],
+        [300, 250],
+      ], // tablet+
     ],
     breakpoints: [
       [768, 0], // tablet+
@@ -595,8 +596,10 @@ export const adSlots = {
   'RP01-List-Page': {
     slotName: 'RP01',
     dimensions: [
-      [300, 600],
-      [300, 250], // tablet +
+      [
+        [300, 600],
+        [300, 250],
+      ], // tablet +
     ],
     breakpoints: [
       [768, 0], // tablet+
@@ -1198,8 +1201,10 @@ export const adSlots = {
   PG01: {
     slotName: 'PG01',
     dimensions: [
-      [600, 400],
-      [300, 250], // desktop
+      [
+        [600, 400],
+        [300, 250],
+      ], // desktop
     ],
     breakpoints: [
       [1024, 0], // desktop
