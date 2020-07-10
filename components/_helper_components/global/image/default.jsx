@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useFusionContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import PropTypes from 'prop-types';
+import getProperties from 'fusion:properties';
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
-import placeholder from '../../../../resources/images/placeholder.svg';
-
 
 const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage = false,
@@ -18,6 +17,10 @@ const Image = ({
   } = src || {};
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
+  const appContext = useAppContext();
+  const { deployment, contextPath } = appContext;
+  const { logoPlaceholder } = getProperties(arcSite);
+  const placeholder = deployment(`${contextPath}${logoPlaceholder}`);
 
   const [imageSrc, setImageSrc] = useState('');
 

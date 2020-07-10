@@ -23,6 +23,7 @@ export default {
   logo: '/resources/logos/DaytonDailyNews/logo-full.svg',
   logoShort: '/resources/logos/DaytonDailyNews/logo-short.svg',
   logoHamburger: '/resources/logos/DaytonDailyNews/logo-mobile-hamburger.svg',
+  logoPlaceholder: '/resources/logos/DaytonDailyNews/placeholder.svg',
   mail: 'mailto:?Subject=',
   sites: ['daytondailynews'],
   weatherLocationId: 330120,

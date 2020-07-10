@@ -23,6 +23,7 @@ export default {
   logo: '/resources/logos/JournalNews/logo-full.svg',
   logoShort: '/resources/logos/JournalNews/logo-short.svg',
   logoHamburger: '/resources/logos/JournalNews/logo-mobile-hamburger.svg',
+  logoPlaceholder: '/resources/logos/JournalNews/placeholder.svg',
   mail: 'mailto:?Subject=',
   sites: ['journal-news'],
   featuredVideoPlayerRules: {
