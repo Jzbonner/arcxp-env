@@ -219,10 +219,12 @@ export const adSlots = {
   },
   HP05: {
     dimensions: [
-      [728, 90], // tablet+
+      [], // desktop
+      [728, 90], // tablet
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop
+      [768, 0], // tablet
     ],
     bidding: {
       amazon: {
