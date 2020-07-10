@@ -32,7 +32,7 @@ export default {
   adsPath: 'atlanta_np/ajc_web_default',
   adsTxt,
   appAdsTxt,
-  adsA9Enabled: true,
+  adsA9Enabled: false,
   adsA9Id: '3970',
   adsPrebidEnabled: true,
   adsPrebidTimeout: 1500,
