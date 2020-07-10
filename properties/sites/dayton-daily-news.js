@@ -3,7 +3,7 @@ import appAdsTxt from './appadstxt/daytondailynews.com.json';
 
 export default {
   dfp_id: 21849707860,
-  siteName: 'daytondailynews',
+  siteName: 'dayton-daily-news',
   cdnOrg: 'coxohio',
   cdnSite: 'dayton-daily-news',
   siteDomainURL: 'https://sandbox.daytondailynews.arcpublishing.com/pf',
@@ -24,7 +24,7 @@ export default {
   logoShort: '/resources/logos/DaytonDailyNews/logo-short.svg',
   logoHamburger: '/resources/logos/DaytonDailyNews/logo-mobile-hamburger.svg',
   mail: 'mailto:?Subject=',
-  sites: ['daytondailynews'],
+  sites: ['dayton-daily-news'],
   weatherLocationId: 330120,
   featuredVideoPlayerRules: {
     startPlaying: true,

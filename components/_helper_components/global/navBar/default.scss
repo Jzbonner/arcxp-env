@@ -194,7 +194,7 @@
       }
     }
 
-    &.daytondailynews {
+    &.dayton-daily-news {
       width: 260px;
 
       @include breakpoint(desktop-sm) {
@@ -212,7 +212,7 @@
       }
     }
 
-    &.springfieldnewssun {
+    &.springfield-news-sun {
       width: 265px;
 
       @include breakpoint(desktop-sm) {
@@ -243,7 +243,7 @@
       margin-top: -5px;
     }
 
-    &.daytondailynews {
+    &.dayton-daily-news {
       max-width: 313px;
     }
 
@@ -252,7 +252,7 @@
       margin-top: -5px;
     }
 
-    &.springfieldnewssun {
+    &.springfield-news-sun {
       max-width: 313px;
       margin-top: 4px;
     }

@@ -113,7 +113,7 @@ export default () => ({
       },
     ],
   },
-  daytondailynews: {
+  'dayton-daily-news': {
     all: {
       name: 'All',
       tag: 'all',
