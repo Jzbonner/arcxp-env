@@ -12,7 +12,7 @@ const GoogleStructuredData = () => {
     title, pageContentType, initialPublishDate, url, topSectionName, promoItems, credits, dateModified, articleDesc,
   } = contentMeta;
 
-  if (pageContentType && pageContentType === 'article') {
+  if (pageContentType === 'article' || pageContentType === 'wire' || pageContentType === 'blog') {
     const fusionContext = useFusionContext();
     const { arcSite } = fusionContext;
     const desc = articleDesc && articleDesc.basic ? articleDesc.basic : '';
@@ -21,8 +21,8 @@ const GoogleStructuredData = () => {
     } = getProperties(arcSite);
 
     const { url: featuredIMG } = promoItems && promoItems.basic && promoItems.basic.url ? promoItems.basic : {};
-    const { url: videoThumbnail } = promoItems && promoItems.lead_art && promoItems.lead_art.promo_image
-      ? promoItems.lead_art.promo_image : {};
+    const { url: videoThumbnail } = promoItems
+    && promoItems.lead_art && promoItems.lead_art.promo_image ? promoItems.lead_art.promo_image : {};
     const { url: galleryThumbnail } = promoItems && promoItems.basic && promoItems.basic.promo_items && promoItems.basic.promo_items.basic
       ? promoItems.basic.promo_items.basic
       : {};
