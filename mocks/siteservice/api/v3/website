@@ -10,7 +10,7 @@
     "is_default_website": false
   },
   {
-    "_id": "daytondailynews",
+    "_id": "dayton-daily-news",
     "display_name": "Dayton Daily News",
     "is_default_website": false
   },
@@ -20,7 +20,7 @@
     "is_default_website": false
   },
   {
-    "_id": "springfieldnewssun",
+    "_id": "springfield-news-sun",
     "display_name": "Springfield News-Sun",
     "is_default_website": false
   }

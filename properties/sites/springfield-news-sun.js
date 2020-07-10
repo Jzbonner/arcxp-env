@@ -2,7 +2,7 @@ import adsTxt from './adstxt/springfieldnewssun.com.json';
 
 export default {
   dfp_id: 21849707860,
-  siteName: 'springfieldnewssun',
+  siteName: 'springfield-news-sun',
   cdnOrg: 'coxohio',
   cdnSite: 'springfield-news-sun',
   siteDomainURL: 'https://sandbox.springfieldnewssun.arcpublishing.com/pf',
@@ -24,7 +24,7 @@ export default {
   logoHamburger: '/resources/logos/SpringfieldNews/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/SpringfieldNews/placeholder.svg',
   mail: 'mailto:?Subject=',
-  sites: ['springfieldnewssun'],
+  sites: ['springfield-news-sun'],
   featuredVideoPlayerRules: {
     startPlaying: true,
     muteON: true,
