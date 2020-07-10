@@ -9,7 +9,7 @@ import './default.scss';
 
 const List = (customFields = {}) => {
   const fusionContext = useFusionContext();
-  const { arcSite = 'ajc', layout } = fusionContext;
+  const { arcSite, layout } = fusionContext;
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues } = {},

@@ -16,7 +16,7 @@ import './default.scss';
 
 const Mosaic = (customFields = {}) => {
   const fusionContext = useFusionContext();
-  const { arcSite = 'ajc' } = fusionContext;
+  const { arcSite } = fusionContext;
   const appContext = useAppContext();
   const { contextPath, requestUri } = appContext;
   const queryParams = getQueryParams(requestUri);
