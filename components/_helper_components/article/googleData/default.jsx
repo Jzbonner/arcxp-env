@@ -12,7 +12,7 @@ const GoogleStructuredData = () => {
     title, pageContentType, initialPublishDate, url, topSectionName, promoItems, credits, dateModified, articleDesc,
   } = contentMeta;
 
-  if ((pageContentType && pageContentType === 'article') || pageContentType === 'wire' || pageContentType === 'blog') {
+  if (pageContentType === 'article' || pageContentType === 'wire' || pageContentType === 'blog') {
     const fusionContext = useFusionContext();
     const { arcSite } = fusionContext;
     const desc = articleDesc && articleDesc.basic ? articleDesc.basic : '';
