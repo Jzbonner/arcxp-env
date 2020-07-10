@@ -39,11 +39,16 @@ const fetch = (query) => {
     excludeTags = '',
     includeSubtypes = '',
     excludeSubtypes = '',
-    arcSite = 'ajc',
+    arcSite,
+    'arc-site': arcSiteAlt,
     size = 100,
     displayClass = '',
     displayClassesRequiringImg = [],
   } = query;
+
+  const activeSite = arcSite || arcSiteAlt;
+
+  if (!activeSite) return [];
 
   const builder = bodybuilder();
   if (includeDistributor) {
@@ -96,8 +101,8 @@ const fetch = (query) => {
   const body = builder.build();
   const newBody = JSON.stringify(body);
 
-  return getQueryData(arcSite, newBody, size)
-    .then(data => AddFirstInlineImage(data, arcSite, displayClass, displayClassesRequiringImg))
+  return getQueryData(activeSite, newBody, size)
+    .then(data => AddFirstInlineImage(data, activeSite, displayClass, displayClassesRequiringImg))
     .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
     .catch((error) => {
       console.error(error);
