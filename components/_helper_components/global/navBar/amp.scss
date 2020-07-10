@@ -75,19 +75,24 @@
 .amp-logo-pinned {
   opacity: 0;
 
-  &.dayton {
+  .ajc {
+    width: 72px;
+    height: 37px;
+  }
+
+  .dayton {
     width: 200px;
   }
 
-  &.daytondailynews {
+  .daytondailynews {
     width: 220px;
   }
 
-  &.journal-news {
+  .journal-news {
     width: 220px;
   }
 
-  &.springfieldnewssun {
+  .springfieldnewssun {
     width: 230px;
   }
 }
@@ -96,20 +101,28 @@
   position: absolute;
   left: 50%;
   transform: translate(-50%);
+}
 
-  &.dayton {
+.amp-logo-main {
+
+  .ajc {
+    height: 59px;
+    width: 109px;
+  }
+
+  .dayton {
     width: 200px;
   }
 
-  &.daytondailynews {
+  .daytondailynews {
     width: 220px;
   }
 
-  &.journal-news {
+  .journal-news {
     width: 220px;
   }
 
-  &.springfieldnewssun {
+  .springfieldnewssun {
     width: 230px;
   }
 }
