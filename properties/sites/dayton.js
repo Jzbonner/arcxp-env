@@ -1,4 +1,5 @@
-import appadstxt from './appadstxt/dayton.com.json';
+import adsTxt from './adstxt/dayton.com.json';
+import appAdsTxt from './appadstxt/dayton.com.json';
 
 export default {
   dfp_id: 21849707860,
@@ -47,5 +48,6 @@ export default {
   },
   adsPath: 'dayton_np/daytoncom_web_default',
   favicon: '/resources/icons/favicons/Ohio/dayton-favicon.ico',
-  appAdsTxt: appadstxt,
+  adsTxt,
+  appAdsTxt,
 };

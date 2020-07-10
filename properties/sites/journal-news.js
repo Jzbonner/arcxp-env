@@ -1,4 +1,5 @@
-import appadstxt from './appadstxt/journal-news.com.json';
+import adsTxt from './adstxt/journal-news.com.json';
+import appAdsTxt from './appadstxt/journal-news.com.json';
 
 export default {
   dfp_id: 21849707860,
@@ -52,5 +53,6 @@ export default {
   },
   adsPath: 'dayton_np/jnws_web_default',
   favicon: '/resources/icons/favicons/Ohio/journal-news-favicon.ico',
-  appAdsTxt: appadstxt,
+  adsTxt,
+  appAdsTxt,
 };

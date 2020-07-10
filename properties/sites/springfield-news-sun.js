@@ -1,3 +1,5 @@
+import adsTxt from './adstxt/springfieldnewssun.com.json';
+
 export default {
   dfp_id: 21849707860,
   siteName: 'springfieldnewssun',
@@ -50,4 +52,5 @@ export default {
   },
   adsPath: 'dayton_np/spns_web_default',
   favicon: '/resources/icons/favicons/Ohio/springfield-news-sun-favicon.ico',
+  adsTxt,
 };

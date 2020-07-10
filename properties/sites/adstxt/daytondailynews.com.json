@@ -157,13 +157,13 @@
   },
   {
     "domain": "teads.tv",
-    "accountId": "8693",
+    "accountId": "20537",
     "relationshipType": "DIRECT",
     "certId": "15a9c44f6d26cbe1"
   },
   {
     "domain": "nativo.com",
-    "accountId": "4652",
+    "accountId": "4654",
     "relationshipType": "DIRECT",
     "certId": "59521ca7cc5e9fee"
   },
@@ -217,13 +217,13 @@
   },
   {
     "domain": "taboola.com",
-    "accountId": "1041479",
+    "accountId": "1041480",
     "relationshipType": "DIRECT",
     "certId": "c228e6794e811952"
   },
   {
     "domain": "taboola.com",
-    "accountId": "1041479",
+    "accountId": "1041480",
     "relationshipType": "RESELLER",
     "certId": "c228e6794e811952"
   },
@@ -475,7 +475,7 @@
   },
   {
     "domain": "liveintent.com",
-    "accountId": "14251",
+    "accountId": "14991",
     "relationshipType": "DIRECT",
     "certId": ""
   },
