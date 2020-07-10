@@ -23,6 +23,7 @@ export default {
   logo: '/resources/logos/Dayton/logo-full.svg',
   logoShort: '/resources/logos/Dayton/logo-short.svg',
   logoHamburger: '/resources/logos/Dayton/logo-mobile-hamburger.svg',
+  logoPlaceholder: '/resources/logos/Dayton/placeholder.svg',
   mail: 'mailto:?Subject=',
   sites: ['dayton'],
   featuredVideoPlayerRules: {
