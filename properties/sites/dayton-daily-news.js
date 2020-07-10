@@ -1,4 +1,5 @@
-import appadstxt from './appadstxt/daytondailynews.com.json';
+import adsTxt from './adstxt/daytondailynews.com.json';
+import appAdsTxt from './appadstxt/daytondailynews.com.json';
 
 export default {
   dfp_id: 21849707860,
@@ -52,5 +53,6 @@ export default {
   },
   adsPath: 'dayton_np/ddn_web_default',
   favicon: '/resources/icons/favicons/Ohio/dayton-daily-news-favicon.ico',
-  appAdsTxt: appadstxt,
+  adsTxt,
+  appAdsTxt,
 };

@@ -157,13 +157,13 @@
   },
   {
     "domain": "teads.tv",
-    "accountId": "8693",
+    "accountId": "20537",
     "relationshipType": "DIRECT",
     "certId": "15a9c44f6d26cbe1"
   },
   {
     "domain": "nativo.com",
-    "accountId": "4652",
+    "accountId": "4654",
     "relationshipType": "DIRECT",
     "certId": "59521ca7cc5e9fee"
   },
@@ -217,13 +217,13 @@
   },
   {
     "domain": "taboola.com",
-    "accountId": "1041479",
+    "accountId": "1045770",
     "relationshipType": "DIRECT",
     "certId": "c228e6794e811952"
   },
   {
     "domain": "taboola.com",
-    "accountId": "1041479",
+    "accountId": "1045770",
     "relationshipType": "RESELLER",
     "certId": "c228e6794e811952"
   },
@@ -333,150 +333,6 @@
     "domain": "admanmedia.com",
     "accountId": "556",
     "relationshipType": "RESELLER",
-    "certId": ""
-  },
-  {
-    "domain": "google.com",
-    "accountId": "pub-1995032544933848",
-    "relationshipType": "RESELLER",
-    "certId": "f08c47fec0942fa0"
-  },
-  {
-    "domain": "rubiconproject.com",
-    "accountId": "17214",
-    "relationshipType": "DIRECT",
-    "certId": "0bfd66d529a55807"
-  },
-  {
-    "domain": "rubiconproject.com",
-    "accountId": "22222",
-    "relationshipType": "RESELLER",
-    "certId": "0bfd66d529a55807"
-  },
-  {
-    "domain": "indexexchange.com",
-    "accountId": "184999",
-    "relationshipType": "DIRECT",
-    "certId": "50b1c356f2c5c8fc"
-  },
-  {
-    "domain": "indexexchange.com",
-    "accountId": "191646",
-    "relationshipType": "RESELLER",
-    "certId": ""
-  },
-  {
-    "domain": "appnexus.com",
-    "accountId": "7541",
-    "relationshipType": "DIRECT",
-    "certId": "f5ab79cb980f11d1"
-  },
-  {
-    "domain": "openx.com",
-    "accountId": "537120530",
-    "relationshipType": "DIRECT",
-    "certId": "6a698e2ec38604c6"
-  },
-  {
-    "domain": "openx.com",
-    "accountId": "541002036",
-    "relationshipType": "DIRECT",
-    "certId": "6a698e2ec38604c6"
-  },
-  {
-    "domain": "spotx.tv",
-    "accountId": "108371",
-    "relationshipType": "RESELLER",
-    "certId": "7842df1d2fe2db34"
-  },
-  {
-    "domain": "sovrn.com",
-    "accountId": "239073",
-    "relationshipType": "DIRECT",
-    "certId": "fafdf38b16bf6b2b"
-  },
-  {
-    "domain": "lijit.com",
-    "accountId": "239073",
-    "relationshipType": "DIRECT",
-    "certId": "fafdf38b16bf6b2b"
-  },
-  {
-    "domain": "lijit.com",
-    "accountId": "239073-eb",
-    "relationshipType": "DIRECT",
-    "certId": "fafdf38b16bf6b2b"
-  },
-  {
-    "domain": "adtech.com",
-    "accountId": "10469",
-    "relationshipType": "DIRECT",
-    "certId": ""
-  },
-  {
-    "domain": "aolcloud.net",
-    "accountId": "10469",
-    "relationshipType": "DIRECT",
-    "certId": ""
-  },
-  {
-    "domain": "advertising.com",
-    "accountId": "7532",
-    "relationshipType": "RESELLER",
-    "certId": ""
-  },
-  {
-    "domain": "exponential.com",
-    "accountId": "151520",
-    "relationshipType": "DIRECT",
-    "certId": "afac06385c445926"
-  },
-  {
-    "domain": "tribalfusion.com",
-    "accountId": "151520",
-    "relationshipType": "DIRECT",
-    "certId": "afac06385c445926"
-  },
-  {
-    "domain": "aps.amazon.com",
-    "accountId": "661990cc-08cb-45bb-9ee2-90c2a9034640",
-    "relationshipType": "DIRECT",
-    "certId": ""
-  },
-  {
-    "domain": "pubmatic.com",
-    "accountId": "157150",
-    "relationshipType": "RESELLER",
-    "certId": "5d62403b186f2ace"
-  },
-  {
-    "domain": "gumgum.com",
-    "accountId": "13956",
-    "relationshipType": "DIRECT",
-    "certId": "ffdef49475d318a9"
-  },
-  {
-    "domain": "smartadserver.com",
-    "accountId": "3660",
-    "relationshipType": "DIRECT",
-    "certId": ""
-  },
-  {
-    "domain": "telaria.com",
-    "accountId": "oibns",
-    "relationshipType": "RESELLER",
-    "certId": "1a4e959a1b50034a"
-  },
-  {
-    "domain": "tremorhub.com",
-    "accountId": "oibns",
-    "relationshipType": "RESELLER",
-    "certId": "1a4e959a1b50034a"
-  },
-  {
-    "domain": "liveintent.com",
-    "accountId": "14251",
-    "relationshipType": "DIRECT",
     "certId": ""
   },
   {

@@ -1,5 +1,5 @@
-import adstxt from './adstxt/ajc.com.json';
-import appadstxt from './appadstxt/ajc.com.json';
+import adsTxt from './adstxt/ajc.com.json';
+import appAdsTxt from './appadstxt/ajc.com.json';
 
 export default {
   defaultSiteTitle: 'AJC',
@@ -30,8 +30,8 @@ export default {
   },
   weatherPageURL: '/atlanta-weather/',
   adsPath: 'atlanta_np/ajc_web_default',
-  adsTxt: adstxt,
-  appAdsTxt: appadstxt,
+  adsTxt,
+  appAdsTxt,
   adsA9Enabled: true,
   adsA9Id: '3970',
   adsPrebidEnabled: true,

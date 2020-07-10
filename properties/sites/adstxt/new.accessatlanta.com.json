@@ -1,0 +1,56 @@
+[
+  {
+    "domain": "google.com",
+    "accountId": "pub-2224462346614446",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "158155",
+    "relationshipType": "DIRECT",
+    "certId": "5d62403b186f2ace #ebda"
+  },
+  {
+    "domain": "indexexchange.com",
+    "accountId": "190275",
+    "relationshipType": "DIRECT #ebda",
+    "certId": ""
+  },
+  {
+    "domain": "rhythmone.com",
+    "accountId": "960386424",
+    "relationshipType": "DIRECT",
+    "certId": "a670c89d4a324e47 #ebda"
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "19160",
+    "relationshipType": "DIRECT",
+    "certId": "0bfd66d529a55807 #ebda"
+  },
+  {
+    "domain": "lijit.com",
+    "accountId": "273127-eb",
+    "relationshipType": "DIRECT",
+    "certId": "fafdf38b16bf6b2b #ebda"
+  },
+  {
+    "domain": "openx.com",
+    "accountId": "540303527",
+    "relationshipType": "DIRECT",
+    "certId": "6a698e2ec38604c6 #ebda"
+  },
+  {
+    "domain": "lijit.com",
+    "accountId": "273127",
+    "relationshipType": "DIRECT",
+    "certId": "fafdf38b16bf6b2b #ebda"
+  },
+  {
+    "domain": "sovrn.com",
+    "accountId": "273127",
+    "relationshipType": "DIRECT",
+    "certId": "fafdf38b16bf6b2b #ebda"
+  }
+]
