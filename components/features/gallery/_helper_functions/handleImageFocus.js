@@ -4,7 +4,7 @@ import GalleryItem from '../../../_helper_components/global/gallery/galleryItem.
 // adds focus class to current gallery-item element
 const handleImageFocus = (arr = [], states = {}, funcs = {}) => {
   const {
-    isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction, hasOpened,
+    isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction, hasOpened, isModalVisible,
   } = states;
   const {
     prev, next, modal,
@@ -35,6 +35,7 @@ const handleImageFocus = (arr = [], states = {}, funcs = {}) => {
       isCaptionOn,
       isAdVisible,
       hasOpened,
+      isModalVisible,
     };
 
     let functionToPass = null;

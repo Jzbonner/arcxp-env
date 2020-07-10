@@ -156,13 +156,16 @@ const Gallery = (props) => {
     dataLayer.push({ event: 'gallerySecondaryPhotoViewed' }, { galleryName: `${galHeadline || headline || ''}` });
   };
 
-  const handelImageModalView = (imageSrc) => {
+  const handelImageModalView = (imageSrc, isModalVisible) => {
     if (!hasOpened) dispatchGalleryOpenEvent();
-    if (!modalVisible) {
+
+    if (!isModalVisible) {
       setModalVisibility(true);
     } else {
       setModalVisibility(false);
     }
+
+    setCurrentAction(actions.UPDATE_CLICK_FUNCS);
 
     if (imageSrc) setCurrectImageSrc(imageSrc);
   };
@@ -231,7 +234,7 @@ const Gallery = (props) => {
   const clickFuncs = {
     prev: () => changeIndex(actions.PREV, null, true, hasOpened),
     next: () => changeIndex(actions.NEXT, null, true, hasOpened),
-    modal: src => handelImageModalView(src),
+    modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
   };
 
 
@@ -319,7 +322,7 @@ const Gallery = (props) => {
 
   const renderDesktopGalleryElements = (elements) => {
     const finalizedElements = handleImageFocus((elements), {
-      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction, hasOpened,
+      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction, hasOpened, modalVisible,
     }, clickFuncs);
 
     setElementData(finalizedElements);
@@ -459,12 +462,12 @@ const Gallery = (props) => {
         }
       };
 
-      if (elementData && hasOpened && !isMobile && currentAction === actions.UPDATE_CLICK_FUNCS) {
+      if (elementData && (hasOpened || modalVisible) && !isMobile && currentAction === actions.UPDATE_CLICK_FUNCS) {
         renderDesktopGalleryElements([...elementData]);
         setCurrentAction('');
       }
     }
-  }, [isAdVisible, currentIndex, currentAction, translateX, elementData, captionData, galleryEl, hasOpened]);
+  }, [isAdVisible, currentIndex, currentAction, translateX, elementData, captionData, galleryEl, hasOpened, modalVisible]);
 
   useEffect(() => {
     if (!isAdVisible && !isMobile) renderCaptionByCurrentIndex();
@@ -483,7 +486,7 @@ const Gallery = (props) => {
         const adRemovedElementArray = removeGalleryAd();
         setAdVisibleState(false);
         const finalizedElements = handleImageFocus((adRemovedElementArray), {
-          isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, hasOpened,
+          isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, hasOpened, modalVisible,
         }, clickFuncs);
 
         setElementData(finalizedElements);
@@ -545,11 +548,11 @@ const Gallery = (props) => {
     const baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
 
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
-      isStickyVisible, isMobile, isCaptionOn, currentIndex,
+      isStickyVisible, isMobile, isCaptionOn, currentIndex, modalVisible,
     }, isMobile, {
       prev: () => changeIndex(actions.PREV, baseGalleryData.length - 1),
       next: () => changeIndex(actions.NEXT),
-      modal: src => handelImageModalView(src),
+      modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
     });
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData;
 
@@ -597,7 +600,7 @@ const Gallery = (props) => {
       {pageType !== 'story' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02()}</div> : null}
       <div className={`${pageType !== 'story' ? 'c-gallery-homeSection' : ''}`}>
         {!isMobile
-          ? <div onClick={handelImageModalView}>
+          ? <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
             <ImageModal src={currentImageSrc} isVisible={modalVisible} />
           </div> : null}
         <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
