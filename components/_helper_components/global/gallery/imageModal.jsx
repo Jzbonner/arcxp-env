@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ImageModal = ({ src, isVisible }) => (
+const ImageModal = ({ src = '', isVisible }) => (
     <div className={`c-image-modal ${isVisible ? 'image-modal-active' : ''}`}>
      {src && <img src={src} />}
     </div>

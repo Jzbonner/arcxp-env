@@ -4,7 +4,7 @@ import getAltText from '../../../layouts/_helper_functions/getAltText';
 
 const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {}) => {
   const {
-    isStickyVisible, isMobile, isCaptionOn, currentIndex,
+    isStickyVisible, isMobile, isCaptionOn, currentIndex, modalVisible,
   } = states;
   const {
     prev, next, modal,
@@ -53,6 +53,7 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
           isStickyVisible,
           isMobile,
           isCaptionOn,
+          modalVisible,
         },
       };
 

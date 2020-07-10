@@ -16,7 +16,7 @@ const GalleryItem = ({
   const { arcSite } = fusionContext;
 
   const {
-    isFocused, isStickyVisible, isCaptionOn, isMobile, isAdVisible,
+    isFocused, isStickyVisible, isCaptionOn, isMobile, isAdVisible, isModalVisible,
   } = states;
 
   let affiliationCredit = affiliation[0] && affiliation[0].name ? affiliation[0].name : null;
@@ -51,7 +51,7 @@ const GalleryItem = ({
       <img
         className={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
         src={resizeUrl}
-        onClick={modalFunc ? () => modalFunc(url) : null}
+        onClick={modalFunc ? () => modalFunc(url, isModalVisible) : null}
         alt={alt ? `${alt}` : ''}
       />
       {
