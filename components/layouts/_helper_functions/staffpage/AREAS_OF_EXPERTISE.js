@@ -113,7 +113,7 @@ export default () => ({
       },
     ],
   },
-  ohio: {
+  daytondailynews: {
     all: {
       name: 'All',
       tag: 'all',
@@ -122,43 +122,53 @@ export default () => ({
     newsroom: {
       name: 'Breaking News Team',
       tag: 'breaking-news-team',
-      id: 30,
+      id: 1,
     },
     areas: [
       {
         name: 'Business',
         tag: 'business',
-        id: 31,
+        id: 2,
       },
       {
         name: 'Copy Desk',
         tag: 'copy-desk',
-        id: 32,
+        id: 3,
       },
       {
         name: 'Digital',
         tag: 'digital',
-        id: 33,
+        id: 4,
       },
       {
         name: 'Investigations',
         tag: 'investigations',
-        id: 34,
-      },
-      {
-        name: 'Lifestyle',
-        tag: 'lifestyle',
-        id: 35,
+        id: 5,
       },
       {
         name: 'Managers & Editors',
         tag: 'managers-editors',
-        id: 36,
+        id: 6,
+      },
+      {
+        name: 'Lifestyles',
+        tag: 'lifestyles',
+        id: 7,
       },
       {
         name: 'Sports',
         tag: 'sports',
-        id: 37,
+        id: 8,
+      },
+      {
+        name: 'News Reporters',
+        tag: 'news-reporters',
+        id: 9,
+      },
+      {
+        name: 'Visuals',
+        tag: 'visuals',
+        id: 10,
       },
     ],
   },

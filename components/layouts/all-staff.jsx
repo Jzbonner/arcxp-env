@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useAppContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import StaffCard from '../_helper_components/allstaff/staffCard/default';
 import NavBar from '../_helper_components/global/navBar/default';
 import Footer from '../_helper_components/global/footer/default';
@@ -12,6 +11,7 @@ import findArea from './_helper_functions/staffpage/findArea';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import ArcAd from '../features/ads/default';
 import plus from '../../resources/icons/staff/plus.svg';
+import AREAS_OF_EXPERTISE from './_helper_functions/staffpage/AREAS_OF_EXPERTISE';
 
 import '../../src/styles/container/_all-staff.scss';
 import '../../src/styles/base/_utility.scss';
@@ -20,7 +20,8 @@ export const AllStaffPage = () => {
   const appContext = useAppContext();
   const { contextPath } = appContext;
   const { globalContent, globalContentConfig } = appContext;
-  const { sites } = getProperties();
+  const fusionContext = useFusionContext();
+  const { arcSite = 'ajc' } = fusionContext;
   const { query } = globalContentConfig || {};
 
   const [leftMenuMenuVisibility, setLeftMenuVisibility] = useState(false);
@@ -33,8 +34,10 @@ export const AllStaffPage = () => {
     setLeftMenuVisibility(false);
   };
 
+  const menuData = AREAS_OF_EXPERTISE()[arcSite];
+
   const updateStaffers = (selectedAreaTag) => {
-    const selectedArea = findArea(selectedAreaTag, sites[0]);
+    const selectedArea = findArea(selectedAreaTag, arcSite);
 
     if (selectedArea && selectedArea.name !== 'All') {
       const staffers = globalContent
@@ -77,7 +80,7 @@ export const AllStaffPage = () => {
 
   useEffect(() => {
     updateStaffers(query.id);
-    const selectedArea = findArea(query.id, sites[0]);
+    const selectedArea = findArea(query.id, arcSite);
     if (selectedArea && selectedArea.name !== 'All') {
       setSelectedLeftMenuItem(selectedArea);
     } else {
@@ -114,9 +117,10 @@ export const AllStaffPage = () => {
           leftMenuMenuVisibility={leftMenuMenuVisibility}
           setLeftMenuVisibility={() => setLeftMenuVisibility(false)}
           pageUri={pageUri}
+          menuData={menuData}
         />
         <section className={'c-staffers'}>
-          <button
+          {menuData && <><button
             className={'menu-button'}
             onClick={() => setLeftMenuVisibility(true)}
           >
@@ -125,7 +129,7 @@ export const AllStaffPage = () => {
           <header className={'c-staffers-header'}>
             <h3>{selectedLeftMenuItem.name}</h3>
             <span className="border"></span>
-          </header>
+          </header></>}
           {Array.isArray(selectedStaff)
             && selectedStaff
               .sort((a = { lastName: '' }, b = { lastName: '' }) => a.lastName.localeCompare(b.lastName))
