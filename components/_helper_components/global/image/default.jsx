@@ -17,7 +17,7 @@ const Image = ({
     url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText,
   } = src || {};
   const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
+  const { arcSite, contextPath } = fusionContext;
 
   const [imageSrc, setImageSrc] = useState('');
 
@@ -40,14 +40,17 @@ const Image = ({
   useEffect(() => {
     const styles = window.getComputedStyle(imageEl.current);
     setPlaceholderWidth(styles.width);
+    if (contextPath === '/pf') {
+      setImageSrc(imageResizer(url, arcSite, width, height));
+    }
   }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', lazyLoadImage);
-    window.addEventListener('load', lazyLoadImage);
+    window.addEventListener('DOMContentLoaded', lazyLoadImage);
     return () => {
       window.removeEventListener('scroll', lazyLoadImage);
-      window.addEventListener('load', lazyLoadImage);
+      window.addEventListener('DOMContentLoaded', lazyLoadImage);
     };
   });
 
