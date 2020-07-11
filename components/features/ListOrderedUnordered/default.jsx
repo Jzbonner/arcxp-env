@@ -9,7 +9,7 @@ import './default.scss';
 
 const ListOrderedUnordered = (customFields = {}) => {
   const fusionContext = useFusionContext();
-  const { arcSite = 'ajc' } = fusionContext;
+  const { arcSite } = fusionContext;
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {},

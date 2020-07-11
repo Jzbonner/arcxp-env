@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getSponsorContent from './_helper_functions/getSponserContent';
 import ArcAd from '../../../features/ads/default';
@@ -11,10 +12,15 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
   if (!sponsorID) {
     return null;
   }
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
 
   const siteData = useContent({
     source: 'site-api',
-    query: { section: sponsorID || null },
+    query: {
+      section: sponsorID || null,
+      arcSite,
+    },
   });
 
   if (!siteData) return null;
@@ -32,10 +38,12 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
   const feed = useContent({
     source: 'query-feed',
     query: {
+      from: 1,
       size: 10,
       includeTags: `${includeTags}`,
       mustIncludeAllTags: `${includeAllTags}`,
       excludeTags: `${excludeTags}`,
+      arcSite,
     },
   });
 
@@ -57,7 +65,7 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
           {boxContent.map((el, i) => {
             if (el && el.url && el.headline) {
               return (
-                <li key={`sp-item-${i}`} className={`sponsor-item 
+                <li key={`sp-item-${i}`} className={`sponsor-item
                 ${el.headline === lastItemInArray.headline && disableAd === 'false' ? 'enabled' : ''}`}>
                   <a href={el.url}>
                     <h2>{el.headline}</h2>

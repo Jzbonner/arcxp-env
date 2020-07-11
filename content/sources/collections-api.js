@@ -14,12 +14,20 @@ const params = {
 
 const fetch = (query) => {
   const {
-    arcSite = 'ajc', id, size = 12, displayClass = '', displayClassesRequiringImg = [],
+    'arc-site': arcSiteAlt, // 'arc-site' comes from globalContentConfig
+    arcSite,
+    id,
+    size = 12,
+    displayClass = '',
+    displayClassesRequiringImg = [],
   } = query;
+  const activeSite = arcSite || arcSiteAlt;
+
+  if (!activeSite) return [];
 
   if (id) {
-    return GetCollectionData(arcSite, id, size)
-      .then(data => AddFirstInlineImage(data, arcSite, displayClass, displayClassesRequiringImg))
+    return GetCollectionData(activeSite, id, size)
+      .then(data => AddFirstInlineImage(data, activeSite, displayClass, displayClassesRequiringImg))
       .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
       .catch((error) => {
         console.error(error);

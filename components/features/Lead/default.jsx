@@ -10,7 +10,7 @@ import './default.scss';
 
 const Lead = (customFields = {}) => {
   const fusionContext = useFusionContext();
-  const { arcSite = 'ajc' } = fusionContext;
+  const { arcSite } = fusionContext;
 
   const {
     customFields: {
