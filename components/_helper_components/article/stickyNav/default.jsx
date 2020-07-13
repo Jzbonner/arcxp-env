@@ -16,7 +16,7 @@ const StickyNav = ({
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    facebookURL, twitterURL, pinterestURL, redditURL, mail, siteName, logoShort,
+    facebookURL, twitterURL, pinterestURL, redditURL, mail, siteName, logoShort, pinterestShareLogo,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
@@ -31,10 +31,10 @@ const StickyNav = ({
     // we must fully-qualify the url for sharing
     articleShareUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${articleShareUrl}`;
   }
-
   const shareLinkFacebook = `${facebookURL}${articleShareUrl}`;
   const shareLinkTwitter = `${twitterURL}${articleShareUrl}&text=${articleHeadline}`;
-  const shareLinkPinterest = `${pinterestURL}${articleShareUrl}&media=${renderImage()}&description=${articleHeadline}`;
+  const shareLinkPinterest = `${pinterestURL}${articleShareUrl}&media=${renderImage().indexOf('/resources/logos/') > -1
+    ? pinterestShareLogo : renderImage()}&description=${articleHeadline}`;
   const shareLinkReddit = `${redditURL}${articleShareUrl}&title=${articleHeadline}`;
   const shareLinkEmail = `${mail}${articleHeadline}&body=${articleShareUrl}`;
 

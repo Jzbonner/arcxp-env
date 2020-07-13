@@ -42,9 +42,9 @@ const SiteMeta = () => {
       <meta name="twitter:url" content={url} />
       <meta property="og:image" content={thumbnailImage} />
       <meta property="og:image:height" content={`${isNonContentPage
-        || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '630'}`} />
-      <meta property="og:image:width" content={`${isNonContentPage
-        || thumbnailImage.indexOf('/resources/images/') > -1 ? '200' : '1200'}`} />
+        || thumbnailImage.indexOf('/resources/logos/') > -1 ? '200' : '630'}`} />
+      <meta property="og:image:width" content={`${isNonContentPage || thumbnailImage.indexOf('/resources/logos/') > -1
+        ? '200' : '1200'}`} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content={`${isNonContentPage ? 'website' : 'article'}`} />
       {!isNativoLandingPage && <meta property="og:url" content={url} />}

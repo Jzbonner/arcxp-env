@@ -178,7 +178,7 @@ const StoryPageLayout = () => {
             <Byline by={authorData} sections={sections}/>
           </div>
           <ContributorBadge tags={tags} ampPage={ampPage} />
-          {ampPage && <SocialShare headlines={headlines} promoItems={promoItems} articleURL={articleURL} />}
+          {ampPage && <SocialShare headlines={headlines} articleURL={articleURL} />}
           <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
             <SubHeadline subheadlines={subheadlines} />
           </div>
