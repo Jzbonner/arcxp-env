@@ -3,10 +3,10 @@ import { video } from 'fusion:environment';
 import getContentMeta from '../../siteMeta/_helper_functions/getContentMeta';
 import checkTags from '../../../../layouts/_helper_functions/checkTags';
 
-const gamAdTagBuilder = (pageTaxonomy = {}, videoTaxonomy = {}, videoId, currentEnv, videoPageUrl) => {
+const gamAdTagBuilder = (pageTax = {}, videoTax = {}, videoId, currentEnv, videoPageUrl) => {
   const { dfp_id: dfpId, adsPath } = getProperties();
-  const { primary_section: primarySection, tags: pageTags } = pageTaxonomy || {};
-  const { tags: videoTags } = videoTaxonomy || {};
+  const { primary_section: primarySection, tags: pageTags } = pageTax || {};
+  const { tags: videoTags } = videoTax || {};
   const { cmsId } = video || {};
   let noPageAds = false;
   let noVideoAds = false;

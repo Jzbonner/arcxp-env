@@ -13,15 +13,21 @@ const Video = ({
   src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, pageTaxonomy = [],
 }) => {
   const appContext = useAppContext();
-  const { requestUri } = appContext;
+  const { globalContent, requestUri, layout } = appContext;
   const fusionContext = useFusionContext();
   const {
     credits,
     _id: videoID,
     videoPageId,
-    taxonomy: videoTaxonomy = [],
+    taxonomy: videoTax = [],
     canonical_url: videoPageUrl,
   } = src || {};
+  let pageTax = pageTaxonomy;
+  if (layout === 'article-basic' && !pageTaxonomy.length) {
+    const { taxonomy: gcTax } = globalContent;
+    pageTax = gcTax;
+  }
+
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON, autoplayNext } = featuredVideoPlayerRules || inlineVideoPlayerRules;
   const screenSize = checkWindowSize();
@@ -34,7 +40,7 @@ const Video = ({
   if (credits) {
     mainCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
   }
-  const adTag = gamAdTagBuilder(pageTaxonomy, videoTaxonomy, vidId, currentEnv, videoPageUrl || requestUri);
+  const adTag = gamAdTagBuilder(pageTax, videoTax, vidId, currentEnv, videoPageUrl || requestUri);
 
   useEffect(() => {
     if (adTag) {

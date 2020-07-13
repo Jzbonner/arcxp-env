@@ -44,7 +44,7 @@ const Headline = ({
           src={basicItems}
           featuredVideoPlayerRules={featuredVideoPlayerRules}
           maxTabletViewWidth={maxTabletViewWidth}
-          taxonomy={taxonomy}
+          pageTaxonomy={taxonomy}
         />
       )}
     </div>
