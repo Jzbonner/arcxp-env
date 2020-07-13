@@ -16,6 +16,7 @@
   "logoShort": "/resources/logos/AJC/logo-short.svg",
   "logoHamburger": "/resources/logos/AJC/logo-mobile-hamburger.svg",
   "logoPlaceholder": "/resources/logos/AJC/placeholder.svg",
+  "logoOgImage": "/resources/logos/AJC/logo-ogimage.png",
   "mail": "mailto:?Subject=",
   "sites": ["ajc", "dayton-daily-news", "dayton", "journal-news", "springfield-news-sun"],
   "hyperlocalTags": ["community contributor", "alpharetta", "roswell", "sandy springs", "dunwoody"],

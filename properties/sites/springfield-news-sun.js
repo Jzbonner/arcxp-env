@@ -7,7 +7,7 @@ export default {
   cdnSite: 'springfield-news-sun',
   siteDomainURL: 'https://sandbox.springfieldnewssun.arcpublishing.com/pf',
   websiteURL: 'https://www.springfieldnewssun.com/',
-  websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/CFSFLNZIUJBB3EVHSGSJCOHOJM.png',
+  websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/ESSF3ZPUYRH7RAH4D7SUTHQCMM.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/ESSF3ZPUYRH7RAH4D7SUTHQCMM.png',
   orgName: 'Springfield News Sun',
   domainTwitterURL: 'https://twitter.com/springfieldnews',
@@ -23,6 +23,7 @@ export default {
   logoShort: '/resources/logos/SpringfieldNews/logo-short.svg',
   logoHamburger: '/resources/logos/SpringfieldNews/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/SpringfieldNews/placeholder.svg',
+  logoOgImage: '/resources/logos/SpringfieldNews/logo-ogimage.png',
   mail: 'mailto:?Subject=',
   sites: ['springfield-news-sun'],
   featuredVideoPlayerRules: {

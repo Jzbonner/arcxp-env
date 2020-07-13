@@ -8,7 +8,7 @@ export default {
   cdnSite: 'journal-news',
   siteDomainURL: 'https://sandbox.journal-news.arcpublishing.com/pf',
   websiteURL: 'https://www.journal-news.com/',
-  websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/CFSFLNZIUJBB3EVHSGSJCOHOJM.png',
+  websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/DK42MHKQZRA7PFSGW7YUX4A4DQ.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/DK42MHKQZRA7PFSGW7YUX4A4DQ.png',
   orgName: 'Journal News',
   domainTwitterURL: 'https://twitter.com/journalnews',
@@ -24,6 +24,7 @@ export default {
   logoShort: '/resources/logos/JournalNews/logo-short.svg',
   logoHamburger: '/resources/logos/JournalNews/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/JournalNews/placeholder.svg',
+  logoOgImage: '/resources/logos/JournalNews/logo-ogimage.png',
   mail: 'mailto:?Subject=',
   sites: ['journal-news'],
   featuredVideoPlayerRules: {

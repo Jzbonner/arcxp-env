@@ -8,7 +8,7 @@ export default {
   cdnSite: 'dayton',
   siteDomainURL: 'https://sandbox.dayton.arcpublising.com/pf',
   websiteURL: 'https://www.dayton.com/',
-  websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/CFSFLNZIUJBB3EVHSGSJCOHOJM.png',
+  websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/YRHUB5MLSRHN3GFTFUEH36LH4M.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/YRHUB5MLSRHN3GFTFUEH36LH4M.png',
   orgName: 'Dayton',
   domainTwitterURL: 'https://www.twitter.com/daytondotcom/',
@@ -24,6 +24,7 @@ export default {
   logoShort: '/resources/logos/Dayton/logo-short.svg',
   logoHamburger: '/resources/logos/Dayton/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/Dayton/placeholder.svg',
+  logoOgImage: '/resources/logos/Dayton/logo-ogimage.png',
   mail: 'mailto:?Subject=',
   sites: ['dayton'],
   featuredVideoPlayerRules: {
