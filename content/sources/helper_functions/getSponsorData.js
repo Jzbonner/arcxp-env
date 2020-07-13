@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 import checkSponsor from '../../../components/layouts/_helper_functions/checkSponsor';
@@ -8,7 +9,7 @@ const getSponsorData = (sections, query) => {
     arcSite = 'ajc', type = 'navigation', hierarchy = 'default',
   } = query;
 
-  if (!sponsorSectionID) return null;
+  if (typeof window === 'undefined' || !sponsorSectionID) return null;
 
   let siteData = null;
 
@@ -24,6 +25,9 @@ const getSponsorData = (sections, query) => {
     })
     .then(({ data }) => {
       siteData = { ...data };
+    })
+    .catch((error) => {
+      console.log('AXIOS CATCH - getSponsorData => ', error);
     });
 
   return Promise.all([promise]).then(() => {

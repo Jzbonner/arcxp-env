@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 
@@ -33,6 +34,9 @@ export default (arcSite, newBody, size = 100) => {
       })
       .then(({ data, config }) => {
         contentElements.push({ id: config.id, data: data.content_elements });
+      })
+      .catch((error) => {
+        console.log('AXIOS CATCH - getQueryData => ', error);
       });
 
     promiseArray.push(promise);

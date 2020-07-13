@@ -21,6 +21,9 @@ export default (site = 'ajc', contentElements) => {
           })
           .then(({ data, config }) => {
             storyData.push({ id: config.id, data });
+          })
+          .catch((error) => {
+            console.log('AXIOS CATCH - getStoryData => ', error);
           });
         promiseArray.push(promise);
       }
