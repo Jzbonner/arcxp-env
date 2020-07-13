@@ -64,7 +64,6 @@ const SocialShare = ({ headlines, articleURL }) => {
 
 SocialShare.propTypes = {
   headlines: PropTypes.object,
-  promoItems: PropTypes.object,
   articleURL: PropTypes.string,
 };
 
