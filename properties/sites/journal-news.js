@@ -17,6 +17,7 @@ export default {
   facebookURL: 'https://www.facebook.com/share.php?u=',
   domainPinterestURL: '',
   pinterestURL: 'https://www.pinterest.com/pin/create/button/?url=',
+  pinterestShareLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.coxohio/NDGCHKDQUNDTLL5XSWQJMKNZIA.png',
   domainRedditURL: '',
   redditURL: 'https://www.reddit.com/submit?url=',
   footerLogo: '/resources/logos/JournalNews/logo-full.svg',
@@ -24,7 +25,7 @@ export default {
   logoShort: '/resources/logos/JournalNews/logo-short.svg',
   logoHamburger: '/resources/logos/JournalNews/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/JournalNews/placeholder.svg',
-  logoOgImage: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.coxohio/NDGCHKDQUNDTLL5XSWQJMKNZIA.png',
+  logoOgImage: '/resources/logos/JournalNews/logo-ogimage.png',
   mail: 'mailto:?Subject=',
   sites: ['journal-news'],
   featuredVideoPlayerRules: {

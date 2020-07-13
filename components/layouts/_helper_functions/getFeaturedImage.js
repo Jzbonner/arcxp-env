@@ -9,11 +9,11 @@ const renderImage = () => {
   const appContext = useAppContext();
   const {
     globalContent,
-    // deployment,
-    // contextPath,
+    deployment,
+    contextPath,
   } = appContext;
 
-  const { logoOgimage } = getProperties(arcSite);
+  const { logoOgImage } = getProperties(arcSite);
   const {
     promo_items: promoItems,
     content_elements: contentElements,
@@ -64,7 +64,7 @@ const renderImage = () => {
   if (ogContentImage) {
     return imageResizer(ogContentImage, arcSite, 1200, 630);
   }
-  return logoOgimage;
+  return deployment(`${contextPath}${logoOgImage}`);
 };
 
 export default renderImage;

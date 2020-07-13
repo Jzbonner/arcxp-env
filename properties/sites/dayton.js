@@ -17,6 +17,7 @@ export default {
   facebookURL: 'https://www.facebook.com/share.php?u=',
   domainPinterestURL: 'https://www.pinterest.com/daytondotcom/',
   pinterestURL: 'https://www.pinterest.com/pin/create/button/?url=',
+  pinterestShareLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.coxohio/2L4CESVBVRBE7M2XATT7PR3IZ4.png',
   domainRedditURL: 'https://www.reddit.com/domain/dayton.com/',
   redditURL: 'https://www.reddit.com/submit?url=',
   footerLogo: '/resources/logos/Dayton/logo-full.svg',
@@ -24,7 +25,7 @@ export default {
   logoShort: '/resources/logos/Dayton/logo-short.svg',
   logoHamburger: '/resources/logos/Dayton/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/Dayton/placeholder.svg',
-  logoOgImage: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.coxohio/2L4CESVBVRBE7M2XATT7PR3IZ4.png',
+  logoOgImage: '/resources/logos/Dayton/logo-ogimage.png',
   mail: 'mailto:?Subject=',
   sites: ['dayton'],
   featuredVideoPlayerRules: {

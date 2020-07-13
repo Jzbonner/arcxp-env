@@ -2,19 +2,16 @@ import React from 'react';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import PropTypes from 'prop-types';
+import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import fetchEnv from '../../global/utils/environment';
-import getItemThumbNail from '../../../features/Slider/_helper_functions/getItemThumbnail';
 
-
-const SocialShare = ({ headlines, promoItems, articleURL }) => {
+const SocialShare = ({ headlines, articleURL }) => {
   const { basic: headline } = headlines || {};
-  const { basic: basicItems } = promoItems || {};
-  const { url: headlineImage } = basicItems || {};
 
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    facebookAppID, siteName, googleLogo, websiteLogo,
+    facebookAppID, siteName, pinterestShareLogo,
   } = getProperties(arcSite);
   let sharedUrl = articleURL;
   let site = siteName.toLowerCase();
@@ -24,14 +21,8 @@ const SocialShare = ({ headlines, promoItems, articleURL }) => {
     // we must fully-qualify the url for sharing
     sharedUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${sharedUrl}`;
   }
-  let pinterestUrl = headlineImage;
 
-  if (!headlineImage && promoItems) {
-    pinterestUrl = getItemThumbNail(promoItems);
-  }
-  if (!pinterestUrl) {
-    pinterestUrl = siteName.toLowerCase() === 'ajc' ? websiteLogo : googleLogo;
-  }
+  const pinterestUrl = renderImage().indexOf('/resources/logos/') > -1 ? pinterestShareLogo : renderImage();
 
   return (
     <div className="social-share-buttons b-margin-bottom-d40-m20">

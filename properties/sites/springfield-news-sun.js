@@ -16,6 +16,7 @@ export default {
   facebookURL: 'https://www.facebook.com/share.php?u=',
   domainPinterestURL: '',
   pinterestURL: 'https://www.pinterest.com/pin/create/button/?url=',
+  pinterestShareLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.coxohio/X6F5HYVHVRHNBOGAKEVUZURWKQ.png',
   domainRedditURL: 'https://www.reddit.com/domain/springfieldnewssun.com/',
   redditURL: 'https://www.reddit.com/submit?url=',
   footerLogo: '/resources/logos/SpringfieldNews/logo-full.svg',
@@ -23,7 +24,7 @@ export default {
   logoShort: '/resources/logos/SpringfieldNews/logo-short.svg',
   logoHamburger: '/resources/logos/SpringfieldNews/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/SpringfieldNews/placeholder.svg',
-  logoOgImage: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.coxohio/X6F5HYVHVRHNBOGAKEVUZURWKQ.png',
+  logoOgImage: '/resources/logos/SpringfieldNews/logo-ogimage.png',
   mail: 'mailto:?Subject=',
   sites: ['springfield-news-sun'],
   featuredVideoPlayerRules: {
