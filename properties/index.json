@@ -50,7 +50,7 @@
   "adsPath": "atlanta_np/ajc_web_default",
   "adsA9Enabled": false,
   "adsA9Id": "3970",
-  "adsPrebidEnabled": true,
+  "adsPrebidEnabled": false,
   "adsPrebidTimeout": 1500,
   "weatherLocationId": 348181,
   "favicon": "/resources/icons/favicons/AJC/favicon.ico"

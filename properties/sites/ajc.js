@@ -34,7 +34,7 @@ export default {
   appAdsTxt,
   adsA9Enabled: false,
   adsA9Id: '3970',
-  adsPrebidEnabled: true,
+  adsPrebidEnabled: false,
   adsPrebidTimeout: 1500,
   devconActive: true,
   devconKey: '2a1556f7-d788-4b8b-943a-dd77f5f0d472',
