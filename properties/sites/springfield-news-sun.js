@@ -23,7 +23,7 @@ export default {
   logoShort: '/resources/logos/SpringfieldNews/logo-short.svg',
   logoHamburger: '/resources/logos/SpringfieldNews/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/SpringfieldNews/placeholder.svg',
-  logoOgImage: '/resources/logos/SpringfieldNews/logo-ogimage.png',
+  logoOgImage: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.coxohio/X6F5HYVHVRHNBOGAKEVUZURWKQ.png',
   mail: 'mailto:?Subject=',
   sites: ['springfield-news-sun'],
   featuredVideoPlayerRules: {

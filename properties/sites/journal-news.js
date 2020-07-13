@@ -24,7 +24,7 @@ export default {
   logoShort: '/resources/logos/JournalNews/logo-short.svg',
   logoHamburger: '/resources/logos/JournalNews/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/JournalNews/placeholder.svg',
-  logoOgImage: '/resources/logos/JournalNews/logo-ogimage.png',
+  logoOgImage: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.coxohio/NDGCHKDQUNDTLL5XSWQJMKNZIA.png',
   mail: 'mailto:?Subject=',
   sites: ['journal-news'],
   featuredVideoPlayerRules: {

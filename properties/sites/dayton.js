@@ -24,7 +24,7 @@ export default {
   logoShort: '/resources/logos/Dayton/logo-short.svg',
   logoHamburger: '/resources/logos/Dayton/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/Dayton/placeholder.svg',
-  logoOgImage: '/resources/logos/Dayton/logo-ogimage.png',
+  logoOgImage: 'https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.coxohio/2L4CESVBVRBE7M2XATT7PR3IZ4.png',
   mail: 'mailto:?Subject=',
   sites: ['dayton'],
   featuredVideoPlayerRules: {
