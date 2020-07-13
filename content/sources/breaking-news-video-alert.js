@@ -32,6 +32,7 @@ const getStoryData = (site, data) => {
         return { url, headline };
       })
       .catch((error) => {
+        console.log('AXIOS CATCH - breaking news video alert "storyURL" => ', error);
         console.error(error);
       });
   }
@@ -68,6 +69,9 @@ const fetch = (query) => {
                 return getStoryData(site, videoData).then(data => ({ ...data, typeOfHeadline }));
               }
               return {};
+            })
+            .catch((error) => {
+              console.log('AXIOS CATCH - breaking news video alert "urlLiveVideo" => ', error);
             });
         }
         // If the the useContent hook receives a falsy value from  a content source, it uses the most recent data in its cache.
@@ -76,7 +80,7 @@ const fetch = (query) => {
         return {};
       })
       .catch((error) => {
-        console.error(error);
+        console.log('AXIOS CATCH - breaking news video alert "urlBreaking" => ', error);
       });
   }
   return {};

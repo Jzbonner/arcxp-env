@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 
@@ -33,6 +34,9 @@ export default (data, arcSite, currentDisplayClass = '', requiredClasses = []) =
               return collectionElements;
             }
             return null;
+          })
+          .catch((error) => {
+            console.log('AXIOS CATCH - addfirstinlineimage => ', error);
           });
 
         promiseArray.push(promise);

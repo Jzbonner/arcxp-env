@@ -26,7 +26,7 @@ const fetch = (query) => {
     })
     .then(({ data }) => data)
     .catch((error) => {
-      console.error(error);
+      console.log('AXIOS CATCH - weather => ', error);
     });
 };
 
