@@ -15,7 +15,6 @@ const TransparenseeWidget = () => {
     },
   });
 
-
   if (callback) {
     const screenSize = checkWindowSize();
     const isMobile = screenSize.width < 768;
