@@ -14,12 +14,17 @@ const SocialShare = ({ headlines, articleURL }) => {
     facebookAppID, siteName, pinterestShareLogo,
   } = getProperties(arcSite);
   let sharedUrl = articleURL;
-  let site = siteName.toLowerCase();
-  site = site ? site.replace(/w/gi, '') : '';
+  const site = siteName.toLowerCase();
   if (sharedUrl.indexOf('.com') === -1) {
     const env = fetchEnv();
     // we must fully-qualify the url for sharing
-    sharedUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${sharedUrl}`;
+    if (env === 'prod') {
+      sharedUrl = `https://${site}.com${sharedUrl}`;
+    } else if (env !== 'prod' && site === 'ajc') {
+      sharedUrl = `https://${site}-${site}-${env}.cdn.arcpublishing.com${sharedUrl}`;
+    } else if (env !== 'prod' && site !== 'ajc') {
+      sharedUrl = `https://coxohio-${site}-${env}.cdn.arcpublishing.com${sharedUrl}`;
+    }
   }
 
   const pinterestUrl = renderImage().indexOf('/resources/logos/') > -1 ? pinterestShareLogo : renderImage();

@@ -22,14 +22,18 @@ const StickyNav = ({
   const { deployment, contextPath } = appContext;
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
-
   let articleShareUrl = articleUrl;
-  let site = siteName.toLowerCase();
-  site = site ? site.replace(/w/gi, '') : '';
+  const site = siteName.toLowerCase();
   if (articleShareUrl && articleShareUrl.indexOf('.com') === -1) {
     const env = fetchEnv();
     // we must fully-qualify the url for sharing
-    articleShareUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${articleShareUrl}`;
+    if (env === 'prod') {
+      articleShareUrl = `https://${site}.com${articleShareUrl}`;
+    } else if (env !== 'prod' && site === 'ajc') {
+      articleShareUrl = `https://${site}-${site}-${env}.cdn.arcpublishing.com${articleShareUrl}`;
+    } else if (env !== 'prod' && site !== 'ajc') {
+      articleShareUrl = `https://coxohio-${site}-${env}.cdn.arcpublishing.com${articleShareUrl}`;
+    }
   }
   const shareLinkFacebook = `${facebookURL}${articleShareUrl}`;
   const shareLinkTwitter = `${twitterURL}${articleShareUrl}&text=${articleHeadline}`;
