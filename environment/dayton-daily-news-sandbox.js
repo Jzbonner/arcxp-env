@@ -12,7 +12,7 @@ export default {
     configCode: 'DN_PROD_DEFAULT',
     debug: false,
     tagManager: 'GTM',
-    containerId: 'GTM-W3VLHBK',
+    containerId: 'GTM-KMZK96C',
   },
   video: {
     cmsId: 2536851,

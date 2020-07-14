@@ -50,7 +50,7 @@ export default {
     siteID: 'daytondotcom',
     siteMetro: 'oh: dayton',
     siteFormat: 'entertainment',
-    gtmContainerKey: 'GTM-W3VLHBK',
+    gtmContainerKey: 'GTM-P72HT8T',
     ampGtmID: 'GTM-T46L3LB',
   },
   adsPath: 'dayton_np/daytoncom_web_default',

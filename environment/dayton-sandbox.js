@@ -12,7 +12,7 @@ export default {
     configCode: 'DAYTON_PROD_DEFAULT',
     debug: false,
     tagManager: 'GTM',
-    containerId: 'GTM-W3VLHBK',
+    containerId: 'GTM-P72HT8T',
   },
   video: {
     cmsId: 2536851,

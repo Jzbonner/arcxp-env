@@ -8,7 +8,7 @@ export default {
     configCode: 'JN_PROD_DEFAULT',
     debug: false,
     tagManager: 'GTM',
-    containerId: 'GTM-W3VLHBK',
+    containerId: 'GTM-NNFL6V6',
   },
   video: {
     cmsId: 2536851,
