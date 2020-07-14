@@ -10,9 +10,8 @@ class Api {
   }
 
   render() {
-    const { globalContent, siteProperties } = this.props || {};
-    const { websiteURL, metrics } = siteProperties || {};
-    const { siteID = 'ajc' } = metrics || {};
+    const { globalContent, siteProperties, arcSite: siteID } = this.props || {};
+    const { websiteURL } = siteProperties || {};
 
     if (globalContent) {
       return globalContent.sort((a, b) => a && a.display_date && b && b.display_date && a.display_date - b.display_date)

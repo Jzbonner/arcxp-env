@@ -13,14 +13,16 @@ const params = {
 
 const fetch = (query) => {
   const {
-    arcSite = 'ajc',
+    'arc-site': arcSiteAlt, // 'arc-site' comes from globalContentConfig
+    arcSite,
     id,
     size = 12,
   } = query;
+  const activeSite = arcSite || arcSiteAlt;
 
   if (id) {
-    return GetCollectionData(arcSite, id, size)
-      .then(data => StoryData(arcSite, data))
+    return GetCollectionData(activeSite, id, size)
+      .then(data => StoryData(activeSite, data))
       .catch((error) => {
         console.error('Error: ', error);
       });
