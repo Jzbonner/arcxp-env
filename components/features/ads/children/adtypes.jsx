@@ -219,6 +219,65 @@ export const adSlots = {
   },
   HP05: {
     dimensions: [
+      [728, 90], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+      prebid: {
+        enabled: true,
+        bids: [
+          {
+            bidder: 'appnexus',
+            labels: ['desktop2', 'tablet1'],
+            params: {
+              publisher: 'AJC',
+              placementGroup: 'ROS',
+              placementId: '17657465',
+              placementName: 'AJC_ROS_DesktopTablet_HP05',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['desktop2'],
+            params: {
+              placement: '5174472',
+            },
+          },
+          {
+            bidder: 'aol',
+            labels: ['tablet1'],
+            params: {
+              placement: '5174484',
+            },
+          },
+          {
+            bidder: 'rubicon',
+            labels: ['desktop2', 'tablet1'],
+            params: {
+              accountId: '21858',
+              siteId: '303388',
+              zoneId: '1529038',
+            },
+          },
+          {
+            bidder: 'openx',
+            labels: ['desktop2', 'tablet1'],
+            params: {
+              unit: '540941868',
+              delDomain: 'ajc-d.openx.net',
+            },
+          },
+        ],
+      },
+    },
+  },
+  'HP05-FlatPage': {
+    dimensions: [
       [], // desktop
       [728, 90], // tablet
     ],
