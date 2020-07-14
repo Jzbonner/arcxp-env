@@ -39,6 +39,8 @@ const Video = ({
   const currentEnv = fetchEnv();
   const { cdnOrg, cdnSite } = getProperties(arcSite);
   const thumbnailImage = renderImage();
+  const orgOfRecord = cdnOrg || (arcSite === 'ajc' ? 'ajc' : 'coxohio');
+  const siteOfRecord = cdnSite || arcSite;
 
   let mainCredit;
   if (credits) {
@@ -227,7 +229,7 @@ const Video = ({
     const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
       const videoScript = document.createElement('script');
       videoScript.type = 'text/javascript';
-      videoScript.src = `https://d328y0m0mtvzqc.cloudfront.net/${currentEnv}/powaBoot.js?org=${arcSite}`;
+      videoScript.src = `https://d328y0m0mtvzqc.cloudfront.net/${currentEnv}/powaBoot.js?org=${siteOfRecord}`;
       videoScript.async = true;
       videoScript.addEventListener('load', () => {
         resolve();
@@ -261,9 +263,9 @@ const Video = ({
     return <Caption src={src} isLeadVideo videoCaption={videoCaption} />;
   };
 
-  const rendePowaPlayer = () => <div
+  const renderPowaPlayer = () => <div
     className="powa"
-    data-org={arcSite}
+    data-org={orgOfRecord}
     data-env={currentEnv}
     data-aspect-ratio="0.5625"
     data-uuid={vidId}
@@ -273,7 +275,7 @@ const Video = ({
     data-discovery={autoplayNext || true}
      />;
 
-  const ampVideoIframeUrl = `https://${cdnOrg}-${cdnSite}-${currentEnv !== 'prod' ? 'sandbox' : 'prod'}.cdn.arcpublishing.com${videoPageUrl}?outputType=ampVideoIframe`;
+  const ampVideoIframeUrl = `https://${orgOfRecord}-${siteOfRecord}-${currentEnv !== 'prod' ? 'sandbox' : 'prod'}.cdn.arcpublishing.com${videoPageUrl}?outputType=ampVideoIframe`;
 
   const renderAmpPlayer = () => <amp-iframe allowFullscreen={true} class="i-amphtml-layout-responsive i-amphtml-layout-size-defined i-amphtml-element i-amphtml-layout" frameBorder="0" height="225" i-amphtml-layout="responsive" layout="responsive" sandbox="allow-scripts allow-same-origin allow-popups" src={ampVideoIframeUrl} width="400" style={{ '--loader-delay-offset': '492ms !important' }}>
     <i-amphtml-sizer style={{ display: 'block', paddingTop: '56.2500%' }} slot="i-amphtml-svc"></i-amphtml-sizer>
@@ -288,7 +290,7 @@ const Video = ({
   return (
     <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
       <div className="video-component">
-        {outputType === 'amp' ? renderAmpPlayer() : rendePowaPlayer()}
+        {outputType === 'amp' ? renderAmpPlayer() : renderPowaPlayer()}
       </div>
       {outputType !== 'amp' && <>
         <p className={`video-credit-text ${isInlineVideo ? 'is-inline' : null}`}>{giveCredit}</p>
