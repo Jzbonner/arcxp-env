@@ -10,6 +10,7 @@ import Copyright from '../global/copyright/default';
 import WeatherAlerts from '../global/weatherAlerts/default';
 import '../../../src/styles/container/_c-section.scss';
 import '../../../src/styles/base/_utility.scss';
+import './default.scss';
 
 const SectionOutput = ({ zones, layout }) => (
   <>
