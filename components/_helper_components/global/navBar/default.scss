@@ -22,7 +22,7 @@
     position: fixed;
     top: 0;
     opacity: .98;
-    z-index: 1000;
+    z-index: 4001;
     width: 100%;
     height: 90px;
     background-color: #f8f8f8;
@@ -36,7 +36,7 @@
   }
 
   nav {
-    z-index: 10;
+    z-index: 4001;
 
     &.mobile-nav-activated {
       transform: translateX(1000px);
@@ -917,7 +917,8 @@
         height: 9.37rem;
       }
 
-      &.itemCount-9 {
+      &.itemCount-9,
+      &.itemCount-10 {
         height: 9.75rem;
       }
 

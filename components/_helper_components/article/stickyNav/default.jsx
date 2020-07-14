@@ -16,20 +16,22 @@ const StickyNav = ({
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    facebookURL, twitterURL, pinterestURL, redditURL, mail, siteName, logoShort, pinterestShareLogo,
+    facebookURL, twitterURL, pinterestURL, redditURL, mail, siteName, logoShort, pinterestShareLogo, cdnOrg,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
-
   let articleShareUrl = articleUrl;
-  let site = siteName.toLowerCase();
-  site = site ? site.replace(/w/gi, '') : '';
+  const site = siteName.toLowerCase();
   if (articleShareUrl && articleShareUrl.indexOf('.com') === -1) {
     const env = fetchEnv();
     // we must fully-qualify the url for sharing
-    articleShareUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${articleShareUrl}`;
+    if (env === 'prod') {
+      articleShareUrl = `https://${site}.com${articleShareUrl}`;
+    } else if (env !== 'prod') {
+      articleShareUrl = `https://${cdnOrg}-${site}-${env}.cdn.arcpublishing.com${articleShareUrl}`;
+    }
   }
   const shareLinkFacebook = `${facebookURL}${articleShareUrl}`;
   const shareLinkTwitter = `${twitterURL}${articleShareUrl}&text=${articleHeadline}`;
