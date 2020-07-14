@@ -45,14 +45,14 @@ const VideoPageLayout = () => {
 
   return (
     <>
-      {(!noAds || !ampVideoIframe) && <GlobalAdSlots />}
+      {!noAds && !ampVideoIframe && <GlobalAdSlots />}
       {!ampVideoIframe && <>
         <BreakingNews />
         <WeatherAlerts />
         <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
       </>}
       <main>
-        {(!noAds || !ampVideoIframe) && <div className="c-hp01-mp01 b-margin-top-d40-m20">
+        {!noAds && !ampVideoIframe && <div className="c-hp01-mp01 b-margin-top-d40-m20">
           <ArcAd staticSlot={'HP00'} />
           <ArcAd staticSlot={'MP01'} />
         </div>}
