@@ -28,6 +28,10 @@ export default {
   logoOgImage: '/resources/logos/Dayton/logo-ogimage.png',
   mail: 'mailto:?Subject=',
   sites: ['dayton'],
+  breakingNewsID: '3FTP2S6SRVFG7M3T2VUKR7B2CY',
+  breakingLiveVideoID: 'NSVDX4ZQ7BEGHDFVFT26WQSOEE',
+  breakingNewsID_sandbox: '63KAPZZLQRABDAB7I7PZ4KNYVA',
+  breakingLiveVideoID_sandbox: 'VYXS5V6CBFEKFG6YEQ7YHU7BEE',
   featuredVideoPlayerRules: {
     startPlaying: true,
     muteON: true,

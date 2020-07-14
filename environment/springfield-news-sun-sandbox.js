@@ -7,15 +7,13 @@ export default {
   connext: {
     isEnabled: true,
     clientCode: 'springfield-news-sun',
-    environment: 'prod',
+    environment: 'sandbox',
     siteCode: 'DN',
     configCode: 'NS_PROD_DEFAULT',
     debug: false,
     tagManager: 'GTM',
     containerId: 'GTM-W3VLHBK',
   },
-  breakingNewsID: '2DFNDMIGWBCSNNVURFGVQV2MDI',
-  breakingLiveVideoID: 'DJ5HSRZBBBAZ7EJ3VMNYD3DMW4',
   video: {
     cmsId: 2536851,
   },

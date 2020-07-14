@@ -27,6 +27,10 @@ export default {
   logoOgImage: '/resources/logos/SpringfieldNews/logo-ogimage.png',
   mail: 'mailto:?Subject=',
   sites: ['springfield-news-sun'],
+  breakingNewsID: 'MDEEBOSQDNEZRK6ZZELXGDVG2E',
+  breakingLiveVideoID: 'HV4DOKFKSZF35CA4XLCK4BHIPY',
+  breakingNewsID_sandbox: '2DFNDMIGWBCSNNVURFGVQV2MDI',
+  breakingLiveVideoID_sandbox: 'DJ5HSRZBBBAZ7EJ3VMNYD3DMW4',
   featuredVideoPlayerRules: {
     startPlaying: true,
     muteON: true,
