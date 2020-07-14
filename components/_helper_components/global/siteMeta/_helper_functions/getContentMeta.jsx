@@ -44,6 +44,13 @@ const getContentMeta = () => {
     referent: primarySectionReference,
   } = primarySection || {};
   const delimitedSections = sections ? sections.filter(section => section._id !== primarySectionId) : [];
+  // Filters sections by site
+  const nonPrimarySections = delimitedSections ? delimitedSections.filter(delimitedSection => delimitedSection._website === arcSite) : [];
+  const nonPrimarySectionNames = [];
+  nonPrimarySections.forEach(section => nonPrimarySectionNames.push(section._id));
+  // The set removes the repeating section names
+  let nonPrimarySet = [...new Set(nonPrimarySectionNames)];
+  nonPrimarySet = nonPrimarySet.join(', ');
   const topics = [];
   tags.forEach((tag) => {
     if (tag && tag.text) {
@@ -166,6 +173,7 @@ const getContentMeta = () => {
     topSectionName,
     isNonContentPage,
     favicon,
+    nonPrimarySet,
   };
 };
 
