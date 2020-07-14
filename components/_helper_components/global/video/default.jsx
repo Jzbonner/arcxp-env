@@ -1,11 +1,14 @@
+/* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import getProperties from 'fusion:properties';
 import { useFusionContext, useAppContext } from 'fusion:context';
 import get from 'lodash.get';
 import fetchEnv from '../utils/environment';
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import gamAdTagBuilder from './_helper_functions/gamAdTagBuilder';
+import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
@@ -31,10 +34,13 @@ const Video = ({
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON, autoplayNext } = featuredVideoPlayerRules || inlineVideoPlayerRules;
   const screenSize = checkWindowSize();
-  const { outputType, arcSite = 'ajc', layout: pageLayout } = fusionContext;
+  const { outputType, arcSite, layout: pageLayout } = fusionContext;
   let vidId = videoID || videoPageId;
   const currentEnv = fetchEnv();
-
+  const { cdnOrg, cdnSite } = getProperties(arcSite);
+  const thumbnailImage = renderImage();
+  const orgOfRecord = cdnOrg || (arcSite === 'ajc' ? 'ajc' : 'coxohio');
+  const siteOfRecord = cdnSite || arcSite;
 
   let mainCredit;
   if (credits) {
@@ -223,7 +229,7 @@ const Video = ({
     const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
       const videoScript = document.createElement('script');
       videoScript.type = 'text/javascript';
-      videoScript.src = `https://d328y0m0mtvzqc.cloudfront.net/${currentEnv}/powaBoot.js?org=${arcSite}`;
+      videoScript.src = `https://d328y0m0mtvzqc.cloudfront.net/${currentEnv}/powaBoot.js?org=${siteOfRecord}`;
       videoScript.async = true;
       videoScript.addEventListener('load', () => {
         resolve();
@@ -257,9 +263,9 @@ const Video = ({
     return <Caption src={src} isLeadVideo videoCaption={videoCaption} />;
   };
 
-  const rendePowaPlayer = () => <div
+  const renderPowaPlayer = () => <div
     className="powa"
-    data-org={arcSite}
+    data-org={orgOfRecord}
     data-env={currentEnv}
     data-aspect-ratio="0.5625"
     data-uuid={vidId}
@@ -269,35 +275,27 @@ const Video = ({
     data-discovery={autoplayNext || true}
      />;
 
-  const renderAmpPlayer = () => {
-    const [mp4Stream] = src.streams.filter(item => item.stream_type === 'mp4');
-    const [webmStream] = src.streams.filter(item => item.stream_type === 'webm');
-    const posterImage = get(src, 'promo_image.url');
+  const ampVideoIframeUrl = `https://${orgOfRecord}-${siteOfRecord}-${currentEnv !== 'prod' ? 'sandbox' : 'prod'}.cdn.arcpublishing.com${videoPageUrl}?outputType=ampVideoIframe`;
 
-    const controls = {
-      controls: '',
-      width: '640',
-      height: '360',
-      layout: 'responsive',
-      poster: posterImage,
-    };
-
-    if (mp4Stream || webmStream) {
-      return <amp-video {...controls}>
-        {webmStream ? <source src={get(webmStream, 'url')} type="video/webm" /> : null}
-        {mp4Stream ? <source src={get(mp4Stream, 'url')} type="video/mp4" /> : null}
-      </amp-video>;
-    }
-    return null;
-  };
+  const renderAmpPlayer = () => <amp-iframe allowFullscreen={true} class="i-amphtml-layout-responsive i-amphtml-layout-size-defined i-amphtml-element i-amphtml-layout" frameBorder="0" height="225" i-amphtml-layout="responsive" layout="responsive" sandbox="allow-scripts allow-same-origin allow-popups" src={ampVideoIframeUrl} width="400" style={{ '--loader-delay-offset': '492ms !important' }}>
+    <i-amphtml-sizer style={{ display: 'block', paddingTop: '56.2500%' }} slot="i-amphtml-svc"></i-amphtml-sizer>
+    <amp-img class="i-amphtml-layout-fill i-amphtml-layout-size-defined i-amphtml-element i-amphtml-layout amp-hidden" i-amphtml-layout="fill" layout="fill" placeholder="" src={`https://www-ajc-com.cdn.ampproject.org/i/s/${thumbnailImage}`} i-amphtml-auto-lightbox-visited="">
+      <img decoding="async" src={`https://www-ajc-com.cdn.ampproject.org/i/s/${thumbnailImage}`} className="i-amphtml-fill-content i-amphtml-replaced-content"></img>
+    </amp-img>
+    <i-amphtml-scroll-container class="amp-active">
+      <iframe className="i-amphtml-fill-content" name="amp_iframe0" allowFullscreen="" frameBorder="0" allow="" sandbox="allow-scripts allow-same-origin allow-popups" src={ampVideoIframeUrl} style={{ zIndex: 0 }}></iframe>
+    </i-amphtml-scroll-container>
+  </amp-iframe>;
 
   return (
     <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
       <div className="video-component">
-        {outputType === 'amp' ? renderAmpPlayer() : rendePowaPlayer()}
+        {outputType === 'amp' ? renderAmpPlayer() : renderPowaPlayer()}
       </div>
-      <p className={`video-credit-text ${isInlineVideo ? 'is-inline' : null}`}>{giveCredit}</p>
-      {smartChecker()}
+      {outputType !== 'amp' && <>
+        <p className={`video-credit-text ${isInlineVideo ? 'is-inline' : null}`}>{giveCredit}</p>
+        {smartChecker()}
+      </>}
     </div>
   );
 };

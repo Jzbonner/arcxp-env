@@ -36,7 +36,7 @@
       h4,
       h5,
       h6 {
-        @include text-styles(1.2rem, 2.11px, "Gordita");
+        @include text-styles(1.2rem, 2.11, "Gordita");
 
         margin: 0;
         clear: left;

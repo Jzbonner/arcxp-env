@@ -13,8 +13,11 @@ import checkTags from './_helper_functions/checkTags';
 
 const VideoPageLayout = () => {
   const appContext = useAppContext();
-  const { globalContent } = appContext;
+  const { globalContent, outputType } = appContext;
   if (!globalContent) return null;
+
+  // ampVideoIframe outputType is used on amp pages, to render only the video page - this is for preroll purposes
+  const ampVideoIframe = outputType.toLowerCase() === 'ampvideoiframe';
 
   const {
     promo_items: promoItems,
@@ -42,21 +45,25 @@ const VideoPageLayout = () => {
 
   return (
     <>
-      {!noAds && <GlobalAdSlots />}
-      <BreakingNews />
-      <WeatherAlerts />
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
+      {!noAds && !ampVideoIframe && <GlobalAdSlots />}
+      {!ampVideoIframe && <>
+        <BreakingNews />
+        <WeatherAlerts />
+        <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
+      </>}
       <main>
-        {!noAds && <div className="c-hp01-mp01 b-margin-top-d40-m20">
+        {!noAds && !ampVideoIframe && <div className="c-hp01-mp01 b-margin-top-d40-m20">
           <ArcAd staticSlot={'HP00'} />
           <ArcAd staticSlot={'MP01'} />
         </div>}
         <div className="c-header">
-          <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} />
+          <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampVideoIframe={ampVideoIframe} />
         </div>
       </main>
-      <Footer />
-      <Copyright />
+      {!ampVideoIframe && <>
+        <Footer />
+        <Copyright />
+      </>}
     </>
   );
 };
