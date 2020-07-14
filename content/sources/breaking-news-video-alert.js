@@ -27,7 +27,7 @@ const fetch = (query) => {
         return GetCollectionData(arcSite, breakingLiveVideoID, size)
           .then((videoData) => {
             if (videoData.length > 0) {
-              return { headline: videoData[0].headlines.basic, url: videoData[0].canonical_url, typeOfHeadline: 'Video News' };
+              return { headline: videoData[0].headlines.basic, url: videoData[0].canonical_url, typeOfHeadline: 'Live Video' };
             }
             return null;
           });
