@@ -7,7 +7,7 @@ import Video from '../../global/video/default';
 import Gallery from '../../../features/gallery/default';
 
 const Headline = ({
-  basicItems = {}, headlines = {}, taxonomy = {}, ampPage = false, contentType = '',
+  basicItems = {}, headlines = {}, taxonomy = {}, ampPage = false, contentType = '', ampVideoIframe = false,
 }) => {
   let promoData = {};
   if (basicItems) {
@@ -22,11 +22,11 @@ const Headline = ({
 
   return (
     <div className={`article-headline-component b-margin-bottom-d30-m20 with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
-      <div className="headline">
+      {!ampVideoIframe && <div className="headline">
         <div className="headline-body">
           <h1 className={`headline-text ${headlines.basic.length > 50 ? 'headline-text-long' : ''}`}>{headlines.basic}</h1>
         </div>
-      </div>
+      </div>}
       {promoData.type === 'image' && (
         <Image
           width={1066}
@@ -59,6 +59,7 @@ Headline.propTypes = {
   taxonomy: PropTypes.object,
   ampPage: PropTypes.bool,
   contentType: PropTypes.string,
+  ampVideoIframe: PropTypes.bool,
 };
 
 export default Headline;

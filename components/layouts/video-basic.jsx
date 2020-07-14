@@ -57,7 +57,7 @@ const VideoPageLayout = () => {
           <ArcAd staticSlot={'MP01'} />
         </div>}
         <div className="c-header">
-          <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} />
+          <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampVideoIframe={ampVideoIframe} />
         </div>
       </main>
       {!ampVideoIframe && <>
