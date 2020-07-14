@@ -20,9 +20,6 @@ import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import ArcAd from '../features/ads/default';
 import ContributorBadge from '../_helper_components/global/contributorBadge/default';
-import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
-import '../../src/styles/container/_article-basic.scss';
-import '../../src/styles/base/_utility.scss';
 import filterContentElements from './_helper_functions/article/filterContentElements';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
 import ConnextHyperLocalSubscription from '../_helper_components/global/ConnextHyperLocalSubscription/ConnextHyperLocalSubscription';
@@ -37,6 +34,9 @@ import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
 import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/default';
+import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
+import '../../src/styles/container/_article-basic.scss';
+import '../../src/styles/base/_utility.scss';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
@@ -156,7 +156,7 @@ const StoryPageLayout = () => {
       <BreakingNews />
       <WeatherAlerts />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
-      <main>
+      <main className="c-articleContent">
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
             <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
