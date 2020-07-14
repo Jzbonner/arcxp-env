@@ -257,11 +257,8 @@ const Gallery = (props) => {
 
     mobileElementData.forEach((el, i) => {
       if (el.props.data && i !== 0 && i % 4 === 0) {
-        mobileElements.splice(
-          i + (i > 0 ? currentAdCount : 0),
-          0,
-          <MPGO1Element adSlot={MPG01} adCount={currentAdCount} key={`${i}-MPG01`} />,
-        );
+        /* eslint-disable-next-line max-len */
+        mobileElements.splice(i + (i > 0 ? currentAdCount : 0), 0, <MPGO1Element adSlot={MPG01} adCount={currentAdCount} key={`${i}-MPG01`} />);
         currentAdCount += 1;
       }
     });
