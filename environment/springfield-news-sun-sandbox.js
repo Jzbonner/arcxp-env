@@ -12,7 +12,7 @@ export default {
     configCode: 'NS_PROD_DEFAULT',
     debug: false,
     tagManager: 'GTM',
-    containerId: 'GTM-W3VLHBK',
+    containerId: 'GTM-NSH3PS4',
   },
   video: {
     cmsId: 2536851,

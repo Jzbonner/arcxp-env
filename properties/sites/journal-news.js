@@ -55,7 +55,7 @@ export default {
     siteID: 'journal-news',
     siteMetro: 'oh: dayton',
     siteFormat: 'news',
-    gtmContainerKey: 'GTM-W3VLHBK',
+    gtmContainerKey: 'GTM-NNFL6V6',
     ampGtmID: 'GTM-WQBXD72',
   },
   adsPath: 'dayton_np/jnws_web_default',

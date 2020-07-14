@@ -55,7 +55,7 @@ export default {
     siteID: 'daytondaily',
     siteMetro: 'oh: dayton',
     siteFormat: 'news',
-    gtmContainerKey: 'GTM-W3VLHBK',
+    gtmContainerKey: 'GTM-KMZK96C',
     ampGtmID: 'GTM-WQBXD72',
   },
   adsPath: 'dayton_np/ddn_web_default',

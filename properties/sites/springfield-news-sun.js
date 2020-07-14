@@ -54,7 +54,7 @@ export default {
     siteID: 'springfieldnews',
     siteMetro: 'oh: dayton',
     siteFormat: 'news',
-    gtmContainerKey: 'GTM-W3VLHBK',
+    gtmContainerKey: 'GTM-NSH3PS4',
     ampGtmID: 'GTM-WQBXD72',
   },
   adsPath: 'dayton_np/spns_web_default',
