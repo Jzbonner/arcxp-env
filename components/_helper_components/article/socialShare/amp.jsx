@@ -20,7 +20,7 @@ const SocialShare = ({ headlines, articleURL }) => {
     // we must fully-qualify the url for sharing
     if (env === 'prod') {
       sharedUrl = `https://${site}.com${sharedUrl}`;
-    } else if (env !== 'prod' && site === 'ajc') {
+    } else if (env !== 'prod') {
       sharedUrl = `https://${cdnOrg}-${site}-${env}.cdn.arcpublishing.com${sharedUrl}`;
     }
   }
