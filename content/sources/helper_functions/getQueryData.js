@@ -7,7 +7,7 @@ export default (arcSite, newBody, from = 0, size = 10) => {
   }
 
   const sizeInt = parseInt(size, 10);
-  const fromInt = parseInt(from, 10) - 1;
+  const fromInt = parseInt(from, 10) === 0 ? parseInt(from, 10) : parseInt(from, 10) - 1;
 
   const promiseArray = [];
   const contentElements = [];
