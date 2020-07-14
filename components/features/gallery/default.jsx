@@ -253,12 +253,12 @@ const Gallery = (props) => {
 
   const insertMobileGalleryAd = () => {
     const mobileElements = [...mobileElementData];
-    let currentAdCountLesser = 0;
+    let currentAdCount = 0;
 
     mobileElementData.forEach((el, i) => {
       if (el.props.data && i !== 0 && i % 4 === 0) {
-        mobileElements.splice(i + (i > 0 ? currentAdCountLesser : 0), 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
-        currentAdCountLesser += 1;
+        mobileElements.splice(i + (i > 0 ? currentAdCount : 0), 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
+        currentAdCount += 1;
       }
     });
 
