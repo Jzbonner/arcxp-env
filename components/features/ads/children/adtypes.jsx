@@ -277,6 +277,7 @@ export const adSlots = {
     },
   },
   'HP05-FlatPage': {
+    slotName: 'HP05',
     dimensions: [
       [], // desktop
       [728, 90], // tablet
