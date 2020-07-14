@@ -11,7 +11,7 @@ const SocialShare = ({ headlines, articleURL }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    facebookAppID, siteName, pinterestShareLogo,
+    facebookAppID, siteName, pinterestShareLogo, cdnOrg,
   } = getProperties(arcSite);
   let sharedUrl = articleURL;
   const site = siteName.toLowerCase();
@@ -21,9 +21,7 @@ const SocialShare = ({ headlines, articleURL }) => {
     if (env === 'prod') {
       sharedUrl = `https://${site}.com${sharedUrl}`;
     } else if (env !== 'prod' && site === 'ajc') {
-      sharedUrl = `https://${site}-${site}-${env}.cdn.arcpublishing.com${sharedUrl}`;
-    } else if (env !== 'prod' && site !== 'ajc') {
-      sharedUrl = `https://coxohio-${site}-${env}.cdn.arcpublishing.com${sharedUrl}`;
+      sharedUrl = `https://${cdnOrg}-${site}-${env}.cdn.arcpublishing.com${sharedUrl}`;
     }
   }
 

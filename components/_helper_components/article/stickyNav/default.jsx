@@ -16,7 +16,7 @@ const StickyNav = ({
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    facebookURL, twitterURL, pinterestURL, redditURL, mail, siteName, logoShort, pinterestShareLogo,
+    facebookURL, twitterURL, pinterestURL, redditURL, mail, siteName, logoShort, pinterestShareLogo, cdnOrg,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
@@ -29,10 +29,8 @@ const StickyNav = ({
     // we must fully-qualify the url for sharing
     if (env === 'prod') {
       articleShareUrl = `https://${site}.com${articleShareUrl}`;
-    } else if (env !== 'prod' && site === 'ajc') {
-      articleShareUrl = `https://${site}-${site}-${env}.cdn.arcpublishing.com${articleShareUrl}`;
-    } else if (env !== 'prod' && site !== 'ajc') {
-      articleShareUrl = `https://coxohio-${site}-${env}.cdn.arcpublishing.com${articleShareUrl}`;
+    } else if (env !== 'prod') {
+      articleShareUrl = `https://${cdnOrg}-${site}-${env}.cdn.arcpublishing.com${articleShareUrl}`;
     }
   }
   const shareLinkFacebook = `${facebookURL}${articleShareUrl}`;
