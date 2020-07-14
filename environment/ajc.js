@@ -11,8 +11,6 @@ export default {
     tagManager: 'GTM',
     containerId: 'GTM-W3VLHBK',
   },
-  breakingNewsID: 'USNZPBNLV5EULFTENZZP52ECZQ',
-  breakingLiveVideoID: '2UPLSZACARBEVG2PQVZLQLO7D4',
   video: {
     cmsId: 2528054,
   },

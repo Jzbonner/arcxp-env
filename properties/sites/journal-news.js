@@ -28,6 +28,10 @@ export default {
   logoOgImage: '/resources/logos/JournalNews/logo-ogimage.png',
   mail: 'mailto:?Subject=',
   sites: ['journal-news'],
+  breakingNewsID: 'FIQH7IEKK5H5LHRAII5AY7VDCU',
+  breakingLiveVideoID: '52EEYZZB6BDYZDOFFNPJBO2ZJA',
+  breakingNewsID_sandbox: 'BYPUKOTQLRAMLDYR5C3XLJOVZQ',
+  breakingLiveVideoID_sandbox: 'A4KCYNGXMBGHRF6JABDFEHFFCE',
   featuredVideoPlayerRules: {
     startPlaying: true,
     muteON: true,

@@ -14,7 +14,7 @@ const fetch = (query) => {
   const {
     breakingNewsID,
     breakingLiveVideoID,
-    arcSite = 'ajc',
+    arcSite,
     size = 1,
   } = query;
 

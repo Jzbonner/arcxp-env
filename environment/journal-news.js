@@ -10,8 +10,6 @@ export default {
     tagManager: 'GTM',
     containerId: 'GTM-W3VLHBK',
   },
-  breakingNewsID: 'FIQH7IEKK5H5LHRAII5AY7VDCU',
-  breakingLiveVideoID: '52EEYZZB6BDYZDOFFNPJBO2ZJA',
   video: {
     cmsId: 2536851,
   },
