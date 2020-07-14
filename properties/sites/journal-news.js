@@ -62,4 +62,5 @@ export default {
   favicon: '/resources/icons/favicons/Ohio/journal-news-favicon.ico',
   adsTxt,
   appAdsTxt,
+  nativoMoapTag: 'https://amp.journal-news.com/amp/ntv',
 };

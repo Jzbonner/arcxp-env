@@ -57,4 +57,5 @@ export default {
   favicon: '/resources/icons/favicons/Ohio/dayton-favicon.ico',
   adsTxt,
   appAdsTxt,
+  nativoMoapTag: 'https://amp.dayton.com/amp/ntv',
 };
