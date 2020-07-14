@@ -19,7 +19,7 @@ import './default.scss';
 
 const PG01 = () => <ArcAd staticSlot={'PG01'} key={'PG01'} />;
 const PG02 = () => <ArcAd staticSlot={'PG02'} key={'PG02'} />;
-const MPG01 = () => <ArcAd staticSlot={'MPG01'} key={'MPG01'} />;
+const MPG01 = adCount => <ArcAd staticSlot={'MPG01'} adSuffix={`_${adCount}`} key={'MPG01'} />;
 
 const Gallery = (props) => {
   const {
@@ -64,8 +64,6 @@ const Gallery = (props) => {
   /* Mobile Ads */
   const [mobileAdsIndices, setMobileAdsIndices] = useState([]);
   const [isAdInsertable, setAdInsertionAbleState] = useState(true);
-  const [currentAdCount, setCurrentAdCount] = useState(0);
-  const [nextAdRendering, setNextAdRendering] = useState(4);
 
   /* Metrics */
   const [hasOpened, setOpenedState] = useState(null);
@@ -255,12 +253,16 @@ const Gallery = (props) => {
 
   const insertMobileGalleryAd = () => {
     const mobileElements = [...mobileElementData];
-    let hasAdBeenInserted = false;
+    let currentAdCount = 0;
 
-    mobileElementData.forEach((element, i) => {
-      if (element.props.data && element.props.data.index >= currentIndex && !hasAdBeenInserted) {
-        mobileElements.splice(nextAdRendering + currentAdCount, 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
-        hasAdBeenInserted = true;
+    mobileElementData.forEach((el, i) => {
+      if (el.props.data && i !== 0 && i % 4 === 0) {
+        mobileElements.splice(
+          i + (i > 0 ? currentAdCount : 0),
+          0,
+          <MPGO1Element adSlot={MPG01} adCount={currentAdCount} key={`${i}-MPG01`} />,
+        );
+        currentAdCount += 1;
       }
     });
 
@@ -300,8 +302,6 @@ const Gallery = (props) => {
     setHeight(0);
     setMobileAdsIndices([]);
     setAdInsertionAbleState(true);
-    setCurrentAdCount(0);
-    setNextAdRendering(4);
   };
 
   const renderCaptionByCurrentIndex = () => {
@@ -359,30 +359,12 @@ const Gallery = (props) => {
     }
   };
 
-  // keeps tracks of which photos have already been scrolled through to prevent redundent ad insetions (mobile)
-  const addIndexToListForAds = (index) => {
-    const indexArray = [...mobileAdsIndices];
-
-    if (!mobileAdsIndices.includes(index)) indexArray.push(index);
-
-    return setMobileAdsIndices(indexArray);
-  };
-
   // tracks which photo user is on (scrolling mobile gallery)
   const handleScrollEvent = debounce(() => {
     if (galleryMobileEl.current) {
       const index = currentIndex;
       const galleryScrollTop = galleryMobileEl.current.scrollTop;
       const targetOffsetTop = document.getElementById(`gallery-item-${index}`).offsetTop;
-
-      // lazy loading ads
-      if (isAdInsertable && !mobileAdsIndices.includes(index) && mobileElementData && currentIndex === (nextAdRendering - 2)) {
-        const adInsertedMobileArray = insertMobileGalleryAd();
-        setMobileElementData(adInsertedMobileArray);
-        setAdInsertionAbleState(false);
-        setCurrentAdCount(currentAdCount + 1);
-        setNextAdRendering(nextAdRendering + 4);
-      }
 
       if (offsetHeight === 0 && (galleryScrollTop > targetOffsetTop)) {
         setHeight(offsetHeight + targetOffsetTop);
@@ -406,8 +388,6 @@ const Gallery = (props) => {
           changeIndex(actions.NEXT);
         }
       }
-
-      addIndexToListForAds(index);
     }
 
     return null;
@@ -449,8 +429,13 @@ const Gallery = (props) => {
 
   useEffect(() => {
     if (elementData && !isStickyVisible && currentAction !== '') finalizeGalleryItems();
-    if (isMobile && isStickyVisible) setAdInsertionAbleState(true);
-  }, [currentIndex, isAdVisible]);
+
+    if (isStickyVisible && isAdInsertable && mobileElementData) {
+      const adsInstertedMobileEls = insertMobileGalleryAd();
+      setMobileElementData(adsInstertedMobileEls);
+      setAdInsertionAbleState(false);
+    }
+  }, [currentIndex, isAdVisible, isStickyVisible]);
 
   useEffect(() => {
     if (!isMobile && galleryEl && galleryEl.current) {
@@ -502,7 +487,7 @@ const Gallery = (props) => {
     return () => {
       window.removeEventListener('scroll', handleScrollEvent, true);
     };
-  }, [currentIndex, isCaptionOn, mobileAdsIndices, isAdInsertable, offsetHeight, currentAdCount, nextAdRendering]);
+  }, [currentIndex, isCaptionOn, mobileAdsIndices, isAdInsertable, offsetHeight]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
@@ -590,7 +575,6 @@ const Gallery = (props) => {
       mobileElemData = getMobileElements([...mobileElementData]);
     }
   }
-
 
   return (
     <>
