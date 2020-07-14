@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
@@ -43,6 +43,7 @@ const ListItem = ({
   const isCommunityContributor = checkTags(tags, 'community contributor');
   const sponsorName = getSponsorData(sections);
 
+  const [isMissingPromo, setIsMissingPromo] = useState('');
 
   const relativeURL = (websites && websites[arcSite] && websites[arcSite].website_url) || '/';
   const isListPage = listPage ? 'listPage' : '';
@@ -124,6 +125,10 @@ const ListItem = ({
       );
     }
 
+    if (!isMissingPromo) {
+      setIsMissingPromo('isMissingPromo');
+    }
+
     return null;
   }
 
@@ -152,7 +157,7 @@ const ListItem = ({
   if (relativeURL === '/') return null;
 
   return (
-    <div className={`c-homeList ${isListPage}`}>
+    <div className={`c-homeList ${isListPage} ${isMissingPromo}`}>
       {getPromoItem(sponsorName)}
       <div className="homeList-text">
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>

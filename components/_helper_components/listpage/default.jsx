@@ -28,6 +28,10 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
   const filterStart = parseInt(query.from, 10) - 1; // since the array is zero-indexed
   const filterSize = parseInt(query.size, 10);
 
+  if (!globalContent) {
+    return null;
+  }
+
   const filteredStories = globalContent.slice(
     filterStart,
     filterStart + filterSize,
@@ -42,7 +46,7 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
     filter,
   });
 
-  const { headlines: { basic: collectionTitle } } = collectionMetaData || {};
+  const { headlines: { basic: collectionTitle } = {} } = collectionMetaData || {};
 
   const storiesPerPage = 10;
 
