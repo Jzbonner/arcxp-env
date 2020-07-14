@@ -57,7 +57,7 @@
       }
 
       .headline {
-        @include text-styles(1.2rem, 1.25, "Average");
+        @include text-styles(1rem, 1.25, "Average");
 
         letter-spacing: -.24px;
         text-align: center;
@@ -224,6 +224,14 @@
           margin-bottom: 2rem;
         }
       }
+      
+      &.isMissingPromo {
+
+        .homeList-text {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
     }
   }
 
@@ -276,7 +284,7 @@
       .homeList-text {
 
         .headline {
-          @include text-styles(1.25rem, 90px, "Gordita");
+          @include text-styles(1rem, 90px, "Gordita");
 
           @include breakpoint(desktop-sm) {
             @include text-styles(1.875rem, 90px, "Gordita");
