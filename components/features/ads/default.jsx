@@ -17,7 +17,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
   const { slot: customFieldsSlot } = customFields || {};
   const { dfp_id: dfpid, adsPath, siteName } = getProperties(arcSite);
   const slot = customFieldsSlot || staticSlot;
-  let randomIdMPG01 = '';
+  // let randomIdMPG01 = '';
   const currentEnv = fetchEnv();
 
   // If there is no DFP ID and we are in the Admin,
@@ -36,7 +36,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
   // use their slotname if given, otherwise default to the slot for this ad type
   const slotName = adConfig.slotName || slot;
 
-  if (staticSlot && staticSlot.includes('MPG01')) randomIdMPG01 = Math.floor(Math.random() * 999999);
+  // if (staticSlot && staticSlot.includes('MPG01')) randomIdMPG01 = Math.floor(Math.random() * 999999);
 
   const targeting = adConfig.targeting || defaultAdSlot.targeting || {};
   // get global targeting values
@@ -122,7 +122,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
       dfpId={dfpIdFormatted}
       display={adConfig.display || defaultAdSlot.display}
-      id={`${defaultAdSlot.name}${staticSlot || slot}${randomIdMPG01 !== '' ? `-${randomIdMPG01}` : ''}`}
+      id={`${defaultAdSlot.name}${staticSlot || slot}`}
       slotName={slotName}
       adSlotNameForArcAds={adSlotNameForArcAds}
       targeting={{ ...globalTargeting, ...targeting }}
