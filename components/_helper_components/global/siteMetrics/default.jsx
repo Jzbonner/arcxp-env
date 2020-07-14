@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import { connext } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import getContentMeta from '../siteMeta/_helper_functions/getContentMeta';
 
 const SiteMetrics = ({ isAmp }) => {
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
   const appContext = useAppContext();
   const { globalContent } = appContext;
   const {
@@ -48,7 +50,7 @@ const SiteMetrics = ({ isAmp }) => {
     galleryHeadline = promoHeadlines && promoHeadlines.basic ? promoHeadlines.basic : '';
   }
 
-  const { metrics, siteDomainURL } = getProperties() || {};
+  const { metrics, siteDomainURL } = getProperties(arcSite) || {};
   const contentMeta = getContentMeta();
 
   if (!contentMeta) {
@@ -68,7 +70,9 @@ const SiteMetrics = ({ isAmp }) => {
     topics,
     contentId,
     firstPublishDateConverted,
+    nonPrimarySet: nonPrimarySections,
   } = contentMeta || {};
+
   const siteDomain = siteDomainURL || `https://www.${site}.com`;
 
   if (isAmp) {
@@ -84,7 +88,7 @@ const SiteMetrics = ({ isAmp }) => {
               "groups": "default",
               "pageName": "${url}",
               "pageSiteSection": "${topSection}",
-              "pageCategory": "${secondarySection}",
+              "pageCategory": "${nonPrimarySections}",
               "pageContentType": "instant article",
               "pageTitle": "${seoTitle ? seoTitle.replace(/'/g, '"').toLowerCase() : pageTitle.replace(/'/g, '"').toLowerCase()}",
               "pageFlow": "",
@@ -107,7 +111,8 @@ const SiteMetrics = ({ isAmp }) => {
               "galleryName": "${galleryHeadline}",
               "authorName": [${ampAuthorNames}],
               "pageNameStr": "",
-              "pageUrlStr": ""
+              "pageUrlStr": "",
+              "pageMainSection": "${topSection}"
               }
             }
           `,
