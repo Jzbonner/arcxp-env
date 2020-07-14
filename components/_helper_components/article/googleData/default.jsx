@@ -1,6 +1,7 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
+import fetchEnv from '../../global/utils/environment';
 import getContentMeta from '../../global/siteMeta/_helper_functions/getContentMeta';
 
 const GoogleStructuredData = () => {
@@ -15,10 +16,19 @@ const GoogleStructuredData = () => {
   if (pageContentType === 'article' || pageContentType === 'wire' || pageContentType === 'blog') {
     const fusionContext = useFusionContext();
     const { arcSite } = fusionContext;
+    const env = fetchEnv();
     const desc = articleDesc && articleDesc.basic ? articleDesc.basic : '';
     const {
-      websiteURL, websiteLogo, googleLogo, orgName,
+      websiteLogo, googleLogo, orgName, cdnOrg, siteName,
     } = getProperties(arcSite);
+    let websiteURL;
+    const site = siteName.toLowerCase();
+
+    if (env === 'prod') {
+      websiteURL = `https://${site}.com`;
+    } else if (env !== 'prod') {
+      websiteURL = `https://${cdnOrg}-${site}-${env}.cdn.arcpublishing.com`;
+    }
 
     const { url: featuredIMG } = promoItems && promoItems.basic && promoItems.basic.url ? promoItems.basic : {};
     const { url: videoThumbnail } = promoItems
