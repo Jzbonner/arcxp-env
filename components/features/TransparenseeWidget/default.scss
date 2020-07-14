@@ -1,0 +1,27 @@
+@import "./../../../src/styles/base";
+
+.ttd-search {
+  height: 3.3rem;
+  position: relative;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .24);
+  width: 100%;
+
+  .ttd-search__input {
+    border-radius: .3125rem;
+    border: 0;
+    height: 3.25rem;
+    width: 88%;
+    margin-left: 10px;
+    background: transparent;
+
+    @include text-styles(1.25rem, 1, "Gordita");
+  }
+
+  .ttd-search__submit {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+  }
+}

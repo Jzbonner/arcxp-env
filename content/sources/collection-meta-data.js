@@ -6,8 +6,8 @@ const params = {
 };
 
 const resolve = (query) => {
-  const { id = '' } = query;
-  return `websked/collections/v1/collections/${id}`;
+  const { id = '', arcSite = 'ajc' } = query;
+  return `/content/v4/collections/?website=${arcSite}&_id=${id}`;
 };
 
 export default {

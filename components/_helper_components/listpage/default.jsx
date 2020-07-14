@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
 import checkTags from '../../layouts/_helper_functions/checkTags';
 import ArcAd from '../../features/ads/default';
 import Pagination from '../global/pagination/default';
 import ListItem from '../home/ListItem/ListItem';
 import './default.scss';
 import '../../features/List/default';
+import filter from '../../../content/filters/collectionTitle';
 
 const RP01 = () => (
   <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />
@@ -16,6 +18,8 @@ const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
 const ListPage = ({ globalContent, globalContentConfig, title }) => {
   const [activePage, setActivePage] = useState(1);
 
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
   const { query } = globalContentConfig || {};
   const { taxonomy } = globalContent;
   const { tags = [] } = taxonomy || {};
@@ -33,10 +37,13 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
     source: 'collection-meta-data',
     query: {
       id: query && query.id,
+      arcSite,
     },
+    filter,
   });
 
-  const { data } = collectionMetaData || {};
+  const { headlines: { basic: collectionTitle } } = collectionMetaData || {};
+
   const storiesPerPage = 10;
 
   const getTitle = () => {
@@ -44,10 +51,10 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
       return title;
     }
 
-    if (data && data.name) {
+    if (collectionTitle) {
       return (
         <div className="b-flexCenter b-flexRow tease-listHeading b-margin-bottom-d30-m20">
-          {data.name}
+          {collectionTitle}
         </div>
       );
     }

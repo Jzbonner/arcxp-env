@@ -26,7 +26,7 @@ const Video = (customFields = {}) => {
 
   if (data) {
     return (
-      <div className="b-margin-bottom-d30-m20">
+      <div className="b-margin-bottom-d30-m20" style={{ width: '100%' }}>
         <FeatureTitle title={title} moreURL={moreURL} />
         <VideoComponent
           src={data}

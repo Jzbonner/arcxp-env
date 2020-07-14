@@ -218,6 +218,7 @@
     "arcads": "^1.6.0",
     "axios": "^0.19.2",
     "bodybuilder": "^2.2.21",
+    "dangerously-set-html-content": "^1.0.6",
     "htmlparser2": "^4.1.0",
     "jstoxml": "^1.6.7",
     "sanitize-html": "^1.26.0",

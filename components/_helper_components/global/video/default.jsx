@@ -267,7 +267,7 @@ const Video = ({
     data-muted={muteON}
     data-playthrough={autoplayNext || true}
     data-discovery={autoplayNext || true}
-    playsInline />;
+     />;
 
   const renderAmpPlayer = () => {
     const [mp4Stream] = src.streams.filter(item => item.stream_type === 'mp4');

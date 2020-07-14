@@ -1,4 +1,5 @@
 import { useAppContext, useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
 import imageResizer from './Thumbor';
 
 const renderImage = () => {
@@ -12,6 +13,7 @@ const renderImage = () => {
     contextPath,
   } = appContext;
 
+  const { logoOgImage } = getProperties(arcSite);
   const {
     promo_items: promoItems,
     content_elements: contentElements,
@@ -62,7 +64,7 @@ const renderImage = () => {
   if (ogContentImage) {
     return imageResizer(ogContentImage, arcSite, 1200, 630);
   }
-  return deployment(`${contextPath}/resources/images/logo-ogimage.png`);
+  return deployment(`${contextPath}${logoOgImage}`);
 };
 
 export default renderImage;

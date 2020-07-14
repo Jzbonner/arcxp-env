@@ -18,7 +18,7 @@ const BreakingNews = () => {
     query: {
       breakingNewsID,
       breakingLiveVideoID,
-      site: arcSite,
+      arcSite,
     },
   });
 
