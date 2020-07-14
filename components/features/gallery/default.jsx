@@ -19,7 +19,7 @@ import './default.scss';
 
 const PG01 = () => <ArcAd staticSlot={'PG01'} key={'PG01'} />;
 const PG02 = () => <ArcAd staticSlot={'PG02'} key={'PG02'} />;
-const MPG01 = () => <ArcAd staticSlot={'MPG01'} key={'MPG01'} />;
+const MPG01 = adCount => <ArcAd staticSlot={'MPG01'} adSuffix={`_${adCount}`} key={'MPG01'} />;
 
 const Gallery = (props) => {
   const {
@@ -257,7 +257,11 @@ const Gallery = (props) => {
 
     mobileElementData.forEach((el, i) => {
       if (el.props.data && i !== 0 && i % 4 === 0) {
-        mobileElements.splice(i + (i > 0 ? currentAdCount : 0), 0, <MPGO1Element adSlot={MPG01} key={`${i}-MPG01`} />);
+        mobileElements.splice(
+          i + (i > 0 ? currentAdCount : 0),
+          0,
+          <MPGO1Element adSlot={MPG01} adCount={currentAdCount} key={`${i}-MPG01`} />,
+        );
         currentAdCount += 1;
       }
     });

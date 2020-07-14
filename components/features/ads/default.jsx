@@ -8,7 +8,7 @@ import { adSlots, defaultAdSlot } from './children/adtypes';
 import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
 import currentConditions from '../../_helper_components/global/utils/weather/currentConditions';
 
-const ArcAd = ({ customFields, staticSlot }) => {
+const ArcAd = ({ customFields, adSuffix = '', staticSlot }) => {
   const { temp, text: sky, precipitation: weather } = currentConditions() || {};
   const appContext = useAppContext();
   const fusionContext = useFusionContext();
@@ -122,7 +122,7 @@ const ArcAd = ({ customFields, staticSlot }) => {
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
       dfpId={dfpIdFormatted}
       display={adConfig.display || defaultAdSlot.display}
-      id={`${defaultAdSlot.name}${staticSlot || slot}`}
+      id={`${defaultAdSlot.name}${staticSlot || slot}${adSuffix}`}
       slotName={slotName}
       adSlotNameForArcAds={adSlotNameForArcAds}
       targeting={{ ...globalTargeting, ...targeting }}
