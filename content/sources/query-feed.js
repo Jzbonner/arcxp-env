@@ -41,7 +41,8 @@ const fetch = (query) => {
     excludeSubtypes = '',
     arcSite,
     'arc-site': arcSiteAlt,
-    size = 100,
+    size = 10,
+    from = 0,
     displayClass = '',
     displayClassesRequiringImg = [],
   } = query;
@@ -101,7 +102,7 @@ const fetch = (query) => {
   const body = builder.build();
   const newBody = JSON.stringify(body);
 
-  return getQueryData(activeSite, newBody, size)
+  return getQueryData(activeSite, newBody, from, size)
     .then(data => AddFirstInlineImage(data, activeSite, displayClass, displayClassesRequiringImg))
     .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
     .catch((error) => {
