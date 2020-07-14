@@ -16,6 +16,7 @@ const VideoPageLayout = () => {
   const { globalContent, outputType } = appContext;
   if (!globalContent) return null;
 
+  // ampVideoIframe outputType is used on amp pages, to render only the video page - this is for preroll purposes
   const ampVideoIframe = outputType.toLowerCase() === 'ampvideoiframe';
 
   const {
