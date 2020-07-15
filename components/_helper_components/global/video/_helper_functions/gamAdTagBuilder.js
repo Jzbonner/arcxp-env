@@ -1,13 +1,15 @@
 import getProperties from 'fusion:properties';
-import { video } from 'fusion:environment';
+import { useFusionContext } from 'fusion:context';
 import getContentMeta from '../../siteMeta/_helper_functions/getContentMeta';
 import checkTags from '../../../../layouts/_helper_functions/checkTags';
 
 const gamAdTagBuilder = (pageTax = {}, videoTax = {}, videoId, currentEnv, videoPageUrl) => {
-  const { dfp_id: dfpId, adsPath } = getProperties();
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const { dfp_id: dfpId, adsPath, video } = getProperties(arcSite);
   const { primary_section: primarySection, tags: pageTags } = pageTax || {};
   const { tags: videoTags } = videoTax || {};
-  const { cmsId } = video || {};
+  const { cmsId } = video[currentEnv] || {};
   let noPageAds = false;
   let noVideoAds = false;
   if (videoTags) {
