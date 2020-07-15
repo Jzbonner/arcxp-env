@@ -63,4 +63,34 @@ export default {
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.daytondailynews.com/amp/ntv',
+  connext: {
+    sandbox: {
+      isEnabled: true,
+      clientCode: 'dayton-daily-news',
+      environment: 'stage',
+      siteCode: 'DN',
+      configCode: 'DN_PROD_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-KMZK96C',
+    },
+    prod: {
+      isEnabled: true,
+      clientCode: 'dayton-daily-news',
+      environment: 'prod',
+      siteCode: 'DN',
+      configCode: 'DN_PROD_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-KMZK96C',
+    },
+  },
+  video: {
+    sandbox: {
+      cmsId: 2536851,
+    },
+    prod: {
+      cmsId: 2536851,
+    },
+  },
 };
