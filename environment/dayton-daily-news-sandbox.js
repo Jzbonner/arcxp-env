@@ -4,17 +4,15 @@ export default {
     moapPTD: '[1058525, 380629, 77511]',
   },
   fbPagesId: '168815400507', // dayton-daily-news
-  breakingNewsID: 'BDA3AIXKOBAMNPZ6GIWW7IXPD4',
-  breakingLiveVideoID: 'D5V3Q4JLGNFSJCNS3BN4V4XPGI',
   connext: {
     isEnabled: true,
     clientCode: 'dayton-daily-news',
-    environment: 'prod',
+    environment: 'sandbox',
     siteCode: 'DN',
     configCode: 'DN_PROD_DEFAULT',
     debug: false,
     tagManager: 'GTM',
-    containerId: 'GTM-W3VLHBK',
+    containerId: 'GTM-KMZK96C',
   },
   video: {
     cmsId: 2536851,

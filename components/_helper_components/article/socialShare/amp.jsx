@@ -11,15 +11,18 @@ const SocialShare = ({ headlines, articleURL }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    facebookAppID, siteName, pinterestShareLogo,
+    facebookAppID, siteName, pinterestShareLogo, cdnOrg,
   } = getProperties(arcSite);
   let sharedUrl = articleURL;
-  let site = siteName.toLowerCase();
-  site = site ? site.replace(/w/gi, '') : '';
+  const site = siteName.toLowerCase();
   if (sharedUrl.indexOf('.com') === -1) {
     const env = fetchEnv();
     // we must fully-qualify the url for sharing
-    sharedUrl = `https://${env === 'prod' ? site : `${site}-${site}-${env}.cdn.arcpublishing`}.com${sharedUrl}`;
+    if (env === 'prod') {
+      sharedUrl = `https://${site}.com${sharedUrl}`;
+    } else if (env !== 'prod') {
+      sharedUrl = `https://${cdnOrg}-${site}-${env}.cdn.arcpublishing.com${sharedUrl}`;
+    }
   }
 
   const pinterestUrl = renderImage().indexOf('/resources/logos/') > -1 ? pinterestShareLogo : renderImage();

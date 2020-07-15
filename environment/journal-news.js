@@ -8,10 +8,8 @@ export default {
     configCode: 'JN_PROD_DEFAULT',
     debug: false,
     tagManager: 'GTM',
-    containerId: 'GTM-W3VLHBK',
+    containerId: 'GTM-NNFL6V6',
   },
-  breakingNewsID: 'FIQH7IEKK5H5LHRAII5AY7VDCU',
-  breakingLiveVideoID: '52EEYZZB6BDYZDOFFNPJBO2ZJA',
   video: {
     cmsId: 2536851,
   },

@@ -10,12 +10,11 @@ class Api {
   }
 
   render() {
-    const { globalContent, siteProperties } = this.props || {};
-    const { websiteURL, metrics } = siteProperties || {};
-    const { siteID = 'ajc' } = metrics || {};
+    const { globalContent, siteProperties, arcSite: siteID } = this.props || {};
+    const { websiteURL } = siteProperties || {};
 
     if (globalContent) {
-      return globalContent.sort((a, b) => a && a.display_date && b && b.display_date && a.display_date - b.display_date)
+      return globalContent
         .map((item) => {
           const {
             content_elements: contentElements = [],
@@ -167,6 +166,11 @@ class Api {
             return galleryXmlObject;
           }
           return {};
+        }).sort((a, b) => {
+          const aTime = new Date(a.item[3].pubDate);
+          const bTime = new Date(b.item[3].pubDate);
+
+          return bTime.getTime() - aTime.getTime();
         });
     }
 

@@ -11,6 +11,10 @@ export default {
   twitterURL: 'https://twitter.com/intent/tweet?url=',
   facebookURL: 'https://www.facebook.com/share.php?u=',
   instagramURL: '//instagram.com/ajcnews',
+  breakingNewsID: 'USNZPBNLV5EULFTENZZP52ECZQ',
+  breakingLiveVideoID: '2UPLSZACARBEVG2PQVZLQLO7D4',
+  breakingNewsID_sandbox: 'FFQQGJZMN5A3RHYWFUIESE3RYI',
+  breakingLiveVideoID_sandbox: 'PI5DD6OFEVFMHNDHZKI3XU7SSQ',
   metrics: {
     siteID: 'ajc',
     siteMetro: 'ga: atlanta',
@@ -38,4 +42,5 @@ export default {
   adsPrebidTimeout: 1500,
   devconActive: true,
   devconKey: '2a1556f7-d788-4b8b-943a-dd77f5f0d472',
+  nativoMoapTag: 'https://amp.ajc.com/amp/ntv',
 };

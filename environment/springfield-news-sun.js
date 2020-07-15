@@ -12,10 +12,8 @@ export default {
     configCode: 'NS_PROD_DEFAULT',
     debug: false,
     tagManager: 'GTM',
-    containerId: 'GTM-W3VLHBK',
+    containerId: 'GTM-NSH3PS4',
   },
-  breakingNewsID: 'MDEEBOSQDNEZRK6ZZELXGDVG2E',
-  breakingLiveVideoID: 'HV4DOKFKSZF35CA4XLCK4BHIPY',
   video: {
     cmsId: 2536851,
   },

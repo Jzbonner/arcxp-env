@@ -1,13 +1,16 @@
 import React from 'react';
 import './styles.scss';
 import PropTypes from 'prop-types';
+import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import { paragraphCounter } from '../../../layouts/_helper_functions/Paragraph';
 
 const Nativo = ({
   elements = [], displayIfAtLeastXParagraphs, controllerClass, ampPage,
 }) => {
-  const { sites } = getProperties();
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const { nativoMoapTag } = getProperties(arcSite);
 
   if (paragraphCounter(elements) >= displayIfAtLeastXParagraphs || controllerClass === 'story-nativo_placeholder--boap') {
     if (ampPage) {
@@ -18,7 +21,7 @@ const Nativo = ({
             width="400"
             height="350"
             layout="responsive"
-            data-request-url={`https://amp.${sites[0]}.com/amp/ntv-${
+            data-request-url={`${nativoMoapTag}-${
               controllerClass === 'story-nativo_placeholder--moap' ? 'moap' : 'boap'
             }`}
           ></amp-ad>

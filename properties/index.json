@@ -55,5 +55,6 @@
   "adsPrebidEnabled": false,
   "adsPrebidTimeout": 1500,
   "weatherLocationId": 348181,
-  "favicon": "/resources/icons/favicons/AJC/favicon.ico"
+  "favicon": "/resources/icons/favicons/AJC/favicon.ico",
+  "nativoMoapTag": "https://amp.ajc.com/amp/ntv"
 }

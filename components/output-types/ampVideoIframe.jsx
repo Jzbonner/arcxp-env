@@ -32,7 +32,7 @@ const AmpVideoIframeOutputType = (props) => {
 
   const { taxonomy } = globalContent || { type: null };
   const { tags = [] } = taxonomy || {};
-  const includeGtm = metrics && metrics.gtmContainerKey;
+  const includeGtm = metrics && metrics.ampGtmID;
   const noAds = checkTags(tags, 'no-ads');
 
   return (
@@ -47,7 +47,7 @@ const AmpVideoIframeOutputType = (props) => {
             {/* Google Tag Manager */}
             <script type='text/javascript' dangerouslySetInnerHTML={{
               /* eslint-disable-next-line max-len */
-              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${metrics.gtmContainerKey}');`,
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${metrics.ampGtmID}');`,
             }}></script>
             {/* End Google Tag Manager */}
           </>
@@ -65,7 +65,7 @@ const AmpVideoIframeOutputType = (props) => {
           /* Google Tag Manager (noscript) */
           <noscript dangerouslySetInnerHTML={{
             /* eslint-disable-next-line max-len */
-            __html: `<iframe src='https://www.googletagmanager.com/ns.html?id=${metrics.gtmContainerKey}' height='0' width='0' style='display:none;visibility:hidden'></iframe>`,
+            __html: `<iframe src='https://www.googletagmanager.com/ns.html?id=${metrics.ampGtmID}' height='0' width='0' style='display:none;visibility:hidden'></iframe>`,
           }}></noscript>
           /* End Google Tag Manager (noscript) */
         )}
