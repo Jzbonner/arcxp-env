@@ -1,6 +1,7 @@
 import React, {
   useState, useEffect, useLayoutEffect, useRef,
 } from 'react';
+import searchIcon from '../../../../../resources/icons/search.svg';
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -59,7 +60,7 @@ const Search = () => {
           className='search-input'></input>
         <button type="submit" className="c-search-icon">
           <img className='search-icon'
-            src='https://www.ajc.com/r/PortalConfig/np-ajc/assets-one/images/icons/search-icon.svg' />
+            src={searchIcon} />
         </button>
       </form>
     </li>
