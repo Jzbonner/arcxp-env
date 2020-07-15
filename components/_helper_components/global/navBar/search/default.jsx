@@ -28,12 +28,6 @@ const Search = () => {
   };
 
   useEffect(() => {
-    const queryLocation = window.location.href.search('/?q=');
-    const query = queryLocation !== -1 ? window.location.href.slice(queryLocation + 2) : '';
-    setSearchTerm(query);
-  }, []);
-
-  useEffect(() => {
     if (windowExists) {
       window.addEventListener('keydown', handleEnterPress, true);
       return () => {
