@@ -796,6 +796,13 @@
     }
   }
 
+  .stickyActive {
+    
+    .Mg2-connext[data-display-type] {
+      display: none;
+    }
+  }
+
   .connext-subscribe,
   .Mg2-connext[data-display-type] {
     max-height: 52px;
