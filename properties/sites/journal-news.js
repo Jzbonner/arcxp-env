@@ -63,4 +63,34 @@ export default {
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.journal-news.com/amp/ntv',
+  connext: {
+    sandbox: {
+      isEnabled: true,
+      clientCode: 'journal-news',
+      environment: 'stage',
+      siteCode: 'JN',
+      configCode: 'JN_STAGE_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-NNFL6V6',
+    },
+    prod: {
+      isEnabled: true,
+      clientCode: 'journal-news',
+      environment: 'prod',
+      siteCode: 'JN',
+      configCode: 'JN_PROD_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-NNFL6V6',
+    },
+  },
+  video: {
+    sandbox: {
+      cmsId: 2536851,
+    },
+    prod: {
+      cmsId: 2536851,
+    },
+  },
 };

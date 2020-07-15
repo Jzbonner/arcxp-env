@@ -61,4 +61,34 @@ export default {
   favicon: '/resources/icons/favicons/Ohio/springfield-news-sun-favicon.ico',
   adsTxt,
   nativoMoapTag: 'https://amp.springfieldnewssun.com/amp/ntv',
+  connext: {
+    sandbox: {
+      isEnabled: true,
+      clientCode: 'springfield-news-sun',
+      environment: 'stage',
+      siteCode: 'DN',
+      configCode: 'NS_STAGE_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-NSH3PS4',
+    },
+    prod: {
+      isEnabled: true,
+      clientCode: 'springfield-news-sun',
+      environment: 'prod',
+      siteCode: 'DN',
+      configCode: 'NS_PROD_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-NSH3PS4',
+    },
+  },
+  video: {
+    sandbox: {
+      cmsId: 2536851,
+    },
+    prod: {
+      cmsId: 2536851,
+    },
+  },
 };

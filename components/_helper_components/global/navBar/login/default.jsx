@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connext } from 'fusion:environment';
+import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../../utils/environment';
 import '../default.scss';
 import userIcon from '../../../../../resources/icons/login/user-icon.svg';
@@ -14,16 +15,19 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   } else {
     source = userIconWhite;
   }
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const currentEnv = fetchEnv();
+  const { connext } = getProperties(arcSite);
   const {
     isEnabled = false,
     clientCode,
-  } = connext;
+  } = connext[currentEnv] || {};
 
   if (!isEnabled) {
     return null;
   }
 
-  const currentEnv = fetchEnv();
   const accountSubdomain = `//${currentEnv !== 'prod' ? 'test-' : ''}myaccount`;
 
   const profileLink = `${accountSubdomain}.${clientCode}.com/${clientCode}/myprofile`;
