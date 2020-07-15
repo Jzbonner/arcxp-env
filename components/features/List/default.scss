@@ -3,7 +3,7 @@
 .c-homeListContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   a {
     color: inherit;
@@ -25,6 +25,7 @@
 
     @include breakpoint(desktop-sm) {
       margin-bottom: 2rem;
+      margin-right: 3.3%;
       width: 100%;
     }
 
@@ -79,6 +80,10 @@
     .c-homeList:last-child {
       border: none;
       margin-bottom: 0;
+
+      @include breakpoint(desktop-sm) {
+        margin-right: 0;
+      }
     }
   }
 
@@ -93,6 +98,12 @@
         @include breakpoint(desktop-sm) {
           margin-bottom: 0;
           border: none;
+        }
+      }
+
+      &:nth-child(2n) {
+        @include breakpoint(desktop-sm) {
+          margin-right: 0;
         }
       }
     }
@@ -111,6 +122,12 @@
           border: none;
         }
       }
+
+      &:nth-child(3n) {
+        @include breakpoint(desktop-sm) {
+          margin-right: 0;
+        }
+      }
     }
   }
 
@@ -125,6 +142,12 @@
         @include breakpoint(desktop-sm) {
           margin-bottom: 0;
           border: none;
+        }
+      }
+      
+      &:nth-child(4n) {
+        @include breakpoint(desktop-sm) {
+          margin-right: 0;
         }
       }
     }
