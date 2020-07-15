@@ -62,4 +62,5 @@ export default {
   favicon: '/resources/icons/favicons/Ohio/dayton-daily-news-favicon.ico',
   adsTxt,
   appAdsTxt,
+  nativoMoapTag: 'https://amp.daytondailynews.com/amp/ntv',
 };
