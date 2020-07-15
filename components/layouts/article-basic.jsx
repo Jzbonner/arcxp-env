@@ -13,7 +13,6 @@ import Section from '../_helper_components/article/section/Section';
 import TaboolaFeed from '../features/taboolaFeed/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
-import Gallery from '../features/gallery/default.jsx';
 import NavBar from '../_helper_components/global/navBar/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Footer from '../_helper_components/global/footer/default';
@@ -249,9 +248,6 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
             ampPage={ampPage}
           />
-          {(!basicItems || promoType !== 'gallery') && !ampPage ? (
-            <Gallery contentElements={filteredContentElements} pageType={type} />
-          ) : null}
           {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} />}
           {!noAds && !isHyperlocalContent && !sponsorSectionID && (
             <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
