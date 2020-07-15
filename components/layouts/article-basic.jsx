@@ -109,17 +109,17 @@ const StoryPageLayout = () => {
         return (
           <div className='c-section'>
             <amp-fx-flying-carpet height="300px" class="ampAd">
-            <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'500'} taxonomy={taxonomy} componentName='ArcAd'
-            multiSizeValidation={'false'} flyingCarpet={true}/>
-          </amp-fx-flying-carpet>
-          <div style={{ transform: `translate(0, -${320}px)` }}className='ampAdLabel'></div>
-        </div>
+              <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'500'} taxonomy={taxonomy} componentName='ArcAd'
+                multiSizeValidation={'false'} flyingCarpet={true} />
+            </amp-fx-flying-carpet>
+            <div style={{ transform: `translate(0, -${320}px)` }} className='ampAdLabel'></div>
+          </div>
         );
       }
       return (
         <div className='c-section teads-ad'>
           <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'1'} taxonomy={taxonomy} componentName='ArcAd'
-          multiSizeValidation={'false'} />
+            multiSizeValidation={'false'} />
         </div>
       );
     }
@@ -162,9 +162,10 @@ const StoryPageLayout = () => {
             <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
             <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} contentType={type} />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center' }} className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
+          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
+            className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
             {!isCommunityContributor
-            && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel}/>}
+              && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />}
             <TimeStamp
               firstPublishDate={firstPublishDate || lastUpdatedDate || displayDate}
               displayDate={displayDate}
@@ -175,7 +176,7 @@ const StoryPageLayout = () => {
             />
           </div>
           <div className="b-flexRow b-flexCenter b-pageContainer">
-            <Byline by={authorData} sections={sections}/>
+            <Byline by={authorData} sections={sections} />
           </div>
           <ContributorBadge tags={tags} ampPage={ampPage} />
           {ampPage && <SocialShare headlines={headlines} articleURL={articleURL} />}
@@ -192,7 +193,7 @@ const StoryPageLayout = () => {
             </div>
           )}
           {!noAds && ampPage && !isHyperlocalContent && (
-              <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
+            <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
           <Section
             elements={filteredContentElements}
@@ -208,7 +209,7 @@ const StoryPageLayout = () => {
             </div>
           )}
           {!noAds && ampPage && isHyperlocalContent && (
-              <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
+            <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
           <Section
             elements={filteredContentElements}
@@ -256,7 +257,7 @@ const StoryPageLayout = () => {
             <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
           )}
           {!noAds && ampPage && (
-              <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
+            <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
         </article>
       </main>
