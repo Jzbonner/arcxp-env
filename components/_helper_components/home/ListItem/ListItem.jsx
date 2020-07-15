@@ -15,7 +15,8 @@ const ListItem = ({
   promo_items: promoItems,
   label,
   taxonomy,
-  publish_date: publishDate,
+  first_publish_date: firstPublishDate,
+  last_updated_date: lastUpdatedDate,
   display_date: displayDate,
   headlines = [],
   websites,
@@ -145,7 +146,7 @@ const ListItem = ({
       <>
         <SectionLabel label={label || {}} taxonomy={taxonomy} />
         <TimeStamp
-          firstPublishDate={publishDate}
+          firstPublishDate={firstPublishDate || lastUpdatedDate || displayDate}
           displayDate={displayDate}
           isHideTimestampTrue={isHideTimestampTrue}
           isTease={true}
@@ -175,8 +176,9 @@ ListItem.propTypes = {
   promo_items: PropTypes.object,
   label: PropTypes.object,
   taxonomy: PropTypes.object,
-  publish_date: PropTypes.string,
   display_date: PropTypes.string,
+  first_publish_date: PropTypes.string,
+  last_updated_date: PropTypes.string,
   headlines: PropTypes.object,
   websites: PropTypes.object,
   listPage: PropTypes.bool,
