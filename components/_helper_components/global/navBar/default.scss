@@ -37,9 +37,15 @@
 
   nav {
     z-index: 4001;
+    visibility: none;
+
+    @include breakpoint (desktop-sm) {
+      visibility: visible;
+    }
 
     &.mobile-nav-activated {
       transform: translateX(1000px);
+      visibility: visible;
 
       .nav-menu-toggle {
         left: 15px;
