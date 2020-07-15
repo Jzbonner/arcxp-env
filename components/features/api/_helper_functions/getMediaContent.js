@@ -11,10 +11,16 @@ export const getMediaContent = (type, siteID, globalContent, promoItems) => {
     url: basicUrl,
     caption: basicCaption,
     subtitle: basicSubtitle,
+    headlines: basicHeadlines,
     credits: basicCredits = {},
     streams: basicStreams = [],
     promo_image: basicPromoImage = {},
   } = basic || {};
+  const { meta_title: metaTitle, basic: baseHeadline } = basicHeadlines || {};
+  let mediaTitle = basicSubtitle;
+  if (!mediaTitle) {
+    mediaTitle = metaTitle || baseHeadline;
+  }
 
   const basicAuthor = basicCredits.affiliation && basicCredits.affiliation.by ? basicCredits.affiliation.by.id : '';
 
@@ -28,7 +34,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems) => {
       },
       _content: [
         {
-          'media:title': `<![CDATA[${basicSubtitle}]]>`,
+          'media:title': `<![CDATA[${mediaTitle}]]>`,
         },
         {
           'media:description': `<![CDATA[${basicCaption}]]>`,
@@ -46,19 +52,31 @@ export const getMediaContent = (type, siteID, globalContent, promoItems) => {
 
   if (promoItemsType === 'video') {
     const [basicMp4Stream = []] = basicStreams.filter(item => item.stream_type === 'mp4');
-    const { url: basicMp4Url } = basicMp4Stream || {};
+    const [basicM3u8Stream = []] = basicStreams.filter(item => item.stream_type === 'ts');
+
+    let leadObjectType = '';
+    let leadObjectUrl = '';
+    if (basicM3u8Stream) {
+      const { url: basicM3u8Url } = basicM3u8Stream || {};
+      leadObjectType = 'application/x-mpegurl';
+      leadObjectUrl = basicM3u8Url;
+    } else if (basicMp4Stream) {
+      const { url: basicMp4Url } = basicMp4Stream || {};
+      leadObjectType = 'video/mp4';
+      leadObjectUrl = basicMp4Url;
+    }
     const { url: basicThumbNailImage = '' } = basicPromoImage;
 
     leadObject = {
       _name: 'media:content',
       _attrs: {
-        type: 'video/mp4',
+        type: `${leadObjectType}`,
         medium: 'video',
-        url: `${basicMp4Url}`,
+        url: `${leadObjectUrl}`,
       },
       _content: [
         {
-          'media:title': `<![CDATA[${basicSubtitle}]]>`,
+          'media:title': `<![CDATA[${mediaTitle}]]>`,
         },
         {
           'media:description': `<![CDATA[${basicCaption}]]>`,
@@ -97,29 +115,38 @@ export const getMediaContent = (type, siteID, globalContent, promoItems) => {
         return {};
       }
 
-      let mp4Stream;
       let resizerUrl = url;
+      let mediaObjectUrl = '';
 
       const mediaAuthor = mediaCredits.affiliation && mediaCredits.affiliation.by ? mediaCredits.affiliation.by.id : '';
-      const mediaType = localType === 'image' ? 'image/JPEG' : 'video/mp4';
+      let mediaType = localType === 'image' ? 'image/JPEG' : 'video/mp4';
       const mediaMedium = localType === 'image' ? 'image' : 'video';
 
       if (mediaMedium === 'video') {
-        [mp4Stream = []] = mediaStreams.filter(item => item && item.stream_type && item.stream_type === 'mp4');
+        const [mp4Stream = []] = mediaStreams.filter(item => item.stream_type === 'mp4');
+        const [m3u8Stream = []] = mediaStreams.filter(item => item.stream_type === 'ts');
+
+        if (m3u8Stream) {
+          const { url: m3u8Url } = m3u8Stream || {};
+          mediaType = 'application/x-mpegurl';
+          mediaObjectUrl = m3u8Url;
+        } else if (mp4Stream) {
+          const { url: mp4Url } = mp4Stream || {};
+          mediaType = 'video/mp4';
+          mediaObjectUrl = mp4Url;
+        }
       }
 
       if (mediaMedium === 'image') {
         resizerUrl = imageResizer(url, siteID);
       }
 
-      const { url: mp4Url } = mp4Stream || {};
-
       return {
         _name: 'media:content',
         _attrs: {
           type: `${mediaType}`,
           medium: `${mediaMedium}`,
-          url: `${localType === 'image' ? resizerUrl : mp4Url}`,
+          url: `${localType === 'image' ? resizerUrl : mediaObjectUrl}`,
         },
         _content: [
           {
