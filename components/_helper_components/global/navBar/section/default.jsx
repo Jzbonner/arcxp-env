@@ -7,7 +7,7 @@ import '../../../../../src/styles/base/_utility.scss';
 const Section = ({
   navigation,
   link,
-  childSections,
+  childSections = [],
   index,
   setSection,
   activeSection,
