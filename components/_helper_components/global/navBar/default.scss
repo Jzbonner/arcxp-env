@@ -33,6 +33,10 @@
       height: 75px;
       border-bottom: solid 1px #d0d0d0;
     }
+
+    .Mg2-connext[data-display-type] {
+      display: none;
+    }
   }
 
   nav {
@@ -793,13 +797,6 @@
       font-weight: 800;
 
       @include text-styles(1.125rem, 3, "Gordita-Bold");
-    }
-  }
-
-  .stickyActive {
-    
-    .Mg2-connext[data-display-type] {
-      display: none;
     }
   }
 
