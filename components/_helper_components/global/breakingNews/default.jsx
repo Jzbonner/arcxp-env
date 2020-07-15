@@ -5,7 +5,7 @@ import BreakingNewsVideo from './breaking-news-video';
 const BreakingNews = () => (
   <>
     <BreakingNewsStory />
-    {!BreakingNewsStory && <BreakingNewsVideo />}
+    {!BreakingNewsStory() && <BreakingNewsVideo />}
   </>
 );
 
