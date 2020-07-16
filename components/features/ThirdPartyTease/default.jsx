@@ -9,10 +9,20 @@ const TPT = () => {
   const componentContext = useComponentContext();
   const { title = '', moreURL = '', content = '' } = componentContext.customFields;
 
+  const getParameter = (name) => {
+    const url = window.location.href;
+    const newName = name.replace(/[[\]]/g, '\\$&');
+    const regex = new RegExp(`[?&]${newName}(=([^&#]*)|&|#|$)`);
+    const results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  };
+
   useEffect(() => {
-    const queryLocation = window.location.href.indexOf('/search/?q=');
-    const query = queryLocation !== -1 ? window.location.href.slice(queryLocation + 11) : '';
-    document.getElementById('search-input').value = query;
+    if (window.location.href.indexOf('/search/?q=') !== -1) {
+      document.getElementById('search-input').value = getParameter('q') || '';
+    }
   });
 
   if (content && content !== '') {
