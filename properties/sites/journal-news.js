@@ -72,7 +72,7 @@ export default {
       configCode: 'JN_STAGE_DEFAULT',
       debug: false,
       tagManager: 'GTM',
-      containerId: 'GTM-NNFL6V6',
+      containerId: 'GTM-W3VLHBK',
     },
     prod: {
       isEnabled: true,
@@ -82,7 +82,7 @@ export default {
       configCode: 'JN_PROD_DEFAULT',
       debug: false,
       tagManager: 'GTM',
-      containerId: 'GTM-NNFL6V6',
+      containerId: 'GTM-W3VLHBK',
     },
   },
   video: {

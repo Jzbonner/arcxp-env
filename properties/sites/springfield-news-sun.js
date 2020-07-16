@@ -70,7 +70,7 @@ export default {
       configCode: 'NS_STAGE_DEFAULT',
       debug: false,
       tagManager: 'GTM',
-      containerId: 'GTM-NSH3PS4',
+      containerId: 'GTM-W3VLHBK',
     },
     prod: {
       isEnabled: true,
@@ -80,7 +80,7 @@ export default {
       configCode: 'NS_PROD_DEFAULT',
       debug: false,
       tagManager: 'GTM',
-      containerId: 'GTM-NSH3PS4',
+      containerId: 'GTM-W3VLHBK',
     },
   },
   video: {

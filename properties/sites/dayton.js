@@ -67,7 +67,7 @@ export default {
       configCode: 'DAYTON_STAGE_DEFAULT',
       debug: false,
       tagManager: 'GTM',
-      containerId: 'GTM-P72HT8T',
+      containerId: 'GTM-W3VLHBK',
     },
     prod: {
       isEnabled: true,
@@ -77,7 +77,7 @@ export default {
       configCode: 'DAYTON_PROD_DEFAULT',
       debug: false,
       tagManager: 'GTM',
-      containerId: 'GTM-P72HT8T',
+      containerId: 'GTM-W3VLHBK',
     },
   },
   video: {
