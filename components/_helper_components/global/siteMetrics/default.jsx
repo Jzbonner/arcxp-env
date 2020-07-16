@@ -88,7 +88,7 @@ const SiteMetrics = ({ isAmp }) => {
               "pageSiteSection": "${topSection}",
               "pageCategory": "${nonPrimarySections}",
               "pageContentType": "instant article",
-              "pageTitle": "${seoTitle ? seoTitle.replace(/"/g, "'").toLowerCase() : pageTitle.replace(/'/g, '"').toLowerCase()}",
+              "pageTitle": "${seoTitle ? seoTitle.replace(/"/g, "'").toLowerCase() : pageTitle.replace(/'/g, "'").toLowerCase()}",
               "pageFlow": "",
               "pageNumber": "",
               "siteVersion": "instant",
