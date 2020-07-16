@@ -66,7 +66,7 @@ export default {
   connext: {
     sandbox: {
       isEnabled: true,
-      clientCode: 'journal-news',
+      clientCode: 'ajc',
       environment: 'stage',
       siteCode: 'JN',
       configCode: 'JN_STAGE_DEFAULT',
@@ -76,7 +76,7 @@ export default {
     },
     prod: {
       isEnabled: true,
-      clientCode: 'journal-news',
+      clientCode: 'ajc',
       environment: 'prod',
       siteCode: 'JN',
       configCode: 'JN_PROD_DEFAULT',

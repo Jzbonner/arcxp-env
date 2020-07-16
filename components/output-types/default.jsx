@@ -42,7 +42,7 @@ const DefaultOutputType = (props) => {
     connext,
   } = getProperties(currentSite) || {};
 
-  const { isEnabled: connextIsEnabled = false, clientCode, environment: connextEnv } = connext[currentEnv] || {};
+  const { isEnabled: connextIsEnabled = false, environment: connextEnv } = connext[currentEnv] || {};
   const {
     type, taxonomy, canonical_url: articleURL, _id: uuid,
   } = globalContent || { type: null };
@@ -98,7 +98,7 @@ const DefaultOutputType = (props) => {
         {connextIsEnabled && (
           <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${connextEnv}/${clientCode}/loader.min.js`}></script>
+            <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${connextEnv}/ajc/loader.min.js`}></script>
             <ConnextInit />
           </>
         )}

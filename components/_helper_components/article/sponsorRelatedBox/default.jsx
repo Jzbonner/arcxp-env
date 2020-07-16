@@ -23,7 +23,7 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
     },
   });
 
-  const { Sponsor = {} } = siteData;
+  const { Sponsor = {} } = siteData || {};
 
   const {
     sponsor_related_box_exclude_tags: excludeTags,

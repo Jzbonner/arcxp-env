@@ -61,7 +61,7 @@ export default {
   connext: {
     sandbox: {
       isEnabled: true,
-      clientCode: 'dayton',
+      clientCode: 'ajc',
       environment: 'stage',
       siteCode: 'DN',
       configCode: 'DAYTON_STAGE_DEFAULT',
@@ -71,8 +71,8 @@ export default {
     },
     prod: {
       isEnabled: true,
-      clientCode: 'dayton',
-      environment: 'sandbox',
+      clientCode: 'ajc',
+      environment: 'prod',
       siteCode: 'DN',
       configCode: 'DAYTON_PROD_DEFAULT',
       debug: false,

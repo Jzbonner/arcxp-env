@@ -64,7 +64,7 @@ export default {
   connext: {
     sandbox: {
       isEnabled: true,
-      clientCode: 'springfield-news-sun',
+      clientCode: 'ajc',
       environment: 'stage',
       siteCode: 'DN',
       configCode: 'NS_STAGE_DEFAULT',
@@ -74,7 +74,7 @@ export default {
     },
     prod: {
       isEnabled: true,
-      clientCode: 'springfield-news-sun',
+      clientCode: 'ajc',
       environment: 'prod',
       siteCode: 'DN',
       configCode: 'NS_PROD_DEFAULT',
