@@ -72,7 +72,7 @@ export default {
       configCode: 'DN_PROD_DEFAULT',
       debug: false,
       tagManager: 'GTM',
-      containerId: 'GTM-KMZK96C',
+      containerId: 'GTM-W3VLHBK',
     },
     prod: {
       isEnabled: true,
@@ -82,7 +82,7 @@ export default {
       configCode: 'DN_PROD_DEFAULT',
       debug: false,
       tagManager: 'GTM',
-      containerId: 'GTM-KMZK96C',
+      containerId: 'GTM-W3VLHBK',
     },
   },
   video: {
