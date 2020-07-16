@@ -52,7 +52,7 @@ export default {
     placementName: 'Journal News Custom Feed',
   },
   metrics: {
-    siteID: 'journal-news',
+    siteID: 'journalnews',
     siteMetro: 'oh: dayton',
     siteFormat: 'news',
     gtmContainerKey: 'GTM-NNFL6V6',

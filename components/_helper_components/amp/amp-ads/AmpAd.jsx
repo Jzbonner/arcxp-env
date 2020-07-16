@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../global/utils/environment.js';
 import buildJsonObject from './_helper_functions/buildJsonObject';
@@ -7,7 +8,9 @@ import buildJsonObject from './_helper_functions/buildJsonObject';
 export const AmpAd = ({
   adSlot = '', uuid = '', width = '', height = '', taxonomy, multiSize, multiSizeValidation, flyingCarpet = false,
 }) => {
-  const { dfp_id: dfpid, adsPath } = getProperties();
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const { dfp_id: dfpid, adsPath } = getProperties(arcSite);
   if (!dfpid) return null;
 
   const { primary_section: primarySection, tags = [] } = taxonomy || {};

@@ -10,11 +10,32 @@ class Api {
   }
 
   render() {
-    const { globalContent, siteProperties, arcSite: siteID } = this.props || {};
+    const {
+      globalContent,
+      globalContentConfig,
+      siteProperties,
+      arcSite: siteID,
+    } = this.props || {};
     const { websiteURL } = siteProperties || {};
+    const { query } = globalContentConfig || {};
+    const { from, size } = query || {};
+    const feedStart = from - 1;
+    let maxItems = feedStart + size;
+    if (maxItems > globalContent.length) {
+      maxItems = globalContent.length;
+    }
 
     if (globalContent) {
-      return globalContent
+      const filteredContent = globalContent
+        .filter((item, i) => i >= feedStart && i < maxItems)
+        .sort((a, b) => {
+          const aTime = new Date(a.display_date);
+          const bTime = new Date(b.display_date);
+
+          return bTime.getTime() - aTime.getTime();
+        });
+
+      return filteredContent
         .map((item) => {
           const {
             content_elements: contentElements = [],
@@ -166,11 +187,6 @@ class Api {
             return galleryXmlObject;
           }
           return {};
-        }).sort((a, b) => {
-          const aTime = new Date(a.item[3].pubDate);
-          const bTime = new Date(b.item[3].pubDate);
-
-          return bTime.getTime() - aTime.getTime();
         });
     }
 
