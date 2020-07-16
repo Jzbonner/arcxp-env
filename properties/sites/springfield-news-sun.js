@@ -5,7 +5,7 @@ export default {
   siteName: 'springfield-news-sun',
   cdnOrg: 'coxohio',
   cdnSite: 'springfield-news-sun',
-  siteDomainURL: 'https://www.springfieldnewssun.com/',
+  siteDomainURL: 'https://www.springfieldnewssun.com',
   websiteURL: 'https://www.springfieldnewssun.com/',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/ESSF3ZPUYRH7RAH4D7SUTHQCMM.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/ESSF3ZPUYRH7RAH4D7SUTHQCMM.png',
@@ -70,7 +70,7 @@ export default {
       configCode: 'NS_STAGE_DEFAULT',
       debug: false,
       tagManager: 'GTM',
-      containerId: 'GTM-NSH3PS4',
+      containerId: 'GTM-W3VLHBK',
     },
     prod: {
       isEnabled: true,
@@ -80,7 +80,7 @@ export default {
       configCode: 'NS_PROD_DEFAULT',
       debug: false,
       tagManager: 'GTM',
-      containerId: 'GTM-NSH3PS4',
+      containerId: 'GTM-W3VLHBK',
     },
   },
   video: {

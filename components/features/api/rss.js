@@ -18,7 +18,7 @@ class Api {
     } = this.props || {};
     const { websiteURL } = siteProperties || {};
     const { query } = globalContentConfig || {};
-    const { from, size } = query || {};
+    const { id: collectionId, from, size } = query || {};
     const feedStart = from - 1;
     let maxItems = feedStart + size;
     if (maxItems > globalContent.length) {
@@ -26,14 +26,17 @@ class Api {
     }
 
     if (globalContent) {
-      const filteredContent = globalContent
-        .filter((item, i) => i >= feedStart && i < maxItems)
-        .sort((a, b) => {
+      let filteredContent = globalContent.filter((item, i) => i >= feedStart && i < maxItems);
+
+      if (!collectionId) {
+        // only sort by display_date for query-based feeds
+        filteredContent = filteredContent.sort((a, b) => {
           const aTime = new Date(a.display_date);
           const bTime = new Date(b.display_date);
 
           return bTime.getTime() - aTime.getTime();
         });
+      }
 
       return filteredContent
         .map((item) => {

@@ -4,4 +4,7 @@ children {
     navigation {
         nav_title
     }
+    site {
+        site_url
+    }
 }`;

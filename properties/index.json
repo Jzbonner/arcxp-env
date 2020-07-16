@@ -56,5 +56,35 @@
   "adsPrebidTimeout": 1500,
   "weatherLocationId": 348181,
   "favicon": "/resources/icons/favicons/AJC/favicon.ico",
-  "nativoMoapTag": "https://amp.ajc.com/amp/ntv"
+  "nativoMoapTag": "https://amp.ajc.com/amp/ntv",
+  "connext": {
+    "sandbox": {
+      "isEnabled": true,
+      "clientCode": "ajc",
+      "environment": "stage",
+      "siteCode": "AJC",
+      "configCode": "AJC_STAGE_DEFAULT",
+      "debug": false,
+      "tagManager": "GTM",
+      "containerId": "GTM-W3VLHBK"
+    },
+    "prod": {
+      "isEnabled": true,
+      "clientCode": "ajc",
+      "environment": "prod",
+      "configCode": "AJC_PROD_DEFAULT",
+      "siteCode": "AJC",
+      "debug": false,
+      "tagManager": "GTM",
+      "containerId": "GTM-W3VLHBK"
+    }
+  },
+  "video": {
+    "sandbox": {
+      "cmsId": 2531688
+    },
+    "prod": {
+      "cmsId": 2528054
+    }
+  }
 }
