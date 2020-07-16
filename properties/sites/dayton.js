@@ -72,7 +72,7 @@ export default {
     prod: {
       isEnabled: true,
       clientCode: 'dayton',
-      environment: 'sandbox',
+      environment: 'prod',
       siteCode: 'DN',
       configCode: 'DAYTON_PROD_DEFAULT',
       debug: false,
