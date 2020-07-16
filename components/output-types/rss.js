@@ -14,8 +14,8 @@ const Xml = (props) => {
 
   const { orgName, websiteURL } = siteProperties || {};
   const { query } = globalContentConfig || {};
-  const { id: queryId } = query || {};
-  const feedLink = queryId ? `/list/${queryId}` : '';
+  const { id: collectionId } = query || {};
+  const feedLink = collectionId ? `/list/${collectionId}` : '';
 
   const xmlOptions = {
     header: true,
