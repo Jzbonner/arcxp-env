@@ -9,13 +9,9 @@ import NavFooter from '../navFooter/default';
 import '../default.scss';
 
 const DesktopNav = ({
-  sections, hamburgerToggle, isMobile, setToggle, rootDirectory, smallLogoUrl, social,
+  sections, hamburgerToggle, isMobile, setToggle, rootDirectory, smallLogoUrl,
   stickyActive, siteName,
 }) => {
-  const {
-    twitter,
-    facebook,
-  } = social || {};
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const { weatherPageURL } = getProperties(arcSite) || {};
@@ -42,7 +38,7 @@ const DesktopNav = ({
       </a>
     </div>
     <ul className='nav-row'>
-      <NavFooter facebook={facebook} twitter={twitter}/>
+      <NavFooter />
       <li className='nav-weather-widget'></li>
       <div className='nav-itemBottomBorder nav-sections'>
       {sections}
@@ -65,7 +61,6 @@ DesktopNav.propTypes = {
   setToggle: PropTypes.func,
   smallLogoUrl: PropTypes.string,
   rootDirectory: PropTypes.string,
-  social: PropTypes.object,
   stickyActive: PropTypes.bool,
   siteName: PropTypes.string,
 };

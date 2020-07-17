@@ -15,6 +15,8 @@ export default {
   breakingLiveVideoID: '2UPLSZACARBEVG2PQVZLQLO7D4',
   breakingNewsID_sandbox: 'FFQQGJZMN5A3RHYWFUIESE3RYI',
   breakingLiveVideoID_sandbox: 'PI5DD6OFEVFMHNDHZKI3XU7SSQ',
+  domainTwitterURL: 'https://twitter.com/ajc',
+  domainFacebookURL: 'https://facebook.com/ajc',
   metrics: {
     siteID: 'ajc',
     siteMetro: 'ga: atlanta',
