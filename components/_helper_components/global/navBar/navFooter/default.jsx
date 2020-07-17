@@ -59,7 +59,7 @@ const NavFooter = () => {
         <a href="/">{checkSiteName()}</a>
       </div>
       <div className="b-flexRow b-flexCenter nav-copyright-links">
-        {children.map((child, i) => {
+        {children && children.map((child, i) => {
           const title = child && child.navigation && child.navigation.nav_title;
           const url = child && child.site && child.site.site_url;
           const id = child && child._id;
