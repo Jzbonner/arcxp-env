@@ -13,7 +13,7 @@ const resolve = ({
   from,
   size,
   arcSite,
-}) => `/content/v4/collections/?website=${arcSite}&_id=${id}&from=${from}&size=${size}`;
+}) => `/content/v4/collections/?website=${arcSite}&_id=${id}&from=${from}&size=${size}&published=true`;
 
 export default {
   resolve,
