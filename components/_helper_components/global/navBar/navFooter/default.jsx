@@ -1,40 +1,74 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useFusionContext } from 'fusion:context';
+import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
+import copyrightFilter from '../../../../../content/filters/copyright';
+import facebookLogo from '../../../../../resources/images/facebook-logo.png';
+import twitterLogo from '../../../../../resources/images/twitter-logo.png';
+import './default.scss';
 
-const NavFooter = ({ facebook, twitter }) => {
-  const { ajcFacebookURL, ajcTwitterURL } = getProperties();
+const NavFooter = () => {
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const {
+    domainFacebookURL, domainTwitterURL, siteName,
+  } = getProperties(arcSite);
+
+  const siteContent = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'MobileFlyoutFooter',
+    },
+    filter: copyrightFilter,
+  });
+
+  const { children } = siteContent || {};
+
+  const checkSiteName = () => {
+    if (siteName.toLowerCase() === 'ajc') {
+      return 'The Atlanta Journal-Constitution';
+    }
+    if (siteName.toLowerCase() === 'dayton-daily-news') {
+      return 'Dayton Daily News';
+    }
+    if (siteName.toLowerCase() === 'dayton') {
+      return 'Dayton.com';
+    }
+    if (siteName.toLowerCase() === 'journal-news') {
+      return 'Journal-News';
+    }
+    if (siteName.toLowerCase() === 'springfield-news-sun') {
+      return 'Springfield News-Sun';
+    }
+    return null;
+  };
   return (
-  <li className='nav-mobile-footer'>
-    <div className='b-flexCenter b-flexRow'>
-      <div className='nav-social'>
-        <a href={ajcFacebookURL} target='_blank' rel='noopener noreferrer'>
-          <img src={facebook}/>
-        </a>
-        <a href={ajcTwitterURL} target='_blank' rel='noopener noreferrer'>
-          <img src={twitter}/>
-        </a>
+    <li className="nav-mobile-footer">
+      <div className="b-flexCenter b-flexRow">
+        <div className="nav-social">
+          <a href={domainFacebookURL} target="_blank" rel="noopener noreferrer">
+            <img src={facebookLogo} />
+          </a>
+          <a href={domainTwitterURL} target="_blank" rel="noopener noreferrer">
+            <img src={twitterLogo} />
+          </a>
+        </div>
       </div>
-    </div>
-    <div className='nav-copyright b-flexRow b-flexCenter'>
-      <span>&copy; {new Date().getFullYear()}</span>
-      <a href="/">The Atlanta Journal-Constitution</a>
-    </div>
-    <div className='b-flexRow b-flexCenter nav-copyright-links'>
-      <a>Visitor Agreement</a>|
-      <a>privacy policy</a>|
-      <a>contact</a>
-    </div>
-    <div className='b-flexRow b-flexCenter'>
-      <a>mobile apps</a>
-    </div>
-  </li>
+      <div className="nav-copyright b-flexRow b-flexCenter">
+        <span style={{ paddingRight: 5 }}>&copy; {new Date().getFullYear()}</span>
+        <a href="/">{checkSiteName()}</a>
+      </div>
+      <div className="b-flexRow b-flexCenter nav-copyright-links">
+        {children.map((child, i) => {
+          const title = child && child.navigation && child.navigation.nav_title;
+          const url = child && child.site && child.site.site_url;
+          const id = child && child._id;
+          const filterURL = url || id;
+          return <a href={filterURL} key={i}>{title}</a>;
+        })}
+      </div>
+    </li>
   );
-};
-
-NavFooter.propTypes = {
-  facebook: PropTypes.string,
-  twitter: PropTypes.string,
 };
 
 export default NavFooter;
