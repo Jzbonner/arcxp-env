@@ -12,13 +12,11 @@ export const StaffCard = ({ staffer = {} }) => {
     role,
     email,
     image,
-    firstName,
-    lastName,
   } = staffer;
   const appContext = useAppContext();
   const { contextPath } = appContext;
 
-  const staffBioPageLink = `${contextPath}/staff/${`${firstName}-${lastName}`}/${id}/`;
+  const staffBioPageLink = `${contextPath}/staff/${id}/`;
   return (
     <div className={'c-staff-card'}>
       <a
