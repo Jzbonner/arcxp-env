@@ -14,11 +14,15 @@
   }
 
   .breakingURL {
-    position: absolute;
-    width: 100%;
+    width: 70%;
     height: 100%;
-    left: 0;
-    right: 0;
+    display: inline-block;
+    padding: 10px 0;
+    margin: 0 auto;
+
+    @media (min-width: 400px) {
+      width: 80%;
+    }
   }
 
   .c-breakingNews-hide {
@@ -68,27 +72,27 @@
   }
 
   .c-breakingNews-heading {
+    @include text-styles(.875em, 1.29, "Gordita-Medium");
+    
+    margin: 0 auto 5px;
+    color: #fff;
+    width: 100%;
+    max-width: 302px;
+
+    @include breakpoint(desktop-sm) {
+      max-width: 885px;
+    }
+  }
+
+  .c-breakingNews-title {
     display: block;
     color: #fff;
     text-transform: uppercase;
 
-    @include text-styles(1em, 2, "Gordita-Bold");
+    @include text-styles(1em, 1.58, "Gordita-Bold");
 
     @include breakpoint(desktop-sm) {
       @include text-styles(1.125em, 1.78, "Gordita-Bold");
-    }
-  }
-
-  .c-breakingNews-content {
-    @include text-styles(.875em, 1.29, "Gordita-Medium");
-
-    color: #fff;
-    width: 100%;
-    max-width: 302px;
-    margin: auto;
-
-    @include breakpoint(desktop-sm) {
-      max-width: 885px;
     }
   }
 }

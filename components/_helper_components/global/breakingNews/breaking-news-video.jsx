@@ -37,10 +37,11 @@ const BreakingNewsVideo = () => {
     const url = get(story, 'canonical_url', '');
     return (
       <div className={`c-breakingNews ${!isVisible ? 'is-hidden' : ''}`}>
-        <a href={url} className="breakingURL" />
+        <a href={url} className="breakingURL">
+          <h2 className="c-breakingNews-heading">Live Video</h2>
+          <h2 className="c-breakingNews-title">{headline}</h2>
+        </a>
         <span className="c-breakingNews-hide" onClick={hideBar} />
-        <h2 className="c-breakingNews-heading">{headline}</h2>
-        <h2 className="c-breakingNews-content">Live Video</h2>
       </div>
     );
   }
