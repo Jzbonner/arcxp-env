@@ -23,6 +23,7 @@ const SiteMeta = () => {
     description,
     isNonContentPage,
     favicon,
+    isOpinion,
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
 
@@ -53,6 +54,7 @@ const SiteMeta = () => {
       <title>{pageTitle}</title>
       <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
+      <meta property="article:opinion" content={isOpinion} />
     </>
   );
 };
