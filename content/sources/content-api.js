@@ -8,12 +8,12 @@ const params = {
 
 const resolve = (query) => {
   const {
-    'arc-site': arcSite = 'ajc', path, published, id,
+    'arc-site': arcSite = 'ajc', path, id,
   } = query;
-  let requestUri = `/content/v4/?website=${arcSite}`;
+  let requestUri = `/content/v4/?published=true&website=${arcSite}`;
   requestUri += path ? `&website_url=${path}` : '';
   requestUri += id ? `&_id=${id}` : '';
-  return published ? `${requestUri}&published=${published}` : requestUri;
+  return requestUri;
 };
 
 export default {
