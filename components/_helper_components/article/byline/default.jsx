@@ -40,12 +40,12 @@ const Byline = ({ by = [], sections }) => {
   const handleAuthors = (authors = []) => {
     const bylineData = authors.map((author, i) => {
       const {
-        id, org, name, status, firstName, lastName,
+        id, org, name, status,
       } = author || {};
 
       if (!name) return null;
 
-      const authorUrl = `${contextPath}/staff/${firstName}-${lastName}/${id}/`;
+      const authorUrl = `${contextPath}/staff/${id}/`;
 
       return <span key={name}>
         {i === 0 && !name.includes('By ') && 'By '}
