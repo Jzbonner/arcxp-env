@@ -74,7 +74,6 @@ const NavBar = ({
   }, [isMobile]);
 
   const {
-    social,
     children,
     _id: rootDirectory,
   } = sections || {};
@@ -141,7 +140,6 @@ const NavBar = ({
             setToggle={setToggle}
             smallLogoUrl={deployment(`${contextPath}${logoHamburger}`)}
             rootDirectory={rootDirectory}
-            social={social}
             stickyActive={stickyNavVisibility}
             type={type}
             siteName={siteName.toLowerCase()}/>
