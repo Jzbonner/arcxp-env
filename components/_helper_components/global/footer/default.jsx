@@ -70,7 +70,7 @@ const Footer = () => {
         {linkCategories
           && linkCategories.map((linkCategory, i) => {
             const parentListTitle = (linkCategory.navigation && linkCategory.navigation.nav_title) || '';
-            if (linkCategory.children.length > 0 && i !== linkCategories.length - 1) {
+            if (linkCategory.children.length > 0 && parentListTitle !== 'Follow') {
               return (
                 <li
                   key={`footerParentLink-${i}`}
