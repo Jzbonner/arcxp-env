@@ -150,7 +150,10 @@ const getContentMeta = () => {
     firstPublishDateConverted = time ? `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}${time.indexOf('1') !== 0 ? '0' : ''}${time.replace(/:/g, '').replace(/\s[A|P]M/g, '')}` : `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}`;
   }
 
-  const isOpinion = (sections && !!sections.find(section => section.name === 'Opinion')).toString();
+  let isOpinion = false;
+  if (sections) {
+    isOpinion = !!sections.find(section => section._id.indexOf('/opinion') > -1);
+  }
 
   // return page content metadata values
   return {
