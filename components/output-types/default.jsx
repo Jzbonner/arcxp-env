@@ -54,7 +54,9 @@ const DefaultOutputType = (props) => {
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
   const { sponsorSectionID: isSponsoredContent } = checkSponsor(sections);
   const includeGtm = metrics && metrics.gtmContainerKey;
-  const fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${cdnSite || currentSite}.com` : '';
+  let fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${cdnSite || currentSite}.com` : '';
+  /* eslint-disable-next-line max-len */
+  fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
 
   return (
     <html>
