@@ -7,6 +7,7 @@ import checkWindowSize from '../utils/check_window_size/default';
 import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
+import getDomain from '../../../layouts/_helper_functions/getDomain';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
 
 const Image = ({
@@ -16,11 +17,11 @@ const Image = ({
     url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText,
   } = src || {};
   const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
+  const { arcSite, layout } = fusionContext;
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
-  const { logoPlaceholder } = getProperties(arcSite);
-  const placeholder = deployment(`${contextPath}${logoPlaceholder}`);
+  const { logoPlaceholder, cdnSite } = getProperties(arcSite);
+  const placeholder = `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
 
   const [imageSrc, setImageSrc] = useState('');
   const [placeholderWidth, setPlaceholderWidth] = useState('100%');

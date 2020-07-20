@@ -3,14 +3,17 @@ import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import topNavFilter from '../../../../content/filters/top-nav';
+import getDomain from '../../../layouts/_helper_functions/getDomain';
 import closeButton from '../../../../resources/images/amp-close.png';
 
 const AmpNavBar = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
-  const { logo, logoShort, siteName } = getProperties(arcSite);
+  const {
+    logo, logoShort, siteName, cdnSite,
+  } = getProperties(arcSite);
   const appContext = useAppContext();
-  const { deployment, contextPath } = appContext;
+  const { deployment, contextPath, layout } = appContext;
   const sections = useContent({
     source: 'site-api',
     query: {
@@ -122,13 +125,13 @@ const AmpNavBar = () => {
           <div id="logo-pinned" className='amp-logo amp-logo-pinned'>
             <a href={rootDirectory}>
             <amp-img height='1' width='1' class={siteName.toLowerCase()}
-            src={deployment(`${contextPath}${logoShort}`)} layout='responsive'></amp-img>
+            src={`${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logoShort}`)}`} layout='responsive'></amp-img>
             </a>
           </div>
           <div id="logo-main" className='amp-logo amp-logo-main'>
             <a href={rootDirectory}>
               <amp-img height='1' width='1' class={siteName.toLowerCase()}
-              src={deployment(`${contextPath}${logo}`)} layout='responsive'></amp-img>
+              src={`${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logo}`)}`} layout='responsive'></amp-img>
             </a>
           </div>
         </div>

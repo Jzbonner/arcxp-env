@@ -7,8 +7,6 @@ import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js
 const SiteMeta = () => {
   const appContext = useAppContext();
   const {
-    deployment,
-    contextPath,
     metaValue,
   } = appContext;
 
@@ -24,7 +22,8 @@ const SiteMeta = () => {
     seoTitle,
     description,
     isNonContentPage,
-    favicon,
+    faviconPath,
+    appleIconPath,
     isOpinion,
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
@@ -36,8 +35,8 @@ const SiteMeta = () => {
 
   return (
     <>
-      <link rel="apple-touch-icon" href={deployment(`${contextPath}/resources/images/favicon-apple-touch-icon.png`)} />
-      <link rel="shortcut icon" href={deployment(`${contextPath}${favicon}`)} />
+      <link rel="apple-touch-icon" href={appleIconPath} />
+      <link rel="shortcut icon" href={faviconPath} />
       {!isNativoLandingPage && <link rel="canonical" href={updatedURL} />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={description} />

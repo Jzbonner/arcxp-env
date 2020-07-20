@@ -56,6 +56,7 @@
   "adsPrebidTimeout": 1500,
   "weatherLocationId": 348181,
   "favicon": "/resources/icons/favicons/AJC/favicon.ico",
+  "appleIcon": "/resources/images/favicon-apple-touch-icon.png",
   "nativoMoapTag": "https://amp.ajc.com/amp/ntv",
   "connext": {
     "sandbox": {

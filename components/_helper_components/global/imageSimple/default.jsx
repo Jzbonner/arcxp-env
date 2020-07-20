@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getDomain from '../../../layouts/_helper_functions/getDomain';
 
 /*
 This image component is for icons, badges and logos that:
@@ -12,13 +14,16 @@ This image component is for icons, badges and logos that:
 const ImageSimple = ({
   src, ampPage, alt, classes, ampMobileHeight, ampMobileMinWidth,
 }) => {
+  const fusionContext = useFusionContext();
+  const { arcSite, layout } = fusionContext;
+  const { cdnSite } = getProperties(arcSite);
   const { deployment, contextPath } = useAppContext();
 
   const getPath = () => {
     if (src.includes('data:image/svg+xml')) {
       return src;
     }
-    return deployment(`${contextPath}${src}`);
+    return `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${src}`)}`;
   };
 
   if (ampPage) {
