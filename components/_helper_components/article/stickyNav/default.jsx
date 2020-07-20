@@ -28,7 +28,6 @@ const StickyNav = ({
     const env = fetchEnv();
     // we must fully-qualify the url for sharing
     if (env === 'prod') {
-      console.log('SITE ', site);
       if (site === 'dayton-daily-news' || site === 'springfield-news-sun') {
         site = site.replace(/-/g, '');
       }
