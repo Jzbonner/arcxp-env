@@ -157,6 +157,18 @@ const Video = ({
 
       // protect against the player not existing (just in case)
       if (typeof powa !== 'undefined') {
+        // bind to ampIntegration events, to conrol the PoWa player from AMP
+        if (isAmpWebPlayer && typeof ampIntegration !== 'undefined') {
+          window.ampIntegration.method('play', () => powa.play());
+          window.ampIntegration.method('pause', () => powa.pause());
+          window.ampIntegration.method('mute', () => powa.mute(true));
+          window.ampIntegration.method('unmute', () => powa.mute(false));
+          window.ampIntegration.method('showcontrols', () => powa.showControls());
+          window.ampIntegration.method('hidecontrols', () => powa.hideControls());
+          window.ampIntegration.method('fullscreenenter', () => powa.fullscreen(true));
+          window.ampIntegration.method('fullscreenexit', () => powa.fullscreen(false));
+        }
+
         // go ahead and define vars for use in subsequent events/metrics
         const { detail: videoDetails } = e || {};
         const {
