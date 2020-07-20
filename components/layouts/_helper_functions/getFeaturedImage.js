@@ -11,6 +11,7 @@ const renderImage = () => {
     globalContent,
     deployment,
     contextPath,
+    metaValue,
   } = appContext;
 
   const { logoOgImage } = getProperties(arcSite);
@@ -59,6 +60,8 @@ const renderImage = () => {
         }
       }
     });
+  } else if (metaValue('image') || metaValue('thumbnail') || metaValue('og:image')) {
+    ogContentImage = metaValue('image') || metaValue('thumbnail') || metaValue('og:image');
   }
 
   if (ogContentImage) {

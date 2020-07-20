@@ -42,9 +42,8 @@ const SiteMeta = () => {
       <meta name="twitter:title" content={title} />
       <meta name="twitter:url" content={url} />
       <meta property="og:image" content={thumbnailImage} />
-      <meta property="og:image:height" content={`${isNonContentPage
-        || thumbnailImage.indexOf('/resources/logos/') > -1 ? '200' : '630'}`} />
-      <meta property="og:image:width" content={`${isNonContentPage || thumbnailImage.indexOf('/resources/logos/') > -1
+      <meta property="og:image:height" content={`${thumbnailImage.indexOf('/resources/logos/') > -1 ? '200' : '630'}`} />
+      <meta property="og:image:width" content={`${thumbnailImage.indexOf('/resources/logos/') > -1
         ? '200' : '1200'}`} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content={`${isNonContentPage ? 'website' : 'article'}`} />
@@ -54,7 +53,7 @@ const SiteMeta = () => {
       <title>{pageTitle}</title>
       <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
-      <meta property="article:opinion" content={isOpinion} />
+      {!isNonContentPage && <meta property="article:opinion" content={isOpinion.toString()} />}
     </>
   );
 };
