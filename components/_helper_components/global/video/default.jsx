@@ -64,7 +64,7 @@ const Video = ({
     let videoContentType;
     let videoTopics;
     const fireGtmEvent = (evt) => {
-      const { time, type } = evt || {};
+      const { muted: mutedState, time, type } = evt || {};
       // fire GTM events for various player events
       const dataLayer = window.dataLayer || [];
       /*
@@ -84,26 +84,17 @@ const Video = ({
         case 'adComplete':
           ampEvent = 'ad_end';
           break;
-        case 'complete':
-          eventType = null;
-          ampEvent = 'ended';
-          break;
-        case 'powaRender':
-          eventType = 'videoPlayerLoad';
-          ampEvent = 'canplay';
-          break;
         case 'muted':
-        case 'unmuted':
           eventType = null;
-          ampEvent = type;
-          break;
-        case 'play':
-          eventType = null;
-          ampEvent = 'playing';
+          ampEvent = mutedState ? 'muted' : 'unmuted';
           break;
         case 'pause':
           eventType = null;
           ampEvent = 'pause';
+          break;
+        case 'play':
+          eventType = null;
+          ampEvent = 'playing';
           break;
         case 'playback0':
           eventType = 'videoContentStart';
@@ -120,8 +111,12 @@ const Video = ({
         case 'playback100':
           eventType = 'videoComplete';
           break;
-        case 'start':
+        case 'powaRender':
+          eventType = 'videoPlayerLoad';
           ampEvent = 'canplay';
+          break;
+        case 'start':
+          ampEvent = 'playing';
           break;
         default:
           eventType = null;
@@ -144,10 +139,6 @@ const Video = ({
         });
       }
       if (isAmpWebPlayer && typeof ampIntegration !== 'undefined' && ampEvent) {
-        if (ampEvent === 'ended') {
-          // we need to also post a `paused` event, per https://amp.dev/documentation/components/amp-video-iframe/#integration
-          window.ampIntegration.postEvent('paused');
-        }
         window.ampIntegration.postEvent(ampEvent);
       }
     };
@@ -259,18 +250,19 @@ const Video = ({
 
           fireGtmEvent(event);
         });
-        powa.on('play', evt => fireGtmEvent(evt));
+        powa.on('adComplete', evt => fireGtmEvent(evt));
+        powa.on('adError', evt => fireGtmEvent(evt));
+        powa.on('adSkip', evt => fireGtmEvent(evt));
+        powa.on('adStart', evt => fireGtmEvent(evt));
+        powa.on('error', evt => fireGtmEvent(evt));
+        powa.on('muted', evt => fireGtmEvent(evt));
         powa.on('pause', evt => fireGtmEvent(evt));
+        powa.on('play', evt => fireGtmEvent(evt));
         powa.on('playback0', evt => fireGtmEvent(evt));
         powa.on('playback25', evt => fireGtmEvent(evt));
         powa.on('playback50', evt => fireGtmEvent(evt));
         powa.on('playback75', evt => fireGtmEvent(evt));
         powa.on('playback100', evt => fireGtmEvent(evt));
-        powa.on('error', evt => fireGtmEvent(evt));
-        powa.on('adStart', evt => fireGtmEvent(evt));
-        powa.on('adSkip', evt => fireGtmEvent(evt));
-        powa.on('adError', evt => fireGtmEvent(evt));
-        powa.on('adComplete', evt => fireGtmEvent(evt));
       }
 
       // kick off playlist discovery
