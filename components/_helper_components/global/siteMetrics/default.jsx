@@ -71,6 +71,7 @@ const SiteMetrics = ({ isAmp }) => {
     contentId,
     firstPublishDateConverted,
     nonPrimarySet: nonPrimarySections,
+    blogName = '',
   } = contentMeta || {};
   const siteDomain = siteDomainURL || `https://www.${site}.com`;
   if (isAmp) {
@@ -105,7 +106,7 @@ const SiteMetrics = ({ isAmp }) => {
               "contentID": "${contentId || ''}",
               "contentVendor": "${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}",
               "contentPublishDate": "${firstPublishDateConverted}",
-              "blogName": "${pageContentType === 'blog' ? topSectionName : ''}",
+              "blogName": "${pageContentType === 'blog' ? topSectionName : (blogName || '')}",
               "galleryName": "${galleryHeadline}",
               "authorName": [${ampAuthorNames}],
               "pageNameStr": "",
@@ -150,7 +151,7 @@ const SiteMetrics = ({ isAmp }) => {
             'contentID': '${contentId || ''}',
             'contentVendor': '${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}',
             'contentPublishDate': '${firstPublishDateConverted}',
-            'blogName': '${pageContentType === 'blog' ? topSectionName : ''}',
+            'blogName': '${pageContentType === 'blog' ? topSectionName : (blogName || '')}',
             'galleryName': '${galleryHeadline}'
           }
         };

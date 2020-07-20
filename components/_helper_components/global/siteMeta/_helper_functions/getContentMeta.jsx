@@ -155,6 +155,8 @@ const getContentMeta = () => {
     isOpinion = !!sections.find(section => section._id && section._id.indexOf('/opinion') > -1);
   }
 
+  const blogName = metaValue('blogname');
+
   // return page content metadata values
   return {
     url,
@@ -181,6 +183,7 @@ const getContentMeta = () => {
     favicon,
     nonPrimarySet,
     isOpinion,
+    blogName,
   };
 };
 
