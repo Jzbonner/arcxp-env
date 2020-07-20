@@ -51,8 +51,8 @@ const AmpScripts = ({ contentElements }) => {
     />
     <script
       async
-      custom-element="amp-video"
-      src="https://cdn.ampproject.org/v0/amp-video-0.1.js"
+      custom-element="amp-video-iframe"
+      src="https://cdn.ampproject.org/v0/amp-video-iframe-0.1.js"
     />
     <script
       async

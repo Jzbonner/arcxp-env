@@ -41,6 +41,7 @@ const AmpVideoIframeOutputType = (props) => {
         <MetaTags />
         <SiteMeta />
         <CssLinks />
+        <script async src="https://cdn.ampproject.org/video-iframe-integration-v0.js"></script>
         {includeGtm && (
           <>
             <SiteMetrics />
