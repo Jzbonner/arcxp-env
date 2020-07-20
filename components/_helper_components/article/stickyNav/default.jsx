@@ -23,16 +23,20 @@ const StickyNav = ({
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
   let articleShareUrl = articleUrl;
-  const site = siteName.toLowerCase();
+  let site = siteName.toLowerCase();
   if (articleShareUrl && articleShareUrl.indexOf('.com') === -1) {
     const env = fetchEnv();
     // we must fully-qualify the url for sharing
     if (env === 'prod') {
+      if (site === 'dayton-daily-news' || site === 'springfield-news-sun') {
+        site = site.replace(/-/g, '');
+      }
       articleShareUrl = `https://${site}.com${articleShareUrl}`;
     } else if (env !== 'prod') {
       articleShareUrl = `https://${cdnOrg}-${site}-${env}.cdn.arcpublishing.com${articleShareUrl}`;
     }
   }
+
   const shareLinkFacebook = `${facebookURL}${articleShareUrl}`;
   const shareLinkTwitter = `${twitterURL}${articleShareUrl}&text=${articleHeadline}`;
   const shareLinkPinterest = `${pinterestURL}${articleShareUrl}&media=${renderImage().indexOf('/resources/logos/') > -1
