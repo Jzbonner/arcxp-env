@@ -7,6 +7,7 @@ import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js'
 import Comments from '../comments/comments';
 import Login from '../../global/navBar/login/default';
 import fetchEnv from '../../global/utils/environment';
+import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
 import '../../global/navBar/default.scss';
 
 const StickyNav = ({
@@ -28,9 +29,7 @@ const StickyNav = ({
     const env = fetchEnv();
     // we must fully-qualify the url for sharing
     if (env === 'prod') {
-      if (site === 'dayton-daily-news' || site === 'springfield-news-sun') {
-        site = site.replace(/-/g, '');
-      }
+      site = handleSiteName(site);
       articleShareUrl = `https://${site}.com${articleShareUrl}`;
     } else if (env !== 'prod') {
       articleShareUrl = `https://${cdnOrg}-${site}-${env}.cdn.arcpublishing.com${articleShareUrl}`;

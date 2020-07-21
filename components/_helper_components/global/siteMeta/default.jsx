@@ -2,6 +2,7 @@ import React from 'react';
 import { useAppContext } from 'fusion:context';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import getContentMeta from '../siteMeta/_helper_functions/getContentMeta';
+import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
 
 const SiteMeta = () => {
   const appContext = useAppContext();
@@ -27,6 +28,11 @@ const SiteMeta = () => {
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
 
+  let updatedURL = url;
+  if (updatedURL === '/homepage/') {
+    updatedURL = `https://${handleSiteName(site)}.com`;
+  }
+
   let pageTitle = seoTitle;
   if (!seoTitle) pageTitle = title;
 
@@ -34,7 +40,7 @@ const SiteMeta = () => {
     <>
       <link rel="apple-touch-icon" href={deployment(`${contextPath}/resources/images/favicon-apple-touch-icon.png`)} />
       <link rel="shortcut icon" href={deployment(`${contextPath}${favicon}`)} />
-      {!isNativoLandingPage && <link rel="canonical" href={url} />}
+      {!isNativoLandingPage && <link rel="canonical" href={updatedURL} />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={thumbnailImage} />
