@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TVwidget = () => {
+const AJCTVwidget = () => {
   const jquerySrc = '<script src="https://host.coxmediagroup.com/ajc/digital/elements/js/jquery-2.2.4.js"></script>';
 
   return (
@@ -31,4 +31,4 @@ const TVwidget = () => {
   );
 };
 
-export default TVwidget;
+export default AJCTVwidget;
