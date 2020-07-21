@@ -13,7 +13,7 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
     return null;
   }
   const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
+  const { arcSite = 'ajc' } = fusionContext;
 
   const siteData = useContent({
     source: 'site-api',
@@ -23,9 +23,7 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
     },
   });
 
-  if (!siteData) return null;
-
-  const { Sponsor = {} } = siteData;
+  const { Sponsor = {} } = siteData || {};
 
   const {
     sponsor_related_box_exclude_tags: excludeTags,
@@ -40,9 +38,9 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
     query: {
       from: 1,
       size: 10,
-      includeTags: `${includeTags}`,
-      mustIncludeAllTags: `${includeAllTags}`,
-      excludeTags: `${excludeTags}`,
+      includeTags: `${includeTags || ''}`,
+      mustIncludeAllTags: `${includeAllTags || ''}`,
+      excludeTags: `${excludeTags || ''}`,
       arcSite,
     },
   });

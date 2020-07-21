@@ -14,7 +14,8 @@ const Xml = (props) => {
 
   const { orgName, websiteURL } = siteProperties || {};
   const { query } = globalContentConfig || {};
-  const { id: queryId } = query || {};
+  const { id: collectionId } = query || {};
+  const feedLink = collectionId ? `/list/${collectionId}` : '';
 
   const xmlOptions = {
     header: true,
@@ -35,7 +36,7 @@ const Xml = (props) => {
           title: 'RSS FEED',
         },
         {
-          link: `${websiteURL}/list/${queryId}`,
+          link: `${websiteURL}${feedLink}`,
         },
         {
           description: `${orgName}`,
@@ -46,7 +47,7 @@ const Xml = (props) => {
         {
           _name: 'atom:link',
           _attrs: {
-            href: `${websiteURL}/list/${queryId}`,
+            href: `${websiteURL}${feedLink}`,
             rel: 'self',
           },
         },

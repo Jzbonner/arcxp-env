@@ -58,4 +58,34 @@ export default {
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.dayton.com/amp/ntv',
+  connext: {
+    sandbox: {
+      isEnabled: true,
+      clientCode: 'ajc',
+      environment: 'stage',
+      siteCode: 'DN',
+      configCode: 'DAYTON_STAGE_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-W3VLHBK',
+    },
+    prod: {
+      isEnabled: true,
+      clientCode: 'ajc',
+      environment: 'prod',
+      siteCode: 'DN',
+      configCode: 'DAYTON_PROD_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-W3VLHBK',
+    },
+  },
+  video: {
+    sandbox: {
+      cmsId: 2536851,
+    },
+    prod: {
+      cmsId: 2536851,
+    },
+  },
 };

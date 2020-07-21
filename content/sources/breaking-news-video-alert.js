@@ -1,47 +1,22 @@
 /* eslint-disable no-console */
-import GetCollectionData from './helper_functions/GetCollectionData';
-
-const schemaName = 'collections';
 const ttl = 120;
 
 const params = {
   id: 'text',
   from: 'text',
   size: 'text',
+  arcSite: 'text',
 };
 
-const fetch = (query) => {
-  const {
-    breakingNewsID,
-    breakingLiveVideoID,
-    arcSite,
-    size = 1,
-  } = query;
-
-  if (breakingNewsID && breakingLiveVideoID) {
-    return GetCollectionData(arcSite, breakingNewsID, size)
-      .then((data) => {
-        if (data.length > 0) {
-          return { headline: data[0].headlines.basic, url: data[0].canonical_url, typeOfHeadline: 'Breaking News' };
-        }
-        return GetCollectionData(arcSite, breakingLiveVideoID, size)
-          .then((videoData) => {
-            if (videoData.length > 0) {
-              return { headline: videoData[0].headlines.basic, url: videoData[0].canonical_url, typeOfHeadline: 'Live Video' };
-            }
-            return null;
-          });
-      })
-      .catch((error) => {
-        console.log('AXIOS CATCH - breaking news video alert "urlBreaking" => ', error);
-      });
-  }
-  return null;
-};
+const resolve = ({
+  id,
+  from,
+  size,
+  arcSite,
+}) => `/content/v4/collections/?website=${arcSite}&_id=${id}&from=${from}&size=${size}&published=true`;
 
 export default {
-  fetch,
-  schemaName,
+  resolve,
   ttl,
   params,
 };

@@ -5,9 +5,9 @@
   "websiteLogo": "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/CFSFLNZIUJBB3EVHSGSJCOHOJM.png",
   "googleLogo": "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/TXGQ6XIXWNACDAKSABXGTXAKU4.png",
   "orgName": "The Atlanta Journal-Constitution",
-  "ajcTwitterURL": "https://twitter.com/ajc",
+  "siteTwitterURL": "https://twitter.com/ajc",
+  "siteFacebookURL" : "https://facebook.com/ajc",
   "twitterURL": "https://twitter.com/intent/tweet?url=",
-  "ajcFacebookURL" : "https://facebook.com/ajc",
   "facebookURL": "https://www.facebook.com/share.php?u=",
   "pinterestURL": "https://www.pinterest.com/pin/create/button/?url=",
   "pinterestShareLogo": "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.ajc/AWUNC4KGBFFALBA3D3OS6VWMIM.png",
@@ -56,5 +56,35 @@
   "adsPrebidTimeout": 1500,
   "weatherLocationId": 348181,
   "favicon": "/resources/icons/favicons/AJC/favicon.ico",
-  "nativoMoapTag": "https://amp.ajc.com/amp/ntv"
+  "nativoMoapTag": "https://amp.ajc.com/amp/ntv",
+  "connext": {
+    "sandbox": {
+      "isEnabled": true,
+      "clientCode": "ajc",
+      "environment": "stage",
+      "siteCode": "AJC",
+      "configCode": "AJC_STAGE_DEFAULT",
+      "debug": false,
+      "tagManager": "GTM",
+      "containerId": "GTM-W3VLHBK"
+    },
+    "prod": {
+      "isEnabled": true,
+      "clientCode": "ajc",
+      "environment": "prod",
+      "configCode": "AJC_PROD_DEFAULT",
+      "siteCode": "AJC",
+      "debug": false,
+      "tagManager": "GTM",
+      "containerId": "GTM-W3VLHBK"
+    }
+  },
+  "video": {
+    "sandbox": {
+      "cmsId": 2531688
+    },
+    "prod": {
+      "cmsId": 2528054
+    }
+  }
 }

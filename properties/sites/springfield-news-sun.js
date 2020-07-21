@@ -5,7 +5,7 @@ export default {
   siteName: 'springfield-news-sun',
   cdnOrg: 'coxohio',
   cdnSite: 'springfield-news-sun',
-  siteDomainURL: 'https://www.springfieldnewssun.com/',
+  siteDomainURL: 'https://www.springfieldnewssun.com',
   websiteURL: 'https://www.springfieldnewssun.com/',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/ESSF3ZPUYRH7RAH4D7SUTHQCMM.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/ESSF3ZPUYRH7RAH4D7SUTHQCMM.png',
@@ -61,4 +61,34 @@ export default {
   favicon: '/resources/icons/favicons/Ohio/springfield-news-sun-favicon.ico',
   adsTxt,
   nativoMoapTag: 'https://amp.springfieldnewssun.com/amp/ntv',
+  connext: {
+    sandbox: {
+      isEnabled: true,
+      clientCode: 'ajc',
+      environment: 'stage',
+      siteCode: 'NS',
+      configCode: 'NS_STAGE_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-W3VLHBK',
+    },
+    prod: {
+      isEnabled: true,
+      clientCode: 'ajc',
+      environment: 'prod',
+      siteCode: 'NS',
+      configCode: 'NS_PROD_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-W3VLHBK',
+    },
+  },
+  video: {
+    sandbox: {
+      cmsId: 2536851,
+    },
+    prod: {
+      cmsId: 2536851,
+    },
+  },
 };

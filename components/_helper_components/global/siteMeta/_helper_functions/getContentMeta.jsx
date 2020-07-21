@@ -149,6 +149,12 @@ const getContentMeta = () => {
     /* eslint-disable-next-line max-len */
     firstPublishDateConverted = time ? `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}${time.indexOf('1') !== 0 ? '0' : ''}${time.replace(/:/g, '').replace(/\s[A|P]M/g, '')}` : `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}`;
   }
+
+  let isOpinion = false;
+  if (sections) {
+    isOpinion = !!sections.find(section => section._id.indexOf('/opinion') > -1);
+  }
+
   // return page content metadata values
   return {
     url,
@@ -174,6 +180,7 @@ const getContentMeta = () => {
     isNonContentPage,
     favicon,
     nonPrimarySet,
+    isOpinion,
   };
 };
 

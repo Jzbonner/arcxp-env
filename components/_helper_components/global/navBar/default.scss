@@ -33,13 +33,23 @@
       height: 75px;
       border-bottom: solid 1px #d0d0d0;
     }
+
+    .Mg2-connext[data-display-type] {
+      display: none;
+    }
   }
 
   nav {
     z-index: 4001;
+    display: none;
+
+    @include breakpoint (desktop-sm) {
+      display: flex;
+    }
 
     &.mobile-nav-activated {
       transform: translateX(1000px);
+      display: flex;
 
       .nav-menu-toggle {
         left: 15px;

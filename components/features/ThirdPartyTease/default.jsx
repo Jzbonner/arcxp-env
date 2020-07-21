@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useComponentContext } from 'fusion:context';
 import renderCustomHtml from '../../_helper_components/article/contentElements/components/html/renderCustomHtml';
@@ -8,6 +8,22 @@ const TPT = () => {
   /* retrieve custom fields from fusion's component context */
   const componentContext = useComponentContext();
   const { title = '', moreURL = '', content = '' } = componentContext.customFields;
+
+  const getParameter = (name) => {
+    const url = window.location.href;
+    const newName = name.replace(/[[\]]/g, '\\$&');
+    const regex = new RegExp(`[?&]${newName}(=([^&#]*)|&|#|$)`);
+    const results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  };
+
+  useEffect(() => {
+    if (window.location.href.indexOf('/search/?q=') !== -1) {
+      document.getElementById('search-input').value = getParameter('q') || '';
+    }
+  });
 
   if (content && content !== '') {
     const regex = /(<?\/body><?\/head><?\/html>)/ig;

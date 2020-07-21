@@ -1,7 +1,13 @@
 import React from 'react';
-import { connext } from 'fusion:environment';
+import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
+import fetchEnv from '../utils/environment';
 
 const ConnextInit = () => {
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const currentEnv = fetchEnv();
+  const { connext } = getProperties(arcSite);
   const {
     isEnabled = false,
     clientCode,
@@ -11,7 +17,7 @@ const ConnextInit = () => {
     debug,
     tagManager,
     containerId,
-  } = connext;
+  } = connext[currentEnv] || {};
 
   if (!isEnabled) return null;
 

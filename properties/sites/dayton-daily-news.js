@@ -6,7 +6,7 @@ export default {
   siteName: 'dayton-daily-news',
   cdnOrg: 'coxohio',
   cdnSite: 'dayton-daily-news',
-  siteDomainURL: 'https://www.daytondailynews.com/',
+  siteDomainURL: 'https://www.daytondailynews.com',
   websiteURL: 'https://www.daytondailynews.com/',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/V5MMRTL6OBFBFBNB3N4HBFITLQ.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/V5MMRTL6OBFBFBNB3N4HBFITLQ.png',
@@ -63,4 +63,34 @@ export default {
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.daytondailynews.com/amp/ntv',
+  connext: {
+    sandbox: {
+      isEnabled: true,
+      clientCode: 'ajc',
+      environment: 'stage',
+      siteCode: 'DN',
+      configCode: 'DN_PROD_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-W3VLHBK',
+    },
+    prod: {
+      isEnabled: true,
+      clientCode: 'ajc',
+      environment: 'prod',
+      siteCode: 'DN',
+      configCode: 'DN_PROD_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-W3VLHBK',
+    },
+  },
+  video: {
+    sandbox: {
+      cmsId: 2536851,
+    },
+    prod: {
+      cmsId: 2536851,
+    },
+  },
 };

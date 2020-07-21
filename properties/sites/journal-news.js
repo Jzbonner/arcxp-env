@@ -6,7 +6,7 @@ export default {
   siteName: 'journal-news',
   cdnOrg: 'coxohio',
   cdnSite: 'journal-news',
-  siteDomainURL: 'https://www.journal-news.com/',
+  siteDomainURL: 'https://www.journal-news.com',
   websiteURL: 'https://www.journal-news.com/',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/DK42MHKQZRA7PFSGW7YUX4A4DQ.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/DK42MHKQZRA7PFSGW7YUX4A4DQ.png',
@@ -52,7 +52,7 @@ export default {
     placementName: 'Journal News Custom Feed',
   },
   metrics: {
-    siteID: 'journal-news',
+    siteID: 'journalnews',
     siteMetro: 'oh: dayton',
     siteFormat: 'news',
     gtmContainerKey: 'GTM-NNFL6V6',
@@ -63,4 +63,34 @@ export default {
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.journal-news.com/amp/ntv',
+  connext: {
+    sandbox: {
+      isEnabled: true,
+      clientCode: 'ajc',
+      environment: 'stage',
+      siteCode: 'JN',
+      configCode: 'JN_STAGE_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-W3VLHBK',
+    },
+    prod: {
+      isEnabled: true,
+      clientCode: 'ajc',
+      environment: 'prod',
+      siteCode: 'JN',
+      configCode: 'JN_PROD_DEFAULT',
+      debug: false,
+      tagManager: 'GTM',
+      containerId: 'GTM-W3VLHBK',
+    },
+  },
+  video: {
+    sandbox: {
+      cmsId: 2536851,
+    },
+    prod: {
+      cmsId: 2536851,
+    },
+  },
 };

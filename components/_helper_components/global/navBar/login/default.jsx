@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connext } from 'fusion:environment';
+import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../../utils/environment';
 import '../default.scss';
 import userIcon from '../../../../../resources/icons/login/user-icon.svg';
@@ -14,19 +15,30 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   } else {
     source = userIconWhite;
   }
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const currentEnv = fetchEnv();
+  const { connext, cdnSite } = getProperties(arcSite);
   const {
     isEnabled = false,
-    clientCode,
-  } = connext;
+    siteCode,
+  } = connext[currentEnv] || {};
 
   if (!isEnabled) {
     return null;
   }
 
-  const currentEnv = fetchEnv();
+  let connextSite = cdnSite;
+  if (arcSite === 'dayton') {
+    connextSite = 'daytondailynews';
+  } else if (arcSite === 'dayton-daily-news' || arcSite === 'springfield-news-sun') {
+    connextSite = connextSite.replace(/-/g, '');
+  }
+
   const accountSubdomain = `//${currentEnv !== 'prod' ? 'test-' : ''}myaccount`;
 
-  const profileLink = `${accountSubdomain}.${clientCode}.com/${clientCode}/myprofile`;
+  const connextDomain = `${accountSubdomain}.${connextSite}.com/${siteCode ? siteCode.toLowerCase() : connextSite}`;
+  const profileLink = `${connextDomain}/myprofile`;
   const [userState, _setUserState] = useState('');
   const [showUserMenu, _setShowUserMenu] = useState(false);
   const userStateRef = React.useRef(userState);
@@ -82,13 +94,13 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
               <a href='#' className='nav-profileLogout' data-mg2-action='logout'><b>Logout</b></a>
             </li>}
             <li className={'flyout-item'}>
-              <a href={`${accountSubdomain}.${clientCode}.com/${clientCode}/dashboard`} target='_blank'>My Account</a>
+              <a href={`${connextDomain}/dashboard`} target='_blank'>My Account</a>
             </li>
             <li className={'flyout-item'}>
-              <a href={`${accountSubdomain}.${clientCode}.com/${clientCode}/preference`} target='_blank'>Newsletters</a>
+              <a href={`${connextDomain}/preference`} target='_blank'>Newsletters</a>
             </li>
             <li className={'flyout-item'}>
-              <a href={`//events.${clientCode}.com`}>Events</a>
+              <a href={`//events.${arcSite === 'dayton' ? 'dayton' : connextSite}.com`}>Events</a>
             </li>
             <li className={'flyout-item'}>
               <a href='/our-products/'>Our Products</a>
