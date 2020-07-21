@@ -31,6 +31,8 @@ const SiteMeta = () => {
   let updatedURL = url;
   if (updatedURL === '/homepage/') {
     updatedURL = `https://${handleSiteName(site)}.com`;
+  } else {
+    updatedURL = `https://${handleSiteName(site)}.com${updatedURL}`;
   }
 
   let pageTitle = seoTitle;
