@@ -152,7 +152,7 @@ const getContentMeta = () => {
 
   let isOpinion = false;
   if (sections) {
-    isOpinion = !!sections.find(section => section._id.indexOf('/opinion') > -1);
+    isOpinion = !!sections.find(section => section._id && section._id.indexOf('/opinion') > -1);
   }
 
   // return page content metadata values

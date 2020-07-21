@@ -15,7 +15,8 @@ import './default.scss';
 const SectionOutput = ({ zones, layout }) => (
   <>
     <GlobalAdSlots pbPage={true} />
-    <BreakingNews />
+    {/* we omit breaking news on wraps */}
+    {layout.indexOf('wrap-') === -1 && <BreakingNews />}
     <WeatherAlerts />
     <NavBar type={layout} />
     <main className="c-sectionContent">
