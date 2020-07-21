@@ -4,6 +4,10 @@
 
 //default image styles. Default scenario is assumed to be thumbnail in main content
 
+main.c-amp-video {
+  padding-top: 0;
+}
+
 .c-video-component {
   flex: 1 0 100%;
   position: relative;
