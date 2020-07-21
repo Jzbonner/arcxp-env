@@ -2,8 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ampScriptSwitch from '../../../src/js/ampScriptSwitch';
 
-const AmpScripts = ({ contentElements }) => {
+const AmpScripts = ({ contentElements, storyPromoItems }) => {
   const scriptsArr = [];
+  const { type: storyPromoType } = storyPromoItems || {};
+  let storyHasVideo = false;
+  if (storyPromoType === 'video') {
+    storyHasVideo = true;
+  }
   const oembedScripts = contentElements && contentElements.map((element) => {
     if (element.type === 'oembed_response' || element.type === 'raw_html') {
       const { raw_oembed: rawOembed, content } = element || {};
@@ -11,11 +16,8 @@ const AmpScripts = ({ contentElements }) => {
       return ampScriptSwitch(type, scriptsArr, content);
     }
     if (element.type === 'video') {
-      return <script
-              async
-              custom-element="amp-video-iframe"
-              src="https://cdn.ampproject.org/v0/amp-video-iframe-0.1.js"
-            />;
+      storyHasVideo = true;
+      return null;
     }
     return null;
   });
@@ -67,10 +69,15 @@ const AmpScripts = ({ contentElements }) => {
       src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"
     />
     <script
-    async
-    custom-element="amp-analytics"
-    src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
+      async
+      custom-element="amp-analytics"
+      src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
     />
+    {storyHasVideo && <script
+      async
+      custom-element="amp-video-iframe"
+      src="https://cdn.ampproject.org/v0/amp-video-iframe-0.1.js"
+    />}
     {oembedScripts}
   </>
   );
@@ -78,6 +85,7 @@ const AmpScripts = ({ contentElements }) => {
 
 AmpScripts.propTypes = {
   contentElements: PropTypes.array,
+  storyPromoItems: PropTypes.object,
 };
 
 export default AmpScripts;

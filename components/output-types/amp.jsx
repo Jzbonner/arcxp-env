@@ -19,13 +19,15 @@ const AmpOutputType = (props) => {
   const {
     canonical_url: articleURL,
     content_elements: contentElements,
+    promo_items: promoItems,
   } = globalContent || {};
+  const { basic: storyPromoItems = {} } = promoItems || {};
 
   return (
     <Html>
     <head>
       <BaseMarkup canonicalUrl={articleURL} />
-      <AmpScripts contentElements={contentElements} />
+      <AmpScripts contentElements={contentElements} storyPromoItems={storyPromoItems} />
       <AmpCustomStyles arcSite={arcSite} outputTypeProps={props} />
       <GoogleStructuredData />
       <SiteMetaAmp />
