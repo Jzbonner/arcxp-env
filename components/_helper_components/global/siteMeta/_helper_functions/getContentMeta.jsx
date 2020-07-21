@@ -35,7 +35,7 @@ const getContentMeta = () => {
   } = globalContent || {};
   const articleDesc = description;
   const {
-    sections,
+    sections = [],
     primary_section: primarySection,
     tags = [],
   } = taxonomy || {};
