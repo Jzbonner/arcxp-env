@@ -9,6 +9,7 @@ import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import gamAdTagBuilder from './_helper_functions/gamAdTagBuilder';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
+import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
 import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
@@ -43,6 +44,16 @@ const Video = ({
   const siteOfRecord = cdnSite || arcSite;
   const isAmpOutput = outputType === 'amp';
   const isAmpWebPlayer = outputType === 'ampVideoIframe';
+  let autoplayState = startPlaying;
+  // update autoplay if it's ampVideoIframe (since we need some way to pass the state to the component through the iframe)
+  if (isAmpWebPlayer) {
+    if (requestUri.indexOf('autoplayState') > -1) {
+      const autoplaySubstr = requestUri.substr(requestUri.indexOf('autoplayState'));
+      const paramsArr = autoplaySubstr.split('&');
+      const autoPlayParam = paramsArr[0].split('=')[1];
+      autoplayState = autoPlayParam;
+    }
+  }
 
   let mainCredit;
   if (credits) {
@@ -314,15 +325,18 @@ const Video = ({
     data-env={currentEnv}
     data-aspect-ratio="0.5625"
     data-uuid={vidId}
-    data-autoplay={startPlaying}
+    data-autoplay={autoplayState}
     data-muted={muteON}
     data-playthrough={autoplayNext || true}
     data-discovery={autoplayNext || true}
      />;
 
-  const ampVideoIframeUrl = `https://${orgOfRecord}-${siteOfRecord}-${currentEnv !== 'prod' ? 'sandbox' : 'prod'}.cdn.arcpublishing.com${videoPageUrl}?outputType=ampVideoIframe`;
+  let ampVideoIframeDomain = `https://${orgOfRecord}-${siteOfRecord}-${currentEnv}.cdn.arcpublishing.com`;
+  if (currentEnv === 'prod') {
+    ampVideoIframeDomain = `https://www.${handleSiteName(siteOfRecord)}.com`;
+  }
 
-  const renderAmpPlayer = () => <amp-video-iframe width="16" height="9" layout="responsive" src={ampVideoIframeUrl} poster={thumbnailImage}></amp-video-iframe>;
+  const renderAmpPlayer = () => <amp-video-iframe width="16" height="9" layout="responsive" src={`${ampVideoIframeDomain}${videoPageUrl}?outputType=ampVideoIframe&autoplayState=${startPlaying}`} poster={thumbnailImage}></amp-video-iframe>;
 
   return (
     <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
