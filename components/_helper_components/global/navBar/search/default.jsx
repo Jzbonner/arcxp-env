@@ -14,7 +14,8 @@ const Search = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     window.location.href = `/search/?q=${searchTerm}`;
   };
 
