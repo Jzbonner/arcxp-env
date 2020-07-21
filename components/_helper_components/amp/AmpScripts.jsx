@@ -10,6 +10,13 @@ const AmpScripts = ({ contentElements }) => {
       const { type } = rawOembed || {};
       return ampScriptSwitch(type, scriptsArr, content);
     }
+    if (element.type === 'video') {
+      return <script
+              async
+              custom-element="amp-video-iframe"
+              src="https://cdn.ampproject.org/v0/amp-video-iframe-0.1.js"
+            />;
+    }
     return null;
   });
 
@@ -48,11 +55,6 @@ const AmpScripts = ({ contentElements }) => {
       async
       custom-element="amp-ad"
       src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"
-    />
-    <script
-      async
-      custom-element="amp-video-iframe"
-      src="https://cdn.ampproject.org/v0/amp-video-iframe-0.1.js"
     />
     <script
       async
