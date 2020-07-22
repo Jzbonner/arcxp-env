@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 import BaseMarkup from '../_helper_components/amp/BaseMarkup';
 import Html from '../_helper_components/amp/Html';
 import AmpCustomStyles from '../_helper_components/amp/AmpCustomStyle';
@@ -13,20 +14,25 @@ const AmpOutputType = (props) => {
   const {
     globalContent,
     children,
-    arcSite = getProperties().sites[0],
+    arcSite: arcSiteFromProps = getProperties().sites[0],
   } = props;
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const currentSite = arcSite || arcSiteFromProps;
 
   const {
     canonical_url: articleURL,
     content_elements: contentElements,
+    promo_items: promoItems,
   } = globalContent || {};
+  const { basic: storyPromoItems = {} } = promoItems || {};
 
   return (
     <Html>
     <head>
       <BaseMarkup canonicalUrl={articleURL} />
-      <AmpScripts contentElements={contentElements} />
-      <AmpCustomStyles arcSite={arcSite} outputTypeProps={props} />
+      <AmpScripts contentElements={contentElements} storyPromoItems={storyPromoItems} />
+      <AmpCustomStyles arcSite={currentSite} outputTypeProps={props} />
       <GoogleStructuredData />
       <SiteMetaAmp />
     </head>
