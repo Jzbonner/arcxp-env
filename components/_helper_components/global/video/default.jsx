@@ -54,7 +54,7 @@ const Video = ({
     if (adTag) {
       window.PoWaSettings = window.PoWaSettings || {};
       window.PoWaSettings.advertising = window.PoWaSettings.advertising || {};
-      window.PoWaSettings.advertising.adBar = true;
+      window.PoWaSettings.advertising.adBar = { skipControl: false };
       window.PoWaSettings.advertising.adTag = adTag;
     }
     let videoTotalTime;
