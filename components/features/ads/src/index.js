@@ -1,12 +1,23 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'fusion:prop-types';
+import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import fetchEnv from '../../../_helper_components/global/utils/environment';
 import ArcAdLib from './children/ArcAdLib';
 
 const AdSetup = ({
   id, slotName, adSlotNameForArcAds, dimensions, display, breakpoints, refresh, targeting, bidding, className, prerender, dfpId,
 }) => {
-  const { adsA9Enabled, adsA9Id, adsPrebidEnabled } = getProperties();
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const currentEnv = fetchEnv();
+  const { ads: adsProps } = getProperties(arcSite);
+  const {
+    adsA9Enabled,
+    adsA9Id,
+    adsPrebidEnabled,
+    adsPrebidSizeConfig,
+  } = adsProps[currentEnv] || {};
   if (prerender && typeof window !== 'undefined') {
     window.arcAdsPrerenderer = adDetails => new Promise((resolve) => {
       prerender.adDetails();
@@ -78,65 +89,12 @@ const AdSetup = ({
           dfpId,
           {
             amazon: {
-              enabled: adsA9Enabled,
-              id: adsA9Id,
+              enabled: adsA9Enabled || false,
+              id: adsA9Id || '',
             },
             prebid: {
-              enabled: adsPrebidEnabled,
-              sizeConfig: [
-                {
-                  mediaQuery: '(min-width: 972px)',
-                  sizesSupported: [
-                    [300, 250],
-                    [300, 600],
-                  ],
-                  labels: ['desktop'],
-                },
-                {
-                  mediaQuery: '(min-width: 972px)',
-                  sizesSupported: [
-                    [970, 250],
-                    [728, 90],
-                  ],
-                  labels: ['desktop1'],
-                },
-                {
-                  mediaQuery: '(min-width: 972px)',
-                  sizesSupported: [
-                    [728, 90],
-                  ],
-                  labels: ['desktop2'],
-                },
-                {
-                  mediaQuery: '(min-width: 768px) and (max-width: 971px)',
-                  sizesSupported: [
-                    [300, 250],
-                    [300, 600],
-                  ],
-                  labels: ['tablet'],
-                },
-                {
-                  mediaQuery: '(min-width: 768px) and (max-width: 971px)',
-                  sizesSupported: [
-                    [728, 90],
-                  ],
-                  labels: ['tablet1'],
-                },
-                {
-                  mediaQuery: '(min-width: 0px) and (max-width: 767px)',
-                  sizesSupported: [
-                    [320, 250],
-                  ],
-                  labels: ['phone'],
-                },
-                {
-                  mediaQuery: '(min-width: 0px) and (max-width: 767px)',
-                  sizesSupported: [
-                    [320, 50],
-                  ],
-                  labels: ['phone1'],
-                },
-              ],
+              enabled: adsPrebidEnabled || false,
+              sizeConfig: adsPrebidSizeConfig || [],
             },
           },
         ];
