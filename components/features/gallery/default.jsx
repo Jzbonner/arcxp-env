@@ -54,6 +54,8 @@ const Gallery = (props) => {
   const [clickCount, setClickCount] = useState(0);
   const [isAdVisible, setAdVisibleState] = useState(false);
   const [previousClickAction, setPreviousClickAction] = useState(null);
+  const [clickDirection, setClickDirection] = useState(null);
+  const [clickType, setClickType] = useState('');
 
   /* Mobile */
   const [offsetHeight, setHeight] = useState(0);
@@ -81,13 +83,20 @@ const Gallery = (props) => {
     ON: 'ON',
     OFF: 'OFF',
     RESIZE: 'RESIZE',
+    AD_REMOVED: 'AD_REMOVED',
     AD_RESET: 'AD_RESET',
     UPDATE_CLICK_FUNCS: 'UPDATE_CLICK_FUNCS',
+  };
+
+  const types = {
+    IMAGE: 'IMAGE',
+    ARROW: 'ARROW',
   };
 
   let mobileElemData;
   let mobileFuncs = {};
   let mobileState = {};
+  let tester = null;
 
   // if standalone feature, fetches a specific gallery
   const { galleryUrl } = customFields;
@@ -196,6 +205,7 @@ const Gallery = (props) => {
       // change current image index by -1
       if (action === actions.PREV) {
         setCurrentAction(action);
+        setClickDirection(actions.PREV);
         if (!isAdVisible || (currentClickCount % 4) === 0) {
           if (currentIndex <= 0) {
             if (!maxIndex) {
@@ -212,6 +222,7 @@ const Gallery = (props) => {
       } else if (action === actions.NEXT) {
         // change current image index by +1
         setCurrentAction(action);
+        setClickDirection(actions.NEXT);
         if (!isAdVisible || ((currentClickCount % 4) === 0)) {
           if (currentIndex === maxIndex) {
             setCurrentIndex(0);
@@ -224,6 +235,12 @@ const Gallery = (props) => {
       }
     } else {
       setCurrentIndex(currentIndex);
+    }
+
+    if (isPhoto) {
+      setClickType(types.IMAGE);
+    } else {
+      setClickType(types.ARROW);
     }
 
     return null;
@@ -318,23 +335,35 @@ const Gallery = (props) => {
   };
 
   const renderDesktopGalleryElements = (elements) => {
-    const finalizedElements = handleImageFocus((elements), {
+    tester = handleImageFocus((elements), {
       isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction, hasOpened, modalVisible,
     }, clickFuncs);
 
-    setElementData(finalizedElements);
+    setElementData(tester);
 
     if (!isAdVisible) renderCaptionByCurrentIndex();
   };
 
-  const handleNext = (arr) => {
-    arr.push(arr.shift());
-    renderDesktopGalleryElements(arr);
+  const handleNext = (arr, returnOnly = false) => {
+    const newArr = [...arr];
+
+    newArr.push(newArr.shift());
+
+    if (returnOnly) {
+      return newArr;
+    }
+    return renderDesktopGalleryElements(newArr);
   };
 
-  const handlePrevious = (arr) => {
-    arr.unshift(arr.pop());
-    renderDesktopGalleryElements(arr);
+  const handlePrevious = (arr, returnOnly = false) => {
+    const newArr = [...arr];
+
+    newArr.unshift(newArr.pop());
+
+    if (returnOnly) {
+      return newArr;
+    }
+    return renderDesktopGalleryElements(newArr);
   };
 
   const handleResizeEvent = () => {
@@ -392,7 +421,7 @@ const Gallery = (props) => {
 
   /* renders updated gallery elements after currentIndex is changed */
   const finalizeGalleryItems = () => {
-    if (currentAction === actions.PREV) {
+    if (clickDirection === actions.PREV) {
       handlePrevious([...elementData]);
     } else {
       handleNext([...elementData]);
@@ -425,7 +454,11 @@ const Gallery = (props) => {
   }, []);
 
   useEffect(() => {
-    if (elementData && !isStickyVisible && currentAction !== '') finalizeGalleryItems();
+    if (elementData && !isStickyVisible && (currentAction !== '' && currentAction !== actions.AD_REMOVED)) {
+      finalizeGalleryItems();
+    } else if (elementData && !isStickyVisible && currentAction === actions.AD_REMOVED && clickType === types.IMAGE) {
+      renderDesktopGalleryElements([...elementData]);
+    }
 
     if (isStickyVisible && isAdInsertable && mobileElementData) {
       const adsInstertedMobileEls = insertMobileGalleryAd();
@@ -445,7 +478,8 @@ const Gallery = (props) => {
       };
 
       if (elementData && (hasOpened || modalVisible) && !isMobile && currentAction === actions.UPDATE_CLICK_FUNCS) {
-        renderDesktopGalleryElements([...elementData]);
+        const elements = tester || elementData;
+        renderDesktopGalleryElements([...elements]);
         setCurrentAction('');
       }
     }
@@ -463,15 +497,26 @@ const Gallery = (props) => {
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
         const adInsertedElementArray = insertDesktopGalleryAd();
         setElementData(adInsertedElementArray);
-        renderDesktopGalleryElements([...adInsertedElementArray]);
       } else if (isAdVisible && (clickCount % 4) === 1) {
         const adRemovedElementArray = removeGalleryAd();
+        let reorganizedElements = null;
+
+        if (clickType !== types.IMAGE) {
+          if (clickDirection === actions.PREV) {
+            reorganizedElements = handlePrevious(adRemovedElementArray, true);
+          } else {
+            reorganizedElements = handleNext(adRemovedElementArray, true);
+          }
+        }
+
         setAdVisibleState(false);
-        const finalizedElements = handleImageFocus((adRemovedElementArray), {
+
+        const finalizedElements = handleImageFocus((reorganizedElements || adRemovedElementArray), {
           isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, hasOpened, modalVisible,
         }, clickFuncs);
 
         setElementData(finalizedElements);
+        setCurrentAction(actions.AD_REMOVED);
         renderCaptionByCurrentIndex();
       }
     }
@@ -607,7 +652,7 @@ const Gallery = (props) => {
             className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
             <div className="gallery-overlay hidden-large">
               {
-                isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite}/> : null
+                isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null
               }
             </div>
             <div className="gallery-count view-gallery">
