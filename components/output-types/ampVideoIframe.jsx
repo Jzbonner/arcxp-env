@@ -24,8 +24,6 @@ const AmpVideoIframeOutputType = (props) => {
   const {
     metrics,
     favicon,
-    adsA9Enabled,
-    adsPrebidEnabled,
     devconActive,
     devconKey,
   } = getProperties(currentSite) || {};
@@ -41,6 +39,7 @@ const AmpVideoIframeOutputType = (props) => {
         <MetaTags />
         <SiteMeta />
         <CssLinks />
+        <script async src="https://cdn.ampproject.org/video-iframe-integration-v0.js"></script>
         {includeGtm && (
           <>
             <SiteMetrics />
@@ -53,8 +52,6 @@ const AmpVideoIframeOutputType = (props) => {
           </>
         )}
         {!noAds && <script async src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>}
-        {!noAds && adsA9Enabled && <script src='https://c.amazon-adsystem.com/aax2/apstag.js'></script>}
-        {!noAds && adsPrebidEnabled && <script src={deployment(`${contextPath}/resources/scripts/prebid3.23.0.js`)}></script>}
         <Libs />
         {currentSite && <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)} />}
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}${favicon}`)} />

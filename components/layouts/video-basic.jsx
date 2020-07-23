@@ -51,7 +51,7 @@ const VideoPageLayout = () => {
         <WeatherAlerts />
         <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
       </>}
-      <main>
+      <main className={ampVideoIframe ? 'c-amp-video' : ''}>
         {!noAds && !ampVideoIframe && <div className="c-hp01-mp01 b-margin-top-d40-m20">
           <ArcAd staticSlot={'HP00'} />
           <ArcAd staticSlot={'MP01'} />

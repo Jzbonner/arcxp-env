@@ -60,7 +60,6 @@ const SiteMetrics = ({ isAmp }) => {
   const {
     url,
     topSection,
-    secondarySection,
     topSectionName,
     pageContentType,
     typeOfPage,
@@ -71,6 +70,7 @@ const SiteMetrics = ({ isAmp }) => {
     contentId,
     firstPublishDateConverted,
     nonPrimarySet: nonPrimarySections,
+    blogName = '',
   } = contentMeta || {};
   const siteDomain = siteDomainURL || `https://www.${site}.com`;
   if (isAmp) {
@@ -100,12 +100,12 @@ const SiteMetrics = ({ isAmp }) => {
               "siteType": "free",
               "siteCMS": "arc",
               "contentTopics": "${topics.join().toLowerCase()}",
-              "contentByline": "${authors.join()}",
+              "contentByline": "${authors.join() || undefined}",
               "contentOriginatingSite": "${metrics && metrics.siteID ? metrics.siteID : site}",
               "contentID": "${contentId || ''}",
               "contentVendor": "${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}",
               "contentPublishDate": "${firstPublishDateConverted}",
-              "blogName": "${pageContentType === 'blog' ? topSectionName : ''}",
+              "blogName": "${pageContentType === 'blog' ? topSectionName : (blogName || '')}",
               "galleryName": "${galleryHeadline}",
               "authorName": [${ampAuthorNames}],
               "pageNameStr": "",
@@ -129,7 +129,7 @@ const SiteMetrics = ({ isAmp }) => {
             'pageURL': '${siteDomain}${url}',
             'pageSiteSection': '${topSection}',
             'pageMainSection': '${topSection}',
-            'pageCategory': '${secondarySection}',
+            'pageCategory': '${nonPrimarySections}',
             'pageContentType': '${typeOfPage || pageContentType}',
             'pageTitle': '${seoTitle ? seoTitle.replace(/'/g, '"') : pageTitle.replace(/'/g, '"')}'
           },
@@ -145,12 +145,12 @@ const SiteMetrics = ({ isAmp }) => {
           },
           'contentData': {
             'contentTopics': '${topics.join()}',
-            'contentByline': '${authors.join()}',
+            'contentByline': '${authors.join() || undefined}',
             'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
             'contentID': '${contentId || ''}',
             'contentVendor': '${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}',
             'contentPublishDate': '${firstPublishDateConverted}',
-            'blogName': '${pageContentType === 'blog' ? topSectionName : ''}',
+            'blogName': '${pageContentType === 'blog' ? topSectionName : (blogName || '')}',
             'galleryName': '${galleryHeadline}'
           }
         };

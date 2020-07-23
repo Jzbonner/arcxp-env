@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
+import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import Image from '../../global/image/default';
 import Video from '../../global/video/default';
@@ -13,13 +14,13 @@ const Headline = ({
   if (basicItems) {
     promoData = basicItems;
   }
-
-  const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties();
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const { featuredVideoPlayerRules, maxTabletViewWidth } = getProperties(arcSite);
 
   // Uncomment to see how the headline component displays with a video promo type.
   // Used because I was getting errors when trying to add a video as a featured element.
   // promoData.type = 'video';
-
   return (
     <div className={`article-headline-component b-margin-bottom-d30-m20 with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
       {!ampVideoIframe && <div className="headline">

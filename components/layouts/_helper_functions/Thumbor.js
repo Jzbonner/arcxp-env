@@ -11,7 +11,8 @@ export default function (url, arcSite = 'ajc', width = 1000, height = 600) {
     const { cdnOrg, cdnSite } = getProperties(arcSite);
     let siteDomain = `${cdnOrg}-${cdnSite}-sandbox.cdn.arcpublishing.com`;
     if (currentEnv === 'prod') {
-      siteDomain = `www.${cdnSite}.com`;
+      const connextSite = cdnSite.replace(/-/g, '');
+      siteDomain = `www.${connextSite === 'journalnews' ? 'journal-news' : connextSite}.com`;
     }
 
     const thumbor = new Thumbor(

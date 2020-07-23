@@ -9,6 +9,7 @@ import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import gamAdTagBuilder from './_helper_functions/gamAdTagBuilder';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
+import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
 import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
@@ -41,6 +42,18 @@ const Video = ({
   const thumbnailImage = renderImage();
   const orgOfRecord = cdnOrg || (arcSite === 'ajc' ? 'ajc' : 'coxohio');
   const siteOfRecord = cdnSite || arcSite;
+  const isAmpOutput = outputType === 'amp';
+  const isAmpWebPlayer = outputType === 'ampVideoIframe';
+  let autoplayState = startPlaying;
+  // update autoplay if it's ampVideoIframe (since we need some way to pass the state to the component through the iframe)
+  if (isAmpWebPlayer) {
+    if (requestUri.indexOf('autoplayState') > -1) {
+      const autoplaySubstr = requestUri.substr(requestUri.indexOf('autoplayState'));
+      const paramsArr = autoplaySubstr.split('&');
+      const autoPlayParam = paramsArr[0].split('=')[1];
+      autoplayState = autoPlayParam;
+    }
+  }
 
   let mainCredit;
   if (credits) {
@@ -52,7 +65,7 @@ const Video = ({
     if (adTag) {
       window.PoWaSettings = window.PoWaSettings || {};
       window.PoWaSettings.advertising = window.PoWaSettings.advertising || {};
-      window.PoWaSettings.advertising.adBar = true;
+      window.PoWaSettings.advertising.adBar = { skipControl: false };
       window.PoWaSettings.advertising.adTag = adTag;
     }
     let videoTotalTime;
@@ -62,13 +75,37 @@ const Video = ({
     let videoContentType;
     let videoTopics;
     const fireGtmEvent = (evt) => {
-      const { time, type } = evt || {};
+      const { muted: mutedState, time, type } = evt || {};
       // fire GTM events for various player events
       const dataLayer = window.dataLayer || [];
-      let eventType = type;
+      /*
+        We override (or omit) eventType or ampEvent in the following cases to tailor output to either metrics, or amp, or both:
+          - If both are present, then that video event is emitted to both outputs.
+          - If `eventType` is set to null, it's an amp-specific event that should not be tracked in metrics.
+          - And if `ampEvent` is excluded, it's a metrics-only event that should not be passed to the AMP integration.
+        There wasn't much reason to create separate handlers for something shared, so `fireGtmEvent` pulls double duty.
+      */
+      // default eventType value: naming convention remains, we simply prepend "video" and capitalize the first letter
+      let eventType = `video${type.charAt(0).toUpperCase()}${type.slice(1)}`;
+      let ampEvent = null;
       switch (type) {
-        case 'powaRender':
-          eventType = 'videoPlayerLoad';
+        case 'adStart':
+          ampEvent = 'ad_start';
+          break;
+        case 'adComplete':
+          ampEvent = 'ad_end';
+          break;
+        case 'muted':
+          eventType = null;
+          ampEvent = mutedState ? 'muted' : 'unmuted';
+          break;
+        case 'pause':
+          eventType = null;
+          ampEvent = 'pause';
+          break;
+        case 'play':
+          eventType = null;
+          ampEvent = 'playing';
           break;
         case 'playback0':
           eventType = 'videoContentStart';
@@ -85,32 +122,36 @@ const Video = ({
         case 'playback100':
           eventType = 'videoComplete';
           break;
-
+        case 'powaRender':
+          eventType = 'videoPlayerLoad';
+          ampEvent = 'canplay';
+          break;
         case 'start':
-        case 'error':
-        case 'adStart':
-        case 'adComplete':
-        case 'adError':
-        case 'adSkip':
+          ampEvent = 'playing';
+          break;
         default:
-          // naming convention remains, we simply prepend "video" and capitalize the first letter
-          eventType = `video${eventType.charAt(0).toUpperCase()}${eventType.slice(1)}`;
+          eventType = null;
       }
-      dataLayer.push({
-        event: eventType,
-        videoPayload: {
-          videoSource: 'arc',
-          videoTitle,
-          videoID: vidId,
-          videoContentType: videoContentType === 'clip' ? 'vod' : videoContentType,
-          videoPlayType,
-          videoTotalTime,
-          videoPlayerVersion,
-          videoTopics,
-          videoAccountID: '',
-          videoSeekTime: time,
-        },
-      });
+      if (eventType) {
+        dataLayer.push({
+          event: eventType,
+          videoPayload: {
+            videoSource: 'arc',
+            videoTitle,
+            videoID: vidId,
+            videoContentType: videoContentType === 'clip' ? 'vod' : videoContentType,
+            videoPlayType,
+            videoTotalTime,
+            videoPlayerVersion,
+            videoTopics,
+            videoAccountID: '',
+            videoSeekTime: time,
+          },
+        });
+      }
+      if (isAmpWebPlayer && typeof ampIntegration !== 'undefined' && ampEvent) {
+        window.ampIntegration.postEvent(ampEvent);
+      }
     };
     const powaRendered = (e) => {
       const id = get(e, 'detail.id');
@@ -118,6 +159,18 @@ const Video = ({
 
       // protect against the player not existing (just in case)
       if (typeof powa !== 'undefined') {
+        // bind to ampIntegration events, to conrol the PoWa player from AMP
+        if (isAmpWebPlayer && typeof ampIntegration !== 'undefined') {
+          window.ampIntegration.method('play', () => powa.play());
+          window.ampIntegration.method('pause', () => powa.pause());
+          window.ampIntegration.method('mute', () => powa.mute(true));
+          window.ampIntegration.method('unmute', () => powa.mute(false));
+          window.ampIntegration.method('showcontrols', () => powa.showControls());
+          window.ampIntegration.method('hidecontrols', () => powa.hideControls());
+          window.ampIntegration.method('fullscreenenter', () => powa.fullscreen(true));
+          window.ampIntegration.method('fullscreenexit', () => powa.fullscreen(false));
+        }
+
         // go ahead and define vars for use in subsequent events/metrics
         const { detail: videoDetails } = e || {};
         const {
@@ -208,16 +261,19 @@ const Video = ({
 
           fireGtmEvent(event);
         });
+        powa.on('adComplete', evt => fireGtmEvent(evt));
+        powa.on('adError', evt => fireGtmEvent(evt));
+        powa.on('adSkip', evt => fireGtmEvent(evt));
+        powa.on('adStart', evt => fireGtmEvent(evt));
+        powa.on('error', evt => fireGtmEvent(evt));
+        powa.on('muted', evt => fireGtmEvent(evt));
+        powa.on('pause', evt => fireGtmEvent(evt));
+        powa.on('play', evt => fireGtmEvent(evt));
         powa.on('playback0', evt => fireGtmEvent(evt));
         powa.on('playback25', evt => fireGtmEvent(evt));
         powa.on('playback50', evt => fireGtmEvent(evt));
         powa.on('playback75', evt => fireGtmEvent(evt));
         powa.on('playback100', evt => fireGtmEvent(evt));
-        powa.on('error', evt => fireGtmEvent(evt));
-        powa.on('adStart', evt => fireGtmEvent(evt));
-        powa.on('adSkip', evt => fireGtmEvent(evt));
-        powa.on('adError', evt => fireGtmEvent(evt));
-        powa.on('adComplete', evt => fireGtmEvent(evt));
       }
 
       // kick off playlist discovery
@@ -269,30 +325,25 @@ const Video = ({
     data-env={currentEnv}
     data-aspect-ratio="0.5625"
     data-uuid={vidId}
-    data-autoplay={startPlaying}
+    data-autoplay={autoplayState}
     data-muted={muteON}
     data-playthrough={autoplayNext || true}
     data-discovery={autoplayNext || true}
      />;
 
-  const ampVideoIframeUrl = `https://${orgOfRecord}-${siteOfRecord}-${currentEnv !== 'prod' ? 'sandbox' : 'prod'}.cdn.arcpublishing.com${videoPageUrl}?outputType=ampVideoIframe`;
+  let ampVideoIframeDomain = `https://${orgOfRecord}-${siteOfRecord}-${currentEnv}.cdn.arcpublishing.com`;
+  if (currentEnv === 'prod') {
+    ampVideoIframeDomain = `https://www.${handleSiteName(siteOfRecord)}.com`;
+  }
 
-  const renderAmpPlayer = () => <amp-iframe allowFullscreen={true} class="i-amphtml-layout-responsive i-amphtml-layout-size-defined i-amphtml-element i-amphtml-layout" frameBorder="0" height="225" i-amphtml-layout="responsive" layout="responsive" sandbox="allow-scripts allow-same-origin allow-popups" src={ampVideoIframeUrl} width="400" style={{ '--loader-delay-offset': '492ms !important' }}>
-    <i-amphtml-sizer style={{ display: 'block', paddingTop: '56.2500%' }} slot="i-amphtml-svc"></i-amphtml-sizer>
-    <amp-img class="i-amphtml-layout-fill i-amphtml-layout-size-defined i-amphtml-element i-amphtml-layout amp-hidden" i-amphtml-layout="fill" layout="fill" placeholder="" src={`https://www-ajc-com.cdn.ampproject.org/i/s/${thumbnailImage}`} i-amphtml-auto-lightbox-visited="">
-      <img decoding="async" src={`https://www-ajc-com.cdn.ampproject.org/i/s/${thumbnailImage}`} className="i-amphtml-fill-content i-amphtml-replaced-content"></img>
-    </amp-img>
-    <i-amphtml-scroll-container class="amp-active">
-      <iframe className="i-amphtml-fill-content" name="amp_iframe0" allowFullscreen="" frameBorder="0" allow="" sandbox="allow-scripts allow-same-origin allow-popups" src={ampVideoIframeUrl} style={{ zIndex: 0 }}></iframe>
-    </i-amphtml-scroll-container>
-  </amp-iframe>;
+  const renderAmpPlayer = () => <amp-video-iframe width="16" height="9" layout="responsive" src={`${ampVideoIframeDomain}${videoPageUrl}?outputType=ampVideoIframe&autoplayState=${startPlaying}`} poster={thumbnailImage}></amp-video-iframe>;
 
   return (
     <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
       <div className="video-component">
-        {outputType === 'amp' ? renderAmpPlayer() : renderPowaPlayer()}
+        {isAmpOutput ? renderAmpPlayer() : renderPowaPlayer()}
       </div>
-      {outputType !== 'amp' && <>
+      {!isAmpOutput && <>
         <p className={`video-credit-text ${isInlineVideo ? 'is-inline' : null}`}>{giveCredit}</p>
         {smartChecker()}
       </>}

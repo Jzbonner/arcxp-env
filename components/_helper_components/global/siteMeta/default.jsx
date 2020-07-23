@@ -2,6 +2,7 @@ import React from 'react';
 import { useAppContext } from 'fusion:context';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import getContentMeta from '../siteMeta/_helper_functions/getContentMeta';
+import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
 
 const SiteMeta = () => {
   const appContext = useAppContext();
@@ -27,6 +28,13 @@ const SiteMeta = () => {
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
 
+  let updatedURL = url;
+  if (updatedURL === '/homepage/') {
+    updatedURL = `https://${handleSiteName(site)}.com`;
+  } else {
+    updatedURL = `https://${handleSiteName(site)}.com${updatedURL}`;
+  }
+
   let pageTitle = seoTitle;
   if (!seoTitle) pageTitle = title;
 
@@ -34,7 +42,7 @@ const SiteMeta = () => {
     <>
       <link rel="apple-touch-icon" href={deployment(`${contextPath}/resources/images/favicon-apple-touch-icon.png`)} />
       <link rel="shortcut icon" href={deployment(`${contextPath}${favicon}`)} />
-      {!isNativoLandingPage && <link rel="canonical" href={url} />}
+      {!isNativoLandingPage && <link rel="canonical" href={updatedURL} />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={thumbnailImage} />
@@ -42,9 +50,8 @@ const SiteMeta = () => {
       <meta name="twitter:title" content={title} />
       <meta name="twitter:url" content={url} />
       <meta property="og:image" content={thumbnailImage} />
-      <meta property="og:image:height" content={`${isNonContentPage
-        || thumbnailImage.indexOf('/resources/logos/') > -1 ? '200' : '630'}`} />
-      <meta property="og:image:width" content={`${isNonContentPage || thumbnailImage.indexOf('/resources/logos/') > -1
+      <meta property="og:image:height" content={`${thumbnailImage.indexOf('/resources/logos/') > -1 ? '200' : '630'}`} />
+      <meta property="og:image:width" content={`${thumbnailImage.indexOf('/resources/logos/') > -1
         ? '200' : '1200'}`} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content={`${isNonContentPage ? 'website' : 'article'}`} />
@@ -54,7 +61,7 @@ const SiteMeta = () => {
       <title>{pageTitle}</title>
       <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
-      <meta property="article:opinion" content={isOpinion} />
+      {!isNonContentPage && <meta property="article:opinion" content={isOpinion.toString()} />}
     </>
   );
 };

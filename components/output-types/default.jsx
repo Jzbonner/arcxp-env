@@ -26,6 +26,7 @@ const DefaultOutputType = (props) => {
     globalContent,
     Libs,
     MetaTags,
+    layout,
   } = props;
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -34,14 +35,18 @@ const DefaultOutputType = (props) => {
   const {
     hyperlocalTags,
     metrics,
+    ads,
+    favicon,
+    connext,
+    cdnSite,
+  } = getProperties(currentSite) || {};
+
+  const {
     adsA9Enabled,
     adsPrebidEnabled,
     devconActive,
     devconKey,
-    favicon,
-    connext,
-  } = getProperties(currentSite) || {};
-
+  } = ads[currentEnv] || {};
   const { isEnabled: connextIsEnabled = false, environment: connextEnv } = connext[currentEnv] || {};
   const {
     type, taxonomy, canonical_url: articleURL, _id: uuid,
@@ -52,6 +57,9 @@ const DefaultOutputType = (props) => {
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
   const { sponsorSectionID: isSponsoredContent } = checkSponsor(sections);
   const includeGtm = metrics && metrics.gtmContainerKey;
+  let fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${cdnSite || currentSite}.com` : '';
+  /* eslint-disable-next-line max-len */
+  fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
 
   return (
     <html>
@@ -74,12 +82,15 @@ const DefaultOutputType = (props) => {
         )}
         {!noAds && <script async src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>}
         {!noAds && adsA9Enabled && <script src='https://c.amazon-adsystem.com/aax2/apstag.js'></script>}
-        {!noAds && adsPrebidEnabled && <script src={deployment(`${contextPath}/resources/scripts/prebid3.23.0.js`)}></script>}
+        {!noAds && adsPrebidEnabled
+          && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/prebid3.23.0.js`)}`}></script>}
         <Libs />
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} />}
         {!isHyperlocalContent && <TaboolaHeader/>}
-        {currentSite && <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)} />}
-        <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}${favicon}`)} />
+        {currentSite && <link
+          rel="stylesheet"
+          href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)}`} />}
+        <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
       </head>
@@ -124,6 +135,7 @@ DefaultOutputType.propTypes = {
   globalContent: PropTypes.object,
   hyperlocalTags: PropTypes.object,
   metrics: PropTypes.object,
+  layout: PropTypes.string,
   Libs: PropTypes.array,
   MetaTags: PropTypes.object,
 };

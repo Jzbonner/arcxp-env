@@ -1,7 +1,8 @@
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
-export const getMediaContent = (type, siteID, globalContent, promoItems) => {
+export const getMediaContent = (type, siteID, globalContent, promoItems, newsletterFeed = false) => {
   let formattedMediaContent = [];
+  let formatterGalleryArray = [];
   let leadObject = {};
 
   const { basic = {} } = promoItems || {};
@@ -98,6 +99,65 @@ export const getMediaContent = (type, siteID, globalContent, promoItems) => {
     };
   }
 
+  if (promoItemsType === 'gallery') {
+    const { content_elements: galleryContentElements = [] } = basic || {};
+    if (newsletterFeed) {
+      const firstImageInGallery = galleryContentElements && galleryContentElements[0];
+      const { caption: firstImageInGalleryCaption, url: firstImageInGalleryUrl } = firstImageInGallery || {};
+
+      leadObject = {
+        _name: 'media:content',
+        _attrs: {
+          type: 'image/JPEG',
+          medium: 'image',
+          url: `${imageResizer(firstImageInGalleryUrl, siteID)}`,
+        },
+        _content: [
+          {
+            'media:title': `<![CDATA[${mediaTitle}]]>`,
+          },
+          {
+            'media:description': `<![CDATA[${firstImageInGalleryCaption}]]>`,
+          },
+          {
+            _name: 'media:credit',
+            _attrs: {
+              role: 'author',
+            },
+            _content: `<![CDATA[${basicAuthor}]]>`,
+          },
+        ],
+      };
+    } else {
+      formatterGalleryArray = galleryContentElements.map((item) => {
+        const { caption: itemCaption, url: itemUrl } = item || {};
+        return {
+          _name: 'media:content',
+          _attrs: {
+            type: 'image/JPEG',
+            medium: 'image',
+            url: `${imageResizer(itemUrl, siteID)}`,
+          },
+          _content: [
+            {
+              'media:title': `<![CDATA[${mediaTitle}]]>`,
+            },
+            {
+              'media:description': `<![CDATA[${itemCaption}]]>`,
+            },
+            {
+              _name: 'media:credit',
+              _attrs: {
+                role: 'author',
+              },
+              _content: `<![CDATA[${basicAuthor}]]>`,
+            },
+          ],
+        };
+      });
+    }
+  }
+
   const mediaContent = globalContent.filter(el => el && el.type && (el.type === 'image' || el.type === 'video'));
   if (mediaContent) {
     formattedMediaContent = mediaContent.map((media) => {
@@ -167,6 +227,9 @@ export const getMediaContent = (type, siteID, globalContent, promoItems) => {
     });
   }
 
+  if (!newsletterFeed && promoItemsType === 'gallery') {
+    return [...formatterGalleryArray, ...formattedMediaContent];
+  }
   return [leadObject, ...formattedMediaContent];
 };
 
