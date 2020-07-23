@@ -100,7 +100,7 @@ const SiteMetrics = ({ isAmp }) => {
               "siteType": "free",
               "siteCMS": "arc",
               "contentTopics": "${topics.join().toLowerCase()}",
-              "contentByline": "${authors.join()}",
+              "contentByline": "${authors.join() || undefined}",
               "contentOriginatingSite": "${metrics && metrics.siteID ? metrics.siteID : site}",
               "contentID": "${contentId || ''}",
               "contentVendor": "${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}",
@@ -145,7 +145,7 @@ const SiteMetrics = ({ isAmp }) => {
           },
           'contentData': {
             'contentTopics': '${topics.join()}',
-            'contentByline': '${authors.join()}',
+            'contentByline': '${authors.join() || undefined}',
             'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
             'contentID': '${contentId || ''}',
             'contentVendor': '${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}',
