@@ -38,13 +38,133 @@ export default {
   adsPath: 'atlanta_np/ajc_web_default',
   adsTxt,
   appAdsTxt,
-  adsA9Enabled: false,
-  adsA9Id: '3970',
-  adsPrebidEnabled: false,
-  adsPrebidTimeout: 1500,
-  devconActive: true,
-  devconKey: '2a1556f7-d788-4b8b-943a-dd77f5f0d472',
   nativoMoapTag: 'https://amp.ajc.com/amp/ntv',
+  ads: {
+    sandbox: {
+      adsA9Enabled: false,
+      adsA9Id: '3970',
+      adsPrebidEnabled: true,
+      adsPrebidTimeout: 1500,
+      adsPrebidSizeConfig: [
+        {
+          mediaQuery: '(min-width: 972px)',
+          sizesSupported: [
+            [300, 250],
+            [300, 600],
+          ],
+          labels: ['desktop'],
+        },
+        {
+          mediaQuery: '(min-width: 972px)',
+          sizesSupported: [
+            [970, 250],
+            [728, 90],
+          ],
+          labels: ['desktop1'],
+        },
+        {
+          mediaQuery: '(min-width: 972px)',
+          sizesSupported: [
+            [728, 90],
+          ],
+          labels: ['desktop2'],
+        },
+        {
+          mediaQuery: '(min-width: 768px) and (max-width: 971px)',
+          sizesSupported: [
+            [300, 250],
+            [300, 600],
+          ],
+          labels: ['tablet'],
+        },
+        {
+          mediaQuery: '(min-width: 768px) and (max-width: 971px)',
+          sizesSupported: [
+            [728, 90],
+          ],
+          labels: ['tablet1'],
+        },
+        {
+          mediaQuery: '(min-width: 0px) and (max-width: 767px)',
+          sizesSupported: [
+            [320, 250],
+          ],
+          labels: ['phone'],
+        },
+        {
+          mediaQuery: '(min-width: 0px) and (max-width: 767px)',
+          sizesSupported: [
+            [320, 50],
+          ],
+          labels: ['phone1'],
+        },
+      ],
+      devconActive: false,
+      devconKey: '2a1556f7-d788-4b8b-943a-dd77f5f0d472',
+    },
+    prod: {
+      adsA9Enabled: false,
+      adsA9Id: '3970',
+      adsPrebidEnabled: false,
+      adsPrebidTimeout: 1500,
+      adsPrebidSizeConfig: [
+        {
+          mediaQuery: '(min-width: 972px)',
+          sizesSupported: [
+            [300, 250],
+            [300, 600],
+          ],
+          labels: ['desktop'],
+        },
+        {
+          mediaQuery: '(min-width: 972px)',
+          sizesSupported: [
+            [970, 250],
+            [728, 90],
+          ],
+          labels: ['desktop1'],
+        },
+        {
+          mediaQuery: '(min-width: 972px)',
+          sizesSupported: [
+            [728, 90],
+          ],
+          labels: ['desktop2'],
+        },
+        {
+          mediaQuery: '(min-width: 768px) and (max-width: 971px)',
+          sizesSupported: [
+            [300, 250],
+            [300, 600],
+          ],
+          labels: ['tablet'],
+        },
+        {
+          mediaQuery: '(min-width: 768px) and (max-width: 971px)',
+          sizesSupported: [
+            [728, 90],
+          ],
+          labels: ['tablet1'],
+        },
+        {
+          mediaQuery: '(min-width: 0px) and (max-width: 767px)',
+          sizesSupported: [
+            [320, 250],
+          ],
+          labels: ['phone'],
+        },
+        {
+          mediaQuery: '(min-width: 0px) and (max-width: 767px)',
+          sizesSupported: [
+            [320, 50],
+          ],
+          labels: ['phone1'],
+        },
+      ],
+      devconActive: true,
+      devconKey: '2a1556f7-d788-4b8b-943a-dd77f5f0d472',
+    },
+  },
   connext: {
     sandbox: {
       isEnabled: true,

@@ -35,15 +35,18 @@ const DefaultOutputType = (props) => {
   const {
     hyperlocalTags,
     metrics,
-    adsA9Enabled,
-    adsPrebidEnabled,
-    devconActive,
-    devconKey,
+    ads,
     favicon,
     connext,
     cdnSite,
   } = getProperties(currentSite) || {};
 
+  const {
+    adsA9Enabled,
+    adsPrebidEnabled,
+    devconActive,
+    devconKey,
+  } = ads[currentEnv] || {};
   const { isEnabled: connextIsEnabled = false, environment: connextEnv } = connext[currentEnv] || {};
   const {
     type, taxonomy, canonical_url: articleURL, _id: uuid,

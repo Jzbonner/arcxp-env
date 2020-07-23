@@ -63,6 +63,24 @@ export default {
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.daytondailynews.com/amp/ntv',
+  ads: {
+    sandbox: {
+      adsA9Enabled: false,
+      adsA9Id: '',
+      adsPrebidEnabled: false,
+      adsPrebidTimeout: 1500,
+      devconActive: false,
+      devconKey: '',
+    },
+    prod: {
+      adsA9Enabled: false,
+      adsA9Id: '',
+      adsPrebidEnabled: false,
+      adsPrebidTimeout: 1500,
+      devconActive: false,
+      devconKey: '',
+    },
+  },
   connext: {
     sandbox: {
       isEnabled: true,
