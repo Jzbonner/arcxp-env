@@ -96,7 +96,7 @@ const Gallery = (props) => {
   let mobileElemData;
   let mobileFuncs = {};
   let mobileState = {};
-  let tester = null;
+  let preRenderEls = null;
 
   // if standalone feature, fetches a specific gallery
   const { galleryUrl } = customFields;
@@ -335,11 +335,11 @@ const Gallery = (props) => {
   };
 
   const renderDesktopGalleryElements = (elements) => {
-    tester = handleImageFocus((elements), {
+    preRenderEls = handleImageFocus((elements), {
       isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction, hasOpened, modalVisible,
     }, clickFuncs);
 
-    setElementData(tester);
+    setElementData(preRenderEls);
 
     if (!isAdVisible) renderCaptionByCurrentIndex();
   };
@@ -478,7 +478,7 @@ const Gallery = (props) => {
       };
 
       if (elementData && (hasOpened || modalVisible) && !isMobile && currentAction === actions.UPDATE_CLICK_FUNCS) {
-        const elements = tester || elementData;
+        const elements = preRenderEls || elementData;
         renderDesktopGalleryElements([...elements]);
         setCurrentAction('');
       }
