@@ -55,7 +55,6 @@ const StoryPageLayout = () => {
   const {
     _id: uuid,
     first_publish_date: firstPublishDate,
-    last_updated_date: lastUpdatedDate,
     display_date: displayDate,
     content_elements: contentElements,
     promo_items: promoItems,
@@ -166,7 +165,7 @@ const StoryPageLayout = () => {
             {!isCommunityContributor
               && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />}
             <TimeStamp
-              firstPublishDate={firstPublishDate || lastUpdatedDate || displayDate}
+              firstPublishDate={firstPublishDate}
               displayDate={displayDate}
               isHideTimestampTrue={isHideTimestampTrue}
               ampPage={ampPage}

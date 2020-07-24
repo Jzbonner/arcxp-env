@@ -16,7 +16,7 @@ const Headline = ({
   promo_items: promoItems,
   label,
   taxonomy,
-  publish_date: publishDate,
+  first_publish_date: firstPublishDate,
   display_date: displayDate,
   headlines,
   websites,
@@ -81,7 +81,7 @@ const Headline = ({
        <>
         <SectionLabel label={label} taxonomy={taxonomy} />
         <TimeStamp
-         firstPublishDate={publishDate}
+         firstPublishDate={firstPublishDate}
          displayDate={displayDate}
          isHideTimestampTrue={isHideTimestampTrue}
          isTease={isTease} />
@@ -109,7 +109,7 @@ Headline.propTypes = {
   promo_items: PropTypes.object,
   label: PropTypes.object,
   taxonomy: PropTypes.object,
-  publish_date: PropTypes.string,
+  first_publish_date: PropTypes.string,
   display_date: PropTypes.string,
   headlines: PropTypes.object,
   websites: PropTypes.object,
