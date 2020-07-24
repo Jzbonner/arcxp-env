@@ -7,7 +7,7 @@ export default {
   cdnOrg: 'coxohio',
   cdnSite: 'dayton',
   siteDomainURL: 'https://www.dayton.com',
-  websiteURL: 'https://www.dayton.com/',
+  websiteURL: 'https://www.dayton.com',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/YRHUB5MLSRHN3GFTFUEH36LH4M.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/YRHUB5MLSRHN3GFTFUEH36LH4M.png',
   orgName: 'Dayton',

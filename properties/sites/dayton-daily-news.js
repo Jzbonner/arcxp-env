@@ -7,7 +7,7 @@ export default {
   cdnOrg: 'coxohio',
   cdnSite: 'dayton-daily-news',
   siteDomainURL: 'https://www.daytondailynews.com',
-  websiteURL: 'https://www.daytondailynews.com/',
+  websiteURL: 'https://www.daytondailynews.com',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/V5MMRTL6OBFBFBNB3N4HBFITLQ.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/V5MMRTL6OBFBFBNB3N4HBFITLQ.png',
   orgName: 'Dayton Daily News',
