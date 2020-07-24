@@ -8,6 +8,7 @@ const SiteMetaAmp = () => {
   const {
     deployment,
     contextPath,
+    metaValue,
   } = appContext;
 
   const thumbnailImage = renderImage();
@@ -54,6 +55,7 @@ const SiteMetaAmp = () => {
       <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
       <meta property="article:opinion" content={isOpinion} />
+      {metaValue('topics') && <meta name="topics" content={metaValue('topics')} />}
     </>
   );
 };

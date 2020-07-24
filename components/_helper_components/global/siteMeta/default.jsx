@@ -8,6 +8,7 @@ const SiteMeta = () => {
   const {
     deployment,
     contextPath,
+    metaValue,
   } = appContext;
 
   const thumbnailImage = renderImage();
@@ -54,6 +55,7 @@ const SiteMeta = () => {
       <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
       {!isNonContentPage && <meta property="article:opinion" content={isOpinion.toString()} />}
+      {metaValue('topics') && <meta name="topics" content={metaValue('topics')} />}
     </>
   );
 };
