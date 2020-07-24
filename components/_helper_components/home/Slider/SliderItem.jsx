@@ -17,7 +17,7 @@ const SliderItem = ({ data, refHook }) => {
     classes, headline, image: imageData, canonicalUrl, timestampData, sectionLabelData, contentType,
   } = data;
   const appContext = useAppContext();
-  const { contextPath, requestUri } = appContext;
+  const { requestUri } = appContext;
   const { displayDate, firstPublishDate } = timestampData;
   const { taxonomy, label } = sectionLabelData;
   const { hide_timestamp: hideTimestamp } = label || {};
@@ -60,7 +60,7 @@ const SliderItem = ({ data, refHook }) => {
 
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
-      <a href={`${contextPath}${canonicalUrl}`} className="homeList-image">
+      <a href={canonicalUrl} className="homeList-image">
         <Image height={282}
                width={500}
                src={imageData}

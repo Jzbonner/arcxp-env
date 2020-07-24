@@ -18,7 +18,6 @@ import '../../src/styles/base/_utility.scss';
 
 export const AllStaffPage = () => {
   const appContext = useAppContext();
-  const { contextPath } = appContext;
   const { globalContent, globalContentConfig } = appContext;
   const fusionContext = useFusionContext();
   const { arcSite = 'ajc' } = fusionContext;
@@ -93,7 +92,7 @@ export const AllStaffPage = () => {
     setSelectedLeftMenuItem(area);
     updateStaffers(area.tag);
     setLeftMenuVisibility(false);
-    window.history.pushState({}, null, `${contextPath}/${pageUri}/${area.tag}`);
+    window.history.pushState({}, null, `/${pageUri}/${area.tag}`);
   };
 
   return (

@@ -1,6 +1,5 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
-import { useAppContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import checkTags from '../../../layouts/_helper_functions/checkTags';
 import ImageSimple from '../imageSimple/default';
@@ -9,8 +8,6 @@ import './default.scss';
 const ContributorBadge = ({
   tags, ampPage, useWhiteLogos, staffBio,
 }) => {
-  const { contextPath } = useAppContext();
-
   const hyperlocalTags = getProperties().hyperlocalTags.filter((tag) => {
     if (tag !== 'community contributor') {
       return tag;
@@ -41,7 +38,7 @@ const ContributorBadge = ({
   if (staffBio) {
     if (checkTags(tags, hyperlocalTags)) {
       return (
-        <a href={`${contextPath}${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
+        <a href={`${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
           <ImageSimple
             src={getContributorProps().image}
             ampPage={ampPage}
@@ -55,7 +52,7 @@ const ContributorBadge = ({
   }
   if (checkTags(tags, 'community contributor')) {
     return (
-      <a href={`${contextPath}${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
+      <a href={`${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
         <ImageSimple
           src={getContributorProps().image}
           ampPage={ampPage}

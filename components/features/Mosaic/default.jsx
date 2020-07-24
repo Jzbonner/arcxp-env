@@ -18,7 +18,7 @@ const Mosaic = (customFields = {}) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
-  const { contextPath, requestUri } = appContext;
+  const { requestUri } = appContext;
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(
     paramKey => paramKey === 'outputType',
@@ -151,7 +151,7 @@ const Mosaic = (customFields = {}) => {
                   className={`mosaic-box ${patternMap(startIndex, i)}`}
                 >
                   {/* the link is empty - 100% coverage of content via css - because sectionLabel outputs a link as well */}
-                  <a href={`${contextPath}${relativeURL}`}></a>
+                  <a href={relativeURL}></a>
                   <div className="c-sectionLabel">
                    {getLabelContent(getLabelContentConfig)}
                   </div>

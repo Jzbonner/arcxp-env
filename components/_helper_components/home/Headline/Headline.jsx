@@ -26,7 +26,7 @@ const Headline = ({
   isTease,
 }) => {
   const appContext = useAppContext();
-  const { contextPath, requestUri } = appContext;
+  const { requestUri } = appContext;
   const { tags = [], sections } = taxonomy || {};
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
@@ -90,13 +90,13 @@ const Headline = ({
 
   return (
     <div className={`home-headline ${sponsorName ? 'sponsored' : ''}`}>
-      <a href={`${contextPath}${relativeURL}`} className='homeList-image'>
+      <a href={relativeURL} className='homeList-image'>
         {getPromoItem(type)}
         {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
         </a>
       <div className="headline-box">
        {getLabelContent(sponsorName)}
-        <a href={`${contextPath}${relativeURL}`} className="headline">
+        <a href={relativeURL} className="headline">
           {headlines && truncateHeadline(headlines.basic)}
         </a>
       </div>

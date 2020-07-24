@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useAppContext } from 'fusion:context';
 import './default.scss';
 
 const AuthorMenuItem = ({
@@ -8,26 +7,16 @@ const AuthorMenuItem = ({
   area,
   setCategory,
   pageUri,
-}) => {
-  const appContext = useAppContext();
-  const { contextPath } = appContext;
-
-  return (
-    <li
-      key={area.name}
-      className={`c-author-menu-item ${
-        area.id === selectedLeftMenuItem.id ? 'active' : ''
-      }`}
-    >
-      <a
-        href={`${contextPath}/${pageUri}/${area.tag}`}
-        onClick={e => setCategory(e, area)}
-      >
-        {area.name}
-      </a>
-    </li>
-  );
-};
+}) => <li
+  key={area.name}
+  className={`c-author-menu-item ${
+    area.id === selectedLeftMenuItem.id ? 'active' : ''}`}>
+    <a
+      href={`/${pageUri}/${area.tag}`}
+      onClick={e => setCategory(e, area)}>
+      {area.name}
+    </a>
+  </li>;
 
 AuthorMenuItem.propTypes = {
   setCategory: PropTypes.func,

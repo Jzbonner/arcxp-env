@@ -26,7 +26,7 @@ const ListItem = ({
   firstInlineImage,
 }) => {
   const appContext = useAppContext();
-  const { contextPath, requestUri } = appContext;
+  const { requestUri } = appContext;
   const { tags = [], sections } = taxonomy || {};
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(
@@ -53,7 +53,7 @@ const ListItem = ({
     if (contentType === 'video' || contentType === 'gallery') {
       if (promoItems && promoItems.basic) {
         return (
-          <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+          <a href={relativeURL} className="homeList-image">
             <Image
               src={promoItems.basic}
               width={500}
@@ -72,7 +72,7 @@ const ListItem = ({
     if (promoItems) {
       if (promoItems.basic && promoItems.basic.type === 'image') {
         return (
-          <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+          <a href={relativeURL} className="homeList-image">
             <Image
               src={promoItems.basic || promoItems.lead_art.promo_items.basic}
               width={500}
@@ -95,7 +95,7 @@ const ListItem = ({
           && promoItems.basic.promo_items.basic
         ) {
           return (
-            <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+            <a href={relativeURL} className="homeList-image">
               <Image
                 src={promoItems.basic.promo_items.basic}
                 width={500}
@@ -113,7 +113,7 @@ const ListItem = ({
 
     if (firstInlineImage) {
       return (
-        <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+        <a href={relativeURL} className="homeList-image">
           <Image
             src={firstInlineImage}
             width={500}
@@ -162,7 +162,7 @@ const ListItem = ({
       <div className="homeList-text">
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
         <div className={`headline ${isListPage}`}>
-          <a href={`${contextPath}${relativeURL}`}>
+          <a href={relativeURL}>
             {truncateHeadline(headlines.basic)}
           </a>
         </div>
