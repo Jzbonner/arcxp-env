@@ -13,18 +13,15 @@ export default (arcSite, newBody, from = 0, size = 10) => {
   const promiseArray = [];
   const contentElements = [];
 
-  const buffer = 5;
+  const buffer = Math.ceil(size * 0.1);
   const maxFetchSize = 100;
 
-  const total = fromInt + sizeInt + buffer;
-
-  const numberOfFetches = total <= maxFetchSize ? 1 : Math.ceil(total / maxFetchSize);
-  const fetchSize = total <= maxFetchSize ? total : 100;
-
+  let leftToFetch = fromInt + sizeInt + buffer;
   let fetchStart = 0;
+  let fetchSize = leftToFetch <= maxFetchSize ? leftToFetch : maxFetchSize;
   let i = 1;
 
-  while (i <= numberOfFetches && i < 10) {
+  while (leftToFetch > 0) {
     let requestUri = `${CONTENT_BASE}/content/v4/search/published?body=${newBody}&website=${arcSite}&sort=display_date:desc`;
     requestUri += `&from=${fetchStart}`;
     requestUri += `&size=${fetchSize}`;
@@ -45,7 +42,9 @@ export default (arcSite, newBody, from = 0, size = 10) => {
 
     promiseArray.push(promise);
 
+    leftToFetch -= fetchSize;
     fetchStart += fetchSize;
+    fetchSize = leftToFetch <= maxFetchSize ? leftToFetch : maxFetchSize;
     i += 1;
   }
 

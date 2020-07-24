@@ -85,33 +85,34 @@ const Mosaic = (customFields = {}) => {
     if (isHyperlocalContent && isCommunityContributor) {
       return (
         <ContributorBadge
-        tags={tags}
-        ampPage={ampPage}
-        useWhiteLogos={true}
-      />
+          tags={tags}
+          ampPage={ampPage}
+          useWhiteLogos={true}
+        />
       );
     }
 
     return (
       <>
-      <SectionLabel label={label || {}} taxonomy={taxonomy} />
-      <TimeStamp
-        firstPublishDate={firstPublishDate}
-        displayDate={displayDate}
-        isHideTimestampTrue={isHideTimestampTrue}
-        isTease={true}
-      />
-    </>
+        <SectionLabel label={label || {}} taxonomy={taxonomy} />
+        <TimeStamp
+          firstPublishDate={firstPublishDate}
+          displayDate={displayDate}
+          isHideTimestampTrue={isHideTimestampTrue}
+          isTease={true}
+        />
+      </>
     );
   }
   if (Array.isArray(data)) {
     return (
       <div className="c-mosaic b-margin-bottom-d40-m20">
-      <FeatureTitle title={title} moreURL={moreURL} />
+        <FeatureTitle title={title} moreURL={moreURL} />
         <div className="c-mosaic-box">
           {data.map((el, i) => {
             const {
-              websites,
+              canonical_url: canonicalUrl,
+              website_url: websiteUrl,
               headlines,
               label,
               taxonomy,
@@ -131,10 +132,7 @@ const Mosaic = (customFields = {}) => {
               tags,
               'community contributor',
             );
-            const relativeURL = (websites
-                && websites[arcSite]
-                && websites[arcSite].website_url)
-              || '/';
+            const relativeURL = websiteUrl || canonicalUrl || '/';
             const getLabelContentConfig = {
               sponsorName,
               isHyperlocalContent,
@@ -155,7 +153,7 @@ const Mosaic = (customFields = {}) => {
                   {/* the link is empty - 100% coverage of content via css - because sectionLabel outputs a link as well */}
                   <a href={`${contextPath}${relativeURL}`}></a>
                   <div className="c-sectionLabel">
-                   {getLabelContent(getLabelContentConfig)}
+                    {getLabelContent(getLabelContentConfig)}
                   </div>
                   <span className="headline">
                     {truncateHeadline(get(headlines, 'basic', ''))}

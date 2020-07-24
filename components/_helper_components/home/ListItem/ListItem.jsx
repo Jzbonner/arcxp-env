@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useAppContext } from 'fusion:context';
 import Image from '../../global/image/default';
 import SectionLabel from '../../global/sectionLabel/default';
 import getQueryParams from '../../../layouts/_helper_functions/getQueryParams';
@@ -19,15 +19,14 @@ const ListItem = ({
   last_updated_date: lastUpdatedDate,
   display_date: displayDate,
   headlines = [],
-  websites,
+  canonical_url: canonicalUrl,
+  website_url: websiteUrl,
   listPage,
   type: contentType,
   firstInlineImage,
 }) => {
   const appContext = useAppContext();
   const { contextPath, requestUri } = appContext;
-  const fusionContext = useFusionContext();
-  const { arcSite = 'ajc' } = fusionContext;
   const { tags = [], sections } = taxonomy || {};
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(
@@ -46,7 +45,7 @@ const ListItem = ({
 
   const [isMissingPromo, setIsMissingPromo] = useState('');
 
-  const relativeURL = (websites && websites[arcSite] && websites[arcSite].website_url) || '/';
+  const relativeURL = websiteUrl || canonicalUrl || '/';
   const isListPage = listPage ? 'listPage' : '';
 
   function getPromoItem(sponsor) {
@@ -180,10 +179,11 @@ ListItem.propTypes = {
   first_publish_date: PropTypes.string,
   last_updated_date: PropTypes.string,
   headlines: PropTypes.object,
-  websites: PropTypes.object,
   listPage: PropTypes.bool,
   type: PropTypes.string,
   firstInlineImage: PropTypes.object,
+  canonical_url: PropTypes.string,
+  website_url: PropTypes.string,
 };
 
 export default ListItem;
