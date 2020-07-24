@@ -111,7 +111,8 @@ const Mosaic = (customFields = {}) => {
         <div className="c-mosaic-box">
           {data.map((el, i) => {
             const {
-              websites,
+              canonical_url: canonicalUrl,
+              website_url: websiteUrl,
               headlines,
               label,
               taxonomy,
@@ -131,10 +132,7 @@ const Mosaic = (customFields = {}) => {
               tags,
               'community contributor',
             );
-            const relativeURL = (websites
-                && websites[arcSite]
-                && websites[arcSite].website_url)
-              || '/';
+            const relativeURL = websiteUrl || canonicalUrl || '/';
             const getLabelContentConfig = {
               sponsorName,
               isHyperlocalContent,

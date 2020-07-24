@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import GetCollectionData from './helper_functions/GetCollectionData';
 import StoryData from './helper_functions/getStoryData';
+import filter from '../filters/collectionAndQueryFilter';
 
 const schemaName = 'collections';
 const ttl = 120;
@@ -18,6 +19,7 @@ const fetch = (query) => {
     id,
     size = 12,
   } = query;
+
   const activeSite = arcSite || arcSiteAlt;
 
   if (id) {
@@ -35,4 +37,5 @@ export default {
   schemaName,
   ttl,
   params,
+  filter,
 };
