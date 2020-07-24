@@ -6,7 +6,7 @@ export default {
   cdnOrg: 'coxohio',
   cdnSite: 'springfield-news-sun',
   siteDomainURL: 'https://www.springfieldnewssun.com',
-  websiteURL: 'https://www.springfieldnewssun.com/',
+  websiteURL: 'https://www.springfieldnewssun.com',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/ESSF3ZPUYRH7RAH4D7SUTHQCMM.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/ESSF3ZPUYRH7RAH4D7SUTHQCMM.png',
   orgName: 'Springfield News Sun',
