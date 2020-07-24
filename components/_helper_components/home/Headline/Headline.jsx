@@ -77,14 +77,14 @@ const Headline = ({
     }
 
     return (
-      <>
+       <>
         <SectionLabel label={label} taxonomy={taxonomy} />
         <TimeStamp
-          firstPublishDate={publishDate}
-          displayDate={displayDate}
-          isHideTimestampTrue={isHideTimestampTrue}
-          isTease={isTease} />
-      </>
+         firstPublishDate={publishDate}
+         displayDate={displayDate}
+         isHideTimestampTrue={isHideTimestampTrue}
+         isTease={isTease} />
+       </>
     );
   }
 
@@ -93,9 +93,9 @@ const Headline = ({
       <a href={`${contextPath}${relativeURL}`} className='homeList-image'>
         {getPromoItem(type)}
         {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
-      </a>
+        </a>
       <div className="headline-box">
-        {getLabelContent(sponsorName)}
+       {getLabelContent(sponsorName)}
         <a href={`${contextPath}${relativeURL}`} className="headline">
           {headlines && truncateHeadline(headlines.basic)}
         </a>

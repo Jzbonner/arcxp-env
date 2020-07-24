@@ -101,31 +101,31 @@ const Slider = (customFields = {}) => {
   }, []);
 
   return (
-    <div ref={wrapperRef} className={`c-slider-wrapper b-margin-bottom-d40-m20
+      <div ref={wrapperRef} className={`c-slider-wrapper b-margin-bottom-d40-m20
       b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
       <FeatureTitle title={title} moreURL={moreURL} />
-      <div className="c-slider">
-        <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`}>
-          <div ref={contentRef} className="itemList" style={{ transform: `translateX(${translateX}px)` }}>
-            {sliderItems}
+        <div className="c-slider">
+          <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`}>
+            <div ref={contentRef} className="itemList" style={{ transform: `translateX(${translateX}px)` }}>
+              {sliderItems}
+            </div>
           </div>
+          {isDesktop && !isPad && (
+            <>
+              {translateX !== 0 ? (
+                <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
+                  <img src={rightArrow} />
+                </a>
+              ) : null}
+              {Math.abs(translateX) < contentFullWidth ? (
+                <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
+                  <img src={rightArrow} />
+                </a>
+              ) : null}
+            </>
+          )}
         </div>
-        {isDesktop && !isPad && (
-          <>
-            {translateX !== 0 ? (
-              <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
-                <img src={rightArrow} />
-              </a>
-            ) : null}
-            {Math.abs(translateX) < contentFullWidth ? (
-              <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
-                <img src={rightArrow} />
-              </a>
-            ) : null}
-          </>
-        )}
       </div>
-    </div>
   );
 };
 
