@@ -3,6 +3,7 @@ import { formatApiTime } from '../../layouts/_helper_functions/api/formatTime';
 import { getMediaContent } from './_helper_functions/getMediaContent';
 import { formatNavigaContent } from './_helper_functions/formatNavigaContent';
 import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
+import { getFirstSentenceFromStory } from './_helper_functions/getFirstSentenceFromStory';
 
 @Consumer
 class Api {
@@ -60,7 +61,8 @@ class Api {
 
           const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
           const author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
-          const formattedDescription = description && description.basic ? `<![CDATA[${description.basic}]]>` : '';
+          const formattedDescription = description
+          && description.basic ? `<![CDATA[${description.basic}]]>` : getFirstSentenceFromStory(contentElements);
 
           const formattedDate = formatApiTime(firstPubDate, displayDate);
 
