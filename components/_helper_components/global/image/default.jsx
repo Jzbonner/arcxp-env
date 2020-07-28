@@ -61,7 +61,13 @@ const Image = ({
   });
 
   useEffect(() => {
-    window.PostRelease.Start();
+    const dateInMilliseconds = new Date().getTime();
+    if (!window.lastNativoCall || dateInMilliseconds - window.lastNativoCall > 1000) {
+      window.lastNativoCall = dateInMilliseconds;
+      if (window.PostRelease) {
+        window.PostRelease.Start();
+      }
+    }
   });
 
   const screenSize = checkWindowSize();
