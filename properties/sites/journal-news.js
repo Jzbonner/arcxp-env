@@ -7,7 +7,7 @@ export default {
   cdnOrg: 'coxohio',
   cdnSite: 'journal-news',
   siteDomainURL: 'https://www.journal-news.com',
-  websiteURL: 'https://www.journal-news.com/',
+  websiteURL: 'https://www.journal-news.com',
   websiteLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/DK42MHKQZRA7PFSGW7YUX4A4DQ.png',
   googleLogo: 'https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/DK42MHKQZRA7PFSGW7YUX4A4DQ.png',
   orgName: 'Journal News',

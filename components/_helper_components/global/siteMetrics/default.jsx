@@ -40,7 +40,8 @@ const SiteMetrics = ({ isAmp }) => {
         ampAuthors.push(`{ "_id": "${authorID}", "name": "${authorName}", "type": "${type}"}`);
         ampAuthorNames.push(`"${authorName.toLowerCase()}"`);
       }
-      authors.push(authorName.toLowerCase());
+      // eslint-disable-next-line no-useless-escape
+      authors.push(authorName.toLowerCase().replace(/'/g, "\'"));
     });
   }
 
