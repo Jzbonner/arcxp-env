@@ -27,7 +27,6 @@ const WrapOutputType = (props) => {
     MetaTags,
     layout,
     Resource,
-    Styles,
   } = props;
 
   const fusionContext = useFusionContext();
@@ -60,7 +59,7 @@ const WrapOutputType = (props) => {
   /* eslint-disable-next-line max-len */
   fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
 
-  const cssData = <Resource path={'resources/dist/ajc/css/style.css'}>
+  const cssData = <Resource path={'resources/dist/ajc/css/style.css'} encoding='utf8'>
   {({ data }) => {
     if (!data) return null;
     const css = data.replace(/url\(([^\s<>{}|\\^~)'"`]+)\)/g, (_, uri) => {
@@ -69,7 +68,8 @@ const WrapOutputType = (props) => {
       const parsedUrl = `${fullPathDomain}${trimmedUri}`;
       return `url(${deployment(parsedUrl)})`;
     });
-    return css;
+    return <style dangerouslySetInnerHTML={{ __html: css }}></style>;
+    // css;
   }}
   </Resource>;
 
@@ -98,9 +98,10 @@ const WrapOutputType = (props) => {
         <Libs />
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} />}
         {!isHyperlocalContent && <TaboolaHeader/>}
-        <Styles>
+        {/* <Styles>
             {({ templateStyles }) => <style>{templateStyles}{cssData}</style> }
-        </Styles>
+        </Styles> */}
+        {cssData}
         <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />

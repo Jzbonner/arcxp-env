@@ -5,7 +5,7 @@ import getProperties from 'fusion:properties';
 import copyrightFilter from '../../../../../content/filters/copyright';
 import facebookLogo from '../../../../../resources/images/facebook-logo.png';
 import twitterLogo from '../../../../../resources/images/twitter-logo.png';
-import './default.scss';
+import '../../../../../src/styles/container/_c-headerNav.scss';
 
 const NavFooter = () => {
   const fusionContext = useFusionContext();

@@ -1,5 +1,5 @@
-@import "../../../../src/styles/base/_mixins.scss";
-@import "../../../../src//styles/base/breakpoints";
+@import "../base/mixins";
+@import "../base/breakpoints";
 
 .c-headerNav {
   width: 90%;
@@ -665,17 +665,29 @@
       display: none;
     }
   }
+  
+  .nav-copyright-links {
+    flex-wrap: wrap;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    
+    a {
+      display: flex;
+      padding: 0 5px;
 
+      &:not(:last-child) {
+  
+        &:after {
+          content: "|";
+          display: block;
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+  
   .nav-copyright {
     margin-bottom: 20px;
-  }
-
-  .nav-copyright-links {
-    margin-bottom: 10px;
-
-    a {
-      padding: 0 5px;
-    }
   }
 
   .nav-mobile-login {
@@ -1049,6 +1061,243 @@
 
   &.isSticky {
     padding-bottom: .313em;
+  }
+}
+
+// Sticky Nav styling
+
+.stickyNav {
+  height: 100%;
+  border: none;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: calc(100% - #{2 * $min-margin});
+  display: none;
+  align-items: center;
+
+  @include breakpoint(tablet) {
+    width: calc(100% - 85px);
+  }
+
+  &.is-visible {
+    display: flex;
+  }
+
+  &.not-visible {
+    display: none;
+  }
+}
+
+.sticky-logo {
+  display: block;
+  margin-top: 0;
+}
+
+.sticky-logo-homepage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 7px;
+
+  @include breakpoint(desktop-sm) {
+    display: none;
+  }
+
+  img {
+    width: 75px;
+
+    &.dayton {
+      width: 210px;
+    }
+
+    &.dayton-daily-news {
+      width: 210px;
+    }
+
+    &.journal-news {
+      width: 100%;
+      max-width: 151px;
+    }
+
+    &.springfield-news-sun {
+      width: 240px;
+    }
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.c-stickyLogin {
+  justify-content: flex-end;
+  align-items: center;
+
+  @include breakpoint(desktop-sm) {
+    margin-bottom: 10px;
+  }
+
+  .nav-items {
+    padding-top: 0;
+  }
+
+  .nav-login {
+    padding-bottom: 0;
+  }
+
+  .stickyNav-social {
+    margin-bottom: 10px;
+  }
+}
+
+.stickyNav-social {
+  display: flex;
+
+  &.hidden {
+    display: none;
+
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+}
+
+.stickyNav-homepage {
+  display: none;
+  width: 100%;
+
+  @include breakpoint(desktop-sm) {
+    display: flex;
+    height: 45px;
+
+    .nav-items {
+      border-bottom: solid 1px #cdcdcd;
+    }
+  }
+
+  &.hidden {
+    display: none;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+
+    @include breakpoint(desktop-sm) {
+      color: #2e81b7;
+    }
+  }
+}
+
+.c-stickyNav-list {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: min-content;
+  z-index: 11;
+  margin-top: 5px;
+
+  @include breakpoint(desktop-sm) {
+    margin-left: 0;
+    margin-top: 0;
+    justify-content: left;
+  }
+
+  .stickyNav-item {
+    list-style: none;
+    margin: 0 6px;
+
+    @include breakpoint(desktop-sm) {
+      margin-right: 15px;
+    }
+
+    img {
+
+      &.ajc {
+        width: 75px;
+        height: 56px;
+      }
+
+      &.dayton {
+        width: 156px;
+        height: 35px;
+      }
+
+      &.dayton-daily-news {
+        width: 210px;
+        height: 30px;
+      }
+
+      &.journal-news {
+        height: 30px;
+        width: 151px;
+      }
+      
+      &.springfield-news-sun {
+        width: 200px;
+        height: 30px;
+      }
+    }
+
+    a {
+      margin: 0;
+      position: relative;
+      box-shadow: none;
+    }
+
+    [class*="fb-comments-count"] {
+      @include text-styles(.6rem, 1, "Gordita-Bold");
+
+      position: absolute;
+      top: 12px;
+      font-weight: 800;
+      color: #4481eb;
+    }
+  }
+
+  &.dropdown-stickyNav {
+    @media (max-width: 1023px) {
+      flex-direction: column;
+      position: absolute;
+      right: -50px;
+      top: -10px;
+      overflow: hidden;
+      height: 45px;
+
+      .stickyNav-item {
+        padding-bottom: .313em;
+      }
+
+      .stickyNav-item:first-child {
+        padding-top: .313em;
+      }
+
+      &.is-open {
+        height: auto;
+        border-radius: 6px;
+        box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+        background: #fff;
+
+        .arrow-icon {
+          transform: rotate(180deg);
+        }
+      }
+
+      .arrow-icon {
+        display: block;
+        padding-bottom: .313em;
+      }
+    }
+  }
+
+  .nav-menu-toggle {
+    position: relative;
+    margin-right: 5px;
+    // margin-bottom: .313em;
   }
 }
 

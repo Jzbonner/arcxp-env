@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../default.scss';
+import '../../../../../src/styles/container/_c-headerNav.scss';
 
 const Logo = ({
   source, rootDirectory, topRef, siteName,

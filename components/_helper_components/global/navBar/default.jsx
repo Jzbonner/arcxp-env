@@ -12,7 +12,7 @@ import StickyNav from '../../article/stickyNav/default';
 import AmpNavBar from './amp';
 import '../../../../src/styles/base/_utility.scss';
 import '../../../../src/styles/container/_article-basic.scss';
-import './default.scss';
+import '../../../../src/styles/container/_c-headerNav.scss';
 
 const NavBar = ({
   articleURL, headlines, comments, type, subtype, ampPage = false,

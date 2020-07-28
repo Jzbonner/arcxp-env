@@ -3,7 +3,7 @@ import { useContent } from 'fusion:content';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import footerFilter from '../../../../content/filters/bottom-nav';
-import './default.scss';
+import '../../../../src/styles/container/_c-footer.scss';
 import menuArrow from '../../../../resources/images/menu-arrow.svg';
 import facebookIcon from '../../../../resources/images/facebook-icon.svg';
 import twitterIcon from '../../../../resources/images/twitter-icon.svg';

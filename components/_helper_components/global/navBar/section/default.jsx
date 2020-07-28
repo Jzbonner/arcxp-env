@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import '../default.scss';
+import '../../../../../src/styles/container/_c-headerNav.scss';
 import '../../../../../src/styles/base/_utility.scss';
 
 const Section = ({
