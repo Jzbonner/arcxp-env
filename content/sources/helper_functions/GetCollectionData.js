@@ -34,8 +34,6 @@ export default (arcSite, id, size = 20) => {
         id: i,
       })
       .then(({ data, config }) => {
-        console.log('DATA1234 ', data);
-        console.log('LENGTH ', data.content_elements.length);
         const filterData = data.content_elements.filter(story => story.publish_date);
         contentElements.push({ id: config.id, data: filterData });
       })
