@@ -60,7 +60,6 @@ const SiteMetrics = ({ isAmp }) => {
   const {
     url,
     topSection,
-    secondarySection,
     topSectionName,
     pageContentType,
     typeOfPage,
@@ -130,7 +129,7 @@ const SiteMetrics = ({ isAmp }) => {
             'pageURL': '${siteDomain}${url}',
             'pageSiteSection': '${topSection}',
             'pageMainSection': '${topSection}',
-            'pageCategory': '${secondarySection}',
+            'pageCategory': '${nonPrimarySections}',
             'pageContentType': '${typeOfPage || pageContentType}',
             'pageTitle': '${seoTitle ? seoTitle.replace(/'/g, '"') : pageTitle.replace(/'/g, '"')}'
           },
