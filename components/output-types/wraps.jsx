@@ -69,7 +69,6 @@ const WrapOutputType = (props) => {
       return `url(${deployment(parsedUrl)})`;
     });
     return <style dangerouslySetInnerHTML={{ __html: css }}></style>;
-    // css;
   }}
   </Resource>;
 
@@ -98,9 +97,6 @@ const WrapOutputType = (props) => {
         <Libs />
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} />}
         {!isHyperlocalContent && <TaboolaHeader/>}
-        {/* <Styles>
-            {({ templateStyles }) => <style>{templateStyles}{cssData}</style> }
-        </Styles> */}
         {cssData}
         <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
