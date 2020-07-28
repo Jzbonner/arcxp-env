@@ -2,6 +2,7 @@ import Consumer from 'fusion:consumer';
 import { formatApiTime } from '../../layouts/_helper_functions/api/formatTime';
 import { getMediaContent } from './_helper_functions/getMediaContent';
 import { formatNavigaContent } from './_helper_functions/formatNavigaContent';
+import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
 
 @Consumer
 class Api {
@@ -15,11 +16,15 @@ class Api {
       globalContentConfig,
       siteProperties,
       arcSite: siteID,
+      requestUri,
     } = this.props || {};
     const { websiteURL } = siteProperties || {};
     const { query } = globalContentConfig || {};
     const { id: collectionId, from, size } = query || {};
     const feedStart = from - 1;
+    const queryParams = getQueryParams(requestUri);
+    const queryTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'type');
+    const newsletterFeed = queryTypePresent && queryParams.type === 'newsletter';
     let maxItems = feedStart + size;
     if (maxItems > globalContent.length) {
       maxItems = globalContent.length;
@@ -62,7 +67,7 @@ class Api {
           if (type === 'story') {
             const formatContentElements = formatNavigaContent(siteID, contentElements);
 
-            const mediaArray = getMediaContent(type, siteID, contentElements, promoItems);
+            const mediaArray = getMediaContent(type, siteID, contentElements, promoItems, newsletterFeed);
 
             const xmlObject = {
               item: [
