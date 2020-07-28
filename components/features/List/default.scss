@@ -79,9 +79,9 @@
       border: none;
       margin-bottom: 0;
 
-      @include breakpoint(desktop-sm) {
-        margin-right: 0;
-      }
+      // @include breakpoint(desktop-sm) {
+      //   margin-right: 0;
+      // }
     }
   }
 
