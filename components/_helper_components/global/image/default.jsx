@@ -60,6 +60,10 @@ const Image = ({
     };
   });
 
+  useEffect(() => {
+    window.PostRelease.Start();
+  });
+
   const screenSize = checkWindowSize();
 
   let mainCredit;
