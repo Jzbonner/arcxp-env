@@ -24,7 +24,6 @@ const Image = ({
 
   const [imageSrc, setImageSrc] = useState('');
   const [placeholderWidth, setPlaceholderWidth] = useState('100%');
-
   const imageEl = useRef(null);
   const placeholderEl = useRef(null);
 
@@ -32,6 +31,7 @@ const Image = ({
     imageEl.current.style.display = 'block';
     placeholderEl.current.style.display = 'none';
   };
+
 
   const lazyLoadImage = () => {
     const imagePosition = placeholderEl.current.getBoundingClientRect().top;
@@ -98,34 +98,34 @@ const Image = ({
         <>
           {!ampPage ? (
             <>
-              <img src={imageSrc}
-                style={{ display: 'none' }}
-                alt={getAltText(altText, caption)}
-                className={teaseContentType ? 'tease-image' : ''}
-                ref={imageEl}
-                onLoad={setLoaded} />
-              <img src={placeholder} ref={placeholderEl}
-                style={{ width: placeholderWidth }} />
+            <img src={imageSrc}
+              style={{ display: 'none' }}
+              alt={getAltText(altText, caption)}
+              className={teaseContentType ? 'tease-image' : ''}
+              ref={imageEl}
+              onLoad={() => setLoaded(true)}/>
+            <img src={placeholder} ref={placeholderEl}
+              style={{ width: placeholderWidth }}/>
             </>
           ) : (
+            <amp-img
+              src={imageResizer(url, arcSite, width, height)}
+              alt={getAltText(altText, caption)}
+              width={width}
+              height={height !== 0 ? height : (width / originalWidth) * originalHeight}
+              layout="responsive"
+              class={teaseContentType ? 'tease-image' : ''}>
               <amp-img
-                src={imageResizer(url, arcSite, width, height)}
+                src={placeholder}
                 alt={getAltText(altText, caption)}
+                fallback=""
                 width={width}
                 height={height !== 0 ? height : (width / originalWidth) * originalHeight}
                 layout="responsive"
-                class={teaseContentType ? 'tease-image' : ''}>
-                <amp-img
-                  src={placeholder}
-                  alt={getAltText(altText, caption)}
-                  fallback=""
-                  width={width}
-                  height={height !== 0 ? height : (width / originalWidth) * originalHeight}
-                  layout="responsive"
-                  class={teaseContentType ? 'tease-image' : ''}
+                class={teaseContentType ? 'tease-image' : ''}
                 >
-                </amp-img>
               </amp-img>
+            </amp-img>
           )}
           {teaseContentType && getTeaseIcon(teaseContentType)}
         </>
