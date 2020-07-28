@@ -102,7 +102,7 @@ const Image = ({
               alt={getAltText(altText, caption)}
               className={teaseContentType ? 'tease-image' : ''}
               ref={imageEl}
-              onLoad={() => setLoaded(true)}/>
+              onLoad={setLoaded}/>
             <img src={placeholder} ref={placeholderEl}
               style={{ width: placeholderWidth }}/>
             </>
