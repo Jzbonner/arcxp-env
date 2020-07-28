@@ -32,7 +32,6 @@ const Image = ({
     placeholderEl.current.style.display = 'none';
   };
 
-
   const lazyLoadImage = () => {
     const imagePosition = placeholderEl.current.getBoundingClientRect().top;
     const windowHeight = window.innerHeight;
