@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useAppContext } from 'fusion:context';
 import Image from '../../global/image/default';
 import SectionLabel from '../../global/sectionLabel/default';
 import getQueryParams from '../../../layouts/_helper_functions/getQueryParams';
@@ -19,15 +19,14 @@ const ListItem = ({
   last_updated_date: lastUpdatedDate,
   display_date: displayDate,
   headlines = [],
-  websites,
+  canonical_url: canonicalUrl,
+  website_url: websiteUrl,
   listPage,
   type: contentType,
   firstInlineImage,
 }) => {
   const appContext = useAppContext();
-  const { contextPath, requestUri } = appContext;
-  const fusionContext = useFusionContext();
-  const { arcSite = 'ajc' } = fusionContext;
+  const { requestUri } = appContext;
   const { tags = [], sections } = taxonomy || {};
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(
@@ -46,7 +45,7 @@ const ListItem = ({
 
   const [isMissingPromo, setIsMissingPromo] = useState('');
 
-  const relativeURL = (websites && websites[arcSite] && websites[arcSite].website_url) || '/';
+  const relativeURL = websiteUrl || canonicalUrl || '/';
   const isListPage = listPage ? 'listPage' : '';
 
   function getPromoItem(sponsor) {
@@ -54,7 +53,7 @@ const ListItem = ({
     if (contentType === 'video' || contentType === 'gallery') {
       if (promoItems && promoItems.basic) {
         return (
-          <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+          <a href={relativeURL} className="homeList-image">
             <Image
               src={promoItems.basic}
               width={500}
@@ -73,7 +72,7 @@ const ListItem = ({
     if (promoItems) {
       if (promoItems.basic && promoItems.basic.type === 'image') {
         return (
-          <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+          <a href={relativeURL} className="homeList-image">
             <Image
               src={promoItems.basic || promoItems.lead_art.promo_items.basic}
               width={500}
@@ -96,7 +95,7 @@ const ListItem = ({
           && promoItems.basic.promo_items.basic
         ) {
           return (
-            <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+            <a href={relativeURL} className="homeList-image">
               <Image
                 src={promoItems.basic.promo_items.basic}
                 width={500}
@@ -114,7 +113,7 @@ const ListItem = ({
 
     if (firstInlineImage) {
       return (
-        <a href={`${contextPath}${relativeURL}`} className="homeList-image">
+        <a href={relativeURL} className="homeList-image">
           <Image
             src={firstInlineImage}
             width={500}
@@ -163,7 +162,7 @@ const ListItem = ({
       <div className="homeList-text">
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
         <div className={`headline ${isListPage}`}>
-          <a href={`${contextPath}${relativeURL}`}>
+          <a href={relativeURL}>
             {truncateHeadline(headlines.basic)}
           </a>
         </div>
@@ -180,10 +179,11 @@ ListItem.propTypes = {
   first_publish_date: PropTypes.string,
   last_updated_date: PropTypes.string,
   headlines: PropTypes.object,
-  websites: PropTypes.object,
   listPage: PropTypes.bool,
   type: PropTypes.string,
   firstInlineImage: PropTypes.object,
+  canonical_url: PropTypes.string,
+  website_url: PropTypes.string,
 };
 
 export default ListItem;

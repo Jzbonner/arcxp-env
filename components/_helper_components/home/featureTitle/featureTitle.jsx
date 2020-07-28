@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useAppContext } from 'fusion:context';
 import './default.scss';
 
 const FeatureTitle = ({ title, moreURL }) => {
-  const appContext = useAppContext();
-  const { contextPath } = appContext;
-
   const getLink = () => {
     if (moreURL.includes('https://www')) {
       return moreURL;
     }
-    return `${contextPath}${moreURL}`;
+    return moreURL;
   };
 
   if (title) {

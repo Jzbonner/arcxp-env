@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useFusionContext } from 'fusion:context';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import imageResizer from '../../layouts/_helper_functions/Thumbor';
 import getTeaseIcon from '../../_helper_components/global/image/_helper_functions/getTeaseIcon';
@@ -17,9 +17,6 @@ const Hero = (customFields = {}) => {
 
   let { from: startIndex } = contentConfigValues || {};
   startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
-
-  const appContext = useAppContext();
-  const { contextPath } = appContext;
 
   const displayClass = 'all';
   const displayClassesRequiringImg = ['all'];
@@ -50,7 +47,7 @@ const Hero = (customFields = {}) => {
     if (data && heroBackground) {
       return (
         <div className="c-heroFeature">
-          <a href={`${contextPath}${heroURL}`} className="hero-url" />
+          <a href={heroURL} className="hero-url" />
           <div className="hero-img"
           style={{ backgroundImage: `url(${imageResizer(heroBackground, arcSite)})`, backgroundRepeat: 'no-repeat' }}>
             <div className="hero-headline">

@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useAppContext } from 'fusion:context';
 import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import './default.scss';
 
 const Byline = ({ by = [], sections }) => {
   let byline;
-
-  const appContext = useAppContext();
-  const { contextPath } = appContext;
 
   const handleOrganization = (authors = []) => {
     const authorsAndOrgs = authors.map((author) => {
@@ -45,7 +41,7 @@ const Byline = ({ by = [], sections }) => {
 
       if (!name) return null;
 
-      const authorUrl = `${contextPath}/staff/${id}/`;
+      const authorUrl = `/staff/${id}/`;
 
       return <span key={name}>
         {i === 0 && !name.includes('By ') && 'By '}

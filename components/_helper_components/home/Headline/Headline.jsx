@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useAppContext } from 'fusion:context';
 import Image from '../../global/image/default';
 import SectionLabel from '../../global/sectionLabel/default';
 import TimeStamp from '../../article/timestamp/default';
@@ -19,15 +19,14 @@ const Headline = ({
   publish_date: publishDate,
   display_date: displayDate,
   headlines,
-  websites,
+  canonical_url: canonicalUrl,
+  website_url: websiteUrl,
   type,
   firstInlineImage,
   isTease,
 }) => {
   const appContext = useAppContext();
-  const { contextPath, requestUri } = appContext;
-  const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
+  const { requestUri } = appContext;
   const { tags = [], sections } = taxonomy || {};
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
@@ -42,7 +41,7 @@ const Headline = ({
   const isCommunityContributor = checkTags(tags, 'community contributor');
   const sponsorName = getSponsorData(sections);
 
-  const relativeURL = (websites && websites[arcSite] && websites[arcSite].website_url) || '/';
+  const relativeURL = websiteUrl || canonicalUrl || '/';
 
   function getPromoItem(contentType) {
     if (promoItems) {
@@ -91,13 +90,13 @@ const Headline = ({
 
   return (
     <div className={`home-headline ${sponsorName ? 'sponsored' : ''}`}>
-      <a href={`${contextPath}${relativeURL}`} className='homeList-image'>
+      <a href={relativeURL} className='homeList-image'>
         {getPromoItem(type)}
         {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
         </a>
       <div className="headline-box">
        {getLabelContent(sponsorName)}
-        <a href={`${contextPath}${relativeURL}`} className="headline">
+        <a href={relativeURL} className="headline">
           {headlines && truncateHeadline(headlines.basic)}
         </a>
       </div>
@@ -112,10 +111,11 @@ Headline.propTypes = {
   publish_date: PropTypes.string,
   display_date: PropTypes.string,
   headlines: PropTypes.object,
-  websites: PropTypes.object,
   type: PropTypes.string,
   firstInlineImage: PropTypes.object,
   isTease: PropTypes.bool,
+  canonical_url: PropTypes.string,
+  website_url: PropTypes.string,
 };
 
 export default Headline;
