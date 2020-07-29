@@ -61,11 +61,28 @@ const Image = ({
   });
 
   useEffect(() => {
-    const dateInMilliseconds = new Date().getTime();
-    if (!window.lastNativoCall || dateInMilliseconds - window.lastNativoCall > 1000) {
-      window.lastNativoCall = dateInMilliseconds;
-      if (window.PostRelease) {
-        window.PostRelease.Start();
+    if (teaseContentType) {
+      const currentTimeInMilliseconds = new Date().getTime();
+
+      if (!window.lastNativoCall) {
+        window.lastNativoCall = {
+          time: currentTimeInMilliseconds - 1000,
+          timeOutSet: false,
+        };
+      }
+
+      // calls nativo script 1s after last call or
+      // immediately if it has been more than 1s.
+      const { lastNativoCall } = window;
+      if (!lastNativoCall.timeOutSet) {
+        lastNativoCall.timeOutSet = true;
+        setTimeout(() => {
+          lastNativoCall.timeOutSet = false;
+          lastNativoCall.time = new Date().getTime();
+          if (window.PostRelease) {
+            window.PostRelease.Start();
+          }
+        }, 1000 - (currentTimeInMilliseconds - lastNativoCall.time));
       }
     }
   });
@@ -107,34 +124,34 @@ const Image = ({
         <>
           {!ampPage ? (
             <>
-            <img src={imageSrc}
-              style={{ display: 'none' }}
-              alt={getAltText(altText, caption)}
-              className={teaseContentType ? 'tease-image' : ''}
-              ref={imageEl}
-              onLoad={setLoaded}/>
-            <img src={placeholder} ref={placeholderEl}
-              style={{ width: placeholderWidth }}/>
+              <img src={imageSrc}
+                style={{ display: 'none' }}
+                alt={getAltText(altText, caption)}
+                className={teaseContentType ? 'tease-image' : ''}
+                ref={imageEl}
+                onLoad={setLoaded} />
+              <img src={placeholder} ref={placeholderEl}
+                style={{ width: placeholderWidth }} />
             </>
           ) : (
-            <amp-img
-              src={imageResizer(url, arcSite, width, height)}
-              alt={getAltText(altText, caption)}
-              width={width}
-              height={height !== 0 ? height : (width / originalWidth) * originalHeight}
-              layout="responsive"
-              class={teaseContentType ? 'tease-image' : ''}>
               <amp-img
-                src={placeholder}
+                src={imageResizer(url, arcSite, width, height)}
                 alt={getAltText(altText, caption)}
-                fallback=""
                 width={width}
                 height={height !== 0 ? height : (width / originalWidth) * originalHeight}
                 layout="responsive"
-                class={teaseContentType ? 'tease-image' : ''}
+                class={teaseContentType ? 'tease-image' : ''}>
+                <amp-img
+                  src={placeholder}
+                  alt={getAltText(altText, caption)}
+                  fallback=""
+                  width={width}
+                  height={height !== 0 ? height : (width / originalWidth) * originalHeight}
+                  layout="responsive"
+                  class={teaseContentType ? 'tease-image' : ''}
                 >
+                </amp-img>
               </amp-img>
-            </amp-img>
           )}
           {teaseContentType && getTeaseIcon(teaseContentType)}
         </>
