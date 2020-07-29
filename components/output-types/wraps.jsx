@@ -11,6 +11,7 @@ import TaboolaHeader from '../_helper_components/global/taboola/taboolaHeader.js
 import NativoScripts from '../_helper_components/article/nativo/nativoScripts';
 import checkTags from '../layouts/_helper_functions/checkTags';
 import checkSponsor from '../layouts/_helper_functions/checkSponsor';
+import handleSiteName from '../layouts/_helper_functions/handleSiteName';
 import AmpRelLink from '../_helper_components/amp/AmpRelLink';
 import GoogleStructuredData from '../_helper_components/article/googleData/default';
 import fetchEnv from '../_helper_components/global/utils/environment';
@@ -55,9 +56,8 @@ const WrapOutputType = (props) => {
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
   const { sponsorSectionID: isSponsoredContent } = checkSponsor(sections);
   const includeGtm = metrics && metrics.gtmContainerKey;
-  let fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${cdnSite || currentSite}.com` : '';
+  const fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${handleSiteName(cdnSite) || handleSiteName(currentSite)}.com` : '';
   /* eslint-disable-next-line max-len */
-  fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
 
   const cssData = <Resource path={'resources/dist/ajc/css/style.css'} encoding='utf8'>
   {({ data }) => {
