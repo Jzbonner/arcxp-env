@@ -28,12 +28,7 @@ const SiteMeta = () => {
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
 
-  let updatedURL = url;
-  if (updatedURL === '/homepage/') {
-    updatedURL = `https://${handleSiteName(site)}.com`;
-  } else {
-    updatedURL = `https://${handleSiteName(site)}.com${updatedURL}`;
-  }
+  const updatedURL = `https://www.${handleSiteName(site)}.com${url === '/homepage' || url === '/homepage/' ? '' : url}`;
 
   let pageTitle = seoTitle;
   if (!seoTitle) pageTitle = title;
