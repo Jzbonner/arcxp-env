@@ -142,7 +142,7 @@ const getContentMeta = () => {
   const firstPubDateObj = new Date(pubDate);
   let firstPublishDateConverted = '';
   if (pubDate) {
-    const month = `${firstPubDateObj.getMonth()}`;
+    const month = `${firstPubDateObj.getMonth() + 1}`; // increment by one because getMonth is 0-indexed
     const dayOfTheMonth = `${formatDate(firstPubDateObj)}`;
     const year = `${firstPubDateObj.getFullYear()}`;
     const time = `${formatTime(firstPubDateObj, true)}` || '';
