@@ -8,7 +8,12 @@ import { adSlots, defaultAdSlot } from './children/adtypes';
 import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
 import currentConditions from '../../_helper_components/global/utils/weather/currentConditions';
 
-const ArcAd = ({ customFields, adSuffix = '', staticSlot }) => {
+const ArcAd = ({
+  customFields,
+  adSuffix = '',
+  staticSlot,
+  galleryTopics = [],
+}) => {
   const { temp, text: sky, precipitation: weather } = currentConditions() || {};
   const appContext = useAppContext();
   const fusionContext = useFusionContext();
@@ -19,6 +24,7 @@ const ArcAd = ({ customFields, adSuffix = '', staticSlot }) => {
   const slot = customFieldsSlot || staticSlot;
   // let randomIdMPG01 = '';
   const currentEnv = fetchEnv();
+  let finalTopics = [];
 
   // If there is no DFP ID and we are in the Admin,
   if (!dfpid || (!isAdmin && typeof window === 'undefined')) return null;
@@ -63,6 +69,12 @@ const ArcAd = ({ customFields, adSuffix = '', staticSlot }) => {
     adSlotNameForArcAds = adSlotNameForArcAds.substring(0, adSlotNameForArcAds.length - 1);
   }
 
+  if (galleryTopics && galleryTopics.length && galleryTopics.length > 0) {
+    finalTopics = [...topics, ...galleryTopics];
+  } else {
+    finalTopics = topics;
+  }
+
   // rewrite content types for ads reporting purposes (see APD-520)
   let objType;
   switch (pageContentType) {
@@ -91,7 +103,7 @@ const ArcAd = ({ customFields, adSuffix = '', staticSlot }) => {
     mediaType: 'Arc',
     sitepath: site ? site.toLowerCase() : siteName.toLowerCase(),
     ad_slot: slotName,
-    topics,
+    topics: finalTopics,
     temp,
     weather,
     sky,
@@ -159,6 +171,7 @@ ArcAd.propTypes = {
     }),
   }),
   staticSlot: PropTypes.string,
+  galleryTopics: PropTypes.array,
 };
 
 ArcAd.defaultProps = {

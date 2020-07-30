@@ -6,13 +6,14 @@ import '../../../../src/styles/base/_utility.scss';
 const GlobalAdSlots = ({
   ampPage,
   pbPage = false,
+  galleryTopics = [],
 }) => {
   if (ampPage) {
     return null;
   }
 
   return <div className="b-hidden">
-    <ArcAd staticSlot={'PX01'} />
+    <ArcAd staticSlot={'PX01'} galleryTopics={galleryTopics} />
     <ArcAd staticSlot={'HS01'} />
     {pbPage && <>
         <ArcAd staticSlot={'NS01'} />
@@ -26,6 +27,7 @@ GlobalAdSlots.propTypes = {
   uuid: PropTypes.string,
   taxonomy: PropTypes.object,
   pbPage: PropTypes.bool,
+  galleryTopics: PropTypes.array,
 };
 
 export default GlobalAdSlots;

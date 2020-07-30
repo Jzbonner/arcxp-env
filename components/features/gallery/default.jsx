@@ -6,7 +6,7 @@ import {
   DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery, ImageModal,
 } from '../../_helper_components/global/gallery/index';
 import {
-  debounce, createBaseGallery, handleImageFocus, reorganizeElements, handlePropContentElements,
+  debounce, createBaseGallery, handleImageFocus, reorganizeElements, handlePropContentElements, getGalleryImageTopics,
 } from './_helper_functions/index';
 import ArcAd from '../ads/default';
 import PGO1Element from '../../_helper_components/global/ads/pg01/default';
@@ -16,10 +16,13 @@ import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
 import './default.scss';
 
-
-const PG01 = () => <ArcAd staticSlot={'PG01'} key={'PG01'} />;
-const PG02 = () => <ArcAd staticSlot={'PG02'} key={'PG02'} />;
-const MPG01 = adCount => <ArcAd staticSlot={'MPG01'} adSuffix={`_${adCount}`} key={'MPG01'} />;
+const PG01 = galleryTopics => <ArcAd staticSlot={'PG01'} key={'PG01'} galleryTopics={galleryTopics} />;
+const PG02 = galleryTopics => <ArcAd staticSlot={'PG02'} key={'PG02'} galleryTopics={galleryTopics} />;
+const MPG01 = (adCount, galleryTopics) => <ArcAd
+  staticSlot={'MPG01'}
+  adSuffix={`_${adCount}`}
+  key={'MPG01'}
+  galleryTopics={galleryTopics} />;
 
 const Gallery = (props) => {
   const {
@@ -49,6 +52,7 @@ const Gallery = (props) => {
   const [galleryVisible, setVisibility] = useState(false);
   const [modalVisible, setModalVisibility] = useState(false);
   const [currentImageSrc, setCurrectImageSrc] = useState('');
+  const [galleryTopics, setGalleryTopics] = useState([]);
 
   /* Ads */
   const [clickCount, setClickCount] = useState(0);
@@ -573,7 +577,6 @@ const Gallery = (props) => {
     }
 
     const baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
-
     const captionAndGalleryData = createBaseGallery(baseGalleryData, {
       isStickyVisible, isMobile, isCaptionOn, currentIndex, modalVisible,
     }, isMobile, {
@@ -597,6 +600,7 @@ const Gallery = (props) => {
       setMobileAdsIndices([]);
       setCurrentAction('');
     }
+    if (galleryTopics.length === 0) setGalleryTopics(getGalleryImageTopics(baseGalleryData));
   }
 
   if (isStickyVisible || isMobile) {
@@ -623,7 +627,7 @@ const Gallery = (props) => {
       {(isMobile || pageType !== 'story')
         && galHeadline
         ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
-      {pageType !== 'story' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02()}</div> : null}
+      {pageType !== 'story' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
       <div className={`${pageType !== 'story' ? 'c-gallery-homeSection' : ''}`}>
         {!isMobile
           ? <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
