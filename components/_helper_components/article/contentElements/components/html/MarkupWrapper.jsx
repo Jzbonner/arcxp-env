@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Parser } from 'htmlparser2';
-import sanitizeHtml from 'sanitize-html';
 import './styles.scss';
 
 class MarkupWrapper extends PureComponent {
@@ -32,15 +31,6 @@ class MarkupWrapper extends PureComponent {
       if (src) this.scriptSrc = src;
       if (script) this.scriptText = script;
     }
-
-    this.parsedHtml = sanitizeHtml(
-      this.props.html,
-      {
-        allowedTags: false,
-        allowedAttributes: false,
-        exclusiveFilter: frame => frame.tag === 'script',
-      },
-    );
   }
 
   componentDidMount() {
@@ -52,7 +42,6 @@ class MarkupWrapper extends PureComponent {
       window[type] = true;
     }
     const script = document.createElement('script');
-    script.setAttribute('data-script', 'constructed');
     script.async = true;
     if (src) script.src = src;
     if (this.scriptText) script.text = this.scriptText;
@@ -61,7 +50,7 @@ class MarkupWrapper extends PureComponent {
 
   render() {
     if (this.props.render) return this.props.render();
-    return <div dangerouslySetInnerHTML={{ __html: this.parsedHtml }} />;
+    return <div dangerouslySetInnerHTML={{ __html: this.props.html }} />;
   }
 }
 
