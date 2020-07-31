@@ -16,7 +16,7 @@ export default `{
             name
         }
     }
-    desciption {
+    description {
         basic
         meta_title
     }
