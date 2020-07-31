@@ -33,6 +33,7 @@ import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
 import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/default';
+import InterscrollerPlaceholder from '../_helper_components/article/interscroller/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
@@ -102,28 +103,7 @@ const StoryPageLayout = () => {
   let paragraphIndex = 0;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />;
   const insertAtEndOfStory = [];
-  const interscrollerPlaceholder = () => {
-    if (ampPage) {
-      if (isHyperlocalContent) {
-        return (
-          <div className='c-section'>
-            <amp-fx-flying-carpet height="300px" class="ampAd">
-              <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'500'} taxonomy={taxonomy} componentName='ArcAd'
-                multiSizeValidation={'false'} flyingCarpet={true} />
-            </amp-fx-flying-carpet>
-            <div style={{ transform: `translate(0, -${320}px)` }} className='ampAdLabel'></div>
-          </div>
-        );
-      }
-      return (
-        <div className='c-section teads-ad'>
-          <AmpAd adSlot='PX01' uuid={uuid} width={'300'} height={'1'} taxonomy={taxonomy} componentName='ArcAd'
-            multiSizeValidation={'false'} />
-        </div>
-      );
-    }
-    return <div className="story-interscroller__placeholder full-width c-clear-both c-section" key={'interscrollerPlaceholder'}></div>;
-  };
+
   filteredContentElements.forEach((el, i) => {
     if (el && el.type === 'divider' && infoBoxIndex === null) {
       infoBoxIndex = i;
@@ -220,7 +200,13 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
             ampPage={ampPage}
           />
-          {!noAds && maxNumberOfParagraphs === 3 && interscrollerPlaceholder()}
+          {!noAds && maxNumberOfParagraphs === 3
+          && <InterscrollerPlaceholder
+          ampPage={ampPage}
+          isHyperlocalContent={isHyperlocalContent}
+          taxonomy={taxonomy}
+          uuid={uuid}
+          />}
           {!noAds && !isHyperlocalContent && !sponsorSectionID && (
             <Nativo
               elements={filteredContentElements}
@@ -237,7 +223,13 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
             ampPage={ampPage}
           />
-          {!noAds && maxNumberOfParagraphs >= 4 && interscrollerPlaceholder()}
+          {!noAds && maxNumberOfParagraphs === 4
+          && <InterscrollerPlaceholder
+            ampPage={ampPage}
+            isHyperlocalContent={isHyperlocalContent}
+            taxonomy={taxonomy}
+            uuid={uuid}
+          />}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
