@@ -13,19 +13,18 @@ export default (arcSite, id, size = 20) => {
   const promiseArray = [];
   const contentElements = [];
 
-  const buffer = Math.ceil(size * 0.1);
-  const maxFetchSize = 20;
+  const buffer = 3;
+  const fetchSize = 20;
+  const numberOfFetches = fromInt + sizeInt + buffer <= fetchSize ? 1 : Math.ceil((fromInt + sizeInt + buffer) / fetchSize);
 
-  let leftToFetch = fromInt + sizeInt + buffer;
   let fetchStart = 0;
-  let fetchSize = leftToFetch <= maxFetchSize ? leftToFetch : maxFetchSize;
   let i = 1;
 
-  while (leftToFetch > 0) {
+  while (i <= numberOfFetches && i < 10) {
     let requestUri = `${CONTENT_BASE}/content/v4/collections/?website=${arcSite}`;
     requestUri += `&_id=${id}`;
     requestUri += `&from=${fetchStart}`;
-    requestUri += `&size=${fetchSize}`;
+    requestUri += '&size=20';
 
     const promise = axios
       .get(requestUri, {
@@ -43,9 +42,7 @@ export default (arcSite, id, size = 20) => {
 
     promiseArray.push(promise);
 
-    leftToFetch -= fetchSize;
     fetchStart += fetchSize;
-    fetchSize = leftToFetch <= maxFetchSize ? leftToFetch : maxFetchSize;
     i += 1;
   }
 
