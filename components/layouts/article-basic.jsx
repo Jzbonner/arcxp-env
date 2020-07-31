@@ -223,7 +223,7 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
             ampPage={ampPage}
           />
-          {!noAds && maxNumberOfParagraphs === 4
+          {!noAds && maxNumberOfParagraphs >= 4
           && <InterscrollerPlaceholder
             ampPage={ampPage}
             isHyperlocalContent={isHyperlocalContent}
