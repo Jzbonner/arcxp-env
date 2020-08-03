@@ -15,7 +15,7 @@ import '../../../../src/styles/container/_article-basic.scss';
 import '../../../../src/styles/container/_c-headerNav.scss';
 
 const NavBar = ({
-  articleURL, headlines, comments, type, subtype, ampPage = false,
+  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false,
 }) => {
   // amp hijack
   if (ampPage) return <AmpNavBar />;
@@ -181,6 +181,7 @@ NavBar.propTypes = {
   type: PropTypes.string,
   subtype: PropTypes.string,
   ampPage: PropTypes.bool,
+  hasWindowShade: PropTypes.bool,
 };
 
 export default NavBar;
