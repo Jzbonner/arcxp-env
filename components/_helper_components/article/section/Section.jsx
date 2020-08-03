@@ -21,8 +21,17 @@ const Section = ({
   elements.forEach((element) => {
     // filters the paragraphs to only show the ones inside the range specified by startIndex and stopIndex
     if (startIndex <= paragraphCounter && paragraphCounter < stopIndex) {
+      if (stopIndex === elements.length) {
+        newContentElements.push(element);
+      }
+
       if (insertedAds) {
-        const insertIndex = insertedAds.findIndex(el => paragraphCounter === el.insertAfterParagraph);
+        let insertIndex;
+        if (stopIndex === elements.length) {
+          insertIndex = insertedAds.findIndex(el => paragraphCounter + 1 === el.insertAfterParagraph);
+        } else {
+          insertIndex = insertedAds.findIndex(el => paragraphCounter === el.insertAfterParagraph);
+        }
         if (insertIndex > -1) {
           insertedAds[insertIndex].adArray.forEach((el) => {
             newContentElements.push(el());
@@ -40,7 +49,9 @@ const Section = ({
           newContentElements.push(rightRail.ad());
         }
       }
-      newContentElements.push(element);
+      if (stopIndex !== elements.length) {
+        newContentElements.push(element);
+      }
     }
 
     // keeps track of how many paragraphs have been mapped through
