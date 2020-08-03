@@ -124,7 +124,7 @@ const NavBar = ({
   return (
     <header className="c-nav">
         <div className={`c-headerNav
-        ${stickyNavVisibility ? 'stickyActive' : ''}
+        ${stickyNavVisibility || hasWindowShade ? 'stickyActive' : ''}
         ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`}>
           <div className={`b-flexRow b-flexCenter nav-logo
           ${(stickyNavVisibility || hasWindowShade) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
@@ -146,7 +146,7 @@ const NavBar = ({
             setToggle={setToggle}
             smallLogoUrl={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoHamburger}`)}`}
             rootDirectory={rootDirectory}
-            stickyActive={stickyNavVisibility}
+            stickyActive={stickyNavVisibility || hasWindowShade}
             type={type}
             siteName={siteName.toLowerCase()}/>
           <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
@@ -157,7 +157,7 @@ const NavBar = ({
             comments={comments}
             hamburgerToggle={mobileMenuToggled}
             setStickyNavVisibility={setStickyNavVisibility}
-            stickyNavVisibility={stickyNavVisibility}
+            stickyNavVisibility={stickyNavVisibility || hasWindowShade}
             isMobile={isMobile}
             isMobileVisibilityRef={isMobileVisibilityRef}
             logoRef={logoRef}

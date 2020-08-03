@@ -34,6 +34,7 @@ import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/d
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
+import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 
 const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
 const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
