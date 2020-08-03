@@ -74,8 +74,9 @@ const Video = ({
     let videoPlayerVersion;
     let videoContentType;
     let videoTopics;
+
     const fireGtmEvent = (evt) => {
-      const { muted: mutedState, time, type } = evt || {};
+      const { time, type } = evt || {};
       // fire GTM events for various player events
       const dataLayer = window.dataLayer || [];
       /*
@@ -87,26 +88,7 @@ const Video = ({
       */
       // default eventType value: naming convention remains, we simply prepend "video" and capitalize the first letter
       let eventType = `video${type.charAt(0).toUpperCase()}${type.slice(1)}`;
-      let ampEvent = null;
       switch (type) {
-        case 'adStart':
-          ampEvent = 'ad_start';
-          break;
-        case 'adComplete':
-          ampEvent = 'ad_end';
-          break;
-        case 'muted':
-          eventType = null;
-          ampEvent = mutedState ? 'muted' : 'unmuted';
-          break;
-        case 'pause':
-          eventType = null;
-          ampEvent = 'pause';
-          break;
-        case 'play':
-          eventType = null;
-          ampEvent = 'playing';
-          break;
         case 'playback0':
           eventType = 'videoContentStart';
           break;
@@ -124,10 +106,6 @@ const Video = ({
           break;
         case 'powaRender':
           eventType = 'videoPlayerLoad';
-          ampEvent = 'canplay';
-          break;
-        case 'start':
-          ampEvent = 'playing';
           break;
         default:
           eventType = null;
@@ -149,9 +127,6 @@ const Video = ({
           },
         });
       }
-      if (isAmpWebPlayer && typeof ampIntegration !== 'undefined' && ampEvent) {
-        window.ampIntegration.postEvent(ampEvent);
-      }
     };
     const powaRendered = (e) => {
       const id = get(e, 'detail.id');
@@ -159,16 +134,47 @@ const Video = ({
 
       // protect against the player not existing (just in case)
       if (typeof powa !== 'undefined') {
-        // bind to ampIntegration events, to conrol the PoWa player from AMP
-        if (isAmpWebPlayer && typeof ampIntegration !== 'undefined') {
-          window.ampIntegration.method('play', () => powa.play());
-          window.ampIntegration.method('pause', () => powa.pause());
-          window.ampIntegration.method('mute', () => powa.mute(true));
-          window.ampIntegration.method('unmute', () => powa.mute(false));
-          window.ampIntegration.method('showcontrols', () => powa.showControls());
-          window.ampIntegration.method('hidecontrols', () => powa.hideControls());
-          window.ampIntegration.method('fullscreenenter', () => powa.fullscreen(true));
-          window.ampIntegration.method('fullscreenexit', () => powa.fullscreen(false));
+        // bind to ampIntegration events, to control the PoWa player from AMP
+        if (isAmpWebPlayer) {
+          const onAmpIntegrationReady = (ampIntegration) => {
+            // `ampIntegration` is an object containing the tools required to integrate.
+            // This callback specifies how the AMP document and the iframed video document
+            // talk to each other.
+
+            // amp -> player triggers
+            ampIntegration.method('play', () => powa.play());
+            ampIntegration.method('pause', () => powa.pause());
+            ampIntegration.method('mute', () => powa.mute(true));
+            ampIntegration.method('unmute', () => powa.mute(false));
+            ampIntegration.method('showcontrols', () => powa.showControls());
+            ampIntegration.method('hidecontrols', () => powa.hideControls());
+            ampIntegration.method('fullscreenenter', () => powa.fullscreen(true));
+            ampIntegration.method('fullscreenexit', () => powa.fullscreen(false));
+
+            const postToAmp = (ampEvent, evt) => {
+              if (ampEvent === 'muted' && typeof evt !== 'undefined') {
+                const { muted: mutedState } = evt || {};
+                ampIntegration.postEvent(mutedState ? 'muted' : 'unmuted');
+              } else {
+                ampIntegration.postEvent(ampEvent);
+              }
+            };
+
+            // player -> amp triggers
+            powa.on('adComplete', () => postToAmp('ad_end'));
+            powa.on('adError', () => postToAmp('ad_error'));
+            powa.on('adStart', () => postToAmp('ad_start'));
+            powa.on('muted', evt => postToAmp('muted', evt));
+            powa.on('pause', () => postToAmp('pause'));
+            powa.on('play', () => postToAmp('playing'));
+            powa.on('start', () => postToAmp('playing'));
+            // trigger initial postEvent since we're in the `powaRender` event
+            postToAmp('canplay');
+          };
+
+          (window.AmpVideoIframe = window.AmpVideoIframe || []).push(
+            onAmpIntegrationReady,
+          );
         }
 
         // go ahead and define vars for use in subsequent events/metrics
@@ -336,7 +342,7 @@ const Video = ({
     ampVideoIframeDomain = `https://www.${handleSiteName(siteOfRecord)}.com`;
   }
 
-  const renderAmpPlayer = () => <amp-video-iframe width="16" height="9" layout="responsive" src={`${ampVideoIframeDomain}${videoPageUrl}?outputType=ampVideoIframe&autoplayState=${startPlaying}`} poster={thumbnailImage}></amp-video-iframe>;
+  const renderAmpPlayer = () => <amp-video-iframe width="16" height="9" layout="responsive" src={`${ampVideoIframeDomain}${videoPageUrl}?outputType=ampVideoIframe&autoplayState=${startPlaying}`} poster={thumbnailImage} autoplay={!startPlaying ? null : ''}></amp-video-iframe>;
 
   return (
     <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
