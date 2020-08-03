@@ -177,7 +177,7 @@ class Api {
                   link: `${websiteURL}${canonicalUrl}`,
                 },
                 {
-                  description: formattedDescription,
+                  description: formattedDescription || title,
                 },
                 {
                   pubDate: formattedDate,
