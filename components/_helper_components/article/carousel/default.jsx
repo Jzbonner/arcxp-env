@@ -16,8 +16,8 @@ const Carousel = ({ storyId, taxonomy }) => {
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
-  const { logoShort, cdnSite } = getProperties(arcSite) || {};
-  const logoPath = `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logoShort}`)}`;
+  const { logoShort, cdnSite, cdnOrg } = getProperties(arcSite) || {};
+  const logoPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoShort}`)}`;
 
   let finalReferentId;
   if (referentId) {

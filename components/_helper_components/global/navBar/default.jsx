@@ -32,7 +32,7 @@ const NavBar = ({
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    logo, logoHamburger, siteName, cdnSite,
+    logo, logoHamburger, siteName, cdnSite, cdnOrg,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
@@ -134,7 +134,7 @@ const NavBar = ({
             <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
               && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
               <Logo
-                source={`${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logo}`)}`}
+                source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logo}`)}`}
                 rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
               />
             </div>
@@ -144,7 +144,7 @@ const NavBar = ({
             isMobile={isMobile}
             hamburgerToggle={mobileMenuToggled}
             setToggle={setToggle}
-            smallLogoUrl={`${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logoHamburger}`)}`}
+            smallLogoUrl={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoHamburger}`)}`}
             rootDirectory={rootDirectory}
             stickyActive={stickyNavVisibility}
             type={type}

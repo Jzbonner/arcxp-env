@@ -16,14 +16,14 @@ const ImageSimple = ({
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite, layout } = fusionContext;
-  const { cdnSite } = getProperties(arcSite);
+  const { cdnSite, cdnOrg } = getProperties(arcSite);
   const { deployment, contextPath } = useAppContext();
 
   const getPath = () => {
     if (src.includes('data:image/svg+xml')) {
       return src;
     }
-    return `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${src}`)}`;
+    return `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${src}`)}`;
   };
 
   if (ampPage) {

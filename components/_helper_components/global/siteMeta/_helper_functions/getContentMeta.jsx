@@ -10,7 +10,7 @@ const getContentMeta = () => {
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
   const {
-    siteName, favicon, cdnSite, appleIcon,
+    siteName, favicon, cdnSite, appleIcon, cdnOrg,
   } = getProperties(arcSite) || {};
   const {
     globalContent,
@@ -171,8 +171,8 @@ const getContentMeta = () => {
 
   const blogName = metaValue('blogname');
 
-  const faviconPath = `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${favicon}`)}`;
-  const appleIconPath = `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
+  const faviconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${favicon}`)}`;
+  const appleIconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
   // return page content metadata values
   return {
     url,

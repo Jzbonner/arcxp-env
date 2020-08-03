@@ -10,7 +10,7 @@ const AmpNavBar = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    logo, logoShort, siteName, cdnSite,
+    logo, logoShort, siteName, cdnSite, cdnOrg,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
@@ -125,13 +125,13 @@ const AmpNavBar = () => {
           <div id="logo-pinned" className='amp-logo amp-logo-pinned'>
             <a href={rootDirectory}>
             <amp-img height='1' width='1' class={siteName.toLowerCase()}
-            src={`${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logoShort}`)}`} layout='responsive'></amp-img>
+            src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoShort}`)}`} layout='responsive'></amp-img>
             </a>
           </div>
           <div id="logo-main" className='amp-logo amp-logo-main'>
             <a href={rootDirectory}>
               <amp-img height='1' width='1' class={siteName.toLowerCase()}
-              src={`${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logo}`)}`} layout='responsive'></amp-img>
+              src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logo}`)}`} layout='responsive'></amp-img>
             </a>
           </div>
         </div>

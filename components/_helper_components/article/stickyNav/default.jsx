@@ -44,7 +44,7 @@ const StickyNav = ({
   const shareLinkReddit = `${redditURL}${articleShareUrl}&title=${articleHeadline}`;
   const shareLinkEmail = `${mail}${articleHeadline}&body=${articleShareUrl}`;
 
-  const logoPath = `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logoShort}`)}`;
+  const logoPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoShort}`)}`;
 
   const siteNameLower = siteName.toLowerCase();
 

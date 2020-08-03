@@ -21,8 +21,8 @@ const Image = ({
   const { arcSite, layout } = fusionContext;
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
-  const { logoPlaceholder, cdnSite } = getProperties(arcSite);
-  const placeholder = `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
+  const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
+  const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
 
   const [imageSrc, setImageSrc] = useState('');
   const [placeholderWidth, setPlaceholderWidth] = useState('100%');

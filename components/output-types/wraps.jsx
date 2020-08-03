@@ -15,6 +15,7 @@ import handleSiteName from '../layouts/_helper_functions/handleSiteName';
 import AmpRelLink from '../_helper_components/amp/AmpRelLink';
 import GoogleStructuredData from '../_helper_components/article/googleData/default';
 import fetchEnv from '../_helper_components/global/utils/environment';
+import getDomain from '../layouts/_helper_functions/getDomain';
 
 const WrapOutputType = (props) => {
   const {
@@ -44,6 +45,7 @@ const WrapOutputType = (props) => {
     favicon,
     connext,
     cdnSite,
+    cdnOrg,
   } = getProperties(currentSite) || {};
 
   const { isEnabled: connextIsEnabled = false, environment: connextEnv } = connext[currentEnv] || {};
@@ -65,7 +67,7 @@ const WrapOutputType = (props) => {
     const css = data.replace(/url\(([^\s<>{}|\\^~)'"`]+)\)/g, (_, uri) => {
       // any url that starts with a `..`
       const trimmedUri = uri ? uri.replace(/\.\.\//g, '') : uri;
-      const parsedUrl = `${fullPathDomain}${trimmedUri}`;
+      const parsedUrl = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${trimmedUri}`;
       return `url(${deployment(parsedUrl)})`;
     });
     return <style dangerouslySetInnerHTML={{ __html: css }}></style>;
