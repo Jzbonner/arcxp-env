@@ -32,6 +32,7 @@ const getContentMeta = () => {
     publish_date: firstPublishDate,
     data: contentData,
     additional_properties: additionalProperties,
+    content_elements: contentElements = [],
   } = globalContent || {};
   const articleDesc = description;
   const {
@@ -110,6 +111,11 @@ const getContentMeta = () => {
     // remove query string & hashes from uri
     uri = uri.replace(/\?.*/g, '');
     uri = uri.replace(/#.*/g, '');
+  }
+  if ((desc === undefined || desc === '') && type === 'story') {
+    const firstParagraphElement = contentElements.find((el = { type: '', content: '' }) => el.type === 'text' && el.content !== '<br/>');
+    const { content: firstParagraphContent = '' } = firstParagraphElement || {};
+    desc = firstParagraphContent || '';
   }
   const newCanonicalUrl = distributor && distributor.subcategory === 'canonical'
     ? additionalProperties && additionalProperties.originalUrl : '';
