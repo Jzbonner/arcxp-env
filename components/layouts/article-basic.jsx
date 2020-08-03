@@ -13,8 +13,6 @@ import Section from '../_helper_components/article/section/Section';
 import TaboolaFeed from '../features/taboolaFeed/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
-import NavBar from '../_helper_components/global/navBar/default';
-import BreakingNews from '../_helper_components/global/breakingNews/default';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import ArcAd from '../features/ads/default';
@@ -31,7 +29,6 @@ import getSponsorData from './_helper_functions/getSponsorData';
 import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
 import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
-import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import '../../src/styles/container/_article-basic.scss';
@@ -151,9 +148,7 @@ const StoryPageLayout = () => {
   return (
     <>
       {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} />}
-      <BreakingNews />
-      <WeatherAlerts />
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
+      <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} noAds={noAds} />
       <main className="c-articleContent">
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>

@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import StaffCard from '../_helper_components/allstaff/staffCard/default';
-import NavBar from '../_helper_components/global/navBar/default';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
-import BreakingNews from '../_helper_components/global/breakingNews/default';
-import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 import AuthorMenu from '../_helper_components/allstaff/authorMenu/default';
 import findArea from './_helper_functions/staffpage/findArea';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import ArcAd from '../features/ads/default';
+import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 import plus from '../../resources/icons/staff/plus.svg';
 import AREAS_OF_EXPERTISE from './_helper_functions/staffpage/AREAS_OF_EXPERTISE';
 
@@ -98,9 +96,7 @@ export const AllStaffPage = () => {
   return (
     <>
       <GlobalAdSlots />
-      <BreakingNews />
-      <WeatherAlerts />
-      <NavBar />
+      <TopNavBreakingNews />
       <header className={'c-staff-page-header'}>
         <div className="c-hp01-mp01">
           <ArcAd staticSlot={'HP01'} />

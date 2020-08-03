@@ -4,12 +4,10 @@ import { useAppContext } from 'fusion:context';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import ArcAd from '../features/ads/default';
 import Headline from '../_helper_components/article/headline/default';
-import NavBar from '../_helper_components/global/navBar/default';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
-import BreakingNews from '../_helper_components/global/breakingNews/default';
-import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 import checkTags from './_helper_functions/checkTags';
+import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 
 const VideoPageLayout = () => {
   const appContext = useAppContext();
@@ -47,9 +45,7 @@ const VideoPageLayout = () => {
     <>
       {!noAds && !ampVideoIframe && <GlobalAdSlots />}
       {!ampVideoIframe && <>
-        <BreakingNews />
-        <WeatherAlerts />
-        <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type}/>
+        <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} noAds={noAds} />
       </>}
       <main className={ampVideoIframe ? 'c-amp-video' : ''}>
         {!noAds && !ampVideoIframe && <div className="c-hp01-mp01 b-margin-top-d40-m20">

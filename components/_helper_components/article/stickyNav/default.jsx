@@ -12,7 +12,7 @@ import '../../../../src/styles/container/_c-headerNav.scss';
 
 const StickyNav = ({
   headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
-  isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections, articleUrl,
+  isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections, articleUrl, hasWindowShade = false,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -121,7 +121,7 @@ const StickyNav = ({
 
   return (
     <>
-      <div className={`stickyNav ${stickyVisibilityRef.current ? 'is-visible' : ''}`}>
+      <div className={`stickyNav ${hasWindowShade || stickyVisibilityRef.current ? 'is-visible' : ''}`}>
         <ul className={`c-stickyNav-list ${siteNameLower}`}>
         <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
           <div className='nav-flyout-button'>
@@ -197,6 +197,7 @@ StickyNav.propTypes = {
   type: PropTypes.string,
   sections: PropTypes.array,
   articleUrl: PropTypes.string,
+  hasWindowShade: PropTypes.bool,
 };
 
 export default StickyNav;

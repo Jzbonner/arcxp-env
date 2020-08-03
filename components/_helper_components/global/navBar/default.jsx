@@ -127,7 +127,7 @@ const NavBar = ({
         ${stickyNavVisibility ? 'stickyActive' : ''}
         ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`}>
           <div className={`b-flexRow b-flexCenter nav-logo
-          ${stickyNavVisibility || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
+          ${(stickyNavVisibility || hasWindowShade) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
             <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
               <div className='nav-flyout-button'></div>
             </div>
@@ -165,7 +165,9 @@ const NavBar = ({
             paddingRef={paddingRef}
             type={type}
             sections={sectionLi}
-            articleUrl={articleURL}/>
+            articleUrl={articleURL}
+            hasWindowShade={hasWindowShade}
+            />
         </div>
         <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
       </header>

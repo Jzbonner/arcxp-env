@@ -3,10 +3,7 @@ import { useAppContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import checkTags from './_helper_functions/checkTags';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
-import BreakingNews from '../_helper_components/global/breakingNews/default';
-import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 import ArcAd from '../features/ads/default';
-import NavBar from '../_helper_components/global/navBar/default';
 import StaffBio from '../_helper_components/staffBioPage/staffBio/default';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
@@ -14,6 +11,7 @@ import CollectionList from '../_helper_components/staffBioPage/collectionList/de
 import '../features/List/default.scss';
 import '../../src/styles/container/_homepage.scss';
 import '../_helper_components/listpage/default.scss';
+import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 
 const staffBioPage = () => {
   const appContext = useAppContext();
@@ -58,9 +56,7 @@ const staffBioPage = () => {
   return (
     <>
       <GlobalAdSlots/>
-      <BreakingNews/>
-      <WeatherAlerts />
-      <NavBar/>
+      <TopNavBreakingNews />
       <main className='c-listPage'>
           {!noAds
           && <div className="c-hp01-mp01">
