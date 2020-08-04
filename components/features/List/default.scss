@@ -78,10 +78,6 @@
     .c-homeList:last-child {
       border: none;
       margin-bottom: 0;
-
-      // @include breakpoint(desktop-sm) {
-      //   margin-right: 0;
-      // }
     }
   }
 
@@ -216,7 +212,6 @@
       }
 
       .homeList-image {
-        // margin-right: 15px;
         max-width: calc(45% - 7.5px);
       }
 
