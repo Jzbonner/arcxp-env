@@ -30,6 +30,7 @@ import AmpAd from '../_helper_components/amp/amp-ads/AmpAd';
 import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
 import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/default';
+
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
