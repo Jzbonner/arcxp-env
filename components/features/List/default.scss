@@ -216,7 +216,7 @@
       }
 
       .homeList-image {
-        margin-right: 15px;
+        // margin-right: 15px;
         max-width: calc(45% - 7.5px);
       }
 
@@ -228,12 +228,13 @@
         }
 
         .c-label-wrapper {
-          margin: 0 0 7px;
+          margin: 0 0 7px 15px;
           text-align: left;
         }
 
         .headline {
           text-align: left;
+          margin-left: 15px;
 
           &.listPage {
             text-align: left;
