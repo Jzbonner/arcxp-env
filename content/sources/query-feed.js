@@ -104,7 +104,7 @@ const fetch = (query) => {
   const newBody = JSON.stringify(body);
 
   return getQueryData(activeSite, newBody, from, size)
-    .then(data => AddFirstInlineImage(data, activeSite, displayClass, displayClassesRequiringImg))
+    .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
     .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
     .catch((error) => {
       console.error(error);

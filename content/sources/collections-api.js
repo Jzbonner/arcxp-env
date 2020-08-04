@@ -28,7 +28,7 @@ const fetch = (query) => {
 
   if (id) {
     return GetCollectionData(activeSite, id, size)
-      .then(data => AddFirstInlineImage(data, activeSite, displayClass, displayClassesRequiringImg))
+      .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
       .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
       .catch((error) => {
         console.error(error);
