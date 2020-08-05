@@ -58,7 +58,7 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
             <h1>{`More from ${boxTitle}`}</h1>
           </div>
         )}
-        {disableAd === 'false' ? <div className="sponsor-ad">{SP01()}</div> : null}
+        <div className="sponsor-ad">{SP01()}</div>
         <ul className={'sponsor-content'}>
           {boxContent.map((el, i) => {
             if (el && el.url && el.headline) {
