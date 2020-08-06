@@ -70,7 +70,7 @@ const ArcAd = ({
   }
 
   if (galleryTopics && galleryTopics.length && galleryTopics.length > 0) {
-    finalTopics = [...topics, ...galleryTopics];
+    finalTopics = [...new Set([...topics, ...galleryTopics])];
   } else {
     finalTopics = topics;
   }

@@ -6,7 +6,7 @@ import {
   DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery, ImageModal,
 } from '../../_helper_components/global/gallery/index';
 import {
-  debounce, createBaseGallery, handleImageFocus, reorganizeElements, handlePropContentElements, getGalleryImageTopics,
+  debounce, createBaseGallery, handleImageFocus, reorganizeElements, handlePropContentElements,
 } from './_helper_functions/index';
 import ArcAd from '../ads/default';
 import PGO1Element from '../../_helper_components/global/ads/pg01/default';
@@ -265,7 +265,11 @@ const Gallery = (props) => {
     elementData.forEach((element, i) => {
       // inserts add after current photo
       if (element.props.data.states.isFocused) {
-        elements.splice(i + insertionBuffer, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} key={`${i}-PG01`} />);
+        elements.splice(i + insertionBuffer, 0, <PGO1Element
+          refHook={PG01Ref}
+          adSlot={PG01}
+          key={`${i}-PG01`}
+          galleryTopics={galleryTopics} />);
       }
     });
 
@@ -279,7 +283,11 @@ const Gallery = (props) => {
     mobileElementData.forEach((el, i) => {
       if (el.props.data && i !== 0 && i % 4 === 0) {
         /* eslint-disable-next-line max-len */
-        mobileElements.splice(i + (i > 0 ? currentAdCount : 0), 0, <MPGO1Element adSlot={MPG01} adCount={currentAdCount} key={`${i}-MPG01`} />);
+        mobileElements.splice(i + (i > 0 ? currentAdCount : 0), 0, <MPGO1Element
+          adSlot={MPG01}
+          adCount={currentAdCount}
+          key={`${i}-MPG01`}
+          galleryTopics={galleryTopics} />);
         currentAdCount += 1;
       }
     });
@@ -563,6 +571,9 @@ const Gallery = (props) => {
       return null;
     }
 
+    const { promo_items: fetchedPromoItems = {} } = fetchedGalleryData || {};
+    const { promo_items: featuredPromoItems = {} } = featuredGalleryData || {};
+
     if (relevantGalleryData && !galleryContentElements) galleryContentElements = relevantGalleryData.content_elements;
 
     if ((!headline && !galHeadline) || !canonicalUrl) {
@@ -600,7 +611,24 @@ const Gallery = (props) => {
       setMobileAdsIndices([]);
       setCurrentAction('');
     }
-    if (galleryTopics.length === 0) setGalleryTopics(getGalleryImageTopics(baseGalleryData));
+
+    if (fetchedPromoItems
+      && fetchedPromoItems.basic
+      && fetchedPromoItems.basic.additional_properties
+      && fetchedPromoItems.basic.additional_properties.keywords) {
+      // galleryTopics = fetchedPromoItems.basic.additional_properties.keywords;
+      setGalleryTopics(fetchedPromoItems.basic.additional_properties.keywords);
+    } else if (featuredPromoItems
+      && featuredPromoItems.basic
+      && featuredPromoItems.basic.additional_properties
+      && featuredPromoItems.basic.additional_properties.keywords) {
+      // galleryTopics = featuredPromoItems.basic.additional_properties.keywords;
+      setGalleryTopics(featuredPromoItems.basic.additional_properties.keywords);
+    } else if (promoItems && promoItems.additional_properties
+      && promoItems.additional_properties.keywords) {
+      // galleryTopics = promoItems.additional_properties.keywords;
+      setGalleryTopics(promoItems.additional_properties.keywords);
+    }
   }
 
   if (isStickyVisible || isMobile) {
