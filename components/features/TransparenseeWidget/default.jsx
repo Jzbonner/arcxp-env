@@ -28,7 +28,7 @@ const TransparenseeWidget = (props) => {
         <link href="https://fonts.googleapis.com/css?family=Oswald:400,300,700" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
         {!isMobile ? (
-          <InnerHTML html={payload} id="ttd-search-widget" className="hidden--small" data-searchurl="events.ajc.com" />
+          <InnerHTML html={payload} id="ttd-search-widget" className="hidden--small" />
         ) : (
           <div className="hidden--medium hidden--large">
             <form className="ttd-search" action="//events.ajc.com/events" method="get">
