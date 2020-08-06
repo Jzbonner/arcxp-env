@@ -23,11 +23,14 @@ const Image = ({
   const placeholder = deployment(`${contextPath}${logoPlaceholder}`);
 
   const [imageSrc, setImageSrc] = useState('');
-
   const [placeholderWidth, setPlaceholderWidth] = useState('100%');
-  const [loaded, setLoaded] = useState(false);
   const imageEl = useRef(null);
   const placeholderEl = useRef(null);
+
+  const setLoaded = () => {
+    imageEl.current.style.display = 'block';
+    placeholderEl.current.style.display = 'none';
+  };
 
   const lazyLoadImage = () => {
     const imagePosition = placeholderEl.current.getBoundingClientRect().top;
@@ -55,6 +58,32 @@ const Image = ({
       window.removeEventListener('scroll', lazyLoadImage);
       window.addEventListener('DOMContentLoaded', lazyLoadImage);
     };
+  });
+
+  useEffect(() => {
+    if (teaseContentType) {
+      const currentTimeInMilliseconds = new Date().getTime();
+      if (!window.lastNativoCall) {
+        window.lastNativoCall = {
+          time: currentTimeInMilliseconds - 1000,
+          timeOutSet: false,
+        };
+      }
+      const { lastNativoCall } = window;
+
+      // calls nativo script 1s after last call or
+      // immediately if it has been more than 1s.
+      if (!lastNativoCall.timeOutSet) {
+        lastNativoCall.timeOutSet = true;
+        setTimeout(() => {
+          lastNativoCall.timeOutSet = false;
+          lastNativoCall.time = new Date().getTime();
+          if (window.PostRelease) {
+            window.PostRelease.Start();
+          }
+        }, 1000 - (currentTimeInMilliseconds - lastNativoCall.time));
+      }
+    }
   });
 
   const screenSize = checkWindowSize();
@@ -95,13 +124,13 @@ const Image = ({
           {!ampPage ? (
             <>
             <img src={imageSrc}
-              style={ loaded ? {} : { display: 'none' }}
+              style={{ display: 'none' }}
               alt={getAltText(altText, caption)}
               className={teaseContentType ? 'tease-image' : ''}
               ref={imageEl}
-              onLoad={() => setLoaded(true)}/>
+              onLoad={setLoaded}/>
             <img src={placeholder} ref={placeholderEl}
-              style={ loaded ? { display: 'none' } : { width: placeholderWidth }}/>
+              style={{ width: placeholderWidth }}/>
             </>
           ) : (
             <amp-img

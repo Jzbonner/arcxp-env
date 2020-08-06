@@ -27,7 +27,7 @@ const NativoScripts = ({ tags, uuid }) => (
         __html: "let _prx = window._prx || []; _prx.push(['cfg.SetNoAutoStart']);",
       }}
     ></script>
-    <script type="text/javascript" src="//s.ntv.io/serve/load.js" async></script>
+    <script type="text/javascript" src="//s.ntv.io/serve/load.js" ntv-set-no-auto-start async></script>
   </>
 );
 
