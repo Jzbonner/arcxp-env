@@ -38,6 +38,7 @@ const Image = ({
     placeholderEl.current.style.display = 'none';
   };
 
+
   useEffect(() => {
     const styles = window.getComputedStyle(imageEl.current);
     setPlaceholderWidth(styles.width);
