@@ -102,6 +102,7 @@ export default {
       ],
       devconActive: false,
       devconKey: '2a1556f7-d788-4b8b-943a-dd77f5f0d472',
+      prebidJs: 'prebid3.23.0.js',
     },
     prod: {
       adsA9Enabled: false,
@@ -164,6 +165,7 @@ export default {
       ],
       devconActive: true,
       devconKey: '2a1556f7-d788-4b8b-943a-dd77f5f0d472',
+      prebidJs: 'prebid3.23.0.js',
     },
   },
   connext: {
