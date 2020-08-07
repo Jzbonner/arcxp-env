@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Image from '../image/default';
+import { useFusionContext } from 'fusion:context';
+import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+
 
 const GalleryItem = ({
-  data, func, modalFunc,
-}) => {
+                       data, func, modalFunc,
+                     }) => {
   const {
     url, width, height, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass,
   } = data;
   const { affiliation = [], caption = [] } = captionObj;
+
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
 
   const {
     isFocused, isStickyVisible, isCaptionOn, isMobile, isAdVisible, isModalVisible,
@@ -18,18 +23,18 @@ const GalleryItem = ({
 
   if (affiliationCredit && !affiliationCredit.includes('Credit:')) affiliationCredit = `Credit: ${affiliationCredit}`;
 
-  const imageProps = {
-    width,
-    height,
-    imageType: 'isGalleryImage',
-    ampPage: false,
-    src: {
-      url,
-      height,
-      width,
-      alt_text: alt,
-    },
-  };
+  const [resizeUrl, setUrl] = useState(null);
+
+  useEffect(() => {
+    if (!isMobile) {
+      const galleryHeight = 480;
+      const newWidth = (width / height) * galleryHeight;
+      const thumborUrl = imageResizer(url, arcSite, Math.round(newWidth), galleryHeight);
+      setUrl(thumborUrl);
+    } else {
+      setUrl(url);
+    }
+  }, []);
 
   return (
     <div
@@ -42,20 +47,20 @@ const GalleryItem = ({
       ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}
       ${!isMobile ? 'desktop-image' : ''}
       `}
-      >
-      {url && <Image
-        {...imageProps}
-        classes={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
-        onClickRun={modalFunc ? () => modalFunc(url, isModalVisible) : null}
-        customScrollContainerEl="#MOBILE_GALLERY"
-      />}
+    >
+      <img
+        className={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
+        src={resizeUrl}
+        onClick={modalFunc ? () => modalFunc(url, isModalVisible) : null}
+        alt={alt ? `${alt}` : ''}
+      />
       {
         isStickyVisible
           ? <div className='gallery-subtitle'>
             <div className="gallery-credit">
               {
-              (affiliationCredit) || (by && by[0] && by[0].name)
-                ? (affiliationCredit) || `Credit: ${by && by[0] && by[0].name}` : null
+                (affiliationCredit) || (by && by[0] && by[0].name)
+                  ? (affiliationCredit) || `Credit: ${by && by[0] && by[0].name}` : null
               }
             </div>
             {

@@ -12,9 +12,9 @@ import useLazyLoad from '../../../layouts/_helper_functions/useLazyLoad';
 import './default.scss';
 
 const Image = ({
-  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType,
-  ampPage = false, classes, onClickRun, customScrollContainerEl,
-}) => {
+                 width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType,
+                 ampPage = false, classes, onClickRun, customScrollContainerEl,
+               }) => {
   const {
     url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText,
   } = src || {};
@@ -37,7 +37,6 @@ const Image = ({
     imageEl.current.style.display = 'block';
     placeholderEl.current.style.display = 'none';
   };
-
 
   useEffect(() => {
     const styles = window.getComputedStyle(imageEl.current);

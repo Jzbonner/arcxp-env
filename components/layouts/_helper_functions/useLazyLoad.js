@@ -12,7 +12,7 @@ export default (el, cb, customScrollContainerEl) => {
     let imagePosition = el.current.getBoundingClientRect().top; //eslint-disable-line
     let windowHeight = window.innerHeight; //eslint-disable-line
 
-    if (!fetched && imagePosition !== 0 && imagePosition < windowHeight + 50) {
+    if (!fetched && imagePosition !== 0 && imagePosition < windowHeight + 300) {
       cb();
       fetched = true;
     }
