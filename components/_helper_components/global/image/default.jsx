@@ -8,6 +8,7 @@ import './default.scss';
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
+import useLazyLoad from '../../../layouts/_helper_functions/lazyLoad';
 
 const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage = false,
@@ -27,20 +28,11 @@ const Image = ({
   const imageEl = useRef(null);
   const placeholderEl = useRef(null);
 
+  useLazyLoad(placeholderEl, () => setImageSrc(imageResizer(url, arcSite, width, height)));
+
   const setLoaded = () => {
     imageEl.current.style.display = 'block';
     placeholderEl.current.style.display = 'none';
-  };
-
-  const lazyLoadImage = () => {
-    const imagePosition = placeholderEl.current.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-
-    const buffer = 300;
-
-    if (!imageSrc && (imagePosition < windowHeight + buffer)) {
-      setImageSrc(imageResizer(url, arcSite, width, height));
-    }
   };
 
   useEffect(() => {
@@ -50,15 +42,6 @@ const Image = ({
       setImageSrc(imageResizer(url, arcSite, width, height));
     }
   }, []);
-
-  useEffect(() => {
-    window.addEventListener('scroll', lazyLoadImage);
-    window.addEventListener('DOMContentLoaded', lazyLoadImage);
-    return () => {
-      window.removeEventListener('scroll', lazyLoadImage);
-      window.addEventListener('DOMContentLoaded', lazyLoadImage);
-    };
-  });
 
   useEffect(() => {
     if (teaseContentType) {
@@ -84,7 +67,7 @@ const Image = ({
         }, 1000 - (currentTimeInMilliseconds - lastNativoCall.time));
       }
     }
-  });
+  }, [url]);
 
   const screenSize = checkWindowSize();
 
@@ -172,4 +155,5 @@ Image.propTypes = {
   canonicalUrl: PropTypes.string,
   ampPage: PropTypes.bool,
 };
+
 export default Image;
