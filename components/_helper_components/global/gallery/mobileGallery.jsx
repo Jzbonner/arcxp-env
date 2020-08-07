@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import middleBox from '../../../../resources/icons/gallery/middle-box.svg';
 import close from '../../../../resources/icons/gallery/close.svg';
 
+
+
+
 const MobileGallery = (props) => {
   const {
-    data, states, objectRef, funcs,
+    data, states, objectRef, funcs, forceUpdate
   } = props;
   const {
     handleStickyClose, captionOn, captionOff,
@@ -13,6 +16,15 @@ const MobileGallery = (props) => {
   const {
     isStickyVisible, isCaptionOn, currentIndex, maxIndex,
   } = states;
+
+
+
+  const renderMobileGallery = (mobileData) => {
+    if(isStickyVisible) {
+    return mobileData;
+    } 
+    return
+  }
 
   return (
     <div className="gallery-immersive hidden-large">
