@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
-import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import Image from './../image/default';
 
 
 const GalleryItem = ({
@@ -23,18 +23,18 @@ const GalleryItem = ({
 
   if (affiliationCredit && !affiliationCredit.includes('Credit:')) affiliationCredit = `Credit: ${affiliationCredit}`;
 
-  const [resizeUrl, setUrl] = useState(null);
-
-  useEffect(() => {
-    if (!isMobile) {
-      const galleryHeight = 480;
-      const newWidth = (width / height) * galleryHeight;
-      const thumborUrl = imageResizer(url, arcSite, Math.round(newWidth), galleryHeight);
-      setUrl(thumborUrl);
-    } else {
-      setUrl(url);
+  const imageProps = {
+    width,
+    height,
+    imageType: 'isGalleryImage',
+    ampPage: false,
+    'src': {
+      url,
+      height,
+      width,
+      alt_text: alt
     }
-  }, []);
+  }
 
   return (
     <div
@@ -48,11 +48,10 @@ const GalleryItem = ({
       ${!isMobile ? 'desktop-image' : ''}
       `}
       >
-      <img
-        className={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
-        src={resizeUrl}
-        onClick={modalFunc ? () => modalFunc(url, isModalVisible) : null}
-        alt={alt ? `${alt}` : ''}
+      <Image 
+        {...imageProps} 
+        classes={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`} 
+        onClickRun={modalFunc ? () => modalFunc(url, isModalVisible) : null}
       />
       {
         isStickyVisible
