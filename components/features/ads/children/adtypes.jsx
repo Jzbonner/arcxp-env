@@ -107,6 +107,7 @@ export const adSlots = {
             labels: ['desktop1'],
             params: {
               placement: '5174475',
+              network: '11741.1',
             },
           },
           {
@@ -114,6 +115,7 @@ export const adSlots = {
             labels: ['tablet1'],
             params: {
               placement: '5174480',
+              network: '11741.1',
             },
           },
           {
@@ -180,6 +182,7 @@ export const adSlots = {
             labels: ['desktop1'],
             params: {
               placement: '5174478',
+              network: '11741.1',
             },
           },
           {
@@ -187,6 +190,7 @@ export const adSlots = {
             labels: ['tablet1'],
             params: {
               placement: '5174479',
+              network: '11741.1',
             },
           },
           {
@@ -194,6 +198,7 @@ export const adSlots = {
             labels: ['phone'],
             params: {
               placement: '5174489',
+              network: '11741.1',
             },
           },
           {
@@ -246,6 +251,7 @@ export const adSlots = {
             labels: ['desktop2'],
             params: {
               placement: '5174472',
+              network: '11741.1',
             },
           },
           {
@@ -253,6 +259,7 @@ export const adSlots = {
             labels: ['tablet1'],
             params: {
               placement: '5174484',
+              network: '11741.1',
             },
           },
           {
@@ -308,6 +315,7 @@ export const adSlots = {
             labels: ['desktop2'],
             params: {
               placement: '5174472',
+              network: '11741.1',
             },
           },
           {
@@ -315,6 +323,7 @@ export const adSlots = {
             labels: ['tablet1'],
             params: {
               placement: '5174484',
+              network: '11741.1',
             },
           },
           {
@@ -370,6 +379,7 @@ export const adSlots = {
             labels: ['desktop'],
             params: {
               placement: '5174477',
+              network: '11741.1',
             },
           },
           {
@@ -377,6 +387,7 @@ export const adSlots = {
             labels: ['tablet'],
             params: {
               placement: '5174486',
+              network: '11741.1',
             },
           },
           {
@@ -434,6 +445,7 @@ export const adSlots = {
             labels: ['desktop'],
             params: {
               placement: '5174477',
+              network: '11741.1',
             },
           },
           {
@@ -441,6 +453,7 @@ export const adSlots = {
             labels: ['tablet'],
             params: {
               placement: '5174486',
+              network: '11741.1',
             },
           },
           {
@@ -500,6 +513,7 @@ export const adSlots = {
             labels: ['desktop'],
             params: {
               placement: '5174477',
+              network: '11741.1',
             },
           },
           {
@@ -507,6 +521,7 @@ export const adSlots = {
             labels: ['tablet'],
             params: {
               placement: '5174486',
+              network: '11741.1',
             },
           },
           {
@@ -567,6 +582,7 @@ export const adSlots = {
             labels: ['desktop'],
             params: {
               placement: '5174477',
+              network: '11741.1',
             },
           },
           {
@@ -574,6 +590,7 @@ export const adSlots = {
             labels: ['tablet'],
             params: {
               placement: '5174486',
+              network: '11741.1',
             },
           },
           {
@@ -632,6 +649,7 @@ export const adSlots = {
             labels: ['tablet'],
             params: {
               placement: '5174483',
+              network: '11741.1',
             },
           },
           {
@@ -688,6 +706,7 @@ export const adSlots = {
             labels: ['desktop'],
             params: {
               placement: '5174477',
+              network: '11741.1',
             },
           },
           {
@@ -695,6 +714,7 @@ export const adSlots = {
             labels: ['tablet'],
             params: {
               placement: '5174486',
+              network: '11741.1',
             },
           },
           {
@@ -760,6 +780,7 @@ export const adSlots = {
             labels: ['desktop'],
             params: {
               placement: '5174471',
+              network: '11741.1',
             },
           },
           {
@@ -767,6 +788,7 @@ export const adSlots = {
             labels: ['tablet'],
             params: {
               placement: '5174485',
+              network: '11741.1',
             },
           },
           {
@@ -827,6 +849,7 @@ export const adSlots = {
             labels: ['desktop'],
             params: {
               placement: '5174474',
+              network: '11741.1',
             },
           },
           {
@@ -885,6 +908,7 @@ export const adSlots = {
             labels: ['desktop'],
             params: {
               placement: '5174476',
+              network: '11741.1',
             },
           },
           {
@@ -892,6 +916,7 @@ export const adSlots = {
             labels: ['tablet'],
             params: {
               placement: '5174482',
+              network: '11741.1',
             },
           },
           {
@@ -949,6 +974,7 @@ export const adSlots = {
             labels: ['desktop'],
             params: {
               placement: '5174476',
+              network: '11741.1',
             },
           },
           {
@@ -956,6 +982,7 @@ export const adSlots = {
             labels: ['tablet'],
             params: {
               placement: '5174482',
+              network: '11741.1',
             },
           },
           {
@@ -1013,6 +1040,7 @@ export const adSlots = {
             labels: ['phone1'],
             params: {
               placement: '5174488',
+              network: '11741.1',
             },
           },
           {
@@ -1069,6 +1097,7 @@ export const adSlots = {
             labels: ['phone'],
             params: {
               placement: '5174492',
+              network: '11741.1',
             },
           },
           {
@@ -1125,6 +1154,7 @@ export const adSlots = {
             labels: ['phone'],
             params: {
               placement: '5174487',
+              network: '11741.1',
             },
           },
           {
@@ -1181,6 +1211,7 @@ export const adSlots = {
             labels: ['phone'],
             params: {
               placement: '5174491',
+              network: '11741.1',
             },
           },
           {
@@ -1237,6 +1268,7 @@ export const adSlots = {
             labels: ['phone'],
             params: {
               placement: '5174490',
+              network: '11741.1',
             },
           },
           {
