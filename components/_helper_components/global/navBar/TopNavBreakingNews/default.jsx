@@ -24,9 +24,14 @@ const TopNavBreakingNews = ({
   const [onMainContent, setOnMainContent] = useState(false);
   const windowExists = typeof window !== 'undefined';
 
-  const docHasWindowShade = () => {
+  const docHasWindowShade = (getCollapse) => {
     if (windowExists) {
       const docBody = document.querySelector('body');
+
+      if (getCollapse) {
+        return docBody.classList.contains('window-shade-collapsed');
+      }
+
       return docBody.classList.contains('window-shade');
     }
     return null;
@@ -37,19 +42,31 @@ const TopNavBreakingNews = ({
     const navBottom = navRef && navRef.getBoundingClientRect().bottom;
     const pageContentRef = document.querySelector('main');
     const contentTop = pageContentRef && pageContentRef.getBoundingClientRect().top;
+    const { scrollY } = window;
 
     if (navRef && aboveWindowShade && (navBottom >= contentTop)) {
       setOnMainContent(true);
       setAboveWindowShade(false);
-    } else if (!aboveWindowShade && !onMainContent && (navBottom < contentTop)) {
-      setAboveWindowShade(true);
+    } else if (navBottom < contentTop) {
+      if (docHasWindowShade()) {
+        setOnMainContent(false);
+        setAboveWindowShade(true);
+      } else if (!aboveWindowShade && !onMainContent) {
+        setAboveWindowShade(true);
+      }
+    } else if (docHasWindowShade(true) && scrollY <= 1) {
+      setAboveWindowShade(false);
     }
-  }, 12);
+  }, 10);
 
   useEffect(() => {
     document.onreadystatechange = () => {
       if (document.readyState === 'complete') {
-        if (docHasWindowShade()) setAboveWindowShade(true);
+        if (docHasWindowShade()) {
+          setAboveWindowShade(true);
+        } else if (docHasWindowShade(true)) {
+          setAboveWindowShade(false);
+        }
       }
     };
   }, [aboveWindowShade]);
