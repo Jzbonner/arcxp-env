@@ -1,0 +1,352 @@
+{
+  "adsPrebidSizeConfig": [
+    {
+      "mediaQuery": "(min-width: 972px)",
+      "sizesSupported": [
+        [300, 250],
+        [300, 600]
+      ],
+      "labels": ["desktop"]
+    },
+    {
+      "mediaQuery": "(min-width: 972px)",
+      "sizesSupported": [
+        [970, 250],
+        [728, 90]
+      ],
+      "labels": ["desktop1"]
+    },
+    {
+      "mediaQuery": "(min-width: 972px)",
+      "sizesSupported": [
+        [728, 90]
+      ],
+      "labels": ["desktop2"]
+    },
+    {
+      "mediaQuery": "(min-width: 972px)",
+      "sizesSupported": [
+        [300, 250]
+      ],
+      "labels": ["desktop3"]
+    },
+    {
+      "mediaQuery": "(min-width: 768px) and (max-width: 971px)",
+      "sizesSupported": [
+        [300, 250],
+        [300, 600]
+      ],
+      "labels": ["tablet"]
+    },
+    {
+      "mediaQuery": "(min-width: 768px) and (max-width: 971px)",
+      "sizesSupported": [
+        [728, 90]
+      ],
+      "labels": ["tablet1"]
+    },
+    {
+      "mediaQuery": "(min-width: 768px) and (max-width: 971px)",
+      "sizesSupported": [
+        [300, 250]
+      ],
+      "labels": ["tablet2"]
+    },
+    {
+      "mediaQuery": "(min-width: 0px) and (max-width: 767px)",
+      "sizesSupported": [
+        [300, 250]
+      ],
+      "labels": ["phone"]
+    },
+    {
+      "mediaQuery": "(min-width: 0px) and (max-width: 767px)",
+      "sizesSupported": [
+        [320, 50]
+      ],
+      "labels": ["phone1"]
+    }
+  ],
+  "adsPrebidSlots": {
+    "HP00": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop2", "tablet1"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064918",
+              "placementName": "SNS_ROS_DesktopTablet_HP00"
+            }
+          },
+        ]
+      }
+    },
+    "HP01": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop1", "tablet1"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064920",
+              "placementName": "SNS_ROS_DesktopTablet_HP01"
+            }
+          },
+        ]
+      }
+    },
+    "HP02": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop1", "tablet1", "phone"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064921",
+              "placementName": "SNS_ROS_HP02"
+            }
+          }
+        ]
+      }
+    },
+    "HP05": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop2", "tablet1"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064922",
+              "placementName": "SNS_ROS_DesktopTablet_HP05"
+            }
+          }
+        ]
+      }
+    },
+    "RP01": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop3", "tablet2"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064923",
+              "placementName": "SNS_ROS_DesktopTablet_RP01"
+            }
+          }
+        ]
+      }
+    },
+    "RP01-tablet": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet2"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064924",
+              "placementName": "SNS_ROS_Tablet_RP01h2"
+            }
+          }
+        ]
+      }
+    },
+    "RP03": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop3", "tablet2"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064925",
+              "placementName": "SNS_ROS_DesktopTablet_RP03"
+            }
+          }
+        ]
+      }
+    },
+    "RP09": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop3", "tablet2"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064926",
+              "placementName": "SNS_ROS_DesktopTablet_RP09"
+            }
+          }
+        ]
+      }
+    },
+    "RP09-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop3"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064927",
+              "placementName": "SNS_ROS_Desktop_RP09h2"
+            }
+          }
+        ]
+      }
+    },
+    "MP01": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["phone1"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064928",
+              "placementName": "SNS_ROS_Phone_MP01"
+            }
+          }
+        ]
+      }
+    },
+    "MP02": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["phone"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064929",
+              "placementName": "SNS_ROS_Phone_MP02"
+            }
+          }
+        ]
+      }
+    },
+    "MP03": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["phone"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064930",
+              "placementName": "SNS_ROS_Phone_MP03"
+            }
+          }
+        ]
+      }
+    },
+    "MP04": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["phone"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064931",
+              "placementName": "SNS_ROS_Phone_MP04"
+            }
+          }
+        ]
+      }
+    },
+    "MP05": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["phone"],
+            "params": {
+              "publisher": "SNS",
+              "placementGroup": "ROS",
+              "placementId": "19064932",
+              "placementName": "SNS_ROS_Phone_MP05"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

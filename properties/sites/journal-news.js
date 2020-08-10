@@ -1,3 +1,4 @@
+import adsBidding from './adsBidding/journal-news.com.json';
 import adsTxt from './adstxt/journal-news.com.json';
 import appAdsTxt from './appadstxt/journal-news.com.json';
 
@@ -65,6 +66,7 @@ export default {
   nativoMoapTag: 'https://amp.journal-news.com/amp/ntv',
   ads: {
     sandbox: {
+      adsBidding,
       adsA9Enabled: false,
       adsA9Id: '',
       adsPrebidEnabled: false,
@@ -73,6 +75,7 @@ export default {
       devconKey: '',
     },
     prod: {
+      adsBidding,
       adsA9Enabled: false,
       adsA9Id: '',
       adsPrebidEnabled: false,
