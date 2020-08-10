@@ -69,7 +69,7 @@ export default {
       adsBidding,
       adsA9Enabled: false,
       adsA9Id: '',
-      adsPrebidEnabled: false,
+      adsPrebidEnabled: true,
       adsPrebidTimeout: 1500,
       devconActive: false,
       devconKey: '',
