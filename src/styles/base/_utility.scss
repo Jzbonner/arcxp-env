@@ -144,10 +144,6 @@
 
       @include advertisement-label;
     }
-
-    &.HS02 + div:not(:empty) {
-      @include advertisement-label;
-    }
   }
 }
 
