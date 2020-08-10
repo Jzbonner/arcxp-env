@@ -1,3 +1,4 @@
+import adsBidding from './adsBidding/springfieldnewssun.com.json';
 import adsTxt from './adstxt/springfieldnewssun.com.json';
 
 export default {
@@ -63,6 +64,7 @@ export default {
   nativoMoapTag: 'https://amp.springfieldnewssun.com/amp/ntv',
   ads: {
     sandbox: {
+      adsBidding,
       adsA9Enabled: false,
       adsA9Id: '',
       adsPrebidEnabled: false,
@@ -71,6 +73,7 @@ export default {
       devconKey: '',
     },
     prod: {
+      adsBidding,
       adsA9Enabled: false,
       adsA9Id: '',
       adsPrebidEnabled: false,

@@ -1,3 +1,4 @@
+import adsBidding from './adsBidding/daytondailynews.com.json';
 import adsTxt from './adstxt/daytondailynews.com.json';
 import appAdsTxt from './appadstxt/daytondailynews.com.json';
 
@@ -65,6 +66,7 @@ export default {
   nativoMoapTag: 'https://amp.daytondailynews.com/amp/ntv',
   ads: {
     sandbox: {
+      adsBidding,
       adsA9Enabled: false,
       adsA9Id: '',
       adsPrebidEnabled: false,
@@ -73,6 +75,7 @@ export default {
       devconKey: '',
     },
     prod: {
+      adsBidding,
       adsA9Enabled: false,
       adsA9Id: '',
       adsPrebidEnabled: false,
