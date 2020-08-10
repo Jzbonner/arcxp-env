@@ -215,6 +215,7 @@
   },
   "homepage": "https://github.com/wapopartners/StarterPack-PageBuilder-Fusion-Features#readme",
   "dependencies": {
+    "@loadable/server": "^5.13.1",
     "arcads": "^1.6.0",
     "axios": "^0.19.2",
     "bodybuilder": "^2.2.21",
