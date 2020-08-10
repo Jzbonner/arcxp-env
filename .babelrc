@@ -7,7 +7,7 @@
       {
         "rootPathSuffix": "./",
         "rootPathPrefix": "~"
-      }
+      },
     ],
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     "@babel/plugin-proposal-function-sent",
