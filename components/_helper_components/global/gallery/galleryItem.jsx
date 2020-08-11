@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useFusionContext } from 'fusion:context';
-import Image from './../image/default';
-
+import Image from '../image/default';
 
 const GalleryItem = ({
   data, func, modalFunc,
@@ -11,9 +9,6 @@ const GalleryItem = ({
     url, width, height, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass,
   } = data;
   const { affiliation = [], caption = [] } = captionObj;
-
-  const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
 
   const {
     isFocused, isStickyVisible, isCaptionOn, isMobile, isAdVisible, isModalVisible,
@@ -28,13 +23,13 @@ const GalleryItem = ({
     height,
     imageType: 'isGalleryImage',
     ampPage: false,
-    'src': {
+    src: {
       url,
       height,
       width,
-      alt_text: alt
-    }
-  }
+      alt_text: alt,
+    },
+  };
 
   return (
     <div
@@ -48,11 +43,12 @@ const GalleryItem = ({
       ${!isMobile ? 'desktop-image' : ''}
       `}
       >
-      <Image 
-        {...imageProps} 
-        classes={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`} 
+      {url && <Image
+        {...imageProps}
+        classes={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
         onClickRun={modalFunc ? () => modalFunc(url, isModalVisible) : null}
-      />
+        customScrollContainerEl="#MOBILE_GALLERY"
+      />}
       {
         isStickyVisible
           ? <div className='gallery-subtitle'>
