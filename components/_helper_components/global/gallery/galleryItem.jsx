@@ -5,8 +5,8 @@ import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
 
 const GalleryItem = ({
-                       data, func, modalFunc,
-                     }) => {
+  data, func, modalFunc,
+}) => {
   const {
     url, width, height, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass,
   } = data;

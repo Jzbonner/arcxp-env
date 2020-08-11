@@ -20,6 +20,7 @@ import './default.scss';
 
 const PG01 = galleryTopics => <ArcAd staticSlot={'PG01'} key={'PG01'} galleryTopics={galleryTopics} />;
 const PG02 = galleryTopics => <ArcAd staticSlot={'PG02'} key={'PG02'} galleryTopics={galleryTopics} />;
+<<<<<<< HEAD
 
 function useForceUpdate() {
   const [value, setValue] = useState(0); // integer state
@@ -35,6 +36,13 @@ function useForceUpdate() {
   const [value, setValue] = useState(0); // integer state
   return () => setValue(value => ++value); // update the state to force render
 }
+=======
+const MPG01 = (adCount, galleryTopics) => <ArcAd
+  staticSlot={'MPG01'}
+  adSuffix={`_${adCount}`}
+  key={'MPG01'}
+  galleryTopics={galleryTopics} />;
+>>>>>>> d06f4921... APD-771/FixesEventListenersNotAttachingOnMobile-Nicholas
 
 const Gallery = (props) => {
   const {
@@ -43,8 +51,6 @@ const Gallery = (props) => {
 
   const fusionContext = useFusionContext();
   const { arcSite = 'ajc' } = fusionContext;
-
-  const [value, setValue] = useState(0);
 
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
@@ -124,8 +130,6 @@ const Gallery = (props) => {
       path: galleryUrl,
     },
   });
-
-
 
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
@@ -371,14 +375,10 @@ const Gallery = (props) => {
   const handleStickyOpen = () => {
     if (isMobile) setStickyState(true);
     dispatchGalleryOpenEvent();
-    setValue(value => ++value);
-    console.log("opened");
-    
   };
 
   // on & off buttons for mobile caption
   const handleCaptionToggle = (action) => {
-
     if (action === actions.ON) {
       setCaptionState(false);
     } else {
