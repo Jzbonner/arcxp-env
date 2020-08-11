@@ -30,7 +30,7 @@ export const itemsToArray = (itemString = '') => itemString.split(',').map(item 
 
 const fetch = (query) => {
   const {
-    daysBack = '',
+    daysBack,
     includeDistributor = '',
     excludeDistributor = '',
     includeSections = '',
