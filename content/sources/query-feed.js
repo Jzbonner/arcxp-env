@@ -10,7 +10,7 @@ const bodybuilder = require('bodybuilder');
 const ttl = 120;
 
 const params = {
-  daysBack: 'text',
+  daysBack: 'number',
   from: 'number',
   size: 'number',
   includeDistributor: 'text',
