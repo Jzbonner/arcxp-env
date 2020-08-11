@@ -19,7 +19,6 @@ import './default.scss';
 
 const PG01 = () => <ArcAd staticSlot={'PG01'} key={'PG01'} />;
 const PG02 = () => <ArcAd staticSlot={'PG02'} key={'PG02'} />;
-const MPG01 = adCount => <ArcAd staticSlot={'MPG01'} adSuffix={`_${adCount}`} key={'MPG01'} />;
 
 const Gallery = (props) => {
   const {
@@ -274,6 +273,11 @@ const Gallery = (props) => {
 
     mobileElementData.forEach((el, i) => {
       if (el.props.data && i !== 0 && i % 4 === 0) {
+        // My only explanation for moving this here is because this function is called
+        // browser side on, the MPG01 variable is out of scope. Once moved inside of here,
+        // the ads were appearing on sandbox. This may or may not be the reason. But since
+        // the MPG01 ad is only called here, I think it's safe to leave it here.
+        const MPG01 = adCount => <ArcAd staticSlot={'MPG01'} adSuffix={`_${adCount}`} key={'MPG01'} />;
         /* eslint-disable-next-line max-len */
         mobileElements.splice(i + (i > 0 ? currentAdCount : 0), 0, <MPGO1Element adSlot={MPG01} adCount={currentAdCount} key={`${i}-MPG01`} />);
         currentAdCount += 1;
@@ -432,7 +436,7 @@ const Gallery = (props) => {
   const getMobileElements = (arr) => {
     const finalElements = arr.map((element) => {
       // if the element is an ad, just return it
-      if (element.props.adSlot && element.props.adSlot.name && element.props.adSlot.name === 'MPG01') return element;
+      if (element && element.props && element.props.adSlot) return element;
 
       const elementItemData = { ...element.props.data };
       const parentStates = {
