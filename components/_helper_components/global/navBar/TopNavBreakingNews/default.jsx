@@ -5,7 +5,6 @@ import BreakingNews from '../../breakingNews/default';
 import ArcAd from '../../../../features/ads/default';
 import WeatherAlerts from '../../weatherAlerts/default';
 import { debounce } from '../../../../features/gallery/_helper_functions';
-import '../../../../../src/styles/base/_utility.scss';
 import './default.scss';
 
 const HS01 = () => <ArcAd staticSlot={'HS01'} />;
@@ -24,11 +23,11 @@ const TopNavBreakingNews = ({
   const [onMainContent, setOnMainContent] = useState(false);
   const windowExists = typeof window !== 'undefined';
 
-  const docHasWindowShade = (getCollapse) => {
+  const docHasWindowShade = (checkCollapse) => {
     if (windowExists) {
       const docBody = document.querySelector('body');
 
-      if (getCollapse) {
+      if (checkCollapse) {
         return docBody.classList.contains('window-shade-collapsed');
       }
 
@@ -60,15 +59,17 @@ const TopNavBreakingNews = ({
   }, 10);
 
   useEffect(() => {
-    document.onreadystatechange = () => {
-      if (document.readyState === 'complete') {
-        if (docHasWindowShade()) {
-          setAboveWindowShade(true);
-        } else if (docHasWindowShade(true)) {
-          setAboveWindowShade(false);
+    if (windowExists) {
+      document.onreadystatechange = () => {
+        if (document.readyState === 'complete') {
+          if (docHasWindowShade()) {
+            setAboveWindowShade(true);
+          } else if (docHasWindowShade(true)) {
+            setAboveWindowShade(false);
+          }
         }
-      }
-    };
+      };
+    }
   }, [aboveWindowShade]);
 
   useEffect(() => {
@@ -80,7 +81,7 @@ const TopNavBreakingNews = ({
 
   return (
     <>
-      {!noAds && <div className="b-hidden">{HS01()}</div>}
+      {!noAds && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01()}</div>}
       <div className={`nav-breaking-news ${aboveWindowShade ? 'is-above-shade' : ''}`} >
         {!omitBreakingNews && <BreakingNews />}
         <WeatherAlerts />

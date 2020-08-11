@@ -4,3 +4,15 @@
   width: 100%;
   z-index: 9999;
 }
+
+.b-hidden:empty {
+  display: none;
+}
+
+.leave-behind {
+  z-index: 1000;
+
+  .arc_ad .arcad:not(:empty):before {
+    content: "";
+  }
+}
