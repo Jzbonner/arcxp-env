@@ -58,7 +58,10 @@ const fetch = (query) => {
   if (daysBack) {
     builder.andQuery('range', 'display_date', {
       gte: `now-${daysBack}d/d`,
-      lt: 'now/d',
+    });
+  } else {
+    builder.andQuery('range', 'display_date', {
+      gte: 'now-30d/d',
     });
   }
   if (includeDistributor) {
