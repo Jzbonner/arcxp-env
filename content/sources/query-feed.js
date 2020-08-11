@@ -10,6 +10,7 @@ const bodybuilder = require('bodybuilder');
 const ttl = 120;
 
 const params = {
+  daysBack: 'text',
   from: 'number',
   size: 'number',
   includeDistributor: 'text',
@@ -29,6 +30,7 @@ export const itemsToArray = (itemString = '') => itemString.split(',').map(item 
 
 const fetch = (query) => {
   const {
+    daysBack = '',
     includeDistributor = '',
     excludeDistributor = '',
     includeSections = '',
@@ -53,6 +55,12 @@ const fetch = (query) => {
   if (!activeSite) return [];
 
   const builder = bodybuilder();
+  if (daysBack) {
+    builder.andQuery('range', 'display_date', {
+      gte: `now-${daysBack}d/d`,
+      lt: 'now/d',
+    });
+  }
   if (includeDistributor) {
     const distributors = itemsToArray(includeDistributor);
     builder.andQuery('terms', 'distributor.reference_id', distributors);
