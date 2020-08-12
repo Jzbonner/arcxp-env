@@ -4,6 +4,7 @@ import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import buildCarouselItem from './_helper_functions/buildCarouselItems';
+import getDomain from '../../../layouts/_helper_functions/getDomain';
 import './default.scss';
 
 const Carousel = ({ storyId, taxonomy }) => {
@@ -14,9 +15,9 @@ const Carousel = ({ storyId, taxonomy }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
-  const { deployment, contextPath } = appContext;
-  const { logoShort } = getProperties(arcSite) || {};
-  const logoPath = deployment(`${contextPath}${logoShort}`);
+  const { deployment, contextPath, layout } = appContext;
+  const { logoShort, cdnSite } = getProperties(arcSite) || {};
+  const logoPath = `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logoShort}`)}`;
 
   let finalReferentId;
   if (referentId) {

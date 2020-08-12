@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContent } from 'fusion:content';
 import copyrightFilter from '../../../../content/filters/copyright';
-import './default.scss';
+import '../../../../src/styles/container/_c-copyright.scss';
 import getCopyLinks from '../../../layouts/_helper_functions/getCopyLinks';
 
 const Copyright = () => {

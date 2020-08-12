@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
-import './default.scss';
-import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
+import renderImage from '../../../layouts/_helper_functions/getFeaturedImage';
+import getDomain from '../../../layouts/_helper_functions/getDomain';
 import Comments from '../comments/comments';
 import Login from '../../global/navBar/login/default';
 import fetchEnv from '../../global/utils/environment';
 import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
 import '../../global/navBar/default.scss';
+import '../../../../src/styles/container/_c-headerNav.scss';
 
 const StickyNav = ({
   headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
@@ -17,10 +18,10 @@ const StickyNav = ({
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    facebookURL, twitterURL, pinterestURL, redditURL, mail, siteName, logoShort, pinterestShareLogo, cdnOrg,
+    facebookURL, twitterURL, pinterestURL, redditURL, mail, siteName, logoShort, pinterestShareLogo, cdnOrg, cdnSite,
   } = getProperties(arcSite);
   const appContext = useAppContext();
-  const { deployment, contextPath } = appContext;
+  const { deployment, contextPath, layout } = appContext;
   const { basic: articleHeadline } = headlines || {};
   const { allow_comments: commentsEnabled } = comments || {};
   let articleShareUrl = articleUrl;
@@ -43,7 +44,7 @@ const StickyNav = ({
   const shareLinkReddit = `${redditURL}${articleShareUrl}&title=${articleHeadline}`;
   const shareLinkEmail = `${mail}${articleHeadline}&body=${articleShareUrl}`;
 
-  const logoPath = deployment(`${contextPath}${logoShort}`);
+  const logoPath = `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logoShort}`)}`;
 
   const siteNameLower = siteName.toLowerCase();
 
@@ -174,7 +175,11 @@ const StickyNav = ({
           <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
         </div>
       </div>
-      <Comments commentVisibility={commentVisibility} toggleCommentsWindow={toggleCommentsWindow} articleUrl={articleShareUrl} />
+              { !isNonShareablePage
+              && <Comments
+              commentVisibility={commentVisibility}
+              toggleCommentsWindow={toggleCommentsWindow}
+              articleUrl={articleShareUrl} /> }
     </>
   );
 };

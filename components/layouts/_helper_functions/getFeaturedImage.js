@@ -1,5 +1,6 @@
 import { useAppContext, useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import getDomain from './getDomain';
 import imageResizer from './Thumbor';
 
 const renderImage = () => {
@@ -12,9 +13,10 @@ const renderImage = () => {
     deployment,
     contextPath,
     metaValue,
+    layout,
   } = appContext;
 
-  const { logoOgImage } = getProperties(arcSite);
+  const { logoOgImage, cdnSite } = getProperties(arcSite);
   const {
     promo_items: promoItems,
     content_elements: contentElements,
@@ -67,7 +69,7 @@ const renderImage = () => {
   if (ogContentImage) {
     return imageResizer(ogContentImage, arcSite, 1200, 630);
   }
-  return deployment(`${contextPath}${logoOgImage}`);
+  return `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logoOgImage}`)}`;
 };
 
 export default renderImage;

@@ -6,7 +6,7 @@ import Search from '../search/default';
 import Login from '../login/default';
 import Weather from '../weather/default';
 import NavFooter from '../navFooter/default';
-import '../default.scss';
+import '../../../../../src/styles/container/_c-headerNav.scss';
 
 const DesktopNav = ({
   sections, hamburgerToggle, isMobile, setToggle, rootDirectory, smallLogoUrl,

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
+import getDomain from '../../../layouts/_helper_functions/getDomain';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
@@ -11,7 +12,7 @@ import StickyNav from '../../article/stickyNav/default';
 import AmpNavBar from './amp';
 import '../../../../src/styles/base/_utility.scss';
 import '../../../../src/styles/container/_article-basic.scss';
-import './default.scss';
+import '../../../../src/styles/container/_c-headerNav.scss';
 
 const NavBar = ({
   articleURL, headlines, comments, type, subtype, ampPage = false,
@@ -30,9 +31,11 @@ const NavBar = ({
 
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
-  const { logo, logoHamburger, siteName } = getProperties(arcSite);
+  const {
+    logo, logoHamburger, siteName, cdnSite,
+  } = getProperties(arcSite);
   const appContext = useAppContext();
-  const { deployment, contextPath } = appContext;
+  const { deployment, contextPath, layout } = appContext;
 
   const sections = useContent({
     source: 'site-api',
@@ -130,7 +133,10 @@ const NavBar = ({
             </div>
             <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
               && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
-              <Logo source={deployment(`${contextPath}${logo}`)} rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}/>
+              <Logo
+                source={`${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logo}`)}`}
+                rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
+              />
             </div>
           </div>
           <DesktopNav
@@ -138,7 +144,7 @@ const NavBar = ({
             isMobile={isMobile}
             hamburgerToggle={mobileMenuToggled}
             setToggle={setToggle}
-            smallLogoUrl={deployment(`${contextPath}${logoHamburger}`)}
+            smallLogoUrl={`${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${logoHamburger}`)}`}
             rootDirectory={rootDirectory}
             stickyActive={stickyNavVisibility}
             type={type}

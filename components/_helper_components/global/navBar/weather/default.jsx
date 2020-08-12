@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import '../default.scss';
+import '../../../../../src/styles/container/_c-headerNav.scss';
 import currentConditions from '../../utils/weather/currentConditions';
 
 const Weather = ({ weatherPageUrl }) => {

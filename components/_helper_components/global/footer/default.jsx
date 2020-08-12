@@ -3,19 +3,20 @@ import { useContent } from 'fusion:content';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import footerFilter from '../../../../content/filters/bottom-nav';
-import './default.scss';
+import '../../../../src/styles/container/_c-footer.scss';
 import menuArrow from '../../../../resources/images/menu-arrow.svg';
 import facebookIcon from '../../../../resources/images/facebook-icon.svg';
 import twitterIcon from '../../../../resources/images/twitter-icon.svg';
 import rightArrow from '../../../../resources/images/right-arrow.svg';
 import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
+import getDomain from '../../../layouts/_helper_functions/getDomain';
 
 
 const Footer = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
-  const { deployment, contextPath } = appContext;
+  const { deployment, contextPath, layout } = appContext;
   let twitterURL = '';
   let facebookURL = '';
 
@@ -27,7 +28,7 @@ const Footer = () => {
     filter: footerFilter,
   });
 
-  const { footerLogo, siteName } = getProperties(arcSite);
+  const { footerLogo, siteName, cdnSite } = getProperties(arcSite);
 
   const { children: linkCategories } = siteNavigation || {};
   const [row1 = []] = linkCategories || [];
@@ -56,7 +57,10 @@ const Footer = () => {
       <div className="logo-row">
         <div className="col">
           <a href="/">
-            <img className={`footer-logo ${siteName.toLowerCase()}`} src={deployment(`${contextPath}${footerLogo}`)} alt="logo" />
+            <img
+              className={`footer-logo ${siteName.toLowerCase()}`}
+              src={`${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${footerLogo}`)}`} alt="logo"
+            />
           </a>
         </div>
         <div className="col">

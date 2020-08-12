@@ -1,5 +1,6 @@
 import { useAppContext, useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import getDomain from '../../../../layouts/_helper_functions/getDomain';
 import checkPageType from '../../../../layouts/_helper_functions/getPageType.js';
 import fetchEnv from '../../utils/environment.js';
 import { formatTime, formatDate } from '../../../article/timestamp/_helper_functions/computeTimeStamp';
@@ -8,13 +9,17 @@ const getContentMeta = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
-  const { siteName, favicon } = getProperties(arcSite) || {};
+  const {
+    siteName, favicon, cdnSite, appleIcon,
+  } = getProperties(arcSite) || {};
   const {
     globalContent,
     layout,
     metaValue,
     requestUri,
     template,
+    deployment,
+    contextPath,
   } = appContext;
   const {
     headlines,
@@ -166,6 +171,8 @@ const getContentMeta = () => {
 
   const blogName = metaValue('blogname');
 
+  const faviconPath = `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${favicon}`)}`;
+  const appleIconPath = `${getDomain(layout, cdnSite, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
   // return page content metadata values
   return {
     url,
@@ -189,7 +196,8 @@ const getContentMeta = () => {
     secondarySection,
     topSectionName,
     isNonContentPage,
-    favicon,
+    faviconPath,
+    appleIconPath,
     nonPrimarySet,
     isOpinion,
     blogName,
