@@ -44,7 +44,8 @@
       @include arc-ad-spacing;
 
       .arc_ad[class*="HP0"],
-      .arc_ad[class*="MP0"] {
+      .arc_ad[class*="MP0"],
+      .arc_ad[class*="HS02"] {
         @include arc-ad-full-width;
       }
 
