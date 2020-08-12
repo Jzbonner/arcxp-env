@@ -49,12 +49,9 @@
         @include arc-ad-full-width;
       }
 
-      .arc_ad[class*="HS02"] .c-HS02 {
-        width: 80%;
-        max-width: 1600px;
-        margin: 0 auto;
+      .arc_ad[class*="HS02"] .arcad.HS02 + div {
+        padding-bottom: 20px;
       }
-
       // override for HP02 when interscroller loads in place of a display ad
 
       .arc_ad[class*="HP0"].ccad-noslotshadow .arcad {
