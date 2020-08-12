@@ -4,6 +4,7 @@ import { Parser } from 'htmlparser2';
 import get from 'lodash.get';
 import ScriptWrapper from './components/Script/default';
 import ExpandableTextMessage from './components/ExpandableTextMessage/default';
+import PymLoader from './components/PymLoader/default';
 
 class MarkupWrapper extends PureComponent {
   constructor(props) {
@@ -12,6 +13,7 @@ class MarkupWrapper extends PureComponent {
     const plugins = [
       'script',
       'ExpandableTextMessage',
+      'PymLoader',
     ];
 
     let component;
@@ -37,6 +39,8 @@ class MarkupWrapper extends PureComponent {
         return <ExpandableTextMessage html={this.props.html} />;
       case 'script':
         return <ScriptWrapper html={this.props.html} />;
+      case 'PymLoader':
+        return <PymLoader html={this.props.html} />;
       default:
         return <></>;
     }
