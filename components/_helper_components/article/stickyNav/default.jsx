@@ -8,7 +8,6 @@ import Comments from '../comments/comments';
 import Login from '../../global/navBar/login/default';
 import fetchEnv from '../../global/utils/environment';
 import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
-import '../../global/navBar/default.scss';
 import '../../../../src/styles/container/_c-headerNav.scss';
 
 const StickyNav = ({
