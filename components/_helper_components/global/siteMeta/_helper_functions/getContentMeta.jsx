@@ -117,6 +117,9 @@ const getContentMeta = () => {
     const { content: firstParagraphContent = '' } = firstParagraphElement || {};
     desc = firstParagraphContent || '';
   }
+  if ((desc === undefined || desc === '') && type === 'gallery') {
+    desc = title;
+  }
   const newCanonicalUrl = distributor && distributor.subcategory === 'canonical'
     ? additionalProperties && additionalProperties.originalUrl : '';
   const url = newCanonicalUrl || canonicalUrl || uri;
