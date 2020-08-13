@@ -67,11 +67,13 @@ const StoryPageLayout = () => {
     credits,
     type,
   } = globalContent || {};
-  if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} />;
-
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
+  const { nowrap: detectNoWrap } = queryParams || {};
+  const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
+  if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} noHeaderAndFooter={noHeaderAndFooter}/>;
+
   const ampMP02 = () => <AmpAd adSlot="MP02" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
   const ampMP03 = () => <AmpAd adSlot="MP03" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
 
@@ -129,7 +131,11 @@ const StoryPageLayout = () => {
   return (
     <>
       {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} />}
-      <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} noAds={noAds} />
+      {!noHeaderAndFooter && <>
+      <BreakingNews />
+      <WeatherAlerts />
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
+      </>}
       <main className="c-articleContent">
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
@@ -244,7 +250,7 @@ const StoryPageLayout = () => {
           )}
         </article>
       </main>
-      {!ampPage && <Footer />}
+      {!ampPage && !noHeaderAndFooter && <Footer />}
       <Copyright />
       {ampPage && <Carousel storyId={uuid} taxonomy={taxonomy} />}
     </>

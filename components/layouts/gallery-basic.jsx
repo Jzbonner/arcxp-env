@@ -10,7 +10,6 @@ import checkTags from './_helper_functions/checkTags';
 import getGalleryTopics from './_helper_functions/getGalleryTopics';
 import '../../src/styles/container/_article-basic.scss';
 import getQueryParams from './_helper_functions/getQueryParams';
-import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 
 const GalleryPageLayout = () => {
   const appContext = useAppContext();

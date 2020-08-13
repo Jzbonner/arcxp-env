@@ -26,6 +26,13 @@ class Api {
     const queryParams = getQueryParams(requestUri);
     const queryTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'type');
     const newsletterFeed = queryTypePresent && queryParams.type === 'newsletter';
+    const { nowrap: detectNoWrap } = queryParams || {};
+    const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
+    const rssFeedDetectAppWebview = () => {
+      if (noHeaderAndFooter) {
+        return '&#x26;nowrap=y'; // had to use &#x26; instead of simple "&" as per the W3 RSS validator
+      } return '';
+    };
     let maxItems = feedStart + size;
     if (maxItems > globalContent.length) {
       maxItems = globalContent.length;
@@ -62,7 +69,7 @@ class Api {
           const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
           const author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
           const formattedDescription = description
-          && description.basic ? `<![CDATA[${description.basic}]]>` : getFirst120CharsFromStory(contentElements);
+            && description.basic ? `<![CDATA[${description.basic}]]>` : getFirst120CharsFromStory(contentElements);
 
           const formattedDate = formatApiTime(firstPubDate, displayDate);
 
@@ -77,7 +84,7 @@ class Api {
                   guid: `urn:uuid:${guid}`,
                 },
                 {
-                  link: `${websiteURL}${canonicalUrl}`,
+                  link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
                 },
                 {
                   description: formattedDescription,
@@ -116,7 +123,7 @@ class Api {
                   guid: `urn:uuid:${guid}`,
                 },
                 {
-                  link: `${websiteURL}${canonicalUrl}`,
+                  link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
                 },
                 {
                   description: formattedDescription,
@@ -176,10 +183,10 @@ class Api {
                   guid: `urn:uuid:${guid}`,
                 },
                 {
-                  link: `${websiteURL}${canonicalUrl}`,
+                  link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
                 },
                 {
-                  description: formattedDescription || title,
+                  description: formattedDescription,
                 },
                 {
                   pubDate: formattedDate,

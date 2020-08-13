@@ -11,7 +11,7 @@ import '../../../src/styles/base/_utility.scss';
 import '../../../src/styles/container/_article-basic.scss';
 import './default.scss';
 
-const FlatPage = ({ globalContent }) => {
+const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
   if (!globalContent) return null;
   const {
     headlines,
@@ -36,7 +36,11 @@ const FlatPage = ({ globalContent }) => {
   return (
     <>
       { !noAds && <GlobalAdSlots /> }
-      <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype} />
+      {!noHeaderAndFooter && <>
+      <BreakingNews/>
+      <WeatherAlerts />
+      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype}/>
+      </>}
       <main className="c-flatpage">
         <article>
           {
@@ -72,13 +76,14 @@ const FlatPage = ({ globalContent }) => {
           }
         </article>
       </main>
-      <Footer />
+      {!noHeaderAndFooter && <Footer />}
     </>
   );
 };
 
 FlatPage.propTypes = {
   globalContent: PropTypes.object,
+  noHeaderAndFooter: PropTypes.bool,
 };
 
 export default FlatPage;
