@@ -147,9 +147,13 @@
     }
   }
 
+  &.HS02 {
+    padding: 40px 0;
+  }
+
   @include breakpoint(tablet) {
 
-    .arcad {
+    .arcad:not(.HS02) {
       margin: 0 auto;
       padding-bottom: 20px;
     }
