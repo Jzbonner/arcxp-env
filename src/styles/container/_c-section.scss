@@ -44,14 +44,15 @@
       @include arc-ad-spacing;
 
       .arc_ad[class*="HP0"],
-      .arc_ad[class*="MP0"] {
+      .arc_ad[class*="MP0"],
+      .arc_ad[class*="HS02"] {
         @include arc-ad-full-width;
       }
 
       .c-HS02 {
         padding: 40px 0;
         margin-bottom: 20px;
-        
+
         @include breakpoint(tablet) {
           margin-bottom: 40px;
         }
@@ -150,11 +151,24 @@
     &.halves {
 
       &.with-rightRail {
-        display: block;
+        flex-wrap: wrap;
+
+        .c-contentElements {
+          width: calc(100% - 330px);
+          padding: 0 $min-margin 0 0;
+
+          &:nth-child(2) {
+            order: 3;
+          }
+
+          &:nth-child(3) {
+            order: 2;
+          }
+        }
       }
     }
   }
-  
+
   @include breakpoint(desktop-sm) {
 
     &.halves {
@@ -169,9 +183,18 @@
       }
 
       &.with-rightRail {
+        flex-wrap: unset;
 
         .c-contentElements {
           width: calc((100% - 300px) / 2 - 40px);
+
+          &:nth-child(2) {
+            order: unset;
+          }
+
+          &:nth-child(3) {
+            order: unset;
+          }
         }
       }
     }
