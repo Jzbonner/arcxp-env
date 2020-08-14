@@ -33,8 +33,10 @@ const SectionOutput = ({ zones, layout, noHeaderAndFooter }) => (
       )}
     </main>
     {layout !== 'wrap-header_only' && <>
-      {!noHeaderAndFooter && <Footer />}
+    {!noHeaderAndFooter && <>
+      <Footer />
       <Copyright />
+      </>}
     </>}
   </>
 );

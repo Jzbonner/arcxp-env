@@ -97,8 +97,10 @@ const staffBioPage = () => {
         </div>
         { !noAds ? <div className='list-mp05'>{MP05()}</div> : null}
       </main>
-      {!noHeaderAndFooter && <Footer />}
+      {!noHeaderAndFooter && <>
+      <Footer />
       <Copyright />
+      </>}
   </>
   );
 };

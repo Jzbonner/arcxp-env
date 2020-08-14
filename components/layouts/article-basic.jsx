@@ -72,7 +72,7 @@ const StoryPageLayout = () => {
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
   const { nowrap: detectNoWrap } = queryParams || {};
   const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
-  if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} noHeaderAndFooter={noHeaderAndFooter}/>;
+  if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} noHeaderAndFooter={noHeaderAndFooter} />;
 
   const ampMP02 = () => <AmpAd adSlot="MP02" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
   const ampMP03 = () => <AmpAd adSlot="MP03" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
@@ -131,21 +131,22 @@ const StoryPageLayout = () => {
   return (
     <>
       {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} />}
-      {!noHeaderAndFooter && <>
-      <BreakingNews />
-      <WeatherAlerts />
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} />
-      </>}
+      {!noHeaderAndFooter && (
+        <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} noAds={noAds} />
+      )}
       <main className="c-articleContent">
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
             <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
             <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} contentType={type} />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
-            className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
-            {!isCommunityContributor
-              && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />}
+          <div
+            style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
+            className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10"
+          >
+            {!isCommunityContributor && (
+              <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />
+            )}
             <TimeStamp
               firstPublishDate={firstPublishDate}
               displayDate={displayDate}
@@ -201,13 +202,9 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
             ampPage={ampPage}
           />
-          {!noAds && maxNumberOfParagraphs === 3
-          && <InterscrollerPlaceholder
-          ampPage={ampPage}
-          isHyperlocalContent={isHyperlocalContent}
-          taxonomy={taxonomy}
-          uuid={uuid}
-          />}
+          {!noAds && maxNumberOfParagraphs === 3 && (
+            <InterscrollerPlaceholder ampPage={ampPage} isHyperlocalContent={isHyperlocalContent} taxonomy={taxonomy} uuid={uuid} />
+          )}
           {!noAds && !isHyperlocalContent && !sponsorSectionID && (
             <Nativo
               elements={filteredContentElements}
@@ -224,13 +221,9 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
             ampPage={ampPage}
           />
-          {!noAds && maxNumberOfParagraphs >= 4
-          && <InterscrollerPlaceholder
-            ampPage={ampPage}
-            isHyperlocalContent={isHyperlocalContent}
-            taxonomy={taxonomy}
-            uuid={uuid}
-          />}
+          {!noAds && maxNumberOfParagraphs >= 4 && (
+            <InterscrollerPlaceholder ampPage={ampPage} isHyperlocalContent={isHyperlocalContent} taxonomy={taxonomy} uuid={uuid} />
+          )}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
@@ -250,8 +243,10 @@ const StoryPageLayout = () => {
           )}
         </article>
       </main>
-      {!ampPage && !noHeaderAndFooter && <Footer />}
+      {!ampPage && !noHeaderAndFooter && <>
+      <Footer />
       <Copyright />
+      </>}
       {ampPage && <Carousel storyId={uuid} taxonomy={taxonomy} />}
     </>
   );

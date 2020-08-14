@@ -26,8 +26,7 @@ class Api {
     const queryParams = getQueryParams(requestUri);
     const queryTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'type');
     const newsletterFeed = queryTypePresent && queryParams.type === 'newsletter';
-    const { nowrap: detectNoWrap } = queryParams || {};
-    const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
+    const noHeaderAndFooter = queryTypePresent && queryParams.type === 'app';
     const rssFeedDetectAppWebview = () => {
       if (noHeaderAndFooter) {
         return '&#x26;nowrap=y'; // had to use &#x26; instead of simple "&" as per the W3 RSS validator

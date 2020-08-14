@@ -62,8 +62,10 @@ const VideoPageLayout = () => {
         </div>
       </main>
       {!ampVideoIframe && <>
-        {!noHeaderAndFooter && <Footer />}
+        {!noHeaderAndFooter && <>
+        <Footer />
         <Copyright />
+      </>}
       </>}
     </>
   );

@@ -46,8 +46,10 @@ const HomePageLayout = (props) => {
         <SectionHome feature={zone5} rightRailContent={zone5rightrail} />
         <SectionHome feature={zone6} />
       </main>
-      {!noHeaderAndFooter && <Footer />}
+      {!noHeaderAndFooter && <>
+      <Footer />
       <Copyright />
+      </>}
     </>
   );
 };

@@ -141,8 +141,10 @@ export const AllStaffPage = () => {
               })}
         </section>
       </main>
-      {!noHeaderAndFooter && <Footer />}
+      {!noHeaderAndFooter && <>
+      <Footer />
       <Copyright />
+      </>}
     </>
   );
 };

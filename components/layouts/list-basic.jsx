@@ -28,16 +28,16 @@ const ListPageLayout = (props) => {
   return (
     <>
       <GlobalAdSlots />
-      {!noHeaderAndFooter && (
-        <>
-          <BreakingNews />
-          <WeatherAlerts />
-          <NavBar />
-        </>
-      )}
-      <ListPage globalContent={globalContent} globalContentConfig={globalContentConfig} title={pageTitleFeaturePresent && title} />
-      {!noHeaderAndFooter && <Footer />}
+      {!noHeaderAndFooter && <TopNavBreakingNews />}
+      <ListPage
+        globalContent={globalContent}
+        globalContentConfig={globalContentConfig}
+        title={pageTitleFeaturePresent && title}
+      />
+      {!noHeaderAndFooter && <>
+      <Footer />
       <Copyright />
+      </>}
     </>
   );
 };
