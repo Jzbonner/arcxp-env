@@ -43,10 +43,19 @@
     .c-contentElements {
       @include arc-ad-spacing;
 
-      .arc_ad[class*="HP0"],
-      .arc_ad[class*="MP0"],
-      .arc_ad[class*="HS02"] {
+      .c-HS02 {
         @include arc-ad-full-width;
+      }
+
+      .arc_ad[class*="HP0"],
+      .arc_ad[class*="MP0"] {
+        @include arc-ad-full-width;
+      }
+
+      .arc_ad[class*="HS02"] {
+        width: 80%;
+        max-width: 1600px;
+        margin: 0 auto;
       }
 
       // override for HP02 when interscroller loads in place of a display ad

@@ -144,12 +144,12 @@
 
       @include advertisement-label;
     }
-  }
 
-  .c-HS02 {
-    display: block;
-    
-    @include advertisement-label;
+    &.HS02 {
+      display: block;
+
+      @include advertisement-label;
+    }
   }
 }
 
