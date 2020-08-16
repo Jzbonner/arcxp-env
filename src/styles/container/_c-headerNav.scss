@@ -826,7 +826,8 @@
     }
 
     &.not-visible {
-      display: none;
+      //this !important is to override an inline style created by the connext
+      display: none !important; /* stylelint-disable-line declaration-no-important */
     }
   }
 

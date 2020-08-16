@@ -15,7 +15,7 @@ import '../../../../src/styles/container/_article-basic.scss';
 import '../../../../src/styles/container/_c-headerNav.scss';
 
 const NavBar = ({
-  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false,
+  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, ignoreEmptyConnextBar = false,
 }) => {
   // amp hijack
   if (ampPage) return <AmpNavBar />;
@@ -123,54 +123,55 @@ const NavBar = ({
 
   return (
     <header className="c-nav">
-        <div className={`c-headerNav
-        ${stickyNavVisibility || hasWindowShade ? 'stickyActive' : ''}
-        ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`}>
-          <div className={`b-flexRow b-flexCenter nav-logo
-          ${(stickyNavVisibility || hasWindowShade) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
-            <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
-              <div className='nav-flyout-button'></div>
-            </div>
-            <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
-              && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
-              <Logo
-                source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logo}`)}`}
-                rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
-              />
-            </div>
+      <div className={`c-headerNav
+      ${stickyNavVisibility || hasWindowShade ? 'stickyActive' : ''}
+      ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`}>
+        <div className={`b-flexRow b-flexCenter nav-logo
+        ${(stickyNavVisibility || hasWindowShade) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
+          <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
+            <div className='nav-flyout-button'></div>
           </div>
-          <DesktopNav
-            sections={sectionLi}
-            isMobile={isMobile}
-            hamburgerToggle={mobileMenuToggled}
-            setToggle={setToggle}
-            smallLogoUrl={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoHamburger}`)}`}
-            rootDirectory={rootDirectory}
-            stickyActive={stickyNavVisibility || hasWindowShade}
-            type={type}
-            siteName={siteName.toLowerCase()}/>
-          <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
-            && mobileMenuToggled) ? 'not-visible' : ''}`}>
-          </div>
-          <StickyNav
-            headlines={headlines}
-            comments={comments}
-            hamburgerToggle={mobileMenuToggled}
-            setStickyNavVisibility={setStickyNavVisibility}
-            stickyNavVisibility={stickyNavVisibility || hasWindowShade}
-            isMobile={isMobile}
-            isMobileVisibilityRef={isMobileVisibilityRef}
-            logoRef={logoRef}
-            setToggle={setToggle}
-            paddingRef={paddingRef}
-            type={type}
-            sections={sectionLi}
-            articleUrl={articleURL}
-            hasWindowShade={hasWindowShade}
+          <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
+            && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
+            <Logo
+              source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logo}`)}`}
+              rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
             />
+          </div>
         </div>
-        <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
-      </header>
+        <DesktopNav
+          sections={sectionLi}
+          isMobile={isMobile}
+          hamburgerToggle={mobileMenuToggled}
+          setToggle={setToggle}
+          smallLogoUrl={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoHamburger}`)}`}
+          rootDirectory={rootDirectory}
+          stickyActive={stickyNavVisibility || hasWindowShade}
+          type={type}
+          siteName={siteName.toLowerCase()}/>
+        <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
+          && mobileMenuToggled) || (stickyNavVisibility
+            && ignoreEmptyConnextBar) ? 'not-visible' : ''} `}>
+        </div>
+        <StickyNav
+          headlines={headlines}
+          comments={comments}
+          hamburgerToggle={mobileMenuToggled}
+          setStickyNavVisibility={setStickyNavVisibility}
+          stickyNavVisibility={stickyNavVisibility || hasWindowShade}
+          isMobile={isMobile}
+          isMobileVisibilityRef={isMobileVisibilityRef}
+          logoRef={logoRef}
+          setToggle={setToggle}
+          paddingRef={paddingRef}
+          type={type}
+          sections={sectionLi}
+          articleUrl={articleURL}
+          hasWindowShade={hasWindowShade}
+        />
+      </div>
+      <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
+    </header>
   );
 };
 
@@ -182,6 +183,7 @@ NavBar.propTypes = {
   subtype: PropTypes.string,
   ampPage: PropTypes.bool,
   hasWindowShade: PropTypes.bool,
+  ignoreEmptyConnextBar: PropTypes.bool,
 };
 
 export default NavBar;
