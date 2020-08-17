@@ -136,6 +136,10 @@
 
   &.c-HS02 {
     padding-bottom: 40px;
+
+    @include breakpoint(desktop-sm) {
+      padding-top: 0;
+    }
   }
 
   .arcad:not(.HS02) {
