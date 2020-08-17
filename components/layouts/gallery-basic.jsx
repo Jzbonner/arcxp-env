@@ -63,6 +63,7 @@ const GalleryPageLayout = () => {
             promoItems={basic}
             pageType={subtype}
             leafHeadline={leafHeadline}
+            taxonomy={taxonomy}
           />
         </div>
       </main>

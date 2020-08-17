@@ -26,7 +26,7 @@ const MPG01 = (adCount, galleryTopics) => <ArcAd
 
 const Gallery = (props) => {
   const {
-    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '', leafHeadline = '',
+    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '', leafHeadline = '', taxonomy = {},
   } = props;
 
   const fusionContext = useFusionContext();
@@ -558,6 +558,8 @@ const Gallery = (props) => {
     let galleryContentElements = null;
     let fetchedContentElements = null;
     let featuredContentElements = null;
+    let finalPromoItemTopics = [];
+    let finalTaxonomyTopics = [];
 
     if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements(contentElements);
 
@@ -571,8 +573,8 @@ const Gallery = (props) => {
       return null;
     }
 
-    const { promo_items: fetchedPromoItems = {} } = fetchedGalleryData || {};
-    const { promo_items: featuredPromoItems = {} } = featuredGalleryData || {};
+    const { taxonomy: fetchedTaxonomy = {}, promo_items: fetchedPromoItems = {} } = fetchedGalleryData || {};
+    const { taxonomy: featuredTaxonomy = {}, promo_items: featuredPromoItems = {} } = featuredGalleryData || {};
 
     if (relevantGalleryData && !galleryContentElements) galleryContentElements = relevantGalleryData.content_elements;
 
@@ -616,19 +618,32 @@ const Gallery = (props) => {
       && fetchedPromoItems.basic
       && fetchedPromoItems.basic.additional_properties
       && fetchedPromoItems.basic.additional_properties.keywords) {
-      // galleryTopics = fetchedPromoItems.basic.additional_properties.keywords;
-      setGalleryTopics(fetchedPromoItems.basic.additional_properties.keywords);
+      finalPromoItemTopics = fetchedPromoItems.basic.additional_properties.keywords;
     } else if (featuredPromoItems
       && featuredPromoItems.basic
       && featuredPromoItems.basic.additional_properties
       && featuredPromoItems.basic.additional_properties.keywords) {
-      // galleryTopics = featuredPromoItems.basic.additional_properties.keywords;
-      setGalleryTopics(featuredPromoItems.basic.additional_properties.keywords);
+      finalPromoItemTopics = featuredPromoItems.basic.additional_properties.keywords;
     } else if (promoItems && promoItems.additional_properties
       && promoItems.additional_properties.keywords) {
-      // galleryTopics = promoItems.additional_properties.keywords;
-      setGalleryTopics(promoItems.additional_properties.keywords);
+      finalPromoItemTopics = promoItems.additional_properties.keywords;
     }
+
+    if (fetchedTaxonomy && fetchedTaxonomy.tags && fetchedTaxonomy.tags.length) {
+      finalTaxonomyTopics = fetchedTaxonomy.tags;
+    } else if (featuredTaxonomy && featuredTaxonomy.tags && featuredTaxonomy.tags.length) {
+      finalTaxonomyTopics = featuredTaxonomy.tags;
+    } else if (taxonomy && taxonomy.tags && taxonomy.tags.length) {
+      finalTaxonomyTopics = taxonomy.tags;
+    }
+
+    if (finalTaxonomyTopics.length) {
+      finalTaxonomyTopics = finalTaxonomyTopics.map(tag => tag && tag.text);
+    }
+
+    const mergedTopics = [...new Set([...finalTaxonomyTopics, ...finalPromoItemTopics])];
+
+    setGalleryTopics(mergedTopics);
   }
 
   if (isStickyVisible || isMobile) {
@@ -724,6 +739,7 @@ Gallery.propTypes = {
   ads: PropTypes.array,
   pageType: PropTypes.string,
   leafHeadline: PropTypes.string,
+  taxonomy: PropTypes.object,
   customFields: PropTypes.shape({
     galleryUrl: PropTypes.string.tag({
       label: 'Gallery URL',
