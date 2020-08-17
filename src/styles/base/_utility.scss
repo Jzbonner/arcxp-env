@@ -145,7 +145,7 @@
       @include advertisement-label;
     }
 
-    &.HS02 {
+    &.HS02:empty {
       display: block;
 
       @include advertisement-label;

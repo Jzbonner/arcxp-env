@@ -134,7 +134,7 @@
   box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
   width: 100vw;
 
-  .arcad:not(.HS02) {
+  .arcad {
     width: 100vw;
     max-width: 1600px;
     text-align: center;
@@ -148,15 +148,11 @@
   }
 
   &.HS02 {
-    padding: 20px 0 40px;
+    padding: 40px 0;
     margin-bottom: 20px;
     
     @include breakpoint(tablet) {
       margin-bottom: 40px;
-    }
-
-    @include breakpoint(desktop-sm) {
-      padding: 0 0 40px;
     }
   }
 

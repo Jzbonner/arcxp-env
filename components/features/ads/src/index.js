@@ -109,16 +109,6 @@ const AdSetup = ({
     }
   }, []);
 
-  if (slotName === 'HS02') {
-    return (
-      <div className={'c-HS02 HS02'}>
-        <div className={className}>
-          <div id={id} className={`${slotName} arcad b-margin-bottom-d40-m20`} />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className={className}>
       <div id={id} className={`${slotName} arcad b-margin-bottom-d40-m20`} />
