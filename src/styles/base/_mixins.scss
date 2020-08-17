@@ -134,7 +134,7 @@
   box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
   width: 100vw;
 
-  .arcad {
+  .arcad:not(.HS02) {
     width: 100vw;
     max-width: 1600px;
     text-align: center;
@@ -144,15 +144,6 @@
     > iframe {
       margin-left: auto;
       margin-right: auto;
-    }
-  }
-
-  &.HS02 {
-    padding: 40px 0;
-    margin-bottom: 20px;
-    
-    @include breakpoint(tablet) {
-      margin-bottom: 40px;
     }
   }
 
