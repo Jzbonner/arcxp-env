@@ -55,7 +55,7 @@
         @include breakpoint(desktop-sm) {
           width: 80% !important;
           margin: 0 auto !important;
-          max-width: 1600px;
+          max-width: 1600px !important;
         }
       }
       /* stylelint-enable */
