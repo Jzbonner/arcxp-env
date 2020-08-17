@@ -43,9 +43,12 @@ const TopNavBreakingNews = ({
     const navBottom = navRef && navRef.getBoundingClientRect().bottom;
     const pageContentRef = document.querySelector('main');
     const contentTop = pageContentRef && pageContentRef.getBoundingClientRect().top;
-    const connextEl = document.querySelector('connext-subscribe') || null;
-    const connextElHeight = connextEl && connextEl.style && connextEl.style.height ? parseInt(connextEl.style.height, 10) : 0;
+    const connextEl = document.querySelector('.connext-subscribe') || null;
+    const connextElHeight = connextEl && connextEl.style.height ? parseInt(connextEl.style.height, 10) : 0;
     const { scrollY } = window;
+
+    console.log('connextEl', connextEl);
+    console.log('connetHeight', connextElHeight);
 
     if (navRef && aboveWindowShade && (navBottom >= contentTop)) {
       setOnMainContent(true);
@@ -61,7 +64,7 @@ const TopNavBreakingNews = ({
       setAboveWindowShade(false);
     }
 
-    if (connextEl && !connextEl.classList.contains('not-visible') && connextElHeight > 1 && aboveWindowShade) {
+    if (windowExists && connextEl && !connextEl.classList.contains('not-visible') && connextElHeight > 1 && aboveWindowShade) {
       setIgnoreEmptyConnextBar(true);
     } else if (ignoreEmptyConnextBar && !aboveWindowShade && docHasWindowShade()) setIgnoreEmptyConnextBar(false);
   }, 4);
@@ -81,10 +84,14 @@ const TopNavBreakingNews = ({
   }, [aboveWindowShade]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    if (windowExists) {
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+
+    return null;
   }, [aboveWindowShade, onMainContent]);
 
   return (
