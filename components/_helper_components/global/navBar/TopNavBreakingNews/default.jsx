@@ -21,8 +21,6 @@ const TopNavBreakingNews = ({
 }) => {
   const [aboveWindowShade, setAboveWindowShade] = useState(false);
   const [onMainContent, setOnMainContent] = useState(false);
-  const [ignoreEmptyConnextBar, setIgnoreEmptyConnextBar] = useState(false);
-
   const windowExists = typeof window !== 'undefined';
 
   const docHasWindowShade = (checkCollapse) => {
@@ -43,8 +41,6 @@ const TopNavBreakingNews = ({
     const navBottom = navRef && navRef.getBoundingClientRect().bottom;
     const pageContentRef = document.querySelector('main');
     const contentTop = pageContentRef && pageContentRef.getBoundingClientRect().top;
-    const connextEl = document.querySelector('.connext-subscribe') || null;
-    const connextElHeight = connextEl && connextEl.style.height ? parseInt(connextEl.style.height, 10) : 0;
     const { scrollY } = window;
 
     if (navRef && aboveWindowShade && (navBottom >= contentTop)) {
@@ -60,11 +56,7 @@ const TopNavBreakingNews = ({
     } else if (docHasWindowShade(true) && scrollY <= 1) {
       setAboveWindowShade(false);
     }
-
-    if (connextEl && !connextEl.classList.contains('not-visible') && connextElHeight > 1 && aboveWindowShade) {
-      setIgnoreEmptyConnextBar(true);
-    } else if (ignoreEmptyConnextBar && !aboveWindowShade && docHasWindowShade()) setIgnoreEmptyConnextBar(false);
-  }, 4);
+  }, 2);
 
   useEffect(() => {
     if (windowExists) {
@@ -104,7 +96,6 @@ const TopNavBreakingNews = ({
           type={type}
           ampPage={ampPage}
           hasWindowShade={aboveWindowShade}
-          ignoreEmptyConnextBar={ignoreEmptyConnextBar}
         />
       </div>
     </>

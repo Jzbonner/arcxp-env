@@ -15,7 +15,7 @@ import '../../../../src/styles/container/_article-basic.scss';
 import '../../../../src/styles/container/_c-headerNav.scss';
 
 const NavBar = ({
-  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, ignoreEmptyConnextBar = false,
+  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false,
 }) => {
   // amp hijack
   if (ampPage) return <AmpNavBar />;
@@ -151,7 +151,7 @@ const NavBar = ({
           siteName={siteName.toLowerCase()}/>
         <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
           && mobileMenuToggled) || (stickyNavVisibility
-            && ignoreEmptyConnextBar) ? 'not-visible' : ''} `}>
+            && hasWindowShade) ? 'not-visible' : ''} `}>
         </div>
         <StickyNav
           headlines={headlines}
