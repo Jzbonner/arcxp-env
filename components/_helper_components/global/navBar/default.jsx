@@ -150,8 +150,7 @@ const NavBar = ({
           type={type}
           siteName={siteName.toLowerCase()}/>
         <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
-          && mobileMenuToggled) || (stickyNavVisibility
-            && hasWindowShade) ? 'not-visible' : ''} `}>
+          && mobileMenuToggled) || hasWindowShade ? 'not-visible' : ''} `}>
         </div>
         <StickyNav
           headlines={headlines}
