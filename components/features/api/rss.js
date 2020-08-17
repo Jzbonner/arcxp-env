@@ -29,7 +29,7 @@ class Api {
     const noHeaderAndFooter = queryTypePresent && queryParams.type === 'app';
     const rssFeedDetectAppWebview = () => {
       if (noHeaderAndFooter) {
-        return '?nowrap=y'; // had to use &#x26; instead of simple "&" as per the W3 RSS validator
+        return '?nowrap=y';
       } return '';
     };
     let maxItems = feedStart + size;
