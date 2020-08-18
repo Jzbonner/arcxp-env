@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import NavBar from '../default';
-import BreakingNews from '../../breakingNews/default';
 import ArcAd from '../../../../features/ads/default';
 import WeatherAlerts from '../../weatherAlerts/default';
 import { debounce } from '../../../../features/gallery/_helper_functions';
@@ -87,7 +86,6 @@ const TopNavBreakingNews = ({
     <>
       {!noAds && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01()}</div>}
       <div className={`nav-breaking-news ${aboveWindowShade ? 'is-above-shade' : ''}`} >
-        {!omitBreakingNews && <BreakingNews />}
         <WeatherAlerts />
         <NavBar
           articleURL={articleURL}
@@ -96,6 +94,7 @@ const TopNavBreakingNews = ({
           type={type}
           ampPage={ampPage}
           hasWindowShade={aboveWindowShade}
+          omitBreakingNews={omitBreakingNews}
         />
       </div>
     </>

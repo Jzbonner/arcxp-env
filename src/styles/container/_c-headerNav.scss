@@ -28,6 +28,10 @@
     background-color: #f8f8f8;
     max-width: 100%;
 
+    &.above-shade {
+      position: relative;
+    }
+
     @include breakpoint(desktop-sm) {
       box-sizing: border-box;
       height: 75px;

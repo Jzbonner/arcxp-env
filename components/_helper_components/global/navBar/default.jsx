@@ -13,9 +13,10 @@ import AmpNavBar from './amp';
 import '../../../../src/styles/base/_utility.scss';
 import '../../../../src/styles/container/_article-basic.scss';
 import '../../../../src/styles/container/_c-headerNav.scss';
+import BreakingNews from '../breakingNews/default';
 
 const NavBar = ({
-  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false,
+  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false,
 }) => {
   // amp hijack
   if (ampPage) return <AmpNavBar />;
@@ -123,9 +124,11 @@ const NavBar = ({
 
   return (
     <header className="c-nav">
+      {!omitBreakingNews && <BreakingNews />}
       <div className={`c-headerNav
-      ${stickyNavVisibility || hasWindowShade ? 'stickyActive' : ''}
-      ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`}>
+        ${stickyNavVisibility || hasWindowShade ? 'stickyActive' : ''}
+        ${hasWindowShade ? 'above-shade' : ''}
+        ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`}>
         <div className={`b-flexRow b-flexCenter nav-logo
         ${(stickyNavVisibility || hasWindowShade) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
           <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
@@ -182,7 +185,7 @@ NavBar.propTypes = {
   subtype: PropTypes.string,
   ampPage: PropTypes.bool,
   hasWindowShade: PropTypes.bool,
-  ignoreEmptyConnextBar: PropTypes.bool,
+  omitBreakingNews: PropTypes.bool,
 };
 
 export default NavBar;
