@@ -59,7 +59,7 @@
         @include arc-ad-full-width;
 
         .arc_ad[class*="HS02"] {
-          width: 80%;
+          width: 100vw;
           max-width: 1600px;
           text-align: center;
           margin: 0 auto;
@@ -68,6 +68,14 @@
           > iframe {
             margin-left: auto;
             margin-right: auto;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 94%;
+          }
+
+          @include breakpoint(desktop-lg) {
+            width: 90%;
           }
         }
       }
