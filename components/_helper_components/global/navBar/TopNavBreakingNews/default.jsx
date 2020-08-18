@@ -37,15 +37,14 @@ const TopNavBreakingNews = ({
 
   const handleScroll = debounce(() => {
     const navRef = document.querySelector('.c-headerNav.stickyActive');
-    const navBottom = navRef && navRef.getBoundingClientRect().bottom;
     const pageContentRef = document.querySelector('main');
     const contentTop = pageContentRef && pageContentRef.getBoundingClientRect().top;
     const { scrollY } = window;
 
-    if (navRef && aboveWindowShade && (navBottom >= contentTop)) {
+    if ((navRef && aboveWindowShade && (contentTop <= 230))) {
       setOnMainContent(true);
       setAboveWindowShade(false);
-    } else if (navBottom < contentTop) {
+    } else if (contentTop > 230) {
       if (docHasWindowShade()) {
         setOnMainContent(false);
         setAboveWindowShade(true);
