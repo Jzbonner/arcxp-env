@@ -10,6 +10,7 @@ import Copyright from '../_helper_components/global/copyright/default';
 import BreakingNews from '../_helper_components/global/breakingNews/default';
 import WeatherAlerts from '../_helper_components/global/weatherAlerts/default';
 import checkTags from './_helper_functions/checkTags';
+import getGalleryTopics from './_helper_functions/getGalleryTopics';
 import '../../src/styles/container/_article-basic.scss';
 
 const GalleryPageLayout = () => {
@@ -31,6 +32,8 @@ const GalleryPageLayout = () => {
     taxonomy,
   } = globalContent || {};
 
+  const galleryTopics = getGalleryTopics(promoItems, taxonomy);
+
   const { basic } = promoItems || {};
   const { basic: leafHeadline } = headlines || {};
 
@@ -45,14 +48,14 @@ const GalleryPageLayout = () => {
 
   return (
     <>
-      {!noAds && <GlobalAdSlots />}
+      {!noAds && <GlobalAdSlots galleryTopics={galleryTopics} />}
       <BreakingNews />
       <WeatherAlerts />
       <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} />
       <main>
         {!noAds && <div className="c-hp01-mp01 b-margin-top-d40-m20">
-          <ArcAd staticSlot={'HP00'} />
-          <ArcAd staticSlot={'MP01'} />
+          <ArcAd staticSlot={'HP00'} galleryTopics={galleryTopics} />
+          <ArcAd staticSlot={'MP01'} galleryTopics={galleryTopics} />
         </div>}
         <div className="c-header-gallery">
           <Headline headlines={headlines} basicItems={basicItems} />
