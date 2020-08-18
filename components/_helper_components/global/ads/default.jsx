@@ -14,7 +14,6 @@ const GlobalAdSlots = ({
 
   return <div className="b-hidden">
     <ArcAd staticSlot={'PX01'} galleryTopics={galleryTopics} />
-    <ArcAd staticSlot={'HS01'} galleryTopics={galleryTopics} />
     {pbPage && <>
         <ArcAd staticSlot={'NS01'} />
         <ArcAd staticSlot={'NS02'} />

@@ -49,9 +49,15 @@ const GalleryPageLayout = () => {
   return (
     <>
       {!noAds && <GlobalAdSlots galleryTopics={galleryTopics} />}
-      <BreakingNews />
-      <WeatherAlerts />
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} />
+      {!noHeaderAndFooter && (
+        <TopNavBreakingNews
+          articleURL={articleURL}
+          headlines={headlines}
+          comments={comments}
+          type={type}
+          noAds={noAds}
+          galleryTopics={galleryTopics} />
+      )}
       <main>
         {!noAds && <div className="c-hp01-mp01 b-margin-top-d40-m20">
           <ArcAd staticSlot={'HP00'} galleryTopics={galleryTopics} />
