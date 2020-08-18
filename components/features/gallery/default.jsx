@@ -131,6 +131,8 @@ const Gallery = (props) => {
     },
   });
 
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
+
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic || leafHeadline ? headlines.basic || leafHeadline : null;

@@ -8,13 +8,13 @@ import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
-import useLazyLoad from '../../../layouts/_helper_functions/useLazyLoad';
+import useLazyLoad from '../../../layouts/_helper_functions/lazyLoad';
 import './default.scss';
 
 const Image = ({
-                 width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType,
-                 ampPage = false, classes, onClickRun, customScrollContainerEl,
-               }) => {
+  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType,
+  ampPage = false, classes, onClickRun, customScrollContainerEl, lazyLoadCallback,
+}) => {
   const {
     url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText,
   } = src || {};
@@ -31,19 +31,20 @@ const Image = ({
   const imageEl = useRef(null);
   const placeholderEl = useRef(null);
 
-  useLazyLoad(placeholderEl, () => setImageSrc(imageResizer(url, arcSite, width, height)));
-
   const setLoaded = () => {
     imageEl.current.style.display = 'block';
     placeholderEl.current.style.display = 'none';
+    if (lazyLoadCallback && lazyLoadCallback instanceof Function) {
+      lazyLoadCallback();
+    }
   };
 
   useEffect(() => {
     const styles = window.getComputedStyle(imageEl.current);
     setPlaceholderWidth(styles.width);
-    // if (contextPath === '/pf') {
-    //   setImageSrc(imageResizer(url, arcSite, width, height));
-    // }
+    if (contextPath === '/pf' && imageType !== 'isGalleryImage') {
+      setImageSrc(imageResizer(url, arcSite, width, height));
+    }
   }, []);
 
   useEffect(() => {
@@ -72,6 +73,13 @@ const Image = ({
     }
   }, [url]);
   useLazyLoad(placeholderEl, () => setImageSrc(imageResizer(url, arcSite, width, height)), customScrollContainerEl);
+
+  useLazyLoad(
+    placeholderEl,
+    () => setImageSrc(imageResizer(url, arcSite, width, height)),
+    customScrollContainerEl,
+    imageType,
+  );
 
   const screenSize = checkWindowSize();
 
@@ -106,36 +114,36 @@ const Image = ({
 
   const imageBase = (
     !ampPage ? (
-      <>
+        <>
         <img src={imageSrc}
-             className={`${classes} ${teaseContentType ? ' tease-image' : ''}`}
-             style={{ display: 'none' }}
-             alt={getAltText(altText, caption)}
-             ref={imageEl}
-             onClick={onClickRun}
-             onLoad={setLoaded}/>
+          className={`${classes} ${teaseContentType ? ' tease-image' : ''}`}
+          style={{ display: 'none' }}
+          alt={getAltText(altText, caption)}
+          ref={imageEl}
+          onClick={onClickRun}
+          onLoad={setLoaded}/>
         <img src={placeholder} ref={placeholderEl}
-             style={{ width: placeholderWidth }}/>
-      </>
+          style={{ width: placeholderWidth }}/>
+        </>
     ) : (
       <amp-img
-        src={imageResizer(url, arcSite, width, height)}
-        alt={getAltText(altText, caption)}
-        width={width}
-        height={height !== 0 ? height : (width / originalWidth) * originalHeight}
-        onClick={onClickRun}
-        layout="responsive"
-        className={`${classes} ${teaseContentType ? ' tease-image' : ''}`}>
-        <amp-img
-          src={placeholder}
+          src={imageResizer(url, arcSite, width, height)}
           alt={getAltText(altText, caption)}
-          fallback=""
           width={width}
           height={height !== 0 ? height : (width / originalWidth) * originalHeight}
+          onClick={onClickRun}
           layout="responsive"
-          className={`${classes} ${teaseContentType ? ' tease-image' : ''}`}
-        >
-        </amp-img>
+          className={`${classes} ${teaseContentType ? ' tease-image' : ''}`}>
+          <amp-img
+            src={placeholder}
+            alt={getAltText(altText, caption)}
+            fallback=""
+            width={width}
+            height={height !== 0 ? height : (width / originalWidth) * originalHeight}
+            layout="responsive"
+            className={`${classes} ${teaseContentType ? ' tease-image' : ''}`}
+            >
+          </amp-img>
       </amp-img>
     )
   );
@@ -143,13 +151,13 @@ const Image = ({
   if (imageType !== 'isGalleryImage') {
     return (
       <div className={`c-image-component ${imageMarginBottom || ''}`}>
-        <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
-          {teaseContentType && getTeaseIcon(teaseContentType)}
+      <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
+        {teaseContentType && getTeaseIcon(teaseContentType)}
           {imageBase}
-          {imageType !== 'isHomepageImage' && renderCaption()}
-        </div>
-        {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
+        {imageType !== 'isHomepageImage' && renderCaption()}
       </div>
+      {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
+    </div>
     );
   }
 
