@@ -42,7 +42,7 @@ export default {
   nativoMoapTag: 'https://amp.ajc.com/amp/ntv',
   ads: {
     sandbox: {
-      adsA9Enabled: false,
+      adsA9Enabled: true,
       adsA9Id: '3970',
       adsPrebidEnabled: true,
       adsPrebidTimeout: 1500,
