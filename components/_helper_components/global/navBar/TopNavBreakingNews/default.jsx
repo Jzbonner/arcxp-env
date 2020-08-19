@@ -20,7 +20,6 @@ const TopNavBreakingNews = ({
   galleryTopics = [],
 }) => {
   const [aboveWindowShade, setAboveWindowShade] = useState(false);
-  const [onMainContent, setOnMainContent] = useState(false);
   const windowExists = typeof window !== 'undefined';
 
   const docHasWindowShade = (checkCollapse) => {
@@ -37,22 +36,10 @@ const TopNavBreakingNews = ({
   };
 
   const handleScroll = debounce(() => {
-    const navRef = document.querySelector('.c-headerNav.stickyActive');
-    const navBottom = navRef && navRef.getBoundingClientRect().bottom;
-    const pageContentRef = document.querySelector('main');
-    const contentTop = pageContentRef && pageContentRef.getBoundingClientRect().top;
     const { scrollY } = window;
 
-    if (navRef && aboveWindowShade && (navBottom >= contentTop)) {
-      setOnMainContent(true);
-      setAboveWindowShade(false);
-    } else if (navBottom < contentTop) {
-      if (docHasWindowShade()) {
-        setOnMainContent(false);
-        setAboveWindowShade(true);
-      } else if (!aboveWindowShade && !onMainContent && docHasWindowShade()) {
-        setAboveWindowShade(true);
-      }
+    if (!aboveWindowShade && docHasWindowShade()) {
+      setAboveWindowShade(true);
     } else if (docHasWindowShade(true) && scrollY <= 1) {
       setAboveWindowShade(false);
     }
@@ -70,7 +57,7 @@ const TopNavBreakingNews = ({
         }
       };
     }
-  }, [aboveWindowShade, onMainContent]);
+  }, [aboveWindowShade]);
 
   useEffect(() => {
     if (windowExists) {
@@ -81,7 +68,7 @@ const TopNavBreakingNews = ({
     }
 
     return null;
-  }, [aboveWindowShade, onMainContent]);
+  }, [aboveWindowShade]);
 
   return (
     <>

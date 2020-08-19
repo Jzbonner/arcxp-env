@@ -10,7 +10,7 @@ import '../../../../../src/styles/container/_c-headerNav.scss';
 
 const DesktopNav = ({
   sections, hamburgerToggle, isMobile, setToggle, rootDirectory, smallLogoUrl,
-  stickyActive, siteName,
+  stickyActive, siteName, hasWindowShade,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -28,7 +28,7 @@ const DesktopNav = ({
   <nav className={`
   ${hamburgerToggle && isMobile ? 'mobile-nav-activated' : ''}
   ${isMobile ? 'nav-mobile' : ''}
-  ${stickyActive && !isMobile ? 'is-hidden' : ''}`}>
+  ${(stickyActive || hasWindowShade) && !isMobile ? 'is-hidden' : ''}`}>
     <div className='nav-menu-toggle' onClick={(e) => { e.preventDefault(); setToggle(false); }}>
         <div className='nav-close-button'></div>
     </div>
@@ -63,6 +63,7 @@ DesktopNav.propTypes = {
   rootDirectory: PropTypes.string,
   stickyActive: PropTypes.bool,
   siteName: PropTypes.string,
+  hasWindowShade: PropTypes.bool,
 };
 
 export default DesktopNav;
