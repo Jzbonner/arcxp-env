@@ -48,6 +48,38 @@
         @include arc-ad-full-width;
       }
 
+      .c-HS02 {
+        padding: 40px 0;
+        margin-bottom: 20px;
+        
+        @include breakpoint(tablet) {
+          margin-bottom: 40px;
+        }
+
+        @include arc-ad-full-width;
+
+        .arc_ad[class*="HS02"] {
+          width: 100vw;
+          max-width: 1600px;
+          text-align: center;
+          margin: 0 auto;
+
+          > div,
+          > iframe {
+            margin-left: auto;
+            margin-right: auto;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 94%;
+          }
+
+          @include breakpoint(desktop-lg) {
+            width: 90%;
+          }
+        }
+      }
+
       // override for HP02 when interscroller loads in place of a display ad
 
       .arc_ad[class*="HP0"].ccad-noslotshadow .arcad {
