@@ -1,7 +1,7 @@
 const getGalleryTopics = (promoItems = {}, taxonomy = {}) => {
   const { basic = {} } = promoItems || {};
   const { additional_properties: additionalProperties = {} } = basic;
-  const { keywords = {} } = additionalProperties;
+  const { keywords = [] } = additionalProperties;
 
   const { tags = [] } = taxonomy;
 
