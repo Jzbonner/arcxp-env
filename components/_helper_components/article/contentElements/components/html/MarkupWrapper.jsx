@@ -1,59 +1,51 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Parser } from 'htmlparser2';
-import './styles.scss';
+import get from 'lodash.get';
+import ScriptWrapper from './components/Script/default';
+import ExpandableTextMessage from './components/ExpandableTextMessage/default';
+import PymLoader from './components/PymLoader/default';
 
 class MarkupWrapper extends PureComponent {
   constructor(props) {
     super(props);
-    if (!props.src) {
-      // don't have a defined endpoint so we need to parse the html
-      let inScript = false;
-      let src = '';
-      let script = '';
-      const parser = new Parser({
-        onopentag: (tag, attribs) => {
-          if (tag !== 'script') return;
-          ({ src } = attribs);
-          if (!src) inScript = true;
-        },
-        ontext: (text) => {
-          if (!inScript) return;
-          script = text;
-        },
-        onclosetag: (tag) => {
-          if (tag !== 'script') return;
-          inScript = false;
-        },
-      });
-      parser.write(this.props.html);
-      parser.end();
-      if (src) this.scriptSrc = src;
-      if (script) this.scriptText = script;
-    }
-  }
 
-  componentDidMount() {
-    const src = this.props.src || this.scriptSrc;
-    if (src) {
-      // if the endpoint is more than 1024 char, something is wrong
-      const type = `src-${src}`.substring(0, 1024);
-      if (window[type]) return;
-      window[type] = true;
-    }
-    const script = document.createElement('script');
-    script.async = true;
-    if (src) script.src = src;
-    if (this.scriptText) script.text = this.scriptText;
-    document.getElementsByTagName('body')[0].appendChild(script);
+    const plugins = [
+      'script',
+      'ExpandableTextMessage',
+      'PymLoader',
+    ];
+
+    let component;
+
+    const parser = new Parser({
+      onopentag: (tag) => {
+        const findComponent = plugins.find(item => item.toLowerCase() === tag.toLowerCase());
+        if (!findComponent) return;
+        component = findComponent;
+      },
+    });
+
+    parser.write(this.props.html);
+    parser.end();
+    if (component) this.component = component;
   }
 
   render() {
-    if (this.props.render) return this.props.render();
-    return <div dangerouslySetInnerHTML={{ __html: this.props.html }} />;
+    const component = get(this, 'component');
+    if (!component) return <div dangerouslySetInnerHTML={{ __html: this.props.html }} />;
+    switch (component) {
+      case 'ExpandableTextMessage':
+        return <ExpandableTextMessage html={this.props.html} />;
+      case 'script':
+        return <ScriptWrapper html={this.props.html} />;
+      case 'PymLoader':
+        return <PymLoader html={this.props.html} />;
+      default:
+        return <></>;
+    }
   }
 }
-
 
 MarkupWrapper.propTypes = {
   html: PropTypes.string,

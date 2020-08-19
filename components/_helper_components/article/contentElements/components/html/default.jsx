@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MarkupWrapper from './MarkupWrapper';
-import './styles.scss';
 
 const HTML = ({ src }) => {
   const { content } = src || '';
