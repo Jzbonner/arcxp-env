@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Footer from '../global/footer/default';
-import NavBar from '../global/navBar/default';
 import ArcAd from '../../features/ads/default';
 import Section from '../article/section/Section';
 import GlobalAdSlots from '../global/ads/default';
-import BreakingNews from '../global/breakingNews/default';
-import WeatherAlerts from '../global/weatherAlerts/default';
+import TopNavBreakingNews from '../global/navBar/TopNavBreakingNews/default';
 
 import '../../../src/styles/base/_utility.scss';
 import '../../../src/styles/container/_article-basic.scss';
@@ -38,9 +36,7 @@ const FlatPage = ({ globalContent }) => {
   return (
     <>
       { !noAds && <GlobalAdSlots /> }
-      <BreakingNews/>
-      <WeatherAlerts />
-      <NavBar articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype}/>
+      <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype} />
       <main className="c-flatpage">
         <article>
           {
