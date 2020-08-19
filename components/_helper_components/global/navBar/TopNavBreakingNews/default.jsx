@@ -19,7 +19,6 @@ const TopNavBreakingNews = ({
   omitBreakingNews = false,
 }) => {
   const [aboveWindowShade, setAboveWindowShade] = useState(false);
-  const [onMainContent, setOnMainContent] = useState(false);
   const windowExists = typeof window !== 'undefined';
 
   const docHasWindowShade = (checkCollapse) => {
@@ -36,21 +35,10 @@ const TopNavBreakingNews = ({
   };
 
   const handleScroll = debounce(() => {
-    const navRef = document.querySelector('.c-headerNav.stickyActive');
-    const pageContentRef = document.querySelector('main');
-    const contentTop = pageContentRef && pageContentRef.getBoundingClientRect().top;
     const { scrollY } = window;
 
-    if ((navRef && aboveWindowShade && (contentTop <= 230))) {
-      setOnMainContent(true);
-      setAboveWindowShade(false);
-    } else if (contentTop > 230) {
-      if (docHasWindowShade()) {
-        setOnMainContent(false);
-        setAboveWindowShade(true);
-      } else if (!aboveWindowShade && !onMainContent) {
-        setAboveWindowShade(true);
-      }
+    if (!aboveWindowShade && docHasWindowShade()) {
+      setAboveWindowShade(true);
     } else if (docHasWindowShade(true) && scrollY <= 1) {
       setAboveWindowShade(false);
     }
@@ -79,7 +67,7 @@ const TopNavBreakingNews = ({
     }
 
     return null;
-  }, [aboveWindowShade, onMainContent]);
+  }, [aboveWindowShade]);
 
   return (
     <>

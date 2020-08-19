@@ -85,14 +85,14 @@ const StickyNav = ({
     // Handles sticky visibility if scrolling down past top(mobile) or bottom(desktop) of logo.
     if (!stickyVisibilityRef.current
       && logoRef.current
-      && stickyShouldBeVisible()) {
+      && (stickyShouldBeVisible() || hasWindowShade)) {
       setStickyVisibility(true);
     }
 
     // Handles sticky visibility if scrolling up past bottom of padding between sticky nav and page content.
     if (stickyVisibilityRef.current
       && paddingRef.current
-      && stickyShouldBeHidden()) {
+      && stickyShouldBeHidden() && !hasWindowShade) {
       setStickyVisibility(false);
     }
   };
