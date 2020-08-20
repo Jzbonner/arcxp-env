@@ -49,7 +49,6 @@ const Gallery = (props) => {
   const [galleryVisible, setVisibility] = useState(false);
   const [modalVisible, setModalVisibility] = useState(false);
   const [currentImageSrc, setCurrectImageSrc] = useState('');
-  const [galleryTopics, setGalleryTopics] = useState([]);
 
   /* Ads */
   const [clickCount, setClickCount] = useState(0);
@@ -120,6 +119,41 @@ const Gallery = (props) => {
     && fetchedGalleryData.headlines.basic ? fetchedGalleryData.headlines.basic : '';
 
   const dataLayer = windowExists ? window.dataLayer : [];
+
+  let finalPromoItemTopics = [];
+  let finalTaxonomyTopics = [];
+
+  const { taxonomy: fetchedTaxonomy = {}, promo_items: fetchedPromoItems = {} } = fetchedGalleryData || {};
+  const { taxonomy: featuredTaxonomy = {}, promo_items: featuredPromoItems = {} } = featuredGalleryData || {};
+
+  if (fetchedPromoItems
+    && fetchedPromoItems.basic
+    && fetchedPromoItems.basic.additional_properties
+    && fetchedPromoItems.basic.additional_properties.keywords) {
+    finalPromoItemTopics = fetchedPromoItems.basic.additional_properties.keywords;
+  } else if (featuredPromoItems
+    && featuredPromoItems.basic
+    && featuredPromoItems.basic.additional_properties
+    && featuredPromoItems.basic.additional_properties.keywords) {
+    finalPromoItemTopics = featuredPromoItems.basic.additional_properties.keywords;
+  } else if (promoItems && promoItems.additional_properties
+    && promoItems.additional_properties.keywords) {
+    finalPromoItemTopics = promoItems.additional_properties.keywords;
+  }
+
+  if (fetchedTaxonomy && fetchedTaxonomy.tags && fetchedTaxonomy.tags.length) {
+    finalTaxonomyTopics = fetchedTaxonomy.tags;
+  } else if (featuredTaxonomy && featuredTaxonomy.tags && featuredTaxonomy.tags.length) {
+    finalTaxonomyTopics = featuredTaxonomy.tags;
+  } else if (taxonomy && taxonomy.tags && taxonomy.tags.length) {
+    finalTaxonomyTopics = taxonomy.tags;
+  }
+
+  if (finalTaxonomyTopics.length) {
+    finalTaxonomyTopics = finalTaxonomyTopics.map(tag => tag && tag.text);
+  }
+
+  const galleryTopics = [...new Set([...finalTaxonomyTopics, ...finalPromoItemTopics])];
 
   // push headline for home/section galleries
   if (!galHeadline && !headline && !isContentDataHeadlineFilled && fetchedHeadline) {
@@ -569,8 +603,6 @@ const Gallery = (props) => {
     let galleryContentElements = null;
     let fetchedContentElements = null;
     let featuredContentElements = null;
-    let finalPromoItemTopics = [];
-    let finalTaxonomyTopics = [];
 
     if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements(contentElements);
 
@@ -583,9 +615,6 @@ const Gallery = (props) => {
     } else if (!relevantGalleryData) {
       return null;
     }
-
-    const { taxonomy: fetchedTaxonomy = {}, promo_items: fetchedPromoItems = {} } = fetchedGalleryData || {};
-    const { taxonomy: featuredTaxonomy = {}, promo_items: featuredPromoItems = {} } = featuredGalleryData || {};
 
     if (relevantGalleryData && !galleryContentElements) galleryContentElements = relevantGalleryData.content_elements;
 
@@ -625,37 +654,6 @@ const Gallery = (props) => {
       setMobileAdsIndices([]);
       setCurrentAction('');
     }
-
-    if (fetchedPromoItems
-      && fetchedPromoItems.basic
-      && fetchedPromoItems.basic.additional_properties
-      && fetchedPromoItems.basic.additional_properties.keywords) {
-      finalPromoItemTopics = fetchedPromoItems.basic.additional_properties.keywords;
-    } else if (featuredPromoItems
-      && featuredPromoItems.basic
-      && featuredPromoItems.basic.additional_properties
-      && featuredPromoItems.basic.additional_properties.keywords) {
-      finalPromoItemTopics = featuredPromoItems.basic.additional_properties.keywords;
-    } else if (promoItems && promoItems.additional_properties
-      && promoItems.additional_properties.keywords) {
-      finalPromoItemTopics = promoItems.additional_properties.keywords;
-    }
-
-    if (fetchedTaxonomy && fetchedTaxonomy.tags && fetchedTaxonomy.tags.length) {
-      finalTaxonomyTopics = fetchedTaxonomy.tags;
-    } else if (featuredTaxonomy && featuredTaxonomy.tags && featuredTaxonomy.tags.length) {
-      finalTaxonomyTopics = featuredTaxonomy.tags;
-    } else if (taxonomy && taxonomy.tags && taxonomy.tags.length) {
-      finalTaxonomyTopics = taxonomy.tags;
-    }
-
-    if (finalTaxonomyTopics.length) {
-      finalTaxonomyTopics = finalTaxonomyTopics.map(tag => tag && tag.text);
-    }
-
-    const mergedTopics = [...new Set([...finalTaxonomyTopics, ...finalPromoItemTopics])];
-
-    setGalleryTopics(mergedTopics);
   }
 
   if (isStickyVisible || isMobile) {
