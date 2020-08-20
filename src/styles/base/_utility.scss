@@ -152,11 +152,16 @@
     &:not(:empty) {
       display: block;
 
+      &.HS02 {
+        margin: 0 auto;
+      }
+
       @include advertisement-label;
     }
 
     &.HS02:empty {
       display: block;
+      margin-bottom: 20px;
 
       @include advertisement-label;
     }
