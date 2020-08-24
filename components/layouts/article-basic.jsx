@@ -18,6 +18,7 @@ import Copyright from '../_helper_components/global/copyright/default';
 import ArcAd from '../features/ads/default';
 import ContributorBadge from '../_helper_components/global/contributorBadge/default';
 import filterContentElements from './_helper_functions/article/filterContentElements';
+import ConnextFreeMessaging from '../_helper_components/global/ConnextFreeMessaging/default';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
 import ConnextHyperLocalSubscription from '../_helper_components/global/ConnextHyperLocalSubscription/ConnextHyperLocalSubscription';
 import FlatPage from '../_helper_components/flatpage/default';
@@ -66,6 +67,7 @@ const StoryPageLayout = () => {
     subheadlines,
     credits,
     type,
+    content_restrictions: contentRestrictions,
   } = globalContent || {};
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
@@ -80,6 +82,7 @@ const StoryPageLayout = () => {
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
+  const { content_code: paywallStatus } = contentRestrictions || {};
 
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
@@ -176,6 +179,7 @@ const StoryPageLayout = () => {
           {!noAds && ampPage && !isHyperlocalContent && (
             <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
+          { paywallStatus === 'free' && <ConnextFreeMessaging/>}
           <Section
             elements={filteredContentElements}
             stopIndex={1}
