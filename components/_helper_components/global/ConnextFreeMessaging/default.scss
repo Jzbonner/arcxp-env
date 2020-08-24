@@ -1,0 +1,11 @@
+  
+@import "../../../../src/styles/base/breakpoints";
+@import "../../../../src/styles/base/mixins";
+
+.connext-free-messaging {
+  display: none;
+
+  &:not(:empty) {
+    display: block;
+  }
+}
