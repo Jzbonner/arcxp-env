@@ -4,7 +4,8 @@
 
 .connext-free-messaging {
   display: none;
-
+  height: auto !important; /* stylelint-disable-line declaration-no-important */
+  
   &:not(:empty) {
     display: block;
   }
