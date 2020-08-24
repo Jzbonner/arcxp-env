@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InnerHTML from 'dangerously-set-html-content';
-import getProperties from 'fusion:properties';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import checkWindowSize from '../../_helper_components/global/utils/check_window_size/default';

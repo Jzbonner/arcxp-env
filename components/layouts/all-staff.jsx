@@ -100,10 +100,7 @@ export const AllStaffPage = () => {
   return (
     <>
       <GlobalAdSlots />
-      {!noHeaderAndFooter && <> <BreakingNews />
-      <WeatherAlerts />
-      <NavBar />
-      </>}
+      {!noHeaderAndFooter && <TopNavBreakingNews />}
       <header className={'c-staff-page-header'}>
         <div className="c-hp01-mp01">
           <ArcAd staticSlot={'HP01'} />
@@ -142,8 +139,8 @@ export const AllStaffPage = () => {
         </section>
       </main>
       {!noHeaderAndFooter && <>
-      <Footer />
-      <Copyright />
+        <Footer />
+        <Copyright />
       </>}
     </>
   );

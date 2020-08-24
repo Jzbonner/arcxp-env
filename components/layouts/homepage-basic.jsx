@@ -1,5 +1,4 @@
 /*  /components/layouts/article-basic.jsx  */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
@@ -25,7 +24,7 @@ const HomePageLayout = (props) => {
     zone6,
   ] = props.children;
   const appContext = useAppContext();
-  const { layout, requestUri } = appContext;
+  const { requestUri } = appContext;
   const queryParams = getQueryParams(requestUri);
   const { nowrap: detectNoWrap } = queryParams || {};
   const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
@@ -33,11 +32,7 @@ const HomePageLayout = (props) => {
   return (
     <>
       <GlobalAdSlots pbPage={true} />
-      {!noHeaderAndFooter && <>
-      <BreakingNews />
-      <WeatherAlerts />
-      <NavBar type={layout} />
-      </>}
+      {!noHeaderAndFooter && <TopNavBreakingNews />}
       <main className="c-homepageContent">
         <SectionHome feature={zone1} rightRailContent={zone1rightrail} />
         <SectionHome feature={zone2} />
@@ -47,8 +42,8 @@ const HomePageLayout = (props) => {
         <SectionHome feature={zone6} />
       </main>
       {!noHeaderAndFooter && <>
-      <Footer />
-      <Copyright />
+        <Footer />
+        <Copyright />
       </>}
     </>
   );

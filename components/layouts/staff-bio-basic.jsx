@@ -60,11 +60,7 @@ const staffBioPage = () => {
   return (
     <>
       <GlobalAdSlots/>
-      {!noHeaderAndFooter && <>
-      <BreakingNews/>
-      <WeatherAlerts />
-      <NavBar/>
-      </>}
+      {!noHeaderAndFooter && <TopNavBreakingNews />}
       <main className='c-listPage'>
           {!noAds
           && <div className="c-hp01-mp01">
