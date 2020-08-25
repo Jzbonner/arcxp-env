@@ -185,7 +185,7 @@ class Api {
                   link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
                 },
                 {
-                  description: formattedDescription,
+                  description: formattedDescription || title,
                 },
                 {
                   pubDate: formattedDate,

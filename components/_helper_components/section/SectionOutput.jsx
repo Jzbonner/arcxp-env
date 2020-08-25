@@ -14,7 +14,7 @@ const SectionOutput = ({ zones, layout, noHeaderAndFooter }) => (
   <>
     <GlobalAdSlots pbPage={true} />
     {/* we omit breaking news on wraps */}
-    {!noHeaderAndFooter && <TopNavBreakingNews type={layout} />}
+    {!noHeaderAndFooter && <TopNavBreakingNews type={layout} omitBreakingNews={layout.indexOf('wrap-') !== -1} />}
     <main className="c-sectionContent">
       {zones && (
         zones.map((zone, i) => {
