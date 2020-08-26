@@ -26,8 +26,8 @@ const HomePageLayout = (props) => {
   const appContext = useAppContext();
   const { layout, requestUri } = appContext;
   const queryParams = getQueryParams(requestUri);
-  const { nowrap: detectNoWrap } = queryParams || {};
-  const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
 
   return (
     <>

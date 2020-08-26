@@ -16,8 +16,8 @@ const ListPageLayout = (props) => {
   } = appContext;
   if (!globalContent) return null;
   const queryParams = getQueryParams(requestUri);
-  const { nowrap: detectNoWrap } = queryParams || {};
-  const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
 
   const [title] = props.children;
   const pageTitleFeaturePresent = renderables[2] && renderables[2].type === 'pageTitle/default';

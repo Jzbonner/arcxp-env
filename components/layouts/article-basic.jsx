@@ -72,8 +72,7 @@ const StoryPageLayout = () => {
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
-  const { nowrap: detectNoWrap } = queryParams || {};
-  const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
+  const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
   if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} noHeaderAndFooter={noHeaderAndFooter} />;
 
   const ampMP02 = () => <AmpAd adSlot="MP02" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;

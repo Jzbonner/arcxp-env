@@ -26,8 +26,8 @@ export const AllStaffPage = () => {
   const [selectedLeftMenuItem, setSelectedLeftMenuItem] = useState({});
   const [selectedStaff, setSelectedStaff] = useState([]);
   const queryParams = getQueryParams(requestUri);
-  const { nowrap: detectNoWrap } = queryParams || {};
-  const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
 
   const pageUri = 'staff';
 

@@ -18,8 +18,8 @@ const VideoPageLayout = () => {
   // ampVideoIframe outputType is used on amp pages, to render only the video page - this is for preroll purposes
   const ampVideoIframe = outputType.toLowerCase() === 'ampvideoiframe';
   const queryParams = getQueryParams(requestUri);
-  const { nowrap: detectNoWrap } = queryParams || {};
-  const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
 
   const {
     promo_items: promoItems,
