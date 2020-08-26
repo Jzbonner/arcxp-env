@@ -6,7 +6,7 @@ import fetchEnv from '../../../_helper_components/global/utils/environment';
 import ArcAdLib from './children/ArcAdLib';
 
 const AdSetup = ({
-  id, slotName, adSlotNameForArcAds, dimensions, display, breakpoints, refresh, targeting, bidding, className, prerender, dfpId,
+  id, slotName, adSlotNameForArcAds, dimensions, display, breakpoints, refresh, targeting, bidding, className, prerender, dfpId, lazyLoad,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -29,6 +29,7 @@ const AdSetup = ({
   useEffect(() => {
     const instance = ArcAdLib.getInstance();
     const windowWidth = window.outerWidth;
+    const deferUntilKnownAuthState = window.deferUntilKnownAuthState || [];
     if (instance) {
       let adIsGood = null;
       let hasDimensionsMatch = false;
@@ -112,6 +113,10 @@ const AdSetup = ({
         if (slotName === 'HS02') {
           // we exclude HS02 from being registered because it is dependent upon the rendering of HS01 (see ./children/ArcAdLib.js)
           window.HS02SlotConfig = adSlotConfig;
+        } else if (lazyLoad) {
+          // this ad should not be loaded yet (most likely because we're waitig on connext or some other callback)
+          deferUntilKnownAuthState.push({ ad: adSlotConfig });
+          window.deferUntilKnownAuthState = deferUntilKnownAuthState;
         } else {
           instance.registerAd(adSlotConfig[0], adSlotConfig[1], adSlotConfig[2]);
         }
@@ -141,6 +146,7 @@ AdSetup.propTypes = {
   bidding: PropTypes.object, // bidding information. see https://github.com/washingtonpost/ArcAds#header-bidding
   dfpId: PropTypes.string,
   adSlotNameForArcAds: PropTypes.string.isRequired, // slot name for this ad, to be passed to arc ads (i.e. `topSection` value)
+  lazyLoad: PropTypes.bool, // flag for lazyloading ads (e.g. connext/paywall)
 };
 
 AdSetup.defaultProps = {

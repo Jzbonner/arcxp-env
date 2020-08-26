@@ -13,6 +13,7 @@ const ArcAd = ({
   adSuffix = '',
   staticSlot,
   galleryTopics = [],
+  lazyLoad = false,
 }) => {
   const { temp, text: sky, precipitation: weather } = currentConditions() || {};
   const appContext = useAppContext();
@@ -148,6 +149,7 @@ const ArcAd = ({
       adSlotNameForArcAds={adSlotNameForArcAds}
       targeting={{ ...globalTargeting, ...targeting }}
       bidding={adsPrebidSlots[slotBiddingName] || { prebid: false, amazon: false }}
+      lazyLoad={lazyLoad}
     />
   );
 
@@ -188,6 +190,7 @@ ArcAd.propTypes = {
   }),
   staticSlot: PropTypes.string,
   galleryTopics: PropTypes.array,
+  lazyLoad: PropTypes.bool,
 };
 
 ArcAd.defaultProps = {
