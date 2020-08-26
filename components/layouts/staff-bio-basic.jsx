@@ -8,6 +8,7 @@ import StaffBio from '../_helper_components/staffBioPage/staffBio/default';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import CollectionList from '../_helper_components/staffBioPage/collectionList/default';
+import getQueryParams from './_helper_functions/getQueryParams';
 import '../features/List/default.scss';
 import '../../src/styles/container/_homepage.scss';
 import '../_helper_components/listpage/default.scss';
@@ -15,7 +16,7 @@ import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreaki
 
 const staffBioPage = () => {
   const appContext = useAppContext();
-  const { globalContent } = appContext;
+  const { globalContent, requestUri } = appContext;
 
   if (!globalContent) return null;
   const {
@@ -31,6 +32,9 @@ const staffBioPage = () => {
     email,
     custom_ajc_phone: phoneNumber,
   } = globalContent || {};
+  const queryParams = getQueryParams(requestUri);
+  const { nowrap: detectNoWrap } = queryParams || {};
+  const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
 
 
   const { tags = [] } = taxonomy || {};
@@ -56,7 +60,7 @@ const staffBioPage = () => {
   return (
     <>
       <GlobalAdSlots/>
-      <TopNavBreakingNews />
+      {!noHeaderAndFooter && <TopNavBreakingNews />}
       <main className='c-listPage'>
           {!noAds
           && <div className="c-hp01-mp01">
@@ -89,8 +93,10 @@ const staffBioPage = () => {
         </div>
         { !noAds ? <div className='list-mp05'>{MP05()}</div> : null}
       </main>
+      {!noHeaderAndFooter && <>
       <Footer />
       <Copyright />
+      </>}
   </>
   );
 };

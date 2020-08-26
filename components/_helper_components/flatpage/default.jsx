@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Footer from '../global/footer/default';
+import Copyright from '../_helper_components/global/copyright/default';
 import ArcAd from '../../features/ads/default';
 import Section from '../article/section/Section';
 import GlobalAdSlots from '../global/ads/default';
@@ -11,7 +12,7 @@ import '../../../src/styles/base/_utility.scss';
 import '../../../src/styles/container/_article-basic.scss';
 import './default.scss';
 
-const FlatPage = ({ globalContent }) => {
+const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
   if (!globalContent) return null;
   const {
     headlines,
@@ -36,7 +37,9 @@ const FlatPage = ({ globalContent }) => {
   return (
     <>
       { !noAds && <GlobalAdSlots /> }
-      <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype} />
+      {!noHeaderAndFooter && (
+        <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype} noAds={noAds} />
+      )}
       <main className="c-flatpage">
         <article>
           {
@@ -72,13 +75,17 @@ const FlatPage = ({ globalContent }) => {
           }
         </article>
       </main>
-      <Footer />
+      {!noHeaderAndFooter && <>
+        <Footer />
+        <Copyright />
+      </>}
     </>
   );
 };
 
 FlatPage.propTypes = {
   globalContent: PropTypes.object,
+  noHeaderAndFooter: PropTypes.bool,
 };
 
 export default FlatPage;
