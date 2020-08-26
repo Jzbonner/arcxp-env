@@ -5,7 +5,7 @@ import { useAppContext, useFusionContext } from 'fusion:context';
 import { taboolaModuleScript } from '../../../src/js/taboola/taboolaScripts';
 import '../../../src/styles/base/_utility.scss';
 
-const TaboolaFeed = ({ ampPage }) => {
+const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
@@ -40,7 +40,12 @@ const TaboolaFeed = ({ ampPage }) => {
     const taboolaScript = document.createElement('script');
     taboolaScript.innerHTML = taboolaModuleScript(layout, containerName, placementName);
     taboolaScript.async = true;
-    document.body.appendChild(taboolaScript);
+    if (lazyLoad) {
+      window.deferUntilKnownAuthState = window.deferUntilKnownAuthState || [];
+      window.deferUntilKnownAuthState.push({ script: taboolaScript });
+    } else {
+      document.body.appendChild(taboolaScript);
+    }
   }, []);
 
   return (
@@ -51,6 +56,7 @@ const TaboolaFeed = ({ ampPage }) => {
 
 TaboolaFeed.propTypes = {
   ampPage: PropTypes.bool,
+  lazyLoad: PropTypes.bool, // flag for lazyloading (e.g. connext/paywall)
 };
 
 export default TaboolaFeed;
