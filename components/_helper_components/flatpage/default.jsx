@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Footer from '../global/footer/default';
-import Copyright from '../_helper_components/global/copyright/default';
+import Copyright from '../global/copyright/default';
 import ArcAd from '../../features/ads/default';
 import Section from '../article/section/Section';
 import GlobalAdSlots from '../global/ads/default';
