@@ -24,12 +24,13 @@ class Api {
     const { id: collectionId, from, size } = query || {};
     const feedStart = from - 1;
     const queryParams = getQueryParams(requestUri);
+    const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
     const queryTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'type');
     const newsletterFeed = queryTypePresent && queryParams.type === 'newsletter';
-    const noHeaderAndFooter = queryTypePresent && queryParams.type === 'app';
+    const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'rss-app';
     const rssFeedDetectAppWebview = () => {
       if (noHeaderAndFooter) {
-        return '?nowrap=y';
+        return '?outputType=wrap';
       } return '';
     };
     let maxItems = feedStart + size;

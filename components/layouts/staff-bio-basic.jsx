@@ -33,8 +33,8 @@ const staffBioPage = () => {
     custom_ajc_phone: phoneNumber,
   } = globalContent || {};
   const queryParams = getQueryParams(requestUri);
-  const { nowrap: detectNoWrap } = queryParams || {};
-  const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
 
 
   const { tags = [] } = taxonomy || {};
