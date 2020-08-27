@@ -25,8 +25,9 @@ class Api {
     const feedStart = from - 1;
     const queryParams = getQueryParams(requestUri);
     const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+    const queryTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'type');
+    const newsletterFeed = queryTypePresent && queryParams.type === 'newsletter';
     const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'rss-app';
-    const newsletterFeed = outPutTypePresent && queryParams.outputType === 'rss-newsletter';
     const rssFeedDetectAppWebview = () => {
       if (noHeaderAndFooter) {
         return '?outputType=wrap';
