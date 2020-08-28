@@ -175,7 +175,7 @@ const StoryPageLayout = () => {
               <ArcAd staticSlot={'MP01'} />
             </div>
           )}
-          <div className="c-articleContent">
+          <div className="c-articleBodyContainer">
             {!noAds && ampPage && !isHyperlocalContent && (
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
             )}
