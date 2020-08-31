@@ -44,7 +44,7 @@ export default {
   ads: {
     sandbox: {
       adsBidding,
-      adsA9Enabled: true,
+      adsA9Enabled: false,
       adsA9Id: '3970',
       adsPrebidEnabled: true,
       adsPrebidTimeout: 1500,
