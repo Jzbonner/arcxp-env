@@ -42,6 +42,8 @@ const Lead = (customFields = {}) => {
     },
   });
 
+  console.log(data);
+
   function getDisplayClassMap(displayC) {
     switch (displayC) {
       case '5-Item Feature - Top Photo':
@@ -54,15 +56,17 @@ const Lead = (customFields = {}) => {
         return 'center-lead-display-class';
       case '1 or 2 Item Feature':
         return 'one-two-item-display-class';
+      case 'Synopsis':
+        return 'synopsis';
       default:
         return 'top-photo-display-class';
     }
   }
 
-  function getLists(apiData, start, limit) {
+  function getLists(apiData, start, limit, showPreview) {
     return apiData.map((el, i) => {
       if (start <= i && i < start + limit) {
-        return <ListItem key={`ListItem-${i}`} {...el} />;
+        return <ListItem key={`ListItem-${i}`} {...el} showPreview={showPreview}/>;
       }
       return null;
     });
@@ -87,6 +91,7 @@ const Lead = (customFields = {}) => {
       case '5-Item Feature - Left Photo':
       case '5-Item Feature - No Photo':
       case '5-Item Feature - Center Lead Top Photo':
+      case 'Synopsis':
         return <Headline {...apiData[startIndex]} isTease={true} />;
       default:
         return null;
@@ -99,6 +104,7 @@ const Lead = (customFields = {}) => {
       case '5-Item Feature - Left Photo':
         return getLists(apiData, startIndex + 1, 4);
       case '5-Item Feature - No Photo':
+      case 'Synopsis':
         return (
           <>
             <FeatureTitle title={title} moreURL={moreURL} />
@@ -107,6 +113,20 @@ const Lead = (customFields = {}) => {
         );
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex + 3, 2);
+      default:
+        return null;
+    }
+  }
+
+  function renderColumn4(displayC, apiData) {
+    switch (displayC) {
+      case 'Synopsis':
+        return (
+          <>
+            <FeatureTitle title={title} moreURL={moreURL} />
+            {getLists(apiData, startIndex + 5, 2, true)}
+          </>
+        );
       default:
         return null;
     }
@@ -128,6 +148,9 @@ const Lead = (customFields = {}) => {
         {renderColumn3(displayClass, data) && (
           <div className="column-3">{renderColumn3(displayClass, data)}</div>
         )}
+         {renderColumn4(displayClass, data) && (
+          <div className="column-4">{renderColumn4(displayClass, data)}</div>
+        )}
       </div>
     );
   }
@@ -145,6 +168,7 @@ Lead.propTypes = {
       '5-Item Feature - No Photo',
       '5-Item Feature - Center Lead Top Photo',
       '1 or 2 Item Feature',
+      'Synopsis'
     ]).tag({
       name: 'Display Class',
       defaultValue: '5-Item Feature - Top Photo',

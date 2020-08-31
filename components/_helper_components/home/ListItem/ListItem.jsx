@@ -10,6 +10,7 @@ import checkTags from '../../../layouts/_helper_functions/checkTags';
 import truncateHeadline from '../../../layouts/_helper_functions/homepage/truncateHeadline';
 import ContributorBadge from '../../../_helper_components/global/contributorBadge/default';
 import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
+import ListItemPreview from '../ListItemPreview/ListItemPreview';
 
 const ListItem = ({
   promo_items: promoItems,
@@ -23,6 +24,8 @@ const ListItem = ({
   listPage,
   type: contentType,
   firstInlineImage,
+  showPreview,
+  _id: id
 }) => {
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -164,6 +167,7 @@ const ListItem = ({
           <a href={relativeURL}>
             {truncateHeadline(headlines.basic)}
           </a>
+          {showPreview && <ListItemPreview id={id} />}
         </div>
       </div>
     </div>
