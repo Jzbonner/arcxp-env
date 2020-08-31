@@ -220,6 +220,7 @@
     "dangerously-set-html-content": "^1.0.8",
     "htmlparser2": "^4.1.0",
     "jstoxml": "^1.6.7",
+    "lodash": "^4.17.20",
     "sanitize-html": "^1.26.0",
     "scriptjs": "^2.5.9",
     "thumbor-lite": "^0.1.8"
