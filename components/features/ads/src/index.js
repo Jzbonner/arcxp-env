@@ -94,6 +94,16 @@ const AdSetup = ({
             },
             prebid: {
               enabled: adsPrebidEnabled || false,
+              config: { // baseline config, per prebid docs & arcads repo
+                userSync: {
+                  filterSettings: {
+                    iframe: {
+                      bidders: '*', // '*' means all bidders
+                      filter: 'include',
+                    },
+                  },
+                },
+              },
               sizeConfig: adsPrebidSizeConfig || [],
             },
           },
