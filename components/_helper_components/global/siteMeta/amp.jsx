@@ -56,7 +56,6 @@ const SiteMetaAmp = () => {
       <meta name="language" content="English" />
       <meta property="article:opinion" content={isOpinion} />
       <meta name="story.meter" content={paywallStatus} />
-
       {metaValue('topics') && <meta name="topics" content={metaValue('topics')} />}
     </>
   );
