@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
@@ -9,7 +9,6 @@ import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
-import useLazyLoad from '../../../layouts/_helper_functions/lazyLoad';
 
 const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage = false,
@@ -23,26 +22,6 @@ const Image = ({
   const { deployment, contextPath } = appContext;
   const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
-
-  const [imageSrc, setImageSrc] = useState('');
-  const [placeholderWidth, setPlaceholderWidth] = useState('100%');
-  const imageEl = useRef(null);
-  const placeholderEl = useRef(null);
-
-  useLazyLoad(placeholderEl, () => setImageSrc(imageResizer(url, arcSite, width, height)));
-
-  const setLoaded = () => {
-    imageEl.current.style.display = 'block';
-    placeholderEl.current.style.display = 'none';
-  };
-
-  useEffect(() => {
-    const styles = window.getComputedStyle(imageEl.current);
-    setPlaceholderWidth(styles.width);
-    if (contextPath === '/pf') {
-      setImageSrc(imageResizer(url, arcSite, width, height));
-    }
-  }, []);
 
   useEffect(() => {
     if (teaseContentType) {
@@ -106,16 +85,10 @@ const Image = ({
       <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
         <>
           {!ampPage ? (
-            <>
-            <img src={imageSrc}
-              style={{ display: 'none' }}
+            <img src={imageResizer(url, arcSite, width, height)}
               alt={getAltText(altText, caption)}
               className={teaseContentType ? 'tease-image' : ''}
-              ref={imageEl}
-              onLoad={setLoaded}/>
-            <img src={placeholder} ref={placeholderEl}
-              style={{ width: placeholderWidth }}/>
-            </>
+            />
           ) : (
             <amp-img
               src={imageResizer(url, arcSite, width, height)}
