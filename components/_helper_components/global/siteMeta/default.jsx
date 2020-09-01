@@ -58,7 +58,7 @@ const SiteMeta = () => {
       <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
       {!isNonContentPage && <meta property="article:opinion" content={isOpinion.toString()} />}
-      {!isNonContentPage && <meta name="story.meter" value={paywallStatus} />}
+      {!isNonContentPage && <meta name="story.meter" content={paywallStatus} />}
       {metaValue('topics') && <meta name="topics" content={metaValue('topics')} />}
     </>
   );
