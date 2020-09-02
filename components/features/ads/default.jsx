@@ -172,9 +172,12 @@ ArcAd.propTypes = {
       'MP04',
       'MP05',
       'RP01',
+      'RP01 300x250',
+      'RP01 300x600',
       'RP01 sticky',
       'RP02',
       'RP03 sticky',
+      'RP09 300x250',
       'RP09 sticky',
       'SP01',
     ]).tag({
