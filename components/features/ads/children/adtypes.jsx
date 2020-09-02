@@ -138,6 +138,28 @@ export const adSlots = {
       [768, 0], // tablet+
     ],
   },
+  'RP01 300x250': {
+    slotName: 'RP01',
+    dimensions: [
+      [
+        [300, 250],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+  },
+  'RP01 300x600': {
+    slotName: 'RP01',
+    dimensions: [
+      [
+        [300, 600],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+  },
   'RP01 sticky': {
     slotName: 'RP01',
     dimensions: [
@@ -259,6 +281,17 @@ export const adSlots = {
     breakpoints: [
       [1024, 0], // desktop
       [768, 0], // tablet
+    ],
+  },
+  'RP09 300x250': {
+    slotName: 'RP09',
+    dimensions: [
+      [
+        [300, 250],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
     ],
   },
   'RP09 sticky': {
