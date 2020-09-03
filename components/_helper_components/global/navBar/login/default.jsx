@@ -75,6 +75,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   return (
     <li className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`}>
       <div
+        className='login-text-container'
         data-mg2-action={userStateRef.current === 'logged-out' ? 'login' : ''}
         onClick={(e) => { e.preventDefault(); setShowUserMenu(!showUserMenuRef.current); }}>
         <img src={source} />

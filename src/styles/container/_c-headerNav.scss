@@ -669,18 +669,18 @@
       display: none;
     }
   }
-  
+
   .nav-copyright-links {
     flex-wrap: wrap;
     line-height: 1.8;
     margin-bottom: 10px;
-    
+
     a {
       display: flex;
       padding: 0 5px;
 
       &:not(:last-child) {
-  
+
         &:after {
           content: "|";
           display: block;
@@ -689,7 +689,7 @@
       }
     }
   }
-  
+
   .nav-copyright {
     margin-bottom: 20px;
   }
@@ -729,6 +729,10 @@
 
       .section-item {
         height: 54px;
+      }
+
+      .login-text-container {
+        display: block !important; /* stylelint-disable-line declaration-no-important */
       }
 
       .login-text {
@@ -1240,7 +1244,7 @@
         height: 30px;
         width: 151px;
       }
-      
+
       &.springfield-news-sun {
         width: 200px;
         height: 30px;

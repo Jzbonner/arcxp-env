@@ -5,7 +5,7 @@ import { useFusionContext } from 'fusion:context';
 import { fbPagesId } from 'fusion:environment';
 import SiteMeta from '../_helper_components/global/siteMeta/default';
 import SiteMetrics from '../_helper_components/global/siteMetrics/default';
-import ConnextInit from '../_helper_components/global/connext/default.jsx';
+import { ConnextInit } from '../_helper_components/global/connext/default.jsx';
 import TaboolaFooter from '../_helper_components/global/taboola/taboolaFooter.jsx';
 import TaboolaHeader from '../_helper_components/global/taboola/taboolaHeader.jsx';
 import NativoScripts from '../_helper_components/article/nativo/nativoScripts';
