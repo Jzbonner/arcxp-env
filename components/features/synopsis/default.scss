@@ -1,0 +1,37 @@
+@import "./../../../src/styles/base";
+
+.synopsis {
+  .c-homeList {
+    .c-label-wrapper {
+      text-align: left;
+      margin: 0.6rem 0 0.4rem;
+    }
+
+    .headline {
+      text-align: left;
+      @include text-styles(1.75rem, 1.14, "Average");
+      letter-spacing: -0.16px;
+      a {
+        color: black;
+      }
+    }
+
+    .homeList-image {
+      display: none;
+    }
+
+    .homeList-text {
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid #cdcdcd;
+      width: 100%;
+      @include text-styles(1rem, 1.5, "Average");
+      letter-spacing: -0.32px;
+    }
+
+    &:last-child {
+      .homeList-text {
+        border: none;
+      }
+    }
+  }
+}

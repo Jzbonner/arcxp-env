@@ -1,0 +1,11 @@
+@import "../../../../src/styles/base/mixins";
+
+.listItemPreview {
+  @include text-styles(1rem, 1.5, "Average");
+  letter-spacing: -0.32;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin-top: 20px;
+}
