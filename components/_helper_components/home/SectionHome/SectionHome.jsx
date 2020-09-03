@@ -14,14 +14,12 @@ const SectionHomepage = ({
     if (colLayout) {
       parentClass += ' col-layout';
     }
-
-   console.log(feature.type.displayName);
-
+    
     return (
       <div className={parentClass}>
         <div className="c-contentElements">
           {!Array.isArray(feature) && feature}
-          {/* {Array.isArray(feature) && feature.map(feat => feat)} */}
+          {Array.isArray(feature) && feature.map(feat => feat)}
         </div>
         {rightColContent && <div className="c-contentElements">{rightColContent}</div>}
         {rightRailContent && <div className="c-rightRail">{rightRailContent}</div>}

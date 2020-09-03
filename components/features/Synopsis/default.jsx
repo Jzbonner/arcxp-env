@@ -14,7 +14,7 @@ const Synopsis = (customFields = {}) => {
     }
   } = customFields;
 
-  let { size, from: startIndex = 1 } = contentConfigValues || {};
+  let { size = 3, from: startIndex = 1 } = contentConfigValues || {};
   startIndex =
     parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
 

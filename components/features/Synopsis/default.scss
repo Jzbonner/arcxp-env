@@ -1,5 +1,12 @@
 @import "./../../../src/styles/base";
 
+.c-sectionHome.col-layout .c-contentElements .synopsis {
+  @include breakpoint(desktop-sm) {
+    width: 39%;
+    margin-left: 2%
+  }
+}
+
 .synopsis {
   .c-homeList {
     .c-label-wrapper {

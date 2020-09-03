@@ -1,18 +1,19 @@
 /*  /components/layouts/article-basic.jsx  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useAppContext } from 'fusion:context';
+import React from "react";
+import PropTypes from "prop-types";
+import { useAppContext } from "fusion:context";
 
-import GlobalAdSlots from '../_helper_components/global/ads/default';
-import SectionHome from '../_helper_components/home/SectionHome/SectionHome';
-import Footer from '../_helper_components/global/footer/default';
-import Copyright from '../_helper_components/global/copyright/default';
-import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
-import '../../src/styles/container/_homepage.scss';
-import '../../src/styles/base/_utility.scss';
+import GlobalAdSlots from "../_helper_components/global/ads/default";
+import SectionHome from "../_helper_components/home/SectionHome/SectionHome";
+import Footer from "../_helper_components/global/footer/default";
+import Copyright from "../_helper_components/global/copyright/default";
+import TopNavBreakingNews from "../_helper_components/global/navBar/TopNavBreakingNews/default";
+import isComponentInSection from "./_helper_functions/isComponentInSection";
+import "../../src/styles/container/_homepage.scss";
+import "../../src/styles/base/_utility.scss";
 
-const HomePageLayout = (props) => {
+const HomePageLayout = props => {
   const [
     zone1,
     zone1rightrail,
@@ -22,17 +23,17 @@ const HomePageLayout = (props) => {
     zone4,
     zone5,
     zone5rightrail,
-    zone6,
+    zone6
   ] = props.children;
   const appContext = useAppContext();
-  const { layout } = appContext;
-
+  const { layout, tree } = appContext;
+  
   return (
     <>
       <GlobalAdSlots pbPage={true} />
       <TopNavBreakingNews type={layout} />
       <main className="c-homepageContent">
-        <SectionHome feature={zone1} rightRailContent={zone1rightrail} />
+        <SectionHome feature={zone1} rightRailContent={zone1rightrail} colLayout={isComponentInSection(tree, "Synopsis/default", 0)}/>
         <SectionHome feature={zone2} />
         <SectionHome feature={zone3} rightRailContent={zone3rightrail} />
         <SectionHome feature={zone4} />
@@ -46,19 +47,19 @@ const HomePageLayout = (props) => {
 };
 
 HomePageLayout.sections = [
-  'Zone 1',
-  'Right Rail (zone 1)',
-  'Zone 2',
-  'Zone 3',
-  'Right Rail (zone 3)',
-  'Zone 4',
-  'Zone 5',
-  'Right Rail (zone 5)',
-  'Zone 6',
+  "Zone 1",
+  "Right Rail (zone 1)",
+  "Zone 2",
+  "Zone 3",
+  "Right Rail (zone 3)",
+  "Zone 4",
+  "Zone 5",
+  "Right Rail (zone 5)",
+  "Zone 6"
 ];
 
 HomePageLayout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 export default HomePageLayout;
