@@ -1,0 +1,10 @@
+@import "./../../../src/styles/base";
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  @include breakpoint(desktop-sm) {
+    flex-wrap: nowrap;
+  }
+}
