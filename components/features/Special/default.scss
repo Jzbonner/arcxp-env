@@ -1,0 +1,48 @@
+@import "../../../src/styles/base";
+
+.c-special {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  width: 100%;
+  overflow: hidden;
+
+  .c-call-to-action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 80%;
+    height: 209px;
+    opacity: .9;
+    border-radius: 12px;
+    box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+    background-color: #fff;
+
+    @include breakpoint(tablet) {
+      min-width: 590px;
+    }
+
+    @include breakpoint(desktop-sm) {
+      height: 209px;
+    }
+
+    .action-icon {
+      width: 75px;
+      height: 75px;
+    }
+
+    .text-action {
+      font-family: "Gordita";
+      font-size: 35px;
+      font-weight: 700;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.29;
+      letter-spacing: -.35px;
+      text-align: center;
+    }
+  }
+}
