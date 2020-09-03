@@ -20,10 +20,18 @@ const ArcAd = ({
   const { isAdmin } = appContext;
   const { arcSite } = fusionContext;
   const { slot: customFieldsSlot } = customFields || {};
-  const { dfp_id: dfpid, adsPath, siteName } = getProperties(arcSite);
+  const currentEnv = fetchEnv();
+  const {
+    dfp_id: dfpid,
+    adsPath,
+    siteName,
+    ads: adsProps,
+  } = getProperties(arcSite);
+  const { adsBidding } = adsProps[currentEnv] || {};
+  const { adsPrebidSlots } = adsBidding || {};
+
   const slot = customFieldsSlot || staticSlot;
   // let randomIdMPG01 = '';
-  const currentEnv = fetchEnv();
   let finalTopics = [];
 
   // If there is no DFP ID and we are in the Admin,
@@ -41,6 +49,7 @@ const ArcAd = ({
 
   // use their slotname if given, otherwise default to the slot for this ad type
   const slotName = adConfig.slotName || slot;
+  const slotBiddingName = adConfig.biddingName || adConfig.slotName || slot;
 
   // if (staticSlot && staticSlot.includes('MPG01')) randomIdMPG01 = Math.floor(Math.random() * 999999);
 
@@ -138,7 +147,7 @@ const ArcAd = ({
       slotName={slotName}
       adSlotNameForArcAds={adSlotNameForArcAds}
       targeting={{ ...globalTargeting, ...targeting }}
-      bidding={adConfig.bidding || { prebid: false, amazon: false }}
+      bidding={adsPrebidSlots[slotBiddingName] || { prebid: false, amazon: false }}
     />
   );
 
@@ -163,9 +172,12 @@ ArcAd.propTypes = {
       'MP04',
       'MP05',
       'RP01',
+      'RP01 300x250',
+      'RP01 300x600',
       'RP01 sticky',
       'RP02',
       'RP03 sticky',
+      'RP09 300x250',
       'RP09 sticky',
       'SP01',
     ]).tag({

@@ -75,10 +75,8 @@ const Video = ({
     let videoContentType;
     let videoTopics;
 
-    const fireGtmEvent = (evt) => {
-      const { time, type } = evt || {};
-      // fire GTM events for various player events
-      const dataLayer = window.dataLayer || [];
+    const buildGtmObject = (evt) => {
+      const { muted: mutedState, time, type } = evt || {};
       /*
         We override (or omit) eventType or ampEvent in the following cases to tailor output to either metrics, or amp, or both:
           - If both are present, then that video event is emitted to both outputs.
@@ -88,7 +86,26 @@ const Video = ({
       */
       // default eventType value: naming convention remains, we simply prepend "video" and capitalize the first letter
       let eventType = `video${type.charAt(0).toUpperCase()}${type.slice(1)}`;
+      let ampEvent = null;
       switch (type) {
+        case 'adStart':
+          ampEvent = 'ad_start';
+          break;
+        case 'adComplete':
+          ampEvent = 'ad_end';
+          break;
+        case 'muted':
+          eventType = null;
+          ampEvent = mutedState ? 'muted' : 'unmuted';
+          break;
+        case 'pause':
+          eventType = null;
+          ampEvent = 'pause';
+          break;
+        case 'play':
+          eventType = null;
+          ampEvent = 'playing';
+          break;
         case 'playback0':
           eventType = 'videoContentStart';
           break;
@@ -106,31 +123,77 @@ const Video = ({
           break;
         case 'powaRender':
           eventType = 'videoPlayerLoad';
+          ampEvent = 'canplay';
+          break;
+        case 'start':
+          ampEvent = 'playing';
           break;
         default:
           eventType = null;
       }
-      if (eventType) {
-        dataLayer.push({
-          event: eventType,
-          videoPayload: {
-            videoSource: 'arc',
-            videoTitle,
-            videoID: vidId,
-            videoContentType: videoContentType === 'clip' ? 'vod' : videoContentType,
-            videoPlayType,
-            videoTotalTime,
-            videoPlayerVersion,
-            videoTopics,
-            videoAccountID: '',
-            videoSeekTime: time,
-          },
-        });
+      const analyticsEventType = eventType;
+      const videoPayload = {
+        videoSource: 'arc',
+        videoTitle,
+        videoID: vidId,
+        videoContentType: videoContentType === 'clip' ? 'vod' : videoContentType,
+        videoPlayType,
+        videoTotalTime,
+        videoPlayerVersion,
+        videoTopics,
+        videoAccountID: '',
+        videoSeekTime: time,
+      };
+      if (isAmpWebPlayer && ampEvent) {
+        return {
+          ampPlayerEvent: ampEvent,
+          ampAnalyticsEvent: analyticsEventType,
+          videoPayload,
+        };
       }
+      return {
+        event: analyticsEventType,
+        videoPayload,
+      };
     };
+
+    const fireGtmEvent = (evt) => {
+      // fire GTM events for various player events
+      const dataLayer = window.dataLayer || [];
+      dataLayer.push(buildGtmObject(evt));
+    };
+
     const powaRendered = (e) => {
       const id = get(e, 'detail.id');
       const powa = get(e, 'detail.powa');
+
+      // go ahead and define vars for use in subsequent events/metrics
+      const { detail: videoDetails } = e || {};
+      const {
+        videoData: ogVideoData,
+        autoplay: ogAutoplay,
+      } = videoDetails || {};
+      const {
+        duration: ogDuration = 0,
+        headlines: ogHeadlines,
+        taxonomy: ogTaxonomy,
+        _id: ogVidId,
+        version: ogVersion,
+        video_type: ogVidType,
+      } = ogVideoData || {};
+      const { basic: ogHeadline } = ogHeadlines || {};
+      const { tags: ogTags = [] } = ogTaxonomy || {};
+
+      // (re)set video-specific values, for use in gtm
+      videoTotalTime = typeof ogDuration === 'number' && ogDuration > 0 ? ogDuration / 1000 : ogDuration;
+      vidId = ogVidId;
+      videoTitle = ogHeadline;
+      videoPlayType = ogAutoplay ? 'auto-play' : 'manual-play';
+      videoTopics = ogTags;
+      videoPlayerVersion = ogVersion;
+      videoContentType = ogVidType;
+
+      fireGtmEvent(videoDetails);
 
       // protect against the player not existing (just in case)
       if (typeof powa !== 'undefined') {
@@ -151,59 +214,32 @@ const Video = ({
             ampIntegration.method('fullscreenenter', () => powa.fullscreen(true));
             ampIntegration.method('fullscreenexit', () => powa.fullscreen(false));
 
-            const postToAmp = (ampEvent, evt) => {
-              if (ampEvent === 'muted' && typeof evt !== 'undefined') {
-                const { muted: mutedState } = evt || {};
-                ampIntegration.postEvent(mutedState ? 'muted' : 'unmuted');
-              } else {
-                ampIntegration.postEvent(ampEvent);
+            const postToAmp = (evt) => {
+              const { ampPlayerEvent, ampAnalyticsEvent, videoPayload } = buildGtmObject(evt) || {};
+              if (ampPlayerEvent) {
+                ampIntegration.postEvent(ampPlayerEvent);
+              }
+              if (ampAnalyticsEvent) {
+                ampIntegration.postAnalyticsEvent(ampAnalyticsEvent, videoPayload);
               }
             };
 
             // player -> amp triggers
-            powa.on('adComplete', () => postToAmp('ad_end'));
-            powa.on('adError', () => postToAmp('ad_error'));
-            powa.on('adStart', () => postToAmp('ad_start'));
-            powa.on('muted', evt => postToAmp('muted', evt));
-            powa.on('pause', () => postToAmp('pause'));
-            powa.on('play', () => postToAmp('playing'));
-            powa.on('start', () => postToAmp('playing'));
+            powa.on('adComplete', evt => postToAmp(evt));
+            powa.on('adError', evt => postToAmp(evt));
+            powa.on('adStart', evt => postToAmp(evt));
+            powa.on('muted', evt => postToAmp(evt));
+            powa.on('pause', evt => postToAmp(evt));
+            powa.on('play', evt => postToAmp(evt));
+            powa.on('start', evt => postToAmp(evt));
             // trigger initial postEvent since we're in the `powaRender` event
-            postToAmp('canplay');
+            postToAmp(videoDetails);
           };
 
           (window.AmpVideoIframe = window.AmpVideoIframe || []).push(
             onAmpIntegrationReady,
           );
         }
-
-        // go ahead and define vars for use in subsequent events/metrics
-        const { detail: videoDetails } = e || {};
-        const {
-          videoData: ogVideoData,
-          autoplay: ogAutoplay,
-        } = videoDetails || {};
-        const {
-          duration: ogDuration = 0,
-          headlines: ogHeadlines,
-          taxonomy: ogTaxonomy,
-          _id: ogVidId,
-          version: ogVersion,
-          video_type: ogVidType,
-        } = ogVideoData || {};
-        const { basic: ogHeadline } = ogHeadlines || {};
-        const { tags: ogTags = [] } = ogTaxonomy || {};
-
-        // (re)set video-specific values, for use in gtm
-        videoTotalTime = typeof ogDuration === 'number' && ogDuration > 0 ? ogDuration / 1000 : ogDuration;
-        vidId = ogVidId;
-        videoTitle = ogHeadline;
-        videoPlayType = ogAutoplay ? 'auto-play' : 'manual-play';
-        videoTopics = ogTags;
-        videoPlayerVersion = ogVersion;
-        videoContentType = ogVidType;
-
-        fireGtmEvent(videoDetails);
 
         powa.on('start', (event) => {
           const {
