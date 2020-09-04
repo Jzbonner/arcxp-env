@@ -1,8 +1,9 @@
-/*  /components/layouts/homepage-basic.jsx  */
+/*  /components/layouts/article-basic.jsx  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
-import getQueryParams from './_helper_functions/getQueryParams';
+
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import SectionHome from '../_helper_components/home/SectionHome/SectionHome';
 import Footer from '../_helper_components/global/footer/default';
@@ -24,15 +25,12 @@ const HomePageLayout = (props) => {
     zone6,
   ] = props.children;
   const appContext = useAppContext();
-  const { layout, requestUri } = appContext;
-  const queryParams = getQueryParams(requestUri);
-  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
-  const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
+  const { layout } = appContext;
 
   return (
     <>
       <GlobalAdSlots pbPage={true} />
-      {!noHeaderAndFooter && <TopNavBreakingNews type={layout} />}
+      <TopNavBreakingNews type={layout} />
       <main className="c-homepageContent">
         <SectionHome feature={zone1} rightRailContent={zone1rightrail} />
         <SectionHome feature={zone2} />
@@ -41,10 +39,8 @@ const HomePageLayout = (props) => {
         <SectionHome feature={zone5} rightRailContent={zone5rightrail} />
         <SectionHome feature={zone6} />
       </main>
-      {!noHeaderAndFooter && <>
-        <Footer />
-        <Copyright />
-      </>}
+      <Footer />
+      <Copyright />
     </>
   );
 };
