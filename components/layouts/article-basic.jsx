@@ -140,7 +140,13 @@ const StoryPageLayout = () => {
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
             <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
-            <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} contentType={type} />
+            <Headline
+              headlines={headlines}
+              basicItems={basicItems}
+              taxonomy={taxonomy}
+              ampPage={ampPage}
+              contentType={type}
+              lazyLoad={isMeteredStory} />
           </div>
           <div
             style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
