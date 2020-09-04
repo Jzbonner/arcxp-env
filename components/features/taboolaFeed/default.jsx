@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import { taboolaModuleScript } from '../../../src/js/taboola/taboolaScripts';
+import deferThis from '../../_helper_components/global/utils/deferLoading';
 import '../../../src/styles/base/_utility.scss';
 
 const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
@@ -41,8 +42,7 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
     taboolaScript.innerHTML = taboolaModuleScript(layout, containerName, placementName);
     taboolaScript.async = true;
     if (lazyLoad) {
-      window.deferUntilKnownAuthState = window.deferUntilKnownAuthState || [];
-      window.deferUntilKnownAuthState.push({ script: taboolaScript });
+      deferThis({ script: taboolaScript });
     } else {
       document.body.appendChild(taboolaScript);
     }

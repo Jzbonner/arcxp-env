@@ -3,6 +3,7 @@ import PropTypes from 'fusion:prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../../_helper_components/global/utils/environment';
+import deferThis from '../../../_helper_components/global/utils/deferLoading';
 import ArcAdLib from './children/ArcAdLib';
 
 const AdSetup = ({
@@ -29,7 +30,6 @@ const AdSetup = ({
   useEffect(() => {
     const instance = ArcAdLib.getInstance();
     const windowWidth = window.outerWidth;
-    const deferUntilKnownAuthState = window.deferUntilKnownAuthState || [];
     if (instance) {
       let adIsGood = null;
       let hasDimensionsMatch = false;
@@ -115,8 +115,7 @@ const AdSetup = ({
           window.HS02SlotConfig = adSlotConfig;
         } else if (lazyLoad) {
           // this ad should not be loaded yet (most likely because we're waitig on connext or some other callback)
-          deferUntilKnownAuthState.push({ ad: adSlotConfig });
-          window.deferUntilKnownAuthState = deferUntilKnownAuthState;
+          deferThis({ ad: adSlotConfig });
         } else {
           instance.registerAd(adSlotConfig[0], adSlotConfig[1], adSlotConfig[2]);
         }
