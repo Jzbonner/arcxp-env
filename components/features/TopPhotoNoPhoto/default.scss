@@ -1,6 +1,8 @@
 @import "./../../../src/styles/base";
 
 .topPhotoNoPhoto {
+  width: 100%;
+
   @include breakpoint(desktop-sm) {
     margin-right: 3%;
   }
@@ -8,20 +10,21 @@
   .c-homeLeadContainer {
     display: flex;
     flex-wrap: wrap;
+
     .column-2,
     .column-3 {
       width: 100%;
     }
+
     .column-2 {
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
-    .home-headline {
-      padding-top: 0;
-
+    .home-headline,
+    .home-headline.sponsored {
+      
       .homeList-image {
         width: 100%;
-        min-width: 100%;
 
         .c-image-component {
           position: static;
@@ -36,15 +39,26 @@
 
         .headline {
           margin-top: 3px;
-          letter-spacing: -0.16px;
+          letter-spacing: -.16px;
 
           @include text-styles(1rem, 1.38, "Average");
         }
       }
     }
 
+    .home-headline:not(.sponsored) {
+      padding: 0;
+    }
+
+    .home-headline.sponsored {
+
+      .headline-box {
+        margin-top: 30px;
+      }
+    }
+
     .column-3 .headline {
-      letter-spacing: -0.16px;
+      letter-spacing: -.16px;
 
       @include text-styles(1rem, 1.38, "Average");
     }
