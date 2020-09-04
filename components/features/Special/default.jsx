@@ -11,8 +11,6 @@ const Special = (customFields = {}) => {
     },
   } = customFields;
 
-  /* TODO: icon switch */
-
   const getIcon = () => {
     switch (icon) {
       case 'Podcast':
@@ -27,16 +25,16 @@ const Special = (customFields = {}) => {
   if (!backgroundImgSrc) return null;
 
   return (
-    <div className="c-special" style={{ background: `${backgroundImgSrc ? `url(${backgroundImgSrc})` : ''}` }}>
-      <a href={url || ''}>
+    <a href={url || ''}>
+      <div className="c-special" style={{ background: `${backgroundImgSrc ? `url(${backgroundImgSrc})` : ''}` }}>
         <div className="c-call-to-action">
           {icon ? <img className="action-icon" src={getIcon()} /> : null}
           {title ? <div className="action-text">
             <span>{`${title}`}</span>
           </div> : null}
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
   );
 };
 
