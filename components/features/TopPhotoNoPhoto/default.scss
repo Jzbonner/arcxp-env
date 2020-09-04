@@ -4,6 +4,7 @@
   @include breakpoint(desktop-sm) {
     margin-right: 3%;
   }
+
   .c-homeLeadContainer {
     display: flex;
     flex-wrap: wrap;
@@ -12,7 +13,40 @@
       width: 100%;
     }
     .column-2 {
-      margin-bottom: 25px;
+      margin-bottom: 15px;
+    }
+
+    .home-headline {
+      padding-top: 0;
+
+      .homeList-image {
+        width: 100%;
+        min-width: 100%;
+
+        .c-image-component {
+          position: static;
+        }
+      }
+
+      .headline-box {
+        box-shadow: none;
+        padding: 0;
+        background-color: none;
+        margin-top: 15px;
+
+        .headline {
+          margin-top: 3px;
+          letter-spacing: -0.16px;
+
+          @include text-styles(1rem, 1.38, "Average");
+        }
+      }
+    }
+
+    .column-3 .headline {
+      letter-spacing: -0.16px;
+
+      @include text-styles(1rem, 1.38, "Average");
     }
   }
 }
