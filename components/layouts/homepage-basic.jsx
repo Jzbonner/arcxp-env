@@ -9,7 +9,6 @@ import SectionHome from "../_helper_components/home/SectionHome/SectionHome";
 import Footer from "../_helper_components/global/footer/default";
 import Copyright from "../_helper_components/global/copyright/default";
 import TopNavBreakingNews from "../_helper_components/global/navBar/TopNavBreakingNews/default";
-import isComponentInSection from "./_helper_functions/isComponentInSection";
 import "../../src/styles/container/_homepage.scss";
 import "../../src/styles/base/_utility.scss";
 
@@ -27,13 +26,13 @@ const HomePageLayout = props => {
   ] = props.children;
   const appContext = useAppContext();
   const { layout, tree } = appContext;
-  
+
   return (
     <>
       <GlobalAdSlots pbPage={true} />
       <TopNavBreakingNews type={layout} />
       <main className="c-homepageContent">
-        <SectionHome feature={zone1} rightRailContent={zone1rightrail} colLayout={isComponentInSection(tree, "Synopsis/default", 0)}/>
+        <SectionHome feature={zone1} rightRailContent={zone1rightrail} />
         <SectionHome feature={zone2} />
         <SectionHome feature={zone3} rightRailContent={zone3rightrail} />
         <SectionHome feature={zone4} />

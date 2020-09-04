@@ -1,17 +1,17 @@
 @import "./../../../src/styles/base";
 
-.c-sectionHome.col-layout .c-contentElements .synopsis {
+.c-sectionHome .c-contentElements .c-synopsis {
   @include breakpoint(desktop-sm) {
     width: 39%;
-    margin-left: 2%
+    margin-left: 2%;
   }
 }
 
-.synopsis {
+.c-synopsis {
   .c-homeList {
     .c-label-wrapper {
       text-align: left;
-      margin: 0.6rem 0 0.4rem;
+      margin: 0.6rem 0;
     }
 
     .headline {
@@ -33,6 +33,12 @@
       width: 100%;
       @include text-styles(1rem, 1.5, "Average");
       letter-spacing: -0.32px;
+    }
+
+    &:first-child {
+      .c-label-wrapper {
+        margin-top: 0;
+      }
     }
 
     &:last-child {

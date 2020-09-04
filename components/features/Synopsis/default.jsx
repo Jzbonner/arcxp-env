@@ -28,7 +28,7 @@ const Synopsis = (customFields = {}) => {
 
   if (Array.isArray(data)) {
     return (
-      <div className="synopsis">
+      <div className="c-synopsis">
         {data.map((el, i) => {
           if (startIndex <= i && i < size) {
             return (
