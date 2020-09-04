@@ -18,6 +18,7 @@ import Copyright from '../_helper_components/global/copyright/default';
 import ArcAd from '../features/ads/default';
 import ContributorBadge from '../_helper_components/global/contributorBadge/default';
 import filterContentElements from './_helper_functions/article/filterContentElements';
+import ConnextFreeMessaging from '../_helper_components/global/ConnextFreeMessaging/default';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
 import ConnextHyperLocalSubscription from '../_helper_components/global/ConnextHyperLocalSubscription/ConnextHyperLocalSubscription';
 import FlatPage from '../_helper_components/flatpage/default';
@@ -66,18 +67,21 @@ const StoryPageLayout = () => {
     subheadlines,
     credits,
     type,
+    content_restrictions: contentRestrictions,
   } = globalContent || {};
-  if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} />;
-
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
+  const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
+  if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} noHeaderAndFooter={noHeaderAndFooter} />;
+
   const ampMP02 = () => <AmpAd adSlot="MP02" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
   const ampMP03 = () => <AmpAd adSlot="MP03" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
 
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
+  const { content_code: paywallStatus } = contentRestrictions || {};
 
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
@@ -129,17 +133,22 @@ const StoryPageLayout = () => {
   return (
     <>
       {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} />}
-      <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} noAds={noAds} />
+      {!noHeaderAndFooter && (
+        <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} noAds={noAds} />
+      )}
       <main className="c-articleContent">
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
             <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
             <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} contentType={type} />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
-            className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10">
-            {!isCommunityContributor
-              && <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />}
+          <div
+            style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
+            className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10"
+          >
+            {!isCommunityContributor && (
+              <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />
+            )}
             <TimeStamp
               firstPublishDate={firstPublishDate}
               displayDate={displayDate}
@@ -169,6 +178,7 @@ const StoryPageLayout = () => {
           {!noAds && ampPage && !isHyperlocalContent && (
             <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
           )}
+          { paywallStatus === 'free' && <ConnextFreeMessaging/>}
           <Section
             elements={filteredContentElements}
             stopIndex={1}
@@ -195,13 +205,9 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
             ampPage={ampPage}
           />
-          {!noAds && maxNumberOfParagraphs === 3
-          && <InterscrollerPlaceholder
-          ampPage={ampPage}
-          isHyperlocalContent={isHyperlocalContent}
-          taxonomy={taxonomy}
-          uuid={uuid}
-          />}
+          {!noAds && maxNumberOfParagraphs === 3 && (
+            <InterscrollerPlaceholder ampPage={ampPage} isHyperlocalContent={isHyperlocalContent} taxonomy={taxonomy} uuid={uuid} />
+          )}
           {!noAds && !isHyperlocalContent && !sponsorSectionID && (
             <Nativo
               elements={filteredContentElements}
@@ -218,13 +224,9 @@ const StoryPageLayout = () => {
             comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
             ampPage={ampPage}
           />
-          {!noAds && maxNumberOfParagraphs >= 4
-          && <InterscrollerPlaceholder
-            ampPage={ampPage}
-            isHyperlocalContent={isHyperlocalContent}
-            taxonomy={taxonomy}
-            uuid={uuid}
-          />}
+          {!noAds && maxNumberOfParagraphs >= 4 && (
+            <InterscrollerPlaceholder ampPage={ampPage} isHyperlocalContent={isHyperlocalContent} taxonomy={taxonomy} uuid={uuid} />
+          )}
           <Section
             elements={filteredContentElements}
             startIndex={stop}
@@ -244,8 +246,10 @@ const StoryPageLayout = () => {
           )}
         </article>
       </main>
-      {!ampPage && <Footer />}
+      {!ampPage && !noHeaderAndFooter && <>
+      <Footer />
       <Copyright />
+      </>}
       {ampPage && <Carousel storyId={uuid} taxonomy={taxonomy} />}
     </>
   );
