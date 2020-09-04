@@ -1,11 +1,14 @@
+/* stylelint-disable value-no-vendor-prefix, property-no-vendor-prefix */
+
 @import "../../../../src/styles/base/mixins";
 
 .c-listItemPreview {
-  @include text-styles(1rem, 1.5, "Average");
-  letter-spacing: -0.32;
+  letter-spacing: -.32;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  margin-top: 0.4rem;
+  margin-top: .4rem;
+
+  @include text-styles(1rem, 1.5, "Average");
 }

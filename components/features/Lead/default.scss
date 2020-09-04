@@ -380,6 +380,7 @@
       }
 
       &:first-child {
+
         .c-label-wrapper {
           margin-top: 0;
         }
@@ -476,57 +477,6 @@
           @include breakpoint(desktop-sm) {
             text-align: center;
           }
-        }
-      }
-    }
-  }
-
-
-  /////////////////////
-  // Synopsis Display Class Styles
-  /////////////////////
-
-  &.synopsis {
-
-    .column-2,
-    .column-3,
-    .column-4 {
-      flex: 1;
-    }
-
-    .column-2, .column-3 {
-      margin-right: 2%;
-    }
-
-    .b-sectionTitle {
-      text-align: left;
-    }
-
-    .c-homeList {
-
-      .c-label-wrapper {
-        text-align: left;
-        margin: .6rem 0 .4rem;
-      }
-
-      .headline {
-        text-align: left;
-      }
-
-      .homeList-image {
-        display: none;
-      }
-
-      .homeList-text {
-        padding-bottom: .6rem;
-        border-bottom: 1px solid #cdcdcd;
-        width: 100%;
-      }
-
-      &:last-child {
-
-        .homeList-text {
-          border: none;
         }
       }
     }

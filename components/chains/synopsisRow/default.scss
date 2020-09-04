@@ -5,39 +5,69 @@
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
+
   @include breakpoint(desktop-sm) {
     flex-wrap: nowrap;
   }
 
   .c-homeLeadContainer {
+
     .home-headline {
       padding-top: 0;
-      .c-image-component {
-        position: static;
+
+      .homeList-image {
+        width: 100%;
+
+        .c-image-component {
+          position: static;
+        }
       }
+
       .headline-box {
         box-shadow: none;
         padding: 0;
         background-color: none;
         margin-top: 15px;
+
         .headline {
           margin-top: 7px;
+          letter-spacing: -.16px;
+
           @include text-styles(1.75rem, 1.14, "Average");
-          letter-spacing: -0.16px;
         }
       }
     }
+
     .column-3 {
-      .c-label-wrapper {
-        margin-bottom: 0.6rem;
+    
+      .c-homeList {
+
+        .c-label-wrapper,
+        .c-sponsor {
+          margin-bottom: .2rem;
+        }
+
+        .headline {
+          margin-top: -5px;
+          font-size: unset;
+
+          a {
+            @include text-styles(1.25rem, 1.5, "Average");
+
+            letter-spacing: -.27px;
+
+            @include breakpoint(desktop-sm) {
+              letter-spacing: -.32px;
+            }
+          }
+        }
       }
-      .headline {
-        margin-top: -5px;
-        a {
-          @include text-styles(1.25rem, 1.5, "Average");
-          letter-spacing: -0.27px;
-          @include breakpoint(desktop-sm) {
-            letter-spacing: -0.32px;
+
+      .c-homeList:last-child {
+
+        .homeList-text {
+          @include between-breakpoints(tablet, desktop-sm) {
+            border-bottom: 1px solid #cdcdcd;
           }
         }
       }

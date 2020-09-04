@@ -25,7 +25,7 @@ const ListItem = ({
   type: contentType,
   firstInlineImage,
   showPreview,
-  _id: id
+  _id: id,
 }) => {
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -186,6 +186,8 @@ ListItem.propTypes = {
   firstInlineImage: PropTypes.object,
   canonical_url: PropTypes.string,
   website_url: PropTypes.string,
+  showPreview: PropTypes.bool,
+  _id: PropTypes.string,
 };
 
 export default ListItem;

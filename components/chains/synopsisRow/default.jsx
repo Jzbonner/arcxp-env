@@ -1,12 +1,15 @@
-import React from "react";
-import "./default.scss";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './default.scss';
 
-const SynopsisRow = props => {
-  return (
-    <div className="c-synopsis-row b-margin-bottom-d30-m20">
+const SynopsisRow = props => (
+    <div className='c-synopsis-row b-margin-bottom-d30-m20'>
       {props.children}
     </div>
-  );
+);
+
+SynopsisRow.propTypes = {
+  children: PropTypes.array,
 };
 
 export default SynopsisRow;
