@@ -7,6 +7,7 @@ import get from 'lodash.get';
 import fetchEnv from '../utils/environment';
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
+import deferThis from '../utils/deferLoading';
 import gamAdTagBuilder from './_helper_functions/gamAdTagBuilder';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
@@ -14,7 +15,14 @@ import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
 const Video = ({
-  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, pageTaxonomy = [],
+  src,
+  isLeadVideo,
+  isInlineVideo,
+  maxTabletViewWidth,
+  featuredVideoPlayerRules,
+  inlineVideoPlayerRules,
+  pageTaxonomy = [],
+  lazyLoad = false,
 }) => {
   const appContext = useAppContext();
   const { globalContent, requestUri, layout } = appContext;
@@ -44,7 +52,8 @@ const Video = ({
   const siteOfRecord = cdnSite || arcSite;
   const isAmpOutput = outputType === 'amp';
   const isAmpWebPlayer = outputType === 'ampVideoIframe';
-  let autoplayState = startPlaying;
+  // initial autoplay state: false if it's a lead video and we're lazy loading the video (i.e. paywall)
+  let autoplayState = isLeadVideo && lazyLoad ? false : startPlaying;
   // update autoplay if it's ampVideoIframe (since we need some way to pass the state to the component through the iframe)
   if (isAmpWebPlayer) {
     if (requestUri.indexOf('autoplayState') > -1) {
@@ -197,6 +206,11 @@ const Video = ({
 
       // protect against the player not existing (just in case)
       if (typeof powa !== 'undefined') {
+        /* if it's a lead video and should be lazyloaded, add it to the `` array, for triggering in ... */
+        if (isLeadVideo && lazyLoad) {
+          deferThis({ video: powa });
+        }
+
         // bind to ampIntegration events, to control the PoWa player from AMP
         if (isAmpWebPlayer) {
           const onAmpIntegrationReady = (ampIntegration) => {
@@ -401,6 +415,7 @@ Video.propTypes = {
   inlineVideoPlayerRules: PropTypes.object,
   maxTabletViewWidth: PropTypes.number,
   pageTaxonomy: PropTypes.object,
+  lazyLoad: PropTypes.bool,
 };
 
 export default Video;

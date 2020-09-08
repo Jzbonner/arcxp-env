@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../../utils/environment';
+import GetConnextLocalStorageData from '../../connext/connextLocalStorage';
 import '../../../../../src/styles/container/_c-headerNav.scss';
 import userIcon from '../../../../../resources/icons/login/user-icon.svg';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
@@ -22,6 +23,8 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   const {
     isEnabled = false,
     siteCode,
+    configCode,
+    environment,
   } = connext[currentEnv] || {};
 
   if (!isEnabled) {
@@ -59,6 +62,26 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
       }
     }
   };
+
+  const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
+  const { UserState } = connextLocalStorageData;
+  if (typeof window !== 'undefined' && UserState) {
+    let currentState;
+    switch (UserState) {
+      case 'Logged Out':
+      case 'logged out':
+        currentState = 'logged-out';
+        break;
+      case 'Logged In':
+        currentState = 'logged-in';
+        break;
+      default:
+        currentState = UserState;
+    }
+    useEffect(() => {
+      setUserState(currentState);
+    }, [currentState]);
+  }
 
   const useWindowEvent = (event, trigger) => {
     const callback = () => setUserState(trigger);

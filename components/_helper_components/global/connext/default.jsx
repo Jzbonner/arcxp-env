@@ -32,6 +32,9 @@ export const ConnextAuthTrigger = () => {
             } else if (key === 'script') {
               // it's a script file, append it (e.g. taboola)
               document.body.appendChild(item[key]);
+            } else if (key === 'video') {
+              // it's a video player, trigger it to play
+              item[key].play();
             } else {
               // eslint-disable-next-line no-console
               console.error(`unsupported object (${key}) defined in window.deferUntilKnownAuthState:`, item[key]);
