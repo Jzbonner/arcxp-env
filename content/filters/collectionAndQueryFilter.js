@@ -1,126 +1,54 @@
-export default `{
-    canonical_url
-    content_elements {
-        type
-        content
-        url
-        caption
-        raw_oembed {
-            type
-            url
-            _id
-        }
-    }
-    credits {
-        by {
-            name
-            url
-        }
-    }
-    description {
-        basic
-        meta_title
-    }
-    display_date
-    first_publish_date
-    firstInlineImage {
-        alt_text
-        url
-        height
-        width
-        caption
-        credits {
-            affiliation {
-                by {
-                    id
-                }
-            }
-            by {
-                name
-                type
-            }
-        }
-    }
-    headlines {
-        basic
-    }
-    label {
-        hide_timestamp
-        basic {
-            text
-        }
-    }
-    last_updated_date
-    promo_items {
-        basic {
-            alt_text
-            caption
-            content_elements {
-                caption
-                url
-            }
-            credits {
-                affiliation {
-                    by {
-                        id
-                    }
-                }
-                by {
-                    name
-                    type
-                }
-            }
-            height
-            headlines {
-                basic
-            }
-            promo_image {
-                url
-            }
-            promo_items {
-                basic {
-                    alt_text
-                    url
-                    width
-                    height
-                    caption
-                    subtitle
-                    caption
-                    type
-                }
-            }
-            streams {
-                stream_type
-                url
-            }
-            subtitle
-            type
-            url
-            width
-        }
-    }
-    taxonomy {
-        tags {
-            text
-        }
-        sections {
-            type
-            name
-            path
-            additional_properties {
-                original {
-                    inactive
-                }
-            }
-        }
-        primary_section {
-            path
-            name
-            referent
-        }
-    }
-    type
-    website_url
-    _id
-  }
-}`;
+export default [
+  'canonical_url',
+  'content_elements',
+  'credits.by',
+  'description.basic',
+  'description.meta_title',
+  'display_date',
+  'first_publish_date',
+  'firstInlineImage.alt_text',
+  'firstInlineImage.url',
+  'firstInlineImage.height',
+  'firstInlineImage.width',
+  'firstInlineImage.caption',
+  'firstInlineImage.credits.affiliation.by.id',
+  'firstInlineImage.credit.by',
+  'headlines.basic',
+  'label.hide_timestamp',
+  'label.basic.text',
+  'last_updated_date',
+  'promo_items.basic.alt_text',
+  'promo_items.basic.caption',
+  'promo_items.basic.content_elements.caption',
+  'promo_items.basic.content_elements.url',
+  'promo_items.basic.credits.affiliation.by.id',
+  'promo_items.basic.credits.by',
+  'promo_items.basic.height',
+  'promo_items.basic.headlines.basic',
+  'promo_items.basic.promo_image.url',
+  'promo_items.basic.promo_items.basic.alt_text',
+  'promo_items.basic.promo_items.basic.url',
+  'promo_items.basic.promo_items.basic.width',
+  'promo_items.basic.promo_items.basic.height',
+  'promo_items.basic.promo_items.basic.caption',
+  'promo_items.basic.promo_items.basic.subtitle',
+  'promo_items.basic.promo_items.basic.caption',
+  'promo_items.basic.promo_items.basic.type',
+  'promo_items.basic.streams.stream_type',
+  'promo_items.basic.streams.url',
+  'promo_items.basic.subtitle',
+  'promo_items.basic.type',
+  'promo_items.basic.url',
+  'promo_items.basic.width',
+  'taxonomy.tags.text',
+  'taxonomy.sections.type',
+  'taxonomy.sections.name',
+  'taxonomy.sections.path',
+  'taxonomy.sections.additional_properties.original.inactive',
+  'taxonomy.primary_section.path',
+  'taxonomy.primary_section.name',
+  'taxonomy.primary_section.referent',
+  'type',
+  'website_url',
+  '_id',
+];

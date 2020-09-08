@@ -4,7 +4,12 @@ export default (apiData, currentDisplayClass = '', requiredClasses = []) => {
     if (requiredClasses.some(requiredClass => requiredClass === currentDisplayClass)) {
       newData = apiData.filter((el) => {
         if (el.type === 'story') {
-          if (el.promo_items && el.promo_items.basic && el.promo_items.basic.promo_image && el.promo_items.basic.promo_image.url) {
+          if (
+            el.promo_items
+            && el.promo_items.basic
+            && el.promo_items.basic.promo_image
+            && el.promo_items.basic.promo_image.url
+          ) {
             return true;
           }
           if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {

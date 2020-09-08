@@ -7,13 +7,14 @@ const GlobalAdSlots = ({
   ampPage,
   pbPage = false,
   galleryTopics = [],
+  lazyLoad = false,
 }) => {
   if (ampPage) {
     return null;
   }
 
   return <div className="b-hidden">
-    <ArcAd staticSlot={'PX01'} galleryTopics={galleryTopics} />
+    <ArcAd staticSlot={'PX01'} galleryTopics={galleryTopics} lazyLoad={lazyLoad} />
     {pbPage && <>
         <ArcAd staticSlot={'NS01'} />
         <ArcAd staticSlot={'NS02'} />
@@ -27,6 +28,7 @@ GlobalAdSlots.propTypes = {
   taxonomy: PropTypes.object,
   pbPage: PropTypes.bool,
   galleryTopics: PropTypes.array,
+  lazyLoad: PropTypes.bool,
 };
 
 export default GlobalAdSlots;

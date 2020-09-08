@@ -1,0 +1,67 @@
+@import "./../../../src/styles/base";
+
+.c-sectionHome .c-contentElements .c-synopsis {
+  @include breakpoint(desktop-sm) {
+    width: 39%;
+    margin-left: 1.5%;
+  }
+}
+
+.c-synopsis {
+
+  .c-homeList {
+
+    .c-label-wrapper {
+      text-align: left;
+      margin: .4rem 0 0;
+
+      @include breakpoint(desktop-sm) {
+        margin-top: .6rem;
+      }
+
+      .c-sponsor {
+        margin-bottom: .2rem;
+      }
+    }
+
+    .headline {
+      text-align: left;
+      letter-spacing: -.16px;
+
+      @include text-styles(1.75rem, 1.14, "Average");
+
+      a {
+        color: #000;
+      }
+    }
+
+    .homeList-image {
+      display: none;
+    }
+
+    .homeList-text {
+      padding-bottom: .6rem;
+      border-bottom: 1px solid #cdcdcd;
+      width: 100%;
+      letter-spacing: -.32px;
+
+      @include text-styles(1rem, 1.5, "Average");
+    }
+
+    &:first-child {
+
+      .c-label-wrapper {
+        @include breakpoint(desktop-sm) {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &:last-child {
+      
+      .homeList-text {
+        border: none;
+      }
+    }
+  }
+}

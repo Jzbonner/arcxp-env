@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import _ from 'lodash';
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
 import GetCollectionData from './helper_functions/GetCollectionData';
@@ -30,6 +31,7 @@ const fetch = (query) => {
     return GetCollectionData(activeSite, id, size)
       .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
       .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
+      .then(data => data.map(el => _.pick(el, filter)))
       .catch((error) => {
         console.error(error);
       });
@@ -42,5 +44,4 @@ export default {
   schemaName,
   ttl,
   params,
-  filter,
 };
