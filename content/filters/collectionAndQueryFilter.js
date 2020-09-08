@@ -14,6 +14,7 @@ export default `{
     credits {
         by {
             name
+            url
         }
     }
     description {
