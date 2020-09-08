@@ -35,7 +35,7 @@ const Columnist = (customFields = {}) => {
             } = story && story.credits && story.credits.by && story.credits.by[0] ? story.credits.by[0] : {};
             const { basic: headline } = story && story.headlines && story.headlines.basic ? story.headlines : {};
             const { canonical_url: articleURL } = story && story.canonical_url ? story : {};
-            if (startIndex <= idx && idx < size) {
+            if (startIndex <= idx && idx < size + startIndex) {
               return (
                 <li className="c-singleStory" key={idx}>
                   <a href={authorURL} className={`authorName ${!authorURL ? 'noURL' : ''}`}>
