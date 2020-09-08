@@ -2,8 +2,80 @@ import React from 'react';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../utils/environment';
+import ArcAdLib from '../../../features/ads/src/children/ArcAdLib';
+import GetConnextLocalStorageData from './connextLocalStorage';
 
-const ConnextInit = () => {
+export const ConnextAuthTrigger = () => {
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const currentEnv = fetchEnv();
+  const { connext } = getProperties(arcSite);
+  const {
+    isEnabled = false,
+    environment,
+    siteCode,
+    configCode,
+  } = connext[currentEnv] || {};
+
+  if (typeof window !== 'undefined') {
+    const loadDeferredItems = () => {
+      const deferredItems = window.deferUntilKnownAuthState || [];
+
+      if (deferredItems.length) {
+        const adInstance = ArcAdLib.getInstance();
+        deferredItems.forEach((item) => {
+          Object.keys(item).forEach((key) => {
+            if (key === 'ad') {
+              // it's an ad, let's register/initialize it with ArcAds
+              const adSlotConfig = item[key];
+              adInstance.registerAd(adSlotConfig[0], adSlotConfig[1], adSlotConfig[2]);
+            } else if (key === 'script') {
+              // it's a script file, append it (e.g. taboola)
+              document.body.appendChild(item[key]);
+            } else if (key === 'video') {
+              // it's a video player, trigger it to play
+              item[key].play();
+            } else {
+              // eslint-disable-next-line no-console
+              console.error(`unsupported object (${key}) defined in window.deferUntilKnownAuthState:`, item[key]);
+            }
+          });
+        });
+      }
+    };
+
+    const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
+    const { UserState } = connextLocalStorageData;
+    if (isEnabled && !(UserState && UserState.toLowerCase() === 'subscriber')) {
+      const checkConnextStorageState = () => {
+        if (window.Connext.Storage.GetCurrentMeterLevel() === 1) {
+          // it's "free" content (per connext), so load everything
+          loadDeferredItems();
+        } else {
+          try {
+            const articlesRemaining = window.Connext.Storage.GetArticlesLeft() || 0;
+
+            if (typeof articlesRemaining === 'string' || articlesRemaining > 0) {
+              loadDeferredItems();
+            }
+          } catch (err) {
+            // eslint-disable-next-line no-console
+            console.error('`checkConnextStorageState` error response:', err);
+            loadDeferredItems();
+          }
+        }
+      };
+      window.addEventListener('connextMeterLevelSet', checkConnextStorageState);
+      // connext is enabled & the user is not authorized, wait for the connext auth callback
+      window.addEventListener('connextIsSubscriber', loadDeferredItems);
+    } else {
+      // either connext is disabled or the user is a subscriber per localstorage.  Either way, proceed with loading
+      loadDeferredItems();
+    }
+  }
+};
+
+export const ConnextInit = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
@@ -38,11 +110,11 @@ const ConnextInit = () => {
           if (typeof(window.localStorage) !== 'undefined') {
             const connextLS = window.localStorage.getItem('${connextLSLookup}');
             if (connextLS) {
-              const { UserId } = JSON.parse(connextLS);
+              const { CustomerRegistrationId } = JSON.parse(connextLS);
               const userDataObj = {
                 'userData': {
                   'userActive': 'logged in',
-                  'userProfileID': UserId
+                  'userProfileID': CustomerRegistrationId
                 }
               };
               dataLayer.push(userDataObj);
@@ -93,6 +165,7 @@ const ConnextInit = () => {
       });
       doc.addEventListener('DOMContentLoaded', () => {
         const connextLoaded = new Event('connextLoaded');
+        const connextMeterLevelSet = new Event('connextMeterLevelSet');
         const connextLoggedIn = new Event('connextLoggedIn');
         const connextLoggedOut = new Event('connextLoggedOut');
         const connextIsSubscriber = new Event('connextIsSubscriber');
@@ -150,6 +223,7 @@ const ConnextInit = () => {
                   },
                   onMeterLevelSet: (e) => {
                     connextLogger('>> onMeterLevelSet', e);
+                    window.dispatchEvent(connextMeterLevelSet);
                   },
                   onAuthorized: (e) => {
                     // this event fires on every Engage loading if user is logged in but doesn't have access to this product
@@ -177,5 +251,3 @@ const ConnextInit = () => {
       });`,
   }}></script>;
 };
-
-export default ConnextInit;
