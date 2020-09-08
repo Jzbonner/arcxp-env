@@ -30,7 +30,7 @@ const Synopsis = (customFields = {}) => {
     return (
       <div className='c-synopsis'>
         {data.map((el, i) => {
-          if (startIndex <= i && i < size) {
+          if (startIndex <= i && i < size + startIndex) {
             return (
               <ListItem key={`ListItem-${i}`} {...el} showPreview={true} />
             );
