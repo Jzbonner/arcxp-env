@@ -1,0 +1,27 @@
+@import "./../../../src/styles/base";
+
+.c-revenue {
+  background-color: #ededed;
+  margin-right: -15px;
+  margin-left: -15px;
+  padding: 15px 15px 0 15px;
+  .c-homeListContainer {
+    @include breakpoint(desktop-sm) {
+      flex-direction: row;
+    }
+    .c-homeList {
+      @include breakpoint(desktop-sm) {
+        width: 30%;
+      }
+      .headline {
+        @include text-styles(1rem, 1.25, "Average");
+      }
+      .c-sponsorOverlay {
+        background: #000;
+        @include text-styles(0.75rem, 1, "Gordita");
+        min-height: 20px;
+        font-weight: 400;
+      }
+    }
+  }
+}
