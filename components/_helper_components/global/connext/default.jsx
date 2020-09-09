@@ -34,7 +34,13 @@ export const ConnextAuthTrigger = () => {
               document.body.appendChild(item[key]);
             } else if (key === 'video') {
               // it's a video player, trigger it to play
-              item[key].play();
+              const videoPlayer = item[key];
+              const videoBlocker = window.document.querySelector('.video-blocker');
+              videoPlayer.play();
+              videoPlayer.showControls();
+              if (videoBlocker) {
+                videoBlocker.style.display = 'none';
+              }
             } else {
               // eslint-disable-next-line no-console
               console.error(`unsupported object (${key}) defined in window.deferUntilKnownAuthState:`, item[key]);
