@@ -16,7 +16,10 @@ const SiteMetrics = ({ isAmp }) => {
     type: contentType,
     promo_items: promoItems,
     headlines: contentHeadlines,
+    content_restrictions: contentRestrictions,
   } = globalContent || {};
+
+  const { content_code: contentCode } = contentRestrictions || {};
 
   const { basic = {} } = promoItems || {};
   const { headlines: promoHeadlines } = basic;
@@ -111,7 +114,8 @@ const SiteMetrics = ({ isAmp }) => {
               "authorName": [${ampAuthorNames}],
               "pageNameStr": "",
               "pageUrlStr": "",
-              "pageMainSection": "${topSection}"
+              "pageMainSection": "${topSection}",
+              "contentPaywallStatus": "${contentCode}"
               }
             }
           `,
@@ -152,7 +156,8 @@ const SiteMetrics = ({ isAmp }) => {
             'contentVendor': '${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}',
             'contentPublishDate': '${firstPublishDateConverted}',
             'blogName': '${pageContentType === 'blog' ? topSectionName : (blogName || '')}',
-            'galleryName': '${galleryHeadline}'
+            'galleryName': '${galleryHeadline}',
+            'contentPaywallStatus': '${contentCode}'
           }
         };
         // we do a check just in case dataLayer has already been created
