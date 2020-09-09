@@ -1,3 +1,5 @@
+// Array of strings used for pick function for collection api.
+// A pick function is used to filter data because a Sources Include parameter can't be used with the collection api.
 export default [
   'canonical_url',
   'content_elements',
