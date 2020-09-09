@@ -1,0 +1,63 @@
+@import "./../../../src/styles/base";
+
+.c-columnistFeature {
+  padding: 0 20px;
+
+  @include breakpoint(desktop-sm) {
+    border-left: 1px solid #dedede;
+  }
+
+  .c-title {
+    @include text-styles(1.875rem, 1, "Average");
+    
+    color: #313132;
+    letter-spacing: -.38px;
+    padding-bottom: 20px;
+    text-align: center;
+
+    @include breakpoint(desktop-sm) {
+      @include text-styles(2.5rem, 1, "Average");
+
+      letter-spacing: -.5px;
+      text-align: left;
+    }
+  }
+
+  .c-columnistList {
+
+    .c-singleStory {
+      list-style: none;
+      margin-bottom: 20px;
+      text-align: left;
+
+      .authorName {
+        @include text-styles(1.125rem, 1.8, "Gordita-Bold");
+
+        color: #313132;
+
+        @include breakpoint(desktop-sm) {
+          letter-spacing: -.23px;
+        }
+
+        &.noURL {
+          color: #313132;
+
+          @include text-styles(1.125rem, 1.8, "Gordita");
+        }
+      }
+
+      .headline {
+        @include text-styles(.875rem, 1.23, "Average");
+
+        display: block;
+        text-decoration: none;
+        letter-spacing: -.18px;
+        color: #313132;
+
+        @include breakpoint(desktop-sm) {
+          letter-spacing: -.5px;
+        }
+      }
+    }
+  }
+}
