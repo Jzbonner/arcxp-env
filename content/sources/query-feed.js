@@ -1,9 +1,7 @@
 /* eslint-disable no-console */
-import _ from 'lodash';
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
 import getQueryData from './helper_functions/getQueryData';
-import filter from '../filters/collectionAndQueryFilter';
 
 const schemaName = 'query-feed';
 const bodybuilder = require('bodybuilder');
@@ -118,7 +116,6 @@ const fetch = (query) => {
   return getQueryData(activeSite, newBody, from, size)
     .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
     .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
-    .then(data => data.map(el => _.pick(el, filter)))
     .catch((error) => {
       console.error(error);
     });
