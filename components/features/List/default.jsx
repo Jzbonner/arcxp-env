@@ -38,8 +38,6 @@ const List = (customFields = {}) => {
     },
   });
 
-  console.log("data: ", data);
-
   function getDisplayClassMap(displayC) {
     switch (displayC) {
       case 'Top Photo':
