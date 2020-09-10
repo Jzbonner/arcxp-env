@@ -65,23 +65,28 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
 
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState } = connextLocalStorageData;
-  if (typeof window !== 'undefined' && UserState) {
-    let currentState;
-    switch (UserState) {
-      case 'Logged Out':
-      case 'logged out':
-        currentState = 'logged-out';
-        break;
-      case 'Logged In':
-        currentState = 'logged-in';
-        break;
-      default:
-        currentState = UserState;
+  const getState = () => {
+    if (typeof window !== 'undefined' && UserState) {
+      let currentState;
+      switch (UserState) {
+        case 'Logged Out':
+        case 'logged out':
+          currentState = 'logged-out';
+          break;
+        case 'Logged In':
+          currentState = 'logged-in';
+          break;
+        default:
+          currentState = UserState;
+      }
+      return currentState;
     }
-    useEffect(() => {
-      setUserState(currentState);
-    }, [currentState]);
-  }
+
+    return UserState;
+  };
+  useEffect(() => {
+    setUserState(getState());
+  }, [UserState]);
 
   const useWindowEvent = (event, trigger) => {
     const callback = () => setUserState(trigger);

@@ -206,9 +206,14 @@ const Video = ({
 
       // protect against the player not existing (just in case)
       if (typeof powa !== 'undefined') {
-        /* if it's a lead video and should be lazyloaded, add it to the `` array, for triggering in ... */
+        /*
+          if it's a lead video and the story is paywalled, pass the player to `deferThis` to be lazyLoaded
+          & queued for (eventual) triggering in components/_helper_components/global/connext/default.jsx
+          (`ConnextAuthTrigger` function, called in `article-basic` layout)
+        */
         if (isLeadVideo && lazyLoad) {
           deferThis({ video: powa });
+          powa.hideControls();
         }
 
         // bind to ampIntegration events, to control the PoWa player from AMP
@@ -375,17 +380,20 @@ const Video = ({
     return <Caption src={src} isLeadVideo videoCaption={videoCaption} />;
   };
 
-  const renderPowaPlayer = () => <div
-    className="powa"
-    data-org={orgOfRecord}
-    data-env={currentEnv}
-    data-aspect-ratio="0.5625"
-    data-uuid={vidId}
-    data-autoplay={autoplayState}
-    data-muted={muteON}
-    data-playthrough={autoplayNext || true}
-    data-discovery={autoplayNext || true}
-     />;
+  const renderPowaPlayer = () => <>
+    <div
+      className="powa"
+      data-org={orgOfRecord}
+      data-env={currentEnv}
+      data-aspect-ratio="0.5625"
+      data-uuid={vidId}
+      data-autoplay={autoplayState}
+      data-muted={muteON}
+      data-playthrough={autoplayNext || true}
+      data-discovery={autoplayNext || true}
+       />
+     {isLeadVideo && lazyLoad && <div className="video-blocker" />}
+  </>;
 
   let ampVideoIframeDomain = `https://${orgOfRecord}-${siteOfRecord}-${currentEnv}.cdn.arcpublishing.com`;
   if (currentEnv === 'prod') {
