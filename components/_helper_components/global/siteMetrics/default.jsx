@@ -128,36 +128,36 @@ const SiteMetrics = ({ isAmp }) => {
     <script type='text/javascript' dangerouslySetInnerHTML={{
       __html: `
         const initialDataObj = {
-          'connextActive': '${connext && connext.isEnabled ? connext.isEnabled : 'false'}',
-          'pageData': {
-            'pageName': '${url}',
-            'pageURL': '${siteDomain}${url}',
-            'pageSiteSection': '${topSection}',
-            'pageMainSection': '${topSection}',
-            'pageCategory': '${nonPrimarySections}',
-            'pageContentType': '${typeOfPage || pageContentType}',
-            'pageTitle': '${seoTitle ? seoTitle.replace(/'/g, '"') : pageTitle.replace(/'/g, '"')}'
+          "connextActive": "${connext && connext.isEnabled ? connext.isEnabled : 'false'}",
+          "pageData": {
+            "pageName": "${url}",
+            "pageURL": "${siteDomain}${url}",
+            "pageSiteSection": "${topSection}",
+            "pageMainSection": "${topSection}",
+            "pageCategory": "${nonPrimarySections}",
+            "pageContentType": "${typeOfPage || pageContentType}",
+            "pageTitle": "${seoTitle || pageTitle}"
           },
-          'siteData': {
-            'siteID': '${metrics && metrics.siteID ? metrics.siteID : site}',
-            'siteDomain': '${siteDomain.replace('https://www.', '')}',
-            'siteVersion': 'responsive site',
-            'siteFormat': '${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}',
-            'siteMetro': '${metrics && metrics.siteMetro ? metrics.siteMetro : ''}',
-            'siteMedium': 'np',
-            'siteType': 'free',
-            'siteCMS': 'arc'
+          "siteData": {
+            "siteID": "${metrics && metrics.siteID ? metrics.siteID : site}",
+            "siteDomain": "${siteDomain.replace('https://www.', '')}",
+            "siteVersion": "responsive site",
+            "siteFormat": "${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}",
+            "siteMetro": "${metrics && metrics.siteMetro ? metrics.siteMetro : ''}",
+            "siteMedium": "np",
+            "siteType": "free",
+            "siteCMS": "arc"
           },
-          'contentData': {
-            'contentTopics': '${topics.join()}',
-            'contentByline': '${authors.join() || undefined}',
-            'contentOriginatingSite': '${metrics && metrics.siteID ? metrics.siteID : site}',
-            'contentID': '${contentId || ''}',
-            'contentVendor': '${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}',
-            'contentPublishDate': '${firstPublishDateConverted}',
-            'blogName': '${pageContentType === 'blog' ? topSectionName : (blogName || '')}',
-            'galleryName': '${galleryHeadline}',
-            'contentPaywallStatus': '${contentCode}'
+          "contentData": {
+            "contentTopics": "${topics.join()}",
+            "contentByline": "${authors.join() || undefined}",
+            "contentOriginatingSite": "${metrics && metrics.siteID ? metrics.siteID : site}",
+            "contentID": "${contentId || ''}",
+            "contentVendor": "${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}",
+            "contentPublishDate": "${firstPublishDateConverted}",
+            "blogName": "${pageContentType === 'blog' ? topSectionName : (blogName || '')}",
+            "galleryName": "${galleryHeadline}",
+            "contentPaywallStatus": "${contentCode}"
           }
         };
         // we do a check just in case dataLayer has already been created
