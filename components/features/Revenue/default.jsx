@@ -1,5 +1,5 @@
-import React from './node_modules/react';
-import PropTypes from './node_modules/prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import List from '../List/default';
 import './default.scss';
