@@ -217,7 +217,7 @@
     "arcads": "^1.6.0",
     "axios": "^0.19.2",
     "bodybuilder": "^2.2.21",
-    "dangerously-set-html-content": "^1.0.6",
+    "dangerously-set-html-content": "^1.0.8",
     "htmlparser2": "^4.1.0",
     "jstoxml": "^1.6.7",
     "lodash": "^4.17.20",

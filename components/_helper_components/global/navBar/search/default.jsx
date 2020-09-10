@@ -43,7 +43,7 @@ const Search = () => {
 
   return (
     <li className='nav-search'>
-      <form onSubmit={handleSubmit} className='search-form'>
+      <form onSubmit={e => e.target && handleSubmit(e)} className='search-form'>
         <input
           onClick={toggleEditing}
           onChange={handleChange}

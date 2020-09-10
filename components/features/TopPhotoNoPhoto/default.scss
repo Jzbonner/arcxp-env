@@ -1,0 +1,70 @@
+@import "./../../../src/styles/base";
+
+.topPhotoNoPhoto {
+  width: 100%;
+
+  @include breakpoint(desktop-sm) {
+    margin-right: 3%;
+  }
+
+  .c-homeLeadContainer {
+    display: flex;
+    flex-wrap: wrap;
+
+    .column-2,
+    .column-3 {
+      width: 100%;
+    }
+
+    .column-2 {
+      margin-bottom: 10px;
+    }
+
+    .home-headline,
+    .home-headline.sponsored {
+      
+      .homeList-image {
+        width: 100%;
+
+        .c-image-component {
+          position: static;
+        }
+      }
+
+      .headline-box {
+        box-shadow: none;
+        padding: 0;
+        background-color: none;
+        margin-top: 15px;
+
+        .headline {
+          margin-top: 3px;
+          letter-spacing: -.16px;
+
+          @include text-styles(1rem, 1.38, "Average");
+        }
+      }
+    }
+
+    .home-headline:not(.sponsored) {
+      padding: 0;
+    }
+
+    .home-headline.sponsored {
+
+      .headline-box {
+        margin-top: 30px;
+      }
+    }
+
+    .column-3 .headline {
+      letter-spacing: -.16px;
+
+      @include text-styles(1rem, 1.38, "Average");
+    }
+  }
+}
+
+.topPhotoNoPhoto:last-child {
+  margin-right: 0;
+}

@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
+import filter from '../../filters/queryFilter';
 
 export default (arcSite, newBody, from = 0, size = 10) => {
   if (!arcSite || !newBody) {
@@ -30,6 +31,7 @@ export default (arcSite, newBody, from = 0, size = 10) => {
     let requestUri = `${CONTENT_BASE}/content/v4/search/published?body=${newBody}&website=${arcSite}&sort=display_date:desc`;
     requestUri += `&from=${fetchStart}`;
     requestUri += `&size=${fetchSize}`;
+    requestUri += `&_sourceInclude=${filter}`;
 
     const promise = axios
       .get(requestUri, {
