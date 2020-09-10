@@ -1,14 +1,14 @@
 {
   "adsPrebidSizeConfig": [
     {
-      "mediaQuery": "(min-width: 972px)",
+      "mediaQuery": "(min-width: 1024px)",
       "sizesSupported": [
         [300, 250]
       ],
       "labels": ["desktop"]
     },
     {
-      "mediaQuery": "(min-width: 972px)",
+      "mediaQuery": "(min-width: 1024px)",
       "sizesSupported": [
         [970, 250],
         [728, 90]
@@ -16,35 +16,35 @@
       "labels": ["desktop1"]
     },
     {
-      "mediaQuery": "(min-width: 972px)",
+      "mediaQuery": "(min-width: 1024px)",
       "sizesSupported": [
         [728, 90]
       ],
       "labels": ["desktop2"]
     },
     {
-      "mediaQuery": "(min-width: 972px)",
+      "mediaQuery": "(min-width: 1024px)",
       "sizesSupported": [
         [300, 250]
       ],
       "labels": ["desktop3"]
     },
     {
-      "mediaQuery": "(min-width: 768px) and (max-width: 971px)",
+      "mediaQuery": "(min-width: 768px) and (max-width: 1023px)",
       "sizesSupported": [
         [300, 250]
       ],
       "labels": ["tablet"]
     },
     {
-      "mediaQuery": "(min-width: 768px) and (max-width: 971px)",
+      "mediaQuery": "(min-width: 768px) and (max-width: 1023px)",
       "sizesSupported": [
         [728, 90]
       ],
       "labels": ["tablet1"]
     },
     {
-      "mediaQuery": "(min-width: 768px) and (max-width: 971px)",
+      "mediaQuery": "(min-width: 768px) and (max-width: 1023px)",
       "sizesSupported": [
         [300, 250]
       ],
