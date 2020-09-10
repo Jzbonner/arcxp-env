@@ -136,7 +136,7 @@ const SiteMetrics = ({ isAmp }) => {
             "pageMainSection": "${topSection}",
             "pageCategory": "${nonPrimarySections}",
             "pageContentType": "${typeOfPage || pageContentType}",
-            "pageTitle": "${seoTitle || pageTitle}"
+            "pageTitle": "${seoTitle ? seoTitle.replace(/"/g, "'") : pageTitle.replace(/"/g, "'")}"
           },
           "siteData": {
             "siteID": "${metrics && metrics.siteID ? metrics.siteID : site}",
@@ -156,7 +156,7 @@ const SiteMetrics = ({ isAmp }) => {
             "contentVendor": "${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}",
             "contentPublishDate": "${firstPublishDateConverted}",
             "blogName": "${pageContentType === 'blog' ? topSectionName : (blogName || '')}",
-            "galleryName": "${galleryHeadline}",
+            "galleryName": "${galleryHeadline.replace(/"/g, "'")}",
             "contentPaywallStatus": "${contentCode}"
           }
         };
@@ -166,7 +166,6 @@ const SiteMetrics = ({ isAmp }) => {
         } else {
           dataLayer = [initialDataObj];
         }
-
       `,
     }}></script>
   );
