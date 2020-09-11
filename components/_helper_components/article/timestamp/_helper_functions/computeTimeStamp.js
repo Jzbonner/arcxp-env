@@ -42,8 +42,12 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
   const now = new Date();
   const nowInMs = now.getTime();
   const pub = isUpdated ? displayDateObject : firstPublishDateObject;
-  const pubInMs = pub.getTime();
-  const timeAgoInMs = Math.floor(nowInMs - pubInMs);
+  const pubInMs = pub && pub.getTime();
+  const displayInMs = displayDateObject && displayDateObject.getTime();
+  // Always use display date for teases because the collection-api
+  // which can be used for teases does not return a first_publish_date variable.
+  const updatedTime = articleType === 'tease' ? displayInMs : pubInMs;
+  const timeAgoInMs = Math.floor(nowInMs - updatedTime);
   const minutes = Math.floor(timeAgoInMs / 60000);
   const hours = Math.floor(timeAgoInMs / 3600000);
   const days = Math.floor(timeAgoInMs / 86400000);
