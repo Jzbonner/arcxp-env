@@ -26,28 +26,33 @@ const dayOfTheWeek = (day = 7) => {
 
 const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, isHyperlocalContent, articleType = 'normal') => {
   let timeStamp = null;
+  let isUpdated = null;
+  let firstPublishDateObject = null;
 
   if (!firstPublishDate && !displayDate) return null;
   if (isHideTimestampTrue === 'Yes') return null;
 
-  // The timestamps are off by a few fractions of a second. Because of that,
-  // We check to see if firstPublishDate and displayDate are off by a minute.
-  const firstPublishDateObject = new Date(firstPublishDate);
   const displayDateObject = new Date(displayDate);
-  const firstPublishDateInMilliSeconds = firstPublishDateObject.getTime();
   const displayDateInMilliSeconds = displayDateObject.getTime();
-  const currentOffset = displayDateInMilliSeconds - firstPublishDateInMilliSeconds;
 
-  const isUpdated = currentOffset >= 60000;
-  const now = new Date();
-  const nowInMs = now.getTime();
-  const pub = isUpdated ? displayDateObject : firstPublishDateObject;
-  const pubInMs = pub && pub.getTime();
-  const displayInMs = displayDateObject && displayDateObject.getTime();
+  if (firstPublishDate) {
+    // The timestamps are off by a few fractions of a second. Because of that,
+    // We check to see if firstPublishDate and displayDate are off by a minute.
+    firstPublishDateObject = new Date(firstPublishDate);
+    const firstPublishDateInMilliSeconds = firstPublishDateObject.getTime();
+    const currentOffset = displayDateInMilliSeconds - firstPublishDateInMilliSeconds;
+    isUpdated = currentOffset >= 60000;
+  }
+
   // Always use display date for teases because the collection-api
   // which can be used for teases does not return a first_publish_date variable.
-  const updatedTime = articleType === 'tease' ? displayInMs : pubInMs;
-  const timeAgoInMs = Math.floor(nowInMs - updatedTime);
+  const pub = isUpdated || articleType === 'tease' ? displayDateObject : firstPublishDateObject;
+  if (!pub) return null;
+
+  const pubInMs = pub.getTime();
+  const now = new Date();
+  const nowInMs = now.getTime();
+  const timeAgoInMs = Math.floor(nowInMs - pubInMs);
   const minutes = Math.floor(timeAgoInMs / 60000);
   const hours = Math.floor(timeAgoInMs / 3600000);
   const days = Math.floor(timeAgoInMs / 86400000);
