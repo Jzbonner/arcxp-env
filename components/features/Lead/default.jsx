@@ -8,18 +8,16 @@ import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMa
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import './default.scss';
 
-const Lead = (customFields = {}) => {
+const Lead = ({ customFields = {}, limitOverride }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
 
   const {
-    customFields: {
-      content: { contentService = 'collections-api', contentConfigValues } = {},
-      displayClass = '',
-      title = '',
-      columns = 1,
-      moreURL,
-    },
+    content: { contentService = 'collections-api', contentConfigValues } = {},
+    displayClass = '',
+    title = '',
+    columns = 1,
+    moreURL,
   } = customFields;
 
   let { from: startIndex = 1 } = contentConfigValues || {};
@@ -60,8 +58,9 @@ const Lead = (customFields = {}) => {
   }
 
   function getLists(apiData, start, limit) {
+    const listLimit = limitOverride || limit;
     return apiData.map((el, i) => {
-      if (start <= i && i < start + limit) {
+      if (start <= i && i < start + listLimit) {
         return <ListItem key={`ListItem-${i}`} {...el} />;
       }
       return null;
@@ -135,6 +134,7 @@ const Lead = (customFields = {}) => {
 };
 
 Lead.propTypes = {
+  limitOverride: PropTypes.number,
   customFields: PropTypes.shape({
     content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
       name: 'Content',

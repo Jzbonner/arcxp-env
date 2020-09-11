@@ -19,6 +19,7 @@ import ArcAd from '../features/ads/default';
 import ContributorBadge from '../_helper_components/global/contributorBadge/default';
 import filterContentElements from './_helper_functions/article/filterContentElements';
 import ConnextFreeMessaging from '../_helper_components/global/ConnextFreeMessaging/default';
+import { ConnextAuthTrigger } from '../_helper_components/global/connext/default';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
 import ConnextHyperLocalSubscription from '../_helper_components/global/ConnextHyperLocalSubscription/ConnextHyperLocalSubscription';
 import FlatPage from '../_helper_components/flatpage/default';
@@ -37,14 +38,6 @@ import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
-
-const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} key={'RP01-Story-Desktop'} />;
-const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} key={'RP01-Story-Tablet'} />;
-const MP02 = () => <ArcAd staticSlot={'MP02'} key={'MP02'} />;
-const MP03 = () => <ArcAd staticSlot={'MP03'} key={'MP03'} />;
-
-const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} key={'RP09-Story-Desktop'} />;
-const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} key={'RP09-Story-Tablet'} />;
 
 const start = 3;
 
@@ -73,8 +66,7 @@ const StoryPageLayout = () => {
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
-  const { nowrap: detectNoWrap } = queryParams || {};
-  const noHeaderAndFooter = detectNoWrap && detectNoWrap === 'y';
+  const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
   if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} noHeaderAndFooter={noHeaderAndFooter} />;
 
   const ampMP02 = () => <AmpAd adSlot="MP02" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
@@ -84,6 +76,13 @@ const StoryPageLayout = () => {
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
   const { content_code: paywallStatus } = contentRestrictions || {};
+  const isMeteredStory = paywallStatus && paywallStatus.toLowerCase() !== 'free' && paywallStatus.toLowerCase() !== 'unmetered';
+  const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP01-Story-Desktop'} />;
+  const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP01-Story-Tablet'} />;
+  const MP02 = () => <ArcAd staticSlot={'MP02'} lazyLoad={isMeteredStory} key={'MP02'} />;
+  const MP03 = () => <ArcAd staticSlot={'MP03'} lazyLoad={isMeteredStory} key={'MP03'} />;
+  const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP09-Story-Desktop'} />;
+  const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP09-Story-Tablet'} />;
 
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
@@ -134,7 +133,7 @@ const StoryPageLayout = () => {
 
   return (
     <>
-      {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} />}
+      {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} lazyLoad={isMeteredStory} />}
       {!noHeaderAndFooter && (
         <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} noAds={noAds} />
       )}
@@ -142,7 +141,13 @@ const StoryPageLayout = () => {
         <header className="b-margin-bottom-d30-m20">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
             <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
-            <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampPage={ampPage} contentType={type} />
+            <Headline
+              headlines={headlines}
+              basicItems={basicItems}
+              taxonomy={taxonomy}
+              ampPage={ampPage}
+              contentType={type}
+              lazyLoad={isMeteredStory} />
           </div>
           <div
             style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
@@ -177,85 +182,95 @@ const StoryPageLayout = () => {
               <ArcAd staticSlot={'MP01'} />
             </div>
           )}
-          {!noAds && ampPage && !isHyperlocalContent && (
-            <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
-          )}
-          {paywallStatus === 'free' && <ConnextFreeMessaging sponsorID={sponsorSectionID} />}
-          {paywallStatus === 'free' && <SponsorStoryMessage sponsorID={sponsorSectionID} />}
-          <Section
-            elements={filteredContentElements}
-            stopIndex={1}
-            fullWidth={true}
-            comesAfterDivider={infoBoxIndex && infoBoxIndex === 0}
-            ampPage={ampPage}
-          />
-          {!noAds && !ampPage && isHyperlocalContent && (
-            <div className="c-hp01-mp01">
-              <ArcAd staticSlot={'HP01'} />
-              <ArcAd staticSlot={'MP01'} />
-            </div>
-          )}
-          {!noAds && ampPage && isHyperlocalContent && (
-            <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
-          )}
-          <Section
-            elements={filteredContentElements}
-            startIndex={1}
-            stopIndex={3}
-            rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null}
-            insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [RP01StoryTablet, MP02] : [ampMP02] }] : null}
-            fullWidth={noAds}
-            comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
-            ampPage={ampPage}
-          />
-          {!noAds && maxNumberOfParagraphs === 3 && (
-            <InterscrollerPlaceholder ampPage={ampPage} isHyperlocalContent={isHyperlocalContent} taxonomy={taxonomy} uuid={uuid} />
-          )}
-          {!noAds && !isHyperlocalContent && !sponsorSectionID && (
-            <Nativo
+          <div className="c-articleBodyContainer">
+            {!noAds && ampPage && !isHyperlocalContent && (
+              <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
+            )}
+            { paywallStatus === 'free' && <ConnextFreeMessaging sponsorID={sponsorSectionID}/>}
+            { paywallStatus === 'free' && <SponsorStoryMessage sponsorID={sponsorSectionID}/>}
+            <Section
               elements={filteredContentElements}
-              displayIfAtLeastXParagraphs={4}
-              controllerClass="story-nativo_placeholder--moap"
+              stopIndex={1}
+              fullWidth={true}
+              comesAfterDivider={infoBoxIndex && infoBoxIndex === 0}
               ampPage={ampPage}
             />
-          )}
-          <Section
-            elements={filteredContentElements}
-            startIndex={start}
-            stopIndex={stop}
-            fullWidth={noAds}
-            comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
+            {!noAds && !ampPage && isHyperlocalContent && (
+              <div className="c-hp01-mp01">
+                <ArcAd staticSlot={'HP01'} lazyLoad={isMeteredStory} />
+                <ArcAd staticSlot={'MP01'} lazyLoad={isMeteredStory} />
+              </div>
+            )}
+            {!noAds && ampPage && isHyperlocalContent && (
+              <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
+            )}
+            <Section
+              elements={filteredContentElements}
+              startIndex={1}
+              stopIndex={3}
+              rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null}
+              insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [RP01StoryTablet, MP02] : [ampMP02] }] : null}
+              fullWidth={noAds}
+              comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
+              ampPage={ampPage}
+            />
+            {!noAds && maxNumberOfParagraphs === 3
+            && <InterscrollerPlaceholder
             ampPage={ampPage}
-          />
-          {!noAds && maxNumberOfParagraphs >= 4 && (
-            <InterscrollerPlaceholder ampPage={ampPage} isHyperlocalContent={isHyperlocalContent} taxonomy={taxonomy} uuid={uuid} />
-          )}
-          <Section
-            elements={filteredContentElements}
-            startIndex={stop}
-            rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
-            insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [RP09StoryTablet, MP03] : [ampMP03] }] : null}
-            fullWidth={noAds}
-            insertAtSectionEnd={insertAtEndOfStory}
-            comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
-            ampPage={ampPage}
-          />
-          {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} />}
-          {!noAds && !isHyperlocalContent && !sponsorSectionID && (
-            <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
-          )}
-          {!noAds && ampPage && (
-            <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
-          )}
+            isHyperlocalContent={isHyperlocalContent}
+            taxonomy={taxonomy}
+            uuid={uuid}
+            />}
+            {!noAds && !isHyperlocalContent && !sponsorSectionID && (
+              <Nativo
+                elements={filteredContentElements}
+                displayIfAtLeastXParagraphs={4}
+                controllerClass="story-nativo_placeholder--moap"
+                ampPage={ampPage}
+              />
+            )}
+            <Section
+              elements={filteredContentElements}
+              startIndex={start}
+              stopIndex={stop}
+              fullWidth={noAds}
+              comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
+              ampPage={ampPage}
+            />
+            {!noAds && maxNumberOfParagraphs >= 4
+            && <InterscrollerPlaceholder
+              ampPage={ampPage}
+              isHyperlocalContent={isHyperlocalContent}
+              taxonomy={taxonomy}
+              uuid={uuid}
+            />}
+            <Section
+              elements={filteredContentElements}
+              startIndex={stop}
+              rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
+              insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [RP09StoryTablet, MP03] : [ampMP03] }] : null}
+              fullWidth={noAds}
+              insertAtSectionEnd={insertAtEndOfStory}
+              comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
+              ampPage={ampPage}
+            />
+          {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
+            {!noAds && !isHyperlocalContent && !sponsorSectionID && (
+              <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
+            )}
+            {!noAds && ampPage && (
+              <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
+            )}
+          </div>
         </article>
       </main>
-      {!ampPage && !noHeaderAndFooter && (
-        <>
-          <Footer />
-          <Copyright />
-        </>
-      )}
+      {!ampPage && !noHeaderAndFooter && <>
+      <Footer />
+      <Copyright />
+      </>}
       {ampPage && <Carousel storyId={uuid} taxonomy={taxonomy} />}
+       {/* if it's a metered story, add the connext auth handlers to load deferred items (e.g. anything with `lazyLoad` above) */}
+      {isMeteredStory && ConnextAuthTrigger()}
     </>
   );
 };

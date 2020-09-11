@@ -34,7 +34,7 @@ class ExpandableTextMessage extends PureComponent {
         'condensed', '') : parentBoxClass + ' condensed';
     };
     const boxTextArr = document.querySelectorAll('.inline--box_text');
-    document.querySelectorAll('.box_text--arrow').forEach((boxText, i) => {
+    document.querySelectorAll('.box_text--footer .icon').forEach((boxText, i) => {
       let parentBox = boxTextArr[i];
       boxText.addEventListener('click', () => {
         toggleBoxClass(parentBox);
@@ -51,7 +51,9 @@ class ExpandableTextMessage extends PureComponent {
       {headingText ? <div className="box_text--title">{headingText}</div> : null}
       {contentText ? <div className="box_text--content"><p>{contentText}</p></div> : null}
       <div className="box_text--footer">
-        <div className="box_text--arrow"><span className="arrow--pointer"></span><span className="arrow--line"></span></div>
+        <div className="icon">
+          <div className="arrow"></div>
+        </div>
       </div>
     </div>);
   }

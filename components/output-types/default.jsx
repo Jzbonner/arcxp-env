@@ -5,7 +5,7 @@ import { useFusionContext } from 'fusion:context';
 import { fbPagesId } from 'fusion:environment';
 import SiteMeta from '../_helper_components/global/siteMeta/default';
 import SiteMetrics from '../_helper_components/global/siteMetrics/default';
-import ConnextInit from '../_helper_components/global/connext/default.jsx';
+import { ConnextInit } from '../_helper_components/global/connext/default.jsx';
 import TaboolaFooter from '../_helper_components/global/taboola/taboolaFooter.jsx';
 import TaboolaHeader from '../_helper_components/global/taboola/taboolaHeader.jsx';
 import NativoScripts from '../_helper_components/article/nativo/nativoScripts';
@@ -46,11 +46,13 @@ const DefaultOutputType = (props) => {
     adsPrebidEnabled,
     devconActive,
     devconKey,
+    prebidJs,
   } = ads[currentEnv] || {};
   const { isEnabled: connextIsEnabled = false, environment: connextEnv } = connext[currentEnv] || {};
   const {
-    type, taxonomy, canonical_url: articleURL, _id: uuid,
-  } = globalContent || { type: null };
+    type = null, taxonomy, canonical_url: articleURL, _id: uuid,
+  } = globalContent || {};
+  const storyPage = (type === 'story');
   const { tags = [], sections } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
   const noAmp = checkTags(tags, 'no-amp');
@@ -69,6 +71,7 @@ const DefaultOutputType = (props) => {
         <GoogleStructuredData />
         <AmpRelLink type={type} url={articleURL} noAmp={noAmp} />
         <CssLinks />
+        {storyPage && <script id="scriptMg2Widget" src="https://prodmg2.blob.core.windows.net/newsletterwidget/ajc/mg2nw.min.js" />}
         {includeGtm && (
           <>
             <SiteMetrics />
@@ -83,7 +86,7 @@ const DefaultOutputType = (props) => {
         {!noAds && <script async src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>}
         {!noAds && adsA9Enabled && <script src='https://c.amazon-adsystem.com/aax2/apstag.js'></script>}
         {!noAds && adsPrebidEnabled
-          && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/prebid3.23.0.js`)}`}></script>}
+          && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/${prebidJs}`)}`}></script>}
         <Libs />
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} />}
         {!isHyperlocalContent && <TaboolaHeader/>}
@@ -120,6 +123,7 @@ const DefaultOutputType = (props) => {
           data-e='5'
           src='//includemodal.global.ssl.fastly.net/sp.js'
           type='text/javascript'></script>}
+        {storyPage && <div id="mg2Widget-newsletter-container"></div>}
       </body>
     </html>
   );

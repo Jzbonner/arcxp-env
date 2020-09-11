@@ -10,13 +10,14 @@ import ArcAd from '../features/ads/default';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 import plus from '../../resources/icons/staff/plus.svg';
 import AREAS_OF_EXPERTISE from './_helper_functions/staffpage/AREAS_OF_EXPERTISE';
+import getQueryParams from './_helper_functions/getQueryParams';
 
 import '../../src/styles/container/_all-staff.scss';
 import '../../src/styles/base/_utility.scss';
 
 export const AllStaffPage = () => {
   const appContext = useAppContext();
-  const { globalContent, globalContentConfig } = appContext;
+  const { globalContent, globalContentConfig, requestUri } = appContext;
   const fusionContext = useFusionContext();
   const { arcSite = 'ajc' } = fusionContext;
   const { query } = globalContentConfig || {};
@@ -24,6 +25,9 @@ export const AllStaffPage = () => {
   const [leftMenuMenuVisibility, setLeftMenuVisibility] = useState(false);
   const [selectedLeftMenuItem, setSelectedLeftMenuItem] = useState({});
   const [selectedStaff, setSelectedStaff] = useState([]);
+  const queryParams = getQueryParams(requestUri);
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
 
   const pageUri = 'staff';
 
@@ -96,7 +100,7 @@ export const AllStaffPage = () => {
   return (
     <>
       <GlobalAdSlots />
-      <TopNavBreakingNews />
+      {!noHeaderAndFooter && <TopNavBreakingNews />}
       <header className={'c-staff-page-header'}>
         <div className="c-hp01-mp01">
           <ArcAd staticSlot={'HP01'} />
@@ -134,8 +138,10 @@ export const AllStaffPage = () => {
               })}
         </section>
       </main>
-      <Footer />
-      <Copyright />
+      {!noHeaderAndFooter && <>
+        <Footer />
+        <Copyright />
+      </>}
     </>
   );
 };

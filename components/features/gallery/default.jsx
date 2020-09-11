@@ -322,11 +322,11 @@ const Gallery = (props) => {
         // browser side on, the MPG01 variable is out of scope. Once moved inside of here,
         // the ads were appearing on sandbox. This may or may not be the reason. But since
         // the MPG01 ad is only called here, I think it's safe to leave it here.
-        const MPG01 = (adCount, mgp01GalleryTopics) => <ArcAd
+        const MPG01 = (adCount, mpg01GalleryTopics) => <ArcAd
           staticSlot={'MPG01'}
           adSuffix={`_${adCount}`}
           key={'MPG01'}
-          galleryTopics={mgp01GalleryTopics} />;
+          galleryTopics={mpg01GalleryTopics} />;
         /* eslint-disable-next-line max-len */
         mobileElements.splice(i + (i > 0 ? currentAdCount : 0), 0, <MPGO1Element
           adSlot={MPG01}
@@ -603,9 +603,7 @@ const Gallery = (props) => {
     let galleryContentElements = null;
     let fetchedContentElements = null;
     let featuredContentElements = null;
-
     if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements(contentElements);
-
     if (leafContentElements.length > 0) {
       galleryContentElements = leafContentElements;
     } else if (featuredGalleryData) {
