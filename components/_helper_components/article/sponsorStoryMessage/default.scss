@@ -1,0 +1,34 @@
+@import "../../../../src/styles/base";
+
+.c-freeSponsoredMsg {
+  text-align: center;
+  background: #d8d8d8;
+  padding: 10px;
+  max-width: 1080px;
+  margin: 0 20px;
+
+  @include breakpoint(tablet) {
+    width: 88.3%;
+    margin: 0 auto;
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: 83.9%;
+  }
+
+  @include breakpoint(desktop-lg) {
+    width: 60.7%;
+  }
+
+  .headline {
+    color: #313132;
+    letter-spacing: -.31px;
+    font-weight: 600;
+    
+    @include text-styles(.875rem, 1.44, "Gordita");
+
+    @include breakpoint(desktop-sm) {
+      @include text-styles(1.25rem, 1.44, "Gordita");
+    }
+  }
+}
