@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import ConnextFreeMessaging from '../../global/ConnextFreeMessaging/default';
 import './default.scss';
 
-const SponsorStoryMessage = ({ sponsorID }) => {
-  if (!sponsorID) {
+const SponsorStoryMessage = ({ sponsorID, paywallStatus }) => {
+  if (paywallStatus !== 'free') {
     return null;
   }
 
@@ -22,12 +23,19 @@ const SponsorStoryMessage = ({ sponsorID }) => {
           <h2 className="headline">{`Access to this AJC content is brought to you by our sponsor, ${sponsorName}`}</h2>
         </div>
       );
-    } return null;
-  } return null;
+    }
+    return (
+      <ConnextFreeMessaging paywallStatus={paywallStatus} sponsorMessage={sponsorMessage} sponsorName={sponsorName} sponsorID={sponsorID} />
+    );
+  }
+  return (
+    <ConnextFreeMessaging paywallStatus={paywallStatus} sponsorID={sponsorID} />
+  );
 };
 
 SponsorStoryMessage.propTypes = {
   sponsorID: PropTypes.string,
+  paywallStatus: PropTypes.string,
 };
 
 export default SponsorStoryMessage;
