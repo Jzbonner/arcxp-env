@@ -11,7 +11,7 @@ const Search = () => {
   const inputRef = useRef(null);
   const windowExists = typeof window !== 'undefined';
 
-  const getWindowSize = () => {
+  const handleWindowSize = () => {
     if (window.innerWidth <= 1023) {
       setTabletState(true);
     } else {
@@ -38,7 +38,7 @@ const Search = () => {
 
   // check viewport size on mount
   useEffect(() => {
-    if (windowExists) getWindowSize();
+    if (windowExists) handleWindowSize();
   }, []);
 
   useEffect(() => {
@@ -53,9 +53,9 @@ const Search = () => {
 
   useEffect(() => {
     if (windowExists) {
-      window.addEventListener('resize', getWindowSize, true);
+      window.addEventListener('resize', handleWindowSize, true);
       return () => {
-        window.removeEventListener('resize', getWindowSize, true);
+        window.removeEventListener('resize', handleWindowSize, true);
       };
     }
     return null;
