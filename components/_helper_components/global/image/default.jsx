@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import { useAppContext, useFusionContext } from 'fusion:context';
+import { useContent } from 'fusion:content';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
+import LazyLoad from 'react-lazyload';
+
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import './default.scss';
-import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
+// import PlaceholderImage from './_helper_functions/PlaceholderImage';
 
 const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage = false,
@@ -22,6 +25,19 @@ const Image = ({
   const { deployment, contextPath } = appContext;
   const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
+  // const timestamp = Date.now();
+
+  const imgQuery = {
+    src: url,
+    height,
+    width,
+    arcSite,
+  };
+
+  const img = useContent({
+    source: 'resizer',
+    query: imgQuery,
+  });
 
   useEffect(() => {
     if (teaseContentType) {
@@ -80,42 +96,61 @@ const Image = ({
     return <Caption src={src} />;
   };
 
-  return (
-    <div className={`c-image-component ${imageMarginBottom || ''}`}>
-      <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
-        <>
-          {!ampPage ? (
-            <img src={imageResizer(url, arcSite, width, height)}
-              alt={getAltText(altText, caption)}
-              className={teaseContentType ? 'tease-image' : ''}
-            />
-          ) : (
-            <amp-img
-              src={imageResizer(url, arcSite, width, height)}
-              alt={getAltText(altText, caption)}
-              width={width}
-              height={height !== 0 ? height : (width / originalWidth) * originalHeight}
-              layout="responsive"
-              class={teaseContentType ? 'tease-image' : ''}>
-              <amp-img
-                src={placeholder}
-                alt={getAltText(altText, caption)}
-                fallback=""
-                width={width}
-                height={height !== 0 ? height : (width / originalWidth) * originalHeight}
-                layout="responsive"
-                class={teaseContentType ? 'tease-image' : ''}
-                >
-              </amp-img>
-            </amp-img>
-          )}
+  const refPlaceholder = React.useRef();
+  const removePlaceholder = () => {
+    refPlaceholder.current.remove();
+  };
+
+  // console.log("==========================================");
+
+  if (img) {
+    // console.log("image -> has image", img);
+    return (
+      <div className={`c-image-component ${imageMarginBottom || ''}`}>
+        <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
+          <>
+            {!ampPage ? (
+              <div>
+                <img src={placeholder} ref={refPlaceholder} />
+                <LazyLoad>
+                  <img
+                    onLoad={removePlaceholder}
+                    onError={removePlaceholder}
+                    src={img.src}
+                    alt={getAltText(altText, caption)}
+                    className={teaseContentType ? 'tease-image' : ''}
+                  />
+                </LazyLoad>
+              </div>
+            ) : (
+                <amp-img
+                  src={img.src}
+                  alt={getAltText(altText, caption)}
+                  width={width}
+                  height={height !== 0 ? height : (width / originalWidth) * originalHeight}
+                  layout="responsive"
+                  class={teaseContentType ? 'tease-image' : ''}>
+                  <amp-img
+                    src={placeholder}
+                    alt={getAltText(altText, caption)}
+                    fallback=""
+                    width={width}
+                    height={height !== 0 ? height : (width / originalWidth) * originalHeight}
+                    layout="responsive"
+                    class={teaseContentType ? 'tease-image' : ''}>
+                  </amp-img>
+                </amp-img>
+            )}
           {teaseContentType && getTeaseIcon(teaseContentType)}
-        </>
-        {imageType !== 'isHomepageImage' && renderCaption()}
+          </>
+          {imageType !== 'isHomepageImage' && renderCaption()}
+        </div>
+        {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
       </div>
-      {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
-    </div>
-  );
+    );
+  }
+  // console.log("image -> no img", img, imgQuery)
+  return null;
 };
 
 Image.propTypes = {
