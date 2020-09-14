@@ -38,12 +38,6 @@
         @include breakpoint(desktop-sm) {
           letter-spacing: -.23px;
         }
-
-        &.noURL {
-          color: #313132;
-
-          @include text-styles(1.125rem, 1.8, "Gordita");
-        }
       }
 
       .headline {
