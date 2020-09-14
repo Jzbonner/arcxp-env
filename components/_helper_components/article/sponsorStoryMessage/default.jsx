@@ -8,6 +8,9 @@ const SponsorStoryMessage = ({ sponsorID, paywallStatus }) => {
   if (paywallStatus !== 'free') {
     return null;
   }
+  if (!sponsorID) {
+    return <ConnextFreeMessaging />;
+  }
 
   const data = useContent({
     source: 'site-api',
@@ -15,6 +18,7 @@ const SponsorStoryMessage = ({ sponsorID, paywallStatus }) => {
   });
 
   if (data && data.Sponsor) {
+    console.log('SPONSOR ', data.Sponsor);
     const { disable_access_brought_to_you_by_message: sponsorMessage } = data && data.Sponsor ? data.Sponsor : {};
     const { advertiser_name: sponsorName } = data && data.Sponsor ? data.Sponsor : {};
     if (sponsorMessage === 'false' && sponsorName) {
@@ -25,12 +29,9 @@ const SponsorStoryMessage = ({ sponsorID, paywallStatus }) => {
       );
     }
     return (
-      <ConnextFreeMessaging paywallStatus={paywallStatus} sponsorMessage={sponsorMessage} sponsorName={sponsorName} sponsorID={sponsorID} />
+      <ConnextFreeMessaging sponsorMessage={sponsorMessage} sponsorName={sponsorName} sponsorID={sponsorID} />
     );
-  }
-  return (
-    <ConnextFreeMessaging paywallStatus={paywallStatus} sponsorID={sponsorID} />
-  );
+  } return null;
 };
 
 SponsorStoryMessage.propTypes = {

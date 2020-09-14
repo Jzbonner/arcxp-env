@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 import './default.scss';
 
 const ConnextFreeMessaging = ({
-  sponsorID, sponsorMessage, sponsorName, paywallStatus,
+  sponsorID, sponsorMessage, sponsorName,
 }) => {
-  if (paywallStatus === 'free') {
-    if (!sponsorID || sponsorMessage === 'true' || sponsorName === '') {
-      return <div className="free-story-messaging connext-free-messaging b-margin-bottom-d30-m20"></div>;
-    }
-    return null;
+  if (!sponsorID || sponsorMessage === 'true' || sponsorName === '') {
+    return <div className="free-story-messaging connext-free-messaging b-margin-bottom-d30-m20"></div>;
   }
   return null;
 };
@@ -22,7 +19,6 @@ ConnextFreeMessaging.propTypes = {
   sponsorID: PropTypes.string,
   sponsorMessage: PropTypes.string,
   sponsorName: PropTypes.string,
-  paywallStatus: PropTypes.string,
 };
 
 export default ConnextFreeMessaging;
