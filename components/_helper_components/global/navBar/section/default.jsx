@@ -59,7 +59,6 @@ const Section = ({
 
   let ePaperClass = '';
   if (name === 'ePaper') {
-    console.log('yeeeet');
     ePaperClass = 'nav-ePaper';
   }
 
