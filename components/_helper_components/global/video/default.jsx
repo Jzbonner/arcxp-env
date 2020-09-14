@@ -199,7 +199,7 @@ const Video = ({
         vidId = ogVidId;
         videoTitle = ogHeadline;
         videoPlayType = ogAutoplay ? 'auto-play' : 'manual-play';
-        videoTopics = ogTags;
+        videoTopics = ogTags.map(tag => tag.text);
         videoPlayerVersion = ogVersion;
         videoContentType = ogVidType;
 
@@ -236,7 +236,7 @@ const Video = ({
             vidId = vId;
             videoTitle = headline;
             videoPlayType = autoplay ? 'auto-play' : 'manual-play';
-            videoTopics = tags;
+            videoTopics = tags.map(tag => tag.text);
             videoPlayerVersion = version;
             videoContentType = vidType;
             // make everything relative to the player's container, in case there are multiple players on the page
@@ -305,7 +305,6 @@ const Video = ({
     loadVideoScript();
     window.removeEventListener('powaRender', e => powaRendered(e));
   }, []);
-
   const videoMarginBottom = 'b-margin-bottom-d40-m20';
   const giveCredit = mainCredit ? `Credit: ${mainCredit}` : null;
 
