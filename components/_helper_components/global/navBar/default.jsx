@@ -110,9 +110,6 @@ const NavBar = ({
           <Section navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
                    setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile}
                    isSticky={stickyNavVisibility}/>
-          <li className='nav-items nav-separator'>
-            <span className='separatorBar'></span>
-          </li>
         </React.Fragment>
       );
     }
