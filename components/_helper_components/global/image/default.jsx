@@ -11,7 +11,6 @@ import './default.scss';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
-// import PlaceholderImage from './_helper_functions/PlaceholderImage';
 
 const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage = false,
@@ -25,7 +24,6 @@ const Image = ({
   const { deployment, contextPath } = appContext;
   const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
-  // const timestamp = Date.now();
 
   const imgQuery = {
     src: url,
@@ -101,10 +99,7 @@ const Image = ({
     refPlaceholder.current.remove();
   };
 
-  // console.log("==========================================");
-
   if (img) {
-    // console.log("image -> has image", img);
     return (
       <div className={`c-image-component ${imageMarginBottom || ''}`}>
         <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
@@ -149,7 +144,6 @@ const Image = ({
       </div>
     );
   }
-  // console.log("image -> no img", img, imgQuery)
   return null;
 };
 
