@@ -4,16 +4,16 @@ import { useContent } from 'fusion:content';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import LazyLoad from 'react-lazyload';
-
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
-import './default.scss';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
+import './default.scss';
 
 const Image = ({
-  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, ampPage = false,
+  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType,
+  ampPage = false, onClickRun,
 }) => {
   const {
     url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText,
@@ -62,7 +62,6 @@ const Image = ({
       }
     }
   }, [url]);
-
   const screenSize = checkWindowSize();
 
   let mainCredit;
@@ -94,29 +93,24 @@ const Image = ({
     return <Caption src={src} />;
   };
 
-  const refPlaceholder = React.useRef();
-  const removePlaceholder = () => {
-    refPlaceholder.current.remove();
-  };
-
   if (img) {
     return (
       <div className={`c-image-component ${imageMarginBottom || ''}`}>
         <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
           <>
             {!ampPage ? (
-              <div>
-                <img src={placeholder} ref={refPlaceholder} />
-                <LazyLoad>
-                  <img
-                    onLoad={removePlaceholder}
-                    onError={removePlaceholder}
-                    src={img.src}
-                    alt={getAltText(altText, caption)}
-                    className={teaseContentType ? 'tease-image' : ''}
-                  />
-                </LazyLoad>
-              </div>
+              <LazyLoad
+                placeholder={<img src={placeholder} style={{ width: '100%' }} />}
+                height="100%"
+                width="100%"
+                once={true}>
+                <img
+                  src={img.src}
+                  alt={getAltText(altText, caption)}
+                  className={teaseContentType ? 'tease-image' : ''}
+                  onClick={onClickRun}
+                />
+              </LazyLoad>
             ) : (
                 <amp-img
                   src={img.src}
@@ -136,7 +130,7 @@ const Image = ({
                   </amp-img>
                 </amp-img>
             )}
-          {teaseContentType && getTeaseIcon(teaseContentType)}
+            {teaseContentType && getTeaseIcon(teaseContentType)}
           </>
           {imageType !== 'isHomepageImage' && renderCaption()}
         </div>
@@ -152,11 +146,13 @@ Image.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   imageMarginBottom: PropTypes.string,
-  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage']).isRequired,
+  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage', 'isGalleryImage']).isRequired,
   maxTabletViewWidth: PropTypes.number,
   teaseContentType: PropTypes.string,
   canonicalUrl: PropTypes.string,
   ampPage: PropTypes.bool,
+  onClickRun: PropTypes.func,
+  customScrollContainerEl: PropTypes.string,
 };
 
 export default Image;

@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
+import filter from '../../filters/queryFilter';
 
 export default (arcSite, newBody, from = 0, size = 10) => {
   if (!arcSite || !newBody) {
@@ -17,17 +18,20 @@ export default (arcSite, newBody, from = 0, size = 10) => {
   const maxFetchSize = 100;
 
   const total = fromInt + sizeInt + buffer;
+  let leftToFetch = total;
 
   const numberOfFetches = total <= maxFetchSize ? 1 : Math.ceil(total / maxFetchSize);
-  const fetchSize = total <= maxFetchSize ? total : 100;
 
   let fetchStart = 0;
   let i = 1;
 
   while (i <= numberOfFetches && i < 10) {
+    const fetchSize = leftToFetch <= maxFetchSize ? leftToFetch : maxFetchSize;
+
     let requestUri = `${CONTENT_BASE}/content/v4/search/published?body=${newBody}&website=${arcSite}&sort=display_date:desc`;
     requestUri += `&from=${fetchStart}`;
     requestUri += `&size=${fetchSize}`;
+    requestUri += `&_sourceInclude=${filter}`;
 
     const promise = axios
       .get(requestUri, {
@@ -46,6 +50,7 @@ export default (arcSite, newBody, from = 0, size = 10) => {
     promiseArray.push(promise);
 
     fetchStart += fetchSize;
+    leftToFetch -= fetchSize;
     i += 1;
   }
 

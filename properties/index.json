@@ -49,11 +49,22 @@
     "placementName": "AJC Custom Feed"
   },
   "facebookAppID": "366816260017522",
-  "adsPath": "atlanta_np/ajc_web_default",
-  "adsA9Enabled": false,
-  "adsA9Id": "3970",
-  "adsPrebidEnabled": false,
-  "adsPrebidTimeout": 1500,
+  "ads": {
+    "sandbox": {
+      "adsA9Enabled": "false",
+      "adsA9Id": "3970",
+      "adsPrebidEnabled": "false",
+      "adsPrebidTimeout": "1500",
+      "prebidJs": "prebid3.23.0.js"
+    },
+    "prod": {
+      "adsA9Enabled": "false",
+      "adsA9Id": "3970",
+      "adsPrebidEnabled": "false",
+      "adsPrebidTimeout": "1500",
+      "prebidJs": "prebid3.23.0.js"
+    }
+  },
   "weatherLocationId": 348181,
   "favicon": "/resources/icons/favicons/AJC/favicon.ico",
   "appleIcon": "/resources/images/favicon-apple-touch-icon.png",

@@ -1,0 +1,89 @@
+@import "./../../../src/styles/base";
+
+.c-revenue {
+  background-color: #ededed;
+  width: 100vw;
+  padding-top: 1.25rem;
+
+  @include breakpoint(desktop-sm) {
+    padding-top: 2rem;
+  }
+
+  .revenue-container {
+    padding: 0 15px 1.25rem;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+
+    @include breakpoint(tablet) {
+      width: 94%;
+    }
+
+    @include breakpoint(desktop-sm) {
+      padding: 0;
+    }
+
+    @include breakpoint(desktop-lg) {
+      width: 90%;
+    }
+
+    & > div {
+      margin: 0;
+    }
+
+    .c-homeListContainer {
+      @include breakpoint(desktop-sm) {
+        flex-direction: row;
+      }
+
+      .c-homeList {
+        margin-bottom: 1.25rem;
+
+        @include breakpoint(desktop-sm) {
+          margin-bottom: 2.25rem;
+          width: 30%;
+        }
+
+        .homeList-image {
+          max-width: calc(55% - 7.5px);
+          width: calc(55% - 7.5px);
+        }
+
+        .homeList-text {
+          max-width: 50%;
+          width: 50%;
+        }
+
+        .c-tease-icon {
+          height: 30px;
+          width: 30px;
+        }
+
+        .headline {
+          @include text-styles(1rem, 1.25, "Average");
+
+          @include breakpoint(desktop-sm) {
+            @include text-styles(1.25rem, 1.25, "Average");
+          }
+        }
+
+        .c-sponsorOverlay {
+          background: #000;
+
+          @include text-styles(.75rem, 1, "Gordita");
+
+          @include breakpoint(desktop-sm) {
+            @include text-styles(.875rem, 1, "Gordita");
+          }
+
+          min-height: 20px;
+          font-weight: 400;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

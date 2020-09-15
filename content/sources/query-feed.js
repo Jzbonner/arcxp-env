@@ -2,7 +2,6 @@
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
 import getQueryData from './helper_functions/getQueryData';
-import filter from '../filters/collectionAndQueryFilter';
 
 const schemaName = 'query-feed';
 const bodybuilder = require('bodybuilder');
@@ -127,5 +126,4 @@ export default {
   fetch,
   params,
   ttl,
-  filter,
 };
