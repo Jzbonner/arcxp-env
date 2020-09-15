@@ -260,6 +260,34 @@ const Video = ({
           );
         }
 
+        // go ahead and define vars for use in subsequent events/metrics
+        const { detail: videoDetails } = e || {};
+        const {
+          videoData: ogVideoData,
+          autoplay: ogAutoplay,
+        } = videoDetails || {};
+        const {
+          duration: ogDuration = 0,
+          headlines: ogHeadlines,
+          taxonomy: ogTaxonomy,
+          _id: ogVidId,
+          version: ogVersion,
+          video_type: ogVidType,
+        } = ogVideoData || {};
+        const { basic: ogHeadline } = ogHeadlines || {};
+        const { tags: ogTags = [] } = ogTaxonomy || {};
+
+        // (re)set video-specific values, for use in gtm
+        videoTotalTime = typeof ogDuration === 'number' && ogDuration > 0 ? ogDuration / 1000 : ogDuration;
+        vidId = ogVidId;
+        videoTitle = ogHeadline;
+        videoPlayType = ogAutoplay ? 'auto-play' : 'manual-play';
+        videoTopics = ogTags.map(tag => tag.text);
+        videoPlayerVersion = ogVersion;
+        videoContentType = ogVidType;
+
+        fireGtmEvent(videoDetails);
+          
         powa.on('start', (event) => {
           const {
             id: playerId,
@@ -291,7 +319,7 @@ const Video = ({
             vidId = vId;
             videoTitle = headline;
             videoPlayType = autoplay ? 'auto-play' : 'manual-play';
-            videoTopics = tags;
+            videoTopics = tags.map(tag => tag.text);
             videoPlayerVersion = version;
             videoContentType = vidType;
             // make everything relative to the player's container, in case there are multiple players on the page
@@ -360,7 +388,6 @@ const Video = ({
     loadVideoScript();
     window.removeEventListener('powaRender', e => powaRendered(e));
   }, []);
-
   const videoMarginBottom = 'b-margin-bottom-d40-m20';
   const giveCredit = mainCredit ? `Credit: ${mainCredit}` : null;
 
