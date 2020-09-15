@@ -10,11 +10,11 @@ import '../../../src/styles/container/_c-section.scss';
 import '../../../src/styles/base/_utility.scss';
 import './default.scss';
 
-const SectionOutput = ({ zones, layout }) => (
+const SectionOutput = ({ zones, layout, noHeaderAndFooter }) => (
   <>
     <GlobalAdSlots pbPage={true} />
     {/* we omit breaking news on wraps */}
-    <TopNavBreakingNews type={layout} omitBreakingNews={layout.indexOf('wrap-') !== -1}/>
+    {!noHeaderAndFooter && <TopNavBreakingNews type={layout} omitBreakingNews={layout.indexOf('wrap-') !== -1} />}
     <main className="c-sectionContent">
       {zones && (
         zones.map((zone, i) => {
@@ -30,8 +30,10 @@ const SectionOutput = ({ zones, layout }) => (
       )}
     </main>
     {layout !== 'wrap-header_only' && <>
+    {!noHeaderAndFooter && <>
       <Footer />
       <Copyright />
+      </>}
     </>}
   </>
 );
@@ -39,6 +41,7 @@ const SectionOutput = ({ zones, layout }) => (
 SectionOutput.propTypes = {
   zones: PropTypes.array,
   layout: PropTypes.string,
+  noHeaderAndFooter: PropTypes.bool,
 };
 
 export default SectionOutput;

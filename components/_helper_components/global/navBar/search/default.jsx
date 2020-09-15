@@ -6,9 +6,18 @@ import searchIcon from '../../../../../resources/icons/search.svg';
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isEditing, setEditingState] = useState(false);
+  const [isTablet, setTabletState] = useState(false);
 
   const inputRef = useRef(null);
   const windowExists = typeof window !== 'undefined';
+
+  const handleWindowSize = () => {
+    if (window.innerWidth <= 1023) {
+      setTabletState(true);
+    } else {
+      setTabletState(false);
+    }
+  };
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -27,6 +36,11 @@ const Search = () => {
     setEditingState(!isEditing);
   };
 
+  // check viewport size on mount
+  useEffect(() => {
+    if (windowExists) handleWindowSize();
+  }, []);
+
   useEffect(() => {
     if (windowExists) {
       window.addEventListener('keydown', handleEnterPress, true);
@@ -37,21 +51,35 @@ const Search = () => {
     return null;
   }, [searchTerm]);
 
+  useEffect(() => {
+    if (windowExists) {
+      window.addEventListener('resize', handleWindowSize, true);
+      return () => {
+        window.removeEventListener('resize', handleWindowSize, true);
+      };
+    }
+    return null;
+  }, [isTablet]);
+
   useLayoutEffect(() => {
     if (isEditing) inputRef.current.focus();
   }, [isEditing]);
 
   return (
     <li className='nav-search'>
-      <form onSubmit={handleSubmit} className='search-form'>
-        <input
-          onClick={toggleEditing}
-          onChange={handleChange}
-          type="text"
-          name="value"
-          value={searchTerm}
-          ref={inputRef}
-          className='search-input'></input>
+      <form onSubmit={e => e.target && handleSubmit(e)} className='search-form'>
+        {
+          isTablet && (
+            <input
+            onClick={toggleEditing}
+            onChange={handleChange}
+            type="text"
+            name="value"
+            value={searchTerm}
+            ref={inputRef}
+            className='search-input'></input>
+          )
+        }
         <button type="submit" className="c-search-icon">
           <img className='search-icon'
             src={searchIcon} />

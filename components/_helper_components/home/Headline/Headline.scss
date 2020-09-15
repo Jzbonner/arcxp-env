@@ -27,8 +27,7 @@
       .c-sponsorOverlay {
         height: 60px;
         display: flex;
-        align-items: flex-start;
-        padding-top: 10px;
+        align-items: center;
 
         @media (min-width: 450px) {
           height: 65px;
@@ -41,7 +40,7 @@
         @include breakpoint(desktop-sm) {
           height: 50px;
         }
-        
+
         @include breakpoint(desktop-lg) {
           height: 55px;
         }

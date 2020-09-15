@@ -10,8 +10,8 @@ const ttl = 120;
 
 const params = {
   id: 'text',
-  from: 'text',
-  size: 'text',
+  from: 'number',
+  size: 'number',
 };
 
 const fetch = (query) => {
