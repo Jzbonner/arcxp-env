@@ -14,7 +14,7 @@ export default [
   'firstInlineImage.width',
   'firstInlineImage.caption',
   'firstInlineImage.credits.affiliation.by.id',
-  'firstInlineImage.credit.by',
+  'firstInlineImage.credits.by',
   'headlines.basic',
   'label.hide_timestamp',
   'label.basic.text',

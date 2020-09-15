@@ -18,7 +18,6 @@ import Copyright from '../_helper_components/global/copyright/default';
 import ArcAd from '../features/ads/default';
 import ContributorBadge from '../_helper_components/global/contributorBadge/default';
 import filterContentElements from './_helper_functions/article/filterContentElements';
-import ConnextFreeMessaging from '../_helper_components/global/ConnextFreeMessaging/default';
 import { ConnextAuthTrigger } from '../_helper_components/global/connext/default';
 import ConnextEndOfStory from '../_helper_components/global/connextEndOfStory/default';
 import ConnextHyperLocalSubscription from '../_helper_components/global/ConnextHyperLocalSubscription/ConnextHyperLocalSubscription';
@@ -33,6 +32,7 @@ import Carousel from '../_helper_components/article/carousel/default';
 import SponsorBanner from '../_helper_components/article/sponsorBanner/default';
 import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/default';
 import InterscrollerPlaceholder from '../_helper_components/article/interscroller/default';
+import SponsorStoryMessage from '../_helper_components/article/sponsorStoryMessage/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
@@ -185,7 +185,7 @@ const StoryPageLayout = () => {
             {!noAds && ampPage && !isHyperlocalContent && (
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
             )}
-            { paywallStatus === 'free' && <ConnextFreeMessaging/>}
+            <SponsorStoryMessage sponsorID={sponsorSectionID} paywallStatus={paywallStatus}/>
             <Section
               elements={filteredContentElements}
               stopIndex={1}
