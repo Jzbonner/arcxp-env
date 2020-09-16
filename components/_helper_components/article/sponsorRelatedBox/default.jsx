@@ -4,7 +4,9 @@ import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getSponsorContent from './_helper_functions/getSponserContent';
 import ArcAd from '../../../features/ads/default';
+import relatedList from '../relatedList/default';
 import './default.scss';
+
 
 const SP01 = () => <ArcAd staticSlot={'SP01'} key={'SP01'} />;
 
@@ -31,6 +33,7 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
     sponsor_related_box_must_include_all_tags: includeAllTags,
     sponsor_related_box_title: boxTitle,
     disable_advertiser_content_label: disableAd,
+    disable_sponsor_related_box: disableSponsorRelatedBox,
   } = Sponsor;
 
   const feed = useContent({
@@ -45,11 +48,11 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
     },
   });
 
-  const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor, uuid);
+  if (!disableSponsorRelatedBox) {
+    const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor, uuid);
 
-  if (!boxContent || (boxContent && boxContent.length < 1)) return null;
+    if (!boxContent || (boxContent && boxContent.length < 1)) return null;
 
-  if (boxContent) {
     const lastItemInArray = boxContent.slice(-1).pop();
     return (
       <div className={'c-sponsor-box'}>
@@ -76,6 +79,8 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
         </ul>
       </div>
     );
+  } else {
+    return <relatedList />
   }
 
   return null;
