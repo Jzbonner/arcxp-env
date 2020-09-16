@@ -107,6 +107,21 @@ const Video = ({
         case 'powaRender':
           eventType = 'videoPlayerLoad';
           break;
+        case 'start':
+          eventType = 'videoStart';
+          break;
+        case 'adStart':
+          eventType = 'videoAdStart';
+          break;
+        case 'error':
+          eventType = 'videoError';
+          break;
+        case 'adError':
+          eventType = 'videoAdError';
+          break;
+        case 'adSkip':
+          eventType = 'videoAdSkip';
+          break;
         default:
           eventType = null;
       }
