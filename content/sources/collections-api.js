@@ -3,7 +3,7 @@ import _ from 'lodash';
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
 import GetCollectionData from './helper_functions/GetCollectionData';
-import filter from '../filters/collectionAndQueryFilter';
+import filter from '../filters/collectionFilter';
 
 const schemaName = 'collections';
 const ttl = 120;
