@@ -86,8 +86,7 @@ const Video = ({
           - And if `ampEvent` is excluded, it's a metrics-only event that should not be passed to the AMP integration.
         There wasn't much reason to create separate handlers for something shared, so `fireGtmEvent` pulls double duty.
       */
-      // default eventType value: naming convention remains, we simply prepend "video" and capitalize the first letter
-      let eventType = `video${type.charAt(0).toUpperCase()}${type.slice(1)}`;
+      let eventType;
       switch (type) {
         case 'playback0':
           eventType = 'videoContentStart';
