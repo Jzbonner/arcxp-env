@@ -94,24 +94,27 @@ const Video = ({
         There wasn't much reason to create separate handlers for something shared, so `fireGtmEvent` pulls double duty.
       */
       let eventType;
+      let ampEvent = null;
       switch (type) {
         case 'adStart':
           ampEvent = 'ad_start';
+          eventType = 'videoAdStart';
           break;
         case 'adComplete':
           ampEvent = 'ad_end';
+          eventType = 'videoAdComplete';
           break;
         case 'muted':
-          eventType = null;
           ampEvent = mutedState ? 'muted' : 'unmuted';
+          eventType = null;
           break;
         case 'pause':
-          eventType = null;
           ampEvent = 'pause';
+          eventType = null;
           break;
         case 'play':
-          eventType = null;
           ampEvent = 'playing';
+          eventType = null;
           break;
         case 'playback0':
           eventType = 'videoContentStart';
@@ -133,13 +136,8 @@ const Video = ({
           ampEvent = 'canplay';
           break;
         case 'start':
-          ampEvent = 'playing';
-          break;
-        case 'start':
           eventType = 'videoStart';
-          break;
-        case 'adStart':
-          eventType = 'videoAdStart';
+          ampEvent = 'playing';
           break;
         case 'error':
           eventType = 'videoError';
@@ -273,23 +271,6 @@ const Video = ({
           );
         }
 
-        // go ahead and define vars for use in subsequent events/metrics
-        const { detail: videoDetails } = e || {};
-        const {
-          videoData: ogVideoData,
-          autoplay: ogAutoplay,
-        } = videoDetails || {};
-        const {
-          duration: ogDuration = 0,
-          headlines: ogHeadlines,
-          taxonomy: ogTaxonomy,
-          _id: ogVidId,
-          version: ogVersion,
-          video_type: ogVidType,
-        } = ogVideoData || {};
-        const { basic: ogHeadline } = ogHeadlines || {};
-        const { tags: ogTags = [] } = ogTaxonomy || {};
-
         // (re)set video-specific values, for use in gtm
         videoTotalTime = typeof ogDuration === 'number' && ogDuration > 0 ? ogDuration / 1000 : ogDuration;
         vidId = ogVidId;
@@ -300,7 +281,7 @@ const Video = ({
         videoContentType = ogVidType;
 
         fireGtmEvent(videoDetails);
-          
+
         powa.on('start', (event) => {
           const {
             id: playerId,
