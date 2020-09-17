@@ -8,7 +8,7 @@ import Video from '../../global/video/default';
 import Gallery from '../../../features/gallery/default';
 
 const Headline = ({
-  basicItems = {}, headlines = {}, taxonomy = {}, ampPage = false, contentType = '', ampVideoIframe = false,
+  basicItems = {}, headlines = {}, taxonomy = {}, ampPage = false, contentType = '', ampVideoIframe = false, lazyLoad = false,
 }) => {
   let promoData = {};
   if (basicItems) {
@@ -46,6 +46,7 @@ const Headline = ({
           featuredVideoPlayerRules={featuredVideoPlayerRules}
           maxTabletViewWidth={maxTabletViewWidth}
           pageTaxonomy={taxonomy}
+          lazyLoad={lazyLoad}
         />
       )}
     </div>
@@ -61,6 +62,7 @@ Headline.propTypes = {
   ampPage: PropTypes.bool,
   contentType: PropTypes.string,
   ampVideoIframe: PropTypes.bool,
+  lazyLoad: PropTypes.bool,
 };
 
 export default Headline;

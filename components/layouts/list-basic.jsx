@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
+import getQueryParams from './_helper_functions/getQueryParams';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import ListPage from '../_helper_components/listpage/default';
@@ -10,8 +11,13 @@ import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreaki
 
 const ListPageLayout = (props) => {
   const appContext = useAppContext();
-  const { globalContent, globalContentConfig, renderables } = appContext;
+  const {
+    globalContent, globalContentConfig, renderables, requestUri,
+  } = appContext;
   if (!globalContent) return null;
+  const queryParams = getQueryParams(requestUri);
+  const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
+  const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
 
   const [title] = props.children;
   const pageTitleFeaturePresent = renderables[2] && renderables[2].type === 'pageTitle/default';
@@ -19,14 +25,16 @@ const ListPageLayout = (props) => {
   return (
     <>
       <GlobalAdSlots />
-      <TopNavBreakingNews />
+      {!noHeaderAndFooter && <TopNavBreakingNews />}
       <ListPage
         globalContent={globalContent}
         globalContentConfig={globalContentConfig}
         title={pageTitleFeaturePresent && title}
       />
-      <Footer />
-      <Copyright />
+      {!noHeaderAndFooter && <>
+        <Footer />
+        <Copyright />
+      </>}
     </>
   );
 };

@@ -38,6 +38,7 @@ const getContentMeta = () => {
     data: contentData,
     additional_properties: additionalProperties,
     content_elements: contentElements = [],
+    content_restrictions: contentRestrictions,
   } = globalContent || {};
   const articleDesc = description;
   const {
@@ -173,6 +174,8 @@ const getContentMeta = () => {
 
   const faviconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${favicon}`)}`;
   const appleIconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
+
+  const { content_code: paywallStatus } = contentRestrictions || {};
   // return page content metadata values
   return {
     url,
@@ -201,6 +204,7 @@ const getContentMeta = () => {
     nonPrimarySet,
     isOpinion,
     blogName,
+    paywallStatus,
   };
 };
 

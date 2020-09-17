@@ -1,3 +1,4 @@
+import adsBidding from './adsBidding/dayton.com.json';
 import adsTxt from './adstxt/dayton.com.json';
 import appAdsTxt from './appadstxt/dayton.com.json';
 
@@ -60,14 +61,16 @@ export default {
   nativoMoapTag: 'https://amp.dayton.com/amp/ntv',
   ads: {
     sandbox: {
+      adsBidding,
       adsA9Enabled: false,
       adsA9Id: '',
-      adsPrebidEnabled: false,
+      adsPrebidEnabled: true,
       adsPrebidTimeout: 1500,
       devconActive: false,
       devconKey: '',
     },
     prod: {
+      adsBidding,
       adsA9Enabled: false,
       adsA9Id: '',
       adsPrebidEnabled: false,

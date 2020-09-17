@@ -7,6 +7,7 @@ import get from 'lodash.get';
 import fetchEnv from '../utils/environment';
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
+import deferThis from '../utils/deferLoading';
 import gamAdTagBuilder from './_helper_functions/gamAdTagBuilder';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
@@ -14,7 +15,14 @@ import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
 const Video = ({
-  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, pageTaxonomy = [],
+  src,
+  isLeadVideo,
+  isInlineVideo,
+  maxTabletViewWidth,
+  featuredVideoPlayerRules,
+  inlineVideoPlayerRules,
+  pageTaxonomy = [],
+  lazyLoad = false,
 }) => {
   const appContext = useAppContext();
   const { globalContent, requestUri, layout } = appContext;
@@ -44,7 +52,8 @@ const Video = ({
   const siteOfRecord = cdnSite || arcSite;
   const isAmpOutput = outputType === 'amp';
   const isAmpWebPlayer = outputType === 'ampVideoIframe';
-  let autoplayState = startPlaying;
+  // initial autoplay state: false if it's a lead video and we're lazy loading the video (i.e. paywall)
+  let autoplayState = isLeadVideo && lazyLoad ? false : startPlaying;
   // update autoplay if it's ampVideoIframe (since we need some way to pass the state to the component through the iframe)
   if (isAmpWebPlayer) {
     if (requestUri.indexOf('autoplayState') > -1) {
@@ -75,10 +84,8 @@ const Video = ({
     let videoContentType;
     let videoTopics;
 
-    const fireGtmEvent = (evt) => {
-      const { time, type } = evt || {};
-      // fire GTM events for various player events
-      const dataLayer = window.dataLayer || [];
+    const buildGtmObject = (evt) => {
+      const { muted: mutedState, time, type } = evt || {};
       /*
         We override (or omit) eventType or ampEvent in the following cases to tailor output to either metrics, or amp, or both:
           - If both are present, then that video event is emitted to both outputs.
@@ -88,6 +95,24 @@ const Video = ({
       */
       let eventType;
       switch (type) {
+        case 'adStart':
+          ampEvent = 'ad_start';
+          break;
+        case 'adComplete':
+          ampEvent = 'ad_end';
+          break;
+        case 'muted':
+          eventType = null;
+          ampEvent = mutedState ? 'muted' : 'unmuted';
+          break;
+        case 'pause':
+          eventType = null;
+          ampEvent = 'pause';
+          break;
+        case 'play':
+          eventType = null;
+          ampEvent = 'playing';
+          break;
         case 'playback0':
           eventType = 'videoContentStart';
           break;
@@ -105,6 +130,10 @@ const Video = ({
           break;
         case 'powaRender':
           eventType = 'videoPlayerLoad';
+          ampEvent = 'canplay';
+          break;
+        case 'start':
+          ampEvent = 'playing';
           break;
         case 'start':
           eventType = 'videoStart';
@@ -124,30 +153,82 @@ const Video = ({
         default:
           eventType = null;
       }
-      if (eventType) {
-        dataLayer.push({
-          event: eventType,
-          videoPayload: {
-            videoSource: 'arc',
-            videoTitle,
-            videoID: vidId,
-            videoContentType: videoContentType === 'clip' ? 'vod' : videoContentType,
-            videoPlayType,
-            videoTotalTime,
-            videoPlayerVersion,
-            videoTopics,
-            videoAccountID: '',
-            videoSeekTime: time,
-          },
-        });
+      const analyticsEventType = eventType;
+      const videoPayload = {
+        videoSource: 'arc',
+        videoTitle,
+        videoID: vidId,
+        videoContentType: videoContentType === 'clip' ? 'vod' : videoContentType,
+        videoPlayType,
+        videoTotalTime,
+        videoPlayerVersion,
+        videoTopics,
+        videoAccountID: '',
+        videoSeekTime: time,
+      };
+      if (isAmpWebPlayer && ampEvent) {
+        return {
+          ampPlayerEvent: ampEvent,
+          ampAnalyticsEvent: analyticsEventType,
+          videoPayload,
+        };
       }
+      return {
+        event: analyticsEventType,
+        videoPayload,
+      };
     };
+
+    const fireGtmEvent = (evt) => {
+      // fire GTM events for various player events
+      const dataLayer = window.dataLayer || [];
+      dataLayer.push(buildGtmObject(evt));
+    };
+
     const powaRendered = (e) => {
       const id = get(e, 'detail.id');
       const powa = get(e, 'detail.powa');
 
+      // go ahead and define vars for use in subsequent events/metrics
+      const { detail: videoDetails } = e || {};
+      const {
+        videoData: ogVideoData,
+        autoplay: ogAutoplay,
+      } = videoDetails || {};
+      const {
+        duration: ogDuration = 0,
+        headlines: ogHeadlines,
+        taxonomy: ogTaxonomy,
+        _id: ogVidId,
+        version: ogVersion,
+        video_type: ogVidType,
+      } = ogVideoData || {};
+      const { basic: ogHeadline } = ogHeadlines || {};
+      const { tags: ogTags = [] } = ogTaxonomy || {};
+
+      // (re)set video-specific values, for use in gtm
+      videoTotalTime = typeof ogDuration === 'number' && ogDuration > 0 ? ogDuration / 1000 : ogDuration;
+      vidId = ogVidId;
+      videoTitle = ogHeadline;
+      videoPlayType = ogAutoplay ? 'auto-play' : 'manual-play';
+      videoTopics = ogTags;
+      videoPlayerVersion = ogVersion;
+      videoContentType = ogVidType;
+
+      fireGtmEvent(videoDetails);
+
       // protect against the player not existing (just in case)
       if (typeof powa !== 'undefined') {
+        /*
+          if it's a lead video and the story is paywalled, pass the player to `deferThis` to be lazyLoaded
+          & queued for (eventual) triggering in components/_helper_components/global/connext/default.jsx
+          (`ConnextAuthTrigger` function, called in `article-basic` layout)
+        */
+        if (isLeadVideo && lazyLoad) {
+          deferThis({ video: powa });
+          powa.hideControls();
+        }
+
         // bind to ampIntegration events, to control the PoWa player from AMP
         if (isAmpWebPlayer) {
           const onAmpIntegrationReady = (ampIntegration) => {
@@ -165,25 +246,26 @@ const Video = ({
             ampIntegration.method('fullscreenenter', () => powa.fullscreen(true));
             ampIntegration.method('fullscreenexit', () => powa.fullscreen(false));
 
-            const postToAmp = (ampEvent, evt) => {
-              if (ampEvent === 'muted' && typeof evt !== 'undefined') {
-                const { muted: mutedState } = evt || {};
-                ampIntegration.postEvent(mutedState ? 'muted' : 'unmuted');
-              } else {
-                ampIntegration.postEvent(ampEvent);
+            const postToAmp = (evt) => {
+              const { ampPlayerEvent, ampAnalyticsEvent, videoPayload } = buildGtmObject(evt) || {};
+              if (ampPlayerEvent) {
+                ampIntegration.postEvent(ampPlayerEvent);
+              }
+              if (ampAnalyticsEvent) {
+                ampIntegration.postAnalyticsEvent(ampAnalyticsEvent, videoPayload);
               }
             };
 
             // player -> amp triggers
-            powa.on('adComplete', () => postToAmp('ad_end'));
-            powa.on('adError', () => postToAmp('ad_error'));
-            powa.on('adStart', () => postToAmp('ad_start'));
-            powa.on('muted', evt => postToAmp('muted', evt));
-            powa.on('pause', () => postToAmp('pause'));
-            powa.on('play', () => postToAmp('playing'));
-            powa.on('start', () => postToAmp('playing'));
+            powa.on('adComplete', evt => postToAmp(evt));
+            powa.on('adError', evt => postToAmp(evt));
+            powa.on('adStart', evt => postToAmp(evt));
+            powa.on('muted', evt => postToAmp(evt));
+            powa.on('pause', evt => postToAmp(evt));
+            powa.on('play', evt => postToAmp(evt));
+            powa.on('start', evt => postToAmp(evt));
             // trigger initial postEvent since we're in the `powaRender` event
-            postToAmp('canplay');
+            postToAmp(videoDetails);
           };
 
           (window.AmpVideoIframe = window.AmpVideoIframe || []).push(
@@ -213,12 +295,12 @@ const Video = ({
         vidId = ogVidId;
         videoTitle = ogHeadline;
         videoPlayType = ogAutoplay ? 'auto-play' : 'manual-play';
-        videoTopics = ogTags;
+        videoTopics = ogTags.map(tag => tag.text);
         videoPlayerVersion = ogVersion;
         videoContentType = ogVidType;
 
         fireGtmEvent(videoDetails);
-
+          
         powa.on('start', (event) => {
           const {
             id: playerId,
@@ -250,7 +332,7 @@ const Video = ({
             vidId = vId;
             videoTitle = headline;
             videoPlayType = autoplay ? 'auto-play' : 'manual-play';
-            videoTopics = tags;
+            videoTopics = tags.map(tag => tag.text);
             videoPlayerVersion = version;
             videoContentType = vidType;
             // make everything relative to the player's container, in case there are multiple players on the page
@@ -319,7 +401,6 @@ const Video = ({
     loadVideoScript();
     window.removeEventListener('powaRender', e => powaRendered(e));
   }, []);
-
   const videoMarginBottom = 'b-margin-bottom-d40-m20';
   const giveCredit = mainCredit ? `Credit: ${mainCredit}` : null;
 
@@ -339,17 +420,20 @@ const Video = ({
     return <Caption src={src} isLeadVideo videoCaption={videoCaption} />;
   };
 
-  const renderPowaPlayer = () => <div
-    className="powa"
-    data-org={orgOfRecord}
-    data-env={currentEnv}
-    data-aspect-ratio="0.5625"
-    data-uuid={vidId}
-    data-autoplay={autoplayState}
-    data-muted={muteON}
-    data-playthrough={autoplayNext || true}
-    data-discovery={autoplayNext || true}
-     />;
+  const renderPowaPlayer = () => <>
+    <div
+      className="powa"
+      data-org={orgOfRecord}
+      data-env={currentEnv}
+      data-aspect-ratio="0.5625"
+      data-uuid={vidId}
+      data-autoplay={autoplayState}
+      data-muted={muteON}
+      data-playthrough={autoplayNext || true}
+      data-discovery={autoplayNext || true}
+       />
+     {isLeadVideo && lazyLoad && <div className="video-blocker" />}
+  </>;
 
   let ampVideoIframeDomain = `https://${orgOfRecord}-${siteOfRecord}-${currentEnv}.cdn.arcpublishing.com`;
   if (currentEnv === 'prod') {
@@ -379,6 +463,7 @@ Video.propTypes = {
   inlineVideoPlayerRules: PropTypes.object,
   maxTabletViewWidth: PropTypes.number,
   pageTaxonomy: PropTypes.object,
+  lazyLoad: PropTypes.bool,
 };
 
 export default Video;
