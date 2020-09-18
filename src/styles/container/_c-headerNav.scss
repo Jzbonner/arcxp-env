@@ -21,7 +21,7 @@
     padding-bottom: 0;
     position: fixed;
     top: 0;
-    opacity: .98;
+    opacity: 0.98;
     z-index: 4001;
     width: 100%;
     height: 90px;
@@ -47,7 +47,7 @@
     z-index: 4001;
     display: none;
 
-    @include breakpoint (desktop-sm) {
+    @include breakpoint(desktop-sm) {
       display: flex;
     }
 
@@ -103,7 +103,7 @@
     flex-direction: column;
     padding: 30px 20px;
     background-image: linear-gradient(to top, #04befe, #4481eb);
-    box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+    box-shadow: 0 2px 4px 0 rgba(149, 149, 149, 0.5);
     height: 100%;
     width: 100%;
     max-width: 408px;
@@ -112,7 +112,7 @@
     z-index: 10002;
     left: -1000px;
     transform: translateX(0);
-    transition: transform .5s ease;
+    transition: transform 0.5s ease;
     box-sizing: border-box;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
@@ -321,7 +321,6 @@
       }
 
       @include breakpoint(desktop-sm) {
-
         &:not(.nav-login) {
           cursor: none;
         }
@@ -381,7 +380,7 @@
     @include breakpoint(desktop-sm) {
       color: #2e81b7;
 
-      @include text-styles(.875rem, 1, "Gordita-Medium");
+      @include text-styles(0.875rem, 1, "Gordita-Medium");
     }
 
     @include breakpoint(desktop-lg) {
@@ -421,7 +420,7 @@
     height: 3.3rem;
     border-radius: 6px;
     background-color: #fff;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .24), 0 1px 4px 0 rgba(0, 0, 0, .24);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.24), 0 1px 4px 0 rgba(0, 0, 0, 0.24);
     margin-bottom: 25px;
     order: -1;
 
@@ -468,7 +467,7 @@
       background-color: transparent;
       width: calc(100% - 40px);
 
-      @include text-styles(.875rem, 1, "Gordita");
+      @include text-styles(0.875rem, 1, "Gordita");
     }
   }
 
@@ -477,7 +476,7 @@
     background: transparent;
 
     .search-icon {
-      padding: 0 .5rem;
+      padding: 0 0.5rem;
 
       @include breakpoint(desktop-sm) {
         max-width: 100%;
@@ -663,24 +662,23 @@
     color: #fff;
     text-transform: capitalize;
 
-    @include text-styles(.875rem, 1, "Gordita");
+    @include text-styles(0.875rem, 1, "Gordita");
 
     @include breakpoint(desktop-sm) {
       display: none;
     }
   }
-  
+
   .nav-copyright-links {
     flex-wrap: wrap;
     line-height: 1.8;
     margin-bottom: 10px;
-    
+
     a {
       display: flex;
       padding: 0 5px;
 
       &:not(:last-child) {
-  
         &:after {
           content: "|";
           display: block;
@@ -689,15 +687,15 @@
       }
     }
   }
-  
+
   .nav-copyright {
     margin-bottom: 20px;
   }
 
   .nav-mobile-login {
     @include between-breakpoints(mobile, desktop-sm) {
-
       .nav-login {
+        width: 80%;
         display: block;
         padding-left: 0;
       }
@@ -706,7 +704,6 @@
 
   .nav-login {
     @include between-breakpoints(mobile, desktop-sm) {
-
       &.isSticky .login-text {
         display: none;
       }
@@ -756,19 +753,24 @@
       }
     }
 
-    .btn-logout {
+    .btn-profile {
       height: auto;
-      width: 100%;
+      width: 220px;
+      max-width: 50vw;
       padding: 8px 0;
-      margin-bottom: 15px;
-      border-radius: 4px;
-      background-image: linear-gradient(to top, #04befe, #4481eb);
-      box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+      border-radius: 2px;
       color: #fff;
       text-align: center;
       display: inline-block;
+      border: 2px solid white;
 
-      @include text-styles(.875rem, 1, "Gordita-Bold");
+      @include breakpoint(desktop-sm) {
+        background-image: linear-gradient(to top, #04befe, #4481eb);
+        border: none;
+        margin-bottom: 15px;
+      }
+
+      @include text-styles(0.875rem, 1, "Gordita-Bold");
     }
 
     /*
@@ -805,7 +807,7 @@
       display: flex;
       font-weight: 800;
 
-      @include text-styles(.875rem, 3, "Gordita-Bold");
+      @include text-styles(0.875rem, 3, "Gordita-Bold");
     }
 
     @include breakpoint(desktop-nav) {
@@ -852,11 +854,11 @@
     @include breakpoint(desktop-sm) {
       display: flex;
       opacity: 0;
-      transition: opacity .15s;
+      transition: opacity 0.15s;
       margin-top: 0;
-      margin-left: -.45rem;
+      margin-left: -0.45rem;
       position: absolute;
-      box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
+      box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, 0.1);
     }
   }
 
@@ -867,7 +869,7 @@
       height: 44px;
       display: flex;
       align-items: center;
-      padding: 0 .45rem;
+      padding: 0 0.45rem;
       background-color: #fff;
       border-radius: 6px 6px 0 0;
       z-index: 4;
@@ -888,14 +890,14 @@
       overflow: hidden;
       visibility: hidden;
       min-width: 120px;
-      transition: opacity .15s;
+      transition: opacity 0.15s;
       opacity: 0;
-      padding: 1.125rem 1.5625rem .3125rem;
+      padding: 1.125rem 1.5625rem 0.3125rem;
       position: absolute;
       z-index: 3;
       top: 44px;
       background-color: #fff;
-      box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+      box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
     }
   }
 
@@ -908,7 +910,7 @@
       margin-right: 3vw;
       height: 1.875rem;
 
-      @include text-styles(.875rem, 1, "Gordita");
+      @include text-styles(0.875rem, 1, "Gordita");
     }
   }
 
@@ -966,7 +968,7 @@
     width: 100%;
     z-index: 10001;
     background-color: #808080;
-    opacity: .55;
+    opacity: 0.55;
     display: none;
 
     &.isVisible {
@@ -1007,7 +1009,7 @@
     height: 3px;
     background: #000;
     border-radius: inherit;
-    transition: all .2s;
+    transition: all 0.2s;
     transform: rotate(0);
   }
 
@@ -1019,7 +1021,7 @@
     height: 3px;
     background: #000;
     border-radius: inherit;
-    transition: all .2s;
+    transition: all 0.2s;
     transform: rotate(0);
     top: auto;
     bottom: -400%;
@@ -1064,7 +1066,7 @@
   }
 
   &.isSticky {
-    padding-bottom: .313em;
+    padding-bottom: 0.313em;
   }
 }
 
@@ -1220,7 +1222,6 @@
     }
 
     img {
-
       &.ajc {
         width: 75px;
         height: 56px;
@@ -1240,7 +1241,7 @@
         height: 30px;
         width: 151px;
       }
-      
+
       &.springfield-news-sun {
         width: 200px;
         height: 30px;
@@ -1254,7 +1255,7 @@
     }
 
     [class*="fb-comments-count"] {
-      @include text-styles(.6rem, 1, "Gordita-Bold");
+      @include text-styles(0.6rem, 1, "Gordita-Bold");
 
       position: absolute;
       top: 12px;
@@ -1273,17 +1274,17 @@
       height: 45px;
 
       .stickyNav-item {
-        padding-bottom: .313em;
+        padding-bottom: 0.313em;
       }
 
       .stickyNav-item:first-child {
-        padding-top: .313em;
+        padding-top: 0.313em;
       }
 
       &.is-open {
         height: auto;
         border-radius: 6px;
-        box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+        box-shadow: 0 2px 26px 4px rgba(0, 0, 0, 0.1);
         background: #fff;
 
         .arrow-icon {
@@ -1293,7 +1294,7 @@
 
       .arrow-icon {
         display: block;
-        padding-bottom: .313em;
+        padding-bottom: 0.313em;
       }
     }
   }
@@ -1310,5 +1311,51 @@
 
   &.isActive {
     display: flex;
+  }
+}
+
+.c-headerNav {
+  .login-menu {
+    @include breakpoint(desktop-sm) {
+      .subNav-flyout {
+        width: 100%;
+        align-content: center;
+        .flyout-item {
+          text-align: center;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.c-headerNav {
+  .fadeInOut.section {
+    @include breakpoint(desktop-sm) {
+      animation: 10s menuFadeInOut;
+      .subNav {
+        animation: 10s menuFadeInOut;
+      }
+    }
+  }
+}
+
+@keyframes menuFadeInOut {
+  0% {
+    opacity: 0;
+    visibility: visible;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
   }
 }
