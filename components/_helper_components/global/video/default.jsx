@@ -204,17 +204,6 @@ const Video = ({
       const { basic: ogHeadline } = ogHeadlines || {};
       const { tags: ogTags = [] } = ogTaxonomy || {};
 
-      // (re)set video-specific values, for use in gtm
-      videoTotalTime = typeof ogDuration === 'number' && ogDuration > 0 ? ogDuration / 1000 : ogDuration;
-      vidId = ogVidId;
-      videoTitle = ogHeadline;
-      videoPlayType = ogAutoplay ? 'auto-play' : 'manual-play';
-      videoTopics = ogTags;
-      videoPlayerVersion = ogVersion;
-      videoContentType = ogVidType;
-
-      fireGtmEvent(videoDetails);
-
       // protect against the player not existing (just in case)
       if (typeof powa !== 'undefined') {
         /*
