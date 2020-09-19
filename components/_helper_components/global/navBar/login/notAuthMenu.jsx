@@ -1,8 +1,18 @@
 import React, { useRef, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useContent } from "fusion:content";
+import userIcon from "../../../../../resources/icons/login/user-icon.svg";
+import userIconWhite from "../../../../../resources/icons/login/user-icon-white.svg";
 
-const isAuthMenu = ({ isMobile, showUserMenu, setShowUserMenu, source }) => {
+const NotAuthMenu = ({ isMobile, isFlyout, showUserMenu, setShowUserMenu }) => {
   const loginEl = useRef(null);
+
+  let source;
+  if (isMobile || isFlyout) {
+    source = userIconWhite;
+  } else {
+    source = userIcon;
+  }
 
   const siteContent = useContent({
     source: "site-api",
@@ -11,7 +21,7 @@ const isAuthMenu = ({ isMobile, showUserMenu, setShowUserMenu, source }) => {
     }
   });
 
-  const { children } = siteContent || {};
+  const { children } = siteContent || [];
 
   useEffect(() => {
     if (typeof window.localStorage !== "undefined") {
@@ -48,7 +58,7 @@ const isAuthMenu = ({ isMobile, showUserMenu, setShowUserMenu, source }) => {
     <>
       <div onClick={() => setShowUserMenu(!showUserMenu)}>
         <img src={source} />
-        <div className="nav-itemText login-text">Log in</div>
+        <div className="nav-itemText login-text">Log In</div>
       </div>
 
       <div
@@ -67,47 +77,46 @@ const isAuthMenu = ({ isMobile, showUserMenu, setShowUserMenu, source }) => {
           className={`subNav ${isMobile && showUserMenu ? "isVisible" : ""}`}
         >
           {!isMobile && (
-            <a
-              href="#"
+            <button
               className="btn-profile"
-              data-mg2-action="register"
+              data-mg2-action="login"
               onClick={e => {
                 e.preventDefault();
                 setShowUserMenu(!showUserMenu);
               }}
             >
-              Log in
-            </a>
+              Log In
+            </button>
           )}
           <ul className={"subNav-flyout"}>
             {isMobile && (
               <li className={"flyout-item"}>
-                <a
-                  href="#"
+                <button
                   className="btn-profile"
-                  data-mg2-action="register"
+                  data-mg2-action="login"
                   onClick={e => {
                     e.preventDefault();
                     setShowUserMenu(!showUserMenu);
                   }}
                 >
-                  <b>Log In</b>
-                </a>
+                  Log In
+                </button>
               </li>
             )}
 
-            {children.map(child => {
-              const destination = child._id.includes("/configsection")
-                ? child.site.site_url
-                : _id;
-              return (
-                <li className={"flyout-item"} key={child.name}>
-                  <a href={destination} target="_blank">
-                    {child.name}
-                  </a>
-                </li>
-              );
-            })}
+            {Array.isArray(children) &&
+              children.map(child => {
+                const destination = child._id.includes("/configsection")
+                  ? child.site.site_url
+                  : _id;
+                return (
+                  <li className={"flyout-item"} key={child.name}>
+                    <a href={destination} target="_blank">
+                      {child.name}
+                    </a>
+                  </li>
+                );
+              })}
           </ul>
         </div>
       </div>
@@ -115,4 +124,11 @@ const isAuthMenu = ({ isMobile, showUserMenu, setShowUserMenu, source }) => {
   );
 };
 
-export default isAuthMenu;
+NotAuthMenu.propTypes = {
+  isMobile: PropTypes.bool,
+  isFlyout: PropTypes.bool,
+  showUserMenu: PropTypes.string,
+  setShowUserMenu: PropTypes.func
+};
+
+export default NotAuthMenu;

@@ -4,30 +4,39 @@ import PropTypes from "prop-types";
 import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
 import fetchEnv from "../../utils/environment";
+import GetConnextLocalStorageData from "../../connext/connextLocalStorage";
 import "../../../../../src/styles/container/_c-headerNav.scss";
-import userIcon from "../../../../../resources/icons/login/user-icon.svg";
-import userIconWhite from "../../../../../resources/icons/login/user-icon-white.svg";
 import NotAuthMenu from "./notAuthMenu";
 import IsAuthMenu from "./isAuthMenu";
 
 const Login = ({ isMobile, isFlyout, isSticky }) => {
-  let source;
-  if (!isMobile || !isFlyout) {
-    source = userIcon;
-  } else {
-    source = userIconWhite;
-  }
-
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
-  const { connext } = getProperties(arcSite);
-  const { isEnabled = false } = connext[currentEnv] || {};
+  const { connext, cdnSite } = getProperties(arcSite);
+  const { isEnabled = false, siteCode, configCode, environment } =
+    connext[currentEnv] || {};
 
   if (!isEnabled) {
     return null;
   }
 
+  let connextSite = cdnSite;
+  if (arcSite === "dayton") {
+    connextSite = "daytondailynews";
+  } else if (
+    arcSite === "dayton-daily-news" ||
+    arcSite === "springfield-news-sun"
+  ) {
+    connextSite = connextSite.replace(/-/g, "");
+  }
+
+  const accountSubdomain = `//${currentEnv !== "prod" ? "test-" : ""}myaccount`;
+
+  const connextDomain = `${accountSubdomain}.${connextSite}.com/${
+    siteCode ? siteCode.toLowerCase() : connextSite
+  }`;
+  const profileLink = `${connextDomain}/myprofile`;
   const [userState, _setUserState] = useState("");
   const [showUserMenu, _setShowUserMenu] = useState(false);
   const userStateRef = React.useRef(userState);
@@ -49,6 +58,32 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
     }
   };
 
+  const connextLocalStorageData =
+    GetConnextLocalStorageData(siteCode, configCode, environment) || {};
+  const { UserState } = connextLocalStorageData;
+  const getState = () => {
+    if (typeof window !== "undefined" && UserState) {
+      let currentState;
+      switch (UserState) {
+        case "Logged Out":
+        case "logged out":
+          currentState = "logged-out";
+          break;
+        case "Logged In":
+          currentState = "logged-in";
+          break;
+        default:
+          currentState = UserState;
+      }
+      return currentState;
+    }
+
+    return UserState;
+  };
+  useEffect(() => {
+    setUserState(getState());
+  }, [UserState]);
+
   const useWindowEvent = (event, trigger) => {
     const callback = () => setUserState(trigger);
     useEffect(() => {
@@ -63,19 +98,24 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
 
   return (
     <li className={`nav-login nav-items ${isSticky ? "isSticky" : ""}`}>
-      {/* <NotAuthMenu
-        isMobile={isMobile}
-        showUserMenu={showUserMenu}
-        setShowUserMenu={setShowUserMenu}
-        source={source}
-        userStateRef={userStateRef}
-      /> */}
-      <IsAuthMenu
-        isMobile={isMobile}
-        showUserMenu={showUserMenu}
-        source={source}
-        userStateRef={userStateRef}
-      />
+      {(userStateRef.current == "logged-in" ||
+        userStateRef.current == "authenticated") && (
+        <IsAuthMenu
+          isMobile={isMobile}
+          isFlyout={isFlyout}
+          showUserMenu={showUserMenu}
+          setShowUserMenu={setShowUserMenu}
+          userStateRef={userStateRef}
+        />
+      )}
+      {userStateRef.current == "logged-out" && (
+        <NotAuthMenu
+          isMobile={isMobile}
+          isFlyout={isFlyout}
+          showUserMenu={showUserMenu}
+          setShowUserMenu={setShowUserMenu}
+        />
+      )}
     </li>
   );
 };

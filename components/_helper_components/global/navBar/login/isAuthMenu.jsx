@@ -1,14 +1,30 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import fetchEnv from "../../utils/environment";
+import userIconWhite from "../../../../../resources/icons/login/user-icon-white.svg";
+import userIconDark from "../../../../../resources/icons/login/user-icon-dark.svg";
 
-const isAuthMenu = ({ isMobile, showUserMenu, source, userStateRef }) => {
+const isAuthMenu = ({
+  isMobile,
+  isFlyout,
+  showUserMenu,
+  setShowUserMenu,
+  userStateRef
+}) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
   const { connext, cdnSite } = getProperties(arcSite);
   const { siteCode } = connext[currentEnv] || {};
+
+  let source;
+  if (isMobile || isFlyout) {
+    source = userIconWhite;
+  } else {
+    source = userIconDark;
+  }
 
   let connextSite = cdnSite;
   if (arcSite === "dayton") {
@@ -29,15 +45,13 @@ const isAuthMenu = ({ isMobile, showUserMenu, source, userStateRef }) => {
 
   return (
     <>
-      <div>
+      <div onClick={() => setShowUserMenu(!showUserMenu)}>
         <img src={source} />
-        <div className="nav-itemText login-text is-profileAuthed">
-          My Profile
-        </div>
+        <div className="nav-itemText login-text">My Profile</div>
       </div>
 
       <div
-        className={`section is-profileAuthed ${
+        className={`section login-menu ${
           isMobile && showUserMenu ? "isVisible" : ""
         }`}
       >
@@ -51,20 +65,30 @@ const isAuthMenu = ({ isMobile, showUserMenu, source, userStateRef }) => {
           className={`subNav ${isMobile && showUserMenu ? "isVisible" : ""}`}
         >
           {!isMobile && (
-            <a href="#" className="btn-profile" data-mg2-action="logout">
-              Logout
-            </a>
+            <button
+              className="btn-profile"
+              data-mg2-action="logout"
+              onClick={e => {
+                e.preventDefault();
+                setShowUserMenu(!showUserMenu);
+              }}
+            >
+              Log Out
+            </button>
           )}
           <ul className={"subNav-flyout"}>
             {isMobile && (
               <li className={"flyout-item"}>
-                <a
-                  href="#"
-                  className="nav-profileLogout"
+                <button
+                  className="btn-profile"
                   data-mg2-action="logout"
+                  onClick={e => {
+                    e.preventDefault();
+                    setShowUserMenu(!showUserMenu);
+                  }}
                 >
-                  <b>Logout</b>
-                </a>
+                  Log Out
+                </button>
               </li>
             )}
             <li className={"flyout-item"}>
@@ -72,6 +96,13 @@ const isAuthMenu = ({ isMobile, showUserMenu, source, userStateRef }) => {
                 My Account
               </a>
             </li>
+            {userStateRef.current !== "authenticated" && (
+              <li className={"flyout-item MG2activation"}>
+                <a href="#" data-mg2-action="activation">
+                  Activate My Account
+                </a>
+              </li>
+            )}
             <li className={"flyout-item"}>
               <a href={`${connextDomain}/preference`} target="_blank">
                 Newsletters
@@ -89,18 +120,19 @@ const isAuthMenu = ({ isMobile, showUserMenu, source, userStateRef }) => {
             <li className={"flyout-item"}>
               <a href="/our-products/">Our Products</a>
             </li>
-            {userStateRef.current !== "authenticated" && (
-              <li className={"flyout-item MG2activation"}>
-                <a href="#" data-mg2-action="activation">
-                  Activate My Account
-                </a>
-              </li>
-            )}
           </ul>
         </div>
       </div>
     </>
   );
+};
+
+isAuthMenu.propTypes = {
+  isMobile: PropTypes.bool,
+  isFlyout: PropTypes.bool,
+  showUserMenu: PropTypes.string,
+  setShowUserMenu: PropTypes.func,
+  userStateRef: PropTypes.object
 };
 
 export default isAuthMenu;
