@@ -6,16 +6,10 @@ import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../../utils/environment';
 import GetConnextLocalStorageData from '../../connext/connextLocalStorage';
 import '../../../../../src/styles/container/_c-headerNav.scss';
-import userIcon from '../../../../../resources/icons/login/user-icon.svg';
-import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
+import NotAuthMenu from './notAuthMenu';
+import IsAuthMenu from './isAuthMenu';
 
 const Login = ({ isMobile, isFlyout, isSticky }) => {
-  let source;
-  if (!isMobile || !isFlyout) {
-    source = userIcon;
-  } else {
-    source = userIconWhite;
-  }
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
@@ -34,13 +28,18 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   let connextSite = cdnSite;
   if (arcSite === 'dayton') {
     connextSite = 'daytondailynews';
-  } else if (arcSite === 'dayton-daily-news' || arcSite === 'springfield-news-sun') {
+  } else if (
+    arcSite === 'dayton-daily-news'
+    || arcSite === 'springfield-news-sun'
+  ) {
     connextSite = connextSite.replace(/-/g, '');
   }
 
   const accountSubdomain = `//${currentEnv !== 'prod' ? 'test-' : ''}myaccount`;
 
-  const connextDomain = `${accountSubdomain}.${connextSite}.com/${siteCode ? siteCode.toLowerCase() : connextSite}`;
+  const connextDomain = `${accountSubdomain}.${connextSite}.com/${
+    siteCode ? siteCode.toLowerCase() : connextSite
+  }`;
   const profileLink = `${connextDomain}/myprofile`;
   const [userState, _setUserState] = useState('');
   const [showUserMenu, _setShowUserMenu] = useState(false);
@@ -68,12 +67,11 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   const getState = () => {
     if (typeof window !== 'undefined' && UserState) {
       let currentState;
-      switch (UserState) {
-        case 'Logged Out':
+      switch (UserState.toLowerCase()) {
         case 'logged out':
           currentState = 'logged-out';
           break;
-        case 'Logged In':
+        case 'logged in':
           currentState = 'logged-in';
           break;
         default:
@@ -102,49 +100,27 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
 
   return (
     <li className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`}>
-      <div
-        className='login-text-container'
-        data-mg2-action={userStateRef.current === 'logged-out' ? 'login' : ''}
-        onClick={(e) => { e.preventDefault(); setShowUserMenu(!showUserMenuRef.current); }}>
-        <img src={source} />
-        <div className='nav-itemText login-text is-profileAnon'>Log in</div>
-        <div className='nav-itemText login-text is-profileAuthed'>My Profile</div>
-      </div>
-      <div className={`section is-profileAuthed ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
-        <div className={'section-item'}>
-          <a href={profileLink}>
-            <img src={source} />
-            <div className='nav-itemText login-text'>My Profile</div>
-          </a>
-        </div>
-        <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
-          <ul className={'subNav-flyout'}>
-            {isMobile && <li className={'flyout-item'}>
-              <a href='#' className='nav-profileLogout' data-mg2-action='logout'><b>Logout</b></a>
-            </li>}
-            <li className={'flyout-item'}>
-              <a href={`${connextDomain}/dashboard`} target='_blank'>My Account</a>
-            </li>
-            <li className={'flyout-item'}>
-              <a href={`${connextDomain}/preference`} target='_blank'>Newsletters</a>
-            </li>
-            <li className={'flyout-item'}>
-              <a href={`//events.${arcSite === 'dayton' ? 'dayton' : connextSite}.com`}>Events</a>
-            </li>
-            <li className={'flyout-item'}>
-              <a href='/our-products/'>Our Products</a>
-            </li>
-            {userStateRef.current !== 'authenticated' && <li className={'flyout-item MG2activation'}>
-                <a href='#' data-mg2-action='activation'>Activate My Account</a>
-            </li>}
-          </ul>
-          {!isMobile && <a href='#' className='btn-logout nav-profileLogout' data-mg2-action='logout'>Logout</a>}
-        </div>
-      </div>
+      {(userStateRef.current === 'logged-in'
+      || userStateRef.current === 'authenticated') && (
+        <IsAuthMenu
+          isMobile={isMobile}
+          isFlyout={isFlyout}
+          showUserMenu={showUserMenu}
+          setShowUserMenu={setShowUserMenu}
+          userStateRef={userStateRef}
+        />
+      )}
+      {userStateRef.current === 'logged-out' && (
+        <NotAuthMenu
+          isMobile={isMobile}
+          isFlyout={isFlyout}
+          showUserMenu={showUserMenu}
+          setShowUserMenu={setShowUserMenu}
+        />
+      )}
     </li>
   );
 };
-
 
 Login.propTypes = {
   isMobile: PropTypes.bool,

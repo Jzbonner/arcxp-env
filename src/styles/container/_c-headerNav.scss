@@ -128,17 +128,29 @@
       .login-text {
         color: #fff;
         padding-left: 15px;
+
+        @include text-styles(1.25rem, 1, "Gordita-Bold");
       }
 
       .section {
         margin-top: 20px;
         margin-left: 50px;
 
-        .flyout-item {
-          margin-bottom: 15px;
+        .subNav {
+          width: 100%;
 
-          .nav-profileLogout {
-            @include text-styles(1, 2, "Gordita-Bold");
+          .flyout-item {
+            margin-bottom: 2rem;
+
+            @include text-styles(1.125rem, 1, "Gordita");
+
+            .nav-profileLogout {
+              @include text-styles(1.25rem, 1, "Gordita-Bold");
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
           }
         }
       }
@@ -306,7 +318,7 @@
 
   .nav-items {
     padding-left: 50px;
-    padding-bottom: 25px;
+    padding-bottom: 2rem;
     position: relative;
 
     @include breakpoint(desktop-sm) {
@@ -422,7 +434,7 @@
     border-radius: 6px;
     background-color: #fff;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .24), 0 1px 4px 0 rgba(0, 0, 0, .24);
-    margin-bottom: 25px;
+    margin-bottom: 2rem;
     order: -1;
 
     @include breakpoint(desktop-sm) {
@@ -699,6 +711,7 @@
     @include between-breakpoints(mobile, desktop-sm) {
 
       .nav-login {
+        width: 100%;
         display: block;
         padding-left: 0;
       }
@@ -754,6 +767,9 @@
         border-radius: 6px 0 6px 6px;
         top: 52px;
         min-width: 170px;
+        width: 240px;
+        box-sizing: border-box;
+        padding: 1.875rem;
 
         &-flyout {
           height: auto;
@@ -761,19 +777,26 @@
       }
     }
 
-    .btn-logout {
-      height: auto;
+    .btn-profile {
+      height: 43px;
       width: 100%;
-      padding: 8px 0;
-      margin-bottom: 15px;
-      border-radius: 4px;
-      background-image: linear-gradient(to top, #04befe, #4481eb);
-      box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+      padding: 0;
+      border-radius: 2px;
       color: #fff;
       text-align: center;
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #fff;
+      cursor: pointer;
 
-      @include text-styles(.875rem, 1, "Gordita-Bold");
+      @include breakpoint(desktop-sm) {
+        background-image: linear-gradient(to top, #04befe, #4481eb);
+        border: none;
+        margin-bottom: 1.875rem;
+      }
+
+      @include text-styles(1rem, 1, "Gordita-Bold");
     }
 
     /*
@@ -990,6 +1013,42 @@
 
   @include breakpoint(desktop-sm) {
     display: none;
+  }
+
+  .login-menu {
+
+    .subNav-flyout .flyout-item:last-child {
+      margin-bottom: 0;
+    }
+
+    @include breakpoint(desktop-sm) {
+
+      .subNav-flyout {
+        width: 100%;
+        align-content: center;
+
+        .flyout-item {
+          text-align: center;
+          margin-right: 0;
+          margin-bottom: 1rem;
+          height: auto;
+        }
+      }
+    }
+
+    &.isVisible {
+      width: calc(100% - 100px);
+    }
+  }
+
+  .fadeInOut.section {
+    @include breakpoint(desktop-sm) {
+      animation: 10s menuFadeInOut;
+
+      .subNav {
+        animation: 10s menuFadeInOut;
+      }
+    }
   }
 }
 
@@ -1315,5 +1374,26 @@
 
   &.isActive {
     display: flex;
+  }
+}
+
+@keyframes menuFadeInOut {
+
+  0% {
+    opacity: 0;
+    visibility: visible;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
   }
 }
