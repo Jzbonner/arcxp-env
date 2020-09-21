@@ -26,7 +26,7 @@ const NotAuthMenu = ({
   const { children } = siteContent || [];
 
   useEffect(() => {
-    if (typeof window.localStorage !== 'undefined') {
+    if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
       const expirationTime = localStorage.getItem('logoutMenuExpiration');
 
       // Update expiration no matter what

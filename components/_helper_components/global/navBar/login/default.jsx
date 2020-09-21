@@ -66,12 +66,11 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   const getState = () => {
     if (typeof window !== 'undefined' && UserState) {
       let currentState;
-      switch (UserState) {
-        case 'Logged Out':
+      switch (UserState.toLowerCase()) {
         case 'logged out':
           currentState = 'logged-out';
           break;
-        case 'Logged In':
+        case 'logged in':
           currentState = 'logged-in';
           break;
         default:
