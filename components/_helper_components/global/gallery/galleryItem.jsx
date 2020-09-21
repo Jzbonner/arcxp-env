@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from '../image/default';
+import Image from '../image/old';
 
 const GalleryItem = ({
   data, func, modalFunc, calculateTranslateX,
