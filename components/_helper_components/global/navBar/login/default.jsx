@@ -16,7 +16,8 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   const { connext, cdnSite } = getProperties(arcSite);
   const {
     isEnabled = false,
-    siteCode, configCode,
+    siteCode,
+    configCode,
     environment,
   } = connext[currentEnv] || {};
 

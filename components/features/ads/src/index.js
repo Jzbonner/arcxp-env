@@ -3,10 +3,11 @@ import PropTypes from 'fusion:prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../../_helper_components/global/utils/environment';
+import deferThis from '../../../_helper_components/global/utils/deferLoading';
 import ArcAdLib from './children/ArcAdLib';
 
 const AdSetup = ({
-  id, slotName, adSlotNameForArcAds, dimensions, display, breakpoints, refresh, targeting, bidding, className, prerender, dfpId,
+  id, slotName, adSlotNameForArcAds, dimensions, display, breakpoints, refresh, targeting, bidding, className, prerender, dfpId, lazyLoad,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -94,6 +95,16 @@ const AdSetup = ({
             },
             prebid: {
               enabled: adsPrebidEnabled || false,
+              config: { // baseline config, per prebid docs & arcads repo
+                userSync: {
+                  filterSettings: {
+                    iframe: {
+                      bidders: '*', // '*' means all bidders
+                      filter: 'include',
+                    },
+                  },
+                },
+              },
               sizeConfig: adsPrebidSizeConfig || [],
             },
           },
@@ -102,6 +113,9 @@ const AdSetup = ({
         if (slotName === 'HS02') {
           // we exclude HS02 from being registered because it is dependent upon the rendering of HS01 (see ./children/ArcAdLib.js)
           window.HS02SlotConfig = adSlotConfig;
+        } else if (lazyLoad) {
+          // this ad should not be loaded yet (most likely because we're waitig on connext or some other callback)
+          deferThis({ ad: adSlotConfig });
         } else {
           instance.registerAd(adSlotConfig[0], adSlotConfig[1], adSlotConfig[2]);
         }
@@ -131,6 +145,7 @@ AdSetup.propTypes = {
   bidding: PropTypes.object, // bidding information. see https://github.com/washingtonpost/ArcAds#header-bidding
   dfpId: PropTypes.string,
   adSlotNameForArcAds: PropTypes.string.isRequired, // slot name for this ad, to be passed to arc ads (i.e. `topSection` value)
+  lazyLoad: PropTypes.bool, // flag for lazyloading ads (e.g. connext/paywall)
 };
 
 AdSetup.defaultProps = {

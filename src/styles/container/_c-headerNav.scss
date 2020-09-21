@@ -463,6 +463,7 @@
       height: 28px;
       width: 100%;
       flex-direction: row;
+      justify-content: flex-end;
     }
   }
 
@@ -742,6 +743,10 @@
 
       .section-item {
         height: 54px;
+      }
+
+      .login-text-container {
+        display: block !important; /* stylelint-disable-line declaration-no-important */
       }
 
       .login-text {

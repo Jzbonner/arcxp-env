@@ -1,0 +1,20 @@
+  
+@import "../../../../src/styles/base/breakpoints";
+@import "../../../../src/styles/base/mixins";
+
+.connext-free-messaging {
+  display: none;
+  height: auto !important; /* stylelint-disable-line declaration-no-important */
+
+  &:not(:empty) {
+    display: block;
+  }
+
+  .Mg2-connext[data-display-type] {
+    /* stylelint-disable */
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    /* stylelint-enable */
+  }
+}

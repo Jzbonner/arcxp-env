@@ -1,0 +1,91 @@
+@import "../../../src/styles/base";
+
+.c-special {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  width: 100vw;
+  overflow: hidden;
+
+  .c-call-to-action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 92vw;
+    height: 115px;
+    opacity: .9;
+    border-radius: 12px;
+    box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+    background-color: #fff;
+    margin: auto;
+
+    @include breakpoint(tablet) {
+      width: 590px;
+      height: 209px;
+    }
+
+    @include breakpoint(desktop-sm) {
+      height: 209px;
+    }
+
+    .action-icon {
+      width: 54px;
+      height: 66px;
+
+      @include breakpoint(tablet) {
+        margin-bottom: 20px;
+        width: 75px;
+        height: 75px;
+      }
+    }
+
+    .action-text {
+      font-family: "Gordita-Bold";
+      color: #000;
+      font-weight: 700;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.29;
+      letter-spacing: -.35px;
+      text-align: center;
+      font-size: 1.1875rem;
+
+      @include breakpoint(tablet) {
+        font-size: 2.1875rem;
+      }
+    }
+  }
+}
+
+.c-rightRail .c-special {
+  margin-left: -15px;
+
+  @include breakpoint(tablet) {
+    margin-left: auto;
+    width: 100%;
+  }
+
+  .c-call-to-action {
+    @include breakpoint(tablet) {
+      height: 110px;
+      width: 265px;
+    }
+
+    .action-icon {
+      @include breakpoint(tablet) {
+        width: 44px;
+        height: 66px;
+        margin-bottom: 0;
+      }
+    }
+
+    .action-text {
+      @include breakpoint(tablet) {
+        font-size: 1.1875rem;
+      }
+    }
+  }
+}
