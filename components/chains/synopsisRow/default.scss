@@ -6,7 +6,7 @@
   flex-wrap: wrap;
   width: 100%;
 
-  @include breakpoint(desktop-sm) {
+  @include breakpoint(desktop-lg) {
     flex-wrap: nowrap;
   }
 
