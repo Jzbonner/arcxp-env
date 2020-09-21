@@ -21,6 +21,10 @@
 
       .c-customHTML {
         @include text-styles(1rem, 2.11, "Gordita");
+
+        @include breakpoint(desktop-sm) {
+          float: left;
+        }
       }
 
       .MP02 {
