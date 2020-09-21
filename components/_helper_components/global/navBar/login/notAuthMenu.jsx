@@ -5,7 +5,7 @@ import userIcon from '../../../../../resources/icons/login/user-icon.svg';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 
 const NotAuthMenu = ({
-  isMobile, isFlyout, showUserMenu, setShowUserMenu,
+  isMobile, isFlyout, showUserMenu, setShowUserMenu, arcSite,
 }) => {
   const loginEl = useRef(null);
 
@@ -27,11 +27,13 @@ const NotAuthMenu = ({
 
   useEffect(() => {
     if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
-      const expirationTime = localStorage.getItem('logoutMenuExpiration');
+      const expirationTime = localStorage.getItem(`${arcSite}_logoutMenuExpiration`);
 
       // Update expiration no matter what
       const newDate = new Date();
-      localStorage.setItem('logoutMenuExpiration', newDate);
+      const minutes = newDate.getMinutes();
+      newDate.setMinutes(30 + minutes);
+      localStorage.setItem(`${arcSite}_logoutMenuExpiration`, newDate);
 
       const now = new Date();
       const midnight = new Date(
@@ -131,6 +133,7 @@ NotAuthMenu.propTypes = {
   isFlyout: PropTypes.bool,
   showUserMenu: PropTypes.string,
   setShowUserMenu: PropTypes.func,
+  arcSite: PropTypes.string,
 };
 
 export default NotAuthMenu;

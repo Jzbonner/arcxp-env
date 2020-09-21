@@ -1001,6 +1001,42 @@
       display: flex;
     }
   }
+
+  .login-menu {
+
+    .subNav-flyout .flyout-item:last-child {
+      margin-bottom: 0;
+    }
+  
+    @include breakpoint(desktop-sm) {
+  
+      .subNav-flyout {
+        width: 100%;
+        align-content: center;
+  
+        .flyout-item {
+          text-align: center;
+          margin-right: 0;
+          margin-bottom: 1rem;
+          height: auto;
+        }
+      }
+    }
+  
+    &.isVisible {
+      width: calc(100% - 100px);
+    }
+  }
+  
+  .fadeInOut.section {
+    @include breakpoint(desktop-sm) {
+      animation: 10s menuFadeInOut;
+  
+      .subNav {
+        animation: 10s menuFadeInOut;
+      }
+    }
+  }
 }
 
 .nav-menu-toggle {
@@ -1013,42 +1049,6 @@
 
   @include breakpoint(desktop-sm) {
     display: none;
-  }
-
-  .login-menu {
-
-    .subNav-flyout .flyout-item:last-child {
-      margin-bottom: 0;
-    }
-
-    @include breakpoint(desktop-sm) {
-
-      .subNav-flyout {
-        width: 100%;
-        align-content: center;
-
-        .flyout-item {
-          text-align: center;
-          margin-right: 0;
-          margin-bottom: 1rem;
-          height: auto;
-        }
-      }
-    }
-
-    &.isVisible {
-      width: calc(100% - 100px);
-    }
-  }
-
-  .fadeInOut.section {
-    @include breakpoint(desktop-sm) {
-      animation: 10s menuFadeInOut;
-
-      .subNav {
-        animation: 10s menuFadeInOut;
-      }
-    }
   }
 }
 
