@@ -1,76 +1,78 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import getProperties from "fusion:properties";
-import { useFusionContext } from "fusion:context";
-import fetchEnv from "../../utils/environment";
-import GetConnextLocalStorageData from "../../connext/connextLocalStorage";
-import "../../../../../src/styles/container/_c-headerNav.scss";
-import NotAuthMenu from "./notAuthMenu";
-import IsAuthMenu from "./isAuthMenu";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
+import fetchEnv from '../../utils/environment';
+import GetConnextLocalStorageData from '../../connext/connextLocalStorage';
+import '../../../../../src/styles/container/_c-headerNav.scss';
+import NotAuthMenu from './notAuthMenu';
+import IsAuthMenu from './isAuthMenu';
 
 const Login = ({ isMobile, isFlyout, isSticky }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
   const { connext, cdnSite } = getProperties(arcSite);
-  const { isEnabled = false, siteCode, configCode, environment } =
-    connext[currentEnv] || {};
+  const {
+    isEnabled = false,
+    siteCode, configCode,
+    environment,
+  } = connext[currentEnv] || {};
 
   if (!isEnabled) {
     return null;
   }
 
   let connextSite = cdnSite;
-  if (arcSite === "dayton") {
-    connextSite = "daytondailynews";
+  if (arcSite === 'dayton') {
+    connextSite = 'daytondailynews';
   } else if (
-    arcSite === "dayton-daily-news" ||
-    arcSite === "springfield-news-sun"
+    arcSite === 'dayton-daily-news'
+    || arcSite === 'springfield-news-sun'
   ) {
-    connextSite = connextSite.replace(/-/g, "");
+    connextSite = connextSite.replace(/-/g, '');
   }
 
-  const accountSubdomain = `//${currentEnv !== "prod" ? "test-" : ""}myaccount`;
+  const accountSubdomain = `//${currentEnv !== 'prod' ? 'test-' : ''}myaccount`;
 
   const connextDomain = `${accountSubdomain}.${connextSite}.com/${
     siteCode ? siteCode.toLowerCase() : connextSite
   }`;
   const profileLink = `${connextDomain}/myprofile`;
-  const [userState, _setUserState] = useState("");
+  const [userState, _setUserState] = useState('');
   const [showUserMenu, _setShowUserMenu] = useState(false);
   const userStateRef = React.useRef(userState);
   const showUserMenuRef = React.useRef(showUserMenu);
 
-  const setUserState = data => {
+  const setUserState = (data) => {
     userStateRef.current = data;
     _setUserState(data);
   };
 
-  const setShowUserMenu = data => {
+  const setShowUserMenu = (data) => {
     if (isMobile) {
       if (!isSticky) {
         showUserMenuRef.current = data;
         _setShowUserMenu(data);
-      } else if (userStateRef.current !== "logged-out") {
+      } else if (userStateRef.current !== 'logged-out') {
         window.location.href = profileLink;
       }
     }
   };
 
-  const connextLocalStorageData =
-    GetConnextLocalStorageData(siteCode, configCode, environment) || {};
+  const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState } = connextLocalStorageData;
   const getState = () => {
-    if (typeof window !== "undefined" && UserState) {
+    if (typeof window !== 'undefined' && UserState) {
       let currentState;
       switch (UserState) {
-        case "Logged Out":
-        case "logged out":
-          currentState = "logged-out";
+        case 'Logged Out':
+        case 'logged out':
+          currentState = 'logged-out';
           break;
-        case "Logged In":
-          currentState = "logged-in";
+        case 'Logged In':
+          currentState = 'logged-in';
           break;
         default:
           currentState = UserState;
@@ -92,14 +94,14 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
     }, [event, trigger]);
   };
 
-  useWindowEvent("connextLoggedIn", "logged-in");
-  useWindowEvent("connextLoggedOut", "logged-out");
-  useWindowEvent("connextIsSubscriber", "authenticated");
+  useWindowEvent('connextLoggedIn', 'logged-in');
+  useWindowEvent('connextLoggedOut', 'logged-out');
+  useWindowEvent('connextIsSubscriber', 'authenticated');
 
   return (
-    <li className={`nav-login nav-items ${isSticky ? "isSticky" : ""}`}>
-      {(userStateRef.current == "logged-in" ||
-        userStateRef.current == "authenticated") && (
+    <li className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`}>
+      {(userStateRef.current === 'logged-in'
+      || userStateRef.current === 'authenticated') && (
         <IsAuthMenu
           isMobile={isMobile}
           isFlyout={isFlyout}
@@ -108,7 +110,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
           userStateRef={userStateRef}
         />
       )}
-      {userStateRef.current == "logged-out" && (
+      {userStateRef.current === 'logged-out' && (
         <NotAuthMenu
           isMobile={isMobile}
           isFlyout={isFlyout}
@@ -123,7 +125,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
 Login.propTypes = {
   isMobile: PropTypes.bool,
   isFlyout: PropTypes.bool,
-  isSticky: PropTypes.bool
+  isSticky: PropTypes.bool,
 };
 
 export default Login;

@@ -1,10 +1,12 @@
-import React, { useRef, useEffect } from "react";
-import PropTypes from "prop-types";
-import { useContent } from "fusion:content";
-import userIcon from "../../../../../resources/icons/login/user-icon.svg";
-import userIconWhite from "../../../../../resources/icons/login/user-icon-white.svg";
+import React, { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useContent } from 'fusion:content';
+import userIcon from '../../../../../resources/icons/login/user-icon.svg';
+import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 
-const NotAuthMenu = ({ isMobile, isFlyout, showUserMenu, setShowUserMenu }) => {
+const NotAuthMenu = ({
+  isMobile, isFlyout, showUserMenu, setShowUserMenu,
+}) => {
   const loginEl = useRef(null);
 
   let source;
@@ -15,27 +17,27 @@ const NotAuthMenu = ({ isMobile, isFlyout, showUserMenu, setShowUserMenu }) => {
   }
 
   const siteContent = useContent({
-    source: "site-api",
+    source: 'site-api',
     query: {
-      hierarchy: "LoggedOutMenu"
-    }
+      hierarchy: 'LoggedOutMenu',
+    },
   });
 
   const { children } = siteContent || [];
 
   useEffect(() => {
-    if (typeof window.localStorage !== "undefined") {
-      const expirationTime = localStorage.getItem("logoutMenuExpiration");
+    if (typeof window.localStorage !== 'undefined') {
+      const expirationTime = localStorage.getItem('logoutMenuExpiration');
 
       // Update expiration no matter what
       const newDate = new Date();
-      localStorage.setItem("logoutMenuExpiration", newDate);
+      localStorage.setItem('logoutMenuExpiration', newDate);
 
       const now = new Date();
       const midnight = new Date(
         now.getFullYear(),
         now.getMonth(),
-        now.getDate()
+        now.getDate(),
       );
 
       const nowInMs = Date.parse(now);
@@ -44,12 +46,12 @@ const NotAuthMenu = ({ isMobile, isFlyout, showUserMenu, setShowUserMenu }) => {
 
       // Display menu if any of these are true
       if (
-        !expirationTime ||
-        nowInMs - expirationInMs > 1000 * 1 ||
-        (expirationInMs < midnightInMs && midnightInMs < nowInMs)
+        !expirationTime
+        || nowInMs - expirationInMs > 1000 * 60 * 30
+        || (expirationInMs < midnightInMs && midnightInMs < nowInMs)
       ) {
-        loginEl.current.classList.remove("fadeInOut");
-        loginEl.current.classList.add("fadeInOut");
+        loginEl.current.classList.remove('fadeInOut');
+        loginEl.current.classList.add('fadeInOut');
       }
     }
   }, []);
@@ -58,29 +60,29 @@ const NotAuthMenu = ({ isMobile, isFlyout, showUserMenu, setShowUserMenu }) => {
     <>
       <div onClick={() => setShowUserMenu(!showUserMenu)}>
         <img src={source} />
-        <div className="nav-itemText login-text">Log In</div>
+        <div className='nav-itemText login-text'>Log In</div>
       </div>
 
       <div
         ref={loginEl}
         className={`section login-menu ${
-          isMobile && showUserMenu ? "isVisible" : ""
+          isMobile && showUserMenu ? 'isVisible' : ''
         }`}
       >
-        <div className={"section-item"}>
+        <div className={'section-item'}>
           <a>
             <img src={source} />
-            <div className="nav-itemText login-text">Log In</div>
+            <div className='nav-itemText login-text'>Log In</div>
           </a>
         </div>
         <div
-          className={`subNav ${isMobile && showUserMenu ? "isVisible" : ""}`}
+          className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}
         >
           {!isMobile && (
             <button
-              className="btn-profile"
-              data-mg2-action="login"
-              onClick={e => {
+              className='btn-profile'
+              data-mg2-action='login'
+              onClick={(e) => {
                 e.preventDefault();
                 setShowUserMenu(!showUserMenu);
               }}
@@ -88,13 +90,13 @@ const NotAuthMenu = ({ isMobile, isFlyout, showUserMenu, setShowUserMenu }) => {
               Log In
             </button>
           )}
-          <ul className={"subNav-flyout"}>
+          <ul className={'subNav-flyout'}>
             {isMobile && (
-              <li className={"flyout-item"}>
+              <li className={'flyout-item'}>
                 <button
-                  className="btn-profile"
-                  data-mg2-action="login"
-                  onClick={e => {
+                  className='btn-profile'
+                  data-mg2-action='login'
+                  onClick={(e) => {
                     e.preventDefault();
                     setShowUserMenu(!showUserMenu);
                   }}
@@ -104,19 +106,19 @@ const NotAuthMenu = ({ isMobile, isFlyout, showUserMenu, setShowUserMenu }) => {
               </li>
             )}
 
-            {Array.isArray(children) &&
-              children.map(child => {
-                const destination = child._id.includes("/configsection")
-                  ? child.site.site_url
-                  : _id;
-                return (
-                  <li className={"flyout-item"} key={child.name}>
-                    <a href={destination} target="_blank">
+            {Array.isArray(children)
+            && children.map((child) => {
+              const destination = child._id.includes('/configsection')
+                ? child.site && child.site.site_url
+                : child._id;
+              return (
+                  <li className={'flyout-item'} key={child.name}>
+                    <a href={destination} target='_blank' rel="noopener noreferrer">
                       {child.name}
                     </a>
                   </li>
-                );
-              })}
+              );
+            })}
           </ul>
         </div>
       </div>
@@ -128,7 +130,7 @@ NotAuthMenu.propTypes = {
   isMobile: PropTypes.bool,
   isFlyout: PropTypes.bool,
   showUserMenu: PropTypes.string,
-  setShowUserMenu: PropTypes.func
+  setShowUserMenu: PropTypes.func,
 };
 
 export default NotAuthMenu;
