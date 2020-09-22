@@ -49,21 +49,32 @@ export const ConnextAuthTrigger = () => {
         });
       }
     };
-
-    const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
-    const { UserState } = connextLocalStorageData;
-    if (isEnabled && !(UserState && UserState.toLowerCase() === 'subscriber')) {
-      const checkConnextStorageState = () => {
-        const connextStorage = window.Connext.Storage;
+    window.addEventListener('connextMeterLevelSet', () => {
+      const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
+      const { UserState } = connextLocalStorageData;
+      if (isEnabled && !(UserState && UserState.toLowerCase() === 'subscriber')) {
         if (window.Connext.Storage.GetCurrentMeterLevel() === 1) {
           // it's "free" content (per connext), so load everything
           loadDeferredItems();
         } else {
-          const meterDataFromLocalStorage = GetConnextLocalStorageData(
-            siteCode, configCode, environment, 'CurrentConversation',
-          ) || { Properties: {} };
-          const { ArticleLeft: articlesRemainingFromLocalStorage } = meterDataFromLocalStorage.Properties;
-          if (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0) {
+          const conversationsDataFromLocalStorage = GetConnextLocalStorageData(
+            siteCode, configCode, environment, 'Connext_CurrentConversations',
+          ) || { };
+          const { Metered: meteredConversationData } = conversationsDataFromLocalStorage || {};
+          const { Id: meteredConversationId, Properties: meteredConversationProperties } = meteredConversationData || {};
+          const viewedArticlesFromLocalStorage = GetConnextLocalStorageData(
+            siteCode, configCode, environment, 'Connext_ViewedArticles',
+          ) || {};
+          const viewedArticlesArray = viewedArticlesFromLocalStorage[meteredConversationId] || [];
+          const {
+            ArticleLeft: articlesRemainingFromLocalStorage,
+            PaywallLimit: articleLimitFromLocalStorage,
+          } = meteredConversationProperties;
+
+          if (
+            (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
+            || (viewedArticlesArray.length < articleLimitFromLocalStorage - 1)
+          ) {
             loadDeferredItems();
           } else {
             try {
@@ -76,8 +87,8 @@ export const ConnextAuthTrigger = () => {
               console.error('`checkConnextStorageState` error response:', err);
 
               // GetArticlesLeft method threw an error, so try an alternate method
-              const numberOfArticlesViewed = connextStorage.GetViewedArticles().length;
-              const currentConversationDetails = connextStorage.GetCurrentConversation() || { Properties: {} };
+              const numberOfArticlesViewed = window.Connext.Storage.GetViewedArticles().length;
+              const currentConversationDetails = window.Connext.Storage.GetCurrentConversation() || { Properties: {} };
               const {
                 ArticleLeft: articlesRemainingFromConversation,
                 PaywallLimit: paywallArticleLimit = 4,
@@ -92,14 +103,13 @@ export const ConnextAuthTrigger = () => {
             }
           }
         }
-      };
-      window.addEventListener('connextMeterLevelSet', checkConnextStorageState);
-      // connext is enabled & the user is not authorized, wait for the connext auth callback
-      window.addEventListener('connextIsSubscriber', loadDeferredItems);
-    } else {
-      // either connext is disabled or the user is a subscriber per localstorage.  Either way, proceed with loading
-      loadDeferredItems();
-    }
+      } else {
+        // either connext is disabled or the user is a subscriber per localstorage.  Either way, proceed with loading
+        loadDeferredItems();
+      }
+    });
+    // connext is enabled & the user is not authorized, wait for the connext auth callback
+    window.addEventListener('connextIsSubscriber', loadDeferredItems);
   }
 };
 
