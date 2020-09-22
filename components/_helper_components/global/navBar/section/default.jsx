@@ -15,6 +15,7 @@ const Section = ({
   newTab,
   isMobile,
   isSticky,
+  isLast,
 }) => {
   const fusionContext = useFusionContext();
   const { globalContent, arcSite } = fusionContext;
@@ -121,7 +122,7 @@ const Section = ({
           <div className='section-item'>
             <a href={link.indexOf('/') === 0 ? `${siteDomainURL}${link}/` : link}>{name}</a>
           </div>
-          <div className={`subNav ${isActive}`} style={{ width: `${width}px` }}>
+          <div className={`subNav ${isActive} ${isLast ? 'expand-left' : ''}`} style={{ width: `${width}px` }}>
             <ul className={`subNav-flyout itemCount-${childSectionLength}`} ref={subNavRef}>
               {childList}
             </ul>
@@ -142,6 +143,7 @@ Section.propTypes = {
   newTab: PropTypes.string,
   isMobile: PropTypes.bool,
   isSticky: PropTypes.bool,
+  isLast: PropTypes.bool,
 };
 
 export default Section;
