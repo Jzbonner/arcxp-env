@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../utils/environment';
+import openMg2Widget from './_helper_functions/openMg2Widget';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 import userIconDark from '../../../../../resources/icons/login/user-icon-dark.svg';
 
@@ -99,12 +100,12 @@ const isAuthMenu = ({
             {userStateRef.current !== 'authenticated' && (
               <li className={'flyout-item MG2activation'}>
                 <a href='#' data-mg2-action='activation'>
-                  Activate My Account
+                  Link My Account
                 </a>
               </li>
             )}
             <li className={'flyout-item'}>
-              <a href={`${connextDomain}/preference`} target='_blank' rel="noopener noreferrer">
+              <a href="#" onClick={() => openMg2Widget(siteCode, userStateRef.current)}>
                 Newsletters
               </a>
             </li>
