@@ -4,13 +4,15 @@ import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getSponsorContent from './_helper_functions/getSponserContent';
 import ArcAd from '../../../features/ads/default';
-import relatedList from '../relatedList/default';
+import RelatedList from '../relatedList/default';
 import './default.scss';
 
 
 const SP01 = () => <ArcAd staticSlot={'SP01'} key={'SP01'} />;
 
-const SponsorRelatedBox = ({ sponsorID, uuid }) => {
+const SponsorRelatedBox = ({
+  sponsorID, taxonomy, hideRelatedList, uuid,
+}) => {
   if (!sponsorID) {
     return null;
   }
@@ -47,8 +49,18 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
       arcSite,
     },
   });
+  // debugger;
 
-  if (!disableSponsorRelatedBox) {
+  console.log('disbale sponsor box?', disableSponsorRelatedBox);
+
+  console.log('hide related list?', hideRelatedList);
+
+  if (disableSponsorRelatedBox === 'true' && !hideRelatedList) {
+    console.log('rednering list');
+    return <RelatedList taxonomy={taxonomy} uuid={uuid} />;
+  }
+
+  if (disableSponsorRelatedBox !== 'true') {
     const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor, uuid);
 
     if (!boxContent || (boxContent && boxContent.length < 1)) return null;
@@ -79,15 +91,12 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
         </ul>
       </div>
     );
-  } else {
-    return <relatedList />
   }
-
-  return null;
 };
 
 SponsorRelatedBox.propTypes = {
   sponsorID: PropTypes.string,
+  taxonomy: PropTypes.object,
   uuid: PropTypes.string,
 };
 

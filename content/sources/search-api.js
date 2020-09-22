@@ -1,3 +1,5 @@
+import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
+
 const schemaName = 'article';
 
 const params = {

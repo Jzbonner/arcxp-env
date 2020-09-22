@@ -135,7 +135,7 @@ const StoryPageLayout = () => {
 
   if (sponsorSectionID) {
     // sponsor box should appear right after blog author component
-    insertAtEndOfStory.push(<SponsorRelatedBox sponsorID={sponsorSectionID} uuid={uuid} />);
+    insertAtEndOfStory.push(<SponsorRelatedBox sponsorID={sponsorSectionID} taxonomy={taxonomy} uuid={uuid} />);
   }
 
   if (!sponsorSectionID && !hideRelatedList) {
@@ -143,6 +143,7 @@ const StoryPageLayout = () => {
     insertAtEndOfStory.push(<RelatedList taxonomy={taxonomy} uuid={uuid} />);
   }
 
+  console.log('endofstoryarray', insertAtEndOfStory);
   return (
     <>
       {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} lazyLoad={isMeteredStory} />}
@@ -160,7 +161,6 @@ const StoryPageLayout = () => {
               ampPage={ampPage}
               contentType={type}
               lazyLoad={isMeteredStory} />
-            <RelatedList taxonomy={taxonomy} uuid={uuid} />
           </div>
           <div
             style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
