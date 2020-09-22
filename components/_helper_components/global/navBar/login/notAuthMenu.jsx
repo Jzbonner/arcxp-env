@@ -1,6 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
+import getProperties from 'fusion:properties';
+import fetchEnv from '../../utils/environment';
+import openMg2Widget from './_helper_functions/openMg2Widget';
 import userIcon from '../../../../../resources/icons/login/user-icon.svg';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 
@@ -8,6 +12,11 @@ const NotAuthMenu = ({
   isMobile, isFlyout, showUserMenu, setShowUserMenu,
 }) => {
   const loginEl = useRef(null);
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const currentEnv = fetchEnv();
+  const { connext } = getProperties(arcSite);
+  const { siteCode } = connext[currentEnv] || {};
 
   let source;
   if (isMobile || isFlyout) {
@@ -111,6 +120,15 @@ const NotAuthMenu = ({
               const destination = child._id.includes('/configsection')
                 ? child.site && child.site.site_url
                 : child._id;
+              if (child && child.name && child.name.toLowerCase() === 'newsletters') {
+                return (
+                  <li className={'flyout-item'} key={child.name}>
+                    <a href="#" onClick={() => openMg2Widget(siteCode)}>
+                      {child.name}
+                    </a>
+                  </li>
+                );
+              }
               return (
                   <li className={'flyout-item'} key={child.name}>
                     <a href={destination} target='_blank' rel="noopener noreferrer">
