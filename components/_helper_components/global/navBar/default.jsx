@@ -87,8 +87,9 @@ const NavBar = ({
   }
 
   const verticalBarIndex = children.length - 2;
+  const finalIndex = children.length - 1;
 
-  const sectionLi = children.map((section) => {
+  const sectionLi = children.map((section, i) => {
     const {
       _id: id,
       children: childSections,
@@ -109,14 +110,15 @@ const NavBar = ({
         <React.Fragment key={id}>
           <Section navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
                    setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile}
-                   isSticky={stickyNavVisibility}/>
+                   isSticky={stickyNavVisibility} isLast={i === finalIndex}/>
         </React.Fragment>
       );
     }
 
     return (
       <Section key={id} navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
-      setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile} isSticky={stickyNavVisibility}/>
+      setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile} isSticky={stickyNavVisibility}
+      isLast={i === finalIndex}/>
     );
   });
 
