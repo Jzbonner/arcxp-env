@@ -116,6 +116,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
           isFlyout={isFlyout}
           showUserMenu={showUserMenu}
           setShowUserMenu={setShowUserMenu}
+          arcSite={arcSite}
         />
       )}
     </li>
