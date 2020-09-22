@@ -54,20 +54,42 @@ export const ConnextAuthTrigger = () => {
     const { UserState } = connextLocalStorageData;
     if (isEnabled && !(UserState && UserState.toLowerCase() === 'subscriber')) {
       const checkConnextStorageState = () => {
+        const connextStorage = window.Connext.Storage;
         if (window.Connext.Storage.GetCurrentMeterLevel() === 1) {
           // it's "free" content (per connext), so load everything
           loadDeferredItems();
         } else {
-          try {
-            const articlesRemaining = window.Connext.Storage.GetArticlesLeft() || 0;
-
-            if (typeof articlesRemaining === 'string' || articlesRemaining > 0) {
-              loadDeferredItems();
-            }
-          } catch (err) {
-            // eslint-disable-next-line no-console
-            console.error('`checkConnextStorageState` error response:', err);
+          const meterDataFromLocalStorage = GetConnextLocalStorageData(
+            siteCode, configCode, environment, 'CurrentConversation',
+          ) || { Properties: {} };
+          const { ArticleLeft: articlesRemainingFromLocalStorage } = meterDataFromLocalStorage.Properties;
+          if (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0) {
             loadDeferredItems();
+          } else {
+            try {
+              const articlesRemainingFromConnext = window.Connext.Storage.GetArticlesLeft();
+              if (typeof articlesRemainingFromConnext === 'string' || articlesRemainingFromConnext > 0) {
+                loadDeferredItems();
+              }
+            } catch (err) {
+              // eslint-disable-next-line no-console
+              console.error('`checkConnextStorageState` error response:', err);
+
+              // GetArticlesLeft method threw an error, so try an alternate method
+              const numberOfArticlesViewed = connextStorage.GetViewedArticles().length;
+              const currentConversationDetails = connextStorage.GetCurrentConversation() || { Properties: {} };
+              const {
+                ArticleLeft: articlesRemainingFromConversation,
+                PaywallLimit: paywallArticleLimit = 4,
+              } = currentConversationDetails.Properties;
+              if (
+                (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
+                || (numberOfArticlesViewed <= paywallArticleLimit)
+              ) {
+                // more than 0 article views remaining before reaching the paywall
+                loadDeferredItems();
+              }
+            }
           }
         }
       };
