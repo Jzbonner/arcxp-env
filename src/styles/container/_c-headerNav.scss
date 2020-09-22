@@ -914,6 +914,7 @@
 
     &.expand-left {
       right: 0;
+      border-radius: 6px 0 6px 6px;
     }
 
     @include breakpoint(desktop-sm) {
