@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../utils/environment';
@@ -12,8 +11,6 @@ const NotAuthMenu = ({
   isMobile, isFlyout, showUserMenu, setShowUserMenu, arcSite,
 }) => {
   const loginEl = useRef(null);
-  const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
   const { connext } = getProperties(arcSite);
   const { siteCode } = connext[currentEnv] || {};
