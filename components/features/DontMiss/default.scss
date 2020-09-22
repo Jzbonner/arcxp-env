@@ -25,10 +25,6 @@
   
           .headline {
             @include text-styles(1.25rem, 1.25, "Average");
-  
-            @include breakpoint(desktop-sm) {
-              @include text-styles(1.4vw, 1.28, "Average");
-            }
           }
         }
   
