@@ -14,7 +14,6 @@ const Synopsis = (customFields = {}) => {
     },
   } = customFields;
 
-  const { size = 3 } = contentConfigValues || {};
   let { from: startIndex = 1 } = contentConfigValues || {};
   startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
 
@@ -30,7 +29,7 @@ const Synopsis = (customFields = {}) => {
     return (
       <div className='c-synopsis'>
         {data.map((el, i) => {
-          if (startIndex <= i && i < size + startIndex) {
+          if (startIndex <= i && i < 2 + startIndex) {
             return (
               <ListItem key={`ListItem-${i}`} {...el} showPreview={true} />
             );

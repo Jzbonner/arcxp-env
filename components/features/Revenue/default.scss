@@ -69,12 +69,9 @@
 
         .c-sponsorOverlay {
           background: #000;
+          padding: 7.5px;
 
           @include text-styles(.75rem, 1, "Gordita");
-
-          @include breakpoint(desktop-sm) {
-            @include text-styles(.875rem, 1, "Gordita");
-          }
 
           min-height: 20px;
           font-weight: 400;
