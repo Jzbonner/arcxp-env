@@ -27,9 +27,6 @@ const RelatedList = ({ taxonomy, uuid }) => {
 
   const formattedPath = path ? path.substring(1) : finalReferentId || null;
   console.log('formattedPath', formattedPath);
-  
-
-  // debugger;
 
   const data = useContent({
     source: 'search-api',

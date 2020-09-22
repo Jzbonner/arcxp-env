@@ -135,7 +135,11 @@ const StoryPageLayout = () => {
 
   if (sponsorSectionID) {
     // sponsor box should appear right after blog author component
-    insertAtEndOfStory.push(<SponsorRelatedBox sponsorID={sponsorSectionID} taxonomy={taxonomy} uuid={uuid} />);
+    insertAtEndOfStory.push(<SponsorRelatedBox
+      hideRelatedList={hideRelatedList}
+      sponsorID={sponsorSectionID}
+      taxonomy={taxonomy}
+      uuid={uuid} />);
   }
 
   if (!sponsorSectionID && !hideRelatedList) {
