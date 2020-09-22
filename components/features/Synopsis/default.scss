@@ -5,6 +5,7 @@
     width: 100%;
     margin-left: 1.5%;
   }
+
   @include breakpoint(desktop-lg) {
     width: 39%;
   }
@@ -17,10 +18,16 @@
     justify-content: space-between;
   }
 
+  @include breakpoint(desktop-lg) {
+    flex-direction: column;
+    justify-content: initial;
+  }
+
   .c-homeList {
     @include breakpoint(desktop-sm) {
       width: 47%;
     }
+
     @include breakpoint(desktop-lg) {
       width: 100%;
     }
@@ -28,6 +35,10 @@
     .c-label-wrapper {
       text-align: left;
       margin: .4rem 0 0;
+
+      @include breakpoint(tablet) {
+        margin-bottom: .4rem;
+      }
 
       @include breakpoint(desktop-sm) {
         margin-top: .6rem;
@@ -65,8 +76,13 @@
 
       @include text-styles(1rem, 1.5, "Average");
 
+      @include between-breakpoints(desktop-sm, desktop-lg) {
+        border-bottom: none;
+      }
+
       @include breakpoint(desktop-sm) {
         letter-spacing: -.28px;
+
         @include text-styles(1.14rem, 1.14, "Average");
       }
 
@@ -85,15 +101,16 @@
     }
 
     &:last-child {
-      
+
       .homeList-text {
         border: none;
       }
     }
 
     &:nth-child(1),
-    &:nth-child(2)  {
-      @include breakpoint(desktop-sm) {
+    &:nth-child(2) {
+      @include between-breakpoints(desktop-sm, desktop-lg) {
+        
         .c-label-wrapper {
           margin-top: 0;
         }
