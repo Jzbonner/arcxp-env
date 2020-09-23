@@ -78,7 +78,7 @@ export const ConnextAuthTrigger = () => {
             loadDeferredItems();
           } else {
             try {
-              const articlesRemainingFromConnext = window.Connext.Storage.GetArticlesLeft();
+              const articlesRemainingFromConnext = window.Connext.Storage.GetArticlesLeft() || [];
               if (typeof articlesRemainingFromConnext === 'string' || articlesRemainingFromConnext > 0) {
                 loadDeferredItems();
               }
@@ -87,15 +87,16 @@ export const ConnextAuthTrigger = () => {
               console.error('`checkConnextStorageState` error response:', err);
 
               // GetArticlesLeft method threw an error, so try an alternate method
-              const numberOfArticlesViewed = window.Connext.Storage.GetViewedArticles().length;
-              const currentConversationDetails = window.Connext.Storage.GetCurrentConversation() || { Properties: {} };
+              const numberOfArticlesViewed = window.Connext.Storage.GetViewedArticles();
+              const currentConversations = window.Connext.Storage.GetCurrentConversations() || { };
+              const { Metered: meteredConversationDetails } = currentConversations || { Properties: {} };
               const {
                 ArticleLeft: articlesRemainingFromConversation,
                 PaywallLimit: paywallArticleLimit = 4,
-              } = currentConversationDetails.Properties;
+              } = meteredConversationDetails.Properties;
               if (
                 (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
-                || (numberOfArticlesViewed <= paywallArticleLimit)
+                || (numberOfArticlesViewed.length < paywallArticleLimit - 1)
               ) {
                 // more than 0 article views remaining before reaching the paywall
                 loadDeferredItems();
