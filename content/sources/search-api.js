@@ -1,5 +1,3 @@
-import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
-
 const schemaName = 'article';
 
 const params = {
@@ -14,6 +12,7 @@ const resolve = (query) => {
   const {
     'arc-site': arcSite = 'ajc', published, section, sort, size,
   } = query;
+
   let requestUri = `/content/v4/search/?website=${arcSite}`;
   requestUri += section ? `&q=type:story+AND+taxonomy.sites._id:%22/${section}%22` : null;
   requestUri += size ? `&size=${size}` : '';

@@ -6,27 +6,25 @@ import filterDuplicateStory from '../sponsorRelatedBox/_helper_functions/filterD
 import AddFirstInlineImage from '../../../../content/sources/helper_functions/AddFirstInlineImage';
 import FilterElements from '../../../../content/sources/helper_functions/FilterElements';
 import '../../../features/List/default.scss';
+import './default.scss';
 
 const RelatedList = ({ taxonomy, uuid }) => {
-  console.log('taxonomy', taxonomy);
   const { primary_section: primarySection } = taxonomy || {};
   const { path, referent } = primarySection || {};
   const { id: referentId } = referent || {};
   const mobileBreakpoint = 768;
   const windowExists = typeof window !== 'undefined';
   let limit = null;
+  let contentData = null;
+  let fixedImageData = null;
   let filteredData = null;
-  let finalizedData = null;
-  let goodData = null;
-
-
   let finalReferentId;
+
   if (referentId) {
     [, finalReferentId] = referentId.split('/');
   }
 
   const formattedPath = path ? path.substring(1) : finalReferentId || null;
-  console.log('formattedPath', formattedPath);
 
   const data = useContent({
     source: 'search-api',
@@ -44,7 +42,7 @@ const RelatedList = ({ taxonomy, uuid }) => {
   };
 
   if (windowExists) {
-    if (getViewportSize() <= mobileBreakpoint) {
+    if (getViewportSize() < mobileBreakpoint) {
       limit = 4;
     } else {
       limit = 8;
@@ -52,27 +50,18 @@ const RelatedList = ({ taxonomy, uuid }) => {
   }
 
   if (data && data.content_elements && data.content_elements.length > 1) {
-    filteredData = filterDuplicateStory(data.content_elements, uuid);
-    finalizedData = AddFirstInlineImage(filteredData, 'dummy', ['dummy']);
-    goodData = FilterElements(finalizedData, 'dummy', ['dummy']);
-
-    console.log('filtertedData', finalizedData);
+    contentData = filterDuplicateStory(data.content_elements, uuid);
+    fixedImageData = AddFirstInlineImage(contentData, 'search', ['search']);
+    filteredData = FilterElements(fixedImageData, 'search', ['search']);
   } else {
     return null;
   }
 
-  console.log('relatedStoryData', data);
-
-  console.log('limit', limit);
-
-  debugger;
-
-
   return (
     <div className="c-relatedList b-margin-bottom-d40-m20">
-      <h1 className="titleURL">In Other News</h1>
+      <h1 className="title">In Other News</h1>
       <div className="c-homeListContainer two-columns left-photo-display-class">
-        {goodData && goodData.map((el, i) => {
+        {filteredData && filteredData.map((el, i) => {
           if (i < limit) {
             return <ListItem key={`ListItem-${i}`} {...el} />;
           }

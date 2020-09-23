@@ -49,14 +49,8 @@ const SponsorRelatedBox = ({
       arcSite,
     },
   });
-  // debugger;
-
-  console.log('disbale sponsor box?', disableSponsorRelatedBox);
-
-  console.log('hide related list?', hideRelatedList);
 
   if (disableSponsorRelatedBox === 'true' && !hideRelatedList) {
-    console.log('rednering list');
     return <RelatedList taxonomy={taxonomy} uuid={uuid} />;
   }
 
@@ -92,12 +86,15 @@ const SponsorRelatedBox = ({
       </div>
     );
   }
+
+  return null;
 };
 
 SponsorRelatedBox.propTypes = {
   sponsorID: PropTypes.string,
   taxonomy: PropTypes.object,
   uuid: PropTypes.string,
+  hideRelatedList: PropTypes.bool,
 };
 
 SponsorRelatedBox.defaultProps = {

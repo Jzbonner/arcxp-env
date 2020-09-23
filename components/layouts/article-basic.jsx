@@ -102,9 +102,6 @@ const StoryPageLayout = () => {
   const { sponsorSectionID } = checkSponsor(sections);
   const sponsorContentLabel = getSponsorData(sections);
 
-  console.log('no related list?', hideRelatedList);
-  console.log('sponsor?', sponsorSectionID);
-
   let infoBoxIndex = null;
   let paragraphIndex = 0;
   const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />;
@@ -143,11 +140,9 @@ const StoryPageLayout = () => {
   }
 
   if (!sponsorSectionID && !hideRelatedList) {
-    console.log('ddddd');
     insertAtEndOfStory.push(<RelatedList taxonomy={taxonomy} uuid={uuid} />);
   }
 
-  console.log('endofstoryarray', insertAtEndOfStory);
   return (
     <>
       {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} lazyLoad={isMeteredStory} />}
