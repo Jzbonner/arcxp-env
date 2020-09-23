@@ -5,6 +5,8 @@
 
   @include breakpoint(desktop-sm) {
     border-left: 1px solid #dedede;
+    margin-left: -20px;
+    width: 100%;
   }
 
   .c-title {
