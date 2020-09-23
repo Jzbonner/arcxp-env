@@ -17,8 +17,9 @@ const AdSetup = ({
     adsA9Enabled,
     adsA9Id,
     adsPrebidEnabled,
-    adsPrebidSizeConfig,
+    adsBidding,
   } = adsProps[currentEnv] || {};
+  const { adsPrebidSizeConfig } = adsBidding || {};
   if (prerender && typeof window !== 'undefined') {
     window.arcAdsPrerenderer = adDetails => new Promise((resolve) => {
       prerender.adDetails();
@@ -104,8 +105,8 @@ const AdSetup = ({
                     },
                   },
                 },
+                sizeConfig: adsPrebidSizeConfig || [],
               },
-              sizeConfig: adsPrebidSizeConfig || [],
             },
           },
         ];
