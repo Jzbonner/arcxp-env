@@ -33,13 +33,8 @@ const NotAuthMenu = ({
 
   useEffect(() => {
     if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+      loginEl.current.classList.remove('fadeInOut');
       const expirationTime = localStorage.getItem(`${arcSite}_logoutMenuExpiration`);
-
-      // Update expiration no matter what
-      const newDate = new Date();
-      const minutes = newDate.getMinutes();
-      newDate.setMinutes(30 + minutes);
-      localStorage.setItem(`${arcSite}_logoutMenuExpiration`, newDate);
 
       const now = new Date();
       const midnight = new Date(
@@ -58,11 +53,20 @@ const NotAuthMenu = ({
         || nowInMs - expirationInMs > 1000 * 60 * 30
         || (expirationInMs < midnightInMs && midnightInMs < nowInMs)
       ) {
-        loginEl.current.classList.remove('fadeInOut');
         loginEl.current.classList.add('fadeInOut');
       }
+
+      // Update expiration no matter what
+      // Without this timeout, the logoutMenuExpiration gets set before it is read on line 37.
+      // Not sure how that is happening.
+      setTimeout(() => {
+        const newDate = new Date();
+        const minutes = newDate.getMinutes();
+        newDate.setMinutes(30 + minutes);
+        localStorage.setItem(`${arcSite}_logoutMenuExpiration`, newDate);
+      }, 1000);
     }
-  }, []);
+  });
 
   return (
     <>
