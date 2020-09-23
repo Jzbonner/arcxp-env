@@ -139,10 +139,6 @@ const StoryPageLayout = () => {
       uuid={uuid} />);
   }
 
-  if (!sponsorSectionID && !hideRelatedList) {
-    insertAtEndOfStory.push(<RelatedList taxonomy={taxonomy} uuid={uuid} />);
-  }
-
   return (
     <>
       {!noAds && <GlobalAdSlots ampPage={ampPage} uuid={uuid} taxonomy={taxonomy} lazyLoad={isMeteredStory} />}
@@ -265,6 +261,9 @@ const StoryPageLayout = () => {
               comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
               ampPage={ampPage}
             />
+            {!sponsorSectionID && !hideRelatedList && (<div className="c-section">
+              <RelatedList taxonomy={taxonomy} uuid={uuid} />
+              </div>)}
             {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
             {!noAds && !isHyperlocalContent && !sponsorSectionID && (
               <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
