@@ -6,7 +6,7 @@
   flex-wrap: wrap;
   width: 100%;
 
-  @include breakpoint(desktop-sm) {
+  @include breakpoint(desktop-lg) {
     flex-wrap: nowrap;
   }
 
@@ -38,8 +38,20 @@
       }
     }
 
+    .home-headline.sponsored {
+
+      .homeList-image {
+        position: relative;
+      }
+
+      .home-headline {
+        position: static;
+        padding-top: 0;
+      }
+    }
+
     .column-3 {
-    
+
       .c-homeList {
 
         .c-label-wrapper,
@@ -64,7 +76,7 @@
       }
 
       .c-homeList:last-child {
-
+        
         .homeList-text {
           @include between-breakpoints(tablet, desktop-sm) {
             border-bottom: 1px solid #cdcdcd;

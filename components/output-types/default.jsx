@@ -52,7 +52,6 @@ const DefaultOutputType = (props) => {
   const {
     type = null, taxonomy, canonical_url: articleURL, _id: uuid,
   } = globalContent || {};
-  const storyPage = (type === 'story');
   const { tags = [], sections } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
   const noAmp = checkTags(tags, 'no-amp');
@@ -71,7 +70,7 @@ const DefaultOutputType = (props) => {
         <GoogleStructuredData />
         <AmpRelLink type={type} url={articleURL} noAmp={noAmp} />
         <CssLinks />
-        {storyPage && <script id="scriptMg2Widget" src="https://prodmg2.blob.core.windows.net/newsletterwidget/ajc/mg2nw.min.js" />}
+        <script id="scriptMg2Widget" src="https://prodmg2.blob.core.windows.net/newsletterwidget/ajc/mg2nw.min.js" />
         {includeGtm && (
           <>
             <SiteMetrics />
@@ -123,7 +122,7 @@ const DefaultOutputType = (props) => {
           data-e='5'
           src='//includemodal.global.ssl.fastly.net/sp.js'
           type='text/javascript'></script>}
-        {storyPage && <div id="mg2Widget-newsletter-container"></div>}
+        <div id="mg2Widget-newsletter-container"></div>
       </body>
     </html>
   );

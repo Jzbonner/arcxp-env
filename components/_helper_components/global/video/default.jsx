@@ -93,27 +93,28 @@ const Video = ({
           - And if `ampEvent` is excluded, it's a metrics-only event that should not be passed to the AMP integration.
         There wasn't much reason to create separate handlers for something shared, so `fireGtmEvent` pulls double duty.
       */
-      // default eventType value: naming convention remains, we simply prepend "video" and capitalize the first letter
-      let eventType = `video${type.charAt(0).toUpperCase()}${type.slice(1)}`;
+      let eventType;
       let ampEvent = null;
       switch (type) {
         case 'adStart':
           ampEvent = 'ad_start';
+          eventType = 'videoAdStart';
           break;
         case 'adComplete':
           ampEvent = 'ad_end';
+          eventType = 'videoAdComplete';
           break;
         case 'muted':
-          eventType = null;
           ampEvent = mutedState ? 'muted' : 'unmuted';
+          eventType = null;
           break;
         case 'pause':
-          eventType = null;
           ampEvent = 'pause';
+          eventType = null;
           break;
         case 'play':
-          eventType = null;
           ampEvent = 'playing';
+          eventType = null;
           break;
         case 'playback0':
           eventType = 'videoContentStart';
@@ -135,7 +136,17 @@ const Video = ({
           ampEvent = 'canplay';
           break;
         case 'start':
+          eventType = 'videoStart';
           ampEvent = 'playing';
+          break;
+        case 'error':
+          eventType = 'videoError';
+          break;
+        case 'adError':
+          eventType = 'videoAdError';
+          break;
+        case 'adSkip':
+          eventType = 'videoAdSkip';
           break;
         default:
           eventType = null;
@@ -193,17 +204,6 @@ const Video = ({
       const { basic: ogHeadline } = ogHeadlines || {};
       const { tags: ogTags = [] } = ogTaxonomy || {};
 
-      // (re)set video-specific values, for use in gtm
-      videoTotalTime = typeof ogDuration === 'number' && ogDuration > 0 ? ogDuration / 1000 : ogDuration;
-      vidId = ogVidId;
-      videoTitle = ogHeadline;
-      videoPlayType = ogAutoplay ? 'auto-play' : 'manual-play';
-      videoTopics = ogTags;
-      videoPlayerVersion = ogVersion;
-      videoContentType = ogVidType;
-
-      fireGtmEvent(videoDetails);
-
       // protect against the player not existing (just in case)
       if (typeof powa !== 'undefined') {
         /*
@@ -260,6 +260,17 @@ const Video = ({
           );
         }
 
+        // (re)set video-specific values, for use in gtm
+        videoTotalTime = typeof ogDuration === 'number' && ogDuration > 0 ? ogDuration / 1000 : ogDuration;
+        vidId = ogVidId;
+        videoTitle = ogHeadline;
+        videoPlayType = ogAutoplay ? 'auto-play' : 'manual-play';
+        videoTopics = ogTags.map(tag => tag.text);
+        videoPlayerVersion = ogVersion;
+        videoContentType = ogVidType;
+
+        fireGtmEvent(videoDetails);
+
         powa.on('start', (event) => {
           const {
             id: playerId,
@@ -291,7 +302,7 @@ const Video = ({
             vidId = vId;
             videoTitle = headline;
             videoPlayType = autoplay ? 'auto-play' : 'manual-play';
-            videoTopics = tags;
+            videoTopics = tags.map(tag => tag.text);
             videoPlayerVersion = version;
             videoContentType = vidType;
             // make everything relative to the player's container, in case there are multiple players on the page
@@ -360,7 +371,6 @@ const Video = ({
     loadVideoScript();
     window.removeEventListener('powaRender', e => powaRendered(e));
   }, []);
-
   const videoMarginBottom = 'b-margin-bottom-d40-m20';
   const giveCredit = mainCredit ? `Credit: ${mainCredit}` : null;
 

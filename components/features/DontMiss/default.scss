@@ -1,0 +1,37 @@
+@import "../../../src/styles/base";
+
+.c-dontMiss {
+  @include breakpoint(tablet) {
+    padding: 0 20px;
+    border-left: solid 1px #cdcdcd;
+  }
+  
+  .c-sectionTitle {
+    @include text-styles(1.875rem, 1, "Average");
+
+    @include breakpoint(tablet) {
+      @include text-styles(2.5rem, 1, "Average");
+    }
+  }
+  
+  .c-homeListContainer {
+
+    &.no-photo-display-class.dontMissFeature {
+  
+      .c-homeList {
+        border-bottom: none;
+  
+        .homeList-text {
+  
+          .headline {
+            @include text-styles(1.25rem, 1.25, "Average");
+          }
+        }
+  
+        .c-label-wrapper {
+          margin: 0 0 .2rem;
+        }
+      }
+    }
+  }
+}

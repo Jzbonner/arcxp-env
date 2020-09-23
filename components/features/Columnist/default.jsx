@@ -38,7 +38,7 @@ const Columnist = (customFields = {}) => {
             if (startIndex <= idx && idx < size + startIndex) {
               return (
                 <li className="c-singleStory" key={idx}>
-                  <a href={authorURL} className={`authorName ${!authorURL ? 'noURL' : ''}`}>
+                  <a href={authorURL} className='authorName'>
                     {authorName}
                   </a>
                   <a href={articleURL} className="headline">

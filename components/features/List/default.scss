@@ -166,14 +166,6 @@
       margin-left: 0;
     }
 
-    .image-component-image img {
-      border-radius: 0;
-
-      @include breakpoint(tablet) {
-        border-radius: 6px;
-      }
-    }
-
     .c-label-wrapper {
       @include breakpoint(desktop-sm) {
         min-height: 25px;
@@ -181,6 +173,21 @@
 
       @include breakpoint(desktop-lg) {
         min-height: initial;
+      }
+    }
+
+    .homeList-image {
+      @include between-breakpoints(mobile, desktop-sm) {
+        display: table;
+        margin: 0 auto;
+      }
+
+      .image-component-image img {
+        border-radius: 0;
+  
+        @include breakpoint(tablet) {
+          border-radius: 6px;
+        }
       }
     }
 
