@@ -484,5 +484,119 @@
     "accountId": "pub-3872273078424183",
     "relationshipType": "DIRECT",
     "certId": "f08c47fec0942fa0"
+  },
+  {
+    "domain": "wowyow.com",
+    "accountId": "ae84fc49-0dfa-7aed-cf30-0f452e8f8b73",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "google.com",
+    "accountId": "pub-1290358753233458",
+    "relationshipType": "DIRECT",
+    "certId": "f08c47fec0942fa0"
+  },
+  {
+    "domain": "sovrn.com",
+    "accountId": "267490",
+    "relationshipType": "DIRECT",
+    "certId": "fafdf38b16bf6b2b"
+  },
+  {
+    "domain": "lijit.com",
+    "accountId": "267490",
+    "relationshipType": "DIRECT",
+    "certId": "fafdf38b16bf6b2b"
+  },
+  {
+    "domain": "appnexus.com",
+    "accountId": "1360",
+    "relationshipType": "RESELLER",
+    "certId": "f5ab79cb980f11d1"
+  },
+  {
+    "domain": "openx.com",
+    "accountId": "538959099",
+    "relationshipType": "RESELLER",
+    "certId": "6a698e2ec38604c6"
+  },
+  {
+    "domain": "openx.com",
+    "accountId": "539924617",
+    "relationshipType": "RESELLER",
+    "certId": "6a698e2ec38604c6"
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "137711",
+    "relationshipType": "RESELLER",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "156212",
+    "relationshipType": "RESELLER",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "156700",
+    "relationshipType": "RESELLER",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "17960",
+    "relationshipType": "RESELLER",
+    "certId": "0bfd66d529a55807"
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "19398",
+    "relationshipType": "DIRECT",
+    "certId": "0bfd66d529a55807"
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "19398",
+    "relationshipType": "RESELLER",
+    "certId": "0bfd66d529a55807"
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "157599",
+    "relationshipType": "DIRECT",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "157599",
+    "relationshipType": "RESELLER",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "districtm.io",
+    "accountId": "100600",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "17054",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "156181",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "lijit.com",
+    "accountId": "267490-eb",
+    "relationshipType": "DIRECT",
+    "certId": "fafdf38b16bf6b2b"
   }
 ]
