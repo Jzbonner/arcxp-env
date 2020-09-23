@@ -37,6 +37,7 @@ import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
+import RelatedList from '../_helper_components/article/relatedList/default';
 
 const start = 3;
 
@@ -97,6 +98,7 @@ const StoryPageLayout = () => {
   const noAds = checkTags(tags, 'no-ads');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
   const isCommunityContributor = checkTags(tags, 'community contributor');
+  const hideRelatedList = checkTags(tags, 'no-related-list');
   const { sponsorSectionID } = checkSponsor(sections);
   const sponsorContentLabel = getSponsorData(sections);
 
@@ -127,8 +129,15 @@ const StoryPageLayout = () => {
   }
   // about the author should be the last component of the story
   insertAtEndOfStory.push(BlogAuthorComponent);
-  // sponsor box should appear right after blog author component
-  insertAtEndOfStory.push(<SponsorRelatedBox sponsorID={sponsorSectionID} uuid={uuid} />);
+
+  if (sponsorSectionID) {
+    // sponsor box should appear right after blog author component
+    insertAtEndOfStory.push(<SponsorRelatedBox
+      hideRelatedList={hideRelatedList}
+      sponsorID={sponsorSectionID}
+      taxonomy={taxonomy}
+      uuid={uuid} />);
+  }
 
   return (
     <>
@@ -213,12 +222,12 @@ const StoryPageLayout = () => {
               ampPage={ampPage}
             />
             {!noAds && maxNumberOfParagraphs === 3
-            && <InterscrollerPlaceholder
-            ampPage={ampPage}
-            isHyperlocalContent={isHyperlocalContent}
-            taxonomy={taxonomy}
-            uuid={uuid}
-            />}
+              && <InterscrollerPlaceholder
+                ampPage={ampPage}
+                isHyperlocalContent={isHyperlocalContent}
+                taxonomy={taxonomy}
+                uuid={uuid}
+              />}
             {!noAds && !isHyperlocalContent && !sponsorSectionID && (
               <Nativo
                 elements={filteredContentElements}
@@ -236,12 +245,12 @@ const StoryPageLayout = () => {
               ampPage={ampPage}
             />
             {!noAds && maxNumberOfParagraphs >= 4
-            && <InterscrollerPlaceholder
-              ampPage={ampPage}
-              isHyperlocalContent={isHyperlocalContent}
-              taxonomy={taxonomy}
-              uuid={uuid}
-            />}
+              && <InterscrollerPlaceholder
+                ampPage={ampPage}
+                isHyperlocalContent={isHyperlocalContent}
+                taxonomy={taxonomy}
+                uuid={uuid}
+              />}
             <Section
               elements={filteredContentElements}
               startIndex={stop}
@@ -252,7 +261,10 @@ const StoryPageLayout = () => {
               comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
               ampPage={ampPage}
             />
-          {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
+            {!sponsorSectionID && !hideRelatedList && (<div className="c-section">
+              <RelatedList taxonomy={taxonomy} uuid={uuid} />
+              </div>)}
+            {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
             {!noAds && !isHyperlocalContent && !sponsorSectionID && (
               <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
             )}
@@ -263,11 +275,11 @@ const StoryPageLayout = () => {
         </article>
       </main>
       {!ampPage && !noHeaderAndFooter && <>
-      <Footer />
-      <Copyright />
+        <Footer />
+        <Copyright />
       </>}
       {ampPage && <Carousel storyId={uuid} taxonomy={taxonomy} />}
-       {/* if it's a metered story, add the connext auth handlers to load deferred items (e.g. anything with `lazyLoad` above) */}
+      {/* if it's a metered story, add the connext auth handlers to load deferred items (e.g. anything with `lazyLoad` above) */}
       {isMeteredStory && ConnextAuthTrigger()}
     </>
   );

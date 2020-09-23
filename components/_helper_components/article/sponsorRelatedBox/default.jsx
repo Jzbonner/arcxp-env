@@ -4,11 +4,15 @@ import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getSponsorContent from './_helper_functions/getSponserContent';
 import ArcAd from '../../../features/ads/default';
+import RelatedList from '../relatedList/default';
 import './default.scss';
+
 
 const SP01 = () => <ArcAd staticSlot={'SP01'} key={'SP01'} />;
 
-const SponsorRelatedBox = ({ sponsorID, uuid }) => {
+const SponsorRelatedBox = ({
+  sponsorID, taxonomy, hideRelatedList, uuid,
+}) => {
   if (!sponsorID) {
     return null;
   }
@@ -31,6 +35,7 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
     sponsor_related_box_must_include_all_tags: includeAllTags,
     sponsor_related_box_title: boxTitle,
     disable_advertiser_content_label: disableAd,
+    disable_sponsor_related_box: disableSponsorRelatedBox,
   } = Sponsor;
 
   const feed = useContent({
@@ -45,11 +50,15 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
     },
   });
 
-  const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor, uuid);
+  if (disableSponsorRelatedBox === 'true' && !hideRelatedList) {
+    return <RelatedList taxonomy={taxonomy} uuid={uuid} />;
+  }
 
-  if (!boxContent || (boxContent && boxContent.length < 1)) return null;
+  if (disableSponsorRelatedBox !== 'true') {
+    const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor, uuid);
 
-  if (boxContent) {
+    if (!boxContent || (boxContent && boxContent.length < 1)) return null;
+
     const lastItemInArray = boxContent.slice(-1).pop();
     return (
       <div className={'c-sponsor-box'}>
@@ -83,7 +92,9 @@ const SponsorRelatedBox = ({ sponsorID, uuid }) => {
 
 SponsorRelatedBox.propTypes = {
   sponsorID: PropTypes.string,
+  taxonomy: PropTypes.object,
   uuid: PropTypes.string,
+  hideRelatedList: PropTypes.bool,
 };
 
 SponsorRelatedBox.defaultProps = {

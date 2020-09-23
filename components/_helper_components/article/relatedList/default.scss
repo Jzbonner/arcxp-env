@@ -1,0 +1,47 @@
+@import "../../../../src/styles/base";
+
+.c-relatedList {
+  font-family: "Average";
+  font-size: 1.875rem;
+
+  .title {
+    text-align: center;
+    margin-bottom: 1.1rem;
+
+    @include breakpoint(tablet) {
+      font-size: 2.5rem;
+    }
+
+    @include breakpoint(desktop-sm) {
+      text-align: unset;
+    }
+  }
+
+  .c-homeListContainer.left-photo-display-class .c-homeList {
+    margin-bottom: .875rem;
+    max-width: 100%;
+
+    .homeList-text {
+      display: flex;
+      flex-direction: column;
+
+      .c-label-wrapper {
+        font-size: .75rem;
+      }
+
+      .headline {
+        font-size: .85rem;
+      }
+    }
+
+    @include breakpoint(tablet) {
+      margin-bottom: 1.875rem;
+      max-width: 50%;
+    }
+
+    @include breakpoint(desktop-sm) {
+      margin-bottom: 1.25rem;
+      max-width: 100%;
+    }
+  }
+}
