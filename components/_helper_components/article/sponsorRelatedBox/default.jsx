@@ -4,14 +4,13 @@ import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getSponsorContent from './_helper_functions/getSponserContent';
 import ArcAd from '../../../features/ads/default';
-import RelatedList from '../relatedList/default';
 import './default.scss';
 
 
 const SP01 = () => <ArcAd staticSlot={'SP01'} key={'SP01'} />;
 
 const SponsorRelatedBox = ({
-  sponsorID, taxonomy, hideRelatedList, uuid,
+  sponsorID, uuid,
 }) => {
   if (!sponsorID) {
     return null;
@@ -49,10 +48,6 @@ const SponsorRelatedBox = ({
       arcSite,
     },
   });
-
-  if (disableSponsorRelatedBox === 'true' && !hideRelatedList) {
-    return <RelatedList taxonomy={taxonomy} uuid={uuid} />;
-  }
 
   if (disableSponsorRelatedBox !== 'true') {
     const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor, uuid);
