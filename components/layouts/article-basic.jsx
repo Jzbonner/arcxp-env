@@ -261,7 +261,7 @@ const StoryPageLayout = () => {
               comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
               ampPage={ampPage}
             />
-            {!sponsorSectionID && !hideRelatedList && (<div className="c-section">
+            {!sponsorSectionID && !hideRelatedList && (<div className="c-section full-width b-clear-both">
               <RelatedList taxonomy={taxonomy} uuid={uuid} />
               </div>)}
             {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}

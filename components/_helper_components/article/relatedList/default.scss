@@ -31,6 +31,14 @@
 
       .headline {
         font-size: .85rem;
+
+        @include breakpoint(tablet) {
+          font-size: 1rem;
+        }
+
+        @include breakpoint(desktop-sm) {
+          font-size: 1.15rem;
+        }
       }
     }
 
