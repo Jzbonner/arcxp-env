@@ -100,7 +100,7 @@ const StoryPageLayout = () => {
   const isCommunityContributor = checkTags(tags, 'community contributor');
   const hideRelatedList = checkTags(tags, 'no-related-list');
   const { sponsorSectionID } = checkSponsor(sections);
-  const sponsorContentLabel = getSponsorData(sections);
+  const { sponsorName: sponsorContentLabel, disableSponsorRelatedBox } = getSponsorData(sections, true);
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
@@ -194,7 +194,7 @@ const StoryPageLayout = () => {
             {!noAds && ampPage && !isHyperlocalContent && (
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
             )}
-            <SponsorStoryMessage sponsorID={sponsorSectionID} paywallStatus={paywallStatus}/>
+            <SponsorStoryMessage sponsorID={sponsorSectionID} paywallStatus={paywallStatus} />
             <Section
               elements={filteredContentElements}
               stopIndex={1}
@@ -261,9 +261,11 @@ const StoryPageLayout = () => {
               comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
               ampPage={ampPage}
             />
-            {!sponsorSectionID && !hideRelatedList && (<div className="c-section">
-              <RelatedList taxonomy={taxonomy} uuid={uuid} />
-              </div>)}
+            {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && (
+              <div className="c-section full-width b-clear-both">
+                <RelatedList taxonomy={taxonomy} uuid={uuid} />
+              </div>
+            )}
             {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
             {!noAds && !isHyperlocalContent && !sponsorSectionID && (
               <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
