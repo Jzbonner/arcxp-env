@@ -100,7 +100,7 @@ const StoryPageLayout = () => {
   const isCommunityContributor = checkTags(tags, 'community contributor');
   const hideRelatedList = checkTags(tags, 'no-related-list');
   const { sponsorSectionID } = checkSponsor(sections);
-  const { sponsorName: sponsorContentLabel, disableSponsorRelatedBox } = getSponsorData(sections, true);
+  const { sponsorName: sponsorContentLabel, disableSponsorRelatedBox } = getSponsorData(sections, true) || {};
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
