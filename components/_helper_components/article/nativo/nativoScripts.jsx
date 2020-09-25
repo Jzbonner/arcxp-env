@@ -21,13 +21,7 @@ const NativoScripts = ({ tags, uuid }) => (
         __html: `window.ntvConfig = window.ntvConfig || {}; window.ntvConfig.keyValues = ${createNativoKeys(tags, uuid)};`,
       }}
     ></script>
-    <script
-      type="text/javascript"
-      dangerouslySetInnerHTML={{
-        __html: "let _prx = window._prx || []; _prx.push(['cfg.SetNoAutoStart']);",
-      }}
-    ></script>
-    <script type="text/javascript" src="//s.ntv.io/serve/load.js" ntv-set-no-auto-start async></script>
+    <script type="text/javascript" src="//s.ntv.io/serve/load.js" data-ntv-set-no-auto-start async></script>
   </>
 );
 
