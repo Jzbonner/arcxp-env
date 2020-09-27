@@ -50,7 +50,35 @@
       }
     }
 
+    .column-2 {
+      @include breakpoint(desktop-sm) {
+        width: 60.5%;
+      }
+
+      @include breakpoint(desktop-lg) {
+        width: 60.5%;
+      }
+
+      @media (min-width: 1400px) {
+        width: 61.5%;
+      }
+    }
+
     .column-3 {
+      @include breakpoint(desktop-sm) {
+        width: 36%;
+        margin-left: 3.5%;
+      }
+
+      @include breakpoint(desktop-lg) {
+        width: 35.5%;
+        margin-left: 4%;
+      }
+
+      @media (min-width: 1400px) {
+        width: 35%;
+        margin-left: 3.5%;
+      }
 
       .c-homeList {
 

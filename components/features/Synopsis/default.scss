@@ -3,11 +3,16 @@
 .c-sectionHome .c-contentElements .c-synopsis {
   @include breakpoint(desktop-sm) {
     width: 100%;
-    margin-left: 1.5%;
   }
 
   @include breakpoint(desktop-lg) {
-    width: 39%;
+    width: 35.5%;
+    margin-left: 3%;
+  }
+
+  @media (min-width: 1400px) {
+    width: 35%;
+    margin-left: 2.5%;
   }
 }
 
@@ -35,13 +40,17 @@
     .c-label-wrapper {
       text-align: left;
       margin: .4rem 0 0;
-
+  
       @include breakpoint(tablet) {
         margin-bottom: .4rem;
       }
 
       @include breakpoint(desktop-sm) {
         margin-top: .6rem;
+      }
+
+      a {
+        font-weight: 600;
       }
 
       .c-sponsor {
