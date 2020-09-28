@@ -46,13 +46,29 @@
         }
 
         .homeList-image {
-          max-width: calc(55% - 7.5px);
-          width: calc(55% - 7.5px);
+          max-width: calc(40% - 7.5px);
+          width: calc(40% - 7.5px);
+
+          @include breakpoint(desktop-sm) {
+            max-width: calc(50% - 7.5px);
+            width: calc(50% - 7.5px);
+          }
         }
 
         .homeList-text {
-          max-width: 50%;
-          width: 50%;
+          max-width: 65%;
+          width: 65%;
+
+          @include breakpoint(desktop-sm) {
+            max-width: 50%;
+            width: 50%;
+          }
+
+          .c-sponsor {
+            @include text-styles(.75rem, 1, "Gordita");
+            
+            font-weight: 400;
+          }
         }
 
         .c-tease-icon {
@@ -63,19 +79,22 @@
         .headline {
           @include text-styles(1rem, 1.25, "Average");
 
-          @include breakpoint(desktop-sm) {
+          @include breakpoint(desktop-lg) {
             @include text-styles(1.25rem, 1.25, "Average");
           }
         }
 
         .c-sponsorOverlay {
           background: #000;
-          padding: 7.5px;
+          padding: 5px;
 
           @include text-styles(.75rem, 1, "Gordita");
 
-          min-height: 20px;
           font-weight: 400;
+
+          @include breakpoint(tablet) {
+            padding: 7.5px;
+          }
         }
 
         &:last-child {
