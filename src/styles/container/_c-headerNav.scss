@@ -1009,8 +1009,12 @@
 
   .login-menu {
 
-    .subNav-flyout .flyout-item:last-child {
-      margin-bottom: 0;
+    .subNav-flyout .flyout-item {
+      white-space: normal;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
 
     @include breakpoint(desktop-sm) {
