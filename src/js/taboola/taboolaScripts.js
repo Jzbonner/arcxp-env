@@ -1,4 +1,4 @@
-const isHome = 'homepage-basic';
+const isHome = 'homepage';
 const isArticle = 'article-basic';
 const isSection = 'section';
 
@@ -9,7 +9,7 @@ const taboolaHeaderScript = (layout = '', cdnLink) => {
       taboolaCatType = 'article';
     } else if (layout.includes(isSection)) {
       taboolaCatType = 'category';
-    } else if (layout === isHome) {
+    } else if (layout.includes(isHome)) {
       taboolaCatType = 'home';
     }
     return `window._taboola = window._taboola || [];
@@ -34,7 +34,7 @@ const taboolaHeaderScript = (layout = '', cdnLink) => {
 
 const taboolaFooterScript = (layout = '', moapPTD, boapPTD, siteName) => {
   if (layout) {
-    if (layout === isHome && siteName.toLowerCase() === 'ajc') {
+    if (layout === isArticle && siteName.toLowerCase() === 'ajc') {
       return ` window._taboola = window._taboola || [];
       _taboola.push({flush: true});
       let renderedBoap = false;
@@ -77,7 +77,7 @@ const taboolaModuleScript = (layout, container, placement) => {
     } else if (layout.includes(isSection)) {
       containerName = `${container}---section-fronts`;
       placementName = `${placement} - Section Fronts`;
-    } else if (layout === isHome) {
+    } else if (layout.includes(isHome)) {
       containerName = `${container}---home-page`;
       placementName = `${placement} - Home Page`;
     }
