@@ -14,7 +14,7 @@ const resolve = (query) => {
   } = query;
 
   let requestUri = `/content/v4/search/?website=${arcSite}`;
-  requestUri += section ? `&q=type:story+AND+taxonomy.sites._id:%22/${section}%22` : null;
+  requestUri += section ? `&q=type:story+AND+taxonomy.sites._id:%22/${section}` : null;
   requestUri += size ? `&size=${size}` : '';
   requestUri += sort ? '&sort=display_date:desc' : '';
   return published ? `${requestUri}&published=${published}` : requestUri;

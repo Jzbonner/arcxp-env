@@ -5,6 +5,7 @@ import ListItem from '../../home/ListItem/ListItem';
 import filterDuplicateStory from '../sponsorRelatedBox/_helper_functions/filterDuplicateStory';
 import AddFirstInlineImage from '../../../../content/sources/helper_functions/AddFirstInlineImage';
 import FilterElements from '../../../../content/sources/helper_functions/FilterElements';
+import filterByPrimarySection from '../../../../content/sources/helper_functions/filterByPrimarySection';
 import '../../../features/List/default.scss';
 import './default.scss';
 
@@ -18,6 +19,7 @@ const RelatedList = ({ taxonomy, uuid }) => {
   let contentData = null;
   let fixedImageData = null;
   let filteredData = null;
+  let primaryData = null;
   let finalReferentId;
 
   if (referentId) {
@@ -32,7 +34,7 @@ const RelatedList = ({ taxonomy, uuid }) => {
       published: true,
       section: formattedPath,
       sort: true,
-      size: 15,
+      size: 30,
     },
   });
 
@@ -51,7 +53,8 @@ const RelatedList = ({ taxonomy, uuid }) => {
 
   if (data && data.content_elements && data.content_elements.length > 1) {
     contentData = filterDuplicateStory(data.content_elements, uuid);
-    fixedImageData = AddFirstInlineImage(contentData, 'search', ['search']);
+    primaryData = filterByPrimarySection(contentData, formattedPath);
+    fixedImageData = AddFirstInlineImage(primaryData, 'search', ['search']);
     filteredData = FilterElements(fixedImageData, 'search', ['search']);
   } else {
     return null;
