@@ -17,7 +17,7 @@ const AmpNavBar = () => {
   const sections = useContent({
     source: 'site-api',
     query: {
-      hierarchy: 'TopNav',
+      hierarchy: 'TopNavRedesign',
     },
     filter: topNavFilter,
   });
