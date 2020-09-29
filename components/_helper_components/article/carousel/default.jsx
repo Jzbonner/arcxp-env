@@ -40,7 +40,7 @@ const Carousel = ({ storyId, taxonomy }) => {
 
   if (!relatedStoryData) return null;
 
-  const carouselItems = buildCarouselItem(relatedStoryData, storyId, logoPath, arcSite);
+  const carouselItems = buildCarouselItem(relatedStoryData, storyId, logoPath, arcSite, formattedPath);
 
   return (
     <div className="c-carousel">
