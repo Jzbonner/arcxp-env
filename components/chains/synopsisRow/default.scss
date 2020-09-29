@@ -59,7 +59,7 @@
         width: 60.5%;
       }
 
-      @media (min-width: 1400px) {
+      @include breakpoint(desktop-xl) {
         width: 61.5%;
       }
     }
@@ -75,7 +75,7 @@
         margin-left: 4%;
       }
 
-      @media (min-width: 1400px) {
+      @include breakpoint(desktop-xl) {
         width: 35%;
         margin-left: 3.5%;
       }

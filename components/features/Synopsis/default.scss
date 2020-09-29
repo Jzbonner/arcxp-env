@@ -10,7 +10,7 @@
     margin-left: 3%;
   }
 
-  @media (min-width: 1400px) {
+  @include breakpoint(desktop-xl) {
     width: 35%;
     margin-left: 2.5%;
   }
@@ -26,6 +26,7 @@
   @include breakpoint(desktop-lg) {
     flex-direction: column;
     justify-content: initial;
+    margin-top: -2px;
   }
 
   .c-homeList {
