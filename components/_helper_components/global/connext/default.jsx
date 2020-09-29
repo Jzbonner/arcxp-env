@@ -154,7 +154,8 @@ export const ConnextInit = () => {
                 'userData': {
                   'userActive': 'logged in',
                   'userProfileID': CustomerRegistrationId
-                }
+                },
+                'event': 'loginEvent_complete'
               };
               dataLayer.push(userDataObj);
             }
