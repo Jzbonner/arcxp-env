@@ -18,7 +18,7 @@
   }
 
   .c-homeListContainer.left-photo-display-class .c-homeList {
-    margin-bottom: .875rem;
+    margin-bottom: 1.25rem;
     max-width: 100%;
 
     .homeList-text {
@@ -30,11 +30,7 @@
       }
 
       .headline {
-        font-size: .85rem;
-
-        @include breakpoint(tablet) {
-          font-size: 1rem;
-        }
+        font-size: 16px;
 
         @include breakpoint(desktop-sm) {
           font-size: 1.15rem;
@@ -48,7 +44,6 @@
     }
 
     @include breakpoint(desktop-sm) {
-      margin-bottom: 1.25rem;
       max-width: 100%;
     }
   }
