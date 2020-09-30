@@ -9,6 +9,7 @@ export default {
   cdnSite: 'ajc',
   dfpId: '21849707860',
   siteDomainURL: 'https://www.ajc.com',
+  siteNavHierarchy: 'TopNavRedesign',
   websiteURL: 'https://www.ajc.com',
   twitterURL: 'https://twitter.com/intent/tweet?url=',
   facebookURL: 'https://www.facebook.com/share.php?u=',
