@@ -1,6 +1,7 @@
 import React from 'react';
 import imageResizer from '../../../../layouts/_helper_functions/Thumbor';
 import truncateHeadline from '../../../../layouts/_helper_functions/homepage/truncateHeadline';
+import filterByPrimarySection from '../../../../../content/sources/helper_functions/filterByPrimarySection';
 import getDaysSincePublished from './getDaysSincePublished';
 import getFirstInlineImage from './getFirstInlineImage';
 import '../default.scss';
@@ -10,13 +11,15 @@ const filterCurrentStory = (contentElements, storyId) => contentElements.filter(
   return el;
 });
 
-export default function buildCarouselItems(relatedContentElements, storyId, logo, arcSite) {
+export default function buildCarouselItems(relatedContentElements, storyId, logo, arcSite, primarySection = '') {
   if (!relatedContentElements.content_elements) return null;
 
   const filteredContentElements = filterCurrentStory(relatedContentElements.content_elements, storyId);
+  const primaryContentElements = filterByPrimarySection(filteredContentElements, primarySection);
+
   let temp = {};
 
-  const elements = filteredContentElements.map((el, i) => {
+  const elements = primaryContentElements.map((el, i) => {
     // create up to 12 items
     if (i <= 11) {
       temp = {};
