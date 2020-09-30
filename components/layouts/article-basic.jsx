@@ -50,7 +50,7 @@ const StoryPageLayout = () => {
   const currentEnv = fetchEnv();
   const { connext } = getProperties(arcSite);
   const { allowMeter = false } = connext[currentEnv] || {};
-  console.error('dave', allowMeter, currentEnv, connext);
+
   if (!globalContent) return null;
   const {
     _id: uuid,
