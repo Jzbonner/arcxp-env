@@ -140,7 +140,7 @@
       ],
       "max-len": [
         "error",
-        140
+        240
       ],
       "no-underscore-dangle": "off",
       "unicorn/filename-case": "off"
