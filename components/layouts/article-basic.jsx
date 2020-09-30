@@ -2,7 +2,7 @@
 import React from 'react';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import fetchEnv from '../_helper_components/utils/environment';
+import fetchEnv from '../_helper_components/global/utils/environment';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
@@ -50,7 +50,7 @@ const StoryPageLayout = () => {
   const currentEnv = fetchEnv();
   const { connext } = getProperties(arcSite);
   const { allowMeter = false } = connext[currentEnv] || {};
-
+  console.error('dave', allowMeter, currentEnv, connext);
   if (!globalContent) return null;
   const {
     _id: uuid,
