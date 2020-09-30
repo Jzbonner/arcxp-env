@@ -1,7 +1,8 @@
 /*  /components/layouts/article-basic.jsx  */
 import React from 'react';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import fetchEnv from '../_helper_components/global/utils/environment';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import TimeStamp from '../_helper_components/article/timestamp/default.jsx';
 import Byline from '../_helper_components/article/byline/default.jsx';
@@ -44,6 +45,11 @@ const start = 3;
 const StoryPageLayout = () => {
   const appContext = useAppContext();
   const { globalContent, requestUri } = appContext;
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const currentEnv = fetchEnv();
+  const { connext } = getProperties(arcSite);
+  const { allowMeter = false } = connext[currentEnv] || {};
 
   if (!globalContent) return null;
   const {
@@ -76,7 +82,10 @@ const StoryPageLayout = () => {
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
   const { content_code: paywallStatus } = contentRestrictions || {};
-  const isMeteredStory = paywallStatus && paywallStatus.toLowerCase() !== 'free' && paywallStatus.toLowerCase() !== 'unmetered';
+  const isMeteredStory = allowMeter
+    && paywallStatus
+    && paywallStatus.toLowerCase() !== 'free'
+    && paywallStatus.toLowerCase() !== 'unmetered';
   const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP01-Story-Desktop'} />;
   const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP01-Story-Tablet'} />;
   const MP02 = () => <ArcAd staticSlot={'MP02'} lazyLoad={isMeteredStory} key={'MP02'} />;

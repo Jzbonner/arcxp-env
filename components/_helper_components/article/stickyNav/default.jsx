@@ -117,7 +117,7 @@ const StickyNav = ({
     });
   }, []);
 
-  const isNonShareablePage = !articleUrl || !type || type === 'homepage-basic' || type === 'section-basic';
+  const isNonShareablePage = !articleUrl || !type || type.includes('homepage') || type.includes('section');
 
   return (
     <>
