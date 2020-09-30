@@ -76,7 +76,7 @@ const RelatedList = ({ taxonomy, uuid }) => {
 };
 
 RelatedList.propTypes = {
-  taxonomy: PropTypes.string,
+  taxonomy: PropTypes.object,
   uuid: PropTypes.string,
 };
 
