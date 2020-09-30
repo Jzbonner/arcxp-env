@@ -150,7 +150,7 @@ const NotAuthMenu = ({
 NotAuthMenu.propTypes = {
   isMobile: PropTypes.bool,
   isFlyout: PropTypes.bool,
-  showUserMenu: PropTypes.string,
+  showUserMenu: PropTypes.bool,
   setShowUserMenu: PropTypes.func,
   arcSite: PropTypes.string,
 };
