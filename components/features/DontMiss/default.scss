@@ -3,6 +3,7 @@
 .c-dontMiss {
   @include breakpoint(tablet) {
     padding: 0 20px;
+    border-left: solid 1px #cdcdcd;
   }
 
   @include breakpoint(desktop-sm) {

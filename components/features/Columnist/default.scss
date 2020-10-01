@@ -3,8 +3,11 @@
 .c-columnistFeature {
   padding: 0 20px;
 
+  @include breakpoint(tablet) {
+    border-left: solid 1px #cdcdcd;
+  }
+
   @include breakpoint(desktop-sm) {
-    border-left: 1px solid #dedede;
     margin-left: -20px;
     width: 100%;
   }
@@ -43,7 +46,7 @@
       }
 
       .headline {
-        @include text-styles(.875rem, 1.23, "Average");
+        @include text-styles(1rem, 1.23, "Average");
 
         display: block;
         text-decoration: none;
