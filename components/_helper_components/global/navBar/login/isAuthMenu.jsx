@@ -104,6 +104,11 @@ const isAuthMenu = ({
                 </a>
               </li>
             )}
+            {arcSite !== 'dayton' && <li className={'flyout-item'}>
+              <a href='/epaper' target='_blank' rel="noopener noreferrer">
+                ePaper
+              </a>
+            </li>}
             <li className={'flyout-item'}>
               <a href="#" onClick={() => openMg2Widget(siteCode, userStateRef.current)}>
                 Newsletters
