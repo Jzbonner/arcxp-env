@@ -4,6 +4,7 @@ import appAdsTxt from './appadstxt/ajc.com.json';
 
 export default {
   defaultSiteTitle: 'AJC',
+  fbPagesId: '13310147298',
   siteTag: 'ajc',
   cdnOrg: 'ajc',
   cdnSite: 'ajc',
@@ -42,6 +43,16 @@ export default {
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.ajc.com/amp/ntv',
+  taboola: {
+    sandbox: {
+      moapPTD: '1114521',
+      boapPTD: '1097469',
+    },
+    prod: {
+      moapPTD: '1099909',
+      boapPTD: '1099013',
+    },
+  },
   ads: {
     sandbox: {
       adsBidding,

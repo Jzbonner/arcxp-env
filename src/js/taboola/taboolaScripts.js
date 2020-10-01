@@ -32,49 +32,57 @@ const taboolaHeaderScript = (layout = '', cdnLink) => {
   return null;
 };
 
-const taboolaFooterScript = (layout = '', moapPTD, boapPTD, siteName) => {
+const taboolaFooterScript = (layout) => {
   if (layout) {
-    if (layout === isArticle && siteName.toLowerCase() === 'ajc') {
-      return ` window._taboola = window._taboola || [];
-      _taboola.push({flush: true});
-      let renderedBoap = false;
-      let renderedMoap = false;
-      _taboola.push({
-        listenTo: 'visible',
-        handler: function (e) {
-          if (typeof PostRelease !== 'undefined' && !renderedBoap) {
-            PostRelease.Start({
-              ptd: ${boapPTD}
-            });
-            renderedBoap = true;
-          }
-        }
-      },
-      {
-        listenTo: 'render',
-        handler: function (e) {
-          if (typeof PostRelease !== 'undefined' && !renderedMoap) {
-            PostRelease.Start({
-              ptd: ${moapPTD}
-            });
-            renderedMoap = true;
-          }
-        }
-      });`;
-    }
     return 'window._taboola = window._taboola || []; _taboola.push({flush: true});';
   }
   return null;
 };
 
-const taboolaModuleScript = (layout, container, placement) => {
+const taboolaModuleScript = (layout, container, placement, moapPTD, boapPTD, siteName) => {
   let containerName;
   let placementName;
   if (layout) {
     if (layout === isArticle) {
       containerName = container;
       placementName = placement;
-    } else if (layout.includes(isSection)) {
+      return `window._taboola = window._taboola || [];
+      _taboola.push({flush: true});
+      _taboola.push({
+        mode: 'thumbnails-feed-4x1',
+        container: '${containerName}',
+        placement: '${placementName}',
+        target_type: 'mix'
+      });
+
+      if (${siteName.toLowerCase() === 'ajc' && moapPTD && boapPTD}) {
+        let renderedBoap = false;
+        let renderedMoap = false;
+        _taboola.push({
+          listenTo: 'visible',
+          handler: function (e) {
+            if (typeof PostRelease !== 'undefined' && !renderedBoap) {
+              PostRelease.Start({
+                ptd: ${boapPTD}
+              });
+              renderedBoap = true;
+            }
+          }
+        },
+        {
+          listenTo: 'render',
+          handler: function (e) {
+            if (typeof PostRelease !== 'undefined' && !renderedMoap) {
+              PostRelease.Start({
+                ptd: ${moapPTD}
+              });
+              renderedMoap = true;
+            }
+          }
+        });
+      }`;
+    }
+    if (layout.includes(isSection)) {
       containerName = `${container}---section-fronts`;
       placementName = `${placement} - Section Fronts`;
     } else if (layout.includes(isHome)) {
@@ -82,12 +90,13 @@ const taboolaModuleScript = (layout, container, placement) => {
       placementName = `${placement} - Home Page`;
     }
     return `window._taboola = window._taboola || [];
-    _taboola.push({
-      mode: 'thumbnails-feed-4x1',
-      container: '${containerName}',
-      placement: '${placementName}',
-      target_type: 'mix'
-    });`;
+      _taboola.push({flush: true});
+      _taboola.push({
+        mode: 'thumbnails-feed-4x1',
+        container: '${containerName}',
+        placement: '${placementName}',
+        target_type: 'mix'
+      });`;
   }
   return null;
 };

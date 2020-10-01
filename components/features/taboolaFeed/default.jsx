@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import { taboolaModuleScript } from '../../../src/js/taboola/taboolaScripts';
+import fetchEnv from '../../_helper_components/global/utils/environment';
 import deferThis from '../../_helper_components/global/utils/deferLoading';
 import '../../../src/styles/base/_utility.scss';
 
@@ -11,6 +12,7 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
   const { layout } = appContext;
+  const currentEnv = fetchEnv();
   const { taboola, siteName } = getProperties(arcSite);
   const {
     dataPublisher,
@@ -18,7 +20,8 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
     taboolaSectionID,
     containerName,
     placementName,
-  } = taboola;
+  } = taboola || {};
+  const { moapPTD, boapPTD } = taboola[currentEnv] || {};
   if (ampPage) {
     return (
       <div className="c-section b-margin-bottom-d40-m20">
@@ -39,7 +42,7 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
 
   useEffect(() => {
     const taboolaScript = document.createElement('script');
-    taboolaScript.innerHTML = taboolaModuleScript(layout, containerName, placementName);
+    taboolaScript.innerHTML = taboolaModuleScript(layout, containerName, placementName, moapPTD, boapPTD, siteName);
     taboolaScript.async = true;
     if (lazyLoad) {
       deferThis({ script: taboolaScript });

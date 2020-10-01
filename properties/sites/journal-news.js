@@ -4,6 +4,7 @@ import appAdsTxt from './appadstxt/journal-news.com.json';
 
 export default {
   dfp_id: 21849707860,
+  fbPagesId: '210895530407',
   siteName: 'journal-news',
   cdnOrg: 'coxohio',
   cdnSite: 'journal-news',
