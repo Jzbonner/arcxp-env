@@ -42,6 +42,16 @@ export default {
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.ajc.com/amp/ntv',
+  taboola: {
+    sandbox: {
+      moapPTD: '1114521',
+      boapPTD: '1097469',
+    },
+    prod: {
+      moapPTD: '1099909',
+      boapPTD: '1099013',
+    },
+  },
   ads: {
     sandbox: {
       adsBidding,
