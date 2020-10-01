@@ -4,6 +4,7 @@ import appAdsTxt from './appadstxt/dayton.com.json';
 
 export default {
   dfp_id: 21849707860,
+  fbPagesId: '1431445090472096',
   siteName: 'dayton',
   cdnOrg: 'coxohio',
   cdnSite: 'dayton',
@@ -46,6 +47,19 @@ export default {
   weatherLocationId: 330120,
   taboola: {
     dataPublisher: 'cox-dayton',
+    taboolaStoryID: 'taboola-dayton-custom-feed',
+    taboolaSectionID: 'taboola-dayton-custom-feed---section-fronts',
+    cdnLink: '//cdn.taboola.com/libtrc/cox-dayton/loader.js',
+    containerName: 'taboola-dayton-custom-feed',
+    placementName: 'Dayton Custom Feed',
+    sandbox: {
+      boapPTD: '[1058554, 380629, 92770]',
+      moapPTD: '[1087800, 382325, 62055]',
+    },
+    prod: {
+      boapPTD: '[1058554, 380629, 92770]',
+      moapPTD: '[1087800, 382325, 62055]',
+    },
   },
   metrics: {
     siteID: 'daytondotcom',

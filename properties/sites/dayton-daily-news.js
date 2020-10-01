@@ -4,6 +4,7 @@ import appAdsTxt from './appadstxt/daytondailynews.com.json';
 
 export default {
   dfp_id: 21849707860,
+  fbPagesId: '168815400507',
   siteName: 'dayton-daily-news',
   cdnOrg: 'coxohio',
   cdnSite: 'dayton-daily-news',
@@ -51,6 +52,14 @@ export default {
     cdnLink: '//cdn.taboola.com/libtrc/cox-daytondailynews/loader.js',
     containerName: 'taboola-dayton-daily-news-custom-feed',
     placementName: 'Dayton Daily News Custom Feed',
+    sandbox: {
+      boapPTD: '[1058525, 380629, 77511]',
+      moapPTD: '[1058525, 380629, 77511]',
+    },
+    prod: {
+      boapPTD: '[1058525, 380629, 77511]',
+      moapPTD: '[1058525, 380629, 77511]',
+    },
   },
   metrics: {
     siteID: 'daytondaily',
