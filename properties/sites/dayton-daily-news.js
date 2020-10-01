@@ -53,12 +53,12 @@ export default {
     containerName: 'taboola-dayton-daily-news-custom-feed',
     placementName: 'Dayton Daily News Custom Feed',
     sandbox: {
-      boapPTD: '[1058525, 380629, 77511]',
-      moapPTD: '[1058525, 380629, 77511]',
+      boapPTD: '1118358',
+      moapPTD: '1118359',
     },
     prod: {
-      boapPTD: '[1058525, 380629, 77511]',
-      moapPTD: '[1058525, 380629, 77511]',
+      boapPTD: '1058525',
+      moapPTD: '1087799',
     },
   },
   metrics: {

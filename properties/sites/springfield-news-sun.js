@@ -52,12 +52,12 @@ export default {
     containerName: 'taboola-springfield-news-sun-custom-feed',
     placementName: 'Springfield News Sun Custom Feed',
     sandbox: {
-      boapPTD: '[1058525, 380629, 77511]',
-      moapPTD: '[1058525, 380629, 77511]',
+      boapPTD: '1118370',
+      moapPTD: '1118371',
     },
     prod: {
-      boapPTD: '[1058525, 380629, 77511]',
-      moapPTD: '[1058525, 380629, 77511]',
+      boapPTD: '1053969',
+      moapPTD: '1100010',
     },
   },
   metrics: {
