@@ -75,6 +75,7 @@
     @include text-styles(.875em, 1.29, "Gordita-Medium");
     
     margin: 0 auto 5px;
+    text-transform: uppercase;
     color: #fff;
     width: 100%;
     max-width: 302px;
@@ -87,7 +88,7 @@
   .c-breakingNews-title {
     display: block;
     color: #fff;
-    text-transform: uppercase;
+    text-transform: none;
 
     @include text-styles(1em, 1.58, "Gordita-Bold");
 
