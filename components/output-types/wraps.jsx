@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
-import { fbPagesId } from 'fusion:environment';
 import SiteMeta from '../_helper_components/global/siteMeta/default';
 import SiteMetrics from '../_helper_components/global/siteMetrics/default';
 import { ConnextInit } from '../_helper_components/global/connext/default.jsx';
@@ -46,6 +45,7 @@ const WrapOutputType = (props) => {
     connext,
     cdnSite,
     cdnOrg,
+    fbPagesId,
   } = getProperties(currentSite) || {};
 
   const { isEnabled: connextIsEnabled = false, environment: connextEnv } = connext[currentEnv] || {};
