@@ -1,7 +1,6 @@
-const triggerGtmEvent = (eventName, eventToListenTo = null, listenerEventName = null) => {
+const triggerGtmEvent = (eventName, eventToListenTo = null, delayedEventName = null) => {
   if (typeof window !== 'undefined') {
     const dataLayer = window.dataLayer || [];
-    const queuedEventTriggers = window.queuedEventTriggers || [];
     // trigger an event immediately
     if (eventName) {
       dataLayer.push({
@@ -9,13 +8,14 @@ const triggerGtmEvent = (eventName, eventToListenTo = null, listenerEventName = 
       });
     }
     // trigger an event after another event occurs
-    if (eventToListenTo && listenerEventName && !queuedEventTriggers.includes(listenerEventName)) {
-      queuedEventTriggers.push(listenerEventName);
+    if (eventToListenTo && delayedEventName) {
+      // we define a window property to prevent double- or errant- triggering with the standard connext callback
+      // see components/_helper_components/global/connext/default.jsx#153 for details
+      window[delayedEventName] = true;
       window.addEventListener(eventToListenTo, () => {
         dataLayer.push({
-          event: listenerEventName,
+          event: delayedEventName,
         });
-        window.queuedEventTriggers = queuedEventTriggers.filter(t => t !== listenerEventName);
       });
     }
   }

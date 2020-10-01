@@ -149,13 +149,15 @@ export const ConnextInit = () => {
           if (typeof(window.localStorage) !== 'undefined') {
             const connextLS = window.localStorage.getItem('${connextLSLookup}');
             if (connextLS) {
+              const loginEventName = 'loginEvent_complete';
+              const loginEventToTrigger = !window[loginEventName] ? 'loginEvent_return-user' : null;
               const { CustomerRegistrationId } = JSON.parse(connextLS);
               const userDataObj = {
                 'userData': {
                   'userActive': 'logged in',
                   'userProfileID': CustomerRegistrationId
                 },
-                'event': 'loginEvent_complete'
+                'event': loginEventToTrigger
               };
               dataLayer.push(userDataObj);
             }
