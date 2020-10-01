@@ -4,11 +4,10 @@
   @include breakpoint(tablet) {
     padding: 0 20px;
     border-left: solid 1px #cdcdcd;
+    margin-left: -20px;
   }
 
   @include breakpoint(desktop-sm) {
-    border-left: solid 1px #cdcdcd;
-    margin-left: -20px;
     width: 100%;
   }
   

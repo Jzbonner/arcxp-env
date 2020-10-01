@@ -5,10 +5,10 @@
 
   @include breakpoint(tablet) {
     border-left: solid 1px #cdcdcd;
+    margin-left: -20px;
   }
 
   @include breakpoint(desktop-sm) {
-    margin-left: -20px;
     width: 100%;
   }
 
