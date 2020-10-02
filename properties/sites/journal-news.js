@@ -52,6 +52,14 @@ export default {
     cdnLink: '//cdn.taboola.com/libtrc/cox-journal-news/loader.js',
     containerName: 'taboola-journal-news-custom-feed',
     placementName: 'Journal News Custom Feed',
+    sandbox: {
+      boapPTD: '1118366',
+      moapPTD: '1118367',
+    },
+    prod: {
+      boapPTD: '1058553',
+      moapPTD: '1087801',
+    },
   },
   metrics: {
     siteID: 'journalnews',

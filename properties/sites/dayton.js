@@ -53,12 +53,12 @@ export default {
     containerName: 'taboola-dayton-custom-feed',
     placementName: 'Dayton Custom Feed',
     sandbox: {
-      boapPTD: '[1058554, 380629, 92770]',
-      moapPTD: '[1087800, 382325, 62055]',
+      boapPTD: '1118362',
+      moapPTD: '1118363',
     },
     prod: {
-      boapPTD: '[1058554, 380629, 92770]',
-      moapPTD: '[1087800, 382325, 62055]',
+      boapPTD: '1058554',
+      moapPTD: '1087800',
     },
   },
   metrics: {
