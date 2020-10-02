@@ -51,7 +51,7 @@ const SiteMeta = () => {
         ? '200' : '1200'}`} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content={`${isNonContentPage ? 'website' : 'article'}`} />
-      {!isNativoLandingPage && <meta property="og:url" content={url} />}
+      {!isNativoLandingPage && <meta property="og:url" content={updatedURL} />}
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content={site} />
       <title>{pageTitle}</title>

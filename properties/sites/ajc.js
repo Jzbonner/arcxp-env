@@ -4,11 +4,13 @@ import appAdsTxt from './appadstxt/ajc.com.json';
 
 export default {
   defaultSiteTitle: 'AJC',
+  fbPagesId: '13310147298',
   siteTag: 'ajc',
   cdnOrg: 'ajc',
   cdnSite: 'ajc',
   dfpId: '21849707860',
   siteDomainURL: 'https://www.ajc.com',
+  siteNavHierarchy: 'TopNavRedesign',
   websiteURL: 'https://www.ajc.com',
   twitterURL: 'https://twitter.com/intent/tweet?url=',
   facebookURL: 'https://www.facebook.com/share.php?u=',
@@ -41,6 +43,16 @@ export default {
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.ajc.com/amp/ntv',
+  taboola: {
+    sandbox: {
+      moapPTD: '1114521',
+      boapPTD: '1097469',
+    },
+    prod: {
+      moapPTD: '1099909',
+      boapPTD: '1099013',
+    },
+  },
   ads: {
     sandbox: {
       adsBidding,

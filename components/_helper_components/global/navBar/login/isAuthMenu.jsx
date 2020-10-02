@@ -4,6 +4,7 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../utils/environment';
 import openMg2Widget from './_helper_functions/openMg2Widget';
+import triggerGtmEvent from '../../siteMetrics/_helper_functions/triggerGtmEvent';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 import userIconDark from '../../../../../resources/icons/login/user-icon-dark.svg';
 
@@ -44,6 +45,18 @@ const isAuthMenu = ({
   }`;
   const profileLink = `${connextDomain}/myprofile`;
 
+  const renderLogoutButton = () => <button
+    className='btn-profile'
+    data-mg2-action='logout'
+    onClick={(e) => {
+      e.preventDefault();
+      triggerGtmEvent('loginEvent_logout');
+      setShowUserMenu(!showUserMenu);
+    }}
+  >
+    Log Out
+  </button>;
+
   return (
     <>
       <div onClick={() => setShowUserMenu(!showUserMenu)}>
@@ -51,45 +64,19 @@ const isAuthMenu = ({
         <div className='nav-itemText login-text'>My Profile</div>
       </div>
 
-      <div
-        className={`section login-menu ${
-          isMobile && showUserMenu ? 'isVisible' : ''
-        }`}
-      >
+      <div className={`section login-menu ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
         <div className={'section-item'}>
           <a href={profileLink}>
             <img src={source} />
             <div className='nav-itemText login-text'>My Profile</div>
           </a>
         </div>
-        <div
-          className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}
-        >
-          {!isMobile && (
-            <button
-              className='btn-profile'
-              data-mg2-action='logout'
-              onClick={(e) => {
-                e.preventDefault();
-                setShowUserMenu(!showUserMenu);
-              }}
-            >
-              Log Out
-            </button>
-          )}
+        <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
+          {!isMobile && renderLogoutButton()}
           <ul className={'subNav-flyout'}>
             {isMobile && (
               <li className={'flyout-item'}>
-                <button
-                  className='btn-profile'
-                  data-mg2-action='logout'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowUserMenu(!showUserMenu);
-                  }}
-                >
-                  Log Out
-                </button>
+                {renderLogoutButton()}
               </li>
             )}
             <li className={'flyout-item'}>
@@ -104,6 +91,11 @@ const isAuthMenu = ({
                 </a>
               </li>
             )}
+            {arcSite !== 'dayton' && <li className={'flyout-item'}>
+              <a href='/epaper' target='_blank' rel="noopener noreferrer">
+                ePaper
+              </a>
+            </li>}
             <li className={'flyout-item'}>
               <a href="#" onClick={() => openMg2Widget(siteCode, userStateRef.current)}>
                 Newsletters
@@ -131,7 +123,7 @@ const isAuthMenu = ({
 isAuthMenu.propTypes = {
   isMobile: PropTypes.bool,
   isFlyout: PropTypes.bool,
-  showUserMenu: PropTypes.string,
+  showUserMenu: PropTypes.bool,
   setShowUserMenu: PropTypes.func,
   userStateRef: PropTypes.object,
 };

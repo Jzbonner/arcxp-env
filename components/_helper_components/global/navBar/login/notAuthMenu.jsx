@@ -4,6 +4,7 @@ import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../utils/environment';
 import openMg2Widget from './_helper_functions/openMg2Widget';
+import triggerGtmEvent from '../../siteMetrics/_helper_functions/triggerGtmEvent';
 import userIcon from '../../../../../resources/icons/login/user-icon.svg';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 
@@ -68,6 +69,18 @@ const NotAuthMenu = ({
     }
   });
 
+  const renderLoginButton = () => <button
+    className='btn-profile'
+    data-mg2-action='login'
+    onClick={(e) => {
+      e.preventDefault();
+      triggerGtmEvent('loginEvent_start', 'connextLoggedIn', 'loginEvent_complete');
+      setShowUserMenu(!showUserMenu);
+    }}
+  >
+    Log In
+  </button>;
+
   return (
     <>
       <div onClick={() => setShowUserMenu(!showUserMenu)}>
@@ -75,46 +88,19 @@ const NotAuthMenu = ({
         <div className='nav-itemText login-text'>Log In</div>
       </div>
 
-      <div
-        ref={loginEl}
-        className={`section login-menu ${
-          isMobile && showUserMenu ? 'isVisible' : ''
-        }`}
-      >
+      <div ref={loginEl} className={`section login-menu ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
         <div className={'section-item'}>
           <a>
             <img src={source} />
             <div className='nav-itemText login-text'>Log In</div>
           </a>
         </div>
-        <div
-          className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}
-        >
-          {!isMobile && (
-            <button
-              className='btn-profile'
-              data-mg2-action='login'
-              onClick={(e) => {
-                e.preventDefault();
-                setShowUserMenu(!showUserMenu);
-              }}
-            >
-              Log In
-            </button>
-          )}
+        <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
+          {!isMobile && renderLoginButton()}
           <ul className={'subNav-flyout'}>
             {isMobile && (
               <li className={'flyout-item'}>
-                <button
-                  className='btn-profile'
-                  data-mg2-action='login'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowUserMenu(!showUserMenu);
-                  }}
-                >
-                  Log In
-                </button>
+                 {renderLoginButton()}
               </li>
             )}
 
@@ -150,7 +136,7 @@ const NotAuthMenu = ({
 NotAuthMenu.propTypes = {
   isMobile: PropTypes.bool,
   isFlyout: PropTypes.bool,
-  showUserMenu: PropTypes.string,
+  showUserMenu: PropTypes.bool,
   setShowUserMenu: PropTypes.func,
   arcSite: PropTypes.string,
 };

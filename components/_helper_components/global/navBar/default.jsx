@@ -33,7 +33,7 @@ const NavBar = ({
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    logo, logoHamburger, siteName, cdnSite, cdnOrg,
+    logo, logoHamburger, siteName, cdnSite, cdnOrg, siteNavHierarchy,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
@@ -41,7 +41,7 @@ const NavBar = ({
   const sections = useContent({
     source: 'site-api',
     query: {
-      hierarchy: 'TopNavRedesign',
+      hierarchy: siteNavHierarchy || 'TopNav',
     },
     filter: topNavFilter,
   });

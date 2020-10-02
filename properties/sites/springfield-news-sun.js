@@ -3,6 +3,7 @@ import adsTxt from './adstxt/springfieldnewssun.com.json';
 
 export default {
   dfp_id: 21849707860,
+  fbPagesId: '73484672682',
   siteName: 'springfield-news-sun',
   cdnOrg: 'coxohio',
   cdnSite: 'springfield-news-sun',
@@ -50,6 +51,14 @@ export default {
     cdnLink: '//cdn.taboola.com/libtrc/cox-springfieldnewssun/loader.js',
     containerName: 'taboola-springfield-news-sun-custom-feed',
     placementName: 'Springfield News Sun Custom Feed',
+    sandbox: {
+      boapPTD: '1118370',
+      moapPTD: '1118371',
+    },
+    prod: {
+      boapPTD: '1053969',
+      moapPTD: '1100010',
+    },
   },
   metrics: {
     siteID: 'springfieldnews',

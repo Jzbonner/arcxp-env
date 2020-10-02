@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext, useFusionContext } from 'fusion:context';
-import { connext } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import getContentMeta from '../siteMeta/_helper_functions/getContentMeta';
+import fetchEnv from '../utils/environment';
 
 const SiteMetrics = ({ isAmp }) => {
   const fusionContext = useFusionContext();
@@ -54,7 +54,9 @@ const SiteMetrics = ({ isAmp }) => {
     galleryHeadline = promoHeadlines && promoHeadlines.basic ? promoHeadlines.basic : '';
   }
 
-  const { metrics, siteDomainURL } = getProperties(arcSite) || {};
+  const { metrics, siteDomainURL, connext } = getProperties(arcSite) || {};
+  const currentEnv = fetchEnv();
+  const { isEnabled: connextIsEnabled = false } = connext[currentEnv] || {};
   const contentMeta = getContentMeta();
 
   if (!contentMeta) {
@@ -128,7 +130,7 @@ const SiteMetrics = ({ isAmp }) => {
     <script type='text/javascript' dangerouslySetInnerHTML={{
       __html: `
         const initialDataObj = {
-          "connextActive": "${connext && connext.isEnabled ? connext.isEnabled : 'false'}",
+          "connextActive": "${connextIsEnabled}",
           "pageData": {
             "pageName": "${url}",
             "pageURL": "${siteDomain}${url}",

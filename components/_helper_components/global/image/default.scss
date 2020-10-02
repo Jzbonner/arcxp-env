@@ -241,4 +241,10 @@
 
 .lazyload-wrapper {
   display: grid;
+
+  .content-profileImage & {
+    // need to set explicit height/width for the blog profile instance
+    width: 100%;
+    height: 100%;
+  }
 }

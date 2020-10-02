@@ -112,7 +112,6 @@
 
     .c-rightRail {
 
-      > :first-child:not(.arc_ad),
       .arc_ad + .arc_ad {
         margin-top: 2.26rem;
       }
@@ -122,9 +121,6 @@
         float: right;
         position: relative;
         right: -30px;
-      }
-
-      @include breakpoint(desktop-sm) {
 
         > :first-child:not(.arc_ad) {
           margin-top: 0;
