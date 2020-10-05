@@ -16,6 +16,8 @@ export default [
   'firstInlineImage.credits.affiliation.by.id',
   'firstInlineImage.credits.by',
   'headlines.basic',
+  'label.custom_label.display',
+  'label.custom_label.text',
   'label.hide_timestamp',
   'label.basic.text',
   'last_updated_date',
