@@ -61,17 +61,21 @@ const RelatedList = ({ taxonomy, uuid }) => {
   }
 
   return (
-    <div className="c-relatedList b-margin-bottom-d40-m20">
-      <h1 className="title">In Other News</h1>
-      <div className="c-homeListContainer two-columns left-photo-display-class">
-        {filteredData && filteredData.map((el, i) => {
-          if (i < limit) {
-            return <ListItem key={`ListItem-${i}`} {...el} />;
-          }
-          return null;
-        })}
-      </div>
-    </div>
+    <>
+      {filteredData.length > 1
+        ? <div className="c-relatedList b-margin-bottom-d40-m20">
+          <h1 className="title">In Other News</h1>
+          <div className="c-homeListContainer two-columns left-photo-display-class">
+            {filteredData && filteredData.map((el, i) => {
+              if (i < limit) {
+                return <ListItem key={`ListItem-${i}`} {...el} />;
+              }
+              return null;
+            })}
+          </div>
+        </div>
+        : null}
+    </>
   );
 };
 

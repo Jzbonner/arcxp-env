@@ -21,7 +21,7 @@ const isAuthMenu = ({
   const { siteCode } = connext[currentEnv] || {};
 
   let source;
-  if (isMobile || isFlyout) {
+  if (isFlyout) {
     source = userIconWhite;
   } else {
     source = userIconDark;
