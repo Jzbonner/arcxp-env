@@ -4,7 +4,6 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../utils/environment';
 import openMg2Widget from './_helper_functions/openMg2Widget';
-import triggerGtmEvent from '../../siteMetrics/_helper_functions/triggerGtmEvent';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 import userIconDark from '../../../../../resources/icons/login/user-icon-dark.svg';
 
@@ -50,7 +49,6 @@ const isAuthMenu = ({
     data-mg2-action='logout'
     onClick={(e) => {
       e.preventDefault();
-      triggerGtmEvent('loginEvent_logout');
       setShowUserMenu(!showUserMenu);
     }}
   >

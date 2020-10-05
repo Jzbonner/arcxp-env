@@ -2,6 +2,7 @@ import React from 'react';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../utils/environment';
+import triggerGtmEvent from '../siteMetrics/_helper_functions/triggerGtmEvent';
 import ArcAdLib from '../../../features/ads/src/children/ArcAdLib';
 import GetConnextLocalStorageData from './connextLocalStorage';
 
@@ -17,7 +18,7 @@ export const ConnextAuthTrigger = () => {
     configCode,
   } = connext[currentEnv] || {};
 
-  if (typeof window !== 'undefined') {
+  if (typeof window !== 'undefined' && !window.connextAuthTriggerEnabled) {
     const loadDeferredItems = () => {
       const deferredItems = window.deferUntilKnownAuthState || [];
 
@@ -52,6 +53,17 @@ export const ConnextAuthTrigger = () => {
     window.addEventListener('connextMeterLevelSet', () => {
       const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
       const { UserState } = connextLocalStorageData;
+      /*
+        workaround for APD-960, since binding to the logout button click isn't working (connext fires too quickly)
+        and connext actually double-fires the `onNotAuthorized` event.  So we set this property when connext first loads
+        and then we delete it - if it hasn't been already - once the meter level is set (one of the later processes for connext)
+      */
+      if (typeof window.connextInitialLoadComplete !== 'undefined') {
+        delete window.connextInitialLoadComplete;
+      } else if (UserState.toLowerCase() === 'logged out') {
+        triggerGtmEvent('loginEvent_logout');
+      }
+
       if (isEnabled && !(UserState && UserState.toLowerCase() === 'subscriber')) {
         if (window.Connext.Storage.GetCurrentMeterLevel() === 1) {
           // it's "free" content (per connext), so load everything
@@ -111,6 +123,7 @@ export const ConnextAuthTrigger = () => {
     });
     // connext is enabled & the user is not authorized, wait for the connext auth callback
     window.addEventListener('connextIsSubscriber', loadDeferredItems);
+    window.connextAuthTriggerEnabled = true;
   }
 };
 
@@ -181,21 +194,6 @@ export const ConnextInit = () => {
           console.log(message);
         }
       };
-      const mg2Logout = () => {
-        const deleteCookie = (name) => {
-          const arr = location.host.split('.');
-          const rootdomain = arr[arr.length - 2] + '.' + arr[arr.length - 1];
-          doc.cookie = name + '=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT';
-          doc.cookie = name + '=;path=/;domain=' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
-          doc.cookie = name + '=;path=/;domain=.' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
-          doc.cookie = name + '=;path=/;domain=' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
-          doc.cookie = name + '=;path=/;domain=.' + rootdomain + ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
-        };
-        deleteCookie('igmAuth');
-        deleteCookie('igmContent');
-        deleteCookie('igmRegID');
-        window.Connext.Logout();
-      };
       window.addEventListener('connextLoggedIn', () => {
         toggleUserState('logged-in');
       });
@@ -249,9 +247,7 @@ export const ConnextInit = () => {
                   onDebugNote: (e) => { connextLogger('>> onDebugNote', e); },
                   onInit: (e) => {
                     connextLogger('>> onInit', e);
-                    doc.querySelectorAll('.nav-profileLogout').forEach((el) => {
-                      el.addEventListener('click', mg2Logout);
-                    });
+                    window.connextInitialLoadComplete = true;
                     window.dispatchEvent(connextLoaded);
                   },
                   onLoggedIn: (e) => {
