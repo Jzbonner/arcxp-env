@@ -73,6 +73,9 @@ export const ConnextAuthTrigger = () => {
             siteCode, configCode, environment, 'Connext_CurrentConversations',
           ) || { };
           const { Metered: meteredConversationData } = conversationsDataFromLocalStorage || {};
+          if (!meteredConversationData) {
+            loadDeferredItems();
+          }
           const { Id: meteredConversationId, Properties: meteredConversationProperties } = meteredConversationData || {};
           const viewedArticlesFromLocalStorage = GetConnextLocalStorageData(
             siteCode, configCode, environment, 'Connext_ViewedArticles',
@@ -80,8 +83,8 @@ export const ConnextAuthTrigger = () => {
           const viewedArticlesArray = viewedArticlesFromLocalStorage[meteredConversationId] || [];
           const {
             ArticleLeft: articlesRemainingFromLocalStorage,
-            PaywallLimit: articleLimitFromLocalStorage,
-          } = meteredConversationProperties;
+            PaywallLimit: articleLimitFromLocalStorage = 4,
+          } = meteredConversationProperties || {};
 
           if (
             (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
