@@ -2,6 +2,7 @@ import React from 'react';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../utils/environment';
+import triggerGtmEvent from '../siteMetrics/_helper_functions/triggerGtmEvent';
 import ArcAdLib from '../../../features/ads/src/children/ArcAdLib';
 import GetConnextLocalStorageData from './connextLocalStorage';
 
@@ -60,8 +61,7 @@ export const ConnextAuthTrigger = () => {
       if (typeof window.connextInitialLoadComplete !== 'undefined') {
         delete window.connextInitialLoadComplete;
       } else if (UserState.toLowerCase() === 'logged out') {
-        const dataLayer = window.dataLayer || [];
-        dataLayer.push({ event: 'loginEvent_logout' });
+        triggerGtmEvent('loginEvent_logout');
       }
 
       if (isEnabled && !(UserState && UserState.toLowerCase() === 'subscriber')) {
