@@ -25,7 +25,7 @@ const List = (customFields = {}) => {
   itemLimit = parseInt(itemLimit, 10) || 0;
 
   const displayClassesRequiringImg = layout !== 'list-basic'
-    ? ['Top Photo', '1 or 2 Item Feature', 'Left Photo']
+    ? ['Top Photo', '1 or 2 Item Feature', 'Left Photo', 'Left Photo Small']
     : ['Top Photo', '1 or 2 Item Feature'];
 
   const data = useContent({
@@ -44,6 +44,8 @@ const List = (customFields = {}) => {
         return 'top-photo-display-class';
       case 'Left Photo':
         return 'left-photo-display-class';
+      case 'Left Photo Small':
+        return 'left-photo-small-display-class';
       case 'No Photo':
         return 'no-photo-display-class';
       case 'Center Lead Top Photo':
@@ -87,6 +89,7 @@ List.propTypes = {
     displayClass: PropTypes.oneOf([
       'Top Photo',
       'Left Photo',
+      'Left Photo Small',
       'No Photo',
       'Link',
     ]).tag({
