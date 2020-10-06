@@ -97,7 +97,7 @@ const NotAuthMenu = ({
         </div>
         <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
           {!isMobile && renderLoginButton()}
-          <ul className={'subNav-flyout'}>
+          <ul className={'subNav-flyout itemCount-4'}>
             {isMobile && (
               <li className={'flyout-item'}>
                  {renderLoginButton()}
