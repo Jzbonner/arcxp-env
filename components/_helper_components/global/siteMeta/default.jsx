@@ -13,7 +13,7 @@ const SiteMeta = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const siteProps = getProperties(arcSite);
-  const { fbPagesId } = siteProps || {};
+  const { fbAppId } = siteProps || {};
 
   const thumbnailImage = renderImage();
   const contentMeta = getContentMeta();
@@ -50,7 +50,7 @@ const SiteMeta = () => {
       <meta name="twitter:site" content={`@${site}`} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:url" content={url} />
-      <meta name="fb:app_id" content={fbPagesId} />
+      <meta name="fb:app_id" content={fbAppId} />
       <meta property="og:image:secure_url" content={thumbnailImage} />
       <meta property="og:image:type" content="image/jpeg" />
       <meta property="og:image:height" content={`${thumbnailImage.indexOf('/resources/logos/') > -1 ? '200' : '630'}`} />
