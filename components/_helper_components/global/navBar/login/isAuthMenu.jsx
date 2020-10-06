@@ -13,6 +13,7 @@ const isAuthMenu = ({
   showUserMenu,
   setShowUserMenu,
   userStateRef,
+  userId,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -90,7 +91,8 @@ const isAuthMenu = ({
               </li>
             )}
             {arcSite !== 'dayton' && <li className={'flyout-item'}>
-              <a href='/epaper' target='_blank' rel="noopener noreferrer">
+              <a href={`https://epaper.ajc.com/default.aspx?acc=cmg&pub={{site id}}
+              &date=&section=Main&EntitlementCode=epaperHTML5&custregid=${userId}`} target='_blank' rel="noopener noreferrer">
                 ePaper
               </a>
             </li>}
@@ -124,6 +126,7 @@ isAuthMenu.propTypes = {
   showUserMenu: PropTypes.bool,
   setShowUserMenu: PropTypes.func,
   userStateRef: PropTypes.object,
+  userId: PropTypes.string,
 };
 
 export default isAuthMenu;
