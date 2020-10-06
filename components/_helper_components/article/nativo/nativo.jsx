@@ -29,7 +29,15 @@ const Nativo = ({
       }
       return null;
     }
-    return <div className={`${controllerClass} ${controllerClass === 'story-nativo_placeholder--moap' ? 'b-clear-both' : ''}`}></div>;
+    const isBoap = controllerClass === 'story-nativo_placeholder--boap';
+    if (isBoap) {
+      return (
+        <div className='taboola-split'>
+          <div className={controllerClass}></div>
+        </div>
+      );
+    }
+    return <div className={`${controllerClass} b-clear-both`}></div>;
   }
   return null;
 };
