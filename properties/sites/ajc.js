@@ -4,7 +4,7 @@ import appAdsTxt from './appadstxt/ajc.com.json';
 
 export default {
   defaultSiteTitle: 'AJC',
-  fbPagesId: '13310147298',
+  fbPagesId: '366816260017522',
   siteTag: 'ajc',
   cdnOrg: 'ajc',
   cdnSite: 'ajc',
