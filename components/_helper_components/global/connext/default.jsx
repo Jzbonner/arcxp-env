@@ -92,18 +92,23 @@ export const ConnextAuthTrigger = () => {
               // GetArticlesLeft method threw an error, so try an alternate method
               const numberOfArticlesViewed = window.Connext.Storage.GetViewedArticles();
               const currentConversations = window.Connext.Storage.GetCurrentConversations();
-              const { Metered: meteredConversationDetails = {} } = currentConversations;
-              const { Properties: meteredConversationProperties = {} } = meteredConversationDetails;
-              const {
-                ArticleLeft: articlesRemainingFromConversation,
-                PaywallLimit: paywallArticleLimit = 4,
-              } = meteredConversationProperties;
-              if (
-                (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
-                || (articlesRemainingFromConversation !== 0 && numberOfArticlesViewed.length < paywallArticleLimit - 1)
-              ) {
-                // more than 0 article views remaining before reaching the paywall
+              const { Metered: meteredConversationDetails } = currentConversations;
+              if (!meteredConversationDetails) {
+                // meteredConversationDetails is sometimes `null` so just stop & load deferred items
                 loadDeferredItems();
+              } else {
+                const { Properties: meteredConversationProperties = {} } = meteredConversationDetails;
+                const {
+                  ArticleLeft: articlesRemainingFromConversation,
+                  PaywallLimit: paywallArticleLimit = 4,
+                } = meteredConversationProperties;
+                if (
+                  (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
+                  || (articlesRemainingFromConversation !== 0 && numberOfArticlesViewed.length < paywallArticleLimit - 1)
+                ) {
+                  // more than 0 article views remaining before reaching the paywall
+                  loadDeferredItems();
+                }
               }
             }
           }
