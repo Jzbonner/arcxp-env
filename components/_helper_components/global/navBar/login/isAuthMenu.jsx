@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../utils/environment';
+import handleSiteName from '../../../../layouts/_helper_functions/handleSiteName';
 import openMg2Widget from './_helper_functions/openMg2Widget';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 import userIconDark from '../../../../../resources/icons/login/user-icon-dark.svg';
@@ -91,7 +92,7 @@ const isAuthMenu = ({
               </li>
             )}
             {arcSite !== 'dayton' && <li className={'flyout-item'}>
-              <a href={`https://epaper.ajc.com/default.aspx?acc=cmg&pub=${siteCode}
+              <a href={`https://epaper.${handleSiteName(arcSite)}.com/default.aspx?acc=cmg&pub=${siteCode}
               &date=&section=Main&EntitlementCode=epaperHTML5&custregid=${userId}`} target='_blank' rel="noopener noreferrer">
                 ePaper
               </a>
