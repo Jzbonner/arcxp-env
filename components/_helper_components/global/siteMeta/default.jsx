@@ -50,8 +50,8 @@ const SiteMeta = () => {
       <meta name="twitter:site" content={`@${site}`} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:url" content={url} />
-      <meta name="fb:app_id" content={fbAppId} />
-      <meta property="og:image:secure_url" content={thumbnailImage} />
+      <meta property="fb:app_id" content={fbAppId} />
+      <meta property="og:image" content={thumbnailImage} />
       <meta property="og:image:type" content="image/jpeg" />
       <meta property="og:image:height" content={`${thumbnailImage.indexOf('/resources/logos/') > -1 ? '200' : '630'}`} />
       <meta property="og:image:width" content={`${thumbnailImage.indexOf('/resources/logos/') > -1
