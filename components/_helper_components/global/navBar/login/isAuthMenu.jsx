@@ -91,7 +91,7 @@ const isAuthMenu = ({
               </li>
             )}
             {arcSite !== 'dayton' && <li className={'flyout-item'}>
-              <a href={`https://epaper.ajc.com/default.aspx?acc=cmg&pub={{site id}}
+              <a href={`https://epaper.ajc.com/default.aspx?acc=cmg&pub=${siteCode}
               &date=&section=Main&EntitlementCode=epaperHTML5&custregid=${userId}`} target='_blank' rel="noopener noreferrer">
                 ePaper
               </a>
