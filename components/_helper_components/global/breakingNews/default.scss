@@ -72,7 +72,7 @@
   }
 
   .c-breakingNews-heading {
-    @include text-styles(.875em, 1.29, "Gordita-Medium");
+    @include text-styles(.875em, 1.29, "Gordita-Bold");
     
     margin: 0 auto 5px;
     text-transform: uppercase;
@@ -90,10 +90,10 @@
     color: #fff;
     text-transform: none;
 
-    @include text-styles(1em, 1.58, "Gordita-Bold");
+    @include text-styles(1em, 1.58, "Gordita");
 
     @include breakpoint(desktop-sm) {
-      @include text-styles(1.125em, 1.78, "Gordita-Bold");
+      @include text-styles(1.125em, 1.78, "Gordita");
     }
   }
 }
