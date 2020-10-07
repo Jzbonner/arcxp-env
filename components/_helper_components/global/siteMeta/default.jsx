@@ -1,5 +1,6 @@
 import React from 'react';
-import { useAppContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import getContentMeta from '../siteMeta/_helper_functions/getContentMeta';
 import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
@@ -9,6 +10,10 @@ const SiteMeta = () => {
   const {
     metaValue,
   } = appContext;
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const siteProps = getProperties(arcSite);
+  const { fbAppId } = siteProps || {};
 
   const thumbnailImage = renderImage();
   const contentMeta = getContentMeta();
@@ -45,7 +50,9 @@ const SiteMeta = () => {
       <meta name="twitter:site" content={`@${site}`} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:url" content={url} />
-      <meta property="og:image" content={thumbnailImage} />
+      <meta name="fb:app_id" content={fbAppId} />
+      <meta property="og:image:secure_url" content={thumbnailImage} />
+      <meta property="og:image:type" content="image/jpeg" />
       <meta property="og:image:height" content={`${thumbnailImage.indexOf('/resources/logos/') > -1 ? '200' : '630'}`} />
       <meta property="og:image:width" content={`${thumbnailImage.indexOf('/resources/logos/') > -1
         ? '200' : '1200'}`} />
