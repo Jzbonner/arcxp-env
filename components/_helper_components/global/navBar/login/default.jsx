@@ -63,7 +63,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   };
 
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
-  const { UserState } = connextLocalStorageData;
+  const { UserState, UserId } = connextLocalStorageData;
   const getState = () => {
     if (typeof window !== 'undefined' && UserState) {
       let currentState;
@@ -108,6 +108,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
           showUserMenu={showUserMenu}
           setShowUserMenu={setShowUserMenu}
           userStateRef={userStateRef}
+          userId={UserId}
         />
       )}
       {userStateRef.current === 'logged-out' && (

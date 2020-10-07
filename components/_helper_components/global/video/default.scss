@@ -82,12 +82,12 @@ main.c-amp-video {
 
 .video-credit-text {
   text-align: right;
-
-  @include text-styles(.75rem, 1, "Gordita");
-
   display: none;
   position: absolute;
   right: 0;
+  margin-top: 2px;
+
+  @include text-styles(.75rem, 1, "Gordita");
 
   @include breakpoint(desktop-sm) {
     display: block;
