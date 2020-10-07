@@ -12,7 +12,7 @@
 }
 
 .c-gallery-homeSection {
-  width: 100vw;
+  width: calc(100vw - 1rem - 1px);
 }
 
 .gallery-wrapper {
@@ -205,7 +205,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: calc(100vw - 1rem - 1px);
   z-index: 10000;
   font: .75rem "Gordita_Regular", "arial", sans-serif;
   height: 100%;
@@ -438,7 +438,7 @@
       font: 1rem/2.25;
 
       img {
-        width: 100vw;
+        width: calc(100vw - 1rem - 1px);
         display: block;
         margin: 0 auto;
       }
