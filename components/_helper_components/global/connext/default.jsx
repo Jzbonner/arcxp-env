@@ -2,7 +2,6 @@ import React from 'react';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../utils/environment';
-import triggerGtmEvent from '../siteMetrics/_helper_functions/triggerGtmEvent';
 import ArcAdLib from '../../../features/ads/src/children/ArcAdLib';
 import GetConnextLocalStorageData from './connextLocalStorage';
 
@@ -53,17 +52,6 @@ export const ConnextAuthTrigger = () => {
     window.addEventListener('connextMeterLevelSet', () => {
       const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
       const { UserState } = connextLocalStorageData;
-      /*
-        workaround for APD-960, since binding to the logout button click isn't working (connext fires too quickly)
-        and connext actually double-fires the `onNotAuthorized` event.  So we set this property when connext first loads
-        and then we delete it - if it hasn't been already - once the meter level is set (one of the later processes for connext)
-      */
-      if (typeof window.connextInitialLoadComplete !== 'undefined') {
-        delete window.connextInitialLoadComplete;
-      } else if (UserState.toLowerCase() === 'logged out') {
-        triggerGtmEvent('loginEvent_logout');
-      }
-
       if (isEnabled && !(UserState && UserState.toLowerCase() === 'subscriber')) {
         if (window.Connext.Storage.GetCurrentMeterLevel() === 1) {
           // it's "free" content (per connext), so load everything
@@ -71,24 +59,24 @@ export const ConnextAuthTrigger = () => {
         } else {
           const conversationsDataFromLocalStorage = GetConnextLocalStorageData(
             siteCode, configCode, environment, 'Connext_CurrentConversations',
-          ) || { };
-          const { Metered: meteredConversationData } = conversationsDataFromLocalStorage || {};
-          if (!meteredConversationData) {
-            loadDeferredItems();
-          }
-          const { Id: meteredConversationId, Properties: meteredConversationProperties } = meteredConversationData || {};
+          ) || {};
+          const { Metered: meteredConversationData = {} } = conversationsDataFromLocalStorage;
+          const {
+            Id: meteredConversationId = '',
+            Properties: meteredConversationLSProperties = {},
+          } = meteredConversationData;
           const viewedArticlesFromLocalStorage = GetConnextLocalStorageData(
             siteCode, configCode, environment, 'Connext_ViewedArticles',
           ) || {};
           const viewedArticlesArray = viewedArticlesFromLocalStorage[meteredConversationId] || [];
           const {
             ArticleLeft: articlesRemainingFromLocalStorage,
-            PaywallLimit: articleLimitFromLocalStorage = 4,
-          } = meteredConversationProperties || {};
+            PaywallLimit: articleLimitFromLocalStorage,
+          } = meteredConversationLSProperties;
 
           if (
             (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
-            || (viewedArticlesArray.length < articleLimitFromLocalStorage - 1)
+            || (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1)
           ) {
             loadDeferredItems();
           } else {
@@ -103,18 +91,24 @@ export const ConnextAuthTrigger = () => {
 
               // GetArticlesLeft method threw an error, so try an alternate method
               const numberOfArticlesViewed = window.Connext.Storage.GetViewedArticles();
-              const currentConversations = window.Connext.Storage.GetCurrentConversations() || { };
-              const { Metered: meteredConversationDetails } = currentConversations || { Properties: {} };
-              const {
-                ArticleLeft: articlesRemainingFromConversation,
-                PaywallLimit: paywallArticleLimit = 4,
-              } = meteredConversationDetails.Properties;
-              if (
-                (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
-                || (numberOfArticlesViewed.length < paywallArticleLimit - 1)
-              ) {
-                // more than 0 article views remaining before reaching the paywall
+              const currentConversations = window.Connext.Storage.GetCurrentConversations();
+              const { Metered: meteredConversationDetails } = currentConversations;
+              if (!meteredConversationDetails) {
+                // meteredConversationDetails is sometimes `null` so just stop & load deferred items
                 loadDeferredItems();
+              } else {
+                const { Properties: meteredConversationProperties = {} } = meteredConversationDetails;
+                const {
+                  ArticleLeft: articlesRemainingFromConversation,
+                  PaywallLimit: paywallArticleLimit = 4,
+                } = meteredConversationProperties;
+                if (
+                  (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
+                  || (articlesRemainingFromConversation !== 0 && numberOfArticlesViewed.length < paywallArticleLimit - 1)
+                ) {
+                  // more than 0 article views remaining before reaching the paywall
+                  loadDeferredItems();
+                }
               }
             }
           }
@@ -205,6 +199,21 @@ export const ConnextInit = () => {
       });
       window.addEventListener('connextIsSubscriber', () => {
         toggleUserState('authenticated');
+      });
+      window.addEventListener('connextMeterLevelSet', () => {
+        /*
+          workaround for APD-960, since binding to the logout button click isn't working (connext fires too quickly)
+          and connext actually double-fires the "onNotAuthorized" event.  So we set this property when connext first loads
+          and then we delete it - if it hasn't been already - once the meter level is set (one of the later processes for connext)
+        */
+        if (typeof window.connextInitialLoadComplete !== 'undefined') {
+          delete window.connextInitialLoadComplete;
+        } else {
+          const userState = Connext.Storage.GetUserState() || '';
+          if (userState.toLowerCase() === 'logged out') {
+            dataLayer.push({'event': 'loginEvent_logout'});
+          }
+        }
       });
       doc.addEventListener('DOMContentLoaded', () => {
         const connextLoaded = new Event('connextLoaded');
