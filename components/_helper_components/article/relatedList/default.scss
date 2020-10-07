@@ -24,6 +24,11 @@
     .homeList-text {
       display: flex;
       flex-direction: column;
+      max-width: 69%;
+
+      @include breakpoint(tablet) {
+        max-width: 75%;
+      }
 
       .c-label-wrapper {
         font-size: .75rem;
@@ -36,6 +41,11 @@
           font-size: 1.15rem;
         }
       }
+    }
+
+    .homeList-image {
+      max-width: 110px;
+      max-height: 64px;
     }
 
     @include breakpoint(tablet) {
