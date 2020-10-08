@@ -97,8 +97,10 @@ const WrapOutputType = (props) => {
         {!noAds && adsPrebidEnabled
           && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/prebid3.23.0.js`)}`}></script>}
         <Libs />
-        {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} />}
-        {!isHyperlocalContent && <TaboolaHeader/>}
+        {!noAds && !isHyperlocalContent && !isSponsoredContent
+          && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />
+        }
+        {!isHyperlocalContent && <TaboolaHeader />}
         {cssData}
         <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -115,7 +117,7 @@ const WrapOutputType = (props) => {
         )}
         <div id="fusion-app">{children}</div>
         <Fusion />
-        {!isHyperlocalContent && <TaboolaFooter/>}
+        {!isHyperlocalContent && <TaboolaFooter />}
         {connextIsEnabled && (
           <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import PropTypes from 'prop-types';
@@ -37,31 +37,6 @@ const Image = ({
     query: imgQuery,
   });
 
-  useEffect(() => {
-    if (teaseContentType) {
-      const currentTimeInMilliseconds = new Date().getTime();
-      if (!window.lastNativoCall) {
-        window.lastNativoCall = {
-          time: currentTimeInMilliseconds - 1000,
-          timeOutSet: false,
-        };
-      }
-      const { lastNativoCall } = window;
-
-      // calls nativo script 1s after last call or
-      // immediately if it has been more than 1s.
-      if (!lastNativoCall.timeOutSet) {
-        lastNativoCall.timeOutSet = true;
-        setTimeout(() => {
-          lastNativoCall.timeOutSet = false;
-          lastNativoCall.time = new Date().getTime();
-          if (window.PostRelease) {
-            window.PostRelease.Start();
-          }
-        }, 1000 - (currentTimeInMilliseconds - lastNativoCall.time));
-      }
-    }
-  }, [url]);
   const screenSize = checkWindowSize();
 
   let mainCredit;
