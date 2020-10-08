@@ -12,7 +12,11 @@
 }
 
 .c-gallery-homeSection {
-  width: calc(100vw - 1rem - 1px);
+  width: 100vw;
+
+  @include breakpoint(desktop-sm) {
+    width: calc(100vw - 1rem - 1px);
+  }
 }
 
 .gallery-wrapper {
@@ -205,7 +209,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: calc(100vw - 1rem - 1px);
+  width: 100vw;
   z-index: 10000;
   font: .75rem "Gordita_Regular", "arial", sans-serif;
   height: 100%;
