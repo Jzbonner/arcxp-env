@@ -13,21 +13,51 @@ function createNativoKeys(tags, uuid) {
   return JSON.stringify(kvpMap);
 }
 
-const NativoScripts = ({ tags, uuid }) => (
-  <>
-    <script
-      type="text/javascript"
-      dangerouslySetInnerHTML={{
-        __html: `window.ntvConfig = window.ntvConfig || {}; window.ntvConfig.keyValues = ${createNativoKeys(tags, uuid)};`,
-      }}
-    ></script>
-    <script type="text/javascript" src="//s.ntv.io/serve/load.js" data-ntv-set-no-auto-start async></script>
-  </>
-);
+const NativoScripts = ({
+  tags,
+  uuid,
+  layout,
+  currentSite,
+}) => <>
+  <script
+    type="text/javascript"
+    dangerouslySetInnerHTML={{
+      __html: `window.ntvConfig = window.ntvConfig || {}; window.ntvConfig.keyValues = ${createNativoKeys(tags, uuid)};`,
+    }}
+  ></script>
+  <script
+    src="//s.ntv.io/serve/load.js"
+    data-ntv-set-no-auto-start
+    async
+  ></script>
+  {/* only render the following script if it's _not_ an article page, or it's Dayton.com */}
+  {(layout !== 'article-basic' || currentSite === 'dayton') && <script type='text/javascript' dangerouslySetInnerHTML={{
+    __html: `
+      const totalAttempts = 3;
+      let attemptInterval = 500;
+      let thisAttempt = 0;
+      if (window.PostRelease) {
+        window.PostRelease.Start();
+      } else if (thisAttempt < totalAttempts) {
+        // calls nativo script at doubling intervals (starting at 1/2s) until it's available or we run out of attempts
+        setTimeout(() => {
+          if (window.PostRelease) {
+            window.PostRelease.Start();
+            thisAttempt = totalAttempts;
+          }
+          attemptInterval = attemptInterval * 2;
+          thisAttempt++;
+        }, attemptInterval);
+      }`,
+  }}></script>
+  }
+</>;
 
 NativoScripts.propTypes = {
   tags: PropTypes.array,
   uuid: PropTypes.string,
+  layout: PropTypes.string,
+  currentSite: PropTypes.string,
 };
 
 export default NativoScripts;
