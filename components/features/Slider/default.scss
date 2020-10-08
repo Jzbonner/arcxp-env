@@ -8,10 +8,14 @@
 .c-slider-wrapper {
   display: flex;
   flex-direction: column;
+  width: 100vw;
   position: relative;
-  width: calc(100vw - 1rem - 1px);
   overflow: hidden;
   box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+
+  @include breakpoint(desktop-sm) {
+    width: calc(100vw - 1rem - 1px);
+  }
 
   .c-sectionTitle {
     margin-left: 30px;

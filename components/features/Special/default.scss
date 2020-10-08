@@ -6,8 +6,12 @@
   justify-content: center;
   align-items: center;
   min-height: 300px;
-  width: calc(100vw - 1rem - 1px);
+  width: 100vw;
   overflow: hidden;
+  
+  @include breakpoint(desktop-sm) {
+    width: calc(100vw - 1rem - 1px);
+  }
 
   .c-call-to-action {
     display: flex;
