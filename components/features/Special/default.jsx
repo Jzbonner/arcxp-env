@@ -26,7 +26,13 @@ const Special = (customFields = {}) => {
 
   return (
     <a href={url || ''}>
-      <div className="c-special" style={{ background: `${backgroundImgSrc ? `url(${backgroundImgSrc})` : ''}` }}>
+      <div
+        className="c-special"
+           style={{
+             background: `${backgroundImgSrc ? `url(${backgroundImgSrc})` : ''}`,
+             backgroundRepeat: 'no-repeat',
+             backgroundSize: 'cover',
+           }}>
         <div className="c-call-to-action">
           {icon ? <img className="action-icon" src={getIcon()} /> : null}
           {title ? <div className="action-text">
