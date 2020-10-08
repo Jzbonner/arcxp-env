@@ -134,6 +134,10 @@
   box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
   width: 100vw;
 
+  @include breakpoint(desktop-sm) {
+    width: calc(100vw - 1rem - 1px);
+  }
+
   &.c-HS02 {
     padding-bottom: 40px;
   }
@@ -143,6 +147,10 @@
     max-width: 1600px;
     text-align: center;
     margin: 0 auto;
+
+    @include breakpoint(desktop-sm) {
+      width: calc(100vw - 1rem - 1px);
+    }
 
     > div,
     > iframe {
