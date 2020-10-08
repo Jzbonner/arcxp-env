@@ -92,8 +92,9 @@ const isAuthMenu = ({
               </li>
             )}
             {arcSite !== 'dayton' && <li className={'flyout-item'}>
-              <a href={`https://epaper.${handleSiteName(arcSite)}.com/default.aspx?acc=cmg&pub=${siteCode}
-              &date=&section=Main&EntitlementCode=epaperHTML5&custregid=${userId}`} target='_blank' rel="noopener noreferrer">
+              <a href={`https://epaper.${handleSiteName(arcSite)}.com/default.aspx?acc=cmg&pub=${siteCode}&date=&section=Main&EntitlementCode=epaperHTML5&custregid=${userId}`}
+              target='_blank'
+              rel="noopener noreferrer">
                 ePaper
               </a>
             </li>}

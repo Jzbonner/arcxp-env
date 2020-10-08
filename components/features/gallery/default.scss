@@ -13,6 +13,10 @@
 
 .c-gallery-homeSection {
   width: 100vw;
+
+  @include breakpoint(desktop-sm) {
+    width: calc(100vw - 1rem - 1px);
+  }
 }
 
 .gallery-wrapper {

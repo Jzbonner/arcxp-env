@@ -59,7 +59,7 @@
         @include arc-ad-full-width;
 
         .arc_ad[class*="HS02"] {
-          width: 100vw;
+          width: calc(100vw - 1rem - 1px);
           max-width: 1600px;
           text-align: center;
           margin: 0 auto;
@@ -103,6 +103,9 @@
 
       .arc_ad[class*="MP"] {
         @include arc-ad-full-width;
+
+        overflow: hidden;
+        margin: 0 -15px;
 
         .arcad:not(:empty) {
           padding-top: 20px;

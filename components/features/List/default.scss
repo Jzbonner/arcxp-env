@@ -296,7 +296,7 @@
       .headline {
         letter-spacing: -.32px;
 
-        @include text-styles(1rem, 1.38, "Average");
+        @include text-styles(1rem, 1, "Average");
       }
     }
   }
