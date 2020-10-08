@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function createNativoKeys(tags, uuid) {
@@ -13,7 +13,26 @@ function createNativoKeys(tags, uuid) {
   return JSON.stringify(kvpMap);
 }
 
-const NativoScripts = ({ tags, uuid }) => (
+const onloadCallback = (layout, currentSite) => {
+  if (layout !== 'article-basic' || currentSite === 'dayton') {
+    return useEffect(() => {
+      if (typeof window.PostRelease !== 'undefined') {
+        window.PostRelease.Start();
+      } else {
+        /* eslint-disable-next-line no-console */
+        console.error('PostRelease does not exist:', typeof PostRelease);
+      }
+    }, []);
+  }
+  return null;
+};
+
+const NativoScripts = ({
+  tags,
+  uuid,
+  layout,
+  currentSite,
+}) => (
   <>
     <script
       type="text/javascript"
@@ -21,13 +40,20 @@ const NativoScripts = ({ tags, uuid }) => (
         __html: `window.ntvConfig = window.ntvConfig || {}; window.ntvConfig.keyValues = ${createNativoKeys(tags, uuid)};`,
       }}
     ></script>
-    <script type="text/javascript" src="//s.ntv.io/serve/load.js" data-ntv-set-no-auto-start async></script>
+    <script
+      src="//s.ntv.io/serve/load.js"
+      data-ntv-set-no-auto-start
+      async
+      onLoad={onloadCallback(layout, currentSite)}
+    ></script>
   </>
 );
 
 NativoScripts.propTypes = {
   tags: PropTypes.array,
   uuid: PropTypes.string,
+  layout: PropTypes.string,
+  currentSite: PropTypes.string,
 };
 
 export default NativoScripts;
