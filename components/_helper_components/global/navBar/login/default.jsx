@@ -108,7 +108,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
           showUserMenu={showUserMenu}
           setShowUserMenu={setShowUserMenu}
           userStateRef={userStateRef}
-          userId={CustomerRegistrationId}
+          custRegId={CustomerRegistrationId}
         />
       )}
       {userStateRef.current === 'logged-out' && (
