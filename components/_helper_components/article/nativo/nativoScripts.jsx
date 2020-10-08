@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 function createNativoKeys(tags, uuid) {
@@ -13,41 +13,45 @@ function createNativoKeys(tags, uuid) {
   return JSON.stringify(kvpMap);
 }
 
-const onloadCallback = (layout, currentSite) => {
-  if (layout !== 'article-basic' || currentSite === 'dayton') {
-    return useEffect(() => {
-      if (typeof window.PostRelease !== 'undefined') {
-        window.PostRelease.Start();
-      } else {
-        /* eslint-disable-next-line no-console */
-        console.error('PostRelease does not exist:', typeof PostRelease);
-      }
-    }, []);
-  }
-  return null;
-};
-
 const NativoScripts = ({
   tags,
   uuid,
   layout,
   currentSite,
-}) => (
-  <>
-    <script
-      type="text/javascript"
-      dangerouslySetInnerHTML={{
-        __html: `window.ntvConfig = window.ntvConfig || {}; window.ntvConfig.keyValues = ${createNativoKeys(tags, uuid)};`,
-      }}
-    ></script>
-    <script
-      src="//s.ntv.io/serve/load.js"
-      data-ntv-set-no-auto-start
-      async
-      onLoad={onloadCallback(layout, currentSite)}
-    ></script>
-  </>
-);
+}) => <>
+  <script
+    type="text/javascript"
+    dangerouslySetInnerHTML={{
+      __html: `window.ntvConfig = window.ntvConfig || {}; window.ntvConfig.keyValues = ${createNativoKeys(tags, uuid)};`,
+    }}
+  ></script>
+  <script
+    src="//s.ntv.io/serve/load.js"
+    data-ntv-set-no-auto-start
+    async
+  ></script>
+  {/* only render the following script if it's _not_ an article page, or it's Dayton.com */}
+  {(layout !== 'article-basic' || currentSite === 'dayton') && <script type='text/javascript' dangerouslySetInnerHTML={{
+    __html: `
+      const totalAttempts = 3;
+      let attemptInterval = 500;
+      let thisAttempt = 0;
+      if (window.PostRelease) {
+        window.PostRelease.Start();
+      } else if (thisAttempt < totalAttempts) {
+        // calls nativo script at doubling intervals (starting at 1/2s) until it's available or we run out of attempts
+        setTimeout(() => {
+          if (window.PostRelease) {
+            window.PostRelease.Start();
+            thisAttempt = totalAttempts;
+          }
+          attemptInterval = attemptInterval * 2;
+          thisAttempt++;
+        }, attemptInterval);
+      }`,
+  }}></script>
+  }
+</>;
 
 NativoScripts.propTypes = {
   tags: PropTypes.array,

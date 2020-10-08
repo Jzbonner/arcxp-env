@@ -88,7 +88,7 @@ const DefaultOutputType = (props) => {
           && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/${prebidJs}`)}`}></script>}
         <Libs />
         {!noAds && !isHyperlocalContent && !isSponsoredContent
-          && <NativoScripts tags={tags} uuid={uuid} url={articleURL} currentSite={currentSite} />
+          && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />
         }
         {!isHyperlocalContent && <TaboolaHeader/>}
         {currentSite && <link
