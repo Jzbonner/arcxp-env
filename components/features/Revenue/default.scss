@@ -68,6 +68,7 @@
           .c-sponsor {
             @include text-styles(.75rem, 1, "Gordita");
             
+            width: max-content;
             font-weight: 400;
           }
         }
