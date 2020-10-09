@@ -105,7 +105,8 @@
         @include arc-ad-full-width;
 
         overflow: hidden;
-        margin: 0 -15px;
+        margin-left: -15px;
+        margin-right: -15px;
 
         .arcad:not(:empty) {
           padding-top: 20px;
