@@ -62,6 +62,14 @@ export default {
       moapPTD: '1087799',
     },
   },
+  nativo: {
+    sandbox: {
+      lazyLoad: true,
+    },
+    prod: {
+      lazyLoad: false,
+    },
+  },
   metrics: {
     siteID: 'daytondaily',
     siteMetro: 'oh: dayton',

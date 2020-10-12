@@ -61,6 +61,14 @@ export default {
       moapPTD: '1100010',
     },
   },
+  nativo: {
+    sandbox: {
+      lazyLoad: true,
+    },
+    prod: {
+      lazyLoad: false,
+    },
+  },
   metrics: {
     siteID: 'springfieldnews',
     siteMetro: 'oh: dayton',

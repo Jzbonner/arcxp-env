@@ -62,6 +62,14 @@ export default {
       moapPTD: '1087801',
     },
   },
+  nativo: {
+    sandbox: {
+      lazyLoad: true,
+    },
+    prod: {
+      lazyLoad: false,
+    },
+  },
   metrics: {
     siteID: 'journalnews',
     siteMetro: 'oh: dayton',
