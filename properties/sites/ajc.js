@@ -45,6 +45,12 @@ export default {
   appAdsTxt,
   nativoMoapTag: 'https://amp.ajc.com/amp/ntv',
   taboola: {
+    dataPublisher: 'cox-atlantajournal-constitution',
+    taboolaStoryID: 'taboola-ajc-custom-feed',
+    taboolaSectionID: 'taboola-ajc-custom-feed---section-fronts',
+    cdnLink: '//cdn.taboola.com/libtrc/cox-atlantajournal-constitution/loader.js',
+    containerName: 'taboola-ajc-custom-feed',
+    placementName: 'AJC Custom Feed',
     sandbox: {
       moapPTD: '1114521',
       boapPTD: '1097469',
@@ -52,6 +58,14 @@ export default {
     prod: {
       moapPTD: '1099909',
       boapPTD: '1099013',
+    },
+  },
+  nativo: {
+    sandbox: {
+      lazyLoad: true,
+    },
+    prod: {
+      lazyLoad: false,
     },
   },
   ads: {
