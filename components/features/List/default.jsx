@@ -22,7 +22,7 @@ const List = (customFields = {}) => {
         const homeListItems = [...document.querySelectorAll('.c-homeList')];
         homeListItems.forEach((item) => {
           if (item.classList.value.includes('ntv')) {
-            item.parentNode.classList.add('hasNativoAdd');
+            item.parentNode.classList.add('hasNativoAd');
           }
         });
       });
