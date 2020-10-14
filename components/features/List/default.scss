@@ -5,6 +5,13 @@
   flex-wrap: wrap;
   justify-content: flex-start;
 
+  &.hasNativoAd {
+
+    .c-homeList:last-child {
+      display: none;
+    }
+  }
+
   a {
     color: inherit;
   }

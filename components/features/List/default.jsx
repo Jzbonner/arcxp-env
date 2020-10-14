@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
@@ -12,21 +12,28 @@ const List = (customFields = {}) => {
   const { arcSite, layout } = fusionContext;
   const {
     customFields: {
-      content: { contentService = 'collections-api', contentConfigValues } = {},
-      displayClass = '',
-      columns = 1,
-      title = '',
-      moreURL = '',
+      content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', columns = 1, title = '', moreURL = '',
     },
   } = customFields;
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('load', () => {
+        const homeListItems = [...document.querySelectorAll('.c-homeList')];
+        homeListItems.forEach((item) => {
+          if (item.classList.value.includes('ntv')) {
+            item.parentNode.classList.add('hasNativoAd');
+          }
+        });
+      });
+    }
+  }, []);
 
   let { from: startIndex = 1, size: itemLimit = 0 } = contentConfigValues || {};
   startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
   itemLimit = parseInt(itemLimit, 10) || 0;
 
-  const displayClassesRequiringImg = layout !== 'list-basic'
-    ? ['Top Photo', '1 or 2 Item Feature', 'Left Photo', 'Left Photo Small']
-    : ['Top Photo', '1 or 2 Item Feature'];
+  const displayClassesRequiringImg = layout !== 'list-basic' ? ['Top Photo', '1 or 2 Item Feature', 'Left Photo', 'Left Photo Small'] : ['Top Photo', '1 or 2 Item Feature'];
 
   const data = useContent({
     source: contentService,
@@ -62,12 +69,8 @@ const List = (customFields = {}) => {
   if (Array.isArray(data)) {
     return (
       <div className="b-margin-bottom-d40-m20">
-      <FeatureTitle title={title} moreURL={moreURL} />
-        <div
-          className={`c-homeListContainer ${getColumnsMap(
-            columns,
-          )} ${getDisplayClassMap(displayClass)}`}
-        >
+        <FeatureTitle title={title} moreURL={moreURL} />
+        <div className={`c-homeListContainer ${getColumnsMap(columns)} ${getDisplayClassMap(displayClass)}`}>
           {data.map((el, i) => {
             if (startIndex <= i && i < itemLimit + startIndex) {
               return <ListItem key={`ListItem-${i}`} {...el} />;
@@ -86,13 +89,7 @@ List.propTypes = {
     content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
       name: 'Content',
     }),
-    displayClass: PropTypes.oneOf([
-      'Top Photo',
-      'Left Photo',
-      'Left Photo Small',
-      'No Photo',
-      'Link',
-    ]).tag({
+    displayClass: PropTypes.oneOf(['Top Photo', 'Left Photo', 'Left Photo Small', 'No Photo', 'Link']).tag({
       name: 'Display Class',
       defaultValue: 'Top Photo',
     }),
