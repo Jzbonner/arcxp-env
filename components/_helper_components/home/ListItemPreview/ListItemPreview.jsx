@@ -4,13 +4,18 @@ import { useContent } from 'fusion:content';
 import debounce from '../../../features/gallery/_helper_functions/debounce';
 import './default.scss';
 
-let baseText = '';
-
 const ListItemPreview = ({ id }) => {
   const containerEl = useRef(null);
   const textEl = useRef(null);
   const [text, setText] = useState('');
   const [preRender, setPreRender] = useState(false);
+  const [baseText, _setBaseText] = useState('');
+  const baseTextRef = useRef(baseText);
+
+  const setBaseText = (data) => {
+    baseTextRef.current = data;
+    _setBaseText(data);
+  };
 
   const storyData = useContent({
     source: 'content-api',
@@ -39,11 +44,7 @@ const ListItemPreview = ({ id }) => {
   };
 
   useEffect(() => {
-    if (storyData && storyData.headlines && storyData.headlines.web) {
-      baseText = storyData.headlines.web.concat('...');
-      setText(storyData.headlines.web.concat('...'));
-      setPreRender(true);
-    } else if (
+    if (
       storyData
       && storyData.content_elements
       && storyData.content_elements[0]
@@ -53,7 +54,7 @@ const ListItemPreview = ({ id }) => {
       const div = document.createElement('div');
       div.innerHTML = html;
       const textContent = div.textContent || div.innerText || '';
-      baseText = textContent.concat('...');
+      setBaseText(textContent.concat('...'));
       setText(textContent.concat('...'));
       setPreRender(true);
     }
@@ -67,7 +68,7 @@ const ListItemPreview = ({ id }) => {
     textEl.current.style.opacity = 0;
 
     const runResize = debounce(() => {
-      textEl.current.innerText = baseText;
+      textEl.current.innerText = baseTextRef.current;
       setText(lineClamp(containerEl, textEl));
       textEl.current.style.opacity = 1;
     }, 500);
