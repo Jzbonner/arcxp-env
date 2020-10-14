@@ -38,8 +38,10 @@ const NativoScripts = ({
       <script src="//s.ntv.io/serve/load.js"></script>
     </>}
 
+    {(lazyLoad || (layout === 'article-basic' && currentSite !== 'dayton')) && <script
+      src="//s.ntv.io/serve/load.js" data-ntv-set-no-auto-start async></script>
+    }
     {/* only render the following script if it's _not_ an article page, or it's Dayton.com */}
-    {lazyLoad && <script src="//s.ntv.io/serve/load.js" data-ntv-set-no-auto-start async></script>}
     {lazyLoad && (layout !== 'article-basic' || currentSite === 'dayton') && <script
       type='text/javascript'
       dangerouslySetInnerHTML={{
