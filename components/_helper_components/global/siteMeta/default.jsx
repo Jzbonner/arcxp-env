@@ -4,6 +4,7 @@ import { useAppContext, useFusionContext } from 'fusion:context';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import getContentMeta from '../siteMeta/_helper_functions/getContentMeta';
 import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
+import { safeHtml } from '../utils/stringUtils';
 
 const SiteMeta = () => {
   const appContext = useAppContext();
@@ -39,13 +40,15 @@ const SiteMeta = () => {
   let pageTitle = seoTitle;
   if (!seoTitle) pageTitle = title;
 
+  const parsedDescription = safeHtml(description, { allowedTags: [], allowedAttributes: {} });
+
   return (
     <>
       <link rel="apple-touch-icon" href={appleIconPath} />
       <link rel="shortcut icon" href={faviconPath} />
       {!isNativoLandingPage && <link rel="canonical" href={updatedURL} />}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:description" content={parsedDescription} />
       <meta name="twitter:image" content={thumbnailImage} />
       <meta name="twitter:site" content={`@${site}`} />
       <meta name="twitter:title" content={title} />
@@ -59,7 +62,7 @@ const SiteMeta = () => {
       <meta property="og:title" content={title} />
       <meta property="og:type" content={`${isNonContentPage ? 'website' : 'article'}`} />
       {!isNativoLandingPage && <meta property="og:url" content={updatedURL} />}
-      <meta property="og:description" content={description} />
+      <meta property="og:description" content={parsedDescription} />
       <meta property="og:site_name" content={site} />
       <title>{pageTitle}</title>
       <meta name="thumbnail" content={thumbnailImage} />
