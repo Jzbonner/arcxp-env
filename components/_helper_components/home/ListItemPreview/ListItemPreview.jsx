@@ -22,11 +22,9 @@ const ListItemPreview = ({ id }) => {
   const lineClamp = (container, paragraph) => {
     if (container && container.current && paragraph && paragraph.current) {
       const containerHeight = container.current.clientHeight;
-      let newText = '';
+      let newText = paragraph.current.innerText;
 
       while (paragraph.current.clientHeight > containerHeight) {
-        newText = paragraph.current.innerText;
-
         newText = newText.substring(0, newText.length - 3);
         newText = newText.split(' ');
         newText.pop();
@@ -45,16 +43,18 @@ const ListItemPreview = ({ id }) => {
       baseText = storyData.headlines.web.concat('...');
       setText(storyData.headlines.web.concat('...'));
       setPreRender(true);
-    }
-
-    if (
+    } else if (
       storyData
       && storyData.content_elements
       && storyData.content_elements[0]
       && storyData.content_elements[0].type === 'text'
     ) {
-      baseText = storyData.content_elements[0].content.concat('...');
-      setText(storyData.content_elements[0].content.concat('...'));
+      const html = storyData.content_elements[0].content;
+      const div = document.createElement('div');
+      div.innerHTML = html;
+      const textContent = div.textContent || div.innerText || '';
+      baseText = textContent.concat('...');
+      setText(textContent.concat('...'));
       setPreRender(true);
     }
   }, [storyData]);
