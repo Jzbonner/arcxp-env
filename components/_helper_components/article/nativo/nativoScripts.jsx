@@ -31,7 +31,7 @@ const NativoScripts = ({
         __html: `window.ntvConfig = window.ntvConfig || {}; window.ntvConfig.keyValues = ${createNativoKeys(tags, uuid)};`,
       }}
     ></script>
-    {!lazyLoad && <>
+    {!lazyLoad && (layout !== 'article-basic' || currentSite === 'dayton') && <>
       <script type="text/javascript" dangerouslySetInnerHTML={{
         __html: "let _prx = window._prx || []; _prx.push(['cfg.SetNoAutoStart']);",
       }}></script>
