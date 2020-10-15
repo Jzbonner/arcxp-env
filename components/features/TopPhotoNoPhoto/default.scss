@@ -18,6 +18,10 @@
 
     .column-2 {
       margin-bottom: 10px;
+
+      @include breakpoint(desktop-sm) {
+        min-height: 260px;
+      }
     }
 
     .home-headline,
@@ -41,7 +45,11 @@
           margin-top: 3px;
           letter-spacing: -.16px;
 
-          @include text-styles(1rem, 1.38, "Average");
+          @include text-styles(1.25rem, 1.38, "Average");
+
+          @include breakpoint(desktop-lg) {
+            @include text-styles(1.2rem, 1.38, "Average");
+          }
         }
       }
     }
