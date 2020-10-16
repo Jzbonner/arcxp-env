@@ -99,7 +99,7 @@ export default {
       clientCode: 'ajc',
       environment: 'stage',
       siteCode: 'DN',
-      configCode: 'DN_PROD_DEFAULT',
+      configCode: 'DN_STAGE_DEFAULT',
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
