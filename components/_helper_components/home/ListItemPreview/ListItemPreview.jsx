@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import debounce from '../../../features/gallery/_helper_functions/debounce';
+import { safeHtml } from '../../global/utils/stringUtils';
 import './default.scss';
 
 const ListItemPreview = ({ id }) => {
@@ -44,16 +45,17 @@ const ListItemPreview = ({ id }) => {
   };
 
   useEffect(() => {
-    if (
+    if (storyData && storyData.headlines && storyData.headlines.web) {
+      setBaseText(storyData.headlines.web.concat('...'));
+      setText(storyData.headlines.web.concat('...'));
+      setPreRender(true);
+    } else if (
       storyData
       && storyData.content_elements
       && storyData.content_elements[0]
       && storyData.content_elements[0].type === 'text'
     ) {
-      const html = storyData.content_elements[0].content;
-      const div = document.createElement('div');
-      div.innerHTML = html;
-      const textContent = div.textContent || div.innerText || '';
+      const textContent = safeHtml(storyData.content_elements[0].content, { allowedTags: [], allowedAttributes: {} });
       setBaseText(textContent.concat('...'));
       setText(textContent.concat('...'));
       setPreRender(true);
