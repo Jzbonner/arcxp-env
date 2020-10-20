@@ -13,7 +13,7 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
   const appContext = useAppContext();
   const { layout } = appContext;
   const currentEnv = fetchEnv();
-  const { taboola, siteName, nativo } = getProperties(arcSite);
+  const { taboola, siteName } = getProperties(arcSite);
   const {
     dataPublisher,
     taboolaStoryID,
@@ -22,7 +22,6 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
     placementName,
   } = taboola || {};
   const { moapPTD, boapPTD } = taboola[currentEnv] || {};
-  const { lazyLoad: lazyLoadNativo = false } = nativo[currentEnv];
   if (ampPage) {
     return (
       <div className="c-section b-margin-bottom-d40-m20">
@@ -43,7 +42,7 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
 
   useEffect(() => {
     const taboolaScript = document.createElement('script');
-    taboolaScript.innerHTML = taboolaModuleScript(layout, containerName, placementName, moapPTD, boapPTD, siteName, lazyLoadNativo);
+    taboolaScript.innerHTML = taboolaModuleScript(layout, containerName, placementName, moapPTD, boapPTD);
     taboolaScript.async = true;
     if (lazyLoad) {
       deferThis({ script: taboolaScript });
