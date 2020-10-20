@@ -111,6 +111,7 @@ export default {
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
+      pubParam: 'SNS',
     },
     prod: {
       isEnabled: true,
@@ -121,6 +122,7 @@ export default {
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
+      pubParam: 'SNS',
     },
   },
   video: {
