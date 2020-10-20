@@ -20,7 +20,7 @@ const isAuthMenu = ({
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
   const { connext, cdnSite } = getProperties(arcSite);
-  const { siteCode } = connext[currentEnv] || {};
+  const { siteCode, pubParam } = connext[currentEnv] || {};
 
   let source;
   if (isFlyout) {
@@ -92,7 +92,7 @@ const isAuthMenu = ({
               </li>
             )}
             {arcSite !== 'dayton' && <li className={'flyout-item'}>
-              <a href={`https://epaper.${handleSiteName(arcSite)}.com/default.aspx?acc=cmg&pub=${siteCode}&date=&section=Main&EntitlementCode=epaperHTML5&custregid=${custRegId}`}
+              <a href={`https://epaper.${handleSiteName(arcSite)}.com/default.aspx?acc=cmg&pub=${pubParam}&date=&section=Main&EntitlementCode=epaperHTML5&custregid=${custRegId}`}
               target='_blank'
               rel="noopener noreferrer">
                 ePaper
