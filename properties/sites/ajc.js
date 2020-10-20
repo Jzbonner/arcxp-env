@@ -101,6 +101,7 @@ export default {
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
       allowMeter: true,
+      pubParam: 'AJC',
     },
     prod: {
       isEnabled: true,
@@ -112,6 +113,7 @@ export default {
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
       allowMeter: false,
+      pubParam: 'AJC',
     },
   },
   video: {
