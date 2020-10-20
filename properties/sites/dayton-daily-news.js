@@ -79,6 +79,7 @@ export default {
   },
   adsPath: 'dayton_np/ddn_web_default',
   favicon: '/resources/icons/favicons/Ohio/dayton-daily-news-favicon.ico',
+  appleIcon: '/resources/appleTouch/ohio/DDN-AppleTouch-152x152.png',
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.daytondailynews.com/amp/ntv',
@@ -108,10 +109,11 @@ export default {
       clientCode: 'ajc',
       environment: 'stage',
       siteCode: 'DN',
-      configCode: 'DN_PROD_DEFAULT',
+      configCode: 'DN_STAGE_DEFAULT',
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
+      pubParam: 'DDN',
     },
     prod: {
       isEnabled: true,
@@ -122,6 +124,7 @@ export default {
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
+      pubParam: 'DDN',
     },
   },
   video: {
