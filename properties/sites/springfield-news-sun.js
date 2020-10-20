@@ -78,6 +78,7 @@ export default {
   },
   adsPath: 'dayton_np/spns_web_default',
   favicon: '/resources/icons/favicons/Ohio/springfield-news-sun-favicon.ico',
+  appleIcon: '/resources/appleTouch/ohio/SNS-AppleTouch-152x152.png',
   adsTxt,
   nativoMoapTag: 'https://amp.springfieldnewssun.com/amp/ntv',
   ads: {
