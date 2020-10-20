@@ -2,6 +2,8 @@ import React from 'react';
 import { useAppContext } from 'fusion:context';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import getContentMeta from './_helper_functions/getContentMeta';
+import { safeHtml } from '../utils/stringUtils';
+
 
 const SiteMetaAmp = () => {
   const appContext = useAppContext();
@@ -31,12 +33,14 @@ const SiteMetaAmp = () => {
   let pageTitle = seoTitle;
   if (!seoTitle) pageTitle = title;
 
+  const parsedDescription = safeHtml(description, { allowedTags: [], allowedAttributes: {} });
+
   return (
     <>
       <link rel="apple-touch-icon" href={appleIconPath} />
       <link rel="shortcut icon" href={faviconPath} />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:description" content={parsedDescription} />
       <meta name="twitter:image" content={thumbnailImage} />
       <meta name="twitter:site" content={`@${site}`} />
       <meta name="twitter:title" content={title} />
@@ -49,7 +53,7 @@ const SiteMetaAmp = () => {
       <meta property="og:title" content={title} />
       <meta property="og:type" content={`${isNonContentPage ? 'website' : 'article'}`} />
       {!isNativoLandingPage && <meta property="og:url" content={url} />}
-      <meta property="og:description" content={description} />
+      <meta property="og:description" content={parsedDescription} />
       <meta property="og:site_name" content={site} />
       <title>{pageTitle}</title>
       <meta name="thumbnail" content={thumbnailImage} />
