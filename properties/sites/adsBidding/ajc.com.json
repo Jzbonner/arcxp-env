@@ -116,12 +116,32 @@
         "bids": [
           {
             "bidder": "appnexus",
-            "labels": ["desktop1", "tablet1", "phone"],
+            "labels": ["desktop1"],
             "params": {
               "publisher": "AJC",
               "placementGroup": "ROS",
-              "placementId": "17657464",
-              "placementName": "AJC_ROS_HP02"
+              "placementId": "20395735",
+              "placementName": "AJC_ROS_HP02_Desktop"
+            }
+          },
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "20395739",
+              "placementName": "AJC_ROS_HP02_Tablet"
+            }
+          },
+          {
+            "bidder": "appnexus",
+            "labels": ["phone"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "20395740",
+              "placementName": "AJC_ROS_HP02_Mobile"
             }
           },
           {
@@ -150,11 +170,29 @@
           },
           {
             "bidder": "rubicon",
-            "labels": ["desktop1", "tablet1"],
+            "labels": ["desktop1"],
             "params": {
               "accountId": "21858",
               "siteId": "303388",
-              "zoneId": "1529036"
+              "zoneId": "1867418"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["tablet1"],
+            "params": {
+              "accountId": "21858",
+              "siteId": "303388",
+              "zoneId": "1867420"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["phone"],
+            "params": {
+              "accountId": "21858",
+              "siteId": "303388",
+              "zoneId": "1867422"
             }
           },
           {
@@ -287,7 +325,7 @@
             "params": {
               "publisher": "AJC",
               "placementGroup": "ROS",
-              "placementId": "17657466",
+              "placementId": "20392482",
               "placementName": "AJC_ROS_DesktopTablet_RP01-300x250"
             }
           },
@@ -295,7 +333,7 @@
             "bidder": "aol",
             "labels": ["desktop3"],
             "params": {
-              "placement": "5174477",
+              "placement": "5257395",
               "network": "11741.1"
             }
           },
@@ -303,7 +341,7 @@
             "bidder": "aol",
             "labels": ["tablet2"],
             "params": {
-              "placement": "5174486",
+              "placement": "5257398",
               "network": "11741.1"
             }
           },
@@ -313,7 +351,7 @@
             "params": {
               "accountId": "21858",
               "siteId": "303388",
-              "zoneId": "1529040"
+              "zoneId": "1867426"
             }
           },
           {
@@ -340,7 +378,7 @@
             "params": {
               "publisher": "AJC",
               "placementGroup": "ROS",
-              "placementId": "17657466",
+              "placementId": "20392481",
               "placementName": "AJC_ROS_DesktopTablet_RP01-300x600"
             }
           },
@@ -348,7 +386,7 @@
             "bidder": "aol",
             "labels": ["desktop4"],
             "params": {
-              "placement": "5174477",
+              "placement": "5257394",
               "network": "11741.1"
             }
           },
@@ -356,7 +394,7 @@
             "bidder": "aol",
             "labels": ["tablet3"],
             "params": {
-              "placement": "5174486",
+              "placement": "5257399",
               "network": "11741.1"
             }
           },
@@ -366,7 +404,7 @@
             "params": {
               "accountId": "21858",
               "siteId": "303388",
-              "zoneId": "1529040"
+              "zoneId": "1867424"
             }
           },
           {
@@ -544,7 +582,7 @@
             "params": {
               "publisher": "AJC",
               "placementGroup": "ROS",
-              "placementId": "17657466",
+              "placementId": "20392483",
               "placementName": "AJC_ROS_DesktopTablet_RP09-300x250"
             }
           },
@@ -552,7 +590,7 @@
             "bidder": "aol",
             "labels": ["desktop3"],
             "params": {
-              "placement": "5174477",
+              "placement": "5257396",
               "network": "11741.1"
             }
           },
@@ -560,7 +598,7 @@
             "bidder": "aol",
             "labels": ["tablet2"],
             "params": {
-              "placement": "5174486",
+              "placement": "5257397",
               "network": "11741.1"
             }
           },
@@ -570,7 +608,7 @@
             "params": {
               "accountId": "21858",
               "siteId": "303388",
-              "zoneId": "1529040"
+              "zoneId": "1867428"
             }
           },
           {
