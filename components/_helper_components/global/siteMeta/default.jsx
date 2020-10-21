@@ -41,11 +41,16 @@ const SiteMeta = () => {
   if (!seoTitle) pageTitle = title;
 
   const parsedDescription = safeHtml(description, { allowedTags: [], allowedAttributes: {} });
+  // cap meta description to the first period to prevent run away descriptions. Google has no limit but recommends <= 150 chars.
+  const sentencePos = parsedDescription.indexOf('.') + 1;
+  const metaDescParsed = parsedDescription.substring(0, (sentencePos > 0) ? sentencePos : 150);
 
   return (
     <>
       <link rel="apple-touch-icon" href={appleIconPath} />
       <link rel="shortcut icon" href={faviconPath} />
+      <title>{pageTitle}</title>
+      <meta name="description" content={metaDescParsed} />
       {!isNativoLandingPage && <link rel="canonical" href={updatedURL} />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={parsedDescription} />
@@ -64,7 +69,6 @@ const SiteMeta = () => {
       {!isNativoLandingPage && <meta property="og:url" content={updatedURL} />}
       <meta property="og:description" content={parsedDescription} />
       <meta property="og:site_name" content={site} />
-      <title>{pageTitle}</title>
       <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
       {!isNonContentPage && <meta property="article:opinion" content={isOpinion.toString()} />}
