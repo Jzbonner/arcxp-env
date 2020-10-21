@@ -48,7 +48,7 @@
           @include text-styles(1.25rem, 1.38, "Average");
           
           @include breakpoint(desktop-sm) {
-            @include text-styles(1rem, 1.38, "Average");
+            @include text-styles(1.1rem, 1.38, "Average");
           }
           
           @include breakpoint(desktop-lg) {
@@ -73,6 +73,10 @@
       letter-spacing: -.16px;
 
       @include text-styles(1rem, 1.38, "Average");
+
+      @include breakpoint(desktop-lg) {
+        @include text-styles(1.2rem, 1.38, "Average");
+      }
     }
   }
 }
