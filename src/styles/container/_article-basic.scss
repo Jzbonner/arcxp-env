@@ -69,3 +69,15 @@
 .c-clear-both:empty {
   display: none;
 }
+
+body .c-articleContent .c-articleBodyContainer.is-safari .c-section {
+
+  &:not(.full-width) {
+
+    .Mg2-connext[data-display-type].paywall[data-display-type="inline"] {
+      @include breakpoint(desktop-sm) {
+        width: calc(100% + 330px);
+      }
+    }
+  }
+}
