@@ -140,6 +140,7 @@ export const adSlots = {
   },
   'RP01 300x250': {
     slotName: 'RP01',
+    biddingName: 'RP01-300x250',
     dimensions: [
       [
         [300, 250],
@@ -151,6 +152,7 @@ export const adSlots = {
   },
   'RP01 300x600': {
     slotName: 'RP01',
+    biddingName: 'RP01-300x600',
     dimensions: [
       [
         [300, 600],
@@ -285,6 +287,7 @@ export const adSlots = {
   },
   'RP09 300x250': {
     slotName: 'RP09',
+    biddingName: 'RP09-300x250',
     dimensions: [
       [
         [300, 250],
