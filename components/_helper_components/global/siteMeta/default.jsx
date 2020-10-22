@@ -45,7 +45,7 @@ const SiteMeta = () => {
   return (
     <>
       <link rel="apple-touch-icon" href={appleIconPath} />
-      <link rel="shortcut icon" href={faviconPath} />
+      <link rel="icon" type="image/png" href={faviconPath} />
       {!isNativoLandingPage && <link rel="canonical" href={updatedURL} />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={parsedDescription} />

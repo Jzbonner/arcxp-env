@@ -79,7 +79,7 @@ export default {
   },
   adsPath: 'dayton_np/ddn_web_default',
   favicon: '/resources/icons/favicons/Ohio/dayton-daily-news-favicon.ico',
-  appleIcon: '/resources/appleTouch/ohio/DDN-AppleTouch-152x152.png',
+  appleIcon: '/resources/icons/appleTouch/ohio/DDN-AppleTouch-152x152-2.png',
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.daytondailynews.com/amp/ntv',

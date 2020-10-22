@@ -79,7 +79,7 @@ export default {
   },
   adsPath: 'dayton_np/jnws_web_default',
   favicon: '/resources/icons/favicons/Ohio/journal-news-favicon.ico',
-  appleIcon: '/resources/appleTouch/ohio/JN-AppleTouch-152x152.png',
+  appleIcon: '/resources/icons/appleTouch/ohio/JN-AppleTouch-152x152-2.png',
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.journal-news.com/amp/ntv',
