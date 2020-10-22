@@ -39,7 +39,7 @@
           margin-top: .2rem;
           letter-spacing: -.16px;
 
-          @include text-styles(1.75rem, 1.14, "Average");
+          @include text-styles(1.75rem, 1.28, "Average");
         }
       }
     }
@@ -86,7 +86,7 @@
             }
 
             @include breakpoint(desktop-lg) {
-              @include text-styles(1.2rem, 1.5. "Average");
+              @include text-styles(1.2rem, 1.5, "Average");
             }
           }
         }
