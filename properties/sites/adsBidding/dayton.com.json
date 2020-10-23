@@ -115,12 +115,32 @@
         "bids": [
           {
             "bidder": "appnexus",
-            "labels": ["desktop1", "tablet1", "phone"],
+            "labels": ["desktop1"],
             "params": {
               "publisher": "Dayton.com",
               "placementGroup": "ROS",
-              "placementId": "19064885",
-              "placementName": "Dayton.com_ROS_HP02"
+              "placementId": "20392487",
+              "placementName": "Dayton.com_ROS_HP02_Desktop"
+            }
+          },
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "Dayton.com",
+              "placementGroup": "ROS",
+              "placementId": "20392488",
+              "placementName": "Dayton.com_ROS_HP02_Tablet"
+            }
+          },
+          {
+            "bidder": "appnexus",
+            "labels": ["phone"],
+            "params": {
+              "publisher": "Dayton.com",
+              "placementGroup": "ROS",
+              "placementId": "20392489",
+              "placementName": "Dayton.com_ROS_HP02_Mobile"
             }
           }
         ]

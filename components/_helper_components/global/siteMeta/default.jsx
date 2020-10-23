@@ -4,6 +4,7 @@ import { useAppContext, useFusionContext } from 'fusion:context';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import getContentMeta from '../siteMeta/_helper_functions/getContentMeta';
 import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
+import { safeHtml } from '../utils/stringUtils';
 
 const SiteMeta = () => {
   const appContext = useAppContext();
@@ -39,13 +40,20 @@ const SiteMeta = () => {
   let pageTitle = seoTitle;
   if (!seoTitle) pageTitle = title;
 
+  const parsedDescription = safeHtml(description, { allowedTags: [], allowedAttributes: {} });
+  // cap meta description to the first period to prevent run away descriptions. Google has no limit but recommends <= 150 chars.
+  const sentencePos = parsedDescription.indexOf('.') + 1;
+  const metaDescParsed = parsedDescription.substring(0, (sentencePos > 0) ? sentencePos : 150);
+
   return (
     <>
       <link rel="apple-touch-icon" href={appleIconPath} />
       <link rel="shortcut icon" href={faviconPath} />
+      <title>{pageTitle}</title>
+      { metaDescParsed ? <meta name="description" content={metaDescParsed} /> : null }
       {!isNativoLandingPage && <link rel="canonical" href={updatedURL} />}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:description" content={parsedDescription} />
       <meta name="twitter:image" content={thumbnailImage} />
       <meta name="twitter:site" content={`@${site}`} />
       <meta name="twitter:title" content={title} />
@@ -59,9 +67,8 @@ const SiteMeta = () => {
       <meta property="og:title" content={title} />
       <meta property="og:type" content={`${isNonContentPage ? 'website' : 'article'}`} />
       {!isNativoLandingPage && <meta property="og:url" content={updatedURL} />}
-      <meta property="og:description" content={description} />
+      <meta property="og:description" content={parsedDescription} />
       <meta property="og:site_name" content={site} />
-      <title>{pageTitle}</title>
       <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
       {!isNonContentPage && <meta property="article:opinion" content={isOpinion.toString()} />}

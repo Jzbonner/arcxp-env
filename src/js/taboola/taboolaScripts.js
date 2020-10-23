@@ -39,7 +39,7 @@ const taboolaFooterScript = (layout) => {
   return null;
 };
 
-const taboolaModuleScript = (layout, container, placement, moapPTD, boapPTD, siteName, lazyLoadNativo) => {
+const taboolaModuleScript = (layout, container, placement, moapPTD, boapPTD) => {
   let containerName;
   let placementName;
   if (layout) {
@@ -55,7 +55,7 @@ const taboolaModuleScript = (layout, container, placement, moapPTD, boapPTD, sit
         target_type: 'mix'
       });
 
-      if (${lazyLoadNativo && moapPTD && boapPTD}) {
+      if (${moapPTD && boapPTD}) {
         let renderedBoap = false;
         let renderedMoap = false;
         _taboola.push({

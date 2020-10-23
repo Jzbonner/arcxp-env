@@ -39,6 +39,8 @@ export default {
     muteON: true,
     autoplayNext: true,
   },
+  favicon: '/resources/icons/favicons/AJC/favicon.ico',
+  appleIcon: '/resources/appleTouch/ajc/favicon-apple-touch-icon.png',
   weatherPageURL: '/atlanta-weather/',
   adsPath: 'atlanta_np/ajc_web_default',
   adsTxt,
@@ -101,6 +103,7 @@ export default {
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
       allowMeter: true,
+      pubParam: 'AJC',
     },
     prod: {
       isEnabled: true,
@@ -112,6 +115,7 @@ export default {
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
       allowMeter: false,
+      pubParam: 'AJC',
     },
   },
   video: {

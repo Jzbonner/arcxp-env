@@ -79,6 +79,7 @@ export default {
   },
   adsPath: 'dayton_np/jnws_web_default',
   favicon: '/resources/icons/favicons/Ohio/journal-news-favicon.ico',
+  appleIcon: '/resources/appleTouch/ohio/JN-AppleTouch-152x152.png',
   adsTxt,
   appAdsTxt,
   nativoMoapTag: 'https://amp.journal-news.com/amp/ntv',
@@ -112,6 +113,7 @@ export default {
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
+      pubParam: 'JN',
     },
     prod: {
       isEnabled: true,
@@ -122,6 +124,7 @@ export default {
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
+      pubParam: 'JN',
     },
   },
   video: {
