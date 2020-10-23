@@ -75,23 +75,23 @@ export const ConnextAuthTrigger = () => {
           && viewedArticlesArray.length < articleLimitFromLocalStorage - 1
         )
       ) {
-        // console.error(
-        //   `connext debugging >> (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
-        //  || (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1)`,
-        //   (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0),
-        //   'or',
-        //   (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1),
-        //   'articlesRemainingFromLocalStorage',
-        //   articlesRemainingFromLocalStorage,
-        //   'viewedArticlesArray.length',
-        //   viewedArticlesArray.length,
-        //   'articleLimitFromLocalStorage - 1',
-        //   articleLimitFromLocalStorage - 1,
-        //   'viewedArticlesFromLocalStorage',
-        //   viewedArticlesFromLocalStorage,
-        //   'conversationsDataFromLocalStorage',
-        //   conversationsDataFromLocalStorage,
-        // );
+        console.log(
+          `connext debugging >> (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
+         || (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1)`,
+          (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0),
+          'or',
+          (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1),
+          'articlesRemainingFromLocalStorage',
+          articlesRemainingFromLocalStorage,
+          'viewedArticlesArray.length',
+          viewedArticlesArray.length,
+          'articleLimitFromLocalStorage - 1',
+          articleLimitFromLocalStorage - 1,
+          'viewedArticlesFromLocalStorage',
+          viewedArticlesFromLocalStorage,
+          'conversationsDataFromLocalStorage',
+          conversationsDataFromLocalStorage,
+        );
         // there are > 0 articles remaining before hitting the limit
         loadDeferredItems();
       } else {
@@ -118,31 +118,31 @@ export const ConnextAuthTrigger = () => {
             && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft > 0)
           )
         ) {
-          // console.error(
-          //   'connext debugging >> (articlesRemainingFromConversation && articlesRemainingFromConversation > 0) || (articlesRemainingFromConversation !== 0 && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft > 0))',
-          //   '(articlesRemainingFromConversation',
-          //   articlesRemainingFromConversation,
-          //   'and',
-          //   articlesRemainingFromConversation > 0,
-          //   ') or',
-          //   articlesRemainingFromConversation !== 0,
-          //   'and (',
-          //   numberOfArticlesViewed.length < paywallArticleLimit - 1,
-          //   'or',
-          //   numberOfArticlesLeft > 0,
-          //   ') currentConversation',
-          //   currentConversation,
-          //   'articlesRemainingFromConversation',
-          //   articlesRemainingFromConversation,
-          //   'numberOfArticlesViewed',
-          //   numberOfArticlesViewed,
-          //   'numberOfArticlesViewed.length',
-          //   numberOfArticlesViewed.length,
-          //   'paywallArticleLimit - 1',
-          //   paywallArticleLimit - 1,
-          //   'numberOfArticlesLeft',
-          //   numberOfArticlesLeft,
-          // );
+          console.log(
+            'connext debugging >> (articlesRemainingFromConversation && articlesRemainingFromConversation > 0) || (articlesRemainingFromConversation !== 0 && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft > 0))',
+            '(articlesRemainingFromConversation',
+            articlesRemainingFromConversation,
+            'and',
+            articlesRemainingFromConversation > 0,
+            ') or',
+            articlesRemainingFromConversation !== 0,
+            'and (',
+            numberOfArticlesViewed.length < paywallArticleLimit - 1,
+            'or',
+            numberOfArticlesLeft > 0,
+            ') currentConversation',
+            currentConversation,
+            'articlesRemainingFromConversation',
+            articlesRemainingFromConversation,
+            'numberOfArticlesViewed',
+            numberOfArticlesViewed,
+            'numberOfArticlesViewed.length',
+            numberOfArticlesViewed.length,
+            'paywallArticleLimit - 1',
+            paywallArticleLimit - 1,
+            'numberOfArticlesLeft',
+            numberOfArticlesLeft,
+          );
           loadDeferredItems();
         }
       }
