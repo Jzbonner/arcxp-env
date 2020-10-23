@@ -93,7 +93,12 @@ const StoryPageLayout = () => {
   const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP09-Story-Desktop'} />;
   const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP09-Story-Tablet'} />;
 
-  const isSafari = !!(!navigator.userAgent.includes('Chrome') && navigator.userAgent.match(/Safari/i));
+  const windowExists = typeof window !== 'undefined';
+
+  const isSafari = () => {
+    if (windowExists) return !!(!navigator.userAgent.includes('Chrome') && navigator.userAgent.match(/Safari/i));
+    return null;
+  };
 
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
