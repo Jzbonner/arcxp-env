@@ -13,7 +13,7 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
   const appContext = useAppContext();
   const { layout } = appContext;
   const currentEnv = fetchEnv();
-  const { taboola, siteName, nativo } = getProperties(arcSite);
+  const { taboola, siteName } = getProperties(arcSite);
   const { moapPTD, boapPTD } = taboola[currentEnv] || {};
   const {
     cdnLink,
@@ -23,7 +23,6 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
     containerName,
     placementName,
   } = taboola || {};
-  const { lazyLoad: lazyLoadNativo = false } = nativo[currentEnv];
 
   if (ampPage) {
     return (
