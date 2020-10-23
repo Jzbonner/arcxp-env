@@ -5,8 +5,6 @@ import { useFusionContext } from 'fusion:context';
 import SiteMeta from '../_helper_components/global/siteMeta/default';
 import SiteMetrics from '../_helper_components/global/siteMetrics/default';
 import { ConnextInit } from '../_helper_components/global/connext/default.jsx';
-import TaboolaFooter from '../_helper_components/global/taboola/taboolaFooter.jsx';
-import TaboolaHeader from '../_helper_components/global/taboola/taboolaHeader.jsx';
 import NativoScripts from '../_helper_components/article/nativo/nativoScripts';
 import checkTags from '../layouts/_helper_functions/checkTags';
 import checkSponsor from '../layouts/_helper_functions/checkSponsor';
@@ -100,7 +98,6 @@ const WrapOutputType = (props) => {
         {!noAds && !isHyperlocalContent && !isSponsoredContent
           && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />
         }
-        {!isHyperlocalContent && <TaboolaHeader />}
         {cssData}
         <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -117,7 +114,6 @@ const WrapOutputType = (props) => {
         )}
         <div id="fusion-app">{children}</div>
         <Fusion />
-        {!isHyperlocalContent && <TaboolaFooter />}
         {connextIsEnabled && (
           <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
