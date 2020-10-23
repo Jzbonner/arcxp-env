@@ -1,9 +1,11 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import LazyLoad from 'react-lazyload';
+import LazyLoad, { forceCheck, forceVisible } from 'react-lazyload';
+
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
@@ -24,6 +26,7 @@ const Image = ({
   const { deployment, contextPath } = appContext;
   const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
+  const [hasUserLoggedIn, setUserLoggedInState] = useState(false);
 
   const imgQuery = {
     src: url,
@@ -32,12 +35,16 @@ const Image = ({
     arcSite,
   };
 
+  console.log('image query', imgQuery);
+
   const img = useContent({
     source: 'resizer',
     query: imgQuery,
   });
 
   const screenSize = checkWindowSize();
+
+  // const windowExists = typeof window !== 'undefined';
 
   let mainCredit;
   let secondaryCredit;
@@ -67,6 +74,19 @@ const Image = ({
     }
     return <Caption src={src} />;
   };
+
+  const triggerImageLoader = () => {
+    if (!hasUserLoggedIn) {
+      setUserLoggedInState(true);
+      forceCheck();
+      forceVisible();
+      console.log('image: the user has logged in!');
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('connextLoggedIn', triggerImageLoader);
+  }, []);
 
   if (img) {
     return (
