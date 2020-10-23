@@ -49,7 +49,7 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
     if (lazyLoad) {
       deferThis({ script: taboolaHeadScript });
     } else {
-      document.head[0].appendChild(taboolaHeadScript);
+      document.head.appendChild(taboolaHeadScript);
     }
 
     const taboolaFootScript = document.createElement('script');
