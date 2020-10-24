@@ -68,6 +68,8 @@ export const ConnextAuthTrigger = () => {
       ) || {};
       const viewedArticlesArray = viewedArticlesFromLocalStorage[meteredConversationId] || [];
 
+      console.log('connext logging >> localStorageAuthChecks - articlesRemainingFromLocalStorage', articlesRemainingFromLocalStorage, 'viewedArticlesArray.length', viewedArticlesArray.length, 'articleLimitFromLocalStorage - 1', articleLimitFromLocalStorage - 1, 'window.Connext.Storage.GetViewedArticles()', window.Connext.Storage.GetViewedArticles(), 'window.Connext.Storage.GetCurrentConversation()', window.Connext.Storage.GetCurrentConversation());
+
       if (
         (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
         || (
@@ -115,7 +117,7 @@ export const ConnextAuthTrigger = () => {
           (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
           || (
             articlesRemainingFromConversation !== 0
-            && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft > 0)
+            && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft() > 0)
           )
         ) {
           console.log(
@@ -129,7 +131,7 @@ export const ConnextAuthTrigger = () => {
             'and (',
             numberOfArticlesViewed.length < paywallArticleLimit - 1,
             'or',
-            numberOfArticlesLeft > 0,
+            numberOfArticlesLeft() > 0,
             ') currentConversation',
             currentConversation,
             'articlesRemainingFromConversation',
@@ -141,19 +143,21 @@ export const ConnextAuthTrigger = () => {
             'paywallArticleLimit - 1',
             paywallArticleLimit - 1,
             'numberOfArticlesLeft',
-            numberOfArticlesLeft,
+            numberOfArticlesLeft(),
           );
           loadDeferredItems();
         }
       }
     };
 
-    window.addEventListener('connextMeterLevelSet', () => {
+    window.addEventListener('connextConversationDetermined', () => {
       const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
       const { UserState } = connextLocalStorageData;
       if (isEnabled && !(UserState && UserState.toLowerCase() === 'subscriber')) {
+        console.log('connext logging >> isEnabled && !(UserState && UserState.toLowerCase() === "subscriber")', 'isenabled', isEnabled, 'userState', UserState, 'is subscriber', UserState.toLowerCase() === 'subscriber');
         try {
           const currentMeterLevel = window.Connext.Storage.GetCurrentMeterLevel();
+          console.log('connext logging >> currentMeterLevel', currentMeterLevel);
           if (currentMeterLevel === 1) {
             // it's "free" content (per connext), so load everything
             loadDeferredItems();
@@ -271,6 +275,7 @@ export const ConnextInit = () => {
       doc.addEventListener('DOMContentLoaded', () => {
         const connextLoaded = new Event('connextLoaded');
         const connextMeterLevelSet = new Event('connextMeterLevelSet');
+        const connextConversationDetermined = new Event('connextConversationDetermined');
         const connextLoggedIn = new Event('connextLoggedIn');
         const connextLoggedOut = new Event('connextLoggedOut');
         const connextIsSubscriber = new Event('connextIsSubscriber');
@@ -307,7 +312,10 @@ export const ConnextInit = () => {
                   onActionShown: (e) => { connextLogger('>> onActionShown', e); },
                   onButtonClick: (e) => { connextLogger('>> onButtonClick', e); },
                   onCampaignFound: (e) => { connextLogger('>> onCampaignFound', e); },
-                  onConversationDetermined: (e) => { connextLogger('>> onConversationDetermined', e); },
+                  onConversationDetermined: (e) => {
+                    connextLogger('>> onConversationDetermined', e);
+                    window.dispatchEvent(connextConversationDetermined);
+                  },
                   onCriticalError: (e) => { connextLogger('>> onCriticalError', e); },
                   onDebugNote: (e) => { connextLogger('>> onDebugNote', e); },
                   onInit: (e) => {

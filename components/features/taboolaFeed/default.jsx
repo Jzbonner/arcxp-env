@@ -23,6 +23,7 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
     containerName,
     placementName,
   } = taboola || {};
+
   if (ampPage) {
     return (
       <div className="c-section b-margin-bottom-d40-m20">
