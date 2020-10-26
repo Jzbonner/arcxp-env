@@ -234,6 +234,10 @@
       @include breakpoint(desktop-sm) {
         width: calc(100% - 330px);
         padding: 0 $min-margin 0 0;
+
+        .c-synopsis-row + div {
+          margin-bottom: 1.25rem;
+        }
       }
     }
 
