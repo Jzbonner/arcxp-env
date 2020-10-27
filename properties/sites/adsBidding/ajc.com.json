@@ -39,14 +39,14 @@
       "labels": ["tablet1"]
     },
     {
-      "mediaQuery": "(min-width: 0px) and (max-width: 767px)",
+      "mediaQuery": "(max-width: 767px)",
       "sizesSupported": [
         [300, 250]
       ],
       "labels": ["phone"]
     },
     {
-      "mediaQuery": "(min-width: 0px) and (max-width: 767px)",
+      "mediaQuery": "(max-width: 767px)",
       "sizesSupported": [
         [320, 50]
       ],
