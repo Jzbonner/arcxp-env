@@ -5,9 +5,11 @@
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
+  margin-bottom: 1.25rem;
 
   @include breakpoint(desktop-lg) {
     flex-wrap: nowrap;
+    margin-bottom: 0;
   }
 
   .c-homeLeadContainer {
@@ -28,12 +30,17 @@
         padding: 0;
         background-color: none;
         margin-top: 15px;
+        max-width: 90%;
+
+        @include breakpoint(desktop-sm) {
+          max-width: 100%;
+        }
 
         .headline {
-          margin-top: 7px;
+          margin-top: .2rem;
           letter-spacing: -.16px;
 
-          @include text-styles(1.75rem, 1.14, "Average");
+          @include text-styles(1.75rem, 1.28, "Average");
         }
       }
     }
@@ -52,40 +59,17 @@
 
     .column-2 {
       @include breakpoint(desktop-sm) {
-        width: 60.5%;
-      }
-
-      @include breakpoint(desktop-lg) {
-        width: 60.5%;
-      }
-
-      @include breakpoint(desktop-xl) {
-        width: 61.5%;
+        width: 50%;
       }
     }
 
     .column-3 {
       @include breakpoint(desktop-sm) {
-        width: 36%;
-        margin-left: 3.5%;
-      }
-
-      @include breakpoint(desktop-lg) {
-        width: 35.5%;
-        margin-left: 4%;
-      }
-
-      @include breakpoint(desktop-xl) {
-        width: 35%;
+        width: 50%;
         margin-left: 3.5%;
       }
 
       .c-homeList {
-
-        .c-label-wrapper,
-        .c-sponsor {
-          margin-bottom: .2rem;
-        }
 
         .headline {
           margin-top: -5px;
@@ -98,6 +82,16 @@
 
             @include breakpoint(desktop-sm) {
               letter-spacing: -.32px;
+
+              @include text-styles(1.1rem, 1.5, "Average");
+            }
+
+            @include breakpoint(desktop-lg) {
+              @include text-styles(1.2rem, 1.5, "Average");
+            }
+
+            @media (min-width: 1500px) {
+              @include text-styles(1.3rem, 1.5, "Average");
             }
           }
         }
