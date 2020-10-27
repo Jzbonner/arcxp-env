@@ -22,6 +22,10 @@
       @include breakpoint(desktop-sm) {
         min-height: 260px;
       }
+
+      @media (min-width: 1600px) {
+        min-height: 320px;
+      }
     }
 
     .home-headline,

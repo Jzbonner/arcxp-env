@@ -152,33 +152,10 @@
   }
 }
 
-.column-1 .home-headline .c-image-component .image-component-image .c-tease-icon {
-  bottom: 34%;
-  right: 5%;
-
-  @include breakpoint(tablet) {
-    bottom: 40px;
-  }
-
-  @include breakpoint(desktop-sm) {
-    bottom: 50px;
-  }
-
-  @include breakpoint(desktop-lg) {
-    bottom: calc(1.5% + 50px);
-  }
-}
-
+.column-1 .home-headline .c-image-component .image-component-image .c-tease-icon,
 .column-2 .home-headline .c-image-component .image-component-image .c-tease-icon {
-  right: 5%;
-
-  @include breakpoint(desktop-sm) {
-    bottom: 17%;
-  }
-
-  @include breakpoint(desktop-lg) {
-    bottom: 20%;
-  }
+  right: 10px;
+  bottom: 10px;
 }
 
 .column-1 .c-homeList .c-image-component .image-component-image .c-tease-icon,
