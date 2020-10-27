@@ -48,7 +48,7 @@ const SiteMeta = () => {
   return (
     <>
       <link rel="apple-touch-icon" href={appleIconPath} />
-      <link rel="shortcut icon" href={faviconPath} />
+      <link rel="icon" type="image/png" href={faviconPath} />
       <title>{pageTitle}</title>
       { metaDescParsed ? <meta name="description" content={metaDescParsed} /> : null }
       {!isNativoLandingPage && <link rel="canonical" href={updatedURL} />}
