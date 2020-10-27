@@ -42,6 +42,8 @@ const AdSetup = ({
       } else {
         bpTarget = 0;
       }
+      let filteredDimensions = dimensions;
+      let filteredBPs = breakpoints;
       breakpoints.forEach((breakpoint, i) => {
         const bpSizes = dimensions[i];
         const bpWidth = breakpoint[0];
@@ -51,6 +53,12 @@ const AdSetup = ({
             // the ad is specified and has sizes for this breakpoint, so ensure it gets rendered
             adIsGood = true;
             hasDimensionsMatch = true;
+            /*
+              Since the ad has a breakpoint-specific size array, we re-set the dimensions & bp arrays to _only_ the breakpoint-matching sizes and breakpoint.  This is specifically to correct the issue affecting HP02 (which spans all breakpoints) since ArcAds passes the full `dimensions` array to bidders, which results in bids (and ads) for sizes that don't match the current breakpoint.  See APD-344 for more details.
+              They are added as nested arrays to match the nesting of the original arrays (which ArcAds expects).
+            */
+            filteredDimensions = [bpSizes];
+            filteredBPs = [breakpoint];
           } else if (bpWidth === bpTarget && (!bpSizes || bpSizes.length === 0)) {
             // the ad is specifically excluded at this breakpoint, so ensure it does not render
             adIsGood = false;
@@ -71,18 +79,19 @@ const AdSetup = ({
       if (adIsGood) {
         /*
           we store the slot config in an array so that we don't have to duplicate it...
-          since we reference the same output twice: for the `HS02SlotConfig` object, and in teh registerAd call
+          since we reference the same output twice: for the `HS02SlotConfig` object, and in the registerAd call
         */
+
         const adSlotConfig = [
           {
             id,
             slotName: adSlotNameForArcAds,
             name,
-            dimensions,
+            dimensions: filteredDimensions,
             display,
             targeting,
             sizemap: {
-              breakpoints,
+              breakpoints: filteredBPs,
               refresh,
             },
             bidding,
