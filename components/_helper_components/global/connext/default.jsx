@@ -20,7 +20,6 @@ export const ConnextAuthTrigger = () => {
   if (typeof window !== 'undefined' && !window.connextAuthTriggerEnabled) {
     const loadDeferredItems = () => {
       const deferredItems = window.deferUntilKnownAuthState || [];
-
       if (deferredItems.length) {
         const adInstance = ArcAdLib.getInstance();
         deferredItems.forEach((item) => {
@@ -47,6 +46,18 @@ export const ConnextAuthTrigger = () => {
             }
           });
         });
+
+        // image fix for APD-983
+        const inlineImages = document.querySelectorAll('.lazyload-wrapper img');
+        if (inlineImages.length) {
+          inlineImages.forEach((img) => {
+            const isPlaceholder = img.getAttribute('data-placeholder');
+            const dataSrc = img.getAttribute('data-src');
+            if (isPlaceholder && dataSrc) {
+              img.setAttribute('src', dataSrc);
+            }
+          });
+        }
       }
     };
 
