@@ -85,6 +85,10 @@
             @include breakpoint(desktop-lg) {
               @include text-styles(1.2rem, 1.5, "Average");
             }
+
+            @media (min-width: 1500px) {
+              @include text-styles(1.3rem, 1.5, "Average");
+            }
           }
         }
       }
