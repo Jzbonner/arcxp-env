@@ -9,6 +9,7 @@
 
   @include breakpoint(desktop-lg) {
     flex-wrap: nowrap;
+    margin-bottom: 0;
   }
 
   .c-homeLeadContainer {
@@ -29,11 +30,7 @@
         padding: 0;
         background-color: none;
         margin-top: 15px;
-        max-width: 90%;
-
-        @include breakpoint(desktop-sm) {
-          max-width: 100%;
-        }
+        max-width: 100%;
 
         .headline {
           margin-top: .2rem;
