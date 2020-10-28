@@ -1,11 +1,10 @@
 @import "./../../../src/styles/base";
 
 .c-columnistFeature {
-  padding: 0 20px;
-
   @include breakpoint(tablet) {
     border-left: solid 1px #cdcdcd;
     margin-left: -20px;
+    padding: 0 20px;
   }
 
   @include breakpoint(desktop-sm) {
