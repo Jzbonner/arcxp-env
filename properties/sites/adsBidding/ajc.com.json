@@ -54,6 +54,59 @@
     }
   ],
   "adsPrebidSlots": {
+    "HP00": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop2", "tablet1"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "17657461",
+              "placementName": "AJC_ROS_DesktopTablet_HP00"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["desktop2"],
+            "params": {
+              "placement": "5174473",
+              "network": "11741.1"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["tablet1"],
+            "params": {
+              "placement": "5174481",
+              "network": "11741.1"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["desktop2", "tablet1"],
+            "params": {
+              "accountId": "21858",
+              "siteId": "303388",
+              "zoneId": "1529032"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["desktop2", "tablet1"],
+            "params": {
+              "unit": "540941865",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
     "HP01": {
       "amazon": {
         "enabled": "true"
