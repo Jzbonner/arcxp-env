@@ -18,6 +18,14 @@
 
     .column-2 {
       margin-bottom: 10px;
+
+      @include breakpoint(desktop-sm) {
+        min-height: 260px;
+      }
+
+      @media (min-width: 1600px) {
+        min-height: 320px;
+      }
     }
 
     .home-headline,
@@ -36,12 +44,25 @@
         padding: 0;
         background-color: none;
         margin-top: 15px;
+        max-width: 90%;
+
+        @include breakpoint(desktop-sm) {
+          max-width: 100%;
+        }
 
         .headline {
           margin-top: 3px;
           letter-spacing: -.16px;
 
-          @include text-styles(1rem, 1.38, "Average");
+          @include text-styles(1.25rem, 1.38, "Average");
+          
+          @include breakpoint(desktop-sm) {
+            @include text-styles(1.1rem, 1.38, "Average");
+          }
+          
+          @include breakpoint(desktop-lg) {
+            @include text-styles(1.2rem, 1.38, "Average");
+          }
         }
       }
     }
@@ -60,7 +81,15 @@
     .column-3 .headline {
       letter-spacing: -.16px;
 
-      @include text-styles(1rem, 1.38, "Average");
+      @include text-styles(1.25rem, 1.38, "Average");
+
+      @include breakpoint(desktop-sm) {
+        @include text-styles(1rem, 1.38, "Average");
+      }
+
+      @include breakpoint(desktop-lg) {
+        @include text-styles(1.2rem, 1.38, "Average");
+      }
     }
   }
 }

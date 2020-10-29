@@ -114,7 +114,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
   if (Array.isArray(data)) {
     return (
       <div
-        className={`c-homeLeadContainer b-margin-bottom-d30-m20 ${getDisplayClassMap(
+        className={`c-homeLeadContainer ${getDisplayClassMap(
           displayClass,
         )} ${getColumnsMap(columns)}`}
       >

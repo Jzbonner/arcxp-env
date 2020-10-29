@@ -51,14 +51,14 @@
       "labels": ["tablet2"]
     },
     {
-      "mediaQuery": "(min-width: 0px) and (max-width: 767px)",
+      "mediaQuery": "(max-width: 767px)",
       "sizesSupported": [
         [300, 250]
       ],
       "labels": ["phone"]
     },
     {
-      "mediaQuery": "(min-width: 0px) and (max-width: 767px)",
+      "mediaQuery": "(max-width: 767px)",
       "sizesSupported": [
         [320, 50]
       ],
@@ -115,12 +115,32 @@
         "bids": [
           {
             "bidder": "appnexus",
-            "labels": ["desktop1", "tablet1", "phone"],
+            "labels": ["desktop1"],
             "params": {
               "publisher": "DDN",
               "placementGroup": "ROS",
-              "placementId": "19064851",
-              "placementName": "DDN_ROS_HP02"
+              "placementId": "20392484",
+              "placementName": "DDN_ROS_HP02_Desktop"
+            }
+          },
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "20392485",
+              "placementName": "DDN_ROS_HP02_Tablet"
+            }
+          },
+          {
+            "bidder": "appnexus",
+            "labels": ["phone"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "20392486",
+              "placementName": "DDN_ROS_HP02_Mobile"
             }
           }
         ]

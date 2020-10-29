@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
-import { taboolaModuleScript } from '../../../src/js/taboola/taboolaScripts';
+import { taboolaFooterScript, taboolaHeaderScript, taboolaModuleScript } from '../../../src/js/taboola/taboolaScripts';
 import fetchEnv from '../../_helper_components/global/utils/environment';
 import deferThis from '../../_helper_components/global/utils/deferLoading';
 import '../../../src/styles/base/_utility.scss';
@@ -14,14 +14,16 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
   const { layout } = appContext;
   const currentEnv = fetchEnv();
   const { taboola, siteName } = getProperties(arcSite);
+  const { moapPTD, boapPTD } = taboola[currentEnv] || {};
   const {
+    cdnLink,
     dataPublisher,
     taboolaStoryID,
     taboolaSectionID,
     containerName,
     placementName,
   } = taboola || {};
-  const { moapPTD, boapPTD } = taboola[currentEnv] || {};
+
   if (ampPage) {
     return (
       <div className="c-section b-margin-bottom-d40-m20">
@@ -41,6 +43,22 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
   if (siteName === 'dayton') return null;
 
   useEffect(() => {
+    const taboolaHeadScript = document.createElement('script');
+    taboolaHeadScript.innerHTML = taboolaHeaderScript(layout, cdnLink);
+    if (lazyLoad) {
+      deferThis({ script: taboolaHeadScript });
+    } else {
+      document.head.appendChild(taboolaHeadScript);
+    }
+
+    const taboolaFootScript = document.createElement('script');
+    taboolaFootScript.innerHTML = taboolaFooterScript(layout);
+    if (lazyLoad) {
+      deferThis({ script: taboolaFootScript });
+    } else {
+      document.body.appendChild(taboolaFootScript);
+    }
+
     const taboolaScript = document.createElement('script');
     taboolaScript.innerHTML = taboolaModuleScript(layout, containerName, placementName, moapPTD, boapPTD);
     taboolaScript.async = true;
