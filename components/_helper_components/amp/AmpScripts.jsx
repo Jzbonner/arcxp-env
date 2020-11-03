@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ampScriptSwitch from '../../../src/js/ampScriptSwitch';
+import EngageAmpScript from './engageAmp/default';
 
-const AmpScripts = ({ contentElements, storyPromoItems }) => {
+const AmpScripts = ({ contentElements, storyPromoItems, arcSite }) => {
   const scriptsArr = [];
   const { type: storyPromoType } = storyPromoItems || {};
   let storyHasVideo = false;
@@ -79,6 +80,11 @@ const AmpScripts = ({ contentElements, storyPromoItems }) => {
       src="https://cdn.ampproject.org/v0/amp-video-iframe-0.1.js"
     />}
     {oembedScripts}
+    <script
+     async
+     custom-element="amp-access"
+     src="https://cdn.ampproject.org/v0/amp-access-0.1.js"/>
+     <EngageAmpScript arcSite={arcSite} />
   </>
   );
 };
@@ -86,6 +92,7 @@ const AmpScripts = ({ contentElements, storyPromoItems }) => {
 AmpScripts.propTypes = {
   contentElements: PropTypes.array,
   storyPromoItems: PropTypes.object,
+  arcSite: PropTypes.string,
 };
 
 export default AmpScripts;
