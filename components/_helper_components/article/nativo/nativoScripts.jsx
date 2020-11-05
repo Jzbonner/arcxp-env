@@ -23,12 +23,10 @@ const NativoScripts = ({ tags, uuid }) => (
     ></script>
   </>
 );
-
 NativoScripts.propTypes = {
   tags: PropTypes.array,
   uuid: PropTypes.string,
   layout: PropTypes.string,
   currentSite: PropTypes.string,
 };
-
 export default NativoScripts;

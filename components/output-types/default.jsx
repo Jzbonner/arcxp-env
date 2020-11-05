@@ -41,10 +41,6 @@ const DefaultOutputType = (props) => {
   /* eslint-disable-next-line max-len */
   fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
 
-  const nativoAttributes = {
-    ...(layout === 'article-basic' && currentSite !== 'dayton' && { 'data-ntv-set-no-auto-start': 'true' }),
-  };
-
   return (
     <html>
       <head>
@@ -73,8 +69,7 @@ const DefaultOutputType = (props) => {
         {!noAds && adsPrebidEnabled && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/${prebidJs}`)}`}></script>}
         <Libs />
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
-        {!noAds && !isHyperlocalContent && !isSponsoredContent && <script type="text/javascript" src="https://s.ntv.io/serve/load.js" {...nativoAttributes} id="nativoScript"></script>}
-        {!isHyperlocalContent && <TaboolaHeader />}
+        {!noAds && !isHyperlocalContent && !isSponsoredContent && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
         {currentSite && <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)}`} />}
         <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -93,7 +88,6 @@ const DefaultOutputType = (props) => {
         )}
         <div id="fusion-app">{children}</div>
         <Fusion />
-        {!isHyperlocalContent && <TaboolaFooter />}
         {connextIsEnabled && (
           <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
