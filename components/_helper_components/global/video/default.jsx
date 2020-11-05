@@ -71,6 +71,10 @@ const Video = ({
   const adTag = gamAdTagBuilder(pageTax, videoTax, vidId, currentEnv, videoPageUrl || requestUri);
 
   useEffect(() => {
+    window.powaRendered = window.powaRendered || [];
+    window.powaVideos = window.powaVideos || [];
+    // we can't rely on the `isLeadVideo` value once the onPowaRendered event fires, so we track the videos & lead-state separately
+    window.powaVideos.push(vidId, isLeadVideo);
     if (adTag) {
       window.PoWaSettings = window.PoWaSettings || {};
       window.PoWaSettings.advertising = window.PoWaSettings.advertising || {};
@@ -186,6 +190,9 @@ const Video = ({
     const powaRendered = (e) => {
       const id = get(e, 'detail.id');
       const powa = get(e, 'detail.powa');
+      const powaVideoId = id.split('-')[1];
+      // we get the original video id (from the powa id) and check to be sure it is a lead video
+      const isLead = window.powaVideos[window.powaVideos.indexOf(powaVideoId) + 1];
 
       // go ahead and define vars for use in subsequent events/metrics
       const { detail: videoDetails } = e || {};
@@ -211,8 +218,8 @@ const Video = ({
           & queued for (eventual) triggering in components/_helper_components/global/connext/default.jsx
           (`ConnextAuthTrigger` function, called in `article-basic` layout)
         */
-        if (isLeadVideo && lazyLoad) {
-          deferThis({ video: powa });
+        if (isLead && lazyLoad) {
+          deferThis({ video: [powa, id] });
           powa.hideControls();
         }
 
@@ -353,23 +360,38 @@ const Video = ({
         window.Discovery({ id, powa });
       }
     };
-    window.addEventListener('powaRender', e => powaRendered(e));
+    const powaRenderListener = (e) => {
+      const id = get(e, 'detail.id');
+      if (window.powaRendered.includes(id)) {
+        // the `powaRendered` callback for this video has already been run, so abort
+        return null;
+      }
+      window.powaRendered.push(id);
+      return powaRendered(e);
+    };
+    window.addEventListener('powaRender', e => powaRenderListener(e));
     const loadVideoScript = (rejectCallBack = () => null) => new Promise((resolve, reject) => {
-      const videoScript = document.createElement('script');
-      videoScript.type = 'text/javascript';
-      videoScript.src = `https://d328y0m0mtvzqc.cloudfront.net/${currentEnv}/powaBoot.js?org=${siteOfRecord}`;
-      videoScript.async = true;
-      videoScript.addEventListener('load', () => {
+      if (!document.querySelector('#powaVideoScript')) {
+        // the script hasn't already been loaded, so proceed
+        const videoScript = document.createElement('script');
+        videoScript.type = 'text/javascript';
+        videoScript.id = 'powaVideoScript';
+        videoScript.src = `https://d328y0m0mtvzqc.cloudfront.net/${currentEnv}/powaBoot.js?org=${siteOfRecord}`;
+        videoScript.async = true;
+        videoScript.addEventListener('load', () => {
+          resolve();
+        });
+        videoScript.addEventListener('error', (e) => {
+          reject(rejectCallBack(e));
+        });
+        document.body.appendChild(videoScript);
+      } else {
         resolve();
-      });
-      videoScript.addEventListener('error', (e) => {
-        reject(rejectCallBack(e));
-      });
-      document.body.appendChild(videoScript);
+      }
     });
 
     loadVideoScript();
-    window.removeEventListener('powaRender', e => powaRendered(e));
+    window.removeEventListener('powaRender', e => powaRenderListener(e));
   }, []);
   const videoMarginBottom = 'b-margin-bottom-d40-m20';
   const giveCredit = mainCredit ? `Credit: ${mainCredit}` : null;
