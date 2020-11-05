@@ -73,7 +73,7 @@ const DefaultOutputType = (props) => {
         {!noAds && adsPrebidEnabled && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/${prebidJs}`)}`}></script>}
         <Libs />
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
-        {!noAds && !isHyperlocalContent && !isSponsoredContent && <script type="text/javascript" src="https://s.ntv.io/serve/load.js" {...nativoAttributes} id="nativoScript"></script>}
+        {!noAds && !isHyperlocalContent && !isSponsoredContent && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
         {currentSite && <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)}`} />}
         <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

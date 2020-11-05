@@ -30,5 +30,4 @@ NativoScripts.propTypes = {
   layout: PropTypes.string,
   currentSite: PropTypes.string,
 };
-
 export default NativoScripts;
