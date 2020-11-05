@@ -23,6 +23,7 @@ const NativoScripts = ({ tags, uuid }) => (
     ></script>
   </>
 );
+
 NativoScripts.propTypes = {
   tags: PropTypes.array,
   uuid: PropTypes.string,

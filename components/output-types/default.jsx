@@ -41,6 +41,10 @@ const DefaultOutputType = (props) => {
   /* eslint-disable-next-line max-len */
   fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
 
+  const nativoAttributes = {
+    ...(layout === 'article-basic' && currentSite !== 'dayton' && { 'data-ntv-set-no-auto-start': 'true' }),
+  };
+
   return (
     <html>
       <head>
