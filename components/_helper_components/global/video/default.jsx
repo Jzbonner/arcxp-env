@@ -190,8 +190,11 @@ const Video = ({
     const powaRendered = (e) => {
       const id = get(e, 'detail.id');
       const powa = get(e, 'detail.powa');
-      const powaVideoId = id.split('-')[1];
-      // we get the original video id (from the powa id) and check to be sure it is a lead video
+      // we remove the `powa-` prefix from the player id
+      let powaVideoId = id.replace('powa-', '');
+      // and then we remove the `-[player index]` suffix from the player id, to give us the original video id
+      powaVideoId = powaVideoId.substr(0, powaVideoId.lastIndexOf('-'));
+      // finally we find the video's index in the powaVidoes object and fetch the next item, determining whether it is a lead video
       const isLead = window.powaVideos[window.powaVideos.indexOf(powaVideoId) + 1];
 
       // go ahead and define vars for use in subsequent events/metrics
