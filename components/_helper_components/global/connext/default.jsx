@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../utils/environment';
@@ -10,6 +10,12 @@ export const ConnextAuthTrigger = () => {
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
   const { connext } = getProperties(arcSite);
+  const [loadedDeferredItems, _setLoadedDeferredItems] = useState(false);
+  const loadedDeferredItemsRef = React.useRef(loadedDeferredItems);
+  const setLoadedDeferredItems = (data) => {
+    loadedDeferredItemsRef.current = data;
+    _setLoadedDeferredItems(data);
+  };
   const {
     isEnabled = false,
     environment,
@@ -20,7 +26,7 @@ export const ConnextAuthTrigger = () => {
   if (typeof window !== 'undefined' && !window.connextAuthTriggerEnabled) {
     const loadDeferredItems = () => {
       const deferredItems = window.deferUntilKnownAuthState || [];
-      if (deferredItems.length) {
+      if (deferredItems.length && !loadedDeferredItemsRef.current) {
         const adInstance = ArcAdLib.getInstance();
         deferredItems.forEach((item) => {
           Object.keys(item).forEach((key) => {
@@ -33,7 +39,7 @@ export const ConnextAuthTrigger = () => {
               document.body.appendChild(item[key]);
             } else if (key === 'video') {
               // it's a video player, trigger it to play
-              const videoPlayer = item[key];
+              const videoPlayer = item[key][0];
               const videoBlocker = window.document.querySelector('.video-blocker');
               videoPlayer.play();
               videoPlayer.showControls();
@@ -58,6 +64,8 @@ export const ConnextAuthTrigger = () => {
             }
           });
         }
+        // set state to `true` to ensure we only call `loadDeferredItems` once
+        setLoadedDeferredItems(true);
       }
     };
 
@@ -164,8 +172,8 @@ export const ConnextAuthTrigger = () => {
     window.addEventListener('connextConversationDetermined', () => {
       const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
       const { UserState } = connextLocalStorageData;
-      if (isEnabled && !(UserState && UserState.toLowerCase() === 'subscriber')) {
-        console.log('connext logging >> isEnabled && !(UserState && UserState.toLowerCase() === "subscriber")', 'isenabled', isEnabled, 'userState', UserState, 'is subscriber', UserState.toLowerCase() === 'subscriber');
+      if (isEnabled && !(UserState && ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1)) {
+        console.log('connext logging >> isEnabled && !(UserState && ["subscriber", "subscribed"].indexOf(UserState.toLowerCase()) > -1))', 'isenabled', isEnabled, 'userState', UserState, 'is subscriber', ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1);
         try {
           const currentMeterLevel = window.Connext.Storage.GetCurrentMeterLevel();
           console.log('connext logging >> currentMeterLevel', currentMeterLevel);
@@ -290,7 +298,7 @@ export const ConnextInit = () => {
         const connextLoggedIn = new Event('connextLoggedIn');
         const connextLoggedOut = new Event('connextLoggedOut');
         const connextIsSubscriber = new Event('connextIsSubscriber');
-        Promise.resolve(window.MG2Loader.init({
+        window.MG2Loader.init({
           plugins: [
             {
               name: 'FP',
@@ -369,7 +377,7 @@ export const ConnextInit = () => {
               },
             },
           ],
-        }));
+        });
       });`,
   }}></script>;
 };
