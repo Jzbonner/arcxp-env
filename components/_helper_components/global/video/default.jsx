@@ -195,7 +195,7 @@ const Video = ({
       // and then we remove the `-[player index]` suffix from the player id, to give us the original video id
       powaVideoId = powaVideoId.substr(0, powaVideoId.lastIndexOf('-'));
       // finally we find the video's index in the powaVidoes object and fetch the next item, determining whether it is a lead video
-      const isLead = window.powaVideos[window.powaVideos.indexOf(powaVideoId) + 1];
+      const isLead = window.powaVideos[window.powaVideos.indexOf(powaVideoId) + 1] || false;
 
       // go ahead and define vars for use in subsequent events/metrics
       const { detail: videoDetails } = e || {};
@@ -221,8 +221,8 @@ const Video = ({
           & queued for (eventual) triggering in components/_helper_components/global/connext/default.jsx
           (`ConnextAuthTrigger` function, called in `article-basic` layout)
         */
-        if (isLead && lazyLoad) {
-          deferThis({ video: [powa, id] });
+        if (lazyLoad) {
+          deferThis({ video: [powa, isLead] });
           powa.hideControls();
         }
 
@@ -417,7 +417,7 @@ const Video = ({
 
   const renderPowaPlayer = () => <>
     <div
-      className="powa"
+      className={isLeadVideo || !lazyLoad ? 'powa' : 'powa-lazyLoad'}
       data-org={orgOfRecord}
       data-env={currentEnv}
       data-aspect-ratio="0.5625"
@@ -426,6 +426,7 @@ const Video = ({
       data-muted={muteON}
       data-playthrough={autoplayNext || true}
       data-discovery={autoplayNext || true}
+      data-autoinit={isInlineVideo ? 'false' : 'native-hls'}
        />
      {isLeadVideo && lazyLoad && <div className="video-blocker" />}
   </>;
