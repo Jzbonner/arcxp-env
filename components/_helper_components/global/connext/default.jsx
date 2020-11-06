@@ -38,13 +38,23 @@ export const ConnextAuthTrigger = () => {
               // it's a script file, append it (e.g. taboola)
               document.body.appendChild(item[key]);
             } else if (key === 'video') {
-              // it's a video player, trigger it to play
+              // it's a video player
               const videoPlayer = item[key][0];
+              const videoIsLead = item[key][1];
               const videoBlocker = window.document.querySelector('.video-blocker');
-              videoPlayer.play();
-              videoPlayer.showControls();
-              if (videoBlocker) {
-                videoBlocker.style.display = 'none';
+              if (videoIsLead) {
+                // it's a lead video (and thus already instantiated) so just trigger it to play
+                videoPlayer.play();
+                videoPlayer.showControls();
+                if (videoBlocker) {
+                  videoBlocker.style.display = 'none';
+                }
+              } else {
+                // it's an inline video, so change the className to `powa`...
+                const videoPlaceholder = document.querySelector('.powa-lazyLoad') || {};
+                videoPlaceholder.className = 'powa';
+                // ... and then instantiate the player (per https://arcpublishing.atlassian.net/wiki/spaces/POWA/overview)
+                window.powaBoot();
               }
             } else {
               // eslint-disable-next-line no-console
