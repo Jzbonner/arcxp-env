@@ -279,7 +279,7 @@ const StoryPageLayout = () => {
             />
             {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && (
               <div className="c-section full-width b-clear-both">
-                <RelatedList taxonomy={taxonomy} uuid={uuid} />
+                <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} />
               </div>
             )}
             {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
