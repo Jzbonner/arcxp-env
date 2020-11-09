@@ -9,7 +9,7 @@ import filterByPrimarySection from '../../../../content/sources/helper_functions
 import '../../../features/List/default.scss';
 import './default.scss';
 
-const RelatedList = ({ taxonomy, uuid }) => {
+const RelatedList = ({ taxonomy, uuid, isAmp = false }) => {
   const { primary_section: primarySection } = taxonomy || {};
   const { path, referent } = primarySection || {};
   const { id: referentId } = referent || {};
@@ -62,7 +62,7 @@ const RelatedList = ({ taxonomy, uuid }) => {
 
   return (
     <>
-      {filteredData.length > 1
+      {filteredData.length > 1 && !isAmp
         ? <div className="c-relatedList b-margin-bottom-d40-m20">
           <h1 className="title">In Other News</h1>
           <div className="c-homeListContainer two-columns left-photo-display-class">
@@ -80,6 +80,7 @@ const RelatedList = ({ taxonomy, uuid }) => {
 };
 
 RelatedList.propTypes = {
+  isAmp: PropTypes.bool,
   taxonomy: PropTypes.object,
   uuid: PropTypes.string,
 };
