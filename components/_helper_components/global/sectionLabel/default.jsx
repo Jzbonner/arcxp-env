@@ -26,6 +26,12 @@ const sectionLabel = ({
     return <span className="section-label">{nameCustom}</span>;
   }
 
+  // Trailing slash function
+  function checkTrailingSlash(link) {
+    // link.replace(/^\/?([^\/]+(?:\/[^\/]+)*)\/?$/, '/$1/') || '/';
+    return link.endsWith('/') ? link : `${link}/`;
+  }
+
   // case where label returns basic: { text }
   if (!nameCustom && !namePrimary && label && label.basic && label.basic.text) {
     return <span className="section-label">{getTeaseLabel(taxonomy, label)}</span>;
@@ -42,16 +48,10 @@ const sectionLabel = ({
   }
 
   // add trailing slash to pathPrimary
-  if(pathPrimary !== undefined) {
+  if (pathPrimary !== undefined) {
     newPathPrimary = checkTrailingSlash(pathPrimary);
   }
 
-  function checkTrailingSlash(link) {
-    // link.replace(/^\/?([^\/]+(?:\/[^\/]+)*)\/?$/, '/$1/') || '/';
-    return link.endsWith("/") ? link : link + "/";
-    return link;
-  }
-  
   if (sponsorContentLabel) {
     return (
       <p className="section-label">
