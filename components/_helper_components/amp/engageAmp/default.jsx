@@ -6,6 +6,7 @@ import handleSiteName from '../../../layouts/_helper_functions/handleSiteName';
 
 const EngageAmpScript = ({ arcSite }) => {
   const currentEnv = fetchEnv();
+  const envUrl = currentEnv === 'prod' ? '' : 'stage-';
   const { connext, cdnSite } = getProperties(arcSite);
   const {
     configCode, siteCode,
@@ -15,7 +16,7 @@ const EngageAmpScript = ({ arcSite }) => {
   <script id="amp-access" type="application/json" dangerouslySetInnerHTML={{
     __html: `{
       "type": "iframe",
-      "iframeSrc": "https://${currentEnv === 'prod' ? currentEnv : 'stage'}-mg2access.${domain}.com/accessIframe",
+      "iframeSrc": "https://${envUrl}mg2access.${domain}.com/accessIframe",
       "iframeVars": [
         "READER_ID",
         "CANONICAL_URL",
@@ -24,10 +25,10 @@ const EngageAmpScript = ({ arcSite }) => {
         "DOCUMENT_REFERRER"
       ],
       "login":{
-        "loginEmbedded": "https://mg2access.${domain}.com?siteCode=${siteCode}&configCode=${configCode}&flow=login&returnUrl=RETURN_URL&readerId=READER_ID&accessLevel=AUTHDATA(AccessLevel)",
-        "activateEmbedded": "https://mg2access.${domain}.com?embedded=true&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true",
-        "SubscribeInMarket": "https://mg2access.${domain}.com?embedded=false&activatePageUrl={{activatePageUrl}}&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true",
-        "SubscribeOutOfMarket": "https://mg2access.${domain}.com?embedded=false&activatePageUrl={{activatePageUrl}}&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true"
+        "loginEmbedded": "https://${envUrl}mg2access.${domain}.com?siteCode=${siteCode}&configCode=${configCode}&flow=login&returnUrl=RETURN_URL&readerId=READER_ID&accessLevel=AUTHDATA(AccessLevel)",
+        "activateEmbedded": "https://${envUrl}mg2access.${domain}.com?embedded=true&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true",
+        "SubscribeInMarket": "https://${envUrl}mg2access.${domain}.com?embedded=false&activatePageUrl={{activatePageUrl}}&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true",
+        "SubscribeOutOfMarket": "https://${envUrl}mg2access.${domain}.com?embedded=false&activatePageUrl={{activatePageUrl}}&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true"
       },
       "siteCode": "${siteCode}",
       "configCode": "${configCode}",
