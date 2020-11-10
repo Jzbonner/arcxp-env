@@ -28,7 +28,6 @@ const sectionLabel = ({
 
   // Trailing slash function
   function checkTrailingSlash(link) {
-    // link.replace(/^\/?([^\/]+(?:\/[^\/]+)*)\/?$/, '/$1/') || '/';
     return link.endsWith('/') ? link : `${link}/`;
   }
 
