@@ -97,7 +97,7 @@ const Headline = ({
       <div className="headline-box">
        {getLabelContent(sponsorName)}
         <a href={relativeURL} className="headline">
-          {headlines && truncateHeadline(headlines.basic)}
+          {headlines && truncateHeadline(headlines.basic, true)}
         </a>
       </div>
     </div>

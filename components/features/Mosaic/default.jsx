@@ -156,7 +156,7 @@ const Mosaic = (customFields = {}) => {
                    {getLabelContent(getLabelContentConfig)}
                   </div>
                   <span className="headline">
-                    {truncateHeadline(get(headlines, 'basic', ''))}
+                    {truncateHeadline(get(headlines, 'basic', ''), true)}
                   </span>
                 </div>
               );

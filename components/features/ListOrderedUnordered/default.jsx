@@ -42,7 +42,7 @@ const ListOrderedUnordered = (customFields = {}) => {
               <li className="list-item" key={i}>
                 <span className={`item-index-${displayClass}`}>{displayClass === 'Ordered List' ? countOrdered : ''}</span>
                 <a href={itemURL} className="item-title">
-                  {truncateHeadline(headline)}
+                  {truncateHeadline(headline, true)}
                 </a>
               </li>
             );

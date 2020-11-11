@@ -31,7 +31,7 @@ const Synopsis = (customFields = {}) => {
         {data.map((el, i) => {
           if (startIndex <= i && i < 2 + startIndex) {
             return (
-              <ListItem key={`ListItem-${i}`} {...el} showPreview={true} />
+              <ListItem key={`ListItem-${i}`} {...el} showPreview={true} isSynopsis={true} />
             );
           }
           return null;
