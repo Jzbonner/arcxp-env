@@ -10,18 +10,11 @@ const AmpCustomStyles = ({ arcSite, outputTypeProps }) => {
             <style
               amp-custom="amp-custom"
               dangerouslySetInnerHTML={{
-                __html: `body .Mg2-connext[data-display-type].paywall {position: relative; width:100%; max-width:1064px; margin:0 auto} ${data}`,
+                __html: `${data}`,
               }}
             />
         ) : null)}
       </Resource>
-      {/* <style
-        amp-custom="amp-custom"
-        dangerouslySetInnerHTML={{
-          __html: `
-          body. Mg2-connext[data-display-type]. paywall {position: relative; width:100%; max-width:1064px; margin:0 auto}`,
-        }}
-      /> */}
     </>
   );
 };

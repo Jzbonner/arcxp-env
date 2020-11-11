@@ -102,24 +102,6 @@ const AmpNavBar = () => {
           <amp-img width='44px' height='44px' src={closeButton}></amp-img>
         </a>
         <ul>
-          <li amp-access="Error != true AND UserState = 'LoggedOut'" amp-access-hide className="amp-nav-section">
-            <a className="amp-nav-link" on="tap:amp-access.login-loginEmbedded">Log in</a>
-          </li>
-          <li amp-access="Error = true" amp-access-hide className="amp-nav-section">
-            <a className="amp-nav-link" on="tap:amp-access.login-loginEmbedded">Error</a>
-          </li>
-          <li amp-access="AccessLevel = 'Fallback_EmptyReaderId'" amp-access-hide className="amp-nav-section">
-            <a className="amp-nav-link" on="tap:amp-access.login-loginEmbedded">Empty reader id access level</a>
-          </li>
-          <li amp-access="Error != true AND UserState != 'Subscribed'" amp-access-hide className="amp-nav-section">
-            <a className="amp-nav-link" on="tap:amp-access.login-SubscribeInMarket">Subscribe</a>
-          </li>
-          <li amp-access="Error != true AND UserState != 'Subscribed' AND UserState != 'LoggedOut'" amp-access-hide className="amp-nav-section">
-            <a className="amp-nav-link" on="tap:amp-access.login-activateEmbedded">Activate</a>
-          </li>
-          <li amp-access="Error != true AND UserState = 'Subscribed'" amp-access-hide className="amp-nav-section">
-            <a className="amp-nav-link">Manage Account</a>
-          </li>
           {sectionLi}
         </ul>
       </amp-sidebar>
