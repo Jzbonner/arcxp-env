@@ -51,7 +51,7 @@ const Hero = (customFields = {}) => {
           <div className="hero-img"
           style={{ backgroundImage: `url(${imageResizer(heroBackground, arcSite)})`, backgroundRepeat: 'no-repeat' }}>
             <div className="hero-headline">
-              <h2 className="headline-text">{truncateHeadline(headline)}</h2>
+              <h2 className="headline-text">{truncateHeadline(headline, true)}</h2>
             </div>
             {contentType === 'gallery' || contentType === 'video' ? getTeaseIcon(contentType, heroURL) : null}
           </div>
