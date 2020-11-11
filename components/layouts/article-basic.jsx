@@ -206,11 +206,6 @@ const StoryPageLayout = () => {
               <ArcAd staticSlot={'MP01'} />
             </div>
           )}
-          { ampPage && (
-          // <div amp-access="Error != true AND UserState = 'LoggedOut'" amp-access-hide>
-            <div className='Mg2-connext[data-display-type] paywall'>
-            {/* </div> */}
-          </div>)}
           <div className={`c-articleBodyContainer ${isSafari ? 'is-safari' : ''}`}>
             {!noAds && ampPage && !isHyperlocalContent && (
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
