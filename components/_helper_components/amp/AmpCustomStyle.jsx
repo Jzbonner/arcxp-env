@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 const AmpCustomStyles = ({ arcSite, outputTypeProps }) => {
   const { Resource } = outputTypeProps || {};
   return (
-    <>
       <Resource path={`resources/dist/${arcSite}-amp/css/style.css`}>
         {({ data }) => (data ? (
             <style
@@ -15,7 +14,6 @@ const AmpCustomStyles = ({ arcSite, outputTypeProps }) => {
             />
         ) : null)}
       </Resource>
-    </>
   );
 };
 
