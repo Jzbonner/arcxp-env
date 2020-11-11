@@ -26,6 +26,7 @@ const ListItem = ({
   firstInlineImage,
   showPreview,
   _id: id,
+  isSynopsis = false,
 }) => {
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -165,7 +166,7 @@ const ListItem = ({
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
         <div className={`headline ${isListPage}`}>
           <a href={relativeURL}>
-            {truncateHeadline(headlines.basic)}
+            {truncateHeadline(headlines.basic, !isSynopsis)}
           </a>
           {showPreview && <ListItemPreview id={id} />}
         </div>
@@ -188,6 +189,7 @@ ListItem.propTypes = {
   website_url: PropTypes.string,
   showPreview: PropTypes.bool,
   _id: PropTypes.string,
+  isSynopsis: PropTypes.bool,
 };
 
 export default ListItem;

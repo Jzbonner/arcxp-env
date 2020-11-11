@@ -75,7 +75,7 @@ const SliderItem = ({ data, refHook }) => {
          {getLabelContent()}
         </div>
         <a className="headline" href={canonicalUrl}>
-          {truncateHeadline(headline)}
+          {truncateHeadline(headline, true)}
         </a>
       </div>
     </div>
