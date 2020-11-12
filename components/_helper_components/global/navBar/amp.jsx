@@ -102,7 +102,7 @@ const AmpNavBar = () => {
           <amp-img width='44px' height='44px' src={closeButton}></amp-img>
         </a>
         <ul>
-        {sectionLi}
+          {sectionLi}
         </ul>
       </amp-sidebar>
       <div id="page-header-anim-marker">
