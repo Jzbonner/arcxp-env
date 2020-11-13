@@ -1,0 +1,120 @@
+.subscription-promo {
+  height: auto;
+  width: 100%;
+  position: relative;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+
+.subscription-promo .text {
+  font-size: 16px;
+  text-align: center;
+  width: auto;
+  margin: 0 auto;
+}
+
+.subscription-promo .text span {
+  display: block;
+}
+
+//   .subscription-promo .text a {
+//     display: inline-block !important;
+//     font: bold 18px Gordita_Bold !important;
+//     color: #2e81b7 !important;
+//   }
+
+//   .subscription-promo .text a:hover {
+//     border: 0 !important;
+//   }
+
+@media (min-width: 768px) {
+
+  .subscription-promo .text {
+    font-size: 26px;
+  }
+
+  .subscription-promo .text a {
+    font-size: inherit;
+  }
+}
+
+.subscription-promo__option-2 {
+  background-image: linear-gradient(0deg, #50aff6 0%, #3d8bed 100%);
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.subscription-promo__option-2 .text {
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+//   .subscription-promo__option-2 .text a {
+//     display: inline-block !important;
+//     font: bold 14px Gordita_Bold !important;
+//     color: #fff !important;
+//   }
+
+.subscription-promo__option-2 span.subscription-headline {
+  font-family: "Gordita-Medium";
+  font-size: 22px;
+  // font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
+.subscription-promo__option-2 span.thank-you-subscriber {
+  font-family: "Gordita";
+  font-size: 14px;
+  // font-weight: lighter;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+
+  .subscription-promo__option-2 .text {
+    font-size: 20px;
+  }
+
+  .subscription-promo__option-2 .text a {
+    font-size: inherit;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .subscription-promo__option-2 span.subscription-headline {
+    font-size: 18px;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+  }
+
+  .subscription-promo__option-2 span.thank-you-subscriber {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+
+  .subscription-promo {
+    margin-top: 0;
+    margin-bottom: 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  
+  .subscription-promo {
+    margin-bottom: 60px;
+  }
+}
