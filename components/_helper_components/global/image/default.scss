@@ -94,7 +94,7 @@
 // HOME && SECTION specific styles for tease icons.
 ///////////////
 @include amp-exclude {
-  
+
   .two-columns .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon,
   .three-columns .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon,
   .four-columns .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
@@ -194,40 +194,40 @@
       }
     }
   }
-}
 
-///////////////
-// HERO specific styles for tease icons.
-///////////////
+  ///////////////
+  // HERO specific styles for tease icons.
+  ///////////////
 
-.hero-img .c-tease-icon {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(to top, #04befe, #4481eb);
-  border-radius: 25px;
-  box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
-  right: 14px;
-  bottom: 14px;
-  z-index: 25;
-  overflow: hidden;
+  .hero-img .c-tease-icon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(to top, #04befe, #4481eb);
+    border-radius: 25px;
+    box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+    right: 14px;
+    bottom: 14px;
+    z-index: 25;
+    overflow: hidden;
 
-  .tease-icon {
-    position: relative;
-    max-width: 27px;
-    max-height: 27px;
-    top: 29%;
-    left: 22%;
-    border-radius: 0;
+    .tease-icon {
+      position: relative;
+      max-width: 27px;
+      max-height: 27px;
+      top: 29%;
+      left: 22%;
+      border-radius: 0;
+    }
   }
-}
 
-.lazyload-wrapper {
-  display: grid;
+  .lazyload-wrapper {
+    display: grid;
 
-  .content-profileImage & {
-    // need to set explicit height/width for the blog profile instance
-    width: 100%;
-    height: 100%;
+    .content-profileImage & {
+      // need to set explicit height/width for the blog profile instance
+      width: 100%;
+      height: 100%;
+    }
   }
 }
