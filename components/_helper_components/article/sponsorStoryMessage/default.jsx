@@ -4,13 +4,10 @@ import { useContent } from 'fusion:content';
 import ConnextFreeMessaging from '../../global/ConnextFreeMessaging/default';
 import './default.scss';
 
-const SponsorStoryMessage = ({ sponsorID, paywallStatus }) => {
-  if (paywallStatus !== 'free') {
-    return null;
-  }
-  if (!sponsorID) {
-    return <ConnextFreeMessaging />;
-  }
+const SponsorStoryMessage = ({ sponsorID, paywallStatus, isAmp = false }) => {
+  if (!isAmp && paywallStatus !== 'free') return null;
+
+  if (!sponsorID) return <ConnextFreeMessaging isAmp={isAmp}/>;
 
   const data = useContent({
     source: 'site-api',
@@ -28,14 +25,17 @@ const SponsorStoryMessage = ({ sponsorID, paywallStatus }) => {
       );
     }
     return (
-      <ConnextFreeMessaging sponsorMessage={sponsorMessage} sponsorName={sponsorName} sponsorID={sponsorID} />
+      <ConnextFreeMessaging sponsorMessage={sponsorMessage} sponsorName={sponsorName} sponsorID={sponsorID} isAmp={isAmp} />
     );
-  } return <ConnextFreeMessaging />;
+  }
+
+  return <ConnextFreeMessaging isAmp={isAmp} />;
 };
 
 SponsorStoryMessage.propTypes = {
   sponsorID: PropTypes.string,
   paywallStatus: PropTypes.string,
+  isAmp: PropTypes.bool,
 };
 
 export default SponsorStoryMessage;
