@@ -5,7 +5,7 @@ import ConnextFreeMessaging from '../../global/ConnextFreeMessaging/default';
 import './default.scss';
 
 const SponsorStoryMessage = ({ sponsorID, paywallStatus, isAmp = false }) => {
-  if (!isAmp && paywallStatus !== 'free') return null;
+  if (paywallStatus !== 'free') return null;
 
   if (!sponsorID) return <ConnextFreeMessaging isAmp={isAmp}/>;
 
