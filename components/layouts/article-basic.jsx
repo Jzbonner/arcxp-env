@@ -210,7 +210,7 @@ const StoryPageLayout = () => {
             {!noAds && ampPage && !isHyperlocalContent && (
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
             )}
-            <SponsorStoryMessage sponsorID={sponsorSectionID} paywallStatus={paywallStatus} />
+            <SponsorStoryMessage sponsorID={sponsorSectionID} paywallStatus={paywallStatus} isAmp={ampPage} />
             <Section
               elements={filteredContentElements}
               stopIndex={1}
