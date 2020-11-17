@@ -9,7 +9,7 @@ const EngageAmpScript = ({ arcSite }) => {
   const envUrl = currentEnv === 'prod' ? '' : 'stage-';
   const { connext, cdnSite } = getProperties(arcSite);
   const {
-    configCode, siteCode,
+    configCode, siteCode, activateUrl,
   } = connext[currentEnv] || {};
   const domain = handleSiteName(cdnSite);
   return (
@@ -27,8 +27,8 @@ const EngageAmpScript = ({ arcSite }) => {
       "login":{
         "loginEmbedded": "https://${envUrl}mg2access.${domain}.com?siteCode=${siteCode}&configCode=${configCode}&flow=login&returnUrl=RETURN_URL&readerId=READER_ID&accessLevel=AUTHDATA(AccessLevel)",
         "activateEmbedded": "https://${envUrl}mg2access.${domain}.com?embedded=true&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true",
-        "SubscribeInMarket": "https://${envUrl}mg2access.${domain}.com?embedded=false&activatePageUrl={{activatePageUrl}}&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true",
-        "SubscribeOutOfMarket": "https://${envUrl}mg2access.${domain}.com?embedded=false&activatePageUrl={{activatePageUrl}}&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true"
+        "SubscribeInMarket": "https://${envUrl}mg2access.${domain}.com?embedded=false&activatePageUrl=${activateUrl}&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true",
+        "SubscribeOutOfMarket": "https://${envUrl}mg2access.${domain}.com?embedded=false&activatePageUrl=${activateUrl}&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true"
       },
       "siteCode": "${siteCode}",
       "configCode": "${configCode}",
