@@ -26,13 +26,13 @@ $is-amp: true;
 @import "./../../../components/_helper_components/article/contentElements/components/paragraph/default.scss";
 @import "./../../../components/_helper_components/article/contentElements/components/interstitial_link/styles.scss";
 @import "./../../../components/_helper_components/article/carousel/default.scss";
+@import "./../../../components/_helper_components/amp/nonSubPremiumMessage/amp.scss";
 @import "./../../../components/_helper_components/global/ConnextFreeMessaging/default.scss";
 @import "./../../../components/_helper_components/global/ConnextThankYouMessage/amp.scss";
 
 // end components
 
 // start global
-@import "./../../../components/_helper_components/global/breakingNews/default.scss";
 @import "./../../../components/_helper_components/global/navBar/amp.scss";
 @import "./../../../components/_helper_components/global/image/default.scss";
 @import "./../../../components/_helper_components/global/caption/default.scss";

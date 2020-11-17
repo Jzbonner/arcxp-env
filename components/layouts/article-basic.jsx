@@ -40,6 +40,7 @@ import '../../src/styles/base/_utility.scss';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 import RelatedList from '../_helper_components/article/relatedList/default';
 import ConnextThankYouMessage from '../_helper_components/global/ConnextThankYouMessage/amp';
+import NonSubPremiumMessage from '../_helper_components/amp/nonSubPremiumMessage/default';
 
 const start = 3;
 
@@ -264,12 +265,15 @@ const StoryPageLayout = () => {
               insertedAds={ampPage && maxNumberOfParagraphs >= 4 && paywallStatus !== 'free' ? [{ insertAfterParagraph: 4, adArray: [connextThankYouMessage] }] : null}
             />
             {!noAds && maxNumberOfParagraphs >= 4
-              && <InterscrollerPlaceholder
-                ampPage={ampPage}
-                isHyperlocalContent={isHyperlocalContent}
-                taxonomy={taxonomy}
-                uuid={uuid}
-              />}
+              && <>
+                  {ampPage && paywallStatus.toLowerCase() === 'premium' && <NonSubPremiumMessage arcSite={arcSite}/>}
+                  <InterscrollerPlaceholder
+                    ampPage={ampPage}
+                    isHyperlocalContent={isHyperlocalContent}
+                    taxonomy={taxonomy}
+                    uuid={uuid}
+                  />
+                </>}
             <Section
               elements={filteredContentElements}
               startIndex={stop}

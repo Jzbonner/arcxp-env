@@ -1,45 +1,48 @@
 @import "./../base/mixins";
 @import "./c-section";
 
-.c-sponsor,
-.section-label.sponsored-story {
-  background: #2e81b7;
-  border-radius: 6px;
-  font-weight: 600;
-  color: #fff;
-  text-align: center;
-  width: fit-content;
-  display: inline-block;
-  padding: 5px 13px;
+@include amp-exclude {
 
-  @include text-styles(.5rem, 1, "Gordita");
-}
+  .c-sponsor,
+  .section-label.sponsored-story {
+    background: #2e81b7;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    width: fit-content;
+    display: inline-block;
+    padding: 5px 13px;
 
-.c-sponsorOverlay,
-.image-component-image .sponsored-story {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(55, 58, 60, .9);
-  color: #fff;
-  font-weight: 600;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  text-align: center;
-  padding: 7.5px;
-
-  @include text-styles(.625rem, 1.25, "Gordita");
-
-  @include breakpoint(tablet) {
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
+    @include text-styles(.5rem, 1, "Gordita");
   }
-}
 
-.c-homepageContent {
-  @media (max-width: 767px) {
-    padding-top: 0;
+  .c-sponsorOverlay,
+  .image-component-image .sponsored-story {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(55, 58, 60, .9);
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 7.5px;
+
+    @include text-styles(.625rem, 1.25, "Gordita");
+
+    @include breakpoint(tablet) {
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+  }
+
+  .c-homepageContent {
+    @media (max-width: 767px) {
+      padding-top: 0;
+    }
   }
 }
