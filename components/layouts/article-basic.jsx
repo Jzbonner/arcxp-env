@@ -39,6 +39,7 @@ import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 import RelatedList from '../_helper_components/article/relatedList/default';
+import NonSubPremiumMessage from '../_helper_components/amp/nonSubPremiumMessage/default';
 
 const start = 3;
 
@@ -261,12 +262,15 @@ const StoryPageLayout = () => {
               ampPage={ampPage}
             />
             {!noAds && maxNumberOfParagraphs >= 4
-              && <InterscrollerPlaceholder
-                ampPage={ampPage}
-                isHyperlocalContent={isHyperlocalContent}
-                taxonomy={taxonomy}
-                uuid={uuid}
-              />}
+              && <>
+                  {ampPage && paywallStatus.toLowerCase() === 'premium' && <NonSubPremiumMessage arcSite={arcSite}/>}
+                  <InterscrollerPlaceholder
+                    ampPage={ampPage}
+                    isHyperlocalContent={isHyperlocalContent}
+                    taxonomy={taxonomy}
+                    uuid={uuid}
+                  />
+                </>}
             <Section
               elements={filteredContentElements}
               startIndex={stop}
