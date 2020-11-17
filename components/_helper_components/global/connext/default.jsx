@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../utils/environment';
@@ -210,7 +211,7 @@ export const ConnextAuthTrigger = () => {
   }
 };
 
-export const ConnextInit = () => {
+const ConnextInit = ({ triggerLoginModal = false }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
@@ -268,6 +269,10 @@ export const ConnextInit = () => {
             }
           };
           dataLayer.push(userDataObj);
+          // trigger login modal to appear if "triggerLoginModal" is passed-in (i.e. from "login" outputType)
+          if (${triggerLoginModal}) {
+            doc.querySelector('[data-mg2-action="login"]').click();
+          }
         } else if (action === 'authenticated' && docBody.className.indexOf('${userIsAuthenticatedClass}') === -1) {
           docBody.className += ' ${userIsAuthenticatedClass}';
         }
@@ -391,3 +396,9 @@ export const ConnextInit = () => {
       });`,
   }}></script>;
 };
+
+ConnextInit.propTypes = {
+  triggerLoginModal: PropTypes.boolean,
+};
+
+export default ConnextInit;
