@@ -1,0 +1,72 @@
+.subscription-promo {
+  height: auto;
+  width: 100%;
+  position: relative;
+  border-radius: 6px;
+
+  .text {
+    font-size: 16px;
+    text-align: center;
+    width: auto;
+    margin: 0 auto;
+
+    a {
+      display: inline-block;
+      font: 700 18px "Gordita_Bold";
+      color: #2e81b7;
+      font-size: inherit;
+    }
+
+    span {
+      display: block;
+    }
+  }
+}
+
+.subscription-promo__option-2 {
+  border-radius: 6px;
+  margin: 1.25rem 1.375rem;
+  text-align: center;
+  background-image: linear-gradient(0deg, #50aff6 0%, #3d8bed 100%);
+  padding: 22px;
+
+  .text {
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 4px;
+
+    a {
+      display: inline-block;
+      font: 700 14px "Gordita_Bold";
+      color: #fff;
+    }
+  }
+
+  span.subscription-headline {
+    font-family: "Gordita-Medium";
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: .5rem;
+    padding-bottom: 10px;
+  }
+
+  span.thank-you-subscriber {
+    font-family: "Gordita", "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: 100;
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .subscription-promo__option-2 .text {
+    font-size: 20px;
+  }
+
+  .subscription-promo__option-2 .text a {
+    font-size: inherit;
+  }
+}
