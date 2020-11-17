@@ -263,7 +263,7 @@ const StoryPageLayout = () => {
             />
             {!noAds && maxNumberOfParagraphs >= 4
               && <>
-                  {ampPage && paywallStatus.toLowerCase() === 'premium' && <NonSubPremiumMessage/>}
+                  {ampPage && paywallStatus.toLowerCase() === 'premium' && <NonSubPremiumMessage arcSite={arcSite}/>}
                   <InterscrollerPlaceholder
                     ampPage={ampPage}
                     isHyperlocalContent={isHyperlocalContent}

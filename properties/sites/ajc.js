@@ -104,6 +104,7 @@ export default {
       containerId: 'GTM-W3VLHBK',
       allowMeter: true,
       pubParam: 'AJC',
+      activateUrl: 'https://subscribe.ajc.com/',
     },
     prod: {
       isEnabled: true,
@@ -116,6 +117,7 @@ export default {
       containerId: 'GTM-W3VLHBK',
       allowMeter: true,
       pubParam: 'AJC',
+      activateUrl: 'https://subscribe.ajc.com/',
     },
   },
   video: {
