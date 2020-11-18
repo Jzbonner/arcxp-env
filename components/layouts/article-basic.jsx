@@ -39,6 +39,7 @@ import '../../src/styles/container/_article-basic.scss';
 import '../../src/styles/base/_utility.scss';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 import RelatedList from '../_helper_components/article/relatedList/default';
+import ConnextThankYouMessage from '../_helper_components/global/ConnextThankYouMessage/amp';
 import NonSubPremiumMessage from '../_helper_components/amp/nonSubPremiumMessage/default';
 
 const start = 3;
@@ -93,6 +94,7 @@ const StoryPageLayout = () => {
   const MP03 = () => <ArcAd staticSlot={'MP03'} lazyLoad={isMeteredStory} key={'MP03'} />;
   const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP09-Story-Desktop'} />;
   const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP09-Story-Tablet'} />;
+  const connextThankYouMessage = () => <ConnextThankYouMessage isAmp={ampPage}/>;
 
   const windowExists = typeof window !== 'undefined';
 
@@ -260,6 +262,7 @@ const StoryPageLayout = () => {
               fullWidth={noAds}
               comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
               ampPage={ampPage}
+              insertedAds={ampPage && maxNumberOfParagraphs >= 4 && paywallStatus !== 'free' ? [{ insertAfterParagraph: 4, adArray: [connextThankYouMessage] }] : null}
             />
             {!noAds && maxNumberOfParagraphs >= 4
               && <>
