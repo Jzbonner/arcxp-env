@@ -10,7 +10,7 @@ class ExpandableTextMessage extends PureComponent {
     super(props);
 
     let headingText;
-    let contentText = this.props.html;
+    const contentText = this.props.html;
 
     const parser = new Parser({
       onopentag: (tag, attribs) => {
@@ -19,10 +19,10 @@ class ExpandableTextMessage extends PureComponent {
         }
       },
     });
-    
+
     parser.write(this.props.html);
     parser.end();
-    
+
     this.headingText = headingText;
     this.contentText = contentText;
   }
