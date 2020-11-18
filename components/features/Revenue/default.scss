@@ -67,7 +67,7 @@
 
           .c-sponsor {
             @include text-styles(.75rem, 1, "Gordita");
-            
+
             width: max-content;
             font-weight: 400;
           }
@@ -99,8 +99,12 @@
           }
         }
 
-        &:last-child {
+        &:nth-child(3) {
           margin-bottom: 0;
+        }
+
+        &:nth-child(n + 4) {
+          display: none;
         }
       }
     }
