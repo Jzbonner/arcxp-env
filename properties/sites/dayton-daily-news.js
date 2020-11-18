@@ -87,7 +87,7 @@ export default {
     sandbox: {
       adsBidding,
       adsA9Enabled: true,
-      adsA9Id: '',
+      adsA9Id: '3970',
       adsPrebidEnabled: true,
       adsPrebidTimeout: 1500,
       devconActive: false,
@@ -96,7 +96,7 @@ export default {
     prod: {
       adsBidding,
       adsA9Enabled: false,
-      adsA9Id: '',
+      adsA9Id: '3970',
       adsPrebidEnabled: false,
       adsPrebidTimeout: 1500,
       devconActive: false,
