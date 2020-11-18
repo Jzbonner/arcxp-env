@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
+import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../utils/environment';
+import RenderMenuLinks from './_helper_functions/renderMenuLinks';
 import handleSiteName from '../../../../layouts/_helper_functions/handleSiteName';
-import openMg2Widget from './_helper_functions/openMg2Widget';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 import userIconDark from '../../../../../resources/icons/login/user-icon-dark.svg';
 
@@ -39,7 +40,17 @@ const isAuthMenu = ({
     connextSite = connextSite.replace(/-/g, '');
   }
 
+  const siteContent = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'LoggedInMenu',
+    },
+  });
+
+  const { children: links = [] } = siteContent || [];
+
   const accountSubdomain = `//${currentEnv !== 'prod' ? 'test-' : ''}myaccount`;
+  const isNotAuthenticated = userStateRef.current !== 'authenticated';
 
   const connextDomain = `${accountSubdomain}.${connextSite}.com/${
     siteCode ? siteCode.toLowerCase() : connextSite
@@ -73,7 +84,7 @@ const isAuthMenu = ({
         </div>
         <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
           {!isMobile && renderLogoutButton()}
-          <ul className={'subNav-flyout itemCount-4'}>
+          <ul className={`subNav-flyout itemCount-${links.length + (isNotAuthenticated ? 3 : 2)}`}>
             {isMobile && (
               <li className={'flyout-item'}>
                 {renderLogoutButton()}
@@ -84,7 +95,7 @@ const isAuthMenu = ({
                 My Account
               </a>
             </li>
-            {userStateRef.current !== 'authenticated' && (
+            {isNotAuthenticated && (
               <li className={'flyout-item MG2activation'}>
                 <a href='#' data-mg2-action='activation'>
                   Link My Account
@@ -98,23 +109,7 @@ const isAuthMenu = ({
                 ePaper
               </a>
             </li>}
-            <li className={'flyout-item'}>
-              <a href="#" onClick={() => openMg2Widget(siteCode, userStateRef.current)}>
-                Newsletters
-              </a>
-            </li>
-            <li className={'flyout-item'}>
-              <a
-                href={`//events.${
-                  arcSite === 'dayton' ? 'dayton' : connextSite
-                }.com`}
-              >
-                Events
-              </a>
-            </li>
-            <li className={'flyout-item'}>
-              <a href='/our-products/'>Our Products</a>
-            </li>
+            {RenderMenuLinks(links, siteCode, userStateRef.current)}
           </ul>
         </div>
       </div>
