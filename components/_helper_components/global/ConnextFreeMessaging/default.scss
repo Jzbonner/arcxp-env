@@ -1,21 +1,20 @@
-  
+
 @import "../../../../src/styles/base/breakpoints";
 @import "../../../../src/styles/base/mixins";
+/* stylelint-disable property-no-vendor-prefix */
 
 .connext-free-messaging {
   display: none;
-  height: auto !important; /* stylelint-disable-line declaration-no-important */
+  height: auto;
 
   &:not(:empty) {
     display: block;
   }
 
   .Mg2-connext[data-display-type] {
-    /* stylelint-disable */
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-    /* stylelint-enable */
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
   }
 
   .c-freeMessaging {
@@ -35,7 +34,7 @@
         max-width: 768px;
       }
     }
-    
+
     .free-messaging-text {
       font-family: "Gordita-Medium";
       font-size: 14px;

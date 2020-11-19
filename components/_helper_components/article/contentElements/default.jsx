@@ -88,6 +88,7 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
                 || element.props.componentName === 'ConnextHyperLocalSubscription'
                 || element.props.componentName === 'SponsorRelatedBox'
                 || element.props.componentName === 'RelatedList'
+                || element.props.componentName === 'ConnextThankYouMessage'
               )
             ) {
               return element;
