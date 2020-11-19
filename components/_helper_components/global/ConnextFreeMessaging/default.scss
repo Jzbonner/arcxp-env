@@ -1,6 +1,7 @@
-  
+
 @import "../../../../src/styles/base/breakpoints";
 @import "../../../../src/styles/base/mixins";
+/* stylelint-disable property-no-vendor-prefix */
 
 .connext-free-messaging {
   display: none;
@@ -33,7 +34,7 @@
         max-width: 768px;
       }
     }
-    
+
     .free-messaging-text {
       font-family: "Gordita-Medium";
       font-size: 14px;

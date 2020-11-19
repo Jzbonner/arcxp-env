@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../utils/environment';
-import openMg2Widget from './_helper_functions/openMg2Widget';
+import RenderMenuLinks from './_helper_functions/renderMenuLinks';
 import triggerGtmEvent from '../../siteMetrics/_helper_functions/triggerGtmEvent';
 import userIcon from '../../../../../resources/icons/login/user-icon.svg';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
@@ -30,7 +30,7 @@ const NotAuthMenu = ({
     },
   });
 
-  const { children } = siteContent || [];
+  const { children: links = [] } = siteContent || [];
 
   useEffect(() => {
     if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
@@ -97,35 +97,13 @@ const NotAuthMenu = ({
         </div>
         <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
           {!isMobile && renderLoginButton()}
-          <ul className={'subNav-flyout itemCount-4'}>
+          <ul className={`subNav-flyout itemCount-${links.length}`}>
             {isMobile && (
               <li className={'flyout-item'}>
                  {renderLoginButton()}
               </li>
             )}
-
-            {Array.isArray(children)
-            && children.map((child) => {
-              const destination = child._id.includes('/configsection')
-                ? child.site && child.site.site_url
-                : child._id;
-              if (child && child.name && child.name.toLowerCase() === 'newsletters') {
-                return (
-                  <li className={'flyout-item'} key={child.name}>
-                    <a href="#" onClick={() => openMg2Widget(siteCode)}>
-                      {child.name}
-                    </a>
-                  </li>
-                );
-              }
-              return (
-                  <li className={'flyout-item'} key={child.name}>
-                    <a href={destination} target='_blank' rel="noopener noreferrer">
-                      {child.name}
-                    </a>
-                  </li>
-              );
-            })}
+            {RenderMenuLinks(links, siteCode)}
           </ul>
         </div>
       </div>
