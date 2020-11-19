@@ -2,8 +2,13 @@ import React from 'react';
 import openMg2Widget from './openMg2Widget';
 
 const RenderMenuLinks = (links = [], siteCode, userState = null) => links.map((link) => {
-  const destination = link._id.includes('/configsection') ? link.site && link.site.site_url : link._id;
-  const isExternalLink = destination && (destination.indexOf('http') > -1 || destination.indexOf('//') === 0);
+  const { _id: linkId, site: siteFields } = link || {};
+  const { site_url: siteUrl, section_url_open_new_tab: openInNewTab } = siteFields || {};
+  const destination = linkId.includes('/configsection') ? siteUrl : linkId;
+  let isExternalLink = openInNewTab;
+  if (openInNewTab === undefined || !siteFields) {
+    isExternalLink = destination && (destination.indexOf('http') > -1 || destination.indexOf('//') === 0);
+  }
   if (link && link.name && link.name.toLowerCase() === 'newsletters') {
     return (
       <li className={'flyout-item'} key={link.name}>
