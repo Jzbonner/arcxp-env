@@ -41,6 +41,7 @@ import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreaki
 import RelatedList from '../_helper_components/article/relatedList/default';
 import ConnextThankYouMessage from '../_helper_components/global/ConnextThankYouMessage/amp';
 import NonSubPremiumMessage from '../_helper_components/amp/nonSubPremiumMessage/default';
+import paywallLimitMessage from '../_helper_components/amp/paywallLimitMessage/default';
 
 const start = 3;
 
@@ -267,6 +268,7 @@ const StoryPageLayout = () => {
             {!noAds && maxNumberOfParagraphs >= 4
               && <>
                   {ampPage && paywallStatus.toLowerCase() === 'premium' && <NonSubPremiumMessage arcSite={arcSite}/>}
+                  {ampPage && isMeteredStory && <paywallLimitMessage arcSite={arcSite}/>}
                   <InterscrollerPlaceholder
                     ampPage={ampPage}
                     isHyperlocalContent={isHyperlocalContent}
