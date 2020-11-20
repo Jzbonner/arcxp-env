@@ -4,7 +4,7 @@ import './amp.scss';
 const NonSubPremiumMessage = () => <div className="c-section" amp-access="Error != true AND UserState = 'LoggedOut' OR UserState = 'NoActiveSubscriptions'" amp-access-hide>
     <div className="c-contentElements">
         <div className="c-nonSubPremium">
-            <div className="subscription-promo__option-2">
+            <div className="nonSubPromo">
                 <div className="text">
                     <span className="subscription-headline">Support Our Journalists
                     </span>
