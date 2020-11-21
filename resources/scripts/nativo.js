@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', () => {
   let nativoIsDeferred = false;
   nativoScript.src = 'https://s.ntv.io/serve/load.js';
   nativoScript.id = 'nativoScript';
-  if (typeof meterMeta !== 'undefined' && window.Fusion.arcSite !== 'dayton') {
+  if (meterMeta && window.Fusion.arcSite !== 'dayton') {
     // it's a story page (thus `meterMeta` exists) and NOT Dayton (because Dayton doesn't yet have Taboola)
     nativoScript.setAttribute('data-ntv-set-no-auto-start', true);
     if (meterMeta.getAttribute('content') === 'premium') {
