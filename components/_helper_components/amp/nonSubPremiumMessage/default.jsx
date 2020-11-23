@@ -11,7 +11,7 @@ const NonSubPremiumMessage = () => <div className="c-section" amp-access="Error 
                     <span className="thank-you-subscriber">The Atlanta Journal-Constitution’s journalists report what’s really going on in your community.
                     </span>
                     <div className="action-wrapper">
-                      <a on="tap:amp-access.login-subscribeInMarket">Subscribe
+                      <a on="tap:amp-access.login-SubscribeInMarket">Subscribe
                       </a>
                     </div>
                 </div>
