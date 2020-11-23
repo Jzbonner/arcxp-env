@@ -132,6 +132,39 @@
       }
     }
   }
+
+  .app-landing-page {
+
+    .section--intro {
+
+      h1 {
+        @include text-styles(2.5rem, 1.25, "Gordita-Bold");
+
+        @include breakpoint(desktop-sm) {
+          @include text-styles(3.25rem, 1.25, "Gordita-Bold");
+        }
+
+        span {
+          @include text-styles(1.25rem, 1.2, "Gordita");
+
+          @include breakpoint(desktop-sm) {
+            @include text-styles(2rem, 1.2, "Gordita");
+          }
+        }
+      }
+    }
+
+    .section--content {
+      
+      h2 {
+        @include text-styles(1.5rem, 1.2, "Gordita-Bold");
+
+        @include breakpoint(desktop-sm) {
+          @include text-styles(2.1875rem, 1.2 "Gordita-Bold");
+        }
+      }
+    }
+  }
 }
 
 @include breakpoint(desktop-sm) {
