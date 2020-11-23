@@ -78,6 +78,10 @@ const ArcAd = ({
     // we remove the trailing `/` if it exists, because it will mess up GAM targeting if it exists
     adSlotNameForArcAds = adSlotNameForArcAds.substring(0, adSlotNameForArcAds.length - 1);
   }
+  if (adSlotNameForArcAds.indexOf('?') > -1) {
+    // we remove the query string (if present), because it will mess up GAM targeting if it's passed in the slot name
+    adSlotNameForArcAds = adSlotNameForArcAds.substring(0, adSlotNameForArcAds.indexOf('?'));
+  }
 
   if (galleryTopics && galleryTopics.length && galleryTopics.length > 0) {
     finalTopics = galleryTopics;
