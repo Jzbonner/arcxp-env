@@ -132,6 +132,22 @@
       }
     }
   }
+
+  .app-landing-page {
+
+    .section--intro {
+      @include breakpoint(desktop-sm) {
+
+        h1 {
+          @include text-styles(2rem, 1.25, "Gordita");
+  
+          span {
+            @include text-styles(3.25rem, 1.2, "Gordita");
+          }
+        }
+      }
+    }
+  }
 }
 
 @include breakpoint(desktop-sm) {
