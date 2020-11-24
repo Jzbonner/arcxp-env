@@ -7,7 +7,7 @@ const RenderMenuLinks = (links = [], siteCode, userState = null) => links.map((l
   const destination = linkId.includes('/configsection') ? siteUrl : linkId;
   let isExternalLink = openInNewTab;
   if (openInNewTab === undefined || !siteFields) {
-    isExternalLink = destination && (destination.indexOf('http') > -1 || destination.indexOf('//') === 0);
+    isExternalLink = destination && (destination.indexOf('http') === 0 || destination.indexOf('//') === 0);
   }
   if (link && link.name && link.name.toLowerCase() === 'newsletters') {
     return (
@@ -20,7 +20,7 @@ const RenderMenuLinks = (links = [], siteCode, userState = null) => links.map((l
   }
   return (
     <li className={'flyout-item'} key={link.name}>
-      <a href={destination} target={isExternalLink ? '_blank' : 'self'} rel={isExternalLink ? 'noopener noreferrer' : ''} title={link.name}>
+      <a href={destination} target={!isExternalLink || isExternalLink === 'false' ? 'self' : '_blank'} rel={!isExternalLink || isExternalLink === 'false' ? '' : 'noopener noreferrer'} title={link.name}>
         {link.name}
       </a>
     </li>
