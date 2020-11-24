@@ -18,9 +18,9 @@ const List = (customFields = {}) => {
   } = customFields;
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && arcSite.toLowerCase() !== 'ajc' && displayClass === 'Left Photo' && featureName !== 'Revenue') {
+    if (typeof window !== 'undefined' && arcSite.toLowerCase() !== 'ajc' && featureName !== 'Revenue') {
       window.addEventListener('load', () => {
-        const homeListItems = [...document.querySelectorAll('.c-homeListContainer.left-photo-display-class .c-homeList')];
+        const homeListItems = [...document.querySelectorAll('.c-homeList')];
         homeListItems.forEach((item) => {
           if (item.classList.value.includes('ntv')) {
             item.parentNode.classList.add('hasNativoAd');
