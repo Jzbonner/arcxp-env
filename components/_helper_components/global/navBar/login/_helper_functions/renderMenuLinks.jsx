@@ -20,7 +20,7 @@ const RenderMenuLinks = (links = [], siteCode, userState = null) => links.map((l
   }
   return (
     <li className={'flyout-item'} key={link.name}>
-      <a href={destination} target={!isExternalLink || isExternalLink === 'false' ? 'self' : '_blank'} rel={!isExternalLink || isExternalLink === 'false' ? '' : 'noopener noreferrer'} title={link.name}>
+      <a href={destination} target={!isExternalLink || isExternalLink === 'false' ? '_self' : '_blank'} rel={!isExternalLink || isExternalLink === 'false' ? '' : 'noopener noreferrer'} title={link.name}>
         {link.name}
       </a>
     </li>
