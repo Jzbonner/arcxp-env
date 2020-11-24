@@ -15,6 +15,20 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
   if (!nativoIsDeferred) {
+    // logic for APD-1062.  moved here from Components/features/List/
+    if (!meterMeta && window.Fusion.arcSite !== 'ajc') {
+      // it's a non-story page on a non-AJC site, so run the check after load
+      nativoScript.addEventListener('load', () => {
+        console.error('dave, nativo script loaded');
+        document.querySelectorAll('.c-homeListContainer').forEach((list) => {
+          console.error('dave, list', list);
+          if (list.querySelector('.c-homeList.ntv').length) {
+            list.classList.add('hasNativoAd');
+          }
+        });
+      });
+    }
+
     document.querySelector('head').appendChild(nativoScript);
   }
 });
