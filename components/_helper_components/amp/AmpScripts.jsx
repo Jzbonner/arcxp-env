@@ -59,11 +59,11 @@ const AmpScripts = ({ contentElements, storyPromoItems, arcSite }) => {
       custom-element="amp-ad"
       src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"
     />
-    <script
+    {storyHasVideo && <script
       async
-      custom-element="amp-iframe"
-      src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"
-    />
+      custom-element="amp-ima-video"
+      src="https://cdn.ampproject.org/v0/amp-ima-video-0.1.js"
+    />}
     <script
       async
       custom-element="amp-carousel"
@@ -74,11 +74,6 @@ const AmpScripts = ({ contentElements, storyPromoItems, arcSite }) => {
       custom-element="amp-analytics"
       src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
     />
-    {storyHasVideo && <script
-      async
-      custom-element="amp-video-iframe"
-      src="https://cdn.ampproject.org/v0/amp-video-iframe-0.1.js"
-    />}
     {oembedScripts}
     <script
      async

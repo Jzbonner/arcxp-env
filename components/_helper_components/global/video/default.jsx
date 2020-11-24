@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext, useAppContext } from 'fusion:context';
+import { useContent } from 'fusion:content';
 import get from 'lodash.get';
 import fetchEnv from '../utils/environment';
 import Caption from '../caption/default.jsx';
@@ -10,35 +11,33 @@ import checkWindowSize from '../utils/check_window_size/default';
 import deferThis from '../utils/deferLoading';
 import gamAdTagBuilder from './_helper_functions/gamAdTagBuilder';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
-import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
+// import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
 import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
 const Video = ({
-  src,
-  isLeadVideo,
-  isInlineVideo,
-  maxTabletViewWidth,
-  featuredVideoPlayerRules,
-  inlineVideoPlayerRules,
-  pageTaxonomy = [],
-  lazyLoad = false,
+  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, pageTaxonomy = [], lazyLoad = false,
 }) => {
   const appContext = useAppContext();
   const { globalContent, requestUri, layout } = appContext;
   const fusionContext = useFusionContext();
   const {
-    credits,
-    _id: videoID,
-    videoPageId,
-    taxonomy: videoTax = [],
-    canonical_url: videoPageUrl,
+    credits, _id: videoID, videoPageId, taxonomy: videoTax = [], canonical_url: videoPageUrl,
   } = src || {};
   let pageTax = pageTaxonomy;
   if (layout === 'article-basic' && !pageTaxonomy.length) {
     const { taxonomy: gcTax } = globalContent;
     pageTax = gcTax;
   }
+
+  const videoApiData = useContent({
+    source: 'video-api',
+    query: {
+      uuid: videoID,
+    },
+  });
+
+  const videoLink = videoApiData && videoApiData.streams && videoApiData.streams[0] ? videoApiData.streams[0].url : '';
 
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON, autoplayNext } = featuredVideoPlayerRules || inlineVideoPlayerRules;
@@ -199,17 +198,9 @@ const Video = ({
 
       // go ahead and define vars for use in subsequent events/metrics
       const { detail: videoDetails } = e || {};
+      const { videoData: ogVideoData, autoplay: ogAutoplay } = videoDetails || {};
       const {
-        videoData: ogVideoData,
-        autoplay: ogAutoplay,
-      } = videoDetails || {};
-      const {
-        duration: ogDuration = 0,
-        headlines: ogHeadlines,
-        taxonomy: ogTaxonomy,
-        _id: ogVidId,
-        version: ogVersion,
-        video_type: ogVidType,
+        duration: ogDuration = 0, headlines: ogHeadlines, taxonomy: ogTaxonomy, _id: ogVidId, version: ogVersion, video_type: ogVidType,
       } = ogVideoData || {};
       const { basic: ogHeadline } = ogHeadlines || {};
       const { tags: ogTags = [] } = ogTaxonomy || {};
@@ -265,9 +256,7 @@ const Video = ({
             postToAmp(videoDetails);
           };
 
-          (window.AmpVideoIframe = window.AmpVideoIframe || []).push(
-            onAmpIntegrationReady,
-          );
+          (window.AmpVideoIframe = window.AmpVideoIframe || []).push(onAmpIntegrationReady);
         }
 
         // (re)set video-specific values, for use in gtm
@@ -282,21 +271,9 @@ const Video = ({
         fireGtmEvent(videoDetails);
 
         powa.on('start', (event) => {
+          const { id: playerId, videoData, autoplay } = event || {};
           const {
-            id: playerId,
-            videoData,
-            autoplay,
-          } = event || {};
-          const {
-            canonical_url: vidCanonical,
-            credits: vidCredits,
-            description,
-            duration = 0,
-            headlines,
-            taxonomy,
-            _id: vId,
-            version,
-            video_type: vidType,
+            canonical_url: vidCanonical, credits: vidCredits, description, duration = 0, headlines, taxonomy, _id: vId, version, video_type: vidType,
           } = videoData || {};
           const { basic: headline } = headlines || {};
           const { basic: vidCaption } = description || {};
@@ -400,11 +377,7 @@ const Video = ({
   const giveCredit = mainCredit ? `Credit: ${mainCredit}` : null;
 
   const smartChecker = () => {
-    if (
-      (isLeadVideo && !giveCredit && !videoCaption)
-      || (isLeadVideo && giveCredit && !videoCaption && screenSize.width > maxTabletViewWidth)
-      || (isInlineVideo && !videoCaption)
-    ) {
+    if ((isLeadVideo && !giveCredit && !videoCaption) || (isLeadVideo && giveCredit && !videoCaption && screenSize.width > maxTabletViewWidth) || (isInlineVideo && !videoCaption)) {
       return null;
     }
 
@@ -415,38 +388,29 @@ const Video = ({
     return <Caption src={src} isLeadVideo videoCaption={videoCaption} />;
   };
 
-  const renderPowaPlayer = () => <>
-    <div
-      className={isLeadVideo || !lazyLoad ? 'powa' : 'powa-lazyLoad'}
-      data-org={orgOfRecord}
-      data-env={currentEnv}
-      data-aspect-ratio="0.5625"
-      data-uuid={vidId}
-      data-autoplay={autoplayState}
-      data-muted={muteON}
-      data-playthrough={autoplayNext || true}
-      data-discovery={autoplayNext || true}
-      data-autoinit={isInlineVideo ? 'false' : 'native-hls'}
-       />
-     {isLeadVideo && lazyLoad && <div className="video-blocker" />}
-  </>;
+  const renderPowaPlayer = () => (
+    <>
+      <div className={isLeadVideo || !lazyLoad ? 'powa' : 'powa-lazyLoad'} data-org={orgOfRecord} data-env={currentEnv} data-aspect-ratio="0.5625" data-uuid={vidId} data-autoplay={autoplayState} data-muted={muteON} data-playthrough={autoplayNext || true} data-discovery={autoplayNext || true} data-autoinit={isInlineVideo ? 'false' : 'native-hls'} />
+      {isLeadVideo && lazyLoad && <div className="video-blocker" />}
+    </>
+  );
 
-  let ampVideoIframeDomain = `https://${orgOfRecord}-${siteOfRecord}-${currentEnv}.cdn.arcpublishing.com`;
-  if (currentEnv === 'prod') {
-    ampVideoIframeDomain = `https://www.${handleSiteName(siteOfRecord)}.com`;
-  }
-
-  const renderAmpPlayer = () => <amp-video-iframe width="16" height="9" layout="responsive" src={`${ampVideoIframeDomain}${videoPageUrl}?outputType=ampVideoIframe&autoplayState=${startPlaying}`} poster={thumbnailImage} autoplay={!startPlaying ? null : ''}></amp-video-iframe>;
+  const renderAmpPlayer = () => (
+    <amp-ima-video width="16" height="9" layout="responsive" data-tag={adTag} data-poster={thumbnailImage} autoplay={!!startPlaying}>
+      <source src={videoLink} type="video/mp4"></source>
+      <source src={videoLink} type="video/webm"></source>
+    </amp-ima-video>
+  );
 
   return (
     <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
-      <div className="video-component">
-        {isAmpOutput ? renderAmpPlayer() : renderPowaPlayer()}
-      </div>
-      {!isAmpOutput && <>
-        <p className={`video-credit-text ${isInlineVideo ? 'is-inline' : null}`}>{giveCredit}</p>
-        {smartChecker()}
-      </>}
+      <div className="video-component">{isAmpOutput ? renderAmpPlayer() : renderPowaPlayer()}</div>
+      {!isAmpOutput && (
+        <>
+          <p className={`video-credit-text ${isInlineVideo ? 'is-inline' : null}`}>{giveCredit}</p>
+          {smartChecker()}
+        </>
+      )}
     </div>
   );
 };
