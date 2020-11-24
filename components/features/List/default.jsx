@@ -9,7 +9,6 @@ import './default.scss';
 
 const List = (customFields = {}) => {
   const fusionContext = useFusionContext();
-  console.error('dave, fusionContext', fusionContext);
   const { arcSite, layout } = fusionContext;
   const {
     customFields: {
