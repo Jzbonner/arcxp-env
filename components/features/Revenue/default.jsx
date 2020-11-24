@@ -19,6 +19,7 @@ const Revenue = (customFields = {}) => {
     ...customFields,
     customFields: {
       ...customFields.customFields,
+      featureName: 'Revenue',
       displayClass: 'Left Photo',
       content: {
         ...customFields.customFields.content,

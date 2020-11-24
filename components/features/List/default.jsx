@@ -9,17 +9,19 @@ import './default.scss';
 
 const List = (customFields = {}) => {
   const fusionContext = useFusionContext();
+  console.error('dave, fusionContext', fusionContext);
   const { arcSite, layout } = fusionContext;
   const {
     customFields: {
       content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', columns = 1, title = '', moreURL = '',
     },
+    featureName,
   } = customFields;
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && arcSite.toLowerCase() !== 'ajc' && displayClass === 'Left Photo' && featureName !== 'Revenue') {
       window.addEventListener('load', () => {
-        const homeListItems = [...document.querySelectorAll('.c-homeList')];
+        const homeListItems = [...document.querySelectorAll('.c-homeListContainer.left-photo-display-class .c-homeList')];
         homeListItems.forEach((item) => {
           if (item.classList.value.includes('ntv')) {
             item.parentNode.classList.add('hasNativoAd');
