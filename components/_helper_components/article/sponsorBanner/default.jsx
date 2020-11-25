@@ -7,6 +7,7 @@ import './default.scss';
 const SponsorBanner = ({ sponsorID, ampPage }) => {
   const { minTabletViewWidth } = getProperties();
   const [currentWidth, setWidth] = useState();
+  let openNewTabTrue;
   useEffect(() => {
     const width = window.innerWidth;
     setWidth(width);
@@ -26,7 +27,7 @@ const SponsorBanner = ({ sponsorID, ampPage }) => {
       sponsor_desktop_banner: desktopBanner, sponsor_mobile_banner: mobileBanner, sponsor_url: bannerURL, sponsor_url_open_new_tab: openNewTab,
     } = data && data.Sponsor;
     const checkForMobileBanner = mobileBanner || desktopBanner;
-    var openNewTabTrue = openNewTab === 'true';
+    openNewTabTrue = openNewTab === 'true';
     if (ampPage && checkForMobileBanner) {
       return (
         <a href={bannerURL}><amp-img height='1' width='1.75' src={checkForMobileBanner} layout='responsive'/></a>);
