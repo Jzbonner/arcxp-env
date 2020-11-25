@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
@@ -15,19 +15,6 @@ const List = (customFields = {}) => {
       content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', columns = 1, title = '', moreURL = '',
     },
   } = customFields;
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('load', () => {
-        const homeListItems = [...document.querySelectorAll('.c-homeList')];
-        homeListItems.forEach((item) => {
-          if (item.classList.value.includes('ntv')) {
-            item.parentNode.classList.add('hasNativoAd');
-          }
-        });
-      });
-    }
-  }, []);
 
   let { from: startIndex = 1, size: itemLimit = 0 } = contentConfigValues || {};
   startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
