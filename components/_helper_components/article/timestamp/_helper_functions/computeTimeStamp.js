@@ -16,6 +16,14 @@ const formatTime = (date, showSeconds = false) => {
   return new Intl.DateTimeFormat('en-US', dateOptions).format(date);
 };
 
+const formatDay = (date) => {
+  const dateOptions = {
+    timeZone: 'America/New_York',
+    day: 'numeric',
+  };
+  return new Intl.DateTimeFormat('en-US', dateOptions).format(date);
+};
+
 const formatDate = date => (date.getDate() < 10 ? `0${date.getDate()}` : date.getDate());
 
 const dayOfTheWeek = (day = 7) => {
@@ -76,7 +84,7 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
   if (articleType === 'amp') {
     const weekday = `${dayOfTheWeek(pub.getDay())}`;
     const month = `${findAPMonth(pub.getMonth())}`;
-    const dayOfTheMonth = `${formatDate(pub)}`;
+    const dayOfTheMonth = `${formatDay(pub)}`;
     const year = `${pub.getFullYear()}`;
     const time = `${formatTime(pub)}`;
 
