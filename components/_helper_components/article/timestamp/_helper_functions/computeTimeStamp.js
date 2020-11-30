@@ -82,9 +82,10 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
   }
 
   if (articleType === 'amp') {
+    const formatDayFunc = formatDay(pub);
     const weekday = `${dayOfTheWeek(pub.getDay())}`;
     const month = `${findAPMonth(pub.getMonth())}`;
-    const dayOfTheMonth = formatDay(pub) < 10 ? `0${formatDay(pub)}` : `${formatDay(pub)}`;
+    const dayOfTheMonth = formatDayFunc < 10 ? `0${formatDayFunc}` : `${formatDayFunc}`;
     const year = `${pub.getFullYear()}`;
     const time = `${formatTime(pub)}`;
 
