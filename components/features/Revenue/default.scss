@@ -53,6 +53,7 @@
           @include breakpoint(desktop-sm) {
             max-width: calc(50% - 7.5px);
             width: calc(50% - 7.5px);
+            height: max-content;
           }
         }
 
