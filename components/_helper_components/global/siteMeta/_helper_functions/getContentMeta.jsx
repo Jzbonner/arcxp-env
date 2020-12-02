@@ -68,7 +68,9 @@ const getContentMeta = () => {
     });
   }
   const pagebuilderTopics = metaValue('topics') || [];
-  topics = [...topics, ...pagebuilderTopics.split(',')];
+  if (pagebuilderTopics.length) {
+    topics = [...topics, ...pagebuilderTopics.split(',')];
+  }
 
   let environ = fetchEnv();
   if (requestUri && requestUri.indexOf('?') > -1) {
