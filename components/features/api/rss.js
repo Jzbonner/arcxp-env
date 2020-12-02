@@ -1,7 +1,6 @@
 import Consumer from 'fusion:consumer';
 import { formatApiTime } from '../../layouts/_helper_functions/api/formatTime';
 import { getMediaContent } from './_helper_functions/getMediaContent';
-import { formatNavigaContent } from './_helper_functions/formatNavigaContent';
 import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
 import { getFirst120CharsFromStory } from './_helper_functions/getFirst120CharFromStory';
 
@@ -74,8 +73,6 @@ class Api {
           const formattedDate = formatApiTime(firstPubDate, displayDate);
 
           if (type === 'story') {
-            const formatContentElements = formatNavigaContent(siteID, contentElements);
-
             const mediaArray = getMediaContent(type, siteID, contentElements, promoItems, newsletterFeed);
 
             const xmlObject = {
@@ -93,7 +90,7 @@ class Api {
                   pubDate: formattedDate,
                 },
                 {
-                  'content:encoded': `<![CDATA[${formatContentElements.join('')}]]>`,
+                  'content:encoded': formattedDescription,
                 },
                 {
                   title,
