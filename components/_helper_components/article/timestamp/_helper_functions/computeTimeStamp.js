@@ -16,20 +16,17 @@ const formatTime = (date, showSeconds = false) => {
   return new Intl.DateTimeFormat('en-US', dateOptions).format(date);
 };
 
-const formatDay = (date) => {
+const formatDate = date => (date.getDate() < 10 ? `0${date.getDate()}` : date.getDate());
+
+const formatAmpDate = (date) => {
   const dateOptions = {
     timeZone: 'America/New_York',
+    weekday: 'long',
+    year: 'numeric',
+    month: 'short',
     day: 'numeric',
   };
   return new Intl.DateTimeFormat('en-US', dateOptions).format(date);
-};
-
-const formatDate = date => (date.getDate() < 10 ? `0${date.getDate()}` : date.getDate());
-
-const dayOfTheWeek = (day = 7) => {
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', null];
-
-  return days[day];
 };
 
 const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, isHyperlocalContent, articleType = 'normal') => {
@@ -82,14 +79,9 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
   }
 
   if (articleType === 'amp') {
-    const formatDayFunc = formatDay(pub);
-    const weekday = `${dayOfTheWeek(pub.getDay())}`;
-    const month = `${findAPMonth(pub.getMonth())}`;
-    const dayOfTheMonth = formatDayFunc < 10 ? `0${formatDayFunc}` : `${formatDayFunc}`;
-    const year = `${pub.getFullYear()}`;
-    const time = `${formatTime(pub)}`;
-
-    timeStamp = `${weekday}, ${month} ${dayOfTheMonth}, ${year} at ${time}`;
+    const ampTime = formatTime(pub);
+    const ampDate = formatAmpDate(pub);
+    timeStamp = `${ampDate} at ${ampTime}`;
   }
 
   if (articleType === 'tease') {
