@@ -39,6 +39,7 @@ const getContentMeta = () => {
     additional_properties: additionalProperties,
     content_elements: contentElements = [],
     content_restrictions: contentRestrictions,
+    syndication,
   } = globalContent || {};
   const articleDesc = description;
   const {
@@ -205,6 +206,7 @@ const getContentMeta = () => {
     isOpinion,
     blogName,
     paywallStatus,
+    syndication,
   };
 };
 
