@@ -59,12 +59,16 @@ const getContentMeta = () => {
   // The set removes the repeating section names
   let nonPrimarySet = [...new Set(nonPrimarySectionNames)];
   nonPrimarySet = nonPrimarySet.join(', ');
-  const topics = [];
-  tags.forEach((tag) => {
-    if (tag && tag.text) {
-      topics.push(tag.text);
-    }
-  });
+  let topics = [];
+  if (tags) {
+    tags.forEach((tag) => {
+      if (tag && tag.text) {
+        topics.push(tag.text);
+      }
+    });
+  }
+  const pagebuilderTopics = metaValue('topics') || [];
+  topics = [...topics, ...pagebuilderTopics.split(',')];
 
   let environ = fetchEnv();
   if (requestUri && requestUri.indexOf('?') > -1) {
