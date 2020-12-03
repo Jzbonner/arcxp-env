@@ -233,7 +233,7 @@ const StoryPageLayout = () => {
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
             )}
 
-            {ampPage && isMeteredStory && paywallStatus.toLowerCase() === 'premium' && <PaywallLimitMessage arcSite={arcSite}/>}
+            {ampPage && isMeteredStory && <PaywallLimitMessage arcSite={arcSite}/>}
 
             <Section
               elements={filteredContentElements}
