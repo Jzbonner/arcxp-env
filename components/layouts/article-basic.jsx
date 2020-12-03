@@ -214,6 +214,7 @@ const StoryPageLayout = () => {
             {!noAds && ampPage && !isHyperlocalContent && (
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
             )}
+
             <SponsorStoryMessage sponsorID={sponsorSectionID} paywallStatus={paywallStatus} isAmp={ampPage} />
             <Section
               elements={filteredContentElements}
@@ -231,6 +232,9 @@ const StoryPageLayout = () => {
             {!noAds && ampPage && isHyperlocalContent && (
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
             )}
+
+            {ampPage && isMeteredStory && paywallStatus.toLowerCase() === 'premium' && <PaywallLimitMessage arcSite={arcSite}/>}
+
             <Section
               elements={filteredContentElements}
               startIndex={1}
@@ -268,7 +272,6 @@ const StoryPageLayout = () => {
             {!noAds && maxNumberOfParagraphs >= 4
               && <>
                   {ampPage && paywallStatus.toLowerCase() === 'premium' && <NonSubPremiumMessage arcSite={arcSite}/>}
-                  {ampPage && isMeteredStory && <PaywallLimitMessage arcSite={arcSite}/>}
                   <InterscrollerPlaceholder
                     ampPage={ampPage}
                     isHyperlocalContent={isHyperlocalContent}

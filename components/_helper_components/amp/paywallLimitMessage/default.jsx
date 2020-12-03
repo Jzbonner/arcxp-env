@@ -1,7 +1,7 @@
 import React from 'react';
 import './default.scss';
 
-const PaywallLimitMessage = () => <div className="inline-body subscribe-bar" id="paywallContainer" amp-access="Error != true AND UserState = 'LoggedOut' OR UserState = 'NoActiveSubscriptions' AND AccessLevel = 'Page View Limit' OR AccessLevel = 'Fallback_EmptyReaderId'" amp-access-hide>
+const PaywallLimitMessage = () => <div className="c-section inline-body subscribe-bar" id="paywallContainer" amp-access="Error != true AND UserState = 'LoggedOut' OR UserState = 'NoActiveSubscriptions' AND AccessLevel = 'Page View Limit'" amp-access-hide>
     <div className="contener container-fluid">
         <div className="custom-tmpl-wrapper" id="inlineSubscribe">
             <div className="row heading center">
