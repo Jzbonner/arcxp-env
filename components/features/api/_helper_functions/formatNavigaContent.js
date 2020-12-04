@@ -1,10 +1,7 @@
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 
 export const formatNavigaContent = (siteID, contentElements) => contentElements.map((el) => {
-  const {
-    type,
-    content = '',
-  } = el || {};
+  const { type, content = '' } = el || {};
 
   if (type === 'text' && content !== '<br/>') {
     return `<div class="text">
@@ -15,35 +12,20 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   }
 
   if (type === 'oembed_response') {
-    const {
-      raw_oembed: rawOembed,
-    } = el || {};
+    const { raw_oembed: rawOembed } = el || {};
 
-    const {
-      type: oType,
-    } = rawOembed || {};
+    const { type: oType } = rawOembed || {};
 
     if (oType === 'twitter') {
-      const {
-        url,
-      } = rawOembed || {};
+      const { url } = rawOembed || {};
 
       return `<embed type="oembed">
                  ${url}
                </embed>`;
     }
 
-    if (
-      oType === 'youtube'
-        || oType === 'reddit'
-        || oType === 'instagram'
-        || oType === 'facebook-post'
-        || oType === 'facebook-video'
-        || oType === 'soundcloud'
-    ) {
-      const {
-        _id: id,
-      } = rawOembed || {};
+    if (oType === 'youtube' || oType === 'reddit' || oType === 'instagram' || oType === 'facebook-post' || oType === 'facebook-video' || oType === 'soundcloud') {
+      const { _id: id } = rawOembed || {};
 
       return `<embed type="oembed">
                  ${id}
@@ -51,14 +33,52 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     }
   }
 
-  if (type === 'div' || type === 'quote' || type === 'header') {
+  if (type === 'div' || type === 'header') {
     return content;
   }
 
-  if (type === 'raw_html' || type === 'list' || type === 'divider') {
+  if (type === 'raw_html') {
     return `<embed type="raw">
              ${content}
            </embed>`;
+  }
+
+  if (type === 'list') {
+    const { items, list_type: listType } = el || {};
+    if (listType === 'unordered') {
+      return `<ul>
+            ${items.map((item, id) => {
+    const { content: itemContent } = item;
+    return `<li key=${id}>${itemContent}</li>`;
+  })}
+          </ul>`;
+    }
+    return `<ol>
+          ${items.map((item, id) => {
+    const { content: itemContent } = item;
+    return `<li key=${id}>${itemContent}</li>`;
+  })}
+        </ol>`;
+  }
+
+  if (type === 'quote') {
+    const { content_elements: quoteElements, citation } = el || {};
+    const [{ content: quoteHeading }] = quoteElements || {};
+    const { content: citationContent } = citation || {};
+    return `<div>
+      <p>${quoteHeading}</p>
+      <blockquote>${citationContent}</blockquote>
+    </div>`;
+  }
+
+  if (type === 'divider') {
+    return '<hr/>';
+  }
+
+  if (type === 'video') {
+    const { streams } = el || {};
+    const [{ url: inlineVideoURL }] = streams || {};
+    return `<embed type="oembed">${inlineVideoURL}</embed>`;
   }
 
   if (type === 'interstitial_link') {
