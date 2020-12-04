@@ -403,7 +403,7 @@ const Video = ({
           <source src={videoLink} type="video/webm"></source>
         </amp-ima-video>
       </div>
-      <div amp-access="Error != true AND AccessLevel = 'Fallback_EmptyReaderId' OR AccessLevel = 'Page View Limit' OR AccessLevel != 'Full Content Access'" amp-access-hide><amp-img src={thumbnailImage} /></div>
+      <div amp-access="Error != true AND AccessLevel = 'Fallback_EmptyReaderId' OR AccessLevel = 'Page View Limit' OR AccessLevel != 'Full Content Access'" amp-access-hide><amp-img src={thumbnailImage} width="16" height="9" layout="responsive" /></div>
     </>
   );
 
