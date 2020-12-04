@@ -67,11 +67,16 @@ class Api {
           } = item || {};
 
           const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
-          const author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
+          let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
+          if (credits && credits.by && credits.by.length > 1) {
+            author = `<![CDATA[${credits.by.map(eachAuthor => eachAuthor.name).join(', ')}]]>`;
+          }
+
           const formattedDescription = description
             && description.basic ? `<![CDATA[${description.basic}]]>` : getFirst120CharsFromStory(contentElements);
 
           const formattedDate = formatApiTime(firstPubDate, displayDate);
+
           if (type === 'story') {
             const formatContentElements = formatNavigaContent(siteID, contentElements);
             const outputContent = noHeaderAndFooter ? `<![CDATA[${formatContentElements.join('')}]]>` : formattedDescription;
@@ -109,15 +114,16 @@ class Api {
           }
 
           if (type === 'video') {
+            const { basic } = promoItems || {};
             const {
               streams,
               promo_image: promoImage,
-            } = item || {};
-
+            } = basic || {};
+            const { name, org } = basic && basic.credits && basic.credits.by && basic.credits.by[0];
+            const videoAuthor = name || org;
             const mp4Url = streams && streams[0] && streams[0].url;
             const { caption, url: promoImageUrl } = promoImage || {};
-
-            const vidoeXmlObject = {
+            const videoXmlObject = {
               item: [
                 {
                   guid: `urn:uuid:${guid}`,
@@ -157,7 +163,7 @@ class Api {
                         _attrs: {
                           role: 'author',
                         },
-                        _content: author,
+                        _content: videoAuthor,
                       },
                       {
                         _name: 'media:thumbnail',
@@ -171,7 +177,7 @@ class Api {
               ],
             };
 
-            return vidoeXmlObject;
+            return videoXmlObject;
           }
 
           if (type === 'gallery') {
