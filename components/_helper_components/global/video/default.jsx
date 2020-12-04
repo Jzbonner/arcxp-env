@@ -396,10 +396,15 @@ const Video = ({
   );
 
   const renderAmpPlayer = () => (
-    <amp-ima-video width="16" height="9" layout="responsive" data-tag={adTag} data-poster={thumbnailImage} autoplay={!!startPlaying}>
-      <source src={videoLink} type="video/mp4"></source>
-      <source src={videoLink} type="video/webm"></source>
-    </amp-ima-video>
+    <>
+      <div amp-access="Error = true OR AccessLevel = 'Full Content Access'" amp-access-hide>
+        <amp-ima-video width="16" height="9" layout="responsive" data-tag={adTag} data-poster={thumbnailImage} autoplay={startPlaying ? '' : 'false'}>
+          <source src={videoLink} type="video/mp4"></source>
+          <source src={videoLink} type="video/webm"></source>
+        </amp-ima-video>
+      </div>
+      <div amp-access="Error != true AND AccessLevel = 'Fallback_EmptyReaderId' OR AccessLevel = 'Page View Limit' OR AccessLevel != 'Full Content Access'" amp-access-hide><amp-img src={thumbnailImage} /></div>
+    </>
   );
 
   return (

@@ -302,7 +302,7 @@ const StoryPageLayout = () => {
             )}
             {ampPage && isMeteredStory && <>
               <PaywallLimitMessage arcSite={arcSite} />
-              <div className="c-section inline-body subscribe-bar" amp-access="Error = true OR AccessLevel = 'Full Content Access'" amp-access-hide>
+              <div amp-access="Error = true OR AccessLevel = 'Full Content Access'" amp-access-hide>
                 {storyContentOutput()}
               </div>
             </>}
