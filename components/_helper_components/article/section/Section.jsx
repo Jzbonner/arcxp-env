@@ -82,7 +82,7 @@ const Section = ({
           ${fullWidth ? 'full-width b-clear-both' : ''}
           b-margin-bottom-d40-m20
           ${comesAfterDivider ? 'after-divider' : ''}`
-        } amp-access="Error != true AND UserState != 'LoggedOut' OR UserState != 'NoActiveSubscriptions' AND AccessLevel != 'Page View Limit'" amp-access-hide>
+        }>
         <ContentElements contentElements={newContentElements} ampPage={ampPage} />
       </div>
     );
