@@ -158,6 +158,74 @@ const StoryPageLayout = () => {
       taxonomy={taxonomy}
       uuid={uuid} />);
   }
+  const storyContentOutput = () => <>
+    <Section
+      elements={filteredContentElements}
+      startIndex={1}
+      stopIndex={3}
+      rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null}
+      insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [RP01StoryTablet, MP02] : [ampMP02] }] : null}
+      fullWidth={noAds}
+      comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
+      ampPage={ampPage}
+    />
+    {!noAds && maxNumberOfParagraphs === 3 && <InterscrollerPlaceholder
+        ampPage={ampPage}
+        isHyperlocalContent={isHyperlocalContent}
+        taxonomy={taxonomy}
+        uuid={uuid}
+      />}
+    {!noAds && !isHyperlocalContent && !sponsorSectionID && (
+      <Nativo
+        elements={filteredContentElements}
+        displayIfAtLeastXParagraphs={4}
+        controllerClass="story-nativo_placeholder--moap"
+        ampPage={ampPage}
+      />
+    )}
+    <Section
+      elements={filteredContentElements}
+      startIndex={start}
+      stopIndex={stop}
+      fullWidth={noAds}
+      comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
+      ampPage={ampPage}
+      insertedAds={ampPage && maxNumberOfParagraphs >= 4 && paywallStatus !== 'free' ? [{ insertAfterParagraph: 4, adArray: [connextThankYouMessage] }] : null}
+    />
+    {!noAds && maxNumberOfParagraphs >= 4
+      && <>
+        {ampPage && isMeteredStory && <NonSubPremiumMessage arcSite={arcSite}/>}
+        <InterscrollerPlaceholder
+          ampPage={ampPage}
+          isHyperlocalContent={isHyperlocalContent}
+          taxonomy={taxonomy}
+          uuid={uuid}
+        />
+      </>
+    }
+    <Section
+      elements={filteredContentElements}
+      startIndex={stop}
+      rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
+      insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [RP09StoryTablet, MP03] : [ampMP03] }] : null}
+      fullWidth={noAds}
+      insertAtSectionEnd={insertAtEndOfStory}
+      comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
+      ampPage={ampPage}
+    />
+    {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && (
+      <div className="c-section full-width b-clear-both">
+        <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} />
+      </div>
+    )}
+    {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
+    {!noAds && !isHyperlocalContent && !sponsorSectionID && (
+      <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
+    )}
+    {!noAds && ampPage && (
+      <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
+    )}
+  </>;
 
   return (
     <>
@@ -232,75 +300,13 @@ const StoryPageLayout = () => {
             {!noAds && ampPage && isHyperlocalContent && (
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
             )}
-
-            {ampPage && isMeteredStory && <PaywallLimitMessage arcSite={arcSite}/>}
-
-            <Section
-              elements={filteredContentElements}
-              startIndex={1}
-              stopIndex={3}
-              rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null}
-              insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [RP01StoryTablet, MP02] : [ampMP02] }] : null}
-              fullWidth={noAds}
-              comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
-              ampPage={ampPage}
-            />
-            {!noAds && maxNumberOfParagraphs === 3
-              && <InterscrollerPlaceholder
-                ampPage={ampPage}
-                isHyperlocalContent={isHyperlocalContent}
-                taxonomy={taxonomy}
-                uuid={uuid}
-              />}
-            {!noAds && !isHyperlocalContent && !sponsorSectionID && (
-              <Nativo
-                elements={filteredContentElements}
-                displayIfAtLeastXParagraphs={4}
-                controllerClass="story-nativo_placeholder--moap"
-                ampPage={ampPage}
-              />
-            )}
-            <Section
-              elements={filteredContentElements}
-              startIndex={start}
-              stopIndex={stop}
-              fullWidth={noAds}
-              comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
-              ampPage={ampPage}
-              insertedAds={ampPage && maxNumberOfParagraphs >= 4 && paywallStatus !== 'free' ? [{ insertAfterParagraph: 4, adArray: [connextThankYouMessage] }] : null}
-            />
-            {!noAds && maxNumberOfParagraphs >= 4
-              && <>
-                  {ampPage && paywallStatus.toLowerCase() === 'premium' && <NonSubPremiumMessage arcSite={arcSite}/>}
-                  <InterscrollerPlaceholder
-                    ampPage={ampPage}
-                    isHyperlocalContent={isHyperlocalContent}
-                    taxonomy={taxonomy}
-                    uuid={uuid}
-                  />
-                </>}
-            <Section
-              elements={filteredContentElements}
-              startIndex={stop}
-              rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
-              insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [RP09StoryTablet, MP03] : [ampMP03] }] : null}
-              fullWidth={noAds}
-              insertAtSectionEnd={insertAtEndOfStory}
-              comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
-              ampPage={ampPage}
-            />
-            {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && (
-              <div className="c-section full-width b-clear-both">
-                <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} />
+            {ampPage && isMeteredStory && <>
+              <PaywallLimitMessage arcSite={arcSite} />
+              <div amp-access="Error = true OR AccessLevel = 'Full Content Access'" amp-access-hide>
+                {storyContentOutput()}
               </div>
-            )}
-            {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
-            {!noAds && !isHyperlocalContent && !sponsorSectionID && (
-              <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
-            )}
-            {!noAds && ampPage && (
-              <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
-            )}
+            </>}
+            {(!ampPage || (ampPage && !isMeteredStory)) && storyContentOutput()}
           </div>
         </article>
       </main>
