@@ -1,7 +1,6 @@
 /* /components/output-types/xml.js */
-import { toXML } from 'jstoxml';
 import Api from '../features/api/rss';
-import { formatApiTime } from '../layouts/_helper_functions/api/formatTime';
+import buildXML from './_helper_components/buildXML';
 
 const Xml = (props) => {
   const {
@@ -22,42 +21,7 @@ const Xml = (props) => {
     indent: '  ',
   };
 
-  return toXML({
-    _name: 'rss-app',
-    _attrs: {
-      'xmlns:content': 'http://purl.org/rss/1.0/modules/content/',
-      'xmlns:media': 'http://search.yahoo.com/mrss/',
-      'xmlns:atom': 'http://www.w3.org/2005/Atom',
-      version: '2.0',
-    },
-    _content: {
-      channel: [
-        {
-          title: 'RSS-APP FEED',
-        },
-        {
-          link: `${websiteURL}${feedLink}`,
-        },
-        {
-          description: `${orgName}`,
-        },
-        {
-          language: 'en-us',
-        },
-        {
-          _name: 'atom:link',
-          _attrs: {
-            href: `${websiteURL}${feedLink}`,
-            rel: 'self',
-          },
-        },
-        {
-          lastBuildDate: () => formatApiTime(),
-        },
-        rssApiContent,
-      ],
-    },
-  }, xmlOptions);
+  return buildXML('rss-app', rssApiContent, { websiteURL, feedLink, orgName }, xmlOptions);
 };
 
 // XML content type

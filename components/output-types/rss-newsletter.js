@@ -1,3 +1,4 @@
+/* /components/output-types/xml.js */
 import Api from '../features/api/rss';
 import buildXML from './_helper_components/buildXML';
 
