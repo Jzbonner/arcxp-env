@@ -95,7 +95,6 @@ const Section = ({
 
     childSectionLength = childNav && childName ? childSectionLength + 1 : childSectionLength + 0;
 
-
     if (id.indexOf('/configsection/links/') !== -1 && !childURL) {
       // if it's a section link (not a true section) but has no URL defined, skip it
       return null;
