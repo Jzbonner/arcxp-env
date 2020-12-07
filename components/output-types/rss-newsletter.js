@@ -21,7 +21,7 @@ const Xml = (props) => {
     indent: '  ',
   };
 
-  return buildXML('rss-app', rssApiContent, { websiteURL, feedLink, orgName }, xmlOptions);
+  return buildXML('rss-newsletter', rssApiContent, { websiteURL, feedLink, orgName }, xmlOptions);
 };
 
 // XML content type

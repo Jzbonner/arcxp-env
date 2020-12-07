@@ -25,9 +25,9 @@ class Api {
     const feedStart = from - 1;
     const queryParams = getQueryParams(requestUri);
     const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
-    const queryTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'type');
-    const newsletterFeed = queryTypePresent && queryParams.type === 'newsletter';
+    const newsletterFeed = outPutTypePresent && queryParams.outputType === 'rss-newsletter';
     const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'rss-app';
+
     const rssFeedDetectAppWebview = () => {
       if (noHeaderAndFooter) {
         return '?outputType=wrap';
@@ -79,7 +79,7 @@ class Api {
 
           if (type === 'story') {
             const formatContentElements = formatNavigaContent(siteID, contentElements);
-            const outputContent = noHeaderAndFooter ? `<![CDATA[${formatContentElements.join('')}]]>` : formattedDescription;
+            const outputContent = noHeaderAndFooter || newsletterFeed ? `<![CDATA[${formatContentElements.join('')}]]>` : formattedDescription;
 
             const mediaArray = getMediaContent(type, siteID, contentElements, promoItems, newsletterFeed);
 
