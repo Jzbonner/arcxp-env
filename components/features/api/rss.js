@@ -4,6 +4,7 @@ import { getMediaContent } from './_helper_functions/getMediaContent';
 import { formatNavigaContent } from './_helper_functions/formatNavigaContent';
 import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
 import { getFirst120CharsFromStory } from './_helper_functions/getFirst120CharFromStory';
+import getVideoAuthor from './_helper_functions/getVideoAuthor';
 
 @Consumer
 class Api {
@@ -62,12 +63,13 @@ class Api {
             type = '',
             headlines,
             description,
-            credits,
+            credits = {},
             promo_items: promoItems,
           } = item || {};
 
           const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
           let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
+
           if (credits && credits.by && credits.by.length > 1) {
             author = `<![CDATA[${credits.by.map(eachAuthor => eachAuthor.name).join(', ')}]]>`;
           }
@@ -114,13 +116,12 @@ class Api {
           }
 
           if (type === 'video') {
-            const { basic } = promoItems || {};
+            const { basic = {} } = promoItems || {};
             const {
               streams,
               promo_image: promoImage,
             } = basic || {};
-            const { name, org } = basic && basic.credits && basic.credits.by && basic.credits.by[0];
-            const videoAuthor = name || org;
+            const videoAuthor = getVideoAuthor(basic);
             const mp4Url = streams && streams[0] && streams[0].url;
             const { caption, url: promoImageUrl } = promoImage || {};
             const videoXmlObject = {
