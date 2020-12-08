@@ -50,15 +50,13 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
             ${items.map((item, id) => {
     const { content: itemContent } = item;
     return `<li key=${id}>${itemContent}</li>`;
-  })}
-          </ul>`;
+  }).join('')}</ul>`;
     }
-    return `<ol>
+    return `<ol style="list-style: decimal;">
           ${items.map((item, id) => {
     const { content: itemContent } = item;
     return `<li key=${id}>${itemContent}</li>`;
-  })}
-        </ol>`;
+  }).join('')}</ol>`;
   }
 
   if (type === 'quote') {
@@ -78,7 +76,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   if (type === 'video') {
     const { streams } = el || {};
     const [{ url: inlineVideoURL }] = streams || {};
-    return `<embed type="oembed">${inlineVideoURL}</embed>`;
+    return `<embed type="raw">${inlineVideoURL}</embed>`;
   }
 
   if (type === 'interstitial_link') {
