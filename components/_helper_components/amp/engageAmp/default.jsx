@@ -32,7 +32,7 @@ const EngageAmpScript = ({ arcSite }) => {
       },
       "siteCode": "${siteCode}",
       "configCode": "${configCode}",
-      "defaultResponse": {"Error":true},
+      "defaultResponse": {"Error":false},
       "authorizationFallbackResponse": {"Error":true}
     }`,
   }}>
