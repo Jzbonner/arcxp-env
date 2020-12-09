@@ -10,7 +10,6 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
                 </p>
               </div>`;
   }
-
   if (type === 'oembed_response') {
     const { raw_oembed: rawOembed } = el || {};
 
@@ -52,7 +51,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     return `<li key=${id}>${itemContent}</li>`;
   }).join('')}</ul>`;
     }
-    return `<ol style="list-style: decimal;">
+    return `<ol>
           ${items.map((item, id) => {
     const { content: itemContent } = item;
     return `<li key=${id}>${itemContent}</li>`;
@@ -76,7 +75,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   if (type === 'video') {
     const { streams } = el || {};
     const [{ url: inlineVideoURL }] = streams || {};
-    return `<embed type="raw">${inlineVideoURL}</embed>`;
+    return `<iframe src=${inlineVideoURL} width="640" height="360" frameborder="0" allowfullscreen="allowfullscreen"></iframe>`;
   }
 
   if (type === 'interstitial_link') {
