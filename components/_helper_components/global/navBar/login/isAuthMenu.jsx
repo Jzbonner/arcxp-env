@@ -109,7 +109,7 @@ const isAuthMenu = ({
                 ePaper
               </a>
             </li>}
-            {RenderMenuLinks(links, siteCode, userStateRef.current)}
+            {RenderMenuLinks(links)}
           </ul>
         </div>
       </div>
