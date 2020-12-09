@@ -1,8 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import getProperties from 'fusion:properties';
-import fetchEnv from '../../utils/environment';
 import RenderMenuLinks from './_helper_functions/renderMenuLinks';
 import triggerGtmEvent from '../../siteMetrics/_helper_functions/triggerGtmEvent';
 import userIcon from '../../../../../resources/icons/login/user-icon.svg';
@@ -12,9 +10,6 @@ const NotAuthMenu = ({
   isMobile, isFlyout, showUserMenu, setShowUserMenu, arcSite,
 }) => {
   const loginEl = useRef(null);
-  const currentEnv = fetchEnv();
-  const { connext } = getProperties(arcSite);
-  const { siteCode } = connext[currentEnv] || {};
 
   let source;
   if (isFlyout) {
@@ -103,7 +98,7 @@ const NotAuthMenu = ({
                  {renderLoginButton()}
               </li>
             )}
-            {RenderMenuLinks(links, siteCode)}
+            {RenderMenuLinks(links)}
           </ul>
         </div>
       </div>
