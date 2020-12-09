@@ -6,7 +6,7 @@ import fetchEnv from '../../global/utils/environment.js';
 import buildJsonObject from './_helper_functions/buildJsonObject';
 
 export const AmpAd = ({
-  adSlot = '', uuid = '', width = '', height = '', taxonomy, multiSize, multiSizeValidation, flyingCarpet = false,
+  adSlot = '', uuid = '', width = '', height = '', taxonomy, multiSize, multiSizeValidation, flyingCarpet = false, isMeteredStory = false,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -41,6 +41,8 @@ export const AmpAd = ({
         class="ampAd"
         data-multi-size={multiSize}
         data-multi-size-validation={multiSizeValidation}
+        amp-access={isMeteredStory ? 'Error = true OR AccessLevel = "Full Content Access"' : null}
+        amp-access-hide={isMeteredStory ? '' : null}
       >
       </amp-ad>
       { !flyingCarpet && <div style={{ transform: `translate(0, -${offsetHeight}px)` }}className='ampAdLabel'></div> }
@@ -57,6 +59,7 @@ AmpAd.propTypes = {
   multiSize: PropTypes.string,
   multiSizeValidation: PropTypes.string,
   flyingCarpet: PropTypes.bool,
+  isMeteredStory: PropTypes.bool,
 };
 
 export default AmpAd;

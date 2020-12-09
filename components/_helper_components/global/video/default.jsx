@@ -395,7 +395,7 @@ const Video = ({
     </>
   );
 
-  const ampImaPlayer = () => <amp-ima-video width="16" height="9" layout="responsive" data-tag={adTag} data-poster={thumbnailImage} autoplay={!lazyLoad && startPlaying ? '' : null}>
+  const ampImaPlayer = () => <amp-ima-video width="16" height="9" layout="responsive" data-tag={adTag} data-poster={thumbnailImage} autoplay={!lazyLoad && startPlaying ? '' : null} amp-access={lazyLoad ? 'Error=true OR AccessLevel="Full Content Access"' : null} amp-access-hide={lazyLoad ? '' : null}>
     <source src={videoLink} type="video/mp4"></source>
     <source src={videoLink} type="video/webm"></source>
   </amp-ima-video>;
@@ -403,10 +403,10 @@ const Video = ({
   const renderAmpPlayer = () => (
     <>
       {lazyLoad && <>
-        <div amp-access='Error = true OR AccessLevel = "Full Content Access"' amp-access-hide>
+        <div amp-access='Error=true OR AccessLevel="Full Content Access"' amp-access-hide>
           {ampImaPlayer()}
         </div>
-        <div amp-access='Error != true AND AccessLevel != "Full Content Access"'><amp-img src={thumbnailImage} width="16" height="9" layout="responsive" /></div>
+        <div amp-access='Error=false AND AccessLevel!="Full Content Access"'><amp-img src={thumbnailImage} width="16" height="9" layout="responsive" /></div>
       </>}
       {!lazyLoad && ampImaPlayer()}
     </>
