@@ -78,9 +78,6 @@ const StoryPageLayout = () => {
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
   if (subtype === 'Flatpage') return <FlatPage globalContent={globalContent} noHeaderAndFooter={noHeaderAndFooter} />;
 
-  const ampMP02 = () => <AmpAd adSlot="MP02" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
-  const ampMP03 = () => <AmpAd adSlot="MP03" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />;
-
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
@@ -89,6 +86,9 @@ const StoryPageLayout = () => {
     && paywallStatus
     && paywallStatus.toLowerCase() !== 'free'
     && paywallStatus.toLowerCase() !== 'unmetered';
+
+  const ampMP02 = () => <AmpAd adSlot="MP02" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />;
+  const ampMP03 = () => <AmpAd adSlot="MP03" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />;
   const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP01-Story-Desktop'} />;
   const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP01-Story-Tablet'} />;
   const MP02 = () => <ArcAd staticSlot={'MP02'} lazyLoad={isMeteredStory} key={'MP02'} />;
@@ -223,7 +223,7 @@ const StoryPageLayout = () => {
       <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
     )}
     {!noAds && ampPage && (
-      <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} />
+      <AmpAd adSlot="MSW01" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />
     )}
   </>;
 
@@ -298,11 +298,11 @@ const StoryPageLayout = () => {
               </div>
             )}
             {!noAds && ampPage && isHyperlocalContent && (
-              <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
+              <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />
             )}
             {ampPage && isMeteredStory && <>
               <PaywallLimitMessage arcSite={arcSite} />
-              <div amp-access='Error = true OR AccessLevel = "Full Content Access"' amp-access-hide>
+              <div amp-access='Error=true OR AccessLevel="Full Content Access"' amp-access-hide>
                 {storyContentOutput()}
               </div>
             </>}

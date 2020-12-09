@@ -32,8 +32,14 @@ const EngageAmpScript = ({ arcSite }) => {
       },
       "siteCode": "${siteCode}",
       "configCode": "${configCode}",
-      "defaultResponse": {"Error":false},
-      "authorizationFallbackResponse": {"Error":true}
+      "defaultResponse": {
+        "Error": false,
+        "AccessLevel": ""
+      },
+      "authorizationFallbackResponse": {
+        "Error": false,
+        "AccessLevel": "Fallback_EmptyReaderId"
+      }
     }`,
   }}>
   </script>
