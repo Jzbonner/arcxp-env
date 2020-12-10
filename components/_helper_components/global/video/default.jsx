@@ -406,7 +406,7 @@ const Video = ({
         <div amp-access='Error=true OR AccessLevel="Full Content Access"' amp-access-hide>
           {ampImaPlayer()}
         </div>
-        <div amp-access='Error=false AND AccessLevel!="Full Content Access"'><amp-img src={thumbnailImage} width="16" height="9" layout="responsive" /></div>
+        <div amp-access='Error!=true AND AccessLevel!="Full Content Access"'><amp-img src={thumbnailImage} width="16" height="9" layout="responsive" /></div>
       </>}
       {!lazyLoad && ampImaPlayer()}
     </>

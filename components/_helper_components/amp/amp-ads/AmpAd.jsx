@@ -35,13 +35,14 @@ export const AmpAd = ({
         height={height}
         layout="fixed"
         type="doubleclick"
-        data-loading-strategy ="1.25"
+        data-loading-strategy={isMeteredStory ? '0' : '1.25'}
+        data-lazy-fetch={isMeteredStory ? 'true' : null}
         data-slot={dataSlot}
         json={jsonObject}
         class="ampAd"
         data-multi-size={multiSize}
         data-multi-size-validation={multiSizeValidation}
-        amp-access={isMeteredStory ? 'Error = true OR AccessLevel = "Full Content Access"' : null}
+        amp-access={isMeteredStory ? 'Error=true OR AccessLevel="Full Content Access"' : null}
         amp-access-hide={isMeteredStory ? '' : null}
       >
       </amp-ad>
