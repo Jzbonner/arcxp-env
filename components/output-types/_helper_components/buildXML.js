@@ -3,7 +3,7 @@ import { formatApiTime } from '../../layouts/_helper_functions/api/formatTime';
 
 export default function buildXML(rssTitle = 'rss', rssApiContent, { websiteURL = '', feedLink = '', orgName = '' }, xmlOptions = {}) {
   return toXML({
-    _name: `${rssTitle}`,
+    _name: 'rss',
     _attrs: {
       'xmlns:content': 'http://purl.org/rss/1.0/modules/content/',
       'xmlns:media': 'http://search.yahoo.com/mrss/',
