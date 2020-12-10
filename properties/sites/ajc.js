@@ -104,7 +104,9 @@ export default {
       containerId: 'GTM-W3VLHBK',
       allowMeter: true,
       pubParam: 'AJC',
-      activateUrl: 'https://subscribe.ajc.com/',
+      activateUrl: 'https://test-subscribe.ajc.com/',
+      activateAmpPaywallUrl: 'https://test-subscribe.ajc.com/startgw?g2i_campaign=ajcsite&g2i_source=digital-gateway&g2i_medium=gatewayamp',
+      activateAmpInlineUrl: 'https://test-subscribe.ajc.com/start?g2i_campaign=ajcsite&g2i_source=digital-site&g2i_medium=instoryamp',
     },
     prod: {
       isEnabled: true,
@@ -118,6 +120,8 @@ export default {
       allowMeter: true,
       pubParam: 'AJC',
       activateUrl: 'https://subscribe.ajc.com/',
+      activateAmpPaywallUrl: 'https://subscribe.ajc.com/startgw?g2i_campaign=ajcsite&g2i_source=digital-gateway&g2i_medium=gatewayamp',
+      activateAmpInlineUrl: 'https://subscribe.ajc.com/start?g2i_campaign=ajcsite&g2i_source=digital-site&g2i_medium=instoryamp',
     },
   },
   video: {
