@@ -36,7 +36,7 @@ const SiteMeta = () => {
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
   const { external_distribution: extDistribution, search: visibleInSearch } = syndication || {};
-  const hideArticleFromSearch = !!(!extDistribution && !visibleInSearch);
+  const hideArticleFromSearch = !!(syndication && !extDistribution && !visibleInSearch);
 
   const updatedURL = `https://www.${handleSiteName(site)}.com${url === '/homepage' || url === '/homepage/' ? '' : url}`;
 

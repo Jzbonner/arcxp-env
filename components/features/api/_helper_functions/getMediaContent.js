@@ -1,4 +1,5 @@
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import getVideoAuthor from './getVideoAuthor';
 
 export const getMediaContent = (type, siteID, globalContent, promoItems, newsletterFeed = false) => {
   let formattedMediaContent = [];
@@ -52,8 +53,8 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
   }
 
   if (promoItemsType === 'video') {
-    const [basicMp4Stream = []] = basicStreams.filter(item => item.stream_type === 'mp4');
-    const [basicM3u8Stream = []] = basicStreams.filter(item => item.stream_type === 'ts');
+    const [basicMp4Stream] = basicStreams.filter(item => item.stream_type === 'mp4');
+    const [basicM3u8Stream] = basicStreams.filter(item => item.stream_type === 'ts');
 
     let leadObjectType = '';
     let leadObjectUrl = '';
@@ -66,7 +67,8 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
       leadObjectType = 'video/mp4';
       leadObjectUrl = basicMp4Url;
     }
-    const { url: basicThumbNailImage = '' } = basicPromoImage;
+    const { caption: videoCaption, url: basicThumbNailImage = '' } = basicPromoImage || {};
+    const videoAuthor = getVideoAuthor(basic);
 
     leadObject = {
       _name: 'media:content',
@@ -80,7 +82,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
           'media:title': `<![CDATA[${mediaTitle}]]>`,
         },
         {
-          'media:description': `<![CDATA[${basicCaption}]]>`,
+          'media:description': `<![CDATA[${videoCaption}]]>`,
         },
         {
           _name: 'media:thumbnail',
@@ -93,7 +95,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
           _attrs: {
             role: 'author',
           },
-          _content: `<![CDATA[${basicAuthor}]]>`,
+          _content: `<![CDATA[${videoAuthor}]]>`,
         },
       ],
     };

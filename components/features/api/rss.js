@@ -14,11 +14,7 @@ class Api {
 
   render() {
     const {
-      globalContent,
-      globalContentConfig,
-      siteProperties,
-      arcSite: siteID,
-      requestUri,
+      globalContent, globalContentConfig, siteProperties, arcSite: siteID, requestUri,
     } = this.props || {};
     const { websiteURL } = siteProperties || {};
     const { query } = globalContentConfig || {};
@@ -32,7 +28,8 @@ class Api {
     const rssFeedDetectAppWebview = () => {
       if (noHeaderAndFooter) {
         return '?outputType=wrap';
-      } return '';
+      }
+      return '';
     };
     let maxItems = feedStart + size;
     if (maxItems > globalContent.length) {
@@ -52,166 +49,152 @@ class Api {
         });
       }
 
-      return filteredContent
-        .map((item) => {
-          const {
-            content_elements: contentElements = [],
-            first_publish_date: firstPubDate,
-            display_date: displayDate,
-            canonical_url: canonicalUrl,
-            _id: guid,
-            type = '',
-            headlines,
-            description,
-            credits = {},
-            promo_items: promoItems,
-          } = item || {};
+      return filteredContent.map((item) => {
+        const {
+          content_elements: contentElements = [], first_publish_date: firstPubDate, display_date: displayDate, canonical_url: canonicalUrl, _id: guid, type = '', headlines, description, credits = {}, promo_items: promoItems,
+        } = item || {};
 
-          const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
-          let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
+        const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
+        let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
 
-          if (credits && credits.by && credits.by.length > 1) {
-            author = `<![CDATA[${credits.by.map(eachAuthor => eachAuthor.name).join(', ')}]]>`;
-          }
+        if (credits && credits.by && credits.by.length > 1) {
+          author = `<![CDATA[${credits.by.map(eachAuthor => eachAuthor.name).join(', ')}]]>`;
+        }
 
-          const formattedDescription = description
-            && description.basic ? `<![CDATA[${description.basic}]]>` : getFirst120CharsFromStory(contentElements);
+        const formattedDescription = description && description.basic ? `<![CDATA[${description.basic}]]>` : getFirst120CharsFromStory(contentElements);
 
-          const formattedDate = formatApiTime(firstPubDate, displayDate);
+        const formattedDate = formatApiTime(firstPubDate, displayDate);
 
-          if (type === 'story') {
-            const formatContentElements = formatNavigaContent(siteID, contentElements);
-            const outputContent = noHeaderAndFooter || newsletterFeed ? `<![CDATA[${formatContentElements.join('')}]]>` : formattedDescription;
+        if (type === 'story') {
+          const formatContentElements = formatNavigaContent(siteID, contentElements);
+          const outputContent = noHeaderAndFooter || newsletterFeed ? `<![CDATA[${formatContentElements.join('')}]]>` : formattedDescription;
 
-            const mediaArray = getMediaContent(type, siteID, contentElements, promoItems, newsletterFeed);
+          const mediaArray = getMediaContent(type, siteID, contentElements, promoItems, newsletterFeed);
 
-            const xmlObject = {
-              item: [
-                {
-                  guid: `urn:uuid:${guid}`,
-                },
-                {
-                  link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
-                },
-                {
-                  description: formattedDescription,
-                },
-                {
-                  pubDate: formattedDate,
-                },
-                {
-                  'content:encoded': outputContent,
-                },
-                {
-                  title,
-                },
-                {
-                  author,
-                },
-                mediaArray,
-              ],
-            };
+          const xmlObject = {
+            item: [
+              {
+                guid: `urn:uuid:${guid}`,
+              },
+              {
+                link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
+              },
+              {
+                description: formattedDescription,
+              },
+              {
+                pubDate: formattedDate,
+              },
+              {
+                'content:encoded': outputContent,
+              },
+              {
+                title,
+              },
+              {
+                author,
+              },
+              mediaArray,
+            ],
+          };
 
-            return xmlObject;
-          }
+          return xmlObject;
+        }
 
-          if (type === 'video') {
-            const { basic = {} } = promoItems || {};
-            const {
-              streams,
-              promo_image: promoImage,
-            } = basic || {};
-            const videoAuthor = getVideoAuthor(basic);
-            const mp4Url = streams && streams[0] && streams[0].url;
-            const { caption, url: promoImageUrl } = promoImage || {};
-            const videoXmlObject = {
-              item: [
+        if (type === 'video') {
+          const { basic = {} } = promoItems || {};
+          const { streams, promo_image: promoImage } = basic || {};
+          const videoAuthor = getVideoAuthor(basic);
+          const mp4Url = streams && streams[0] && streams[0].url;
+          const { caption, url: promoImageUrl } = promoImage || {};
+          const videoXmlObject = {
+            item: [
+              {
+                guid: `urn:uuid:${guid}`,
+              },
+              {
+                link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
+              },
+              {
+                description: formattedDescription,
+              },
+              {
+                pubDate: formattedDate,
+              },
+              {
+                title,
+              },
+              {
+                author,
+              },
+              [
                 {
-                  guid: `urn:uuid:${guid}`,
-                },
-                {
-                  link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
-                },
-                {
-                  description: formattedDescription,
-                },
-                {
-                  pubDate: formattedDate,
-                },
-                {
-                  title,
-                },
-                {
-                  author,
-                },
-                [
-                  {
-                    _name: 'media:content',
-                    _attrs: {
-                      type: 'video',
-                      medium: 'video/mp4',
-                      url: mp4Url,
-                    },
-                    _content: [
-                      {
-                        'media:title': title,
-                      },
-                      {
-                        'media:description': `<![CDATA[${caption}]]>`,
-                      },
-                      {
-                        _name: 'media:credit',
-                        _attrs: {
-                          role: 'author',
-                        },
-                        _content: videoAuthor,
-                      },
-                      {
-                        _name: 'media:thumbnail',
-                        _attrs: {
-                          url: promoImageUrl,
-                        },
-                      },
-                    ],
+                  _name: 'media:content',
+                  _attrs: {
+                    type: 'video',
+                    medium: 'video/mp4',
+                    url: mp4Url,
                   },
-                ],
+                  _content: [
+                    {
+                      'media:title': title,
+                    },
+                    {
+                      'media:description': `<![CDATA[${caption}]]>`,
+                    },
+                    {
+                      _name: 'media:credit',
+                      _attrs: {
+                        role: 'author',
+                      },
+                      _content: videoAuthor,
+                    },
+                    {
+                      _name: 'media:thumbnail',
+                      _attrs: {
+                        url: promoImageUrl,
+                      },
+                    },
+                  ],
+                },
               ],
-            };
+            ],
+          };
 
-            return videoXmlObject;
-          }
+          return videoXmlObject;
+        }
 
-          if (type === 'gallery') {
-            const galleryMediaArray = getMediaContent(type, siteID, contentElements);
+        if (type === 'gallery') {
+          const galleryMediaArray = getMediaContent(type, siteID, contentElements);
 
-            const galleryXmlObject = {
-              item: [
-                {
-                  guid: `urn:uuid:${guid}`,
-                },
-                {
-                  link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
-                },
-                {
-                  description: formattedDescription || title,
-                },
-                {
-                  pubDate: formattedDate,
-                },
-                {
-                  title,
-                },
-                {
-                  author,
-                },
-                galleryMediaArray,
-              ],
-            };
+          const galleryXmlObject = {
+            item: [
+              {
+                guid: `urn:uuid:${guid}`,
+              },
+              {
+                link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
+              },
+              {
+                description: formattedDescription || title,
+              },
+              {
+                pubDate: formattedDate,
+              },
+              {
+                title,
+              },
+              {
+                author,
+              },
+              galleryMediaArray,
+            ],
+          };
 
-            return galleryXmlObject;
-          }
-          return {};
-        });
+          return galleryXmlObject;
+        }
+        return {};
+      });
     }
 
     return [];
