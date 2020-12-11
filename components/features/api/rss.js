@@ -9,9 +9,6 @@ import getVideoAuthor from './_helper_functions/getVideoAuthor';
 @Consumer
 class Api {
   constructor(props) {
-    this.state = {
-      isLoaded: false,
-    };
     this.props = props;
   }
 
