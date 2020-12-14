@@ -165,6 +165,7 @@
   z-index: 2;
   opacity: .28;
   background: #000;
+  scroll-behavior: initial;
 
   .gallery-overlay-backdrop {
     display: flex;
@@ -213,6 +214,7 @@
   z-index: 10000;
   font: .75rem "Gordita_Regular", "arial", sans-serif;
   height: 100%;
+  scroll-behavior: initial;
 
   .gallery-count {
     color: #393f4d;
