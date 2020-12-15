@@ -90,6 +90,13 @@
           display: none;
         }
       }
+
+      @include breakpoint(tablet) {
+
+        .arc_ad[class*="HP01"] {
+          margin-bottom: 1.88rem;
+        }
+      }
     }
   }
 
@@ -128,6 +135,17 @@
 
         > :first-child:not(.arc_ad) {
           margin-top: 0;
+        }
+      }
+
+      @include breakpoint(desktop-sm) {
+
+        > :first-child {
+          margin-bottom: 1.88rem;
+          
+          .arcad {
+            margin-bottom: 1.88rem;
+          }
         }
       }
     }
@@ -219,6 +237,16 @@
 
         .c-contentElements {
           width: calc((100% - 300px) / 2 - 40px);
+
+          &:first-child {
+            @include between-breakpoints(tablet, desktop-sm) {
+              height: fit-content;
+            }
+
+            @include breakpoint(desktop-sm) {
+              padding-right: 30px;
+            }
+          }
 
           &:nth-child(2) {
             order: unset;
