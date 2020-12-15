@@ -7,8 +7,8 @@
   width: 100%;
   margin-bottom: 1.25rem;
 
-  @include breakpoint(desktop-lg) {
-    margin-bottom: 0;
+  @include breakpoint(desktop-sm) {
+    margin-bottom: 1.88rem;
   }
 
   @include between-breakpoints(tablet, desktop-sm) {
@@ -396,6 +396,7 @@
 
         .homeList-text {
           border: none;
+          padding-bottom: 0;
         }
       }
     }
