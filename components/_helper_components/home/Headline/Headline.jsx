@@ -78,7 +78,7 @@ const Headline = ({
 
     return (
        <>
-        <SectionLabel label={label} taxonomy={taxonomy} />
+        <SectionLabel label={label || {}} taxonomy={taxonomy || {}} />
         <TimeStamp
          firstPublishDate={firstPublishDate}
          displayDate={displayDate}
