@@ -15,7 +15,7 @@ function encodeSrc(src) {
 export default {
 
   fetch({
-    src, height = 600, width = 1000, smart, arcSite,
+    src, height = 600, width = 1000, smart, focalCoords, arcSite,
   }) {
     let reqWidth = width;
     let reqHeight = height;
@@ -25,12 +25,24 @@ export default {
       if (item[0] === imgDimensions[0] && item[1] === imgDimensions[1]) return true;
       return false;
     });
+    const useFocalCrop = focalCoords.length === 2;
+    const focalPoints = {};
 
     // Return null if the requested size dimensions aren't in the whitelist.
     // This prevents spamming the resizer for images at misc dimensions
     if (!isInDimensions) {
       reqWidth = 500;
       reqHeight = 282;
+    }
+
+    if (useFocalCrop) {
+      const { 0: focalX, 1: focalY } = focalCoords;
+      const focalOffsetX = reqWidth / 2;
+      const focalOffsetY = reqHeight / 2;
+      focalPoints.left = focalX - focalOffsetX;
+      focalPoints.top = focalY - focalOffsetY;
+      focalPoints.right = focalX + focalOffsetX;
+      focalPoints.bottom = focalY + focalOffsetY;
     }
 
     let siteDomain = `${cdnOrg}-${cdnSite}-sandbox.cdn.arcpublishing.com`;
@@ -42,7 +54,8 @@ export default {
     const resizerUrl = `https://${siteDomain}/resizer`;
     const imageUrl = src.substring(src.indexOf('//') + 2);
     const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerUrl);
-    const resizedUrl = thumbor.setImagePath(encodeSrc(imageUrl)).resize(reqWidth, reqHeight);
+    const imagePath = thumbor.setImagePath(encodeSrc(imageUrl));
+    const resizedUrl = (useFocalCrop) ? imagePath.crop(focalPoints.left, focalPoints.top, focalPoints.right, focalPoints.bottom) : imagePath.resize(reqWidth, reqHeight);
     const thumborUrl = (smart) ? resizedUrl.smartCrop(true) : resizedUrl;
     const outputUrl = thumborUrl.buildUrl();
 
@@ -53,6 +66,7 @@ export default {
     height: 'number',
     width: 'number',
     smart: 'boolean',
+    focalCoords: 'array',
   },
   ttl: 120,
 };
