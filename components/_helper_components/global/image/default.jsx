@@ -16,8 +16,11 @@ const Image = ({
   ampPage = false, onClickRun,
 }) => {
   const {
-    url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText,
+    url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties,
   } = src || {};
+  const { focal_point: focalPoint } = additionalProperties || {};
+  const { min: focalMin = [], max: focalMax = [] } = focalPoint || {};
+  const focalCoords = focalMin || focalMax || [];
   const fusionContext = useFusionContext();
   const { arcSite, layout } = fusionContext;
   const appContext = useAppContext();
@@ -29,6 +32,7 @@ const Image = ({
     src: url,
     height,
     width,
+    focalCoords,
     arcSite,
   };
 
