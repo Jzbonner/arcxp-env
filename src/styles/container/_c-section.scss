@@ -250,6 +250,8 @@
 
           &:nth-child(2) {
             order: unset;
+            width: calc((100% - 300px) / 2 - 30px);
+            padding-right: 10px;
           }
 
           &:nth-child(3) {
