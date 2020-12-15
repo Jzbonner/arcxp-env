@@ -25,7 +25,7 @@ const Columnist = (customFields = {}) => {
 
   if (Array.isArray(data)) {
     return (
-      <div className="c-columnistFeature b-margin-bottom-d40-m20">
+      <div className="c-columnistFeature b-margin-bottom-d30-m20">
         <h2 className="c-title">Columnists</h2>
         <ul className="c-columnistList">
           {data.map((story, idx) => {
