@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getSponsorContent from './_helper_functions/getSponserContent';
 import ArcAd from '../../../features/ads/default';
+import getSiteData from '../../../../content/sources/helper_functions/getSiteData';
+import getSponsorData from '../../../../content/sources/helper_functions/getSponsorData';
 import './default.scss';
 
 
@@ -12,19 +14,28 @@ const SP01 = () => <ArcAd staticSlot={'SP01'} key={'SP01'} />;
 const SponsorRelatedBox = ({
   sponsorID, uuid,
 }) => {
+  // const [feedQuery, setFeedQuery] = useState(null);
+
   if (!sponsorID) {
     return null;
   }
   const fusionContext = useFusionContext();
   const { arcSite = 'ajc' } = fusionContext;
 
-  const siteData = useContent({
+/*   const siteData = useContent({
     source: 'site-api',
     query: {
       section: sponsorID || null,
       arcSite,
     },
-  });
+  }); */
+  const siteData = getSponsorData(null, {}, true, sponsorID);
+
+  // const siteData = getSiteData({ arcSite, section: sponsorID });
+
+  console.log('HERE IS THE SITE DATA', siteData);
+
+  // if (!siteData) return null;
 
   const { Sponsor = {} } = siteData || {};
 
@@ -37,6 +48,9 @@ const SponsorRelatedBox = ({
     disable_sponsor_related_box: disableSponsorRelatedBox,
   } = Sponsor;
 
+  console.log('sponsor', Sponsor);
+  console.log('include tags', includeTags);
+
   const feed = useContent({
     source: 'query-feed',
     query: {
@@ -48,6 +62,13 @@ const SponsorRelatedBox = ({
       arcSite,
     },
   });
+
+ // console.log('boxTitle', boxTitle);
+
+/*   useEffect(() => {
+    if(!feedQuery && siteData) setFeedQuery({includeTags,includeAllTags})
+
+  }, [siteData]) */
 
   if (disableSponsorRelatedBox !== 'true') {
     const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor, uuid);

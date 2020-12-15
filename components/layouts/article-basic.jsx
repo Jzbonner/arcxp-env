@@ -158,6 +158,7 @@ const StoryPageLayout = () => {
       taxonomy={taxonomy}
       uuid={uuid} />);
   }
+
   const storyContentOutput = () => <>
     <Section
       elements={filteredContentElements}
