@@ -9,6 +9,7 @@ import getSiteData from '../../../../content/sources/helper_functions/getSiteDat
 import getSponsorData from '../../../../content/sources/helper_functions/getSponsorData';
 import { default as queryFeedFetch } from '../../../../content/sources/query-feed';
 import './default.scss';
+import { divide } from 'lodash';
 
 
 const SP01 = () => <ArcAd staticSlot={'SP01'} key={'SP01'} />;
@@ -76,9 +77,8 @@ const SponsorRelatedBoxAMP = ({
             const boxContent = getSponsorContent(5, queryFeedData, data && data.Sponsor, uuid);
 
             if (!boxContent || (boxContent && boxContent.length < 1)) return null;
-
-            const lastItemInArray = boxContent.slice(-1).pop();
-            return (
+           //  const lastItemInArray = boxContent.slice(-1).pop();
+/*             return (
               <div id="SPONSOR-BOX" className={'c-sponsor-box'}>
                 {boxTitle && (
                   <div className={'sponsor-header'}>
@@ -102,15 +102,17 @@ const SponsorRelatedBoxAMP = ({
                   })}
                 </ul>
               </div>
-            );
+            ); */
           }
         });
       });
   };
 
-  return buildAMPSponsorBox();
+  const fetchy = buildAMPSponsorBox();
 
-  // return null;
+  console.log('fetch output', fetchy);
+
+  return <h1>UNDER CONSTRUCTION</h1>;
 };
 
 SponsorRelatedBoxAMP.propTypes = {
