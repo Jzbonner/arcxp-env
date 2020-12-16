@@ -89,6 +89,7 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
                 || element.props.componentName === 'SponsorRelatedBox'
                 || element.props.componentName === 'RelatedList'
                 || element.props.componentName === 'ConnextThankYouMessage'
+                || element.props.componentName === 'SponsorRelatedBoxAMP'
               )
             ) {
               return element;

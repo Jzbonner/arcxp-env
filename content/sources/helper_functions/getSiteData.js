@@ -3,14 +3,16 @@ import axios from 'axios';
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 
 
-const getSiteData = (query = {}) => {
+const getSiteData = async (query = {}) => {
   const {
     'arc-site': arcSite = 'ajc', type = 'navigation', hierarchy = 'default', section,
   } = query;
 
   console.log('siteDataQuery', query);
 
-  let siteData = null;
+  // let siteData = null;
+
+  const promiseArray = [];
 
   if (!query) return null;
 
@@ -22,46 +24,21 @@ const getSiteData = (query = {}) => {
 
   console.log('requestUri', requestUri);
 
-  const fetchResponse = fetch(requestUri, {
+  fetch(requestUri, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json',
       Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
     },
   })
     .then(response => response.json())
-    .then(data => {
+    .then((data) => {
       //console.log('consssollleeee data', data);
-      return data;
+      promiseArray.push(data);
     });
 
-  siteData = fetchResponse;
-  
-  // console.log('siteData after fetch', siteData);
+  return Promise.all(promiseArray).then(() => promiseArray);
 
-  /* const promise = axios
-    .get(requestUri, {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': '*',
-        'Content-Type': 'application/json',
-      },
-    })
-    .then(({ data }) => {
-      console.log('data', data);
-      siteData = { ...data };
-    })
-    .catch((error) => {
-      console.log('AXIOS CATCH - getSiteData => ', error);
-    }); */
-
-
-  return Promise.all([fetchResponse]).then(() => {
-   // console.log('fetchy', fetchResponse);
-    return fetchResponse;
-  });
+  // console.log('promiseResponse', promiseResponse);
 };
 
 export default getSiteData;

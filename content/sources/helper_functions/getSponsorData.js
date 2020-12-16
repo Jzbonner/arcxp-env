@@ -3,7 +3,7 @@ import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 import checkSponsor from '../../../components/layouts/_helper_functions/checkSponsor';
 
-const getSponsorData = (sections, query, isSponsorBox = false, sponsorBoxSectionID = '') => {
+const getSponsorData = async (sections, query, isSponsorBox = false, sponsorBoxSectionID = '') => {
   const { sponsorSectionID, sponsorName } = checkSponsor(sections);
   const {
     arcSite = 'ajc', type = 'navigation', hierarchy = 'default',

@@ -42,6 +42,7 @@ import RelatedList from '../_helper_components/article/relatedList/default';
 import ConnextThankYouMessage from '../_helper_components/global/ConnextThankYouMessage/amp';
 import NonSubPremiumMessage from '../_helper_components/amp/nonSubPremiumMessage/default';
 import PaywallLimitMessage from '../_helper_components/amp/paywallLimitMessage/default';
+import SponsorRelatedBoxAMP from '../_helper_components/article/sponsorRelatedBox/amp';
 
 const start = 3;
 
@@ -95,7 +96,7 @@ const StoryPageLayout = () => {
   const MP03 = () => <ArcAd staticSlot={'MP03'} lazyLoad={isMeteredStory} key={'MP03'} />;
   const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP09-Story-Desktop'} />;
   const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP09-Story-Tablet'} />;
-  const connextThankYouMessage = () => <ConnextThankYouMessage isAmp={ampPage}/>;
+  const connextThankYouMessage = () => <ConnextThankYouMessage isAmp={ampPage} />;
 
   const windowExists = typeof window !== 'undefined';
 
@@ -150,13 +151,23 @@ const StoryPageLayout = () => {
   // about the author should be the last component of the story
   insertAtEndOfStory.push(BlogAuthorComponent);
 
+  // sponsor box should appear right after blog author component
   if (sponsorSectionID) {
-    // sponsor box should appear right after blog author component
-    insertAtEndOfStory.push(<SponsorRelatedBox
-      hideRelatedList={hideRelatedList}
-      sponsorID={sponsorSectionID}
-      taxonomy={taxonomy}
-      uuid={uuid} />);
+    if (ampPage) {
+      console.log('IS AMP')
+      insertAtEndOfStory.push(<SponsorRelatedBoxAMP
+        hideRelatedList={hideRelatedList}
+        sponsorID={sponsorSectionID}
+        taxonomy={taxonomy}
+        uuid={uuid} />);
+    } else {
+      console.log('NOT AMP');
+      insertAtEndOfStory.push(<SponsorRelatedBox
+        hideRelatedList={hideRelatedList}
+        sponsorID={sponsorSectionID}
+        taxonomy={taxonomy}
+        uuid={uuid} />);
+    }
   }
 
   const storyContentOutput = () => <>
@@ -171,11 +182,11 @@ const StoryPageLayout = () => {
       ampPage={ampPage}
     />
     {!noAds && maxNumberOfParagraphs === 3 && <InterscrollerPlaceholder
-        ampPage={ampPage}
-        isHyperlocalContent={isHyperlocalContent}
-        taxonomy={taxonomy}
-        uuid={uuid}
-      />}
+      ampPage={ampPage}
+      isHyperlocalContent={isHyperlocalContent}
+      taxonomy={taxonomy}
+      uuid={uuid}
+    />}
     {!noAds && !isHyperlocalContent && !sponsorSectionID && (
       <Nativo
         elements={filteredContentElements}
@@ -195,7 +206,7 @@ const StoryPageLayout = () => {
     />
     {!noAds && maxNumberOfParagraphs >= 4
       && <>
-        {ampPage && isMeteredStory && <NonSubPremiumMessage arcSite={arcSite}/>}
+        {ampPage && isMeteredStory && <NonSubPremiumMessage arcSite={arcSite} />}
         <InterscrollerPlaceholder
           ampPage={ampPage}
           isHyperlocalContent={isHyperlocalContent}
