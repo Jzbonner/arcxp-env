@@ -43,6 +43,24 @@ export default {
       focalPoints.top = focalY - focalOffsetY;
       focalPoints.right = focalX + focalOffsetX;
       focalPoints.bottom = focalY + focalOffsetY;
+
+      // additional logic to handle negative values (i.e. the focal point is less than half width or height distance from edge of photo)
+      if (focalPoints.left < 0) {
+        focalPoints.right -= focalPoints.left; // subtract a negative = positive
+        focalPoints.left = 0;
+      }
+      if (focalPoints.right < 0) {
+        focalPoints.left -= focalPoints.right; // subtract a negative = positive
+        focalPoints.right = 0;
+      }
+      if (focalPoints.top < 0) {
+        focalPoints.bottom -= focalPoints.top; // subtract a negative = positive
+        focalPoints.top = 0;
+      }
+      if (focalPoints.bottom < 0) {
+        focalPoints.top -= focalPoints.bottom; // subtract a negative = positive
+        focalPoints.bottom = 0;
+      }
     }
 
     let siteDomain = `${cdnOrg}-${cdnSite}-sandbox.cdn.arcpublishing.com`;
