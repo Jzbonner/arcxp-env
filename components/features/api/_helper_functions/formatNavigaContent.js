@@ -51,7 +51,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     return `<li key=${id}>${itemContent}</li>`;
   }).join('')}</ul>`;
     }
-    return `<ol>
+    return `<ol type="1">
           ${items.map((item, id) => {
     const { content: itemContent } = item;
     return `<li key=${id}>${itemContent}</li>`;
