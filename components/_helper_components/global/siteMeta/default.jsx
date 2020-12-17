@@ -33,6 +33,7 @@ const SiteMeta = () => {
     isOpinion,
     paywallStatus,
     syndication,
+    noIndex,
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
   const { external_distribution: extDistribution, search: visibleInSearch } = syndication || {};
@@ -73,7 +74,7 @@ const SiteMeta = () => {
       <meta property="og:site_name" content={site} />
       <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
-      {!isNonContentPage && hideArticleFromSearch && <meta name="robots" content="noindex" />}
+      {((!isNonContentPage && hideArticleFromSearch) || (noIndex === 'yes')) && <meta name="robots" content="noindex" />}
       {!isNonContentPage && <meta property="article:opinion" content={isOpinion.toString()} />}
       {!isNonContentPage && <meta name="story.meter" content={paywallStatus} />}
       {metaValue('topics') && <meta name="topics" content={metaValue('topics')} />}

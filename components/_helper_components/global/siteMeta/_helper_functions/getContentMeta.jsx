@@ -178,6 +178,7 @@ const getContentMeta = () => {
   }
 
   const blogName = metaValue('blogname');
+  const noIndex = metaValue('no index');
 
   const faviconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${favicon}`)}`;
   const appleIconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
@@ -213,6 +214,7 @@ const getContentMeta = () => {
     blogName,
     paywallStatus,
     syndication,
+    noIndex,
   };
 };
 
