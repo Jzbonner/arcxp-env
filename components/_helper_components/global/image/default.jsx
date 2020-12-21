@@ -32,6 +32,8 @@ const Image = ({
     src: url,
     height,
     width,
+    originalHeight,
+    originalWidth,
     focalCoords,
     arcSite,
   };

@@ -15,7 +15,7 @@ function encodeSrc(src) {
 export default {
 
   fetch({
-    src, height = 600, width = 1000, smart, focalCoords, arcSite,
+    src, height = 600, width = 1000, originalHeight, originalWidth, smart, focalCoords, arcSite,
   }) {
     let reqWidth = width;
     let reqHeight = height;
@@ -37,12 +37,26 @@ export default {
 
     if (useFocalCrop) {
       const { 0: focalX, 1: focalY } = focalCoords;
-      const focalOffsetX = reqWidth / 2;
-      const focalOffsetY = reqHeight / 2;
-      focalPoints.left = focalX - focalOffsetX;
-      focalPoints.top = focalY - focalOffsetY;
-      focalPoints.right = focalX + focalOffsetX;
-      focalPoints.bottom = focalY + focalOffsetY;
+      const origRatio = originalHeight / originalWidth;
+      const reqRatio = reqWidth / reqHeight;
+      // let's figure out how much to crop to keep the FP centered
+      const leftCrop = focalX / originalWidth;
+      const topCrop = focalY / originalHeight;
+      if (origRatio !== reqRatio && leftCrop > topCrop) {
+        // the images are differing ratios, so let's figure out how much to crop to match
+        const cropHeight = Math.floor(originalHeight - (originalWidth * reqHeight / reqWidth));
+        focalPoints.left = 0;
+        focalPoints.right = originalWidth;
+        focalPoints.top = cropHeight * topCrop;
+        focalPoints.bottom = originalHeight - (cropHeight - focalPoints.top);
+      } else {
+        const cropWidth = Math.floor(originalWidth - (originalHeight * reqWidth / reqHeight));
+        focalPoints.top = 0;
+        focalPoints.bottom = originalHeight;
+        focalPoints.left = cropWidth * leftCrop;
+        focalPoints.right = originalWidth - (cropWidth - focalPoints.left);
+        // console.error('dave crop info (original):', originalWidth, originalHeight, '(desired)', reqWidth, reqHeight, 'ratios (original):', origRatio, '(desired)', reqRatio, 'leftCrop', leftCrop, 'topCrop', topCrop, 'cropWidth', cropWidth, 'focal points', focalPoints);
+      }
 
       // additional logic to handle negative values (i.e. the focal point is less than half width or height distance from edge of photo)
       if (focalPoints.left < 0) {
@@ -73,7 +87,8 @@ export default {
     const imageUrl = src.substring(src.indexOf('//') + 2);
     const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerUrl);
     const imagePath = thumbor.setImagePath(encodeSrc(imageUrl));
-    const resizedUrl = (useFocalCrop) ? imagePath.crop(focalPoints.left, focalPoints.top, focalPoints.right, focalPoints.bottom) : imagePath.resize(reqWidth, reqHeight);
+    const croppedUrl = (useFocalCrop) ? imagePath.crop(focalPoints.left, focalPoints.top, focalPoints.right, focalPoints.bottom) : imagePath;
+    const resizedUrl = croppedUrl.resize(reqWidth, reqHeight);
     const thumborUrl = (smart) ? resizedUrl.smartCrop(true) : resizedUrl;
     const outputUrl = thumborUrl.buildUrl();
 
@@ -83,6 +98,8 @@ export default {
     src: 'text',
     height: 'number',
     width: 'number',
+    originalHeight: 'number',
+    originalWidth: 'number',
     smart: 'boolean',
     focalCoords: 'array',
   },
