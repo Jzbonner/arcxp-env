@@ -5,6 +5,7 @@ import { useAppContext, useFusionContext } from 'fusion:context';
 import topNavFilter from '../../../../content/filters/top-nav';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import closeButton from '../../../../resources/images/amp-close.png';
+import userIconWhite from '../../../../resources/icons/login/user-icon-white.svg';
 
 const AmpNavBar = () => {
   const fusionContext = useFusionContext();
@@ -102,6 +103,16 @@ const AmpNavBar = () => {
           <amp-img width='44px' height='44px' src={closeButton}></amp-img>
         </a>
         <ul>
+          <li className="amp-nav-link amp-auth">
+            <a on="tap:amp-access.login-logoutEmbedded" data-mg2-action="logout" data-mce-href="#" amp-access='UserState!="LoggedOut"' amp-access-hide>
+              <amp-img src={userIconWhite} width="35px" height="35px" layout="fixed"></amp-img>
+              <span>Log Out</span>
+            </a>
+            <a on="tap:amp-access.login-loginEmbedded" data-mg2-action="login" data-mce-href="#" data-mce-selected="1" amp-access='UserState="LoggedOut"' amp-access-hide>
+              <amp-img src={userIconWhite} width="35px" height="35px" layout="fixed"></amp-img>
+              <span>Log In</span>
+            </a>
+          </li>
           {sectionLi}
         </ul>
       </amp-sidebar>
