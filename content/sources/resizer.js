@@ -47,15 +47,16 @@ export default {
         const cropHeight = Math.floor(originalHeight - (originalWidth * reqHeight / reqWidth));
         focalPoints.left = 0;
         focalPoints.right = originalWidth;
-        focalPoints.top = cropHeight * topCrop;
+        focalPoints.top = Math.floor(cropHeight * topCrop);
         focalPoints.bottom = originalHeight - (cropHeight - focalPoints.top);
+        // console.error('dave top/bottom crop info (original):', originalWidth, originalHeight, '(desired)', reqWidth, reqHeight, 'ratios (original):', origRatio, '(desired)', reqRatio, 'leftCrop', leftCrop, 'topCrop', topCrop, 'cropHeight', cropHeight, 'focal points', focalPoints);
       } else {
         const cropWidth = Math.floor(originalWidth - (originalHeight * reqWidth / reqHeight));
         focalPoints.top = 0;
         focalPoints.bottom = originalHeight;
-        focalPoints.left = cropWidth * leftCrop;
+        focalPoints.left = Math.floor(cropWidth * leftCrop);
         focalPoints.right = originalWidth - (cropWidth - focalPoints.left);
-        // console.error('dave crop info (original):', originalWidth, originalHeight, '(desired)', reqWidth, reqHeight, 'ratios (original):', origRatio, '(desired)', reqRatio, 'leftCrop', leftCrop, 'topCrop', topCrop, 'cropWidth', cropWidth, 'focal points', focalPoints);
+        // console.error('dave left/right crop info (original):', originalWidth, originalHeight, '(desired)', reqWidth, reqHeight, 'ratios (original):', origRatio, '(desired)', reqRatio, 'leftCrop', leftCrop, 'topCrop', topCrop, 'cropWidth', cropWidth, 'focal points', focalPoints);
       }
 
       // additional logic to handle negative values (i.e. the focal point is less than half width or height distance from edge of photo)
