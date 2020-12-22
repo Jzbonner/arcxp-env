@@ -5,6 +5,7 @@ import getSponsorContent from '../../../components/_helper_components/article/sp
 // eslint-disable-next-line import/no-named-default
 import { default as queryFeedFetch } from '../query-feed';
 
+// APD-842 Sponsor Box Fetch workaround
 const buildAMPSponsorBox = async (query) => {
   const arcSite = (query && query.arcSite) || 'ajc';
   const endpoint = `${CONTENT_BASE}/site/v3/${query.type}/${query.arcSite}/?hierarchy=${query.hierarchy}`;

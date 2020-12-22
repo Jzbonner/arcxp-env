@@ -9,16 +9,12 @@ const getSponsorData = async (sections, query, isSponsorBox = false, sponsorBoxS
     arcSite = 'ajc', type = 'navigation', hierarchy = 'default',
   } = query;
 
-  console.log('isSponsorBox', isSponsorBox);
-
   if (!sponsorSectionID && !isSponsorBox) return null;
 
   let siteData = null;
   let requestUri = null;
 
   const endpoint = `${CONTENT_BASE}/site/v3/${type}/${arcSite}/?hierarchy=${hierarchy}`;
-
-  // const requestUri = sponsorSectionID ? `${endpoint}&_id=${sponsorSectionID}` : endpoint;
 
   if (sponsorSectionID) {
     requestUri = `${endpoint}&_id=${sponsorSectionID}`;

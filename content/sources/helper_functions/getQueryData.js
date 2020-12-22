@@ -26,7 +26,6 @@ export default (arcSite, newBody, from = 0, size = 10, useFetch = false) => {
   let fetchStart = 0;
   let i = 1;
 
-  console.log('useFetch getQueryData', useFetch);
   while (i <= numberOfFetches && i < 10) {
     const fetchSize = leftToFetch <= maxFetchSize ? leftToFetch : maxFetchSize;
 
@@ -43,7 +42,6 @@ export default (arcSite, newBody, from = 0, size = 10, useFetch = false) => {
         },
       }).then(response => response.json())
         .then((data) => {
-          // console.log('GET QUERY DATA....FETCH EDITION!', data);
           contentElements.push({ data: data.content_elements });
         })
         .catch((error) => {
