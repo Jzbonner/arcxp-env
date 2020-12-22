@@ -46,7 +46,6 @@ const getSponsorData = async (sections, query, isSponsorBox = false, sponsorBoxS
     }
 
     if (isSponsorBox) {
-      console.log('back site', siteData);
       return siteData;
     }
 
