@@ -36,46 +36,15 @@ export default {
     }
 
     if (useFocalCrop) {
-      const { 0: focalX, 1: focalY } = focalCoords;
-      const origRatio = originalHeight / originalWidth;
-      const reqRatio = reqWidth / reqHeight;
+      const { 1: focalY } = focalCoords;
       // let's figure out how much to crop to keep the FP centered
-      const leftCrop = focalX / originalWidth;
       const topCrop = focalY / originalHeight;
-      if (origRatio !== reqRatio && leftCrop > topCrop) {
-        // the images are differing ratios, so let's figure out how much to crop to match
-        const cropHeight = Math.floor(originalHeight - (originalWidth * reqHeight / reqWidth));
-        focalPoints.left = 0;
-        focalPoints.right = originalWidth;
-        focalPoints.top = Math.floor(cropHeight * topCrop);
-        focalPoints.bottom = originalHeight - (cropHeight - focalPoints.top);
-        // console.error('dave top/bottom crop info (original):', originalWidth, originalHeight, '(desired)', reqWidth, reqHeight, 'ratios (original):', origRatio, '(desired)', reqRatio, 'leftCrop', leftCrop, 'topCrop', topCrop, 'cropHeight', cropHeight, 'focal points', focalPoints);
-      } else {
-        const cropWidth = Math.floor(originalWidth - (originalHeight * reqWidth / reqHeight));
-        focalPoints.top = 0;
-        focalPoints.bottom = originalHeight;
-        focalPoints.left = Math.floor(cropWidth * leftCrop);
-        focalPoints.right = originalWidth - (cropWidth - focalPoints.left);
-        // console.error('dave left/right crop info (original):', originalWidth, originalHeight, '(desired)', reqWidth, reqHeight, 'ratios (original):', origRatio, '(desired)', reqRatio, 'leftCrop', leftCrop, 'topCrop', topCrop, 'cropWidth', cropWidth, 'focal points', focalPoints);
-      }
-
-      // additional logic to handle negative values (i.e. the focal point is less than half width or height distance from edge of photo)
-      if (focalPoints.left < 0) {
-        focalPoints.right -= focalPoints.left; // subtract a negative = positive
-        focalPoints.left = 0;
-      }
-      if (focalPoints.right < 0) {
-        focalPoints.left -= focalPoints.right; // subtract a negative = positive
-        focalPoints.right = 0;
-      }
-      if (focalPoints.top < 0) {
-        focalPoints.bottom -= focalPoints.top; // subtract a negative = positive
-        focalPoints.top = 0;
-      }
-      if (focalPoints.bottom < 0) {
-        focalPoints.top -= focalPoints.bottom; // subtract a negative = positive
-        focalPoints.bottom = 0;
-      }
+      // let's figure out how much to crop to match
+      const cropHeight = Math.floor(originalHeight - (originalWidth * reqHeight / reqWidth));
+      focalPoints.left = 0;
+      focalPoints.right = originalWidth;
+      focalPoints.top = Math.floor(cropHeight * topCrop);
+      focalPoints.bottom = originalHeight - (cropHeight - focalPoints.top);
     }
 
     let siteDomain = `${cdnOrg}-${cdnSite}-sandbox.cdn.arcpublishing.com`;
