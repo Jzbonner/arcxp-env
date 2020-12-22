@@ -26,6 +26,7 @@ const EngageAmpScript = ({ arcSite }) => {
       ],
       "login":{
         "loginEmbedded": "https://${envUrl}mg2access.${domain}.com?siteCode=${siteCode}&configCode=${configCode}&flow=login&returnUrl=RETURN_URL&readerId=READER_ID&accessLevel=AUTHDATA(AccessLevel)",
+        "logoutEmbedded": "https://${envUrl}mg2access.${domain}.com/?siteCode=${siteCode}&configCode=${configCode}&embedded=true&flow=logout&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true",
         "activateEmbedded": "https://${envUrl}mg2access.${domain}.com?embedded=true&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true",
         "SubscribeFromPaywall": "https://${envUrl}mg2access.${domain}.com?embedded=false&activatePageUrl=${activateAmpPaywallUrl || activateUrl}&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true",
         "SubscribeFromInline": "https://${envUrl}mg2access.${domain}.com?embedded=false&activatePageUrl=${activateAmpInlineUrl || activateUrl}&configCode=${configCode}&siteCode=${siteCode}&flow=activate&accessLevel=AUTHDATA(AccessLevel)&returnUrl=RETURN_URL&readerId=READER_ID&debug=true&allowSso=true"
