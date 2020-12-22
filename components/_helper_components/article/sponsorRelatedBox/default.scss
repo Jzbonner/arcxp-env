@@ -38,6 +38,10 @@
     }
   }
 
+  .sponsor-ad .ampAdLabel::before {
+    display: none;
+  }
+
   .sponsor-content {
     display: flex;
     flex-direction: column;

@@ -49,8 +49,6 @@ const SponsorRelatedBox = ({
     },
   });
 
-  // console.log('non amp feed', feed);
-
   if (disableSponsorRelatedBox !== 'true') {
     const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor, uuid);
 
