@@ -23,8 +23,6 @@ const getSponsorData = async (sections, query, isSponsorBox = false, sponsorBoxS
   } else {
     requestUri = endpoint;
   }
-  console.log('query', query);
-  console.log('request uri', requestUri);
 
   const promise = axios
     .get(requestUri, {
