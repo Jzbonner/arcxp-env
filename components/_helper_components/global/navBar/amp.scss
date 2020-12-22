@@ -131,7 +131,7 @@
   background-image: linear-gradient(to top, #04befe, #4481eb);
   max-width: 408px;
   width: 100%;
-  
+
   .close {
     padding: 31px 16px 0 8px;
     display: inline-block;
@@ -146,5 +146,16 @@
     color: #fff;
 
     @include text-styles(1.125rem, 1.44, "Gordita");
+
+    &.amp-auth a {
+      font-weight: 800;
+
+      span {
+        display: inline-block;
+        line-height: 35px;
+        vertical-align: top;
+        padding-left: 10px;
+      }
+    }
   }
 }
