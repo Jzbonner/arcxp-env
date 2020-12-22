@@ -154,14 +154,12 @@ const StoryPageLayout = () => {
   // sponsor box should appear right after blog author component
   if (sponsorSectionID) {
     if (ampPage) {
-      console.log('IS AMP')
       insertAtEndOfStory.push(<SponsorRelatedBoxAMP
         hideRelatedList={hideRelatedList}
         sponsorID={sponsorSectionID}
         taxonomy={taxonomy}
         uuid={uuid} />);
     } else {
-      console.log('NOT AMP');
       insertAtEndOfStory.push(<SponsorRelatedBox
         hideRelatedList={hideRelatedList}
         sponsorID={sponsorSectionID}
