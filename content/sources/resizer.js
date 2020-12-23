@@ -15,7 +15,7 @@ function encodeSrc(src) {
 export default {
 
   fetch({
-    src, height = 600, width = 1000, smart, focalCoords, arcSite,
+    src, height = 600, width = 1000, originalHeight, originalWidth, smart, focalCoords, arcSite,
   }) {
     let reqWidth = width;
     let reqHeight = height;
@@ -36,31 +36,15 @@ export default {
     }
 
     if (useFocalCrop) {
-      const { 0: focalX, 1: focalY } = focalCoords;
-      const focalOffsetX = reqWidth / 2;
-      const focalOffsetY = reqHeight / 2;
-      focalPoints.left = focalX - focalOffsetX;
-      focalPoints.top = focalY - focalOffsetY;
-      focalPoints.right = focalX + focalOffsetX;
-      focalPoints.bottom = focalY + focalOffsetY;
-
-      // additional logic to handle negative values (i.e. the focal point is less than half width or height distance from edge of photo)
-      if (focalPoints.left < 0) {
-        focalPoints.right -= focalPoints.left; // subtract a negative = positive
-        focalPoints.left = 0;
-      }
-      if (focalPoints.right < 0) {
-        focalPoints.left -= focalPoints.right; // subtract a negative = positive
-        focalPoints.right = 0;
-      }
-      if (focalPoints.top < 0) {
-        focalPoints.bottom -= focalPoints.top; // subtract a negative = positive
-        focalPoints.top = 0;
-      }
-      if (focalPoints.bottom < 0) {
-        focalPoints.top -= focalPoints.bottom; // subtract a negative = positive
-        focalPoints.bottom = 0;
-      }
+      const { 1: focalY } = focalCoords;
+      // let's figure out how much to crop to keep the FP centered
+      const topCrop = focalY / originalHeight;
+      // let's figure out how much to crop to match
+      const cropHeight = Math.floor(originalHeight - (originalWidth * reqHeight / reqWidth));
+      focalPoints.left = 0;
+      focalPoints.right = originalWidth;
+      focalPoints.top = Math.floor(cropHeight * topCrop);
+      focalPoints.bottom = originalHeight - (cropHeight - focalPoints.top);
     }
 
     let siteDomain = `${cdnOrg}-${cdnSite}-sandbox.cdn.arcpublishing.com`;
@@ -73,7 +57,8 @@ export default {
     const imageUrl = src.substring(src.indexOf('//') + 2);
     const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerUrl);
     const imagePath = thumbor.setImagePath(encodeSrc(imageUrl));
-    const resizedUrl = (useFocalCrop) ? imagePath.crop(focalPoints.left, focalPoints.top, focalPoints.right, focalPoints.bottom) : imagePath.resize(reqWidth, reqHeight);
+    const croppedUrl = (useFocalCrop) ? imagePath.crop(focalPoints.left, focalPoints.top, focalPoints.right, focalPoints.bottom) : imagePath;
+    const resizedUrl = croppedUrl.resize(reqWidth, reqHeight);
     const thumborUrl = (smart) ? resizedUrl.smartCrop(true) : resizedUrl;
     const outputUrl = thumborUrl.buildUrl();
 
@@ -83,6 +68,8 @@ export default {
     src: 'text',
     height: 'number',
     width: 'number',
+    originalHeight: 'number',
+    originalWidth: 'number',
     smart: 'boolean',
     focalCoords: 'array',
   },
