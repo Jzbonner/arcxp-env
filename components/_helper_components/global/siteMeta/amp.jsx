@@ -27,6 +27,7 @@ const SiteMetaAmp = () => {
     appleIconPath,
     isOpinion,
     paywallStatus,
+    noIndex,
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
 
@@ -61,6 +62,7 @@ const SiteMetaAmp = () => {
       <meta property="article:opinion" content={isOpinion} />
       <meta name="story.meter" content={paywallStatus} />
       {metaValue('topics') && <meta name="topics" content={metaValue('topics')} />}
+      {noIndex === 'yes' && <meta name="robots" content="noindex" />}
     </>
   );
 };

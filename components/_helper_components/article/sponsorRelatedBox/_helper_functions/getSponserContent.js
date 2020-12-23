@@ -1,6 +1,7 @@
 import filterDuplicateStory from './filterDuplicateStory';
 
 export default function getSponserContent(limit, queryFeed, siteData = {}, refId) {
+  if (!siteData) return null;
   const { sponsor_url: sponsorUrl, sponsor_related_box_title: sponsorTitle } = siteData;
   if (!queryFeed || queryFeed.length < 1) return null;
   const data = [];
