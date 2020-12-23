@@ -3,7 +3,7 @@ import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 import filter from '../../filters/queryFilter';
 
-export default (arcSite, newBody, from = 0, size = 10) => {
+export default (arcSite, newBody, from = 0, size = 10, useFetch = false) => {
   if (!arcSite || !newBody) {
     return null;
   }
@@ -16,6 +16,7 @@ export default (arcSite, newBody, from = 0, size = 10) => {
 
   const buffer = 5;
   const maxFetchSize = 100;
+  let promise = null;
 
   const total = fromInt + sizeInt + buffer;
   let leftToFetch = total;
@@ -33,19 +34,34 @@ export default (arcSite, newBody, from = 0, size = 10) => {
     requestUri += `&size=${fetchSize}`;
     requestUri += `&_sourceInclude=${filter}`;
 
-    const promise = axios
-      .get(requestUri, {
+    if (useFetch) {
+      promise = fetch(requestUri, {
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
         },
-        id: i,
-      })
-      .then(({ data, config }) => {
-        contentElements.push({ id: config.id, data: data.content_elements });
-      })
-      .catch((error) => {
-        console.log('AXIOS CATCH - getQueryData => ', error);
-      });
+      }).then(response => response.json())
+        .then((data) => {
+          contentElements.push({ data: data.content_elements });
+        })
+        .catch((error) => {
+          console.log('FETCH API CATCH - getQueryData => ', error);
+        });
+    } else {
+      promise = axios
+        .get(requestUri, {
+          headers: {
+            Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+          },
+          id: i,
+        })
+        .then(({ data, config }) => {
+          contentElements.push({ id: config.id, data: data.content_elements });
+        })
+        .catch((error) => {
+          console.log('AXIOS CATCH - getQueryData => ', error);
+        });
+    }
 
     promiseArray.push(promise);
 

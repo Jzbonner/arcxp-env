@@ -1,4 +1,4 @@
-@import "../../../../src/styles/base";
+@import "../../../../src/styles/base/_utility.scss";
 
 .c-sponsor-box {
   display: flex;
@@ -36,6 +36,10 @@
     &:not(:empty):before {
       content: "";
     }
+  }
+
+  .sponsor-ad .ampAdLabel:before {
+    display: none;
   }
 
   .sponsor-content {
