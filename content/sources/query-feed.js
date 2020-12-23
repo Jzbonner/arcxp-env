@@ -47,6 +47,7 @@ const fetch = (query) => {
     from = 0,
     displayClass = '',
     displayClassesRequiringImg = [],
+    useFetch = false,
   } = query;
 
   const activeSite = arcSite || arcSiteAlt;
@@ -113,7 +114,7 @@ const fetch = (query) => {
   const body = builder.build();
   const newBody = JSON.stringify(body);
 
-  return getQueryData(activeSite, newBody, from, size)
+  return getQueryData(activeSite, newBody, from, size, useFetch)
     .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
     .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
     .catch((error) => {
