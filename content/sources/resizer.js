@@ -1,5 +1,5 @@
 import Thumbor from 'thumbor-lite';
-import { RESIZER_SECRET_KEY } from 'fusion:environment';
+// import { RESIZER_SECRET_KEY } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../components/_helper_components/global/utils/environment';
 
@@ -53,7 +53,7 @@ export default {
 
     const resizerUrl = `https://${siteDomain}/resizer`;
     const imageUrl = src.substring(src.indexOf('//') + 2);
-    const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerUrl);
+    const thumbor = new Thumbor('Fmkgru2rZ2uPZ5wXs7B2HbVDHS2SZuA7', resizerUrl);
     const imagePath = thumbor.setImagePath(encodeSrc(imageUrl));
     const resizedUrl = (useFocalCrop) ? imagePath.crop(focalPoints.left, focalPoints.top, focalPoints.right, focalPoints.bottom) : imagePath.resize(reqWidth, reqHeight);
     const thumborUrl = (smart) ? resizedUrl.smartCrop(true) : resizedUrl;
