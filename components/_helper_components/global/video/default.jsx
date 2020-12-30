@@ -37,6 +37,8 @@ const Video = ({
     },
   });
 
+  console.log(videoApiData);
+
   const videoLink = videoApiData && videoApiData.streams && videoApiData.streams[0] ? videoApiData.streams[0].url : '';
 
   const { basic: videoCaption } = src.description ? src.description : {};
