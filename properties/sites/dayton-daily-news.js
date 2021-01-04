@@ -5,7 +5,7 @@ import appAdsTxt from './appadstxt/daytondailynews.com.json';
 export default {
   dfp_id: 21849707860,
   fbPagesId: '168815400507',
-  fbAppId: '168815400507',
+  fbAppId: '1509059885983561',
   siteName: 'dayton-daily-news',
   cdnOrg: 'coxohio',
   cdnSite: 'dayton-daily-news',

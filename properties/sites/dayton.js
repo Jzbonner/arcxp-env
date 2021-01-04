@@ -5,7 +5,7 @@ import appAdsTxt from './appadstxt/dayton.com.json';
 export default {
   dfp_id: 21849707860,
   fbPagesId: '1431445090472096',
-  fbAppId: '1431445090472096',
+  fbAppId: '455873671229722',
   siteName: 'dayton',
   cdnOrg: 'coxohio',
   cdnSite: 'dayton',
