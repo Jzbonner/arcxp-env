@@ -48,6 +48,9 @@ const RenderOutputType = (props) => {
         <SiteMeta />
         <GoogleStructuredData />
         <AmpRelLink type={type} url={articleURL} noAmp={noAmp} />
+        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`}/>
+        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`}/>
+        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`}/>
         <CssLinks />
         {includeGtm && (
           <>
