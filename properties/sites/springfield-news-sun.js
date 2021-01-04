@@ -4,7 +4,7 @@ import adsTxt from './adstxt/springfieldnewssun.com.json';
 export default {
   dfp_id: 21849707860,
   fbPagesId: '73484672682',
-  fbAppId: '73484672682',
+  fbAppId: '1793003357612189',
   siteName: 'springfield-news-sun',
   cdnOrg: 'coxohio',
   cdnSite: 'springfield-news-sun',
