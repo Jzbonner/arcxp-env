@@ -121,7 +121,7 @@
       justify-content: space-between;
       flex-direction: column;
       width: 100%;
-
+      
       @include breakpoint(desktop-sm) {
         flex-direction: row;
       }
@@ -132,6 +132,7 @@
 
         @include breakpoint(desktop-sm) {
           margin: 0 2% 0 0;
+          padding-bottom: 1.75rem;
         }
 
         .headline {
