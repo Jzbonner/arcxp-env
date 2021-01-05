@@ -47,6 +47,7 @@ const SiteMetaAmp = () => {
       <meta name="twitter:title" content={title} />
       <meta name="twitter:url" content={url} />
       <meta property="og:image" content={thumbnailImage} />
+      <meta property="og:image:secure_url" content={thumbnailImage} />
       <meta property="og:image:height" content={`${isNonContentPage
         || thumbnailImage.indexOf('/resources/logos/') > -1 ? '200' : '630'}`} />
       <meta property="og:image:width" content={`${isNonContentPage
