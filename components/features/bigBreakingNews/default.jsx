@@ -34,7 +34,7 @@ const BigBreakingNews = (customFields = {}) => {
           <div className="leadItem">
             <a href={leadItemURL}>
               <h2>{truncateHeadline(headline, true)}</h2>
-              <Image src={imageData} width={1108} height={426} imageType="isHomepageImage"/>
+              <Image src={imageData} width={1066} height={600} imageType="isHomepageImage"/>
             </a>
           </div>
           <div className="restOfItems">
