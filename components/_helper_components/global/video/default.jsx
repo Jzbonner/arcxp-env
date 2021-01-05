@@ -166,6 +166,7 @@ const Video = ({
         videoTopics,
         videoAccountID: '',
         videoSeekTime: time,
+        videoPageName: videoPageUrl,
       };
       if (isAmpWebPlayer && ampEvent) {
         return {
