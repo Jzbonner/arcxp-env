@@ -248,11 +248,14 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
             if (connextLS) {
               const loginEventName = 'loginEvent_complete';
               const loginEventToTrigger = !window[loginEventName] ? 'loginEvent_return-user' : null;
-              const { CustomerRegistrationId } = JSON.parse(connextLS);
+              const { CustomerRegistrationId, UserState } = JSON.parse(connextLS);
+              const userTypeState = UserState === 'Subscribed' ? 'premium' : 'standard';
               const userDataObj = {
                 'userData': {
                   'userActive': 'logged in',
-                  'userProfileID': CustomerRegistrationId
+                  'userProfileID': CustomerRegistrationId,
+                  'userStatus': 'registered',
+                  'userType': userTypeState
                 },
                 'event': loginEventToTrigger
               };
@@ -265,7 +268,9 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           const userDataObj = {
             'userData': {
               'userActive': 'not logged in',
-              'userProfileID': null
+              'userProfileID': null,
+              'userStatus': 'not registered',
+              'userType': 'anonymous'
             }
           };
           dataLayer.push(userDataObj);
