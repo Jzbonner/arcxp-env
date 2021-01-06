@@ -21,11 +21,11 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
   const { meta_title: metaTitle, basic: baseHeadline } = basicHeadlines || {};
   let mediaTitle = basicSubtitle;
   if (!mediaTitle) {
-    mediaTitle = metaTitle || baseHeadline || null;
+    mediaTitle = metaTitle || baseHeadline || '';
   }
 
-  const basicAuthor = basicCredits.affiliation && basicCredits.affiliation.by ? basicCredits.affiliation.by.id : null;
-  const checkCaption = basicCaption || null;
+  const basicAuthor = basicCredits.affiliation && basicCredits.affiliation.by ? basicCredits.affiliation.by.id : '';
+  const checkCaption = basicCaption || '';
 
   if (promoItemsType === 'image') {
     leadObject = {
@@ -70,7 +70,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     }
     const { caption: videoCaption, url: basicThumbNailImage = '' } = basicPromoImage || {};
     const videoAuthor = getVideoAuthor(basic);
-    const checkVideoCaption = videoCaption || null;
+    const checkVideoCaption = videoCaption || '';
 
     leadObject = {
       _name: 'media:content',
