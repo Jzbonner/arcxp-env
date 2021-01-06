@@ -73,5 +73,5 @@ export default {
     smart: 'boolean',
     focalCoords: 'array',
   },
-  ttl: 120,
+  ttl: 86400,
 };
