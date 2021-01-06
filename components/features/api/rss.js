@@ -54,8 +54,8 @@ class Api {
         } = item || {};
 
         const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
-        let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
-        const org = credits && credits.by && credits.by[0] && credits.by[0].org ? `<![CDATA[${credits.by[0].org}]]>` : '';
+        let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : null;
+        const org = credits && credits.by && credits.by[0] && credits.by[0].org ? `<![CDATA[${credits.by[0].org}]]>` : null;
 
         if (credits && credits.by && credits.by.length > 1) {
           author = `<![CDATA[${credits.by.map(eachAuthor => eachAuthor.name).join(', ')}]]>`;
@@ -108,6 +108,7 @@ class Api {
         if (type === 'video') {
           const { basic = {} } = promoItems || {};
           const { caption, url: promoImageUrl } = basic || {};
+          const videoCaption = caption || null;
           const { url: mp4Url, stream_type: videoType } = streams && streams[0] ? streams[0] : {};
           let mediumType = '';
           if (videoType === 'ts') {
@@ -148,7 +149,7 @@ class Api {
                       'media:title': title,
                     },
                     {
-                      'media:description': `<![CDATA[${caption}]]>`,
+                      'media:description': `<![CDATA[${videoCaption}]]>`,
                     },
                     {
                       _name: 'media:credit',

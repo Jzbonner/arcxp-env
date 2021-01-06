@@ -21,10 +21,11 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
   const { meta_title: metaTitle, basic: baseHeadline } = basicHeadlines || {};
   let mediaTitle = basicSubtitle;
   if (!mediaTitle) {
-    mediaTitle = metaTitle || baseHeadline;
+    mediaTitle = metaTitle || baseHeadline || null;
   }
 
-  const basicAuthor = basicCredits.affiliation && basicCredits.affiliation.by ? basicCredits.affiliation.by.id : '';
+  const basicAuthor = basicCredits.affiliation && basicCredits.affiliation.by ? basicCredits.affiliation.by.id : null;
+  const checkCaption = basicCaption || null;
 
   if (promoItemsType === 'image') {
     leadObject = {
@@ -39,7 +40,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
           'media:title': `<![CDATA[${mediaTitle}]]>`,
         },
         {
-          'media:description': `<![CDATA[${basicCaption}]]>`,
+          'media:description': `<![CDATA[${checkCaption}]]>`,
         },
         {
           _name: 'media:credit',
@@ -69,6 +70,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     }
     const { caption: videoCaption, url: basicThumbNailImage = '' } = basicPromoImage || {};
     const videoAuthor = getVideoAuthor(basic);
+    const checkVideoCaption = videoCaption || null;
 
     leadObject = {
       _name: 'media:content',
@@ -82,7 +84,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
           'media:title': `<![CDATA[${mediaTitle}]]>`,
         },
         {
-          'media:description': `<![CDATA[${videoCaption}]]>`,
+          'media:description': `<![CDATA[${checkVideoCaption}]]>`,
         },
         {
           _name: 'media:thumbnail',
