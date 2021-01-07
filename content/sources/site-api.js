@@ -1,3 +1,4 @@
+const ttl = 3600;
 const params = {
   type: 'text',
   hierarchy: 'text',
@@ -11,6 +12,7 @@ const resolve = (query) => {
   return section ? `${endpoint}&_id=${section}` : endpoint;
 };
 export default {
+  ttl,
   resolve,
   params,
 };

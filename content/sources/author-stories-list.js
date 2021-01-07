@@ -1,3 +1,4 @@
+const ttl = 3600;
 const params = {
   id: 'text',
   from: 'text',
@@ -14,6 +15,7 @@ const resolve = (query) => {
 };
 
 export default {
+  ttl,
   resolve,
   params,
 };
