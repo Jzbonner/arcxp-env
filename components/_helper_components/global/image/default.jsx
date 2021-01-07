@@ -74,6 +74,7 @@ const Image = ({
     return <Caption src={src} />;
   };
 
+
   if (img) {
     return (
       <div className={`c-image-component ${imageMarginBottom || ''}`}>
