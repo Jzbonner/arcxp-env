@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './default.scss';
 
 const Golf = () => <h1>Under Construction</h1>;
 
