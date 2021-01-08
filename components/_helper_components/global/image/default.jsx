@@ -133,7 +133,7 @@ const Image = ({
           <>
             {!ampPage ? (
               <LazyLoad
-                placeholder={<img src={placeholder} style={{ width: '100%' }} data-placeholder={true} data-src={img ? img.src : mImage.src} alt={altTextContent}
+                placeholder={<img src={placeholder} style={{ width: '100%' }} data-placeholder={true} data-src={img ? img.src : mImage.src || url} alt={altTextContent}
                 className={teaseContentType ? 'tease-image' : ''} />}
                 height="100%"
                 width="100%"
