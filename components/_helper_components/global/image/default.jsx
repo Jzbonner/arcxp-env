@@ -11,9 +11,17 @@ import getDomain from '../../../layouts/_helper_functions/getDomain';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
 import './default.scss';
 
+/*
+  srcSetSizes is an optional array to be used when an image should render with `srcset` & `sizes` attributes.  It is an array of 3 nested arrays, and should be ordered from desktop -> mobile with width preceding height, as such:
+  [
+    [w, h], // desktop
+    [w, h], // tablet
+    [w, h], // mobile
+  ]
+*/
 const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType,
-  ampPage = false, onClickRun,
+  ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [],
 }) => {
   const {
     url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties,
@@ -37,11 +45,53 @@ const Image = ({
     focalCoords,
     arcSite,
   };
-
-  const img = useContent({
-    source: 'resizer',
-    query: imgQuery,
-  });
+  let img = null;
+  let dtImage = null;
+  let tImage = null;
+  let mImage = null;
+  if (useSrcSet && srcSetSizes.length) {
+    dtImage = useContent({
+      source: 'resizer',
+      query: {
+        src: url,
+        width: srcSetSizes[0] && srcSetSizes[0][0] ? srcSetSizes[0][0] : width,
+        height: srcSetSizes[0] && srcSetSizes[0][1] ? srcSetSizes[0][1] : height,
+        originalHeight,
+        originalWidth,
+        focalCoords,
+        arcSite,
+      },
+    });
+    tImage = useContent({
+      source: 'resizer',
+      query: {
+        src: url,
+        width: srcSetSizes[1] && srcSetSizes[1][0] ? srcSetSizes[1][0] : srcSetSizes[0][0],
+        height: srcSetSizes[1] && srcSetSizes[1][1] ? srcSetSizes[1][1] : Math.floor(srcSetSizes[1][0] * 0.38),
+        originalHeight,
+        originalWidth,
+        focalCoords,
+        arcSite,
+      },
+    });
+    mImage = useContent({
+      source: 'resizer',
+      query: {
+        src: url,
+        width: srcSetSizes[2] && srcSetSizes[2][0] ? srcSetSizes[2][0] : srcSetSizes[0][0],
+        height: srcSetSizes[2] && srcSetSizes[2][1] ? srcSetSizes[2][1] : Math.floor(srcSetSizes[2][0] * 0.70),
+        originalHeight,
+        originalWidth,
+        focalCoords,
+        arcSite,
+      },
+    });
+  } else {
+    img = useContent({
+      source: 'resizer',
+      query: imgQuery,
+    });
+  }
 
   const screenSize = checkWindowSize();
 
@@ -74,37 +124,46 @@ const Image = ({
     return <Caption src={src} />;
   };
 
+  const altTextContent = getAltText(altText, caption);
 
-  if (img) {
+  if (img || srcSetSizes.length) {
     return (
       <div className={`c-image-component ${imageMarginBottom || ''}`}>
         <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
           <>
             {!ampPage ? (
               <LazyLoad
-                placeholder={<img src={placeholder} style={{ width: '100%' }} data-placeholder={true} data-src={img.src} alt={getAltText(altText, caption)}
+                placeholder={<img src={placeholder} style={{ width: '100%' }} data-placeholder={true} data-src={img ? img.src : mImage.src} alt={altTextContent}
                 className={teaseContentType ? 'tease-image' : ''} />}
                 height="100%"
                 width="100%"
                 once={true}>
-                <img
-                  src={img.src}
-                  alt={getAltText(altText, caption)}
-                  className={teaseContentType ? 'tease-image' : ''}
-                  onClick={onClickRun}
-                />
+                {srcSetSizes.length ? (
+                  <picture className={teaseContentType ? 'tease-image' : ''}>
+                    <source srcSet={dtImage.src} media="(min-width: 1200px)" />
+                    <source srcSet={tImage.src} media="(min-width: 768px)" />
+                    <img src={mImage.src} alt={altTextContent} />
+                  </picture>
+                ) : (
+                  <img
+                    src={img ? img.src : mImage.src}
+                    alt={altTextContent}
+                    className={teaseContentType ? 'tease-image' : ''}
+                    onClick={onClickRun}
+                  />
+                )}
               </LazyLoad>
             ) : (
                 <amp-img
-                  src={img.src}
-                  alt={getAltText(altText, caption)}
+                  src={img ? img.src : mImage.src}
+                  alt={altTextContent}
                   width={width}
                   height={height !== 0 ? height : (width / originalWidth) * originalHeight}
                   layout="responsive"
                   class={teaseContentType ? 'tease-image' : ''}>
                   <amp-img
                     src={placeholder}
-                    alt={getAltText(altText, caption)}
+                    alt={altTextContent}
                     fallback=""
                     width={width}
                     height={height !== 0 ? height : (width / originalWidth) * originalHeight}
@@ -136,6 +195,8 @@ Image.propTypes = {
   ampPage: PropTypes.bool,
   onClickRun: PropTypes.func,
   customScrollContainerEl: PropTypes.string,
+  useSrcSet: PropTypes.bool,
+  srcSetSizes: PropTypes.array,
 };
 
 export default Image;
