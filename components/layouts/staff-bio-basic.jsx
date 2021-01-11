@@ -48,8 +48,6 @@ const staffBioPage = () => {
     },
   });
 
-  console.log(initialList);
-
   const {
     content_elements: listItems,
     count,
