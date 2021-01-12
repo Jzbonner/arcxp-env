@@ -1,3 +1,5 @@
+import searchFilter from '../filters/searchFilter';
+
 const schemaName = 'article';
 
 const params = {
@@ -17,6 +19,7 @@ const resolve = (query) => {
   requestUri += section ? `&q=type:story+AND+taxonomy.primary_section._id:%22/${section}%22` : null;
   requestUri += size ? `&size=${size}` : '';
   requestUri += sort ? '&sort=display_date:desc' : '';
+  requestUri += `&_sourceInclude=${searchFilter}`;
   return published ? `${requestUri}&published=${published}` : requestUri;
 };
 
