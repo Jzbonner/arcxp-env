@@ -184,7 +184,6 @@ const Video = ({
     const fireGtmEvent = (evt) => {
       // fire GTM events for various player events
       const dataLayer = window.dataLayer || [];
-
       dataLayer.push(buildGtmObject(evt));
     };
 
