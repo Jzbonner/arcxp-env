@@ -166,7 +166,7 @@ const Video = ({
         videoTopics,
         videoAccountID: '',
         videoSeekTime: time,
-        videoPageName: videoPageUrl,
+        videoPageName: evt.videoData.canonical_url,
       };
       if (isAmpWebPlayer && ampEvent) {
         return {
@@ -184,6 +184,7 @@ const Video = ({
     const fireGtmEvent = (evt) => {
       // fire GTM events for various player events
       const dataLayer = window.dataLayer || [];
+
       dataLayer.push(buildGtmObject(evt));
     };
 
@@ -318,7 +319,6 @@ const Video = ({
               creditContainerMobile.innerHTML = vidCredit;
             }
           }
-
           fireGtmEvent(event);
         });
         powa.on('adComplete', evt => fireGtmEvent(evt));
