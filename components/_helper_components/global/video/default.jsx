@@ -166,7 +166,7 @@ const Video = ({
         videoTopics,
         videoAccountID: '',
         videoSeekTime: time,
-        videoPageName: videoPageUrl,
+        videoPageName: evt.videoData.canonical_url,
       };
       if (isAmpWebPlayer && ampEvent) {
         return {
@@ -318,7 +318,6 @@ const Video = ({
               creditContainerMobile.innerHTML = vidCredit;
             }
           }
-
           fireGtmEvent(event);
         });
         powa.on('adComplete', evt => fireGtmEvent(evt));
