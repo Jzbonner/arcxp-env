@@ -166,7 +166,7 @@ const Video = ({
         videoTopics,
         videoAccountID: '',
         videoSeekTime: time,
-        videoPageName: videoPageUrl,
+        videoPageName: evt.videoData.canonical_url,
       };
       if (isAmpWebPlayer && ampEvent) {
         return {
@@ -318,7 +318,6 @@ const Video = ({
               creditContainerMobile.innerHTML = vidCredit;
             }
           }
-
           fireGtmEvent(event);
         });
         powa.on('adComplete', evt => fireGtmEvent(evt));
@@ -395,12 +394,10 @@ const Video = ({
       {isLeadVideo && lazyLoad && <div className="video-blocker" />}
     </>
   );
-
   const ampImaPlayer = () => <amp-ima-video width="16" height="9" layout="responsive" data-tag={adTag} data-poster={thumbnailImage} autoplay={!lazyLoad && startPlaying ? '' : null} amp-access={lazyLoad ? 'Error=true OR AccessLevel="Full Content Access"' : null} amp-access-hide={lazyLoad ? '' : null}>
     <source src={videoLink} type="video/mp4"></source>
     <source src={videoLink} type="video/webm"></source>
   </amp-ima-video>;
-
   const renderAmpPlayer = () => (
     <>
       {lazyLoad && <>
@@ -412,7 +409,6 @@ const Video = ({
       {!lazyLoad && ampImaPlayer()}
     </>
   );
-
   return (
     <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
       <div className="video-component">{isAmpOutput ? renderAmpPlayer() : renderPowaPlayer()}</div>
@@ -425,7 +421,6 @@ const Video = ({
     </div>
   );
 };
-
 Video.propTypes = {
   src: PropTypes.object.isRequired,
   isLeadVideo: PropTypes.bool,
@@ -436,5 +431,4 @@ Video.propTypes = {
   pageTaxonomy: PropTypes.object,
   lazyLoad: PropTypes.bool,
 };
-
 export default Video;
