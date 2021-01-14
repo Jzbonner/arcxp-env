@@ -148,7 +148,6 @@ const Image = ({
   }
   return null;
 };
-
 Image.propTypes = {
   src: PropTypes.object.isRequired,
   width: PropTypes.number.isRequired,
@@ -164,5 +163,4 @@ Image.propTypes = {
   useSrcSet: PropTypes.bool,
   srcSetSizes: PropTypes.array,
 };
-
 export default Image;
