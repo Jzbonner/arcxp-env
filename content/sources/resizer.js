@@ -29,11 +29,11 @@ export default {
         // let's figure out how much to crop to keep the FP centered
         const topCrop = focalY / originalHeight;
         // let's figure out how much to crop to match
-        const cropHeight = Math.floor(originalHeight - (originalWidth * w / h));
+        const cropHeight = Math.round(originalHeight - (originalWidth * h / w));
         focalPoints.left = 0;
         focalPoints.right = originalWidth;
-        focalPoints.top = Math.floor(cropHeight * topCrop);
-        focalPoints.bottom = originalHeight - (cropHeight - focalPoints.top);
+        focalPoints.top = Math.round(cropHeight * topCrop);
+        focalPoints.bottom = cropHeight - focalPoints.top > originalHeight ? cropHeight : originalHeight - (cropHeight - focalPoints.top);
       }
 
       let siteDomain = `${cdnOrg}-${cdnSite}-sandbox.cdn.arcpublishing.com`;
