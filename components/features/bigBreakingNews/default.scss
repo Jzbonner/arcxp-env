@@ -28,7 +28,7 @@
 
       @include breakpoint(desktop-sm) {
         border-right: 1px solid #cdcdcd;
-        padding: 0 20px 20px;
+        padding: 0 20px 20px 0;
       }
 
       @include between-breakpoints(desktop-sm, desktop-lg) {
@@ -133,6 +133,8 @@
             color: #000;
             letter-spacing: -.16px;
 
+            @include text-styles(1.31em, 1.3, "Average");
+
             @include between-breakpoints(mobile, desktop-sm) {
               @include text-styles(1.375em, 1.14, "Average");
             }
@@ -142,11 +144,7 @@
             }
 
             @include between-breakpoints(desktop-lg, desktop-xl) {
-              @include text-styles(1.2em, 1.15, "Average");
-            }
-
-            @include breakpoint(desktop-xl) {
-              @include text-styles(1.31em, 1.3, "Average");
+              @include text-styles(1em, 1.15, "Average");
             }
           }
         }
