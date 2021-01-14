@@ -32,7 +32,7 @@ export default {
         const cropHeight = Math.round(originalHeight - (originalWidth * h / w));
         focalPoints.left = 0;
         focalPoints.right = originalWidth;
-        focalPoints.top = Math.round(cropHeight * topCrop);
+        focalPoints.top = cropHeight >= 0 ? Math.round(cropHeight * topCrop) : 0;
         focalPoints.bottom = cropHeight - focalPoints.top > originalHeight ? cropHeight : originalHeight - (cropHeight - focalPoints.top);
       }
 
