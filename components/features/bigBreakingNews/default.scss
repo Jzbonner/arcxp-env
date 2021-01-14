@@ -22,10 +22,21 @@
       flex: 1 100%;
       padding: 20px 0;
 
+      @include between-breakpoints(tablet, desktop-sm) {
+        padding-top: 0;
+      }
+
       @include breakpoint(desktop-sm) {
-        flex: 1 70%;
         border-right: 1px solid #cdcdcd;
-        padding: 0 20px 20px;
+        padding: 0 20px 20px 0;
+      }
+
+      @include between-breakpoints(desktop-sm, desktop-lg) {
+        flex: 1 80%;
+      }
+
+      @include breakpoint(desktop-lg) {
+        flex: 1 83%;
       }
 
       h2 {
@@ -36,8 +47,8 @@
 
         @include text-styles(1.75em, 1.07, "Average");
 
-        @include breakpoint(desktop-sm) {
-          @include text-styles(2.125em, 1.22, "Average");
+        @include between-breakpoints(desktop-sm, desktop-lg) {
+          @include text-styles(1.6em, 1.22, "Average");
         }
       }
 
@@ -65,9 +76,14 @@
 
     .restOfItems {
       flex: 1 30%;
+      padding: 0 0 0 20px;
 
-      @include breakpoint(desktop-sm) {
-        padding: 0 0 0 20px;
+      @include between-breakpoints(desktop-sm, desktop-lg) {
+        flex: 1 20%;
+      }
+
+      @include breakpoint(desktop-lg) {
+        flex: 1 17%;
       }
 
       .c-homeList {
@@ -76,10 +92,26 @@
 
         &:first-child {
           padding: 0 0 10px;
+
+          @include breakpoint(desktop-sm) {
+            padding: 0 0 20px;
+          }
+
+          @include between-breakpoints(desktop-sm, desktop-lg) {
+            padding: 0 0 15px;
+          }
         }
 
         &:last-child {
           border: 0;
+        }
+
+        @include between-breakpoints(desktop-sm, desktop-lg) {
+          padding: 15px 0;
+        }
+
+        @include breakpoint(desktop-lg) {
+          padding: 20px 0;
         }
 
         .homeList-image {
@@ -101,7 +133,19 @@
             color: #000;
             letter-spacing: -.16px;
 
-            @include text-styles(1.375em, 1.14, "Average");
+            @include text-styles(1.1em, 1.3, "Average");
+
+            @include between-breakpoints(mobile, desktop-sm) {
+              @include text-styles(1.375em, 1.14, "Average");
+            }
+
+            @include between-breakpoints(desktop-sm, desktop-lg) {
+              @include text-styles(1.08em, 1.2, "Average");
+            }
+
+            @include between-breakpoints(desktop-lg, desktop-xl) {
+              @include text-styles(1em, 1.15, "Average");
+            }
           }
         }
       }
