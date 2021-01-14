@@ -40,58 +40,17 @@ const Image = ({
     src: url,
     height,
     width,
+    srcSetSizes,
     originalHeight,
     originalWidth,
     focalCoords,
     arcSite,
   };
-  let img = null;
-  let dtImage = null;
-  let tImage = null;
-  let mImage = null;
-  if (useSrcSet && srcSetSizes.length) {
-    dtImage = useContent({
-      source: 'resizer',
-      query: {
-        src: url,
-        width: srcSetSizes[0] && srcSetSizes[0][0] ? srcSetSizes[0][0] : width,
-        height: srcSetSizes[0] && srcSetSizes[0][1] ? srcSetSizes[0][1] : height,
-        originalHeight,
-        originalWidth,
-        focalCoords,
-        arcSite,
-      },
-    });
-    tImage = useContent({
-      source: 'resizer',
-      query: {
-        src: url,
-        width: srcSetSizes[1] && srcSetSizes[1][0] ? srcSetSizes[1][0] : srcSetSizes[0][0],
-        height: srcSetSizes[1] && srcSetSizes[1][1] ? srcSetSizes[1][1] : Math.floor(srcSetSizes[1][0] * 0.38),
-        originalHeight,
-        originalWidth,
-        focalCoords,
-        arcSite,
-      },
-    });
-    mImage = useContent({
-      source: 'resizer',
-      query: {
-        src: url,
-        width: srcSetSizes[2] && srcSetSizes[2][0] ? srcSetSizes[2][0] : srcSetSizes[0][0],
-        height: srcSetSizes[2] && srcSetSizes[2][1] ? srcSetSizes[2][1] : Math.floor(srcSetSizes[2][0] * 0.70),
-        originalHeight,
-        originalWidth,
-        focalCoords,
-        arcSite,
-      },
-    });
-  } else {
-    img = useContent({
-      source: 'resizer',
-      query: imgQuery,
-    });
-  }
+
+  const img = useContent({
+    source: 'resizer',
+    query: imgQuery,
+  });
 
   const screenSize = checkWindowSize();
 
@@ -126,19 +85,26 @@ const Image = ({
 
   const altTextContent = getAltText(altText, caption);
 
-  if (img || srcSetSizes.length) {
+  if (img) {
+    const {
+      src: imgSrc = null,
+      0: dtImage = null,
+      1: tImage = null,
+      2: mImage = null,
+    } = img;
+    const dataSrc = imgSrc || mImage.src || url;
     return (
       <div className={`c-image-component ${imageMarginBottom || ''}`}>
         <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
           <>
             {!ampPage ? (
               <LazyLoad
-                placeholder={<img src={placeholder} style={{ width: '100%' }} data-placeholder={true} data-src={img ? img.src : mImage.src} alt={altTextContent}
+                placeholder={<img src={placeholder} style={{ width: '100%' }} data-placeholder={true} data-src={dataSrc} alt={altTextContent}
                 className={teaseContentType ? 'tease-image' : ''} />}
                 height="100%"
                 width="100%"
                 once={true}>
-                {srcSetSizes.length ? (
+                {useSrcSet && srcSetSizes.length ? (
                   <picture className={teaseContentType ? 'tease-image' : ''}>
                     <source srcSet={dtImage.src} media="(min-width: 1200px)" />
                     <source srcSet={tImage.src} media="(min-width: 768px)" />
@@ -146,7 +112,7 @@ const Image = ({
                   </picture>
                 ) : (
                   <img
-                    src={img ? img.src : mImage.src}
+                    src={dataSrc}
                     alt={altTextContent}
                     className={teaseContentType ? 'tease-image' : ''}
                     onClick={onClickRun}
@@ -155,7 +121,7 @@ const Image = ({
               </LazyLoad>
             ) : (
                 <amp-img
-                  src={img ? img.src : mImage.src}
+                  src={dataSrc}
                   alt={altTextContent}
                   width={width}
                   height={height !== 0 ? height : (width / originalWidth) * originalHeight}
@@ -182,7 +148,6 @@ const Image = ({
   }
   return null;
 };
-
 Image.propTypes = {
   src: PropTypes.object.isRequired,
   width: PropTypes.number.isRequired,
@@ -198,5 +163,4 @@ Image.propTypes = {
   useSrcSet: PropTypes.bool,
   srcSetSizes: PropTypes.array,
 };
-
 export default Image;

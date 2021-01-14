@@ -15,59 +15,73 @@ function encodeSrc(src) {
 export default {
 
   fetch({
-    src, height = 600, width = 1000, originalHeight, originalWidth, smart, focalCoords, arcSite,
+    src, height = 600, width = 1000, srcSetSizes = [], originalHeight, originalWidth, smart, focalCoords, arcSite,
   }) {
+    const { cdnOrg, cdnSite, allowedDimensions } = getProperties(arcSite);
     let reqWidth = width;
     let reqHeight = height;
-    const { cdnOrg, cdnSite, allowedDimensions } = getProperties(arcSite);
-    const imgDimensions = [reqWidth, reqHeight];
-    const isInDimensions = allowedDimensions.find((item) => {
-      if (item[0] === imgDimensions[0] && item[1] === imgDimensions[1]) return true;
-      return false;
-    });
-    const useFocalCrop = focalCoords.length === 2;
-    const focalPoints = {};
+    const buildOutputUrl = (w, h) => {
+      const useFocalCrop = focalCoords.length === 2;
+      const focalPoints = {};
 
-    // Return null if the requested size dimensions aren't in the whitelist.
-    // This prevents spamming the resizer for images at misc dimensions
-    if (!isInDimensions) {
-      reqWidth = 500;
-      reqHeight = 282;
+      if (useFocalCrop) {
+        const { 1: focalY } = focalCoords;
+        // let's figure out how much to crop to keep the FP centered
+        const topCrop = focalY / originalHeight;
+        // let's figure out how much to crop to match
+        const cropHeight = Math.round(originalHeight - (originalWidth * h / w));
+        focalPoints.left = 0;
+        focalPoints.right = originalWidth;
+        focalPoints.top = Math.round(cropHeight * topCrop);
+        focalPoints.bottom = cropHeight - focalPoints.top > originalHeight ? cropHeight : originalHeight - (cropHeight - focalPoints.top);
+      }
+
+      let siteDomain = `${cdnOrg}-${cdnSite}-sandbox.cdn.arcpublishing.com`;
+      if (currentEnv === 'prod') {
+        const connextSite = cdnSite.replace(/-/g, '');
+        siteDomain = `www.${connextSite === 'journalnews' ? 'journal-news' : connextSite}.com`;
+      }
+
+      const resizerUrl = `https://${siteDomain}/resizer`;
+      const imageUrl = src.substring(src.indexOf('//') + 2);
+      const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerUrl);
+      const imagePath = thumbor.setImagePath(encodeSrc(imageUrl));
+      const croppedUrl = (useFocalCrop) ? imagePath.crop(focalPoints.left, focalPoints.top, focalPoints.right, focalPoints.bottom) : imagePath;
+      const resizedUrl = croppedUrl.resize(w, h);
+      const thumborUrl = (smart) ? resizedUrl.smartCrop(true) : resizedUrl;
+      const outputUrl = thumborUrl.buildUrl();
+      return outputUrl;
+    };
+
+    if (srcSetSizes.length) {
+      const outputUrlArray = [];
+      srcSetSizes.forEach((size) => {
+        reqWidth = size[0] || width;
+        reqHeight = size[1] || height;
+        const imgDimensions = [reqWidth, reqHeight];
+        const isInDimensions = allowedDimensions.find((item) => {
+          if (item[0] === imgDimensions[0] && item[1] === imgDimensions[1]) return true;
+          return false;
+        });
+
+        // Return null if the requested size dimensions aren't in the whitelist.
+        // This prevents spamming the resizer for images at misc dimensions
+        if (!isInDimensions) {
+          reqWidth = 500;
+          reqHeight = 282;
+        }
+        return outputUrlArray.push({ src: buildOutputUrl(reqWidth, reqHeight) });
+      });
+      return outputUrlArray;
     }
 
-    if (useFocalCrop) {
-      const { 1: focalY } = focalCoords;
-      // let's figure out how much to crop to keep the FP centered
-      const topCrop = focalY / originalHeight;
-      // let's figure out how much to crop to match
-      const cropHeight = Math.floor(originalHeight - (originalWidth * reqHeight / reqWidth));
-      focalPoints.left = 0;
-      focalPoints.right = originalWidth;
-      focalPoints.top = Math.floor(cropHeight * topCrop);
-      focalPoints.bottom = originalHeight - (cropHeight - focalPoints.top);
-    }
-
-    let siteDomain = `${cdnOrg}-${cdnSite}-sandbox.cdn.arcpublishing.com`;
-    if (currentEnv === 'prod') {
-      const connextSite = cdnSite.replace(/-/g, '');
-      siteDomain = `www.${connextSite === 'journalnews' ? 'journal-news' : connextSite}.com`;
-    }
-
-    const resizerUrl = `https://${siteDomain}/resizer`;
-    const imageUrl = src.substring(src.indexOf('//') + 2);
-    const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerUrl);
-    const imagePath = thumbor.setImagePath(encodeSrc(imageUrl));
-    const croppedUrl = (useFocalCrop) ? imagePath.crop(focalPoints.left, focalPoints.top, focalPoints.right, focalPoints.bottom) : imagePath;
-    const resizedUrl = croppedUrl.resize(reqWidth, reqHeight);
-    const thumborUrl = (smart) ? resizedUrl.smartCrop(true) : resizedUrl;
-    const outputUrl = thumborUrl.buildUrl();
-
-    return { src: outputUrl };
+    return { src: buildOutputUrl(reqWidth, reqHeight) };
   },
   params: {
     src: 'text',
     height: 'number',
     width: 'number',
+    srcSetSizes: 'array',
     originalHeight: 'number',
     originalWidth: 'number',
     smart: 'boolean',
