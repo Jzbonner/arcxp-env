@@ -1,7 +1,6 @@
 export default `
     count,
     canonical_url,
-    content_elements,
     credits,
     display_date,
     first_publish_date,

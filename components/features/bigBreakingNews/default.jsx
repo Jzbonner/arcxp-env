@@ -14,6 +14,10 @@ const BigBreakingNews = (customFields = {}) => {
     customFields: { content: { contentService = 'collections-api', contentConfigValues } = {} },
   } = customFields;
 
+  let { from: startIndex = 1, size } = contentConfigValues || {};
+  startIndex -= 1;
+  size = startIndex + size;
+
   let data = useContent({
     source: contentService,
     query: {
@@ -21,7 +25,8 @@ const BigBreakingNews = (customFields = {}) => {
       arcSite,
     },
   });
-  data = data && data.slice(0, 5);
+
+  data = data && data.slice(startIndex, size);
 
   const renderLogic = () => {
     const leadItem = data[0];
@@ -38,12 +43,12 @@ const BigBreakingNews = (customFields = {}) => {
             </a>
           </div>
           <div className="restOfItems">
-          {restOfItems.map((item, id) => {
+          {restOfItems.map((item, i) => {
             const newItem = item;
             // deleting these two props as we don't want to render images for non-lead items of BBN
             delete newItem.promo_items;
             delete newItem.firstInlineImage;
-            return <ListItem key={`ListItem-${id}`} {...newItem} />;
+            return <ListItem key={`ListItem-${i}`} {...newItem} />;
           })}
           </div>
       </div>
