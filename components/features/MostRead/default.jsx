@@ -11,7 +11,7 @@ const MostRead = () => {
     query: {
       host: 'ajc.com',
       limit: '5',
-      section: `${section}`,
+      section: `${section}` || '',
     },
   });
   console.log(topStoriesData);
