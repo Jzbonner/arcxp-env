@@ -39,6 +39,9 @@ const Video = ({
 
   const videoLink = videoApiData && videoApiData.streams && videoApiData.streams[0] ? videoApiData.streams[0].url : '';
 
+  const { basic: vidTitle } = src && src.headlines ? src.headlines : {};
+  const { url: vidPoster } = src && src.promo_image ? src.promo_image : {};
+
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON, autoplayNext } = featuredVideoPlayerRules || inlineVideoPlayerRules;
   const screenSize = checkWindowSize();
@@ -213,6 +216,28 @@ const Video = ({
           & queued for (eventual) triggering in components/_helper_components/global/connext/default.jsx
           (`ConnextAuthTrigger` function, called in `article-basic` layout)
         */
+
+        const getShadowParent = document.getElementsByClassName('powa-shadow');
+        // console.log('SHADOW ROOT', getShadowParent);
+
+        const appendDataToVideo = (tag) => {
+          tag.setAttribute('title', vidTitle);
+          tag.setAttribute('poster', vidPoster);
+        };
+        Array.from(getShadowParent).map((root) => {
+          const children = root && root.shadowRoot && root.shadowRoot.children;
+          Array.from(children).map((el) => {
+            // console.log('children ', el);
+            const videoTag = el.getElementsByTagName('video')[0];
+            // console.log('powaProcessed', videoTag);
+            if (videoTag) {
+              appendDataToVideo(videoTag);
+            } return null;
+          });
+          return null;
+        });
+
+
         if (lazyLoad) {
           deferThis({ video: [powa, isLead] });
           powa.hideControls();
@@ -394,18 +419,24 @@ const Video = ({
       {isLeadVideo && lazyLoad && <div className="video-blocker" />}
     </>
   );
-  const ampImaPlayer = () => <amp-ima-video width="16" height="9" layout="responsive" data-tag={adTag} data-poster={thumbnailImage} autoplay={!lazyLoad && startPlaying ? '' : null} amp-access={lazyLoad ? 'Error=true OR AccessLevel="Full Content Access"' : null} amp-access-hide={lazyLoad ? '' : null}>
-    <source src={videoLink} type="video/mp4"></source>
-    <source src={videoLink} type="video/webm"></source>
-  </amp-ima-video>;
+  const ampImaPlayer = () => (
+    <amp-ima-video width="16" height="9" layout="responsive" data-tag={adTag} data-poster={thumbnailImage} autoplay={!lazyLoad && startPlaying ? '' : null} amp-access={lazyLoad ? 'Error=true OR AccessLevel="Full Content Access"' : null} amp-access-hide={lazyLoad ? '' : null}>
+      <source src={videoLink} type="video/mp4"></source>
+      <source src={videoLink} type="video/webm"></source>
+    </amp-ima-video>
+  );
   const renderAmpPlayer = () => (
     <>
-      {lazyLoad && <>
-        <div amp-access='Error=true OR AccessLevel="Full Content Access"' amp-access-hide>
-          {ampImaPlayer()}
-        </div>
-        <div amp-access='Error!=true AND AccessLevel!="Full Content Access"'><amp-img src={thumbnailImage} width="16" height="9" layout="responsive" /></div>
-      </>}
+      {lazyLoad && (
+        <>
+          <div amp-access='Error=true OR AccessLevel="Full Content Access"' amp-access-hide>
+            {ampImaPlayer()}
+          </div>
+          <div amp-access='Error!=true AND AccessLevel!="Full Content Access"'>
+            <amp-img src={thumbnailImage} width="16" height="9" layout="responsive" />
+          </div>
+        </>
+      )}
       {!lazyLoad && ampImaPlayer()}
     </>
   );
