@@ -30,6 +30,8 @@ const Video = ({
     pageTax = gcTax;
   }
 
+  console.log('SRC ', src);
+
   const videoApiData = useContent({
     source: 'video-api',
     query: {
@@ -217,26 +219,36 @@ const Video = ({
           (`ConnextAuthTrigger` function, called in `article-basic` layout)
         */
 
+        // get parent div of shadow DOM
         const getShadowParent = document.getElementsByClassName('powa-shadow');
-        // console.log('SHADOW ROOT', getShadowParent);
 
+        // append attributes to video
         const appendDataToVideo = (tag) => {
           tag.setAttribute('title', vidTitle);
           tag.setAttribute('poster', vidPoster);
         };
+
+        // find video tag inside shadow DOM and append attributes. Works for Lead Video only since Inline Videos don't autoPlay!
         Array.from(getShadowParent).map((root) => {
           const children = root && root.shadowRoot && root.shadowRoot.children;
           Array.from(children).map((el) => {
-            // console.log('children ', el);
+            // console.log('CHILDREN ', children);
             const videoTag = el.getElementsByTagName('video')[0];
-            // console.log('powaProcessed', videoTag);
-            if (videoTag) {
+            // console.log('EL ', el);
+            if (!videoTag) {
+              el.addEventListener('click', () => {
+                const inlineVideoTag = el.children[2];
+                // console.log('INLINE VIDEO IS CLICKED');
+                // console.log('ELEMENTs CHILDREN ', inlineVideoTag);
+                appendDataToVideo(inlineVideoTag);
+              });
+            } else {
               appendDataToVideo(videoTag);
-            } return null;
+            }
+            return null;
           });
           return null;
         });
-
 
         if (lazyLoad) {
           deferThis({ video: [powa, isLead] });
