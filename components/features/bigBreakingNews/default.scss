@@ -45,7 +45,11 @@
         color: #000;
         padding: 0 0 20px;
 
-        @include text-styles(1.75em, 1.07, "Average");
+        @include text-styles(2.8125em, 1.07, "Average");
+
+        @include between-breakpoints(mobile, desktop-sm) {
+          @include text-styles(1.75em, 1.07, "Average");
+        }
 
         @include between-breakpoints(desktop-sm, desktop-lg) {
           @include text-styles(1.6em, 1.22, "Average");
