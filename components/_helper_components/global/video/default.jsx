@@ -30,8 +30,6 @@ const Video = ({
     pageTax = gcTax;
   }
 
-  console.log('SRC ', src);
-
   const videoApiData = useContent({
     source: 'video-api',
     query: {
@@ -40,9 +38,6 @@ const Video = ({
   });
 
   const videoLink = videoApiData && videoApiData.streams && videoApiData.streams[0] ? videoApiData.streams[0].url : '';
-
-  const { basic: vidTitle } = src && src.headlines ? src.headlines : {};
-  const { url: vidPoster } = src && src.promo_image ? src.promo_image : {};
 
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON, autoplayNext } = featuredVideoPlayerRules || inlineVideoPlayerRules;
@@ -219,37 +214,6 @@ const Video = ({
           (`ConnextAuthTrigger` function, called in `article-basic` layout)
         */
 
-        // get parent div of shadow DOM
-        const getShadowParent = document.getElementsByClassName('powa-shadow');
-
-        // append attributes to video
-        const appendDataToVideo = (tag) => {
-          tag.setAttribute('title', vidTitle);
-          tag.setAttribute('poster', vidPoster);
-        };
-
-        // find video tag inside shadow DOM and append attributes. Works for Lead Video only since Inline Videos don't autoPlay!
-        Array.from(getShadowParent).map((root) => {
-          const children = root && root.shadowRoot && root.shadowRoot.children;
-          Array.from(children).map((el) => {
-            // console.log('CHILDREN ', children);
-            const videoTag = el.getElementsByTagName('video')[0];
-            // console.log('EL ', el);
-            if (!videoTag) {
-              el.addEventListener('click', () => {
-                const inlineVideoTag = el.children[2];
-                // console.log('INLINE VIDEO IS CLICKED');
-                // console.log('ELEMENTs CHILDREN ', inlineVideoTag);
-                appendDataToVideo(inlineVideoTag);
-              });
-            } else {
-              appendDataToVideo(videoTag);
-            }
-            return null;
-          });
-          return null;
-        });
-
         if (lazyLoad) {
           deferThis({ video: [powa, isLead] });
           powa.hideControls();
@@ -310,6 +274,47 @@ const Video = ({
 
         powa.on('start', (event) => {
           const { id: playerId, videoData, autoplay } = event || {};
+
+          // grab title and poster for each video event
+          const { basic: vidTitle } = videoData && videoData.headlines ? videoData.headlines : {};
+          const { url: vidPoster } = videoData && videoData.promo_image ? videoData.promo_image : {};
+          // get parent div of shadow DOM
+          const getShadowParent = document.getElementsByClassName('powa-shadow');
+          // append attributes to video
+          const appendDataToVideo = (tag) => {
+            tag.setAttribute('title', vidTitle);
+            tag.setAttribute('poster', vidPoster);
+          };
+
+          const sendVideoToChartbeat = (videoTag) => {
+            window._cbv = window._cbv || [];
+            window._cbv.push(videoTag);
+          };
+          // find video tag inside shadow DOM and append attributes.
+          Array.from(getShadowParent).map((root) => {
+            const children = root && root.shadowRoot && root.shadowRoot.children;
+            Array.from(children).map((el) => {
+              const videoTag = el.getElementsByTagName('video')[0];
+              // create event listener for inline videos where the video tag doesn't exist yet.
+              // send inline video tag to Chartbeat
+              if (!videoTag) {
+                el.addEventListener('click', () => {
+                  const inlineVideoTag = el.children[2];
+                  appendDataToVideo(inlineVideoTag);
+                  sendVideoToChartbeat(inlineVideoTag);
+                });
+              } else {
+                // append to lead video where the video tag always exists due to autoPlay=true
+                // send lead video tag to Chartbeat
+                appendDataToVideo(videoTag);
+                sendVideoToChartbeat(videoTag);
+              }
+              return null;
+            });
+            return null;
+          });
+
+
           const {
             canonical_url: vidCanonical, credits: vidCredits, description, duration = 0, headlines, taxonomy, _id: vId, version, video_type: vidType,
           } = videoData || {};
@@ -379,6 +384,7 @@ const Video = ({
     };
     const powaRenderListener = (e) => {
       const id = get(e, 'detail.id');
+
       if (window.powaRendered.includes(id)) {
         // the `powaRendered` callback for this video has already been run, so abort
         return null;
