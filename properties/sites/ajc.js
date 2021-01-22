@@ -35,7 +35,7 @@ export default {
     autoplayNext: true,
   },
   inlineVideoPlayerRules: {
-    startPlaying: true,
+    startPlaying: false,
     muteON: true,
     autoplayNext: true,
   },
