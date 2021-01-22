@@ -4,7 +4,7 @@ $is-amp: true;
 
 /* Imports and extends base stylesheet, only include overrides or site-specific scss here */
 @import "./../../styles/base/index.scss";
-@import "./../../styles/container/index.scss";
+@import "./../../styles/container/_article-basic.scss";
 @import "./../../styles/state/index.scss";
 
 /* Import all component styles */
