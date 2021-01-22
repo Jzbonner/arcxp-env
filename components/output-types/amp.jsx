@@ -31,8 +31,8 @@ const AmpOutputType = (props) => {
     <Html>
     <head>
       <BaseMarkup canonicalUrl={articleURL} />
-      <AmpScripts contentElements={contentElements} storyPromoItems={storyPromoItems} arcSite={arcSite}/>
       <AmpCustomStyles arcSite={currentSite} outputTypeProps={props} />
+      <AmpScripts contentElements={contentElements} storyPromoItems={storyPromoItems} arcSite={arcSite}/>
       <GoogleStructuredData />
       <SiteMetaAmp />
     </head>

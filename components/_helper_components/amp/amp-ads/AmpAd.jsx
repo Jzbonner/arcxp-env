@@ -25,6 +25,7 @@ export const AmpAd = ({
   const currentEnv = fetchEnv();
   const jsonObject = buildJsonObject(adSlot, uuid, topics);
   const dataSlot = `${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}${path.replace(/-/g, '_')}`;
+  const isHs01orMp01 = adSlot === 'MP01' || adSlot === 'HS01';
 
   const offsetHeight = parseInt(height, 10) + 20;
 
@@ -42,11 +43,11 @@ export const AmpAd = ({
         class="ampAd"
         data-multi-size={multiSize}
         data-multi-size-validation={multiSizeValidation}
-        amp-access={isMeteredStory ? 'Error=true OR AccessLevel="Full Content Access"' : null}
-        amp-access-hide={isMeteredStory ? '' : null}
+        amp-access={isMeteredStory && !isHs01orMp01 ? 'Error=true OR AccessLevel="Full Content Access"' : null}
+        amp-access-hide={isMeteredStory && !isHs01orMp01 ? '' : null}
       >
       </amp-ad>
-      { !flyingCarpet && <div style={{ transform: `translate(0, -${offsetHeight}px)` }}className='ampAdLabel'></div> }
+      { !flyingCarpet && <div style={{ transform: `translate(0, -${offsetHeight}px)` }} className='ampAdLabel'></div> }
     </>
   );
 };

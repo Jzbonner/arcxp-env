@@ -117,53 +117,55 @@
 }
 
 // ad styles
+@include amp-exclude {
 
-.arc_ad {
-  // hide HP0x & RP0x ads below tablet
+  .arc_ad {
+    // hide HP0x & RP0x ads below tablet
 
-  @include between-breakpoints(mobile, tablet) {
+    @include between-breakpoints(mobile, tablet) {
 
-    &[class*="HP0"]:not(.HP02),
-    &[class*="RP0"] {
-      display: none;
+      &[class*="HP0"]:not(.HP02),
+      &[class*="RP0"] {
+        display: none;
+      }
     }
-  }
 
-  // hide MP0x ads on tablet+
+    // hide MP0x ads on tablet+
 
-  @include breakpoint(tablet) {
+    @include breakpoint(tablet) {
 
-    &[class*="MP0"] {
-      display: none;
+      &[class*="MP0"] {
+        display: none;
+      }
     }
-  }
 
-  // for sticky (e.g. right rail) ads
+    // for sticky (e.g. right rail) ads
 
-  &.is-sticky {
-    @include position-sticky(110px);
-  }
+    &.is-sticky {
+      @include position-sticky(110px);
+    }
 
-  .arcad {
-    position: relative;
-    text-align: center;
-    display: none;
+    .arcad {
+      position: relative;
+      text-align: center;
+      display: none;
 
-    &:not(:empty) {
-      display: block;
+      &:not(:empty) {
+        display: block;
 
-      &.HS02 {
-        margin: 0 auto;
+        &.HS02 {
+          margin: 0 auto;
+        }
+
+        @include advertisement-label;
       }
 
-      @include advertisement-label;
-    }
+      &.HS02:empty {
+        display: block;
+        margin-bottom: 20px;
 
-    &.HS02:empty {
-      display: block;
-      margin-bottom: 20px;
-
-      @include advertisement-label;
+        @include advertisement-label;
+      }
     }
   }
 }
