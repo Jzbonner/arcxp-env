@@ -213,6 +213,7 @@ const Video = ({
           & queued for (eventual) triggering in components/_helper_components/global/connext/default.jsx
           (`ConnextAuthTrigger` function, called in `article-basic` layout)
         */
+
         if (lazyLoad) {
           deferThis({ video: [powa, isLead] });
           powa.hideControls();
@@ -273,6 +274,47 @@ const Video = ({
 
         powa.on('start', (event) => {
           const { id: playerId, videoData, autoplay } = event || {};
+
+          // grab the title and poster for each video event
+          const { basic: vidTitle } = videoData && videoData.headlines ? videoData.headlines : {};
+          const { url: vidPoster } = videoData && videoData.promo_image ? videoData.promo_image : {};
+          // get parent div of shadow DOM
+          const getShadowParent = document.getElementsByClassName('powa-shadow');
+          // append attributes to video func
+          const appendDataToVideo = (tag) => {
+            tag.setAttribute('title', vidTitle);
+            tag.setAttribute('poster', vidPoster);
+          };
+
+          // send video tags to chartbeat once title and poster are appended
+          const sendVideoToChartbeat = (videoTag) => {
+            window._cbv = window._cbv || [];
+            window._cbv.push(videoTag);
+          };
+          // find video tag inside shadow DOM and append attributes.
+          Array.from(getShadowParent).map((root) => {
+            const children = root && root.shadowRoot && root.shadowRoot.children;
+            Array.from(children).map((el) => {
+              const videoTag = el.getElementsByTagName('video')[0];
+              // create event listener for inline videos where the video tag doesn't exist yet.
+              // send inline video tag to Chartbeat
+              if (!videoTag) {
+                el.addEventListener('click', () => {
+                  const inlineVideoTag = el.children[2];
+                  appendDataToVideo(inlineVideoTag);
+                  sendVideoToChartbeat(inlineVideoTag);
+                });
+              } else {
+                // append to lead video where the video tag always exists due to autoPlay=true
+                // send lead video tag to Chartbeat
+                appendDataToVideo(videoTag);
+                sendVideoToChartbeat(videoTag);
+              }
+              return null;
+            });
+            return null;
+          });
+
           const {
             canonical_url: vidCanonical, credits: vidCredits, description, duration = 0, headlines, taxonomy, _id: vId, version, video_type: vidType,
           } = videoData || {};
@@ -342,6 +384,7 @@ const Video = ({
     };
     const powaRenderListener = (e) => {
       const id = get(e, 'detail.id');
+
       if (window.powaRendered.includes(id)) {
         // the `powaRendered` callback for this video has already been run, so abort
         return null;
@@ -394,24 +437,27 @@ const Video = ({
       {isLeadVideo && lazyLoad && <div className="video-blocker" />}
     </>
   );
-
-  const ampImaPlayer = () => <amp-ima-video width="16" height="9" layout="responsive" data-tag={adTag} data-poster={thumbnailImage} autoplay={!lazyLoad && startPlaying ? '' : null} amp-access={lazyLoad ? 'Error=true OR AccessLevel="Full Content Access"' : null} amp-access-hide={lazyLoad ? '' : null}>
-    <source src={videoLink} type="video/mp4"></source>
-    <source src={videoLink} type="video/webm"></source>
-  </amp-ima-video>;
-
+  const ampImaPlayer = () => (
+    <amp-ima-video width="16" height="9" layout="responsive" data-tag={adTag} data-poster={thumbnailImage} autoplay={!lazyLoad && startPlaying ? '' : null} amp-access={lazyLoad ? 'Error=true OR AccessLevel="Full Content Access"' : null} amp-access-hide={lazyLoad ? '' : null}>
+      <source src={videoLink} type="video/mp4"></source>
+      <source src={videoLink} type="video/webm"></source>
+    </amp-ima-video>
+  );
   const renderAmpPlayer = () => (
     <>
-      {lazyLoad && <>
-        <div amp-access='Error=true OR AccessLevel="Full Content Access"' amp-access-hide>
-          {ampImaPlayer()}
-        </div>
-        <div amp-access='Error!=true AND AccessLevel!="Full Content Access"'><amp-img src={thumbnailImage} width="16" height="9" layout="responsive" /></div>
-      </>}
+      {lazyLoad && (
+        <>
+          <div amp-access='Error=true OR AccessLevel="Full Content Access"' amp-access-hide>
+            {ampImaPlayer()}
+          </div>
+          <div amp-access='Error!=true AND AccessLevel!="Full Content Access"'>
+            <amp-img src={thumbnailImage} width="16" height="9" layout="responsive" />
+          </div>
+        </>
+      )}
       {!lazyLoad && ampImaPlayer()}
     </>
   );
-
   return (
     <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
       <div className="video-component">{isAmpOutput ? renderAmpPlayer() : renderPowaPlayer()}</div>
@@ -424,7 +470,6 @@ const Video = ({
     </div>
   );
 };
-
 Video.propTypes = {
   src: PropTypes.object.isRequired,
   isLeadVideo: PropTypes.bool,
@@ -435,5 +480,4 @@ Video.propTypes = {
   pageTaxonomy: PropTypes.object,
   lazyLoad: PropTypes.bool,
 };
-
 export default Video;
