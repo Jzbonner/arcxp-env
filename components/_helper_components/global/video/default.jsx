@@ -275,17 +275,18 @@ const Video = ({
         powa.on('start', (event) => {
           const { id: playerId, videoData, autoplay } = event || {};
 
-          // grab title and poster for each video event
+          // grab the title and poster for each video event
           const { basic: vidTitle } = videoData && videoData.headlines ? videoData.headlines : {};
           const { url: vidPoster } = videoData && videoData.promo_image ? videoData.promo_image : {};
           // get parent div of shadow DOM
           const getShadowParent = document.getElementsByClassName('powa-shadow');
-          // append attributes to video
+          // append attributes to video func
           const appendDataToVideo = (tag) => {
             tag.setAttribute('title', vidTitle);
             tag.setAttribute('poster', vidPoster);
           };
 
+          // send video tags to chartbeat once title and poster are appended
           const sendVideoToChartbeat = (videoTag) => {
             window._cbv = window._cbv || [];
             window._cbv.push(videoTag);
@@ -313,7 +314,6 @@ const Video = ({
             });
             return null;
           });
-
 
           const {
             canonical_url: vidCanonical, credits: vidCredits, description, duration = 0, headlines, taxonomy, _id: vId, version, video_type: vidType,
