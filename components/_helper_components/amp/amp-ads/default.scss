@@ -3,7 +3,7 @@
 .ampAd {
   display: none;
 
-  &:not([hidden]) {
+  &:not([amp-access-hide]):not([hidden]) {
     position: relative;
     text-align: center;
     display: block;
@@ -11,11 +11,11 @@
   }
 }
 
-amp-ad:not([hidden]) + .ampAdLabel {
+amp-ad:not([amp-access-hide]):not([hidden]) + .ampAdLabel {
   @include advertisement-label;
 }
 
-amp-fx-flying-carpet:not([hidden]) + .ampAdLabel {
+amp-fx-flying-carpet:not([amp-access-hide]):not([hidden]) + .ampAdLabel {
   @include advertisement-label;
 }
 
@@ -23,8 +23,8 @@ amp-fx-flying-carpet:not([hidden]) + .ampAdLabel {
 
   .ampAd {
 
-    &:not([hidden]) + .ampAdLabel {
-    
+    &:not([amp-access-hide]):not([hidden]) + .ampAdLabel {
+
       &:before {
         content: "";
       }

@@ -184,6 +184,7 @@ const StoryPageLayout = () => {
       isHyperlocalContent={isHyperlocalContent}
       taxonomy={taxonomy}
       uuid={uuid}
+      isMeteredStory={isMeteredStory}
     />}
     {!noAds && !isHyperlocalContent && !sponsorSectionID && (
       <Nativo
@@ -210,6 +211,7 @@ const StoryPageLayout = () => {
           isHyperlocalContent={isHyperlocalContent}
           taxonomy={taxonomy}
           uuid={uuid}
+          isMeteredStory={isMeteredStory}
         />
       </>
     }
