@@ -1,7 +1,7 @@
 import adsBidding from './adsBidding/ajc.com.json';
 import adsTxt from './adstxt/ajc.com.json';
 import appAdsTxt from './appadstxt/ajc.com.json';
-import mostReadBlacklist from './mostReadBlacklist/ajc.com';
+import mostReadBlacklist from './mostReadBlacklist/ajc.com.json';
 
 export default {
   defaultSiteTitle: 'AJC',

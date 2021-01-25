@@ -1,6 +1,7 @@
 import adsBidding from './adsBidding/dayton.com.json';
 import adsTxt from './adstxt/dayton.com.json';
 import appAdsTxt from './appadstxt/dayton.com.json';
+import blacklist from './mostReadBlacklist/dayton.com.json';
 
 export default {
   dfp_id: 21849707860,
@@ -132,5 +133,9 @@ export default {
     prod: {
       cmsId: 2536851,
     },
+  },
+  chartbeat: {
+    blacklist,
+    host: 'dayton.com',
   },
 };

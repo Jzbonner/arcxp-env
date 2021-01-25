@@ -1,9 +1,6 @@
-export default `
-pages {
-    title
-    path
-    sections
-    stats {
-        type
-    }
-}`;
+export default [
+  'title',
+  'path',
+  'sections',
+  'stats.type',
+];
