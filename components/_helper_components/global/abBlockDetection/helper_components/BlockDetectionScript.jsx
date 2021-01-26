@@ -83,24 +83,22 @@ const BlockDetectionScript = (uuid = '', pageUrl = '') => {
             console.log('customr id', CustomerRegistrationId, 'clientId', clientId);
           }
 
-          /* TODO: refactor header to standard obj */
-          const postHeaders = new Headers();
-
           console.log('blocker state', blockerStates);
+          const headers = {
+            'Content-Type' : 'application/json',
+            'event' : generateEventString(blockerStates),
+            'page' : '${pageUrl}',
+            'referer' : 'docu.referrer',
+            'contenttype' : '${pageContentType}',
+            'contentid' : '${uuid}',
+            'clientid' :  clientId || '',
+            'visitorid' : '',
+            'siteversion' : 'responsive',
+            'siteid' : '${metrics && metrics.siteID ? metrics.siteID : site}',
+            'useragent' : navigator.userAgent
+          }
 
-          postHeaders.append('Content-Type', 'application/json');
-          postHeaders.append('event', generateEventString(blockerStates));
-          postHeaders.append('page', '${pageUrl}');
-          postHeaders.append('referer', docu.referrer || '');
-          postHeaders.append('contenttype', '${pageContentType}');
-          postHeaders.append('contentid', '${uuid}');
-          postHeaders.append('clientid', '');
-          postHeaders.append('visitorid', '');
-          postHeaders.append('siteversion', 'responsive');
-          postHeaders.append('siteid', '${metrics && metrics.siteID ? metrics.siteID : site}' );
-          postHeaders.append('useragent', navigator.userAgent);
-
-          return postHeaders;
+          return headers;
         };
 
         window.addEventListener('connextConversationDetermined', () => {
@@ -111,7 +109,7 @@ const BlockDetectionScript = (uuid = '', pageUrl = '') => {
             const hasPrivacyBlocker = typeof window.google_tag_manager === 'undefined' ? true : false;
             const hasPaywallBlocker = getUserPaywallBlockerState();
 
-            ga(function(tracker) {
+            window.ga(function(tracker) {
               const visitorId = tracker.get('clientId');
               console.log('visitor id', visitorId);
             });

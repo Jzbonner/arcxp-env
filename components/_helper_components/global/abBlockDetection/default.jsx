@@ -5,7 +5,6 @@ import BlockDetectionScript from './helper_components/BlockDetectionScript';
 const DetectAdBlocker = (pageUrl = '', uuid = '') => (
   <div id="detection-wrapper">
     <div id="ADS_2" style={{ height: '0px', width: '0px' }} >
-      <p>aaaa</p>
     </div>
     <BlockDetectionScript pageUrl={pageUrl} uuid={uuid} />
   </div>
