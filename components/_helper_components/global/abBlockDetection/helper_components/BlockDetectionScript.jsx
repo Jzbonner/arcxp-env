@@ -11,6 +11,9 @@ const BlockDetectionScript = (uuid = '', pageUrl = '') => {
   const { arcSite } = fusionContext;
   const contentMeta = getContentMeta();
 
+  console.log('pageUrl', pageUrl);
+  console.log('uuid', uuid);
+
   const { metrics } = getProperties(arcSite) || {};
 
   const {
@@ -37,41 +40,46 @@ const BlockDetectionScript = (uuid = '', pageUrl = '') => {
           } 
         };
 
-        const generateEventString = ({ adBlocker, privacyBlocker, paywallBlocker}) => {
+        const generateEventString = ({ hasAdBlocker, hasPrivacyBlocker, hasPaywallBlocker}) => {
           let evtString = '';
 
-          if (adBlocker) {
+          console.log('abBlocker state', hasAdBlocker);
+
+          if (hasAdBlocker) {
             evtString += 'AdBlocker';
           }
 
-          if (privacyBlocker) {
-            evtString += evtString.length > 0 ? '_PrivacyBlocker' : 'PrivacyBlocker'';
+          if (hasPrivacyBlocker) {
+            evtString += evtString.length > 0 ? '_PrivacyBlocker' : 'PrivacyBlocker';
           }
 
-          if (paywallBlocker) {
-            evtString += evtString.length > 0 ? '_PaywallBlocker' : 'PaywallBlocker'';
+          if (hasPaywallBlocker) {
+            evtString += evtString.length > 0 ? '_PaywallBlocker' : 'PaywallBlocker';
           }
 
+          console.log('event string', evtString);
           return evtString;
         };
 
         const buildHeaderData = (blockerStates) => {
           const postHeaders = new Headers();
+
+          console.log('blocker state', blockerStates);
+
           postHeaders.append('Content-Type', 'application/json');
           postHeaders.append('event', generateEventString(blockerStates));
-          postHeaders.append('page', ${pageUrl});
+          postHeaders.append('page', '${pageUrl}');
           postHeaders.append('referer', docu.referrer || '');
-          postHeaders.append('contenttype', ${pageContentType});
-          postHeaders.append('contentid', ${uuid});
+          postHeaders.append('contenttype', '${pageContentType}');
+          postHeaders.append('contentid', '${uuid}');
           postHeaders.append('clientid', '');
           postHeaders.append('visitorid', '');
           postHeaders.append('siteversion', 'responsive');
-          postHeaders.append('siteid', ${metrics && metrics.siteID ? metrics.siteID : site} );
+          postHeaders.append('siteid', '${metrics && metrics.siteID ? metrics.siteID : site}' );
           postHeaders.append('useragent', navigator.userAgent);
 
           return postHeaders;
-
-        }
+        };
 
         window.addEventListener('connextConversationDetermined', () => {
           console.log('running event');
@@ -83,10 +91,12 @@ const BlockDetectionScript = (uuid = '', pageUrl = '') => {
 
             console.log('hasAdBlocker', hasAdBlocker, 'hasPrivacyBlocker', hasPrivacyBlocker, 'hasPaywallBlocker', hasPaywallBlocker);
 
-          fetch(${domainEndpoint}, {
+            console.log('here are the headers', buildHeaderData({ hasAdBlocker, hasPrivacyBlocker, hasPaywallBlocker }));
+            console.log('here is the domain', '${domainEndpoint}');
+/*           fetch('${domainEndpoint}', {
             method: 'post',
             headers: buildHeaderData({ hasAdBlocker, hasPrivacyBlocker, hasPaywallBlocker }),
-          });
+          }); */
         });`,
   }}></script>;
 };
