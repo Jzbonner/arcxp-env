@@ -23,12 +23,12 @@ const MostRead = () => {
   });
   if (topStoriesData) {
     let counter = 0;
-    return <div className="c-mostRead"><div className="mostReadTitle">Most Read</div>
+    return <div className="c-mostRead b-margin-bottom-d30-m20"><div className="mostReadTitle">Most Read</div>
       <div className="mostReadList"> {
         topStoriesData.map((el, i) => {
           if (el.title && i < 5) {
             counter += 1;
-            return <a key={i} href={el.path}><div className="mostReadRanking">{counter}</div><div className="mostReadHeadline">{el.title}</div></a>;
+            return <a key={i} href={el.path}><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{el.title}</div></a>;
           }
           return null;
         })
