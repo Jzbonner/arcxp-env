@@ -1,11 +1,9 @@
 import { CHARTBEAT_KEY } from 'fusion:environment';
 import axios from 'axios';
-import _ from 'lodash';
 import getProperties from 'fusion:properties';
-import filter from '../filters/most-read';
+import filterMostRead from './helper_functions/filterMostRead';
 
-
-const ttl = 100;
+const ttl = 900;
 
 const params = {
   section: 'text',
@@ -15,7 +13,7 @@ const params = {
 
 const fetch = (query = {}) => {
   const {
-    host, section = '', limit = '10', arcSite = 'ajc',
+    host = 'ajc.com', section = '', limit = '10', arcSite = 'ajc',
   } = query;
 
   const { chartbeat } = getProperties(arcSite);
@@ -28,18 +26,13 @@ const fetch = (query = {}) => {
     .then(({ data }) => {
       if ((!section) || (data && data.pages && data.pages.length < 5)) {
         return axios.get(newUri)
-          .then(({ data: siteData }) => {
-            // / TURN INTO FUNCTION AND ALSO USE OUTSIDE OF IF STATEMENT//
-            let { pages: pageData } = siteData;
-            pageData = pageData.filter(
-              page => !blacklist.some(listItem => `${host}${listItem.uri}` === page.path),
-            );
-            return pageData.map(el => _.pick(el, filter));
-          });
+          .then(({ data: siteData }) => filterMostRead(siteData, host, blacklist));
       }
-      return data;
+      return filterMostRead(data, host, blacklist);
     })
-    .catch(error => error);
+    .catch((error) => {
+      console.error('Error: ', error);
+    });
   return promiseData;
 };
 

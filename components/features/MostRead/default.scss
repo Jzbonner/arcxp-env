@@ -1,0 +1,83 @@
+@import "./../../../src/styles/base";
+
+.c-mostRead {
+  display: flex;
+  flex-direction: column;
+}
+
+.mostReadTitle {
+  @include text-styles(1.88rem, 1 , "Average");
+  
+  text-align: center;
+
+  @include breakpoint(tablet) {
+    @include text-styles(1.56rem, 1, "Average");
+    
+    text-align: left;
+  }
+
+  @include breakpoint(desktop-sm) {
+    @include text-styles (2.5rem, 1, "Average");
+
+    text-align: left;
+  }
+}
+
+.mostReadList {
+  display: flex;
+  flex-direction: column;
+
+  @include breakpoint(tablet) {
+    flex-direction: row;
+  }
+
+  a {
+    color: inherit;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.mostReadRanking {
+  @include text-styles (2.5rem, 1, "Average");
+
+  margin-right: 8px;
+  padding-top: 12px;
+  min-width: 20px;
+
+  @include breakpoint(tablet) {
+    @include text-styles(1.88rem, 1 , "Average");
+
+    margin-right: 4px;
+    padding-top: 9px;
+  }
+
+  @include breakpoint (desktop-sm) {
+    @include text-styles (2.5rem, 1, "Average");
+
+    margin-right: 9px;
+    padding-top: 10px;
+  }
+}
+
+.mostReadHeadline {
+  border-left: 1px solid #cdcdcd;
+  padding-left: 12px;
+  padding-top: 12px;
+  
+  @include text-styles(1.75rem, 1.14, "Average");
+
+  @include breakpoint(tablet) {
+    @include text-styles(1rem, 1.25, "Average");
+
+    padding-left: 9px;
+    padding-top: 9px;
+  }
+  
+  @include breakpoint(desktop-sm) {
+    @include text-styles(1.56rem, 1.28, "Average");
+
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+}

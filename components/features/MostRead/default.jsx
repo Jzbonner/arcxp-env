@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useComponentContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
+import './default.scss';
 
 const MostRead = () => {
   const fusionContext = useFusionContext();
@@ -21,9 +22,19 @@ const MostRead = () => {
     },
   });
   if (topStoriesData) {
-    return <div className="c-mostRead"><div className="mostReadTitle">Most Read</div>{
-      topStoriesData.map((el, i) => (el.title ? <a key={i} href={el.path}><div>{i + 1}: {el.title}</div></a> : null))}
-      </div>;
+    let counter = 0;
+    return <div className="c-mostRead"><div className="mostReadTitle">Most Read</div>
+      <div className="mostReadList"> {
+        topStoriesData.map((el, i) => {
+          if (el.title && i < 5) {
+            counter += 1;
+            return <a key={i} href={el.path}><div className="mostReadRanking">{counter}</div><div className="mostReadHeadline">{el.title}</div></a>;
+          }
+          return null;
+        })
+        }
+      </div>
+    </div>;
   }
   return null;
 };
