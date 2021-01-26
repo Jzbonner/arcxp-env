@@ -11,6 +11,7 @@ import checkSponsor from '../../layouts/_helper_functions/checkSponsor';
 import AmpRelLink from '../../_helper_components/amp/AmpRelLink';
 import GoogleStructuredData from '../../_helper_components/article/googleData/default';
 import fetchEnv from '../../_helper_components/global/utils/environment';
+import BlockDetectionScript from '../../_helper_components/global/abBlockDetection/default';
 
 const RenderOutputType = (props) => {
   const {
@@ -40,6 +41,8 @@ const RenderOutputType = (props) => {
   let fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${cdnSite || currentSite}.com` : '';
   /* eslint-disable-next-line max-len */
   fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
+
+  console.log('output type', outputType);
 
   return (
     <html>
@@ -97,6 +100,7 @@ const RenderOutputType = (props) => {
             <ConnextInit triggerLoginModal={outputType && outputType === 'login'} />
           </>
         )}
+        {outputType === 'default' ? <BlockDetectionScript pageUrl={articleURL} uuid={uuid} /> : null}
         <div id="fb-root"></div>
         <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
         {devconActive && <script id="ns_script_dc" data-key={devconKey || '2a1556f7-d788-4b8b-943a-dd77f5f0d472'} data-e="5" src="//includemodal.global.ssl.fastly.net/sp.js" type="text/javascript"></script>}
