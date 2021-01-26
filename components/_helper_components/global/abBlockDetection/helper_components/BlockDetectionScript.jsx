@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
+import fetchEnv from '../../utils/environment';
 import getContentMeta from '../../../global/siteMeta/_helper_functions/getContentMeta';
 import getDomainEndpoint from '../helper_functions/getDomainEndpoint';
 
@@ -10,17 +11,26 @@ const BlockDetectionScript = (uuid = '', pageUrl = '') => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const contentMeta = getContentMeta();
+  const currentEnv = fetchEnv();
 
   console.log('pageUrl', pageUrl);
   console.log('uuid', uuid);
 
-  const { metrics } = getProperties(arcSite) || {};
+  const { connext, metrics } = getProperties(arcSite) || {};
+
+  const {
+    environment,
+    siteCode,
+    configCode,
+  } = connext[currentEnv] || {};
 
   const {
     pageContentType, site,
   } = contentMeta;
 
   const domainEndpoint = getDomainEndpoint(arcSite);
+  const connextLSLookup = `connext_user_data_${siteCode}_${configCode}_${environment.toUpperCase()}`;
+  console.log('connext lookup string', connextLSLookup);
 
   return <script type='text/javascript' dangerouslySetInnerHTML={{
     __html: `
@@ -62,6 +72,18 @@ const BlockDetectionScript = (uuid = '', pageUrl = '') => {
         };
 
         const buildHeaderData = (blockerStates) => {
+          let visitorId = null;
+          let clientId = null;
+          const connextLS = window.localStorage.getItem('${connextLSLookup}');
+
+          console.log('connext ls', connextLS);
+          if (connextLS) {
+            const { CustomerRegistrationId } = JSON.parse(connextLS);
+            clientId = CustomerRegistrationId;
+            console.log('customr id', CustomerRegistrationId, 'clientId', clientId);
+          }
+
+          /* TODO: refactor header to standard obj */
           const postHeaders = new Headers();
 
           console.log('blocker state', blockerStates);
@@ -88,6 +110,11 @@ const BlockDetectionScript = (uuid = '', pageUrl = '') => {
             const hasAdBlocker = baitElementDisplay === 'none' ? true : false;
             const hasPrivacyBlocker = typeof window.google_tag_manager === 'undefined' ? true : false;
             const hasPaywallBlocker = getUserPaywallBlockerState();
+
+            ga(function(tracker) {
+              const visitorId = tracker.get('clientId');
+              console.log('visitor id', visitorId);
+            });
 
             console.log('hasAdBlocker', hasAdBlocker, 'hasPrivacyBlocker', hasPrivacyBlocker, 'hasPaywallBlocker', hasPaywallBlocker);
 
