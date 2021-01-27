@@ -4,6 +4,7 @@ import { useComponentContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import './default.scss';
+import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 
 const MostRead = () => {
   const fusionContext = useFusionContext();
@@ -28,7 +29,7 @@ const MostRead = () => {
         topStoriesData.map((el, i) => {
           if (el.title && i < 5) {
             counter += 1;
-            return <a key={i} href={el.path}><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{el.title}</div></a>;
+            return <a key={i} href={el.path}><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>;
           }
           return null;
         })
