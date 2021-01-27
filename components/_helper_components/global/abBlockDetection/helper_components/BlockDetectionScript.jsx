@@ -30,8 +30,6 @@ const BlockDetectionScript = () => {
     __html: `
         const docu = window.document;
         const docuBody = docu.querySelector('body');
-        console.log('pageUrl', '${url}');
-
         const getUserPaywallBlockerState = () => {
           const numberOfArticlesLeft = window.Connext.Storage.GetArticlesLeft();
           const paywallEl = doc.getElementById('paywallContainer');
@@ -42,7 +40,6 @@ const BlockDetectionScript = () => {
             return false
           } 
         };
-
         const generateEventString = ({ hasAdBlocker, hasPrivacyBlocker, hasPaywallBlocker}) => {
           let evtString = '';
           console.log('abBlocker state', hasAdBlocker);
@@ -57,24 +54,17 @@ const BlockDetectionScript = () => {
           }
           return evtString;
         };
-
         const buildHeaderData = (blockerStates) => {
           let visitorId = '';
           let clientId = '';
           const connextLS = window.localStorage.getItem('${connextLSLookup}');
-
-/*           window.ga(function(tracker) {
-            visitorId = tracker.get('clientId');
-          });
-
-          console.log('visitor', visitorId); */
-
-
+          if (window._gat) {
+            visitorId = _gat._getTrackerByName()._visitCode();
+          }
           if (connextLS) {
             const { CustomerRegistrationId } = JSON.parse(connextLS);
             clientId = CustomerRegistrationId;
           }
-
           const headers = {
             'Content-Type' : 'application/json',
             'event' : generateEventString(blockerStates),
@@ -83,7 +73,7 @@ const BlockDetectionScript = () => {
             'contenttype' : '${pageContentType}',
             'contentid' : '${contentId}',
             'clientid' :  clientId,
-            'visitorid' : '',
+            'visitorid' : visitorId,
             'siteversion' : 'responsive',
             'siteid' : '${metrics && metrics.siteID ? metrics.siteID : site}',
             'useragent' : navigator.userAgent
@@ -91,14 +81,11 @@ const BlockDetectionScript = () => {
 
           return headers;
         };
-
         window.addEventListener('connextConversationDetermined', () => {
             const baitElementDisplay = window.getComputedStyle(document.getElementById('ADS_2'), null).display;
-
             const hasAdBlocker = baitElementDisplay === 'none' ? true : false;
             const hasPrivacyBlocker = typeof window.google_tag_manager === 'undefined' ? true : false;
             const hasPaywallBlocker = getUserPaywallBlockerState();
-
             if (hasAdBlocker || hasPrivacyBlocker || hasPaywallBlocker) {
               fetch('${domainEndpoint}', {
                 method: 'post',
