@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../../utils/environment';
@@ -94,11 +93,6 @@ const BlockDetectionScript = () => {
             }
         });`,
   }}></script>;
-};
-
-BlockDetectionScript.propTypes = {
-  pageData: PropTypes.string,
-  uuid: PropTypes.string,
 };
 
 export default BlockDetectionScript;
