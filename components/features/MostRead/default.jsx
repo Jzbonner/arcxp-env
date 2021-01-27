@@ -29,7 +29,7 @@ const MostRead = () => {
         topStoriesData.map((el, i) => {
           if (el.title && i < 5) {
             counter += 1;
-            return <a key={i} href={el.path}><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>;
+            return <a key={`Headline: ${el.title}`} href={`https://www.${el.path}`} target="_self"><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>;
           }
           return null;
         })
