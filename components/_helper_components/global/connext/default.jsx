@@ -240,6 +240,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
       const docBody = doc.querySelector('body');
       const toggleUserState = (action) => {
         let dataLayer = window.dataLayer || [];
+        let resonateEvent = null;
         if (action === 'logged-in') {
           docBody.className = docBody.className.replace(/${userIsLoggedOutClass}/g, '');
           docBody.className += docBody.className.indexOf('${userIsLoggedInClass}') === -1 ? ' ${userIsLoggedInClass}' : '';
@@ -260,6 +261,8 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                 'event': loginEventToTrigger
               };
               dataLayer.push(userDataObj);
+              resonateEvent = new CustomEvent("connextUserDataReady", {detail: {'userType' : userTypeState }});
+              window.dispatchEvent(resonateEvent);
             }
           }
         } else if (action === 'logged-out') {
@@ -274,6 +277,8 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
             }
           };
           dataLayer.push(userDataObj);
+          resonateEvent = new CustomEvent("connextUserDataReady", {detail: {'userType' : 'anonymous' }});
+          window.dispatchEvent(resonateEvent);
           // trigger login modal to appear if "triggerLoginModal" is passed-in (i.e. from "login" outputType)
           if (${triggerLoginModal}) {
             doc.querySelector('[data-mg2-action="login"]').click();
