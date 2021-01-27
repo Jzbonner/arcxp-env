@@ -1,7 +1,8 @@
-import { CHARTBEAT_KEY } from 'fusion:environment';
 import axios from 'axios';
 import getProperties from 'fusion:properties';
 import filterMostRead from './helper_functions/filterMostRead';
+
+const { CHARTBEAT_KEY } = require('../../environment/index');
 
 const ttl = 900;
 
