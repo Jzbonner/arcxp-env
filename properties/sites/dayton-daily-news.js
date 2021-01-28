@@ -136,7 +136,7 @@ export default {
       cmsId: 2536851,
     },
   },
-  charbeat: {
+  chartbeat: {
     blacklist,
     host: 'daytondailynews.com',
   },

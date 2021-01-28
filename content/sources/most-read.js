@@ -1,8 +1,7 @@
 import axios from 'axios';
 import getProperties from 'fusion:properties';
+import { CHARTBEAT_KEY } from 'fusion:environment';
 import filterMostRead from './helper_functions/filterMostRead';
-
-const { CHARTBEAT_KEY } = require('../../environment/index');
 
 const ttl = 900;
 
@@ -16,10 +15,10 @@ const fetch = (query = {}) => {
   const {
     host = 'ajc.com', section = '', limit = '10', arcSite = 'ajc',
   } = query;
-
   const { chartbeat } = getProperties(arcSite);
   const { blacklist } = chartbeat;
   let requestUri = `https://api.chartbeat.com/live/toppages/v3/?apikey=${CHARTBEAT_KEY}&types=1&host=${host}&limit=${limit}`;
+
   const newUri = requestUri;
   requestUri += section ? `&section=${section}` : '';
 
