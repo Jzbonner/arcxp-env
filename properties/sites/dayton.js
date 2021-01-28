@@ -1,7 +1,6 @@
 import adsBidding from './adsBidding/dayton.com.json';
 import adsTxt from './adstxt/dayton.com.json';
 import appAdsTxt from './appadstxt/dayton.com.json';
-import blacklist from './mostReadBlacklist/dayton.com.json';
 
 export default {
   dfp_id: 21849707860,
@@ -36,6 +35,7 @@ export default {
   breakingLiveVideoID: 'NSVDX4ZQ7BEGHDFVFT26WQSOEE',
   breakingNewsID_sandbox: '63KAPZZLQRABDAB7I7PZ4KNYVA',
   breakingLiveVideoID_sandbox: 'VYXS5V6CBFEKFG6YEQ7YHU7BEE',
+  domainBlockerTracking: 'https://rtwa.dayton.com',
   featuredVideoPlayerRules: {
     startPlaying: true,
     muteON: true,
@@ -133,9 +133,5 @@ export default {
     prod: {
       cmsId: 2536851,
     },
-  },
-  chartbeat: {
-    blacklist,
-    host: 'dayton.com',
   },
 };

@@ -1,6 +1,5 @@
 import adsBidding from './adsBidding/springfieldnewssun.com.json';
 import adsTxt from './adstxt/springfieldnewssun.com.json';
-import blacklist from './mostReadBlacklist/springfieldnewssun.com.json';
 
 export default {
   dfp_id: 21849707860,
@@ -35,6 +34,7 @@ export default {
   breakingLiveVideoID: 'HV4DOKFKSZF35CA4XLCK4BHIPY',
   breakingNewsID_sandbox: '2DFNDMIGWBCSNNVURFGVQV2MDI',
   breakingLiveVideoID_sandbox: 'DJ5HSRZBBBAZ7EJ3VMNYD3DMW4',
+  domainBlockerTracking: 'https://rtwa.springfieldnewssun.com',
   featuredVideoPlayerRules: {
     startPlaying: true,
     muteON: true,
@@ -133,9 +133,5 @@ export default {
     prod: {
       cmsId: 2536851,
     },
-  },
-  chartbeat: {
-    blacklist,
-    host: 'springfieldnewssun.com',
   },
 };
