@@ -3,14 +3,13 @@ import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../../utils/environment';
 import getContentMeta from '../../../global/siteMeta/_helper_functions/getContentMeta';
-import getDomainEndpoint from '../helper_functions/getDomainEndpoint';
 
 const BlockDetectionScript = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const contentMeta = getContentMeta();
   const currentEnv = fetchEnv();
-  const { connext, metrics } = getProperties(arcSite) || {};
+  const { connext, metrics, domainBlockerTracking } = getProperties(arcSite) || {};
 
   const {
     environment,
@@ -22,7 +21,6 @@ const BlockDetectionScript = () => {
     contentId, pageContentType, site, url,
   } = contentMeta;
 
-  const domainEndpoint = getDomainEndpoint(arcSite);
   const connextLSLookup = `connext_user_data_${siteCode}_${configCode}_${environment.toUpperCase()}`;
 
   return <script type='text/javascript' dangerouslySetInnerHTML={{
@@ -88,7 +86,7 @@ const BlockDetectionScript = () => {
             const hasPrivacyBlocker = typeof window.google_tag_manager === 'undefined' ? true : false;
             const hasPaywallBlocker = getUserPaywallBlockerState();
             if (hasAdBlocker || hasPrivacyBlocker || hasPaywallBlocker) {
-              fetch('${domainEndpoint}', {
+              fetch('${domainBlockerTracking}', {
                 method: 'post',
                 headers: buildHeaderData({ hasAdBlocker, hasPrivacyBlocker, hasPaywallBlocker }),
               });
