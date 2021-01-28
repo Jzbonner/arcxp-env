@@ -1,5 +1,6 @@
 import adsBidding from './adsBidding/springfieldnewssun.com.json';
 import adsTxt from './adstxt/springfieldnewssun.com.json';
+import blacklist from './mostReadBlacklist/springfieldnewssun.com.json';
 
 export default {
   dfp_id: 21849707860,
@@ -132,5 +133,9 @@ export default {
     prod: {
       cmsId: 2536851,
     },
+  },
+  chartbeat: {
+    blacklist,
+    host: 'springfieldnewssun.com',
   },
 };

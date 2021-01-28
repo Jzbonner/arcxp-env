@@ -1,0 +1,246 @@
+[
+  {
+    "uri": "/",
+    "name": "Homepage"
+  },
+  {
+    "uri": "/business/",
+    "name": "JN Business"
+  },
+  {
+    "uri": "/community/butler-county/",
+    "name": "JN Community: Butler County"
+  },
+  {
+    "uri": "/community/fairfield/",
+    "name": "JN Community: Fairfield"
+  },
+  {
+    "uri": "/community/hamilton/",
+    "name": "JN Community: Hamilton"
+  },
+  {
+    "uri": "/community/middletown/",
+    "name": "JN Community: Middletown"
+  },
+  {
+    "uri": "/community/oxford/",
+    "name": "JN Community: Oxford"
+  },
+  {
+    "uri": "/community/warren-county/",
+    "name": "JN Community: Warren County"
+  },
+  {
+    "uri": "/community/west-chester-liberty-twp/",
+    "name": "JN Community: West Chester & Liberty Twp"
+  },
+  {
+    "uri": "/crime/",
+    "name": "JN Crime"
+  },
+  {
+    "uri": "/elections/",
+    "name": "JN Elections"
+  },
+  {
+    "uri": "/foodrelief/",
+    "name": "JN Food Relief"
+  },
+  {
+    "uri": "/homepage",
+    "name": "JN Homepage"
+  },
+  {
+    "uri": "/jn-alexa-headlines/",
+    "name": "JN Alexa Headlines List"
+  },
+  {
+    "uri": "/jn-app-all-news/",
+    "name": "JN App: All News"
+  },
+  {
+    "uri": "/jn-app-business/",
+    "name": "JN App: Business"
+  },
+  {
+    "uri": "/jn-app-crime-law/",
+    "name": "JN App: Crime & Law"
+  },
+  {
+    "uri": "/jn-app-elections/",
+    "name": "JN App: Elections"
+  },
+  {
+    "uri": "/jn-app-latest-news/",
+    "name": "JN App: Latest News"
+  },
+  {
+    "uri": "/jn-app-nation-world/",
+    "name": "JN App: Nation & World"
+  },
+  {
+    "uri": "/jn-app-ohio-news/",
+    "name": "JN App: Ohio News"
+  },
+  {
+    "uri": "/jn-app-sports/",
+    "name": "JN App: Sports"
+  },
+  {
+    "uri": "/jn-app-sports-bengals/",
+    "name": "JN App: Cincinnati Bengals"
+  },
+  {
+    "uri": "/jn-app-sports-browns/",
+    "name": "JN App: Cleveland Browns"
+  },
+  {
+    "uri": "/jn-app-sports-highschool/",
+    "name": "JN App: Highschool Sports"
+  },
+  {
+    "uri": "/jn-app-sports-miami-redhawks/",
+    "name": "JN App: Miami RedHawks"
+  },
+  {
+    "uri": "/jn-app-sports-osu/",
+    "name": "JN App: OSU Buckeyes"
+  },
+  {
+    "uri": "/jn-app-sports-reds/",
+    "name": "JN App: Cincinnati Reds"
+  },
+  {
+    "uri": "/jn-nl-afternoon-update-food/",
+    "name": "JN NL Afternoon Update Food"
+  },
+  {
+    "uri": "/jn-nl-afternoon-update-news/",
+    "name": "JN NL Afternoon Update News"
+  },
+  {
+    "uri": "/jn-nl-afternoon-update-sports/",
+    "name": "JN NL Afternoon Update Sports"
+  },
+  {
+    "uri": "/jn-nl-afternoon-update-weather/",
+    "name": "JN NL Afternoon Update Weather"
+  },
+  {
+    "uri": "/jn-nl-crime-other-stories/",
+    "name": "JN NL Crime Other Stories"
+  },
+  {
+    "uri": "/jn-nl-crime-top-story/",
+    "name": "JN NL Crime Top Story"
+  },
+  {
+    "uri": "/jn-nl-daily-headlines-more-headlines/",
+    "name": "JN NL Daily Headlines More Headlines"
+  },
+  {
+    "uri": "/jn-nl-evening-read-local-news/",
+    "name": "JN NL Evening Read Local News"
+  },
+  {
+    "uri": "/jn-nl-headlines-top-story/",
+    "name": "JN NL Headlines Top Story"
+  },
+  {
+    "uri": "/jn-nl-midday-first-story/",
+    "name": "JN NL Midday First Story"
+  },
+  {
+    "uri": "/jn-nl-midday-second-story/",
+    "name": "JN NL Midday Second Story"
+  },
+  {
+    "uri": "/jn-nl-milestones-listings/",
+    "name": "JN NL Milestones Listings"
+  },
+  {
+    "uri": "/jn-nl-milestones-top-story/",
+    "name": "JN NL Milestones Top Story"
+  },
+  {
+    "uri": "/latest-headlines-list/",
+    "name": "JN Latest Headlines List"
+  },
+  {
+    "uri": "/nation-world/",
+    "name": "JN Nation/World"
+  },
+  {
+    "uri": "/native/",
+    "name": "Nativo Landing Page"
+  },
+  {
+    "uri": "/news/",
+    "name": "JN News"
+  },
+  {
+    "uri": "/news-test",
+    "name": "JN News - OLD"
+  },
+  {
+    "uri": "/ohio/",
+    "name": "JN Ohio News"
+  },
+  {
+    "uri": "/robots.txt",
+    "name": "JN Robots.txt"
+  },
+  {
+    "uri": "/rss-jn-headlines/",
+    "name": "RSS JN Headlines"
+  },
+  {
+    "uri": "/search/",
+    "name": "journal-search"
+  },
+  {
+    "uri": "/special-promotions/",
+    "name": "JN Special Promotions"
+  },
+  {
+    "uri": "/sports/",
+    "name": "JN Sports"
+  },
+  {
+    "uri": "/subscription-specials/",
+    "name": "JN Subscription Specials"
+  },
+  {
+    "uri": "/traffic/",
+    "name": "Traffic"
+  },
+  {
+    "uri": "/weather/",
+    "name": "JN Weather"
+  },
+  {
+    "uri": "/wrap-ancestry/",
+    "name": "Wrap - Ancestry"
+  },
+  {
+    "uri": "/wrap-legacy/",
+    "name": "Wrap - Legacy"
+  },
+  {
+    "uri": "/wrap-transparensee-things-to-do/",
+    "name": "Wrap - Things to Do"
+  },
+  {
+    "uri": "/back-to-school/",
+    "name": "SNS & JN Back to School"
+  },
+  {
+    "uri": "/entertainment/dining/",
+    "name": "Entertainment & Dining"
+  },
+  {
+    "uri": "/real-estate/",
+    "name": "Real Estate"
+  }
+]

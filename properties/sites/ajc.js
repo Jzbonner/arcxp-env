@@ -1,6 +1,7 @@
 import adsBidding from './adsBidding/ajc.com.json';
 import adsTxt from './adstxt/ajc.com.json';
 import appAdsTxt from './appadstxt/ajc.com.json';
+import mostReadBlacklist from './mostReadBlacklist/ajc.com.json';
 
 export default {
   defaultSiteTitle: 'AJC',
@@ -131,5 +132,9 @@ export default {
     prod: {
       cmsId: 2528054,
     },
+  },
+  chartbeat: {
+    blacklist: mostReadBlacklist,
+    host: 'ajc.com',
   },
 };
