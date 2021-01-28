@@ -66,6 +66,8 @@ const BlockDetectionScript = () => {
           }
           const headers = {
             'Content-Type' : 'application/json',
+            'Access-Control-Allow-Origin':'*',
+            'mode': 'cors',
             'event' : generateEventString(blockerStates),
             'page' : '${url}',
             'referer' : document.referrer,
