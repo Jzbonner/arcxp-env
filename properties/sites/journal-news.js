@@ -1,7 +1,6 @@
 import adsBidding from './adsBidding/journal-news.com.json';
 import adsTxt from './adstxt/journal-news.com.json';
 import appAdsTxt from './appadstxt/journal-news.com.json';
-import blacklist from './mostReadBlacklist/journal-news.com.json';
 
 export default {
   dfp_id: 21849707860,
@@ -36,6 +35,7 @@ export default {
   breakingLiveVideoID: '52EEYZZB6BDYZDOFFNPJBO2ZJA',
   breakingNewsID_sandbox: 'BYPUKOTQLRAMLDYR5C3XLJOVZQ',
   breakingLiveVideoID_sandbox: 'A4KCYNGXMBGHRF6JABDFEHFFCE',
+  domainBlockerTracking: 'https://rtwa.journal-news.com',
   featuredVideoPlayerRules: {
     startPlaying: true,
     muteON: true,
@@ -136,9 +136,5 @@ export default {
     prod: {
       cmsId: 2536851,
     },
-  },
-  chartbeat: {
-    blacklist,
-    host: 'journal-news.com',
   },
 };
