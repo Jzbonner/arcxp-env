@@ -114,6 +114,7 @@ export default {
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
+      allowMeter: true,
       pubParam: 'JN',
     },
     prod: {
