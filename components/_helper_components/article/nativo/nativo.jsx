@@ -19,7 +19,7 @@ const Nativo = ({
           <amp-ad
             type="nativo"
             width="400"
-            height="350"
+            height="400"
             layout="responsive"
             data-request-url={`${nativoMoapTag}-${
               controllerClass === 'story-nativo_placeholder--moap' ? 'moap' : 'boap'
