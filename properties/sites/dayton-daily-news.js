@@ -1,6 +1,7 @@
 import adsBidding from './adsBidding/daytondailynews.com.json';
 import adsTxt from './adstxt/daytondailynews.com.json';
 import appAdsTxt from './appadstxt/daytondailynews.com.json';
+import blacklist from './mostReadBlacklist/daytondailynews.com.json';
 
 export default {
   dfp_id: 21849707860,
@@ -136,5 +137,9 @@ export default {
     prod: {
       cmsId: 2536851,
     },
+  },
+  chartbeat: {
+    blacklist,
+    host: 'daytondailynews.com',
   },
 };
