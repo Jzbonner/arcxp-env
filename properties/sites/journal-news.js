@@ -36,6 +36,7 @@ export default {
   breakingLiveVideoID: '52EEYZZB6BDYZDOFFNPJBO2ZJA',
   breakingNewsID_sandbox: 'BYPUKOTQLRAMLDYR5C3XLJOVZQ',
   breakingLiveVideoID_sandbox: 'A4KCYNGXMBGHRF6JABDFEHFFCE',
+  domainBlockerTracking: 'https://rtwa.journal-news.com',
   featuredVideoPlayerRules: {
     startPlaying: true,
     muteON: true,

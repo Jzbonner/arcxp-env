@@ -35,6 +35,7 @@ export default {
   breakingLiveVideoID: 'HV4DOKFKSZF35CA4XLCK4BHIPY',
   breakingNewsID_sandbox: '2DFNDMIGWBCSNNVURFGVQV2MDI',
   breakingLiveVideoID_sandbox: 'DJ5HSRZBBBAZ7EJ3VMNYD3DMW4',
+  domainBlockerTracking: 'https://rtwa.springfieldnewssun.com',
   featuredVideoPlayerRules: {
     startPlaying: true,
     muteON: true,

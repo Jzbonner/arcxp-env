@@ -36,6 +36,7 @@ export default {
   breakingLiveVideoID: 'ONIHRIDEANDIJD2AX2WWO3NUQA',
   breakingNewsID_sandbox: 'BDA3AIXKOBAMNPZ6GIWW7IXPD4',
   breakingLiveVideoID_sandbox: 'D5V3Q4JLGNFSJCNS3BN4V4XPGI',
+  domainBlockerTracking: 'https://rtwa.daytondailynews.com',
   weatherLocationId: 330120,
   featuredVideoPlayerRules: {
     startPlaying: true,
