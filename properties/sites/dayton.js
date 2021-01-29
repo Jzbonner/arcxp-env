@@ -36,6 +36,7 @@ export default {
   breakingLiveVideoID: 'NSVDX4ZQ7BEGHDFVFT26WQSOEE',
   breakingNewsID_sandbox: '63KAPZZLQRABDAB7I7PZ4KNYVA',
   breakingLiveVideoID_sandbox: 'VYXS5V6CBFEKFG6YEQ7YHU7BEE',
+  domainBlockerTracking: 'https://rtwa.dayton.com',
   featuredVideoPlayerRules: {
     startPlaying: true,
     muteON: true,

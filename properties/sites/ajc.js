@@ -23,6 +23,7 @@ export default {
   breakingLiveVideoID_sandbox: 'PI5DD6OFEVFMHNDHZKI3XU7SSQ',
   domainTwitterURL: 'https://twitter.com/ajc',
   domainFacebookURL: 'https://facebook.com/ajc',
+  domainBlockerTracking: 'https://rtwa.ajc.com',
   metrics: {
     siteID: 'ajc',
     siteMetro: 'ga: atlanta',
@@ -132,9 +133,9 @@ export default {
     prod: {
       cmsId: 2528054,
     },
-  },
-  chartbeat: {
-    blacklist: mostReadBlacklist,
-    host: 'ajc.com',
+    chartbeat: {
+      blacklist: mostReadBlacklist,
+      host: 'ajc.com',
+    },
   },
 };
