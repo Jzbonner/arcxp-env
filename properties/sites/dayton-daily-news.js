@@ -8,6 +8,7 @@ export default {
   fbPagesId: '168815400507',
   fbAppId: '1509059885983561',
   siteName: 'dayton-daily-news',
+  siteFullname: 'Dayton Daily News',
   cdnOrg: 'coxohio',
   cdnSite: 'dayton-daily-news',
   siteDomainURL: 'https://www.daytondailynews.com',

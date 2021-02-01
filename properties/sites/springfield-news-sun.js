@@ -7,6 +7,7 @@ export default {
   fbPagesId: '73484672682',
   fbAppId: '1793003357612189',
   siteName: 'springfield-news-sun',
+  siteFullname: 'Springfield News-Sun',
   cdnOrg: 'coxohio',
   cdnSite: 'springfield-news-sun',
   siteDomainURL: 'https://www.springfieldnewssun.com',
