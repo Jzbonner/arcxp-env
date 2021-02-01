@@ -118,6 +118,9 @@ export default {
       containerId: 'GTM-W3VLHBK',
       allowMeter: true,
       pubParam: 'DDN',
+      activateUrl: 'https://test-subscribe.daytondailynews.com/',
+      activateAmpPaywallUrl: 'https://test-subscribe.daytondailynews.com/startgwamp',
+      activateAmpInlineUrl: 'https://test-subscribe.daytondailynews.com/startamp',
     },
     prod: {
       isEnabled: true,
@@ -129,6 +132,9 @@ export default {
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
       pubParam: 'DDN',
+      activateUrl: 'https://subscribe.daytondailynews.com/',
+      activateAmpPaywallUrl: 'https://subscribe.daytondailynews.com/startgwamp',
+      activateAmpInlineUrl: 'https://subscribe.daytondailynews.com/startamp',
     },
   },
   video: {
