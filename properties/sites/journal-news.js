@@ -8,6 +8,7 @@ export default {
   fbPagesId: '210895530407',
   fbAppId: '1747383545520530',
   siteName: 'journal-news',
+  siteFullname: 'Journal-News',
   cdnOrg: 'coxohio',
   cdnSite: 'journal-news',
   siteDomainURL: 'https://www.journal-news.com',

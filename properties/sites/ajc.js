@@ -8,6 +8,7 @@ export default {
   fbPagesId: '13310147298',
   fbAppId: '366816260017522',
   siteTag: 'ajc',
+  siteFullname: 'Atlanta Journal-Constitution',
   cdnOrg: 'ajc',
   cdnSite: 'ajc',
   dfpId: '21849707860',
