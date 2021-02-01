@@ -138,8 +138,4 @@ export default {
       host: 'ajc.com',
     },
   },
-  chartbeat: {
-    blacklist: mostReadBlacklist,
-    host: 'ajc.com',
-  },
 };
