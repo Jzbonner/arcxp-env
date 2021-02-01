@@ -133,9 +133,9 @@ export default {
     prod: {
       cmsId: 2528054,
     },
-    chartbeat: {
-      blacklist: mostReadBlacklist,
-      host: 'ajc.com',
-    },
+  },
+  chartbeat: {
+    blacklist: mostReadBlacklist,
+    host: 'ajc.com',
   },
 };
