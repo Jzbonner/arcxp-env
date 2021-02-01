@@ -192,6 +192,7 @@ const StoryPageLayout = () => {
         displayIfAtLeastXParagraphs={4}
         controllerClass="story-nativo_placeholder--moap"
         ampPage={ampPage}
+        isMeteredStory={isMeteredStory}
       />
     )}
     <Section
