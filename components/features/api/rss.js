@@ -24,12 +24,6 @@ class Api {
     const newsletterFeed = outPutTypePresent && queryParams.outputType === 'rss-newsletter';
     const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'rss-app';
 
-    const rssFeedDetectAppWebview = () => {
-      if (noHeaderAndFooter) {
-        return '?outputType=wrap';
-      }
-      return '';
-    };
     let maxItems = feedStart + size;
     if (maxItems > globalContent.length) {
       maxItems = globalContent.length;
@@ -81,7 +75,7 @@ class Api {
                 guid: `urn:uuid:${guid}`,
               },
               {
-                link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
+                link: `${websiteURL}${canonicalUrl}`,
               },
               {
                 description: formattedDescription,
@@ -122,7 +116,7 @@ class Api {
                 guid: `urn:uuid:${guid}`,
               },
               {
-                link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
+                link: `${websiteURL}${canonicalUrl}`,
               },
               {
                 description: formattedDescription,
@@ -182,7 +176,7 @@ class Api {
                 guid: `urn:uuid:${guid}`,
               },
               {
-                link: `${websiteURL}${canonicalUrl}${rssFeedDetectAppWebview()}`,
+                link: `${websiteURL}${canonicalUrl}`,
               },
               {
                 description: formattedDescription || title,
