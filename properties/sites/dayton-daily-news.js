@@ -8,6 +8,7 @@ export default {
   fbPagesId: '168815400507',
   fbAppId: '1509059885983561',
   siteName: 'dayton-daily-news',
+  siteFullname: 'Dayton Daily News',
   cdnOrg: 'coxohio',
   cdnSite: 'dayton-daily-news',
   siteDomainURL: 'https://www.daytondailynews.com',
@@ -117,6 +118,9 @@ export default {
       containerId: 'GTM-W3VLHBK',
       allowMeter: true,
       pubParam: 'DDN',
+      activateUrl: 'https://test-subscribe.daytondailynews.com/',
+      activateAmpPaywallUrl: 'https://test-subscribe.daytondailynews.com/startgwamp',
+      activateAmpInlineUrl: 'https://test-subscribe.daytondailynews.com/startamp',
     },
     prod: {
       isEnabled: true,
@@ -128,6 +132,9 @@ export default {
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
       pubParam: 'DDN',
+      activateUrl: 'https://subscribe.daytondailynews.com/',
+      activateAmpPaywallUrl: 'https://subscribe.daytondailynews.com/startgwamp',
+      activateAmpInlineUrl: 'https://subscribe.daytondailynews.com/startamp',
     },
   },
   video: {

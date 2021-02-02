@@ -52,7 +52,7 @@ const StoryPageLayout = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
-  const { connext } = getProperties(arcSite);
+  const { connext, siteFullname } = getProperties(arcSite);
   const { allowMeter = false } = connext[currentEnv] || {};
 
   if (!globalContent) return null;
@@ -206,7 +206,7 @@ const StoryPageLayout = () => {
     />
     {!noAds && maxNumberOfParagraphs >= 4
       && <>
-        {ampPage && isMeteredStory && <NonSubPremiumMessage arcSite={arcSite} />}
+        {ampPage && isMeteredStory && <NonSubPremiumMessage arcSite={arcSite} siteFullname={siteFullname} />}
         <InterscrollerPlaceholder
           ampPage={ampPage}
           isHyperlocalContent={isHyperlocalContent}
@@ -314,7 +314,7 @@ const StoryPageLayout = () => {
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />
             )}
             {ampPage && isMeteredStory && <>
-              <PaywallLimitMessage arcSite={arcSite} />
+              <PaywallLimitMessage arcSite={arcSite} siteFullname={siteFullname} />
               <div amp-access='Error=true OR AccessLevel="Full Content Access"' amp-access-hide>
                 {storyContentOutput()}
               </div>
