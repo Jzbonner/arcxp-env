@@ -96,7 +96,7 @@ const StoryPageLayout = () => {
   const MP03 = () => <ArcAd staticSlot={'MP03'} lazyLoad={isMeteredStory} key={'MP03'} />;
   const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP09-Story-Desktop'} />;
   const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP09-Story-Tablet'} />;
-  const connextThankYouMessage = () => <ConnextThankYouMessage isAmp={ampPage} />;
+  const connextThankYouMessage = () => <ConnextThankYouMessage isAmp={ampPage} siteFullname={siteFullname} />;
 
   const windowExists = typeof window !== 'undefined';
 
@@ -206,7 +206,7 @@ const StoryPageLayout = () => {
     />
     {!noAds && maxNumberOfParagraphs >= 4
       && <>
-        {ampPage && isMeteredStory && <NonSubPremiumMessage arcSite={arcSite} siteFullname={siteFullname} />}
+        {ampPage && isMeteredStory && <NonSubPremiumMessage siteFullname={siteFullname} />}
         <InterscrollerPlaceholder
           ampPage={ampPage}
           isHyperlocalContent={isHyperlocalContent}
@@ -296,7 +296,7 @@ const StoryPageLayout = () => {
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
             )}
 
-            <SponsorStoryMessage sponsorID={sponsorSectionID} paywallStatus={paywallStatus} isAmp={ampPage} />
+            <SponsorStoryMessage sponsorID={sponsorSectionID} paywallStatus={paywallStatus} isAmp={ampPage} siteFullname={siteFullname} />
             <Section
               elements={filteredContentElements}
               stopIndex={1}
@@ -314,7 +314,7 @@ const StoryPageLayout = () => {
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />
             )}
             {ampPage && isMeteredStory && <>
-              <PaywallLimitMessage arcSite={arcSite} siteFullname={siteFullname} />
+              <PaywallLimitMessage siteFullname={siteFullname} />
               <div amp-access='Error=true OR AccessLevel="Full Content Access"' amp-access-hide>
                 {storyContentOutput()}
               </div>
