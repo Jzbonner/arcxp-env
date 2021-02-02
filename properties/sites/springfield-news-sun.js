@@ -7,6 +7,7 @@ export default {
   fbPagesId: '73484672682',
   fbAppId: '1793003357612189',
   siteName: 'springfield-news-sun',
+  siteFullname: 'Springfield News-Sun',
   cdnOrg: 'coxohio',
   cdnSite: 'springfield-news-sun',
   siteDomainURL: 'https://www.springfieldnewssun.com',
@@ -115,6 +116,9 @@ export default {
       containerId: 'GTM-W3VLHBK',
       allowMeter: true,
       pubParam: 'SNS',
+      activateUrl: 'https://test-subscribe.springfieldnewssun.com/',
+      activateAmpPaywallUrl: 'https://test-subscribe.springfieldnewssun.com/startgwamp',
+      activateAmpInlineUrl: 'https://test-subscribe.springfieldnewssun.com/startamp',
     },
     prod: {
       isEnabled: true,
@@ -126,6 +130,9 @@ export default {
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
       pubParam: 'SNS',
+      activateUrl: 'https://subscribe.springfieldnewssun.com/',
+      activateAmpPaywallUrl: 'https://subscribe.springfieldnewssun.com/startgwamp',
+      activateAmpInlineUrl: 'https://subscribe.springfieldnewssun.com/startamp',
     },
   },
   video: {
