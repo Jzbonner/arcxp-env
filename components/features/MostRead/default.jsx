@@ -22,12 +22,13 @@ const MostRead = () => {
       arcSite,
     },
   });
+
   if (topStoriesData) {
     let counter = 0;
     return <div className="c-mostRead b-margin-bottom-d30-m20"><div className="mostReadTitle">Most Read</div>
       <div className="mostReadList"> {
-        topStoriesData.map((el, i) => {
-          if (el.title && i < 5) {
+        topStoriesData.map((el) => {
+          if (el.title && counter < 5) {
             counter += 1;
             return <a key={`Headline: ${el.title}`} href={`https://www.${el.path}`} target="_self"><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>;
           }

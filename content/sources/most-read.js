@@ -2,6 +2,7 @@ import axios from 'axios';
 import getProperties from 'fusion:properties';
 import { CHARTBEAT_KEY } from 'fusion:environment';
 import filterMostRead from './helper_functions/filterMostRead';
+import titleCheck from './helper_functions/titleCheck';
 
 const ttl = 900;
 
@@ -24,7 +25,7 @@ const fetch = (query = {}) => {
 
   const promiseData = axios.get(requestUri)
     .then(({ data }) => {
-      if ((!section) || (data && data.pages && data.pages.length < 5)) {
+      if ((!section) || (data && data.pages && titleCheck(data, data.pages.length))) {
         return axios.get(newUri)
           .then(({ data: siteData }) => filterMostRead(siteData, host, blacklist));
       }
