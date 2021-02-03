@@ -1,6 +1,9 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import './amp.scss';
 
-const NonSubPremiumMessage = siteFullname => `<div className="c-section" amp-access="Error!=true AND UserState='LoggedOut' OR UserState='NoActiveSubscriptions'" amp-access-hide>
+const NonSubPremiumMessage = ({ siteFullname }) => (
+  <div className="c-section" amp-access="Error!=true AND UserState='LoggedOut' OR UserState='NoActiveSubscriptions'" amp-access-hide>
     <div className="c-contentElements">
         <div className="c-nonSubPremium">
             <div className="nonSubPromo">
@@ -17,6 +20,11 @@ const NonSubPremiumMessage = siteFullname => `<div className="c-section" amp-acc
             </div>
         </div>
     </div>
-</div>`;
+  </div>
+);
+
+NonSubPremiumMessage.propTypes = {
+  siteFullname: PropTypes.string,
+};
 
 export default NonSubPremiumMessage;

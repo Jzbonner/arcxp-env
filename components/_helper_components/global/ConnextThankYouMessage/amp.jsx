@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './amp.scss';
 
-const ConnextThankYouMessage = (isAmp = false) => {
+const ConnextThankYouMessage = ({ isAmp = false, siteFullname }) => {
   if (isAmp) {
     return (
       <div amp-access="Error != true AND UserState = 'Subscribed'">
@@ -10,7 +10,7 @@ const ConnextThankYouMessage = (isAmp = false) => {
           <div className="subscription-promo__option-2">
             <div className="text">
               <span className="subscription-headline">Our journalists are committed to pursuing the facts.</span>
-              <span className="thank-you-subscriber">Thank you for subscribing to<br />The Atlanta Journal-Constitution.</span>
+              <span className="thank-you-subscriber">Thank you for subscribing to<br />The {siteFullname}.</span>
             </div>
           </div>
         </div>
@@ -27,6 +27,7 @@ ConnextThankYouMessage.defaultProps = {
 
 ConnextThankYouMessage.propTypes = {
   isAmp: PropTypes.bool,
+  siteFullname: PropTypes.string,
 };
 
 export default ConnextThankYouMessage;
