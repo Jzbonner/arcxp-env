@@ -4,10 +4,12 @@ import { useContent } from 'fusion:content';
 import ConnextFreeMessaging from '../../global/ConnextFreeMessaging/default';
 import './default.scss';
 
-const SponsorStoryMessage = ({ sponsorID, paywallStatus, isAmp = false }) => {
+const SponsorStoryMessage = ({
+  sponsorID, paywallStatus, isAmp = false, siteFullname,
+}) => {
   if (paywallStatus !== 'free') return null;
 
-  if (!sponsorID) return <ConnextFreeMessaging isAmp={isAmp}/>;
+  if (!sponsorID) return <ConnextFreeMessaging isAmp={isAmp} siteFullname={siteFullname} />;
 
   const data = useContent({
     source: 'site-api',
@@ -36,6 +38,7 @@ SponsorStoryMessage.propTypes = {
   sponsorID: PropTypes.string,
   paywallStatus: PropTypes.string,
   isAmp: PropTypes.bool,
+  siteFullname: PropTypes.string,
 };
 
 export default SponsorStoryMessage;
