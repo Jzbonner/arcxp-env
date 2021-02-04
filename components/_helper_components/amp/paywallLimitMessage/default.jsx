@@ -30,5 +30,4 @@ PaywallLimitMessage.propTypes = {
   siteFullname: PropTypes.string,
 };
 
-
 export default PaywallLimitMessage;

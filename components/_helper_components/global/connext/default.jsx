@@ -225,6 +225,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
     debug,
     tagManager,
     containerId,
+    userAuthenticationTime: userAuthTime = 9999,
   } = connext[currentEnv] || {};
 
   if (!isEnabled) return null;
@@ -349,6 +350,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                 environment: '${environment}',
                 siteCode: '${siteCode}',
                 configCode: '${configCode}',
+                userAuthenticationTime: ${userAuthTime},
                 debug: ${debug},
                 silentmode: false,
                 publicEventHandlers: {
