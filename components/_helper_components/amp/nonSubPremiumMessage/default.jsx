@@ -10,8 +10,7 @@ const NonSubPremiumMessage = ({ siteFullname }) => (
                 <div className="text">
                     <span className="subscription-headline">Support Our Journalists
                     </span>
-                    <span className="thank-you-subscriber">The ${siteFullname}’s journalists report what’s really going on in your community.
-                    </span>
+                    <span className="thank-you-subscriber">The {siteFullname}’s journalists report what’s really going on in your community.</span>
                     <div className="action-wrapper">
                       <a on="tap:amp-access.login-SubscribeFromInline">Subscribe
                       </a>

@@ -206,7 +206,6 @@ const StoryPageLayout = () => {
     />
     {!noAds && maxNumberOfParagraphs >= 4
       && <>
-
         {ampPage && isMeteredStory && <NonSubPremiumMessage siteFullname={siteFullname} />}
         <InterscrollerPlaceholder
           ampPage={ampPage}
