@@ -78,7 +78,7 @@ const NotAuthMenu = ({
 
   return (
     <>
-      <div onClick={() => setShowUserMenu(!showUserMenu)}>
+      <div onClick={() => setShowUserMenu(!showUserMenu)} data-mg2-action='login'>
         <img src={source} />
         <div className='nav-itemText login-text'>Log In</div>
       </div>

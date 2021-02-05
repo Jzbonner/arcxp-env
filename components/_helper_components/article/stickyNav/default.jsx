@@ -17,7 +17,7 @@ const StickyNav = ({
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    facebookURL, twitterURL, pinterestURL, redditURL, mail, siteName, logoShort, pinterestShareLogo, cdnOrg, cdnSite,
+    facebookURL, twitterURL, pinterestURL, redditURL, mail, siteName, logo, pinterestShareLogo, cdnOrg, cdnSite,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
@@ -43,7 +43,7 @@ const StickyNav = ({
   const shareLinkReddit = `${redditURL}${articleShareUrl}&title=${articleHeadline}`;
   const shareLinkEmail = `${mail}${articleHeadline}&body=${articleShareUrl}`;
 
-  const logoPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoShort}`)}`;
+  const logoPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logo}`)}`;
 
   const siteNameLower = siteName.toLowerCase();
 
