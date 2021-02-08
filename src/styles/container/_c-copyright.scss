@@ -3,6 +3,7 @@
 
 .c-copyright {
   background-color: #f1f1f2;
+  color: #545454;
 
   @include amp-only {
     box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
@@ -11,9 +12,15 @@
   }
 
   .copyright {
-    padding: 35px 20px;
-    text-align: center;
+    padding: 20px;
+    text-align: left;
     margin: 0 auto;
+
+    .rights,
+    .privacy,
+    .learn-more {
+      padding-bottom: 28px;
+    }
 
     a {
       color: #2e81b7;
