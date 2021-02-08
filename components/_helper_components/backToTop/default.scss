@@ -1,0 +1,42 @@
+@import "../../../src/styles/base/mixins";
+@import "../../../src/styles/base/breakpoints";
+
+.c-backToTop {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  color: #000;
+  padding-bottom: 2.8125rem;
+
+  @include breakpoint(tablet) {
+    display: none;
+  }
+
+  span {
+    @include text-styles(.75rem, 1, "Gordita-Bold");
+
+    margin-right: 8px;
+  }
+
+  .arrow {
+    border-radius: 11px;
+    box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, .6);
+    background-color: #fff;
+    padding: 7px 12px;
+
+    img {
+      transform: rotate(180deg);
+    }
+
+    .shape {
+      border: solid #000;
+      border-width: 0 3px 3px 0;
+      border-radius: 3px;
+      display: inline-block;
+      padding: 3px;
+      transform: rotate(-135deg);
+    }
+  }
+}
