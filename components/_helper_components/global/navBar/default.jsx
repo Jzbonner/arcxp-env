@@ -14,6 +14,7 @@ import '../../../../src/styles/base/_utility.scss';
 import '../../../../src/styles/container/_article-basic.scss';
 import '../../../../src/styles/container/_c-headerNav.scss';
 import BreakingNews from '../breakingNews/default';
+import Login from './login/default';
 
 const NavBar = ({
   articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false,
@@ -141,6 +142,10 @@ const NavBar = ({
               rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
             />
           </div>
+          <Login
+            isMobile={isMobile}
+            isSticky={true}
+          />
         </div>
         <DesktopNav
           sections={sectionLi}
