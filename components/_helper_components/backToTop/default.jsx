@@ -1,4 +1,5 @@
 import React from 'react';
+import TopArrow from '../../../resources/icons/global/TopArrow.svg';
 import './default.scss';
 
 const BackToTop = () => {
@@ -9,9 +10,11 @@ const BackToTop = () => {
   return (
     <div className='c-backToTop' onClick={scrollToTop}>
       <span>Back to Top</span>
-      <div className='arrow'>
+{/*       <div className='arrow'>
         <i className='shape'></i>
-      </div>
+      </div> */}
+      <img src={TopArrow}>
+      </img>
     </div>
   );
 };
