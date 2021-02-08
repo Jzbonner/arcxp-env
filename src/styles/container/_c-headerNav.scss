@@ -90,12 +90,6 @@
         }
       }
 
-      @include breakpoint(desktop-sm) {
-        display: flex;
-        align-items: flex-end;
-        padding-bottom: 20px;
-      }
-
       &.is-hidden {
         display: none;
       }
@@ -186,12 +180,6 @@
 
       @include breakpoint(desktop-sm) {
         padding: 0;
-      }
-
-      .nav-login {
-        @include breakpoint(desktop-sm) {
-          display: none;
-        }
       }
 
       &.not-visible {
@@ -300,11 +288,6 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-
-      @include breakpoint(desktop-sm) {
-        display: flex;
-        flex-direction: row;
-      }
     }
 
     .nav-row {
@@ -352,12 +335,12 @@
         }
 
         .section {
-          @include breakpoint(desktop-sm) {
+          @include breakpoint(tablet) {
             opacity: 1;
           }
 
           .subNav {
-            @include breakpoint(desktop-sm) {
+            @include breakpoint(tablet) {
               visibility: visible;
               opacity: 1;
             }
@@ -730,14 +713,14 @@
     }
 
     .nav-login {
-      @include between-breakpoints(mobile, desktop-sm) {
+      @include between-breakpoints(mobile, tablet) {
 
         &.isSticky .login-text {
           display: none;
         }
       }
 
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         display: flex;
         padding: 0;
         padding-bottom: 0;

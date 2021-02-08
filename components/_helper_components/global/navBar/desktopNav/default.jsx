@@ -26,9 +26,9 @@ const DesktopNav = ({
   <>
   <div className={`nav-wrapper ${hamburgerToggle && isMobile ? 'isVisible' : ''}`}></div>
   <nav className={`
-  ${hamburgerToggle && isMobile ? 'mobile-nav-activated' : ''}
-  ${isMobile ? 'nav-mobile' : ''}
-  ${(stickyActive || hasWindowShade) && !isMobile ? 'is-hidden' : ''}`}>
+  ${hamburgerToggle ? 'mobile-nav-activated' : ''}
+  ${(stickyActive || hasWindowShade) && !isMobile ? 'is-hidden' : ''}
+  nav-mobile`}>
     <div className='nav-menu-toggle' onClick={(e) => { e.preventDefault(); setToggle(false); }}>
         <div className='nav-close-button'></div>
     </div>
