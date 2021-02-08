@@ -818,21 +818,19 @@
       cursor: pointer;
       display: inline-block;
       vertical-align: middle;
+      white-space: nowrap;
 
       @include text-styles(.75rem, 1, "Gordita-Bold");
 
-      @include breakpoint(desktop-sm) {
-        display: flex;
+      @include breakpoint(tablet) {
         font-weight: 800;
+        display: flex;
 
-        @include text-styles(.875rem, 3, "Gordita-Bold");
+        @include text-styles(.875rem, 1, "Gordita-Bold");
       }
 
       @include breakpoint(desktop-nav) {
-        display: flex;
-        font-weight: 800;
-
-        @include text-styles(1.125rem, 3, "Gordita-Bold");
+        @include text-styles(1.125rem, 1, "Gordita-Bold");
       }
     }
 
