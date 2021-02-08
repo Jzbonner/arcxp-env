@@ -3,10 +3,6 @@ import { useContent } from 'fusion:content';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import footerFilter from '../../../../content/filters/bottom-nav';
-import menuArrow from '../../../../resources/images/menu-arrow.svg';
-import facebookIcon from '../../../../resources/images/facebook-icon.svg';
-import twitterIcon from '../../../../resources/images/twitter-icon.svg';
-import rightArrow from '../../../../resources/images/right-arrow.svg';
 import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import ConnextBottomNavSubPromo from '../ConnextBottomNavSubPromo/default';
@@ -18,8 +14,6 @@ const Footer = () => {
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
-  let twitterURL = '';
-  let facebookURL = '';
 
   const siteNavigation = useContent({
     source: 'site-api',
@@ -34,7 +28,6 @@ const Footer = () => {
   } = getProperties(arcSite);
 
   const { children: linkCategories } = siteNavigation || {};
-  const [row1 = []] = linkCategories || [];
 
   const [openMenu, setOpenMenu] = useState('');
 
@@ -46,15 +39,6 @@ const Footer = () => {
     }
   };
 
-  if (siteNavigation && siteNavigation.children && siteNavigation.children[5]) {
-    if (siteNavigation.children[5].children[0] && siteNavigation.children[5].children[0].url) {
-      twitterURL = siteNavigation.children[5].children[0].url;
-    }
-    if (siteNavigation.children[5].children[1] && siteNavigation.children[5].children[1].url) {
-      facebookURL = siteNavigation.children[5].children[1].url;
-    }
-  }
-
   return (
     <footer className="c-footer b-clear-both">
       <div className="logo-row">
@@ -65,14 +49,10 @@ const Footer = () => {
               src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${footerLogo}`)}`} alt="logo"
             />
           </a>
+        </div>
+        <div className="col">
           <ConnextBottomNavSubPromo />
         </div>
-{/*         <div className="col">
-          <a href={row1 && row1.site && row1.site.site_url} className="newsletter-signup">
-            <p>{row1.navigation && row1.navigation.nav_title}</p>
-            <img src={rightArrow} alt="" />
-          </a>
-        </div> */}
       </div>
       <ul className="menu-row">
         {linkCategories

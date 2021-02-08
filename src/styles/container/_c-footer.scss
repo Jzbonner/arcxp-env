@@ -148,7 +148,7 @@
 
     font-weight: 500;
     color: #000;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     border-left: 1.4px solid #cfcfcf;
     margin-left: 15px;
 
@@ -167,8 +167,9 @@
     }
 
     .menu-header {
-      @include text-styles(.875rem, 0.85, "Gordita-Bold");
-      font-weight: bold;
+      @include text-styles(.875rem, .85, "Gordita-Bold");
+
+      font-weight: 800;
       max-width: 1600px;
       padding: 0 20px 15px 10px;
       margin: 0 auto;
@@ -193,6 +194,7 @@
         @include text-styles(.85rem, 1.57, "Gordita");
 
         color: #2e81b7;
+
         @include breakpoint(desktop-sm) {
 
           &:last-child {
