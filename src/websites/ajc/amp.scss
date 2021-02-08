@@ -48,3 +48,10 @@ $is-amp: true;
 .article-timestamp {
   color: #000;
 }
+
+.c-section {
+  display: block;
+  padding: 0 $min-margin;
+  margin-right: auto;
+  margin-left: auto;
+}
