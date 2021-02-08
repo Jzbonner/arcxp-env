@@ -159,6 +159,7 @@
       display: flex;
       justify-content: center;
       min-height: 29px;
+      order: 2;
 
       @include breakpoint(desktop-sm) {
         height: 79px;
@@ -186,12 +187,20 @@
         display: none;
       }
 
-      .login-text {
-        display: none;
-      }
-
-      .nav-login.nav-items.isSticky {
+      .isSticky {
         padding: 0;
+        order: 3;
+
+        :first-child {
+          display: flex;
+          height: 27px;
+        }
+
+        .login-text {
+          @include between-breakpoints(mobile,tablet) {
+            display: none;
+          }
+        }
 
         img {
           height: 27px;
@@ -208,7 +217,7 @@
 
       @include breakpoint(desktop-sm) {
         padding-left: 0;
-        height: 79px;
+        height: 46px;
         padding-top: 30px;
         max-height: 8vw;
         box-sizing: border-box;
@@ -713,13 +722,6 @@
     }
 
     .nav-login {
-      @include between-breakpoints(mobile, tablet) {
-
-        &.isSticky .login-text {
-          display: none;
-        }
-      }
-
       @include breakpoint(tablet) {
         display: flex;
         padding: 0;
@@ -812,12 +814,12 @@
     }
 
     .login-text {
-      padding-left: 6px;
+      padding-left: 2px;
       cursor: pointer;
       display: inline-block;
       vertical-align: middle;
 
-      @include text-styles(1rem, 1, "Gordita-Bold");
+      @include text-styles(.75rem, 1, "Gordita-Bold");
 
       @include breakpoint(desktop-sm) {
         display: flex;
@@ -1037,6 +1039,10 @@
           animation: 10s menuFadeInOut;
         }
       }
+    }
+
+    .c-topNavLinks {
+      order: 1;
     }
   }
 

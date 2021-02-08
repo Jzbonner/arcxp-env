@@ -124,7 +124,7 @@ const NavBar = ({
   });
 
   return (
-    <header className="c-nav">
+    <header className='c-nav'>
       {!omitBreakingNews && <BreakingNews />}
       <div className={`c-headerNav
         ${stickyNavVisibility || hasWindowShade ? 'stickyActive' : ''}
@@ -132,15 +132,17 @@ const NavBar = ({
         ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`}>
         <div className={`b-flexRow b-flexCenter nav-logo
         ${(stickyNavVisibility || hasWindowShade) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
-          <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
-            <div className='nav-flyout-button'></div>
-          </div>
           <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
             && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
             <Logo
               source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logo}`)}`}
               rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
             />
+          </div>
+          <div className='c-topNavLinks'>
+            <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
+              <div className='nav-flyout-button'></div>
+            </div>
           </div>
           <Login
             isMobile={isMobile}

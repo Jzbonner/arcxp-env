@@ -99,7 +99,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   useWindowEvent('connextIsSubscriber', 'authenticated');
 
   return (
-    <li className={`nav-login nav-items ${isSticky ? 'isSticky' : ''}`}>
+    <div className={`${isSticky ? 'isSticky' : ''}`}>
       {(userStateRef.current === 'logged-in'
       || userStateRef.current === 'authenticated') && (
         <IsAuthMenu
@@ -120,7 +120,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
           arcSite={arcSite}
         />
       )}
-    </li>
+    </div>
   );
 };
 

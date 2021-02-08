@@ -72,14 +72,14 @@ const isAuthMenu = ({
     <>
       <div onClick={() => setShowUserMenu(!showUserMenu)}>
         <img src={source} />
-        <div className='nav-itemText login-text'>My Profile</div>
+        <div className='nav-itemText login-text'>Log Out</div>
       </div>
 
       <div className={`section login-menu ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
         <div className={'section-item'}>
           <a href={profileLink}>
             <img src={source} />
-            <div className='nav-itemText login-text'>My Profile</div>
+            <div className='nav-itemText login-text'>Log Out</div>
           </a>
         </div>
         <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
