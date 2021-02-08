@@ -1,0 +1,26 @@
+@import "../../../src/styles/base/mixins";
+@import "../../../src/styles/base/breakpoints";
+
+.c-backToTop {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  padding-bottom: 1.875rem;
+
+  @include breakpoint(tablet) {
+    display: none;
+  }
+
+  span {
+    @include text-styles(.75rem, 1, "Gordita-Bold");
+
+    margin-right: 8px;
+  }
+
+  img {
+    padding-bottom: 9px;
+  }
+}
