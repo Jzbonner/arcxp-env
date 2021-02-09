@@ -133,7 +133,7 @@ const NavBar = ({
         <div className={`b-flexRow b-flexCenter nav-logo
         ${(stickyNavVisibility || hasWindowShade) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
           <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
-            && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
+            && mobileMenuToggled) ? 'not-visible' : ''} ${siteName}`} ref={logoRef} >
             <Logo
               source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logo}`)}`}
               rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}

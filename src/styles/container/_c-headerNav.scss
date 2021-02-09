@@ -9,10 +9,15 @@
     padding-bottom: 15px;
     border-bottom: 1px solid #cdcdcd;
 
+    @include breakpoint(tablet) {
+      padding-top: 20px;
+    }
+
     @include breakpoint(desktop-sm) {
       display: flex;
       flex-direction: column;
       width: 94%;
+      padding-top: 30px;
     }
 
     @include breakpoint(desktop-lg) {
@@ -158,19 +163,22 @@
       width: 100%;
       display: flex;
       justify-content: center;
+      align-items: center;
       min-height: 29px;
       order: 2;
-
-      @include breakpoint(desktop-sm) {
-        height: 79px;
+      
+      &.ajc {
+        @include breakpoint(tablet) {
+          height: 46px;
+        }
+  
+        @include breakpoint(desktop-sm) {
+          height: 71px;
+        }
       }
 
       &.not-visible {
         display: none;
-      }
-
-      a {
-        height: 29px;
       }
     }
 
@@ -217,14 +225,14 @@
 
       @include breakpoint(desktop-sm) {
         padding-left: 0;
-        height: 46px;
-        padding-top: 30px;
         max-height: 8vw;
         box-sizing: border-box;
       }
 
       &.ajc {
-        box-sizing: border-box;
+        @include breakpoint(tablet) {
+          max-height: 46px;
+        }
       }
 
       &.dayton {
