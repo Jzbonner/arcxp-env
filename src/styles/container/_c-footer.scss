@@ -165,6 +165,10 @@
       border-top: none;
     }
 
+    &:last-child {
+      margin-bottom: 0;
+    }
+
     .menu-header {
       @include text-styles(.875rem, .85, "Gordita-Bold");
 

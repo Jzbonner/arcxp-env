@@ -3,6 +3,7 @@ import { useContent } from 'fusion:content';
 import copyrightFilter from '../../../../content/filters/copyright';
 import '../../../../src/styles/container/_c-copyright.scss';
 import getCopyLinks from '../../../layouts/_helper_functions/getCopyLinks';
+import BackToTop from '../../backToTop/default';
 
 const Copyright = () => {
   const siteContent = useContent({
@@ -39,6 +40,7 @@ const Copyright = () => {
            <a href={getCopyLinks(careers)}>Learn about {careersName}</a>.
         </div>
       </div>
+      <BackToTop />
     </div>
   );
 };
