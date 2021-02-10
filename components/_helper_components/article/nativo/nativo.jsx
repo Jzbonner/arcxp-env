@@ -3,6 +3,7 @@ import './styles.scss';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import { paragraphCounter } from '../../../layouts/_helper_functions/Paragraph';
+import handleSiteName from '../../../layouts/_helper_functions/handleSiteName';
 
 const Nativo = ({
   elements = [], displayIfAtLeastXParagraphs, controllerClass, ampPage,
@@ -19,7 +20,7 @@ const Nativo = ({
             width="400"
             height="400"
             layout="responsive"
-            data-request-url={`https://amp.${arcSite}.com/amp/nativo`}
+            data-request-url={`https://amp.${handleSiteName(arcSite)}.com/amp/nativo`}
           ></amp-ad>
         );
       }
