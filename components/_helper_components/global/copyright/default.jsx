@@ -3,6 +3,7 @@ import { useContent } from 'fusion:content';
 import copyrightFilter from '../../../../content/filters/copyright';
 import '../../../../src/styles/container/_c-copyright.scss';
 import getCopyLinks from '../../../layouts/_helper_functions/getCopyLinks';
+import BackToTop from '../../backToTop/default';
 
 const Copyright = () => {
   const siteContent = useContent({
@@ -27,11 +28,19 @@ const Copyright = () => {
   return (
     <div className="c-copyright">
       <div className="copyright">
-        &copy; {year} <a href="/">{ajcName}.</a> All Rights Reserved. By using this website, you accept the terms of our{' '}
-        <a href={getCopyLinks(visitor_agreement)}>{visitorAgreementName}</a> and{' '}
-        <a href={getCopyLinks(privacy_policy)}>{privacyPolicyName}</a>, and understand your options regarding{' '}
-        <a href={getCopyLinks(ad_choices)}>{adChoicesName}</a>. Learn about <a href={getCopyLinks(careers)}>{careersName}</a>.
+        <div className="rights">
+          &copy; {year} <a href="/">{ajcName}.</a> <br /> All Rights Reserved. <br />
+        </div>
+        By using this website, you accept the terms of our{' '}
+        <div className="privacy">
+          <a href={getCopyLinks(visitor_agreement)}>{visitorAgreementName}</a> and{' '}
+          <a href={getCopyLinks(privacy_policy)}>{privacyPolicyName}</a>, and understand your options regarding{' '}<a href={getCopyLinks(ad_choices)}>{adChoicesName}</a>.
+        </div>
+        <div className="learn-more">
+           <a href={getCopyLinks(careers)}>Learn about {careersName}</a>.
+        </div>
       </div>
+      <BackToTop />
     </div>
   );
 };

@@ -1,0 +1,170 @@
+[
+  {
+    "uri": "/",
+    "name": "Homepage"
+  },
+  {
+    "uri": "/best-of-dayton/",
+    "name": "DCOM Best of Dayton"
+  },
+  {
+    "uri": "/dcom-app-best-of-dayton/",
+    "name": "DCOM App: Best of Dayton"
+  },
+  {
+    "uri": "/dcom-app-what-to-do/",
+    "name": "DCOM App: All What to Do"
+  },
+  {
+    "uri": "/dcom-app-what-to-do-breweries-bars/",
+    "name": "DCOM App: Breweries & Bars"
+  },
+  {
+    "uri": "/dcom-app-what-to-do-dining/",
+    "name": "DCOM App: Dining"
+  },
+  {
+    "uri": "/dcom-app-what-to-do-parks-rec/",
+    "name": "DCOM App: Parks & Rec"
+  },
+  {
+    "uri": "/dcom-app-what-to-know/",
+    "name": "DCOM App: All What to Know"
+  },
+  {
+    "uri": "/dcom-app-what-to-love/",
+    "name": "DCOM App: All What to Love"
+  },
+  {
+    "uri": "/dcom-app-what-to-love-dayton-bucket-list/",
+    "name": "DCOM App: Bucket List"
+  },
+  {
+    "uri": "/dcom-app-what-to-love-dayton-history/",
+    "name": "DCOM App: Dayton History"
+  },
+  {
+    "uri": "/dcom-app-what-to-love-daytonian/",
+    "name": "DCOM App: Daytonian"
+  },
+  {
+    "uri": "/dcom-nl-first-to-know-top-story/",
+    "name": "DCOM NL First to Know Top Story"
+  },
+  {
+    "uri": "/dcom-nl-food-and-dining-latest-news/",
+    "name": "DCOM NL Food And Dining Latest News"
+  },
+  {
+    "uri": "/dcom-nl-food-and-dining-more-headlines/",
+    "name": "DCOM NL Food And Dining More Headlines"
+  },
+  {
+    "uri": "/dcom-nl-food-and-dining-top-story/",
+    "name": "DCOM NL Food And Dining Top Story"
+  },
+  {
+    "uri": "/dcom-nl-things-to-do-story-1/",
+    "name": "DCOM NL ThingsToDo Story 1"
+  },
+  {
+    "uri": "/dcom-nl-things-to-do-story-2/",
+    "name": "DCOM NL ThingsToDo Story 2"
+  },
+  {
+    "uri": "/dcom-nl-things-to-do-story-3/",
+    "name": "DCOM NL ThingsToDo Story 3"
+  },
+  {
+    "uri": "/dcom-nl-things-to-do-story-4/",
+    "name": "DCOM NL ThingsToDo Story 4"
+  },
+  {
+    "uri": "/dcom-nl-things-to-do-story-5/",
+    "name": "DCOM NL ThingsToDo Story 5"
+  },
+  {
+    "uri": "/dcom-nl-whattoknow-more-headlines/",
+    "name": "DCOM NL Whattoknow More Headlines"
+  },
+  {
+    "uri": "/dcom-nl-what-to-know-top-story/",
+    "name": "DCOM NL Whattoknow Top Story"
+  },
+  {
+    "uri": "/event-photo-galleries/",
+    "name": "DCOM: Event Photos"
+  },
+  {
+    "uri": "/homepage",
+    "name": "DCOM Homepage"
+  },
+  {
+    "uri": "/native/",
+    "name": "Nativo Landing Page"
+  },
+  {
+    "uri": "/robots.txt",
+    "name": "Dayton Robots.txt"
+  },
+  {
+    "uri": "/rss-dayton.com-headlines",
+    "name": "RSS Dayton.com Headlines"
+  },
+  {
+    "uri": "/traffic/",
+    "name": "Traffic"
+  },
+  {
+    "uri": "/weather/",
+    "name": "DCOM Weather"
+  },
+  {
+    "uri": "/what-to-do/",
+    "name": "DCOM What to Do"
+  },
+  {
+    "uri": "/what-to-do/breweries-bars/",
+    "name": "DCOM Breweries & Bars"
+  },
+  {
+    "uri": "/what-to-do/dining/",
+    "name": "DCOM Dining"
+  },
+  {
+    "uri": "/what-to-do/events/",
+    "name": "DCOM Events"
+  },
+  {
+    "uri": "/what-to-do/parks-recreation/",
+    "name": "DCOM Parks & Recreation"
+  },
+  {
+    "uri": "/what-to-know/",
+    "name": "DCOM What to Know"
+  },
+  {
+    "uri": "/what-to-love/",
+    "name": "DCOM What to Love"
+  },
+  {
+    "uri": "/what-to-love/dayton-bucket-list/",
+    "name": "DCOM Dayton Bucket List"
+  },
+  {
+    "uri": "/what-to-love/dayton-history/",
+    "name": "DCOM Dayton History"
+  },
+  {
+    "uri": "/what-to-love/daytonianoftheweek/",
+    "name": "DCOM Daytontian of the Week"
+  },
+  {
+    "uri": "/wrap-transparensee-things-to-do/",
+    "name": "Wrap - Things to Do"
+  },
+  {
+    "uri": "/wrap-upickem/",
+    "name": "Wrap - Upickem"
+  }
+]

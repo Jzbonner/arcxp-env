@@ -14,6 +14,7 @@ import '../../../../src/styles/base/_utility.scss';
 import '../../../../src/styles/container/_article-basic.scss';
 import '../../../../src/styles/container/_c-headerNav.scss';
 import BreakingNews from '../breakingNews/default';
+import Login from './login/default';
 
 const NavBar = ({
   articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false,
@@ -33,7 +34,7 @@ const NavBar = ({
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    logo, logoHamburger, siteName, cdnSite, cdnOrg, siteNavHierarchy,
+    logoRedesign, logoHamburger, siteName, cdnSite, cdnOrg, siteNavHierarchy,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
@@ -137,10 +138,14 @@ const NavBar = ({
           <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
             && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
             <Logo
-              source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logo}`)}`}
+              source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoRedesign}`)}`}
               rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
             />
           </div>
+          <Login
+            isMobile={isMobile}
+            isSticky={true}
+          />
         </div>
         <DesktopNav
           sections={sectionLi}

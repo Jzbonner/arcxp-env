@@ -1,0 +1,127 @@
+@import "./../../../src/styles/base";
+
+.c-mostRead {
+  display: flex;
+  flex-direction: column;
+}
+
+.mostReadTitle {
+  @include text-styles(2.5rem, 1 , "Average");
+  
+  text-align: center;
+  margin-bottom: 15px;
+
+  @include breakpoint(tablet) {
+    text-align: left;
+    margin-bottom: 9px;
+  }
+
+  @include breakpoint(desktop-sm) {
+    text-align: left;
+    margin-bottom: 11px;
+  }
+}
+
+.mostReadList {
+  display: flex;
+  flex-direction: column;
+
+  @include breakpoint(tablet) {
+    flex-direction: row;
+  }
+
+  a {
+    color: inherit;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+
+    @include breakpoint(tablet) {
+      margin-bottom: 0;
+    }
+  }
+
+  a:last-child {
+    margin-bottom: 0;
+  }
+
+  a:not(:last-child) {
+    @include breakpoint(tablet) {
+      margin-right: 8px;
+    }
+
+    @include breakpoint(desktop-sm) {
+      margin-right: 12px;
+    }
+  }
+}
+
+.mostReadRanking {
+  @include text-styles (2.5rem, .88, "Average");
+
+  margin-right: 8px;
+  min-width: 20px;
+  max-width: 20px;
+  height: fit-content;
+
+  @include breakpoint(tablet) {
+    @include text-styles(1.88rem, 1 , "Average");
+
+    margin: 0 4px;
+    padding-top: 4px;
+  }
+
+  @include breakpoint (desktop-sm) {
+    @include text-styles (2.5rem, 1, "Average");
+
+    padding-top: 4px;
+    margin: 0 9px 4px;
+  }
+}
+
+.mostReadRanking:first-child {
+  margin-left: 0;
+}
+
+.mostReadRanking + div {
+  background-color: #cdcdcd;
+  transform: rotate(90deg);
+  position: relative;
+  top: -10px;
+  left: 11px;
+  min-width: 1px;
+  height: 20px;
+}
+
+.mostReadHeadline {
+  border-left: 1px solid #cdcdcd;
+  padding-left: 12px;
+  padding-top: 3px;
+  height: fit-content;
+  
+  @include text-styles(1.4rem, 1.14, "Average");
+
+  @include breakpoint(tablet) {
+    @include text-styles(1rem, 1.25, "Average");
+
+    padding-left: 9px;
+    padding-top: 9px;
+    min-width: 100px;
+  }
+
+  @include breakpoint(desktop-sm) {
+    @include text-styles(1.2rem, 1.28, "Average");
+
+    padding-left: 10px;
+    padding-top: 10px;
+    min-width: 120px;
+  }
+
+  @include breakpoint(desktop-lg) {
+    @include text-styles(1.56rem, 1.28, "Average");
+
+    padding-left: 10px;
+    padding-top: 10px;
+    min-width: 140px;
+  }
+}

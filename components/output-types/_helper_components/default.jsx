@@ -11,6 +11,8 @@ import checkSponsor from '../../layouts/_helper_functions/checkSponsor';
 import AmpRelLink from '../../_helper_components/amp/AmpRelLink';
 import GoogleStructuredData from '../../_helper_components/article/googleData/default';
 import fetchEnv from '../../_helper_components/global/utils/environment';
+import DetectAdBlocker from '../../_helper_components/global/abBlockDetection/default';
+import gtmScript from '../helper_functions/gtmScript';
 
 const RenderOutputType = (props) => {
   const {
@@ -31,6 +33,8 @@ const RenderOutputType = (props) => {
   const {
     type = null, taxonomy, canonical_url: articleURL, _id: uuid,
   } = globalContent || {};
+
+
   const { tags = [], sections } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
   const noAmp = checkTags(tags, 'no-amp');
@@ -60,7 +64,7 @@ const RenderOutputType = (props) => {
               type="text/javascript"
               dangerouslySetInnerHTML={{
                 /* eslint-disable-next-line max-len */
-                __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${metrics.gtmContainerKey}');`,
+                __html: gtmScript(arcSite),
               }}
             ></script>
             {/* End Google Tag Manager */}
@@ -97,6 +101,7 @@ const RenderOutputType = (props) => {
             <ConnextInit triggerLoginModal={outputType && outputType === 'login'} />
           </>
         )}
+        {outputType === 'default' ? <DetectAdBlocker /> : null}
         <div id="fb-root"></div>
         <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
         {devconActive && <script id="ns_script_dc" data-key={devconKey || '2a1556f7-d788-4b8b-943a-dd77f5f0d472'} data-e="5" src="//includemodal.global.ssl.fastly.net/sp.js" type="text/javascript"></script>}

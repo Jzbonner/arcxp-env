@@ -52,7 +52,7 @@ const StoryPageLayout = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
-  const { connext } = getProperties(arcSite);
+  const { connext, siteFullname } = getProperties(arcSite);
   const { allowMeter = false } = connext[currentEnv] || {};
 
   if (!globalContent) return null;
@@ -96,7 +96,7 @@ const StoryPageLayout = () => {
   const MP03 = () => <ArcAd staticSlot={'MP03'} lazyLoad={isMeteredStory} key={'MP03'} />;
   const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP09-Story-Desktop'} />;
   const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP09-Story-Tablet'} />;
-  const connextThankYouMessage = () => <ConnextThankYouMessage isAmp={ampPage} />;
+  const connextThankYouMessage = () => <ConnextThankYouMessage isAmp={ampPage} siteFullname={siteFullname} />;
 
   const windowExists = typeof window !== 'undefined';
 
@@ -184,6 +184,7 @@ const StoryPageLayout = () => {
       isHyperlocalContent={isHyperlocalContent}
       taxonomy={taxonomy}
       uuid={uuid}
+      isMeteredStory={isMeteredStory}
     />}
     {!noAds && !isHyperlocalContent && !sponsorSectionID && (
       <Nativo
@@ -191,6 +192,7 @@ const StoryPageLayout = () => {
         displayIfAtLeastXParagraphs={4}
         controllerClass="story-nativo_placeholder--moap"
         ampPage={ampPage}
+        isMeteredStory={isMeteredStory}
       />
     )}
     <Section
@@ -204,12 +206,13 @@ const StoryPageLayout = () => {
     />
     {!noAds && maxNumberOfParagraphs >= 4
       && <>
-        {ampPage && isMeteredStory && <NonSubPremiumMessage arcSite={arcSite} />}
+        {ampPage && isMeteredStory && <NonSubPremiumMessage siteFullname={siteFullname} />}
         <InterscrollerPlaceholder
           ampPage={ampPage}
           isHyperlocalContent={isHyperlocalContent}
           taxonomy={taxonomy}
           uuid={uuid}
+          isMeteredStory={isMeteredStory}
         />
       </>
     }
@@ -293,7 +296,7 @@ const StoryPageLayout = () => {
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
             )}
 
-            <SponsorStoryMessage sponsorID={sponsorSectionID} paywallStatus={paywallStatus} isAmp={ampPage} />
+            <SponsorStoryMessage sponsorID={sponsorSectionID} paywallStatus={paywallStatus} isAmp={ampPage} siteFullname={siteFullname} />
             <Section
               elements={filteredContentElements}
               stopIndex={1}
@@ -311,7 +314,7 @@ const StoryPageLayout = () => {
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />
             )}
             {ampPage && isMeteredStory && <>
-              <PaywallLimitMessage arcSite={arcSite} />
+              <PaywallLimitMessage siteFullname={siteFullname} />
               <div amp-access='Error=true OR AccessLevel="Full Content Access"' amp-access-hide>
                 {storyContentOutput()}
               </div>

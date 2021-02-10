@@ -1,11 +1,13 @@
 import adsBidding from './adsBidding/springfieldnewssun.com.json';
 import adsTxt from './adstxt/springfieldnewssun.com.json';
+import blacklist from './mostReadBlacklist/springfieldnewssun.com.json';
 
 export default {
   dfp_id: 21849707860,
   fbPagesId: '73484672682',
   fbAppId: '1793003357612189',
   siteName: 'springfield-news-sun',
+  siteFullname: 'Springfield News-Sun',
   cdnOrg: 'coxohio',
   cdnSite: 'springfield-news-sun',
   siteDomainURL: 'https://www.springfieldnewssun.com',
@@ -34,6 +36,7 @@ export default {
   breakingLiveVideoID: 'HV4DOKFKSZF35CA4XLCK4BHIPY',
   breakingNewsID_sandbox: '2DFNDMIGWBCSNNVURFGVQV2MDI',
   breakingLiveVideoID_sandbox: 'DJ5HSRZBBBAZ7EJ3VMNYD3DMW4',
+  domainBlockerTracking: 'https://rtwa.springfieldnewssun.com',
   featuredVideoPlayerRules: {
     startPlaying: true,
     muteON: true,
@@ -111,7 +114,11 @@ export default {
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
+      allowMeter: true,
       pubParam: 'SNS',
+      activateUrl: 'https://test-subscribe.springfieldnewssun.com/',
+      activateAmpPaywallUrl: 'https://test-subscribe.springfieldnewssun.com/startgwamp',
+      activateAmpInlineUrl: 'https://test-subscribe.springfieldnewssun.com/startamp',
     },
     prod: {
       isEnabled: true,
@@ -123,6 +130,9 @@ export default {
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
       pubParam: 'SNS',
+      activateUrl: 'https://subscribe.springfieldnewssun.com/',
+      activateAmpPaywallUrl: 'https://subscribe.springfieldnewssun.com/startgwamp',
+      activateAmpInlineUrl: 'https://subscribe.springfieldnewssun.com/startamp',
     },
   },
   video: {
@@ -132,5 +142,9 @@ export default {
     prod: {
       cmsId: 2536851,
     },
+  },
+  chartbeat: {
+    blacklist,
+    host: 'springfieldnewssun.com',
   },
 };

@@ -5,7 +5,7 @@ import { useFusionContext } from 'fusion:context';
 import { paragraphCounter } from '../../../layouts/_helper_functions/Paragraph';
 
 const Nativo = ({
-  elements = [], displayIfAtLeastXParagraphs, controllerClass, ampPage,
+  elements = [], displayIfAtLeastXParagraphs, controllerClass, ampPage, isMeteredStory = false,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -20,6 +20,8 @@ const Nativo = ({
             height="400"
             layout="responsive"
             data-request-url={`https://amp.${arcSite}.com/amp/nativo`}
+            amp-access={isMeteredStory ? 'Error=true OR AccessLevel="Full Content Access"' : null}
+            amp-access-hide={isMeteredStory ? '' : null}
           ></amp-ad>
         );
       }
@@ -43,6 +45,7 @@ Nativo.propTypes = {
   displayIfAtLeastXParagraphs: PropTypes.number,
   controllerClass: PropTypes.oneOf(['story-nativo_placeholder--moap', 'story-nativo_placeholder--boap']).isRequired,
   ampPage: PropTypes.bool.isRequired,
+  isMeteredStory: PropTypes.bool,
 };
 
 export default Nativo;
