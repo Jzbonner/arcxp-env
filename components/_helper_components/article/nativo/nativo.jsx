@@ -2,7 +2,6 @@ import React from 'react';
 import './styles.scss';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
 import { paragraphCounter } from '../../../layouts/_helper_functions/Paragraph';
 
 const Nativo = ({
@@ -10,7 +9,6 @@ const Nativo = ({
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
-  const { nativoMoapTag } = getProperties(arcSite);
 
   if (paragraphCounter(elements) >= displayIfAtLeastXParagraphs || controllerClass === 'story-nativo_placeholder--boap') {
     if (ampPage) {
@@ -21,9 +19,7 @@ const Nativo = ({
             width="400"
             height="400"
             layout="responsive"
-            data-request-url={`${nativoMoapTag}-${
-              controllerClass === 'story-nativo_placeholder--moap' ? 'moap' : 'boap'
-            }`}
+            data-request-url={`https://amp.${arcSite}.com/amp/nativo`}
           ></amp-ad>
         );
       }
