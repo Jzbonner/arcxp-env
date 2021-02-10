@@ -20,7 +20,14 @@
     margin-right: 8px;
   }
 
-  img {
-    padding-bottom: 9px;
+  .top-arrow-icon {
+    height: 52px;
+    width: 36px;
+    transition: background-image .2s;
+    background-image: url("../../../resources/icons/global/TopArrow.svg");
+  }
+
+  .top-arrow-icon:hover {
+    background-image: url("../../../resources/icons/global/TopArrowHover.svg");
   }
 }
