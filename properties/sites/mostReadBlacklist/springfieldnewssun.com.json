@@ -1,0 +1,174 @@
+[
+  {
+    "uri": "/",
+    "name": "Homepage"
+  },
+  {
+    "uri": "/business/",
+    "name": "SNS Business"
+  },
+  {
+    "uri": "/community/",
+    "name": "SNS Community: All"
+  },
+  {
+    "uri": "/crime/",
+    "name": "SNS Crime"
+  },
+  {
+    "uri": "/elections/",
+    "name": "SNS Elections"
+  },
+  {
+    "uri": "/foodrelief/",
+    "name": "SNS Food Relief"
+  },
+  {
+    "uri": "/homepage",
+    "name": "SNS Homepage"
+  },
+  {
+    "uri": "/latest-headlines-list/",
+    "name": "SNS Latest Headlines List"
+  },
+  {
+    "uri": "/military/",
+    "name": "SNS Military"
+  },
+  {
+    "uri": "/native/",
+    "name": "Nativo Landing Page"
+  },
+  {
+    "uri": "/news/",
+    "name": "SNS News"
+  },
+  {
+    "uri": "/ohio/",
+    "name": "SNS Ohio News"
+  },
+  {
+    "uri": "/politics/",
+    "name": "SNS Politics"
+  },
+  {
+    "uri": "/robots.txt",
+    "name": "SNS Robots.txt"
+  },
+  {
+    "uri": "/search/",
+    "name": "springfield-search"
+  },
+  {
+    "uri": "/sns-alexa-headlines/",
+    "name": "SNS Alexa Headlines"
+  },
+  {
+    "uri": "/sns-nl-afternoon-update-common/",
+    "name": "SNS NL Afternoon Update common pleas"
+  },
+  {
+    "uri": "/sns-nl-afternoon-update-lifestyles/",
+    "name": "SNS NL Afternoon Update Lifestyle"
+  },
+  {
+    "uri": "/sns-nl-afternoon-update-municipal-court/",
+    "name": "SNS NL Afternoon Update municipal"
+  },
+  {
+    "uri": "/sns-nl-afternoon-update-news/",
+    "name": "SNS NL Afternoon Update News"
+  },
+  {
+    "uri": "/sns-nl-afternoon-update-sports/",
+    "name": "SNS NL Afternoon Update Sports"
+  },
+  {
+    "uri": "/sns-nl-daily-headlines-more-headlines/",
+    "name": "SNS NL Daily Headlines More Headlines"
+  },
+  {
+    "uri": "/sns-nl-daily-headlines-top-story/",
+    "name": "SNS NL Daily Headlines Top Story"
+  },
+  {
+    "uri": "/sns-nl-evening-read-news/",
+    "name": "SNS NL Evening Read Local News"
+  },
+  {
+    "uri": "/sns-nl-midday-first-story/",
+    "name": "SNS NL Midday First Story"
+  },
+  {
+    "uri": "/sns-nl-midday-second-story/",
+    "name": "SNS NL Midday Second Story"
+  },
+  {
+    "uri": "/sns-nl-milestones-listings/",
+    "name": "SNS NL Milestones Listings"
+  },
+  {
+    "uri": "/sns-nl-milestones-top-story/",
+    "name": "SNS NL Milestones Top Story"
+  },
+  {
+    "uri": "/special-promotions/",
+    "name": "SNS Special Promotions"
+  },
+  {
+    "uri": "/sports/",
+    "name": "SNS Sports"
+  },
+  {
+    "uri": "/sports/wittenberg-tigers/",
+    "name": "SNS Wittenberg Tigers"
+  },
+  {
+    "uri": "/subscription-specials/",
+    "name": "SNS Subscription Specials"
+  },
+  {
+    "uri": "/traffic/",
+    "name": "Traffic"
+  },
+  {
+    "uri": "/weather/",
+    "name": "SNS Weather"
+  },
+  {
+    "uri": "/wrap-ancestry/",
+    "name": "Wrap - Ancestry"
+  },
+  {
+    "uri": "/wrap-legacy/",
+    "name": "Wrap - Legacy"
+  },
+  {
+    "uri": "/wrap-transparensee-things-to-do/",
+    "name": "Wrap - Things to Do"
+  },
+  {
+    "uri": "/ads.txt",
+    "name": "ads.txt"
+  },
+  {
+    "uri": "/app-ads.txt",
+    "name": "app-ads.txt"
+  },
+  {
+    "uri": "/error/404/",
+    "name": "/error/404/"
+  },
+  {
+    "uri": "/oall-nl-coronavirus-update-local-updates/",
+    "name": "OALL NL Coronavirus Update Local Updates"
+  },
+  {
+    "uri": "/oall-nl-coronavirus-update-national-headlines/",
+    "name": "OALL NL Coronavirus Update National Headlines"
+  },
+  {
+    "uri": "/staff/",
+    "name": "Staff"
+    }
+]

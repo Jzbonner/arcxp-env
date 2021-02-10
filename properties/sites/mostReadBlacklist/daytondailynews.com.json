@@ -1,0 +1,666 @@
+[
+  {
+    "uri": "/",
+    "name": "Homepage"
+  },
+  {
+    "uri": "/blog/university-of-dayton-flyers/",
+    "name": "University of Dayton Flyers Blog"
+  },
+  {
+    "uri": "/business/",
+    "name": "DDN Business"
+  },
+  {
+    "uri": "/community/",
+    "name": "DDN Community: All"
+  },
+  {
+    "uri": "/community/beavercreek/",
+    "name": "DDN Community: Beavercreek"
+  },
+  {
+    "uri": "/community/bellbrook/",
+    "name": "DDN Community: Bellbrook"
+  },
+  {
+    "uri": "/community/brookville/",
+    "name": "DDN Community: Brookville"
+  },
+  {
+    "uri": "/community/centerville/",
+    "name": "DDN Community: Centerville"
+  },
+  {
+    "uri": "/community/clayton/",
+    "name": "DDN Community: Clayton"
+  },
+  {
+    "uri": "/community/dayton/",
+    "name": "DDN Community: Dayton"
+  },
+  {
+    "uri": "/community/englewood/",
+    "name": "DDN Community: Englewood"
+  },
+  {
+    "uri": "/community/fairborn/",
+    "name": "DDN Community: Fairborn"
+  },
+  {
+    "uri": "/community/huber-heights/",
+    "name": "DDN Community: Huber Heights"
+  },
+  {
+    "uri": "/community/kettering/",
+    "name": "DDN Community: Kettering"
+  },
+  {
+    "uri": "/community/lebanon/",
+    "name": "DDN Community: Lebanon"
+  },
+  {
+    "uri": "/community/miamisburg/",
+    "name": "DDN Community: Miamisburg"
+  },
+  {
+    "uri": "/community/moraine/",
+    "name": "DDN Community: Moraine"
+  },
+  {
+    "uri": "/community/oakwood/",
+    "name": "DDN Community: Oakwood"
+  },
+  {
+    "uri": "/community/springboro/",
+    "name": "DDN Community: Springboro"
+  },
+  {
+    "uri": "/community/trotwood/",
+    "name": "DDN Community: Trotwood"
+  },
+  {
+    "uri": "/community/troy/",
+    "name": "DDN Community: Troy"
+  },
+  {
+    "uri": "/community/vandalia/",
+    "name": "DDN Community: Vandalia"
+  },
+  {
+    "uri": "/community/waynesville/",
+    "name": "DDN Community: Waynesville"
+  },
+  {
+    "uri": "/community/west-carrollton/",
+    "name": "DDN Community: West Carrollton"
+  },
+  {
+    "uri": "/community/xenia/",
+    "name": "DDN Community: Xenia"
+  },
+  {
+    "uri": "/crime/",
+    "name": "DDN Crime"
+  },
+  {
+    "uri": "/ddn-alexa-latest-news/",
+    "name": "DDN Alexa: Latest News"
+  },
+  {
+    "uri": "/ddn-ap-content-list/",
+    "name": "DDN AP Content List"
+  },
+  {
+    "uri": "/ddn-app-business/",
+    "name": "DDN App: Business"
+  },
+  {
+    "uri": "/ddn-app-crime-law/",
+    "name": "DDN App: Crime & Law"
+  },
+  {
+    "uri": "/ddn-app-election-news/",
+    "name": "DDN App: Election News"
+  },
+  {
+    "uri": "/ddn-app-entertainment/",
+    "name": "DDN App: Entertainment"
+  },
+  {
+    "uri": "/ddn-app-food/",
+    "name": "DDN App: Food & Dining"
+  },
+  {
+    "uri": "/ddn-app-force-content/",
+    "name": "DDN App: Force Content Query"
+  },
+  {
+    "uri": "/ddn-app-forced-content/",
+    "name": "DDN App: Force Content Section"
+  },
+  {
+    "uri": "/ddn-app-latest-news-hp/",
+    "name": "DDN App: Latest News (HP)"
+  },
+  {
+    "uri": "/ddn-app-life/",
+    "name": "DDN App: Lifestyles"
+  },
+  {
+    "uri": "/ddn-app-nation-world/",
+    "name": "DDN App: Nation & World"
+  },
+  {
+    "uri": "/ddn-app-news/",
+    "name": "DDN App: All News"
+  },
+  {
+    "uri": "/ddn-app-ohio-news/",
+    "name": "DDN App: Ohio News"
+  },
+  {
+    "uri": "/ddn-app-politics/",
+    "name": "DDN App: Politics"
+  },
+  {
+    "uri": "/ddn-app-sports/",
+    "name": "DDN App: Sports"
+  },
+  {
+    "uri": "/ddn-app-sports-bengals/",
+    "name": "DDN App: Bengals"
+  },
+  {
+    "uri": "/ddn-app-sports-browns/",
+    "name": "DDN App: Browns"
+  },
+  {
+    "uri": "/ddn-app-sports-dragons/",
+    "name": "DDN App: Dayton Dragons"
+  },
+  {
+    "uri": "/ddn-app-sports-highschool/",
+    "name": "DDN App: HS Sports"
+  },
+  {
+    "uri": "/ddn-app-sports-osu/",
+    "name": "DDN App: OSU"
+  },
+  {
+    "uri": "/ddn-app-sports-reds/",
+    "name": "DDN App: Reds"
+  },
+  {
+    "uri": "/ddn-app-sports-ud/",
+    "name": "DDN App: UD Flyers"
+  },
+  {
+    "uri": "/ddn-app-sports-wsu/",
+    "name": "DDN App: WSU Raiders"
+  },
+  {
+    "uri": "/ddn-nl-afternoon-update-bottom-left/",
+    "name": "DDN NL Afternoon Update Bottom left"
+  },
+  {
+    "uri": "/ddn-nl-afternoon-update-bottom-right/",
+    "name": "DDN NL Afternoon Update Bottom Right"
+  },
+  {
+    "uri": "/ddn-nl-afternoon-update-headlines/",
+    "name": "DDN NL Afternoon Update Headlines"
+  },
+  {
+    "uri": "/ddn-nl-afternoon-update-top-story/",
+    "name": "DDN NL Afternoon Update Top Story"
+  },
+  {
+    "uri": "/ddn-nl-b2b-business-headlines/",
+    "name": "DDN NL Business Newsletter Headlines"
+  },
+  {
+    "uri": "/ddn-nl-b2b-business-national/",
+    "name": "DDN NL Business newsletter national"
+  },
+  {
+    "uri": "/ddn-nl-daily-headlines-business/",
+    "name": "DDN NL Daily Headlines Business"
+  },
+  {
+    "uri": "/ddn-nl-daily-headlines-coronavirus-5-things/",
+    "name": "DDN NL Daily Headlines Coronavirus 5 things"
+  },
+  {
+    "uri": "/ddn-nl-daily-headlines-feature-story/",
+    "name": "DDN NL Daily Headlines Feature Story"
+  },
+  {
+    "uri": "/ddn-nl-daily-headlines-more-headlines/",
+    "name": "DDN NL Daily Headlines More Headlines"
+  },
+  {
+    "uri": "/ddn-nl-daily-headlines-sports/",
+    "name": "DDN NL Daily Headlines Sports"
+  },
+  {
+    "uri": "/ddn-nl-daily-headlines-top-story/",
+    "name": "DDN NL Daily Headlines Top Story"
+  },
+  {
+    "uri": "/ddn-nl-daily-sports-automatic/",
+    "name": "DDN NL Daily Sports Automatic"
+  },
+  {
+    "uri": "/ddn-nl-daily-sports-curated-feature-story/",
+    "name": "DDN NL Daily Sports Curated Feature Story"
+  },
+  {
+    "uri": "/ddn-nl-daily-sports-curated-game-related-story/",
+    "name": "DDN NL Daily Sports Curated Game Related Story"
+  },
+  {
+    "uri": "/ddn-nl-daily-sports-curated-game-story/",
+    "name": "DDN NL Daily Sports Curated Game Story"
+  },
+  {
+    "uri": "/ddn-nl-daily-sports-curated-latest/",
+    "name": "DDN NL Daily Sports Curated Latest"
+  },
+  {
+    "uri": "/ddn-nl-education-weekly-headlines/",
+    "name": "DDN NL Education Weekly Headlines"
+  },
+  {
+    "uri": "/ddn-nl-evening-read-local-news/",
+    "name": "DDN NL Evening Read Local News"
+  },
+  {
+    "uri": "/ddn-nl-evening-read-sports/",
+    "name": "DDN NL Evening Read Sports"
+  },
+  {
+    "uri": "/ddn-nl-flyers-complete-coverage/",
+    "name": "DDN NL Flyers Complete Coverage"
+  },
+  {
+    "uri": "/ddn-nl-flyers-photos-and-videos/",
+    "name": "DDN NL Flyers Photos and Videos"
+  },
+  {
+    "uri": "/ddn-nl-flyers-top-story/",
+    "name": "DDN NL Flyers Top Story"
+  },
+  {
+    "uri": "/ddn-nl-high-school-sports-more-headlines/",
+    "name": "DDN NL High School Sports More Headlines"
+  },
+  {
+    "uri": "/ddn-nl-high-school-sports-top-story/",
+    "name": "DDN NL High School Sports Top Story"
+  },
+  {
+    "uri": "/ddn-nl-midday-stories/",
+    "name": "DDN NL Midday Stories"
+  },
+  {
+    "uri": "/ddn-nl-milestones-listings/",
+    "name": "DDN NL Milestones Listings"
+  },
+  {
+    "uri": "/ddn-nl-milestones-top-story/",
+    "name": "DDN NL Milestones Top Story"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-bottom-left/",
+    "name": "DDN NL Morning Briefing Bottom Left"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-bottom-right/",
+    "name": "DDN NL Morning Briefing Bottom Right"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-coronavirus/",
+    "name": "DDN NL Morning Briefing Coronavirus"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-headlines/",
+    "name": "DDN NL Morning Briefing Headlines"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-photo-of-the-day-weekdays/",
+    "name": "DDN NL Morning Briefing Photo of the Day Weekdays"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-saturday-icymi-stories/",
+    "name": "DDN NL Morning Briefing Saturday ICYMI Stories"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-saturday-top-story/",
+    "name": "DDN NL Morning Briefing Saturday Top Story"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-sunday-bottom-left/",
+    "name": "DDN NL Morning Briefing Sunday Bottom Left"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-sunday-bottom-right/",
+    "name": "DDN NL Morning Briefing Sunday Bottom Right"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-sunday-photo-of-the-day/",
+    "name": "DDN NL Morning Briefing Sunday Photo of the Day"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-sunday-top-stories/",
+    "name": "DDN NL Morning Briefing Sunday Top Stories"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-weather/",
+    "name": "DDN NL Morning Briefing Weather"
+  },
+  {
+    "uri": "/ddn-nl-morning-briefing-weekday-top-stories/",
+    "name": "DDN NL Morning Briefing Weekday Top Stories"
+  },
+  {
+    "uri": "/ddn-nl-ohio-politics-top-story/",
+    "name": "DDN NL Ohio Politics Top Story"
+  },
+  {
+    "uri": "/ddn-nl-ohio-politics-watching/",
+    "name": "DDN NL Ohio Politics Watching"
+  },
+  {
+    "uri": "/ddn-nl-raider-up-more-headlines/",
+    "name": "DDN NL Raider Up More Headlines"
+  },
+  {
+    "uri": "/ddn-nl-raider-up-top-story/",
+    "name": "DDN NL Raider Up Top Story"
+  },
+  {
+    "uri": "/ddn-nl-reds-connection-more-headlines/",
+    "name": "DDN NL Reds Connection More Headlines"
+  },
+  {
+    "uri": "/ddn-nl-reds-connection-top-story/",
+    "name": "DDN NL Reds Connection Top Story"
+  },
+  {
+    "uri": "/ddn-nl-wright-patt-friday/",
+    "name": "DDN NL Wright Patt Friday"
+  },
+  {
+    "uri": "/ddn-nl-wright-patt-monday/",
+    "name": "DDN NL Wright Patt Monday"
+  },
+  {
+    "uri": "/ddn-nl-wright-patt-thursday/",
+    "name": "DDN NL Wright Patt Thursday"
+  },
+  {
+    "uri": "/ddn-nl-wright-patt-tuesday/",
+    "name": "DDN NL Wright Patt Tuesday"
+  },
+  {
+    "uri": "/ddn-nl-wright-patt-wednesday/",
+    "name": "DDN NL Wright Patt Wednesday"
+  },
+  {
+    "uri": "/education/",
+    "name": "DDN Education"
+  },
+  {
+    "uri": "/elections/",
+    "name": "DDN Elections"
+  },
+  {
+    "uri": "/foodrelief/",
+    "name": "DDN Food Relief"
+  },
+  {
+    "uri": "/homepage",
+    "name": "DDN Homepage"
+  },
+  {
+    "uri": "/inspire-dayton/",
+    "name": "Inspire Dayton"
+  },
+  {
+    "uri": "/investigations/",
+    "name": "DDN Investigations"
+  },
+  {
+    "uri": "/latest-headlines-list/",
+    "name": "DDN Latest Headlines List"
+  },
+  {
+    "uri": "/lifestyles/health/",
+    "name": "DDN Health"
+  },
+  {
+    "uri": "/local/",
+    "name": "DDN Local News"
+  },
+  {
+    "uri": "/local/oregon-district-shooting/",
+    "name": "DDN Oregon District Shooting"
+  },
+  {
+    "uri": "/military/",
+    "name": "DDN Military"
+  },
+  {
+    "uri": "/native/",
+    "name": "Nativo Landing Page"
+  },
+  {
+    "uri": "/news/",
+    "name": "DDN News"
+  },
+  {
+    "uri": "/news/local/sports-scores-pro-college-and-high-school/",
+    "name": "Sports Scores - Scorestream"
+  },
+  {
+    "uri": "/oall-nl-obits-top-story/",
+    "name": "OALL NL Obits Top Story"
+  },
+  {
+    "uri": "/obituaries/",
+    "name": "DDN Obituaries"
+  },
+  {
+    "uri": "/ohio/",
+    "name": "DDN Ohio News"
+  },
+  {
+    "uri": "/path-forward/",
+    "name": "DDN Path Forward"
+  },
+  {
+    "uri": "/politics/",
+    "name": "DDN Politics"
+  },
+  {
+    "uri": "/robots.txt",
+    "name": "DDN Robots.txt"
+  },
+  {
+    "uri": "/rss-ddn-business/",
+    "name": "RSS DDN Business"
+  },
+  {
+    "uri": "/section-template-do-not-publish/",
+    "name": "SECTION TEMPLATE"
+  },
+  {
+    "uri": "/some-rando-test-page-31324/",
+    "name": "test"
+  },
+  {
+    "uri": "/special-promotions/",
+    "name": "DDN Special Promotions"
+  },
+  {
+    "uri": "/sports/",
+    "name": "DDN Sports"
+  },
+  {
+    "uri": "/sports/dayton-dragons/",
+    "name": "DDN Dayton Dragons"
+  },
+  {
+    "uri": "/sports/university-of-dayton-flyers/",
+    "name": "DDN University of Dayton Flyers"
+  },
+  {
+    "uri": "/sports/wright-state-university-raiders/",
+    "name": "DDN Wright State University Raiders"
+  },
+  {
+    "uri": "/subscription-specials/",
+    "name": "DDN Subscription Specials"
+  },
+  {
+    "uri": "/test/",
+    "name": "test"
+  },
+  {
+    "uri": "/traffic/",
+    "name": "Traffic"
+  },
+  {
+    "uri": "/travel-list/",
+    "name": "DDN Travel List"
+  },
+  {
+    "uri": "/weather/",
+    "name": "DDN Weather"
+  },
+  {
+    "uri": "/wrap-ancestry/",
+    "name": "Wrap - Ancestry"
+  },
+  {
+    "uri": "/wrap-legacy/",
+    "name": "Wrap - Legacy"
+  },
+  {
+    "uri": "/wrap-monster/",
+    "name": "Wrap - Monster"
+  },
+  {
+    "uri": "/wrap-mycapture/",
+    "name": "Wrap - MyCapture"
+  },
+  {
+    "uri": "/wrap-scorestream/",
+    "name": "Wrap - Scorestream"
+  },
+  {
+    "uri": "/wrap-stats/",
+    "name": "Wrap - Stats"
+  },
+  {
+    "uri": "/wrap-upickem/",
+    "name": "Wrap - Upickem"
+  },
+  {
+    "uri": "/back-to-school/",
+    "name": "DDN & DCOM Back to School"
+  },
+  {
+    "uri": "/news/local/oregon-district-shooting/",
+    "name": "Oregon District Mass Shooting"
+  },
+  {
+    "uri": "/podcasts/what-had-happened-was/",
+    "name": "What Had Happened Was Podcast List"
+  },
+  {
+    "uri": "/search/",
+    "name": "dayton / ddn search"
+  },
+  {
+    "uri": "/sports/miami-university-redhawks/",
+    "name": "Miami University Redhawks"
+  },
+  {
+    "uri": "/blog/cincinnati-bengals/",
+    "name": "Cincinnati Bengals Blog"
+  },
+  {
+    "uri": "/blog/cincinnati-reds/",
+    "name": "Cincinnati Reds Blog"
+  },
+  {
+    "uri": "/blog/hartman/",
+    "name": "Hartman Blog"
+  },
+  {
+    "uri": "/blog/jamie-dupree/",
+    "name": "Jamie Dupree Blog"
+  },
+  {
+    "uri": "/blog/ohio-politics/",
+    "name": "Ohio Politics Blog"
+  },
+  {
+    "uri": "/cars/",
+    "name": "Cars"
+  },
+  {
+    "uri": "/entertainment/",
+    "name": "Entertainment"
+  },
+  {
+    "uri": "/food/",
+    "name": "Food & Dining"
+  },
+  {
+    "uri": "/homes/",
+    "name": "Homes"
+  },
+  {
+    "uri": "/ideas-voices/",
+    "name": "DDN Ideas & Voices"
+  },
+  {
+    "uri": "/jobs/",
+    "name": "Jobs"
+  },
+  {
+    "uri": "/lifestyles/",
+    "name": "Lifestyles"
+  },
+  {
+    "uri": "/sports/cincinnati-bengals/",
+    "name": "Cincinnati Bengals"
+  },
+  {
+    "uri": "/sports/cincinnati-reds/",
+    "name": "Cincinnati Reds"
+  },
+  {
+    "uri": "/sports/cleveland-browns/",
+    "name": "Cleveland Browns"
+  },
+  {
+    "uri": "/sports/high-school/",
+    "name": "High School Sports"
+  },
+  {
+    "uri": "/sports/ohio-state-buckeyes/",
+    "name": "Ohio State Buckeyes"
+  },
+  {
+    "uri": "/coronavirus/",
+    "name": "Coronavirus"
+  },
+  {
+    "uri": "/nation-world/",
+    "name": "DDN & SNS Nation/World"
+  }
+]

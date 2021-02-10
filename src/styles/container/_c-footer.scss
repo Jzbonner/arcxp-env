@@ -1,10 +1,12 @@
 @import "../base/mixins";
 @import "../base/breakpoints";
+@import "../base/fonts";
 
 // default styles for footer elements
 
 .c-footer {
   background-color: #f1f1f2;
+  padding-bottom: 10px;
 
   li {
     list-style: none;
@@ -12,7 +14,7 @@
   }
 
   a {
-    color: #2e81b7;
+    color: #212126;
     cursor: pointer;
   }
 
@@ -144,9 +146,10 @@
     @include text-styles(1rem, 1, "Gordita");
 
     font-weight: 500;
-    border-top: 1px solid #ccc;
-    color: #545454;
-    padding: 15px 0;
+    color: #000;
+    margin-bottom: 30px;
+    border-left: 1.4px solid #cfcfcf;
+    margin-left: 15px;
 
     @include breakpoint(desktop-sm) {
       border-top: none;
@@ -162,60 +165,38 @@
       border-top: none;
     }
 
-    &.is-visible-mobile {
-      padding-bottom: 0;
-
-      .menu-header .menu-arrow {
-        transform: scale(.9) translate(0, 1px);
-      }
-
-      .menu-body {
-        display: block;
-        margin-top: 15px;
-        padding-top: 15px;
-        border-top: 1px solid #ccc;
-
-        @include breakpoint(desktop-sm) {
-          border: none;
-        }
-      }
+    &:last-child {
+      margin-bottom: 0;
     }
 
     .menu-header {
+      @include text-styles(.875rem, .85, "Gordita-Bold");
+
+      font-weight: 800;
       max-width: 1600px;
-      padding: 0 20px;
+      padding: 0 20px 15px 10px;
       margin: 0 auto;
+      text-transform: uppercase;
 
       @include breakpoint(desktop-sm) {
         padding: 0;
       }
-
-      .menu-arrow {
-        float: right;
-        transform: rotate(180deg) scale(.9) translate(0, -1px);
-
-        @include breakpoint(desktop-sm) {
-          display: none;
-        }
-      }
     }
 
     .menu-body {
-      display: none;
+      display: block;
       max-width: 1600px;
-      padding: 0 20px;
+      padding: 0 20px 0 10px;
 
       @include breakpoint(desktop-sm) {
-        display: block;
         margin-top: 1.25rem;
         padding: 0;
       }
 
       .menu-body-links {
-        @include text-styles(.85rem, 1.25, "Gordita");
+        @include text-styles(.85rem, 1.57, "Gordita");
 
         color: #2e81b7;
-        margin: 0 auto 1.25rem;
 
         @include breakpoint(desktop-sm) {
 

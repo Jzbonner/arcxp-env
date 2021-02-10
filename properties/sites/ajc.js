@@ -1,12 +1,14 @@
 import adsBidding from './adsBidding/ajc.com.json';
 import adsTxt from './adstxt/ajc.com.json';
 import appAdsTxt from './appadstxt/ajc.com.json';
+import mostReadBlacklist from './mostReadBlacklist/ajc.com.json';
 
 export default {
   defaultSiteTitle: 'AJC',
   fbPagesId: '13310147298',
   fbAppId: '366816260017522',
   siteTag: 'ajc',
+  siteFullname: 'Atlanta Journal-Constitution',
   cdnOrg: 'ajc',
   cdnSite: 'ajc',
   dfpId: '21849707860',
@@ -22,6 +24,7 @@ export default {
   breakingLiveVideoID_sandbox: 'PI5DD6OFEVFMHNDHZKI3XU7SSQ',
   domainTwitterURL: 'https://twitter.com/ajc',
   domainFacebookURL: 'https://facebook.com/ajc',
+  domainBlockerTracking: 'https://rtwa.ajc.com',
   metrics: {
     siteID: 'ajc',
     siteMetro: 'ga: atlanta',
@@ -131,5 +134,9 @@ export default {
     prod: {
       cmsId: 2528054,
     },
+  },
+  chartbeat: {
+    blacklist: mostReadBlacklist,
+    host: 'ajc.com',
   },
 };

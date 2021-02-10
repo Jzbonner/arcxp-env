@@ -1,12 +1,14 @@
 import adsBidding from './adsBidding/journal-news.com.json';
 import adsTxt from './adstxt/journal-news.com.json';
 import appAdsTxt from './appadstxt/journal-news.com.json';
+import blacklist from './mostReadBlacklist/journal-news.com.json';
 
 export default {
   dfp_id: 21849707860,
   fbPagesId: '210895530407',
   fbAppId: '1747383545520530',
   siteName: 'journal-news',
+  siteFullname: 'Journal-News',
   cdnOrg: 'coxohio',
   cdnSite: 'journal-news',
   siteDomainURL: 'https://www.journal-news.com',
@@ -35,6 +37,7 @@ export default {
   breakingLiveVideoID: '52EEYZZB6BDYZDOFFNPJBO2ZJA',
   breakingNewsID_sandbox: 'BYPUKOTQLRAMLDYR5C3XLJOVZQ',
   breakingLiveVideoID_sandbox: 'A4KCYNGXMBGHRF6JABDFEHFFCE',
+  domainBlockerTracking: 'https://rtwa.journal-news.com',
   featuredVideoPlayerRules: {
     startPlaying: true,
     muteON: true,
@@ -113,7 +116,11 @@ export default {
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
+      allowMeter: true,
       pubParam: 'JN',
+      activateUrl: 'https://test-subscribe.journal-news.com/',
+      activateAmpPaywallUrl: 'https://test-subscribe.journal-news.com/startgwamp',
+      activateAmpInlineUrl: 'https://test-subscribe.journal-news.com/startamp',
     },
     prod: {
       isEnabled: true,
@@ -125,6 +132,9 @@ export default {
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
       pubParam: 'JN',
+      activateUrl: 'https://subscribe.journal-news.com/',
+      activateAmpPaywallUrl: 'https://subscribe.journal-news.com/startgwamp',
+      activateAmpInlineUrl: 'https://subscribe.journal-news.com/startamp',
     },
   },
   video: {
@@ -134,5 +144,9 @@ export default {
     prod: {
       cmsId: 2536851,
     },
+  },
+  chartbeat: {
+    blacklist,
+    host: 'journal-news.com',
   },
 };

@@ -21,7 +21,6 @@
 
 .c-nav {
   margin: 0 auto;
-  background-color: #f8f8f8;
 
   @include breakpoint(desktop-sm) {
     width: 100%;
@@ -60,10 +59,6 @@
   @include breakpoint(desktop-sm) {
     padding: 0;
   }
-}
-
-.c-articleContent {
-  padding-top: 0;
 }
 
 .c-clear-both:empty {

@@ -3,13 +3,10 @@ import { useContent } from 'fusion:content';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import footerFilter from '../../../../content/filters/bottom-nav';
-import '../../../../src/styles/container/_c-footer.scss';
-import menuArrow from '../../../../resources/images/menu-arrow.svg';
-import facebookIcon from '../../../../resources/images/facebook-icon.svg';
-import twitterIcon from '../../../../resources/images/twitter-icon.svg';
-import rightArrow from '../../../../resources/images/right-arrow.svg';
 import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
+import ConnextBottomNavSubPromo from '../ConnextBottomNavSubPromo/default';
+import '../../../../src/styles/container/_c-footer.scss';
 
 
 const Footer = () => {
@@ -17,23 +14,20 @@ const Footer = () => {
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
-  let twitterURL = '';
-  let facebookURL = '';
 
   const siteNavigation = useContent({
     source: 'site-api',
     query: {
-      hierarchy: 'BottomNav',
+      hierarchy: 'BottomNavRedesign2021',
     },
     filter: footerFilter,
   });
 
   const {
-    footerLogo, siteName, cdnSite, cdnOrg,
+    logoRedesign, siteName, cdnSite, cdnOrg,
   } = getProperties(arcSite);
 
   const { children: linkCategories } = siteNavigation || {};
-  const [row1 = []] = linkCategories || [];
 
   const [openMenu, setOpenMenu] = useState('');
 
@@ -45,15 +39,6 @@ const Footer = () => {
     }
   };
 
-  if (siteNavigation && siteNavigation.children && siteNavigation.children[5]) {
-    if (siteNavigation.children[5].children[0] && siteNavigation.children[5].children[0].url) {
-      twitterURL = siteNavigation.children[5].children[0].url;
-    }
-    if (siteNavigation.children[5].children[1] && siteNavigation.children[5].children[1].url) {
-      facebookURL = siteNavigation.children[5].children[1].url;
-    }
-  }
-
   return (
     <footer className="c-footer b-clear-both">
       <div className="logo-row">
@@ -61,15 +46,12 @@ const Footer = () => {
           <a href="/">
             <img
               className={`footer-logo ${siteName.toLowerCase()}`}
-              src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${footerLogo}`)}`} alt="logo"
+              src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoRedesign}`)}`} alt="logo"
             />
           </a>
         </div>
         <div className="col">
-          <a href={row1 && row1.site && row1.site.site_url} className="newsletter-signup">
-            <p>{row1.navigation && row1.navigation.nav_title}</p>
-            <img src={rightArrow} alt="" />
-          </a>
+          <ConnextBottomNavSubPromo />
         </div>
       </div>
       <ul className="menu-row">
@@ -85,7 +67,6 @@ const Footer = () => {
                 >
                   <div className="menu-header">
                     {parentListTitle}
-                    <img className="menu-arrow" src={menuArrow} alt="" />
                   </div>
 
                   <ul className="menu-body">
@@ -107,21 +88,6 @@ const Footer = () => {
             }
             return null;
           })}
-        <li className="menu social-media">
-          <span className="header-menu">Follow</span>
-          <ul className="social-media-icons">
-            <li>
-              <a href={facebookURL}>
-                <img src={facebookIcon} alt="" />
-              </a>
-            </li>
-            <li>
-              <a href={twitterURL}>
-                <img src={twitterIcon} alt="" />
-              </a>
-            </li>
-          </ul>
-        </li>
       </ul>
     </footer>
   );
