@@ -48,7 +48,6 @@ export default {
   adsPath: 'atlanta_np/ajc_web_default',
   adsTxt,
   appAdsTxt,
-  nativoMoapTag: 'https://amp.ajc.com/amp/ntv',
   taboola: {
     dataPublisher: 'cox-atlantajournal-constitution',
     taboolaStoryID: 'taboola-ajc-custom-feed',

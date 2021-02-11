@@ -85,7 +85,6 @@ export default {
   appleIcon: '/resources/icons/appleTouch/ohio/JN-AppleTouch-152x152-2.png',
   adsTxt,
   appAdsTxt,
-  nativoMoapTag: 'https://amp.journal-news.com/amp/ntv',
   ads: {
     sandbox: {
       adsBidding,
