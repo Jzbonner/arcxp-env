@@ -84,7 +84,6 @@ export default {
   appleIcon: '/resources/icons/appleTouch/ohio/D-AppleTouch-152x152-2.png',
   adsTxt,
   appAdsTxt,
-  nativoMoapTag: 'https://amp.dayton.com/amp/ntv',
   ads: {
     sandbox: {
       adsBidding,
