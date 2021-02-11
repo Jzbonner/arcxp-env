@@ -56,7 +56,7 @@ const BlockDetectionScript = () => {
           let clientId = '';
           const connextLS = window.localStorage.getItem('${connextLSLookup}');
           if (window._gat) {
-            visitorId = _gat._getTrackerByName()._visitCode();
+            visitorId = window._gat._getTrackerByName && window._gat._visitCode ? window._gat._getTrackerByName()._visitCode() : '';
           }
           if (connextLS) {
             const { CustomerRegistrationId } = JSON.parse(connextLS);

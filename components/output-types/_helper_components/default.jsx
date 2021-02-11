@@ -52,9 +52,9 @@ const RenderOutputType = (props) => {
         <SiteMeta />
         <GoogleStructuredData />
         <AmpRelLink type={type} url={articleURL} noAmp={noAmp} />
-        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`}/>
-        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`}/>
-        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`}/>
+        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} />
+        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} />
+        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`} />
         <CssLinks />
         {includeGtm && (
           <>
@@ -76,10 +76,6 @@ const RenderOutputType = (props) => {
         <Libs />
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
-        {/* 1045 bait START */}
-        {outputType !== 'amp' ? <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/src/js/blocker/analytics-corp.js`)}`}></script> : null}
-        {outputType !== 'amp' ? <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/src/js/blocker/prebid-ads-bt.js`)}`}></script> : null}
-        {/* 1045 bait END */}
         {currentSite && <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)}`} />}
         <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -105,6 +101,10 @@ const RenderOutputType = (props) => {
             <ConnextInit triggerLoginModal={outputType && outputType === 'login'} />
           </>
         )}
+        {/* 1045 bait START */}
+        {outputType !== 'amp' ? <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/blocker/analytics-corp.js`)}`}></script> : null}
+        {outputType !== 'amp' ? <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/blocker/prebid-ads-bt.js`)}`}></script> : null}
+        {/* 1045 bait END */}
         {outputType !== 'amp' ? <DetectAdBlocker /> : null}
         <div id="fb-root"></div>
         <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
