@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import SiteMeta from '../../_helper_components/global/siteMeta/default';
-import SiteMetrics from '../../_helperw_components/global/siteMetrics/default';
+import SiteMetrics from '../../_helper_components/global/siteMetrics/default';
 import ConnextInit from '../../_helper_components/global/connext/default.jsx';
 import NativoScripts from '../../_helper_components/article/nativo/nativoScripts';
 import checkTags from '../../layouts/_helper_functions/checkTags';
@@ -76,10 +76,10 @@ const RenderOutputType = (props) => {
         <Libs />
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
-        {/* 1045 block detections START */}
+        {/* 1045 bait START */}
         {outputType !== 'amp' ? <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/src/js/blocker/analytics-corp.js`)}`}></script> : null}
         {outputType !== 'amp' ? <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/src/js/blocker/prebid-ads-bt.js`)}`}></script> : null}
-        {/* 1045 block detections END */}
+        {/* 1045 bait END */}
         {currentSite && <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)}`} />}
         <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
