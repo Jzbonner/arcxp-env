@@ -2,13 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
+import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import './default.scss';
 
 const Columnist = (customFields = {}) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    customFields: { content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {} },
+    customFields: {
+      content: { contentService = 'collections-api', contentConfigValues = { id: '' } } = {}, title = 'Columnists', moreURL = '',
+    },
   } = customFields;
 
   const { size } = contentConfigValues;
@@ -26,7 +29,7 @@ const Columnist = (customFields = {}) => {
   if (Array.isArray(data)) {
     return (
       <div className="c-columnistFeature b-margin-bottom-d30-m20">
-        <h2 className="c-title">Columnists</h2>
+        <FeatureTitle title={title} moreURL={moreURL} />
         <ul className="c-columnistList">
           {data.map((story, idx) => {
             const {
@@ -61,6 +64,13 @@ Columnist.propTypes = {
   customFields: PropTypes.shape({
     content: PropTypes.contentConfig('collections').tag({
       name: 'Content',
+    }),
+    title: PropTypes.string.tag({
+      name: 'Columnists Title',
+      defaultValue: 'Columnists',
+    }),
+    moreURL: PropTypes.string.tag({
+      name: 'More URL',
     }),
   }),
 };
