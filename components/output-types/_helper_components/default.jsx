@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import SiteMeta from '../../_helper_components/global/siteMeta/default';
-import SiteMetrics from '../../_helper_components/global/siteMetrics/default';
+import SiteMetrics from '../../_helperw_components/global/siteMetrics/default';
 import ConnextInit from '../../_helper_components/global/connext/default.jsx';
 import NativoScripts from '../../_helper_components/article/nativo/nativoScripts';
 import checkTags from '../../layouts/_helper_functions/checkTags';
@@ -76,6 +76,10 @@ const RenderOutputType = (props) => {
         <Libs />
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
+        {/* 1045 block detections START */}
+        {outputType !== 'amp' ? <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/src/js/blocker/analytics-corp.js`)}`}></script> : null}
+        {outputType !== 'amp' ? <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/src/js/blocker/prebid-ads-bt.js`)}`}></script> : null}
+        {/* 1045 block detections END */}
         {currentSite && <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)}`} />}
         <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -101,7 +105,7 @@ const RenderOutputType = (props) => {
             <ConnextInit triggerLoginModal={outputType && outputType === 'login'} />
           </>
         )}
-        {outputType === 'default' ? <DetectAdBlocker /> : null}
+        {outputType !== 'amp' ? <DetectAdBlocker /> : null}
         <div id="fb-root"></div>
         <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
         {devconActive && <script id="ns_script_dc" data-key={devconKey || '2a1556f7-d788-4b8b-943a-dd77f5f0d472'} data-e="5" src="//includemodal.global.ssl.fastly.net/sp.js" type="text/javascript"></script>}

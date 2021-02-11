@@ -80,10 +80,44 @@ const BlockDetectionScript = () => {
 
           return headers;
         };
+        const isTrackingOn = () => {
+          console.log('tracking func is running');
+          console.log('window.canAnalyze', window.canAnalyze);
+          if (typeof window.canAnalyze === 'undefined') {
+            return false;
+          }
+          return true;
+        };
+        const areAdsOn = () => {
+          console.log('ad checking func is running');
+          console.log('window.canRunAds', window.canRunAds);
+          if (typeof window.canRunAds === 'undefined') {
+            return false;
+          }
+          return true;
+        };
+        const getAdBlockerState = (baitElementDisplay) => {
+          let adBlockerOn = false;
+
+          if (baitElementDisplay === 'none' || !areAdsOn()) {
+            adBlockerOn = true;
+          } 
+        
+          return adBlockerOn;
+        };
+        const getPrivacyBlockerState = () => {
+          let isTrackingBlocked = false;
+
+          if (typeof window.google_tag_manager === 'undefined' || !isTrackingOn()) {
+            isTrackingBlocked = true;
+          }
+
+          return isTrackingBlocked;
+        };
         window.addEventListener('connextConversationDetermined', () => {
             const baitElementDisplay = window.getComputedStyle(document.getElementById('ADS_2'), null).display;
-            const hasAdBlocker = baitElementDisplay === 'none' ? true : false;
-            const hasPrivacyBlocker = typeof window.google_tag_manager === 'undefined' ? true : false;
+            const hasAdBlocker = getAdBlockerState(baitElementDisplay);
+            const hasPrivacyBlocker = getPrivacyBlockerState();
             const hasPaywallBlocker = getUserPaywallBlockerState();
             if (hasAdBlocker || hasPrivacyBlocker || hasPaywallBlocker) {
               fetch('${domainBlockerTracking}', {
