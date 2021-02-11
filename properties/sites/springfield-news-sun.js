@@ -83,7 +83,6 @@ export default {
   favicon: '/resources/icons/favicons/Ohio/springfield-news-sun-favicon.ico',
   appleIcon: '/resources/icons/appleTouch/ohio/SNS-AppleTouch-152x152-2.png',
   adsTxt,
-  nativoMoapTag: 'https://amp.springfieldnewssun.com/amp/ntv',
   ads: {
     sandbox: {
       adsBidding,
