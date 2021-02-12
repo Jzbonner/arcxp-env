@@ -117,10 +117,44 @@ const SiteMetrics = ({ isAmp }) => {
               "pageNameStr": "",
               "pageUrlStr": "",
               "pageMainSection": "${topSection}",
-              "contentPaywallStatus": "${contentCode}"
+              "contentPaywallStatus": "${contentCode}",
+              "userData": {
+                "userProfileID": "AUTHDATA(RegistrationId)"
+              }
+            },
+            "triggers": {
+              "accessLoginStarted": {
+                "on": "access-login-loginEmbedded-started",
+                "request": "event",
+                "vars": {
+                  "event_name": "loginEvent_start",
+                  "event_category": "user registration",
+                  "event_action": "login start",
+                  "event_label": "log in"
+                }
+              },
+              "accessLoginSuccess": {
+                "on": "access-login-loginEmbedded-success",
+                "request": "event",
+                "vars": {
+                  "event_name": "loginEvent_complete",
+                  "event_category": "user registration",
+                  "event_action": "login complete",
+                  "event_label": "log in"
+                }
+              },
+              "accessLoginSuccess": {
+                "on": "access-login-logoutEmbedded-success",
+                "request": "event",
+                "vars": {
+                  "event_name": "loginEvent_logout",
+                  "event_category": "user registration",
+                  "event_action": "logout complete",
+                  "event_label": "log in"
+                }
               }
             }
-          `,
+          }`,
         }}></script>
     </amp-analytics>
     );
