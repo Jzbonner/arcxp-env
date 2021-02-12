@@ -29,7 +29,7 @@ const Copyright = () => {
     <div className="c-copyright">
       <div className="copyright">
         <div className="rights">
-          &copy; {year} <a href="/">{ajcName}.</a> <br /> All Rights Reserved. <br />
+          &copy; {year} {ajcName}. <br /> All Rights Reserved. <br />
         </div>
         By using this website, you accept the terms of our{' '}
         <div className="privacy">
