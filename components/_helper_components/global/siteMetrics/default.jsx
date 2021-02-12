@@ -125,7 +125,7 @@ const SiteMetrics = ({ isAmp }) => {
             "triggers": {
               "accessLoginStarted": {
                 "on": "access-login-loginEmbedded-started",
-                "request": "event",
+                "request": "35",
                 "vars": {
                   "event_name": "loginEvent_start",
                   "event_category": "user registration",
@@ -135,7 +135,7 @@ const SiteMetrics = ({ isAmp }) => {
               },
               "accessLoginSuccess": {
                 "on": "access-login-loginEmbedded-success",
-                "request": "event",
+                "request": "39",
                 "vars": {
                   "event_name": "loginEvent_complete",
                   "event_category": "user registration",
@@ -143,13 +143,23 @@ const SiteMetrics = ({ isAmp }) => {
                   "event_label": "log in"
                 }
               },
-              "accessLoginSuccess": {
-                "on": "access-login-logoutEmbedded-success",
-                "request": "event",
+              "accessLoginFailed": {
+                "on": "access-login-loginEmbedded-failed",
+                "request": "42",
                 "vars": {
-                  "event_name": "loginEvent_logout",
+                  "event_name": "loginEvent_failed",
                   "event_category": "user registration",
-                  "event_action": "logout complete",
+                  "event_action": "login failed",
+                  "event_label": "log in"
+                }
+              },
+              "accessLoginRejected": {
+                "on": "access-login-loginEmbedded-rejected",
+                "request": "43",
+                "vars": {
+                  "event_name": "loginEvent_aborted",
+                  "event_category": "user registration",
+                  "event_action": "login aborted",
                   "event_label": "log in"
                 }
               }
