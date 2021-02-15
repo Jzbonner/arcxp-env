@@ -64,7 +64,7 @@ const RelatedList = ({ taxonomy, uuid, isAmp = false }) => {
     <>
       {filteredData.length > 1 && !isAmp
         ? <div className="c-relatedList b-margin-bottom-d40-m20">
-          <h1 className="title">In Other News</h1>
+          <h3 className="title">In Other News</h3>
           <div className="c-homeListContainer two-columns left-photo-display-class">
             {filteredData && filteredData.map((el, i) => {
               if (i < limit) {
