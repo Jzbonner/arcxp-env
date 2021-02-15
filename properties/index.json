@@ -56,14 +56,16 @@
       "adsA9Id": "3970",
       "adsPrebidEnabled": "false",
       "adsPrebidTimeout": "1500",
-      "prebidJs": "prebid3.23.0.js"
+      "prebidJs": "prebid3.23.0.js",
+      "adsBreakpoints": [1024, 768, 0]
     },
     "prod": {
       "adsA9Enabled": "false",
       "adsA9Id": "3970",
       "adsPrebidEnabled": "false",
       "adsPrebidTimeout": "1500",
-      "prebidJs": "prebid3.23.0.js"
+      "prebidJs": "prebid3.23.0.js",
+      "adsBreakpoints": [1024, 768, 0]
     }
   },
   "weatherLocationId": 348181,
