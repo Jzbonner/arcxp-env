@@ -102,10 +102,14 @@ const RenderOutputType = (props) => {
           </>
         )}
         {/* 1045 bait START */}
-        {outputType !== 'amp' ? <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/blocker/analytics-corp.js`)}`}></script> : null}
-        {outputType !== 'amp' ? <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/blocker/prebid-ads-bt.js`)}`}></script> : null}
+        {outputType !== 'amp' && (
+          <>
+            <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/blocker/analytics-corp.js`)}`}></script>
+            <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/blocker/prebid-ads-bt.js`)}`}></script>
+            <DetectAdBlocker />
+          </>
+        )}
         {/* 1045 bait END */}
-        {outputType !== 'amp' ? <DetectAdBlocker /> : null}
         <div id="fb-root"></div>
         <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
         {devconActive && <script id="ns_script_dc" data-key={devconKey || '2a1556f7-d788-4b8b-943a-dd77f5f0d472'} data-e="5" src="//includemodal.global.ssl.fastly.net/sp.js" type="text/javascript"></script>}
