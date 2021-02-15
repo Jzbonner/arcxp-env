@@ -1,9 +1,10 @@
 import React, {
   useState, useEffect, useLayoutEffect, useRef,
 } from 'react';
+import PropTypes from 'prop-types';
 import searchIcon from '../../../../../resources/icons/search.svg';
 
-const Search = () => {
+const Search = ({ isHeader }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isEditing, setEditingState] = useState(false);
   const [isTablet, setTabletState] = useState(false);
@@ -27,6 +28,14 @@ const Search = () => {
     e.preventDefault();
     window.location.href = `/search/?q=${searchTerm}`;
   };
+
+  if (isHeader) {
+    return (
+      <button onClick={e => e.target && handleSubmit(e)}type="submit" className="c-headerIcon">
+        <img className='search-icon' src={searchIcon} />
+      </button>
+    );
+  }
 
   const handleEnterPress = (e) => {
     if (e.keyCode === 13) handleSubmit();
@@ -66,7 +75,7 @@ const Search = () => {
   }, [isEditing]);
 
   return (
-    <li className='nav-search'>
+    <div className='nav-search'>
       <form onSubmit={e => e.target && handleSubmit(e)} className='search-form'>
         {
           isTablet && (
@@ -85,9 +94,13 @@ const Search = () => {
             src={searchIcon} />
         </button>
       </form>
-    </li>
+    </div>
 
   );
+};
+
+Search.propTypes = {
+  isHeader: PropTypes.bool,
 };
 
 export default Search;

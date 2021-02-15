@@ -99,7 +99,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   useWindowEvent('connextIsSubscriber', 'authenticated');
 
   return (
-    <div className={`${isSticky ? 'isSticky' : ''}`}>
+    <div className={`c-login ${isSticky ? 'isSticky' : ''}`}>
       {(userStateRef.current === 'logged-in'
       || userStateRef.current === 'authenticated') && (
         <IsAuthMenu

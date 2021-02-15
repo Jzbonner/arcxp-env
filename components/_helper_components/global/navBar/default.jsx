@@ -9,12 +9,15 @@ import Section from './section/default';
 import Logo from './logo/default';
 import DesktopNav from './desktopNav/default';
 import StickyNav from '../../article/stickyNav/default';
+import RedesignNavLinks from './redesignNavLinks/default';
 import AmpNavBar from './amp';
+import Weather from './weather/default';
 import '../../../../src/styles/base/_utility.scss';
 import '../../../../src/styles/container/_article-basic.scss';
 import '../../../../src/styles/container/_c-headerNav.scss';
 import BreakingNews from '../breakingNews/default';
 import Login from './login/default';
+import Search from './search/default';
 
 const NavBar = ({
   articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false,
@@ -34,7 +37,7 @@ const NavBar = ({
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    logoRedesign, logoHamburger, siteName, cdnSite, cdnOrg, siteNavHierarchy,
+    logoRedesign, logoHamburger, siteName, cdnSite, cdnOrg, siteNavHierarchy, weatherPageUrl,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
@@ -46,6 +49,18 @@ const NavBar = ({
     },
     filter: topNavFilter,
   });
+
+  const redesignSections = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'TopNavRedesign2021',
+    },
+    filter: topNavFilter,
+  });
+
+  const { children: redesignChildren } = redesignSections;
+
+  console.log(redesignSections);
 
   const setStickyMobileRef = (data) => {
     isMobileVisibilityRef.current = data;
@@ -130,24 +145,31 @@ const NavBar = ({
         ${stickyNavVisibility || hasWindowShade ? 'stickyActive' : ''}
         ${hasWindowShade ? 'above-shade' : ''}
         ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`}>
-        <div className={`b-flexRow b-flexCenter nav-logo
+        <div className={`c-logoAndLinks nav-logo
         ${(stickyNavVisibility || hasWindowShade) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
-          <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
-            && mobileMenuToggled) ? 'not-visible' : ''} ${siteName}`} ref={logoRef} >
-            <Logo
-              source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoRedesign}`)}`}
-              rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
-            />
+          <div className='c-topNavItems'>
+            <Weather weatherPageUrl={weatherPageUrl}/>
+            <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
+              && mobileMenuToggled) ? 'not-visible' : ''} ${siteName.toLowerCase()}`} ref={logoRef} >
+              <Logo
+                source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoRedesign}`)}`}
+                rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
+              />
+            </div>
+          <Login
+            isMobile={isMobile}
+          />
           </div>
           <div className='c-topNavLinks'>
             <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
               <div className='nav-flyout-button'></div>
             </div>
-          </div>
-          <Login
-            isMobile={isMobile}
-            isSticky={true}
-          />
+            <RedesignNavLinks
+              sections={redesignChildren}
+              arcSite={arcSite}
+              />
+            <Search isHeader={true}/>
+            </div>
         </div>
         <DesktopNav
           sections={sectionLi}
