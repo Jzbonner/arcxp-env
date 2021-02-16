@@ -39,7 +39,6 @@ const BlockDetectionScript = () => {
         };
         const generateEventString = ({ hasAdBlocker, hasPrivacyBlocker, hasPaywallBlocker}) => {
           let evtString = '';
-          console.log('abBlocker state', hasAdBlocker);
           if (hasAdBlocker) {
             evtString += 'AdBlocker';
           }
@@ -56,7 +55,7 @@ const BlockDetectionScript = () => {
           let clientId = '';
           const connextLS = window.localStorage.getItem('${connextLSLookup}');
           if (window._gat) {
-            visitorId = _gat._getTrackerByName()._visitCode();
+            visitorId = window._gat._getTrackerByName && window._gat._visitCode ? window._gat._getTrackerByName()._visitCode() : '';
           }
           if (connextLS) {
             const { CustomerRegistrationId } = JSON.parse(connextLS);
@@ -80,10 +79,36 @@ const BlockDetectionScript = () => {
 
           return headers;
         };
+        const isTrackingOn = () => {
+          if (typeof window.canAnalyze === 'undefined') {
+            return false;
+          }
+          return true;
+        };
+        const areAdsOn = () => {
+          if (typeof window.canRunAds === 'undefined') {
+            return false;
+          }
+          return true;
+        };
+        const getAdBlockerState = (baitElementDisplay) => {
+          let adBlockerOn = false;
+          if (baitElementDisplay === 'none' || !areAdsOn()) {
+            adBlockerOn = true;
+          } 
+          return adBlockerOn;
+        };
+        const getPrivacyBlockerState = () => {
+          let isTrackingBlocked = false;
+          if (typeof window.google_tag_manager === 'undefined' || !isTrackingOn()) {
+            isTrackingBlocked = true;
+          }
+          return isTrackingBlocked;
+        };
         window.addEventListener('connextConversationDetermined', () => {
             const baitElementDisplay = window.getComputedStyle(document.getElementById('ADS_2'), null).display;
-            const hasAdBlocker = baitElementDisplay === 'none' ? true : false;
-            const hasPrivacyBlocker = typeof window.google_tag_manager === 'undefined' ? true : false;
+            const hasAdBlocker = getAdBlockerState(baitElementDisplay);
+            const hasPrivacyBlocker = getPrivacyBlockerState();
             const hasPaywallBlocker = getUserPaywallBlockerState();
             if (hasAdBlocker || hasPrivacyBlocker || hasPaywallBlocker) {
               fetch('${domainBlockerTracking}', {
