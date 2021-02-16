@@ -6,6 +6,8 @@ import topNavFilter from '../../../../content/filters/top-nav';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import closeButton from '../../../../resources/images/amp-close.png';
 import userIconWhite from '../../../../resources/icons/login/user-icon-white.svg';
+import userIconDark from '../../../../resources/icons/login/user-icon.svg';
+
 
 const AmpNavBar = () => {
   const fusionContext = useFusionContext();
@@ -143,6 +145,14 @@ const AmpNavBar = () => {
             <a href={rootDirectory}>
               <amp-img height='1' width='1' class={siteName.toLowerCase()}
               src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logo}`)}`} layout='responsive'></amp-img>
+            </a>
+          </div>
+          <div className="amp-login-nav">
+            <a on="tap:amp-access.login-logoutEmbedded" data-mg2-action="logout" data-mce-href="#" amp-access='UserState!="LoggedOut"' amp-access-hide>
+              <amp-img src={userIconDark} width="28px" height="28px" layout="fixed"></amp-img>
+            </a>
+            <a on="tap:amp-access.login-loginEmbedded" data-mg2-action="login" data-mce-href="#" data-mce-selected="1" amp-access='UserState="LoggedOut"' amp-access-hide>
+              <amp-img src={userIconDark} width="28px" height="28px" layout="fixed"></amp-img>
             </a>
           </div>
         </div>
