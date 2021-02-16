@@ -27,6 +27,7 @@ export default {
   redditURL: 'https://www.reddit.com/submit?url=',
   footerLogo: '/resources/logos/JournalNews/logo-full.svg',
   logo: '/resources/logos/JournalNews/logo-full.svg',
+  logoRedesign: '/resources/logos/JournalNews/logo-full.svg',
   logoShort: '/resources/logos/JournalNews/logo-short.svg',
   logoHamburger: '/resources/logos/JournalNews/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/JournalNews/placeholder.svg',

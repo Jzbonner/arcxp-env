@@ -26,6 +26,7 @@ export default {
   redditURL: 'https://www.reddit.com/submit?url=',
   footerLogo: '/resources/logos/SpringfieldNews/logo-full.svg',
   logo: '/resources/logos/SpringfieldNews/logo-full.svg',
+  logoRedesign: '/resources/logos/SpringfieldNews/logo-full.svg',
   logoShort: '/resources/logos/SpringfieldNews/logo-short.svg',
   logoHamburger: '/resources/logos/SpringfieldNews/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/SpringfieldNews/placeholder.svg',
