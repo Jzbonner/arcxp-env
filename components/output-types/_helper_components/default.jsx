@@ -104,8 +104,6 @@ const RenderOutputType = (props) => {
         {/* 1045 bait START */}
         {outputType !== 'amp' && (
           <>
-            <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/blocker/analytics-corp.js`)}`}></script>
-            <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/blocker/prebid-ads-bt.js`)}`}></script>
             <DetectAdBlocker />
           </>
         )}

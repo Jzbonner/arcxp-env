@@ -80,13 +80,13 @@ const BlockDetectionScript = () => {
           return headers;
         };
         const isTrackingOn = () => {
-          if (typeof window.canAnalyze === 'undefined') {
+          if (typeof window.google_tag_manager === 'undefined' || typeof window.GoogleAnalyticsObject === 'undefined') {
             return false;
           }
           return true;
         };
         const areAdsOn = () => {
-          if (typeof window.canRunAds === 'undefined') {
+          if (typeof window.googletag === 'undefined') {
             return false;
           }
           return true;
@@ -100,7 +100,7 @@ const BlockDetectionScript = () => {
         };
         const getPrivacyBlockerState = () => {
           let isTrackingBlocked = false;
-          if (typeof window.google_tag_manager === 'undefined' || !isTrackingOn()) {
+          if (!isTrackingOn()) {
             isTrackingBlocked = true;
           }
           return isTrackingBlocked;
