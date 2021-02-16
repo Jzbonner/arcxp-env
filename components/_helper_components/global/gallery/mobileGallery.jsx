@@ -4,7 +4,6 @@ import middleBox from '../../../../resources/icons/gallery/middle-box.svg';
 import close from '../../../../resources/icons/gallery/close.svg';
 
 const MobileGallery = (props) => {
-
   const {
     data, states, objectRef, funcs,
   } = props;
