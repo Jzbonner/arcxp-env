@@ -145,10 +145,10 @@ const AmpNavBar = () => {
           </div>
           <div className="amp-login-nav">
             {/* // amp-access-hide='elide' prevents both userState icons from displaying at the same time */}
-            <a on="tap:amp-access.login-logoutEmbedded" className="userAction-btn" data-mg2-action="logout" data-mce-href="#" amp-access='UserState!="LoggedOut"' amp-access-hide='elide'>
+            <a on="tap:amp-access.login-logoutEmbedded" data-mg2-action="logout" data-mce-href="#" amp-access='UserState!="LoggedOut"' amp-access-hide='elide'>
               <amp-img src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${userLoggedIn}`)}`} width="28px" height="28px" layout="fixed"></amp-img>
             </a>
-            <a on="tap:amp-access.login-loginEmbedded" className="userAction-btn" data-mg2-action="login" data-mce-href="#" data-mce-selected="1" amp-access='UserState="LoggedOut"' amp-access-hide='elide'>
+            <a on="tap:amp-access.login-loginEmbedded" data-mg2-action="login" data-mce-href="#" data-mce-selected="1" amp-access='UserState="LoggedOut"' amp-access-hide='elide'>
               <amp-img src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${userLoggedOut}`)}`} width="28px" height="28px" layout="fixed"></amp-img>
             </a>
           </div>
