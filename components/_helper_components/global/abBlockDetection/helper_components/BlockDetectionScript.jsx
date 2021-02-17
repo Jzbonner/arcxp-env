@@ -76,7 +76,6 @@ const BlockDetectionScript = () => {
             'siteid' : '${metrics && metrics.siteID ? metrics.siteID : site}',
             'useragent' : navigator.userAgent
           };
-
           return headers;
         };
         const isTrackingOn = () => {
@@ -86,7 +85,7 @@ const BlockDetectionScript = () => {
           return true;
         };
         const areAdsOn = () => {
-          if (typeof window.googletag === 'undefined') {
+          if (typeof window.googletag === 'undefined' || typeof window.pbjs === 'undefined' ) {
             return false;
           }
           return true;
