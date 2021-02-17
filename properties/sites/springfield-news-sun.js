@@ -25,6 +25,7 @@ export default {
   domainRedditURL: 'https://www.reddit.com/domain/springfieldnewssun.com/',
   redditURL: 'https://www.reddit.com/submit?url=',
   footerLogo: '/resources/logos/SpringfieldNews/logo-full.svg',
+  logo: '/resources/logos/SpringfieldNews/logo-full.svg',
   logoRedesign: '/resources/logos/SpringfieldNews/logo-full.svg',
   logoShort: '/resources/logos/SpringfieldNews/logo-short.svg',
   logoHamburger: '/resources/logos/SpringfieldNews/logo-mobile-hamburger.svg',

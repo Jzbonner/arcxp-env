@@ -25,6 +25,7 @@ export default {
   domainRedditURL: 'https://www.reddit.com/domain/dayton.com/',
   redditURL: 'https://www.reddit.com/submit?url=',
   footerLogo: '/resources/logos/Dayton/logo-full.svg',
+  logo: '/resources/logos/Dayton/logo-full.svg',
   logoRedesign: '/resources/logos/Dayton/logo-full.svg',
   logoShort: '/resources/logos/Dayton/logo-short.svg',
   logoHamburger: '/resources/logos/Dayton/logo-mobile-hamburger.svg',
