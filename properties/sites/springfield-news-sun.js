@@ -96,9 +96,9 @@ export default {
     },
     prod: {
       adsBidding,
-      adsA9Enabled: false,
+      adsA9Enabled: true,
       adsA9Id: '3970',
-      adsPrebidEnabled: false,
+      adsPrebidEnabled: true,
       adsPrebidTimeout: 1500,
       devconActive: false,
       devconKey: '',
