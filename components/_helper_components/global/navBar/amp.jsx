@@ -4,14 +4,12 @@ import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import topNavFilter from '../../../../content/filters/top-nav';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
-import closeButton from '../../../../resources/images/amp-close.png';
-import userIconWhite from '../../../../resources/icons/login/user-icon-white.svg';
 
 const AmpNavBar = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    logo, logoShort, siteName, cdnSite, cdnOrg,
+    logo, logoShort, userLoggedIn, userLoggedOut, userIconWhite, closeButton, siteName, cdnSite, cdnOrg,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
@@ -22,6 +20,8 @@ const AmpNavBar = () => {
     },
     filter: topNavFilter,
   });
+
+  const shortLogoCheck = arcSite === 'ajc' ? logo : logoShort;
 
   const {
     _id: rootDirectory,
@@ -100,16 +100,16 @@ const AmpNavBar = () => {
     <>
       <amp-sidebar id="sidebar" layout="nodisplay" side="left" class="amp-sidebar">
         <a className="close" on="tap:sidebar.close">
-          <amp-img width='44px' height='44px' src={closeButton}></amp-img>
+          <amp-img width='44px' height='44px' src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${closeButton}`)}`}></amp-img>
         </a>
         <ul>
           <li className="amp-nav-link amp-auth">
             <a on="tap:amp-access.login-logoutEmbedded" data-mg2-action="logout" data-mce-href="#" amp-access='UserState!="LoggedOut"' amp-access-hide>
-              <amp-img src={userIconWhite} width="35px" height="35px" layout="fixed"></amp-img>
+              <amp-img src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${userIconWhite}`)}`} width="35px" height="35px" layout="fixed"></amp-img>
               <span>Log Out</span>
             </a>
             <a on="tap:amp-access.login-loginEmbedded" data-mg2-action="login" data-mce-href="#" data-mce-selected="1" amp-access='UserState="LoggedOut"' amp-access-hide>
-              <amp-img src={userIconWhite} width="35px" height="35px" layout="fixed"></amp-img>
+              <amp-img src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${userIconWhite}`)}`} width="35px" height="35px" layout="fixed"></amp-img>
               <span>Log In</span>
             </a>
           </li>
@@ -136,13 +136,22 @@ const AmpNavBar = () => {
           <div id="logo-pinned" className='amp-logo amp-logo-pinned'>
             <a href={rootDirectory}>
             <amp-img height='1' width='1' class={siteName.toLowerCase()}
-            src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoShort}`)}`} layout='responsive'></amp-img>
+            src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${shortLogoCheck}`)}`} layout='responsive'></amp-img>
             </a>
           </div>
           <div id="logo-main" className='amp-logo amp-logo-main'>
             <a href={rootDirectory}>
               <amp-img height='1' width='1' class={siteName.toLowerCase()}
               src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logo}`)}`} layout='responsive'></amp-img>
+            </a>
+          </div>
+          <div className="amp-login-nav">
+            {/* // amp-access-hide='elide' prevents both userState icons from displaying at the same time */}
+            <a on="tap:amp-access.login-logoutEmbedded" data-mg2-action="logout" data-mce-href="#" amp-access='UserState!="LoggedOut"' amp-access-hide='elide'>
+              <amp-img src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${userLoggedIn}`)}`} width="28px" height="28px" layout="fixed"></amp-img>
+            </a>
+            <a on="tap:amp-access.login-loginEmbedded" data-mg2-action="login" data-mce-href="#" data-mce-selected="1" amp-access='UserState="LoggedOut"' amp-access-hide='elide'>
+              <amp-img src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${userLoggedOut}`)}`} width="28px" height="28px" layout="fixed"></amp-img>
             </a>
           </div>
         </div>
