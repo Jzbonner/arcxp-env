@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import getProperties from './hamburgerMenu/node_modules/fusion:properties';
-import { useAppContext, useFusionContext } from './hamburgerMenu/node_modules/fusion:context';
+import getProperties from 'fusion:properties';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
