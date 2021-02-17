@@ -72,24 +72,20 @@ const isAuthMenu = ({
     <>
       <div onClick={() => setShowUserMenu(!showUserMenu)}>
         <img src={source} />
-        <div className='nav-itemText login-text'>Log Out</div>
+        <div className='login-text'>Log Out</div>
       </div>
 
       <div className={`section login-menu ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
         <div className={'section-item'}>
           <a href={profileLink}>
             <img src={source} />
-            <div className='nav-itemText login-text'>Log Out</div>
           </a>
+            <div className='login-text'>Log Out</div>
         </div>
         <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
-          {!isMobile && renderLogoutButton()}
-          <ul className={`subNav-flyout itemCount-${links.length + (isNotAuthenticated ? 3 : 2)}`}>
-            {isMobile && (
-              <li className={'flyout-item'}>
-                {renderLogoutButton()}
-              </li>
-            )}
+          {renderLogoutButton()}
+          <div className='login-separator'></div>
+          <ul className={`subNav-flyout itemCount-${links.length + (isNotAuthenticated ? 3 : 2)} logged-out`}>
             <li className={'flyout-item'}>
               <a href={`${connextDomain}/dashboard`} target='_blank' rel="noopener noreferrer">
                 My Account

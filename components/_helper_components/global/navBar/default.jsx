@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import getProperties from 'fusion:properties';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import getProperties from './hamburgerMenu/node_modules/fusion:properties';
+import { useAppContext, useFusionContext } from './hamburgerMenu/node_modules/fusion:context';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
-import DesktopNav from './desktopNav/default';
+import HamburgerMenu from './hamburgerMenu/default';
 import StickyNav from '../../article/stickyNav/default';
 import RedesignNavLinks from './redesignNavLinks/default';
 import AmpNavBar from './amp';
@@ -32,7 +32,7 @@ const NavBar = ({
   const logoRef = useRef(null);
   const paddingRef = React.useRef(null);
   const isMobileVisibilityRef = React.useRef(isMobile);
-  const mobileBreakpoint = 1023;
+  const mobileBreakpoint = 767;
 
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -59,8 +59,6 @@ const NavBar = ({
   });
 
   const { children: redesignChildren } = redesignSections;
-
-  console.log(redesignSections);
 
   const setStickyMobileRef = (data) => {
     isMobileVisibilityRef.current = data;
@@ -171,7 +169,7 @@ const NavBar = ({
             <Search isHeader={true}/>
             </div>
         </div>
-        <DesktopNav
+        <HamburgerMenu
           sections={sectionLi}
           isMobile={isMobile}
           hamburgerToggle={mobileMenuToggled}

@@ -26,7 +26,7 @@ export default {
   domainRedditURL: 'https://www.reddit.com/domain/daytondailynews.com/',
   redditURL: 'https://www.reddit.com/submit?url=',
   footerLogo: '/resources/logos/DaytonDailyNews/logo-full.svg',
-  logo: '/resources/logos/DaytonDailyNews/logo-full.svg',
+  logoRedesign: '/resources/logos/DaytonDailyNews/logo-full.svg',
   logoShort: '/resources/logos/DaytonDailyNews/logo-short.svg',
   logoHamburger: '/resources/logos/DaytonDailyNews/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/DaytonDailyNews/placeholder.svg',
