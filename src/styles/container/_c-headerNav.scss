@@ -948,7 +948,7 @@
         margin-top: -1px;
         margin-left: -1rem;
         position: absolute;
-        box-shadow: 6px 5px 8px 0 rgba(60, 60, 60, .11);
+        box-shadow: -6px 5px 8px 0 rgba(60, 60, 60, .11);
       }
     }
 
@@ -992,8 +992,7 @@
         z-index: 3;
         top: 44px;
         background-color: #fff;
-        // box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
-        box-shadow: 6px 5px 8px 0 rgba(60, 60, 60, .11);
+        box-shadow: -6px 5px 8px 0 rgba(60, 60, 60, .11);
         border: solid 1px rgba(255, 255, 255, .47);
       }
     }
