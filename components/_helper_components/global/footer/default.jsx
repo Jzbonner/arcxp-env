@@ -50,9 +50,7 @@ const Footer = () => {
             />
           </a>
         </div>
-        <div className="col">
-          <ConnextBottomNavSubPromo />
-        </div>
+        <ConnextBottomNavSubPromo />
       </div>
       <ul className="menu-row">
         {linkCategories
