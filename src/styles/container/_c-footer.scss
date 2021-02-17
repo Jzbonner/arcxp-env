@@ -70,9 +70,9 @@
       }
 
       &.dayton {
-        width: 58vw;
+        width: 183px;
         max-width: 300px;
-        margin: 4rem 0;
+        margin: 1.875rem 0;
 
         @include breakpoint(desktop-sm) {
           width: 28vw;
@@ -80,14 +80,15 @@
       }
 
       &.dayton-daily-news {
-        margin: 4rem 0;
-        width: 300px;
+        margin: 1.875rem 0;
+        width: 183px;
         max-width: 100%;
       }
 
       &.journal-news {
-        width: 58vw;
+        width: 183px;
         max-width: 300px;
+        margin: 1.875rem 0;
 
         @include breakpoint(desktop-sm) {
           width: 28vw;
@@ -95,8 +96,9 @@
       }
 
       &.springfield-news-sun {
-        width: 400px;
+        width: 183px;
         max-width: 100%;
+        margin: 1.875rem 0;
       }
     }
 
