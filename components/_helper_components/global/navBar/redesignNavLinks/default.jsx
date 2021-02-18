@@ -4,6 +4,8 @@ import getProperties from 'fusion:properties';
 
 const RedesignNavLinks = ({ sections, arcSite }) => {
   const { siteDomainURL } = getProperties(arcSite);
+  const itemCount = sections.length;
+
   const items = sections.map((section, i) => {
     const {
       _id: id,
@@ -16,7 +18,7 @@ const RedesignNavLinks = ({ sections, arcSite }) => {
 
     return (
     <li key={i}>
-      <a href={id.indexOf('/') === 0 ? `${siteDomainURL}${id}` : id} target='_self' className="nav-itemText">{title}</a>
+      <a href={id.indexOf('/') === 0 ? `${siteDomainURL}${id}` : id} target='_self' className={`nav-itemText ${itemCount > 7 ? 'sm-text' : ''}`}>{title}</a>
     </li>
     );
   });
