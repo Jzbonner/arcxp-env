@@ -7,14 +7,17 @@ import getDomain from '../../../layouts/_helper_functions/getDomain';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
-import DesktopNav from './desktopNav/default';
+import HamburgerMenu from './hamburgerMenu/default';
 import StickyNav from '../../article/stickyNav/default';
+import RedesignNavLinks from './redesignNavLinks/default';
 import AmpNavBar from './amp';
+import Weather from './weather/default';
 import '../../../../src/styles/base/_utility.scss';
 import '../../../../src/styles/container/_article-basic.scss';
 import '../../../../src/styles/container/_c-headerNav.scss';
 import BreakingNews from '../breakingNews/default';
 import Login from './login/default';
+import Search from './search/default';
 
 const NavBar = ({
   articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false,
@@ -29,12 +32,12 @@ const NavBar = ({
   const logoRef = useRef(null);
   const paddingRef = React.useRef(null);
   const isMobileVisibilityRef = React.useRef(isMobile);
-  const mobileBreakpoint = 1023;
+  const mobileBreakpoint = 767;
 
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    logoRedesign, logoHamburger, siteName, cdnSite, cdnOrg, siteNavHierarchy,
+    logoRedesign, logoHamburger, siteName, cdnSite, cdnOrg, siteNavHierarchy, weatherPageUrl,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
@@ -46,6 +49,16 @@ const NavBar = ({
     },
     filter: topNavFilter,
   });
+
+  const redesignSections = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'TopNavRedesign2021',
+    },
+    filter: topNavFilter,
+  });
+
+  const { children: redesignChildren } = redesignSections;
 
   const setStickyMobileRef = (data) => {
     isMobileVisibilityRef.current = data;
@@ -124,30 +137,39 @@ const NavBar = ({
   });
 
   return (
-    <header className="c-nav">
+    <header className='c-nav'>
       {!omitBreakingNews && <BreakingNews />}
       <div className={`c-headerNav
         ${stickyNavVisibility || hasWindowShade ? 'stickyActive' : ''}
         ${hasWindowShade ? 'above-shade' : ''}
         ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`}>
-        <div className={`b-flexRow b-flexCenter nav-logo
+        <div className={`c-logoAndLinks nav-logo
         ${(stickyNavVisibility || hasWindowShade) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
-          <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
-            <div className='nav-flyout-button'></div>
-          </div>
-          <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
-            && mobileMenuToggled) ? 'not-visible' : ''}`} ref={logoRef} >
-            <Logo
-              source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoRedesign}`)}`}
-              rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
-            />
-          </div>
+          <div className='c-topNavItems'>
+            <Weather weatherPageUrl={weatherPageUrl}/>
+            <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
+              && mobileMenuToggled) ? 'not-visible' : ''} ${siteName.toLowerCase()}`} ref={logoRef} >
+              <Logo
+                source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoRedesign}`)}`}
+                rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
+              />
+            </div>
           <Login
             isMobile={isMobile}
-            isSticky={true}
           />
+          </div>
+          <div className='c-topNavLinks'>
+            <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
+              <div className='nav-flyout-button'></div>
+            </div>
+            <RedesignNavLinks
+              sections={redesignChildren}
+              arcSite={arcSite}
+              />
+            <Search isHeader={true}/>
+            </div>
         </div>
-        <DesktopNav
+        <HamburgerMenu
           sections={sectionLi}
           isMobile={isMobile}
           hamburgerToggle={mobileMenuToggled}

@@ -73,31 +73,27 @@ const NotAuthMenu = ({
       setShowUserMenu(!showUserMenu);
     }}
   >
-    Log In
+    Login
   </button>;
 
   return (
     <>
-      <div onClick={() => setShowUserMenu(!showUserMenu)} data-mg2-action='login'>
+      <div onClick={() => setShowUserMenu(!showUserMenu)}>
         <img src={source} />
-        <div className='nav-itemText login-text'>Log In</div>
+        <div className='login-text'>Log In</div>
       </div>
 
       <div ref={loginEl} className={`section login-menu ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
         <div className={'section-item'}>
           <a>
             <img src={source} />
-            <div className='nav-itemText login-text'>Log In</div>
+            <div className='login-text'>Log In</div>
           </a>
         </div>
         <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
-          {!isMobile && renderLoginButton()}
-          <ul className={`subNav-flyout itemCount-${links.length}`}>
-            {isMobile && (
-              <li className={'flyout-item'}>
-                 {renderLoginButton()}
-              </li>
-            )}
+          {renderLoginButton()}
+          <div className='login-separator'></div>
+          <ul className={`subNav-flyout itemCount-${links.length} logged-in`}>
             {RenderMenuLinks(links)}
           </ul>
         </div>

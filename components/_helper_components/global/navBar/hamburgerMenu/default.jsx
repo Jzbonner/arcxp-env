@@ -8,7 +8,7 @@ import Weather from '../weather/default';
 import NavFooter from '../navFooter/default';
 import '../../../../../src/styles/container/_c-headerNav.scss';
 
-const DesktopNav = ({
+const HamburgerMenu = ({
   sections, hamburgerToggle, isMobile, setToggle, rootDirectory, smallLogoUrl,
   stickyActive, siteName, hasWindowShade,
 }) => {
@@ -26,9 +26,9 @@ const DesktopNav = ({
   <>
   <div className={`nav-wrapper ${hamburgerToggle && isMobile ? 'isVisible' : ''}`}></div>
   <nav className={`
-  ${hamburgerToggle && isMobile ? 'mobile-nav-activated' : ''}
-  ${isMobile ? 'nav-mobile' : ''}
-  ${(stickyActive || hasWindowShade) && !isMobile ? 'is-hidden' : ''}`}>
+  ${hamburgerToggle ? 'mobile-nav-activated' : ''}
+  ${(stickyActive || hasWindowShade) && !isMobile ? 'is-hidden' : ''}
+  nav-mobile`}>
     <div className='nav-menu-toggle' onClick={(e) => { e.preventDefault(); setToggle(false); }}>
         <div className='nav-close-button'></div>
     </div>
@@ -54,7 +54,7 @@ const DesktopNav = ({
   );
 };
 
-DesktopNav.propTypes = {
+HamburgerMenu.propTypes = {
   sections: PropTypes.array,
   isMobile: PropTypes.bool,
   hamburgerToggle: PropTypes.bool,
@@ -66,4 +66,4 @@ DesktopNav.propTypes = {
   hasWindowShade: PropTypes.bool,
 };
 
-export default DesktopNav;
+export default HamburgerMenu;
