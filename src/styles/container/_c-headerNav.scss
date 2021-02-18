@@ -69,6 +69,7 @@
       display: flex;
       width: 100%;
       flex-direction: row;
+      z-index: 1;
 
       @include breakpoint(tablet) {
         flex-direction: column;
@@ -1164,9 +1165,24 @@
       box-sizing: border-box;
 
       .nav-itemText {
+        white-space: nowrap;
 
         &:hover {
           color: #2e81b7;
+        }
+
+        &.sm-text {
+          @include breakpoint(tablet) {
+            font-size: .65rem;
+          }
+
+          @include breakpoint(desktop-sm) {
+            font-size: .875rem;
+          }
+
+          @include breakpoint(desktop-nav) {
+            font-size: 1rem;
+          }
         }
       }
 
@@ -1195,9 +1211,24 @@
           height: 16px;
           width: 100%;
           list-style-type: none;
+          overflow: hidden;
 
           :not(:last-child) {
             margin-right: 10px;
+          }
+        }
+
+        @include breakpoint(desktop-sm) {
+
+          :not(:last-child) {
+            margin-right: 20px;
+          }
+        }
+
+        @include breakpoint(desktop-lg) {
+          
+          :not(:last-child) {
+            margin-right: 30px;
           }
         }
 
