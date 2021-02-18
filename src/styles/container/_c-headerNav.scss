@@ -519,8 +519,12 @@
     }
 
     .c-weather {
-      display: flex;
-      min-width: 65px;
+      display: none;
+
+      @include breakpoint(tablet) {
+        display: flex;
+        min-width: 65px;
+      }
 
       @include breakpoint(desktop-sm) {
         min-width: 86px;
