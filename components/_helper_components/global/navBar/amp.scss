@@ -132,33 +132,45 @@
 }
 
 .amp-sidebar {
-  background-image: linear-gradient(to top, #04befe, #4481eb);
-  max-width: 408px;
+  background-color: #212126;
+  max-width: 390px;
   width: 100%;
 
   .close {
-    padding: 31px 16px 0 8px;
+    position: absolute;
+    top: 10px;
+    right: 13px;
     display: inline-block;
   }
 
+  ul {
+    padding: 55px 0 55px 26px;
+    list-style: none;
+  }
+
   .amp-nav-section {
-    padding: 15px 0;
+    padding: 13px 0;
   }
 
   .amp-nav-link {
-    padding: 16px 32px 16px 16px;
     color: #fff;
-
+    font-weight: 800;
+    
     @include text-styles(1.125rem, 1.44, "Gordita");
 
     &.amp-auth a {
-      font-weight: 800;
+      @include text-styles(.75rem, 1.44, "Gordita");
 
       span {
         display: inline-block;
-        line-height: 35px;
         vertical-align: top;
-        padding-left: 10px;
+        text-align: center;
+        font-weight: 800;
+        width: 46px;
+        padding: 13px 22px 14px;
+        border-radius: 9px;
+        margin: 0 0 0 8px;
+        border: solid 1px #ececec;
       }
     }
   }
