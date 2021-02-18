@@ -41,7 +41,7 @@
   }
 
   .c-homepageContent {
-    @media (max-width: 767px) {
+    @include breakpoint(tablet) {
       padding-top: 0;
     }
   }
