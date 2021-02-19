@@ -32,7 +32,7 @@
       z-index: 4001;
       width: 100%;
       height: 90px;
-      background-color: #f8f8f8;
+      background-color: #fff;
       max-width: 100%;
       box-shadow: 4px 4px 6px 0 rgba(132, 132, 132, .22);
 
@@ -219,6 +219,7 @@
       padding: 15px 0;
       flex-direction: row;
       position: relative;
+      align-items: center;
 
       @include breakpoint(tablet) {
         padding: 10px 0;
@@ -1164,6 +1165,7 @@
       order: 1;
       display: flex;
       box-sizing: border-box;
+      height: fit-content;
 
       .nav-itemText {
         white-space: nowrap;
@@ -1189,6 +1191,7 @@
 
       @include breakpoint(tablet) {
         display: flex;
+        width: 100%;
         justify-content: center;
         align-items: center;
         order: 2;
@@ -1277,7 +1280,7 @@
 
   .nav-flyout-button,
   .nav-close-button {
-    position: absolute;
+    position: relative;
     top: 50%;
     transform: translateY(-50%);
     width: 13px;
@@ -1288,11 +1291,6 @@
     @include between-breakpoints(tablet, desktop-sm) {
       width: 9px;
       left: 5px;
-      top: 77%;
-    }
-
-    @include breakpoint(desktop-sm) {
-      top: 74%;
     }
 
     &:before {
@@ -1444,10 +1442,6 @@
   .c-stickyLogin {
     justify-content: flex-end;
     align-items: center;
-
-    @include breakpoint(desktop-sm) {
-      margin-bottom: 10px;
-    }
 
     .nav-items {
       padding-top: 0;
