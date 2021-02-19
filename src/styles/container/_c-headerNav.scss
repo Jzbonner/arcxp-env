@@ -11,6 +11,7 @@
 
     @include breakpoint(tablet) {
       border-bottom: none;
+      padding-bottom: 0;
     }
 
     @include breakpoint(desktop-sm) {
