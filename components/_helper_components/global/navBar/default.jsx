@@ -17,7 +17,6 @@ import '../../../../src/styles/container/_article-basic.scss';
 import '../../../../src/styles/container/_c-headerNav.scss';
 import BreakingNews from '../breakingNews/default';
 import Login from './login/default';
-import Search from './search/default';
 
 const NavBar = ({
   articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false,
@@ -158,16 +157,11 @@ const NavBar = ({
             isMobile={isMobile}
           />
           </div>
-          <div className='c-topNavLinks'>
-            <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
-              <div className='nav-flyout-button'></div>
-            </div>
-            <RedesignNavLinks
-              sections={redesignChildren}
-              arcSite={arcSite}
-              />
-            <Search isHeader={true}/>
-            </div>
+          <RedesignNavLinks
+            sections={redesignChildren}
+            arcSite={arcSite}
+            setToggle={setToggle}
+            />
         </div>
         <HamburgerMenu
           sections={sectionLi}
@@ -194,7 +188,7 @@ const NavBar = ({
           setToggle={setToggle}
           paddingRef={paddingRef}
           type={type}
-          sections={sectionLi}
+          sections={redesignChildren}
           articleUrl={articleURL}
           hasWindowShade={hasWindowShade}
         />
