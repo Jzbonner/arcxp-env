@@ -1259,8 +1259,17 @@
           font-size: .69rem;
         }
 
-        @include breakpoint(desktop-nav) {
+        @include breakpoint(desktop-sm) {
           font-size: 1rem;
+        }
+      }
+      
+      .login-menu {
+
+        img {
+          @include between-breakpoints(tablet, desktop-sm) {
+            height: 21px;
+          }
         }
       }
     }
