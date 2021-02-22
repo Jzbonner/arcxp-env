@@ -42,7 +42,7 @@
 
   .c-homepageContent {
     @include breakpoint(tablet) {
-      padding-top: 0;
+      padding-top: 1.875rem;
     }
   }
 }
