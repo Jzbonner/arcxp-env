@@ -11,6 +11,7 @@
 
     @include breakpoint(tablet) {
       border-bottom: none;
+      padding-bottom: 0;
     }
 
     @include breakpoint(desktop-sm) {
@@ -32,17 +33,21 @@
       z-index: 4001;
       width: 100%;
       height: 90px;
-      background-color: #f8f8f8;
+      background-color: #fff;
       max-width: 100%;
+      box-shadow: 4px 4px 6px 0 rgba(132, 132, 132, .22);
 
       &.above-shade {
         position: relative;
       }
 
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         box-sizing: border-box;
-        height: 75px;
-        border-bottom: solid 1px #d0d0d0;
+        height: 70px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        height: 60px;
       }
 
       .Mg2-connext[data-display-type] {
@@ -1145,9 +1150,6 @@
           }
         }
       }
-      // &.isVisible {
-      //   width: calc(100% - 100px);
-      // }
     }
 
     .fadeInOut.section {
@@ -1238,6 +1240,40 @@
         li {
           display: flex;
           align-items: center;
+        }
+      }
+    }
+    
+    .c-stickyLogin {
+
+      .c-topNavLinks {
+        border: none;
+      }
+  
+      .c-headerIcon {
+        display: none;
+      }
+
+      .nav-itemText {
+        @include breakpoint(tablet) {
+          font-size: .69rem;
+        }
+
+        @include breakpoint(desktop-sm) {
+          font-size: .875rem;
+        }
+
+        @include breakpoint(desktop-lg) {
+          font-size: 1rem;
+        }
+      }
+      
+      .login-menu {
+
+        img {
+          @include between-breakpoints(tablet, desktop-sm) {
+            height: 21px;
+          }
         }
       }
     }
@@ -1381,13 +1417,8 @@
     }
   }
 
-  .sticky-logo {
-    display: block;
-    margin-top: 0;
-  }
-
   .sticky-logo-homepage {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -1395,10 +1426,6 @@
     left: 0;
     right: 0;
     margin-top: 7px;
-
-    @include breakpoint(desktop-sm) {
-      display: none;
-    }
 
     img {
       width: 75px;
@@ -1430,10 +1457,6 @@
     justify-content: flex-end;
     align-items: center;
 
-    @include breakpoint(desktop-sm) {
-      margin-bottom: 10px;
-    }
-
     .nav-items {
       padding-top: 0;
     }
@@ -1444,6 +1467,14 @@
 
     .stickyNav-social {
       margin-bottom: 10px;
+    }
+
+    .sticky-logo-homepage {
+      display: flex;
+
+      @include breakpoint(tablet) {
+        display: none;
+      }
     }
   }
 
@@ -1463,13 +1494,8 @@
     display: none;
     width: 100%;
 
-    @include breakpoint(desktop-sm) {
+    @include breakpoint(tablet) {
       display: flex;
-      height: 45px;
-
-      .nav-items {
-        border-bottom: solid 1px #cdcdcd;
-      }
     }
 
     &.hidden {
