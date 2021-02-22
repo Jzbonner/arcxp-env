@@ -39,10 +39,4 @@
       border-bottom-right-radius: 6px;
     }
   }
-
-  .c-homepageContent {
-    @include breakpoint(tablet) {
-      padding-top: 0;
-    }
-  }
 }
