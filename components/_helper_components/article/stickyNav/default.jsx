@@ -6,6 +6,7 @@ import renderImage from '../../../layouts/_helper_functions/getFeaturedImage';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import Comments from '../comments/comments';
 import Login from '../../global/navBar/login/default';
+import RedesignNavLinks from '../../global/navBar/redesignNavLinks/default';
 import fetchEnv from '../../global/utils/environment';
 import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
 import '../../../../src/styles/container/_c-headerNav.scss';
@@ -123,15 +124,6 @@ const StickyNav = ({
     <>
       <div className={`stickyNav ${hasWindowShade || stickyVisibilityRef.current ? 'is-visible' : ''}`}>
         <ul className={`c-stickyNav-list ${siteNameLower}`}>
-        <div className='nav-menu-toggle' onClick={() => { setToggle(true); }}>
-          <div className='nav-flyout-button'>
-          </div>
-        </div>
-          <li className="stickyNav-item mobile-hidden">
-            <a href="/">
-              <img className={`sticky-logo ${siteNameLower}`} src={logoPath} alt={`${siteName} logo`} />
-            </a>
-          </li>
           <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
             <li className="stickyNav-item">
               <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
@@ -169,7 +161,7 @@ const StickyNav = ({
             </a>
           </div>
           <div className={`stickyNav-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
-            {sections}
+            <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={logoPath} isNonShareablePage={isNonShareablePage}/>
           </div>
           <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
         </div>
@@ -195,7 +187,7 @@ StickyNav.propTypes = {
   paddingRef: PropTypes.object,
   hamburgerToggle: PropTypes.bool,
   type: PropTypes.string,
-  sections: PropTypes.array,
+  sections: PropTypes.object,
   articleUrl: PropTypes.string,
   hasWindowShade: PropTypes.bool,
 };
