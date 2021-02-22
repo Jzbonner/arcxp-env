@@ -215,6 +215,7 @@
       padding: 15px 0;
       flex-direction: row;
       position: relative;
+      align-items: center;
 
       @include breakpoint(tablet) {
         padding: 10px 0;
@@ -1163,6 +1164,7 @@
       order: 1;
       display: flex;
       box-sizing: border-box;
+      height: fit-content;
 
       .nav-itemText {
         white-space: nowrap;
@@ -1188,6 +1190,7 @@
 
       @include breakpoint(tablet) {
         display: flex;
+        width: 100%;
         justify-content: center;
         align-items: center;
         order: 2;
@@ -1255,7 +1258,7 @@
 
   .nav-flyout-button,
   .nav-close-button {
-    position: absolute;
+    position: relative;
     top: 50%;
     transform: translateY(-50%);
     width: 13px;
@@ -1266,11 +1269,6 @@
     @include between-breakpoints(tablet, desktop-sm) {
       width: 9px;
       left: 5px;
-      top: 77%;
-    }
-
-    @include breakpoint(desktop-sm) {
-      top: 74%;
     }
 
     &:before {
