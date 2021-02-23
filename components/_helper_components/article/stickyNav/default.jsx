@@ -155,7 +155,7 @@ const StickyNav = ({
           </div>
         </ul>
         <div className='b-flexRow c-stickyLogin'>
-            <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={logoPath} isNonShareablePage={isNonShareablePage}/>
+          <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={logoPath} isNonShareablePage={isNonShareablePage}/>
           <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
         </div>
       </div>

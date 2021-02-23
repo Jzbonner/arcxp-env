@@ -1255,6 +1255,7 @@
       .c-topNavLinks {
         border: none;
         width: 100%;
+        order: initial;
       }
   
       .c-headerIcon {
@@ -1421,6 +1422,10 @@
 
     &.not-visible {
       display: none;
+    }
+
+    .c-topNavLinks {
+      order: initial;
     }
   }
 
