@@ -11,6 +11,11 @@
     margin-bottom: 1.13rem;
   }
 
+  @include breakpoint(desktop-sm) {
+    display: flex;
+    flex-direction: row;
+  }
+
   .copyright {
     padding: 20px;
     text-align: left;
