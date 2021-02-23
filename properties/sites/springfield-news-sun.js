@@ -117,8 +117,8 @@ export default {
       allowMeter: true,
       pubParam: 'SNS',
       activateUrl: 'https://test-subscribe.springfieldnewssun.com/',
-      activateAmpPaywallUrl: 'https://test-subscribe.springfieldnewssun.com/startgwamp',
-      activateAmpInlineUrl: 'https://test-subscribe.springfieldnewssun.com/startamp',
+      activateAmpPaywallUrl: 'https://test-subscribe.springfieldnewssun.com/ohpaywall',
+      activateAmpInlineUrl: 'https://test-subscribe.springfieldnewssun.com/ohpaywall',
     },
     prod: {
       isEnabled: true,
@@ -131,8 +131,8 @@ export default {
       containerId: 'GTM-W3VLHBK',
       pubParam: 'SNS',
       activateUrl: 'https://subscribe.springfieldnewssun.com/',
-      activateAmpPaywallUrl: 'https://subscribe.springfieldnewssun.com/startgwamp',
-      activateAmpInlineUrl: 'https://subscribe.springfieldnewssun.com/startamp',
+      activateAmpPaywallUrl: 'https://subscribe.springfieldnewssun.com/ohpaywall',
+      activateAmpInlineUrl: 'https://subscribe.springfieldnewssun.com/ohpaywall',
     },
   },
   video: {

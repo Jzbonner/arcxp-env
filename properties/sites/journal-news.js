@@ -119,8 +119,8 @@ export default {
       allowMeter: true,
       pubParam: 'JN',
       activateUrl: 'https://test-subscribe.journal-news.com/',
-      activateAmpPaywallUrl: 'https://test-subscribe.journal-news.com/startgwamp',
-      activateAmpInlineUrl: 'https://test-subscribe.journal-news.com/startamp',
+      activateAmpPaywallUrl: 'https://test-subscribe.journal-news.com/ohpaywall',
+      activateAmpInlineUrl: 'https://test-subscribe.journal-news.com/ohpaywall',
     },
     prod: {
       isEnabled: true,
@@ -133,8 +133,8 @@ export default {
       containerId: 'GTM-W3VLHBK',
       pubParam: 'JN',
       activateUrl: 'https://subscribe.journal-news.com/',
-      activateAmpPaywallUrl: 'https://subscribe.journal-news.com/startgwamp',
-      activateAmpInlineUrl: 'https://subscribe.journal-news.com/startamp',
+      activateAmpPaywallUrl: 'https://subscribe.journal-news.com/ohpaywall',
+      activateAmpInlineUrl: 'https://subscribe.journal-news.com/ohpaywall',
     },
   },
   video: {
