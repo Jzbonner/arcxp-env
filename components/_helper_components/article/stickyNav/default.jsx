@@ -155,14 +155,7 @@ const StickyNav = ({
           </div>
         </ul>
         <div className='b-flexRow c-stickyLogin'>
-          <div className={`sticky-logo-homepage ${siteNameLower} ${isNonShareablePage ? '' : 'hidden'}`}>
-            <a href="/">
-              <img src={logoPath} className={siteNameLower} alt={`${siteName} logo`} />
-            </a>
-          </div>
-          <div className={`stickyNav-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
             <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={logoPath} isNonShareablePage={isNonShareablePage}/>
-          </div>
           <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
         </div>
       </div>

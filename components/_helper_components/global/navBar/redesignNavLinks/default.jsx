@@ -35,10 +35,12 @@ const RedesignNavLinks = ({
           <img src={logoPath} className={siteName} alt={`${siteName} logo`} />
         </a>
       </div>
-      <ul>
-        {items}
-      </ul>
-      <Search isHeader={true}/>
+      <div className={`stickyNav-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
+        <ul>
+          {items}
+        </ul>
+        <Search isHeader={true}/>
+      </div>
     </div>
   );
 };

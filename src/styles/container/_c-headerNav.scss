@@ -32,7 +32,7 @@
       opacity: .98;
       z-index: 4001;
       width: 100%;
-      height: 90px;
+      height: 60px;
       background-color: #fff;
       max-width: 100%;
       box-shadow: 4px 4px 6px 0 rgba(132, 132, 132, .22);
@@ -78,6 +78,11 @@
 
       @include breakpoint(tablet) {
         flex-direction: column;
+      }
+
+      .stickyNav-homepage {
+        display: flex;
+        align-items: center;
       }
     }
 
@@ -1167,6 +1172,7 @@
       display: flex;
       box-sizing: border-box;
       height: fit-content;
+      align-items: center;
 
       .nav-itemText {
         white-space: nowrap;
@@ -1248,6 +1254,7 @@
 
       .c-topNavLinks {
         border: none;
+        width: 100%;
       }
   
       .c-headerIcon {
@@ -1400,12 +1407,12 @@
     border: none;
     max-width: 1600px;
     margin: 0 auto;
-    width: calc(100% - #{2 * $min-margin});
+    width: 90%;
     display: none;
     align-items: center;
 
-    @include breakpoint(tablet) {
-      width: calc(100% - 85px);
+    @include breakpoint(desktop-sm) {
+      width: 94%;
     }
 
     &.is-visible {
@@ -1422,13 +1429,12 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin-top: 7px;
 
     img {
-      width: 75px;
+
+      &.ajc {
+        height: 29px;
+      }
 
       &.dayton {
         width: 210px;
@@ -1454,7 +1460,6 @@
   }
 
   .c-stickyLogin {
-    justify-content: flex-end;
     align-items: center;
 
     .nav-items {
