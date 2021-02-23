@@ -271,6 +271,8 @@
         @include breakpoint(desktop-sm) {
           max-height: 71px;
           height: 71px;
+          max-width: 346px;
+          width: 346px;
         }
       }
 
