@@ -10,10 +10,6 @@
   color: #000;
   padding-bottom: 1.875rem;
 
-  @include breakpoint(tablet) {
-    
-  }
-
   @include breakpoint(desktop-sm) {
     justify-content: flex-end;
     margin-right: 38px;
