@@ -131,6 +131,7 @@ export default {
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
+      allowMeter: true,
       pubParam: 'JN',
       activateUrl: 'https://subscribe.journal-news.com/',
       activateAmpPaywallUrl: 'https://subscribe.journal-news.com/ohpaywall',
