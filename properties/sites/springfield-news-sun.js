@@ -129,6 +129,7 @@ export default {
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
+      allowMeter: true,
       pubParam: 'SNS',
       activateUrl: 'https://subscribe.springfieldnewssun.com/',
       activateAmpPaywallUrl: 'https://subscribe.springfieldnewssun.com/ohpaywall',
