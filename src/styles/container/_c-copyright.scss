@@ -11,6 +11,11 @@
     margin-bottom: 1.13rem;
   }
 
+  @include breakpoint(desktop-sm) {
+    display: flex;
+    flex-direction: row;
+  }
+
   .copyright {
     padding: 20px;
     text-align: left;
@@ -36,6 +41,26 @@
     }
 
     @include text-styles(.75rem, 1.75, "Gordita");
+
+    @include breakpoint(tablet) {
+      display: none;
+    }
+
+    @include breakpoint(desktop-sm) {
+      display: block;
+    }
+    
+    &.in-footer {
+      display: none;
+  
+      @include breakpoint(tablet) {
+        display: block;
+      }
+  
+      @include breakpoint(desktop-sm) {
+        display: none;
+      }
+    }
 
     @include breakpoint(desktop-sm) {
       padding: 25px 30px 20px;

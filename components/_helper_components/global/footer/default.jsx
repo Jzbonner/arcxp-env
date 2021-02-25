@@ -6,6 +6,7 @@ import footerFilter from '../../../../content/filters/bottom-nav';
 import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import ConnextBottomNavSubPromo from '../ConnextBottomNavSubPromo/default';
+import Copyright from '../copyright/default';
 import '../../../../src/styles/container/_c-footer.scss';
 
 
@@ -51,6 +52,7 @@ const Footer = () => {
           </a>
         </div>
         <ConnextBottomNavSubPromo />
+        <Copyright cssClass={'in-footer'} hideBackToTop={true} />
       </div>
       <ul className="menu-row">
         {linkCategories
