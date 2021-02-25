@@ -5,10 +5,9 @@ import isOhioSite from '../../global/connext/isOhioSite';
 
 const PaywallLimitMessage = ({ siteFullname }) => {
   let blurb = `We count on our readers to help fund the journalists who keep you informed of what's really going on. Subscribe now to get complete access to The ${siteFullname}.`;
-  let offerPrice = '$9.99/Month';
+  const offerPrice = '99¢';
   if (isOhioSite(siteFullname)) {
     blurb = `We count on our readers to help fund in-depth local journalism. Subscribe now for unlimited digital access to the ${siteFullname}.`;
-    offerPrice = '99¢';
   }
   return (
     <div className="c-section inline-body subscribe-bar" id="paywallContainer">
