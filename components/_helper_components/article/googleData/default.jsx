@@ -19,7 +19,7 @@ const GoogleStructuredData = () => {
     const env = fetchEnv();
     const desc = articleDesc && articleDesc.basic ? articleDesc.basic : '';
     const {
-      websiteLogo, googleLogo, orgName, cdnOrg, siteName,
+      websiteLogo, orgName, cdnOrg, siteName,
     } = getProperties(arcSite);
     let websiteURL;
     const site = siteName.toLowerCase();
@@ -58,10 +58,6 @@ const GoogleStructuredData = () => {
       publisher: {
         '@type': 'Organization',
         name: `${orgName}`,
-        logo: {
-          '@type': 'ImageObject',
-          url: `${googleLogo}`,
-        },
       },
       articleSection: `${topSectionName}`,
       headline: `${title}`,
