@@ -28,7 +28,7 @@ const PaywallLimitMessage = ({ siteFullname }) => {
           </a>
         </div>
         <div className="row center link-container" amp-access='UserState!="LoggedOut" AND UserState!="Subscribed"' amp-access-hide>
-          <a on="tap:amp-access.login-activateEmbedded" data-mg2-action="activation" data-mce-href="#" >Already a Print Subscriber? <br />Access your digital products.</a>
+          <a on="tap:amp-access.login-activateEmbedded" data-mg2-action="activation" data-mce-href="#" >Already a Subscriber? <br />Access your digital products.</a>
         </div>
       </div>
     </div>
