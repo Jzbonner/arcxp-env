@@ -173,7 +173,9 @@
     @include breakpoint(desktop-lg) {
       margin: 0;
       padding: 40px 40px 0 0;
-      width: 51%;
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
 
@@ -207,6 +209,10 @@
       &:last-child {
         padding: 0;
       }
+    }
+
+    @include breakpoint(desktop-lg) {
+      padding-right: 0;
     }
 
     &:first-child {
