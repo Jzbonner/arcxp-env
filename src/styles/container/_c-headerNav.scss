@@ -32,7 +32,7 @@
       opacity: .98;
       z-index: 4001;
       width: 100%;
-      height: 90px;
+      height: 60px;
       background-color: #fff;
       max-width: 100%;
       box-shadow: 4px 4px 6px 0 rgba(132, 132, 132, .22);
@@ -66,6 +66,10 @@
       }
 
       @include breakpoint(desktop-sm) {
+        padding-bottom: 15px;
+      }
+
+      @include breakpoint(desktop-lg) {
         padding-bottom: 20px;
       }
     }
@@ -78,6 +82,20 @@
 
       @include breakpoint(tablet) {
         flex-direction: column;
+      }
+
+      .stickyNav-homepage {
+        display: flex;
+        align-items: center;
+      }
+
+      .pulse {
+        @include breakpoint(desktop-sm) {
+          animation: .75s pulse;
+          animation-delay: 2s;
+          animation-iteration-count: 5;
+          animation-timing-function: linear;
+        }
       }
     }
 
@@ -204,8 +222,12 @@
           @include breakpoint(tablet) {
             height: 46px;
           }
-    
+
           @include breakpoint(desktop-sm) {
+            height: 54px;
+          }
+    
+          @include breakpoint(desktop-lg) {
             height: 71px;
           }
         }
@@ -227,6 +249,11 @@
       }
 
       @include breakpoint(desktop-sm) {
+        padding-top: 15px;
+        padding-bottom: 20px;
+      }
+
+      @include breakpoint(desktop-lg) {
         padding: 20px 0;
       }
 
@@ -264,8 +291,15 @@
         }
 
         @include breakpoint(desktop-sm) {
+          max-height: 54px;
+          max-width: 256px;
+        }
+        
+        @include breakpoint(desktop-lg) {
           max-height: 71px;
           height: 71px;
+          max-width: 346px;
+          width: 346px;
         }
       }
 
@@ -782,12 +816,19 @@
         }
       }
 
+      &.isSticky {
+
+        .subNav {
+          top: 31px;
+        }
+      }
+
       &:hover {
         @include breakpoint(tablet) {
           cursor: pointer;
         }
 
-        @include breakpoint(tablet-sm) {
+        @include breakpoint(desktop-sm) {
 
           &:not(.nav-login) {
             cursor: none;
@@ -1167,6 +1208,7 @@
       display: flex;
       box-sizing: border-box;
       height: fit-content;
+      align-items: center;
 
       .nav-itemText {
         white-space: nowrap;
@@ -1213,7 +1255,7 @@
         @include breakpoint(tablet) {
           display: flex;
           justify-content: center;
-          height: 16px;
+          height: inherit;
           width: 100%;
           list-style-type: none;
           overflow: hidden;
@@ -1248,6 +1290,8 @@
 
       .c-topNavLinks {
         border: none;
+        width: 100%;
+        order: initial;
       }
   
       .c-headerIcon {
@@ -1272,7 +1316,7 @@
 
         img {
           @include between-breakpoints(tablet, desktop-sm) {
-            height: 21px;
+            height: 26px;
           }
         }
       }
@@ -1400,12 +1444,12 @@
     border: none;
     max-width: 1600px;
     margin: 0 auto;
-    width: calc(100% - #{2 * $min-margin});
+    width: 90%;
     display: none;
     align-items: center;
 
-    @include breakpoint(tablet) {
-      width: calc(100% - 85px);
+    @include breakpoint(desktop-sm) {
+      width: 94%;
     }
 
     &.is-visible {
@@ -1415,6 +1459,10 @@
     &.not-visible {
       display: none;
     }
+
+    .c-topNavLinks {
+      order: initial;
+    }
   }
 
   .sticky-logo-homepage {
@@ -1422,13 +1470,12 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin-top: 7px;
 
     img {
-      width: 75px;
+
+      &.ajc {
+        height: 29px;
+      }
 
       &.dayton {
         width: 210px;
@@ -1454,7 +1501,6 @@
   }
 
   .c-stickyLogin {
-    justify-content: flex-end;
     align-items: center;
 
     .nav-items {
@@ -1645,6 +1691,21 @@
     100% {
       opacity: 0;
       visibility: hidden;
+    }
+  }
+
+  @keyframes pulse {
+
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.17);
+    }
+
+    100% {
+      transform: scale(1);
     }
   }
 }
