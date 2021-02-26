@@ -161,6 +161,7 @@ const NavBar = ({
             sections={redesignChildren}
             arcSite={arcSite}
             setToggle={setToggle}
+            animationVisibility={stickyNavVisibility}
             />
         </div>
         <HamburgerMenu

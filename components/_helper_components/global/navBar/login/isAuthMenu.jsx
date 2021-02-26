@@ -70,7 +70,7 @@ const isAuthMenu = ({
 
   return (
     <>
-      <div onClick={() => setShowUserMenu(!showUserMenu)}>
+      <div onClick={() => setShowUserMenu(!showUserMenu)} data-mg2-action={isMobile ? 'login' : ''}>
         <img src={source} />
         <div className='login-text'>Log Out</div>
       </div>
