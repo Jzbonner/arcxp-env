@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
@@ -10,11 +10,8 @@ const Section = ({
   link,
   childSections = [],
   index,
-  setSection,
   activeSection,
   newTab,
-  isMobile,
-  isSticky,
   isLast,
 }) => {
   const fusionContext = useFusionContext();
@@ -34,27 +31,11 @@ const Section = ({
   const {
     nav_title: name,
   } = navigation || {};
-  function activateMenu(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    setSection(index);
-  }
+
   const subNavRef = React.createRef(null);
-  const [width, setWidth] = useState(null);
   let childSectionLength = 0;
 
   // manually sets the width for the parent container, was having issues with safari when no width was being set.
-  useEffect(() => {
-    if (subNavRef.current && !isMobile) {
-      setWidth(subNavRef.current.getBoundingClientRect().width);
-    }
-  }, [subNavRef.current]);
-
-  useEffect(() => {
-    if (subNavRef.current && !isMobile) {
-      setWidth(subNavRef.current.getBoundingClientRect().width);
-    }
-  }, [isSticky]);
 
   const isActive = index === activeSection ? 'isVisible' : '';
 
@@ -64,12 +45,11 @@ const Section = ({
   }
 
   const isHighlighted = primarySectionID === link;
-  const highlitClass = isHighlighted ? 'bold' : '';
 
   // Added protection if there are no subsections
   if (childSections.length === 0) {
     return <>
-      <li className={`nav-items nav-itemText ${ePaperClass}`}>
+      <li className={`nav-items nav-itemText ${ePaperClass} nav-itemText-${primarySectionID}`}>
         {isHighlighted ? <div className="activeSelection" /> : null}
         <a href={link.indexOf('/') === 0 ? `${siteDomainURL}${link}` : link} target={newTab === 'true' ? '_blank' : '_self'}>
           {name}
@@ -114,14 +94,11 @@ const Section = ({
     <>
     <li className={`nav-items nav-itemText ${ePaperClass}`}>
       {isHighlighted ? <div className="activeSelection" /> : null}
-        <div className={`nav-item-link ${highlitClass}`} onClick={ e => activateMenu(e)}>
-          <a>{name}</a>
-        </div>
         <div className={`section ${isActive}`}>
           <div className='section-item'>
             <a href={link.indexOf('/') === 0 ? `${siteDomainURL}${link}/` : link}>{name}</a>
           </div>
-          <div className={`subNav ${isActive} ${isLast ? 'expand-left' : ''}`} style={{ width: `${width}px` }}>
+          <div className={`subNav ${isActive} ${isLast ? 'expand-left' : ''}`}>
             <ul className={`subNav-flyout itemCount-${childSectionLength}`} ref={subNavRef}>
               {childList}
             </ul>
@@ -143,6 +120,7 @@ Section.propTypes = {
   isMobile: PropTypes.bool,
   isSticky: PropTypes.bool,
   isLast: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 export default Section;
