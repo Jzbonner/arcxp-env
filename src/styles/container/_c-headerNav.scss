@@ -1334,12 +1334,6 @@
       min-width: 14px;
       height: 14px;
     }
-
-    // @include breakpoint(desktop-sm) {
-    //   animation: .75s pulse;
-    //   animation-delay: 2s;
-    //   animation-iteration-count: 3;
-    // }
   }
 
   .nav-flyout-button,
@@ -1706,17 +1700,9 @@
       transform: scale(1);
     }
 
-    // 25% {
-    //   transform: scale(1.05);
-    // }
-
     50% {
       transform: scale(1.17);
     }
-
-    // 75% {
-    //   transform: scale(1.05);
-    // }
 
     100% {
       transform: scale(1);
