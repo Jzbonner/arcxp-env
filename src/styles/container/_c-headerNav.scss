@@ -66,6 +66,10 @@
       }
 
       @include breakpoint(desktop-sm) {
+        padding-bottom: 15px;
+      }
+
+      @include breakpoint(desktop-lg) {
         padding-bottom: 20px;
       }
     }
@@ -83,6 +87,15 @@
       .stickyNav-homepage {
         display: flex;
         align-items: center;
+      }
+
+      .pulse {
+        @include breakpoint(desktop-sm) {
+          animation: .75s pulse;
+          animation-delay: 2s;
+          animation-iteration-count: 5;
+          animation-timing-function: linear;
+        }
       }
     }
 
@@ -209,8 +222,12 @@
           @include breakpoint(tablet) {
             height: 46px;
           }
-    
+
           @include breakpoint(desktop-sm) {
+            height: 54px;
+          }
+    
+          @include breakpoint(desktop-lg) {
             height: 71px;
           }
         }
@@ -232,6 +249,11 @@
       }
 
       @include breakpoint(desktop-sm) {
+        padding-top: 15px;
+        padding-bottom: 20px;
+      }
+
+      @include breakpoint(desktop-lg) {
         padding: 20px 0;
       }
 
@@ -269,6 +291,11 @@
         }
 
         @include breakpoint(desktop-sm) {
+          max-height: 54px;
+          max-width: 256px;
+        }
+        
+        @include breakpoint(desktop-lg) {
           max-height: 71px;
           height: 71px;
           max-width: 346px;
@@ -789,12 +816,19 @@
         }
       }
 
+      &.isSticky {
+
+        .subNav {
+          top: 31px;
+        }
+      }
+
       &:hover {
         @include breakpoint(tablet) {
           cursor: pointer;
         }
 
-        @include breakpoint(tablet-sm) {
+        @include breakpoint(desktop-sm) {
 
           &:not(.nav-login) {
             cursor: none;
@@ -1221,7 +1255,7 @@
         @include breakpoint(tablet) {
           display: flex;
           justify-content: center;
-          height: 16px;
+          height: inherit;
           width: 100%;
           list-style-type: none;
           overflow: hidden;
@@ -1282,7 +1316,7 @@
 
         img {
           @include between-breakpoints(tablet, desktop-sm) {
-            height: 21px;
+            height: 26px;
           }
         }
       }
@@ -1300,6 +1334,12 @@
       min-width: 14px;
       height: 14px;
     }
+
+    // @include breakpoint(desktop-sm) {
+    //   animation: .75s pulse;
+    //   animation-delay: 2s;
+    //   animation-iteration-count: 3;
+    // }
   }
 
   .nav-flyout-button,
@@ -1657,6 +1697,29 @@
     100% {
       opacity: 0;
       visibility: hidden;
+    }
+  }
+
+  @keyframes pulse {
+
+    0% {
+      transform: scale(1);
+    }
+
+    // 25% {
+    //   transform: scale(1.05);
+    // }
+
+    50% {
+      transform: scale(1.17);
+    }
+
+    // 75% {
+    //   transform: scale(1.05);
+    // }
+
+    100% {
+      transform: scale(1);
     }
   }
 }
