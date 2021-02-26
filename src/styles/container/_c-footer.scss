@@ -4,6 +4,10 @@
 
 // default styles for footer elements
 
+body .Mg2-connext[data-display-type] {
+  box-shadow: none !important; /* stylelint-disable-line declaration-no-important */
+}
+
 .c-footer {
   display: flex;
   background-color: #f1f1f2;
