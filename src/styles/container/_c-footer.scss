@@ -252,8 +252,13 @@ body .Mg2-connext[data-display-type] {
 
       .menu-body-links {
         @include text-styles(.85rem, 1.57, "Gordita");
+        
+        a {
 
-        color: #2e81b7;
+          &:hover {
+            color: #2e81b7;
+          }
+        }
 
         @include breakpoint(desktop-sm) {
 
