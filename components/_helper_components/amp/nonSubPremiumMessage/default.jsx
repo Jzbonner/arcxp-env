@@ -9,12 +9,10 @@ const NonSubPremiumMessage = ({ siteFullname }) => (
         <div className="c-nonSubPremium">
             <div className="nonSubPromo">
                 <div className="text">
-                    <span className="subscription-headline">Support Our Journalists
-                    </span>
-                    <span className="thank-you-subscriber">The {isOhioSite(siteFullname) ? `${siteFullname}'` : `${siteFullname}'s`} journalists report what&apos;s really going on in your community.</span>
+                    <span className="subscription-headline">Support {isOhioSite(siteFullname) ? 'Local Journalism' : 'Our Journalists'}</span>
+                    <span className="thank-you-subscriber">{isOhioSite(siteFullname) ? `${siteFullname}'` : `The ${siteFullname}'s`} journalists report what&apos;s really going on in your community.</span>
                     <div className="action-wrapper">
-                      <a on="tap:amp-access.login-SubscribeFromInline">Subscribe
-                      </a>
+                      <a on="tap:amp-access.login-SubscribeFromInline">Subscribe</a>
                     </div>
                 </div>
             </div>
