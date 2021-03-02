@@ -11,6 +11,8 @@ body .Mg2-connext[data-display-type] {
 .footer-wrapper {
   background-color: #f1f1f2;
   width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
 
   .c-footer {
     display: flex;
@@ -174,7 +176,7 @@ body .Mg2-connext[data-display-type] {
 
       @include breakpoint(desktop-sm) {
         display: flex;
-        padding: 40px 20px 40px 0;
+        padding: 40px 10px 40px 0;
         box-sizing: border-box;
         max-width: 1600px;
         flex-wrap: wrap;
@@ -184,7 +186,7 @@ body .Mg2-connext[data-display-type] {
 
       @include breakpoint(desktop-lg) {
         margin: 0;
-        padding: 40px 40px 0 0;
+        padding: 40px 25px 0 0;
         width: auto;
         white-space: nowrap;
         overflow: hidden;
@@ -246,6 +248,7 @@ body .Mg2-connext[data-display-type] {
 
         @include breakpoint(desktop-sm) {
           padding: 0 0 0 10px;
+          white-space: nowrap;
         }
       }
 

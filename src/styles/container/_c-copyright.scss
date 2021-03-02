@@ -4,6 +4,8 @@
 .copyright-wrapper {
   width: 100%;
   background-color: #f1f1f2;
+  max-width: 1600px;
+  margin: 0 auto;
 
   .c-copyright {
     background-color: #f1f1f2;
@@ -62,6 +64,7 @@
 
         @include breakpoint(tablet) {
           display: block;
+          padding-left: 0;
         }
 
         @include breakpoint(desktop-sm) {
