@@ -104,7 +104,7 @@ const AmpNavBar = () => {
         </a>
         <ul>
           <li className="amp-nav-link amp-auth">
-            <a on="tap:amp-access.login-logoutEmbedded" data-mg2-action="logout" data-mce-href="#" amp-access='UserState!="LoggedOut"' amp-access-hide>
+            <a on="tap:amp-access.logout-logoutEmbedded" data-mg2-action="logout" data-mce-href="#" amp-access='UserState!="LoggedOut"' amp-access-hide>
               <amp-img src={userIconWhite} width="35px" height="35px" layout="fixed"></amp-img>
               <span>Log Out</span>
             </a>

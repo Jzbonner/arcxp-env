@@ -117,12 +117,29 @@ const SiteMetrics = ({ isAmp }) => {
               "pageNameStr": "",
               "pageUrlStr": "",
               "pageMainSection": "${topSection}",
-              "contentPaywallStatus": "${contentCode}",
-              "userData": {
-                "userProfileID": "AUTHDATA(RegistrationId)"
-              }
+              "contentPaywallStatus": "${contentCode}"
             },
             "triggers": {
+              "accessLogoutStarted": {
+                "on": "access-logout-logoutEmbedded-started",
+                "request": "41",
+                "vars": {
+                  "event_name": "logoutEvent_start",
+                  "event_category": "user registration",
+                  "event_action": "logout start",
+                  "event_label": "log out"
+                }
+              },
+              "accessLogoutSuccess": {
+                "on": "access-logout-logoutEmbedded-success",
+                "request": "41",
+                "vars": {
+                  "event_name": "logoutEvent_complete",
+                  "event_category": "user registration",
+                  "event_action": "logout complete",
+                  "event_label": "log out"
+                }
+              },
               "accessLoginStarted": {
                 "on": "access-login-loginEmbedded-started",
                 "request": "35",
@@ -140,7 +157,10 @@ const SiteMetrics = ({ isAmp }) => {
                   "event_name": "loginEvent_complete",
                   "event_category": "user registration",
                   "event_action": "login complete",
-                  "event_label": "log in"
+                  "event_label": "log in",
+                  "userData": {
+                    "userProfileID": "AUTHDATA(RegistrationId)"
+                  }
                 }
               },
               "accessLoginFailed": {
