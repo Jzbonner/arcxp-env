@@ -289,63 +289,6 @@
           &:last-child {
             padding-bottom: 15px;
           }
-
-          // @include between-breakpoints(tablet, desktop-sm) {
-          //   &:nth-child(1) {
-          //     .flyout-item-0,
-          //     .flyout-item-2,
-          //     .flyout-item-4,
-          //     .flyout-item-6 {
-          //       grid-column-start: 1;
-          //     }
-
-          //     .flyout-item-1,
-          //     .flyout-item-3,
-          //     .flyout-item-5,
-          //     .flyout-item-7 {
-          //       grid-column-start: 2;
-          //     }
-
-          //     .flyout-item-8 {
-          //       grid-column-start: 3;
-          //       grid-row-end: -3;
-          //     }
-
-          //     .flyout-item-9 {
-          //       grid-column-start: 4;
-          //       grid-row-end: -3;
-          //     }
-              
-          //     .flyout-item-10 {
-          //       grid-column-start: 3;
-          //       grid-row-end: -2;
-          //     }
-
-          //     .flyout-item-11 {
-          //       grid-column-start: 4;
-          //       grid-row-end: -2;
-          //     }
-
-          //     .flyout-item-12 {
-          //       grid-column-start: 3;
-          //       grid-row-end: -1;
-          //     }
-
-          //     .flyout-item-13 {
-          //       grid-column-start: 4;
-          //       grid-row-end: -1;
-          //     }
-          //   }
-
-          //   &:nth-child(2) {
-          //     .flyout-item-0,
-          //     .flyout-item-2,
-          //     .flyout-item-4 {
-          //       grid-column-start: 1;
-          //     }
-          //   }
-            
-          // }
         }
       }
 
