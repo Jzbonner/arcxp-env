@@ -9,6 +9,12 @@ import Login from '../../global/navBar/login/default';
 import RedesignNavLinks from '../../global/navBar/redesignNavLinks/default';
 import fetchEnv from '../../global/utils/environment';
 import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
+import fbIcon from '../../../../resources/icons/stickyNav/facebook-icon.svg';
+import redditIcon from '../../../../resources/icons/stickyNav/reddit.svg';
+import instaIcon from '../../../../resources/icons/stickyNav/instagram-icon.svg';
+import pinIcon from '../../../../resources/icons/stickyNav/pinterest-icon.svg';
+import emailIcon from '../../../../resources/icons/stickyNav/email.svg';
+
 import '../../../../src/styles/container/_c-headerNav.scss';
 
 const StickyNav = ({
@@ -125,8 +131,10 @@ const StickyNav = ({
       <div className={`stickyNav ${hasWindowShade || stickyVisibilityRef.current ? 'is-visible' : ''}`}>
         <ul className={`c-stickyNav-list ${siteNameLower}`}>
           <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
-            <li className="stickyNav-item">
-              <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
+          <li className="stickyNav-item">
+              <a href={shareLinkFacebook} className="sticky-nav-icon " target="__blank">
+                <img src={fbIcon} />
+              </a>
             </li>
             <li className="stickyNav-item">
               <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
@@ -144,6 +152,25 @@ const StickyNav = ({
               <li className="stickyNav-item">
                 <a href={shareLinkEmail} className="sticky-nav-icon btn-mail" target="__blank"></a>
               </li>
+{/*             <li className="stickyNav-item">
+              <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
+            </li>
+            <li className="stickyNav-item">
+              <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
+            </li>
+            <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
+              <li className="stickyNav-item arrow-icon desktop-hidden" onClick={e => toggleMobileDropdownMenu(e)}>
+                <a href="#" className="sticky-nav-icon btn-arrow-down" target="__blank"></a>
+              </li>
+              <li className="stickyNav-item">
+                <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
+              </li>
+              <li className="stickyNav-item">
+                <a href={shareLinkReddit} className="sticky-nav-icon btn-reddit" target="__blank"></a>
+              </li>
+              <li className="stickyNav-item">
+                <a href={shareLinkEmail} className="sticky-nav-icon btn-mail" target="__blank"></a>
+              </li> */}
               {commentsEnabled ? (
                 <li className="stickyNav-item">
                   <a href="#" className="sticky-nav-icon btn-comments" onClick={e => toggleCommentsWindow(e)}>
