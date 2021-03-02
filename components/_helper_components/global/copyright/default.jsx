@@ -27,21 +27,23 @@ const Copyright = ({ cssClass = '', hideBackToTop = false }) => {
   const year = new Date().getFullYear();
 
   return (
-    <div className="c-copyright">
-      <div className={`copyright ${cssClass}`}>
-        <div className="rights">
-          &copy; {year} {ajcName}. <br /> All Rights Reserved. <br />
-        </div>
+    <div className="copyright-wrapper">
+      <div className="c-copyright">
+        <div className={`copyright ${cssClass}`}>
+          <div className="rights">
+            &copy; {year} {ajcName}. <br /> All Rights Reserved. <br />
+          </div>
         By using this website, you accept the terms of our{' '}
-        <div className="privacy">
-          <a href={getCopyLinks(visitor_agreement)}>{visitorAgreementName}</a> and{' '}
-          <a href={getCopyLinks(privacy_policy)}>{privacyPolicyName}</a>, and understand your options regarding{' '}<a href={getCopyLinks(ad_choices)}>{adChoicesName}</a>.
+          <div className="privacy">
+            <a href={getCopyLinks(visitor_agreement)}>{visitorAgreementName}</a> and{' '}
+            <a href={getCopyLinks(privacy_policy)}>{privacyPolicyName}</a>, and understand your options regarding{' '}<a href={getCopyLinks(ad_choices)}>{adChoicesName}</a>.
         </div>
-        <div className="learn-more">
-           <a href={getCopyLinks(careers)}>Learn about {careersName}</a>.
+          <div className="learn-more">
+            <a href={getCopyLinks(careers)}>Learn about {careersName}</a>.
         </div>
+        </div>
+        {!hideBackToTop && <BackToTop />}
       </div>
-      {!hideBackToTop && <BackToTop />}
     </div>
   );
 };
