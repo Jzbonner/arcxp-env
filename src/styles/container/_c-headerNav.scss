@@ -130,7 +130,7 @@
     .nav-mobile {
       display: flex;
       flex-direction: column;
-      padding: 42px 28px 30px;
+      padding: 42px 0 30px 28px;
       background-color: #212126;
       box-shadow: 0 2px 14px 0 rgba(0, 0, 0, .13);
       height: 100%;
@@ -146,6 +146,10 @@
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
       white-space: nowrap;
+
+      @include between-breakpoints(tablet, desktop-sm) {
+        padding: 42px 28px 30px;
+      }
 
       @include breakpoint(desktop-sm) {
         max-width: 416px;
