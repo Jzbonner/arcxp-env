@@ -447,11 +447,11 @@
       @include breakpoint(tablet) {
         color: #212126;
 
-        @include text-styles(.75rem, 1, "Gordita");
+        @include text-styles(.75rem, 1.2, "Gordita");
       }
 
       @include breakpoint(desktop-sm) {
-        @include text-styles(1rem, 1, "Gordita");
+        @include text-styles(1rem, 1.32, "Gordita");
       }
 
       &.login-text {
