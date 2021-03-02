@@ -19,6 +19,7 @@ body .Mg2-connext[data-display-type] {
     padding-bottom: 10px;
     flex-direction: column;
     margin: 0 auto;
+    width: 94%;
 
     li {
       list-style: none;
@@ -275,6 +276,10 @@ body .Mg2-connext[data-display-type] {
             &:last-child {
               margin-bottom: 0;
             }
+          }
+
+          @include breakpoint(desktop-lg) {
+            white-space: nowrap;
           }
         }
       }

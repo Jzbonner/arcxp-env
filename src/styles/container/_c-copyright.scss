@@ -10,6 +10,7 @@
     color: #545454;
     max-width: 1600px;
     margin: 0 auto;
+    width: 94%;
 
     @include amp-only {
       box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
