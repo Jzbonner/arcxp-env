@@ -8,304 +8,315 @@ body .Mg2-connext[data-display-type] {
   box-shadow: none !important; /* stylelint-disable-line declaration-no-important */
 }
 
-.c-footer {
-  display: flex;
+.footer-wrapper {
   background-color: #f1f1f2;
-  padding-bottom: 10px;
-  flex-direction: column;
+  width: 100%;
 
-  li {
-    list-style: none;
-    text-align: left;
-  }
-
-  a {
-    color: #212126;
-    cursor: pointer;
-  }
-
-  @include breakpoint(tablet) {
-    flex-direction: row;
-  }
-
-  //unique styles for different parts of footer
-
-  .logo-row {
+  .c-footer {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-    padding: 0 $min-margin;
     max-width: 1600px;
+    background-color: #f1f1f2;
+    padding-bottom: 10px;
+    flex-direction: column;
+    margin: 0 auto;
+
+    li {
+      list-style: none;
+      text-align: left;
+    }
+
+    a {
+      color: #212126;
+      cursor: pointer;
+    }
 
     @include breakpoint(tablet) {
-      padding-top: 20px;
+      flex-direction: row;
     }
 
-    @include breakpoint(desktop-sm) {
-      flex-direction: column;
-      justify-content: flex-start;
-      padding: 20px 30px 0;
-    }
+    //unique styles for different parts of footer
 
-    @include breakpoint(desktop-lg) {
-      margin: 0;
-      margin-right: auto;
-    }
-
-    .col {
+    .logo-row {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      width: 100%;
+      margin: 0 auto;
+      padding: 0 $min-margin;
+      max-width: 1600px;
 
       @include breakpoint(tablet) {
-        justify-content: flex-start;
+        padding-top: 20px;
+        padding-left: 30px;
       }
 
       @include breakpoint(desktop-sm) {
-        justify-content: center;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 20px 30px 0;
       }
 
-      &:first-child {
-        @include breakpoint(desktop-sm) {
-          padding: 2rem 4rem 2rem 1.563rem;
+      @include breakpoint(desktop-lg) {
+        margin: 0;
+        margin-right: auto;
+      }
+
+      .col {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        @include breakpoint(tablet) {
           justify-content: flex-start;
         }
-      }
-
-      &:nth-child(2) {
-        @include breakpoint(desktop-sm) {
-          padding-left: 4rem;
-          justify-content: left;
-        }
-      }
-    }
-
-    .footer-logo {
-      width: 183px;
-      margin: 1.875rem 0;
-
-      &.ajc {
-        @include breakpoint(tablet) {
-          margin-left: 1.25rem;
-        }
-      }
-
-      @include breakpoint(desktop-sm) {
-        width: 185px;
-        margin: 0;
-      }
-
-      &.dayton {
-        width: 183px;
-        max-width: 300px;
-        margin: 1.875rem 0;
 
         @include breakpoint(desktop-sm) {
-          width: 28vw;
+          justify-content: center;
+        }
+
+        &:first-child {
+          @include breakpoint(desktop-sm) {
+            padding: 2rem 4rem 2rem 1.563rem;
+            justify-content: flex-start;
+          }
+        }
+
+        &:nth-child(2) {
+          @include breakpoint(desktop-sm) {
+            padding-left: 4rem;
+            justify-content: left;
+          }
         }
       }
 
-      &.dayton-daily-news {
-        margin: 1.875rem 0;
+      .footer-logo {
         width: 183px;
-        max-width: 100%;
-      }
+        margin: 1.875rem 0;
 
-      &.journal-news {
-        width: 183px;
-        max-width: 300px;
-        margin: 1.875rem 0;
+        &.ajc {
+          @include breakpoint(tablet) {
+            margin-left: 1.25rem;
+          }
+        }
 
         @include breakpoint(desktop-sm) {
-          width: 28vw;
+          width: 185px;
+          margin: 0;
+        }
+
+        &.dayton {
+          width: 183px;
+          max-width: 300px;
+          margin: 1.875rem 0;
+
+          @include breakpoint(desktop-sm) {
+            width: 28vw;
+          }
+        }
+
+        &.dayton-daily-news {
+          margin: 1.875rem 0;
+          width: 183px;
+          max-width: 100%;
+        }
+
+        &.journal-news {
+          width: 183px;
+          max-width: 300px;
+          margin: 1.875rem 0;
+
+          @include breakpoint(desktop-sm) {
+            width: 28vw;
+          }
+        }
+
+        &.springfield-news-sun {
+          width: 183px;
+          max-width: 100%;
+          margin: 1.875rem 0;
         }
       }
 
-      &.springfield-news-sun {
-        width: 183px;
-        max-width: 100%;
-        margin: 1.875rem 0;
-      }
-    }
+      .newsletter-signup {
+        @include text-styles(1.125rem, 1, "Gordita");
 
-    .newsletter-signup {
-      @include text-styles(1.125rem, 1, "Gordita");
-
-      color: #545454;
-      margin-bottom: 1.6rem;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      img {
-        width: 2.8rem;
-        cursor: pointer;
-        margin-top: 3px;
-      }
-
-      @include breakpoint(desktop-sm) {
-        @include text-styles(1.2rem, 1, "Gordita");
-
-        font-weight: 500;
-        margin: 0;
+        color: #545454;
+        margin-bottom: 1.6rem;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         img {
-          width: 3rem;
+          width: 2.8rem;
+          cursor: pointer;
+          margin-top: 3px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          @include text-styles(1.2rem, 1, "Gordita");
+
+          font-weight: 500;
+          margin: 0;
+
+          img {
+            width: 3rem;
+          }
         }
       }
     }
-  }
 
-  .menu-row {
-    @include breakpoint(tablet) {
-      margin-right: 60px;
+    .menu-row {
+      @include breakpoint(tablet) {
+        margin-right: 60px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        display: flex;
+        padding: 40px 20px 40px 0;
+        box-sizing: border-box;
+        max-width: 1600px;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        width: calc(100% - #{2 * $min-margin});
+      }
+
+      @include breakpoint(desktop-lg) {
+        margin: 0;
+        padding: 40px 40px 0 0;
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+      }
     }
 
-    @include breakpoint(desktop-sm) {
-      display: flex;
-      padding: 40px 20px 40px 0;
-      box-sizing: border-box;
-      max-width: 1600px;
-      flex-wrap: wrap;
-      margin: 0 auto;
-      width: calc(100% - #{2 * $min-margin});
-    }
+    .menu {
+      @include text-styles(1rem, 1, "Gordita");
 
-    @include breakpoint(desktop-lg) {
-      margin: 0;
-      padding: 40px 40px 0 0;
-      width: auto;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-  }
+      font-weight: 500;
+      color: #000;
+      margin-bottom: 30px;
+      border-left: 1.4px solid #cfcfcf;
+      margin-left: 15px;
 
-  .menu {
-    @include text-styles(1rem, 1, "Gordita");
+      @include breakpoint(tablet) {
+        height: fit-content;
 
-    font-weight: 500;
-    color: #000;
-    margin-bottom: 30px;
-    border-left: 1.4px solid #cfcfcf;
-    margin-left: 15px;
+        &:first-child {
+          border-top: none;
+          margin-top: 40px;
+        }
+      }
 
-    @include breakpoint(tablet) {
-      height: fit-content;
+      @include breakpoint(desktop-sm) {
+        border-top: none;
+        flex: 1;
+        padding: 0 $min-margin 0 0;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          padding: 0;
+        }
+      }
+
+      @include breakpoint(desktop-lg) {
+        padding-right: 0;
+      }
 
       &:first-child {
         border-top: none;
-        margin-top: 40px;
-      }
-    }
-
-    @include breakpoint(desktop-sm) {
-      border-top: none;
-      flex: 1;
-      padding: 0 $min-margin 0 0;
-
-      &:first-child {
-        margin-top: 0;
       }
 
       &:last-child {
-        padding: 0;
-      }
-    }
-
-    @include breakpoint(desktop-lg) {
-      padding-right: 0;
-    }
-
-    &:first-child {
-      border-top: none;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    .menu-header {
-      @include text-styles(.875rem, .85, "Gordita-Bold");
-
-      font-weight: 800;
-      max-width: 1600px;
-      padding: 0 20px 15px 10px;
-      margin: 0 auto;
-      text-transform: uppercase;
-
-      @include breakpoint(desktop-sm) {
-        padding: 0 0 0 10px;
-      }
-    }
-
-    .menu-body {
-      display: block;
-      max-width: 1600px;
-      padding: 0 20px 0 10px;
-
-      @include breakpoint(desktop-sm) {
-        margin-top: 1.25rem;
+        margin-bottom: 0;
       }
 
-      .menu-body-links {
-        @include text-styles(.85rem, 1.57, "Gordita");
-        
-        a {
+      .menu-header {
+        @include text-styles(.875rem, .85, "Gordita-Bold");
 
-          &:hover {
-            color: #2e81b7;
-          }
-        }
+        font-weight: 800;
+        max-width: 1600px;
+        padding: 0 20px 15px 10px;
+        margin: 0 auto;
+        text-transform: uppercase;
 
         @include breakpoint(desktop-sm) {
+          padding: 0 0 0 10px;
+        }
+      }
 
-          &:last-child {
-            margin-bottom: 0;
+      .menu-body {
+        display: block;
+        max-width: 1600px;
+        padding: 0 20px 0 10px;
+
+        @include breakpoint(desktop-sm) {
+          margin-top: 1.25rem;
+        }
+
+        .menu-body-links {
+          white-space: nowrap;
+
+          @include text-styles(.85rem, 1.57, "Gordita");
+
+          a {
+
+            &:hover {
+              color: #2e81b7;
+            }
+          }
+
+          @include breakpoint(desktop-sm) {
+            white-space: normal;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
           }
         }
       }
     }
-  }
 
-  .menu.social-media {
-    text-align: center;
-
-    @include breakpoint(desktop-sm) {
-      text-align: left;
-      flex: .5;
-    }
-
-    .header-menu {
-      margin-top: 2.6rem;
-      display: none;
-
-      @include breakpoint(tablet) {
-        display: inline-block;
-      }
+    .menu.social-media {
+      text-align: center;
 
       @include breakpoint(desktop-sm) {
-        margin: 0;
-      }
-    }
-
-    .social-media-icons {
-      display: flex;
-      justify-content: center;
-      margin: 1.25rem auto 0;
-
-      @include breakpoint(desktop-sm) {
-        justify-content: left;
+        text-align: left;
+        flex: .5;
       }
 
-      img {
-        height: 30px;
-        margin: 0 1rem;
+      .header-menu {
+        margin-top: 2.6rem;
+        display: none;
+
+        @include breakpoint(tablet) {
+          display: inline-block;
+        }
 
         @include breakpoint(desktop-sm) {
-          margin: 0 1.25rem 0 0;
+          margin: 0;
+        }
+      }
+
+      .social-media-icons {
+        display: flex;
+        justify-content: center;
+        margin: 1.25rem auto 0;
+
+        @include breakpoint(desktop-sm) {
+          justify-content: left;
+        }
+
+        img {
+          height: 30px;
+          margin: 0 1rem;
+
+          @include breakpoint(desktop-sm) {
+            margin: 0 1.25rem 0 0;
+          }
         }
       }
     }
