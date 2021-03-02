@@ -9,7 +9,9 @@ import '../../../../../src/styles/container/_c-headerNav.scss';
 import NotAuthMenu from './notAuthMenu';
 import IsAuthMenu from './isAuthMenu';
 
-const Login = ({ isMobile, isFlyout, isSticky }) => {
+const Login = ({
+  isMobile, isFlyout, isSticky, isSidebar,
+}) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
@@ -99,7 +101,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   useWindowEvent('connextIsSubscriber', 'authenticated');
 
   return (
-    <div className={`c-login ${isSticky ? 'isSticky' : ''}`}>
+    <div className={`${isSidebar ? 'c-login-bmenu' : `c-login ${isSticky ? 'isSticky' : ''}`}`}>
       {(userStateRef.current === 'logged-in'
       || userStateRef.current === 'authenticated') && (
         <IsAuthMenu
@@ -109,6 +111,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
           setShowUserMenu={setShowUserMenu}
           userStateRef={userStateRef}
           custRegId={CustomerRegistrationId}
+          isSidebar={isSidebar}
         />
       )}
       {userStateRef.current === 'logged-out' && (
@@ -118,6 +121,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
           showUserMenu={showUserMenu}
           setShowUserMenu={setShowUserMenu}
           arcSite={arcSite}
+          isSidebar={isSidebar}
         />
       )}
     </div>
@@ -128,6 +132,7 @@ Login.propTypes = {
   isMobile: PropTypes.bool,
   isFlyout: PropTypes.bool,
   isSticky: PropTypes.bool,
+  isSidebar: PropTypes.bool,
 };
 
 export default Login;

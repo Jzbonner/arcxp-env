@@ -57,7 +57,7 @@ const Section = ({
       </li>
         </>;
   }
-  const childList = childSections.map((childSection) => {
+  const childList = childSections.map((childSection, idx) => {
     const {
       _id: id,
       navigation: childNav,
@@ -82,7 +82,7 @@ const Section = ({
 
     if (childName) {
       return (
-        <li key={id} className='flyout-item'>
+        <li key={id} className={`flyout-item flyout-item-${idx}`}>
           <a href={childURL || `${siteDomainURL}${id}/`} target='_self'>{childName}</a>
         </li>
       );

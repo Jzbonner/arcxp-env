@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useFusionContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import Search from '../search/default';
-// import Login from '../login/default';
+import Login from '../login/default';
 import NavFooter from '../navFooter/default';
 import NavCopyright from '../navCopyright/default';
 import '../../../../../src/styles/container/_c-headerNav.scss';
@@ -29,8 +29,6 @@ const HamburgerMenu = ({
     if (windowExists) handleWindowSize();
   }, []);
 
-  console.log('SECTIONS ', sections);
-
   return (
   <>
   <div className={`nav-wrapper ${hamburgerToggle ? 'isVisible' : ''}`}></div>
@@ -38,8 +36,12 @@ const HamburgerMenu = ({
   ${hamburgerToggle ? 'mobile-nav-activated' : ''}
   ${(stickyActive || hasWindowShade) && !isMobile ? 'is-hidden' : ''}
   nav-mobile`}>
+    {isTablet && <div className='nav-mobile-login'>
+        <Login isMobile={isMobile} isFlyout={isMobile} isSidebar/>
+      </div>}
+      {isTablet && <Search sticky={stickyActive} isSidebar={true}/>}
     {arcSite === 'ajc' && <div className="nav-background">
-      <img src={burgerMenuBackground} alt="ajc-burgerMenu-background"/>
+      <img className="ajc-burgerBackgrnd" src={burgerMenuBackground} alt="ajc-burgerMenu-background"/>
     </div>}
     <div className='nav-menu-toggle' onClick={(e) => { e.preventDefault(); setToggle(false); }}>
         <img src={closeButton} alt="close-btn"/>
@@ -54,10 +56,6 @@ const HamburgerMenu = ({
       <NavFooter navFooterContent={navFooterContent}/>
       <NavCopyright />
     </div>
-      {isTablet && <Search sticky={stickyActive}/>}
-      {/* <div className='nav-mobile-login'>
-        <Login isMobile={isMobile} isFlyout={isMobile}/>
-      </div> */}
   </nav>
   </>
   );
