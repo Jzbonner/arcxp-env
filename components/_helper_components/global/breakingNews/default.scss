@@ -2,27 +2,37 @@
 @import "../../../../src/styles/base/mixins";
 
 .c-breakingNews {
-  min-height: 59px;
+  height: 63px;
   width: 100%;
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
-  background: #e74c3c;
   position: relative;
+  border: 1px solid #e74c3c;
+
+  @include breakpoint(tablet) {
+    height: 40px;
+    width: 90%;
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: 94%;
+  }
+
+  @include breakpoint(desktop-lg) {
+    width: 90%;
+    max-width: 1600px;
+  }
 
   &.is-hidden {
     display: none;
   }
 
   .breakingURL {
-    width: 70%;
+    width: 100%;
     height: 100%;
-    display: inline-block;
-    padding: 10px 0;
+    display: flex;
     margin: 0 auto;
-
-    @media (min-width: 400px) {
-      width: 80%;
-    }
+    align-items: center;
   }
 
   .c-breakingNews-hide {
@@ -33,8 +43,6 @@
     transform: translateY(-50%);
     width: 19px;
     height: 20px;
-    border-radius: 50%;
-    border: 1px solid #fff;
 
     @include breakpoint(desktop-sm) {
       width: 29px;
@@ -49,9 +57,9 @@
       right: 0;
       top: 50%;
       margin: auto;
-      width: 12px;
+      width: 16px;
       height: 1px;
-      background: #fff;
+      background: #212126;
 
       @include breakpoint(desktop-sm) {
         width: 19px;
@@ -72,28 +80,64 @@
   }
 
   .c-breakingNews-heading {
-    @include text-styles(.875em, 1.29, "Gordita-Bold");
+    @include text-styles(.875rem, 1.29, "Gordita-Bold");
     
-    margin: 0 auto 5px;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
     text-transform: uppercase;
     color: #fff;
-    width: 100%;
-    max-width: 302px;
+    width: 30%;
+    background: #e74c3c;
+    max-width: 182px;
+
+    @include breakpoint(tablet) {
+      width: 25%;
+    }
 
     @include breakpoint(desktop-sm) {
-      max-width: 885px;
+      width: 20%;
+    }
+
+    @include breakpoint(desktop-sm) {
+      @include text-styles(1rem, 1.29, "Gordita-Bold");
+    }
+    
+    :first-child {
+      @include breakpoint(tablet) {
+        margin-right: 5px;
+      }
+    }
+
+    :nth-child(2) {
+      display: none;
+
+      @include breakpoint(tablet) {
+        display: flex;
+      }
     }
   }
 
   .c-breakingNews-title {
     display: block;
-    color: #fff;
+    color: #212126;
     text-transform: none;
+    text-align: left;
+    padding: 5px 40px 5px 10px;
+    width: 70%;
+    height: min-content;
 
-    @include text-styles(1em, 1.58, "Gordita");
+    @include text-styles(.75rem, 1.2, "Gordita");
+
+    @include breakpoint(tablet) {
+      padding: 10px 40px 10px 18px;
+      width: 75%;
+    }
 
     @include breakpoint(desktop-sm) {
-      @include text-styles(1.125em, 1.78, "Gordita");
+      @include text-styles(1rem, 1.2, "Gordita");
+
+      width: 80%;
     }
   }
 }
