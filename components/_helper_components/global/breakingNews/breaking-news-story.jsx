@@ -38,8 +38,11 @@ const BreakingNewsStory = () => {
     return (
       <div className={`c-breakingNews ${!isVisible ? 'is-hidden' : ''}`}>
         <a href={url} className="breakingURL">
-          <h2 className="c-breakingNews-heading">Breaking News</h2>
-          <h2 className="c-breakingNews-title">{headline}</h2>
+          <div className="c-breakingNews-heading b-flexCenter">
+            <span>Breaking</span>
+            <span>News</span>
+          </div>
+          <div className="c-breakingNews-title">{headline}</div>
         </a>
         <span className="c-breakingNews-hide" onClick={hideBar} />
       </div>
