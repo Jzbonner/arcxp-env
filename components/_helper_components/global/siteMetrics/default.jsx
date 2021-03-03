@@ -80,9 +80,18 @@ const SiteMetrics = ({ isAmp }) => {
   } = contentMeta || {};
   const siteDomain = siteDomainURL || `https://www.${site}.com`;
   if (isAmp) {
+    const { ampGtmTriggers, ampGtmID } = metrics || {};
+    const {
+      loginStart,
+      loginFailed,
+      loginAborted,
+      loginComplete,
+      logoutStart,
+      logoutComplete,
+    } = ampGtmTriggers || {};
     return (
       <amp-analytics
-        config={`https://www.googletagmanager.com/amp.json?id=${metrics.ampGtmID}&gtm.url=SOURCE_URL`}
+        config={`https://www.googletagmanager.com/amp.json?id=${ampGtmID}&gtm.url=SOURCE_URL`}
         data-credentials='include'>
         <script type='application/json' dangerouslySetInnerHTML={{
           __html: `{
@@ -122,7 +131,7 @@ const SiteMetrics = ({ isAmp }) => {
             "triggers": {
               "accessLogoutStarted": {
                 "on": "access-logout-logoutEmbedded-started",
-                "request": "41",
+                "request": "${logoutStart}",
                 "vars": {
                   "event_name": "logoutEvent_start",
                   "event_category": "user registration",
@@ -132,7 +141,7 @@ const SiteMetrics = ({ isAmp }) => {
               },
               "accessLogoutSuccess": {
                 "on": "access-logout-logoutEmbedded-success",
-                "request": "41",
+                "request": "${logoutComplete}",
                 "vars": {
                   "event_name": "logoutEvent_complete",
                   "event_category": "user registration",
@@ -142,7 +151,7 @@ const SiteMetrics = ({ isAmp }) => {
               },
               "accessLoginStarted": {
                 "on": "access-login-loginEmbedded-started",
-                "request": "35",
+                "request": "${loginStart}",
                 "vars": {
                   "event_name": "loginEvent_start",
                   "event_category": "user registration",
@@ -152,7 +161,7 @@ const SiteMetrics = ({ isAmp }) => {
               },
               "accessLoginSuccess": {
                 "on": "access-login-loginEmbedded-success",
-                "request": "39",
+                "request": "${loginComplete}",
                 "vars": {
                   "event_name": "loginEvent_complete",
                   "event_category": "user registration",
@@ -165,7 +174,7 @@ const SiteMetrics = ({ isAmp }) => {
               },
               "accessLoginFailed": {
                 "on": "access-login-loginEmbedded-failed",
-                "request": "42",
+                "request": "${loginFailed}",
                 "vars": {
                   "event_name": "loginEvent_failed",
                   "event_category": "user registration",
@@ -175,7 +184,7 @@ const SiteMetrics = ({ isAmp }) => {
               },
               "accessLoginRejected": {
                 "on": "access-login-loginEmbedded-rejected",
-                "request": "43",
+                "request": "${loginAborted}",
                 "vars": {
                   "event_name": "loginEvent_aborted",
                   "event_category": "user registration",

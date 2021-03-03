@@ -31,6 +31,14 @@ export default {
     siteFormat: 'news',
     gtmContainerKey: 'GTM-WT4CBT7',
     ampGtmID: 'GTM-WQBXD72',
+    ampGtmTriggers: {
+      loginStart: '35',
+      loginFailed: '42',
+      loginAborted: '43',
+      loginComplete: '39',
+      logoutStart: '41',
+      logoutComplete: '41',
+    },
   },
   featuredVideoPlayerRules: {
     startPlaying: true,
