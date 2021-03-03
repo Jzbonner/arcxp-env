@@ -129,26 +129,6 @@ const SiteMetrics = ({ isAmp }) => {
               "contentPaywallStatus": "${contentCode}"
             },
             "triggers": {
-              "accessLogoutStarted": {
-                "on": "access-logout-logoutEmbedded-started",
-                "request": "${logoutStart}",
-                "vars": {
-                  "event_name": "logoutEvent_start",
-                  "event_category": "user registration",
-                  "event_action": "logout start",
-                  "event_label": "log out"
-                }
-              },
-              "accessLogoutSuccess": {
-                "on": "access-logout-logoutEmbedded-success",
-                "request": "${logoutComplete}",
-                "vars": {
-                  "event_name": "logoutEvent_complete",
-                  "event_category": "user registration",
-                  "event_action": "logout complete",
-                  "event_label": "log out"
-                }
-              },
               "accessLoginStarted": {
                 "on": "access-login-loginEmbedded-started",
                 "request": "${loginStart}",
@@ -190,6 +170,26 @@ const SiteMetrics = ({ isAmp }) => {
                   "event_category": "user registration",
                   "event_action": "login aborted",
                   "event_label": "log in"
+                }
+              },
+              "accessLogoutStarted": {
+                "on": "access-login-logoutEmbedded-started",
+                "request": "${logoutStart}",
+                "vars": {
+                  "event_name": "logoutEvent_start",
+                  "event_category": "user registration",
+                  "event_action": "logout start",
+                  "event_label": "log out start"
+                }
+              },
+              "accessLogoutSuccess": {
+                "on": "access-login-logoutEmbedded-success",
+                "request": "${logoutComplete}",
+                "vars": {
+                  "event_name": "logoutEvent_complete",
+                  "event_category": "user registration",
+                  "event_action": "logout complete",
+                  "event_label": "log out complete"
                 }
               }
             }
