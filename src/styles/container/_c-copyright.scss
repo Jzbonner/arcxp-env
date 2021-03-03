@@ -1,70 +1,81 @@
 @import "../base/mixins";
 @import "../base/breakpoints";
 
-.c-copyright {
+.copyright-wrapper {
+  width: 100%;
   background-color: #f1f1f2;
-  color: #545454;
+  max-width: 1600px;
+  margin: 0 auto;
 
-  @include amp-only {
-    box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
-    background-color: #fff;
-    margin-bottom: 1.13rem;
-  }
-
-  @include breakpoint(desktop-sm) {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .copyright {
-    padding: 20px;
-    text-align: left;
+  .c-copyright {
+    background-color: #f1f1f2;
+    color: #545454;
+    max-width: 1600px;
     margin: 0 auto;
-
-    .rights,
-    .privacy {
-      padding-bottom: 28px;
-    }
-    
-    .learn-more {
-      padding-bottom: 0;
-    }
-
-    a {
-      color: #2e81b7;
-      cursor: pointer;
-    }
+    width: 94%;
 
     @include amp-only {
-      text-align: left;
-      padding: 17px 19px;
-    }
-
-    @include text-styles(.75rem, 1.75, "Gordita");
-
-    @include breakpoint(tablet) {
-      display: none;
+      box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+      background-color: #fff;
+      margin-bottom: 1.13rem;
     }
 
     @include breakpoint(desktop-sm) {
-      display: block;
+      display: flex;
+      flex-direction: row;
     }
-    
-    &.in-footer {
-      display: none;
-  
-      @include breakpoint(tablet) {
-        display: block;
+
+    .copyright {
+      padding: 20px;
+      text-align: left;
+      margin: 0 auto;
+
+      .rights,
+      .privacy {
+        padding-bottom: 28px;
       }
-  
-      @include breakpoint(desktop-sm) {
+
+      .learn-more {
+        padding-bottom: 0;
+      }
+
+      a {
+        color: #2e81b7;
+        cursor: pointer;
+      }
+
+      @include amp-only {
+        text-align: left;
+        padding: 17px 19px;
+      }
+
+      @include text-styles(.75rem, 1.75, "Gordita");
+
+      @include breakpoint(tablet) {
         display: none;
       }
-    }
 
-    @include breakpoint(desktop-sm) {
-      padding: 25px 30px 20px;
-      max-width: 1600px;
+      @include breakpoint(desktop-sm) {
+        display: block;
+      }
+
+      &.in-footer {
+        display: none;
+
+        @include breakpoint(tablet) {
+          display: block;
+          padding-left: 0;
+        }
+
+        @include breakpoint(desktop-sm) {
+          display: none;
+        }
+      }
+
+      @include breakpoint(desktop-sm) {
+        padding: 25px 30px 20px;
+        max-width: 1600px;
+      }
     }
   }
 }
