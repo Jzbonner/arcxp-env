@@ -4,23 +4,12 @@
 .c-breakingNews {
   height: 63px;
   width: 100%;
-  margin: 0 auto;
   text-align: center;
   position: relative;
   border: 1px solid #e74c3c;
 
   @include breakpoint(tablet) {
     height: 40px;
-    width: 90%;
-  }
-
-  @include breakpoint(desktop-sm) {
-    width: 94%;
-  }
-
-  @include breakpoint(desktop-lg) {
-    width: 90%;
-    max-width: 1600px;
   }
 
   &.is-hidden {
