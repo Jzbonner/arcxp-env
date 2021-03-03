@@ -70,15 +70,22 @@ const NotAuthMenu = ({
     </button>
   );
 
+  if (isSidebar) {
+    return (
+      <div onClick={() => setShowUserMenu(!showUserMenu)}>
+        <img src={userIconWhite} />
+        <div data-mg2-action="login" className='login-text-bmenu'>Log In</div>
+        <ul className={`subNav-flyout itemCount-${links.length} logged-in`}>{RenderMenuLinks(links)}</ul>
+    </div>
+    );
+  }
+
   return (
     <>
       <div onClick={() => setShowUserMenu(!showUserMenu)}>
-        <img src={isSidebar ? userIconWhite : source} />
-        <div className={`${isSidebar ? 'login-text-bmenu' : 'login-text'}`}>Log In</div>
+        <img src={source} />
+        <div className='login-text'>Log In</div>
       </div>
-      {isSidebar ? (
-        <ul className={`subNav-flyout itemCount-${links.length} logged-in`}>{RenderMenuLinks(links)}</ul>
-      ) : (
         <div ref={loginEl} className={`section login-menu ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
           <div className={'section-item'}>
             <a>
@@ -92,7 +99,6 @@ const NotAuthMenu = ({
             <ul className={`subNav-flyout itemCount-${links.length} logged-in`}>{RenderMenuLinks(links)}</ul>
           </div>
         </div>
-      )}
     </>
   );
 };

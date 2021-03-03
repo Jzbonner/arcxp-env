@@ -60,22 +60,26 @@ const isAuthMenu = ({
     </button>
   );
 
+  if (isSidebar) {
+    return (
+    <div onClick={() => setShowUserMenu(!showUserMenu)}>
+      <img src={userIconDark} />
+        <div data-mg2-action="logout" className='login-text-bmenu'>Log Out</div>
+          <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
+            <ul className={`subNav-flyout itemCount-${links.length + (isNotAuthenticated ? 3 : 2)} logged-out`}>
+              {RenderMenuLinks(links)}
+            </ul>
+          </div>
+    </div>
+    );
+  }
+
   return (
     <>
       <div onClick={() => setShowUserMenu(!showUserMenu)}>
-        <img src={isSidebar ? userIconDark : source} />
-        <div className={`${isSidebar ? 'login-text-bmenu' : 'login-text'}`}>Log Out</div>
+        <img src={source} />
+        <div className='login-text'>Log Out</div>
       </div>
-      {isSidebar ? (
-        arcSite !== 'dayton' && (
-          <div>
-            <a href={`https://epaper.${handleSiteName(arcSite)}.com/default.aspx?acc=cmg&pub=${pubParam}&date=&section=Main&EntitlementCode=epaperHTML5&custregid=${custRegId}`} target="_blank" rel="noopener noreferrer">
-              ePaper
-            </a>
-            {RenderMenuLinks(links)}
-          </div>
-        )
-      ) : (
         <div className={`section login-menu ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
           <div className={'section-item'}>
             <a href={profileLink}>
@@ -110,7 +114,6 @@ const isAuthMenu = ({
             </ul>
           </div>
         </div>
-      )}
     </>
   );
 };
