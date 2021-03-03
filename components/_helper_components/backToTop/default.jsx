@@ -7,9 +7,9 @@ const BackToTop = () => {
   };
 
   return (
-    <div className='c-backToTop' onClick={scrollToTop}>
+    <div className='c-backToTop'>
       <span>Back to Top</span>
-      <span className="top-arrow-icon"></span>
+      <span className="top-arrow-icon" onClick={scrollToTop}></span>
     </div>
   );
 };
