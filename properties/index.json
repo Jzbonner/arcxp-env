@@ -15,6 +15,10 @@
   "footerLogo": "/resources/logos/AJC/logo-footer.svg",
   "logo": "/resources/logos/AJC/logo-full.svg",
   "logoRedesign": "/resources/logos/AJC/logo-full-redesign.svg",
+  "userIconWhite": "/resources/icons/login/user-icon-white.svg",
+  "userLoggedIn": "/resources/icons/login/user-icon-dark.svg",
+  "userLoggedOut": "/resources/icons/login/user-icon.svg",
+  "closeButton": "/resources/images/amp-close.png",
   "logoShort": "/resources/logos/AJC/logo-short.svg",
   "logoHamburger": "/resources/logos/AJC/logo-mobile-hamburger.svg",
   "logoPlaceholder": "/resources/logos/AJC/placeholder.svg",
@@ -56,14 +60,16 @@
       "adsA9Id": "3970",
       "adsPrebidEnabled": "false",
       "adsPrebidTimeout": "1500",
-      "prebidJs": "prebid3.23.0.js"
+      "prebidJs": "prebid3.23.0.js",
+      "adsBreakpoints": [1024, 768, 0]
     },
     "prod": {
       "adsA9Enabled": "false",
       "adsA9Id": "3970",
       "adsPrebidEnabled": "false",
       "adsPrebidTimeout": "1500",
-      "prebidJs": "prebid3.23.0.js"
+      "prebidJs": "prebid3.23.0.js",
+      "adsBreakpoints": [1024, 768, 0]
     }
   },
   "weatherLocationId": 348181,

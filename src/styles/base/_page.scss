@@ -21,10 +21,6 @@
 
 main {
   padding-top: 1.25rem;
-
-  @include breakpoint(tablet) {
-    padding-top: 1.875rem;
-  }
 }
 
 /* stylelint-disable */

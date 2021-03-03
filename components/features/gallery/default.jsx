@@ -373,6 +373,7 @@ const Gallery = (props) => {
     setHeight(0);
     setMobileAdsIndices([]);
     setAdInsertionAbleState(true);
+    document.body.style.overflow = 'initial';
   };
 
   const renderCaptionByCurrentIndex = () => {

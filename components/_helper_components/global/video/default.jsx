@@ -278,8 +278,9 @@ const Video = ({
           // grab the title and poster for each video event
           const { basic: vidTitle } = videoData && videoData.headlines ? videoData.headlines : {};
           const { url: vidPoster } = videoData && videoData.promo_image ? videoData.promo_image : {};
-          // get parent div of shadow DOM
-          const getShadowParent = document.getElementsByClassName('powa-shadow');
+          // get parent div
+          const getVideoParent = document.querySelectorAll('.video-component');
+
           // append attributes to video func
           const appendDataToVideo = (tag) => {
             tag.setAttribute('title', vidTitle);
@@ -291,9 +292,9 @@ const Video = ({
             window._cbv = window._cbv || [];
             window._cbv.push(videoTag);
           };
-          // find video tag inside shadow DOM and append attributes.
-          Array.from(getShadowParent).map((root) => {
-            const children = root && root.shadowRoot && root.shadowRoot.children;
+          // find video tag within parent divs and append attributes.
+          Array.from(getVideoParent).map((childNode) => {
+            const children = childNode && childNode.children ? childNode.children : {};
             Array.from(children).map((el) => {
               const videoTag = el.getElementsByTagName('video')[0];
               // create event listener for inline videos where the video tag doesn't exist yet.

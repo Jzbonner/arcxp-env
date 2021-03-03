@@ -9,6 +9,11 @@
     padding-bottom: 15px;
     border-bottom: 1px solid #cdcdcd;
 
+    @include breakpoint(tablet) {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
     @include breakpoint(desktop-sm) {
       display: flex;
       flex-direction: column;
@@ -27,22 +32,70 @@
       opacity: .98;
       z-index: 4001;
       width: 100%;
-      height: 90px;
-      background-color: #f8f8f8;
+      height: 60px;
+      background-color: #fff;
       max-width: 100%;
+      box-shadow: 4px 4px 6px 0 rgba(132, 132, 132, .22);
 
       &.above-shade {
         position: relative;
       }
 
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         box-sizing: border-box;
-        height: 75px;
-        border-bottom: solid 1px #d0d0d0;
+        height: 70px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        height: 60px;
       }
 
       .Mg2-connext[data-display-type] {
         display: none;
+      }
+    }
+
+    .c-topNavItems {
+      display: flex;
+      width: 100%;
+      order: 2;
+
+      @include breakpoint(tablet) {
+        order: 1;
+        padding-bottom: 10px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        padding-bottom: 15px;
+      }
+
+      @include breakpoint(desktop-lg) {
+        padding-bottom: 20px;
+      }
+    }
+
+    .c-logoAndLinks {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      z-index: 1;
+
+      @include breakpoint(tablet) {
+        flex-direction: column;
+      }
+
+      .stickyNav-homepage {
+        display: flex;
+        align-items: center;
+      }
+
+      .pulse {
+        @include breakpoint(desktop-sm) {
+          animation: .75s pulse;
+          animation-delay: 2s;
+          animation-iteration-count: 5;
+          animation-timing-function: linear;
+        }
       }
     }
 
@@ -88,12 +141,6 @@
         @include breakpoint(desktop-sm) {
           color: #2e81b7;
         }
-      }
-
-      @include breakpoint(desktop-sm) {
-        display: flex;
-        align-items: flex-end;
-        padding-bottom: 20px;
       }
 
       &.is-hidden {
@@ -164,18 +211,30 @@
       width: 100%;
       display: flex;
       justify-content: center;
+      align-items: center;
       min-height: 29px;
+      
+      &.ajc {
 
-      @include breakpoint(desktop-sm) {
-        height: 79px;
+        a {
+          height: 37px;
+
+          @include breakpoint(tablet) {
+            height: 46px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            height: 54px;
+          }
+    
+          @include breakpoint(desktop-lg) {
+            height: 71px;
+          }
+        }
       }
 
       &.not-visible {
         display: none;
-      }
-
-      a {
-        height: 29px;
       }
     }
 
@@ -183,26 +242,26 @@
       padding: 15px 0;
       flex-direction: row;
       position: relative;
+      align-items: center;
 
-      @include breakpoint(desktop-sm) {
-        padding: 0;
+      @include breakpoint(tablet) {
+        padding: 10px 0;
       }
 
-      .nav-login {
-        @include breakpoint(desktop-sm) {
-          display: none;
-        }
+      @include breakpoint(desktop-sm) {
+        padding-top: 15px;
+        padding-bottom: 20px;
+      }
+
+      @include breakpoint(desktop-lg) {
+        padding: 20px 0;
       }
 
       &.not-visible {
         display: none;
       }
 
-      .login-text {
-        display: none;
-      }
-
-      .nav-login.nav-items.isSticky {
+      .isSticky {
         padding: 0;
 
         img {
@@ -220,14 +279,28 @@
 
       @include breakpoint(desktop-sm) {
         padding-left: 0;
-        height: 79px;
-        padding-top: 30px;
         max-height: 8vw;
         box-sizing: border-box;
       }
 
       &.ajc {
-        box-sizing: border-box;
+        max-height: 37px;
+
+        @include breakpoint(tablet) {
+          max-height: 46px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          max-height: 54px;
+          max-width: 256px;
+        }
+        
+        @include breakpoint(desktop-lg) {
+          max-height: 71px;
+          height: 71px;
+          max-width: 346px;
+          width: 346px;
+        }
       }
 
       &.dayton {
@@ -300,11 +373,6 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-
-      @include breakpoint(desktop-sm) {
-        display: flex;
-        flex-direction: row;
-      }
     }
 
     .nav-row {
@@ -339,32 +407,6 @@
         padding: 10px 1.3vw 0 0;
       }
 
-      &:hover {
-        @include breakpoint(desktop-sm) {
-          cursor: pointer;
-        }
-
-        @include breakpoint(desktop-sm) {
-
-          &:not(.nav-login) {
-            cursor: none;
-          }
-        }
-
-        .section {
-          @include breakpoint(desktop-sm) {
-            opacity: 1;
-          }
-
-          .subNav {
-            @include breakpoint(desktop-sm) {
-              visibility: visible;
-              opacity: 1;
-            }
-          }
-        }
-      }
-
       .activeSelection {
         width: 5px;
         height: 24px;
@@ -396,20 +438,24 @@
     }
 
     .nav-itemText {
-      @include text-styles(1.125rem, 1.44, "Gordita");
+      @include text-styles(1.125rem, 1.44, "Gordita-Medium");
 
       text-transform: capitalize;
       align-items: center;
       -webkit-font-smoothing: antialiased;
 
-      @include breakpoint(desktop-sm) {
-        color: #2e81b7;
+      @include breakpoint(tablet) {
+        color: #212126;
 
-        @include text-styles(.875rem, 1, "Gordita-Medium");
+        @include text-styles(.75rem, 1.2, "Gordita");
       }
 
-      @include breakpoint(desktop-lg) {
-        @include text-styles(1rem, 1, "Gordita-Medium");
+      @include breakpoint(desktop-sm) {
+        @include text-styles(1rem, 1.32, "Gordita");
+      }
+
+      &.login-text {
+        color: #212126;
       }
     }
 
@@ -448,20 +494,6 @@
       box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .24), 0 1px 4px 0 rgba(0, 0, 0, .24);
       margin-bottom: 2rem;
       order: -1;
-
-      @include breakpoint(desktop-sm) {
-        padding-left: 15px;
-        padding-top: 10px;
-        margin-bottom: 0;
-        display: flex;
-        align-items: center;
-        flex-grow: 1;
-        flex-basis: 180px;
-        box-shadow: none;
-        border-radius: 0;
-        height: auto;
-        order: 0;
-      }
     }
 
     .search-form {
@@ -485,32 +517,68 @@
       outline: none;
 
       @include text-styles(1rem, 1, "Gordita");
-
-      @include breakpoint(desktop-sm) {
-        text-align: right;
-        border: none;
-        background-color: transparent;
-        width: calc(100% - 40px);
-
-        @include text-styles(.875rem, 1, "Gordita");
-      }
     }
 
     .c-search-icon {
       border: none;
       background: transparent;
+      height: 14px;
+
+      @include breakpoint(desktop-sm) {
+        height: 21px;
+      }
 
       .search-icon {
         padding: 0 .5rem;
+      }
+    }
 
-        @include breakpoint(desktop-sm) {
-          max-width: 100%;
-          width: 29px;
-          cursor: pointer;
-          vertical-align: middle;
-          margin-left: 10px;
-          font-size: 1rem;
-          padding: 0;
+    .c-headerIcon {
+      display: none;
+      border: none;
+
+      @include breakpoint(tablet) {
+        height: 14px;
+        display: flex;
+      }
+
+      @include breakpoint(desktop-sm) {
+        height: 21px;
+        cursor: pointer;
+      }
+
+      .search-icon {
+        height: 100%;
+
+        &:hover {
+
+          path {
+            fill: #2e81b7;
+          }
+        }
+      }
+    }
+
+    .c-weather {
+      display: none;
+
+      @include breakpoint(tablet) {
+        display: flex;
+        min-width: 65px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        min-width: 86px;
+      }
+
+      &:hover {
+
+        a {
+          color: #2e81b7;
+        }
+
+        :before {
+          color: #2e81b7;
         }
       }
     }
@@ -518,17 +586,14 @@
     .nav-weather {
       display: none;
 
-      @include breakpoint(desktop-nav) {
+      @include breakpoint(tablet) {
         display: flex;
-        padding-top: 10px;
         align-items: center;
-        min-width: 35px;
+        white-space: nowrap;
       }
     }
 
     .weather-icon {
-      padding-left: 26px;
-      padding-top: 10px;
       cursor: pointer;
 
       &:before {
@@ -537,7 +602,7 @@
         top: 0;
         padding: 0;
         content: " ";
-        color: #2e81b7;
+        color: #212126;
       }
 
       &.weather-1:before {
@@ -729,31 +794,76 @@
       }
     }
 
-    .nav-login {
-      @include between-breakpoints(mobile, desktop-sm) {
+    .c-login {
+      display: flex;
+      align-items: center;
 
-        &.isSticky .login-text {
+      :first-child {
+        display: flex;
+      }
+
+      img {
+        height: 26px;
+
+        @include breakpoint(desktop-sm) {
+          height: 36px;
+        }
+      }
+
+      .login-text {
+        @include between-breakpoints(mobile,tablet) {
           display: none;
         }
       }
 
-      @include breakpoint(desktop-sm) {
+      &.isSticky {
+
+        .subNav {
+          top: 31px;
+        }
+      }
+
+      &:hover {
+        @include breakpoint(tablet) {
+          cursor: pointer;
+        }
+
+        @include breakpoint(desktop-sm) {
+
+          &:not(.nav-login) {
+            cursor: none;
+          }
+        }
+
+        .section {
+          @include breakpoint(tablet) {
+            opacity: 1;
+          }
+
+          .subNav {
+            @include breakpoint(tablet) {
+              visibility: visible;
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+      @include breakpoint(tablet) {
         display: flex;
-        padding: 0;
-        padding-bottom: 0;
-        margin-left: 20px;
-        margin-bottom: 0;
-        margin-top: 11px;
-        height: 54px;
-        width: max-content;
 
         a {
-          color: #2e81b7;
+          color: #212126;
           width: max-content;
         }
 
         .section-item {
-          height: 54px;
+          background-color: #ededed;
+          border-top: solid 1px rgba(255, 255, 255, .47);
+          border-right: solid 1px rgba(255, 255, 255, .47);
+          border-left: solid 1px rgba(255, 255, 255, .47);
+          padding: 5px 15px;
+          z-index: 4;
         }
 
         .login-text-container {
@@ -761,34 +871,35 @@
         }
 
         .login-text {
-          display: inline-block;
-          line-height: 54px;
-          vertical-align: middle;
           cursor: pointer;
         }
 
         .section,
         .section-item {
-          min-width: 100%;
-          box-sizing: border-box;
+          box-sizing: content-box;
         }
 
         .section .subNav {
           right: 0;
           border-radius: 6px 0 6px 6px;
-          top: 52px;
+          top: 36px;
           min-width: 170px;
           width: 240px;
-          box-sizing: border-box;
-          padding: 1.875rem;
+          box-sizing: content-box;
+          padding: 15px;
+          background-color: #ededed;
+
+          @include breakpoint(desktop-sm) {
+            top: 54px;
+          }
         }
       }
 
       .btn-profile {
-        height: 43px;
+        height: 40px;
         width: 100%;
         padding: 0;
-        border-radius: 2px;
+        border-radius: 6px;
         color: #fff;
         text-align: center;
         display: flex;
@@ -797,10 +908,14 @@
         border: 2px solid #fff;
         cursor: pointer;
 
-        @include breakpoint(desktop-sm) {
-          background-image: linear-gradient(to top, #04befe, #4481eb);
+        @include breakpoint(tablet) {
+          background-color: #3299ad;
           border: none;
-          margin-bottom: 1.875rem;
+          margin-bottom: 10px;
+        }
+
+        &:hover {
+          background-color: #313132;
         }
 
         @include text-styles(1rem, 1, "Gordita-Bold");
@@ -829,25 +944,19 @@
     }
 
     .login-text {
-      padding-left: 6px;
+      padding-left: 2px;
       cursor: pointer;
-      display: inline-block;
+      display: flex;
+      align-items: center;
       vertical-align: middle;
+      white-space: nowrap;
 
-      @include text-styles(1rem, 1, "Gordita-Bold");
+      @include text-styles(.75rem, 1, "Gordita-Medium");
 
       @include breakpoint(desktop-sm) {
-        display: flex;
-        font-weight: 800;
+        padding-left: 6px;
 
-        @include text-styles(.875rem, 3, "Gordita-Bold");
-      }
-
-      @include breakpoint(desktop-nav) {
-        display: flex;
-        font-weight: 800;
-
-        @include text-styles(1.125rem, 3, "Gordita-Bold");
+        @include text-styles(.875rem, 1, "Gordita-Medium");
       }
     }
 
@@ -879,24 +988,26 @@
       &.isVisible {
         display: flex;
 
-        @include breakpoint(desktop-sm) {
+        @include breakpoint(tablet) {
           opacity: 1;
         }
       }
 
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         display: flex;
         opacity: 0;
         transition: opacity .15s;
-        margin-top: 0;
-        margin-left: -.45rem;
+        margin-top: -1px;
+        margin-left: -1rem;
         position: absolute;
-        box-shadow: 0 -8px 30px -8px rgba(0, 0, 0, .1);
+        box-shadow: -6px 5px 8px 0 rgba(60, 60, 60, .11);
       }
     }
 
     .section-item {
       display: none;
+      border-radius: 6px 6px 0 0;
+      z-index: 4;
 
       @include breakpoint(desktop-sm) {
         height: 44px;
@@ -904,8 +1015,6 @@
         align-items: center;
         padding: 0 .45rem;
         background-color: #fff;
-        border-radius: 6px 6px 0 0;
-        z-index: 4;
       }
     }
 
@@ -924,7 +1033,7 @@
         border-radius: 6px 0 6px 6px;
       }
 
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         overflow: hidden;
         visibility: hidden;
         min-width: 120px;
@@ -935,14 +1044,15 @@
         z-index: 3;
         top: 44px;
         background-color: #fff;
-        box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+        box-shadow: -6px 5px 8px 0 rgba(60, 60, 60, .11);
+        border: solid 1px rgba(255, 255, 255, .47);
       }
     }
 
     .flyout-item {
       @include text-styles(1rem, 2, "Gordita");
 
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         white-space: nowrap;
         writing-mode: horizontal-tb;
         margin-right: 3vw;
@@ -950,20 +1060,30 @@
 
         @include text-styles(.875rem, 1, "Gordita");
       }
+
+      a {
+
+        &:hover {
+          color: #2e81b7;
+        }
+      }
     }
 
     .subNav-flyout {
       list-style-type: none;
 
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         display: inline-flex;
-        flex-wrap: wrap;
         align-content: flex-start;
         writing-mode: vertical-lr;
         height: 13.125rem;
 
+        &.itemCount-0 {
+          height: 0;
+        }
+
         &.itemCount-1 {
-          height: 1.875rem;
+          height: .875rem;
         }
 
         &.itemCount-2 {
@@ -971,12 +1091,12 @@
         }
 
         &.itemCount-3 {
-          height: 5.625rem;
+          height: max-content;
         }
 
         &.itemCount-4,
         &.itemCount-8 {
-          height: 7.5rem;
+          height: 2.4rem;
         }
 
         &.itemCount-5 {
@@ -991,7 +1111,7 @@
         &.itemCount-6,
         &.itemCount-11,
         &.itemCount-12 {
-          height: 11.25rem;
+          height: 3.88rem;
         }
       }
     }
@@ -1024,34 +1144,180 @@
         }
       }
 
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
+        background-color: #ededed;
 
         .subNav-flyout {
-          width: 100%;
+          width: inherit;
           align-content: center;
           display: flex;
-          flex-wrap: nowrap;
+          flex-wrap: wrap;
 
           .flyout-item {
+            width: 40%;
             text-align: center;
-            margin-right: 0;
-            margin-bottom: 1rem;
+            margin-right: 10px;
             height: auto;
+            min-width: fit-content;
+          }
+          
+          &.logged-in {
+
+            .flyout-item {
+              width: 50%;
+              margin-right: 0;
+            }
+
+            li {
+
+              &:nth-child(1) {
+                margin-bottom: 10px;
+              }
+  
+              &:nth-child(3) {
+                margin-bottom: 10px;
+              }
+            }
+          }
+
+          &.logged-out {
+
+            li {
+
+              &:not(:nth-child(3)):not(:last-child) {
+                margin-bottom: 10px;
+              }
+            }
           }
         }
-      }
-
-      &.isVisible {
-        width: calc(100% - 100px);
       }
     }
 
     .fadeInOut.section {
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         animation: 10s menuFadeInOut;
 
         .subNav {
           animation: 10s menuFadeInOut;
+        }
+      }
+    }
+
+    .c-topNavLinks {
+      order: 1;
+      display: flex;
+      box-sizing: border-box;
+      height: fit-content;
+      align-items: center;
+
+      .nav-itemText {
+        white-space: nowrap;
+
+        &:hover {
+          color: #2e81b7;
+        }
+
+        &.sm-text {
+          @include breakpoint(tablet) {
+            font-size: .65rem;
+          }
+
+          @include breakpoint(desktop-sm) {
+            font-size: .875rem;
+          }
+
+          @include breakpoint(desktop-nav) {
+            font-size: 1rem;
+          }
+        }
+      }
+
+      @include breakpoint(tablet) {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        order: 2;
+        height: 29px;
+        border-bottom: 1px solid #cdcdcd;
+        border-top: 1px solid #cdcdcd;
+        padding: 6px 0;
+      }
+
+      @include breakpoint(desktop-sm) {
+        height: 57px;
+        padding: 20px 0;
+      }
+
+      ul {
+        display: none;
+        
+        @include breakpoint(tablet) {
+          display: flex;
+          justify-content: center;
+          height: inherit;
+          width: 100%;
+          list-style-type: none;
+          overflow: hidden;
+
+          :not(:last-child) {
+            margin-right: 10px;
+          }
+        }
+
+        @include breakpoint(desktop-sm) {
+
+          :not(:last-child) {
+            margin-right: 20px;
+          }
+        }
+
+        @include breakpoint(desktop-lg) {
+          
+          :not(:last-child) {
+            margin-right: 30px;
+          }
+        }
+
+        li {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+    
+    .c-stickyLogin {
+
+      .c-topNavLinks {
+        border: none;
+        width: 100%;
+        order: initial;
+      }
+  
+      .c-headerIcon {
+        display: none;
+      }
+
+      .nav-itemText {
+        @include breakpoint(tablet) {
+          font-size: .69rem;
+        }
+
+        @include breakpoint(desktop-sm) {
+          font-size: .875rem;
+        }
+
+        @include breakpoint(desktop-lg) {
+          font-size: 1rem;
+        }
+      }
+      
+      .login-menu {
+
+        img {
+          @include between-breakpoints(tablet, desktop-sm) {
+            height: 26px;
+          }
         }
       }
     }
@@ -1062,17 +1328,28 @@
     min-width: 20px;
     height: 20px;
     cursor: pointer;
+    margin-right: 7px;
+
+    @include between-breakpoints(tablet, desktop-sm) {
+      min-width: 14px;
+      height: 14px;
+    }
   }
 
   .nav-flyout-button,
   .nav-close-button {
-    position: absolute;
+    position: relative;
     top: 50%;
     transform: translateY(-50%);
     width: 13px;
     height: 2px;
     background: #000;
     left: 7px;
+
+    @include between-breakpoints(tablet, desktop-sm) {
+      width: 9px;
+      left: 5px;
+    }
 
     &:before {
       content: "";
@@ -1084,6 +1361,11 @@
       background: #000;
       transition: all .2s;
       transform: rotate(0);
+
+      @include between-breakpoints(tablet, desktop-sm) {
+        width: 14px;
+        top: -250%;
+      }
     }
 
     &:after {
@@ -1097,6 +1379,11 @@
       transform: rotate(0);
       top: auto;
       bottom: -400%;
+
+      @include between-breakpoints(tablet, desktop-sm) {
+        width: 14px;
+        bottom: -250%;
+      }
     }
   }
 
@@ -1142,6 +1429,14 @@
     }
   }
 
+  .login-separator {
+    height: 0;
+    opacity: .5;
+    box-shadow: 0 1px 1px 0 #fff;
+    border: solid 1px #c5d5e2;
+    margin-bottom: 10px;
+  }
+
   // Sticky Nav styling
 
   .stickyNav {
@@ -1149,12 +1444,12 @@
     border: none;
     max-width: 1600px;
     margin: 0 auto;
-    width: calc(100% - #{2 * $min-margin});
+    width: 90%;
     display: none;
     align-items: center;
 
-    @include breakpoint(tablet) {
-      width: calc(100% - 85px);
+    @include breakpoint(desktop-sm) {
+      width: 94%;
     }
 
     &.is-visible {
@@ -1164,29 +1459,23 @@
     &.not-visible {
       display: none;
     }
-  }
 
-  .sticky-logo {
-    display: block;
-    margin-top: 0;
+    .c-topNavLinks {
+      order: initial;
+    }
   }
 
   .sticky-logo-homepage {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     width: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin-top: 7px;
-
-    @include breakpoint(desktop-sm) {
-      display: none;
-    }
 
     img {
-      width: 75px;
+
+      &.ajc {
+        height: 29px;
+      }
 
       &.dayton {
         width: 210px;
@@ -1212,12 +1501,7 @@
   }
 
   .c-stickyLogin {
-    justify-content: flex-end;
     align-items: center;
-
-    @include breakpoint(desktop-sm) {
-      margin-bottom: 10px;
-    }
 
     .nav-items {
       padding-top: 0;
@@ -1229,6 +1513,14 @@
 
     .stickyNav-social {
       margin-bottom: 10px;
+    }
+
+    .sticky-logo-homepage {
+      display: flex;
+
+      @include breakpoint(tablet) {
+        display: none;
+      }
     }
   }
 
@@ -1248,13 +1540,8 @@
     display: none;
     width: 100%;
 
-    @include breakpoint(desktop-sm) {
+    @include breakpoint(tablet) {
       display: flex;
-      height: 45px;
-
-      .nav-items {
-        border-bottom: solid 1px #cdcdcd;
-      }
     }
 
     &.hidden {
@@ -1404,6 +1691,21 @@
     100% {
       opacity: 0;
       visibility: hidden;
+    }
+  }
+
+  @keyframes pulse {
+
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.17);
+    }
+
+    100% {
+      transform: scale(1);
     }
   }
 }

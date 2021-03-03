@@ -18,6 +18,7 @@ const AdSetup = ({
     adsA9Id,
     adsPrebidEnabled,
     adsBidding,
+    adsBreakpoints: adsBPs = [1024, 768, 0],
   } = adsProps[currentEnv] || {};
   const { adsPrebidSizeConfig } = adsBidding || {};
   if (prerender && typeof window !== 'undefined') {
@@ -30,17 +31,16 @@ const AdSetup = ({
 
   useEffect(() => {
     const instance = ArcAdLib.getInstance();
-    const windowWidth = window.outerWidth;
+    const windowWidth = window.innerWidth;
     if (instance) {
       let adIsGood = null;
       let hasDimensionsMatch = false;
       let bpTarget;
-      if (windowWidth >= 1024) {
-        bpTarget = 1024;
-      } else if (windowWidth >= 768) {
-        bpTarget = 768;
-      } else {
-        bpTarget = 0;
+      for (let i = 0; i < adsBPs.length; i += 1) {
+        if (windowWidth >= adsBPs[i]) {
+          bpTarget = adsBPs[i];
+          break;
+        }
       }
       let filteredDimensions = dimensions;
       let filteredBPs = breakpoints;

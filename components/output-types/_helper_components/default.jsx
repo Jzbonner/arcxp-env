@@ -52,9 +52,9 @@ const RenderOutputType = (props) => {
         <SiteMeta />
         <GoogleStructuredData />
         <AmpRelLink type={type} url={articleURL} noAmp={noAmp} />
-        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`}/>
-        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`}/>
-        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`}/>
+        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} />
+        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} />
+        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`} />
         <CssLinks />
         {includeGtm && (
           <>
@@ -101,7 +101,13 @@ const RenderOutputType = (props) => {
             <ConnextInit triggerLoginModal={outputType && outputType === 'login'} />
           </>
         )}
-        {outputType === 'default' ? <DetectAdBlocker /> : null}
+        {/* 1045 bait START */}
+        {outputType !== 'amp' && (
+          <>
+            <DetectAdBlocker />
+          </>
+        )}
+        {/* 1045 bait END */}
         <div id="fb-root"></div>
         <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
         {devconActive && <script id="ns_script_dc" data-key={devconKey || '2a1556f7-d788-4b8b-943a-dd77f5f0d472'} data-e="5" src="//includemodal.global.ssl.fastly.net/sp.js" type="text/javascript"></script>}

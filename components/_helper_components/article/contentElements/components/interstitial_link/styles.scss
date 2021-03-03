@@ -7,6 +7,10 @@
   padding: 1.2em 0 1.2em 1.0625em;
   display: flex;
 
+  @include amp-exclude {
+    height: auto !important; /* stylelint-disable declaration-no-important */
+  }
+
   @include breakpoint(tablet) {
     padding-left: 1.4em;
   }

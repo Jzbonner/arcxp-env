@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import copyrightFilter from '../../../../content/filters/copyright';
 import '../../../../src/styles/container/_c-copyright.scss';
 import getCopyLinks from '../../../layouts/_helper_functions/getCopyLinks';
 import BackToTop from '../../backToTop/default';
 
-const Copyright = () => {
+const Copyright = ({ cssClass = '', hideBackToTop = false }) => {
   const siteContent = useContent({
     source: 'site-api',
     query: {
@@ -26,22 +27,29 @@ const Copyright = () => {
   const year = new Date().getFullYear();
 
   return (
-    <div className="c-copyright">
-      <div className="copyright">
-        <div className="rights">
-          &copy; {year} <a href="/">{ajcName}.</a> <br /> All Rights Reserved. <br />
-        </div>
+    <div className="copyright-wrapper">
+      <div className="c-copyright">
+        <div className={`copyright ${cssClass}`}>
+          <div className="rights">
+            &copy; {year} {ajcName}. <br /> All Rights Reserved. <br />
+          </div>
         By using this website, you accept the terms of our{' '}
-        <div className="privacy">
-          <a href={getCopyLinks(visitor_agreement)}>{visitorAgreementName}</a> and{' '}
-          <a href={getCopyLinks(privacy_policy)}>{privacyPolicyName}</a>, and understand your options regarding{' '}<a href={getCopyLinks(ad_choices)}>{adChoicesName}</a>.
+          <div className="privacy">
+            <a href={getCopyLinks(visitor_agreement)}>{visitorAgreementName}</a> and{' '}
+            <a href={getCopyLinks(privacy_policy)}>{privacyPolicyName}</a>, and understand your options regarding{' '}<a href={getCopyLinks(ad_choices)}>{adChoicesName}</a>.
         </div>
-        <div className="learn-more">
-           <a href={getCopyLinks(careers)}>Learn about {careersName}</a>.
+          <div className="learn-more">
+            <a href={getCopyLinks(careers)}>Learn about {careersName}</a>.
         </div>
+        </div>
+        {!hideBackToTop && <BackToTop />}
       </div>
-      <BackToTop />
     </div>
   );
+};
+
+Copyright.propTypes = {
+  cssClass: PropTypes.string,
+  hideBackToTop: PropTypes.bool,
 };
 export default Copyright;
