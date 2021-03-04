@@ -21,9 +21,19 @@
 
 .c-nav {
   margin: 0 auto;
+  width: 100%;
+
+  @include breakpoint(tablet) {
+    width: 90%;
+  }
 
   @include breakpoint(desktop-sm) {
-    width: 100%;
+    width: 94%;
+  }
+
+  @include breakpoint(desktop-lg) {
+    width: 90%;
+    max-width: 1600px;
   }
 }
 

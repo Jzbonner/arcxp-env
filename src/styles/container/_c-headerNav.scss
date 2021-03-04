@@ -12,17 +12,12 @@
     @include breakpoint(tablet) {
       border-bottom: none;
       padding-bottom: 0;
+      width: 100%;
     }
 
     @include breakpoint(desktop-sm) {
       display: flex;
       flex-direction: column;
-      width: 94%;
-    }
-
-    @include breakpoint(desktop-lg) {
-      width: 90%;
-      max-width: 1600px;
     }
 
     &.stickyActive {
@@ -1972,31 +1967,35 @@
       .nav-copyright {
         padding-bottom: 37px;
 
-        .c-copyright {
+        .copyright-wrapper {
           background: none;
 
-          .copyright {
-            white-space: pre-wrap;
-            margin: 0;
-            padding: 0;
-            max-width: 354px;
-            width: 100%;
-            color: #fff;
-
-            .learn-more {
-
-              span {
-                color: #fff;
+          .c-copyright {
+            background: none;
+  
+            .copyright {
+              white-space: pre-wrap;
+              margin: 0;
+              padding: 0;
+              max-width: 354px;
+              width: 100%;
+              color: #fff;
+  
+              .learn-more {
+  
+                span {
+                  color: #fff;
+                }
               }
             }
-          }
-
-          .rights,
-          .privacy {
-            padding-bottom: 20px;
-
-            a {
-              width: auto;
+  
+            .rights,
+            .privacy {
+              padding-bottom: 20px;
+  
+              a {
+                width: auto;
+              }
             }
           }
         }
