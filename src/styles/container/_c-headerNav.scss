@@ -1733,6 +1733,12 @@
           @include breakpoint(desktop-sm) {
             cursor: pointer;
           }
+
+          &:active,
+          &:visited {
+            background: #3299ad;
+            border: none;
+          }
         }
 
         .subNav-flyout {
@@ -1892,6 +1898,22 @@
                   color: #fff;
                   font-weight: 200;
                   white-space: pre-line;
+
+                  @include between-breakpoints(mobile,tablet) {
+
+                    &:active,
+                    &:focus,
+                    &:visited {
+                      color: #9b9b9b;
+                    }
+                  }
+
+                  @include breakpoint(desktop-sm) {
+                  
+                    &:hover {
+                      color: #9b9b9b;
+                    }
+                  }
                 }
               }
             }
