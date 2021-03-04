@@ -125,7 +125,8 @@
 
     @include breakpoint(desktop-sm) {
       @include text-styles(1rem, 1.2, "Gordita");
-
+      
+      text-align: center;
       width: 80%;
     }
   }
