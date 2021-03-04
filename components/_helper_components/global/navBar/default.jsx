@@ -36,7 +36,7 @@ const NavBar = ({
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const {
-    logoRedesign, logoHamburger, siteName, cdnSite, cdnOrg, siteNavHierarchy, weatherPageUrl,
+    logoRedesign, siteName, cdnSite, cdnOrg, weatherPageUrl, closeButton, burgerMenuBackground, burgerWhiteLogo,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
@@ -44,9 +44,8 @@ const NavBar = ({
   const sections = useContent({
     source: 'site-api',
     query: {
-      hierarchy: siteNavHierarchy || 'TopNav',
+      hierarchy: 'MainMenuRedesign2021',
     },
-    filter: topNavFilter,
   });
 
   const redesignSections = useContent({
@@ -56,6 +55,14 @@ const NavBar = ({
     },
     filter: topNavFilter,
   });
+
+  const navFooterContent = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'BottomNavRedesign2021',
+    },
+  });
+
 
   const { children: redesignChildren } = redesignSections;
 
@@ -166,13 +173,16 @@ const NavBar = ({
         </div>
         <HamburgerMenu
           sections={sectionLi}
+          navFooterContent={navFooterContent}
           isMobile={isMobile}
           hamburgerToggle={mobileMenuToggled}
           setToggle={setToggle}
-          smallLogoUrl={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoHamburger}`)}`}
+          whiteLogoRedesign={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
+          closeButton={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${closeButton}`)}`}
           rootDirectory={rootDirectory}
           stickyActive={stickyNavVisibility || hasWindowShade}
           type={type}
+          burgerMenuBackground={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerMenuBackground}`)}`}
           siteName={siteName.toLowerCase()}/>
         <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
           && mobileMenuToggled) || hasWindowShade ? 'not-visible' : ''} `}>

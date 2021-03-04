@@ -143,65 +143,6 @@
       }
     }
 
-    .nav-mobile {
-      display: flex;
-      flex-direction: column;
-      padding: 30px 20px;
-      background-image: linear-gradient(to top, #04befe, #4481eb);
-      box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
-      height: 100%;
-      width: 100%;
-      max-width: 408px;
-      position: fixed;
-      top: 0;
-      z-index: 10002;
-      left: -1000px;
-      transform: translateX(0);
-      transition: transform .5s ease;
-      box-sizing: border-box;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
-      white-space: nowrap;
-
-      &.mobile-nav-deactivated {
-        transform: translateX(-1000px);
-      }
-
-      .nav-mobile-login {
-        display: flex;
-
-        .login-text {
-          color: #fff;
-          padding-left: 15px;
-
-          @include text-styles(1.25rem, 1, "Gordita-Bold");
-        }
-
-        .section {
-          margin-top: 20px;
-          margin-left: 50px;
-
-          .subNav {
-            width: 100%;
-
-            .flyout-item {
-              margin-bottom: 2rem;
-
-              @include text-styles(1.125rem, 1, "Gordita");
-
-              .nav-profileLogout {
-                @include text-styles(1.25rem, 1, "Gordita-Bold");
-              }
-
-              &:last-child {
-                margin-bottom: 0;
-              }
-            }
-          }
-        }
-      }
-    }
-
     .nav-mobile-logo {
       width: 100%;
       display: flex;
@@ -329,16 +270,6 @@
       }
     }
 
-    .nav-menu-header {
-      min-height: 90px;
-      padding-left: 40px;
-      padding-bottom: 10px;
-
-      @include breakpoint(desktop-sm) {
-        display: none;
-      }
-    }
-
     .nav-menu-logo {
       width: 100%;
       max-width: 80px;
@@ -368,19 +299,6 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-    }
-
-    .nav-row {
-      display: flex;
-      flex-direction: column-reverse;
-      list-style-type: none;
-      min-height: fit-content;
-
-      @include breakpoint(desktop-sm) {
-        height: 65px;
-        width: 100%;
-        flex-direction: row;
-      }
     }
 
     .nav-item-link {
@@ -1701,6 +1619,474 @@
 
     100% {
       transform: scale(1);
+    }
+  }
+  // Redesigned Hamburger Menu
+
+  .c-headerNav .nav-mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 42px 20px 30px;
+    background-color: #212126;
+    box-shadow: 0 2px 14px 0 rgba(0, 0, 0, .13);
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10002;
+    left: -1000px;
+    transform: translateX(0);
+    transition: transform .5s ease;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+
+    @include breakpoint(tablet) {
+      padding: 42px 28px 30px;
+    }
+
+    @include breakpoint(desktop-sm) {
+      max-width: 416px;
+      padding: 114px 28px 30px;
+    }
+
+    &.mobile-nav-deactivated {
+      transform: translateX(-1000px);
+    }
+
+    .nav-background {
+      z-index: -1;
+
+      .ajc-burgerBackgrnd {
+        position: absolute;
+        max-width: 335px;
+        width: 100%;
+        top: 100px;
+        left: 85px;
+        right: unset;
+
+        @include between-breakpoints(tablet, desktop-sm) {
+          top: 120px;
+          right: 0;
+          left: unset;
+        }
+      }
+    }
+
+    .nav-menu-toggle {
+
+      img {
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        right: 21px;
+        top: 20px;
+      }
+
+      .nav-flyout-button {
+        display: block;
+        background: none;
+
+        &:before {
+          transform: rotate(-135deg);
+          top: 0;
+          background: #fff;
+        }
+
+        &:after {
+          transform: rotate(135deg);
+          bottom: 0;
+          background: #fff;
+        }
+      }
+    }
+
+    .nav-mobile-login {
+      display: flex;
+      order: -1;
+
+      img {
+        width: 44px;
+        height: 43px;
+      }
+
+      .c-login-bmenu {
+        display: block;
+        width: 100%;
+
+        .login-text-bmenu {
+          color: #fff;
+          display: inline-block;
+          vertical-align: top;
+          text-align: center;
+          font-weight: 800;
+          width: 55px;
+          padding: 13px 22px 14px;
+          border-radius: 9px;
+          margin: 0 0 0 9px;
+          border: solid 1px #ececec;
+
+          @include text-styles(.75rem, 1.44, "Gordita");
+
+          @include breakpoint(desktop-sm) {
+            cursor: pointer;
+          }
+
+          &:active,
+          &:visited {
+            background: #3299ad;
+            border: none;
+          }
+        }
+
+        .subNav-flyout {
+          list-style: none;
+          display: flex;
+          padding: 16px 0 21px;
+          align-content: unset;
+          height: auto;
+          writing-mode: unset;
+
+          .flyout-item {
+            width: 25%;
+            line-height: 1;
+            height: auto;
+
+            a {
+              @include text-styles(.875rem, 1.44, "Gordita");
+
+              color: #fff;
+              font-weight: 200;
+              text-decoration: none;
+            }
+
+            &:last-child {
+              display: none;
+            }
+          }
+
+          @include between-breakpoints(mobile, tablet) {
+            columns: 2;
+            display: block;
+
+            .flyout-item:nth-child(1),
+            .flyout-item:nth-child(3) {
+              padding-bottom: 9px;
+            }
+          }
+        }
+      }
+    }
+
+    .nav-search {
+      background: none;
+      border: solid 1px #ececec;
+      box-shadow: none;
+      margin-bottom: 19px;
+
+      .search-form {
+        position: relative;
+        height: 43px;
+
+        .c-search-icon {
+          position: absolute;
+          left: 10px;
+          top: 10px;
+
+          .search-icon {
+            padding: 0;
+          }
+        }
+
+        .search-input {
+          background: none;
+          color: #fff;
+          width: 88%;
+
+          @include breakpoint(tablet) {
+            width: 95%;
+          }
+        }
+      }
+    }
+
+    .nav-row {
+      display: flex;
+      flex-direction: column;
+      list-style-type: none;
+      min-height: fit-content;
+
+      .nav-itemText {
+        @include text-styles(1.125rem, 1, "Gordita");
+
+        padding: 15px 0 6px;
+        color: #fff;
+        font-weight: 800;
+        border-bottom: 1px solid #4f4f4f;
+
+        @include breakpoint(desktop-sm) {
+          padding: 15px 0;
+        }
+
+        .section {
+          cursor: default;
+          width: 100%;
+          height: 100%;
+          display: block;
+          margin: 0;
+          opacity: 1;
+          border-radius: 0;
+          position: relative;
+          box-shadow: unset;
+
+          .section-item {
+            padding: 0 0 15px;
+            background: none;
+            border-radius: 0;
+            height: auto;
+            display: block;
+            
+            a {
+              @include text-styles(1.125rem, 1, "Gordita");
+      
+              display: flex;
+              color: #fff;
+              font-weight: 800;
+            }
+          }
+
+          .subNav {
+            width: 100%;
+            visibility: visible;
+            overflow: unset;
+            opacity: 1;
+            background: none;
+            padding: 0;
+            box-shadow: none;
+            border: none;
+            border-radius: 0;
+            position: unset;
+      
+            .subNav-flyout {
+              width: 100%;
+              list-style: none;
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              align-content: unset;
+              writing-mode: unset;
+              height: auto;
+              
+              @include between-breakpoints(tablet, desktop-sm) {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+              }
+      
+              .flyout-item {
+                padding-bottom: 9px;
+                max-width: 163px;
+                width: 100%;
+                height: auto;
+                white-space: unset;
+                writing-mode: unset;
+                margin: 0;
+                line-height: 1;
+      
+                a {
+                  @include text-styles(.875rem, 1, "Gordita");
+      
+                  color: #fff;
+                  font-weight: 200;
+                  white-space: pre-line;
+
+                  @include between-breakpoints(mobile,tablet) {
+
+                    &:active,
+                    &:focus,
+                    &:visited {
+                      color: #9b9b9b;
+                    }
+                  }
+
+                  @include breakpoint(desktop-sm) {
+                  
+                    &:hover {
+                      color: #9b9b9b;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+  
+
+        &:first-child {
+          border-top: 1px solid #4f4f4f;
+
+          @include breakpoint(desktop-sm) {
+            border-top: none;
+          }
+        }
+
+        &:last-child {
+          padding-bottom: 15px;
+        }
+      }
+    }
+
+    .nav-menu-header {
+      min-height: auto;
+      margin: 32px 0 31px;
+      text-align: center;
+
+      a {
+        width: 234px;
+
+        .nav-menu-logo {
+          width: 100%;
+          max-width: 234px;
+        }
+      }
+
+      .nav-footer {
+        margin: 31px 0 30px;
+        text-align: left;
+
+        .nav-footer-links {
+          list-style: none;
+
+          .parentLink {
+            margin-bottom: 25px;
+            border-left: 1px solid #4f4f4f;
+            padding-left: 10px;
+
+            a {
+              @include text-styles(1rem, 1, "Gordita");
+
+              color: #fff;
+              font-weight: 800;
+              padding-bottom: 15px;
+            }
+
+            .nav-footer-subNav {
+              list-style: none;
+              margin-top: 10px;
+
+              .nav-footer-subNav-links {
+
+                a {
+                  @include text-styles(.875rem, 1.57, "Gordita");
+
+                  font-weight: 200;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .nav-copyright {
+        padding-bottom: 37px;
+
+        .copyright-wrapper {
+          background: none;
+
+          .c-copyright {
+            background: none;
+  
+            .copyright {
+              white-space: pre-wrap;
+              margin: 0;
+              padding: 0;
+              max-width: 354px;
+              width: 100%;
+              color: #fff;
+  
+              .learn-more {
+  
+                span {
+                  color: #fff;
+                }
+              }
+            }
+  
+            .rights,
+            .privacy {
+              padding-bottom: 20px;
+  
+              a {
+                width: auto;
+              }
+            }
+          }
+        }
+
+        .nav-social {
+          margin: 0 auto 24px;
+          width: fit-content;
+
+          .burger-fb {
+            width: auto;
+            margin-right: 10px;
+
+            img {
+              width: 27px;
+              height: 27px;
+            }
+          }
+
+          .burger-twitter {
+            width: auto;
+            margin-left: 10px;
+
+            img {
+              width: 33px;
+              height: 27px;
+            }
+          }
+        }
+      }
+
+      @include between-breakpoints(tablet, desktop-sm) {
+
+        a {
+          width: 50%;
+          max-width: none;
+        }
+
+        .nav-footer {
+          order: 2;
+          width: 50%;
+          float: right;
+          margin: 10px 0 30px;
+
+          .nav-footer-links {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+
+        .nav-copyright {
+          width: 50%;
+          float: left;
+
+          .copyright {
+            max-width: 360px;
+          }
+
+          .nav-social {
+            margin: 33px auto 24px;
+          }
+
+          .learn-more {
+
+            a {
+              min-width: 250px;
+            }
+          }
+        }
+      }
     }
   }
 }

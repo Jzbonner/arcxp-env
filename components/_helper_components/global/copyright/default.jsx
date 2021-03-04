@@ -6,7 +6,7 @@ import '../../../../src/styles/container/_c-copyright.scss';
 import getCopyLinks from '../../../layouts/_helper_functions/getCopyLinks';
 import BackToTop from '../../backToTop/default';
 
-const Copyright = ({ cssClass = '', hideBackToTop = false }) => {
+const Copyright = ({ isSidebar, cssClass = '', hideBackToTop = false }) => {
   const siteContent = useContent({
     source: 'site-api',
     query: {
@@ -31,7 +31,7 @@ const Copyright = ({ cssClass = '', hideBackToTop = false }) => {
       <div className="c-copyright">
         <div className={`copyright ${cssClass}`}>
           <div className="rights">
-            &copy; {year} {ajcName}. <br /> All Rights Reserved. <br />
+            &copy; {year} {ajcName}. {!isSidebar && <br />} All Rights Reserved. {!isSidebar && <br />}
           </div>
         By using this website, you accept the terms of our{' '}
           <div className="privacy">
@@ -39,17 +39,19 @@ const Copyright = ({ cssClass = '', hideBackToTop = false }) => {
             <a href={getCopyLinks(privacy_policy)}>{privacyPolicyName}</a>, and understand your options regarding{' '}<a href={getCopyLinks(ad_choices)}>{adChoicesName}</a>.
         </div>
           <div className="learn-more">
-            <a href={getCopyLinks(careers)}>Learn about {careersName}</a>.
+            {isSidebar ? <a href={getCopyLinks(careers)}><span>Learn about</span> {careersName}.</a> : <a href={getCopyLinks(careers)}>Learn about {careersName}.</a>}
         </div>
         </div>
-        {!hideBackToTop && <BackToTop />}
+        {!isSidebar && !hideBackToTop && <BackToTop />}
       </div>
     </div>
   );
 };
 
 Copyright.propTypes = {
+  isSidebar: PropTypes.bool,
   cssClass: PropTypes.string,
   hideBackToTop: PropTypes.bool,
 };
+
 export default Copyright;

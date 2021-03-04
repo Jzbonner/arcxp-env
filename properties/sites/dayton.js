@@ -27,6 +27,7 @@ export default {
   footerLogo: '/resources/logos/Dayton/logo-full.svg',
   logo: '/resources/logos/Dayton/logo-full.svg',
   logoRedesign: '/resources/logos/Dayton/logo-full.svg',
+  burgerWhiteLogo: '/resources/logos/Dayton/Dayton_White.svg',
   logoShort: '/resources/logos/Dayton/logo-short.svg',
   logoHamburger: '/resources/logos/Dayton/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/Dayton/placeholder.svg',
