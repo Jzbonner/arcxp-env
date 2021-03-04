@@ -3,9 +3,10 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import searchIcon from '../../../../../resources/icons/search.svg';
+import searchBurger from '../../../../../resources/icons/search-burger.svg';
 /* eslint-disable max-len */
 
-const Search = ({ isHeader }) => {
+const Search = ({ isHeader, isSidebar }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isEditing, setEditingState] = useState(false);
   const [isTablet, setTabletState] = useState(false);
@@ -76,7 +77,7 @@ const Search = ({ isHeader }) => {
   }, [isEditing]);
 
   return (
-    <div className='nav-search'>
+    <div className={`nav-search ${isSidebar ? 'burger-search' : ''}`}>
       <form onSubmit={e => e.target && handleSubmit(e)} className='search-form'>
         {
           isTablet && (
@@ -92,7 +93,7 @@ const Search = ({ isHeader }) => {
         }
         <button type="submit" className="c-search-icon">
           <img className='search-icon'
-            src={searchIcon} />
+            src={isSidebar ? searchBurger : searchIcon} />
         </button>
       </form>
     </div>
@@ -102,6 +103,7 @@ const Search = ({ isHeader }) => {
 
 Search.propTypes = {
   isHeader: PropTypes.bool,
+  isSidebar: PropTypes.bool,
 };
 
 export default Search;

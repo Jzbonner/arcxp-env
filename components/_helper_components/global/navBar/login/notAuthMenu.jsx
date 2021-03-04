@@ -7,7 +7,7 @@ import userIcon from '../../../../../resources/icons/login/user-icon.svg';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 
 const NotAuthMenu = ({
-  isMobile, isFlyout, showUserMenu, setShowUserMenu, arcSite,
+  isMobile, isFlyout, showUserMenu, setShowUserMenu, arcSite, isSidebar,
 }) => {
   const loginEl = useRef(null);
 
@@ -28,27 +28,19 @@ const NotAuthMenu = ({
   const { children: links = [] } = siteContent || [];
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+    if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined' && !isSidebar) {
       loginEl.current.classList.remove('fadeInOut');
       const expirationTime = localStorage.getItem(`${arcSite}_logoutMenuExpiration`);
 
       const now = new Date();
-      const midnight = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate(),
-      );
+      const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
       const nowInMs = Date.parse(now);
       const midnightInMs = Date.parse(midnight);
       const expirationInMs = Date.parse(expirationTime);
 
       // Display menu if any of these are true
-      if (
-        !expirationTime
-        || nowInMs - expirationInMs > 1000 * 60 * 30
-        || (expirationInMs < midnightInMs && midnightInMs < nowInMs)
-      ) {
+      if (!expirationTime || nowInMs - expirationInMs > 1000 * 60 * 30 || (expirationInMs < midnightInMs && midnightInMs < nowInMs)) {
         loginEl.current.classList.add('fadeInOut');
       }
 
@@ -64,17 +56,29 @@ const NotAuthMenu = ({
     }
   });
 
-  const renderLoginButton = () => <button
-    className='btn-profile'
-    data-mg2-action='login'
-    onClick={(e) => {
-      e.preventDefault();
-      triggerGtmEvent('loginEvent_start', 'connextLoggedIn', 'loginEvent_complete');
-      setShowUserMenu(!showUserMenu);
-    }}
-  >
-    Login
-  </button>;
+  const renderLoginButton = () => (
+    <button
+      className="btn-profile"
+      data-mg2-action="login"
+      onClick={(e) => {
+        e.preventDefault();
+        triggerGtmEvent('loginEvent_start', 'connextLoggedIn', 'loginEvent_complete');
+        setShowUserMenu(!showUserMenu);
+      }}
+    >
+      Login
+    </button>
+  );
+
+  if (isSidebar) {
+    return (
+      <div onClick={() => setShowUserMenu(!showUserMenu)}>
+        <img src={userIconWhite} />
+        <div data-mg2-action="login" className='login-text-bmenu'>Log In</div>
+        <ul className={`subNav-flyout itemCount-${links.length} logged-in`}>{RenderMenuLinks(links)}</ul>
+    </div>
+    );
+  }
 
   return (
     <>
@@ -107,6 +111,7 @@ NotAuthMenu.propTypes = {
   showUserMenu: PropTypes.bool,
   setShowUserMenu: PropTypes.func,
   arcSite: PropTypes.string,
+  isSidebar: PropTypes.bool,
 };
 
 export default NotAuthMenu;

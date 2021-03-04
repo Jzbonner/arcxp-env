@@ -28,6 +28,7 @@ export default {
   footerLogo: '/resources/logos/JournalNews/logo-full.svg',
   logo: '/resources/logos/JournalNews/logo-full.svg',
   logoRedesign: '/resources/logos/JournalNews/logo-full.svg',
+  burgerWhiteLogo: 'resources/logos/JournalNews/JN_White.svg',
   logoShort: '/resources/logos/JournalNews/logo-short.svg',
   logoHamburger: '/resources/logos/JournalNews/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/JournalNews/placeholder.svg',

@@ -28,6 +28,7 @@ export default {
   footerLogo: '/resources/logos/DaytonDailyNews/logo-full.svg',
   logo: '/resources/logos/DaytonDailyNews/logo-full.svg',
   logoRedesign: '/resources/logos/DaytonDailyNews/logo-full.svg',
+  burgerWhiteLogo: '/resources/logos/DaytonDailyNews/DDN_White.svg',
   logoShort: '/resources/logos/DaytonDailyNews/logo-short.svg',
   logoHamburger: '/resources/logos/DaytonDailyNews/logo-mobile-hamburger.svg',
   logoPlaceholder: '/resources/logos/DaytonDailyNews/placeholder.svg',
