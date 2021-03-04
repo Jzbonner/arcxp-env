@@ -80,9 +80,18 @@ const SiteMetrics = ({ isAmp }) => {
   } = contentMeta || {};
   const siteDomain = siteDomainURL || `https://www.${site}.com`;
   if (isAmp) {
+    const { ampGtmTriggers, ampGtmID } = metrics || {};
+    const {
+      loginStart,
+      loginFailed,
+      loginAborted,
+      loginComplete,
+      logoutStart,
+      logoutComplete,
+    } = ampGtmTriggers || {};
     return (
       <amp-analytics
-        config={`https://www.googletagmanager.com/amp.json?id=${metrics.ampGtmID}&gtm.url=SOURCE_URL`}
+        config={`https://www.googletagmanager.com/amp.json?id=${ampGtmID}&gtm.url=SOURCE_URL`}
         data-credentials='include'>
         <script type='application/json' dangerouslySetInnerHTML={{
           __html: `{
@@ -118,9 +127,73 @@ const SiteMetrics = ({ isAmp }) => {
               "pageUrlStr": "",
               "pageMainSection": "${topSection}",
               "contentPaywallStatus": "${contentCode}"
+            },
+            "triggers": {
+              "accessLoginStarted": {
+                "on": "access-login-loginEmbedded-started",
+                "request": "${loginStart}",
+                "vars": {
+                  "event_name": "loginEvent_start",
+                  "event_category": "user registration",
+                  "event_action": "login start",
+                  "event_label": "log in"
+                }
+              },
+              "accessLoginSuccess": {
+                "on": "access-login-loginEmbedded-success",
+                "request": "${loginComplete}",
+                "vars": {
+                  "event_name": "loginEvent_complete",
+                  "event_category": "user registration",
+                  "event_action": "login complete",
+                  "event_label": "log in",
+                  "userData": {
+                    "userProfileID": "AUTHDATA(RegistrationId)"
+                  }
+                }
+              },
+              "accessLoginFailed": {
+                "on": "access-login-loginEmbedded-failed",
+                "request": "${loginFailed}",
+                "vars": {
+                  "event_name": "loginEvent_failed",
+                  "event_category": "user registration",
+                  "event_action": "login failed",
+                  "event_label": "log in"
+                }
+              },
+              "accessLoginRejected": {
+                "on": "access-login-loginEmbedded-rejected",
+                "request": "${loginAborted}",
+                "vars": {
+                  "event_name": "loginEvent_aborted",
+                  "event_category": "user registration",
+                  "event_action": "login aborted",
+                  "event_label": "log in"
+                }
+              },
+              "accessLogoutStarted": {
+                "on": "access-login-logoutEmbedded-started",
+                "request": "${logoutStart}",
+                "vars": {
+                  "event_name": "logoutEvent_start",
+                  "event_category": "user registration",
+                  "event_action": "logout start",
+                  "event_label": "log out start"
+                }
+              },
+              "accessLogoutSuccess": {
+                "on": "access-login-logoutEmbedded-success",
+                "request": "${logoutComplete}",
+                "vars": {
+                  "event_name": "logoutEvent_complete",
+                  "event_category": "user registration",
+                  "event_action": "logout complete",
+                  "event_label": "log out complete"
+                }
               }
             }
-          `,
+          }`,
         }}></script>
     </amp-analytics>
     );
