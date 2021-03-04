@@ -24,6 +24,7 @@
       padding-bottom: 0;
       position: fixed;
       top: 0;
+      left: 0;
       opacity: .98;
       z-index: 4001;
       width: 100%;
@@ -442,11 +443,11 @@
       @include breakpoint(tablet) {
         color: #212126;
 
-        @include text-styles(.75rem, 1.2, "Gordita");
+        @include text-styles(.75rem, 29px, "Gordita");
       }
 
       @include breakpoint(desktop-sm) {
-        @include text-styles(1rem, 1.32, "Gordita");
+        @include text-styles(1rem, 57px, "Gordita");
       }
 
       &.login-text {
@@ -1250,10 +1251,11 @@
         @include breakpoint(tablet) {
           display: flex;
           justify-content: center;
-          height: inherit;
+          height: 29px;
           width: 100%;
           list-style-type: none;
           overflow: hidden;
+          flex-wrap: wrap;
 
           :not(:last-child) {
             margin-right: 10px;
@@ -1261,6 +1263,7 @@
         }
 
         @include breakpoint(desktop-sm) {
+          height: 57px;
 
           :not(:last-child) {
             margin-right: 20px;
