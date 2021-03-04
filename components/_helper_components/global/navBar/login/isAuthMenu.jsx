@@ -80,14 +80,14 @@ const isAuthMenu = ({
         <img src={source} />
         <div className='login-text'>Log Out</div>
       </div>
-        <div className={`section login-menu ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
+        <div className={`section login-menu ${!isMobile && showUserMenu ? 'isVisible' : ''}`}>
           <div className={'section-item'}>
             <a href={profileLink}>
               <img src={source} />
             </a>
             <div className="login-text">Log Out</div>
           </div>
-          <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
+          <div className={`subNav ${!isMobile && showUserMenu ? 'isVisible' : ''}`}>
             {renderLogoutButton()}
             <div className="login-separator"></div>
             <ul className={`subNav-flyout itemCount-${links.length + (isNotAuthenticated ? 3 : 2)} logged-out`}>
