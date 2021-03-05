@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from '../image';
+import Image from '../image/default';
 
 const GalleryItem = ({
   data, func, modalFunc,
@@ -19,8 +19,8 @@ const GalleryItem = ({
   if (affiliationCredit && !affiliationCredit.includes('Credit:')) affiliationCredit = `Credit: ${affiliationCredit}`;
 
   const imageProps = {
-    width,
-    height,
+    width: 720,
+    height: 480,
     imageType: 'isGalleryImage',
     ampPage: false,
     src: {
@@ -37,12 +37,8 @@ const GalleryItem = ({
       data-index={index}
       key={url}
       onClick={func}
-      className={`${isStickyVisible ? `gallery-full-item ${isCaptionOn ? lastItemClass : ''}` : 'gallery-image'}
-      ${lastItemClass && isStickyVisible && !isCaptionOn ? 'last-item-height-fix-no-caption' : ''}
-      ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}
-      ${!isMobile ? 'desktop-image' : ''}
-      `}
-      >
+      className={`${isStickyVisible ? `gallery-full-item ${isCaptionOn ? lastItemClass : ''}` : 'gallery-image'} ${lastItemClass && isStickyVisible && !isCaptionOn ? 'last-item-height-fix-no-caption' : ''} ${!isStickyVisible && isMobile ? 'mosaic-container' : ''} ${!isMobile ? 'desktop-image' : ''}`}
+    >
       {url && <Image
         {...imageProps}
         additionalClasses={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
