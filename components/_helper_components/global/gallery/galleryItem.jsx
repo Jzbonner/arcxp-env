@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from '../image/old';
+import Image from '../image';
 
 const GalleryItem = ({
-  data, func, modalFunc, calculateTranslateX,
+  data, func, modalFunc,
 }) => {
   const {
     url, width, height, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass,
@@ -45,10 +45,8 @@ const GalleryItem = ({
       >
       {url && <Image
         {...imageProps}
-        classes={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
+        additionalClasses={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
         onClickRun={modalFunc ? () => modalFunc(url, isModalVisible) : null}
-        customScrollContainerEl="#MOBILE_GALLERY"
-        lazyLoadCallback={calculateTranslateX}
       />}
       {
         isStickyVisible
@@ -87,7 +85,6 @@ GalleryItem.propTypes = {
   func: PropTypes.func,
   lastItemClass: PropTypes.string,
   modalFunc: PropTypes.func,
-  calculateTranslateX: PropTypes.func,
 };
 
 export default GalleryItem;

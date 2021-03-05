@@ -21,7 +21,7 @@ import './default.scss';
 */
 const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType,
-  ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [],
+  ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [], additionalClasses = '',
 }) => {
   const {
     url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties,
@@ -100,7 +100,7 @@ const Image = ({
             {!ampPage ? (
               <LazyLoad
                 placeholder={<img src={placeholder} style={{ width: '100%' }} data-placeholder={true} data-src={dataSrc} alt={altTextContent}
-                className={teaseContentType ? 'tease-image' : ''} />}
+                className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`} />}
                 height="100%"
                 width="100%"
                 once={true}>
@@ -114,7 +114,7 @@ const Image = ({
                   <img
                     src={dataSrc}
                     alt={altTextContent}
-                    className={teaseContentType ? 'tease-image' : ''}
+                    className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`}
                     onClick={onClickRun}
                   />
                 )}
@@ -162,5 +162,6 @@ Image.propTypes = {
   customScrollContainerEl: PropTypes.string,
   useSrcSet: PropTypes.bool,
   srcSetSizes: PropTypes.array,
+  additionalClasses: PropTypes.string,
 };
 export default Image;
