@@ -15,15 +15,19 @@ const Nativo = ({
     if (ampPage) {
       if (controllerClass === 'story-nativo_placeholder--moap') {
         return (
-          <amp-ad
-            type="nativo"
-            width="400"
-            height="400"
-            layout="responsive"
-            data-request-url={`https://amp.${handleSiteName(arcSite)}.com/amp/nativo`}
-            amp-access={isMeteredStory ? 'Error=true OR AccessLevel="Full Content Access"' : null}
-            amp-access-hide={isMeteredStory ? '' : null}
-          ></amp-ad>
+          <div className="c-ntv-moap">
+            <amp-ad
+              type="nativo"
+              width="400"
+              height="400"
+              layout="responsive"
+              data-request-url={`https://amp.${handleSiteName(arcSite)}.com/amp/nativo`}
+              amp-access={isMeteredStory ? 'Error=true OR AccessLevel="Full Content Access"' : null}
+              amp-access-hide={isMeteredStory ? '' : null}
+            ></amp-ad>
+            <div className="nativo-lead-text" amp-access={isMeteredStory ? 'Error=true OR AccessLevel="Full Content Access"' : null}
+            amp-access-hide={isMeteredStory ? '' : null}>Article continues below</div>
+          </div>
         );
       }
       return null;
