@@ -88,9 +88,7 @@ const Login = ({
   }, [UserState, showUserMenu, userStateRef.current]);
 
   const useWindowEvent = (event, trigger) => {
-    const callback = () => {
-      setUserState(trigger);
-    };
+    const callback = () => setUserState(trigger);
     useEffect(() => {
       window.addEventListener(event, callback);
       return () => window.removeEventListener(event, callback);
