@@ -161,7 +161,7 @@ const NavBar = ({
               />
             </div>
           <Login
-            isMobile={isMobile}
+            isMobile={isMobileVisibilityRef.current} isSticky={stickyNavVisibility}
           />
           </div>
           <RedesignNavLinks

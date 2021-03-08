@@ -936,6 +936,7 @@
       border-radius: 0 6px 6px;
       box-shadow: none;
       align-items: center;
+      visibility: hidden;
 
       &.isVisible {
         visibility: visible;
@@ -1014,12 +1015,11 @@
         }
 
         &.itemCount-5 {
-          height: 10rem;
+          height: 4rem;
         }
 
-        &.itemCount-9,
-        &.itemCount-10 {
-          height: 9.75rem;
+        &.itemCount-7 {
+          height: 5.4rem;
         }
 
         &.itemCount-6,
@@ -1092,6 +1092,20 @@
                 margin-bottom: 10px;
               }
             }
+
+            &.itemCount-5 {
+
+              li {
+
+                &:nth-child(3) {
+                  margin-bottom: 0;
+                }
+
+                &:not(:nth-child(3)):not(:last-child) {
+                  margin-bottom: 10px;
+                }
+              }
+            }
           }
 
           &.logged-out {
@@ -1100,6 +1114,20 @@
 
               &:not(:nth-child(3)):not(:last-child) {
                 margin-bottom: 10px;
+              }
+            }
+
+            &.itemCount-7 {
+
+              li {
+
+                &:nth-child(3) {
+                  margin-bottom: 10px;
+                }
+
+                &:nth-child(4) {
+                  margin-bottom: 0;
+                }
               }
             }
           }
