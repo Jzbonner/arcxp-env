@@ -101,8 +101,8 @@ const Login = ({
 
   return (
     <div className={`${isSidebar ? 'c-login-bmenu' : `c-login ${isSticky ? 'isSticky' : ''}`}`}>
-      {(userState === 'logged-in'
-      || userState === 'authenticated') && (
+      {(userStateRef.current === 'logged-in'
+      || userStateRef.current === 'authenticated') && (
         <IsAuthMenu
           isMobile={isMobile}
           isFlyout={isFlyout}
@@ -113,7 +113,7 @@ const Login = ({
           isSidebar={isSidebar}
         />
       )}
-      {userState === 'logged-out' && (
+      {userStateRef.current === 'logged-out' && (
         <NotAuthMenu
           isMobile={isMobile}
           isFlyout={isFlyout}
