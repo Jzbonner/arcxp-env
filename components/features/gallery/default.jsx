@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, {
   useState, useEffect, useRef, useReducer,
 } from 'react';
@@ -28,6 +29,7 @@ const Gallery = (props) => {
 
   const fusionContext = useFusionContext();
   const { arcSite = 'ajc' } = fusionContext;
+  const isStory = pageType === 'story';
 
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
@@ -113,10 +115,7 @@ const Gallery = (props) => {
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic || leafHeadline ? headlines.basic || leafHeadline : null;
-  const fetchedHeadline = !headline
-    && fetchedGalleryData
-    && fetchedGalleryData.headlines
-    && fetchedGalleryData.headlines.basic ? fetchedGalleryData.headlines.basic : '';
+  const fetchedHeadline = !headline && fetchedGalleryData?.headlines?.basic;
 
   const dataLayer = windowExists ? window.dataLayer : [];
 
@@ -126,26 +125,19 @@ const Gallery = (props) => {
   const { taxonomy: fetchedTaxonomy = {}, promo_items: fetchedPromoItems = {} } = fetchedGalleryData || {};
   const { taxonomy: featuredTaxonomy = {}, promo_items: featuredPromoItems = {} } = featuredGalleryData || {};
 
-  if (fetchedPromoItems
-    && fetchedPromoItems.basic
-    && fetchedPromoItems.basic.additional_properties
-    && fetchedPromoItems.basic.additional_properties.keywords) {
+  if (fetchedPromoItems?.basic?.additional_properties?.keywords) {
     finalPromoItemTopics = fetchedPromoItems.basic.additional_properties.keywords;
-  } else if (featuredPromoItems
-    && featuredPromoItems.basic
-    && featuredPromoItems.basic.additional_properties
-    && featuredPromoItems.basic.additional_properties.keywords) {
+  } else if (featuredPromoItems?.basic?.additional_properties?.keywords) {
     finalPromoItemTopics = featuredPromoItems.basic.additional_properties.keywords;
-  } else if (promoItems && promoItems.additional_properties
-    && promoItems.additional_properties.keywords) {
+  } else if (promoItems?.additional_properties?.keywords) {
     finalPromoItemTopics = promoItems.additional_properties.keywords;
   }
 
-  if (fetchedTaxonomy && fetchedTaxonomy.tags && fetchedTaxonomy.tags.length) {
+  if (fetchedTaxonomy?.tags.length) {
     finalTaxonomyTopics = fetchedTaxonomy.tags;
-  } else if (featuredTaxonomy && featuredTaxonomy.tags && featuredTaxonomy.tags.length) {
+  } else if (featuredTaxonomy?.tags.length) {
     finalTaxonomyTopics = featuredTaxonomy.tags;
-  } else if (taxonomy && taxonomy.tags && taxonomy.tags.length) {
+  } else if (taxonomy?.tags.length) {
     finalTaxonomyTopics = taxonomy.tags;
   }
 
@@ -676,17 +668,17 @@ const Gallery = (props) => {
 
   return (
     <>
-      {(isMobile || pageType !== 'story')
+      {(isMobile || !isStory)
         && galHeadline
         ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
       {pageType !== 'story' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
-      <div className={`${pageType !== 'story' ? 'c-gallery-homeSection' : ''}`}>
+      <div className={`${!isStory ? 'c-gallery-homeSection' : ''}`}>
         {!isMobile
           ? <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
             <ImageModal src={currentImageSrc} isVisible={modalVisible} />
           </div> : null}
         <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-          {!isMobile && galHeadline && pageType === 'story'
+          {!isMobile && galHeadline && isStory
             ? <div className="gallery-headline"><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
           {
             isStickyVisible
