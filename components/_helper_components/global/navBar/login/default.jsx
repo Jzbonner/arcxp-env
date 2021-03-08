@@ -85,7 +85,7 @@ const Login = ({
   };
   useEffect(() => {
     setUserState(getState());
-  }, [UserState, showUserMenu, userStateRef.current]);
+  }, [UserState]);
 
   const useWindowEvent = (event, trigger) => {
     const callback = () => setUserState(trigger);
