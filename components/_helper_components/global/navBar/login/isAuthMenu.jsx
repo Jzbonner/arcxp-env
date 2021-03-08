@@ -65,7 +65,7 @@ const isAuthMenu = ({
     <div onClick={() => setShowUserMenu(!showUserMenu)}>
       <img src={userIconDark} />
         <div data-mg2-action="logout" className='login-text-bmenu'>Log Out</div>
-          <div className={`subNav ${!isMobile && showUserMenu ? 'isVisible' : ''}`}>
+          <div className='subNav isVisible'>
             <ul className={`subNav-flyout itemCount-${links.length + (isNotAuthenticated ? 3 : 2)} logged-out`}>
               {RenderMenuLinks(links)}
             </ul>
