@@ -2,6 +2,7 @@
 import React, {
   useState, useEffect, useRef, useReducer,
 } from 'react';
+import LazyLoad from 'react-lazyload';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
@@ -224,7 +225,9 @@ const Gallery = (props) => {
       const galleryItems = document.querySelectorAll('.gallery-full-item');
       const targetGalleryItem = galleryItems[index];
       const targetGalleryItemImg = targetGalleryItem && targetGalleryItem.querySelector('.lazyload-wrapper img[data-placeholder]');
+      console.error('dave, attempt to load image ', index, targetGalleryItem);
       if (targetGalleryItemImg) {
+        console.error('dave, load image ', index, targetGalleryItemImg);
         const isPlaceholder = targetGalleryItemImg.getAttribute('data-placeholder');
         const dataSrc = targetGalleryItemImg.getAttribute('data-src');
         if (isPlaceholder && dataSrc) {
@@ -236,6 +239,7 @@ const Gallery = (props) => {
   };
 
   const changeIndex = (action, maxNumber, isPhoto = true) => {
+    console.error('dave again, inside changeIndex');
     const targetIndex = isPhoto ? 0 : 1;
     if (!hasOpened && (currentIndex === targetIndex || currentIndex === maxIndex)) dispatchGalleryOpenEvent();
 
@@ -271,7 +275,7 @@ const Gallery = (props) => {
         }
       } else if (action === actions.NEXT) {
         // change current image index by +1
-        loadNextImage(currentIndex - 1);
+        loadNextImage(currentIndex + 1);
         setCurrentAction(action);
         setClickDirection(actions.NEXT);
         if (!isAdVisible || ((currentClickCount % 4) === 0)) {
@@ -285,7 +289,6 @@ const Gallery = (props) => {
         }
       }
     } else {
-      loadNextImage(currentIndex);
       setCurrentIndex(currentIndex);
     }
 
@@ -689,7 +692,11 @@ const Gallery = (props) => {
   }
 
   return (
-    <>
+    <LazyLoad
+      placeholder={<div />}
+      height="100%"
+      width="100%"
+      offset={200}>
       {(isMobile || !isStory)
         && galHeadline
         ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
@@ -751,7 +758,7 @@ const Gallery = (props) => {
           {captionData}
         </div>
       </div>
-    </>
+    </LazyLoad>
   );
 };
 

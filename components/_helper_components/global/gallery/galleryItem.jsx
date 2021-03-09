@@ -31,6 +31,8 @@ const GalleryItem = ({
     },
   };
 
+  console.error('DAVE from galleryitem', url);
+
   return (
     <div
       id={id}

@@ -36,6 +36,8 @@ const Image = ({
   const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
 
+  if (!url) return null;
+  // console.error('dave from image component', url);
   const imgQuery = {
     src: url,
     height,
