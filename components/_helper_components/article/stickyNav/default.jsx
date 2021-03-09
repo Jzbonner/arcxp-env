@@ -79,9 +79,6 @@ const StickyNav = ({
   const toggleCommentsWindow = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    /*  if (!commentVisibilityRef.current) {
-      setDropdownVisibility(false);
-    } */
     setCommentVisibility(!commentVisibilityRef.current);
     setStickyVisibility(!stickyShouldBeHidden());
   };
