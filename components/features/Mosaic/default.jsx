@@ -5,7 +5,6 @@ import { useAppContext, useFusionContext } from 'fusion:context';
 import get from 'lodash.get';
 import getProperties from 'fusion:properties';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
-import SectionLabel from '../../_helper_components/global/sectionLabel/default';
 import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
 import TimeStamp from '../../_helper_components/article/timestamp/default';
 import checkTags from '../../layouts/_helper_functions/checkTags';
@@ -70,8 +69,6 @@ const Mosaic = (customFields = {}) => {
     sponsorName,
     isHyperlocalContent,
     isCommunityContributor,
-    label,
-    taxonomy,
     tags,
     /* eslint-enable react/prop-types */
   }) {
@@ -89,11 +86,7 @@ const Mosaic = (customFields = {}) => {
       );
     }
 
-    return (
-      <>
-      <SectionLabel label={label || {}} taxonomy={taxonomy || {}} />
-    </>
-    );
+    return null;
   }
   if (Array.isArray(data)) {
     return (
