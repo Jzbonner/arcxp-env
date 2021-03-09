@@ -1,3 +1,3 @@
-const isOhioSite = siteFullname => siteFullname.toLowerCase().indexOf('atlanta') === -1;
+const isOhioSite = siteFullname => siteFullname?.toLowerCase().indexOf('atlanta') === -1;
 
 export default isOhioSite;
