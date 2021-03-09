@@ -2,7 +2,7 @@
 @import "./../../../../src/styles/base/mixins";
 
 .article-timestamp {
-  @include text-styles(.75rem, "normal", "Gordita");
+  @include text-styles(.688rem, 2.3, "Gordita");
 
   letter-spacing: normal;
   color: #9b9b9b;
