@@ -85,3 +85,24 @@ article {
     }
   }
 }
+
+@include amp-only {
+
+  .c-ntv-moap {
+    display: flex;
+    flex-direction: column-reverse;
+    height: auto;
+    width: 100%;
+    text-align: center;
+
+    .nativo-lead-text {
+      display: none;
+    }
+
+    amp-ad[type="nativo"]:not([hidden]) + .nativo-lead-text {
+      position: relative;
+      display: block;
+      font: italic .875rem "Gordita", "Arial", sans-serif;
+    }
+  }
+}
