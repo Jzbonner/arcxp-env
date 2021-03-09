@@ -133,11 +133,11 @@ const Gallery = (props) => {
     finalPromoItemTopics = promoItems.additional_properties.keywords;
   }
 
-  if (fetchedTaxonomy?.tags.length) {
+  if (fetchedTaxonomy.tags && fetchedTaxonomy.tags.length) {
     finalTaxonomyTopics = fetchedTaxonomy.tags;
-  } else if (featuredTaxonomy?.tags.length) {
+  } else if (featuredTaxonomy.tags && featuredTaxonomy.tags.length) {
     finalTaxonomyTopics = featuredTaxonomy.tags;
-  } else if (taxonomy?.tags.length) {
+  } else if (taxonomy.tags && taxonomy.tags.length) {
     finalTaxonomyTopics = taxonomy.tags;
   }
 
@@ -217,6 +217,24 @@ const Gallery = (props) => {
     }
   };
 
+  // lazyload upcoming images in the gallery
+  const loadNextImage = (index) => {
+    if (document.querySelectorAll('.gallery-full-item img[data-placeholder]').length) {
+      // only proceed if there are still placeholder images in the gallery
+      const galleryItems = document.querySelectorAll('.gallery-full-item');
+      const targetGalleryItem = galleryItems[index];
+      const targetGalleryItemImg = targetGalleryItem && targetGalleryItem.querySelector('.lazyload-wrapper img[data-placeholder]');
+      if (targetGalleryItemImg) {
+        const isPlaceholder = targetGalleryItemImg.getAttribute('data-placeholder');
+        const dataSrc = targetGalleryItemImg.getAttribute('data-src');
+        if (isPlaceholder && dataSrc) {
+          targetGalleryItemImg.setAttribute('src', dataSrc);
+          targetGalleryItemImg.removeAttribute('data-placeholder');
+        }
+      }
+    }
+  };
+
   const changeIndex = (action, maxNumber, isPhoto = true) => {
     const targetIndex = isPhoto ? 0 : 1;
     if (!hasOpened && (currentIndex === targetIndex || currentIndex === maxIndex)) dispatchGalleryOpenEvent();
@@ -235,6 +253,7 @@ const Gallery = (props) => {
       || (isAdVisible && currentClickCount === 4)) {
       // change current image index by -1
       if (action === actions.PREV) {
+        loadNextImage(currentIndex - 1);
         setCurrentAction(action);
         setClickDirection(actions.PREV);
         if (!isAdVisible || (currentClickCount % 4) === 0) {
@@ -252,6 +271,7 @@ const Gallery = (props) => {
         }
       } else if (action === actions.NEXT) {
         // change current image index by +1
+        loadNextImage(currentIndex - 1);
         setCurrentAction(action);
         setClickDirection(actions.NEXT);
         if (!isAdVisible || ((currentClickCount % 4) === 0)) {
@@ -265,6 +285,7 @@ const Gallery = (props) => {
         }
       }
     } else {
+      loadNextImage(currentIndex);
       setCurrentIndex(currentIndex);
     }
 
@@ -444,6 +465,7 @@ const Gallery = (props) => {
 
       if (offsetHeight === 0 && (galleryScrollTop > targetOffsetTop)) {
         setHeight(offsetHeight + targetOffsetTop);
+        loadNextImage(index);
         changeIndex(actions.NEXT);
       }
 
