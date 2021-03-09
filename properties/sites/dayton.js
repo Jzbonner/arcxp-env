@@ -8,6 +8,7 @@ export default {
   fbPagesId: '1431445090472096',
   fbAppId: '455873671229722',
   siteName: 'dayton',
+  siteFullname: 'Dayton.com',
   cdnOrg: 'coxohio',
   cdnSite: 'dayton',
   siteDomainURL: 'https://www.dayton.com',
