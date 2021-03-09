@@ -763,6 +763,31 @@
         }
       }
 
+      &.daytondailynews {
+
+        .login-menu {
+
+          .subNav-flyout {
+
+            .flyout-item {
+              min-width: auto;
+    
+              a {
+                width: auto;
+              }
+            }
+          }
+        }
+
+        .itemCount-4 {
+          height: 4.5rem;
+        }
+
+        .itemCount-5 {
+          height: 5.7rem;
+        }
+      }
+
       @include breakpoint(tablet) {
         display: flex;
 
@@ -1065,7 +1090,7 @@
 
           .flyout-item {
             width: 40%;
-            text-align: center;
+            text-align: left;
             margin-right: 10px;
             margin-bottom: 10px;
             height: auto;

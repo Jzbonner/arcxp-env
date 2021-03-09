@@ -100,7 +100,7 @@ const Login = ({
   useWindowEvent('connextIsSubscriber', 'authenticated');
 
   return (
-    <div className={`${isSidebar ? 'c-login-bmenu' : `c-login ${isSticky ? 'isSticky' : ''}`}`}>
+    <div className={`${isSidebar ? 'c-login-bmenu' : `c-login ${isSticky ? 'isSticky' : ''}`}${connextSite}`}>
       {(userStateRef.current === 'logged-in'
       || userStateRef.current === 'authenticated') && (
         <IsAuthMenu
