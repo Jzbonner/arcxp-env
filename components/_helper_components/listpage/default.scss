@@ -52,6 +52,10 @@
 
     .c-label-wrapper {
       text-align: left;
+
+      &:empty {
+        display: none;
+      }
     }
   }
 }

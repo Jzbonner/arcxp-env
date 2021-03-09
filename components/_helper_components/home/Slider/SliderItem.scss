@@ -104,6 +104,10 @@
 
     .c-label-wrapper {
       margin-bottom: .35rem;
+
+      &:empty {
+        display: none;
+      }
     }
 
     a.headline {
