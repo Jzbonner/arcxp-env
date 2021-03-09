@@ -64,7 +64,7 @@ const NavBar = ({
   });
 
 
-  const { children: redesignChildren } = redesignSections;
+  const { children: redesignChildren } = redesignSections || {};
 
   const setStickyMobileRef = (data) => {
     isMobileVisibilityRef.current = data;

@@ -72,9 +72,6 @@ const Mosaic = (customFields = {}) => {
     isCommunityContributor,
     label,
     taxonomy,
-    firstPublishDate,
-    displayDate,
-    isHideTimestampTrue,
     tags,
     /* eslint-enable react/prop-types */
   }) {
@@ -95,12 +92,6 @@ const Mosaic = (customFields = {}) => {
     return (
       <>
       <SectionLabel label={label || {}} taxonomy={taxonomy || {}} />
-      <TimeStamp
-        firstPublishDate={firstPublishDate}
-        displayDate={displayDate}
-        isHideTimestampTrue={isHideTimestampTrue}
-        isTease={true}
-      />
     </>
     );
   }
@@ -158,6 +149,12 @@ const Mosaic = (customFields = {}) => {
                   <span className="headline">
                     {truncateHeadline(get(headlines, 'basic', ''), true)}
                   </span>
+                  <TimeStamp
+                    firstPublishDate={firstPublishDate}
+                    displayDate={displayDate}
+                    isHideTimestampTrue={isHideTimestampTrue}
+                    isTease={true}
+                  />
                 </div>
               );
             }

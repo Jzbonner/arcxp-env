@@ -209,6 +209,7 @@
 
     .homeList-text {
       margin: 0 $min-margin;
+      text-align: center;
 
       @include breakpoint(tablet) {
         margin: 0;

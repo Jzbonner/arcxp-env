@@ -147,12 +147,6 @@ const ListItem = ({
     return (
       <>
         <SectionLabel label={label || {}} taxonomy={taxonomy || {}} />
-        <TimeStamp
-          firstPublishDate={firstPublishDate}
-          displayDate={displayDate}
-          isHideTimestampTrue={isHideTimestampTrue}
-          isTease={true}
-        />
       </>
     );
   }
@@ -170,6 +164,12 @@ const ListItem = ({
           </a>
           {showPreview && <ListItemPreview id={id} />}
         </div>
+        <TimeStamp
+            firstPublishDate={firstPublishDate}
+            displayDate={displayDate}
+            isHideTimestampTrue={isHideTimestampTrue}
+            isTease={true}
+          />
       </div>
     </div>
   );

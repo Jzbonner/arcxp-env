@@ -274,6 +274,7 @@
 
         .homeList-text {
           max-width: 65%;
+          text-align: center;
 
           @include breakpoint(desktop-sm) {
             max-width: 100%;
