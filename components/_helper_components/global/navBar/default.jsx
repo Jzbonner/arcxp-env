@@ -34,12 +34,22 @@ const NavBar = ({
   const mobileBreakpoint = 767;
 
   const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
+  const { arcSite, globalContent } = fusionContext;
   const {
     logoRedesign, siteName, cdnSite, cdnOrg, weatherPageUrl, closeButton, burgerMenuBackground, burgerWhiteLogo,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
+
+  const {
+    taxonomy,
+  } = globalContent || {};
+  const {
+    primary_section: primarySection,
+  } = taxonomy || {};
+  const {
+    _id: primarySectionID,
+  } = primarySection || {};
 
   const sections = useContent({
     source: 'site-api',
@@ -130,7 +140,7 @@ const NavBar = ({
         <React.Fragment key={id}>
           <Section navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
                    setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile}
-                   isSticky={stickyNavVisibility} isLast={i === finalIndex}/>
+                   isSticky={stickyNavVisibility} isLast={i === finalIndex} primarySectionID={primarySectionID}/>
         </React.Fragment>
       );
     }
@@ -138,7 +148,7 @@ const NavBar = ({
     return (
       <Section key={id} navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
       setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile} isSticky={stickyNavVisibility}
-      isLast={i === finalIndex}/>
+      isLast={i === finalIndex} primarySectionID={primarySectionID}/>
     );
   });
 
@@ -161,7 +171,7 @@ const NavBar = ({
               />
             </div>
           <Login
-            isMobile={isMobile}
+            isMobile={isMobileVisibilityRef.current} isSticky={stickyNavVisibility}
           />
           </div>
           <RedesignNavLinks
@@ -169,6 +179,7 @@ const NavBar = ({
             arcSite={arcSite}
             setToggle={setToggle}
             animationVisibility={stickyNavVisibility}
+            primarySectionID={primarySectionID}
             />
         </div>
         <HamburgerMenu

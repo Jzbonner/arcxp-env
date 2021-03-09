@@ -763,6 +763,31 @@
         }
       }
 
+      &.daytondailynews {
+
+        .login-menu {
+
+          .subNav-flyout {
+
+            .flyout-item {
+              min-width: auto;
+    
+              a {
+                width: auto;
+              }
+            }
+          }
+        }
+
+        .itemCount-4 {
+          height: 4.5rem;
+        }
+
+        .itemCount-5 {
+          height: 5.7rem;
+        }
+      }
+
       @include breakpoint(tablet) {
         display: flex;
 
@@ -800,7 +825,7 @@
           min-width: 170px;
           width: 240px;
           box-sizing: content-box;
-          padding: 15px;
+          padding: 15px 15px 5px;
           background-color: #ededed;
 
           @include breakpoint(desktop-sm) {
@@ -936,6 +961,7 @@
       border-radius: 0 6px 6px;
       box-shadow: none;
       align-items: center;
+      visibility: hidden;
 
       &.isVisible {
         visibility: visible;
@@ -1010,22 +1036,21 @@
 
         &.itemCount-4,
         &.itemCount-8 {
-          height: 2.4rem;
+          height: 3rem;
         }
 
         &.itemCount-5 {
-          height: 10rem;
+          height: 4.5rem;
         }
 
-        &.itemCount-9,
-        &.itemCount-10 {
-          height: 9.75rem;
+        &.itemCount-7 {
+          height: 5.4rem;
         }
 
         &.itemCount-6,
         &.itemCount-11,
         &.itemCount-12 {
-          height: 3.88rem;
+          height: 4.5rem;
         }
       }
     }
@@ -1052,25 +1077,22 @@
 
       .subNav-flyout .flyout-item {
         white-space: normal;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
       }
 
       @include breakpoint(tablet) {
         background-color: #ededed;
 
         .subNav-flyout {
-          width: inherit;
+          width: 100%;
           align-content: center;
           display: flex;
           flex-wrap: wrap;
 
           .flyout-item {
             width: 40%;
-            text-align: center;
+            text-align: left;
             margin-right: 10px;
+            margin-bottom: 10px;
             height: auto;
             min-width: fit-content;
           }
@@ -1080,27 +1102,6 @@
             .flyout-item {
               width: 50%;
               margin-right: 0;
-            }
-
-            li {
-
-              &:nth-child(1) {
-                margin-bottom: 10px;
-              }
-  
-              &:nth-child(3) {
-                margin-bottom: 10px;
-              }
-            }
-          }
-
-          &.logged-out {
-
-            li {
-
-              &:not(:nth-child(3)):not(:last-child) {
-                margin-bottom: 10px;
-              }
             }
           }
         }
@@ -1127,7 +1128,8 @@
       .nav-itemText {
         white-space: nowrap;
 
-        &:hover {
+        &:hover,
+        &.active {
           color: #2e81b7;
         }
 
@@ -1763,10 +1765,6 @@
               color: #fff;
               font-weight: 200;
               text-decoration: none;
-            }
-
-            &:last-child {
-              display: none;
             }
           }
 

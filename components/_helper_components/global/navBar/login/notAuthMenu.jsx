@@ -86,14 +86,14 @@ const NotAuthMenu = ({
         <img src={source} />
         <div className='login-text'>Log In</div>
       </div>
-      <div ref={loginEl} className={`section login-menu ${!isMobile && showUserMenu ? 'isVisible' : ''}`}>
+      <div ref={loginEl} className={`section login-menu ${!isMobile && showUserMenu ? '' : ''}`}>
         <div className={'section-item'}>
           <a>
             <img src={source} />
             <div className='login-text'>Log In</div>
           </a>
         </div>
-        <div className={`subNav ${!isMobile && showUserMenu ? 'isVisible' : ''}`}>
+        <div className={`subNav ${!isMobile && showUserMenu ? '' : ''}`}>
           {renderLoginButton()}
           <div className='login-separator'></div>
           <ul className={`subNav-flyout itemCount-${links.length} logged-in`}>
