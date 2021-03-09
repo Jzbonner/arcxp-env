@@ -55,13 +55,12 @@ const Login = ({
 
   const setShowUserMenu = (data) => {
     if (isMobile) {
-      if (!isSticky) {
-        showUserMenuRef.current = data;
-        _setShowUserMenu(data);
-      } else if (userStateRef.current !== 'logged-out') {
+      if (userStateRef.current !== 'logged-out') {
         window.location.href = profileLink;
       }
     }
+    showUserMenuRef.current = data;
+    _setShowUserMenu(data);
   };
 
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
@@ -101,7 +100,7 @@ const Login = ({
   useWindowEvent('connextIsSubscriber', 'authenticated');
 
   return (
-    <div className={`${isSidebar ? 'c-login-bmenu' : `c-login ${isSticky ? 'isSticky' : ''}`}`}>
+    <div className={`${isSidebar ? 'c-login-bmenu' : `c-login ${isSticky ? 'isSticky' : ''}`} ${connextSite}`}>
       {(userStateRef.current === 'logged-in'
       || userStateRef.current === 'authenticated') && (
         <IsAuthMenu
