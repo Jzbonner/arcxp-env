@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext } from 'fusion:context';
 import Image from '../../global/image/default';
-import SectionLabel from '../../global/sectionLabel/default';
 import getQueryParams from '../../../layouts/_helper_functions/getQueryParams';
 import TimeStamp from '../../article/timestamp/default';
 import checkTags from '../../../layouts/_helper_functions/checkTags';
@@ -144,11 +143,7 @@ const ListItem = ({
       return <ContributorBadge tags={tags} ampPage={ampPage} />;
     }
 
-    return (
-      <>
-        <SectionLabel label={label || {}} taxonomy={taxonomy || {}} />
-      </>
-    );
+    return null;
   }
 
   if (relativeURL === '/') return null;

@@ -32,6 +32,10 @@
 
       .c-label-wrapper {
         font-size: .75rem;
+
+        &:empty {
+          display: none;
+        }
       }
 
       .headline {

@@ -76,9 +76,11 @@ const Headline = ({
       return <ContributorBadge tags={tags} ampPage={ampPage} />;
     }
 
-    return (
-        <SectionLabel label={label || {}} taxonomy={taxonomy || {}} />
-    );
+    if (!isTease) {
+      return <SectionLabel label={label || {}} taxonomy={taxonomy || {}} />;
+    }
+
+    return null;
   }
 
   return (
