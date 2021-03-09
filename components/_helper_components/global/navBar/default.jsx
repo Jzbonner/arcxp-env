@@ -177,7 +177,7 @@ const NavBar = ({
         <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
           && mobileMenuToggled) || hasWindowShade ? 'not-visible' : ''} `}>
         </div>
-        <StickyNav
+         <StickyNav
           headlines={headlines}
           comments={comments}
           hamburgerToggle={mobileMenuToggled}

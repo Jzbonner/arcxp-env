@@ -9,12 +9,11 @@ import Login from '../../global/navBar/login/default';
 import RedesignNavLinks from '../../global/navBar/redesignNavLinks/default';
 import fetchEnv from '../../global/utils/environment';
 import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
-import fbIcon from '../../../../resources/icons/stickyNav/facebook-icon.svg';
-import redditIcon from '../../../../resources/icons/stickyNav/reddit.svg';
-import instaIcon from '../../../../resources/icons/stickyNav/instagram-icon.svg';
-import pinIcon from '../../../../resources/icons/stickyNav/pinterest-icon.svg';
-import emailIcon from '../../../../resources/icons/stickyNav/email.svg';
-
+import RedditIcon from './_helper_functions/RedditIcon.js';
+import EmailIcon from './_helper_functions/MailIcon.js';
+import FbIcon from './_helper_functions/FbIcon.js';
+import TwitterIcon from './_helper_functions/TwitterIcon.js';
+import PinterestIcon from './_helper_functions/PinterestIcon.js';
 import '../../../../src/styles/container/_c-headerNav.scss';
 
 const StickyNav = ({
@@ -58,7 +57,6 @@ const StickyNav = ({
   // This state is managed in this component because the window's visibility is controlled
   // by a click on the comment button in the sticky nav bar
   const [commentVisibility, _setCommentVisibility] = useState(false);
-  const [dropdownVisibility, setDropdownVisibility] = useState(false);
   const commentVisibilityRef = React.useRef(commentVisibility);
   const stickyVisibilityRef = React.useRef(stickyNavVisibility);
 
@@ -66,8 +64,8 @@ const StickyNav = ({
     || (!isMobileVisibilityRef.current && logoRef.current.getBoundingClientRect().bottom <= 1);
 
   const stickyShouldBeHidden = () => (isMobileVisibilityRef.current
-        && paddingRef.current.getBoundingClientRect().bottom >= 90 && !commentVisibilityRef.current)
-        || (!isMobileVisibilityRef.current && paddingRef.current.getBoundingClientRect().bottom >= 71 && !commentVisibilityRef.current);
+    && paddingRef.current.getBoundingClientRect().bottom >= 90 && !commentVisibilityRef.current)
+    || (!isMobileVisibilityRef.current && paddingRef.current.getBoundingClientRect().bottom >= 71 && !commentVisibilityRef.current);
 
   const setCommentVisibility = (data) => {
     commentVisibilityRef.current = data;
@@ -81,9 +79,9 @@ const StickyNav = ({
   const toggleCommentsWindow = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!commentVisibilityRef.current) {
+    /*  if (!commentVisibilityRef.current) {
       setDropdownVisibility(false);
-    }
+    } */
     setCommentVisibility(!commentVisibilityRef.current);
     setStickyVisibility(!stickyShouldBeHidden());
   };
@@ -104,20 +102,11 @@ const StickyNav = ({
     }
   };
 
-
-  // Handles mobile dropdown visibility
-
-  const toggleMobileDropdownMenu = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDropdownVisibility(prev => !prev);
-  };
-
   // Sets event listeners
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('click', () => {
-      setDropdownVisibility(false);
+      /* setDropdownVisibility(false); */
       if (commentVisibilityRef.current) {
         setCommentVisibility(false);
       }
@@ -129,68 +118,52 @@ const StickyNav = ({
   return (
     <>
       <div className={`stickyNav ${hasWindowShade || stickyVisibilityRef.current ? 'is-visible' : ''}`}>
-        <ul className={`c-stickyNav-list ${siteNameLower}`}>
-          <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
-          <li className="stickyNav-item">
-              <a href={shareLinkFacebook} className="sticky-nav-icon " target="__blank">
-                <img src={fbIcon} />
-              </a>
-            </li>
-            <li className="stickyNav-item">
-              <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
-            </li>
-            <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
-              <li className="stickyNav-item arrow-icon desktop-hidden" onClick={e => toggleMobileDropdownMenu(e)}>
-                <a href="#" className="sticky-nav-icon btn-arrow-down" target="__blank"></a>
+        <div className='b-flexRow c-stickyLogin'>
+          <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={logoPath} isNonShareablePage={isNonShareablePage} />
+          <ul className={`c-stickyNav-list ${siteNameLower}`}>
+            <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
+              <li className="stickyNav-item fb-icon" >
+                <a href={shareLinkFacebook} target="__blank">
+                  <FbIcon />
+                </a>
               </li>
-              <li className="stickyNav-item">
-                <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
+              <li className="stickyNav-item twitter-icon" >
+                <a href={shareLinkTwitter} target="__blank">
+                  <TwitterIcon />
+                </a>
               </li>
-              <li className="stickyNav-item">
-                <a href={shareLinkReddit} className="sticky-nav-icon btn-reddit" target="__blank"></a>
+              <li className="stickyNav-item pin-icon" >
+                <a href={shareLinkPinterest} target="__blank">
+                  <PinterestIcon />
+                </a>
               </li>
-              <li className="stickyNav-item">
-                <a href={shareLinkEmail} className="sticky-nav-icon btn-mail" target="__blank"></a>
+              <li className="stickyNav-item reddit-icon" >
+                <a href={shareLinkReddit} target="__blank">
+                  <RedditIcon />
+                </a>
               </li>
-{/*             <li className="stickyNav-item">
-              <a href={shareLinkFacebook} className="sticky-nav-icon btn-facebook" target="__blank"></a>
-            </li>
-            <li className="stickyNav-item">
-              <a href={shareLinkTwitter} className="sticky-nav-icon btn-twitter" target="__blank"></a>
-            </li>
-            <ul className={`c-stickyNav-list dropdown-stickyNav ${dropdownVisibility ? 'is-open' : ''}`}>
-              <li className="stickyNav-item arrow-icon desktop-hidden" onClick={e => toggleMobileDropdownMenu(e)}>
-                <a href="#" className="sticky-nav-icon btn-arrow-down" target="__blank"></a>
+              <li className="stickyNav-item mail-icon" >
+                <a href={shareLinkEmail} target="__blank">
+                  <EmailIcon />
+                </a>
               </li>
-              <li className="stickyNav-item">
-                <a href={shareLinkPinterest} className="sticky-nav-icon btn-pinterest" target="__blank"></a>
-              </li>
-              <li className="stickyNav-item">
-                <a href={shareLinkReddit} className="sticky-nav-icon btn-reddit" target="__blank"></a>
-              </li>
-              <li className="stickyNav-item">
-                <a href={shareLinkEmail} className="sticky-nav-icon btn-mail" target="__blank"></a>
-              </li> */}
               {commentsEnabled ? (
-                <li className="stickyNav-item">
-                  <a href="#" className="sticky-nav-icon btn-comments" onClick={e => toggleCommentsWindow(e)}>
+                <li className="stickyNav-item comment-icon">
+                  <a href="#" className="sticky-nav-icon" onClick={e => toggleCommentsWindow(e)}>
                     <span className="fb-comments-count" data-href={articleShareUrl}></span>
                   </a>
                 </li>
               ) : null}
-            </ul>
-          </div>
-        </ul>
-        <div className='b-flexRow c-stickyLogin'>
-          <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={logoPath} isNonShareablePage={isNonShareablePage}/>
-          <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current}/>
+            </div>
+          </ul>
+          <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current} />
         </div>
       </div>
-              { !isNonShareablePage
-              && <Comments
-              commentVisibility={commentVisibility}
-              toggleCommentsWindow={toggleCommentsWindow}
-              articleUrl={articleShareUrl} /> }
+      { !isNonShareablePage
+        && <Comments
+          commentVisibility={commentVisibility}
+          toggleCommentsWindow={toggleCommentsWindow}
+          articleUrl={articleShareUrl} />}
     </>
   );
 };
