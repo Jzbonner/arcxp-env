@@ -1128,7 +1128,8 @@
       .nav-itemText {
         white-space: nowrap;
 
-        &:hover {
+        &:hover,
+        .active {
           color: #2e81b7;
         }
 

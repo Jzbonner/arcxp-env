@@ -13,20 +13,11 @@ const Section = ({
   activeSection,
   newTab,
   isLast,
+  primarySectionID,
 }) => {
   const fusionContext = useFusionContext();
-  const { globalContent, arcSite } = fusionContext;
+  const { arcSite } = fusionContext;
   const { siteDomainURL } = getProperties(arcSite);
-
-  const {
-    taxonomy,
-  } = globalContent || {};
-  const {
-    primary_section: primarySection,
-  } = taxonomy || {};
-  const {
-    _id: primarySectionID,
-  } = primarySection || {};
 
   const {
     nav_title: name,
@@ -121,6 +112,7 @@ Section.propTypes = {
   isSticky: PropTypes.bool,
   isLast: PropTypes.bool,
   id: PropTypes.string,
+  primarySectionID: PropTypes.string,
 };
 
 export default Section;
