@@ -73,7 +73,6 @@ const NavBar = ({
     },
   });
 
-
   const { children: redesignChildren } = redesignSections || {};
 
   const setStickyMobileRef = (data) => {
