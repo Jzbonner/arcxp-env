@@ -52,6 +52,10 @@
       .c-label-wrapper {
         margin: .6rem 0 .2rem;
 
+        &:empty {
+          display: none;
+        }
+
         @include breakpoint(desktop-sm) {
           margin-bottom: .4rem;
         }
@@ -209,6 +213,7 @@
 
     .homeList-text {
       margin: 0 $min-margin;
+      text-align: center;
 
       @include breakpoint(tablet) {
         margin: 0;

@@ -274,6 +274,7 @@
 
         .homeList-text {
           max-width: 65%;
+          text-align: center;
 
           @include breakpoint(desktop-sm) {
             max-width: 100%;
@@ -291,6 +292,10 @@
             @include breakpoint(desktop-lg) {
               text-align: center;
               min-height: initial;
+            }
+
+            &:empty {
+              display: none;
             }
           }
 

@@ -10,12 +10,7 @@ import userIconWhite from '../../../../../resources/icons/login/user-icon-white.
 import userIconDark from '../../../../../resources/icons/login/user-icon-dark.svg';
 
 const isAuthMenu = ({
-  isMobile,
-  isFlyout,
-  showUserMenu,
-  setShowUserMenu,
-  userStateRef,
-  custRegId,
+  isMobile, isFlyout, showUserMenu, setShowUserMenu, userStateRef, custRegId, isSidebar,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -33,10 +28,7 @@ const isAuthMenu = ({
   let connextSite = cdnSite;
   if (arcSite === 'dayton') {
     connextSite = 'daytondailynews';
-  } else if (
-    arcSite === 'dayton-daily-news'
-    || arcSite === 'springfield-news-sun'
-  ) {
+  } else if (arcSite === 'dayton-daily-news' || arcSite === 'springfield-news-sun') {
     connextSite = connextSite.replace(/-/g, '');
   }
 
@@ -52,63 +44,76 @@ const isAuthMenu = ({
   const accountSubdomain = `//${currentEnv !== 'prod' ? 'test-' : ''}myaccount`;
   const isNotAuthenticated = userStateRef.current !== 'authenticated';
 
-  const connextDomain = `${accountSubdomain}.${connextSite}.com/${
-    siteCode ? siteCode.toLowerCase() : connextSite
-  }`;
+  const connextDomain = `${accountSubdomain}.${connextSite}.com/${siteCode ? siteCode.toLowerCase() : connextSite}`;
   const profileLink = `${connextDomain}/myprofile`;
 
-  const renderLogoutButton = () => <button
-    className='btn-profile'
-    data-mg2-action='logout'
-    onClick={(e) => {
-      e.preventDefault();
-      setShowUserMenu(!showUserMenu);
-    }}
-  >
-    Log Out
-  </button>;
+  const renderLogoutButton = () => (
+    <button
+      className="btn-profile"
+      data-mg2-action="logout"
+      onClick={(e) => {
+        e.preventDefault();
+        setShowUserMenu(!showUserMenu);
+      }}
+    >
+      Log Out
+    </button>
+  );
+
+  if (isSidebar) {
+    return (
+    <div onClick={() => setShowUserMenu(!showUserMenu)}>
+      <img src={userIconDark} />
+        <div data-mg2-action="logout" className='login-text-bmenu'>Log Out</div>
+          <div className='subNav isVisible'>
+            <ul className={`subNav-flyout itemCount-${links.length + (isNotAuthenticated ? 3 : 2)} logged-out`}>
+              {RenderMenuLinks(links)}
+            </ul>
+          </div>
+    </div>
+    );
+  }
 
   return (
     <>
-      <div onClick={() => setShowUserMenu(!showUserMenu)} data-mg2-action={isMobile ? 'login' : ''}>
+      <div onClick={() => setShowUserMenu(true)}>
         <img src={source} />
         <div className='login-text'>Log Out</div>
       </div>
-
-      <div className={`section login-menu ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
-        <div className={'section-item'}>
-          <a href={profileLink}>
-            <img src={source} />
-          </a>
-            <div className='login-text'>Log Out</div>
-        </div>
-        <div className={`subNav ${isMobile && showUserMenu ? 'isVisible' : ''}`}>
-          {renderLogoutButton()}
-          <div className='login-separator'></div>
-          <ul className={`subNav-flyout itemCount-${links.length + (isNotAuthenticated ? 3 : 2)} logged-out`}>
-            <li className={'flyout-item'}>
-              <a href={`${connextDomain}/dashboard`} target='_blank' rel="noopener noreferrer">
-                My Account
-              </a>
-            </li>
-            {isNotAuthenticated && (
-              <li className={'flyout-item MG2activation'}>
-                <a href='#' data-mg2-action='activation'>
-                  Link My Account
+        <div className={`section login-menu ${!isMobile && showUserMenu ? 'isVisible' : ''}`}>
+          <div className={'section-item'}>
+            <a href={profileLink}>
+              <img src={source} />
+            </a>
+            <div className="login-text">Log Out</div>
+          </div>
+          <div className={`subNav ${!isMobile && showUserMenu ? 'isVisible' : ''}`}>
+            {renderLogoutButton()}
+            <div className="login-separator"></div>
+            <ul className={`subNav-flyout itemCount-${links.length + (isNotAuthenticated ? 3 : 2)} logged-out`}>
+              <li className={'flyout-item'}>
+                <a href={`${connextDomain}/dashboard`} target="_blank" rel="noopener noreferrer">
+                  My Account
                 </a>
               </li>
-            )}
-            {arcSite !== 'dayton' && <li className={'flyout-item'}>
-              <a href={`https://epaper.${handleSiteName(arcSite)}.com/default.aspx?acc=cmg&pub=${pubParam}&date=&section=Main&EntitlementCode=epaperHTML5&custregid=${custRegId}`}
-              target='_blank'
-              rel="noopener noreferrer">
-                ePaper
-              </a>
-            </li>}
-            {RenderMenuLinks(links)}
-          </ul>
+              {isNotAuthenticated && (
+                <li className={'flyout-item MG2activation'}>
+                  <a href="#" data-mg2-action="activation">
+                    Link My Account
+                  </a>
+                </li>
+              )}
+              {arcSite !== 'dayton' && (
+                <li className={'flyout-item'}>
+                  <a href={`https://epaper.${handleSiteName(arcSite)}.com/default.aspx?acc=cmg&pub=${pubParam}&date=&section=Main&EntitlementCode=epaperHTML5&custregid=${custRegId}`} target="_blank" rel="noopener noreferrer">
+                    ePaper
+                  </a>
+                </li>
+              )}
+              {RenderMenuLinks(links)}
+            </ul>
+          </div>
         </div>
-      </div>
     </>
   );
 };
@@ -120,6 +125,7 @@ isAuthMenu.propTypes = {
   setShowUserMenu: PropTypes.func,
   userStateRef: PropTypes.object,
   custRegId: PropTypes.string,
+  isSidebar: PropTypes.bool,
 };
 
 export default isAuthMenu;

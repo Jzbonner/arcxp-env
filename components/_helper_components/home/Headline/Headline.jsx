@@ -76,16 +76,11 @@ const Headline = ({
       return <ContributorBadge tags={tags} ampPage={ampPage} />;
     }
 
-    return (
-       <>
-        <SectionLabel label={label || {}} taxonomy={taxonomy || {}} />
-        <TimeStamp
-         firstPublishDate={firstPublishDate}
-         displayDate={displayDate}
-         isHideTimestampTrue={isHideTimestampTrue}
-         isTease={isTease} />
-       </>
-    );
+    if (!isTease) {
+      return <SectionLabel label={label || {}} taxonomy={taxonomy || {}} />;
+    }
+
+    return null;
   }
 
   return (
@@ -99,6 +94,14 @@ const Headline = ({
         <a href={relativeURL} className="headline">
           {headlines && truncateHeadline(headlines.basic, true)}
         </a>
+        {isTease
+          ? <TimeStamp
+              firstPublishDate={firstPublishDate}
+              displayDate={displayDate}
+              isHideTimestampTrue={isHideTimestampTrue}
+              isTease={isTease} />
+          : null
+        }
       </div>
     </div>
   );

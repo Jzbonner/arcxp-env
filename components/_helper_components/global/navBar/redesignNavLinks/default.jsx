@@ -4,7 +4,7 @@ import getProperties from 'fusion:properties';
 import Search from '../search/default';
 
 const RedesignNavLinks = ({
-  sections, arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false,
+  sections, arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID,
 }) => {
   const { siteDomainURL } = getProperties(arcSite);
   const itemCount = sections.length;
@@ -24,15 +24,23 @@ const RedesignNavLinks = ({
     const {
       _id: id,
       navigation,
+      site,
     } = section || {};
+
+    const {
+      site_url: siteURL,
+    } = site || {};
 
     const {
       nav_title: title,
     } = navigation || {};
 
+    const destination = id.includes('/configsection') ? siteURL : id;
+    const isHighlighted = primarySectionID === destination;
+
     return (
     <li key={i}>
-      <a href={id.indexOf('/') === 0 ? `${siteDomainURL}${id}` : id} target='_self' className={`nav-itemText ${itemCount > 7 ? 'sm-text' : ''}`}>{title}</a>
+      <a href={id.indexOf('/') === 0 ? `${siteDomainURL}${id}` : id} target='_self' className={`nav-itemText ${isHighlighted ? 'active' : ''}${itemCount > 7 ? 'sm-text' : ''}`}>{title}</a>
     </li>
     );
   });
@@ -64,6 +72,7 @@ RedesignNavLinks.propTypes = {
   logoPath: PropTypes.string,
   isNonShareablePage: PropTypes.bool,
   animationVisibility: PropTypes.bool,
+  primarySectionID: PropTypes.string,
 };
 
 export default RedesignNavLinks;

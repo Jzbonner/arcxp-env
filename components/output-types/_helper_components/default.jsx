@@ -64,7 +64,7 @@ const RenderOutputType = (props) => {
               type="text/javascript"
               dangerouslySetInnerHTML={{
                 /* eslint-disable-next-line max-len */
-                __html: gtmScript(arcSite),
+                __html: gtmScript(arcSite, metrics.gtmContainerKey),
               }}
             ></script>
             {/* End Google Tag Manager */}

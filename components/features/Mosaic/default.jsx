@@ -5,7 +5,6 @@ import { useAppContext, useFusionContext } from 'fusion:context';
 import get from 'lodash.get';
 import getProperties from 'fusion:properties';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
-import SectionLabel from '../../_helper_components/global/sectionLabel/default';
 import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
 import TimeStamp from '../../_helper_components/article/timestamp/default';
 import checkTags from '../../layouts/_helper_functions/checkTags';
@@ -70,11 +69,6 @@ const Mosaic = (customFields = {}) => {
     sponsorName,
     isHyperlocalContent,
     isCommunityContributor,
-    label,
-    taxonomy,
-    firstPublishDate,
-    displayDate,
-    isHideTimestampTrue,
     tags,
     /* eslint-enable react/prop-types */
   }) {
@@ -92,17 +86,7 @@ const Mosaic = (customFields = {}) => {
       );
     }
 
-    return (
-      <>
-      <SectionLabel label={label || {}} taxonomy={taxonomy || {}} />
-      <TimeStamp
-        firstPublishDate={firstPublishDate}
-        displayDate={displayDate}
-        isHideTimestampTrue={isHideTimestampTrue}
-        isTease={true}
-      />
-    </>
-    );
+    return null;
   }
   if (Array.isArray(data)) {
     return (
@@ -158,6 +142,12 @@ const Mosaic = (customFields = {}) => {
                   <span className="headline">
                     {truncateHeadline(get(headlines, 'basic', ''), true)}
                   </span>
+                  <TimeStamp
+                    firstPublishDate={firstPublishDate}
+                    displayDate={displayDate}
+                    isHideTimestampTrue={isHideTimestampTrue}
+                    isTease={true}
+                  />
                 </div>
               );
             }

@@ -34,19 +34,28 @@ const NavBar = ({
   const mobileBreakpoint = 767;
 
   const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
+  const { arcSite, globalContent } = fusionContext;
   const {
-    logoRedesign, logoHamburger, siteName, cdnSite, cdnOrg, siteNavHierarchy, weatherPageUrl,
+    logoRedesign, siteName, cdnSite, cdnOrg, weatherPageUrl, closeButton, burgerMenuBackground, burgerWhiteLogo,
   } = getProperties(arcSite);
   const appContext = useAppContext();
   const { deployment, contextPath, layout } = appContext;
 
+  const {
+    taxonomy,
+  } = globalContent || {};
+  const {
+    primary_section: primarySection,
+  } = taxonomy || {};
+  const {
+    _id: primarySectionID,
+  } = primarySection || {};
+
   const sections = useContent({
     source: 'site-api',
     query: {
-      hierarchy: siteNavHierarchy || 'TopNav',
+      hierarchy: 'MainMenuRedesign2021',
     },
-    filter: topNavFilter,
   });
 
   const redesignSections = useContent({
@@ -57,7 +66,14 @@ const NavBar = ({
     filter: topNavFilter,
   });
 
-  const { children: redesignChildren } = redesignSections;
+  const navFooterContent = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'BottomNavRedesign2021',
+    },
+  });
+
+  const { children: redesignChildren } = redesignSections || {};
 
   const setStickyMobileRef = (data) => {
     isMobileVisibilityRef.current = data;
@@ -123,7 +139,7 @@ const NavBar = ({
         <React.Fragment key={id}>
           <Section navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
                    setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile}
-                   isSticky={stickyNavVisibility} isLast={i === finalIndex}/>
+                   isSticky={stickyNavVisibility} isLast={i === finalIndex} primarySectionID={primarySectionID}/>
         </React.Fragment>
       );
     }
@@ -131,7 +147,7 @@ const NavBar = ({
     return (
       <Section key={id} navigation={navigation} link={destination} childSections={childSections} index={sectionIndex}
       setSection={setSection} activeSection={activeSection} newTab={newTab} isMobile={isMobile} isSticky={stickyNavVisibility}
-      isLast={i === finalIndex}/>
+      isLast={i === finalIndex} primarySectionID={primarySectionID}/>
     );
   });
 
@@ -154,7 +170,7 @@ const NavBar = ({
               />
             </div>
           <Login
-            isMobile={isMobile}
+            isMobile={isMobileVisibilityRef.current} isSticky={stickyNavVisibility}
           />
           </div>
           <RedesignNavLinks
@@ -162,17 +178,21 @@ const NavBar = ({
             arcSite={arcSite}
             setToggle={setToggle}
             animationVisibility={stickyNavVisibility}
+            primarySectionID={primarySectionID}
             />
         </div>
         <HamburgerMenu
           sections={sectionLi}
+          navFooterContent={navFooterContent}
           isMobile={isMobile}
           hamburgerToggle={mobileMenuToggled}
           setToggle={setToggle}
-          smallLogoUrl={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoHamburger}`)}`}
+          whiteLogoRedesign={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
+          closeButton={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${closeButton}`)}`}
           rootDirectory={rootDirectory}
           stickyActive={stickyNavVisibility || hasWindowShade}
           type={type}
+          burgerMenuBackground={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerMenuBackground}`)}`}
           siteName={siteName.toLowerCase()}/>
         <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
           && mobileMenuToggled) || hasWindowShade ? 'not-visible' : ''} `}>

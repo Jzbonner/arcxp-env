@@ -26,9 +26,9 @@ const PaywallLimitMessage = ({ siteFullname }) => {
             <button className="btn"> Already have an account? <br />Log In </button>
           </a>
         </div>
-        <div className="row center link-container" amp-access='UserState!="LoggedOut" AND UserState!="Subscribed"' amp-access-hide>
+        {!isOhioSite(siteFullname) && <div className="row center link-container" amp-access='UserState!="LoggedOut" AND UserState!="Subscribed"' amp-access-hide>
           <a on="tap:amp-access.login-activateEmbedded" data-mg2-action="activation" data-mce-href="#" >Already a Subscriber? <br />Access your digital products.</a>
-        </div>
+        </div>}
       </div>
     </div>
   );

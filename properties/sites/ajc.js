@@ -22,6 +22,7 @@ export default {
   breakingLiveVideoID: '2UPLSZACARBEVG2PQVZLQLO7D4',
   breakingNewsID_sandbox: 'FFQQGJZMN5A3RHYWFUIESE3RYI',
   breakingLiveVideoID_sandbox: 'PI5DD6OFEVFMHNDHZKI3XU7SSQ',
+  burgerWhiteLogo: '/resources/logos/AJC/sidebar-logo.png',
   domainTwitterURL: 'https://twitter.com/ajc',
   domainFacebookURL: 'https://facebook.com/ajc',
   domainBlockerTracking: 'https://rtwa.ajc.com',
@@ -31,6 +32,14 @@ export default {
     siteFormat: 'news',
     gtmContainerKey: 'GTM-WT4CBT7',
     ampGtmID: 'GTM-WQBXD72',
+    ampGtmTriggers: {
+      loginStart: '35',
+      loginFailed: '42',
+      loginAborted: '43',
+      loginComplete: '39',
+      logoutStart: '41',
+      logoutComplete: '41',
+    },
   },
   featuredVideoPlayerRules: {
     startPlaying: true,

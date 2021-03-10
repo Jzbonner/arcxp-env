@@ -9,7 +9,9 @@ import '../../../../../src/styles/container/_c-headerNav.scss';
 import NotAuthMenu from './notAuthMenu';
 import IsAuthMenu from './isAuthMenu';
 
-const Login = ({ isMobile, isFlyout, isSticky }) => {
+const Login = ({
+  isMobile, isFlyout, isSticky, isSidebar,
+}) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
@@ -53,13 +55,12 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
 
   const setShowUserMenu = (data) => {
     if (isMobile) {
-      if (!isSticky) {
-        showUserMenuRef.current = data;
-        _setShowUserMenu(data);
-      } else if (userStateRef.current !== 'logged-out') {
+      if (userStateRef.current !== 'logged-out') {
         window.location.href = profileLink;
       }
     }
+    showUserMenuRef.current = data;
+    _setShowUserMenu(data);
   };
 
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
@@ -99,7 +100,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
   useWindowEvent('connextIsSubscriber', 'authenticated');
 
   return (
-    <div className={`c-login ${isSticky ? 'isSticky' : ''}`}>
+    <div className={`${isSidebar ? 'c-login-bmenu' : `c-login ${isSticky ? 'isSticky' : ''}`} ${connextSite}`}>
       {(userStateRef.current === 'logged-in'
       || userStateRef.current === 'authenticated') && (
         <IsAuthMenu
@@ -109,6 +110,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
           setShowUserMenu={setShowUserMenu}
           userStateRef={userStateRef}
           custRegId={CustomerRegistrationId}
+          isSidebar={isSidebar}
         />
       )}
       {userStateRef.current === 'logged-out' && (
@@ -118,6 +120,7 @@ const Login = ({ isMobile, isFlyout, isSticky }) => {
           showUserMenu={showUserMenu}
           setShowUserMenu={setShowUserMenu}
           arcSite={arcSite}
+          isSidebar={isSidebar}
         />
       )}
     </div>
@@ -128,6 +131,7 @@ Login.propTypes = {
   isMobile: PropTypes.bool,
   isFlyout: PropTypes.bool,
   isSticky: PropTypes.bool,
+  isSidebar: PropTypes.bool,
 };
 
 export default Login;
