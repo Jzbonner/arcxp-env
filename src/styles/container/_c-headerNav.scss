@@ -1760,7 +1760,7 @@
             height: auto;
 
             a {
-              @include text-styles(.875rem, 1.44, "Gordita");
+              @include text-styles(.875rem, 1, "Gordita");
 
               color: #fff;
               font-weight: 200;
@@ -1891,7 +1891,7 @@
                 white-space: unset;
                 writing-mode: unset;
                 margin: 0;
-                line-height: 1;
+                line-height: 1.44;
 
                 @include breakpoint(desktop-sm) {
                   
