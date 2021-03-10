@@ -99,7 +99,7 @@
       z-index: 4001;
       display: none;
 
-      @include breakpoint (desktop-sm) {
+      @include breakpoint(desktop-sm) {
         display: flex;
       }
 
@@ -150,7 +150,7 @@
       justify-content: center;
       align-items: center;
       min-height: 29px;
-      
+
       &.ajc {
 
         a {
@@ -163,7 +163,7 @@
           @include breakpoint(desktop-sm) {
             height: 54px;
           }
-    
+
           @include breakpoint(desktop-lg) {
             height: 71px;
           }
@@ -231,7 +231,7 @@
           max-height: 54px;
           max-width: 256px;
         }
-        
+
         @include breakpoint(desktop-lg) {
           max-height: 71px;
           height: 71px;
@@ -405,7 +405,9 @@
       height: 3.3rem;
       border-radius: 6px;
       background-color: #fff;
-      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .24), 0 1px 4px 0 rgba(0, 0, 0, .24);
+      box-shadow:
+        0 1px 4px 0 rgba(0, 0, 0, .24),
+        0 1px 4px 0 rgba(0, 0, 0, .24);
       margin-bottom: 2rem;
       order: -1;
     }
@@ -725,7 +727,7 @@
       }
 
       .login-text {
-        @include between-breakpoints(mobile,tablet) {
+        @include between-breakpoints(mobile, tablet) {
           display: none;
         }
       }
@@ -1096,7 +1098,7 @@
             height: auto;
             min-width: fit-content;
           }
-          
+
           &.logged-in {
 
             .flyout-item {
@@ -1167,7 +1169,7 @@
 
       ul {
         display: none;
-        
+
         @include breakpoint(tablet) {
           display: flex;
           justify-content: center;
@@ -1191,7 +1193,7 @@
         }
 
         @include breakpoint(desktop-lg) {
-          
+
           :not(:last-child) {
             margin-right: 30px;
           }
@@ -1203,15 +1205,15 @@
         }
       }
     }
-    
+
     .c-stickyLogin {
 
       .c-topNavLinks {
         border: none;
-        width: 100%;
+        width: auto;
         order: initial;
       }
-  
+
       .c-headerIcon {
         display: none;
       }
@@ -1229,7 +1231,7 @@
           font-size: 1rem;
         }
       }
-      
+
       .login-menu {
 
         img {
@@ -1444,6 +1446,7 @@
 
   .stickyNav-social {
     display: flex;
+    align-items: baseline;
 
     &.hidden {
       display: none;
@@ -1482,12 +1485,128 @@
     align-items: center;
     width: min-content;
     z-index: 11;
-    margin-top: 5px;
+    margin: 0 auto;
 
     @include breakpoint(desktop-sm) {
-      margin-left: 0;
       margin-top: 0;
-      justify-content: left;
+    }
+
+    .stickyNav-social {
+      margin-top: 10px;
+
+      .stickyNav-item {
+        @include breakpoint(tablet) {
+          margin-right: 27px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          margin-right: 34px;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        svg path {
+          transition: fill .4s;
+        }
+
+        &.fb-icon svg {
+          @include breakpoint(tablet) {
+            width: 14px;
+            height: 25px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 18px;
+            height: 30px;
+          }
+
+          &:hover path {
+            fill: #1877f2;
+          }
+        }
+
+        &.twitter-icon svg {
+          @include breakpoint(tablet) {
+            width: 29px;
+            height: 25px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 36px;
+            height: 30px;
+          }
+
+          &:hover path {
+            fill: #1da1f2;
+          }
+        }
+
+        &.pin-icon svg {
+          @include breakpoint(tablet) {
+            width: 20px;
+            height: 25px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 25px;
+            height: 30px;
+          }
+
+          &:hover path {
+            fill: #bd081c;
+          }
+        }
+
+        &.reddit-icon svg {
+          @include breakpoint(tablet) {
+            width: 26px;
+            height: 25px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 32px;
+            height: 30px;
+          }
+
+          &:hover path {
+            fill: #ff4500;
+          }
+        }
+
+        &.mail-icon svg {
+          @include breakpoint(tablet) {
+            width: 35px;
+            height: 25px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 43px;
+            height: 30px;
+          }
+
+          &:hover path {
+            fill: #3299ad;
+          }
+        }
+
+        &.comment-icon svg {
+          @include breakpoint(tablet) {
+            width: 29px;
+            height: 25px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 36px;
+            height: 30px;
+          }
+
+          &:hover path {
+            fill: #3299ad;
+          }
+        }
+      }
     }
 
     .stickyNav-item {
@@ -1533,12 +1652,21 @@
       }
 
       [class*="fb-comments-count"] {
-        @include text-styles(.6rem, 1, "Gordita-Bold");
+        @include text-styles(.625rem, 1, "Gordita-Bold");
 
         position: absolute;
-        top: 12px;
         font-weight: 800;
-        color: #4481eb;
+        color: #9b9b9b;
+
+        @include breakpoint(tablet) {
+          top: -5px;
+          left: 10px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          top: -7px;
+          left: 14px;
+        }
       }
     }
 
