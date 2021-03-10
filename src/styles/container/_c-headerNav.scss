@@ -1760,7 +1760,7 @@
             height: auto;
 
             a {
-              @include text-styles(.875rem, 1.44, "Gordita");
+              @include text-styles(.875rem, 1, "Gordita");
 
               color: #fff;
               font-weight: 200;
@@ -1891,30 +1891,24 @@
                 white-space: unset;
                 writing-mode: unset;
                 margin: 0;
-                line-height: 1;
+                line-height: 1.44;
+
+                @include breakpoint(desktop-sm) {
+                  
+                  &:hover {
+                    
+                    a {
+                      color: #9b9b9b !important; /* stylelint-disable-line declaration-no-important */
+                    }
+                  }
+                }
       
                 a {
                   @include text-styles(.875rem, 1, "Gordita");
       
-                  color: #fff;
+                  color: #fff !important; /* stylelint-disable-line declaration-no-important */
                   font-weight: 200;
                   white-space: pre-line;
-
-                  @include between-breakpoints(mobile,tablet) {
-
-                    &:active,
-                    &:focus,
-                    &:visited {
-                      color: #9b9b9b;
-                    }
-                  }
-
-                  @include breakpoint(desktop-sm) {
-                  
-                    &:hover {
-                      color: #9b9b9b;
-                    }
-                  }
                 }
               }
             }
