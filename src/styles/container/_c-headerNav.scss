@@ -1652,12 +1652,21 @@
       }
 
       [class*="fb-comments-count"] {
-        @include text-styles(.6rem, 1, "Gordita-Bold");
+        @include text-styles(.625rem, 1, "Gordita-Bold");
 
         position: absolute;
-        top: 12px;
         font-weight: 800;
-        color: #4481eb;
+        color: #9b9b9b;
+
+        @include breakpoint(tablet) {
+          top: -5px;
+          left: 10px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          top: -7px;
+          left: 14px;
+        }
       }
     }
 

@@ -14,6 +14,7 @@ import EmailIcon from './_helper_functions/MailIcon.js';
 import FbIcon from './_helper_functions/FbIcon.js';
 import TwitterIcon from './_helper_functions/TwitterIcon.js';
 import PinterestIcon from './_helper_functions/PinterestIcon.js';
+import CommentIcon from './_helper_functions/CommentIcon.js';
 import '../../../../src/styles/container/_c-headerNav.scss';
 
 const StickyNav = ({
@@ -147,6 +148,7 @@ const StickyNav = ({
               {commentsEnabled ? (
                 <li className="stickyNav-item comment-icon">
                   <a href="#" className="sticky-nav-icon" onClick={e => toggleCommentsWindow(e)}>
+                  <CommentIcon />
                     <span className="fb-comments-count" data-href={articleShareUrl}></span>
                   </a>
                 </li>
