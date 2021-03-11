@@ -32,7 +32,7 @@ module.exports = (env, multisite) => {
     Object.keys(multisite).forEach((site) => {
       sizeCheckEntries.push({
         fileName: `${site}/css/style.css`,
-        maxSize: 80000,
+        maxSize: 90000,
         warningSize: 70000,
       });
       sizeCheckEntries.push({

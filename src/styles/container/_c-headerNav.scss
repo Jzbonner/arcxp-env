@@ -1218,8 +1218,20 @@
 
       .c-topNavLinks {
         border: none;
-        width: auto;
+        width: 100%;
         order: initial;
+
+        &.content {
+          width: auto;
+  
+          .sticky-logo-homepage {
+            display: none;
+          }
+  
+          .stickyNav-homepage {
+            display: none;
+          }
+        }
       }
 
       .c-headerIcon {
@@ -1422,10 +1434,6 @@
         width: 240px;
       }
     }
-
-    &.hidden {
-      display: none;
-    }
   }
 
   .c-stickyLogin {
@@ -1475,10 +1483,6 @@
 
     @include breakpoint(tablet) {
       display: flex;
-    }
-
-    &.hidden {
-      display: none;
     }
 
     a {
