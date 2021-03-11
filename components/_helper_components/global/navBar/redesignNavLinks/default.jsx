@@ -45,7 +45,7 @@ const RedesignNavLinks = ({
     );
   });
   return (
-    <div className='c-topNavLinks'>
+    <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
         <div className='nav-flyout-button'></div>
       </div>
