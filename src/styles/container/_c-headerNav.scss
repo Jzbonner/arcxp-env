@@ -1894,7 +1894,7 @@
     }
 
     .nav-mobile-login {
-      display: flex;
+      display: block !important; /* stylelint-disable-line declaration-no-important */
       order: -1;
 
       img {
@@ -1939,6 +1939,10 @@
           height: auto;
           writing-mode: unset;
 
+          @include between-breakpoints(mobile,tablet) {
+            height: auto;
+          }
+
           .flyout-item {
             width: 25%;
             line-height: 1;
@@ -1980,6 +1984,7 @@
           position: absolute;
           left: 10px;
           top: 10px;
+          min-height: 25px;
 
           .search-icon {
             padding: 0;
