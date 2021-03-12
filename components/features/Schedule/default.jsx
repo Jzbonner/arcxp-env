@@ -135,13 +135,6 @@ const Schedule = () => {
                                                     </span>
                                                   </div>
                                                 </td>
-                                                <td>
-                                                  <div className="sr-us-table-cell__cell sr-us-common-standings__header-col sr-us-common-standings__header-border sr-us-common-standings__header-col-n sr-us-common-standings__stat-col srm-is-uppercase">
-                                                    <span className="srt-text-secondary">
-                                                      Winner
-                                                    </span>
-                                                  </div>
-                                                </td>
                                               </tr>
                                             </thead>
                                             <tbody>
@@ -165,11 +158,6 @@ const Schedule = () => {
                                                           <span>
                                                             {tournament.name}
                                                           </span>
-                                                        </div>
-                                                      </td>
-                                                      <td>
-                                                        <div className="sr-us-table-cell__cell sr-us-common-standings__data-col sr-us-common-standings__data-border sr-us-common-standings__stat-col srm-is-clickable">
-                                                          <span>Winner</span>
                                                         </div>
                                                       </td>
                                                     </tr>
