@@ -3,6 +3,14 @@
 
 @include amp-exclude {
 
+  .hidden-mobile {
+    display: none;
+
+    @include breakpoint(tablet) {
+      display: flex;
+    }
+  }
+
   .c-headerNav {
     width: 90%;
     margin: 0 auto;
@@ -773,7 +781,7 @@
 
             .flyout-item {
               min-width: auto;
-    
+
               a {
                 width: auto;
               }
@@ -1446,6 +1454,10 @@
     .sticky-logo-homepage {
       display: flex;
 
+      &.hidden {
+        display: none;
+      }
+
       @include breakpoint(tablet) {
         display: none;
       }
@@ -1489,7 +1501,11 @@
     align-items: center;
     width: min-content;
     z-index: 11;
-    margin: 0 auto;
+    margin-left: auto;
+
+    @include breakpoint(tablet) {
+      margin: 0 auto;
+    }
 
     @include breakpoint(desktop-sm) {
       margin-top: 0;
@@ -1499,6 +1515,8 @@
       margin-top: 10px;
 
       .stickyNav-item {
+        margin-right: 22px;
+
         @include breakpoint(tablet) {
           margin-right: 27px;
         }
@@ -1516,6 +1534,9 @@
         }
 
         &.fb-icon svg {
+          width: 11px;
+          height: 19px;
+
           @include breakpoint(tablet) {
             width: 14px;
             height: 25px;
@@ -1532,6 +1553,9 @@
         }
 
         &.twitter-icon svg {
+          width: 23px;
+          height: 19px;
+
           @include breakpoint(tablet) {
             width: 29px;
             height: 25px;
@@ -1548,6 +1572,9 @@
         }
 
         &.pin-icon svg {
+          width: 16px;
+          height: 19px;
+
           @include breakpoint(tablet) {
             width: 20px;
             height: 25px;
@@ -1564,6 +1591,9 @@
         }
 
         &.reddit-icon svg {
+          width: 20px;
+          height: 19px;
+
           @include breakpoint(tablet) {
             width: 26px;
             height: 25px;
@@ -1580,6 +1610,9 @@
         }
 
         &.mail-icon svg {
+          width: 27px;
+          height: 19px;
+
           @include breakpoint(tablet) {
             width: 35px;
             height: 25px;
@@ -1595,19 +1628,36 @@
           }
         }
 
-        &.comment-icon svg {
-          @include breakpoint(tablet) {
-            width: 29px;
-            height: 25px;
+        &.comment-icon {
+
+          span {
+            transition: color .4s;
           }
 
-          @include breakpoint(desktop-sm) {
-            width: 36px;
-            height: 30px;
+          &:hover {
+
+            span {
+              color: #3299ad;
+            }
+
+            svg path {
+              fill: #3299ad;
+            }
           }
 
-          &:hover path {
-            fill: #3299ad;
+          svg {
+            width: 23px;
+            height: 19px;
+
+            @include breakpoint(tablet) {
+              width: 29px;
+              height: 25px;
+            }
+
+            @include breakpoint(desktop-sm) {
+              width: 36px;
+              height: 30px;
+            }
           }
         }
       }
@@ -1661,8 +1711,11 @@
         position: absolute;
         font-weight: 800;
         color: #9b9b9b;
+        left: 8px;
+        margin-top: 3px;
 
         @include breakpoint(tablet) {
+          margin-top: 0;
           top: -5px;
           left: 10px;
         }
@@ -1980,10 +2033,10 @@
             border-radius: 0;
             height: auto;
             display: block;
-            
+
             a {
               @include text-styles(1.125rem, 1, "Gordita");
-      
+
               display: flex;
               color: #fff;
               font-weight: 800;
@@ -2001,7 +2054,7 @@
             border: none;
             border-radius: 0;
             position: unset;
-      
+
             .subNav-flyout {
               width: 100%;
               list-style: none;
@@ -2010,11 +2063,11 @@
               align-content: unset;
               writing-mode: unset;
               height: auto;
-              
+
               @include between-breakpoints(tablet, desktop-sm) {
                 grid-template-columns: 1fr 1fr 1fr 1fr;
               }
-      
+
               .flyout-item {
                 padding-bottom: 9px;
                 max-width: 163px;
@@ -2026,18 +2079,18 @@
                 line-height: 1.44;
 
                 @include breakpoint(desktop-sm) {
-                  
+
                   &:hover {
-                    
+
                     a {
                       color: #9b9b9b !important; /* stylelint-disable-line declaration-no-important */
                     }
                   }
                 }
-      
+
                 a {
                   @include text-styles(.875rem, 1, "Gordita");
-      
+
                   color: #fff !important; /* stylelint-disable-line declaration-no-important */
                   font-weight: 200;
                   white-space: pre-line;
@@ -2046,7 +2099,6 @@
             }
           }
         }
-  
 
         &:first-child {
           border-top: 1px solid #4f4f4f;
@@ -2121,7 +2173,7 @@
 
           .c-copyright {
             background: none;
-  
+
             .copyright {
               white-space: pre-wrap;
               margin: 0;
@@ -2129,19 +2181,19 @@
               max-width: 354px;
               width: 100%;
               color: #fff;
-  
+
               .learn-more {
-  
+
                 span {
                   color: #fff;
                 }
               }
             }
-  
+
             .rights,
             .privacy {
               padding-bottom: 20px;
-  
+
               a {
                 width: auto;
               }

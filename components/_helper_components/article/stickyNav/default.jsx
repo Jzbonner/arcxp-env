@@ -148,14 +148,16 @@ const StickyNav = ({
               {commentsEnabled ? (
                 <li className="stickyNav-item comment-icon">
                   <a href="#" className="sticky-nav-icon" onClick={e => toggleCommentsWindow(e)}>
-                  <CommentIcon />
+                    <CommentIcon />
                     <span className="fb-comments-count" data-href={articleShareUrl}></span>
                   </a>
                 </li>
               ) : null}
             </div>
           </ul>
-          <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current} />
+          <div className="hidden-mobile">
+            <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current} />
+          </div>
         </div>
       </div>
       { !isNonShareablePage
