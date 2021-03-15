@@ -693,7 +693,7 @@ const Gallery = (props) => {
 
   return (
     <LazyLoad
-      placeholder={<div />}
+      placeholder={<div className="c-placeholder-gallery" />}
       height="100%"
       width="100%"
       offset={200}>

@@ -100,8 +100,10 @@ const Image = ({
     const renderedImageOutput = () => <>
       {!ampPage ? (
         <LazyLoad
-          placeholder={<img src={placeholder} style={{ width: '100%' }} data-placeholder={true} data-src={dataSrc} alt={altTextContent}
-          className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`} />}
+          placeholder={
+            <img src={placeholder} style={{ width: '100%' }} data-placeholder={true} data-src={dataSrc} alt={altTextContent}
+              className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`} />
+          }
           height="100%"
           width="100%"
           once={true}>
