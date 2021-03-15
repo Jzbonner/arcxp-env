@@ -2,41 +2,63 @@
 @import "./../../../src/styles/base/fonts";
 
 .c-sectionHome .c-contentElements .c-synopsis {
-  @include breakpoint(desktop-sm) {
+  @include breakpoint(tablet) {
     width: 100%;
   }
 
   @include breakpoint(desktop-lg) {
-    width: 35.5%;
+    width: 48.5%;
     margin-left: 3%;
-  }
-
-  @include breakpoint(desktop-xl) {
-    width: 35%;
-    margin-left: 2.5%;
   }
 }
 
 .c-synopsis {
-  @include breakpoint(desktop-sm) {
+  @include breakpoint(tablet) {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    border-bottom: 1px solid #cdcdcd;
+    padding-bottom: 5px;
   }
 
   @include breakpoint(desktop-lg) {
     flex-direction: column;
     justify-content: initial;
     margin-top: -2px;
+    border-bottom: none;
+    padding-bottom: 0;
   }
 
   .c-homeList {
-    @include breakpoint(desktop-sm) {
-      width: 47%;
+    margin-bottom: 15px;
+
+    &:nth-child(1) {
+      border-bottom: 1px solid #cdcdcd;
+      margin-bottom: 15px;
+    }
+
+    @include between-breakpoints(tablet, desktop-lg) {
+      width: 50%;
+      box-sizing: border-box;
+
+      &:nth-child(1) {
+        border-bottom: none;
+        margin-bottom: 0;
+
+        .headline {
+          border-right: 1px solid #cdcdcd;
+          padding-right: 15px;
+        }
+      }
+
+      &:nth-child(2) {
+        padding-left: 15px;
+      }
     }
 
     @include breakpoint(desktop-lg) {
       width: 100%;
+      border-bottom: none;
     }
 
     .c-label-wrapper {
@@ -46,15 +68,12 @@
     .headline {
       text-align: left;
       letter-spacing: -.46px;
+      margin-bottom: 10px;
 
-      @include text-styles(1.625rem, 1.14, "Lora");
+      @include text-styles(1.625rem, 1.14, "Lora-Bold");
 
       @include between-breakpoints(tablet, desktop-lg) {
-        @include text-styles(1.5rem, 1.25, "Lora");
-      }
-
-      @include breakpoint (desktop-lg) {
-        @include text-styles(1.625rem, 1.14, "Lora");
+        @include text-styles(1.5rem, 1.25, "Lora-Bold");
       }
 
       a {
@@ -67,46 +86,26 @@
     }
 
     .homeList-text {
-      padding-bottom: .6rem;
-      border-bottom: 1px solid #cdcdcd;
       width: 100%;
       letter-spacing: -.32px;
+      padding-bottom: 10px;
 
       @include text-styles(.875rem, 1.5, "Gordita");
-
-      @include between-breakpoints(desktop-sm, desktop-lg) {
-        border-bottom: none;
-      }
 
       @include breakpoint(desktop-sm) {
         letter-spacing: -.28px;
       }
-    }
 
-    &:first-child {
-
-      .c-label-wrapper {
-        @include breakpoint(desktop-sm) {
-          margin-top: 0;
-        }
+      @include between-breakpoints(tablet, desktop-lg) {
+        padding-bottom: 0;
       }
     }
+  }
 
-    &:last-child {
-
-      .homeList-text {
-        border: none;
-      }
-    }
-
-    &:nth-child(1),
-    &:nth-child(2) {
-      @include between-breakpoints(desktop-sm, desktop-lg) {
-        
-        .c-label-wrapper {
-          margin-top: 0;
-        }
-      }
-    }
+  .c-listItemPreview {
+    height: auto;
+    font-family: "Gordita";
+    font-size: .875rem;
+    margin-top: 10px;
   }
 }

@@ -80,3 +80,27 @@ $font: (
     url("./../../../resources/fonts/lora/Lora-Regular.woff") format("woff"),
     url("./../../../resources/fonts/lora/Lora-Regular.woff2") format("woff2");
 }
+
+@font-face {
+  font-family: "Lora-Medium";
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  font-display: swap;
+  src:
+    url("./../../../resources/fonts/lora/Lora-Medium.ttf") format("truetype"),
+    url("./../../../resources/fonts/lora/Lora-Medium.woff") format("woff"),
+    url("./../../../resources/fonts/lora/Lora-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Lora-Bold";
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  font-display: swap;
+  src:
+    url("./../../../resources/fonts/lora/Lora-Bold.ttf") format("truetype"),
+    url("./../../../resources/fonts/lora/Lora-Bold.woff") format("woff"),
+    url("./../../../resources/fonts/lora/Lora-Bold.woff2") format("woff2");
+}
