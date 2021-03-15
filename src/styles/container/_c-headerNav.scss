@@ -1924,9 +1924,12 @@
             cursor: pointer;
           }
 
+          &:focus,
+          &:visited,
           &:active,
-          &:visited {
+          &:hover {
             background: #3299ad;
+            -webkit-tap-highlight-color: #3299ad;
             border: none;
           }
         }
