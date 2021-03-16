@@ -1711,18 +1711,18 @@
         position: absolute;
         font-weight: 800;
         color: #9b9b9b;
-        left: 8px;
         margin-top: 3px;
+        width: 100%;
+        left: 0;
+        text-align: center;
 
         @include breakpoint(tablet) {
           margin-top: 0;
           top: -5px;
-          left: 10px;
         }
 
         @include breakpoint(desktop-sm) {
           top: -7px;
-          left: 14px;
         }
       }
     }
