@@ -109,7 +109,7 @@ const Image = ({
           className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`}
           onClick={onClickRun}
         />
-      )};
+      )}
     </>;
     const renderedImageOutput = () => <>
       {!ampPage && (
