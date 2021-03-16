@@ -33,6 +33,13 @@
       margin: 0;
     }
 
+    .c-sectionTitle {
+
+      &:after {
+        display: none;
+      }
+    }
+
     .c-homeListContainer {
       @include breakpoint(desktop-sm) {
         flex-direction: row;
