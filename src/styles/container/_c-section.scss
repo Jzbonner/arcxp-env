@@ -103,7 +103,7 @@
   &:not(.full-width) {
 
     .c-contentElements {
-      @include breakpoint(tablet) {
+      @include breakpoint(desktop-sm) {
         width: calc(100% - 330px);
         padding: 0 $min-margin 0 0;
       }
@@ -127,7 +127,7 @@
         margin-top: 2.26rem;
       }
 
-      @include breakpoint(tablet) {
+      @include breakpoint(desktop-sm) {
         width: 300px;
         float: right;
         position: relative;
