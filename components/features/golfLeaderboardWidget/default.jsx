@@ -8,9 +8,9 @@ const golfLeadershipWidget = () => {
   const tournamentId = 'b681c361-bf1d-414a-98b5-a341671cd922';
 
   const leaderboardData = useContent({
-    source: 'golfLeaderboard-api',
+    source: 'sportradarLeaderboard-api',
     query: {
-      golf_tour: `${tour}`,
+      golfTour: `${tour}`,
       year: `${year}`,
       tournamentId: `${tournamentId}`,
     },
