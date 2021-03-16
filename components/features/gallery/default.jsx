@@ -494,7 +494,7 @@ const Gallery = (props) => {
       elementItemData.states = { ...parentStates };
 
       return (
-        <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`} />
+        <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`} isMobileGallery={true} />
       );
     });
     return finalElements;

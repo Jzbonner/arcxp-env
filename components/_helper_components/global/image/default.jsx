@@ -21,7 +21,7 @@ import './default.scss';
 */
 const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType,
-  ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [], additionalClasses = '',
+  ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [], additionalClasses = '', noLazyLoad = false,
 }) => {
   const {
     url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties,
@@ -95,32 +95,40 @@ const Image = ({
       2: mImage = null,
     } = img;
     const dataSrc = imgSrc || mImage.src || url;
-    const renderedImageOutput = () => <>
-      {!ampPage ? (
-        <LazyLoad
-          placeholder={
-            <img src={placeholder} style={{ width: '100%' }} data-placeholder={true} data-src={dataSrc} alt={altTextContent}
-              className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`} />
-          }
-          height="100%"
-          width="100%"
-          once={true}>
-          {useSrcSet && srcSetSizes.length ? (
-            <picture className={teaseContentType ? 'tease-image' : ''}>
-              <source srcSet={dtImage.src} media="(min-width: 1200px)" />
-              <source srcSet={tImage.src} media="(min-width: 768px)" />
-              <img src={mImage.src} alt={altTextContent} />
-            </picture>
-          ) : (
-            <img
-              src={dataSrc}
-              alt={altTextContent}
-              className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`}
-              onClick={onClickRun}
-            />
-          )}
-        </LazyLoad>
+    const renderImgTag = () => <>
+      {useSrcSet && srcSetSizes.length ? (
+        <picture className={teaseContentType ? 'tease-image' : ''}>
+          <source srcSet={dtImage.src} media="(min-width: 1200px)" />
+          <source srcSet={tImage.src} media="(min-width: 768px)" />
+          <img src={mImage.src} alt={altTextContent} />
+        </picture>
       ) : (
+        <img
+          src={dataSrc}
+          alt={altTextContent}
+          className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`}
+          onClick={onClickRun}
+        />
+      )};
+    </>;
+    const renderedImageOutput = () => <>
+      {!ampPage && (
+        noLazyLoad ? (
+          renderImgTag()
+        ) : (
+          <LazyLoad
+            placeholder={
+              <img src={placeholder} style={{ width: '100%' }} data-placeholder={true} data-src={dataSrc} alt={altTextContent}
+                className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`} />
+            }
+            height="100%"
+            width="100%"
+            once={true}>
+            {renderImgTag()}
+          </LazyLoad>
+        )
+      )}
+      {ampPage && (
           <amp-img
             src={dataSrc}
             alt={altTextContent}
@@ -173,5 +181,6 @@ Image.propTypes = {
   useSrcSet: PropTypes.bool,
   srcSetSizes: PropTypes.array,
   additionalClasses: PropTypes.string,
+  noLazyLoad: PropTypes.bool,
 };
 export default Image;

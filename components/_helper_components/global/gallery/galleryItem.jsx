@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Image from '../image/default';
 
 const GalleryItem = ({
-  data, func, modalFunc,
+  data, func, modalFunc, isMobileGallery = false,
 }) => {
   const {
     url, width, height, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass,
@@ -22,6 +22,7 @@ const GalleryItem = ({
     width: 720,
     height: 480,
     imageType: 'isGalleryImage',
+    noLazyLoad: isMobileGallery,
     ampPage: false,
     src: {
       url,
@@ -81,6 +82,7 @@ GalleryItem.propTypes = {
   func: PropTypes.func,
   lastItemClass: PropTypes.string,
   modalFunc: PropTypes.func,
+  isMobileGallery: PropTypes.bool,
 };
 
 export default GalleryItem;
