@@ -103,7 +103,7 @@
   &:not(.full-width) {
 
     .c-contentElements {
-      @include breakpoint(desktop) {
+      @include breakpoint(desktop-sm) {
         width: calc(100% - 330px);
         padding: 0 $min-margin 0 0;
       }
