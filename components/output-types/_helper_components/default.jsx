@@ -55,6 +55,8 @@ const RenderOutputType = (props) => {
         <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} />
         <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} />
         <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`} />
+        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/Lora-Regular.ttf`)}`} />
+
         <CssLinks />
         {includeGtm && (
           <>
