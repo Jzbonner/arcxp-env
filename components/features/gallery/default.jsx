@@ -218,28 +218,7 @@ const Gallery = (props) => {
     }
   };
 
-  // lazyload upcoming images in the gallery
-  const loadNextImage = (index) => {
-    if (document.querySelectorAll('.gallery-full-item img[data-placeholder]').length) {
-      // only proceed if there are still placeholder images in the gallery
-      const galleryItems = document.querySelectorAll('.gallery-full-item');
-      const targetGalleryItem = galleryItems[index];
-      const targetGalleryItemImg = targetGalleryItem && targetGalleryItem.querySelector('.lazyload-wrapper img[data-placeholder]');
-      console.error('dave, attempt to load image ', index, targetGalleryItem);
-      if (targetGalleryItemImg) {
-        console.error('dave, load image ', index, targetGalleryItemImg);
-        const isPlaceholder = targetGalleryItemImg.getAttribute('data-placeholder');
-        const dataSrc = targetGalleryItemImg.getAttribute('data-src');
-        if (isPlaceholder && dataSrc) {
-          targetGalleryItemImg.setAttribute('src', dataSrc);
-          targetGalleryItemImg.removeAttribute('data-placeholder');
-        }
-      }
-    }
-  };
-
   const changeIndex = (action, maxNumber, isPhoto = true) => {
-    console.error('dave again, inside changeIndex');
     const targetIndex = isPhoto ? 0 : 1;
     if (!hasOpened && (currentIndex === targetIndex || currentIndex === maxIndex)) dispatchGalleryOpenEvent();
 
@@ -257,7 +236,6 @@ const Gallery = (props) => {
       || (isAdVisible && currentClickCount === 4)) {
       // change current image index by -1
       if (action === actions.PREV) {
-        loadNextImage(currentIndex - 1);
         setCurrentAction(action);
         setClickDirection(actions.PREV);
         if (!isAdVisible || (currentClickCount % 4) === 0) {
@@ -275,7 +253,6 @@ const Gallery = (props) => {
         }
       } else if (action === actions.NEXT) {
         // change current image index by +1
-        loadNextImage(currentIndex + 1);
         setCurrentAction(action);
         setClickDirection(actions.NEXT);
         if (!isAdVisible || ((currentClickCount % 4) === 0)) {
@@ -468,7 +445,6 @@ const Gallery = (props) => {
 
       if (offsetHeight === 0 && (galleryScrollTop > targetOffsetTop)) {
         setHeight(offsetHeight + targetOffsetTop);
-        loadNextImage(index);
         changeIndex(actions.NEXT);
       }
 
@@ -693,10 +669,10 @@ const Gallery = (props) => {
 
   return (
     <LazyLoad
-      placeholder={<div className="c-placeholder-gallery" />}
+      placeholder={<div className="c-placeholder-gallery" data-uri={canonicalUrl || null} />}
       height="100%"
       width="100%"
-      offset={200}>
+      offset={300}>
       {(isMobile || !isStory)
         && galHeadline
         ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
