@@ -18,6 +18,7 @@ export default {
     src, height = 600, width = 1000, srcSetSizes = [], originalHeight, originalWidth, smart, focalCoords, arcSite,
   }) {
     const { cdnOrg, cdnSite, allowedDimensions } = getProperties(arcSite);
+    if (!src) return null;
     let reqWidth = width;
     let reqHeight = height;
     const buildOutputUrl = (w, h) => {
