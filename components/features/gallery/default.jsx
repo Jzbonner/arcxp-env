@@ -423,6 +423,7 @@ const Gallery = (props) => {
       setMobileState(true);
     } else {
       setMobileState(false);
+      setVisibility(true);
     }
 
     setCurrentAction(actions.RESIZE);
@@ -540,7 +541,7 @@ const Gallery = (props) => {
     if (!isAdVisible && !isMobile) renderCaptionByCurrentIndex();
   }, [baseCaptionData]);
 
-  // handles ad intertions and removals for desktop gallery
+  // handles ad insertions and removals for desktop gallery
   useEffect(() => {
     if (!isMobile) {
       if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
