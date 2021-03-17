@@ -1,0 +1,18 @@
+/* stylelint-disable */
+// without this, the taboola script gives the tabool element left and right margins of -187px on mobile.
+@media screen and (max-width: 480px) {
+  #taboola-ajc-custom-feed---section-fronts[data-feed-main-container-id="taboola-ajc-custom-feed---section-fronts"].tbl-feed-full-width,
+  #taboola-dayton-custom-feed---section-fronts[data-feed-main-container-id="taboola-dayton-custom-feed---section-fronts"].tbl-feed-full-width,
+  #taboola-dayton-daily-news-custom-feed---section-fronts[data-feed-main-container-id="taboola-dayton-daily-news-custom-feed---section-fronts"].tbl-feed-full-width,
+  #taboola-journal-news-custom-feed---section-fronts[data-feed-main-container-id="taboola-journal-news-custom-feed---section-fronts"].tbl-feed-full-width,
+  #taboola-springfield-news-sun-custom-feed---section-fronts[data-feed-main-container-id="taboola-springfield-news-sun-custom-feed---section-fronts"].tbl-feed-full-width {
+    @if $is-amp {
+      margin-left: 0;
+      margin-right: 0;
+    } @else {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+   }
+}
+/* stylelint-enable */
