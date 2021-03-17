@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 
-const { sportradarAPIkey, sportradarAPIVersion } = require('../../environment/index');
+const { sportradarAPIkey, sportradarAPIVersion, sportradarAccessLevel } = require('../../environment/index');
 
 const params = {
   tour: 'text',
@@ -16,7 +16,7 @@ const fetch = (query) => {
     return null;
   }
 
-  const sportradarAPILink = `https://api.sportradar.us/${sportradarAPIVersion}/schedule/${tour}/${year}/tournaments/schedule.json?api_key=${sportradarAPIkey}`;
+  const sportradarAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/schedule.json?api_key=${sportradarAPIkey}`;
 
   return axios
     .get(sportradarAPILink, {
