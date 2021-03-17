@@ -63,7 +63,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     const { content: citationContent } = citation || {};
     return `<div class="blockquote">
       ${quoteElements.map(qEl => qEl.content && `<p>${qEl.content}</p>`)}
-      <blockquote>${citationContent}</blockquote>
+      ${citationContent ? `<blockquote>${citationContent}</blockquote>` : ''}
     </div>`;
   }
 
