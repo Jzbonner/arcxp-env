@@ -60,10 +60,9 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
 
   if (type === 'quote') {
     const { content_elements: quoteElements, citation } = el || {};
-    const [{ content: quoteHeading }] = quoteElements || {};
     const { content: citationContent } = citation || {};
-    return `<div>
-      <p>${quoteHeading}</p>
+    return `<div class="blockquote">
+      ${quoteElements.map(qEl => qEl.content && `<p>${qEl.content}</p>`)}
       <blockquote>${citationContent}</blockquote>
     </div>`;
   }
