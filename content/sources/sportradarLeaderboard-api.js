@@ -26,6 +26,7 @@ const fetch = (query) => {
     .get(golfLeaderboardAPILink, {
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
     })
     .then(({ data }) => data)

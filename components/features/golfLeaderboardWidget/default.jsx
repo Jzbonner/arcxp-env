@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { useContent } from 'fusion:content';
 import './default.scss';
@@ -5,14 +6,14 @@ import './default.scss';
 const golfLeadershipWidget = () => {
   const tour = 'pga';
   const year = '2020';
-  const tournamentId = 'b681c361-bf1d-414a-98b5-a341671cd922';
+  const tournamentId = '6ba4893c-c82e-4269-a0ab-c99a05c854a8';
 
   const leaderboardData = useContent({
     source: 'sportradarLeaderboard-api',
     query: {
-      golfTour: `${tour}`,
-      year: `${year}`,
-      tournamentId: `${tournamentId}`,
+      golfTour: tour,
+      year: year,
+      tournamentId: tournamentId,
     },
   });
 
