@@ -434,7 +434,7 @@ const Video = ({
   const { width: vidWidth } = src && src.streams && src.streams[0] ? src.streams[0] : {};
   const { height: vidHeight } = src && src.streams && src.streams[0] ? src.streams[0] : {};
   const encodedAdTag = encodeURIComponent(adTag).replace(/'/g, '%27').replace(/"/g, '%22');
-  console.log(adTag);
+  console.log('AD TAG ', adTag);
 
   const ampIframe = () => (
     <>
@@ -444,8 +444,9 @@ const Video = ({
     width={`${vidWidth}`}
     height={`${vidHeight}`}
     allow='autoplay'
-    sandbox="allow-scripts allow-popups"
+    sandbox="allow-scripts allow-same-origin allow-popups"
     scrolling="no"
+    tag={adTag}
     allowfullscreen
     >
     <amp-img layout="fill" src={thumbnailImage} placeholder></amp-img>
