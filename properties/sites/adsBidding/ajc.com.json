@@ -178,6 +178,26 @@
             }
           },
           {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "20395739",
+              "placementName": "AJC_ROS_HP02_Tablet"
+            }
+          },
+          {
+            "bidder": "appnexus",
+            "labels": ["phone"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "20395740",
+              "placementName": "AJC_ROS_HP02_Mobile"
+            }
+          },
+          {
             "bidder": "aol",
             "labels": ["desktop1"],
             "params": {
@@ -199,26 +219,6 @@
             "params": {
               "dcn": "8a9694fd01787821c15726c8ed460197",
               "pos": "8a969c4f01787821b9d626c914dc016f"
-            }
-          },
-          {
-            "bidder": "appnexus",
-            "labels": ["tablet1"],
-            "params": {
-              "publisher": "AJC",
-              "placementGroup": "ROS",
-              "placementId": "20395739",
-              "placementName": "AJC_ROS_HP02_Tablet"
-            }
-          },
-          {
-            "bidder": "appnexus",
-            "labels": ["phone"],
-            "params": {
-              "publisher": "AJC",
-              "placementGroup": "ROS",
-              "placementId": "20395740",
-              "placementName": "AJC_ROS_HP02_Mobile"
             }
           },
           {
