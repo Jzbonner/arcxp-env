@@ -1,0 +1,192 @@
+@import "./../../../src/styles/base";
+
+.schedule-widget.sportsradar-widget {
+
+  .schedule-header {
+
+    h1 {
+      font-family: "Gordita";
+      color: #313132;
+      height: 40px;
+      margin: 0 83px 6px 0;
+      font-size: 30px;
+      font-weight: 700;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: -.38px;
+
+      @include breakpoint(tablet) {
+        height: 40px;
+        margin: 0;
+        font-size: 30px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        height: 60px;
+        font-size: 45px;
+        letter-spacing: -.56px;
+      }
+    }
+  }
+
+  .schedule-subheader {
+
+    h5 {
+      text-align: left;
+      margin: 0 6px 7px 1px;
+      font-family: "Gordita-bold";
+      font-size: 12px;
+      font-weight: 700;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #313132;
+
+      @include breakpoint(tablet) {
+        margin: 0 6px 6px 1px;
+        font-size: 14px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        margin: 0 27px 5px 1px;
+        font-size: 18px;
+      }
+    }
+  }
+
+  .schedule-info {
+
+    p {
+      font-family: "Gordita";
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      color: #313132;
+
+      @include breakpoint(tablet) {
+        margin: 0 0 10px;
+        font-size: 11px;
+        line-height: 1.82;
+      }
+
+      @include breakpoint(desktop-sm) {
+        height: 62px;
+        margin: 10px 0 0;
+        padding: 50px 6px 11px 1px;
+        font-size: 13px;
+        line-height: 1.54;
+        letter-spacing: normal;
+      }
+    }
+  }
+
+  .schedule-table {
+
+    thead {
+
+      tr {
+
+        th {
+          text-align: center;
+          margin: 0 6px 7px 1px;
+          font-family: "Gordita-bold";
+          font-size: 12px;
+          font-weight: 700;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          color: #313132;
+
+          @include breakpoint(tablet) {
+            margin: 0 6px 6px 1px;
+            font-size: 14px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            margin: 0 27px 5px 1px;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+    tbody {
+
+      tr {
+
+        &:nth-child(odd) {
+          background-color: rgba(50, 153, 173, .1);
+        }
+
+        &:nth-child(even) {
+          background-color: rgba(245, 245, 245, 1);
+        }
+
+        @include breakpoint(tablet) {
+          width: 730px;
+          height: 30px;
+          margin: 3px 1px 30px 0;
+          padding: 8px 81px 6px 49px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          height: 30px;
+          margin: 3px 1px 30px 0;
+          padding: 6px 1009px 5px 81px;
+        }
+
+        td {
+          text-align: center;
+          vertical-align: middle;
+          font-family: "Gordita";
+          font-size: 12px;
+          font-weight: 500;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          color: #313132;
+          padding-left: 10px;
+          padding-right: 10px;
+
+          &:nth-child(odd) {
+            background-color: rgba(237, 237, 237, 1);
+          }
+
+          @include breakpoint(desktop-sm) {
+            font-size: 14px;
+          }
+
+          &.tournament-date {
+            width: 80px;
+
+            @include breakpoint(desktop-sm) {
+              width: 180px;
+            }
+          }
+
+          &.tournament-name {
+            width: 146px;
+            text-align: left;
+            
+            @include breakpoint(desktop-sm) {
+              width: 400px;
+            }
+          }
+
+          &.tournament-winner {
+            width: 146px;
+            text-align: left;
+
+            @include breakpoint(desktop-sm) {
+              width: 200px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

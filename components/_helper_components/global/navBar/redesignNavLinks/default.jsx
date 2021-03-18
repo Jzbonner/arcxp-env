@@ -45,16 +45,16 @@ const RedesignNavLinks = ({
     );
   });
   return (
-    <div className='c-topNavLinks'>
+    <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
         <div className='nav-flyout-button'></div>
       </div>
-      <div className={`sticky-logo-homepage ${siteName} ${isNonShareablePage ? '' : 'hidden'}`}>
+      <div className={`sticky-logo-homepage ${siteName}`}>
         <a href="/">
           <img src={logoPath} className={siteName} alt={`${siteName} logo`} />
         </a>
       </div>
-      <div className={`stickyNav-homepage ${isNonShareablePage ? '' : 'hidden'}`}>
+      <div className='stickyNav-homepage'>
         <ul>
           {items}
         </ul>

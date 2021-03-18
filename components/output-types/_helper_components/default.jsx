@@ -55,6 +55,8 @@ const RenderOutputType = (props) => {
         <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} />
         <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} />
         <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`} />
+        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/Lora-Regular.ttf`)}`} />
+
         <CssLinks />
         {includeGtm && (
           <>
@@ -80,6 +82,27 @@ const RenderOutputType = (props) => {
         <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
+        <script type="text/javascript" dangerouslySetInnerHTML={{
+          __html:
+          `
+            window.addEventListener('load', () => {
+              function timer11(){ga('send', 'event', 'TimeOnPage', '1', '11-30 seconds', { 'nonInteraction': 1 })};
+              function timer31(){ga('send', 'event', 'TimeOnPage', '2', '31-60 seconds', { 'nonInteraction': 1 })};
+              function timer61(){ga('send', 'event', 'TimeOnPage', '3', '61-180 seconds', { 'nonInteraction': 1 })};
+              function timer181(){ga('send', 'event', 'TimeOnPage', '4', '181-600 seconds', { 'nonInteraction': 1 })};
+              function timer601(){ga('send', 'event', 'TimeOnPage', '5', '601-1800 seconds', { 'nonInteraction': 1 })};
+              function timer1801(){ga('send', 'event', 'TimeOnPage', '6', '1801+ seconds', { 'nonInteraction': 1 })};
+              function timer0(){ga('send', 'event', 'TimeOnPage', '0', '0-10 seconds', { 'nonInteraction': 1 })};
+              timer0();
+              setTimeout(timer11,11000);
+              setTimeout(timer31,31000);
+              setTimeout(timer61,61000);
+              setTimeout(timer181,181000);
+              setTimeout(timer601,601000);
+              setTimeout(timer1801,1801000);
+            });
+          `,
+        }}></script>
       </head>
       <body>
         {includeGtm && (
@@ -114,6 +137,7 @@ const RenderOutputType = (props) => {
       </body>
     </html>
   );
+  /* eslint-enable */
 };
 
 RenderOutputType.propTypes = {

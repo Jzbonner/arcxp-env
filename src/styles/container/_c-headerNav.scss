@@ -3,6 +3,14 @@
 
 @include amp-exclude {
 
+  .hidden-mobile {
+    display: none;
+
+    @include breakpoint(tablet) {
+      display: flex;
+    }
+  }
+
   .c-headerNav {
     width: 90%;
     margin: 0 auto;
@@ -99,7 +107,7 @@
       z-index: 4001;
       display: none;
 
-      @include breakpoint (desktop-sm) {
+      @include breakpoint(desktop-sm) {
         display: flex;
       }
 
@@ -150,7 +158,7 @@
       justify-content: center;
       align-items: center;
       min-height: 29px;
-      
+
       &.ajc {
 
         a {
@@ -163,7 +171,7 @@
           @include breakpoint(desktop-sm) {
             height: 54px;
           }
-    
+
           @include breakpoint(desktop-lg) {
             height: 71px;
           }
@@ -231,7 +239,7 @@
           max-height: 54px;
           max-width: 256px;
         }
-        
+
         @include breakpoint(desktop-lg) {
           max-height: 71px;
           height: 71px;
@@ -405,7 +413,9 @@
       height: 3.3rem;
       border-radius: 6px;
       background-color: #fff;
-      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .24), 0 1px 4px 0 rgba(0, 0, 0, .24);
+      box-shadow:
+        0 1px 4px 0 rgba(0, 0, 0, .24),
+        0 1px 4px 0 rgba(0, 0, 0, .24);
       margin-bottom: 2rem;
       order: -1;
     }
@@ -725,7 +735,7 @@
       }
 
       .login-text {
-        @include between-breakpoints(mobile,tablet) {
+        @include between-breakpoints(mobile, tablet) {
           display: none;
         }
       }
@@ -771,7 +781,7 @@
 
             .flyout-item {
               min-width: auto;
-    
+
               a {
                 width: auto;
               }
@@ -1096,7 +1106,7 @@
             height: auto;
             min-width: fit-content;
           }
-          
+
           &.logged-in {
 
             .flyout-item {
@@ -1167,7 +1177,7 @@
 
       ul {
         display: none;
-        
+
         @include breakpoint(tablet) {
           display: flex;
           justify-content: center;
@@ -1191,7 +1201,7 @@
         }
 
         @include breakpoint(desktop-lg) {
-          
+
           :not(:last-child) {
             margin-right: 30px;
           }
@@ -1203,15 +1213,27 @@
         }
       }
     }
-    
+
     .c-stickyLogin {
 
       .c-topNavLinks {
         border: none;
         width: 100%;
         order: initial;
-      }
+
+        &.content {
+          width: auto;
   
+          .sticky-logo-homepage {
+            display: none;
+          }
+  
+          .stickyNav-homepage {
+            display: none;
+          }
+        }
+      }
+
       .c-headerIcon {
         display: none;
       }
@@ -1229,7 +1251,7 @@
           font-size: 1rem;
         }
       }
-      
+
       .login-menu {
 
         img {
@@ -1412,10 +1434,6 @@
         width: 240px;
       }
     }
-
-    &.hidden {
-      display: none;
-    }
   }
 
   .c-stickyLogin {
@@ -1436,6 +1454,10 @@
     .sticky-logo-homepage {
       display: flex;
 
+      &.hidden {
+        display: none;
+      }
+
       @include breakpoint(tablet) {
         display: none;
       }
@@ -1444,6 +1466,7 @@
 
   .stickyNav-social {
     display: flex;
+    align-items: baseline;
 
     &.hidden {
       display: none;
@@ -1462,10 +1485,6 @@
       display: flex;
     }
 
-    &.hidden {
-      display: none;
-    }
-
     a {
       color: #fff;
       text-decoration: none;
@@ -1482,12 +1501,166 @@
     align-items: center;
     width: min-content;
     z-index: 11;
-    margin-top: 5px;
+    margin-left: auto;
+
+    @include breakpoint(tablet) {
+      margin: 0 auto;
+    }
 
     @include breakpoint(desktop-sm) {
-      margin-left: 0;
       margin-top: 0;
-      justify-content: left;
+    }
+
+    .stickyNav-social {
+      margin-top: 10px;
+
+      .stickyNav-item {
+        margin-right: 22px;
+
+        @include breakpoint(tablet) {
+          margin-right: 27px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          margin-right: 34px;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        svg path {
+          transition: fill .4s;
+        }
+
+        &.fb-icon svg {
+          width: 11px;
+          height: 19px;
+
+          @include breakpoint(tablet) {
+            width: 14px;
+            height: 25px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 18px;
+            height: 30px;
+          }
+
+          &:hover path {
+            fill: #1877f2;
+          }
+        }
+
+        &.twitter-icon svg {
+          width: 23px;
+          height: 19px;
+
+          @include breakpoint(tablet) {
+            width: 29px;
+            height: 25px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 36px;
+            height: 30px;
+          }
+
+          &:hover path {
+            fill: #1da1f2;
+          }
+        }
+
+        &.pin-icon svg {
+          width: 16px;
+          height: 19px;
+
+          @include breakpoint(tablet) {
+            width: 20px;
+            height: 25px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 25px;
+            height: 30px;
+          }
+
+          &:hover path {
+            fill: #bd081c;
+          }
+        }
+
+        &.reddit-icon svg {
+          width: 20px;
+          height: 19px;
+
+          @include breakpoint(tablet) {
+            width: 26px;
+            height: 25px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 32px;
+            height: 30px;
+          }
+
+          &:hover path {
+            fill: #ff4500;
+          }
+        }
+
+        &.mail-icon svg {
+          width: 27px;
+          height: 19px;
+
+          @include breakpoint(tablet) {
+            width: 35px;
+            height: 25px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            width: 43px;
+            height: 30px;
+          }
+
+          &:hover path {
+            fill: #3299ad;
+          }
+        }
+
+        &.comment-icon {
+
+          span {
+            transition: color .4s;
+          }
+
+          &:hover {
+
+            span {
+              color: #3299ad;
+            }
+
+            svg path {
+              fill: #3299ad;
+            }
+          }
+
+          svg {
+            width: 23px;
+            height: 19px;
+
+            @include breakpoint(tablet) {
+              width: 29px;
+              height: 25px;
+            }
+
+            @include breakpoint(desktop-sm) {
+              width: 36px;
+              height: 30px;
+            }
+          }
+        }
+      }
     }
 
     .stickyNav-item {
@@ -1533,12 +1706,24 @@
       }
 
       [class*="fb-comments-count"] {
-        @include text-styles(.6rem, 1, "Gordita-Bold");
+        @include text-styles(.625rem, 1, "Gordita-Bold");
 
         position: absolute;
-        top: 12px;
         font-weight: 800;
-        color: #4481eb;
+        color: #9b9b9b;
+        margin-top: 3px;
+        width: 100%;
+        left: 0;
+        text-align: center;
+
+        @include breakpoint(tablet) {
+          margin-top: 0;
+          top: -5px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          top: -7px;
+        }
       }
     }
 
@@ -1709,7 +1894,7 @@
     }
 
     .nav-mobile-login {
-      display: flex;
+      display: block !important; /* stylelint-disable-line declaration-no-important */
       order: -1;
 
       img {
@@ -1739,9 +1924,12 @@
             cursor: pointer;
           }
 
+          &:focus,
+          &:visited,
           &:active,
-          &:visited {
+          &:hover {
             background: #3299ad;
+            -webkit-tap-highlight-color: #3299ad;
             border: none;
           }
         }
@@ -1754,13 +1942,17 @@
           height: auto;
           writing-mode: unset;
 
+          @include between-breakpoints(mobile,tablet) {
+            height: auto;
+          }
+
           .flyout-item {
             width: 25%;
             line-height: 1;
             height: auto;
 
             a {
-              @include text-styles(.875rem, 1.44, "Gordita");
+              @include text-styles(.875rem, 1, "Gordita");
 
               color: #fff;
               font-weight: 200;
@@ -1795,6 +1987,7 @@
           position: absolute;
           left: 10px;
           top: 10px;
+          min-height: 25px;
 
           .search-icon {
             padding: 0;
@@ -1848,10 +2041,10 @@
             border-radius: 0;
             height: auto;
             display: block;
-            
+
             a {
               @include text-styles(1.125rem, 1, "Gordita");
-      
+
               display: flex;
               color: #fff;
               font-weight: 800;
@@ -1869,7 +2062,7 @@
             border: none;
             border-radius: 0;
             position: unset;
-      
+
             .subNav-flyout {
               width: 100%;
               list-style: none;
@@ -1878,11 +2071,11 @@
               align-content: unset;
               writing-mode: unset;
               height: auto;
-              
+
               @include between-breakpoints(tablet, desktop-sm) {
                 grid-template-columns: 1fr 1fr 1fr 1fr;
               }
-      
+
               .flyout-item {
                 padding-bottom: 9px;
                 max-width: 163px;
@@ -1891,36 +2084,29 @@
                 white-space: unset;
                 writing-mode: unset;
                 margin: 0;
-                line-height: 1;
-      
+                line-height: 1.44;
+
+                @include breakpoint(desktop-sm) {
+
+                  &:hover {
+
+                    a {
+                      color: #9b9b9b !important; /* stylelint-disable-line declaration-no-important */
+                    }
+                  }
+                }
+
                 a {
                   @include text-styles(.875rem, 1, "Gordita");
-      
-                  color: #fff;
+
+                  color: #fff !important; /* stylelint-disable-line declaration-no-important */
                   font-weight: 200;
                   white-space: pre-line;
-
-                  @include between-breakpoints(mobile,tablet) {
-
-                    &:active,
-                    &:focus,
-                    &:visited {
-                      color: #9b9b9b;
-                    }
-                  }
-
-                  @include breakpoint(desktop-sm) {
-                  
-                    &:hover {
-                      color: #9b9b9b;
-                    }
-                  }
                 }
               }
             }
           }
         }
-  
 
         &:first-child {
           border-top: 1px solid #4f4f4f;
@@ -1995,27 +2181,28 @@
 
           .c-copyright {
             background: none;
-  
+
             .copyright {
+              display: block;
               white-space: pre-wrap;
               margin: 0;
               padding: 0;
               max-width: 354px;
               width: 100%;
               color: #fff;
-  
+
               .learn-more {
-  
+
                 span {
                   color: #fff;
                 }
               }
             }
-  
+
             .rights,
             .privacy {
               padding-bottom: 20px;
-  
+
               a {
                 width: auto;
               }
