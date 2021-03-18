@@ -399,10 +399,12 @@
       }
 
       &:last-child {
-
-        .homeList-text {
-          border: none;
-          padding-bottom: 0;
+        @include breakpoint(tablet) {
+          
+          .homeList-text {
+            border: none;
+            padding-bottom: 0;
+          }
         }
       }
     }
