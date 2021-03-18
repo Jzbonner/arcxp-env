@@ -6,6 +6,7 @@ import { taboolaFooterScript, taboolaHeaderScript, taboolaModuleScript } from '.
 import fetchEnv from '../../_helper_components/global/utils/environment';
 import deferThis from '../../_helper_components/global/utils/deferLoading';
 import '../../../src/styles/base/_utility.scss';
+import './default.scss';
 
 const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
   const fusionContext = useFusionContext();
