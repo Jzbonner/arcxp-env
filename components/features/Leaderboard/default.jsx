@@ -22,8 +22,6 @@ const Leaderboard = () => {
   //   ref.current.scrollLeft += scrollOffset;
   // };
 
-  // console.log(leaderboardData);
-
   if (leaderboardData) {
     return (
       <div className="leaderboard-widget sportsradar-widget">
@@ -55,10 +53,6 @@ const Leaderboard = () => {
               <tr key={player.id}>
                 <td className="player-rank">{player.position}{player.tied === true ? 't' : null}</td>
                 <td className="player-name">{player.first_name} {player.last_name}</td>
-                {/* <div className="scrollable-div"> */}
-                    {/* {player.rounds.map(round => (
-                      <td className="player-round">{round.strokes}</td>
-                    ))} */}
                     <td className="player-round">{player.rounds[0] ? player.rounds[0].strokes : '-'}</td>
                     <td className="player-round">{player.rounds[1] ? player.rounds[1].strokes : '-'}</td>
                     <td className="player-round">{player.rounds[2] ? player.rounds[2].strokes : '-'}</td>
