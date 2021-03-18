@@ -12,7 +12,19 @@
   }
   
   .c-sectionTitle {
-    @include text-styles(2.5rem, 1, "Average");
+    @include text-styles(1.875rem, 1, "Gordita-Bold");
+
+    letter-spacing: -.38px;
+
+    @include between-breakpoints(tablet,desktop-sm) {
+      letter-spacing: -.31px;
+      
+      @include text-styles(1.563rem, 1, "Gordita-Bold");
+    }
+
+    @include breakpoint(desktop-sm) {
+      @include text-styles(1.875rem, 1, "Gordita-Bold");
+    }
   }
   
   .c-homeListContainer {
@@ -25,7 +37,9 @@
         .homeList-text {
   
           .headline {
-            @include text-styles(1.25rem, 1.25, "Average");
+            letter-spacing: -.09px;
+
+            @include text-styles(1rem, 1.25, "Lora-Bold");
           }
         }
   
