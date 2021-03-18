@@ -56,11 +56,15 @@ const Leaderboard = () => {
                 <td className="player-rank">{player.position}{player.tied === true ? 't' : null}</td>
                 <td className="player-name">{player.first_name} {player.last_name}</td>
                 {/* <div className="scrollable-div"> */}
-                    {player.rounds.map(round => (
+                    {/* {player.rounds.map(round => (
                       <td className="player-round">{round.strokes}</td>
-                    ))}
+                    ))} */}
+                    <td className="player-round">{player.rounds[0] ? player.rounds[0].strokes : '-'}</td>
+                    <td className="player-round">{player.rounds[1] ? player.rounds[1].strokes : '-'}</td>
+                    <td className="player-round">{player.rounds[2] ? player.rounds[2].strokes : '-'}</td>
+                    <td className="player-round">{player.rounds[3] ? player.rounds[3].strokes : '-'}</td>
                     <td className="player-strokes">{player.score} ({player.strokes})</td>
-                    <td className="player-thru">12:40</td>
+                    <td className="player-thru">{player.rounds[0].thru}</td>
                 {/* </div> */}
               </tr>
             ))}
