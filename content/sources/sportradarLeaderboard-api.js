@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const { sportradarAPIkey, sportradarAPIVersion } = require('../../environment/index');
+const { sportradarAPIkey, sportradarAPIVersion, sportradarAccessLevel } = require('../../environment/index');
 
 const params = {
   golfTour: 'text',
@@ -15,7 +15,7 @@ const fetch = (query) => {
     return null;
   }
 
-  const golfLeaderboardAPILink = `https://api.sportradar.us/golf/trial/${golfTour}/${sportradarAPIVersion}/en/${year}/tournaments/${tournamentId}/leaderboard.json?api_key=${sportradarAPIkey}`;
+  const golfLeaderboardAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${golfTour}/${sportradarAPIVersion}/en/${year}/tournaments/${tournamentId}/leaderboard.json?api_key=${sportradarAPIkey}`;
 
   return axios
     .get(golfLeaderboardAPILink, {
