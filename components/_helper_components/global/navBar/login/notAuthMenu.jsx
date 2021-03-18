@@ -66,7 +66,7 @@ const NotAuthMenu = ({
         setShowUserMenu(!showUserMenu);
       }}
     >
-      Login
+      Log In
     </button>
   );
 

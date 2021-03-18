@@ -340,5 +340,89 @@
     "accountId": "pub-3872273078424183",
     "relationshipType": "DIRECT",
     "certId": "f08c47fec0942fa0"
+  },
+  {
+    "domain": "yahoo.com",
+    "accountId": "58781",
+    "relationshipType": "DIRECT",
+    "certId": "e1a5b5b6e3255540"
+  },
+  {
+    "domain": "appnexus.com",
+    "accountId": "1868",
+    "relationshipType": "RESELLER",
+    "certId": "#banner"
+  },
+  {
+    "domain": "appnexus.com",
+    "accountId": "1356",
+    "relationshipType": "RESELLER",
+    "certId": "f5ab79cb980f11d1"
+  },
+  {
+    "domain": "EMXDGT.com",
+    "accountId": "273",
+    "relationshipType": "RESELLER",
+    "certId": "1e1d41537f7cad7f"
+  },
+  {
+    "domain": "indexexchange.com",
+    "accountId": "184110",
+    "relationshipType": "RESELLER",
+    "certId": "50b1c356f2c5c8fc"
+  },
+  {
+    "domain": "openx.com",
+    "accountId": "537125356",
+    "relationshipType": "RESELLER",
+    "certId": "6a698e2ec38604c6"
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "158430",
+    "relationshipType": "RESELLER",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "133799",
+    "relationshipType": "RESELLER",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "156078",
+    "relationshipType": "RESELLER",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "17250",
+    "relationshipType": "RESELLER",
+    "certId": "0bfd66d529a55807"
+  },
+  {
+    "domain": "xad.com",
+    "accountId": "240",
+    "relationshipType": "RESELLER",
+    "certId": "81cbf0a75a5e0e9a"
+  },
+  {
+    "domain": "indexexchange.com",
+    "accountId": "183875",
+    "relationshipType": "RESELLER",
+    "certId": "50b1c356f2c5c8fc"
+  },
+  {
+    "domain": "appnexus.com",
+    "accountId": "11664",
+    "relationshipType": "RESELLER",
+    "certId": "#banner"
+  },
+  {
+    "domain": "contextweb.com",
+    "accountId": "562258",
+    "relationshipType": "RESELLER",
+    "certId": "89ff185a4c4e857c"
   }
 ]
