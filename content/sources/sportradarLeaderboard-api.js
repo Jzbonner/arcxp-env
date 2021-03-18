@@ -15,7 +15,7 @@ const fetch = (query) => {
     return null;
   }
 
-  const golfLeaderboardAPILink = `https://api.sportradar.us/golf/trial/${golfTour}/${sportradarAPIVersion}/en/${year}/tournaments/${tournamentId}/leaderboard.json?api_key=${sportradarAPIkey}`;
+  const golfLeaderboardAPILink = `https://api.sportradar.us/golf/production/${golfTour}/${sportradarAPIVersion}/en/${year}/tournaments/${tournamentId}/leaderboard.json?api_key=${sportradarAPIkey}`;
 
   return axios
     .get(golfLeaderboardAPILink, {
