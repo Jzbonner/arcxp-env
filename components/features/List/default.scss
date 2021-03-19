@@ -67,22 +67,9 @@
       }
 
       .headline {
-        @include text-styles(1.25rem, 1.25, "Average");
+        @include text-styles(1rem, 1.38, "Lora");
 
-        letter-spacing: -.24px;
-        text-align: center;
-
-        @include breakpoint(desktop-sm) {
-          @include text-styles(1.1rem, 1.28, "Average");
-        }
-
-        @include breakpoint(desktop-lg) {
-          @include text-styles(1.2rem, 1.31, "Average");
-        }
-
-        @media (min-width: 1500px) {
-          @include text-styles(1.3rem, 1.31, "Average");
-        }
+        letter-spacing: -.09px;
       }
     }
   }
@@ -259,15 +246,6 @@
         .headline {
           text-align: left;
           margin-left: 15px;
-          font-size: 1rem;
-
-          @include breakpoint(desktop-sm) {
-            font-size: 1.1rem;
-          }
-
-          @include breakpoint(desktop-lg) {
-            font-size: 1.2rem;
-          }
 
           &.listPage {
             text-align: left;
@@ -318,19 +296,19 @@
           }
         }
 
+        .article-timestamp {
+          margin-left: 15px;
+        }
+
         @include breakpoint(desktop-sm) {
           max-width: 80%;
         }
       }
 
       .headline {
-        letter-spacing: -.32px;
+        @include text-styles(1rem, 1.38, "Lora");
 
-        @include text-styles(1rem, 1.4, "Average");
-
-        @include breakpoint(tablet) {
-          @include text-styles(1rem, 1.2, "Average");
-        }
+        letter-spacing: -.09px;
       }
     }
   }

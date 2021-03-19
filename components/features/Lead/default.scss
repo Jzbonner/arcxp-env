@@ -15,6 +15,10 @@
     margin-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
   }
 
+  .c-label-wrapper:empty {
+    display: none;
+  }
+
   a {
     color: inherit;
   }
@@ -101,10 +105,14 @@
       }
 
       .headline {
-        @include text-styles(1rem, 1.28, "Average");
+        @include text-styles(1rem, 1.38, "Lora");
 
-        @include breakpoint(desktop-sm) {
-          @include text-styles(1.4vw, 1.28, "Average");
+        letter-spacing: -.09px;
+
+        @include between-breakpoints(tablet,desktop-sm) {
+          @include text-styles(.938rem, 1.47, "Lora");
+
+          letter-spacing: -.08px;
         }
       }
     }
