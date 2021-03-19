@@ -22,8 +22,6 @@ const Leaderboard = () => {
   //   ref.current.scrollLeft += scrollOffset;
   // };
 
-  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
   if (leaderboardData) {
     return (
       <div className="leaderboard-widget sportsradar-widget">
