@@ -1,6 +1,7 @@
 @import "./../../../src/styles/base";
 
 .leaderboard-widget.sportsradar-widget {
+  margin: 0 0 30px;
 
   .leaderboard-header {
 
@@ -221,6 +222,7 @@
 
           &.player-name {
             width: 146px;
+            text-align: left;
 
             @include breakpoint(desktop-sm) {
               width: 241px;
