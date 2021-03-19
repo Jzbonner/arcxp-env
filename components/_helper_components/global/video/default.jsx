@@ -440,13 +440,12 @@ const Video = ({
     <>
     <amp-iframe
     layout="responsive"
-    src={`https://${orgOfRecord}.video-player.arcpublishing.com/${currentEnv}/powaEmbed.html?org=${orgOfRecord}&uuid=${vidId}&tag=${encodedAdTag}&autoinit=native-hls&playthrough=true&discovery=true&autoplay=true`}
+    src={`https://${orgOfRecord}.video-player.arcpublishing.com/${currentEnv}/powaEmbed.html?org=${orgOfRecord}&uuid=${vidId}&powa-ad-tag=${encodedAdTag}&autoinit=native-hls&playthrough=true&discovery=true&powa-autoplay=true&powa-muted=true`}
     width={`${vidWidth}`}
     height={`${vidHeight}`}
     allow='autoplay'
     sandbox="allow-scripts allow-same-origin allow-popups"
     scrolling="no"
-    tag={adTag}
     allowfullscreen
     >
     <amp-img layout="fill" src={thumbnailImage} placeholder></amp-img>
