@@ -49,7 +49,7 @@ const WrapOutputType = (props) => {
 
   const { isEnabled: connextIsEnabled = false, environment: connextEnv } = connext[currentEnv] || {};
   const {
-    type, taxonomy, canonical_url: articleURL, _id: uuid,
+    type, taxonomy, canonical_url: articleURL, _id: uuid, promo_items: promoItems,
   } = globalContent || { type: null };
   const { tags = [], sections } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
@@ -58,6 +58,10 @@ const WrapOutputType = (props) => {
   const { sponsorSectionID: isSponsoredContent } = checkSponsor(sections);
   const includeGtm = metrics && metrics.gtmContainerKey;
   const fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${handleSiteName(cdnSite) || handleSiteName(currentSite)}.com` : '';
+  let hasLeadGallery = false;
+  if (type === 'story') {
+    hasLeadGallery = promoItems?.basic?.type === 'gallery';
+  }
   /* eslint-disable-next-line max-len */
 
   const cssData = <Resource path={'resources/dist/ajc/css/style.css'} encoding='utf8'>
@@ -80,7 +84,7 @@ const WrapOutputType = (props) => {
         <MetaTags />
         <SiteMeta />
         <GoogleStructuredData />
-        <AmpRelLink type={type} url={articleURL} noAmp={noAmp} />
+        {!hasLeadGallery && <AmpRelLink type={type} url={articleURL} noAmp={noAmp} />}
         {includeGtm && (
           <>
             <SiteMetrics />
