@@ -90,13 +90,6 @@
           display: none;
         }
       }
-
-      @include breakpoint(tablet) {
-
-        .arc_ad[class*="HP01"] {
-          margin-bottom: 1.88rem;
-        }
-      }
     }
   }
 

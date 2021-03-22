@@ -371,10 +371,10 @@ export const adSlots = {
     dimensions: [
       [
         [300, 250],
-      ], // tablet+
+      ], // desktop+
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop+
     ],
     bidding: {
       amazon: {
@@ -388,10 +388,10 @@ export const adSlots = {
       [
         [300, 250],
         [300, 600],
-      ], // tablet+
+      ], // desktop+
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop+
     ],
     isSticky: true,
     bidding: {

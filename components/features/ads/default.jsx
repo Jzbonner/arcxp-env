@@ -143,7 +143,7 @@ const ArcAd = ({
     <AdSetup
       refresh={false}
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
-      className={`arc_ad | ${slotName} b-margin-bottom-d40-m20
+      className={`arc_ad | ${slotName} b-margin-bottom-d30-m20
       ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
       dfpId={dfpIdFormatted}
@@ -156,10 +156,6 @@ const ArcAd = ({
       lazyLoad={lazyLoad}
     />
   );
-
-  if (slotName === 'HS02') {
-    return <div className='c-HS02'>{arcad}</div>;
-  }
 
   return slotName ? arcad : fallbackAd;
 };
