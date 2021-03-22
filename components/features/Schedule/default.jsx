@@ -10,6 +10,15 @@ const tournamentDate = (sDate, eDate) => {
   return tDate;
 };
 
+const isCurrYear = (eDate) => {
+  const endDate = new Date(eDate);
+  const date = new Date();
+  if (endDate.getFullYear() === date.getFullYear()) {
+    return true;
+  }
+  return false;
+};
+
 const Schedule = () => {
   const tour = 'pga';
   const year = '2021';
@@ -43,17 +52,19 @@ const Schedule = () => {
                 <tr>
                   <th>Date</th>
                   <th>Tournament/Course</th>
+                  <th>Defending Champion</th>
                 </tr>
             </thead>
             <tbody>
             {scheduleData.tournaments
               .filter(
-                tournament => (tournament.end_date >= today && tournament.status === 'scheduled'),
+                tournament => (tournament.start_date <= today && tournament.end_date >= today && tournament.status === '1inprogress'),
               )
               .map(tournament => (
                   <tr key={tournament.id}>
                       <td key={tournament.id} className="tournament-date">{tournamentDate(tournament.start_date, tournament.end_date)}</td>
                       <td key={tournament.id} className="tournament-name">{tournament.name}</td>
+                      <td key={tournament.id} className="tournament-defchamp">{tournament.defending_champ.first_name}&nbsp;{tournament.defending_champ.last_name}</td>
                   </tr>
               ))}
             </tbody>
@@ -75,8 +86,9 @@ const Schedule = () => {
             <tbody>
             {scheduleData.tournaments
               .filter(
-                tournament => (tournament.end_date < today && tournament.status === 'closed'),
+                tournament => (tournament.end_date < today && tournament.status === 'closed' && isCurrYear(tournament.end_date)),
               )
+              .sort((a, b) => b.end_date.localeCompare(a.end_date))
               .map(tournament => (
                   <tr key={tournament.id}>
                       <td key={tournament.id} className="tournament-date">{tournamentDate(tournament.start_date, tournament.end_date)}</td>
