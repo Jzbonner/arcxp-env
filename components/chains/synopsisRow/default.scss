@@ -62,13 +62,13 @@
     }
 
     .column-2 {
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         width: 50%;
       }
     }
 
     .column-3 {
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         width: 50%;
         margin-left: 3.5%;
       }
