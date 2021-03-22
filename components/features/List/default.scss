@@ -30,6 +30,10 @@
       }
     }
 
+    .article-timestamp {
+      margin-left: 15px;
+    }
+
     @include breakpoint(desktop-sm) {
       margin-bottom: 2rem;
       margin-right: 3.3%;
@@ -294,10 +298,6 @@
           @include breakpoint(desktop-sm) {
             margin-bottom: 5px;
           }
-        }
-
-        .article-timestamp {
-          margin-left: 15px;
         }
 
         @include breakpoint(desktop-sm) {

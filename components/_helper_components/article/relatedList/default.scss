@@ -5,15 +5,19 @@
   font-size: 1.875rem;
 
   .title {
-    text-align: center;
+    text-align: left;
     margin-bottom: 1.1rem;
+    display: flex;
+    color: #313132;
 
-    @include breakpoint(tablet) {
-      font-size: 2.5rem;
-    }
+    @include text-styles(1.563rem, 1, "Gordita-Bold");
 
-    @include breakpoint(desktop-sm) {
-      text-align: unset;
+    &:after {
+      content: "";
+      background: #cdcdcd;
+      height: 1px;
+      flex: 1;
+      margin: auto 0 auto 15px;
     }
   }
 
