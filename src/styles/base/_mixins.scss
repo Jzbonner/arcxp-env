@@ -130,7 +130,6 @@
 // styling for "full width" ads on home/section pages
 
 @mixin arc-ad-full-width {
-  padding: 15px 0 0;
   width: 100vw;
 
   @include breakpoint(desktop-sm) {
