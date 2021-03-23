@@ -89,7 +89,7 @@
       tr {
 
         th {
-          text-align: center;
+          text-align: left;
           margin: 0 6px 7px 1px;
           font-family: "Gordita-bold";
           font-size: 12px;
@@ -162,6 +162,7 @@
 
           &.tournament-date {
             width: 80px;
+            text-align: left;
 
             @include breakpoint(desktop-sm) {
               width: 180px;
@@ -178,6 +179,15 @@
           }
 
           &.tournament-winner {
+            width: 146px;
+            text-align: left;
+
+            @include breakpoint(desktop-sm) {
+              width: 200px;
+            }
+          }
+
+          &.tournament-defchamp {
             width: 146px;
             text-align: left;
 
