@@ -157,6 +157,10 @@ const ArcAd = ({
     />
   );
 
+  if (slotName === 'HS02') {
+    return <div className='c-HS02'>{arcad}</div>;
+  }
+
   return slotName ? arcad : fallbackAd;
 };
 
