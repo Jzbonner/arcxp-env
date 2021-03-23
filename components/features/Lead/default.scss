@@ -5,15 +5,11 @@
   // Common styles
   ////////////////
   width: 100%;
-  margin-bottom: 1.25rem;
+  margin-bottom: .94rem;
 
-  @include breakpoint(desktop-sm) {
+  @include breakpoint(desktop-lg) {
     margin-bottom: 1.88rem;
   }
-
-  // @include between-breakpoints(tablet, desktop-sm) {
-  //   margin-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
-  // }
 
   a {
     color: inherit;
