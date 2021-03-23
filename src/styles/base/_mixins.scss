@@ -130,40 +130,37 @@
 // styling for "full width" ads on home/section pages
 
 @mixin arc-ad-full-width {
-  padding: 20px 0;
-  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
   width: 100vw;
 
   @include breakpoint(desktop-sm) {
     width: calc(100vw - 1rem - 1px);
+    padding-bottom: 5px;
   }
 
   &.c-HS02 {
-    padding-bottom: 40px;
+    padding-bottom: 5px;
+
+    .arcad {
+      padding-bottom: 0;
+    }
   }
 
-  .arcad:not(.HS02) {
+  .arcad {
     width: 100vw;
     max-width: 1600px;
     text-align: center;
     margin: 0 auto;
+    padding-bottom: 10px;
 
     @include breakpoint(desktop-sm) {
       width: calc(100vw - 1rem - 1px);
+      padding-bottom: 5px;
     }
 
     > div,
     > iframe {
       margin-left: auto;
       margin-right: auto;
-    }
-  }
-
-  @include breakpoint(tablet) {
-
-    .arcad:not(.HS02) {
-      margin: 0 auto;
-      padding-bottom: 20px;
     }
   }
 }
@@ -224,7 +221,7 @@
     position: absolute;
     color: #313132;
 
-    @include text-styles(.75rem, 1, "Gordita");
+    @include text-styles(.75rem, 1, "Gordita-Medium");
 
     font-weight: 500;
     left: 50%;
