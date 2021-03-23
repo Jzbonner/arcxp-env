@@ -135,6 +135,10 @@
 
         > :first-child {
           margin-bottom: 1.88rem;
+          
+          &.arc_ad[class*="RP"] {
+            margin-top: 20px;
+          }
 
           .arcad {
             margin-bottom: 1.88rem;
