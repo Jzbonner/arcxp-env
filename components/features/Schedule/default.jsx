@@ -6,17 +6,16 @@ const tournamentDate = (sDate, eDate) => {
   const mlist = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const startDate = new Date(sDate);
   const endDate = new Date(eDate);
-  const tDate = `${mlist[startDate.getMonth()]}. ${startDate.getDate()} - ${mlist[endDate.getMonth()]}. ${endDate.getDate()}`;
-  return tDate;
-};
+  let tDate = null;
 
-const isCurrYear = (eDate) => {
-  const endDate = new Date(eDate);
-  const date = new Date();
-  if (endDate.getFullYear() === date.getFullYear()) {
-    return true;
+  if (startDate.getMonth() === endDate.getMonth()) {
+    // eslint-disable-next-line no-const-assign
+    tDate = `${mlist[startDate.getMonth()]} ${startDate.getDate()} - ${endDate.getDate()}, ${endDate.getFullYear()}`;
+  } else {
+    // eslint-disable-next-line no-const-assign
+    tDate = `${mlist[startDate.getMonth()]} ${startDate.getDate()} - ${mlist[startDate.getMonth()]} ${endDate.getDate()}, ${endDate.getFullYear()}`;
   }
-  return false;
+  return tDate;
 };
 
 const Schedule = () => {
@@ -40,12 +39,12 @@ const Schedule = () => {
     return (
       <div className="schedule-widget sportsradar-widget">
         <div className="schedule-header">
-          <h1>PGA Schedule</h1>
+          <h1>Current PGA Schedule</h1>
         </div>
         <div className="b-margin-bottom-d40-m20"></div>
         <div>
           <div className="schedule-subheader">
-            <h5>Current Tournament</h5>
+            <h5>Upcoming Tournaments</h5>
           </div>
           <table className="schedule-table">
             <thead>
@@ -58,13 +57,13 @@ const Schedule = () => {
             <tbody>
             {scheduleData.tournaments
               .filter(
-                tournament => (tournament.start_date <= today && tournament.end_date >= today && tournament.status === '1inprogress'),
+                tournament => (tournament.end_date >= today),
               )
               .map(tournament => (
                   <tr key={tournament.id}>
                       <td key={tournament.id} className="tournament-date">{tournamentDate(tournament.start_date, tournament.end_date)}</td>
                       <td key={tournament.id} className="tournament-name">{tournament.name}</td>
-                      <td key={tournament.id} className="tournament-defchamp">{tournament.defending_champ.first_name}&nbsp;{tournament.defending_champ.last_name}</td>
+                      <td key={tournament.id} className="tournament-winner">{tournament.defending_champ == null ? 'N/A' : `${tournament.defending_champ.first_name} ${tournament.defending_champ.last_name}`}</td>
                   </tr>
               ))}
             </tbody>
@@ -86,7 +85,7 @@ const Schedule = () => {
             <tbody>
             {scheduleData.tournaments
               .filter(
-                tournament => (tournament.end_date < today && tournament.status === 'closed' && isCurrYear(tournament.end_date)),
+                tournament => (tournament.end_date < today && tournament.status === 'closed'),
               )
               .sort((a, b) => b.end_date.localeCompare(a.end_date))
               .map(tournament => (
