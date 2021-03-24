@@ -64,9 +64,6 @@ const Video = ({
     window.powaVideos = window.powaVideos || [];
     // we can't rely on the `isLeadVideo` value once the onPowaRendered event fires, so we track the videos & lead-state separately
     window.powaVideos.push(vidId, isLeadVideo);
-    if (typeof PoWa === 'function') {
-      console.log('NO RACE');
-    }
     if (adTag) {
       window.PoWaSettings = window.PoWaSettings || {};
       window.PoWaSettings.advertising = window.PoWaSettings.advertising || {};
@@ -434,13 +431,12 @@ const Video = ({
   const { width: vidWidth } = src && src.streams && src.streams[0] ? src.streams[0] : {};
   const { height: vidHeight } = src && src.streams && src.streams[0] ? src.streams[0] : {};
   const encodedAdTag = encodeURIComponent(adTag).replace(/'/g, '%27').replace(/"/g, '%22');
-  console.log('AD TAG ', adTag);
 
   const ampIframe = () => (
     <>
     <amp-iframe
     layout="responsive"
-    src={`https://${orgOfRecord}.video-player.arcpublishing.com/${currentEnv}/powaEmbed.html?org=${orgOfRecord}&uuid=${vidId}&powa-ad-tag=${encodedAdTag}&autoinit=native-hls&playthrough=true&discovery=true&powa-autoplay=true&powa-muted=true`}
+    src={`https://${orgOfRecord}.video-player.arcpublishing.com/${currentEnv}/powaEmbed.html?org=${orgOfRecord}&uuid=${vidId}&powa-ad-tag=${encodedAdTag}&autoinit=native-hls&playthrough=true&discovery=true&powa-autoplay=${!isInlineVideo}&powa-muted=${!isInlineVideo}`}
     width={`${vidWidth}`}
     height={`${vidHeight}`}
     allow='autoplay'
