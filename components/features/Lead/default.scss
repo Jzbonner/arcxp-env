@@ -282,7 +282,7 @@
 
         .homeList-text {
           max-width: 65%;
-          text-align: center;
+          text-align: left;
 
           @include breakpoint(desktop-sm) {
             max-width: 100%;
@@ -294,11 +294,11 @@
 
             @include breakpoint(desktop-sm) {
               margin: 0 auto .4rem;
-              text-align: center;
+              text-align: left;
             }
 
             @include breakpoint(desktop-lg) {
-              text-align: center;
+              text-align: left;
               min-height: initial;
             }
 
@@ -311,7 +311,7 @@
             margin-bottom: 0;
 
             @include breakpoint(desktop-sm) {
-              text-align: center;
+              text-align: left;
             }
           }
         }
@@ -484,11 +484,11 @@
 
           @include breakpoint(desktop-sm) {
             margin: 0 auto .4rem;
-            text-align: center;
+            text-align: left;
           }
 
           @include breakpoint(desktop-lg) {
-            text-align: center;
+            text-align: left;
           }
         }
 
@@ -496,7 +496,7 @@
           margin-bottom: 0;
 
           @include breakpoint(desktop-sm) {
-            text-align: center;
+            text-align: left;
           }
         }
       }

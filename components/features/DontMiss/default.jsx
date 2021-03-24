@@ -32,7 +32,7 @@ const DontMiss = (customFields = {}) => {
         <div className="c-homeListContainer no-photo-display-class dontMissFeature">
         {data.map((el, i) => {
           if (i < 3) {
-            return <ListItem key={`ListItem-${i}`} {...el} />;
+            return <ListItem key={`ListItem-${i}`} {...el} isDontMissFeature/>;
           }
           return null;
         })}

@@ -30,10 +30,6 @@
       }
     }
 
-    .article-timestamp {
-      margin-left: 15px;
-    }
-
     @include breakpoint(desktop-sm) {
       margin-bottom: 2rem;
       margin-right: 3.3%;
@@ -204,7 +200,7 @@
 
     .homeList-text {
       margin: 0 $min-margin;
-      text-align: center;
+      text-align: left;
 
       @include breakpoint(tablet) {
         margin: 0;
@@ -212,7 +208,7 @@
     }
 
     .headline {
-      text-align: center;
+      text-align: left;
     }
   }
 
@@ -224,6 +220,10 @@
     .c-homeList {
       margin-bottom: 40px;
       display: flex;
+
+      .article-timestamp {
+        margin-left: 15px;
+      }
 
       .c-sponsorOverlay,
       .image-component-image .sponsored-story {

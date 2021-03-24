@@ -9,8 +9,7 @@
   display: block;
   max-width: 1600px;
   padding: 0 $min-margin;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 0 auto $min-section-margin;
 
   @include breakpoint(tablet) {
     width: 94%;
@@ -20,6 +19,10 @@
 
   @include breakpoint(desktop-lg) {
     width: 90%;
+  }
+
+  &:empty {
+    margin-bottom: 0;
   }
 
   .c-contentElements {

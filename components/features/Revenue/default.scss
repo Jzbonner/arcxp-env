@@ -34,6 +34,7 @@
     }
 
     .c-sectionTitle {
+      margin-bottom: $min-margin;
 
       &:after {
         display: none;

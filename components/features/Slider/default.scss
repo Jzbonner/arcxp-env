@@ -18,7 +18,7 @@
   }
 
   .c-sectionTitle {
-    margin-left: 30px;
+    margin: 0 0 $min-margin 30px;
 
     @include breakpoint(desktop-sm) {
       margin-left: 1.875rem;

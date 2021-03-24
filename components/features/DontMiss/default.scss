@@ -15,6 +15,7 @@
     @include text-styles(1.875rem, 1, "Gordita-Bold");
 
     letter-spacing: -.38px;
+    margin-bottom: $min-margin;
 
     @include between-breakpoints(tablet,desktop-sm) {
       letter-spacing: -.31px;
@@ -32,8 +33,18 @@
     &.no-photo-display-class.dontMissFeature {
   
       .c-homeList {
-        border-bottom: none;
-  
+        padding-top: 10px;
+        margin-right: 0;
+        border-bottom: 1px solid #cdcdcd;
+
+        &:first-child {
+          padding-top: 0;
+        }
+        
+        &:last-child {
+          border: none;
+        }
+
         .homeList-text {
   
           .headline {

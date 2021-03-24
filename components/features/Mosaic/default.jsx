@@ -6,7 +6,6 @@ import get from 'lodash.get';
 import getProperties from 'fusion:properties';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
-import TimeStamp from '../../_helper_components/article/timestamp/default';
 import checkTags from '../../layouts/_helper_functions/checkTags';
 import ContributorBadge from '../../_helper_components/global/contributorBadge/default';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
@@ -142,12 +141,6 @@ const Mosaic = (customFields = {}) => {
                   <span className="headline">
                     {truncateHeadline(get(headlines, 'basic', ''), true)}
                   </span>
-                  <TimeStamp
-                    firstPublishDate={firstPublishDate}
-                    displayDate={displayDate}
-                    isHideTimestampTrue={isHideTimestampTrue}
-                    isTease={true}
-                  />
                 </div>
               );
             }

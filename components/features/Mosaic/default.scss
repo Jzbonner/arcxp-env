@@ -10,7 +10,7 @@
     letter-spacing: -.5px;
     margin: 0 0 20px 15px;
 
-    @include text-styles(2.5rem, 1, "Average");
+    @include text-styles(2.5rem, 1, "Lora");
   }
 
   .c-mosaic-box {
@@ -37,7 +37,7 @@
       letter-spacing: -.2px;
       overflow: hidden;
 
-      @include text-styles(1.875rem, 1.43, "Average");
+      @include text-styles(1.875rem, 1.43, "Lora");
 
       @include breakpoint(desktop-sm) {
         padding: 40px 20px;
@@ -55,14 +55,14 @@
           .headline {
             letter-spacing: -.2px;
 
-            @include text-styles(1.1rem, 1.43, "Average");
+            @include text-styles(1.1rem, 1.43, "Lora");
           }
         }
 
         @include breakpoint(desktop-lg) {
 
           .headline {
-            @include text-styles(1.55rem, 1.43, "Average");
+            @include text-styles(1.55rem, 1.43, "Lora");
           }
         }
       }
@@ -76,7 +76,7 @@
           .headline {
             letter-spacing: -.2px;
 
-            @include text-styles(1.8rem, 1.43, "Average");
+            @include text-styles(1.8rem, 1.43, "Lora");
           }
         }
       }
@@ -90,7 +90,7 @@
           .headline {
             letter-spacing: -.4px;
 
-            @include text-styles(3.2rem, 1.26, "Average");
+            @include text-styles(3.2rem, 1.26, "Lora");
           }
         }
       }
@@ -104,7 +104,7 @@
           .headline {
             letter-spacing: -.4px;
 
-            @include text-styles(3.2rem, 1.26, "Average");
+            @include text-styles(3.2rem, 1.26, "Lora");
           }
         }
       }
