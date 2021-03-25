@@ -27,7 +27,7 @@ const DontMiss = (customFields = {}) => {
 
   if (Array.isArray(data)) {
     return (
-      <div className="c-dontMiss b-margin-bottom-d40-m20">
+      <div className="c-dontMiss">
         <FeatureTitle title={title}/>
         <div className="c-homeListContainer no-photo-display-class dontMissFeature">
         {data.map((el, i) => {

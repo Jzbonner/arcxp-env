@@ -1,6 +1,8 @@
 @import "../../../src/styles/base";
 
 .c-dontMiss {
+  margin-bottom: $min-Msection-margin;
+
   @include breakpoint(tablet) {
     padding: 0 20px;
     border-left: solid 1px #cdcdcd;
@@ -9,6 +11,7 @@
 
   @include breakpoint(desktop-sm) {
     width: 100%;
+    margin-bottom: $min-DTsection-margin;
   }
   
   .c-sectionTitle {
@@ -33,7 +36,7 @@
     &.no-photo-display-class.dontMissFeature {
   
       .c-homeList {
-        padding-top: 10px;
+        padding-top: $min-margin;
         margin-right: 0;
         border-bottom: 1px solid #cdcdcd;
 
@@ -46,6 +49,7 @@
         }
 
         .homeList-text {
+          padding-bottom: $min-margin;
   
           .headline {
             letter-spacing: -.09px;

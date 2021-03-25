@@ -5,7 +5,7 @@
   display: block;
 
   .blogAuthor-title {
-    @include text-styles(1.875rem, 1, "Gordita-Bold");
+    @include text-styles(1.563rem, 1, "Gordita-Bold");
 
     margin-bottom: 10px;
     font-weight: 600;
@@ -18,10 +18,6 @@
       height: 1px;
       flex: 1;
       margin: auto 0 auto 15px;
-    }
-  
-    @include between-breakpoints(tablet, desktop-sm) {
-      @include text-styles(1.563rem, 1, "Gordita-Bold");
     }
   }
 

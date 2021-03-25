@@ -13,9 +13,11 @@
   width: 100vw;
   overflow: hidden;
   box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+  margin-bottom: $min-Msection-margin;
 
   @include breakpoint(desktop-sm) {
     width: calc(100vw - 1rem - 1px);
+    margin-bottom: $min-DTsection-margin;
   }
 
   .c-sectionTitle {

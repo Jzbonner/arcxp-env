@@ -31,7 +31,7 @@ const Revenue = (customFields = {}) => {
   };
 
   return (
-    <div className="c-revenue b-margin-bottom-d30-m20">
+    <div className="c-revenue">
       <div className="revenue-container">
         <FeatureTitle title={title} moreURL={moreURL} />
         <List {...newCustomFields} />

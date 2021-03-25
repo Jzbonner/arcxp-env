@@ -1,6 +1,11 @@
 @import "./../../../src/styles/base";
 
 .c-mosaic {
+  margin-bottom: $min-Msection-margin;
+
+  @include breakpoint(desktop-sm) {
+    margin-bottom: $min-DTsection-margin;
+  }
 
   a {
     cursor: pointer;

@@ -1,6 +1,8 @@
 @import "./../../../src/styles/base";
 
 .c-columnistFeature {
+  margin-bottom: $min-Msection-margin;
+
   @include breakpoint(tablet) {
     border-left: solid 1px #cdcdcd;
     margin-left: -20px;
@@ -9,6 +11,7 @@
 
   @include breakpoint(desktop-sm) {
     width: 100%;
+    margin-bottom: $min-DTsection-margin;
   }
 
   .c-title {

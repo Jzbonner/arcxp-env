@@ -17,6 +17,11 @@
   }
 
   .c-homeLeadContainer {
+    margin-bottom: $min-Msection-margin;
+
+    @include breakpoint(desktop-sm) {
+      margin-bottom: $min-DTsection-margin;
+    }
 
     .home-headline {
       padding-top: 0;

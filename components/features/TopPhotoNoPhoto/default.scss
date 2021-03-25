@@ -10,6 +10,11 @@
   .c-homeLeadContainer {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: $min-Msection-margin;
+
+    @include breakpoint(desktop-sm) {
+      margin-bottom: $min-DTsection-margin;
+    }
 
     .column-2,
     .column-3 {

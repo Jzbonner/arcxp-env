@@ -5,10 +5,10 @@
   // Common styles
   ////////////////
   width: 100%;
-  margin-bottom: 1.25rem;
+  margin-bottom: $min-Msection-margin;
 
   @include breakpoint(desktop-sm) {
-    margin-bottom: 1.88rem;
+    margin-bottom: $min-DTsection-margin;
   }
 
   @include between-breakpoints(tablet, desktop-sm) {

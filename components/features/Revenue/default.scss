@@ -4,10 +4,12 @@
   background-color: #ededed;
   width: 100vw;
   padding-top: 1.25rem;
+  margin-bottom: $min-Msection-margin;
 
   @include breakpoint(desktop-sm) {
     padding-top: 2rem;
     width: calc(100vw - 1rem - 1px);
+    margin-bottom: $min-DTsection-margin;
   }
 
   .revenue-container {
