@@ -7,6 +7,7 @@ import fetchEnv from '../../_helper_components/global/utils/environment.js';
 import { adSlots, defaultAdSlot } from './children/adtypes';
 import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
 import currentConditions from '../../_helper_components/global/utils/weather/currentConditions';
+import './default.scss';
 
 const ArcAd = ({
   customFields,
@@ -158,7 +159,12 @@ const ArcAd = ({
   );
 
   if (slotName === 'HS02') {
-    return <div className='c-HS02'>{arcad}</div>;
+    return (
+      <>
+        <div className='border-top'></div>
+        <div className='c-HS02'>{arcad}</div>
+      </>
+    );
   }
 
   return slotName ? arcad : fallbackAd;

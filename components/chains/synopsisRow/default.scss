@@ -100,15 +100,14 @@
           }
         }
       }
+    }
+  }
+  
+  .border-top {
+    width: 100%;
 
-      .c-homeList:last-child {
-        
-        .homeList-text {
-          @include between-breakpoints(tablet, desktop-sm) {
-            border-bottom: 1px solid #cdcdcd;
-          }
-        }
-      }
+    @include breakpoint(tablet) {
+      width: 0;
     }
   }
 }

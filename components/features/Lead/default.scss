@@ -5,7 +5,6 @@
   // Common styles
   ////////////////
   width: 100%;
-  margin-bottom: .94rem;
 
   @include breakpoint(tablet) {
     margin-bottom: 1.88rem;
@@ -395,12 +394,10 @@
       }
 
       &:last-child {
-        @include breakpoint(tablet) {
           
-          .homeList-text {
-            border: none;
-            padding-bottom: 0;
-          }
+        .homeList-text {
+          border: none;
+          padding-bottom: 0;
         }
       }
     }
