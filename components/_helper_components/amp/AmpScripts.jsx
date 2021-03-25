@@ -61,8 +61,8 @@ const AmpScripts = ({ contentElements, storyPromoItems, arcSite }) => {
     />
     {storyHasVideo && <script
       async
-      custom-element="amp-ima-video"
-      src="https://cdn.ampproject.org/v0/amp-ima-video-0.1.js"
+      custom-element="amp-iframe"
+      src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"
     />}
     <script
       async
