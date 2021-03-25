@@ -6,7 +6,7 @@
   height: 480px;
   visibility: hidden;
 
-  &.is-Visible {
+  @include breakpoint(desktop-sm) {
     visibility: visible;
   }
 }

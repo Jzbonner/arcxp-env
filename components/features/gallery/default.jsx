@@ -49,7 +49,6 @@ const Gallery = (props) => {
   // holds true max # of photos ( w/o changing value when adding ads into Element array)
   const [maxIndex, setMaxIndex] = useState(null);
   const [canonicalUrl, setCanonicalUrl] = useState('');
-  const [galleryVisible, setVisibility] = useState(false);
   const [modalVisible, setModalVisibility] = useState(false);
   const [currentImageSrc, setCurrectImageSrc] = useState('');
 
@@ -105,7 +104,7 @@ const Gallery = (props) => {
   const { galleryUrl } = customFields;
 
   const fetchedGalleryData = useContent({
-    source: 'content-api',
+    source: 'gallery-api',
     query: {
       path: galleryUrl,
     },
@@ -423,7 +422,6 @@ const Gallery = (props) => {
       setMobileState(true);
     } else {
       setMobileState(false);
-      setVisibility(true);
     }
 
     setCurrentAction(actions.RESIZE);
@@ -522,12 +520,6 @@ const Gallery = (props) => {
   useEffect(() => {
     if (!isMobile && galleryEl && galleryEl.current) {
       calculateTranslateX();
-      document.onreadystatechange = () => {
-        if (document.readyState === 'complete') {
-          calculateTranslateX();
-          setVisibility(true);
-        }
-      };
 
       if (elementData && (hasOpened || modalVisible) && !isMobile && currentAction === actions.UPDATE_CLICK_FUNCS) {
         const elements = preRenderEls || elementData;
@@ -673,7 +665,9 @@ const Gallery = (props) => {
       placeholder={<div className="c-placeholder-gallery" data-uri={canonicalUrl || null} />}
       height="100%"
       width="100%"
-      offset={300}>
+      offset={300}
+      overflow={!isMobile}
+      once={true}>
       {(isMobile || !isStory)
         && galHeadline
         ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
@@ -698,7 +692,7 @@ const Gallery = (props) => {
           }
           {
             !isMobile
-              ? <DesktopGallery data={elementData} translateX={translateX} visibility={galleryVisible} />
+              ? <DesktopGallery data={elementData} translateX={translateX} />
               : null
           }
           <div
