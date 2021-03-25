@@ -67,10 +67,11 @@
           }
 
           .c-sponsor {
-            @include text-styles(.75rem, 1, "Gordita");
+            @include text-styles(.75rem, 1, "Gordita-Medium");
 
             width: max-content;
-            font-weight: 400;
+            font-weight: 500;
+            text-transform: uppercase;
           }
         }
 
