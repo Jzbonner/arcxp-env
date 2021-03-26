@@ -64,12 +64,16 @@ const Video = ({
     window.powaVideos = window.powaVideos || [];
     // we can't rely on the `isLeadVideo` value once the onPowaRendered event fires, so we track the videos & lead-state separately
     window.powaVideos.push(vidId, isLeadVideo);
+    window.PoWaSettings = window.PoWaSettings || {};
     if (adTag) {
-      window.PoWaSettings = window.PoWaSettings || {};
       window.PoWaSettings.advertising = window.PoWaSettings.advertising || {};
       window.PoWaSettings.advertising.adBar = { skipControl: false };
       window.PoWaSettings.advertising.adTag = adTag;
     }
+    window.PoWaSettings.container = {
+      ...window.PoWaSettings.container,
+      shadowDOM: false,
+    };
     let videoTotalTime;
     let videoTitle;
     let videoPlayType;
