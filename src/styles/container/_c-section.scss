@@ -129,6 +129,10 @@
         > :first-child:not(.arc_ad) {
           margin-top: 0;
         }
+
+        .border-top {
+          display: none;
+        }
       }
 
       @include breakpoint(desktop-sm) {
