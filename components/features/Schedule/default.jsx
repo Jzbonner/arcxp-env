@@ -13,7 +13,7 @@ const tournamentDate = (sDate, eDate) => {
     tDate = `${mlist[startDate.getMonth()]} ${startDate.getDate()} - ${endDate.getDate()}, ${endDate.getFullYear()}`;
   } else {
     // eslint-disable-next-line no-const-assign
-    tDate = `${mlist[startDate.getMonth()]} ${startDate.getDate()} - ${mlist[startDate.getMonth()]} ${endDate.getDate()}, ${endDate.getFullYear()}`;
+    tDate = `${mlist[startDate.getMonth()]} ${startDate.getDate()} - ${mlist[endDate.getMonth()]} ${endDate.getDate()}, ${endDate.getFullYear()}`;
   }
   return tDate;
 };
@@ -43,9 +43,6 @@ const Schedule = () => {
         </div>
         <div className="b-margin-bottom-d40-m20"></div>
         <div>
-          <div className="schedule-subheader">
-            <h5>Upcoming Tournaments</h5>
-          </div>
           <table className="schedule-table">
             <thead>
                 <tr>
@@ -63,7 +60,7 @@ const Schedule = () => {
                   <tr key={tournament.id}>
                       <td key={tournament.id} className="tournament-date">{tournamentDate(tournament.start_date, tournament.end_date)}</td>
                       <td key={tournament.id} className="tournament-name">{tournament.name}</td>
-                      <td key={tournament.id} className="tournament-winner">{tournament.defending_champ == null ? 'N/A' : `${tournament.defending_champ.first_name} ${tournament.defending_champ.last_name}`}</td>
+                      <td key={tournament.id} className="tournament-winner">{tournament.defending_champ == null ? ' ' : `${tournament.defending_champ.first_name} ${tournament.defending_champ.last_name}`}</td>
                   </tr>
               ))}
             </tbody>
@@ -92,12 +89,13 @@ const Schedule = () => {
                   <tr key={tournament.id}>
                       <td key={tournament.id} className="tournament-date">{tournamentDate(tournament.start_date, tournament.end_date)}</td>
                       <td key={tournament.id} className="tournament-name">{tournament.name}</td>
-                      <td key={tournament.id} className="tournament-winner">{tournament.winner.first_name}&nbsp;{tournament.winner.last_name}</td>
+                      <td key={tournament.id} className="tournament-winner">{tournament.winner == null ? ' ' : `${tournament.winner.first_name} ${tournament.winner.last_name}`}</td>
                   </tr>
               ))}
             </tbody>
           </table>
         </div>
+        <div className="b-margin-bottom-d40-m20"></div>
       </div>
 
     );
