@@ -16,6 +16,10 @@
       margin-bottom: $min-DTsection-margin;
     }
 
+    .article-timestamp {
+      line-height: 1;
+    }
+
     .column-2,
     .column-3 {
       width: 100%;
@@ -46,20 +50,22 @@
 
       .headline-box {
         box-shadow: none;
-        padding: 0;
         background-color: none;
         margin-top: 15px;
         max-width: 90%;
+        border-bottom: 1px solid #cdcdcd;
+        padding: 0 0 $min-margin;
+        border-radius: unset;
 
         @include breakpoint(desktop-sm) {
           max-width: 100%;
         }
 
         .headline {
-          margin-top: 3px;
           letter-spacing: -.16px;
+          margin: 0 0 10px;
 
-          @include text-styles(1rem, 1.38, "Lora");
+          @include text-styles(1rem, 1, "Lora");
         }
       }
     }
@@ -78,7 +84,7 @@
     .column-3 .headline {
       letter-spacing: -.16px;
 
-      @include text-styles(1rem, 1.38, "Lora");
+      @include text-styles(1rem, 1, "Lora");
     }
   }
 }

@@ -99,8 +99,7 @@
   .sliderList-text {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    text-align: left;
 
     .c-label-wrapper {
       margin-bottom: .35rem;
@@ -110,11 +109,16 @@
       }
     }
 
+    .article-timestamp {
+      line-height: 1;
+    }
+
     a.headline {
       max-width: 80%;
       letter-spacing: -.17;
       color: #000;
       text-decoration: none;
+      margin-bottom: $min-margin;
 
       @include text-styles(1.125rem, 1.33, "Lora");
 

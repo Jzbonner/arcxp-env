@@ -11,10 +11,6 @@
     margin-bottom: $min-DTsection-margin;
   }
 
-  @include between-breakpoints(tablet, desktop-sm) {
-    margin-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
-  }
-
   .c-label-wrapper:empty {
     display: none;
   }
@@ -23,8 +19,20 @@
     color: inherit;
   }
 
+  .headline {
+    margin-bottom: $min-margin;
+  }
+
+  .homeList-text {
+    padding-bottom: $min-margin;
+  }
+
   img {
     border-radius: 6px;
+  }
+
+  .article-timestamp {
+    line-height: 1;
   }
 
   .column-2 {
@@ -107,6 +115,7 @@
       .headline {
         @include text-styles(1rem, 1.38, "Lora");
 
+        margin-bottom: 10px;
         letter-spacing: -.09px;
 
         @include between-breakpoints(tablet,desktop-sm) {
@@ -144,7 +153,7 @@
         }
 
         .headline {
-          @include text-styles(1.25rem, 1.25, "Average");
+          @include text-styles(1.25rem, 1, "Lora");
         }
       }
 
@@ -393,8 +402,9 @@
         display: none;
       }
 
+      .home-headline,
       .homeList-text {
-        padding-bottom: .6rem;
+        margin: $min-margin 0 0;
         border-bottom: 1px solid #cdcdcd;
         width: 100%;
       }

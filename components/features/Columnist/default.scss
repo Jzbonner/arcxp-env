@@ -34,9 +34,14 @@
       list-style: none;
       margin-bottom: 15px;
       text-align: left;
+      border-bottom: 1px solid #cdcdcd;
+
+      &:last-child {
+        border: none;
+      }
 
       .authorName {
-        @include text-styles(1.125rem, 1.8, "Gordita-Bold");
+        @include text-styles(1.125rem, 1, "Gordita-Bold");
 
         color: #313132;
 
@@ -53,6 +58,7 @@
         letter-spacing: -.33px;
         color: #313132;
         font-weight: 500;
+        margin: 5px 0 $min-margin;
       }
     }
 

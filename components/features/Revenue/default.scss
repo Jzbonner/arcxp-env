@@ -91,6 +91,7 @@
 
         .headline {
           letter-spacing: -.17px;
+          margin-bottom: 10px;
 
           @include text-styles(1.125rem, 1.33, "Lora");
 

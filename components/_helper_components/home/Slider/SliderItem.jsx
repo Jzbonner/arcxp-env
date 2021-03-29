@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext } from 'fusion:context';
-import TimeStamp from '../../article/timestamp/default';
 import Image from '../../global/image/default';
 import truncateHeadline from '../../../layouts/_helper_functions/homepage/truncateHeadline';
 import getQueryParams from '../../../layouts/_helper_functions/getQueryParams';
@@ -13,14 +12,11 @@ import './SliderItem.scss';
 
 const SliderItem = ({ data, refHook }) => {
   const {
-    classes, headline, image: imageData, canonicalUrl, timestampData, sectionLabelData, contentType,
+    classes, headline, image: imageData, canonicalUrl, sectionLabelData, contentType,
   } = data;
   const appContext = useAppContext();
   const { requestUri } = appContext;
-  const { displayDate, firstPublishDate } = timestampData;
-  const { taxonomy, label } = sectionLabelData;
-  const { hide_timestamp: hideTimestamp } = label || {};
-  const { text: isHideTimestampTrue } = hideTimestamp || {};
+  const { taxonomy } = sectionLabelData;
   const hyperlocalTags = getProperties().hyperlocalTags || [];
   const { tags = [], sections } = taxonomy || {};
   const isHyperlocalContent = checkTags(
@@ -66,12 +62,6 @@ const SliderItem = ({ data, refHook }) => {
         <a className="headline" href={canonicalUrl}>
           {truncateHeadline(headline, true)}
         </a>
-        <TimeStamp
-          firstPublishDate={firstPublishDate}
-          displayDate={displayDate}
-          isHideTimestampTrue={isHideTimestampTrue}
-          isTease={true}
-        />
       </div>
     </div>
   );

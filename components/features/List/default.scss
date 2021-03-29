@@ -16,6 +16,10 @@
     color: inherit;
   }
 
+  .article-timestamp {
+    line-height: 1;
+  }
+
   // Common Styles Used By All the Display Classes
 
   .c-homeList {
@@ -40,6 +44,7 @@
       position: relative;
       display: inline-block;
       height: fit-content;
+      margin-bottom: $min-margin;
     }
 
     .image-component-image img {
@@ -70,6 +75,7 @@
         @include text-styles(1rem, 1.38, "Lora");
 
         letter-spacing: -.09px;
+        margin-bottom: 10px;
       }
     }
   }
@@ -335,7 +341,7 @@
       }
 
       .homeList-text {
-        padding-bottom: .6rem;
+        margin-top: $min-margin;
         width: 100%;
       }
     }
