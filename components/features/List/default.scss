@@ -249,7 +249,7 @@
         }
 
         .c-label-wrapper {
-          margin: 0 0 7px 15px;
+          margin: 0 0 6px 15px;
           text-align: left;
         }
 
@@ -278,6 +278,10 @@
           width: 100%;
           max-width: 100%;
         }
+      }
+
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }

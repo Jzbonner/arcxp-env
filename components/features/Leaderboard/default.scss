@@ -1,8 +1,9 @@
 @import "./../../../src/styles/base";
 
-.schedule-widget.sportsradar-widget {
+.leaderboard-widget.sportsradar-widget {
+  margin: 0 0 40px;
 
-  .schedule-header {
+  .leaderboard-header {
 
     h1 {
       font-family: "Gordita";
@@ -30,33 +31,16 @@
     }
   }
 
-  .schedule-subheader {
+  .tour-info {
+    margin: 15px 0;
 
-    h5 {
-      text-align: left;
-      margin: 0 6px 7px 1px;
-      font-family: "Gordita-bold";
-      font-size: 12px;
-      font-weight: 700;
+    .tour-name {
+      font-family: "Gordita";
+      font-weight: 500;
       font-stretch: normal;
       font-style: normal;
-      line-height: normal;
-      letter-spacing: normal;
       color: #313132;
-
-      @include breakpoint(tablet) {
-        margin: 0 6px 6px 1px;
-        font-size: 14px;
-      }
-
-      @include breakpoint(desktop-sm) {
-        margin: 0 27px 5px 1px;
-        font-size: 18px;
-      }
     }
-  }
-
-  .schedule-info {
 
     p {
       font-family: "Gordita";
@@ -72,9 +56,7 @@
       }
 
       @include breakpoint(desktop-sm) {
-        height: 62px;
         margin: 10px 0 0;
-        padding: 50px 6px 11px 1px;
         font-size: 13px;
         line-height: 1.54;
         letter-spacing: normal;
@@ -82,17 +64,27 @@
     }
   }
 
-  .schedule-table {
+  .leaderboard-table {
+    border-collapse: collapse;
+    overflow: scroll;
+    max-width: 350px;
+    max-height: 500px;
+
+    @include breakpoint(tablet) {
+      max-width: 100%;
+    }
 
     thead {
+      border-bottom: 3px solid #212126;
 
       tr {
 
         th {
-          text-align: left;
+          text-align: center;
           margin: 0 6px 7px 1px;
-          font-family: "Gordita-bold";
-          font-size: 12px;
+          padding: 10px 0;
+          font-family: "Gordita";
+          font-size: 9px;
           font-weight: 700;
           font-stretch: normal;
           font-style: normal;
@@ -109,11 +101,73 @@
             margin: 0 27px 5px 1px;
             font-size: 18px;
           }
+
+          &.player-rank {
+            width: 45px;
+
+            @include breakpoint(desktop-sm) {
+              width: 72px;
+            }
+          }
+
+          &.player-name {
+            // width: 146px;
+
+            @include breakpoint(desktop-sm) {
+              width: 241px;
+            }
+          }
+
+          &.player-round {
+            width: 75px;
+
+            @include breakpoint(tablet) {
+              width: 92px;
+            }
+
+            @include breakpoint(desktop-sm) {
+              width: 152px;
+            }
+          }
+
+          &.player-strokes {
+            width: 75px;
+
+            @include breakpoint(tablet) {
+              width: 92px;
+            }
+
+            @include breakpoint(desktop-sm) {
+              width: 152px;
+            }
+          }
+
+          &.player-thru {
+            width: 75px;
+
+            @include breakpoint(tablet) {
+              width: 66px;
+            }
+
+            @include breakpoint(desktop-sm) {
+              width: 108px;
+            }
+          }
         }
       }
     }
 
     tbody {
+
+      .scrollable-div {
+        max-width: 150px;
+        overflow-x: scroll;
+
+        @include breakpoint(tablet) {
+          max-width: none;
+          overflow-x: initial;
+        }
+      }
 
       tr {
 
@@ -140,59 +194,74 @@
 
         td {
           text-align: center;
-          vertical-align: middle;
           font-family: "Gordita";
           font-size: 12px;
           font-weight: 500;
+          padding: 15px 0;
           font-stretch: normal;
           font-style: normal;
           line-height: normal;
           letter-spacing: normal;
           color: #313132;
-          padding-left: 10px;
-          padding-right: 10px;
 
           &:nth-child(odd) {
-            background-color: rgba(237, 237, 237, 1);
+            background-color: rgba(237, 237, 237, .6);
           }
 
           @include breakpoint(desktop-sm) {
             font-size: 14px;
           }
 
-          &.tournament-date {
-            width: 80px;
-            text-align: left;
+          &.player-rank {
+            width: 45px;
 
             @include breakpoint(desktop-sm) {
-              width: 180px;
+              width: 72px;
             }
           }
 
-          &.tournament-name {
-            width: 146px;
-            text-align: left;
-            
-            @include breakpoint(desktop-sm) {
-              width: 400px;
-            }
-          }
-
-          &.tournament-winner {
+          &.player-name {
             width: 146px;
             text-align: left;
 
             @include breakpoint(desktop-sm) {
-              width: 200px;
+              width: 241px;
             }
           }
 
-          &.tournament-defchamp {
-            width: 146px;
-            text-align: left;
+          &.player-round {
+            width: 75px;
+
+            @include breakpoint(tablet) {
+              width: 92px;
+            }
 
             @include breakpoint(desktop-sm) {
-              width: 200px;
+              width: 152px;
+            }
+          }
+
+          &.player-strokes {
+            width: 75px;
+
+            @include breakpoint(tablet) {
+              width: 92px;
+            }
+
+            @include breakpoint(desktop-sm) {
+              width: 152px;
+            }
+          }
+
+          &.player-thru {
+            width: 75px;
+
+            @include breakpoint(tablet) {
+              width: 66px;
+            }
+
+            @include breakpoint(desktop-sm) {
+              width: 108px;
             }
           }
         }

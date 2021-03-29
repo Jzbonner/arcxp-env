@@ -65,7 +65,7 @@
     height: fit-content;
   }
 
-  @include breakpoint(desktop-sm) {
+  @include breakpoint(tablet) {
     display: flex;
     justify-content: space-between;
 
@@ -417,7 +417,7 @@
       }
 
       &:last-child {
-
+          
         .homeList-text {
           border: none;
           padding-bottom: 0;

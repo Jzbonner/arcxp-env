@@ -34,7 +34,7 @@ const Revenue = (customFields = {}) => {
     <div className="c-revenue">
       <div className="revenue-container">
         <FeatureTitle title={title} moreURL={moreURL} />
-        <List {...newCustomFields} />
+        <List {...newCustomFields}/>
       </div>
     </div>
   );

@@ -55,7 +55,12 @@ const ListItemPreview = ({ id }) => {
       && storyData.content_elements[0]
       && storyData.content_elements[0].type === 'text'
     ) {
-      const textContent = safeHtml(storyData.content_elements[0].content, { allowedTags: [], allowedAttributes: {} });
+      let previewData = storyData.content_elements[0].content;
+      if (storyData.content_elements[0].content.length < 90
+      && storyData.content_elements[1]) {
+        previewData = `${storyData.content_elements[0].content} ${storyData.content_elements[1].content}`;
+      }
+      const textContent = safeHtml(previewData, { allowedTags: [], allowedAttributes: {} });
       setBaseText(textContent.concat('...'));
       setText(textContent.concat('...'));
       setPreRender(true);

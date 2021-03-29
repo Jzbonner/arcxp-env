@@ -7,6 +7,7 @@ import fetchEnv from '../../_helper_components/global/utils/environment.js';
 import { adSlots, defaultAdSlot } from './children/adtypes';
 import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
 import currentConditions from '../../_helper_components/global/utils/weather/currentConditions';
+import './default.scss';
 
 const ArcAd = ({
   customFields,
@@ -143,7 +144,7 @@ const ArcAd = ({
     <AdSetup
       refresh={false}
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
-      className={`arc_ad | ${slotName} b-margin-bottom-d40-m20
+      className={`arc_ad | ${slotName} b-margin-bottom-d30-m20
       ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
       dfpId={dfpIdFormatted}
@@ -158,7 +159,12 @@ const ArcAd = ({
   );
 
   if (slotName === 'HS02') {
-    return <div className='c-HS02'>{arcad}</div>;
+    return (
+      <>
+        <div className='border-top'></div>
+        <div className='c-HS02'>{arcad}</div>
+      </>
+    );
   }
 
   return slotName ? arcad : fallbackAd;

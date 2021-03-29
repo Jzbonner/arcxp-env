@@ -155,7 +155,7 @@ const StickyNav = ({
               ) : null}
             </div>
           </ul>
-          <div className="hidden-mobile">
+          <div className={`${isNonShareablePage ? '' : 'hidden-mobile'}`}>
             <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current} />
           </div>
         </div>

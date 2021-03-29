@@ -79,13 +79,13 @@
     }
 
     .column-2 {
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         width: 50%;
       }
     }
 
     .column-3 {
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         width: 50%;
         margin-left: 3.5%;
       }
@@ -117,15 +117,14 @@
           }
         }
       }
+    }
+  }
+  
+  .border-top {
+    width: 100%;
 
-      .c-homeList:last-child {
-        
-        .homeList-text {
-          @include between-breakpoints(tablet, desktop-sm) {
-            border-bottom: 1px solid #cdcdcd;
-          }
-        }
-      }
+    @include breakpoint(tablet) {
+      width: 0;
     }
   }
 }
