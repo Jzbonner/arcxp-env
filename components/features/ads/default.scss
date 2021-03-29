@@ -1,6 +1,15 @@
+@import "../../../src/styles/base";
 
 .border-top {
   border-top: 1px solid #cdcdcd;
   width: 100%;
   margin-bottom: 10px;
+
+  &[class*="MP0"] {
+    display: flex;
+
+    @include breakpoint(tablet) {
+      display: none;
+    }
+  }
 }

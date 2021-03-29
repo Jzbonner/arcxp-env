@@ -150,6 +150,14 @@
         }
       }
     }
+
+    @include breakpoint(tablet) {
+      flex-direction: column;
+    }
+
+    @include breakpoint(desktop-sm) {
+      flex-direction: initial;
+    }
   }
 
   .app-landing-page {
