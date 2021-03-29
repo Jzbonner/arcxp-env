@@ -75,6 +75,13 @@
   display: none;
 }
 
+.c-articleContent {
+  
+  .border-top {
+    display: none;
+  }
+}
+
 @include amp-exclude {
 
   body .c-articleContent .c-articleBodyContainer {
