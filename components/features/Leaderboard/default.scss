@@ -1,12 +1,12 @@
 @import "./../../../src/styles/base";
 
 .leaderboard-widget.sportsradar-widget {
-  margin: 0 0 40px;
+  margin: 0 0 30px;
 
   .leaderboard-header {
 
     h1 {
-      font-family: "Gordita";
+      font-family: "Gordita-bold";
       color: #313132;
       height: 40px;
       margin: 0 83px 6px 0;
@@ -32,7 +32,10 @@
   }
 
   .tour-info {
-    margin: 15px 0;
+    margin: 10px 0;
+    padding: 10px 0;
+    border-top: solid 1px #cdcdcd;
+    border-bottom: solid 1px #cdcdcd;
 
     .tour-name {
       font-family: "Gordita";
@@ -50,13 +53,13 @@
       color: #313132;
 
       @include breakpoint(tablet) {
-        margin: 0 0 10px;
+        margin: 10px 0 0;
         font-size: 11px;
         line-height: 1.82;
       }
 
       @include breakpoint(desktop-sm) {
-        margin: 10px 0 0;
+        height: auto;
         font-size: 13px;
         line-height: 1.54;
         letter-spacing: normal;
@@ -80,10 +83,9 @@
       tr {
 
         th {
-          text-align: center;
           margin: 0 6px 7px 1px;
-          padding: 10px 0;
-          font-family: "Gordita";
+          padding: 10px;
+          font-family: "Gordita-bold";
           font-size: 9px;
           font-weight: 700;
           font-stretch: normal;
@@ -91,6 +93,7 @@
           line-height: normal;
           letter-spacing: normal;
           color: #313132;
+          text-align: left;
 
           @include breakpoint(tablet) {
             margin: 0 6px 6px 1px;
@@ -223,6 +226,7 @@
           &.player-name {
             width: 146px;
             text-align: left;
+            padding-left: 10px;
 
             @include breakpoint(desktop-sm) {
               width: 241px;

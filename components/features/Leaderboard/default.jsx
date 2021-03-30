@@ -6,23 +6,25 @@ import './default.scss';
 const Leaderboard = () => {
   const tour = 'pga';
   const year = '2021';
-  const tournamentId = 'c5068725-96da-4cee-81b1-054e1ef1b7c9';
   // const ref = useRef(null);
 
   const leaderboardData = useContent({
     source: 'sportradarLeaderboard-api',
     query: {
-      golfTour: tour,
+      tour: tour,
       year: year,
-      tournamentId: tournamentId,
     },
   });
+
+  console.log("HEllo3");
+  console.log(leaderboardData);
+  // leaderboardData = leaderboardData.LeaderboardData;
 
   // const scroll = (scrollOffset) => {
   //   ref.current.scrollLeft += scrollOffset;
   // };
 
-  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  // const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   if (leaderboardData) {
     return (

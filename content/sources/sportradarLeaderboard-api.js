@@ -3,25 +3,23 @@ import axios from 'axios';
 const { sportradarAPIkey, sportradarAPIVersion, sportradarAccessLevel } = require('../../environment/index');
 
 const params = {
-  golfTour: 'text',
+  tour: 'text',
   year: 'text',
-  tournamentId: 'text',
 };
 
 const fetch = (query) => {
-  const { golfTour, year, tournamentId } = query;
+  const { tour, year } = query;
 
-  if (!golfTour || !year || !tournamentId || !sportradarAPIkey || !sportradarAPIVersion) {
+  if (!tour || !year || !sportradarAPIkey || !sportradarAPIVersion) {
     return null;
   }
 
-  const golfLeaderboardAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${golfTour}/${sportradarAPIVersion}/en/${year}/tournaments/${tournamentId}/leaderboard.json?api_key=${sportradarAPIkey}`;
+  const golfLeaderboardAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/e8d09c79-21e7-4c40-bde4-9f3f3a1e9d65/leaderboard.json?api_key=${sportradarAPIkey}`;
 
   return axios
     .get(golfLeaderboardAPILink, {
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
       },
     })
     .then(({ data }) => data)
