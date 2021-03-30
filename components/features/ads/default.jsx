@@ -187,6 +187,7 @@ ArcAd.propTypes = {
       'RP01 300x250',
       'RP01 300x600',
       'RP01 sticky',
+      'RP01 tablet',
       'RP02',
       'RP03 sticky',
       'RP09 300x250',

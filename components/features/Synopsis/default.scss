@@ -15,7 +15,6 @@
   @include breakpoint(tablet) {
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 1px solid #cdcdcd;
     padding-bottom: 5px;
   }
 
@@ -58,7 +57,6 @@
 
     @include breakpoint(desktop-lg) {
       width: 100%;
-      border-bottom: none;
     }
 
     .c-label-wrapper {
