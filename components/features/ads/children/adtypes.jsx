@@ -220,6 +220,26 @@ export const adSlots = {
       },
     },
   },
+  'RP01 tablet': {
+    slotName: 'RP01',
+    biddingName: 'RP01-tablet',
+    dimensions: [
+      [], // desktop
+      [
+        [300, 600],
+        [300, 250], // tablet
+      ],
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
+    ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
   'RP01-Story-Desktop': {
     slotName: 'RP01',
     dimensions: [
