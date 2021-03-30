@@ -160,7 +160,7 @@ export const adSlots = {
       ],
     ],
     breakpoints: [
-      [1024, 0], // desktop+
+      [768, 0], // desktop+
     ],
     bidding: {
       amazon: {
@@ -194,7 +194,7 @@ export const adSlots = {
       ], // desktop+
     ],
     breakpoints: [
-      [1024, 0], // desktop+
+      [768, 0], // desktop+
     ],
     bidding: {
       amazon: {

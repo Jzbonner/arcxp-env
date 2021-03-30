@@ -23,6 +23,7 @@ const HomePageLayout = (props) => {
     zone5rightrail,
     zone6,
   ] = props.children;
+
   const appContext = useAppContext();
   const { layout, requestUri } = appContext;
   const queryParams = getQueryParams(requestUri);
