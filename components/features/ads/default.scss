@@ -13,10 +13,18 @@
     }
   }
 
-  &[class*="RP"] {
+  &[class*="RP0"] {
     display: none;
 
     @include between-breakpoints(tablet, desktop-sm) {
+      display: flex;
+    }
+  }
+
+  &[class*="HP01"] {
+    display: none;
+
+    @include breakpoint(tablet) {
       display: flex;
     }
   }
