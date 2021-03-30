@@ -160,37 +160,6 @@
     }
   }
 
-  &.with-rightRail.zone-one {
-
-    .c-contentElements {
-      flex-wrap: wrap;
-
-      @include between-breakpoints(mobile, desktop-sm) {
-
-        > :nth-child(1) {
-          order: 1;
-        }
-
-        > :nth-child(2) {
-          order: 3;
-        }
-
-        > :nth-child(3) {
-          order: 2;
-        }
-
-        .c-rightRail {
-          width: 100%;
-
-          > :first-child {
-            margin-top: 0;
-            margin-bottom: 30px;
-          }
-        }
-      }
-    }
-  }
-
   .app-landing-page {
 
     .section--intro {
@@ -316,9 +285,6 @@
 
   .c-contentElements {
     width: 100%;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
 
     @include breakpoint(tablet) {
       padding: 0;

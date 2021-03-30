@@ -12,4 +12,12 @@
       display: none;
     }
   }
+
+  &[class*="RP"] {
+    display: none;
+
+    @include between-breakpoints(tablet, desktop-sm) {
+      display: flex;
+    }
+  }
 }
