@@ -39,7 +39,7 @@ const HomePageNineLayout = (props) => {
       <GlobalAdSlots pbPage={true} />
       {!noHeaderAndFooter && <TopNavBreakingNews type={layout} />}
       <main className="c-homepageContent">
-        <SectionHome feature={zone1} rightRailContent={zone1rightrail}/>
+        <SectionHome feature={zone1} rightRailContent={zone1rightrail} />
         <SectionHome feature={zone2} rightRailContent={zone2rightrail} />
         <SectionHome feature={zone3} />
         <SectionHome feature={zone4} rightRailContent={zone4rightrail} />
