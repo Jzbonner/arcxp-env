@@ -328,27 +328,6 @@
         flex: 0 0 auto;
         padding: 10px 1.3vw 0 0;
       }
-
-      .activeSelection {
-        width: 5px;
-        height: 24px;
-        border-radius: 2px;
-        background-color: #fff;
-        position: absolute;
-        left: 0;
-        top: 0;
-
-        @include breakpoint(desktop-sm) {
-          background-color: #2e81b7;
-          border-radius: 2px;
-          display: block;
-          height: 7px;
-          margin-right: 15px;
-          margin-top: 61px;
-          right: 0;
-          width: auto;
-        }
-      }
     }
 
     .nav-itemBottomBorder {
@@ -2000,7 +1979,7 @@
           width: 88%;
 
           @include breakpoint(tablet) {
-            width: 95%;
+            width: 90%;
           }
         }
       }
