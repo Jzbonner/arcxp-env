@@ -1804,7 +1804,7 @@
     position: fixed;
     top: 0;
     z-index: 10002;
-    left: -1000px;
+    left: -1100px;
     transform: translateX(0);
     transition: transform .5s ease;
     box-sizing: border-box;
@@ -1824,7 +1824,7 @@
     }
 
     &.mobile-nav-deactivated {
-      transform: translateX(-1000px);
+      transform: translateX(-1100px);
     }
 
     .nav-background {
