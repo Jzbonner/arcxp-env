@@ -998,52 +998,6 @@
       }
     }
 
-    // .subNav-flyout {
-    //   list-style-type: none;
-
-    //   @include breakpoint(tablet) {
-    //     display: inline-flex;
-    //     align-content: flex-start;
-    //     writing-mode: vertical-lr;
-    //     height: 13.125rem;
-
-    //     &.itemCount-0 {
-    //       height: 0;
-    //     }
-
-    //     &.itemCount-1 {
-    //       height: .875rem;
-    //     }
-
-    //     &.itemCount-2 {
-    //       height: 3.75rem;
-    //     }
-
-    //     &.itemCount-3 {
-    //       height: max-content;
-    //     }
-
-    //     &.itemCount-4,
-    //     &.itemCount-8 {
-    //       height: 3rem;
-    //     }
-
-    //     &.itemCount-5 {
-    //       height: 4.5rem;
-    //     }
-
-    //     &.itemCount-7 {
-    //       height: 5.4rem;
-    //     }
-
-    //     &.itemCount-6,
-    //     &.itemCount-11,
-    //     &.itemCount-12 {
-    //       height: 4.5rem;
-    //     }
-    //   }
-    // }
-
     .nav-wrapper {
       background: transparent;
       content: " ";
