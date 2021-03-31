@@ -4,7 +4,7 @@ import Lead from '../Lead/default';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import './default.scss';
 
-const LeftPhotoNoPhotoRow = (customFields = {}) => {
+const LeftPhotoNoPhoto = (customFields = {}) => {
   const limit = customFields
     && customFields.customFields
     && customFields.customFields.content
@@ -13,9 +13,7 @@ const LeftPhotoNoPhotoRow = (customFields = {}) => {
     ? customFields.customFields.content.contentConfigValues.size
     : 2;
 
-  const { title = '', moreURL = '' } = customFields;
-
-  console.log('title', title);
+  const { title = '', moreURL = '' } = customFields.customFields;
 
   const newCustomFields = {
     ...customFields,
@@ -34,7 +32,7 @@ const LeftPhotoNoPhotoRow = (customFields = {}) => {
 
   return (
     <div className="c-LeftPhotoNoPhotoRow">
-      <FeatureTitle title={title} moreURL={moreURL} />
+      <FeatureTitle title={title} moreURL={moreURL} isLeftPhotoNoPhoto={true} />
       <div className="row">
         <div className='LeftPhotoNoPhotoRow'>
           <Lead {...newCustomFields} columns={2} limitOverride={4} />
@@ -44,7 +42,7 @@ const LeftPhotoNoPhotoRow = (customFields = {}) => {
   );
 };
 
-LeftPhotoNoPhotoRow.propTypes = {
+LeftPhotoNoPhoto.propTypes = {
   customFields: PropTypes.shape({
     title: PropTypes.string.tag({
       name: 'Title',
@@ -61,4 +59,4 @@ LeftPhotoNoPhotoRow.propTypes = {
   }),
 };
 
-export default LeftPhotoNoPhotoRow;
+export default LeftPhotoNoPhoto;

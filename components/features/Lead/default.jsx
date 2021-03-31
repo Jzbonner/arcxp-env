@@ -66,8 +66,6 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     const listLimit = limitOverride || limit;
     return apiData.map((el, i) => {
       if (start <= i && i < start + listLimit) {
-        console.log('list number good', i);
-        console.log('display CLass', displayClass);
         return <ListItem key={`ListItem-${i}`} displayClass={displayClass} hidePromo={((isLeftNoPhotoFeature && i !== 1 && i !== 5) || false)} {...el} />;
       }
       return null;
@@ -121,8 +119,6 @@ const Lead = ({ customFields = {}, limitOverride }) => {
         return null;
     }
   }
-
-  console.log('stat index', startIndex);
 
   if (Array.isArray(data) && displayClass === 'Redesign Feature - Left Photo No Photo') {
     return (

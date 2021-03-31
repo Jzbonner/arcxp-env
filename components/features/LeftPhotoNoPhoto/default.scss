@@ -1,7 +1,34 @@
 @import "./../../../src/styles/base";
 
-
 .c-LeftPhotoNoPhotoRow {
+
+  &:first-child {
+    margin-right: 55px;
+
+    .LeftPhotoNoPhotoRow::before {
+      display: none;
+    }
+  }
+
+  .LeftPhotoNoPhotoRow {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-left: 1px solid #cdcdcd;
+      left: -30px;
+      top: -30px;
+    }
+  }
+
+  @include breakpoint(desktop-sm) {
+    margin-top: 35px;
+    margin-bottom: 15px;
+  }
+
   .row {
     display: flex;
     justify-content: space-between;
@@ -11,4 +38,33 @@
       flex-wrap: nowrap;
     }
   }
+
+  .c-divider-top {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    height: inherit;
+    top: 0;
+    left: 0;
+    border-top: 1px solid #cdcdcd;
+    transform: translate(38%, -35px);
+
+    @include breakpoint(desktop-sm) {
+      width: 421px;
+    }
+  }
+
+  .c-divider-left {
+
+  }
+
+  .c-sectionTitle {
+    @include text-styles(1.875rem, 1, "Gordita-Bold");
+
+    @include breakpoint(desktop-sm) {
+      margin-bottom: 15px;
+    }
+
+  }
+
 }

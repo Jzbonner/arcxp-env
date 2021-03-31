@@ -57,8 +57,6 @@ const ListItem = ({
   const defaultPromoWidth = 500;
   const defaultPromoHeight = 282;
 
-  console.log('hide timestamp?', hideTimestamp);
-
   function getPromoItem(sponsor) {
     const promoWidth = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoWidth;
     const promoHeight = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoHeight;
@@ -158,8 +156,6 @@ const ListItem = ({
   }
 
   if (relativeURL === '/') return null;
-
-  console.log('isLeftPhoto', isLeftPhotoNoPhotoItem, 'hide promo?', hidePromo);
 
   return (
     <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''}`}>

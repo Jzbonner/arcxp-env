@@ -2,6 +2,9 @@
 
 
 .c-LeftPhotoNoPhotoWrapper {
+  display: flex;
+  width: 100%;
+
   .row {
     display: flex;
     justify-content: space-between;
