@@ -28,6 +28,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     '5-Item Feature - Left Photo',
     '5-Item Feature - Center Lead Top Photo',
     '5-Item Feature - No Photo',
+    'Redesign Feature - Left Photo No Photo',
   ];
 
   const data = useContent({
@@ -39,6 +40,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       displayClassesRequiringImg,
     },
   });
+
+  const isLeftNoPhotoFeature = displayClass === 'Redesign Feature - Left Photo No Photo';
 
   function getDisplayClassMap(displayC) {
     switch (displayC) {
@@ -52,6 +55,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
         return 'center-lead-display-class';
       case '1 or 2 Item Feature':
         return 'one-two-item-display-class';
+      case 'Redesign Feature - Left Photo No Photo':
+        return 'left-photo-no-photo-display-class';
       default:
         return 'top-photo-display-class';
     }
@@ -61,7 +66,9 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     const listLimit = limitOverride || limit;
     return apiData.map((el, i) => {
       if (start <= i && i < start + listLimit) {
-        return <ListItem key={`ListItem-${i}`} {...el} />;
+        console.log('list number good', i);
+        console.log('display CLass', displayClass);
+        return <ListItem key={`ListItem-${i}`} displayClass={displayClass} hidePromo={((isLeftNoPhotoFeature && i !== 1 && i !== 5) || false)} {...el} />;
       }
       return null;
     });
@@ -75,6 +82,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
         return [...Array(parseInt(columns, 10)).keys()].map(i => (
           <Headline key={i} {...apiData[startIndex + i]} isTease={true} />
         ));
+      case 'Redesign Feature - Left Photo No Photo':
+        return getLists(apiData, startIndex + 1, 5);
       default:
         return null;
     }
@@ -87,6 +96,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - No Photo':
       case '5-Item Feature - Center Lead Top Photo':
         return <Headline {...apiData[startIndex]} isTease={true} />;
+      case 'Redesign Feature - Left Photo No Photo':
+        return getLists(apiData, startIndex + 5, 9);
       default:
         return null;
     }
@@ -109,6 +120,23 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       default:
         return null;
     }
+  }
+
+  console.log('stat index', startIndex);
+
+  if (Array.isArray(data) && displayClass === 'Redesign Feature - Left Photo No Photo') {
+    return (
+      <div
+        className={`c-homeLeadContainer left-photo-no-photo-display-class ${getColumnsMap(columns)}`}
+      >
+        {renderColumn1(displayClass, data) && (
+          <div className="column-1 ">{renderColumn1(displayClass, data)}</div>
+        )}
+        {renderColumn2(displayClass, data) && (
+          <div className="column-2">{renderColumn2(displayClass, data)}</div>
+        )}
+      </div>
+    );
   }
 
   if (Array.isArray(data)) {
@@ -145,6 +173,7 @@ Lead.propTypes = {
       '5-Item Feature - No Photo',
       '5-Item Feature - Center Lead Top Photo',
       '1 or 2 Item Feature',
+      'Redesign Feature - Left Photo No Photo',
     ]).tag({
       name: 'Display Class',
       defaultValue: '5-Item Feature - Top Photo',

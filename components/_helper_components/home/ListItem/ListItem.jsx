@@ -26,6 +26,8 @@ const ListItem = ({
   showPreview,
   _id: id,
   isSynopsis = false,
+  displayClass,
+  hidePromo,
 }) => {
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -50,7 +52,16 @@ const ListItem = ({
   const relativeURL = websiteUrl || canonicalUrl || '/';
   const isListPage = listPage ? 'listPage' : '';
 
+  const isLeftPhotoNoPhotoItem = displayClass === 'Redesign Feature - Left Photo No Photo';
+  const leftPhotoNoPhotoSizeInt = 80;
+  const defaultPromoWidth = 500;
+  const defaultPromoHeight = 282;
+
+  console.log('hide timestamp?', hideTimestamp);
+
   function getPromoItem(sponsor) {
+    const promoWidth = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoWidth;
+    const promoHeight = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoHeight;
     // standalone video/gallery
     if (contentType === 'video' || contentType === 'gallery') {
       if (promoItems && promoItems.basic) {
@@ -58,8 +69,8 @@ const ListItem = ({
           <a href={relativeURL} className="homeList-image">
             <Image
               src={promoItems.basic}
-              width={500}
-              height={282}
+              width={promoWidth}
+              height={promoHeight}
               imageType="isHomepageImage"
               teaseContentType={contentType}
             />
@@ -77,8 +88,8 @@ const ListItem = ({
           <a href={relativeURL} className="homeList-image">
             <Image
               src={promoItems.basic || promoItems.lead_art.promo_items.basic}
-              width={500}
-              height={282}
+              width={promoWidth}
+              height={promoHeight}
               imageType="isHomepageImage"
             />
             {sponsor && (
@@ -100,8 +111,8 @@ const ListItem = ({
             <a href={relativeURL} className="homeList-image">
               <Image
                 src={promoItems.basic.promo_items.basic}
-                width={500}
-                height={282}
+                width={promoWidth}
+                height={promoHeight}
                 imageType="isHomepageImage"
               />
               {sponsor && (
@@ -118,8 +129,8 @@ const ListItem = ({
         <a href={relativeURL} className="homeList-image">
           <Image
             src={firstInlineImage}
-            width={500}
-            height={282}
+            width={promoWidth}
+            height={promoHeight}
             imageType="isHomepageImage"
           />
           {sponsor && <div className="c-sponsorOverlay">{sponsor}</div>}
@@ -148,9 +159,11 @@ const ListItem = ({
 
   if (relativeURL === '/') return null;
 
+  console.log('isLeftPhoto', isLeftPhotoNoPhotoItem, 'hide promo?', hidePromo);
+
   return (
-    <div className={`c-homeList ${isListPage} ${isMissingPromo}`}>
-      {getPromoItem(sponsorName)}
+    <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''}`}>
+      {!hidePromo && getPromoItem(sponsorName)}
       <div className="homeList-text">
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
         <div className={`headline ${isListPage}`}>
@@ -185,6 +198,8 @@ ListItem.propTypes = {
   showPreview: PropTypes.bool,
   _id: PropTypes.string,
   isSynopsis: PropTypes.bool,
+  displayClass: PropTypes.string,
+  hidePromo: PropTypes.bool,
 };
 
 export default ListItem;

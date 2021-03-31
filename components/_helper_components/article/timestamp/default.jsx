@@ -12,7 +12,10 @@ const TimeStamp = ({
 
   if (isTease) pageType = 'tease';
 
+  console.log('hide time stamp?', isHideTimestampTrue);
+
   const timeStamp = computeTimeStamp(firstPublishDate, displayDate, isHideTimestampTrue, isHyperlocalContent, pageType);
+  console.log('resulting timestamp', timeStamp);
   if (timeStamp === null) return null;
 
   return (
