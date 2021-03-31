@@ -47,7 +47,7 @@ const Schedule = () => {
             <thead>
                 <tr>
                   <th>Date</th>
-                  <th>Tournament/Course</th>
+                  <th>Tournament</th>
                   <th>Defending Champion</th>
                 </tr>
             </thead>
