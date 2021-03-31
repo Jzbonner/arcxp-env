@@ -105,6 +105,15 @@
   }
 }
 
+// section title mixin
+@mixin sectionTitle {
+  content: "";
+  background: #cdcdcd;
+  height: 1px;
+  flex: 1;
+  margin: auto 0 auto 15px;
+}
+
 // The pseudo :before element applied to all ad classes
 // causes spacing issues in the story content well.
 // This mixin can be used when ad spacing is required in content wells.

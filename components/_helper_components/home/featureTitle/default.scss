@@ -13,11 +13,7 @@
   @include text-styles(1.875rem, 1, "Gordita-Bold");
 
   &:after {
-    content: "";
-    background: #cdcdcd;
-    height: 1px;
-    flex: 1;
-    margin: auto 0 auto 15px;
+    @include sectionTitle;
   }
 
   @include between-breakpoints(tablet, desktop-sm) {

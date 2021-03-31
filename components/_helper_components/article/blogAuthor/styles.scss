@@ -13,11 +13,7 @@
     display: flex;
 
     &:after {
-      content: "";
-      background: #cdcdcd;
-      height: 1px;
-      flex: 1;
-      margin: auto 0 auto 15px;
+      @include sectionTitle;
     }
   }
 
