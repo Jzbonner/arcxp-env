@@ -1,5 +1,4 @@
-/* eslint-disable eol-last */
-/* eslint-disable no-console */
+/* eslint-disable */
 import axios from 'axios';
 
 const { sportradarAPIkey, sportradarAPIVersion, sportradarAccessLevel } = require('../../environment/index');
@@ -10,24 +9,35 @@ const params = {
 };
 
 const fetch = (query) => {
-  const { tour, year } = query;
+  const { tour, year, tournamentId } = query;
 
   if (!tour || !year || !sportradarAPIkey || !sportradarAPIVersion) {
     return null;
   }
 
-  const sportradarAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/schedule.json?api_key=${sportradarAPIkey}`;
-
-  return axios
-    .get(sportradarAPILink, {
+  function getScheduleData() {
+    const sportradarAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/schedule.json?api_key=${sportradarAPIkey}`;
+    return axios.get(sportradarAPILink, {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
-    })
-    .then(({ data }) => data)
-    .catch((error) => {
-      console.log('AXIOS CATCH - sportradar-api => ', error);
     });
+  }
+
+  function getLeaderboardData() {
+    const golfLeaderboardAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/${tournamentId}/leaderboard.json?api_key=${sportradarAPIkey}`;  
+    return axios.get(golfLeaderboardAPILink, {
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    });
+  }
+
+  if (!tournamentId) {
+    return getScheduleData().then(({data}) => data);
+  } else {
+    return getLeaderboardData(tournamentId).then(({data}) => data);
+  }
 };
 
 export default {
