@@ -26,6 +26,7 @@ const ListItem = ({
   showPreview,
   _id: id,
   isSynopsis = false,
+  isDontMissFeature = false,
 }) => {
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -159,12 +160,12 @@ const ListItem = ({
           </a>
           {showPreview && <ListItemPreview id={id} />}
         </div>
-        <TimeStamp
+        {!isDontMissFeature && <TimeStamp
             firstPublishDate={firstPublishDate}
             displayDate={displayDate}
             isHideTimestampTrue={isHideTimestampTrue}
             isTease={true}
-          />
+          />}
       </div>
     </div>
   );
@@ -185,6 +186,7 @@ ListItem.propTypes = {
   showPreview: PropTypes.bool,
   _id: PropTypes.string,
   isSynopsis: PropTypes.bool,
+  isDontMissFeature: PropTypes.bool,
 };
 
 export default ListItem;

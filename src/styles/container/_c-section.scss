@@ -9,8 +9,7 @@
   display: block;
   max-width: 1600px;
   padding: 0 $min-margin;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 0 auto;
 
   @include breakpoint(tablet) {
     width: 94%;
