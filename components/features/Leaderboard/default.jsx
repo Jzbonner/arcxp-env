@@ -17,9 +17,6 @@ const Leaderboard = () => {
     },
   });
 
-  console.log("Hello2!!!!!");
-  console.log(scheduleData);
-
   let tournaments = scheduleData.tournaments;
   for (let i = 28; i < tournaments.length; i++) {
     if (tournaments[i].status === "inprogress" || tournaments[i].status === "closed") {
@@ -37,10 +34,6 @@ const Leaderboard = () => {
       tournamentId: tournamentId,
     },
   });
-
-  console.log("Hello!!");
-  console.log(leaderboardData);
-
 
   // const scroll = (scrollOffset) => {
   //   ref.current.scrollLeft += scrollOffset;
