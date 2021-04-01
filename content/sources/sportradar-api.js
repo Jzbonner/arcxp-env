@@ -17,12 +17,20 @@ const fetch = (query) => {
 
   function getScheduleData() {
     const sportradarAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/schedule.json?api_key=${sportradarAPIkey}`;
-    return axios.get(sportradarAPILink);
+    return axios.get(sportradarAPILink, {
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    });
   }
 
   function getLeaderboardData() {
     const golfLeaderboardAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/${tournamentId}/leaderboard.json?api_key=${sportradarAPIkey}`;  
-    return axios.get(golfLeaderboardAPILink);
+    return axios.get(golfLeaderboardAPILink, {
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    });
   }
 
   if (!tournamentId) {
