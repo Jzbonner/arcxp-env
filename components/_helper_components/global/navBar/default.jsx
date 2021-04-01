@@ -99,6 +99,17 @@ const NavBar = ({
     }
   }, []);
 
+  const [sidebarIsOpen, setSidebarState] = useState(false);
+
+  useEffect(() => {
+    const sidebarBtn = document.querySelectorAll('.nav-menu-toggle');
+    sidebarBtn.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setSidebarState(!sidebarIsOpen);
+      });
+    });
+  }, [sidebarIsOpen]);
+
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
     return () => {
@@ -157,7 +168,7 @@ const NavBar = ({
       <div className={`c-headerNav
         ${stickyNavVisibility || hasWindowShade ? 'stickyActive' : ''}
         ${hasWindowShade ? 'above-shade' : ''}
-        ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`}>
+        ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`} style={sidebarIsOpen ? { opacity: 1 } : {}}>
         <div className={`c-logoAndLinks nav-logo
         ${(stickyNavVisibility || hasWindowShade) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
           <div className='c-topNavItems'>
