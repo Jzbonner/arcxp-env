@@ -5,14 +5,6 @@
   width: 100%;
   margin-bottom: 10px;
 
-  &[class*="MP0"] {
-    display: flex;
-
-    @include breakpoint(tablet) {
-      display: none;
-    }
-  }
-
   &[class*="RP0"] {
     display: none;
 
@@ -21,12 +13,8 @@
       margin-bottom: 30px;
     }
   }
+}
 
-  &[class*="HP01"] {
-    display: none;
-
-    @include breakpoint(tablet) {
-      display: flex;
-    }
-  }
+.arc_ad[class*="HP0"].ccad-noslotshadow .border-top.HP02 {
+  display: none;
 }
