@@ -495,18 +495,41 @@
   /////////////////////
 
   &.left-photo-no-photo-display-class {
+    
     .column-1 {
-      margin-right: 30px;
+      margin-right: 15px;
+      padding-bottom: 30px;
+
+      @include breakpoint(tablet) {
+        padding-bottom: 0;
+      }
+
+      @include breakpoint(desktop-sm) {
+        margin-right: 30px;
+      }
     }
 
     .column-2 {
-      border-left: 1px solid #cdcdcd;
-      padding-left: 30px;
+      @include breakpoint(tablet) {
+        border-left: 1px solid #cdcdcd;
+        padding-left: 30px;
+      }
+    }
+
+    .column-1,
+    .column-2 {
+      @include breakpoint(tablet) {
+        max-width: 350px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        max-width: none;
+      }
     }
 
     .c-homeList {
       border-bottom: 1px solid #cdcdcd;
-      padding: 15px 0;
+      padding-bottom: 15px;
 
       @include breakpoint(desktop-sm) {
         display: flex;
@@ -514,23 +537,20 @@
       }
 
       .homeList-text {
-
         @include breakpoint(desktop-sm) {
           width: 168px;
         }
 
         .headline {
-          letter-spacing: -0.1px;
+          letter-spacing: -.1px;
 
           @include text-styles(1.125rem, 1.22, "Lora-Bold");
         }
       }
 
       &.no-photo {
-
-        @include breakpoint(desktop-sm) {
-          width: 255px;
-        }
+        padding-top: 15px;
+        width: 100%;
 
         .homeList-text {
           @include breakpoint(desktop-sm) {
@@ -546,7 +566,11 @@
       &:last-child {
         border-bottom: none;
       }
-      
+    }
+
+    .lazyload-wrapper {
+      width: 80px;
+      height: 80px;
     }
 
     img {
