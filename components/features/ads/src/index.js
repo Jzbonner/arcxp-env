@@ -29,9 +29,9 @@ const AdSetup = ({
     });
   }
   const name = slotName;
-  const fullWidthAd = ['HP01', 'MP01', 'MP02', 'MP03', 'MP04'];
+  const fullWidthAd = ['HP01', 'MP01', 'MP02', 'MP03', 'MP04', 'RP01', 'RP09'];
 
-  const borderTop = fullWidthAd.includes(name) ? <div className="border-top"></div> : null;
+  const borderTop = fullWidthAd.includes(name) ? <div className={`border-top ${name}`}></div> : null;
 
   useEffect(() => {
     const instance = ArcAdLib.getInstance();

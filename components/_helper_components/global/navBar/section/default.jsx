@@ -35,13 +35,10 @@ const Section = ({
     ePaperClass = 'nav-ePaper';
   }
 
-  const isHighlighted = primarySectionID === link;
-
   // Added protection if there are no subsections
   if (childSections.length === 0) {
     return <>
       <li className={`nav-items nav-itemText ${ePaperClass} nav-itemText-${primarySectionID}`}>
-        {isHighlighted ? <div className="activeSelection" /> : null}
         <a href={link.indexOf('/') === 0 ? `${siteDomainURL}${link}` : link} target={newTab === 'true' ? '_blank' : '_self'}>
           {name}
         </a>
@@ -84,7 +81,6 @@ const Section = ({
   return (
     <>
     <li className={`nav-items nav-itemText ${ePaperClass}`}>
-      {isHighlighted ? <div className="activeSelection" /> : null}
         <div className={`section ${isActive}`}>
           <div className='section-item'>
             <a href={link.indexOf('/') === 0 ? `${siteDomainURL}${link}/` : link}>{name}</a>

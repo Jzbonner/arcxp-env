@@ -5,17 +5,34 @@
   // Common styles
   ////////////////
   width: 100%;
+  margin-bottom: $min-Msection-margin;
 
-  @include breakpoint(tablet) {
-    margin-bottom: 1.88rem;
+  @include breakpoint(desktop-sm) {
+    margin-bottom: $min-DTsection-margin;
+  }
+
+  .c-label-wrapper:empty {
+    display: none;
   }
 
   a {
     color: inherit;
   }
 
+  .headline {
+    margin-bottom: $min-margin;
+  }
+
+  .homeList-text {
+    padding-bottom: $min-margin;
+  }
+
   img {
     border-radius: 6px;
+  }
+
+  .article-timestamp {
+    line-height: 1;
   }
 
   .column-2 {
@@ -96,10 +113,15 @@
       }
 
       .headline {
-        @include text-styles(1rem, 1.28, "Average");
+        @include text-styles(1rem, 1.38, "Lora");
 
-        @include breakpoint(desktop-sm) {
-          @include text-styles(1.4vw, 1.28, "Average");
+        margin-bottom: 10px;
+        letter-spacing: -.09px;
+
+        @include between-breakpoints(tablet,desktop-sm) {
+          @include text-styles(.938rem, 1.47, "Lora");
+
+          letter-spacing: -.08px;
         }
       }
     }
@@ -131,7 +153,7 @@
         }
 
         .headline {
-          @include text-styles(1.25rem, 1.25, "Average");
+          @include text-styles(1.25rem, 1, "Lora");
         }
       }
 
@@ -269,7 +291,7 @@
 
         .homeList-text {
           max-width: 65%;
-          text-align: center;
+          text-align: left;
 
           @include breakpoint(desktop-sm) {
             max-width: 100%;
@@ -281,11 +303,11 @@
 
             @include breakpoint(desktop-sm) {
               margin: 0 auto .4rem;
-              text-align: center;
+              text-align: left;
             }
 
             @include breakpoint(desktop-lg) {
-              text-align: center;
+              text-align: left;
               min-height: initial;
             }
 
@@ -298,7 +320,7 @@
             margin-bottom: 0;
 
             @include breakpoint(desktop-sm) {
-              text-align: center;
+              text-align: left;
             }
           }
         }
@@ -380,8 +402,9 @@
         display: none;
       }
 
+      .home-headline,
       .homeList-text {
-        padding-bottom: .6rem;
+        margin: $min-margin 0 0;
         border-bottom: 1px solid #cdcdcd;
         width: 100%;
       }
@@ -471,11 +494,11 @@
 
           @include breakpoint(desktop-sm) {
             margin: 0 auto .4rem;
-            text-align: center;
+            text-align: left;
           }
 
           @include breakpoint(desktop-lg) {
-            text-align: center;
+            text-align: left;
           }
         }
 
@@ -483,7 +506,7 @@
           margin-bottom: 0;
 
           @include breakpoint(desktop-sm) {
-            text-align: center;
+            text-align: left;
           }
         }
       }

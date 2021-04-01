@@ -1,4 +1,4 @@
-@import "../../../../src/styles/base/breakpoints";
+@import "../../../../src/styles/base";
 
 .c-slider-item.is-firstItem {
   margin-left: 0;
@@ -99,8 +99,7 @@
   .sliderList-text {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    text-align: left;
 
     .c-label-wrapper {
       margin-bottom: .35rem;
@@ -110,22 +109,24 @@
       }
     }
 
+    .article-timestamp {
+      line-height: 1;
+    }
+
     a.headline {
       max-width: 80%;
-      line-height: 1.17;
-      letter-spacing: normal;
-      font-size: 1rem;
+      letter-spacing: -.17;
       color: #000;
-      font-family: "Average", "Georgia", serif;
       text-decoration: none;
+      margin-bottom: $min-margin;
+
+      @include text-styles(1.125rem, 1.33, "Lora");
 
       @include breakpoint(desktop-sm) {
         max-width: 90%;
-        font-size: 1.75vw;
-      }
+        letter-spacing: -.2px;
 
-      @media (min-width: 1024px) and (min-width: 1600px) {
-        font-size: 1.5rem;
+        @include text-styles(1.375rem, 1.09, "Lora");
       }
     }
   }

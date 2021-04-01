@@ -3,11 +3,13 @@
 .schedule-widget.sportsradar-widget {
 
   .schedule-header {
-
+    display: block;
+    
     h1 {
       font-family: "Gordita";
       color: #313132;
-      height: 40px;
+      height: 100%;
+      width: 100%;
       margin: 0 83px 6px 0;
       font-size: 30px;
       font-weight: 700;
@@ -36,7 +38,7 @@
       text-align: left;
       margin: 0 6px 7px 1px;
       font-family: "Gordita-bold";
-      font-size: 12px;
+      font-size: 18px;
       font-weight: 700;
       font-stretch: normal;
       font-style: normal;
@@ -46,7 +48,7 @@
 
       @include breakpoint(tablet) {
         margin: 0 6px 6px 1px;
-        font-size: 14px;
+        font-size: 18px;
       }
 
       @include breakpoint(desktop-sm) {
@@ -83,6 +85,9 @@
   }
 
   .schedule-table {
+    @include breakpoint(tablet) {
+      max-width: 100%;
+    }
 
     thead {
 
@@ -149,8 +154,7 @@
           line-height: normal;
           letter-spacing: normal;
           color: #313132;
-          padding-left: 10px;
-          padding-right: 10px;
+          padding: 10px;
 
           &:nth-child(odd) {
             background-color: rgba(237, 237, 237, 1);
@@ -165,7 +169,7 @@
             text-align: left;
 
             @include breakpoint(desktop-sm) {
-              width: 180px;
+              width: 230px;
             }
           }
 
@@ -183,7 +187,7 @@
             text-align: left;
 
             @include breakpoint(desktop-sm) {
-              width: 200px;
+              width: 230px;
             }
           }
 

@@ -16,6 +16,10 @@
     color: inherit;
   }
 
+  .article-timestamp {
+    line-height: 1;
+  }
+
   // Common Styles Used By All the Display Classes
 
   .c-homeList {
@@ -40,6 +44,7 @@
       position: relative;
       display: inline-block;
       height: fit-content;
+      margin-bottom: $min-margin;
     }
 
     .image-component-image img {
@@ -67,22 +72,10 @@
       }
 
       .headline {
-        @include text-styles(1.25rem, 1.25, "Average");
+        @include text-styles(1rem, 1.38, "Lora");
 
-        letter-spacing: -.24px;
-        text-align: center;
-
-        @include breakpoint(desktop-sm) {
-          @include text-styles(1.1rem, 1.28, "Average");
-        }
-
-        @include breakpoint(desktop-lg) {
-          @include text-styles(1.2rem, 1.31, "Average");
-        }
-
-        @media (min-width: 1500px) {
-          @include text-styles(1.3rem, 1.31, "Average");
-        }
+        letter-spacing: -.09px;
+        margin-bottom: 10px;
       }
     }
   }
@@ -213,7 +206,7 @@
 
     .homeList-text {
       margin: 0 $min-margin;
-      text-align: center;
+      text-align: left;
 
       @include breakpoint(tablet) {
         margin: 0;
@@ -221,7 +214,7 @@
     }
 
     .headline {
-      text-align: center;
+      text-align: left;
     }
   }
 
@@ -233,6 +226,10 @@
     .c-homeList {
       margin-bottom: 40px;
       display: flex;
+
+      .article-timestamp {
+        margin-left: 15px;
+      }
 
       .c-sponsorOverlay,
       .image-component-image .sponsored-story {
@@ -259,15 +256,6 @@
         .headline {
           text-align: left;
           margin-left: 15px;
-          font-size: 1rem;
-
-          @include breakpoint(desktop-sm) {
-            font-size: 1.1rem;
-          }
-
-          @include breakpoint(desktop-lg) {
-            font-size: 1.2rem;
-          }
 
           &.listPage {
             text-align: left;
@@ -328,13 +316,9 @@
       }
 
       .headline {
-        letter-spacing: -.32px;
+        @include text-styles(1rem, 1.38, "Lora");
 
-        @include text-styles(1rem, 1.4, "Average");
-
-        @include breakpoint(tablet) {
-          @include text-styles(1rem, 1.2, "Average");
-        }
+        letter-spacing: -.09px;
       }
     }
   }
@@ -361,8 +345,12 @@
       }
 
       .homeList-text {
-        padding-bottom: .6rem;
+        margin: $min-margin 0;
         width: 100%;
+      }
+
+      &:last-child {
+        border-bottom: none;
       }
     }
   }

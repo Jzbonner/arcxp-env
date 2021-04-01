@@ -2,15 +2,23 @@
 @import "../../../../src/styles/base/breakpoints";
 
 .c-sectionTitle {
-  letter-spacing: -.5px;
-  margin-bottom: 20px;
+  letter-spacing: -.38px;
+  margin-bottom: $min-margin;
   color: #313132;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  @include text-styles(2.5rem, 1, "Average");
+  @include text-styles(1.875rem, 1, "Gordita-Bold");
+
+  &:after {
+    @include sectionTitle;
+  }
+
+  @include between-breakpoints(tablet, desktop-sm) {
+    @include text-styles(1.563rem, 1, "Gordita-Bold");
+  }
 
   @include breakpoint(desktop-sm) {
     text-align: left;

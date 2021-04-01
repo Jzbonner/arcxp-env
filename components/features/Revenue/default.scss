@@ -3,11 +3,13 @@
 .c-revenue {
   background-color: #ededed;
   width: 100vw;
-  padding-top: 1.25rem;
+  padding: 1.25rem 0;
+  margin-bottom: $min-Msection-margin;
 
   @include breakpoint(desktop-sm) {
     padding-top: 2rem;
     width: calc(100vw - 1rem - 1px);
+    margin-bottom: $min-DTsection-margin;
   }
 
   .revenue-container {
@@ -31,6 +33,14 @@
 
     & > div {
       margin: 0;
+    }
+
+    .c-sectionTitle {
+      margin-bottom: $min-margin;
+
+      &:after {
+        display: none;
+      }
     }
 
     .c-homeListContainer {
@@ -81,18 +91,21 @@
         }
 
         .headline {
-          // @include text-styles(1rem, 1.25, "Average");
+          letter-spacing: -.17px;
+          margin-bottom: 10px;
+
+          @include text-styles(1.125rem, 1.33, "Lora");
 
           @include between-breakpoints(tablet, desktop-sm) {
-            @include text-styles(1.5rem, 1.25, "Average");
+            letter-spacing: -.15px;
+
+            @include text-styles(1rem, 1.13, "Lora");
           }
 
           @include breakpoint(desktop-sm) {
-            @include text-styles(1.1rem, 1.25, "Average");
-          }
-
-          @include breakpoint(desktop-lg) {
-            @include text-styles(1.25rem, 1.25, "Average");
+            letter-spacing: -.22px;
+            
+            @include text-styles(1.5rem, 1.17, "Lora");
           }
         }
 

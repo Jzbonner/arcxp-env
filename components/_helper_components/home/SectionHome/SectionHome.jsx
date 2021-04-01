@@ -14,6 +14,7 @@ const SectionHomepage = ({
     if (colLayout) {
       parentClass += ' col-layout';
     }
+
     return (
       <div className={parentClass}>
         <div className="c-contentElements">

@@ -1,6 +1,32 @@
+@import "../../../src/styles/base";
 
 .border-top {
   border-top: 1px solid #cdcdcd;
   width: 100%;
   margin-bottom: 10px;
+
+  &[class*="MP0"] {
+    display: flex;
+
+    @include breakpoint(tablet) {
+      display: none;
+    }
+  }
+
+  &[class*="RP0"] {
+    display: none;
+
+    @include between-breakpoints(tablet, desktop-sm) {
+      display: flex;
+      margin-bottom: 30px;
+    }
+  }
+
+  &[class*="HP01"] {
+    display: none;
+
+    @include breakpoint(tablet) {
+      display: flex;
+    }
+  }
 }

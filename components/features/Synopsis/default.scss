@@ -12,10 +12,11 @@
 }
 
 .c-synopsis {
+  margin-bottom: $min-Msection-margin;
+
   @include breakpoint(tablet) {
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 1px solid #cdcdcd;
     padding-bottom: 5px;
   }
 
@@ -24,6 +25,7 @@
     margin-top: -2px;
     border-bottom: none;
     padding-bottom: 0;
+    margin-bottom: $min-DTsection-margin;
   }
 
   .c-homeList {
@@ -42,8 +44,11 @@
         border-bottom: none;
         margin-bottom: 0;
 
-        .headline {
+        .homeList-text {
           border-right: 1px solid #cdcdcd;
+        }
+        
+        .headline {
           padding-right: 15px;
         }
       }
@@ -55,7 +60,6 @@
 
     @include breakpoint(desktop-lg) {
       width: 100%;
-      border-bottom: none;
     }
 
     .c-label-wrapper {
