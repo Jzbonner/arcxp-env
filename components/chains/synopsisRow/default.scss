@@ -7,13 +7,12 @@
   width: 100%;
   margin-bottom: 1.25rem;
 
-  @include breakpoint(desktop-lg) {
-    flex-wrap: nowrap;
+  @include breakpoint(tablet) {
     margin-bottom: 0;
   }
 
-  @media (min-width: 1600px) {
-    margin-bottom: 1.25rem;
+  @include breakpoint(desktop-lg) {
+    flex-wrap: nowrap;
   }
 
   .c-homeLeadContainer {
