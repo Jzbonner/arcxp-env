@@ -1,30 +1,50 @@
 /* eslint-disable */
-import React, {useRef } from 'react';
+import React, { useRef } from 'react';
 import { useContent } from 'fusion:content';
 import './default.scss';
 
 const Leaderboard = () => {
   const tour = 'pga';
   const year = '2021';
+  let tournamentId;
   // const ref = useRef(null);
 
-  const leaderboardData = useContent({
-    source: 'sportradarLeaderboard-api',
+  const scheduleData = useContent({
+    source: 'sportradar-api',
     query: {
       tour: tour,
       year: year,
     },
   });
 
-  console.log("HEllo3");
+  console.log("Hello2!!!!!");
+  console.log(scheduleData);
+
+  let tournaments = scheduleData.tournaments;
+  for (let i = 28; i < tournaments.length; i++) {
+    if (tournaments[i].status === "inprogress" || tournaments[i].status === "closed") {
+      if (tournaments[i].event_type === "stroke") {
+        tournamentId = tournaments[i].id;
+      }
+    }
+  }
+
+  const leaderboardData = useContent({
+    source: 'sportradar-api',
+    query: {
+      tour: tour,
+      year: year,
+      tournamentId: tournamentId,
+    },
+  });
+
+  console.log("Hello!!");
   console.log(leaderboardData);
-  // leaderboardData = leaderboardData.LeaderboardData;
+
 
   // const scroll = (scrollOffset) => {
   //   ref.current.scrollLeft += scrollOffset;
   // };
-
-  // const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   if (leaderboardData) {
     return (
@@ -42,12 +62,12 @@ const Leaderboard = () => {
               <th className="player-rank">Rank</th>
               <th className="player-name">Name</th>
               {/* <div className="scrollable-div"> */}
-                <th className="player-round">Round 1</th>
-                <th className="player-round">Round 2</th>
-                <th className="player-round">Round 3</th>
-                <th className="player-round">Round 4</th>
-                <th className="player-strokes">Total</th>
-                <th className="player-thru">Thru</th>
+              <th className="player-round">Round 1</th>
+              <th className="player-round">Round 2</th>
+              <th className="player-round">Round 3</th>
+              <th className="player-round">Round 4</th>
+              <th className="player-strokes">Total</th>
+              <th className="player-thru">Thru</th>
               {/* </div> */}
             </tr>
           </thead>
@@ -58,12 +78,12 @@ const Leaderboard = () => {
                 <td className="player-rank">{player.position}{player.tied == true ? 't' : null}</td>
                 <td className="player-name">{player.first_name} {player.last_name}</td>
                 {/* <div className="scrollable-div"> */}
-                    <td className="player-round">{player.rounds[0] ? player.rounds[0].strokes : '-'}</td>
-                    <td className="player-round">{player.rounds[1] ? player.rounds[1].strokes : '-'}</td>
-                    <td className="player-round">{player.rounds[2] ? player.rounds[2].strokes : '-'}</td>
-                    <td className="player-round">{player.rounds[3] ? player.rounds[3].strokes : '-'}</td>
-                    <td className="player-strokes">{player.score} ({player.strokes})</td>
-                    <td className="player-thru">{player.rounds[player.rounds.length -1].thru == 18 ? 'F' : player.rounds[player.rounds.length -1].thru}</td>
+                <td className="player-round">{player.rounds[0] ? player.rounds[0].strokes : '-'}</td>
+                <td className="player-round">{player.rounds[1] ? player.rounds[1].strokes : '-'}</td>
+                <td className="player-round">{player.rounds[2] ? player.rounds[2].strokes : '-'}</td>
+                <td className="player-round">{player.rounds[3] ? player.rounds[3].strokes : '-'}</td>
+                <td className="player-strokes">{player.score} ({player.strokes})</td>
+                <td className="player-thru">{player.rounds[player.rounds.length - 1].thru == 18 ? 'F' : player.rounds[player.rounds.length - 1].thru}</td>
                 {/* </div> */}
               </tr>
             ))}

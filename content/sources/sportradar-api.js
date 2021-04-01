@@ -1,5 +1,4 @@
-/* eslint-disable eol-last */
-/* eslint-disable no-console */
+/* eslint-disable */
 import axios from 'axios';
 
 const { sportradarAPIkey, sportradarAPIVersion, sportradarAccessLevel } = require('../../environment/index');
@@ -9,36 +8,28 @@ const params = {
   year: 'text',
 };
 
-let scheduleData;
-
 const fetch = (query) => {
-  const { tour, year } = query;
-  // let tournamentId;
+  const { tour, year, tournamentId } = query;
 
   if (!tour || !year || !sportradarAPIkey || !sportradarAPIVersion) {
     return null;
   }
 
-  const sportradarAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/schedule.json?api_key=${sportradarAPIkey}`;
+  function getScheduleData() {
+    const sportradarAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/schedule.json?api_key=${sportradarAPIkey}`;
+    return axios.get(sportradarAPILink);
+  }
 
-  const response = axios.get(sportradarAPILink, {
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-    },
-  });
-  scheduleData = response.data;
-  // scheduleData.tournaments.map((tournament) => (
-  //   tournament.status == 'inprogress' ? tournamentId = tournament.id : tournamentId = '8fd31d7c-2357-448b-b16f-e1953fe77757'
-  // ));
-  const leaderboardData = axios.get(`https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/e8d09c79-21e7-4c40-bde4-9f3f3a1e9d65/leaderboard.json?api_key=${sportradarAPIkey}`);
-  console.log('Response', leaderboardData);
+  function getLeaderboardData() {
+    const golfLeaderboardAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/${tournamentId}/leaderboard.json?api_key=${sportradarAPIkey}`;  
+    return axios.get(golfLeaderboardAPILink);
+  }
 
-  const responseObj = {
-    ScheduleData: scheduleData,
-    LeaderboardData: leaderboardData,
-  };
-
-  return responseObj;
+  if (!tournamentId) {
+    return getScheduleData().then(({data}) => data);
+  } else {
+    return getLeaderboardData(tournamentId).then(({data}) => data);
+  }
 };
 
 export default {

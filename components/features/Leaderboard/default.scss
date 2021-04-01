@@ -1,7 +1,7 @@
 @import "./../../../src/styles/base";
 
 .leaderboard-widget.sportsradar-widget {
-  margin: 0 0 30px;
+  margin: 30px 0 40px;
 
   .leaderboard-header {
 
@@ -70,12 +70,8 @@
   .leaderboard-table {
     border-collapse: collapse;
     overflow: scroll;
-    max-width: 350px;
+    max-width: 100%;
     max-height: 500px;
-
-    @include breakpoint(tablet) {
-      max-width: 100%;
-    }
 
     thead {
       border-bottom: 3px solid #212126;
@@ -83,8 +79,7 @@
       tr {
 
         th {
-          margin: 0 6px 7px 1px;
-          padding: 10px;
+          padding: 10px 3px;
           font-family: "Gordita-bold";
           font-size: 9px;
           font-weight: 700;
@@ -96,12 +91,11 @@
           text-align: left;
 
           @include breakpoint(tablet) {
-            margin: 0 6px 6px 1px;
+            padding: 10px;
             font-size: 14px;
           }
 
           @include breakpoint(desktop-sm) {
-            margin: 0 27px 5px 1px;
             font-size: 18px;
           }
 
