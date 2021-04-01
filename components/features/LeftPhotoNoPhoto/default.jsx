@@ -34,7 +34,7 @@ const LeftPhotoNoPhoto = (customFields = {}) => {
     <div className="c-LeftPhotoNoPhotoRow">
       <FeatureTitle title={title} moreURL={moreURL} isLeftPhotoNoPhoto={true} />
       <div className="row">
-        <div className='LeftPhotoNoPhotoRow'>
+        <div className='LeftPhotoNoPhoto'>
           <Lead {...newCustomFields} columns={2} limitOverride={4} />
         </div>
       </div>
