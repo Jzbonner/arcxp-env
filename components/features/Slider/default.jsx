@@ -101,7 +101,7 @@ const Slider = (customFields = {}) => {
   }, []);
 
   return (
-      <div ref={wrapperRef} className={`c-slider-wrapper b-margin-bottom-d40-m20
+      <div ref={wrapperRef} className={`c-slider-wrapper
       b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
       <FeatureTitle title={title} moreURL={moreURL} />
         <div className="c-slider">

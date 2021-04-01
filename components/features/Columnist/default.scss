@@ -1,6 +1,8 @@
 @import "./../../../src/styles/base";
 
 .c-columnistFeature {
+  margin-bottom: $min-Msection-margin;
+
   @include breakpoint(tablet) {
     border-left: solid 1px #cdcdcd;
     margin-left: -20px;
@@ -9,10 +11,11 @@
 
   @include breakpoint(desktop-sm) {
     width: 100%;
+    margin-bottom: $min-DTsection-margin;
   }
 
   .c-title {
-    @include text-styles(2.5rem, 1, "Average");
+    @include text-styles(1.875rem, 1, "Gordita-Bold");
     
     color: #313132;
     letter-spacing: -.38px;
@@ -31,9 +34,14 @@
       list-style: none;
       margin-bottom: 15px;
       text-align: left;
+      border-bottom: 1px solid #cdcdcd;
+
+      &:last-child {
+        border: none;
+      }
 
       .authorName {
-        @include text-styles(1.125rem, 1.8, "Gordita-Bold");
+        @include text-styles(1.125rem, 1, "Gordita-Bold");
 
         color: #313132;
 
@@ -43,16 +51,14 @@
       }
 
       .headline {
-        @include text-styles(1rem, 1.23, "Average");
+        @include text-styles(1rem, normal, "Lora");
 
         display: block;
         text-decoration: none;
-        letter-spacing: -.18px;
+        letter-spacing: -.33px;
         color: #313132;
-
-        @include breakpoint(desktop-sm) {
-          letter-spacing: -.5px;
-        }
+        font-weight: 500;
+        margin: 5px 0 $min-margin;
       }
     }
 
