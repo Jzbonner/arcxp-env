@@ -23,6 +23,16 @@ const BigBreakingNews = (customFields = {}) => {
     query: {
       ...contentConfigValues,
       arcSite,
+      displayClass: 'BigBreakingNews',
+      displayClassesRequiringImg: ['BigBreakingNews'],
+      width: 1108,
+      height: 426,
+      useSrcSet: true,
+      srcSetSizes: [
+        [1108, 426],
+        [770, 296],
+        [408, 300],
+      ],
     },
   });
 
@@ -31,7 +41,7 @@ const BigBreakingNews = (customFields = {}) => {
   const renderLogic = () => {
     const leadItem = data[0];
     const { basic: headline } = leadItem && leadItem.headlines;
-    const { canonical_url: leadItemURL } = leadItem || {};
+    const { canonical_url: leadItemURL, teaseImageObject } = leadItem || {};
     const { basic: imageData } = leadItem && leadItem.promo_items ? leadItem.promo_items : {};
     const [, ...restOfItems] = data;
     return (
@@ -39,7 +49,7 @@ const BigBreakingNews = (customFields = {}) => {
           <div className="leadItem">
             <a href={leadItemURL}>
               <h2>{truncateHeadline(headline, true)}</h2>
-              <Image src={imageData} width={1108} height={426} imageType="isHomepageImage" useSrcSet={true} srcSetSizes={[[1108, 426], [770, 296], [408, 300]]} />
+              <Image src={teaseImageObject || imageData} width={1108} height={426} imageType="isHomepageImage" useSrcSet={true} srcSetSizes={[[1108, 426], [770, 296], [408, 300]]} />
             </a>
           </div>
           <div className="restOfItems">

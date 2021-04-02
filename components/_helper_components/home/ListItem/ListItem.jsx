@@ -12,7 +12,6 @@ import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import ListItemPreview from '../ListItemPreview/ListItemPreview';
 
 const ListItem = ({
-  promo_items: promoItems,
   label,
   taxonomy,
   first_publish_date: firstPublishDate,
@@ -22,7 +21,7 @@ const ListItem = ({
   website_url: websiteUrl,
   listPage,
   type: contentType,
-  firstInlineImage,
+  teaseImageObject,
   showPreview,
   _id: id,
   isSynopsis = false,
@@ -62,83 +61,23 @@ const ListItem = ({
 
   const isLeftPhotoNoPhotoItem = displayClass === 'Redesign Feature - Left Photo No Photo';
   const leftPhotoNoPhotoSizeInt = 80;
+  const promoWidth = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoWidth;
+  const promoHeight = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoHeight;
 
   function getPromoItem(sponsor) {
-    const promoWidth = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoWidth;
-    const promoHeight = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoHeight;
-
-    // standalone video/gallery
-    if (contentType === 'video' || contentType === 'gallery') {
-      if (promoItems && promoItems.basic) {
-        return (
-          <a href={relativeURL} className="homeList-image">
-            <Image
-              src={promoItems.basic}
-              width={promoWidth}
-              height={promoHeight}
-              imageType="isHomepageImage"
-              teaseContentType={contentType}
-            />
-            {sponsor && (
-              <div className="c-sponsorOverlay">{sponsor}</div>
-            )}
-          </a>
-        );
-      }
-    }
-
-    if (promoItems) {
-      if (promoItems.basic && promoItems.basic.type === 'image') {
-        return (
-          <a href={relativeURL} className="homeList-image">
-            <Image
-              src={promoItems.basic || promoItems.lead_art.promo_items.basic}
-              width={promoWidth}
-              height={promoHeight}
-              imageType="isHomepageImage"
-            />
-            {sponsor && (
-              <div className="c-sponsorOverlay">{sponsor}</div>
-            )}
-          </a>
-        );
-      }
-
-      if (
-        (promoItems.basic && promoItems.basic.type === 'video')
-        || (promoItems.basic && promoItems.basic.type === 'gallery')
-      ) {
-        if (
-          promoItems.basic.promo_items
-          && promoItems.basic.promo_items.basic
-        ) {
-          return (
-            <a href={relativeURL} className="homeList-image">
-              <Image
-                src={promoItems.basic.promo_items.basic}
-                width={promoWidth}
-                height={promoHeight}
-                imageType="isHomepageImage"
-              />
-              {sponsor && (
-                <div className="c-sponsorOverlay">{sponsor}</div>
-              )}
-            </a>
-          );
-        }
-      }
-    }
-
-    if (firstInlineImage) {
+    if (teaseImageObject) {
       return (
         <a href={relativeURL} className="homeList-image">
           <Image
-            src={firstInlineImage}
+            src={teaseImageObject}
             width={promoWidth}
             height={promoHeight}
             imageType="isHomepageImage"
+            teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null}
           />
-          {sponsor && <div className="c-sponsorOverlay">{sponsor}</div>}
+          {sponsor && (
+            <div className="c-sponsorOverlay">{sponsor}</div>
+          )}
         </a>
       );
     }
@@ -187,7 +126,6 @@ const ListItem = ({
 };
 
 ListItem.propTypes = {
-  promo_items: PropTypes.object,
   label: PropTypes.object,
   taxonomy: PropTypes.object,
   display_date: PropTypes.string,
@@ -195,7 +133,6 @@ ListItem.propTypes = {
   headlines: PropTypes.object,
   listPage: PropTypes.bool,
   type: PropTypes.string,
-  firstInlineImage: PropTypes.object,
   canonical_url: PropTypes.string,
   website_url: PropTypes.string,
   showPreview: PropTypes.bool,
@@ -205,6 +142,7 @@ ListItem.propTypes = {
   hidePromo: PropTypes.bool,
   isDontMissFeature: PropTypes.bool,
   isTTDFeature: PropTypes.bool,
+  teaseImageObject: PropTypes.object,
 };
 
 export default ListItem;
