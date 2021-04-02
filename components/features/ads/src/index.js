@@ -29,9 +29,9 @@ const AdSetup = ({
     });
   }
   const name = slotName;
-  const fullWidthAd = ['HP01', 'MP01', 'MP02', 'MP03', 'MP04', 'RP01', 'RP09'];
+  const fullWidthAd = ['HP01', 'HP02', 'HS02', 'MP01', 'MP02', 'MP03', 'MP04', 'RP01', 'RP09'];
 
-  const borderTop = fullWidthAd.includes(name) ? <div className={`border-top ${name}`}></div> : null;
+  const borderTop = fullWidthAd.includes(name) ? <div className={`c-sectionHome border-top ${name}`}></div> : null;
 
   useEffect(() => {
     const instance = ArcAdLib.getInstance();
@@ -139,8 +139,8 @@ const AdSetup = ({
 
   return (
     <>
-      {borderTop}
       <div className={className}>
+        {borderTop}
         <div id={id} className={`${slotName} arcad b-margin-bottom-d40-m20`} />
         {slotName === 'HP02' ? <div className='hp-interscroller__placeholder full-width'></div> : ''}
       </div>
