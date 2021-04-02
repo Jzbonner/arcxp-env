@@ -161,7 +161,6 @@ const ArcAd = ({
   if (slotName === 'HS02') {
     return (
       <>
-        <div className='border-top'></div>
         <div className='c-HS02'>{arcad}</div>
       </>
     );
