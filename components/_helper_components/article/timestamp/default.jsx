@@ -13,6 +13,7 @@ const TimeStamp = ({
   if (isTease) pageType = 'tease';
 
   const timeStamp = computeTimeStamp(firstPublishDate, displayDate, isHideTimestampTrue, isHyperlocalContent, pageType);
+
   if (timeStamp === null) return null;
 
   return (
