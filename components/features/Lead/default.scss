@@ -552,16 +552,33 @@
 
     .c-homeList {
       border-bottom: 1px solid #cdcdcd;
-      padding-bottom: 15px;
+
+      @include breakpoint(tablet) {
+
+        .homeList-image {
+          margin-bottom: 1rem;
+        }
+      }
 
       @include breakpoint(desktop-sm) {
+
+        &.left-photo {
+          display: flex;
+          flex-wrap: wrap;
+        }
+      }
+
+      @include breakpoint(desktop-lg) {
         display: flex;
-        max-width: 263px;
+
+        &.left-photo {
+          flex-wrap: nowrap;
+        }
       }
 
       .homeList-text {
         @include breakpoint(desktop-sm) {
-          width: 168px;
+          max-width: 168px;
         }
 
         .headline {

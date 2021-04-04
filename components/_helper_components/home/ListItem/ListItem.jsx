@@ -159,7 +159,7 @@ const ListItem = ({
   if (relativeURL === '/') return null;
 
   return (
-    <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''}`}>
+    <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''}`}>
       {!hidePromo && getPromoItem(sponsorName)}
       <div className="homeList-text">
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
