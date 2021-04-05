@@ -1,0 +1,65 @@
+@import "./../../../src/styles/base";
+
+.c-ttd-feature {
+
+  .c-homeLeadContainer {
+    justify-content: end;
+
+    .column-1 {
+      width: 52%;
+      max-width: 423px;
+      margin-right: 27px;
+
+      .home-headline {
+        display: flex;
+        overflow: initial;
+        padding-top: 0;
+
+        .homeList-image {
+          order: 1;
+          display: contents;
+
+          .c-image-component {
+            padding-top: calc(27% + 42px);
+          }
+        }
+
+        .headline-box {
+          order: 0;
+          background: none;
+          padding: 0;
+          box-shadow: unset;
+
+          .headline {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+
+    .column-2 {
+      max-width: 324px;
+    }
+
+    .column-3 {
+      max-width: 393px;
+
+      .c-synopsis {
+        width: 100%;
+        margin-left: 27px;
+
+        .c-homeList {
+
+          .homeList-text {
+
+            .headline {
+              @include text-styles(1.625rem, 1.15, "Lora-Bold");
+
+              letter-spacing: -.5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

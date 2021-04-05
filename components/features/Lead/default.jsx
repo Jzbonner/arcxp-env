@@ -41,7 +41,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
         ...customFields.content,
         contentConfigValues: {
           ...customFields.content.contentConfigValues,
-          from: startIndex + contentConfigValues.size - 1,
+          from: startIndex + 6,
           size: 2,
         },
       },
@@ -84,6 +84,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
         return getLists(apiData, startIndex + 1, 2);
       case '1 or 2 Item Feature':
         return [...Array(parseInt(columns, 10)).keys()].map(i => <Headline key={i} {...apiData[startIndex + i]} isTease={true} />);
+      case '7-Item TTD Feature':
+        return <Headline {...apiData[startIndex]} isTease={true} />;
       default:
         return null;
     }
@@ -95,8 +97,14 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - Left Photo':
       case '5-Item Feature - No Photo':
       case '5-Item Feature - Center Lead Top Photo':
-      case '7-Item TTD Feature':
         return <Headline {...apiData[startIndex]} isTease={true} />;
+      case '7-Item TTD Feature':
+        return (
+          <>
+            {getLists(apiData, startIndex + 1, 4)}
+            {/* <Synopsis {...synopsisCustomFields}/> */}
+          </>
+        );
       default:
         return null;
     }
@@ -115,12 +123,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
           </>
         );
       case '7-Item TTD Feature':
-        return (
-          <>
-            {getLists(apiData, startIndex + 1, 4)}
-            <Synopsis {...synopsisCustomFields}/>
-          </>
-        );
+        return <Synopsis {...synopsisCustomFields} />;
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex + 3, 2);
       default:
