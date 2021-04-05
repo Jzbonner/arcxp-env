@@ -6,7 +6,7 @@ import './default.scss';
 
 const TTD = (customFields = {}) => {
   const {
-    customFields: { content: title = 'Columnists', moreURL = '' },
+    content: title = 'Things To Do', moreURL = '',
   } = customFields;
 
   const newCustomFields = {
