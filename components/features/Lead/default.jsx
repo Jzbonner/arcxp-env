@@ -6,7 +6,6 @@ import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import Headline from '../../_helper_components/home/Headline/Headline';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
-import Synopsis from '../Synopsis/default';
 import './default.scss';
 
 const Lead = ({ customFields = {}, limitOverride }) => {
@@ -34,30 +33,14 @@ const Lead = ({ customFields = {}, limitOverride }) => {
 
   console.log('DATA FROM LEAD ', data);
 
-  const synopsisCustomFields = {
-    customFields: {
-      ...customFields,
-      content: {
-        ...customFields.content,
-        contentConfigValues: {
-          ...customFields.content.contentConfigValues,
-          from: startIndex + 6,
-          size: 2,
-        },
-      },
-    },
-  };
-
-  console.log('synopsisCustomFields ', synopsisCustomFields);
-
   function getDisplayClassMap(displayC) {
     switch (displayC) {
       case '5-Item Feature - Top Photo':
         return 'top-photo-display-class';
       case '5-Item Feature - Left Photo':
+      case '7-Item TTD Feature':
         return 'left-photo-display-class';
       case '5-Item Feature - No Photo':
-      case '7-Item TTD Feature':
         return 'no-photo-display-class';
       case '5-Item Feature - Center Lead Top Photo':
         return 'center-lead-display-class';
@@ -99,12 +82,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - Center Lead Top Photo':
         return <Headline {...apiData[startIndex]} isTease={true} />;
       case '7-Item TTD Feature':
-        return (
-          <>
-            {getLists(apiData, startIndex + 1, 4)}
-            {/* <Synopsis {...synopsisCustomFields}/> */}
-          </>
-        );
+        return getLists(apiData, startIndex + 1, 3);
       default:
         return null;
     }
@@ -123,7 +101,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
           </>
         );
       case '7-Item TTD Feature':
-        return <Synopsis {...synopsisCustomFields} />;
+        return getLists(apiData, startIndex + 4, 3);
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex + 3, 2);
       default:

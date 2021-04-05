@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Lead from '../Lead/default';
+import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import './default.scss';
 
 const TTD = (customFields = {}) => {
+  const {
+    customFields: { content: title = 'Columnists', moreURL = '' },
+  } = customFields;
+
   const newCustomFields = {
     ...customFields,
     customFields: {
@@ -19,8 +24,9 @@ const TTD = (customFields = {}) => {
   };
 
   return (
-    <div className='c-ttd-feature'>
-      <Lead {...newCustomFields}/>
+    <div className="c-ttd-feature">
+      <FeatureTitle title={title} moreURL={moreURL} />
+      <Lead {...newCustomFields} />
     </div>
   );
 };
