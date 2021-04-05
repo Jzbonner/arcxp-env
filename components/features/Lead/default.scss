@@ -547,6 +547,11 @@
 
       @include breakpoint(desktop-sm) {
         max-width: none;
+        width: auto;
+      }
+
+      @include breakpoint(desktop-nav) {
+
       }
     }
 
@@ -579,6 +584,10 @@
       .homeList-text {
         @include breakpoint(desktop-sm) {
           max-width: 168px;
+        }
+
+        @include breakpoint(desktop-lg) {
+          max-width: none;
         }
 
         .headline {
