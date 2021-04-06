@@ -75,10 +75,10 @@
         display: block;
         color: #2e81b7;
 
-        @include text-styles(1.5625em, 1, "Average");
+        @include text-styles(1.5625em, 1, "Lora");
 
         @include breakpoint(desktop-sm) {
-          @include text-styles(1.875em, 1, "Average");
+          @include text-styles(1.875em, 1, "Lora");
         }
       }
 
@@ -100,10 +100,10 @@
         position: relative;
         top: 3px;
 
-        @include text-styles(1em, 1.44, "Average");
+        @include text-styles(1em, 1.44, "Lora");
 
         @include breakpoint(desktop-sm) {
-          @include text-styles(1.25em, 1.25, "Average");
+          @include text-styles(1.25em, 1.25, "Lora");
         }
       }
     }

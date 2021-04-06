@@ -1,37 +1,61 @@
 @import "./../../../src/styles/base";
 
 .c-sectionHome .c-contentElements .c-synopsis {
-  @include breakpoint(desktop-sm) {
+  @include breakpoint(tablet) {
     width: 100%;
   }
 
   @include breakpoint(desktop-lg) {
-    width: 35.5%;
+    width: 48.5%;
     margin-left: 3%;
-  }
-
-  @include breakpoint(desktop-xl) {
-    width: 35%;
-    margin-left: 2.5%;
   }
 }
 
 .c-synopsis {
-  @include breakpoint(desktop-sm) {
+  margin-bottom: $min-Msection-margin;
+
+  @include breakpoint(tablet) {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    padding-bottom: 5px;
   }
 
   @include breakpoint(desktop-lg) {
     flex-direction: column;
-    justify-content: initial;
     margin-top: -2px;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: $min-DTsection-margin;
   }
 
   .c-homeList {
-    @include breakpoint(desktop-sm) {
-      width: 47%;
+    margin-bottom: 15px;
+
+    &:nth-child(1) {
+      border-bottom: 1px solid #cdcdcd;
+      margin-bottom: 15px;
+    }
+
+    @include between-breakpoints(tablet, desktop-lg) {
+      width: 50%;
+      box-sizing: border-box;
+
+      &:nth-child(1) {
+        border-bottom: none;
+        margin-bottom: 0;
+
+        .homeList-text {
+          border-right: 1px solid #cdcdcd;
+        }
+        
+        .headline {
+          padding-right: 15px;
+        }
+      }
+
+      &:nth-child(2) {
+        padding-left: 15px;
+      }
     }
 
     @include breakpoint(desktop-lg) {
@@ -39,38 +63,17 @@
     }
 
     .c-label-wrapper {
-      text-align: left;
-      margin: .4rem 0 0;
-  
-      @include breakpoint(tablet) {
-        margin-bottom: .4rem;
-      }
-
-      @include breakpoint(desktop-sm) {
-        margin-top: .6rem;
-      }
-
-      a {
-        font-weight: 600;
-      }
-
-      .c-sponsor {
-        margin-bottom: .2rem;
-      }
+      display: none;
     }
 
     .headline {
       text-align: left;
-      letter-spacing: -.13px;
+      letter-spacing: -.46px;
 
-      @include text-styles(1.75rem, 1.14, "Average");
+      @include text-styles(1.625rem, 1.14, "Lora-Bold");
 
       @include between-breakpoints(tablet, desktop-lg) {
-        @include text-styles(1.375rem, 1.14, "Average");
-      }
-
-      @include breakpoint (desktop-lg) {
-        @include text-styles(1.4rem, 1.14, "Average");
+        @include text-styles(1.5rem, 1.25, "Lora-Bold");
       }
 
       a {
@@ -83,52 +86,30 @@
     }
 
     .homeList-text {
-      padding-bottom: .6rem;
-      border-bottom: 1px solid #cdcdcd;
       width: 100%;
       letter-spacing: -.32px;
 
-      @include text-styles(1rem, 1.5, "Average");
-
-      @include between-breakpoints(desktop-sm, desktop-lg) {
-        border-bottom: none;
-      }
+      @include text-styles(.875rem, 1.5, "Gordita");
 
       @include breakpoint(desktop-sm) {
         letter-spacing: -.28px;
-
-        @include text-styles(1.14rem, 1.14, "Average");
       }
 
-      .section-label {
-        @include text-styles(.75rem, 1, "Gordita");
+      @include between-breakpoints(tablet, desktop-lg) {
+        padding-bottom: 0;
       }
     }
 
-    &:first-child {
-
-      .c-label-wrapper {
-        @include breakpoint(desktop-sm) {
-          margin-top: 0;
-        }
-      }
+    .article-timestamp {
+      display: flex;
+      margin-bottom: 10px;
     }
+  }
 
-    &:last-child {
-
-      .homeList-text {
-        border: none;
-      }
-    }
-
-    &:nth-child(1),
-    &:nth-child(2) {
-      @include between-breakpoints(desktop-sm, desktop-lg) {
-        
-        .c-label-wrapper {
-          margin-top: 0;
-        }
-      }
-    }
+  .c-listItemPreview {
+    height: 4.5rem;
+    font-family: "Gordita";
+    font-size: .875rem;
+    margin-top: 10px;
   }
 }

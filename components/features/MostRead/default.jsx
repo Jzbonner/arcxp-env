@@ -25,7 +25,7 @@ const MostRead = () => {
 
   if (topStoriesData) {
     let counter = 0;
-    return <div className="c-mostRead b-margin-bottom-d30-m20"><div className="mostReadTitle">Most Read</div>
+    return <div className="c-mostRead"><div className="mostReadTitle">Most Read</div>
       <div className="mostReadList"> {
         topStoriesData.map((el) => {
           if (el.title && counter < 5) {

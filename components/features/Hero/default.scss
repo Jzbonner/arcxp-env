@@ -68,7 +68,7 @@
     }
 
     .headline-text {
-      @include text-styles(1.875rem, 1.23, "Average");
+      @include text-styles(1.875rem, 1.23, "Lora");
 
       padding: 1.4375em;
       letter-spacing: -.25px;
@@ -76,15 +76,15 @@
       color: #000;
 
       @include breakpoint(tablet) {
-        @include text-styles(1.25rem, 1.25, "Average");
+        @include text-styles(1.25rem, 1.25, "Lora");
       }
 
       @include breakpoint(desktop-sm) {
-        @include text-styles(1.5625rem, 1.2, "Average");
+        @include text-styles(1.5625rem, 1.2, "Lora");
       }
 
       @include breakpoint(desktop-lg) {
-        @include text-styles(2.1875rem, 1.29, "Average");
+        @include text-styles(2.1875rem, 1.29, "Lora");
       }
     }
   }

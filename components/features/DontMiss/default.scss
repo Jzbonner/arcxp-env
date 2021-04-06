@@ -1,6 +1,8 @@
 @import "../../../src/styles/base";
 
 .c-dontMiss {
+  margin-bottom: $min-Msection-margin;
+
   @include breakpoint(tablet) {
     padding: 0 20px;
     border-left: solid 1px #cdcdcd;
@@ -9,10 +11,24 @@
 
   @include breakpoint(desktop-sm) {
     width: 100%;
+    margin-bottom: $min-DTsection-margin;
   }
   
   .c-sectionTitle {
-    @include text-styles(2.5rem, 1, "Average");
+    @include text-styles(1.875rem, 1, "Gordita-Bold");
+
+    letter-spacing: -.38px;
+    margin-bottom: $min-margin;
+
+    @include between-breakpoints(tablet,desktop-sm) {
+      letter-spacing: -.31px;
+      
+      @include text-styles(1.563rem, 1, "Gordita-Bold");
+    }
+
+    @include breakpoint(desktop-sm) {
+      @include text-styles(1.875rem, 1, "Gordita-Bold");
+    }
   }
   
   .c-homeListContainer {
@@ -20,12 +36,25 @@
     &.no-photo-display-class.dontMissFeature {
   
       .c-homeList {
-        border-bottom: none;
-  
+        padding-top: $min-margin;
+        margin-right: 0;
+        border-bottom: 1px solid #cdcdcd;
+
+        &:first-child {
+          padding-top: 0;
+        }
+        
+        &:last-child {
+          border: none;
+        }
+
         .homeList-text {
+          margin-top: 0;
   
           .headline {
-            @include text-styles(1.25rem, 1.25, "Average");
+            letter-spacing: -.09px;
+
+            @include text-styles(1rem, 1.25, "Lora-Bold");
           }
         }
   

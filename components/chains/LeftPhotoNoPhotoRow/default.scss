@@ -1,0 +1,16 @@
+@import "./../../../src/styles/base";
+
+.c-LeftPhotoNoPhotoWrapper {
+  display: flex;
+  width: 100%;
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @include breakpoint(desktop-sm) {
+      flex-wrap: nowrap;
+    }
+  }
+}

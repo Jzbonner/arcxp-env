@@ -14,7 +14,7 @@ const Text = () => {
     let src = TextFeatureContent.replace(regex, '');
     src = src.replace(/<\/p>/g, '</p><br />');
     return (
-      <div className="c-textFeature b-margin-bottom-d40-m20">
+      <div className="c-textFeature">
         <h2
           className="c-textFeature-title"
           {...editableField('Text Feature Title')}

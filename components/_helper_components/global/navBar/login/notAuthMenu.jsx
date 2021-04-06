@@ -66,7 +66,7 @@ const NotAuthMenu = ({
         setShowUserMenu(!showUserMenu);
       }}
     >
-      Login
+      Log In
     </button>
   );
 
@@ -75,7 +75,9 @@ const NotAuthMenu = ({
       <div onClick={() => setShowUserMenu(!showUserMenu)}>
         <img src={userIconWhite} />
         <div data-mg2-action="login" className='login-text-bmenu'>Log In</div>
-        <ul className={`subNav-flyout itemCount-${links.length} logged-in`}>{RenderMenuLinks(links)}</ul>
+        <div className="subNav">
+          <ul className={`subNav-flyout itemCount-${links.length} logged-in`}>{RenderMenuLinks(links)}</ul>
+        </div>
     </div>
     );
   }

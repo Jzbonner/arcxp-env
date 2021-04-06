@@ -31,8 +31,12 @@ const RenderOutputType = (props) => {
   } = ads[currentEnv] || {};
   const { isEnabled: connextIsEnabled = false, environment: connextEnv } = connext[currentEnv] || {};
   const {
-    type = null, taxonomy, canonical_url: articleURL, _id: uuid,
+    type = null, taxonomy, canonical_url: articleURL, _id: uuid, promo_items: promoItems,
   } = globalContent || {};
+  let hasLeadGallery = false;
+  if (type === 'story') {
+    hasLeadGallery = promoItems?.basic?.type === 'gallery';
+  }
 
 
   const { tags = [], sections } = taxonomy || {};
@@ -46,16 +50,17 @@ const RenderOutputType = (props) => {
   fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
 
   return (
-    /* eslint-disable */
     <html>
       <head>
         <MetaTags />
         <SiteMeta />
         <GoogleStructuredData />
-        <AmpRelLink type={type} url={articleURL} noAmp={noAmp} />
+        {!hasLeadGallery && <AmpRelLink type={type} url={articleURL} noAmp={noAmp} />}
         <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} />
         <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} />
         <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`} />
+        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/Lora-Regular.ttf`)}`} />
+
         <CssLinks />
         {includeGtm && (
           <>
