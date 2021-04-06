@@ -23,7 +23,6 @@ const AmpVideoIframeOutputType = (props) => {
   const currentSite = arcSite || arcSiteFromProps;
   const {
     metrics,
-    favicon,
     devconActive,
     devconKey,
   } = getProperties(currentSite) || {};
@@ -54,7 +53,6 @@ const AmpVideoIframeOutputType = (props) => {
         {!noAds && <script async src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>}
         <Libs />
         {currentSite && <link rel="stylesheet" href={deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)} />}
-        <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}${favicon}`)} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>
