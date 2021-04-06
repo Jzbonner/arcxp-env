@@ -40,7 +40,6 @@ const WrapOutputType = (props) => {
     adsPrebidEnabled,
     devconActive,
     devconKey,
-    favicon,
     connext,
     cdnSite,
     cdnOrg,
@@ -105,7 +104,6 @@ const WrapOutputType = (props) => {
           && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />
         }
         {cssData}
-        <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
         <script type="text/javascript">
