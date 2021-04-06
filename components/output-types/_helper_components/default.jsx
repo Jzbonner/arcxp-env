@@ -23,7 +23,7 @@ const RenderOutputType = (props) => {
   const currentSite = arcSite || arcSiteFromProps;
   const currentEnv = fetchEnv();
   const {
-    hyperlocalTags, metrics, ads, favicon, connext, cdnSite, fbPagesId,
+    hyperlocalTags, metrics, ads, connext, cdnSite, fbPagesId,
   } = getProperties(currentSite) || {};
 
   const {
@@ -83,7 +83,6 @@ const RenderOutputType = (props) => {
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
         {currentSite && <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)}`} />}
-        <link rel="icon" type="image/x-icon" href={`${fullPathDomain}${deployment(`${contextPath}${favicon}`)}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
         <script type="text/javascript" dangerouslySetInnerHTML={{
