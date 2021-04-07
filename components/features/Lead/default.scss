@@ -569,7 +569,7 @@
         }
       }
 
-      @include breakpoint(desktop-lg) {
+      @include breakpoint(desktop-nav) {
         display: flex;
 
         &.left-photo {
@@ -610,6 +610,13 @@
 
       &:last-child {
         border-bottom: none;
+      }
+    }
+
+    .c-image-component .image-component-image {
+
+      .c-tease-icon {
+        display: none;
       }
     }
 
