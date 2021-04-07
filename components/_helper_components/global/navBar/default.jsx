@@ -61,7 +61,7 @@ const NavBar = ({
   const redesignSections = useContent({
     source: 'site-api',
     query: {
-      hierarchy: 'Topics Bar.',
+      hierarchy: 'Topics Bar',
     },
     filter: topNavFilter,
   });
