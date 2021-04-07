@@ -51,11 +51,11 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     }
   }
 
-  function getLists(apiData, start, limit) {
+  function getLists(apiData, start, limit, isTTDFeature = false) {
     const listLimit = limitOverride || limit;
     return apiData.map((el, i) => {
       if (start <= i && i < start + listLimit) {
-        return <ListItem key={`ListItem-${i}`} {...el} />;
+        return <ListItem key={`ListItem-${i}`} {...el} isTTDFeature={isTTDFeature} />;
       }
       return null;
     });
@@ -82,7 +82,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - Center Lead Top Photo':
         return <Headline {...apiData[startIndex]} isTease={true} />;
       case '7-Item TTD Feature':
-        return getLists(apiData, startIndex + 1, 3);
+        return getLists(apiData, startIndex + 1, 3, true);
       default:
         return null;
     }
@@ -101,7 +101,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
           </>
         );
       case '7-Item TTD Feature':
-        return getLists(apiData, startIndex + 4, 3);
+        return getLists(apiData, startIndex + 4, 3, true);
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex + 3, 2);
       default:

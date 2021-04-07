@@ -27,6 +27,7 @@ const ListItem = ({
   _id: id,
   isSynopsis = false,
   isDontMissFeature = false,
+  isTTDFeature = false,
 }) => {
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -50,6 +51,10 @@ const ListItem = ({
 
   const relativeURL = websiteUrl || canonicalUrl || '/';
   const isListPage = listPage ? 'listPage' : '';
+  let imageSizes = { width: 500, height: 282 };
+  if (isTTDFeature) {
+    imageSizes = { width: 110, height: 110 };
+  }
 
   function getPromoItem(sponsor) {
     // standalone video/gallery
@@ -59,8 +64,8 @@ const ListItem = ({
           <a href={relativeURL} className="homeList-image">
             <Image
               src={promoItems.basic}
-              width={500}
-              height={282}
+              width={imageSizes.width}
+              height={imageSizes.height}
               imageType="isHomepageImage"
               teaseContentType={contentType}
             />
@@ -78,8 +83,8 @@ const ListItem = ({
           <a href={relativeURL} className="homeList-image">
             <Image
               src={promoItems.basic || promoItems.lead_art.promo_items.basic}
-              width={500}
-              height={282}
+              width={imageSizes.width}
+              height={imageSizes.height}
               imageType="isHomepageImage"
             />
             {sponsor && (
@@ -101,8 +106,8 @@ const ListItem = ({
             <a href={relativeURL} className="homeList-image">
               <Image
                 src={promoItems.basic.promo_items.basic}
-                width={500}
-                height={282}
+                width={imageSizes.width}
+                height={imageSizes.height}
                 imageType="isHomepageImage"
               />
               {sponsor && (
@@ -119,8 +124,8 @@ const ListItem = ({
         <a href={relativeURL} className="homeList-image">
           <Image
             src={firstInlineImage}
-            width={500}
-            height={282}
+            width={imageSizes.width}
+            height={imageSizes.height}
             imageType="isHomepageImage"
           />
           {sponsor && <div className="c-sponsorOverlay">{sponsor}</div>}
@@ -187,6 +192,7 @@ ListItem.propTypes = {
   _id: PropTypes.string,
   isSynopsis: PropTypes.bool,
   isDontMissFeature: PropTypes.bool,
+  isTTDFeature: PropTypes.bool,
 };
 
 export default ListItem;

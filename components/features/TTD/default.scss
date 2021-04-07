@@ -4,22 +4,26 @@
   width: 100%;
 
   .c-homeLeadContainer {
-    display: flex;
-    flex-wrap: wrap;
-    
-    @include breakpoint(desktop-lg) {
-      flex-wrap: nowrap;
+    width: 100%;
+    position: relative;
+
+    @include between-breakpoints(tablet, desktop-lg) {
+      display: flex;
+      flex-wrap: wrap;
     }
 
     .column-1 {
-      flex: 1 100%;
+      width: 100%;
+
+      @include breakpoint(desktop-lg) {
+        max-width: 39.6884%;
+      }
 
       @include between-breakpoints(tablet, desktop-lg) {
         margin-bottom: 30px;
       }
 
       @include breakpoint(desktop-lg) {
-        flex: 1 35%;
         margin-right: 30px;
       }
 
@@ -32,7 +36,6 @@
 
         @include between-breakpoints(tablet, desktop-lg) {
           display: flex;
-          flex-wrap: wrap;
           padding-top: 0;
         }
 
@@ -65,16 +68,11 @@
         }
 
         .headline-box {
-          padding: 0;
+          padding: 20px 0;
           background: none;
           border-radius: 0;
           box-shadow: unset;
           top: 0;
-
-          @include between-breakpoints(tablet, desktop-lg) {
-            position: relative;
-            flex: 1 48%;
-          }
 
           @include breakpoint(tablet) {
             top: 10px;
@@ -82,7 +80,7 @@
 
           .headline {
             @include text-styles(1.5rem, 1.17, "Lora");
-            
+
             margin-bottom: 10px;
             letter-spacing: -.22px;
 
@@ -102,30 +100,46 @@
       }
     }
 
+    .column-3 {
+
+      .c-homeList {
+        @include between-breakpoints(mobile, tablet) {
+          
+          &:last-child {
+            border: none;
+          }
+        }
+      }
+    }
+
     .column-2,
     .column-3 {
-      flex: 1 100%;
-
+      width: 100%;
+      
       @include between-breakpoints(tablet, desktop-lg) {
-        flex: 1 48%;
+        flex: 1 47%;
       }
 
       @include breakpoint(desktop-lg) {
-        flex: 1 32%;
+        max-width: 30.1558%;
+        width: 100%;
       }
 
       .c-homeList {
         border-bottom: 1px solid #cdcdcd;
         padding: 0 0 15px;
-        position: relative;
+
+        &.isMissingPromo {
+          min-height: 80px;
+
+          @include breakpoint(desktop-sm) {
+            min-height: 104px;
+          }
+        }
 
         @include between-breakpoints(mobile, desktop-lg) {
           box-shadow: none;
           margin: 0 auto 15px;
-        }
-
-        @include between-breakpoints(desktop-lg,desktop-ttd-case) {
-          padding: 0 0 20px;
         }
 
         @include breakpoint(tablet) {
@@ -136,26 +150,28 @@
         }
 
         .homeList-text {
-          @include breakpoint(desktop-lg) {
-            max-width: calc(100% - 120px);
-            position: absolute;
-            right: 0;
-          }
+          padding: 0;
         }
 
         .homeList-image {
+          width: auto;
+          height: auto;
+          min-width: 80px;
+          min-height: 80px;
+          overflow: hidden;
+          
+          @include breakpoint(desktop-sm) {
+            min-width: 104px;
+            min-height: 104px;
+          }
 
           .c-image-component {
-
-            .homeList-text {
-              padding: 0;
-            }
 
             .image-component-image {
 
               .lazyload-wrapper {
-                width: 104px;
-                height: 104px;
+                width: 100%;
+                height: 100%;
 
                 img {
                   border-radius: 0;
