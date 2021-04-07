@@ -53,7 +53,7 @@ export default {
   },
   favicon: '/resources/icons/favicons/AJC/favicon.ico',
   appleIcon: '/resources/icons/appleTouch/ajc/favicon-apple-touch-icon-2.png',
-  weatherPageURL: '/atlanta-weather/',
+  weatherPageUrl: '/atlanta-weather/',
   adsPath: 'atlanta_np/ajc_web_default',
   adsTxt,
   appAdsTxt,
