@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import LazyLoad from 'react-lazyload';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import { buildSliderItems, getAmount } from './_helper_functions/index';
@@ -101,9 +102,16 @@ const Slider = (customFields = {}) => {
   }, []);
 
   return (
+    <LazyLoad
+    placeholder={<div className="c-placeholder-gallery" />}
+    height="100%"
+    width="100%"
+    offset={300}
+    overflow={true}
+    once={true}>
       <div ref={wrapperRef} className={`c-slider-wrapper
       b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
-      <FeatureTitle title={title} moreURL={moreURL} />
+        <FeatureTitle title={title} moreURL={moreURL} />
         <div className="c-slider">
           <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`}>
             <div ref={contentRef} className="itemList" style={{ transform: `translateX(${translateX}px)` }}>
@@ -126,6 +134,7 @@ const Slider = (customFields = {}) => {
           )}
         </div>
       </div>
+    </LazyLoad>
   );
 };
 
