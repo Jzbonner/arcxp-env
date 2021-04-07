@@ -2,16 +2,7 @@
 
 .border-top {
   border-top: 1px solid #cdcdcd;
-  width: 100%;
   margin-bottom: 10px;
-
-  &[class*="MP0"] {
-    display: flex;
-
-    @include breakpoint(tablet) {
-      display: none;
-    }
-  }
 
   &[class*="RP0"] {
     display: none;
@@ -22,11 +13,18 @@
     }
   }
 
-  &[class*="HP01"] {
-    display: none;
+  &.HS02 {
+    margin-bottom: 30px;
+  }
 
-    @include breakpoint(tablet) {
-      display: flex;
+  &.c-sectionHome {
+    @include between-breakpoints(mobile, tablet) {
+      width: 94%;
+      padding: 0;
     }
   }
+}
+
+.arc_ad[class*="HP0"].ccad-noslotshadow .border-top.HP02 {
+  display: none;
 }

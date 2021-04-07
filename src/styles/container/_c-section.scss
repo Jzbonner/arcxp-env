@@ -48,7 +48,6 @@
       }
 
       .c-HS02 {
-        padding: 20px 0;
         margin-bottom: 20px;
 
         @include breakpoint(tablet) {
@@ -108,7 +107,7 @@
         margin-right: -15px;
 
         .arcad:not(:empty) {
-          padding-top: 20px;
+          padding-top: 30px;
         }
       }
     }

@@ -512,4 +512,121 @@
       }
     }
   }
+
+  /////////////////////
+  // Left Photo No Photo Display Class Styles
+  /////////////////////
+
+  &.left-photo-no-photo-display-class {
+    
+    .column-1 {
+      margin-right: 15px;
+      padding-bottom: 30px;
+
+      @include breakpoint(tablet) {
+        padding-bottom: 0;
+      }
+
+      @include breakpoint(desktop-sm) {
+        margin-right: 30px;
+      }
+    }
+
+    .column-2 {
+      @include breakpoint(tablet) {
+        border-left: 1px solid #cdcdcd;
+        padding-left: 30px;
+      }
+    }
+
+    .column-1,
+    .column-2 {
+      @include breakpoint(tablet) {
+        max-width: 350px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        max-width: none;
+        width: auto;
+      }
+    }
+
+    .c-homeList {
+      border-bottom: 1px solid #cdcdcd;
+
+      @include breakpoint(tablet) {
+
+        .homeList-image {
+          margin-bottom: 1rem;
+        }
+      }
+
+      @include breakpoint(desktop-sm) {
+
+        &.left-photo {
+          display: flex;
+          flex-wrap: wrap;
+        }
+      }
+
+      @include breakpoint(desktop-nav) {
+        display: flex;
+
+        &.left-photo {
+          flex-wrap: nowrap;
+        }
+      }
+
+      .homeList-text {
+        @include breakpoint(desktop-sm) {
+          max-width: 168px;
+        }
+
+        @include breakpoint(desktop-lg) {
+          max-width: none;
+        }
+
+        .headline {
+          letter-spacing: -.1px;
+
+          @include text-styles(1.125rem, 1.22, "Lora-Bold");
+        }
+      }
+
+      &.no-photo {
+        padding-top: 15px;
+        width: 100%;
+
+        .homeList-text {
+          @include breakpoint(desktop-sm) {
+            width: 100%;
+          }
+
+          .headline {
+            @include text-styles(1rem, 1.38, "Lora");
+          }
+        }
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .c-image-component .image-component-image {
+
+      .c-tease-icon {
+        display: none;
+      }
+    }
+
+    .lazyload-wrapper {
+      width: 80px;
+      height: 80px;
+    }
+
+    img {
+      border-radius: 0;
+    }
+  }
 }

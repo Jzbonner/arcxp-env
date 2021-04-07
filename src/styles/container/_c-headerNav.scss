@@ -473,7 +473,7 @@
       &:hover {
 
         a {
-          color: #2e81b7;
+          color: #2e81b7 !important; /* stylelint-disable-line declaration-no-important */
         }
 
         :before {
@@ -489,6 +489,11 @@
         display: flex;
         align-items: center;
         white-space: nowrap;
+        text-decoration: none;
+        
+        a {
+          color: #212126;
+        }
       }
     }
 
@@ -1934,7 +1939,7 @@
             }
   
             .flyout-item {
-              width: 50%;
+              width: 95%;
               line-height: 1;
               height: auto;
               margin-right: 0;

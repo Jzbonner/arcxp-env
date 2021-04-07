@@ -26,6 +26,8 @@ const ListItem = ({
   showPreview,
   _id: id,
   isSynopsis = false,
+  displayClass,
+  hidePromo,
   isDontMissFeature = false,
   isTTDFeature = false,
 }) => {
@@ -51,12 +53,20 @@ const ListItem = ({
 
   const relativeURL = websiteUrl || canonicalUrl || '/';
   const isListPage = listPage ? 'listPage' : '';
-  let imageSizes = { width: 500, height: 282 };
+  let defaultPromoWidth = 500;
+  let defaultPromoHeight = 282;
   if (isTTDFeature) {
-    imageSizes = { width: 110, height: 110 };
+    defaultPromoWidth = 110;
+    defaultPromoHeight = 110;
   }
 
+  const isLeftPhotoNoPhotoItem = displayClass === 'Redesign Feature - Left Photo No Photo';
+  const leftPhotoNoPhotoSizeInt = 80;
+
   function getPromoItem(sponsor) {
+    const promoWidth = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoWidth;
+    const promoHeight = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoHeight;
+
     // standalone video/gallery
     if (contentType === 'video' || contentType === 'gallery') {
       if (promoItems && promoItems.basic) {
@@ -64,8 +74,8 @@ const ListItem = ({
           <a href={relativeURL} className="homeList-image">
             <Image
               src={promoItems.basic}
-              width={imageSizes.width}
-              height={imageSizes.height}
+              width={promoWidth}
+              height={promoHeight}
               imageType="isHomepageImage"
               teaseContentType={contentType}
             />
@@ -83,8 +93,8 @@ const ListItem = ({
           <a href={relativeURL} className="homeList-image">
             <Image
               src={promoItems.basic || promoItems.lead_art.promo_items.basic}
-              width={imageSizes.width}
-              height={imageSizes.height}
+              width={promoWidth}
+              height={promoHeight}
               imageType="isHomepageImage"
             />
             {sponsor && (
@@ -106,8 +116,8 @@ const ListItem = ({
             <a href={relativeURL} className="homeList-image">
               <Image
                 src={promoItems.basic.promo_items.basic}
-                width={imageSizes.width}
-                height={imageSizes.height}
+                width={promoWidth}
+                height={promoHeight}
                 imageType="isHomepageImage"
               />
               {sponsor && (
@@ -124,8 +134,8 @@ const ListItem = ({
         <a href={relativeURL} className="homeList-image">
           <Image
             src={firstInlineImage}
-            width={imageSizes.width}
-            height={imageSizes.height}
+            width={promoWidth}
+            height={promoHeight}
             imageType="isHomepageImage"
           />
           {sponsor && <div className="c-sponsorOverlay">{sponsor}</div>}
@@ -155,8 +165,8 @@ const ListItem = ({
   if (relativeURL === '/') return null;
 
   return (
-    <div className={`c-homeList ${isListPage} ${isMissingPromo}`}>
-      {getPromoItem(sponsorName)}
+    <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''}`}>
+      {!hidePromo && getPromoItem(sponsorName)}
       <div className="homeList-text">
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
         <div className={`headline ${isListPage}`}>
@@ -191,6 +201,8 @@ ListItem.propTypes = {
   showPreview: PropTypes.bool,
   _id: PropTypes.string,
   isSynopsis: PropTypes.bool,
+  displayClass: PropTypes.string,
+  hidePromo: PropTypes.bool,
   isDontMissFeature: PropTypes.bool,
   isTTDFeature: PropTypes.bool,
 };
