@@ -4,17 +4,53 @@
   width: 100%;
 
   .c-homeLeadContainer {
+    display: flex;
+    flex-wrap: wrap;
+    
+    @include breakpoint(desktop-lg) {
+      flex-wrap: nowrap;
+    }
 
     .column-1 {
-      max-width: 433px;
-      margin-right: 30px;
+      flex: 1 100%;
+
+      @include between-breakpoints(tablet, desktop-lg) {
+        margin-bottom: 30px;
+      }
+
+      @include breakpoint(desktop-lg) {
+        flex: 1 35%;
+        margin-right: 30px;
+      }
 
       .home-headline {
         overflow: initial;
 
+        @include between-breakpoints(mobile, desktop-lg) {
+          margin: 0 auto;
+        }
+
+        @include between-breakpoints(tablet, desktop-lg) {
+          display: flex;
+          flex-wrap: wrap;
+          padding-top: 0;
+        }
+
         .homeList-image {
+          margin-right: 0;
+
+          @include between-breakpoints(tablet, desktop-lg) {
+            flex: 1 50%;
+          }
+
+          @include breakpoint(tablet) {
+            margin-right: 1rem;
+          }
 
           .c-image-component {
+            @include between-breakpoints(tablet, desktop-lg) {
+              position: relative;
+            }
 
             .image-component-image {
 
@@ -33,31 +69,78 @@
           background: none;
           border-radius: 0;
           box-shadow: unset;
-          top: 30px;
+          top: 0;
+
+          @include between-breakpoints(tablet, desktop-lg) {
+            position: relative;
+            flex: 1 48%;
+          }
+
+          @include breakpoint(tablet) {
+            top: 10px;
+          }
 
           .headline {
             @include text-styles(1.5rem, 1.17, "Lora");
-
+            
+            margin-bottom: 10px;
             letter-spacing: -.22px;
+
+            @include between-breakpoints(tablet, desktop-lg) {
+              margin-top: 0;
+            }
           }
         }
       }
     }
 
     .column-2 {
-      margin-right: 30px;
+      margin: 30px 0 0;
+
+      @include breakpoint(tablet) {
+        margin: 0 30px 25px 0;
+      }
     }
 
     .column-2,
     .column-3 {
-      max-width: 329px;
+      flex: 1 100%;
+
+      @include between-breakpoints(tablet, desktop-lg) {
+        flex: 1 48%;
+      }
+
+      @include breakpoint(desktop-lg) {
+        flex: 1 32%;
+      }
 
       .c-homeList {
         border-bottom: 1px solid #cdcdcd;
         padding: 0 0 15px;
+        position: relative;
 
-        &:last-child {
-          border: none;
+        @include between-breakpoints(mobile, desktop-lg) {
+          box-shadow: none;
+          margin: 0 auto 15px;
+        }
+
+        @include between-breakpoints(desktop-lg,desktop-ttd-case) {
+          padding: 0 0 20px;
+        }
+
+        @include breakpoint(tablet) {
+
+          &:last-child {
+            border: none;
+          }
+        }
+
+        .homeList-text {
+          @include breakpoint(desktop-lg) {
+            max-width: calc(100% - 120px);
+            position: absolute;
+            right: 0;
+          }
         }
 
         .homeList-image {
