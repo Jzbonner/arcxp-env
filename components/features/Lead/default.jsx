@@ -31,8 +31,6 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     },
   });
 
-  console.log('DATA FROM LEAD ', data);
-
   function getDisplayClassMap(displayC) {
     switch (displayC) {
       case '5-Item Feature - Top Photo':
