@@ -29,6 +29,7 @@ const ListItem = ({
   displayClass,
   hidePromo,
   isDontMissFeature = false,
+  isTTDFeature = false,
 }) => {
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -52,15 +53,20 @@ const ListItem = ({
 
   const relativeURL = websiteUrl || canonicalUrl || '/';
   const isListPage = listPage ? 'listPage' : '';
+  let defaultPromoWidth = 500;
+  let defaultPromoHeight = 282;
+  if (isTTDFeature) {
+    defaultPromoWidth = 110;
+    defaultPromoHeight = 110;
+  }
 
   const isLeftPhotoNoPhotoItem = displayClass === 'Redesign Feature - Left Photo No Photo';
   const leftPhotoNoPhotoSizeInt = 80;
-  const defaultPromoWidth = 500;
-  const defaultPromoHeight = 282;
 
   function getPromoItem(sponsor) {
     const promoWidth = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoWidth;
     const promoHeight = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoHeight;
+
     // standalone video/gallery
     if (contentType === 'video' || contentType === 'gallery') {
       if (promoItems && promoItems.basic) {
@@ -198,6 +204,7 @@ ListItem.propTypes = {
   displayClass: PropTypes.string,
   hidePromo: PropTypes.bool,
   isDontMissFeature: PropTypes.bool,
+  isTTDFeature: PropTypes.bool,
 };
 
 export default ListItem;

@@ -13,11 +13,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
   const { arcSite } = fusionContext;
 
   const {
-    content: { contentService = 'collections-api', contentConfigValues } = {},
-    displayClass = '',
-    title = '',
-    columns = 1,
-    moreURL,
+    content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', title = '', columns = 1, moreURL,
   } = customFields;
 
   let { from: startIndex = 1 } = contentConfigValues || {};
@@ -48,6 +44,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - Top Photo':
         return 'top-photo-display-class';
       case '5-Item Feature - Left Photo':
+      case '7-Item TTD Feature':
         return 'left-photo-display-class';
       case '5-Item Feature - No Photo':
         return 'no-photo-display-class';
@@ -62,11 +59,11 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     }
   }
 
-  function getLists(apiData, start, limit) {
+  function getLists(apiData, start, limit, isTTDFeature = false) {
     const listLimit = limitOverride || limit;
     return apiData.map((el, i) => {
       if (start <= i && i < start + listLimit) {
-        return <ListItem key={`ListItem-${i}`} displayClass={displayClass} hidePromo={((isLeftNoPhotoFeature && i !== 1 && i !== 5) || false)} {...el} />;
+        return <ListItem key={`ListItem-${i}`} displayClass={displayClass} hidePromo={((isLeftNoPhotoFeature && i !== 1 && i !== 5) || false)} isTTDFeature={isTTDFeature} {...el} />;
       }
       return null;
     });
@@ -77,9 +74,9 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex + 1, 2);
       case '1 or 2 Item Feature':
-        return [...Array(parseInt(columns, 10)).keys()].map(i => (
-          <Headline key={i} {...apiData[startIndex + i]} isTease={true} />
-        ));
+        return [...Array(parseInt(columns, 10)).keys()].map(i => <Headline key={i} {...apiData[startIndex + i]} isTease={true} />);
+      case '7-Item TTD Feature':
+        return <Headline {...apiData[startIndex]} isTease={true} />;
       case 'Redesign Feature - Left Photo No Photo':
         return getLists(apiData, startIndex + 1, 5);
       default:
@@ -94,6 +91,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - No Photo':
       case '5-Item Feature - Center Lead Top Photo':
         return <Headline {...apiData[startIndex]} isTease={true} />;
+      case '7-Item TTD Feature':
+        return getLists(apiData, startIndex + 1, 3, true);
       case 'Redesign Feature - Left Photo No Photo':
         return getLists(apiData, startIndex + 5, 9);
       default:
@@ -113,6 +112,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
             {getLists(apiData, startIndex + 1, 4)}
           </>
         );
+      case '7-Item TTD Feature':
+        return getLists(apiData, startIndex + 4, 3, true);
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex + 3, 2);
       default:
@@ -137,20 +138,10 @@ const Lead = ({ customFields = {}, limitOverride }) => {
 
   if (Array.isArray(data)) {
     return (
-      <div
-        className={`c-homeLeadContainer ${getDisplayClassMap(
-          displayClass,
-        )} ${getColumnsMap(columns)}`}
-      >
-        {renderColumn1(displayClass, data) && (
-          <div className="column-1">{renderColumn1(displayClass, data)}</div>
-        )}
-        {renderColumn2(displayClass, data) && (
-          <div className="column-2">{renderColumn2(displayClass, data)}</div>
-        )}
-        {renderColumn3(displayClass, data) && (
-          <div className="column-3">{renderColumn3(displayClass, data)}</div>
-        )}
+      <div className={`c-homeLeadContainer ${getDisplayClassMap(displayClass)} ${getColumnsMap(columns)}`}>
+        {renderColumn1(displayClass, data) && <div className="column-1">{renderColumn1(displayClass, data)}</div>}
+        {renderColumn2(displayClass, data) && <div className="column-2">{renderColumn2(displayClass, data)}</div>}
+        {renderColumn3(displayClass, data) && <div className="column-3">{renderColumn3(displayClass, data)}</div>}
       </div>
     );
   }
@@ -163,14 +154,7 @@ Lead.propTypes = {
     content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
       name: 'Content',
     }),
-    displayClass: PropTypes.oneOf([
-      '5-Item Feature - Top Photo',
-      '5-Item Feature - Left Photo',
-      '5-Item Feature - No Photo',
-      '5-Item Feature - Center Lead Top Photo',
-      '1 or 2 Item Feature',
-      'Redesign Feature - Left Photo No Photo',
-    ]).tag({
+    displayClass: PropTypes.oneOf(['5-Item Feature - Top Photo', '5-Item Feature - Left Photo', '5-Item Feature - No Photo', '5-Item Feature - Center Lead Top Photo', '1 or 2 Item Feature', '7-Item TTD Feature', 'Redesign Feature - Left Photo No Photo']).tag({
       name: 'Display Class',
       defaultValue: '5-Item Feature - Top Photo',
     }),
