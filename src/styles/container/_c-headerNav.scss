@@ -490,7 +490,7 @@
         align-items: center;
         white-space: nowrap;
         text-decoration: none;
-        
+
         a {
           color: #212126;
         }
@@ -1203,11 +1203,11 @@
 
         &.content {
           width: auto;
-  
+
           .sticky-logo-homepage {
             display: none;
           }
-  
+
           .stickyNav-homepage {
             display: none;
           }
@@ -1839,7 +1839,7 @@
         left: 85px;
         right: unset;
 
-        @include between-breakpoints(tablet, desktop-sm) {
+        @include between-breakpoints(mobile-lg, desktop-sm) {
           top: 120px;
           right: 0;
           left: unset;
@@ -1933,21 +1933,21 @@
             align-content: unset;
             height: auto;
             writing-mode: unset;
-  
+
             @include between-breakpoints(mobile,tablet) {
               height: auto;
             }
-  
+
             .flyout-item {
               width: 95%;
               line-height: 1;
               height: auto;
               margin-right: 0;
               white-space: normal;
-  
+
               a {
                 @include text-styles(.875rem, 1, "Gordita");
-  
+
                 color: #fff;
                 font-weight: 200;
                 text-decoration: none;
@@ -1957,11 +1957,11 @@
                 width: 25%;
               }
             }
-  
+
             @include between-breakpoints(mobile, tablet) {
               columns: 2;
               display: block;
-  
+
               .flyout-item:nth-child(1),
               .flyout-item:nth-child(3) {
                 padding-bottom: 9px;
