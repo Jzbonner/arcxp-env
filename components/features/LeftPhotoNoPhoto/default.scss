@@ -1,0 +1,64 @@
+@import "./../../../src/styles/base";
+
+.c-LeftPhotoNoPhotoRow {
+
+  &:first-child {
+    @include breakpoint(tablet) {
+      margin-right: 0;
+    }
+
+    @include breakpoint(desktop-sm) {
+      margin-right: 55px;
+    }
+
+    .LeftPhotoNoPhoto:before {
+      display: none;
+    }
+  }
+
+  &:last-child {
+    border-bottom: 1px solid #cdcdcd;
+
+    @include breakpoint(desktop-sm) {
+      border-bottom: none;
+    }
+  }
+
+  .LeftPhotoNoPhoto {
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-left: 1px solid #cdcdcd;
+      left: -30px;
+      top: -30px;
+      z-index: -1;
+    }
+  }
+
+  @include breakpoint(desktop-sm) {
+    margin-top: 35px;
+    margin-bottom: 15px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @include breakpoint(desktop-sm) {
+      flex-wrap: nowrap;
+    }
+  }
+
+  .c-sectionTitle {
+    @include text-styles(1.875rem, 1, "Gordita-Bold");
+
+    @include breakpoint(desktop-sm) {
+      margin-bottom: 15px;
+    }
+  }
+}

@@ -5,6 +5,7 @@ import getProperties from 'fusion:properties';
 import fetchEnv from '../../../_helper_components/global/utils/environment';
 import deferThis from '../../../_helper_components/global/utils/deferLoading';
 import ArcAdLib from './children/ArcAdLib';
+import '../default.scss';
 
 const AdSetup = ({
   id, slotName, adSlotNameForArcAds, dimensions, display, breakpoints, refresh, targeting, bidding, className, prerender, dfpId, lazyLoad,
@@ -28,6 +29,9 @@ const AdSetup = ({
     });
   }
   const name = slotName;
+  const fullWidthAd = ['HP01', 'HP02', 'HS02', 'MP01', 'MP02', 'MP03', 'MP04', 'RP01', 'RP09'];
+
+  const borderTop = fullWidthAd.includes(name) ? <div className={`c-sectionHome border-top ${name}`}></div> : null;
 
   useEffect(() => {
     const instance = ArcAdLib.getInstance();
@@ -134,10 +138,13 @@ const AdSetup = ({
   }, []);
 
   return (
-    <div className={className}>
-      <div id={id} className={`${slotName} arcad b-margin-bottom-d40-m20`} />
-      {slotName === 'HP02' ? <div className='hp-interscroller__placeholder full-width'></div> : ''}
-    </div>
+    <>
+      <div className={className}>
+        {borderTop}
+        <div id={id} className={`${slotName} arcad b-margin-bottom-d40-m20`} />
+        {slotName === 'HP02' ? <div className='hp-interscroller__placeholder full-width'></div> : ''}
+      </div>
+    </>
   );
 };
 

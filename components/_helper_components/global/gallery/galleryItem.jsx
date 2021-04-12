@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from '../image/old';
+import Image from '../image/default';
 
 const GalleryItem = ({
-  data, func, modalFunc, calculateTranslateX,
+  data, func, modalFunc, isMobileGallery = false,
 }) => {
   const {
     url, width, height, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass,
@@ -19,9 +19,10 @@ const GalleryItem = ({
   if (affiliationCredit && !affiliationCredit.includes('Credit:')) affiliationCredit = `Credit: ${affiliationCredit}`;
 
   const imageProps = {
-    width,
-    height,
+    width: 720,
+    height: 480,
     imageType: 'isGalleryImage',
+    noLazyLoad: isMobileGallery,
     ampPage: false,
     src: {
       url,
@@ -37,18 +38,12 @@ const GalleryItem = ({
       data-index={index}
       key={url}
       onClick={func}
-      className={`${isStickyVisible ? `gallery-full-item ${isCaptionOn ? lastItemClass : ''}` : 'gallery-image'}
-      ${lastItemClass && isStickyVisible && !isCaptionOn ? 'last-item-height-fix-no-caption' : ''}
-      ${!isStickyVisible && isMobile ? 'mosaic-container' : ''}
-      ${!isMobile ? 'desktop-image' : ''}
-      `}
-      >
+      className={`${isStickyVisible ? `gallery-full-item ${isCaptionOn ? lastItemClass : ''}` : 'gallery-image'} ${lastItemClass && isStickyVisible && !isCaptionOn ? 'last-item-height-fix-no-caption' : ''} ${!isStickyVisible && isMobile ? 'mosaic-container' : ''} ${!isMobile ? 'desktop-image' : ''}`}
+    >
       {url && <Image
         {...imageProps}
-        classes={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
+        additionalClasses={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
         onClickRun={modalFunc ? () => modalFunc(url, isModalVisible) : null}
-        customScrollContainerEl="#MOBILE_GALLERY"
-        lazyLoadCallback={calculateTranslateX}
       />}
       {
         isStickyVisible
@@ -87,7 +82,7 @@ GalleryItem.propTypes = {
   func: PropTypes.func,
   lastItemClass: PropTypes.string,
   modalFunc: PropTypes.func,
-  calculateTranslateX: PropTypes.func,
+  isMobileGallery: PropTypes.bool,
 };
 
 export default GalleryItem;

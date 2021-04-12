@@ -27,12 +27,12 @@ const DontMiss = (customFields = {}) => {
 
   if (Array.isArray(data)) {
     return (
-      <div className="c-dontMiss b-margin-bottom-d40-m20">
+      <div className="c-dontMiss">
         <FeatureTitle title={title}/>
         <div className="c-homeListContainer no-photo-display-class dontMissFeature">
         {data.map((el, i) => {
           if (i < 3) {
-            return <ListItem key={`ListItem-${i}`} {...el} />;
+            return <ListItem key={`ListItem-${i}`} {...el} isDontMissFeature/>;
           }
           return null;
         })}

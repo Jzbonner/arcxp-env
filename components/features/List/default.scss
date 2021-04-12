@@ -6,6 +6,15 @@
   justify-content: flex-start;
 
   &.hasNativoAd {
+    @include breakpoint(desktop-sm) {
+
+      .ntv-hp1 {
+
+        .homeList-image {
+          margin-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
+        }
+      }
+    }
 
     .c-homeList:last-child {
       display: none;
@@ -14,6 +23,10 @@
 
   a {
     color: inherit;
+  }
+
+  .article-timestamp {
+    line-height: 1;
   }
 
   // Common Styles Used By All the Display Classes
@@ -40,6 +53,7 @@
       position: relative;
       display: inline-block;
       height: fit-content;
+      margin-bottom: $min-margin;
     }
 
     .image-component-image img {
@@ -51,6 +65,7 @@
 
       .c-label-wrapper {
         margin: .6rem 0 .2rem;
+        text-align: left;
 
         &:empty {
           display: none;
@@ -63,26 +78,23 @@
         .section-label {
           font-size: .75rem;
           font-weight: 600;
+
+          &.ntv-disc {
+            background-color: inherit;
+            padding: 0;
+            
+            a {
+              color: #000 !important; /* stylelint-disable-line declaration-no-important */
+            }
+          }
         }
       }
 
       .headline {
-        @include text-styles(1.25rem, 1.25, "Average");
+        @include text-styles(1rem, 1.38, "Lora");
 
-        letter-spacing: -.24px;
-        text-align: center;
-
-        @include breakpoint(desktop-sm) {
-          @include text-styles(1.1rem, 1.28, "Average");
-        }
-
-        @include breakpoint(desktop-lg) {
-          @include text-styles(1.2rem, 1.31, "Average");
-        }
-
-        @media (min-width: 1500px) {
-          @include text-styles(1.3rem, 1.31, "Average");
-        }
+        letter-spacing: -.09px;
+        margin-bottom: 10px;
       }
     }
   }
@@ -213,7 +225,7 @@
 
     .homeList-text {
       margin: 0 $min-margin;
-      text-align: center;
+      text-align: left;
 
       @include breakpoint(tablet) {
         margin: 0;
@@ -221,7 +233,7 @@
     }
 
     .headline {
-      text-align: center;
+      text-align: left;
     }
   }
 
@@ -233,6 +245,10 @@
     .c-homeList {
       margin-bottom: 40px;
       display: flex;
+
+      .article-timestamp {
+        margin-left: 15px;
+      }
 
       .c-sponsorOverlay,
       .image-component-image .sponsored-story {
@@ -252,22 +268,13 @@
         }
 
         .c-label-wrapper {
-          margin: 0 0 7px 15px;
+          margin: 0 0 6px 15px;
           text-align: left;
         }
 
         .headline {
           text-align: left;
           margin-left: 15px;
-          font-size: 1rem;
-
-          @include breakpoint(desktop-sm) {
-            font-size: 1.1rem;
-          }
-
-          @include breakpoint(desktop-lg) {
-            font-size: 1.2rem;
-          }
 
           &.listPage {
             text-align: left;
@@ -290,6 +297,10 @@
           width: 100%;
           max-width: 100%;
         }
+      }
+
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }
@@ -324,13 +335,9 @@
       }
 
       .headline {
-        letter-spacing: -.32px;
+        @include text-styles(1rem, 1.38, "Lora");
 
-        @include text-styles(1rem, 1.4, "Average");
-
-        @include breakpoint(tablet) {
-          @include text-styles(1rem, 1.2, "Average");
-        }
+        letter-spacing: -.09px;
       }
     }
   }
@@ -357,8 +364,12 @@
       }
 
       .homeList-text {
-        padding-bottom: .6rem;
+        margin: $min-margin 0;
         width: 100%;
+      }
+
+      &:last-child {
+        border-bottom: none;
       }
     }
   }

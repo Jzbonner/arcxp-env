@@ -1,8 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './default.scss';
+import Schedule from '../Schedule/default';
+import Leaderboard from '../Leaderboard/default';
 
-const Golf = () => <h1>Under Construction</h1>;
+const Golf = ({ customFields = {} }) => {
+  const {
+    widgetName,
+  } = customFields;
+
+  switch (widgetName) {
+    case 'Schedule':
+      return <Schedule />;
+    case 'Leaderboard':
+      return <Leaderboard />;
+    default:
+      return <h1>{widgetName} is Under Construction</h1>;
+  }
+};
 
 Golf.propTypes = {
   customFields: PropTypes.shape({

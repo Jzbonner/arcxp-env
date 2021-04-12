@@ -28,7 +28,7 @@ const Columnist = (customFields = {}) => {
 
   if (Array.isArray(data)) {
     return (
-      <div className="c-columnistFeature b-margin-bottom-d30-m20">
+      <div className="c-columnistFeature">
         <FeatureTitle title={title && title.length > 0 ? title : 'Columnists'} moreURL={moreURL} />
         <ul className="c-columnistList">
           {data.map((story, idx) => {

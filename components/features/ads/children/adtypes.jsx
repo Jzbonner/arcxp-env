@@ -156,11 +156,11 @@ export const adSlots = {
     dimensions: [
       [
         [300, 600],
-        [300, 250], // tablet+
+        [300, 250], // desktop+
       ],
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop+
     ],
     bidding: {
       amazon: {
@@ -174,10 +174,10 @@ export const adSlots = {
     dimensions: [
       [
         [300, 250],
-      ], // tablet+
+      ], // desktop+
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop+
     ],
     bidding: {
       amazon: {
@@ -191,10 +191,10 @@ export const adSlots = {
     dimensions: [
       [
         [300, 600],
-      ], // tablet+
+      ], // desktop+
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop+
     ],
     bidding: {
       amazon: {
@@ -208,12 +208,32 @@ export const adSlots = {
       [
         [300, 600],
         [300, 250],
-      ], // tablet+
+      ], // desktop+
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop+
     ],
     isSticky: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
+  'RP01 tablet': {
+    slotName: 'RP01',
+    biddingName: 'RP01-tablet',
+    dimensions: [
+      [], // desktop
+      [
+        [300, 600],
+        [300, 250], // tablet
+      ],
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
+    ],
     bidding: {
       amazon: {
         enabled: true,
@@ -300,10 +320,10 @@ export const adSlots = {
   },
   RP02: {
     dimensions: [
-      [300, 100], // tablet+
+      [300, 100], // desktop+
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop+
     ],
   },
   'RP03 sticky': {
@@ -312,10 +332,10 @@ export const adSlots = {
       [
         [300, 250],
         [300, 600],
-      ], // tablet+
+      ], // desktop+
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop+
     ],
     isSticky: true,
     bidding: {
@@ -371,10 +391,10 @@ export const adSlots = {
     dimensions: [
       [
         [300, 250],
-      ], // tablet+
+      ], // desktop+
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop+
     ],
     bidding: {
       amazon: {
@@ -388,10 +408,10 @@ export const adSlots = {
       [
         [300, 250],
         [300, 600],
-      ], // tablet+
+      ], // desktop+
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop+
     ],
     isSticky: true,
     bidding: {

@@ -75,16 +75,16 @@
             "bidder": "aol",
             "labels": ["desktop2"],
             "params": {
-              "placement": "5174473",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a96904001787821bdfa26c1c9e80164"
             }
           },
           {
             "bidder": "aol",
             "labels": ["tablet1"],
             "params": {
-              "placement": "5174481",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a969c4f01787821b9d626c50a02016d"
             }
           },
           {
@@ -128,16 +128,16 @@
             "bidder": "aol",
             "labels": ["desktop1"],
             "params": {
-              "placement": "5174475",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a9694fd01787821c15726c21cb7018d"
             }
           },
           {
             "bidder": "aol",
             "labels": ["tablet1"],
             "params": {
-              "placement": "5174480",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a9694fd01787821c15726c563580193"
             }
           },
           {
@@ -201,24 +201,24 @@
             "bidder": "aol",
             "labels": ["desktop1"],
             "params": {
-              "placement": "5174478",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a9694fd01787821c15726c3f49b0190"
             }
           },
           {
             "bidder": "aol",
             "labels": ["tablet1"],
             "params": {
-              "placement": "5174479",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a96904001787821bdfa26c5987e0168"
             }
           },
           {
             "bidder": "aol",
             "labels": ["phone"],
             "params": {
-              "placement": "5174489",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c8ed460197",
+              "pos": "8a969c4f01787821b9d626c914dc016f"
             }
           },
           {
@@ -280,16 +280,16 @@
             "bidder": "aol",
             "labels": ["desktop2"],
             "params": {
-              "placement": "5174472",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a969c4f01787821b9d626c253bb016a"
             }
           },
           {
             "bidder": "aol",
             "labels": ["tablet1"],
             "params": {
-              "placement": "5174484",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a96904001787821bdfa26c5d78e0169"
             }
           },
           {
@@ -333,16 +333,16 @@
             "bidder": "aol",
             "labels": ["desktop"],
             "params": {
-              "placement": "5174477",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a96904001787821bdfa26c2c4190165"
             }
           },
           {
             "bidder": "aol",
             "labels": ["tablet"],
             "params": {
-              "placement": "5174486",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a96904001787821bdfa26c671ba016b"
             }
           },
           {
@@ -386,16 +386,16 @@
             "bidder": "aol",
             "labels": ["desktop3"],
             "params": {
-              "placement": "5257395",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a9694fd01787821c15726c28bd7018e"
             }
           },
           {
             "bidder": "aol",
             "labels": ["tablet2"],
             "params": {
-              "placement": "5257398",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a9694fd01787821c15726c608220194"
             }
           },
           {
@@ -439,16 +439,16 @@
             "bidder": "aol",
             "labels": ["desktop4"],
             "params": {
-              "placement": "5257394",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a969c4f01787821b9d626c303ea016b"
             }
           },
           {
             "bidder": "aol",
             "labels": ["tablet3"],
             "params": {
-              "placement": "5257399",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a96904001787821bdfa26c6488b016a"
             }
           },
           {
@@ -492,8 +492,8 @@
             "bidder": "aol",
             "labels": ["tablet"],
             "params": {
-              "placement": "5174483",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a9694fd01787821c15726c698f40195"
             }
           },
           {
@@ -537,16 +537,16 @@
             "bidder": "aol",
             "labels": ["desktop"],
             "params": {
-              "placement": "5174471",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a96904001787821bdfa26c337da0166"
             }
           },
           {
             "bidder": "aol",
             "labels": ["tablet"],
             "params": {
-              "placement": "5174485",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a96904001787821bdfa26c6bd83016d"
             }
           },
           {
@@ -590,16 +590,16 @@
             "bidder": "aol",
             "labels": ["desktop"],
             "params": {
-              "placement": "5174476",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a969c4f01787821b9d626c391a2016c"
             }
           },
           {
             "bidder": "aol",
             "labels": ["tablet"],
             "params": {
-              "placement": "5174482",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a969c4f01787821b9d626c72777016e"
             }
           },
           {
@@ -643,16 +643,16 @@
             "bidder": "aol",
             "labels": ["desktop3"],
             "params": {
-              "placement": "5257396",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a96904001787821bdfa26c35eb00167"
             }
           },
           {
             "bidder": "aol",
             "labels": ["tablet2"],
             "params": {
-              "placement": "5257397",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a9694fd01787821c15726c6e62a0196"
             }
           },
           {
@@ -696,8 +696,8 @@
             "bidder": "aol",
             "labels": ["desktop"],
             "params": {
-              "placement": "5174474",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a9694fd01787821c15726c3c00c018f"
             }
           },
           {
@@ -741,8 +741,8 @@
             "bidder": "aol",
             "labels": ["phone1"],
             "params": {
-              "placement": "5174488",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c8ed460197",
+              "pos": "8a96904001787821bdfa26c953310170"
             }
           },
           {
@@ -786,8 +786,8 @@
             "bidder": "aol",
             "labels": ["phone"],
             "params": {
-              "placement": "5174492",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c8ed460197",
+              "pos": "8a969c4f01787821b9d626c9dd290170"
             }
           },
           {
@@ -831,8 +831,8 @@
             "bidder": "aol",
             "labels": ["phone"],
             "params": {
-              "placement": "5174487",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c8ed460197",
+              "pos": "8a969c4f01787821b9d626ca05b90171"
             }
           },
           {
@@ -876,8 +876,8 @@
             "bidder": "aol",
             "labels": ["phone"],
             "params": {
-              "placement": "5174491",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c8ed460197",
+              "pos": "8a969c4f01787821b9d626ca2f7b0174"
             }
           },
           {
@@ -921,8 +921,8 @@
             "bidder": "aol",
             "labels": ["phone"],
             "params": {
-              "placement": "5174490",
-              "network": "11741.1"
+              "dcn": "8a9694fd01787821c15726c8ed460197",
+              "pos": "8a969c4f01787821b9d626ca5da10181"
             }
           },
           {

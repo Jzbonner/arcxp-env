@@ -16,6 +16,7 @@ const List = (customFields = {}) => {
     },
   } = customFields;
 
+
   let { from: startIndex = 1, size: itemLimit = 0 } = contentConfigValues || {};
   startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
   itemLimit = parseInt(itemLimit, 10) || 0;

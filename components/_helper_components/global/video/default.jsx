@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext, useAppContext } from 'fusion:context';
-import { useContent } from 'fusion:content';
 import get from 'lodash.get';
 import fetchEnv from '../utils/environment';
 import Caption from '../caption/default.jsx';
@@ -29,15 +28,6 @@ const Video = ({
     const { taxonomy: gcTax } = globalContent;
     pageTax = gcTax;
   }
-
-  const videoApiData = useContent({
-    source: 'video-api',
-    query: {
-      uuid: videoID,
-    },
-  });
-
-  const videoLink = videoApiData && videoApiData.streams && videoApiData.streams[0] ? videoApiData.streams[0].url : '';
 
   const { basic: videoCaption } = src.description ? src.description : {};
   const { startPlaying, muteON, autoplayNext } = featuredVideoPlayerRules || inlineVideoPlayerRules;
@@ -74,12 +64,16 @@ const Video = ({
     window.powaVideos = window.powaVideos || [];
     // we can't rely on the `isLeadVideo` value once the onPowaRendered event fires, so we track the videos & lead-state separately
     window.powaVideos.push(vidId, isLeadVideo);
+    window.PoWaSettings = window.PoWaSettings || {};
     if (adTag) {
-      window.PoWaSettings = window.PoWaSettings || {};
       window.PoWaSettings.advertising = window.PoWaSettings.advertising || {};
       window.PoWaSettings.advertising.adBar = { skipControl: false };
       window.PoWaSettings.advertising.adTag = adTag;
     }
+    window.PoWaSettings.container = {
+      ...window.PoWaSettings.container,
+      shadowDOM: false,
+    };
     let videoTotalTime;
     let videoTitle;
     let videoPlayType;
@@ -438,25 +432,40 @@ const Video = ({
       {isLeadVideo && lazyLoad && <div className="video-blocker" />}
     </>
   );
-  const ampImaPlayer = () => (
-    <amp-ima-video width="16" height="9" layout="responsive" data-tag={adTag} data-poster={thumbnailImage} autoplay={!lazyLoad && startPlaying ? '' : null} amp-access={lazyLoad ? 'Error=true OR AccessLevel="Full Content Access"' : null} amp-access-hide={lazyLoad ? '' : null}>
-      <source src={videoLink} type="video/mp4"></source>
-      <source src={videoLink} type="video/webm"></source>
-    </amp-ima-video>
+  const { width: vidWidth } = src && src.streams && src.streams[0] ? src.streams[0] : {};
+  const { height: vidHeight } = src && src.streams && src.streams[0] ? src.streams[0] : {};
+  const encodedAdTag = encodeURIComponent(adTag).replace(/'/g, '%27').replace(/"/g, '%22');
+
+  const ampIframe = () => (
+    <>
+    <amp-iframe
+    layout="responsive"
+    src={`https://${orgOfRecord}.video-player.arcpublishing.com/${currentEnv}/powaEmbed.html?org=${orgOfRecord}&uuid=${vidId}&powa-ad-tag=${encodedAdTag}&autoinit=native-hls&playthrough=true&discovery=true&powa-autoplay=${!isInlineVideo}&powa-muted=${!isInlineVideo}`}
+    width={`${vidWidth}`}
+    height={`${vidHeight}`}
+    allow='autoplay'
+    sandbox="allow-scripts allow-same-origin allow-popups"
+    scrolling="no"
+    allowfullscreen
+    >
+    <amp-img layout="fill" src={thumbnailImage} placeholder></amp-img>
+    <div overflow tabIndex="0" role="button" aria-label="Watch more" style={{ display: 'none' }}>Watch more!</div>
+</amp-iframe>
+  </>
   );
   const renderAmpPlayer = () => (
     <>
       {lazyLoad && (
         <>
           <div amp-access='Error=true OR AccessLevel="Full Content Access"' amp-access-hide>
-            {ampImaPlayer()}
+            {ampIframe()}
           </div>
           <div amp-access='Error!=true AND AccessLevel!="Full Content Access"'>
             <amp-img src={thumbnailImage} width="16" height="9" layout="responsive" />
           </div>
         </>
       )}
-      {!lazyLoad && ampImaPlayer()}
+      {!lazyLoad && ampIframe()}
     </>
   );
   return (

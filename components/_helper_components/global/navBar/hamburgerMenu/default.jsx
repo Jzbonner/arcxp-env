@@ -9,7 +9,7 @@ import '../../../../../src/styles/container/_c-headerNav.scss';
 
 const HamburgerMenu = ({
   sections, hamburgerToggle, isMobile, setToggle, rootDirectory, whiteLogoRedesign,
-  stickyActive, siteName, hasWindowShade, closeButton, burgerMenuBackground, navFooterContent,
+  stickyActive, siteName, closeButton, burgerMenuBackground, navFooterContent,
 }) => {
   const [isTablet, setTabletState] = useState(false);
   const windowExists = typeof window !== 'undefined';
@@ -34,7 +34,6 @@ const HamburgerMenu = ({
   <div className={`nav-wrapper ${hamburgerToggle ? 'isVisible' : ''}`}></div>
   <nav className={`
   ${hamburgerToggle ? 'mobile-nav-activated' : ''}
-  ${(stickyActive || hasWindowShade) && !isMobile ? 'is-hidden' : ''}
   nav-mobile`}>
     {isTablet && <div className='nav-mobile-login'>
         <Login isMobile={isMobile} isFlyout={isMobile} isSidebar/>

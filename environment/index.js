@@ -4,4 +4,7 @@ module.exports = {
   weatherAlertsAPIkey: 'dJWlnHeXb06XuqExRDXpJ3fk4vOTzxyg4Um7TG5Z',
   RESIZER_SECRET_KEY_OLD: 'Fmkgru2rZ2uPZ5wXs7B2HbVDHS2SZuA7', // only galleryItem is using this right now temporarily until that component can be upgraded.
   CHARTBEAT_KEY: '8829d57bf1a1416ba9187bbf33e6fb81',
+  sportradarAPIkey: 'mmwnrjmhcnx9wp87ptf4mqf5',
+  sportradarAPIVersion: 'v3',
+  sportradarAccessLevel: 'production',
 };

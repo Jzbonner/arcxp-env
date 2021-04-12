@@ -1,0 +1,30 @@
+@import "../../../src/styles/base";
+
+.border-top {
+  border-top: 1px solid #cdcdcd;
+  margin-bottom: 10px;
+
+  &[class*="RP0"] {
+    display: none;
+
+    @include between-breakpoints(tablet, desktop-sm) {
+      display: flex;
+      margin-bottom: 30px;
+    }
+  }
+
+  &.HS02 {
+    margin-bottom: 30px;
+  }
+
+  &.c-sectionHome {
+    @include between-breakpoints(mobile, tablet) {
+      width: 94%;
+      padding: 0;
+    }
+  }
+}
+
+.arc_ad[class*="HP0"].ccad-noslotshadow .border-top.HP02 {
+  display: none;
+}

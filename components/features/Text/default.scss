@@ -1,6 +1,7 @@
 @import "./../../../src/styles/base";
 
 .c-textFeature {
+  margin-bottom: $min-Msection-margin;
 
   .c-textFeature-title {
     color: #313132;
@@ -11,6 +12,7 @@
 
     @include breakpoint(desktop-sm) {
       letter-spacing: -.84px;
+      margin-bottom: $min-DTsection-margin;
 
       @include text-styles(1.5em, normal, "Gordita");
     }

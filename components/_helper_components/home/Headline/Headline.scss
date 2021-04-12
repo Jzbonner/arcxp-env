@@ -60,7 +60,7 @@
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
-    text-align: center;
+    text-align: left;
     padding: 20px;
     position: relative;
     margin: 0 auto;
@@ -75,15 +75,20 @@
     .headline {
       display: block;
       margin-top: 10px;
+      letter-spacing: -.31px;
 
-      @include text-styles(1.4rem, 1.23, "Average");
+      @include text-styles(1.563rem, 1.12, "Lora-Bold");
 
-      @include breakpoint(desktop-sm) {
-        @include text-styles(2vw, 1.29, "Average");
+      @include breakpoint(tablet) {
+        @include text-styles(1.625rem, 1.12, "Lora-Bold");
+
+        letter-spacing: -.43px;
       }
 
-      @media (min-width: 1600px) {
-        @include text-styles(2rem, 1.29, "Average");
+      @include breakpoint(desktop-sm) {
+        @include text-styles(1.875rem, 1.13, "Lora-Bold");
+
+        letter-spacing: -.5px;
       }
     }
   }
