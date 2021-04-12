@@ -8,7 +8,7 @@
     }
 
     @include breakpoint(desktop-sm) {
-      margin-right: 55px;
+      margin-right: 46px;
     }
 
     .LeftPhotoNoPhoto:before {
@@ -36,6 +36,10 @@
       left: -30px;
       top: -30px;
       z-index: -1;
+
+      @include breakpoint(desktop-sm) {
+        left: -23px;
+      }
     }
   }
 

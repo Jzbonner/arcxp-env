@@ -526,16 +526,12 @@
       @include breakpoint(tablet) {
         padding-bottom: 0;
       }
-
-      @include breakpoint(desktop-sm) {
-        margin-right: 30px;
-      }
     }
 
     .column-2 {
       @include breakpoint(tablet) {
         border-left: 1px solid #cdcdcd;
-        padding-left: 30px;
+        padding-left: 15px;
       }
     }
 
@@ -546,19 +542,15 @@
       }
 
       @include breakpoint(desktop-sm) {
-        max-width: none;
-        width: auto;
+        width: 50%;
       }
     }
 
     .c-homeList {
       border-bottom: 1px solid #cdcdcd;
 
-      @include breakpoint(tablet) {
-
-        .homeList-image {
-          margin-bottom: 1rem;
-        }
+      .homeList-image {
+        margin-bottom: 1rem;
       }
 
       @include breakpoint(desktop-sm) {
@@ -588,8 +580,9 @@
 
         .headline {
           letter-spacing: -.1px;
+          margin-bottom: 0;
 
-          @include text-styles(1.125rem, 1.22, "Lora-Bold");
+          @include text-styles(1rem, 1.22, "Lora-Bold");
         }
       }
 
@@ -623,6 +616,11 @@
     .lazyload-wrapper {
       width: 80px;
       height: 80px;
+
+      @include breakpoint(desktop-sm) {
+        width: 60px;
+        height: 60px;
+      }
     }
 
     img {
