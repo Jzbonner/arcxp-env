@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import filter from '../filters/galleryFilter';
+import FilterElements from './helper_functions/FilterElements';
+import FetchResizedImages from './helper_functions/FetchResizedImages';
 
 const schemaName = 'article';
 
@@ -23,7 +25,8 @@ const fetch = (query = {}) => {
         Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
       },
     })
-    .then(({ data }) => data)
+    .then(({ data }) => FilterElements(data, 'gallery', ['gallery']))
+    .then(data => FetchResizedImages(arcSite, data, 1000, 780))
     .catch((error) => {
       console.log('AXIOS CATCH - gallery => ', error);
     });
