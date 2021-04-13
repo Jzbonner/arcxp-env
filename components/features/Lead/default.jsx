@@ -61,9 +61,11 @@ const Lead = ({ customFields = {}, limitOverride }) => {
 
   function getLists(apiData, start, limit, isTTDFeature = false) {
     const listLimit = limitOverride || limit;
+    let itemCounter = 0; /* item counter for Left Photo No Feature feature */
     return apiData.map((el, i) => {
       if (start <= i && i < start + listLimit) {
-        return <ListItem key={`ListItem-${i}`} displayClass={displayClass} hidePromo={((isLeftNoPhotoFeature && i !== 1 && i !== 5) || false)} isTTDFeature={isTTDFeature} {...el} />;
+        if (isLeftNoPhotoFeature) itemCounter += 1;
+        return <ListItem key={`ListItem-${i}`} displayClass={displayClass} hidePromo={((isLeftNoPhotoFeature && itemCounter !== 1 && itemCounter !== 5) || false)} isTTDFeature={isTTDFeature} {...el} />;
       }
       return null;
     });

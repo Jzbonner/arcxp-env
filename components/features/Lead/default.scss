@@ -551,6 +551,31 @@
 
       .homeList-image {
         margin-bottom: 1rem;
+
+        &:empty {
+          display: none;
+        }
+
+        @include breakpoint(tablet) {
+          width: 80px;
+          height: 80px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          width: 60px;
+          height: 60px;
+
+          &:empty {
+            display: block;
+          }
+        }
+
+        @include breakpoint(desktop-nav) {
+
+          &:empty {
+            display: none;
+          }
+        }
       }
 
       @include breakpoint(desktop-sm) {
