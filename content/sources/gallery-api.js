@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
-import filter from '../../filters/galleryFilter';
+import filter from '../filters/galleryFilter';
 
 const schemaName = 'article';
 
