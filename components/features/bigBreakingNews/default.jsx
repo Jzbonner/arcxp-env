@@ -40,16 +40,21 @@ const BigBreakingNews = (customFields = {}) => {
 
   const renderLogic = () => {
     const leadItem = data[0];
-    const { basic: headline } = leadItem && leadItem.headlines;
-    const { canonical_url: leadItemURL, teaseImageObject } = leadItem || {};
-    const { basic: imageData } = leadItem && leadItem.promo_items ? leadItem.promo_items : {};
+    const {
+      headlines: leadHeadlines,
+      promo_items: leadPromoItems,
+      canonical_url: leadItemURL,
+      teaseImageObject,
+    } = leadItem || {};
+    const { basic: headline } = leadHeadlines || {};
+    const { basic: imageData } = leadPromoItems || {};
     const [, ...restOfItems] = data;
     return (
       <div className="c-breakingContainer">
           <div className="leadItem">
             <a href={leadItemURL}>
               <h2>{truncateHeadline(headline, true)}</h2>
-              <Image src={teaseImageObject || imageData} width={1108} height={426} imageType="isHomepageImage" useSrcSet={true} srcSetSizes={[[1108, 426], [770, 296], [408, 300]]} />
+              {(teaseImageObject || imageData) && <Image src={teaseImageObject || imageData} width={1108} height={426} imageType="isHomepageImage" useSrcSet={true} srcSetSizes={[[1108, 426], [770, 296], [408, 300]]} />}
             </a>
           </div>
           <div className="restOfItems">
