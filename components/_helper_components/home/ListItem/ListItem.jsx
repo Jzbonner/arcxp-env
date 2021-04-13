@@ -60,6 +60,8 @@ const ListItem = ({
     defaultPromoHeight = 110;
   }
 
+  console.log('hide promo?', hidePromo);
+
   const isLeftPhotoNoPhotoItem = displayClass === 'Redesign Feature - Left Photo No Photo';
   const leftPhotoNoPhotoSizeInt = 80;
 

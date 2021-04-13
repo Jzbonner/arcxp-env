@@ -55,8 +55,12 @@
 
   .title-bar {
     content: "";
-    width: auto;
+    width: 100%;
     height: 1px;
     border-bottom: 1px solid #cdcdcd;
+
+    @include breakpoint(tablet) {
+      width: auto;
+    }
   }
 }

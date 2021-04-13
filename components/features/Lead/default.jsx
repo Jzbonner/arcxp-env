@@ -65,6 +65,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     return apiData.map((el, i) => {
       if (start <= i && i < start + listLimit) {
         if (isLeftNoPhotoFeature) itemCounter += 1;
+        console.log('isLPNP', isLeftNoPhotoFeature, 'index', itemCounter);
         return <ListItem key={`ListItem-${i}`} displayClass={displayClass} hidePromo={((isLeftNoPhotoFeature && itemCounter !== 1 && itemCounter !== 5) || false)} isTTDFeature={isTTDFeature} {...el} />;
       }
       return null;
