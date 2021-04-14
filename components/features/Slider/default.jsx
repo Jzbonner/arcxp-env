@@ -103,7 +103,7 @@ const Slider = (customFields = {}) => {
 
   return (
     <LazyLoad
-    placeholder={<div className="c-placeholder-gallery" />}
+    placeholder={<div className="c-placeholder-slider" />}
     height="100%"
     width="100%"
     offset={300}
