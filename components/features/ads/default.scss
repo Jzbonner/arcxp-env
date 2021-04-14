@@ -13,10 +13,6 @@
     }
   }
 
-  &.HS02 {
-    margin-bottom: 30px;
-  }
-
   &.c-sectionHome {
     @include between-breakpoints(mobile, tablet) {
       width: 94%;
