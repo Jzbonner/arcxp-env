@@ -12,13 +12,7 @@
   margin: 0 auto;
 
   @include breakpoint(tablet) {
-    width: 94%;
     display: flex;
-    padding: 0;
-  }
-
-  @include breakpoint(desktop-lg) {
-    width: 90%;
   }
 
   .c-contentElements {
@@ -312,6 +306,7 @@
       @include breakpoint(desktop-sm) {
         width: calc(100% - 330px);
         padding: 0 $min-margin 0 0;
+        box-sizing: border-box;
 
         .c-synopsis-row + div {
           margin-bottom: 1.25rem;
