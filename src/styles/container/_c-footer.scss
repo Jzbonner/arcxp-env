@@ -42,7 +42,7 @@ body .Mg2-connext[data-display-type] {
     .logo-row {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: baseline;
       margin: 0 auto;
       padding: 0 $min-margin;
       max-width: 1600px;
@@ -79,7 +79,7 @@ body .Mg2-connext[data-display-type] {
 
         &:first-child {
           @include breakpoint(desktop-sm) {
-            padding: 2rem 4rem 2rem 1.563rem;
+            padding: 2rem 4rem 2rem 0;
             justify-content: flex-start;
           }
         }
@@ -97,7 +97,7 @@ body .Mg2-connext[data-display-type] {
         margin: 1.875rem 0;
 
         &.ajc {
-          @include breakpoint(tablet) {
+          @include between-breakpoints(tablet, desktop-sm) {
             margin-left: 1.25rem;
           }
         }
