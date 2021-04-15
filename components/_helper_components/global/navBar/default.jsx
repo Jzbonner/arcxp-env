@@ -163,9 +163,9 @@ const NavBar = ({
   });
 
   return (
-    <header className='c-nav'>
+    <header className='c-nav b-sectionHome-adding b-sectionHomeMaxWidth'>
       {!omitBreakingNews && <BreakingNews />}
-      <div className={`c-headerNav b-sectionHome-padding
+      <div className={`c-headerNav
         ${stickyNavVisibility || hasWindowShade ? 'stickyActive' : ''}
         ${hasWindowShade ? 'above-shade' : ''}
         ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`} style={sidebarIsOpen ? { opacity: 1 } : {}}>
