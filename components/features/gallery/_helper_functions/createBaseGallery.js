@@ -23,7 +23,7 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
       const {
         url, copyright, caption, alt_text: alt, credits, width, height, resized_obj: resizedObject = null,
       } = element || {};
-      // console.error('dave gallery element', element);
+      console.error('dave gallery element', element);
 
       const { affiliation, by } = credits || {};
 

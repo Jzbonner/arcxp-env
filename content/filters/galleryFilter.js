@@ -1,11 +1,10 @@
 export default `
   canonical_url,
+  content_elements,
   credits,
-  description.basic,
-  description.meta_title,
   display_date,
   first_publish_date,
-  headlines.basic,
+  headlines,
   last_updated_date,
   promo_items.basic.additional_properties.focal_point,
   promo_items.basic.alt_text,

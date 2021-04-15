@@ -29,10 +29,13 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes) => {
 
 
     const newData = apiData;
+    console.error('dave its a..', newData.type);
     if (newData.type === 'gallery') {
       // we treat galleries differently than other content
       const { content_elements: newContentElements } = newData;
+      console.error('dave newContentElements', newContentElements);
       newContentElements.forEach((el, e) => {
+        console.error('dave el', el);
         newData.content_elements[e] = addResizedData(el);
       });
       return newData;
