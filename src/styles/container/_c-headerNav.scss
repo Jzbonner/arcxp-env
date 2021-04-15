@@ -12,14 +12,14 @@
   }
 
   .c-headerNav {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     padding-bottom: 15px;
     border-bottom: 1px solid #cdcdcd;
+    box-sizing: border-box;
 
     @include breakpoint(tablet) {
       border-bottom: none;
-      padding-bottom: 0;
       width: 100%;
     }
 
@@ -1298,15 +1298,11 @@
   .stickyNav {
     height: 100%;
     border: none;
-    max-width: 1600px;
+    max-width: 1540px;
     margin: 0 auto;
-    width: 90%;
+    width: 100%;
     display: none;
     align-items: center;
-
-    @include breakpoint(desktop-sm) {
-      width: 94%;
-    }
 
     &.is-visible {
       display: flex;
