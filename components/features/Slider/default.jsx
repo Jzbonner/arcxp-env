@@ -2,14 +2,16 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 import { useContent } from 'fusion:content';
-import { useFusionContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import { buildSliderItems, getAmount } from './_helper_functions/index';
 import rightArrow from '../../../resources/images/right-arrow.svg';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import './default.scss';
 
 const Slider = (customFields = {}) => {
+  const appContext = useAppContext();
   const fusionContext = useFusionContext();
+  const { isAdmin } = appContext;
   const { arcSite } = fusionContext;
   const {
     customFields: {
@@ -97,43 +99,49 @@ const Slider = (customFields = {}) => {
     return null;
   };
 
+  const sliderOutput = () => <div ref={wrapperRef} className={`c-slider-wrapper
+  b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
+    <FeatureTitle title={title} moreURL={moreURL} />
+    <div className="c-slider">
+      <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`}>
+        <div ref={contentRef} className="itemList" style={{ transform: `translateX(${translateX}px)` }}>
+          {sliderItems}
+        </div>
+      </div>
+      {isDesktop && !isPad && (
+        <>
+          {translateX !== 0 ? (
+            <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
+              <img src={rightArrow} />
+            </a>
+          ) : null}
+          {Math.abs(translateX) < contentFullWidth ? (
+            <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
+              <img src={rightArrow} />
+            </a>
+          ) : null}
+        </>
+      )}
+    </div>
+  </div>;
+
+  if (isAdmin) {
+    return sliderOutput();
+  }
+
   useEffect(() => {
     getInitWindowSize();
   }, []);
 
   return (
     <LazyLoad
-    placeholder={<div className="c-placeholder-gallery" />}
-    height="100%"
-    width="100%"
-    offset={300}
-    overflow={true}
-    once={true}>
-      <div ref={wrapperRef} className={`c-slider-wrapper
-      b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
-        <FeatureTitle title={title} moreURL={moreURL} />
-        <div className="c-slider">
-          <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`}>
-            <div ref={contentRef} className="itemList" style={{ transform: `translateX(${translateX}px)` }}>
-              {sliderItems}
-            </div>
-          </div>
-          {isDesktop && !isPad && (
-            <>
-              {translateX !== 0 ? (
-                <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
-                  <img src={rightArrow} />
-                </a>
-              ) : null}
-              {Math.abs(translateX) < contentFullWidth ? (
-                <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
-                  <img src={rightArrow} />
-                </a>
-              ) : null}
-            </>
-          )}
-        </div>
-      </div>
+      placeholder={<div className="c-placeholder-slider" />}
+      height="100%"
+      width="100%"
+      offset={300}
+      overflow={true}
+      once={true}>
+      {sliderOutput()}
     </LazyLoad>
   );
 };
