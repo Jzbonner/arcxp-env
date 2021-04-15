@@ -394,10 +394,6 @@
         margin: .6rem 0 .4rem;
       }
 
-      .headline {
-        text-align: left;
-      }
-
       .homeList-image {
         display: none;
       }
@@ -407,6 +403,7 @@
         margin: $min-margin 0 0;
         border-bottom: 1px solid #cdcdcd;
         width: 100%;
+        text-align: left;
       }
 
       &:first-child {
@@ -421,6 +418,106 @@
         .homeList-text {
           border: none;
           padding-bottom: 0;
+        }
+      }
+    }
+  }
+
+  /////////////////////
+  // Redesigned Lead - No Photo Class Styles - Will be used with the Synopsis Feature mainly
+  /////////////////////
+
+  &.redesigned-no-photo-display-class {
+    justify-content: flex-start;
+
+    .b-sectionTitle {
+      text-align: left;
+    }
+
+    .column-2 {
+      width: 100%;
+
+      @include between-breakpoints(mobile,tablet) {
+        margin-bottom: 10px;
+      }
+
+      @include breakpoint(tablet) {
+        width: 52%;
+        margin-right: 27px;
+      }
+
+      .home-headline {
+        display: flex;
+        flex-direction: column-reverse;
+        padding-top: 0;
+
+        @include between-breakpoints(mobile,tablet) {
+          margin: 0 auto;
+        }
+
+        .homeList-image {
+          margin-right: 0;
+
+          .c-image-component {
+            position: relative;
+  
+            img {
+              border-radius: 0;
+            }
+          }
+        }
+
+        .headline-box {
+          background: none;
+          border-radius: 0;
+          box-shadow: unset;
+          padding: 10px 0;
+
+          @include between-breakpoints(mobile,tablet) {
+            padding-top: 0;
+          }
+
+          .headline {
+            margin: 10px 0;
+          }
+        }
+      }
+    }
+
+    .column-3 {
+
+      .c-homeList {
+
+        .c-label-wrapper {
+          text-align: left;
+          margin: .6rem 0 .4rem;
+        }
+  
+        .homeList-image {
+          display: none;
+        }
+  
+        .home-headline,
+        .homeList-text {
+          margin: $min-margin 0 0;
+          border-bottom: 1px solid #cdcdcd;
+          width: 100%;
+          text-align: left;
+        }
+  
+        &:first-child {
+  
+          .c-label-wrapper {
+            margin-top: 0;
+          }
+        }
+  
+        &:last-child {
+            
+          .homeList-text {
+            border: none;
+            padding-bottom: 0;
+          }
         }
       }
     }

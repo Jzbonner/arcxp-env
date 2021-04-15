@@ -24,6 +24,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     '5-Item Feature - Left Photo',
     '5-Item Feature - Center Lead Top Photo',
     '5-Item Feature - No Photo',
+    '5-Item Feature - Redesigned - No Photo',
     'Redesign Feature - Left Photo No Photo',
   ];
 
@@ -48,6 +49,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
         return 'left-photo-display-class';
       case '5-Item Feature - No Photo':
         return 'no-photo-display-class';
+      case '5-Item Feature - Redesigned - No Photo':
+        return 'redesigned-no-photo-display-class';
       case '5-Item Feature - Center Lead Top Photo':
         return 'center-lead-display-class';
       case '1 or 2 Item Feature':
@@ -92,6 +95,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - Left Photo':
       case '5-Item Feature - No Photo':
       case '5-Item Feature - Center Lead Top Photo':
+      case '5-Item Feature - Redesigned - No Photo':
         return <Headline {...apiData[startIndex]} isTease={true} />;
       case '7-Item TTD Feature':
         return getLists(apiData, startIndex + 1, 3, true);
@@ -108,6 +112,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - Left Photo':
         return getLists(apiData, startIndex + 1, 4);
       case '5-Item Feature - No Photo':
+      case '5-Item Feature - Redesigned - No Photo':
         return (
           <>
             <FeatureTitle title={title} moreURL={moreURL} />
@@ -156,7 +161,7 @@ Lead.propTypes = {
     content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
       name: 'Content',
     }),
-    displayClass: PropTypes.oneOf(['5-Item Feature - Top Photo', '5-Item Feature - Left Photo', '5-Item Feature - No Photo', '5-Item Feature - Center Lead Top Photo', '1 or 2 Item Feature', '7-Item TTD Feature', 'Redesign Feature - Left Photo No Photo']).tag({
+    displayClass: PropTypes.oneOf(['5-Item Feature - Top Photo', '5-Item Feature - Left Photo', '5-Item Feature - No Photo', '5-Item Feature - Redesigned - No Photo', '5-Item Feature - Center Lead Top Photo', '1 or 2 Item Feature', '7-Item TTD Feature', 'Redesign Feature - Left Photo No Photo']).tag({
       name: 'Display Class',
       defaultValue: '5-Item Feature - Top Photo',
     }),
