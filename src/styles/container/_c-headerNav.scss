@@ -28,6 +28,15 @@
       flex-direction: column;
     }
 
+    &.above-shade {
+      position: relative;
+      background: #fff;
+
+      .Mg2-connext {
+        display: none !important; /* stylelint-disable-line declaration-no-important */
+      }
+    }
+
     &.stickyActive {
       padding-bottom: 0;
       position: fixed;
@@ -40,10 +49,6 @@
       background-color: #fff;
       max-width: 100%;
       box-shadow: 4px 4px 6px 0 rgba(132, 132, 132, .22);
-
-      &.above-shade {
-        position: relative;
-      }
 
       @include breakpoint(tablet) {
         box-sizing: border-box;
