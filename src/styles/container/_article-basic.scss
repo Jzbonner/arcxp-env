@@ -3,15 +3,17 @@
 
 .c-header {
   margin: 0 auto;
+  // max-width: 820px;
+  // box-sizing: border-box;
 
-  @include breakpoint(desktop-sm) {
-    width: 94%;
-  }
+  // @include breakpoint(desktop-sm) {
+  //   width: 94%;
+  // }
 
-  @include breakpoint(desktop-lg) {
-    width: 90%;
-    max-width: 1600px;
-  }
+  // @include breakpoint(desktop-lg) {
+  //   width: 90%;
+  //   max-width: 1600px;
+  // }
 }
 
 .c-main-gallery,
@@ -86,6 +88,8 @@
 
   body .c-articleContent .c-articleBodyContainer {
     height: auto !important; /* stylelint-disable declaration-no-important */
+    max-width: 820px;
+    margin: 0 auto;
 
     &.is-safari .c-section {
 

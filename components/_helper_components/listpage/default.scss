@@ -4,11 +4,6 @@
 .c-listPage {
 
   .c-section {
-    padding: 0 20px;
-
-    @include breakpoint(desktop-sm) {
-      padding: 0 $min-margin;
-    }
 
     .c-contentElements {
       @include breakpoint(tablet) {

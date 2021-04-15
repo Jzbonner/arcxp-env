@@ -78,7 +78,7 @@ const Section = ({
   if (newContentElements.length > 0) {
     return (
       <div className={
-          `c-section
+          `c-section b-sectionHome-padding
           ${fullWidth ? 'full-width b-clear-both' : ''}
           b-margin-bottom-d40-m20
           ${comesAfterDivider ? 'after-divider' : ''}`

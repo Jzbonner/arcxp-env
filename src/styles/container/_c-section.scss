@@ -10,6 +10,7 @@
   max-width: 1600px;
   padding: 0 $min-margin;
   margin: 0 auto;
+  box-sizing: border-box;
 
   @include breakpoint(tablet) {
     display: flex;
@@ -304,7 +305,7 @@
 
     .c-contentElements {
       @include breakpoint(desktop-sm) {
-        width: calc(100% - 330px);
+        width: calc(100% - 315px);
         padding: 0 $min-margin 0 0;
         box-sizing: border-box;
 
