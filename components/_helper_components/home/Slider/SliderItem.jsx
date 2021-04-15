@@ -10,7 +10,7 @@ import ContributorBadge from '../../../_helper_components/global/contributorBadg
 import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import './SliderItem.scss';
 
-const SliderItem = ({ data, refHook }) => {
+const SliderItem = ({ data, refHook, viewport }) => {
   const {
     classes, headline, image: imageData, canonicalUrl, sectionLabelData, contentType,
   } = data;
@@ -39,6 +39,10 @@ const SliderItem = ({ data, refHook }) => {
     }
 
     return null;
+  }
+
+  function getImageSize() {
+    /* check viewport prop to decide img size */
   }
 
   if (!canonicalUrl || !imageData) return null;
@@ -81,6 +85,7 @@ SliderItem.propTypes = {
   firstPublishDate: PropTypes.string,
   taxonomy: PropTypes.object,
   label: PropTypes.object,
+  viewport: PropTypes.string,
 };
 
 export default SliderItem;

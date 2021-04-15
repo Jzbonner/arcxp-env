@@ -2,7 +2,7 @@ import React from 'react';
 import SliderItem from '../../../_helper_components/home/Slider/SliderItem';
 import getItemThumbnail from './getItemThumbnail';
 
-const buildSliderItems = (sliderCollection, ref, startIndex, itemLimit) => {
+const buildSliderItems = (sliderCollection, ref, startIndex, itemLimit, viewport) => {
   let elCount = 0;
   const sliderItems = sliderCollection.map((elem, i) => {
     if (startIndex <= i && elCount < itemLimit) {
@@ -33,7 +33,7 @@ const buildSliderItems = (sliderCollection, ref, startIndex, itemLimit) => {
 
       data.sectionLabelData.label = elem.label ? elem.label : null;
 
-      return <SliderItem key={`tease-${elCount}`} data={data} refHook={ref} />;
+      return <SliderItem key={`tease-${elCount}`} data={data} refHook={ref} viewport={viewport} />;
     }
     return null;
   });

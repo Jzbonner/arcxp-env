@@ -22,7 +22,7 @@ const Slider = (customFields = {}) => {
   itemLimit = parseInt(itemLimit, 10) || 10;
 
   const [sliderItems, setSliderItems] = useState(null);
-  const [isDesktop, setDesktopState] = useState(true);
+  const [viewportState, setViewportState] = useState('');
   const [translateX, setTranslateX] = useState(0);
 
   const actions = {
@@ -32,12 +32,19 @@ const Slider = (customFields = {}) => {
     SUB: 'SUB',
   };
 
+  const states = {
+    DESKTOP: 'DESKTOP',
+    TABLET: 'TABLET',
+    MOBILE: 'MOBILE',
+  };
+
   const wrapperRef = useRef(null);
   const contentRef = useRef(null);
   const elRefs = useRef([]);
 
   const marginOffset = 15;
   const tabletBreakPoint = 1023;
+  const mobileBreakpoint = 768;
 
   const displayClassesRequiringImg = ['Slider', 'Slider - Special Features'];
 
@@ -55,7 +62,7 @@ const Slider = (customFields = {}) => {
     if (el && !refArray.current.includes(el)) refArray.current.push(el);
   };
 
-  if (data && !sliderItems) setSliderItems(buildSliderItems(data, el => addToRefs(el, elRefs), startIndex, itemLimit));
+  if (data && !sliderItems) setSliderItems(buildSliderItems(data, el => addToRefs(el, elRefs), startIndex, itemLimit, viewportState));
 
   const isPad = typeof navigator !== 'undefined' ? navigator.userAgent.match(/iPad|Tablet/i) != null : false;
   const itemOffsetWidth = elRefs.current && elRefs.current[0] ? elRefs.current[0].scrollWidth + marginOffset : null;
@@ -84,10 +91,14 @@ const Slider = (customFields = {}) => {
   };
 
   const getInitWindowSize = () => {
+    if (window.innerWidth > tabletBreakPoint) {
+      setViewportState(states.DESKTOP);
+    }
     if (window.innerWidth <= tabletBreakPoint) {
-      setDesktopState(false);
-    } else {
-      setDesktopState(true);
+      setViewportState(states.TABLET);
+    }
+    if (window.innerWidth <= mobileBreakpoint) {
+      setViewportState(states.MOBILE);
     }
   };
 
@@ -118,7 +129,7 @@ const Slider = (customFields = {}) => {
               {sliderItems}
             </div>
           </div>
-          {isDesktop && !isPad && (
+          {viewportState === states.DESKTOP && !isPad && (
             <>
               {translateX !== 0 ? (
                 <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
