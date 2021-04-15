@@ -19,7 +19,7 @@ import BreakingNews from '../breakingNews/default';
 import Login from './login/default';
 
 const NavBar = ({
-  articleURL, headlines, comments, type, subtype, ampPage = false, omitBreakingNews = false,
+  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false,
 }) => {
   // amp hijack
   if (ampPage) return <AmpNavBar />;
@@ -170,7 +170,7 @@ const NavBar = ({
         ${hasWindowShade ? 'above-shade' : ''}
         ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`} style={sidebarIsOpen ? { opacity: 1 } : {}}>
         <div className={`c-logoAndLinks nav-logo
-        ${(stickyNavVisibility) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
+        ${stickyNavVisibility || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
           <div className='c-topNavItems'>
             <Weather weatherPageUrl={weatherPageUrl}/>
             <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
@@ -206,7 +206,7 @@ const NavBar = ({
           burgerMenuBackground={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerMenuBackground}`)}`}
           siteName={siteName.toLowerCase()}/>
         <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
-          && mobileMenuToggled) ? 'not-visible' : ''} `}>
+          && mobileMenuToggled) || hasWindowShade ? 'not-visible' : ''} `}>
         </div>
          <StickyNav
           headlines={headlines}
@@ -222,7 +222,6 @@ const NavBar = ({
           type={type}
           sections={redesignChildren}
           articleUrl={articleURL}
-          hasWindowShade={false}
         />
       </div>
       <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
@@ -237,6 +236,7 @@ NavBar.propTypes = {
   type: PropTypes.string,
   subtype: PropTypes.string,
   ampPage: PropTypes.bool,
+  hasWindowShade: PropTypes.bool,
   omitBreakingNews: PropTypes.bool,
 };
 
