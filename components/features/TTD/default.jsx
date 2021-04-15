@@ -5,9 +5,7 @@ import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitl
 import './default.scss';
 
 const TTD = (customFields = {}) => {
-  const {
-    content: title = 'Things To Do', moreURL = '',
-  } = customFields;
+  const { title = '', moreURL = '' } = customFields.customFields;
 
   const newCustomFields = {
     ...customFields,
@@ -37,8 +35,7 @@ TTD.propTypes = {
       name: 'Content',
     }),
     title: PropTypes.string.tag({
-      name: 'Things To Do Title',
-      defaultValue: 'Things To Do',
+      name: 'Title',
     }),
     moreURL: PropTypes.string.tag({
       name: 'More URL',
