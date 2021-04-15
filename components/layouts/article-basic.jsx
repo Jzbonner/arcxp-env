@@ -227,7 +227,7 @@ const StoryPageLayout = () => {
       ampPage={ampPage}
     />
     {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && (
-      <div className="c-section full-width b-clear-both">
+      <div className="c-section b-sectionHome-padding full-width b-clear-both">
         <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} />
       </div>
     )}
@@ -246,9 +246,9 @@ const StoryPageLayout = () => {
       {!noHeaderAndFooter && (
         <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} noAds={noAds} />
       )}
-      <main className="c-articleContent">
+      <main className="c-articleContent b-contentMaxWidth">
         <header className="b-margin-bottom-d30-m20">
-          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
+          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header b-sectionHome-padding'}>
             <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
             <Headline
               headlines={headlines}
