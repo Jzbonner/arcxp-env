@@ -625,7 +625,7 @@ const Gallery = (props) => {
       modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
       calculateTranslateX: () => calculateTranslateX(),
     });
-    const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData;
+    const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData || {};
 
     if (!isMobile) {
       if (!elementData) {
