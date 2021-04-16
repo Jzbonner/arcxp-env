@@ -24,6 +24,20 @@
       "labels": ["desktop2"]
     },
     {
+      "mediaQuery": "(min-width: 1024px)",
+      "sizesSupported": [
+        [300, 250]
+      ],
+      "labels": ["desktop3"]
+    },
+    {
+      "mediaQuery": "(min-width: 1024px)",
+      "sizesSupported": [
+        [300, 600]
+      ],
+      "labels": ["desktop4"]
+    },
+    {
       "mediaQuery": "(min-width: 768px) and (max-width: 1023px)",
       "sizesSupported": [
         [300, 250],
@@ -37,6 +51,20 @@
         [728, 90]
       ],
       "labels": ["tablet1"]
+    },
+    {
+      "mediaQuery": "(min-width: 768px) and (max-width: 1023px)",
+      "sizesSupported": [
+        [300, 250]
+      ],
+      "labels": ["tablet2"]
+    },
+    {
+      "mediaQuery": "(min-width: 768px) and (max-width: 1023px)",
+      "sizesSupported": [
+        [300, 600]
+      ],
+      "labels": ["tablet3"]
     },
     {
       "mediaQuery": "(max-width: 767px)",

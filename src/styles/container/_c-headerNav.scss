@@ -753,31 +753,6 @@
         }
       }
 
-      &.daytondailynews {
-
-        .login-menu {
-
-          .subNav-flyout {
-
-            .flyout-item {
-              min-width: auto;
-
-              a {
-                width: auto;
-              }
-            }
-          }
-        }
-
-        .itemCount-4 {
-          height: 4.5rem;
-        }
-
-        .itemCount-5 {
-          height: 5.7rem;
-        }
-      }
-
       @include breakpoint(tablet) {
         display: flex;
 
@@ -1001,48 +976,6 @@
 
     .subNav-flyout {
       list-style-type: none;
-
-      @include breakpoint(tablet) {
-        display: inline-flex;
-        align-content: flex-start;
-        writing-mode: vertical-lr;
-        height: 13.125rem;
-
-        &.itemCount-0 {
-          height: 0;
-        }
-
-        &.itemCount-1 {
-          height: .875rem;
-        }
-
-        &.itemCount-2 {
-          height: 3.75rem;
-        }
-
-        &.itemCount-3 {
-          height: max-content;
-        }
-
-        &.itemCount-4,
-        &.itemCount-8 {
-          height: 3rem;
-        }
-
-        &.itemCount-5 {
-          height: 4.5rem;
-        }
-
-        &.itemCount-7 {
-          height: 5.4rem;
-        }
-
-        &.itemCount-6,
-        &.itemCount-11,
-        &.itemCount-12 {
-          height: 4.5rem;
-        }
-      }
     }
 
     .nav-wrapper {
@@ -1064,27 +997,30 @@
     }
 
     .login-menu {
-
-      .subNav-flyout .flyout-item {
-        white-space: normal;
-      }
-
       @include breakpoint(tablet) {
         background-color: #ededed;
 
         .subNav-flyout {
           width: 100%;
+          min-width: auto;
           align-content: center;
           display: flex;
-          flex-wrap: wrap;
+          flex-flow: row wrap;
+          list-style-type: none;
 
           .flyout-item {
-            width: 40%;
+            width: 45%;
             text-align: left;
             margin-right: 10px;
             margin-bottom: 10px;
             height: auto;
-            min-width: fit-content;
+            min-width: auto;
+            line-height: 1.3;
+            white-space: normal;
+
+            a {
+              max-width: 100%;
+            }
           }
 
           &.logged-in {

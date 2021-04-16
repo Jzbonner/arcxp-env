@@ -5,7 +5,7 @@ import React, {
 import LazyLoad from 'react-lazyload';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import { useFusionContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import {
   DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery, ImageModal,
 } from '../../_helper_components/global/gallery/index';
@@ -28,7 +28,9 @@ const Gallery = (props) => {
     contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '', leafHeadline = '', taxonomy = {},
   } = props;
 
+  const appContext = useAppContext();
   const fusionContext = useFusionContext();
+  const { isAdmin } = appContext;
   const { arcSite = 'ajc' } = fusionContext;
   const isStory = pageType === 'story';
 
@@ -623,7 +625,7 @@ const Gallery = (props) => {
       modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
       calculateTranslateX: () => calculateTranslateX(),
     });
-    const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData;
+    const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData || {};
 
     if (!isMobile) {
       if (!elementData) {
@@ -660,6 +662,74 @@ const Gallery = (props) => {
     }
   }
 
+  const galleryOutput = () => <>
+    {(isMobile || !isStory)
+      && galHeadline
+      ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
+    {pageType !== 'story' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
+    <div className={`${!isStory ? 'c-gallery-homeSection b-sectionHome-padding' : ''}`}>
+      {!isMobile
+        ? <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
+          <ImageModal src={currentImageSrc} isVisible={modalVisible} />
+        </div> : null}
+      <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
+        {!isMobile && galHeadline && isStory
+          ? <div className="gallery-headline"><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
+        {
+          isStickyVisible
+            ? <MobileGallery
+              objectRef={galleryMobileEl}
+              data={mobileElemData}
+              states={mobileState}
+              funcs={mobileFuncs}
+            />
+            : null
+        }
+        {
+          !isMobile
+            ? <DesktopGallery data={elementData} translateX={translateX} />
+            : null
+        }
+        <div
+          onClick={handleStickyOpen}
+          className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
+          <div className="gallery-overlay hidden-large">
+            {
+              isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null
+            }
+          </div>
+          <div className="gallery-count view-gallery">
+            <div className="gallery-count-prev hidden-small hidden-medium">
+              <a onClick={() => changeIndex(actions.PREV, null, false)}>
+                <img src={leftArrow} />
+              </a>
+            </div>
+            <div className="mobile-change">
+              <a>
+                <img src={middleBox} className="icon-gallery" />
+              </a>
+              <div className="icon-text hidden-large">View Gallery</div>
+            </div>
+            <div className="gallery-count-next hidden-small hidden-medium">
+              <a onClick={() => changeIndex(actions.NEXT, null, false)}>
+                <img src={rightArrow} />
+              </a>
+            </div>
+            <div className="count--box hidden-small hidden-medium">
+              <span className="gallery-index">{currentIndex + 1} / </span>
+              <span>{maxIndex && maxIndex + 1}</span>
+            </div>
+          </div>
+        </div>
+        {captionData}
+      </div>
+    </div>
+  </>;
+
+  if (isAdmin) {
+    return galleryOutput();
+  }
+
   return (
     <LazyLoad
       placeholder={<div className="c-placeholder-gallery" data-uri={canonicalUrl || null} />}
@@ -668,67 +738,7 @@ const Gallery = (props) => {
       offset={300}
       overflow={!isMobile}
       once={true}>
-      {(isMobile || !isStory)
-        && galHeadline
-        ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
-      {pageType !== 'story' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
-      <div className={`${!isStory ? 'c-gallery-homeSection b-sectionHome-padding' : ''}`}>
-        {!isMobile
-          ? <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
-            <ImageModal src={currentImageSrc} isVisible={modalVisible} />
-          </div> : null}
-        <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-          {!isMobile && galHeadline && isStory
-            ? <div className="gallery-headline"><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
-          {
-            isStickyVisible
-              ? <MobileGallery
-                objectRef={galleryMobileEl}
-                data={mobileElemData}
-                states={mobileState}
-                funcs={mobileFuncs}
-              />
-              : null
-          }
-          {
-            !isMobile
-              ? <DesktopGallery data={elementData} translateX={translateX} />
-              : null
-          }
-          <div
-            onClick={handleStickyOpen}
-            className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
-            <div className="gallery-overlay hidden-large">
-              {
-                isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null
-              }
-            </div>
-            <div className="gallery-count view-gallery">
-              <div className="gallery-count-prev hidden-small hidden-medium">
-                <a onClick={() => changeIndex(actions.PREV, null, false)}>
-                  <img src={leftArrow} />
-                </a>
-              </div>
-              <div className="mobile-change">
-                <a>
-                  <img src={middleBox} className="icon-gallery" />
-                </a>
-                <div className="icon-text hidden-large">View Gallery</div>
-              </div>
-              <div className="gallery-count-next hidden-small hidden-medium">
-                <a onClick={() => changeIndex(actions.NEXT, null, false)}>
-                  <img src={rightArrow} />
-                </a>
-              </div>
-              <div className="count--box hidden-small hidden-medium">
-                <span className="gallery-index">{currentIndex + 1} / </span>
-                <span>{maxIndex && maxIndex + 1}</span>
-              </div>
-            </div>
-          </div>
-          {captionData}
-        </div>
-      </div>
+      {galleryOutput()}
     </LazyLoad>
   );
 };
