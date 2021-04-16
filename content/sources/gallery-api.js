@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import filter from '../filters/galleryFilter';
@@ -24,7 +25,7 @@ const fetch = (query = {}) => {
         Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
       },
     })
-    .then(({ data }) => FetchResizedImages(arcSite, data, 720, 480))
+    .then(({ data: galleryData }) => FetchResizedImages(arcSite, galleryData, 720, 480))
     .catch((error) => {
       console.log('AXIOS CATCH - gallery => ', error);
     });

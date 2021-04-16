@@ -126,7 +126,6 @@ const Gallery = (props) => {
 
   const { taxonomy: fetchedTaxonomy = {}, promo_items: fetchedPromoItems = {} } = fetchedGalleryData || {};
   const { taxonomy: featuredTaxonomy = {}, promo_items: featuredPromoItems = {} } = featuredGalleryData || {};
-  // console.error('dave gallery data...', featuredGalleryData, 'fetchedGalleryData', fetchedGalleryData, 'promoItems', promoItems);
 
   if (fetchedPromoItems?.basic?.additional_properties?.keywords) {
     finalPromoItemTopics = fetchedPromoItems.basic.additional_properties.keywords;
