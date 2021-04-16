@@ -7,10 +7,9 @@
 
 .c-sectionHome {
   display: block;
-  max-width: 1600px;
   padding: 0 $min-margin;
   margin: 0 auto;
-  box-sizing: border-box;
+  box-sizing: content-box;
 
   @include breakpoint(tablet) {
     display: flex;

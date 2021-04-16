@@ -225,3 +225,11 @@
     max-width: 880px;
   }
 }
+
+.b-sectionHomeMaxWidth {
+  margin: 0 auto;
+
+  @include breakpoint(desktop-lg) {
+    max-width: 1540px;
+  }
+}

@@ -36,7 +36,7 @@ const BreakingNewsStory = () => {
     const headline = get(story, 'headlines.basic', '');
     const url = get(story, 'canonical_url', '');
     return (
-      <div className={`c-breakingNews ${!isVisible ? 'is-hidden' : ''}`}>
+      <div className={`c-breakingNews b-sectionHomeMaxWidth ${!isVisible ? 'is-hidden' : ''}`}>
         <a href={url} className="breakingURL">
           <div className="c-breakingNews-heading b-flexCenter">
             <span>Breaking</span>
