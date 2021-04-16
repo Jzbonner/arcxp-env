@@ -6,7 +6,7 @@ const GalleryItem = ({
   data, func, modalFunc, isMobileGallery = false,
 }) => {
   const {
-    url, width, height, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass,
+    url, width, height, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass, resized_obj: resizedObj,
   } = data;
   const { affiliation = [], caption = [] } = captionObj;
 
@@ -29,6 +29,7 @@ const GalleryItem = ({
       height,
       width,
       alt_text: alt,
+      resized_obj: resizedObj,
     },
   };
 

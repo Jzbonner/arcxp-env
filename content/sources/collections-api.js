@@ -3,7 +3,8 @@ import _ from 'lodash';
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
 import GetCollectionData from './helper_functions/GetCollectionData';
-import filter from '../filters/collectionFilter';
+import FetchResizedImages from './helper_functions/FetchResizedImages';
+import filter from '../filters/collectionApiFilter';
 
 const schemaName = 'collections';
 const ttl = 120;
@@ -22,6 +23,10 @@ const fetch = (query) => {
     size = 12,
     displayClass = '',
     displayClassesRequiringImg = [],
+    width = 500,
+    height = 282,
+    useSrcSet = false,
+    srcSetSizes = [],
   } = query;
   const activeSite = arcSite || arcSiteAlt;
 
@@ -31,6 +36,7 @@ const fetch = (query) => {
     return GetCollectionData(activeSite, id, size)
       .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
       .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
+      .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes))
       .then(data => data.map(el => _.pick(el, filter)))
       .catch((error) => {
         console.error(error);

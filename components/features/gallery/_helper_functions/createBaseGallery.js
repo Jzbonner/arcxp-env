@@ -21,7 +21,7 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
       let isNext = false;
       let functionToPass = null;
       const {
-        url, copyright, caption, alt_text: alt, credits, width, height,
+        url, copyright, caption, alt_text: alt, credits, width, height, resized_obj: resizedObject = null,
       } = element || {};
 
       const { affiliation, by } = credits || {};
@@ -34,6 +34,7 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
 
       const galleryItem = {
         url,
+        resized_obj: resizedObject,
         alt: getAltText(alt, caption),
         by,
         width,
