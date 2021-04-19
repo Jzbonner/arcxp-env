@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import _ from 'lodash';
+import pick from 'lodash.pick';
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
 import GetCollectionData from './helper_functions/GetCollectionData';
@@ -37,7 +37,7 @@ const fetch = (query) => {
       .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
       .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
       .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes))
-      .then(data => data.map(el => _.pick(el, filter)))
+      .then(data => data.map(el => pick(el, filter)))
       .catch((error) => {
         console.error(error);
       });
