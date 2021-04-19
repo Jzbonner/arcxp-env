@@ -9,12 +9,14 @@ import TopNavBreakingNews from '../global/navBar/TopNavBreakingNews/default';
 import '../../../src/styles/container/_c-section.scss';
 import '../../../src/styles/base/_utility.scss';
 
-const SectionOutput = ({ zones, layout, noHeaderAndFooter }) => (
+const SectionOutput = ({ zones, layout, noHeaderAndFooter }) => {
+  const isErrorOrFlatpage = layout === 'section-basic' || layout === 'section-special-one';
+  return (
   <>
     <GlobalAdSlots pbPage={true} />
     {/* we omit breaking news on wraps */}
     {!noHeaderAndFooter && <TopNavBreakingNews type={layout} omitBreakingNews={layout.indexOf('wrap-') !== -1} />}
-    <main className="c-sectionContent b-contentMaxWidth">
+    <main className={`c-sectionContent ${isErrorOrFlatpage ? 'b-contentMaxWidth' : ''}`}>
       {zones && (
         zones.map((zone, i) => {
           const {
@@ -35,7 +37,8 @@ const SectionOutput = ({ zones, layout, noHeaderAndFooter }) => (
       </>}
     </>}
   </>
-);
+  );
+};
 
 SectionOutput.propTypes = {
   zones: PropTypes.array,
