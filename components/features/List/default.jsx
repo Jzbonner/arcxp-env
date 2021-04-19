@@ -16,7 +16,6 @@ const List = (customFields = {}) => {
     },
   } = customFields;
 
-
   let { from: startIndex = 1, size: itemLimit = 0 } = contentConfigValues || {};
   startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
   itemLimit = parseInt(itemLimit, 10) || 0;
@@ -55,16 +54,21 @@ const List = (customFields = {}) => {
   }
 
   if (Array.isArray(data)) {
+    const threeItemsArray = [];
+    const size = 3;
+    for (let i = 0; i < data.length; i += size) {
+      if (startIndex <= i && i < itemLimit + startIndex) {
+        threeItemsArray.push(data.slice(i, i + size));
+      }
+    }
+    console.log('ARRAY ', threeItemsArray);
     return (
       <div className="b-margin-bottom-d40-m20">
         <FeatureTitle title={title} moreURL={moreURL} />
         <div className={`c-homeListContainer ${getColumnsMap(columns)} ${getDisplayClassMap(displayClass)}`}>
-          {data.map((el, i) => {
-            if (startIndex <= i && i < itemLimit + startIndex) {
-              return <ListItem key={`ListItem-${i}`} {...el} />;
-            }
-            return null;
-          })}
+          {threeItemsArray.map((singleArray, colCount) => <div key={colCount} className={`col-${colCount + 1}`}>
+              {singleArray.map((el, idx) => <ListItem key={`ListItem-${idx}`} {...el} />)}
+            </div>)}
         </div>
       </div>
     );
