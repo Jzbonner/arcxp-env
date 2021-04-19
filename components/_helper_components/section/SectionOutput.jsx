@@ -8,7 +8,6 @@ import Copyright from '../global/copyright/default';
 import TopNavBreakingNews from '../global/navBar/TopNavBreakingNews/default';
 import '../../../src/styles/container/_c-section.scss';
 import '../../../src/styles/base/_utility.scss';
-import './default.scss';
 
 const SectionOutput = ({ zones, layout, noHeaderAndFooter }) => (
   <>
