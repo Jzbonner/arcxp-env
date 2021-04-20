@@ -12,7 +12,7 @@ const List = (customFields = {}) => {
   const { arcSite, layout } = fusionContext;
   const {
     customFields: {
-      content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', columns = 1, title = '', moreURL = '', itemsPerColumn = 3,
+      content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', columns = 1, title = '', moreURL = '',
     },
   } = customFields;
 
@@ -54,16 +54,12 @@ const List = (customFields = {}) => {
   }
 
   if (Array.isArray(data)) {
-    const threeItemsArray = [];
-    let updatedItemsPerColumn = itemsPerColumn || itemLimit; // if items per column are not set, it will use the size given by the user
-    if (itemsPerColumn === 'all') { // if ALL is picked, it will grab the size from the configuration
-      updatedItemsPerColumn = itemLimit;
-    }
-    const size = updatedItemsPerColumn || 3; // if no items per column or user size
+    const noItemsArray = [];
+    const size = Math.round(itemLimit / columns);
     if (getDisplayClassMap(displayClass) === 'no-photo-display-class') {
       for (let i = 0; i < data.length; i += size) {
         if (startIndex <= i && i < itemLimit + startIndex) {
-          threeItemsArray.push(data.slice(i, i + size));
+          noItemsArray.push(data.slice(i, i + size));
         }
       }
     }
@@ -78,7 +74,7 @@ const List = (customFields = {}) => {
               }
               return null;
             })
-            : threeItemsArray.map((singleArray, colCount) => (
+            : noItemsArray.map((singleArray, colCount) => (
               <div key={colCount} className={`col col-${colCount + 1}`}>
                 {singleArray.map((el, idx) => (
                   <ListItem key={`ListItem-${idx}`} {...el} />
@@ -111,10 +107,6 @@ List.propTypes = {
     }),
     moreURL: PropTypes.string.tag({
       name: 'More URL',
-    }),
-    itemsPerColumn: PropTypes.oneOf(['1', '2', '3', '4', '5', '6', '7', '8', '9', 'all']).tag({
-      name: 'Items per Column',
-      defaultValue: '3',
     }),
   }),
 };
