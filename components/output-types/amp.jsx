@@ -9,6 +9,7 @@ import AmpScripts from '../_helper_components/amp/AmpScripts';
 import GoogleStructuredData from '../_helper_components/article/googleData/default';
 import SiteMetrics from '../_helper_components/global/siteMetrics/default';
 import SiteMetaAmp from '../_helper_components/global/siteMeta/amp';
+import handleSiteName from '../layouts/_helper_functions/handleSiteName.js';
 
 const AmpOutputType = (props) => {
   const {
@@ -19,9 +20,9 @@ const AmpOutputType = (props) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentSite = arcSite || arcSiteFromProps;
-
   const {
     canonical_url: articleURL,
+    canonical_website: canonicalSite,
     content_elements: contentElements,
     promo_items: promoItems,
   } = globalContent || {};
@@ -30,7 +31,7 @@ const AmpOutputType = (props) => {
   return (
     <Html>
     <head>
-      <BaseMarkup canonicalUrl={articleURL} />
+      <BaseMarkup canonicalUrl={`https://www.${handleSiteName(canonicalSite)}.com${articleURL}`} />
       <AmpCustomStyles arcSite={currentSite} outputTypeProps={props} />
       <AmpScripts contentElements={contentElements} storyPromoItems={storyPromoItems} arcSite={arcSite}/>
       <GoogleStructuredData />
