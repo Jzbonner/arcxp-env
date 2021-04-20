@@ -55,9 +55,12 @@ const List = (customFields = {}) => {
 
   if (Array.isArray(data)) {
     const threeItemsArray = [];
-    const size = itemsPerColumn || 3;
+    let updatedItemsPerColumn = itemsPerColumn || itemLimit; // if items per column are not set, it will use the size given by the user
+    if (itemsPerColumn === 'all') { // if ALL is picked, it will grab the size from the configuration
+      updatedItemsPerColumn = itemLimit;
+    }
+    const size = updatedItemsPerColumn || 3; // if no items per column or user size
     if (getDisplayClassMap(displayClass) === 'no-photo-display-class') {
-      console.log('size ', size);
       for (let i = 0; i < data.length; i += size) {
         if (startIndex <= i && i < itemLimit + startIndex) {
           threeItemsArray.push(data.slice(i, i + size));
@@ -109,7 +112,7 @@ List.propTypes = {
     moreURL: PropTypes.string.tag({
       name: 'More URL',
     }),
-    itemsPerColumn: PropTypes.oneOf(['1', '2', '3', '4', '5', '6']).tag({
+    itemsPerColumn: PropTypes.oneOf(['1', '2', '3', '4', '5', '6', '7', '8', '9', 'all']).tag({
       name: 'Items per Column',
       defaultValue: '3',
     }),
