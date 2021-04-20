@@ -24,7 +24,7 @@ const Image = ({
   ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [], additionalClasses = '', noLazyLoad = false,
 }) => {
   const {
-    resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, useSrcSet: hasSrcSet = false,
+    resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, focal_point: rootFocalPoint, useSrcSet: hasSrcSet = false,
   } = src || {};
   const fusionContext = useFusionContext();
   const { arcSite, layout } = fusionContext;
@@ -33,13 +33,22 @@ const Image = ({
   const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
   let img = null;
-
   if (resizedObject) {
     img = resizedObject;
   } else {
     const { focal_point: focalPoint } = additionalProperties || {};
     const { min: focalMin = [], max: focalMax = [] } = focalPoint || {};
-    const focalCoords = focalMin || focalMax || [];
+    /*
+      we have to (re)create the root focalCoords array because the format of root-level focal_point arrays differs from those focal_point arrays contained within `additionalProperties`.
+      The former have x, y coordinates, whereas the latter is an array of arrays, with `min` & `max` children that have keyless arrays of x & y coords.
+      So our (re)created rootFocalCoords will match the format of the min & max arrays, rendering everything equal when it reaches the resizer content source.
+    */
+    const rootFocalCoords = rootFocalPoint ? [] : null;
+    if (rootFocalPoint?.x && rootFocalPoint?.y) {
+      rootFocalCoords.push(rootFocalPoint.x);
+      rootFocalCoords.push(rootFocalPoint.y);
+    }
+    const focalCoords = focalMin || focalMax || rootFocalCoords || [];
     const imgQuery = {
       src: url,
       height,
