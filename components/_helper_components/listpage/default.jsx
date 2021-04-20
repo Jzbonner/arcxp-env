@@ -9,6 +9,7 @@ import ListItem from '../home/ListItem/ListItem';
 import './default.scss';
 import '../../features/List/default';
 import filter from '../../../content/filters/collectionTitle';
+import FilterElements from '../../../content/sources/helper_functions/FilterElements';
 
 const RP01 = () => (
   <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />
@@ -36,6 +37,8 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
     filterStart,
     filterStart + filterSize,
   );
+
+  const filteredTeases = FilterElements(filteredStories, 'list', ['list']);
 
   const collectionMetaData = useContent({
     source: 'collection-meta-data',
@@ -75,7 +78,7 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
           ) : null}
           <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column">
             {getTitle()}
-            {filteredStories.map((el, i) => {
+            {filteredTeases.map((el, i) => {
               const startIndex = (activePage - 1) * storiesPerPage;
               if (startIndex <= i && i < startIndex + storiesPerPage) {
                 return <ListItem key={`key-${i}`} {...el} listPage={true} />;
