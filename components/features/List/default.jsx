@@ -12,7 +12,7 @@ const List = (customFields = {}) => {
   const { arcSite, layout } = fusionContext;
   const {
     customFields: {
-      content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', columns = 1, title = '', moreURL = '',
+      content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', columns = 1, title = '', moreURL = '', itemsPerColumn = 3,
     },
   } = customFields;
 
@@ -55,20 +55,34 @@ const List = (customFields = {}) => {
 
   if (Array.isArray(data)) {
     const threeItemsArray = [];
-    const size = 3;
-    for (let i = 0; i < data.length; i += size) {
-      if (startIndex <= i && i < itemLimit + startIndex) {
-        threeItemsArray.push(data.slice(i, i + size));
+    const size = itemsPerColumn || 3;
+    if (getDisplayClassMap(displayClass) === 'no-photo-display-class') {
+      console.log('size ', size);
+      for (let i = 0; i < data.length; i += size) {
+        if (startIndex <= i && i < itemLimit + startIndex) {
+          threeItemsArray.push(data.slice(i, i + size));
+        }
       }
     }
-    console.log('ARRAY ', threeItemsArray);
     return (
       <div className="b-margin-bottom-d40-m20">
         <FeatureTitle title={title} moreURL={moreURL} />
         <div className={`c-homeListContainer ${getColumnsMap(columns)} ${getDisplayClassMap(displayClass)}`}>
-          {threeItemsArray.map((singleArray, colCount) => <div key={colCount} className={`col-${colCount + 1}`}>
-              {singleArray.map((el, idx) => <ListItem key={`ListItem-${idx}`} {...el} />)}
-            </div>)}
+          {getDisplayClassMap(displayClass) !== 'no-photo-display-class'
+            ? data.map((el, i) => {
+              if (startIndex <= i && i < itemLimit + startIndex) {
+                return <ListItem key={`ListItem-${i}`} {...el} />;
+              }
+              return null;
+            })
+            : threeItemsArray.map((singleArray, colCount) => (
+              <div key={colCount} className={`col col-${colCount + 1}`}>
+                {singleArray.map((el, idx) => (
+                  <ListItem key={`ListItem-${idx}`} {...el} />
+                ))}
+              </div>
+            ))
+            }
         </div>
       </div>
     );
@@ -94,6 +108,10 @@ List.propTypes = {
     }),
     moreURL: PropTypes.string.tag({
       name: 'More URL',
+    }),
+    itemsPerColumn: PropTypes.oneOf(['1', '2', '3', '4', '5', '6']).tag({
+      name: 'Items per Column',
+      defaultValue: '3',
     }),
   }),
 };
