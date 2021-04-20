@@ -54,12 +54,12 @@ const List = (customFields = {}) => {
   }
 
   if (Array.isArray(data)) {
-    const noItemsArray = [];
+    const noPhotoClassItemsArray = [];
     const size = Math.round(itemLimit / columns);
     if (getDisplayClassMap(displayClass) === 'no-photo-display-class') {
       for (let i = 0; i < data.length; i += size) {
         if (startIndex <= i && i < itemLimit + startIndex) {
-          noItemsArray.push(data.slice(i, i + size));
+          noPhotoClassItemsArray.push(data.slice(i, i + size));
         }
       }
     }
@@ -74,7 +74,7 @@ const List = (customFields = {}) => {
               }
               return null;
             })
-            : noItemsArray.map((singleArray, colCount) => (
+            : noPhotoClassItemsArray.map((singleArray, colCount) => (
               <div key={colCount} className={`col col-${colCount + 1}`}>
                 {singleArray.map((el, idx) => (
                   <ListItem key={`ListItem-${idx}`} {...el} />
