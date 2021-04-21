@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ScrollBar.scss';
 
-const ScrollBar = ({ maxWidth, currentScrollLeft, sliderId }) => {
+const ScrollBar = ({ maxWidth, maxScrollLeft, currentScrollLeft, sliderId }) => {
   console.log('propped width', maxWidth);
   console.log('propped scrollLeft', currentScrollLeft);
   console.log('propped id', sliderId);
@@ -11,10 +11,6 @@ const ScrollBar = ({ maxWidth, currentScrollLeft, sliderId }) => {
   const [thumbWidth, setThumbWidth] = useState(1);
 
   const [thumbScrollLeft, setThumbScrollLeft] = useState(0);
-
-  const scrollTrack = document.querySelector('.scroll-track');
-
-  const maxScrollLeft = maxWidth - document.querySelector('.itemList').clientWidth;
 
   console.log('offset left from scrollbar', currentScrollLeft);
 
@@ -32,10 +28,13 @@ const ScrollBar = ({ maxWidth, currentScrollLeft, sliderId }) => {
   };
 
   const calculateScrollLeft = (sliderScrollLeft) => {
-    console.log('calculating scroll left');
+    console.log('calculating scroll left', sliderScrollLeft);
     const scrollWidth = document.querySelector('.scroll-track').offsetWidth;
-
+    console.log('calculating scroll with', scrollWidth);
     const adjustedRatio = sliderScrollLeft / maxScrollLeft;
+    console.log('calculateScrollLeft adjusted ratio', adjustedRatio);
+
+    console.log('calculated', scrollWidth * adjustedRatio);
 
     setThumbScrollLeft(scrollWidth * adjustedRatio);
   };
@@ -48,10 +47,12 @@ const ScrollBar = ({ maxWidth, currentScrollLeft, sliderId }) => {
     calculateScrollLeft(currentScrollLeft);
   }, [currentScrollLeft]);
 
+  console.log('scrolllbar current thumb scroll', thumbScrollLeft);
+
   return (
     <div className="c-scroll-bar">
       <div className={`scroll-track ${scrollId}`}>
-        <div id={scrollId} style={{ width: `${thumbWidth}px`, transform: `translateX(${-thumbScrollLeft}px)` }} className="scroll-thumb"></div>
+        <div id={scrollId} style={{ width: `${thumbWidth}px`, transform: `translateX(${thumbScrollLeft}px)` }} className="scroll-thumb"></div>
       </div>
     </div>
   );

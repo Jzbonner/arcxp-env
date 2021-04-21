@@ -28,6 +28,7 @@ const Slider = (customFields = {}) => {
   const [contentWidth, setContentWidth] = useState(0);
   const [idSuffix, setIdSuffix] = useState('');
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [maxScrollLeft, setMaxScrollLeft] = useState(0);
 
   const actions = {
     LEFT: 'LEFT',
@@ -133,9 +134,10 @@ const Slider = (customFields = {}) => {
   const handleOverflowScroll = () => {
     // console.log('scrolling');
     const sliderContent = document.querySelector('.itemList');
-    
+    const sliderContainer = document.querySelector('.c-slider-content');
+
     const sliderMaxWidth = window.getComputedStyle(sliderContent).width;
-    const sliderScrollLeft = document.querySelector('.c-slider-content').scrollLeft;
+    const sliderScrollLeft = sliderContainer.scrollLeft;
 
     if (sliderScrollLeft !== scrollLeft) {
       setScrollLeft(sliderScrollLeft);
@@ -143,6 +145,12 @@ const Slider = (customFields = {}) => {
 
     if (sliderMaxWidth !== contentWidth) {
       setContentWidth(sliderMaxWidth);
+    }
+
+    if (!maxScrollLeft) {
+      const maxScrollLeftSlider = sliderContainer.scrollWidth - sliderContainer.clientWidth;
+      console.log('maxScrollLeftSlider', maxScrollLeftSlider);
+      setMaxScrollLeft(maxScrollLeftSlider);
     }
   };
 
@@ -163,7 +171,12 @@ const Slider = (customFields = {}) => {
               {sliderItems}
             </div>
           </div>
-          <ScrollBar maxWidth={contentWidth} currentScrollLeft={scrollLeft} sliderId={idSuffix}/>
+          <ScrollBar
+            maxWidth={contentWidth}
+            maxScrollLeft={maxScrollLeft}
+            currentScrollLeft={scrollLeft}
+            sliderId={idSuffix}
+          />
           {viewportState === states.DESKTOP && !isPad && (
             <>
               {translateX !== 0 ? (
