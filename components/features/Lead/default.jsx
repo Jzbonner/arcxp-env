@@ -25,6 +25,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     '5-Item Feature - Center Lead Top Photo',
     '5-Item Feature - No Photo',
     '5-Item Feature - Redesigned Lead - No Photo',
+    '7-Item TTD Feature',
     'Redesign Feature - Left Photo No Photo',
   ];
 
