@@ -1,13 +1,12 @@
 import resizer from '../resizer';
+import setFocalCoords from './setFocalCoords';
 
 export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes) => {
   const addResizedData = (el) => {
     const {
-      url, height: originalHeight, width: originalWidth, additional_properties: additionalProperties,
+      url, height: originalHeight, width: originalWidth, additional_properties: additionalProperties, focal_point: rootFocalPoint,
     } = el || {};
-    const { focal_point: focalPoint } = additionalProperties || {};
-    const { min: focalMin = [], max: focalMax = [] } = focalPoint || {};
-    const focalCoords = focalMin || focalMax || [];
+    const focalCoords = setFocalCoords(additionalProperties, rootFocalPoint);
     const newEl = el;
 
     if (!url) return newEl;

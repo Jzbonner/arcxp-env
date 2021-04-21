@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import axios from 'axios';
-import flatten from 'lodash.flatten';
+import flatten from 'lodash/flatten';
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 
 export default (site = 'ajc', contentElements) => {
