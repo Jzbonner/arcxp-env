@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useAppContext, useFusionContext } from 'fusion:context';
-import get from 'lodash.get';
+import get from 'lodash/get';
 import getProperties from 'fusion:properties';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 import getQueryParams from '../../layouts/_helper_functions/getQueryParams';

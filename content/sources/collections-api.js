@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import pick from 'lodash.pick';
+import pick from 'lodash/pick';
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
 import GetCollectionData from './helper_functions/GetCollectionData';
