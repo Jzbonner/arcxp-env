@@ -8,10 +8,14 @@ const DesktopGallery = (props) => {
     if (typeof translateX !== 'number') {
       const galleryContainers = document.querySelectorAll('.gallery-container');
       galleryContainers.forEach((gallery) => {
-        const focusElement = gallery.querySelector('#gallery-item-0');
-        const translateXValue = parseInt(gallery.offsetWidth, 10) / 2 - parseInt(focusElement.offsetWidth, 10) / 2 - parseInt(focusElement.offsetLeft, 10);
-        // eslint-disable-next-line no-param-reassign
-        gallery.style.transform = `translateX(${translateXValue}px)`;
+        if (gallery) {
+          const focusElement = gallery.querySelector('#gallery-item-0');
+          if (focusElement) {
+            const translateXValue = parseInt(gallery.offsetWidth, 10) / 2 - parseInt(focusElement.offsetWidth, 10) / 2 - parseInt(focusElement.offsetLeft, 10);
+            // eslint-disable-next-line no-param-reassign
+            gallery.style.transform = `translateX(${translateXValue}px)`;
+          }
+        }
       });
     }
   }, [translateX]);
