@@ -1,4 +1,4 @@
-import pick from 'lodash.pick';
+import pick from 'lodash/pick';
 import filter from '../../filters/most-read';
 
 export default (apiData, host, blacklist) => {

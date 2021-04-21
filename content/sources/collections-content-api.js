@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import pick from 'lodash.pick';
+import pick from 'lodash/pick';
 import GetCollectionData from './helper_functions/GetCollectionData';
 import StoryData from './helper_functions/getStoryData';
 import filter from '../filters/collectionFilter';
