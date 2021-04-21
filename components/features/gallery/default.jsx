@@ -101,16 +101,19 @@ const Gallery = (props) => {
   let mobileFuncs = {};
   let mobileState = {};
   let preRenderEls = null;
+  let fetchedGalleryData = null;
 
   // if standalone feature, fetches a specific gallery
   const { galleryUrl } = customFields;
-
-  const fetchedGalleryData = useContent({
-    source: 'gallery-api',
-    query: {
-      path: galleryUrl,
-    },
-  });
+  if (galleryUrl) {
+    fetchedGalleryData = useContent({
+      source: 'gallery-api',
+      query: {
+        arcSite,
+        path: galleryUrl,
+      },
+    });
+  }
 
   const [, forceUpdate] = useReducer(x => x + 1, 0);
 
@@ -667,7 +670,7 @@ const Gallery = (props) => {
       && galHeadline
       ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
     {pageType !== 'story' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
-    <div className={`${!isStory ? 'c-gallery-homeSection' : ''}`}>
+    <div className={`${!isStory ? 'c-gallery-homeSection b-sectionHome-padding' : ''}`}>
       {!isMobile
         ? <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
           <ImageModal src={currentImageSrc} isVisible={modalVisible} />

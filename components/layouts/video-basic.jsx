@@ -54,12 +54,12 @@ const VideoPageLayout = () => {
         comments={comments}
         type={type}
         noAds={noAds} />}
-      <main className={ampVideoIframe ? 'c-amp-video' : ''}>
+      <main className={`${ampVideoIframe ? 'c-amp-video' : ''} b-contentMaxWidth`}>
         {!noAds && !ampVideoIframe && <div className="c-hp01-mp01 b-margin-top-d40-m20">
           <ArcAd staticSlot={'HP00'} />
           <ArcAd staticSlot={'MP01'} />
         </div>}
-        <div className="c-header">
+        <div className="c-header b-sectionHome-padding">
           <Headline headlines={headlines} basicItems={basicItems} taxonomy={taxonomy} ampVideoIframe={ampVideoIframe} />
         </div>
       </main>

@@ -166,11 +166,11 @@ const NavBar = ({
     <header className='c-nav'>
       {!omitBreakingNews && <BreakingNews />}
       <div className={`c-headerNav b-sectionHome-padding
-        ${stickyNavVisibility || hasWindowShade ? 'stickyActive' : ''}
+        ${stickyNavVisibility ? 'stickyActive' : ''}
         ${hasWindowShade ? 'above-shade' : ''}
         ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`} style={sidebarIsOpen ? { opacity: 1 } : {}}>
         <div className={`c-logoAndLinks nav-logo
-        ${(stickyNavVisibility || hasWindowShade) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
+        ${stickyNavVisibility || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
           <div className='c-topNavItems'>
             <Weather weatherPageUrl={weatherPageUrl}/>
             <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
@@ -201,7 +201,7 @@ const NavBar = ({
           whiteLogoRedesign={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
           closeButton={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${closeButton}`)}`}
           rootDirectory={rootDirectory}
-          stickyActive={stickyNavVisibility || hasWindowShade}
+          stickyActive={stickyNavVisibility}
           type={type}
           burgerMenuBackground={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerMenuBackground}`)}`}
           siteName={siteName.toLowerCase()}/>
@@ -213,7 +213,7 @@ const NavBar = ({
           comments={comments}
           hamburgerToggle={mobileMenuToggled}
           setStickyNavVisibility={setStickyNavVisibility}
-          stickyNavVisibility={stickyNavVisibility || hasWindowShade}
+          stickyNavVisibility={stickyNavVisibility}
           isMobile={isMobile}
           isMobileVisibilityRef={isMobileVisibilityRef}
           logoRef={logoRef}
@@ -222,7 +222,6 @@ const NavBar = ({
           type={type}
           sections={redesignChildren}
           articleUrl={articleURL}
-          hasWindowShade={hasWindowShade}
         />
       </div>
       <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
