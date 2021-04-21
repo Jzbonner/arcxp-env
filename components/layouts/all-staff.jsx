@@ -108,7 +108,7 @@ export const AllStaffPage = () => {
         </div>
         <h2>Newsroom</h2>
       </header>
-      <main className={'c-staff-page-main b-margin-bottom-d30-m20'}>
+      <main className={'c-staff-page-main b-margin-bottom-d30-m20 b-sectionHomeMaxWidth'}>
         <AuthorMenu
           selectedLeftMenuItem={selectedLeftMenuItem}
           setCategory={setCategory}
