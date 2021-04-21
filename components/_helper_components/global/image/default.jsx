@@ -9,6 +9,7 @@ import checkWindowSize from '../utils/check_window_size/default';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
+import setFocalCoords from '../../../../content/sources/helper_functions/setFocalCoords';
 import './default.scss';
 
 /*
@@ -36,19 +37,7 @@ const Image = ({
   if (resizedObject) {
     img = resizedObject;
   } else {
-    const { focal_point: focalPoint } = additionalProperties || {};
-    const { min: focalMin, max: focalMax } = focalPoint || {};
-    /*
-      we have to (re)create the root focalCoords array because the format of root-level focal_point arrays differs from those focal_point arrays contained within `additionalProperties`.
-      The former have x, y coordinates, whereas the latter is an array of arrays, with `min` & `max` children that have keyless arrays of x & y coords.
-      So our (re)created rootFocalCoords will match the format of the min & max arrays, rendering everything equal when it reaches the resizer content source.
-    */
-    const rootFocalCoords = rootFocalPoint ? [] : null;
-    if (rootFocalPoint?.x && rootFocalPoint?.y) {
-      rootFocalCoords.push(rootFocalPoint.x);
-      rootFocalCoords.push(rootFocalPoint.y);
-    }
-    const focalCoords = focalMin || focalMax || rootFocalCoords || [];
+    const focalCoords = setFocalCoords(additionalProperties, rootFocalPoint);
     const imgQuery = {
       src: url,
       height,
