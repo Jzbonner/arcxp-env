@@ -10,21 +10,19 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 100vw;
+/*   width: 100vw; */
+  width: 100%;
   overflow: hidden;
-  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+/*   box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1); */
   margin-bottom: $min-Msection-margin;
 
   @include breakpoint(desktop-sm) {
-    width: calc(100vw - 1rem - 1px);
     margin-bottom: $min-DTsection-margin;
   }
 
   .c-sectionTitle {
-    margin: 0 0 $min-margin 30px;
 
     @include breakpoint(desktop-sm) {
-      margin-left: 1.875rem;
     }
   }
 
@@ -47,8 +45,32 @@
       overflow-x: scroll;
       -webkit-overflow-scrolling: touch;
 
+      &::-webkit-scrollbar-track {
+        background-image: linear-gradient(to bottom, #e7edf2, #f5f7fa);
+        border-radius: 10px;
+        padding: 2px 0;
+        height: 8px;
+        width: 80%;
+        max-width: 80%;
+      }
+
+      &::-webkit-scrollbar {
+        border-radius: 10px;
+        height: 8px;
+        width: 80%;
+        max-width: 80%;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #9b9b9b;
+        height: 8px;
+        
+      }
+
       @include breakpoint(desktop-sm) {
-        overflow-x: hidden;
+        padding-bottom: 30px;
       }
 
       .itemList {

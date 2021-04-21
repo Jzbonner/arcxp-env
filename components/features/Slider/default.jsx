@@ -6,6 +6,7 @@ import { useFusionContext } from 'fusion:context';
 import { buildSliderItems, getAmount } from './_helper_functions/index';
 import rightArrow from '../../../resources/images/right-arrow.svg';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
+import ScrollBar from '../../_helper_components/home/Slider/ScrollBar';
 import './default.scss';
 
 const Slider = (customFields = {}) => {
@@ -24,6 +25,9 @@ const Slider = (customFields = {}) => {
   const [sliderItems, setSliderItems] = useState(null);
   const [viewportState, setViewportState] = useState('');
   const [translateX, setTranslateX] = useState(0);
+  const [contentWidth, setContentWidth] = useState(0);
+  const [idSuffix, setIdSuffix] = useState('');
+  const [scrollLeft, setScrollLeft] = useState(0);
 
   const actions = {
     LEFT: 'LEFT',
@@ -47,6 +51,8 @@ const Slider = (customFields = {}) => {
   const mobileBreakpoint = 768;
 
   const displayClassesRequiringImg = ['Slider', 'Slider - Special Features'];
+
+  const windowExists = typeof window !== 'undefined';
 
   const data = useContent({
     source: contentService,
@@ -91,8 +97,10 @@ const Slider = (customFields = {}) => {
   };
 
   const getInitWindowSize = () => {
+    console.log('running');
     if (window.innerWidth > tabletBreakPoint) {
       setViewportState(states.DESKTOP);
+      console.log('is desktop');
     }
     if (window.innerWidth <= tabletBreakPoint) {
       setViewportState(states.TABLET);
@@ -108,27 +116,54 @@ const Slider = (customFields = {}) => {
     return null;
   };
 
+  const genId = () => {
+    if (!idSuffix) {
+      const rng = Math.floor(Math.random() * 9999999);
+      setIdSuffix(rng);
+    }
+
+    return null;
+  };
+
   useEffect(() => {
     getInitWindowSize();
+    genId();
   }, []);
+
+  const handleOverflowScroll = () => {
+    // console.log('scrolling');
+    const sliderContent = document.querySelector('.itemList');
+    
+    const sliderMaxWidth = window.getComputedStyle(sliderContent).width;
+    const sliderScrollLeft = document.querySelector('.c-slider-content').scrollLeft;
+
+    if (sliderScrollLeft !== scrollLeft) {
+      setScrollLeft(sliderScrollLeft);
+    }
+
+    if (sliderMaxWidth !== contentWidth) {
+      setContentWidth(sliderMaxWidth);
+    }
+  };
 
   return (
     <LazyLoad
-    placeholder={<div className="c-placeholder-gallery" />}
-    height="100%"
-    width="100%"
-    offset={300}
-    overflow={true}
-    once={true}>
+      placeholder={<div className="c-placeholder-slider" />}
+      height="100%"
+      width="100%"
+      offset={300}
+      overflow={true}
+      once={true}>
       <div ref={wrapperRef} className={`c-slider-wrapper
       b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
         <FeatureTitle title={title} moreURL={moreURL} />
         <div className="c-slider">
-          <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`}>
+          <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`} onScroll={handleOverflowScroll}>
             <div ref={contentRef} className="itemList" style={{ transform: `translateX(${translateX}px)` }}>
               {sliderItems}
             </div>
           </div>
+          <ScrollBar maxWidth={contentWidth} currentScrollLeft={scrollLeft} sliderId={idSuffix}/>
           {viewportState === states.DESKTOP && !isPad && (
             <>
               {translateX !== 0 ? (
