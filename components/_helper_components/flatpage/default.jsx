@@ -40,7 +40,7 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
       {!noHeaderAndFooter && (
         <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype} noAds={noAds} />
       )}
-      <main className="c-flatpage">
+      <main className="c-flatpage b-sectionHomeMaxWidth">
         <article>
           {
             !noAds
