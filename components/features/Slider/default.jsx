@@ -4,7 +4,6 @@ import LazyLoad from 'react-lazyload';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import { buildSliderItems, getAmount } from './_helper_functions/index';
-import rightArrow from '../../../resources/images/right-arrow.svg';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import ScrollBar from '../../_helper_components/home/Slider/ScrollBar';
 import './default.scss';
@@ -53,8 +52,6 @@ const Slider = (customFields = {}) => {
 
   const displayClassesRequiringImg = ['Slider', 'Slider - Special Features'];
 
-  const windowExists = typeof window !== 'undefined';
-
   const data = useContent({
     source: contentService,
     query: {
@@ -98,10 +95,8 @@ const Slider = (customFields = {}) => {
   };
 
   const getInitWindowSize = () => {
-    console.log('running');
     if (window.innerWidth > tabletBreakPoint) {
       setViewportState(states.DESKTOP);
-      console.log('is desktop');
     }
     if (window.innerWidth <= tabletBreakPoint) {
       setViewportState(states.TABLET);
@@ -132,7 +127,6 @@ const Slider = (customFields = {}) => {
   }, []);
 
   const handleOverflowScroll = () => {
-    // console.log('scrolling');
     const sliderContent = document.querySelector('.itemList');
     const sliderContainer = document.querySelector('.c-slider-content');
 
@@ -149,7 +143,6 @@ const Slider = (customFields = {}) => {
 
     if (!maxScrollLeft) {
       const maxScrollLeftSlider = sliderContainer.scrollWidth - sliderContainer.clientWidth;
-      console.log('maxScrollLeftSlider', maxScrollLeftSlider);
       setMaxScrollLeft(maxScrollLeftSlider);
     }
   };
@@ -171,13 +164,23 @@ const Slider = (customFields = {}) => {
               {sliderItems}
             </div>
           </div>
-          <ScrollBar
-            maxWidth={contentWidth}
-            maxScrollLeft={maxScrollLeft}
-            currentScrollLeft={scrollLeft}
-            sliderId={idSuffix}
-          />
-          {viewportState === states.DESKTOP && !isPad && (
+          <div className="c-slider-nav">
+            <a className="c-slider-button" onClick={() => handleArrowClick(actions.LEFT)}>
+              <div className="top-arrow"></div>
+              <div className="bottom-arrow"></div>
+            </a>
+            <ScrollBar
+              maxWidth={contentWidth}
+              maxScrollLeft={maxScrollLeft}
+              currentScrollLeft={scrollLeft}
+              sliderId={idSuffix}
+            />
+            <a className="c-slider-button is-right" onClick={() => handleArrowClick(actions.RIGHT)}>
+              <div className="top-arrow"></div>
+              <div className="bottom-arrow"></div>
+            </a>
+          </div>
+          {/*           {viewportState === states.DESKTOP && !isPad && (
             <>
               {translateX !== 0 ? (
                 <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
@@ -190,7 +193,7 @@ const Slider = (customFields = {}) => {
                 </a>
               ) : null}
             </>
-          )}
+          )} */}
         </div>
       </div>
     </LazyLoad>

@@ -10,20 +10,12 @@
   display: flex;
   flex-direction: column;
   position: relative;
-/*   width: 100vw; */
   width: 100%;
   overflow: hidden;
-/*   box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1); */
   margin-bottom: $min-Msection-margin;
 
   @include breakpoint(desktop-sm) {
     margin-bottom: $min-DTsection-margin;
-  }
-
-  .c-sectionTitle {
-
-    @include breakpoint(desktop-sm) {
-    }
   }
 
   .c-slider {
@@ -46,27 +38,15 @@
       -webkit-overflow-scrolling: touch;
 
       &::-webkit-scrollbar-track {
-        background-image: linear-gradient(to bottom, #e7edf2, #f5f7fa);
-        border-radius: 10px;
-        padding: 2px 0;
-        height: 8px;
-        width: 80%;
-        max-width: 80%;
+        display: none;
       }
 
       &::-webkit-scrollbar {
-        border-radius: 10px;
-        height: 8px;
-        width: 80%;
-        max-width: 80%;
+        display: none;
       }
 
       &::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-        background-color: #9b9b9b;
-        height: 8px;
-        
+        display: none;
       }
 
       @include breakpoint(desktop-sm) {
@@ -81,6 +61,62 @@
 
         @include breakpoint(desktop-sm) {
           margin-bottom: 0;
+        }
+      }
+    }
+
+    .c-slider-nav {
+      display: flex;
+      align-items: center;
+
+      .c-slider-button {
+        display: none;
+      
+        @include breakpoint(tablet) {
+          display: flex;
+          width: 50px;
+          height: 50px;
+          border-radius: 15px;
+          box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, .6);
+          border: solid 1px #ececec;
+          background-color: #fff;
+          position: relative;
+          justify-content: center;
+          align-items: center;
+          transform: rotate(-90deg);
+          margin-left: 0;
+          margin-right: 15px;
+        }
+      
+        &.is-right {
+          transform: rotate(90deg);
+          margin-left: 15px;
+          margin-right: 0;
+
+          .top-arrow {
+            transform: rotate(45deg);
+          }
+        
+          .bottom-arrow {
+            transform: rotate(125deg);
+          }
+        }
+
+        .top-arrow {
+          transform: rotate(45deg);
+        }
+
+        .bottom-arrow {
+          transform: rotate(-45deg);
+        }
+      
+        .top-arrow,
+        .bottom-arrow {
+          content: " ";
+          height: 16px;
+          width: 6px;
+          background-color: #212126;
+          border-radius: 2.5px;
         }
       }
     }

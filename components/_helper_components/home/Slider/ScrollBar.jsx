@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './ScrollBar.scss';
 
-const ScrollBar = ({ maxWidth, maxScrollLeft, currentScrollLeft, sliderId }) => {
-  console.log('propped width', maxWidth);
-  console.log('propped scrollLeft', currentScrollLeft);
-  console.log('propped id', sliderId);
-
+const ScrollBar = ({
+  currentScrollLeft, maxWidth, maxScrollLeft, sliderId,
+}) => {
   const scrollId = `slider-${sliderId}`;
 
-  const [thumbWidth, setThumbWidth] = useState(1);
-
+  const [thumbWidth, setThumbWidth] = useState(0);
   const [thumbScrollLeft, setThumbScrollLeft] = useState(0);
-
-  console.log('offset left from scrollbar', currentScrollLeft);
 
 
   const calculateThumbWidth = () => {
@@ -28,15 +24,10 @@ const ScrollBar = ({ maxWidth, maxScrollLeft, currentScrollLeft, sliderId }) => 
   };
 
   const calculateScrollLeft = (sliderScrollLeft) => {
-    console.log('calculating scroll left', sliderScrollLeft);
     const scrollWidth = document.querySelector('.scroll-track').offsetWidth;
-    console.log('calculating scroll with', scrollWidth);
+
     const adjustedRatio = sliderScrollLeft / maxScrollLeft;
     const adjustedScrollWidth = scrollWidth - thumbWidth;
-
-    console.log('calculateScrollLeft adjusted ratio', adjustedRatio);
-    console.log('calculated', adjustedScrollWidth * adjustedRatio);
-
     setThumbScrollLeft(adjustedScrollWidth * adjustedRatio);
   };
 
@@ -48,8 +39,6 @@ const ScrollBar = ({ maxWidth, maxScrollLeft, currentScrollLeft, sliderId }) => 
     calculateScrollLeft(currentScrollLeft);
   }, [currentScrollLeft]);
 
-  console.log('scrolllbar current thumb scroll', thumbScrollLeft);
-
   return (
     <div className="c-scroll-bar">
       <div className={`scroll-track ${scrollId}`}>
@@ -57,6 +46,13 @@ const ScrollBar = ({ maxWidth, maxScrollLeft, currentScrollLeft, sliderId }) => 
       </div>
     </div>
   );
+};
+
+ScrollBar.propTypes = {
+  currentScrollLeft: PropTypes.number,
+  maxScrollLeft: PropTypes.number,
+  maxWidth: PropTypes.string,
+  sliderId: PropTypes.string,
 };
 
 export default ScrollBar;

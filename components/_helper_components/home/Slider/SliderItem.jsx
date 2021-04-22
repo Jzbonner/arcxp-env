@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext } from 'fusion:context';
@@ -75,7 +75,6 @@ const SliderItem = ({ data, refHook, viewport }) => {
 
   if (!canonicalUrl || !imageData) return null;
 
-  console.log('viewport', viewport);
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
       <a href={canonicalUrl} className="homeList-image">

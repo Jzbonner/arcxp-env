@@ -33,8 +33,6 @@ const buildSliderItems = (sliderCollection, ref, startIndex, itemLimit, viewport
 
       data.sectionLabelData.label = elem.label ? elem.label : null;
 
-      console.log('item viewport', viewport);
-
       return <SliderItem key={`tease-${elCount}`} data={data} refHook={ref} viewport={viewport} />;
     }
     return null;
