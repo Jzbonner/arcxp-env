@@ -30,18 +30,6 @@
       @include text-styles(1.875rem, 1, "Gordita-Bold");
     }
   }
-
-  .dontMissFeature {
-    
-    .c-homeList {
-      margin: 0;
-      text-align: left;
-
-      .headline {
-        margin-bottom: $min-margin;
-      }
-    }
-  }
   
   .c-homeListContainer {
 
