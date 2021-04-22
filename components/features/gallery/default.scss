@@ -6,7 +6,7 @@
   height: 480px;
   visibility: hidden;
 
-  @include breakpoint(desktop-sm) {
+  @include breakpoint(tablet) {
     visibility: visible;
   }
 }
@@ -157,6 +157,11 @@
 
   .arc_ad {
     margin: 0;
+
+    .PG02 {
+      padding-top: 15px;
+      margin-bottom: 15px;
+    }
   }
 
   .arc_ad .arcad:not(:empty):before {
@@ -344,13 +349,6 @@
   }
 }
 
-@media (max-width: 1023px) and (min-width: 768px) {
-
-  .hidden-medium {
-    display: none;
-  }
-}
-
 @media (min-width: 768px) {
 
   .gallery-caption-container {
@@ -362,7 +360,7 @@
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
 
   .gallery__immersive .gallery-sticky .gallery-count {
     border-radius: 6px;
@@ -519,7 +517,7 @@
       color: #313132;
     }
 
-    @include breakpoint(desktop-sm) {
+    @include breakpoint(tablet) {
       min-width: auto;
     }
   }
@@ -548,7 +546,7 @@
   .gallery-image {
     background: #efefef;
     min-width: 720px;
-    margin: 0 5px;
+    margin: 0 7.5px;
 
     a {
 
