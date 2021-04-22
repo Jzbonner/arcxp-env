@@ -39,7 +39,7 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes, squareI
     let imageElIndex = 0;
     newArrData.forEach((el, e) => {
       if (el.teaseImageObject) {
-        newArrData[e].teaseImageObject = addResizedData(el.teaseImageObject, imageElIndex, e);
+        newArrData[e].teaseImageObject = addResizedData(el.teaseImageObject, imageElIndex);
         imageElIndex += 1;
       }
     });
