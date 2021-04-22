@@ -1,7 +1,7 @@
 import resizer from '../resizer';
 
-export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes) => {
-  const addResizedData = (el) => {
+export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes, squareImageSize, useSquareImageAfter) => {
+  const addResizedData = (el, i) => {
     const {
       url, height: originalHeight, width: originalWidth, additional_properties: additionalProperties,
     } = el || {};
@@ -9,13 +9,19 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes) => {
     const { min: focalMin = [], max: focalMax = [] } = focalPoint || {};
     const focalCoords = focalMin || focalMax || [];
     const newEl = el;
+    let finalWidth = width;
+    let finalHeight = height;
+    if (squareImageSize && i >= useSquareImageAfter) {
+      finalWidth = squareImageSize;
+      finalHeight = squareImageSize;
+    }
 
     if (!url) return newEl;
 
     const img = resizer.fetch({
       src: url,
-      height,
-      width,
+      height: finalHeight,
+      width: finalWidth,
       srcSetSizes,
       originalHeight,
       originalWidth,
@@ -32,7 +38,7 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes) => {
     const newArrData = apiData;
     newArrData.forEach((el, e) => {
       if (el.teaseImageObject) {
-        newArrData[e].teaseImageObject = addResizedData(el.teaseImageObject);
+        newArrData[e].teaseImageObject = addResizedData(el.teaseImageObject, e);
       }
     });
     return newArrData;
@@ -42,7 +48,7 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes) => {
     const newGallData = apiData;
     const { content_elements: newContentElements = [] } = newGallData;
     newContentElements.forEach((el, e) => {
-      newGallData.content_elements[e] = addResizedData(el);
+      newGallData.content_elements[e] = addResizedData(el, e);
     });
     return newGallData;
   }
