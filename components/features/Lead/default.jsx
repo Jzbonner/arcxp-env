@@ -16,8 +16,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', title = '', columns = 1, moreURL,
   } = customFields;
 
-  let { from: startIndex = 1 } = contentConfigValues || {};
-  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
+  // removed old startIndex logic as it's already been "subsetted" by the time we get `data` back from the content source, so we really only want to start from the beginning (of that subset of data) at this point
+  const startIndex = 0;
 
   const displayClassesRequiringImg = [
     '5-Item Feature - Top Photo',
@@ -33,12 +33,15 @@ const Lead = ({ customFields = {}, limitOverride }) => {
   const isLeftNoPhotoFeature = displayClass === 'Redesign Feature - Left Photo No Photo';
 
   let squareImageSize = null;
-  let useSquareImageAfter = 0;
+  let useSquareImageAfter = -1;
   if (isTTDFeature) {
     squareImageSize = 110;
     useSquareImageAfter = 1;
   }
-  if (isLeftNoPhotoFeature) squareImageSize = 80;
+  if (isLeftNoPhotoFeature) {
+    squareImageSize = 80;
+    useSquareImageAfter = 0;
+  }
 
   const data = useContent({
     source: contentService,

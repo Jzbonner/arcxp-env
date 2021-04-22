@@ -1,7 +1,7 @@
 import resizer from '../resizer';
 
 export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes, squareImageSize, useSquareImageAfter) => {
-  const addResizedData = (el, i) => {
+  const addResizedData = (el, i = -1) => {
     const {
       url, height: originalHeight, width: originalWidth, additional_properties: additionalProperties,
     } = el || {};
@@ -36,9 +36,11 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes, squareI
 
   if (apiData && apiData.length) {
     const newArrData = apiData;
+    let imageElIndex = 0;
     newArrData.forEach((el, e) => {
       if (el.teaseImageObject) {
-        newArrData[e].teaseImageObject = addResizedData(el.teaseImageObject, e);
+        newArrData[e].teaseImageObject = addResizedData(el.teaseImageObject, imageElIndex, e);
+        imageElIndex += 1;
       }
     });
     return newArrData;
@@ -48,7 +50,7 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes, squareI
     const newGallData = apiData;
     const { content_elements: newContentElements = [] } = newGallData;
     newContentElements.forEach((el, e) => {
-      newGallData.content_elements[e] = addResizedData(el, e);
+      newGallData.content_elements[e] = addResizedData(el);
     });
     return newGallData;
   }
