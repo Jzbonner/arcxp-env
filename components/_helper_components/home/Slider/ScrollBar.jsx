@@ -32,11 +32,12 @@ const ScrollBar = ({ maxWidth, maxScrollLeft, currentScrollLeft, sliderId }) => 
     const scrollWidth = document.querySelector('.scroll-track').offsetWidth;
     console.log('calculating scroll with', scrollWidth);
     const adjustedRatio = sliderScrollLeft / maxScrollLeft;
+    const adjustedScrollWidth = scrollWidth - thumbWidth;
+
     console.log('calculateScrollLeft adjusted ratio', adjustedRatio);
+    console.log('calculated', adjustedScrollWidth * adjustedRatio);
 
-    console.log('calculated', scrollWidth * adjustedRatio);
-
-    setThumbScrollLeft(scrollWidth * adjustedRatio);
+    setThumbScrollLeft(adjustedScrollWidth * adjustedRatio);
   };
 
   useEffect(() => {
