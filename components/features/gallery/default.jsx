@@ -79,7 +79,7 @@ const Gallery = (props) => {
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
   const PG01Ref = useRef(null);
-  const mobileBreakPoint = 1023;
+  const mobileBreakPoint = 768;
 
   const actions = {
     PREV: 'PREV',
