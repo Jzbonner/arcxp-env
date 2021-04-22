@@ -29,6 +29,17 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     'Redesign Feature - Left Photo No Photo',
   ];
 
+  const isTTDFeature = displayClass === '7-Item TTD Feature';
+  const isLeftNoPhotoFeature = displayClass === 'Redesign Feature - Left Photo No Photo';
+
+  let squareImageSize = null;
+  let useSquareImageAfter = 0;
+  if (isTTDFeature) {
+    squareImageSize = 110;
+    useSquareImageAfter = 1;
+  }
+  if (isLeftNoPhotoFeature) squareImageSize = 80;
+
   const data = useContent({
     source: contentService,
     query: {
@@ -36,10 +47,10 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       arcSite,
       displayClass,
       displayClassesRequiringImg,
+      squareImageSize,
+      useSquareImageAfter,
     },
   });
-
-  const isLeftNoPhotoFeature = displayClass === 'Redesign Feature - Left Photo No Photo';
 
   function getDisplayClassMap(displayC) {
     switch (displayC) {
@@ -63,7 +74,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     }
   }
 
-  function getLists(apiData, start, limit, isTTDFeature = false) {
+  function getLists(apiData, start, limit) {
     const listLimit = limitOverride || limit;
     let itemCounter = 0; /* item counter for Left Photo No Feature feature */
     return apiData.map((el, i) => {
@@ -99,7 +110,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - Redesigned Lead - No Photo':
         return <Headline {...apiData[startIndex]} isTease={true} />;
       case '7-Item TTD Feature':
-        return getLists(apiData, startIndex + 1, 3, true);
+        return getLists(apiData, startIndex + 1, 3);
       case 'Redesign Feature - Left Photo No Photo':
         return getLists(apiData, startIndex + 5, 9);
       default:
@@ -121,7 +132,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
           </>
         );
       case '7-Item TTD Feature':
-        return getLists(apiData, startIndex + 4, 3, true);
+        return getLists(apiData, startIndex + 4, 3);
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex + 3, 2);
       default:
