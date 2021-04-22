@@ -101,16 +101,19 @@ const Gallery = (props) => {
   let mobileFuncs = {};
   let mobileState = {};
   let preRenderEls = null;
+  let fetchedGalleryData = null;
 
   // if standalone feature, fetches a specific gallery
   const { galleryUrl } = customFields;
-
-  const fetchedGalleryData = useContent({
-    source: 'gallery-api',
-    query: {
-      path: galleryUrl,
-    },
-  });
+  if (galleryUrl) {
+    fetchedGalleryData = useContent({
+      source: 'gallery-api',
+      query: {
+        arcSite,
+        path: galleryUrl,
+      },
+    });
+  }
 
   const [, forceUpdate] = useReducer(x => x + 1, 0);
 
