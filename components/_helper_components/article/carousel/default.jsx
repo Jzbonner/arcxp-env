@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
-import buildCarouselItem from './_helper_functions/buildCarouselItems';
+import buildCarouselItems from './_helper_functions/buildCarouselItems';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
+import FilterElements from '../../../../content/sources/helper_functions/FilterElements';
 import './default.scss';
 
 const Carousel = ({ storyId, taxonomy }) => {
@@ -38,9 +39,9 @@ const Carousel = ({ storyId, taxonomy }) => {
     },
   });
 
-  if (!relatedStoryData) return null;
-
-  const carouselItems = buildCarouselItem(relatedStoryData, storyId, logoPath, arcSite, formattedPath);
+  if (!relatedStoryData || !relatedStoryData.content_elements) return null;
+  const relatedStoryTeases = FilterElements(relatedStoryData.content_elements, 'carousel', ['carousel']);
+  const carouselItems = buildCarouselItems(relatedStoryTeases, storyId, logoPath, arcSite, formattedPath);
 
   return (
     <div className="c-carousel">
