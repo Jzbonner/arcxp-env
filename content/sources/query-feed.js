@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
+import FetchResizedImages from './helper_functions/FetchResizedImages';
 import getQueryData from './helper_functions/getQueryData';
 
 const schemaName = 'query-feed';
@@ -48,6 +49,12 @@ const fetch = (query) => {
     displayClass = '',
     displayClassesRequiringImg = [],
     useFetch = false,
+    width = 500,
+    height = 282,
+    useSrcSet = false,
+    srcSetSizes = [],
+    squareImageSize,
+    useSquareImageAfter,
   } = query;
 
   const activeSite = arcSite || arcSiteAlt;
@@ -117,6 +124,7 @@ const fetch = (query) => {
   return getQueryData(activeSite, newBody, from, size, useFetch)
     .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
     .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
+    .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes, squareImageSize, useSquareImageAfter))
     .catch((error) => {
       console.error(error);
     });

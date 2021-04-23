@@ -40,22 +40,10 @@
 
 @mixin section() {
   display: block;
-  max-width: 1080px;
-  padding: 0 $min-margin;
   margin-right: auto;
   margin-left: auto;
-
-  @include breakpoint(tablet) {
-    width: 88.3%;
-  }
-
-  @include breakpoint(desktop-sm) {
-    width: 83.9%;
-  }
-
-  @include breakpoint(desktop-lg) {
-    width: 60.7%;
-  }
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @mixin home-and-section() {
@@ -151,6 +139,7 @@
 
     .arcad {
       padding-bottom: 0;
+      padding-top: 30px;
       width: 100%;
     }
   }

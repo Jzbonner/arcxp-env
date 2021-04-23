@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import _ from 'lodash';
+import pick from 'lodash/pick';
 import GetCollectionData from './helper_functions/GetCollectionData';
 import StoryData from './helper_functions/getStoryData';
 import filter from '../filters/collectionFilter';
@@ -26,7 +26,7 @@ const fetch = (query) => {
   if (id) {
     return GetCollectionData(activeSite, id, size)
       .then(data => StoryData(activeSite, data))
-      .then(data => data.map(el => _.pick(el, filter)))
+      .then(data => data.map(el => pick(el, filter)))
       .catch((error) => {
         console.error('Error: ', error);
       });

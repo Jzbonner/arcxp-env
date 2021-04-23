@@ -53,7 +53,7 @@ ScrollBar.propTypes = {
   currentScrollLeft: PropTypes.number,
   maxScrollLeft: PropTypes.number,
   maxWidth: PropTypes.number,
-  sliderId: PropTypes.number,
+  sliderId: PropTypes.string,
 };
 
 export default ScrollBar;

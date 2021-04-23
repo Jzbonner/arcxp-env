@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import pick from 'lodash/pick';
 import filter from '../../filters/most-read';
 
 export default (apiData, host, blacklist) => {
@@ -6,5 +6,5 @@ export default (apiData, host, blacklist) => {
   pageData = pageData.filter(
     page => !blacklist.some(listItem => `${host}${listItem.uri}` === page.path),
   );
-  return pageData.map(el => _.pick(el, filter));
+  return pageData.map(el => pick(el, filter));
 };

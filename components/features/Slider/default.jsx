@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 import { useContent } from 'fusion:content';
-import { useFusionContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import { buildSliderItems, getAmount } from './_helper_functions/index';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import ScrollBar from '../../_helper_components/home/Slider/ScrollBar';
@@ -11,7 +11,9 @@ import RightArrow from '../../../resources/icons/slider/right-arrow.svg';
 import './default.scss';
 
 const Slider = (customFields = {}) => {
+  const appContext = useAppContext();
   const fusionContext = useFusionContext();
+  const { isAdmin } = appContext;
   const { arcSite } = fusionContext;
   const {
     customFields: {
@@ -163,6 +165,37 @@ const Slider = (customFields = {}) => {
     return null;
   };
 
+  const sliderOutput = () => (<div ref={wrapperRef} className={`c-slider-wrapper
+      b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
+    <FeatureTitle title={title} moreURL={moreURL} />
+    <div className="c-slider">
+      <div className={`c-slider-content ${idSuffix} ${isPad ? 'is-Tablet' : ''}`} onScroll={handleOverflowScroll}>
+        <div ref={contentRef} className="itemList">
+          {sliderItems}
+        </div>
+      </div>
+      <div className="c-slider-nav">
+        <a className="c-slider-button" onClick={() => handleArrowClick(actions.LEFT)}>
+          <img src={LeftArrow} />
+        </a>
+        <ScrollBar
+          maxWidth={contentWidth}
+          maxScrollLeft={maxScrollLeft}
+          currentScrollLeft={scrollLeft}
+          sliderId={idSuffix}
+        />
+        <a className="c-slider-button is-right" onClick={() => handleArrowClick(actions.RIGHT)}>
+          <img src={RightArrow} />
+        </a>
+      </div>
+    </div>
+  </div>
+  );
+
+  if (isAdmin) {
+    return sliderOutput();
+  }
+
   useEffect(() => {
     getInitWindowSize();
     genId();
@@ -181,31 +214,7 @@ const Slider = (customFields = {}) => {
       offset={300}
       overflow={true}
       once={true}>
-      <div ref={wrapperRef} className={`c-slider-wrapper
-      b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
-        <FeatureTitle title={title} moreURL={moreURL} />
-        <div className="c-slider">
-          <div className={`c-slider-content ${idSuffix} ${isPad ? 'is-Tablet' : ''}`} onScroll={handleOverflowScroll}>
-            <div ref={contentRef} className="itemList">
-              {sliderItems}
-            </div>
-          </div>
-          <div className="c-slider-nav">
-            <a className="c-slider-button" onClick={() => handleArrowClick(actions.LEFT)}>
-              <img src={LeftArrow} />
-            </a>
-            <ScrollBar
-              maxWidth={contentWidth}
-              maxScrollLeft={maxScrollLeft}
-              currentScrollLeft={scrollLeft}
-              sliderId={idSuffix}
-            />
-            <a className="c-slider-button is-right" onClick={() => handleArrowClick(actions.RIGHT)}>
-              <img src={RightArrow} />
-            </a>
-          </div>
-        </div>
-      </div>
+      {sliderOutput()}
     </LazyLoad>
   );
 };

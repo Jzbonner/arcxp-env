@@ -13,11 +13,9 @@
     }
   }
 
-  &.HS02 {
-    margin-bottom: 30px;
-  }
-
   &.c-sectionHome {
+    max-width: 1540px;
+
     @include between-breakpoints(mobile, tablet) {
       width: 94%;
       padding: 0;

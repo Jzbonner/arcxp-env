@@ -16,16 +16,32 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', title = '', columns = 1, moreURL,
   } = customFields;
 
-  let { from: startIndex = 1 } = contentConfigValues || {};
-  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
+  // removed old startIndex logic as it's already been "subsetted" by the time we get `data` back from the content source, so we really only want to start from the beginning (of that subset of data) at this point
+  const startIndex = 0;
 
   const displayClassesRequiringImg = [
     '5-Item Feature - Top Photo',
     '5-Item Feature - Left Photo',
     '5-Item Feature - Center Lead Top Photo',
     '5-Item Feature - No Photo',
+    '5-Item Feature - Redesigned Lead - No Photo',
+    '7-Item TTD Feature',
     'Redesign Feature - Left Photo No Photo',
   ];
+
+  const isTTDFeature = displayClass === '7-Item TTD Feature';
+  const isLeftNoPhotoFeature = displayClass === 'Redesign Feature - Left Photo No Photo';
+
+  let squareImageSize = null;
+  let useSquareImageAfter = -1;
+  if (isTTDFeature) {
+    squareImageSize = 110;
+    useSquareImageAfter = 1;
+  }
+  if (isLeftNoPhotoFeature) {
+    squareImageSize = 80;
+    useSquareImageAfter = 0;
+  }
 
   const data = useContent({
     source: contentService,
@@ -34,10 +50,10 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       arcSite,
       displayClass,
       displayClassesRequiringImg,
+      squareImageSize,
+      useSquareImageAfter,
     },
   });
-
-  const isLeftNoPhotoFeature = displayClass === 'Redesign Feature - Left Photo No Photo';
 
   function getDisplayClassMap(displayC) {
     switch (displayC) {
@@ -48,6 +64,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
         return 'left-photo-display-class';
       case '5-Item Feature - No Photo':
         return 'no-photo-display-class';
+      case '5-Item Feature - Redesigned Lead - No Photo':
+        return 'redesigned-no-photo-display-class';
       case '5-Item Feature - Center Lead Top Photo':
         return 'center-lead-display-class';
       case '1 or 2 Item Feature':
@@ -59,7 +77,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     }
   }
 
-  function getLists(apiData, start, limit, isTTDFeature = false) {
+  function getLists(apiData, start, limit) {
     const listLimit = limitOverride || limit;
     let itemCounter = 0; /* item counter for Left Photo No Feature feature */
     return apiData.map((el, i) => {
@@ -92,9 +110,10 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - Left Photo':
       case '5-Item Feature - No Photo':
       case '5-Item Feature - Center Lead Top Photo':
+      case '5-Item Feature - Redesigned Lead - No Photo':
         return <Headline {...apiData[startIndex]} isTease={true} />;
       case '7-Item TTD Feature':
-        return getLists(apiData, startIndex + 1, 3, true);
+        return getLists(apiData, startIndex + 1, 3);
       case 'Redesign Feature - Left Photo No Photo':
         return getLists(apiData, startIndex + 5, 9);
       default:
@@ -108,6 +127,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - Left Photo':
         return getLists(apiData, startIndex + 1, 4);
       case '5-Item Feature - No Photo':
+      case '5-Item Feature - Redesigned Lead - No Photo':
         return (
           <>
             <FeatureTitle title={title} moreURL={moreURL} />
@@ -115,7 +135,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
           </>
         );
       case '7-Item TTD Feature':
-        return getLists(apiData, startIndex + 4, 3, true);
+        return getLists(apiData, startIndex + 4, 3);
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex + 3, 2);
       default:
@@ -156,7 +176,7 @@ Lead.propTypes = {
     content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
       name: 'Content',
     }),
-    displayClass: PropTypes.oneOf(['5-Item Feature - Top Photo', '5-Item Feature - Left Photo', '5-Item Feature - No Photo', '5-Item Feature - Center Lead Top Photo', '1 or 2 Item Feature', '7-Item TTD Feature', 'Redesign Feature - Left Photo No Photo']).tag({
+    displayClass: PropTypes.oneOf(['5-Item Feature - Top Photo', '5-Item Feature - Left Photo', '5-Item Feature - No Photo', '5-Item Feature - Redesigned Lead - No Photo', '5-Item Feature - Center Lead Top Photo', '1 or 2 Item Feature', '7-Item TTD Feature', 'Redesign Feature - Left Photo No Photo']).tag({
       name: 'Display Class',
       defaultValue: '5-Item Feature - Top Photo',
     }),

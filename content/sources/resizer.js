@@ -17,12 +17,12 @@ export default {
   fetch({
     src, height = 600, width = 1000, srcSetSizes = [], originalHeight, originalWidth, smart, focalCoords, arcSite,
   }) {
-    const { cdnOrg, cdnSite, allowedDimensions } = getProperties(arcSite);
+    const { cdnSite, allowedDimensions } = getProperties(arcSite);
     if (!src) return null;
     let reqWidth = width;
     let reqHeight = height;
     const buildOutputUrl = (w, h) => {
-      const useFocalCrop = focalCoords.length === 2;
+      const useFocalCrop = focalCoords?.length === 2;
       const focalPoints = {};
 
       if (useFocalCrop) {
@@ -37,11 +37,8 @@ export default {
         focalPoints.bottom = cropHeight - focalPoints.top > originalHeight ? cropHeight : originalHeight - (cropHeight - focalPoints.top);
       }
 
-      let siteDomain = `${cdnOrg}-${cdnSite}-sandbox.cdn.arcpublishing.com`;
-      if (currentEnv === 'prod') {
-        const connextSite = cdnSite.replace(/-/g, '');
-        siteDomain = `www.${connextSite === 'journalnews' ? 'journal-news' : connextSite}.com`;
-      }
+      const connextSite = cdnSite.replace(/-/g, '');
+      const siteDomain = `${currentEnv === 'prod' ? 'www' : 'sandbox'}.${connextSite === 'journalnews' ? 'journal-news' : connextSite}.com`;
 
       const resizerUrl = `https://${siteDomain}/resizer`;
       const imageUrl = src.substring(src.indexOf('//') + 2);
@@ -54,7 +51,7 @@ export default {
       return outputUrl;
     };
 
-    if (srcSetSizes.length) {
+    if (srcSetSizes?.length) {
       const outputUrlArray = [];
       srcSetSizes.forEach((size) => {
         reqWidth = size[0] || width;

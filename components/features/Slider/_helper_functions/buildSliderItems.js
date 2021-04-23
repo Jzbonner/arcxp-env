@@ -6,10 +6,10 @@ const buildSliderItems = (sliderCollection, ref, startIndex, itemLimit, viewport
   let elCount = 0;
   const sliderItems = sliderCollection.map((elem, i) => {
     if (startIndex <= i && elCount < itemLimit) {
-      const itemThumbnail = getItemThumbnail(elem.promo_items || elem.firstInlineImage);
+      const itemThumbnail = getItemThumbnail(elem.teaseImageObject || elem.promo_items || elem.firstInlineImage);
 
       const data = {};
-      data.classes = elCount === 0 ? 'is-firstItem' : '';
+      // data.classes = elCount === 0 ? 'is-firstItem' : '';
       data.index = elCount;
 
       elCount += 1;

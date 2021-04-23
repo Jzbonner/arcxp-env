@@ -9,6 +9,7 @@ import checkWindowSize from '../utils/check_window_size/default';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import getTeaseIcon from './_helper_functions/getTeaseIcon';
+import setFocalCoords from '../../../../content/sources/helper_functions/setFocalCoords';
 import './default.scss';
 
 /*
@@ -24,33 +25,35 @@ const Image = ({
   ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [], additionalClasses = '', noLazyLoad = false,
 }) => {
   const {
-    url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties,
+    resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, focal_point: rootFocalPoint, useSrcSet: hasSrcSet = false,
   } = src || {};
-  const { focal_point: focalPoint } = additionalProperties || {};
-  const { min: focalMin = [], max: focalMax = [] } = focalPoint || {};
-  const focalCoords = focalMin || focalMax || [];
   const fusionContext = useFusionContext();
   const { arcSite, layout } = fusionContext;
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
   const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
+  let img = null;
+  if (resizedObject) {
+    img = resizedObject;
+  } else {
+    const focalCoords = setFocalCoords(additionalProperties, rootFocalPoint);
+    const imgQuery = {
+      src: url,
+      height,
+      width,
+      srcSetSizes,
+      originalHeight,
+      originalWidth,
+      focalCoords,
+      arcSite,
+    };
 
-  const imgQuery = {
-    src: url,
-    height,
-    width,
-    srcSetSizes,
-    originalHeight,
-    originalWidth,
-    focalCoords,
-    arcSite,
-  };
-
-  const img = useContent({
-    source: 'resizer',
-    query: imgQuery,
-  });
+    img = useContent({
+      source: 'resizer',
+      query: imgQuery,
+    });
+  }
 
   const screenSize = checkWindowSize();
 
@@ -96,7 +99,7 @@ const Image = ({
     } = img;
     const dataSrc = imgSrc || mImage.src || url;
     const renderImgTag = () => <>
-      {useSrcSet && srcSetSizes.length ? (
+      {useSrcSet || hasSrcSet ? (
         <picture className={teaseContentType ? 'tease-image' : ''}>
           <source srcSet={dtImage.src} media="(min-width: 1200px)" />
           <source srcSet={tImage.src} media="(min-width: 768px)" />
@@ -166,10 +169,12 @@ const Image = ({
   }
   return null;
 };
+
 Image.propTypes = {
+  resized_obj: PropTypes.object,
   src: PropTypes.object.isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
   imageMarginBottom: PropTypes.string,
   imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage', 'isGalleryImage']).isRequired,
   maxTabletViewWidth: PropTypes.number,
