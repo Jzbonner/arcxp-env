@@ -49,7 +49,7 @@ const SliderItem = ({ data, refHook }) => {
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
       <a href={canonicalUrl} className="homeList-image">
-        <Image height={149}
+        <Image height={150}
           width={150}
           src={imageData}
           canonicalUrl={canonicalUrl || null}
