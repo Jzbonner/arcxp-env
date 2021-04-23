@@ -53,13 +53,12 @@ const Slider = (customFields = {}) => {
   let squareImageSize = null;
   const useSquareImageAfter = 0;
 
-
   const getInitWindowSize = () => {
     if (window.innerWidth > tabletBreakPoint) {
       squareImageSize = 150;
     }
     if (window.innerWidth <= tabletBreakPoint) {
-      squareImageSize = 142;
+      squareImageSize = 124;
     }
     if (window.innerWidth <= mobileBreakpoint) {
       squareImageSize = 105;
