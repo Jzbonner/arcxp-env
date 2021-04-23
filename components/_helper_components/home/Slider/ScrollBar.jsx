@@ -12,7 +12,6 @@ const ScrollBar = ({
 
   const scrollTrackEl = useRef(null);
 
-
   const calculateThumbWidth = () => {
     const scrollWidth = scrollTrackEl.current ? scrollTrackEl.current.offsetWidth : null;
 
