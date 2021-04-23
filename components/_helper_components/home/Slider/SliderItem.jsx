@@ -12,7 +12,7 @@ import getTeaseIcon from '../../global/image/_helper_functions/getTeaseIcon';
 import TimeStamp from '../../article/timestamp/default';
 import './SliderItem.scss';
 
-const SliderItem = ({ data, refHook, viewport }) => {
+const SliderItem = ({ data, refHook }) => {
   const {
     classes, headline, image: imageData, canonicalUrl, sectionLabelData, contentType, timestampData,
   } = data;
@@ -32,11 +32,6 @@ const SliderItem = ({ data, refHook, viewport }) => {
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
   const sponsorName = getSponsorData(sections);
 
-  const dimensionType = {
-    HEIGHT: 'HEIGHT',
-    WIDTH: 'WIDTH',
-  };
-
   function getLabelContent() {
     if (sponsorName) {
       return <div className="c-sponsor">Advertiser Content</div>;
@@ -49,37 +44,13 @@ const SliderItem = ({ data, refHook, viewport }) => {
     return null;
   }
 
-  function getImageSize(type) {
-    /* check viewport prop to decide img size */
-    if (viewport === 'DESKTOP') {
-      if (type === 'HEIGHT') {
-        return 149;
-      }
-      return 150;
-    }
-    if (viewport === 'TABLET') {
-      if (type === 'HEIGHT') {
-        return 123;
-      }
-      return 124;
-    }
-    if (viewport === 'MOBILE') {
-      if (type === 'HEIGHT') {
-        return 104;
-      }
-      return 105;
-    }
-
-    return null;
-  }
-
   if (!canonicalUrl || !imageData) return null;
 
   return (
     <div ref={refHook || null} className={`c-slider-item ${classes || ''}`}>
       <a href={canonicalUrl} className="homeList-image">
-        <Image height={getImageSize(dimensionType.HEIGHT)}
-          width={getImageSize(dimensionType.WIDTH)}
+        <Image height={149}
+          width={150}
           src={imageData}
           canonicalUrl={canonicalUrl || null}
           imageType="isHomepageImage"
@@ -119,7 +90,6 @@ SliderItem.propTypes = {
   firstPublishDate: PropTypes.string,
   taxonomy: PropTypes.object,
   label: PropTypes.object,
-  viewport: PropTypes.string,
 };
 
 export default SliderItem;

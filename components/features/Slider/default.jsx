@@ -21,12 +21,11 @@ const Slider = (customFields = {}) => {
     },
   } = customFields;
 
-  let { from: startIndex, size: itemLimit } = contentConfigValues || {};
-  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
+  let { size: itemLimit } = contentConfigValues || {};
+  const startIndex = 0;
   itemLimit = parseInt(itemLimit, 10) || 10;
 
   const [sliderItems, setSliderItems] = useState(null);
-  const [viewportState, setViewportState] = useState('');
   const [contentWidth, setContentWidth] = useState(0);
   const [idSuffix, setIdSuffix] = useState('');
   const [scrollLeft, setScrollLeft] = useState(0);
@@ -41,12 +40,6 @@ const Slider = (customFields = {}) => {
     SUB: 'SUB',
   };
 
-  const states = {
-    DESKTOP: 'DESKTOP',
-    TABLET: 'TABLET',
-    MOBILE: 'MOBILE',
-  };
-
   const wrapperRef = useRef(null);
   const contentRef = useRef(null);
   const elRefs = useRef([]);
@@ -57,6 +50,22 @@ const Slider = (customFields = {}) => {
 
   const displayClassesRequiringImg = ['Slider', 'Slider - Special Features'];
 
+  let squareImageSize = null;
+  const useSquareImageAfter = 0;
+
+
+  const getInitWindowSize = () => {
+    if (window.innerWidth > tabletBreakPoint) {
+      squareImageSize = 150;
+    }
+    if (window.innerWidth <= tabletBreakPoint) {
+      squareImageSize = 142;
+    }
+    if (window.innerWidth <= mobileBreakpoint) {
+      squareImageSize = 105;
+    }
+  };
+
   const data = useContent({
     source: contentService,
     query: {
@@ -64,6 +73,8 @@ const Slider = (customFields = {}) => {
       arcSite,
       displayClass,
       displayClassesRequiringImg,
+      squareImageSize,
+      useSquareImageAfter,
     },
   });
 
@@ -71,7 +82,7 @@ const Slider = (customFields = {}) => {
     if (el && !refArray.current.includes(el)) refArray.current.push(el);
   };
 
-  if (data && !sliderItems) setSliderItems(buildSliderItems(data, el => addToRefs(el, elRefs), startIndex, itemLimit, viewportState));
+  if (data && !sliderItems) setSliderItems(buildSliderItems(data, el => addToRefs(el, elRefs), startIndex, itemLimit));
 
   const isPad = typeof navigator !== 'undefined' ? navigator.userAgent.match(/iPad|Tablet/i) != null : false;
   const itemOffsetWidth = elRefs.current && elRefs.current[0] ? elRefs.current[0].scrollWidth + marginOffset : null;
@@ -100,18 +111,6 @@ const Slider = (customFields = {}) => {
     }
 
     return null;
-  };
-
-  const getInitWindowSize = () => {
-    if (window.innerWidth > tabletBreakPoint) {
-      setViewportState(states.DESKTOP);
-    }
-    if (window.innerWidth <= tabletBreakPoint) {
-      setViewportState(states.TABLET);
-    }
-    if (window.innerWidth <= mobileBreakpoint) {
-      setViewportState(states.MOBILE);
-    }
   };
 
   const getIsSpecial = () => {
