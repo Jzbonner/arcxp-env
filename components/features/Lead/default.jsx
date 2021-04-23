@@ -32,7 +32,9 @@ const Lead = ({ customFields = {}, limitOverride }) => {
   const isTTDFeature = displayClass === '7-Item TTD Feature';
   const isLeftNoPhotoFeature = displayClass === 'Redesign Feature - Left Photo No Photo';
 
+  // use squareImageSize to override the default height/width of tease images for cases where we want a square aspect ratio
   let squareImageSize = null;
+  // useSquareImageAfter determines _when_ square images take effect.  For example, the TTD feature should only use square images after the first item (which retains the default 16:9 ratio). If your feature uses all square images, you would set this to 0 (as with LeftPhotoNoPhoto display class)
   let useSquareImageAfter = -1;
   if (isTTDFeature) {
     squareImageSize = 110;
