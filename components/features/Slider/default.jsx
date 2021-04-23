@@ -6,6 +6,8 @@ import { useFusionContext } from 'fusion:context';
 import { buildSliderItems, getAmount } from './_helper_functions/index';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import ScrollBar from '../../_helper_components/home/Slider/ScrollBar';
+import LeftArrow from '../../../resources/icons/slider/left-arrow.svg';
+import RightArrow from '../../../resources/icons/slider/right-arrow.svg';
 import './default.scss';
 
 const Slider = (customFields = {}) => {
@@ -23,11 +25,12 @@ const Slider = (customFields = {}) => {
 
   const [sliderItems, setSliderItems] = useState(null);
   const [viewportState, setViewportState] = useState('');
-  const [translateX, setTranslateX] = useState(0);
   const [contentWidth, setContentWidth] = useState(0);
   const [idSuffix, setIdSuffix] = useState('');
   const [scrollLeft, setScrollLeft] = useState(0);
   const [maxScrollLeft, setMaxScrollLeft] = useState(0);
+  const [wasButtonClicked, setButtonClickState] = useState(false);
+  const [overflowScroll, setOverflowScroll] = useState(0);
 
   const actions = {
     LEFT: 'LEFT',
@@ -70,25 +73,28 @@ const Slider = (customFields = {}) => {
 
   const isPad = typeof navigator !== 'undefined' ? navigator.userAgent.match(/iPad|Tablet/i) != null : false;
   const itemOffsetWidth = elRefs.current && elRefs.current[0] ? elRefs.current[0].scrollWidth + marginOffset : null;
-  const wrapperClientWidth = wrapperRef.current ? wrapperRef.current.clientWidth : null;
-  const contentFullWidth = contentRef.current && sliderItems
-    ? contentRef.current.offsetWidth - wrapperClientWidth + marginOffset * 2 : null;
 
-  const calculateTranslateX = (direction) => {
+  const calculateScrollLeft = (direction) => {
     if (direction === actions.LEFT) {
-      const change = getAmount(contentFullWidth, itemOffsetWidth, translateX, actions.SUB);
-      if (change) setTranslateX(translateX + change);
+      const change = getAmount(maxScrollLeft, itemOffsetWidth, scrollLeft, actions.SUB);
+      if (change) {
+        setOverflowScroll(scrollLeft - change);
+        setButtonClickState(true);
+      }
     } else if (direction === actions.RIGHT) {
-      const change = getAmount(contentFullWidth, itemOffsetWidth, translateX, actions.ADD);
-      if (change) setTranslateX(translateX - change);
+      const change = getAmount(maxScrollLeft, itemOffsetWidth, scrollLeft, actions.ADD);
+      if (change) {
+        setOverflowScroll(scrollLeft + change);
+        setButtonClickState(true);
+      }
     }
   };
 
   const handleArrowClick = (direction) => {
     if (direction === actions.RIGHT) {
-      calculateTranslateX(actions.RIGHT);
+      calculateScrollLeft(actions.RIGHT);
     } else if (direction === actions.LEFT) {
-      calculateTranslateX(actions.LEFT);
+      calculateScrollLeft(actions.LEFT);
     }
 
     return null;
@@ -121,12 +127,8 @@ const Slider = (customFields = {}) => {
     return null;
   };
 
-  useEffect(() => {
-    getInitWindowSize();
-    genId();
-  }, []);
-
   const handleOverflowScroll = () => {
+    if (wasButtonClicked) return null;
     const sliderContent = document.querySelector('.itemList');
     const sliderContainer = document.querySelector('.c-slider-content');
 
@@ -134,7 +136,8 @@ const Slider = (customFields = {}) => {
     const sliderScrollLeft = sliderContainer.scrollLeft;
 
     if (sliderScrollLeft !== scrollLeft) {
-      setScrollLeft(sliderScrollLeft);
+      const diff = sliderScrollLeft - scrollLeft;
+      setScrollLeft(scrollLeft + diff);
     }
 
     if (sliderMaxWidth !== contentWidth) {
@@ -145,7 +148,30 @@ const Slider = (customFields = {}) => {
       const maxScrollLeftSlider = sliderContainer.scrollWidth - sliderContainer.clientWidth;
       setMaxScrollLeft(maxScrollLeftSlider);
     }
+
+    return null;
   };
+
+  const handleButtonScrollEffect = () => {
+    const contentSliderArr = document.getElementsByClassName(`c-slider-content ${idSuffix}`);
+
+    if (!contentSliderArr || !contentSliderArr[0]) return null;
+
+    setButtonClickState(false);
+    contentSliderArr[0].scrollLeft = overflowScroll;
+
+    return null;
+  };
+
+  useEffect(() => {
+    getInitWindowSize();
+    genId();
+  }, []);
+
+
+  useEffect(() => {
+    handleButtonScrollEffect();
+  }, [overflowScroll]);
 
   return (
     <LazyLoad
@@ -159,15 +185,14 @@ const Slider = (customFields = {}) => {
       b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
         <FeatureTitle title={title} moreURL={moreURL} />
         <div className="c-slider">
-          <div className={`c-slider-content ${isPad ? 'is-Tablet' : ''}`} onScroll={handleOverflowScroll}>
-            <div ref={contentRef} className="itemList" style={{ transform: `translateX(${translateX}px)` }}>
+          <div className={`c-slider-content ${idSuffix} ${isPad ? 'is-Tablet' : ''}`} onScroll={handleOverflowScroll}>
+            <div ref={contentRef} className="itemList">
               {sliderItems}
             </div>
           </div>
           <div className="c-slider-nav">
             <a className="c-slider-button" onClick={() => handleArrowClick(actions.LEFT)}>
-              <div className="top-arrow"></div>
-              <div className="bottom-arrow"></div>
+              <img src={LeftArrow} />
             </a>
             <ScrollBar
               maxWidth={contentWidth}
@@ -176,24 +201,9 @@ const Slider = (customFields = {}) => {
               sliderId={idSuffix}
             />
             <a className="c-slider-button is-right" onClick={() => handleArrowClick(actions.RIGHT)}>
-              <div className="top-arrow"></div>
-              <div className="bottom-arrow"></div>
+              <img src={RightArrow} />
             </a>
           </div>
-          {/*           {viewportState === states.DESKTOP && !isPad && (
-            <>
-              {translateX !== 0 ? (
-                <a className="left-arrow" onClick={() => handleArrowClick(actions.LEFT)}>
-                  <img src={rightArrow} />
-                </a>
-              ) : null}
-              {Math.abs(translateX) < contentFullWidth ? (
-                <a className="right-arrow" onClick={() => handleArrowClick(actions.RIGHT)}>
-                  <img src={rightArrow} />
-                </a>
-              ) : null}
-            </>
-          )} */}
         </div>
       </div>
     </LazyLoad>

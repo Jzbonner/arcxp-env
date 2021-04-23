@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './ScrollBar.scss';
 
@@ -10,9 +10,11 @@ const ScrollBar = ({
   const [thumbWidth, setThumbWidth] = useState(0);
   const [thumbScrollLeft, setThumbScrollLeft] = useState(0);
 
+  const scrollTrackEl = useRef(null);
+
 
   const calculateThumbWidth = () => {
-    const scrollWidth = document.querySelector('.scroll-track').offsetWidth;
+    const scrollWidth = scrollTrackEl.current ? scrollTrackEl.current.offsetWidth : null;
 
     const widthRatio = parseInt(scrollWidth, 10) / parseInt(maxWidth, 10);
 
@@ -22,10 +24,10 @@ const ScrollBar = ({
       setThumbWidth(thumbW);
     }
   };
-
+  /* Ensures the ScrollBar thumb's scrollLeft value
+  is proportional to the main content container's scrollLeft value */
   const calculateScrollLeft = (sliderScrollLeft) => {
-    const scrollWidth = document.querySelector('.scroll-track').offsetWidth;
-
+    const scrollWidth = scrollTrackEl.current ? scrollTrackEl.current.offsetWidth : null;
     const adjustedRatio = sliderScrollLeft / maxScrollLeft;
     const adjustedScrollWidth = scrollWidth - thumbWidth;
     setThumbScrollLeft(adjustedScrollWidth * adjustedRatio);
@@ -41,7 +43,7 @@ const ScrollBar = ({
 
   return (
     <div className="c-scroll-bar">
-      <div className={`scroll-track ${scrollId}`}>
+      <div ref={scrollTrackEl} className={`scroll-track ${scrollId}`}>
         <div id={scrollId} style={{ width: `${thumbWidth}px`, transform: `translateX(${thumbScrollLeft}px)` }} className="scroll-thumb"></div>
       </div>
     </div>
@@ -51,8 +53,8 @@ const ScrollBar = ({
 ScrollBar.propTypes = {
   currentScrollLeft: PropTypes.number,
   maxScrollLeft: PropTypes.number,
-  maxWidth: PropTypes.string,
-  sliderId: PropTypes.string,
+  maxWidth: PropTypes.number,
+  sliderId: PropTypes.number,
 };
 
 export default ScrollBar;
