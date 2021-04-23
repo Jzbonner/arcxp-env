@@ -17,6 +17,7 @@ export default [
   'firstInlineImage.caption',
   'firstInlineImage.credits.affiliation.by.id',
   'firstInlineImage.credits.by',
+  'focal_point',
   'headlines.basic',
   'label.custom_label.display',
   'label.custom_label.text',
