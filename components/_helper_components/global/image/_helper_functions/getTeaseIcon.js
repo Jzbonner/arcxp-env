@@ -1,6 +1,8 @@
 import React from 'react';
-import galleryIcon from '../../../../../resources/icons/tease/gallery.svg';
-import videoIcon from '../../../../../resources/icons/tease/video.svg';
+import galleryIcon from '../../../../../resources/icons/tease/redesign/camera-icon.svg';
+import videoIcon from '../../../../../resources/icons/tease/redesign/video.svg';
+import docIcon from '../../../../../resources/icons/tease/redesign/documents.svg';
+import podcastIcon from '../../../../../resources/icons/tease/redesign/podcast.svg';
 import '../default.scss';
 
 export default function getTeaseIcon(teaseContentType, isAmp) {
@@ -10,6 +12,10 @@ export default function getTeaseIcon(teaseContentType, isAmp) {
     iconToRender = videoIcon;
   } else if (teaseContentType && teaseContentType.toLowerCase() === 'gallery') {
     iconToRender = galleryIcon;
+  } else if (teaseContentType && teaseContentType.toLowerCase() === 'document') {
+    iconToRender = docIcon;
+  } else if (teaseContentType && teaseContentType.toLowerCase() === 'podcast') {
+    iconToRender = podcastIcon;
   }
 
   if (iconToRender) {
