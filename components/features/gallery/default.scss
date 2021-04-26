@@ -158,9 +158,8 @@
   .arc_ad {
     margin: 0;
 
-    .PG02 {
-      padding-top: 15px;
-      margin-bottom: 15px;
+    #div-id-PG02 {
+      padding-top: 10px;
     }
   }
 
@@ -349,18 +348,7 @@
   }
 }
 
-@media (min-width: 768px) {
-
-  .gallery-caption-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-}
-
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
 
   .gallery__immersive .gallery-sticky .gallery-count {
     border-radius: 6px;
@@ -469,7 +457,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
 
   .hidden-large {
     display: none;
@@ -496,8 +484,7 @@
     bottom: 0;
     box-sizing: border-box;
     height: auto;
-    min-width: 1000px;
-    max-width: 58vw;
+    width: 180px;
     margin: 1.875rem auto .5rem;
   }
 
@@ -507,9 +494,16 @@
     bottom: 0;
     box-sizing: border-box;
     height: auto;
-    min-width: 1000px;
-    max-width: 58vw;
     margin: .313rem auto 6rem;
+
+    @include between-breakpoints(tablet,desktop-sm) {
+      width: calc(100% - 40px);
+    }
+
+    @include breakpoint(desktop-sm) {
+      width: 100%;
+      max-width: 932px;
+    }
 
     .gallery-caption {
       @include text-styles(1rem, 1.88, "Gordita");
@@ -535,11 +529,11 @@
     @include text-styles(1rem, normal, "Gordita");
 
     .gallery-count-prev {
-      left: 42%;
+      left: 0;
     }
 
     .gallery-count-next {
-      right: 42%;
+      right: 0;
     }
   }
 
