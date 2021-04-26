@@ -34,7 +34,7 @@ const SiteMetaAmp = () => {
   let pageTitle = seoTitle;
   if (!seoTitle) pageTitle = title;
 
-  const parsedDescription = safeHtml(description, { allowedTags: [], allowedAttributes: {} });
+  const parsedDescription = safeHtml(description, { whiteList: {} });
 
   return (
     <>
