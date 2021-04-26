@@ -522,9 +522,11 @@ export const adSlots = {
     slotName: 'PG02',
     dimensions: [
       [88, 31], // desktop
+      [88, 31], // tablet
     ],
     breakpoints: [
       [1024, 0], // desktop
+      [768, 0], // tablet
     ],
   },
   MPG01: {
