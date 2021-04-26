@@ -668,7 +668,7 @@ const Gallery = (props) => {
       && galHeadline
       ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
     {pageType !== 'story' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
-    <div className={`${!isStory ? 'c-gallery-homeSection b-sectionHome-padding' : ''}`}>
+    <div className={`${!isStory ? 'c-gallery-homeSection' : ''}`}>
       {!isMobile
         ? <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
           <ImageModal src={currentImageSrc} isVisible={modalVisible} />

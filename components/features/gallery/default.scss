@@ -500,7 +500,7 @@
     margin: .313rem auto 6rem;
 
     @include between-breakpoints(tablet,desktop-sm) {
-      width: calc(100% - 40px);
+      width: calc(100% - 80px);
     }
 
     @include breakpoint(desktop-sm) {
