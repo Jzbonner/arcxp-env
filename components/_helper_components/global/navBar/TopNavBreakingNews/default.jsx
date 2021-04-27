@@ -19,15 +19,19 @@ const TopNavBreakingNews = ({
   omitBreakingNews = false,
   galleryTopics = [],
 }) => {
-  const [aboveWindowShade, setAboveWindowShade] = useState(false);
+  const [aboveWindowShade, setAboveWindowShade, hasHalfShade, setHasHalfShade] = useState(false);
   const windowExists = typeof window !== 'undefined';
 
-  const docHasWindowShade = (checkCollapse) => {
+  const docHasWindowShade = (checkCollapse, checkHalfShade) => {
     if (windowExists) {
       const docBody = document.querySelector('body');
 
       if (checkCollapse) {
         return docBody.classList.contains('window-shade-collapsed');
+      }
+
+      if (checkHalfShade) {
+        return docBody.querySelector('#div-id-HS01 > div')?.innerHTML !== '';
       }
 
       return docBody.classList.contains('window-shade');
@@ -53,11 +57,14 @@ const TopNavBreakingNews = ({
             setAboveWindowShade(true);
           } else if (docHasWindowShade(true)) {
             setAboveWindowShade(false);
+            setHasHalfShade(true);
+          } else if (docHasWindowShade(null, true)) {
+            setHasHalfShade(true);
           }
         }
       };
     }
-  }, [aboveWindowShade]);
+  }, [aboveWindowShade, hasHalfShade]);
 
   useEffect(() => {
     if (windowExists) {
@@ -73,7 +80,7 @@ const TopNavBreakingNews = ({
   return (
     <>
       {!noAds && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
-      <div className={`nav-breaking-news ${aboveWindowShade ? 'is-above-shade' : ''}`} >
+      <div className={`nav-breaking-news ${aboveWindowShade ? 'is-above-shade' : ''} ${docHasWindowShade(true) || hasHalfShade ? 'with-half-shade' : ''}`} >
         <WeatherAlerts />
         <NavBar
           articleURL={articleURL}
