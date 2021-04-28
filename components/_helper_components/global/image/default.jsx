@@ -8,7 +8,6 @@ import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
-import getTeaseIcon from './_helper_functions/getTeaseIcon';
 import setFocalCoords from '../../../../content/sources/helper_functions/setFocalCoords';
 import './default.scss';
 
@@ -150,7 +149,6 @@ const Image = ({
             </amp-img>
           </amp-img>
       )}
-      {teaseContentType && getTeaseIcon(teaseContentType)}
     </>;
 
     if (isGalleryImage) {
