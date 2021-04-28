@@ -19,7 +19,8 @@ const TopNavBreakingNews = ({
   omitBreakingNews = false,
   galleryTopics = [],
 }) => {
-  const [aboveWindowShade, setAboveWindowShade, hasHalfShade, setHasHalfShade] = useState(false);
+  const [aboveWindowShade, setAboveWindowShade] = useState(false);
+  const [hasHalfShade, setHasHalfShade] = useState(false);
   const windowExists = typeof window !== 'undefined';
 
   const docHasWindowShade = (checkCollapse, checkHalfShade) => {
