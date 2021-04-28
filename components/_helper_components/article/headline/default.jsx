@@ -23,7 +23,6 @@ const Headline = ({
   // promoData.type = 'video';
   return (
     <div className={`article-headline-component b-margin-bottom-d30-m20 with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
-      {/* {isTease && promoData.type && getTeaseIcon(promoData.type)} */}
       {!ampVideoIframe && <div className="headline">
         <div className="headline-body">
           <h1 className={`headline-text ${headlines.basic.length > 50 ? 'headline-text-long' : ''}`}>{headlines.basic}</h1>
