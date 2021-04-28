@@ -1,3 +1,4 @@
+/* stylelint-disable declaration-no-important */
 @import "./../base/breakpoints";
 @import "./../base/mixins";
 
@@ -15,7 +16,7 @@
   width: 100%;
 
   @include breakpoint(desktop-lg) {
-    max-width: 1600px;
+    max-width: 1600px !important;
   }
 }
 
@@ -58,7 +59,7 @@
 }
 
 .c-articleContent {
-  
+
   .border-top {
     display: none;
   }
@@ -67,7 +68,7 @@
 @include amp-exclude {
 
   body .c-articleContent .c-articleBodyContainer {
-    height: auto !important; /* stylelint-disable declaration-no-important */
+    height: auto !important;
 
     &.is-safari .c-section {
 
