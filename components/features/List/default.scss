@@ -444,7 +444,7 @@
         width: 100%;
 
         @include breakpoint(tablet) {
-          width: calc((100% - 82px) / 2);
+          width: calc((100% - 82px) / 3);
         }
       }
     }
