@@ -10,7 +10,7 @@
     background: #fff;
   }
 
-  &.with-half-shade .c-breakingNews {
+  &.with-half-shade:not(.is-above-shade) .c-breakingNews {
     margin-top: 15px;
 
     @include breakpoint(desktop-sm) {
