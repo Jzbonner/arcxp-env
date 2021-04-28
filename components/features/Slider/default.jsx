@@ -43,27 +43,11 @@ const Slider = (customFields = {}) => {
   const wrapperRef = useRef(null);
   const contentRef = useRef(null);
   const elRefs = useRef([]);
-
   const marginOffset = 15;
-  const tabletBreakPoint = 1023;
-  const mobileBreakpoint = 768;
-
   const displayClassesRequiringImg = ['Slider', 'Slider - Special Features'];
 
-  let squareImageSize = null;
+  const squareImageSize = 150;
   const useSquareImageAfter = 0;
-
-  const getInitWindowSize = () => {
-    if (window.innerWidth > tabletBreakPoint) {
-      squareImageSize = 150;
-    }
-    if (window.innerWidth <= tabletBreakPoint) {
-      squareImageSize = 124;
-    }
-    if (window.innerWidth <= mobileBreakpoint) {
-      squareImageSize = 105;
-    }
-  };
 
   const data = useContent({
     source: contentService,
@@ -195,7 +179,6 @@ const Slider = (customFields = {}) => {
   }
 
   useEffect(() => {
-    getInitWindowSize();
     genId();
   }, []);
 
