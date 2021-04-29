@@ -116,6 +116,22 @@
   cursor: pointer;
   width: 30px;
   height: 30px;
+  border-radius: 15px;
+  box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, .6);
+  border: solid 1px #ececec;
+  padding: 8px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    height: 20px;
+  }
+}
+
+.gallery-image a img {
+  height: 100%;
+  opacity: .5;
 }
 
 .gallery-image {
@@ -348,14 +364,11 @@
   height: 100%;
 }
 
-@media (max-width: 767px) {
+@include between-breakpoints(mobile,tablet) {
 
   .hidden-small {
     display: none;
   }
-}
-
-@media (max-width: 768px) {
 
   .gallery__immersive .gallery-sticky .gallery-count {
     border-radius: 6px;
