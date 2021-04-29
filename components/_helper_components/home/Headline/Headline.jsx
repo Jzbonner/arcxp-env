@@ -44,7 +44,7 @@ const Headline = ({
 
   function getPromoItem(contentType) {
     if (teaseImageObject) {
-      return <Image src={teaseImageObject} width={1066} height={600} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} />;
+      return <Image src={teaseImageObject} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} />;
     }
     return null;
   }
