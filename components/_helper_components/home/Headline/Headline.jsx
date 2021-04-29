@@ -13,7 +13,6 @@ import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import './Headline.scss';
 
 const Headline = ({
-  promo_items: promoItems,
   label,
   taxonomy,
   first_publish_date: firstPublishDate,
@@ -22,7 +21,7 @@ const Headline = ({
   canonical_url: canonicalUrl,
   website_url: websiteUrl,
   type,
-  firstInlineImage,
+  teaseImageObject,
   isTease,
 }) => {
   const appContext = useAppContext();
@@ -44,25 +43,8 @@ const Headline = ({
   const relativeURL = websiteUrl || canonicalUrl || '/';
 
   function getPromoItem(contentType) {
-    if (promoItems) {
-      if (contentType === 'video' || contentType === 'gallery') {
-        if (promoItems.basic) {
-          return <Image src={promoItems.basic} width={1066} height={600} imageType="isHomepageImage" teaseContentType={contentType} />;
-        }
-      }
-      if (promoItems.basic.type === 'image') {
-        return (
-          <Image src={promoItems.basic || promoItems.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />
-        );
-      }
-      if (promoItems.basic.type === 'video' || promoItems.basic.type === 'gallery') {
-        if (promoItems.basic.promo_items && promoItems.basic.promo_items.basic) {
-          return <Image src={promoItems.basic.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />;
-        }
-      }
-    }
-    if (firstInlineImage) {
-      return <Image src={firstInlineImage} width={1066} height={600} imageType="isHomepageImage" />;
+    if (teaseImageObject) {
+      return <Image src={teaseImageObject} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} />;
     }
     return null;
   }
@@ -108,14 +90,13 @@ const Headline = ({
 };
 
 Headline.propTypes = {
-  promo_items: PropTypes.object,
   label: PropTypes.object,
   taxonomy: PropTypes.object,
   first_publish_date: PropTypes.string,
   display_date: PropTypes.string,
   headlines: PropTypes.object,
   type: PropTypes.string,
-  firstInlineImage: PropTypes.object,
+  teaseImageObject: PropTypes.object,
   isTease: PropTypes.bool,
   canonical_url: PropTypes.string,
   website_url: PropTypes.string,

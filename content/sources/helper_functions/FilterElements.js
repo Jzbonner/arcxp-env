@@ -10,7 +10,7 @@ export default (apiData, currentDisplayClass = '', requiredClasses = []) => {
             && el.promo_items.basic.promo_image
             && el.promo_items.basic.promo_image.url
           ) {
-            newData[e].teaseImageObject = el.promo_items.basic;
+            newData[e].teaseImageObject = el.promo_items.basic.promo_image;
             return true;
           }
           if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
@@ -23,7 +23,7 @@ export default (apiData, currentDisplayClass = '', requiredClasses = []) => {
             || (el.promo_items && el.promo_items.basic && el.promo_items.basic.type === 'gallery')
           ) {
             if (el.promo_items.basic.promo_items && el.promo_items.basic.promo_items.basic && el.promo_items.basic.promo_items.basic.url) {
-              newData[e].teaseImageObject = el.promo_items.basic.promo_items;
+              newData[e].teaseImageObject = el.promo_items.basic.promo_items.basic;
               return true;
             }
           }

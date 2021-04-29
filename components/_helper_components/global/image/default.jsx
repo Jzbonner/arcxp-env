@@ -8,7 +8,7 @@ import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
-import getTeaseIcon from './_helper_functions/getTeaseIcon';
+import setFocalCoords from '../../../../content/sources/helper_functions/setFocalCoords';
 import './default.scss';
 
 /*
@@ -24,7 +24,7 @@ const Image = ({
   ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [], additionalClasses = '', noLazyLoad = false,
 }) => {
   const {
-    resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, useSrcSet: hasSrcSet = false,
+    resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, focal_point: rootFocalPoint, useSrcSet: hasSrcSet = false,
   } = src || {};
   const fusionContext = useFusionContext();
   const { arcSite, layout } = fusionContext;
@@ -33,13 +33,10 @@ const Image = ({
   const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
   let img = null;
-
   if (resizedObject) {
     img = resizedObject;
   } else {
-    const { focal_point: focalPoint } = additionalProperties || {};
-    const { min: focalMin = [], max: focalMax = [] } = focalPoint || {};
-    const focalCoords = focalMin || focalMax || [];
+    const focalCoords = setFocalCoords(additionalProperties, rootFocalPoint);
     const imgQuery = {
       src: url,
       height,
@@ -152,7 +149,6 @@ const Image = ({
             </amp-img>
           </amp-img>
       )}
-      {teaseContentType && getTeaseIcon(teaseContentType)}
     </>;
 
     if (isGalleryImage) {

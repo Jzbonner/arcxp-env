@@ -54,6 +54,8 @@ const fetch = (query) => {
     height = 282,
     useSrcSet = false,
     srcSetSizes = [],
+    squareImageSize,
+    useSquareImageAfter,
   } = query;
 
   const activeSite = arcSite || arcSiteAlt;
@@ -123,7 +125,7 @@ const fetch = (query) => {
   return getQueryData(activeSite, newBody, from, size, useFetch)
     .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
     .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
-    .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes))
+    .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes, squareImageSize, useSquareImageAfter))
     .then(data => FilterGallery(data))
     .catch((error) => {
       console.error(error);

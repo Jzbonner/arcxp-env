@@ -60,7 +60,7 @@ const ListItemPreview = ({ id }) => {
       && storyData.content_elements[1]) {
         previewData = `${storyData.content_elements[0].content} ${storyData.content_elements[1].content}`;
       }
-      const textContent = safeHtml(previewData, { allowedTags: [], allowedAttributes: {} });
+      const textContent = safeHtml(previewData, { whiteList: {} });
       setBaseText(textContent.concat('...'));
       setText(textContent.concat('...'));
       setPreRender(true);

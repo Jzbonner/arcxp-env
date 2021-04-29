@@ -14,7 +14,7 @@ export default function getAmount(limit, changeAmount, currentAmount, operation)
   if (operation === 'SUB') {
     if (currentAmount === 0) return null;
     const result = Math.abs(currentAmount) - changeAmount;
-    if (result < 0 || result === 0) return -currentAmount;
+    if (result < 0 || result === 0) return currentAmount;
     if (result > 0) return changeAmount;
     return null;
   }

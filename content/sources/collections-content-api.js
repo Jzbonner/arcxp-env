@@ -17,13 +17,14 @@ const fetch = (query) => {
     'arc-site': arcSiteAlt, // 'arc-site' comes from globalContentConfig
     arcSite,
     id,
+    from,
     size = 12,
   } = query;
 
   const activeSite = arcSite || arcSiteAlt;
 
   if (id) {
-    return GetCollectionData(activeSite, id, size)
+    return GetCollectionData(activeSite, id, size, from)
       .then(data => StoryData(activeSite, data))
       .then(data => FilterGallery(data))
       .catch((error) => {
