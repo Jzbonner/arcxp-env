@@ -23,7 +23,7 @@ export default `
   promo_items.basic.promo_items.basic.height,
   promo_items.basic.promo_items.basic.caption,
   promo_items.basic.promo_items.basic.subtitle,
-  promo_items.basic.promo_items.basic.caption,
+  promo_items.basic.promo_items.basic.credits,
   promo_items.basic.promo_items.basic.type,
   promo_items.basic.streams.stream_type,
   promo_items.basic.streams.url,

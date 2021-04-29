@@ -3,6 +3,7 @@ import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
 import FetchResizedImages from './helper_functions/FetchResizedImages';
 import getQueryData from './helper_functions/getQueryData';
+import FilterGallery from './helper_functions/filterRssGallery';
 
 const schemaName = 'query-feed';
 const bodybuilder = require('bodybuilder');
@@ -123,6 +124,7 @@ const fetch = (query) => {
     .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
     .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
     .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes))
+    .then(data => FilterGallery(data))
     .catch((error) => {
       console.error(error);
     });

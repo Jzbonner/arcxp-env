@@ -2,6 +2,9 @@
 // A pick function is used to filter data because a Sources Include parameter can't be used with the collection api.
 export default [
   'canonical_url',
+  'caption',
+  'url',
+  'credits',
   'content_elements',
   'credits.by',
   'credits.by[0]',
@@ -26,8 +29,7 @@ export default [
   'promo_items.basic.additional_properties.focal_point',
   'promo_items.basic.alt_text',
   'promo_items.basic.caption',
-  'promo_items.basic.content_elements.caption',
-  'promo_items.basic.content_elements.url',
+  'promo_items.basic.content_elements',
   'promo_items.basic.credits.affiliation.by.id',
   'promo_items.basic.credits.by',
   'promo_items.basic.height',
@@ -41,7 +43,7 @@ export default [
   'promo_items.basic.promo_items.basic.height',
   'promo_items.basic.promo_items.basic.caption',
   'promo_items.basic.promo_items.basic.subtitle',
-  'promo_items.basic.promo_items.basic.caption',
+  'promo_items.basic.promo_items.basic.credits',
   'promo_items.basic.promo_items.basic.type',
   'promo_items.basic.streams[0].stream_type',
   'promo_items.basic.streams[0].url',
