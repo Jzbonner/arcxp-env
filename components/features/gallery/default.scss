@@ -6,7 +6,7 @@
   height: 480px;
   visibility: hidden;
 
-  @include breakpoint(tablet) {
+  @media (min-width: 768px) {
     visibility: visible;
   }
 }
@@ -244,7 +244,7 @@
     .gallery-index {
       @include text-styles(.625rem, normal, "Gordita");
 
-      @include breakpoint(tablet) {
+      @media (min-width: 768px) {
         @include text-styles(1rem, normal, "Gordita");
       }
 
@@ -364,7 +364,7 @@
   height: 100%;
 }
 
-@include between-breakpoints(mobile,tablet) {
+@media (max-width: 767px) { // targeting 767px since iPad Mini's width is 768px and it has to have DT view
 
   .hidden-small {
     display: none;
@@ -477,7 +477,7 @@
   }
 }
 
-@include breakpoint(tablet) {
+@media (min-width: 768px) {
 
   .hidden-large {
     display: none;
@@ -511,22 +511,19 @@
     box-sizing: border-box;
     height: auto;
     margin: .313rem auto 6rem;
+    min-width: auto;
 
-    @include between-breakpoints(tablet,desktop-sm) {
+    @media (min-width: 768px) and (max-width: 1024px) {
       width: calc(100% - 80px);
     }
 
-    @include breakpoint(desktop-sm) {
+    @media (min-width: 1024px) {
       width: 100%;
       max-width: 932px;
     }
 
     .gallery-caption {
       font-size: 1.25rem;
-    }
-
-    @include breakpoint(tablet) {
-      min-width: auto;
     }
   }
 
