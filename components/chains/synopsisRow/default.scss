@@ -100,7 +100,7 @@
           font-size: unset;
 
           a {
-            @include text-styles(1rem, 1.5, "Lora");
+            @include text-styles(1rem, 1, "Lora");
 
             letter-spacing: -.27px;
           }
