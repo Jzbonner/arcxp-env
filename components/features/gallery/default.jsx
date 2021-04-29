@@ -80,7 +80,7 @@ const Gallery = (props) => {
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
   const PG01Ref = useRef(null);
-  const mobileBreakPoint = 768;
+  const mobileBreakPoint = 767;
 
   const actions = {
     PREV: 'PREV',
@@ -501,16 +501,13 @@ const Gallery = (props) => {
 
   useEffect(() => {
     getInitWindowSize();
-    console.log('AD VISIBLE 3 ', isAdVisible);
   }, []);
 
   useEffect(() => {
     if (elementData && !isStickyVisible && currentAction !== '' && currentAction !== actions.AD_REMOVED) {
       finalizeGalleryItems();
-      console.log('AD VISIBLE 4 ', isAdVisible);
     } else if (elementData && !isStickyVisible && currentAction === actions.AD_REMOVED && clickType === types.IMAGE) {
       renderDesktopGalleryElements([...elementData]);
-      console.log('AD VISIBLE 5 ', isAdVisible);
     }
 
     if (isStickyVisible && isAdInsertable && mobileElementData) {
@@ -523,20 +520,17 @@ const Gallery = (props) => {
   useEffect(() => {
     if (!isMobile && galleryEl && galleryEl.current) {
       calculateTranslateX();
-      console.log('AD VISIBLE 6 ', isAdVisible);
 
       if (elementData && (hasOpened || modalVisible) && !isMobile && currentAction === actions.UPDATE_CLICK_FUNCS) {
         const elements = preRenderEls || elementData;
         renderDesktopGalleryElements([...elements]);
         setCurrentAction('');
-        console.log('AD VISIBLE 7 ', isAdVisible);
       }
     }
   }, [isAdVisible, currentIndex, currentAction, translateX, elementData, captionData, galleryEl, hasOpened, modalVisible]);
 
   useEffect(() => {
     if (!isAdVisible && !isMobile) renderCaptionByCurrentIndex();
-    console.log('AD VISIBLE 8 ', isAdVisible);
   }, [baseCaptionData]);
 
   // handles ad insertions and removals for desktop gallery
@@ -549,10 +543,9 @@ const Gallery = (props) => {
 
   useEffect(() => {
     if (!isMobile) {
-      console.log('CLICK COUNT 1', clickCount);
       if (clickCount !== 0 && clickCount % 4 === 0) {
         setAdVisibleState(true);
-        console.log('AD IS VISIBLE ', isAdVisible);
+        console.log('AD IS VISIBLE, CLICK COUNT IS 4 ', isAdVisible);
         console.log('CLICK COUNT WHEN AD IS VISIBLE', clickCount);
       }
       console.log('AD VISIBLE 9 ', isAdVisible);
@@ -564,15 +557,12 @@ const Gallery = (props) => {
       } else if (isAdVisible && clickCount % 4 === 1) {
         const adRemovedElementArray = removeGalleryAd();
         let reorganizedElements = null;
-        console.log('AD VISIBLE 11 ', isAdVisible);
 
         if (clickType !== types.IMAGE) {
           if (clickDirection === actions.PREV) {
             reorganizedElements = handlePrevious(adRemovedElementArray, true);
-            console.log('AD VISIBLE 12 ', isAdVisible);
           } else {
             reorganizedElements = handleNext(adRemovedElementArray, true);
-            console.log('AD VISIBLE 13 ', isAdVisible);
           }
         }
 
@@ -601,7 +591,6 @@ const Gallery = (props) => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScrollEvent, true);
-    console.log('AD VISIBLE 1 ', isAdVisible);
 
     // returned function will be called when component unmounts
     return () => {
@@ -611,7 +600,6 @@ const Gallery = (props) => {
 
   useEffect(() => {
     window.addEventListener('resize', handleResizeEvent, true);
-    console.log('AD VISIBLE 2 ', isAdVisible);
     return () => {
       window.removeEventListener('resize', handleResizeEvent, true);
     };
