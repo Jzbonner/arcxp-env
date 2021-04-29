@@ -475,14 +475,10 @@
           background: none;
           border-radius: 0;
           box-shadow: unset;
-          padding: 10px 0;
-
-          @include between-breakpoints(mobile,tablet) {
-            padding-top: 0;
-          }
+          padding: 0 0 10px;
 
           .headline {
-            margin: 10px 0;
+            margin: 0 0 10px;
           }
         }
       }
@@ -510,9 +506,13 @@
         }
   
         &:first-child {
-  
-          .c-label-wrapper {
+
+          .homeList-text {
             margin-top: 0;
+
+            .c-label-wrapper {
+              margin-top: 0;
+            }
           }
         }
   
