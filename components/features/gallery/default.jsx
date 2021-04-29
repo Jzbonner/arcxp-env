@@ -548,7 +548,12 @@ const Gallery = (props) => {
 
   useEffect(() => {
     if (!isMobile) {
-      if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
+      console.log('CLICK COUNT 1', clickCount);
+      if (clickCount !== 0 && clickCount % 4 === 0) {
+        setAdVisibleState(true);
+        console.log('AD IS VISIBLE ', isAdVisible);
+        console.log('CLICK COUNT WHEN AD IS VISIBLE', clickCount);
+      }
       console.log('AD VISIBLE 9 ', isAdVisible);
 
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
