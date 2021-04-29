@@ -10,6 +10,8 @@ const GalleryItem = ({
   } = data;
   const { affiliation = [], caption = [] } = captionObj;
 
+  console.log('STATES ', states);
+
   const {
     isFocused, isStickyVisible, isCaptionOn, isMobile, isAdVisible, isModalVisible,
   } = states;

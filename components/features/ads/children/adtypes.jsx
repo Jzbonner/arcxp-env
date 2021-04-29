@@ -513,9 +513,14 @@ export const adSlots = {
         [600, 400],
         [300, 250],
       ], // desktop
+      [
+        [600, 400],
+        [300, 250],
+      ], // tablet
     ],
     breakpoints: [
       [1024, 0], // desktop
+      [768, 0], // tablet
     ],
   },
   PG02: {
