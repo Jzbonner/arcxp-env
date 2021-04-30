@@ -1,5 +1,4 @@
 /* eslint-disable no-nested-ternary */
-import imageResizer from '../../../layouts/_helper_functions/Thumbor';
 import getVideoAuthor from './getVideoAuthor';
 import mediaObj from './mediaObj';
 
@@ -98,7 +97,6 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         return {};
       }
 
-      let resizerUrl = url;
       let mediaObjectUrl = '';
 
 
@@ -122,11 +120,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         }
       }
 
-      if (mediaMedium === 'image') {
-        resizerUrl = imageResizer(url, siteID);
-      }
-
-      return mediaObj(mediaType, mediaMedium, `${localType === 'image' ? resizerUrl : mediaObjectUrl}`, siteID, subtitle, caption, mediaAuthor, false, '', false);
+      return mediaObj(mediaType, mediaMedium, `${localType === 'image' ? url : mediaObjectUrl}`, siteID, subtitle, caption, mediaAuthor, false, '', false);
     });
   }
 
