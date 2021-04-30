@@ -81,6 +81,10 @@
       @include breakpoint(tablet) {
         width: 50%;
       }
+
+      .headline-box {
+        margin-top: 0;
+      }
     }
 
     .column-3 {
@@ -92,32 +96,19 @@
       .c-homeList {
 
         .headline {
-          margin-top: -5px;
+          margin-top: 0;
           font-size: unset;
 
           a {
-            @include text-styles(1.25rem, 1.5, "Lora");
+            @include text-styles(1rem, 1, "Lora");
 
             letter-spacing: -.27px;
-
-            @include breakpoint(desktop-sm) {
-              letter-spacing: -.32px;
-
-              @include text-styles(1.1rem, 1.5, "Lora");
-            }
-
-            @include breakpoint(desktop-lg) {
-              @include text-styles(1.2rem, 1.5, "Lora");
-            }
-
-            @media (min-width: 1500px) {
-              @include text-styles(1.3rem, 1.5, "Lora");
-            }
           }
         }
       }
     }
   }
+  
   
   .border-top {
     width: 100%;
