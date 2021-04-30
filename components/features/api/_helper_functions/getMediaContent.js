@@ -54,7 +54,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     const { caption: videoCaption, url: basicThumbNailImage = '' } = basicPromoImage || {};
     const videoAuthor = getVideoAuthor(basic);
     const checkVideoCaption = videoCaption || '';
-    leadObject = mediaObj(leadObjectType, 'video', leadObjectUrl, siteID, mediaTitle, checkVideoCaption, videoAuthor, true, basicThumbNailImage);
+    leadObject = mediaObj(leadObjectType, 'video', leadObjectUrl, siteID, mediaTitle, checkVideoCaption, videoAuthor, true, basicThumbNailImage, false);
   }
 
   if (promoItemsType === 'gallery' || standaloneGallery) {

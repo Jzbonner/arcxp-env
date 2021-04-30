@@ -1,13 +1,27 @@
-import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import resizer from '../../../../content/sources/resizer';
 
 export default (type = 'image/JPEG', medium = 'image', url, siteID, title, caption, author, hasThumbnail = false, thumbnailImage, needsResizer = true) => {
+  const imgQuery = {
+    src: url,
+    height: 600,
+    width: 1000,
+    arcSite: siteID,
+  };
+  const img = resizer.fetch(imgQuery);
+
   if (hasThumbnail) {
+    const thumb = resizer.fetch({
+      src: thumbnailImage,
+      height: 600,
+      width: 1000,
+      arcSite: siteID,
+    });
     return ({
       _name: 'media:content',
       _attrs: {
         type: `${type}`,
         medium: `${medium}`,
-        url: `${imageResizer(url, siteID)}`,
+        url: `${needsResizer ? img.src : url}`,
       },
       _content: [
         {
@@ -19,7 +33,7 @@ export default (type = 'image/JPEG', medium = 'image', url, siteID, title, capti
         {
           _name: 'media:thumbnail',
           _attrs: {
-            url: `${imageResizer(thumbnailImage, siteID)}`,
+            url: `${thumb.src}`,
           },
         },
         {
@@ -37,7 +51,7 @@ export default (type = 'image/JPEG', medium = 'image', url, siteID, title, capti
     _attrs: {
       type: `${type}`,
       medium: `${medium}`,
-      url: `${needsResizer ? imageResizer(url, siteID) : url}`,
+      url: `${needsResizer ? img.src : url}`,
     },
     _content: [
       {
