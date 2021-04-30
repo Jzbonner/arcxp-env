@@ -1,8 +1,22 @@
-.nav-breaking-news.is-above-shade {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 9999;
+@import "./../../../../../src/styles/base/breakpoints";
+
+.nav-breaking-news {
+
+  &.is-above-shade {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    background: #fff;
+  }
+
+  &.with-half-shade:not(.is-above-shade) .c-breakingNews {
+    margin-top: 15px;
+
+    @include breakpoint(desktop-sm) {
+      margin-top: 20px;
+    }
+  }
 }
 
 .b-hidden:empty {

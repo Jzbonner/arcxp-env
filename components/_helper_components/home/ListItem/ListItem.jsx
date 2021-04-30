@@ -10,6 +10,7 @@ import truncateHeadline from '../../../layouts/_helper_functions/homepage/trunca
 import ContributorBadge from '../../../_helper_components/global/contributorBadge/default';
 import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import ListItemPreview from '../ListItemPreview/ListItemPreview';
+import getTeaseIcon from '../../global/image/_helper_functions/getTeaseIcon';
 
 const ListItem = ({
   label,
@@ -107,6 +108,7 @@ const ListItem = ({
     <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''}`}>
       {!hidePromo && getPromoItem(sponsorName)}
       <div className="homeList-text">
+        {!hidePromo && getTeaseIcon(contentType)}
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
         <div className={`headline ${isListPage}`}>
           <a href={relativeURL}>

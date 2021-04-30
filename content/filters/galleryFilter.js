@@ -3,6 +3,7 @@ export default `
   content_elements,
   credits,
   display_date,
+  focal_point,
   first_publish_date,
   headlines,
   last_updated_date,

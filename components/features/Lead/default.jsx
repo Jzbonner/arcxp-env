@@ -25,8 +25,25 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     '5-Item Feature - Center Lead Top Photo',
     '5-Item Feature - No Photo',
     '5-Item Feature - Redesigned Lead - No Photo',
+    '7-Item TTD Feature',
     'Redesign Feature - Left Photo No Photo',
   ];
+
+  const isTTDFeature = displayClass === '7-Item TTD Feature';
+  const isLeftNoPhotoFeature = displayClass === 'Redesign Feature - Left Photo No Photo';
+
+  // use squareImageSize to override the default height/width of tease images for cases where we want a square aspect ratio
+  let squareImageSize = null;
+  // useSquareImageAfter determines _when_ square images take effect.  For example, the TTD feature should only use square images after the first item (which retains the default 16:9 ratio). If your feature uses all square images, you would set this to 0 (as with LeftPhotoNoPhoto display class)
+  let useSquareImageAfter = -1;
+  if (isTTDFeature) {
+    squareImageSize = 110;
+    useSquareImageAfter = startIndex + 1;
+  }
+  if (isLeftNoPhotoFeature) {
+    squareImageSize = 80;
+    useSquareImageAfter = 0;
+  }
 
   const data = useContent({
     source: contentService,
@@ -35,10 +52,10 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       arcSite,
       displayClass,
       displayClassesRequiringImg,
+      squareImageSize,
+      useSquareImageAfter,
     },
   });
-
-  const isLeftNoPhotoFeature = displayClass === 'Redesign Feature - Left Photo No Photo';
 
   function getDisplayClassMap(displayC) {
     switch (displayC) {
@@ -62,7 +79,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     }
   }
 
-  function getLists(apiData, start, limit, isTTDFeature = false) {
+  function getLists(apiData, start, limit) {
     const listLimit = limitOverride || limit;
     let itemCounter = 0; /* item counter for Left Photo No Feature feature */
     return apiData.map((el, i) => {
@@ -98,7 +115,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
       case '5-Item Feature - Redesigned Lead - No Photo':
         return <Headline {...apiData[startIndex]} isTease={true} />;
       case '7-Item TTD Feature':
-        return getLists(apiData, startIndex + 1, 3, true);
+        return getLists(apiData, startIndex + 1, 3);
       case 'Redesign Feature - Left Photo No Photo':
         return getLists(apiData, startIndex + 5, 9);
       default:
@@ -120,7 +137,7 @@ const Lead = ({ customFields = {}, limitOverride }) => {
           </>
         );
       case '7-Item TTD Feature':
-        return getLists(apiData, startIndex + 4, 3, true);
+        return getLists(apiData, startIndex + 4, 3);
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex + 3, 2);
       default:

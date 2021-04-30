@@ -22,7 +22,7 @@ export default {
     let reqWidth = width;
     let reqHeight = height;
     const buildOutputUrl = (w, h) => {
-      const useFocalCrop = focalCoords.length === 2;
+      const useFocalCrop = focalCoords?.length === 2;
       const focalPoints = {};
 
       if (useFocalCrop) {
@@ -51,7 +51,7 @@ export default {
       return outputUrl;
     };
 
-    if (srcSetSizes.length) {
+    if (srcSetSizes?.length) {
       const outputUrlArray = [];
       srcSetSizes.forEach((size) => {
         reqWidth = size[0] || width;
