@@ -15,7 +15,7 @@ function encodeSrc(src) {
 export default {
 
   fetch({
-    src, height = 600, width = 1000, srcSetSizes = [], originalHeight, originalWidth, smart, focalCoords, arcSite,
+    src, height = 600, width = 1000, srcSetSizes = [], originalHeight, originalWidth, smart, focalCoords, arcSite, isGallery = false,
   }) {
     const { cdnSite, allowedDimensions } = getProperties(arcSite);
     if (!src) return null;
@@ -44,8 +44,15 @@ export default {
       const imageUrl = src.substring(src.indexOf('//') + 2);
       const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerUrl);
       const imagePath = thumbor.setImagePath(encodeSrc(imageUrl));
-      const croppedUrl = (useFocalCrop) ? imagePath.crop(focalPoints.left, focalPoints.top, focalPoints.right, focalPoints.bottom) : imagePath;
-      const resizedUrl = croppedUrl.resize(w, h);
+      let croppedUrl = imagePath;
+      let resizedUrl = imagePath;
+      if (isGallery) {
+        // if it's a gallery image/request we don't want to crop it; instead, we "fit in" the 720x480 "hole"
+        resizedUrl = croppedUrl.fitIn(w, h); // .exf(w, h);
+      } else {
+        croppedUrl = (useFocalCrop) ? imagePath.crop(focalPoints.left, focalPoints.top, focalPoints.right, focalPoints.bottom) : imagePath;
+        resizedUrl = croppedUrl.resize(w, h);
+      }
       const thumborUrl = (smart) ? resizedUrl.smartCrop(true) : resizedUrl;
       const outputUrl = thumborUrl.buildUrl();
       return outputUrl;
