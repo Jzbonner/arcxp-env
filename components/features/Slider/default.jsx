@@ -73,6 +73,7 @@ const Slider = (customFields = {}) => {
   const calculateScrollLeft = (direction) => {
     if (direction === actions.LEFT) {
       const change = getAmount(maxScrollLeft, itemOffsetWidth, scrollLeft, actions.SUB);
+      console.log('change', change);
       if (change) {
         setOverflowScroll(scrollLeft - change);
         setButtonClickState(true);
@@ -90,6 +91,7 @@ const Slider = (customFields = {}) => {
     if (direction === actions.RIGHT) {
       calculateScrollLeft(actions.RIGHT);
     } else if (direction === actions.LEFT) {
+      console.log('calc left');
       calculateScrollLeft(actions.LEFT);
     }
 
@@ -111,25 +113,40 @@ const Slider = (customFields = {}) => {
     return null;
   };
 
+  const handleMaxWidth = () => {
+    const sliderContent = document.getElementsByClassName(`itemList ${idSuffix}`);
+
+    if (!sliderContent || !sliderContent[0]) return null;
+
+    const sliderMaxWidth = window.getComputedStyle(sliderContent[0]).width;
+    const parsedMaxWidth = parseInt(sliderMaxWidth, 10);
+
+    if (parsedMaxWidth !== contentWidth) {
+      setContentWidth(parsedMaxWidth);
+    }
+
+    return null;
+  };
+
   const handleOverflowScroll = () => {
     if (wasButtonClicked) return null;
-    const sliderContent = document.querySelector('.itemList');
-    const sliderContainer = document.querySelector('.c-slider-content');
-
-    const sliderMaxWidth = window.getComputedStyle(sliderContent).width;
-    const sliderScrollLeft = sliderContainer.scrollLeft;
+    const sliderContent = document.getElementsByClassName(`itemList ${idSuffix}`);
+    const sliderContainer = document.getElementsByClassName(`c-slider-content ${idSuffix}`);
+    const sliderMaxWidth = window.getComputedStyle(sliderContent[0]).width;
+    const parsedMaxWidth = parseInt(sliderMaxWidth, 10);
+    const sliderScrollLeft = sliderContainer[0].scrollLeft;
 
     if (sliderScrollLeft !== scrollLeft) {
       const diff = sliderScrollLeft - scrollLeft;
       setScrollLeft(scrollLeft + diff);
     }
 
-    if (sliderMaxWidth !== contentWidth) {
-      setContentWidth(sliderMaxWidth);
+    if (parsedMaxWidth !== contentWidth) {
+      setContentWidth(parsedMaxWidth);
     }
 
     if (!maxScrollLeft) {
-      const maxScrollLeftSlider = sliderContainer.scrollWidth - sliderContainer.clientWidth;
+      const maxScrollLeftSlider = sliderContainer[0].scrollWidth - sliderContainer[0].clientWidth;
       setMaxScrollLeft(maxScrollLeftSlider);
     }
 
@@ -141,18 +158,20 @@ const Slider = (customFields = {}) => {
 
     if (!contentSliderArr || !contentSliderArr[0]) return null;
 
-    setButtonClickState(false);
     contentSliderArr[0].scrollLeft = overflowScroll;
+    setButtonClickState(false);
 
     return null;
   };
+
+  console.log('overflowscroll', overflowScroll);
 
   const sliderOutput = () => (<div ref={wrapperRef} className={`c-slider-wrapper
       b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
     <FeatureTitle title={title} moreURL={moreURL} />
     <div className="c-slider">
       <div className={`c-slider-content ${idSuffix} ${isPad ? 'is-Tablet' : ''}`} onScroll={handleOverflowScroll}>
-        <div ref={contentRef} className="itemList">
+        <div ref={contentRef} className={`itemList ${idSuffix}`}>
           {sliderItems}
         </div>
       </div>
@@ -182,10 +201,13 @@ const Slider = (customFields = {}) => {
     genId();
   }, []);
 
+  useEffect(() => {
+    handleMaxWidth();
+  }, [idSuffix]);
 
   useEffect(() => {
     handleButtonScrollEffect();
-  }, [overflowScroll]);
+  }, [overflowScroll, wasButtonClicked]);
 
   return (
     <LazyLoad

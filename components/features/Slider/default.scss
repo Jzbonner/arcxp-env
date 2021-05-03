@@ -36,6 +36,7 @@
       scroll-behavior: smooth;
       overflow-x: scroll;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
 
       &::-webkit-scrollbar-track {
         display: none;
@@ -70,6 +71,7 @@
 
       .c-slider-button {
         display: none;
+        cursor: pointer;
       
         @include breakpoint(tablet) {
           display: flex;
