@@ -22,6 +22,8 @@ const ListItem = ({
   website_url: websiteUrl,
   listPage,
   type: contentType,
+  promo_items: promoItems,
+  firstInlineImage,
   teaseImageObject,
   showPreview,
   _id: id,
@@ -65,28 +67,32 @@ const ListItem = ({
   const promoWidth = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoWidth;
   const promoHeight = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoHeight;
 
-  function getPromoItem(sponsor) {
+  function getPromoItem() {
     if (teaseImageObject) {
-      return (
-        <a href={relativeURL} className="homeList-image">
-          <Image
-            src={teaseImageObject}
-            width={promoWidth}
-            height={promoHeight}
-            imageType="isHomepageImage"
-            teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null}
-          />
-          {sponsor && (
-            <div className="c-sponsorOverlay">{sponsor}</div>
-          )}
-        </a>
-      );
+      return teaseImageObject;
+    }
+    if (promoItems) {
+      if (contentType === 'video' || contentType === 'gallery') {
+        if (promoItems.basic) {
+          return promoItems.basic;
+        }
+      }
+      if (promoItems.basic.type === 'image') {
+        return promoItems.basic || promoItems.lead_art.promo_items.basic;
+      }
+      if (promoItems.basic.type === 'video' || promoItems.basic.type === 'gallery') {
+        if (promoItems.basic.promo_items && promoItems.basic.promo_items.basic) {
+          return promoItems.basic.promo_items.basic;
+        }
+      }
+    }
+    if (firstInlineImage) {
+      return firstInlineImage;
     }
 
     if (!isMissingPromo) {
       setIsMissingPromo('isMissingPromo');
     }
-
     return null;
   }
 
@@ -106,7 +112,12 @@ const ListItem = ({
 
   return (
     <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''}`}>
-      {!hidePromo && getPromoItem(sponsorName)}
+      {!hidePromo && getPromoItem() && (
+        <a href={relativeURL} className="homeList-image">
+          <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} />
+          {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
+        </a>
+      )}
       <div className="homeList-text">
         {!hidePromo && getTeaseIcon(contentType)}
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
@@ -144,6 +155,8 @@ ListItem.propTypes = {
   hidePromo: PropTypes.bool,
   isDontMissFeature: PropTypes.bool,
   isTTDFeature: PropTypes.bool,
+  promo_items: PropTypes.object,
+  firstInlineImage: PropTypes.object,
   teaseImageObject: PropTypes.object,
 };
 
