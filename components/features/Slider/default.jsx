@@ -73,7 +73,6 @@ const Slider = (customFields = {}) => {
   const calculateScrollLeft = (direction) => {
     if (direction === actions.LEFT) {
       const change = getAmount(maxScrollLeft, itemOffsetWidth, scrollLeft, actions.SUB);
-      console.log('change', change);
       if (change) {
         setOverflowScroll(scrollLeft - change);
         setButtonClickState(true);
@@ -91,7 +90,6 @@ const Slider = (customFields = {}) => {
     if (direction === actions.RIGHT) {
       calculateScrollLeft(actions.RIGHT);
     } else if (direction === actions.LEFT) {
-      console.log('calc left');
       calculateScrollLeft(actions.LEFT);
     }
 
@@ -163,8 +161,6 @@ const Slider = (customFields = {}) => {
 
     return null;
   };
-
-  console.log('overflowscroll', overflowScroll);
 
   const sliderOutput = () => (<div ref={wrapperRef} className={`c-slider-wrapper
       b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
