@@ -112,7 +112,7 @@ const ListItem = ({
 
   return (
     <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''}`}>
-      {!hidePromo && getPromoItem() && (
+      {!hidePromo && getPromoItem() && !isDontMissFeature && (
         <a href={relativeURL} className="homeList-image">
           <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} />
           {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
