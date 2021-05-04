@@ -8,12 +8,14 @@ const decodeString = (str) => {
   return parsed;
 };
 
-// https://github.com/apostrophecms/sanitize-html
 const safeHtml = (str, opt = {}) => {
   const preconfig = {
     whiteList: {
       '*': ['id'],
-      'a': ['href', 'data-*', 'target', 'class', 'on']
+      'a': ['href', 'data-*', 'target', 'class', 'on'],
+      'b': [],
+      'i': [],
+      'strong': [],
     }
   };
 

@@ -11,12 +11,15 @@
   margin: 0 auto;
 }
 
-.c-nav {
-  margin: 0 auto;
-  width: 100%;
+@include amp-exclude {
 
-  @include breakpoint(desktop-lg) {
-    max-width: 1600px !important;
+  .c-nav {
+    margin: 0 auto;
+    width: 100%;
+
+    @include breakpoint(desktop-lg) {
+      max-width: 1600px !important;
+    }
   }
 }
 
