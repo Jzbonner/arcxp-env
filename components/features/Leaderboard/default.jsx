@@ -19,7 +19,7 @@ const Leaderboard = () => {
 
   let tournaments = scheduleData.tournaments;
   for (let i = 28; i < tournaments.length; i++) {
-    if (tournaments[i].status === "inprogress" || tournaments[i].status === "closed") {
+    if (tournaments[i].status === "inprogress" || tournaments[i].status === "playoff" || tournaments[i].status === "complete" || tournaments[i].status === "closed") {
       if (tournaments[i].event_type === "stroke") {
         tournamentId = tournaments[i].id;
       }
