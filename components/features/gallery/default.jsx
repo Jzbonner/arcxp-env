@@ -96,6 +96,7 @@ const Gallery = (props) => {
   const types = {
     IMAGE: 'IMAGE',
     ARROW: 'ARROW',
+    SWIPE: 'SWIPE',
   };
 
   let mobileElemData;
@@ -397,7 +398,6 @@ const Gallery = (props) => {
 
   const handleNext = (arr, returnOnly = false) => {
     const newArr = [...arr];
-
     newArr.push(newArr.shift());
 
     if (returnOnly) {
@@ -408,7 +408,6 @@ const Gallery = (props) => {
 
   const handlePrevious = (arr, returnOnly = false) => {
     const newArr = [...arr];
-
     newArr.unshift(newArr.pop());
 
     if (returnOnly) {
@@ -532,28 +531,23 @@ const Gallery = (props) => {
     if (!isAdVisible && !isMobile) renderCaptionByCurrentIndex();
   }, [baseCaptionData]);
 
-  // handles ad insertions and removals for desktop gallery
+  // handles swiping functionality for tablets
   const handlers = useSwipeable({
-    onSwipedLeft: () => changeIndex(actions.NEXT, null, false),
-    onSwipedRight: () => changeIndex(actions.PREV, null, false),
+    onSwipedLeft: () => changeIndex(actions.NEXT, null, true),
+    onSwipedRight: () => changeIndex(actions.PREV, null, true),
     preventDefaultTouchmoveEvent: true,
-    trackTouch: true,
   });
 
+  // handles ad insertions and removals for desktop gallery
   useEffect(() => {
     if (!isMobile) {
-      if (clickCount !== 0 && clickCount % 4 === 0) {
-        setAdVisibleState(true);
-        console.log('AD IS VISIBLE, CLICK COUNT IS 4 ', isAdVisible);
-        console.log('CLICK COUNT WHEN AD IS VISIBLE', clickCount);
-      }
-      console.log('AD VISIBLE 9 ', isAdVisible);
-
+      console.log('CLICK TYPE ', clickType);
+      console.log('CLICK COUNT ', clickCount);
+      if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
         const adInsertedElementArray = insertDesktopGalleryAd();
         setElementData(adInsertedElementArray);
-        console.log('AD VISIBLE 10 ', isAdVisible);
-      } else if (isAdVisible && clickCount % 4 === 1) {
+      } else if (isAdVisible && (clickCount % 4) === 1) {
         const adRemovedElementArray = removeGalleryAd();
         let reorganizedElements = null;
 
@@ -567,19 +561,9 @@ const Gallery = (props) => {
 
         setAdVisibleState(false);
 
-        const finalizedElements = handleImageFocus(
-          reorganizedElements || adRemovedElementArray,
-          {
-            isStickyVisible,
-            isMobile,
-            isCaptionOn,
-            currentIndex,
-            maxIndex,
-            hasOpened,
-            modalVisible,
-          },
-          clickFuncs,
-        );
+        const finalizedElements = handleImageFocus((reorganizedElements || adRemovedElementArray), {
+          isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, hasOpened, modalVisible,
+        }, clickFuncs);
 
         setElementData(finalizedElements);
         setCurrentAction(actions.AD_REMOVED);
