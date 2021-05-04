@@ -32,6 +32,7 @@ const Image = ({
   const { deployment, contextPath } = appContext;
   const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
+  const isGalleryImage = imageType === 'isGalleryImage';
   let img = null;
   if (resizedObject) {
     img = resizedObject;
@@ -46,6 +47,7 @@ const Image = ({
       originalWidth,
       focalCoords,
       arcSite,
+      isGallery: isGalleryImage,
     };
 
     img = useContent({
@@ -69,8 +71,6 @@ const Image = ({
   } else if (secondaryCredit) {
     giveCredit = `Credit: ${secondaryCredit}`;
   }
-
-  const isGalleryImage = imageType === 'isGalleryImage';
 
   const renderCaption = () => {
     if (

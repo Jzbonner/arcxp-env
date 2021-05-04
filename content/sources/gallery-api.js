@@ -25,7 +25,10 @@ const fetch = (query = {}) => {
         Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
       },
     })
-    .then(({ data: galleryData }) => FetchResizedImages(arcSite, galleryData, 720, 480))
+    .then(({ data }) => {
+      console.error('dave, data from gallery-api', data);
+      FetchResizedImages(arcSite, data, 720, 480, false, null, null, null, true);
+    })
     .catch((error) => {
       console.log('AXIOS CATCH - gallery => ', error);
     });
