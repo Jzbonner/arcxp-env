@@ -534,11 +534,9 @@ const Gallery = (props) => {
   // handles swiping functionality for tablets
   const handlers = useSwipeable({
     onSwiped: () => console.log('SWIPED'),
-    onSwipedLeft: () => changeIndex(actions.NEXT, null, true),
-    onSwipedRight: () => changeIndex(actions.PREV, null, true),
-    preventDefaultTouchmoveEvent: false,
-    trackTouch: true,
-    trackMouse: false,
+    onSwipedLeft: () => changeIndex(actions.NEXT, null, false),
+    onSwipedRight: () => changeIndex(actions.PREV, null, false),
+    preventDefaultTouchmoveEvent: true,
   });
 
   // handles ad insertions and removals for desktop gallery
