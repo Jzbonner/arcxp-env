@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './ScrollBar.scss';
 
 const ScrollBar = ({
-  currentScrollLeft, maxWidth, maxScrollLeft, sliderId,
+  currentScrollLeft, maxWidth = 0, maxScrollLeft, sliderId,
 }) => {
   const scrollId = `slider-${sliderId}`;
 
@@ -14,7 +14,6 @@ const ScrollBar = ({
 
   const calculateThumbWidth = () => {
     const scrollWidth = scrollTrackEl.current ? scrollTrackEl.current.offsetWidth : null;
-
     const widthRatio = parseInt(scrollWidth, 10) / parseInt(maxWidth, 10);
 
     const thumbW = parseInt(scrollWidth, 10) * widthRatio;
@@ -27,14 +26,14 @@ const ScrollBar = ({
   is proportional to the main content container's scrollLeft value */
   const calculateScrollLeft = (sliderScrollLeft) => {
     const scrollWidth = scrollTrackEl.current ? scrollTrackEl.current.offsetWidth : null;
-    const adjustedRatio = sliderScrollLeft / maxScrollLeft;
+    const adjustedRatio = sliderScrollLeft / parseInt(maxScrollLeft, 10);
     const adjustedScrollWidth = scrollWidth - thumbWidth;
     setThumbScrollLeft(adjustedScrollWidth * adjustedRatio);
   };
 
   useEffect(() => {
     calculateThumbWidth();
-  }, [maxWidth]);
+  }, [sliderId, maxWidth]);
 
   useEffect(() => {
     calculateScrollLeft(currentScrollLeft);
