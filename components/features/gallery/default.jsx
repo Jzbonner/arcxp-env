@@ -18,7 +18,6 @@ import MPGO1Element from '../../_helper_components/global/ads/mpg01/default';
 import leftArrow from '../../../resources/icons/gallery/left-arrow.svg';
 import middleBox from '../../../resources/icons/gallery/middle-box.svg';
 import rightArrow from '../../../resources/icons/gallery/right-arrow.svg';
-import FetchResizedImages from '../../../content/sources/helper_functions/FetchResizedImages';
 import './default.scss';
 
 const PG01 = galleryTopics => <ArcAd staticSlot={'PG01'} key={'PG01'} galleryTopics={galleryTopics} />;
@@ -598,16 +597,16 @@ const Gallery = (props) => {
     let featuredContentElements = null;
     if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements(contentElements);
     if (leafContentElements.length > 0) {
-      galleryContentElements = FetchResizedImages(arcSite, leafContentElements, 720, 480, false, null, null, null, true);
+      galleryContentElements = leafContentElements;
     } else if (featuredGalleryData) {
-      featuredContentElements = FetchResizedImages(arcSite, featuredGalleryData.content_elements, 720, 480, false, null, null, null, true);
+      featuredContentElements = featuredGalleryData.content_elements;
     } else if (fetchedGalleryData) {
       fetchedContentElements = fetchedGalleryData.content_elements;
     } else if (!relevantGalleryData) {
       return null;
     }
 
-    if (relevantGalleryData && !galleryContentElements) galleryContentElements = FetchResizedImages(arcSite, relevantGalleryData.content_elements, 720, 480, false, null, null, null, true);
+    if (relevantGalleryData && !galleryContentElements) galleryContentElements = relevantGalleryData.content_elements;
 
     if ((!headline && !galHeadline) || !canonicalUrl) {
       const mainData = relevantGalleryData || fetchedGalleryData;
