@@ -53,7 +53,7 @@ const GalleryItem = ({
     >
       {url && <Image
         {...imageProps}
-        additionalClasses={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${(isFocused && !isAdVisible) || index === 0 ? 'is-focused' : ''}`}
+        additionalClasses={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${(isFocused && !isAdVisible) ? 'is-focused' : ''}`}
         onClickRun={modalFunc ? () => modalFunc(url, isModalVisible) : null}
       />}
       {
