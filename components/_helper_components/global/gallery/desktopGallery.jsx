@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const DesktopGallery = (props) => {
-  const { data, translateX, handlers } = props;
+  const { data, translateX } = props;
 
   useEffect(() => {
     if (typeof translateX !== 'number') {
@@ -21,7 +21,7 @@ const DesktopGallery = (props) => {
   }, [translateX]);
 
   return (
-    <div className={'gallery-container'} style={{ transform: `translateX(${translateX}px)` }} {...handlers}>
+    <div className={'gallery-container'} style={{ transform: `translateX(${translateX}px)` }} >
       {data}
     </div>
   );
