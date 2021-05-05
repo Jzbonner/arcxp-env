@@ -535,16 +535,14 @@ const Gallery = (props) => {
   // handles swiping functionality for tablets
   const handlers = useSwipeable({
     onSwiped: () => setClickType(types.IMAGE),
-    onSwipedLeft: () => changeIndex(actions.NEXT, null),
-    onSwipedRight: () => changeIndex(actions.PREV, null),
-    preventDefaultTouchmoveEvent: false,
+    onSwipedLeft: () => changeIndex(actions.NEXT, null, true),
+    onSwipedRight: () => changeIndex(actions.PREV, null, true),
+    preventDefaultTouchmoveEvent: true,
   });
 
   // handles ad insertions and removals for desktop gallery
   useEffect(() => {
     if (!isMobile) {
-      console.log('CLICK TYPE ', clickType);
-      console.log('CLICK COUNT ', clickCount);
       if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
         const adInsertedElementArray = insertDesktopGalleryAd();
@@ -563,9 +561,19 @@ const Gallery = (props) => {
 
         setAdVisibleState(false);
 
-        const finalizedElements = handleImageFocus((reorganizedElements || adRemovedElementArray), {
-          isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, hasOpened, modalVisible,
-        }, clickFuncs);
+        const finalizedElements = handleImageFocus(
+          reorganizedElements || adRemovedElementArray,
+          {
+            isStickyVisible,
+            isMobile,
+            isCaptionOn,
+            currentIndex,
+            maxIndex,
+            hasOpened,
+            modalVisible,
+          },
+          clickFuncs,
+        );
 
         setElementData(finalizedElements);
         setCurrentAction(actions.AD_REMOVED);
