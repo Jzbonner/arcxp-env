@@ -248,7 +248,7 @@ const StoryPageLayout = () => {
       )}
       <main className="c-articleContent b-contentMaxWidth">
         <header className="b-margin-bottom-d30-m20">
-          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header b-sectionHome-padding'}>
+          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header article-header-padding'}>
             <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
             <Headline
               headlines={headlines}
@@ -260,16 +260,16 @@ const StoryPageLayout = () => {
           </div>
           <div
             style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}
-            className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10"
+            className="c-label-wrapper b-pageContainer "
           >
             {!isCommunityContributor && (
               <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />
             )}
           </div>
-          <div className="b-flexRow b-pageContainer">
+          <div className="b-flexRow b-pageContainer article-byline">
             <Byline by={authorData} sections={sections} />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}>
+          <div className="b-margin-bottom-d30-m20" style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}>
             <TimeStamp
               firstPublishDate={firstPublishDate}
               displayDate={displayDate}

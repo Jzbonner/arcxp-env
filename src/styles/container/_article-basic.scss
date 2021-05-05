@@ -4,6 +4,14 @@
 
 .c-header {
   margin: 0 auto;
+
+  &.article-header-padding {
+    padding: 0;
+
+    @include breakpoint(tablet) {
+      padding: 0 15px;
+    }
+  }
 }
 
 .c-main-gallery,
@@ -47,6 +55,11 @@
 
 .c-label-wrapper {
   text-align: center;
+  margin-left: .938rem;
+
+  @include breakpoint(desktop-sm) {
+    margin-left: 1.875rem;
+  }
 }
 
 .c-articlePadding {
@@ -62,6 +75,21 @@
 }
 
 .c-articleContent {
+
+  .article-byline {
+
+    .byline {
+      text-align: left;
+    }
+
+    @include breakpoint(tablet) {
+      margin-left: .938rem;
+    }
+
+    @include breakpoint(desktop-sm) {
+      margin-left: 1.875rem;
+    }
+  }
 
   .border-top {
     display: none;

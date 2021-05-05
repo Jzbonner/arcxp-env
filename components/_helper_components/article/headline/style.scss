@@ -9,11 +9,10 @@
 
 .article-headline-component {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   position: relative;
 
   @include breakpoint(desktop-sm) {
-    flex-direction: row;
     align-items: center;
   }
 
@@ -27,11 +26,21 @@
     display: flex;
     align-items: center;
     max-width: 90%;
-    margin: 0 auto;
+    margin-left: .938rem;
+
+    @include breakpoint(tablet) {
+      margin: 0 auto;
+    }
   }
 
   .headline-body {
-    padding: 20px 30px;
+    padding-bottom: 15px;
+    text-align: left;
+
+    @include breakpoint(tablet) {
+      padding: 20px 30px;
+      text-align: center;
+    }
 
     .headline-text {
       @include text-styles(1.4rem, 1.25, "Lora-Bold");
@@ -83,7 +92,7 @@
   &.with-image {
 
     .headline {
-      margin: -3.5vh auto 0;
+      /* margin: -3.5vh auto 0; */
       text-align: center;
       display: flex;
       justify-content: center;
@@ -92,7 +101,6 @@
         flex: 1 0 33%;
         height: 70%;
         text-align: center;
-        margin: 0 -3vw 0 3vw;
       }
     }
   }
