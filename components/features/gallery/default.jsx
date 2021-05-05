@@ -177,7 +177,6 @@ const Gallery = (props) => {
     let translateAmount;
     const focusElement = isAdVisible ? PG01Ref.current : (document.getElementById(`gallery-item-${currentIndex}`) || null);
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
-
     if (galleryEl.current && focusElement) {
       // fixes initializing translate bug...?
       translateAmount = parseInt(galleryFullWidth, 10)
@@ -626,7 +625,6 @@ const Gallery = (props) => {
       prev: () => changeIndex(actions.PREV, baseGalleryData.length - 1),
       next: () => changeIndex(actions.NEXT),
       modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
-      calculateTranslateX: () => calculateTranslateX(),
     });
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData || {};
 

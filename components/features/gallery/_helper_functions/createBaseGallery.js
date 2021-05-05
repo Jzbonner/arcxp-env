@@ -7,7 +7,7 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
     isStickyVisible, isMobile, isCaptionOn, currentIndex, modalVisible,
   } = states;
   const {
-    prev, next, modal, calculateTranslateX,
+    prev, next, modal,
   } = funcs;
 
   let galleryData = null;
@@ -73,7 +73,6 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
           data={galleryItem}
           func={functionToPass}
           modalFunc={isFocused ? modal : null}
-          calculateTranslateX={calculateTranslateX}
         />
       );
     });
