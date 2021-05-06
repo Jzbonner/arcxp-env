@@ -6,15 +6,21 @@
 
   letter-spacing: normal;
   color: #9b9b9b;
-  margin-left: .938rem;
+
+  &:not(.isTease) {
+    margin-left: .938rem;
+  }
 
   @include breakpoint(tablet) {
     @include text-styles(.688rem, 2.3, "Gordita");
   }
 
   @include breakpoint(desktop-sm) {
-    text-align: center;
-    margin-left: 1.875rem;
+
+    &:not(.isTease) {
+      text-align: center;
+      margin-left: 1.875rem;
+    }
   }
 }
 
