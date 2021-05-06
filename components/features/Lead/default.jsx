@@ -148,11 +148,14 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
   }
 
   if (Array.isArray(data)) {
+    const column1Output = renderColumn1(data);
+    const column2Output = renderColumn2(data);
+    const column3Output = !isLeftNoPhotoFeature ? renderColumn3(data) : null;
     return (
       <div className={`c-homeLeadContainer ${getDisplayClassMap()} ${getColumnsMap(columns)}`}>
-        {renderColumn1(data) && <div className="column-1">{renderColumn1(data)}</div>}
-        {renderColumn2(data) && <div className="column-2">{renderColumn2(data)}</div>}
-        {!isLeftNoPhotoFeature && renderColumn3(data) && <div className="column-3">{renderColumn3(data)}</div>}
+        {column1Output && <div className="column-1">{column1Output}</div>}
+        {column2Output && <div className="column-2">{column2Output}</div>}
+        {column3Output && <div className="column-3">{column3Output}</div>}
       </div>
     );
   }
