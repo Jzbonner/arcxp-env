@@ -8,13 +8,15 @@ import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMa
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import './default.scss';
 
-const Lead = ({ customFields = {}, limitOverride }) => {
+const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
 
   const {
     content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', title = '', columns = 1, moreURL,
   } = customFields;
+
+  const actualDisplayClass = displayClassOverride || displayClass;
 
   let { from: startIndex = 1 } = contentConfigValues || {};
   startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
@@ -29,8 +31,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     'Redesign Feature - Left Photo No Photo',
   ];
 
-  const isTTDFeature = displayClass === '7-Item TTD Feature';
-  const isLeftNoPhotoFeature = displayClass === 'Redesign Feature - Left Photo No Photo';
+  const isTTDFeature = actualDisplayClass === '7-Item TTD Feature';
+  const isLeftNoPhotoFeature = actualDisplayClass === 'Redesign Feature - Left Photo No Photo';
 
   // use squareImageSize to override the default height/width of tease images for cases where we want a square aspect ratio
   let squareImageSize = null;
@@ -50,15 +52,15 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     query: {
       ...contentConfigValues,
       arcSite,
-      displayClass,
+      actualDisplayClass,
       displayClassesRequiringImg,
       squareImageSize,
       useSquareImageAfter,
     },
   });
 
-  function getDisplayClassMap(displayC) {
-    switch (displayC) {
+  function getDisplayClassMap() {
+    switch (actualDisplayClass) {
       case '5-Item Feature - Top Photo':
         return 'top-photo-display-class';
       case '5-Item Feature - Left Photo':
@@ -85,14 +87,14 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     return apiData.map((el, i) => {
       if (start <= i && i < start + listLimit) {
         if (isLeftNoPhotoFeature) itemCounter += 1;
-        return <ListItem key={`ListItem-${i}`} displayClass={displayClass} hidePromo={((isLeftNoPhotoFeature && itemCounter !== 1 && itemCounter !== 5) || false)} isTTDFeature={isTTDFeature} {...el} />;
+        return <ListItem key={`ListItem-${i}`} displayClass={actualDisplayClass} hidePromo={((isLeftNoPhotoFeature && itemCounter !== 1 && itemCounter !== 5) || false)} isTTDFeature={isTTDFeature} {...el} />;
       }
       return null;
     });
   }
 
-  function renderColumn1(displayC, apiData) {
-    switch (displayC) {
+  function renderColumn1(apiData) {
+    switch (actualDisplayClass) {
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, startIndex + 1, 2);
       case '1 or 2 Item Feature':
@@ -106,8 +108,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     }
   }
 
-  function renderColumn2(displayC, apiData) {
-    switch (displayC) {
+  function renderColumn2(apiData) {
+    switch (actualDisplayClass) {
       case '5-Item Feature - Top Photo':
       case '5-Item Feature - Left Photo':
       case '5-Item Feature - No Photo':
@@ -123,8 +125,8 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     }
   }
 
-  function renderColumn3(displayC, apiData) {
-    switch (displayC) {
+  function renderColumn3(apiData) {
+    switch (actualDisplayClass) {
       case '5-Item Feature - Top Photo':
       case '5-Item Feature - Left Photo':
         return getLists(apiData, startIndex + 1, 4);
@@ -145,27 +147,15 @@ const Lead = ({ customFields = {}, limitOverride }) => {
     }
   }
 
-  if (Array.isArray(data) && displayClass === 'Redesign Feature - Left Photo No Photo') {
-    return (
-      <div
-        className={`c-homeLeadContainer left-photo-no-photo-display-class ${getColumnsMap(columns)}`}
-      >
-        {renderColumn1(displayClass, data) && (
-          <div className="column-1 ">{renderColumn1(displayClass, data)}</div>
-        )}
-        {renderColumn2(displayClass, data) && (
-          <div className="column-2">{renderColumn2(displayClass, data)}</div>
-        )}
-      </div>
-    );
-  }
-
   if (Array.isArray(data)) {
+    const column1Output = renderColumn1(data);
+    const column2Output = renderColumn2(data);
+    const column3Output = !isLeftNoPhotoFeature ? renderColumn3(data) : null;
     return (
-      <div className={`c-homeLeadContainer ${getDisplayClassMap(displayClass)} ${getColumnsMap(columns)}`}>
-        {renderColumn1(displayClass, data) && <div className="column-1">{renderColumn1(displayClass, data)}</div>}
-        {renderColumn2(displayClass, data) && <div className="column-2">{renderColumn2(displayClass, data)}</div>}
-        {renderColumn3(displayClass, data) && <div className="column-3">{renderColumn3(displayClass, data)}</div>}
+      <div className={`c-homeLeadContainer ${getDisplayClassMap()} ${getColumnsMap(columns)}`}>
+        {column1Output && <div className="column-1">{column1Output}</div>}
+        {column2Output && <div className="column-2">{column2Output}</div>}
+        {column3Output && <div className="column-3">{column3Output}</div>}
       </div>
     );
   }
@@ -174,11 +164,12 @@ const Lead = ({ customFields = {}, limitOverride }) => {
 
 Lead.propTypes = {
   limitOverride: PropTypes.number,
+  displayClassOverride: PropTypes.string,
   customFields: PropTypes.shape({
     content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
       name: 'Content',
     }),
-    displayClass: PropTypes.oneOf(['5-Item Feature - Top Photo', '5-Item Feature - Left Photo', '5-Item Feature - No Photo', '5-Item Feature - Redesigned Lead - No Photo', '5-Item Feature - Center Lead Top Photo', '1 or 2 Item Feature', '7-Item TTD Feature', 'Redesign Feature - Left Photo No Photo']).tag({
+    displayClass: PropTypes.oneOf(['5-Item Feature - Top Photo', '5-Item Feature - Left Photo', '5-Item Feature - No Photo', '5-Item Feature - Redesigned Lead - No Photo', '5-Item Feature - Center Lead Top Photo', '1 or 2 Item Feature']).tag({
       name: 'Display Class',
       defaultValue: '5-Item Feature - Top Photo',
     }),

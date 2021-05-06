@@ -88,7 +88,7 @@ const Headline = ({
   return (
     <div className={`home-headline ${sponsorName ? 'sponsored' : ''}`}>
       <a href={relativeURL} className='homeList-image'>
-        {<Image src={getPromoItem()} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} />}
+        {<Image src={getPromoItem()} width={500} height={282} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} />}
         {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
         </a>
       <div className="headline-box">
