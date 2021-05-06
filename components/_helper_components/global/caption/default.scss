@@ -22,6 +22,10 @@
 
   &.is-active {
 
+    .photo-caption-btn {
+      transform: rotate(90deg);
+    }
+
     .photo-caption {
       display: block;
     }
@@ -29,35 +33,26 @@
 
   .photo-caption-btn {
     position: absolute;
-    width: 69px;
-    height: 26px;
-    border-radius: 5px;
-    background: #ececec;
+    display: block;
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    background: linear-gradient(to top, #04befe, #4481eb);
     top: -1.25rem;
     right: -1.25rem;
     z-index: 1;
     cursor: pointer;
     transition: transform .5s;
     box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
+    padding: 12px;
     box-sizing: border-box;
-    font-size: 11px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @include text-styles(11px, 1, "Gordita");
 
     @include breakpoint(desktop-sm) {
-      width: 69px;
-      height: 26px;
+      width: 61px;
+      height: 61px;
+      padding: 18px;
       top: -1.875rem;
       right: -1.875rem;
-    }
-
-    .caption-arrow {
-      width: 9px;
-      height: 11px;
-      margin-right: 2px;
     }
 
     .fill-line {
