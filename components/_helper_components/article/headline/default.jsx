@@ -30,8 +30,8 @@ const Headline = ({
       </div>}
       {promoData.type === 'image' && (
         <Image
-          width={1066}
-          height={600}
+          width={814}
+          height={458}
           imageType="isLeadImage"
           src={basicItems}
           maxTabletViewWidth={maxTabletViewWidth}
