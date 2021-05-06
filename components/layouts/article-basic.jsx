@@ -248,7 +248,7 @@ const StoryPageLayout = () => {
       )}
       <main className="c-articleContent b-contentMaxWidth">
         <header className="b-margin-bottom-d30-m20">
-          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header article-header-padding'}>
+          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header b-sectionHome-padding'}>
             <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
             <Headline
               headlines={headlines}
@@ -259,17 +259,12 @@ const StoryPageLayout = () => {
               lazyLoad={isMeteredStory} />
           </div>
           <div
-            style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}
-            className="c-label-wrapper b-pageContainer "
+            style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
+            className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10"
           >
             {!isCommunityContributor && (
               <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />
             )}
-          </div>
-          <div className="b-flexRow b-pageContainer article-byline">
-            <Byline by={authorData} sections={sections} />
-          </div>
-          <div className="b-margin-bottom-d30-m20" style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}>
             <TimeStamp
               firstPublishDate={firstPublishDate}
               displayDate={displayDate}
@@ -278,6 +273,9 @@ const StoryPageLayout = () => {
               isHyperlocalContent={isHyperlocalContent && isCommunityContributor}
               sponsorContentLabel={sponsorContentLabel}
             />
+          </div>
+          <div className="b-flexRow b-flexCenter b-pageContainer">
+            <Byline by={authorData} sections={sections} />
           </div>
           <ContributorBadge tags={tags} ampPage={ampPage} />
           {ampPage && <SocialShare headlines={headlines} articleURL={articleURL} />}
