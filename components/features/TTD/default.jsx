@@ -11,7 +11,7 @@ const TTD = (customFields = {}) => {
     ...customFields,
     customFields: {
       ...customFields.customFields,
-      displayClass: '7-Item TTD Feature',
+      displayClass: '1 or 2 Item Feature', // this is meaningless, the real class-of-record is passed as `displayClassOverride` below
       content: {
         ...customFields.customFields.content,
         contentConfigValues: {
@@ -24,7 +24,7 @@ const TTD = (customFields = {}) => {
   return (
     <div className="c-ttd-feature">
       <FeatureTitle title={title} moreURL={moreURL} />
-      <Lead {...newCustomFields} />
+      <Lead {...newCustomFields} displayClassOverride={'7-Item TTD Feature'} />
     </div>
   );
 };
