@@ -20,7 +20,6 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
 
   let { from: startIndex = 1 } = contentConfigValues || {};
   startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
-  console.error('dave dc', displayClassOverride, actualDisplayClass);
 
   const displayClassesRequiringImg = [
     '5-Item Feature - Top Photo',
