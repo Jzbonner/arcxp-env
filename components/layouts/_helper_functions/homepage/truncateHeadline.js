@@ -13,11 +13,11 @@ export default (headline, applyExtension = false) => {
       } else if (lastWordIndex === -1) {
         // the headline limit has been exceeded, so set the lastWordIndex
         lastWordIndex = i;
-        // then check the new headline for ending punctuation and remove, if present
-        if (['.', ',', '?', ':', ';', '!', ' '].includes(newHeadline.slice(-1))) {
-          newHeadline = newHeadline.substring(0, -1);
-        }
         if (newHeadline.length < charLimit) {
+          // then check the new headline for ending punctuation and remove, if present
+          if (['.', ',', '?', ':', ';', '!', ' '].includes(newHeadline.slice(-1))) {
+            newHeadline = newHeadline.substring(0, newHeadline.length - 1);
+          }
           // and if the new headline length is less than the limit, append an ellipsis
           newHeadline = `${newHeadline}...`;
         }
