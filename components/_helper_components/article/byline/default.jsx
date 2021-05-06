@@ -8,8 +8,8 @@ const Byline = ({ by = [], sections }) => {
   const sponsorContentLabel = getSponsorData(sections);
   const finalizeByline = (authors = []) => handleAuthors(handleOrganization(authors));
 
-  if (sponsorContentLabel) return <div className="byline b-margin-bottom-d40-m20">By {sponsorContentLabel}</div>;
-  return by.length ? <div className="byline b-margin-bottom-d40-m20">{finalizeByline(by.map(creditParser))}</div> : null;
+  if (sponsorContentLabel) return <div className="byline ">By {sponsorContentLabel}</div>;
+  return by.length ? <div className="byline ">{finalizeByline(by.map(creditParser))}</div> : null;
 };
 
 Byline.propTypes = {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import createID from '../../../layouts/_helper_functions/createID';
+import LeftArrow from '../../../../resources/icons/slider/left-arrow.svg';
 import './default.scss';
 
 const Caption = ({ src, isLeadVideo, videoCaption }) => {
@@ -47,11 +48,8 @@ const Caption = ({ src, isLeadVideo, videoCaption }) => {
       tabIndex="0"
     >
       <div className="photo-caption-btn" onClick={toggle}>
-        <div className="fill-line fill-line-long"></div>
-        <div className="fill-line"></div>
-        <div className="fill-line fill-line-long"></div>
-        <div className="fill-line"></div>
-        <div className="fill-line fill-line-long"></div>
+        <img className="caption-arrow" src={LeftArrow} />
+        <span>Caption</span>
       </div>
       <div className="photo-caption">
         <div className="photo-caption-text">{captionContent}</div>
