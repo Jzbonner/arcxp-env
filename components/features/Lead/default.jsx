@@ -52,7 +52,7 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
     query: {
       ...contentConfigValues,
       arcSite,
-      actualDisplayClass,
+      displayClass: actualDisplayClass,
       displayClassesRequiringImg,
       squareImageSize,
       useSquareImageAfter,
