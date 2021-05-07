@@ -10,6 +10,9 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes, squareI
       const {
         url, height: originalHeight, width: originalWidth, additional_properties: additionalProperties, focal_point: rootFocalPoint,
       } = el || {};
+      if (!url) {
+        imageQueries.push({});
+      }
       const focalCoords = setFocalCoords(additionalProperties, rootFocalPoint);
       let finalWidth = width;
       let finalHeight = height;
@@ -37,17 +40,18 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes, squareI
 
     if (imageResponses.length) {
       imageResponses.forEach((img, i) => {
-        originalEls[i].useSrcSet = useSrcSet;
-        originalEls[i].resized_obj = img || null;
+        if (img && originalEls[i]) {
+          originalEls[i].useSrcSet = useSrcSet;
+          originalEls[i].resized_obj = img || null;
+        }
       });
     }
 
     return originalEls;
   };
 
-  const imagesToFetch = [];
-
   if (apiData && apiData.type === 'gallery') {
+    const imagesToFetch = [];
     const newGallData = apiData;
     const { content_elements: newContentElements = [] } = newGallData;
     isGallery = true;
@@ -66,10 +70,11 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes, squareI
   }
 
   if (apiData && apiData.length) {
+    const imagesToFetch = [];
     const newArrData = apiData;
 
     newArrData.forEach((el) => {
-      const imageEl = el.teaseImageObject || el;
+      const imageEl = el.teaseImageObject || el.promo_items?.basic;
       imagesToFetch.push(imageEl);
     });
 

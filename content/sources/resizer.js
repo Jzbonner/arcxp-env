@@ -101,6 +101,11 @@ export default {
       return fetchedResponse;
     }
 
+    // no passed-in array and no src, so return null
+    if (!src) {
+      return null;
+    }
+
     // it was a request for a single image, so pass-through the params
     return fetchImageData(src, height, width, srcSetSizes, originalHeight, originalWidth, smart, focalCoords);
   },
