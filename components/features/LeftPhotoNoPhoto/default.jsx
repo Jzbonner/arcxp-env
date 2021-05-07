@@ -29,7 +29,7 @@ const LeftPhotoNoPhoto = (customFields = {}) => {
       <FeatureTitle title={title} moreURL={moreURL} isLeftPhotoNoPhoto={true} />
       <div className="row">
         <div className='LeftPhotoNoPhoto'>
-          <Lead {...newCustomFields} columns={2} limitOverride={limit} displayClassOverride={'Redesign Feature - Left Photo No Photo'} />
+          <Lead {...newCustomFields} columns={2} limitOverride={4} displayClassOverride={'Redesign Feature - Left Photo No Photo'} />
         </div>
       </div>
     </div>
