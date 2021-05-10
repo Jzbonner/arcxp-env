@@ -3,7 +3,6 @@
 
 .c-blogAuthor {
   display: block;
-  margin-bottom: 2rem;
 
   .blogAuthor-title {
     @include text-styles(1.563rem, 1, "Gordita-Bold");
@@ -22,18 +21,16 @@
   .blogAuthor-content {
 
     .blog-author-content-heading {
-      justify-content: center;
-      align-items: center;
+      justify-content: left;
       flex-direction: column;
 
       @include breakpoint(tablet) {
-        justify-content: left;
         flex-direction: row;
       }
     }
 
     .b-flexRow {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
 
       .content-profileImage {
         width: 97px;
@@ -75,17 +72,10 @@
     }
 
     .content-authorDescription {
-      padding: 0 20px;
+      padding: 0;
       color: #505050;
 
       @include text-styles(.875rem, 1.375, "Gordita");
-
-      text-align: center;
-
-      @include breakpoint(tablet) {
-        text-align: left;
-        padding: 0;
-      }
     }
   }
 

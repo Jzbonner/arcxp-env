@@ -227,7 +227,7 @@ const StoryPageLayout = () => {
     )}
     {/* about the author should be the last component of the story */}
     {<div className="c-section b-sectionHome-padding full-width b-clear-both"><BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} /></div>}
-    {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
+    {!noAds && !isHyperlocalContent && <div className="b-padding-top-30"><TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} /></div>}
     {!noAds && !isHyperlocalContent && !sponsorSectionID && (
       <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
     )}
