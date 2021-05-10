@@ -1,64 +1,69 @@
 @import "../../../../src/styles/base";
 
-.c-relatedList {
-  font-family: "Average";
-  font-size: 1.875rem;
+@include amp-exclude {
 
-  .title {
-    text-align: left;
-    margin-bottom: 1.1rem;
-    display: flex;
-    color: #313132;
+  .c-mostRead {
+    margin-bottom: 0;
 
-    @include text-styles(1.563rem, 1, "Gordita-Bold");
-
-    &:after {
-      @include sectionTitle;
+    @include between-breakpoints(tablet, desktop-sm) {
+      margin-bottom: 4px;
     }
   }
 
-  .c-homeListContainer.left-photo-display-class .c-homeList {
-    margin-bottom: 1.25rem;
-    max-width: 100%;
+  .mostReadList {
 
-    .homeList-text {
-      display: flex;
-      flex-direction: column;
-      max-width: 69%;
+    a {
+      margin: 0 0 22px;
+      width: 100%;
 
       @include breakpoint(tablet) {
-        max-width: 75%;
-      }
-
-      .c-label-wrapper {
-        font-size: .75rem;
-
-        &:empty {
-          display: none;
-        }
-      }
-
-      .headline {
-        font-size: 16px;
-
-        @include breakpoint(desktop-sm) {
-          font-size: 1.15rem;
-        }
+        width: calc(100% / 5);
       }
     }
+  }
 
-    .homeList-image {
-      max-width: 110px;
-      max-height: 64px;
-    }
+  .mostReadTitle {
+    font-size: 1.5625rem;
+    letter-spacing: -.31px;
+  }
+
+  .mostReadRanking {
+    font-style: normal;
+    margin: 0 6px 0 0;
+    min-width: 20px;
+    max-width: auto;
+    font-family: "Lora-Bold";
 
     @include breakpoint(tablet) {
-      margin-bottom: 1.875rem;
-      max-width: 50%;
+      min-width: auto;
+      font-size: 1.875rem;
+      letter-spacing: -.38px;
     }
 
     @include breakpoint(desktop-sm) {
-      max-width: 100%;
+      margin-right: 6px;
+    }
+  }
+
+  .mostReadHeadline {
+    font-size: 1.3125rem;
+    line-height: 1.75rem;
+    letter-spacing: -.4px;
+    font-family: "Lora-Medium";
+    min-width: auto;
+    padding-left: 9px;
+
+    @include breakpoint(tablet) {
+      font-size: 1rem;
+      line-height: 1.625rem;
+      letter-spacing: 0;
+      padding: 4px 0 0 8px;
+    }
+
+    @include breakpoint(desktop-sm) {
+      line-height: 1.25rem;
+      letter-spacing: -.31px;
+      padding: 7px 0 0 9px;
     }
   }
 }
