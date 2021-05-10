@@ -3,9 +3,9 @@
 @include amp-exclude {
 
   .c-mostRead {
-    margin-bottom: 0;
+    margin-bottom: 30px;
 
-    @include between-breakpoints(tablet, desktop-sm) {
+    @include breakpoint(tablet) {
       margin-bottom: 4px;
     }
   }
@@ -18,6 +18,10 @@
 
       @include breakpoint(tablet) {
         width: calc(100% / 5);
+
+        &:last-child {
+          margin-bottom: 22px;
+        }
       }
     }
   }

@@ -56,6 +56,10 @@
   margin-bottom: 5em;
 }
 
+.b-margin-bottom-30 {
+  margin-bottom: 1.875rem;
+}
+
 .b-margin-bottom-40 {
   margin-bottom: 2.5rem;
 }
@@ -100,6 +104,10 @@
   @include breakpoint(desktop-sm) {
     margin-bottom: 2.5rem;
   }
+}
+
+.b-padding-top-30 {
+  padding-top: 1.875rem;
 }
 
 .b-padding-d30-m20 {
