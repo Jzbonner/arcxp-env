@@ -125,7 +125,6 @@ const StoryPageLayout = () => {
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
-  const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />;
   const insertAtEndOfStory = [];
 
   filteredContentElements.forEach((el, i) => {
@@ -147,25 +146,6 @@ const StoryPageLayout = () => {
     infoBoxIndex += 1;
   } else if (!ampPage) {
     insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
-  }
-  // about the author should be the last component of the story
-  insertAtEndOfStory.push(BlogAuthorComponent);
-
-  // sponsor box should appear right after blog author component
-  if (sponsorSectionID) {
-    if (ampPage) {
-      insertAtEndOfStory.push(<SponsorRelatedBoxAMP
-        hideRelatedList={hideRelatedList}
-        sponsorID={sponsorSectionID}
-        taxonomy={taxonomy}
-        uuid={uuid} />);
-    } else {
-      insertAtEndOfStory.push(<SponsorRelatedBox
-        hideRelatedList={hideRelatedList}
-        sponsorID={sponsorSectionID}
-        taxonomy={taxonomy}
-        uuid={uuid} />);
-    }
   }
 
   const storyContentOutput = () => <>
@@ -226,11 +206,27 @@ const StoryPageLayout = () => {
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
       ampPage={ampPage}
     />
+
+    {sponsorSectionID && (
+      // sponsor box should appear right before blog author component
+      ampPage ? <SponsorRelatedBoxAMP
+          hideRelatedList={hideRelatedList}
+          sponsorID={sponsorSectionID}
+          taxonomy={taxonomy}
+          uuid={uuid} />
+        : <SponsorRelatedBox
+          hideRelatedList={hideRelatedList}
+          sponsorID={sponsorSectionID}
+          taxonomy={taxonomy}
+          uuid={uuid} />
+    )}
     {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && (
       <div className="c-section b-sectionHome-padding full-width b-clear-both">
         <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} />
       </div>
     )}
+    {/* about the author should be the last component of the story */}
+    {<div className="c-section b-sectionHome-padding full-width b-clear-both"><BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} /></div>}
     {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
     {!noAds && !isHyperlocalContent && !sponsorSectionID && (
       <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
