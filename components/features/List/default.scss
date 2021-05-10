@@ -63,6 +63,10 @@
 
     .homeList-text {
 
+      .c-tease-icon {
+        margin-left: 15px;
+      }
+
       .c-label-wrapper {
         margin: .6rem 0 .2rem;
         text-align: left;
@@ -82,7 +86,7 @@
           &.ntv-disc {
             background-color: inherit;
             padding: 0;
-            
+
             a {
               color: #000 !important; /* stylelint-disable-line declaration-no-important */
             }
@@ -216,7 +220,7 @@
 
       .image-component-image img {
         border-radius: 0;
-  
+
         @include breakpoint(tablet) {
           border-radius: 6px;
         }
@@ -306,12 +310,12 @@
   }
 
   //Left Photo Small Display Class
-  
+
   &.left-photo-small-display-class {
 
     .c-homeList {
       margin-bottom: 20px;
-     
+
       .homeList-image {
         @include breakpoint(desktop-sm) {
           max-width: calc(20% - 7.5px);
@@ -350,7 +354,7 @@
     &.two-columns,
     &.three-columns,
     &.four-columns {
-      
+
       .c-homeList {
 
         &:not(:first-child) {
@@ -359,7 +363,7 @@
 
         &:last-child {
           border-bottom: none;
-  
+
           .homeList-text {
             margin-bottom: 0;
           }
@@ -368,24 +372,24 @@
             margin-bottom: 30px;
           }
         }
-  
+
         border-bottom: 1px solid #cdcdcd;
         width: 100%;
         margin-bottom: 0;
-  
+
         .c-label-wrapper {
           text-align: left;
           margin-bottom: .4rem;
         }
-  
+
         .headline {
           text-align: left;
         }
-  
+
         .homeList-image {
           display: none;
         }
-  
+
         .homeList-text {
           margin: 0 0 $min-margin;
           width: 100%;
@@ -413,7 +417,7 @@
       .col-1 {
         margin-right: 0;
         width: 100%;
-        
+
         @include breakpoint(tablet) {
           padding-right: 20px;
         }
@@ -427,7 +431,7 @@
         width: 100%;
 
         @include breakpoint(tablet) {
-          width: calc(55% - 65px);
+          width: calc((100% - 41px) / 2);
         }
       }
     }
@@ -440,13 +444,13 @@
         width: 100%;
 
         @include breakpoint(tablet) {
-          width: calc(100% / 3 - 28px);
+          width: calc((100% - 82px) / 3);
         }
       }
     }
 
     &.four-columns {
-      
+
       .col-1,
       .col-2,
       .col-3,
@@ -454,7 +458,7 @@
         width: 100%;
 
         @include breakpoint(tablet) {
-          width: calc(100% / 4 - 33px);
+          width: calc((100% - 123px) / 4);
         }
       }
     }

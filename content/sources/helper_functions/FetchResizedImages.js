@@ -1,49 +1,91 @@
 import resizer from '../resizer';
 import setFocalCoords from './setFocalCoords';
 
-export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes) => {
-  const addResizedData = (el) => {
-    const {
-      url, height: originalHeight, width: originalWidth, additional_properties: additionalProperties, focal_point: rootFocalPoint,
-    } = el || {};
-    const focalCoords = setFocalCoords(additionalProperties, rootFocalPoint);
-    const newEl = el;
+export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes, squareImageSize, useSquareImageAfter, isGalleryFetch = false) => {
+  let isGallery = isGalleryFetch;
+  const addResizedData = (elsToFetch) => {
+    const imageQueries = [];
+    const originalEls = elsToFetch;
+    elsToFetch.forEach((el, i) => {
+      const {
+        url, height: originalHeight, width: originalWidth, additional_properties: additionalProperties, focal_point: rootFocalPoint,
+      } = el || {};
+      if (!url) {
+        imageQueries.push({});
+      }
+      const focalCoords = setFocalCoords(additionalProperties, rootFocalPoint);
+      let finalWidth = width;
+      let finalHeight = height;
+      if (squareImageSize && i >= useSquareImageAfter) {
+        finalWidth = squareImageSize;
+        finalHeight = squareImageSize;
+      }
 
-    if (!url) return newEl;
-
-    const img = resizer.fetch({
-      src: url,
-      height,
-      width,
-      srcSetSizes,
-      originalHeight,
-      originalWidth,
-      focalCoords,
-      arcSite,
+      imageQueries.push({
+        src: url,
+        height: finalHeight,
+        width: finalWidth,
+        srcSetSizes,
+        originalHeight,
+        originalWidth,
+        focalCoords,
+      });
     });
 
-    newEl.useSrcSet = useSrcSet;
-    newEl.resized_obj = img || null;
-    return newEl;
+    const imageResponses = resizer.fetch({
+      srcArray: imageQueries,
+      arcSite,
+      isGallery,
+    });
+
+    if (imageResponses.length) {
+      imageResponses.forEach((img, i) => {
+        if (img && originalEls[i]) {
+          originalEls[i].useSrcSet = useSrcSet;
+          originalEls[i].resized_obj = img || null;
+        }
+      });
+    }
+
+    return originalEls;
   };
 
+  if (apiData && apiData.type === 'gallery') {
+    const imagesToFetch = [];
+    const newGallData = apiData;
+    const { content_elements: newContentElements = [] } = newGallData;
+    isGallery = true;
+    newContentElements.forEach((el) => {
+      imagesToFetch.push(el);
+    });
+
+    const fetchedImages = addResizedData(imagesToFetch);
+
+    fetchedImages.forEach((fetchedImageObj, e) => {
+      if (fetchedImageObj) {
+        newGallData.content_elements[e] = fetchedImageObj;
+      }
+    });
+    return newGallData;
+  }
+
   if (apiData && apiData.length) {
+    const imagesToFetch = [];
     const newArrData = apiData;
-    newArrData.forEach((el, e) => {
-      if (el.teaseImageObject) {
-        newArrData[e].teaseImageObject = addResizedData(el.teaseImageObject);
+
+    newArrData.forEach((el) => {
+      const imageEl = el.teaseImageObject || el.promo_items?.basic;
+      imagesToFetch.push(imageEl);
+    });
+
+    const fetchedImages = addResizedData(imagesToFetch);
+
+    fetchedImages.forEach((fetchedImageObj, e) => {
+      if (fetchedImageObj) {
+        newArrData[e].teaseImageObject = fetchedImageObj;
       }
     });
     return newArrData;
-  }
-
-  if (apiData && apiData.type === 'gallery') {
-    const newGallData = apiData;
-    const { content_elements: newContentElements = [] } = newGallData;
-    newContentElements.forEach((el, e) => {
-      newGallData.content_elements[e] = addResizedData(el);
-    });
-    return newGallData;
   }
 
   return apiData;

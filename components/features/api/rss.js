@@ -23,6 +23,7 @@ class Api {
     const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
     const newsletterFeed = outPutTypePresent && queryParams.outputType === 'rss-newsletter';
     const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'rss-app';
+    const standardFeed = outPutTypePresent && queryParams.outputType === 'rss';
 
     let maxItems = feedStart + size;
     if (maxItems > globalContent.length) {
@@ -47,6 +48,8 @@ class Api {
           content_elements: contentElements = [], first_publish_date: firstPubDate, display_date: displayDate, canonical_url: canonicalUrl, _id: guid, type = '', headlines, description, credits = {}, promo_items: promoItems, streams,
         } = item || {};
 
+        // console.log(contentElements);
+
         const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
         let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
         const org = credits && credits.by && credits.by[0] && credits.by[0].org ? `<![CDATA[${credits.by[0].org}]]>` : '';
@@ -67,7 +70,7 @@ class Api {
           const formatContentElements = formatNavigaContent(siteID, contentElements);
           const outputContent = noHeaderAndFooter || newsletterFeed ? `<![CDATA[${formatContentElements.join('')}]]>` : formattedDescription;
 
-          const mediaArray = getMediaContent(type, siteID, contentElements, promoItems, newsletterFeed);
+          const mediaArray = getMediaContent(type, siteID, contentElements, promoItems, newsletterFeed, standardFeed);
 
           const xmlObject = {
             item: [
@@ -166,9 +169,9 @@ class Api {
 
           return videoXmlObject;
         }
-
+        // Standalone Gallery
         if (type === 'gallery') {
-          const galleryMediaArray = getMediaContent(type, siteID, contentElements);
+          const galleryMediaArray = getMediaContent(type, siteID, contentElements, promoItems, newsletterFeed, standardFeed);
 
           const galleryXmlObject = {
             item: [

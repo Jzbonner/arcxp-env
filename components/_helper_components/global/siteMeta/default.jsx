@@ -44,7 +44,7 @@ const SiteMeta = () => {
   let pageTitle = seoTitle;
   if (!seoTitle) pageTitle = title;
 
-  const parsedDescription = safeHtml(description, { allowedTags: [], allowedAttributes: {} });
+  const parsedDescription = safeHtml(description, { whiteList: {} });
   // cap meta description at 150 characters.Google has no limit but recommends <= 150 chars, 160 chars max is what is allowed in video center.
   const metaDescParsed = parsedDescription.substring(0, 150);
 

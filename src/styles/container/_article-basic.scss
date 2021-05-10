@@ -1,8 +1,17 @@
+/* stylelint-disable declaration-no-important */
 @import "./../base/breakpoints";
 @import "./../base/mixins";
 
 .c-header {
   margin: 0 auto;
+
+  &.article-header-padding {
+    padding: 0;
+
+    @include breakpoint(tablet) {
+      padding: 0 15px;
+    }
+  }
 }
 
 .c-main-gallery,
@@ -10,12 +19,15 @@
   margin: 0 auto;
 }
 
-.c-nav {
-  margin: 0 auto;
-  width: 100%;
+@include amp-exclude {
 
-  @include breakpoint(desktop-lg) {
-    max-width: 1600px;
+  .c-nav {
+    margin: 0 auto;
+    width: 100%;
+
+    @include breakpoint(desktop-lg) {
+      max-width: 1600px !important;
+    }
   }
 }
 
@@ -43,6 +55,11 @@
 
 .c-label-wrapper {
   text-align: center;
+  margin-left: .938rem;
+
+  @include breakpoint(desktop-sm) {
+    margin-left: 1.875rem;
+  }
 }
 
 .c-articlePadding {
@@ -58,7 +75,22 @@
 }
 
 .c-articleContent {
-  
+
+  .article-byline {
+
+    .byline {
+      text-align: left;
+    }
+
+    @include breakpoint(tablet) {
+      margin-left: .938rem;
+    }
+
+    @include breakpoint(desktop-sm) {
+      margin-left: 1.875rem;
+    }
+  }
+
   .border-top {
     display: none;
   }
@@ -67,7 +99,7 @@
 @include amp-exclude {
 
   body .c-articleContent .c-articleBodyContainer {
-    height: auto !important; /* stylelint-disable declaration-no-important */
+    height: auto !important;
 
     &.is-safari .c-section {
 

@@ -8,7 +8,6 @@ import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
-import getTeaseIcon from './_helper_functions/getTeaseIcon';
 import setFocalCoords from '../../../../content/sources/helper_functions/setFocalCoords';
 import './default.scss';
 
@@ -33,6 +32,7 @@ const Image = ({
   const { deployment, contextPath } = appContext;
   const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
+  const isGalleryImage = imageType === 'isGalleryImage';
   let img = null;
   if (resizedObject) {
     img = resizedObject;
@@ -47,6 +47,7 @@ const Image = ({
       originalWidth,
       focalCoords,
       arcSite,
+      isGallery: isGalleryImage,
     };
 
     img = useContent({
@@ -70,8 +71,6 @@ const Image = ({
   } else if (secondaryCredit) {
     giveCredit = `Credit: ${secondaryCredit}`;
   }
-
-  const isGalleryImage = imageType === 'isGalleryImage';
 
   const renderCaption = () => {
     if (
@@ -150,7 +149,6 @@ const Image = ({
             </amp-img>
           </amp-img>
       )}
-      {teaseContentType && getTeaseIcon(teaseContentType)}
     </>;
 
     if (isGalleryImage) {

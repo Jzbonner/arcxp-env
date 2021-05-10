@@ -31,6 +31,10 @@
     border-radius: 6px;
   }
 
+  .c-tease-icon .tease-icon {
+    border-radius: 0;
+  }
+
   .article-timestamp {
     line-height: 1;
   }
@@ -443,7 +447,6 @@
 
       @include breakpoint(tablet) {
         width: 52%;
-        margin-right: 27px;
       }
 
       .home-headline {
@@ -471,14 +474,11 @@
           background: none;
           border-radius: 0;
           box-shadow: unset;
-          padding: 10px 0;
-
-          @include between-breakpoints(mobile,tablet) {
-            padding-top: 0;
-          }
+          padding: 0 0 10px;
+          max-width: 100%;
 
           .headline {
-            margin: 10px 0;
+            margin: 0 0 10px;
           }
         }
       }
@@ -503,12 +503,20 @@
           border-bottom: 1px solid #cdcdcd;
           width: 100%;
           text-align: left;
+
+          .headline {
+            margin-bottom: 5px;
+          }
         }
   
         &:first-child {
-  
-          .c-label-wrapper {
+
+          .homeList-text {
             margin-top: 0;
+
+            .c-label-wrapper {
+              margin-top: 0;
+            }
           }
         }
   

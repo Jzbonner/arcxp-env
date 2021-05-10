@@ -141,8 +141,10 @@
   height: 100%;
 
   img {
-    height: 100%;
+    height: auto;
     width: auto;
+    vertical-align: middle;
+    margin: auto;
     opacity: .5;
     transition: opacity .2s .1s;
   }
@@ -478,10 +480,6 @@
     display: none;
   }
 
-  .gallery-image .is-focused {
-    opacity: 1;
-  }
-
   .icon-gallery {
     filter: none;
   }
@@ -551,18 +549,18 @@
 
   .gallery-image {
     background: #efefef;
-    min-width: 720px;
+    // min-width: 720px;
     margin: 0 7.5px;
 
-    a {
+    .is-focused {
+      opacity: 1;
+    }
 
-      img {
-        height: 100%;
-        width: 800px;
-        opacity: .5;
-        display: block;
-        margin: 0 auto;
-      }
+    .lazyload-wrapper {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
     }
   }
 }

@@ -5,21 +5,15 @@ import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitl
 import './default.scss';
 
 const LeftPhotoNoPhoto = (customFields = {}) => {
-  const limit = customFields
-    && customFields.customFields
-    && customFields.customFields.content
-    && customFields.customFields.content.contentConfigValues
-    && customFields.customFields.content.contentConfigValues.size
-    ? customFields.customFields.content.contentConfigValues.size
-    : 2;
+  const limit = customFields?.customFields?.content?.contentConfigValues?.size || 2;
 
-  const { title = '', moreURL = '' } = customFields.customFields;
+  const { title = '', moreURL = '' } = customFields?.customFields || {};
 
   const newCustomFields = {
     ...customFields,
     customFields: {
       ...customFields.customFields,
-      displayClass: 'Redesign Feature - Left Photo No Photo',
+      displayClass: '1 or 2 Item Feature', // this is meaningless, the real class-of-record is passed as `displayClassOverride` below
       content: {
         ...customFields.customFields.content,
         contentConfigValues: {
@@ -35,7 +29,7 @@ const LeftPhotoNoPhoto = (customFields = {}) => {
       <FeatureTitle title={title} moreURL={moreURL} isLeftPhotoNoPhoto={true} />
       <div className="row">
         <div className='LeftPhotoNoPhoto'>
-          <Lead {...newCustomFields} columns={2} limitOverride={4} />
+          <Lead {...newCustomFields} columns={2} limitOverride={4} displayClassOverride={'Redesign Feature - Left Photo No Photo'} />
         </div>
       </div>
     </div>

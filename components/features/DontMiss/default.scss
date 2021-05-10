@@ -37,8 +37,9 @@
   
       .c-homeList {
         padding-top: $min-margin;
-        margin-right: 0;
         border-bottom: 1px solid #cdcdcd;
+        margin: 0;
+        text-align: left;
 
         &:first-child {
           padding-top: 0;
@@ -53,6 +54,7 @@
   
           .headline {
             letter-spacing: -.09px;
+            margin-bottom: $min-margin;
 
             @include text-styles(1rem, 1.25, "Lora-Bold");
           }

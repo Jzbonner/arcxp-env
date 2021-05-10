@@ -2,22 +2,21 @@
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 
-export default (arcSite, id, size = 20) => {
+export default (arcSite, id, size = 20, from = 0) => {
   if (!arcSite || !id) {
     return null;
   }
 
   const sizeInt = parseInt(size, 10);
-  const fromInt = 0;
 
   const promiseArray = [];
   const contentElements = [];
 
   const buffer = 3;
   const fetchSize = 20;
-  const numberOfFetches = fromInt + sizeInt + buffer <= fetchSize ? 1 : Math.ceil((fromInt + sizeInt + buffer) / fetchSize);
+  const numberOfFetches = from + sizeInt + buffer <= fetchSize ? 1 : Math.ceil((from + sizeInt + buffer) / fetchSize);
 
-  let fetchStart = 0;
+  let fetchStart = from;
   let i = 1;
 
   while (i <= numberOfFetches && i < 10) {

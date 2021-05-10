@@ -1,13 +1,14 @@
-import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+/* eslint-disable no-nested-ternary */
 import getVideoAuthor from './getVideoAuthor';
+import mediaObj from './mediaObj';
 
-export const getMediaContent = (type, siteID, globalContent, promoItems, newsletterFeed = false) => {
+export const getMediaContent = (type, siteID, globalContent, promoItems, newsletterFeed = false, standardFeed = false) => {
   let formattedMediaContent = [];
   let formatterGalleryArray = [];
   let leadObject = {};
 
+  const standaloneGallery = type === 'gallery';
   const { basic = {} } = promoItems || {};
-
   const {
     type: promoItemsType = '',
     url: basicUrl,
@@ -17,40 +18,21 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     credits: basicCredits = {},
     streams: basicStreams = [],
     promo_image: basicPromoImage = {},
+    promo_items: basicPromoItems = {},
   } = basic || {};
+
   const { meta_title: metaTitle, basic: baseHeadline } = basicHeadlines || {};
   let mediaTitle = basicSubtitle;
   if (!mediaTitle) {
     mediaTitle = metaTitle || baseHeadline || '';
   }
+  const basicAuthor = basicCredits && basicCredits.affiliation && basicCredits.affiliation.by ? basicCredits.affiliation.by.id
+    : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].name ? basicCredits.by[0].name : '';
 
-  const basicAuthor = basicCredits.affiliation && basicCredits.affiliation.by ? basicCredits.affiliation.by.id : '';
   const checkCaption = basicCaption || '';
 
-  if (promoItemsType === 'image') {
-    leadObject = {
-      _name: 'media:content',
-      _attrs: {
-        type: 'image/JPEG',
-        medium: 'image',
-        url: `${imageResizer(basicUrl, siteID)}`,
-      },
-      _content: [
-        {
-          'media:title': `<![CDATA[${mediaTitle}]]>`,
-        },
-        {
-          'media:description': `<![CDATA[${checkCaption}]]>`,
-        },
-        {
-          _name: 'media:credit',
-          _attrs: {
-            role: 'author',
-          },
-          _content: `<![CDATA[${basicAuthor}]]>`,
-        },
-      ],
-    };
+  if (promoItemsType === 'image' && !standaloneGallery) {
+    leadObject = mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, checkCaption, basicAuthor);
   }
 
   if (promoItemsType === 'video') {
@@ -71,97 +53,33 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     const { caption: videoCaption, url: basicThumbNailImage = '' } = basicPromoImage || {};
     const videoAuthor = getVideoAuthor(basic);
     const checkVideoCaption = videoCaption || '';
-
-    leadObject = {
-      _name: 'media:content',
-      _attrs: {
-        type: `${leadObjectType}`,
-        medium: 'video',
-        url: `${leadObjectUrl}`,
-      },
-      _content: [
-        {
-          'media:title': `<![CDATA[${mediaTitle}]]>`,
-        },
-        {
-          'media:description': `<![CDATA[${checkVideoCaption}]]>`,
-        },
-        {
-          _name: 'media:thumbnail',
-          _attrs: {
-            url: `${imageResizer(basicThumbNailImage, siteID)}`,
-          },
-        },
-        {
-          _name: 'media:credit',
-          _attrs: {
-            role: 'author',
-          },
-          _content: `<![CDATA[${videoAuthor}]]>`,
-        },
-      ],
-    };
+    leadObject = mediaObj(leadObjectType, 'video', leadObjectUrl, siteID, mediaTitle, checkVideoCaption, videoAuthor, true, basicThumbNailImage, false);
   }
 
-  if (promoItemsType === 'gallery') {
+  if (promoItemsType === 'gallery' || standaloneGallery) {
     const { content_elements: galleryContentElements = [] } = basic || {};
-    if (newsletterFeed) {
-      const firstImageInGallery = galleryContentElements && galleryContentElements[0];
-      const { caption: firstImageInGalleryCaption, url: firstImageInGalleryUrl } = firstImageInGallery || {};
+    const { basic: basicGalleryPromo } = basicPromoItems || {};
+    const {
+      credits: basicGalleryCredits = '', url: basicGalleryUrl, caption: basicGalleryCaption = '', subtitle: basicGallerySubtitle = '',
+    } = basicGalleryPromo || {};
+    const galleryMediaCredit = basicGalleryCredits && basicGalleryCredits.by && basicGalleryCredits.by[0] ? basicGalleryCredits.by[0].name : '';
 
-      leadObject = {
-        _name: 'media:content',
-        _attrs: {
-          type: 'image/JPEG',
-          medium: 'image',
-          url: `${imageResizer(firstImageInGalleryUrl, siteID)}`,
-        },
-        _content: [
-          {
-            'media:title': `<![CDATA[${mediaTitle}]]>`,
-          },
-          {
-            'media:description': `<![CDATA[${firstImageInGalleryCaption}]]>`,
-          },
-          {
-            _name: 'media:credit',
-            _attrs: {
-              role: 'author',
-            },
-            _content: `<![CDATA[${basicAuthor}]]>`,
-          },
-        ],
-      };
+    if (newsletterFeed || standardFeed) {
+      if (standaloneGallery) {
+        leadObject = mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, checkCaption, basicAuthor);
+      } else {
+        leadObject = mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, (galleryMediaCredit || basicAuthor));
+      }
     } else {
       formatterGalleryArray = galleryContentElements.map((item) => {
-        const { caption: itemCaption, url: itemUrl } = item || {};
-        return {
-          _name: 'media:content',
-          _attrs: {
-            type: 'image/JPEG',
-            medium: 'image',
-            url: `${imageResizer(itemUrl, siteID)}`,
-          },
-          _content: [
-            {
-              'media:title': `<![CDATA[${mediaTitle}]]>`,
-            },
-            {
-              'media:description': `<![CDATA[${itemCaption}]]>`,
-            },
-            {
-              _name: 'media:credit',
-              _attrs: {
-                role: 'author',
-              },
-              _content: `<![CDATA[${basicAuthor}]]>`,
-            },
-          ],
-        };
+        const {
+          caption: itemCaption, url: itemUrl, credits: creditsArray = '', subtitle: itemTitle,
+        } = item || {};
+        const appFeedCredit = creditsArray && creditsArray.by && creditsArray.by[0] && creditsArray.by[0].name ? creditsArray.by[0].name : '';
+        return mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit);
       });
     }
   }
-
   const mediaContent = globalContent.filter(el => el && el.type && (el.type === 'image' || el.type === 'video'));
   if (mediaContent) {
     formattedMediaContent = mediaContent.map((media) => {
@@ -179,10 +97,11 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         return {};
       }
 
-      let resizerUrl = url;
       let mediaObjectUrl = '';
 
-      const mediaAuthor = mediaCredits.affiliation && mediaCredits.affiliation.by ? mediaCredits.affiliation.by.id : '';
+
+      const mediaAuthor = mediaCredits.affiliation && mediaCredits.affiliation.by && mediaCredits.affiliation.by.id ? mediaCredits.affiliation.by.id
+        : mediaCredits && mediaCredits.by && mediaCredits.by[0] && mediaCredits.by[0].name ? mediaCredits.by[0].name : '';
       let mediaType = localType === 'image' ? 'image/JPEG' : 'video/mp4';
       const mediaMedium = localType === 'image' ? 'image' : 'video';
 
@@ -201,38 +120,15 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         }
       }
 
-      if (mediaMedium === 'image') {
-        resizerUrl = imageResizer(url, siteID);
-      }
-
-      return {
-        _name: 'media:content',
-        _attrs: {
-          type: `${mediaType}`,
-          medium: `${mediaMedium}`,
-          url: `${localType === 'image' ? resizerUrl : mediaObjectUrl}`,
-        },
-        _content: [
-          {
-            'media:title': `<![CDATA[${subtitle}]]>`,
-          },
-          {
-            'media:description': `<![CDATA[${caption}]]>`,
-          },
-          {
-            _name: 'media:credit',
-            _attrs: {
-              role: 'author',
-            },
-            _content: `<![CDATA[${mediaAuthor}]]>`,
-          },
-        ],
-      };
+      return mediaObj(mediaType, mediaMedium, `${localType === 'image' ? url : mediaObjectUrl}`, siteID, subtitle, caption, mediaAuthor, false, '', false);
     });
   }
 
-  if (!newsletterFeed && promoItemsType === 'gallery') {
+  if (!newsletterFeed && !standardFeed && promoItemsType === 'gallery' && !standaloneGallery) {
     return [...formatterGalleryArray, ...formattedMediaContent];
+  }
+  if ((newsletterFeed || standardFeed) && standaloneGallery) {
+    return [leadObject];
   }
   return [leadObject, ...formattedMediaContent];
 };
