@@ -6,7 +6,7 @@ import './styles.scss';
 const BlogAuthor = ({ subtype, authorData, ampPage }) => {
   if (subtype === 'Blog' && authorData.length > 0) {
     return (
-      <div className="c-blogAuthor b-margin-bottom-d40-m20">
+      <div className="c-blogAuthor b-margin-bottom-30">
         <p className="blogAuthor-title">About the Author{authorData.length > 1 ? 's' : ''}</p>
         <div className="blogAuthor-content">
           {authorData.map((val, index) => (
@@ -26,12 +26,13 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
               )}
               {authorData.length < 2 && (
                 <div className="b-flexRow b-flexCenter">
-                  {val.social_links && val.social_links[1] && val.social_links[1].url && (
-                    <a className="btn-facebook" href={val.social_links[1].url} />
-                  )}
-                  {val.social_links && val.social_links[2] && val.social_links[2].url && (
-                    <a className="btn-twitter" href={`https://twitter.com/${val.social_links[2].url}`} />
-                  )}
+                  {val.social_links.map((link) => {
+                    const { site: network, url } = link;
+                    if (network && url) {
+                      return <a className={`btn-${network}`} href={url} />;
+                    }
+                    return false;
+                  })}
                 </div>
               )}
             </React.Fragment>

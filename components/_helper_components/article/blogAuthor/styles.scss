@@ -7,6 +7,7 @@
   .blogAuthor-title {
     @include text-styles(1.563rem, 1, "Gordita-Bold");
 
+    letter-spacing: -.31px;
     margin-bottom: 10px;
     font-weight: 600;
     color: #313132;
@@ -18,26 +19,24 @@
   }
 
   .blogAuthor-content {
-    padding: 30px 0 25px;
 
     .blog-author-content-heading {
-      justify-content: center;
+      justify-content: left;
       align-items: center;
       flex-direction: column;
 
       @include breakpoint(tablet) {
-        justify-content: left;
         flex-direction: row;
       }
     }
 
     .b-flexRow {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
 
       .content-profileImage {
         width: 97px;
         height: 97px;
-        margin: 0 0 20px;
+        margin: 0 0 10px;
 
         @include breakpoint(tablet) {
           margin: 0 20px 0 0;
@@ -57,14 +56,14 @@
           height: 100%;
           width: auto;
           border-radius: 50%;
-          box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
           overflow: hidden;
         }
       }
 
       .content-authorName {
-        @include text-styles(1.25rem, 1, "Gordita-Bold");
+        @include text-styles(1.125rem, 1, "Gordita-Bold");
 
+        letter-spacing: -.22px;
         font-weight: 600;
       }
     }
@@ -74,17 +73,10 @@
     }
 
     .content-authorDescription {
-      padding: 0 20px;
+      padding: 0;
       color: #505050;
 
-      @include text-styles(.875rem, 1.57, "Gordita");
-
-      text-align: center;
-
-      @include breakpoint(tablet) {
-        text-align: left;
-        padding: 0;
-      }
+      @include text-styles(.875rem, 1.375, "Gordita");
     }
   }
 
