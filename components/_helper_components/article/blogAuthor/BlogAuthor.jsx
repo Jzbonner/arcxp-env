@@ -26,12 +26,13 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
               )}
               {authorData.length < 2 && (
                 <div className="b-flexRow b-flexCenter">
-                  {val.social_links && val.social_links[1] && val.social_links[1].url && (
-                    <a className="btn-facebook" href={val.social_links[1].url} />
-                  )}
-                  {val.social_links && val.social_links[2] && val.social_links[2].url && (
-                    <a className="btn-twitter" href={`https://twitter.com/${val.social_links[2].url}`} />
-                  )}
+                  {val.social_links.map((link) => {
+                    const { site: network, url } = link;
+                    if (network && url) {
+                      return <a className={`btn-${network}`} href={url} />;
+                    }
+                    return false;
+                  })}
                 </div>
               )}
             </React.Fragment>
