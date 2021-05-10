@@ -161,7 +161,6 @@ const Slider = (customFields = {}) => {
           <img src={LeftArrow} />
         </a>
         <ScrollBar
-          maxWidth={contentWidth}
           maxScrollLeft={maxScrollLeft}
           currentScrollLeft={scrollLeft}
           sliderId={idSuffix}
