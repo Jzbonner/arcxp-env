@@ -66,6 +66,10 @@
 
 .desktop-image {
   cursor: pointer;
+
+  img {
+    touch-action: pan-y;
+  }
 }
 
 .icon-gallery {
