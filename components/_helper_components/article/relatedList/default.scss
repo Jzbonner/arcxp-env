@@ -18,6 +18,10 @@
 
       @include breakpoint(tablet) {
         width: calc(100% / 5);
+
+        &:last-child {
+          margin-bottom: 22px;
+        }
       }
     }
   }
