@@ -26,6 +26,14 @@
 .b-pageContainer {
   width: calc(100% - #{2 * $min-margin});
   margin: 0 auto;
+
+  &:empty {
+    display: none;
+  }
+  
+  @include breakpoint(tablet) {
+    width: calc(100% - #{4 * $min-margin});
+  }
 }
 
 .b-margin-bottom-1 {
@@ -62,6 +70,12 @@
   }
 }
 
+// desktop and mobile margin-bottom 7 to handle new spacing for label, byline and timestamp (with the new line-height)
+
+.b-margin-bottom-d7-m7 {
+  margin-bottom: 7px;
+}
+
 // desktop margin-bottom 30, mobile margin-bottom 20
 
 .b-margin-bottom-d30-m20 {
@@ -70,6 +84,12 @@
   @include breakpoint(desktop-sm) {
     margin-bottom: 1.88rem;
   }
+}
+
+// desktop margin-botton 30, mobile margin-bottom 30 as per new design
+
+.b-margin-bottom-d30-m30 {
+  margin-bottom: 1.88rem;
 }
 
 // desktop margin-bottom 40, mobile margin-bottom 20

@@ -3,17 +3,13 @@
 @import "../../../../src/styles/base/mixins";
 
 .section-label {
-  @include text-styles(.688rem, 1.5, "Gordita");
+  @include text-styles(.688rem, 1.82, "Gordita");
 
   font-weight: 500;
   text-transform: uppercase;
   color: #000;
   letter-spacing: normal;
   margin-right: 6px;
-
-  @include breakpoint(desktop-sm) {
-    @include text-styles(.688rem, 1.82, "Gordita");
-  }
 
   &.section-label-link {
     color: #2e81b7;

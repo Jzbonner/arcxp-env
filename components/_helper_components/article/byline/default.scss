@@ -3,8 +3,8 @@
 
 .byline {
   color: #313132;
-  font-weight: 100;
-  letter-spacing: normal;
+  font-weight: 500;
+  letter-spacing: -.18px;
   line-height: 1.4rem;
   text-align: center;
   display: flex;
@@ -19,7 +19,8 @@
   }
 
   @include breakpoint(desktop-sm) {
-    font-size: 1.25rem;
-    line-height: 2.25rem;
+    @include text-styles(1rem, normal, "Gordita");
+    
+    letter-spacing: -.2px;
   }
 }
