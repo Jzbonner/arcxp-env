@@ -688,7 +688,7 @@ const Gallery = (props) => {
           <a href={canonicalUrl || null}>{galHeadline}</a>
         </div>
       ) : null}
-      {pageType !== 'story' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
+      {!isStory && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
       <div className={`${!isStory ? 'c-gallery-homeSection' : ''}`}>
         {!isMobile ? (
           <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
