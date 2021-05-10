@@ -96,7 +96,6 @@ const Gallery = (props) => {
   const types = {
     IMAGE: 'IMAGE',
     ARROW: 'ARROW',
-    SWIPE: 'SWIPE',
   };
 
   let mobileElemData;
