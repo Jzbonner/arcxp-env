@@ -120,4 +120,11 @@
       }
     }
   }
+
+  @include breakpoint(desktop-lg) {
+    
+    &.b-sectionHomeMaxWidth {
+      max-width: 1600px;
+    }
+  }
 }
