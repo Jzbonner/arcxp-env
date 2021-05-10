@@ -62,7 +62,7 @@ const GalleryItem = ({
             <div className="gallery-credit">
               {
                 (affiliationCredit) || (by && by[0] && by[0].name)
-                  ? (affiliationCredit) || `Credit: ${by && by[0] && by[0].name}` : null
+                  ? (affiliationCredit) || `Photo: ${by && by[0] && by[0].name}` : null
               }
             </div>
             {

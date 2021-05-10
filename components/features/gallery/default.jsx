@@ -6,6 +6,7 @@ import LazyLoad from 'react-lazyload';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useAppContext, useFusionContext } from 'fusion:context';
+import { useSwipeable } from 'react-swipeable';
 import {
   DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery, ImageModal,
 } from '../../_helper_components/global/gallery/index';
@@ -79,7 +80,7 @@ const Gallery = (props) => {
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
   const PG01Ref = useRef(null);
-  const mobileBreakPoint = 1023;
+  const mobileBreakPoint = 767;
 
   const actions = {
     PREV: 'PREV',
@@ -175,13 +176,11 @@ const Gallery = (props) => {
   const calculateTranslateX = () => {
     if (isMobile) return;
     let translateAmount;
-    const focusElement = isAdVisible ? PG01Ref.current : (document.getElementById(`gallery-item-${currentIndex}`) || null);
+    const focusElement = isAdVisible ? PG01Ref.current : document.getElementById(`gallery-item-${currentIndex}`) || null;
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
     if (galleryEl.current && focusElement) {
       // fixes initializing translate bug...?
-      translateAmount = parseInt(galleryFullWidth, 10)
-        / 2 - parseInt(focusElement.offsetWidth, 10)
-        / 2 - parseInt(focusElement.offsetLeft, 10);
+      translateAmount = parseInt(galleryFullWidth, 10) / 2 - parseInt(focusElement.offsetWidth, 10) / 2 - parseInt(focusElement.offsetLeft, 10);
       setTranslateX(translateAmount);
       // The gallery component needs to re-render every time this function is called.
       forceUpdate();
@@ -235,13 +234,12 @@ const Gallery = (props) => {
     if (!isMobile) handleClickCount();
     setPreviousClickAction(currentAction);
 
-    if ((!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0))
-      || (isAdVisible && currentClickCount === 4)) {
+    if ((!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0)) || (isAdVisible && currentClickCount === 4)) {
       // change current image index by -1
       if (action === actions.PREV) {
         setCurrentAction(action);
         setClickDirection(actions.PREV);
-        if (!isAdVisible || (currentClickCount % 4) === 0) {
+        if (!isAdVisible || currentClickCount % 4 === 0) {
           if (currentIndex <= 0) {
             if (!maxIndex) {
               setCurrentIndex(maxNumber);
@@ -258,7 +256,7 @@ const Gallery = (props) => {
         // change current image index by +1
         setCurrentAction(action);
         setClickDirection(actions.NEXT);
-        if (!isAdVisible || ((currentClickCount % 4) === 0)) {
+        if (!isAdVisible || currentClickCount % 4 === 0) {
           if (currentIndex === maxIndex) {
             setCurrentIndex(0);
           } else if (isAdVisible && previousClickAction === actions.PREV) {
@@ -288,7 +286,6 @@ const Gallery = (props) => {
     calculateTranslateX: () => calculateTranslateX(),
   };
 
-
   const insertDesktopGalleryAd = () => {
     const elements = [...elementData];
 
@@ -297,11 +294,7 @@ const Gallery = (props) => {
     elementData.forEach((element, i) => {
       // inserts add after current photo
       if (element.props.data.states.isFocused) {
-        elements.splice(i + insertionBuffer, 0, <PGO1Element
-          refHook={PG01Ref}
-          adSlot={PG01}
-          key={`${i}-PG01`}
-          galleryTopics={galleryTopics} />);
+        elements.splice(i + insertionBuffer, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} key={`${i}-PG01`} galleryTopics={galleryTopics} />);
       }
     });
 
@@ -318,17 +311,9 @@ const Gallery = (props) => {
         // browser side on, the MPG01 variable is out of scope. Once moved inside of here,
         // the ads were appearing on sandbox. This may or may not be the reason. But since
         // the MPG01 ad is only called here, I think it's safe to leave it here.
-        const MPG01 = (adCount, mpg01GalleryTopics) => <ArcAd
-          staticSlot={'MPG01'}
-          adSuffix={`_${adCount}`}
-          key={'MPG01'}
-          galleryTopics={mpg01GalleryTopics} />;
+        const MPG01 = (adCount, mpg01GalleryTopics) => <ArcAd staticSlot={'MPG01'} adSuffix={`_${adCount}`} key={'MPG01'} galleryTopics={mpg01GalleryTopics} />;
         /* eslint-disable-next-line max-len */
-        mobileElements.splice(i + (i > 0 ? currentAdCount : 0), 0, <MPGO1Element
-          adSlot={MPG01}
-          adCount={currentAdCount}
-          key={`${i}-MPG01`}
-          galleryTopics={galleryTopics} />);
+        mobileElements.splice(i + (i > 0 ? currentAdCount : 0), 0, <MPGO1Element adSlot={MPG01} adCount={currentAdCount} key={`${i}-MPG01`} galleryTopics={galleryTopics} />);
         currentAdCount += 1;
       }
     });
@@ -389,9 +374,21 @@ const Gallery = (props) => {
   };
 
   const renderDesktopGalleryElements = (elements) => {
-    preRenderEls = handleImageFocus((elements), {
-      isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction, hasOpened, modalVisible,
-    }, clickFuncs);
+    preRenderEls = handleImageFocus(
+      elements,
+      {
+        isStickyVisible,
+        isMobile,
+        isCaptionOn,
+        currentIndex,
+        maxIndex,
+        isAdVisible,
+        currentAction,
+        hasOpened,
+        modalVisible,
+      },
+      clickFuncs,
+    );
 
     setElementData(preRenderEls);
 
@@ -400,7 +397,6 @@ const Gallery = (props) => {
 
   const handleNext = (arr, returnOnly = false) => {
     const newArr = [...arr];
-
     newArr.push(newArr.shift());
 
     if (returnOnly) {
@@ -411,7 +407,6 @@ const Gallery = (props) => {
 
   const handlePrevious = (arr, returnOnly = false) => {
     const newArr = [...arr];
-
     newArr.unshift(newArr.pop());
 
     if (returnOnly) {
@@ -446,7 +441,7 @@ const Gallery = (props) => {
       const galleryScrollTop = galleryMobileEl.current.scrollTop;
       const targetOffsetTop = document.getElementById(`gallery-item-${index}`).offsetTop;
 
-      if (offsetHeight === 0 && (galleryScrollTop > targetOffsetTop)) {
+      if (offsetHeight === 0 && galleryScrollTop > targetOffsetTop) {
         setHeight(offsetHeight + targetOffsetTop);
         changeIndex(actions.NEXT);
       }
@@ -458,12 +453,12 @@ const Gallery = (props) => {
           return null;
         }
 
-        if ((galleryScrollTop < offsetHeight) && index !== 0) {
+        if (galleryScrollTop < offsetHeight && index !== 0) {
           setHeight(previousTarget);
           changeIndex(actions.PREV);
         }
 
-        if ((galleryScrollTop > targetOffsetTop)) {
+        if (galleryScrollTop > targetOffsetTop) {
           setHeight(targetOffsetTop);
           changeIndex(actions.NEXT);
         }
@@ -496,9 +491,7 @@ const Gallery = (props) => {
       };
       elementItemData.states = { ...parentStates };
 
-      return (
-        <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`} isMobileGallery={true} />
-      );
+      return <GalleryItem data={elementItemData} key={`gallery-item-${elementItemData.url}`} isMobileGallery={true} />;
     });
     return finalElements;
   };
@@ -508,7 +501,7 @@ const Gallery = (props) => {
   }, []);
 
   useEffect(() => {
-    if (elementData && !isStickyVisible && (currentAction !== '' && currentAction !== actions.AD_REMOVED)) {
+    if (elementData && !isStickyVisible && currentAction !== '' && currentAction !== actions.AD_REMOVED) {
       finalizeGalleryItems();
     } else if (elementData && !isStickyVisible && currentAction === actions.AD_REMOVED && clickType === types.IMAGE) {
       renderDesktopGalleryElements([...elementData]);
@@ -537,11 +530,19 @@ const Gallery = (props) => {
     if (!isAdVisible && !isMobile) renderCaptionByCurrentIndex();
   }, [baseCaptionData]);
 
+  // handles swiping functionality for tablets
+  const handlers = useSwipeable({
+    onSwipedLeft: () => changeIndex(actions.NEXT, null, true),
+    onSwipedRight: () => changeIndex(actions.PREV, null, true),
+    preventDefaultTouchmoveEvent: false,
+    trackTouch: true,
+    trackMouse: true,
+  });
+
   // handles ad insertions and removals for desktop gallery
   useEffect(() => {
     if (!isMobile) {
       if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
-
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
         const adInsertedElementArray = insertDesktopGalleryAd();
         setElementData(adInsertedElementArray);
@@ -559,9 +560,19 @@ const Gallery = (props) => {
 
         setAdVisibleState(false);
 
-        const finalizedElements = handleImageFocus((reorganizedElements || adRemovedElementArray), {
-          isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, hasOpened, modalVisible,
-        }, clickFuncs);
+        const finalizedElements = handleImageFocus(
+          reorganizedElements || adRemovedElementArray,
+          {
+            isStickyVisible,
+            isMobile,
+            isCaptionOn,
+            currentIndex,
+            maxIndex,
+            hasOpened,
+            modalVisible,
+          },
+          clickFuncs,
+        );
 
         setElementData(finalizedElements);
         setCurrentAction(actions.AD_REMOVED);
@@ -588,8 +599,7 @@ const Gallery = (props) => {
 
   // initializing the gallery w/ either propped or fetched content elements
   // NOTE: leafContentElements = Gallery-page-only propped contentElements array
-  if (isMobile !== 'NOT INIT' && ((contentElements || leafContentElements || fetchedGalleryData || featuredGalleryData)
-    && ((currentAction === actions.RESIZE || currentAction === actions.AD_RESET) || (!elementData && !mobileElementData)))) {
+  if (isMobile !== 'NOT INIT' && (contentElements || leafContentElements || fetchedGalleryData || featuredGalleryData) && (currentAction === actions.RESIZE || currentAction === actions.AD_RESET || (!elementData && !mobileElementData))) {
     let relevantGalleryData = null;
     let galleryContentElements = null;
     let fetchedContentElements = null;
@@ -611,21 +621,29 @@ const Gallery = (props) => {
       const mainData = relevantGalleryData || fetchedGalleryData;
 
       if (mainData) {
-        headline = mainData.headlines && mainData.headlines.basic
-          ? setHeadline(mainData.headlines.basic) : null;
+        headline = mainData.headlines && mainData.headlines.basic ? setHeadline(mainData.headlines.basic) : null;
 
         if (mainData && mainData.canonical_url) setCanonicalUrl(mainData.canonical_url);
       }
     }
 
     const baseGalleryData = fetchedContentElements || featuredContentElements || galleryContentElements;
-    const captionAndGalleryData = createBaseGallery(baseGalleryData, {
-      isStickyVisible, isMobile, isCaptionOn, currentIndex, modalVisible,
-    }, isMobile, {
-      prev: () => changeIndex(actions.PREV, baseGalleryData.length - 1),
-      next: () => changeIndex(actions.NEXT),
-      modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
-    });
+    const captionAndGalleryData = createBaseGallery(
+      baseGalleryData,
+      {
+        isStickyVisible,
+        isMobile,
+        isCaptionOn,
+        currentIndex,
+        modalVisible,
+      },
+      isMobile,
+      {
+        prev: () => changeIndex(actions.PREV, baseGalleryData.length - 1),
+        next: () => changeIndex(actions.NEXT),
+        modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
+      },
+    );
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData || {};
 
     if (!isMobile) {
@@ -663,82 +681,61 @@ const Gallery = (props) => {
     }
   }
 
-  const galleryOutput = () => <>
-    {(isMobile || !isStory)
-      && galHeadline
-      ? <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
-    {pageType !== 'story' && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
-    <div className={`${!isStory ? 'c-gallery-homeSection b-sectionHome-padding' : ''}`}>
-      {!isMobile
-        ? <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
-          <ImageModal src={currentImageSrc} isVisible={modalVisible} />
-        </div> : null}
-      <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`}>
-        {!isMobile && galHeadline && isStory
-          ? <div className="gallery-headline"><a href={canonicalUrl || null} >{galHeadline}</a></div> : null}
-        {
-          isStickyVisible
-            ? <MobileGallery
-              objectRef={galleryMobileEl}
-              data={mobileElemData}
-              states={mobileState}
-              funcs={mobileFuncs}
-            />
-            : null
-        }
-        {
-          !isMobile
-            ? <DesktopGallery data={elementData} translateX={translateX} />
-            : null
-        }
-        <div
-          onClick={handleStickyOpen}
-          className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
-          <div className="gallery-overlay hidden-large">
-            {
-              isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null
-            }
-          </div>
-          <div className="gallery-count view-gallery">
-            <div className="gallery-count-prev hidden-small hidden-medium">
-              <a onClick={() => changeIndex(actions.PREV, null, false)}>
-                <img src={leftArrow} />
-              </a>
-            </div>
-            <div className="mobile-change">
-              <a>
-                <img src={middleBox} className="icon-gallery" />
-              </a>
-              <div className="icon-text hidden-large">View Gallery</div>
-            </div>
-            <div className="gallery-count-next hidden-small hidden-medium">
-              <a onClick={() => changeIndex(actions.NEXT, null, false)}>
-                <img src={rightArrow} />
-              </a>
-            </div>
-            <div className="count--box hidden-small hidden-medium">
-              <span className="gallery-index">{currentIndex + 1} / </span>
-              <span>{maxIndex && maxIndex + 1}</span>
-            </div>
-          </div>
+  const galleryOutput = () => (
+    <>
+      {(isMobile || !isStory) && galHeadline ? (
+        <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}>
+          <a href={canonicalUrl || null}>{galHeadline}</a>
         </div>
-        {captionData}
+      ) : null}
+      {!isStory && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
+      <div className={`${!isStory ? 'c-gallery-homeSection' : ''}`}>
+        {!isMobile ? (
+          <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
+            <ImageModal src={currentImageSrc} isVisible={modalVisible} />
+          </div>
+        ) : null}
+        <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`} >
+          {!isMobile && galHeadline && isStory ? (
+            <div className="gallery-headline">
+              <a href={canonicalUrl || null}>{galHeadline}</a>
+            </div>
+          ) : null}
+          {isStickyVisible ? <MobileGallery objectRef={galleryMobileEl} data={mobileElemData} states={mobileState} funcs={mobileFuncs} /> : null}
+          {!isMobile ? <DesktopGallery data={elementData} translateX={translateX} handlers={handlers}/> : null}
+          <div onClick={handleStickyOpen} className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
+            <div className="gallery-overlay hidden-large">{isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null}</div>
+            <div className="gallery-count view-gallery">
+              <div className="gallery-count-prev hidden-small hidden-medium" onClick={() => changeIndex(actions.PREV, null, false)}>
+                <img src={leftArrow} />
+              </div>
+              <div className="mobile-change">
+                <a>
+                  <img src={middleBox} className="icon-gallery" />
+                </a>
+                <div className="icon-text hidden-large">View Gallery</div>
+              </div>
+              <div className="gallery-count-next hidden-small hidden-medium" onClick={() => changeIndex(actions.NEXT, null, false)}>
+                <img src={rightArrow} />
+              </div>
+              <div className="count--box hidden-small hidden-medium">
+                <span className="gallery-index">{currentIndex + 1} / </span>
+                <span>{maxIndex && maxIndex + 1}</span>
+              </div>
+            </div>
+          </div>
+          {captionData}
+        </div>
       </div>
-    </div>
-  </>;
+    </>
+  );
 
   if (isAdmin) {
     return galleryOutput();
   }
 
   return (
-    <LazyLoad
-      placeholder={<div className="c-placeholder-gallery" data-uri={canonicalUrl || null} />}
-      height="100%"
-      width="100%"
-      offset={300}
-      overflow={!isMobile}
-      once={true}>
+    <LazyLoad placeholder={<div className="c-placeholder-gallery" data-uri={canonicalUrl || null} />} height="100%" width="100%" offset={300} overflow={!isMobile} once={true}>
       {galleryOutput()}
     </LazyLoad>
   );

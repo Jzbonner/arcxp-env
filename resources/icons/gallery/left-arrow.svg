@@ -1,3 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="30" height="22" viewBox="0 0 30 22">
-  <path fill="#2E81B7" fill-rule="nonzero" d="M9.798.316a1.063 1.063 0 0 1 1.512 1.49L3.644 9.438h25.298c.59 0 1.058.467 1.058 1.054s-.469 1.07-1.058 1.07H3.644l7.666 7.617c.409.421.409 1.1 0 1.505a1.063 1.063 0 0 1-1.512 0l-9.48-9.439a1.033 1.033 0 0 1 0-1.49l9.48-9.44z"></path>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="20px" viewBox="0 0 12 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Combined Shape</title>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Left" transform="translate(-17.000000, -15.000000)" fill="#212126">
+            <path d="M32.25,18 C33.2164983,18 34,18.7835017 34,19.75 C34,20.7164983 33.2164983,21.5 32.25,21.5 L23.5,21.5 L23.5,30.25 C23.5,31.2164983 22.7164983,32 21.75,32 C20.7835017,32 20,31.2164983 20,30.25 L20,19.75 C20,18.7835017 20.7835017,18 21.75,18 L32.25,18 Z" id="Combined-Shape" transform="translate(27.000000, 25.000000) rotate(-45.000000) translate(-27.000000, -25.000000) "></path>
+        </g>
+    </g>
 </svg>
