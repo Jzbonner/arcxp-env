@@ -533,10 +533,11 @@ const Gallery = (props) => {
 
   // handles swiping functionality for tablets
   const handlers = useSwipeable({
-    onSwiped: () => setClickType(types.IMAGE),
     onSwipedLeft: () => changeIndex(actions.NEXT, null, true),
     onSwipedRight: () => changeIndex(actions.PREV, null, true),
-    preventDefaultTouchmoveEvent: true,
+    preventDefaultTouchmoveEvent: false,
+    trackTouch: true,
+    trackMouse: true,
   });
 
   // handles ad insertions and removals for desktop gallery
@@ -695,14 +696,14 @@ const Gallery = (props) => {
             <ImageModal src={currentImageSrc} isVisible={modalVisible} />
           </div>
         ) : null}
-        <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`} {...handlers}>
+        <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`} >
           {!isMobile && galHeadline && isStory ? (
             <div className="gallery-headline">
               <a href={canonicalUrl || null}>{galHeadline}</a>
             </div>
           ) : null}
           {isStickyVisible ? <MobileGallery objectRef={galleryMobileEl} data={mobileElemData} states={mobileState} funcs={mobileFuncs} /> : null}
-          {!isMobile ? <DesktopGallery data={elementData} translateX={translateX} /> : null}
+          {!isMobile ? <DesktopGallery data={elementData} translateX={translateX} handlers={handlers}/> : null}
           <div onClick={handleStickyOpen} className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
             <div className="gallery-overlay hidden-large">{isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null}</div>
             <div className="gallery-count view-gallery">
