@@ -22,7 +22,7 @@ const Headline = ({
   // Used because I was getting errors when trying to add a video as a featured element.
   // promoData.type = 'video';
   return (
-    <div className={`article-headline-component b-margin-bottom-d30-m20 with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
+    <div className={`article-headline-component b-margin-bottom-d30-m30 with-${promoData.type ? `${promoData.type}` : 'just-headline'}`}>
       {!ampVideoIframe && <div className="headline">
         <div className="headline-body">
           <h1 className={`headline-text ${headlines.basic.length > 50 ? 'headline-text-long' : ''}`}>{headlines.basic}</h1>
