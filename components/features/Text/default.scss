@@ -22,10 +22,19 @@
     }
   }
 
+  // have to duplicate the fonts below in order to cover the case where no HTML tag is used
+  // otherwise the P tags grab the styling from the Paragraph Component
+
   .c-textFeature-content {
     max-width: 100%;
     border-bottom: 1px solid #cdcdcd;
     padding-bottom: 15px;
+
+    @include text-styles(.688rem, 1.82, "Gordita");
+  
+    @include breakpoint(desktop-sm) {
+      @include text-styles(.813rem, 1.54, "Gordita");
+    }
     
     p,
     strong {
@@ -36,6 +45,10 @@
       @include breakpoint(desktop-sm) {
         @include text-styles(.813rem, 1.54, "Gordita");
       }
+    }
+
+    p {
+      margin-bottom: $min-margin;
     }
 
     a {
