@@ -68,7 +68,7 @@ const Slider = (customFields = {}) => {
   if (data && !sliderItems) setSliderItems(buildSliderItems(data, el => addToRefs(el, elRefs), startIndex, itemLimit));
 
   const isPad = typeof navigator !== 'undefined' ? navigator.userAgent.match(/iPad|Tablet/i) != null : false;
-  const itemOffsetWidth = elRefs.current && elRefs.current[0] ? elRefs.current[0].scrollWidth + marginOffset : null;
+  const itemOffsetWidth = elRefs.current && elRefs.current[0] ? elRefs.current[0].scrollWidth + marginOffset : 330;
 
   const calculateScrollLeft = (direction) => {
     if (direction === actions.LEFT) {
@@ -106,21 +106,6 @@ const Slider = (customFields = {}) => {
     if (!idSuffix) {
       const rng = Math.floor(Math.random() * 9999999);
       setIdSuffix(rng);
-    }
-
-    return null;
-  };
-
-  const handleMaxWidth = () => {
-    const sliderContent = document.getElementsByClassName(`itemList ${idSuffix}`);
-
-    if (!sliderContent || !sliderContent[0]) return null;
-
-    const sliderMaxWidth = window.getComputedStyle(sliderContent[0]).width;
-    const parsedMaxWidth = parseInt(sliderMaxWidth, 10);
-
-    if (parsedMaxWidth !== contentWidth) {
-      setContentWidth(parsedMaxWidth);
     }
 
     return null;
@@ -176,10 +161,10 @@ const Slider = (customFields = {}) => {
           <img src={LeftArrow} />
         </a>
         <ScrollBar
-          maxWidth={contentWidth}
           maxScrollLeft={maxScrollLeft}
           currentScrollLeft={scrollLeft}
           sliderId={idSuffix}
+          elScrollThumb={contentRef}
         />
         <a className="c-slider-button is-right" onClick={() => handleArrowClick(actions.RIGHT)}>
           <img src={RightArrow} />
@@ -196,10 +181,6 @@ const Slider = (customFields = {}) => {
   useEffect(() => {
     genId();
   }, []);
-
-  useEffect(() => {
-    handleMaxWidth();
-  }, [idSuffix]);
 
   useEffect(() => {
     handleButtonScrollEffect();
