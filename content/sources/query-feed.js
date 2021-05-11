@@ -63,7 +63,7 @@ const fetch = (query) => {
 
   if (!activeSite) return [];
 
-  const { requiresImageEveryX = null } = getImageRequirements(displayClass, displayClassesRequiringImg);
+  const requiresImageEveryX = getImageRequirements(displayClass, displayClassesRequiringImg);
 
   const builder = bodybuilder();
   if (daysBack) {

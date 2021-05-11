@@ -44,7 +44,7 @@ export default (apiData, requiresImageEveryX) => {
         }
       }
 
-      if (requiresImageEveryX && hasImageIndex % requiresImageEveryX === 0 && !hasImage) {
+      if (typeof requiresImageEveryX === 'number' && !hasImage && (requiresImageEveryX === 0 || hasImageIndex % requiresImageEveryX === 0)) {
         // final filter for display classes that require images
         return false;
       }

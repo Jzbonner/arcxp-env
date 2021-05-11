@@ -35,8 +35,7 @@ const fetch = (query) => {
 
   if (!activeSite) return [];
 
-  const { requiresImageEveryX = null } = getImageRequirements(displayClass, displayClassesRequiringImg);
-
+  const requiresImageEveryX = getImageRequirements(displayClass, displayClassesRequiringImg);
   if (id) {
     return GetCollectionData(activeSite, id, size)
       .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
