@@ -246,6 +246,10 @@
       display: flex;
     }
 
+    .c-homeList .homeList-text .c-tease-icon {
+      margin-left: 0;
+    }
+
     .column-2 {
       @include between-breakpoints(desktop-sm, desktop-lg) {
         width: 100%;
