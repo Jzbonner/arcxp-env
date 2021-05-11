@@ -164,7 +164,7 @@ const Slider = (customFields = {}) => {
           maxScrollLeft={maxScrollLeft}
           currentScrollLeft={scrollLeft}
           sliderId={idSuffix}
-          elScrollThumb={contentRef}
+          sliderContentElRef={contentRef}
         />
         <a className="c-slider-button is-right" onClick={() => handleArrowClick(actions.RIGHT)}>
           <img src={RightArrow} />
