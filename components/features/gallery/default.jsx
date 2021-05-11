@@ -689,7 +689,7 @@ const Gallery = (props) => {
         </div>
       ) : null}
       {!isStory && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
-      <div className={`${!isStory ? 'c-gallery-homeSection' : ''}`}>
+      <div className={`${!isStory ? 'c-gallery-homeSection b-homeSection-padding' : ''}`}>
         {!isMobile ? (
           <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
             <ImageModal src={currentImageSrc} isVisible={modalVisible} />

@@ -27,7 +27,7 @@ const Copyright = ({ isSidebar, cssClass = '', hideBackToTop = false }) => {
   const year = new Date().getFullYear();
 
   return (
-    <div className="copyright-wrapper">
+    <div className="copyright-wrapper b-sectionHomeMaxWidth">
       <div className="c-copyright">
         <div className={`copyright ${cssClass}`}>
           <div className="rights">
