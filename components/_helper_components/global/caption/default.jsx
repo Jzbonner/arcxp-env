@@ -49,7 +49,7 @@ const Caption = ({ src, isLeadVideo, videoCaption }) => {
     >
       <div className="photo-caption-btn" onClick={toggle}>
         <img className="caption-arrow" src={LeftArrow} />
-        <span>Caption</span>
+      <span>Caption</span>
       </div>
       <div className="photo-caption">
         <div className="photo-caption-text">{captionContent}</div>

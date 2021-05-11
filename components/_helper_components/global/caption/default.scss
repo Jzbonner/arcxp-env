@@ -16,14 +16,18 @@
 
   @include breakpoint(desktop-sm) {
     width: calc(100% - 6.25rem);
-    top: 3.125rem;
-    right: 3.125rem;
+    top: 2.125rem;
+    right: 2.125rem;
   }
 
   &.is-active {
 
     .photo-caption {
       display: block;
+    }
+
+    .photo-caption-btn .caption-arrow {
+      transform: rotate(180deg);
     }
   }
 
@@ -50,14 +54,13 @@
     @include breakpoint(desktop-sm) {
       width: 69px;
       height: 26px;
-      top: -1.875rem;
-      right: -1.875rem;
     }
 
     .caption-arrow {
       width: 9px;
       height: 11px;
       margin-right: 2px;
+      transition: transform .5s;
     }
 
     .fill-line {
