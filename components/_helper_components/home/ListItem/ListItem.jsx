@@ -119,7 +119,7 @@ const ListItem = ({
         </a>
       )}
       <div className="homeList-text">
-        {!hidePromo && getTeaseIcon(contentType)}
+        {!hidePromo && !isDontMissFeature && !isSynopsis && getTeaseIcon(contentType)}
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
         <div className={`headline ${isListPage}`}>
           <a href={relativeURL}>

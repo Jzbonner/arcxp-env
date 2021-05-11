@@ -167,6 +167,18 @@
 
   &.four-columns {
 
+    &.top-photo-display-class {
+
+      .c-tease-icon {
+        margin-top: 10px;
+        margin-left: 0;
+
+        @include breakpoint(desktop-sm) {
+          margin-top: 0;
+        }
+      }
+    }
+
     .c-homeList {
       @include breakpoint(desktop-sm) {
         width: 22.5%;
