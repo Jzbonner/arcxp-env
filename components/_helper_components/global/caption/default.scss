@@ -25,6 +25,10 @@
     .photo-caption {
       display: block;
     }
+
+    .photo-caption-btn .caption-arrow {
+      transform: rotate(180deg);
+    }
   }
 
   .photo-caption-btn {
@@ -50,14 +54,15 @@
     @include breakpoint(desktop-sm) {
       width: 69px;
       height: 26px;
-      top: -1.875rem;
-      right: -1.875rem;
+      top: -2.375rem;
+      right: -2.375rem;
     }
 
     .caption-arrow {
       width: 9px;
       height: 11px;
       margin-right: 2px;
+      transition: transform .5s;
     }
 
     .fill-line {
