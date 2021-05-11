@@ -33,7 +33,7 @@ const ScrollBar = ({
   };
 
   const handleMaxWidth = () => {
-    if (sliderContentElRef.current && sliderContentElRef.current.offsetWidth) {
+    if (sliderContentElRef && sliderContentElRef.current && sliderContentElRef.current.offsetWidth) {
       setMaxWidth(sliderContentElRef.current.offsetWidth);
     }
   };
@@ -42,7 +42,7 @@ const ScrollBar = ({
     if (!maxWidth) {
       handleMaxWidth();
     }
-  }, [sliderId, sliderContentElRef.current]);
+  }, [sliderId, sliderContentElRef && sliderContentElRef.current]);
 
   useEffect(() => {
     calculateThumbWidth();
