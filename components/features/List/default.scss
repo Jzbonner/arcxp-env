@@ -405,6 +405,10 @@
         .homeList-text {
           margin: 0 0 $min-margin;
           width: 100%;
+
+          .c-tease-icon {
+            margin-left: 0;
+          }
         }
       }
     }
