@@ -63,8 +63,7 @@ const WrapOutputType = (props) => {
   }
   /* eslint-disable-next-line max-len */
 
-  const cssData = <Resource path={'resources/dist/ajc/css/style.css'} encoding='utf8'>
-  {({ data }) => {
+  const parseCss = ({ data }) => {
     if (!data) return null;
     const css = data.replace(/url\(([^\s<>{}|\\^~)'"`]+)\)/g, (_, uri) => {
       // any url that starts with a `..`
@@ -73,7 +72,12 @@ const WrapOutputType = (props) => {
       return `url(${deployment(parsedUrl)})`;
     });
     return <style dangerouslySetInnerHTML={{ __html: css }}></style>;
-  }}
+  };
+  const mainCssData = <Resource path={'resources/dist/ajc/css/style.css'} encoding='utf8'>
+  {({ data }) => parseCss(data)}
+  </Resource>;
+  const pbCssData = <Resource path={'resources/dist/ajc-pb/css/style.css'} encoding='utf8'>
+  {({ data }) => parseCss(data)}
   </Resource>;
 
   return (
@@ -103,7 +107,8 @@ const WrapOutputType = (props) => {
         {!noAds && !isHyperlocalContent && !isSponsoredContent
           && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />
         }
-        {cssData}
+        {mainCssData}
+        {pbCssData}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
         <script type="text/javascript" dangerouslySetInnerHTML={{

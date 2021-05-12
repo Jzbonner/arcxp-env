@@ -8,8 +8,6 @@ import SectionHome from '../_helper_components/home/SectionHome/SectionHome';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
-import '../../src/styles/container/_homepage.scss';
-import '../../src/styles/base/_utility.scss';
 
 const HomePageLayout = (props) => {
   const [

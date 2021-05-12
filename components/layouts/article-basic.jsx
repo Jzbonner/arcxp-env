@@ -35,8 +35,6 @@ import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/d
 import InterscrollerPlaceholder from '../_helper_components/article/interscroller/default';
 import SponsorStoryMessage from '../_helper_components/article/sponsorStoryMessage/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
-import '../../src/styles/container/_article-basic.scss';
-import '../../src/styles/base/_utility.scss';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 import RelatedList from '../_helper_components/article/relatedList/default';
 import ConnextThankYouMessage from '../_helper_components/global/ConnextThankYouMessage/amp';

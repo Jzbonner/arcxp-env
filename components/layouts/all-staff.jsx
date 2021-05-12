@@ -13,7 +13,6 @@ import AREAS_OF_EXPERTISE from './_helper_functions/staffpage/AREAS_OF_EXPERTISE
 import getQueryParams from './_helper_functions/getQueryParams';
 
 import '../../src/styles/container/_all-staff.scss';
-import '../../src/styles/base/_utility.scss';
 
 export const AllStaffPage = () => {
   const appContext = useAppContext();
