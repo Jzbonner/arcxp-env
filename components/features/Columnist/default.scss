@@ -13,6 +13,7 @@
   @include breakpoint(desktop-sm) {
     width: 100%;
     margin-bottom: $min-DTsection-margin;
+    margin-left: -5px;
     padding-right: 0;
   }
 
