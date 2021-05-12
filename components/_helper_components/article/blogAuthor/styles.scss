@@ -18,70 +18,110 @@
     }
   }
 
-  .blogAuthor-content {
+  &.multiple-authors {
+    margin-bottom: 0;
 
-    .blog-author-content-heading {
-      justify-content: left;
-      align-items: center;
-      flex-direction: column;
-
-      @include breakpoint(tablet) {
-        flex-direction: row;
-      }
-    }
-
-    .b-flexRow {
-      margin-bottom: 10px;
-
-      .content-profileImage {
-        width: 97px;
-        height: 97px;
-        margin: 0 0 10px;
-
-        @include breakpoint(tablet) {
-          margin: 0 20px 0 0;
-        }
-
-        display: flex;
-        justify-content: center;
-
-        .c-image-component,
-        .image-component-image {
-          height: 100%;
-          width: 100%;
-        }
-
-        img,
-        amp-img {
-          height: 100%;
-          width: auto;
-          border-radius: 50%;
-          overflow: hidden;
-        }
-      }
-
-      .content-authorName {
-        @include text-styles(1.125rem, 1, "Gordita-Bold");
-
-        letter-spacing: -.22px;
-        font-weight: 600;
-      }
-    }
-
-    .b-flexRow:last-child {
+    .content-profileImage {
       margin-bottom: 0;
-    }
-
-    .content-authorDescription {
-      padding: 0;
-      color: #505050;
-
-      @include text-styles(.875rem, 1.375, "Gordita");
     }
   }
 
-  .btn-facebook,
-  .btn-twitter {
-    margin: 0 10px;
+  .blog-author-content:not(:last-child) {
+    border-bottom: 1px solid #cdcdcd;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
+
+  .blog-author-content-heading {
+    justify-content: left;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+
+    &.has-image .content-authorName {
+      width: calc(100% - 117px);
+    }
+
+    &:not(.has-image) .content-authorSocial a {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .content-profileImage {
+    width: 97px;
+    height: 97px;
+    margin: 0 20px 10px 0;
+    display: flex;
+    justify-content: center;
+
+    @include breakpoint(tablet) {
+      margin-bottom: 0;
+    }
+
+    .c-image-component,
+    .image-component-image {
+      height: 100%;
+      width: 100%;
+    }
+
+    img,
+    amp-img {
+      height: 100%;
+      width: auto;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }
+
+  .content-authorName {
+    @include text-styles(1.125rem, 1, "Gordita-Bold");
+
+    letter-spacing: -.22px;
+    font-weight: 600;
+    position: relative;
+    width: 100%;
+    padding-right: 50px;
+    box-sizing: border-box;
+  }
+
+  .content-authorSocial {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    a {
+      margin-left: 12px;
+      display: inline-block;
+      vertical-align: middle;
+      width: 17px;
+      height: 17px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      @include breakpoint(tablet) {
+        width: 33px;
+        height: 33px;
+        margin-left: 24px;
+      }
+    }
+  }
+
+  .b-flexRow {
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .content-authorDescription {
+    padding: 0;
+    color: #505050;
+
+    @include text-styles(.875rem, 1.375, "Gordita");
   }
 }
