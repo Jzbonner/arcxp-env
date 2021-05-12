@@ -102,7 +102,7 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
       case '7-Item TTD Feature':
         return <Headline {...apiData[startIndex]} isTease={true} />;
       case 'Redesign Feature - Left Photo No Photo':
-        return getLists(apiData, startIndex + 1, 5);
+        return getLists(apiData, startIndex, 5);
       default:
         return null;
     }
@@ -119,7 +119,7 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
       case '7-Item TTD Feature':
         return getLists(apiData, startIndex + 1, 3);
       case 'Redesign Feature - Left Photo No Photo':
-        return getLists(apiData, startIndex + 5, 9);
+        return getLists(apiData, startIndex + 4, 9);
       default:
         return null;
     }
