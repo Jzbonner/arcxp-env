@@ -2,72 +2,75 @@
 
 @include amp-exclude {
 
-  .c-mostRead {
-    margin-bottom: 30px;
+  .c-articleContent {
 
-    @include breakpoint(tablet) {
-      margin-bottom: 4px;
-    }
-  }
-
-  .mostReadList {
-
-    a {
-      margin: 0 0 22px;
-      width: 100%;
+    .c-mostRead {
+      margin-bottom: 30px;
 
       @include breakpoint(tablet) {
-        width: calc(100% / 5);
+        margin-bottom: 4px;
+      }
+    }
 
-        &:last-child {
-          margin-bottom: 22px;
+    .mostReadList {
+
+      a {
+        margin: 0 0 22px;
+        width: 100%;
+
+        @include breakpoint(tablet) {
+          width: calc(100% / 5);
+
+          &:last-child {
+            margin-bottom: 22px;
+          }
         }
       }
     }
-  }
 
-  .mostReadTitle {
-    font-size: 1.5625rem;
-    letter-spacing: -.31px;
-  }
-
-  .mostReadRanking {
-    font-style: normal;
-    margin: 0 6px 0 0;
-    min-width: 20px;
-    max-width: auto;
-    font-family: "Lora-Bold";
-
-    @include breakpoint(tablet) {
-      min-width: auto;
-      font-size: 1.875rem;
-      letter-spacing: -.38px;
-    }
-
-    @include breakpoint(desktop-sm) {
-      margin-right: 6px;
-    }
-  }
-
-  .mostReadHeadline {
-    font-size: 1.3125rem;
-    line-height: 1.75rem;
-    letter-spacing: -.4px;
-    font-family: "Lora-Medium";
-    min-width: auto;
-    padding-left: 9px;
-
-    @include breakpoint(tablet) {
-      font-size: 1rem;
-      line-height: 1.625rem;
-      letter-spacing: 0;
-      padding: 4px 0 0 8px;
-    }
-
-    @include breakpoint(desktop-sm) {
-      line-height: 1.25rem;
+    .mostReadTitle {
+      font-size: 1.5625rem;
       letter-spacing: -.31px;
-      padding: 7px 0 0 9px;
+    }
+
+    .mostReadRanking {
+      font-style: normal;
+      margin: 0 6px 0 0;
+      min-width: 20px;
+      max-width: auto;
+      font-family: "Lora-Bold";
+
+      @include breakpoint(tablet) {
+        min-width: auto;
+        font-size: 1.875rem;
+        letter-spacing: -.38px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        margin-right: 6px;
+      }
+    }
+
+    .mostReadHeadline {
+      font-size: 1.3125rem;
+      line-height: 1.75rem;
+      letter-spacing: -.4px;
+      font-family: "Lora-Medium";
+      min-width: auto;
+      padding-left: 9px;
+
+      @include breakpoint(tablet) {
+        font-size: 1rem;
+        line-height: 1.625rem;
+        letter-spacing: 0;
+        padding: 4px 0 0 8px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        line-height: 1.25rem;
+        letter-spacing: -.31px;
+        padding: 7px 0 0 9px;
+      }
     }
   }
 }
