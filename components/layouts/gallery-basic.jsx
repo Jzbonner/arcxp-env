@@ -8,7 +8,6 @@ import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import checkTags from './_helper_functions/checkTags';
 import getGalleryTopics from './_helper_functions/getGalleryTopics';
-import '../../src/styles/container/_article-basic.scss';
 import getQueryParams from './_helper_functions/getQueryParams';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 

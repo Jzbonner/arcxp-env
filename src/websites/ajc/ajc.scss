@@ -3,7 +3,6 @@ $is-amp: false;
 /* Import site specific variables */
 
 /* Imports and extends base stylesheet, only include overrides or site-specific scss here */
-@import "./../../styles/base/index.scss";
 @import "./../../styles/container/index.scss";
 @import "./../../styles/state/index.scss";
 
