@@ -57,6 +57,10 @@
   text-align: center;
   margin-left: .938rem;
 
+  @include between-breakpoints(desktop-sm, desktop-lg) {
+    max-width: 814px;
+  }
+
   @include breakpoint(desktop-sm) {
     margin-left: 1.875rem;
   }
@@ -76,17 +80,32 @@
 
 .c-articleContent {
 
+  .b-margin-bottom-d7-m7 {
+    @include between-breakpoints(desktop-sm, desktop-lg) {
+      max-width: 814px;
+      margin: 0 auto 7px;
+
+      .article-timestamp {
+        margin-left: 0;
+      }
+    }
+  }
+
   .article-byline {
+    @include between-breakpoints(desktop-sm, desktop-lg) {
+      max-width: 814px;
+      margin: 0 auto 7px;
+    }
 
     .byline {
       text-align: left;
     }
 
-    @include breakpoint(tablet) {
+    @include between-breakpoints(tablet, desktop-sm) {
       margin-left: .938rem;
     }
 
-    @include breakpoint(desktop-sm) {
+    @include breakpoint(desktop-lg) {
       margin-left: 1.875rem;
     }
   }

@@ -80,18 +80,21 @@
 
 .article-headline-component {
 
-  .photo-credit-text {
-    position: absolute;
-    right: 0;
-    margin-right: .938rem;
+  .c-image-component {
+    position: relative;
 
-    @include breakpoint(tablet) {
-      margin-right: 0;
-    }
-
-    @include breakpoint(desktop-sm) {
-      display: block;
+    .photo-credit-text {
+      position: absolute;
+      right: 0;
       margin-right: .938rem;
+  
+      @include breakpoint(tablet) {
+        margin-right: 0;
+      }
+  
+      @include breakpoint(desktop-sm) {
+        display: block;
+      }
     }
   }
 }
