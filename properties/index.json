@@ -24,6 +24,7 @@
   "burgerMenuBackground": "/resources/images/ajc-hamburger-menu.png",
   "logoShort": "/resources/logos/AJC/logo-full.svg",
   "logoHamburger": "/resources/logos/AJC/logo-mobile-hamburger.svg",
+  "partnerBadgeLogo": "/resources/images/contributors/contributing-partner.png",
   "logoPlaceholder": "/resources/logos/AJC/placeholder.jpg",
   "logoOgImage": "/resources/logos/AJC/logo-ogimage.png",
   "mail": "mailto:?Subject=",
