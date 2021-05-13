@@ -276,7 +276,7 @@ const StoryPageLayout = () => {
               sponsorContentLabel={sponsorContentLabel}
             />
           </div>
-          <ContributorBadge tags={tags} />
+          <ContributorBadge tags={tags} ampPage={ampPage}/>
           <PartnerBadge sections={sections} ampPage={ampPage}/>
           {ampPage && <SocialShare headlines={headlines} articleURL={articleURL} />}
           <div className="b-flexRow b-flexCenter b-margin-bottom-d7-m7 b-pageContainer">
