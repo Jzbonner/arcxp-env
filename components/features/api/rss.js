@@ -48,8 +48,6 @@ class Api {
           content_elements: contentElements = [], first_publish_date: firstPubDate, display_date: displayDate, canonical_url: canonicalUrl, _id: guid, type = '', headlines, description, credits = {}, promo_items: promoItems, streams,
         } = item || {};
 
-        // console.log(contentElements);
-
         const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
         let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
         const org = credits && credits.by && credits.by[0] && credits.by[0].org ? `<![CDATA[${credits.by[0].org}]]>` : '';
