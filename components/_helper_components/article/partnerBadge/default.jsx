@@ -11,8 +11,8 @@ const PartnerBadge = ({ sections, ampPage }) => {
   const { partnerBadgeLogo, websiteURL } = getProperties(arcSite);
 
   return sections.map((section) => {
-    const { path } = section;
-    const isPartner = path.includes('/partner');
+    const { path } = section || {};
+    const isPartner = path?.includes('/partner');
     if (isPartner) {
       return (
         <a href={`${websiteURL}/partner`} key={path} className="c-story-partnerBadge b-flexRow b-flexCenter b-margin-bottom-d40-m20">
