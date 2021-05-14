@@ -41,6 +41,7 @@ import ConnextThankYouMessage from '../_helper_components/global/ConnextThankYou
 import NonSubPremiumMessage from '../_helper_components/amp/nonSubPremiumMessage/default';
 import PaywallLimitMessage from '../_helper_components/amp/paywallLimitMessage/default';
 import SponsorRelatedBoxAMP from '../_helper_components/article/sponsorRelatedBox/amp';
+import PartnerBadge from '../_helper_components/article/partnerBadge/default';
 
 const start = 3;
 
@@ -273,7 +274,8 @@ const StoryPageLayout = () => {
               sponsorContentLabel={sponsorContentLabel}
             />
           </div>
-          <ContributorBadge tags={tags} ampPage={ampPage} />
+          <ContributorBadge tags={tags} ampPage={ampPage}/>
+          <PartnerBadge sections={sections} ampPage={ampPage}/>
           {ampPage && <SocialShare headlines={headlines} articleURL={articleURL} />}
           <div className="b-flexRow b-flexCenter b-margin-bottom-d7-m7 b-pageContainer">
             <SubHeadline subheadlines={subheadlines} />
