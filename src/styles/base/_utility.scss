@@ -31,7 +31,7 @@
     display: none;
   }
   
-  @include breakpoint(tablet) {
+  @include breakpoint(desktop-sm) {
     width: calc(100% - #{4 * $min-margin});
   }
 }
