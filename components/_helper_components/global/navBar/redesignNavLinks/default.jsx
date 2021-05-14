@@ -38,9 +38,13 @@ const RedesignNavLinks = ({
     const destination = id.includes('/configsection') ? siteURL : id;
     const isHighlighted = primarySectionID === destination;
 
+    function checkTrailingSlash(link) {
+      return link.endsWith('/') ? link : `${link}/`;
+    }
+
     return (
     <li key={i}>
-      <a href={id.indexOf('/') === 0 ? `${siteDomainURL}${id}` : id} target='_self' className={`nav-itemText ${isHighlighted ? 'active' : ''}${itemCount > 7 ? 'sm-text' : ''}`}>{title}</a>
+      <a href={destination.indexOf('/') === 0 ? `${siteDomainURL}${checkTrailingSlash(destination)}` : checkTrailingSlash(destination)} target='_self' className={`nav-itemText ${isHighlighted ? 'active' : ''}${itemCount > 7 ? 'sm-text' : ''}`}>{title}</a>
     </li>
     );
   });
