@@ -75,6 +75,7 @@
       "adsBreakpoints": [1024, 768, 0]
     }
   },
+  "weatherPageUrl": "/weather/",
   "weatherLocationId": 348181,
   "connext": {
     "sandbox": {

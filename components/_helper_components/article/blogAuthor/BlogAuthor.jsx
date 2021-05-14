@@ -20,7 +20,7 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
               )}
               <div className="content-authorName">
                 {val.name}
-                <div className="content-authorSocial">
+                {val.social_links && <div className="content-authorSocial">
                   {val.social_links.map((link) => {
                     const { site: network, url } = link;
                     const isFb = network === 'facebook';
@@ -30,7 +30,7 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
                     }
                     return false;
                   })}
-                </div>
+                </div>}
               </div>
             </div>
             {authorData.length < 2 && val.description && (
