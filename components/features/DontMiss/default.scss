@@ -4,13 +4,15 @@
   margin-bottom: $min-Msection-margin;
 
   @include breakpoint(tablet) {
-    padding: 0 20px;
+    padding-right: 0;
+    padding-left: 20px;
     border-left: solid 1px #cdcdcd;
     margin-left: -20px;
   }
 
   @include breakpoint(desktop-sm) {
-    width: 100%;
+    width: 95%;
+    margin-left: -10px;
     margin-bottom: $min-DTsection-margin;
   }
   
