@@ -5,7 +5,6 @@ import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../../utils/environment';
 import GetConnextLocalStorageData from '../../connext/connextLocalStorage';
-import '../../../../../src/styles/container/_c-headerNav.scss';
 import NotAuthMenu from './notAuthMenu';
 import IsAuthMenu from './isAuthMenu';
 
