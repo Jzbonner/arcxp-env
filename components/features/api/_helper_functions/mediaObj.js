@@ -51,7 +51,7 @@ export default (type = 'image/JPEG', medium = 'image', url, siteID, title, capti
     _attrs: {
       type: `${type}`,
       medium: `${medium}`,
-      url: `${needsResizer ? img.src : url}`,
+      url: `${needsResizer && img !== null ? img.src : url}`,
     },
     _content: [
       {

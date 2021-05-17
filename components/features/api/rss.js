@@ -3,6 +3,8 @@ import { formatApiTime } from '../../layouts/_helper_functions/api/formatTime';
 import { getMediaContent } from './_helper_functions/getMediaContent';
 import { formatNavigaContent } from './_helper_functions/formatNavigaContent';
 import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
+import handleSiteName from '../../layouts/_helper_functions/handleSiteName';
+import fetchEnv from '../../_helper_components/global/utils/environment';
 import { getFirst120CharsFromStory } from './_helper_functions/getFirst120CharFromStory';
 
 @Consumer
@@ -13,9 +15,8 @@ class Api {
 
   render() {
     const {
-      globalContent, globalContentConfig, siteProperties, arcSite: siteID, requestUri,
+      globalContent, globalContentConfig, arcSite: siteID, requestUri,
     } = this.props || {};
-    const { websiteURL } = siteProperties || {};
     const { query } = globalContentConfig || {};
     const { id: collectionId, from, size } = query || {};
     const feedStart = from - 1;
@@ -24,6 +25,7 @@ class Api {
     const newsletterFeed = outPutTypePresent && queryParams.outputType === 'rss-newsletter';
     const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'rss-app';
     const standardFeed = outPutTypePresent && queryParams.outputType === 'rss';
+    const siteDomain = `${fetchEnv() === 'prod' ? 'www' : 'sandbox'}.${handleSiteName(siteID)}.com`;
 
     let maxItems = feedStart + size;
     if (maxItems > globalContent.length) {
@@ -76,7 +78,7 @@ class Api {
                 guid: `urn:uuid:${guid}`,
               },
               {
-                link: `${websiteURL}${canonicalUrl}`,
+                link: `https://${siteDomain}${canonicalUrl}`,
               },
               {
                 description: formattedDescription,
@@ -117,7 +119,7 @@ class Api {
                 guid: `urn:uuid:${guid}`,
               },
               {
-                link: `${websiteURL}${canonicalUrl}`,
+                link: `https://${siteDomain}${canonicalUrl}`,
               },
               {
                 description: formattedDescription,
@@ -177,7 +179,7 @@ class Api {
                 guid: `urn:uuid:${guid}`,
               },
               {
-                link: `${websiteURL}${canonicalUrl}`,
+                link: `https://${siteDomain}${canonicalUrl}`,
               },
               {
                 description: formattedDescription || title,

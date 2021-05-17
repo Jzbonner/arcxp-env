@@ -20,22 +20,27 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     streams: basicStreams = [],
     promo_image: basicPromoImage = {},
     promo_items: basicPromoItems = {},
-    content_elements: basicPromoContentElements = [],
+    content_elements: basicContentElements = [],
   } = basic || {};
 
+  const { basic: basicGalleryPromo } = basicPromoItems || {};
+  const {
+    credits: basicGalleryCredits = '', url: basicGalleryUrl = '', caption: basicGalleryCaption = '', subtitle: basicGallerySubtitle = '',
+  } = basicGalleryPromo || {};
+
+  const galleryMediaCredit = basicGalleryCredits && basicGalleryCredits.affiliation && basicGalleryCredits.affiliation[0] && basicGalleryCredits.affiliation[0].name ? basicGalleryCredits.affiliation[0].name : basicGalleryCredits && basicGalleryCredits.by && basicGalleryCredits.by[0] && basicGalleryCredits.by[0].name
+    ? basicGalleryCredits.by[0].name : basicGalleryCredits && basicGalleryCredits.by && basicGalleryCredits.by[0] && basicGalleryCredits.by[0].referent && basicGalleryCredits.by[0].referent && basicGalleryCredits.by[0].referent.id ? basicGalleryCredits.by[0].referent.id : '';
   const { meta_title: metaTitle, basic: baseHeadline } = basicHeadlines || {};
   let mediaTitle = basicSubtitle;
   if (!mediaTitle) {
     mediaTitle = metaTitle || baseHeadline || '';
   }
 
-  const basicAuthor = basicCredits && basicCredits.affiliation && basicCredits.affiliation.by ? basicCredits.affiliation.by.id
-    : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].name ? basicCredits.by[0].name : '';
+  const basicAuthor = basicCredits && basicCredits.affiliation && basicCredits.affiliation[0] && basicCredits.affiliation[0].name ? basicCredits.affiliation[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].name ? basicCredits.by[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].referent && basicCredits.by[0].referent.id ? basicCredits.by[0].referent.id : '';
 
-  const checkCaption = basicCaption || '';
-
+  // getting whack stuff from lead gallery image (Jim Galloway as author) Basic author is bad and only returns author of gallery).
   if (promoItemsType === 'image' && !standaloneGallery) {
-    leadObject = mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, checkCaption, basicAuthor);
+    leadObject = mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit);
   }
 
   if (promoItemsType === 'video') {
@@ -59,23 +64,15 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     leadObject = mediaObj(leadObjectType, 'video', leadObjectUrl, siteID, mediaTitle, checkVideoCaption, videoAuthor, true, basicThumbNailImage, false);
   }
 
-
   if (promoItemsType === 'gallery' || standaloneGallery || !standaloneGallery) {
-    const { content_elements: galleryContentElements = [] } = basic || {};
-    const { basic: basicGalleryPromo } = basicPromoItems || {};
-    const {
-      credits: basicGalleryCredits = '', url: basicGalleryUrl = '', caption: basicGalleryCaption = '', subtitle: basicGallerySubtitle = '',
-    } = basicGalleryPromo || {};
-    const galleryMediaCredit = basicCredits.affiliation && basicCredits.affiliation.by && basicCredits.affiliation.by.name ? basicCredits.affiliation.by.name : basicGalleryCredits && basicGalleryCredits.by && basicGalleryCredits.by[0] && basicGalleryCredits.by[0].name
-      ? basicGalleryCredits.by[0].name : basicGalleryCredits && basicGalleryCredits.by && basicGalleryCredits.by[0] && basicGalleryCredits.by[0].referent && basicGalleryCredits.by[0].referent && basicGalleryCredits.by[0].referent.id ? basicGalleryCredits.by[0].referent.id : '';
     if (newsletterFeed || standardFeed) {
       if (standaloneGallery) {
-        leadObject = mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, checkCaption, basicAuthor, true, basicUrl, true);
+        leadObject = mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor, true, basicUrl, true);
       } else {
-        leadObject = basicGalleryPromo ? mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit, true, basicGalleryUrl, true) : mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, checkCaption, basicAuthor, true, basicUrl, true);
+        leadObject = basicGalleryPromo ? mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit, true, basicGalleryUrl, true) : mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor);
       }
     } else if (!standaloneGallery) {
-      formatterGalleryArray = basicPromoContentElements.map((item) => {
+      formatterGalleryArray = basicContentElements.map((item) => {
         const {
           caption: itemCaption = '', url: itemUrl = '', credits: creditsArray = '', subtitle: itemTitle = '',
         } = item || {};
@@ -86,7 +83,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         return mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, false, false, true);
       });
     } else {
-      formatterGalleryArray = galleryContentElements.map((item) => {
+      formatterGalleryArray = basicContentElements.map((item) => {
         const {
           caption: itemCaption, url: itemUrl, credits: creditsArray = '', subtitle: itemTitle = '',
         } = item || {};
@@ -110,7 +107,6 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         credits: mediaCredits = {},
         streams: mediaStreams = [],
       } = media || {};
-
       // per Surendra: For stories, we are not adding inline images to media:content.
       if (type === 'story') {
         return {};
