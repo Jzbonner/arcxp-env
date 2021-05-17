@@ -124,7 +124,8 @@
   @include breakpoint(desktop-lg) {
     
     &.b-sectionHomeMaxWidth {
-      max-width: 1600px;
+      max-width: 1540px;
+      margin: 0 auto;
     }
   }
 }

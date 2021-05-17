@@ -44,8 +44,6 @@
   }
 
   .home-headline {
-    margin-left: -$min-margin;
-    margin-right: -$min-margin;
     overflow: hidden;
 
     img {
@@ -53,8 +51,6 @@
     }
 
     @include breakpoint(tablet) {
-      margin-left: 0;
-      margin-right: 0;
 
       img {
         border-radius: 6px;
@@ -629,11 +625,11 @@
   &.left-photo-no-photo-display-class {
     
     .column-1 {
-      margin-right: 15px;
       padding-bottom: 30px;
 
       @include breakpoint(tablet) {
         padding-bottom: 0;
+        margin-right: 15px;
       }
     }
 
@@ -646,7 +642,7 @@
 
     .column-1,
     .column-2 {
-      width: 93vw;
+      width: inherit;
       
       @include breakpoint(tablet) {
         max-width: 350px;

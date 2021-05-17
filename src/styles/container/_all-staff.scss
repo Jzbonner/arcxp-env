@@ -41,8 +41,8 @@
   @include breakpoint(desktop-sm) {
     min-height: 97px;
     margin: 0 auto 26px;
-    width: 94%;
-    max-width: 1600px;
+    width: 100%;
+    max-width: 1540px;
     padding-top: 40px;
 
     h2 {
