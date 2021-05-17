@@ -35,8 +35,6 @@ export default [
   'promo_items.basic.credits.affiliation.by.id',
   'promo_items.basic.credits.affiliation.by.name',
   'promo_items.basic.credits.by',
-  'promo_items.basic.credits.by[0].referent',
-  'promo_items.basic.credits',
   'promo_items.basic.height',
   'promo_items.basic.headlines.basic',
   'promo_items.basic.promo_image.url',
