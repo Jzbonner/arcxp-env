@@ -11,3 +11,17 @@ $is-amp: false;
 //@import "components/**/*.scss";
 
 /* Import site specific overrides here */
+@media only screen and (min-width: 768px) {
+
+  .c-headerNav .c-login .btn-profile {
+    background: linear-gradient(to top, #04befe, #4481eb);
+
+    &:hover {
+      background: linear-gradient(to top, #04befe, #4481eb);
+    }
+  }
+}
+
+.is-loggedIn .c-headerNav .c-login img {
+  filter: invert(48%) sepia(10%) saturate(3357%) hue-rotate(108deg) brightness(90%) contrast(86%);
+}
