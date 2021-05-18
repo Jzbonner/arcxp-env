@@ -25,7 +25,7 @@ const fetch = (query) => {
   if (id) {
     return GetCollectionData(activeSite, id, size)
       .then(data => StoryData(activeSite, data))
-      .then(data => FilterGallery(data, 'collection'))
+      .then(data => FilterGallery(data))
       .catch((error) => {
         console.error('Error: ', error);
       });
