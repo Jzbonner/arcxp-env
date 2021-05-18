@@ -6,42 +6,26 @@ export default (apiData, requiresImageEveryX) => {
       let hasImage = false;
       if (!el.canonical_url) return false;
 
-      /* image (re)assignments */
-      if (el.type === 'story') {
-        if (
-          el.promo_items
-          && el.promo_items.basic
-          && el.promo_items.basic.promo_image
-          && el.promo_items.basic.promo_image.url
-        ) {
+      /* featured image (re)assignments */
+      if (el.promo_items) {
+        /* check for promo image (collection override(s)) before anything else and regardless of content type */
+        if (el.promo_items.basic && el.promo_items.basic.promo_image && el.promo_items.basic.promo_image.url) {
           newData[e].teaseImageObject = el.promo_items.basic.promo_image;
           hasImage = true;
-        }
-        if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
+          /* no promo image, so now do the usual cascade to find the appropriate promo item */
+        } else if (el.promo_items.basic && el.promo_items.basic.url) {
+          /* top-level promo item */
           newData[e].teaseImageObject = el.promo_items.basic;
           hasImage = true;
-        }
-
-        if (
-          (el.promo_items && el.promo_items.basic && el.promo_items.basic.type === 'video')
-          || (el.promo_items && el.promo_items.basic && el.promo_items.basic.type === 'gallery')
-        ) {
-          if (el.promo_items.basic.promo_items && el.promo_items.basic.promo_items.basic && el.promo_items.basic.promo_items.basic.url) {
-            newData[e].teaseImageObject = el.promo_items.basic.promo_items.basic;
-            hasImage = true;
-          }
-        }
-
-        if (el.firstInlineImage) {
-          newData[e].teaseImageObject = el.firstInlineImage;
+        } else if (el.promo_items.basic.promo_items && el.promo_items.basic.promo_items.basic && el.promo_items.basic.promo_items.basic.url) {
+          /* second-level promo item (i.e. video or gallery as primary) */
+          newData[e].teaseImageObject = el.promo_items.basic.promo_items.basic;
           hasImage = true;
         }
-      }
-      if (el.type === 'video' || el.type === 'gallery') {
-        if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
-          newData[e].teaseImageObject = el.promo_items.basic;
-          hasImage = true;
-        }
+      } else if (el.firstInlineImage) {
+        /* final option:  first inline image */
+        newData[e].teaseImageObject = el.firstInlineImage;
+        hasImage = true;
       }
 
       if (typeof requiresImageEveryX === 'number' && !hasImage && (requiresImageEveryX === 0 || hasImageIndex % requiresImageEveryX === 0)) {

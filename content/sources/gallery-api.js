@@ -18,9 +18,10 @@ const fetch = (query = {}) => {
   } = query;
 
   if (!path || !arcSite) return null;
+  const encodedFilter = encodeURIComponent(filter.replace(/\s+/g, ''));
 
   return axios
-    .get(`${CONTENT_BASE}/content/v4/?published=true&website=${arcSite}&website_url=${path}&_sourceInclude=${filter}`, {
+    .get(`${CONTENT_BASE}/content/v4/?published=true&website=${arcSite}&website_url=${path}&_sourceInclude=${encodedFilter}`, {
       headers: {
         Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
       },
