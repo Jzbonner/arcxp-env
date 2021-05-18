@@ -38,8 +38,8 @@ const SiteMeta = () => {
   const isNativoLandingPage = url === '/native/';
   const { external_distribution: extDistribution, search: visibleInSearch } = syndication || {};
   const hideArticleFromSearch = !!(syndication && !extDistribution && !visibleInSearch);
-
-  const updatedURL = `https://www.${handleSiteName(site)}.com${url === '/homepage' || url === '/homepage/' ? '' : url}`;
+  // only add the sitedomain if the url is relative
+  const updatedURL = `${url.indexOf('http:') > -1 || url.indexOf('https:') > -1 ? '' : `https://www.${handleSiteName(site)}.com`}${url === '/homepage' || url === '/homepage/' ? '' : url}`;
 
   let pageTitle = seoTitle;
   if (!seoTitle) pageTitle = title;
