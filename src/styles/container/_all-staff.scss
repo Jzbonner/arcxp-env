@@ -57,8 +57,9 @@
 }
 
 .c-staff-page-main {
-  width: calc(100% - 28px);
+  width: calc(100% - 40px);
   display: flex;
+  justify-content: center;
   margin: 0 24px;
   position: relative;
   border-radius: 4px;
@@ -80,7 +81,7 @@
   }
 
   .c-staffers {
-    width: calc(100% - 40px);
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-content: baseline;
@@ -120,8 +121,8 @@
     }
   }
 
-  @include breakpoint(tablet) {
-    width: 90%;
+  @include between-breakpoints(tablet, desktop-sm) {
+    width: calc(100% - 80px);
     margin: 0 auto;
 
     .c-staffers {
@@ -129,10 +130,17 @@
     }
   }
 
-  @include breakpoint(desktop-sm) {
-    width: 94%;
-    max-width: 1600px;
+  @include between-breakpoints(desktop-sm, desktop-xxl) {
+    width: calc(100% - 60px);
+  }
+
+  @include breakpoint(desktop-xxl) {
+    width: 100%;
+    max-width: 1540px;
     margin: 0 auto;
+  }
+
+  @include breakpoint(desktop-sm) {
 
     .c-staffers {
       padding-left: 42px;
