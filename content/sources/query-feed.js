@@ -129,7 +129,7 @@ const fetch = (query) => {
     .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
     .then(data => FilterElements(data, requiresImageEveryX))
     .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes, squareImageSize, useSquareImageAfter))
-    .then(data => FilterGallery(data, 'query'))
+    .then(data => FilterGallery(data))
     .catch((error) => {
       console.error(error);
     });
