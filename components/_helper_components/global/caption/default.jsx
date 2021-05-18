@@ -4,7 +4,11 @@ import createID from '../../../layouts/_helper_functions/createID';
 import LeftArrow from '../../../../resources/icons/slider/left-arrow.svg';
 import './default.scss';
 
-const Caption = ({ src, isLeadVideo, videoCaption }) => {
+const Caption = (
+  {
+    src, isLeadVideo, videoCaption, imageType,
+  },
+) => {
   const { caption, credits } = src || null;
   const [toggleButton, setToggle] = useState(false);
   const captionID = `captionID-${createID()}`;
@@ -28,7 +32,11 @@ const Caption = ({ src, isLeadVideo, videoCaption }) => {
   let giveCredit;
   if (!isLeadVideo) {
     if (mainCredit) {
-      giveCredit = `Credit: ${mainCredit}`;
+      if (imageType === 'isLeadImage') {
+        giveCredit = '';
+      } else {
+        giveCredit = `Credit: ${mainCredit}`;
+      }
     } else if (secondaryCredit) {
       giveCredit = `Credit: ${secondaryCredit}`;
     }
@@ -63,6 +71,7 @@ Caption.propTypes = {
   src: PropTypes.object,
   isLeadVideo: PropTypes.bool,
   videoCaption: PropTypes.string,
+  imageType: PropTypes.string,
 };
 
 export default Caption;
