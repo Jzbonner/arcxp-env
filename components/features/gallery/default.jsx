@@ -682,6 +682,47 @@ const Gallery = (props) => {
   }
 
   const galleryOutput = () => (
+    <div className={`${!isStory ? 'c-gallery-homeSection' : ''}`}>
+      {!isMobile ? (
+        <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
+          <ImageModal src={currentImageSrc} isVisible={modalVisible} />
+        </div>
+      ) : null}
+      <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`} >
+        {!isMobile && galHeadline && isStory ? (
+          <div className="gallery-headline">
+            <a href={canonicalUrl || null}>{galHeadline}</a>
+          </div>
+        ) : null}
+        {isStickyVisible ? <MobileGallery objectRef={galleryMobileEl} data={mobileElemData} states={mobileState} funcs={mobileFuncs} /> : null}
+        {!isMobile ? <DesktopGallery data={elementData} translateX={translateX} handlers={handlers}/> : null}
+        <div onClick={handleStickyOpen} className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
+          <div className="gallery-overlay hidden-large">{isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null}</div>
+          <div className="gallery-count view-gallery">
+            <div className="gallery-count-prev hidden-small hidden-medium" onClick={() => changeIndex(actions.PREV, null, false)}>
+              <img src={leftArrow} />
+            </div>
+            <div className="mobile-change">
+              <a>
+                <img src={middleBox} className="icon-gallery" />
+              </a>
+              <div className="icon-text hidden-large">View Gallery</div>
+            </div>
+            <div className="gallery-count-next hidden-small hidden-medium" onClick={() => changeIndex(actions.NEXT, null, false)}>
+              <img src={rightArrow} />
+            </div>
+            <div className="count--box hidden-small hidden-medium">
+              <span className="gallery-index">{currentIndex + 1} / </span>
+              <span>{maxIndex && maxIndex + 1}</span>
+            </div>
+          </div>
+        </div>
+        {captionData}
+      </div>
+    </div>
+  );
+
+  const galleryHeadlineAdOutput = () => (
     <>
       {(isMobile || !isStory) && galHeadline ? (
         <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}>
@@ -689,55 +730,25 @@ const Gallery = (props) => {
         </div>
       ) : null}
       {!isStory && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
-      <div className={`${!isStory ? 'c-gallery-homeSection' : ''}`}>
-        {!isMobile ? (
-          <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
-            <ImageModal src={currentImageSrc} isVisible={modalVisible} />
-          </div>
-        ) : null}
-        <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`} >
-          {!isMobile && galHeadline && isStory ? (
-            <div className="gallery-headline">
-              <a href={canonicalUrl || null}>{galHeadline}</a>
-            </div>
-          ) : null}
-          {isStickyVisible ? <MobileGallery objectRef={galleryMobileEl} data={mobileElemData} states={mobileState} funcs={mobileFuncs} /> : null}
-          {!isMobile ? <DesktopGallery data={elementData} translateX={translateX} handlers={handlers}/> : null}
-          <div onClick={handleStickyOpen} className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
-            <div className="gallery-overlay hidden-large">{isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null}</div>
-            <div className="gallery-count view-gallery">
-              <div className="gallery-count-prev hidden-small hidden-medium" onClick={() => changeIndex(actions.PREV, null, false)}>
-                <img src={leftArrow} />
-              </div>
-              <div className="mobile-change">
-                <a>
-                  <img src={middleBox} className="icon-gallery" />
-                </a>
-                <div className="icon-text hidden-large">View Gallery</div>
-              </div>
-              <div className="gallery-count-next hidden-small hidden-medium" onClick={() => changeIndex(actions.NEXT, null, false)}>
-                <img src={rightArrow} />
-              </div>
-              <div className="count--box hidden-small hidden-medium">
-                <span className="gallery-index">{currentIndex + 1} / </span>
-                <span>{maxIndex && maxIndex + 1}</span>
-              </div>
-            </div>
-          </div>
-          {captionData}
-        </div>
-      </div>
     </>
   );
 
   if (isAdmin) {
-    return galleryOutput();
+    return (
+      <>
+        {galleryHeadlineAdOutput()}
+        {galleryOutput()}
+      </>
+    );
   }
 
   return (
-    <LazyLoad placeholder={<div className="c-placeholder-gallery" data-uri={canonicalUrl || null} />} height="100%" width="100%" offset={300} overflow={!isMobile} once={true}>
-      {galleryOutput()}
-    </LazyLoad>
+    <>
+      {galleryHeadlineAdOutput()}
+      <LazyLoad placeholder={<div className="c-placeholder-gallery" data-uri={canonicalUrl || null} />} height="100%" width="100%" offset={300} overflow={!isMobile} once={true}>
+        {galleryOutput()}
+      </LazyLoad>
+    </>
   );
 };
 
