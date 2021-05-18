@@ -29,9 +29,12 @@
 .tease-listHeading {
   text-align: center;
   border-bottom: 1px solid #cdcdcd;
-  padding-bottom: 10px;
   box-sizing: border-box;
   text-transform: capitalize;
+
+  @include between-breakpoints(mobile, desktop-sm) {
+    padding: 10px 0;
+  }
 
   @include text-styles(1.875rem, 1, "Average");
 

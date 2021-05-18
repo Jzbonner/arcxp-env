@@ -231,9 +231,9 @@
 
 .b-contentMaxWidth {
   margin: 0 auto;
-
-  @include breakpoint(desktop-lg) {
-    max-width: 880px;
+  
+  @include breakpoint(desktop-sm) {
+    max-width: 820px;
   }
 }
 
