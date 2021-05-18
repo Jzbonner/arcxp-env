@@ -21,7 +21,7 @@ export default (type = 'image/JPEG', medium = 'image', url, siteID, title, capti
       _attrs: {
         type: `${type}`,
         medium: `${medium}`,
-        url: `${needsResizer ? img.src : url}`,
+        url: `${needsResizer && img !== null ? img.src : url}`,
       },
       _content: [
         {
@@ -33,7 +33,7 @@ export default (type = 'image/JPEG', medium = 'image', url, siteID, title, capti
         {
           _name: 'media:thumbnail',
           _attrs: {
-            url: `${thumb.src}`,
+            url: `${thumb !== null ? thumb.src : url}`,
           },
         },
         {
@@ -51,7 +51,7 @@ export default (type = 'image/JPEG', medium = 'image', url, siteID, title, capti
     _attrs: {
       type: `${type}`,
       medium: `${medium}`,
-      url: `${needsResizer ? img.src : url}`,
+      url: `${needsResizer && img !== null ? img.src : url}`,
     },
     _content: [
       {
