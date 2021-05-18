@@ -23,19 +23,6 @@
   display: none;
 }
 
-.b-pageContainer {
-  width: calc(100% - #{2 * $min-margin});
-  margin: 0 auto;
-
-  &:empty {
-    display: none;
-  }
-  
-  @include breakpoint(desktop-sm) {
-    width: calc(100% - #{4 * $min-margin});
-  }
-}
-
 .b-margin-bottom-1 {
   margin-bottom: 1em;
 }
