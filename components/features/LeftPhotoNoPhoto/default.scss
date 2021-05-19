@@ -19,7 +19,7 @@
   &:last-child {
     border-bottom: 1px solid #cdcdcd;
 
-    @include breakpoint(desktop-sm) {
+    @include breakpoint(tablet) {
       border-bottom: none;
     }
   }
