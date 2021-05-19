@@ -96,7 +96,7 @@
 
     .photo-caption-text {
       color: #fff;
-      padding: 20px;
+      padding: 5px;
       letter-spacing: normal;
       line-height: 1.5;
 
@@ -104,6 +104,8 @@
 
       @include breakpoint(tablet) {
         @include text-styles(1.25rem, 1.5, "Gordita");
+
+        padding: 20px;
       }
     }
 
@@ -148,8 +150,8 @@
     @include breakpoint(desktop-sm) {
       // 100% reduces caption to match the width of the image component
       // 3.5rem accounts for the  right: 3.5em positioning of the caption
-      // 6vw ensures the distance between the caption and headline container is always equal to the overlap of the headline over the image, which is -3vw.
-      width: calc(100% - 3.125rem - 6vw);
+      // 1.1vw ensures the distance between the caption and headline container is always equal to the overlap of the headline over the image, which is -3vw.
+      width: calc(100% - 3.125rem - 1.1vw);
     }
   }
 }

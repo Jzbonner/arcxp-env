@@ -28,11 +28,12 @@ export default (arcSite, newBody, from = 0, size = 10, useFetch = false) => {
 
   while (i <= numberOfFetches && i < 10) {
     const fetchSize = leftToFetch <= maxFetchSize ? leftToFetch : maxFetchSize;
+    const encodedFilter = encodeURIComponent(filter.replace(/\s+/g, ''));
 
     let requestUri = `${CONTENT_BASE}/content/v4/search/published?body=${newBody}&website=${arcSite}&sort=display_date:desc`;
     requestUri += `&from=${fetchStart}`;
     requestUri += `&size=${fetchSize}`;
-    requestUri += `&_sourceInclude=${filter}`;
+    requestUri += `&_sourceInclude=${encodedFilter}`;
 
     if (useFetch) {
       promise = fetch(requestUri, {

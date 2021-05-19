@@ -14,12 +14,13 @@ const resolve = (query) => {
   const {
     'arc-site': arcSite = 'ajc', published, section, sort, size,
   } = query;
+  const encodedFilter = encodeURIComponent(searchFilter.replace(/\s+/g, ''));
 
   let requestUri = `/content/v4/search/?website=${arcSite}`;
   requestUri += section ? `&q=type:story+AND+taxonomy.primary_section._id:%22/${section}%22` : null;
   requestUri += size ? `&size=${size}` : '';
   requestUri += sort ? '&sort=display_date:desc' : '';
-  requestUri += `&_sourceInclude=${searchFilter}`;
+  requestUri += `&_sourceInclude=${encodedFilter}`;
   return published ? `${requestUri}&published=${published}` : requestUri;
 };
 

@@ -748,6 +748,7 @@
     .lazyload-wrapper {
       width: 80px;
       height: 80px;
+      overflow: hidden;
 
       @include breakpoint(desktop-sm) {
         width: 60px;

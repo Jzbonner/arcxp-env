@@ -1,7 +1,11 @@
 import { toXML } from 'jstoxml';
 import { formatApiTime } from '../../layouts/_helper_functions/api/formatTime';
+import fetchEnv from '../../_helper_components/global/utils/environment';
+import handleSiteName from '../../layouts/_helper_functions/handleSiteName';
 
-export default function buildXML(rssTitle = 'rss', rssApiContent, { websiteURL = '', feedLink = '', orgName = '' }, xmlOptions = {}) {
+export default function buildXML(rssTitle = 'rss', rssApiContent, { arcSite = '', feedLink = '', orgName = '' }, xmlOptions = {}) {
+  const siteDomain = `${fetchEnv() === 'prod' ? 'www' : 'sandbox'}.${handleSiteName(arcSite)}.com`;
+
   return toXML({
     _name: 'rss',
     _attrs: {
@@ -16,7 +20,7 @@ export default function buildXML(rssTitle = 'rss', rssApiContent, { websiteURL =
           title: `${rssTitle.toUpperCase()} FEED`,
         },
         {
-          link: `${websiteURL}${feedLink}`,
+          link: `https://${siteDomain}${feedLink}`,
         },
         {
           description: `${orgName}`,
@@ -27,7 +31,7 @@ export default function buildXML(rssTitle = 'rss', rssApiContent, { websiteURL =
         {
           _name: 'atom:link',
           _attrs: {
-            href: `${websiteURL}${feedLink}`,
+            href: `https://${siteDomain}${feedLink}`,
             rel: 'self',
           },
         },

@@ -1,6 +1,9 @@
 // string of comma-separated list for Sources Include parameter
 export default `
   canonical_url,
+  caption,
+  url,
+  credits,
   content_elements,
   credits,
   description.basic,
