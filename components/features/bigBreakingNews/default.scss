@@ -63,18 +63,6 @@
         @include breakpoint(tablet) {
           margin: auto;
         }
-
-        .image-component-image {
-
-          .lazyload-wrapper {
-
-            img {
-              @include breakpoint(tablet) {
-                border-radius: 6px;
-              }
-            }
-          }
-        }
       }
     }
 
