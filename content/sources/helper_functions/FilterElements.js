@@ -4,22 +4,26 @@ export default (apiData, requiresImageEveryX) => {
     let hasImageIndex = 1;
     newData = apiData.filter((el, e) => {
       let hasImage = false;
-      if (!el.canonical_url) return false;
+      if (!el || !el.canonical_url) return false;
+      const { promo_items: rootPromoItems = {} } = el;
+      const { basic: rootPromoItemsBasic = {} } = rootPromoItems;
+      const { promo_image: promoImage, promo_items: nestedPromoItems = {} } = rootPromoItemsBasic;
+      const { basic: nestedPromoItemsBasic } = nestedPromoItems;
 
       /* featured image (re)assignments */
       if (el.promo_items) {
         /* check for promo image (collection override(s)) before anything else and regardless of content type */
-        if (el.promo_items.basic && el.promo_items.basic.promo_image && el.promo_items.basic.promo_image.url) {
-          newData[e].teaseImageObject = el.promo_items.basic.promo_image;
+        if (promoImage && promoImage.url) {
+          newData[e].teaseImageObject = promoImage;
           hasImage = true;
           /* no promo image, so now do the usual cascade to find the appropriate promo item */
-        } else if (el.promo_items.basic && el.promo_items.basic.url) {
+        } else if (rootPromoItemsBasic && rootPromoItemsBasic.url) {
           /* top-level promo item */
-          newData[e].teaseImageObject = el.promo_items.basic;
+          newData[e].teaseImageObject = rootPromoItemsBasic;
           hasImage = true;
-        } else if (el.promo_items.basic.promo_items && el.promo_items.basic.promo_items.basic && el.promo_items.basic.promo_items.basic.url) {
+        } else if (nestedPromoItemsBasic && nestedPromoItemsBasic.url) {
           /* second-level promo item (i.e. video or gallery as primary) */
-          newData[e].teaseImageObject = el.promo_items.basic.promo_items.basic;
+          newData[e].teaseImageObject = nestedPromoItemsBasic;
           hasImage = true;
         }
       } else if (el.firstInlineImage) {
