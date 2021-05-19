@@ -28,6 +28,11 @@
   text-align: center;
   padding: 1.25rem 1.88rem;
   border-top: 1px solid #cdcdcd;
+  width: calc(100% - 60px);
+
+  @include breakpoint(desktop-xxl) {
+    width: calc(100% - 20px);
+  }
 
   a {
     text-decoration: none;
