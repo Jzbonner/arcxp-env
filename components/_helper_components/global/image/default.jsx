@@ -84,7 +84,7 @@ const Image = ({
     if (imageType === 'isLeadImage' && giveCredit && !caption && screenSize.width < maxTabletViewWidth) {
       return <Caption imageType={imageType} src={src} />;
     }
-    return <Caption imageType={imageType} src={src} />;
+    return <Caption imageType={imageType} src={src} ampPage={ampPage} />;
   };
 
   const altTextContent = getAltText(altText, caption);

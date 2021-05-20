@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAppContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import createID from '../../../layouts/_helper_functions/createID';
 import LeftArrow from '../../../../resources/icons/slider/left-arrow.svg';
@@ -6,12 +7,15 @@ import './default.scss';
 
 const Caption = (
   {
-    src, isLeadVideo, videoCaption, imageType,
+    src, isLeadVideo, videoCaption, imageType, ampPage,
   },
 ) => {
   const { caption, credits } = src || null;
   const [toggleButton, setToggle] = useState(false);
   const captionID = `captionID-${createID()}`;
+  const appContext = useAppContext();
+  const { deployment, contextPath } = appContext;
+
 
   const toggle = () => {
     setToggle(!toggleButton);
@@ -51,13 +55,13 @@ const Caption = (
     <div
       className={`c-caption ${toggleButton ? 'is-active' : ''}`}
       id={captionID}
-      on={`tap:${captionID}.toggleClass(class='is-active')`}
+      on={`tap:${captionID}.toggleClass(class='is-active'),amp-arrow.toggleClass(class='rotate-right')`}
       role="button"
       tabIndex="0"
     >
       <div className="photo-caption-btn" onClick={toggle}>
-        <img className="caption-arrow" src={LeftArrow} />
-      <span>Caption</span>
+        { ampPage ? <amp-img class='amp-arrow' id='amp-arrow'src={`${deployment(`${contextPath}/resources/icons/slider/left-arrow.svg`)}`} height='9px' width='11px'></amp-img> : <img className="caption-arrow" src={LeftArrow} />}
+        <span>Caption</span>
       </div>
       <div className="photo-caption">
         <div className="photo-caption-text">{captionContent}</div>
@@ -72,6 +76,7 @@ Caption.propTypes = {
   isLeadVideo: PropTypes.bool,
   videoCaption: PropTypes.string,
   imageType: PropTypes.string,
+  ampPage: PropTypes.bool,
 };
 
 export default Caption;
