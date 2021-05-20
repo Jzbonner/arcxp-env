@@ -21,9 +21,9 @@ const Slider = (customFields = {}) => {
     },
   } = customFields;
 
-  let { size: itemLimit } = contentConfigValues || {};
-  const startIndex = 0;
-  itemLimit = parseInt(itemLimit, 10) || 10;
+  // eslint-disable-next-line prefer-const
+  let { size: itemLimit, from: startIndex = 1 } = contentConfigValues || {};
+  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
 
   const [sliderItems, setSliderItems] = useState(null);
   const [contentWidth, setContentWidth] = useState(0);
