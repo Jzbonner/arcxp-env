@@ -57,7 +57,6 @@
     }
 
     .amp-arrow {
-      transform: rotate(0deg);
       transition: .5s;
     }
 
@@ -120,7 +119,7 @@
   }
 
   .rotate-right {
-    transform: rotate(180deg) !important; /* stylelint-disable-line declaration-no-important */
+    transform: rotate(180deg); /* stylelint-disable-line declaration-no-important */
   }
 }
 
