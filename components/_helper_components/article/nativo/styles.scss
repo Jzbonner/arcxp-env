@@ -82,8 +82,11 @@ article {
         text-transform: uppercase;
         color: #000;
 
-        a {
-          color: #000 !important; /*stylelint-disable declaration-no-important*/
+        @include amp-exclude {
+          
+          a {
+            color: #000 !important; /*stylelint-disable declaration-no-important*/
+          }
         }
       }
 

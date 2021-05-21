@@ -56,6 +56,10 @@
       height: 26px;
     }
 
+    .amp-arrow {
+      transition: .5s;
+    }
+
     .caption-arrow {
       width: 9px;
       height: 11px;
@@ -112,6 +116,10 @@
     .photo-credit-text {
       display: none;
     }
+  }
+
+  .rotate-right {
+    transform: rotate(180deg); /* stylelint-disable-line declaration-no-important */
   }
 }
 
