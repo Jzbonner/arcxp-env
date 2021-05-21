@@ -60,7 +60,7 @@ const Caption = (
       tabIndex="0"
     >
       <div className="photo-caption-btn" onClick={toggle}>
-        { ampPage ? <amp-img class='amp-arrow' id='amp-arrow'src={`${deployment(`${contextPath}/resources/icons/slider/left-arrow.svg`)}`} height='9px' width='11px'></amp-img> : <img className="caption-arrow" src={LeftArrow} />}
+        { ampPage ? <amp-img class='amp-arrow' id='amp-arrow' src={`${deployment(`${contextPath}/resources/icons/slider/left-arrow.svg`)}`} height='9px' width='11px'></amp-img> : <img className="caption-arrow" src={LeftArrow} />}
         <span>Caption</span>
       </div>
       <div className="photo-caption">
