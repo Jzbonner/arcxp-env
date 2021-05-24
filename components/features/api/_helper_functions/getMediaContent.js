@@ -35,7 +35,6 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
   if (!mediaTitle) {
     mediaTitle = metaTitle || baseHeadline || '';
   }
-
   const basicAuthor = basicCredits && basicCredits.affiliation && basicCredits.affiliation[0] && basicCredits.affiliation[0].name ? basicCredits.affiliation[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].name ? basicCredits.by[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].referent && basicCredits.by[0].referent.id ? basicCredits.by[0].referent.id : '';
   if (promoItemsType === 'image' && !standaloneGallery) {
     leadObject = basicGalleryPromo ? mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit) : mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor);
@@ -67,7 +66,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
       if (standaloneGallery) {
         leadObject = mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor, true, basicUrl, true);
       } else {
-        leadObject = basicGalleryPromo ? mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit, true, basicGalleryUrl, true) : mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor);
+        leadObject = basicGalleryPromo ? mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit, true, basicGalleryUrl, true) : mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor, true, basicUrl, true);
       }
     } else if (!standaloneGallery) {
       formatterGalleryArray = basicContentElements.map((item) => {
@@ -76,7 +75,8 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         } = item || {};
         const appFeedCredit = creditsArray && creditsArray.affiliation && creditsArray.affiliation[0] && creditsArray.affiliation[0].name && creditsArray.affiliation[0].name !== '' ? creditsArray.affiliation[0].name : creditsArray && creditsArray.by && creditsArray.by[0] && creditsArray.by[0].name ? creditsArray.by[0].name : creditsArray && creditsArray.by && creditsArray.by[0] && creditsArray.by[0].referent && creditsArray.by[0].referent.id ? creditsArray.by[0].referent.id : '';
         if (basicGalleryUrl === itemUrl) {
-          return mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, true, basicGalleryUrl, true);
+          leadObject = mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, true, basicGalleryUrl, true);
+          return {};
         }
         return mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, false, false, true);
       });
@@ -87,7 +87,8 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         } = item || {};
         const appFeedCredit = creditsArray.affiliation && creditsArray.affiliation.by && creditsArray.affiliation.by.name ? creditsArray.affiliation.by.name : creditsArray && creditsArray.by && creditsArray.by[0] && creditsArray.by[0].name ? creditsArray.by[0].name : '';
         if (basicUrl === itemUrl) {
-          return mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, true, basicUrl, true);
+          leadObject = mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, true, basicUrl, true);
+          return {};
         }
         return mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, false, false, true);
       });
@@ -105,14 +106,13 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         credits: mediaCredits = {},
         streams: mediaStreams = [],
       } = media || {};
+      const mediaAuthor = mediaCredits.affiliation && mediaCredits.affiliation.by && mediaCredits.affiliation.by.name ? mediaCredits.affiliation.by.name : mediaCredits && mediaCredits.by && mediaCredits.by[0] && mediaCredits.by[0].name ? mediaCredits.by[0].name : '';
       // per Surendra: For stories, we are not adding inline images to media:content.
       if (type === 'story') {
         return {};
       }
 
       let mediaObjectUrl = '';
-
-      const mediaAuthor = mediaCredits.affiliation && mediaCredits.affiliation.by && mediaCredits.affiliation.by.name ? mediaCredits.affiliation.by.name : mediaCredits && mediaCredits.by && mediaCredits.by[0] && mediaCredits.by[0].name ? mediaCredits.by[0].name : '';
       let mediaType = localType === 'image' ? 'image/JPEG' : 'video/mp4';
       const mediaMedium = localType === 'image' ? 'image' : 'video';
 
@@ -133,9 +133,9 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
       }
 
       if (basicUrl === url) {
-        return mediaObj(mediaType, mediaMedium, `${localType === 'image' ? url : mediaObjectUrl}`, siteID, subtitle, caption, mediaAuthor, true, mediaObjectUrl, true);
+        leadObject = mediaObj(mediaType, mediaMedium, `${localType === 'image' ? url : mediaObjectUrl}`, siteID, subtitle, caption, mediaAuthor, true, mediaObjectUrl, true);
+        return {};
       }
-
       return mediaObj(mediaType, mediaMedium, `${localType === 'image' ? url : mediaObjectUrl}`, siteID, subtitle, caption, mediaAuthor, false, '', true);
     });
   }

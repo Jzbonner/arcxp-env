@@ -10,12 +10,15 @@ export default (type = 'image/JPEG', medium = 'image', url, siteID, title, capti
   const img = resizer.fetch(imgQuery);
 
   if (hasThumbnail) {
-    const thumb = resizer.fetch({
-      src: thumbnailImage,
-      height: 600,
-      width: 1000,
-      arcSite: siteID,
-    });
+    let thumb = img;
+    if (medium !== 'image') {
+      thumb = resizer.fetch({
+        src: thumbnailImage,
+        height: 600,
+        width: 1000,
+        arcSite: siteID,
+      });
+    }
     return ({
       _name: 'media:content',
       _attrs: {
