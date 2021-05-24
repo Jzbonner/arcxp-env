@@ -36,7 +36,7 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
           <div id={`carousel-item-${i}`} className={`c-carouselItem ${i === 0 ? 'is-first' : ''}`}>
             <amp-img
               width={`${hasImage && resizedObj.src ? '36' : '54'}`}
-              height="50"
+              height="36"
               src={carouselImage}
             />
             <div className='c-itemText'>
