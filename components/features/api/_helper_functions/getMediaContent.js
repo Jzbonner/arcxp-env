@@ -28,14 +28,14 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     credits: basicGalleryCredits = '', url: basicGalleryUrl = '', caption: basicGalleryCaption = '', subtitle: basicGallerySubtitle = '',
   } = basicGalleryPromo || {};
 
-  const galleryMediaCredit = basicGalleryCredits && basicGalleryCredits.affiliation && basicGalleryCredits.affiliation[0] && basicGalleryCredits.affiliation[0].name ? basicGalleryCredits.affiliation[0].name : basicGalleryCredits && basicGalleryCredits.by && basicGalleryCredits.by[0] && basicGalleryCredits.by[0].name
+  const galleryMediaCredit = basicGalleryCredits && basicGalleryCredits.affiliation && basicGalleryCredits.affiliation[0] && basicGalleryCredits.affiliation[0].name && basicGalleryCredits.affiliation[0].name !== '' ? basicGalleryCredits.affiliation[0].name : basicGalleryCredits && basicGalleryCredits.by && basicGalleryCredits.by[0] && basicGalleryCredits.by[0].name
     ? basicGalleryCredits.by[0].name : basicGalleryCredits && basicGalleryCredits.by && basicGalleryCredits.by[0] && basicGalleryCredits.by[0].referent && basicGalleryCredits.by[0].referent && basicGalleryCredits.by[0].referent.id ? basicGalleryCredits.by[0].referent.id : '';
   const { meta_title: metaTitle, basic: baseHeadline } = basicHeadlines || {};
   let mediaTitle = basicSubtitle;
   if (!mediaTitle) {
     mediaTitle = metaTitle || baseHeadline || '';
   }
-  const basicAuthor = basicCredits && basicCredits.affiliation && basicCredits.affiliation[0] && basicCredits.affiliation[0].name ? basicCredits.affiliation[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].name ? basicCredits.by[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].referent && basicCredits.by[0].referent.id ? basicCredits.by[0].referent.id : '';
+  const basicAuthor = basicCredits && basicCredits.affiliation && basicCredits.affiliation[0] && basicCredits.affiliation[0].name && basicCredits.affiliation[0].name !== '' ? basicCredits.affiliation[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].name ? basicCredits.by[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].referent && basicCredits.by[0].referent.id ? basicCredits.by[0].referent.id : '';
   if (promoItemsType === 'image' && !standaloneGallery) {
     leadObject = basicGalleryPromo ? mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit) : mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor);
   }
