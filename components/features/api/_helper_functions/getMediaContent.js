@@ -106,7 +106,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         credits: mediaCredits = {},
         streams: mediaStreams = [],
       } = media || {};
-      const mediaAuthor = mediaCredits && mediaCredits.affiliation && mediaCredits.affiliation[0] && mediaCredits.affiliation[0].name ? mediaCredits.affiliation[0].name : mediaCredits.affiliation && mediaCredits.affiliation.by && mediaCredits.affiliation.by.name ? mediaCredits.affiliation.by.name : mediaCredits && mediaCredits.by && mediaCredits.by[0] && mediaCredits.by[0].name ? mediaCredits.by[0].name : '';
+      const mediaAuthor = mediaCredits && mediaCredits.affiliation && mediaCredits.affiliation[0] && mediaCredits.affiliation[0].name && mediaCredits.affiliation[0].name !== '' ? mediaCredits.affiliation[0].name : mediaCredits.affiliation && mediaCredits.affiliation.by && mediaCredits.affiliation.by.name ? mediaCredits.affiliation.by.name : mediaCredits && mediaCredits.by && mediaCredits.by[0] && mediaCredits.by[0].name ? mediaCredits.by[0].name : '';
       // per Surendra: For stories, we are not adding inline images to media:content.
       if (type === 'story') {
         return {};
