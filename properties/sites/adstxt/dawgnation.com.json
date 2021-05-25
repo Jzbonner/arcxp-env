@@ -238,5 +238,35 @@
     "accountId": "556",
     "relationshipType": "RESELLER",
     "certId": ""
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "23256",
+    "relationshipType": "DIRECT",
+    "certId": "0bfd66d529a55807"
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "23256",
+    "relationshipType": "RESELLER",
+    "certId": "0bfd66d529a55807"
+  },
+  {
+    "domain": "emxdgt.com",
+    "accountId": "1643",
+    "relationshipType": "RESELLER",
+    "certId": "1e1d41537f7cad7f"
+  },
+  {
+    "domain": "improvedigital.com",
+    "accountId": "1577",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "video.unrulymedia.com",
+    "accountId": "1166984029",
+    "relationshipType": "RESELLER",
+    "certId": ""
   }
 ]
