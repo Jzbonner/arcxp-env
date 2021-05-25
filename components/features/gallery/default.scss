@@ -26,13 +26,9 @@
 
   letter-spacing: -.38px;
   text-align: center;
-  padding: 1.25rem 1.88rem;
+  padding: 1.25rem 0;
   border-top: 1px solid #cdcdcd;
-  width: calc(100% - 60px);
-
-  @include breakpoint(desktop-xxl) {
-    width: calc(100% - 20px);
-  }
+  width: inherit;
 
   a {
     text-decoration: none;
@@ -83,7 +79,7 @@
 }
 
 .with-ad {
-  padding: 1.25rem 1.88rem .35rem;
+  padding: 1.25rem 0 .35rem;
 }
 
 .last-item-height-fix {
@@ -132,6 +128,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-tap-highlight-color: rgb(0, 0, 0, 0);
 
   &:active {
     box-shadow: none;

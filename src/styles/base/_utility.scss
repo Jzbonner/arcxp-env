@@ -218,7 +218,11 @@
 }
 
 .b-sectionHome-padding {
-  padding: 0 20px;
+  padding: 0;
+
+  @include between-breakpoints(mobile, tablet) {
+    padding: 0 20px;
+  }
 
   @include between-breakpoints(tablet, desktop-sm) {
     padding: 0 40px;
