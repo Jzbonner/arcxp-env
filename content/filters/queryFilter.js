@@ -27,6 +27,7 @@ export default `
   promo_items.basic.caption,
   promo_items.basic.content_elements,
   promo_items.basic.credits.affiliation.by.id,
+  promo_items.basic.credits.affiliation.by.name,
   promo_items.basic.credits,
   promo_items.basic.height,
   promo_items.basic.headlines.basic,
