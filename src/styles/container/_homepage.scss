@@ -30,11 +30,6 @@
     padding: 7.5px;
 
     @include text-styles(.625rem, 1.25, "Gordita");
-
-    @include breakpoint(tablet) {
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
-    }
   }
 
   .c-homepageContent {

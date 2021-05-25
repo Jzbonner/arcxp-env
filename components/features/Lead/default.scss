@@ -27,10 +27,6 @@
     padding-bottom: $min-margin;
   }
 
-  img {
-    border-radius: 6px;
-  }
-
   .c-tease-icon .tease-icon {
     border-radius: 0;
   }
@@ -55,6 +51,9 @@
       img {
         border-radius: 6px;
       }
+
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 
@@ -88,12 +87,6 @@
       @include breakpoint(desktop-sm) {
         margin-bottom: initial;
       }
-    }
-
-    .c-sponsorOverlay,
-    .image-component-image .sponsored-story {
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
     }
 
     @include breakpoint(tablet) {

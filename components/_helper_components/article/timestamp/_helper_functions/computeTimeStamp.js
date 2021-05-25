@@ -4,7 +4,7 @@ const findAPMonth = (month = 12) => {
   return months[month];
 };
 
-const formatTime = (date, showSeconds = false) => {
+const formatTime = (date, showSeconds = false, milTime = false) => {
   const dateOptions = {
     timeZone: 'America/New_York',
     hour: 'numeric',
@@ -13,7 +13,8 @@ const formatTime = (date, showSeconds = false) => {
   if (showSeconds) {
     dateOptions.second = 'numeric';
   }
-  return new Intl.DateTimeFormat('en-US', dateOptions).format(date);
+  const hourFormat = milTime ? 'en-UK' : 'en-US';
+  return new Intl.DateTimeFormat(hourFormat, dateOptions).format(date);
 };
 
 const formatDate = date => (date.getDate() < 10 ? `0${date.getDate()}` : date.getDate());
