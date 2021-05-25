@@ -1,6 +1,7 @@
 @import "./../../../src/styles/base";
 
 .c-LeftPhotoNoPhotoRow {
+  width: inherit;
 
   &:first-child {
     @include breakpoint(tablet) {
