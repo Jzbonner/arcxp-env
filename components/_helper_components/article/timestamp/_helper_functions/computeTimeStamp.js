@@ -19,17 +19,6 @@ const formatTime = (date, showSeconds = false, milTime = false) => {
 
 const formatDate = date => (date.getDate() < 10 ? `0${date.getDate()}` : date.getDate());
 
-const formatAmpDate = (date) => {
-  const dateOptions = {
-    timeZone: 'America/New_York',
-    weekday: 'long',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  };
-  return new Intl.DateTimeFormat('en-US', dateOptions).format(date);
-};
-
 const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, isHyperlocalContent, articleType = 'normal') => {
   let timeStamp = null;
   let isUpdated = null;
@@ -63,7 +52,7 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
   const hours = Math.floor(timeAgoInMs / 3600000);
   const days = Math.floor(timeAgoInMs / 86400000);
 
-  if (articleType === 'normal') {
+  if (articleType === 'normal' || articleType === 'amp') {
     if (days > 0) {
       timeStamp = `${isUpdated ? 'Updated ' : ''}${findAPMonth(
         pub.getMonth(),
@@ -77,12 +66,6 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
     } else {
       return null;
     }
-  }
-
-  if (articleType === 'amp') {
-    const ampTime = formatTime(pub);
-    const ampDate = formatAmpDate(pub);
-    timeStamp = `${ampDate} at ${ampTime}`;
   }
 
   if (articleType === 'tease') {
