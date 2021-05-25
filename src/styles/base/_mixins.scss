@@ -131,7 +131,7 @@
   width: 100vw;
 
   @include breakpoint(desktop-sm) {
-    width: calc(100vw - 1rem - 1px);
+    width: inherit;
     padding-bottom: 5px;
   }
 
