@@ -322,6 +322,14 @@
       > :first-child:not(.arc_ad):not(.c-dontMiss):not(.c-columnistFeature):not(.border-top),
       .arc_ad + .arc_ad {
         margin-top: 2.26rem;
+
+        @include between-breakpoints(mobile, tablet) {
+          margin-top: 0;
+
+          .border-top {
+            padding-top: 30px;
+          }
+        }
       }
     }
   }
