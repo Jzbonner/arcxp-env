@@ -20,12 +20,6 @@ const SectionRedesign2021 = (props) => {
     zone5,
     zone5rightrail,
     zone6,
-    zone7,
-    zone7rightrail,
-    zone8,
-    zone9,
-    zone9rightrail,
-    zone10,
   ] = props.children;
   const appContext = useAppContext();
   const { layout, requestUri } = appContext;
@@ -44,10 +38,6 @@ const SectionRedesign2021 = (props) => {
         <SectionHome feature={zone4} />
         <SectionHome feature={zone5} rightRailContent={zone5rightrail} />
         <SectionHome feature={zone6} />
-        <SectionHome feature={zone7} rightRailContent={zone7rightrail} />
-        <SectionHome feature={zone8} />
-        <SectionHome feature={zone9} rightRailContent={zone9rightrail} />
-        <SectionHome feature={zone10} />
       </main>
       {!noHeaderAndFooter && <>
         <Footer />
@@ -57,7 +47,7 @@ const SectionRedesign2021 = (props) => {
   );
 };
 
-HomePageTenLayout.sections = [
+SectionRedesign2021.sections = [
   'Zone 1',
   'Zone 2',
   'Right Rail (zone 2)',
@@ -67,12 +57,6 @@ HomePageTenLayout.sections = [
   'Zone 5',
   'Right Rail (zone 5)',
   'Zone 6',
-  'Zone 7',
-  'Right Rail (zone 7)',
-  'Zone 8',
-  'Zone 9',
-  'Right Rail (zone 9)',
-  'Zone 10',
 ];
 
 SectionRedesign2021.propTypes = {
