@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import ChainContext from '../../chains/helper_functions/chainContext';
 import Lead from '../Lead/default';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
 import './default.scss';
 
 const LeftPhotoNoPhoto = (customFields = {}) => {
   const limit = customFields?.customFields?.content?.contentConfigValues?.size || 2;
+
+  const chainTitle = useContext(ChainContext);
 
   const { title = '', moreURL = '' } = customFields?.customFields || {};
 
@@ -28,7 +31,7 @@ const LeftPhotoNoPhoto = (customFields = {}) => {
     <div className="c-LeftPhotoNoPhotoRow">
       <FeatureTitle title={title} moreURL={moreURL} isLeftPhotoNoPhoto={true} />
       <div className="row">
-        <div className='LeftPhotoNoPhoto'>
+        <div className={`LeftPhotoNoPhoto ${chainTitle && chainTitle !== '' ? 'withTitle' : ''}`}>
           <Lead {...newCustomFields} columns={2} limitOverride={4} displayClassOverride={'Redesign Feature - Left Photo No Photo'} />
         </div>
       </div>
