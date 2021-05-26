@@ -1,4 +1,4 @@
-/*  /components/layouts/homepage-ten.jsx  */
+/*  /components/layouts/section-redesign-2021.jsx  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
