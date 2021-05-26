@@ -42,6 +42,13 @@
         left: -23px;
       }
     }
+
+    &.withTitle {
+
+      &:before {
+        top: 0;
+      }
+    }
   }
 
   @include breakpoint(desktop-sm) {
