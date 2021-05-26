@@ -126,9 +126,11 @@
   }
 
   .arc_ad[class*="MP02"],
-  .arc_ad[class*="MP03"] {
+  .arc_ad[class*="MP03"],
+  .arc_ad[class*="RP01"],
+  .arc_ad[class*="RP09"] {
     @include between-breakpoints(mobile, desktop-sm) {
-      margin-bottom: 20px;
+      padding-top: 20px;
     }
   }
 }
