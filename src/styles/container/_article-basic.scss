@@ -124,6 +124,13 @@
   .border-top {
     display: none;
   }
+
+  .arc_ad[class*="MP02"],
+  .arc_ad[class*="MP03"] {
+    @include between-breakpoints(mobile, desktop-sm) {
+      margin-bottom: 20px;
+    }
+  }
 }
 
 @include amp-exclude {
