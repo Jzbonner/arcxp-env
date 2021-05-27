@@ -46,6 +46,10 @@
 
       &:before {
         top: 0;
+
+        @include breakpoint(desktop-sm) {
+          height: calc(100% - 35px);
+        }
       }
     }
   }
