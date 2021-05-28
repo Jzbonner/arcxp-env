@@ -34,7 +34,7 @@ const SponsorBanner = ({ sponsorID, ampPage }) => {
     }
     if (desktopBanner) {
       return (
-        <div className="c-sponsorBanner b-margin-top-d30-m20 b-margin-bottom-d30-m20">
+        <div className="c-sponsorBanner b-margin-bottom-d30-m20">
           {bannerURL ? (
             <a href={bannerURL} className="c-sponsorUrl" rel={openNewTabTrue ? 'noopener noreferrer' : null} target={openNewTabTrue ? '_blank' : '_self'}></a>
           ) : null}
