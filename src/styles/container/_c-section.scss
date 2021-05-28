@@ -54,6 +54,7 @@
 
       .c-HS02 {
         margin-bottom: 20px;
+        width: inherit;
 
         @include breakpoint(tablet) {
           margin-bottom: 40px;
@@ -62,8 +63,8 @@
         @include arc-ad-full-width;
 
         .arc_ad[class*="HS02"] {
-          width: calc(100vw - 1rem - 1px);
-          max-width: 1600px;
+          width: inherit;
+          max-width: 1540px;
           text-align: center;
           margin: 0 auto;
 
@@ -74,11 +75,7 @@
           }
 
           @include breakpoint(desktop-sm) {
-            width: 94%;
-          }
-
-          @include breakpoint(desktop-lg) {
-            width: 90%;
+            width: 100%;
           }
         }
       }
@@ -108,8 +105,7 @@
         @include arc-ad-full-width;
 
         overflow: hidden;
-        margin-left: -15px;
-        margin-right: -15px;
+        margin: 0 auto;
 
         .arcad:not(:empty) {
           padding-top: 30px;

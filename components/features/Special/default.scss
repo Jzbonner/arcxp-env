@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   min-height: 300px;
-  width: 100vw;
+  width: inherit;
   overflow: hidden;
   margin-bottom: $min-Msection-margin;
   
@@ -20,7 +20,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 92vw;
+    width: 300px;
     height: 115px;
     opacity: .9;
     border-radius: 12px;

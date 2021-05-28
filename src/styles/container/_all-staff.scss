@@ -34,7 +34,7 @@
     bottom: 11px;
   }
 
-  @include breakpoint(tablet) {
+  @include between-breakpoints(tablet, desktop-sm) {
     width: 90%;
   }
 
@@ -42,7 +42,6 @@
     min-height: 97px;
     margin: 0 auto 26px;
     padding-top: 40px;
-    width: 95%;
 
     h2 {
       font-size: 5rem;
@@ -54,7 +53,15 @@
     }
   }
 
-  @include breakpoint(desktop-xxl) {
+  @include between-breakpoints(desktop-sm, desktop-xxl) {
+    width: 95%;
+  }
+
+  @include between-breakpoints(desktop-xxl, desktop-xxxl) {
+    width: 97%;
+  }
+
+  @include breakpoint(desktop-xxxl) {
     width: 100%;
     max-width: 1540px;
   }
