@@ -89,14 +89,13 @@
 
           &:before {
             content: "ADVERTISER CONTENT";
-            max-width: 115px;
+            max-width: 200px;
             border-radius: 6px;
             color: #000;
-            padding: 6px 15px;
             display: block;
             margin-bottom: .5rem;
             
-            @include text-styles(.625rem, 1.44, "Gordita_Medium");
+            @include text-styles(1rem, 1.44, "Gordita_Medium");
           }
         }
       }
