@@ -2,7 +2,8 @@
 @import "./../../../../../../src/styles/base/mixins";
 @import "./../../../../../../src/styles/base/breakpoints";
 
-.story-text {
+.story-text,
+.c-customHTML {
   width: 100%;
 
   a {
