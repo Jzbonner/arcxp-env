@@ -41,6 +41,13 @@
         @include arc-ad-full-width;
       }
 
+      .arc_ad[class*="HP01"] {
+        @include breakpoint(desktop-sm) {
+          padding-bottom: 0;
+          margin-bottom: $min-DTsection-margin;
+        }
+      }
+
       .c-HS02 {
         margin-bottom: 20px;
 
@@ -307,10 +314,6 @@
         width: calc(100% - 315px);
         padding: 0 $min-margin 0 0;
         box-sizing: border-box;
-
-        .c-synopsis-row + div {
-          margin-bottom: 1.25rem;
-        }
       }
     }
 

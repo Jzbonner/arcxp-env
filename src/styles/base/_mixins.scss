@@ -131,7 +131,6 @@
 
   @include breakpoint(desktop-sm) {
     width: calc(100vw - 1rem - 1px);
-    padding-bottom: 5px;
   }
 
   &.c-HS02 {
@@ -153,7 +152,6 @@
 
     @include breakpoint(desktop-sm) {
       width: calc(100vw - 1rem - 1px);
-      padding-bottom: 5px;
     }
 
     > div,

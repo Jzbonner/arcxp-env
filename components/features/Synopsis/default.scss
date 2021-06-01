@@ -58,6 +58,12 @@
       }
     }
 
+    &:last-child {
+      @include breakpoint(desktop-sm) {
+        margin-bottom: 0;
+      }
+    }
+
     @include breakpoint(desktop-lg) {
       width: 100%;
     }

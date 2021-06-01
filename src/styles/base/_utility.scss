@@ -96,13 +96,13 @@
   margin-bottom: 1.88rem;
 }
 
-// desktop margin-bottom 40, mobile margin-bottom 20
+// desktop margin-bottom 35, mobile margin-bottom 20
 
 .b-margin-bottom-d40-m20 {
   margin-bottom: 1.25rem;
 
   @include breakpoint(desktop-sm) {
-    margin-bottom: 2.5rem;
+    margin-bottom: $min-DTsection-margin;
   }
 }
 
