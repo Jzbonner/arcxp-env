@@ -47,11 +47,6 @@
     }
 
     @include breakpoint(tablet) {
-
-      img {
-        border-radius: 6px;
-      }
-
       margin-left: 0;
       margin-right: 0;
     }
