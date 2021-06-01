@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import getProperties from 'fusion:properties';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import Image from '../../global/image/default.jsx';
-import facebookLogo from '../../../../resources/images/facebook-burger.svg';
-import twitterLogo from '../../../../resources/images/twitter-burger.svg';
 import './styles.scss';
 
 const BlogAuthor = ({ subtype, authorData, ampPage }) => {
   if (subtype === 'Blog' && authorData.length > 0) {
+    const fusionContext = useFusionContext();
+    const { arcSite } = fusionContext;
+    const {
+      burgerFbLogo, burgerTwitterLogo,
+    } = getProperties(arcSite);
+    const appContext = useAppContext();
+    const { deployment, contextPath } = appContext;
     return (
       <div className={`c-blogAuthor b-margin-bottom-30 ${authorData.length > 1 ? 'multiple-authors' : ''}`}>
         <p className="blogAuthor-title">About the Author{authorData.length > 1 ? 's' : ''}</p>
@@ -26,7 +33,10 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
                     const isFb = network === 'facebook';
                     const isTwitter = network === 'twitter';
                     if ((isFb || isTwitter) && url) {
-                      return <a href={url.indexOf('http') !== 0 && url.indexOf('//') !== 0 ? `//${url}` : url}><img src={isFb ? facebookLogo : twitterLogo} alt={`Follow ${val.name} on ${network}`} width={17} height={17} /></a>;
+                      const logoSrc = isFb ? deployment(`${contextPath}${burgerFbLogo}`) : deployment(`${contextPath}${burgerTwitterLogo}`);
+                      return <a href={url.indexOf('http') !== 0 && url.indexOf('//') !== 0 ? `//${url}` : url}>
+                        {ampPage ? <amp-img src={logoSrc} alt={`Follow ${val.name} on ${network}`} width={17} height={17}></amp-img> : <img src={logoSrc} alt={`Follow ${val.name} on ${network}`} width={17} height={17} />}
+                      </a>;
                     }
                     return false;
                   })}
