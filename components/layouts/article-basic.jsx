@@ -220,12 +220,12 @@ const StoryPageLayout = () => {
           uuid={uuid} />
     )}
     {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && (
-      <div className="c-section b-sectionHome-padding full-width b-clear-both">
+      <div className="c-section full-width b-clear-both">
         <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} />
       </div>
     )}
     {/* about the author should be the last component of the story */}
-    {<div className="c-section b-sectionHome-padding full-width b-clear-both"><BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} /></div>}
+    {<div className="c-section full-width b-clear-both"><BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} /></div>}
     {!noAds && !isHyperlocalContent && <div className="b-padding-top-30"><TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} /></div>}
     {!noAds && !isHyperlocalContent && !sponsorSectionID && (
       <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
@@ -241,9 +241,9 @@ const StoryPageLayout = () => {
       {!noHeaderAndFooter && (
         <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} noAds={noAds} />
       )}
-      <main className="c-articleContent b-contentMaxWidth">
+      <main className="c-articleContent b-contentMaxWidth b-sectionHome-padding">
         <header className="b-margin-bottom-d30-m30">
-          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header article-header-padding'}>
+          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
             <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
             <Headline
               headlines={headlines}
@@ -255,13 +255,13 @@ const StoryPageLayout = () => {
           </div>
           <div
             style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}
-            className="c-label-wrapper b-pageContainer b-margin-bottom-d7-m7"
+            className="c-label-wrapper b-margin-bottom-d7-m7"
           >
             {!isCommunityContributor && (
               <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />
             )}
           </div>
-          <div className="b-flexRow b-pageContainer article-byline b-margin-bottom-d7-m7">
+          <div className="b-flexRow article-byline b-margin-bottom-d7-m7">
             <Byline by={authorData} sections={sections} />
           </div>
           <div className="b-margin-bottom-d7-m7" style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}>
@@ -277,7 +277,7 @@ const StoryPageLayout = () => {
           <ContributorBadge tags={tags} ampPage={ampPage}/>
           <PartnerBadge sections={sections} ampPage={ampPage}/>
           {ampPage && <SocialShare headlines={headlines} articleURL={articleURL} />}
-          <div className="b-flexRow b-flexCenter b-margin-bottom-d7-m7 b-pageContainer">
+          <div className="b-flexRow b-flexCenter b-margin-bottom-d7-m7">
             <SubHeadline subheadlines={subheadlines} />
           </div>
         </header>

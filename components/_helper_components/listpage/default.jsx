@@ -108,8 +108,8 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
   };
 
   return (
-    <main className="c-listPage b-contentMaxWidth">
-      <div className="c-section with-rightRail b-sectionHome-padding">
+    <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
+      <div className="c-section with-rightRail">
         <div className="c-contentElements list-contentElements">
           {!noAds ? (
             <div className="c-rightRail list-rp01">{RP01()}</div>

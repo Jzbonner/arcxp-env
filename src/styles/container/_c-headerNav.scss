@@ -11,10 +11,23 @@
     }
   }
 
+  .c-headerNav.b-sectionHome-padding {
+    @include between-breakpoints(mobile, tablet) {
+      padding: 0 0 15px;
+      width: auto;
+      margin: 0 20px;
+
+      &.stickyActive {
+        padding: 0 20px;
+        width: 100%;
+        margin: 0;
+      }
+    }
+  }
+
   .c-headerNav {
     width: 100%;
     margin: 0 auto;
-    padding-bottom: 15px;
     border-bottom: 1px solid #cdcdcd;
     box-sizing: border-box;
 

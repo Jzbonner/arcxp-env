@@ -86,11 +86,6 @@
     .photo-credit-text {
       position: absolute;
       right: 0;
-      margin-right: .938rem;
-  
-      @include breakpoint(tablet) {
-        margin-right: 0;
-      }
   
       @include breakpoint(desktop-sm) {
         display: block;
