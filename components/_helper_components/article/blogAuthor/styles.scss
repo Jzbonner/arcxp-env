@@ -22,7 +22,7 @@
 
     .blog-author-content-heading {
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       flex-direction: column;
 
       @include breakpoint(tablet) {
@@ -38,6 +38,7 @@
         width: 97px;
         height: 97px;
         margin: 0 0 20px;
+        float: left;
 
         @include breakpoint(tablet) {
           margin: 0 20px 0 0;
