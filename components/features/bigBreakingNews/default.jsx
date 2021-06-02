@@ -60,10 +60,7 @@ const BigBreakingNews = (customFields = {}) => {
           <div className="restOfItems">
           {restOfItems.map((item, i) => {
             const newItem = item;
-            // deleting these two props as we don't want to render images for non-lead items of BBN
-            delete newItem.promo_items;
-            delete newItem.firstInlineImage;
-            return <ListItem key={`ListItem-${i}`} {...newItem} />;
+            return <ListItem key={`ListItem-${i}`} {...newItem} hidePromo={true} />;
           })}
           </div>
       </div>
