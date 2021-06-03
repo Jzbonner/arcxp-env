@@ -358,6 +358,26 @@
             }
           },
           {
+            "bidder": "appnexus",
+            "labels": ["desktop"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716228",
+              "placementName": "AJC_ROS_Desktop_RP01_0621"
+            }
+          },
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716262",
+              "placementName": "AJC_ROS_Tablet_RP01_0621"
+            }
+          },
+          {
             "bidder": "aol",
             "labels": ["desktop"],
             "params": {
@@ -411,6 +431,16 @@
             }
           },
           {
+            "bidder": "appnexus",
+            "labels": ["desktop3"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716254",
+              "placementName": "AJC_ROS_Desktop_RP01-300x250_0621"
+            }
+          },
+          {
             "bidder": "aol",
             "labels": ["desktop3"],
             "params": {
@@ -461,6 +491,16 @@
               "placementGroup": "ROS",
               "placementId": "20392481",
               "placementName": "AJC_ROS_DesktopTablet_RP01-300x600"
+            }
+          },
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop4"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716241",
+              "placementName": "AJC_ROS_Desktop_RP01-300x600_0621"
             }
           },
           {
