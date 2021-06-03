@@ -20,20 +20,8 @@ article {
     }
 
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0;
     text-align: left;
-
-    @include breakpoint(tablet) {
-      padding: 0 20px;
-    }
-
-    @include breakpoint(desktop-sm) {
-      padding: 0 40px;
-    }
-
-    @include breakpoint(desktop-lg) {
-      padding: 0 30px;
-    }
 
     @media (max-width: 747px) {
       max-width: initial;
