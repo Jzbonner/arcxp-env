@@ -119,9 +119,9 @@
             "bidder": "rubicon",
             "labels": ["desktop2", "tablet1"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
-              "zoneId": "1529032"
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068946"
             }
           },
           {
@@ -172,9 +172,9 @@
             "bidder": "rubicon",
             "labels": ["desktop1", "tablet1"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
-              "zoneId": "1529034"
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068948"
             }
           },
           {
@@ -253,27 +253,27 @@
             "bidder": "rubicon",
             "labels": ["desktop1"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
-              "zoneId": "1867418"
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068952"
             }
           },
           {
             "bidder": "rubicon",
             "labels": ["tablet1"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
-              "zoneId": "1867420"
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068954"
             }
           },
           {
             "bidder": "rubicon",
             "labels": ["phone"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
-              "zoneId": "1867422"
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068956"
             }
           },
           {
@@ -324,8 +324,8 @@
             "bidder": "rubicon",
             "labels": ["desktop2", "tablet1"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
+              "accountId": "23256",
+              "siteId": "376980",
               "zoneId": "1529038"
             }
           },
@@ -377,14 +377,104 @@
             "bidder": "rubicon",
             "labels": ["desktop", "tablet"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
+              "accountId": "23256",
+              "siteId": "376980",
               "zoneId": "1529040"
             }
           },
           {
             "bidder": "openx",
             "labels": ["desktop", "tablet"],
+            "params": {
+              "unit": "540941869",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
+    "RP01-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716228",
+              "placementName": "AJC_ROS_Desktop_RP01_0621"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["desktop"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a96917d017979ae6267b49d090701dd"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["desktop"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068968"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["desktop"],
+            "params": {
+              "unit": "544080389",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
+    "RP01-tablet": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716262",
+              "placementName": "AJC_ROS_Tablet_RP01_0621"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["tablet1"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a969938017979ae5eb6b49f886c01f7"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["tablet1"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068974"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["tablet1"],
             "params": {
               "unit": "540941869",
               "delDomain": "ajc-d.openx.net"
@@ -430,8 +520,8 @@
             "bidder": "rubicon",
             "labels": ["desktop3", "tablet2"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
+              "accountId": "23256",
+              "siteId": "376980",
               "zoneId": "1867426"
             }
           },
@@ -440,6 +530,51 @@
             "labels": ["desktop3", "tablet2"],
             "params": {
               "unit": "540941869",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
+    "RP01-300x250-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop3"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716254",
+              "placementName": "AJC_ROS_Desktop_RP01-300x250_0621"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["desktop3"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a969938017979ae5eb6b49f0ee401f6"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["desktop3"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068972"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["desktop3"],
+            "params": {
+              "unit": "544080393",
               "delDomain": "ajc-d.openx.net"
             }
           }
@@ -483,8 +618,8 @@
             "bidder": "rubicon",
             "labels": ["desktop4", "tablet3"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
+              "accountId": "23256",
+              "siteId": "376980",
               "zoneId": "1867424"
             }
           },
@@ -499,7 +634,52 @@
         ]
       }
     },
-    "RP01-tablet": {
+    "RP01-300x600-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop4"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716241",
+              "placementName": "AJC_ROS_Desktop_RP01-300x600_0621"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["desktop4"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a969938017979ae5eb6b49d975c01f5"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["desktop4"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068970"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["desktop4"],
+            "params": {
+              "unit": "544080390",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
+    "RP01-story-tablet": {
       "amazon": {
         "enabled": "true"
       },
@@ -528,9 +708,9 @@
             "bidder": "rubicon",
             "labels": ["tablet"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
-              "zoneId": "1529040"
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068962"
             }
           },
           {
@@ -581,8 +761,8 @@
             "bidder": "rubicon",
             "labels": ["desktop", "tablet"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
+              "accountId": "23256",
+              "siteId": "376980",
               "zoneId": "1529044"
             }
           },
@@ -591,6 +771,96 @@
             "labels": ["desktop", "tablet"],
             "params": {
               "unit": "540941873",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
+    "RP03-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716259",
+              "placementName": "AJC_ROS_Desktop_RP03_0621"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["desktop"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a969434017979ae664db4a13bfc01d8"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["desktop"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068976"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["desktop"],
+            "params": {
+              "unit": "544080395",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
+    "RP03-tablet": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716263",
+              "placementName": "AJC_ROS_Tablet_RP03_0621"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["tablet1"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a969434017979ae664db4a0096201d7"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["tablet1"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068978"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["tablet1"],
+            "params": {
+              "unit": "544080396",
               "delDomain": "ajc-d.openx.net"
             }
           }
@@ -634,9 +904,9 @@
             "bidder": "rubicon",
             "labels": ["desktop", "tablet"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
-              "zoneId": "1529048"
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068964"
             }
           },
           {
@@ -644,6 +914,96 @@
             "labels": ["desktop", "tablet"],
             "params": {
               "unit": "540941874",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
+    "RP09-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716260",
+              "placementName": "AJC_ROS_Desktop_RP09_0621"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["desktop"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a96917d017979ae6267b4a1d56a01de"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["desktop"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068980"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["desktop"],
+            "params": {
+              "unit": "544080397",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
+    "RP09-tablet": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716264",
+              "placementName": "AJC_ROS_Tablet_RP09_0621"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["tablet1"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a969938017979ae5eb6b4a0818001f8"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["tablet1"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068984"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["tablet1"],
+            "params": {
+              "unit": "544080399",
               "delDomain": "ajc-d.openx.net"
             }
           }
@@ -687,8 +1047,8 @@
             "bidder": "rubicon",
             "labels": ["desktop3", "tablet2"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
+              "accountId": "23256",
+              "siteId": "376980",
               "zoneId": "1867428"
             }
           },
@@ -703,7 +1063,52 @@
         ]
       }
     },
-    "RP09-desktop": {
+    "RP09-300x250-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop3"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "21716261",
+              "placementName": "AJC_ROS_Desktop_RP09-300x250_0621"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["desktop3"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a969938017979ae5eb6b4a219de01f9"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["desktop3"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068982"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["desktop3"],
+            "params": {
+              "unit": "544080398",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
+    "RP09-story-desktop": {
       "amazon": {
         "enabled": "true"
       },
@@ -732,9 +1137,9 @@
             "bidder": "rubicon",
             "labels": ["desktop"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303388",
-              "zoneId": "1529050"
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2068966"
             }
           },
           {
@@ -777,9 +1182,9 @@
             "bidder": "rubicon",
             "labels": ["phone1"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303390",
-              "zoneId": "1529052"
+              "accountId": "23256",
+              "siteId": "376984",
+              "zoneId": "2068986"
             }
           },
           {
@@ -822,9 +1227,9 @@
             "bidder": "rubicon",
             "labels": ["phone"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303390",
-              "zoneId": "1529054"
+              "accountId": "23256",
+              "siteId": "376984",
+              "zoneId": "2068988"
             }
           },
           {
@@ -867,9 +1272,9 @@
             "bidder": "rubicon",
             "labels": ["phone"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303390",
-              "zoneId": "1529056"
+              "accountId": "23256",
+              "siteId": "376984",
+              "zoneId": "2068990"
             }
           },
           {
@@ -912,9 +1317,9 @@
             "bidder": "rubicon",
             "labels": ["phone"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303390",
-              "zoneId": "1529058"
+              "accountId": "23256",
+              "siteId": "376984",
+              "zoneId": "2068992"
             }
           },
           {
@@ -957,9 +1362,9 @@
             "bidder": "rubicon",
             "labels": ["phone"],
             "params": {
-              "accountId": "21858",
-              "siteId": "303390",
-              "zoneId": "1529060"
+              "accountId": "23256",
+              "siteId": "376984",
+              "zoneId": "2068994"
             }
           },
           {
