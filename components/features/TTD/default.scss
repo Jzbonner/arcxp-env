@@ -120,14 +120,6 @@
         flex: 1 47%;
       }
 
-      @include breakpoint(desktop-sm) {
-
-        &:last-child {
-          margin-bottom: 0;
-          padding-bottom: 0;
-        }
-      }
-
       @include breakpoint(desktop-lg) {
         max-width: 30.1558%;
         width: 100%;
@@ -143,6 +135,11 @@
           @include breakpoint(desktop-sm) {
             min-height: 104px;
           }
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+          padding-bottom: 0;
         }
 
         @include between-breakpoints(mobile, desktop-lg) {
