@@ -148,7 +148,7 @@ const Slider = (customFields = {}) => {
   };
 
   const sliderOutput = () => (<div ref={wrapperRef} className={`c-slider-wrapper
-      b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
+      ${getIsSpecial() ? 'is-special-feature' : ''}`}>
     <FeatureTitle title={title} moreURL={moreURL} />
     <div className="c-slider">
       <div className={`c-slider-content ${idSuffix} ${isPad ? 'is-Tablet' : ''}`} onScroll={handleOverflowScroll}>

@@ -15,6 +15,10 @@
   width: 100vw;
   max-width: 1540px;
   box-sizing: border-box;
+
+  @include between-breakpoints(mobile, tablet) {
+    padding-bottom: 20px;
+  }
 }
 
 .gallery-wrapper {
