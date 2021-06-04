@@ -398,7 +398,6 @@ export const adSlots = {
   },
   'RP02 tablet': {
     slotName: 'RP02',
-    biddingName: 'RP02-tablet',
     dimensions: [
       [], // desktop
       [
