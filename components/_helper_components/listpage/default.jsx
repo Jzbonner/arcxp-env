@@ -4,12 +4,12 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import checkTags from '../../layouts/_helper_functions/checkTags';
 import ArcAd from '../../features/ads/default';
-import Pagination from '../global/pagination/default';
 import ListItem from '../home/ListItem/ListItem';
 import './default.scss';
 import '../../features/List/default';
 import filter from '../../../content/filters/collectionTitle';
 import AddFirstInlineImage from '../../../content/sources/helper_functions/AddFirstInlineImage';
+import LoadMoreButton from '../loadMoreBtn/default';
 
 const RP01 = () => (
   <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />
@@ -17,7 +17,8 @@ const RP01 = () => (
 const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
 
 const ListPage = ({ globalContent, globalContentConfig, title }) => {
-  const [activePage, setActivePage] = useState(1);
+  const storiesPerLoad = 10;
+  const [storiesCount, setStoryCount] = useState(storiesPerLoad);
 
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -26,17 +27,11 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
 
-  const filterStart = parseInt(query.from, 10) - 1; // since the array is zero-indexed
-  const filterSize = parseInt(query.size, 10);
-
   if (!globalContent) {
     return null;
   }
 
-  const filteredStories = globalContent.slice(
-    filterStart,
-    filterStart + filterSize,
-  );
+  const filteredStories = globalContent.slice(0, storiesCount);
 
   const updateImageRefs = (apiData) => {
     const newData = apiData;
@@ -89,8 +84,6 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
 
   const { headlines: { basic: collectionTitle } = {} } = collectionMetaData || {};
 
-  const storiesPerPage = 10;
-
   const getTitle = () => {
     if (title) {
       return title;
@@ -116,22 +109,11 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
           ) : null}
           <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column">
             {getTitle()}
-            {filteredTeases.map((el, i) => {
-              const startIndex = (activePage - 1) * storiesPerPage;
-              if (startIndex <= i && i < startIndex + storiesPerPage) {
-                return <ListItem key={`key-${i}`} {...el} listPage={true} />;
-              }
-              return null;
-            })}
-            {filteredTeases.length > storiesPerPage && (
-              <Pagination
-                activePage={activePage}
-                setActivePage={setActivePage}
-                totalStories={filteredStories.length}
-                storiesPerPage={storiesPerPage}
-                maxPagesToDisplay={5}
-              />
-            )}
+            {filteredTeases.map((el, i) => <ListItem key={`key-${i}`} {...el} listPage={true} />)}
+            {globalContent.length > storiesPerLoad && <LoadMoreButton
+              newStories={filteredStories}
+              handleOnClick={() => setStoryCount(storiesCount + storiesPerLoad)}
+            />}
           </div>
         </div>
       </div>

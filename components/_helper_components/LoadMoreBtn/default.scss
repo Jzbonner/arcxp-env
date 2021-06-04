@@ -1,0 +1,23 @@
+@import "../../../src/styles/base/_mixins.scss";
+
+.btn-loadMore {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 4px 4px 6px 0 rgb(229 229 229 / 60%);
+  border: solid 1px #ececec;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+
+  @include text-styles(1rem, 1, "Gordita-Bold");
+
+  .arrow {
+    transform: rotate(270deg) translateY(10px);
+  }
+
+  &.data-max-reached {
+    display: none;
+  }
+}
