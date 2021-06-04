@@ -2,8 +2,7 @@
 @import "./../../../../../../src/styles/base/mixins";
 @import "./../../../../../../src/styles/base/breakpoints";
 
-.story-text,
-.c-customHTML {
+.story-text {
   width: 100%;
 
   a {
@@ -15,9 +14,9 @@
     }
   }
 
-  @include text-styles(1rem, 2.25, "Gordita");
+  @include text-styles(1rem, 1.6rem, "Gordita");
 
   @include breakpoint(desktop-sm) {
-    @include text-styles(1.25rem, 2, "Gordita");
+    @include text-styles(1rem, 1.6rem, "Gordita");
   }
 }
