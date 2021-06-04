@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: $min-Msection-margin;
+  width: inherit;
 
   @include breakpoint(desktop-sm) {
     margin-bottom: $min-DTsection-margin;
@@ -38,7 +39,7 @@
   display: flex;
   flex-direction: column;
 
-  @include breakpoint(tablet) {
+  @include breakpoint(desktop-sm) {
     flex-direction: row;
   }
 
@@ -48,7 +49,7 @@
     flex-direction: row;
     margin-bottom: 25px;
 
-    @include breakpoint(tablet) {
+    @include breakpoint(desktop-sm) {
       margin-bottom: 0;
     }
   }

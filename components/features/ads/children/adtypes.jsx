@@ -156,11 +156,11 @@ export const adSlots = {
     dimensions: [
       [
         [300, 600],
-        [300, 250], // desktop+
+        [300, 250], // tablet+
       ],
     ],
     breakpoints: [
-      [1024, 0], // desktop+
+      [768, 0], // tablet+
     ],
     bidding: {
       amazon: {
@@ -169,6 +169,23 @@ export const adSlots = {
     },
   },
   'RP01 300x250': {
+    slotName: 'RP01',
+    biddingName: 'RP01-300x250',
+    dimensions: [
+      [
+        [300, 250],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
+  'RP01 300x250 (desktop only)': {
     slotName: 'RP01',
     biddingName: 'RP01-300x250',
     dimensions: [
@@ -191,6 +208,23 @@ export const adSlots = {
     dimensions: [
       [
         [300, 600],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
+  'RP01 300x600 (desktop only)': {
+    slotName: 'RP01',
+    biddingName: 'RP01-300x600',
+    dimensions: [
+      [
+        [300, 600],
       ], // desktop+
     ],
     breakpoints: [
@@ -208,6 +242,24 @@ export const adSlots = {
       [
         [300, 600],
         [300, 250],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+    isSticky: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
+  'RP01 sticky (desktop only)': {
+    slotName: 'RP01',
+    dimensions: [
+      [
+        [300, 600],
+        [300, 250],
       ], // desktop+
     ],
     breakpoints: [
@@ -220,14 +272,31 @@ export const adSlots = {
       },
     },
   },
+  'RP01 desktop': {
+    slotName: 'RP01',
+    biddingName: 'RP01',
+    dimensions: [
+      [
+        [300, 600],
+        [300, 250],
+      ], // desktop
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+    ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
   'RP01 tablet': {
     slotName: 'RP01',
-    biddingName: 'RP01-tablet',
+    biddingName: 'RP01',
     dimensions: [
       [], // desktop
       [
-        [300, 600],
-        [300, 250], // tablet
+        [728, 90], // tablet
       ],
     ],
     breakpoints: [
@@ -326,7 +395,38 @@ export const adSlots = {
       [1024, 0], // desktop+
     ],
   },
+  'RP02 tablet': {
+    slotName: 'RP02',
+    dimensions: [
+      [], // desktop
+      [
+        [728, 90], // tablet
+      ],
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
+    ],
+  },
   'RP03 sticky': {
+    slotName: 'RP03',
+    dimensions: [
+      [
+        [300, 250],
+        [300, 600],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+    isSticky: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
+  'RP03 sticky (desktop only)': {
     slotName: 'RP03',
     dimensions: [
       [
@@ -338,6 +438,24 @@ export const adSlots = {
       [1024, 0], // desktop+
     ],
     isSticky: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
+  'RP03 tablet': {
+    slotName: 'RP03',
+    dimensions: [
+      [], // desktop
+      [
+        [728, 90], // tablet
+      ],
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
+    ],
     bidding: {
       amazon: {
         enabled: true,
@@ -391,6 +509,23 @@ export const adSlots = {
     dimensions: [
       [
         [300, 250],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
+  'RP09 300x250 (desktop only)': {
+    slotName: 'RP09',
+    biddingName: 'RP09-300x250',
+    dimensions: [
+      [
+        [300, 250],
       ], // desktop+
     ],
     breakpoints: [
@@ -408,12 +543,49 @@ export const adSlots = {
       [
         [300, 250],
         [300, 600],
+      ], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+    isSticky: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
+  'RP09 sticky (desktop only)': {
+    slotName: 'RP09',
+    dimensions: [
+      [
+        [300, 250],
+        [300, 600],
       ], // desktop+
     ],
     breakpoints: [
       [1024, 0], // desktop+
     ],
     isSticky: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
+  'RP09 tablet': {
+    slotName: 'RP09',
+    biddingName: 'RP09',
+    dimensions: [
+      [], // desktop
+      [
+        [728, 90], // tablet
+      ],
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [768, 0], // tablet
+    ],
     bidding: {
       amazon: {
         enabled: true,

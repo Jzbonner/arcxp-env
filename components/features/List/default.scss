@@ -203,13 +203,6 @@
   // Top Photo styles
 
   &.top-photo-display-class {
-    margin-left: -$min-margin;
-    margin-right: -$min-margin;
-
-    @include breakpoint(tablet) {
-      margin-right: 0;
-      margin-left: 0;
-    }
 
     .c-label-wrapper {
       @include breakpoint(desktop-sm) {

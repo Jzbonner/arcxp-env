@@ -30,7 +30,9 @@
 
   letter-spacing: -.38px;
   text-align: center;
-  padding: 1.25rem 1.88rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid #cdcdcd;
+  width: inherit;
 
   a {
     text-decoration: none;
@@ -81,7 +83,7 @@
 }
 
 .with-ad {
-  padding: .35rem 1.88rem;
+  padding: 1.25rem 0 .35rem;
 }
 
 .last-item-height-fix {
@@ -130,6 +132,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-tap-highlight-color: rgb(0, 0, 0, 0);
+
+  &:active {
+    box-shadow: none;
+  }
 
   img {
     height: 20px;
@@ -290,6 +297,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &:active {
+      box-shadow: none;
+    }
   }
 
   .gallery-caption-toggle {

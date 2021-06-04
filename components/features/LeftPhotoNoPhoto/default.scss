@@ -42,6 +42,17 @@
         left: -23px;
       }
     }
+
+    &.withTitle {
+
+      &:before {
+        top: 0;
+
+        @include breakpoint(desktop-sm) {
+          height: calc(100% - 35px);
+        }
+      }
+    }
   }
 
   @include breakpoint(desktop-sm) {

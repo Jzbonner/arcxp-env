@@ -3,6 +3,7 @@
 .c-LeftPhotoNoPhotoWrapper {
   display: flex;
   width: 100%;
+  flex-direction: column;
 
   .row {
     display: flex;

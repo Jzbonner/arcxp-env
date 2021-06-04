@@ -5,7 +5,11 @@
   // Common styles
   ////////////////
   width: 100%;
-  margin-bottom: $min-Msection-margin;
+  margin-bottom: 15px;
+
+  @include breakpoint(tablet) {
+    margin-bottom: $min-Msection-margin;
+  }
 
   @include breakpoint(desktop-sm) {
     margin-bottom: $min-DTsection-margin;
@@ -40,8 +44,6 @@
   }
 
   .home-headline {
-    margin-left: -$min-margin;
-    margin-right: -$min-margin;
     overflow: hidden;
 
     img {
@@ -615,11 +617,11 @@
   &.left-photo-no-photo-display-class {
     
     .column-1 {
-      margin-right: 15px;
       padding-bottom: 30px;
 
       @include breakpoint(tablet) {
         padding-bottom: 0;
+        margin-right: 15px;
       }
     }
 
@@ -632,7 +634,7 @@
 
     .column-1,
     .column-2 {
-      width: 93vw;
+      width: inherit;
       
       @include breakpoint(tablet) {
         max-width: 350px;

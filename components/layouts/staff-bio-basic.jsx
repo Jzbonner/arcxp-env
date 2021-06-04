@@ -60,13 +60,13 @@ const staffBioPage = () => {
     <>
       <GlobalAdSlots/>
       {!noHeaderAndFooter && <TopNavBreakingNews />}
-      <main className='c-listPage b-contentMaxWidth'>
+      <main className='c-listPage b-contentMaxWidth b-sectionHome-padding'>
           {!noAds
           && <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />
               <ArcAd staticSlot={'MP01'} />
             </div>}
-        <div className='c-section with-rightRail b-sectionHome-padding'>
+        <div className='c-section with-rightRail'>
         <StaffBio role={role}
         authorPhoto={authorPhoto}
         byline={byline}

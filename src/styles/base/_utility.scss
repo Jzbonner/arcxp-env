@@ -23,19 +23,6 @@
   display: none;
 }
 
-.b-pageContainer {
-  width: calc(100% - #{2 * $min-margin});
-  margin: 0 auto;
-
-  &:empty {
-    display: none;
-  }
-  
-  @include breakpoint(desktop-sm) {
-    width: calc(100% - #{4 * $min-margin});
-  }
-}
-
 .b-margin-bottom-1 {
   margin-bottom: 1em;
 }
@@ -231,26 +218,32 @@
 }
 
 .b-sectionHome-padding {
-  padding: 0 $min-margin;
-
-  @include breakpoint(tablet) {
+  @include between-breakpoints(mobile, tablet) {
     padding: 0 20px;
   }
 
-  @include breakpoint(desktop-sm) {
+  @include between-breakpoints(tablet, desktop-sm) {
     padding: 0 40px;
   }
 
-  @include breakpoint(desktop-lg) {
+  @include between-breakpoints(desktop-sm, desktop-xxl) {
     padding: 0 30px;
+  }
+
+  @include between-breakpoints(desktop-xxl, desktop-xxxl) {
+    padding: 0 20px;
+  }
+
+  @include breakpoint(desktop-xxxl) {
+    padding: 0;
   }
 }
 
 .b-contentMaxWidth {
   margin: 0 auto;
-
-  @include breakpoint(desktop-lg) {
-    max-width: 880px;
+  
+  @include breakpoint(desktop-sm) {
+    max-width: 820px;
   }
 }
 
