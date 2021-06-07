@@ -4,7 +4,7 @@
 .c-staff-page-header {
   min-height: 61px;
   height: auto;
-  width: calc(100% - 48px);
+  width: calc(100% - 40px);
   margin: 0 auto 25px;
   padding-top: 20px;
   display: flex;
@@ -34,15 +34,13 @@
     bottom: 11px;
   }
 
-  @include breakpoint(tablet) {
+  @include between-breakpoints(tablet, desktop-sm) {
     width: 90%;
   }
 
   @include breakpoint(desktop-sm) {
     min-height: 97px;
     margin: 0 auto 26px;
-    width: 94%;
-    max-width: 1600px;
     padding-top: 40px;
 
     h2 {
@@ -54,11 +52,25 @@
       bottom: 18px;
     }
   }
+
+  @include between-breakpoints(desktop-sm, desktop-xxl) {
+    width: 95%;
+  }
+
+  @include between-breakpoints(desktop-xxl, desktop-xxxl) {
+    width: 97%;
+  }
+
+  @include breakpoint(desktop-xxxl) {
+    width: 100%;
+    max-width: 1540px;
+  }
 }
 
 .c-staff-page-main {
-  width: calc(100% - 28px);
+  width: calc(100% - 40px);
   display: flex;
+  justify-content: center;
   margin: 0 24px;
   position: relative;
   border-radius: 4px;
@@ -80,7 +92,7 @@
   }
 
   .c-staffers {
-    width: calc(100% - 40px);
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-content: baseline;
@@ -120,8 +132,8 @@
     }
   }
 
-  @include breakpoint(tablet) {
-    width: 90%;
+  @include between-breakpoints(tablet, desktop-sm) {
+    width: calc(100% - 80px);
     margin: 0 auto;
 
     .c-staffers {
@@ -129,10 +141,17 @@
     }
   }
 
-  @include breakpoint(desktop-sm) {
-    width: 94%;
-    max-width: 1600px;
+  @include between-breakpoints(desktop-sm, desktop-xxl) {
+    width: calc(100% - 60px);
+  }
+
+  @include breakpoint(desktop-xxl) {
+    width: 100%;
+    max-width: 1540px;
     margin: 0 auto;
+  }
+
+  @include breakpoint(desktop-sm) {
 
     .c-staffers {
       padding-left: 42px;

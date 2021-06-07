@@ -2,13 +2,12 @@
 
 .c-revenue {
   background-color: #ededed;
-  width: 100vw;
-  padding: 1.25rem 0;
+  padding: 1.25rem 0 0;
+  width: inherit;
   margin-bottom: $min-Msection-margin;
 
   @include breakpoint(desktop-sm) {
     padding-top: 2rem;
-    width: calc(100vw - 1rem - 1px);
     margin-bottom: $min-DTsection-margin;
   }
 

@@ -32,7 +32,6 @@
   // Common Styles Used By All the Display Classes
 
   .c-homeList {
-    margin-bottom: 3rem;
     width: 100%;
 
     &:last-child {
@@ -44,7 +43,6 @@
     }
 
     @include breakpoint(desktop-sm) {
-      margin-bottom: 2rem;
       margin-right: 3.3%;
       width: 100%;
     }
@@ -205,13 +203,6 @@
   // Top Photo styles
 
   &.top-photo-display-class {
-    margin-left: -$min-margin;
-    margin-right: -$min-margin;
-
-    @include breakpoint(tablet) {
-      margin-right: 0;
-      margin-left: 0;
-    }
 
     .c-label-wrapper {
       @include breakpoint(desktop-sm) {
@@ -254,7 +245,6 @@
   &.left-photo-small-display-class {
 
     .c-homeList {
-      margin-bottom: 40px;
       display: flex;
 
       .article-timestamp {
@@ -315,7 +305,6 @@
   &.left-photo-small-display-class {
 
     .c-homeList {
-      margin-bottom: 20px;
 
       .homeList-image {
         @include breakpoint(desktop-sm) {

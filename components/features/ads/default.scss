@@ -15,9 +15,10 @@
 
   &.c-sectionHome {
     max-width: 1540px;
+    margin-bottom: 10px;
 
     @include between-breakpoints(mobile, tablet) {
-      width: 94%;
+      width: 100%;
       padding: 0;
     }
   }
