@@ -50,10 +50,6 @@
         display: none;
       }
 
-      @include breakpoint(desktop-sm) {
-        padding-bottom: 30px;
-      }
-
       .itemList {
         display: flex;
         position: relative;

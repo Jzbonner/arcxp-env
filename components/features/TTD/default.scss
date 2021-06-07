@@ -68,14 +68,14 @@
         }
 
         .headline-box {
-          padding: 20px 0;
+          padding: 25px 0 0;
           background: none;
           border-radius: 0;
           box-shadow: unset;
           top: 0;
 
           @include breakpoint(tablet) {
-            top: 10px;
+            padding: 0;
           }
 
           .headline {

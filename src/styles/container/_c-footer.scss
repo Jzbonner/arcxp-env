@@ -213,7 +213,7 @@ body .Mg2-connext[data-display-type] {
       @include breakpoint(desktop-sm) {
         border-top: none;
         flex: 1;
-        padding: 0 $min-margin 0 0;
+        padding-right: 0;
 
         &:first-child {
           margin-top: 0;
@@ -255,6 +255,10 @@ body .Mg2-connext[data-display-type] {
         display: block;
         max-width: 1600px;
         padding: 0 20px 0 10px;
+
+        @include between-breakpoints(desktop-sm, desktop-lg) {
+          padding-right: 0;
+        }
 
         @include breakpoint(desktop-sm) {
           margin-top: 1.25rem;
