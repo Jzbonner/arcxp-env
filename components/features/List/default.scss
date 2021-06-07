@@ -273,13 +273,32 @@
 
           &.listPage {
             text-align: left;
+            margin-left: 0;
+
+            @include text-styles(.875rem, 1.47, "Lora-Bold");
+
+            font-weight: 700;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: -.08px;
+
+            @include breakpoint(desktop-lg) {
+              max-width: 60%;
+            }
           }
         }
       }
 
       &.listPage {
-        margin-bottom: 1rem;
         width: 100%;
+        justify-content: space-between;
+        border-bottom: 1px #dadada solid;
+        padding-bottom: .063rem;
+        margin-bottom: .875rem;
+
+        .article-timestamp {
+          margin-left: 0;
+        }
 
         @include breakpoint(desktop-sm) {
           margin-bottom: 2rem;
@@ -287,6 +306,7 @@
       }
 
       &.isMissingPromo {
+        padding-bottom: .75rem;
 
         .homeList-text {
           width: 100%;
