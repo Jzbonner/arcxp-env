@@ -7,4 +7,5 @@ module.exports = {
   sportradarAPIkey: 'mmwnrjmhcnx9wp87ptf4mqf5',
   sportradarAPIVersion: 'v3',
   sportradarAccessLevel: 'production',
+  searchPageKey: 'fCEj1NJ92085IDY9trZAk4YydlTZjWTJ5tGWAys4',
 };
