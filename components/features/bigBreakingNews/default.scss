@@ -28,9 +28,6 @@
 
       @include breakpoint(desktop-sm) {
         padding: 0 20px 0 0;
-      }
-
-      @include between-breakpoints(desktop-sm, desktop-lg) {
         flex: 1 65%;
       }
 
