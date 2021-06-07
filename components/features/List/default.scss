@@ -33,6 +33,7 @@
 
   .c-homeList {
     width: 100%;
+    margin-bottom: 15px;
 
     &:last-child {
       margin-bottom: 0;
@@ -96,6 +97,10 @@
 
         letter-spacing: -.09px;
         margin-bottom: 10px;
+
+        @include breakpoint(desktop-lg) {
+          @include text-styles(.9375rem, 1.17, "Lora");
+        }
       }
     }
   }
@@ -236,6 +241,10 @@
 
     .headline {
       text-align: left;
+
+      @include between-breakpoints(mobile, desktop-sm) {
+        padding-top: 15px;
+      }
     }
   }
 
@@ -305,11 +314,13 @@
   &.left-photo-small-display-class {
 
     .c-homeList {
+      margin-bottom: 15px;
 
       .homeList-image {
         @include breakpoint(desktop-sm) {
           max-width: calc(20% - 7.5px);
           min-width: 110px;
+          margin-bottom: 0;
         }
       }
 
@@ -332,6 +343,10 @@
         @include text-styles(1rem, 1.38, "Lora");
 
         letter-spacing: -.09px;
+
+        @include breakpoint(desktop-lg) {
+          @include text-styles(.9375rem, 1.38, "Lora");
+        }
       }
     }
   }
