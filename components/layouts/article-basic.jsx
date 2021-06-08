@@ -241,10 +241,10 @@ const StoryPageLayout = () => {
       {!noHeaderAndFooter && (
         <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} noAds={noAds} />
       )}
+      <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
       <main className="c-articleContent b-contentMaxWidth b-sectionHome-padding">
         <header className="b-margin-bottom-d30-m30">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
-            <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
             <Headline
               headlines={headlines}
               basicItems={basicItems}
