@@ -13,7 +13,6 @@ import AREAS_OF_EXPERTISE from './_helper_functions/staffpage/AREAS_OF_EXPERTISE
 import getQueryParams from './_helper_functions/getQueryParams';
 
 import '../../src/styles/container/_all-staff.scss';
-import '../../src/styles/base/_utility.scss';
 
 export const AllStaffPage = () => {
   const appContext = useAppContext();
@@ -108,7 +107,7 @@ export const AllStaffPage = () => {
         </div>
         <h2>Newsroom</h2>
       </header>
-      <main className={'c-staff-page-main b-margin-bottom-d30-m20'}>
+      <main className={'c-staff-page-main b-margin-bottom-d30-m20 b-sectionHomeMaxWidth'}>
         <AuthorMenu
           selectedLeftMenuItem={selectedLeftMenuItem}
           setCategory={setCategory}

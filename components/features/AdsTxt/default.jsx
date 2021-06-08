@@ -2,7 +2,7 @@ import React from 'react';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import PropTypes from 'prop-types';
-import get from 'lodash.get';
+import get from 'lodash/get';
 
 const AdsTxt = (customFields = {}) => {
   const fusionContext = useFusionContext();

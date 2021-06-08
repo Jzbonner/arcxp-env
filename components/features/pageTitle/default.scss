@@ -4,30 +4,22 @@
   width: 100%;
   max-width: 1600px;
   text-align: center;
-  margin: 1.25rem 0;
+  margin: 0 0 1.25rem;
 
   .c-title-content {
     color: #313132;
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
-
-    @include text-styles(2.5em, 1, "Average");
-
-    &:before,
-    &:after {
-      content: "";
-      flex: 1 1;
-      margin: 0 10px 5px;
-      border-bottom: 2px solid #aeaeae;
-
-      @include breakpoint(desktop-sm) {
-        margin: 0 10px 9px;
-      }
-    }
+    font-family: "Gordita-Bold", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -.56px;
+    border-bottom: solid 1px #cdcdcd;
+    padding: 0 0 10px;
 
     @include breakpoint(desktop-sm) {
-      @include text-styles(3.5em, 1, "Average");
+      font-size: 45px;
     }
   }
 }

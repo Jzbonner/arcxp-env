@@ -4,13 +4,15 @@
   margin-bottom: $min-Msection-margin;
 
   @include breakpoint(tablet) {
-    padding: 0 20px;
+    padding-right: 0;
+    padding-left: 20px;
     border-left: solid 1px #cdcdcd;
     margin-left: -20px;
   }
 
   @include breakpoint(desktop-sm) {
-    width: 100%;
+    width: calc(100% - 10px);
+    margin-left: -10px;
     margin-bottom: $min-DTsection-margin;
   }
   
@@ -37,8 +39,9 @@
   
       .c-homeList {
         padding-top: $min-margin;
-        margin-right: 0;
         border-bottom: 1px solid #cdcdcd;
+        margin: 0;
+        text-align: left;
 
         &:first-child {
           padding-top: 0;
@@ -53,6 +56,7 @@
   
           .headline {
             letter-spacing: -.09px;
+            margin-bottom: $min-margin;
 
             @include text-styles(1rem, 1.25, "Lora-Bold");
           }

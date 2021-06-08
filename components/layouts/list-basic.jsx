@@ -6,7 +6,6 @@ import getQueryParams from './_helper_functions/getQueryParams';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import ListPage from '../_helper_components/listpage/default';
-import '../../src/styles/container/_homepage.scss';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 
 const ListPageLayout = (props) => {

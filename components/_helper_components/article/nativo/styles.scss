@@ -1,3 +1,4 @@
+/* stylelint-disable declaration-no-important */
 @import "./../../../../src/styles/base/mixins";
 @import "./../../../../src/styles/base/breakpoints";
 
@@ -7,27 +8,21 @@ article {
   .story-nativo_placeholder--boap elements with .ntv-moap and .ntv-boap elements
  */
 
-  .ntv-moap:before {
-    @include text-styles(1rem, 1, "Gordita");
-
-    @include breakpoint(desktop-sm) {
-      @include text-styles(1.125rem, 1, "Gordita");
-    }
-
-    @include section();
-
-    font-style: italic;
-    content: "Article continues below";
-    margin-bottom: 25px;
-    padding: 0 $min-margin;
-  }
-
   .taboola-split {
     display: flex;
   }
 
   .ntv-moap,
   .ntv-boap {
+    @include amp-exclude {
+      clear: none !important;
+      float: none;
+    }
+
+    margin: 0 auto;
+    padding: 0;
+    text-align: left;
+
     @media (max-width: 747px) {
       max-width: initial;
     }
@@ -41,39 +36,21 @@ article {
 
     .ntv-enter {
       box-sizing: border-box;
-      padding-left: calc((100% - 340px) / 2);
-      padding-right: calc((100% - 340px) / 2);
-      margin-bottom: 1.13rem;
+      background: #ededed;
+      box-shadow: none;
+      padding: 12px;
+      margin-bottom: 1.25rem;
 
       @include breakpoint(tablet) {
-        padding-right: calc((100% - 88.3%) / 2);
-        padding-left: calc((100% - 88.3%) / 2);
+        padding: 20px;
       }
 
       @include breakpoint(desktop-sm) {
-        padding-left: calc((100% - 83.9%) / 2);
-        padding-right: calc((100% - 83.9%) / 2);
-        margin-bottom: 2.5rem;
-      }
-
-      @include breakpoint(desktop-lg) {
-        padding-left: calc(((100% - 60.7%) / 2));
-        padding-right: calc(((100% - 60.7%) / 2));
-      }
-
-      /*
-  1780px comes from 1080px / .607 (60.7%)
-  1780px is the screen width at which 60.7% of the screen width becomes more than 1080px
-  Since 1080px is the max width of the contentElements, to keep the content of the Nativo element within
-  this boundary, our padding calculations changes at 1780px.
-  */
-      @media (min-width: 1780px) {
-        padding-left: calc(((100% - 1080px) / 2));
-        padding-right: calc(((100% - 1080px) / 2));
+        margin-bottom: 1.875rem;
       }
 
       .ntv-disclaimer {
-        @include text-styles(.75rem, 1, "Gordita-Medium");
+        @include text-styles(.625rem, 1.25rem, "Gordita-Medium");
 
         font-weight: 500;
         display: inline-flex;
@@ -81,17 +58,49 @@ article {
         background: none;
         text-transform: uppercase;
         color: #000;
+        margin-bottom: 5px;
 
-        a {
-          color: #000 !important; /*stylelint-disable declaration-no-important*/
+        @include amp-exclude {
+
+          a {
+            color: #000 !important;
+          }
+        }
+
+        @include breakpoint(tablet) {
+          @include text-styles(.6875rem, 1.25rem, "Gordita-Medium");
+        }
+      }
+
+      @include amp-exclude {
+
+        .ntv-image img {
+          border-radius: none !important;
         }
       }
 
       .ntv-byline {
         box-sizing: border-box;
         font-weight: 400;
+        letter-spacing: -.19px;
+        padding: 8px 0;
+        border-radius: 0;
+        text-align: center;
 
-        @include text-styles(1rem, 1.25, "Gordita");
+        @include text-styles(.625rem, 1, "Gordita");
+      }
+
+      .ntv-title {
+        letter-spacing: -.31px;
+        margin: 0;
+
+        @include text-styles(1rem, 1.375, "Gordita");
+
+        @include breakpoint(tablet) {
+          letter-spacing: -.42px;
+
+          @include text-styles(1.375rem, 1.875rem, "Gordita");
+        }
       }
     }
   }

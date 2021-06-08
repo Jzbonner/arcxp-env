@@ -1,56 +1,43 @@
-import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+/* eslint-disable no-nested-ternary */
 import getVideoAuthor from './getVideoAuthor';
+import mediaObj from './mediaObj';
 
-export const getMediaContent = (type, siteID, globalContent, promoItems, newsletterFeed = false) => {
+export const getMediaContent = (type, siteID, globalContent, promoItems, newsletterFeed = false, standardFeed = false) => {
   let formattedMediaContent = [];
   let formatterGalleryArray = [];
   let leadObject = {};
 
-  const { basic = {} } = promoItems || {};
 
+  const standaloneGallery = type === 'gallery';
+  const { basic = {} } = promoItems || {};
   const {
     type: promoItemsType = '',
-    url: basicUrl,
-    caption: basicCaption,
-    subtitle: basicSubtitle,
-    headlines: basicHeadlines,
+    url: basicUrl = '',
+    caption: basicCaption = '',
+    subtitle: basicSubtitle = '',
+    headlines: basicHeadlines = '',
     credits: basicCredits = {},
     streams: basicStreams = [],
     promo_image: basicPromoImage = {},
+    promo_items: basicPromoItems = {},
+    content_elements: basicContentElements = [],
   } = basic || {};
+
+  const { basic: basicGalleryPromo } = basicPromoItems || {};
+  const {
+    credits: basicGalleryCredits = '', url: basicGalleryUrl = '', caption: basicGalleryCaption = '', subtitle: basicGallerySubtitle = '',
+  } = basicGalleryPromo || {};
+
+  const galleryMediaCredit = basicGalleryCredits && basicGalleryCredits.affiliation && basicGalleryCredits.affiliation[0] && basicGalleryCredits.affiliation[0].name && basicGalleryCredits.affiliation[0].name !== '' ? basicGalleryCredits.affiliation[0].name : basicGalleryCredits && basicGalleryCredits.by && basicGalleryCredits.by[0] && basicGalleryCredits.by[0].name
+    ? basicGalleryCredits.by[0].name : basicGalleryCredits && basicGalleryCredits.by && basicGalleryCredits.by[0] && basicGalleryCredits.by[0].referent && basicGalleryCredits.by[0].referent && basicGalleryCredits.by[0].referent.id ? basicGalleryCredits.by[0].referent.id : '';
   const { meta_title: metaTitle, basic: baseHeadline } = basicHeadlines || {};
   let mediaTitle = basicSubtitle;
   if (!mediaTitle) {
     mediaTitle = metaTitle || baseHeadline || '';
   }
-
-  const basicAuthor = basicCredits.affiliation && basicCredits.affiliation.by ? basicCredits.affiliation.by.id : '';
-  const checkCaption = basicCaption || '';
-
-  if (promoItemsType === 'image') {
-    leadObject = {
-      _name: 'media:content',
-      _attrs: {
-        type: 'image/JPEG',
-        medium: 'image',
-        url: `${imageResizer(basicUrl, siteID)}`,
-      },
-      _content: [
-        {
-          'media:title': `<![CDATA[${mediaTitle}]]>`,
-        },
-        {
-          'media:description': `<![CDATA[${checkCaption}]]>`,
-        },
-        {
-          _name: 'media:credit',
-          _attrs: {
-            role: 'author',
-          },
-          _content: `<![CDATA[${basicAuthor}]]>`,
-        },
-      ],
-    };
+  const basicAuthor = basicCredits && basicCredits.affiliation && basicCredits.affiliation[0] && basicCredits.affiliation[0].name && basicCredits.affiliation[0].name !== '' ? basicCredits.affiliation[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].name ? basicCredits.by[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].referent && basicCredits.by[0].referent.id ? basicCredits.by[0].referent.id : '';
+  if (promoItemsType === 'image' && !standaloneGallery) {
+    leadObject = basicUrl && basicUrl !== '' ? mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor, true, basicUrl, true) : basicGalleryPromo ? mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit, true, basicGalleryUrl, true) : {};
   }
 
   if (promoItemsType === 'video') {
@@ -71,93 +58,41 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     const { caption: videoCaption, url: basicThumbNailImage = '' } = basicPromoImage || {};
     const videoAuthor = getVideoAuthor(basic);
     const checkVideoCaption = videoCaption || '';
-
-    leadObject = {
-      _name: 'media:content',
-      _attrs: {
-        type: `${leadObjectType}`,
-        medium: 'video',
-        url: `${leadObjectUrl}`,
-      },
-      _content: [
-        {
-          'media:title': `<![CDATA[${mediaTitle}]]>`,
-        },
-        {
-          'media:description': `<![CDATA[${checkVideoCaption}]]>`,
-        },
-        {
-          _name: 'media:thumbnail',
-          _attrs: {
-            url: `${imageResizer(basicThumbNailImage, siteID)}`,
-          },
-        },
-        {
-          _name: 'media:credit',
-          _attrs: {
-            role: 'author',
-          },
-          _content: `<![CDATA[${videoAuthor}]]>`,
-        },
-      ],
-    };
+    leadObject = mediaObj(leadObjectType, 'video', leadObjectUrl, siteID, mediaTitle, checkVideoCaption, videoAuthor, true, basicThumbNailImage, false);
   }
 
-  if (promoItemsType === 'gallery') {
-    const { content_elements: galleryContentElements = [] } = basic || {};
-    if (newsletterFeed) {
-      const firstImageInGallery = galleryContentElements && galleryContentElements[0];
-      const { caption: firstImageInGalleryCaption, url: firstImageInGalleryUrl } = firstImageInGallery || {};
+  if (promoItemsType === 'gallery' || standaloneGallery || !standaloneGallery) {
+    if (newsletterFeed || standardFeed) {
+      if (standaloneGallery) {
+        leadObject = mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor, true, basicUrl, true);
+      } else {
+        leadObject = basicGalleryPromo ? mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit, true, basicGalleryUrl, true) : mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor, true, basicUrl, true);
+      }
+    } else if (!standaloneGallery) {
+      formatterGalleryArray = basicContentElements.map((item) => {
+        const {
+          caption: itemCaption = '', url: itemUrl = '', credits: creditsArray = '', subtitle: itemTitle = '',
+        } = item || {};
+        const appFeedCredit = creditsArray && creditsArray.affiliation && creditsArray.affiliation[0] && creditsArray.affiliation[0].name && creditsArray.affiliation[0].name !== '' ? creditsArray.affiliation[0].name : creditsArray && creditsArray.by && creditsArray.by[0] && creditsArray.by[0].name ? creditsArray.by[0].name : creditsArray && creditsArray.by && creditsArray.by[0] && creditsArray.by[0].referent && creditsArray.by[0].referent.id ? creditsArray.by[0].referent.id : '';
 
-      leadObject = {
-        _name: 'media:content',
-        _attrs: {
-          type: 'image/JPEG',
-          medium: 'image',
-          url: `${imageResizer(firstImageInGalleryUrl, siteID)}`,
-        },
-        _content: [
-          {
-            'media:title': `<![CDATA[${mediaTitle}]]>`,
-          },
-          {
-            'media:description': `<![CDATA[${firstImageInGalleryCaption}]]>`,
-          },
-          {
-            _name: 'media:credit',
-            _attrs: {
-              role: 'author',
-            },
-            _content: `<![CDATA[${basicAuthor}]]>`,
-          },
-        ],
-      };
+        // Have to implement an additional check for collections to see if there isn't already a lead object (which is usually the case for collections)
+        if (basicGalleryUrl === itemUrl && !Object.prototype.hasOwnProperty.call(leadObject, '_name')) {
+          leadObject = mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, true, basicGalleryUrl, true);
+          return {};
+        }
+        return mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, false, false, true);
+      });
     } else {
-      formatterGalleryArray = galleryContentElements.map((item) => {
-        const { caption: itemCaption, url: itemUrl } = item || {};
-        return {
-          _name: 'media:content',
-          _attrs: {
-            type: 'image/JPEG',
-            medium: 'image',
-            url: `${imageResizer(itemUrl, siteID)}`,
-          },
-          _content: [
-            {
-              'media:title': `<![CDATA[${mediaTitle}]]>`,
-            },
-            {
-              'media:description': `<![CDATA[${itemCaption}]]>`,
-            },
-            {
-              _name: 'media:credit',
-              _attrs: {
-                role: 'author',
-              },
-              _content: `<![CDATA[${basicAuthor}]]>`,
-            },
-          ],
-        };
+      formatterGalleryArray = basicContentElements.map((item) => {
+        const {
+          caption: itemCaption, url: itemUrl, credits: creditsArray = '', subtitle: itemTitle = '',
+        } = item || {};
+        const appFeedCredit = creditsArray.affiliation && creditsArray.affiliation.by && creditsArray.affiliation.by.name ? creditsArray.affiliation.by.name : creditsArray && creditsArray.by && creditsArray.by[0] && creditsArray.by[0].name ? creditsArray.by[0].name : '';
+        if (basicUrl === itemUrl) {
+          leadObject = mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, true, basicUrl, true);
+          return {};
+        }
+        return mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, false, false, true);
       });
     }
   }
@@ -173,16 +108,13 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         credits: mediaCredits = {},
         streams: mediaStreams = [],
       } = media || {};
-
+      const mediaAuthor = mediaCredits && mediaCredits.affiliation && mediaCredits.affiliation[0] && mediaCredits.affiliation[0].name && mediaCredits.affiliation[0].name !== '' ? mediaCredits.affiliation[0].name : mediaCredits.affiliation && mediaCredits.affiliation.by && mediaCredits.affiliation.by.name ? mediaCredits.affiliation.by.name : mediaCredits && mediaCredits.by && mediaCredits.by[0] && mediaCredits.by[0].name ? mediaCredits.by[0].name : '';
       // per Surendra: For stories, we are not adding inline images to media:content.
       if (type === 'story') {
         return {};
       }
 
-      let resizerUrl = url;
       let mediaObjectUrl = '';
-
-      const mediaAuthor = mediaCredits.affiliation && mediaCredits.affiliation.by ? mediaCredits.affiliation.by.id : '';
       let mediaType = localType === 'image' ? 'image/JPEG' : 'video/mp4';
       const mediaMedium = localType === 'image' ? 'image' : 'video';
 
@@ -199,41 +131,24 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
           mediaType = 'video/mp4';
           mediaObjectUrl = mp4Url;
         }
+        mediaObjectUrl = url;
       }
 
-      if (mediaMedium === 'image') {
-        resizerUrl = imageResizer(url, siteID);
+      if (basicUrl === url) {
+        leadObject = mediaObj(mediaType, mediaMedium, `${localType === 'image' ? url : mediaObjectUrl}`, siteID, subtitle, caption, mediaAuthor, true, mediaObjectUrl, true);
+        return {};
       }
-
-      return {
-        _name: 'media:content',
-        _attrs: {
-          type: `${mediaType}`,
-          medium: `${mediaMedium}`,
-          url: `${localType === 'image' ? resizerUrl : mediaObjectUrl}`,
-        },
-        _content: [
-          {
-            'media:title': `<![CDATA[${subtitle}]]>`,
-          },
-          {
-            'media:description': `<![CDATA[${caption}]]>`,
-          },
-          {
-            _name: 'media:credit',
-            _attrs: {
-              role: 'author',
-            },
-            _content: `<![CDATA[${mediaAuthor}]]>`,
-          },
-        ],
-      };
+      return mediaObj(mediaType, mediaMedium, `${localType === 'image' ? url : mediaObjectUrl}`, siteID, subtitle, caption, mediaAuthor, false, '', true);
     });
   }
 
-  if (!newsletterFeed && promoItemsType === 'gallery') {
-    return [...formatterGalleryArray, ...formattedMediaContent];
+  if (!newsletterFeed && !standardFeed && !standaloneGallery) {
+    return [leadObject, ...formatterGalleryArray, ...formattedMediaContent];
   }
+  if ((newsletterFeed || standardFeed) && standaloneGallery) {
+    return [leadObject];
+  }
+
   return [leadObject, ...formattedMediaContent];
 };
 

@@ -25,7 +25,7 @@ const Special = (customFields = {}) => {
   if (!backgroundImgSrc) return null;
 
   return (
-    <a href={url || ''}>
+    <a href={url || ''} style={{ width: 'inherit' }}>
       <div
         className="c-special"
            style={{

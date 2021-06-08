@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Parser } from 'htmlparser2';
-import get from 'lodash.get';
+import get from 'lodash/get';
 import ScriptWrapper from './components/Script/default';
 import ExpandableTextMessage from './components/ExpandableTextMessage/default';
 import PymLoader from './components/PymLoader/default';

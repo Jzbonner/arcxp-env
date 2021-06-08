@@ -186,7 +186,47 @@
         ]
       }
     },
+    "RP01-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "21716543",
+              "placementName": "SNS_ROS_Desktop_RP01_0621"
+            }
+          }
+        ]
+      }
+    },
     "RP01-tablet": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "21716548",
+              "placementName": "SNS_ROS_Tablet_RP01_0621"
+            }
+          }
+        ]
+      }
+    },
+    "RP01-story-tablet": {
       "amazon": {
         "enabled": "true"
       },
@@ -226,6 +266,46 @@
         ]
       }
     },
+    "RP03-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "21716553",
+              "placementName": "SNS_ROS_Desktop_RP03_0621"
+            }
+          }
+        ]
+      }
+    },
+    "RP03-tablet": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "21716558",
+              "placementName": "SNS_ROS_Tablet_RP03_0621"
+            }
+          }
+        ]
+      }
+    },
     "RP09": {
       "amazon": {
         "enabled": "true"
@@ -247,6 +327,46 @@
       }
     },
     "RP09-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "21716563",
+              "placementName": "SNS_ROS_Desktop_RP09_0621"
+            }
+          }
+        ]
+      }
+    },
+    "RP09-tablet": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "21716569",
+              "placementName": "SNS_ROS_Tablet_RP09_0621"
+            }
+          }
+        ]
+      }
+    },
+    "RP09-story-desktop": {
       "amazon": {
         "enabled": "true"
       },

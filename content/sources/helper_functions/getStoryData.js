@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import axios from 'axios';
-import _ from 'lodash';
+import flatten from 'lodash/flatten';
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 
 export default (site = 'ajc', contentElements) => {
@@ -57,7 +57,7 @@ export default (site = 'ajc', contentElements) => {
         storyDataArray.push(dataContentElements);
       });
 
-      const flattenStoryDataArray = _.flatten(storyDataArray);
+      const flattenStoryDataArray = flatten(storyDataArray);
 
       return contentElements.map((story) => {
         const clonedStory = Object.assign({}, story);

@@ -35,14 +35,13 @@ import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/d
 import InterscrollerPlaceholder from '../_helper_components/article/interscroller/default';
 import SponsorStoryMessage from '../_helper_components/article/sponsorStoryMessage/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
-import '../../src/styles/container/_article-basic.scss';
-import '../../src/styles/base/_utility.scss';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 import RelatedList from '../_helper_components/article/relatedList/default';
 import ConnextThankYouMessage from '../_helper_components/global/ConnextThankYouMessage/amp';
 import NonSubPremiumMessage from '../_helper_components/amp/nonSubPremiumMessage/default';
 import PaywallLimitMessage from '../_helper_components/amp/paywallLimitMessage/default';
 import SponsorRelatedBoxAMP from '../_helper_components/article/sponsorRelatedBox/amp';
+import PartnerBadge from '../_helper_components/article/partnerBadge/default';
 
 const start = 3;
 
@@ -125,7 +124,6 @@ const StoryPageLayout = () => {
 
   let infoBoxIndex = null;
   let paragraphIndex = 0;
-  const BlogAuthorComponent = () => <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />;
   const insertAtEndOfStory = [];
 
   filteredContentElements.forEach((el, i) => {
@@ -147,25 +145,6 @@ const StoryPageLayout = () => {
     infoBoxIndex += 1;
   } else if (!ampPage) {
     insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
-  }
-  // about the author should be the last component of the story
-  insertAtEndOfStory.push(BlogAuthorComponent);
-
-  // sponsor box should appear right after blog author component
-  if (sponsorSectionID) {
-    if (ampPage) {
-      insertAtEndOfStory.push(<SponsorRelatedBoxAMP
-        hideRelatedList={hideRelatedList}
-        sponsorID={sponsorSectionID}
-        taxonomy={taxonomy}
-        uuid={uuid} />);
-    } else {
-      insertAtEndOfStory.push(<SponsorRelatedBox
-        hideRelatedList={hideRelatedList}
-        sponsorID={sponsorSectionID}
-        taxonomy={taxonomy}
-        uuid={uuid} />);
-    }
   }
 
   const storyContentOutput = () => <>
@@ -226,12 +205,28 @@ const StoryPageLayout = () => {
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
       ampPage={ampPage}
     />
+
+    {sponsorSectionID && (
+      // sponsor box should appear right before blog author component
+      ampPage ? <SponsorRelatedBoxAMP
+          hideRelatedList={hideRelatedList}
+          sponsorID={sponsorSectionID}
+          taxonomy={taxonomy}
+          uuid={uuid} />
+        : <SponsorRelatedBox
+          hideRelatedList={hideRelatedList}
+          sponsorID={sponsorSectionID}
+          taxonomy={taxonomy}
+          uuid={uuid} />
+    )}
     {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && (
       <div className="c-section full-width b-clear-both">
         <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} />
       </div>
     )}
-    {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
+    {/* about the author should be the last component of the story */}
+    {<div className="c-section full-width b-clear-both"><BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} /></div>}
+    {!noAds && !isHyperlocalContent && <div className="b-padding-top-30"><TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} /></div>}
     {!noAds && !isHyperlocalContent && !sponsorSectionID && (
       <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
     )}
@@ -246,10 +241,10 @@ const StoryPageLayout = () => {
       {!noHeaderAndFooter && (
         <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} noAds={noAds} />
       )}
-      <main className="c-articleContent">
-        <header className="b-margin-bottom-d30-m20">
+      <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
+      <main className="c-articleContent b-contentMaxWidth b-sectionHome-padding">
+        <header className="b-margin-bottom-d30-m30">
           <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
-            <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
             <Headline
               headlines={headlines}
               basicItems={basicItems}
@@ -259,12 +254,17 @@ const StoryPageLayout = () => {
               lazyLoad={isMeteredStory} />
           </div>
           <div
-            style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
-            className="c-label-wrapper b-pageContainer b-margin-bottom-d15-m10"
+            style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}
+            className="c-label-wrapper b-margin-bottom-d7-m7"
           >
             {!isCommunityContributor && (
               <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />
             )}
+          </div>
+          <div className="b-flexRow article-byline b-margin-bottom-d7-m7">
+            <Byline by={authorData} sections={sections} />
+          </div>
+          <div className="b-margin-bottom-d7-m7" style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}>
             <TimeStamp
               firstPublishDate={firstPublishDate}
               displayDate={displayDate}
@@ -274,12 +274,10 @@ const StoryPageLayout = () => {
               sponsorContentLabel={sponsorContentLabel}
             />
           </div>
-          <div className="b-flexRow b-flexCenter b-pageContainer">
-            <Byline by={authorData} sections={sections} />
-          </div>
-          <ContributorBadge tags={tags} ampPage={ampPage} />
+          <ContributorBadge tags={tags} ampPage={ampPage}/>
+          <PartnerBadge sections={sections} ampPage={ampPage}/>
           {ampPage && <SocialShare headlines={headlines} articleURL={articleURL} />}
-          <div className="b-flexRow b-flexCenter b-margin-bottom-d15-m10 b-pageContainer">
+          <div className="b-flexRow b-flexCenter b-margin-bottom-d7-m7">
             <SubHeadline subheadlines={subheadlines} />
           </div>
         </header>

@@ -2,13 +2,16 @@
 @import "../../../src/styles/base/breakpoints";
 
 .c-listPage {
+  
+  &.b-sectionHome-padding {
+    padding-top: 1.25rem;
+
+    @include breakpoint(tablet) {
+      padding-top: 1.875rem;
+    }
+  }
 
   .c-section {
-    padding: 0 20px;
-
-    @include breakpoint(desktop-sm) {
-      padding: 0 $min-margin;
-    }
 
     .c-contentElements {
       @include breakpoint(tablet) {
@@ -25,14 +28,26 @@
       }
     }
   }
+
+  .border-top {
+    display: none;
+  }
+
+  .c-hp01-mp01 {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .tease-listHeading {
   text-align: center;
   border-bottom: 1px solid #cdcdcd;
-  padding-bottom: 10px;
   box-sizing: border-box;
   text-transform: capitalize;
+
+  @include between-breakpoints(mobile, desktop-sm) {
+    padding: 10px 0;
+  }
 
   @include text-styles(1.875rem, 1, "Average");
 

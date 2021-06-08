@@ -3,6 +3,7 @@
 @import "../../../src/styles/base/mixins";
 
 .c-flatpage {
+  height: auto;
 
   .RP01.arcad.b-margin-bottom-d40-m20 {
     margin-bottom: 0;
@@ -118,6 +119,14 @@
           font-size: 2.5vw;
         }
       }
+    }
+  }
+
+  @include breakpoint(desktop-lg) {
+    
+    &.b-sectionHomeMaxWidth {
+      max-width: 1540px;
+      margin: 0 auto;
     }
   }
 }

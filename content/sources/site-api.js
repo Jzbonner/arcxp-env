@@ -1,4 +1,4 @@
-const ttl = 3600;
+const ttl = 600;
 const params = {
   type: 'text',
   hierarchy: 'text',

@@ -6,7 +6,7 @@ const GalleryItem = ({
   data, func, modalFunc, isMobileGallery = false,
 }) => {
   const {
-    url, width, height, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass,
+    url, width, height, focal_point: focalPoint, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass, resized_obj: resizedObj,
   } = data;
   const { affiliation = [], caption = [] } = captionObj;
 
@@ -18,9 +18,12 @@ const GalleryItem = ({
 
   if (affiliationCredit && !affiliationCredit.includes('Credit:')) affiliationCredit = `Credit: ${affiliationCredit}`;
 
+  const finalWidth = 720;
+  const finalHeight = 480;
+
   const imageProps = {
-    width: 720,
-    height: 480,
+    width: finalWidth,
+    height: finalHeight,
     imageType: 'isGalleryImage',
     noLazyLoad: isMobileGallery,
     ampPage: false,
@@ -29,8 +32,15 @@ const GalleryItem = ({
       height,
       width,
       alt_text: alt,
+      resized_obj: resizedObj,
+      focal_point: focalPoint,
     },
   };
+  let calculatedWidth = 'auto';
+  if (!isMobile) {
+    // we go ahead and determine what the width of the vertical images will be based on a scaling of height to final height ratio and then set that as the min-width style of each gallery item, to ensure that positioning & overall gallery width is properly calculated (prior to lazyloading of images)
+    calculatedWidth = `${height > width ? Math.floor(width * (finalHeight / height)) : finalWidth}px`;
+  }
 
   return (
     <div
@@ -39,10 +49,11 @@ const GalleryItem = ({
       key={url}
       onClick={func}
       className={`${isStickyVisible ? `gallery-full-item ${isCaptionOn ? lastItemClass : ''}` : 'gallery-image'} ${lastItemClass && isStickyVisible && !isCaptionOn ? 'last-item-height-fix-no-caption' : ''} ${!isStickyVisible && isMobile ? 'mosaic-container' : ''} ${!isMobile ? 'desktop-image' : ''}`}
+      style={{ minWidth: calculatedWidth }}
     >
       {url && <Image
         {...imageProps}
-        additionalClasses={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${isFocused && !isAdVisible ? 'is-focused' : ''}`}
+        additionalClasses={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${(isFocused && !isAdVisible) ? 'is-focused' : ''}`}
         onClickRun={modalFunc ? () => modalFunc(url, isModalVisible) : null}
       />}
       {
@@ -51,7 +62,7 @@ const GalleryItem = ({
             <div className="gallery-credit">
               {
                 (affiliationCredit) || (by && by[0] && by[0].name)
-                  ? (affiliationCredit) || `Credit: ${by && by[0] && by[0].name}` : null
+                  ? (affiliationCredit) || `Photo: ${by && by[0] && by[0].name}` : null
               }
             </div>
             {

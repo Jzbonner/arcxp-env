@@ -2,13 +2,16 @@
 @import "./../../../../src/styles/base/mixins";
 
 .article-timestamp {
-  @include text-styles(.75rem, 2.3, "Gordita");
+  @include text-styles(.688rem, 1.82, "Gordita");
 
   letter-spacing: normal;
   color: #9b9b9b;
 
-  @include breakpoint(tablet) {
-    @include text-styles(.688rem, 2.3, "Gordita");
+  @include breakpoint(desktop-sm) {
+
+    &:not(.isTease) {
+      text-align: center;
+    }
   }
 }
 

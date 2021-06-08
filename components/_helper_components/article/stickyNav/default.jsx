@@ -115,7 +115,7 @@ const StickyNav = ({
 
   return (
     <>
-      <div className={`stickyNav ${hasWindowShade || stickyVisibilityRef.current ? 'is-visible' : ''}`}>
+      <div className={`stickyNav b-sectionHomeMaxWidth ${hasWindowShade || stickyVisibilityRef.current ? 'is-visible' : ''}`}>
         <div className='b-flexRow c-stickyLogin'>
           <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={logoPath} isNonShareablePage={isNonShareablePage} />
           <ul className={`c-stickyNav-list ${siteNameLower}`}>
@@ -181,7 +181,7 @@ StickyNav.propTypes = {
   paddingRef: PropTypes.object,
   hamburgerToggle: PropTypes.bool,
   type: PropTypes.string,
-  sections: PropTypes.object,
+  sections: PropTypes.array,
   articleUrl: PropTypes.string,
   hasWindowShade: PropTypes.bool,
 };

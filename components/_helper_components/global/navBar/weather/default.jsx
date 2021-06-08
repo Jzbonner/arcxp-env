@@ -6,15 +6,17 @@ import currentConditions from '../../utils/weather/currentConditions';
 const Weather = ({ weatherPageUrl }) => {
   const { temp = '', icon = '', text = '' } = currentConditions() || {};
 
-  useEffect(() => {
-    const callback = () => {
-      window.location.href = weatherPageUrl;
-    };
-    const weatherIcon = document.querySelector('.nav-weather.weather-icon');
+  if (weatherPageUrl) {
+    useEffect(() => {
+      const callback = () => {
+        window.location.href = weatherPageUrl;
+      };
+      const weatherIcon = document.querySelector('.nav-weather.weather-icon');
 
-    weatherIcon.addEventListener('click', callback);
-    return () => weatherIcon.removeEventListener('click', callback);
-  }, []);
+      weatherIcon.addEventListener('click', callback);
+      return () => weatherIcon.removeEventListener('click', callback);
+    }, []);
+  }
 
   return (
     <div className="c-weather">

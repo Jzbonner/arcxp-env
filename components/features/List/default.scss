@@ -32,8 +32,8 @@
   // Common Styles Used By All the Display Classes
 
   .c-homeList {
-    margin-bottom: 3rem;
     width: 100%;
+    margin-bottom: 15px;
 
     &:last-child {
       margin-bottom: 0;
@@ -44,7 +44,6 @@
     }
 
     @include breakpoint(desktop-sm) {
-      margin-bottom: 2rem;
       margin-right: 3.3%;
       width: 100%;
     }
@@ -58,10 +57,13 @@
 
     .image-component-image img {
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .24);
-      border-radius: 6px;
     }
 
     .homeList-text {
+
+      .c-tease-icon {
+        margin-left: 15px;
+      }
 
       .c-label-wrapper {
         margin: .6rem 0 .2rem;
@@ -82,7 +84,7 @@
           &.ntv-disc {
             background-color: inherit;
             padding: 0;
-            
+
             a {
               color: #000 !important; /* stylelint-disable-line declaration-no-important */
             }
@@ -95,6 +97,10 @@
 
         letter-spacing: -.09px;
         margin-bottom: 10px;
+
+        @include breakpoint(desktop-lg) {
+          @include text-styles(.9375rem, 1.17, "Lora");
+        }
       }
     }
   }
@@ -163,6 +169,18 @@
 
   &.four-columns {
 
+    &.top-photo-display-class {
+
+      .c-tease-icon {
+        margin-top: 10px;
+        margin-left: 0;
+
+        @include breakpoint(desktop-sm) {
+          margin-top: 0;
+        }
+      }
+    }
+
     .c-homeList {
       @include breakpoint(desktop-sm) {
         width: 22.5%;
@@ -190,13 +208,6 @@
   // Top Photo styles
 
   &.top-photo-display-class {
-    margin-left: -$min-margin;
-    margin-right: -$min-margin;
-
-    @include breakpoint(tablet) {
-      margin-right: 0;
-      margin-left: 0;
-    }
 
     .c-label-wrapper {
       @include breakpoint(desktop-sm) {
@@ -216,10 +227,6 @@
 
       .image-component-image img {
         border-radius: 0;
-  
-        @include breakpoint(tablet) {
-          border-radius: 6px;
-        }
       }
     }
 
@@ -234,6 +241,10 @@
 
     .headline {
       text-align: left;
+
+      @include between-breakpoints(mobile, desktop-sm) {
+        padding-top: 15px;
+      }
     }
   }
 
@@ -243,17 +254,10 @@
   &.left-photo-small-display-class {
 
     .c-homeList {
-      margin-bottom: 40px;
       display: flex;
 
       .article-timestamp {
         margin-left: 15px;
-      }
-
-      .c-sponsorOverlay,
-      .image-component-image .sponsored-story {
-        border-bottom-left-radius: 6px;
-        border-bottom-right-radius: 6px;
       }
 
       .homeList-image {
@@ -306,16 +310,17 @@
   }
 
   //Left Photo Small Display Class
-  
+
   &.left-photo-small-display-class {
 
     .c-homeList {
-      margin-bottom: 20px;
-     
+      margin-bottom: 15px;
+
       .homeList-image {
         @include breakpoint(desktop-sm) {
           max-width: calc(20% - 7.5px);
           min-width: 110px;
+          margin-bottom: 0;
         }
       }
 
@@ -338,6 +343,10 @@
         @include text-styles(1rem, 1.38, "Lora");
 
         letter-spacing: -.09px;
+
+        @include breakpoint(desktop-lg) {
+          @include text-styles(.9375rem, 1.38, "Lora");
+        }
       }
     }
   }
@@ -346,30 +355,120 @@
 
   &.no-photo-display-class {
 
-    .c-homeList {
-      margin-bottom: 0;
-      border-bottom: 1px solid #cdcdcd;
+    &.one-column,
+    &.two-columns,
+    &.three-columns,
+    &.four-columns {
 
-      .c-label-wrapper {
-        text-align: left;
-        margin-bottom: .4rem;
-      }
+      .c-homeList {
 
-      .headline {
-        text-align: left;
-      }
+        &:not(:first-child) {
+          margin: $min-margin 0 0;
+        }
 
-      .homeList-image {
-        display: none;
-      }
+        &:last-child {
+          border-bottom: none;
 
-      .homeList-text {
-        margin: $min-margin 0;
+          .homeList-text {
+            margin-bottom: 0;
+          }
+
+          @include between-breakpoints(mobile, tablet) {
+            margin-bottom: 30px;
+          }
+        }
+
+        border-bottom: 1px solid #cdcdcd;
         width: 100%;
+        margin-bottom: 0;
+
+        .c-label-wrapper {
+          text-align: left;
+          margin-bottom: .4rem;
+        }
+
+        .headline {
+          text-align: left;
+        }
+
+        .homeList-image {
+          display: none;
+        }
+
+        .homeList-text {
+          margin: 0 0 $min-margin;
+          width: 100%;
+
+          .c-tease-icon {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+
+    &.two-columns,
+    &.three-columns,
+    &.four-columns {
+
+      .col-2,
+      .col-3,
+      .col-4 {
+        @include breakpoint(tablet) {
+          border-left: 1px solid #cdcdcd;
+          padding-left: 20px;
+
+          &:not(:last-child) {
+            padding-right: 20px;
+          }
+        }
       }
 
-      &:last-child {
-        border-bottom: none;
+      .col-1 {
+        margin-right: 0;
+        width: 100%;
+
+        @include breakpoint(tablet) {
+          padding-right: 20px;
+        }
+      }
+    }
+
+    &.two-columns {
+
+      .col-1,
+      .col-2 {
+        width: 100%;
+
+        @include breakpoint(tablet) {
+          width: calc((100% - 41px) / 2);
+        }
+      }
+    }
+
+    &.three-columns {
+
+      .col-1,
+      .col-2,
+      .col-3 {
+        width: 100%;
+
+        @include breakpoint(tablet) {
+          width: calc((100% - 82px) / 3);
+        }
+      }
+    }
+
+    &.four-columns {
+
+      .col-1,
+      .col-2,
+      .col-3,
+      .col-4 {
+        width: 100%;
+
+        @include breakpoint(tablet) {
+          width: calc((100% - 123px) / 4);
+        }
       }
     }
   }

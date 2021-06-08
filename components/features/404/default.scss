@@ -3,11 +3,15 @@
 @import "./../../../src/styles/base/breakpoints";
 
 .page-not-found-feature {
-  width: 100%;
+  width: inherit;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
+  .background-image-text {
+    width: inherit;
+  }
 
   .text {
     font-family: "Gordita";
@@ -37,12 +41,12 @@
     background-repeat: no-repeat;
     background-position: center;
     flex: 1;
-    width: 100vw;
+    width: inherit;
     height: auto;
     display: flex;
     justify-content: center;
 
-    @include breakpoint(tablet) {
+    @include breakpoint(desktop-sm) {
       width: 100%;
     }
   }

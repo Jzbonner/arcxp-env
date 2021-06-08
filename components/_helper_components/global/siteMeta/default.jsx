@@ -38,13 +38,13 @@ const SiteMeta = () => {
   const isNativoLandingPage = url === '/native/';
   const { external_distribution: extDistribution, search: visibleInSearch } = syndication || {};
   const hideArticleFromSearch = !!(syndication && !extDistribution && !visibleInSearch);
-
-  const updatedURL = `https://www.${handleSiteName(site)}.com${url === '/homepage' || url === '/homepage/' ? '' : url}`;
+  // only add the sitedomain if the url is relative
+  const updatedURL = `${url.indexOf('http:') > -1 || url.indexOf('https:') > -1 ? '' : `https://www.${handleSiteName(site)}.com`}${url === '/homepage' || url === '/homepage/' ? '' : url}`;
 
   let pageTitle = seoTitle;
   if (!seoTitle) pageTitle = title;
 
-  const parsedDescription = safeHtml(description, { allowedTags: [], allowedAttributes: {} });
+  const parsedDescription = safeHtml(description, { whiteList: {} });
   // cap meta description at 150 characters.Google has no limit but recommends <= 150 chars, 160 chars max is what is allowed in video center.
   const metaDescParsed = parsedDescription.substring(0, 150);
 

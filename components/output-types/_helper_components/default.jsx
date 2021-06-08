@@ -7,6 +7,7 @@ import SiteMetrics from '../../_helper_components/global/siteMetrics/default';
 import ConnextInit from '../../_helper_components/global/connext/default.jsx';
 import NativoScripts from '../../_helper_components/article/nativo/nativoScripts';
 import checkTags from '../../layouts/_helper_functions/checkTags';
+import checkPageType from '../../layouts/_helper_functions/getPageType.js';
 import checkSponsor from '../../layouts/_helper_functions/checkSponsor';
 import AmpRelLink from '../../_helper_components/amp/AmpRelLink';
 import GoogleStructuredData from '../../_helper_components/article/googleData/default';
@@ -31,13 +32,14 @@ const RenderOutputType = (props) => {
   } = ads[currentEnv] || {};
   const { isEnabled: connextIsEnabled = false, environment: connextEnv } = connext[currentEnv] || {};
   const {
-    type = null, taxonomy, canonical_url: articleURL, _id: uuid, promo_items: promoItems,
+    type = null, taxonomy, canonical_url: articleURL, canonical_website: website, _id: uuid, promo_items: promoItems,
   } = globalContent || {};
   let hasLeadGallery = false;
   if (type === 'story') {
     hasLeadGallery = promoItems?.basic?.type === 'gallery';
   }
-
+  const pageType = checkPageType(type, layout);
+  const { isNonContentPage } = pageType || {};
 
   const { tags = [], sections } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
@@ -55,13 +57,17 @@ const RenderOutputType = (props) => {
         <MetaTags />
         <SiteMeta />
         <GoogleStructuredData />
-        {!hasLeadGallery && <AmpRelLink type={type} url={articleURL} noAmp={noAmp} />}
-        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} />
-        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} />
-        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`} />
-        <link rel="preload" src={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/Lora-Regular.ttf`)}`} />
+        {!hasLeadGallery && <AmpRelLink type={type} noAmp={noAmp} site={website} url={articleURL} />}
+        <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} as="font" type="font/woff2" />
+        <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} as="font" type="font/woff2" />
+        <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`} as="font" type="font/woff2" />
+        <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/Lora-Regular.ttf`)}`} as="font" type="font/ttf" />
 
         <CssLinks />
+        {currentSite && <>
+          <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)}`} />
+          <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}-${isNonContentPage ? 'pb' : 'content'}/css/style.css`)}`} />
+        </>}
         {includeGtm && (
           <>
             <SiteMetrics />
@@ -82,7 +88,6 @@ const RenderOutputType = (props) => {
         <Libs />
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
-        {currentSite && <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)}`} />}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
         <script type="text/javascript" dangerouslySetInnerHTML={{

@@ -6,16 +6,18 @@
   height: 480px;
   visibility: hidden;
 
-  @include breakpoint(desktop-sm) {
+  @media (min-width: 768px) {
     visibility: visible;
   }
 }
 
 .c-gallery-homeSection {
   width: 100vw;
+  max-width: 1540px;
+  box-sizing: border-box;
 
-  @include breakpoint(desktop-sm) {
-    width: calc(100vw - 1rem - 1px);
+  @include between-breakpoints(mobile, tablet) {
+    padding-bottom: 20px;
   }
 }
 
@@ -28,7 +30,9 @@
 
   letter-spacing: -.38px;
   text-align: center;
-  padding: 1.25rem 1.88rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid #cdcdcd;
+  width: inherit;
 
   a {
     text-decoration: none;
@@ -68,6 +72,10 @@
 
 .desktop-image {
   cursor: pointer;
+
+  img {
+    touch-action: pan-y;
+  }
 }
 
 .icon-gallery {
@@ -75,7 +83,7 @@
 }
 
 .with-ad {
-  padding: .35rem 1.88rem;
+  padding: 1.25rem 0 .35rem;
 }
 
 .last-item-height-fix {
@@ -111,13 +119,28 @@
 
 .gallery-count-prev,
 .gallery-count-next {
-  display: block;
   position: absolute;
-  top: 22px;
+  top: 30px;
   transform: translateY(-50%);
   cursor: pointer;
   width: 30px;
   height: 30px;
+  border-radius: 15px;
+  box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, .6);
+  border: solid 1px #ececec;
+  padding: 8px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-tap-highlight-color: rgb(0, 0, 0, 0);
+
+  &:active {
+    box-shadow: none;
+  }
+
+  img {
+    height: 20px;
+  }
 }
 
 .gallery-image a img {
@@ -129,8 +152,10 @@
   height: 100%;
 
   img {
-    height: 100%;
+    height: auto;
     width: auto;
+    vertical-align: middle;
+    margin: auto;
     opacity: .5;
     transition: opacity .2s .1s;
   }
@@ -149,6 +174,11 @@
 
   .arc_ad {
     margin: 0;
+
+    #div-id-PG02 {
+      padding-top: 10px;
+      margin-bottom: 15px;
+    }
   }
 
   .arc_ad .arcad:not(:empty):before {
@@ -223,12 +253,17 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 1rem;
+    margin: 0 auto;
 
     .gallery-index {
-      @include text-styles(.75rem, normal, "Gordita");
+      @include text-styles(.625rem, normal, "Gordita");
+
+      @media (min-width: 768px) {
+        @include text-styles(1rem, normal, "Gordita");
+      }
 
       letter-spacing: .01rem;
+      font-weight: 900;
     }
   }
 
@@ -249,21 +284,22 @@
   }
 
   .gallery-immersive--close {
-    background: linear-gradient(to top, #04befe, #4481eb);
-    box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
-    border-radius: 22px;
-    width: 44px;
-    height: 44px;
+    border-radius: 8px;
+    box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, .6);
+    border: solid 1px #ececec;
     top: 20px;
     right: 20px;
-    color: #fff;
+    color: #212126;
     position: absolute;
     cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    img {
-      position: relative;
-      top: 28%;
-      left: 30%;
+    &:active {
+      box-shadow: none;
     }
   }
 
@@ -271,7 +307,7 @@
     position: absolute;
     top: 20px;
     left: 20px;
-    width: 88px;
+    width: 89px;
     text-align: center;
 
     @include text-styles(.75rem, normal, "Gordita");
@@ -283,8 +319,9 @@
       width: 44px;
       height: 26px;
       border-radius: 2px;
-      background: #efefef;
-      color: #545454;
+      box-shadow: inset 0 4px 6px 0 rgba(171, 194, 212, .5);
+      background-image: linear-gradient(to bottom, #e7edf2, #f5f7fa);
+      color: #9b9b9b;
       text-align: center;
       text-transform: capitalize;
       margin-bottom: 4px;
@@ -294,9 +331,19 @@
     }
 
     .is-active {
-      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .24);
-      background: linear-gradient(to top, #04befe, #4481eb);
-      color: #fff;
+      box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, .6);
+      background: #fff;
+      color: #212126;
+      border-top: 1px solid #ececec;
+      border-left: 1px solid #ececec;
+      border-bottom: 1px solid #ececec;
+    }
+
+    div {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -15px;
     }
   }
 }
@@ -311,14 +358,9 @@
   overflow-x: hidden;
 }
 
-.gallery-caption {
-  @include text-styles(1rem, 1.5, "Gordita");
-
-  color: #313132;
-}
-
 .gallery-sticky {
   display: flex;
+  align-items: center;
   width: 100%;
   position: sticky;
   height: 84px;
@@ -334,32 +376,11 @@
   height: 100%;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767px) { // targeting 767px since iPad Mini's width is 768px and it has to have DT view
 
   .hidden-small {
     display: none;
   }
-}
-
-@media (max-width: 1023px) and (min-width: 768px) {
-
-  .hidden-medium {
-    display: none;
-  }
-}
-
-@media (min-width: 768px) {
-
-  .gallery-caption-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-}
-
-@media (max-width: 1023px) {
 
   .gallery__immersive .gallery-sticky .gallery-count {
     border-radius: 6px;
@@ -427,8 +448,8 @@
   }
 
   .icon-sticky {
-    width: 2rem;
-    height: 2rem;
+    width: 39px;
+    height: 32px;
   }
 
   .gallery-full {
@@ -462,20 +483,16 @@
       .gallery-caption {
         text-align: left;
         margin: 10px 20px;
-        line-height: 2.25rem;
+        line-height: 1.63rem;
       }
     }
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
 
   .hidden-large {
     display: none;
-  }
-
-  .gallery-image .is-focused {
-    opacity: 1;
   }
 
   .icon-gallery {
@@ -495,9 +512,8 @@
     bottom: 0;
     box-sizing: border-box;
     height: auto;
-    min-width: 1000px;
-    max-width: 58vw;
-    margin: 2.18rem auto .5rem;
+    width: 180px;
+    margin: 1.875rem auto .5rem;
   }
 
   .gallery-caption-container {
@@ -506,54 +522,60 @@
     bottom: 0;
     box-sizing: border-box;
     height: auto;
-    min-width: 1000px;
-    max-width: 58vw;
-    margin: 1.25rem auto 6rem;
+    margin: .313rem auto 6rem;
+    min-width: auto;
 
-    .gallery-caption {
-      font-size: 1.25rem;
+    @media (min-width: 768px) and (max-width: 1024px) {
+      width: calc(100% - 80px);
     }
 
-    @include breakpoint(desktop-sm) {
-      min-width: auto;
+    @media (min-width: 1024px) {
+      width: 100%;
+      max-width: 932px;
+    }
+
+    .gallery-caption {
+      @include text-styles(1rem, 1.88, "Gordita");
+    
+      color: #313132;
     }
   }
 
   .gallery-count {
     width: 100px;
-    letter-spacing: -2px;
+    letter-spacing: -.2px;
     text-align: center;
-    color: #2e81b7;
+    color: #212126;
     top: 0;
     left: 0;
     transform: none;
     margin: 0 auto 10px;
 
-    @include text-styles(1.44rem, normal, "Gordita");
+    @include text-styles(1rem, normal, "Gordita");
 
     .gallery-count-prev {
-      left: 42%;
+      left: 0;
     }
 
     .gallery-count-next {
-      right: 42%;
+      right: 0;
     }
   }
 
   .gallery-image {
     background: #efefef;
-    min-width: 720px;
-    margin: 0 5px;
+    // min-width: 720px;
+    margin: 0 7.5px;
 
-    a {
+    .is-focused {
+      opacity: 1;
+    }
 
-      img {
-        height: 100%;
-        width: 800px;
-        opacity: .5;
-        display: block;
-        margin: 0 auto;
-      }
+    .lazyload-wrapper {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
     }
   }
 }

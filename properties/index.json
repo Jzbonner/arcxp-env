@@ -22,8 +22,11 @@
   "userLoggedOut": "/resources/icons/login/user-icon.svg",
   "closeButton": "/resources/images/amp-close.png",
   "burgerMenuBackground": "/resources/images/ajc-hamburger-menu.png",
+  "burgerFbLogo": "/resources/images/facebook-burger.svg",
+  "burgerTwitterLogo": "/resources/images/twitter-burger.svg",
   "logoShort": "/resources/logos/AJC/logo-full.svg",
   "logoHamburger": "/resources/logos/AJC/logo-mobile-hamburger.svg",
+  "partnerBadgeLogo": "/resources/images/contributors/contributing-partner.png",
   "logoPlaceholder": "/resources/logos/AJC/placeholder.jpg",
   "logoOgImage": "/resources/logos/AJC/logo-ogimage.png",
   "mail": "mailto:?Subject=",
@@ -75,6 +78,7 @@
       "adsBreakpoints": [1024, 768, 0]
     }
   },
+  "weatherPageUrl": "/weather/",
   "weatherLocationId": 348181,
   "connext": {
     "sandbox": {

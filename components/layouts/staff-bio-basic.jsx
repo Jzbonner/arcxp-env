@@ -10,7 +10,6 @@ import Copyright from '../_helper_components/global/copyright/default';
 import CollectionList from '../_helper_components/staffBioPage/collectionList/default';
 import getQueryParams from './_helper_functions/getQueryParams';
 import '../features/List/default.scss';
-import '../../src/styles/container/_homepage.scss';
 import '../_helper_components/listpage/default.scss';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 
@@ -61,7 +60,7 @@ const staffBioPage = () => {
     <>
       <GlobalAdSlots/>
       {!noHeaderAndFooter && <TopNavBreakingNews />}
-      <main className='c-listPage'>
+      <main className='c-listPage b-contentMaxWidth b-sectionHome-padding'>
           {!noAds
           && <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />

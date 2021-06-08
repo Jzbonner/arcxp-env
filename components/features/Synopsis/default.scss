@@ -58,6 +58,12 @@
       }
     }
 
+    &:last-child {
+      @include breakpoint(desktop-sm) {
+        margin-bottom: 0;
+      }
+    }
+
     @include breakpoint(desktop-lg) {
       width: 100%;
     }
@@ -74,6 +80,10 @@
 
       @include between-breakpoints(tablet, desktop-lg) {
         @include text-styles(1.5rem, 1.25, "Lora-Bold");
+      }
+
+      @include breakpoint(desktop-lg) {
+        @include text-styles(1.3rem, 1.25, "Lora-Bold");
       }
 
       a {
@@ -111,5 +121,9 @@
     font-family: "Gordita";
     font-size: .875rem;
     margin-top: 10px;
+
+    @include between-breakpoints(mobile, tablet) {
+      margin-bottom: .15rem;
+    }
   }
 }

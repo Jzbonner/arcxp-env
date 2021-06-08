@@ -1,9 +1,8 @@
 import React from 'react';
-import imageResizer from '../../../../layouts/_helper_functions/Thumbor';
 import truncateHeadline from '../../../../layouts/_helper_functions/homepage/truncateHeadline';
 import filterByPrimarySection from '../../../../../content/sources/helper_functions/filterByPrimarySection';
+import FetchResizedImages from '../../../../../content/sources/helper_functions/FetchResizedImages';
 import getDaysSincePublished from './getDaysSincePublished';
-import getFirstInlineImage from './getFirstInlineImage';
 import '../default.scss';
 
 const filterCurrentStory = (contentElements, storyId) => contentElements.filter((el) => {
@@ -12,10 +11,11 @@ const filterCurrentStory = (contentElements, storyId) => contentElements.filter(
 });
 
 export default function buildCarouselItems(relatedContentElements, storyId, logo, arcSite, primarySection = '') {
-  if (!relatedContentElements.content_elements) return null;
+  if (!relatedContentElements) return null;
 
-  const filteredContentElements = filterCurrentStory(relatedContentElements.content_elements, storyId);
-  const primaryContentElements = filterByPrimarySection(filteredContentElements, primarySection);
+  const filteredContentElements = filterCurrentStory(relatedContentElements, storyId);
+  let primaryContentElements = filterByPrimarySection(filteredContentElements, primarySection);
+  primaryContentElements = FetchResizedImages(arcSite, primaryContentElements, 144, 144);
 
   let temp = {};
 
@@ -25,35 +25,24 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
       temp = {};
       temp.firstPublishDate = el.first_publish_date ? el.first_publish_date : null;
       temp.url = el.canonical_url || null;
+      temp.headline = el?.headlines?.basic || null;
 
-      if (el.promo_items && el.promo_items.basic) {
-        const basicPromo = el.promo_items.basic;
-        if (basicPromo.type === 'gallery') {
-          temp.src = basicPromo.promo_items && basicPromo.promo_items.basic
-          && basicPromo.promo_items.basic.type && basicPromo.promo_items.basic.type === 'image'
-          && basicPromo.promo_items.basic.url ? basicPromo.promo_items.basic.url : null;
-        } else if (basicPromo.type === 'video') {
-          temp.src = basicPromo.promo_image && basicPromo.promo_image.url ? basicPromo.promo_image.url : null;
-        } else {
-          temp.src = basicPromo.type === 'image'
-          && basicPromo.url ? basicPromo.url : null;
-        }
-      }
-
-      temp.headline = el.headlines && el.headlines.basic ? el.headlines.basic : null;
-
-      if (!temp.src && el.content_elements) temp.src = getFirstInlineImage(el.content_elements);
+      const hasImage = el.teaseImageObject;
+      const { resized_obj: resizedObj = {} } = hasImage || {};
+      const carouselImage = resizedObj.src ? resizedObj.src : logo;
 
       return (
-        <a key={`key-${i}`} href={`${temp.url ? `${temp.url}` : null}`}>
+        <a key={`key-${i}`} href={temp.url}>
           <div id={`carousel-item-${i}`} className={`c-carouselItem ${i === 0 ? 'is-first' : ''}`}>
             <amp-img
-              width={`${temp.src ? '90' : '76'}`}
-              height="50"
-              src={temp.src ? imageResizer(temp.src, arcSite, 256, 144) : logo}
+              width={`${hasImage && resizedObj.src ? '36' : '54'}`}
+              height="36"
+              src={carouselImage}
             />
-            <div className={`c-itemText ${!temp.src && temp.teaseIcon ? 'with-icon' : ''}`}>
-              {truncateHeadline(temp.headline)}
+            <div className='c-itemText'>
+              <div className={`carousel-text ${!hasImage && temp.teaseIcon ? 'with-icon' : ''}`}>
+                {truncateHeadline(temp.headline)}
+              </div>
             </div>
           </div>
         </a>

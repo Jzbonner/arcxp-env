@@ -1,17 +1,9 @@
+/* stylelint-disable declaration-no-important */
 @import "./../base/breakpoints";
 @import "./../base/mixins";
 
 .c-header {
   margin: 0 auto;
-
-  @include breakpoint(desktop-sm) {
-    width: 94%;
-  }
-
-  @include breakpoint(desktop-lg) {
-    width: 90%;
-    max-width: 1600px;
-  }
 }
 
 .c-main-gallery,
@@ -19,21 +11,15 @@
   margin: 0 auto;
 }
 
-.c-nav {
-  margin: 0 auto;
-  width: 100%;
+@include amp-exclude {
 
-  @include breakpoint(tablet) {
-    width: 90%;
-  }
+  .c-nav {
+    margin: 0 auto;
+    width: 100%;
 
-  @include breakpoint(desktop-sm) {
-    width: 94%;
-  }
-
-  @include breakpoint(desktop-lg) {
-    width: 90%;
-    max-width: 1600px;
+    @include breakpoint(desktop-lg) {
+      max-width: 1540px !important;
+    }
   }
 }
 
@@ -63,6 +49,17 @@
   text-align: center;
 }
 
+@include amp-only {
+  
+  .c-label-wrapper {
+
+    .section-label {
+      width: 100%;
+      text-align: left;
+    }
+  }
+}
+
 .c-articlePadding {
   padding: 0 $min-margin;
 
@@ -76,16 +73,57 @@
 }
 
 .c-articleContent {
-  
+  @include between-breakpoints(mobile, tablet) {
+    padding-top: 1.25rem;
+  }
+
+  @include breakpoint(desktop-sm) {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .c-section {
+    padding: 0;
+  }
+
+  .b-margin-bottom-d7-m7 {
+    @include between-breakpoints(desktop-sm, desktop-lg) {
+      margin: 0 auto 7px;
+
+      .article-timestamp {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .article-byline {
+    @include between-breakpoints(desktop-sm, desktop-lg) {
+      margin: 0 auto 7px;
+    }
+
+    .byline {
+      text-align: left;
+    }
+  }
+
   .border-top {
     display: none;
+  }
+
+  .arc_ad[class*="MP02"],
+  .arc_ad[class*="MP03"],
+  .arc_ad[class*="RP01"],
+  .arc_ad[class*="RP09"] {
+    @include between-breakpoints(mobile, desktop-sm) {
+      padding-top: 20px;
+    }
   }
 }
 
 @include amp-exclude {
 
   body .c-articleContent .c-articleBodyContainer {
-    height: auto !important; /* stylelint-disable declaration-no-important */
+    height: auto !important;
 
     &.is-safari .c-section {
 

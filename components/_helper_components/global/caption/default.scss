@@ -16,43 +16,55 @@
 
   @include breakpoint(desktop-sm) {
     width: calc(100% - 6.25rem);
-    top: 3.125rem;
-    right: 3.125rem;
+    top: 2.125rem;
+    right: 2.125rem;
   }
 
   &.is-active {
 
-    .photo-caption-btn {
-      transform: rotate(90deg);
-    }
-
     .photo-caption {
       display: block;
+    }
+
+    .photo-caption-btn .caption-arrow {
+      transform: rotate(180deg);
     }
   }
 
   .photo-caption-btn {
     position: absolute;
-    display: block;
-    width: 41px;
-    height: 41px;
-    border-radius: 50%;
-    background: linear-gradient(to top, #04befe, #4481eb);
+    width: 69px;
+    height: 26px;
+    border-radius: 5px;
+    background: #ececec;
     top: -1.25rem;
     right: -1.25rem;
     z-index: 1;
     cursor: pointer;
     transition: transform .5s;
     box-shadow: 0 2px 4px 0 rgba(149, 149, 149, .5);
-    padding: 12px;
     box-sizing: border-box;
+    font-size: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include text-styles(11px, 1, "Gordita");
 
     @include breakpoint(desktop-sm) {
-      width: 61px;
-      height: 61px;
-      padding: 18px;
-      top: -1.875rem;
-      right: -1.875rem;
+      width: 69px;
+      height: 26px;
+    }
+
+    .amp-arrow {
+      transition: .5s;
+    }
+
+    .caption-arrow {
+      width: 9px;
+      height: 11px;
+      margin-right: 2px;
+      transition: transform .5s;
     }
 
     .fill-line {
@@ -88,7 +100,7 @@
 
     .photo-caption-text {
       color: #fff;
-      padding: 20px;
+      padding: 5px;
       letter-spacing: normal;
       line-height: 1.5;
 
@@ -96,12 +108,18 @@
 
       @include breakpoint(tablet) {
         @include text-styles(1.25rem, 1.5, "Gordita");
+
+        padding: 20px;
       }
     }
 
     .photo-credit-text {
       display: none;
     }
+  }
+
+  .rotate-right {
+    transform: rotate(180deg); /* stylelint-disable-line declaration-no-important */
   }
 }
 
@@ -140,8 +158,8 @@
     @include breakpoint(desktop-sm) {
       // 100% reduces caption to match the width of the image component
       // 3.5rem accounts for the  right: 3.5em positioning of the caption
-      // 6vw ensures the distance between the caption and headline container is always equal to the overlap of the headline over the image, which is -3vw.
-      width: calc(100% - 3.125rem - 6vw);
+      // 1.1vw ensures the distance between the caption and headline container is always equal to the overlap of the headline over the image, which is -3vw.
+      width: calc(100% - 3.125rem - 1.1vw);
     }
   }
 }

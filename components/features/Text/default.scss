@@ -2,58 +2,57 @@
 
 .c-textFeature {
   margin-bottom: $min-Msection-margin;
+  max-width: 100%;
 
   .c-textFeature-title {
     color: #313132;
-    letter-spacing: -.45px;
+    letter-spacing: -.38px;
     font-weight: 600;
+    border-bottom: 1px solid #cdcdcd;
+    max-width: 100%;
+    margin: 15px 0;
+    padding-bottom: 10px;
 
-    @include text-styles(1em, 1.88, "Gordita");
+    @include text-styles(1.875rem, normal, "Gordita-Bold");
 
     @include breakpoint(desktop-sm) {
-      letter-spacing: -.84px;
-      margin-bottom: $min-DTsection-margin;
+      letter-spacing: -.56px;
 
-      @include text-styles(1.5em, normal, "Gordita");
+      @include text-styles(2.813rem, normal, "Gordita-Bold");
     }
   }
+
+  // have to duplicate the fonts below in order to cover the case where no HTML tag is used
+  // otherwise the P tags grab the styling from the Paragraph Component
 
   .c-textFeature-content {
-    color: #313132;
+    max-width: 100%;
+    border-bottom: 1px solid #cdcdcd;
+    padding-bottom: 15px;
 
-    @include text-styles(1em, 2.25, "Gordita");
-
+    @include text-styles(.688rem, 1.82, "Gordita");
+  
     @include breakpoint(desktop-sm) {
-      @include text-styles(1.25em, 2, "Gordita");
+      @include text-styles(.813rem, 1.54, "Gordita");
     }
-  }
+    
+    p,
+    strong {
+      color: #313132;
 
-  .c-rightRail & {
-
-    .c-textFeature-title {
-      font-weight: 600;
-
-      @include text-styles(1.3125em, 1.9, "Gordita");
-    }
-
-    .c-textFeature-content {
-      @include text-styles(.875em, 2, "Gordita");
-    }
-  }
-
-  .one-column,
-  .two-column,
-  .three-column,
-  .four-column & {
-
-    .c-textFeature-title {
-      font-weight: 600;
-
-      @include text-styles(1.5em, 1.67, "Gordita");
+      @include text-styles(.688rem, 1.82, "Gordita");
+  
+      @include breakpoint(desktop-sm) {
+        @include text-styles(.813rem, 1.54, "Gordita");
+      }
     }
 
-    .c-textFeature-content {
-      @include text-styles(1.25em, 2, "Gordita");
+    p {
+      margin-bottom: $min-margin;
+    }
+
+    a {
+      color: #2e81b7;
     }
   }
 }

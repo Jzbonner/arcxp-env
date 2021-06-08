@@ -12,9 +12,6 @@ import StickyNav from '../../article/stickyNav/default';
 import RedesignNavLinks from './redesignNavLinks/default';
 import AmpNavBar from './amp';
 import Weather from './weather/default';
-import '../../../../src/styles/base/_utility.scss';
-import '../../../../src/styles/container/_article-basic.scss';
-import '../../../../src/styles/container/_c-headerNav.scss';
 import BreakingNews from '../breakingNews/default';
 import Login from './login/default';
 
@@ -165,12 +162,12 @@ const NavBar = ({
   return (
     <header className='c-nav'>
       {!omitBreakingNews && <BreakingNews />}
-      <div className={`c-headerNav
-        ${stickyNavVisibility || hasWindowShade ? 'stickyActive' : ''}
+      <div className={`c-headerNav b-sectionHome-padding
+        ${stickyNavVisibility ? 'stickyActive' : ''}
         ${hasWindowShade ? 'above-shade' : ''}
         ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`} style={sidebarIsOpen ? { opacity: 1 } : {}}>
         <div className={`c-logoAndLinks nav-logo
-        ${(stickyNavVisibility || hasWindowShade) || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
+        ${stickyNavVisibility || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
           <div className='c-topNavItems'>
             <Weather weatherPageUrl={weatherPageUrl}/>
             <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
@@ -201,7 +198,7 @@ const NavBar = ({
           whiteLogoRedesign={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
           closeButton={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${closeButton}`)}`}
           rootDirectory={rootDirectory}
-          stickyActive={stickyNavVisibility || hasWindowShade}
+          stickyActive={stickyNavVisibility}
           type={type}
           burgerMenuBackground={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerMenuBackground}`)}`}
           siteName={siteName.toLowerCase()}/>
@@ -213,7 +210,7 @@ const NavBar = ({
           comments={comments}
           hamburgerToggle={mobileMenuToggled}
           setStickyNavVisibility={setStickyNavVisibility}
-          stickyNavVisibility={stickyNavVisibility || hasWindowShade}
+          stickyNavVisibility={stickyNavVisibility}
           isMobile={isMobile}
           isMobileVisibilityRef={isMobileVisibilityRef}
           logoRef={logoRef}
@@ -222,7 +219,6 @@ const NavBar = ({
           type={type}
           sections={redesignChildren}
           articleUrl={articleURL}
-          hasWindowShade={hasWindowShade}
         />
       </div>
       <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>

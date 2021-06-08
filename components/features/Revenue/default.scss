@@ -2,13 +2,12 @@
 
 .c-revenue {
   background-color: #ededed;
-  width: 100vw;
-  padding: 1.25rem 0;
+  padding: 1.25rem 0 0;
+  width: inherit;
   margin-bottom: $min-Msection-margin;
 
   @include breakpoint(desktop-sm) {
     padding-top: 2rem;
-    width: calc(100vw - 1rem - 1px);
     margin-bottom: $min-DTsection-margin;
   }
 
@@ -37,6 +36,7 @@
 
     .c-sectionTitle {
       margin-bottom: $min-margin;
+      justify-content: start;
 
       &:after {
         display: none;
@@ -105,7 +105,11 @@
           @include breakpoint(desktop-sm) {
             letter-spacing: -.22px;
             
-            @include text-styles(1.5rem, 1.17, "Lora");
+            @include text-styles(1.3rem, 1.17, "Lora");
+          }
+
+          @include breakpoint(desktop-lg) {
+            @include text-styles(1.1rem, 1.17, "Lora");
           }
         }
 

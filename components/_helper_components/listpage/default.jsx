@@ -9,6 +9,7 @@ import ListItem from '../home/ListItem/ListItem';
 import './default.scss';
 import '../../features/List/default';
 import filter from '../../../content/filters/collectionTitle';
+import AddFirstInlineImage from '../../../content/sources/helper_functions/AddFirstInlineImage';
 
 const RP01 = () => (
   <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />
@@ -36,6 +37,46 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
     filterStart,
     filterStart + filterSize,
   );
+
+  const updateImageRefs = (apiData) => {
+    const newData = apiData;
+    apiData.forEach((el, e) => {
+      if (el.type === 'story') {
+        if (el.promo_items
+          && el.promo_items.basic
+          && el.promo_items.basic.promo_image
+          && el.promo_items.basic.promo_image.url
+        ) {
+          newData[e].teaseImageObject = el.promo_items.basic.promo_image;
+        }
+        if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
+          newData[e].teaseImageObject = el.promo_items.basic;
+        }
+
+        if (
+          (el.promo_items && el.promo_items.basic && el.promo_items.basic.type === 'video')
+          || (el.promo_items && el.promo_items.basic && el.promo_items.basic.type === 'gallery')
+        ) {
+          if (el.promo_items.basic.promo_items && el.promo_items.basic.promo_items.basic && el.promo_items.basic.promo_items.basic.url) {
+            newData[e].teaseImageObject = el.promo_items.basic.promo_items.basic;
+          }
+        }
+
+        if (el.firstInlineImage) {
+          newData[e].teaseImageObject = el.firstInlineImage;
+        }
+      }
+      if (el.type === 'video' || el.type === 'gallery') {
+        if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
+          newData[e].teaseImageObject = el.promo_items.basic;
+        }
+      }
+    });
+    return newData;
+  };
+
+  let filteredTeases = AddFirstInlineImage(filteredStories, 'list', ['list']);
+  filteredTeases = updateImageRefs(filteredTeases);
 
   const collectionMetaData = useContent({
     source: 'collection-meta-data',
@@ -67,7 +108,7 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
   };
 
   return (
-    <main className="c-listPage">
+    <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
       <div className="c-section with-rightRail">
         <div className="c-contentElements list-contentElements">
           {!noAds ? (
@@ -75,14 +116,14 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
           ) : null}
           <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column">
             {getTitle()}
-            {filteredStories.map((el, i) => {
+            {filteredTeases.map((el, i) => {
               const startIndex = (activePage - 1) * storiesPerPage;
               if (startIndex <= i && i < startIndex + storiesPerPage) {
                 return <ListItem key={`key-${i}`} {...el} listPage={true} />;
               }
               return null;
             })}
-            {filteredStories.length > storiesPerPage && (
+            {filteredTeases.length > storiesPerPage && (
               <Pagination
                 activePage={activePage}
                 setActivePage={setActivePage}

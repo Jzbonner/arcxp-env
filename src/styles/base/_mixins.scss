@@ -40,29 +40,18 @@
 
 @mixin section() {
   display: block;
-  max-width: 1080px;
-  padding: 0 $min-margin;
   margin-right: auto;
   margin-left: auto;
-
-  @include breakpoint(tablet) {
-    width: 88.3%;
-  }
-
-  @include breakpoint(desktop-sm) {
-    width: 83.9%;
-  }
-
-  @include breakpoint(desktop-lg) {
-    width: 60.7%;
-  }
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @mixin home-and-section() {
   padding-top: 30px;
 
   .c-section {
-    max-width: 1600px;
+    max-width: 1540px;
+    margin: 0 auto;
 
     &.with-rightRail {
       @include breakpoint(desktop-sm) {
@@ -139,11 +128,10 @@
 // styling for "full width" ads on home/section pages
 
 @mixin arc-ad-full-width {
-  width: 100vw;
+  width: inherit;
 
-  @include breakpoint(desktop-sm) {
-    width: calc(100vw - 1rem - 1px);
-    padding-bottom: 5px;
+  @include between-breakpoints(tablet, desktop-sm) {
+    width: auto;
   }
 
   &.c-HS02 {
@@ -151,21 +139,17 @@
 
     .arcad {
       padding-bottom: 0;
+      padding-top: 30px;
       width: 100%;
     }
   }
 
   .arcad {
-    width: 100vw;
-    max-width: 1600px;
+    width: inherit;
+    max-width: 1540px;
     text-align: center;
     margin: 0 auto;
     padding-bottom: 10px;
-
-    @include breakpoint(desktop-sm) {
-      width: calc(100vw - 1rem - 1px);
-      padding-bottom: 5px;
-    }
 
     > div,
     > iframe {

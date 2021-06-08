@@ -1,7 +1,10 @@
 /* eslint-disable no-console */
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
+import FetchResizedImages from './helper_functions/FetchResizedImages';
 import getQueryData from './helper_functions/getQueryData';
+import getImageRequirements from './helper_functions/getImageRequirements';
+import FilterGallery from './helper_functions/filterRssGallery';
 
 const schemaName = 'query-feed';
 const bodybuilder = require('bodybuilder');
@@ -48,11 +51,19 @@ const fetch = (query) => {
     displayClass = '',
     displayClassesRequiringImg = [],
     useFetch = false,
+    width = 500,
+    height = 282,
+    useSrcSet = false,
+    srcSetSizes = [],
+    squareImageSize,
+    useSquareImageAfter,
   } = query;
 
   const activeSite = arcSite || arcSiteAlt;
 
   if (!activeSite) return [];
+
+  const requiresImageEveryX = getImageRequirements(displayClass, displayClassesRequiringImg);
 
   const builder = bodybuilder();
   if (daysBack) {
@@ -116,7 +127,9 @@ const fetch = (query) => {
 
   return getQueryData(activeSite, newBody, from, size, useFetch)
     .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
-    .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
+    .then(data => FilterElements(data, requiresImageEveryX))
+    .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes, squareImageSize, useSquareImageAfter))
+    .then(data => FilterGallery(data))
     .catch((error) => {
       console.error(error);
     });

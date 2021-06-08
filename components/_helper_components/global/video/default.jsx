@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext, useAppContext } from 'fusion:context';
-import get from 'lodash.get';
+import get from 'lodash/get';
 import fetchEnv from '../utils/environment';
 import Caption from '../caption/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';

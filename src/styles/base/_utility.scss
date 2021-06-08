@@ -23,11 +23,6 @@
   display: none;
 }
 
-.b-pageContainer {
-  width: calc(100% - #{2 * $min-margin});
-  margin: 0 auto;
-}
-
 .b-margin-bottom-1 {
   margin-bottom: 1em;
 }
@@ -48,6 +43,10 @@
   margin-bottom: 5em;
 }
 
+.b-margin-bottom-30 {
+  margin-bottom: 1.875rem;
+}
+
 .b-margin-bottom-40 {
   margin-bottom: 2.5rem;
 }
@@ -62,6 +61,12 @@
   }
 }
 
+// desktop and mobile margin-bottom 7 to handle new spacing for label, byline and timestamp (with the new line-height)
+
+.b-margin-bottom-d7-m7 {
+  margin-bottom: 7px;
+}
+
 // desktop margin-bottom 30, mobile margin-bottom 20
 
 .b-margin-bottom-d30-m20 {
@@ -72,14 +77,24 @@
   }
 }
 
-// desktop margin-bottom 40, mobile margin-bottom 20
+// desktop margin-botton 30, mobile margin-bottom 30 as per new design
+
+.b-margin-bottom-d30-m30 {
+  margin-bottom: 1.88rem;
+}
+
+// desktop margin-bottom 35, mobile margin-bottom 20
 
 .b-margin-bottom-d40-m20 {
   margin-bottom: 1.25rem;
 
   @include breakpoint(desktop-sm) {
-    margin-bottom: 2.5rem;
+    margin-bottom: $min-DTsection-margin;
   }
+}
+
+.b-padding-top-30 {
+  padding-top: 1.875rem;
 }
 
 .b-padding-d30-m20 {
@@ -200,4 +215,42 @@
 
 .b-full-width {
   width: 100%;
+}
+
+.b-sectionHome-padding {
+  @include between-breakpoints(mobile, tablet) {
+    padding: 0 20px;
+  }
+
+  @include between-breakpoints(tablet, desktop-sm) {
+    padding: 0 40px;
+  }
+
+  @include between-breakpoints(desktop-sm, desktop-xxl) {
+    padding: 0 30px;
+  }
+
+  @include between-breakpoints(desktop-xxl, desktop-xxxl) {
+    padding: 0 20px;
+  }
+
+  @include breakpoint(desktop-xxxl) {
+    padding: 0;
+  }
+}
+
+.b-contentMaxWidth {
+  margin: 0 auto;
+  
+  @include breakpoint(desktop-sm) {
+    max-width: 820px;
+  }
+}
+
+.b-sectionHomeMaxWidth {
+  margin: 0 auto;
+
+  @include breakpoint(desktop-lg) {
+    max-width: 1540px;
+  }
 }

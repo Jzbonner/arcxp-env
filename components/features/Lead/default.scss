@@ -5,7 +5,11 @@
   // Common styles
   ////////////////
   width: 100%;
-  margin-bottom: $min-Msection-margin;
+  margin-bottom: 15px;
+
+  @include breakpoint(tablet) {
+    margin-bottom: $min-Msection-margin;
+  }
 
   @include breakpoint(desktop-sm) {
     margin-bottom: $min-DTsection-margin;
@@ -27,21 +31,15 @@
     padding-bottom: $min-margin;
   }
 
-  img {
-    border-radius: 6px;
+  .c-tease-icon .tease-icon {
+    border-radius: 0;
   }
 
   .article-timestamp {
     line-height: 1;
   }
 
-  .column-2 {
-    margin-bottom: 25px;
-  }
-
   .home-headline {
-    margin-left: -$min-margin;
-    margin-right: -$min-margin;
     overflow: hidden;
 
     img {
@@ -51,10 +49,6 @@
     @include breakpoint(tablet) {
       margin-left: 0;
       margin-right: 0;
-
-      img {
-        border-radius: 6px;
-      }
     }
   }
 
@@ -88,12 +82,6 @@
       @include breakpoint(desktop-sm) {
         margin-bottom: initial;
       }
-    }
-
-    .c-sponsorOverlay,
-    .image-component-image .sponsored-story {
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
     }
 
     @include breakpoint(tablet) {
@@ -240,6 +228,10 @@
 
     @include breakpoint(desktop-lg) {
       display: flex;
+    }
+
+    .c-homeList .homeList-text .c-tease-icon {
+      margin-left: 0;
     }
 
     .column-2 {
@@ -394,10 +386,6 @@
         margin: .6rem 0 .4rem;
       }
 
-      .headline {
-        text-align: left;
-      }
-
       .homeList-image {
         display: none;
       }
@@ -407,6 +395,7 @@
         margin: $min-margin 0 0;
         border-bottom: 1px solid #cdcdcd;
         width: 100%;
+        text-align: left;
       }
 
       &:first-child {
@@ -421,6 +410,110 @@
         .homeList-text {
           border: none;
           padding-bottom: 0;
+        }
+      }
+    }
+  }
+
+  /////////////////////
+  // Redesigned Lead - No Photo Class Styles - Will be used with the Synopsis Feature mainly
+  /////////////////////
+
+  &.redesigned-no-photo-display-class {
+    justify-content: flex-start;
+
+    .b-sectionTitle {
+      text-align: left;
+    }
+
+    .column-2 {
+      width: 100%;
+
+      @include between-breakpoints(mobile,tablet) {
+        margin-bottom: 10px;
+      }
+
+      @include breakpoint(tablet) {
+        width: 52%;
+      }
+
+      .home-headline {
+        display: flex;
+        flex-direction: column-reverse;
+        padding-top: 0;
+
+        @include between-breakpoints(mobile,tablet) {
+          margin: 0 auto;
+        }
+
+        .homeList-image {
+          margin-right: 0;
+
+          .c-image-component {
+            position: relative;
+  
+            img {
+              border-radius: 0;
+            }
+          }
+        }
+
+        .headline-box {
+          background: none;
+          border-radius: 0;
+          box-shadow: unset;
+          padding: 0 0 10px;
+          max-width: 100%;
+
+          .headline {
+            margin: 0 0 10px;
+          }
+        }
+      }
+    }
+
+    .column-3 {
+
+      .c-homeList {
+
+        .c-label-wrapper {
+          text-align: left;
+          margin: .6rem 0 .4rem;
+        }
+  
+        .homeList-image {
+          display: none;
+        }
+  
+        .home-headline,
+        .homeList-text {
+          margin: $min-margin 0 0;
+          border-bottom: 1px solid #cdcdcd;
+          width: 100%;
+          text-align: left;
+
+          .headline {
+            margin-bottom: 5px;
+          }
+        }
+  
+        &:first-child {
+
+          .homeList-text {
+            margin-top: 0;
+
+            .c-label-wrapper {
+              margin-top: 0;
+            }
+          }
+        }
+  
+        &:last-child {
+            
+          .homeList-text {
+            border: none;
+            padding-bottom: 0;
+          }
         }
       }
     }
@@ -520,44 +613,63 @@
   &.left-photo-no-photo-display-class {
     
     .column-1 {
-      margin-right: 15px;
       padding-bottom: 30px;
 
       @include breakpoint(tablet) {
         padding-bottom: 0;
-      }
-
-      @include breakpoint(desktop-sm) {
-        margin-right: 30px;
+        margin-right: 15px;
       }
     }
 
     .column-2 {
       @include breakpoint(tablet) {
         border-left: 1px solid #cdcdcd;
-        padding-left: 30px;
+        padding-left: 15px;
       }
     }
 
     .column-1,
     .column-2 {
+      width: inherit;
+      
       @include breakpoint(tablet) {
         max-width: 350px;
       }
 
       @include breakpoint(desktop-sm) {
-        max-width: none;
-        width: auto;
+        width: 50%;
       }
     }
 
     .c-homeList {
       border-bottom: 1px solid #cdcdcd;
 
-      @include breakpoint(tablet) {
+      .homeList-image {
+        margin-bottom: 1rem;
 
-        .homeList-image {
-          margin-bottom: 1rem;
+        &:empty {
+          display: none;
+        }
+
+        @include breakpoint(tablet) {
+          width: 80px;
+          height: 80px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          width: 60px;
+          height: 60px;
+
+          &:empty {
+            display: block;
+          }
+        }
+
+        @include breakpoint(desktop-nav) {
+
+          &:empty {
+            display: none;
+          }
         }
       }
 
@@ -588,8 +700,9 @@
 
         .headline {
           letter-spacing: -.1px;
+          margin-bottom: 0;
 
-          @include text-styles(1.125rem, 1.22, "Lora-Bold");
+          @include text-styles(1rem, 1.22, "Lora-Bold");
         }
       }
 
@@ -623,6 +736,12 @@
     .lazyload-wrapper {
       width: 80px;
       height: 80px;
+      overflow: hidden;
+
+      @include breakpoint(desktop-sm) {
+        width: 60px;
+        height: 60px;
+      }
     }
 
     img {

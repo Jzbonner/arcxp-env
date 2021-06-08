@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import getProperties from 'fusion:properties';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
-import get from 'lodash.get';
+import get from 'lodash/get';
 import fetchEnv from '../utils/environment.js';
 import './default.scss';
 

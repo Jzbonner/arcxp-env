@@ -1,4 +1,9 @@
 export default function getItemThumbnail(promoItems) {
+  // the resized image object has already been fetched from the content request, just return it
+  if (promoItems.resized_obj) {
+    return promoItems;
+  }
+
   if (promoItems.basic && promoItems.basic.type) {
     if (promoItems.basic.type === 'image') {
       return promoItems.basic;

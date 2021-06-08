@@ -5,15 +5,13 @@ import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitl
 import './default.scss';
 
 const TTD = (customFields = {}) => {
-  const {
-    content: title = 'Things To Do', moreURL = '',
-  } = customFields;
+  const { title = '', moreURL = '' } = customFields.customFields;
 
   const newCustomFields = {
     ...customFields,
     customFields: {
       ...customFields.customFields,
-      displayClass: '7-Item TTD Feature',
+      displayClass: '1 or 2 Item Feature', // this is meaningless, the real class-of-record is passed as `displayClassOverride` below
       content: {
         ...customFields.customFields.content,
         contentConfigValues: {
@@ -26,7 +24,7 @@ const TTD = (customFields = {}) => {
   return (
     <div className="c-ttd-feature">
       <FeatureTitle title={title} moreURL={moreURL} />
-      <Lead {...newCustomFields} />
+      <Lead {...newCustomFields} displayClassOverride={'7-Item TTD Feature'} />
     </div>
   );
 };
@@ -37,8 +35,7 @@ TTD.propTypes = {
       name: 'Content',
     }),
     title: PropTypes.string.tag({
-      name: 'Things To Do Title',
-      defaultValue: 'Things To Do',
+      name: 'Title',
     }),
     moreURL: PropTypes.string.tag({
       name: 'More URL',

@@ -26,14 +26,12 @@
     }
 
     .column-2 {
-      margin-bottom: 10px;
-
       @include breakpoint(desktop-sm) {
-        min-height: 266px;
+        min-height: 245px;
       }
 
       @media (min-width: 1600px) {
-        min-height: 320px;
+        min-height: 292px;
       }
     }
 
@@ -52,20 +50,14 @@
         box-shadow: none;
         background-color: none;
         margin-top: 15px;
-        max-width: 90%;
-        border-bottom: 1px solid #cdcdcd;
-        padding: 0 0 $min-margin;
+        padding: 0;
         border-radius: unset;
-
-        @include breakpoint(desktop-sm) {
-          max-width: 100%;
-        }
 
         .headline {
           letter-spacing: -.16px;
           margin: 0 0 10px;
 
-          @include text-styles(1rem, 1, "Lora");
+          @include text-styles(1rem, 1.375, "Lora");
         }
       }
     }
@@ -84,7 +76,7 @@
     .column-3 .headline {
       letter-spacing: -.16px;
 
-      @include text-styles(1rem, 1, "Lora");
+      @include text-styles(1rem, 1.375, "Lora");
     }
   }
 }

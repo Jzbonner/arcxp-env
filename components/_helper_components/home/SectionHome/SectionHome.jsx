@@ -5,7 +5,7 @@ const SectionHomepage = ({
   feature, rightColContent, rightRailContent, colLayout,
 }) => {
   if (feature || rightColContent || rightRailContent) {
-    let parentClass = 'c-sectionHome ';
+    let parentClass = 'c-sectionHome b-sectionHome-padding b-sectionHomeMaxWidth';
     if (rightColContent) {
       parentClass += ` halves ${rightRailContent ? ' with-rightRail' : ''}`;
     } else {

@@ -8,14 +8,15 @@ import Copyright from '../global/copyright/default';
 import TopNavBreakingNews from '../global/navBar/TopNavBreakingNews/default';
 import '../../../src/styles/container/_c-section.scss';
 import '../../../src/styles/base/_utility.scss';
-import './default.scss';
 
-const SectionOutput = ({ zones, layout, noHeaderAndFooter }) => (
+const SectionOutput = ({ zones, layout, noHeaderAndFooter }) => {
+  const isErrorPage = layout === 'section-basic';
+  return (
   <>
     <GlobalAdSlots pbPage={true} />
     {/* we omit breaking news on wraps */}
     {!noHeaderAndFooter && <TopNavBreakingNews type={layout} omitBreakingNews={layout.indexOf('wrap-') !== -1} />}
-    <main className="c-sectionContent">
+    <main className={`c-sectionContent ${isErrorPage ? 'b-contentMaxWidth' : ''}`}>
       {zones && (
         zones.map((zone, i) => {
           const {
@@ -36,7 +37,8 @@ const SectionOutput = ({ zones, layout, noHeaderAndFooter }) => (
       </>}
     </>}
   </>
-);
+  );
+};
 
 SectionOutput.propTypes = {
   zones: PropTypes.array,

@@ -1,4 +1,4 @@
-import sanitizeHtml from 'sanitize-html';
+import xss from 'xss';
 
 /* eslint-disable */
 const decodeString = (str) => {
@@ -6,15 +6,18 @@ const decodeString = (str) => {
   let parsed = str.replace(REGNewline, '');
   parsed = parsed.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
   return parsed;
-}
+};
 
-// https://github.com/apostrophecms/sanitize-html
 const safeHtml = (str, opt = {}) => {
   const preconfig = {
-    allowedAttributes: {
+    whiteList: {
       '*': ['id'],
-      'a': ['href', 'data-*', 'target', 'class', 'on']
-    }
+      'a': ['href', 'data-*', 'target', 'class', 'on'],
+      'b': [],
+      'i': [],
+      'strong': [],
+    },
+    stripIgnoreTag: true,// filter out all HTML not in the whilelist
   };
 
   const cfg = {
@@ -22,7 +25,9 @@ const safeHtml = (str, opt = {}) => {
     ...opt
   };
 
-  const parsed = sanitizeHtml(str, cfg);
+  const myxss = new xss.FilterXSS(cfg);
+
+  const parsed = myxss.process(str);
   return parsed;
 }
 

@@ -13,7 +13,6 @@ import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import './Headline.scss';
 
 const Headline = ({
-  promo_items: promoItems,
   label,
   taxonomy,
   first_publish_date: firstPublishDate,
@@ -21,8 +20,10 @@ const Headline = ({
   headlines,
   canonical_url: canonicalUrl,
   website_url: websiteUrl,
-  type,
+  type: contentType,
+  promo_items: promoItems,
   firstInlineImage,
+  teaseImageObject,
   isTease,
 }) => {
   const appContext = useAppContext();
@@ -43,26 +44,27 @@ const Headline = ({
 
   const relativeURL = websiteUrl || canonicalUrl || '/';
 
-  function getPromoItem(contentType) {
+  function getPromoItem() {
+    if (teaseImageObject) {
+      return teaseImageObject;
+    }
     if (promoItems) {
       if (contentType === 'video' || contentType === 'gallery') {
         if (promoItems.basic) {
-          return <Image src={promoItems.basic} width={1066} height={600} imageType="isHomepageImage" teaseContentType={contentType} />;
+          return promoItems.basic;
         }
       }
       if (promoItems.basic.type === 'image') {
-        return (
-          <Image src={promoItems.basic || promoItems.lead_art.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />
-        );
+        return promoItems.basic || promoItems.lead_art.promo_items.basic;
       }
       if (promoItems.basic.type === 'video' || promoItems.basic.type === 'gallery') {
         if (promoItems.basic.promo_items && promoItems.basic.promo_items.basic) {
-          return <Image src={promoItems.basic.promo_items.basic} width={1066} height={600} imageType="isHomepageImage" />;
+          return promoItems.basic.promo_items.basic;
         }
       }
     }
     if (firstInlineImage) {
-      return <Image src={firstInlineImage} width={1066} height={600} imageType="isHomepageImage" />;
+      return firstInlineImage;
     }
     return null;
   }
@@ -86,7 +88,7 @@ const Headline = ({
   return (
     <div className={`home-headline ${sponsorName ? 'sponsored' : ''}`}>
       <a href={relativeURL} className='homeList-image'>
-        {getPromoItem(type)}
+        {<Image src={getPromoItem()} width={500} height={282} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} />}
         {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
         </a>
       <div className="headline-box">
@@ -108,14 +110,15 @@ const Headline = ({
 };
 
 Headline.propTypes = {
-  promo_items: PropTypes.object,
   label: PropTypes.object,
   taxonomy: PropTypes.object,
   first_publish_date: PropTypes.string,
   display_date: PropTypes.string,
   headlines: PropTypes.object,
   type: PropTypes.string,
+  promo_items: PropTypes.object,
   firstInlineImage: PropTypes.object,
+  teaseImageObject: PropTypes.object,
   isTease: PropTypes.bool,
   canonical_url: PropTypes.string,
   website_url: PropTypes.string,

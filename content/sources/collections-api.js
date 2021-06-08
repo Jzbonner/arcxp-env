@@ -1,9 +1,11 @@
 /* eslint-disable no-console */
-import _ from 'lodash';
+import pick from 'lodash/pick';
 import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
 import GetCollectionData from './helper_functions/GetCollectionData';
-import filter from '../filters/collectionFilter';
+import FetchResizedImages from './helper_functions/FetchResizedImages';
+import getImageRequirements from './helper_functions/getImageRequirements';
+import filter from '../filters/collectionApiFilter';
 
 const schemaName = 'collections';
 const ttl = 120;
@@ -22,16 +24,24 @@ const fetch = (query) => {
     size = 12,
     displayClass = '',
     displayClassesRequiringImg = [],
+    width = 500,
+    height = 282,
+    useSrcSet = false,
+    srcSetSizes = [],
+    squareImageSize,
+    useSquareImageAfter,
   } = query;
   const activeSite = arcSite || arcSiteAlt;
 
   if (!activeSite) return [];
 
+  const requiresImageEveryX = getImageRequirements(displayClass, displayClassesRequiringImg);
   if (id) {
     return GetCollectionData(activeSite, id, size)
       .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
-      .then(data => FilterElements(data, displayClass, displayClassesRequiringImg))
-      .then(data => data.map(el => _.pick(el, filter)))
+      .then(data => FilterElements(data, requiresImageEveryX))
+      .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes, squareImageSize, useSquareImageAfter))
+      .then(data => data.map(el => pick(el, filter)))
       .catch((error) => {
         console.error(error);
       });

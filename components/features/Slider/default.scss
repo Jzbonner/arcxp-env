@@ -10,22 +10,12 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
-  box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
   margin-bottom: $min-Msection-margin;
 
   @include breakpoint(desktop-sm) {
-    width: calc(100vw - 1rem - 1px);
     margin-bottom: $min-DTsection-margin;
-  }
-
-  .c-sectionTitle {
-    margin: 0 0 $min-margin 30px;
-
-    @include breakpoint(desktop-sm) {
-      margin-left: 1.875rem;
-    }
   }
 
   .c-slider {
@@ -46,19 +36,62 @@
       scroll-behavior: smooth;
       overflow-x: scroll;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
 
-      @include breakpoint(desktop-sm) {
-        overflow-x: hidden;
+      &::-webkit-scrollbar-track {
+        display: none;
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        display: none;
       }
 
       .itemList {
         display: flex;
         position: relative;
         transition: transform .1s;
-        margin-bottom: 1.275rem;
 
         @include breakpoint(desktop-sm) {
           margin-bottom: 0;
+        }
+      }
+    }
+
+    .c-slider-nav {
+      display: flex;
+      align-items: center;
+
+      .c-slider-button {
+        display: none;
+        cursor: pointer;
+      
+        @include breakpoint(tablet) {
+          display: flex;
+          min-width: 50px;
+          min-height: 50px;
+          border-radius: 15px;
+          box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, .6);
+          border: solid 1px #ececec;
+          background-color: #fff;
+          position: relative;
+          justify-content: center;
+          align-items: center;
+          margin-left: 9px;
+          margin-right: 15px;
+          transition: box-shadow .5s;
+
+          &:active {
+            box-shadow: none;
+          }
+        }
+
+        &.is-right {
+          margin-left: 15px;
+          margin-right: 9px;
         }
       }
     }

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import getProperties from 'fusion:properties';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
-import get from 'lodash.get';
+import get from 'lodash/get';
 import fetchEnv from '../utils/environment.js';
 import './default.scss';
 
@@ -36,7 +36,7 @@ const BreakingNewsStory = () => {
     const headline = get(story, 'headlines.basic', '');
     const url = get(story, 'canonical_url', '');
     return (
-      <div className={`c-breakingNews ${!isVisible ? 'is-hidden' : ''}`}>
+      <div className={`c-breakingNews b-sectionHomeMaxWidth ${!isVisible ? 'is-hidden' : ''}`}>
         <a href={url} className="breakingURL">
           <div className="c-breakingNews-heading b-flexCenter">
             <span>Breaking</span>
