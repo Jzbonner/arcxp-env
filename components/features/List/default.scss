@@ -114,6 +114,29 @@
     }
   }
 
+  &.two-column-mobile {
+    @include breakpoint(tablet) {
+      position: relative;
+      padding-bottom: 32px;
+      border-bottom: 1px #dadada solid;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .tablet-line {
+        position: absolute;
+        bottom: 32px;
+        right: 50%;
+        height: 600px;
+        width: 1px;
+        background-color: #dadada;
+      }
+    }
+
+    @include breakpoint(desktop-sm) {
+      flex-direction: column;
+    }
+  }
+
   &.two-columns {
 
     .c-homeList {
@@ -298,6 +321,10 @@
 
         .article-timestamp {
           margin-left: 0;
+        }
+
+        @include between-breakpoints(tablet, desktop-sm) {
+          width: 47%;
         }
 
         @include breakpoint(desktop-sm) {
