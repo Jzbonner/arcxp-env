@@ -75,8 +75,11 @@
           top: 0;
 
           @include breakpoint(tablet) {
-            top: 10px;
             padding: 0;
+          }
+
+          @include breakpoint(desktop-sm) {
+            top: 10px;
           }
 
           .headline {
