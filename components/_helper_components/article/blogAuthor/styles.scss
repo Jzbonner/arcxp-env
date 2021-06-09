@@ -20,6 +20,7 @@
 
   &.multiple-authors {
     margin-bottom: 0;
+
     .blog-author-content-heading {
       justify-content: left;
       align-items: start;
@@ -29,10 +30,11 @@
         justify-content: left;
         flex-direction: row;
       }
-    .content-profileImage {
-      margin-bottom: 0;
+
+      .content-profileImage {
+        margin-bottom: 0;
+      }
     }
-  }
 
     .b-flexRow {
       margin-bottom: 20px;
@@ -65,109 +67,108 @@
           overflow: hidden;
         }
       }
-  .blog-author-content:not(:last-child) {
-    border-bottom: 1px solid #cdcdcd;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-  }
 
-  .blog-author-content-heading {
-    justify-content: left;
-    align-items: center;
-    flex-direction: row;
-    position: relative;
+      .blog-author-content:not(:last-child) {
+        border-bottom: 1px solid #cdcdcd;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+      }
 
+      .blog-author-content-heading {
+        justify-content: left;
+        align-items: center;
+        flex-direction: row;
+        position: relative;
         font-weight: 600;
         padding: 35px 20px;
       }
-    &.has-image .content-authorName {
-      width: calc(100% - 117px);
-    }
 
-    &:not(.has-image) .content-authorSocial a {
-      width: 20px;
-      height: 20px;
-    }
-  }
-
-  .content-profileImage {
-    width: 97px;
-    height: 97px;
-    margin: 0 20px 10px 0;
-    display: flex;
-    justify-content: center;
-
-    @include breakpoint(tablet) {
-      margin-bottom: 0;
-    }
-
-    .content-authorDescription {
-      padding: 0;
-      
-    .c-image-component,
-    .image-component-image {
-      height: 100%;
-      width: 100%;
-    }
-
-    img,
-    amp-img {
-      height: 100%;
-      width: auto;
-      border-radius: 50%;
-      overflow: hidden;
-    }
-  }
-
-  .content-authorName {
-    @include text-styles(1.125rem, 1, "Gordita-Bold");
-
-    text-align: left;
-    letter-spacing: -.22px;
-    font-weight: 600;
-    position: relative;
-    width: 100%;
-    padding-right: 50px;
-    box-sizing: border-box;
-  }
-
-  .content-authorSocial {
-    position: absolute;
-    right: 0;
-    top: 0;
-
-    a {
-      margin-left: 12px;
-      display: inline-block;
-      vertical-align: middle;
-      width: 17px;
-      height: 17px;
-
-      img {
-        width: 100%;
-        height: 100%;
+      &.has-image .content-authorName {
+        width: calc(100% - 117px);
       }
+
+      &:not(.has-image) .content-authorSocial a {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .content-profileImage {
+      width: 97px;
+      height: 97px;
+      margin: 0 20px 10px 0;
+      display: flex;
+      justify-content: center;
 
       @include breakpoint(tablet) {
-        width: 33px;
-        height: 33px;
-        margin-left: 24px;
+        margin-bottom: 0;
+      }
+
+      .content-authorDescription {
+        padding: 0;
+        color: #505050;
+
+        @include text-styles(.875rem, 1.375, "Gordita");
+
+        .c-image-component,
+        .image-component-image {
+          height: 100%;
+          width: 100%;
+        }
+
+        img,
+        amp-img {
+          height: 100%;
+          width: auto;
+          border-radius: 50%;
+          overflow: hidden;
+        }
+      }
+
+      .content-authorName {
+        @include text-styles(1.125rem, 1, "Gordita-Bold");
+
+        text-align: left;
+        letter-spacing: -.22px;
+        font-weight: 600;
+        position: relative;
+        width: 100%;
+        padding-right: 50px;
+        box-sizing: border-box;
+      }
+
+      .content-authorSocial {
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        a {
+          margin-left: 12px;
+          display: inline-block;
+          vertical-align: middle;
+          width: 17px;
+          height: 17px;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+
+          @include breakpoint(tablet) {
+            width: 33px;
+            height: 33px;
+            margin-left: 24px;
+          }
+        }
+      }
+
+      .b-flexRow {
+        margin-bottom: 10px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
-  }
-
-  .b-flexRow {
-    margin-bottom: 10px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  .content-authorDescription {
-    padding: 0;
-    color: #505050;
-
-    @include text-styles(.875rem, 1.375, "Gordita");
   }
 }
