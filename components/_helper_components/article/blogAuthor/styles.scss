@@ -9,7 +9,7 @@
 
     letter-spacing: -.31px;
     margin-bottom: 10px;
-    font-weight: 600;
+    font-weight: 700;
     color: #313132;
     display: flex;
 
@@ -20,12 +20,51 @@
 
   &.multiple-authors {
     margin-bottom: 0;
+    .blog-author-content-heading {
+      justify-content: left;
+      align-items: start;
+      flex-direction: inherit;
 
+      @include breakpoint(tablet) {
+        justify-content: left;
+        flex-direction: row;
+      }
     .content-profileImage {
       margin-bottom: 0;
     }
   }
 
+    .b-flexRow {
+      margin-bottom: 20px;
+
+      .content-profileImage {
+        width: 97px;
+        height: 97px;
+        margin: 0 0 20px;
+        float: left;
+
+        @include breakpoint(tablet) {
+          margin: 0 20px 0 0;
+        }
+
+        display: flex;
+        justify-content: center;
+
+        .c-image-component,
+        .image-component-image {
+          height: 100%;
+          width: 100%;
+        }
+
+        img,
+        amp-img {
+          height: 100%;
+          width: auto;
+          border-radius: 50%;
+          box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
+          overflow: hidden;
+        }
+      }
   .blog-author-content:not(:last-child) {
     border-bottom: 1px solid #cdcdcd;
     padding-bottom: 15px;
@@ -38,6 +77,9 @@
     flex-direction: row;
     position: relative;
 
+        font-weight: 600;
+        padding: 35px 20px;
+      }
     &.has-image .content-authorName {
       width: calc(100% - 117px);
     }
@@ -59,6 +101,9 @@
       margin-bottom: 0;
     }
 
+    .content-authorDescription {
+      padding: 0;
+      
     .c-image-component,
     .image-component-image {
       height: 100%;
@@ -77,6 +122,7 @@
   .content-authorName {
     @include text-styles(1.125rem, 1, "Gordita-Bold");
 
+    text-align: left;
     letter-spacing: -.22px;
     font-weight: 600;
     position: relative;
