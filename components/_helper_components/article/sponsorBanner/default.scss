@@ -20,7 +20,7 @@
     margin-top: .938rem;
   }
 
-  @include breakpoint(desktop-nav) {
+  @include breakpoint(desktop-xxxl) {
     max-width: 1540px;
   }
 
