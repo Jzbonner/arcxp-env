@@ -78,6 +78,10 @@
             padding: 0;
           }
 
+          @include breakpoint(desktop-sm) {
+            top: 10px;
+          }
+
           .headline {
             @include text-styles(1.5rem, 1.17, "Lora");
 
