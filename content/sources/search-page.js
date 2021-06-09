@@ -1,12 +1,17 @@
-const { searchPageKey } = require('../../environment/index');
+import { SEARCH_PAGE_KEY } from 'fusion:environment';
+
+const params = {
+  q: 'text',
+  page: 'number',
+};
 
 const resolve = (query) => {
-  // Temporarily hardcoded while calling from Feature below hardcoded values will be removed
-  const { q = 'disney', arcSite = 'ajc', page = 1 } = query;
-  const requestUri = `https://search.arcpublishing.com/search?website_id=${arcSite}&q=${q}&page=${page}&key=${searchPageKey}`;
+  const { arcSite = 'ajc', q, page } = query;
+  const requestUri = `https://search.arcpublishing.com/search?website_id=${arcSite}&q=${q}&page=${page}&key=${SEARCH_PAGE_KEY}`;
   return requestUri;
 };
 
 export default {
   resolve,
+  params,
 };

@@ -7,5 +7,5 @@ module.exports = {
   sportradarAPIkey: 'mmwnrjmhcnx9wp87ptf4mqf5',
   sportradarAPIVersion: 'v3',
   sportradarAccessLevel: 'production',
-  searchPageKey: 'fCEj1NJ92085IDY9trZAk4YydlTZjWTJ5tGWAys4',
+  SEARCH_PAGE_KEY: '{%AQICAHiH7W8m/ZwSizPtJ5+e3MKEKRvPhAGdG3pC/jWLxGpnzgHjYwEIrhHOIkf+YZa3ZueDAAAAhzCBhAYJKoZIhvcNAQcGoHcwdQIBADBwBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDKDDhc94xAubMtFkaAIBEIBDcxHre9Szx5xtWL6jkN9utfxtHwwv8lDQTlBqhjlQj0FrO0ib/hJJSQWDqjZB8kb0ZFNy0kVR+RiGdhIEnHZdLqY5WA==}',
 };
