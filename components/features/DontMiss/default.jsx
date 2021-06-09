@@ -17,6 +17,10 @@ const DontMiss = (customFields = {}) => {
     },
   } = customFields;
 
+  const { size } = contentConfigValues;
+  let { from: startIndex = 1 } = contentConfigValues || {};
+  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
+
   const data = useContent({
     source: contentService,
     query: {
@@ -31,10 +35,9 @@ const DontMiss = (customFields = {}) => {
         <FeatureTitle title={title}/>
         <div className="c-homeListContainer no-photo-display-class dontMissFeature">
         {data.map((el, i) => {
-          if (i < 3) {
+          if (startIndex <= i && i < size + startIndex) {
             return <ListItem key={`ListItem-${i}`} {...el} isDontMissFeature/>;
-          }
-          return null;
+          } return null;
         })}
         </div>
       </div>);
