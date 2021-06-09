@@ -130,17 +130,17 @@
       text-decoration: none;
       margin-bottom: $min-margin;
 
-      @include text-styles(1.125rem, 1.33, "Lora");
+      @include text-styles(1rem, 1.33, "Lora");
 
       @include breakpoint(tablet) {
         max-width: 93%;
+
+        @include text-styles(1.1rem, 1.3, "Lora");
       }
 
       @include breakpoint(desktop-sm) {
         letter-spacing: -.2px;
         line-height: 1.5rem;
-
-        @include text-styles(1.375rem, 1.09, "Lora");
       }
     }
   }

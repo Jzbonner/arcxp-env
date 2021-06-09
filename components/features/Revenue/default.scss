@@ -36,6 +36,7 @@
 
     .c-sectionTitle {
       margin-bottom: $min-margin;
+      justify-content: start;
 
       &:after {
         display: none;
@@ -104,7 +105,11 @@
           @include breakpoint(desktop-sm) {
             letter-spacing: -.22px;
             
-            @include text-styles(1.5rem, 1.17, "Lora");
+            @include text-styles(1.3rem, 1.17, "Lora");
+          }
+
+          @include breakpoint(desktop-lg) {
+            @include text-styles(1.1rem, 1.17, "Lora");
           }
         }
 

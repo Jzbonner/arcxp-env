@@ -2,6 +2,14 @@
 @import "../../../src/styles/base/breakpoints";
 
 .c-listPage {
+  
+  &.b-sectionHome-padding {
+    padding-top: 1.25rem;
+
+    @include breakpoint(tablet) {
+      padding-top: 1.875rem;
+    }
+  }
 
   .c-section {
 
