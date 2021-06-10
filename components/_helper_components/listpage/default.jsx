@@ -111,8 +111,8 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
           {!noAds ? (
             <div className="c-rightRail list-rp01">{RP01()}</div>
           ) : null}
+          {getTitle()}
           <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile">
-            {getTitle()}
             <div className="tablet-line"></div>
             {filteredTeases.map((el, i) => {
               const startIndex = 1;

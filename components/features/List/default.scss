@@ -43,7 +43,6 @@
     }
 
     @include breakpoint(desktop-sm) {
-      margin-right: 3.3%;
       width: 100%;
     }
 
@@ -112,6 +111,17 @@
       margin-bottom: 0;
       padding-bottom: 0;
     }
+
+    .homeList-image {
+      width: 80px;
+      min-width: 80px;
+      height: auto;
+
+      @include breakpoint(desktop-sm) {
+        width: 104px;
+        min-width: 104px;
+      }
+    }
   }
 
   &.two-column-mobile {
@@ -126,7 +136,7 @@
         position: absolute;
         bottom: 32px;
         right: 50%;
-        height: 600px;
+        height: calc(100% - 47px);
         width: 1px;
         background-color: #dadada;
       }
@@ -134,6 +144,10 @@
 
     @include breakpoint(desktop-sm) {
       flex-direction: column;
+
+      .tablet-line {
+        display: none;
+      }
     }
   }
 
@@ -282,7 +296,7 @@
         max-width: 55%;
 
         @include breakpoint(desktop-lg) {
-          max-width: 60%;
+          max-width: 100%;
         }
 
         .c-label-wrapper {
@@ -306,7 +320,7 @@
             letter-spacing: -.08px;
 
             @include breakpoint(desktop-lg) {
-              max-width: 60%;
+              max-width: 100%;
             }
           }
         }
@@ -327,9 +341,9 @@
           width: 47%;
         }
 
-        @include breakpoint(desktop-sm) {
-          margin-bottom: 2rem;
-        }
+        //@include breakpoint(desktop-sm) {
+        //  margin-bottom: 2rem;
+        //}
       }
 
       &.isMissingPromo {
