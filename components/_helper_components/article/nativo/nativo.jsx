@@ -21,7 +21,7 @@ const Nativo = ({
               width="400"
               height="400"
               layout="responsive"
-              data-request-url={`https://amp.${handleSiteName(arcSite)}.com/amp/nativo`}
+              data-request-url={`https://amp.${handleSiteName(arcSite)}.com/amp/ntv-moap`}
               amp-access={isMeteredStory ? 'Error=true OR AccessLevel="Full Content Access"' : null}
               amp-access-hide={isMeteredStory ? '' : null}
             ></amp-ad>
