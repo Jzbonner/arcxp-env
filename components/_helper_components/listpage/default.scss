@@ -14,13 +14,13 @@
   .c-section {
 
     .c-contentElements {
-      @include breakpoint(tablet) {
+      @include breakpoint(desktop-sm) {
         width: calc(100% - 330px);
         padding: 0 30px 0 0;
       }
 
       .c-rightRail {
-        @include breakpoint(tablet) {
+        @include breakpoint(desktop-sm) {
           display: block;
           float: right;
           margin-right: -330px;
