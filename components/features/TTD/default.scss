@@ -68,7 +68,7 @@
         }
 
         .headline-box {
-          padding: 25px 0 0;
+          padding: 0;
           background: none;
           border-radius: 0;
           box-shadow: unset;
@@ -139,11 +139,6 @@
           @include breakpoint(desktop-sm) {
             min-height: 104px;
           }
-        }
-
-        &:last-child {
-          margin-bottom: 0;
-          padding-bottom: 0;
         }
 
         @include between-breakpoints(mobile, desktop-lg) {
