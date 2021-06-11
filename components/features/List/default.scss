@@ -44,6 +44,7 @@
     }
 
     @include breakpoint(desktop-sm) {
+      margin-right: 3.3%;
       width: 100%;
     }
 
@@ -100,6 +101,17 @@
         @include breakpoint(desktop-lg) {
           @include text-styles(.9375rem, 1.17, "Lora");
         }
+      }
+    }
+
+    &.listPage {
+
+      .c-tease-icon {
+        margin-left: 0;
+      }
+
+      .homeList-image {
+        margin-left: 23px;
       }
     }
   }
