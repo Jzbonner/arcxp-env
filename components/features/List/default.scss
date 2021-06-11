@@ -231,11 +231,15 @@
     }
 
     .homeList-text {
-      margin: 0 $min-margin;
       text-align: left;
 
       @include breakpoint(tablet) {
         margin: 0;
+      }
+
+      @include breakpoint(desktop-sm) {
+        font-size: 1rem;
+        line-height: 1.375;
       }
     }
 
@@ -343,6 +347,10 @@
         @include text-styles(1rem, 1.38, "Lora");
 
         letter-spacing: -.09px;
+
+        @include breakpoint(desktop-sm) {
+          font-size: .9rem;
+        }
 
         @include breakpoint(desktop-lg) {
           @include text-styles(.9375rem, 1.38, "Lora");

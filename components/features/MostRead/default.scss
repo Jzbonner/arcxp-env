@@ -128,7 +128,7 @@
   }
 
   @include breakpoint(desktop-sm) {
-    @include text-styles(1.438rem, 1.3, "Lora");
+    @include text-styles(1rem, 1.3, "Lora");
 
     padding-top: 10px;
     min-width: 120px;

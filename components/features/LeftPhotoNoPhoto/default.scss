@@ -51,10 +51,6 @@
     }
   }
 
-  @include breakpoint(desktop-sm) {
-    margin-bottom: 15px;
-  }
-
   .row {
     display: flex;
     justify-content: space-between;
