@@ -112,6 +112,12 @@ const ListItem = ({
 
   return (
     <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''}`}>
+      {!hidePromo && getPromoItem() && !isDontMissFeature && (
+        <a href={relativeURL} className="homeList-image">
+          <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'}/>
+          {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
+        </a>
+      )}
       <div className="homeList-text">
         {!hidePromo && !isDontMissFeature && !isSynopsis && getTeaseIcon(contentType)}
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
@@ -128,12 +134,6 @@ const ListItem = ({
             isTease={true}
           />}
       </div>
-      {!hidePromo && getPromoItem() && !isDontMissFeature && (
-        <a href={relativeURL} className="homeList-image">
-          <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'}/>
-          {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
-        </a>
-      )}
     </div>
   );
 };
