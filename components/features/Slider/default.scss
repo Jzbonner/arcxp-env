@@ -64,6 +64,7 @@
     .c-slider-nav {
       display: flex;
       align-items: center;
+      margin-bottom: .625rem;
 
       .c-slider-button {
         display: none;
@@ -85,6 +86,7 @@
           transition: box-shadow .5s;
 
           &:active {
+            outline: none;
             box-shadow: none;
           }
         }
