@@ -1,8 +1,9 @@
 @import "../../../src/styles/base/_mixins.scss";
 @import "../../../src/styles/base/breakpoints";
 
-.c-listPage {
-  
+.c-listPage,
+.c-staffBioPage {
+
   &.b-sectionHome-padding {
     padding-top: 1.25rem;
 
@@ -75,7 +76,18 @@
   }
 }
 
+.c-listPage {
+
+  .list-contentElements {
+    @include breakpoint(desktop-sm) {
+      border-right: 1px #dadada solid;
+    }
+  }
+}
+
 .list-mp05 {
+  margin-top: 2rem;
+
   @include breakpoint(tablet) {
     display: none;
   }

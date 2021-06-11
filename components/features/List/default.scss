@@ -132,23 +132,33 @@
   &.two-column-mobile {
     @include breakpoint(tablet) {
       position: relative;
-      padding-bottom: 32px;
       border-bottom: 1px #dadada solid;
       flex-direction: row;
       justify-content: space-between;
+      margin-bottom: 1.25rem;
 
       .tablet-line {
         position: absolute;
-        bottom: 32px;
+        top: 1rem;
         right: 50%;
-        height: calc(100% - 47px);
+        height: calc(100% - 3rem);
         width: 1px;
         background-color: #dadada;
+      }
+
+      .c-homeList.listPage:nth-last-child(-n+2) {
+        border: none;
       }
     }
 
     @include breakpoint(desktop-sm) {
       flex-direction: column;
+      border: none;
+      margin-bottom: .94rem;
+
+      .c-homeList.listPage:nth-last-child(2) {
+        border-bottom: 1px #dadada solid;
+      }
 
       .tablet-line {
         display: none;
