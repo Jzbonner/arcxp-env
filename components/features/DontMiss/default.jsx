@@ -17,7 +17,7 @@ const DontMiss = (customFields = {}) => {
     },
   } = customFields;
 
-  const { size = 5 } = contentConfigValues;
+  const { size } = contentConfigValues;
   let { from: startIndex = 1 } = contentConfigValues || {};
   startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
 
