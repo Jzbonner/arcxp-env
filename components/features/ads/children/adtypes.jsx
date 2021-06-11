@@ -380,7 +380,7 @@ export const adSlots = {
       ], // tablet +
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop
     ],
     bidding: {
       amazon: {

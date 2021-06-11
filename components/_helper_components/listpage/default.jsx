@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import checkTags from '../../layouts/_helper_functions/checkTags';
 import ArcAd from '../../features/ads/default';
-import Pagination from '../global/pagination/default';
 import ListItem from '../home/ListItem/ListItem';
 import './default.scss';
 import '../../features/List/default';
@@ -17,8 +16,6 @@ const RP01 = () => (
 const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
 
 const ListPage = ({ globalContent, globalContentConfig, title }) => {
-  const [activePage, setActivePage] = useState(1);
-
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const { query } = globalContentConfig || {};
@@ -114,24 +111,16 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
           {!noAds ? (
             <div className="c-rightRail list-rp01">{RP01()}</div>
           ) : null}
-          <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column">
-            {getTitle()}
+          {getTitle()}
+          <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile">
+            <div className="tablet-line"></div>
             {filteredTeases.map((el, i) => {
-              const startIndex = (activePage - 1) * storiesPerPage;
+              const startIndex = 1;
               if (startIndex <= i && i < startIndex + storiesPerPage) {
                 return <ListItem key={`key-${i}`} {...el} listPage={true} />;
               }
               return null;
             })}
-            {filteredTeases.length > storiesPerPage && (
-              <Pagination
-                activePage={activePage}
-                setActivePage={setActivePage}
-                totalStories={filteredStories.length}
-                storiesPerPage={storiesPerPage}
-                maxPagesToDisplay={5}
-              />
-            )}
           </div>
         </div>
       </div>
