@@ -337,6 +337,7 @@
 
       &.listPage {
         width: 100%;
+        flex-direction: row-reverse;
         justify-content: space-between;
         border-bottom: 1px #dadada solid;
         padding-bottom: .063rem;
