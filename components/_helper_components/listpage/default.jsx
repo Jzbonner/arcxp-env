@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
@@ -9,6 +9,7 @@ import './default.scss';
 import '../../features/List/default';
 import filter from '../../../content/filters/collectionTitle';
 import AddFirstInlineImage from '../../../content/sources/helper_functions/AddFirstInlineImage';
+import LoadMoreButton from '../loadMoreBtn/default';
 
 const RP01 = () => (
   <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />
@@ -23,17 +24,14 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
 
-  const filterStart = parseInt(query.from, 10) - 1; // since the array is zero-indexed
-  const filterSize = parseInt(query.size, 10);
+  const storiesPerLoad = 10;
+  const [storiesCount, setStoryCount] = useState(storiesPerLoad);
 
   if (!globalContent) {
     return null;
   }
 
-  const filteredStories = globalContent.slice(
-    filterStart,
-    filterStart + filterSize,
-  );
+  const filteredStories = globalContent.slice(0, storiesCount);
 
   const updateImageRefs = (apiData) => {
     const newData = apiData;
@@ -86,8 +84,6 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
 
   const { headlines: { basic: collectionTitle } = {} } = collectionMetaData || {};
 
-  const storiesPerPage = 10;
-
   const getTitle = () => {
     if (title) {
       return title;
@@ -113,18 +109,16 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
           ) : null}
           {getTitle()}
           <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile">
-            <div className="tablet-line"></div>
-            {filteredTeases.map((el, i) => {
-              const startIndex = 1;
-              if (startIndex <= i && i < startIndex + storiesPerPage) {
-                return <ListItem key={`key-${i}`} {...el} listPage={true} />;
-              }
-              return null;
-            })}
+          <div className="tablet-line"></div>
+            {filteredTeases.map((el, i) => <ListItem key={`key-${i}`} {...el} listPage={true} />)}
           </div>
+          {!noAds ? <div className="list-mp05">{MP05()}</div> : null}
+            {globalContent.length > storiesPerLoad && <LoadMoreButton
+              newStories={filteredStories}
+              handleOnClick={() => setStoryCount(storiesCount + storiesPerLoad)}
+            />}
         </div>
       </div>
-      {!noAds ? <div className="list-mp05">{MP05()}</div> : null}
     </main>
   );
 };
