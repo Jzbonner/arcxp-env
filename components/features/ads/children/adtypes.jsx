@@ -389,10 +389,18 @@ export const adSlots = {
   },
   RP02: {
     dimensions: [
-      [300, 100], // desktop+
+      [
+        [300, 100], // desktop+
+      ],
+      [], // tablet
+      [
+        [300, 100], // mobile
+      ],
     ],
     breakpoints: [
-      [1024, 0], // desktop+
+      [1024, 0], // desktop
+      [768, 0], // tablet
+      [0, 0], // mobile
     ],
   },
   'RP02 tablet': {
@@ -400,7 +408,7 @@ export const adSlots = {
     dimensions: [
       [], // desktop
       [
-        [728, 90], // tablet
+        [730, 100], // tablet
       ],
     ],
     breakpoints: [
