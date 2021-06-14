@@ -392,7 +392,9 @@ export const adSlots = {
       [
         [300, 100], // desktop+
       ],
-      [], // tablet
+      [
+        [730, 100], // tablet
+      ],
       [
         [300, 100], // mobile
       ],
@@ -401,19 +403,6 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
       [0, 0], // mobile
-    ],
-  },
-  'RP02 tablet': {
-    slotName: 'RP02',
-    dimensions: [
-      [], // desktop
-      [
-        [730, 100], // tablet
-      ],
-    ],
-    breakpoints: [
-      [1024, 0], // desktop
-      [768, 0], // tablet
     ],
   },
   'RP03 sticky': {
