@@ -107,11 +107,11 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
   return (
     <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
       <div className="c-section with-rightRail">
+        {getTitle()}
         <div className="c-contentElements list-contentElements">
           {!noAds ? (
-            <div className="c-rightRail list-rp01">{RP01()}</div>
+            <div className="c-rightRail list-rp01 list-page-right-rail">{RP01()}</div>
           ) : null}
-          {getTitle()}
           <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile">
             <div className="tablet-line"></div>
             {filteredTeases.map((el, i) => {
