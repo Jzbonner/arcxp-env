@@ -16,7 +16,12 @@ const RP01 = () => (
 );
 const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
 
-const ListPage = ({ globalContent, globalContentConfig, title }) => {
+const ListPage = ({
+  globalContent,
+  globalContentConfig,
+  title,
+  textBox,
+}) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const { query } = globalContentConfig || {};
@@ -100,14 +105,25 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
     return null;
   };
 
+  const getNewsTipText = (placement) => {
+    if (!placement || !textBox) return null;
+
+    return (
+      <div className={`c-news-tip-text ${placement}`}>
+        {textBox}
+      </div>
+    );
+  };
+
   return (
     <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
       <div className="c-section with-rightRail">
+        {getTitle()}
+        {getNewsTipText('mobile-tablet')}
         <div className="c-contentElements list-contentElements">
           {!noAds ? (
-            <div className="c-rightRail list-rp01">{RP01()}</div>
+            <div className="c-rightRail list-rp01 list-page-right-rail">{RP01()}</div>
           ) : null}
-          {getTitle()}
           <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile">
           <div className="tablet-line"></div>
             {filteredTeases.map((el, i) => <ListItem key={`key-${i}`} {...el} listPage={true} />)}
@@ -127,6 +143,7 @@ ListPage.propTypes = {
   globalContent: PropTypes.array,
   globalContentConfig: PropTypes.object,
   title: PropTypes.func,
+  textBox: PropTypes.func,
 };
 
 export default ListPage;
