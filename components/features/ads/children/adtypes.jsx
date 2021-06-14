@@ -390,23 +390,20 @@ export const adSlots = {
   },
   RP02: {
     dimensions: [
-      [300, 100], // desktop+
-    ],
-    breakpoints: [
-      [1024, 0], // desktop+
-    ],
-  },
-  'RP02 tablet': {
-    slotName: 'RP02',
-    dimensions: [
-      [], // desktop
       [
-        [728, 90], // tablet
+        [300, 100], // desktop+
+      ],
+      [
+        [730, 100], // tablet
+      ],
+      [
+        [300, 100], // mobile
       ],
     ],
     breakpoints: [
       [1024, 0], // desktop
       [768, 0], // tablet
+      [0, 0], // mobile
     ],
   },
   'RP03 sticky': {
@@ -416,10 +413,14 @@ export const adSlots = {
       [
         [300, 250],
         [300, 600],
-      ], // tablet+
+      ], // desktop
+      [
+        [728, 90],
+      ], // tablet
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop
+      [768, 0], // tablet
     ],
     isSticky: true,
     bidding: {
@@ -513,10 +514,14 @@ export const adSlots = {
     dimensions: [
       [
         [300, 250],
-      ], // tablet+
+      ], // desktop
+      [
+        [728, 90],
+      ], // tablet
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop
+      [768, 0], // tablet
     ],
     bidding: {
       amazon: {
@@ -547,10 +552,14 @@ export const adSlots = {
       [
         [300, 250],
         [300, 600],
-      ], // tablet+
+      ], // desktop
+      [
+        [728, 90], // tablet
+      ],
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop
+      [768, 0], // tablet
     ],
     isSticky: true,
     bidding: {

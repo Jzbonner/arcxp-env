@@ -326,6 +326,13 @@
 
   &.left-photo-display-class {
 
+    .column-1 .home-headline {
+      @include breakpoint(desktop-lg) {
+        position: relative;
+        padding-top: 50%;
+      }
+    }
+
     .c-homeList {
       margin-bottom: 1rem;
       box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
