@@ -20,6 +20,10 @@
     padding-bottom: 5px;
   }
 
+  @include breakpoint(desktop-sm) {
+    margin-bottom: 0;
+  }
+
   @include breakpoint(desktop-lg) {
     flex-direction: column;
     margin-top: -2px;
@@ -82,7 +86,11 @@
       }
 
       @include breakpoint(desktop-lg) {
-        @include text-styles(1.3rem, 1.25, "Lora-Bold");
+        @include text-styles(1.325rem, 1.25, "Lora-Bold");
+      }
+
+      @include breakpoint(desktop-xl) {
+        font-size: 1.425rem;
       }
 
       a {
