@@ -153,6 +153,14 @@
           }
         }
 
+        @include breakpoint(desktop-lg) {
+
+          &:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+          }
+        }
+
         .homeList-text {
           padding: 0;
         }

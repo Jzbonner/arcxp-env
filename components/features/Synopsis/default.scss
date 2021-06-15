@@ -52,14 +52,6 @@
         }
         
         .headline {
-          @include breakpoint(desktop-lg) {
-            font-size: 1.33rem;
-          }
-
-          @include breakpoint(desktop-xl) {
-            font-size: 1.425rem;
-          }
-
           padding-right: 15px;
         }
       }
@@ -94,7 +86,11 @@
       }
 
       @include breakpoint(desktop-lg) {
-        @include text-styles(1.3rem, 1.25, "Lora-Bold");
+        @include text-styles(1.325rem, 1.25, "Lora-Bold");
+      }
+
+      @include breakpoint(desktop-xl) {
+        font-size: 1.425rem;
       }
 
       a {
