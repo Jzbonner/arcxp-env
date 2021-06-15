@@ -20,6 +20,10 @@
     padding-bottom: 5px;
   }
 
+  @include breakpoint(desktop-sm) {
+    margin-bottom: 0;
+  }
+
   @include breakpoint(desktop-lg) {
     flex-direction: column;
     margin-top: -2px;
@@ -48,6 +52,14 @@
         }
         
         .headline {
+          @include breakpoint(desktop-lg) {
+            font-size: 1.33rem;
+          }
+
+          @include breakpoint(desktop-xl) {
+            font-size: 1.425rem;
+          }
+
           padding-right: 15px;
         }
       }
