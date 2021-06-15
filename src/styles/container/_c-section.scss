@@ -51,10 +51,10 @@
       .arc_ad[class*="MP0"] {
         @include arc-ad-full-width;
 
-        border-top: 1px solid #cdcdcd;
+        border-top: none;
 
-        @include breakpoint(tablet) {
-          border-top: none;
+        @include breakpoint(desktop-sm) {
+          border-top: 1px solid #cdcdcd;
         }
       }
 
