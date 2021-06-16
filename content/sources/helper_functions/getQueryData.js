@@ -9,7 +9,7 @@ export default (arcSite, newBody, from = 0, size = 10, useFetch = false) => {
   }
 
   const sizeInt = parseInt(size, 10);
-  const fromInt = parseInt(from, 10) === 0 ? parseInt(from, 10) : parseInt(from, 10) - 1;
+  const fromInt = parseInt(from, 10);
 
   const promiseArray = [];
   const contentElements = [];
@@ -23,7 +23,7 @@ export default (arcSite, newBody, from = 0, size = 10, useFetch = false) => {
 
   const numberOfFetches = total <= maxFetchSize ? 1 : Math.ceil(total / maxFetchSize);
 
-  let fetchStart = 0;
+  let fetchStart = fromInt;
   let i = 1;
 
   while (i <= numberOfFetches && i < 10) {
