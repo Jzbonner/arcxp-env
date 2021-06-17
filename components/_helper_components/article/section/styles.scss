@@ -9,6 +9,19 @@
   }
 }
 
+@include breakpoint(desktop-sm) {
+
+  .c-hp01-mp01 {
+    margin: 0 -75px;
+    max-width: 970px;
+    text-align: center;
+  }
+
+  .story-interscroller__placeholder {
+    clear: both;
+  }
+}
+
 .MP01 {
   @include breakpoint(tablet) {
     display: none;
