@@ -13,8 +13,11 @@ export const ConnextAuthTrigger = () => {
   const { connext } = getProperties(arcSite);
   const [loadedDeferredItems, _setLoadedDeferredItems] = useState(false);
   const loadedDeferredItemsRef = React.useRef(loadedDeferredItems);
+  console.log('loaded deffered items', loadedDeferredItemsRef);
   const setLoadedDeferredItems = (data) => {
     loadedDeferredItemsRef.current = data;
+
+    console.log('loaded curretn defferd items', loadedDeferredItemsRef.current);
     _setLoadedDeferredItems(data);
   };
   const {
@@ -29,8 +32,10 @@ export const ConnextAuthTrigger = () => {
       const deferredItems = window.deferUntilKnownAuthState || [];
       if (deferredItems.length && !loadedDeferredItemsRef.current) {
         const adInstance = ArcAdLib.getInstance();
-        deferredItems.forEach((item) => {
+        deferredItems.forEach((item, i) => {
+          console.log('deffered item', item, 'index', i);
           Object.keys(item).forEach((key) => {
+            console.log('key', key);
             if (key === 'ad') {
               // it's an ad, let's register/initialize it with ArcAds
               const adSlotConfig = item[key];
@@ -42,12 +47,16 @@ export const ConnextAuthTrigger = () => {
               // it's a video player
               const videoPlayer = item[key][0];
               const videoIsLead = item[key][1];
+              console.log('videoPlayer', videoPlayer);
+              console.log('videoIsLead', videoIsLead);
               const videoBlocker = window.document.querySelector('.video-blocker');
               if (videoIsLead) {
                 // it's a lead video (and thus already instantiated) so just trigger it to play
                 videoPlayer.play();
                 videoPlayer.showControls();
+                console.log('playing and showing controls on powa video');
                 if (videoBlocker) {
+                  console.log('disabling videoblocker div');
                   videoBlocker.style.display = 'none';
                 }
               } else {
