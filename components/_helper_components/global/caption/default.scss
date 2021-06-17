@@ -107,7 +107,7 @@
       @include text-styles(.875rem, 1.58, "Gordita");
 
       @include breakpoint(tablet) {
-        @include text-styles(1.25rem, 1.5, "Gordita");
+        @include text-styles(1rem, 1.5, "Gordita");
 
         padding: 20px;
       }
@@ -135,7 +135,7 @@
       @include text-styles(.875rem, 1.58, "Gordita");
 
       @include breakpoint(tablet) {
-        @include text-styles(1.25rem, 1.5, "Gordita");
+        @include text-styles(1rem, 1.5, "Gordita");
       }
     }
 
