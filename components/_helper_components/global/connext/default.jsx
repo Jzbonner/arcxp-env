@@ -16,8 +16,6 @@ export const ConnextAuthTrigger = () => {
   console.log('loaded deffered items', loadedDeferredItemsRef);
   const setLoadedDeferredItems = (data) => {
     loadedDeferredItemsRef.current = data;
-
-    console.log('loaded curretn defferd items', loadedDeferredItemsRef.current);
     _setLoadedDeferredItems(data);
   };
   const {
@@ -30,9 +28,12 @@ export const ConnextAuthTrigger = () => {
   if (typeof window !== 'undefined' && !window.connextAuthTriggerEnabled) {
     const loadDeferredItems = () => {
       const deferredItems = window.deferUntilKnownAuthState || [];
+      console.log('deffered items', deferredItems);
+      console.log(' are defered items loaded?', loadedDeferredItemsRef.current);
       if (deferredItems.length && !loadedDeferredItemsRef.current) {
         const adInstance = ArcAdLib.getInstance();
         deferredItems.forEach((item, i) => {
+          console.log('defferedItemsArray', deferredItems);
           console.log('deffered item', item, 'index', i);
           Object.keys(item).forEach((key) => {
             console.log('key', key);
