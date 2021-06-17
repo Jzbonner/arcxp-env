@@ -31,7 +31,6 @@ export const ConnextAuthTrigger = () => {
         const adInstance = ArcAdLib.getInstance();
         deferredItems.forEach((item) => {
           Object.keys(item).forEach((key) => {
-            console.log('key', key);
             if (key === 'ad') {
               // it's an ad, let's register/initialize it with ArcAds
               const adSlotConfig = item[key];
