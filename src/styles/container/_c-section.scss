@@ -205,17 +205,6 @@
       }
     }
   }
-
-  &:first-child {
-
-    .c-rightRail {
-      display: none;
-
-      @include breakpoint(desktop-sm) {
-        display: block;
-      }
-    }
-  }
 }
 
 @include breakpoint(desktop-sm) {
