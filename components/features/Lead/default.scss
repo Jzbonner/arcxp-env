@@ -39,10 +39,6 @@
     line-height: 1;
   }
 
-  .column-2 {
-    margin-bottom: 25px;
-  }
-
   .home-headline {
     overflow: hidden;
 
@@ -329,6 +325,13 @@
   /////////////////////
 
   &.left-photo-display-class {
+
+    .column-1 .home-headline {
+      @include breakpoint(desktop-lg) {
+        position: relative;
+        padding-top: 50%;
+      }
+    }
 
     .c-homeList {
       margin-bottom: 1rem;

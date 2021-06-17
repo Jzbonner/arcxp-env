@@ -46,6 +46,30 @@ $is-amp: false !default;
         @content;
       }
     }
+
+    /* Equal or greater than 1400px */
+    @if $point == desktop-xl {
+      /* stylelint-disable-next-line */
+      @media only screen and (min-width: map-get($breakpoint, desktop-xl)) {
+        @content;
+      }
+    }
+
+    /* Equal or greater than 1540px */
+    @if $point == desktop-xxl {
+      /* stylelint-disable-next-line */
+      @media only screen and (min-width: map-get($breakpoint, desktop-xxl)) {
+        @content;
+      }
+    }
+
+    /* Equal or greater than 1600px */
+    @if $point == desktop-xxxl {
+      /* stylelint-disable-next-line */
+      @media only screen and (min-width: map-get($breakpoint, desktop-xxxl)) {
+        @content;
+      }
+    }
   }
 }
 

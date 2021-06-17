@@ -12,7 +12,7 @@
   flex-direction: column;
   position: relative;
 
-  @include breakpoint(desktop-sm) {
+  @include breakpoint(tablet) {
     align-items: center;
   }
 
@@ -25,7 +25,7 @@
     z-index: 1;
     display: flex;
     align-items: center;
-    max-width: 90%;
+    max-width: 100%;
 
     @include breakpoint(tablet) {
       margin: 0 auto;

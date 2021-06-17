@@ -187,7 +187,7 @@ export const adSlots = {
   },
   'RP01 300x250 (desktop only)': {
     slotName: 'RP01',
-    biddingName: 'RP01-300x250',
+    biddingName: 'RP01-300x250-desktop',
     dimensions: [
       [
         [300, 250],
@@ -221,7 +221,7 @@ export const adSlots = {
   },
   'RP01 300x600 (desktop only)': {
     slotName: 'RP01',
-    biddingName: 'RP01-300x600',
+    biddingName: 'RP01-300x600-desktop',
     dimensions: [
       [
         [300, 600],
@@ -256,6 +256,7 @@ export const adSlots = {
   },
   'RP01 sticky (desktop only)': {
     slotName: 'RP01',
+    biddingName: 'RP01-desktop',
     dimensions: [
       [
         [300, 600],
@@ -274,7 +275,7 @@ export const adSlots = {
   },
   'RP01 desktop': {
     slotName: 'RP01',
-    biddingName: 'RP01',
+    biddingName: 'RP01-desktop',
     dimensions: [
       [
         [300, 600],
@@ -292,7 +293,7 @@ export const adSlots = {
   },
   'RP01 tablet': {
     slotName: 'RP01',
-    biddingName: 'RP01',
+    biddingName: 'RP01-tablet',
     dimensions: [
       [], // desktop
       [
@@ -352,7 +353,7 @@ export const adSlots = {
   },
   'RP01-Story-Tablet': {
     slotName: 'RP01',
-    biddingName: 'RP01-tablet',
+    biddingName: 'RP01-story-tablet',
     dimensions: [
       [], // desktop
       [
@@ -379,7 +380,7 @@ export const adSlots = {
       ], // tablet +
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop
     ],
     bidding: {
       amazon: {
@@ -389,35 +390,37 @@ export const adSlots = {
   },
   RP02: {
     dimensions: [
-      [300, 100], // desktop+
-    ],
-    breakpoints: [
-      [1024, 0], // desktop+
-    ],
-  },
-  'RP02 tablet': {
-    slotName: 'RP02',
-    dimensions: [
-      [], // desktop
       [
-        [728, 90], // tablet
+        [300, 100], // desktop+
+      ],
+      [
+        [730, 100], // tablet
+      ],
+      [
+        [300, 100], // mobile
       ],
     ],
     breakpoints: [
       [1024, 0], // desktop
       [768, 0], // tablet
+      [0, 0], // mobile
     ],
   },
   'RP03 sticky': {
     slotName: 'RP03',
+    biddingName: 'RP03',
     dimensions: [
       [
         [300, 250],
         [300, 600],
-      ], // tablet+
+      ], // desktop
+      [
+        [728, 90],
+      ], // tablet
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop
+      [768, 0], // tablet
     ],
     isSticky: true,
     bidding: {
@@ -428,6 +431,7 @@ export const adSlots = {
   },
   'RP03 sticky (desktop only)': {
     slotName: 'RP03',
+    biddingName: 'RP03-desktop',
     dimensions: [
       [
         [300, 250],
@@ -446,6 +450,7 @@ export const adSlots = {
   },
   'RP03 tablet': {
     slotName: 'RP03',
+    biddingName: 'RP03-tablet',
     dimensions: [
       [], // desktop
       [
@@ -464,7 +469,7 @@ export const adSlots = {
   },
   'RP09-Story-Desktop': {
     slotName: 'RP09',
-    biddingName: 'RP09-desktop',
+    biddingName: 'RP09-story-desktop',
     dimensions: [
       [
         [300, 600],
@@ -509,10 +514,14 @@ export const adSlots = {
     dimensions: [
       [
         [300, 250],
-      ], // tablet+
+      ], // desktop
+      [
+        [728, 90],
+      ], // tablet
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop
+      [768, 0], // tablet
     ],
     bidding: {
       amazon: {
@@ -522,7 +531,7 @@ export const adSlots = {
   },
   'RP09 300x250 (desktop only)': {
     slotName: 'RP09',
-    biddingName: 'RP09-300x250',
+    biddingName: 'RP09-300x250-desktop',
     dimensions: [
       [
         [300, 250],
@@ -543,10 +552,14 @@ export const adSlots = {
       [
         [300, 250],
         [300, 600],
-      ], // tablet+
+      ], // desktop
+      [
+        [728, 90], // tablet
+      ],
     ],
     breakpoints: [
-      [768, 0], // tablet+
+      [1024, 0], // desktop
+      [768, 0], // tablet
     ],
     isSticky: true,
     bidding: {
@@ -556,7 +569,7 @@ export const adSlots = {
     },
   },
   'RP09 sticky (desktop only)': {
-    slotName: 'RP09',
+    slotName: 'RP09-desktop',
     dimensions: [
       [
         [300, 250],
@@ -575,7 +588,7 @@ export const adSlots = {
   },
   'RP09 tablet': {
     slotName: 'RP09',
-    biddingName: 'RP09',
+    biddingName: 'RP09-tablet',
     dimensions: [
       [], // desktop
       [

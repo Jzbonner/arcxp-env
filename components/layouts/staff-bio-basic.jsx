@@ -60,7 +60,7 @@ const staffBioPage = () => {
     <>
       <GlobalAdSlots/>
       {!noHeaderAndFooter && <TopNavBreakingNews />}
-      <main className='c-listPage b-contentMaxWidth b-sectionHome-padding'>
+      <main className='c-staffBioPage b-contentMaxWidth b-sectionHome-padding'>
           {!noAds
           && <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />

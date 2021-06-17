@@ -18,11 +18,7 @@
   }
 
   &:last-child {
-    border-bottom: 1px solid #cdcdcd;
-
-    @include breakpoint(tablet) {
-      border-bottom: none;
-    }
+    border-bottom: none;
   }
 
   .LeftPhotoNoPhoto {
@@ -53,10 +49,6 @@
         }
       }
     }
-  }
-
-  @include breakpoint(desktop-sm) {
-    margin-bottom: 15px;
   }
 
   .row {

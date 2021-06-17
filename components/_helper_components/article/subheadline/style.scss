@@ -4,16 +4,19 @@
 
 .subheadline-content {
   font-weight: 700;
-  width: 72.37%;
-  text-align: center;
+  width: 100%;
+  text-align: left;
   font-stretch: normal;
   font-style: normal;
   letter-spacing: -.45px;
+  padding: 10px 0;
+  border-top: 1px solid #cdcdcd;
+  border-bottom: 1px solid #cdcdcd;
 
-  @include text-styles(1rem, 1.5, "Gordita");
+  @include text-styles(16px, 25px, "Gordita-Bold");
 
   @include breakpoint(tablet) {
-    @include text-styles(1.3rem, normal, "Gordita");
+    @include text-styles(20px, 25px, "Gordita-Bold");
 
     font-weight: 700;
     font-stretch: normal;

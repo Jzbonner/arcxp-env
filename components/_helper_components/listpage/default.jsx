@@ -4,21 +4,24 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import checkTags from '../../layouts/_helper_functions/checkTags';
 import ArcAd from '../../features/ads/default';
-import Pagination from '../global/pagination/default';
 import ListItem from '../home/ListItem/ListItem';
 import './default.scss';
 import '../../features/List/default';
 import filter from '../../../content/filters/collectionTitle';
 import AddFirstInlineImage from '../../../content/sources/helper_functions/AddFirstInlineImage';
+import LoadMoreButton from '../loadMoreBtn/default';
 
 const RP01 = () => (
   <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />
 );
 const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
 
-const ListPage = ({ globalContent, globalContentConfig, title }) => {
-  const [activePage, setActivePage] = useState(1);
-
+const ListPage = ({
+  globalContent,
+  globalContentConfig,
+  title,
+  textBox,
+}) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const { query } = globalContentConfig || {};
@@ -26,17 +29,14 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
 
-  const filterStart = parseInt(query.from, 10) - 1; // since the array is zero-indexed
-  const filterSize = parseInt(query.size, 10);
+  const storiesPerLoad = 10;
+  const [storiesCount, setStoryCount] = useState(storiesPerLoad);
 
   if (!globalContent) {
     return null;
   }
 
-  const filteredStories = globalContent.slice(
-    filterStart,
-    filterStart + filterSize,
-  );
+  const filteredStories = globalContent.slice(0, storiesCount);
 
   const updateImageRefs = (apiData) => {
     const newData = apiData;
@@ -89,8 +89,6 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
 
   const { headlines: { basic: collectionTitle } = {} } = collectionMetaData || {};
 
-  const storiesPerPage = 10;
-
   const getTitle = () => {
     if (title) {
       return title;
@@ -107,35 +105,36 @@ const ListPage = ({ globalContent, globalContentConfig, title }) => {
     return null;
   };
 
+  const getNewsTipText = (placement) => {
+    if (!placement || !textBox) return null;
+
+    return (
+      <div className={`c-news-tip-text ${placement}`}>
+        {textBox}
+      </div>
+    );
+  };
+
   return (
     <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
       <div className="c-section with-rightRail">
+        {getTitle()}
+        {getNewsTipText('mobile-tablet')}
         <div className="c-contentElements list-contentElements">
           {!noAds ? (
-            <div className="c-rightRail list-rp01">{RP01()}</div>
+            <div className="c-rightRail list-rp01 list-page-right-rail">{RP01()}</div>
           ) : null}
-          <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column">
-            {getTitle()}
-            {filteredTeases.map((el, i) => {
-              const startIndex = (activePage - 1) * storiesPerPage;
-              if (startIndex <= i && i < startIndex + storiesPerPage) {
-                return <ListItem key={`key-${i}`} {...el} listPage={true} />;
-              }
-              return null;
-            })}
-            {filteredTeases.length > storiesPerPage && (
-              <Pagination
-                activePage={activePage}
-                setActivePage={setActivePage}
-                totalStories={filteredStories.length}
-                storiesPerPage={storiesPerPage}
-                maxPagesToDisplay={5}
-              />
-            )}
+          <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile">
+          <div className="tablet-line"></div>
+            {filteredTeases.map((el, i) => <ListItem key={`key-${i}`} {...el} listPage={true} />)}
           </div>
+          {!noAds ? <div className="list-mp05">{MP05()}</div> : null}
+            {globalContent.length > storiesPerLoad && <LoadMoreButton
+              newStories={filteredStories}
+              handleOnClick={() => setStoryCount(storiesCount + storiesPerLoad)}
+            />}
         </div>
       </div>
-      {!noAds ? <div className="list-mp05">{MP05()}</div> : null}
     </main>
   );
 };
@@ -144,6 +143,7 @@ ListPage.propTypes = {
   globalContent: PropTypes.array,
   globalContentConfig: PropTypes.object,
   title: PropTypes.func,
+  textBox: PropTypes.func,
 };
 
 export default ListPage;

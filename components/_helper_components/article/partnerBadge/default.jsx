@@ -12,7 +12,7 @@ const PartnerBadge = ({ sections, ampPage }) => {
 
   return sections.map((section) => {
     const { path } = section || {};
-    const isPartner = path?.includes('/partner');
+    const isPartner = path === '/partner';
     if (isPartner) {
       return (
         <a href={`${websiteURL}/partner`} key={path} className="c-story-partnerBadge b-flexRow b-flexCenter b-margin-bottom-d40-m20">

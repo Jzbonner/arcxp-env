@@ -1,18 +1,27 @@
 @import "../../../src/styles/base/_mixins.scss";
 @import "../../../src/styles/base/breakpoints";
 
-.c-listPage {
+.c-listPage,
+.c-staffBioPage {
+
+  &.b-sectionHome-padding {
+    padding-top: 1.25rem;
+
+    @include breakpoint(tablet) {
+      padding-top: 1.875rem;
+    }
+  }
 
   .c-section {
 
     .c-contentElements {
-      @include breakpoint(tablet) {
+      @include breakpoint(desktop-sm) {
         width: calc(100% - 330px);
         padding: 0 30px 0 0;
       }
 
       .c-rightRail {
-        @include breakpoint(tablet) {
+        @include breakpoint(desktop-sm) {
           display: block;
           float: right;
           margin-right: -330px;
@@ -28,6 +37,44 @@
   .c-hp01-mp01 {
     display: flex;
     justify-content: center;
+  }
+
+  .c-news-tip-text {
+    @include text-styles(.813rem, 1.54, "Gordita");
+
+    color: #313132;
+    padding-bottom: 15px;
+    border-bottom: solid 1px #dadada;
+    width: 100%;
+
+    h3.bold-text {
+      @include text-styles(.813rem, 1.54, "Gordita-Bold");
+
+      font-weight: 700;
+    }
+
+    a {
+      color: #2e81b7;
+    }
+
+    @include breakpoint(desktop-sm) {
+      margin-right: 3.3%;
+      margin-bottom: .875rem;
+    }
+
+    &.desktop {
+      display: none;
+
+      @include breakpoint(desktop-sm) {
+        display: initial;
+      }
+    }
+
+    &.mobile-tablet {
+      @include breakpoint(desktop-sm) {
+        display: none;
+      }
+    }
   }
 }
 
@@ -67,7 +114,18 @@
   }
 }
 
+.c-listPage {
+
+  .list-contentElements {
+    @include breakpoint(desktop-sm) {
+      border-right: 1px #dadada solid;
+    }
+  }
+}
+
 .list-mp05 {
+  margin-top: 2rem;
+
   @include breakpoint(tablet) {
     display: none;
   }

@@ -50,6 +50,19 @@
       .arc_ad[class*="HP0"],
       .arc_ad[class*="MP0"] {
         @include arc-ad-full-width;
+
+        border-top: none;
+
+        @include breakpoint(desktop-sm) {
+          border-top: 1px solid #cdcdcd;
+        }
+      }
+
+      .arc_ad[class*="HP01"] {
+        @include breakpoint(desktop-sm) {
+          padding-bottom: 0;
+          margin-bottom: $min-DTsection-margin;
+        }
       }
 
       .c-HS02 {
@@ -108,7 +121,8 @@
         margin: 0 auto;
 
         .arcad:not(:empty) {
-          padding-top: 30px;
+          padding: 30px 0;
+          margin: 20px 0;
         }
       }
     }
@@ -314,10 +328,6 @@
         width: calc(100% - 315px);
         padding: 0 $min-margin 0 0;
         box-sizing: border-box;
-
-        .c-synopsis-row + div {
-          margin-bottom: 1.25rem;
-        }
       }
     }
 
@@ -383,5 +393,9 @@
 
   .insertedAd {
     height: 200px;
+  }
+
+  .list-page-right-rail {
+    margin-top: 19px;
   }
 }

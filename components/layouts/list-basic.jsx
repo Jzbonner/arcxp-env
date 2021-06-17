@@ -18,7 +18,7 @@ const ListPageLayout = (props) => {
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
 
-  const [title] = props.children;
+  const [title, textBox] = props.children;
   const pageTitleFeaturePresent = renderables[2] && renderables[2].type === 'pageTitle/default';
 
   return (
@@ -29,6 +29,7 @@ const ListPageLayout = (props) => {
         globalContent={globalContent}
         globalContentConfig={globalContentConfig}
         title={pageTitleFeaturePresent && title}
+        textBox={textBox}
       />
       {!noHeaderAndFooter && <>
         <Footer />
@@ -42,6 +43,6 @@ ListPageLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-ListPageLayout.sections = ['Title'];
+ListPageLayout.sections = ['Title', 'Text Box'];
 
 export default ListPageLayout;
