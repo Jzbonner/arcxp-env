@@ -13,7 +13,6 @@ export const ConnextAuthTrigger = () => {
   const { connext } = getProperties(arcSite);
   const [loadedDeferredItems, _setLoadedDeferredItems] = useState(false);
   const loadedDeferredItemsRef = React.useRef(loadedDeferredItems);
-  console.log('loaded deffered items', loadedDeferredItemsRef);
   const setLoadedDeferredItems = (data) => {
     loadedDeferredItemsRef.current = data;
     _setLoadedDeferredItems(data);
@@ -28,13 +27,9 @@ export const ConnextAuthTrigger = () => {
   if (typeof window !== 'undefined' && !window.connextAuthTriggerEnabled) {
     const loadDeferredItems = () => {
       const deferredItems = window.deferUntilKnownAuthState || [];
-      console.log('deffered items', deferredItems);
-      console.log(' are defered items loaded?', loadedDeferredItemsRef.current);
       if (deferredItems.length && !loadedDeferredItemsRef.current) {
         const adInstance = ArcAdLib.getInstance();
-        deferredItems.forEach((item, i) => {
-          console.log('defferedItemsArray', deferredItems);
-          console.log('deffered item', item, 'index', i);
+        deferredItems.forEach((item) => {
           Object.keys(item).forEach((key) => {
             console.log('key', key);
             if (key === 'ad') {
@@ -48,16 +43,12 @@ export const ConnextAuthTrigger = () => {
               // it's a video player
               const videoPlayer = item[key][0];
               const videoIsLead = item[key][1];
-              console.log('videoPlayer', videoPlayer);
-              console.log('videoIsLead', videoIsLead);
               const videoBlocker = window.document.querySelector('.video-blocker');
               if (videoIsLead) {
                 // it's a lead video (and thus already instantiated) so just trigger it to play
                 videoPlayer.play();
                 videoPlayer.showControls();
-                console.log('playing and showing controls on powa video');
                 if (videoBlocker) {
-                  console.log('disabling videoblocker div');
                   videoBlocker.style.display = 'none';
                 }
               } else {
@@ -85,6 +76,16 @@ export const ConnextAuthTrigger = () => {
             }
           });
         }
+
+        // lead video fix for APD-1333
+        const storyHasLeadVideo = !!window.document.getElementsByClassName('article-headline-component with-video');
+
+        if (storyHasLeadVideo) {
+          const videoBlocker = window.document.querySelector('.video-blocker');
+
+          if (videoBlocker) videoBlocker.style.display = 'none';
+        }
+
         // set state to `true` to ensure we only call `loadDeferredItems` once
         setLoadedDeferredItems(true);
       }
