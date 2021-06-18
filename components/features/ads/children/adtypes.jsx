@@ -246,6 +246,7 @@ export const adSlots = {
   },
   'RP01 sticky': {
     slotName: 'RP01',
+    biddingName: 'RP01-sticky',
     dimensions: [
       [
         [300, 600],
@@ -560,6 +561,7 @@ export const adSlots = {
   },
   'RP09 sticky': {
     slotName: 'RP09',
+    biddingName: 'RP09-sticky',
     dimensions: [
       [
         [300, 250],
