@@ -9,14 +9,20 @@
   }
 }
 
-@include breakpoint(desktop-sm) {
-
-  .c-hp01-mp01 {
-    margin: 0 -75px;
-    max-width: 970px;
+.c-hp01-mp01 {
+  @include breakpoint(tablet) {
     text-align: center;
+    margin: 0 -20px;
   }
 
+  @include breakpoint(desktop-sm) {
+    margin: 0 -75px;
+    max-width: 970px;
+  }
+}
+
+@include breakpoint(desktop-sm) {
+  
   .story-interscroller__placeholder {
     clear: both;
   }
