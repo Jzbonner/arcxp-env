@@ -1,13 +1,15 @@
 import React from 'react';
 import './default.scss';
-import keyboardImage from '../../../resources/images/404.png';
+import keyboardImage from '../../../resources/images/404_latest.svg';
 
 export const FourZeroFour = () => <div className="page-not-found-feature">
-  <div className="background-image-text b-margin-bottom-d40-m20">
+  <div>
     <img className="background-image" src={keyboardImage} />
   </div>
-  <div className="text">Sorry, we couldn&apos;t find that page.</div>
-  <div className="text">Try Searching or go to our <a href='/'>Frontpage.</a></div>
+  <div className="error-text">
+    <span className="error-text-1">We can’t seem to find the page you’re looking for. </span>
+    <span className="error-text-2"> Here are some other stories that may be of interest.</span>
+  </div>
 </div>;
 
 export default FourZeroFour;
