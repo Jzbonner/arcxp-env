@@ -181,19 +181,20 @@
   &.two-columns {
 
     .c-homeList {
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         width: 47%;
+        margin-right: 3.3%;
       }
 
       &:nth-last-child(-n + 2) {
-        @include breakpoint(desktop-sm) {
+        @include breakpoint(tablet) {
           margin-bottom: 0;
           border: none;
         }
       }
 
       &:nth-child(2n) {
-        @include breakpoint(desktop-sm) {
+        @include breakpoint(tablet) {
           margin-right: 0;
         }
       }
@@ -229,6 +230,9 @@
   &.four-columns {
 
     &.top-photo-display-class {
+      @include between-breakpoints(tablet, desktop-sm) {
+        justify-content: space-between;
+      }
 
       .c-tease-icon {
         margin-top: 10px;
@@ -241,6 +245,10 @@
     }
 
     .c-homeList {
+      @include between-breakpoints(tablet, desktop-sm) {
+        width: 47%;
+      }
+
       @include breakpoint(desktop-sm) {
         width: 22.5%;
       }

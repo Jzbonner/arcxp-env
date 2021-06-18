@@ -27,3 +27,10 @@
     display: none;
   }
 }
+
+.RP01.c-rightRail,
+.RP09.c-rightRail {
+  @include between-breakpoints(mobile, desktop-sm) {
+    display: none;
+  }
+}

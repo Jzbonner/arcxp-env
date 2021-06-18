@@ -3,6 +3,14 @@
 .topPhotoNoPhoto {
   width: 100%;
 
+  @include between-breakpoints(tablet, desktop-sm) {
+    width: 47%;
+
+    &:first-child {
+      margin-right: 3.3%;
+    }
+  }
+
   @include breakpoint(desktop-sm) {
     margin-right: 3%;
   }
@@ -83,4 +91,8 @@
 
 .topPhotoNoPhoto:last-child {
   margin-right: 0;
+
+  @include between-breakpoints(tablet, desktop-sm) {
+    display: none;
+  }
 }
