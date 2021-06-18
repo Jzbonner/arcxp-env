@@ -171,6 +171,14 @@
     @include breakpoint(desktop-sm) {
       flex-direction: initial;
     }
+
+    @include between-breakpoints(tablet, desktop-sm) {
+      
+      .arcad.RP09,
+      .arcad.RP03 {
+        margin-left: -20px;
+      }
+    }
   }
 
   .app-landing-page {

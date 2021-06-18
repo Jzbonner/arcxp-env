@@ -107,7 +107,7 @@
           @include between-breakpoints(tablet, desktop-sm) {
             letter-spacing: -.15px;
 
-            @include text-styles(1rem, 1.13, "Lora");
+            @include text-styles(1.2rem, 1.3, "Lora");
           }
 
           @include breakpoint(desktop-sm) {
