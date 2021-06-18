@@ -26,7 +26,8 @@ const SectionOutput = ({ zones, layout, noHeaderAndFooter }) => {
           rightRailContent={rightRailZone}
           rightColContent={rightHalfZone}
           colLayout={colLayout}
-          key={`section${i}`}/>;
+          key={`section${i}`}
+          isErrorPage={isErrorPage}/>;
         })
       )}
     </main>

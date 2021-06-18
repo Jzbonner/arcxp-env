@@ -3,13 +3,13 @@
 @import "./../../../src/styles/base/breakpoints";
 
 
-.c-sectionHome:not(.full-width) .c-rightRail {
+.c-sectionHome:not(.full-width) .c-RightRailWithErrorPageFeature {
   @include breakpoint(desktop-sm) {
-    top: 160px;
+    margin-top: 160px;
   }
 
   @include breakpoint(desktop-xxl) {
-    top: 170px;
+    margin-top: 170px;
   }
 }
 
