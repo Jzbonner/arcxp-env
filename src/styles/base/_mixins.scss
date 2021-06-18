@@ -128,14 +128,11 @@
 // styling for "full width" ads on home/section pages
 
 @mixin arc-ad-full-width {
-  width: inherit;
-
-  @include between-breakpoints(tablet, desktop-sm) {
-    width: auto;
-  }
+  width: auto;
 
   &.c-HS02 {
     padding-bottom: 5px;
+    width: auto;
 
     .arcad {
       padding-bottom: 0;

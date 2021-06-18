@@ -39,7 +39,7 @@
   display: flex;
   flex-direction: column;
 
-  @include breakpoint(desktop-sm) {
+  @include breakpoint(tablet) {
     flex-direction: row;
   }
 
@@ -47,7 +47,14 @@
     color: inherit;
     display: flex;
     flex-direction: row;
-    margin-bottom: 25px;
+
+    @include breakpoint(tablet) {
+      width: 20%;
+    }
+
+    @include between-breakpoints(tablet, desktop-sm) {
+      max-width: 20%;
+    }
 
     @include breakpoint(desktop-sm) {
       margin-bottom: 0;
@@ -83,7 +90,7 @@
     @include text-styles(1.875rem, 1 , "Lora");
 
     letter-spacing: -.38px;
-    margin: 0 15px;
+    margin: 0;
     padding-top: 4px;
   }
 
@@ -91,8 +98,8 @@
     @include text-styles (2.5rem, 1, "Lora");
 
     padding-top: 4px;
-    margin: 0 10px 4px;
     letter-spacing: -.5px;
+    margin: 0 10px 4px;
   }
 }
 
@@ -123,7 +130,8 @@
     @include text-styles(1rem, 1.13, "Average");
 
     padding-top: 9px;
-    min-width: 100px;
+    padding-left: 15px;
+    min-width: 85px;
     letter-spacing: -.15px;
   }
 

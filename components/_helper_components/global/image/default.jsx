@@ -26,6 +26,7 @@ const Image = ({
   const {
     resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, focal_point: rootFocalPoint, useSrcSet: hasSrcSet = false,
   } = src || {};
+
   const fusionContext = useFusionContext();
   const { arcSite, layout } = fusionContext;
   const appContext = useAppContext();
@@ -77,12 +78,12 @@ const Image = ({
     if (
       (imageType === 'isLeadImage' && !giveCredit && !caption)
       || (imageType === 'isInlineImage' && !caption)
-      || (imageType === 'isLeadImage' && giveCredit && !caption && screenSize.width > maxTabletViewWidth)
+      || (imageType === 'isLeadImage' && giveCredit && !caption)
       || teaseContentType
     ) {
       return null;
     }
-    if (imageType === 'isLeadImage' && giveCredit && !caption && screenSize.width < maxTabletViewWidth) {
+    if (imageType === 'isLeadImage' && giveCredit && caption && screenSize.width < maxTabletViewWidth) {
       return <Caption imageType={imageType} src={src} />;
     }
     return <Caption imageType={imageType} src={src} ampPage={ampPage} />;

@@ -54,7 +54,13 @@
         border-top: none;
 
         @include breakpoint(desktop-sm) {
-          border-top: 1px solid #cdcdcd;
+          width: inherit;
+        }
+      }
+
+      .arc_ad[class*="HP02"] {
+        @include between-breakpoints(tablet, desktop-sm) {
+          width: inherit;
         }
       }
 
@@ -171,6 +177,14 @@
     @include breakpoint(desktop-sm) {
       flex-direction: initial;
     }
+
+    @include between-breakpoints(tablet, desktop-sm) {
+
+      .arcad.RP09,
+      .arcad.RP03 {
+        margin-left: -20px;
+      }
+    }
   }
 
   .app-landing-page {
@@ -202,17 +216,6 @@
         @include breakpoint(desktop-sm) {
           @include text-styles(2.1875rem, 1.2 "Gordita-Bold");
         }
-      }
-    }
-  }
-
-  &:first-child {
-
-    .c-rightRail {
-      display: none;
-
-      @include breakpoint(desktop-sm) {
-        display: block;
       }
     }
   }

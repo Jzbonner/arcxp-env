@@ -60,13 +60,14 @@
       padding-left: 9px;
 
       @include breakpoint(tablet) {
-        font-size: 1rem;
-        line-height: 1.625rem;
+        font-size: .9rem;
+        line-height: 1.3rem;
         letter-spacing: 0;
         padding: 4px 0 0 8px;
       }
 
       @include breakpoint(desktop-sm) {
+        font-size: 1rem;
         line-height: 1.25rem;
         letter-spacing: -.31px;
         padding: 7px 0 0 9px;

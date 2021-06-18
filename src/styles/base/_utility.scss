@@ -140,7 +140,7 @@
     @include between-breakpoints(mobile, tablet) {
 
       &[class*="HP0"]:not(.HP02),
-      &[class*="RP0"] {
+      &[class*="RP0"]:not(.RP02) {
         display: none;
       }
     }
@@ -241,7 +241,7 @@
 
 .b-contentMaxWidth {
   margin: 0 auto;
-  
+
   @include breakpoint(desktop-sm) {
     max-width: 820px;
   }

@@ -37,6 +37,7 @@ const ListPage = ({
   }
 
   const filteredStories = globalContent.slice(0, storiesCount);
+  const moreStoriesToLoad = !!(globalContent?.length - filteredStories?.length);
 
   const updateImageRefs = (apiData) => {
     const newData = apiData;
@@ -129,7 +130,7 @@ const ListPage = ({
             {filteredTeases.map((el, i) => <ListItem key={`key-${i}`} {...el} listPage={true} />)}
           </div>
           {!noAds ? <div className="list-mp05">{MP05()}</div> : null}
-            {globalContent.length > storiesPerLoad && <LoadMoreButton
+            {moreStoriesToLoad && <LoadMoreButton
               newStories={filteredStories}
               handleOnClick={() => setStoryCount(storiesCount + storiesPerLoad)}
             />}
