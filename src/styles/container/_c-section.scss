@@ -180,8 +180,7 @@
 
     @include between-breakpoints(tablet, desktop-sm) {
 
-      .arcad.RP09,
-      .arcad.RP03 {
+      .arc_ad[class="RP0"] {
         margin-left: -20px;
       }
     }
