@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SectionHomepage = ({
-  feature, rightColContent, rightRailContent, colLayout, isErrorPage
+  feature, rightColContent, rightRailContent, colLayout, isErrorPage,
 }) => {
   if (feature || rightColContent || rightRailContent) {
     let parentClass = 'c-sectionHome b-sectionHome-padding b-sectionHomeMaxWidth';
@@ -34,7 +34,7 @@ SectionHomepage.propTypes = {
   rightColContent: PropTypes.object,
   rightRailContent: PropTypes.object,
   colLayout: PropTypes.bool,
-  isErrorPage: PropTypes.bool
+  isErrorPage: PropTypes.bool,
 };
 
 export default SectionHomepage;

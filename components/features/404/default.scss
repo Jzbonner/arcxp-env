@@ -2,7 +2,6 @@
 @import "./../../../src/styles/base/fonts";
 @import "./../../../src/styles/base/breakpoints";
 
-
 .c-sectionHome:not(.full-width) .c-RightRailWithErrorPageFeature {
   @include breakpoint(desktop-sm) {
     margin-top: 160px;
@@ -17,51 +16,48 @@
   display: flex;
   flex-direction: column;
   border-bottom: solid 1px #dadada;
-  margin: 15px 0 15px;
+  margin: 15px 0;
   padding-bottom: 10px;
   align-self: normal;
   
-    .error-text {
-      font-family: "Gordita";
-      font-size: .8125rem;
-      color: var(--body-text);
-      line-height: 1.54;
+  .error-text {
+    @include text-styles(.8125rem, 1.54, "Gordita-Bold");
+
+    color: var(--body-text);
+
+    @include between-breakpoints(tablet, desktop-sm) {
+      display: flex;
+    }
+
+    @include breakpoint(desktop-sm) {
+      display: grid;
+    }
+
+    .error-text-2 {
+      @include text-styles(.8125rem, 1.54, "Gordita");
 
       @include between-breakpoints(tablet, desktop-sm) {
-        display: flex;
-      }
-
-      @include breakpoint(desktop-sm) {
-        display: grid;
-      }
-
-      .error-text-1 {
-        font-weight: bold;
-      }
-
-      .error-text-2 {
-        @include between-breakpoints(tablet, desktop-sm)  {
-          padding-left: .3125rem;
-        }
+        padding-left: .3125rem;
       }
     }
+  }
 
-    .background-image {
-      width: 100%;
-      height: auto;
-      display: flex;
-      padding-bottom: .625rem;
+  .background-image {
+    width: 100%;
+    height: auto;
+    display: flex;
+    padding-bottom: .625rem;
 
-      @include breakpoint(desktop-sm)  {
-        width: 177%;
-      }
-
-      @include breakpoint(desktop-xxl)  {
-        width: 174%;
-      }
-
-      @include breakpoint(desktop-xxxl)  {
-        width: 168%;
-      }
+    @include breakpoint(desktop-sm) {
+      width: 177%;
     }
+
+    @include breakpoint(desktop-xxl) {
+      width: 174%;
+    }
+
+    @include breakpoint(desktop-xxxl) {
+      width: 168%;
+    }
+  }
 }
