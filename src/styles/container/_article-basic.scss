@@ -43,7 +43,8 @@
     width: 100%;
   }
 
-  .gallery-caption {
+  .gallery-caption,
+  .gallery-credit {
     width: inherit;
     margin: 0 auto;
   }
@@ -129,9 +130,7 @@
   }
 
   .arc_ad[class*="MP02"],
-  .arc_ad[class*="MP03"],
-  .arc_ad[class*="RP01"],
-  .arc_ad[class*="RP09"] {
+  .arc_ad[class*="MP03"] {
     @include between-breakpoints(mobile, desktop-sm) {
       padding-top: 20px;
     }
