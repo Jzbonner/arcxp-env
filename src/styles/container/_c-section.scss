@@ -58,6 +58,12 @@
         }
       }
 
+      .arc_ad[class*="HP02"] {
+        @include between-breakpoints(tablet, desktop-sm) {
+          width: inherit;
+        }
+      }
+
       .arc_ad[class*="HP01"] {
         @include breakpoint(desktop-sm) {
           padding-bottom: 0;
@@ -173,7 +179,7 @@
     }
 
     @include between-breakpoints(tablet, desktop-sm) {
-      
+
       .arcad.RP09,
       .arcad.RP03 {
         margin-left: -20px;
