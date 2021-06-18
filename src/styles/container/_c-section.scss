@@ -180,7 +180,7 @@
 
     @include between-breakpoints(tablet, desktop-sm) {
 
-      .arc_ad[class="RP0"] {
+      .arc_ad[class*="RP0"] {
         margin-left: -20px;
       }
     }
