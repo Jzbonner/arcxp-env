@@ -2,52 +2,66 @@
 @import "./../../../src/styles/base/fonts";
 @import "./../../../src/styles/base/breakpoints";
 
+
+.c-sectionHome:not(.full-width) .c-rightRail {
+  @include breakpoint(desktop-sm) {
+    top: 160px;
+  }
+
+  @include breakpoint(desktop-xxl) {
+    top: 170px;
+  }
+}
+
 .page-not-found-feature {
-  width: inherit;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  border-bottom: solid 1px #dadada;
+  margin: 15px 0 15px;
+  padding-bottom: 10px;
+  align-self: normal;
   
-  .background-image-text {
-    width: inherit;
-  }
+    .error-text {
+      font-family: "Gordita";
+      font-size: .825em;
+      color: var(--body-text);
+      line-height: 1.54;
 
-  .text {
-    font-family: "Gordita";
-    font-size: 1.25rem;
-    font-weight: 400;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #373a3c;
-    width: 105%;
+      @include between-breakpoints(tablet, desktop-sm) {
+        display: flex;
+      }
 
-    @include breakpoint(desktop-sm) {
-      font-size: 1.875rem;
+      @include breakpoint(desktop-sm) {
+        display: grid;
+      }
+
+      .error-text-1 {
+        font-weight: bold;
+      }
+
+      .error-text-2 {
+        @include between-breakpoints(tablet, desktop-sm)  {
+          padding-left: .3125rem;
+        }
+      }
+    }
+
+    .background-image {
       width: 100%;
-    }
+      height: auto;
+      display: flex;
+      padding-bottom: .625rem;
 
-    a {
-      font-weight: 600;
-      color: #2e81b7;
-      text-decoration: none;
-    }
-  }
+      @include breakpoint(desktop-sm)  {
+        width: 177%;
+      }
 
-  .background-image {
-    background-repeat: no-repeat;
-    background-position: center;
-    flex: 1;
-    width: inherit;
-    height: auto;
-    display: flex;
-    justify-content: center;
+      @include breakpoint(desktop-xxl)  {
+        width: 174%;
+      }
 
-    @include breakpoint(desktop-sm) {
-      width: 100%;
+      @include breakpoint(desktop-xxxl)  {
+        width: 168%;
+      }
     }
-  }
 }
