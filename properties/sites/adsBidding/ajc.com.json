@@ -326,7 +326,7 @@
             "params": {
               "accountId": "23256",
               "siteId": "376980",
-              "zoneId": "1529038"
+              "zoneId": "2068950"
             }
           },
           {
@@ -379,7 +379,7 @@
             "params": {
               "accountId": "23256",
               "siteId": "376980",
-              "zoneId": "2068950"
+              "zoneId": "2068960"
             }
           },
           {
@@ -529,7 +529,7 @@
             "bidder": "openx",
             "labels": ["tablet1"],
             "params": {
-              "unit": "540941869",
+              "unit": "544080394",
               "delDomain": "ajc-d.openx.net"
             }
           }
@@ -549,7 +549,7 @@
             "params": {
               "publisher": "AJC",
               "placementGroup": "ROS",
-              "placementId": "20392482",
+              "placementId": "21830601",
               "placementName": "AJC_ROS_DesktopTablet_RP01-300x250_0621"
             }
           },
@@ -763,7 +763,7 @@
             "params": {
               "accountId": "23256",
               "siteId": "376980",
-              "zoneId": "2068960"
+              "zoneId": "2068962"
             }
           },
           {
