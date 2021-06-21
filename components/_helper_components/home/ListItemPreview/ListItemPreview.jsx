@@ -35,7 +35,9 @@ const ListItemPreview = ({ id }) => {
         newText = newText.split(' ');
         newText.pop();
         newText = newText.join(' ');
-        newText = newText.concat('...');
+        if (newText.length < paragraph.current.innerText.length) {
+          newText = newText.concat('...');
+        }
         paragraph.current.innerText = newText; // eslint-disable-line no-param-reassign
       }
 
@@ -46,8 +48,8 @@ const ListItemPreview = ({ id }) => {
 
   useEffect(() => {
     if (storyData && storyData.headlines && storyData.headlines.web) {
-      setBaseText(storyData.headlines.web.concat('...'));
-      setText(storyData.headlines.web.concat('...'));
+      setBaseText(storyData.headlines.web);
+      setText(storyData.headlines.web);
       setPreRender(true);
     } else if (
       storyData
