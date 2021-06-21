@@ -15,6 +15,7 @@
   margin-bottom: $min-Msection-margin;
 
   @include breakpoint(desktop-sm) {
+    overflow: unset;
     margin-bottom: $min-DTsection-margin;
   }
 
