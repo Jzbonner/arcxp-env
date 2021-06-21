@@ -12,10 +12,11 @@ const DesktopGallery = (props) => {
         if (gallery) {
           const focusElement = gallery.querySelector('#gallery-item-0');
           if (focusElement) {
+            // we adjust the offset value by 1/2 the difference between the gallery wrapper's width & the first photo (to center in the container)
             const containerAdjustment = (document.querySelector('.gallery-wrapper').offsetWidth - focusElement.offsetWidth) / 2;
             let focusElementOffset = 0;
             if (!focusElement.offsetLeft) {
-              // we start the offset value with 1/2 of the window's width, to properly center
+              // the inherent offsetLeft is invalid for some reason, so let's calculate it
               let stopCounting = false;
               gallery.querySelectorAll('.gallery-image').forEach((image) => {
                 // we loop through the images to add up the total left offset based on preceding images's widths & margins
@@ -31,6 +32,7 @@ const DesktopGallery = (props) => {
                 }
               });
             } else {
+              // the inherent offsetLeft is fine, so use it
               focusElementOffset = focusElement.offsetLeft;
             }
             // eslint-disable-next-line no-param-reassign
