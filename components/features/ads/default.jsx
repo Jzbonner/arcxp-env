@@ -192,7 +192,6 @@ ArcAd.propTypes = {
       'RP01 sticky',
       'RP01 sticky (desktop only)',
       'RP02',
-      'RP02 tablet',
       'RP03 sticky',
       'RP03 sticky (desktop only)',
       'RP03 tablet',
