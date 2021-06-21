@@ -6,25 +6,13 @@
 
     .c-mostRead {
       margin-bottom: 30px;
-
-      @include breakpoint(tablet) {
-        margin-bottom: 4px;
-      }
     }
 
-    .mostReadList {
+    .mostReadList a {
+      width: 100%;
 
-      a {
-        margin: 0 0 22px;
-        width: 100%;
-
-        @include breakpoint(tablet) {
-          width: calc(100% / 5);
-
-          &:last-child {
-            margin-bottom: 22px;
-          }
-        }
+      @include breakpoint(tablet) {
+        width: calc(100% / 5);
       }
     }
 

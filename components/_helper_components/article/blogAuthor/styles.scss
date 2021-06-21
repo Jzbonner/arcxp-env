@@ -18,12 +18,8 @@
     }
   }
 
-  &.multiple-authors {
+  &.multiple-authors .content-profileImage {
     margin-bottom: 0;
-
-    .content-profileImage {
-      margin-bottom: 0;
-    }
   }
 
   .blog-author-content:not(:last-child) {
