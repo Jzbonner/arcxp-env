@@ -12,23 +12,29 @@ const DesktopGallery = (props) => {
         if (gallery) {
           const focusElement = gallery.querySelector('#gallery-item-0');
           if (focusElement) {
+            const containerAdjustment = (document.querySelector('.gallery-wrapper').offsetWidth - focusElement.offsetWidth) / 2;
             let focusElementOffset = 0;
-            let stopCounting = false;
-            gallery.querySelectorAll('.gallery-image').forEach((image) => {
-              // we loop through the images to add up the total left offset based on preceding images's widths & margins
-              if (image.getAttribute('data-index') === '0') {
-                stopCounting = true;
-                const style = image.currentStyle || window.getComputedStyle(image);
-                // and we also include the focus element's left margin as well
-                focusElementOffset += parseFloat(style.marginLeft);
-              } else if (!stopCounting) {
-                const style = image.currentStyle || window.getComputedStyle(image);
-                const margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
-                focusElementOffset += image.offsetWidth + margin;
-              }
-            });
+            if (!focusElement.offsetLeft) {
+              // we start the offset value with 1/2 of the window's width, to properly center
+              let stopCounting = false;
+              gallery.querySelectorAll('.gallery-image').forEach((image) => {
+                // we loop through the images to add up the total left offset based on preceding images's widths & margins
+                if (image.getAttribute('data-index') === '0') {
+                  stopCounting = true;
+                  const style = image.currentStyle || window.getComputedStyle(image);
+                  // and we also include the focus element's left margin as well
+                  focusElementOffset += parseFloat(style.marginLeft);
+                } else if (!stopCounting) {
+                  const style = image.currentStyle || window.getComputedStyle(image);
+                  const margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+                  focusElementOffset += image.offsetWidth + margin;
+                }
+              });
+            } else {
+              focusElementOffset = focusElement.offsetLeft;
+            }
             // eslint-disable-next-line no-param-reassign
-            gallery.style.transform = `translateX(-${focusElementOffset - parseInt(focusElement.offsetWidth, 10) / 2}px)`;
+            gallery.style.transform = `translateX(${containerAdjustment - focusElementOffset}px)`;
           }
         }
       });
