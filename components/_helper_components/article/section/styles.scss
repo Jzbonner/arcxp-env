@@ -22,8 +22,10 @@
 }
 
 @include breakpoint(desktop-sm) {
-  
-  .story-interscroller__placeholder {
+
+  // ensure it only applies to non-teads (i.e. interscroller) since they both share the same placeholder div
+
+  .story-interscroller__placeholder > div:not([class^="teads"]) {
     clear: both;
   }
 }
