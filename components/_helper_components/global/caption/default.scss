@@ -129,6 +129,13 @@
 
 .article-headline-component {
 
+  &.with-image {
+
+    .c-image-component .image-component-image .photo-credit-text {
+      display: none;
+    }
+  }
+
   .photo-caption {
 
     .photo-caption-text {
