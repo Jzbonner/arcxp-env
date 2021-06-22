@@ -11,7 +11,7 @@ import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreaki
 const ListPageLayout = (props) => {
   const appContext = useAppContext();
   const {
-    globalContent, globalContentConfig, renderables, requestUri,
+    globalContent, globalContentConfig, requestUri,
   } = appContext;
   if (!globalContent) return null;
   const queryParams = getQueryParams(requestUri);
@@ -19,7 +19,6 @@ const ListPageLayout = (props) => {
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
 
   const [title, textBox] = props.children;
-  const pageTitleFeaturePresent = renderables[2] && renderables[2].type === 'pageTitle/default';
 
   return (
     <>
@@ -28,7 +27,7 @@ const ListPageLayout = (props) => {
       <ListPage
         globalContent={globalContent}
         globalContentConfig={globalContentConfig}
-        title={pageTitleFeaturePresent && title}
+        title={title}
         textBox={textBox}
       />
       {!noHeaderAndFooter && <>

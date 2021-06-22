@@ -106,7 +106,7 @@ const ListPage = ({
     return null;
   };
 
-  const getNewsTipText = (placement) => {
+  const getNewsTipText = (placement = '') => {
     if (!placement || !textBox) return null;
 
     return (
@@ -126,7 +126,8 @@ const ListPage = ({
             <div className="c-rightRail list-rp01 list-page-right-rail">{RP01()}</div>
           ) : null}
           <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile">
-          <div className="tablet-line"></div>
+            <div className="tablet-line"></div>
+            {getNewsTipText('desktop')}
             {filteredTeases.map((el, i) => <ListItem key={`key-${i}`} {...el} listPage={true} />)}
           </div>
           {!noAds ? <div className="list-mp05">{MP05()}</div> : null}

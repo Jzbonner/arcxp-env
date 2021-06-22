@@ -72,8 +72,21 @@
 
   &.with-gallery {
     flex-direction: column;
-    overflow: hidden;
     margin-bottom: .25rem;
+
+    @include breakpoint(desktop-sm) {
+      overflow: inherit;
+
+      .gallery-wrapper {
+        max-width: 100%;
+        width: 100%;
+        justify-content: center;
+
+        @media screen and (min-width: 1540px) {
+          max-width: 1540px;
+        }
+      }
+    }
 
     .article-headline {
       justify-content: center;

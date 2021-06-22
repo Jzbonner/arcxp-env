@@ -15,6 +15,7 @@
   width: 100vw;
   max-width: 1540px;
   box-sizing: border-box;
+  margin: 0 auto;
 
   @include between-breakpoints(mobile, tablet) {
     padding-bottom: 20px;
@@ -536,7 +537,7 @@
 
     .gallery-caption {
       @include text-styles(1rem, 1.88, "Gordita");
-    
+
       color: #313132;
     }
   }
