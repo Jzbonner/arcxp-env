@@ -51,11 +51,14 @@ class Api {
         } = item || {};
 
         const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
-        let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
-        const org = credits && credits.by && credits.by[0] && credits.by[0].org ? `<![CDATA[${credits.by[0].org}]]>` : '';
+
+        const orgString = credits && credits.by && credits.by[0] && credits.by[0].org ? `${credits.by[0].org}` : '';
+        const org = orgString ? `<![CDATA[${orgString}]]>` : '';
+
+        let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}${orgString ? ` - ${orgString}` : ''}]]>` : '';
 
         if (credits && credits.by && credits.by.length > 1) {
-          author = `<![CDATA[${credits.by.map(eachAuthor => eachAuthor.name).join(', ')}]]>`;
+          author = `<![CDATA[${credits.by.map(eachAuthor => `${eachAuthor.name}${eachAuthor.org ? ` - ${eachAuthor.org}` : ''}`).join(', ')}]]>`;
         }
 
         if (!author) {
