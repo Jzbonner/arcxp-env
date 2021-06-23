@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useComponentContext } from 'fusion:context';
 import renderCustomHtml from '../../_helper_components/article/contentElements/components/html/renderCustomHtml';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
+import './default.scss';
 
 const TPT = () => {
   /* retrieve custom fields from fusion's component context */
@@ -29,7 +30,7 @@ const TPT = () => {
     const regex = /(<?\/body><?\/head><?\/html>)/ig;
     const src = content.replace(regex, '');
     return (
-      <div className="b-margin-bottom-d30-m20 b-full-width">
+      <div className="b-margin-bottom-d30-m20 tpt-margin-top b-full-width">
         <FeatureTitle title={title} moreURL={moreURL} />
         <div className="custom-html" dangerouslySetInnerHTML={{
           __html: renderCustomHtml(src),

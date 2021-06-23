@@ -1,0 +1,10 @@
+@import "../../../src/styles/base/breakpoints";
+@import "../../../src/styles/base/mixins";
+
+/* fix for APD-1366 */
+
+.tpt-margin-top {
+  @include breakpoint(desktop-sm) {
+    margin-top: 1.65rem;
+  }
+}
