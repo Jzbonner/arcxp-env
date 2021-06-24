@@ -9,6 +9,15 @@
 .c-main-gallery,
 .c-header-gallery {
   margin: 0 auto;
+
+  @include breakpoint(tablet) {
+    overflow: hidden;
+    width: calc(100vw - 80px);
+  }
+  
+  @include breakpoint(desktop-sm) {
+    width: calc(100vw - 60px);
+  }
 }
 
 @include amp-exclude {

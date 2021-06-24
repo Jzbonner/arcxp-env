@@ -242,9 +242,9 @@ const StoryPageLayout = () => {
         <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} noAds={noAds} />
       )}
       <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
-      <main className="c-articleContent b-contentMaxWidth b-sectionHome-padding">
+      <main className="b-sectionHome-padding">
         <header className="b-margin-bottom-d30-m30">
-          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header'}>
+          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header b-contentMaxWidth'}>
             <Headline
               headlines={headlines}
               basicItems={basicItems}
@@ -255,16 +255,16 @@ const StoryPageLayout = () => {
           </div>
           <div
             style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}
-            className="c-label-wrapper b-margin-bottom-d7-m7"
+            className="c-label-wrapper b-margin-bottom-d7-m7 b-contentMaxWidth"
           >
             {!isCommunityContributor && (
               <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />
             )}
           </div>
-          <div className="b-flexRow article-byline b-margin-bottom-d7-m7">
+          <div className="b-flexRow article-byline b-margin-bottom-d7-m7 b-contentMaxWidth">
             <Byline by={authorData} sections={sections} />
           </div>
-          <div className="b-margin-bottom-d7-m7" style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}>
+          <div className="b-margin-bottom-d7-m7 b-contentMaxWidth" style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}>
             <TimeStamp
               firstPublishDate={firstPublishDate}
               displayDate={displayDate}
@@ -277,12 +277,12 @@ const StoryPageLayout = () => {
           <ContributorBadge tags={tags} ampPage={ampPage}/>
           <PartnerBadge sections={sections} ampPage={ampPage}/>
           {ampPage && <SocialShare headlines={headlines} articleURL={articleURL} />}
-          <div className="b-flexRow b-flexCenter b-margin-bottom-d7-m7">
+          <div className="b-flexRow b-flexCenter b-margin-bottom-d7-m7 b-contentMaxWidth">
             <SubHeadline subheadlines={subheadlines} />
           </div>
         </header>
 
-        <article>
+        <article className="c-articleContent">
           {!noAds && !ampPage && !isHyperlocalContent && (
             <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />
