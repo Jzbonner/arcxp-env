@@ -272,7 +272,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
               };
               dataLayer.push(userDataObj);
               if (window?.sophi?.data) {
-                window?.sophi?.data.visitor = {
+                window.sophi.data.visitor = {
                   type: userTypeState,
                   isLoggedIn: true,
                   uid: CustomerRegistrationId
@@ -293,7 +293,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           };
           dataLayer.push(userDataObj);
           if (window?.sophi?.data) {
-            window?.sophi?.data.visitor = {
+            window.sophi.data.visitor = {
               type: 'anonymous',
               isLoggedIn: false,
               uid: null

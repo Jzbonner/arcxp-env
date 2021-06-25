@@ -140,10 +140,10 @@ const SophiTags = ({ isAmp }) => {
                   datePublished: "${firstPublishDateConverted}"
                 },
                 environment: {
-                  environment: "${sophiEnv}"/*,
-                  version: "APP_VERSION_string"*/
+                  environment: "${sophiEnv}",
+                  version: "APP_VERSION_string"
                 },
-                content: ${sophiContentObj}
+                content: ${JSON.stringify(sophiContentObj)}
               },
               settings: {
                 collectorEndpoint: 'collector.sophi.io',
