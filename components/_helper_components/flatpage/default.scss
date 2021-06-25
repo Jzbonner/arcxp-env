@@ -15,6 +15,20 @@
     clear: both;
   }
 
+  .c-hp01-mp01 {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+
+    @include breakpoint(tablet) {
+      padding-top: 10px;
+    }
+
+    .border-top {
+      display: none;
+    }
+  }
+
   article {
 
     .c-section {
