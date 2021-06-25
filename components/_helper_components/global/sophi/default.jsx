@@ -50,11 +50,11 @@ const SophiTags = ({ isAmp }) => {
           __html: `{
             "vars": {
               "collectorHost": "collector.sophi.io",
-              "appId": "Sent to you in a separate file-amp",
+              "appId": "ajc:ajc_com:amp",
               "customContexts": {
                 "schema": "iglu:com.globeandmail/environment/jsonschema/1-0-9",
                 "data": {
-                  "client": "Sent to you in a separate file",
+                  "client": "ajc",
                   "environment": "${sophiEnv}"
                 }
               },
@@ -78,7 +78,7 @@ const SophiTags = ({ isAmp }) => {
             "linkers": {
                 "enabled": true,
                 "proxyOnly": false,
-                "destinationDomains": "Sent to you in a separate file"
+                "destinationDomains": "ajc.com"
               },
               "triggers": {
                 "defaultPageview": {
@@ -147,9 +147,9 @@ const SophiTags = ({ isAmp }) => {
               },
               settings: {
                 collectorEndpoint: 'collector.sophi.io',
-                client: "Sent to you in a separate file",
-                appId: "Sent to you in a separate file-website",
-                linkedDomains: [Sent to you in a separate file],
+                client: "ajc",
+                appId: "ajc:ajc_com-website",
+                linkedDomains: ["ajc.com"],
                 plugin: {
                   adblock: false,
                   private: false,
