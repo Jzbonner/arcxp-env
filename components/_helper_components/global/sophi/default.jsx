@@ -150,6 +150,7 @@ const SophiTags = ({ isAmp }) => {
                 client: "ajc",
                 appId: "ajc:ajc_com-website",
                 linkedDomains: ["ajc.com"],
+                noConfigFile: true,
                 plugin: {
                   adblock: false,
                   private: false,
