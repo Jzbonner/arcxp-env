@@ -81,7 +81,7 @@ const staffBioPage = () => {
               {RP01()}
             </div> : null }
             <div className='b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column'>
-              <div className='b-flexCenter b-flexRow tease-listHeading b-margin-bottom-d30-m20' ref={fetchRef}>Latest from {byline}</div>
+              <div className='b-flexRow tease-listHeading b-margin-bottom-d30-m20' ref={fetchRef}>Latest from {byline}</div>
               <CollectionList source={'author-stories-list'}
               listItems={listItems}
               collectionLength={count}

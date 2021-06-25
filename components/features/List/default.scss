@@ -1,6 +1,7 @@
 @import "./../../../src/styles/base";
 
-.c-homeListContainer {
+.c-homeListContainer,
+.c-staffBioPage {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
