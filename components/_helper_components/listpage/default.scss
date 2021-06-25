@@ -37,6 +37,7 @@
   .c-hp01-mp01 {
     display: flex;
     justify-content: center;
+    width: 100%;
   }
 
   .c-news-tip-text {
@@ -127,6 +128,7 @@
 
 .list-mp05 {
   margin-top: 2rem;
+  width: 100%;
 
   @include breakpoint(tablet) {
     display: none;

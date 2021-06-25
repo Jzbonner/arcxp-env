@@ -33,9 +33,7 @@ const CollectionList = ({
   useEffect(() => {
     setItems(
       listItems.map((el, i) => (
-        <div className={'listPage-item'} key={`ListItem-${i}`}>
-          <ListItem {...el} listPage={true} />
-        </div>
+        <ListItem {...el} listPage={true} key={`ListItem-${i}`} />
       )),
     );
   }, []);
