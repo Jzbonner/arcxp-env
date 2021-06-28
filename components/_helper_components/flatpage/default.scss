@@ -23,10 +23,10 @@
     @include breakpoint(tablet) {
       padding-top: 10px;
     }
+  }
 
-    .border-top {
-      display: none;
-    }
+  .border-top {
+    display: none;
   }
 
   article {
