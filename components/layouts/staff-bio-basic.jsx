@@ -54,7 +54,7 @@ const staffBioPage = () => {
 
   const fetchRef = useRef(null);
 
-  const RP01 = () => <ArcAd staticSlot={'RP01 sticky'} key={'RP01 sticky'} />;
+  const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
   const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
   return (
     <>
@@ -77,11 +77,11 @@ const staffBioPage = () => {
         email={email}
         phoneNumber={phoneNumber}/>
           <div className='c-contentElements list-contentElements'>
-            { !noAds ? <div className='c-rightRail list-rp01'>
+            { !noAds ? <div className='c-rightRail list-rp01 list-page-right-rail'>
               {RP01()}
             </div> : null }
             <div className='b-flexRow tease-listHeading b-margin-bottom-d30-m20' ref={fetchRef}>Latest from {byline}</div>
-            <div className='b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column'>
+            <div className='b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile'>
               <CollectionList source={'author-stories-list'}
               listItems={listItems}
               collectionLength={count}

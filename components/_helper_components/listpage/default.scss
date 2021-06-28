@@ -126,6 +126,15 @@
   }
 }
 
+.c-staffBioPage {
+
+  .c-rightRail {
+    @include breakpoint(tablet) {
+      display: none;
+    }
+  }
+}
+
 .list-mp05 {
   margin-top: 2rem;
   width: 100%;
