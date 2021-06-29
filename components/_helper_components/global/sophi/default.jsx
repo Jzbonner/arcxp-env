@@ -27,16 +27,19 @@ const SophiTags = ({ isAmp }) => {
     isNonContentPage,
     contentId,
     firstPublishDateConverted,
+    paywallStatus,
   } = contentMeta || {};
   const sophiContentType = isNonContentPage ? 'section' : 'article';
   let sophiSection = topSection.indexOf('/') === 0 ? topSection.substr(1) : topSection;
   const sophiMainSection = sophiSection.substr(0, sophiSection.indexOf('/'));
   sophiSection = sophiSection.replace(/\//g, ':');
 
+  const accessCategory = paywallStatus === 'premium' ? 'metered view' : 'free access';
+
   const sophiContentObj = isNonContentPage ? {} : {
     type: `${sophiContentType}`,
     contentId: `${contentId || ''}`,
-    accessCategory: 'ACCESS_CATEGORY',
+    accessCategory,
   };
 
 
