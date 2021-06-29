@@ -96,13 +96,13 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
   function renderColumn1(apiData) {
     switch (actualDisplayClass) {
       case '5-Item Feature - Center Lead Top Photo':
-        return getLists(apiData, 1, 2);
+        return getLists(apiData, 0, 2);
       case '1 or 2 Item Feature':
         return [...Array(parseInt(columns, 10)).keys()].map(i => <Headline key={i} {...apiData[startIndex + i]} isTease={true} />);
       case '7-Item TTD Feature':
         return <Headline {...apiData[0]} isTease={true} />;
       case 'Redesign Feature - Left Photo No Photo':
-        return getLists(apiData, startIndex, 5);
+        return getLists(apiData, 0, 5);
       default:
         return null;
     }
@@ -119,7 +119,7 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
       case '7-Item TTD Feature':
         return getLists(apiData, 1, 3);
       case 'Redesign Feature - Left Photo No Photo':
-        return getLists(apiData, startIndex + 4, 9);
+        return getLists(apiData, 3, 9);
       default:
         return null;
     }
@@ -129,13 +129,13 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
     switch (actualDisplayClass) {
       case '5-Item Feature - Top Photo':
       case '5-Item Feature - Left Photo':
-        return getLists(apiData, startIndex + 1, 4);
+        return getLists(apiData, 1, 4);
       case '5-Item Feature - No Photo':
       case '5-Item Feature - Redesigned Lead - No Photo':
         return (
           <>
             <FeatureTitle title={title} moreURL={moreURL} />
-            {getLists(apiData, startIndex + 1, 4)}
+            {getLists(apiData, 1, 4)}
           </>
         );
       case '7-Item TTD Feature':
