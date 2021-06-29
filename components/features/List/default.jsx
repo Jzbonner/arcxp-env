@@ -70,7 +70,7 @@ const List = (customFields = {}) => {
         <div className={`c-homeListContainer ${getColumnsMap(columns)} ${getDisplayClassMap(displayClass)}`}>
           {getDisplayClassMap(displayClass) !== 'no-photo-display-class'
             ? data.map((el, i) => {
-              if (i < itemLimit - 1) {
+              if (i < itemLimit) {
                 return <ListItem key={`ListItem-${i}`} {...el} />;
               }
               return null;

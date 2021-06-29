@@ -96,7 +96,7 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
   function renderColumn1(apiData) {
     switch (actualDisplayClass) {
       case '5-Item Feature - Center Lead Top Photo':
-        return getLists(apiData, 0, 2);
+        return getLists(apiData, 1, 2);
       case '1 or 2 Item Feature':
         return [...Array(parseInt(columns, 10)).keys()].map(i => <Headline key={i} {...apiData[startIndex + i]} isTease={true} />);
       case '7-Item TTD Feature':
