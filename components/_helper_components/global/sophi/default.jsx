@@ -34,7 +34,7 @@ const SophiTags = ({ isAmp }) => {
   const sophiMainSection = sophiSection.substr(0, sophiSection.indexOf('/'));
   sophiSection = sophiSection.replace(/\//g, ':');
 
-  const accessCategory = paywallStatus === 'premium' ? 'metered view' : 'free access';
+  const accessCategory = paywallStatus === 'premium' ? 'metered views' : 'free access';
 
   const sophiContentObj = isNonContentPage ? {} : {
     type: `${sophiContentType}`,
