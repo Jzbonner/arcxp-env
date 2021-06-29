@@ -18,6 +18,7 @@ const List = (customFields = {}) => {
 
   let { from: startIndex = 1, size: itemLimit = 0 } = contentConfigValues || {};
   startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
+
   itemLimit = parseInt(itemLimit, 10) || 0;
 
   const displayClassesRequiringImg = layout !== 'list-basic' ? ['Top Photo', '1 or 2 Item Feature', 'Left Photo', 'Left Photo Small'] : ['Top Photo', '1 or 2 Item Feature'];
@@ -69,7 +70,7 @@ const List = (customFields = {}) => {
         <div className={`c-homeListContainer ${getColumnsMap(columns)} ${getDisplayClassMap(displayClass)}`}>
           {getDisplayClassMap(displayClass) !== 'no-photo-display-class'
             ? data.map((el, i) => {
-              if (startIndex <= i && i < itemLimit + startIndex) {
+              if (i < itemLimit - 1) {
                 return <ListItem key={`ListItem-${i}`} {...el} />;
               }
               return null;
