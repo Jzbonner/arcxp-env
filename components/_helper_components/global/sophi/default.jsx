@@ -26,7 +26,7 @@ const SophiTags = ({ isAmp }) => {
     topSection,
     isNonContentPage,
     contentId,
-    firstPublishDateConverted,
+    firstPublishDate,
     paywallStatus,
   } = contentMeta || {};
   const sophiContentType = isNonContentPage ? 'section' : 'article';
@@ -67,7 +67,7 @@ const SophiTags = ({ isAmp }) => {
                   "type": "${sophiContentType}",
                   "breadcrumb": "${sophiSection}",
                   "sectionName": "${sophiMainSection}",
-                  "datePublished": "${firstPublishDateConverted}"
+                  "datePublished": "${firstPublishDate}"
                 }
               },
               {
@@ -140,7 +140,7 @@ const SophiTags = ({ isAmp }) => {
                   type: "${sophiContentType}",
                   breadcrumb: "${sophiSection}",
                   sectionName: "${sophiMainSection}",
-                  datePublished: "${firstPublishDateConverted}"
+                  datePublished: "${firstPublishDate}"
                 },
                 environment: {
                   environment: "${sophiEnv}",
