@@ -19,10 +19,7 @@
     max-width: 100%;
     margin-left: 0;
     margin-right: 0;
-
-    @include breakpoint(tablet) {
-      padding-top: 10px;
-    }
+    padding-top: 10px;
   }
 
   .border-top {

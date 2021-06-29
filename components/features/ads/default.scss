@@ -18,7 +18,6 @@
   
       @include between-breakpoints(tablet, desktop-sm) {
         display: flex;
-        // margin-bottom: 30px;
         padding-top: 20px;
       }
     }
