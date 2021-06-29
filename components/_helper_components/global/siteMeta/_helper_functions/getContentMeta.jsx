@@ -194,6 +194,7 @@ const getContentMeta = () => {
     environ,
     topics,
     firstPublishDateConverted,
+    firstPublishDate,
     title,
     seoTitle,
     description: desc,
