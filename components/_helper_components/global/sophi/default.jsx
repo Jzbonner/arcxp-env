@@ -44,6 +44,34 @@ const SophiTags = ({ isAmp }) => {
 
 
   if (isAmp) {
+    const customContexts1 = {
+      schema: 'iglu:com.globeandmail/environment/jsonschema/1-0-9',
+      data: {
+        client: 'ajc',
+        environment: `${sophiEnv}`,
+      },
+    };
+
+    const customContexts2 = {
+      schema: 'iglu:com.globeandmail/page/jsonschema/1-0-10',
+      data: {
+        type: `${sophiContentType}`,
+        breadcrumb: `${sophiSection}`,
+        sectionName: `${sophiMainSection}`,
+        datePublished: `${firstPublishDate}`,
+      },
+    };
+
+    const customContexts3 = {
+      schema: 'iglu:com.globeandmail/content/jsonschema/1-0-12',
+      data: {
+        type: `${sophiContentType}`,
+        contentId: `${contentId || ''}`,
+      },
+    };
+
+    const stringCustomContents = `${JSON.stringify(JSON.stringify(customContexts1))},${JSON.stringify(JSON.stringify(customContexts2))},${JSON.stringify(JSON.stringify(customContexts3))}`;
+
     return (
       <amp-analytics type="snowplow_v2" id="sophi" data-credentials="include">
         <script type='application/json' dangerouslySetInnerHTML={{
@@ -51,30 +79,7 @@ const SophiTags = ({ isAmp }) => {
             "vars": {
               "collectorHost": "collector.sophi.io",
               "appId": "ajc:ajc_com:amp",
-              "customContexts": {
-                "schema": "iglu:com.globeandmail/environment/jsonschema/1-0-9",
-                "data": {
-                  "client": "ajc",
-                  "environment": "${sophiEnv}"
-                }
-              },
-              {
-                "schema": "iglu:com.globeandmail/page/jsonschema/1-0-10",
-                "data": {
-                  "type": "${sophiContentType}",
-                  "breadcrumb": "${sophiSection}",
-                  "sectionName": "${sophiMainSection}",
-                  "datePublished": "${firstPublishDate}"
-                }
-              },
-              {
-                "schema": "iglu:com.globeandmail/content/jsonschema/1-0-12",
-                "data": {
-                  "type": "${sophiContentType}",
-                  "contentId": "${contentId || ''}
-                }
-              }
-            },
+              "customContexts": ${stringCustomContents},
             "linkers": {
                 "enabled": true,
                 "proxyOnly": false,
