@@ -8,7 +8,7 @@ import AmpCustomStyles from '../_helper_components/amp/AmpCustomStyle';
 import AmpScripts from '../_helper_components/amp/AmpScripts';
 import GoogleStructuredData from '../_helper_components/article/googleData/default';
 import SiteMetrics from '../_helper_components/global/siteMetrics/default';
-import SophiTags from '../../_helper_components/global/sophi/default';
+import SophiTags from '../_helper_components/global/sophi/default';
 import SiteMetaAmp from '../_helper_components/global/siteMeta/amp';
 import handleSiteName from '../layouts/_helper_functions/handleSiteName.js';
 
