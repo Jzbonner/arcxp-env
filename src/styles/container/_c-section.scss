@@ -71,6 +71,12 @@
         }
       }
 
+      .arc_ad[class*="MP01"] {
+        @include between-breakpoints(mobile, tablet) {
+          margin-bottom: 0;
+        }
+      }
+
       .c-HS02 {
         margin-bottom: 20px;
         width: inherit;
