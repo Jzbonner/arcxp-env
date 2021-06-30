@@ -44,11 +44,8 @@ const SophiTags = ({ isAmp }) => {
 
 
   if (isAmp) {
-    const { ampGtmID } = metrics || {};
     return (
-      <amp-analytics
-        config={`https://www.googletagmanager.com/amp.json?id=${ampGtmID}&gtm.url=SOURCE_URL`}
-        data-credentials='include'>
+      <amp-analytics type="snowplow_v2" id="sophi" data-credentials="include">
         <script type='application/json' dangerouslySetInnerHTML={{
           __html: `{
             "vars": {
