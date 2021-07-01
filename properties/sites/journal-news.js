@@ -89,6 +89,12 @@ export default {
       logoutStart: '35',
       logoutComplete: '35',
     },
+    sandbox: {
+      sophiActive: true,
+    },
+    prod: {
+      sophiActive: false,
+    },
   },
   adsPath: 'dayton_np/jnws_web_default',
   favicon: '/resources/icons/favicons/Ohio/journal-news-favicon.ico',
