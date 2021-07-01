@@ -119,7 +119,7 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
       case '7-Item TTD Feature':
         return getLists(apiData, 1, 3);
       case 'Redesign Feature - Left Photo No Photo':
-        return getLists(apiData, 3, 9);
+        return getLists(apiData, 4, 9);
       default:
         return null;
     }
