@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useAppContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import checkTags from './_helper_functions/checkTags';
@@ -47,12 +47,7 @@ const staffBioPage = () => {
     },
   });
 
-  const {
-    content_elements: listItems,
-    count,
-  } = initialList || {};
-
-  const fetchRef = useRef(null);
+  const { content_elements: listItems } = initialList || {};
 
   const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
   const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
@@ -76,7 +71,7 @@ const staffBioPage = () => {
         expertise={expertise}
         email={email}
         phoneNumber={phoneNumber}/>
-          <div className='b-flexRow tease-listHeading b-margin-bottom-d30-m20' ref={fetchRef}>Latest from {byline}</div>
+          <div className='b-flexRow tease-listHeading b-margin-bottom-d30-m20'>Latest from {byline}</div>
           <div className='c-contentElements list-contentElements'>
             { !noAds ? <div className='c-rightRail list-rp01 list-page-right-rail'>
               {RP01()}
@@ -85,9 +80,8 @@ const staffBioPage = () => {
               <div className="tablet-line"></div>
               <CollectionList source={'author-stories-list'}
               listItems={listItems}
-              collectionLength={count}
               collectionID={queryID}
-              fetchRef={fetchRef} />
+            />
             </div>
           </div>
         </div>
