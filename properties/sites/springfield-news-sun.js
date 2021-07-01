@@ -89,7 +89,7 @@ export default {
       logoutComplete: '35',
     },
     sandbox: {
-      sophiActive: true,
+      sophiActive: false,
     },
     prod: {
       sophiActive: false,
