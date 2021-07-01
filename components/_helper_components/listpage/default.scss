@@ -82,6 +82,12 @@
       display: none;
     }
   }
+
+  .list-contentElements {
+    @include breakpoint(desktop-sm) {
+      border-right: 1px #dadada solid;
+    }
+  }
 }
 
 .tease-listHeading {
@@ -118,21 +124,16 @@
   }
 }
 
-.c-listPage {
-
-  .list-contentElements {
-    @include breakpoint(desktop-sm) {
-      border-right: 1px #dadada solid;
-    }
-  }
-}
-
 .c-staffBioPage {
 
   .c-rightRail {
     @include breakpoint(tablet) {
       display: none;
     }
+  }
+
+  .btn-loadMore {
+    margin-right: 3.3%;
   }
 }
 
