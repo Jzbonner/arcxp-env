@@ -44,39 +44,40 @@ const SophiTags = ({ isAmp }) => {
 
 
   if (isAmp) {
-    const { ampGtmID } = metrics || {};
+    const stringCustomContents = [
+      JSON.stringify({
+        schema: 'iglu:com.globeandmail/environment/jsonschema/1-0-9',
+        data: {
+          client: 'ajc',
+          environment: `${sophiEnv}`,
+        },
+      }),
+      JSON.stringify({
+        schema: 'iglu:com.globeandmail/page/jsonschema/1-0-10',
+        data: {
+          type: `${sophiContentType}`,
+          breadcrumb: `${sophiSection}`,
+          sectionName: `${sophiMainSection}`,
+          datePublished: `${firstPublishDate}`,
+        },
+      }),
+      JSON.stringify({
+        schema: 'iglu:com.globeandmail/content/jsonschema/1-0-12',
+        data: {
+          type: `${sophiContentType}`,
+          contentId: `${contentId || ''}`,
+        },
+      }),
+    ].toString();
+
     return (
-      <amp-analytics
-        config={`https://www.googletagmanager.com/amp.json?id=${ampGtmID}&gtm.url=SOURCE_URL`}
-        data-credentials='include'>
+      <amp-analytics type="snowplow_v2" id="sophi" data-credentials="include">
         <script type='application/json' dangerouslySetInnerHTML={{
           __html: `{
             "vars": {
               "collectorHost": "collector.sophi.io",
               "appId": "ajc:ajc_com:amp",
-              "customContexts": {
-                "schema": "iglu:com.globeandmail/environment/jsonschema/1-0-9",
-                "data": {
-                  "client": "ajc",
-                  "environment": "${sophiEnv}"
-                }
-              },
-              {
-                "schema": "iglu:com.globeandmail/page/jsonschema/1-0-10",
-                "data": {
-                  "type": "${sophiContentType}",
-                  "breadcrumb": "${sophiSection}",
-                  "sectionName": "${sophiMainSection}",
-                  "datePublished": "${firstPublishDate}"
-                }
-              },
-              {
-                "schema": "iglu:com.globeandmail/content/jsonschema/1-0-12",
-                "data": {
-                  "type": "${sophiContentType}",
-                  "contentId": "${contentId || ''}
-                }
-              }
+              "customContexts": ${JSON.stringify(stringCustomContents)}
             },
             "linkers": {
                 "enabled": true,
