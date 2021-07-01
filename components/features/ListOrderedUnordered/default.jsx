@@ -17,8 +17,7 @@ const ListOrderedUnordered = (customFields = {}) => {
     },
   } = customFields;
 
-  let { from: startIndex, size: itemLimit } = contentConfigValues || {};
-  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
+  let { size: itemLimit } = contentConfigValues || {};
   itemLimit = parseInt(itemLimit, 10) || 10;
 
   const data = useContent({
@@ -27,8 +26,7 @@ const ListOrderedUnordered = (customFields = {}) => {
   });
 
   if (Array.isArray(data)) {
-    const limitResult = startIndex + itemLimit; // making sure the limit adds the index, so it doesn't reduce number of results
-    const filteredData = data.slice(startIndex, limitResult); // filtering data based on startIndex & itemLimit (user input)
+    const filteredData = data.slice(0, itemLimit);
 
     return (
       <div className={`c-${displayClass} b-margin-bottom-d30-m20`}>

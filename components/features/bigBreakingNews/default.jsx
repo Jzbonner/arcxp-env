@@ -14,9 +14,7 @@ const BigBreakingNews = (customFields = {}) => {
     customFields: { content: { contentService = 'collections-api', contentConfigValues } = {} },
   } = customFields;
 
-  let { from: startIndex = 1, size } = contentConfigValues || {};
-  startIndex -= 1;
-  size = startIndex + size;
+  const { size } = contentConfigValues || {};
 
   let data = useContent({
     source: contentService,
@@ -36,7 +34,7 @@ const BigBreakingNews = (customFields = {}) => {
     },
   });
 
-  data = data && data.slice(startIndex, size);
+  data = data && data.slice(0, size);
 
   const renderLogic = () => {
     const leadItem = data[0];

@@ -34,8 +34,7 @@ const Mosaic = (customFields = {}) => {
     },
   } = customFields;
 
-  let { from: startIndex, size: itemLimit } = contentConfigValues || {};
-  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
+  let { size: itemLimit } = contentConfigValues || {};
   itemLimit = parseInt(itemLimit, 10) || 12;
 
   const data = useContent({
@@ -43,8 +42,8 @@ const Mosaic = (customFields = {}) => {
     query: { ...contentConfigValues, arcSite },
   });
 
-  function patternMap(index, i) {
-    const patternSpot = (index + i) % 6;
+  function patternMap(i) {
+    const patternSpot = (i) % 6;
     switch (patternSpot) {
       case 0:
         return 'size-2';
@@ -127,11 +126,11 @@ const Mosaic = (customFields = {}) => {
               isHideTimestampTrue,
               tags,
             };
-            if (startIndex <= i && i < startIndex + itemLimit) {
+            if (i < itemLimit) {
               return (
                 <div
                   key={`Mosaic-${i}`}
-                  className={`mosaic-box ${patternMap(startIndex, i)}`}
+                  className={`mosaic-box ${patternMap(i)}`}
                 >
                   {/* the link is empty - 100% coverage of content via css - because sectionLabel outputs a link as well */}
                   <a href={relativeURL}></a>
