@@ -18,6 +18,17 @@ main.c-amp-video {
       outline: none;
       box-shadow: none;
       -webkit-tap-highlight-color: transparent;
+
+      .powa-processed .powa-pane .powa-share {
+        display: flex;
+      }
+    }
+
+    &:hover {
+
+      .powa-processed .powa-pane .powa-share {
+        display: flex;
+      }
     }
   
     @include breakpoint(tablet) {
