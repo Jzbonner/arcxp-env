@@ -44,33 +44,31 @@ const SophiTags = ({ isAmp }) => {
 
 
   if (isAmp) {
-    const customContexts1 = {
-      schema: 'iglu:com.globeandmail/environment/jsonschema/1-0-9',
-      data: {
-        client: 'ajc',
-        environment: `${sophiEnv}`,
-      },
-    };
-
-    const customContexts2 = {
-      schema: 'iglu:com.globeandmail/page/jsonschema/1-0-10',
-      data: {
-        type: `${sophiContentType}`,
-        breadcrumb: `${sophiSection}`,
-        sectionName: `${sophiMainSection}`,
-        datePublished: `${firstPublishDate}`,
-      },
-    };
-
-    const customContexts3 = {
-      schema: 'iglu:com.globeandmail/content/jsonschema/1-0-12',
-      data: {
-        type: `${sophiContentType}`,
-        contentId: `${contentId || ''}`,
-      },
-    };
-
-    const stringCustomContents = `${JSON.stringify(JSON.stringify(customContexts1))},${JSON.stringify(JSON.stringify(customContexts2))},${JSON.stringify(JSON.stringify(customContexts3))}`;
+    const stringCustomContents = [
+      JSON.stringify(JSON.stringify({
+        schema: 'iglu:com.globeandmail/environment/jsonschema/1-0-9',
+        data: {
+          client: 'ajc',
+          environment: `${sophiEnv}`,
+        },
+      })),
+      JSON.stringify(JSON.stringify({
+        schema: 'iglu:com.globeandmail/page/jsonschema/1-0-10',
+        data: {
+          type: `${sophiContentType}`,
+          breadcrumb: `${sophiSection}`,
+          sectionName: `${sophiMainSection}`,
+          datePublished: `${firstPublishDate}`,
+        },
+      })),
+      JSON.stringify(JSON.stringify({
+        schema: 'iglu:com.globeandmail/content/jsonschema/1-0-12',
+        data: {
+          type: `${sophiContentType}`,
+          contentId: `${contentId || ''}`,
+        },
+      })),
+    ];
 
     return (
       <amp-analytics type="snowplow_v2" id="sophi" data-credentials="include">
