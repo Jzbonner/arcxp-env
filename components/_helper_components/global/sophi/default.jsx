@@ -45,14 +45,14 @@ const SophiTags = ({ isAmp }) => {
 
   if (isAmp) {
     const stringCustomContents = [
-      JSON.stringify(JSON.stringify({
+      JSON.stringify({
         schema: 'iglu:com.globeandmail/environment/jsonschema/1-0-9',
         data: {
           client: 'ajc',
           environment: `${sophiEnv}`,
         },
-      })),
-      JSON.stringify(JSON.stringify({
+      }),
+      JSON.stringify({
         schema: 'iglu:com.globeandmail/page/jsonschema/1-0-10',
         data: {
           type: `${sophiContentType}`,
@@ -60,15 +60,15 @@ const SophiTags = ({ isAmp }) => {
           sectionName: `${sophiMainSection}`,
           datePublished: `${firstPublishDate}`,
         },
-      })),
-      JSON.stringify(JSON.stringify({
+      }),
+      JSON.stringify({
         schema: 'iglu:com.globeandmail/content/jsonschema/1-0-12',
         data: {
           type: `${sophiContentType}`,
           contentId: `${contentId || ''}`,
         },
-      })),
-    ];
+      }),
+    ].toString();
 
     return (
       <amp-analytics type="snowplow_v2" id="sophi" data-credentials="include">
@@ -77,7 +77,7 @@ const SophiTags = ({ isAmp }) => {
             "vars": {
               "collectorHost": "collector.sophi.io",
               "appId": "ajc:ajc_com:amp",
-              "customContexts": ${stringCustomContents},
+              "customContexts": ${JSON.stringify(stringCustomContents)},
             "linkers": {
                 "enabled": true,
                 "proxyOnly": false,
