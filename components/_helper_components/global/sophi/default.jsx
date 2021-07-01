@@ -78,6 +78,7 @@ const SophiTags = ({ isAmp }) => {
               "collectorHost": "collector.sophi.io",
               "appId": "ajc:ajc_com:amp",
               "customContexts": ${JSON.stringify(stringCustomContents)},
+            },
             "linkers": {
                 "enabled": true,
                 "proxyOnly": false,
