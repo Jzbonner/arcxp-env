@@ -18,9 +18,6 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
 
   const actualDisplayClass = displayClassOverride || displayClass;
 
-  let { from: startIndex = 1 } = contentConfigValues || {};
-  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
-
   const displayClassesRequiringImg = [
     '5-Item Feature - Top Photo',
     '5-Item Feature - Left Photo',
@@ -40,7 +37,7 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
   let useSquareImageAfter = -1;
   if (isTTDFeature) {
     squareImageSize = 110;
-    useSquareImageAfter = startIndex + 1;
+    useSquareImageAfter = 1;
   }
   if (isLeftNoPhotoFeature) {
     squareImageSize = 80;
@@ -98,7 +95,7 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
       case '5-Item Feature - Center Lead Top Photo':
         return getLists(apiData, 1, 2);
       case '1 or 2 Item Feature':
-        return [...Array(parseInt(columns, 10)).keys()].map(i => <Headline key={i} {...apiData[startIndex + i]} isTease={true} />);
+        return [...Array(parseInt(columns, 10)).keys()].map(i => <Headline key={i} {...apiData[i]} isTease={true} />);
       case '7-Item TTD Feature':
         return <Headline {...apiData[0]} isTease={true} />;
       case 'Redesign Feature - Left Photo No Photo':

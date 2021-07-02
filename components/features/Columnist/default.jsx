@@ -15,8 +15,6 @@ const Columnist = (customFields = {}) => {
   } = customFields;
 
   const { size } = contentConfigValues;
-  let { from: startIndex = 1 } = contentConfigValues || {};
-  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
 
   const data = useContent({
     source: contentService,
@@ -38,7 +36,7 @@ const Columnist = (customFields = {}) => {
             } = story && story.credits && story.credits.by && story.credits.by[0] ? story.credits.by[0] : {};
             const { basic: headline } = story && story.headlines && story.headlines.basic ? story.headlines : {};
             const { canonical_url: articleURL } = story && story.canonical_url ? story : {};
-            if (startIndex <= idx && idx < size + startIndex) {
+            if (idx < size) {
               return (
                 <li className="c-singleStory" key={idx}>
                   <a href={authorURL} className='authorName'>

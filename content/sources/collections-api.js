@@ -22,6 +22,7 @@ const fetch = (query) => {
     arcSite,
     id,
     size = 12,
+    from,
     displayClass = '',
     displayClassesRequiringImg = [],
     width = 500,
@@ -37,7 +38,7 @@ const fetch = (query) => {
 
   const requiresImageEveryX = getImageRequirements(displayClass, displayClassesRequiringImg);
   if (id) {
-    return GetCollectionData(activeSite, id, size)
+    return GetCollectionData(activeSite, id, size, from)
       .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
       .then(data => FilterElements(data, requiresImageEveryX))
       .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes, squareImageSize, useSquareImageAfter))
