@@ -14,16 +14,16 @@ export default (arcSite, id, size = 20, from = 0) => {
 
   const buffer = 3;
   const fetchSize = 20;
-  const numberOfFetches = from + sizeInt + buffer <= fetchSize ? 1 : Math.ceil((from + sizeInt + buffer) / fetchSize);
+  const numberOfFetches = sizeInt + buffer <= fetchSize ? 1 : Math.ceil((sizeInt + buffer) / fetchSize);
 
-  let fetchStart = from;
+  let fetchStart = from - 1;
   let i = 1;
 
   while (i <= numberOfFetches && i < 10) {
     let requestUri = `${CONTENT_BASE}/content/v4/collections/?website=${arcSite}`;
     requestUri += `&_id=${id}`;
     requestUri += `&from=${fetchStart}`;
-    requestUri += '&size=20';
+    requestUri += `&size=${fetchSize}`;
 
     const promise = axios
       .get(requestUri, {

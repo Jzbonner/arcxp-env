@@ -14,9 +14,6 @@ const Synopsis = (customFields = {}) => {
     },
   } = customFields;
 
-  let { from: startIndex = 1 } = contentConfigValues || {};
-  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
-
   const data = useContent({
     source: contentService,
     query: {
@@ -29,7 +26,7 @@ const Synopsis = (customFields = {}) => {
     return (
       <div className='c-synopsis'>
         {data.map((el, i) => {
-          if (startIndex <= i && i < 2 + startIndex) {
+          if (i < 2) {
             return (
               <ListItem key={`ListItem-${i}`} {...el} showPreview={true} isSynopsis={true} />
             );
