@@ -37,6 +37,8 @@
   .c-hp01-mp01 {
     display: flex;
     justify-content: center;
+    width: 100%;
+    margin: 0;
   }
 
   .c-news-tip-text {
@@ -80,24 +82,28 @@
       display: none;
     }
   }
+
+  .list-contentElements {
+    @include breakpoint(desktop-sm) {
+      border-right: 1px #dadada solid;
+    }
+  }
 }
 
 .tease-listHeading {
-  text-align: center;
   border-bottom: 1px solid #cdcdcd;
-  box-sizing: border-box;
-  text-transform: capitalize;
+  font-weight: 700;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: -.28px;
+  color: #313132;
+  padding: 11px 0;
 
-  @include between-breakpoints(mobile, desktop-sm) {
-    padding: 10px 0;
-  }
-
-  @include text-styles(1.875rem, 1, "Average");
+  @include text-styles(1.375rem, 1, "Gordita-Bold");
 
   @include breakpoint(desktop-sm) {
-    padding-bottom: 20px;
-
-    @include text-styles(2.5rem, 1, "Average");
+    padding-bottom: 12px;
+    font-size: 2.188rem;
   }
 }
 
@@ -118,17 +124,22 @@
   }
 }
 
-.c-listPage {
+.c-staffBioPage {
 
-  .list-contentElements {
-    @include breakpoint(desktop-sm) {
-      border-right: 1px #dadada solid;
+  .c-rightRail {
+    @include breakpoint(tablet) {
+      display: none;
     }
+  }
+
+  .btn-loadMore {
+    margin-right: 3.3%;
   }
 }
 
 .list-mp05 {
   margin-top: 2rem;
+  width: 100%;
 
   @include breakpoint(tablet) {
     display: none;

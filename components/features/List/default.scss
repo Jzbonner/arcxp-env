@@ -1,6 +1,7 @@
 @import "./../../../src/styles/base";
 
-.c-homeListContainer {
+.c-homeListContainer,
+.c-staffBioPage {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -127,6 +128,7 @@
       border: none;
       margin-bottom: 0;
       padding-bottom: 0;
+      border-bottom: none;
     }
 
     .homeList-image {
@@ -167,10 +169,6 @@
       flex-direction: column;
       border: none;
       margin-bottom: .94rem;
-
-      .c-homeList.listPage:nth-last-child(2) {
-        border-bottom: 1px #dadada solid;
-      }
 
       .tablet-line {
         display: none;
@@ -388,10 +386,6 @@
         @include between-breakpoints(tablet, desktop-sm) {
           width: 47%;
         }
-
-        //@include breakpoint(desktop-sm) {
-        //  margin-bottom: 2rem;
-        //}
       }
 
       &.isMissingPromo {
