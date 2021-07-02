@@ -29,7 +29,7 @@ const StaffBio = ({
 
   return (
     <>
-      <div className='b-flexRow b-flexCenter b-margin-bottom-d30-m20'>
+      <div className='c-staff-bio b-flexRow b-flexCenter'>
         { authorPhoto
         && <div className='staff-image'>
           <img src={authorPhoto}/>
