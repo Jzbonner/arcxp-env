@@ -30,6 +30,10 @@ main.c-amp-video {
         display: flex;
       }
     }
+
+    .powa-tap .powa-pane .powa-share {
+      display: flex;
+    }
   
     @include breakpoint(tablet) {
       flex: 1 0 66%;
