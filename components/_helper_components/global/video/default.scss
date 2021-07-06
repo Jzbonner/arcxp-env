@@ -27,12 +27,14 @@ main.c-amp-video {
     &:hover {
 
       .powa-processed .powa-pane .powa-share {
-        display: flex;
+        display: flex; /* stylelint-disable-line declaration-no-important */
       }
     }
 
-    .powa-tap .powa-pane .powa-share {
-      display: flex;
+    .powa-tap .powa-pane .powa-share,
+    .powa-hover .powa-pane .powa-share {
+      //this !important is to override an inline style created by the powa
+      display: flex !important; /* stylelint-disable-line declaration-no-important */
     }
   
     @include breakpoint(tablet) {
