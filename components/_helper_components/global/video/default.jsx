@@ -440,7 +440,7 @@ const Video = ({
     <>
     <amp-iframe
     layout="responsive"
-    src={`https://${orgOfRecord}.video-player.arcpublishing.com/${currentEnv}/powaEmbed.html?org=${orgOfRecord}&uuid=${vidId}&powa-ad-tag=${encodedAdTag}&autoinit=native-hls&playthrough=true&discovery=true&powa-autoplay=${!isInlineVideo}&powa-muted=${!isInlineVideo}`}
+    src={`https://${orgOfRecord}.video-player.arcpublishing.com/${currentEnv}/powaEmbed.html?org=${orgOfRecord}&uuid=${vidId}&powa-ad-tag=${encodedAdTag}&autoinit=native-hls&playthrough=true&discovery=true&${!isInlineVideo ? 'powa-autoplay=true&powa-autoplay-muted=true' : ''}`}
     width={`${vidWidth}`}
     height={`${vidHeight}`}
     allow='autoplay'
