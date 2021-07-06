@@ -37,7 +37,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
   }
   const basicAuthor = basicCredits && basicCredits.affiliation && basicCredits.affiliation[0] && basicCredits.affiliation[0].name && basicCredits.affiliation[0].name !== '' ? basicCredits.affiliation[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].name ? basicCredits.by[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].referent && basicCredits.by[0].referent.id ? basicCredits.by[0].referent.id : '';
   if (promoItemsType === 'image' && !standaloneGallery) {
-    leadObject = basicGalleryPromo ? mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit) : mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor);
+    leadObject = basicUrl && basicUrl !== '' ? mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor, true, basicUrl, true) : basicGalleryPromo ? mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit, true, basicGalleryUrl, true) : {};
   }
 
   if (promoItemsType === 'video') {
@@ -74,7 +74,9 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
           caption: itemCaption = '', url: itemUrl = '', credits: creditsArray = '', subtitle: itemTitle = '',
         } = item || {};
         const appFeedCredit = creditsArray && creditsArray.affiliation && creditsArray.affiliation[0] && creditsArray.affiliation[0].name && creditsArray.affiliation[0].name !== '' ? creditsArray.affiliation[0].name : creditsArray && creditsArray.by && creditsArray.by[0] && creditsArray.by[0].name ? creditsArray.by[0].name : creditsArray && creditsArray.by && creditsArray.by[0] && creditsArray.by[0].referent && creditsArray.by[0].referent.id ? creditsArray.by[0].referent.id : '';
-        if (basicGalleryUrl === itemUrl) {
+
+        // Have to implement an additional check for collections to see if there isn't already a lead object (which is usually the case for collections)
+        if (basicGalleryUrl === itemUrl && !Object.prototype.hasOwnProperty.call(leadObject, '_name')) {
           leadObject = mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, true, basicGalleryUrl, true);
           return {};
         }

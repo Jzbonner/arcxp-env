@@ -75,6 +75,16 @@ export const ConnextAuthTrigger = () => {
             }
           });
         }
+
+        // lead video fix for APD-1333
+        const storyHasLeadVideo = !!window.document.getElementsByClassName('article-headline-component with-video');
+
+        if (storyHasLeadVideo) {
+          const videoBlocker = window.document.querySelector('.video-blocker');
+
+          if (videoBlocker) videoBlocker.style.display = 'none';
+        }
+
         // set state to `true` to ensure we only call `loadDeferredItems` once
         setLoadedDeferredItems(true);
       }
@@ -261,6 +271,13 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                 'event': loginEventToTrigger
               };
               dataLayer.push(userDataObj);
+              if (window?.sophi?.data) {
+                window.sophi.data.visitor = {
+                  type: userTypeState,
+                  isLoggedIn: true,
+                  uid: CustomerRegistrationId
+                };
+              }
             }
           }
         } else if (action === 'logged-out') {
@@ -275,6 +292,13 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
             }
           };
           dataLayer.push(userDataObj);
+          if (window?.sophi?.data) {
+            window.sophi.data.visitor = {
+              type: 'anonymous',
+              isLoggedIn: false,
+              uid: null
+            };
+          }
           // trigger login modal to appear if "triggerLoginModal" is passed-in (i.e. from "login" outputType)
           if (${triggerLoginModal}) {
             doc.querySelector('[data-mg2-action="login"]').click();

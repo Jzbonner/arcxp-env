@@ -5,7 +5,6 @@
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
-  margin-bottom: 1.25rem;
 
   @include breakpoint(tablet) {
     margin-bottom: 0;
@@ -16,8 +15,10 @@
   }
 
   .c-homeLeadContainer {
-    margin-bottom: $min-Msection-margin;
-
+    @include breakpoint(tablet) {
+      margin-bottom: $min-Msection-margin;
+    }
+    
     @include breakpoint(desktop-sm) {
       margin-bottom: $min-DTsection-margin;
     }
@@ -103,6 +104,22 @@
             @include text-styles(1rem, 1, "Lora");
 
             letter-spacing: -.27px;
+          }
+        }
+      }
+    }
+  }
+
+  .c-synopsis {
+
+    .c-homeList {
+
+      &:last-child {
+
+        .homeList-text {
+          
+          .article-timestamp {
+            margin-bottom: 0;
           }
         }
       }

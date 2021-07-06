@@ -3,6 +3,14 @@
 .topPhotoNoPhoto {
   width: 100%;
 
+  @include between-breakpoints(tablet, desktop-sm) {
+    width: 47%;
+
+    &:first-child {
+      margin-right: 3.3%;
+    }
+  }
+
   @include breakpoint(desktop-sm) {
     margin-right: 3%;
   }
@@ -26,8 +34,6 @@
     }
 
     .column-2 {
-      margin-bottom: 10px;
-
       @include breakpoint(desktop-sm) {
         min-height: 245px;
       }
@@ -52,19 +58,14 @@
         box-shadow: none;
         background-color: none;
         margin-top: 15px;
-        max-width: 90%;
-        padding: 0 0 $min-margin;
+        padding: 0;
         border-radius: unset;
-
-        @include breakpoint(desktop-sm) {
-          max-width: 100%;
-        }
 
         .headline {
           letter-spacing: -.16px;
           margin: 0 0 10px;
 
-          @include text-styles(1rem, 1, "Lora");
+          @include text-styles(1rem, 1.375, "Lora");
         }
       }
     }
@@ -83,11 +84,15 @@
     .column-3 .headline {
       letter-spacing: -.16px;
 
-      @include text-styles(1rem, 1, "Lora");
+      @include text-styles(1rem, 1.375, "Lora");
     }
   }
 }
 
 .topPhotoNoPhoto:last-child {
   margin-right: 0;
+
+  @include between-breakpoints(tablet, desktop-sm) {
+    display: none;
+  }
 }

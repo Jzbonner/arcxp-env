@@ -4,18 +4,24 @@
 .c-sponsorBanner {
   position: relative;
   display: block;
-  width: 100%;
+  width: calc(100% - 40px);
   height: auto;
   max-width: 576px;
   max-height: 260px;
-  margin: auto;
+  margin: .938rem auto auto;
 
   @include breakpoint(tablet) {
-    max-width: calc(100% - 40px);
+    width: 100%;
+    max-width: calc(100% - 75px);
   }
 
   @include breakpoint(desktop-sm) {
-    max-width: 1600px;
+    max-width: calc(100% - 65px);
+    margin-top: .938rem;
+  }
+
+  @include breakpoint(desktop-xxxl) {
+    max-width: 1540px;
   }
 
   .c-sponsorImg {

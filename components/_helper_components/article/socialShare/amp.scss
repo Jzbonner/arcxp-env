@@ -1,9 +1,35 @@
 .social-share-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: left;
 
   amp-social-share {
-    margin: 0 5px;
+    margin: 4px 20px 0 0;
     outline: none;
+    background: none;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    &.icon-fb:hover path,
+    &.icon-fb:active path {
+      fill: #1877f2;
+    }
+
+    &.icon-twitter:hover path,
+    &.icon-twitter:active path {
+      fill: #1da1f2;
+    }
+
+    &.icon-pinterest:hover path,
+    &.icon-pinterest:active path {
+      fill: #bd081c;
+    }
+
+    &.icon-email:hover path,
+    &.icon-email:active path {
+      fill: #3299ad;
+    }
   }
 }

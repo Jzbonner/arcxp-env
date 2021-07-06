@@ -20,12 +20,13 @@ import './default.scss';
   ]
 */
 const Image = ({
-  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType,
+  width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, squareImage = false,
   ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [], additionalClasses = '', noLazyLoad = false,
 }) => {
   const {
     resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, focal_point: rootFocalPoint, useSrcSet: hasSrcSet = false,
   } = src || {};
+
   const fusionContext = useFusionContext();
   const { arcSite, layout } = fusionContext;
   const appContext = useAppContext();
@@ -34,7 +35,7 @@ const Image = ({
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
   const isGalleryImage = imageType === 'isGalleryImage';
   let img = null;
-  if (resizedObject && resizedObject.src) {
+  if (resizedObject && resizedObject.src && !squareImage) {
     img = resizedObject;
   } else if (url) {
     const focalCoords = setFocalCoords(additionalProperties, rootFocalPoint);
@@ -47,6 +48,7 @@ const Image = ({
       originalWidth,
       focalCoords,
       arcSite,
+      squareImage,
       isGallery: isGalleryImage,
     };
 
@@ -76,12 +78,12 @@ const Image = ({
     if (
       (imageType === 'isLeadImage' && !giveCredit && !caption)
       || (imageType === 'isInlineImage' && !caption)
-      || (imageType === 'isLeadImage' && giveCredit && !caption && screenSize.width > maxTabletViewWidth)
+      || (imageType === 'isLeadImage' && giveCredit && !caption)
       || teaseContentType
     ) {
       return null;
     }
-    if (imageType === 'isLeadImage' && giveCredit && !caption && screenSize.width < maxTabletViewWidth) {
+    if (imageType === 'isLeadImage' && giveCredit && caption && screenSize.width < maxTabletViewWidth) {
       return <Caption imageType={imageType} src={src} />;
     }
     return <Caption imageType={imageType} src={src} ampPage={ampPage} />;
@@ -185,5 +187,6 @@ Image.propTypes = {
   srcSetSizes: PropTypes.array,
   additionalClasses: PropTypes.string,
   noLazyLoad: PropTypes.bool,
+  squareImage: PropTypes.bool,
 };
 export default Image;

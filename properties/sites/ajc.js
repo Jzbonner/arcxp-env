@@ -40,6 +40,12 @@ export default {
       logoutStart: '41',
       logoutComplete: '41',
     },
+    sandbox: {
+      sophiActive: true,
+    },
+    prod: {
+      sophiActive: false,
+    },
   },
   featuredVideoPlayerRules: {
     startPlaying: true,

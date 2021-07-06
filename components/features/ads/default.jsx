@@ -149,7 +149,7 @@ const ArcAd = ({
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
       dfpId={dfpIdFormatted}
       display={adConfig.display || defaultAdSlot.display}
-      id={`${defaultAdSlot.name}${staticSlot || slot.replace(/ /g, '-')}${adSuffix}`}
+      id={`${defaultAdSlot.name}${staticSlot || slot.replace(/ /g, '-').replace(/[()]/g, '')}${adSuffix}`}
       slotName={slotName}
       adSlotNameForArcAds={adSlotNameForArcAds}
       targeting={{ ...globalTargeting, ...targeting }}
@@ -183,14 +183,23 @@ ArcAd.propTypes = {
       'MP04',
       'MP05',
       'RP01',
-      'RP01 300x250',
-      'RP01 300x600',
-      'RP01 sticky',
+      'RP01 desktop',
       'RP01 tablet',
+      'RP01 300x250',
+      'RP01 300x250 (desktop only)',
+      'RP01 300x600',
+      'RP01 300x600 (desktop only)',
+      'RP01 sticky',
+      'RP01 sticky (desktop only)',
       'RP02',
       'RP03 sticky',
+      'RP03 sticky (desktop only)',
+      'RP03 tablet',
       'RP09 300x250',
+      'RP09 300x250 (desktop only)',
       'RP09 sticky',
+      'RP09 sticky (desktop only)',
+      'RP09 tablet',
       'SP01',
     ]).tag({
       name: 'Slot ID',

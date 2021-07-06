@@ -17,6 +17,8 @@ const DontMiss = (customFields = {}) => {
     },
   } = customFields;
 
+  const { size } = contentConfigValues;
+
   const data = useContent({
     source: contentService,
     query: {
@@ -31,10 +33,9 @@ const DontMiss = (customFields = {}) => {
         <FeatureTitle title={title}/>
         <div className="c-homeListContainer no-photo-display-class dontMissFeature">
         {data.map((el, i) => {
-          if (i < 3) {
+          if (i < size) {
             return <ListItem key={`ListItem-${i}`} {...el} isDontMissFeature/>;
-          }
-          return null;
+          } return null;
         })}
         </div>
       </div>);

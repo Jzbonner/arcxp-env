@@ -4,22 +4,29 @@
   border-top: 1px solid #cdcdcd;
   margin-bottom: 10px;
 
-  &[class*="RP0"] {
-    display: none;
+  &.c-sectionHome {
+    max-width: 1540px;
+    margin-bottom: 10px;
 
-    @include between-breakpoints(tablet, desktop-sm) {
-      display: flex;
-      margin-bottom: 30px;
+    @include between-breakpoints(mobile, tablet) {
+      width: 100%;
+      padding: 0;
+    }
+
+    &[class*="RP0"] {
+      display: none;
+  
+      @include between-breakpoints(tablet, desktop-sm) {
+        display: flex;
+        padding-top: 20px;
+      }
     }
   }
 
-  &.c-sectionHome {
-    max-width: 1540px;
-
-    @include between-breakpoints(mobile, tablet) {
-      width: 94%;
-      padding: 0;
-    }
+  &.HP01,
+  &.HP02,
+  &.HS02 {
+    margin-bottom: 0;
   }
 }
 

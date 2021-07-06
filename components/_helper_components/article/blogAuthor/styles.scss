@@ -18,12 +18,8 @@
     }
   }
 
-  &.multiple-authors {
+  &.multiple-authors .content-profileImage {
     margin-bottom: 0;
-
-    .content-profileImage {
-      margin-bottom: 0;
-    }
   }
 
   .blog-author-content:not(:last-child) {
@@ -81,8 +77,9 @@
     font-weight: 600;
     position: relative;
     width: 100%;
-    padding-right: 50px;
+    padding-right: 60px;
     box-sizing: border-box;
+    line-height: 1.2;
   }
 
   .content-authorSocial {

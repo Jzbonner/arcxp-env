@@ -1,6 +1,7 @@
 @import "./../../../src/styles/base";
 
-.c-homeListContainer {
+.c-homeListContainer,
+.c-staffBioPage {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -33,6 +34,7 @@
 
   .c-homeList {
     width: 100%;
+    margin-bottom: 15px;
 
     &:last-child {
       margin-bottom: 0;
@@ -96,6 +98,21 @@
 
         letter-spacing: -.09px;
         margin-bottom: 10px;
+
+        @include breakpoint(desktop-lg) {
+          @include text-styles(.9375rem, 1.17, "Lora");
+        }
+      }
+    }
+
+    &.listPage {
+
+      .c-tease-icon {
+        margin-left: 0;
+      }
+
+      .homeList-image {
+        margin-left: 23px;
       }
     }
   }
@@ -111,25 +128,71 @@
       border: none;
       margin-bottom: 0;
       padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .homeList-image {
+      width: 80px;
+      min-width: 80px;
+      height: auto;
+
+      @include breakpoint(desktop-sm) {
+        width: 104px;
+        min-width: 104px;
+      }
+    }
+  }
+
+  &.two-column-mobile {
+    @include breakpoint(tablet) {
+      position: relative;
+      border-bottom: 1px #dadada solid;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+
+      .tablet-line {
+        position: absolute;
+        top: 1rem;
+        right: 50%;
+        height: calc(100% - 3rem);
+        width: 1px;
+        background-color: #dadada;
+      }
+
+      .c-homeList.listPage:nth-last-child(-n+2) {
+        border: none;
+      }
+    }
+
+    @include breakpoint(desktop-sm) {
+      flex-direction: column;
+      border: none;
+      margin-bottom: .94rem;
+
+      .tablet-line {
+        display: none;
+      }
     }
   }
 
   &.two-columns {
 
     .c-homeList {
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(tablet) {
         width: 47%;
+        margin-right: 3.3%;
       }
 
       &:nth-last-child(-n + 2) {
-        @include breakpoint(desktop-sm) {
+        @include breakpoint(tablet) {
           margin-bottom: 0;
           border: none;
         }
       }
 
       &:nth-child(2n) {
-        @include breakpoint(desktop-sm) {
+        @include breakpoint(tablet) {
           margin-right: 0;
         }
       }
@@ -165,6 +228,9 @@
   &.four-columns {
 
     &.top-photo-display-class {
+      @include between-breakpoints(tablet, desktop-sm) {
+        justify-content: space-between;
+      }
 
       .c-tease-icon {
         margin-top: 10px;
@@ -177,6 +243,10 @@
     }
 
     .c-homeList {
+      @include between-breakpoints(tablet, desktop-sm) {
+        width: 47%;
+      }
+
       @include breakpoint(desktop-sm) {
         width: 22.5%;
       }
@@ -203,13 +273,6 @@
   // Top Photo styles
 
   &.top-photo-display-class {
-    margin-left: -$min-margin;
-    margin-right: -$min-margin;
-
-    @include breakpoint(tablet) {
-      margin-right: 0;
-      margin-left: 0;
-    }
 
     .c-label-wrapper {
       @include breakpoint(desktop-sm) {
@@ -233,16 +296,28 @@
     }
 
     .homeList-text {
-      margin: 0 $min-margin;
       text-align: left;
 
       @include breakpoint(tablet) {
         margin: 0;
       }
+
+      @include breakpoint(desktop-sm) {
+        font-size: 1rem;
+        line-height: 1.375;
+      }
     }
 
     .headline {
       text-align: left;
+
+      @include between-breakpoints(mobile, desktop-sm) {
+        padding-top: 15px;
+      }
+
+      @include breakpoint(desktop-lg) {
+        line-height: 1.375;
+      }
     }
   }
 
@@ -266,7 +341,7 @@
         max-width: 55%;
 
         @include breakpoint(desktop-lg) {
-          max-width: 60%;
+          max-width: 100%;
         }
 
         .c-label-wrapper {
@@ -280,20 +355,41 @@
 
           &.listPage {
             text-align: left;
+            margin-left: 0;
+
+            @include text-styles(.875rem, 1.47, "Lora-Bold");
+
+            font-weight: 700;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: -.08px;
+
+            @include breakpoint(desktop-lg) {
+              max-width: 100%;
+            }
           }
         }
       }
 
       &.listPage {
-        margin-bottom: 1rem;
         width: 100%;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        border-bottom: 1px #dadada solid;
+        padding-bottom: .063rem;
+        margin-bottom: .875rem;
 
-        @include breakpoint(desktop-sm) {
-          margin-bottom: 2rem;
+        .article-timestamp {
+          margin-left: 0;
+        }
+
+        @include between-breakpoints(tablet, desktop-sm) {
+          width: 47%;
         }
       }
 
       &.isMissingPromo {
+        padding-bottom: .75rem;
 
         .homeList-text {
           width: 100%;
@@ -312,11 +408,13 @@
   &.left-photo-small-display-class {
 
     .c-homeList {
+      margin-bottom: 15px;
 
       .homeList-image {
         @include breakpoint(desktop-sm) {
           max-width: calc(20% - 7.5px);
           min-width: 110px;
+          margin-bottom: 0;
         }
       }
 
@@ -339,6 +437,14 @@
         @include text-styles(1rem, 1.38, "Lora");
 
         letter-spacing: -.09px;
+
+        @include breakpoint(desktop-sm) {
+          font-size: .9rem;
+        }
+
+        @include breakpoint(desktop-lg) {
+          @include text-styles(.9375rem, 1.38, "Lora");
+        }
       }
     }
   }

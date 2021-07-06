@@ -57,7 +57,7 @@ const ListItem = ({
   const isListPage = listPage ? 'listPage' : '';
   let defaultPromoWidth = 500;
   let defaultPromoHeight = 282;
-  if (isTTDFeature) {
+  if (isTTDFeature || isListPage) {
     defaultPromoWidth = 110;
     defaultPromoHeight = 110;
   }
@@ -114,7 +114,7 @@ const ListItem = ({
     <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''}`}>
       {!hidePromo && getPromoItem() && !isDontMissFeature && (
         <a href={relativeURL} className="homeList-image">
-          <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} />
+          <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'}/>
           {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
         </a>
       )}

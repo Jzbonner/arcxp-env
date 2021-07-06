@@ -7,15 +7,10 @@
   letter-spacing: normal;
   color: #9b9b9b;
 
-  &:not(.isTease) {
-    margin-left: .938rem;
-  }
-
   @include breakpoint(desktop-sm) {
 
     &:not(.isTease) {
       text-align: center;
-      margin-left: 1.875rem;
     }
   }
 }

@@ -15,6 +15,11 @@
   width: 100vw;
   max-width: 1540px;
   box-sizing: border-box;
+  margin: 0 auto;
+
+  @include between-breakpoints(mobile, tablet) {
+    padding-bottom: 20px;
+  }
 }
 
 .gallery-wrapper {
@@ -26,7 +31,9 @@
 
   letter-spacing: -.38px;
   text-align: center;
-  padding: 1.25rem 1.88rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid #cdcdcd;
+  width: inherit;
 
   a {
     text-decoration: none;
@@ -77,7 +84,7 @@
 }
 
 .with-ad {
-  padding: .35rem 1.88rem;
+  padding: 1.25rem 0 .35rem;
 }
 
 .last-item-height-fix {
@@ -126,6 +133,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-tap-highlight-color: rgb(0, 0, 0, 0);
+
+  &:active {
+    box-shadow: none;
+  }
 
   img {
     height: 20px;
@@ -151,7 +163,7 @@
 }
 
 .gallery-credit {
-  text-align: right;
+  text-align: left;
 
   @include text-styles(.875rem, normal, "Gordita");
 }
@@ -286,6 +298,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &:active {
+      box-shadow: none;
+    }
   }
 
   .gallery-caption-toggle {
@@ -521,7 +537,7 @@
 
     .gallery-caption {
       @include text-styles(1rem, 1.88, "Gordita");
-    
+
       color: #313132;
     }
   }

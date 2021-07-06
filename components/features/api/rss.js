@@ -32,6 +32,25 @@ class Api {
       maxItems = globalContent.length;
     }
 
+    const getAuthorOrganization = (credits, author, isMap) => {
+      let authorOrg = '';
+      /*
+        First, we check affiliatons because it contains the author's organization as seen on AuthorService ...
+        ... credits.by[x].org is inconsistent and sometimes returns the author's location, instead of it's organization. It's only consistent with returning guest author orgs, so we check that if affiliations fail..
+      */
+      if (isMap) {
+        authorOrg = author.additional_properties && author.additional_properties.original && author.additional_properties.original.affiliations ? ` - ${author.additional_properties.original.affiliations}` : '';
+
+        if (!authorOrg) authorOrg = author.org ? ` - ${author.org}` : '';
+      } else {
+        authorOrg = credits && credits.by && credits.by[0] && credits.by[0].additional_properties && credits.by[0].additional_properties.original && credits.by[0].additional_properties.original.affiliations ? `${credits.by[0].additional_properties.original.affiliations}` : '';
+
+        if (!authorOrg) authorOrg = credits && credits.by && credits.by[0] && credits.by[0].org ? `${credits.by[0].org}` : '';
+      }
+
+      return authorOrg;
+    };
+
     if (globalContent) {
       let filteredContent = globalContent.filter((item, i) => i >= feedStart && i < maxItems);
 
@@ -51,11 +70,16 @@ class Api {
         } = item || {};
 
         const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
-        let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
-        const org = credits && credits.by && credits.by[0] && credits.by[0].org ? `<![CDATA[${credits.by[0].org}]]>` : '';
+
+        const orgString = getAuthorOrganization(credits, null, false);
+
+        const org = orgString ? `<![CDATA[${orgString}]]>` : '';
+
+
+        let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}${orgString ? ` - ${orgString}` : ''}]]>` : '';
 
         if (credits && credits.by && credits.by.length > 1) {
-          author = `<![CDATA[${credits.by.map(eachAuthor => eachAuthor.name).join(', ')}]]>`;
+          author = `<![CDATA[${credits.by.map(eachAuthor => `${eachAuthor.name}${getAuthorOrganization(null, eachAuthor, true)}`).join(', ')}]]>`;
         }
 
         if (!author) {

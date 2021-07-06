@@ -22,8 +22,7 @@ const Slider = (customFields = {}) => {
   } = customFields;
 
   // eslint-disable-next-line prefer-const
-  let { size: itemLimit, from: startIndex = 1 } = contentConfigValues || {};
-  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
+  const { size: itemLimit } = contentConfigValues || {};
 
   const [sliderItems, setSliderItems] = useState(null);
   const [contentWidth, setContentWidth] = useState(0);
@@ -65,7 +64,7 @@ const Slider = (customFields = {}) => {
     if (el && !refArray.current.includes(el)) refArray.current.push(el);
   };
 
-  if (data && !sliderItems) setSliderItems(buildSliderItems(data, el => addToRefs(el, elRefs), startIndex, itemLimit));
+  if (data && !sliderItems) setSliderItems(buildSliderItems(data, el => addToRefs(el, elRefs), itemLimit));
 
   const isPad = typeof navigator !== 'undefined' ? navigator.userAgent.match(/iPad|Tablet/i) != null : false;
   const itemOffsetWidth = elRefs.current && elRefs.current[0] ? elRefs.current[0].scrollWidth + marginOffset : 330;
@@ -148,7 +147,7 @@ const Slider = (customFields = {}) => {
   };
 
   const sliderOutput = () => (<div ref={wrapperRef} className={`c-slider-wrapper
-      b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
+      ${getIsSpecial() ? 'is-special-feature' : ''}`}>
     <FeatureTitle title={title} moreURL={moreURL} />
     <div className="c-slider">
       <div className={`c-slider-content ${idSuffix} ${isPad ? 'is-Tablet' : ''}`} onScroll={handleOverflowScroll}>

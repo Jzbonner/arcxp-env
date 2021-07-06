@@ -12,7 +12,7 @@
   flex-direction: column;
   position: relative;
 
-  @include breakpoint(desktop-sm) {
+  @include breakpoint(tablet) {
     align-items: center;
   }
 
@@ -25,8 +25,7 @@
     z-index: 1;
     display: flex;
     align-items: center;
-    max-width: 90%;
-    margin-left: .938rem;
+    max-width: 100%;
 
     @include breakpoint(tablet) {
       margin: 0 auto;
@@ -37,6 +36,10 @@
     padding-top: 30px;
     padding-bottom: 15px;
     text-align: left;
+
+    @include amp-only {
+      padding-top: 20px;
+    }
 
     @include breakpoint(tablet) {
       padding: 30px 20px 20px 15px;
@@ -69,8 +72,21 @@
 
   &.with-gallery {
     flex-direction: column;
-    overflow: hidden;
     margin-bottom: .25rem;
+
+    @include breakpoint(desktop-sm) {
+      overflow: inherit;
+
+      .gallery-wrapper {
+        max-width: 100%;
+        width: 100%;
+        justify-content: center;
+
+        @media screen and (min-width: 1540px) {
+          max-width: 1540px;
+        }
+      }
+    }
 
     .article-headline {
       justify-content: center;

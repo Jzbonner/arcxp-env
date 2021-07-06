@@ -68,13 +68,17 @@
         }
 
         .headline-box {
-          padding: 20px 0;
+          padding: 0;
           background: none;
           border-radius: 0;
           box-shadow: unset;
           top: 0;
 
           @include breakpoint(tablet) {
+            padding: 0;
+          }
+
+          @include breakpoint(desktop-lg) {
             top: 10px;
           }
 
@@ -96,7 +100,7 @@
       margin: 30px 0 0;
 
       @include breakpoint(tablet) {
-        margin: 0 30px 25px 0;
+        margin: 0 30px 0 0;
       }
     }
 
@@ -146,6 +150,14 @@
 
           &:last-child {
             border: none;
+          }
+        }
+
+        @include breakpoint(desktop-lg) {
+
+          &:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
           }
         }
 

@@ -7,6 +7,8 @@ $breakpoint: (
   desktop-lg: 1280px,
   desktop-nav: 1340px,
   desktop-xl: 1400px,
+  desktop-xxl: 1540px,
+  desktop-xxxl: 1600px,
 ) !default;
 
 $is-amp: false !default;
@@ -41,6 +43,30 @@ $is-amp: false !default;
     @if $point == desktop-nav {
       /* stylelint-disable-next-line */
       @media only screen and (min-width: map-get($breakpoint, desktop-nav)) {
+        @content;
+      }
+    }
+
+    /* Equal or greater than 1400px */
+    @if $point == desktop-xl {
+      /* stylelint-disable-next-line */
+      @media only screen and (min-width: map-get($breakpoint, desktop-xl)) {
+        @content;
+      }
+    }
+
+    /* Equal or greater than 1540px */
+    @if $point == desktop-xxl {
+      /* stylelint-disable-next-line */
+      @media only screen and (min-width: map-get($breakpoint, desktop-xxl)) {
+        @content;
+      }
+    }
+
+    /* Equal or greater than 1600px */
+    @if $point == desktop-xxxl {
+      /* stylelint-disable-next-line */
+      @media only screen and (min-width: map-get($breakpoint, desktop-xxxl)) {
         @content;
       }
     }

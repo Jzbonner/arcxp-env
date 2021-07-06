@@ -89,6 +89,12 @@ export default {
       logoutStart: '35',
       logoutComplete: '35',
     },
+    sandbox: {
+      sophiActive: false,
+    },
+    prod: {
+      sophiActive: false,
+    },
   },
   adsPath: 'dayton_np/ddn_web_default',
   favicon: '/resources/icons/favicons/Ohio/dayton-daily-news-favicon.ico',

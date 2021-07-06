@@ -15,11 +15,26 @@
   margin-bottom: $min-Msection-margin;
 
   @include breakpoint(desktop-sm) {
+    overflow: unset;
     margin-bottom: $min-DTsection-margin;
   }
 
   .c-slider {
     position: relative;
+    width: calc(100vw - 40px);
+    max-width: 1600px;
+
+    @include breakpoint(tablet) {
+      width: calc(100vw - 80px);
+    }
+
+    @include breakpoint(desktop-sm) {
+      width: calc(100vw - 60px);
+    }
+
+    @include breakpoint(deskop-lg) {
+      width: 100%;
+    }
 
     .c-contributorBadge {
       height: 1.25rem;
@@ -50,10 +65,6 @@
         display: none;
       }
 
-      @include breakpoint(desktop-sm) {
-        padding-bottom: 30px;
-      }
-
       .itemList {
         display: flex;
         position: relative;
@@ -68,6 +79,7 @@
     .c-slider-nav {
       display: flex;
       align-items: center;
+      margin-bottom: .625rem;
 
       .c-slider-button {
         display: none;
@@ -89,6 +101,7 @@
           transition: box-shadow .5s;
 
           &:active {
+            outline: none;
             box-shadow: none;
           }
         }

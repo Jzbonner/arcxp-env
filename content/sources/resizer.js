@@ -26,6 +26,7 @@ export default {
       let reqWidth = imageWidth;
       let reqHeight = imageHeight;
 
+
       const buildOutputUrl = (w, h) => {
         const useFocalCrop = imageFocalCoords?.length === 2;
         const focalPoints = {};
