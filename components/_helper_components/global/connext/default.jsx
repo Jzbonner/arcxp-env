@@ -13,9 +13,15 @@ export const ConnextAuthTrigger = () => {
   const { connext } = getProperties(arcSite);
   const [loadedDeferredItems, _setLoadedDeferredItems] = useState(false);
   const loadedDeferredItemsRef = React.useRef(loadedDeferredItems);
+  const [localStorageAuthCheckComplete, _setLocalStorageAuthCheckComplete] = useState(false);
+  const localStorageAuthCheckCompleteRef = React.useRef(localStorageAuthCheckComplete);
   const setLoadedDeferredItems = (data) => {
     loadedDeferredItemsRef.current = data;
     _setLoadedDeferredItems(data);
+  };
+  const setLocalStorageAuthCheckComplete = (data) => {
+    localStorageAuthCheckCompleteRef.current = data;
+    _setLocalStorageAuthCheckComplete(data);
   };
   const {
     isEnabled = false,
@@ -91,102 +97,118 @@ export const ConnextAuthTrigger = () => {
     };
 
     const localStorageAuthChecks = () => {
-      const conversationsDataFromLocalStorage = GetConnextLocalStorageData(
-        siteCode, configCode, environment, 'Connext_CurrentConversations',
-      ) || {};
-      const { Metered: meteredConversationData = {} } = conversationsDataFromLocalStorage;
-      const {
-        Id: meteredConversationId = '',
-        Properties: meteredConversationLSProperties = {},
-      } = meteredConversationData;
-      const {
-        ArticleLeft: articlesRemainingFromLocalStorage,
-        PaywallLimit: articleLimitFromLocalStorage,
-      } = meteredConversationLSProperties;
-      const viewedArticlesFromLocalStorage = GetConnextLocalStorageData(
-        siteCode, configCode, environment, 'Connext_ViewedArticles',
-      ) || {};
-      const viewedArticlesArray = viewedArticlesFromLocalStorage[meteredConversationId] || [];
-
-      console.log('connext logging >> localStorageAuthChecks - articlesRemainingFromLocalStorage', articlesRemainingFromLocalStorage, 'viewedArticlesArray.length', viewedArticlesArray.length, 'articleLimitFromLocalStorage - 1', articleLimitFromLocalStorage - 1, 'window.Connext.Storage.GetViewedArticles()', window.Connext.Storage.GetViewedArticles(), 'window.Connext.Storage.GetCurrentConversation()', window.Connext.Storage.GetCurrentConversation());
-
-      if (
-        (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
-        || (
-          articlesRemainingFromLocalStorage !== 0
-          && viewedArticlesArray.length < articleLimitFromLocalStorage - 1
-        )
-      ) {
-        console.log(
-          `connext debugging >> (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
-         || (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1)`,
-          (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0),
-          'or',
-          (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1),
-          'articlesRemainingFromLocalStorage',
-          articlesRemainingFromLocalStorage,
-          'viewedArticlesArray.length',
-          viewedArticlesArray.length,
-          'articleLimitFromLocalStorage - 1',
-          articleLimitFromLocalStorage - 1,
-          'viewedArticlesFromLocalStorage',
-          viewedArticlesFromLocalStorage,
-          'conversationsDataFromLocalStorage',
-          conversationsDataFromLocalStorage,
-        );
-        // there are > 0 articles remaining before hitting the limit
-        loadDeferredItems();
-      } else {
-        const numberOfArticlesViewed = window.Connext.Storage.GetViewedArticles();
-        const numberOfArticlesLeft = () => {
-          try {
-            return window.Connext.Storage.GetArticlesLeft();
-          } catch (err) {
-            // eslint-disable-next-line no-console
-            console.error('error calling `window.Connext.Storage.GetArticlesLeft()`', err);
-            return null;
-          }
-        };
-        const currentConversation = window.Connext.Storage.GetCurrentConversation();
-        const { Properties: currentConversationProperties = {} } = currentConversation;
+      if (!localStorageAuthCheckCompleteRef.current) {
+        const conversationsDataFromLocalStorage = GetConnextLocalStorageData(
+          siteCode, configCode, environment, 'Connext_CurrentConversations',
+        ) || {};
+        const { Metered: meteredConversationData = {} } = conversationsDataFromLocalStorage;
         const {
-          ArticleLeft: articlesRemainingFromConversation,
-          PaywallLimit: paywallArticleLimit,
-        } = currentConversationProperties;
+          Id: meteredConversationId = '',
+          Properties: meteredConversationLSProperties = {},
+        } = meteredConversationData;
+        const {
+          ArticleLeft: articlesRemainingFromLocalStorage,
+          PaywallLimit: articleLimitFromLocalStorage,
+        } = meteredConversationLSProperties;
+        const viewedArticlesFromLocalStorage = GetConnextLocalStorageData(
+          siteCode, configCode, environment, 'Connext_ViewedArticles',
+        ) || {};
+        const viewedArticlesArray = viewedArticlesFromLocalStorage[meteredConversationId] || [];
+
+        console.log('connext logging >> localStorageAuthChecks - articlesRemainingFromLocalStorage', articlesRemainingFromLocalStorage, 'viewedArticlesArray.length', viewedArticlesArray.length, 'articleLimitFromLocalStorage - 1', articleLimitFromLocalStorage - 1, 'window.Connext.Storage.GetViewedArticles()', window.Connext.Storage.GetViewedArticles(), 'window.Connext.Storage.GetCurrentConversation()', window.Connext.Storage.GetCurrentConversation());
+
         if (
-          (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
+          (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
           || (
-            articlesRemainingFromConversation !== 0
-            && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft() > 0)
+            articlesRemainingFromLocalStorage !== 0
+            && viewedArticlesArray.length < articleLimitFromLocalStorage - 1
           )
         ) {
           console.log(
-            'connext debugging >> (articlesRemainingFromConversation && articlesRemainingFromConversation > 0) || (articlesRemainingFromConversation !== 0 && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft > 0))',
-            '(articlesRemainingFromConversation',
-            articlesRemainingFromConversation,
-            'and',
-            articlesRemainingFromConversation > 0,
-            ') or',
-            articlesRemainingFromConversation !== 0,
-            'and (',
-            numberOfArticlesViewed.length < paywallArticleLimit - 1,
+            `connext debugging >> (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
+           || (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1)`,
+            (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0),
             'or',
-            numberOfArticlesLeft() > 0,
-            ') currentConversation',
-            currentConversation,
-            'articlesRemainingFromConversation',
-            articlesRemainingFromConversation,
-            'numberOfArticlesViewed',
-            numberOfArticlesViewed,
-            'numberOfArticlesViewed.length',
-            numberOfArticlesViewed.length,
-            'paywallArticleLimit - 1',
-            paywallArticleLimit - 1,
-            'numberOfArticlesLeft',
-            numberOfArticlesLeft(),
+            (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1),
+            'articlesRemainingFromLocalStorage',
+            articlesRemainingFromLocalStorage,
+            'viewedArticlesArray.length',
+            viewedArticlesArray.length,
+            'articleLimitFromLocalStorage - 1',
+            articleLimitFromLocalStorage - 1,
+            'viewedArticlesFromLocalStorage',
+            viewedArticlesFromLocalStorage,
+            'conversationsDataFromLocalStorage',
+            conversationsDataFromLocalStorage,
           );
+          // there are > 0 articles remaining before hitting the limit
           loadDeferredItems();
+        } else {
+          const numberOfArticlesViewed = window.Connext.Storage.GetViewedArticles();
+          const numberOfArticlesLeft = () => {
+            try {
+              return window.Connext.Storage.GetArticlesLeft();
+            } catch (err) {
+              // eslint-disable-next-line no-console
+              console.error('error calling `window.Connext.Storage.GetArticlesLeft()`', err);
+              return null;
+            }
+          };
+          const currentConversation = window.Connext.Storage.GetCurrentConversation();
+          const { Properties: currentConversationProperties = {} } = currentConversation;
+          const {
+            ArticleLeft: articlesRemainingFromConversation,
+            PaywallLimit: paywallArticleLimit,
+          } = currentConversationProperties;
+          if (
+            (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
+            || (
+              articlesRemainingFromConversation !== 0
+              && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft() > 0)
+            )
+          ) {
+            console.log(
+              'connext debugging >> (articlesRemainingFromConversation && articlesRemainingFromConversation > 0) || (articlesRemainingFromConversation !== 0 && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft > 0))',
+              '(articlesRemainingFromConversation',
+              articlesRemainingFromConversation,
+              'and',
+              articlesRemainingFromConversation > 0,
+              ') or',
+              articlesRemainingFromConversation !== 0,
+              'and (',
+              numberOfArticlesViewed.length < paywallArticleLimit - 1,
+              'or',
+              numberOfArticlesLeft() > 0,
+              ') currentConversation',
+              currentConversation,
+              'articlesRemainingFromConversation',
+              articlesRemainingFromConversation,
+              'numberOfArticlesViewed',
+              numberOfArticlesViewed,
+              'numberOfArticlesViewed.length',
+              numberOfArticlesViewed.length,
+              'paywallArticleLimit - 1',
+              paywallArticleLimit - 1,
+              'numberOfArticlesLeft',
+              numberOfArticlesLeft(),
+            );
+            loadDeferredItems();
+          } else if (window?.sophi) {
+            // the free limit has been exceeded and/or they are unauthorized; it's a paywall interaction, so trigger a Sophi event
+            window.sophi.sendEvent(
+              {
+                type: 'wall_hit',
+                data: {
+                  type: 'paywall-metered',
+                  name: 'regular',
+                },
+              },
+            );
+          }
         }
+
+        // set state to `true` to ensure we only call `localStorageAuthChecks` once
+        setLocalStorageAuthCheckComplete(true);
       }
     };
 
