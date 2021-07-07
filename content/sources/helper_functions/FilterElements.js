@@ -1,4 +1,4 @@
-export default (apiData, requiresImageEveryX) => {
+export default (apiData, requiresImageEveryX, feature) => {
   if (apiData) {
     let newData = apiData;
     let hasImageIndex = 1;
@@ -9,6 +9,8 @@ export default (apiData, requiresImageEveryX) => {
       const { basic: rootPromoItemsBasic = {} } = rootPromoItems;
       const { promo_image: promoImage, promo_items: nestedPromoItems = {} } = rootPromoItemsBasic;
       const { basic: nestedPromoItemsBasic } = nestedPromoItems;
+
+      console.log(feature);
 
       /* featured image (re)assignments */
       if (el.promo_items) {
@@ -32,10 +34,18 @@ export default (apiData, requiresImageEveryX) => {
         hasImage = true;
       }
 
+      // if (feature === 'TopPhotoNoPhoto') {
+
+      // }
+
+      // if (feature == 'LeftPhotoNoPhoto')
+
       if (typeof requiresImageEveryX === 'number' && !hasImage && (requiresImageEveryX === 0 || hasImageIndex % requiresImageEveryX === 0)) {
         // final filter for display classes that require images
         return false;
       }
+
+      // if ()
       hasImageIndex += 1;
       return true;
     });
