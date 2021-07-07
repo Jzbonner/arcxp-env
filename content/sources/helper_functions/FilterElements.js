@@ -10,8 +10,6 @@ export default (apiData, requiresImageEveryX, feature) => {
       const { promo_image: promoImage, promo_items: nestedPromoItems = {} } = rootPromoItemsBasic;
       const { basic: nestedPromoItemsBasic } = nestedPromoItems;
 
-      console.log(feature);
-
       /* featured image (re)assignments */
       if (el.promo_items) {
         /* check for promo image (collection override(s)) before anything else and regardless of content type */
@@ -34,11 +32,19 @@ export default (apiData, requiresImageEveryX, feature) => {
         hasImage = true;
       }
 
-      // if (feature === 'TopPhotoNoPhoto') {
+      // Small edge case where if query item isnt the first then the item automatically passes the filter. This is because certain display classes only require the first image to be present.
+      if (feature === 'TopPhotoNoPhoto') {
+        if (!hasImage && e !== 0) {
+          return true;
+        }
+      }
 
-      // }
-
-      // if (feature == 'LeftPhotoNoPhoto')
+      // Left Photo no Photo (Standalone) only requires the first story and the first story of the second column to have an image
+      if (feature === 'LeftPhotoNoPhoto') {
+        if (!hasImage && (e !== 0 || e !== 4)) {
+          return true;
+        }
+      }
 
       if (typeof requiresImageEveryX === 'number' && !hasImage && (requiresImageEveryX === 0 || hasImageIndex % requiresImageEveryX === 0)) {
         // final filter for display classes that require images
