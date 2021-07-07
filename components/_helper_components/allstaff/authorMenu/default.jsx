@@ -11,6 +11,7 @@ const AuthorMenu = ({
 }) => {
   const { maxTabletViewWidth } = getProperties();
   const windowWidth = getWindowSize();
+  const menuDataLength = (menuData?.areas?.length - 1);
 
   useEffect(() => {
     if (windowWidth.width < maxTabletViewWidth) {
@@ -63,7 +64,7 @@ const AuthorMenu = ({
             {menuData
               && menuData.areas
                 .sort((a, b) => a.tag.localeCompare(b.tag))
-                .map(area => (
+                .map((area, index) => (
                   <AuthorMenuItem
                     key={`key-${area.tag}`}
                     area={area}
@@ -71,8 +72,8 @@ const AuthorMenu = ({
                     setCategory={setCategory}
                     setLeftMenuVisibility={setLeftMenuVisibility}
                     pageUri={pageUri}
-                  />
-                ))}
+                    setBorderBottomOnLast={index === menuDataLength}
+                  />))}
             <li className="spacer bottom-space"></li>
           </ul>
           <div className="mobile-fader bottom-fader"></div>

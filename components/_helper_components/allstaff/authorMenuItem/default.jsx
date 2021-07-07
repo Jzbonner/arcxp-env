@@ -7,10 +7,11 @@ const AuthorMenuItem = ({
   area,
   setCategory,
   pageUri,
+  setBorderBottomOnLast = false,
 }) => <li
   key={area.name}
   className={`c-author-menu-item ${
-    area.id === selectedLeftMenuItem.id ? 'active' : ''}`}>
+    area.id === selectedLeftMenuItem.id ? 'active' : ''} ${setBorderBottomOnLast && area.id !== selectedLeftMenuItem.id ? 'set-border-bottom' : ''}`}>
     <a
       href={`/${pageUri}/${area.tag}`}
       onClick={e => setCategory(e, area)}>
@@ -23,6 +24,7 @@ AuthorMenuItem.propTypes = {
   selectedLeftMenuItem: PropTypes.object,
   area: PropTypes.object,
   pageUri: PropTypes.string,
+  setBorderBottomOnLast: PropTypes.bool,
 };
 
 export default AuthorMenuItem;
