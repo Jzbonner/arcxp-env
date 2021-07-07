@@ -51,7 +51,6 @@ export default (apiData, requiresImageEveryX, feature) => {
         return false;
       }
 
-      // if ()
       hasImageIndex += 1;
       return true;
     });
