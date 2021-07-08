@@ -14,7 +14,7 @@
     overflow: hidden;
     width: calc(100vw - 80px);
   }
-  
+
   @include breakpoint(desktop-sm) {
     width: calc(100vw - 60px);
   }
@@ -78,7 +78,7 @@
 }
 
 @include amp-only {
-  
+
   .c-label-wrapper {
 
     .section-label {
@@ -98,6 +98,16 @@
 
 .c-clear-both:empty {
   display: none;
+}
+
+.article-byline {
+  @include between-breakpoints(desktop-sm, desktop-lg) {
+    margin: 0 auto 7px;
+  }
+
+  .byline {
+    text-align: left;
+  }
 }
 
 .c-articleContent {
@@ -121,16 +131,6 @@
       .article-timestamp {
         margin-left: 0;
       }
-    }
-  }
-
-  .article-byline {
-    @include between-breakpoints(desktop-sm, desktop-lg) {
-      margin: 0 auto 7px;
-    }
-
-    .byline {
-      text-align: left;
     }
   }
 
