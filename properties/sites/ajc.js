@@ -44,7 +44,7 @@ export default {
       sophiActive: true,
     },
     prod: {
-      sophiActive: false,
+      sophiActive: true,
     },
   },
   featuredVideoPlayerRules: {
