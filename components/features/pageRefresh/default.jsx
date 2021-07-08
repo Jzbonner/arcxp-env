@@ -8,13 +8,7 @@ const pageRefresh = () => {
   const { refreshActive, refreshInterval = 300 } = componentContext.customFields;
 
   if (refreshActive && refreshInterval) {
-    return (
-      <script dangerouslySetInnerHTML={{
-        __html: `setTimeout(() => {
-          window.location.reload(true);
-        }, ${refreshInterval} * 1000);`,
-      }}></script>
-    );
+    return <meta httpEquiv='refresh' content={refreshInterval} />;
   }
   return null;
 };
