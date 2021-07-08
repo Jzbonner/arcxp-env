@@ -2,38 +2,50 @@
 @import "./../../../../src/styles/base/mixins";
 
 .c-sponsorBanner {
-  position: relative;
-  display: block;
-  width: calc(100% - 40px);
-  height: auto;
-  max-width: 576px;
-  max-height: 260px;
-  margin: .938rem auto auto;
+  @include amp-exclude {
+    position: relative;
+    display: block;
+    width: calc(100% - 40px);
+    height: auto;
+    max-width: 576px;
+    max-height: 260px;
+    margin: .938rem auto auto;
 
-  @include breakpoint(tablet) {
-    width: 100%;
-    max-width: calc(100% - 75px);
+    @include breakpoint(tablet) {
+      width: 100%;
+      max-width: calc(100% - 75px);
+    }
+
+    @include breakpoint(desktop-sm) {
+      max-width: calc(100% - 65px);
+      margin-top: .938rem;
+    }
+
+    @include breakpoint(desktop-xxxl) {
+      max-width: 1540px;
+    }
+
+    .c-sponsorImg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .c-sponsorUrl {
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 
-  @include breakpoint(desktop-sm) {
-    max-width: calc(100% - 65px);
-    margin-top: .938rem;
-  }
+  @include amp-only {
 
-  @include breakpoint(desktop-xxxl) {
-    max-width: 1540px;
-  }
-
-  .c-sponsorImg {
-    width: 100%;
-    height: 100%;
-  }
-
-  .c-sponsorUrl {
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
+    + main {
+      
+      .headline-body {
+        padding-top: 0;
+      }
+    }
   }
 }
