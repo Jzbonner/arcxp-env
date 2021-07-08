@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useComponentContext } from 'fusion:context';
+import { useAppContext, useComponentContext } from 'fusion:context';
 
 const pageRefresh = () => {
   /* retrieve custom fields from fusion's component context */
   const componentContext = useComponentContext();
+  const appContext = useAppContext();
+  const { isAdmin } = appContext;
   const { refreshActive, refreshInterval = 300 } = componentContext.customFields;
 
-  if (refreshActive && refreshInterval) {
+  if (!isAdmin && refreshActive && refreshInterval) {
     return <meta httpEquiv='refresh' content={refreshInterval} />;
   }
   return null;
