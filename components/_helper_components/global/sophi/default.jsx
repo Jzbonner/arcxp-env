@@ -12,7 +12,7 @@ const SophiTags = ({ isAmp }) => {
 
   const { metrics } = getProperties(arcSite) || {};
   const currentEnv = fetchEnv();
-  const { sophiActive = false } = metrics[currentEnv];
+  const { sophiActive = false } = metrics[currentEnv] || {};
   // sophi is being implemented for AJC only, and must be active
   if (arcSite !== 'ajc' || !sophiActive) return false;
   const sophiEnv = currentEnv !== 'prod' ? 'stg' : 'prod';
@@ -41,6 +41,16 @@ const SophiTags = ({ isAmp }) => {
     contentId: `${contentId || ''}`,
     accessCategory,
   };
+  const sophiPageObj = {
+    type: `${sophiContentType}`,
+    breadcrumb: `${sophiSection}`,
+    sectionName: `${sophiMainSection}`,
+    datePublished: `${firstPublishDate}`,
+  };
+  if (isNonContentPage) {
+    // it's a non-content page (i.e. home or section) so remove `datePublished` from the page object
+    delete sophiPageObj.datePublished;
+  }
 
 
   if (isAmp) {
@@ -54,12 +64,7 @@ const SophiTags = ({ isAmp }) => {
       }),
       JSON.stringify({
         schema: 'iglu:com.globeandmail/page/jsonschema/1-0-10',
-        data: {
-          type: `${sophiContentType}`,
-          breadcrumb: `${sophiSection}`,
-          sectionName: `${sophiMainSection}`,
-          datePublished: `${firstPublishDate}`,
-        },
+        data: `${sophiPageObj}`,
       }),
       JSON.stringify({
         schema: 'iglu:com.globeandmail/content/jsonschema/1-0-12',
@@ -137,12 +142,7 @@ const SophiTags = ({ isAmp }) => {
           try {
             window.sophi = {
               data: {
-                page: {
-                  type: "${sophiContentType}",
-                  breadcrumb: "${sophiSection}",
-                  sectionName: "${sophiMainSection}",
-                  datePublished: "${firstPublishDate}"
-                },
+                page: ${JSON.stringify(sophiPageObj)},
                 environment: {
                   environment: "${sophiEnv}",
                   version: "APP_VERSION_string"

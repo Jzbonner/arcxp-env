@@ -272,8 +272,8 @@ const Video = ({
           // grab the title and poster for each video event
           const { basic: vidTitle } = videoData && videoData.headlines ? videoData.headlines : {};
           const { url: vidPoster } = videoData && videoData.promo_image ? videoData.promo_image : {};
-          // get parent div
-          const getVideoParent = document.querySelectorAll('.video-component');
+          // get parent div of shadow DOM
+          const getShadowParent = document.getElementsByClassName('powa-shadow');
 
           // append attributes to video func
           const appendDataToVideo = (tag) => {
@@ -286,9 +286,9 @@ const Video = ({
             window._cbv = window._cbv || [];
             window._cbv.push(videoTag);
           };
-          // find video tag within parent divs and append attributes.
-          Array.from(getVideoParent).map((childNode) => {
-            const children = childNode && childNode.children ? childNode.children : {};
+          // find video tag inside shadow DOM and append attributes.
+          Array.from(getShadowParent).map((root) => {
+            const children = root && root.shadowRoot && root.shadowRoot.children;
             Array.from(children).map((el) => {
               const videoTag = el.getElementsByTagName('video')[0];
               // create event listener for inline videos where the video tag doesn't exist yet.
@@ -438,20 +438,22 @@ const Video = ({
 
   const ampIframe = () => (
     <>
-    <amp-iframe
-    layout="responsive"
-    src={`https://${orgOfRecord}.video-player.arcpublishing.com/${currentEnv}/powaEmbed.html?org=${orgOfRecord}&uuid=${vidId}&powa-ad-tag=${encodedAdTag}&autoinit=native-hls&playthrough=true&discovery=true&${!isInlineVideo ? 'powa-autoplay=true&powa-autoplay-muted=true' : ''}`}
-    width={`${vidWidth}`}
-    height={`${vidHeight}`}
-    allow='autoplay'
-    sandbox="allow-scripts allow-same-origin allow-popups"
-    scrolling="no"
-    allowfullscreen
-    >
-    <amp-img layout="fill" src={thumbnailImage} placeholder></amp-img>
-    <div overflow tabIndex="0" role="button" aria-label="Watch more" style={{ display: 'none' }}>Watch more!</div>
-</amp-iframe>
-  </>
+      <amp-iframe
+      layout="responsive"
+      src={`https://${orgOfRecord}.video-player.arcpublishing.com/${currentEnv}/powaEmbed.html?org=${orgOfRecord}&uuid=${vidId}&powa-ad-tag=${encodedAdTag}&autoinit=native-hls&playthrough=true&discovery=true&${!isInlineVideo ? 'powa-autoplay=true&powa-autoplay-muted=true' : ''}`}
+      width={`${vidWidth}`}
+      height={`${vidHeight}`}
+      allow='autoplay'
+      sandbox="allow-scripts allow-same-origin allow-popups"
+      scrolling="no"
+      allowfullscreen=""
+      amp-access={lazyLoad ? 'Error=true OR AccessLevel="Full Content Access"' : null}
+      amp-access-hide={lazyLoad ? '' : null}
+      >
+        <amp-img layout="fill" src={thumbnailImage} placeholder></amp-img>
+        <div overflow tabIndex="0" role="button" aria-label="Watch more" style={{ display: 'none' }}>Watch more!</div>
+      </amp-iframe>
+    </>
   );
   const renderAmpPlayer = () => (
     <>
