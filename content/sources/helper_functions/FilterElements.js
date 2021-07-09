@@ -1,4 +1,4 @@
-export default (apiData, requiresImageEveryX) => {
+export default (apiData, requiresImageEveryX, feature) => {
   if (apiData) {
     let newData = apiData;
     let hasImageIndex = 1;
@@ -32,10 +32,25 @@ export default (apiData, requiresImageEveryX) => {
         hasImage = true;
       }
 
+      // Small edge case where if query item isnt the first then the item automatically passes the filter. This is because certain display classes only require the first image to be present.
+      if (feature === 'TopPhotoNoPhoto') {
+        if (!hasImage && e !== 0) {
+          return true;
+        }
+      }
+
+      // Left Photo no Photo (Standalone) only requires the first story and the first story of the second column to have an image
+      if (feature === 'LeftPhotoNoPhoto') {
+        if (!hasImage && (e !== 0 || e !== 4)) {
+          return true;
+        }
+      }
+
       if (typeof requiresImageEveryX === 'number' && !hasImage && (requiresImageEveryX === 0 || hasImageIndex % requiresImageEveryX === 0)) {
         // final filter for display classes that require images
         return false;
       }
+
       hasImageIndex += 1;
       return true;
     });

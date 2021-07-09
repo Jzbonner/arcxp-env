@@ -29,7 +29,7 @@ const TopPhotoNoPhoto = (customFields = {}) => {
 
   return (
     <div className='topPhotoNoPhoto'>
-      <Lead {...newCustomFields} limitOverride={limit} />
+      <Lead {...newCustomFields} limitOverride={limit} feature={'TopPhotoNoPhoto'} />
     </div>
   );
 };
