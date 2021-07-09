@@ -19,7 +19,7 @@ class Api {
     } = this.props || {};
     const { query } = globalContentConfig || {};
     const { id: collectionId, from, size } = query || {};
-    const feedStart = from - 1;
+    const feedStart = globalContent ? 0 : from - 1; // we start at 0 when populating from globalContent so as to avoid double-filtering of results (collection & query content sources natively respect `from`)
     const queryParams = getQueryParams(requestUri);
     const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
     const newsletterFeed = outPutTypePresent && queryParams.outputType === 'rss-newsletter';
