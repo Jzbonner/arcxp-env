@@ -144,6 +144,10 @@
       padding-top: 20px;
     }
   }
+
+  &.b-contentMaxWidth {
+    padding-top: 0;
+  }
 }
 
 @include amp-exclude {

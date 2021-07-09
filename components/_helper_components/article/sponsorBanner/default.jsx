@@ -30,7 +30,7 @@ const SponsorBanner = ({ sponsorID, ampPage }) => {
     openNewTabTrue = openNewTab === 'true';
     if (ampPage && checkForMobileBanner) {
       return (
-        <a href={bannerURL}><amp-img height='1' width='1.75' src={checkForMobileBanner} layout='responsive'/></a>);
+        <a className="c-sponsorBanner" href={bannerURL}><amp-img height='1' width='1.75' src={checkForMobileBanner} layout='responsive'/></a>);
     }
     if (desktopBanner) {
       return (
