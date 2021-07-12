@@ -28,7 +28,7 @@ const SiteMetrics = ({ isAmp }) => {
   const { by: authorData } = credits || {};
   const {
     system: sourceSystem,
-    type: sourceType,
+    source_type: sourceType,
   } = source || {};
   const authors = [];
   const ampAuthors = [];
