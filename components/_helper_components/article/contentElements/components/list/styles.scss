@@ -13,10 +13,6 @@
 
     padding-left: .3em;
     list-style: none;
-
-    @include breakpoint(desktop-sm) {
-      @include text-styles(1.25rem, 2.25, "Gordita");
-    }
   }
 
   ul {
