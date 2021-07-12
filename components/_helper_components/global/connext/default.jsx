@@ -36,7 +36,7 @@ export const ConnextAuthTrigger = () => {
       if (deferredItems.length && !loadedDeferredItemsRef.current) {
         const adInstance = ArcAdLib.getInstance();
         const articleBodyContainer = document.querySelector('.c-articleBodyContainer');
-        if (articleBodyContainer.getAttribute('class').indexOf('mark-text') > -1) {
+        if (articleBodyContainer && articleBodyContainer.getAttribute('class').indexOf('mark-text') > -1) {
           // we override/remove the inline styles that are being added by Naviga/connext when the paywall renders
           // specifically for APD-1223 (`overflow: hidden` was cropping the interscroller ad) but also because their inline styles suck
           articleBodyContainer.setAttribute('style', '');
