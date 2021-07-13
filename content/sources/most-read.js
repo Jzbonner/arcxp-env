@@ -14,8 +14,9 @@ const params = {
 
 const fetch = (query = {}) => {
   const {
-    host = 'ajc.com', section = '', limit = '10', arcSite = 'ajc',
+    host = 'ajc.com', limit = '10', arcSite = 'ajc',
   } = query;
+  let { section = '' } = query;
   const { chartbeat } = getProperties(arcSite);
   const { blacklist } = chartbeat;
   let requestUri = `https://api.chartbeat.com/live/toppages/v3/?apikey=${CHARTBEAT_KEY}&types=1&host=${host}&limit=${limit}`;
@@ -26,13 +27,17 @@ const fetch = (query = {}) => {
   const promiseData = axios
     .get(requestUri)
     .then(({ data }) => {
-      if (!section || (data && data.pages && titleCheck(data, data.pages.length))) {
+      if (!section || (data && data.pages && data.pages.length < 5 && titleCheck(data, data.pages.length))) {
         // keep initial existing data that matches the user's input
         const newArray = filterMostRead(data, host, blacklist);
         // grab the primary section if any
-        const primarySection = `/${section.split('/')[1]}` || section || '';
+        const primarySection = `/${section.split('/')[1]}`;
+        // check if the user's section input has secondary section
+        if (primarySection !== section) {
+          section = primarySection;
+        }
         // update the uri
-        newUri += primarySection ? `&section=${primarySection}` : '';
+        newUri += section ? `&section=${section}` : '';
         return axios.get(newUri).then(({ data: siteData }) => {
           // update the array with the seconday data from the primary section if any
           newArray.push(...filterMostRead(siteData, host, blacklist));
