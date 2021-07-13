@@ -20,14 +20,24 @@ const fetch = (query = {}) => {
   const { blacklist } = chartbeat;
   let requestUri = `https://api.chartbeat.com/live/toppages/v3/?apikey=${CHARTBEAT_KEY}&types=1&host=${host}&limit=${limit}`;
 
-  const newUri = requestUri;
+  let newUri = requestUri;
   requestUri += section ? `&section=${section}` : '';
 
-  const promiseData = axios.get(requestUri)
+  const promiseData = axios
+    .get(requestUri)
     .then(({ data }) => {
-      if ((!section) || (data && data.pages && titleCheck(data, data.pages.length))) {
-        return axios.get(newUri)
-          .then(({ data: siteData }) => filterMostRead(siteData, host, blacklist));
+      if (!section || (data && data.pages && titleCheck(data, data.pages.length))) {
+        // keep initial existing data that matches the user's input
+        const newArray = filterMostRead(data, host, blacklist);
+        // grab the primary section if any
+        const primarySection = `/${section.split('/')[1]}` || section || '';
+        // update the uri
+        newUri += primarySection ? `&section=${primarySection}` : '';
+        return axios.get(newUri).then(({ data: siteData }) => {
+          // update the array with the seconday data from the primary section if any
+          newArray.push(...filterMostRead(siteData, host, blacklist));
+          return newArray;
+        });
       }
       return filterMostRead(data, host, blacklist);
     })

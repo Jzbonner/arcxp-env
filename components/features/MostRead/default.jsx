@@ -23,6 +23,8 @@ const MostRead = () => {
     },
   });
 
+  console.log('MOST READ FEATURE DATA ', topStoriesData);
+
   if (topStoriesData) {
     let counter = 0;
     return <div className="c-mostRead"><div className="mostReadTitle">Most Read</div>
