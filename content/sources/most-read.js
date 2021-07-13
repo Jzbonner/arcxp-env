@@ -27,22 +27,22 @@ const fetch = (query = {}) => {
   const promiseData = axios
     .get(requestUri)
     .then(({ data }) => {
-      if (!section || (data && data.pages && data.pages.length < 5 && titleCheck(data, data.pages.length))) {
+      if (!section || (data && data.pages && titleCheck(data, data.pages.length))) {
         // keep initial existing data that matches the user's input
         const newArray = filterMostRead(data, host, blacklist);
         // grab the primary section if any
         const primarySection = `/${section.split('/')[1]}`;
         // check if the user's section input has secondary section
-        if (primarySection !== section) {
+        if (primarySection && primarySection !== section && newArray.length < 5) {
           section = primarySection;
+          newUri += section ? `&section=${section}` : '';
+          return axios.get(newUri).then(({ data: siteData }) => {
+            // update the array with the seconday data from the primary section if any
+            newArray.push(...filterMostRead(siteData, host, blacklist));
+            return newArray;
+          });
         }
-        // update the uri
-        newUri += section ? `&section=${section}` : '';
-        return axios.get(newUri).then(({ data: siteData }) => {
-          // update the array with the seconday data from the primary section if any
-          newArray.push(...filterMostRead(siteData, host, blacklist));
-          return newArray;
-        });
+        return newArray;
       }
       return filterMostRead(data, host, blacklist);
     })
