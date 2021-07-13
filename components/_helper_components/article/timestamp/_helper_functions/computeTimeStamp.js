@@ -41,7 +41,9 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
 
   // Always use display date for teases because the collection-api
   // which can be used for teases does not return a first_publish_date variable.
-  const pub = isUpdated || articleType === 'tease' ? displayDateObject : firstPublishDateObject;
+  // isUpdated === display date has been updated in composer,
+  // !isUpdated && display date === display date exists and is older than first publish date.
+  const pub = isUpdated || (!isUpdated && displayDate) || articleType === 'tease' ? displayDateObject : firstPublishDateObject;
   if (!pub) return null;
 
   const pubInMs = pub.getTime();
