@@ -64,7 +64,12 @@ const SophiTags = ({ isAmp }) => {
       }),
       JSON.stringify({
         schema: 'iglu:com.globeandmail/page/jsonschema/1-0-10',
-        data: `${sophiPageObj}`,
+        data: {
+          type: `${sophiContentType}`,
+          breadcrumb: `${sophiSection}`,
+          sectionName: `${sophiMainSection}`,
+          datePublished: `${firstPublishDate}`,
+        },
       }),
       JSON.stringify({
         schema: 'iglu:com.globeandmail/content/jsonschema/1-0-12',
