@@ -14,7 +14,7 @@ import LoadMoreButton from '../loadMoreBtn/default';
 const RP01 = () => (
   <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />
 );
-const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
+const MP05 = i => <ArcAd staticSlot={'MP05'} key={`MP05-${i / 10}`} customId={`div-id-MP05_${i / 10}`} />;
 
 const ListPage = ({
   globalContent,
@@ -128,9 +128,17 @@ const ListPage = ({
           <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile">
             <div className="tablet-line"></div>
             {getNewsTipText('desktop')}
-            {filteredTeases.map((el, i) => <ListItem key={`key-${i}`} {...el} listPage={true} />)}
+            {filteredTeases.map((el, i) => {
+              const j = i + 1;
+              if (i !== 0 && j % 10 === 0 && !noAds) {
+                return (<>
+                  <ListItem key={`key-${i}`} {...el} listPage={true} />
+                  <div className="list-mp05">{MP05(j)}</div>
+                </>);
+              }
+              return <ListItem key={`key-${i}`} {...el} listPage={true} />;
+            })}
           </div>
-          {!noAds ? <div className="list-mp05">{MP05()}</div> : null}
             {moreStoriesToLoad && <LoadMoreButton
               newStories={filteredStories}
               handleOnClick={() => setStoryCount(storiesCount + storiesPerLoad)}
