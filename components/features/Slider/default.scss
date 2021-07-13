@@ -15,26 +15,13 @@
   margin-bottom: $min-Msection-margin;
 
   @include breakpoint(desktop-sm) {
-    overflow: unset;
     margin-bottom: $min-DTsection-margin;
   }
 
   .c-slider {
     position: relative;
-    width: calc(100vw - 40px);
+    width: 100%;
     max-width: 1600px;
-
-    @include breakpoint(tablet) {
-      width: calc(100vw - 80px);
-    }
-
-    @include breakpoint(desktop-sm) {
-      width: calc(100vw - 60px);
-    }
-
-    @include breakpoint(deskop-lg) {
-      width: 100%;
-    }
 
     .c-contributorBadge {
       height: 1.25rem;
@@ -84,7 +71,7 @@
       .c-slider-button {
         display: none;
         cursor: pointer;
-      
+
         @include breakpoint(tablet) {
           display: flex;
           min-width: 50px;
