@@ -32,6 +32,7 @@ const ListItem = ({
   hidePromo,
   isDontMissFeature = false,
   isTTDFeature = false,
+  noBorder = false,
 }) => {
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -111,7 +112,7 @@ const ListItem = ({
   if (relativeURL === '/') return null;
 
   return (
-    <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''}`}>
+    <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''} ${noBorder ? 'no-border-bottom' : ''}`}>
       {!hidePromo && getPromoItem() && !isDontMissFeature && (
         <a href={relativeURL} className="homeList-image">
           <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'}/>
@@ -158,6 +159,7 @@ ListItem.propTypes = {
   promo_items: PropTypes.object,
   firstInlineImage: PropTypes.object,
   teaseImageObject: PropTypes.object,
+  noBorder: PropTypes.bool,
 };
 
 export default ListItem;

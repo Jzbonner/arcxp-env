@@ -15,6 +15,7 @@ const RP01 = () => (
   <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />
 );
 const MP05 = i => <ArcAd staticSlot={'MP05'} key={`MP05-${i / 10}`} customId={`div-id-MP05_${i / 10}`} />;
+const HP05 = i => <ArcAd staticSlot={'HP05'} key={`HP05-${i / 10}`} customId={`div-id-HP05_${i / 10}`} />;
 
 const ListPage = ({
   globalContent,
@@ -129,14 +130,17 @@ const ListPage = ({
             <div className="tablet-line"></div>
             {getNewsTipText('desktop')}
             {filteredTeases.map((el, i) => {
+              // this trick helps us keep multiple of tens for ads and list modulus math.
               const j = i + 1;
+              const f = i + 2;
               if (i !== 0 && j % 10 === 0 && !noAds) {
                 return (<>
-                  <ListItem key={`key-${i}`} {...el} listPage={true} />
+                  <ListItem noBorder={true} key={`key-${i}`} {...el} listPage={true} />
                   <div className="list-mp05">{MP05(j)}</div>
+                  <div className="list-hp05"><div className="hp05-line"/>{HP05(j)}</div>
                 </>);
               }
-              return <ListItem key={`key-${i}`} {...el} listPage={true} />;
+              return <ListItem noBorder={f % 10 === 0} key={`key-${i}`} {...el} listPage={true} />;
             })}
           </div>
             {moreStoriesToLoad && <LoadMoreButton

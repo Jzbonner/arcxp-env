@@ -146,10 +146,8 @@
   &.two-column-mobile {
     @include breakpoint(tablet) {
       position: relative;
-      border-bottom: 1px #dadada solid;
       flex-direction: row;
       justify-content: space-between;
-      margin-bottom: 1.25rem;
 
       .tablet-line {
         position: absolute;
@@ -160,8 +158,8 @@
         background-color: #dadada;
       }
 
-      .c-homeList.listPage:nth-last-child(-n+2) {
-        border: none;
+      .c-homeList.listPage.no-border-bottom {
+        border-bottom: none;
       }
     }
 
@@ -182,13 +180,6 @@
       @include breakpoint(tablet) {
         width: 47%;
         margin-right: 3.3%;
-      }
-
-      &:nth-last-child(-n + 2) {
-        @include breakpoint(tablet) {
-          margin-bottom: 0;
-          border: none;
-        }
       }
 
       &:nth-child(2n) {
