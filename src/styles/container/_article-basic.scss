@@ -68,7 +68,7 @@
 }
 
 @include amp-only {
-  
+
   .c-label-wrapper {
 
     .section-label {
@@ -91,10 +91,6 @@
 }
 
 .c-articleContent {
-  @include between-breakpoints(mobile, tablet) {
-    padding-top: 1.25rem;
-  }
-
   @include breakpoint(desktop-sm) {
     max-width: 820px;
     margin: 0 auto;
