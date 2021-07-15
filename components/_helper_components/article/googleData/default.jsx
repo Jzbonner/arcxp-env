@@ -68,7 +68,7 @@ const GoogleStructuredData = () => {
       datePublished: `${initialPublishDate}`,
       dateModified: `${dateModified}`,
       author: {
-        '@type': 'Person}',
+        '@type': 'Person',
         name: `${author}`,
       },
       image: {
