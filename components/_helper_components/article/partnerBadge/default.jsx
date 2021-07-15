@@ -15,7 +15,7 @@ const PartnerBadge = ({ sections, ampPage }) => {
     const isPartner = path === '/partner';
     if (isPartner) {
       return (
-        <a href={`${websiteURL}/partner`} key={path} className="c-story-partnerBadge b-flexRow b-flexCenter b-margin-bottom-d40-m20">
+        <a href={`${websiteURL}/partner`} key={path} className="c-story-partnerBadge">
           <ImageSimple src={partnerBadgeLogo} ampPage={ampPage} alt="Partner Badge Logo" ampMobileHeight="57px" ampMobileMinWidth="228px" />
         </a>
       );
