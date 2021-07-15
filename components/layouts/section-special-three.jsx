@@ -30,7 +30,7 @@ const SectionLayout = (props) => {
 SectionLayout.sections = [
   'Content Area 1',
   'Content Area 2',
-  'Content Area - Right Rail',
+  'Content Area 2 - Right Rail',
   'Content Area 3',
 ];
 
