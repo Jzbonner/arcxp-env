@@ -26,7 +26,7 @@ const SophiTags = ({ isAmp }) => {
     topSection,
     isNonContentPage,
     contentId,
-    firstPublishDate,
+    initialPublishDate,
     paywallStatus,
   } = contentMeta || {};
   const sophiContentType = isNonContentPage ? 'section' : 'article';
@@ -45,7 +45,7 @@ const SophiTags = ({ isAmp }) => {
     type: `${sophiContentType}`,
     breadcrumb: `${sophiSection}`,
     sectionName: `${sophiMainSection}`,
-    datePublished: `${firstPublishDate}`,
+    datePublished: `${initialPublishDate}`,
   };
   if (isNonContentPage) {
     // it's a non-content page (i.e. home or section) so remove `datePublished` from the page object
@@ -68,7 +68,7 @@ const SophiTags = ({ isAmp }) => {
           type: `${sophiContentType}`,
           breadcrumb: `${sophiSection}`,
           sectionName: `${sophiMainSection}`,
-          datePublished: `${firstPublishDate}`,
+          datePublished: `${initialPublishDate}`,
         },
       }),
       JSON.stringify({
