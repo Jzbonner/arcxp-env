@@ -245,6 +245,10 @@
   @include breakpoint(desktop-sm) {
     max-width: 820px;
   }
+
+  @include between-breakpoints(tablet, desktop-sm) {
+    margin-top: 1.25rem;
+  }
 }
 
 .b-sectionHomeMaxWidth {
