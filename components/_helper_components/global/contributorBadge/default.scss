@@ -2,15 +2,18 @@
 @import "./../../../../src/styles/base/breakpoints";
 
 .c-contributorBadge {
-  height: 54px;
   margin-right: auto;
   margin-left: auto;
   display: flex;
   justify-content: center;
   max-width: 100%;
 
-  @include breakpoint(desktop-sm) {
-    height: 57px;
+  &.staff-bio {
+    height: 54px;
+
+    @include breakpoint(desktop-sm) {
+      height: 57px;
+    }
   }
 
   img {
@@ -24,7 +27,7 @@
 .no-photo-display-class,
 .redesigned-no-photo-display-class,
 .c-mosaic {
-  
+
   .c-homeList .c-contributorBadge {
     justify-content: left;
   }
@@ -36,9 +39,9 @@
   .c-contributorBadge {
     height: 25px;
     margin: 0;
-    
+
     img {
       border-radius: 0;
     }
   }
-}   
+}
