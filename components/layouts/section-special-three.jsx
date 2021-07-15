@@ -28,10 +28,10 @@ const SectionLayout = (props) => {
 };
 
 SectionLayout.sections = [
-  'Zone 1',
-  'Zone 2',
-  'Right Rail (zone 2)',
-  'Zone 3',
+  'Content Area 1',
+  'Content Area 2',
+  'Content Area - Right Rail',
+  'Content Area 3',
 ];
 
 SectionLayout.propTypes = {
