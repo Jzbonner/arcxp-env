@@ -74,6 +74,10 @@
 .desktop-image {
   cursor: pointer;
 
+  @include between-breakpoints(tablet, gallery) {
+    max-width: 620px;
+  }
+
   img {
     touch-action: pan-y;
   }
