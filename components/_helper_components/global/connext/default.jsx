@@ -306,6 +306,12 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                   isLoggedIn: true,
                   uid: CustomerRegistrationId
                 };
+                // account interaction - login event
+                window.sophi.sendEvent({
+                  type: 'account_interaction',
+                  data: { type: 'login', action: 'sign in' },
+                  config: { overrideStoredContext: true },
+                });
               }
             }
           }
@@ -327,6 +333,12 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
               isLoggedIn: false,
               uid: null
             };
+            // account interaction - logout event
+            window.sophi.sendEvent({
+              type: 'account_interaction',
+              data: { type: 'login', action: 'sign out' },
+              config: { overrideStoredContext: true },
+            });
           }
           // trigger login modal to appear if "triggerLoginModal" is passed-in (i.e. from "login" outputType)
           if (${triggerLoginModal}) {
