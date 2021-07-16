@@ -11,9 +11,7 @@ import filter from '../../../content/filters/collectionTitle';
 import AddFirstInlineImage from '../../../content/sources/helper_functions/AddFirstInlineImage';
 import LoadMoreButton from '../loadMoreBtn/default';
 
-const RP01 = () => (
-  <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />
-);
+const RP01 = i => <ArcAd staticSlot={'RP01-List-Page'} key={`RP01-List-Page-${i}`} customId={`div-id-RP01_${i}`}/>;
 const MP05 = i => <ArcAd staticSlot={'MP05'} key={`MP05-${i / 10}`} customId={`div-id-MP05_${i / 10}`} />;
 const HP05 = i => <ArcAd staticSlot={'HP05'} key={`HP05-${i / 10}`} customId={`div-id-HP05_${i / 10}`} />;
 
@@ -29,9 +27,22 @@ const ListPage = ({
   const { taxonomy } = globalContent;
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
+  const RP01Array = [];
 
   const storiesPerLoad = 10;
   const [storiesCount, setStoryCount] = useState(storiesPerLoad);
+
+  const RP01Count = storiesCount / storiesPerLoad;
+
+  for (let i = 0; i < RP01Count; i += 1) {
+    RP01Array.push(
+      (
+        <div className="RP01-container">
+          { RP01((i + 1)) }
+        </div>
+      ),
+    );
+  }
 
   if (!globalContent) {
     return null;
@@ -119,13 +130,11 @@ const ListPage = ({
 
   return (
     <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
+      {getTitle()}
+      {getNewsTipText('mobile-tablet')}
       <div className="c-section with-rightRail">
-        {getTitle()}
-        {getNewsTipText('mobile-tablet')}
+
         <div className="c-contentElements list-contentElements">
-          {!noAds ? (
-            <div className="c-rightRail list-rp01 list-page-right-rail">{RP01()}</div>
-          ) : null}
           <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile">
             <div className="tablet-line"></div>
             {getNewsTipText('desktop')}
@@ -148,6 +157,13 @@ const ListPage = ({
               handleOnClick={() => setStoryCount(storiesCount + storiesPerLoad)}
             />}
         </div>
+        {!noAds ? (
+          <div className="c-list-right-rail">
+            {
+              RP01Array.map(el => el)
+            }
+          </div>
+        ) : null}
       </div>
     </main>
   );

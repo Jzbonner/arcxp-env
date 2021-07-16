@@ -13,19 +13,22 @@
   }
 
   .c-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
 
     .c-contentElements {
       @include breakpoint(desktop-sm) {
         width: calc(100% - 330px);
         padding: 0 30px 0 0;
       }
+    }
 
-      .c-rightRail {
-        @include breakpoint(desktop-sm) {
-          display: block;
-          float: right;
-          margin-right: -330px;
-        }
+    .c-list-right-rail {
+      display: none;
+
+      @include breakpoint(desktop-sm) {
+        display: flex;
       }
     }
   }
@@ -90,30 +93,59 @@
   }
 
   .list-hp05 {
-    background-color: #fff;
-    width: 100%;
-    height: 155px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    z-index: 100;
-    position: relative;
-    padding-bottom: 1.813rem;
+    display: none;
 
-    .hp05-line {
+    @include breakpoint(tablet) {
+      background-color: #fff;
       width: 100%;
-      height: 1px;
-      background-color: #dadada;
-      position: absolute;
-      top: 32px;
+      height: 155px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      z-index: 100;
+      position: relative;
+      padding-bottom: 1.813rem;
+
+      .hp05-line {
+        width: 100%;
+        height: 1px;
+        background-color: #dadada;
+        position: absolute;
+        top: 32px;
+      }
+
+      .arc_ad {
+        margin: 0;
+      }
+
+      .HP05 {
+        margin: 0;
+      }
     }
 
-    .arc_ad {
-      margin: 0;
+    @include breakpoint(desktop-sm) {
+      display: none;
     }
+  }
 
-    .HP05 {
-      margin: 0;
+  .c-list-right-rail {
+    display: none;
+
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      flex-direction: column;
+
+      .RP01-container {
+        flex-grow: 1;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 19px;
+
+        .RP01 {
+          top: 100px;
+          position: sticky;
+        }
+      }
     }
   }
 }
