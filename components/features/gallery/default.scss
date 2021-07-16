@@ -20,6 +20,14 @@
   @include between-breakpoints(mobile, tablet) {
     padding-bottom: 20px;
   }
+
+  @include between-breakpoints(tablet, desktop-sm) {
+    width: calc(100vw - 80px);
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: calc(100vw - 60px);
+  }
 }
 
 .gallery-wrapper {
@@ -159,6 +167,8 @@
   img {
     height: auto;
     width: auto;
+    max-width: 100%;
+    max-height: 100%;
     vertical-align: middle;
     margin: auto;
     opacity: .5;

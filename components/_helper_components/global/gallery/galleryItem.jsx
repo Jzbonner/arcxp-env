@@ -40,7 +40,6 @@ const GalleryItem = ({
   if (!isMobile) {
     // we go ahead and determine what the width of the vertical images will be based on a scaling of height to final height ratio and then set that as the min-width style of each gallery item, to ensure that positioning & overall gallery width is properly calculated (prior to lazyloading of images)
     calculatedWidth = `${height > width ? Math.floor(width * (finalHeight / height)) : finalWidth}px`;
-    console.error('dave window width', window, window.innerWidth);
 
     if (typeof window !== 'undefined' && window.innerWidth < 950 && calculatedWidth === '720px') {
       // 950 is a somewhat arbitrary value but it's based on the amount of fore/aft images visible with a full-width landscape photo centered
