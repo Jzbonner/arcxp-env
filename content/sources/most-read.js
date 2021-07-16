@@ -45,7 +45,7 @@ const fetch = (query = {}) => {
           section = '';
           newUri += section ? `&section=${section}` : '';
           return axios.get(newUri).then(({ data: siteData }) => {
-            // update the array with the seconday data from the primary section if any
+            // update the array with general data if the primary section has less than 5 results
             newArray.push(...filterMostRead(siteData, host, blacklist));
             return newArray;
           });
