@@ -186,6 +186,10 @@
 
 .c-staffBioPage {
 
+  .c-section {
+    display: block;
+  }
+
   .c-rightRail {
     @include breakpoint(tablet) {
       display: none;
