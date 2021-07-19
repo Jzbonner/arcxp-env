@@ -11,7 +11,8 @@ import filter from '../../../content/filters/collectionTitle';
 import AddFirstInlineImage from '../../../content/sources/helper_functions/AddFirstInlineImage';
 import LoadMoreButton from '../loadMoreBtn/default';
 
-const RP01 = i => <ArcAd staticSlot={'RP01-List-Page'} key={`RP01-List-Page-${i}`} customId={`div-id-RP01_${i}`}/>;
+const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'}/>;
+const RP09 = i => <ArcAd staticSlot={'RP09 sticky (desktop only)'} key={`RP09-List-Page-${i}`} customId={`div-id-RP09_${i}`}/>;
 const MP05 = i => <ArcAd staticSlot={'MP05'} key={`MP05-${i / 10}`} customId={`div-id-MP05_${i / 10}`} />;
 const HP05 = i => <ArcAd staticSlot={'HP05'} key={`HP05-${i / 10}`} customId={`div-id-HP05_${i / 10}`} />;
 
@@ -27,7 +28,7 @@ const ListPage = ({
   const { taxonomy } = globalContent;
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
-  const RP01Array = [];
+  const RP01RP09Array = [];
 
   const storiesPerLoad = 10;
   const [storiesCount, setStoryCount] = useState(storiesPerLoad);
@@ -35,10 +36,19 @@ const ListPage = ({
   const RP01Count = storiesCount / storiesPerLoad;
 
   for (let i = 0; i < RP01Count; i += 1) {
-    RP01Array.push(
+    if (i === 0) {
+      RP01RP09Array.push(
+        (
+          <div className="RP01-container">
+            { RP01() }
+          </div>
+        ),
+      );
+    }
+    RP01RP09Array.push(
       (
         <div className="RP01-container">
-          { RP01((i + 1)) }
+          { RP09((i)) }
         </div>
       ),
     );
@@ -160,7 +170,7 @@ const ListPage = ({
         {!noAds ? (
           <div className="c-list-right-rail">
             {
-              RP01Array.map(el => el)
+              RP01RP09Array.map(el => el)
             }
           </div>
         ) : null}
