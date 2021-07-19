@@ -44,14 +44,15 @@ const ListPage = ({
           </div>
         ),
       );
+    } else {
+      RP01RP09Array.push(
+        (
+          <div className="RP01-container">
+            { RP09((i)) }
+          </div>
+        ),
+      );
     }
-    RP01RP09Array.push(
-      (
-        <div className="RP01-container">
-          { RP09((i)) }
-        </div>
-      ),
-    );
   }
 
   if (!globalContent) {
