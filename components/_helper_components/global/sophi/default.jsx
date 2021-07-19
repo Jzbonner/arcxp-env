@@ -50,8 +50,9 @@ const SophiTags = ({ isAmp }) => {
     dateModified: `${lastModifiedDate}`,
   };
   if (isNonContentPage) {
-    // it's a non-content page (i.e. home or section) so remove `datePublished` from the page object
+    // it's a non-content page (i.e. home or section) so remove `datePublished` and `dateModified` from the page object
     delete sophiPageObj.datePublished;
+    delete sophiPageObj.dateModified;
   }
 
 
