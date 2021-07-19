@@ -253,29 +253,30 @@ const StoryPageLayout = () => {
               contentType={type}
               lazyLoad={isMeteredStory} />
           </div>
-          <div
-            style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}
-            className="c-label-wrapper b-margin-bottom-d7-m7 b-contentMaxWidth"
-          >
-            {!isCommunityContributor && (
-              <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />
-            )}
+          <div className="c-articleMetaContainer b-contentMaxWidth b-margin-bottom-d30-m20">
+            <div className="c-articleBadge">
+              <ContributorBadge tags={tags} ampPage={ampPage}/>
+              <PartnerBadge sections={sections} ampPage={ampPage}/>
+            </div>
+            <div className="c-articleMetadata">
+              <div className="c-label-wrapper b-margin-bottom-d7-m7">
+                {!isCommunityContributor && (
+                  <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />
+                )}
+              </div>
+              <div className="b-flexRow article-byline b-margin-bottom-d7-m7">
+                <Byline by={authorData} sections={sections} />
+              </div>
+              <TimeStamp
+                firstPublishDate={firstPublishDate}
+                displayDate={displayDate}
+                isHideTimestampTrue={isHideTimestampTrue}
+                ampPage={ampPage}
+                isHyperlocalContent={isHyperlocalContent && isCommunityContributor}
+                sponsorContentLabel={sponsorContentLabel}
+              />
+            </div>
           </div>
-          <div className="b-flexRow article-byline b-margin-bottom-d7-m7 b-contentMaxWidth">
-            <Byline by={authorData} sections={sections} />
-          </div>
-          <div className="b-margin-bottom-d7-m7 b-contentMaxWidth" style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}>
-            <TimeStamp
-              firstPublishDate={firstPublishDate}
-              displayDate={displayDate}
-              isHideTimestampTrue={isHideTimestampTrue}
-              ampPage={ampPage}
-              isHyperlocalContent={isHyperlocalContent && isCommunityContributor}
-              sponsorContentLabel={sponsorContentLabel}
-            />
-          </div>
-          <ContributorBadge tags={tags} ampPage={ampPage}/>
-          <PartnerBadge sections={sections} ampPage={ampPage}/>
           {ampPage && <SocialShare headlines={headlines} articleURL={articleURL} />}
           <div className="b-flexRow b-flexCenter b-margin-bottom-d7-m7 b-contentMaxWidth">
             <SubHeadline subheadlines={subheadlines} />

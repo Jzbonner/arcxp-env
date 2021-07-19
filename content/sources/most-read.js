@@ -14,20 +14,43 @@ const params = {
 
 const fetch = (query = {}) => {
   const {
-    host = 'ajc.com', section = '', limit = '10', arcSite = 'ajc',
+    host = 'ajc.com', limit = '10', arcSite = 'ajc',
   } = query;
+  let { section = '' } = query;
   const { chartbeat } = getProperties(arcSite);
   const { blacklist } = chartbeat;
   let requestUri = `https://api.chartbeat.com/live/toppages/v3/?apikey=${CHARTBEAT_KEY}&types=1&host=${host}&limit=${limit}`;
 
-  const newUri = requestUri;
+  let newUri = requestUri;
   requestUri += section ? `&section=${section}` : '';
 
-  const promiseData = axios.get(requestUri)
+  const promiseData = axios
+    .get(requestUri)
     .then(({ data }) => {
-      if ((!section) || (data && data.pages && titleCheck(data, data.pages.length))) {
-        return axios.get(newUri)
-          .then(({ data: siteData }) => filterMostRead(siteData, host, blacklist));
+      if (!section || (data && data.pages && titleCheck(data, data.pages.length))) {
+        // keep initial existing data that matches the user's input
+        const newArray = filterMostRead(data, host, blacklist);
+        // grab the primary section if any
+        const primarySection = `/${section.split('/')[1]}`;
+        // check if the user's section input has secondary section
+        if (primarySection && primarySection !== section && newArray.length < 5) {
+          section = primarySection;
+          newUri += section ? `&section=${section}` : '';
+          return axios.get(newUri).then(({ data: siteData }) => {
+            // update the array with the seconday data from the primary section if any
+            newArray.push(...filterMostRead(siteData, host, blacklist));
+            return newArray;
+          });
+        } if (section !== '' && newArray.length < 5) {
+          section = '';
+          newUri += section ? `&section=${section}` : '';
+          return axios.get(newUri).then(({ data: siteData }) => {
+            // update the array with general data if the primary section has less than 5 results
+            newArray.push(...filterMostRead(siteData, host, blacklist));
+            return newArray;
+          });
+        }
+        return newArray;
       }
       return filterMostRead(data, host, blacklist);
     })

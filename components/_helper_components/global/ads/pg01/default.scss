@@ -1,3 +1,5 @@
+@import "../../../../../src/styles/base/breakpoints";
+
 .pg01-container {
   position: relative;
   background: #000;
@@ -10,6 +12,10 @@
   align-items: center;
   padding-top: 3.125rem;
   overflow-y: hidden;
+
+  @include between-breakpoints(tablet, gallery) {
+    min-width: 620px;
+  }
 
   .arc_ad .arcad:not(:empty):before {
     color: #fff;

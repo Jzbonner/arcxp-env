@@ -300,8 +300,9 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
               };
               dataLayer.push(userDataObj);
               if (window?.sophi?.data) {
+                const sophiUserState = UserState === 'Subscribed' ? 'Subscribed' : 'Registered'
                 window.sophi.data.visitor = {
-                  type: userTypeState,
+                  type: sophiUserState,
                   isLoggedIn: true,
                   uid: CustomerRegistrationId
                 };
@@ -322,7 +323,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           dataLayer.push(userDataObj);
           if (window?.sophi?.data) {
             window.sophi.data.visitor = {
-              type: 'anonymous',
+              type: 'Anonymous',
               isLoggedIn: false,
               uid: null
             };

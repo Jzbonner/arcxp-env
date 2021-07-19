@@ -38,7 +38,7 @@ const ContributorBadge = ({
   if (staffBio) {
     if (checkTags(tags, hyperlocalTags)) {
       return (
-        <a href={`${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
+        <a href={`${getContributorProps().link}`} className="c-contributorBadge staff-bio b-margin-bottom-d40-m20">
           <ImageSimple
             src={getContributorProps().image}
             ampPage={ampPage}
@@ -52,7 +52,7 @@ const ContributorBadge = ({
   }
   if (checkTags(tags, 'community contributor')) {
     return (
-      <a href={`${getContributorProps().link}`} className="c-contributorBadge b-margin-bottom-d40-m20">
+      <a href={`${getContributorProps().link}`} className="c-contributorBadge">
         <ImageSimple
           src={getContributorProps().image}
           ampPage={ampPage}

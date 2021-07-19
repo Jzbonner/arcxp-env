@@ -74,7 +74,11 @@
 }
 
 .c-label-wrapper {
-  text-align: center;
+  text-align: left;
+
+  &:empty {
+    display: none;
+  }
 }
 
 @include amp-only {
@@ -83,7 +87,6 @@
 
     .section-label {
       width: 100%;
-      text-align: left;
     }
   }
 }
@@ -100,6 +103,40 @@
   display: none;
 }
 
+.c-articleMetaContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+.c-articleBadge:not(:empty) {
+  display: inline-block;
+  vertical-align: middle;
+  width: 140px;
+  height: auto;
+
+  @include between-breakpoints(tablet, desktop-sm) {
+    width: 130px;
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: 100px;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  ~ .c-articleMetadata {
+    margin-left: 15px;
+    padding-left: 12px;
+    border-left: 1px solid #cdcdcd;
+    min-height: 100%;
+  }
+}
+
 .article-byline {
   @include between-breakpoints(desktop-sm, desktop-lg) {
     margin: 0 auto 7px;
@@ -111,10 +148,6 @@
 }
 
 .c-articleContent {
-  @include between-breakpoints(mobile, tablet) {
-    padding-top: 1.25rem;
-  }
-
   @include breakpoint(desktop-sm) {
     max-width: 820px;
     margin: 0 auto;

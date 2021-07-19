@@ -84,6 +84,7 @@ const ArcAd = ({
     // we remove the query string (if present), because it will mess up GAM targeting if it's passed in the slot name
     adSlotNameForArcAds = adSlotNameForArcAds.substring(0, adSlotNameForArcAds.indexOf('?'));
   }
+  adSlotNameForArcAds = adSlotNameForArcAds.replace(/[@.%20 ]/g, '');
 
   if (galleryTopics && galleryTopics.length && galleryTopics.length > 0) {
     finalTopics = galleryTopics;
