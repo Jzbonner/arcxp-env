@@ -15,6 +15,7 @@ const ArcAd = ({
   staticSlot,
   galleryTopics = [],
   lazyLoad = false,
+  customId = '',
 }) => {
   const { temp, text: sky, precipitation: weather } = currentConditions() || {};
   const appContext = useAppContext();
@@ -150,7 +151,7 @@ const ArcAd = ({
       dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
       dfpId={dfpIdFormatted}
       display={adConfig.display || defaultAdSlot.display}
-      id={`${defaultAdSlot.name}${staticSlot || slot.replace(/ /g, '-').replace(/[()]/g, '')}${adSuffix}`}
+      id={`${customId}` || `${defaultAdSlot.name}${staticSlot || slot.replace(/ /g, '-').replace(/[()]/g, '')}${adSuffix}`}
       slotName={slotName}
       adSlotNameForArcAds={adSlotNameForArcAds}
       targeting={{ ...globalTargeting, ...targeting }}

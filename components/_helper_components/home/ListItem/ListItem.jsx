@@ -32,6 +32,7 @@ const ListItem = ({
   hidePromo,
   isDontMissFeature = false,
   isTTDFeature = false,
+  noBorder = false,
   isStaffBioPage = false,
 }) => {
   const appContext = useAppContext();
@@ -112,7 +113,7 @@ const ListItem = ({
   if (relativeURL === '/') return null;
 
   return (
-    <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''} ${isStaffBioPage ? 'staffBio-listItem' : ''}`}>
+    <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''} ${isStaffBioPage ? 'staffBio-listItem' : ''} ${noBorder ? 'no-border-bottom' : ''}`}>
       {!hidePromo && getPromoItem() && !isDontMissFeature && (
         <a href={relativeURL} className="homeList-image">
           <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'}/>
@@ -159,6 +160,7 @@ ListItem.propTypes = {
   promo_items: PropTypes.object,
   firstInlineImage: PropTypes.object,
   teaseImageObject: PropTypes.object,
+  noBorder: PropTypes.bool,
   isStaffBioPage: PropTypes.bool,
 };
 

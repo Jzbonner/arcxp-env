@@ -125,9 +125,11 @@ export const adSlots = {
   },
   HP05: {
     dimensions: [
+      [], // desktop
       [728, 90], // tablet+
     ],
     breakpoints: [
+      [1024, 0], // desktop
       [768, 0], // tablet+
     ],
     bidding: {
