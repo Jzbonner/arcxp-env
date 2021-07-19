@@ -41,6 +41,14 @@ const fetch = (query = {}) => {
             newArray.push(...filterMostRead(siteData, host, blacklist));
             return newArray;
           });
+        } if (section !== '' && newArray.length < 5) {
+          section = '';
+          newUri += section ? `&section=${section}` : '';
+          return axios.get(newUri).then(({ data: siteData }) => {
+            // update the array with general data if the primary section has less than 5 results
+            newArray.push(...filterMostRead(siteData, host, blacklist));
+            return newArray;
+          });
         }
         return newArray;
       }

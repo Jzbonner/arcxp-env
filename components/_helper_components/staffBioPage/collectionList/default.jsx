@@ -20,6 +20,7 @@ const CollectionList = ({
   const displayClass = 'all';
   const displayClassesRequiringImg = ['all'];
 
+  const hideLoadMoreButton = !!(listItems && listItems.length <= 10);
   const newItems = useContent({
     source: `${source}`,
     query: {
@@ -37,7 +38,7 @@ const CollectionList = ({
         listItems.map((el) => {
           const { _id: id } = el || {};
           return (
-            <ListItem {...el} listPage={true} key={`ListItem-${id}`} />
+            <ListItem {...el} listPage={true} key={`ListItem-${id}`} isStaffBioPage={true}/>
           );
         }),
       );
@@ -50,7 +51,7 @@ const CollectionList = ({
       const newContent = contentElements.map((el) => {
         const { _id: id } = el || {};
         return (
-          <ListItem {...el} listPage={true} key={`ListItem-${id}`} />
+          <ListItem {...el} listPage={true} key={`ListItem-${id}`} isStaffBioPage={true}/>
         );
       });
 
@@ -61,7 +62,7 @@ const CollectionList = ({
   return (
     <>
       {list}
-      {<LoadMoreButton
+      {!hideLoadMoreButton && <LoadMoreButton
         newStories={list}
         handleOnClick={() => setIndex(index + storiesPerLoad)}
       />}

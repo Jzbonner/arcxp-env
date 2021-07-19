@@ -95,10 +95,9 @@
 
 .staff-role {
   color: #4a4a4a;
-  text-transform: uppercase;
   margin-bottom: 4px;
 
-  @include text-styles(.75rem, 1, "Gordita-Medium");
+  @include text-styles(1rem, 1, "Gordita-Medium");
 
   @include breakpoint(tablet) {
     font-size: 1rem;
@@ -123,15 +122,12 @@
   a:first-child {
     margin-right: 12px;
 
-    @include breakpoint(desktop-sm) {
-      height: 46px;
-    }
-
     @include breakpoint(tablet) {
       margin-right: 25px;
     }
 
     @include breakpoint(desktop-sm) {
+      height: 33px;
       margin-right: 34px;
     }
   }
@@ -141,10 +137,6 @@
 
     @include breakpoint(tablet) {
       height: 33px;
-    }
-
-    @include breakpoint(desktop-sm) {
-      height: 46px;
     }
   }
 }
