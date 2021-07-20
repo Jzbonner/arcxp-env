@@ -33,7 +33,7 @@ const fetch = (query = {}) => {
         // grab the primary section if any
         const primarySection = `/${section.split('/')[1]}`;
         // check if the user's section input has secondary section
-        if (primarySection && primarySection !== section && newArray.length < 5) {
+        if (primarySection && primarySection !== section && titleCheck(newArray, newArray.length, true)) {
           section = primarySection;
           newUri += section ? `&section=${section}` : '';
           return axios.get(newUri).then(({ data: siteData }) => {
@@ -41,7 +41,7 @@ const fetch = (query = {}) => {
             newArray.push(...filterMostRead(siteData, host, blacklist));
             return newArray;
           });
-        } if (section !== '' && newArray.length < 5) {
+        } if (primarySection && primarySection === section && section !== '' && titleCheck(newArray, newArray.length, true)) {
           section = '';
           newUri += section ? `&section=${section}` : '';
           return axios.get(newUri).then(({ data: siteData }) => {
