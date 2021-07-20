@@ -306,12 +306,6 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                   isLoggedIn: true,
                   uid: CustomerRegistrationId
                 };
-                // account interaction - login event
-                window.sophi.sendEvent({
-                  type: 'account_interaction',
-                  data: { type: 'login', action: 'sign in' },
-                  config: { overrideStoredContext: true },
-                });
               }
             }
           }
@@ -333,12 +327,6 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
               isLoggedIn: false,
               uid: null
             };
-            // account interaction - logout event
-            window.sophi.sendEvent({
-              type: 'account_interaction',
-              data: { type: 'login', action: 'sign out' },
-              config: { overrideStoredContext: true },
-            });
           }
           // trigger login modal to appear if "triggerLoginModal" is passed-in (i.e. from "login" outputType)
           if (${triggerLoginModal}) {
@@ -353,8 +341,26 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           console.log(message);
         }
       };
+      let bindConnextLoaded = false;
+      let bindConnextLoggedIn = false;
+      let bindConnextNotAuthorized = false;
+      let bindConnextIsSubscriber = false;
+      let bindConnextMeterLevelSet = false;
+      let bindConnextConversationDetermined = false;
+      let triggerActualLoginEvent = false;
+      let triggerActualLogoutEvent = false;
       window.addEventListener('connextLoggedIn', () => {
         toggleUserState('logged-in');
+
+        if (triggerActualLoginEvent) {
+          // it's the result of user-instantiated login, so trigger sophi
+          // sophi account interaction - login event
+          window.sophi.sendEvent({
+            type: 'account_interaction',
+            data: { type: 'login', action: 'sign in' },
+            config: { overrideStoredContext: true },
+          });
+        }
       });
       window.addEventListener('connextLoggedOut', () => {
         toggleUserState('logged-out');
@@ -374,11 +380,22 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           const userState = Connext.Storage.GetUserState() || '';
           if (userState.toLowerCase() === 'logged out') {
             dataLayer.push({'event': 'loginEvent_logout'});
+
+            if (triggerActualLogoutEvent) {
+              // sophi account interaction - logout event
+              window?.sophi?.sendEvent({
+                type: 'account_interaction',
+                data: { type: 'login', action: 'sign out' },
+                config: { overrideStoredContext: true },
+              });
+            }
+          } else if (userState.toLowerCase() === 'logged in') {
+            // (re)set the sophi event trigger for logout
+            triggerActualLogoutEvent = true;
           }
         }
       });
       doc.addEventListener('DOMContentLoaded', () => {
-        const connextLoaded = new Event('connextLoaded');
         const connextMeterLevelSet = new Event('connextMeterLevelSet');
         const connextConversationDetermined = new Event('connextConversationDetermined');
         const connextLoggedIn = new Event('connextLoggedIn');
@@ -414,34 +431,57 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                 debug: ${debug},
                 silentmode: false,
                 publicEventHandlers: {
-                  onActionClosed: (e) => { connextLogger('>> onActionClosed', e); },
-                  onActionShown: (e) => { connextLogger('>> onActionShown', e); },
-                  onButtonClick: (e) => { connextLogger('>> onButtonClick', e); },
-                  onCampaignFound: (e) => { connextLogger('>> onCampaignFound', e); },
                   onConversationDetermined: (e) => {
-                    connextLogger('>> onConversationDetermined', e);
-                    window.dispatchEvent(connextConversationDetermined);
+                    if (!bindConnextConversationDetermined) {
+                      connextLogger('>> onConversationDetermined', e);
+                      window.dispatchEvent(connextConversationDetermined);
+                      bindConnextConversationDetermined = true;
+                    }
                   },
-                  onCriticalError: (e) => { connextLogger('>> onCriticalError', e); },
-                  onDebugNote: (e) => { connextLogger('>> onDebugNote', e); },
                   onInit: (e) => {
-                    connextLogger('>> onInit', e);
-                    window.connextInitialLoadComplete = true;
-                    window.dispatchEvent(connextLoaded);
+                    if (!bindConnextLoaded) {
+                      connextLogger('>> onInit', e);
+                      window.connextInitialLoadComplete = true;
+                      bindConnextLoaded = true;
+
+                      // let's bind to the login button(s) to ensure we don't start tracking the onLoggedIn event too early
+                      document.querySelector('[data-mg2-action="login"]').addEventListener('click', () => {
+                        // (re)set the sophi event trigger for login
+                        triggerActualLoginEvent = true;
+                      });
+                    }
                   },
                   onLoggedIn: (e) => {
-                    connextLogger('>> onLoggedIn', e);
-                    window.dispatchEvent(connextLoggedIn);
+                    if (!bindConnextLoggedIn) {
+                      connextLogger('>> onLoggedIn', e);
+                      window.dispatchEvent(connextLoggedIn);
+                      bindConnextLoggedIn = true;
+                    }
                   },
                   onNotAuthorized: (e) => {
                     // this event fires on every Engage loading if user is logged out
-                    connextLogger('>> onNotAuthorized', e);
-                    window.dispatchEvent(connextLoggedOut);
+                    if (!bindConnextNotAuthorized) {
+                      connextLogger('>> onNotAuthorized', e);
+                      window.dispatchEvent(connextLoggedOut);
+                      bindConnextNotAuthorized = true;
+                    }
                   },
                   onMeterLevelSet: (e) => {
-                    connextLogger('>> onMeterLevelSet', e);
-                    window.dispatchEvent(connextMeterLevelSet);
+                    if (!bindConnextMeterLevelSet) {
+                      connextLogger('>> onMeterLevelSet', e);
+                      window.dispatchEvent(connextMeterLevelSet);
+                      bindConnextMeterLevelSet = true;
+                    }
                   },
+                  onHasAccess: (e) => {
+                    if (!bindConnextIsSubscriber) {
+                      // this event fires on every Engage loading if user is subscriber
+                      connextLogger('>> onHasAccess', e);
+                      window.dispatchEvent(connextIsSubscriber);
+                      bindConnextIsSubscriber = true;
+                    }
+                  }
+                  /*
                   onAuthorized: (e) => {
                     // this event fires on every Engage loading if user is logged in but doesn't have access to this product
                     connextLogger('>> onAuthorized', e);
@@ -455,15 +495,16 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                     // and doesn't have access to this product but has access to another one
                     connextLogger('>> onHasAccessNotEntitled', e);
                   },
-                  onHasAccess: (e) => {
-                    // this event fires on every Engage loading if user is subscriber
-                    connextLogger('>> onHasAccess', e);
-                    window.dispatchEvent(connextIsSubscriber);
-                  },
-                },
-              },
-            },
-          ],
+                  onActionClosed: (e) => { connextLogger('>> onActionClosed', e); },
+                  onActionShown: (e) => { connextLogger('>> onActionShown', e); },
+                  onCampaignFound: (e) => { connextLogger('>> onCampaignFound', e); },
+                  onCriticalError: (e) => { connextLogger('>> onCriticalError', e); },
+                  onDebugNote: (e) => { connextLogger('>> onDebugNote', e); }
+                  */
+                }
+              }
+            }
+          ]
         });
       });`,
   }}></script>;
