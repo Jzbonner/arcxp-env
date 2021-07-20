@@ -278,9 +278,9 @@ const StoryPageLayout = () => {
             </div>
           </div>
           {ampPage && <SocialShare headlines={headlines} articleURL={articleURL} />}
-          <div className="b-flexRow b-flexCenter b-margin-bottom-d7-m7 b-contentMaxWidth">
+          {subheadlines?.basic && <div className="b-flexRow b-flexCenter b-margin-bottom-d7-m7 b-contentMaxWidth">
             <SubHeadline subheadlines={subheadlines} />
-          </div>
+          </div>}
         </header>
 
         <article className="c-articleContent">

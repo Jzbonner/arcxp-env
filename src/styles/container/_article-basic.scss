@@ -107,7 +107,10 @@
   display: flex;
   align-items: center;
   width: 100%;
-  margin-bottom: 1.25rem;
+
+  &:not(:last-child) {
+    margin-bottom: 1.25rem;
+  }
 }
 
 .c-articleBadge:not(:empty) {
@@ -116,12 +119,8 @@
   width: 140px;
   height: auto;
 
-  @include between-breakpoints(tablet, desktop-sm) {
+  @include breakpoint(tablet) {
     width: 130px;
-  }
-
-  @include breakpoint(desktop-sm) {
-    width: 100px;
   }
 
   img {
