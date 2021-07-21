@@ -602,6 +602,24 @@ export const adSlots = {
       },
     },
   },
+  'RP09 sticky listPage': {
+    slotName: 'RP09',
+    dimensions: [
+      [
+        [300, 250],
+        [300, 600],
+      ], // desktop+
+    ],
+    breakpoints: [
+      [1024, 0], // desktop+
+    ],
+    isSticky: true,
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
   'RP09 tablet': {
     slotName: 'RP09',
     biddingName: 'RP09-tablet',
