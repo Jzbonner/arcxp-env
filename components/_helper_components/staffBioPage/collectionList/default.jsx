@@ -20,7 +20,7 @@ const CollectionList = ({
   const displayClass = 'all';
   const displayClassesRequiringImg = ['all'];
 
-  const hideLoadMoreButton = !!(listItems && listItems.length <= 10);
+  const hideLoadMoreButton = !!(listItems && listItems.length < 10);
   const newItems = useContent({
     source: `${source}`,
     query: {
