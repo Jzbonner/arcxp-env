@@ -12,7 +12,7 @@ import AddFirstInlineImage from '../../../content/sources/helper_functions/AddFi
 import LoadMoreButton from '../loadMoreBtn/default';
 
 const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'}/>;
-const RP09 = i => <ArcAd staticSlot={'RP09 sticky (desktop only)'} key={`RP09-List-Page-${i}`} customId={`div-id-RP09_${i}`}/>;
+const RP09 = i => <ArcAd staticSlot={'RP09 sticky listPage'} key={`RP09-List-Page-${i}`} customId={`div-id-RP09_${i}`}/>;
 const MP05 = i => <ArcAd staticSlot={'MP05'} key={`MP05-${i / 10}`} customId={`div-id-MP05_${i / 10}`} />;
 const HP05 = i => <ArcAd staticSlot={'HP05'} key={`HP05-${i / 10}`} customId={`div-id-HP05_${i / 10}`} />;
 
@@ -29,6 +29,8 @@ const ListPage = ({
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
   const RP01RP09Array = [];
+  let storiesCountHasRemainder = false;
+  let storiesCountRemainder;
 
   const storiesPerLoad = 10;
   const [storiesCount, setStoryCount] = useState(storiesPerLoad);
@@ -61,6 +63,13 @@ const ListPage = ({
 
   const filteredStories = globalContent.slice(0, storiesCount);
   const moreStoriesToLoad = !!(globalContent?.length - filteredStories?.length);
+
+  if (!moreStoriesToLoad) {
+    storiesCountHasRemainder = (filteredStories?.length % 10) !== 0;
+    if (storiesCountHasRemainder) {
+      storiesCountRemainder = filteredStories?.length % 10;
+    }
+  }
 
   const updateImageRefs = (apiData) => {
     const newData = apiData;
@@ -153,7 +162,7 @@ const ListPage = ({
               // this trick helps us keep multiple of tens for ads and list modulus math.
               const j = i + 1;
               const f = i + 2;
-              if (i !== 0 && j % 10 === 0 && !noAds) {
+              if ((i !== 0 && j % 10 === 0 && !noAds) || (storiesCountHasRemainder && storiesCountRemainder === j && !noAds)) {
                 return (<>
                   <ListItem noBorder={true} key={`key-${i}`} {...el} listPage={true} />
                   <div className="list-mp05">{MP05(j)}</div>
