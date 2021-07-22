@@ -1,6 +1,14 @@
 @import "../../../../src/styles/base/breakpoints";
 @import "./../../../../src/styles/base/mixins";
 
+/* fix for APD-1402*/
+
+main .c-sponsorBanner {
+  width: 100%;
+  max-width: none;
+  margin-bottom: .938rem;
+}
+
 .c-sponsorBanner {
   @include amp-exclude {
     position: relative;
