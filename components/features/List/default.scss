@@ -610,3 +610,19 @@
     }
   }
 }
+
+// staff bio specific styling - adding here so none of the existing list feature styles are affected
+
+.c-staffBioPage .two-column-mobile {
+  @include between-breakpoints(tablet, desktop-sm) {
+    align-items: flex-start;
+
+    .tablet-line {
+      height: calc(100% - 7rem);
+    }
+
+    .c-homeList .homeList-text {
+      max-width: 100%;
+    }
+  }
+}
