@@ -57,7 +57,7 @@ const RenderOutputType = (props) => {
       <head>
         <MetaTags />
         <SiteMeta />
-        <GoogleStructuredData />
+        <GoogleStructuredData {...props} />
         {!hasLeadGallery && <AmpRelLink type={type} noAmp={noAmp} site={website} url={articleURL} />}
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} as="font" type="font/woff2" />
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} as="font" type="font/woff2" />

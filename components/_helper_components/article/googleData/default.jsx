@@ -1,14 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../../global/utils/environment';
 import getContentMeta from '../../global/siteMeta/_helper_functions/getContentMeta';
 
-const GoogleStructuredData = () => {
+const GoogleStructuredData = (props) => {
   const contentMeta = getContentMeta();
   if (!contentMeta) {
     return null;
   }
+  const { contextPath, deployment } = props || {};
   const {
     title, pageContentType, initialPublishDate, url, topSectionName, promoItems, credits, dateModified, articleDesc,
   } = contentMeta;
@@ -19,16 +21,17 @@ const GoogleStructuredData = () => {
     const env = fetchEnv();
     const desc = articleDesc && articleDesc.basic ? articleDesc.basic : '';
     const {
-      websiteLogo, orgName, cdnOrg, siteName, googleLogo,
+      websiteLogo, orgName, siteName, googleLogo,
     } = getProperties(arcSite);
     let websiteURL;
-    const site = siteName.toLowerCase();
+    const site = siteName.replace(/-/g, '').toLowerCase();
 
     if (env === 'prod') {
       websiteURL = `https://${site}.com`;
     } else if (env !== 'prod') {
-      websiteURL = `https://${cdnOrg}-${site}-${env}.cdn.arcpublishing.com`;
+      websiteURL = `https://${env}.${site}.com`;
     }
+    const publisherLogo = `${websiteURL}${deployment(`${contextPath}${googleLogo}`)}`;
 
     const { url: featuredIMG } = promoItems && promoItems.basic && promoItems.basic.url ? promoItems.basic : {};
     const { url: videoThumbnail } = promoItems
@@ -37,7 +40,10 @@ const GoogleStructuredData = () => {
       ? promoItems.basic.promo_items.basic
       : {};
     // image priority: featured image, video thumb, gallery thumb, logo
-    const articleIMG = featuredIMG || videoThumbnail || galleryThumbnail || websiteLogo;
+    let articleIMG = featuredIMG || videoThumbnail || galleryThumbnail || websiteLogo;
+    if (articleIMG.indexOf('/resources/') > -1) {
+      articleIMG = `${websiteURL}${deployment(`${contextPath}${articleIMG}`)}`;
+    }
     // if multiple authors are listed, display all of them
     let author;
     if (credits && credits.by && credits.by.length > 1) {
@@ -60,7 +66,7 @@ const GoogleStructuredData = () => {
         name: `${orgName}`,
         logo: {
           '@type': 'ImageObject',
-          url: `${googleLogo}`,
+          url: `${publisherLogo}`,
         },
       },
       articleSection: `${topSectionName}`,
@@ -88,6 +94,11 @@ const GoogleStructuredData = () => {
     );
   }
   return null;
+};
+
+GoogleStructuredData.propTypes = {
+  contextPath: PropTypes.string,
+  deployment: PropTypes.func,
 };
 
 export default GoogleStructuredData;
