@@ -9,6 +9,9 @@ import './default.scss';
 import '../../features/List/default';
 import filter from '../../../content/filters/collectionTitle';
 import AddFirstInlineImage from '../../../content/sources/helper_functions/AddFirstInlineImage';
+import getTitle from '../../layouts/_helper_functions/listpage/getTitle';
+import getNewsTipText from '../../layouts/_helper_functions/listpage/getNewsTipText';
+import updateImageRefs from '../../layouts/_helper_functions/listpage/updateImageRefs';
 import LoadMoreButton from '../loadMoreBtn/default';
 
 const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'}/>;
@@ -71,43 +74,6 @@ const ListPage = ({
     }
   }
 
-  const updateImageRefs = (apiData) => {
-    const newData = apiData;
-    apiData.forEach((el, e) => {
-      if (el.type === 'story') {
-        if (el.promo_items
-          && el.promo_items.basic
-          && el.promo_items.basic.promo_image
-          && el.promo_items.basic.promo_image.url
-        ) {
-          newData[e].teaseImageObject = el.promo_items.basic.promo_image;
-        }
-        if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
-          newData[e].teaseImageObject = el.promo_items.basic;
-        }
-
-        if (
-          (el.promo_items && el.promo_items.basic && el.promo_items.basic.type === 'video')
-          || (el.promo_items && el.promo_items.basic && el.promo_items.basic.type === 'gallery')
-        ) {
-          if (el.promo_items.basic.promo_items && el.promo_items.basic.promo_items.basic && el.promo_items.basic.promo_items.basic.url) {
-            newData[e].teaseImageObject = el.promo_items.basic.promo_items.basic;
-          }
-        }
-
-        if (el.firstInlineImage) {
-          newData[e].teaseImageObject = el.firstInlineImage;
-        }
-      }
-      if (el.type === 'video' || el.type === 'gallery') {
-        if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
-          newData[e].teaseImageObject = el.promo_items.basic;
-        }
-      }
-    });
-    return newData;
-  };
-
   let filteredTeases = AddFirstInlineImage(filteredStories, 'list', ['list']);
   filteredTeases = updateImageRefs(filteredTeases);
 
@@ -122,42 +88,16 @@ const ListPage = ({
 
   const { headlines: { basic: collectionTitle } = {} } = collectionMetaData || {};
 
-  const getTitle = () => {
-    if (title) {
-      return title;
-    }
-
-    if (collectionTitle) {
-      return (
-        <div className="b-flexCenter b-flexRow tease-listHeading b-margin-bottom-d30-m20">
-          {collectionTitle}
-        </div>
-      );
-    }
-
-    return null;
-  };
-
-  const getNewsTipText = (placement = '') => {
-    if (!placement || !textBox) return null;
-
-    return (
-      <div className={`c-news-tip-text ${placement}`}>
-        {textBox}
-      </div>
-    );
-  };
-
   return (
     <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
-      {getTitle()}
-      {getNewsTipText('mobile-tablet')}
+      {getTitle(title, collectionTitle)}
+      {getNewsTipText(textBox, 'mobile-tablet')}
       <div className="c-section with-rightRail">
 
         <div className="c-contentElements list-contentElements">
           <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile">
             <div className="tablet-line"></div>
-            {getNewsTipText('desktop')}
+            {getNewsTipText(textBox, 'desktop')}
             {filteredTeases.map((el, i) => {
               // this trick helps us keep multiple of tens for ads and list modulus math.
               const j = i + 1;
@@ -173,7 +113,7 @@ const ListPage = ({
             })}
           </div>
             {moreStoriesToLoad && <LoadMoreButton
-              newStories={filteredStories}
+              numberOfNewStories={filteredStories.length}
               handleOnClick={() => setStoryCount(storiesCount + storiesPerLoad)}
             />}
         </div>
