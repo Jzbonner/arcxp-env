@@ -20,6 +20,8 @@ const TTD = (customFields = {}) => {
       },
     },
   };
+  console.log(customFields);
+  console.log(newCustomFields);
 
   return (
     <div className="c-ttd-feature">

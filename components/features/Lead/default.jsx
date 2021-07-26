@@ -11,6 +11,7 @@ import './default.scss';
 const Lead = ({
   customFields = {}, limitOverride, displayClassOverride, feature = 'Lead',
 }) => {
+  console.log(customFields);
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
 
@@ -46,6 +47,9 @@ const Lead = ({
     useSquareImageAfter = 0;
   }
 
+  console.log(contentService);
+  console.log(contentConfigValues);
+
   const data = useContent({
     source: contentService,
     query: {
@@ -58,6 +62,8 @@ const Lead = ({
       feature,
     },
   });
+
+  console.log(data);
 
   function getDisplayClassMap() {
     switch (actualDisplayClass) {

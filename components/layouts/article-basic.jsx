@@ -36,7 +36,7 @@ import InterscrollerPlaceholder from '../_helper_components/article/interscrolle
 import SponsorStoryMessage from '../_helper_components/article/sponsorStoryMessage/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
-import RelatedList from '../_helper_components/article/relatedList/default';
+import EditorsPicks from '../_helper_components/article/editorsPicks/default';
 import ConnextThankYouMessage from '../_helper_components/global/ConnextThankYouMessage/amp';
 import NonSubPremiumMessage from '../_helper_components/amp/nonSubPremiumMessage/default';
 import PaywallLimitMessage from '../_helper_components/amp/paywallLimitMessage/default';
@@ -221,7 +221,7 @@ const StoryPageLayout = () => {
     )}
     {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && (
       <div className="c-section full-width b-clear-both">
-        <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} />
+        <EditorsPicks taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} />
       </div>
     )}
     {/* about the author should be the last component of the story */}
