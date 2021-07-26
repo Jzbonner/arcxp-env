@@ -1,4 +1,4 @@
-/*  /components/layouts/homepage-basic.jsx  */
+/*  /components/layouts/section-centered.jsx  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
