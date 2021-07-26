@@ -44,48 +44,6 @@
     margin: 0;
   }
 
-  .c-news-tip-text {
-    @include text-styles(.813rem, 1.54, "Gordita");
-
-    color: #313132;
-    padding-bottom: 15px;
-    border-bottom: solid 1px #dadada;
-    width: 100%;
-
-    h3.bold-text {
-      @include text-styles(.813rem, 1.54, "Gordita-Bold");
-
-      font-weight: 700;
-    }
-
-    a {
-      color: #2e81b7;
-    }
-
-    @include breakpoint(desktop-sm) {
-      margin-right: 3.3%;
-      margin-bottom: .875rem;
-    }
-
-    &.desktop {
-      display: none;
-
-      @include breakpoint(desktop-sm) {
-        display: initial;
-      }
-    }
-
-    &.mobile-tablet {
-      @include breakpoint(desktop-sm) {
-        display: none;
-      }
-    }
-
-    &:empty {
-      display: none;
-    }
-  }
-
   .list-contentElements {
     @include breakpoint(desktop-sm) {
       border-right: 1px #dadada solid;
@@ -210,7 +168,7 @@
 
     .homeList-text .headline.listPage {
       @include text-styles(.938rem, 1.47, "Lora-Bold");
-  
+
       @include breakpoint(desktop-sm) {
         @include text-styles(1rem, 1.47, "Lora-Bold");
       }
@@ -223,6 +181,48 @@
   width: 100%;
 
   @include breakpoint(tablet) {
+    display: none;
+  }
+}
+
+.c-news-tip-text {
+  @include text-styles(.813rem, 1.54, "Gordita");
+
+  color: #313132;
+  padding-bottom: 15px;
+  border-bottom: solid 1px #dadada;
+  width: 100%;
+
+  h3.bold-text {
+    @include text-styles(.813rem, 1.54, "Gordita-Bold");
+
+    font-weight: 700;
+  }
+
+  a {
+    color: #2e81b7;
+  }
+
+  @include breakpoint(desktop-sm) {
+    margin-right: 3.3%;
+    margin-bottom: .875rem;
+  }
+
+  &.desktop {
+    display: none;
+
+    @include breakpoint(desktop-sm) {
+      display: initial;
+    }
+  }
+
+  &.mobile-tablet {
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+
+  &:empty {
     display: none;
   }
 }

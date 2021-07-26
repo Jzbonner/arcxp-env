@@ -1,0 +1,194 @@
+@import "../../../src/styles/base/_mixins.scss";
+@import "../../../src/styles/base/breakpoints";
+
+.c-list-enhanced {
+  margin: 1.25rem 0 .63rem;
+  position: relative;
+  width: 100%;
+
+  @include breakpoint(tablet) {
+    margin: 1.875rem 0 .63rem;
+  }
+
+  .tablet-line {
+    display: none;
+    position: absolute;
+    top: 1.25rem;
+    right: 50%;
+    height: calc(100% - 3rem);
+    width: 1px;
+    background-color: #dadada;
+
+    @include breakpoint(tablet) {
+      display: block;
+    }
+
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+
+  .section {
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include breakpoint(desktop-sm) {
+      border-right: 1px solid #dadada;
+      margin-right: 15px;
+      padding-right: 15px;
+      display: block;
+      width: auto;
+    }
+  }
+
+  .right-rail {
+    display: none;
+
+    @include breakpoint(desktop-sm) {
+      display: block;
+    }
+  }
+
+  .list-items {
+    position: relative;
+
+    @include breakpoint(tablet) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      border-bottom: 1px solid #dadada;
+    }
+
+    @include breakpoint(desktop-sm) {
+      width: 490px;
+      border-bottom: none;
+    }
+  }
+
+  .btn-loadMore {
+    margin-bottom: 0;
+  }
+
+  .c-listpage-listitem {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px #dadada solid;
+    margin-bottom: 14px;
+
+    @include breakpoint(tablet) {
+      width: 47%;
+    }
+
+    @include breakpoint(desktop-sm) {
+      width: 100%;
+    }
+
+    &.isMissingPromo {
+
+      .col-1 {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .col-2 {
+        margin: 0;
+      }
+    }
+
+    &:nth-last-child(-n + 2) {
+      @include breakpoint(tablet) {
+        border: none;
+      }
+
+      @include breakpoint(desktop-sm) {
+        border-bottom: 1px #dadada solid;
+      }
+    }
+
+    .col-1 {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .col-2 {
+      margin: 0 0 10px 23px;
+    }
+
+    .headline {
+      text-align: left;
+      font-weight: 700;
+      letter-spacing: -.08px;
+      margin: 0 0 10px;
+      display: inline-block;
+
+      @include text-styles(.875rem, 1.47, "Lora-Bold");
+
+      a {
+        color: inherit;
+      }
+    }
+
+    .image {
+      position: relative;
+      width: 80px;
+      display: inline-block;
+      height: auto;
+
+      @include breakpoint(desktop-sm) {
+        width: 104px;
+      }
+    }
+  }
+
+  .RP01 {
+    top: 30px;
+    position: sticky;
+    margin-top: -50px;
+  }
+
+  .MP01,
+  .HP05 {
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+
+  .section:not(:first-of-type) {
+
+    .c-listpage-listitem:first-of-type {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid #dadada;
+    }
+  }
+
+  .section:last-child {
+
+    .list-items {
+      @include breakpoint(desktop-sm) {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+
+  .section:not(:last-child) {
+
+    .c-listpage-listitem:last-child {
+      margin: 0;
+      border: none;
+
+      .col-2 {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

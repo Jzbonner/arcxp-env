@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import './default.scss';
 import arrow from '../../../resources/icons/slider/left-arrow.svg';
 
-const LoadMoreButton = ({ newStories, handleOnClick }) => {
+const LoadMoreButton = ({ numberOfNewStories = 0, handleOnClick }) => {
   const [buttonState, setButtonState] = useState('default');
   const [numberOfOldStories, setNumberOfOldStories] = useState(0);
 
   useEffect(() => {
-    if (newStories?.length === numberOfOldStories) {
+    if (numberOfNewStories === numberOfOldStories) {
       setButtonState('data-max-reached');
     } else {
-      setNumberOfOldStories(newStories?.length);
+      setNumberOfOldStories(numberOfNewStories);
       setButtonState('default');
     }
-  }, [newStories]);
+  }, [numberOfNewStories]);
 
   const handleBtnClick = () => {
     if (buttonState !== 'data-max-reached') {
@@ -40,7 +40,7 @@ const LoadMoreButton = ({ newStories, handleOnClick }) => {
 };
 
 LoadMoreButton.propTypes = {
-  newStories: PropTypes.array,
+  numberOfNewStories: PropTypes.integer,
   handleOnClick: PropTypes.func,
 };
 
