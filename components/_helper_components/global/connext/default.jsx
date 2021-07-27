@@ -6,6 +6,12 @@ import fetchEnv from '../utils/environment';
 import ArcAdLib from '../../../features/ads/src/children/ArcAdLib';
 import GetConnextLocalStorageData from './connextLocalStorage';
 
+const logOutput = (msg, debug = false) => {
+  if (debug || (typeof window !== 'undefined' && window?.location?.search?.indexOf('connextDebug') > -1)) {
+    console.log(msg);
+  }
+};
+
 export const ConnextAuthTrigger = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -121,7 +127,7 @@ export const ConnextAuthTrigger = () => {
         ) || {};
         const viewedArticlesArray = viewedArticlesFromLocalStorage[meteredConversationId] || [];
 
-        console.log('connext logging >> localStorageAuthChecks - articlesRemainingFromLocalStorage', articlesRemainingFromLocalStorage, 'viewedArticlesArray.length', viewedArticlesArray.length, 'articleLimitFromLocalStorage - 1', articleLimitFromLocalStorage - 1, 'window.Connext.Storage.GetViewedArticles()', window.Connext.Storage.GetViewedArticles(), 'window.Connext.Storage.GetCurrentConversation()', window.Connext.Storage.GetCurrentConversation());
+        logOutput('connext logging >> localStorageAuthChecks - articlesRemainingFromLocalStorage', articlesRemainingFromLocalStorage, 'viewedArticlesArray.length', viewedArticlesArray.length, 'articleLimitFromLocalStorage - 1', articleLimitFromLocalStorage - 1, 'window.Connext.Storage.GetViewedArticles()', window.Connext.Storage.GetViewedArticles(), 'window.Connext.Storage.GetCurrentConversation()', window.Connext.Storage.GetCurrentConversation());
 
         if (
           (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
@@ -130,7 +136,7 @@ export const ConnextAuthTrigger = () => {
             && viewedArticlesArray.length < articleLimitFromLocalStorage - 1
           )
         ) {
-          console.log(
+          logOutput(
             `connext debugging >> (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
            || (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1)`,
             (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0),
@@ -173,7 +179,7 @@ export const ConnextAuthTrigger = () => {
               && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft() > 0)
             )
           ) {
-            console.log(
+            logOutput(
               'connext debugging >> (articlesRemainingFromConversation && articlesRemainingFromConversation > 0) || (articlesRemainingFromConversation !== 0 && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft > 0))',
               '(articlesRemainingFromConversation',
               articlesRemainingFromConversation,
@@ -222,10 +228,10 @@ export const ConnextAuthTrigger = () => {
       const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
       const { UserState } = connextLocalStorageData;
       if (isEnabled && !(UserState && ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1)) {
-        console.log('connext logging >> isEnabled && !(UserState && ["subscriber", "subscribed"].indexOf(UserState.toLowerCase()) > -1))', 'isenabled', isEnabled, 'userState', UserState, 'is subscriber', ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1);
+        logOutput('connext logging >> isEnabled && !(UserState && ["subscriber", "subscribed"].indexOf(UserState.toLowerCase()) > -1))', 'isenabled', isEnabled, 'userState', UserState, 'is subscriber', ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1);
         try {
           const currentMeterLevel = window.Connext.Storage.GetCurrentMeterLevel();
-          console.log('connext logging >> currentMeterLevel', currentMeterLevel);
+          logOutput('connext logging >> currentMeterLevel', currentMeterLevel);
           if (currentMeterLevel === 1) {
             // it's "free" content (per connext), so load everything
             loadDeferredItems();
@@ -336,9 +342,9 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           docBody.className += ' ${userIsAuthenticatedClass}';
         }
       };
-      const connextLogger = (message) => {
+      const connextLogger = (msg) => {
         if (${debug} || window.location.search.indexOf('connextDebug') > -1) {
-          console.log(message);
+          console.log(msg);
         }
       };
       let bindConnextLoaded = false;
@@ -436,6 +442,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                       connextLogger('>> onConversationDetermined', e);
                       window.dispatchEvent(connextConversationDetermined);
                       bindConnextConversationDetermined = true;
+                      bindConnextMeterLevelSet = false;
                     }
                   },
                   onInit: (e) => {
