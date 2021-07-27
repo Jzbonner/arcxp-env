@@ -3,6 +3,12 @@
 
 /* fix for APD-1402*/
 
+.c-homepageContent .c-sponsorBanner {
+  @include between-breakpoints(mobile, tablet) {
+    margin-top: 0;
+  }
+}
+
 main .c-sponsorBanner {
   width: 100%;
   max-width: none;
