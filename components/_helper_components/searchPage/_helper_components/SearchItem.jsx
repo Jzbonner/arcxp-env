@@ -60,7 +60,7 @@ const SearchItem = ({
   const isListPage = listPage ? 'listPage' : '';
   let defaultPromoWidth = 500;
   let defaultPromoHeight = 282;
-  const creditName = credits.by && credits.by[0] && credits.by[0].name ? credits.by[0].name : null;
+  const creditName = credits && credits.by && credits.by[0] && credits.by[0].name ? credits.by[0].name : null;
   const sectionName = primarySite && primarySite.name ? primarySite.name : null;
 
   if (isTTDFeature || isListPage) {
@@ -74,9 +74,9 @@ const SearchItem = ({
   const promoHeight = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoHeight;
 
   function getPromoItem() {
-    console.log('teaseImageObject', teaseImageObject);
+/*     console.log('teaseImageObject', teaseImageObject);
     console.log('promoItems', promoItems);
-    console.log('firstInlineImage', firstInlineImage);
+    console.log('firstInlineImage', firstInlineImage); */
     if (teaseImageObject) {
       return teaseImageObject;
     }
@@ -86,10 +86,10 @@ const SearchItem = ({
           return promoItems.basic;
         }
       }
-      if (promoItems.basic.type === 'image') {
+      if (promoItems.basic && promoItems.basic.type === 'image') {
         return promoItems.basic || promoItems.lead_art.promo_items.basic;
       }
-      if (promoItems.basic.type === 'video' || promoItems.basic.type === 'gallery') {
+      if (promoItems.basic && (promoItems.basic.type === 'video' || promoItems.basic.type === 'gallery')) {
         if (promoItems.basic.promo_items && promoItems.basic.promo_items.basic) {
           return promoItems.basic.promo_items.basic;
         }

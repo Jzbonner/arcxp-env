@@ -13,13 +13,25 @@
     border: solid 1px #cdcdcd;
     margin-bottom: 15px;
 
+    img {
+      padding-top: 5px;
+      padding-left: 10px;
+      background: none;
+    }
+
     input {
       padding: 0;
       margin: 0;
       position: relative;
-      top: 3px;
+      top: -3px;
+      left: 3px;
       border: none;
       text-decoration: none;
+      background: none;
+
+      &:active {
+        background: none;
+      }
 
       @include text-styles(1.25rem, 1, "Gordita-Bold");
     }
@@ -120,6 +132,10 @@
   justify-content: space-between;
   padding-bottom: 0.063rem;
   margin-bottom: 0.875rem;
+ 
+  .homeList-text .c-tease-icon {
+    margin-left: 0;
+  }
 
   .homeList-image {
     margin-left: 0;
