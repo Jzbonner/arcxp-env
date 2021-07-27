@@ -221,7 +221,7 @@ const StoryPageLayout = () => {
     )}
     {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && (
       <div className="c-section full-width b-clear-both">
-        <EditorsPicks taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} />
+        <EditorsPicks taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} arcSite={arcSite}/>
       </div>
     )}
     {/* about the author should be the last component of the story */}

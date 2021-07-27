@@ -3,10 +3,12 @@ import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import axios from 'axios';
 
 export default (arcSite, id, size = 20, from = 0) => {
+  console.log(size);
   if (!arcSite || !id) {
     return null;
   }
 
+  console.log(size);
   const sizeInt = parseInt(size, 10);
 
   const promiseArray = [];

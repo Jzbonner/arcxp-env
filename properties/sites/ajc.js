@@ -153,4 +153,8 @@ export default {
     blacklist: mostReadBlacklist,
     host: 'ajc.com',
   },
+  editorsPicks: {
+    sandbox: 'GUEX7HW5GBDINAZZF2ETEB5YQ4',
+    prod: 'DTSNNI7Z2RBX7DHMNGU52KDCVI',
+  },
 };

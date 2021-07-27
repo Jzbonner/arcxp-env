@@ -34,6 +34,11 @@ const fetch = (query) => {
   } = query;
   const activeSite = arcSite || arcSiteAlt;
 
+  console.log(size);
+  console.log(id);
+  console.log(from);
+  console.log(activeSite);
+
   if (!activeSite) return [];
 
   const requiresImageEveryX = getImageRequirements(displayClass, displayClassesRequiringImg);
