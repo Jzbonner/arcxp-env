@@ -10,12 +10,37 @@
     margin: 1.875rem 0 .63rem;
   }
 
+  .c-page-title {
+
+    .c-title-content {
+      @include text-styles(1.375rem, 1, "Gordita-Bold");
+
+      letter-spacing: -.28px;
+
+      @include breakpoint(tablet) {
+        @include text-styles(1.5625rem, 1, "Gordita-Bold");
+
+        letter-spacing: -.31px;
+      }
+
+      @include breakpoint(tablet) {
+        @include text-styles(2.1875rem, 1, "Gordita-Bold");
+
+        letter-spacing: -.44px;
+      }
+    }
+  }
+
+  .c-news-tip-text.desktop {
+    margin-right: 0;
+  }
+
   .tablet-line {
     display: none;
     position: absolute;
-    top: 1.25rem;
+    top: 0;
     right: 50%;
-    height: calc(100% - 3rem);
+    height: calc(100% - 1rem);
     width: 1px;
     background-color: #dadada;
 
@@ -42,8 +67,8 @@
 
     @include breakpoint(desktop-sm) {
       border-right: 1px solid #dadada;
-      margin-right: 15px;
-      padding-right: 15px;
+      margin-right: 30px;
+      padding-right: 30px;
       display: block;
       width: auto;
     }
@@ -59,6 +84,7 @@
 
   .list-items {
     position: relative;
+    margin-top: 15px;
 
     @include breakpoint(tablet) {
       display: flex;
@@ -68,8 +94,9 @@
     }
 
     @include breakpoint(desktop-sm) {
-      width: 490px;
+      width: 460px;
       border-bottom: none;
+      margin-top: 0;
     }
   }
 
@@ -113,6 +140,12 @@
       }
     }
 
+    &:last-child {
+      @include breakpoint(desktop-sm) {
+        border: none;
+      }
+    }
+
     .col-1 {
       width: 80%;
       display: flex;
@@ -120,7 +153,7 @@
     }
 
     .col-2 {
-      margin: 0 0 10px 23px;
+      margin: 0 0 10px 25px;
     }
 
     .headline {
@@ -152,7 +185,7 @@
   .RP01 {
     top: 30px;
     position: sticky;
-    margin-top: -50px;
+    margin-top: -45px;
   }
 
   .MP01,
@@ -165,8 +198,8 @@
   .section:not(:first-of-type) {
 
     .c-listpage-listitem:first-of-type {
-      margin-top: 14px;
-      padding-top: 14px;
+      margin-top: 15px;
+      padding-top: 15px;
       border-top: 1px solid #dadada;
     }
   }
@@ -184,7 +217,10 @@
 
     .c-listpage-listitem:last-child {
       margin: 0;
-      border: none;
+
+      @include breakpoint(desktop-sm) {
+        border: none;
+      }
 
       .col-2 {
         margin-bottom: 0;

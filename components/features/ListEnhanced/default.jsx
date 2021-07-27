@@ -71,8 +71,8 @@ const ListEnhanced = ({ customFields }) => {
             <section className="section">
               <div className="content">
                 <div className="list-items">
+                {sectionIndex === 0 && getNewsTipText(textBox, 'desktop')}
                   <span className="tablet-line"></span>
-                  {getNewsTipText(textBox, 'desktop')}
                   {filteredStories.map((el, storyIndex) => {
                     if (
                       sectionIndex * storiesPerLoad <= storyIndex
