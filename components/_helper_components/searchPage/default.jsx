@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
@@ -12,15 +12,9 @@ import LoadMoreButton from '../loadMoreBtn/default';
 import SearchItem from './_helper_components/SearchItem';
 import SearchIcon from '../../../resources/icons/search.svg';
 
-const RP01 = () => (
-  <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />
-);
-const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
-
 const SearchPage = ({
   globalContent,
   globalContentConfig,
-  textBox,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -37,19 +31,28 @@ const SearchPage = ({
 
   const [sortByDateState, setSortByDateState] = useState(false);
   const [storyEls, setStoryEls] = useState([]);
-  
-  //TODO: do 'gallery' array ghadnling of content elements as a state
 
   let filteredTeases = null;
-
-
-/*   const filteredStories = globalContent.slice(0, storiesCount);
-  const moreStoriesToLoad = !!(globalContent?.length - filteredStories?.length); */
 
   const actions = {
     RELEVANCE: 'RELEVANCE',
     DATE: 'DATE',
   };
+
+  function getListsByColumn(apiData, columnValue = 1) {
+    const leftColumnLimit = (storyEls.length / 2) - 1;
+    const rightColumnStartIndex = leftColumnLimit;
+    return apiData.map((el, i) => {
+      if (columnValue === 1 && i <= leftColumnLimit) {
+        return <SearchItem key={`SearchItem-${i}`} {...el} listPage={true} />;
+      }
+
+      if (columnValue === 2 && i > rightColumnStartIndex) {
+        return <SearchItem key={`SearchItem-${i}`} {...el} listPage={true} />;
+      }
+      return null;
+    });
+  }
 
   const onChangeHandler = (event) => {
     setSearchInput(event.target.value);
@@ -109,10 +112,25 @@ const SearchPage = ({
     filteredTeases = updateImageRefs(filteredTeases);
   } */
 
-  if (searchMetaData && searchMetaData.metadata && searchMetaData.metadata.page) console.log('page number metadata',searchMetaData.metadata.page)
+  /* if (searchMetaData && searchMetaData.metadata && searchMetaData.metadata.page) console.log('page number metadata',searchMetaData.metadata.page) */
 /* 
   console.log('globalcontent', globalContent);
   console.log('filtered teases', filteredTeases); */
+
+  const buildSearchItems = () => {
+    if (!storyEls) return null;
+
+    const column1Output = getListsByColumn(storyEls, 1);
+    const column2Output = getListsByColumn(storyEls, 2);
+
+    return (
+      <div className="c-searchListContainter two-column left-photo-display-class b-margin-bottom-d15-m10">
+        {column1Output && <div className="column-1">{column1Output}</div>}
+        <div className="tablet-line"></div>
+        {column2Output && <div className="column-2">{column2Output}</div>}
+      </div>
+    );
+  };
 
   const handleSortType = (sortType) => {
     if (sortType === actions.DATE) setSortByDateState(true);
@@ -124,22 +142,6 @@ const SearchPage = ({
     setStoryEls([]);
     setSearchQuery(searchInput);
   };
-
-/*   if (filteredTeases && (storyEls.length < 1 || (searchMetaData && searchMetaData.metadata && parseInt(searchMetaData.metadata.page, 10) !== pageCount))) {
-    if (searchMetaData && searchMetaData.metadata && searchMetaData.metadata.page){
-      console.log('are page count state and metadata page the same? They should be if you just searcha term for the first time..', parseInt(searchMetaData.metadata.page) !== pageCount);
-      console.log(parseInt(searchMetaData.metadata.page, 10));
-      console.log('page count', pageCount);
-    } 
-    debugger;
-    if (storyEls.length === 0) {
-      setStoryEls(filteredTeases);
-    }
-
-    if ((pageCount !== searchMetaData && searchMetaData.metadata && parseInt(searchMetaData.metadata.page, 10))) {
-      setStoryEls(oldArray => [...oldArray, filteredTeases]);
-    }
-  } */
 
   useEffect(() => {
     if (storyEls) {
@@ -190,13 +192,7 @@ const SearchPage = ({
       </div>
       <div className="c-section with-rightRail">
         <div className="c-contentElements list-contentElements">
-          {!noAds ? (
-            <div className="c-rightRail list-rp01 list-page-right-rail">{RP01()}</div>
-          ) : null}
-          <div className="b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile">
-            <div className="tablet-line"></div>
-            {storyEls && storyEls.map((el, i) => <SearchItem key={`key-${i}`} {...el} listPage={true} />)}
-          </div>
+          {buildSearchItems()}
           {<LoadMoreButton
             newStories={filteredTeases}
             handleOnClick={() => setPageCount(pageCount + 1)}
