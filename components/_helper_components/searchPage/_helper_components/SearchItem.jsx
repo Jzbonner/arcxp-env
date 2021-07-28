@@ -30,7 +30,6 @@ const SearchItem = ({
   isSynopsis = false,
   displayClass,
   hidePromo,
-  isDontMissFeature = false,
   isTTDFeature = false,
   credits,
   description = {},
@@ -74,9 +73,6 @@ const SearchItem = ({
   const promoHeight = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoHeight;
 
   function getPromoItem() {
-/*     console.log('teaseImageObject', teaseImageObject);
-    console.log('promoItems', promoItems);
-    console.log('firstInlineImage', firstInlineImage); */
     if (teaseImageObject) {
       return teaseImageObject;
     }
@@ -117,9 +113,6 @@ const SearchItem = ({
     return null;
   }
 
-  //if (relativeURL === '/') return null;
-
-
   const buildSearchItemRow = () => {
     const sectionEl = () => <span className="search-section">{sectionName}</span>;
     const creditEl = () => <span className="search-credit">{creditName}</span>;
@@ -136,23 +129,17 @@ const SearchItem = ({
     </div>);
   };
 
-  console.log('getPromoItem func', getPromoItem());
-  console.log('credits', credits);
-  console.log('promoItems', promoItems);
-  console.log('description text', basic);
-  console.log(hidePromo, 'hidePromo');
   return (
     <div className="c-search-item">
       <div className={`c-homeList isSearch ${isMissingPromo} ${hidePromo ? 'no-photo' : ''}`}>
-        {!hidePromo && getPromoItem() && !isDontMissFeature && (
-
+        {!hidePromo && getPromoItem() && (
           <a href={relativeURL} className="homeList-image">
             <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'} />
             {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
           </a>
         )}
         <div className="homeList-text">
-          {!hidePromo && !isDontMissFeature && !isSynopsis && getTeaseIcon(contentType)}
+          {!hidePromo && getTeaseIcon(contentType)}
           <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
           <div className={`headline ${isListPage}`}>
             <a href={relativeURL}>

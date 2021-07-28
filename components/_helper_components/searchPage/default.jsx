@@ -2,29 +2,17 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
-import checkTags from '../../layouts/_helper_functions/checkTags';
-import ArcAd from '../../features/ads/default';
 import './default.scss';
 import '../../features/List/default';
-import filter from '../../../content/filters/search-page';
 import AddFirstInlineImage from '../../../content/sources/helper_functions/AddFirstInlineImage';
 import LoadMoreButton from '../loadMoreBtn/default';
 import SearchItem from './_helper_components/SearchItem';
 import SearchIcon from '../../../resources/icons/search.svg';
 
-const SearchPage = ({
-  globalContent,
-  globalContentConfig,
-}) => {
+const SearchPage = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
-  const { query } = globalContentConfig || {};
-  const { taxonomy } = globalContent;
-  const { tags = [] } = taxonomy || {};
-  const noAds = checkTags(tags, 'no-ads');
-
-  const storiesPerLoad = 10;
-  const [storiesCount, setStoryCount] = useState(storiesPerLoad);
+  /* const noAds = checkTags(tags, 'no-ads');  uncommenting as this will be used when ads are set */
   const [searchQuery, setSearchQuery] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [pageCount, setPageCount] = useState(1);
@@ -32,12 +20,12 @@ const SearchPage = ({
   const [sortByDateState, setSortByDateState] = useState(false);
   const [storyEls, setStoryEls] = useState([]);
 
-  let filteredTeases = null;
-
   const actions = {
     RELEVANCE: 'RELEVANCE',
     DATE: 'DATE',
   };
+
+  let filteredTeases = null;
 
   function getListsByColumn(apiData, columnValue = 1) {
     const leftColumnLimit = (storyEls.length / 2) - 1;
@@ -104,19 +92,6 @@ const SearchPage = ({
     },
   });
 
-  // console.log('search meta data', searchMetaData.data);
-
-
-/*   if (searchMetaData && searchMetaData.data) {
-    filteredTeases = AddFirstInlineImage(searchMetaData.data, 'list', ['list']);
-    filteredTeases = updateImageRefs(filteredTeases);
-  } */
-
-  /* if (searchMetaData && searchMetaData.metadata && searchMetaData.metadata.page) console.log('page number metadata',searchMetaData.metadata.page) */
-/* 
-  console.log('globalcontent', globalContent);
-  console.log('filtered teases', filteredTeases); */
-
   const buildSearchItems = () => {
     if (!storyEls) return null;
 
@@ -133,6 +108,7 @@ const SearchPage = ({
   };
 
   const handleSortType = (sortType) => {
+    setStoryEls([]);
     if (sortType === actions.DATE) setSortByDateState(true);
     if (sortType === actions.RELEVANCE) setSortByDateState(false);
   };
@@ -142,12 +118,6 @@ const SearchPage = ({
     setStoryEls([]);
     setSearchQuery(searchInput);
   };
-
-  useEffect(() => {
-    if (storyEls) {
-      console.log('THIS IS STORY ELS STATE', storyEls);
-    }
-  }, [storyEls]);
 
   useEffect(() => {
     if (searchMetaData) {
