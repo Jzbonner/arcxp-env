@@ -617,9 +617,15 @@
   @include between-breakpoints(tablet, desktop-sm) {
     align-items: flex-start;
 
-    .tablet-line {
-      height: calc(100% - 7rem);
+    &.hasLoadMoreButton {
+      
+      .tablet-line {
+        height: calc(100% - 7rem);
+      }
     }
+  }
+
+  @include between-breakpoints(mobile, desktop-sm) {
 
     .c-homeList .homeList-text {
       max-width: 100%;

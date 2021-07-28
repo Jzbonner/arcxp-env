@@ -48,7 +48,6 @@ const staffBioPage = () => {
   });
 
   const { content_elements: listItems } = initialList || {};
-
   const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
   const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
   return (
@@ -76,7 +75,7 @@ const staffBioPage = () => {
             { !noAds ? <div className='c-rightRail list-rp01 list-page-right-rail'>
               {RP01()}
             </div> : null }
-            <div className='b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile'>
+            <div className={`b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile ${listItems.length > 9 ? 'hasLoadMoreButton' : ''}`}>
               <div className="tablet-line"></div>
               <CollectionList source={'author-stories-list'}
               listItems={listItems}
