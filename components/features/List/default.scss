@@ -615,7 +615,7 @@
 
 .c-staffBioPage .two-column-mobile {
   @include between-breakpoints(tablet, desktop-sm) {
-    align-items: normal;
+    align-items: flex-start;
 
     &.hasLoadMoreButton {
       
