@@ -48,7 +48,6 @@ const staffBioPage = () => {
   });
 
   const { content_elements: listItems } = initialList || {};
-
   const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
   const MP05 = () => <ArcAd staticSlot={'MP05'} key={'MP05'} />;
   return (

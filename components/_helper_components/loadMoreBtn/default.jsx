@@ -3,18 +3,28 @@ import PropTypes from 'prop-types';
 import './default.scss';
 import arrow from '../../../resources/icons/slider/left-arrow.svg';
 
-const LoadMoreButton = ({ numberOfNewStories = 0, handleOnClick }) => {
+const LoadMoreButton = ({ numberOfNewStories = 0, handleOnClick, newStories }) => {
   const [buttonState, setButtonState] = useState('default');
   const [numberOfOldStories, setNumberOfOldStories] = useState(0);
 
   useEffect(() => {
-    if (numberOfNewStories === numberOfOldStories) {
-      setButtonState('data-max-reached');
-    } else {
-      setNumberOfOldStories(numberOfNewStories);
-      setButtonState('default');
+    if (numberOfNewStories) {
+      if (numberOfNewStories === numberOfOldStories) {
+        setButtonState('data-max-reached');
+      } else {
+        setNumberOfOldStories(numberOfNewStories);
+        setButtonState('default');
+      }
     }
-  }, [numberOfNewStories]);
+    if (newStories) {
+      if (newStories?.length === numberOfOldStories) {
+        setButtonState('data-max-reached');
+      } else {
+        setNumberOfOldStories(newStories?.length);
+        setButtonState('default');
+      }
+    }
+  }, [numberOfNewStories, newStories]);
 
   const handleBtnClick = () => {
     if (buttonState !== 'data-max-reached') {
@@ -40,8 +50,9 @@ const LoadMoreButton = ({ numberOfNewStories = 0, handleOnClick }) => {
 };
 
 LoadMoreButton.propTypes = {
-  numberOfNewStories: PropTypes.integer,
+  numberOfNewStories: PropTypes.number,
   handleOnClick: PropTypes.func,
+  newStories: PropTypes.array,
 };
 
 export default LoadMoreButton;
