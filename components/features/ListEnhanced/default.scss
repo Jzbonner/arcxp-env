@@ -2,12 +2,12 @@
 @import "../../../src/styles/base/breakpoints";
 
 .c-list-enhanced {
-  margin: 1.25rem 0 .63rem;
+  margin: 0 0 .63rem;
   position: relative;
   width: 100%;
 
   @include breakpoint(tablet) {
-    margin: 1.875rem 0 .63rem;
+    margin: 0 0 .63rem;
   }
 
   .c-page-title {
