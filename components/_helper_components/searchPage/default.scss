@@ -209,7 +209,7 @@
     .search-section {
 
       &:after {
-        content: "";
+        content: " ";
         width: 4px;
         height: 15px;
         margin-left: 5px;
@@ -221,7 +221,7 @@
     .search-credit {
 
       &:after {
-        content: "";
+        content: " ";
         width: 2px;
         height: 15px;
         margin-left: 5px;
