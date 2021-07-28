@@ -76,7 +76,7 @@ const staffBioPage = () => {
             { !noAds ? <div className='c-rightRail list-rp01 list-page-right-rail'>
               {RP01()}
             </div> : null }
-            <div className={`b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile ${listItems > 9 ? 'hasLoadMoreButton' : ''}`}>
+            <div className='b-flexCenter c-homeListContainer left-photo-display-class b-margin-bottom-d15-m10 one-column two-column-mobile'>
               <div className="tablet-line"></div>
               <CollectionList source={'author-stories-list'}
               listItems={listItems}
