@@ -380,25 +380,31 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           and connext actually double-fires the "onNotAuthorized" event.  So we set this property when connext first loads
           and then we delete it - if it hasn't been already - once the meter level is set (one of the later processes for connext)
         */
-        if (typeof window.connextInitialLoadComplete !== 'undefined') {
-          delete window.connextInitialLoadComplete;
-        } else {
-          const userState = Connext.Storage.GetUserState() || '';
-          if (userState.toLowerCase() === 'logged out') {
-            dataLayer.push({'event': 'loginEvent_logout'});
+        const userState = Connext.Storage.GetUserState() || '';
+        if (userState.toLowerCase() === 'logged out') {
+          dataLayer.push({'event': 'loginEvent_logout'});
 
-            if (triggerActualLogoutEvent) {
-              // sophi account interaction - logout event
-              window?.sophi?.sendEvent({
-                type: 'account_interaction',
-                data: { type: 'login', action: 'sign out' },
-                config: { overrideStoredContext: true },
-              });
-            }
-          } else if (userState.toLowerCase() === 'logged in') {
-            // (re)set the sophi event trigger for logout
-            triggerActualLogoutEvent = true;
+          if (triggerActualLogoutEvent) {
+            // sophi account interaction - logout event
+            window?.sophi?.sendEvent({
+              type: 'account_interaction',
+              data: { type: 'login', action: 'sign out' },
+              config: { overrideStoredContext: true },
+            });
           }
+
+          // let's bind to the login button(s) since the onLoggedIn event isn't entirely reliable
+          document.querySelector('[data-mg2-action="login"]').addEventListener('click', () => {
+            // (re)set the sophi event trigger for login
+            triggerActualLoginEvent = true;
+          });
+          // reset the connextLoggedIn binding (since another event may occur after page load)
+          bindConnextLoggedIn = false;
+        } else if (userState.toLowerCase() === 'logged in') {
+          // (re)set the sophi event trigger for logout
+          triggerActualLogoutEvent = true;
+          // reset the connextNotAuthorized binding (since another event may occur after page load)
+          bindConnextNotAuthorized = false;
         }
       });
       doc.addEventListener('DOMContentLoaded', () => {
@@ -450,12 +456,6 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                       connextLogger('>> onInit', e);
                       window.connextInitialLoadComplete = true;
                       bindConnextLoaded = true;
-
-                      // let's bind to the login button(s) to ensure we don't start tracking the onLoggedIn event too early
-                      document.querySelector('[data-mg2-action="login"]').addEventListener('click', () => {
-                        // (re)set the sophi event trigger for login
-                        triggerActualLoginEvent = true;
-                      });
                     }
                   },
                   onLoggedIn: (e) => {
