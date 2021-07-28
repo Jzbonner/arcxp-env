@@ -154,7 +154,7 @@ export default {
     host: 'ajc.com',
   },
   editorsPicks: {
-    sandbox: 'GUEX7HW5GBDINAZZF2ETEB5YQ4',
+    sandbox: 'UZG4A6L2JBCZ5IKJGJXNFHTP2E',
     prod: 'DTSNNI7Z2RBX7DHMNGU52KDCVI',
   },
 };
