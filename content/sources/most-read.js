@@ -1,6 +1,6 @@
 import axios from 'axios';
 import getProperties from 'fusion:properties';
-import { CHARTBEAT_KEY } from 'fusion:environment';
+import { CHARTBEAT_KEY, CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import filterMostRead from './helper_functions/filterMostRead';
 import titleCheck from './helper_functions/titleCheck';
 
@@ -12,10 +12,15 @@ const params = {
   limit: 'text',
 };
 
+// const fusionContext = useFusionContext();
+// const { arcSite } = fusionContext;
+
+
 const fetch = (query = {}) => {
   const {
     host = 'ajc.com', limit = '10', arcSite = 'ajc',
   } = query;
+  const { siteDomainURL } = getProperties(arcSite);
   let { section = '' } = query;
   const { chartbeat } = getProperties(arcSite);
   const { blacklist } = chartbeat;
@@ -23,6 +28,8 @@ const fetch = (query = {}) => {
 
   let newUri = requestUri;
   requestUri += section ? `&section=${section}` : '';
+
+  let mostReadContent = [];
 
   const promiseData = axios
     .get(requestUri)
@@ -53,6 +60,34 @@ const fetch = (query = {}) => {
         return newArray;
       }
       return filterMostRead(data, host, blacklist);
+    })
+    .then((data) => {
+      if (Array.isArray(data)) {
+        mostReadContent = [...data];
+        const urls = [];
+        data.map((element) => {
+          const path = element && element.path && element.path.replace('ajc.com', `${siteDomainURL}`);
+          return urls.push(path);
+        });
+        const contentRequestUri = `${CONTENT_BASE}/content/v4/urls`;
+        return axios.post(contentRequestUri, { urls }, {
+          headers: {
+            Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+          },
+        });
+      }
+      return data;
+    })
+    .then((data) => {
+      const mostReadWithArcData = mostReadContent.map((element, i) => {
+        const path = element && element.path && `${element.path.split('ajc.com')[1]}`;
+        // checking the id's and merging the two array
+        if (path && data[i] && data[i].website_url !== undefined && path === data[i].website_url) {
+          return Object.assign({}, element, data[i]);
+        }
+        return element;
+      });
+      return mostReadWithArcData;
     })
     .catch((error) => {
       console.error('Error: ', error);
