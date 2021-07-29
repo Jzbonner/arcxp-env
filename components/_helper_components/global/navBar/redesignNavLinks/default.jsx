@@ -4,7 +4,7 @@ import getProperties from 'fusion:properties';
 import Search from '../search/default';
 
 const RedesignNavLinks = ({
-  sections, arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID,
+  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID,
 }) => {
   const { siteDomainURL } = getProperties(arcSite);
   const itemCount = sections.length;

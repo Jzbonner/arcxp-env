@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../../../../../src/styles/container/_c-headerNav.scss';
 
 const NavFooter = ({ navFooterContent }) => {
-  const { children } = navFooterContent || {};
+  const { children = [] } = navFooterContent || {};
   const filterChildren = children.slice(0, 4);
 
   return (
