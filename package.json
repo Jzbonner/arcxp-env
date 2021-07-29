@@ -17,7 +17,7 @@
     "zip": "zip config/deploy/bundle.zip -r . -x .git/\\* node_modules/\\* coverage/\\* .github/\\* .fusion/\\* .circleci/\\* .dist/\\* .stylelintrc.json data/db/\\*"
   },
   "devDependencies": {
-    "@arc-fusion/cli": "^1.1.0",
+    "@arc-fusion/cli": "^2.0.5",
     "@arc-fusion/prop-types": "^0.1.5",
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
