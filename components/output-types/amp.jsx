@@ -35,7 +35,7 @@ const AmpOutputType = (props) => {
       <BaseMarkup canonicalUrl={`https://www.${handleSiteName(canonicalSite)}.com${articleURL}`} />
       <AmpCustomStyles arcSite={currentSite} outputTypeProps={props} />
       <AmpScripts contentElements={contentElements} storyPromoItems={storyPromoItems} arcSite={arcSite}/>
-      <GoogleStructuredData />
+      <GoogleStructuredData {...props} />
       <SiteMetaAmp />
     </head>
     <body>

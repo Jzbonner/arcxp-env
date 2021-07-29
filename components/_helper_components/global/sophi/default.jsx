@@ -26,7 +26,8 @@ const SophiTags = ({ isAmp }) => {
     topSection,
     isNonContentPage,
     contentId,
-    firstPublishDate,
+    initialPublishDate,
+    firstPublishDate: lastModifiedDate,
     paywallStatus,
   } = contentMeta || {};
   const sophiContentType = isNonContentPage ? 'section' : 'article';
@@ -45,11 +46,13 @@ const SophiTags = ({ isAmp }) => {
     type: `${sophiContentType}`,
     breadcrumb: `${sophiSection}`,
     sectionName: `${sophiMainSection}`,
-    datePublished: `${firstPublishDate}`,
+    datePublished: `${initialPublishDate}`,
+    dateModified: `${lastModifiedDate}`,
   };
   if (isNonContentPage) {
-    // it's a non-content page (i.e. home or section) so remove `datePublished` from the page object
+    // it's a non-content page (i.e. home or section) so remove `datePublished` and `dateModified` from the page object
     delete sophiPageObj.datePublished;
+    delete sophiPageObj.dateModified;
   }
 
 
@@ -68,7 +71,8 @@ const SophiTags = ({ isAmp }) => {
           type: `${sophiContentType}`,
           breadcrumb: `${sophiSection}`,
           sectionName: `${sophiMainSection}`,
-          datePublished: `${firstPublishDate}`,
+          datePublished: `${initialPublishDate}`,
+          dateModified: `${lastModifiedDate}`,
         },
       }),
       JSON.stringify({
@@ -90,51 +94,61 @@ const SophiTags = ({ isAmp }) => {
               "customContexts": ${JSON.stringify(stringCustomContents)}
             },
             "linkers": {
-                "enabled": true,
-                "proxyOnly": false,
-                "destinationDomains": "ajc.com"
+              "enabled": true,
+              "proxyOnly": false,
+              "destinationDomains": "ajc.com"
+            },
+            "triggers": {
+              "defaultPageview": {
+                "on": "visible",
+                "request": "pageView"
               },
-              "triggers": {
-                "defaultPageview": {
-                  "on": "visible",
-                  "request": "pageView"
-                },
-                "trackFirstPagePing": {
-                  "on": "timer",
-                  "request": "pagePing",
-                  "timerSpec": {
-                    "interval": 5,
-                    "maxTimerLength": 4.99,
-                    "immediate": false,
-                    "startSpec": {
-                      "on": "visible",
-                      "selector": ":root"
-                    },
-                    "stopSpec": {
-                      "on": "hidden",
-                      "selector": ":root"
-                    }
-                  }
-                },
-                "trackPagePings": {
-                  "on": "timer",
-                  "request": "pagePing",
-                  "timerSpec": {
-                    "interval": 20,
-                    "maxTimerLength": 1800,
-                    "immediate": false,
-                    "startSpec": {
-                      "on": "visible",
-                      "selector": ":root"
-                    },
-                    "stopSpec": {
-                      "on": "hidden",
-                      "selector": ":root"
-                    }
+              "trackFirstPagePing": {
+                "on": "timer",
+                "request": "pagePing",
+                "timerSpec": {
+                  "interval": 5,
+                  "maxTimerLength": 4.99,
+                  "immediate": false,
+                  "startSpec": {
+                    "on": "visible",
+                    "selector": ":root"
+                  },
+                  "stopSpec": {
+                    "on": "hidden",
+                    "selector": ":root"
                   }
                 }
+              },
+              "trackPagePings": {
+                "on": "timer",
+                "request": "pagePing",
+                "timerSpec": {
+                  "interval": 20,
+                  "maxTimerLength": 1800,
+                  "immediate": false,
+                  "startSpec": {
+                    "on": "visible",
+                    "selector": ":root"
+                  },
+                  "stopSpec": {
+                    "on": "hidden",
+                    "selector": ":root"
+                  }
+                }
+              },
+              "trackSignIn":{
+                "on": "access-login-loginEmbedded-success",
+                "request": "selfDescribingEvent",
+                "vars": {
+                  "customEventSchemaVendor": "com.globeandmail",
+                  "customEventSchemaName": "account_interaction",
+                  "customEventSchemaVersion": "1-0-5",
+                  "customEventSchemaData": ${JSON.stringify({ type: 'login', action: 'sign in' })}
+                }
               }
-            }`,
+            }
+          }`,
         }}></script>
       </amp-analytics>
     );
