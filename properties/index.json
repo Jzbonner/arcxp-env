@@ -127,5 +127,9 @@
     [408,300],
     [256,144],
     [150,150]
-  ]
+  ],
+  "editorsPicks": {
+    "sandbox": "UZG4A6L2JBCZ5IKJGJXNFHTP2E",
+    "prod": "DTSNNI7Z2RBX7DHMNGU52KDCVI"
+  }
 }

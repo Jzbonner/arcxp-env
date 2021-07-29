@@ -26,11 +26,13 @@ const Lead = ({
     '5-Item Feature - Center Lead Top Photo',
     '5-Item Feature - No Photo',
     '5-Item Feature - Redesigned Lead - No Photo',
+    '5-Item TTD Feature',
     '7-Item TTD Feature',
     'Redesign Feature - Left Photo No Photo',
   ];
 
-  const isTTDFeature = actualDisplayClass === '7-Item TTD Feature';
+  // '5-Item TTD feature' in reality is Editors picks, but effectively the same feature just re-used in article pages//
+  const isTTDFeature = actualDisplayClass === '7-Item TTD Feature' || actualDisplayClass === '5-Item TTD Feature';
   const isLeftNoPhotoFeature = actualDisplayClass === 'Redesign Feature - Left Photo No Photo';
 
   // use squareImageSize to override the default height/width of tease images for cases where we want a square aspect ratio
@@ -45,6 +47,7 @@ const Lead = ({
     squareImageSize = 80;
     useSquareImageAfter = 0;
   }
+
 
   const data = useContent({
     source: contentService,
@@ -64,6 +67,7 @@ const Lead = ({
       case '5-Item Feature - Top Photo':
         return 'top-photo-display-class';
       case '5-Item Feature - Left Photo':
+      case '5-Item TTD Feature':
       case '7-Item TTD Feature':
         return 'left-photo-display-class';
       case '5-Item Feature - No Photo':
@@ -100,6 +104,7 @@ const Lead = ({
       case '1 or 2 Item Feature':
         return [...Array(parseInt(columns, 10)).keys()].map(i => <Headline key={i} {...apiData[i]} isTease={true} />);
       case '7-Item TTD Feature':
+      case '5-Item TTD Feature':
         return <Headline {...apiData[0]} isTease={true} />;
       case 'Redesign Feature - Left Photo No Photo':
         return getLists(apiData, 0, 5);
@@ -116,6 +121,8 @@ const Lead = ({
       case '5-Item Feature - Center Lead Top Photo':
       case '5-Item Feature - Redesigned Lead - No Photo':
         return <Headline {...apiData[0]} isTease={true} />;
+      case '5-Item TTD Feature':
+        return getLists(apiData, 1, 3);
       case '7-Item TTD Feature':
         return getLists(apiData, 1, 3);
       case 'Redesign Feature - Left Photo No Photo':
@@ -138,6 +145,8 @@ const Lead = ({
             {getLists(apiData, 1, 4)}
           </>
         );
+      case '5-Item TTD Feature':
+        return getLists(apiData, 3, 2);
       case '7-Item TTD Feature':
         return getLists(apiData, 4, 3);
       case '5-Item Feature - Center Lead Top Photo':
