@@ -6,16 +6,16 @@ const tournamentDate = (sDate, eDate) => {
   const mlist = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   let tDate = null;
 
-  let splitDate = (date) => {
-    let dateArr = date.split("-");
-    let monthIndex = dateArr[1] - 1;
-    dateArr = [parseInt(dateArr[1]), parseInt(dateArr[2]), parseInt(dateArr[0])];
+  const splitDate = (date) => {
+    let dateArr = date.split('-');
+    const monthIndex = dateArr[1] - 1;
+    dateArr = [parseInt(dateArr[1], 10), parseInt(dateArr[2], 10), parseInt(dateArr[0], 10)];
 
     return {
-      "dateArr": dateArr, 
-      "monthIndex": monthIndex
+      dateArr,
+      monthIndex,
     };
-  }
+  };
 
   const startDate = splitDate(sDate).dateArr;
   const endDate = splitDate(eDate).dateArr;
@@ -24,10 +24,10 @@ const tournamentDate = (sDate, eDate) => {
 
   if (startDate[0] === endDate[0]) {
     // eslint-disable-next-line no-const-assign
-    tDate = `${mlist[startMonthIndex]} ${startDate[1]} - ${endDate[1]}, ${ endDate[2]}`;
+    tDate = `${mlist[startMonthIndex]} ${startDate[1]} - ${endDate[1]}, ${endDate[2]}`;
   } else {
     // eslint-disable-next-line no-const-assign
-    tDate = `${mlist[startMonthIndex]} ${startDate[1]} - ${mlist[endMonthIndex]} ${endDate[1]}, ${ endDate[2]}`;
+    tDate = `${mlist[startMonthIndex]} ${startDate[1]} - ${mlist[endMonthIndex]} ${endDate[1]}, ${endDate[2]}`;
   }
   return tDate;
 };
