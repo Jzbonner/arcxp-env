@@ -38,9 +38,9 @@
   .tablet-line {
     display: none;
     position: absolute;
-    top: 0;
+    top: 15px;
     right: 50%;
-    height: calc(100% - 1rem);
+    height: calc(100% - 50px);
     width: 1px;
     background-color: #dadada;
 
@@ -70,7 +70,7 @@
       margin-right: 30px;
       padding-right: 30px;
       display: block;
-      width: auto;
+      width: 460px;
     }
   }
 
@@ -84,102 +84,39 @@
 
   .list-items {
     position: relative;
-    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 
     @include breakpoint(tablet) {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
       border-bottom: 1px solid #dadada;
+      padding-bottom: 20px;
+      flex-direction: row;
     }
 
     @include breakpoint(desktop-sm) {
+      flex-direction: column;
       width: 460px;
       border-bottom: none;
       margin-top: 0;
+    }
+
+    & > .col-1,
+    & > .col-2 {
+      width: 100%;
+
+      @include breakpoint(tablet) {
+        width: 47%;
+      }
+
+      @include breakpoint(desktop-sm) {
+        width: 100%;
+      }
     }
   }
 
   .btn-loadMore {
     margin-bottom: 0;
-  }
-
-  .c-listpage-listitem {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px #dadada solid;
-    margin-bottom: 14px;
-
-    @include breakpoint(tablet) {
-      width: 47%;
-    }
-
-    @include breakpoint(desktop-sm) {
-      width: 100%;
-    }
-
-    &.isMissingPromo {
-
-      .col-1 {
-        width: 100%;
-        max-width: 100%;
-      }
-
-      .col-2 {
-        margin: 0;
-      }
-    }
-
-    &:nth-last-child(-n + 2) {
-      @include breakpoint(tablet) {
-        border: none;
-      }
-
-      @include breakpoint(desktop-sm) {
-        border-bottom: 1px #dadada solid;
-      }
-    }
-
-    &:last-child {
-      @include breakpoint(desktop-sm) {
-        border: none;
-      }
-    }
-
-    .col-1 {
-      width: 80%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .col-2 {
-      margin: 0 0 10px 25px;
-    }
-
-    .headline {
-      text-align: left;
-      font-weight: 700;
-      letter-spacing: -.08px;
-      margin: 0 0 10px;
-      display: inline-block;
-
-      @include text-styles(.875rem, 1.47, "Lora-Bold");
-
-      a {
-        color: inherit;
-      }
-    }
-
-    .image {
-      position: relative;
-      width: 80px;
-      display: inline-block;
-      height: auto;
-
-      @include breakpoint(desktop-sm) {
-        width: 104px;
-      }
-    }
   }
 
   .RP01 {
@@ -195,35 +132,32 @@
     }
   }
 
-  .section:not(:first-of-type) {
+  @include breakpoint(desktop-sm) {
 
-    .c-listpage-listitem:first-of-type {
-      margin-top: 15px;
-      padding-top: 15px;
-      border-top: 1px solid #dadada;
-    }
-  }
+    .section:not(:first-of-type) {
 
-  .section:last-child {
+      .col-1 {
 
-    .list-items {
-      @include breakpoint(desktop-sm) {
-        margin-bottom: 1.5rem;
+        .c-listpage-listitem:first-of-type {
+          margin-top: 15px;
+          border-top: 1px solid #dadada;
+        }
       }
     }
-  }
 
-  .section:not(:last-child) {
+    .section:not(:last-child) {
 
-    .c-listpage-listitem:last-child {
-      margin: 0;
-
-      @include breakpoint(desktop-sm) {
-        border: none;
+      .list-items {
+        padding-bottom: 0;
       }
 
       .col-2 {
-        margin-bottom: 0;
+
+        .c-listpage-listitem:last-child {
+          margin: 0;
+          border: none;
+          padding-bottom: 0;
+        }
       }
     }
   }
