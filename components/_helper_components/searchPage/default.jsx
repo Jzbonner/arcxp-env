@@ -8,17 +8,52 @@ import AddFirstInlineImage from '../../../content/sources/helper_functions/AddFi
 import LoadMoreButton from '../loadMoreBtn/default';
 import SearchItem from './_helper_components/SearchItem';
 import SearchIcon from '../../../resources/icons/search.svg';
+import ArcAd from '../../features/ads/default';
+import checkTags from '../../layouts/_helper_functions/checkTags';
 
-const SearchPage = () => {
+const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
+const RP09 = i => <ArcAd staticSlot={'RP09 sticky listPage'} key={`RP09-List-Page-${i}`} customId={`div-id-RP09_${i}`} />;
+const MP05 = i => <ArcAd staticSlot={'MP05'} key={`MP05-${i / 10}`} customId={`div-id-MP05_${i / 10}`} />;
+const HP05 = i => <ArcAd staticSlot={'HP05'} key={`HP05-${i / 10}`} customId={`div-id-HP05_${i / 10}`} />;
+
+const SearchPage = ({
+  globalContent,
+}) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
-  /* const noAds = checkTags(tags, 'no-ads');  uncommenting as this will be used when ads are set */
+
+  const { taxonomy } = globalContent;
+  const { tags = [] } = taxonomy || {};
+  const noAds = checkTags(tags, 'no-ads');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [pageCount, setPageCount] = useState(1);
 
   const [sortByDateState, setSortByDateState] = useState(false);
   const [storyEls, setStoryEls] = useState([]);
+  const RP01RP09Array = [];
+
+  const RP01Count = storyEls.length / 10;
+
+  for (let i = 0; i < RP01Count; i += 1) {
+    if (i === 0) {
+      RP01RP09Array.push(
+        (
+          <div className="RP01-container">
+            { RP01() }
+          </div>
+        ),
+      );
+    } else {
+      RP01RP09Array.push(
+        (
+          <div className="RP01-container">
+            { RP09((i)) }
+          </div>
+        ),
+      );
+    }
+  }
 
   const actions = {
     RELEVANCE: 'RELEVANCE',
@@ -37,6 +72,14 @@ const SearchPage = () => {
 
       if (columnValue === 2 && i > rightColumnStartIndex) {
         return <SearchItem key={`SearchItem-${i}`} {...el} listPage={true} />;
+      }
+
+      if (i !== 0 && (i + 1) % 10 === 0 && !noAds) {
+        return (<>
+          <SearchItem key={`SearchItem-${i}`} {...el} listPage={true} />;
+          <div className="list-mp05">{MP05(i + 1)}</div>
+          <div className="list-hp05"><div className="hp05-line"/>{HP05(i + 1)}</div>
+        </>);
       }
       return null;
     });
@@ -143,15 +186,15 @@ const SearchPage = () => {
     <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
       <div className="c-search-bar">
         <div className="input-field">
-          <img src={SearchIcon} width={20} height={21}/>
-        <input
-          type="text"
-          id="searchInput"
-          name="search"
-          placeholder=""
-          onChange={onChangeHandler}
-          value={searchInput}></input>
-          </div>
+          <img src={SearchIcon} width={20} height={21} />
+          <input
+            type="text"
+            id="searchInput"
+            name="search"
+            placeholder=""
+            onChange={onChangeHandler}
+            value={searchInput}></input>
+        </div>
         <button onClick={handleButtonClick} className="search-btn">Search</button>
       </div>
       <div className="c-search-sortType">
@@ -168,6 +211,13 @@ const SearchPage = () => {
             handleOnClick={() => setPageCount(pageCount + 1)}
           />}
         </div>
+        {!noAds ? (
+          <div className="c-list-right-rail">
+            {
+              RP01RP09Array.map(el => el)
+            }
+          </div>
+        ) : null}
       </div>
     </main>
   );
