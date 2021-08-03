@@ -12,18 +12,25 @@
   }
 }
 
+.c-listPage .page-not-found-feature {
+  margin-top: -.3rem;
+
+  @include between-breakpoints(tablet, desktop-sm) {
+    margin-top: -2rem;
+  }
+
+  @include breakpoint(desktop-sm) {
+    margin-top: -.6rem;
+  }
+}
+
 .page-not-found-feature {
   display: flex;
   flex-direction: column;
   border-bottom: solid 1px #dadada;
-  margin: 15px 0;
+  margin: 0 0 15px;
   padding-bottom: 10px;
   align-self: normal;
-
-  @include between-breakpoints(tablet, desktop-sm) {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
 
   .error-text {
     @include text-styles(.8125rem, 1.54, "Gordita-Bold");
@@ -32,10 +39,6 @@
 
     @include between-breakpoints(tablet, desktop-sm) {
       display: flex;
-    }
-
-    @include breakpoint(desktop-sm) {
-      display: grid;
     }
 
     .error-text-2 {

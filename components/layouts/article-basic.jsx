@@ -37,6 +37,7 @@ import SponsorStoryMessage from '../_helper_components/article/sponsorStoryMessa
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 import RelatedList from '../_helper_components/article/relatedList/default';
+import EditorsPicks from '../_helper_components/article/editorsPicks/default';
 import ConnextThankYouMessage from '../_helper_components/global/ConnextThankYouMessage/amp';
 import NonSubPremiumMessage from '../_helper_components/amp/nonSubPremiumMessage/default';
 import PaywallLimitMessage from '../_helper_components/amp/paywallLimitMessage/default';
@@ -221,11 +222,13 @@ const StoryPageLayout = () => {
     )}
     {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && (
       <div className="c-section full-width b-clear-both">
-        <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} />
+        { arcSite !== 'ajc' && <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage}/>}
       </div>
     )}
-    {/* about the author should be the last component of the story */}
-    {<div className="c-section full-width b-clear-both"><BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} /></div>}
+    {/* For Ohio, about the author should be the last component of the story, otherwise its about the author THEN editors picks , latest, and most popular */}
+    {<div className="c-section full-width b-clear-both"><BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />
+      {arcSite === 'ajc' && <EditorsPicks arcSite={arcSite} />}
+    </div>}
     {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
     {!noAds && !isHyperlocalContent && !sponsorSectionID && (
       <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />

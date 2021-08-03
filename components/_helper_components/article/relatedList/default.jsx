@@ -7,7 +7,10 @@ import truncateHeadline from '../../../layouts/_helper_functions/homepage/trunca
 import '../../../features/MostRead/default.scss';
 import './default.scss';
 
-const RelatedList = ({ taxonomy, uuid, isAmp = false }) => {
+const RelatedList = ({
+  taxonomy, uuid, isAmp = false,
+}) => {
+  if (isAmp) return null;
   const { primary_section: primarySection } = taxonomy || {};
   const { path, referent } = primarySection || {};
   const { id: referentId } = referent || {};
@@ -21,7 +24,6 @@ const RelatedList = ({ taxonomy, uuid, isAmp = false }) => {
   }
 
   const formattedPath = path ? path.substring(1) : finalReferentId || null;
-
   const data = useContent({
     source: 'search-api',
     query: {
@@ -80,6 +82,7 @@ RelatedList.propTypes = {
 
 RelatedList.defaultProps = {
   componentName: 'RelatedList',
+  arcSite: 'ajc',
 };
 
 export default RelatedList;

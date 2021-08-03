@@ -4,16 +4,30 @@ import './default.scss';
 
 const tournamentDate = (sDate, eDate) => {
   const mlist = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const startDate = new Date(sDate);
-  const endDate = new Date(eDate);
   let tDate = null;
 
-  if (startDate.getMonth() === endDate.getMonth()) {
+  const splitDate = (date) => {
+    let dateArr = date.split('-');
+    const monthIndex = dateArr[1] - 1;
+    dateArr = [parseInt(dateArr[1], 10), parseInt(dateArr[2], 10), parseInt(dateArr[0], 10)];
+
+    return {
+      dateArr,
+      monthIndex,
+    };
+  };
+
+  const startDate = splitDate(sDate).dateArr;
+  const endDate = splitDate(eDate).dateArr;
+  const startMonthIndex = splitDate(sDate).monthIndex;
+  const endMonthIndex = splitDate(eDate).monthIndex;
+
+  if (startDate[0] === endDate[0]) {
     // eslint-disable-next-line no-const-assign
-    tDate = `${mlist[startDate.getMonth()]} ${startDate.getDate()} - ${endDate.getDate()}, ${endDate.getFullYear()}`;
+    tDate = `${mlist[startMonthIndex]} ${startDate[1]} - ${endDate[1]}, ${endDate[2]}`;
   } else {
     // eslint-disable-next-line no-const-assign
-    tDate = `${mlist[startDate.getMonth()]} ${startDate.getDate()} - ${mlist[endDate.getMonth()]} ${endDate.getDate()}, ${endDate.getFullYear()}`;
+    tDate = `${mlist[startMonthIndex]} ${startDate[1]} - ${mlist[endMonthIndex]} ${endDate[1]}, ${endDate[2]}`;
   }
   return tDate;
 };

@@ -4,6 +4,7 @@ import truncateHeadline from '../../../../layouts/_helper_functions/homepage/tru
 import Image from '../../../../_helper_components/global/image/default';
 import getTeaseIcon from '../../../../_helper_components/global/image/_helper_functions/getTeaseIcon';
 import TimeStamp from '../../../../_helper_components/article/timestamp/default';
+import './default.scss';
 
 const ListItem = ({
   label,
@@ -60,7 +61,7 @@ const ListItem = ({
   if (relativeURL === '/') return null;
 
   return (
-    <div className={`c-listpage-listitem ${isMissingPromo}`}>
+    <div className={`c-enhancedList-listItem ${isMissingPromo}`}>
       <div className="col-1">
         {getTeaseIcon(contentType)}
         <div className="headline">
@@ -73,24 +74,22 @@ const ListItem = ({
           isTease={true}
         />
       </div>
-      <div className="col-2">
-        {getPromoItem() && (
-          <a href={relativeURL} className="image">
-            <Image
-              src={getPromoItem()}
-              width={110}
-              height={110}
-              imageType="isHomepageImage"
-              teaseContentType={
-                contentType === 'video' || contentType === 'gallery'
-                  ? contentType
-                  : null
-              }
-              squareImage={true}
-            />
-          </a>
-        )}
-      </div>
+      {getPromoItem() && (
+        <a href={relativeURL} className="image">
+          <Image
+            src={getPromoItem()}
+            width={110}
+            height={110}
+            imageType="isHomepageImage"
+            teaseContentType={
+              contentType === 'video' || contentType === 'gallery'
+                ? contentType
+                : null
+            }
+            squareImage={true}
+          />
+        </a>
+      )}
     </div>
   );
 };

@@ -70,23 +70,41 @@ const ListEnhanced = ({ customFields }) => {
           <Fragment key={sectionIndex}>
             <section className="section">
               <div className="content">
-                <div className="list-items">
                 {sectionIndex === 0 && getNewsTipText(textBox, 'desktop')}
+                <div className="list-items">
                   <span className="tablet-line"></span>
-                  {filteredStories.map((el, storyIndex) => {
-                    if (
-                      sectionIndex * storiesPerLoad <= storyIndex
-                      && storyIndex < (sectionIndex + 1) * storiesPerLoad
-                    ) {
-                      return (
-                        <ListItem
-                          key={`${sectionIndex}-${storyIndex}`}
-                          {...el}
-                        />
-                      );
-                    }
-                    return null;
-                  })}
+                  <div className="col-1">
+                    {filteredStories.map((el, storyIndex) => {
+                      if (
+                        sectionIndex * storiesPerLoad <= storyIndex
+                        && storyIndex < (sectionIndex + 1) * storiesPerLoad - 5
+                      ) {
+                        return (
+                          <ListItem
+                            key={`${sectionIndex}-${storyIndex}`}
+                            {...el}
+                          />
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
+                  <div className="col-2">
+                    {filteredStories.map((el, storyIndex) => {
+                      if (
+                        sectionIndex * storiesPerLoad + 5 <= storyIndex
+                        && storyIndex < (sectionIndex + 1) * storiesPerLoad
+                      ) {
+                        return (
+                          <ListItem
+                            key={`${sectionIndex}-${storyIndex}`}
+                            {...el}
+                          />
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
                 </div>
                 {!noAds && (
                   <>
