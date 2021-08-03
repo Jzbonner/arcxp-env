@@ -128,7 +128,9 @@ class Api {
 
         if (type === 'video') {
           const { basic = {} } = promoItems || {};
-          const { caption, url: promoImageUrl } = basic || {};
+          console.log('promoItems ', promoItems);
+          const { caption, resized_obj: resizedObj } = basic || {};
+          const { src: videoThumbResized } = resizedObj || {};
           const videoCaption = caption || '';
           const { url: mp4Url, stream_type: videoType } = streams && streams[0] ? streams[0] : {};
           let mediumType = '';
@@ -182,7 +184,7 @@ class Api {
                     {
                       _name: 'media:thumbnail',
                       _attrs: {
-                        url: promoImageUrl,
+                        url: videoThumbResized,
                       },
                     },
                   ],
