@@ -1,15 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import getProperties from 'fusion:properties';
-import fetchEnv from '../../global/utils/environment';
 import Lead from '../../../features/Lead/default';
 import '../relatedList/default.scss';
 import '../../../features/MostRead/default.scss';
 
-const EditorsPicks = ({ arcSite }) => {
-  const { editorsPicks } = getProperties(arcSite);
-  const currentEnv = fetchEnv();
-  const collectionId = editorsPicks[currentEnv];
+const EditorsPicks = ({ collectionId }) => {
   const customFields = {
     content: {
       contentConfigValues: {
@@ -30,12 +25,11 @@ const EditorsPicks = ({ arcSite }) => {
 };
 
 EditorsPicks.propTypes = {
-  arcSite: PropTypes.string,
+  collectionId: PropTypes.string,
 };
 
 EditorsPicks.defaultProps = {
   componentName: 'EditorsPicks',
-  arcSite: 'ajc',
 };
 
 export default EditorsPicks;
