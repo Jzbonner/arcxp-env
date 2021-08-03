@@ -10,6 +10,7 @@ const params = {
   section: 'text',
   host: 'text',
   limit: 'text',
+  convertToANS: 'checkbox',
 };
 
 // const fusionContext = useFusionContext();
@@ -18,7 +19,7 @@ const params = {
 
 const fetch = (query = {}) => {
   const {
-    host = 'ajc.com', limit = '10', arcSite = 'ajc',
+    host = 'ajc.com', limit = '10', arcSite = 'ajc', convertToANS = false,
   } = query;
   const { siteDomainURL } = getProperties(arcSite);
   let { section = '' } = query;
@@ -62,15 +63,15 @@ const fetch = (query = {}) => {
       return filterMostRead(data, host, blacklist);
     })
     .then((data) => {
-      if (Array.isArray(data)) {
-        mostReadContent = [...data];
+      mostReadContent = [...data];
+      if (Array.isArray(data) && convertToANS === '') {
         const urls = [];
         data.map((element) => {
           const path = element && element.path && element.path.replace('ajc.com', `${siteDomainURL}`);
           return urls.push(path);
         });
-        const contentRequestUri = `${CONTENT_BASE}/content/v4/urls`;
-        return axios.post(contentRequestUri, { urls }, {
+        const contentRequestUri = `${CONTENT_BASE}/content/v4/urls?website=${arcSite}`;
+        return axios.post(contentRequestUri, urls, {
           headers: {
             Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
           },
@@ -78,18 +79,24 @@ const fetch = (query = {}) => {
       }
       return data;
     })
-    .then((data) => {
-      const mostReadWithArcData = mostReadContent.map((element, i) => {
-        const path = element && element.path && `${element.path.split('ajc.com')[1]}`;
-        // checking the id's and merging the two array
-        if (path && data[i] && data[i].website_url !== undefined && path === data[i].website_url) {
-          return Object.assign({}, element, data[i]);
-        }
-        return element;
-      });
-      return mostReadWithArcData;
+    .then(({ data }) => {
+      if (convertToANS === '') {
+      /* eslint-disable camelcase */
+        const { content_elements } = data;
+        const mostReadWithArcData = mostReadContent.map((element, i) => {
+          const path = element && element.path && `${element.path.split('ajc.com')[1]}`;
+          // checking the id's and merging the two array
+          if (path && content_elements[i] && content_elements[i].website_url !== undefined && path === content_elements[i].website_url) {
+            return Object.assign({}, element, content_elements[i]);
+          }
+          return element;
+        });
+        return mostReadWithArcData;
+      }
+      return mostReadContent;
     })
     .catch((error) => {
+      /* eslint-disable no-console */
       console.error('Error: ', error);
     });
   return promiseData;
