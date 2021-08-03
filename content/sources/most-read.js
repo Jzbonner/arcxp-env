@@ -10,7 +10,7 @@ const params = {
   section: 'text',
   host: 'text',
   limit: 'text',
-  convertToANS: 'checkbox',
+  includeStoryContent: 'checkbox',
 };
 
 // const fusionContext = useFusionContext();
@@ -19,7 +19,7 @@ const params = {
 
 const fetch = (query = {}) => {
   const {
-    host = 'ajc.com', limit = '10', arcSite = 'ajc', convertToANS = false,
+    host = 'ajc.com', limit = '10', arcSite = 'ajc', includeStoryContent = false,
   } = query;
   const { siteDomainURL } = getProperties(arcSite);
   let { section = '' } = query;
@@ -64,7 +64,7 @@ const fetch = (query = {}) => {
     })
     .then((data) => {
       mostReadContent = [...data];
-      if (Array.isArray(data) && convertToANS === '') {
+      if (Array.isArray(data) && includeStoryContent === '') {
         const urls = [];
         data.map((element) => {
           const path = element && element.path && element.path.replace('ajc.com', `${siteDomainURL}`);
@@ -80,7 +80,7 @@ const fetch = (query = {}) => {
       return data;
     })
     .then(({ data }) => {
-      if (convertToANS === '') {
+      if (includeStoryContent === '') {
       /* eslint-disable camelcase */
         const { content_elements } = data;
         const mostReadWithArcData = mostReadContent.map((element, i) => {
