@@ -13,9 +13,10 @@ const SectionLayout = (props) => {
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
+  const isHtmlOutput = outPutTypePresent && queryParams.outputType === 'html';
   const zonesCollection = [{ content: zone1 }];
 
-  return <SectionOutput zones={zonesCollection} layout={layout} noHeaderAndFooter={noHeaderAndFooter} isSectionSpecialOne={true} />;
+  return <SectionOutput zones={zonesCollection} layout={layout} noHeaderAndFooter={noHeaderAndFooter} isSectionSpecialOne={true} isHtmlOutput={isHtmlOutput} />;
 };
 
 SectionLayout.sections = ['Zone 1'];
