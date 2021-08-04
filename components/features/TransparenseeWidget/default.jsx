@@ -2,22 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InnerHTML from 'dangerously-set-html-content';
 import { useContent } from 'fusion:content';
-import { useFusionContext } from 'fusion:context';
 import './default.scss';
-// import renderCustomHtml from '../../_helper_components/article/contentElements/components/html/renderCustomHtml';
 
 const TransparenseeWidget = (props) => {
   const { customFields } = props;
   const { widgetURL } = customFields;
-  const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
-  let formSrcUrl;
-
-  if (arcSite === 'ajc') formSrcUrl = 'https://events.ajc.com/events';
-  if (arcSite === 'dayton') formSrcUrl = 'https://thingstodo.dayton.com/events';
-  if (arcSite === 'journal-news') formSrcUrl = 'https://thingstodo.journal-news.com/events';
-  if (arcSite === 'springfield-news-sun') formSrcUrl = 'https://thingstodo.springfieldnewssun.com/events';
-
   const callback = useContent({
     source: 'widget',
     query: {

@@ -8,11 +8,11 @@
   position: relative;
   border-radius: 6px;
   background-color: #fff;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .24);
   width: 100%;
 
   .ttd-search__input {
-    border-radius: 0.3125rem;
+    border-radius: .3125rem;
     border: 0;
     height: 3.25rem;
     width: 88%;
@@ -30,10 +30,12 @@
 }
 
 .c-transparenseeWidget {
+
   .pseudo-searchbox {
     margin-top: 0 !important;
     border-left: 1px solid #f6f6f6;
     align-items: center;
+
     @include breakpoint(desktop-sm) {
       margin: 1% 0 !important;
     }
@@ -41,6 +43,7 @@
     .pseudo-input-text {
       height: 40px;
     }
+
     .pointslocal-icon.close {
       margin-top: 6px;
     }
@@ -52,33 +55,44 @@
       left: 15.5%;
     }
   }
+
   .pointslocal-events-grid {
+
     .mdl-grid--no-spacing {
+
       .mdl-cell--hide-tablet {
         display: block !important;
       }
+
       .mdl-cell--2-col {
         width: 33.33%;
         margin-top: 5px;
+
         @include breakpoint(desktop-sm) {
           width: 16.3%;
           margin-right: 2px;
         }
       }
+
       .mdl-cell--6-col {
         width: 100%;
+
         @include breakpoint(desktop-sm) {
           width: 50%;
           margin-top: 1px;
         }
       }
+
       .pseudo-input-text {
         width: 80%;
       }
+
       .pseudo-input-submit {
         width: 20%;
+
         i {
           margin-left: 0;
+
           &:before {
             margin-top: 4px;
           }
@@ -96,43 +110,55 @@
     padding-top: 5px;
     max-height: 60vh;
     overflow-y: scroll;
+
     @include breakpoint(desktop-sm) {
       padding-top: 20px;
     }
+
     .mdl-cell--3-col {
       width: 100%;
+
       @include breakpoint(tablet) {
         width: 50%;
         margin-left: -10px;
       }
+
       @include breakpoint(desktop-sm) {
         width: 25%;
         margin-left: 0;
       }
+
       ul {
         margin-left: 10%;
+
         li {
+
           .mdl-checkbox {
             height: 30px;
             display: flex;
             align-items: center;
             width: 90%;
             border-bottom: 1px solid #eee;
+
             @include breakpoint(desktop-sm) {
               height: auto;
               padding-bottom: 4px;
             }
+
             .mdl-checkbox__box-outline {
               top: 8px;
               height: 13px;
               width: 13px;
+
               @include breakpoint(desktop-sm) {
                 top: 0;
               }
             }
+
             .mdl-checkbox__label {
               font-size: 16px;
               line-height: 1;
+
               @include breakpoint(desktop-sm) {
                 font-size: 13px;
               }
@@ -141,8 +167,10 @@
         }
       }
     }
+
     .pointslocal-search-actions {
       margin-top: 20px;
+
       .btn-cancel,
       .btn-apply {
         min-width: unset;
@@ -159,45 +187,58 @@
   }
 
   .search-options-times {
+
     .datepicker-or {
       right: -300%;
       background-color: #149acf;
       color: #fff;
+
       @include breakpoint(desktop-sm) {
         right: 100%;
         top: -110px;
       }
     }
+
     .mdl-cell:nth-child(1) {
+
       .label {
         font-weight: 700;
       }
+
       ul {
         margin-left: 10% !important;
       }
     }
+
     .mdl-cell:nth-child(1),
     .mdl-cell:nth-child(2) {
       display: none;
+
       @include breakpoint(tablet) {
         display: block;
       }
     }
+
     .mdl-cell--6-col {
       width: 100%;
+
       @include breakpoint(desktop-sm) {
         width: 60%;
       }
     }
+
     & > .mdl-cell:nth-child(3) {
       margin-left: -5.15% !important;
+
       .label {
         font-weight: 700;
       }
+
       @include breakpoint(tablet) {
         margin-left: -2.75% !important;
       }
     }
+
     #datepicker-start,
     #datepicker-end {
       width: 100%;
