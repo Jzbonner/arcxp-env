@@ -13,9 +13,6 @@ const params = {
   includeStoryContent: 'checkbox',
 };
 
-// const fusionContext = useFusionContext();
-// const { arcSite } = fusionContext;
-
 
 const fetch = (query = {}) => {
   const {
@@ -67,7 +64,7 @@ const fetch = (query = {}) => {
       if (Array.isArray(data) && includeStoryContent === '') {
         const urls = [];
         data.map((element) => {
-          const path = element && element.path && element.path.replace('ajc.com', `${siteDomainURL}`);
+          const path = element && element.path && element.path.replace(host, `${siteDomainURL}`);
           return urls.push(path);
         });
         const contentRequestUri = `${CONTENT_BASE}/content/v4/urls?website=${arcSite}`;
@@ -84,7 +81,7 @@ const fetch = (query = {}) => {
       /* eslint-disable camelcase */
         const { content_elements } = data;
         const mostReadWithArcData = mostReadContent.map((element, i) => {
-          const path = element && element.path && `${element.path.split('ajc.com')[1]}`;
+          const path = element && element.path && `${element.path.split(host)[1]}`;
           // checking the id's and merging the two array
           if (path && content_elements[i] && content_elements[i].website_url !== undefined && path === content_elements[i].website_url) {
             return Object.assign({}, element, content_elements[i]);
