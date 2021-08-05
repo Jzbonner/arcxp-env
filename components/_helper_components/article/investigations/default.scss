@@ -20,6 +20,27 @@
     }
   }
 
+  .c-sponsor {
+    @include text-styles(.75rem, 1, "Gordita-Medium");
+
+    width: max-content;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .c-sponsorOverlay {
+    background: #000;
+    padding: 5px;
+
+    @include text-styles(.75rem, 1, "Gordita");
+
+    font-weight: 400;
+
+    @include breakpoint(tablet) {
+      padding: 7.5px;
+    }
+  }
+
   .column-2 {
     display: none;
   }
