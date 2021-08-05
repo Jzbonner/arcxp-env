@@ -19,6 +19,16 @@
   align-items: center;
 }
 
+.b-flexColumn {
+  flex-direction: column;
+
+  &.-mobile {
+    @include breakpoint(tablet) {
+      flex-direction: initial;
+    }
+  }
+}
+
 .b-hidden {
   display: none;
 }
