@@ -39,7 +39,7 @@ const Section = ({
   if (childSections.length === 0) {
     return <>
       <li className={`nav-items nav-itemText ${ePaperClass} nav-itemText-${primarySectionID}`}>
-        <a href={link.indexOf('/') === 0 ? `${siteDomainURL}${link}` : link} target={newTab === 'true' ? '_blank' : '_self'}>
+        <a href={link.indexOf('/') === 0 ? `${siteDomainURL}${link}` : link} target={newTab === 'true' ? '_blank' : '_self'} rel='noopener noreferrer'>
           {name}
         </a>
       </li>

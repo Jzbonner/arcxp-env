@@ -36,7 +36,7 @@ const SponsorBanner = ({ sponsorID, ampPage }) => {
       return (
         <div className="c-sponsorBanner ">
           {bannerURL ? (
-            <a href={bannerURL} className="c-sponsorUrl" rel={openNewTabTrue ? 'noopener noreferrer' : null} target={openNewTabTrue ? '_blank' : '_self'}></a>
+            <a href={bannerURL} className="c-sponsorUrl" rel='noopener noreferrer' target={openNewTabTrue ? '_blank' : '_self'}></a>
           ) : null}
           <img
             src={currentWidth < minTabletViewWidth ? checkForMobileBanner : desktopBanner}
