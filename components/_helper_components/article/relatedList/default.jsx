@@ -30,7 +30,7 @@ const RelatedList = ({
       published: true,
       section: formattedPath,
       sort: true,
-      size: 30,
+      size: 15,
     },
   });
 

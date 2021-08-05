@@ -157,4 +157,8 @@ export default {
     sandbox: 'UZG4A6L2JBCZ5IKJGJXNFHTP2E',
     prod: 'DTSNNI7Z2RBX7DHMNGU52KDCVI',
   },
+  investigations: {
+    sandbox: 'UZG4A6L2JBCZ5IKJGJXNFHTP2E',
+    prod: 'XRV7L22CLZDURCMKARMKA3JR74',
+  },
 };

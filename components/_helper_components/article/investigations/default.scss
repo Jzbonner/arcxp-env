@@ -1,0 +1,28 @@
+@import "../../../../src//styles/base/";
+
+.endOfStory {
+  width: 50%;
+
+  .c-homeLeadContainer {
+
+    .column-1 {
+      width: 100%;
+
+      .c-homeList.left-photo {
+        flex-wrap: nowrap;
+      }
+
+      .homeList-text {
+        max-width: unset;
+      }
+    }
+  }
+
+  .column-2 {
+    display: none;
+  }
+
+  + div {
+    margin-left: 30px;
+  }
+}
