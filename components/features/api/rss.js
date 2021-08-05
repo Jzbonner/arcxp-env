@@ -6,6 +6,7 @@ import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
 import handleSiteName from '../../layouts/_helper_functions/handleSiteName';
 import fetchEnv from '../../_helper_components/global/utils/environment';
 import { getFirst120CharsFromStory } from './_helper_functions/getFirst120CharFromStory';
+import resizer from '../../../content/sources/resizer';
 
 @Consumer
 class Api {
@@ -91,6 +92,8 @@ class Api {
         const formattedDate = formatApiTime(firstPubDate, displayDate);
 
         if (type === 'story') {
+          console.log('ITEM ', item.promo_items);
+
           const formatContentElements = formatNavigaContent(siteID, contentElements);
           const outputContent = noHeaderAndFooter || newsletterFeed ? `<![CDATA[${formatContentElements.join('')}]]>` : formattedDescription;
 
@@ -128,11 +131,21 @@ class Api {
 
         if (type === 'video') {
           const { basic = {} } = promoItems || {};
-          console.log('promoItems ', promoItems);
-          const { caption, resized_obj: resizedObj } = basic || {};
-          const { src: videoThumbResized } = resizedObj || {};
+          const { caption, resized_obj: resizedObj, url } = basic || {};
+          const { src: existingResizedVideoThumb } = resizedObj || {};
+          // fetch resized thumb when such is not existing
+          const imgQuery = {
+            src: url,
+            width: 500,
+            height: 282,
+            arcSite: siteID,
+          };
+          const { src: manuallyResizedThumb } = resizer.fetch(imgQuery);
+          const videoThumbResized = existingResizedVideoThumb || manuallyResizedThumb;
           const videoCaption = caption || '';
           const { url: mp4Url, stream_type: videoType } = streams && streams[0] ? streams[0] : {};
+          //
+          // const videoUrl = mp4Url
           let mediumType = '';
           if (videoType === 'ts') {
             mediumType = 'application/x-mpegurl';
