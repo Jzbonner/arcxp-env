@@ -113,6 +113,7 @@ const ListPage = ({
             })}
           </div>
             {moreStoriesToLoad && <LoadMoreButton
+              newStories={filteredStories}
               numberOfNewStories={filteredStories.length}
               handleOnClick={() => setStoryCount(storiesCount + storiesPerLoad)}
             />}

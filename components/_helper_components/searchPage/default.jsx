@@ -31,6 +31,8 @@ const SearchPage = ({
 
   const [sortByDateState, setSortByDateState] = useState(false);
   const [storyEls, setStoryEls] = useState([]);
+  const [columnSets, setColumnSets] = useState([]);
+  const [adIndex, setAdIndex] = useState(1);
   const RP01RP09Array = [];
 
   const RP01Count = storyEls.length / 10;
@@ -66,20 +68,20 @@ const SearchPage = ({
     const leftColumnLimit = (storyEls.length / 2) - 1;
     const rightColumnStartIndex = leftColumnLimit;
     return apiData.map((el, i) => {
-      if (columnValue === 1 && i <= leftColumnLimit) {
-        return <SearchItem key={`SearchItem-${i}`} {...el} listPage={true} />;
-      }
-
-      if (columnValue === 2 && i > rightColumnStartIndex) {
-        return <SearchItem key={`SearchItem-${i}`} {...el} listPage={true} />;
-      }
-
-      if (i !== 0 && (i + 1) % 10 === 0 && !noAds) {
+      const f = i + 2;
+      if (i !== 0 && (i + 1) % 10 === 0 && columnValue === 2 && !noAds) {
         return (<>
-          <SearchItem key={`SearchItem-${i}`} {...el} listPage={true} />;
-          <div className="list-mp05">{MP05(i + 1)}</div>
-          <div className="list-hp05"><div className="hp05-line"/>{HP05(i + 1)}</div>
+          <SearchItem key={`SearchItem-${i}`} {...el} listPage={true} noBorder={true} />
         </>);
+      // eslint-disable-next-line no-else-return
+      } else {
+        if (columnValue === 1 && i <= leftColumnLimit) {
+          return <SearchItem key={`SearchItem-${i}`} {...el} listPage={true} noBorder={f % 10 === 0} />;
+        }
+
+        if (columnValue === 2 && i > rightColumnStartIndex) {
+          return <SearchItem key={`SearchItem-${i}`} {...el} listPage={true} noBorder={f % 10 === 0} />;
+        }
       }
       return null;
     });
@@ -141,13 +143,32 @@ const SearchPage = ({
     const column1Output = getListsByColumn(storyEls, 1);
     const column2Output = getListsByColumn(storyEls, 2);
 
+    console.log('column 1', column1Output);
+    console.log('column 2', column2Output);
+
+    console.log('total items', column1Output.length + column2Output.length);
+
     return (
-      <div className="c-searchListContainter two-column left-photo-display-class b-margin-bottom-d15-m10">
+      <>
+      <div className="c-searchListContainter two-column left-photo-display-class">
         {column1Output && <div className="column-1">{column1Output}</div>}
         <div className="tablet-line"></div>
         {column2Output && <div className="column-2">{column2Output}</div>}
       </div>
+      <div className="list-mp05">{MP05(adIndex)}</div>
+      <div className="list-hp05"><div className="hp05-line"/>{HP05(adIndex)}</div>
+      </>
     );
+  };
+
+  const handleColumnSet = () => {
+    const newColumnSet = buildSearchItems();
+
+    const colArray = [newColumnSet];
+
+    console.log('newColumn', newColumnSet);
+
+    setColumnSets(currentSets => [...currentSets, ...colArray]);
   };
 
   const handleSortType = (sortType) => {
@@ -181,6 +202,16 @@ const SearchPage = ({
     }
   }, [searchMetaData]);
 
+  useEffect(() => {
+    if (storyEls.length > 1) {
+      handleColumnSet();
+    }
+  }, [storyEls]);
+
+  useEffect(() => {
+    console.log('column sets state', columnSets);
+    setAdIndex(adIndex + 1);
+  }, [columnSets]);
 
   return (
     <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
@@ -205,7 +236,7 @@ const SearchPage = ({
       </div>
       <div className="c-section with-rightRail">
         <div className="c-contentElements list-contentElements">
-          {buildSearchItems()}
+          {columnSets.length >= 1 && columnSets.map(el => el)}
           {<LoadMoreButton
             newStories={filteredTeases}
             handleOnClick={() => setPageCount(pageCount + 1)}

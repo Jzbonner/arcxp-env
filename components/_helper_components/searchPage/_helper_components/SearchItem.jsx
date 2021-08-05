@@ -73,6 +73,8 @@ const SearchItem = ({
   const promoWidth = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoWidth;
   const promoHeight = isLeftPhotoNoPhotoItem ? leftPhotoNoPhotoSizeInt : defaultPromoHeight;
 
+  console.log('noBorder', noBorder);
+
   function getPromoItem() {
     if (teaseImageObject) {
       return teaseImageObject;

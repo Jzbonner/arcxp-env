@@ -83,7 +83,7 @@
   margin-bottom: 10px;
   padding-bottom: 10px;
 
-  @include text-styles(.75rem, 1, "Gordita-Bold");
+  @include text-styles(0.75rem, 1, "Gordita-Bold");
 
   .sort-header {
     color: #313132;
@@ -95,7 +95,7 @@
 
   span:nth-child(0) {
     color: #313132;
-    font-size: .875rem;
+    font-size: 0.875rem;
   }
 
   span:nth-child(1),
@@ -124,7 +124,7 @@
     @include breakpoint(tablet) {
       margin-left: 15px;
       margin-right: 15px;
-      width: 1px;
+      min-width: 1px;
       height: inherit;
       background: #dadada;
     }
@@ -137,9 +137,11 @@
   .column-1,
   .column-2 {
     width: fit-content;
+    max-width: 100%;
 
     @include breakpoint(tablet) {
       width: 50%;
+      max-width: none;
     }
 
     @include breakpoint(desktop-sm) {
@@ -157,26 +159,31 @@
     max-width: none;
   }
 
-  .c-homeList.isSearch .lazyload-wrapper {
-    width: 80px;
-    height: 80px;
-    overflow: hidden;
-
-    @include breakpoint(desktop-sm) {
-      width: 104px;
-      height: 104px;
+  .c-homeList.isSearch {
+    &.no-border-bottom .bottom-content {
+      border-bottom: none;
     }
-  }
+
+    .lazyload-wrapper {
+      width: 80px;
+      height: 80px;
+      overflow: hidden;
+  
+      @include breakpoint(desktop-sm) {
+        width: 104px;
+        height: 104px;
+      }
+    }
+  } 
 
   .homeList-text {
-
     .headline {
       margin-bottom: 7px;
 
       a {
         color: #000;
 
-        @include text-styles(.938rem, 1.47, "Lora-Bold");
+        @include text-styles(0.938rem, 1.47, "Lora-Bold");
       }
     }
   }
@@ -184,7 +191,7 @@
   .item-text-preview {
     width: 247px;
 
-    @include text-styles(.75rem, 1.5, "Gordita");
+    @include text-styles(0.75rem, 1.5, "Gordita");
 
     @include breakpoint(desktop-sm) {
       width: 96%;
@@ -203,11 +210,10 @@
     .search-credit {
       color: #313132;
 
-      @include text-styles(.688rem, 1.82, "Gordita-Bold");
+      @include text-styles(0.688rem, 1.82, "Gordita-Bold");
     }
 
     .search-section {
-
       &:after {
         content: " ";
         width: 4px;
@@ -219,7 +225,6 @@
     }
 
     .search-credit {
-
       &:after {
         content: " ";
         width: 2px;
@@ -232,13 +237,15 @@
   }
 }
 
-.c-searchListContainter.left-photo-display-class .c-search-item .c-homeList.isSearch {
+.c-searchListContainter.left-photo-display-class
+  .c-search-item
+  .c-homeList.isSearch {
   display: flex;
   width: 100%;
   flex-direction: row-reverse;
   justify-content: space-between;
-  padding-bottom: .063rem;
-  margin-bottom: .875rem;
+  padding-bottom: 0.063rem;
+  margin-bottom: 0.875rem;
 
   .homeList-text .c-tease-icon {
     margin-left: 0;
@@ -246,5 +253,35 @@
 
   .homeList-image {
     margin-left: 0;
+  }
+}
+
+/* Ad-style overrides */
+
+.c-listPage .c-searchListContainter .list-hp05,
+.c-staffBioPage .list-hp05 {
+  display: flex;
+  height: 123px;
+  padding-bottom: 40px;
+  border-top: 1px solid #cdcdcd;
+
+  .hp05-line {
+
+    @include breakpoint(tablet) {
+      display: none;
+    }
+  }
+
+  .HP05.arcad {
+    @include breakpoint(tablet) {
+      display: block;
+      position: relative;
+      left: -25%;
+      top: 10px;
+    }
+
+    @include breakpoint(desktop-sm) {
+      position: static;
+    }
   }
 }
