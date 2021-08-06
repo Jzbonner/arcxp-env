@@ -10,6 +10,10 @@
     .column-1 {
       width: 100%;
 
+      @include between-breakpoints(mobile, tablet) {
+        padding-bottom: 0;
+      }
+
       .c-homeList.left-photo {
         flex-wrap: nowrap;
       }
