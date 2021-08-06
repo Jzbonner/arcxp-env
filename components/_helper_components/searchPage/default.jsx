@@ -135,6 +135,7 @@ const SearchPage = ({
       q: `${searchQuery}`,
       page: pageCount,
       arcSite,
+      sort: sortByDateState,
     },
   });
 
@@ -166,19 +167,24 @@ const SearchPage = ({
     setColumnSets(currentSets => [...currentSets, ...colArray]);
   };
 
-  const handleSortType = (sortType) => {
+  const resetStates = () => {
     setStoryEls([]);
+    setColumnSets([]);
+    setAdIndex(1);
+    setMapStartIndex(0);
+  };
+
+  const handleSortType = (sortType) => {
+    resetStates();
     if (sortType === actions.DATE) setSortByDateState(true);
     if (sortType === actions.RELEVANCE) setSortByDateState(false);
   };
 
   const handleButtonClick = (e) => {
-    /* searching with a new query means a new story set (and therefore, new column sets) - so reset the following states */
     e.preventDefault();
-    setStoryEls([]);
-    setColumnSets([]);
-    setAdIndex(1);
-    setMapStartIndex(0);
+    /* searching with a new query means a new story set
+    (and therefore, new column sets) - so, reset the states */
+    resetStates();
     setSearchQuery(searchInput);
   };
 
@@ -209,6 +215,7 @@ const SearchPage = ({
   useEffect(() => {
     if (columnSets.length >= 1) setAdIndex(adIndex + 1);
   }, [columnSets]);
+
 
   return (
     <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
