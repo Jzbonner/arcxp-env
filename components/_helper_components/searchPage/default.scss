@@ -139,6 +139,18 @@
     width: fit-content;
     max-width: 100%;
 
+    [class~='c-search-item']:last-of-type {
+      .bottom-content {
+        @include breakpoint(tablet) {
+          border-bottom: none;
+        }
+
+        @include breakpoint(desktop-sm) {
+          border-bottom: 1px solid #dadada;
+        }
+      }
+    }
+
     @include breakpoint(tablet) {
       width: 50%;
       max-width: none;

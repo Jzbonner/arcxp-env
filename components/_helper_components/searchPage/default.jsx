@@ -28,11 +28,11 @@ const SearchPage = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [pageCount, setPageCount] = useState(1);
-
   const [sortByDateState, setSortByDateState] = useState(false);
   const [storyEls, setStoryEls] = useState([]);
   const [columnSets, setColumnSets] = useState([]);
   const [adIndex, setAdIndex] = useState(1);
+  const [mapStartIndex, setMapStartIndex] = useState(0);
   const RP01RP09Array = [];
 
   const RP01Count = storyEls.length / 10;
@@ -65,9 +65,10 @@ const SearchPage = ({
   let filteredTeases = null;
 
   function getListsByColumn(apiData, columnValue = 1) {
-    const leftColumnLimit = (storyEls.length / 2) - 1;
+    const newSearchData = apiData.slice(mapStartIndex);
+    const leftColumnLimit = (newSearchData.length / 2) - 1;
     const rightColumnStartIndex = leftColumnLimit;
-    return apiData.map((el, i) => {
+    return newSearchData.map((el, i) => {
       const f = i + 2;
       if (i !== 0 && (i + 1) % 10 === 0 && columnValue === 2 && !noAds) {
         return (<>
@@ -142,11 +143,7 @@ const SearchPage = ({
 
     const column1Output = getListsByColumn(storyEls, 1);
     const column2Output = getListsByColumn(storyEls, 2);
-
-    console.log('column 1', column1Output);
-    console.log('column 2', column2Output);
-
-    console.log('total items', column1Output.length + column2Output.length);
+    const currentAdIndex = adIndex;
 
     return (
       <>
@@ -155,8 +152,8 @@ const SearchPage = ({
         <div className="tablet-line"></div>
         {column2Output && <div className="column-2">{column2Output}</div>}
       </div>
-      <div className="list-mp05">{MP05(adIndex)}</div>
-      <div className="list-hp05"><div className="hp05-line"/>{HP05(adIndex)}</div>
+      <div className="list-mp05">{MP05(currentAdIndex)}</div>
+      <div className="list-hp05"><div className="hp05-line"/>{HP05(currentAdIndex)}</div>
       </>
     );
   };
@@ -165,8 +162,6 @@ const SearchPage = ({
     const newColumnSet = buildSearchItems();
 
     const colArray = [newColumnSet];
-
-    console.log('newColumn', newColumnSet);
 
     setColumnSets(currentSets => [...currentSets, ...colArray]);
   };
@@ -178,8 +173,12 @@ const SearchPage = ({
   };
 
   const handleButtonClick = (e) => {
+    /* searching with a new query means a new story set (and therefore, new column sets) - so reset the following states */
     e.preventDefault();
     setStoryEls([]);
+    setColumnSets([]);
+    setAdIndex(1);
+    setMapStartIndex(0);
     setSearchQuery(searchInput);
   };
 
@@ -196,6 +195,7 @@ const SearchPage = ({
         }
 
         if (storyEls.length > 1 && (pageCount !== searchMetaData && searchMetaData.metadata && parseInt(searchMetaData.metadata.page, 10))) {
+          setMapStartIndex(storyEls.length);
           setStoryEls(oldArray => [...oldArray, ...filteredTeases]);
         }
       }
@@ -203,14 +203,11 @@ const SearchPage = ({
   }, [searchMetaData]);
 
   useEffect(() => {
-    if (storyEls.length > 1) {
-      handleColumnSet();
-    }
+    if (storyEls.length > 1) handleColumnSet();
   }, [storyEls]);
 
   useEffect(() => {
-    console.log('column sets state', columnSets);
-    setAdIndex(adIndex + 1);
+    if (columnSets.length >= 1) setAdIndex(adIndex + 1);
   }, [columnSets]);
 
   return (
@@ -237,7 +234,7 @@ const SearchPage = ({
       <div className="c-section with-rightRail">
         <div className="c-contentElements list-contentElements">
           {columnSets.length >= 1 && columnSets.map(el => el)}
-          {<LoadMoreButton
+          {columnSets.length >= 1 && <LoadMoreButton
             newStories={filteredTeases}
             handleOnClick={() => setPageCount(pageCount + 1)}
           />}
