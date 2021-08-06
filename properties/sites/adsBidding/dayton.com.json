@@ -3,6 +3,7 @@
     {
       "mediaQuery": "(min-width: 1024px)",
       "sizesSupported": [
+        [300, 600],
         [300, 250]
       ],
       "labels": ["desktop"]
@@ -175,12 +176,12 @@
         "bids": [
           {
             "bidder": "appnexus",
-            "labels": ["desktop3", "tablet2"],
+            "labels": ["desktop", "tablet1"],
             "params": {
               "publisher": "Dayton.com",
               "placementGroup": "ROS",
-              "placementId": "19064887",
-              "placementName": "Dayton.com_ROS_DesktopTablet_RP01"
+              "placementId": "22151069",
+              "placementName": "Dayton.com_ROS_DesktopTablet_RP01_0621"
             }
           }
         ]
@@ -197,7 +198,7 @@
             "bidder": "appnexus",
             "labels": ["desktop"],
             "params": {
-              "publisher": "DDN",
+              "publisher": "Dayton.com",
               "placementGroup": "ROS",
               "placementId": "21716379",
               "placementName": "Dayton.com_ROS_Desktop_RP01_0621"
@@ -217,7 +218,7 @@
             "bidder": "appnexus",
             "labels": ["tablet1"],
             "params": {
-              "publisher": "DDN",
+              "publisher": "Dayton.com",
               "placementGroup": "ROS",
               "placementId": "21716380",
               "placementName": "Dayton.com_ROS_Tablet_RP01_0621"
@@ -246,6 +247,26 @@
         ]
       }
     },
+    "RP03": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop", "tablet1"],
+            "params": {
+              "publisher": "Dayton.com",
+              "placementGroup": "ROS",
+              "placementId": "22151088",
+              "placementName": "Dayton.com_ROS_DesktopTablet_RP03_0621"
+            }
+          }
+        ]
+      }
+    },
     "RP03-desktop": {
       "amazon": {
         "enabled": "true"
@@ -257,7 +278,7 @@
             "bidder": "appnexus",
             "labels": ["desktop"],
             "params": {
-              "publisher": "DDN",
+              "publisher": "Dayton.com",
               "placementGroup": "ROS",
               "placementId": "21716381",
               "placementName": "Dayton.com_ROS_Desktop_RP03_0621"
@@ -277,7 +298,7 @@
             "bidder": "appnexus",
             "labels": ["tablet1"],
             "params": {
-              "publisher": "DDN",
+              "publisher": "Dayton.com",
               "placementGroup": "ROS",
               "placementId": "21716382",
               "placementName": "Dayton.com_ROS_Tablet_RP03_0621"
@@ -295,12 +316,12 @@
         "bids": [
           {
             "bidder": "appnexus",
-            "labels": ["desktop3", "tablet2"],
+            "labels": ["desktop", "tablet1"],
             "params": {
               "publisher": "Dayton.com",
               "placementGroup": "ROS",
-              "placementId": "19064889",
-              "placementName": "Dayton.com_ROS_DesktopTablet_RP09"
+              "placementId": "22151081",
+              "placementName": "Dayton.com_ROS_DesktopTablet_RP09_0621"
             }
           }
         ]
@@ -317,7 +338,7 @@
             "bidder": "appnexus",
             "labels": ["desktop"],
             "params": {
-              "publisher": "DDN",
+              "publisher": "Dayton.com",
               "placementGroup": "ROS",
               "placementId": "21716383",
               "placementName": "Dayton.com_ROS_Desktop_RP09_0621"
@@ -337,7 +358,7 @@
             "bidder": "appnexus",
             "labels": ["tablet1"],
             "params": {
-              "publisher": "DDN",
+              "publisher": "Dayton.com",
               "placementGroup": "ROS",
               "placementId": "21716384",
               "placementName": "Dayton.com_ROS_Tablet_RP09_0621"
