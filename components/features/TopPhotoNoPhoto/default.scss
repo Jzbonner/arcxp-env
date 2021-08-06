@@ -58,14 +58,15 @@
         box-shadow: none;
         background-color: none;
         margin-top: 15px;
-        padding: 0;
+        border-bottom: 1px solid #cdcdcd;
+        padding: 0 0 15px;
         border-radius: unset;
 
         .headline {
           letter-spacing: -.16px;
           margin: 0 0 10px;
 
-          @include text-styles(1rem, 1.375, "Lora");
+          @include text-styles(1rem, 1.375, "Lora-Bold");
         }
       }
     }
