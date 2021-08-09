@@ -124,7 +124,7 @@
     @include breakpoint(tablet) {
       margin-left: 15px;
       margin-right: 15px;
-      width: 1px;
+      min-width: 1px;
       height: inherit;
       background: #dadada;
     }
@@ -137,9 +137,24 @@
   .column-1,
   .column-2 {
     width: fit-content;
+    max-width: 100%;
+
+    [class~="c-search-item"]:last-of-type {
+
+      .bottom-content {
+        @include breakpoint(tablet) {
+          border-bottom: none;
+        }
+
+        @include breakpoint(desktop-sm) {
+          border-bottom: 1px solid #dadada;
+        }
+      }
+    }
 
     @include breakpoint(tablet) {
       width: 50%;
+      max-width: none;
     }
 
     @include breakpoint(desktop-sm) {
@@ -157,14 +172,21 @@
     max-width: none;
   }
 
-  .c-homeList.isSearch .lazyload-wrapper {
-    width: 80px;
-    height: 80px;
-    overflow: hidden;
+  .c-homeList.isSearch {
 
-    @include breakpoint(desktop-sm) {
-      width: 104px;
-      height: 104px;
+    &.no-border-bottom .bottom-content {
+      border-bottom: none;
+    }
+
+    .lazyload-wrapper {
+      width: 80px;
+      height: 80px;
+      overflow: hidden;
+  
+      @include breakpoint(desktop-sm) {
+        width: 104px;
+        height: 104px;
+      }
     }
   }
 
@@ -209,7 +231,7 @@
     .search-section {
 
       &:after {
-        content: " ";
+        content: "";
         width: 4px;
         height: 15px;
         margin-left: 5px;
@@ -221,7 +243,7 @@
     .search-credit {
 
       &:after {
-        content: " ";
+        content: "";
         width: 2px;
         height: 15px;
         margin-left: 5px;
@@ -246,5 +268,34 @@
 
   .homeList-image {
     margin-left: 0;
+  }
+}
+
+/* Ad-style overrides */
+
+.c-listPage .c-searchListContainter .list-hp05,
+.c-staffBioPage .list-hp05 {
+  display: flex;
+  height: 123px;
+  padding-bottom: 40px;
+  border-top: 1px solid #cdcdcd;
+
+  .hp05-line {
+    @include breakpoint(tablet) {
+      display: none;
+    }
+  }
+
+  .HP05.arcad {
+    @include breakpoint(tablet) {
+      display: block;
+      position: relative;
+      left: -25%;
+      top: 10px;
+    }
+
+    @include breakpoint(desktop-sm) {
+      position: static;
+    }
   }
 }

@@ -33,6 +33,7 @@ const SearchItem = ({
   isTTDFeature = false,
   credits,
   description = {},
+  noBorder = false,
 }) => {
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -131,7 +132,7 @@ const SearchItem = ({
 
   return (
     <div className="c-search-item">
-      <div className={`c-homeList isSearch ${isMissingPromo} ${hidePromo ? 'no-photo' : ''}`}>
+      <div className={`c-homeList isSearch ${isMissingPromo}  ${hidePromo ? 'no-photo' : ''} ${noBorder ? 'no-border-bottom' : ''}`} >
         {!hidePromo && getPromoItem() && (
           <a href={relativeURL} className="homeList-image">
             <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'} />
@@ -179,6 +180,7 @@ SearchItem.propTypes = {
   teaseImageObject: PropTypes.object,
   credits: PropTypes.object,
   description: PropTypes.object,
+  noBorder: PropTypes.bool,
 };
 
 export default SearchItem;
