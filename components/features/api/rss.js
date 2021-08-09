@@ -7,6 +7,7 @@ import handleSiteName from '../../layouts/_helper_functions/handleSiteName';
 import fetchEnv from '../../_helper_components/global/utils/environment';
 import { getFirst120CharsFromStory } from './_helper_functions/getFirst120CharFromStory';
 import resizer from '../../../content/sources/resizer';
+import specialCaseVideoData from '../../../content/sources/special-case-video-data';
 
 @Consumer
 class Api {
@@ -92,8 +93,6 @@ class Api {
         const formattedDate = formatApiTime(firstPubDate, displayDate);
 
         if (type === 'story') {
-          console.log('ITEM ', item.promo_items);
-
           const formatContentElements = formatNavigaContent(siteID, contentElements);
           const outputContent = noHeaderAndFooter || newsletterFeed ? `<![CDATA[${formatContentElements.join('')}]]>` : formattedDescription;
 
@@ -143,70 +142,83 @@ class Api {
           const { src: manuallyResizedThumb } = resizer.fetch(imgQuery);
           const videoThumbResized = existingResizedVideoThumb || manuallyResizedThumb;
           const videoCaption = caption || '';
-          const { url: mp4Url, stream_type: videoType } = streams && streams[0] ? streams[0] : {};
-          //
-          // const videoUrl = mp4Url
-          let mediumType = '';
-          if (videoType === 'ts') {
-            mediumType = 'application/x-mpegurl';
-          } else if (videoType === 'mp4') {
-            mediumType = 'video/mp4';
-          }
-          const videoXmlObject = {
-            item: [
-              {
-                guid: `urn:uuid:${guid}`,
-              },
-              {
-                link: `https://${siteDomain}${canonicalUrl}`,
-              },
-              {
-                description: formattedDescription,
-              },
-              {
-                pubDate: formattedDate,
-              },
-              {
-                title,
-              },
-              {
-                author,
-              },
-              [
-                {
-                  _name: 'media:content',
-                  _attrs: {
-                    type: 'video',
-                    medium: `${mediumType}`,
-                    url: mp4Url,
-                  },
-                  _content: [
-                    {
-                      'media:title': title,
-                    },
-                    {
-                      'media:description': `<![CDATA[${videoCaption}]]>`,
-                    },
-                    {
-                      _name: 'media:credit',
-                      _attrs: {
-                        role: 'author',
-                      },
-                      _content: `${author}`, // for type video, author & media:credit are the same
-                    },
-                    {
-                      _name: 'media:thumbnail',
-                      _attrs: {
-                        url: videoThumbResized,
-                      },
-                    },
-                  ],
-                },
-              ],
-            ],
+          let { url: mp4Url, stream_type: videoType } = streams && streams[0] ? streams[0] : {};
+          const videoQuery = {
+            uuid: guid,
           };
-
-          return videoXmlObject;
+          let mediumType = '';
+          const videoXmlObject = (vidType) => {
+            if (vidType === 'ts') {
+              mediumType = 'application/x-mpegurl';
+            } else if (vidType === 'mp4') {
+              mediumType = 'video/mp4';
+            }
+            return {
+              item: [
+                {
+                  guid: `urn:uuid:${guid}`,
+                },
+                {
+                  link: `https://${siteDomain}${canonicalUrl}`,
+                },
+                {
+                  description: formattedDescription,
+                },
+                {
+                  pubDate: formattedDate,
+                },
+                {
+                  title,
+                },
+                {
+                  author,
+                },
+                [
+                  {
+                    _name: 'media:content',
+                    _attrs: {
+                      type: 'video',
+                      medium: `${mediumType}`,
+                      url: mp4Url,
+                    },
+                    _content: [
+                      {
+                        'media:title': title,
+                      },
+                      {
+                        'media:description': `<![CDATA[${videoCaption}]]>`,
+                      },
+                      {
+                        _name: 'media:credit',
+                        _attrs: {
+                          role: 'author',
+                        },
+                        _content: `${author}`, // for type video, author & media:credit are the same
+                      },
+                      {
+                        _name: 'media:thumbnail',
+                        _attrs: {
+                          url: videoThumbResized,
+                        },
+                      },
+                    ],
+                  },
+                ],
+              ],
+            };
+          };
+          // if standalone videos are fetched with collection-content-api, the stream url is missing
+          // secondary video API call is necessary to get the URL
+          if (!mp4Url) {
+            const getVideoStreamUrl = specialCaseVideoData.fetch(videoQuery);
+            getVideoStreamUrl.then((result) => {
+              const { url: missingUrl, stream_type: streamType } = (result && result.streams && result.streams[0]) || {};
+              mp4Url = missingUrl;
+              videoType = streamType;
+            })
+              .then(() => console.log('videoXmlObject ', videoXmlObject(videoType)))
+              .then(() => videoXmlObject(videoType));
+          } videoXmlObject(videoType);
         }
         // Standalone Gallery
         if (type === 'gallery') {
