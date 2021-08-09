@@ -15,7 +15,7 @@ function encodeSrc(src) {
 export default {
 
   fetch({
-    srcArray, src, height = 600, width = 1000, srcSetSizes = [], originalHeight, originalWidth, smart, focalCoords, arcSite, isGallery = false,
+    srcArray, src, height, width = 1000, srcSetSizes = [], originalHeight, originalWidth, smart, focalCoords, arcSite, isGallery = false,
   }) {
     const fetchImageData = (
       imageSrc, imageHeight, imageWidth, imageSrcSetSizes, originalImageHeight, originalImageWidth, smartCrop, imageFocalCoords,
@@ -69,7 +69,7 @@ export default {
         const outputUrlArray = [];
         imageSrcSetSizes.forEach((size) => {
           reqWidth = size[0] || imageWidth;
-          reqHeight = size[1] || imageHeight;
+          reqHeight = size[1] || imageHeight || 0; // Used to resize the image proportionally
           const imgDimensions = [reqWidth, reqHeight];
           const isInDimensions = allowedDimensions.find((item) => {
             if (item[0] === imgDimensions[0] && item[1] === imgDimensions[1]) return true;

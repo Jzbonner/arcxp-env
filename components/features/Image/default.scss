@@ -1,0 +1,24 @@
+@import "../../../src/styles/base/breakpoints";
+
+.c-image-feature {
+  height: min-content;
+  width: 100%;
+  text-align: center;
+
+  @include breakpoint(desktop-sm) {
+    min-width: var(--width, initial);
+    max-width: var(--width, initial);
+
+    &:not(:first-child) {
+      margin-left: 1rem;
+    }
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+
+  img {
+    width: 100%;
+  }
+}

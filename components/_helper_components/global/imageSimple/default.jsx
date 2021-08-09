@@ -20,7 +20,7 @@ const ImageSimple = ({
   const { deployment, contextPath } = useAppContext();
 
   const getPath = () => {
-    if (src.includes('data:image/svg+xml')) {
+    if (src.includes('data:image/svg+xml') || src.endsWith('.gif')) {
       return src;
     }
     return `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${src}`)}`;
