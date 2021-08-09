@@ -30,20 +30,20 @@
     border-bottom: 1px solid #cdcdcd;
     padding-bottom: 15px;
 
-    @include text-styles(1, 1.82, "Gordita");
+    @include text-styles(1rem, 1.82, "Gordita");
   
     @include breakpoint(desktop-sm) {
-      @include text-styles(1, 1.54, "Gordita");
+      @include text-styles(1rem, 1.54, "Gordita");
     }
     
     p,
     strong {
       color: #313132;
 
-      @include text-styles(1, 1.82, "Gordita");
+      @include text-styles(1rem, 1.82, "Gordita");
   
       @include breakpoint(desktop-sm) {
-        @include text-styles(1 1.54, "Gordita");
+        @include text-styles(1rem, 1.54, "Gordita");
       }
     }
 
