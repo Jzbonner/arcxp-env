@@ -1,10 +1,10 @@
-export default (data, length, isInnerData = false) => {
+export default (data = [], length, isInnerData = false) => {
   let counter = 0;
   let pagesData;
   if (isInnerData) {
     pagesData = data;
   } else {
-    pagesData = data.pages;
+    pagesData = data?.pages || [];
   }
   pagesData.forEach((page) => {
     if (!page.title) {
