@@ -27,13 +27,13 @@ const CustomInfoBox = ({ data }) => {
           dividerIndex = i;
           dividerSet = true;
         }
-        infoBoxContent.push(<hr />);
+        infoBoxContent.push(<hr key={`divider${i}`} />);
         break;
       case 'text':
         infoBoxContent.push(<p key={`p${i}`}>{content}</p>);
         break;
       case 'header':
-        infoBoxContent.push(<h3 key={`h${level}-${i}`}>${content}</h3>);
+        infoBoxContent.push(<h3 key={`h${level}-${i}`}>{content}</h3>);
         break;
       case 'image':
         // a height of 0 makes the height proportional to the width

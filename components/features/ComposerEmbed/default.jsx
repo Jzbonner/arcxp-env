@@ -6,33 +6,39 @@ import CustomInfoBox from '../../_helper_components/embed/CustomInfoBox/default'
 
 const ComposerEmbed = (props) => {
   const { customFields: { id } } = props;
-  const { appContext } = useAppContext();
+  const appContext = useAppContext();
   const { globalContent } = appContext;
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
-  let embedData = globalContent;
-  if (!embedData) {
-    embedData = useContent({
-      source: 'content-api',
-      query: {
-        id,
-        arcSite,
-      },
-    });
+
+  const renderEmbed = (embedData) => {
+    const { type, subtype } = embedData;
+
+    if (type !== 'story') return <p>this feature is only compatible with stories (and this is {type} content)</p>;
+
+    switch (subtype.toLowerCase()) {
+      case 'infobox':
+        return <CustomInfoBox data={embedData} />;
+      default:
+        return <p>this is {subtype} content</p>;
+    }
+  };
+
+  if (Object.keys(globalContent).length) {
+    return renderEmbed(globalContent);
   }
 
-  if (!embedData) return false;
+  const embedData = useContent({
+    source: 'content-api',
+    query: {
+      id,
+      arcSite,
+    },
+  });
 
-  const { type, subtype } = embedData;
+  if (!embedData) return null;
 
-  if (type !== 'story') return <p>this feature is only compatible with stories (and this is {type} content)</p>;
-
-  switch (subtype.toLowerCase()) {
-    case 'infobox':
-      return <CustomInfoBox data={embedData} />;
-    default:
-      return <p>this is {subtype} content</p>;
-  }
+  return renderEmbed(embedData);
 };
 
 ComposerEmbed.propTypes = {
