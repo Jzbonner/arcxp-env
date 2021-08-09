@@ -1,6 +1,7 @@
 @import "./../../../src/styles/base";
 
 .c-LeftPhotoNoPhotoRow {
+  width: inherit;
 
   &:first-child {
     @include breakpoint(tablet) {
@@ -17,11 +18,7 @@
   }
 
   &:last-child {
-    border-bottom: 1px solid #cdcdcd;
-
-    @include breakpoint(desktop-sm) {
-      border-bottom: none;
-    }
+    border-bottom: none;
   }
 
   .LeftPhotoNoPhoto {
@@ -32,19 +29,33 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      border-left: 1px solid #cdcdcd;
       left: -30px;
       top: -30px;
       z-index: -1;
 
       @include breakpoint(desktop-sm) {
+        border-left: 1px solid #cdcdcd;
         left: -23px;
       }
     }
-  }
 
-  @include breakpoint(desktop-sm) {
-    margin-bottom: 15px;
+    &.withTitle {
+
+      &:before {
+        top: 0;
+
+        @include breakpoint(desktop-sm) {
+          height: calc(100% - 35px);
+        }
+      }
+    }
+
+    .column-1,
+    .column-2 {
+      @include between-breakpoints(tablet, desktop-sm) {
+        max-width: none;
+      }
+    }
   }
 
   .row {

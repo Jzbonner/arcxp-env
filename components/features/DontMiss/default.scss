@@ -3,14 +3,12 @@
 .c-dontMiss {
   margin-bottom: $min-Msection-margin;
 
-  @include breakpoint(tablet) {
-    padding: 0 20px;
-    border-left: solid 1px #cdcdcd;
-    margin-left: -20px;
-  }
-
   @include breakpoint(desktop-sm) {
-    width: 100%;
+    border-left: solid 1px #cdcdcd;
+    width: calc(100% - 10px);
+    margin-left: -10px;
+    padding-left: 20px;
+    padding-right: 0;
     margin-bottom: $min-DTsection-margin;
   }
   

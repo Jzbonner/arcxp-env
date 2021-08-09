@@ -50,7 +50,8 @@
   padding-top: 30px;
 
   .c-section {
-    max-width: 1600px;
+    max-width: 1540px;
+    margin: 0 auto;
 
     &.with-rightRail {
       @include breakpoint(desktop-sm) {
@@ -127,15 +128,11 @@
 // styling for "full width" ads on home/section pages
 
 @mixin arc-ad-full-width {
-  width: 100vw;
-
-  @include breakpoint(desktop-sm) {
-    width: calc(100vw - 1rem - 1px);
-    padding-bottom: 5px;
-  }
+  width: auto;
 
   &.c-HS02 {
     padding-bottom: 5px;
+    width: inherit;
 
     .arcad {
       padding-bottom: 0;
@@ -145,16 +142,11 @@
   }
 
   .arcad {
-    width: 100vw;
-    max-width: 1600px;
+    width: inherit;
+    max-width: 1540px;
     text-align: center;
     margin: 0 auto;
     padding-bottom: 10px;
-
-    @include breakpoint(desktop-sm) {
-      width: calc(100vw - 1rem - 1px);
-      padding-bottom: 5px;
-    }
 
     > div,
     > iframe {

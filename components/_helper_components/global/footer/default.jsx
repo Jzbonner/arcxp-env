@@ -41,7 +41,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="footer-wrapper">
+    <div className="footer-wrapper b-sectionHomeMaxWidth">
       <footer className="c-footer b-clear-both">
         <div className="logo-row">
           <div className="col">

@@ -1,4 +1,5 @@
 const schemaName = 'article';
+const ttl = 259200;
 
 const params = {
   path: 'text',
@@ -17,6 +18,7 @@ const resolve = (query) => {
 };
 
 export default {
+  ttl,
   resolve,
   params,
   schemaName,

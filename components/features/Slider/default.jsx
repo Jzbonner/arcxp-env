@@ -21,9 +21,8 @@ const Slider = (customFields = {}) => {
     },
   } = customFields;
 
-  let { size: itemLimit } = contentConfigValues || {};
-  const startIndex = 0;
-  itemLimit = parseInt(itemLimit, 10) || 10;
+  // eslint-disable-next-line prefer-const
+  const { size: itemLimit } = contentConfigValues || {};
 
   const [sliderItems, setSliderItems] = useState(null);
   const [contentWidth, setContentWidth] = useState(0);
@@ -65,10 +64,10 @@ const Slider = (customFields = {}) => {
     if (el && !refArray.current.includes(el)) refArray.current.push(el);
   };
 
-  if (data && !sliderItems) setSliderItems(buildSliderItems(data, el => addToRefs(el, elRefs), startIndex, itemLimit));
+  if (data && !sliderItems) setSliderItems(buildSliderItems(data, el => addToRefs(el, elRefs), itemLimit));
 
   const isPad = typeof navigator !== 'undefined' ? navigator.userAgent.match(/iPad|Tablet/i) != null : false;
-  const itemOffsetWidth = elRefs.current && elRefs.current[0] ? elRefs.current[0].scrollWidth + marginOffset : null;
+  const itemOffsetWidth = elRefs.current && elRefs.current[0] ? elRefs.current[0].scrollWidth + marginOffset : 330;
 
   const calculateScrollLeft = (direction) => {
     if (direction === actions.LEFT) {
@@ -111,21 +110,6 @@ const Slider = (customFields = {}) => {
     return null;
   };
 
-  const handleMaxWidth = () => {
-    const sliderContent = document.getElementsByClassName(`itemList ${idSuffix}`);
-
-    if (!sliderContent || !sliderContent[0]) return null;
-
-    const sliderMaxWidth = window.getComputedStyle(sliderContent[0]).width;
-    const parsedMaxWidth = parseInt(sliderMaxWidth, 10);
-
-    if (parsedMaxWidth !== contentWidth) {
-      setContentWidth(parsedMaxWidth);
-    }
-
-    return null;
-  };
-
   const handleOverflowScroll = () => {
     if (wasButtonClicked) return null;
     const sliderContent = document.getElementsByClassName(`itemList ${idSuffix}`);
@@ -163,7 +147,7 @@ const Slider = (customFields = {}) => {
   };
 
   const sliderOutput = () => (<div ref={wrapperRef} className={`c-slider-wrapper
-      b-padding-d30-m20 ${getIsSpecial() ? 'is-special-feature' : ''}`}>
+      ${getIsSpecial() ? 'is-special-feature' : ''}`}>
     <FeatureTitle title={title} moreURL={moreURL} />
     <div className="c-slider">
       <div className={`c-slider-content ${idSuffix} ${isPad ? 'is-Tablet' : ''}`} onScroll={handleOverflowScroll}>
@@ -176,10 +160,10 @@ const Slider = (customFields = {}) => {
           <img src={LeftArrow} />
         </a>
         <ScrollBar
-          maxWidth={contentWidth}
           maxScrollLeft={maxScrollLeft}
           currentScrollLeft={scrollLeft}
           sliderId={idSuffix}
+          sliderContentElRef={contentRef}
         />
         <a className="c-slider-button is-right" onClick={() => handleArrowClick(actions.RIGHT)}>
           <img src={RightArrow} />
@@ -196,10 +180,6 @@ const Slider = (customFields = {}) => {
   useEffect(() => {
     genId();
   }, []);
-
-  useEffect(() => {
-    handleMaxWidth();
-  }, [idSuffix]);
 
   useEffect(() => {
     handleButtonScrollEffect();

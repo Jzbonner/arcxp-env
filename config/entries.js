@@ -14,6 +14,8 @@ console.log(chalk.yellow("Building assets for: ") + chalk.green(buildSites));
 buildSites.forEach(site => {
   entries[site] = `./src/websites/${site}/${site}.scss`;
   entries[`${site}-amp`] = `./src/websites/${site}/amp.scss`;
+  entries[`${site}-content`] = `./src/websites/${site}/content.scss`;
+  entries[`${site}-pb`] = `./src/websites/${site}/pb.scss`;
 });
 
 module.exports = entries;

@@ -1,0 +1,57 @@
+@import "../../../../src//styles/base/";
+
+.endOfStory {
+  @include breakpoint(tablet) {
+    width: 50%;
+  }
+
+  .c-homeLeadContainer {
+
+    .column-1 {
+      width: 100%;
+
+      @include between-breakpoints(mobile, tablet) {
+        padding-bottom: 0;
+      }
+
+      .c-homeList.left-photo {
+        flex-wrap: nowrap;
+      }
+
+      .homeList-text {
+        max-width: unset;
+      }
+    }
+  }
+
+  .c-sponsor {
+    @include text-styles(.75rem, 1, "Gordita-Medium");
+
+    width: max-content;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .c-sponsorOverlay {
+    background: #000;
+    padding: 5px;
+
+    @include text-styles(.75rem, 1, "Gordita");
+
+    font-weight: 400;
+
+    @include breakpoint(tablet) {
+      padding: 7.5px;
+    }
+  }
+
+  .column-2 {
+    display: none;
+  }
+
+  + div {
+    @include breakpoint(tablet) {
+      margin-left: 30px;
+    }
+  }
+}

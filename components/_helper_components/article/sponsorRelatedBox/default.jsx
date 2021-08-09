@@ -53,13 +53,25 @@ const SponsorRelatedBox = ({
     const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor, uuid);
 
     if (!boxContent || (boxContent && boxContent.length < 1)) return null;
+    let mainTitle = '';
+    let subTitle = '';
+
+    if (boxTitle && boxTitle.includes('sponsored')) {
+      mainTitle = boxTitle.slice(0, boxTitle.indexOf('sponsored'));
+      subTitle = boxTitle.slice(boxTitle.indexOf('sponsored'));
+    }
 
     const lastItemInArray = boxContent.slice(-1).pop();
     return (
       <div className={'c-sponsor-box'}>
         {boxTitle && (
           <div className={'sponsor-header'}>
-            <h1>{`More from ${boxTitle}`}</h1>
+            {
+              mainTitle && subTitle ? <>
+                <h1>{`More from ${mainTitle}`}</h1>
+                <h2>{`${subTitle}`}</h2>
+              </> : <h1>{`More from ${boxTitle}`}</h1>
+            }
           </div>
         )}
         <div className="sponsor-ad">{SP01()}</div>

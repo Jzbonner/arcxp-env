@@ -35,14 +35,14 @@ import SponsorRelatedBox from '../_helper_components/article/sponsorRelatedBox/d
 import InterscrollerPlaceholder from '../_helper_components/article/interscroller/default';
 import SponsorStoryMessage from '../_helper_components/article/sponsorStoryMessage/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
-import '../../src/styles/container/_article-basic.scss';
-import '../../src/styles/base/_utility.scss';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
 import RelatedList from '../_helper_components/article/relatedList/default';
+import EndOfStory from '../_helper_components/article/endOfStory/default';
 import ConnextThankYouMessage from '../_helper_components/global/ConnextThankYouMessage/amp';
 import NonSubPremiumMessage from '../_helper_components/amp/nonSubPremiumMessage/default';
 import PaywallLimitMessage from '../_helper_components/amp/paywallLimitMessage/default';
 import SponsorRelatedBoxAMP from '../_helper_components/article/sponsorRelatedBox/amp';
+import PartnerBadge from '../_helper_components/article/partnerBadge/default';
 
 const start = 3;
 
@@ -220,14 +220,16 @@ const StoryPageLayout = () => {
           taxonomy={taxonomy}
           uuid={uuid} />
     )}
-    {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && (
-      <div className="c-section b-sectionHome-padding full-width b-clear-both">
-        <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage} />
-      </div>
+    {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && arcSite !== 'ajc' && (
+     <div className="c-section full-width b-clear-both">
+        <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage}/>
+     </div>
     )}
-    {/* about the author should be the last component of the story */}
-    {<div className="c-section b-sectionHome-padding full-width b-clear-both"><BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} /></div>}
-    {!noAds && !isHyperlocalContent && <div className="b-padding-top-30"><TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} /></div>}
+    {/* For Ohio, about the author should be the last component of the story, otherwise its about the author THEN editors picks , latest, and most popular */}
+    {<div className="c-section full-width b-clear-both"><BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />
+      {arcSite === 'ajc' && <EndOfStory arcSite={arcSite} taxonomy={taxonomy} uuid={uuid}/>}
+    </div>}
+    {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
     {!noAds && !isHyperlocalContent && !sponsorSectionID && (
       <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
     )}
@@ -242,10 +244,10 @@ const StoryPageLayout = () => {
       {!noHeaderAndFooter && (
         <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} ampPage={ampPage} noAds={noAds} />
       )}
-      <main className="c-articleContent b-contentMaxWidth">
+      <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
+      <main className="b-sectionHome-padding">
         <header className="b-margin-bottom-d30-m30">
-          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header article-header-padding'}>
-            <SponsorBanner sponsorID={sponsorSectionID} ampPage={ampPage} />
+          <div className={promoType === 'gallery' ? 'c-header-gallery' : 'c-header b-contentMaxWidth'}>
             <Headline
               headlines={headlines}
               basicItems={basicItems}
@@ -254,35 +256,37 @@ const StoryPageLayout = () => {
               contentType={type}
               lazyLoad={isMeteredStory} />
           </div>
-          <div
-            style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}
-            className="c-label-wrapper b-pageContainer b-margin-bottom-d7-m7"
-          >
-            {!isCommunityContributor && (
-              <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />
-            )}
+          <div className="c-articleMetaContainer b-contentMaxWidth b-margin-bottom-d30-m20">
+            <div className="c-articleBadge">
+              <ContributorBadge tags={tags} ampPage={ampPage}/>
+              <PartnerBadge sections={sections} ampPage={ampPage}/>
+            </div>
+            <div className="c-articleMetadata">
+              <div className="c-label-wrapper b-margin-bottom-d7-m7">
+                {!isCommunityContributor && (
+                  <SectionLabel label={label} taxonomy={taxonomy} ampPage={ampPage} sponsorContentLabel={sponsorContentLabel} />
+                )}
+              </div>
+              <div className="b-flexRow article-byline b-margin-bottom-d7-m7">
+                <Byline by={authorData} sections={sections} />
+              </div>
+              <TimeStamp
+                firstPublishDate={firstPublishDate}
+                displayDate={displayDate}
+                isHideTimestampTrue={isHideTimestampTrue}
+                ampPage={ampPage}
+                isHyperlocalContent={isHyperlocalContent && isCommunityContributor}
+                sponsorContentLabel={sponsorContentLabel}
+              />
+            </div>
           </div>
-          <div className="b-flexRow b-pageContainer article-byline b-margin-bottom-d7-m7">
-            <Byline by={authorData} sections={sections} />
-          </div>
-          <div className="b-margin-bottom-d7-m7" style={{ display: 'flex', justifyContent: 'flex-center', flexWrap: 'wrap' }}>
-            <TimeStamp
-              firstPublishDate={firstPublishDate}
-              displayDate={displayDate}
-              isHideTimestampTrue={isHideTimestampTrue}
-              ampPage={ampPage}
-              isHyperlocalContent={isHyperlocalContent && isCommunityContributor}
-              sponsorContentLabel={sponsorContentLabel}
-            />
-          </div>
-          <ContributorBadge tags={tags} ampPage={ampPage} />
           {ampPage && <SocialShare headlines={headlines} articleURL={articleURL} />}
-          <div className="b-flexRow b-flexCenter b-margin-bottom-d7-m7 b-pageContainer">
+          {subheadlines?.basic && <div className="b-flexRow b-flexCenter b-margin-bottom-d7-m7 b-contentMaxWidth">
             <SubHeadline subheadlines={subheadlines} />
-          </div>
+          </div>}
         </header>
 
-        <article>
+        <article className="c-articleContent">
           {!noAds && !ampPage && !isHyperlocalContent && (
             <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />

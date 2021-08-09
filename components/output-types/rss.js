@@ -6,12 +6,13 @@ const Xml = (props) => {
   const {
     siteProperties,
     globalContentConfig,
+    arcSite,
   } = props || {};
 
   const rssApi = new Api(props);
   const rssApiContent = rssApi.render();
 
-  const { orgName, websiteURL } = siteProperties || {};
+  const { orgName } = siteProperties || {};
   const { query } = globalContentConfig || {};
   const { id: collectionId } = query || {};
   const feedLink = collectionId ? `/list/${collectionId}` : '';
@@ -21,7 +22,7 @@ const Xml = (props) => {
     indent: '  ',
   };
 
-  return buildXML('rss', rssApiContent, { websiteURL, feedLink, orgName }, xmlOptions);
+  return buildXML('rss', rssApiContent, { arcSite, feedLink, orgName }, xmlOptions);
 };
 
 // XML content type

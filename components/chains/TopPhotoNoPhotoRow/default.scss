@@ -7,7 +7,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
 
-    @include breakpoint(desktop-sm) {
+    @include breakpoint(tablet) {
       flex-wrap: nowrap;
     }
   }

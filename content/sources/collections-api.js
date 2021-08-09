@@ -4,6 +4,7 @@ import AddFirstInlineImage from './helper_functions/AddFirstInlineImage';
 import FilterElements from './helper_functions/FilterElements';
 import GetCollectionData from './helper_functions/GetCollectionData';
 import FetchResizedImages from './helper_functions/FetchResizedImages';
+import getImageRequirements from './helper_functions/getImageRequirements';
 import filter from '../filters/collectionApiFilter';
 
 const schemaName = 'collections';
@@ -21,6 +22,7 @@ const fetch = (query) => {
     arcSite,
     id,
     size = 12,
+    from,
     displayClass = '',
     displayClassesRequiringImg = [],
     width = 500,
@@ -34,10 +36,11 @@ const fetch = (query) => {
 
   if (!activeSite) return [];
 
+  const requiresImageEveryX = getImageRequirements(displayClass, displayClassesRequiringImg);
   if (id) {
-    return GetCollectionData(activeSite, id, size)
+    return GetCollectionData(activeSite, id, size, from)
       .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
-      .then(data => FilterElements(data))
+      .then(data => FilterElements(data, requiresImageEveryX))
       .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes, squareImageSize, useSquareImageAfter))
       .then(data => data.map(el => pick(el, filter)))
       .catch((error) => {

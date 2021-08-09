@@ -2,10 +2,10 @@ import React from 'react';
 import SliderItem from '../../../_helper_components/home/Slider/SliderItem';
 import getItemThumbnail from './getItemThumbnail';
 
-const buildSliderItems = (sliderCollection, ref, startIndex, itemLimit, viewport) => {
+const buildSliderItems = (sliderCollection, ref, itemLimit, viewport) => {
   let elCount = 0;
-  const sliderItems = sliderCollection.map((elem, i) => {
-    if (startIndex <= i && elCount < itemLimit) {
+  const sliderItems = sliderCollection.map((elem) => {
+    if (elCount < itemLimit) {
       const itemThumbnail = getItemThumbnail(elem.teaseImageObject || elem.promo_items || elem.firstInlineImage);
 
       const data = {};

@@ -3,6 +3,7 @@
     {
       "mediaQuery": "(min-width: 1024px)",
       "sizesSupported": [
+        [300, 600],
         [300, 250]
       ],
       "labels": ["desktop"]
@@ -175,18 +176,58 @@
         "bids": [
           {
             "bidder": "appnexus",
-            "labels": ["desktop3", "tablet2"],
+            "labels": ["desktop", "tablet1"],
             "params": {
               "publisher": "DDN",
               "placementGroup": "ROS",
-              "placementId": "19064853",
-              "placementName": "DDN_ROS_DesktopTablet_RP01"
+              "placementId": "22151117",
+              "placementName": "DDN_ROS_DesktopTablet_RP01_0621"
+            }
+          }
+        ]
+      }
+    },
+    "RP01-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "21716368",
+              "placementName": "DDN_ROS_Desktop_RP01_0621"
             }
           }
         ]
       }
     },
     "RP01-tablet": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "21716371",
+              "placementName": "DDN_ROS_Tablet_RP01_0621"
+            }
+          }
+        ]
+      }
+    },
+    "RP01-story-tablet": {
       "amazon": {
         "enabled": "true"
       },
@@ -215,12 +256,52 @@
         "bids": [
           {
             "bidder": "appnexus",
-            "labels": ["desktop3", "tablet2"],
+            "labels": ["desktop", "tablet1"],
             "params": {
               "publisher": "DDN",
               "placementGroup": "ROS",
-              "placementId": "19064855",
-              "placementName": "DDN_ROS_DesktopTablet_RP03"
+              "placementId": "22151142",
+              "placementName": "DDN_ROS_DesktopTablet_RP03_0621"
+            }
+          }
+        ]
+      }
+    },
+    "RP03-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "21716372",
+              "placementName": "DDN_ROS_Desktop_RP03_0621"
+            }
+          }
+        ]
+      }
+    },
+    "RP03-tablet": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "21716373",
+              "placementName": "DDN_ROS_Tablet_RP03_0621"
             }
           }
         ]
@@ -235,18 +316,58 @@
         "bids": [
           {
             "bidder": "appnexus",
-            "labels": ["desktop3", "tablet2"],
+            "labels": ["desktop", "tablet1"],
             "params": {
               "publisher": "DDN",
               "placementGroup": "ROS",
-              "placementId": "19064856",
-              "placementName": "DDN_ROS_DesktopTablet_RP09"
+              "placementId": "22151134",
+              "placementName": "DDN_ROS_DesktopTablet_RP09_0621"
             }
           }
         ]
       }
     },
     "RP09-desktop": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "21716374",
+              "placementName": "DDN_ROS_Desktop_RP09_0621"
+            }
+          }
+        ]
+      }
+    },
+    "RP09-tablet": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet1"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "21716377",
+              "placementName": "DDN_ROS_Tablet_RP09_0621"
+            }
+          }
+        ]
+      }
+    },
+    "RP09-story-desktop": {
       "amazon": {
         "enabled": "true"
       },

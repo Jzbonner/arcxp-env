@@ -18,12 +18,13 @@ const fetch = (query) => {
     arcSite,
     id,
     size = 12,
+    from,
   } = query;
 
   const activeSite = arcSite || arcSiteAlt;
 
   if (id) {
-    return GetCollectionData(activeSite, id, size)
+    return GetCollectionData(activeSite, id, size, from)
       .then(data => StoryData(activeSite, data))
       .then(data => FilterGallery(data))
       .catch((error) => {

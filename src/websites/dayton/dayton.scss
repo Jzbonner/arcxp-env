@@ -11,3 +11,15 @@ $is-amp: false;
 //@import "components/**/*.scss";
 
 /* Import site specific overrides here */
+@media only screen and (min-width: 768px) {
+
+  .c-headerNav .c-login .btn-profile,
+  .c-headerNav .c-login .btn-profile:hover {
+    background: #117ab4;
+  }
+}
+
+.is-loggedIn .c-headerNav .c-login img,
+.c-headerNav .mobile-nav-activated .nav-mobile-login img {
+  filter: invert(48%) sepia(10%) saturate(3354%) hue-rotate(108deg) brightness(89%) contrast(90%);
+}

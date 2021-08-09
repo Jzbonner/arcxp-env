@@ -1,4 +1,4 @@
-export default (data, currentDisplayClass = '', requiredClasses = []) => {
+export default (data = [], currentDisplayClass = '', requiredClasses = []) => {
   const collectionElements = data;
 
   if (requiredClasses.some(requiredClass => requiredClass === currentDisplayClass)) {

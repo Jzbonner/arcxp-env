@@ -3,6 +3,7 @@
 @import "../../../src/styles/base/mixins";
 
 .c-flatpage {
+  height: auto;
 
   .RP01.arcad.b-margin-bottom-d40-m20 {
     margin-bottom: 0;
@@ -10,8 +11,19 @@
 
   .c-hp01-mp01,
   .c-hp05-mp05 {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     clear: both;
+  }
+
+  .c-hp01-mp01 {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 10px;
+  }
+
+  .border-top {
+    display: none;
   }
 
   article {
@@ -124,7 +136,8 @@
   @include breakpoint(desktop-lg) {
     
     &.b-sectionHomeMaxWidth {
-      max-width: 1600px;
+      max-width: 1540px;
+      margin: 0 auto;
     }
   }
 }

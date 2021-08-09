@@ -1,44 +1,58 @@
-export default (apiData) => {
+export default (apiData, requiresImageEveryX, feature) => {
   if (apiData) {
     let newData = apiData;
+    let hasImageIndex = 1;
     newData = apiData.filter((el, e) => {
-      if (el.type === 'story') {
-        if (
-          el.promo_items
-          && el.promo_items.basic
-          && el.promo_items.basic.promo_image
-          && el.promo_items.basic.promo_image.url
-        ) {
-          newData[e].teaseImageObject = el.promo_items.basic.promo_image;
-          return true;
-        }
-        if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
-          newData[e].teaseImageObject = el.promo_items.basic;
-          return true;
-        }
+      let hasImage = false;
+      if (!el || !el.canonical_url) return false;
+      const { promo_items: rootPromoItems = {} } = el;
+      const { basic: rootPromoItemsBasic = {} } = rootPromoItems;
+      const { promo_image: promoImage, promo_items: nestedPromoItems = {} } = rootPromoItemsBasic;
+      const { basic: nestedPromoItemsBasic } = nestedPromoItems;
 
-        if (
-          (el.promo_items && el.promo_items.basic && el.promo_items.basic.type === 'video')
-          || (el.promo_items && el.promo_items.basic && el.promo_items.basic.type === 'gallery')
-        ) {
-          if (el.promo_items.basic.promo_items && el.promo_items.basic.promo_items.basic && el.promo_items.basic.promo_items.basic.url) {
-            newData[e].teaseImageObject = el.promo_items.basic.promo_items.basic;
-            return true;
-          }
+      /* featured image (re)assignments */
+      if (el.promo_items) {
+        /* check for promo image (collection override(s)) before anything else and regardless of content type */
+        if (promoImage && promoImage.url) {
+          newData[e].teaseImageObject = promoImage;
+          hasImage = true;
+          /* no promo image, so now do the usual cascade to find the appropriate promo item */
+        } else if (rootPromoItemsBasic && rootPromoItemsBasic.url) {
+          /* top-level promo item */
+          newData[e].teaseImageObject = rootPromoItemsBasic;
+          hasImage = true;
+        } else if (nestedPromoItemsBasic && nestedPromoItemsBasic.url) {
+          /* second-level promo item (i.e. video or gallery as primary) */
+          newData[e].teaseImageObject = nestedPromoItemsBasic;
+          hasImage = true;
         }
+      } else if (el.firstInlineImage) {
+        /* final option:  first inline image */
+        newData[e].teaseImageObject = el.firstInlineImage;
+        hasImage = true;
+      }
 
-        if (el.firstInlineImage) {
-          newData[e].teaseImageObject = el.firstInlineImage;
+      // Small edge case where if query item isnt the first then the item automatically passes the filter. This is because certain display classes only require the first image to be present.
+      if (feature === 'TopPhotoNoPhoto') {
+        if (!hasImage && e !== 0) {
           return true;
         }
       }
-      if (el.type === 'video' || el.type === 'gallery') {
-        if (el.promo_items && el.promo_items.basic && el.promo_items.basic.url) {
-          newData[e].teaseImageObject = el.promo_items.basic;
+
+      // Left Photo no Photo (Standalone) only requires the first story and the first story of the second column to have an image
+      if (feature === 'LeftPhotoNoPhoto') {
+        if (!hasImage && (e !== 0 || e !== 4)) {
           return true;
         }
       }
-      return false;
+
+      if (typeof requiresImageEveryX === 'number' && !hasImage && (requiresImageEveryX === 0 || hasImageIndex % requiresImageEveryX === 0)) {
+        // final filter for display classes that require images
+        return false;
+      }
+
+      hasImageIndex += 1;
+      return true;
     });
     return newData;
   }

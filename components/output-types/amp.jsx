@@ -8,6 +8,7 @@ import AmpCustomStyles from '../_helper_components/amp/AmpCustomStyle';
 import AmpScripts from '../_helper_components/amp/AmpScripts';
 import GoogleStructuredData from '../_helper_components/article/googleData/default';
 import SiteMetrics from '../_helper_components/global/siteMetrics/default';
+import SophiTags from '../_helper_components/global/sophi/default';
 import SiteMetaAmp from '../_helper_components/global/siteMeta/amp';
 import handleSiteName from '../layouts/_helper_functions/handleSiteName.js';
 
@@ -34,10 +35,11 @@ const AmpOutputType = (props) => {
       <BaseMarkup canonicalUrl={`https://www.${handleSiteName(canonicalSite)}.com${articleURL}`} />
       <AmpCustomStyles arcSite={currentSite} outputTypeProps={props} />
       <AmpScripts contentElements={contentElements} storyPromoItems={storyPromoItems} arcSite={arcSite}/>
-      <GoogleStructuredData />
+      <GoogleStructuredData {...props} />
       <SiteMetaAmp />
     </head>
     <body>
+      <SophiTags isAmp={true} />
       <SiteMetrics isAmp={true} />
       { children }
     </body>

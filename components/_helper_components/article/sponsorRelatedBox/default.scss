@@ -5,6 +5,7 @@
   flex-direction: column;
   width: calc(100vw - 50px);
   height: auto;
+  margin: auto;
 
   @include breakpoint(tablet) {
     width: calc(100vw - 100px);
@@ -12,26 +13,41 @@
 
   @include breakpoint(desktop-sm) {
     width: 100%;
+    float: left;
+    clear: both;
   }
 
   .sponsor-header {
     border-bottom: solid 1px #cdcdcd;
     padding: 1.2em 0;
     margin-bottom: .35rem;
+    text-align: center;
+    color: #313132;
 
     h1 {
       text-align: center;
-      color: #313132;
       width: auto;
       line-height: normal;
       letter-spacing: -.5px;
 
-      @include text-styles(2.5rem, 1.44, "Average");
+      @include text-styles(1.25rem, 1.44, "Gordita-Bold");
+
+      @include breakpoint(desktop-sm) {
+        font-size: 2.5rem;
+      }
+    }
+
+    h2 {
+      @include text-styles(.75rem, 1.44, "Gordita");
+
+      @include breakpoint(desktop-sm) {
+        font-size: 1rem;
+      }
     }
   }
 
   .sponsor-ad .arc_ad .arcad {
-    margin-bottom: 1.2rem;
+    margin-bottom: .938rem;
 
     &:not(:empty):before {
       content: "";
@@ -50,7 +66,7 @@
     .sponsor-item {
       width: 100%;
       position: relative;
-      margin-bottom: 1.2rem;
+      margin-bottom: .938rem;
 
       a {
         color: #000;
@@ -60,10 +76,10 @@
         h2 {
           line-height: 1.15;
 
-          @include text-styles(1.25rem, 1.44, "Average");
+          @include text-styles(1rem, 1.44, "Lora");
 
           @include breakpoint(desktop-sm) {
-            @include text-styles(1.25em, 1.25, "Average");
+            @include text-styles(1.25em, 1.25, "Lora");
           }
         }
       }
@@ -71,8 +87,7 @@
       &:before {
         display: block;
         content: " ";
-        background: #2e81b7;
-        border-radius: 2.5px;
+        background: #fed255;
         width: 50px;
         height: 5px;
         font-size: 11px;
@@ -86,15 +101,13 @@
 
           &:before {
             content: "ADVERTISER CONTENT";
-            max-width: 115px;
+            max-width: 200px;
             border-radius: 6px;
-            background-color: #2e81b7;
-            color: #fff;
-            padding: 6px 15px;
+            color: #000;
             display: block;
             margin-bottom: .5rem;
             
-            @include text-styles(.625rem, 1.44, "Gordita_Medium");
+            @include text-styles(1rem, 1.44, "Gordita_Medium");
           }
         }
       }

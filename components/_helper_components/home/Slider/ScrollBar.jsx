@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import './ScrollBar.scss';
 
 const ScrollBar = ({
-  currentScrollLeft, maxWidth = 0, maxScrollLeft, sliderId,
+  currentScrollLeft, maxScrollLeft, sliderId, sliderContentElRef,
 }) => {
   const scrollId = `slider-${sliderId}`;
 
   const [thumbWidth, setThumbWidth] = useState(0);
+  const [maxWidth, setMaxWidth] = useState(0);
   const [thumbScrollLeft, setThumbScrollLeft] = useState(0);
 
   const scrollTrackEl = useRef(null);
@@ -31,6 +32,18 @@ const ScrollBar = ({
     setThumbScrollLeft(adjustedScrollWidth * adjustedRatio);
   };
 
+  const handleMaxWidth = () => {
+    if (sliderContentElRef && sliderContentElRef.current && sliderContentElRef.current.offsetWidth) {
+      setMaxWidth(sliderContentElRef.current.offsetWidth);
+    }
+  };
+
+  useEffect(() => {
+    if (!maxWidth) {
+      handleMaxWidth();
+    }
+  }, [sliderId, sliderContentElRef && sliderContentElRef.current]);
+
   useEffect(() => {
     calculateThumbWidth();
   }, [sliderId, maxWidth]);
@@ -53,6 +66,7 @@ ScrollBar.propTypes = {
   maxScrollLeft: PropTypes.number,
   maxWidth: PropTypes.number,
   sliderId: PropTypes.any,
+  sliderContentElRef: PropTypes.any,
 };
 
 export default ScrollBar;

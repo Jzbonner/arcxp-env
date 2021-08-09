@@ -12,7 +12,7 @@
   flex-direction: column;
   position: relative;
 
-  @include breakpoint(desktop-sm) {
+  @include breakpoint(tablet) {
     align-items: center;
   }
 
@@ -25,8 +25,7 @@
     z-index: 1;
     display: flex;
     align-items: center;
-    max-width: 90%;
-    margin-left: .938rem;
+    max-width: 100%;
 
     @include breakpoint(tablet) {
       margin: 0 auto;
@@ -34,30 +33,37 @@
   }
 
   .headline-body {
+    padding-top: 30px;
     padding-bottom: 15px;
     text-align: left;
 
+    @include amp-only {
+      padding-top: 20px;
+    }
+
     @include breakpoint(tablet) {
-      padding: 20px 30px;
+      padding: 30px 20px 20px 15px;
       text-align: center;
     }
 
     .headline-text {
-      @include text-styles(1.4rem, 1.25, "Lora-Bold");
+      @include text-styles(1.56rem, 1.15, "Lora-Bold");
 
       letter-spacing: -.3px;
       margin: 0;
 
+      @include breakpoint(tablet) {
+        @include text-styles(1.875rem, 1.12, "Lora-Bold");
+      }
+
       @include breakpoint(desktop-sm) {
-        @include text-styles(2.5rem, 1.15, "Lora-Bold");
+        @include text-styles(2.188rem, 1.12, "Lora-Bold");
 
         letter-spacing: -.5px;
       }
 
-      &.headline-text-long {
-        @include breakpoint(desktop-sm) {
-          @include text-styles(2.5vw, 1.3, "Lora-Bold");
-        }
+      @include breakpoint(desktop-lg) {
+        @include text-styles(2.5rem, 1.12, "Lora-Bold");
       }
     }
   }
@@ -66,8 +72,21 @@
 
   &.with-gallery {
     flex-direction: column;
-    overflow: hidden;
     margin-bottom: .25rem;
+
+    @include breakpoint(desktop-sm) {
+      overflow: inherit;
+
+      .gallery-wrapper {
+        max-width: 100%;
+        width: 100%;
+        justify-content: center;
+
+        @media screen and (min-width: 1540px) {
+          max-width: 1540px;
+        }
+      }
+    }
 
     .article-headline {
       justify-content: center;

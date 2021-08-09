@@ -1,0 +1,190 @@
+@import "../../../src/styles/base/_mixins.scss";
+@import "../../../src/styles/base/breakpoints";
+
+.c-list-enhanced {
+  margin: 0 0 .63rem;
+  position: relative;
+  width: 100%;
+
+  @include breakpoint(tablet) {
+    margin: 0 0 .63rem;
+  }
+
+  .c-page-title {
+
+    .c-title-content {
+      @include text-styles(1.375rem, 1, "Gordita-Bold");
+
+      letter-spacing: -.28px;
+
+      @include breakpoint(tablet) {
+        @include text-styles(1.5625rem, 1, "Gordita-Bold");
+
+        letter-spacing: -.31px;
+      }
+
+      @include breakpoint(tablet) {
+        @include text-styles(2.1875rem, 1, "Gordita-Bold");
+
+        letter-spacing: -.44px;
+      }
+    }
+  }
+
+  .c-news-tip-text.desktop {
+    margin-right: 0;
+  }
+
+  .tablet-line {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 50%;
+    height: calc(100% - 50px);
+    width: 1px;
+    background-color: #dadada;
+
+    @include breakpoint(tablet) {
+      display: block;
+    }
+
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+
+  .section {
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include breakpoint(desktop-sm) {
+      border-right: 1px solid #dadada;
+      margin-right: 30px;
+      padding-right: 30px;
+      display: block;
+      width: 460px;
+    }
+  }
+
+  .right-rail {
+    display: none;
+
+    @include breakpoint(desktop-sm) {
+      display: block;
+    }
+  }
+
+  .list-items {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+
+    @include breakpoint(tablet) {
+      border-bottom: 1px solid #dadada;
+      padding-bottom: 20px;
+      flex-direction: row;
+    }
+
+    @include breakpoint(desktop-sm) {
+      flex-direction: column;
+      width: 460px;
+      border-bottom: none;
+      margin-top: 0;
+      padding-bottom: 15px;
+    }
+
+    & > .col-1,
+    & > .col-2 {
+      width: 100%;
+
+      @include breakpoint(tablet) {
+        width: 47%;
+      }
+
+      @include breakpoint(desktop-sm) {
+        width: 100%;
+      }
+    }
+  }
+
+  .btn-loadMore {
+    margin-bottom: 0;
+  }
+
+  .RP01 {
+    top: 30px;
+    position: sticky;
+    margin-top: -45px;
+  }
+
+  .MP01,
+  .HP05 {
+    @include breakpoint(desktop-sm) {
+      display: none;
+    }
+  }
+
+  @include breakpoint(tablet) {
+
+    .section:last-child {
+
+      .col-1,
+      .col-2 {
+
+        .c-enhancedList-listItem:last-child {
+          border: none;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(desktop-sm) {
+
+    .section:not(:first-of-type) {
+
+      .col-1 {
+
+        .c-enhancedList-listItem:first-of-type {
+          margin-top: 15px;
+          border-top: 1px solid #dadada;
+        }
+      }
+    }
+
+    .section:not(:last-child) {
+
+      .list-items {
+        padding-bottom: 0;
+      }
+
+      .col-2 {
+
+        .c-enhancedList-listItem:last-child {
+          margin: 0;
+          border: none;
+          padding-bottom: 0;
+        }
+      }
+    }
+
+    .section:last-child {
+
+      .col-2 {
+
+        .c-enhancedList-listItem:last-child {
+          border: none;
+        }
+      }
+    }
+  }
+}

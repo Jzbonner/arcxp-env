@@ -40,6 +40,12 @@ export default {
       logoutStart: '41',
       logoutComplete: '41',
     },
+    sandbox: {
+      sophiActive: true,
+    },
+    prod: {
+      sophiActive: true,
+    },
   },
   featuredVideoPlayerRules: {
     startPlaying: true,
@@ -146,5 +152,13 @@ export default {
   chartbeat: {
     blacklist: mostReadBlacklist,
     host: 'ajc.com',
+  },
+  editorsPicks: {
+    sandbox: 'UZG4A6L2JBCZ5IKJGJXNFHTP2E',
+    prod: 'DTSNNI7Z2RBX7DHMNGU52KDCVI',
+  },
+  investigations: {
+    sandbox: 'UZG4A6L2JBCZ5IKJGJXNFHTP2E',
+    prod: 'XRV7L22CLZDURCMKARMKA3JR74',
   },
 };

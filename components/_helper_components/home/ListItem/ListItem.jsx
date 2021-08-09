@@ -32,6 +32,8 @@ const ListItem = ({
   hidePromo,
   isDontMissFeature = false,
   isTTDFeature = false,
+  noBorder = false,
+  isStaffBioPage = false,
 }) => {
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -57,7 +59,7 @@ const ListItem = ({
   const isListPage = listPage ? 'listPage' : '';
   let defaultPromoWidth = 500;
   let defaultPromoHeight = 282;
-  if (isTTDFeature) {
+  if (isTTDFeature || isListPage) {
     defaultPromoWidth = 110;
     defaultPromoHeight = 110;
   }
@@ -111,15 +113,15 @@ const ListItem = ({
   if (relativeURL === '/') return null;
 
   return (
-    <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''}`}>
+    <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''} ${isStaffBioPage ? 'staffBio-listItem' : ''} ${noBorder ? 'no-border-bottom' : ''}`}>
       {!hidePromo && getPromoItem() && !isDontMissFeature && (
         <a href={relativeURL} className="homeList-image">
-          <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} />
+          <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'}/>
           {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
         </a>
       )}
       <div className="homeList-text">
-        {!hidePromo && getTeaseIcon(contentType)}
+        {!hidePromo && !isDontMissFeature && !isSynopsis && getTeaseIcon(contentType)}
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
         <div className={`headline ${isListPage}`}>
           <a href={relativeURL}>
@@ -158,6 +160,8 @@ ListItem.propTypes = {
   promo_items: PropTypes.object,
   firstInlineImage: PropTypes.object,
   teaseImageObject: PropTypes.object,
+  noBorder: PropTypes.bool,
+  isStaffBioPage: PropTypes.bool,
 };
 
 export default ListItem;

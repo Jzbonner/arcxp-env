@@ -23,7 +23,7 @@ export const StaffCard = ({ staffer = {} }) => {
         <img src={image || missingStaffIcon} alt={'staff image'} className={'profile-picture'}/>
       </a>
       <div className={'c-staff-info'}>
-        <a href={staffBioPageLink} className={'name'}>{name}</a>
+        <a href={staffBioPageLink} className={'name'} rel="author">{name}</a>
         <div className={'role'}>{role}</div>
         <div className={'phone-email'}>
           { telephone && <a

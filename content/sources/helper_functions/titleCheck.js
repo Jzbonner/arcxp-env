@@ -1,7 +1,12 @@
-export default (data, length) => {
+export default (data = [], length, isInnerData = false) => {
   let counter = 0;
-  const { pages } = data;
-  pages.forEach((page) => {
+  let pagesData;
+  if (isInnerData) {
+    pagesData = data;
+  } else {
+    pagesData = data?.pages || [];
+  }
+  pagesData.forEach((page) => {
     if (!page.title) {
       counter += 1;
     }

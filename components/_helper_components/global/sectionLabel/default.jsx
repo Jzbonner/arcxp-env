@@ -4,10 +4,8 @@ import getTeaseLabel from './_helper_functions/getTeaseLabel';
 import './default.scss';
 
 const sectionLabel = ({
-  taxonomy, label, ampPage = false, sponsorContentLabel,
+  taxonomy, label, sponsorContentLabel,
 }) => {
-  if (ampPage && !sponsorContentLabel) return null;
-
   const { primary_section: primarySection } = taxonomy || {};
   const { path: pathPrimary, name: namePrimary, referent = {} } = primarySection || {};
   const { id = '' } = referent;
@@ -68,7 +66,6 @@ const sectionLabel = ({
 sectionLabel.propTypes = {
   taxonomy: PropTypes.object.isRequired,
   label: PropTypes.object.isRequired,
-  ampPage: PropTypes.bool,
   sponsorContentLabel: PropTypes.string,
 };
 

@@ -12,9 +12,6 @@ import StickyNav from '../../article/stickyNav/default';
 import RedesignNavLinks from './redesignNavLinks/default';
 import AmpNavBar from './amp';
 import Weather from './weather/default';
-import '../../../../src/styles/base/_utility.scss';
-import '../../../../src/styles/container/_article-basic.scss';
-import '../../../../src/styles/container/_c-headerNav.scss';
 import BreakingNews from '../breakingNews/default';
 import Login from './login/default';
 

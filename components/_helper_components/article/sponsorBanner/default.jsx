@@ -30,13 +30,13 @@ const SponsorBanner = ({ sponsorID, ampPage }) => {
     openNewTabTrue = openNewTab === 'true';
     if (ampPage && checkForMobileBanner) {
       return (
-        <a href={bannerURL}><amp-img height='1' width='1.75' src={checkForMobileBanner} layout='responsive'/></a>);
+        <a className="c-sponsorBanner" href={bannerURL}><amp-img height='1' width='1.75' src={checkForMobileBanner} layout='responsive'/></a>);
     }
     if (desktopBanner) {
       return (
-        <div className="c-sponsorBanner b-margin-top-d30-m20 b-margin-bottom-d30-m20">
+        <div className="c-sponsorBanner ">
           {bannerURL ? (
-            <a href={bannerURL} className="c-sponsorUrl" rel={openNewTabTrue ? 'noopener noreferrer' : null} target={openNewTabTrue ? '_blank' : '_self'}></a>
+            <a href={bannerURL} className="c-sponsorUrl" rel='noopener noreferrer' target={openNewTabTrue ? '_blank' : '_self'}></a>
           ) : null}
           <img
             src={currentWidth < minTabletViewWidth ? checkForMobileBanner : desktopBanner}

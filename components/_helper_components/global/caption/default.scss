@@ -16,14 +16,18 @@
 
   @include breakpoint(desktop-sm) {
     width: calc(100% - 6.25rem);
-    top: 3.125rem;
-    right: 3.125rem;
+    top: 2.125rem;
+    right: 2.125rem;
   }
 
   &.is-active {
 
     .photo-caption {
       display: block;
+    }
+
+    .photo-caption-btn .caption-arrow {
+      transform: rotate(180deg);
     }
   }
 
@@ -50,14 +54,17 @@
     @include breakpoint(desktop-sm) {
       width: 69px;
       height: 26px;
-      top: -1.875rem;
-      right: -1.875rem;
+    }
+
+    .amp-arrow {
+      transition: .5s;
     }
 
     .caption-arrow {
       width: 9px;
       height: 11px;
       margin-right: 2px;
+      transition: transform .5s;
     }
 
     .fill-line {
@@ -93,20 +100,26 @@
 
     .photo-caption-text {
       color: #fff;
-      padding: 20px;
+      padding: 5px;
       letter-spacing: normal;
       line-height: 1.5;
 
       @include text-styles(.875rem, 1.58, "Gordita");
 
       @include breakpoint(tablet) {
-        @include text-styles(1.25rem, 1.5, "Gordita");
+        @include text-styles(1rem, 1.5, "Gordita");
+
+        padding: 20px;
       }
     }
 
     .photo-credit-text {
       display: none;
     }
+  }
+
+  .rotate-right {
+    transform: rotate(180deg); /* stylelint-disable-line declaration-no-important */
   }
 }
 
@@ -116,13 +129,20 @@
 
 .article-headline-component {
 
+  &.with-image {
+
+    .c-image-component .image-component-image .photo-credit-text {
+      display: none;
+    }
+  }
+
   .photo-caption {
 
     .photo-caption-text {
       @include text-styles(.875rem, 1.58, "Gordita");
 
       @include breakpoint(tablet) {
-        @include text-styles(1.25rem, 1.5, "Gordita");
+        @include text-styles(1rem, 1.5, "Gordita");
       }
     }
 
@@ -145,8 +165,8 @@
     @include breakpoint(desktop-sm) {
       // 100% reduces caption to match the width of the image component
       // 3.5rem accounts for the  right: 3.5em positioning of the caption
-      // 6vw ensures the distance between the caption and headline container is always equal to the overlap of the headline over the image, which is -3vw.
-      width: calc(100% - 3.125rem - 6vw);
+      // 1.1vw ensures the distance between the caption and headline container is always equal to the overlap of the headline over the image, which is -3vw.
+      width: calc(100% - 3.125rem - 1.1vw);
     }
   }
 }

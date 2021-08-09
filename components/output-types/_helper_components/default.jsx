@@ -4,9 +4,11 @@ import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import SiteMeta from '../../_helper_components/global/siteMeta/default';
 import SiteMetrics from '../../_helper_components/global/siteMetrics/default';
+import SophiTags from '../../_helper_components/global/sophi/default';
 import ConnextInit from '../../_helper_components/global/connext/default.jsx';
 import NativoScripts from '../../_helper_components/article/nativo/nativoScripts';
 import checkTags from '../../layouts/_helper_functions/checkTags';
+import checkPageType from '../../layouts/_helper_functions/getPageType.js';
 import checkSponsor from '../../layouts/_helper_functions/checkSponsor';
 import AmpRelLink from '../../_helper_components/amp/AmpRelLink';
 import GoogleStructuredData from '../../_helper_components/article/googleData/default';
@@ -37,7 +39,8 @@ const RenderOutputType = (props) => {
   if (type === 'story') {
     hasLeadGallery = promoItems?.basic?.type === 'gallery';
   }
-
+  const pageType = checkPageType(type, layout);
+  const { isNonContentPage } = pageType || {};
 
   const { tags = [], sections } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
@@ -54,7 +57,7 @@ const RenderOutputType = (props) => {
       <head>
         <MetaTags />
         <SiteMeta />
-        <GoogleStructuredData />
+        <GoogleStructuredData {...props} />
         {!hasLeadGallery && <AmpRelLink type={type} noAmp={noAmp} site={website} url={articleURL} />}
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} as="font" type="font/woff2" />
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} as="font" type="font/woff2" />
@@ -62,6 +65,11 @@ const RenderOutputType = (props) => {
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/Lora-Regular.ttf`)}`} as="font" type="font/ttf" />
 
         <CssLinks />
+        {currentSite && <>
+          <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)}`} />
+          <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}-${isNonContentPage ? 'pb' : 'content'}/css/style.css`)}`} />
+        </>}
+        <SophiTags />
         {includeGtm && (
           <>
             <SiteMetrics />
@@ -82,29 +90,8 @@ const RenderOutputType = (props) => {
         <Libs />
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
         {!noAds && !isHyperlocalContent && !isSponsoredContent && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
-        {currentSite && <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)}`} />}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
-        <script type="text/javascript" dangerouslySetInnerHTML={{
-          __html:
-          `
-            window.addEventListener('load', () => {
-              function timer11(){ga('send', 'event', 'TimeOnPage', '1', '11-30 seconds', { 'nonInteraction': 1 });}
-              function timer31(){ga('send', 'event', 'TimeOnPage', '2', '31-60 seconds', { 'nonInteraction': 1 });}
-              function timer61(){ga('send', 'event', 'TimeOnPage', '3', '61-180 seconds', { 'nonInteraction': 1 });}
-              function timer181(){ga('send', 'event', 'TimeOnPage', '4', '181-600 seconds', { 'nonInteraction': 1 });}
-              function timer601(){ga('send', 'event', 'TimeOnPage', '5', '601-1800 seconds', { 'nonInteraction': 1 });}
-              function timer1801(){ga('send', 'event', 'TimeOnPage', '6', '1801+ seconds', { 'nonInteraction': 1 });}
-              ga('send', 'event', 'TimeOnPage', '0', '0-10 seconds', { 'nonInteraction': 1 });
-              setTimeout(timer11(),11000);
-              setTimeout(timer31(),31000);
-              setTimeout(timer61(),61000);
-              setTimeout(timer181(),181000);
-              setTimeout(timer601(),601000);
-              setTimeout(timer1801(),1801000);
-            });
-          `,
-        }}></script>
       </head>
       <body>
         {includeGtm && (

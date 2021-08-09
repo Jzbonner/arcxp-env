@@ -6,6 +6,12 @@ import fetchEnv from '../utils/environment';
 import ArcAdLib from '../../../features/ads/src/children/ArcAdLib';
 import GetConnextLocalStorageData from './connextLocalStorage';
 
+const logOutput = (msg, debug = false) => {
+  if (debug || (typeof window !== 'undefined' && window?.location?.search?.indexOf('connextDebug') > -1)) {
+    console.log(msg);
+  }
+};
+
 export const ConnextAuthTrigger = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -13,9 +19,15 @@ export const ConnextAuthTrigger = () => {
   const { connext } = getProperties(arcSite);
   const [loadedDeferredItems, _setLoadedDeferredItems] = useState(false);
   const loadedDeferredItemsRef = React.useRef(loadedDeferredItems);
+  const [localStorageAuthCheckComplete, _setLocalStorageAuthCheckComplete] = useState(false);
+  const localStorageAuthCheckCompleteRef = React.useRef(localStorageAuthCheckComplete);
   const setLoadedDeferredItems = (data) => {
     loadedDeferredItemsRef.current = data;
     _setLoadedDeferredItems(data);
+  };
+  const setLocalStorageAuthCheckComplete = (data) => {
+    localStorageAuthCheckCompleteRef.current = data;
+    _setLocalStorageAuthCheckComplete(data);
   };
   const {
     isEnabled = false,
@@ -29,6 +41,12 @@ export const ConnextAuthTrigger = () => {
       const deferredItems = window.deferUntilKnownAuthState || [];
       if (deferredItems.length && !loadedDeferredItemsRef.current) {
         const adInstance = ArcAdLib.getInstance();
+        const articleBodyContainer = document.querySelector('.c-articleBodyContainer');
+        if (articleBodyContainer && articleBodyContainer.getAttribute('class').indexOf('mark-text') > -1) {
+          // we override/remove the inline styles that are being added by Naviga/connext when the paywall renders
+          // specifically for APD-1223 (`overflow: hidden` was cropping the interscroller ad) but also because their inline styles suck
+          articleBodyContainer.setAttribute('style', '');
+        }
         deferredItems.forEach((item) => {
           Object.keys(item).forEach((key) => {
             if (key === 'ad') {
@@ -75,108 +93,134 @@ export const ConnextAuthTrigger = () => {
             }
           });
         }
+
+        // lead video fix for APD-1333
+        const storyHasLeadVideo = !!window.document.getElementsByClassName('article-headline-component with-video');
+
+        if (storyHasLeadVideo) {
+          const videoBlocker = window.document.querySelector('.video-blocker');
+
+          if (videoBlocker) videoBlocker.style.display = 'none';
+        }
+
         // set state to `true` to ensure we only call `loadDeferredItems` once
         setLoadedDeferredItems(true);
       }
     };
 
     const localStorageAuthChecks = () => {
-      const conversationsDataFromLocalStorage = GetConnextLocalStorageData(
-        siteCode, configCode, environment, 'Connext_CurrentConversations',
-      ) || {};
-      const { Metered: meteredConversationData = {} } = conversationsDataFromLocalStorage;
-      const {
-        Id: meteredConversationId = '',
-        Properties: meteredConversationLSProperties = {},
-      } = meteredConversationData;
-      const {
-        ArticleLeft: articlesRemainingFromLocalStorage,
-        PaywallLimit: articleLimitFromLocalStorage,
-      } = meteredConversationLSProperties;
-      const viewedArticlesFromLocalStorage = GetConnextLocalStorageData(
-        siteCode, configCode, environment, 'Connext_ViewedArticles',
-      ) || {};
-      const viewedArticlesArray = viewedArticlesFromLocalStorage[meteredConversationId] || [];
-
-      console.log('connext logging >> localStorageAuthChecks - articlesRemainingFromLocalStorage', articlesRemainingFromLocalStorage, 'viewedArticlesArray.length', viewedArticlesArray.length, 'articleLimitFromLocalStorage - 1', articleLimitFromLocalStorage - 1, 'window.Connext.Storage.GetViewedArticles()', window.Connext.Storage.GetViewedArticles(), 'window.Connext.Storage.GetCurrentConversation()', window.Connext.Storage.GetCurrentConversation());
-
-      if (
-        (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
-        || (
-          articlesRemainingFromLocalStorage !== 0
-          && viewedArticlesArray.length < articleLimitFromLocalStorage - 1
-        )
-      ) {
-        console.log(
-          `connext debugging >> (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
-         || (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1)`,
-          (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0),
-          'or',
-          (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1),
-          'articlesRemainingFromLocalStorage',
-          articlesRemainingFromLocalStorage,
-          'viewedArticlesArray.length',
-          viewedArticlesArray.length,
-          'articleLimitFromLocalStorage - 1',
-          articleLimitFromLocalStorage - 1,
-          'viewedArticlesFromLocalStorage',
-          viewedArticlesFromLocalStorage,
-          'conversationsDataFromLocalStorage',
-          conversationsDataFromLocalStorage,
-        );
-        // there are > 0 articles remaining before hitting the limit
-        loadDeferredItems();
-      } else {
-        const numberOfArticlesViewed = window.Connext.Storage.GetViewedArticles();
-        const numberOfArticlesLeft = () => {
-          try {
-            return window.Connext.Storage.GetArticlesLeft();
-          } catch (err) {
-            // eslint-disable-next-line no-console
-            console.error('error calling `window.Connext.Storage.GetArticlesLeft()`', err);
-            return null;
-          }
-        };
-        const currentConversation = window.Connext.Storage.GetCurrentConversation();
-        const { Properties: currentConversationProperties = {} } = currentConversation;
+      if (!localStorageAuthCheckCompleteRef.current) {
+        const conversationsDataFromLocalStorage = GetConnextLocalStorageData(
+          siteCode, configCode, environment, 'Connext_CurrentConversations',
+        ) || {};
+        const { Metered: meteredConversationData = {} } = conversationsDataFromLocalStorage;
         const {
-          ArticleLeft: articlesRemainingFromConversation,
-          PaywallLimit: paywallArticleLimit,
-        } = currentConversationProperties;
+          Id: meteredConversationId = '',
+          Properties: meteredConversationLSProperties = {},
+        } = meteredConversationData;
+        const {
+          ArticleLeft: articlesRemainingFromLocalStorage,
+          PaywallLimit: articleLimitFromLocalStorage,
+        } = meteredConversationLSProperties;
+        const viewedArticlesFromLocalStorage = GetConnextLocalStorageData(
+          siteCode, configCode, environment, 'Connext_ViewedArticles',
+        ) || {};
+        const viewedArticlesArray = viewedArticlesFromLocalStorage[meteredConversationId] || [];
+
+        logOutput('connext logging >> localStorageAuthChecks - articlesRemainingFromLocalStorage', articlesRemainingFromLocalStorage, 'viewedArticlesArray.length', viewedArticlesArray.length, 'articleLimitFromLocalStorage - 1', articleLimitFromLocalStorage - 1, 'window.Connext.Storage.GetViewedArticles()', window.Connext.Storage.GetViewedArticles(), 'window.Connext.Storage.GetCurrentConversation()', window.Connext.Storage.GetCurrentConversation());
+
         if (
-          (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
+          (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
           || (
-            articlesRemainingFromConversation !== 0
-            && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft() > 0)
+            articlesRemainingFromLocalStorage !== 0
+            && viewedArticlesArray.length < articleLimitFromLocalStorage - 1
           )
         ) {
-          console.log(
-            'connext debugging >> (articlesRemainingFromConversation && articlesRemainingFromConversation > 0) || (articlesRemainingFromConversation !== 0 && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft > 0))',
-            '(articlesRemainingFromConversation',
-            articlesRemainingFromConversation,
-            'and',
-            articlesRemainingFromConversation > 0,
-            ') or',
-            articlesRemainingFromConversation !== 0,
-            'and (',
-            numberOfArticlesViewed.length < paywallArticleLimit - 1,
+          logOutput(
+            `connext debugging >> (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
+           || (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1)`,
+            (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0),
             'or',
-            numberOfArticlesLeft() > 0,
-            ') currentConversation',
-            currentConversation,
-            'articlesRemainingFromConversation',
-            articlesRemainingFromConversation,
-            'numberOfArticlesViewed',
-            numberOfArticlesViewed,
-            'numberOfArticlesViewed.length',
-            numberOfArticlesViewed.length,
-            'paywallArticleLimit - 1',
-            paywallArticleLimit - 1,
-            'numberOfArticlesLeft',
-            numberOfArticlesLeft(),
+            (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1),
+            'articlesRemainingFromLocalStorage',
+            articlesRemainingFromLocalStorage,
+            'viewedArticlesArray.length',
+            viewedArticlesArray.length,
+            'articleLimitFromLocalStorage - 1',
+            articleLimitFromLocalStorage - 1,
+            'viewedArticlesFromLocalStorage',
+            viewedArticlesFromLocalStorage,
+            'conversationsDataFromLocalStorage',
+            conversationsDataFromLocalStorage,
           );
+          // there are > 0 articles remaining before hitting the limit
           loadDeferredItems();
+        } else {
+          const numberOfArticlesViewed = window.Connext.Storage.GetViewedArticles();
+          const numberOfArticlesLeft = () => {
+            try {
+              return window.Connext.Storage.GetArticlesLeft();
+            } catch (err) {
+              // eslint-disable-next-line no-console
+              console.error('error calling `window.Connext.Storage.GetArticlesLeft()`', err);
+              return null;
+            }
+          };
+          const currentConversation = window.Connext.Storage.GetCurrentConversation();
+          const { Properties: currentConversationProperties = {} } = currentConversation;
+          const {
+            ArticleLeft: articlesRemainingFromConversation,
+            PaywallLimit: paywallArticleLimit,
+          } = currentConversationProperties;
+          if (
+            (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
+            || (
+              articlesRemainingFromConversation !== 0
+              && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft() > 0)
+            )
+          ) {
+            logOutput(
+              'connext debugging >> (articlesRemainingFromConversation && articlesRemainingFromConversation > 0) || (articlesRemainingFromConversation !== 0 && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft > 0))',
+              '(articlesRemainingFromConversation',
+              articlesRemainingFromConversation,
+              'and',
+              articlesRemainingFromConversation > 0,
+              ') or',
+              articlesRemainingFromConversation !== 0,
+              'and (',
+              numberOfArticlesViewed.length < paywallArticleLimit - 1,
+              'or',
+              numberOfArticlesLeft() > 0,
+              ') currentConversation',
+              currentConversation,
+              'articlesRemainingFromConversation',
+              articlesRemainingFromConversation,
+              'numberOfArticlesViewed',
+              numberOfArticlesViewed,
+              'numberOfArticlesViewed.length',
+              numberOfArticlesViewed.length,
+              'paywallArticleLimit - 1',
+              paywallArticleLimit - 1,
+              'numberOfArticlesLeft',
+              numberOfArticlesLeft(),
+            );
+            loadDeferredItems();
+          } else if (window?.sophi) {
+            // the free limit has been exceeded and/or they are unauthorized; it's a paywall interaction, so trigger a Sophi event
+            window.sophi.sendEvent(
+              {
+                type: 'wall_hit',
+                data: {
+                  type: 'paywall-metered',
+                  name: 'regular',
+                },
+              },
+            );
+          }
         }
+
+        // set state to `true` to ensure we only call `localStorageAuthChecks` once
+        setLocalStorageAuthCheckComplete(true);
       }
     };
 
@@ -184,10 +228,10 @@ export const ConnextAuthTrigger = () => {
       const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
       const { UserState } = connextLocalStorageData;
       if (isEnabled && !(UserState && ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1)) {
-        console.log('connext logging >> isEnabled && !(UserState && ["subscriber", "subscribed"].indexOf(UserState.toLowerCase()) > -1))', 'isenabled', isEnabled, 'userState', UserState, 'is subscriber', ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1);
+        logOutput('connext logging >> isEnabled && !(UserState && ["subscriber", "subscribed"].indexOf(UserState.toLowerCase()) > -1))', 'isenabled', isEnabled, 'userState', UserState, 'is subscriber', ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1);
         try {
           const currentMeterLevel = window.Connext.Storage.GetCurrentMeterLevel();
-          console.log('connext logging >> currentMeterLevel', currentMeterLevel);
+          logOutput('connext logging >> currentMeterLevel', currentMeterLevel);
           if (currentMeterLevel === 1) {
             // it's "free" content (per connext), so load everything
             loadDeferredItems();
@@ -261,6 +305,14 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                 'event': loginEventToTrigger
               };
               dataLayer.push(userDataObj);
+              if (window?.sophi?.data) {
+                const sophiUserState = UserState === 'Subscribed' ? 'Subscribed' : 'Registered'
+                window.sophi.data.visitor = {
+                  type: sophiUserState,
+                  isLoggedIn: true,
+                  uid: CustomerRegistrationId
+                };
+              }
             }
           }
         } else if (action === 'logged-out') {
@@ -275,6 +327,13 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
             }
           };
           dataLayer.push(userDataObj);
+          if (window?.sophi?.data) {
+            window.sophi.data.visitor = {
+              type: 'Anonymous',
+              isLoggedIn: false,
+              uid: null
+            };
+          }
           // trigger login modal to appear if "triggerLoginModal" is passed-in (i.e. from "login" outputType)
           if (${triggerLoginModal}) {
             doc.querySelector('[data-mg2-action="login"]').click();
@@ -283,13 +342,31 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           docBody.className += ' ${userIsAuthenticatedClass}';
         }
       };
-      const connextLogger = (message) => {
+      const connextLogger = (msg) => {
         if (${debug} || window.location.search.indexOf('connextDebug') > -1) {
-          console.log(message);
+          console.log(msg);
         }
       };
+      let bindConnextLoaded = false;
+      let bindConnextLoggedIn = false;
+      let bindConnextNotAuthorized = false;
+      let bindConnextIsSubscriber = false;
+      let bindConnextMeterLevelSet = false;
+      let bindConnextConversationDetermined = false;
+      let triggerActualLoginEvent = false;
+      let triggerActualLogoutEvent = false;
       window.addEventListener('connextLoggedIn', () => {
         toggleUserState('logged-in');
+
+        if (triggerActualLoginEvent) {
+          // it's the result of user-instantiated login, so trigger sophi
+          // sophi account interaction - login event
+          window.sophi.sendEvent({
+            type: 'account_interaction',
+            data: { type: 'login', action: 'sign in' },
+            config: { overrideStoredContext: true },
+          });
+        }
       });
       window.addEventListener('connextLoggedOut', () => {
         toggleUserState('logged-out');
@@ -303,17 +380,34 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           and connext actually double-fires the "onNotAuthorized" event.  So we set this property when connext first loads
           and then we delete it - if it hasn't been already - once the meter level is set (one of the later processes for connext)
         */
-        if (typeof window.connextInitialLoadComplete !== 'undefined') {
-          delete window.connextInitialLoadComplete;
-        } else {
-          const userState = Connext.Storage.GetUserState() || '';
-          if (userState.toLowerCase() === 'logged out') {
-            dataLayer.push({'event': 'loginEvent_logout'});
+        const userState = Connext.Storage.GetUserState() || '';
+        if (userState.toLowerCase() === 'logged out') {
+          dataLayer.push({'event': 'loginEvent_logout'});
+
+          if (triggerActualLogoutEvent) {
+            // sophi account interaction - logout event
+            window?.sophi?.sendEvent({
+              type: 'account_interaction',
+              data: { type: 'login', action: 'sign out' },
+              config: { overrideStoredContext: true },
+            });
           }
+
+          // let's bind to the login button(s) since the onLoggedIn event isn't entirely reliable
+          document.querySelector('[data-mg2-action="login"]').addEventListener('click', () => {
+            // (re)set the sophi event trigger for login
+            triggerActualLoginEvent = true;
+          });
+          // reset the connextLoggedIn binding (since another event may occur after page load)
+          bindConnextLoggedIn = false;
+        } else if (userState.toLowerCase() === 'logged in') {
+          // (re)set the sophi event trigger for logout
+          triggerActualLogoutEvent = true;
+          // reset the connextNotAuthorized binding (since another event may occur after page load)
+          bindConnextNotAuthorized = false;
         }
       });
       doc.addEventListener('DOMContentLoaded', () => {
-        const connextLoaded = new Event('connextLoaded');
         const connextMeterLevelSet = new Event('connextMeterLevelSet');
         const connextConversationDetermined = new Event('connextConversationDetermined');
         const connextLoggedIn = new Event('connextLoggedIn');
@@ -349,34 +443,52 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                 debug: ${debug},
                 silentmode: false,
                 publicEventHandlers: {
-                  onActionClosed: (e) => { connextLogger('>> onActionClosed', e); },
-                  onActionShown: (e) => { connextLogger('>> onActionShown', e); },
-                  onButtonClick: (e) => { connextLogger('>> onButtonClick', e); },
-                  onCampaignFound: (e) => { connextLogger('>> onCampaignFound', e); },
                   onConversationDetermined: (e) => {
-                    connextLogger('>> onConversationDetermined', e);
-                    window.dispatchEvent(connextConversationDetermined);
+                    if (!bindConnextConversationDetermined) {
+                      connextLogger('>> onConversationDetermined', e);
+                      window.dispatchEvent(connextConversationDetermined);
+                      bindConnextConversationDetermined = true;
+                      bindConnextMeterLevelSet = false;
+                    }
                   },
-                  onCriticalError: (e) => { connextLogger('>> onCriticalError', e); },
-                  onDebugNote: (e) => { connextLogger('>> onDebugNote', e); },
                   onInit: (e) => {
-                    connextLogger('>> onInit', e);
-                    window.connextInitialLoadComplete = true;
-                    window.dispatchEvent(connextLoaded);
+                    if (!bindConnextLoaded) {
+                      connextLogger('>> onInit', e);
+                      window.connextInitialLoadComplete = true;
+                      bindConnextLoaded = true;
+                    }
                   },
                   onLoggedIn: (e) => {
-                    connextLogger('>> onLoggedIn', e);
-                    window.dispatchEvent(connextLoggedIn);
+                    if (!bindConnextLoggedIn) {
+                      connextLogger('>> onLoggedIn', e);
+                      window.dispatchEvent(connextLoggedIn);
+                      bindConnextLoggedIn = true;
+                    }
                   },
                   onNotAuthorized: (e) => {
                     // this event fires on every Engage loading if user is logged out
-                    connextLogger('>> onNotAuthorized', e);
-                    window.dispatchEvent(connextLoggedOut);
+                    if (!bindConnextNotAuthorized) {
+                      connextLogger('>> onNotAuthorized', e);
+                      window.dispatchEvent(connextLoggedOut);
+                      bindConnextNotAuthorized = true;
+                    }
                   },
                   onMeterLevelSet: (e) => {
-                    connextLogger('>> onMeterLevelSet', e);
-                    window.dispatchEvent(connextMeterLevelSet);
+                    if (!bindConnextMeterLevelSet) {
+                      connextLogger('>> onMeterLevelSet', e);
+                      window.dispatchEvent(connextMeterLevelSet);
+                      bindConnextMeterLevelSet = true;
+                    }
                   },
+                  onHasAccess: (e) => {
+                    if (!bindConnextIsSubscriber) {
+                      // this event fires on every Engage loading if user is subscriber
+                      connextLogger('>> onHasAccess', e);
+                      window.dispatchEvent(connextIsSubscriber);
+                      bindConnextIsSubscriber = true;
+                    }
+                  }
+                  /*
                   onAuthorized: (e) => {
                     // this event fires on every Engage loading if user is logged in but doesn't have access to this product
                     connextLogger('>> onAuthorized', e);
@@ -390,15 +502,16 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                     // and doesn't have access to this product but has access to another one
                     connextLogger('>> onHasAccessNotEntitled', e);
                   },
-                  onHasAccess: (e) => {
-                    // this event fires on every Engage loading if user is subscriber
-                    connextLogger('>> onHasAccess', e);
-                    window.dispatchEvent(connextIsSubscriber);
-                  },
-                },
-              },
-            },
-          ],
+                  onActionClosed: (e) => { connextLogger('>> onActionClosed', e); },
+                  onActionShown: (e) => { connextLogger('>> onActionShown', e); },
+                  onCampaignFound: (e) => { connextLogger('>> onCampaignFound', e); },
+                  onCriticalError: (e) => { connextLogger('>> onCriticalError', e); },
+                  onDebugNote: (e) => { connextLogger('>> onDebugNote', e); }
+                  */
+                }
+              }
+            }
+          ]
         });
       });`,
   }}></script>;

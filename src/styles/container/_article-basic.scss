@@ -4,19 +4,20 @@
 
 .c-header {
   margin: 0 auto;
-
-  &.article-header-padding {
-    padding: 0;
-
-    @include breakpoint(tablet) {
-      padding: 0 15px;
-    }
-  }
 }
 
 .c-main-gallery,
 .c-header-gallery {
   margin: 0 auto;
+
+  @include breakpoint(tablet) {
+    overflow: hidden;
+    width: calc(100vw - 80px);
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: calc(100vw - 60px);
+  }
 }
 
 @include amp-exclude {
@@ -26,7 +27,7 @@
     width: 100%;
 
     @include breakpoint(desktop-lg) {
-      max-width: 1600px !important;
+      max-width: 1540px !important;
     }
   }
 }
@@ -36,6 +37,25 @@
 
   @include breakpoint(desktop-sm) {
     min-height: 115px;
+  }
+}
+
+.gallery-caption-container {
+  margin: 5px auto 35px;
+  max-width: 820px;
+
+  @include between-breakpoints(tablet,desktop-sm) {
+    width: calc(100% - 140px);
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: 100%;
+  }
+
+  .gallery-caption,
+  .gallery-credit {
+    width: inherit;
+    margin: 0 auto;
   }
 }
 
@@ -54,11 +74,20 @@
 }
 
 .c-label-wrapper {
-  text-align: center;
-  margin-left: .938rem;
+  text-align: left;
 
-  @include breakpoint(desktop-sm) {
-    margin-left: 1.875rem;
+  &:empty {
+    display: none;
+  }
+}
+
+@include amp-only {
+
+  .c-label-wrapper {
+
+    .section-label {
+      width: 100%;
+    }
   }
 }
 
@@ -74,25 +103,82 @@
   display: none;
 }
 
+.c-articleMetaContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &:not(:last-child) {
+    margin-bottom: 1.25rem;
+  }
+}
+
+.c-articleBadge:not(:empty) {
+  display: inline-block;
+  vertical-align: middle;
+  width: 140px;
+  height: auto;
+
+  @include breakpoint(tablet) {
+    width: 130px;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  ~ .c-articleMetadata {
+    margin-left: 15px;
+    padding-left: 12px;
+    border-left: 1px solid #cdcdcd;
+    min-height: 100%;
+  }
+}
+
+.article-byline {
+  @include between-breakpoints(desktop-sm, desktop-lg) {
+    margin: 0 auto 7px;
+  }
+
+  .byline {
+    text-align: left;
+  }
+}
+
 .c-articleContent {
+  @include breakpoint(desktop-sm) {
+    max-width: 820px;
+    margin: 0 auto;
+  }
 
-  .article-byline {
+  .c-section {
+    padding: 0;
+  }
 
-    .byline {
-      text-align: left;
-    }
+  .b-margin-bottom-d7-m7 {
+    @include between-breakpoints(desktop-sm, desktop-lg) {
+      margin: 0 auto 7px;
 
-    @include breakpoint(tablet) {
-      margin-left: .938rem;
-    }
-
-    @include breakpoint(desktop-sm) {
-      margin-left: 1.875rem;
+      .article-timestamp {
+        margin-left: 0;
+      }
     }
   }
 
   .border-top {
     display: none;
+  }
+
+  .arc_ad[class*="MP02"],
+  .arc_ad[class*="MP03"] {
+    @include between-breakpoints(mobile, desktop-sm) {
+      padding-top: 20px;
+    }
+  }
+
+  &.b-contentMaxWidth {
+    padding-top: 0;
   }
 }
 

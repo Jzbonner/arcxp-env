@@ -97,6 +97,7 @@
     flex-direction: column;
     text-align: left;
     padding-left: 15px;
+    max-width: 144px;
 
     @include breakpoint(tablet) {
       max-width: 158px;
@@ -115,17 +116,21 @@
     }
 
     .article-timestamp {
-      line-height: 1;
+      padding-bottom: 15px;
+
+      @include breakpoint(desktop-sm) {
+        padding-bottom: 0;
+      }
     }
 
     a.headline {
-      max-width: 80%;
+      max-width: 100%;
       letter-spacing: -.17;
       color: #000;
       text-decoration: none;
       margin-bottom: $min-margin;
 
-      @include text-styles(1.125rem, 1.33, "Lora");
+      @include text-styles(1rem, 1.33, "Lora");
 
       @include breakpoint(tablet) {
         max-width: 93%;
@@ -133,8 +138,9 @@
 
       @include breakpoint(desktop-sm) {
         letter-spacing: -.2px;
+        line-height: 1.5rem;
 
-        @include text-styles(1.375rem, 1.09, "Lora");
+        @include text-styles(1.1rem, 1.3, "Lora");
       }
     }
   }

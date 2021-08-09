@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
-import ListItem from '../../_helper_components/home/ListItem/ListItem';
 import Headline from '../../_helper_components/home/Headline/Headline';
 import getColumnsMap from '../../layouts/_helper_functions/homepage/getColumnsMap';
 import FeatureTitle from '../../_helper_components/home/featureTitle/featureTitle';
+import getLists from '../../layouts/_helper_functions/article/getLists';
 import './default.scss';
 
-const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
+const Lead = ({
+  customFields = {}, limitOverride, displayClassOverride, feature = 'Lead',
+}) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
 
@@ -18,20 +20,19 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
 
   const actualDisplayClass = displayClassOverride || displayClass;
 
-  let { from: startIndex = 1 } = contentConfigValues || {};
-  startIndex = parseInt(startIndex, 10) - 1 > -1 ? parseInt(startIndex, 10) - 1 : 0;
-
   const displayClassesRequiringImg = [
     '5-Item Feature - Top Photo',
     '5-Item Feature - Left Photo',
     '5-Item Feature - Center Lead Top Photo',
     '5-Item Feature - No Photo',
     '5-Item Feature - Redesigned Lead - No Photo',
+    '5-Item TTD Feature',
     '7-Item TTD Feature',
     'Redesign Feature - Left Photo No Photo',
   ];
 
-  const isTTDFeature = actualDisplayClass === '7-Item TTD Feature';
+  // '5-Item TTD feature' in reality is Editors picks, but effectively the same feature just re-used in article pages//
+  const isTTDFeature = actualDisplayClass === '7-Item TTD Feature' || actualDisplayClass === '5-Item TTD Feature';
   const isLeftNoPhotoFeature = actualDisplayClass === 'Redesign Feature - Left Photo No Photo';
 
   // use squareImageSize to override the default height/width of tease images for cases where we want a square aspect ratio
@@ -40,12 +41,13 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
   let useSquareImageAfter = -1;
   if (isTTDFeature) {
     squareImageSize = 110;
-    useSquareImageAfter = startIndex + 1;
+    useSquareImageAfter = 1;
   }
   if (isLeftNoPhotoFeature) {
     squareImageSize = 80;
     useSquareImageAfter = 0;
   }
+
 
   const data = useContent({
     source: contentService,
@@ -56,6 +58,7 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
       displayClassesRequiringImg,
       squareImageSize,
       useSquareImageAfter,
+      feature,
     },
   });
 
@@ -64,6 +67,7 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
       case '5-Item Feature - Top Photo':
         return 'top-photo-display-class';
       case '5-Item Feature - Left Photo':
+      case '5-Item TTD Feature':
       case '7-Item TTD Feature':
         return 'left-photo-display-class';
       case '5-Item Feature - No Photo':
@@ -81,28 +85,17 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
     }
   }
 
-  function getLists(apiData, start, limit) {
-    const listLimit = limitOverride || limit;
-    let itemCounter = 0; /* item counter for Left Photo No Feature feature */
-    return apiData.map((el, i) => {
-      if (start <= i && i < start + listLimit) {
-        if (isLeftNoPhotoFeature) itemCounter += 1;
-        return <ListItem key={`ListItem-${i}`} displayClass={actualDisplayClass} hidePromo={((isLeftNoPhotoFeature && itemCounter !== 1 && itemCounter !== 5) || false)} isTTDFeature={isTTDFeature} {...el} />;
-      }
-      return null;
-    });
-  }
-
   function renderColumn1(apiData) {
     switch (actualDisplayClass) {
       case '5-Item Feature - Center Lead Top Photo':
-        return getLists(apiData, startIndex + 1, 2);
+        return getLists(apiData, 0, 2, limitOverride, isLeftNoPhotoFeature, actualDisplayClass, isTTDFeature);
       case '1 or 2 Item Feature':
-        return [...Array(parseInt(columns, 10)).keys()].map(i => <Headline key={i} {...apiData[startIndex + i]} isTease={true} />);
+        return [...Array(parseInt(columns, 10)).keys()].map(i => <Headline key={i} {...apiData[i]} isTease={true} />);
       case '7-Item TTD Feature':
-        return <Headline {...apiData[startIndex]} isTease={true} />;
+      case '5-Item TTD Feature':
+        return <Headline {...apiData[0]} isTease={true} />;
       case 'Redesign Feature - Left Photo No Photo':
-        return getLists(apiData, startIndex + 1, 5);
+        return getLists(apiData, 0, 5, limitOverride, isLeftNoPhotoFeature, actualDisplayClass, isTTDFeature);
       default:
         return null;
     }
@@ -115,11 +108,13 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
       case '5-Item Feature - No Photo':
       case '5-Item Feature - Center Lead Top Photo':
       case '5-Item Feature - Redesigned Lead - No Photo':
-        return <Headline {...apiData[startIndex]} isTease={true} />;
+        return <Headline {...apiData[0]} isTease={true} />;
+      case '5-Item TTD Feature':
+        return getLists(apiData, 1, 3, limitOverride, isLeftNoPhotoFeature, actualDisplayClass, isTTDFeature);
       case '7-Item TTD Feature':
-        return getLists(apiData, startIndex + 1, 3);
+        return getLists(apiData, 1, 3, limitOverride, isLeftNoPhotoFeature, actualDisplayClass, isTTDFeature);
       case 'Redesign Feature - Left Photo No Photo':
-        return getLists(apiData, startIndex + 5, 9);
+        return getLists(apiData, 4, 9, limitOverride, isLeftNoPhotoFeature, actualDisplayClass, isTTDFeature);
       default:
         return null;
     }
@@ -129,19 +124,21 @@ const Lead = ({ customFields = {}, limitOverride, displayClassOverride }) => {
     switch (actualDisplayClass) {
       case '5-Item Feature - Top Photo':
       case '5-Item Feature - Left Photo':
-        return getLists(apiData, startIndex + 1, 4);
+        return getLists(apiData, 1, 4, limitOverride, isLeftNoPhotoFeature, actualDisplayClass, isTTDFeature);
       case '5-Item Feature - No Photo':
       case '5-Item Feature - Redesigned Lead - No Photo':
         return (
           <>
             <FeatureTitle title={title} moreURL={moreURL} />
-            {getLists(apiData, startIndex + 1, 4)}
+            {getLists(apiData, 1, 4, limitOverride, isLeftNoPhotoFeature, actualDisplayClass, isTTDFeature)}
           </>
         );
+      case '5-Item TTD Feature':
+        return getLists(apiData, 3, 2, limitOverride, isLeftNoPhotoFeature, actualDisplayClass, isTTDFeature);
       case '7-Item TTD Feature':
-        return getLists(apiData, startIndex + 4, 3);
+        return getLists(apiData, 4, 3, limitOverride, isLeftNoPhotoFeature, actualDisplayClass, isTTDFeature);
       case '5-Item Feature - Center Lead Top Photo':
-        return getLists(apiData, startIndex + 3, 2);
+        return getLists(apiData, 3, 2, limitOverride, isLeftNoPhotoFeature, actualDisplayClass, isTTDFeature);
       default:
         return null;
     }
@@ -184,6 +181,7 @@ Lead.propTypes = {
       name: 'More URL',
     }),
   }),
+  feature: PropTypes.string,
 };
 
 export default Lead;

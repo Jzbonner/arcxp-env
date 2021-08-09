@@ -28,7 +28,7 @@ const SiteMetrics = ({ isAmp }) => {
   const { by: authorData } = credits || {};
   const {
     system: sourceSystem,
-    type: sourceType,
+    source_type: sourceType,
   } = source || {};
   const authors = [];
   const ampAuthors = [];
@@ -206,7 +206,7 @@ const SiteMetrics = ({ isAmp }) => {
           "connextActive": "${connextIsEnabled}",
           "pageData": {
             "pageName": "${url}",
-            "pageURL": "${siteDomain}${url}",
+            "pageURL": "${url.indexOf('http:') > -1 || url.indexOf('https:') > -1 ? '' : siteDomain}${url}",
             "pageSiteSection": "${topSection}",
             "pageMainSection": "${topSection}",
             "pageCategory": "${nonPrimarySections}",

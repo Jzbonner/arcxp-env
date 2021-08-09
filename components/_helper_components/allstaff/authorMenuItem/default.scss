@@ -31,7 +31,7 @@
   }
 
   &.active {
-    color: #2e81b7;
+    color: #3299ad;
     position: relative;
 
     @include breakpoint(desktop-sm) {
@@ -58,6 +58,12 @@
   &:not(.active) + li:not(.active) {
     @include breakpoint(desktop-sm) {
       border-top: 1px solid #cdcdcd;
+    }
+  }
+
+  &.set-border-bottom {
+    @include breakpoint(desktop-sm) {
+      border-bottom: 1px solid #cdcdcd;
     }
   }
 }

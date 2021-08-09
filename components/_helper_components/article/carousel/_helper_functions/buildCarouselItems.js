@@ -15,7 +15,7 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
 
   const filteredContentElements = filterCurrentStory(relatedContentElements, storyId);
   let primaryContentElements = filterByPrimarySection(filteredContentElements, primarySection);
-  primaryContentElements = FetchResizedImages(arcSite, primaryContentElements, 256, 144);
+  primaryContentElements = FetchResizedImages(arcSite, primaryContentElements, 144, 144);
 
   let temp = {};
 
@@ -35,12 +35,14 @@ export default function buildCarouselItems(relatedContentElements, storyId, logo
         <a key={`key-${i}`} href={temp.url}>
           <div id={`carousel-item-${i}`} className={`c-carouselItem ${i === 0 ? 'is-first' : ''}`}>
             <amp-img
-              width={`${hasImage ? '90' : '76'}`}
-              height="50"
+              width={`${hasImage && resizedObj.src ? '36' : '54'}`}
+              height="36"
               src={carouselImage}
             />
-            <div className={`c-itemText ${!hasImage && temp.teaseIcon ? 'with-icon' : ''}`}>
-              {truncateHeadline(temp.headline)}
+            <div className='c-itemText'>
+              <div className={`carousel-text ${!hasImage && temp.teaseIcon ? 'with-icon' : ''}`}>
+                {truncateHeadline(temp.headline)}
+              </div>
             </div>
           </div>
         </a>

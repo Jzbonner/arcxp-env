@@ -167,7 +167,7 @@ const getContentMeta = () => {
     const month = `${firstPubDateObj.getMonth() + 1}`; // increment by one because getMonth is 0-indexed
     const dayOfTheMonth = `${formatDate(firstPubDateObj)}`;
     const year = `${firstPubDateObj.getFullYear()}`;
-    const time = `${formatTime(firstPubDateObj, true)}` || '';
+    const time = `${formatTime(firstPubDateObj, true, true)}` || '';
     /* eslint-disable-next-line max-len */
     firstPublishDateConverted = time ? `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}${time.indexOf('1') !== 0 ? '0' : ''}${time.replace(/:/g, '').replace(/\s[A|P]M/g, '')}` : `${year}${month < 10 ? `0${month}` : month}${dayOfTheMonth}`;
   }
@@ -194,6 +194,7 @@ const getContentMeta = () => {
     environ,
     topics,
     firstPublishDateConverted,
+    firstPublishDate,
     title,
     seoTitle,
     description: desc,

@@ -3,6 +3,8 @@ import { formatApiTime } from '../../layouts/_helper_functions/api/formatTime';
 import { getMediaContent } from './_helper_functions/getMediaContent';
 import { formatNavigaContent } from './_helper_functions/formatNavigaContent';
 import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
+import handleSiteName from '../../layouts/_helper_functions/handleSiteName';
+import fetchEnv from '../../_helper_components/global/utils/environment';
 import { getFirst120CharsFromStory } from './_helper_functions/getFirst120CharFromStory';
 
 @Consumer
@@ -13,22 +15,41 @@ class Api {
 
   render() {
     const {
-      globalContent, globalContentConfig, siteProperties, arcSite: siteID, requestUri,
+      globalContent, globalContentConfig, arcSite: siteID, requestUri,
     } = this.props || {};
-    const { websiteURL } = siteProperties || {};
     const { query } = globalContentConfig || {};
     const { id: collectionId, from, size } = query || {};
-    const feedStart = from - 1;
+    const feedStart = globalContent ? 0 : from - 1; // we start at 0 when populating from globalContent so as to avoid double-filtering of results (collection & query content sources natively respect `from`)
     const queryParams = getQueryParams(requestUri);
     const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
     const newsletterFeed = outPutTypePresent && queryParams.outputType === 'rss-newsletter';
     const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'rss-app';
     const standardFeed = outPutTypePresent && queryParams.outputType === 'rss';
+    const siteDomain = `${fetchEnv() === 'prod' ? 'www' : 'sandbox'}.${handleSiteName(siteID)}.com`;
 
     let maxItems = feedStart + size;
     if (maxItems > globalContent.length) {
       maxItems = globalContent.length;
     }
+
+    const getAuthorOrganization = (credits, author, isMap) => {
+      let authorOrg = '';
+      /*
+        First, we check affiliatons because it contains the author's organization as seen on AuthorService ...
+        ... credits.by[x].org is inconsistent and sometimes returns the author's location, instead of it's organization. It's only consistent with returning guest author orgs, so we check that if affiliations fail..
+      */
+      if (isMap) {
+        authorOrg = author.additional_properties && author.additional_properties.original && author.additional_properties.original.affiliations ? ` - ${author.additional_properties.original.affiliations}` : '';
+
+        if (!authorOrg) authorOrg = author.org ? ` - ${author.org}` : '';
+      } else {
+        authorOrg = credits && credits.by && credits.by[0] && credits.by[0].additional_properties && credits.by[0].additional_properties.original && credits.by[0].additional_properties.original.affiliations ? `${credits.by[0].additional_properties.original.affiliations}` : '';
+
+        if (!authorOrg) authorOrg = credits && credits.by && credits.by[0] && credits.by[0].org ? `${credits.by[0].org}` : '';
+      }
+
+      return authorOrg;
+    };
 
     if (globalContent) {
       let filteredContent = globalContent.filter((item, i) => i >= feedStart && i < maxItems);
@@ -48,14 +69,17 @@ class Api {
           content_elements: contentElements = [], first_publish_date: firstPubDate, display_date: displayDate, canonical_url: canonicalUrl, _id: guid, type = '', headlines, description, credits = {}, promo_items: promoItems, streams,
         } = item || {};
 
-        // console.log(contentElements);
-
         const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
-        let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}]]>` : '';
-        const org = credits && credits.by && credits.by[0] && credits.by[0].org ? `<![CDATA[${credits.by[0].org}]]>` : '';
+
+        const orgString = getAuthorOrganization(credits, null, false);
+
+        const org = orgString ? `<![CDATA[${orgString}]]>` : '';
+
+
+        let author = credits && credits.by && credits.by[0] && credits.by[0].name ? `<![CDATA[${credits.by[0].name}${orgString ? ` - ${orgString}` : ''}]]>` : '';
 
         if (credits && credits.by && credits.by.length > 1) {
-          author = `<![CDATA[${credits.by.map(eachAuthor => eachAuthor.name).join(', ')}]]>`;
+          author = `<![CDATA[${credits.by.map(eachAuthor => `${eachAuthor.name}${getAuthorOrganization(null, eachAuthor, true)}`).join(', ')}]]>`;
         }
 
         if (!author) {
@@ -78,7 +102,7 @@ class Api {
                 guid: `urn:uuid:${guid}`,
               },
               {
-                link: `${websiteURL}${canonicalUrl}`,
+                link: `https://${siteDomain}${canonicalUrl}`,
               },
               {
                 description: formattedDescription,
@@ -119,7 +143,7 @@ class Api {
                 guid: `urn:uuid:${guid}`,
               },
               {
-                link: `${websiteURL}${canonicalUrl}`,
+                link: `https://${siteDomain}${canonicalUrl}`,
               },
               {
                 description: formattedDescription,
@@ -179,7 +203,7 @@ class Api {
                 guid: `urn:uuid:${guid}`,
               },
               {
-                link: `${websiteURL}${canonicalUrl}`,
+                link: `https://${siteDomain}${canonicalUrl}`,
               },
               {
                 description: formattedDescription || title,

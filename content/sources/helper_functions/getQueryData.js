@@ -9,7 +9,9 @@ export default (arcSite, newBody, from = 0, size = 10, useFetch = false) => {
   }
 
   const sizeInt = parseInt(size, 10);
-  const fromInt = parseInt(from, 10) === 0 ? parseInt(from, 10) : parseInt(from, 10) - 1;
+  // if the `from` value is greater than 1, we subtract 1 from it for the official start index
+  // this is because the query results are 0-indexed but what producers enter (and think) are 1-indexed values
+  const fromInt = parseInt(from, 10) > 0 ? parseInt(from, 10) - 1 : 0;
 
   const promiseArray = [];
   const contentElements = [];
@@ -23,16 +25,17 @@ export default (arcSite, newBody, from = 0, size = 10, useFetch = false) => {
 
   const numberOfFetches = total <= maxFetchSize ? 1 : Math.ceil(total / maxFetchSize);
 
-  let fetchStart = 0;
+  let fetchStart = fromInt;
   let i = 1;
 
   while (i <= numberOfFetches && i < 10) {
     const fetchSize = leftToFetch <= maxFetchSize ? leftToFetch : maxFetchSize;
+    const encodedFilter = encodeURIComponent(filter.replace(/\s+/g, ''));
 
     let requestUri = `${CONTENT_BASE}/content/v4/search/published?body=${newBody}&website=${arcSite}&sort=display_date:desc`;
     requestUri += `&from=${fetchStart}`;
     requestUri += `&size=${fetchSize}`;
-    requestUri += `&_sourceInclude=${filter}`;
+    requestUri += `&_sourceInclude=${encodedFilter}`;
 
     if (useFetch) {
       promise = fetch(requestUri, {

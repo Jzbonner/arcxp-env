@@ -14,7 +14,7 @@
     color: #fff;
     line-height: 1.5;
   }
-  
+
   .text span {
     display: block;
     font-stretch: normal;
@@ -22,69 +22,69 @@
     letter-spacing: normal;
     text-align: center;
   }
-  
+
   @media (min-width: 768px) {
-  
+
     .text {
       font-size: 26px;
     }
-  
+
     .text a {
       font-size: inherit;
     }
   }
-  
+
   .nonSubPromo {
-    background-image: linear-gradient(0deg, #50aff6 0%, #3d8bed 100%);
+    background: #3299ad;
     padding: 20px;
     border-radius: 6px;
   }
-  
+
   .nonSubPromo span.subscription-headline {
     @include text-styles(1.375rem, 1.5, "Gordita-Medium");
 
     margin-bottom: .5rem;
   }
-  
+
   .nonSubPromo span.thank-you-subscriber {
     @include text-styles(.875rem, 1.5, "Gordita");
 
     padding-bottom: 15px;
   }
-  
+
   @media (min-width: 768px) {
-  
+
     .nonSubPromo .text {
       font-size: 1.25rem;
     }
-  
+
     .nonSubPromo .text a {
       font-size: inherit;
     }
   }
-  
+
   @media (max-width: 768px) {
-  
+
     .nonSubPromo span.subscription-headline {
       font-size: 18px;
       padding-bottom: 10px;
       margin-bottom: 0;
     }
-  
+
     .nonSubPromo span.thank-you-subscriber {
       font-size: 14px;
     }
   }
-  
+
   @media (min-width: 1024px) {
     margin-top: 0;
     margin-bottom: 40px;
   }
-  
+
   @media (min-width: 1280px) {
     margin-bottom: 60px;
   }
-  
+
   .action-wrapper {
     display: flex;
     justify-content: center;

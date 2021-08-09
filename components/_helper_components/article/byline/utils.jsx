@@ -56,7 +56,7 @@ const handleAuthors = (authors = []) => {
 
     return <span key={name}>
       {i === 0 && !name.includes('By ') && 'By '}
-      {authorUrl && status && <a href={authorUrl}>{name}</a>}
+      {authorUrl && status && <a href={authorUrl} rel="author">{name}</a>}
       {(!authorUrl || !status) && name}
       {org ? `${authors.length > 1 ? ' - ' : ', '}${org}` : null}
     </span>;

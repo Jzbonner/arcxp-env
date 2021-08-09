@@ -3,11 +3,13 @@
 .c-LeftPhotoNoPhotoWrapper {
   display: flex;
   width: 100%;
+  flex-direction: column;
 
   .row {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    width: inherit;
 
     @include breakpoint(desktop-sm) {
       flex-wrap: nowrap;

@@ -16,7 +16,8 @@ const safeHtml = (str, opt = {}) => {
       'b': [],
       'i': [],
       'strong': [],
-    }
+    },
+    stripIgnoreTag: true,// filter out all HTML not in the whilelist
   };
 
   const cfg = {
