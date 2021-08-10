@@ -4,6 +4,17 @@
   margin-bottom: $min-Msection-margin;
   max-width: 100%;
 
+  &.no-rules {
+
+    .c-textFeature-title {
+      border-bottom: none;
+    }
+
+    .c-textFeature-content {
+      border-bottom: none;
+    }
+  }
+
   .c-textFeature-title {
     color: #313132;
     letter-spacing: -.38px;

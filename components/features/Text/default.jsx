@@ -6,7 +6,7 @@ import './default.scss';
 
 const Text = () => {
   const componentContext = useComponentContext();
-  const { TextFeatureTitle, TextFeatureContent } = componentContext && componentContext.customFields;
+  const { TextFeatureTitle, TextFeatureContent, HorizontalRule } = componentContext && componentContext.customFields;
   const { editableField } = useEditableContent();
 
   if (TextFeatureContent && TextFeatureContent !== '') {
@@ -14,13 +14,13 @@ const Text = () => {
     let src = TextFeatureContent.replace(regex, '');
     src = src.replace(/<\/p>/g, '</p>\n');
     return (
-      <div className="c-textFeature">
-        <h2
+      <div className={`c-textFeature ${HorizontalRule ? '' : 'no-rules'}`}>
+        {TextFeatureTitle && <h2
           className="c-textFeature-title"
           {...editableField('Text Feature Title')}
           suppressContentEditableWarning
           dangerouslySetInnerHTML={{ __html: TextFeatureTitle }}
-        ></h2>
+        ></h2>}
         <div
           className="c-textFeature-content"
           {...editableField('Text Feature Content')}
@@ -40,6 +40,10 @@ Text.propTypes = {
     TextFeatureContent: PropTypes.richtext.tag({
       label: 'Add Content',
     }).isRequired,
+    HorizontalRule: PropTypes.bool.tag({
+      name: 'Horizontal Rules?',
+      defaultValue: true,
+    }),
   }),
 };
 
