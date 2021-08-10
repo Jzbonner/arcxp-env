@@ -210,6 +210,10 @@
 
     .c-homeLeadContainer {
       justify-content: normal;
+
+      @include breakpoint(tablet) {
+        margin-bottom: 0;
+      }
     }
 
     .column-1 {
