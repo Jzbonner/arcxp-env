@@ -41,6 +41,7 @@ const fetch = (query) => {
     return GetCollectionData(activeSite, id, size, from)
       .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
       .then(data => FilterElements(data, requiresImageEveryX))
+      .then(data => data.slice(0, size))
       .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes, squareImageSize, useSquareImageAfter))
       .then(data => data.map(el => pick(el, filter)))
       .catch((error) => {
