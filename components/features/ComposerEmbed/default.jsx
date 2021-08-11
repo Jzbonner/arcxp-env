@@ -47,6 +47,17 @@ ComposerEmbed.propTypes = {
       label: 'Embed ID',
       description: 'Please enter the ID of a composer subtype story.',
     }),
+    borderColor: PropTypes.oneOf([
+      '',
+      'blue',
+      'gray',
+      'orange',
+      'yellow',
+    ]).tag({
+      name: 'Border color',
+      description: 'Select the border color (gray is the default)',
+      value: 'gray',
+    }),
   }),
 };
 export default ComposerEmbed;
