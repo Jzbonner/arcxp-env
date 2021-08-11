@@ -6,10 +6,6 @@
 
   &.no-rules {
 
-    .c-textFeature-title {
-      border-bottom: none;
-    }
-
     .c-textFeature-content {
       border-bottom: none;
     }
@@ -56,10 +52,6 @@
       @include breakpoint(desktop-sm) {
         @include text-styles(1rem, 1.54, "Gordita");
       }
-    }
-
-    p {
-      margin-bottom: $min-margin;
     }
 
     a {
