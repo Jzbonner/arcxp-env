@@ -397,10 +397,11 @@
 
       .home-headline,
       .homeList-text {
-        margin: $min-margin 0 0;
+        margin: 10px 0 0;
         border-bottom: 1px solid #cdcdcd;
         width: 100%;
         text-align: left;
+        padding-bottom: 10px;
       }
 
       &:first-child {
