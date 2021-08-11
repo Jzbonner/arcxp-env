@@ -129,6 +129,7 @@ const fetch = (query) => {
   return getQueryData(activeSite, newBody, from, size, useFetch)
     .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
     .then(data => FilterElements(data, requiresImageEveryX, feature))
+    .then(data => data.slice(0, size))
     .then(data => FetchResizedImages(activeSite, data, width, height, useSrcSet, srcSetSizes, squareImageSize, useSquareImageAfter))
     .then(data => FilterGallery(data))
     .catch((error) => {

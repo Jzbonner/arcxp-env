@@ -27,6 +27,7 @@ const fetch = (query) => {
     return GetCollectionData(activeSite, id, size, from)
       .then(data => StoryData(activeSite, data))
       .then(data => FilterGallery(data))
+      .then(data => data.slice(0, size))
       .catch((error) => {
         console.error('Error: ', error);
       });
