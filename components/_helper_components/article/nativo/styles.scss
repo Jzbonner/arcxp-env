@@ -8,17 +8,35 @@ article {
   .story-nativo_placeholder--boap elements with .ntv-moap and .ntv-boap elements
  */
 
+  .c-image-component .image-component-image {
+    display: inline-table;
+  }
+
   .taboola-split {
     display: flex;
+  }
+
+  .ntv-moap:before {
+    @include text-styles(1rem, 1, "Gordita");
+
+    @include breakpoint(desktop-sm) {
+      @include text-styles(1.125rem, 1, "Gordita");
+    }
+
+    @include section();
+
+    font-style: italic;
+    content: "Article continues below";
+    margin-bottom: 25px;
+    padding: 0 $min-margin;
   }
 
   .ntv-moap,
   .ntv-boap {
     @include amp-exclude {
-      clear: none !important;
       float: none;
     }
-
+  
     margin: 0 auto;
     padding: 0;
     text-align: left;
