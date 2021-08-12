@@ -15,7 +15,14 @@ const Image = ({ customFields }) => {
   const { cdnSite, cdnOrg } = getProperties(arcSite);
   let src = customFields?.src;
   const {
-    width, caption, credit, alt = '', link,
+    width,
+    caption,
+    credit,
+    alt = '',
+    link,
+    label,
+    explainerText,
+    additionalText,
   } = customFields;
 
   if (!src) {
@@ -34,26 +41,44 @@ const Image = ({ customFields }) => {
     const isGif = src?.endsWith('.gif');
 
     if (isGif) {
-      return <ImageSimple src={src} alt={alt} />;
+      return (
+        <>
+          {label && <div className="label">{label}</div>}
+          {explainerText && (
+            <div className="explainerText">{explainerText}</div>
+          )}
+          <ImageSimple src={src} alt={alt} />
+          {additionalText && (
+            <div className="additionalText">{additionalText}</div>
+          )}
+        </>
+      );
     }
 
     return (
-      <ImageGlobal
-        src={{
-          url: src,
-          useSrcSet: true,
-          caption,
-          credits,
-          alt_text: alt,
-        }}
-        imageType="isInlineImage"
-        useSrcSet={true}
-        srcSetSizes={[
-          [1600, 0],
-          [1100, 0],
-          [800, 0],
-        ]}
-      />
+      <>
+        {label && <div className="label">{label}</div>}
+        {explainerText && <div className="explainerText">{explainerText}</div>}
+        <ImageGlobal
+          src={{
+            url: src,
+            useSrcSet: true,
+            caption,
+            credits,
+            alt_text: alt,
+          }}
+          imageType="isInlineImage"
+          useSrcSet={true}
+          srcSetSizes={[
+            [1600, 0],
+            [1100, 0],
+            [800, 0],
+          ]}
+        />
+        {additionalText && (
+          <div className="additionalText">{additionalText}</div>
+        )}
+      </>
     );
   };
 
@@ -75,16 +100,34 @@ Image.propTypes = {
       description:
         'Can be resizer url from photo center that starts with /resizer/ or absolute url.',
     }).isRequired,
-    width: PropTypes.oneOf(['20%', '30%', '40%', '50%', '60%', '70%', '80%', '100%']).tag({
+    width: PropTypes.oneOf([
+      '20%',
+      '30%',
+      '40%',
+      '50%',
+      '60%',
+      '70%',
+      '80%',
+      '100%',
+    ]).tag({
       name: 'Desktop Width',
       defaultValue: '100%',
       description:
         'Sets width on desktop. On tablet and mobile width will be set to 100%.',
     }).isRequired,
-    alt: PropTypes.string.tag({
+    label: PropTypes.string.tag({
+      name: 'Label',
+    }),
+    explainerText: PropTypes.richtext.tag({
+      name: 'Explainer Text',
+    }),
+    additionalText: PropTypes.richtext.tag({
+      name: 'Additional Text',
+    }),
+    alt: PropTypes.richtext.tag({
       name: 'Alt Text',
     }),
-    caption: PropTypes.string.tag({
+    caption: PropTypes.richtext.tag({
       name: 'Caption',
     }),
     credit: PropTypes.string.tag({
