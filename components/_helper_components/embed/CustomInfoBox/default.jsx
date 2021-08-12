@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Image from '../../global/image/default.jsx';
+// import Image from '../../global/image/default.jsx';
 import './default.scss';
 
 const CustomInfoBox = ({ data, borderColor }) => {
@@ -11,6 +11,10 @@ const CustomInfoBox = ({ data, borderColor }) => {
   } = data || {};
 
   const infoBoxHeadline = headlines?.basic;
+  const [isHidden, setVisibility] = useState(true);
+  const toggleVisibility = () => {
+    setVisibility(!isHidden);
+  };
   let border = borderColor && borderColor !== '' ? `border-${borderColor}` : 'border-gray';
   const { tags = [] } = taxonomy || {};
   if (tags.length) {
@@ -46,19 +50,6 @@ const CustomInfoBox = ({ data, borderColor }) => {
       case 'header':
         infoBoxContent.push(<h3 key={`h${level}-${i}`}>{content}</h3>);
         break;
-      case 'image':
-        // a height of 0 makes the height proportional to the width
-        infoBoxContent.push(
-          <Image
-            width={800}
-            height={0}
-            src={cEl}
-            imageType="isInlineImage"
-            imageMarginBottom="b-margin-bottom-d40-m20"
-            key={`Image-${i}`}
-          />,
-        );
-        break;
       case 'list':
         if (listType === 'ordered') {
           infoBoxContent.push(<ol key={`list-${i}`}>
@@ -71,26 +62,21 @@ const CustomInfoBox = ({ data, borderColor }) => {
         }
         break;
       default:
-        return null;
+        infoBoxContent.push(<span style={{ display: 'none' }}>unsupported content element: {cElType}</span>);
     }
     return infoBoxContent;
   });
   const shownContent = dividerIndex > 0 ? infoBoxContent.splice(0, dividerIndex) : infoBoxContent;
   const hiddenContent = dividerIndex > 0 ? infoBoxContent.splice(dividerIndex + 1) : [];
   const hasHiddenContent = hiddenContent.length;
-  const toggleClass = (el) => {
-    const className = el.getAttribute('class');
-    const newClassName = className.indexOf('is-clicked') > -1 ? '' : 'is-clicked';
-    return newClassName;
-  };
 
   return <div className={`c-infoBox ${border}`}>
     {infoBoxHeadline && <h1>{infoBoxHeadline}</h1>}
     {shownContent.map(sCon => <>{sCon}</>)}
-    {hasHiddenContent && <div className='infoBox-hiddenContent'>
+    {hasHiddenContent && <div className={`infoBox-hiddenContent ${isHidden ? '' : 'is-visible'}`}>
       {hiddenContent.map(hCon => <>{hCon}</>)}
     </div>}
-    {hasHiddenContent && <hr className='' onClick={() => this.setAttribute('class', toggleClass(this))}></hr>}
+    {hasHiddenContent && <hr className={isHidden ? '' : 'is-clicked'} onClick={toggleVisibility} />}
   </div>;
 };
 

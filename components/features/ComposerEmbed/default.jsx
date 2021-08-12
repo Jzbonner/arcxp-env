@@ -5,11 +5,24 @@ import { useContent } from 'fusion:content';
 import CustomInfoBox from '../../_helper_components/embed/CustomInfoBox/default';
 
 const ComposerEmbed = (props) => {
-  const { customFields: { id, borderColor } } = props;
+  const { customFields, composerHtml } = props;
+  const { id, borderColor } = customFields || {};
   const appContext = useAppContext();
   const { globalContent } = appContext;
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
+  let embedId = id;
+
+  if (!embedId && composerHtml) {
+    const composerHtmlFormatted = composerHtml.replace(/[\\"\\']/g, '');
+    const htmlArr = composerHtmlFormatted.split('id=');
+    if (htmlArr.length < 2) return null;
+
+    embedId = htmlArr[1].replace(/[w+?|/>]/g, '');
+    if (!embedId || embedId === '') {
+      return null;
+    }
+  }
 
   const renderEmbed = (embedData) => {
     const { type, subtype } = embedData;
@@ -24,14 +37,14 @@ const ComposerEmbed = (props) => {
     }
   };
 
-  if (Object.keys(globalContent).length) {
+  if (Object.keys(globalContent).length && !embedId) {
     return renderEmbed(globalContent);
   }
 
   const embedData = useContent({
     source: 'content-api',
     query: {
-      id,
+      id: embedId,
       arcSite,
     },
   });
@@ -59,5 +72,6 @@ ComposerEmbed.propTypes = {
       value: 'gray',
     }),
   }),
+  composerHtml: PropTypes.object,
 };
 export default ComposerEmbed;

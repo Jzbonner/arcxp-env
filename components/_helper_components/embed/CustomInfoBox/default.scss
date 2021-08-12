@@ -33,6 +33,11 @@
       margin-bottom: 15px;
     }
 
+    ul,
+    ol {
+      margin-left: 15px;
+    }
+
     h1 {
       margin: 0 0 12px;
 
@@ -48,7 +53,18 @@
     hr {
       border: 0;
       text-align: center;
-      width: 100%;
+      width: auto;
+      margin: 0 auto;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+
+      &:before,
+      &:after {
+        position: relative;
+        cursor: pointer;
+        display: block;
+      }
 
       &:before {
         width: 132px;
@@ -56,22 +72,19 @@
         margin: 0 auto 8px;
         background: #cac9ca;
         content: " ";
-        display: block;
-        position: relative;
       }
 
       &:after {
         content: url("/pf/resources/images/expansion-arrow.svg");
-        width: 33px;
-        height: 33px;
+        width: auto;
+        height: auto;
         margin: 8px auto 0;
         object-fit: contain;
-        transform: rotate(-90deg);
-        position: relative;
+        transform: rotate(0deg);
       }
 
       &.is-clicked:after {
-        transform: rotate(0deg);
+        transform: rotate(180deg);
       }
     }
 

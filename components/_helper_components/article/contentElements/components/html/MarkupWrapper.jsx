@@ -5,6 +5,7 @@ import get from 'lodash/get';
 import ScriptWrapper from './components/Script/default';
 import ExpandableTextMessage from './components/ExpandableTextMessage/default';
 import PymLoader from './components/PymLoader/default';
+import ComposerEmbed from '../../../../../features/ComposerEmbed/default';
 
 class MarkupWrapper extends PureComponent {
   constructor(props) {
@@ -14,6 +15,7 @@ class MarkupWrapper extends PureComponent {
       'script',
       'ExpandableTextMessage',
       'PymLoader',
+      'CustomInfoBox',
     ];
 
     let component;
@@ -34,13 +36,16 @@ class MarkupWrapper extends PureComponent {
   render() {
     const component = get(this, 'component');
     if (!component) return <div dangerouslySetInnerHTML={{ __html: this.props.html }} />;
+    const embedHtml = this.props.html;
     switch (component) {
       case 'ExpandableTextMessage':
-        return <ExpandableTextMessage html={this.props.html} />;
+        return <ExpandableTextMessage html={embedHtml} />;
       case 'script':
-        return <ScriptWrapper html={this.props.html} />;
+        return <ScriptWrapper html={embedHtml} />;
       case 'PymLoader':
-        return <PymLoader html={this.props.html} />;
+        return <PymLoader html={embedHtml} />;
+      case 'CustomInfoBox':
+        return <ComposerEmbed {...{ composerHtml: embedHtml }} />;
       default:
         return <></>;
     }
