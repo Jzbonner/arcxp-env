@@ -5,7 +5,7 @@ import { useContent } from 'fusion:content';
 import CustomInfoBox from '../../_helper_components/embed/CustomInfoBox/default';
 
 const ComposerEmbed = (props) => {
-  const { customFields: { id } } = props;
+  const { customFields: { id, borderColor } } = props;
   const appContext = useAppContext();
   const { globalContent } = appContext;
   const fusionContext = useFusionContext();
@@ -18,7 +18,7 @@ const ComposerEmbed = (props) => {
 
     switch (subtype.toLowerCase()) {
       case 'infobox':
-        return <CustomInfoBox data={embedData} />;
+        return <CustomInfoBox data={embedData} borderColor={borderColor} />;
       default:
         return <p>this is {subtype} content</p>;
     }
