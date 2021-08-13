@@ -26,6 +26,8 @@
 
     .article-timestamp {
       line-height: 1;
+      margin-bottom: 10px;
+      display: inline-block;
     }
 
     .column-2,
@@ -57,9 +59,9 @@
       .headline-box {
         box-shadow: none;
         background-color: none;
-        margin-top: 15px;
+        margin-top: 10px;
         border-bottom: 1px solid #cdcdcd;
-        padding: 0 0 15px;
+        padding: 0;
         border-radius: unset;
 
         .headline {
