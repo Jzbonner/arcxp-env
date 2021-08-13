@@ -14,34 +14,29 @@ const SectionOutput = ({
   layout,
   noHeaderAndFooter,
   isSectionSpecialOne = false,
-  isHtmlOutput,
 }) => {
   const isErrorPage = layout === 'section-basic';
-  const zonesOutput = () => zones && (
-    zones.map((zone, i) => {
-      const {
-        content, rightRailZone, rightHalfZone, colLayout,
-      } = zone;
-      return <SectionHome feature={content}
-      rightRailContent={rightRailZone}
-      rightColContent={rightHalfZone}
-      colLayout={colLayout}
-      key={`section${i}`}
-      isErrorPage={isErrorPage}/>;
-    })
-  );
   return (
     <>
-      {!isHtmlOutput && <GlobalAdSlots pbPage={true} />}
+      {<GlobalAdSlots pbPage={true} />}
       {/* we omit breaking news on wraps */}
-      {!noHeaderAndFooter && !isHtmlOutput && <TopNavBreakingNews type={layout} omitBreakingNews={layout.indexOf('wrap-') !== -1} isSectionSpecialOne={isSectionSpecialOne} />}
-      {!isHtmlOutput && <main className={`c-sectionContent ${isErrorPage ? 'b-contentMaxWidth' : ''}`}>
-        {
-          zonesOutput()
-        }
+      {!noHeaderAndFooter && <TopNavBreakingNews type={layout} omitBreakingNews={layout.indexOf('wrap-') !== -1} isSectionSpecialOne={isSectionSpecialOne} />}
+      {<main className={`c-sectionContent ${isErrorPage ? 'b-contentMaxWidth' : ''}`}>
+        {zones && (
+          zones.map((zone, i) => {
+            const {
+              content, rightRailZone, rightHalfZone, colLayout,
+            } = zone;
+            return <SectionHome feature={content}
+            rightRailContent={rightRailZone}
+            rightColContent={rightHalfZone}
+            colLayout={colLayout}
+            key={`section${i}`}
+            isErrorPage={isErrorPage}/>;
+          })
+        )}
       </main>}
-      {isHtmlOutput && <>zonesOutput()</>}
-      {layout !== 'wrap-header_only' && !noHeaderAndFooter && !isHtmlOutput && <>
+      {layout !== 'wrap-header_only' && !noHeaderAndFooter && <>
         <Footer />
         <Copyright />
       </>}
@@ -54,7 +49,6 @@ SectionOutput.propTypes = {
   layout: PropTypes.string,
   noHeaderAndFooter: PropTypes.bool,
   isSectionSpecialOne: PropTypes.bool,
-  isHtmlOutput: PropTypes.bool,
 };
 
 export default SectionOutput;
