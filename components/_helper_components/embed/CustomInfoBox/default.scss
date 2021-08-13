@@ -25,6 +25,11 @@
       border-color: #fed240;
     }
 
+    .is-hidden {
+      display: none;
+      height: 0;
+    }
+
     > p,
     > div,
     > h2,

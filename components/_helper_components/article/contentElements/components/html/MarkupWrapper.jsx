@@ -37,14 +37,14 @@ class MarkupWrapper extends PureComponent {
     const component = get(this, 'component');
     if (!component) return <div dangerouslySetInnerHTML={{ __html: this.props.html }} />;
     const embedHtml = this.props.html;
-    switch (component) {
-      case 'ExpandableTextMessage':
+    switch (component.toLowerCase()) {
+      case 'expandabletextmessage':
         return <ExpandableTextMessage html={embedHtml} />;
       case 'script':
         return <ScriptWrapper html={embedHtml} />;
-      case 'PymLoader':
+      case 'pymloader':
         return <PymLoader html={embedHtml} />;
-      case 'CustomInfoBox':
+      case 'custominfobox':
         return <ComposerEmbed {...{ composerHtml: embedHtml }} />;
       default:
         return <></>;

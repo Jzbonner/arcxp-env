@@ -30,10 +30,10 @@ const CustomInfoBox = ({ data, borderColor }) => {
   contentElements.forEach((cEl, i) => {
     const {
       type: cElType,
-      level,
       content,
       list_type: listType,
       items: listItems,
+      _id: elId,
     } = cEl;
 
     switch (cElType) {
@@ -42,27 +42,28 @@ const CustomInfoBox = ({ data, borderColor }) => {
           dividerIndex = i;
           dividerSet = true;
         }
-        infoBoxContent.push(<hr key={`divider${i}`} />);
+        infoBoxContent.push({ type: 'hr', key: elId, content: '' });
         break;
       case 'text':
-        infoBoxContent.push(<p key={`p${i}`}>{content}</p>);
+        infoBoxContent.push({ type: 'p', key: elId, content });
         break;
       case 'header':
-        infoBoxContent.push(<h3 key={`h${level}-${i}`}>{content}</h3>);
+        infoBoxContent.push({ type: 'h3', key: elId, content });
         break;
       case 'list':
         if (listType === 'ordered') {
-          infoBoxContent.push(<ol key={`list-${i}`}>
-            {listItems.map((li, l) => <li key={`li${l}`}>{li.content}</li>)}
-          </ol>);
+          infoBoxContent.push({ type: 'ol', key: elId, content: listItems.map(li => <li key={`li-${li._id}`}>{li.content}</li>) });
         } else {
-          infoBoxContent.push(<ul key={`list-${i}`}>
-            {listItems.map((li, l) => <li key={`li${l}`}>{li.content}</li>)}
-          </ul>);
+          infoBoxContent.push({ type: 'ul', key: elId, content: listItems.map(li => <li key={`li-${li._id}`}>{li.content}</li>) });
         }
         break;
       default:
-        infoBoxContent.push(<span style={{ display: 'none' }}>unsupported content element: {cElType}</span>);
+        infoBoxContent.push({
+          type: 'span',
+          key: elId,
+          class: 'is-hidden',
+          content: `unsupported content element: ${cElType}`,
+        });
     }
     return infoBoxContent;
   });
@@ -72,9 +73,9 @@ const CustomInfoBox = ({ data, borderColor }) => {
 
   return <div className={`c-infoBox ${border}`}>
     {infoBoxHeadline && <h1>{infoBoxHeadline}</h1>}
-    {shownContent.map(sCon => <>{sCon}</>)}
+    {shownContent.map(sCon => <sCon.type key={sCon.key} className={sCon.class}>{sCon.content}</sCon.type>)}
     {hasHiddenContent && <div className={`infoBox-hiddenContent ${isHidden ? '' : 'is-visible'}`}>
-      {hiddenContent.map(hCon => <>{hCon}</>)}
+      {hiddenContent.map(hCon => <hCon.type key={hCon.key} className={hCon.class}>{hCon.content}</hCon.type>)}
     </div>}
     {hasHiddenContent && <hr className={isHidden ? '' : 'is-clicked'} onClick={toggleVisibility} />}
   </div>;
