@@ -27,7 +27,7 @@ export default (site = 'ajc', contentElements) => {
     // APD-964 continued, we make the calls and add the promises to the promiseArray
     storyIdsForBulkCalls.forEach((storyIdArray) => {
       const storyIdsString = storyIdArray.join(',');
-      const bulkCallUrl = `${CONTENT_BASE}/content/v4/ids?ids=${storyIdsString}&website=${site}&included_fields=content_elements,first_publish_date`;
+      const bulkCallUrl = `${CONTENT_BASE}/content/v4/ids?ids=${storyIdsString}&website=${site}&included_fields=content_elements,first_publish_date,streams`;
 
       if (storyIdsString) {
         const promise = axios
@@ -53,8 +53,8 @@ export default (site = 'ajc', contentElements) => {
       const storyDataArray = [];
       storyData.forEach((sdata) => {
         const { data } = sdata || {};
-        const { content_elements: dataContentElements } = data || {};
-        storyDataArray.push(dataContentElements);
+        const { content_elements: dataContentElements, streams } = data || {};
+        storyDataArray.push(dataContentElements, streams);
       });
 
       const flattenStoryDataArray = flatten(storyDataArray);
@@ -67,11 +67,13 @@ export default (site = 'ajc', contentElements) => {
         const {
           content_elements: contentElementsFromBulkCallForStory,
           first_publish_date: firstPublishDate,
+          streams,
         } = contentElementsFromBulkCall && contentElementsFromBulkCall[0];
         return {
           ...clonedStory,
           content_elements: contentElementsFromBulkCallForStory,
           first_publish_date: firstPublishDate,
+          streams,
         };
       });
     });

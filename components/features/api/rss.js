@@ -6,6 +6,7 @@ import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
 import handleSiteName from '../../layouts/_helper_functions/handleSiteName';
 import fetchEnv from '../../_helper_components/global/utils/environment';
 import { getFirst120CharsFromStory } from './_helper_functions/getFirst120CharFromStory';
+import resizer from '../../../content/sources/resizer';
 
 @Consumer
 class Api {
@@ -128,7 +129,17 @@ class Api {
 
         if (type === 'video') {
           const { basic = {} } = promoItems || {};
-          const { caption, url: promoImageUrl } = basic || {};
+          const { caption, resized_obj: resizedObj, url } = basic || {};
+          const { src: existingResizedVideoThumb } = resizedObj || {};
+          // fetch resized thumb when such is not existing
+          const imgQuery = {
+            src: url,
+            width: 500,
+            height: 282,
+            arcSite: siteID,
+          };
+          const { src: manuallyResizedThumb } = resizer.fetch(imgQuery);
+          const videoThumbResized = existingResizedVideoThumb || manuallyResizedThumb;
           const videoCaption = caption || '';
           const { url: mp4Url, stream_type: videoType } = streams && streams[0] ? streams[0] : {};
           let mediumType = '';
@@ -137,7 +148,8 @@ class Api {
           } else if (videoType === 'mp4') {
             mediumType = 'video/mp4';
           }
-          const videoXmlObject = {
+
+          return {
             item: [
               {
                 guid: `urn:uuid:${guid}`,
@@ -182,7 +194,7 @@ class Api {
                     {
                       _name: 'media:thumbnail',
                       _attrs: {
-                        url: promoImageUrl,
+                        url: videoThumbResized,
                       },
                     },
                   ],
@@ -190,8 +202,6 @@ class Api {
               ],
             ],
           };
-
-          return videoXmlObject;
         }
         // Standalone Gallery
         if (type === 'gallery') {
