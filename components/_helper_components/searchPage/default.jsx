@@ -135,7 +135,7 @@ const SearchPage = ({
       q: `${searchQuery}`,
       page: pageCount,
       arcSite,
-      sort: sortByDateState,
+      sortByDate: sortByDateState,
     },
   });
 
@@ -172,6 +172,7 @@ const SearchPage = ({
     setColumnSets([]);
     setAdIndex(1);
     setMapStartIndex(0);
+    setPageCount(1);
   };
 
   const handleSortType = (sortType) => {
@@ -208,6 +209,13 @@ const SearchPage = ({
     }
   }, [searchMetaData]);
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      resetStates();
+      setSearchQuery(searchInput);
+    }
+  };
+
   useEffect(() => {
     if (storyEls.length > 1) handleColumnSet();
   }, [storyEls]);
@@ -215,7 +223,6 @@ const SearchPage = ({
   useEffect(() => {
     if (columnSets.length >= 1) setAdIndex(adIndex + 1);
   }, [columnSets]);
-
 
   return (
     <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
@@ -228,6 +235,7 @@ const SearchPage = ({
             name="search"
             placeholder=""
             onChange={onChangeHandler}
+            onKeyDown={handleKeyDown}
             value={searchInput}></input>
         </div>
         <button onClick={handleButtonClick} className="search-btn">Search</button>

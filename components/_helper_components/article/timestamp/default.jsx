@@ -4,7 +4,7 @@ import computeTimeStamp from './_helper_functions/computeTimeStamp';
 import './default.scss';
 
 const TimeStamp = ({
-  firstPublishDate, displayDate, isHideTimestampTrue, isHyperlocalContent, ampPage = false, isTease = false, sponsorContentLabel,
+  firstPublishDate, displayDate, isHideTimestampTrue, isHyperlocalContent, ampPage = false, isTease = false, sponsorContentLabel, onSearchPage = false,
 }) => {
   let pageType = 'normal';
 
@@ -16,10 +16,12 @@ const TimeStamp = ({
 
   if (timeStamp === null) return null;
 
-  return (
+  return (<>
+    {onSearchPage && <div className="divider"></div>}
     <span className={isTease ? 'isTease article-timestamp' : 'article-timestamp'}>
       {timeStamp}
     </span>
+    </>
   );
 };
 
@@ -31,6 +33,7 @@ TimeStamp.propTypes = {
   ampPage: PropTypes.bool,
   isTease: PropTypes.bool,
   sponsorContentLabel: PropTypes.string,
+  onSearchPage: PropTypes.bool,
 };
 
 export default TimeStamp;
