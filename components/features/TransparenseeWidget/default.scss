@@ -3,17 +3,6 @@
 
 /* stylelint-disable declaration-no-important */
 
-.header-dayton {
-
-  .pointslocal-events-grid > .mdl-grid {
-    background-color: #20abab !important;
-  }
-
-  &.pointslocal-events-header {
-    background-color: #20abab;
-  }
-}
-
 .ttd-search {
   height: 3.3rem;
   position: relative;
@@ -41,6 +30,27 @@
 }
 
 .c-transparenseeWidget {
+
+  .header-dayton {
+
+    .pointslocal-events-grid > .mdl-grid {
+      background-color: #20abab !important;
+    }
+
+    &.pointslocal-events-header {
+      background-color: #20abab;
+    }
+
+    .search-options.mdl-grid--no-spacing .mdl-cell--3-col ul li {
+
+      .mdl-checkbox.is-checked {
+
+        .mdl-checkbox__focus-helper {
+          background: #20abab;
+        }
+      }
+    }
+  }
 
   .pseudo-searchbox {
     margin-top: 0 !important;
@@ -158,14 +168,25 @@
               padding-bottom: 4px;
             }
 
+            .mdl-checkbox__focus-helper,
             .mdl-checkbox__box-outline {
               top: 8px;
-              height: 13px;
+              left: 0;
               width: 13px;
+              height: 13px;
+              border-radius: 2px;
+              border-width: 1px;
+              border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
 
               @include breakpoint(desktop-sm) {
                 top: 0;
               }
+            }
+
+            .mdl-checkbox__box-outline {
+              background-size: 80%;
+              background-position: center;
+              background-repeat: no-repeat;
             }
 
             .mdl-checkbox__label {
@@ -174,6 +195,17 @@
 
               @include breakpoint(desktop-sm) {
                 font-size: 13px;
+              }
+            }
+
+            &.is-checked {
+
+              .mdl-checkbox__focus-helper {
+                background: #149acf;
+              }
+
+              .mdl-checkbox__box-outline {
+                background-image: url("../../../resources/icons/global/check-white.png");
               }
             }
           }
@@ -190,6 +222,7 @@
         padding-right: 0;
         padding-left: 0;
         width: 120px;
+        cursor: pointer;
       }
     }
 
