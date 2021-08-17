@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
@@ -34,6 +34,8 @@ const SearchPage = ({
   const [adIndex, setAdIndex] = useState(1);
   const [mapStartIndex, setMapStartIndex] = useState(0);
   const RP01RP09Array = [];
+
+  const inputElRef = useRef(null);
 
   const RP01Count = storyEls.length / 10;
 
@@ -135,7 +137,7 @@ const SearchPage = ({
       q: `${searchQuery}`,
       page: pageCount,
       arcSite,
-      sort: sortByDateState,
+      sortByDate: sortByDateState,
     },
   });
 
@@ -172,6 +174,7 @@ const SearchPage = ({
     setColumnSets([]);
     setAdIndex(1);
     setMapStartIndex(0);
+    setPageCount(1);
   };
 
   const handleSortType = (sortType) => {
@@ -208,6 +211,13 @@ const SearchPage = ({
     }
   }, [searchMetaData]);
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      resetStates();
+      setSearchQuery(searchInput);
+    }
+  };
+
   useEffect(() => {
     if (storyEls.length > 1) handleColumnSet();
   }, [storyEls]);
@@ -215,7 +225,6 @@ const SearchPage = ({
   useEffect(() => {
     if (columnSets.length >= 1) setAdIndex(adIndex + 1);
   }, [columnSets]);
-
 
   return (
     <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
@@ -228,6 +237,8 @@ const SearchPage = ({
             name="search"
             placeholder=""
             onChange={onChangeHandler}
+            ref={inputElRef}
+            onKeyDown={handleKeyDown}
             value={searchInput}></input>
         </div>
         <button onClick={handleButtonClick} className="search-btn">Search</button>
