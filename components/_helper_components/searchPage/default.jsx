@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
@@ -34,8 +34,6 @@ const SearchPage = ({
   const [adIndex, setAdIndex] = useState(1);
   const [mapStartIndex, setMapStartIndex] = useState(0);
   const RP01RP09Array = [];
-
-  const inputElRef = useRef(null);
 
   const RP01Count = storyEls.length / 10;
 
@@ -237,7 +235,6 @@ const SearchPage = ({
             name="search"
             placeholder=""
             onChange={onChangeHandler}
-            ref={inputElRef}
             onKeyDown={handleKeyDown}
             value={searchInput}></input>
         </div>

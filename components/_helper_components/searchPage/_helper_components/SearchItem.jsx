@@ -121,7 +121,6 @@ const SearchItem = ({
     return (<div className="c-credit-row">
       {sectionName && sectionEl()}
       {creditName && creditEl()}
-      <>
         <TimeStamp
           firstPublishDate={firstPublishDate}
           displayDate={displayDate}
@@ -129,7 +128,6 @@ const SearchItem = ({
           isTease={true}
           onSearchPage={true}
         />
-      </>
     </div>);
   };
 
