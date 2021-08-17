@@ -180,6 +180,79 @@
   &.b-contentMaxWidth {
     padding-top: 0;
   }
+
+  .c-customHTML .recipe_container {
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .recipe_title {
+      @include text-styles(1.5rem, 1.625, "Gordita-Bold");
+
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+      color: #3299ad;
+      border-bottom: 2px solid #3299ad;
+      flex: 0 0 100%;
+    }
+
+    .recipe_list {
+      width: 250px;
+      font-size: .9375rem;
+      color: #6c6c6c;
+      flex: 0 0 250px;
+      line-height: 1;
+
+      ul {
+        margin: 0 0 0 15px;
+      }
+
+      li {
+        margin-bottom: 14px;
+      }
+    }
+
+    .recipe_directions {
+      padding-left: 15px;
+      flex: 1;
+      font-size: .9375rem;
+      line-height: 1.25;
+
+      li {
+        margin-bottom: 8px;
+        list-style: decimal;
+      }
+    }
+
+    .nutrition {
+      font-size: .9375rem;
+      line-height: 1.0625;
+
+      .nutrition_title {
+        @include text-styles(1.375rem, 1, "Gordita-Bold");
+
+        margin: 12px 0;
+      }
+
+      .serving {
+        font-family: "Gordita-Bold";
+      }
+    }
+
+    @include between-breakpoints(mobile, tablet) {
+
+      .recipe_list {
+        flex: 0 0 100%;
+      }
+
+      .recipe_directions {
+        flex: 0 0 100%;
+        margin-top: 25px;
+        padding: 15px;
+      }
+    }
+  }
 }
 
 @include amp-exclude {
