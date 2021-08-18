@@ -198,18 +198,19 @@
     }
 
     .recipe_list {
+      border-top: 0;
       width: 250px;
       font-size: .9375rem;
       color: #6c6c6c;
       flex: 0 0 250px;
-      line-height: 1;
+      line-height: 1.25;
 
       ul {
         margin: 0 0 0 15px;
       }
 
       li {
-        margin-bottom: 14px;
+        margin: 0 0 14px;
       }
     }
 
@@ -225,21 +226,6 @@
       }
     }
 
-    .nutrition {
-      font-size: .9375rem;
-      line-height: 1.0625;
-
-      .nutrition_title {
-        @include text-styles(1.375rem, 1, "Gordita-Bold");
-
-        margin: 12px 0;
-      }
-
-      .serving {
-        font-family: "Gordita-Bold";
-      }
-    }
-
     @include between-breakpoints(mobile, tablet) {
 
       .recipe_list {
@@ -251,6 +237,20 @@
         margin-top: 25px;
         padding: 15px;
       }
+    }
+  }
+
+  .nutrition {
+    @include text-styles(.9375rem, 1.15, "Gordita");
+
+    .nutrition_title {
+      @include text-styles(1.375rem, 1, "Gordita-Bold");
+
+      margin: 12px 0 8px;
+    }
+
+    .serving {
+      font-family: "Gordita-Bold";
     }
   }
 }
