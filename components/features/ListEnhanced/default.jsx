@@ -15,7 +15,7 @@ import './default.scss';
 const ListEnhanced = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const appContext = useAppContext();
-  const { metaValue, globalContent, globalContentConfig } = appContext;
+  const { metaValue, globalContentConfig } = appContext;
   const noAds = metaValue('noAds');
   const { content, title, textBox } = customFields;
   const { contentConfigValues, contentService } = content;
@@ -23,13 +23,24 @@ const ListEnhanced = ({ customFields }) => {
   const storiesPerLoad = 10;
   const [storiesCount, setStoryCount] = useState(storiesPerLoad);
 
-  const featureContent = useContent({
-    source: contentService,
+  let data = useContent({
+    source: contentService || 'author-stories-list',
     query: {
       ...contentConfigValues,
+      ...globalContentConfig.query,
       arcSite,
     },
   });
+
+
+  if (!Array.isArray(data)) {
+    if (data && Array.isArray(data.content_elements)) {
+      data = data.content_elements;
+    } else {
+      return null;
+    }
+  }
+
 
   const collectionMetaData = useContent({
     source: 'collection-meta-data',
@@ -39,15 +50,6 @@ const ListEnhanced = ({ customFields }) => {
     },
     filter,
   });
-
-  const data = (Array.isArray(featureContent)
-      && featureContent?.slice(0, contentConfigValues.size))
-    || (Array.isArray(globalContent)
-      && globalContent?.slice(0, globalContentConfig?.query?.size));
-
-  if (!data) {
-    return null;
-  }
 
   const collectionTitle = collectionMetaData?.headlines?.basic;
   const filteredStories = data?.slice(0, storiesCount);
@@ -165,6 +167,6 @@ ListEnhanced.propTypes = {
   }),
 };
 
-ListEnhanced.label = 'List Page - List Enhanced';
+ListEnhanced.label = 'List Enhanced';
 
 export default ListEnhanced;

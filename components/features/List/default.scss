@@ -1,7 +1,6 @@
 @import "./../../../src/styles/base";
 
-.c-homeListContainer,
-.c-staffBioPage {
+.c-homeListContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -607,28 +606,6 @@
           }
         }
       }
-    }
-  }
-}
-
-// staff bio specific styling - adding here so none of the existing list feature styles are affected
-
-.c-staffBioPage .two-column-mobile {
-  @include between-breakpoints(tablet, desktop-sm) {
-    align-items: flex-start;
-
-    &.hasLoadMoreButton {
-      
-      .tablet-line {
-        height: calc(100% - 7rem);
-      }
-    }
-  }
-
-  @include between-breakpoints(mobile, desktop-sm) {
-
-    .c-homeList .homeList-text {
-      max-width: 100%;
     }
   }
 }

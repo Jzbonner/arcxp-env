@@ -182,7 +182,7 @@
       width: 80px;
       height: 80px;
       overflow: hidden;
-  
+
       @include breakpoint(desktop-sm) {
         width: 104px;
         height: 104px;
@@ -273,8 +273,7 @@
 
 /* Ad-style overrides */
 
-.c-listPage .c-searchListContainter .list-hp05,
-.c-staffBioPage .list-hp05 {
+.c-listPage .c-searchListContainter .list-hp05 {
   display: flex;
   height: 123px;
   padding-bottom: 40px;
