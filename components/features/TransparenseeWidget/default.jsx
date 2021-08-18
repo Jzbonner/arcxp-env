@@ -14,22 +14,33 @@ const TransparenseeWidget = (props) => {
     },
   });
 
+  const windowExists = typeof window !== 'undefined';
+
   useEffect(() => {
     const toggled = {};
 
     const toggleCheckedClass = (e) => {
       if (e.target.nodeName === 'INPUT') {
-        if (!toggled[e.target.id]) {
-          e.target.labels[0].classList.add('is-checked');
-          toggled[e.target.id] = 'toggled';
-        } else {
-          e.target.labels[0].classList.remove('is-checked');
-          delete toggled[e.target.id];
+        if (
+          e.target.labels[0]
+          && e.target.labels[0].classList.contains('mdl-checkbox')
+        ) {
+          if (!toggled[e.target.id]) {
+            e.target.labels[0].classList.add('is-checked');
+            toggled[e.target.id] = 'toggled';
+          } else {
+            e.target.labels[0].classList.remove('is-checked');
+            delete toggled[e.target.id];
+          }
         }
       }
     };
-    window.addEventListener('click', toggleCheckedClass);
-    return () => window.removeEventListener('click', toggleCheckedClass);
+
+    if (windowExists) {
+      window.addEventListener('click', toggleCheckedClass);
+      return () => window.removeEventListener('click', toggleCheckedClass);
+    }
+    return null;
   }, []);
 
   if (callback) {
