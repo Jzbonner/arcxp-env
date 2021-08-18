@@ -17,17 +17,17 @@ const Section = ({
 }) => {
   let paragraphCounter = 0;
   const newContentElements = [];
-
-  elements.forEach((element) => {
+  const incompleteSectionSegment = stopIndex > elements.length;
+  elements.forEach((element, i) => {
+    const isLastItemInSection = incompleteSectionSegment && i === elements.length - 1;
     // filters the paragraphs to only show the ones inside the range specified by startIndex and stopIndex
     if (startIndex <= paragraphCounter && paragraphCounter < stopIndex) {
-      if (stopIndex === elements.length) {
+      if (stopIndex === elements.length || isLastItemInSection) {
         newContentElements.push(element);
       }
-
       if (insertedAds) {
         let insertIndex;
-        if (stopIndex === elements.length) {
+        if (stopIndex === elements.length || isLastItemInSection) {
           insertIndex = insertedAds.findIndex(el => paragraphCounter + 1 === el.insertAfterParagraph);
         } else {
           insertIndex = insertedAds.findIndex(el => paragraphCounter === el.insertAfterParagraph);
@@ -49,7 +49,7 @@ const Section = ({
           newContentElements.push(rightRail.ad());
         }
       }
-      if (stopIndex !== elements.length) {
+      if (stopIndex !== elements.length && !isLastItemInSection) {
         newContentElements.push(element);
       }
     }
