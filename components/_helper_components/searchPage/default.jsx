@@ -249,7 +249,11 @@ const SearchPage = ({
       <div className="c-section with-rightRail">
         <div className="c-contentElements list-contentElements">
           {columnSets.length >= 1 && columnSets.map(el => el)}
-          {columnSets.length >= 1 && <LoadMoreButton
+          {columnSets.length >= 1
+          && searchMetaData
+          && searchMetaData.data
+          && searchMetaData.data.length >= 10
+          && <LoadMoreButton
             newStories={filteredTeases}
             handleOnClick={() => setPageCount(pageCount + 1)}
           />}
