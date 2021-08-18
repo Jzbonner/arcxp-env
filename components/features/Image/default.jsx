@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import ImageGlobal from '../../_helper_components/global/image/default';
-import ImageSimple from '../../_helper_components/global/imageSimple/default';
 import getDomain from '../../layouts/_helper_functions/getDomain';
 import './default.scss';
 
@@ -40,35 +39,21 @@ const Image = ({ customFields }) => {
   const getImage = () => {
     const isGif = src?.endsWith('.gif');
 
-    if (isGif) {
-      return (
-        <>
-          {label && <div className="label">{label}</div>}
-          {explainerText && (
-            <div className="explainerText">{explainerText}</div>
-          )}
-          <ImageSimple src={src} alt={alt} />
-          {additionalText && (
-            <div className="additionalText">{additionalText}</div>
-          )}
-        </>
-      );
-    }
-
     return (
       <>
         {label && <div className="label">{label}</div>}
         {explainerText && <div className="explainerText">{explainerText}</div>}
         <ImageGlobal
           src={{
+            resized_obj: { src: isGif && src },
             url: src,
-            useSrcSet: true,
+            useSrcSet: !isGif,
             caption,
             credits,
             alt_text: alt,
           }}
           imageType="isInlineImage"
-          useSrcSet={true}
+          useSrcSet={!isGif}
           srcSetSizes={[
             [1600, 0],
             [1100, 0],
