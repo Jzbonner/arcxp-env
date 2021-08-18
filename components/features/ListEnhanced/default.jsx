@@ -15,23 +15,41 @@ import './default.scss';
 const ListEnhanced = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const appContext = useAppContext();
-  const { metaValue, globalContentConfig } = appContext;
+  const { metaValue, globalContentConfig: { query: globalContentQuery, source: globalContentContentSource } } = appContext;
   const noAds = metaValue('noAds');
   const { content, title, textBox } = customFields;
-  const { contentConfigValues, contentService } = content;
+  const { contentConfigValues: customFieldsQuery, contentService: customFieldContentSource } = content;
+  let source;
 
   const storiesPerLoad = 10;
   const [storiesCount, setStoryCount] = useState(storiesPerLoad);
+  const isStaffBio = globalContentContentSource === 'author-search';
+
+  if (isStaffBio) {
+    source = 'author-stories-list';
+  } else if (customFieldContentSource) {
+    source = customFieldContentSource;
+  } else if (globalContentContentSource) {
+    source = globalContentContentSource;
+  }
 
   let data = useContent({
-    source: contentService || 'author-stories-list',
+    source,
     query: {
-      ...contentConfigValues,
-      ...globalContentConfig.query,
+      ...customFieldsQuery,
+      ...globalContentQuery,
       arcSite,
     },
   });
 
+  const collectionMetaData = useContent({
+    source: 'collection-meta-data',
+    query: {
+      id: customFieldsQuery?.id || globalContentQuery?.id,
+      arcSite,
+    },
+    filter,
+  });
 
   if (!Array.isArray(data)) {
     if (data && Array.isArray(data.content_elements)) {
@@ -40,16 +58,6 @@ const ListEnhanced = ({ customFields }) => {
       return null;
     }
   }
-
-
-  const collectionMetaData = useContent({
-    source: 'collection-meta-data',
-    query: {
-      id: contentConfigValues?.id || globalContentConfig?.query?.id,
-      arcSite,
-    },
-    filter,
-  });
 
   const collectionTitle = collectionMetaData?.headlines?.basic;
   const filteredStories = data?.slice(0, storiesCount);
@@ -76,7 +84,7 @@ const ListEnhanced = ({ customFields }) => {
                 <div className="list-items">
                   <span className="tablet-line"></span>
                   <div className="col-1">
-                    {filteredStories.map((el, storyIndex) => {
+                    {filteredTeases.map((el, storyIndex) => {
                       if (
                         sectionIndex * storiesPerLoad <= storyIndex
                         && storyIndex < (sectionIndex + 1) * storiesPerLoad - 5
@@ -92,7 +100,7 @@ const ListEnhanced = ({ customFields }) => {
                     })}
                   </div>
                   <div className="col-2">
-                    {filteredStories.map((el, storyIndex) => {
+                    {filteredTeases.map((el, storyIndex) => {
                       if (
                         sectionIndex * storiesPerLoad + 5 <= storyIndex
                         && storyIndex < (sectionIndex + 1) * storiesPerLoad
