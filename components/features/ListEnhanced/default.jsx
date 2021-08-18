@@ -21,8 +21,7 @@ const ListEnhanced = ({ customFields }) => {
   const { contentConfigValues: customFieldsQuery, contentService: customFieldContentSource } = content;
   let source;
 
-  const storiesPerLoad = 10;
-  const [storiesCount, setStoryCount] = useState(storiesPerLoad);
+  const [storiesCount, setStoryCount] = useState(10);
   const isStaffBio = globalContentContentSource === 'author-search';
 
   if (isStaffBio) {
@@ -59,6 +58,8 @@ const ListEnhanced = ({ customFields }) => {
     }
   }
 
+  const storiesPerLoad = Math.min(10, data.length);
+
   const collectionTitle = collectionMetaData?.headlines?.basic;
   const filteredStories = data?.slice(0, storiesCount);
   const moreStoriesToLoad = !!(data?.length - filteredStories?.length);
@@ -87,7 +88,7 @@ const ListEnhanced = ({ customFields }) => {
                     {filteredTeases.map((el, storyIndex) => {
                       if (
                         sectionIndex * storiesPerLoad <= storyIndex
-                        && storyIndex < (sectionIndex + 1) * storiesPerLoad - 5
+                        && storyIndex < (sectionIndex + 1) * storiesPerLoad - (storiesPerLoad / 2)
                       ) {
                         return (
                           <ListItem
@@ -102,7 +103,7 @@ const ListEnhanced = ({ customFields }) => {
                   <div className="col-2">
                     {filteredTeases.map((el, storyIndex) => {
                       if (
-                        sectionIndex * storiesPerLoad + 5 <= storyIndex
+                        sectionIndex * storiesPerLoad + (storiesPerLoad / 2) <= storyIndex
                         && storyIndex < (sectionIndex + 1) * storiesPerLoad
                       ) {
                         return (
