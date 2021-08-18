@@ -226,8 +226,9 @@ const StoryPageLayout = () => {
      </div>
     )}
     {/* For Ohio, about the author should be the last component of the story, otherwise its about the author THEN editors picks , latest, and most popular */}
-    {<div className="c-section full-width b-clear-both"><BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />
-      {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && arcSite === 'ajc' && <EndOfStory arcSite={arcSite} taxonomy={taxonomy} uuid={uuid}/>}
+    {<div className="c-section full-width b-clear-both">
+      <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />
+      {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && arcSite === 'ajc' && !ampPage && <EndOfStory arcSite={arcSite} taxonomy={taxonomy} uuid={uuid} />}
     </div>}
     {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
     {!noAds && !isHyperlocalContent && !sponsorSectionID && (
