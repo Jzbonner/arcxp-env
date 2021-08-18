@@ -14,6 +14,8 @@ const TransparenseeWidget = (props) => {
     },
   });
 
+  const windowExists = typeof window !== 'undefined';
+
   useEffect(() => {
     const toggled = {};
 
@@ -34,8 +36,11 @@ const TransparenseeWidget = (props) => {
       }
     };
 
-    window.addEventListener('click', toggleCheckedClass);
-    return () => window.removeEventListener('click', toggleCheckedClass);
+    if (windowExists) {
+      window.addEventListener('click', toggleCheckedClass);
+      return () => window.removeEventListener('click', toggleCheckedClass);
+    }
+    return null;
   }, []);
 
   if (callback) {
