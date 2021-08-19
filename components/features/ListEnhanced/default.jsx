@@ -12,12 +12,12 @@ import filter from '../../../content/filters/collectionTitle';
 import ArcAd from '../ads/default';
 import './default.scss';
 
-const ListEnhanced = ({ customFields }) => {
+const ListEnhanced = ({ customFields = {} }) => {
   const { arcSite } = useFusionContext();
   const appContext = useAppContext();
   const { metaValue, globalContentConfig: { query: globalContentQuery, source: globalContentContentSource } } = appContext;
   const noAds = metaValue('noAds');
-  const { content, title, textBox } = customFields;
+  const { content = {}, title, textBox } = customFields;
   const { contentConfigValues: customFieldsQuery, contentService: customFieldContentSource } = content;
   let source;
 
