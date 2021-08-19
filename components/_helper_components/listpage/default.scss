@@ -1,7 +1,8 @@
 @import "../../../src/styles/base/_mixins.scss";
 @import "../../../src/styles/base/breakpoints";
 
-.c-listPage {
+.c-listPage,
+.c-staffBioPage {
 
   &.b-sectionHome-padding {
     padding-top: 1.25rem;
@@ -136,6 +137,40 @@
 
       &:empty {
         display: none;
+      }
+    }
+  }
+}
+
+.c-staffBioPage {
+
+  .c-section {
+    display: block;
+  }
+
+  .c-rightRail {
+    @include breakpoint(tablet) {
+      display: none;
+    }
+  }
+
+  .btn-loadMore {
+    margin-right: 3.3%;
+  }
+
+  .c-homeList.listPage.staffBio-listItem {
+    // have to override border logic coming from the list feature
+    border-bottom: 1px #dadada solid !important; /* stylelint-disable-line declaration-no-important */
+
+    &:last-child {
+      border: none !important; /* stylelint-disable-line declaration-no-important */
+    }
+
+    .homeList-text .headline.listPage {
+      @include text-styles(.938rem, 1.47, "Lora-Bold");
+
+      @include breakpoint(desktop-sm) {
+        @include text-styles(1rem, 1.47, "Lora-Bold");
       }
     }
   }
