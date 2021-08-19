@@ -4,7 +4,7 @@ import { useContent } from 'fusion:content';
 import checkTags from './_helper_functions/checkTags';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
 import ArcAd from '../features/ads/default';
-import StaffBio from '../_helper_components/staffBioPage/staffBio/default';
+import StaffBio from '../features/StaffBio/default';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import CollectionList from '../_helper_components/staffBioPage/collectionList/default';

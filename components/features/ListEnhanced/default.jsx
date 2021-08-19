@@ -15,18 +15,28 @@ import './default.scss';
 const ListEnhanced = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const appContext = useAppContext();
-  const { metaValue, globalContent, globalContentConfig } = appContext;
+  const { metaValue, globalContentConfig: { query: globalContentQuery, source: globalContentContentSource } } = appContext;
   const noAds = metaValue('noAds');
   const { content, title, textBox } = customFields;
-  const { contentConfigValues, contentService } = content;
+  const { contentConfigValues: customFieldsQuery, contentService: customFieldContentSource } = content;
+  let source;
 
-  const storiesPerLoad = 10;
-  const [storiesCount, setStoryCount] = useState(storiesPerLoad);
+  const [storiesCount, setStoryCount] = useState(10);
+  const isStaffBio = globalContentContentSource === 'author-search';
 
-  const featureContent = useContent({
-    source: contentService,
+  if (isStaffBio) {
+    source = 'author-stories-list';
+  } else if (customFieldContentSource) {
+    source = customFieldContentSource;
+  } else if (globalContentContentSource) {
+    source = globalContentContentSource;
+  }
+
+  let data = useContent({
+    source,
     query: {
-      ...contentConfigValues,
+      ...customFieldsQuery,
+      ...globalContentQuery,
       arcSite,
     },
   });
@@ -34,20 +44,21 @@ const ListEnhanced = ({ customFields }) => {
   const collectionMetaData = useContent({
     source: 'collection-meta-data',
     query: {
-      id: contentConfigValues?.id || globalContentConfig?.query?.id,
+      id: customFieldsQuery?.id || globalContentQuery?.id,
       arcSite,
     },
     filter,
   });
 
-  const data = (Array.isArray(featureContent)
-      && featureContent?.slice(0, contentConfigValues.size))
-    || (Array.isArray(globalContent)
-      && globalContent?.slice(0, globalContentConfig?.query?.size));
-
-  if (!data) {
-    return null;
+  if (!Array.isArray(data)) {
+    if (data && Array.isArray(data.content_elements)) {
+      data = data.content_elements;
+    } else {
+      return null;
+    }
   }
+
+  const storiesPerLoad = Math.min(10, data.length);
 
   const collectionTitle = collectionMetaData?.headlines?.basic;
   const filteredStories = data?.slice(0, storiesCount);
@@ -74,10 +85,10 @@ const ListEnhanced = ({ customFields }) => {
                 <div className="list-items">
                   <span className="tablet-line"></span>
                   <div className="col-1">
-                    {filteredStories.map((el, storyIndex) => {
+                    {filteredTeases.map((el, storyIndex) => {
                       if (
                         sectionIndex * storiesPerLoad <= storyIndex
-                        && storyIndex < (sectionIndex + 1) * storiesPerLoad - 5
+                        && storyIndex < (sectionIndex + 1) * storiesPerLoad - (storiesPerLoad / 2)
                       ) {
                         return (
                           <ListItem
@@ -90,9 +101,9 @@ const ListEnhanced = ({ customFields }) => {
                     })}
                   </div>
                   <div className="col-2">
-                    {filteredStories.map((el, storyIndex) => {
+                    {filteredTeases.map((el, storyIndex) => {
                       if (
-                        sectionIndex * storiesPerLoad + 5 <= storyIndex
+                        sectionIndex * storiesPerLoad + (storiesPerLoad / 2) <= storyIndex
                         && storyIndex < (sectionIndex + 1) * storiesPerLoad
                       ) {
                         return (
@@ -165,6 +176,6 @@ ListEnhanced.propTypes = {
   }),
 };
 
-ListEnhanced.label = 'List Page - List Enhanced';
+ListEnhanced.label = 'List Enhanced';
 
 export default ListEnhanced;

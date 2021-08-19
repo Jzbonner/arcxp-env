@@ -179,6 +179,13 @@
 
     .section:last-child {
 
+      .col-1 {
+
+        .c-enhancedList-listItem:last-child {
+          border-bottom: 1px solid #dadada;
+        }
+      }
+
       .col-2 {
 
         .c-enhancedList-listItem:last-child {
