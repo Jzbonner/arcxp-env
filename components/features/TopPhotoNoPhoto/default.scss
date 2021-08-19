@@ -36,10 +36,6 @@
     }
 
     .column-2 {
-      @include breakpoint(desktop-sm) {
-        min-height: 245px;
-      }
-
       @media (min-width: 1600px) {
         min-height: 292px;
       }
