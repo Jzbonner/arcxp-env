@@ -182,6 +182,7 @@
       width: 80px;
       height: 80px;
       overflow: hidden;
+
       @include breakpoint(desktop-sm) {
         width: 104px;
         height: 104px;
