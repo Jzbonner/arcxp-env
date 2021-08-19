@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
@@ -39,11 +40,11 @@ const Section = ({
   if (childSections.length === 0) {
     return <>
       <li className={`nav-items nav-itemText ${ePaperClass} nav-itemText-${primarySectionID}`}>
-        <a href={link.indexOf('/') === 0 ? `${siteDomainURL}${link}` : link} target={newTab === 'true' ? '_blank' : '_self'} rel='noopener noreferrer'>
+        <a href={link.indexOf('/') === 0 ? `${siteDomainURL}${link}` : link} target={newTab === 'true' ? '_blank' : '_self'} rel={newTab === 'true' ? 'noopener noreferrer' : null}>
           {name}
         </a>
       </li>
-        </>;
+    </>;
   }
   const childList = childSections.map((childSection, idx) => {
     const {

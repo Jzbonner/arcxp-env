@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 
 const RenderMenuLinks = (links = []) => links.map((link) => {
@@ -10,7 +11,7 @@ const RenderMenuLinks = (links = []) => links.map((link) => {
   }
   return (
     <li className={'flyout-item'} key={link.name}>
-      <a href={destination} target={!isExternalLink || isExternalLink === 'false' ? '_self' : '_blank'} rel='noopener noreferrer' title={link.name}>
+      <a href={destination} target={!isExternalLink || isExternalLink === 'false' ? '_self' : '_blank'} rel={!isExternalLink || isExternalLink === 'false' ? null : 'noopener noreferrer'} title={link.name}>
         {link.name}
       </a>
     </li>
