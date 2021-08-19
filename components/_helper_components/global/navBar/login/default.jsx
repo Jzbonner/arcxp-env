@@ -36,12 +36,6 @@ const Login = ({
     connextSite = connextSite.replace(/-/g, '');
   }
 
-  const accountSubdomain = `//${currentEnv !== 'prod' ? 'test-' : ''}myaccount`;
-
-  const connextDomain = `${accountSubdomain}.${connextSite}.com/${
-    siteCode ? siteCode.toLowerCase() : connextSite
-  }`;
-  const profileLink = `${connextDomain}/myprofile`;
   const [userState, _setUserState] = useState('');
   const [showUserMenu, _setShowUserMenu] = useState(false);
   const userStateRef = React.useRef(userState);
@@ -53,11 +47,6 @@ const Login = ({
   };
 
   const setShowUserMenu = (data) => {
-    if (isMobile) {
-      if (userStateRef.current !== 'logged-out') {
-        window.location.href = profileLink;
-      }
-    }
     showUserMenuRef.current = data;
     _setShowUserMenu(data);
   };
