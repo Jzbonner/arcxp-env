@@ -8,8 +8,9 @@ article {
   .story-nativo_placeholder--boap elements with .ntv-moap and .ntv-boap elements
  */
 
-  .c-image-component .image-component-image {
-    display: inline-table;
+  .c-image-component,
+  .c-video-component {
+    clear: left;
   }
 
   .taboola-split {
