@@ -5,13 +5,14 @@ import GlobalAdSlots from '../_helper_components/global/ads/default';
 import getQueryParams from './_helper_functions/getQueryParams';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
-import ListPage from '../_helper_components/listpage/default';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
+import ListEnhanced from '../features/ListEnhanced/default';
+import SectionHome from '../_helper_components/home/SectionHome/SectionHome';
 
 const ListPageLayout = (props) => {
   const appContext = useAppContext();
   const {
-    globalContent, globalContentConfig, requestUri,
+    globalContent, requestUri,
   } = appContext;
   if (!globalContent) return null;
   const queryParams = getQueryParams(requestUri);
@@ -24,12 +25,9 @@ const ListPageLayout = (props) => {
     <>
       <GlobalAdSlots />
       {!noHeaderAndFooter && <TopNavBreakingNews />}
-      <ListPage
-        globalContent={globalContent}
-        globalContentConfig={globalContentConfig}
-        title={title}
-        textBox={textBox}
-      />
+      <main className="c-sectionCentered">
+        <SectionHome feature={<ListEnhanced customFields={{ title, textBox }} />} />
+      </main>
       {!noHeaderAndFooter && <>
         <Footer />
         <Copyright />
