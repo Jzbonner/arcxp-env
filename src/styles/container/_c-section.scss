@@ -63,6 +63,14 @@
         @include arc-ad-full-width;
 
         border-top: 1px solid #cdcdcd;
+        
+        .arcad[class*="MP0"] {
+          padding-bottom: 30px;
+
+          @include breakpoint(tablet) {
+            padding-bottom: 10px;
+          }
+        }
 
         @include breakpoint(tablet) {
           border-top: none;
@@ -442,5 +450,26 @@
 
   @include breakpoint(desktop-xxxl) {
     max-width: 820px;
+  }
+}
+
+/* RP0 mobile style overrides */
+
+.c-sectionHome .c-rightRail .arc_ad[class*="RP0"] {
+
+  .arcad:not(:empty) {
+    border-top: 1px solid #cdcdcd;
+
+    @include breakpoint(tablet) {
+      border-top: none;
+    }
+
+    &:before {
+      position: static;
+
+      @include breakpoint(tablet) {
+        position: absolute;
+      }
+    }
   }
 }
