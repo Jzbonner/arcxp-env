@@ -83,6 +83,14 @@
           .c-sponsor {
             @include text-styles(.75rem, 1, "Gordita-Medium");
 
+            @include between-breakpoints(mobile, mobile-lg) {
+              @include text-styles(.6rem, 1, "Gordita-Medium");
+            }
+          
+            @include breakpoint(tablet) {
+              @include text-styles(.75rem, 1, "Gordita-Medium");
+            }
+
             width: max-content;
             font-weight: 500;
             text-transform: uppercase;
@@ -124,6 +132,8 @@
         .c-sponsorOverlay {
           background: #000;
           padding: 5px;
+          position: unset;
+          margin-top: -4px;
 
           @include text-styles(.75rem, 1, "Gordita");
 
@@ -131,6 +141,10 @@
 
           @include breakpoint(tablet) {
             padding: 7.5px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            padding: 4px;
           }
         }
 
