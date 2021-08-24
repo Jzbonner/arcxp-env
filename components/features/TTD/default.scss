@@ -209,6 +209,10 @@
 
     .c-homeLeadContainer {
       justify-content: normal;
+
+      @include breakpoint(desktop-sm) {
+        margin-bottom: 15px;
+      }
     }
 
     .column-1 {
