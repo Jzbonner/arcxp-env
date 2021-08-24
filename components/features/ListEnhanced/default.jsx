@@ -21,11 +21,13 @@ const ListEnhanced = ({ customFields = {} }) => {
   const { contentConfigValues: customFieldsQuery, contentService: customFieldContentSource } = content;
   let source;
 
-  const [storiesCount, setStoryCount] = useState(10);
+  const storiesPerLoadMoreBtnClick = 10;
+  const [storiesCount, setStoryCount] = useState(storiesPerLoadMoreBtnClick);
   const isStaffBio = globalContentContentSource === 'author-search';
 
   if (isStaffBio) {
     source = 'author-stories-list';
+    globalContentQuery.size = storiesCount + (storiesPerLoadMoreBtnClick * 2);
   } else if (customFieldContentSource) {
     source = customFieldContentSource;
   } else if (globalContentContentSource) {
@@ -58,12 +60,11 @@ const ListEnhanced = ({ customFields = {} }) => {
     }
   }
 
-  const storiesPerLoad = Math.min(10, data.length);
-
+  const storiesPerSection = Math.min(storiesPerLoadMoreBtnClick, data.length);
   const collectionTitle = collectionMetaData?.headlines?.basic;
   const filteredStories = data?.slice(0, storiesCount);
   const moreStoriesToLoad = !!(data?.length - filteredStories?.length);
-  const sections = Math.ceil(filteredStories?.length / storiesPerLoad);
+  const sections = Math.ceil(filteredStories?.length / storiesPerSection);
 
   let filteredTeases = AddFirstInlineImage(filteredStories, 'list', ['list']);
   filteredTeases = updateImageRefs(filteredTeases);
@@ -87,8 +88,8 @@ const ListEnhanced = ({ customFields = {} }) => {
                   <div className="col-1">
                     {filteredTeases.map((el, storyIndex) => {
                       if (
-                        sectionIndex * storiesPerLoad <= storyIndex
-                        && storyIndex < (sectionIndex + 1) * storiesPerLoad - (storiesPerLoad / 2)
+                        sectionIndex * storiesPerSection <= storyIndex
+                        && storyIndex < (sectionIndex + 1) * storiesPerSection - (storiesPerSection / 2)
                       ) {
                         return (
                           <ListItem
@@ -103,8 +104,8 @@ const ListEnhanced = ({ customFields = {} }) => {
                   <div className="col-2">
                     {filteredTeases.map((el, storyIndex) => {
                       if (
-                        sectionIndex * storiesPerLoad + (storiesPerLoad / 2) <= storyIndex
-                        && storyIndex < (sectionIndex + 1) * storiesPerLoad
+                        sectionIndex * storiesPerSection + (storiesPerSection / 2) <= storyIndex
+                        && storyIndex < (sectionIndex + 1) * storiesPerSection
                       ) {
                         return (
                           <ListItem
@@ -135,7 +136,7 @@ const ListEnhanced = ({ customFields = {} }) => {
                 {sectionIndex + 1 === sections && moreStoriesToLoad && (
                   <LoadMoreButton
                     numberOfNewStories={filteredStories.length}
-                    handleOnClick={() => setStoryCount(storiesCount + storiesPerLoad)
+                    handleOnClick={() => setStoryCount(storiesCount + storiesPerLoadMoreBtnClick)
                     }
                   />
                 )}
