@@ -77,7 +77,7 @@ Html.propType = {
  * @param {String} canonicalUrl - the canonicalURL for the defaut meta data
  * @return {Object} default metadata including canonical URL and AMP base markup
  */
-export function BaseMarkup({ canonicalUrl }) {
+export function BaseMarkup() {
   return (
     <Fragment>
       <meta charSet="utf-8" />
@@ -85,7 +85,6 @@ export function BaseMarkup({ canonicalUrl }) {
         name="viewport"
         content="width=device-width,minimum-scale=1,initial-scale=1"
       />
-      <link rel="canonical" href={canonicalUrl} />
       <AmpBoilerplateStyle />
       <AmpNoScript />
     </Fragment>
