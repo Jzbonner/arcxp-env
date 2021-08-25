@@ -120,6 +120,36 @@
     flex-direction: column;
   }
 
+  &.no-results {
+
+    .column-1 {
+      width: 100%;
+    }
+
+    .tablet-line {
+      display: none;
+    }
+
+    .no-results-text {
+      @include text-styles(1rem, 1.44, "Gordita");
+
+      color: #313132;
+      border-bottom: solid 1px #dadada;
+      padding-bottom: 1rem;
+
+      @include breakpoint(tablet) {
+        border: none;
+        padding: 1rem  0 0;
+      }
+
+      @include breakpoint(desktop-sm) {
+        margin-top: 0;
+        border-bottom: solid 1px #dadada;
+        padding: .5rem 0 1rem;
+      }
+    }
+  }
+
   .tablet-line {
     @include breakpoint(tablet) {
       margin-left: 15px;
