@@ -45,6 +45,7 @@ class MarkupWrapper extends PureComponent {
       case 'pymloader':
         return <PymLoader html={embedHtml} />;
       case 'custominfobox':
+        // if the composer story references a custom info box (via the <CustomInfoBox id="" /> pattern) then we pass it to the composer embed component
         return <ComposerEmbed {...{ composerHtml: embedHtml }} />;
       default:
         return <></>;

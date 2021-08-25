@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import Image from '../../global/image/default.jsx';
 import './default.scss';
 
+/* this helper component renders the Custom Info Box as outlined in APD-1441 */
 const CustomInfoBox = ({ data, borderColor }) => {
   const {
     headlines,
@@ -15,6 +15,7 @@ const CustomInfoBox = ({ data, borderColor }) => {
   const toggleVisibility = () => {
     setVisibility(!isHidden);
   };
+  // the border color is customizable, either via dropdown in pagebuilder custom fields (line 19) or via tags added in composer (lines 20-27)
   let border = borderColor && borderColor !== '' ? `border-${borderColor}` : 'border-gray';
   const { tags = [] } = taxonomy || {};
   if (tags.length) {
@@ -36,8 +37,10 @@ const CustomInfoBox = ({ data, borderColor }) => {
       _id: elId,
     } = cEl;
 
+    // we loop through the elements in the custom info box subtype and push their contents to a new array for later rendering
     switch (cElType) {
       case 'divider':
+        // dividers are special, they (the first one) determine the "hide/show" delimiter of the info box
         if (!dividerSet) {
           dividerIndex = i;
           dividerSet = true;
@@ -58,6 +61,7 @@ const CustomInfoBox = ({ data, borderColor }) => {
         }
         break;
       default:
+        // if it's an element that we don't officially support in info boxes, it gets pushed as a hidden span (so that we have evidence of the mismatched element in source code)
         infoBoxContent.push({
           type: 'span',
           key: elId,
@@ -67,6 +71,7 @@ const CustomInfoBox = ({ data, borderColor }) => {
     }
     return infoBoxContent;
   });
+  // if there is a divider, we split the array accordingly
   const shownContent = dividerIndex > 0 ? infoBoxContent.splice(0, dividerIndex) : infoBoxContent;
   const hiddenContent = dividerIndex > 0 ? infoBoxContent.splice(dividerIndex + 1) : [];
   const hasHiddenContent = hiddenContent.length;
@@ -77,6 +82,7 @@ const CustomInfoBox = ({ data, borderColor }) => {
     {hasHiddenContent && <div className={`infoBox-hiddenContent ${isHidden ? '' : 'is-visible'}`}>
       {hiddenContent.map(hCon => <hCon.type key={hCon.key} className={hCon.class}>{hCon.content}</hCon.type>)}
     </div>}
+    {/* the divider becomes an HR element which handles the hide/show click event */}
     {hasHiddenContent && <hr className={isHidden ? '' : 'is-clicked'} onClick={toggleVisibility} />}
   </div>;
 };
