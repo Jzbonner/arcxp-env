@@ -18,6 +18,7 @@ const TopNavBreakingNews = ({
   noAds = false,
   omitBreakingNews = false,
   galleryTopics = [],
+  isSectionSpecialOne = false,
 }) => {
   const [aboveWindowShade, setAboveWindowShade] = useState(false);
   const [hasHalfShade, setHasHalfShade] = useState(false);
@@ -81,7 +82,7 @@ const TopNavBreakingNews = ({
   return (
     <>
       {!noAds && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
-      <div className={`nav-breaking-news ${aboveWindowShade ? 'is-above-shade' : ''} ${docHasWindowShade(true) || hasHalfShade ? 'with-half-shade' : ''}`} >
+      <div className={`nav-breaking-news ${isSectionSpecialOne ? 'is-section-special-one' : ''} ${aboveWindowShade ? 'is-above-shade' : ''} ${docHasWindowShade(true) || hasHalfShade ? 'with-half-shade' : ''}`} >
         <WeatherAlerts />
         <NavBar
           articleURL={articleURL}
@@ -108,6 +109,7 @@ TopNavBreakingNews.propTypes = {
   noAds: PropTypes.bool,
   omitBreakingNews: PropTypes.bool,
   galleryTopics: PropTypes.array,
+  isSectionSpecialOne: PropTypes.bool,
 };
 
 export default TopNavBreakingNews;
