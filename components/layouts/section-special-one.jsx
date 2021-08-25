@@ -15,7 +15,7 @@ const SectionLayout = (props) => {
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
   const zonesCollection = [{ content: zone1 }];
 
-  return <SectionOutput zones={zonesCollection} layout={layout} noHeaderAndFooter={noHeaderAndFooter}/>;
+  return <SectionOutput zones={zonesCollection} layout={layout} noHeaderAndFooter={noHeaderAndFooter} isSectionSpecialOne={true} />;
 };
 
 SectionLayout.sections = ['Zone 1'];

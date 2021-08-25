@@ -250,6 +250,10 @@
   padding-bottom: .063rem;
   margin-bottom: .875rem;
 
+  &.isMissingPromo {
+    flex-direction: row;
+  }
+
   .homeList-text .c-tease-icon {
     margin-left: 0;
   }
