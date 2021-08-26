@@ -12,21 +12,33 @@ import filter from '../../../content/filters/collectionTitle';
 import ArcAd from '../ads/default';
 import './default.scss';
 
-const ListEnhanced = ({ customFields }) => {
+const ListEnhanced = ({ customFields = {} }) => {
   const { arcSite } = useFusionContext();
   const appContext = useAppContext();
-  const { metaValue, globalContent, globalContentConfig } = appContext;
+  const { metaValue, globalContentConfig: { query: globalContentQuery, source: globalContentContentSource } } = appContext;
   const noAds = metaValue('noAds');
-  const { content, title, textBox } = customFields;
-  const { contentConfigValues, contentService } = content;
+  const { content = {}, title, textBox } = customFields;
+  const { contentConfigValues: customFieldsQuery, contentService: customFieldContentSource } = content;
+  let source;
 
-  const storiesPerLoad = 10;
-  const [storiesCount, setStoryCount] = useState(storiesPerLoad);
+  const storiesPerLoadMoreBtnClick = 10;
+  const [storiesCount, setStoryCount] = useState(storiesPerLoadMoreBtnClick);
+  const isStaffBio = globalContentContentSource === 'author-search';
 
-  const featureContent = useContent({
-    source: contentService,
+  if (isStaffBio) {
+    source = 'author-stories-list';
+    globalContentQuery.size = storiesCount + (storiesPerLoadMoreBtnClick * 2);
+  } else if (customFieldContentSource) {
+    source = customFieldContentSource;
+  } else if (globalContentContentSource) {
+    source = globalContentContentSource;
+  }
+
+  let data = useContent({
+    source,
     query: {
-      ...contentConfigValues,
+      ...customFieldsQuery,
+      ...globalContentQuery,
       arcSite,
     },
   });
@@ -34,25 +46,25 @@ const ListEnhanced = ({ customFields }) => {
   const collectionMetaData = useContent({
     source: 'collection-meta-data',
     query: {
-      id: contentConfigValues?.id || globalContentConfig?.query?.id,
+      id: customFieldsQuery?.id || globalContentQuery?.id,
       arcSite,
     },
     filter,
   });
 
-  const data = (Array.isArray(featureContent)
-      && featureContent?.slice(0, contentConfigValues.size))
-    || (Array.isArray(globalContent)
-      && globalContent?.slice(0, globalContentConfig?.query?.size));
-
-  if (!data) {
-    return null;
+  if (!Array.isArray(data)) {
+    if (data && Array.isArray(data.content_elements)) {
+      data = data.content_elements;
+    } else {
+      return null;
+    }
   }
 
+  const storiesPerSection = Math.min(storiesPerLoadMoreBtnClick, data.length);
   const collectionTitle = collectionMetaData?.headlines?.basic;
   const filteredStories = data?.slice(0, storiesCount);
   const moreStoriesToLoad = !!(data?.length - filteredStories?.length);
-  const sections = Math.ceil(filteredStories?.length / storiesPerLoad);
+  const sections = Math.ceil(filteredStories?.length / storiesPerSection);
 
   let filteredTeases = AddFirstInlineImage(filteredStories, 'list', ['list']);
   filteredTeases = updateImageRefs(filteredTeases);
@@ -70,23 +82,41 @@ const ListEnhanced = ({ customFields }) => {
           <Fragment key={sectionIndex}>
             <section className="section">
               <div className="content">
-                <div className="list-items">
                 {sectionIndex === 0 && getNewsTipText(textBox, 'desktop')}
+                <div className="list-items">
                   <span className="tablet-line"></span>
-                  {filteredStories.map((el, storyIndex) => {
-                    if (
-                      sectionIndex * storiesPerLoad <= storyIndex
-                      && storyIndex < (sectionIndex + 1) * storiesPerLoad
-                    ) {
-                      return (
-                        <ListItem
-                          key={`${sectionIndex}-${storyIndex}`}
-                          {...el}
-                        />
-                      );
-                    }
-                    return null;
-                  })}
+                  <div className="col-1">
+                    {filteredTeases.map((el, storyIndex) => {
+                      if (
+                        sectionIndex * storiesPerSection <= storyIndex
+                        && storyIndex < (sectionIndex + 1) * storiesPerSection - (storiesPerSection / 2)
+                      ) {
+                        return (
+                          <ListItem
+                            key={`${sectionIndex}-${storyIndex}`}
+                            {...el}
+                          />
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
+                  <div className="col-2">
+                    {filteredTeases.map((el, storyIndex) => {
+                      if (
+                        sectionIndex * storiesPerSection + (storiesPerSection / 2) <= storyIndex
+                        && storyIndex < (sectionIndex + 1) * storiesPerSection
+                      ) {
+                        return (
+                          <ListItem
+                            key={`${sectionIndex}-${storyIndex}`}
+                            {...el}
+                          />
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
                 </div>
                 {!noAds && (
                   <>
@@ -106,7 +136,7 @@ const ListEnhanced = ({ customFields }) => {
                 {sectionIndex + 1 === sections && moreStoriesToLoad && (
                   <LoadMoreButton
                     numberOfNewStories={filteredStories.length}
-                    handleOnClick={() => setStoryCount(storiesCount + storiesPerLoad)
+                    handleOnClick={() => setStoryCount(storiesCount + storiesPerLoadMoreBtnClick)
                     }
                   />
                 )}
@@ -147,6 +177,6 @@ ListEnhanced.propTypes = {
   }),
 };
 
-ListEnhanced.label = 'List Page - List Enhanced';
+ListEnhanced.label = 'List Enhanced';
 
 export default ListEnhanced;

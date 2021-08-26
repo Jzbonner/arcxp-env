@@ -1,0 +1,72 @@
+@import "../../../../../src/styles/base/mixins";
+@import "../../../../../src/styles/base/breakpoints";
+
+.c-enhancedList-listItem {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px #dadada solid;
+  padding: 15px 0;
+
+  &.isMissingPromo {
+
+    .col-1 {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  &:nth-child(5),
+  &:nth-child(10) {
+    @include breakpoint(tablet) {
+      border: none;
+      margin: 0;
+    }
+
+    @include breakpoint(desktop-sm) {
+      border-bottom: 1px #dadada solid;
+    }
+  }
+
+  .col-1 {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .c-tease-icon {
+    margin-bottom: 3px;
+  }
+
+  .headline {
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: -.08px;
+    margin: 0 0 10px;
+    display: inline-block;
+    margin-top: -3px;
+
+    @include text-styles(.875rem, 1.47, "Lora-Bold");
+
+    a {
+      color: inherit;
+    }
+  }
+
+  .article-timestamp {
+    line-height: 1;
+  }
+
+  .image {
+    position: relative;
+    min-width: 80px;
+    max-width: 80px;
+    display: inline-block;
+    height: auto;
+    margin: 0 0 0 25px;
+
+    @include breakpoint(desktop-sm) {
+      min-width: 104px;
+      max-width: 104px;
+    }
+  }
+}

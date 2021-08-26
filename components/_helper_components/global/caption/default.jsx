@@ -17,7 +17,8 @@ const Caption = (
   const { deployment, contextPath } = appContext;
 
 
-  const toggle = () => {
+  const toggle = (e) => {
+    e.preventDefault();
     setToggle(!toggleButton);
   };
 

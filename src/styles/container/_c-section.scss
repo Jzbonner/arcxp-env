@@ -51,7 +51,19 @@
       .arc_ad[class*="MP0"] {
         @include arc-ad-full-width;
 
-        border-top: none;
+        border-top: 1px solid #cdcdcd;
+        
+        .arcad[class*="MP0"] {
+          padding-bottom: 30px;
+
+          @include breakpoint(tablet) {
+            padding-bottom: 10px;
+          }
+        }
+
+        @include breakpoint(tablet) {
+          border-top: none;
+        }
 
         @include breakpoint(desktop-sm) {
           width: inherit;
@@ -80,9 +92,11 @@
       .c-HS02 {
         margin-bottom: 20px;
         width: inherit;
+        border-top: 1px solid #cdcdcd;
 
         @include breakpoint(tablet) {
           margin-bottom: 40px;
+          border-top: none;
         }
 
         @include arc-ad-full-width;
@@ -134,7 +148,11 @@
 
         .arcad:not(:empty) {
           padding: 30px 0;
-          margin: 20px 0;
+          border-top: 1px solid #cdcdcd;
+
+          @include breakpoint(tablet) {
+            margin: 20px 0;
+          }
         }
       }
     }
@@ -424,5 +442,27 @@
 
   @include breakpoint(desktop-xxxl) {
     max-width: 820px;
+  }
+}
+
+/* RP0 mobile style overrides */
+
+.c-sectionHome .c-rightRail .arc_ad[class*="RP0"] {
+
+  .arcad:not(:empty) {
+    border-top: 1px solid #cdcdcd;
+    padding-top: 15px;
+
+    @include breakpoint(tablet) {
+      border-top: none;
+    }
+
+    &:before {
+      position: static;
+
+      @include breakpoint(tablet) {
+        position: absolute;
+      }
+    }
   }
 }

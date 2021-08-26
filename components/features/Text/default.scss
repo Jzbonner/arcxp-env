@@ -4,6 +4,13 @@
   margin-bottom: $min-Msection-margin;
   max-width: 100%;
 
+  &.no-rules {
+
+    .c-textFeature-content {
+      border-bottom: none;
+    }
+  }
+
   .c-textFeature-title {
     color: #313132;
     letter-spacing: -.38px;
@@ -30,25 +37,21 @@
     border-bottom: 1px solid #cdcdcd;
     padding-bottom: 15px;
 
-    @include text-styles(.688rem, 1.82, "Gordita");
+    @include text-styles(1rem, 1.82, "Gordita");
   
     @include breakpoint(desktop-sm) {
-      @include text-styles(.813rem, 1.54, "Gordita");
+      @include text-styles(1rem, 1.54, "Gordita");
     }
     
     p,
     strong {
       color: #313132;
 
-      @include text-styles(.688rem, 1.82, "Gordita");
+      @include text-styles(1rem, 1.82, "Gordita");
   
       @include breakpoint(desktop-sm) {
-        @include text-styles(.813rem, 1.54, "Gordita");
+        @include text-styles(1rem, 1.54, "Gordita");
       }
-    }
-
-    p {
-      margin-bottom: $min-margin;
     }
 
     a {

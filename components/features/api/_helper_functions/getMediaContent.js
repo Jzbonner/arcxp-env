@@ -21,6 +21,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     promo_image: basicPromoImage = {},
     promo_items: basicPromoItems = {},
     content_elements: basicContentElements = [],
+    description: basicDescription,
   } = basic || {};
 
   const { basic: basicGalleryPromo } = basicPromoItems || {};
@@ -55,9 +56,11 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
       leadObjectType = 'video/mp4';
       leadObjectUrl = basicMp4Url;
     }
-    const { caption: videoCaption, url: basicThumbNailImage = '' } = basicPromoImage || {};
+    // removing caption: videoCaption, since it's a description of the promo_image, not the actual video
+    const { url: basicThumbNailImage = '' } = basicPromoImage || {};
+    const { basic: videoDescription } = basicDescription || {};
     const videoAuthor = getVideoAuthor(basic);
-    const checkVideoCaption = videoCaption || '';
+    const checkVideoCaption = videoDescription || '';
     leadObject = mediaObj(leadObjectType, 'video', leadObjectUrl, siteID, mediaTitle, checkVideoCaption, videoAuthor, true, basicThumbNailImage, false);
   }
 

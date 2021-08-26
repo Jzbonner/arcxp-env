@@ -1,0 +1,71 @@
+@import "./../../../src/styles/base";
+
+.c-image-feature {
+  height: min-content;
+  width: 100%;
+  text-align: center;
+
+  .label {
+    @include text-styles(.9rem, 1.625, "Gordita-Bold");
+
+    color: #000;
+    text-align: left;
+  }
+
+  .explainerText,
+  .additionalText {
+    @include text-styles(.85rem, 1.625, "Gordita");
+
+    text-align: left;
+    color: #000;
+  }
+
+  .c-caption {
+    color: #000;
+  }
+
+  @include breakpoint(desktop-sm) {
+    min-width: var(--width, initial);
+    max-width: var(--width, initial);
+
+    &:not(:first-child) {
+      margin-left: 2rem;
+    }
+
+    &:not(:last-child) {
+      margin-right: 2rem;
+    }
+  }
+
+  img[src$=".gif"] {
+    width: 100%;
+  }
+
+  .c-image-component {
+    margin: 1rem 0 .75rem;
+  }
+}
+
+.c-rightRail .c-image-feature {
+  margin-left: 0;
+  margin-right: 0;
+
+  @include breakpoint(desktop-sm) {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+
+    .c-image-component {
+      margin: .75rem 0 .5rem;
+
+      .c-caption {
+        width: calc(100% - 4.25rem);
+
+        .photo-caption .photo-caption-text {
+          @include text-styles(.95rem, 1.5, "Gordita");
+
+          padding: 4px 2px;
+        }
+      }
+    }
+  }
+}

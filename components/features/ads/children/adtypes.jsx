@@ -585,7 +585,8 @@ export const adSlots = {
     },
   },
   'RP09 sticky (desktop only)': {
-    slotName: 'RP09-desktop',
+    slotName: 'RP09',
+    biddingName: 'RP09-desktop',
     dimensions: [
       [
         [300, 250],

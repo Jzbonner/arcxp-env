@@ -215,7 +215,7 @@ const SiteMetrics = ({ isAmp }) => {
           },
           "siteData": {
             "siteID": "${metrics && metrics.siteID ? metrics.siteID : site}",
-            "siteDomain": "${siteDomain.replace('https://www.', '')}",
+            "siteDomain": "${currentEnv === 'sandbox' ? 'sandbox.' : ''}${siteDomain.replace('https://www.', '')}",
             "siteVersion": "responsive site",
             "siteFormat": "${metrics && metrics.siteFormat ? metrics.siteFormat : 'news'}",
             "siteMetro": "${metrics && metrics.siteMetro ? metrics.siteMetro : ''}",

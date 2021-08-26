@@ -32,7 +32,7 @@ const SophiTags = ({ isAmp }) => {
   } = contentMeta || {};
   const sophiContentType = isNonContentPage ? 'section' : 'article';
   let sophiSection = topSection.indexOf('/') === 0 ? topSection.substr(1) : topSection;
-  const sophiMainSection = sophiSection.substr(0, sophiSection.indexOf('/'));
+  const sophiMainSection = sophiSection.indexOf('/') > -1 ? sophiSection.substr(0, sophiSection.indexOf('/')) : sophiSection;
   sophiSection = sophiSection.replace(/\//g, ':');
 
   const accessCategory = paywallStatus === 'premium' ? 'metered views' : 'free access';

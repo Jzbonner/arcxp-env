@@ -26,6 +26,8 @@
 
     .article-timestamp {
       line-height: 1;
+      margin-bottom: 10px;
+      display: inline-block;
     }
 
     .column-2,
@@ -34,10 +36,6 @@
     }
 
     .column-2 {
-      @include breakpoint(desktop-sm) {
-        min-height: 245px;
-      }
-
       @media (min-width: 1600px) {
         min-height: 292px;
       }
@@ -57,7 +55,8 @@
       .headline-box {
         box-shadow: none;
         background-color: none;
-        margin-top: 15px;
+        margin-top: 10px;
+        border-bottom: 1px solid #cdcdcd;
         padding: 0;
         border-radius: unset;
 
@@ -65,7 +64,7 @@
           letter-spacing: -.16px;
           margin: 0 0 10px;
 
-          @include text-styles(1rem, 1.375, "Lora");
+          @include text-styles(1rem, 1.375, "Lora-Bold");
         }
       }
     }

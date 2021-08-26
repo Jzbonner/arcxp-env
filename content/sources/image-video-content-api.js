@@ -1,5 +1,5 @@
 const schemaName = 'article';
-const ttl = 259200;
+const ttl = 3600;
 
 const params = {
   path: 'text',

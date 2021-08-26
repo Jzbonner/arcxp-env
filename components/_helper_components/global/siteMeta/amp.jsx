@@ -2,6 +2,7 @@ import React from 'react';
 import { useAppContext } from 'fusion:context';
 import renderImage from '../../../layouts/_helper_functions/getFeaturedImage.js';
 import getContentMeta from './_helper_functions/getContentMeta';
+import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
 import { safeHtml } from '../utils/stringUtils';
 
 
@@ -16,6 +17,7 @@ const SiteMetaAmp = () => {
   if (!contentMeta) {
     return null;
   }
+
   const {
     url,
     site,
@@ -31,6 +33,8 @@ const SiteMetaAmp = () => {
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
 
+  const updatedURL = `${url.indexOf('http:') > -1 || url.indexOf('https:') > -1 ? '' : `https://www.${handleSiteName(site)}.com`}${url === '/homepage' || url === '/homepage/' ? '' : url}`;
+
   let pageTitle = seoTitle;
   if (!seoTitle) pageTitle = title;
 
@@ -40,6 +44,7 @@ const SiteMetaAmp = () => {
     <>
       <link rel="apple-touch-icon" href={appleIconPath} />
       <link rel="shortcut icon" href={faviconPath} />
+      <link rel="canonical" href={updatedURL} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={parsedDescription} />
       <meta name="twitter:image" content={thumbnailImage} />
@@ -60,7 +65,7 @@ const SiteMetaAmp = () => {
       <title>{pageTitle}</title>
       <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
-      <meta property="article:opinion" content={isOpinion} />
+      <meta property="article:opinion" content={isOpinion.toString()} />
       <meta name="story.meter" content={paywallStatus} />
       {metaValue('topics') && <meta name="topics" content={metaValue('topics')} />}
       {noIndex === 'yes' && <meta name="robots" content="noindex" />}
