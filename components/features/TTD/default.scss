@@ -210,7 +210,7 @@
     .c-homeLeadContainer {
       justify-content: normal;
 
-      @include breakpoint(desktop-sm) {
+      @include breakpoint(desktop-lg) {
         margin-bottom: 15px;
       }
     }
