@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="46" height="47" viewBox="0 0 46 47">
+    <defs>
+        <filter id="rhd38cit1a" width="169.7%" height="169.7%" x="-22.7%" y="-22.7%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dx="4" dy="4" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="3"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.896767437 0 0 0 0 0.896767437 0 0 0 0 0.896767437 0 0 0 0.599835824 0"/>
+        </filter>
+        <rect id="hpcinj7t6b" width="33" height="33" x="0" y="0" rx="11"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g>
+                        <g>
+                            <g transform="translate(-168.000000, -570.000000) translate(20.000000, 449.500000) translate(109.000000, 120.500000) translate(66.000000, 27.500000) scale(-1, 1) translate(-66.000000, -27.500000) translate(49.500000, 11.000000) translate(16.500000, 16.500000) rotate(-90.000000) translate(-16.500000, -16.500000)">
+                                <use fill="#000" filter="url(#rhd38cit1a)" xlink:href="#hpcinj7t6b"/>
+                                <use fill="#FFF" stroke="#ECECEC" xlink:href="#hpcinj7t6b"/>
+                            </g>
+                            <path fill="#212126" d="M22.645 11.88c.638 0 1.155.517 1.155 1.155s-.517 1.155-1.155 1.155H16.87v5.775c0 .638-.517 1.155-1.155 1.155s-1.155-.517-1.155-1.155v-6.93c0-.638.517-1.155 1.155-1.155h6.93z" transform="translate(-168.000000, -570.000000) translate(20.000000, 449.500000) translate(109.000000, 120.500000) translate(66.000000, 27.500000) scale(-1, 1) translate(-66.000000, -27.500000) translate(49.500000, 11.000000) translate(16.500000, 16.500000) rotate(-90.000000) translate(-16.500000, -16.500000) translate(19.180000, 16.500000) rotate(-45.000000) translate(-19.180000, -16.500000)"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

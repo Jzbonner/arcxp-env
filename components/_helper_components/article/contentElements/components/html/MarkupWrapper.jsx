@@ -5,6 +5,7 @@ import get from 'lodash/get';
 import ScriptWrapper from './components/Script/default';
 import ExpandableTextMessage from './components/ExpandableTextMessage/default';
 import PymLoader from './components/PymLoader/default';
+import ComposerEmbed from '../../../../../features/ComposerEmbed/default';
 
 class MarkupWrapper extends PureComponent {
   constructor(props) {
@@ -14,6 +15,7 @@ class MarkupWrapper extends PureComponent {
       'script',
       'ExpandableTextMessage',
       'PymLoader',
+      'CustomInfoBox',
     ];
 
     let component;
@@ -34,13 +36,17 @@ class MarkupWrapper extends PureComponent {
   render() {
     const component = get(this, 'component');
     if (!component) return <div dangerouslySetInnerHTML={{ __html: this.props.html }} />;
-    switch (component) {
-      case 'ExpandableTextMessage':
-        return <ExpandableTextMessage html={this.props.html} />;
+    const embedHtml = this.props.html;
+    switch (component.toLowerCase()) {
+      case 'expandabletextmessage':
+        return <ExpandableTextMessage html={embedHtml} />;
       case 'script':
-        return <ScriptWrapper html={this.props.html} />;
-      case 'PymLoader':
-        return <PymLoader html={this.props.html} />;
+        return <ScriptWrapper html={embedHtml} />;
+      case 'pymloader':
+        return <PymLoader html={embedHtml} />;
+      case 'custominfobox':
+        // if the composer story references a custom info box (via the <CustomInfoBox id="" /> pattern) then we pass it to the composer embed component
+        return <ComposerEmbed {...{ composerHtml: embedHtml }} />;
       default:
         return <></>;
     }
