@@ -142,13 +142,13 @@ const SearchPage = ({
   const buildSearchItems = () => {
     if (!storyEls) return null;
 
-    const column1Output = getListsByColumn(storyEls, 1);
-    const column2Output = getListsByColumn(storyEls, 2);
+    const column1Output = storyEls !== 'no-results' ? getListsByColumn(storyEls, 1) : <div className="no-results-text">We could not find anything related to your search. Please try your search again.</div>;
+    const column2Output = storyEls !== 'no-results' ? getListsByColumn(storyEls, 2) : null;
     const currentAdIndex = adIndex;
 
     return (
       <>
-      <div className="c-searchListContainter two-column left-photo-display-class">
+      <div className={`c-searchListContainter two-column left-photo-display-class ${storyEls === 'no-results' ? 'no-results' : ''}`}>
         {column1Output && <div className="column-1">{column1Output}</div>}
         <div className="tablet-line"></div>
         {column2Output && <div className="column-2">{column2Output}</div>}
@@ -191,9 +191,11 @@ const SearchPage = ({
 
   useEffect(() => {
     if (searchMetaData) {
-      if (searchMetaData.data) {
+      if (searchMetaData?.data.length > 0) {
         filteredTeases = AddFirstInlineImage(searchMetaData.data, 'list', ['list']);
         filteredTeases = updateImageRefs(filteredTeases);
+      } else {
+        setStoryEls('no-results');
       }
 
       if (filteredTeases) {
