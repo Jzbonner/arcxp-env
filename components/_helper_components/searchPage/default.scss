@@ -93,6 +93,11 @@
     margin-left: 5px;
   }
 
+  .sort-date,
+  .sort-header {
+    cursor: pointer;
+  }
+
   span:nth-child(0) {
     color: #313132;
     font-size: .875rem;
@@ -224,6 +229,7 @@
 
     .headline {
       margin-bottom: 7px;
+      width: 90%;
 
       a {
         color: #000;
@@ -234,7 +240,8 @@
   }
 
   .item-text-preview {
-    width: 247px;
+    width: 95%;
+    max-width: 247px;
 
     @include text-styles(.75rem, 1.5, "Gordita");
 
@@ -254,12 +261,11 @@
 
       .divider {
         content: "";
-        width: 2px;
+        width: 1px;
         height: 15px;
         margin-left: 5px;
         margin-right: 5px;
         background-color: #9b9b9b;
-        font-family: "Gordita";
       }
     }
 
@@ -280,8 +286,19 @@
   padding-bottom: .063rem;
   margin-bottom: .875rem;
 
+  @include breakpoint(desktop-sm) {
+    margin-bottom: 0;
+  }
+
   &.isMissingPromo {
     flex-direction: row;
+  }
+
+  &.multi-credits {
+
+    ~ .bottom-content .c-credit-row .isTease.article-timestamp {
+      width: 110px;
+    }
   }
 
   .homeList-text .c-tease-icon {

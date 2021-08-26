@@ -62,6 +62,8 @@ const SearchItem = ({
   let defaultPromoHeight = 282;
   const creditName = credits && credits.by && credits.by[0] && credits.by[0].name ? credits.by[0].name : null;
   const sectionName = primarySite && primarySite.name ? primarySite.name : null;
+  const hasMoreThanOneCredit = !!(creditName && creditName.includes(' and'));
+  const hasLongCredit = !!(creditName && creditName.length && creditName.length >= 20);
 
   if (isTTDFeature || isListPage) {
     defaultPromoWidth = 110;
@@ -133,7 +135,7 @@ const SearchItem = ({
 
   return (
     <div className="c-search-item">
-      <div className={`c-homeList isSearch ${isMissingPromo}  ${hidePromo ? 'no-photo' : ''} ${noBorder ? 'no-border-bottom' : ''}`} >
+      <div className={`c-homeList isSearch ${isMissingPromo}  ${hidePromo ? 'no-photo' : ''} ${noBorder ? 'no-border-bottom' : ''} ${hasMoreThanOneCredit || hasLongCredit ? 'multi-credits' : ''} `} >
         {!hidePromo && getPromoItem() && (
           <a href={relativeURL} className="homeList-image">
             <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'} />
