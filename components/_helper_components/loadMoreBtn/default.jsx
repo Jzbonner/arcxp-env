@@ -4,22 +4,21 @@ import './default.scss';
 import arrow from '../../../resources/icons/slider/left-arrow.svg';
 
 const LoadMoreButton = ({
-  numberOfNewStories = 0, handleOnClick, newStories, isSearch = false, columnSets = [],
+  numberOfTotalStories = 0, handleOnClick, newStories,
 }) => {
   const [buttonState, setButtonState] = useState('default');
   const [numberOfOldStories, setNumberOfOldStories] = useState(0);
-  const [columnSetCount, setColumnSetCount] = useState(0);
 
   useEffect(() => {
-    if (numberOfNewStories && !isSearch) {
-      if (numberOfNewStories === numberOfOldStories) {
+    if (numberOfTotalStories) {
+      if (numberOfTotalStories === numberOfOldStories) {
         setButtonState('data-max-reached');
       } else {
-        setNumberOfOldStories(numberOfNewStories);
+        setNumberOfOldStories(numberOfTotalStories);
         setButtonState('default');
       }
     }
-    if (newStories && !isSearch) {
+    if (newStories) {
       if (newStories?.length === numberOfOldStories) {
         setButtonState('data-max-reached');
       } else {
@@ -27,14 +26,7 @@ const LoadMoreButton = ({
         setButtonState('default');
       }
     }
-
-    if (isSearch) {
-      if (buttonState === 'data-loading' && columnSetCount !== columnSets.length) {
-        setColumnSetCount(columnSets.length);
-        setButtonState('default');
-      }
-    }
-  }, [numberOfNewStories, newStories, columnSetCount, columnSets]);
+  }, [numberOfTotalStories, newStories]);
 
   const handleBtnClick = () => {
     if (buttonState !== 'data-max-reached') {
@@ -60,12 +52,9 @@ const LoadMoreButton = ({
 };
 
 LoadMoreButton.propTypes = {
-  numberOfNewStories: PropTypes.number,
+  numberOfTotalStories: PropTypes.number,
   handleOnClick: PropTypes.func,
   newStories: PropTypes.array,
-  isSearch: PropTypes.bool,
-  newSearchPageNumber: PropTypes.number,
-  columnSets: PropTypes.array,
 };
 
 export default LoadMoreButton;
