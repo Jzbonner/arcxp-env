@@ -191,7 +191,7 @@ const SearchPage = ({
 
   useEffect(() => {
     if (searchMetaData) {
-      if (searchMetaData.data.length > 0) {
+      if (searchMetaData?.data.length > 0) {
         filteredTeases = AddFirstInlineImage(searchMetaData.data, 'list', ['list']);
         filteredTeases = updateImageRefs(filteredTeases);
       } else {
