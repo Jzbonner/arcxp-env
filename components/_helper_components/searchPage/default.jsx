@@ -256,8 +256,7 @@ const SearchPage = ({
           && searchMetaData.data
           && searchMetaData.data.length >= 10
           && <LoadMoreButton
-            isSearch={true}
-            columnSets={columnSets}
+            numberOfTotalStories={storyEls.length}
             handleOnClick={() => setPageCount(pageCount + 1)}
           />}
         </div>

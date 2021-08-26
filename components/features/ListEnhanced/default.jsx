@@ -135,7 +135,7 @@ const ListEnhanced = ({ customFields = {} }) => {
 
                 {sectionIndex + 1 === sections && moreStoriesToLoad && (
                   <LoadMoreButton
-                    numberOfNewStories={filteredStories.length}
+                    numberOfTotalStories={filteredStories.length}
                     handleOnClick={() => setStoryCount(storiesCount + storiesPerLoadMoreBtnClick)
                     }
                   />
