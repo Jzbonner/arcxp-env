@@ -30,11 +30,11 @@
       height: 0;
     }
 
-    > p,
+    p,
     > div,
-    > h2,
-    > h3,
-    > h4 {
+    h2,
+    h3,
+    h4 {
       margin-bottom: 15px;
     }
 
@@ -52,7 +52,7 @@
     h2,
     h3,
     h4 {
-      @include text-styles(1, 1, "Gordita-Bold");
+      @include text-styles(1rem, 1, "Gordita-Bold");
     }
 
     hr {
