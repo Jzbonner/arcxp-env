@@ -22,9 +22,20 @@ const Section = ({
     const isLastItemInSection = incompleteSectionSegment && i === elements.length - 1;
     // filters the paragraphs to only show the ones inside the range specified by startIndex and stopIndex
     if (startIndex <= paragraphCounter && paragraphCounter < stopIndex) {
+      // right rail comes first to properly handle the two paragraph scenario (see APD-1478 for more details)
+      if (rightRail) {
+        // we check to be sure the current element is a "paragraph"
+        // and that it's the paragraph (index) that we want our right rail ad inserted before
+        const rightRailInsertIndex = isParagraph(element.type) && paragraphCounter + 1 === rightRail.insertBeforeParagraph;
+        if (rightRailInsertIndex && typeof rightRail.ad === 'function') {
+          newContentElements.push(rightRail.ad());
+        }
+      }
+      // it's the `stop index` or the last item in a list that doesn't have enough items to reach the stop index
       if (stopIndex === elements.length || isLastItemInSection) {
         newContentElements.push(element);
       }
+      // handle ads, if there are any
       if (insertedAds) {
         let insertIndex;
         if (stopIndex === elements.length || isLastItemInSection) {
@@ -41,14 +52,7 @@ const Section = ({
           insertedAds.splice(insertIndex, 1);
         }
       }
-      if (rightRail) {
-        // we check to be sure the current element is a "paragraph"
-        // and that it's the paragraph (index) that we want our right rail ad inserted before
-        const rightRailInsertIndex = isParagraph(element.type) && paragraphCounter + 1 === rightRail.insertBeforeParagraph;
-        if (rightRailInsertIndex && typeof rightRail.ad === 'function') {
-          newContentElements.push(rightRail.ad());
-        }
-      }
+      // it's not last (and thus hasn't already been added) so add it to the array
       if (stopIndex !== elements.length && !isLastItemInSection) {
         newContentElements.push(element);
       }
