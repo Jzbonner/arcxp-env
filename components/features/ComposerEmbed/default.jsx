@@ -87,6 +87,6 @@ ComposerEmbed.propTypes = {
       value: 'gray',
     }),
   }),
-  composerHtml: PropTypes.object,
+  composerHtml: PropTypes.string,
 };
 export default ComposerEmbed;

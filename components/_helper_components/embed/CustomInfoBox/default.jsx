@@ -19,10 +19,10 @@ const CustomInfoBox = ({ data, borderColor }) => {
   let border = borderColor && borderColor !== '' ? `border-${borderColor}` : 'border-gray';
   const { tags = [] } = taxonomy || {};
   if (tags.length) {
-    const borderTags = tags.filter(tag => tag.indexOf('border-') > -1);
+    const borderTags = tags.filter(tag => tag?.slug.indexOf('border-') > -1);
     if (borderTags.length) {
       const { 0: borderTag } = borderTags;
-      border = borderTag;
+      border = borderTag?.slug;
     }
   }
   let dividerIndex = -1;
@@ -32,10 +32,12 @@ const CustomInfoBox = ({ data, borderColor }) => {
     const {
       type: cElType,
       content,
+      level,
       list_type: listType,
       items: listItems,
       _id: elId,
     } = cEl;
+    const formattedListItems = listItems && listItems.map(li => <li key={`li-${li._id}`}>{li.content}</li>);
 
     // we loop through the elements in the custom info box subtype and push their contents to a new array for later rendering
     switch (cElType) {
@@ -51,13 +53,13 @@ const CustomInfoBox = ({ data, borderColor }) => {
         infoBoxContent.push({ type: 'p', key: elId, content });
         break;
       case 'header':
-        infoBoxContent.push({ type: 'h3', key: elId, content });
+        infoBoxContent.push({ type: `h${level}`, key: elId, content });
         break;
       case 'list':
         if (listType === 'ordered') {
-          infoBoxContent.push({ type: 'ol', key: elId, content: listItems.map(li => <li key={`li-${li._id}`}>{li.content}</li>) });
+          infoBoxContent.push({ type: 'ol', key: elId, content: formattedListItems });
         } else {
-          infoBoxContent.push({ type: 'ul', key: elId, content: listItems.map(li => <li key={`li-${li._id}`}>{li.content}</li>) });
+          infoBoxContent.push({ type: 'ul', key: elId, content: formattedListItems });
         }
         break;
       default:
@@ -73,14 +75,20 @@ const CustomInfoBox = ({ data, borderColor }) => {
   });
   // if there is a divider, we split the array accordingly
   const shownContent = dividerIndex > 0 ? infoBoxContent.splice(0, dividerIndex) : infoBoxContent;
-  const hiddenContent = dividerIndex > 0 ? infoBoxContent.splice(dividerIndex + 1) : [];
+  const hiddenContent = dividerIndex > 0 ? infoBoxContent.splice(dividerIndex) : [];
   const hasHiddenContent = hiddenContent.length;
+  const renderContent = (con) => {
+    if (typeof con.content === 'string') {
+      return <con.type key={con.key} className={con.class} dangerouslySetInnerHTML={{ __html: con.content }}></con.type>;
+    }
+    return <con.type key={con.key} className={con.class}>{con.content}</con.type>;
+  };
 
   return <div className={`c-infoBox ${border}`}>
     {infoBoxHeadline && <h1>{infoBoxHeadline}</h1>}
-    {shownContent.map(sCon => <sCon.type key={sCon.key} className={sCon.class}>{sCon.content}</sCon.type>)}
+    {shownContent.map(sCon => renderContent(sCon))}
     {hasHiddenContent && <div className={`infoBox-hiddenContent ${isHidden ? '' : 'is-visible'}`}>
-      {hiddenContent.map(hCon => <hCon.type key={hCon.key} className={hCon.class}>{hCon.content}</hCon.type>)}
+      {hiddenContent.map(hCon => renderContent(hCon))}
     </div>}
     {/* the divider becomes an HR element which handles the hide/show click event */}
     {hasHiddenContent && <hr className={isHidden ? '' : 'is-clicked'} onClick={toggleVisibility} />}
