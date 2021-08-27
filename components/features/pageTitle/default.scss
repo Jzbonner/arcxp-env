@@ -5,6 +5,7 @@
   max-width: 1600px;
   text-align: center;
   margin: 0 0 15px;
+  padding-top: 1.25rem;
 
   .c-title-content {
     color: #313132;
@@ -24,6 +25,6 @@
   }
 }
 
-.c-sectionContent .c-page-title {
-  padding-top: 1.25rem;
+.is-section-special-one ~ .c-sectionContent .c-page-title {
+  padding-top: 0;
 }
