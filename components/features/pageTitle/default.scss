@@ -6,6 +6,10 @@
   text-align: center;
   margin: 0 0 15px;
 
+  &.no-padding {
+    padding-top: 0;
+  }
+
   .c-title-content {
     color: #313132;
     display: flex;
