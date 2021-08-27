@@ -458,6 +458,7 @@
   .arcad:not(:empty) {
     border-top: 1px solid #cdcdcd;
     padding-top: 15px;
+    margin-bottom: 1.875rem;
 
     @include breakpoint(tablet) {
       border-top: none;
