@@ -49,7 +49,13 @@
 
       .arc_ad[class*="HP0"],
       .arc_ad[class*="MP0"] {
-        @include arc-ad-full-width;
+        width: 100%;
+        overflow: hidden;
+        margin: 0 auto;
+
+        @include breakpoint(tablet) {
+          @include arc-ad-full-width;
+        }
 
         border-top: 1px solid #cdcdcd;
         
@@ -452,6 +458,7 @@
   .arcad:not(:empty) {
     border-top: 1px solid #cdcdcd;
     padding-top: 15px;
+    margin-bottom: 1.875rem;
 
     @include breakpoint(tablet) {
       border-top: none;
