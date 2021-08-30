@@ -127,7 +127,7 @@
     margin-top: -45px;
   }
 
-  .MP01,
+  .MP05,
   .HP05 {
     @include breakpoint(desktop-sm) {
       display: none;
@@ -193,5 +193,12 @@
         }
       }
     }
+  }
+}
+
+.c-sectionHome.full-width .c-contentElements {
+
+  .c-list-enhanced .arc_ad[class*="MP0"] {
+    border: none;
   }
 }
