@@ -37,7 +37,7 @@ const CustomInfoBox = ({ data, borderColor }) => {
       items: listItems,
       _id: elId,
     } = cEl;
-    const formattedListItems = listItems && listItems.map(li => <li key={`li-${li._id}`}>{li.content}</li>);
+    const formattedListItems = listItems && listItems.map(li => <li key={`li-${li._id}`} dangerouslySetInnerHTML={{ __html: li.content }}></li>);
 
     // we loop through the elements in the custom info box subtype and push their contents to a new array for later rendering
     switch (cElType) {
