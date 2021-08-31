@@ -83,15 +83,22 @@ const CustomInfoBox = ({ data, borderColor }) => {
     }
     return <con.type key={con.key} className={con.class}>{con.content}</con.type>;
   };
+  const renderHiddenContent = () => {
+    if (!hasHiddenContent) return null;
+
+    return <>
+      <div className={`infoBox-hiddenContent ${isHidden ? '' : 'is-visible'}`}>
+        {hiddenContent.map(hCon => renderContent(hCon))}
+      </div>
+      {/* the divider becomes an HR element which handles the hide/show click event */}
+      <hr className={isHidden ? '' : 'is-clicked'} onClick={toggleVisibility} />
+    </>;
+  };
 
   return <div className={`c-infoBox ${border}`}>
     {infoBoxHeadline && <h1>{infoBoxHeadline}</h1>}
     {shownContent.map(sCon => renderContent(sCon))}
-    {hasHiddenContent && <div className={`infoBox-hiddenContent ${isHidden ? '' : 'is-visible'}`}>
-      {hiddenContent.map(hCon => renderContent(hCon))}
-    </div>}
-    {/* the divider becomes an HR element which handles the hide/show click event */}
-    {hasHiddenContent && <hr className={isHidden ? '' : 'is-clicked'} onClick={toggleVisibility} />}
+    {renderHiddenContent()}
   </div>;
 };
 
