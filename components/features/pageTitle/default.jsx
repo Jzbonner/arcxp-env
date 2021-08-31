@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useEditableContent, useComponentContext } from 'fusion:content';
+import { useEditableContent } from 'fusion:content';
+import { useComponentContext } from 'fusion:context';
 import './default.scss';
 
 const PageTitle = () => {
