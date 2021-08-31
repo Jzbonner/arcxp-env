@@ -47,12 +47,12 @@
   .content-profileImage {
     width: 97px;
     height: 97px;
-    margin: 0 20px 10px 0;
+    margin: 0 15px 10px 0;
     display: flex;
     justify-content: center;
 
     @include breakpoint(tablet) {
-      margin-bottom: 0;
+      margin: 0 20px 0 0;
     }
 
     .c-image-component,
