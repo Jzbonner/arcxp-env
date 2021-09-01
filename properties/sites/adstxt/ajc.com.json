@@ -712,5 +712,131 @@
     "accountId": "1166984029",
     "relationshipType": "RESELLER",
     "certId": ""
+  },
+  {
+    "domain": "advertising.com",
+    "accountId": "28862",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "krushmedia.com",
+    "accountId": "AJxF6R139a9M6CaTvK",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "advertising.com",
+    "accountId": "28836",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "appnexus.com",
+    "accountId": "10605",
+    "relationshipType": "DIRECT",
+    "certId": "f5ab79cb980f11d1"
+  },
+  {
+    "domain": "lkqd.net",
+    "accountId": "381",
+    "relationshipType": "DIRECT",
+    "certId": "59c49fa9598a0117"
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "23176",
+    "relationshipType": "DIRECT",
+    "certId": "0bfd66d529a55807"
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "23176",
+    "relationshipType": "RESELLER",
+    "certId": "0bfd66d529a55807"
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "160615",
+    "relationshipType": "RESELLER",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "Media.net",
+    "accountId": "8CU2R40WC",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "google.com",
+    "accountId": "pub-5717092533913515",
+    "relationshipType": "RESELLER",
+    "certId": "f08c47fec0942fa0 #NPMpartners"
+  },
+  {
+    "domain": "indexexchange.com",
+    "accountId": "185192",
+    "relationshipType": "RESELLER #EBDA",
+    "certId": ""
+  },
+  {
+    "domain": "rubiconproject.com",
+    "accountId": "17346",
+    "relationshipType": "RESELLER",
+    "certId": "0bfd66d529a55807 #EBDA"
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "157904",
+    "relationshipType": "RESELLER",
+    "certId": "5d62403b186f2ace #EBDA"
+  },
+  {
+    "domain": "advertising.com",
+    "accountId": "28613",
+    "relationshipType": "RESELLER #VerizonOBVideo",
+    "certId": ""
+  },
+  {
+    "domain": "openx.com",
+    "accountId": "538929384",
+    "relationshipType": "RESELLER",
+    "certId": "6a698e2ec38604c6 #EBDA"
+  },
+  {
+    "domain": "spotx.tv",
+    "accountId": "108706",
+    "relationshipType": "RESELLER",
+    "certId": "7842df1d2fe2db34 #EBDA"
+  },
+  {
+    "domain": "spotxchange.com",
+    "accountId": "108706",
+    "relationshipType": "RESELLER",
+    "certId": "7842df1d2fe2db34  #EBDA"
+  },
+  {
+    "domain": "rhythmone.com",
+    "accountId": "1149317856",
+    "relationshipType": "RESELLER",
+    "certId": "a670c89d4a324e47 #EBDA"
+  },
+  {
+    "domain": "video.unrulymedia.com",
+    "accountId": "1149317856",
+    "relationshipType": "RESELLER #EBDA",
+    "certId": ""
+  },
+  {
+    "domain": "airnowmedia.com",
+    "accountId": "ANM017",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "advertising.com",
+    "accountId": "28464",
+    "relationshipType": "RESELLER",
+    "certId": ""
   }
 ]
