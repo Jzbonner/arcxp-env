@@ -13,14 +13,13 @@ const SectionOutput = ({
   zones,
   layout,
   noHeaderAndFooter,
-  isSectionSpecialOne = false,
 }) => {
   const isErrorPage = layout === 'section-basic';
   return (
     <>
       {<GlobalAdSlots pbPage={true} />}
       {/* we omit breaking news on wraps */}
-      {!noHeaderAndFooter && <TopNavBreakingNews type={layout} omitBreakingNews={layout.indexOf('wrap-') !== -1} isSectionSpecialOne={isSectionSpecialOne} />}
+      {!noHeaderAndFooter && <TopNavBreakingNews type={layout} omitBreakingNews={layout.indexOf('wrap-') !== -1} />}
       {<main className={`c-sectionContent ${isErrorPage ? 'b-contentMaxWidth' : ''}`}>
         {zones && (
           zones.map((zone, i) => {
@@ -48,7 +47,6 @@ SectionOutput.propTypes = {
   zones: PropTypes.array,
   layout: PropTypes.string,
   noHeaderAndFooter: PropTypes.bool,
-  isSectionSpecialOne: PropTypes.bool,
 };
 
 export default SectionOutput;
