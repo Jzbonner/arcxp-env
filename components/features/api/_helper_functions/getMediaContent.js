@@ -121,7 +121,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
       const mediaType = localType === 'image' ? 'image/JPEG' : 'video';
       let mediaMedium = localType === 'image' ? 'image' : 'video/mp4';
 
-      if (mediaMedium === 'video') {
+      if (mediaType === 'video') {
         const [mp4Stream = []] = mediaStreams.filter(item => item.stream_type === 'mp4');
         const [m3u8Stream = []] = mediaStreams.filter(item => item.stream_type === 'ts');
 
