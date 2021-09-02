@@ -79,7 +79,24 @@
         }
       }
 
+      .arc_ad[class*="MP02"] .arcad {
+        padding-top: 35px;
+
+        @include breakpoint(tablet) {
+          padding-top: 30px;
+        }
+      }
+
       .arc_ad[class*="HP02"] {
+
+        .arcad {
+          padding-top: 35px;
+
+          @include breakpoint(tablet) {
+            padding-top: 30px;
+          }
+        }
+
         @include between-breakpoints(tablet, desktop-sm) {
           width: inherit;
         }
@@ -122,6 +139,14 @@
             margin-right: auto;
           }
 
+          .arcad:not(:empty) {
+            padding-top: 35px;
+            
+            @include breakpoint(tablet) {
+              padding-top: 30px;
+            }
+          }
+
           @include breakpoint(desktop-sm) {
             width: 100%;
           }
@@ -161,13 +186,27 @@
         }
 
         .arcad:not(:empty) {
-          padding: 30px 0;
-          margin: 0;
           border-top: 1px solid #cdcdcd;
 
           @include breakpoint(tablet) {
             margin: 20px 0;
           }
+        }
+      }
+
+      .arc_ad[class*="MP02"] .arcad:not(:empty) {
+        padding-top: 35px;
+
+        @include breakpoint(tablet) {
+          padding-top: 30px;
+        }
+      }
+
+      .arc_ad[class*="HP02"] .arcad:not(:empty) {
+        padding-top: 35px;
+
+        @include breakpoint(tablet) {
+          padding-top: 30px;
         }
       }
     }
@@ -466,7 +505,7 @@
 
   .arcad:not(:empty) {
     border-top: 1px solid #cdcdcd;
-    padding-top: 15px;
+    padding-top: 8px;
     margin-bottom: 1.875rem;
 
     @include breakpoint(tablet) {
