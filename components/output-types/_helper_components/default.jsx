@@ -9,7 +9,6 @@ import ConnextInit from '../../_helper_components/global/connext/default.jsx';
 import NativoScripts from '../../_helper_components/article/nativo/nativoScripts';
 import checkTags from '../../layouts/_helper_functions/checkTags';
 import checkPageType from '../../layouts/_helper_functions/getPageType.js';
-import checkSponsor from '../../layouts/_helper_functions/checkSponsor';
 import AmpRelLink from '../../_helper_components/amp/AmpRelLink';
 import GoogleStructuredData from '../../_helper_components/article/googleData/default';
 import fetchEnv from '../../_helper_components/global/utils/environment';
@@ -42,11 +41,10 @@ const RenderOutputType = (props) => {
   const pageType = checkPageType(type, layout);
   const { isNonContentPage } = pageType || {};
 
-  const { tags = [], sections } = taxonomy || {};
+  const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
   const noAmp = checkTags(tags, 'no-amp');
   const isHyperlocalContent = checkTags(tags, hyperlocalTags);
-  const { sponsorSectionID: isSponsoredContent } = checkSponsor(sections);
   const includeGtm = metrics && metrics.gtmContainerKey;
   let fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${cdnSite || currentSite}.com` : '';
   /* eslint-disable-next-line max-len */
@@ -88,8 +86,8 @@ const RenderOutputType = (props) => {
         {!noAds && adsA9Enabled && <script src="https://c.amazon-adsystem.com/aax2/apstag.js"></script>}
         {!noAds && adsPrebidEnabled && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/${prebidJs}`)}`}></script>}
         <Libs />
-        {!noAds && !isHyperlocalContent && !isSponsoredContent && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
-        {!noAds && !isHyperlocalContent && !isSponsoredContent && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
+        {!noAds && !isHyperlocalContent && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
+        {!noAds && !isHyperlocalContent && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
       </head>
