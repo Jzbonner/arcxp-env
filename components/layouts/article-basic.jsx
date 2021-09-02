@@ -166,7 +166,7 @@ const StoryPageLayout = () => {
       uuid={uuid}
       isMeteredStory={isMeteredStory}
     />}
-    {!noAds && !isHyperlocalContent && !sponsorSectionID && (
+    {!noAds && !isHyperlocalContent && (
       <Nativo
         elements={filteredContentElements}
         displayIfAtLeastXParagraphs={4}
@@ -231,7 +231,7 @@ const StoryPageLayout = () => {
       {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && arcSite === 'ajc' && !ampPage && <EndOfStory arcSite={arcSite} taxonomy={taxonomy} uuid={uuid} />}
     </div>}
     {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
-    {!noAds && !isHyperlocalContent && !sponsorSectionID && (
+    {!noAds && !isHyperlocalContent && (
       <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
     )}
     {!noAds && ampPage && (
