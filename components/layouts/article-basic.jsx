@@ -206,6 +206,11 @@ const StoryPageLayout = () => {
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
       ampPage={ampPage}
     />
+      {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && arcSite !== 'ajc' && (
+     <div className="c-section full-width b-clear-both">
+        <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage}/>
+     </div>
+      )}
     {/* For Ohio, about the author should be the last component of the story, otherwise its about the author THEN editors picks , latest, and most popular */}
     {<div className="c-section full-width b-clear-both">
       <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />
@@ -223,11 +228,6 @@ const StoryPageLayout = () => {
           sponsorID={sponsorSectionID}
           taxonomy={taxonomy}
           uuid={uuid} />
-    )}
-    {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && arcSite !== 'ajc' && (
-     <div className="c-section full-width b-clear-both">
-        <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage}/>
-     </div>
     )}
     {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
     {!noAds && !isHyperlocalContent && !sponsorSectionID && (
