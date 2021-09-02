@@ -4,6 +4,24 @@
   width: 100%;
   padding: 0 0 10px;
 
+  h2 {
+    text-align: center;
+    letter-spacing: .26px;
+    color: #000;
+
+    @include text-styles(1.5625rem, 1.07, "Lora-Bold");
+
+    @include breakpoint(tablet) {
+      padding: 0 0 15px;
+
+      @include text-styles(2.1875rem, 1.07, "Lora-Bold");
+    }
+
+    @include breakpoint(desktop-lg) {
+      @include text-styles(2.5rem, 1.07, "Lora-Bold");
+    }
+  }
+
   @include breakpoint(desktop-sm) {
     border-bottom: 1px solid #cdcdcd;
     padding: 0 0 30px;
@@ -27,25 +45,8 @@
       }
 
       @include breakpoint(desktop-sm) {
-        padding: 0 20px 0 0;
+        padding: 0 30px 0 0;
         flex: 1 65%;
-      }
-
-      h2 {
-        text-align: left;
-        letter-spacing: .26px;
-        color: #000;
-        padding: 0 0 15px;
-
-        @include text-styles(1.5625rem, 1.07, "Lora-Bold");
-
-        @include breakpoint(tablet) {
-          @include text-styles(2.1875rem, 1.07, "Lora-Bold");
-        }
-
-        @include breakpoint(desktop-lg) {
-          @include text-styles(2.5rem, 1.07, "Lora-Bold");
-        }
       }
 
       .c-image-component {
@@ -62,7 +63,7 @@
       flex: 1 30%;
 
       @include breakpoint(desktop-sm) {
-        padding: 0 0 0 20px;
+        padding: 0 0 0 30px;
         flex: 1 35%;
         border-left: 1px solid #cdcdcd;
       }
