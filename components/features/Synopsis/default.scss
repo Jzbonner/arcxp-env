@@ -126,9 +126,9 @@
   }
 
   .c-listItemPreview {
-    font-family: "Gordita";
-    font-size: .875rem;
     margin-top: 10px;
+
+    @include text-styles(.875rem, 1.5, "Gordita");
 
     @include between-breakpoints(mobile, tablet) {
       margin-bottom: .15rem;
