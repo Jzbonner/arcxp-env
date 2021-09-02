@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { safeHtml } from '../../global/utils/stringUtils';
-import './default.scss';
 
 const ListItemPreview = ({ id }) => {
   let previewText = '';
