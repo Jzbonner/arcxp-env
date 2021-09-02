@@ -120,7 +120,7 @@
 
     .article-timestamp {
       display: flex;
-      margin-bottom: 10px;
+      margin: 4px 0 10px;
     }
   }
 
@@ -134,7 +134,7 @@
     }
 
     @include breakpoint(desktop-sm) {
-      height: 4.2rem;
+      max-height: 4.2rem;
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
