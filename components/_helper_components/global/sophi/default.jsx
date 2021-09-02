@@ -34,6 +34,10 @@ const SophiTags = ({ isAmp }) => {
   let sophiSection = topSection.indexOf('/') === 0 ? topSection.substr(1) : topSection;
   const sophiMainSection = sophiSection.indexOf('/') > -1 ? sophiSection.substr(0, sophiSection.indexOf('/')) : sophiSection;
   sophiSection = sophiSection.replace(/\//g, ':');
+  const sectionLength = sophiSection.length - 1;
+  if (sophiSection.lastIndexOf(':') === sectionLength) {
+    sophiSection = sophiSection.substr(0, sectionLength);
+  }
 
   const accessCategory = paywallStatus === 'premium' ? 'metered views' : 'free access';
 
