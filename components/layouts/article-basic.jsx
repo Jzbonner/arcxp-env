@@ -206,7 +206,11 @@ const StoryPageLayout = () => {
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
       ampPage={ampPage}
     />
-
+    {/* For Ohio, about the author should be the last component of the story, otherwise its about the author THEN editors picks , latest, and most popular */}
+    {<div className="c-section full-width b-clear-both">
+      <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />
+      {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && arcSite === 'ajc' && !ampPage && <EndOfStory arcSite={arcSite} taxonomy={taxonomy} uuid={uuid} />}
+    </div>}
     {sponsorSectionID && (
       // sponsor box should appear right before blog author component
       ampPage ? <SponsorRelatedBoxAMP
@@ -225,11 +229,6 @@ const StoryPageLayout = () => {
         <RelatedList taxonomy={taxonomy} uuid={uuid} isAmp={ampPage}/>
      </div>
     )}
-    {/* For Ohio, about the author should be the last component of the story, otherwise its about the author THEN editors picks , latest, and most popular */}
-    {<div className="c-section full-width b-clear-both">
-      <BlogAuthor subtype={subtype} authorData={authorData} key={'BlogAuthor'} ampPage={ampPage} />
-      {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && arcSite === 'ajc' && !ampPage && <EndOfStory arcSite={arcSite} taxonomy={taxonomy} uuid={uuid} />}
-    </div>}
     {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
     {!noAds && !isHyperlocalContent && !sponsorSectionID && (
       <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
