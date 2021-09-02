@@ -196,7 +196,6 @@
 
       .arc_ad[class*="MP02"] .arcad:not(:empty) {
         padding-top: 35px;
-        /* margin-bottom: 30px; */
 
         @include breakpoint(tablet) {
           padding-top: 30px;
