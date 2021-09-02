@@ -79,7 +79,6 @@
     .headline {
       text-align: left;
       letter-spacing: -.46px;
-      padding-bottom: 10px;
 
       @include text-styles(1.625rem, 1.14, "Lora-Bold");
 
@@ -107,6 +106,7 @@
     .homeList-text {
       width: 100%;
       letter-spacing: -.32px;
+      padding-bottom: 10px;
 
       @include text-styles(.875rem, 1.5, "Gordita");
 
