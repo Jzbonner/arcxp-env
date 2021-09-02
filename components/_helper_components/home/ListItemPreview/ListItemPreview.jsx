@@ -13,12 +13,13 @@ const ListItemPreview = ({ id }) => {
     },
   });
 
-  if (storyData && storyData?.headlines?.web) {
+  if (storyData?.headlines?.web) {
     previewText = storyData.headlines.web;
   } else if (storyData?.content_elements[0]?.type === 'text') {
     let previewData = storyData.content_elements[0].content;
-    if (previewData.length < 90 && storyData.content_elements[1]) {
-      previewData = `${previewData} ${storyData.content_elements[1].content}`;
+    const secondaryContent = storyData?.content_elements[1]?.content || null;
+    if (previewData.length < 90 && secondaryContent) {
+      previewData = `${previewData} ${secondaryContent}`;
     }
     const textContent = safeHtml(previewData, { whiteList: {} });
     previewText = textContent;
