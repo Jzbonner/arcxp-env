@@ -41,9 +41,8 @@
     text-align: left;
     font-weight: 700;
     letter-spacing: -.08px;
-    margin: 0 0 10px;
     display: inline-block;
-    margin-top: -3px;
+    margin: -3px 0;
 
     @include text-styles(.875rem, 1.47, "Lora-Bold");
 
@@ -53,6 +52,7 @@
   }
 
   .article-timestamp {
+    margin-top: 13px;
     line-height: 1;
   }
 
