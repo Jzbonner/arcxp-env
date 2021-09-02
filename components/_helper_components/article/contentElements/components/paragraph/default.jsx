@@ -5,7 +5,7 @@ import './default.scss';
 
 const Paragraph = ({ src }) => {
   const { content } = src;
-  return <p className="story-text b-margin-bottom-d40-m20" dangerouslySetInnerHTML={{
+  return <p className="story-text" dangerouslySetInnerHTML={{
     __html: safeHtml(content, {
       whiteList: {
         p: [],
