@@ -48,20 +48,22 @@ const BigBreakingNews = (customFields = {}) => {
     const { basic: imageData } = leadPromoItems || {};
     const [, ...restOfItems] = data;
     return (
-      <div className="c-breakingContainer">
-          <div className="leadItem">
-            <a href={leadItemURL}>
-              <h2>{truncateHeadline(headline, true)}</h2>
-              {(teaseImageObject || imageData) && <Image src={teaseImageObject || imageData} width={1108} height={426} imageType="isHomepageImage" useSrcSet={true} srcSetSizes={[[1108, 426], [770, 296], [408, 300]]} />}
-            </a>
-          </div>
-          <div className="restOfItems">
-          {restOfItems.map((item, i) => {
-            const newItem = item;
-            return <ListItem key={`ListItem-${i}`} {...newItem} hidePromo={true} />;
-          })}
-          </div>
-      </div>
+      <>
+        <h2>{truncateHeadline(headline, true)}</h2>
+        <div className="c-breakingContainer">
+            <div className="leadItem">
+              <a href={leadItemURL}>
+                {(teaseImageObject || imageData) && <Image src={teaseImageObject || imageData} width={1108} height={426} imageType="isHomepageImage" useSrcSet={true} srcSetSizes={[[1108, 426], [770, 296], [408, 300]]} />}
+              </a>
+            </div>
+            <div className="restOfItems">
+            {restOfItems.map((item, i) => {
+              const newItem = item;
+              return <ListItem key={`ListItem-${i}`} {...newItem} hidePromo={true} />;
+            })}
+            </div>
+        </div>
+      </>
     );
   };
 
