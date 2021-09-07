@@ -45,15 +45,15 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     const [basicMp4Stream] = basicStreams.filter(item => item.stream_type === 'mp4');
     const [basicM3u8Stream] = basicStreams.filter(item => item.stream_type === 'ts');
 
-    let leadObjectMedium = '';
+    let leadObjectType = '';
     let leadObjectUrl = '';
     if (basicM3u8Stream) {
       const { url: basicM3u8Url } = basicM3u8Stream || {};
-      leadObjectMedium = 'application/x-mpegurl';
+      leadObjectType = 'application/x-mpegurl';
       leadObjectUrl = basicM3u8Url;
     } else if (basicMp4Stream) {
       const { url: basicMp4Url } = basicMp4Stream || {};
-      leadObjectMedium = 'video/mp4';
+      leadObjectType = 'video/mp4';
       leadObjectUrl = basicMp4Url;
     }
     // removing caption: videoCaption, since it's a description of the promo_image, not the actual video
@@ -61,7 +61,7 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     const { basic: videoDescription } = basicDescription || {};
     const videoAuthor = getVideoAuthor(basic);
     const checkVideoCaption = videoDescription || '';
-    leadObject = mediaObj('video', leadObjectMedium, leadObjectUrl, siteID, mediaTitle, checkVideoCaption, videoAuthor, true, basicThumbNailImage, false);
+    leadObject = mediaObj(leadObjectType, 'video', leadObjectUrl, siteID, mediaTitle, checkVideoCaption, videoAuthor, true, basicThumbNailImage, false);
   }
 
   if (promoItemsType === 'gallery' || standaloneGallery || !standaloneGallery) {
@@ -118,20 +118,20 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
       }
 
       let mediaObjectUrl = '';
-      const mediaType = localType === 'image' ? 'image/JPEG' : 'video';
-      let mediaMedium = localType === 'image' ? 'image' : 'video/mp4';
+      let mediaType = localType === 'image' ? 'image/JPEG' : 'video/mp4';
+      const mediaMedium = localType === 'image' ? 'image' : 'video';
 
-      if (mediaType === 'video') {
+      if (mediaMedium === 'video') {
         const [mp4Stream = []] = mediaStreams.filter(item => item.stream_type === 'mp4');
         const [m3u8Stream = []] = mediaStreams.filter(item => item.stream_type === 'ts');
 
         if (m3u8Stream) {
           const { url: m3u8Url } = m3u8Stream || {};
-          mediaMedium = 'application/x-mpegurl';
+          mediaType = 'application/x-mpegurl';
           mediaObjectUrl = m3u8Url;
         } else if (mp4Stream) {
           const { url: mp4Url } = mp4Stream || {};
-          mediaMedium = 'video/mp4';
+          mediaType = 'video/mp4';
           mediaObjectUrl = mp4Url;
         }
         mediaObjectUrl = url;
