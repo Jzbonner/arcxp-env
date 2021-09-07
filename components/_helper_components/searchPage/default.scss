@@ -320,6 +320,16 @@
     padding-bottom: 2.188rem;
   }
 
+  .c-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+
+  .c-list-right-rail {
+    display: flex;
+  }
+
   .c-searchListContainter .list-hp05,
   .c-staffBioPage .list-hp05 {
     display: flex;

@@ -228,7 +228,7 @@ const SearchPage = ({
   }, [columnSets]);
 
   return (
-    <main className="c-searchPage b-contentMaxWidth ">
+    <main className="c-searchPage b-contentMaxWidth">
         <div className="c-search-bar">
           <div className="input-field">
             <img src={SearchIcon} width={20} height={21} />
