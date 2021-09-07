@@ -144,7 +144,7 @@
 
       @include breakpoint(tablet) {
         border: none;
-        padding: 1rem  0 0;
+        padding: 1rem 0 0;
       }
 
       @include breakpoint(desktop-sm) {
@@ -258,6 +258,7 @@
       display: flex;
       padding-bottom: 15px;
       align-items: center;
+      flex-wrap: wrap;
 
       .divider {
         content: "";
@@ -312,29 +313,37 @@
 
 /* Ad-style overrides */
 
-.c-listPage .c-searchListContainter .list-hp05,
-.c-staffBioPage .list-hp05 {
-  display: flex;
-  height: 123px;
-  padding-bottom: 40px;
-  border-top: 1px solid #cdcdcd;
+.c-searchPage {
+  padding-bottom: 1.875rem;
 
-  .hp05-line {
-    @include breakpoint(tablet) {
-      display: none;
-    }
+  @include breakpoint(desktop-sm) {
+    padding-bottom: 2.188rem;
   }
 
-  .HP05.arcad {
-    @include breakpoint(tablet) {
-      display: block;
-      position: relative;
-      left: -25%;
-      top: 10px;
+  .c-searchListContainter .list-hp05,
+  .c-staffBioPage .list-hp05 {
+    display: flex;
+    height: 123px;
+    padding-bottom: 40px;
+    border-top: 1px solid #cdcdcd;
+
+    .hp05-line {
+      @include breakpoint(tablet) {
+        display: none;
+      }
     }
 
-    @include breakpoint(desktop-sm) {
-      position: static;
+    .HP05.arcad {
+      @include breakpoint(tablet) {
+        display: block;
+        position: relative;
+        left: -25%;
+        top: 10px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        position: static;
+      }
     }
   }
 }
