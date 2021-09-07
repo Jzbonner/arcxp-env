@@ -89,6 +89,14 @@
 
       .arc_ad[class*="HP02"] {
 
+        .arcad:not(:empty) {
+          margin-bottom: 1.875rem;
+
+          @include breakpoint(tablet) {
+            margin-bottom: 1.25rem;
+          }
+        }
+        
         .arcad {
           padding-top: 35px;
 
@@ -116,11 +124,13 @@
       }
 
       .c-HS02 {
-        margin-bottom: 20px;
+        margin-bottom: 25px;
         width: inherit;
         border-top: 1px solid #cdcdcd;
+        padding-bottom: 0;
 
         @include breakpoint(tablet) {
+          padding-bottom: 5px;
           margin-bottom: 40px;
           border-top: none;
         }
@@ -196,9 +206,11 @@
 
       .arc_ad[class*="MP02"] .arcad:not(:empty) {
         padding-top: 35px;
+        margin-bottom: 30px;
 
         @include breakpoint(tablet) {
           padding-top: 30px;
+          margin-bottom: 35px;
         }
       }
 
