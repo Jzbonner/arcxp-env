@@ -317,7 +317,7 @@
   padding: .938rem 20px 1.875rem;
 
   @include breakpoint(tablet) {
-    padding-top: .938rem;
+    padding-top: 0;
     padding-right: 40px;
     padding-left: 40px;
   }
