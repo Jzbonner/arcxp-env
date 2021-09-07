@@ -314,9 +314,23 @@
 /* Ad-style overrides */
 
 .c-searchPage {
-  padding-bottom: 1.875rem;
+  padding: .938rem 20px 1.875rem;
+
+  @include breakpoint(tablet) {
+    padding-top: .938rem;
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+
+  @include between-breakpoints(tablet, desktop-sm) {
+
+    &.b-contentMaxWidth {
+      margin-top: 0;
+    }
+  }
 
   @include breakpoint(desktop-sm) {
+    padding-top: .938rem;
     padding-bottom: 2.188rem;
   }
 
