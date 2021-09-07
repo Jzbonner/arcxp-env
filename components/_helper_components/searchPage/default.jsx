@@ -42,7 +42,7 @@ const SearchPage = ({
       RP01RP09Array.push(
         (
           <div className="RP01-container">
-            { RP01() }
+            {RP01()}
           </div>
         ),
       );
@@ -50,7 +50,7 @@ const SearchPage = ({
       RP01RP09Array.push(
         (
           <div className="RP01-container">
-            { RP09((i)) }
+            {RP09((i))}
           </div>
         ),
       );
@@ -74,7 +74,7 @@ const SearchPage = ({
         return (<>
           <SearchItem key={`SearchItem-${i}`} {...el} listPage={true} noBorder={true} />
         </>);
-      // eslint-disable-next-line no-else-return
+        // eslint-disable-next-line no-else-return
       } else {
         if (columnValue === 1 && i <= leftColumnLimit) {
           return <SearchItem key={`SearchItem-${i}`} {...el} listPage={true} noBorder={f % 10 === 0} />;
@@ -148,13 +148,13 @@ const SearchPage = ({
 
     return (
       <>
-      <div className={`c-searchListContainter two-column left-photo-display-class ${storyEls === 'no-results' ? 'no-results' : ''}`}>
-        {column1Output && <div className="column-1">{column1Output}</div>}
-        <div className="tablet-line"></div>
-        {column2Output && <div className="column-2">{column2Output}</div>}
-      </div>
-      <div className="list-mp05">{MP05(currentAdIndex)}</div>
-      <div className="list-hp05"><div className="hp05-line"/>{HP05(currentAdIndex)}</div>
+        <div className={`c-searchListContainter two-column left-photo-display-class ${storyEls === 'no-results' ? 'no-results' : ''}`}>
+          {column1Output && <div className="column-1">{column1Output}</div>}
+          <div className="tablet-line"></div>
+          {column2Output && <div className="column-2">{column2Output}</div>}
+        </div>
+        <div className="list-mp05">{MP05(currentAdIndex)}</div>
+        <div className="list-hp05"><div className="hp05-line" />{HP05(currentAdIndex)}</div>
       </>
     );
   };
@@ -227,47 +227,47 @@ const SearchPage = ({
   }, [columnSets]);
 
   return (
-    <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
-      <div className="c-search-bar">
-        <div className="input-field">
-          <img src={SearchIcon} width={20} height={21} />
-          <input
-            type="text"
-            id="searchInput"
-            name="search"
-            placeholder=""
-            onChange={onChangeHandler}
-            onKeyDown={handleKeyDown}
-            value={searchInput}></input>
-        </div>
-        <button onClick={handleButtonClick} className="search-btn">Search</button>
-      </div>
-      <div className="c-search-sortType">
-        <span className="sort-header">Filter: </span>
-        <span className={`sort-score ${(!sortByDateState && 'default-active') || ''}`} onClick={() => handleSortType(actions.RELEVANCE)}>Relevance</span>
-        <span>|</span>
-        <span className={`sort-date ${(sortByDateState && 'default-active') || ''}`} onClick={() => handleSortType(actions.DATE)}>Date</span>
-      </div>
-      <div className="c-section with-rightRail">
-        <div className="c-contentElements list-contentElements">
-          {columnSets.length >= 1 && columnSets.map(el => el)}
-          {columnSets.length >= 1
-          && searchMetaData
-          && searchMetaData.data
-          && searchMetaData.data.length >= 10
-          && <LoadMoreButton
-            numberOfTotalStories={storyEls.length}
-            handleOnClick={() => setPageCount(pageCount + 1)}
-          />}
-        </div>
-        {!noAds ? (
-          <div className="c-list-right-rail">
-            {
-              RP01RP09Array.map(el => el)
-            }
+    <main className="c-searchPage b-contentMaxWidth ">
+        <div className="c-search-bar">
+          <div className="input-field">
+            <img src={SearchIcon} width={20} height={21} />
+            <input
+              type="text"
+              id="searchInput"
+              name="search"
+              placeholder=""
+              onChange={onChangeHandler}
+              onKeyDown={handleKeyDown}
+              value={searchInput}></input>
           </div>
-        ) : null}
-      </div>
+          <button onClick={handleButtonClick} className="search-btn">Search</button>
+        </div>
+        <div className="c-search-sortType">
+          <span className="sort-header">Filter: </span>
+          <span className={`sort-score ${(!sortByDateState && 'default-active') || ''}`} onClick={() => handleSortType(actions.RELEVANCE)}>Relevance</span>
+          <span>|</span>
+          <span className={`sort-date ${(sortByDateState && 'default-active') || ''}`} onClick={() => handleSortType(actions.DATE)}>Date</span>
+        </div>
+        <div className="c-section with-rightRail">
+          <div className="c-contentElements list-contentElements">
+            {columnSets.length >= 1 && columnSets.map(el => el)}
+            {columnSets.length >= 1
+              && searchMetaData
+              && searchMetaData.data
+              && searchMetaData.data.length >= 10
+              && <LoadMoreButton
+                numberOfTotalStories={storyEls.length}
+                handleOnClick={() => setPageCount(pageCount + 1)}
+              />}
+          </div>
+          {!noAds ? (
+            <div className="c-list-right-rail">
+              {
+                RP01RP09Array.map(el => el)
+              }
+            </div>
+          ) : null}
+        </div>
     </main>
   );
 };
