@@ -11,10 +11,10 @@ import SearchIcon from '../../../resources/icons/search.svg';
 import ArcAd from '../../features/ads/default';
 import checkTags from '../../layouts/_helper_functions/checkTags';
 
-const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} />;
-const RP09 = i => <ArcAd staticSlot={'RP09 sticky listPage'} key={`RP09-List-Page-${i}`} customId={`div-id-RP09_${i}`} />;
-const MP05 = i => <ArcAd staticSlot={'MP05'} key={`MP05-${i / 10}`} customId={`div-id-MP05_${i / 10}`} />;
-const HP05 = i => <ArcAd staticSlot={'HP05'} key={`HP05-${i / 10}`} customId={`div-id-HP05_${i / 10}`} />;
+const RP01 = s => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} customId={`div-id-RP01_${s}`} />;
+const RP09 = (i, s) => <ArcAd staticSlot={'RP09 sticky listPage'} key={`RP09-List-Page-${i}`} customId={`div-id-RP09_${s}_${i}`} />;
+const MP05 = (i, s) => <ArcAd staticSlot={'MP05'} key={`MP05-${i / 10}`} customId={`div-id-MP05_${s}_${Math.floor(i / 10)}`} />;
+const HP05 = (i, s) => <ArcAd staticSlot={'HP05'} key={`HP05-${i / 10}`} customId={`div-id-HP05_${s}_${Math.floor(i / 10)}`} />;
 
 const SearchPage = ({
   globalContent,
@@ -27,6 +27,7 @@ const SearchPage = ({
   const noAds = checkTags(tags, 'no-ads');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchInput, setSearchInput] = useState('');
+  const [searchIterator, setSearchIterator] = useState(0);
   const [pageCount, setPageCount] = useState(1);
   const [sortByDateState, setSortByDateState] = useState(false);
   const [storyEls, setStoryEls] = useState([]);
@@ -42,7 +43,7 @@ const SearchPage = ({
       RP01RP09Array.push(
         (
           <div className="RP01-container">
-            {RP01()}
+            {RP01(searchIterator)}
           </div>
         ),
       );
@@ -50,7 +51,7 @@ const SearchPage = ({
       RP01RP09Array.push(
         (
           <div className="RP01-container">
-            {RP09((i))}
+            {RP09(i, searchIterator)}
           </div>
         ),
       );
@@ -153,8 +154,8 @@ const SearchPage = ({
           <div className="tablet-line"></div>
           {column2Output && <div className="column-2">{column2Output}</div>}
         </div>
-        <div className="list-mp05">{MP05(currentAdIndex)}</div>
-        <div className="list-hp05"><div className="hp05-line" />{HP05(currentAdIndex)}</div>
+        <div className="list-mp05">{MP05(currentAdIndex, searchIterator)}</div>
+        <div className="list-hp05"><div className="hp05-line" />{HP05(currentAdIndex, searchIterator)}</div>
       </>
     );
   };
@@ -173,6 +174,7 @@ const SearchPage = ({
     setAdIndex(1);
     setMapStartIndex(0);
     setPageCount(1);
+    setSearchIterator(searchIterator + 1);
   };
 
   const handleSortType = (sortType) => {
@@ -213,8 +215,7 @@ const SearchPage = ({
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      resetStates();
-      setSearchQuery(searchInput);
+      handleButtonClick({ preventDefault: () => {} });
     }
   };
 
@@ -227,7 +228,7 @@ const SearchPage = ({
   }, [columnSets]);
 
   return (
-    <main className="c-searchPage b-contentMaxWidth ">
+    <main className="c-searchPage b-contentMaxWidth">
         <div className="c-search-bar">
           <div className="input-field">
             <img src={SearchIcon} width={20} height={21} />
@@ -261,11 +262,7 @@ const SearchPage = ({
               />}
           </div>
           {!noAds ? (
-            <div className="c-list-right-rail">
-              {
-                RP01RP09Array.map(el => el)
-              }
-            </div>
+            <div className="c-list-right-rail">{RP01RP09Array.map(el => el)}</div>
           ) : null}
         </div>
     </main>
@@ -276,7 +273,6 @@ SearchPage.propTypes = {
   globalContent: PropTypes.object,
   globalContentConfig: PropTypes.object,
   title: PropTypes.object,
-  textBox: PropTypes.func,
 };
 
 export default SearchPage;
