@@ -2,34 +2,34 @@
 @import "../../../../src/styles/base/breakpoints";
 
 .c-section {
-  
+
   .custom-tmpl-wrapper {
 
     a {
       text-decoration: none;
     }
-  
+
     .heading {
       font-size: 24px;
       font-family: "Gordita-Bold";
     }
-  
+
     .text {
       font-size: 18px;
       font-family: "Gordita";
       width: 80%;
       line-height: 1.5;
     }
-  
+
     .row {
       margin-bottom: 20px;
     }
-  
+
     .btn {
       max-width: 100%;
       font-size: 14px;
       align-items: center;
-      background: #3d8bed;
+      background: #3299ad;
       border-radius: 6px;
       color: #fff;
       display: flex;
@@ -39,38 +39,38 @@
       height: 60px;
       font-family: "Gordita-Bold";
     }
-  
+
     .center {
       text-align: center;
       display: flex;
       justify-content: center;
     }
-  
+
     .link-container {
       font-size: 14px;
       font-family: "Gordita";
       margin-top: -20px;
       line-height: 1.5rem;
     }
-  
+
     .link-container a {
       color: #2e81b7;
     }
-  
+
     .btn-link {
       margin-bottom: 20px;
     }
   }
-  
+
   @media (max-width: 600px) {
-  
+
     .custom-tmpl-wrapper {
-  
+
       .text {
         width: 95%;
         font-size: 14px;
       }
-  
+
       .btn-container {
         flex-direction: column;
         align-items: center;
