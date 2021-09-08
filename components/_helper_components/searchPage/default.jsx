@@ -185,10 +185,12 @@ const SearchPage = ({
 
   const handleButtonClick = (e) => {
     e.preventDefault();
-    /* searching with a new query means a new story set
-    (and therefore, new column sets) - so, reset the states */
-    resetStates();
-    setSearchQuery(searchInput);
+    if (searchInput !== searchQuery) {
+      /* searching with a new query means a new story set
+      (and therefore, new column sets) - so, reset the states */
+      resetStates();
+      setSearchQuery(searchInput);
+    }
   };
 
   useEffect(() => {
