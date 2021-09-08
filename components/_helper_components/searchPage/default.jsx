@@ -185,7 +185,10 @@ const SearchPage = ({
 
   const handleButtonClick = (e) => {
     e.preventDefault();
-    if (searchInput !== searchQuery) {
+    if (searchInput === '') {
+      // empty search term
+      setStoryEls('no-results');
+    } else if (searchInput !== searchQuery) {
       /* searching with a new query means a new story set
       (and therefore, new column sets) - so, reset the states */
       resetStates();
