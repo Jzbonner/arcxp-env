@@ -39,6 +39,7 @@ const fetch = async (query) => {
     outerSponsorData = { ...Sponsor };
 
     const bodyQuery = {
+      daysBack: 1000,
       from: 1,
       size: 10,
       includeTags: `${Sponsor.sponsor_related_box_include_tags || ''}`,

@@ -40,6 +40,7 @@ const SponsorRelatedBox = ({
   const feed = useContent({
     source: 'query-feed',
     query: {
+      daysBack: 1000,
       from: 1,
       size: 10,
       includeTags: `${includeTags || ''}`,
