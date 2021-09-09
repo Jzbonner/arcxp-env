@@ -18,7 +18,7 @@ const EditorsPicks = ({ collectionId }) => {
     <>
       <div className="mostReadTitle">Editors&#39; Picks</div>
       <div className="c-ttd-feature editors-picks">
-        <Lead customFields={customFields} displayClassOverride={'5-Item TTD Feature'} />
+        <Lead customFields={customFields} displayClassOverride={'5-Item TTD Feature'} filterData={true}/>
       </div>
     </>
   );
