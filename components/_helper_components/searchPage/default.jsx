@@ -254,7 +254,7 @@ const SearchPage = ({
           <span>|</span>
           <span className={`sort-date ${(sortByDateState && 'default-active') || ''}`} onClick={() => handleSortType(actions.DATE)}>Date</span>
         </div>
-        <div className="c-section with-rightRail">
+        <div className="c-section with-rightRail full-width">
           <div className="c-contentElements list-contentElements">
             {columnSets.length >= 1 && columnSets.map(el => el)}
             {columnSets.length >= 1
