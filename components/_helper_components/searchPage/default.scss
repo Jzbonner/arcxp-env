@@ -81,10 +81,10 @@
   color: #9b9b9b;
   border-bottom: solid 1px #cdcdcd;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   padding-bottom: 10px;
 
-  @include text-styles(.75rem, 1, "Gordita-Bold");
+  @include text-styles(.75rem, 1.25, "Gordita-Bold");
 
   .sort-header {
     color: #313132;
@@ -111,6 +111,14 @@
 
   span.default-active {
     color: #2e81b7;
+  }
+
+  @include breakpoint(tablet) {
+    @include text-styles(.875rem, 1.25, "Gordita-Bold");
+
+    span:nth-child(0) {
+      font-size: 1rem;
+    }
   }
 }
 
@@ -200,13 +208,6 @@
 }
 
 .c-search-item {
-  @include breakpoint(tablet) {
-    max-width: 363px;
-  }
-
-  @include breakpoint(desktop-sm) {
-    max-width: none;
-  }
 
   .c-homeList.isSearch {
 
@@ -235,16 +236,27 @@
       a {
         color: #000;
 
-        @include text-styles(.938rem, 1.47, "Lora-Bold");
+        @include text-styles(.938rem, 1.35, "Lora-Bold");
+
+        @include breakpoint(desktop-sm) {
+          font-size: 1rem;
+        }
       }
     }
   }
 
   .item-text-preview {
     width: 95%;
-    max-width: 247px;
 
     @include text-styles(.75rem, 1.5, "Gordita");
+
+    @include between-breakpoints(mobile, tablet) {
+      max-width: 247px;
+    }
+
+    @include breakpoint(tablet) {
+      @include text-styles(.813rem, 1.67, "Gordita");
+    }
 
     @include breakpoint(desktop-sm) {
       width: 96%;
@@ -341,8 +353,34 @@
     align-items: stretch;
   }
 
+  @include breakpoint(desktop-sm) {
+
+    .list-contentElements.c-contentElements {
+      padding: 0 30px 0 0;
+      border-right: 1px solid #cdcdcd;
+      margin-right: 30px;
+    }
+  }
+
   .c-list-right-rail {
-    display: flex;
+    display: none;
+
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      flex-direction: column;
+
+      .RP01-container {
+        flex-grow: 1;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 19px;
+
+        .RP01 {
+          top: 100px;
+          position: sticky;
+        }
+      }
+    }
   }
 
   .c-searchListContainter .list-hp05,

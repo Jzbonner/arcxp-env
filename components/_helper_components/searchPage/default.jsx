@@ -13,8 +13,8 @@ import checkTags from '../../layouts/_helper_functions/checkTags';
 
 const RP01 = s => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} customId={`div-id-RP01_${s}`} />;
 const RP09 = (i, s) => <ArcAd staticSlot={'RP09 sticky listPage'} key={`RP09-List-Page-${i}`} customId={`div-id-RP09_${s}_${i}`} />;
-const MP05 = (i, s) => <ArcAd staticSlot={'MP05'} key={`MP05-${i / 10}`} customId={`div-id-MP05_${s}_${Math.floor(i / 10)}`} />;
-const HP05 = (i, s) => <ArcAd staticSlot={'HP05'} key={`HP05-${i / 10}`} customId={`div-id-HP05_${s}_${Math.floor(i / 10)}`} />;
+const MP05 = (i, s) => <ArcAd staticSlot={'MP05'} key={`MP05-${i}`} customId={`div-id-MP05_${s}_${i}`} />;
+const HP05 = (i, s) => <ArcAd staticSlot={'HP05'} key={`HP05-${i}`} customId={`div-id-HP05_${s}_${i}`} />;
 
 const SearchPage = ({
   globalContent,
@@ -254,7 +254,7 @@ const SearchPage = ({
           <span>|</span>
           <span className={`sort-date ${(sortByDateState && 'default-active') || ''}`} onClick={() => handleSortType(actions.DATE)}>Date</span>
         </div>
-        <div className="c-section with-rightRail">
+        <div className="c-section with-rightRail full-width">
           <div className="c-contentElements list-contentElements">
             {columnSets.length >= 1 && columnSets.map(el => el)}
             {columnSets.length >= 1
