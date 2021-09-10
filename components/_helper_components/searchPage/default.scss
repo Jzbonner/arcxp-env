@@ -342,7 +342,24 @@
   }
 
   .c-list-right-rail {
-    display: flex;
+    display: none;
+
+    @include breakpoint(desktop-sm) {
+      display: flex;
+      flex-direction: column;
+
+      .RP01-container {
+        flex-grow: 1;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 19px;
+
+        .RP01 {
+          top: 100px;
+          position: sticky;
+        }
+      }
+    }
   }
 
   .c-searchListContainter .list-hp05,
