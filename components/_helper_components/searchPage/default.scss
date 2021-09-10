@@ -383,30 +383,15 @@
     }
   }
 
-  .c-searchListContainter .list-hp05,
-  .c-staffBioPage .list-hp05 {
-    display: flex;
-    height: 123px;
-    padding-bottom: 40px;
-    border-top: 1px solid #cdcdcd;
+  .list-hp05 {
+    display: none;
 
-    .hp05-line {
-      @include breakpoint(tablet) {
-        display: none;
-      }
-    }
-
-    .HP05.arcad {
-      @include breakpoint(tablet) {
-        display: block;
-        position: relative;
-        left: -25%;
-        top: 10px;
-      }
-
-      @include breakpoint(desktop-sm) {
-        position: static;
-      }
+    @include between-breakpoints(tablet, desktop-sm) {
+      display: block;
+      margin: 1.625rem -20px;
+      padding-top: 1.75rem;
+      border-top: 1px solid #cdcdcd;
+      text-align: center;
     }
   }
 }
