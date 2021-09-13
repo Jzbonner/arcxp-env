@@ -53,12 +53,14 @@ const SophiTags = ({ isAmp }) => {
     datePublished: `${initialPublishDate}`,
     dateModified: `${lastModifiedDate}`,
   };
-  if (isNonContentPage) {
-    // it's a non-content page (i.e. home or section) so remove `datePublished` and `dateModified` from the page object
+  if (!initialPublishDate) {
+    // datePublished is invalid, so remove it from the page object
     delete sophiPageObj.datePublished;
+  }
+  if (!lastModifiedDate) {
+    // dateModified is invalid, so remove it from the page object
     delete sophiPageObj.dateModified;
   }
-
 
   if (isAmp) {
     const stringCustomContents = [
