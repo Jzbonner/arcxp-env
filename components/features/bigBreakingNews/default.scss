@@ -47,11 +47,6 @@
         margin-bottom: 15px;
       }
 
-      @include between-breakpoints(mobile, tablet) {
-        border-bottom: 1px solid #cdcdcd;
-        margin-bottom: 15px;
-      }
-
       @include breakpoint(desktop-sm) {
         padding: 0 15px 0 0;
       }
