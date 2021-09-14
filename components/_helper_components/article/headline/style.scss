@@ -100,9 +100,12 @@
       .headline-body {
         padding: 20px 30px;
         max-width: 1600px;
+        text-align: center;
 
         .headline-text-long {
-          max-width: 63vw;
+          @include breakpoint(tablet) {
+            max-width: 63vw;
+          }
         }
       }
     }

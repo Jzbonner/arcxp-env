@@ -31,7 +31,8 @@ const AdSetup = ({
   const name = slotName;
   const fullWidthAd = ['HP01', 'HP02', 'HS02', 'MP01', 'MP02', 'MP03', 'MP04', 'RP01', 'RP09', 'RP03'];
 
-  const borderTop = fullWidthAd.includes(name) ? <div className={`c-sectionHome border-top ${name}`}></div> : null;
+  const isStaffPage = window.location.href.search('/staff/') !== -1;
+  const borderTop = fullWidthAd.includes(name) && !isStaffPage ? <div className={`c-sectionHome border-top ${name}`}></div> : null;
 
   useEffect(() => {
     const instance = ArcAdLib.getInstance();

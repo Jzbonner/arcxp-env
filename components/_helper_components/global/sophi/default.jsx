@@ -34,6 +34,10 @@ const SophiTags = ({ isAmp }) => {
   let sophiSection = topSection.indexOf('/') === 0 ? topSection.substr(1) : topSection;
   const sophiMainSection = sophiSection.indexOf('/') > -1 ? sophiSection.substr(0, sophiSection.indexOf('/')) : sophiSection;
   sophiSection = sophiSection.replace(/\//g, ':');
+  const sectionLength = sophiSection.length - 1;
+  if (sophiSection.lastIndexOf(':') === sectionLength) {
+    sophiSection = sophiSection.substr(0, sectionLength);
+  }
 
   const accessCategory = paywallStatus === 'premium' ? 'metered views' : 'free access';
 
@@ -49,12 +53,14 @@ const SophiTags = ({ isAmp }) => {
     datePublished: `${initialPublishDate}`,
     dateModified: `${lastModifiedDate}`,
   };
-  if (isNonContentPage) {
-    // it's a non-content page (i.e. home or section) so remove `datePublished` and `dateModified` from the page object
+  if (!initialPublishDate) {
+    // datePublished is invalid, so remove it from the page object
     delete sophiPageObj.datePublished;
+  }
+  if (!lastModifiedDate) {
+    // dateModified is invalid, so remove it from the page object
     delete sophiPageObj.dateModified;
   }
-
 
   if (isAmp) {
     const stringCustomContents = [

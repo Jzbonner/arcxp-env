@@ -141,12 +141,12 @@ class Api {
           const { src: manuallyResizedThumb } = resizer.fetch(imgQuery);
           const videoThumbResized = existingResizedVideoThumb || manuallyResizedThumb;
           const videoCaption = caption || '';
-          const { url: mp4Url, stream_type: videoType } = streams && streams[0] ? streams[0] : {};
-          let mediumType = '';
-          if (videoType === 'ts') {
-            mediumType = 'application/x-mpegurl';
-          } else if (videoType === 'mp4') {
-            mediumType = 'video/mp4';
+          const { url: mp4Url, stream_type: streamType } = streams && streams[0] ? streams[0] : {};
+          let videoType = '';
+          if (streamType === 'ts') {
+            videoType = 'application/x-mpegurl';
+          } else if (streamType === 'mp4') {
+            videoType = 'video/mp4';
           }
 
           return {
@@ -173,8 +173,8 @@ class Api {
                 {
                   _name: 'media:content',
                   _attrs: {
-                    type: 'video',
-                    medium: `${mediumType}`,
+                    type: `${videoType}`,
+                    medium: 'video',
                     url: mp4Url,
                   },
                   _content: [

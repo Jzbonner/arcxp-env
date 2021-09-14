@@ -394,12 +394,16 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           }
 
           // let's bind to the login button(s) since the onLoggedIn event isn't entirely reliable
-          document.querySelector('[data-mg2-action="login"]').addEventListener('click', () => {
-            // (re)set the sophi event trigger for login
-            triggerActualLoginEvent = true;
-          });
-          // reset the connextLoggedIn binding (since another event may occur after page load)
-          bindConnextLoggedIn = false;
+          try {
+            document.querySelector('[data-mg2-action="login"]').addEventListener('click', () => {
+              // (re)set the sophi event trigger for login
+              triggerActualLoginEvent = true;
+            });
+            // reset the connextLoggedIn binding (since another event may occur after page load)
+            bindConnextLoggedIn = false;
+          } catch (e) {
+            console.warn('could not bind to login button:', e);
+          }
         } else if (userState.toLowerCase() === 'logged in') {
           // (re)set the sophi event trigger for logout
           triggerActualLogoutEvent = true;

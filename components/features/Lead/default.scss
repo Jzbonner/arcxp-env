@@ -436,7 +436,9 @@
       width: 100%;
 
       @include between-breakpoints(mobile,tablet) {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #cdcdcd;
+        padding-bottom: 15px;
       }
 
       @include breakpoint(tablet) {

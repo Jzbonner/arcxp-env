@@ -33,9 +33,13 @@
   }
 
   .c-homepageContent {
-    padding-top: 1.25rem;
     max-width: 1540px;
     width: 100%;
     margin: 0 auto;
+    padding-top: 1.25rem;
+
+    @include breakpoint (tablet) {
+      padding-top: 0;
+    }
   }
 }

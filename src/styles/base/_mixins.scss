@@ -6,6 +6,7 @@
   text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
 
   @if $font == "Average" {
     font-family: "Average", "Georgia", serif;

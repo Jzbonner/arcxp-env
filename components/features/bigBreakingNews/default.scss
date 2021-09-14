@@ -40,6 +40,10 @@
 
       @include between-breakpoints(desktop-sm, desktop-lg) {
         flex: 1 65%;
+
+      @include between-breakpoints(mobile, tablet) {
+        border-bottom: 1px solid #cdcdcd;
+        margin-bottom: 15px;
       }
 
       @include between-breakpoints(mobile, tablet) {

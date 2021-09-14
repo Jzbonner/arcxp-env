@@ -100,6 +100,10 @@ const getContentMeta = () => {
   if (!primarySection) {
     // there is no section object, so it's likely a pagebuilder page (without a true "section" associated)
     topSection = requestUri;
+    const queryStringIndex = topSection.indexOf('?');
+    if (queryStringIndex > -1) {
+      topSection = topSection.substr(0, queryStringIndex);
+    }
   } else if (primarySectionReference && !primarySectionId) {
     // it's imported content with (only) a section reference
     topSection = primarySectionReference.id || '';
