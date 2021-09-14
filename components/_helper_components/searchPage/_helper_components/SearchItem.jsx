@@ -65,8 +65,6 @@ const SearchItem = ({
   const hasMoreThanOneCredit = !!(creditName && creditName.includes(' and'));
   const hasLongCredit = !!(creditName && creditName.length && creditName.length >= 20);
 
-  console.log('tease text', teaseText);
-
   if (isTTDFeature || isListPage) {
     defaultPromoWidth = 110;
     defaultPromoHeight = 110;
