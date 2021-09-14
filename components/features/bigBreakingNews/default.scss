@@ -38,18 +38,24 @@
     .leadItem {
       flex: 1 100%;
 
+      @include between-breakpoints(desktop-sm, desktop-lg) {
+        flex: 1 65%;
+
       @include between-breakpoints(mobile, tablet) {
         border-bottom: 1px solid #cdcdcd;
-        margin-bottom: 10px;
-        padding: 0 0 15px;
-      }
-
-      @include between-breakpoints(tablet, desktop-sm) {
-        padding: 0 0 20px;
+        margin-bottom: 15px;
       }
 
       @include breakpoint(desktop-sm) {
+        padding: 0 15px 0 0;
+      }
+
+      @include breakpoint(desktop-lg) {
         padding: 0 30px 0 0;
+        flex: 1 70%;
+      }
+
+      @include breakpoint(desktop-xl) {
         flex: 1 65%;
       }
 
@@ -67,9 +73,21 @@
       flex: 1 30%;
 
       @include breakpoint(desktop-sm) {
-        padding: 0 0 0 30px;
-        flex: 1 35%;
+        padding: 0 0 0 15px;
         border-left: 1px solid #cdcdcd;
+      }
+
+      @include between-breakpoints(desktop-sm, desktop-lg) {
+        flex: 1 35%;
+      }
+
+      @include breakpoint(desktop-lg) {
+        padding: 0 0 0 30px;
+        flex: 1 30%;
+      }
+
+      @include breakpoint(desktop-xl) {
+        flex: 1 35%;
       }
 
       .c-homeList {
@@ -80,10 +98,6 @@
           padding: 0 0 10px;
 
           @include breakpoint(desktop-sm) {
-            padding: 0 0 20px;
-          }
-
-          @include between-breakpoints(desktop-sm, desktop-lg) {
             padding: 0 0 15px;
           }
         }
@@ -96,12 +110,8 @@
           }
         }
 
-        @include between-breakpoints(desktop-sm, desktop-lg) {
+        @include breakpoint(desktop-sm) {
           padding: 15px 0;
-        }
-
-        @include breakpoint(desktop-lg) {
-          padding: 20px 0;
         }
 
         .homeList-image {
@@ -123,7 +133,7 @@
             color: #000;
             letter-spacing: -.16px;
 
-            @include text-styles(1rem, 1.38, "Lora");
+            @include text-styles(1.1rem, 1.2, "Lora");
 
             @include breakpoint(tablet) {
               @include text-styles(1.3125rem, 1.24, "Lora-Medium");
