@@ -2,6 +2,8 @@ import isNotBR from '../BR';
 
 let numberOfElements = 0;
 const filterContentElements = ({ contentElements, elementToRemove = 'divider', indexToStartRemoving = 1 }) => {
+  console.log('element to remove', elementToRemove);
+  console.log('filet content el func is running');
   const newContentElements = contentElements.filter((element) => {
     // we reconstruct contentElements to remove any extraneous elements (e.g. Divider), per the logic in APD-96
 
