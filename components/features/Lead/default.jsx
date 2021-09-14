@@ -9,10 +9,11 @@ import getLists from '../../layouts/_helper_functions/article/getLists';
 import './default.scss';
 
 const Lead = ({
-  customFields = {}, limitOverride, displayClassOverride, feature = 'Lead',
+  customFields = {}, limitOverride, displayClassOverride, feature = 'Lead', filterData = false,
 }) => {
   const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
+  const { arcSite, globalContent } = fusionContext;
+  const { _id: id = '' } = globalContent;
 
   const {
     content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', title = '', columns = 1, moreURL,
@@ -49,7 +50,7 @@ const Lead = ({
   }
 
 
-  const data = useContent({
+  let data = useContent({
     source: contentService,
     query: {
       ...contentConfigValues,
@@ -61,6 +62,10 @@ const Lead = ({
       feature,
     },
   });
+
+  if (filterData && Array.isArray(data)) {
+    data = data.filter(story => story?._id !== id);
+  }
 
   function getDisplayClassMap() {
     switch (actualDisplayClass) {
@@ -182,6 +187,7 @@ Lead.propTypes = {
     }),
   }),
   feature: PropTypes.string,
+  filterData: PropTypes.bool,
 };
 
 export default Lead;
