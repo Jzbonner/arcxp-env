@@ -55,15 +55,7 @@ const ListEnhanced = ({ customFields = {} }) => {
     filter,
   });
 
-  const totalStories = contentData.count;
-
-  if (!Array.isArray(contentData)) {
-    if (contentData && Array.isArray(contentData.content_elements)) {
-      contentData = contentData.content_elements;
-    } else {
-      return null;
-    }
-  }
+  const totalStories = contentData?.count;
 
   useEffect(() => {
     if (isStaffBio) {
@@ -73,7 +65,15 @@ const ListEnhanced = ({ customFields = {} }) => {
     }
   }, [contentData]);
 
-  const storiesPerSection = Math.min(storiesPerLoadMoreBtnClick, data.length);
+  if (!Array.isArray(contentData)) {
+    if (contentData && Array.isArray(contentData.content_elements)) {
+      contentData = contentData.content_elements;
+    } else {
+      return null;
+    }
+  }
+
+  const storiesPerSection = Math.min(storiesPerLoadMoreBtnClick, data?.length);
   const collectionTitle = collectionMetaData?.headlines?.basic;
   const filteredStories = data?.slice(0, storiesCount);
   const moreStoriesToLoad = (!isStaffBio && !!(data?.length - filteredStories?.length)) || (isStaffBio && totalStories > filteredStories?.length);
@@ -82,7 +82,7 @@ const ListEnhanced = ({ customFields = {} }) => {
   let filteredTeases = AddFirstInlineImage(filteredStories, 'list', ['list']);
   filteredTeases = updateImageRefs(filteredTeases);
 
-  if (!Array.isArray(filteredTeases) || !filteredTeases.length) {
+  if (!Array.isArray(filteredTeases) || !filteredTeases?.length) {
     return null;
   }
 
@@ -148,7 +148,7 @@ const ListEnhanced = ({ customFields = {} }) => {
 
                 {sectionIndex + 1 === sections && moreStoriesToLoad && (
                   <LoadMoreButton
-                    numberOfTotalStories={filteredStories.length}
+                    numberOfTotalStories={filteredStories?.length}
                     handleOnClick={() => setStoryCount(storiesCount + storiesPerLoadMoreBtnClick)
                     }
                   />

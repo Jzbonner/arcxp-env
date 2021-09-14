@@ -96,7 +96,7 @@
             margin-bottom: 1.25rem;
           }
         }
-        
+
         .arcad {
           padding-top: 35px;
 
@@ -151,7 +151,7 @@
 
           .arcad:not(:empty) {
             padding-top: 35px;
-            
+
             @include breakpoint(tablet) {
               padding-top: 30px;
             }
@@ -496,10 +496,10 @@
 .c-sectionCentered {
   // Needed to work with b-sectionHome-padding and maintain the same max with
   max-width: 880px; // 820px + 30px padding on each side
-  margin: 1rem auto;
+  margin: -.5rem auto 1rem;
 
   @include breakpoint(tablet) {
-    margin: 1.25rem auto;
+    margin: -.5rem auto 1.25rem;
   }
 
   @include between-breakpoints(desktop-xxl, desktop-xxxl) {
