@@ -109,7 +109,7 @@ const StoryPageLayout = () => {
   // destructured it in two parts due to page getting broken when hide_timestamp doesn't exist
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
-  const filteredContentElements = filterContentElements({ contentElements, elementToRemove: 'none' });
+  const filteredContentElements = filterContentElements({ contentElements });
   const maxNumberOfParagraphs = paragraphCounter(filteredContentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
 
