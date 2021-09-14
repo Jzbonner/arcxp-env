@@ -53,6 +53,25 @@
     }
   }
 
+  .section:first-of-type {
+
+    .RP01 {
+      margin-top: -40px;
+    }
+
+    .tablet-line {
+      top: 0;
+      height: calc(100% - 35px);
+    }
+
+    .col-1 {
+
+      .c-enhancedList-listItem:first-of-type {
+        padding-top: 0;
+      }
+    }
+  }
+
   .section {
     display: flex;
     position: relative;
@@ -135,6 +154,13 @@
   }
 
   @include breakpoint(tablet) {
+
+    .section:first-of-type {
+
+      .c-enhancedList-listItem:first-of-type {
+        padding-top: 0;
+      }
+    }
 
     .section:last-child {
 
