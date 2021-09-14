@@ -45,7 +45,7 @@ const SearchItem = ({
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
-  const { basic = '' } = description;
+  const { basic: teaseText = '' } = description;
   const hyperlocalTags = getProperties().hyperlocalTags || [];
   const isHyperlocalContent = checkTags(
     tags,
@@ -64,6 +64,8 @@ const SearchItem = ({
   const sectionName = primarySite && primarySite.name ? primarySite.name : null;
   const hasMoreThanOneCredit = !!(creditName && creditName.includes(' and'));
   const hasLongCredit = !!(creditName && creditName.length && creditName.length >= 20);
+
+  console.log('tease text', teaseText);
 
   if (isTTDFeature || isListPage) {
     defaultPromoWidth = 110;
@@ -118,24 +120,27 @@ const SearchItem = ({
 
   const buildSearchItemRow = () => {
     const sectionEl = () => <span className="search-section">{sectionName}</span>;
-    const creditEl = () => <><div className="divider"></div><span className="search-credit">{creditName}</span></>;
+    const creditEl = () => {
+      const hasDivider = sectionName ? <div className="divider"></div> : null;
+      return <>{hasDivider}<span className="search-credit">{creditName}</span></>;
+    };
 
     return (<div className="c-credit-row">
       {sectionName && sectionEl()}
       {creditName && creditEl()}
-        <TimeStamp
-          firstPublishDate={firstPublishDate}
-          displayDate={displayDate}
-          isHideTimestampTrue={isHideTimestampTrue}
-          isTease={true}
-          onSearchPage={true}
-        />
+      <TimeStamp
+        firstPublishDate={firstPublishDate}
+        displayDate={displayDate}
+        isHideTimestampTrue={isHideTimestampTrue}
+        isTease={true}
+        onSearchPage={true}
+      />
     </div>);
   };
 
   return (
     <div className="c-search-item">
-      <div className={`c-homeList isSearch ${isMissingPromo}  ${hidePromo ? 'no-photo' : ''} ${noBorder ? 'no-border-bottom' : ''} ${hasMoreThanOneCredit || hasLongCredit ? 'multi-credits' : ''} `} >
+      <div className={`c-homeList isSearch ${isMissingPromo} ${!teaseText ? 'no-text' : ''} ${hidePromo ? 'no-photo' : ''} ${noBorder ? 'no-border-bottom' : ''} ${hasMoreThanOneCredit || hasLongCredit ? 'multi-credits' : ''} `} >
         {!hidePromo && getPromoItem() && (
           <a href={relativeURL} className="homeList-image">
             <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'} />
@@ -151,12 +156,17 @@ const SearchItem = ({
             </a>
             {showPreview && <ListItemPreview id={id} />}
           </div>
-          {basic && <div className="item-text-preview">{truncateHeadline(basic, !isSynopsis)}</div>}
+          {teaseText && <div className="item-text-preview">{truncateHeadline(teaseText, !isSynopsis)}</div>}
+          {!teaseText && <div className="bottom-content">
+          {buildSearchItemRow()}
+        </div>}
         </div>
       </div>
-      <div className="bottom-content">
-        {buildSearchItemRow()}
-      </div>
+      {
+        teaseText && <div className="bottom-content">
+          {buildSearchItemRow()}
+        </div>
+      }
     </div>
   );
 };

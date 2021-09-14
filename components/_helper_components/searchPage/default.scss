@@ -95,7 +95,7 @@
   }
 
   .sort-date,
-  .sort-header {
+  .sort-score {
     cursor: pointer;
   }
 
@@ -324,6 +324,29 @@
 
     ~ .bottom-content .c-credit-row .isTease.article-timestamp {
       width: 110px;
+    }
+  }
+
+  &.no-text {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #cdcdcd;
+
+    .homeList-text {
+
+      .c-credit-row {
+        padding-bottom: 0;
+        width: 90%;
+
+        @include breakpoint(tablet) {
+          width: auto;
+        }
+      }
+  
+      .bottom-content {
+        margin-bottom: 0;
+        border-bottom: none;
+      }
     }
   }
 
