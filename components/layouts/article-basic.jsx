@@ -1,5 +1,5 @@
 /*  /components/layouts/article-basic.jsx  */
-import React, { useState } from 'react';
+import React from 'react';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../_helper_components/global/utils/environment';
@@ -112,8 +112,6 @@ const StoryPageLayout = () => {
   const filteredContentElements = filterContentElements({ contentElements, elementToRemove: 'none' });
   const maxNumberOfParagraphs = paragraphCounter(filteredContentElements);
   const stop = maxNumberOfParagraphs === 4 ? 4 : 5;
-  console.log('content elements', contentElements);
-  console.log('filteeredContent els', filteredContentElements);
 
   const { tags = [], sections } = taxonomy || {};
 
@@ -132,7 +130,6 @@ const StoryPageLayout = () => {
 
   filteredContentElements.forEach((el, i) => {
     if (el && el.type === 'divider' && infoBoxIndex === null) {
-      debugger;
       infoBoxIndex = i;
     }
     if (isParagraph(el.type)) {
@@ -144,20 +141,13 @@ const StoryPageLayout = () => {
     return null;
   });
 
-  console.log('infoboxIndex', infoBoxIndex);
-
   if (infoBoxIndex !== null && !ampPage) {
     // there is an infobox.  To match criteria in APD-96 we must insert ConnextEndOfStory immediately prior to it
     filteredContentElements.splice(infoBoxIndex, 0, <ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
-    console.log('fContentEl after connext splicing', filteredContentElements);
     infoBoxIndex += 1;
-    debugger;
   } else if (!ampPage) {
     insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
-    debugger;
   }
-
-  debugger;
 
   const storyContentOutput = () => <>
     <Section
