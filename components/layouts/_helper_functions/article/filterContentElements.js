@@ -3,7 +3,7 @@ import isNotBR from '../BR';
 let numberOfElements = 0;
 const filterContentElements = ({ contentElements, elementToRemove, indexToStartRemoving = 1 }) => {
   const newContentElements = contentElements.filter((element) => {
-    // we reconstruct contentElements to remove any extraneous elements (e.g. Divider), per the logic in APD-96
+    // we reconstruct contentElements to remove any extraneous elements, per the logic in APD-96
 
     if (element.type === elementToRemove) {
       numberOfElements += 1; // it's a removable content type, increment the total count
