@@ -4,6 +4,11 @@
   width: inherit;
 
   &:first-child {
+
+    .withTitle .c-homeLeadContainer {
+      margin-bottom: 0;
+    }
+
     @include breakpoint(tablet) {
       margin-right: 0;
     }
@@ -24,10 +29,10 @@
   &:not(:first-child) .withTitle .column-1 {
     @include between-breakpoints(mobile, tablet) {
       border-top: 1px solid #cdcdcd;
-      padding-top: 30px;
+      padding-top: 15px;
     }
   }
-
+  
   .LeftPhotoNoPhoto {
     position: relative;
 
@@ -67,8 +72,8 @@
     .column-1 {
       @include between-breakpoints(mobile, tablet) {
         border-bottom: 1px solid #cdcdcd;
-        padding-bottom: 15px;
-        margin-bottom: 30px;
+        padding-bottom: 0;
+        margin-bottom: 15px;
       }
     }
   }
