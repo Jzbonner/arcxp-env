@@ -73,6 +73,7 @@ const StoryPageLayout = () => {
     type,
     content_restrictions: contentRestrictions,
   } = globalContent || {};
+
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const ampPage = outPutTypePresent && queryParams.outputType === 'amp';
