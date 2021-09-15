@@ -6,17 +6,15 @@ import getSponsorContent from './_helper_functions/getSponserContent';
 import ArcAd from '../../../features/ads/default';
 import './default.scss';
 
-
-const SP01 = () => <ArcAd staticSlot={'SP01'} key={'SP01'} />;
-
 const SponsorRelatedBox = ({
-  sponsorID, uuid,
+  sponsorID, uuid, isMeteredStory = false,
 }) => {
   if (!sponsorID) {
     return null;
   }
   const fusionContext = useFusionContext();
   const { arcSite = 'ajc' } = fusionContext;
+  const SP01 = () => <ArcAd staticSlot={'SP01'} key={'SP01'} lazyLoad={isMeteredStory} />;
 
   const siteData = useContent({
     source: 'site-api',
@@ -103,6 +101,7 @@ SponsorRelatedBox.propTypes = {
   taxonomy: PropTypes.object,
   uuid: PropTypes.string,
   hideRelatedList: PropTypes.bool,
+  isMeteredStory: PropTypes.bool,
 };
 
 SponsorRelatedBox.defaultProps = {

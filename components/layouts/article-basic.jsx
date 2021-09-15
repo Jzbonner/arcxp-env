@@ -223,12 +223,14 @@ const StoryPageLayout = () => {
           hideRelatedList={hideRelatedList}
           sponsorID={sponsorSectionID}
           taxonomy={taxonomy}
-          uuid={uuid} />
+          uuid={uuid}
+          isMeteredStory={isMeteredStory} />
         : <SponsorRelatedBox
           hideRelatedList={hideRelatedList}
           sponsorID={sponsorSectionID}
           taxonomy={taxonomy}
-          uuid={uuid} />
+          uuid={uuid}
+          isMeteredStory={isMeteredStory} />
     )}
     {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
     {!noAds && !isHyperlocalContent && (
