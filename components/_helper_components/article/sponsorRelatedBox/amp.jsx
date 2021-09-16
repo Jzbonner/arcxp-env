@@ -5,16 +5,15 @@ import { useContent } from 'fusion:content';
 import AmpAd from '../../amp/amp-ads/AmpAd';
 import './default.scss';
 
-const ampSP01 = (taxonomy, uuid) => <AmpAd adSlot="SP01" uuid={uuid} width={'88'} height={'31'} taxonomy={taxonomy} componentName={'ArcAd'} />;
-
 const SponsorRelatedBoxAMP = ({
-  sponsorID, taxonomy, uuid,
+  sponsorID, taxonomy, uuid, isMeteredStory = false,
 }) => {
   if (!sponsorID) {
     return null;
   }
   const fusionContext = useFusionContext();
   const { arcSite = 'ajc' } = fusionContext;
+  const ampSP01 = () => <AmpAd adSlot="SP01" uuid={uuid} width={'88'} height={'31'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />;
 
   const boxData = useContent({
     source: 'sponsor-box-amp',
@@ -46,7 +45,7 @@ const SponsorRelatedBoxAMP = ({
             <h1>{`More from ${boxTitle}`}</h1>
           </div>
         )}
-        <div className="sponsor-ad">{ampSP01(taxonomy, uuid)}</div>
+        <div className="sponsor-ad">{ampSP01()}</div>
         <ul className={'sponsor-content'}>
           {contentElements.map((el, i) => {
             if (el && el.url && el.headline) {
@@ -74,6 +73,7 @@ SponsorRelatedBoxAMP.propTypes = {
   taxonomy: PropTypes.object,
   uuid: PropTypes.string,
   hideRelatedList: PropTypes.bool,
+  isMeteredStory: PropTypes.bool,
 };
 
 SponsorRelatedBoxAMP.defaultProps = {
