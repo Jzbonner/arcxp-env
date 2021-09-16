@@ -197,13 +197,9 @@
 
     [class~="c-search-item"]:last-of-type {
 
-      .bottom-content {
-        @include breakpoint(tablet) {
+      .c-homeList.isSearch {
+        @include between-breakpoints(tablet, desktop-sm) {
           border-bottom: none;
-        }
-
-        @include breakpoint(desktop-sm) {
-          border-bottom: 1px solid #dadada;
         }
       }
     }
@@ -222,9 +218,17 @@
 .c-search-item {
 
   .c-homeList.isSearch {
+    border-bottom: 1px solid #dadada;
+    margin-bottom: 15px;
 
-    &.no-border-bottom .bottom-content {
-      border-bottom: none;
+    &.no-border-bottom {
+      @include breakpoint(tablet) {
+        border-bottom: none;
+      }
+
+      @include breakpoint(desktop-sm) {
+        border-bottom: 1px solid #dadada;
+      }
     }
 
     .lazyload-wrapper {
@@ -259,6 +263,7 @@
 
   .item-text-preview {
     width: 95%;
+    margin-bottom: 10px;
 
     @include text-styles(.75rem, 1.5, "Gordita");
 
@@ -276,8 +281,6 @@
   }
 
   .bottom-content {
-    border-bottom: solid 1px #dadada;
-    margin-bottom: 15px;
 
     .c-credit-row {
       display: flex;
@@ -310,11 +313,7 @@
   flex-direction: row-reverse;
   justify-content: space-between;
   padding-bottom: .063rem;
-  margin-bottom: .875rem;
-
-  @include breakpoint(desktop-sm) {
-    margin-bottom: 0;
-  }
+  margin-bottom: 15px;
 
   &.isMissingPromo {
     flex-direction: row;
