@@ -63,13 +63,12 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     const checkVideoCaption = videoDescription || '';
     leadObject = mediaObj(leadObjectType, 'video', leadObjectUrl, siteID, mediaTitle, checkVideoCaption, videoAuthor, true, basicThumbNailImage, false);
   }
-
   if (promoItemsType === 'gallery' || standaloneGallery || !standaloneGallery) {
     if (newsletterFeed || standardFeed) {
-      if (standaloneGallery) {
+      if (standaloneGallery || basicUrl) {
         leadObject = mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor, true, basicUrl, true);
-      } else {
-        leadObject = basicGalleryPromo ? mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit, true, basicGalleryUrl, true) : mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor, true, basicUrl, true);
+      } else if (basicGalleryPromo) {
+        leadObject = mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit, true, basicGalleryUrl, true);
       }
     } else if (!standaloneGallery) {
       formatterGalleryArray = basicContentElements.map((item) => {
