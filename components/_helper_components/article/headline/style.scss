@@ -128,15 +128,17 @@
   }
 
   &.with-just-headline {
-    margin-top: 1.25rem;
+    margin: 1.25rem 0;
 
     @include breakpoint(desktop-sm) {
-      margin-top: 1.875rem;
+      margin: 1.875rem 0;
     }
 
     .headline-body {
-      @include breakpoint(desktop-sm) {
-        padding: 41px 103px;
+      padding: 0;
+
+      @include breakpoint(tablet) {
+        padding: 0px 20px 0 14px;
       }
     }
   }
