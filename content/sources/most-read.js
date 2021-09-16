@@ -42,7 +42,7 @@ const fetch = (query = {}) => {
         // keep initial existing data that matches the user's input
         const newArray = filterMostRead(data, hostBasedonEnv, blacklist);
         // grab the primary section if any
-        const primarySection = `/${section.split('/')[1]}`;
+        const primarySection = section && `/${section.split('/')[1]}`;
         // check if the user's section input has secondary section
         if (primarySection && primarySection !== section && newArray && titleCheck(newArray, newArray.length, true)) {
           section = primarySection;
@@ -62,29 +62,33 @@ const fetch = (query = {}) => {
       if (Array.isArray(data) && fetchStoryData) {
         const urls = [];
         data.map((element) => {
-          const path = element && element.path && element.path.substr(element.path.indexOf('/'));
+          const pathStart = element?.path.indexOf('/') || 0;
+          const path = element?.path.substr(pathStart) || null;
           return urls.push(path);
         });
-        return axios.get(`${CONTENT_BASE}/content/v4/urls?website=${arcSite}&website_urls=${urls.toString()}`, {
-          headers: {
-            Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
-          },
-        }).then(({ data: finalData }) => {
-          const { content_elements: contentElements = [] } = finalData || {};
-          if (fetchStoryData && contentElements.length) {
-            const mostReadWithArcData = mostReadContent.map((element, i) => {
-              const path = element && element.path && element.path.substr(element.path.indexOf('/'));
-              // checking the paths and merging the two array
-              if (path && contentElements[i] && contentElements[i].canonical_url === path) {
-                const storyEl = pick(contentElements[i], filter);
-                return Object.assign({}, element, storyEl);
-              }
-              return element;
-            });
-            return mostReadWithArcData;
-          }
-          return mostReadContent;
-        });
+        if (urls.length) {
+          return axios.get(`${CONTENT_BASE}/content/v4/urls?website=${arcSite}&website_urls=${urls.toString()}`, {
+            headers: {
+              Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+            },
+          }).then(({ data: finalData }) => {
+            const { content_elements: contentElements = [] } = finalData || {};
+            if (fetchStoryData && contentElements.length) {
+              const mostReadWithArcData = mostReadContent.map((element, i) => {
+                const pathStart = element?.path.indexOf('/') || 0;
+                const path = element?.path.substr(pathStart) || null;
+                // checking the paths and merging the two array
+                if (path && contentElements[i] && contentElements[i].canonical_url === path) {
+                  const storyEl = pick(contentElements[i], filter);
+                  return Object.assign({}, element, storyEl);
+                }
+                return element;
+              });
+              return mostReadWithArcData;
+            }
+            return mostReadContent;
+          });
+        }
       }
       return mostReadContent;
     })
