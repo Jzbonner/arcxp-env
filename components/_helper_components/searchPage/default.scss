@@ -284,7 +284,6 @@
 
     .c-credit-row {
       display: flex;
-      padding-bottom: 15px;
       align-items: center;
       flex-wrap: wrap;
 
@@ -312,7 +311,7 @@
   width: 100%;
   flex-direction: row-reverse;
   justify-content: space-between;
-  padding-bottom: .063rem;
+  padding-bottom: 15px;
   margin-bottom: 15px;
 
   &.isMissingPromo {
