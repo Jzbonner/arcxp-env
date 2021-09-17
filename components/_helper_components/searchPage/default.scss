@@ -316,6 +316,18 @@
 
   &.isMissingPromo {
     flex-direction: row;
+
+    .headline {
+      @include between-breakpoints(mobile, desktop-sm) {
+        width: 100%;
+      }
+    }
+
+    .item-text-preview {
+      @include between-breakpoints(mobile, desktop-sm) {
+        max-width: none;
+      }
+    }
   }
 
   &.multi-credits {
@@ -354,6 +366,25 @@
 
   .homeList-image {
     margin-left: 0;
+    
+    &:empty {
+
+      ~.homeList-text {
+
+        .headline {
+          @include between-breakpoints(mobile, desktop-sm) {
+            width: 100%;
+          }
+        }
+
+        @include between-breakpoints(mobile, desktop-sm) {
+
+          .item-text-preview {
+            max-width: none;
+          }
+        }
+      }
+    }
   }
 }
 
