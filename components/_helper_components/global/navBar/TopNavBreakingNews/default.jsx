@@ -4,6 +4,7 @@ import NavBar from '../default';
 import ArcAd from '../../../../features/ads/default';
 import WeatherAlerts from '../../weatherAlerts/default';
 import { debounce } from '../../../../features/gallery/_helper_functions';
+import getContentMeta from '../../siteMeta/_helper_functions/getContentMeta';
 import './default.scss';
 
 const HS01 = galleryTopics => <ArcAd staticSlot={'HS01'} galleryTopics={galleryTopics} />;
@@ -13,7 +14,6 @@ const TopNavBreakingNews = ({
   headlines,
   comments,
   type,
-  /* subtype, */
   ampPage = false,
   noAds = false,
   omitBreakingNews = false,
@@ -22,6 +22,7 @@ const TopNavBreakingNews = ({
   const [aboveWindowShade, setAboveWindowShade] = useState(false);
   const [hasHalfShade, setHasHalfShade] = useState(false);
   const windowExists = typeof window !== 'undefined';
+  const { enableDarkMode } = getContentMeta();
 
   const docHasWindowShade = (checkCollapse, checkHalfShade) => {
     if (windowExists) {
@@ -80,7 +81,7 @@ const TopNavBreakingNews = ({
 
   return (
     <>
-      {!noAds && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
+      {!noAds && !enableDarkMode && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
       <div className={`nav-breaking-news ${aboveWindowShade ? 'is-above-shade' : ''} ${docHasWindowShade(true) || hasHalfShade ? 'with-half-shade' : ''}`} >
         <WeatherAlerts />
         <NavBar
@@ -91,6 +92,7 @@ const TopNavBreakingNews = ({
           ampPage={ampPage}
           hasWindowShade={aboveWindowShade}
           omitBreakingNews={omitBreakingNews}
+          enableDarkMode={enableDarkMode}
         />
       </div>
     </>

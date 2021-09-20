@@ -16,7 +16,7 @@ import BreakingNews from '../breakingNews/default';
 import Login from './login/default';
 
 const NavBar = ({
-  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false,
+  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false, enableDarkMode,
 }) => {
   // amp hijack
   if (ampPage) return <AmpNavBar />;
@@ -29,6 +29,7 @@ const NavBar = ({
   const paddingRef = React.useRef(null);
   const isMobileVisibilityRef = React.useRef(isMobile);
   const mobileBreakpoint = 767;
+  const darkMode = enableDarkMode && type.includes('homepage');
 
   const fusionContext = useFusionContext();
   const { arcSite, globalContent } = fusionContext;
@@ -161,7 +162,7 @@ const NavBar = ({
 
   return (
     <header className='c-nav'>
-      {!omitBreakingNews && <BreakingNews />}
+      {!omitBreakingNews && !darkMode && <BreakingNews />}
       <div className={`c-headerNav b-sectionHome-padding
         ${stickyNavVisibility ? 'stickyActive' : ''}
         ${hasWindowShade ? 'above-shade' : ''}
@@ -235,6 +236,7 @@ NavBar.propTypes = {
   ampPage: PropTypes.bool,
   hasWindowShade: PropTypes.bool,
   omitBreakingNews: PropTypes.bool,
+  enableDarkMode: PropTypes.bool,
 };
 
 export default NavBar;
