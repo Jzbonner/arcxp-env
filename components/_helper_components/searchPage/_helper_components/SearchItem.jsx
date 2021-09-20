@@ -33,7 +33,6 @@ const SearchItem = ({
   isTTDFeature = false,
   credits,
   description = {},
-  noBorder = false,
 }) => {
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -138,7 +137,7 @@ const SearchItem = ({
 
   return (
     <div className="c-search-item">
-      <div className={`c-homeList isSearch ${isMissingPromo} ${!teaseText ? 'no-text' : ''} ${hidePromo ? 'no-photo' : ''} ${noBorder ? 'no-border-bottom' : ''} ${hasMoreThanOneCredit || hasLongCredit ? 'multi-credits' : ''} `} >
+      <div className={`c-homeList isSearch ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${hasMoreThanOneCredit || hasLongCredit ? 'multi-credits' : ''} `} >
         {!hidePromo && getPromoItem() && (
           <a href={relativeURL} className="homeList-image">
             <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'} />
@@ -155,16 +154,11 @@ const SearchItem = ({
             {showPreview && <ListItemPreview id={id} />}
           </div>
           {teaseText && <div className="item-text-preview">{truncateHeadline(teaseText, !isSynopsis)}</div>}
-          {!teaseText && <div className="bottom-content">
-          {buildSearchItemRow()}
-        </div>}
+          <div className="bottom-content">
+            {buildSearchItemRow()}
+          </div>
         </div>
       </div>
-      {
-        teaseText && <div className="bottom-content">
-          {buildSearchItemRow()}
-        </div>
-      }
     </div>
   );
 };
