@@ -82,7 +82,7 @@ const TopNavBreakingNews = ({
   return (
     <>
       {!noAds && !enableDarkMode && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
-      <div className={`nav-breaking-news ${aboveWindowShade ? 'is-above-shade' : ''} ${docHasWindowShade(true) || hasHalfShade ? 'with-half-shade' : ''}`} >
+      <div className={`nav-breaking-news ${enableDarkMode ? 'dark-mode' : ''} ${aboveWindowShade ? 'is-above-shade' : ''} ${docHasWindowShade(true) || hasHalfShade ? 'with-half-shade' : ''}`} >
         <WeatherAlerts />
         <NavBar
           articleURL={articleURL}
