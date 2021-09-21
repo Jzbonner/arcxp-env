@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import '../../../../../src/styles/container/_c-headerNav.scss';
 
 const Logo = ({
-  source, rootDirectory, topRef, siteName,
+  source, rootDirectory, topRef, siteName, darkMode, darkModeLogo,
 }) => (
     <a href={rootDirectory}>
-      <img src={source} className={`logo ${siteName}`} ref={topRef}></img>
+      <img src={ !darkMode ? source : darkModeLogo} className={`logo ${siteName}`} ref={topRef}></img>
     </a>
 );
 
@@ -15,6 +15,8 @@ Logo.propTypes = {
   rootDirectory: PropTypes.string,
   topRef: PropTypes.any,
   siteName: PropTypes.string,
+  darkMode: PropTypes.bool,
+  darkModeLogo: PropTypes.string,
 };
 
 export default Logo;

@@ -165,6 +165,7 @@ const NavBar = ({
       {!omitBreakingNews && !darkMode && <BreakingNews />}
       <div className={`c-headerNav b-sectionHome-padding
         ${stickyNavVisibility ? 'stickyActive' : ''}
+        ${darkMode && 'dark-mode'}
         ${hasWindowShade ? 'above-shade' : ''}
         ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`} style={sidebarIsOpen ? { opacity: 1 } : {}}>
         <div className={`c-logoAndLinks nav-logo
@@ -176,10 +177,12 @@ const NavBar = ({
               <Logo
                 source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoRedesign}`)}`}
                 rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
+                darkMode={darkMode}
+                darkModeLogo={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
               />
             </div>
           <Login
-            isMobile={isMobileVisibilityRef.current} isSticky={stickyNavVisibility}
+            isMobile={isMobileVisibilityRef.current} isSticky={stickyNavVisibility} darkMode={darkMode}
           />
           </div>
           <RedesignNavLinks
@@ -203,9 +206,9 @@ const NavBar = ({
           type={type}
           burgerMenuBackground={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerMenuBackground}`)}`}
           siteName={siteName.toLowerCase()}/>
-        <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
+        { !darkMode && <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
           && mobileMenuToggled) || hasWindowShade ? 'not-visible' : ''} `}>
-        </div>
+        </div>}
          <StickyNav
           headlines={headlines}
           comments={comments}

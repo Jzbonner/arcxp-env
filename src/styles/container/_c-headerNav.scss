@@ -77,6 +77,29 @@
       }
     }
 
+    &.dark-mode {
+      background-color: #000;
+      
+      .c-topNavLinks {
+        border-bottom: solid 1px #dadada;
+        border-top: solid 1px #dadada;
+      }
+
+      .nav-itemText,
+      .login-text,
+      .weather-text a,
+      .c-weather :before {
+        color: #fff;
+      }
+
+      .search-icon {
+
+        path {
+          fill: #fff;
+        }
+      }
+    }
+
     .c-topNavItems {
       display: flex;
       width: 100%;
