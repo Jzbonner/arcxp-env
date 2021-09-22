@@ -7,12 +7,12 @@ import userIcon from '../../../../../resources/icons/login/user-icon.svg';
 import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
 
 const NotAuthMenu = ({
-  isMobile, isFlyout, showUserMenu, setShowUserMenu, arcSite, isSidebar,
+  isMobile, isFlyout, showUserMenu, setShowUserMenu, arcSite, isSidebar, darkMode,
 }) => {
   const loginEl = useRef(null);
 
   let source;
-  if (isFlyout) {
+  if (isFlyout || darkMode) {
     source = userIconWhite;
   } else {
     source = userIcon;
@@ -114,6 +114,7 @@ NotAuthMenu.propTypes = {
   setShowUserMenu: PropTypes.func,
   arcSite: PropTypes.string,
   isSidebar: PropTypes.bool,
+  darkMode: PropTypes.bool,
 };
 
 export default NotAuthMenu;
