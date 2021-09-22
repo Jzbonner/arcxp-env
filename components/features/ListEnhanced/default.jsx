@@ -176,7 +176,7 @@ const ListEnhanced = ({ customFields = {} }) => {
 
 ListEnhanced.propTypes = {
   customFields: PropTypes.shape({
-    content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
+    content: PropTypes.contentConfig(['collections', 'query-feed', 'most-read']).tag({
       name: 'Content',
     }),
     title: PropTypes.string.tag({

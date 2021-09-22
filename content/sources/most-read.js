@@ -7,6 +7,7 @@ import titleCheck from './helper_functions/titleCheck';
 import fetchEnv from '../../components/_helper_components/global/utils/environment';
 import filter from '../filters/collectionApiFilter';
 
+const schemaName = 'most-read';
 const ttl = 900;
 
 const params = {
@@ -23,11 +24,11 @@ const fetch = (query = {}) => {
   const {
     host = 'ajc.com', limit = '10', arcSite = 'ajc', includeStoryContent,
   } = query;
-  let { section = '' } = query;
+  const { section = '' } = query;
   const { chartbeat } = getProperties(arcSite);
   const { blacklist } = chartbeat;
   // If env is not prod then host will be sandbox.ajc.com
-  const hostBasedonEnv = `${env !== 'prod' && host.indexOf('sandbox') === -1 ? 'sandbox.' : ''}${host}`;
+  const hostBasedonEnv = `${env !== 'prod' && host?.indexOf('sandbox') === -1 ? 'sandbox.' : ''}${host}`;
   let requestUri = `https://api.chartbeat.com/live/toppages/v3/?apikey=${CHARTBEAT_KEY}&types=1&host=${hostBasedonEnv}&limit=${limit}`;
   let newUri = requestUri;
   requestUri += section ? `&section=${section}` : '';
@@ -42,11 +43,10 @@ const fetch = (query = {}) => {
         // keep initial existing data that matches the user's input
         const newArray = filterMostRead(data, hostBasedonEnv, blacklist);
         // grab the primary section if any
-        const primarySection = section && `/${section.split('/')[1]}`;
+        const primarySection = section && section.indexOf('/') > 0 ? `/${section.split('/')[1]}` : '';
         // check if the user's section input has secondary section
-        if (primarySection && primarySection !== section && newArray && titleCheck(newArray, newArray.length, true)) {
-          section = primarySection;
-          newUri += section ? `&section=${section}` : '';
+        if (primarySection !== section && titleCheck(newArray, newArray.length, true)) {
+          newUri += primarySection ? `&section=${primarySection}` : '';
           return axios.get(newUri).then(({ data: siteData }) => {
             // update the array with the seconday data from the primary section if any
             newArray.push(...filterMostRead(siteData, hostBasedonEnv, blacklist));
@@ -101,6 +101,7 @@ const fetch = (query = {}) => {
 
 export default {
   fetch,
+  schemaName,
   params,
   ttl,
 };
