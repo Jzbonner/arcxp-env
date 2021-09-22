@@ -165,7 +165,6 @@ const NavBar = ({
       {!omitBreakingNews && !darkMode && <BreakingNews />}
       <div className={`c-headerNav b-sectionHome-padding
         ${stickyNavVisibility ? 'stickyActive' : ''}
-        ${darkMode && 'dark-mode'}
         ${hasWindowShade ? 'above-shade' : ''}
         ${subtype === 'Flatpage' ? ' b-margin-bottom-40' : ''}`} style={sidebarIsOpen ? { opacity: 1 } : {}}>
         <div className={`c-logoAndLinks nav-logo

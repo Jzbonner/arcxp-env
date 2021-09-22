@@ -21,12 +21,17 @@
   &.dark-mode {
     background-color: #000;
 
+    .c-headerNav {
+      border-bottom: 1px solid #fff;
+    }
+
     .c-topNavLinks {
       border-bottom: solid 1px #dadada;
       border-top: solid 1px #dadada;
 
-      ul li:last-child {
+      ul li:last-child a {
         color: #3299ad;
+        font-family: "Gordita-Bold", "Arial", sans-serif;
       }
     }
 
@@ -41,16 +46,6 @@
 
       path {
         fill: #fff;
-      }
-    }
-
-    .nav-flyout-button,
-    .nav-close-button {
-      background: #fff;
-
-      &:before,
-      &:after {
-        background: #fff;
       }
     }
   }

@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import Search from '../search/default';
+import Hamburger from '../../../../../resources/icons/global/hamburger.svg';
 
 const RedesignNavLinks = ({
   sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID,
@@ -51,7 +52,8 @@ const RedesignNavLinks = ({
   return (
     <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
-        <div className='nav-flyout-button'></div>
+        {/* <div className='nav-flyout-button'></div> */}
+        <img src={Hamburger}></img>
       </div>
       <div className={`sticky-logo-homepage ${siteName}`}>
         <a href="/">
