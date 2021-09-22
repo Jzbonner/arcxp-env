@@ -22,13 +22,21 @@
     background-color: #000;
 
     .c-headerNav {
-      border-bottom: 1px solid #fff;
-      padding-bottom: 0;
+      @include between-breakpoints(mobile, tablet) {
+        border-bottom: 1px solid #fff;
+        padding-bottom: 0;
+      }
+
+      &.stickyActive {
+        background-color: #000;
+      }
     }
 
     .c-topNavLinks {
-      border-bottom: solid 1px #dadada;
-      border-top: solid 1px #dadada;
+      @include breakpoint(tablet) {
+        border-bottom: solid 1px #dadada;
+        border-top: solid 1px #dadada;
+      }
 
       ul li:last-child a {
         color: #3299ad;

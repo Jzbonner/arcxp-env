@@ -190,6 +190,7 @@ const NavBar = ({
             setToggle={setToggle}
             animationVisibility={stickyNavVisibility}
             primarySectionID={primarySectionID}
+            darkMode={darkMode}
             />
         </div>
         <HamburgerMenu
@@ -222,6 +223,8 @@ const NavBar = ({
           type={type}
           sections={redesignChildren}
           articleUrl={articleURL}
+          darkMode={darkMode}
+          darkModeLogo={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
         />
       </div>
       <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>

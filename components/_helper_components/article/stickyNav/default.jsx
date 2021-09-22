@@ -19,7 +19,7 @@ import '../../../../src/styles/container/_c-headerNav.scss';
 
 const StickyNav = ({
   headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
-  isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections, articleUrl, hasWindowShade = false,
+  isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections, articleUrl, hasWindowShade = false, darkMode, darkModeLogo,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -117,7 +117,7 @@ const StickyNav = ({
     <>
       <div className={`stickyNav b-sectionHomeMaxWidth ${hasWindowShade || stickyVisibilityRef.current ? 'is-visible' : ''}`}>
         <div className='b-flexRow c-stickyLogin'>
-          <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={logoPath} isNonShareablePage={isNonShareablePage} />
+          <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={darkMode && siteNameLower === 'ajc' ? darkModeLogo : logoPath} isNonShareablePage={isNonShareablePage} darkMode={darkMode} />
           <ul className={`c-stickyNav-list ${siteNameLower}`}>
             <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
               <li className="stickyNav-item fb-icon" >
@@ -156,7 +156,7 @@ const StickyNav = ({
             </div>
           </ul>
           <div className={`${isNonShareablePage ? '' : 'hidden-mobile'}`}>
-            <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current} />
+            <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current} darkMode={darkMode} />
           </div>
         </div>
       </div>
@@ -184,6 +184,8 @@ StickyNav.propTypes = {
   sections: PropTypes.array,
   articleUrl: PropTypes.string,
   hasWindowShade: PropTypes.bool,
+  darkMode: PropTypes.bool,
+  darkModeLogo: PropTypes.string,
 };
 
 export default StickyNav;

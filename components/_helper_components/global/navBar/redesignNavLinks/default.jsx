@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import Search from '../search/default';
 import Hamburger from '../../../../../resources/icons/global/hamburger.svg';
+import HamburgerDark from '../../../../../resources/icons/global/hamburgerDark.svg';
 
 const RedesignNavLinks = ({
-  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID,
+  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, darkMode,
 }) => {
   const { siteDomainURL } = getProperties(arcSite);
   const itemCount = sections.length;
@@ -52,8 +53,7 @@ const RedesignNavLinks = ({
   return (
     <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
-        {/* <div className='nav-flyout-button'></div> */}
-        <img src={Hamburger}></img>
+        <img src={darkMode ? HamburgerDark : Hamburger}></img>
       </div>
       <div className={`sticky-logo-homepage ${siteName}`}>
         <a href="/">
@@ -79,6 +79,7 @@ RedesignNavLinks.propTypes = {
   isNonShareablePage: PropTypes.bool,
   animationVisibility: PropTypes.bool,
   primarySectionID: PropTypes.string,
+  darkMode: PropTypes.bool,
 };
 
 export default RedesignNavLinks;
