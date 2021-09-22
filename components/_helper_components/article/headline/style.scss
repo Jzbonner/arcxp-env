@@ -130,10 +130,6 @@
   &.with-just-headline {
     margin: 1.25rem 0;
 
-    @include breakpoint(desktop-sm) {
-      margin: 1.875rem 0;
-    }
-
     .headline-body {
       padding: 0;
 
