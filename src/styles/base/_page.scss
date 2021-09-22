@@ -16,10 +16,27 @@
       top: 0;
     }
   }
-  
-/* stylelint-enable */
+
+/* stylelint-enable */  
 
   main {
     padding-top: 1.25rem;
+  }
+}
+
+/* stylelint-disable declaration-no-important */
+/* Added hover state to links - APD-1459 */
+
+.c-flatpage,
+.c-listPage,
+.c-searchPage,
+.c-sectionContent,
+.c-staff-page-main,
+.c-homepageContent,
+.c-sectionCentered,
+.c-staffBioPage {
+  
+  a[href]:hover {
+    color: #494949 !important;
   }
 }
