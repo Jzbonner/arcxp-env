@@ -11,6 +11,7 @@ export default function getSponserContent(limit, queryFeed, siteData = {}, refId
     if (i < limit) {
       if (!el) return null;
       const temp = {};
+      temp.sections = el?.taxonomy?.sections;
       if (sponsorTitle && sponsorUrl && i === limit - 1) {
         temp.url = sponsorUrl || null;
         temp.headline = sponsorTitle || null;

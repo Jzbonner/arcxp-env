@@ -4,6 +4,7 @@ import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getSponsorContent from './_helper_functions/getSponserContent';
 import ArcAd from '../../../features/ads/default';
+import Story from './story';
 import './default.scss';
 
 const SponsorRelatedBox = ({
@@ -31,7 +32,6 @@ const SponsorRelatedBox = ({
     sponsor_related_box_include_tags: includeTags,
     sponsor_related_box_must_include_all_tags: includeAllTags,
     sponsor_related_box_title: boxTitle,
-    disable_advertiser_content_label: disableAd,
     disable_sponsor_related_box: disableSponsorRelatedBox,
   } = Sponsor;
 
@@ -52,6 +52,7 @@ const SponsorRelatedBox = ({
     const boxContent = getSponsorContent(5, feed, siteData && siteData.Sponsor, uuid);
 
     if (!boxContent || (boxContent && boxContent.length < 1)) return null;
+
     let mainTitle = '';
     let subTitle = '';
 
@@ -60,7 +61,6 @@ const SponsorRelatedBox = ({
       subTitle = boxTitle.slice(boxTitle.indexOf('sponsored'));
     }
 
-    const lastItemInArray = boxContent.slice(-1).pop();
     return (
       <div className={'c-sponsor-box'}>
         {boxTitle && (
@@ -77,14 +77,7 @@ const SponsorRelatedBox = ({
         <ul className={'sponsor-content'}>
           {boxContent.map((el, i) => {
             if (el && el.url && el.headline) {
-              return (
-                <li key={`sp-item-${i}`} className={`sponsor-item
-                ${el.headline === lastItemInArray.headline && disableAd === 'false' ? 'enabled' : ''}`}>
-                  <a href={el.url}>
-                    <h2>{el.headline}</h2>
-                  </a>
-                </li>
-              );
+              return (<Story i={i} el={el} sponsor={Sponsor} length={boxContent.length}/>);
             }
             return null;
           })}
