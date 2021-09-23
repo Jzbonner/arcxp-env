@@ -19,7 +19,6 @@ const params = {
 
 const env = fetchEnv();
 
-
 const fetch = (query = {}) => {
   const {
     host = 'ajc.com', limit = '10', arcSite = 'ajc', includeStoryContent,
@@ -32,7 +31,7 @@ const fetch = (query = {}) => {
   let requestUri = `https://api.chartbeat.com/live/toppages/v3/?apikey=${CHARTBEAT_KEY}&types=1&host=${hostBasedonEnv}&limit=${limit}`;
   let newUri = requestUri;
   requestUri += section ? `&section=${section}` : '';
-  const fetchStoryData = includeStoryContent !== '';
+  const fetchStoryData = includeStoryContent && includeStoryContent !== '';
 
   let mostReadContent = [];
 
