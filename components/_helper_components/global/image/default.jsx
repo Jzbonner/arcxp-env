@@ -99,7 +99,7 @@ const Image = ({
       1: tImage = null,
       2: mImage = null,
     } = img;
-    const dataSrc = imgSrc || imgSrc.src || mImage.src || url;
+    const dataSrc = imgSrc || mImage.src || url;
     const renderImgTag = () => <>
       {useSrcSet || hasSrcSet ? (
         <picture className={teaseContentType ? 'tease-image' : ''}>
