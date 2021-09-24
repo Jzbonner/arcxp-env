@@ -161,4 +161,15 @@ export default {
     sandbox: 'UZG4A6L2JBCZ5IKJGJXNFHTP2E',
     prod: 'XRV7L22CLZDURCMKARMKA3JR74',
   },
+  carterObit: {
+    mobile: {
+      src: 'https://sandbox.ajc.com/resizer/SkIbRcrroWUDJdJGDyWhiQXaiJs=/arc-anglerfish-arc2-sandbox-sandbox-ajc/public/GOKKBWLAL5AO5KQCQNGS3HBV2Y.png',
+    },
+    tablet: {
+      src: 'https://sandbox.ajc.com/resizer/28BDynzPv0ZJp7lZH1MtHDfUT-s=/arc-anglerfish-arc2-sandbox-sandbox-ajc/public/JNRQR4DE7ZHEFF2PFQMRJFT43Q.png',
+    },
+    desktop: {
+      src: 'https://sandbox.ajc.com/resizer/6h2IApy8LAPB7net6weUJ0Ck574=/arc-anglerfish-arc2-sandbox-sandbox-ajc/public/WBSBDIITVNDAPBDGP4I6G3OCYY.png',
+    },
+  },
 };

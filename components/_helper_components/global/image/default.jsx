@@ -35,6 +35,7 @@ const Image = ({
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
   const isGalleryImage = imageType === 'isGalleryImage';
   let img = null;
+
   if (resizedObject && resizedObject.src && !squareImage) {
     img = resizedObject;
   } else if (url) {
@@ -98,7 +99,7 @@ const Image = ({
       1: tImage = null,
       2: mImage = null,
     } = img;
-    const dataSrc = imgSrc || mImage.src || url;
+    const dataSrc = imgSrc || imgSrc.src || mImage.src || url;
     const renderImgTag = () => <>
       {useSrcSet || hasSrcSet ? (
         <picture className={teaseContentType ? 'tease-image' : ''}>
