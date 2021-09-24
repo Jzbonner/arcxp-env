@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import AmpAd from '../../amp/amp-ads/AmpAd';
+import Story from './story';
 import './default.scss';
 
 const SponsorRelatedBoxAMP = ({
@@ -32,12 +33,10 @@ const SponsorRelatedBoxAMP = ({
 
   const {
     sponsor_related_box_title: boxTitle,
-    disable_advertiser_content_label: disableAd,
     disable_sponsor_related_box: disableSponsorRelatedBox,
   } = sectionConfig;
 
   if (disableSponsorRelatedBox !== 'true') {
-    const lastItemInArray = contentElements.slice(-1).pop();
     return (
       <div id="SPONSOR-BOX" className={'c-sponsor-box'}>
         {boxTitle && (
@@ -49,14 +48,7 @@ const SponsorRelatedBoxAMP = ({
         <ul className={'sponsor-content'}>
           {contentElements.map((el, i) => {
             if (el && el.url && el.headline) {
-              return (
-                <li key={`sp-item-${i}`} className={`sponsor-item
-                          ${el.headline === lastItemInArray.headline && disableAd === 'false' ? 'enabled' : ''}`}>
-                  <a href={el.url}>
-                    <h2>{el.headline}</h2>
-                  </a>
-                </li>
-              );
+              return (<Story i={i} el={el} sponsor={sectionConfig} length={contentElements.length}/>);
             }
             return null;
           })}
