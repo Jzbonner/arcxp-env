@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import CustomInfoBox from '../../_helper_components/embed/CustomInfoBox/default';
+import LiveUpdates from '../../_helper_components/embed/LiveUpdates/default';
 
 /*
   The purpose of this feature is documented in APD-1442 but here's the cliffs notes version:
@@ -24,15 +25,17 @@ const ComposerEmbed = (props) => {
   const { arcSite } = fusionContext;
   let embedId = id;
   const renderEmbed = (embedData) => {
-    /* function to actually pass the embed doc's data to the customInfoBox child component */
+    /* function to actually pass the embed doc's data to the relevant child component */
     const { type, subtype } = embedData;
 
     if (type !== 'story') return <p>this feature is only compatible with stories (and this is {type} content)</p>;
 
-    // this is how we will handle multiple custom Composer subtypes.  Right now that consists of only the customInfoBox but eventually will include Flip Cards, Timeline, etc.
+    // this is how we will handle multiple custom Composer subtypes.
     switch (subtype.toLowerCase()) {
       case 'infobox':
         return <CustomInfoBox data={embedData} borderColor={borderColor} />;
+      case 'liveupdates':
+        return <LiveUpdates data={embedData} />;
       default:
         return <p>this is {subtype} content</p>;
     }
