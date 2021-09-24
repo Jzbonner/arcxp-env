@@ -162,12 +162,11 @@ const StoryPageLayout = () => {
     />
     {!noAds && maxNumberOfParagraphs === 3 && <InterscrollerPlaceholder
       ampPage={ampPage}
-      isHyperlocalContent={isHyperlocalContent}
       taxonomy={taxonomy}
       uuid={uuid}
       isMeteredStory={isMeteredStory}
     />}
-    {!noAds && !isHyperlocalContent && (
+    {!noAds && (
       <Nativo
         elements={filteredContentElements}
         displayIfAtLeastXParagraphs={4}
@@ -190,7 +189,6 @@ const StoryPageLayout = () => {
         {ampPage && isMeteredStory && <NonSubPremiumMessage siteFullname={siteFullname} />}
         <InterscrollerPlaceholder
           ampPage={ampPage}
-          isHyperlocalContent={isHyperlocalContent}
           taxonomy={taxonomy}
           uuid={uuid}
           isMeteredStory={isMeteredStory}
@@ -232,8 +230,8 @@ const StoryPageLayout = () => {
           uuid={uuid}
           isMeteredStory={isMeteredStory} />
     )}
-    {!noAds && !isHyperlocalContent && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
-    {!noAds && !isHyperlocalContent && (
+    {!noAds && <TaboolaFeed ampPage={ampPage} lazyLoad={isMeteredStory} />}
+    {!noAds && (
       <Nativo elements={filteredContentElements} controllerClass="story-nativo_placeholder--boap" ampPage={ampPage} />
     )}
     {!noAds && ampPage && (
@@ -290,14 +288,14 @@ const StoryPageLayout = () => {
         </header>
 
         <article className="c-articleContent">
-          {!noAds && !ampPage && !isHyperlocalContent && (
+          {!noAds && !ampPage && (
             <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />
               <ArcAd staticSlot={'MP01'} />
             </div>
           )}
           <div className={`c-articleBodyContainer ${isSafari ? 'is-safari' : ''}`}>
-            {!noAds && ampPage && !isHyperlocalContent && (
+            {!noAds && ampPage && (
               <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} />
             )}
 
@@ -309,15 +307,6 @@ const StoryPageLayout = () => {
               comesAfterDivider={infoBoxIndex && infoBoxIndex === 0}
               ampPage={ampPage}
             />
-            {!noAds && !ampPage && isHyperlocalContent && (
-              <div className="c-hp01-mp01">
-                <ArcAd staticSlot={'HP01'} lazyLoad={isMeteredStory} />
-                <ArcAd staticSlot={'MP01'} lazyLoad={isMeteredStory} />
-              </div>
-            )}
-            {!noAds && ampPage && isHyperlocalContent && (
-              <AmpAd adSlot="MP01" uuid={uuid} width={'320'} height={'50'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />
-            )}
             {ampPage && isMeteredStory && <>
               <PaywallLimitMessage siteFullname={siteFullname} />
               <div amp-access='Error=true OR AccessLevel="Full Content Access"' amp-access-hide>

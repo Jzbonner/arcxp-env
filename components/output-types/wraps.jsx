@@ -34,7 +34,6 @@ const WrapOutputType = (props) => {
   const currentSite = arcSite || arcSiteFromProps;
   const currentEnv = fetchEnv();
   const {
-    hyperlocalTags,
     metrics,
     adsA9Enabled,
     adsPrebidEnabled,
@@ -53,7 +52,6 @@ const WrapOutputType = (props) => {
   const { tags = [], sections } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
   const noAmp = checkTags(tags, 'no-amp');
-  const isHyperlocalContent = checkTags(tags, hyperlocalTags);
   const { sponsorSectionID: isSponsoredContent } = checkSponsor(sections);
   const includeGtm = metrics && metrics.gtmContainerKey;
   const fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${handleSiteName(cdnSite) || handleSiteName(currentSite)}.com` : '';
@@ -104,7 +102,7 @@ const WrapOutputType = (props) => {
         {!noAds && adsPrebidEnabled
           && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/prebid3.23.0.js`)}`}></script>}
         <Libs />
-        {!noAds && !isHyperlocalContent && !isSponsoredContent
+        {!noAds && !isSponsoredContent
           && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />
         }
         {mainCssData}
