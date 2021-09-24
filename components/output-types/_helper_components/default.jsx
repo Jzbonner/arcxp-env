@@ -24,7 +24,7 @@ const RenderOutputType = (props) => {
   const currentSite = arcSite || arcSiteFromProps;
   const currentEnv = fetchEnv();
   const {
-    hyperlocalTags, metrics, ads, connext, cdnSite, fbPagesId,
+    metrics, ads, connext, cdnSite, fbPagesId,
   } = getProperties(currentSite) || {};
 
   const {
@@ -44,7 +44,6 @@ const RenderOutputType = (props) => {
   const { tags = [] } = taxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
   const noAmp = checkTags(tags, 'no-amp');
-  const isHyperlocalContent = checkTags(tags, hyperlocalTags);
   const includeGtm = metrics && metrics.gtmContainerKey;
   let fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${cdnSite || currentSite}.com` : '';
   /* eslint-disable-next-line max-len */
@@ -86,8 +85,8 @@ const RenderOutputType = (props) => {
         {!noAds && adsA9Enabled && <script src="https://c.amazon-adsystem.com/aax2/apstag.js"></script>}
         {!noAds && adsPrebidEnabled && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/${prebidJs}`)}`}></script>}
         <Libs />
-        {!noAds && !isHyperlocalContent && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
-        {!noAds && !isHyperlocalContent && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
+        {!noAds && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
+        {!noAds && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
       </head>
