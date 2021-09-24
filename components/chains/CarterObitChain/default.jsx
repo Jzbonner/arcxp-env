@@ -45,7 +45,7 @@ const CarterObitChain = ({ customFields = {}, children }) => {
     <div className='c-obitChain'>
       <div className="chain-content">
         <FeatureTitle title={title} moreURL={moreURL} />
-        <div className="c-carter-mobile">
+{/*         <div className="c-carter-mobile">
           <Image imageType={'isInlineImage'} src={imgArr[0]} width={390} height={495} />
         </div>
         <div className="c-carter-tablet">
@@ -53,7 +53,7 @@ const CarterObitChain = ({ customFields = {}, children }) => {
         </div>
         <div className="c-carter-desktop">
           <Image imageType={'isInlineImage'} src={imgArr[2]} width={1660} height={888} />
-        </div>
+        </div> */}
         <div className='row'>{children}</div>
       </div>
     </div>
