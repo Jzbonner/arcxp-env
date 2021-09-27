@@ -1,0 +1,19 @@
+@import "../../../../src/styles/base";
+
+@include amp-exclude {
+
+  .c-liveUpdates {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    .c-liveUpdateNav {
+      position: sticky;
+      width: 40px;
+    }
+
+    .c-liveUpdateContent {
+      width: 100%;
+    }
+  }
+}
