@@ -13,6 +13,7 @@ const Image = ({ customFields }) => {
   const { arcSite } = fusionContext;
   const { cdnSite, cdnOrg } = getProperties(arcSite);
   let src = customFields?.src;
+  let srcMobile = customFields?.srcMobile;
   const {
     width,
     caption,
@@ -28,8 +29,14 @@ const Image = ({ customFields }) => {
     return null;
   }
 
+  const buildFullUrl = imgSrc => `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${imgSrc}`;
+
   if (/resizer/.test(src)) {
-    src = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${src}`;
+    src = buildFullUrl(src);
+  }
+
+  if (/resizer/.test(srcMobile)) {
+    srcMobile = buildFullUrl(srcMobile);
   }
 
   const credits = {
@@ -38,6 +45,20 @@ const Image = ({ customFields }) => {
 
   const getImage = () => {
     const isGif = src?.endsWith('.gif');
+    /* we do some logic to know if we should supply `components/_helper_components/global/image/default.jsx` with an image array (to power the srcSet with desktop- and mobile- specific images) or single object. */
+    const suppliedImgObj = src && srcMobile ? [
+      {
+        src, // desktop ("dtImage" on line 97)
+      },
+      {
+        src, // tablet ("tImage" on line 98)
+      },
+      {
+        src: srcMobile, // mobile ("mImage" on line 99)
+      },
+    ] : {
+      src, // it's a single image, pass it to ImageGlobal
+    };
 
     return (
       <>
@@ -45,7 +66,7 @@ const Image = ({ customFields }) => {
         {explainerText && <div className="explainerText">{explainerText}</div>}
         <ImageGlobal
           src={{
-            resized_obj: { src: isGif && src },
+            resized_obj: suppliedImgObj,
             url: src,
             useSrcSet: !isGif,
             caption,
@@ -85,6 +106,11 @@ Image.propTypes = {
       description:
         'Can be resizer url from photo center that starts with /resizer/ or absolute url.',
     }).isRequired,
+    srcMobile: PropTypes.string.tag({
+      name: 'Source (Mobile)',
+      description:
+        'Optional, mobile-specific image.  Can be resizer url from photo center that starts with /resizer/ or absolute url.',
+    }),
     width: PropTypes.oneOf([
       '20%',
       '30%',
