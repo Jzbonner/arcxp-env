@@ -116,22 +116,23 @@ const SearchItem = ({
   }
 
   const buildSearchItemRow = () => {
-    const sectionEl = () => <span className="search-section">{sectionName}</span>;
-    const creditEl = () => {
-      const hasDivider = sectionName ? <div className="divider"></div> : null;
-      return <>{hasDivider}<span className="search-credit">{creditName}</span></>;
-    };
+    const hasSectionDivider = !!(sectionName && creditName);
+
+    const sectionEl = () => <span className="search-section">{sectionName}{hasSectionDivider ? <div className="divider"></div> : null}</span>;
+    const creditEl = () => <span className="search-credit">{creditName}{<i className="divider in-credit"></i>}</span>;
 
     return (<div className="c-credit-row">
+      <div className="c-search-timestamp">
+        <TimeStamp
+          firstPublishDate={firstPublishDate}
+          displayDate={displayDate}
+          isHideTimestampTrue={isHideTimestampTrue}
+          isTease={true}
+          addDivider={(sectionName && !creditName)}
+        />
+      </div>
       {sectionName && sectionEl()}
       {creditName && creditEl()}
-      <TimeStamp
-        firstPublishDate={firstPublishDate}
-        displayDate={displayDate}
-        isHideTimestampTrue={isHideTimestampTrue}
-        isTease={true}
-        onSearchPage={true}
-      />
     </div>);
   };
 
