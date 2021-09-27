@@ -117,7 +117,6 @@ const SearchItem = ({
 
   const buildSearchItemRow = () => {
     const hasSectionDivider = !!(sectionName && creditName);
-    console.log('hasSection but no divder', (sectionName && !creditName));
 
     const sectionEl = () => <span className="search-section">{sectionName}{hasSectionDivider ? <div className="divider"></div> : null}</span>;
     const creditEl = () => <span className="search-credit">{creditName}{<i className="divider in-credit"></i>}</span>;
