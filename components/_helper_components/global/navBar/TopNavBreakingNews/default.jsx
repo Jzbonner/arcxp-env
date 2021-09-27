@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useAppContext } from 'fusion:context';
 import NavBar from '../default';
 import ArcAd from '../../../../features/ads/default';
 import WeatherAlerts from '../../weatherAlerts/default';
@@ -23,6 +24,8 @@ const TopNavBreakingNews = ({
   const [hasHalfShade, setHasHalfShade] = useState(false);
   const windowExists = typeof window !== 'undefined';
   const { enableDarkMode } = getContentMeta();
+  const appContext = useAppContext();
+  const { isAdmin } = appContext;
 
   const docHasWindowShade = (checkCollapse, checkHalfShade) => {
     if (windowExists) {
@@ -81,7 +84,7 @@ const TopNavBreakingNews = ({
 
   return (
     <>
-      {!noAds && !enableDarkMode && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
+      {!noAds && !enableDarkMode && !isAdmin && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
       <div className={`nav-breaking-news ${enableDarkMode ? 'dark-mode' : ''} ${aboveWindowShade ? 'is-above-shade' : ''} ${docHasWindowShade(true) || hasHalfShade ? 'with-half-shade' : ''}`} >
         <WeatherAlerts />
         <NavBar
