@@ -9,7 +9,7 @@ import NotAuthMenu from './notAuthMenu';
 import IsAuthMenu from './isAuthMenu';
 
 const Login = ({
-  isMobile, isFlyout, isSticky, isSidebar,
+  isMobile, isFlyout, isSticky, isSidebar, darkMode,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -99,6 +99,7 @@ const Login = ({
           userStateRef={userStateRef}
           custRegId={CustomerRegistrationId}
           isSidebar={isSidebar}
+          darkMode={darkMode}
         />
       )}
       {userStateRef.current === 'logged-out' && (
@@ -109,6 +110,7 @@ const Login = ({
           setShowUserMenu={setShowUserMenu}
           arcSite={arcSite}
           isSidebar={isSidebar}
+          darkMode={darkMode}
         />
       )}
     </div>
@@ -120,6 +122,7 @@ Login.propTypes = {
   isFlyout: PropTypes.bool,
   isSticky: PropTypes.bool,
   isSidebar: PropTypes.bool,
+  darkMode: PropTypes.bool,
 };
 
 export default Login;

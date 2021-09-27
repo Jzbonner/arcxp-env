@@ -197,13 +197,9 @@
 
     [class~="c-search-item"]:last-of-type {
 
-      .bottom-content {
-        @include breakpoint(tablet) {
+      .c-homeList.isSearch {
+        @include between-breakpoints(tablet, desktop-sm) {
           border-bottom: none;
-        }
-
-        @include breakpoint(desktop-sm) {
-          border-bottom: 1px solid #dadada;
         }
       }
     }
@@ -222,9 +218,17 @@
 .c-search-item {
 
   .c-homeList.isSearch {
+    border-bottom: 1px solid #dadada;
+    margin-bottom: 15px;
 
-    &.no-border-bottom .bottom-content {
-      border-bottom: none;
+    &.no-border-bottom {
+      @include breakpoint(tablet) {
+        border-bottom: none;
+      }
+
+      @include breakpoint(desktop-sm) {
+        border-bottom: 1px solid #dadada;
+      }
     }
 
     .lazyload-wrapper {
@@ -259,6 +263,7 @@
 
   .item-text-preview {
     width: 95%;
+    margin-bottom: 10px;
 
     @include text-styles(.75rem, 1.5, "Gordita");
 
@@ -276,12 +281,9 @@
   }
 
   .bottom-content {
-    border-bottom: solid 1px #dadada;
-    margin-bottom: 15px;
 
     .c-credit-row {
       display: flex;
-      padding-bottom: 15px;
       align-items: center;
       flex-wrap: wrap;
 
@@ -309,15 +311,23 @@
   width: 100%;
   flex-direction: row-reverse;
   justify-content: space-between;
-  padding-bottom: .063rem;
-  margin-bottom: .875rem;
-
-  @include breakpoint(desktop-sm) {
-    margin-bottom: 0;
-  }
+  padding-bottom: 15px;
+  margin-bottom: 15px;
 
   &.isMissingPromo {
     flex-direction: row;
+
+    .headline {
+      @include between-breakpoints(mobile, desktop-sm) {
+        width: 100%;
+      }
+    }
+
+    .item-text-preview {
+      @include between-breakpoints(mobile, desktop-sm) {
+        max-width: none;
+      }
+    }
   }
 
   &.multi-credits {
@@ -356,6 +366,25 @@
 
   .homeList-image {
     margin-left: 0;
+    
+    &:empty {
+
+      ~.homeList-text {
+
+        .headline {
+          @include between-breakpoints(mobile, desktop-sm) {
+            width: 100%;
+          }
+        }
+
+        @include between-breakpoints(mobile, desktop-sm) {
+
+          .item-text-preview {
+            max-width: none;
+          }
+        }
+      }
+    }
   }
 }
 

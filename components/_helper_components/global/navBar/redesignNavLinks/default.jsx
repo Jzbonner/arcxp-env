@@ -2,9 +2,11 @@ import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import Search from '../search/default';
+import Hamburger from '../../../../../resources/icons/global/hamburger.svg';
+import HamburgerDark from '../../../../../resources/icons/global/hamburgerDark.svg';
 
 const RedesignNavLinks = ({
-  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID,
+  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, darkMode,
 }) => {
   const { siteDomainURL } = getProperties(arcSite);
   const itemCount = sections.length;
@@ -44,14 +46,14 @@ const RedesignNavLinks = ({
 
     return (
     <li key={i}>
-      <a href={destination.indexOf('/') === 0 ? `${siteDomainURL}${checkTrailingSlash(destination)}` : checkTrailingSlash(destination)} target='_self' className={`nav-itemText ${isHighlighted ? 'active' : ''}${itemCount > 7 ? 'sm-text' : ''}`}>{title}</a>
+      <a href={destination?.indexOf('/') === 0 ? `${siteDomainURL}${checkTrailingSlash(destination)}` : checkTrailingSlash(destination)} target='_self' className={`nav-itemText ${isHighlighted ? 'active' : ''}${itemCount > 7 ? 'sm-text' : ''}`}>{title}</a>
     </li>
     );
   });
   return (
     <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
-        <div className='nav-flyout-button'></div>
+        <img src={darkMode ? HamburgerDark : Hamburger}></img>
       </div>
       <div className={`sticky-logo-homepage ${siteName}`}>
         <a href="/">
@@ -77,6 +79,7 @@ RedesignNavLinks.propTypes = {
   isNonShareablePage: PropTypes.bool,
   animationVisibility: PropTypes.bool,
   primarySectionID: PropTypes.string,
+  darkMode: PropTypes.bool,
 };
 
 export default RedesignNavLinks;

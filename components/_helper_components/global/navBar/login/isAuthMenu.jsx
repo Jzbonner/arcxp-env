@@ -10,7 +10,7 @@ import userIconWhite from '../../../../../resources/icons/login/user-icon-white.
 import userIconDark from '../../../../../resources/icons/login/user-icon-dark.svg';
 
 const isAuthMenu = ({
-  isMobile, isFlyout, showUserMenu, setShowUserMenu, userStateRef, custRegId, isSidebar,
+  isMobile, isFlyout, showUserMenu, setShowUserMenu, userStateRef, custRegId, isSidebar, darkMode,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -19,7 +19,7 @@ const isAuthMenu = ({
   const { siteCode, pubParam } = connext[currentEnv] || {};
 
   let source;
-  if (isFlyout) {
+  if (isFlyout || darkMode) {
     source = userIconWhite;
   } else {
     source = userIconDark;
@@ -126,6 +126,7 @@ isAuthMenu.propTypes = {
   userStateRef: PropTypes.object,
   custRegId: PropTypes.string,
   isSidebar: PropTypes.bool,
+  darkMode: PropTypes.bool,
 };
 
 export default isAuthMenu;

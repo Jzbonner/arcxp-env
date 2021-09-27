@@ -4,6 +4,7 @@ import { useComponentContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import './default.scss';
+import fetchEnv from '../../_helper_components/global/utils/environment';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
 
 const MostRead = () => {
@@ -11,6 +12,7 @@ const MostRead = () => {
   const { arcSite } = fusionContext;
   const { chartbeat } = getProperties(arcSite);
   const { host } = chartbeat;
+  const env = fetchEnv();
   const componentContext = useComponentContext();
   const { section } = componentContext && componentContext.customFields;
   const topStoriesData = useContent({
@@ -30,7 +32,7 @@ const MostRead = () => {
         topStoriesData.map((el) => {
           if (el.title && counter < 5) {
             counter += 1;
-            return <a key={`Headline: ${el.title}`} href={`https://www.${el.path}`} target="_self"><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>;
+            return <a key={`Headline: ${el.title}`} href={`https://${env === 'prod' ? 'www.' : ''}${el.path}`} target="_self"><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>;
           }
           return null;
         })

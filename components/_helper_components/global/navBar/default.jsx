@@ -16,7 +16,7 @@ import BreakingNews from '../breakingNews/default';
 import Login from './login/default';
 
 const NavBar = ({
-  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false,
+  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false, enableDarkMode,
 }) => {
   // amp hijack
   if (ampPage) return <AmpNavBar />;
@@ -29,6 +29,7 @@ const NavBar = ({
   const paddingRef = React.useRef(null);
   const isMobileVisibilityRef = React.useRef(isMobile);
   const mobileBreakpoint = 767;
+  const darkMode = enableDarkMode && type.includes('homepage');
 
   const fusionContext = useFusionContext();
   const { arcSite, globalContent } = fusionContext;
@@ -161,7 +162,7 @@ const NavBar = ({
 
   return (
     <header className='c-nav'>
-      {!omitBreakingNews && <BreakingNews />}
+      {!omitBreakingNews && !darkMode && <BreakingNews />}
       <div className={`c-headerNav b-sectionHome-padding
         ${stickyNavVisibility ? 'stickyActive' : ''}
         ${hasWindowShade ? 'above-shade' : ''}
@@ -175,10 +176,12 @@ const NavBar = ({
               <Logo
                 source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoRedesign}`)}`}
                 rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
+                darkMode={darkMode}
+                darkModeLogo={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
               />
             </div>
           <Login
-            isMobile={isMobileVisibilityRef.current} isSticky={stickyNavVisibility}
+            isMobile={isMobileVisibilityRef.current} isSticky={stickyNavVisibility} darkMode={darkMode}
           />
           </div>
           <RedesignNavLinks
@@ -187,6 +190,7 @@ const NavBar = ({
             setToggle={setToggle}
             animationVisibility={stickyNavVisibility}
             primarySectionID={primarySectionID}
+            darkMode={darkMode}
             />
         </div>
         <HamburgerMenu
@@ -202,9 +206,9 @@ const NavBar = ({
           type={type}
           burgerMenuBackground={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerMenuBackground}`)}`}
           siteName={siteName.toLowerCase()}/>
-        <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
+        { !darkMode && <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
           && mobileMenuToggled) || hasWindowShade ? 'not-visible' : ''} `}>
-        </div>
+        </div>}
          <StickyNav
           headlines={headlines}
           comments={comments}
@@ -219,6 +223,8 @@ const NavBar = ({
           type={type}
           sections={redesignChildren}
           articleUrl={articleURL}
+          darkMode={darkMode}
+          darkModeLogo={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
         />
       </div>
       <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
@@ -235,6 +241,7 @@ NavBar.propTypes = {
   ampPage: PropTypes.bool,
   hasWindowShade: PropTypes.bool,
   omitBreakingNews: PropTypes.bool,
+  enableDarkMode: PropTypes.bool,
 };
 
 export default NavBar;
