@@ -27,6 +27,12 @@
         padding-bottom: 0;
       }
 
+      .logo {
+        @include between-breakpoints(mobile, tablet) {
+          max-width: 176px;
+        }
+      }
+
       &.stickyActive {
         background-color: #000;
       }
