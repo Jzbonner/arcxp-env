@@ -117,8 +117,8 @@ const ListItem = ({
       {!hidePromo && getPromoItem() && !isDontMissFeature && (
         <a href={relativeURL} className="homeList-image">
           <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'}/>
-          {sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
-        </a>
+            {!isLeftPhotoNoPhotoItem && sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
+          </a>
       )}
       <div className="homeList-text">
         {!hidePromo && !isDontMissFeature && !isSynopsis && getTeaseIcon(contentType)}
