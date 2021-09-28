@@ -16,8 +16,13 @@
       padding: 0 0 15px;
       width: auto;
       margin: 0 20px;
+    }
 
-      &.stickyActive {
+    &.stickyActive {
+      //this !important is to override an inline style created by Thirdparty tease
+      box-shadow: 4px 4px 6px 0 rgba(132, 132, 132, .22) !important;  /* stylelint-disable-line declaration-no-important */
+
+      @include between-breakpoints(mobile, tablet) {
         padding: 0 20px;
         width: 100%;
         margin: 0;
