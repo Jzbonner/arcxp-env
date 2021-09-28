@@ -8,7 +8,7 @@ import HamburgerDark from '../../../../../resources/icons/global/hamburgerDark.s
 const RedesignNavLinks = ({
   sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, darkMode,
 }) => {
-  const { siteDomainURL } = getProperties(arcSite);
+  const { siteDomainURL, darkModeSubscribe } = getProperties(arcSite);
   const itemCount = sections.length;
   const hamburgerRef = useRef(null);
   let animationCount = 0;
@@ -23,6 +23,10 @@ const RedesignNavLinks = ({
   }, [animationVisibility]);
 
   const items = sections.map((section, i) => {
+    if (darkMode && i > 5) {
+      return null;
+    }
+
     const {
       _id: id,
       navigation,
@@ -63,6 +67,7 @@ const RedesignNavLinks = ({
       <div className='stickyNav-homepage'>
         <ul>
           {items}
+          {darkMode && <li><a href={darkModeSubscribe} targe='_self' className='nav-itemText'>Subscribe Today</a></li>}
         </ul>
         <Search isHeader={true}/>
       </div>
