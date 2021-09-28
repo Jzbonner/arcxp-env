@@ -114,6 +114,7 @@
         @include breakpoint(desktop-sm) {
           padding-bottom: 0;
           margin-bottom: $min-DTsection-margin;
+          min-width: 970px;
         }
       }
 
