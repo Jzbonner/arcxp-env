@@ -87,6 +87,11 @@
         }
       }
 
+      .arc_ad[class*="MP03"] .arcad {
+        padding-top: 35px;
+        margin-bottom: 30px;
+      }
+
       .arc_ad[class*="HP02"] {
 
         .arcad:not(:empty) {
@@ -212,6 +217,11 @@
           padding-top: 30px;
           margin-bottom: 35px;
         }
+      }
+
+      .arc_ad[class*="MP03"] .arcad {
+        padding-top: 30px;
+        margin-bottom: 30px;
       }
 
       .arc_ad[class*="HP02"] .arcad:not(:empty) {
