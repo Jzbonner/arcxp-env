@@ -28,14 +28,16 @@ const ComposerEmbed = (props) => {
     /* function to actually pass the embed doc's data to the relevant child component */
     const { type, subtype } = embedData;
 
+    if (!type && embedData.length) {
+      return <LiveUpdates data={embedData} />;
+    }
+
     if (type !== 'story') return <p>this feature is only compatible with stories (and this is {type} content)</p>;
 
     // this is how we will handle multiple custom Composer subtypes.
     switch (subtype.toLowerCase()) {
       case 'infobox':
         return <CustomInfoBox data={embedData} borderColor={borderColor} />;
-      case 'liveupdates':
-        return <LiveUpdates data={embedData} />;
       default:
         return <p>this is {subtype} content</p>;
     }
@@ -53,7 +55,7 @@ const ComposerEmbed = (props) => {
     }
   }
 
-  if (Object.keys(globalContent).length && !embedId) {
+  if ((Object.keys(globalContent)?.length || globalContent.isArray()) && !embedId) {
     // we're rendering the subtype directly, so simply pass the data to renderEmbed
     return renderEmbed(globalContent);
   }
