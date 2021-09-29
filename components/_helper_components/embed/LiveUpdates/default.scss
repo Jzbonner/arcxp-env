@@ -1,3 +1,4 @@
+/* stylelint-disable declaration-no-important */
 @import "../../../../src/styles/base";
 
 @include amp-exclude {
@@ -30,6 +31,15 @@
       box-sizing: border-box;
       border-left: 1px solid #cdcdcd;
       padding-left: 30px;
+
+      .arcad {
+        padding-bottom: 30px !important;
+        border-bottom: 1px solid #cdcdcd;
+      }
+
+      h2 {
+        font-size: 1.875rem;
+      }
     }
   }
 }

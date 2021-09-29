@@ -77,19 +77,21 @@ const LiveUpdates = ({ data: liveUpdates }) => {
         return <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger}>{headline}</a>;
       }
 
-      const liveUpdateContent = () => <div className={'c-liveUpdate'} name={elId} key={elId}>
-        <h2 key={headline}>{headline}</h2>
-        <div className={'liveUpdate-content'} key={`${elId}-content`}>
-          <ContentElements contentElements={contentElements} ampPage={false} />
-          {/* we insert items (ads, placeholders, etc) at specific intervals.
-
-            For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
-
-            We also have one for the newsletter placeholder (after #6)
-          */}
-          {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
+      const liveUpdateContent = () => <>
+        <div className={'c-liveUpdate'} name={elId} key={elId}>
+          <h2 key={headline}>{headline}</h2>
+          <div className={'liveUpdate-content'} key={`${elId}-content`}>
+            <ContentElements contentElements={contentElements} ampPage={false} />
+          </div>
         </div>
-      </div>;
+        {/* we insert items (ads, placeholders, etc) at specific intervals.
+
+          For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
+
+          We also have one for the newsletter placeholder (after #6)
+        */}
+        {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
+      </>;
 
       return liveUpdateContent();
     });
