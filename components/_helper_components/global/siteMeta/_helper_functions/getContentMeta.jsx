@@ -184,6 +184,7 @@ const getContentMeta = () => {
   const blogName = metaValue('blogname');
   const noIndex = metaValue('no index');
   const enableDarkMode = metaValue('dark mode') === 'true';
+  const pageIsLive = metaValue('page is live') === 'true';
 
   const faviconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${favicon}`)}`;
   const appleIconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
@@ -222,6 +223,7 @@ const getContentMeta = () => {
     syndication,
     noIndex,
     enableDarkMode,
+    pageIsLive,
   };
 };
 

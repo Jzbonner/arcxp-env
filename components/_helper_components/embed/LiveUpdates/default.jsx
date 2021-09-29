@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ContentElements from '../../article/contentElements/default.jsx';
 import ArcAd from '../../../features/ads/default';
+import computeTimeStamp from '../../article/timestamp/_helper_functions/computeTimeStamp';
 import './default.scss';
 
 /* this helper component renders the Custom Info Box as outlined in APD-1441 */
@@ -68,19 +69,32 @@ const LiveUpdates = ({ data: liveUpdates }) => {
         headlines,
         _id: elId,
         content_elements: contentElements,
+        display_date: displayDate,
+        first_publish_date: firstPublishDate,
       } = update;
       const { basic: headline } = headlines || {};
       if (!headline) return null;
 
+      const fullTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-full');
+      const smallTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-small');
+
       updateIndex += 1;
       if (isNav) {
-        return <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger}>{headline}</a>;
+        return <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger}>
+          <div className='headline'>{headline}</div>
+          <div className='timestamp-full'>{fullTimestamp}</div>
+          <div className='timestamp-small'>{smallTimestamp}</div>
+        </a>;
       }
 
       const liveUpdateContent = () => <>
         <div className={'c-liveUpdate'} name={elId} key={elId}>
-          <h2 key={headline}>{headline}</h2>
-          <div className={'liveUpdate-content'} key={`${elId}-content`}>
+          <h2>{headline}</h2>
+          <div className='c-timestampByline'>
+            <div className='timestamp-small'>{smallTimestamp}</div>
+            <div className='byline'></div>
+          </div>
+          <div className='liveUpdate-content' key={`${elId}-content`}>
             <ContentElements contentElements={contentElements} ampPage={false} />
           </div>
         </div>
@@ -98,7 +112,10 @@ const LiveUpdates = ({ data: liveUpdates }) => {
   };
 
   return <div className={'c-liveUpdates'}>
-    <div className={'c-liveUpdateNav'}>{loopThroughUpdates(true)}</div>
+    <div className={'c-liveUpdateNav'}>
+      <div className={'c-navTitle'}>Latest Updates</div>
+      {loopThroughUpdates(true)}
+    </div>
     <div className={'c-liveUpdateContent'}>{loopThroughUpdates()}</div>
   </div>;
 };

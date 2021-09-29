@@ -6,7 +6,7 @@ import CustomInfoBox from '../../_helper_components/embed/CustomInfoBox/default'
 import LiveUpdates from '../../_helper_components/embed/LiveUpdates/default';
 
 /*
-  The purpose of this feature is documented in APD-1442 but here's the cliffs notes version:
+  The purpose of this feature is documented in APD-1442 (and now APD-1528 as well) but here's the cliffs notes version:
   Ultimately, this feature allows the rendering of custom Composer subtypes in both pagebuilder pages AND other composer articles.
   These subtypes can be rendered in one of three ways:
     1. manually: by adding the feature to a page (or template) in pagebuilder and specifying the ID of the subtype/embed in the pagebuilder customFields
