@@ -8,6 +8,56 @@ import './default.scss';
 const LiveUpdates = ({ data: liveUpdates }) => {
   if (!liveUpdates) return <span><i>There are no Live Updates to display.</i></span>;
 
+  const renderAdOrPlaceholder = (index) => {
+    let response = '';
+    switch (index) {
+      case 0:
+        response = <>
+          <ArcAd
+            staticSlot={'HP01'}
+            key={`HP01-${index}`}
+            customId={`div-id-HP01_${index}`}
+          />
+          <ArcAd
+            staticSlot={'MP01'}
+            key={`MP01-${index}`}
+            customId={`div-id-MP01_${index}`}
+          />
+        </>;
+        break;
+      case 3:
+        response = <>
+          <ArcAd
+            staticSlot={'RP01'}
+            key={`RP01-${index}`}
+            customId={`div-id-RP01_${index}`}
+          />
+          <ArcAd
+            staticSlot={'MP02'}
+            key={`MP02-${index}`}
+            customId={`div-id-MP02_${index}`}
+          />
+        </>;
+        break;
+      case 5:
+        response = <div className='newsletterPlaceholder'></div>;
+        break;
+      case 6:
+        response = <div className='story-nativo_placeholder--moap'></div>;
+        break;
+      case 9:
+        response = <div className='story-interscroller__placeholder c-contentElements'></div>;
+        break;
+      default:
+        response = <ArcAd
+          staticSlot={'HP05'}
+          key={`HP05-${index}`}
+          customId={`div-id-HP05_${index}`}
+        />;
+    }
+    return response;
+  };
+
   const loopThroughUpdates = (isNav = false) => {
     const handleNavTrigger = (evt) => {
       console.log(evt);
@@ -20,7 +70,6 @@ const LiveUpdates = ({ data: liveUpdates }) => {
         content_elements: contentElements,
       } = update;
       const { basic: headline } = headlines || {};
-      // only proceed if it's a live update
       if (!headline) return null;
 
       updateIndex += 1;
@@ -32,11 +81,13 @@ const LiveUpdates = ({ data: liveUpdates }) => {
         <h2 key={headline}>{headline}</h2>
         <div className={'liveUpdate-content'} key={`${elId}-content`}>
           <ContentElements contentElements={contentElements} ampPage={false} />
-          {(updateIndex === 1 || updateIndex % 4 === 0) && <ArcAd
-              staticSlot={'HP05'}
-              key={`HP05-${updateIndex}`}
-              customId={`div-id-HP05_${updateIndex}`}
-            />}
+          {/* we insert items (ads, placeholders, etc) at specific intervals.
+
+            For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
+
+            We also have one for the newsletter placeholder (after #6)
+          */}
+          {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
         </div>
       </div>;
 
