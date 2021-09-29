@@ -5,6 +5,7 @@ const RenderMenuLinks = (links = []) => links.map((link) => {
   const { _id: linkId, site: siteFields } = link || {};
   const { site_url: siteUrl, section_url_open_new_tab: openInNewTab } = siteFields || {};
   const destination = linkId.includes('/configsection') ? siteUrl : linkId;
+
   let isExternalLink = openInNewTab;
   if (openInNewTab === undefined || !siteFields) {
     isExternalLink = destination && (destination.indexOf('http') === 0 || destination.indexOf('//') === 0);

@@ -35,7 +35,8 @@ const Image = ({
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
   const isGalleryImage = imageType === 'isGalleryImage';
   let img = null;
-  if (resizedObject && resizedObject.src && !squareImage) {
+
+  if (resizedObject && (resizedObject.src || resizedObject.length) && !squareImage) {
     img = resizedObject;
   } else if (url) {
     const focalCoords = setFocalCoords(additionalProperties, rootFocalPoint);
