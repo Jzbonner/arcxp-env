@@ -24,9 +24,17 @@
       position: absolute;
       color: #fff;
       z-index: 2;
-      top: 298px;
+      top: 364px;
 
       @include text-styles(1.875rem, 1.38, "Lora-Bold");
+
+      @include breakpoint(tablet) {
+        margin-right: 40px;
+        top: 200px;
+        left: 43%;
+        transform: translateY(-40px);
+        text-align: left;
+      }
 
       @include breakpoint(desktop-sm) {
         font-size: 3.125rem;
@@ -51,7 +59,7 @@
       }
 
       @include breakpoint(desktop-xxl) {
-        transform: translate(-18%, -20%);
+        transform: translate(0, -20%);
       }
 
       &:after {
@@ -59,10 +67,8 @@
       }
     }
 
-    /* TODO: revise margin-top as it's messing with top-photo list items */
-
     .c-image-component {
-      margin-top: -4rem;
+      margin-top: 0;
       
       @include breakpoint(desktop-lg) {
         margin-top: -8rem;
@@ -74,10 +80,11 @@
     }
 
     .c-homeListContainer {
-      padding: 120px 30px 0;
+      padding: 35px 30px 0;
 
       @include breakpoint(tablet) {
         padding: 0 30px;
+        margin-top: -5.6rem;
       }
 
       @include breakpoint(desktop-sm) {
@@ -95,34 +102,6 @@
 
     .c-homeList .headline a {
       color: #fff;
-    }
-
-    .c-carter-mobile {
-      display: block;
-
-      @include breakpoint(tablet) {
-        display: none;
-      }
-    }
-
-    .c-carter-tablet {
-      display: none;
-
-      @include breakpoint(tablet) {
-        display: block;
-      }
-
-      @include breakpoint(desktop-sm) {
-        display: none;
-      }
-    }
-
-    .c-carter-desktop {
-      display: none;
-
-      @include breakpoint(desktop-sm) {
-        display: block;
-      }
     }
   }
 }
