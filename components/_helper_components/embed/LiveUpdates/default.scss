@@ -8,12 +8,28 @@
     align-items: flex-start;
 
     .c-liveUpdateNav {
-      position: sticky;
+      border-top: 1px solid #cdcdcd;
       width: 40px;
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+
+      a {
+        display: block;
+        border-bottom: 1px solid #cdcdcd;
+        padding: 15px 5px 15px 15px;
+      }
+
+      @include breakpoint(tablet) {
+        width: 140px;
+      }
     }
 
     .c-liveUpdateContent {
       width: 100%;
+      box-sizing: border-box;
+      border-left: 1px solid #cdcdcd;
+      padding-left: 30px;
     }
   }
 }

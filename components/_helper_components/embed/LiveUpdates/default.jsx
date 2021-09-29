@@ -6,22 +6,24 @@ import './default.scss';
 
 /* this helper component renders the Custom Info Box as outlined in APD-1441 */
 const LiveUpdates = ({ data: liveUpdates }) => {
+  if (!liveUpdates) return <span><i>There are no Live Updates to display.</i></span>;
+
   const loopThroughUpdates = (isNav = false) => {
-    let updateIndex = 0;
     const handleNavTrigger = (evt) => {
       console.log(evt);
     };
-    liveUpdates.map((update) => {
+    let updateIndex = 0;
+    return liveUpdates.map((update) => {
       const {
-        type,
         headlines,
         _id: elId,
         content_elements: contentElements,
       } = update;
       const { basic: headline } = headlines || {};
       // only proceed if it's a live update
-      if (type !== 'liveupdates' || !headline) return null;
+      if (!headline) return null;
 
+      updateIndex += 1;
       if (isNav) {
         return <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger}>{headline}</a>;
       }
@@ -30,26 +32,21 @@ const LiveUpdates = ({ data: liveUpdates }) => {
         <h2 key={headline}>{headline}</h2>
         <div className={'liveUpdate-content'} key={`${elId}-content`}>
           <ContentElements contentElements={contentElements} ampPage={false} />
-          {(updateIndex === 0 || updateIndex % 3 === 0) && <ArcAd
+          {(updateIndex === 1 || updateIndex % 4 === 0) && <ArcAd
               staticSlot={'HP05'}
               key={`HP05-${updateIndex}`}
               customId={`div-id-HP05_${updateIndex}`}
             />}
         </div>
       </div>;
-      updateIndex += 1;
 
       return liveUpdateContent();
     });
   };
 
   return <div className={'c-liveUpdates'}>
-    <div className={'c-liveUpdateNav'}>
-      {loopThroughUpdates(true)}
-    </div>
-    <div className={'c-liveUpdateContent'}>
-      {loopThroughUpdates()}
-    </div>
+    <div className={'c-liveUpdateNav'}>{loopThroughUpdates(true)}</div>
+    <div className={'c-liveUpdateContent'}>{loopThroughUpdates()}</div>
   </div>;
 };
 
