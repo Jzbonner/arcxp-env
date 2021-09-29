@@ -1,12 +1,8 @@
 @import "./../../../src/styles/base";
 
 .c-staff-bio {
-  margin-bottom: 6px;
+  margin-bottom: 15px;
   width: 100%;
-
-  @include breakpoint(tablet) {
-    margin-bottom: 17px;
-  }
 
   .staff-image {
     padding-right: 18px;
