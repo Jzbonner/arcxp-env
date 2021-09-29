@@ -220,3 +220,73 @@
     transform: translate(-50%, -20px);
   }
 }
+
+/* stylelint-disable */
+@mixin blinking-dot($size: 10px, $speed: 1s, $color: red) {
+  -webkit-animation: $speed blink ease infinite;
+  -moz-animation: $speed blink ease infinite;
+  -ms-animation: $speed blink ease infinite;
+  -o-animation: $speed blink ease infinite;
+  animation: $speed blink ease infinite;
+  color: $color;
+  width: $size;
+  height: $size;
+  display: inline-block;
+  content: "•";
+  margin-right: 5px;
+
+  @keyframes "blink" {
+    from,
+    to {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @-moz-keyframes "blink" {
+    from,
+    to {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes "blink" {
+    from,
+    to {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @-ms-keyframes "blink" {
+    from,
+    to {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @-o-keyframes "blink" {
+    from,
+    to {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+}
