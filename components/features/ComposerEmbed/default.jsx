@@ -55,7 +55,7 @@ const ComposerEmbed = (props) => {
     }
   }
 
-  if ((Object.keys(globalContent)?.length || globalContent.isArray()) && !embedId) {
+  if (Object.keys(globalContent)?.length && !embedId) {
     // we're rendering the subtype directly, so simply pass the data to renderEmbed
     return renderEmbed(globalContent);
   }
