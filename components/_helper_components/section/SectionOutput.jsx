@@ -6,6 +6,7 @@ import SectionHome from '../home/SectionHome/SectionHome';
 import Footer from '../global/footer/default';
 import Copyright from '../global/copyright/default';
 import TopNavBreakingNews from '../global/navBar/TopNavBreakingNews/default';
+import getContentMeta from '../global/siteMeta/_helper_functions/getContentMeta';
 import '../../../src/styles/container/_c-section.scss';
 import '../../../src/styles/base/_utility.scss';
 
@@ -14,13 +15,14 @@ const SectionOutput = ({
   layout,
   noHeaderAndFooter,
 }) => {
+  const { pageIsLive } = getContentMeta();
   const isErrorPage = layout === 'section-basic';
   return (
     <>
       {<GlobalAdSlots pbPage={true} />}
       {/* we omit breaking news on wraps */}
       {!noHeaderAndFooter && <TopNavBreakingNews type={layout} omitBreakingNews={layout.indexOf('wrap-') !== -1} />}
-      {<main className={`c-sectionContent ${isErrorPage ? 'b-contentMaxWidth' : ''}`}>
+      {<main className={`c-sectionContent ${isErrorPage ? 'b-contentMaxWidth' : ''} ${pageIsLive ? 'is-live' : ''}`}>
         {zones && (
           zones.map((zone, i) => {
             const {

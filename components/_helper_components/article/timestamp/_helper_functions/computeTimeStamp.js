@@ -80,6 +80,16 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
     }
   }
 
+  if (articleType === 'liveupdate-full') {
+    timeStamp = `${findAPMonth(
+      pub.getMonth(),
+    )} ${pub.getDate()}, ${pub.getFullYear()}`;
+  }
+
+  if (articleType === 'liveupdate-small') {
+    timeStamp = `${formatTime(pub)}`;
+  }
+
   return timeStamp;
 };
 
