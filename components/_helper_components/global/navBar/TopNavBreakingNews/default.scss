@@ -31,10 +31,24 @@
         @include between-breakpoints(mobile, tablet) {
           max-width: 176px;
         }
+
+        @include between-breakpoints(tablet, desktop-lg) {
+          max-width: 224px;
+        }
+
+        @include breakpoint(desktop-lg) {
+          max-width: 346px;
+        }
       }
 
       &.stickyActive {
         background-color: #000;
+      }
+
+      .nav-itemText {
+        @media only screen and(min-width: 768px) and(max-width: 820px) {
+          font-size: .65rem;
+        }
       }
     }
 
