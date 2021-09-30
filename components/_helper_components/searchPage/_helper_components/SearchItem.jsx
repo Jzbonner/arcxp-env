@@ -127,8 +127,8 @@ const SearchItem = ({
           firstPublishDate={firstPublishDate}
           displayDate={displayDate}
           isHideTimestampTrue={isHideTimestampTrue}
-          isTease={true}
           addDivider={(sectionName && !creditName)}
+          isSearchPage={true}
         />
       </div>
       {sectionName && sectionEl()}
