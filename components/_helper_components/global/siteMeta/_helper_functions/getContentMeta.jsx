@@ -97,8 +97,12 @@ const getContentMeta = () => {
   }
   let topSection = primarySectionId;
   let secondarySection = '';
-  if (!primarySection) {
-    // there is no section object, so it's likely a pagebuilder page (without a true "section" associated)
+  if (!primarySection && nonPrimarySet.length) {
+    // there is no primary section, so take the first non-primary section (e.g. galleries)
+    const { 0: firstSecondarySection } = nonPrimarySet || [];
+    topSection = firstSecondarySection;
+  } else if (!primarySection) {
+    // there are no primary or secondary sections, so it's likely a pagebuilder page (without a true "section" associated)... build the "section" from the uri
     topSection = requestUri;
     const queryStringIndex = topSection.indexOf('?');
     if (queryStringIndex > -1) {
