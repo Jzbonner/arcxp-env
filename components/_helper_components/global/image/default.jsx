@@ -36,7 +36,7 @@ const Image = ({
   const isGalleryImage = imageType === 'isGalleryImage';
   let img = null;
 
-  if (resizedObject && (resizedObject.src || resizedObject.length) && !squareImage) {
+  if (resizedObject && ((resizedObject.src && Object.keys(resizedObject).length > 1) || resizedObject.length) && !squareImage) {
     img = resizedObject;
   } else if (url) {
     const focalCoords = setFocalCoords(additionalProperties, rootFocalPoint);

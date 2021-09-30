@@ -90,6 +90,20 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
     timeStamp = `${formatTime(pub)}`;
   }
 
+  if (articleType === 'search') {
+    if (days > 0) {
+      timeStamp = `${findAPMonth(
+        pub.getMonth(),
+      )} ${pub.getDate()}, ${pub.getFullYear()}`;
+    } else if (hours >= 1 && hours < 24) {
+      timeStamp = `${hours}h ago`;
+    } else if (hours < 1 && minutes > -1) {
+      timeStamp = `${minutes}m ago`;
+    } else {
+      return null;
+    }
+  }
+
   return timeStamp;
 };
 
