@@ -97,8 +97,12 @@ const getContentMeta = () => {
   }
   let topSection = primarySectionId;
   let secondarySection = '';
-  if (!primarySection) {
-    // there is no section object, so it's likely a pagebuilder page (without a true "section" associated)
+  if (!primarySection && nonPrimarySet.length) {
+    // there is no primary section, so take the first non-primary section (e.g. galleries)
+    const { 0: firstSecondarySection } = nonPrimarySet || [];
+    topSection = firstSecondarySection;
+  } else if (!primarySection) {
+    // there are no primary or secondary sections, so it's likely a pagebuilder page (without a true "section" associated)... build the "section" from the uri
     topSection = requestUri;
     const queryStringIndex = topSection.indexOf('?');
     if (queryStringIndex > -1) {
@@ -184,6 +188,7 @@ const getContentMeta = () => {
   const blogName = metaValue('blogname');
   const noIndex = metaValue('no index');
   const enableDarkMode = metaValue('dark mode') === 'true';
+  const pageIsLive = metaValue('page is live') === 'true';
 
   const faviconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${favicon}`)}`;
   const appleIconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
@@ -222,6 +227,7 @@ const getContentMeta = () => {
     syndication,
     noIndex,
     enableDarkMode,
+    pageIsLive,
   };
 };
 

@@ -3,26 +3,127 @@
 
 @include amp-exclude {
 
+  .c-Row {
+    margin-bottom: 35px;
+    position: relative;
+
+    .c-image-feature {
+      margin: 0;
+      position: relative;
+      width: 100%;
+      height: auto;
+
+      .image-component-image:before {
+        content: " ";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        background: #000;
+        opacity: 40%;
+      }
+
+      picture {
+        position: relative;
+        z-index: 1;
+        right: 0;
+        width: 100%;
+        height: auto;
+        display: block;
+        filter: grayscale(1);
+      }
+    }
+
+    .c-page-title {
+      position: absolute;
+      z-index: 3;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 95%;
+      max-width: 95%;
+      margin: 0 auto;
+
+      @include breakpoint(desktop-sm) {
+        max-width: 50%;
+      }
+
+      .c-title-content {
+        border: none;
+        color: #fff;
+        display: block;
+        text-align: center;
+
+        .is-live &:before {
+          @include blinking-dot(null, 1.25s);
+        }
+      }
+    }
+  }
+
   .c-liveUpdates {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
 
     .c-liveUpdateNav {
-      border-top: 1px solid #cdcdcd;
-      width: 40px;
-      position: sticky;
-      top: 0;
+      width: 50px;
       align-self: flex-start;
+      max-height: calc(100vh - 60px);
+      overflow: auto;
+
+      @include text-styles(.875rem, 1.25, "Gordita");
+      @include position-sticky(60px);
+
+      @include between-breakpoints(tablet, desktop-sm) {
+        min-width: 120px;
+        width: 20%;
+        max-width: 200px;
+      }
+
+      @include between-breakpoints(desktop-sm, desktop-lg) {
+        width: 200px;
+      }
+
+      @include breakpoint(desktop-lg) {
+        min-width: 256px;
+        width: 20%;
+        max-width: 336px;
+      }
+
+      .c-navTitle {
+        text-transform: uppercase;
+        border-bottom: 1px solid #cdcdcd;
+        padding: 5px 0;
+
+        .is-live &:before {
+          @include blinking-dot(null, 1.25s);
+        }
+      }
 
       a {
         display: block;
         border-bottom: 1px solid #cdcdcd;
-        padding: 15px 5px 15px 15px;
-      }
+        padding: 10px 5px 10px 0;
+        color: #313132;
 
-      @include breakpoint(tablet) {
-        width: 140px;
+        &.is-active {
+          font-family: "Gordita-Bold";
+          padding-left: 10px;
+          background: #fed;
+        }
+
+        .timestamp {
+          color: #999;
+          font-size: .75rem;
+          margin-top: 20px;
+
+          .timestamp-full.same-day {
+            display: none;
+          }
+        }
       }
     }
 
@@ -39,6 +140,13 @@
 
       h2 {
         font-size: 1.875rem;
+      }
+
+      .timestamp-small {
+        background: #000;
+        color: #fff;
+        padding: 20px;
+        display: inline-block;
       }
     }
   }

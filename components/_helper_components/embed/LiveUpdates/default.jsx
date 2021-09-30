@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useAppContext } from 'fusion:context';
 import ContentElements from '../../article/contentElements/default.jsx';
 import ArcAd from '../../../features/ads/default';
+import computeTimeStamp from '../../article/timestamp/_helper_functions/computeTimeStamp';
 import './default.scss';
 
 /* this helper component renders the Custom Info Box as outlined in APD-1441 */
 const LiveUpdates = ({ data: liveUpdates }) => {
   if (!liveUpdates) return <span><i>There are no Live Updates to display.</i></span>;
+
+  const appContext = useAppContext();
+  const { requestUri } = appContext;
+  const uriHasHash = requestUri.indexOf('#') > -1;
+  const hashId = uriHasHash ? requestUri.substr(requestUri.indexOf('#') + 1) : null;
 
   const renderAdOrPlaceholder = (index) => {
     let response = '';
@@ -60,7 +67,7 @@ const LiveUpdates = ({ data: liveUpdates }) => {
 
   const loopThroughUpdates = (isNav = false) => {
     const handleNavTrigger = (evt) => {
-      console.log(evt);
+      console.log('handlenavtrigger', evt.target);
     };
     let updateIndex = 0;
     return liveUpdates.map((update) => {
@@ -68,19 +75,35 @@ const LiveUpdates = ({ data: liveUpdates }) => {
         headlines,
         _id: elId,
         content_elements: contentElements,
+        display_date: displayDate,
+        first_publish_date: firstPublishDate,
       } = update;
       const { basic: headline } = headlines || {};
       if (!headline) return null;
 
+      const fullTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-full');
+      const smallTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-small');
+
       updateIndex += 1;
       if (isNav) {
-        return <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger}>{headline}</a>;
+        const isActive = (!uriHasHash && updateIndex === 1) || (uriHasHash && hashId === elId);
+        return <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger} className={isActive ? 'is-active' : ''}>
+          <div className='headline'>{headline}</div>
+          <div className='timestamp'>
+            <span className='timestamp-full'>{fullTimestamp}</span>
+            <span className='timestamp-small'>{smallTimestamp}</span>
+          </div>
+        </a>;
       }
 
       const liveUpdateContent = () => <>
-        <div className={'c-liveUpdate'} name={elId} key={elId}>
-          <h2 key={headline}>{headline}</h2>
-          <div className={'liveUpdate-content'} key={`${elId}-content`}>
+        <div className='c-liveUpdate' name={elId} key={elId}>
+          <h2>{headline}</h2>
+          <div className='c-timestampByline'>
+            <div className='timestamp-small'>{smallTimestamp}</div>
+            <div className='byline'></div>
+          </div>
+          <div className='liveUpdate-content' key={`${elId}-content`}>
             <ContentElements contentElements={contentElements} ampPage={false} />
           </div>
         </div>
@@ -97,9 +120,12 @@ const LiveUpdates = ({ data: liveUpdates }) => {
     });
   };
 
-  return <div className={'c-liveUpdates'}>
-    <div className={'c-liveUpdateNav'}>{loopThroughUpdates(true)}</div>
-    <div className={'c-liveUpdateContent'}>{loopThroughUpdates()}</div>
+  return <div className='c-liveUpdates'>
+    <div className='c-liveUpdateNav'>
+      <div className='c-navTitle'>Latest Updates</div>
+      {loopThroughUpdates(true)}
+    </div>
+    <div className='c-liveUpdateContent'>{loopThroughUpdates()}</div>
   </div>;
 };
 
