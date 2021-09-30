@@ -99,7 +99,8 @@ const getContentMeta = () => {
   let secondarySection = '';
   if (!primarySection && nonPrimarySet.length) {
     // there is no primary section, so take the first non-primary section (e.g. galleries)
-    const { 0: firstSecondarySection } = nonPrimarySet || [];
+    const nonPrimaries = typeof nonPrimarySet === 'string' ? nonPrimarySet.split(',') : nonPrimarySet;
+    const { 0: firstSecondarySection } = nonPrimaries || [];
     topSection = firstSecondarySection;
   } else if (!primarySection) {
     // there are no primary or secondary sections, so it's likely a pagebuilder page (without a true "section" associated)... build the "section" from the uri
