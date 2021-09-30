@@ -9,24 +9,25 @@ import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreaki
 import ListEnhanced from '../features/ListEnhanced/default';
 import SectionHome from '../_helper_components/home/SectionHome/SectionHome';
 
-const ListPageLayout = (props) => {
+const ListPageLayout = () => {
   const appContext = useAppContext();
   const {
-    globalContent, requestUri,
+    globalContent, requestUri, renderables,
   } = appContext;
   if (!globalContent) return null;
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
 
-  const [title, textBox] = props.children;
+  const title = renderables[2]?.props?.customFields?.pageTitle;
+  const textBox = renderables[2]?.props?.customFields?.text || renderables[3]?.props?.customFields?.text;
 
   return (
     <>
       <GlobalAdSlots />
       {!noHeaderAndFooter && <TopNavBreakingNews />}
       <main className="c-sectionCentered">
-        <SectionHome feature={<ListEnhanced customFields={{ title, textBox }} />} />
+        <SectionHome feature={<ListEnhanced customFields={{ title, textBox }}/>} />
       </main>
       {!noHeaderAndFooter && <>
         <Footer />
@@ -40,6 +41,6 @@ ListPageLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-ListPageLayout.sections = ['Title', 'Text Box'];
+ListPageLayout.sections = ['Heading'];
 
 export default ListPageLayout;

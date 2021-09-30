@@ -9,13 +9,16 @@ const PageTitle = () => {
   const { pageTitle } = componentContext && componentContext.customFields;
   const { editableField } = useEditableContent();
 
-  return (
-    <div className="c-page-title">
-      <h1 className="c-title-content" {...editableField('Page Title')} suppressContentEditableWarning value="Add Page Title">
-        {pageTitle}
-      </h1>
-    </div>
-  );
+  if (pageTitle) {
+    return (
+      <div className="c-page-title">
+        <h1 className="c-title-content" {...editableField('Page Title')} suppressContentEditableWarning value="Add Page Title">
+          {pageTitle}
+        </h1>
+      </div>
+    );
+  }
+  return null;
 };
 
 PageTitle.propTypes = {

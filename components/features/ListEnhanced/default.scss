@@ -23,7 +23,7 @@
         letter-spacing: -.31px;
       }
 
-      @include breakpoint(tablet) {
+      @include breakpoint(desktop-sm) {
         @include text-styles(2.1875rem, 1, "Gordita-Bold");
 
         letter-spacing: -.44px;
