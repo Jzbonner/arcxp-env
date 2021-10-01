@@ -1,5 +1,16 @@
 @import "./../../../src/styles/base";
 
+// temp fix for connext bar spacing issue on homepage
+
+.c-homepageContent {
+
+  .c-synopsis-row {
+    @include breakpoint(tablet) {
+      margin-top: 1rem;
+    }
+  }
+}
+
 .c-synopsis-row {
   display: flex;
   justify-content: space-between;
@@ -18,7 +29,7 @@
     @include breakpoint(tablet) {
       margin-bottom: $min-Msection-margin;
     }
-    
+
     @include breakpoint(desktop-sm) {
       margin-bottom: $min-DTsection-margin;
     }
@@ -48,7 +59,7 @@
         .headline {
           margin-top: .2rem;
           letter-spacing: -.31px;
-          
+
           @include text-styles(1.563rem, 1.12, "Lora-Bold");
 
           @include between-breakpoints(tablet,desktop-sm) {
@@ -117,7 +128,7 @@
       &:last-child {
 
         .homeList-text {
-          
+
           .article-timestamp {
             margin-bottom: 0;
           }
@@ -125,8 +136,7 @@
       }
     }
   }
-  
-  
+
   .border-top {
     width: 100%;
 
