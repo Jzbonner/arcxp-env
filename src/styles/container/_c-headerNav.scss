@@ -886,6 +886,12 @@
       &.not-visible {
         display: none;
       }
+
+      .subscribe-bar {
+        @include breakpoint(tablet) {
+          margin-bottom: 1rem;
+        }
+      }
     }
 
     .section {
