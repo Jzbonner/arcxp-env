@@ -212,7 +212,8 @@ const SiteMetrics = ({ isAmp }) => {
             "pageMainSection": "${topSection}",
             "pageCategory": "${nonPrimarySections}",
             "pageContentType": "${typeOfPage || pageContentType}",
-            "pageTitle": "${seoTitle ? seoTitle.replace(/"/g, "'") : pageTitle.replace(/"/g, "'")}"
+            "pageTitle": "${seoTitle ? seoTitle.replace(/"/g, "'") : pageTitle.replace(/"/g, "'")}",
+            "chartbeatTitle": "${pageTitle}",
           },
           "siteData": {
             "siteID": "${metrics && metrics.siteID ? metrics.siteID : site}",
