@@ -214,7 +214,6 @@ const SiteMetrics = ({ isAmp }) => {
             "pageContentType": "${typeOfPage || pageContentType}",
             "pageTitle": "${seoTitle ? seoTitle.replace(/"/g, "'") : pageTitle.replace(/"/g, "'")}",
             "chartbeatTitle": "${pageTitle}",
-
           },
           "siteData": {
             "siteID": "${metrics && metrics.siteID ? metrics.siteID : site}",
