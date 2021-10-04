@@ -126,7 +126,8 @@ const SiteMetrics = ({ isAmp }) => {
               "pageNameStr": "",
               "pageUrlStr": "",
               "pageMainSection": "${topSection}",
-              "contentPaywallStatus": "${contentCode}"
+              "contentPaywallStatus": "${contentCode}",
+              "chartbeatTitle": ${pageTitle}",
             },
             "triggers": {
               "accessLoginStarted": {
