@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import { useFusionContext } from 'fusion:context';
+import { useFusionContext, useAppContext } from 'fusion:context';
 import './default.scss';
 import '../../features/List/default';
 import AddFirstInlineImage from '../../../content/sources/helper_functions/AddFirstInlineImage';
@@ -10,6 +10,7 @@ import SearchItem from './_helper_components/SearchItem';
 import SearchIcon from '../../../resources/icons/search.svg';
 import ArcAd from '../../features/ads/default';
 import checkTags from '../../layouts/_helper_functions/checkTags';
+import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
 
 const RP01 = s => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} customId={`div-id-RP01_${s}`} />;
 const RP09 = (i, s) => <ArcAd staticSlot={'RP09 sticky listPage'} key={`RP09-List-Page-${i}`} customId={`div-id-RP09_${s}_${i}`} />;
@@ -21,6 +22,8 @@ const SearchPage = ({
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
+  const appContext = useAppContext();
+  const { requestUri } = appContext;
 
   const { taxonomy } = globalContent;
   const { tags = [] } = taxonomy || {};
@@ -35,7 +38,8 @@ const SearchPage = ({
   const [adIndex, setAdIndex] = useState(1);
   const [mapStartIndex, setMapStartIndex] = useState(0);
   const RP01RP09Array = [];
-
+  const queryParams = getQueryParams(requestUri);
+  const searchTermParam = queryParams && queryParams.q ? queryParams.q : null;
   const RP01Count = storyEls.length / 10;
 
   for (let i = 0; i < RP01Count; i += 1) {
@@ -133,7 +137,7 @@ const SearchPage = ({
   const searchMetaData = useContent({
     source: 'search-page',
     query: {
-      q: `${searchQuery}`,
+      q: `${searchQuery || searchTermParam}`,
       page: pageCount,
       arcSite,
       sortByDate: sortByDateState,
