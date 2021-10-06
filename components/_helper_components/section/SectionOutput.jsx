@@ -16,24 +16,30 @@ const SectionOutput = ({
   noHeaderAndFooter,
 }) => {
   const { pageIsLive } = getContentMeta();
+  // if the `live` meta exists, we set the default class to `not-live`
+  let liveIndicatorClass = pageIsLive ? 'not-live' : '';
+  // then, if the `live` meta exists and is actually live, we re-set it to `is-live`
+  if (pageIsLive === 'true' || pageIsLive === 'yes') {
+    liveIndicatorClass = 'is-live';
+  }
   const isErrorPage = layout === 'section-basic';
   return (
     <>
       {<GlobalAdSlots pbPage={true} />}
       {/* we omit breaking news on wraps */}
       {!noHeaderAndFooter && <TopNavBreakingNews type={layout} omitBreakingNews={layout.indexOf('wrap-') !== -1} />}
-      {<main className={`c-sectionContent ${isErrorPage ? 'b-contentMaxWidth' : ''} ${pageIsLive ? 'is-live' : ''}`}>
+      {<main className={`c-sectionContent ${isErrorPage ? 'b-contentMaxWidth' : ''} ${liveIndicatorClass}`}>
         {zones && (
           zones.map((zone, i) => {
             const {
               content, rightRailZone, rightHalfZone, colLayout,
             } = zone;
             return <SectionHome feature={content}
-            rightRailContent={rightRailZone}
-            rightColContent={rightHalfZone}
-            colLayout={colLayout}
-            key={`section${i}`}
-            isErrorPage={isErrorPage}/>;
+              rightRailContent={rightRailZone}
+              rightColContent={rightHalfZone}
+              colLayout={colLayout}
+              key={`section${i}`}
+              isErrorPage={isErrorPage} />;
           })
         )}
       </main>}

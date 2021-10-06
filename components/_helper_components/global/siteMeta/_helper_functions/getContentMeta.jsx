@@ -184,7 +184,8 @@ const getContentMeta = () => {
   const blogName = metaValue('blogname');
   const noIndex = metaValue('no index');
   const enableDarkMode = metaValue('dark mode') === 'true';
-  const pageIsLive = metaValue('page is live') === 'true';
+  const pageIsLive = metaValue('live');
+  const pbPaywall = metaValue('story-meter');
 
   const faviconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${favicon}`)}`;
   const appleIconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
@@ -219,7 +220,7 @@ const getContentMeta = () => {
     nonPrimarySet,
     isOpinion,
     blogName,
-    paywallStatus,
+    paywallStatus: paywallStatus || pbPaywall,
     syndication,
     noIndex,
     enableDarkMode,

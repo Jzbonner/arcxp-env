@@ -32,7 +32,7 @@ const ComposerEmbed = (props) => {
       return <LiveUpdates data={embedData} />;
     }
 
-    if (type !== 'story') return <p>this feature is only compatible with stories (and this is {type} content)</p>;
+    if (type !== 'story') return <p>this feature is only compatible with stories (and this is `&lsquo;${type}&rsquo;` content)</p>;
 
     // this is how we will handle multiple custom Composer subtypes.
     switch (subtype.toLowerCase()) {

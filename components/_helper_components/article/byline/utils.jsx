@@ -10,7 +10,7 @@ const creditParser = (element = {}) => {
   if (get(element, '_id')) isStaff = true;
 
   // If the author info is not in site service it returns as a reference on the story not inflated.
-  // Sinmply parse the id and pretty print it.
+  // Simply parse the id and pretty print it.
   const byType = get(element, 'type');
   if (byType === 'reference') {
     const nameArray = get(element, 'referent.id', '')
