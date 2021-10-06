@@ -8,6 +8,11 @@
   justify-content: center;
   overflow: hidden;
   width: 100vw;
+  margin-bottom: 10px;
+
+  @include breakpoint(tablet) {
+    margin-bottom: 0;
+  }
 
   @include breakpoint(desktop-sm) {
     min-width: 700px;
@@ -20,18 +25,26 @@
       max-width: 1540px;
     }
 
+    .c-image-feature {
+      @include between-breakpoints(tablet, desktop-sm) {
+        margin-top: -5rem;
+      }
+    }
+
     .c-sectionTitle {
       position: absolute;
       color: #fff;
       z-index: 2;
       top: 364px;
+      padding: 0 20px;
 
       @include text-styles(1.875rem, 1.38, "Lora-Bold");
 
       @include breakpoint(tablet) {
-        margin-right: 40px;
-        top: 200px;
-        left: 43%;
+        padding: 0;
+        margin-right: 45px;
+        top: 131px;
+        left: 42%;
         transform: translateY(-40px);
         text-align: left;
       }
@@ -55,7 +68,7 @@
       }
 
       @include breakpoint(desktop-xl) {
-        transform: translate(-8%, -20%);
+        transform: translate(1%, -20%);
       }
 
       @include breakpoint(desktop-xxl) {
