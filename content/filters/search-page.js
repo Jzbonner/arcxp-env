@@ -24,12 +24,12 @@ data{
             name,
             type
         }
-    }
+    },
     taxonomy {
         primary_section {
             description,
             name
         }
-    }
+    },
 } 
 `;
