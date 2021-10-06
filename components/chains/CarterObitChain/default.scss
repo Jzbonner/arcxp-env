@@ -105,3 +105,7 @@
     }
   }
 }
+
+.dark-mode ~ .c-homepageContent {
+  padding-top: 0;
+}
