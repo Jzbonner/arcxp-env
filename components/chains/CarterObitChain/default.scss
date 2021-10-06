@@ -26,8 +26,12 @@
     }
 
     .c-image-feature {
-      @include between-breakpoints(tablet, desktop-sm) {
+      @include breakpoint(tablet) {
         margin-top: -5rem;
+      }
+
+      @include between-breakpoints(desktop-sm, desktop-lg) {
+        margin-top: -8rem;
       }
     }
 
@@ -101,7 +105,7 @@
       }
 
       @include breakpoint(desktop-sm) {
-        margin-top: -40px;
+        margin-top: -8rem;
       }
 
       @include breakpoint(desktop-lg) {
