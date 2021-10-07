@@ -20,6 +20,22 @@ const LiveUpdates = ({ data: liveUpdates }) => {
   const { requestUri } = appContext;
   const uriHasHash = requestUri.indexOf('#') > -1;
   const hashId = uriHasHash ? requestUri.substr(requestUri.indexOf('#') + 1) : null;
+  let toggledAdSlot = 'HP03';
+
+  const copyToClipboard = (e) => {
+    e.preventDefault();
+    let action = () => console.error('fallback in case Window or Navigator are unknown');
+    if (window && navigator && navigator.clipboard) {
+      const anchor = `${window.location.pathname}#${e.target.getAttribute('data-target')}`;
+      action = navigator.clipboard.writeText(anchor).then(() => console.log(`Async: Copying ${anchor} to clipboard was successful!`), err => console.error('Async: Could not copy text: ', err)).then(() => {
+        e.target.classList.value += ' is-clicked';
+        setTimeout(() => {
+          e.target.classList.value = e.target.classList.value.replace(' is-clicked', '');
+        }, 1500);
+      });
+    }
+    return action;
+  };
 
   const renderAdOrPlaceholder = (index) => {
     let response = '';
@@ -66,11 +82,13 @@ const LiveUpdates = ({ data: liveUpdates }) => {
         break;
       default:
         response = <ArcAd
-          staticSlot={'HP05'}
-          key={`HP05-${index}`}
-          customId={`div-id-HP05_${index}`}
+          staticSlot={toggledAdSlot}
+          key={`${toggledAdSlot}-${index}`}
+          customId={`div-id-${toggledAdSlot}_${index}`}
           lazyLoad={true}
         />;
+        // we alternate HP03 & HP04 for all default slotnames, because there is a (slight) chance of two slots being visible at the same time
+        toggledAdSlot = toggledAdSlot === 'HP03' ? 'HP04' : 'HP03';
     }
     return response;
   };
@@ -98,12 +116,15 @@ const LiveUpdates = ({ data: liveUpdates }) => {
 
       updateIndex += 1;
       if (isNav) {
-        return <LeftNav isActive={(!uriHasHash && updateIndex === 1) || (uriHasHash && hashId === elId)} elId={elId} headline={headline} fullTimestamp={fullTimestamp} smallTimestamp={smallTimestamp} handleNavTrigger={handleNavTrigger} />;
+        return <LeftNav key={elId} isActive={(!uriHasHash && updateIndex === 1) || (uriHasHash && hashId === elId)} elId={elId} headline={headline} fullTimestamp={fullTimestamp} smallTimestamp={smallTimestamp} handleNavTrigger={handleNavTrigger} />;
       }
 
       const liveUpdateContent = () => <>
         <div className='c-liveUpdate' name={elId} key={elId}>
-          <h2>{headline}</h2>
+          <div className='c-headline'>
+            <h2>{headline}</h2>
+            <a className='link-anchor' href='#' data-target={elId} onClick={e => copyToClipboard(e)}></a>
+          </div>
           <div className='c-timestampByline'>
             <div className='timestamp-small'>{smallTimestamp}</div>
             <Byline by={authorData} sections={[]} excludeOrg={true} />
