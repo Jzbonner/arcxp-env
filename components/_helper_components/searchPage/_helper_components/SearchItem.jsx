@@ -115,8 +115,6 @@ const SearchItem = ({
     return null;
   }
 
-  console.log('creditName', creditName);
-
   const buildSearchItemRow = () => {
     const hasSectionDivider = !!(sectionName && creditName);
 
