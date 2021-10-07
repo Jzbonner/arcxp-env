@@ -26,11 +26,13 @@
     }
 
     .c-image-feature {
+      margin-top: -4.5rem;
+
       @include breakpoint(tablet) {
         margin-top: -5rem;
       }
 
-      @include between-breakpoints(desktop-sm, desktop-lg) {
+      @include breakpoint(desktop-sm) {
         margin-top: -8rem;
       }
     }
@@ -47,7 +49,7 @@
       @include breakpoint(tablet) {
         padding: 0;
         margin-right: 45px;
-        top: 131px;
+        top: 100px;
         left: 42%;
         transform: translateY(-40px);
         text-align: left;
@@ -86,14 +88,6 @@
 
     .c-image-component {
       margin-top: 0;
-      
-      @include breakpoint(desktop-lg) {
-        margin-top: -8rem;
-      }
-  
-      @include breakpoint(desktop-nav) {
-        margin-top: -10rem;
-      }
     }
 
     .c-homeListContainer {
@@ -107,9 +101,9 @@
       @include breakpoint(desktop-sm) {
         margin-top: -8rem;
       }
-
-      @include breakpoint(desktop-lg) {
-        margin-top: 15px;
+  
+      @include breakpoint(desktop-nav) {
+        margin-top: -10rem;
       }
 
       @include breakpoint(desktop-xxxl) {
