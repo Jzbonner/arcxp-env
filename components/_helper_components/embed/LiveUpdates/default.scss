@@ -13,6 +13,11 @@
       width: 100%;
       height: auto;
 
+      &:not(:first-child),
+      &:not(:last-child) {
+        margin: 0;
+      }
+
       .image-component-image:before {
         content: " ";
         position: absolute;
@@ -36,7 +41,8 @@
       }
     }
 
-    .c-page-title {
+    .c-page-title,
+    .c-liveUpdatesStatus {
       position: absolute;
       z-index: 3;
       top: 50%;
@@ -49,16 +55,57 @@
       @include breakpoint(desktop-sm) {
         max-width: 50%;
       }
+    }
 
-      .c-title-content {
-        border: none;
-        color: #fff;
-        display: block;
-        text-align: center;
+    .c-page-title .c-title-content {
+      border: none;
+      color: #fff;
+      display: block;
+      text-align: center;
+      letter-spacing: -.31px;
 
-        .is-live &:before {
-          @include blinking-dot(null, 1.25s);
+      @include text-styles(1.5625rem, 1.75, "Lora-Bold");
+
+      @include between-breakpoints(tablet, desktop-sm) {
+        font-size: 1.875rem;
+        line-height: 1.9375rem;
+        letter-spacing: -.38px;
+      }
+
+      @include between-breakpoints(desktop-sm, desktop-lg) {
+        font-size: 2.43rem;
+        line-height: 2.5rem;
+        letter-spacing: -.49px;
+      }
+
+      @include breakpoint(desktop-lg) {
+        font-size: 3.125rem;
+        line-height: 3.44rem;
+        letter-spacing: -.62px;
+      }
+    }
+
+    .c-liveUpdatesStatus {
+      top: 60%;
+      width: auto;
+
+      @include text-styles(.75rem, 1, "Gordita-Bold");
+
+      .is-live & {
+        color: #ff1f00;
+        text-transform: uppercase;
+
+        &:before {
+          @include blinking-dot(30px, 1.25s);
         }
+      }
+
+      @include between-breakpoints(desktop-sm, desktop-lg) {
+        font-size: .975rem;
+      }
+
+      @include breakpoint(desktop-lg) {
+        font-size: .875rem;
       }
     }
   }
@@ -97,9 +144,39 @@
         text-transform: uppercase;
         border-bottom: 1px solid #cdcdcd;
         padding: 5px 0;
+        position: relative;
+        height: 15px;
 
-        .is-live &:before {
-          @include blinking-dot(null, 1.25s);
+        @include between-breakpoints(mobile, tablet) {
+          display: none;
+        }
+
+        .is-live & {
+          padding-left: 12px;
+
+          &:before {
+            @include blinking-dot(20px, 1.25s);
+
+            left: 0;
+            top: 45%;
+          }
+
+          @include between-breakpoints(mobile, tablet) {
+            text-align: center;
+            height: 15px;
+            display: block;
+
+            &:before {
+              top: 0;
+              transform: translateX(-50%);
+              line-height: 20px;
+              left: 50%;
+              font-size: 40px;
+              width: 40px;
+              height: 40px;
+              margin: 0 auto;
+            }
+          }
         }
       }
 
@@ -108,20 +185,45 @@
         border-bottom: 1px solid #cdcdcd;
         padding: 10px 5px 10px 0;
         color: #313132;
+        text-align: center;
 
         &.is-active {
           font-family: "Gordita-Bold";
-          padding-left: 10px;
-          background: #fed;
+          background: #fff5ec;
+        }
+
+        @include breakpoint(tablet) {
+          text-align: left;
+
+          &.is-active {
+            padding-left: 10px;
+          }
         }
 
         .timestamp {
-          color: #999;
+          color: #212126;
           font-size: .75rem;
-          margin-top: 20px;
+          letter-spacing: -.15px;
 
-          .timestamp-full.same-day {
+          @include text-styles(.75rem, 1, "Lora-Bold");
+
+          @include breakpoint(tablet) {
+            margin-top: 20px;
+            color: #9b9b9b;
+            letter-spacing: 0;
+
+            @include text-styles(.875rem, 1, "Gordita");
+          }
+
+          .timestamp-full {
             display: none;
+
+            @include breakpoint(tablet) {
+
+              &:not(.same-day) {
+                display: inline-block;
+              }
+            }
           }
         }
       }
@@ -133,21 +235,92 @@
       border-left: 1px solid #cdcdcd;
       padding-left: 30px;
 
+      @include text-styles(1rem, 1.625, "Gordita");
+
+      .c-sectionHome.full-width .c-contentElements & .arc_ad[class*="HP01"] {
+        margin-bottom: 0;
+      }
+
       .arcad {
         padding-bottom: 30px !important;
         border-bottom: 1px solid #cdcdcd;
       }
 
       h2 {
-        font-size: 1.875rem;
+        letter-spacing: -.25px;
+
+        @include text-styles(1.25rem, 1.5, "Lora-Bold");
+
+        @include between-breakpoints(tablet, desktop-lg) {
+          font-size: 1.375rem;
+          line-height: 1.69;
+          letter-spacing: -.28px;
+        }
+
+        @include breakpoint(desktop-lg) {
+          font-size: 1.875rem;
+          line-height: 2.19;
+          letter-spacing: -.38px;
+        }
+      }
+
+      .c-timestampByline {
+        margin-bottom: 9px;
+
+        @include breakpoint(tablet) {
+          margin-bottom: 15px;
+        }
+      }
+
+      .byline {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 8px;
+        letter-spacing: -.15px;
+
+        @include text-styles(.75rem, 1, "Gordita");
+
+        @include between-breakpoints(tablet, desktop-lg) {
+          font-size: .875rem;
+          letter-spacing: -.18px;
+          margin-left: 12px;
+        }
+
+        @include breakpoint(desktop-lg) {
+          font-size: 1rem;
+          letter-spacing: -.2px;
+          margin-left: 12px;
+        }
       }
 
       .timestamp-small {
-        background: #000;
+        background: #212126;
         color: #fff;
-        padding: 20px;
+        padding: 5px;
+        text-align: center;
         display: inline-block;
+        letter-spacing: -.18px;
+
+        @include text-styles(.875rem, 1, "Lora-Bold");
+
+        @include breakpoint(tablet) {
+          letter-spacing: -.25px;
+          font-size: 1.25rem;
+          padding: 15px;
+        }
       }
+    }
+
+    .c-liveUpdate {
+      border-bottom: 1px solid #cdcdcd;
+
+      @include between-breakpoints(mobile, tablet) {
+        margin-bottom: 15px;
+      }
+    }
+
+    .liveUpdate-content .c-contentElements > :last-child {
+      margin-bottom: 15px;
     }
   }
 }

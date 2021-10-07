@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import ContentElements from '../../article/contentElements/default.jsx';
 import ArcAd from '../../../features/ads/default';
+import TaboolaFeed from '../../../features/taboolaFeed/default';
 import computeTimeStamp from '../../article/timestamp/_helper_functions/computeTimeStamp';
+import getContentMeta from '../../global/siteMeta/_helper_functions/getContentMeta';
+import Byline from '../../article/byline/default';
+import LeftNav from './leftNav/default';
 import './default.scss';
 
 /* this helper component renders the Custom Info Box as outlined in APD-1441 */
 const LiveUpdates = ({ data: liveUpdates }) => {
-  if (!liveUpdates) return <span><i>There are no Live Updates to display.</i></span>;
+  const { pageIsLive, paywallStatus } = getContentMeta();
+  const isMeteredStory = paywallStatus === 'premium';
+  if (!liveUpdates || !pageIsLive) return <span><i>There are no Live Updates to display.</i></span>;
 
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -30,6 +36,7 @@ const LiveUpdates = ({ data: liveUpdates }) => {
             key={`MP01-${index}`}
             customId={`div-id-MP01_${index}`}
           />
+          {isMeteredStory && <div className='story-paygate_placeholder'></div>}
         </>;
         break;
       case 3:
@@ -38,16 +45,18 @@ const LiveUpdates = ({ data: liveUpdates }) => {
             staticSlot={'RP01'}
             key={`RP01-${index}`}
             customId={`div-id-RP01_${index}`}
+            lazyLoad={isMeteredStory}
           />
           <ArcAd
             staticSlot={'MP02'}
             key={`MP02-${index}`}
             customId={`div-id-MP02_${index}`}
+            lazyLoad={isMeteredStory}
           />
         </>;
         break;
       case 5:
-        response = <div className='newsletterPlaceholder'></div>;
+        response = <div className='story-newsletter_placeholder'></div>;
         break;
       case 6:
         response = <div className='story-nativo_placeholder--moap'></div>;
@@ -60,6 +69,7 @@ const LiveUpdates = ({ data: liveUpdates }) => {
           staticSlot={'HP05'}
           key={`HP05-${index}`}
           customId={`div-id-HP05_${index}`}
+          lazyLoad={true}
         />;
     }
     return response;
@@ -77,8 +87,10 @@ const LiveUpdates = ({ data: liveUpdates }) => {
         content_elements: contentElements,
         display_date: displayDate,
         first_publish_date: firstPublishDate,
+        credits,
       } = update;
       const { basic: headline } = headlines || {};
+      const { by: authorData } = credits || {};
       if (!headline) return null;
 
       const fullTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-full');
@@ -86,14 +98,7 @@ const LiveUpdates = ({ data: liveUpdates }) => {
 
       updateIndex += 1;
       if (isNav) {
-        const isActive = (!uriHasHash && updateIndex === 1) || (uriHasHash && hashId === elId);
-        return <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger} className={isActive ? 'is-active' : ''}>
-          <div className='headline'>{headline}</div>
-          <div className='timestamp'>
-            <span className='timestamp-full'>{fullTimestamp}</span>
-            <span className='timestamp-small'>{smallTimestamp}</span>
-          </div>
-        </a>;
+        return <LeftNav isActive={(!uriHasHash && updateIndex === 1) || (uriHasHash && hashId === elId)} elId={elId} headline={headline} fullTimestamp={fullTimestamp} smallTimestamp={smallTimestamp} handleNavTrigger={handleNavTrigger} />;
       }
 
       const liveUpdateContent = () => <>
@@ -101,7 +106,7 @@ const LiveUpdates = ({ data: liveUpdates }) => {
           <h2>{headline}</h2>
           <div className='c-timestampByline'>
             <div className='timestamp-small'>{smallTimestamp}</div>
-            <div className='byline'></div>
+            <Byline by={authorData} sections={[]} excludeOrg={true} />
           </div>
           <div className='liveUpdate-content' key={`${elId}-content`}>
             <ContentElements contentElements={contentElements} ampPage={false} />
@@ -122,10 +127,13 @@ const LiveUpdates = ({ data: liveUpdates }) => {
 
   return <div className='c-liveUpdates'>
     <div className='c-liveUpdateNav'>
-      <div className='c-navTitle'>Latest Updates</div>
+      <div className='c-navTitle'><span className='hidden-mobile'>Latest Updates</span></div>
       {loopThroughUpdates(true)}
     </div>
-    <div className='c-liveUpdateContent'>{loopThroughUpdates()}</div>
+    <div className='c-liveUpdateContent'>
+      {loopThroughUpdates()}
+      <TaboolaFeed ampPage={false} lazyLoad={true} />
+    </div>
   </div>;
 };
 
