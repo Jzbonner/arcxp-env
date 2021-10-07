@@ -6,6 +6,12 @@
   margin: 0 auto;
 }
 
+.c-gallery-basic.b-contentMaxWidth {
+  @include between-breakpoints(mobile, tablet) {
+    margin: 1.25rem auto 0;
+  }
+}
+
 .c-main-gallery,
 .c-header-gallery {
   margin: 0 auto;

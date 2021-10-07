@@ -98,7 +98,7 @@
       border: none;
 
       .headline-body {
-        padding: 20px 30px;
+        padding: 0 30px 20px;
         max-width: 1600px;
         text-align: center;
 
@@ -143,6 +143,7 @@
     display: block;
 
     .headline-body {
+      padding-top: 0;
 
       .headline-text {
         @include breakpoint(desktop-sm) {
