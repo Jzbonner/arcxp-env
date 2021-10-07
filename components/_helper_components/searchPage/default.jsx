@@ -248,7 +248,7 @@ const SearchPage = ({
               placeholder=""
               onChange={onChangeHandler}
               onKeyDown={handleKeyDown}
-              value={searchInput}></input>
+              value={searchInput || searchTermParam}></input>
           </div>
           <button onClick={handleButtonClick} className="search-btn">Search</button>
         </div>
