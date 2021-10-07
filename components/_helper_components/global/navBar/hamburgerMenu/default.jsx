@@ -29,6 +29,12 @@ const HamburgerMenu = ({
     if (windowExists) handleWindowSize();
   }, []);
 
+  useEffect(() => {
+    if (hamburgerToggle) {
+      document.querySelector('.nav-mobile').scrollTo(0, 0);
+    }
+  }, [hamburgerToggle]);
+
   return (
   <>
   <div className={`nav-wrapper ${hamburgerToggle ? 'isVisible' : ''}`} onClick={(e) => { e.preventDefault(); setToggle(false); }}></div>
