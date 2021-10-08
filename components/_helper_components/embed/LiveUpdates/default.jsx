@@ -11,7 +11,7 @@ import LeftNav from './leftNav/default';
 import './default.scss';
 
 /* this helper component renders the Custom Info Box as outlined in APD-1441 */
-const LiveUpdates = ({ data: liveUpdates }) => {
+const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   const { pageIsLive, paywallStatus } = getContentMeta();
   const isMeteredStory = paywallStatus === 'premium';
   if (!liveUpdates || !pageIsLive) return <span><i>There are no Live Updates to display.</i></span>;
@@ -153,7 +153,7 @@ const LiveUpdates = ({ data: liveUpdates }) => {
     </div>
     <div className='c-liveUpdateContent'>
       {loopThroughUpdates()}
-      <TaboolaFeed ampPage={false} lazyLoad={true} treatAsArticle={true} />
+      {enableTaboola && <TaboolaFeed ampPage={false} lazyLoad={true} treatAsArticle={true} />}
     </div>
   </div>;
 };
@@ -161,6 +161,7 @@ const LiveUpdates = ({ data: liveUpdates }) => {
 
 LiveUpdates.propTypes = {
   data: PropTypes.array,
+  enableTaboola: PropTypes.bool,
 };
 LiveUpdates.defaultProps = {
   componentName: 'LiveUpdates',
