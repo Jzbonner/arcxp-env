@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import truncateHeadline from '../../../../layouts/_helper_functions/homepage/truncateHeadline';
 import Image from '../../../../_helper_components/global/image/default';
@@ -20,7 +20,6 @@ const ListItem = ({
 }) => {
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
-  const [isMissingPromo, setIsMissingPromo] = useState('');
   const relativeURL = websiteUrl || canonicalUrl || '/';
 
   function getPromoItem() {
@@ -51,17 +50,13 @@ const ListItem = ({
     if (firstInlineImage) {
       return firstInlineImage;
     }
-
-    if (!isMissingPromo) {
-      setIsMissingPromo('isMissingPromo');
-    }
     return null;
   }
 
   if (relativeURL === '/') return null;
 
   return (
-    <div className={`c-enhancedList-listItem ${isMissingPromo}`}>
+    <div className='c-enhancedList-listItem'>
       <div className="col-1">
         {getTeaseIcon(contentType)}
         <div className="headline">
