@@ -153,7 +153,7 @@ const LiveUpdates = ({ data: liveUpdates }) => {
     </div>
     <div className='c-liveUpdateContent'>
       {loopThroughUpdates()}
-      <TaboolaFeed ampPage={false} lazyLoad={true} />
+      <TaboolaFeed ampPage={false} lazyLoad={true} treatAsArticle={true} />
     </div>
   </div>;
 };
