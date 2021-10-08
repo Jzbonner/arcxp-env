@@ -43,12 +43,12 @@ const LiveUpdates = ({ data: liveUpdates }) => {
       case 0:
         response = <>
           <ArcAd
-            staticSlot={'HP01'}
+            staticSlot={'HP01-LiveUpdates'}
             key={`HP01-${index}`}
             customId={`div-id-HP01_${index}`}
           />
           <ArcAd
-            staticSlot={'MP01'}
+            staticSlot={'MP01-LiveUpdates'}
             key={`MP01-${index}`}
             customId={`div-id-MP01_${index}`}
           />
@@ -123,7 +123,7 @@ const LiveUpdates = ({ data: liveUpdates }) => {
         <div className='c-liveUpdate' name={elId} key={elId}>
           <div className='c-headline'>
             <h2>{headline}</h2>
-            <a className='link-anchor' href='#' data-target={elId} onClick={e => copyToClipboard(e)}></a>
+            <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
           </div>
           <div className='c-timestampByline'>
             <div className='timestamp-small'>{smallTimestamp}</div>

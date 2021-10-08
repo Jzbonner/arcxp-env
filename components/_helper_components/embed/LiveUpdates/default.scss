@@ -125,19 +125,19 @@
       @include text-styles(.875rem, 1.25, "Gordita");
       @include position-sticky(60px);
 
-      @include between-breakpoints(tablet, desktop-sm) {
+      @include breakpoint(tablet) {
         min-width: 120px;
         width: 20%;
         max-width: 200px;
       }
 
       @include between-breakpoints(desktop-sm, desktop-lg) {
-        width: 200px;
+        min-width: 200px;
+        max-width: 256px;
       }
 
       @include breakpoint(desktop-lg) {
         min-width: 256px;
-        width: 20%;
         max-width: 336px;
       }
 
@@ -202,7 +202,6 @@
         }
 
         .timestamp {
-          color: #212126;
           font-size: .75rem;
           letter-spacing: -.15px;
 
@@ -213,11 +212,12 @@
             color: #9b9b9b;
             letter-spacing: 0;
 
-            @include text-styles(.875rem, 1, "Gordita");
+            @include text-styles(.875rem, 1.25, "Gordita");
           }
 
           .timestamp-full {
             display: none;
+            margin-right: 8px;
 
             @include breakpoint(tablet) {
 
@@ -238,7 +238,11 @@
 
       @include text-styles(1rem, 1.625, "Gordita");
 
-      @include breakpoint(tablet) {
+      @include between-breakpoints(tablet, desktop-lg) {
+        padding-left: 16px;
+      }
+
+      @include breakpoint(desktop-lg) {
         padding-left: 30px;
       }
 
@@ -294,6 +298,7 @@
 
         /* stylelint-disable property-no-vendor-prefix */
 
+        &:focus,
         &:active {
           -webkit-tap-highlight-color: transparent;
           -webkit-touch-callout: none;
@@ -316,6 +321,7 @@
           min-width: max-content;
           opacity: 0;
           transition: opacity .75s;
+          cursor: default;
         }
 
         &.is-clicked:focus:after {
