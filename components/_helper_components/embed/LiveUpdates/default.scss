@@ -193,11 +193,24 @@
           background: #fff5ec;
         }
 
+        &.date-marker {
+          color: #f68c47;
+          padding-right: 0;
+
+          &:first-of-type {
+            display: none;
+          }
+        }
+
         @include breakpoint(tablet) {
           text-align: left;
 
           &.is-active {
             padding-left: 10px;
+          }
+
+          &.date-marker {
+            display: none;
           }
         }
 
@@ -215,7 +228,7 @@
             @include text-styles(.875rem, 1.25, "Gordita");
           }
 
-          .timestamp-full {
+          .timestamp-date {
             display: none;
             margin-right: 8px;
 
@@ -358,7 +371,7 @@
         }
       }
 
-      .timestamp-small {
+      .timestamp-time {
         background: #212126;
         color: #fff;
         padding: 5px;
@@ -377,10 +390,49 @@
     }
 
     .c-liveUpdate {
-      border-bottom: 1px solid #cdcdcd;
+      border-top: 1px solid #cdcdcd;
+
+      &:first-child {
+        border-top: none;
+
+        .date-marker {
+          display: none;
+        }
+      }
 
       @include between-breakpoints(mobile, tablet) {
         margin-bottom: 15px;
+      }
+
+      &.with-date-marker:not(:first-child) {
+        margin-top: 20px;
+        position: relative;
+
+        @include between-breakpoints(mobile, tablet) {
+
+          .c-headline {
+            margin-top: 14px;
+          }
+        }
+      }
+
+      .date-marker {
+        position: absolute;
+        top: -24px;
+        z-index: 2;
+        color: #f68c47;
+        background: #fff;
+        padding-right: 10px;
+        letter-spacing: -.28px;
+
+        @include text-styles(1.375rem, 2, "Gordita-Bold");
+
+        @include breakpoint(tablet) {
+          font-size: 1.62rem;
+          letter-spacing: -.38px;
+          top: -28px;
+          padding-right: 15px;
+        }
       }
     }
 

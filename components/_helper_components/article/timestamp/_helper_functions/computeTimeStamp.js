@@ -19,7 +19,7 @@ const formatTime = (date, showSeconds = false, milTime = false) => {
 
 const formatDate = date => (date.getDate() < 10 ? `0${date.getDate()}` : date.getDate());
 
-const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, isHyperlocalContent, articleType = 'normal') => {
+const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, isHyperlocalContent, articleType = 'normal', returnTimestampObj = false) => {
   let timeStamp = null;
   let isUpdated = null;
   let firstPublishDateObject = null;
@@ -80,14 +80,16 @@ const computeTimeStamp = (firstPublishDate, displayDate, isHideTimestampTrue, is
     }
   }
 
-  if (articleType === 'liveupdate-full') {
-    timeStamp = `${findAPMonth(
-      pub.getMonth(),
-    )} ${pub.getDate()}, ${pub.getFullYear()} `;
-  }
+  if (returnTimestampObj) {
+    const timestampDate = `${findAPMonth(pub.getMonth())} ${pub.getDate()}, ${pub.getFullYear()}`;
+    const timestampTime = `${formatTime(pub)}`;
+    const isToday = timestampDate === `${findAPMonth(now.getMonth())} ${now.getDate()}, ${now.getFullYear()}`;
 
-  if (articleType === 'liveupdate-small') {
-    timeStamp = `${formatTime(pub)}`;
+    return {
+      timestampDate,
+      timestampTime,
+      isToday,
+    };
   }
 
   return timeStamp;

@@ -98,6 +98,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       console.log('handlenavtrigger', evt.target);
     };
     let updateIndex = 0;
+    let mostRecentDate = null;
     return liveUpdates.map((update) => {
       const {
         headlines,
@@ -111,22 +112,38 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       const { by: authorData } = credits || {};
       if (!headline) return null;
 
-      const fullTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-full');
-      const smallTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-small');
+      const {
+        timestampDate,
+        timestampTime,
+        isToday,
+      } = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-full', true) || {};
+      const insertDateMarker = !isToday && timestampDate !== mostRecentDate;
+      mostRecentDate = timestampDate;
 
       updateIndex += 1;
       if (isNav) {
-        return <LeftNav key={elId} isActive={(!uriHasHash && updateIndex === 1) || (uriHasHash && hashId === elId)} elId={elId} headline={headline} fullTimestamp={fullTimestamp} smallTimestamp={smallTimestamp} handleNavTrigger={handleNavTrigger} />;
+        return <LeftNav
+          key={elId}
+          isActive={(!uriHasHash && updateIndex === 1) || (uriHasHash && hashId === elId)}
+          elId={elId}
+          headline={headline}
+          timestampDate={timestampDate}
+          timestampTime={timestampTime}
+          isToday={isToday}
+          insertDateMarker={insertDateMarker}
+          handleNavTrigger={handleNavTrigger}
+        />;
       }
 
       const liveUpdateContent = () => <>
-        <div className='c-liveUpdate' name={elId} key={elId}>
+        <div className={`c-liveUpdate ${insertDateMarker ? 'with-date-marker' : ''}`} name={elId} key={elId}>
+          {insertDateMarker && <div className='date-marker'>{timestampDate}</div>}
           <div className='c-headline'>
             <h2>{headline}</h2>
             <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
           </div>
           <div className='c-timestampByline'>
-            <div className='timestamp-small'>{smallTimestamp}</div>
+            <div className='timestamp-time'>{timestampTime}</div>
             <Byline by={authorData} sections={[]} excludeOrg={true} />
           </div>
           <div className='liveUpdate-content' key={`${elId}-content`}>
