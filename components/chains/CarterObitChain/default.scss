@@ -37,52 +37,64 @@
       }
     }
 
-    .c-sectionTitle {
-      position: absolute;
-      color: #fff;
-      z-index: 2;
-      top: 364px;
-      padding: 0 20px;
+    .row {
 
-      @include text-styles(1.875rem, 1.38, "Lora-Bold");
+      .c-page-title {
+        position: relative;
+        z-index: 2;
+        margin-top: -8rem;
+        margin-bottom: 0;
+  
+        @include breakpoint(tablet) {
+          position: absolute;
+          max-width: 424px;
+          padding: 0;
+          margin-right: 45px;
+          transform: translate(71%, -135px);
+        }
+  
+        @include breakpoint(desktop-sm) {
+          max-width: 600px;
+          transform: translate(430px, -267px);
+        }
+  
+        @include breakpoint(desktop-lg) {
+          max-width: 723px;
+          transform: translate(529px, -314px);
+        }
+  
+        @include breakpoint(desktop-nav) {
+          transform: translate(557px, -331px);
+        }
+  
+        @include breakpoint(desktop-xl) {
+          transform: translate(596px, -345px);
+        }
+  
+        @include breakpoint(desktop-xxl) {
+          transform: translate(654px, -385px);
+        }
+  
+        &:after {
+          display: none;
+        }
 
-      @include breakpoint(tablet) {
-        padding: 0;
-        margin-right: 45px;
-        top: 100px;
-        left: 42%;
-        transform: translateY(-40px);
-        text-align: left;
-      }
+        .c-title-content {
+          color: #fff;
+          border-bottom: none;
+          text-align: center;
+          padding: 0 20px;
 
-      @include breakpoint(desktop-sm) {
-        font-size: 3.125rem;
-        max-width: 600px;
-        top: 0;
-        transform: translate(5%, -22%);
-        right: 0;
-        height: 100%;
-      }
+          @include text-styles(1.875rem, 1.38, "Lora-Bold");
 
-      @include breakpoint(desktop-lg) {
-        max-width: 723px;
-        transform: translate(0%, -20%);
-      }
+          @include breakpoint(tablet) {
+            text-align: left;
+          }
 
-      @include breakpoint(desktop-nav) {
-        transform: translate(-3%, -20%);
-      }
-
-      @include breakpoint(desktop-xl) {
-        transform: translate(1%, -20%);
-      }
-
-      @include breakpoint(desktop-xxl) {
-        transform: translate(0, -20%);
-      }
-
-      &:after {
-        display: none;
+          @include breakpoint(desktop-sm) {
+            font-size: 3.125rem;
+          }
+        }
       }
     }
 
