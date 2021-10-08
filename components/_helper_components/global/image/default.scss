@@ -6,6 +6,10 @@
 
 .c-image-component {
   flex: 1 0 100%;
+  min-width: 100%;
+  height: auto;
+  text-align: center;
+  overflow: hidden;
 
   @include breakpoint(tablet) {
     flex: 1 0 66%;
@@ -86,7 +90,7 @@
     .photo-credit-text {
       position: absolute;
       right: 0;
-  
+
       @include breakpoint(desktop-sm) {
         display: block;
       }
@@ -107,7 +111,7 @@
       width: 40px;
       right: 10px;
       bottom: 10px;
-  
+
       .tease-icon {
         width: 52%;
         height: 52%;
@@ -116,7 +120,7 @@
       }
     }
   }
-  
+
   .with-rightrail .two-columns.left-photo-display-class .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
     @include breakpoint(desktop-sm) {
       height: 60%;
@@ -125,7 +129,7 @@
       max-height: 30px;
     }
   }
-  
+
   .two-columns.left-photo-display-class .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
     @include breakpoint(desktop-sm) {
       height: 60%;
@@ -134,7 +138,7 @@
       max-height: 40px;
     }
   }
-  
+
   .three-columns.left-photo-display-class .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon,
   .four-columns.left-photo-display-class .c-homeList .homeList-image .c-image-component .image-component-image .c-tease-icon {
     @include breakpoint(desktop-sm) {
@@ -146,50 +150,50 @@
       bottom: 8px;
     }
   }
-  
+
   .home-headline .c-image-component .image-component-image .c-tease-icon {
     bottom: 15%;
     width: 30px;
     height: 30px;
-  
+
     @include breakpoint(desktop-sm) {
       bottom: 14%;
     }
   }
-  
+
   .column-1 .home-headline .c-image-component .image-component-image .c-tease-icon,
   .column-2 .home-headline .c-image-component .image-component-image .c-tease-icon {
     right: 10px;
     bottom: 10px;
   }
-  
+
   .column-1 .c-homeList .c-image-component .image-component-image .c-tease-icon,
   .column-3 .c-homeList .c-image-component .image-component-image .c-tease-icon {
     right: 10px;
     bottom: 10px;
     width: 30px;
     height: 30px;
-  
+
     .tease-icon {
       width: 52%;
       height: 52%;
       top: 0;
       left: 0;
     }
-  
+
     @include breakpoint(tablet) {
-  
+
       .tease-icon {
         width: 52%;
         height: 52%;
         transform: none;
       }
     }
-  
+
     @include breakpoint(desktop-sm) {
       width: 30px;
       height: 30px;
-  
+
       .tease-icon {
         width: 52%;
         height: 52%;

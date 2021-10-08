@@ -96,6 +96,30 @@ export const adSlots = {
       },
     },
   },
+  'HP01-LiveUpdates': {
+    slotName: 'HP01',
+    dimensions: [
+      [
+        [970, 250],
+        [728, 90],
+      ], // lg desktop (1280+)
+      [
+        [728, 315],
+        [728, 90],
+      ], // desktop
+      [], // mobile & tablet
+    ],
+    breakpoints: [
+      [1280, 0], // lg desktop
+      [1024, 0], // desktop
+      [0, 0], // mobile & tablet
+    ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
   HP02: {
     dimensions: [
       [
@@ -122,6 +146,34 @@ export const adSlots = {
         enabled: true,
       },
     },
+  },
+  HP03: {
+    dimensions: [
+      [
+        [728, 90],
+      ], // desktop
+      [
+        [300, 250], // mobile & tablet
+      ],
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [0, 0], // mobile & tablet
+    ],
+  },
+  HP04: {
+    dimensions: [
+      [
+        [728, 90],
+      ], // desktop
+      [
+        [300, 250], // mobile & tablet
+      ],
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [0, 0], // mobile & tablet
+    ],
   },
   HP05: {
     dimensions: [
@@ -651,6 +703,25 @@ export const adSlots = {
     breakpoints: [
       [768, 0], // tablet+
       [0, 0], // mobile
+    ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
+  'MP01-LiveUpdates': {
+    slotName: 'MP01',
+    dimensions: [
+      [], // desktop+
+      [
+        [320, 150],
+        [320, 50],
+      ], // mobile & tablet
+    ],
+    breakpoints: [
+      [1024, 0], // desktop+
+      [0, 0], // mobile & tablet
     ],
     bidding: {
       amazon: {
