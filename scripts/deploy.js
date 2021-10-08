@@ -111,6 +111,7 @@ const deployToProperties = process.env.DEPLOYER_PROPERTIES.split(' ');
             Authorization: `Bearer ${authToken}`,
           },
           maxContentLength: Infinity,
+          maxBodyLength: Infinity,
         });
         console.log(`Uploaded to: ${endpoint}/bundles`);
       } catch (e) {
