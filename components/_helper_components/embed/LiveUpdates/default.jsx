@@ -140,7 +140,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         />;
       }
 
-
       return (<>
         <div className={`c-liveUpdate ${insertDateMarker ? 'with-date-marker' : ''}`} name={elId} key={elId}>
           {insertDateMarker && <div className='date-marker'>{timestampDate}</div>}

@@ -6,6 +6,16 @@
   margin: 0 auto;
 }
 
+.c-gallery-basic,
+.c-video-basic {
+  
+  #div-id-HP00 {
+    @include breakpoint(desktop-sm) {
+      margin-bottom: 30px;
+    }
+  }
+}
+
 .c-gallery-basic.b-contentMaxWidth {
   @include between-breakpoints(mobile, tablet) {
     margin: 1.25rem auto 0;
