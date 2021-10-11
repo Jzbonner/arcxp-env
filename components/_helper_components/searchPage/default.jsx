@@ -204,7 +204,6 @@ const SearchPage = ({
   useEffect(() => {
     if (!hasSearchParamBeenUsed && searchTermParam && !searchQuery) {
       setHasSearchParamBeenUsed(true);
-      console.log('searchTermParam', searchTermParam);
       setSearchQuery(searchTermParam);
       setSearchInput(searchTermParam);
     }
@@ -246,8 +245,6 @@ const SearchPage = ({
     if (columnSets.length >= 1) setAdIndex(adIndex + 1);
   }, [columnSets]);
 
-  console.log('setHasSearchParamBeenUsed', hasSearchParamBeenUsed);
-  console.log('searchInput', searchInput);
   return (
     <main className="c-searchPage b-contentMaxWidth">
         <div className="c-search-bar">
