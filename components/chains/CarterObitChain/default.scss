@@ -48,7 +48,6 @@
   
         @include breakpoint(tablet) {
           position: absolute;
-          /* max-width: 424px; */
           padding: 0;
           margin-right: 45px;
           transform: translate(43vw, -154px);
@@ -98,7 +97,6 @@
 
           @include between-breakpoints(tablet, desktop-sm) {
             width: 50%;
-            /* transform: translate(64%, -142px); */
           }
 
           @include breakpoint(desktop-sm) {
