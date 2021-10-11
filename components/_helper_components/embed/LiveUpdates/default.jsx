@@ -52,7 +52,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
             key={`MP01-${index}`}
             customId={`div-id-MP01_${index}`}
           />
-          {isMeteredStory && <div className='story-paygate_placeholder'></div>}
         </>;
         break;
       case 3:
@@ -93,13 +92,18 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     return response;
   };
 
+
   const loopThroughUpdates = (isNav = false) => {
     const handleNavTrigger = (evt) => {
       console.log('handlenavtrigger', evt.target);
     };
+
+    const firstLiveUpdate = liveUpdates.slice(0, 1);
+    const restOfLiveUpdates = liveUpdates.slice(1, liveUpdates.length);
     let updateIndex = 0;
     let mostRecentDate = null;
-    return liveUpdates.map((update) => {
+
+    const liveUpdatesMapper = updates => updates.map((update) => {
       const {
         headlines,
         _id: elId,
@@ -121,6 +125,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       mostRecentDate = timestampDate;
 
       updateIndex += 1;
+
       if (isNav) {
         return <LeftNav
           key={elId}
@@ -135,7 +140,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         />;
       }
 
-      const liveUpdateContent = () => <>
+      return (<>
         <div className={`c-liveUpdate ${insertDateMarker ? 'with-date-marker' : ''}`} name={elId} key={elId}>
           {insertDateMarker && <div className='date-marker'>{timestampDate}</div>}
           <div className='c-headline'>
@@ -150,17 +155,29 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
             <ContentElements contentElements={contentElements} ampPage={false} />
           </div>
         </div>
-        {/* we insert items (ads, placeholders, etc) at specific intervals.
-
-          For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
-
-          We also have one for the newsletter placeholder (after #6)
-        */}
-        {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
-      </>;
-
-      return liveUpdateContent();
+          {/* we insert items (ads, placeholders, etc) at specific intervals.
+            For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
+            We also have one for the newsletter placeholder (after #6)
+          */}
+          {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
+        </>);
     });
+
+    if (isMeteredStory && !isNav) {
+      return (
+        <>
+          {liveUpdatesMapper(firstLiveUpdate)}
+          <div className='story-paygate_placeholder'>
+           {liveUpdatesMapper(restOfLiveUpdates)}
+          </div>
+        </>
+      );
+    }
+    return (
+      <>
+      {liveUpdatesMapper(liveUpdates)}
+    </>
+    );
   };
 
   return <div className='c-liveUpdates'>
