@@ -22,6 +22,10 @@ const LiveUpdates = ({ data: liveUpdates }) => {
   const hashId = uriHasHash ? requestUri.substr(requestUri.indexOf('#') + 1) : null;
   let toggledAdSlot = 'HP03';
 
+  const firstLiveUpdate = liveUpdates.slice(0, 0);
+  const restOfLiveUpdates = liveUpdates.slice(1, liveUpdates.length);
+
+
   const copyToClipboard = (e) => {
     e.preventDefault();
     let action = () => console.error('fallback in case Window or Navigator are unknown');
@@ -97,8 +101,10 @@ const LiveUpdates = ({ data: liveUpdates }) => {
     const handleNavTrigger = (evt) => {
       console.log('handlenavtrigger', evt.target);
     };
+
     let updateIndex = 0;
-    return liveUpdates.map((update) => {
+
+    const liveUpdatesMapper = updates => updates.map((update) => {
       const {
         headlines,
         _id: elId,
@@ -120,30 +126,84 @@ const LiveUpdates = ({ data: liveUpdates }) => {
       }
 
       const liveUpdateContent = () => <>
-        <div className='c-liveUpdate' name={elId} key={elId}>
-          <div className='c-headline'>
-            <h2>{headline}</h2>
-            <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
+          <div className='c-liveUpdate' name={elId} key={elId}>
+            <div className='c-headline'>
+              <h2>{headline}</h2>
+              <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
+            </div>
+            <div className='c-timestampByline'>
+              <div className='timestamp-small'>{smallTimestamp}</div>
+              <Byline by={authorData} sections={[]} excludeOrg={true} />
+            </div>
+            <div className='liveUpdate-content' key={`${elId}-content`}>
+              <ContentElements contentElements={contentElements} ampPage={false} />
+            </div>
           </div>
-          <div className='c-timestampByline'>
-            <div className='timestamp-small'>{smallTimestamp}</div>
-            <Byline by={authorData} sections={[]} excludeOrg={true} />
-          </div>
-          <div className='liveUpdate-content' key={`${elId}-content`}>
-            <ContentElements contentElements={contentElements} ampPage={false} />
-          </div>
-        </div>
-        {/* we insert items (ads, placeholders, etc) at specific intervals.
-
-          For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
-
-          We also have one for the newsletter placeholder (after #6)
-        */}
-        {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
-      </>;
-
+          {/* we insert items (ads, placeholders, etc) at specific intervals.
+            For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
+            We also have one for the newsletter placeholder (after #6)
+          */}
+          {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
+        </>;
       return liveUpdateContent();
     });
+
+    return (
+      <>
+        {liveUpdatesMapper(firstLiveUpdate)}
+        <div className='story-paygate_placeholder'>
+         {liveUpdatesMapper(restOfLiveUpdates)}
+        </div>
+      </>
+    );
+
+
+    // return liveUpdates.map((update) => {
+    //   const {
+    //     headlines,
+    //     _id: elId,
+    //     content_elements: contentElements,
+    //     display_date: displayDate,
+    //     first_publish_date: firstPublishDate,
+    //     credits,
+    //   } = update;
+    //   const { basic: headline } = headlines || {};
+    //   const { by: authorData } = credits || {};
+    //   if (!headline) return null;
+
+    //   const fullTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-full');
+    //   const smallTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-small');
+
+    //   updateIndex += 1;
+    //   if (isNav) {
+    //     return <LeftNav key={elId} isActive={(!uriHasHash && updateIndex === 1) || (uriHasHash && hashId === elId)} elId={elId} headline={headline} fullTimestamp={fullTimestamp} smallTimestamp={smallTimestamp} handleNavTrigger={handleNavTrigger} />;
+    //   }
+
+    //   const liveUpdateContent = () => <>
+    //     <div className='c-liveUpdate' name={elId} key={elId}>
+    //       <div className='c-headline'>
+    //         <h2>{headline}</h2>
+    //         <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
+    //       </div>
+    //       <div className='c-timestampByline'>
+    //         <div className='timestamp-small'>{smallTimestamp}</div>
+    //         <Byline by={authorData} sections={[]} excludeOrg={true} />
+    //       </div>
+    //       <div className='liveUpdate-content' key={`${elId}-content`}>
+    //         <ContentElements contentElements={contentElements} ampPage={false} />
+    //       </div>
+    //     </div>
+    //     {/* we insert items (ads, placeholders, etc) at specific intervals.
+
+    //       For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
+
+    //       We also have one for the newsletter placeholder (after #6)
+    //     */}
+    //     {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
+    //   </>;
+
+    //   return liveUpdateContent();
+    // });
   };
 
   return <div className='c-liveUpdates'>
