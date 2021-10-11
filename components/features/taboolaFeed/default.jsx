@@ -8,11 +8,11 @@ import deferThis from '../../_helper_components/global/utils/deferLoading';
 import '../../../src/styles/base/_utility.scss';
 import './default.scss';
 
-const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
+const TaboolaFeed = ({ ampPage, lazyLoad = false, treatAsArticle = false }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
-  const { layout } = appContext;
+  const { layout: pageLayout } = appContext;
   const currentEnv = fetchEnv();
   const { taboola, siteName } = getProperties(arcSite);
   const { moapPTD, boapPTD } = taboola[currentEnv] || {};
@@ -24,6 +24,8 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
     containerName,
     placementName,
   } = taboola || {};
+  // workaround to treat non-article pages (i.e. Live Updates) as articles
+  const layout = treatAsArticle ? 'article-basic' : pageLayout;
 
   if (ampPage) {
     return (
@@ -79,6 +81,7 @@ const TaboolaFeed = ({ ampPage, lazyLoad = false }) => {
 TaboolaFeed.propTypes = {
   ampPage: PropTypes.bool,
   lazyLoad: PropTypes.bool, // flag for lazyloading (e.g. connext/paywall)
+  treatAsArticle: PropTypes.bool, // flag for treating pb pages as articles
 };
 
 export default TaboolaFeed;

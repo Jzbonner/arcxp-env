@@ -11,7 +11,7 @@ import LeftNav from './leftNav/default';
 import './default.scss';
 
 /* this helper component renders the Custom Info Box as outlined in APD-1441 */
-const LiveUpdates = ({ data: liveUpdates }) => {
+const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   const { pageIsLive, paywallStatus } = getContentMeta();
   const isMeteredStory = paywallStatus === 'premium';
   if (!liveUpdates || !pageIsLive) return <span><i>There are no Live Updates to display.</i></span>;
@@ -21,10 +21,6 @@ const LiveUpdates = ({ data: liveUpdates }) => {
   const uriHasHash = requestUri.indexOf('#') > -1;
   const hashId = uriHasHash ? requestUri.substr(requestUri.indexOf('#') + 1) : null;
   let toggledAdSlot = 'HP03';
-
-  const firstLiveUpdate = liveUpdates.slice(0, 0);
-  const restOfLiveUpdates = liveUpdates.slice(1, liveUpdates.length);
-
 
   const copyToClipboard = (e) => {
     e.preventDefault();
@@ -56,7 +52,6 @@ const LiveUpdates = ({ data: liveUpdates }) => {
             key={`MP01-${index}`}
             customId={`div-id-MP01_${index}`}
           />
-          {isMeteredStory && <div className='story-paygate_placeholder'></div>}
         </>;
         break;
       case 3:
@@ -97,12 +92,16 @@ const LiveUpdates = ({ data: liveUpdates }) => {
     return response;
   };
 
+
   const loopThroughUpdates = (isNav = false) => {
     const handleNavTrigger = (evt) => {
       console.log('handlenavtrigger', evt.target);
     };
 
+    const firstLiveUpdate = liveUpdates.slice(0, 1);
+    const restOfLiveUpdates = liveUpdates.slice(1, liveUpdates.length);
     let updateIndex = 0;
+    let mostRecentDate = null;
 
     const liveUpdatesMapper = updates => updates.map((update) => {
       const {
@@ -117,93 +116,69 @@ const LiveUpdates = ({ data: liveUpdates }) => {
       const { by: authorData } = credits || {};
       if (!headline) return null;
 
-      const fullTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-full');
-      const smallTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-small');
+      const {
+        timestampDate,
+        timestampTime,
+        isToday,
+      } = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-full', true) || {};
+      const insertDateMarker = !isToday && timestampDate !== mostRecentDate;
+      mostRecentDate = timestampDate;
 
       updateIndex += 1;
+
       if (isNav) {
-        return <LeftNav key={elId} isActive={(!uriHasHash && updateIndex === 1) || (uriHasHash && hashId === elId)} elId={elId} headline={headline} fullTimestamp={fullTimestamp} smallTimestamp={smallTimestamp} handleNavTrigger={handleNavTrigger} />;
+        return <LeftNav
+          key={elId}
+          isActive={(!uriHasHash && updateIndex === 1) || (uriHasHash && hashId === elId)}
+          elId={elId}
+          headline={headline}
+          timestampDate={timestampDate}
+          timestampTime={timestampTime}
+          isToday={isToday}
+          insertDateMarker={insertDateMarker}
+          handleNavTrigger={handleNavTrigger}
+        />;
       }
 
-      const liveUpdateContent = () => <>
-          <div className='c-liveUpdate' name={elId} key={elId}>
-            <div className='c-headline'>
-              <h2>{headline}</h2>
-              <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
-            </div>
-            <div className='c-timestampByline'>
-              <div className='timestamp-small'>{smallTimestamp}</div>
-              <Byline by={authorData} sections={[]} excludeOrg={true} />
-            </div>
-            <div className='liveUpdate-content' key={`${elId}-content`}>
-              <ContentElements contentElements={contentElements} ampPage={false} />
-            </div>
+
+      return (<>
+        <div className={`c-liveUpdate ${insertDateMarker ? 'with-date-marker' : ''}`} name={elId} key={elId}>
+          {insertDateMarker && <div className='date-marker'>{timestampDate}</div>}
+          <div className='c-headline'>
+            <h2>{headline}</h2>
+            <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
           </div>
+          <div className='c-timestampByline'>
+            <div className='timestamp-time'>{timestampTime}</div>
+            <Byline by={authorData} sections={[]} excludeOrg={true} />
+          </div>
+          <div className='liveUpdate-content' key={`${elId}-content`}>
+            <ContentElements contentElements={contentElements} ampPage={false} />
+          </div>
+        </div>
           {/* we insert items (ads, placeholders, etc) at specific intervals.
             For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
             We also have one for the newsletter placeholder (after #6)
           */}
           {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
-        </>;
-      return liveUpdateContent();
+        </>);
     });
 
+    if (isMeteredStory && !isNav) {
+      return (
+        <>
+          {liveUpdatesMapper(firstLiveUpdate)}
+          <div className='story-paygate_placeholder'>
+           {liveUpdatesMapper(restOfLiveUpdates)}
+          </div>
+        </>
+      );
+    }
     return (
       <>
-        {liveUpdatesMapper(firstLiveUpdate)}
-        <div className='story-paygate_placeholder'>
-         {liveUpdatesMapper(restOfLiveUpdates)}
-        </div>
-      </>
+      {liveUpdatesMapper(liveUpdates)}
+    </>
     );
-
-
-    // return liveUpdates.map((update) => {
-    //   const {
-    //     headlines,
-    //     _id: elId,
-    //     content_elements: contentElements,
-    //     display_date: displayDate,
-    //     first_publish_date: firstPublishDate,
-    //     credits,
-    //   } = update;
-    //   const { basic: headline } = headlines || {};
-    //   const { by: authorData } = credits || {};
-    //   if (!headline) return null;
-
-    //   const fullTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-full');
-    //   const smallTimestamp = computeTimeStamp(firstPublishDate, displayDate, false, false, 'liveupdate-small');
-
-    //   updateIndex += 1;
-    //   if (isNav) {
-    //     return <LeftNav key={elId} isActive={(!uriHasHash && updateIndex === 1) || (uriHasHash && hashId === elId)} elId={elId} headline={headline} fullTimestamp={fullTimestamp} smallTimestamp={smallTimestamp} handleNavTrigger={handleNavTrigger} />;
-    //   }
-
-    //   const liveUpdateContent = () => <>
-    //     <div className='c-liveUpdate' name={elId} key={elId}>
-    //       <div className='c-headline'>
-    //         <h2>{headline}</h2>
-    //         <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
-    //       </div>
-    //       <div className='c-timestampByline'>
-    //         <div className='timestamp-small'>{smallTimestamp}</div>
-    //         <Byline by={authorData} sections={[]} excludeOrg={true} />
-    //       </div>
-    //       <div className='liveUpdate-content' key={`${elId}-content`}>
-    //         <ContentElements contentElements={contentElements} ampPage={false} />
-    //       </div>
-    //     </div>
-    //     {/* we insert items (ads, placeholders, etc) at specific intervals.
-
-    //       For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
-
-    //       We also have one for the newsletter placeholder (after #6)
-    //     */}
-    //     {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
-    //   </>;
-
-    //   return liveUpdateContent();
-    // });
   };
 
   return <div className='c-liveUpdates'>
@@ -213,7 +188,7 @@ const LiveUpdates = ({ data: liveUpdates }) => {
     </div>
     <div className='c-liveUpdateContent'>
       {loopThroughUpdates()}
-      <TaboolaFeed ampPage={false} lazyLoad={true} />
+      {enableTaboola && <TaboolaFeed ampPage={false} lazyLoad={true} treatAsArticle={true} />}
     </div>
   </div>;
 };
@@ -221,6 +196,7 @@ const LiveUpdates = ({ data: liveUpdates }) => {
 
 LiveUpdates.propTypes = {
   data: PropTypes.array,
+  enableTaboola: PropTypes.bool,
 };
 LiveUpdates.defaultProps = {
   componentName: 'LiveUpdates',

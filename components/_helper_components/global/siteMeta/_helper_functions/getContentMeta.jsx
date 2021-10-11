@@ -225,7 +225,7 @@ const getContentMeta = () => {
     nonPrimarySet,
     isOpinion,
     blogName,
-    paywallStatus: paywallStatus || pbPaywall,
+    paywallStatus: pbPaywall || paywallStatus,
     syndication,
     noIndex,
     enableDarkMode,
