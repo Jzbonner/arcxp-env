@@ -38,6 +38,7 @@
     }
 
     .row {
+      position: relative;
 
       .c-page-title {
         position: relative;
@@ -47,15 +48,19 @@
   
         @include breakpoint(tablet) {
           position: absolute;
-          max-width: 424px;
+          /* max-width: 424px; */
           padding: 0;
           margin-right: 45px;
-          transform: translate(71%, -135px);
+          transform: translate(43vw, -154px);
+        }
+
+        @include between-breakpoints(tablet, desktop-sm) {
+          width: 100vw;
         }
   
         @include breakpoint(desktop-sm) {
           max-width: 600px;
-          transform: translate(430px, -267px);
+          transform: translate(430px,-285px);
         }
   
         @include breakpoint(desktop-lg) {
@@ -89,6 +94,11 @@
 
           @include breakpoint(tablet) {
             text-align: left;
+          }
+
+          @include between-breakpoints(tablet, desktop-sm) {
+            width: 50%;
+            /* transform: translate(64%, -142px); */
           }
 
           @include breakpoint(desktop-sm) {
