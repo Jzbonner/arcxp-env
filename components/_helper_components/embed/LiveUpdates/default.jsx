@@ -92,16 +92,43 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     return response;
   };
 
+  const highlightNavItem = (hashTarget) => {
+    const activeLink = document.querySelector('.c-liveUpdateNav .is-active');
+    activeLink.setAttribute('class', activeLink.className.replace('is-active', ''));
+    document.querySelector(`.c-liveUpdateNav a[href='#${hashTarget}']`).className += ' is-active';
+  };
+
+  const handleNavTrigger = (evt, hash) => {
+    evt.preventDefault();
+    let target = evt.target ? evt.target.getAttribute('href') : null;
+    if (!target && evt) {
+      // it's not the top-level link - but we do have an event - so we have to move up a level
+      let parent = evt.target.parentNode;
+      if (parent.nodeName !== 'A') {
+        // timestamps are grandchildren of the nav `A` element so we need to go up one more level
+        parent = parent.parentNode;
+      }
+      target = parent.getAttribute('href');
+    }
+    const hashTarget = !target && hash ? hash : target && target.substr(target.indexOf('#') + 1);
+    const targetUpdate = document.querySelector(`[name='${hashTarget}']`) || null;
+    if (targetUpdate) {
+      // move to the selected update in the content area
+      window.scrollTo({
+        top: targetUpdate.offsetTop - 60, // to handle sticky header
+        left: 0,
+        behavior: 'smooth',
+      });
+      // udate the `is-active` indicator in the left nav
+      highlightNavItem(hashTarget);
+    }
+  };
 
   const loopThroughUpdates = (isNav = false) => {
-    const handleNavTrigger = (evt) => {
-      console.log('handlenavtrigger', evt.target);
-    };
-
-    const firstLiveUpdate = liveUpdates.slice(0, 1);
-    const restOfLiveUpdates = liveUpdates.slice(1, liveUpdates.length);
     let updateIndex = 0;
     let mostRecentDate = null;
+    const firstLiveUpdate = liveUpdates.slice(0, 1);
+    const restOfLiveUpdates = liveUpdates.slice(1, liveUpdates.length);
 
     const liveUpdatesMapper = updates => updates.map((update) => {
       const {
@@ -155,12 +182,13 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
             <ContentElements contentElements={contentElements} ampPage={false} />
           </div>
         </div>
-          {/* we insert items (ads, placeholders, etc) at specific intervals.
-            For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
-            We also have one for the newsletter placeholder (after #6)
-          */}
-          {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
-        </>);
+        {/* we insert items (ads, placeholders, etc) at specific intervals.
+          For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
+          We also have one for the newsletter placeholder (after #6)
+        */}
+        {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
+        {hashId && updateIndex === liveUpdates.length && handleNavTrigger(null, hashId)}
+      </>);
     });
 
     if (isMeteredStory && !isNav) {
@@ -173,11 +201,9 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         </>
       );
     }
-    return (
-      <>
+    return <>
       {liveUpdatesMapper(liveUpdates)}
-    </>
-    );
+    </>;
   };
 
   return <div className='c-liveUpdates'>
