@@ -37,6 +37,7 @@ const SearchPage = ({
   const [columnSets, setColumnSets] = useState([]);
   const [adIndex, setAdIndex] = useState(1);
   const [mapStartIndex, setMapStartIndex] = useState(0);
+  const [hasSearchParamBeenUsed, setHasSearchParamBeenUsed] = useState(false);
   const RP01RP09Array = [];
   const queryParams = getQueryParams(requestUri);
   const searchTermParam = queryParams && queryParams.q ? queryParams.q : null;
@@ -201,6 +202,14 @@ const SearchPage = ({
   };
 
   useEffect(() => {
+    if (!hasSearchParamBeenUsed && searchTermParam && !searchQuery) {
+      setHasSearchParamBeenUsed(true);
+      setSearchQuery(searchTermParam);
+      setSearchInput(searchTermParam);
+    }
+  }, [searchTermParam]);
+
+  useEffect(() => {
     if (searchMetaData) {
       if (searchMetaData?.data.length > 0) {
         filteredTeases = AddFirstInlineImage(searchMetaData.data, 'list', ['list']);
@@ -248,7 +257,7 @@ const SearchPage = ({
               placeholder=""
               onChange={onChangeHandler}
               onKeyDown={handleKeyDown}
-              value={searchInput || searchTermParam}></input>
+              value={searchInput}></input>
           </div>
           <button onClick={handleButtonClick} className="search-btn">Search</button>
         </div>
