@@ -60,7 +60,7 @@
   
         @include breakpoint(desktop-sm) {
           max-width: 600px;
-          transform: translate(544px, -346px);
+          transform: translate(calc(40vw + 40px), calc(-292px - 15%));
         }
   
         @include breakpoint(desktop-lg) {
