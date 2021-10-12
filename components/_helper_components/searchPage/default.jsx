@@ -138,7 +138,7 @@ const SearchPage = ({
   const searchMetaData = useContent({
     source: 'search-page',
     query: {
-      q: `${searchQuery || searchTermParam}`,
+      q: `${searchQuery}`,
       page: pageCount,
       arcSite,
       sortByDate: sortByDateState,
@@ -192,7 +192,9 @@ const SearchPage = ({
     e.preventDefault();
     if (searchInput === '') {
       // empty search term
+      resetStates();
       setStoryEls('no-results');
+      setSearchQuery(searchInput);
     } else if (searchInput !== searchQuery) {
       /* searching with a new query means a new story set
       (and therefore, new column sets) - so, reset the states */
