@@ -507,7 +507,7 @@
 .c-sectionCentered {
   // Needed to work with b-sectionHome-padding and maintain the same max with
   max-width: 880px; // 820px + 30px padding on each side
-  margin: 1rem;
+  margin: 1rem 0;
 
   @include breakpoint(tablet) {
     margin: 1.25rem auto;
