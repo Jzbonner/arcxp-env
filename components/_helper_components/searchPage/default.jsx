@@ -138,7 +138,7 @@ const SearchPage = ({
   const searchMetaData = useContent({
     source: 'search-page',
     query: {
-      q: `${searchQuery || searchTermParam}`,
+      q: `${searchQuery}`,
       page: pageCount,
       arcSite,
       sortByDate: sortByDateState,
@@ -193,6 +193,7 @@ const SearchPage = ({
     if (searchInput === '') {
       // empty search term
       setStoryEls('no-results');
+      console.log('is empty search');
     } else if (searchInput !== searchQuery) {
       /* searching with a new query means a new story set
       (and therefore, new column sets) - so, reset the states */
@@ -206,6 +207,7 @@ const SearchPage = ({
       setHasSearchParamBeenUsed(true);
       setSearchQuery(searchTermParam);
       setSearchInput(searchTermParam);
+      console.log('running useEffect', searchTermParam);
     }
   }, [searchTermParam]);
 
@@ -244,6 +246,9 @@ const SearchPage = ({
   useEffect(() => {
     if (columnSets.length >= 1) setAdIndex(adIndex + 1);
   }, [columnSets]);
+
+  console.log('searchQuery', searchQuery);
+  console.log('search els', storyEls);
 
   return (
     <main className="c-searchPage b-contentMaxWidth">
