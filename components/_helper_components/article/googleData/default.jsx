@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { useFusionContext } from 'fusion:context';
+import { useFusionContext, useAppContext } from 'fusion:context';
 import fetchEnv from '../../global/utils/environment';
 import getContentMeta from '../../global/siteMeta/_helper_functions/getContentMeta';
 
@@ -11,26 +11,97 @@ const GoogleStructuredData = (props) => {
     return null;
   }
   const { contextPath, deployment } = props || {};
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const appContext = useAppContext();
+  const { requestUri } = appContext;
+
   const {
-    title, pageContentType, initialPublishDate, url, topSectionName, promoItems, credits, dateModified, articleDesc,
+    websiteLogo, orgName, siteName, googleLogo,
+  } = getProperties(arcSite);
+  let websiteURL;
+  const env = fetchEnv();
+  const site = siteName.replace(/-/g, '').toLowerCase();
+  if (env === 'prod') {
+    websiteURL = `https://${site}.com`;
+  } else if (env !== 'prod') {
+    websiteURL = `https://${env}.${site}.com`;
+  }
+
+  const {
+    pageIsLive, title, pageContentType, initialPublishDate, url, topSectionName, promoItems, credits,
+    dateModified, articleDesc, metaTitle, metaDescription, stories, coverageEndTime,
   } = contentMeta;
 
-  if (pageContentType === 'article' || pageContentType === 'wire' || pageContentType === 'blog') {
-    const fusionContext = useFusionContext();
-    const { arcSite } = fusionContext;
-    const env = fetchEnv();
-    const desc = articleDesc && articleDesc.basic ? articleDesc.basic : '';
-    const {
-      websiteLogo, orgName, siteName, googleLogo,
-    } = getProperties(arcSite);
-    let websiteURL;
-    const site = siteName.replace(/-/g, '').toLowerCase();
+  if (pageIsLive === 'true' || pageIsLive === 'yes') {
+    const scriptData = {
+      '@context': 'http://schema.org',
+      '@type': 'LiveBlogPosting',
+      '@id': `${websiteURL}${requestUri}`,
+      inLanguage: 'en_US',
+      about: {
+        '@type': 'Event',
+        startDate: stories[0]?.storyDateModified,
+        name: metaTitle,
+      },
+      coverageStartTime: stories[0]?.storyDateModified,
+      coverageEndTime,
+      headline: metaTitle,
+      description: metaDescription,
+      liveBlogUpdate: stories.map((story) => {
+        const {
+          storyTitle, storyInitialPublishDate, storyPromoItems, storyCredits, storyInitialBodyText,
+        } = story;
 
-    if (env === 'prod') {
-      websiteURL = `https://${site}.com`;
-    } else if (env !== 'prod') {
-      websiteURL = `https://${env}.${site}.com`;
-    }
+        const { url: featuredIMG } = storyPromoItems && storyPromoItems.basic && storyPromoItems.basic.url ? storyPromoItems.basic : {};
+        const { url: videoThumbnail } = storyPromoItems
+        && storyPromoItems.lead_art && storyPromoItems.lead_art.promo_image ? storyPromoItems.lead_art.promo_image : {};
+        const { url: galleryThumbnail } = storyPromoItems && storyPromoItems.basic && storyPromoItems.basic.promo_items && storyPromoItems.basic.promo_items.basic
+          ? storyPromoItems.basic.promo_items.basic
+          : {};
+
+        // image priority: featured image, video thumb, gallery thumb, logo
+        let articleIMG = featuredIMG || videoThumbnail || galleryThumbnail || websiteLogo || '';
+        if (articleIMG.indexOf('/resources/') > -1) {
+          articleIMG = `${websiteURL}${deployment(`${contextPath}${articleIMG}`)}`;
+        }
+        // if multiple authors are listed, display all of them
+        let author;
+        if (storyCredits?.by?.length > 1) {
+          author = storyCredits.by.map(eachAuthor => eachAuthor.name).join(', ');
+        } else {
+          author = storyCredits?.by[0]?.name;
+        }
+
+        return {
+          '@type': 'BlogPosting',
+          datePublished: storyInitialPublishDate,
+          headline: storyTitle,
+          author: {
+            '@type': 'Person',
+            name: author,
+          },
+          image: {
+            '@type': 'ImageObject',
+            url: articleIMG,
+          },
+          articleBody: storyInitialBodyText,
+        };
+      }),
+    };
+
+    return (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `${JSON.stringify(scriptData)}`,
+          }}
+        ></script>
+    );
+  }
+
+  if (pageContentType === 'article' || pageContentType === 'wire' || pageContentType === 'blog') {
+    const desc = articleDesc && articleDesc.basic ? articleDesc.basic : '';
     const publisherLogo = `${websiteURL}${deployment(`${contextPath}${googleLogo}`)}`;
 
     const { url: featuredIMG } = promoItems && promoItems.basic && promoItems.basic.url ? promoItems.basic : {};
