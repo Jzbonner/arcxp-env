@@ -408,7 +408,7 @@
         margin-top: 20px;
         position: relative;
 
-        @include between-breakpoints(mobile, desktop-sm) {
+        @include between-breakpoints(mobile, desktop-lg) {
 
           .c-headline {
             margin-top: 14px;

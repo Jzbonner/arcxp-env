@@ -219,11 +219,10 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   });
 
   const loopThroughUpdates = (isNav = false) => {
-    let updateIndex = 0;
-    let mostRecentDate = null;
     const firstLiveUpdate = liveUpdates.slice(0, 1);
     const restOfLiveUpdates = liveUpdates.slice(1, liveUpdates.length);
-
+    let updateIndex = 0;
+    let mostRecentDate = null;
     const liveUpdatesMapper = updates => updates.map((update) => {
       const {
         headlines,
@@ -264,7 +263,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         />;
       }
 
-      return (<>
+      return <>
         <div className={`c-liveUpdate ${insertDateMarker ? 'with-date-marker' : ''}`} name={elId} key={elId}>
           {insertDateMarker && <div className='date-marker'>{timestampDate}</div>}
           <div className='c-headline'>
@@ -285,22 +284,19 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         */}
         {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
         {hashId && updateIndex === liveUpdates.length && handleNavTrigger(null, hashId)}
-      </>);
+      </>;
     });
 
     if (isMeteredStory && !isNav) {
-      return (
-        <>
-          {liveUpdatesMapper(firstLiveUpdate)}
-          <div className='story-paygate_placeholder'>
-           {liveUpdatesMapper(restOfLiveUpdates)}
-          </div>
-        </>
-      );
+      return <>
+        {liveUpdatesMapper(firstLiveUpdate)}
+        <div className='story-paygate_placeholder'>
+         {liveUpdatesMapper(restOfLiveUpdates)}
+        </div>
+      </>;
     }
-    return <>
-      {liveUpdatesMapper(liveUpdates)}
-    </>;
+
+    return liveUpdatesMapper(liveUpdates);
   };
 
   return <div className='c-liveUpdates'>
