@@ -117,7 +117,7 @@
     max-width: 100%;
 
     .c-liveUpdateNav {
-      width: 50px;
+      flex: 0 0 50px;
       align-self: flex-start;
       max-height: calc(100vh - 60px);
       overflow: auto;
@@ -126,8 +126,7 @@
       @include position-sticky(60px);
 
       @include breakpoint(tablet) {
-        min-width: 120px;
-        width: 20%;
+        flex-basis: 20%;
         max-width: 200px;
       }
 
@@ -184,7 +183,7 @@
       a {
         display: block;
         border-bottom: 1px solid #cdcdcd;
-        padding: 10px 5px 10px 0;
+        padding: 10px 10px 10px 0;
         color: #313132;
         text-align: center;
 
@@ -245,6 +244,7 @@
 
     .c-liveUpdateContent {
       width: 100%;
+      max-width: 100%;
       box-sizing: border-box;
       border-left: 1px solid #cdcdcd;
       padding-left: 12px;
@@ -259,13 +259,21 @@
         padding-left: 30px;
       }
 
+      > .c-liveUpdate:first-child {
+        border-top: none;
+
+        .date-marker {
+          display: none;
+          margin-top: 0;
+        }
+      }
+
       .c-sectionHome.full-width .c-contentElements & .arc_ad[class*="HP01"] {
         margin-bottom: 0;
       }
 
       .arcad {
         padding-bottom: 30px !important;
-        border-bottom: 1px solid #cdcdcd;
       }
 
       .c-headline {
@@ -392,23 +400,15 @@
     .c-liveUpdate {
       border-top: 1px solid #cdcdcd;
 
-      &:first-child {
-        border-top: none;
-
-        .date-marker {
-          display: none;
-        }
-      }
-
       @include between-breakpoints(mobile, tablet) {
         margin-bottom: 15px;
       }
 
-      &.with-date-marker:not(:first-child) {
+      &.with-date-marker {
         margin-top: 20px;
         position: relative;
 
-        @include between-breakpoints(mobile, tablet) {
+        @include between-breakpoints(mobile, desktop-lg) {
 
           .c-headline {
             margin-top: 14px;
@@ -425,12 +425,11 @@
         padding-right: 10px;
         letter-spacing: -.28px;
 
-        @include text-styles(1.375rem, 2, "Gordita-Bold");
+        @include text-styles(1.375rem, 1, "Gordita-Bold");
 
         @include breakpoint(tablet) {
           font-size: 1.62rem;
           letter-spacing: -.38px;
-          top: -28px;
           padding-right: 15px;
         }
       }
