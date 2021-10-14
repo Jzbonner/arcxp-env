@@ -186,11 +186,31 @@ const getContentMeta = () => {
     isOpinion = !!sections.find(section => section._id && section._id.indexOf('/opinion') > -1);
   }
 
+  const getInitialBodyText = contentEls => contentEls.reduce((accumulator, el) => {
+    if (el.type === 'text' && accumulator.length < 200) {
+      return accumulator + el.content;
+    }
+    return accumulator;
+  }, '');
+
+  const stories = Array.isArray(globalContent) && globalContent.map(content => ({
+    /* eslint-disable camelcase */
+    storyTitle: content?.headlines?.basic,
+    storyInitialPublishDate: content?.first_publish_date,
+    storyPromoItems: content?.promo_items,
+    storyCredits: content?.credits,
+    storyInitialBodyText: getInitialBodyText(content?.content_elements),
+    /* eslint-enable camelcase */
+  }));
+
   const blogName = metaValue('blogname');
   const noIndex = metaValue('no index');
   const enableDarkMode = metaValue('dark mode') === 'true';
   const pageIsLive = metaValue('live');
   const pbPaywall = metaValue('story-meter');
+  const metaTitle = metaValue('title');
+  const metaDescription = metaValue('description');
+  const coverageEndTime = metaValue('coverage end time');
 
   const faviconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${favicon}`)}`;
   const appleIconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
@@ -230,6 +250,10 @@ const getContentMeta = () => {
     noIndex,
     enableDarkMode,
     pageIsLive,
+    metaTitle,
+    metaDescription,
+    stories,
+    coverageEndTime,
   };
 };
 
