@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import LazyLoad from 'react-lazyload';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import ContentElements from '../../article/contentElements/default.jsx';
@@ -234,6 +235,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       const { basic: headline } = headlines || {};
       const { by: authorData } = credits || {};
       if (!headline) return null;
+      const isFirstUpdate = updateIndex === 0;
 
       const {
         timestampDate,
@@ -263,20 +265,27 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         </>;
       }
 
+      const liveUpdateContent = () => <>
+        <div className='c-headline'>
+          <h2>{headline}</h2>
+          <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
+        </div>
+        <div className='c-timestampByline'>
+          <div className='timestamp-time'>{timestampTime}</div>
+          <Byline by={authorData} sections={[]} excludeOrg={true} />
+        </div>
+        <div className='liveUpdate-content' key={`${elId}-content`}>
+          <ContentElements contentElements={contentElements} ampPage={false} />
+        </div>
+      </>;
+
       return <>
         <div className={`c-liveUpdate ${insertDateMarker ? 'with-date-marker' : ''}`} name={elId} key={elId}>
           {insertDateMarker && <div className='date-marker'>{timestampDate}</div>}
-          <div className='c-headline'>
-            <h2>{headline}</h2>
-            <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
-          </div>
-          <div className='c-timestampByline'>
-            <div className='timestamp-time'>{timestampTime}</div>
-            <Byline by={authorData} sections={[]} excludeOrg={true} />
-          </div>
-          <div className='liveUpdate-content' key={`${elId}-content`}>
-            <ContentElements contentElements={contentElements} ampPage={false} />
-          </div>
+          {!isFirstUpdate && <LazyLoad placeholder={<div className="c-placeholder-update"></div>} offset={300} once={true}>
+            {liveUpdateContent()}
+          </LazyLoad>}
+          {isFirstUpdate && liveUpdateContent()}
         </div>
         {/* we insert items (ads, placeholders, etc) at specific intervals.
           For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
