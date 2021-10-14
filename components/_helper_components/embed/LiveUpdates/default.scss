@@ -425,12 +425,11 @@
         padding-right: 10px;
         letter-spacing: -.28px;
 
-        @include text-styles(1.375rem, 2, "Gordita-Bold");
+        @include text-styles(1.375rem, 1, "Gordita-Bold");
 
         @include breakpoint(tablet) {
           font-size: 1.62rem;
           letter-spacing: -.38px;
-          top: -28px;
           padding-right: 15px;
         }
       }
