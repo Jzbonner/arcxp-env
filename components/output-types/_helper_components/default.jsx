@@ -13,6 +13,7 @@ import AmpRelLink from '../../_helper_components/amp/AmpRelLink';
 import GoogleStructuredData from '../../_helper_components/article/googleData/default';
 import fetchEnv from '../../_helper_components/global/utils/environment';
 import gtmScript from '../helper_functions/gtmScript';
+import CustomMetricsScript from '../../_helper_components/global/abBlockDetection/helper_components/CustomMetricsScript';
 
 const RenderOutputType = (props) => {
   const {
@@ -107,6 +108,11 @@ const RenderOutputType = (props) => {
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${connextEnv}/ajc/loader.min.js`}></script>
             <ConnextInit triggerLoginModal={outputType && outputType === 'login'} />
+          </>
+        )}
+        {outputType !== 'amp' && (
+          <>
+            <CustomMetricsScript />
           </>
         )}
         <div id="fb-root"></div>
