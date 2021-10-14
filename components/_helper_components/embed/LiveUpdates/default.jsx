@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import ContentElements from '../../article/contentElements/default.jsx';
@@ -6,6 +6,7 @@ import ArcAd from '../../../features/ads/default';
 import TaboolaFeed from '../../../features/taboolaFeed/default';
 import computeTimeStamp from '../../article/timestamp/_helper_functions/computeTimeStamp';
 import getContentMeta from '../../global/siteMeta/_helper_functions/getContentMeta';
+import { debounce } from '../../../features/gallery/_helper_functions';
 import Byline from '../../article/byline/default';
 import LeftNav from './leftNav/default';
 import './default.scss';
@@ -20,6 +21,10 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   const { requestUri } = appContext;
   const uriHasHash = requestUri.indexOf('#') > -1;
   const hashId = uriHasHash ? requestUri.substr(requestUri.indexOf('#') + 1) : null;
+  const [activeUpdate, setActiveUpdate] = useState(hashId);
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const [updateTopPositions, setUpdateTopPositions] = useState([]);
+  const stickyHeaderAdjustment = 90;
   let toggledAdSlot = 'HP03';
 
   const copyToClipboard = (e) => {
@@ -93,9 +98,27 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   };
 
   const highlightNavItem = (hashTarget) => {
-    const activeLink = document.querySelector('.c-liveUpdateNav .is-active');
-    activeLink.setAttribute('class', activeLink.className.replace('is-active', ''));
-    document.querySelector(`.c-liveUpdateNav a[href='#${hashTarget}']`).className += ' is-active';
+    const { innerHeight } = window || {};
+    const activeLink = document.querySelector(`.c-liveUpdateNav a[href='#${activeUpdate}']`) || document.querySelector('.c-liveUpdateNav .is-active');
+    if (activeLink) {
+      activeLink.setAttribute('class', activeLink.className.replace('is-active', ''));
+    }
+    const targetLink = document.querySelector(`.c-liveUpdateNav a[href='#${hashTarget}']`);
+    if (targetLink.className.indexOf('is-active') === -1) {
+      targetLink.className += ' is-active';
+    }
+    // targetLink is outside the viewport from the bottom
+    if (targetLink.getBoundingClientRect().bottom > innerHeight) {
+      // The bottom of the targetLink will be aligned to the bottom of the visible area of the scrollable ancestor.
+      targetLink.scrollIntoView(false);
+    }
+
+    // Target is outside the view from the top
+    if (targetLink.getBoundingClientRect().top < 0) {
+      // The top of the targetLink will be aligned to the top of the visible area of the scrollable ancestor
+      targetLink.scrollIntoView();
+    }
+    setActiveUpdate(hashTarget);
   };
 
   const handleNavTrigger = (evt, hash) => {
@@ -115,7 +138,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     if (targetUpdate) {
       // move to the selected update in the content area
       window.scrollTo({
-        top: targetUpdate.offsetTop - 60, // to handle sticky header
+        top: targetUpdate.offsetTop - stickyHeaderAdjustment, // to handle sticky header
         left: 0,
         behavior: 'smooth',
       });
@@ -123,6 +146,77 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       highlightNavItem(hashTarget);
     }
   };
+
+  const handleScroll = debounce(() => {
+    const { scrollY } = window;
+    let hasAMatch = false;
+    const viewableHeight = scrollY + viewportHeight;
+    updateTopPositions.forEach((update, i) => {
+      if (hasAMatch) {
+        // save lots of unnecessary processing by aborting early, since we've already matched an update's position
+        return null;
+      }
+
+      const { 0: pos, 1: height, 2: hash } = update;
+      const activeTriggerPos = scrollY + stickyHeaderAdjustment; // scrollY + viewportAdjustment;
+      if (
+        activeTriggerPos >= pos
+        && (
+          (
+            i < updateTopPositions.length - 1
+            && (
+              pos + height > viewableHeight
+              || (
+                pos + height <= viewableHeight
+                && activeTriggerPos < updateTopPositions[i + 1][0]
+              )
+            )
+          )
+          || i === updateTopPositions.length - 1
+        )
+      ) {
+        hasAMatch = true;
+        setActiveUpdate(hash);
+        return highlightNavItem(hash);
+      }
+      return false;
+    });
+  }, 100);
+
+  const determineUpdateTopPositions = () => {
+    const { scrollY, innerHeight } = window;
+    setViewportHeight(innerHeight);
+    // re-set the array, in case we're re-running this (i.e. upon "complete" after having run on "interactive")
+    setUpdateTopPositions([]);
+    // populate updateTopPositions with the offsets of the updates
+    document.querySelectorAll('.c-liveUpdate ').forEach(update => updateTopPositions.push([
+      update.getBoundingClientRect().top + scrollY - stickyHeaderAdjustment,
+      update.offsetHeight,
+      update.getAttribute('name'),
+    ]));
+    setUpdateTopPositions(updateTopPositions);
+  };
+
+  useEffect(() => {
+    document.onreadystatechange = () => {
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        return determineUpdateTopPositions();
+      }
+      return null;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  });
+
+  useEffect(() => {
+    window.addEventListener('resize', determineUpdateTopPositions);
+    return () => {
+      window.addEventListener('resize', determineUpdateTopPositions);
+    };
+  });
 
   const loopThroughUpdates = (isNav = false) => {
     let updateIndex = 0;
@@ -154,9 +248,12 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       updateIndex += 1;
 
       if (isNav) {
+        if (!activeUpdate && updateIndex === 1) {
+          setActiveUpdate(elId);
+        }
         return <LeftNav
           key={elId}
-          isActive={(!uriHasHash && updateIndex === 1) || (uriHasHash && hashId === elId)}
+          isActive={activeUpdate === elId}
           elId={elId}
           headline={headline}
           timestampDate={timestampDate}
