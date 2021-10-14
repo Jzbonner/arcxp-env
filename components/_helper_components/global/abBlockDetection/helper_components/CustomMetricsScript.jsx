@@ -4,7 +4,7 @@ import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../../utils/environment';
 import getContentMeta from '../../../global/siteMeta/_helper_functions/getContentMeta';
 
-const BlockDetectionScript = () => {
+const CustomMetricsScript = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const contentMeta = getContentMeta();
@@ -27,30 +27,16 @@ const BlockDetectionScript = () => {
     __html: `
         const docu = window.document;
         const docuBody = docu.querySelector('body');
-        const getUserPaywallBlockerState = () => {
-          const numberOfArticlesLeft = window.Connext.Storage.GetArticlesLeft();
-          const paywallEl = doc.getElementById('paywallContainer');
-          const paywallElDisplay = paywallEl ? window.getComputedStyle(paywallEl, null).display : null;
-          if(numberOfArticlesLeft === 0 && paywallElDisplay === "none"){
-            return true;
-          } else {
-            return false
-          } 
+        const generateEventType = (type) => {
+          if (type === 'homepage') {
+            return type;
+          }
+          if (type === 'section front') {
+            return 'sectionpage';
+          }
+          return '';
         };
-        const generateEventString = ({ hasAdBlocker, hasPrivacyBlocker, hasPaywallBlocker}) => {
-          let evtString = '';
-          if (hasAdBlocker) {
-            evtString += 'AdBlocker';
-          }
-          if (hasPrivacyBlocker) {
-            evtString += evtString.length > 0 ? '_PrivacyBlocker' : 'PrivacyBlocker';
-          }
-          if (hasPaywallBlocker) {
-            evtString += evtString.length > 0 ? '_PaywallBlocker' : 'PaywallBlocker';
-          }
-          return evtString;
-        };
-        const buildHeaderData = (blockerStates) => {
+        const buildHeaderData = () => {
           let visitorId = '';
           let clientId = '';
           const connextLS = window.localStorage.getItem('${connextLSLookup}');
@@ -65,7 +51,7 @@ const BlockDetectionScript = () => {
             'Content-Type' : 'application/json',
             'Access-Control-Allow-Origin':'*',
             'mode': 'cors',
-            'event' : generateEventString(blockerStates),
+            'event' : generateEventType('${pageContentType}'),
             'page' : '${url}',
             'referer' : document.referrer,
             'contenttype' : '${pageContentType}',
@@ -90,33 +76,15 @@ const BlockDetectionScript = () => {
           }
           return true;
         };
-        const getAdBlockerState = (baitElementDisplay) => {
-          let adBlockerOn = false;
-          if (baitElementDisplay === 'none' || !areAdsOn()) {
-            adBlockerOn = true;
-          } 
-          return adBlockerOn;
-        };
-        const getPrivacyBlockerState = () => {
-          let isTrackingBlocked = false;
-          if (!isTrackingOn()) {
-            isTrackingBlocked = true;
-          }
-          return isTrackingBlocked;
-        };
         window.addEventListener('connextConversationDetermined', () => {
-            const baitElementDisplay = window.getComputedStyle(document.getElementById('ADS_2'), null).display;
-            const hasAdBlocker = getAdBlockerState(baitElementDisplay);
-            const hasPrivacyBlocker = getPrivacyBlockerState();
-            const hasPaywallBlocker = getUserPaywallBlockerState();
-            if (hasAdBlocker || hasPrivacyBlocker || hasPaywallBlocker) {
+            if ('${pageContentType}' === 'homepage' || '${pageContentType}' === 'section front' ) {
               fetch('${domainBlockerTracking}', {
                 method: 'post',
-                headers: buildHeaderData({ hasAdBlocker, hasPrivacyBlocker, hasPaywallBlocker }),
+                headers: buildHeaderData(),
               });
             }
         });`,
   }}></script>;
 };
 
-export default BlockDetectionScript;
+export default CustomMetricsScript;
