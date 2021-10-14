@@ -8,14 +8,13 @@ import computeTimeStamp from '../../article/timestamp/_helper_functions/computeT
 import getContentMeta from '../../global/siteMeta/_helper_functions/getContentMeta';
 import { debounce } from '../../../features/gallery/_helper_functions';
 import Byline from '../../article/byline/default';
-import LeftNav from './leftNav/default';
 import './default.scss';
 
 /* this helper component renders the Custom Info Box as outlined in APD-1441 */
 const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
-  const { pageIsLive, paywallStatus } = getContentMeta();
+  const { paywallStatus } = getContentMeta();
   const isMeteredStory = paywallStatus === 'premium';
-  if (!liveUpdates || !pageIsLive) return <span><i>There are no Live Updates to display.</i></span>;
+  if (!liveUpdates) return <span><i>There are no Live Updates to display.</i></span>;
 
   const appContext = useAppContext();
   const { requestUri } = appContext;
@@ -250,17 +249,18 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         if (!activeUpdate && updateIndex === 1) {
           setActiveUpdate(elId);
         }
-        return <LeftNav
-          key={elId}
-          isActive={activeUpdate === elId}
-          elId={elId}
-          headline={headline}
-          timestampDate={timestampDate}
-          timestampTime={timestampTime}
-          isToday={isToday}
-          insertDateMarker={insertDateMarker}
-          handleNavTrigger={handleNavTrigger}
-        />;
+        return <>
+          {insertDateMarker && <a key={`${elId}-dateMarker`} className='date-marker' title={timestampDate}>
+            <div className='timestamp'>{timestampDate.replace(',', '')}</div>
+          </a>}
+          <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger} className={activeUpdate === elId ? 'is-active' : ''} title={`${timestampTime}: ${headline.replace(/"/g, '\'')}`}>
+            <div className='headline hidden-mobile'>{headline}</div>
+            <div className='timestamp'>
+              <span className={`timestamp-date ${isToday ? 'same-day' : ''}`}>{timestampDate} </span>
+              <span className='timestamp-time'>{timestampTime}</span>
+            </div>
+          </a>
+        </>;
       }
 
       return <>
