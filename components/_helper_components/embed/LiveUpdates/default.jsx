@@ -271,9 +271,10 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       mostRecentDate = timestampDate;
 
       updateIndex += 1;
+      const isFirstUpdate = updateIndex === 1;
 
       if (isNav) {
-        if (!activeUpdate && updateIndex === 1) {
+        if (!activeUpdate && isFirstUpdate) {
           setActiveUpdate(elId);
         }
         return <>
@@ -291,8 +292,8 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       }
 
       return <>
-        <div className={`c-liveUpdate ${insertDateMarker ? 'with-date-marker' : ''}`} name={elId} key={elId}>
-          {insertDateMarker && <div className='date-marker'>{timestampDate}</div>}
+        <div className={`c-liveUpdate ${!isFirstUpdate && insertDateMarker ? 'with-date-marker' : ''}`} name={elId} key={elId}>
+          {!isFirstUpdate && insertDateMarker && <div className='date-marker'>{timestampDate}</div>}
           <div className='c-headline'>
             <h2>{headline}</h2>
             <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
