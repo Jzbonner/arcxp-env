@@ -7,7 +7,16 @@ import './default.scss';
 const Byline = ({ by = [], sections, excludeOrg = false }) => {
   const sponsorContentLabel = getSponsorData(sections);
   const finalizeByline = (authors = []) => {
-    const authorData = excludeOrg ? authors : handleOrganization(authors);
+    const authorsArray = authors;
+    if (excludeOrg) {
+      // had to go this route because somehow "location" (from author service ANS) comes through as "org" in story data
+      authorsArray.map((author, i) => {
+        delete authorsArray[i].org;
+        return authorsArray[i];
+      });
+    }
+    // we still need this as well, since `handleOrganization` will re-set a fallback value for `org` which we don't want
+    const authorData = excludeOrg ? authorsArray : handleOrganization(authorsArray);
     return handleAuthors(authorData);
   };
 
