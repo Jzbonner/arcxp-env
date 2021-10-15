@@ -197,6 +197,7 @@ const getContentMeta = () => {
     /* eslint-disable camelcase */
     storyTitle: content?.headlines?.basic,
     storyInitialPublishDate: content?.first_publish_date,
+    storyDateModified: content?.display_date,
     storyPromoItems: content?.promo_items,
     storyCredits: content?.credits,
     storyInitialBodyText: getInitialBodyText(content?.content_elements),
