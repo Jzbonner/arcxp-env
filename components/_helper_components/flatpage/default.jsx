@@ -30,7 +30,8 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
 
   // Both checks return true if the tag is present and false if not.
   const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
-  const noRightRail = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-right-rail');
+  const hasNoRightRailTag = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-right-rail');
+  const removeFloat = hasNoRightRailTag ? 'float-none' : null;
 
   const filteredContentElements = contentElements.filter(element => element && element.type && element.type === 'raw_html');
 
@@ -41,7 +42,7 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
         <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype} noAds={noAds} />
       )}
       <main className="c-flatpage b-sectionHomeMaxWidth">
-        <article>
+        <article className={removeFloat}>
           {
             !noAds
             && <div className="c-hp01-mp01">
@@ -51,7 +52,7 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
           }
 
           {
-            (noRightRail || noAds)
+            (hasNoRightRailTag || noAds)
             && <Section
               elements={filteredContentElements}
               fullWidth={true}
@@ -59,7 +60,7 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
           }
 
           {
-            !noRightRail && !noAds
+            !hasNoRightRailTag && !noAds
             && <Section
               elements={filteredContentElements}
               rightRail={{ insertBeforeParagraph: 1, ad: RP01StoryFlatPage }}
@@ -67,7 +68,7 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
           }
 
           {
-            !noRightRail && !noAds
+            !hasNoRightRailTag && !noAds
             && <div className="c-hp05-mp05">
               <ArcAd staticSlot={'HP05-FlatPage'} />
               <ArcAd staticSlot={'MP05'} />

@@ -5,6 +5,20 @@
 .c-flatpage {
   height: auto;
 
+  .float-none {
+
+    .c-section {
+
+      .c-customHTML {
+        float: none;
+
+        @include breakpoint(desktop-sm) {
+          float: none;
+        }
+      }
+    }
+  }
+
   .RP01.arcad.b-margin-bottom-d40-m20 {
     margin-bottom: 0;
   }
@@ -134,7 +148,7 @@
   }
 
   @include breakpoint(desktop-lg) {
-    
+
     &.b-sectionHomeMaxWidth {
       max-width: 1540px;
       margin: 0 auto;
