@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import LazyLoad from 'react-lazyload';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import ContentElements from '../../article/contentElements/default.jsx';
@@ -7,7 +6,6 @@ import ArcAd from '../../../features/ads/default';
 import TaboolaFeed from '../../../features/taboolaFeed/default';
 import computeTimeStamp from '../../article/timestamp/_helper_functions/computeTimeStamp';
 import getContentMeta from '../../global/siteMeta/_helper_functions/getContentMeta';
-import { debounce } from '../../../features/gallery/_helper_functions';
 import Byline from '../../article/byline/default';
 import './default.scss';
 
@@ -22,8 +20,11 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   const uriHasHash = requestUri.indexOf('#') > -1;
   const hashId = uriHasHash ? requestUri.substr(requestUri.indexOf('#') + 1) : null;
   const [activeUpdate, setActiveUpdate] = useState(hashId);
-  const [viewportHeight, setViewportHeight] = useState(0);
-  const [updateTopPositions, setUpdateTopPositions] = useState([]);
+  let viewportHeight = 0;
+  let lastScrollPos = 0;
+  let updateTopPositions = [];
+  let isScrolling = false;
+  let timeout;
   const stickyHeaderAdjustment = 90;
   let toggledAdSlot = 'HP03';
 
@@ -104,17 +105,18 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       activeLink.setAttribute('class', activeLink.className.replace('is-active', ''));
     }
     const targetLink = document.querySelector(`.c-liveUpdateNav a[href='#${hashTarget}']`);
+    const { top: targetLinkTop, bottom: targetLinkBottom } = targetLink.getBoundingClientRect();
     if (targetLink.className.indexOf('is-active') === -1) {
       targetLink.className += ' is-active';
     }
     // targetLink is outside the viewport from the bottom
-    if (targetLink.getBoundingClientRect().bottom > innerHeight) {
+    if (targetLinkBottom > innerHeight) {
       // The bottom of the targetLink will be aligned to the bottom of the visible area of the scrollable ancestor.
       targetLink.scrollIntoView(false);
     }
 
     // Target is outside the view from the top
-    if (targetLink.getBoundingClientRect().top < 0) {
+    if (targetLinkTop < 0) {
       // The top of the targetLink will be aligned to the top of the visible area of the scrollable ancestor
       targetLink.scrollIntoView();
     }
@@ -147,59 +149,83 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     }
   };
 
-  const handleScroll = debounce(() => {
-    const { scrollY } = window;
-    let hasAMatch = false;
-    const viewableHeight = scrollY + viewportHeight;
-    updateTopPositions.forEach((update, i) => {
-      if (hasAMatch) {
-        // save lots of unnecessary processing by aborting early, since we've already matched an update's position
-        return null;
-      }
+  const handleScroll = () => {
+    if (!isScrolling) {
+      isScrolling = true;
+    }
 
-      const { 0: pos, 1: height, 2: hash } = update;
-      const activeTriggerPos = scrollY + stickyHeaderAdjustment; // scrollY + viewportAdjustment;
-      if (
-        activeTriggerPos >= pos
-        && (
-          (
-            i < updateTopPositions.length - 1
-            && (
-              pos + height > viewableHeight
-              || (
-                pos + height <= viewableHeight
-                && activeTriggerPos < updateTopPositions[i + 1][0]
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      const { scrollY } = window;
+      if (lastScrollPos !== scrollY) {
+        lastScrollPos = scrollY;
+      }
+      let hasAMatch = false;
+      const viewableHeight = lastScrollPos + viewportHeight;
+      updateTopPositions.forEach((update, i) => {
+        if (hasAMatch) {
+          // save lots of unnecessary processing by aborting early, since we've already matched an update's position
+          return null;
+        }
+
+        const { 0: pos, 1: height, 2: hash } = update;
+        const activeTriggerPos = lastScrollPos + stickyHeaderAdjustment; // scrollY + viewportAdjustment;
+        if (
+          activeTriggerPos >= pos
+          && (
+            (
+              i < updateTopPositions.length - 1
+              && (
+                pos + height > viewableHeight
+                || (
+                  pos + height <= viewableHeight
+                  && activeTriggerPos < updateTopPositions[i + 1][0]
+                )
               )
             )
+            || i === updateTopPositions.length - 1
           )
-          || i === updateTopPositions.length - 1
-        )
-      ) {
-        hasAMatch = true;
-        setActiveUpdate(hash);
-        return highlightNavItem(hash);
-      }
-      return false;
-    });
-  }, 100);
+        ) {
+          hasAMatch = true;
+          setActiveUpdate(hash);
+          return highlightNavItem(hash);
+        }
+        return false;
+      });
+      isScrolling = false;
+    }, 100);
+  };
 
-  const determineUpdateTopPositions = () => {
-    const { scrollY, innerHeight } = window;
-    setViewportHeight(innerHeight);
-    // re-set the array, in case we're re-running this (i.e. upon "complete" after having run on "interactive")
-    setUpdateTopPositions([]);
-    // populate updateTopPositions with the offsets of the updates
-    document.querySelectorAll('.c-liveUpdate ').forEach(update => updateTopPositions.push([
-      update.getBoundingClientRect().top + scrollY - stickyHeaderAdjustment,
-      update.offsetHeight,
-      update.getAttribute('name'),
-    ]));
-    setUpdateTopPositions(updateTopPositions);
+  const determineUpdateTopPositions = (recalc) => {
+    // populate updateTopPositions with the positions of each update snippet
+    let currentTopPositions = updateTopPositions;
+    const { innerHeight, scrollY } = window;
+    if (lastScrollPos !== scrollY) {
+      lastScrollPos = scrollY;
+    }
+    if (recalc) {
+      currentTopPositions = [];
+      viewportHeight = innerHeight;
+    }
+    const allUpdates = document.querySelectorAll('.c-liveUpdate');
+    allUpdates.forEach((update, i) => {
+      if (!update || (!recalc && update._boundingClientRect)) return null;
+
+      const updateBoundaries = update.getBoundingClientRect();
+      allUpdates[i]._boundingClientRect = updateBoundaries;
+      return currentTopPositions.push([
+        updateBoundaries.top + lastScrollPos - stickyHeaderAdjustment,
+        updateBoundaries.bottom - updateBoundaries.top,
+        update.getAttribute('name'),
+      ]);
+    });
+    updateTopPositions = currentTopPositions;
   };
 
   useEffect(() => {
     document.onreadystatechange = () => {
-      if (document.readyState === 'interactive' || document.readyState === 'complete') {
+      if (document.readyState === 'complete') {
         return determineUpdateTopPositions();
       }
       return null;
@@ -209,14 +235,14 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  });
+  }, []);
 
   useEffect(() => {
-    window.addEventListener('resize', determineUpdateTopPositions);
+    window.addEventListener('resize', () => determineUpdateTopPositions(true));
     return () => {
-      window.addEventListener('resize', determineUpdateTopPositions);
+      window.addEventListener('resize', () => determineUpdateTopPositions(true));
     };
-  });
+  }, []);
 
   const loopThroughUpdates = (isNav = false) => {
     const firstLiveUpdate = liveUpdates.slice(0, 1);
@@ -235,7 +261,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       const { basic: headline } = headlines || {};
       const { by: authorData } = credits || {};
       if (!headline) return null;
-      const isFirstUpdate = updateIndex === 0;
 
       const {
         timestampDate,
@@ -265,27 +290,20 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         </>;
       }
 
-      const liveUpdateContent = () => <>
-        <div className='c-headline'>
-          <h2>{headline}</h2>
-          <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
-        </div>
-        <div className='c-timestampByline'>
-          <div className='timestamp-time'>{timestampTime}</div>
-          <Byline by={authorData} sections={[]} excludeOrg={true} />
-        </div>
-        <div className='liveUpdate-content' key={`${elId}-content`}>
-          <ContentElements contentElements={contentElements} ampPage={false} />
-        </div>
-      </>;
-
       return <>
         <div className={`c-liveUpdate ${insertDateMarker ? 'with-date-marker' : ''}`} name={elId} key={elId}>
           {insertDateMarker && <div className='date-marker'>{timestampDate}</div>}
-          {!isFirstUpdate && <LazyLoad placeholder={<div className="c-placeholder-update"></div>} offset={300} once={true}>
-            {liveUpdateContent()}
-          </LazyLoad>}
-          {isFirstUpdate && liveUpdateContent()}
+          <div className='c-headline'>
+            <h2>{headline}</h2>
+            <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
+          </div>
+          <div className='c-timestampByline'>
+            <div className='timestamp-time'>{timestampTime}</div>
+            <Byline by={authorData} sections={[]} excludeOrg={true} />
+          </div>
+          <div className='liveUpdate-content' key={`${elId}-content`}>
+            <ContentElements contentElements={contentElements} ampPage={false} />
+          </div>
         </div>
         {/* we insert items (ads, placeholders, etc) at specific intervals.
           For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
