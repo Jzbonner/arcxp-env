@@ -1,4 +1,5 @@
 /* stylelint-disable declaration-no-important */
+/* stylelint-disable property-no-vendor-prefix */
 @import "../../../../src/styles/base";
 
 @include amp-exclude {
@@ -17,6 +18,10 @@
       &:not(:first-child),
       &:not(:last-child) {
         margin: 0;
+      }
+
+      .c-image-component {
+        margin-bottom: 0;
       }
 
       .image-component-image:before {
@@ -65,7 +70,7 @@
 
     .c-page-title .c-title-content {
       border: none;
-      color: #fff;
+      color: #fff5ec;
       display: block;
       text-align: center;
       letter-spacing: -.31px;
@@ -110,6 +115,10 @@
         font-size: .975rem;
       }
 
+      @include breakpoint(desktop-sm) {
+        top: 75%;
+      }
+
       @include breakpoint(desktop-lg) {
         font-size: .875rem;
       }
@@ -121,15 +130,23 @@
     flex-direction: row;
     align-items: flex-start;
     max-width: 100%;
+    margin: 20px auto 60px;
 
     .c-liveUpdateNav {
       flex: 0 0 50px;
       align-self: flex-start;
       max-height: calc(100vh - 60px);
       overflow: auto;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* Internet Explorer 10+ */
+
+      &::-webkit-scrollbar { /* WebKit */
+        width: 0;
+        height: 0;
+      }
 
       @include text-styles(.875rem, 1.25, "Gordita");
-      @include position-sticky(60px);
+      @include position-sticky(75px);
 
       @include breakpoint(tablet) {
         flex-basis: 20%;
@@ -152,6 +169,8 @@
         padding: 5px 0;
         position: relative;
         height: 15px;
+        font-weight: 800;
+        font-size: .6875rem;
 
         @include between-breakpoints(mobile, tablet) {
           display: none;
@@ -333,8 +352,6 @@
           margin-top: 20px;
         }
 
-        /* stylelint-disable property-no-vendor-prefix */
-
         &:focus,
         &:active {
           -webkit-tap-highlight-color: transparent;
@@ -427,7 +444,7 @@
         @include between-breakpoints(mobile, desktop-lg) {
 
           .c-headline {
-            margin-top: 14px;
+            margin-top: 18px;
           }
         }
       }
@@ -452,8 +469,16 @@
       }
     }
 
-    .liveUpdate-content .c-contentElements > :last-child {
-      margin-bottom: 15px;
+    .liveUpdate-content .c-contentElements {
+      > :last-child {
+        margin-bottom: 15px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        max-width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+      }
     }
   }
 }
