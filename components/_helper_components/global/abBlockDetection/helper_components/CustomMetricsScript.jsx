@@ -34,6 +34,12 @@ const CustomMetricsScript = () => {
           if (type === 'section front') {
             return 'sectionpage';
           }
+          if (type === 'list') {
+            return 'listpage';
+          }
+           if (type === 'all') {
+            return 'staffpage';
+          }
           return '';
         };
         const buildHeaderData = () => {
@@ -77,7 +83,7 @@ const CustomMetricsScript = () => {
           return true;
         };
         window.addEventListener('connextConversationDetermined', () => {
-            if ('${pageContentType}' === 'homepage' || '${pageContentType}' === 'section front' ) {
+            if ('${pageContentType}' === 'homepage' || '${pageContentType}' === 'section front' ||  '${pageContentType}' === 'list' || '${pageContentType}' === 'all') {
               fetch('${domainBlockerTracking}', {
                 method: 'post',
                 headers: buildHeaderData(),
