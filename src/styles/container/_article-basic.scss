@@ -17,9 +17,7 @@
 }
 
 .c-gallery-basic.b-contentMaxWidth {
-  @include between-breakpoints(mobile, tablet) {
-    margin: 1.25rem auto 0;
-  }
+  margin: .94rem auto 0;
 }
 
 .c-main-gallery,
