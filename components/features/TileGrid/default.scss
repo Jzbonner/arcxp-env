@@ -1,0 +1,61 @@
+@import "./../../../src/styles/base";
+
+.c-tileGrid {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: column wrap;
+
+  @include breakpoint(tablet) {
+    flex-flow: row wrap;
+  }
+
+  .tileGrid-item {
+    background-color: #373737;
+    width: 100%;
+    margin: 1%;
+
+    @include breakpoint(tablet) {
+      width: 47%;
+    }
+
+    @include breakpoint(desktop-sm) {
+      width: 23%;
+    }
+
+    .tileGrid-item-logo {
+      background-color: #fff;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .c-image-component,
+      .image-component-image,
+      .lazyload-wrapper,
+      img {
+        height: 100%;
+        width: 100%;
+      }
+
+      img {
+        transition: all .1s ease-in-out;
+        cursor: pointer;
+        object-fit: cover;
+      }
+    }
+
+    .tileGrid-item-footer {
+      @include text-styles(.875rem, 1.25, "Gordita-Bold");
+
+      padding: 1rem;
+      color: #fff;
+      display: block;
+      transition: all .1s ease-in-out;
+
+      &:hover {
+        filter: grayscale(1);
+        opacity: .5;
+      }
+    }
+  }
+}
