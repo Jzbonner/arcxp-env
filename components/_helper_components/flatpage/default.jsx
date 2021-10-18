@@ -29,21 +29,22 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
   const RP01StoryFlatPage = () => <ArcAd staticSlot={'RP01-Story-FlatPage'} key={'RP01-Story-FlatPage'} />;
 
   // Both checks return true if the tag is present and false if not.
-  const noAds = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
-  const noRightRail = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-right-rail');
+  const hasNoAdsTag = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
+  const hasNoRightRailTag = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-right-rail');
+  const removeFloat = hasNoRightRailTag ? 'float-none' : null;
 
   const filteredContentElements = contentElements.filter(element => element && element.type && element.type === 'raw_html');
 
   return (
     <>
-      { !noAds && <GlobalAdSlots /> }
+      { !hasNoAdsTag && <GlobalAdSlots /> }
       {!noHeaderAndFooter && (
-        <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype} noAds={noAds} />
+        <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype} noAds={hasNoAdsTag} />
       )}
       <main className="c-flatpage b-sectionHomeMaxWidth">
-        <article>
+        <article className={removeFloat}>
           {
-            !noAds
+            !hasNoAdsTag
             && <div className="c-hp01-mp01">
               <ArcAd staticSlot={'HP01'} />
               <ArcAd staticSlot={'MP01'} />
@@ -51,7 +52,7 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
           }
 
           {
-            (noRightRail || noAds)
+            (hasNoRightRailTag || hasNoAdsTag)
             && <Section
               elements={filteredContentElements}
               fullWidth={true}
@@ -59,7 +60,7 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
           }
 
           {
-            !noRightRail && !noAds
+            !hasNoRightRailTag && !hasNoAdsTag
             && <Section
               elements={filteredContentElements}
               rightRail={{ insertBeforeParagraph: 1, ad: RP01StoryFlatPage }}
@@ -67,7 +68,7 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
           }
 
           {
-            !noRightRail && !noAds
+            !hasNoRightRailTag && !hasNoAdsTag
             && <div className="c-hp05-mp05">
               <ArcAd staticSlot={'HP05-FlatPage'} />
               <ArcAd staticSlot={'MP05'} />
