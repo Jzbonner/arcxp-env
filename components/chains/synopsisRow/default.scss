@@ -1,16 +1,5 @@
 @import "./../../../src/styles/base";
 
-// temp fix for connext bar spacing issue on homepage
-
-.c-homepageContent {
-
-  .c-synopsis-row {
-    @include breakpoint(tablet) {
-      margin-top: 1rem;
-    }
-  }
-}
-
 .c-synopsis-row {
   display: flex;
   justify-content: space-between;

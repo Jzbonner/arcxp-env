@@ -185,23 +185,22 @@
     }
 
     .nav-logo {
-      padding: 15px 0;
+      padding: 15px 0 0;
       flex-direction: row;
       position: relative;
       align-items: center;
 
       @include breakpoint(tablet) {
-        padding: 10px 0;
+        padding: 10px 0 0;
         z-index: 3;
       }
 
       @include breakpoint(desktop-sm) {
         padding-top: 15px;
-        padding-bottom: 20px;
       }
 
       @include breakpoint(desktop-lg) {
-        padding: 20px 0;
+        padding: 20px 0 0;
       }
 
       &.not-visible {
@@ -1181,6 +1180,18 @@
             height: 26px;
           }
         }
+      }
+    }
+
+    .Mg2-connext.x-editable-text.Mg2-custom-tmpl.borderRadiusCustom.fullWidht {
+      padding-top: 15px;
+
+      @include breakpoint(tablet) {
+        padding-top: 10px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        padding-top: 20px;
       }
     }
   }
