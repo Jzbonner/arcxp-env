@@ -441,10 +441,11 @@
         margin-top: 20px;
         position: relative;
 
-        @include between-breakpoints(mobile, desktop-lg) {
+        .c-headline {
+          margin-top: 18px;
 
-          .c-headline {
-            margin-top: 18px;
+          @include breakpoint(desktop-lg) {
+            margin-top: 4px;
           }
         }
       }
@@ -470,6 +471,7 @@
     }
 
     .liveUpdate-content .c-contentElements {
+
       > :last-child {
         margin-bottom: 15px;
       }
