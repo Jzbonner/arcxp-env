@@ -520,6 +520,10 @@
   @include breakpoint(desktop-xxxl) {
     max-width: 820px;
   }
+
+  .tease-listHeading {
+    padding-top: 0;
+  }
 }
 
 /* RP0 mobile style overrides */
