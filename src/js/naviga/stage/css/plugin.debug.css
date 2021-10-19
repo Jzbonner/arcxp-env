@@ -1,0 +1,186 @@
+/* stylelint-disable */
+﻿.debug_details {
+    position: fixed;
+    right: 0;
+    bottom: 5px;
+    width: 45px;
+    z-index: 100000010; /*its more than modal backdrop z-index*/
+}
+
+.debug_details_content strong {
+    font-weight: bold !important;
+    color: #000 !important;
+}
+
+.debug_details.opened {
+    width: 360px;
+}
+
+    .debug_details.opened .debug_details_content {
+        display: block;
+        width: 360px;
+    }
+
+.debug_details_icon {
+    float: right;
+    background: url("https://dt29boamttw71.cloudfront.net/resources/images/config.png") no-repeat scroll center center rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    margin-top: 10px;
+    display: block;
+    width: 45px;
+    height: 45px;
+}
+
+.debug_details_content {
+    float: left;
+    width: 0;
+    display: none;
+    background: #FFF;
+    box-shadow: 0px 6px 8px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 6px 8px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0px 6px 8px 0px rgba(0,0,0,0.1);
+    border-left: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+    .debug_details_content .set-btn {
+        display: inline-block;
+        width: 35px;
+        margin-left: 10px;
+        white-space: nowrap;
+    }
+
+    .debug_details_content .set-btn a {
+        padding: 4px 13px;
+        display: inline-block;
+    }
+
+    .debug_details_content h4 {
+        font-family: 'Roboto';
+        font-size: 16px;
+        color: #25282A;
+        background: #F0F0F0;
+        padding-top: 10px;
+        padding-bottom: 12px;
+        text-align: center;
+    }
+
+    .debug_details_content ul {
+        list-style: none;
+        overflow: auto;
+        max-height: 300px;
+    }
+
+    .debug_details_content .ul-template-list {
+        height: 500px;
+        overflow-y: scroll;
+    }
+
+    .debug_details_content ul li {
+        border-top: 1px solid #E9E9E9;
+        padding: 6px 12px;
+    }
+
+        .debug_details_content ul li:first-child {
+            border-top: none;
+        }
+
+        .debug_details_content ul li label {
+            display: block;
+            font-family: 'Arial';
+            font-size: 12px;
+            color: #7C7C7C;
+        }
+
+        .debug_details_content ul li select {
+            width: 290px;
+            font-size: 14px;
+            color: #3E3E3E;
+            border: 1px solid #E9E9E9;
+            padding: 7px 10px;
+            margin-top: 10px;
+            box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.03);
+            -moz-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.03);
+            -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.03);
+            line-height: normal;
+        }
+
+    .debug_details_content ul.layout_chooser {
+        clear: both;
+    }
+
+        .debug_details_content ul.layout_chooser li {
+            float: left;
+            border: none;
+            padding: 0;
+            margin-left: 5px;
+            margin-top: 5px;
+        }
+
+            .debug_details_content ul.layout_chooser li:first-child,
+            .debug_details_content ul.layout_chooser li.first {
+                margin-left: 0;
+            }
+
+            .debug_details_content ul.layout_chooser li a {
+                display: block;
+                width: 23px;
+                height: 23px;
+                padding-top: 7px;
+                padding-left: 7px;
+                text-align: center;
+            }
+
+    .debug_details_content .paywall-information {
+        font-size: 12px;
+        color: black;
+    }
+
+        .debug_details_content .paywall-information .border-bottom {
+            border-bottom: 1px solid #E9E9E9;
+        }
+
+        .debug_details_content .paywall-information td {
+            padding: 3px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .debug_details_content .paywall-information .name {
+            color: #7C7C7C;
+            font-weight: normal;
+            text-align: left;
+        }
+
+/*make labels that precede a checkbox non-block*/
+.debug_details label.check {
+    display: inline-block;
+}
+
+
+.debug_details input {
+    background: #f0f0f0 none repeat scroll 0 0;
+    border: medium none;
+    color: #3e3e3e;
+    font-family: arial;
+    font-size: 14px;
+    padding: 15px 20px;
+}
+
+    .debug_details input[type="text"] {
+        width: 266px;
+        height: inherit;
+        padding: 5px 20px;
+    }
+
+
+@media screen and (min-width:1824px) {
+
+    .debug_details.opened {
+        width: 396px;
+    }
+
+    .debug_details_content {
+        width: 350px !important;
+    }
+}
