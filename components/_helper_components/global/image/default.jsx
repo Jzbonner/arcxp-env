@@ -36,7 +36,7 @@ const Image = ({
   const isGalleryImage = imageType === 'isGalleryImage';
   let img = null;
 
-  if (resizedObject && ((resizedObject.src && Object.keys(resizedObject).length > 1) || resizedObject.length) && !squareImage) {
+  if (resizedObject && (resizedObject.src || resizedObject.length) && !squareImage) {
     img = resizedObject;
   } else if (url) {
     const focalCoords = setFocalCoords(additionalProperties, rootFocalPoint);
@@ -99,7 +99,7 @@ const Image = ({
       1: tImage = null,
       2: mImage = null,
     } = img;
-    const dataSrc = imgSrc || mImage.src || url;
+    const dataSrc = imgSrc || url;
     const renderImgTag = () => <>
       {useSrcSet || hasSrcSet ? (
         <picture className={teaseContentType ? 'tease-image' : ''}>
