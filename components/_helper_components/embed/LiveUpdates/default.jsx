@@ -25,7 +25,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   let updateTopPositions = [];
   let isScrolling = false;
   let timeout;
-  const stickyHeaderAdjustment = 90;
+  const stickyHeaderAdjustment = 80;
   let toggledAdSlot = 'HP03';
 
   const copyToClipboard = (e) => {
@@ -138,6 +138,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     const hashTarget = !target && hash ? hash : target && target.substr(target.indexOf('#') + 1);
     const targetUpdate = document.querySelector(`[name='${hashTarget}']`) || null;
     if (targetUpdate) {
+      isScrolling = true;
       // move to the selected update in the content area
       window.scrollTo({
         top: targetUpdate.offsetTop - stickyHeaderAdjustment, // to handle sticky header
@@ -146,55 +147,56 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       });
       // udate the `is-active` indicator in the left nav
       highlightNavItem(hashTarget);
+      isScrolling = false;
     }
   };
 
   const handleScroll = () => {
     if (!isScrolling) {
       isScrolling = true;
-    }
 
-    clearTimeout(timeout);
+      clearTimeout(timeout);
 
-    timeout = setTimeout(() => {
-      const { scrollY } = window;
-      if (lastScrollPos !== scrollY) {
-        lastScrollPos = scrollY;
-      }
-      let hasAMatch = false;
-      const viewableHeight = lastScrollPos + viewportHeight;
-      updateTopPositions.forEach((update, i) => {
-        if (hasAMatch) {
-          // save lots of unnecessary processing by aborting early, since we've already matched an update's position
-          return null;
+      timeout = setTimeout(() => {
+        const { scrollY } = window;
+        if (lastScrollPos !== scrollY) {
+          lastScrollPos = scrollY;
         }
+        let hasAMatch = false;
+        const viewableHeight = lastScrollPos + viewportHeight;
+        updateTopPositions.forEach((update, i) => {
+          if (hasAMatch) {
+            // save lots of unnecessary processing by aborting early, since we've already matched an update's position
+            return null;
+          }
 
-        const { 0: pos, 1: height, 2: hash } = update;
-        const activeTriggerPos = lastScrollPos + stickyHeaderAdjustment; // scrollY + viewportAdjustment;
-        if (
-          activeTriggerPos >= pos
-          && (
-            (
-              i < updateTopPositions.length - 1
-              && (
-                pos + height > viewableHeight
-                || (
-                  pos + height <= viewableHeight
-                  && activeTriggerPos < updateTopPositions[i + 1][0]
+          const { 0: pos, 1: height, 2: hash } = update;
+          const activeTriggerPos = lastScrollPos + stickyHeaderAdjustment;
+          if (
+            activeTriggerPos >= pos
+            && (
+              (
+                i < updateTopPositions.length - 1
+                && (
+                  pos + height > viewableHeight
+                  || (
+                    pos + height <= viewableHeight
+                    && activeTriggerPos < updateTopPositions[i + 1][0]
+                  )
                 )
               )
+              || i === updateTopPositions.length - 1
             )
-            || i === updateTopPositions.length - 1
-          )
-        ) {
-          hasAMatch = true;
-          setActiveUpdate(hash);
-          return highlightNavItem(hash);
-        }
-        return false;
-      });
-      isScrolling = false;
-    }, 100);
+          ) {
+            hasAMatch = true;
+            setActiveUpdate(hash);
+            return highlightNavItem(hash);
+          }
+          return false;
+        });
+        isScrolling = false;
+      }, 200);
+    }
   };
 
   const determineUpdateTopPositions = (recalc) => {
