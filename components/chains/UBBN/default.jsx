@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './default.scss';
 
-const CarterObitChain = ({ children }) => (
-    <div className='c-obitChain'>
+const UBBNChain = ({ children }) => (
+    <div className='c-ubbnChain'>
       <div className="chain-content">
         <div className='row'>{children}</div>
       </div>
     </div>
 );
 
-CarterObitChain.propTypes = {
+UBBNChain.propTypes = {
   children: PropTypes.array,
 };
 
-export default CarterObitChain;
+export default UBBNChain;
