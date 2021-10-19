@@ -259,7 +259,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
-  const { connext } = getProperties(arcSite);
+  const { connext, siteDomainURL } = getProperties(arcSite);
   const {
     isEnabled = false,
     clientCode,
@@ -269,7 +269,6 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
     debug,
     tagManager,
     containerId,
-    userAuthenticationTime: userAuthTime = 9999,
   } = connext[currentEnv] || {};
 
   if (!isEnabled) return null;
@@ -417,105 +416,131 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
         const connextLoggedIn = new Event('connextLoggedIn');
         const connextLoggedOut = new Event('connextLoggedOut');
         const connextIsSubscriber = new Event('connextIsSubscriber');
-        window.MG2Loader.init({
-          plugins: [
-            {
-              name: 'FP',
-              initOptions: {
-                version: '${clientCode}' || '1.0',
-                environment: '${environment}',
+        //Generate GUID for session id. Used for troubleshooting
+        const sessionId = (function() {
+          const generatePart = function() {
+            return Math.floor(65536 * (1 + Math.random())).toString(16).substring(1)
+          }
+          return generatePart() + generatePart() + generatePart() + generatePart() + generatePart() + generatePart() + generatePart() + generatePart();
+        })();
+
+        //Function wrapping plugin initalization. Accepts plugin name(string) and initialization settings object. Returns promise
+        const initializePlugin = function (pluginName, initSettings) {
+          try {
+            const plugin = window[pluginName];
+            if(!plugin) {
+              throw new Error(pluginName + " object not found");
+            }
+            const initResult = plugin.init(initSettings);
+            return initResult && initResult.then ? initResult : Promise.resolve(true);
+          } catch(e) {
+            return Promise.reject(e.message);
+          }
+        };
+
+        //Initialization of the plugins in the right order. Init settings from original init script splitted between plugins
+        initializePlugin("Fingerprint", {
+          version: "${clientCode}",
+          siteCode: "${siteCode}",
+          environment: "${environment}",
+          resourceUrl: "${environment === 'prod' ? siteDomainURL : siteDomainURL.replace('www', 'sandbox')}",
+          sessionId: sessionId
+        })
+        .then(function() {
+          return initializePlugin("G2Insights", {
+            environment: "${environment}",
+            version: "${clientCode}",
+            collectors: ["connext"],
+            tagManager: "${tagManager}",
+            containerId: "${containerId}",
+            layoutCode: "${siteCode}",
+            siteCode: "${siteCode}",
+            resourceUrl: "${environment === 'prod' ? siteDomainURL : siteDomainURL.replace('www', 'sandbox')}",
+            sessionId: sessionId
+          });
+        })
+        .then(function() {
+          return initializePlugin("Connext", {
+            clientCode: "${clientCode}",
+            environment: "${environment}",
+            siteCode: "${siteCode}",
+            configCode: "${configCode}",
+            debug: ${debug},
+            silentmode: false,
+            resourceUrl: "${environment === 'prod' ? siteDomainURL : siteDomainURL.replace('www', 'sandbox')}",
+            sessionId: sessionId,
+            publicEventHandlers: {
+              onConversationDetermined: (e) => {
+                if (!bindConnextConversationDetermined) {
+                  connextLogger('>> onConversationDetermined', e);
+                  window.dispatchEvent(connextConversationDetermined);
+                  bindConnextConversationDetermined = true;
+                  bindConnextMeterLevelSet = false;
+                }
               },
-            },
-            {
-              name: 'DL',
-              initOptions: {
-                environment: '${environment}',
-                version: '${clientCode}',
-                collectors: ['connext'],
-                tagManager: '${tagManager}',
-                containerId: '${containerId}',
+              onInit: (e) => {
+                if (!bindConnextLoaded) {
+                  connextLogger('>> onInit', e);
+                  window.connextInitialLoadComplete = true;
+                  bindConnextLoaded = true;
+                }
               },
-            },
-            {
-              name: 'NXT',
-              initOptions: {
-                clientCode: '${clientCode}',
-                environment: '${environment}',
-                siteCode: '${siteCode}',
-                configCode: '${configCode}',
-                userAuthenticationTime: ${userAuthTime},
-                debug: ${debug},
-                silentmode: false,
-                publicEventHandlers: {
-                  onConversationDetermined: (e) => {
-                    if (!bindConnextConversationDetermined) {
-                      connextLogger('>> onConversationDetermined', e);
-                      window.dispatchEvent(connextConversationDetermined);
-                      bindConnextConversationDetermined = true;
-                      bindConnextMeterLevelSet = false;
-                    }
-                  },
-                  onInit: (e) => {
-                    if (!bindConnextLoaded) {
-                      connextLogger('>> onInit', e);
-                      window.connextInitialLoadComplete = true;
-                      bindConnextLoaded = true;
-                    }
-                  },
-                  onLoggedIn: (e) => {
-                    if (!bindConnextLoggedIn) {
-                      connextLogger('>> onLoggedIn', e);
-                      window.dispatchEvent(connextLoggedIn);
-                      bindConnextLoggedIn = true;
-                    }
-                  },
-                  onNotAuthorized: (e) => {
-                    // this event fires on every Engage loading if user is logged out
-                    if (!bindConnextNotAuthorized) {
-                      connextLogger('>> onNotAuthorized', e);
-                      window.dispatchEvent(connextLoggedOut);
-                      bindConnextNotAuthorized = true;
-                    }
-                  },
-                  onMeterLevelSet: (e) => {
-                    if (!bindConnextMeterLevelSet) {
-                      connextLogger('>> onMeterLevelSet', e);
-                      window.dispatchEvent(connextMeterLevelSet);
-                      bindConnextMeterLevelSet = true;
-                    }
-                  },
-                  onHasAccess: (e) => {
-                    if (!bindConnextIsSubscriber) {
-                      // this event fires on every Engage loading if user is subscriber
-                      connextLogger('>> onHasAccess', e);
-                      window.dispatchEvent(connextIsSubscriber);
-                      bindConnextIsSubscriber = true;
-                    }
-                  }
-                  /*
-                  onAuthorized: (e) => {
-                    // this event fires on every Engage loading if user is logged in but doesn't have access to this product
-                    connextLogger('>> onAuthorized', e);
-                  },
-                  onHasNoActiveSubscription: (e) => {
-                    // this event fires on every Engage loading if user is logged in but subscription is stopped or inactive
-                    connextLogger('>> onHasNoActiveSubscription', e);
-                  },
-                  onHasAccessNotEntitled: (e) => {
-                    // this event fires on every Engage loading if user is logged in
-                    // and doesn't have access to this product but has access to another one
-                    connextLogger('>> onHasAccessNotEntitled', e);
-                  },
-                  onActionClosed: (e) => { connextLogger('>> onActionClosed', e); },
-                  onActionShown: (e) => { connextLogger('>> onActionShown', e); },
-                  onCampaignFound: (e) => { connextLogger('>> onCampaignFound', e); },
-                  onCriticalError: (e) => { connextLogger('>> onCriticalError', e); },
-                  onDebugNote: (e) => { connextLogger('>> onDebugNote', e); }
-                  */
+              onLoggedIn: (e) => {
+                if (!bindConnextLoggedIn) {
+                  connextLogger('>> onLoggedIn', e);
+                  window.dispatchEvent(connextLoggedIn);
+                  bindConnextLoggedIn = true;
+                }
+              },
+              onNotAuthorized: (e) => {
+                // this event fires on every Engage loading if user is logged out
+                if (!bindConnextNotAuthorized) {
+                  connextLogger('>> onNotAuthorized', e);
+                  window.dispatchEvent(connextLoggedOut);
+                  bindConnextNotAuthorized = true;
+                }
+              },
+              onMeterLevelSet: (e) => {
+                if (!bindConnextMeterLevelSet) {
+                  connextLogger('>> onMeterLevelSet', e);
+                  window.dispatchEvent(connextMeterLevelSet);
+                  bindConnextMeterLevelSet = true;
+                }
+              },
+              onHasAccess: (e) => {
+                if (!bindConnextIsSubscriber) {
+                  // this event fires on every Engage loading if user is subscriber
+                  connextLogger('>> onHasAccess', e);
+                  window.dispatchEvent(connextIsSubscriber);
+                  bindConnextIsSubscriber = true;
                 }
               }
+              /*
+              onAuthorized: (e) => {
+                // this event fires on every Engage loading if user is logged in but doesn't have access to this product
+                connextLogger('>> onAuthorized', e);
+              },
+              onHasNoActiveSubscription: (e) => {
+                // this event fires on every Engage loading if user is logged in but subscription is stopped or inactive
+                connextLogger('>> onHasNoActiveSubscription', e);
+              },
+              onHasAccessNotEntitled: (e) => {
+                // this event fires on every Engage loading if user is logged in
+                // and doesn't have access to this product but has access to another one
+                connextLogger('>> onHasAccessNotEntitled', e);
+              },
+              onActionClosed: (e) => { connextLogger('>> onActionClosed', e); },
+              onActionShown: (e) => { connextLogger('>> onActionShown', e); },
+              onCampaignFound: (e) => { connextLogger('>> onCampaignFound', e); },
+              onCriticalError: (e) => { connextLogger('>> onCriticalError', e); },
+              onDebugNote: (e) => { connextLogger('>> onDebugNote', e); }
+              */
             }
-          ]
+            //other settings if needed
+          });
+        })
+        .catch(function(err) {
+            console.error(err);
         });
       });`,
   }}></script>;
