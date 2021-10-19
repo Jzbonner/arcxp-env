@@ -51,12 +51,10 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
           <ArcAd
             staticSlot={'HP01-LiveUpdates'}
             key={`HP01-${index}`}
-            customId={`div-id-HP01_${index}`}
           />
           <ArcAd
             staticSlot={'MP01-LiveUpdates'}
             key={`MP01-${index}`}
-            customId={`div-id-MP01_${index}`}
           />
         </>;
         break;
@@ -65,13 +63,11 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
           <ArcAd
             staticSlot={'RP01'}
             key={`RP01-${index}`}
-            customId={`div-id-RP01_${index}`}
             lazyLoad={isMeteredStory}
           />
           <ArcAd
             staticSlot={'MP02'}
             key={`MP02-${index}`}
-            customId={`div-id-MP02_${index}`}
             lazyLoad={isMeteredStory}
           />
         </>;
