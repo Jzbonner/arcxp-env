@@ -114,7 +114,7 @@ const ListItem = ({
 
   return (
     <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''} ${isStaffBioPage ? 'staffBio-listItem' : ''} ${noBorder ? 'no-border-bottom' : ''}`}>
-      {!hidePromo && getPromoItem() && !isDontMissFeature && (
+      {!hidePromo && getPromoItem() && !isDontMissFeature && !isSynopsis && (
         <a href={relativeURL} className="homeList-image">
           <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'}/>
             {!isLeftPhotoNoPhotoItem && sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
