@@ -316,6 +316,10 @@
         display: flex;
         flex-direction: row;
         width: 100%;
+
+        @include between-breakpoints(mobile, tablet) {
+          margin-top: 12px;
+        }
       }
 
       h2 {
@@ -438,7 +442,7 @@
       }
 
       &.with-date-marker {
-        margin-top: 20px;
+        margin-top: 25px;
         position: relative;
 
         .c-headline {
@@ -470,16 +474,35 @@
       }
     }
 
-    .liveUpdate-content .c-contentElements {
+    .liveUpdate-content {
+      margin-bottom: 15px;
 
-      > :last-child {
-        margin-bottom: 15px;
-      }
+      .c-contentElements {
+        text-align: center;
+        display: block;
+        width: 100%;
+        max-width: 100%;
 
-      @include breakpoint(desktop-sm) {
-        max-width: 80%;
-        margin-left: 10%;
-        margin-right: 10%;
+        > :last-child {
+          margin-bottom: 0;
+        }
+
+        /* stylelint-disable selector-max-universal */
+
+        > * {
+          text-align: left;
+        }
+
+        @include breakpoint(desktop-sm) {
+
+          > :not(p) {
+            width: auto;
+            min-width: auto;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+          }
+        }
       }
     }
   }
