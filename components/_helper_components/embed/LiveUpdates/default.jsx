@@ -6,6 +6,7 @@ import ArcAd from '../../../features/ads/default';
 import TaboolaFeed from '../../../features/taboolaFeed/default';
 import computeTimeStamp from '../../article/timestamp/_helper_functions/computeTimeStamp';
 import getContentMeta from '../../global/siteMeta/_helper_functions/getContentMeta';
+import { ConnextAuthTrigger } from '../../global/connext/default';
 import Byline from '../../article/byline/default';
 import './default.scss';
 
@@ -51,12 +52,10 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
           <ArcAd
             staticSlot={'HP01-LiveUpdates'}
             key={`HP01-${index}`}
-            customId={`div-id-HP01_${index}`}
           />
           <ArcAd
             staticSlot={'MP01-LiveUpdates'}
             key={`MP01-${index}`}
-            customId={`div-id-MP01_${index}`}
           />
         </>;
         break;
@@ -65,13 +64,11 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
           <ArcAd
             staticSlot={'RP01'}
             key={`RP01-${index}`}
-            customId={`div-id-RP01_${index}`}
             lazyLoad={isMeteredStory}
           />
           <ArcAd
-            staticSlot={'MP02'}
+            staticSlot={'MP02-LiveUpdates'}
             key={`MP02-${index}`}
-            customId={`div-id-MP02_${index}`}
             lazyLoad={isMeteredStory}
           />
         </>;
@@ -99,26 +96,9 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   };
 
   const highlightNavItem = (hashTarget) => {
-    const { innerHeight } = window || {};
     const activeLink = document.querySelector(`.c-liveUpdateNav a[href='#${activeUpdate}']`) || document.querySelector('.c-liveUpdateNav .is-active');
     if (activeLink) {
       activeLink.setAttribute('class', activeLink.className.replace('is-active', ''));
-    }
-    const targetLink = document.querySelector(`.c-liveUpdateNav a[href='#${hashTarget}']`);
-    const { top: targetLinkTop, bottom: targetLinkBottom } = targetLink.getBoundingClientRect();
-    if (targetLink.className.indexOf('is-active') === -1) {
-      targetLink.className += ' is-active';
-    }
-    // targetLink is outside the viewport from the bottom
-    if (targetLinkBottom > innerHeight) {
-      // The bottom of the targetLink will be aligned to the bottom of the visible area of the scrollable ancestor.
-      targetLink.scrollIntoView(false);
-    }
-
-    // Target is outside the view from the top
-    if (targetLinkTop < 0) {
-      // The top of the targetLink will be aligned to the top of the visible area of the scrollable ancestor
-      targetLink.scrollIntoView();
     }
     setActiveUpdate(hashTarget);
   };
@@ -337,6 +317,8 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     <div className='c-liveUpdateContent'>
       {loopThroughUpdates()}
       {enableTaboola && <TaboolaFeed ampPage={false} lazyLoad={true} treatAsArticle={true} />}
+      {/* if it's a metered story, add the connext auth handlers to load deferred items (e.g. anything with `lazyLoad` above) */}
+      {isMeteredStory && ConnextAuthTrigger()}
     </div>
   </div>;
 };

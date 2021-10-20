@@ -98,6 +98,7 @@ export const adSlots = {
   },
   'HP01-LiveUpdates': {
     slotName: 'HP01',
+    biddingName: 'HP01-LiveUpdates',
     dimensions: [
       [
         [970, 250],
@@ -116,7 +117,7 @@ export const adSlots = {
     ],
     bidding: {
       amazon: {
-        enabled: true,
+        enabled: false,
       },
     },
   },
@@ -712,6 +713,7 @@ export const adSlots = {
   },
   'MP01-LiveUpdates': {
     slotName: 'MP01',
+    biddingName: 'MP01-LiveUpdates',
     dimensions: [
       [], // desktop+
       [
@@ -725,7 +727,7 @@ export const adSlots = {
     ],
     bidding: {
       amazon: {
-        enabled: true,
+        enabled: false,
       },
     },
   },
@@ -743,6 +745,25 @@ export const adSlots = {
     bidding: {
       amazon: {
         enabled: true,
+      },
+    },
+  },
+  'MP02-LiveUpdates': {
+    slotName: 'MP02',
+    biddingName: 'MP02-LiveUpdates',
+    dimensions: [
+      [], // desktop+
+      [
+        [300, 250],
+      ], // mobile & tablet
+    ],
+    breakpoints: [
+      [1024, 0], // desktop+
+      [0, 0], // mobile & tablet
+    ],
+    bidding: {
+      amazon: {
+        enabled: false,
       },
     },
   },
