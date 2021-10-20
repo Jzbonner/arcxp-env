@@ -62,8 +62,11 @@
       width: 95%;
       max-width: 95%;
       margin: 0 auto;
+    }
 
-      @include breakpoint(desktop-sm) {
+    @include breakpoint(desktop-sm) {
+
+      .c-liveUpdatesStatus {
         max-width: 50%;
       }
     }
