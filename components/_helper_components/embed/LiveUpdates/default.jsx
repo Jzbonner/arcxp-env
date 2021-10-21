@@ -28,7 +28,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   let timeout;
   const stickyHeaderAdjustment = 80;
   let toggledAdSlot = 'HP03';
-
   const copyToClipboard = (e) => {
     e.preventDefault();
     let action = () => console.error('fallback in case Window or Navigator are unknown');
@@ -96,11 +95,34 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   };
 
   const highlightNavItem = (hashTarget) => {
-    const activeLink = document.querySelector(`.c-liveUpdateNav a[href='#${activeUpdate}']`) || document.querySelector('.c-liveUpdateNav .is-active');
-    if (activeLink) {
-      activeLink.setAttribute('class', activeLink.className.replace('is-active', ''));
+    if (hashTarget !== activeUpdate) {
+      // const { innerHeight } = window || {};
+      const activeLink = document.querySelector(`.c-liveUpdateNav a[href='#${activeUpdate}']`) || document.querySelector('.c-liveUpdateNav .is-active');
+      if (activeLink) {
+        activeLink.setAttribute('class', activeLink.className.replace('is-active', ''));
+      }
+      /*
+      const targetLink = document.querySelector(`.c-liveUpdateNav a[href='#${hashTarget}']`);
+      if (targetLink && (targetLink !== document.querySelector('.c-liveUpdateNav a:first-child') || targetLink !== document.querySelector('.c-liveUpdateNav a:last-child'))) {
+        const { top: targetLinkTop, bottom: targetLinkBottom } = targetLink.getBoundingClientRect();
+        if (targetLink.className.indexOf('is-active') === -1) {
+          targetLink.className += ' is-active';
+        }
+        // targetLink is outside the viewport from the bottom
+        if (targetLinkBottom > innerHeight) {
+          // The bottom of the targetLink will be aligned to the bottom of the visible area of the scrollable ancestor.
+          targetLink.scrollIntoView(false);
+        }
+
+        // Target is outside the view from the top
+        if (targetLinkTop < 0) {
+          // The top of the targetLink will be aligned to the top of the visible area of the scrollable ancestor
+          targetLink.scrollIntoView();
+        }
+      }
+      */
+      setActiveUpdate(hashTarget);
     }
-    setActiveUpdate(hashTarget);
   };
 
   const handleNavTrigger = (evt, hash) => {
@@ -118,16 +140,12 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     const hashTarget = !target && hash ? hash : target && target.substr(target.indexOf('#') + 1);
     const targetUpdate = document.querySelector(`[name='${hashTarget}']`) || null;
     if (targetUpdate) {
-      isScrolling = true;
       // move to the selected update in the content area
       window.scrollTo({
         top: targetUpdate.offsetTop - stickyHeaderAdjustment, // to handle sticky header
         left: 0,
         behavior: 'smooth',
       });
-      // udate the `is-active` indicator in the left nav
-      highlightNavItem(hashTarget);
-      isScrolling = false;
     }
   };
 
@@ -153,19 +171,23 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
           const { 0: pos, 1: height, 2: hash } = update;
           const activeTriggerPos = lastScrollPos + stickyHeaderAdjustment;
           if (
-            activeTriggerPos >= pos
-            && (
-              (
-                i < updateTopPositions.length - 1
-                && (
-                  pos + height > viewableHeight
-                  || (
-                    pos + height <= viewableHeight
-                    && activeTriggerPos < updateTopPositions[i + 1][0]
+            (
+              activeTriggerPos < updateTopPositions[1][0]
+            ) || (
+              activeTriggerPos >= pos
+              && (
+                (
+                  i < updateTopPositions.length - 1
+                  && (
+                    pos + height > viewableHeight
+                    || (
+                      pos + height <= viewableHeight
+                      && activeTriggerPos < updateTopPositions[i + 1][0]
+                    )
                   )
                 )
+                || i === updateTopPositions.length - 1
               )
-              || i === updateTopPositions.length - 1
             )
           ) {
             hasAMatch = true;
