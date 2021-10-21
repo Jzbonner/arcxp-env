@@ -207,6 +207,7 @@ const getContentMeta = () => {
   const blogName = metaValue('blogname');
   const noIndex = metaValue('no index');
   const enableDarkMode = metaValue('dark mode') === 'true';
+  const inMemoriam = metaValue('in-memoriam') === 'true';
   const pageIsLive = metaValue('live');
   const pbPaywall = metaValue('story-meter');
   const metaTitle = metaValue('title');
@@ -250,6 +251,7 @@ const getContentMeta = () => {
     syndication,
     noIndex,
     enableDarkMode,
+    inMemoriam,
     pageIsLive,
     metaTitle,
     metaDescription,

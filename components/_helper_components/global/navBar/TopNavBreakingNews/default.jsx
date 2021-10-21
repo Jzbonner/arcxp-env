@@ -23,9 +23,10 @@ const TopNavBreakingNews = ({
   const [aboveWindowShade, setAboveWindowShade] = useState(false);
   const [hasHalfShade, setHasHalfShade] = useState(false);
   const windowExists = typeof window !== 'undefined';
-  const { enableDarkMode } = getContentMeta();
+  const { enableDarkMode, inMemoriam } = getContentMeta();
   const appContext = useAppContext();
   const { isAdmin } = appContext;
+  const darkModeWithAds = !enableDarkMode || (enableDarkMode && !inMemoriam);
 
   const docHasWindowShade = (checkCollapse, checkHalfShade) => {
     if (windowExists) {
@@ -84,7 +85,7 @@ const TopNavBreakingNews = ({
 
   return (
     <>
-      {!noAds && !enableDarkMode && !isAdmin && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
+      {!noAds && darkModeWithAds && !isAdmin && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
       <div className={`nav-breaking-news ${enableDarkMode ? 'dark-mode' : ''} ${aboveWindowShade ? 'is-above-shade' : ''} ${docHasWindowShade(true) || hasHalfShade ? 'with-half-shade' : ''}`} >
         <WeatherAlerts />
         <NavBar
