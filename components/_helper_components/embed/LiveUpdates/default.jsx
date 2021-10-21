@@ -324,11 +324,15 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         {liveUpdatesMapper(firstLiveUpdate)}
         <div className='story-paygate_placeholder'>
          {liveUpdatesMapper(restOfLiveUpdates)}
+         {enableTaboola && <TaboolaFeed ampPage={false} lazyLoad={isMeteredStory} treatAsArticle={true} />}
         </div>
       </>;
     }
 
-    return liveUpdatesMapper(liveUpdates);
+    return <>
+      {liveUpdatesMapper(liveUpdates)}
+      {enableTaboola && <TaboolaFeed ampPage={false} lazyLoad={isMeteredStory} treatAsArticle={true} />}
+    </>;
   };
 
   return <div className='c-liveUpdates'>
@@ -338,7 +342,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     </div>
     <div className='c-liveUpdateContent'>
       {loopThroughUpdates()}
-      {enableTaboola && <TaboolaFeed ampPage={false} lazyLoad={true} treatAsArticle={true} />}
       {/* if it's a metered story, add the connext auth handlers to load deferred items (e.g. anything with `lazyLoad` above) */}
       {isMeteredStory && ConnextAuthTrigger()}
     </div>
