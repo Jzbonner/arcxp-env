@@ -140,6 +140,7 @@
       align-self: flex-start;
       max-height: calc(100vh - 60px);
       overflow: auto;
+      margin-bottom: 20px;
       scrollbar-width: none; /* Firefox */
       -ms-overflow-style: none;  /* Internet Explorer 10+ */
 
@@ -307,12 +308,47 @@
         }
       }
 
-      .c-sectionHome.full-width .c-contentElements & .arc_ad[class*="HP01"] {
-        margin-bottom: 0;
+      .c-sectionHome.full-width .c-contentElements & .arc_ad {
+
+        .border-top {
+          display: none;
+        }
+
+        &[class*="HP01"] {
+          margin-bottom: 0;
+        }
       }
 
       .arcad {
+        padding-top: 35px !important;
         padding-bottom: 30px !important;
+        border-top: 1px solid #cdcdcd;
+      }
+
+      .story-newsletter_placeholder:not(:empty),
+      .story-newsletter_placeholder ~ .Mg2-connext[data-display-type].cmg-subscribe-to-newsletters-inline-with-email,
+      .story-nativo_placeholder--moap:not(:empty),
+      .story-interscroller__placeholder:not(:empty) {
+        border-top: 1px solid #cdcdcd;
+      }
+
+      .Mg2-connext[data-display-type].cmg-subscribe-to-newsletters-inline-with-email {
+        width: 100% !important;
+
+        .container-fluid {
+          width: 300px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        #newsletters-subscribe-header {
+          text-align: center;
+
+          .title {
+            width: 95%;
+            display: block;
+          }
+        }
       }
 
       .c-headline {
@@ -373,20 +409,28 @@
         &:focus:after {
           position: absolute;
           top: -20px;
-          right: 0;
-          font-size: 10px;
-          padding: 2px 4px;
-          content: "The link has been copied to your clipboard.";
-          color: #323231;
-          background: #fff;
+          right: calc(100% + 10px);
+          padding: 4px 8px;
+          content: "Copied!";
+          color: #000;
+          letter-spacing: -.23px;
+          text-align: center;
+          background: #fff5ec;
+          border: 1px solid #ececec;
+          box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, .6);
+          border-radius: 2px;
           min-width: max-content;
           opacity: 0;
-          transition: opacity .75s;
+          transition: all .75s;
           cursor: default;
+
+          @include text-styles(.75rem, 1, "Gordita-Bold");
         }
 
         &.is-clicked:focus:after {
           opacity: 1;
+          top: 2px;
+          transition: opacity .75s;
         }
       }
 
