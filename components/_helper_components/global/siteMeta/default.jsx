@@ -47,13 +47,15 @@ const SiteMeta = () => {
   const parsedDescription = safeHtml(description, { whiteList: {} });
   // cap meta description at 150 characters.Google has no limit but recommends <= 150 chars, 160 chars max is what is allowed in video center.
   const metaDescParsed = parsedDescription.substring(0, 150);
+  // Page Builder seems to render Page Metadata automatically for pages, here is a conditional check to manually add them for non-pages
+  const hasMetaDescription = !!metaValue('description');
 
   return (
     <>
       <link rel="apple-touch-icon" href={appleIconPath} />
       <link rel="icon" type="image/png" href={faviconPath} />
       <title>{pageTitle}</title>
-      { metaDescParsed ? <meta name="description" content={metaDescParsed} /> : null }
+      {!hasMetaDescription && metaDescParsed ? <meta name="description" content={metaDescParsed} /> : null}
       {!isNativoLandingPage && <link rel="canonical" href={updatedURL} />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:description" content={parsedDescription} />
