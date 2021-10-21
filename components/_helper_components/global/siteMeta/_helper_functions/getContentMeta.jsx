@@ -202,7 +202,7 @@ const getContentMeta = () => {
     storyCredits: content?.credits,
     storyInitialBodyText: getInitialBodyText(content?.content_elements),
     /* eslint-enable camelcase */
-  }));
+  })).reverse();
 
   const blogName = metaValue('blogname');
   const noIndex = metaValue('no index');
