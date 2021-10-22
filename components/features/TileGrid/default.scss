@@ -2,7 +2,6 @@
 
 .c-tileGrid {
   display: flex;
-  justify-content: space-between;
   flex-flow: column wrap;
 
   @include breakpoint(tablet) {
@@ -39,7 +38,6 @@
 
       img {
         transition: all .1s ease-in-out;
-        cursor: pointer;
         object-fit: cover;
       }
     }
