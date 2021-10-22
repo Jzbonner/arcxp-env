@@ -22,7 +22,7 @@ const AuthorMenuItem = ({
     className={`c-author-menu-item ${
       area.id === selectedLeftMenuItem.id ? 'active' : ''} ${setBorderBottomOnLast && area.id !== selectedLeftMenuItem.id ? 'set-border-bottom' : ''}`}>
       <a
-        href={`${contextPath}/${pageUri}/${area.tag}${!isProd && `?_website=${arcSite}`}`}
+        href={`${contextPath}/${pageUri}/${area.tag}/${!isProd && `?_website=${arcSite}`}`}
         onClick={e => setCategory(e, area)}>
         {area.name}
       </a>

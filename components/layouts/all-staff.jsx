@@ -96,7 +96,7 @@ export const AllStaffPage = () => {
     setSelectedLeftMenuItem(area);
     updateStaffers(area.tag);
     setLeftMenuVisibility(false);
-    window.history.pushState({}, null, `${contextPath}/${pageUri}/${area.tag}${!isProd && `?_website=${arcSite}`}`);
+    window.history.pushState({}, null, `${contextPath}/${pageUri}/${area.tag}/${!isProd && `?_website=${arcSite}`}`);
   };
 
   return (
