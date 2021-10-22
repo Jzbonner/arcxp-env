@@ -33,7 +33,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     e.preventDefault();
     let action = () => console.error('fallback in case Window or Navigator are unknown');
     if (window && navigator && navigator.clipboard) {
-      const anchor = `${window.location.pathname}#${e.target.getAttribute('data-target')}`;
+      const anchor = `${window.location.origin}${window.location.pathname}#${e.target.getAttribute('data-target')}`;
       action = navigator.clipboard.writeText(anchor).then(() => console.log(`Async: Copying ${anchor} to clipboard was successful!`), err => console.error('Async: Could not copy text: ', err)).then(() => {
         e.target.classList.value += ' is-clicked';
         setTimeout(() => {
