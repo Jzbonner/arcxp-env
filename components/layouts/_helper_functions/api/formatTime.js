@@ -18,7 +18,7 @@ export const formatApiTime = (firstPubDate, displayDate) => {
   const day = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(pubDate);
   const month = new Intl.DateTimeFormat('en', { month: 'long' }).format(pubDate);
   const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(pubDate);
-  const hour = new Intl.DateTimeFormat('en', { hour: '2-digit', hour12: false }).format(pubDate);
+  const hour = new Intl.DateTimeFormat('en', { hour: '2-digit', hourCycle: 'h23' }).format(pubDate);
   const min = new Intl.DateTimeFormat('en', { minute: '2-digit' }).format(pubDate);
   const sec = new Intl.DateTimeFormat('en', { second: '2-digit' }).format(pubDate);
   const timeZoneName = new Intl.DateTimeFormat('en', { timeZoneName: 'short' }).format(pubDate);
