@@ -33,7 +33,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     e.preventDefault();
     let action = () => console.error('fallback in case Window or Navigator are unknown');
     if (window && navigator && navigator.clipboard) {
-      const anchor = `${window.location.pathname}#${e.target.getAttribute('data-target')}`;
+      const anchor = `${window.location.origin}${window.location.pathname}#${e.target.getAttribute('data-target')}`;
       action = navigator.clipboard.writeText(anchor).then(() => console.log(`Async: Copying ${anchor} to clipboard was successful!`), err => console.error('Async: Could not copy text: ', err)).then(() => {
         e.target.classList.value += ' is-clicked';
         setTimeout(() => {
@@ -316,22 +316,27 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
             <ContentElements contentElements={contentElements} ampPage={false} />
           </div>
         </div>
-        {/* we insert items (ads, placeholders, etc) at specific intervals.
-          For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
-          We also have one for the newsletter placeholder (after #6)
-        */}
-        {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
-        {hashId && updateIndex === liveUpdates.length && handleNavTrigger(null, hashId)}
       </>;
 
       if (isFirstUpdate) {
         // we don't lazyload the first update
-        return updateContentOutput();
+        return <>
+          {updateContentOutput()}
+          {renderAdOrPlaceholder(updateIndex - 1)}
+        </>;
       }
 
-      return <LazyLoad placeholder={<div className="c-placeholder-liveUpdate" />} height="100%" width="100%" offset={300} once={true} key={elId}>
-        {updateContentOutput()}
-      </LazyLoad>;
+      return <>
+        <LazyLoad placeholder={<div className="c-placeholder-liveUpdate" />} height="100%" width="100%" offset={300} once={true} key={elId}>
+          {updateContentOutput()}
+        </LazyLoad>
+        {/* we insert items (ads, placeholders, etc) at specific intervals.
+          For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
+          We also have one for the newsletter placeholder (after #6)
+        */}
+        {(updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
+        {hashId && updateIndex === liveUpdates.length && handleNavTrigger(null, hashId)}
+      </>;
     });
 
     if (!isNav) {
