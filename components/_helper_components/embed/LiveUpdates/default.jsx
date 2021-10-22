@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import LazyLoad from 'react-lazyload';
 import { useAppContext } from 'fusion:context';
 import ContentElements from '../../article/contentElements/default.jsx';
 import ArcAd from '../../../features/ads/default';
@@ -20,7 +21,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   const { requestUri } = appContext;
   const uriHasHash = requestUri.indexOf('#') > -1;
   const hashId = uriHasHash ? requestUri.substr(requestUri.indexOf('#') + 1) : null;
-  const [activeUpdate, setActiveUpdate] = useState(hashId);
+  let activeUpdate = hashId;
   let viewportHeight = 0;
   let lastScrollPos = 0;
   let updateTopPositions = [];
@@ -96,32 +97,32 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
 
   const highlightNavItem = (hashTarget) => {
     if (hashTarget !== activeUpdate) {
-      // const { innerHeight } = window || {};
       const activeLink = document.querySelector(`.c-liveUpdateNav a[href='#${activeUpdate}']`) || document.querySelector('.c-liveUpdateNav .is-active');
       if (activeLink) {
         activeLink.setAttribute('class', activeLink.className.replace('is-active', ''));
       }
-      /*
       const targetLink = document.querySelector(`.c-liveUpdateNav a[href='#${hashTarget}']`);
-      if (targetLink && (targetLink !== document.querySelector('.c-liveUpdateNav a:first-child') || targetLink !== document.querySelector('.c-liveUpdateNav a:last-child'))) {
+      if (targetLink) {
         const { top: targetLinkTop, bottom: targetLinkBottom } = targetLink.getBoundingClientRect();
         if (targetLink.className.indexOf('is-active') === -1) {
           targetLink.className += ' is-active';
         }
         // targetLink is outside the viewport from the bottom
-        if (targetLinkBottom > innerHeight) {
+        if (targetLinkBottom > viewportHeight + 10) {
           // The bottom of the targetLink will be aligned to the bottom of the visible area of the scrollable ancestor.
           targetLink.scrollIntoView(false);
         }
 
         // Target is outside the view from the top
-        if (targetLinkTop < 0) {
+        if (targetLinkTop < 10) {
           // The top of the targetLink will be aligned to the top of the visible area of the scrollable ancestor
-          targetLink.scrollIntoView();
+          targetLink.scrollIntoView(true);
         }
       }
-      */
-      setActiveUpdate(hashTarget);
+      activeUpdate = hashTarget;
+    } else if (document.querySelector('.c-liveUpdateNav .is-active') === null) {
+      const targetLink = document.querySelector(`.c-liveUpdateNav a[href='#${activeUpdate}']`);
+      if (targetLink) targetLink.className += ' is-active';
     }
   };
 
@@ -172,7 +173,8 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
           const activeTriggerPos = lastScrollPos + stickyHeaderAdjustment;
           if (
             (
-              activeTriggerPos < updateTopPositions[1][0]
+              updateTopPositions.length > 1
+              && activeTriggerPos < updateTopPositions[1][0]
             ) || (
               activeTriggerPos >= pos
               && (
@@ -191,7 +193,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
             )
           ) {
             hasAMatch = true;
-            setActiveUpdate(hash);
             return highlightNavItem(hash);
           }
           return false;
@@ -241,10 +242,15 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     };
   }, []);
 
+  const resizeObserver = new ResizeObserver(() => {
+    determineUpdateTopPositions(true);
+  });
+
   useEffect(() => {
-    window.addEventListener('resize', () => determineUpdateTopPositions(true));
+    const liveUpdateContent = document.querySelector('.c-liveUpdateContent');
+    resizeObserver.observe(liveUpdateContent);
     return () => {
-      window.addEventListener('resize', () => determineUpdateTopPositions(true));
+      resizeObserver.unobserve(liveUpdateContent);
     };
   }, []);
 
@@ -279,7 +285,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
 
       if (isNav) {
         if (!activeUpdate && isFirstUpdate) {
-          setActiveUpdate(elId);
+          activeUpdate = elId;
         }
         return <>
           {insertDateMarker && <a key={`${elId}-dateMarker`} className='date-marker' title={timestampDate}>
@@ -295,8 +301,8 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         </>;
       }
 
-      return <>
-        <div className={`c-liveUpdate ${!isFirstUpdate && insertDateMarker ? 'with-date-marker' : ''}`} name={elId} key={elId}>
+      const updateContentOutput = () => <>
+        <div className={`c-liveUpdate ${!isFirstUpdate && insertDateMarker ? 'with-date-marker' : ''}`} name={elId}>
           {!isFirstUpdate && insertDateMarker && <div className='date-marker'>{timestampDate}</div>}
           <div className='c-headline'>
             <h2>{headline}</h2>
@@ -317,22 +323,28 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         {(updateIndex === 1 || updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
         {hashId && updateIndex === liveUpdates.length && handleNavTrigger(null, hashId)}
       </>;
+
+      if (isFirstUpdate) {
+        // we don't lazyload the first update
+        return updateContentOutput();
+      }
+
+      return <LazyLoad placeholder={<div className="c-placeholder-liveUpdate" />} height="100%" width="100%" offset={300} once={true} key={elId}>
+        {updateContentOutput()}
+      </LazyLoad>;
     });
 
-    if (isMeteredStory && !isNav) {
+    if (!isNav) {
       return <>
         {liveUpdatesMapper(firstLiveUpdate)}
         <div className='story-paygate_placeholder'>
-         {liveUpdatesMapper(restOfLiveUpdates)}
-         {enableTaboola && <TaboolaFeed ampPage={false} lazyLoad={isMeteredStory} treatAsArticle={true} />}
+          {liveUpdatesMapper(restOfLiveUpdates)}
+          {enableTaboola && <TaboolaFeed ampPage={false} lazyLoad={isMeteredStory} treatAsArticle={true} />}
         </div>
       </>;
     }
 
-    return <>
-      {liveUpdatesMapper(liveUpdates)}
-      {enableTaboola && <TaboolaFeed ampPage={false} lazyLoad={isMeteredStory} treatAsArticle={true} />}
-    </>;
+    return liveUpdatesMapper(liveUpdates);
   };
 
   return <div className='c-liveUpdates'>

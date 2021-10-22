@@ -3,6 +3,19 @@
 @import "../../../../src/styles/base";
 
 @include amp-exclude {
+  @include between-breakpoints(mobile, mobile-sm) {
+
+    body .Mg2-connext[data-display-type] .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .c-sectionContent.not-live .c-sectionHome,
+    .c-sectionContent.is-live .c-sectionHome {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
 
   .c-Row {
     margin-bottom: 0;
@@ -152,6 +165,10 @@
       @include text-styles(.875rem, 1.25, "Gordita");
       @include position-sticky(75px);
 
+      @include between-breakpoints(mobile, mobile-sm) {
+        flex: 0 0 45px;
+      }
+
       @include breakpoint(tablet) {
         flex-basis: 20%;
         max-width: 200px;
@@ -279,6 +296,11 @@
 
       @include text-styles(1rem, 1.625, "Gordita");
 
+      @include between-breakpoints(mobile, mobile-sm) {
+        padding-left: 10px;
+        width: calc(100% - 54px);
+      }
+
       @include breakpoint(tablet) {
         padding-left: 16px;
         width: calc(80%);
@@ -314,15 +336,42 @@
           display: none;
         }
 
-        &[class*="HP01"] {
+        &[class*="HP01"],
+        &[class*="MP01"],
+        &[class*="RP01"],
+        &[class*="MP02"] {
           margin-bottom: 0;
+        }
+
+        @include between-breakpoints(mobile, mobile-lg) {
+          overflow: visible;
+        }
+
+        @include between-breakpoints(mobile, mobile-sm) {
+
+          .arcad[class*="MP0"] {
+            margin: 0 -9px;
+            width: calc(100% + 16px);
+            text-align: center;
+          }
+        }
+
+        @include between-breakpoints(mobile-sm, mobile-lg) {
+
+          .arcad[class*="MP0"] {
+            margin: 0 -9px 0 -5px;
+            width: calc(100% + 12px);
+          }
         }
       }
 
       .arcad {
         padding-top: 35px !important;
         padding-bottom: 30px !important;
-        border-top: 1px solid #cdcdcd;
+
+        &:not([class*="MP0"]) {
+          border-top: 1px solid #cdcdcd;
+        }
       }
 
       .story-newsletter_placeholder:not(:empty),
