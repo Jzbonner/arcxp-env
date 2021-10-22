@@ -11,12 +11,15 @@ import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreaki
 import plus from '../../resources/icons/staff/plus.svg';
 import AREAS_OF_EXPERTISE from './_helper_functions/staffpage/AREAS_OF_EXPERTISE';
 import getQueryParams from './_helper_functions/getQueryParams';
+import fetchEnv from '../_helper_components/global/utils/environment';
 
 import '../../src/styles/container/_all-staff.scss';
 
 export const AllStaffPage = () => {
   const appContext = useAppContext();
-  const { globalContent, globalContentConfig, requestUri } = appContext;
+  const {
+    globalContent, globalContentConfig, requestUri, contextPath,
+  } = appContext;
   const fusionContext = useFusionContext();
   const { arcSite = 'ajc' } = fusionContext;
   const { query } = globalContentConfig || {};
@@ -27,8 +30,8 @@ export const AllStaffPage = () => {
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
-
-  const pageUri = 'staff';
+  const isProd = fetchEnv() === 'prod';
+  const pageUri = 'newsroom';
 
   const setStaffFilter = () => {
     setLeftMenuVisibility(false);
@@ -93,7 +96,7 @@ export const AllStaffPage = () => {
     setSelectedLeftMenuItem(area);
     updateStaffers(area.tag);
     setLeftMenuVisibility(false);
-    window.history.pushState({}, null, `/${pageUri}/${area.tag}`);
+    window.history.pushState({}, null, `${contextPath}/${pageUri}/${area.tag}${!isProd && `?_website=${arcSite}`}`);
   };
 
   return (
