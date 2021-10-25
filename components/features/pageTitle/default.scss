@@ -18,6 +18,14 @@
     padding-bottom: 12px;
     text-align: initial;
 
+    a,
+    a:visited,
+    a:hover,
+    a:active {
+      color: inherit;
+      cursor: pointer;
+    }
+
     @include breakpoint(desktop-sm) {
       font-size: 45px;
     }
