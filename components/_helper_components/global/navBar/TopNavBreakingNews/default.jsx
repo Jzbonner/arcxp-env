@@ -57,6 +57,8 @@ const TopNavBreakingNews = ({
 
   useEffect(() => {
     if (windowExists) {
+      // add the dark-mode class to ensure body bg is blacked out
+      document.querySelector('body').classList += ` ${enableDarkMode ? 'dark-mode ' : ''}`;
       document.onreadystatechange = () => {
         if (document.readyState === 'complete') {
           if (docHasWindowShade()) {

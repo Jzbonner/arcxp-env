@@ -45,7 +45,7 @@
         z-index: 2;
         margin-top: -8rem;
         margin-bottom: 0;
-  
+
         @include breakpoint(tablet) {
           position: absolute;
           padding: 0;
@@ -56,29 +56,29 @@
         @include between-breakpoints(tablet, desktop-sm) {
           width: 100vw;
         }
-  
+
         @include breakpoint(desktop-sm) {
           max-width: 600px;
           transform: translate(calc(40vw + 40px), calc(-292px - 15%));
         }
-  
+
         @include breakpoint(desktop-lg) {
           max-width: 723px;
           transform: translate(529px, -314px);
         }
-  
+
         @include breakpoint(desktop-nav) {
           transform: translate(557px, -331px);
         }
-  
+
         @include breakpoint(desktop-xl) {
           transform: translate(596px, -345px);
         }
-  
+
         @include breakpoint(desktop-xxl) {
           transform: translate(654px, -385px);
         }
-  
+
         &:after {
           display: none;
         }
@@ -108,6 +108,10 @@
 
     .c-image-component {
       margin-top: 0;
+
+      .lazyload-wrapper .placeholder-image {
+        filter: brightness(0);
+      }
     }
 
     .c-homeListContainer {
@@ -121,7 +125,7 @@
       @include breakpoint(desktop-sm) {
         margin-top: -8rem;
       }
-  
+
       @include breakpoint(desktop-nav) {
         margin-top: -10rem;
       }
