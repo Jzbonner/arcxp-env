@@ -186,12 +186,17 @@ const getContentMeta = () => {
     isOpinion = !!sections.find(section => section._id && section._id.indexOf('/opinion') > -1);
   }
 
-  const getInitialBodyText = contentEls => contentEls.reduce((accumulator, el) => {
-    if (el.type === 'text' && accumulator.length < 200) {
-      return accumulator + el.content;
+  const getInitialBodyText = (contentEls) => {
+    if (Array.isArray(contentEls)) {
+      return contentEls.reduce((accumulator, el) => {
+        if (el.type === 'text' && accumulator.length < 200) {
+          return accumulator + el.content;
+        }
+        return accumulator;
+      }, '');
     }
-    return accumulator;
-  }, '');
+    return '';
+  };
 
   const stories = Array.isArray(globalContent) && globalContent.map(content => ({
     /* eslint-disable camelcase */
