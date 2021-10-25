@@ -52,6 +52,13 @@
       "labels": ["tablet2"]
     },
     {
+      "mediaQuery": "(min-width: 768px) and (max-width: 1023px)",
+      "sizesSupported": [
+        [320, 50]
+      ],
+      "labels": ["tablet3"]
+    },
+    {
       "mediaQuery": "(max-width: 767px)",
       "sizesSupported": [
         [300, 250]
@@ -102,6 +109,26 @@
               "placementGroup": "ROS",
               "placementId": "19064850",
               "placementName": "DDN_ROS_DesktopTablet_HP01"
+            }
+          }
+        ]
+      }
+    },
+    "HP01-LiveUpdates": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop1", "desktop2"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "23054548",
+              "placementName": "DDN_ROS_LiveUpdates_Desktop_HP01"
             }
           }
         ]
@@ -242,6 +269,26 @@
               "placementGroup": "ROS",
               "placementId": "19064854",
               "placementName": "DDN_ROS_Tablet_RP01h2"
+            }
+          }
+        ]
+      }
+    },
+    "RP01-LiveUpdates": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "23054549",
+              "placementName": "DDN_ROS_LiveUpdates_Desktop_RP01"
             }
           }
         ]
@@ -407,6 +454,26 @@
         ]
       }
     },
+    "MP01-LiveUpdates": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet3", "phone1"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "23054550",
+              "placementName": "DDN_ROS_LiveUpdates_PhoneTablet_MP01"
+            }
+          }
+        ]
+      }
+    },
     "MP02": {
       "amazon": {
         "enabled": "true"
@@ -422,6 +489,26 @@
               "placementGroup": "ROS",
               "placementId": "19064859",
               "placementName": "DDN_ROS_Phone_MP02"
+            }
+          }
+        ]
+      }
+    },
+    "MP02-LiveUpdates": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["phone"],
+            "params": {
+              "publisher": "DDN",
+              "placementGroup": "ROS",
+              "placementId": "23054551",
+              "placementName": "DDN_ROS_LiveUpdates_PhoneTablet_MP02"
             }
           }
         ]

@@ -67,6 +67,13 @@
       "labels": ["tablet3"]
     },
     {
+      "mediaQuery": "(min-width: 768px) and (max-width: 1023px)",
+      "sizesSupported": [
+        [320, 50]
+      ],
+      "labels": ["tablet4"]
+    },
+    {
       "mediaQuery": "(max-width: 767px)",
       "sizesSupported": [
         [300, 250]
@@ -182,6 +189,51 @@
             "labels": ["desktop1", "tablet1"],
             "params": {
               "unit": "540941866",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
+    "HP01-LiveUpdates": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop1", "desktop2"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "23054544",
+              "placementName": "AJC_ROS_LiveUpdates_Desktop_HP01"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["desktop1", "desktop2"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a969161017c7c9d3287a09eb6ce0083"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["desktop1", "desktop2"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2191242"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["desktop1", "desktop2"],
+            "params": {
+              "unit": "545727377",
               "delDomain": "ajc-d.openx.net"
             }
           }
@@ -777,6 +829,51 @@
         ]
       }
     },
+    "RP01-LiveUpdates": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "23054545",
+              "placementName": "AJC_ROS_LiveUpdates_Desktop_RP01"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["desktop"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a969958017c7c9d2d8aa0a1af27008b"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["desktop"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2191244"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["desktop"],
+            "params": {
+              "unit": "545727378",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
     "RP03": {
       "amazon": {
         "enabled": "true"
@@ -1304,6 +1401,59 @@
         ]
       }
     },
+    "MP01-LiveUpdates": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet4", "phone1"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "23054546",
+              "placementName": "AJC_ROS_LiveUpdates_PhoneTablet_MP01"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["tablet4"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a969449017c7c9d384da0a339330071"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["phone1"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c8ed460197",
+              "pos": "8a969161017c7c9d3287a0a44bd00085"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["tablet4", "phone1"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2191246"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["tablet4", "phone1"],
+            "params": {
+              "unit": "545727379",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
     "MP02": {
       "amazon": {
         "enabled": "true"
@@ -1343,6 +1493,59 @@
             "labels": ["phone"],
             "params": {
               "unit": "540941879",
+              "delDomain": "ajc-d.openx.net"
+            }
+          }
+        ]
+      }
+    },
+    "MP02-LiveUpdates": {
+      "amazon": {
+        "enabled": "true"
+      },
+      "prebid": {
+        "enabled": "true",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "labels": ["tablet2", "phone"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "23054547",
+              "placementName": "AJC_ROS_LiveUpdates_PhoneTablet_MP02"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["tablet2"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c4cf640191",
+              "pos": "8a969161017c7c9d3287a0a3dabf0084"
+            }
+          },
+          {
+            "bidder": "aol",
+            "labels": ["phone"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c8ed460197",
+              "pos": "8a969958017c7c9d2d8aa0a4c20c008c"
+            }
+          },
+          {
+            "bidder": "rubicon",
+            "labels": ["tablet2", "phone"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2191248"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["tablet2", "phone"],
+            "params": {
+              "unit": "545727380",
               "delDomain": "ajc-d.openx.net"
             }
           }
