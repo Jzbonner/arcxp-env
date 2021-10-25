@@ -14,7 +14,7 @@ const FeatureTitle = ({ title, moreURL }) => {
 
   const buildTitle = () => {
     if (moreURL) {
-      return <a href={getLink()} className="titleURL">{title}</a>;
+      return <a href={getLink()}>{title}</a>;
     }
 
     return title;
