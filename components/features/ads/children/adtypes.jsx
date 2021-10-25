@@ -105,7 +105,6 @@ export const adSlots = {
         [728, 90],
       ], // lg desktop (1280+)
       [
-        [728, 315],
         [728, 90],
       ], // desktop
       [], // mobile & tablet
@@ -456,6 +455,26 @@ export const adSlots = {
       },
     },
   },
+  'RP01-LiveUpdates': {
+    slotName: 'RP01',
+    biddingName: 'RP01-LiveUpdates',
+    dimensions: [
+      [
+        [300, 600],
+        [300, 250],
+      ], // desktop
+      [], // mobile+
+    ],
+    breakpoints: [
+      [1024, 0], // desktop
+      [0, 0], // mobile+
+    ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
   RP02: {
     dimensions: [
       [
@@ -717,7 +736,6 @@ export const adSlots = {
     dimensions: [
       [], // desktop+
       [
-        [320, 150],
         [320, 50],
       ], // mobile & tablet
     ],
