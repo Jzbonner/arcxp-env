@@ -20,7 +20,7 @@ const PageTitle = () => {
 
   const buildTitle = () => {
     if (pageTitleURL) {
-      return <a href={getLink()} className="titleURL">{pageTitle}</a>;
+      return <a href={getLink()}>{pageTitle}</a>;
     }
 
     return pageTitle;
