@@ -11,7 +11,7 @@
   margin-bottom: 10px;
 
   @include breakpoint(tablet) {
-    margin-bottom: 0;
+    margin-bottom: 12px;
   }
 
   @include breakpoint(desktop-sm) {
