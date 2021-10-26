@@ -8,7 +8,7 @@ body.dark-mode #fusion-app {
 
 @include amp-exclude {
 
-  body.dark-mode.window-shade-collapsed > div:first-child div:empty {
+  body.dark-mode > :first-child div:empty {
     // edge-case catch for window shade / half shade wrapper's inline background-color
     background-color: inherit !important; // stylelint-disable declaration-no-important
   }
@@ -22,6 +22,10 @@ body.dark-mode #fusion-app {
     width: 100%;
     z-index: 9999;
     background: #fff;
+
+    &.dark-mode {
+      background: #000;
+    }
   }
 
   &.with-half-shade:not(.is-above-shade) .c-breakingNews {
@@ -33,7 +37,8 @@ body.dark-mode #fusion-app {
   }
 
   &.dark-mode {
-    background-color: #000;
+    // background: linear-gradient(to bottom, #000 75%, transparent);
+    background: #000;
 
     .c-headerNav {
       @include between-breakpoints(mobile, tablet) {
