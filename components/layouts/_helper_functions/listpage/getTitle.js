@@ -8,20 +8,18 @@ const getTitle = ({ title, titleUrl, collectionTitle }) => {
     return `//${titleUrl}`;
   };
 
-  if (title && titleUrl) {
-    return (
-      <div className="c-page-title">
-        <div className="c-title-content">
-          <a href={getLink()}>{title}</a>;
-        </div>
-      </div>
-    );
-  }
+  const buildTitle = () => {
+    if (titleUrl) {
+      return <a href={getLink()}>{title}</a>;
+    }
+
+    return title;
+  };
 
   if (title) {
     return (
       <div className="c-page-title">
-        <div className="c-title-content">{title}</div>
+        <div className="c-title-content">{buildTitle()}</div>
       </div>
     );
   }
