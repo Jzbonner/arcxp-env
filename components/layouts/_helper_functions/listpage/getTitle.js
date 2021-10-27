@@ -1,6 +1,23 @@
 import React from 'react';
 
-const getTitle = (title, collectionTitle) => {
+const getTitle = ({ title, titleUrl, collectionTitle }) => {
+  const getLink = () => {
+    if (titleUrl.indexOf('http') === 0 || titleUrl.indexOf('/') === 0) {
+      return titleUrl;
+    }
+    return `//${titleUrl}`;
+  };
+
+  if (title && titleUrl) {
+    return (
+      <div className="c-page-title">
+        <div className="c-title-content">
+          <a href={getLink()}>{title}</a>;
+        </div>
+      </div>
+    );
+  }
+
   if (title) {
     return (
       <div className="c-page-title">
@@ -8,6 +25,7 @@ const getTitle = (title, collectionTitle) => {
       </div>
     );
   }
+
 
   if (collectionTitle) {
     return (
