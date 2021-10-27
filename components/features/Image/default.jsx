@@ -23,6 +23,7 @@ const Image = ({ customFields }) => {
     label,
     explainerText,
     additionalText,
+    doNotLazyLoad,
   } = customFields;
 
   if (!src) {
@@ -80,6 +81,7 @@ const Image = ({ customFields }) => {
             [1100, 0],
             [800, 0],
           ]}
+          noLazyLoad={doNotLazyLoad}
         />
         {additionalText && (
           <div className="additionalText">{additionalText}</div>
@@ -146,6 +148,11 @@ Image.propTypes = {
     }),
     link: PropTypes.string.tag({
       name: 'Image Link',
+    }),
+    doNotLazyLoad: PropTypes.bool.tag({
+      label: 'Disable lazy load',
+      description: 'Check this box to turn off lazy loading of this image.',
+      value: '',
     }),
   }),
 };
