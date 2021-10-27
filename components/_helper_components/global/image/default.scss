@@ -61,8 +61,39 @@
       }
     }
 
+    .c-expand {
+      position: absolute;
+      left: calc(50% - 60px);
+      top: calc(50% - 60px);
+      width: 120px;
+      visibility: hidden;
+    }
+
     &.amp {
       margin-bottom: 5px;
+    }
+
+    &.inline:hover {
+      background-color: rgba(155, 155, 155, .73);
+
+      .c-expand {
+        visibility: visible;
+        background-color: initial;
+        z-index: 1;
+      }
+
+      .lazyload-wrapper {
+        z-index: -1;
+        opacity: .4;
+      }
+
+      .caption-arrow {
+        background-color: initial;
+      }
+
+      .c-caption {
+        z-index: 2;
+      }
     }
   }
 

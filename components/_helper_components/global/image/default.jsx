@@ -9,6 +9,7 @@ import checkWindowSize from '../utils/check_window_size/default';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import setFocalCoords from '../../../../content/sources/helper_functions/setFocalCoords';
+import expandIcon from '../../../../resources/icons/expand.svg';
 import './default.scss';
 
 /*
@@ -108,12 +109,14 @@ const Image = ({
           <img src={mImage.src} alt={altTextContent} />
         </picture>
       ) : (
-        <img
-          src={dataSrc}
-          alt={altTextContent}
-          className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`}
-          onClick={onClickRun}
-        />
+        <>
+          <img
+            src={dataSrc}
+            alt={altTextContent}
+            className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`}
+            onClick={onClickRun}
+          />
+        </>
       )}
     </>;
     const renderedImageOutput = () => <>
@@ -160,9 +163,10 @@ const Image = ({
 
     return (
       <div className={`c-image-component ${imageMarginBottom || ''}`}>
-        <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
+        <div className={`image-component-image ${ampPage ? 'amp' : ''} ${imageType === 'isInlineImage' ? 'inline' : ''}`}>
           {renderedImageOutput()}
           {imageType !== 'isHomepageImage' && renderCaption()}
+          { imageType === 'isInlineImage' && <img src={expandIcon} className='c-expand' alt={'icon to expand image'}/> }
         </div>
         {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
       </div>
