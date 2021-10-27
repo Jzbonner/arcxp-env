@@ -23,6 +23,8 @@ const Image = ({ customFields }) => {
     label,
     explainerText,
     additionalText,
+    doNotLazyLoad,
+    enableGradient,
   } = customFields;
 
   if (!src) {
@@ -80,6 +82,7 @@ const Image = ({ customFields }) => {
             [1100, 0],
             [800, 0],
           ]}
+          noLazyLoad={doNotLazyLoad}
         />
         {additionalText && (
           <div className="additionalText">{additionalText}</div>
@@ -90,7 +93,7 @@ const Image = ({ customFields }) => {
 
   return (
     <div
-      className="c-image-feature b-margin-bottom-d40-m20"
+      className={`c-image-feature b-margin-bottom-d40-m20 ${enableGradient ? 'with-gradient' : ''}`}
       style={{ '--width': width }}
     >
       {link && <a href={link}>{getImage()}</a>}
@@ -146,6 +149,16 @@ Image.propTypes = {
     }),
     link: PropTypes.string.tag({
       name: 'Image Link',
+    }),
+    doNotLazyLoad: PropTypes.bool.tag({
+      label: 'Disable lazy load',
+      description: 'Check this box to turn off lazy loading of this image.',
+      value: '',
+    }),
+    enableGradient: PropTypes.bool.tag({
+      label: 'Enable css gradient',
+      description: 'Check this box to allow for a css gradient to be applied (if defined in code).',
+      value: '',
     }),
   }),
 };

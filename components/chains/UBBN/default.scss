@@ -1,142 +1,182 @@
+@import ".//../../../src/styles/base/mixins";
 @import "./../../../src/styles/base";
+/* stylelint-disable declaration-no-important */
 
-.c-ubbnChain {
-  background-color: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  width: 100vw;
-  margin-bottom: 10px;
+@include amp-exclude {
 
-  @include breakpoint(tablet) {
-    margin-bottom: 0;
-  }
+  .c-ubbnChain {
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    max-width: 100vw;
+    overflow: visible;
+    margin-bottom: 10px;
 
-  @include breakpoint(desktop-sm) {
-    min-width: 700px;
-  }
-
-  .chain-content {
-    position: relative;
+    @include breakpoint(tablet) {
+      margin-bottom: 12px;
+    }
 
     @include breakpoint(desktop-sm) {
-      max-width: 1540px;
+      min-width: 700px;
     }
 
-    .c-image-feature {
-      margin-top: -4.5rem;
-
-      @include breakpoint(tablet) {
-        margin-top: -5rem;
-      }
-
-      @include breakpoint(desktop-sm) {
-        margin-top: -8rem;
-      }
-    }
-
-    .row {
+    .chain-content {
       position: relative;
 
-      .c-page-title {
-        position: relative;
-        z-index: 2;
-        margin-top: -8rem;
-        margin-bottom: 0;
-  
+      @include breakpoint(desktop-sm) {
+        max-width: 1540px;
+      }
+
+      .c-image-feature {
+        margin-top: 0;
+
         @include breakpoint(tablet) {
-          position: absolute;
-          padding: 0;
-          margin-right: 45px;
-          transform: translate(43vw, -154px);
+          margin-top: -3rem;
         }
 
-        @include between-breakpoints(tablet, desktop-sm) {
-          width: 100vw;
+        &.with-gradient {
+
+          picture {
+            z-index: 1;
+
+            &:after {
+              content: " ";
+              position: absolute;
+              z-index: 2;
+              background: linear-gradient(to top, #000 17%, rgba(0, 0, 0, .3) 25%, rgba(0, 0, 0, 0) 29%), linear-gradient(90deg, #000 3%, rgba(0, 0, 0, .46) 9%, rgba(0, 0, 0, .01) 15%), linear-gradient(270deg, #000 3%, rgba(0, 0, 0, .46) 9%, rgba(0, 0, 0, .01) 15%), linear-gradient(to bottom, #000 4%, rgba(0, 0, 0, .47) 11%, rgba(0, 0, 0, .01) 18%);
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+
+              @include breakpoint(tablet) {
+                background: linear-gradient(95deg, rgba(0, 0, 0, 0) 37%, #000 86%), linear-gradient(267deg, rgba(0, 0, 0, 0) 77%, #000 98%), linear-gradient(177deg, rgba(0, 0, 0, 0) 53%, #000 88%), linear-gradient(to bottom, #000, transparent 15%, transparent);
+              }
+            }
+          }
         }
-  
-        @include breakpoint(desktop-sm) {
-          max-width: 600px;
-          transform: translate(calc(40vw + 40px), calc(-292px - 15%));
-        }
-  
-        @include breakpoint(desktop-lg) {
-          max-width: 723px;
-          transform: translate(529px, -314px);
-        }
-  
-        @include breakpoint(desktop-nav) {
-          transform: translate(557px, -331px);
-        }
-  
-        @include breakpoint(desktop-xl) {
-          transform: translate(596px, -345px);
-        }
-  
-        @include breakpoint(desktop-xxl) {
-          transform: translate(654px, -385px);
-        }
-  
-        &:after {
-          display: none;
+      }
+
+      .row {
+        position: relative;
+
+        > div:last-child {
+          z-index: 2;
+          position: relative;
         }
 
-        .c-title-content {
-          color: #fff;
-          border-bottom: none;
-          text-align: center;
-          padding: 0 20px;
-
-          @include text-styles(1.875rem, 1.38, "Lora-Bold");
+        .c-page-title {
+          position: relative;
+          z-index: 2;
+          margin-top: -9rem;
+          margin-bottom: 0;
 
           @include breakpoint(tablet) {
-            text-align: left;
-          }
-
-          @include between-breakpoints(tablet, desktop-sm) {
-            width: 50%;
+            position: absolute;
+            padding: 0;
+            margin-right: 20px;
+            margin-top: 0;
+            left: 52%;
+            top: 12%;
+            width: auto;
           }
 
           @include breakpoint(desktop-sm) {
-            font-size: 3.125rem;
+            max-width: calc(48% - 30px);
+            top: 15%;
+          }
+
+          @include breakpoint(desktop-lg) {
+            top: 20%;
+          }
+
+          @include breakpoint(desktop-xxl) {
+            top: 22%;
+          }
+
+          &:after {
+            display: none;
+          }
+
+          a:hover,
+          a:visited:hover {
+            color: #cbcbcb !important;
+          }
+
+          .c-title-content {
+            color: #fff;
+            border-bottom: none;
+            text-align: center;
+            display: block;
+            padding: 0 20px;
+
+            @include text-styles(1.875rem, 1.38, "Lora-Bold");
+
+            @include breakpoint(tablet) {
+              text-align: left;
+            }
+
+            @include breakpoint(desktop-sm) {
+              font-size: 3.125rem;
+            }
+
+            @include breakpoint(desktop-lg) {
+              font-size: 3.75rem;
+              line-height: 1.2;
+            }
           }
         }
       }
-    }
 
-    .c-image-component {
-      margin-top: 0;
-    }
+      .c-image-component {
+        margin-top: 0;
 
-    .c-homeListContainer {
-      padding: 35px 30px 0;
+        .lazyload-wrapper {
+          background: #000;
 
-      @include breakpoint(tablet) {
-        padding: 0 30px;
-        margin-top: -5.6rem;
+          .placeholder-image {
+            filter: brightness(0);
+            position: relative;
+          }
+        }
       }
 
-      @include breakpoint(desktop-sm) {
-        margin-top: -8rem;
-      }
-  
-      @include breakpoint(desktop-nav) {
-        margin-top: -10rem;
+      .c-homeListContainer {
+        padding: 20px 30px 0;
+
+        @include between-breakpoints(mobile, tablet) {
+
+          &.top-photo-display-class .homeList-image {
+            width: 100%;
+            margin: 0;
+          }
+        }
+
+        @include breakpoint(tablet) {
+          padding: 0 30px;
+          margin-top: -9rem;
+        }
+
+        @include breakpoint(desktop-xxxl) {
+          padding: 0;
+        }
       }
 
-      @include breakpoint(desktop-xxxl) {
-        padding: 0;
-      }
-    }
+      .c-homeList .headline a {
+        color: #fff;
 
-    .c-homeList .headline a {
-      color: #fff;
+        &:hover,
+        &:visited:hover {
+          color: #cbcbcb !important;
+        }
+      }
     }
   }
-}
 
-.dark-mode ~ .c-homepageContent {
-  padding-top: 0;
+  .dark-mode ~ .c-homepageContent {
+    padding-top: 0;
+  }
 }
