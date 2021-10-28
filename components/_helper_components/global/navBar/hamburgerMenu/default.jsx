@@ -5,6 +5,7 @@ import Search from '../search/default';
 import Login from '../login/default';
 import NavFooter from '../navFooter/default';
 import NavCopyright from '../navCopyright/default';
+import Overlay from '../../overlay/default';
 import '../../../../../src/styles/container/_c-headerNav.scss';
 
 const HamburgerMenu = ({
@@ -37,7 +38,7 @@ const HamburgerMenu = ({
 
   return (
   <>
-  <div className={`b-overlay ${hamburgerToggle ? 'isVisible' : ''}`} onClick={(e) => { e.preventDefault(); setToggle(false); }}></div>
+  <Overlay toggle={hamburgerToggle} setToggle={setToggle}/>
   <nav className={`
   ${hamburgerToggle ? 'mobile-nav-activated' : ''}
   nav-mobile`}>
