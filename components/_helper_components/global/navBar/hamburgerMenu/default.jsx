@@ -37,7 +37,7 @@ const HamburgerMenu = ({
 
   return (
   <>
-  <div className={`nav-wrapper ${hamburgerToggle ? 'isVisible' : ''}`} onClick={(e) => { e.preventDefault(); setToggle(false); }}></div>
+  <div className={`b-overlay ${hamburgerToggle ? 'isVisible' : ''}`} onClick={(e) => { e.preventDefault(); setToggle(false); }}></div>
   <nav className={`
   ${hamburgerToggle ? 'mobile-nav-activated' : ''}
   nav-mobile`}>
