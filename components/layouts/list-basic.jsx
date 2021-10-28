@@ -20,6 +20,7 @@ const ListPageLayout = () => {
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
 
   const title = renderables[2]?.props?.customFields?.pageTitle;
+  const titleUrl = renderables[2]?.props.customFields?.pageTitleURL;
   const textBox = renderables[2]?.props?.customFields?.text || renderables[3]?.props?.customFields?.text;
 
   return (
@@ -27,7 +28,7 @@ const ListPageLayout = () => {
       <GlobalAdSlots />
       {!noHeaderAndFooter && <TopNavBreakingNews />}
       <main className="c-sectionCentered">
-        <SectionHome feature={<ListEnhanced customFields={{ title, textBox }}/>} />
+        <SectionHome feature={<ListEnhanced customFields={{ title, textBox, titleUrl }}/>} />
       </main>
       {!noHeaderAndFooter && <>
         <Footer />

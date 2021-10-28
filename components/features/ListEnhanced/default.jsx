@@ -17,7 +17,12 @@ const ListEnhanced = ({ customFields = {} }) => {
   const appContext = useAppContext();
   const { metaValue, globalContentConfig: { query: globalContentQuery, source: globalContentContentSource } } = appContext;
   const noAds = metaValue('noAds');
-  const { content = {}, title, textBox } = customFields;
+  const {
+    content = {},
+    title,
+    textBox,
+    titleUrl,
+  } = customFields;
   const { contentConfigValues: customFieldsQuery, contentService: customFieldContentSource } = content;
   let source;
 
@@ -89,7 +94,7 @@ const ListEnhanced = ({ customFields = {} }) => {
   return (
     <>
       <div className="c-list-enhanced b-margin-bottom-d30-m20">
-        {getTitle(title, collectionTitle)}
+        {getTitle({ title, titleUrl, collectionTitle })}
         {getNewsTipText(textBox, 'mobile-tablet')}
         {Array.from(Array(sections).keys()).map((i, sectionIndex) => (
           <Fragment key={sectionIndex}>
@@ -182,6 +187,10 @@ ListEnhanced.propTypes = {
     title: PropTypes.string.tag({
       name: 'Title',
       description: 'Title of List',
+    }),
+    titleUrl: PropTypes.string.tag({
+      name: 'Title Url',
+      description: 'Optional title URL',
     }),
     textBox: PropTypes.richtext.tag({
       name: 'Text Box',
