@@ -94,17 +94,48 @@
     }
 
     .image-component-image.inline {
-      position: fixed;
-      left: 5%;
-      top: 17.5%;
-      z-index: 10002;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      left: 0;
+      top: 77.5%;
+    }
+
+    .lazyload-wrapper,
+    .c-caption {
       width: calc(100vw - 10%);
       max-width: 1600px;
+      position: unset;
     }
 
     .c-caption,
-    .lazyload-wrapper img {
+    .lazyload-wrapper,
+    .image-close {
       z-index: 10002;
+    }
+
+    .c-caption {
+
+      .photo-caption-btn {
+        display: none;
+      }
+
+      .photo-caption {
+        padding: 0;
+        border-radius: unset;
+        background-color: unset;
+        box-shadow: none;
+        display: flex;
+
+        .photo-caption-text {
+          padding: 30px 0 0;
+          
+          @include text-styles(1.125rem, 1.88, "Gordita");
+        }
+      }
     }
 
     .image-close {
@@ -112,6 +143,7 @@
       position: fixed;
       top: 20px;
       right: 20px;
+      width: 50px;
       cursor: pointer;
     }
   }
