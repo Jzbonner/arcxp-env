@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import truncateHeadline from '../../../../layouts/_helper_functions/homepage/truncateHeadline';
 import Image from '../../../../_helper_components/global/image/default';
