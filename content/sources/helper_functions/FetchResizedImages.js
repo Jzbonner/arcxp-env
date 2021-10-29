@@ -41,7 +41,6 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes, squareI
     if (imageResponses.length) {
       imageResponses.forEach((img, i) => {
         if (img && originalEls[i]) {
-          if (!apiData.length) console.error('dave, img', img);
           originalEls[i].useSrcSet = useSrcSet;
           originalEls[i].resized_obj = img || null;
         }
@@ -70,35 +69,16 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes, squareI
     return newGallData;
   }
 
-  if (apiData) {
+  if (apiData && apiData.length) {
     const imagesToFetch = [];
     const newArrData = apiData;
-    const isAnImageObject = !apiData.length;
 
-    if (!isAnImageObject) {
-      newArrData.forEach((el) => {
-        const imageEl = el.teaseImageObject || el.promo_items?.basic;
-        imagesToFetch.push(imageEl);
-      });
-    } else if (apiData.type === 'image') {
-      imagesToFetch.push(apiData);
-    }
+    newArrData.forEach((el) => {
+      const imageEl = el.teaseImageObject || el.promo_items?.basic;
+      imagesToFetch.push(imageEl);
+    });
 
     const fetchedImages = addResizedData(imagesToFetch);
-
-    if (isAnImageObject) {
-      const currImageObj = fetchedImages[0];
-      return {
-        credits: currImageObj.credits,
-        subtitle: currImageObj.subtitle,
-        width: currImageObj.width,
-        height: currImageObj.height,
-        caption: currImageObj.caption,
-        type: currImageObj.type,
-        url: currImageObj.url,
-        resized_obj: currImageObj.resized_obj,
-      };
-    }
 
     fetchedImages.forEach((fetchedImageObj, e) => {
       if (fetchedImageObj) {

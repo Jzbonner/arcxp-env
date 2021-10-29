@@ -25,11 +25,7 @@ const fetch = (query = {}) => {
         Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
       },
     })
-    .then(({ data }) => {
-      const resizedImage = FetchResizedImages(arcSite, data, 1600, 0, useSrcSet, srcSetSizes, null, null, false);
-      // console.error('dave, resizedImage', resizedImage);
-      return resizedImage;
-    })
+    .then(({ data }) => FetchResizedImages(arcSite, data, 1600, 0, useSrcSet, srcSetSizes, null, null, false))
     .catch((error) => {
       console.log('AXIOS CATCH - photo (individual) fetch => ', error);
     });

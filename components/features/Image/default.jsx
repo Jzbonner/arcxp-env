@@ -122,6 +122,11 @@ const Image = ({ customFields }) => {
 
     if (!imageObj) return null;
 
+    if (isPartOfUbbn) {
+      delete imageObj.caption;
+      delete imageObj.credits;
+    }
+
     return (
       <>
         {label && <div className="label">{label}</div>}
