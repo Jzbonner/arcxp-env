@@ -18,8 +18,10 @@ class Api {
     const {
       globalContent, globalContentConfig, arcSite: siteID, requestUri,
     } = this.props || {};
-    const { query } = globalContentConfig || {};
-    const { id: collectionId, from, size } = query || {};
+    const { query, source } = globalContentConfig || {};
+    const {
+      id: collectionId, from, size, limit,
+    } = query || {};
     const feedStart = globalContent ? 0 : from - 1; // we start at 0 when populating from globalContent so as to avoid double-filtering of results (collection & query content sources natively respect `from`)
     const queryParams = getQueryParams(requestUri);
     const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
@@ -28,8 +30,8 @@ class Api {
     const standardFeed = outPutTypePresent && queryParams.outputType === 'rss';
     const siteDomain = `${fetchEnv() === 'prod' ? 'www' : 'sandbox'}.${handleSiteName(siteID)}.com`;
 
-    let maxItems = feedStart + size;
-    if (maxItems > globalContent.length) {
+    let maxItems = source === 'most-read' ? limit : (feedStart + size);
+    if (Array.isArray(globalContent) && (!maxItems || maxItems > globalContent.length)) {
       maxItems = globalContent.length;
     }
 
@@ -70,7 +72,8 @@ class Api {
           content_elements: contentElements = [], first_publish_date: firstPubDate, display_date: displayDate, canonical_url: canonicalUrl, _id: guid, type = '', headlines, description, credits = {}, promo_items: promoItems, streams,
         } = item || {};
 
-        const title = headlines && headlines.basic ? `<![CDATA[${headlines.basic}]]>` : '';
+        /* eslint-disable no-nested-ternary */
+        const title = (headlines && headlines.basic) ? `<![CDATA[${headlines.basic}]]>` : item.title ? `<![CDATA[${item.title}]]>` : '';
 
         const orgString = getAuthorOrganization(credits, null, false);
 
@@ -232,6 +235,22 @@ class Api {
           };
 
           return galleryXmlObject;
+        }
+        if (item.stats && item.stats.type && source === 'most-read') {
+          const path = item.path ? item.path : '';
+
+          const xmlObject = {
+            item: [
+              {
+                title,
+              },
+              {
+                link: `https://${path}`,
+              },
+            ],
+          };
+
+          return xmlObject;
         }
         return {};
       });
