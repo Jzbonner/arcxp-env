@@ -17,10 +17,12 @@ const ListItem = ({
   promo_items: promoItems,
   firstInlineImage,
   teaseImageObject,
+  title,
+  path,
 }) => {
   const { hide_timestamp: hideTimestamp } = label || {};
   const { text: isHideTimestampTrue } = hideTimestamp || {};
-  const relativeURL = websiteUrl || canonicalUrl || '/';
+  const relativeURL = websiteUrl || canonicalUrl || (path && path.split('com')[1]) || '/';
 
   function getPromoItem() {
     if (teaseImageObject) {
@@ -56,36 +58,39 @@ const ListItem = ({
   if (relativeURL === '/') return null;
 
   return (
-    <div className='c-enhancedList-listItem'>
-      <div className="col-1">
-        {getTeaseIcon(contentType)}
-        <div className="headline">
-          <a href={relativeURL}>{truncateHeadline(headlines.basic, false)}</a>
+    <>
+      { headlines.basic || title ? <div className='c-enhancedList-listItem'>
+          <div className="col-1">
+            {getTeaseIcon(contentType)}
+            <div className="headline">
+              <a href={relativeURL}>{truncateHeadline(headlines.basic || title, false)}</a>
+            </div>
+            <TimeStamp
+              firstPublishDate={firstPublishDate}
+              displayDate={displayDate}
+              isHideTimestampTrue={isHideTimestampTrue}
+              isTease={true}
+            />
+          </div>
+          {getPromoItem() && (
+            <a href={relativeURL} className="image">
+              <Image
+                src={getPromoItem()}
+                width={110}
+                height={110}
+                imageType="isHomepageImage"
+                teaseContentType={
+                  contentType === 'video' || contentType === 'gallery'
+                    ? contentType
+                    : null
+                }
+                squareImage={true}
+              />
+            </a>
+          )}
         </div>
-        <TimeStamp
-          firstPublishDate={firstPublishDate}
-          displayDate={displayDate}
-          isHideTimestampTrue={isHideTimestampTrue}
-          isTease={true}
-        />
-      </div>
-      {getPromoItem() && (
-        <a href={relativeURL} className="image">
-          <Image
-            src={getPromoItem()}
-            width={110}
-            height={110}
-            imageType="isHomepageImage"
-            teaseContentType={
-              contentType === 'video' || contentType === 'gallery'
-                ? contentType
-                : null
-            }
-            squareImage={true}
-          />
-        </a>
-      )}
-    </div>
+        : null }
+    </>
   );
 };
 
@@ -101,6 +106,8 @@ ListItem.propTypes = {
   promo_items: PropTypes.object,
   firstInlineImage: PropTypes.object,
   teaseImageObject: PropTypes.object,
+  title: PropTypes.string,
+  path: PropTypes.string,
 };
 
 export default ListItem;
