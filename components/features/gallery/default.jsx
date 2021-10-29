@@ -5,7 +5,7 @@ import React, {
 import LazyLoad from 'react-lazyload';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useAppContext } from 'fusion:context';
 import { useSwipeable } from 'react-swipeable';
 import {
   DesktopGallery, DesktopCaption, GalleryItem, OverlayMosiac, MobileGallery, ImageModal,
@@ -30,9 +30,7 @@ const Gallery = (props) => {
   } = props;
 
   const appContext = useAppContext();
-  const fusionContext = useFusionContext();
-  const { isAdmin } = appContext;
-  const { arcSite = 'ajc' } = fusionContext;
+  const { isAdmin, arcSite = 'ajc' } = appContext;
   const isStory = pageType === 'story';
 
   // holds Gallery items
