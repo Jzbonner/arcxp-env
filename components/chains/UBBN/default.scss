@@ -83,21 +83,21 @@
             margin-right: 20px;
             margin-top: 0;
             left: 52%;
-            top: 12%;
+            top: 15%;
             width: auto;
           }
 
           @include breakpoint(desktop-sm) {
             max-width: calc(48% - 30px);
-            top: 15%;
+            top: 25%;
           }
 
           @include breakpoint(desktop-lg) {
-            top: 20%;
+            top: 30%;
           }
 
           @include breakpoint(desktop-xxl) {
-            top: 22%;
+            top: 32%;
           }
 
           &:after {
