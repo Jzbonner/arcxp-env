@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent } from 'fusion:content';
-import { useComponentContext } from 'fusion:context';
 import './default.scss';
 
-const PageTitle = () => {
-  const componentContext = useComponentContext();
-  const { pageTitle, pageTitleURL } = componentContext && componentContext.customFields;
+const PageTitle = ({ customFields }) => {
+  const { pageTitle, pageTitleURL } = customFields;
   const { editableField } = useEditableContent();
 
   const getLink = () => {

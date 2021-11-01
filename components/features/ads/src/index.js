@@ -31,7 +31,7 @@ const AdSetup = ({
   const name = slotName;
   const fullWidthAd = ['HP01', 'HP02', 'HS02', 'MP01', 'MP02', 'MP03', 'MP04', 'RP01', 'RP09', 'RP03'];
 
-  const isStaffPage = window.location.href.search('/staff/') !== -1;
+  const isStaffPage = typeof window !== 'undefined' ? window.location.href.search('/staff/') !== -1 : false;
   const borderTop = fullWidthAd.includes(name) && !isStaffPage ? <div className={`c-sectionHome border-top ${name}`}></div> : null;
 
   useEffect(() => {
