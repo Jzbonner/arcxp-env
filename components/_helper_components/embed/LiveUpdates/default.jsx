@@ -62,7 +62,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       case 3:
         response = <>
           <ArcAd
-            staticSlot={'RP01-LiveUpdates'}
+            staticSlot={'RP01 desktop'}
             key={`RP01-${index}`}
             lazyLoad={isMeteredStory}
           />
