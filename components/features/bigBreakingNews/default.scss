@@ -4,7 +4,8 @@
   width: 100%;
   padding: 0 0 10px;
 
-  h2 {
+  h2,
+  h2 > a {
     text-align: center;
     letter-spacing: .26px;
     color: #000;
@@ -120,7 +121,7 @@
         }
 
         .homeList-text {
-            
+
           .c-label-wrapper {
             text-align: left;
 
