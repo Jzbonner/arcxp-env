@@ -167,6 +167,7 @@ const Image = ({
 
     return (
       <div className={`c-image-component ${toggle ? 'overlay-active' : ''} ${imageMarginBottom || ''}`}>
+        {imageType === 'isInlineImage' && renderCaption()}
         <div className={`image-component-image ${ampPage ? 'amp' : ''} ${imageType === 'isInlineImage' ? 'inline' : ''}`}>
           {renderedImageOutput()}
           {imageType !== 'isHomepageImage' && renderCaption()}

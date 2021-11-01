@@ -10,6 +10,7 @@
   height: auto;
   text-align: center;
   overflow: hidden;
+  position: relative;
 
   @include breakpoint(tablet) {
     flex: 1 0 66%;
@@ -87,6 +88,7 @@
 
   &.overlay-active {
     overflow: visible;
+    position: unset;
     
     .b-overlay {
       background-color: #212126;
@@ -97,18 +99,21 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: absolute;
-      width: 100vw;
-      height: 100vh;
+      position: fixed;
       left: 0;
-      top: 77.5%;
+      top: 10%;
+      width: 100vw;
+      max-width: 1600px;
+      box-sizing: border-box;
+      padding: 0 10%;
+      z-index: 4002;
+      overflow-y: scroll;
     }
 
     .lazyload-wrapper,
     .c-caption {
-      width: calc(100vw - 10%);
-      max-width: 1600px;
       position: unset;
+      width: 100%;
     }
 
     .c-caption,
@@ -118,22 +123,33 @@
     }
 
     .c-caption {
-
+      display: flex;
+      
       .photo-caption-btn {
         display: none;
       }
 
       .photo-caption {
+        width: 100%;
         padding: 0;
         border-radius: unset;
         background-color: unset;
         box-shadow: none;
         display: flex;
+        flex-direction: column-reverse;
 
         .photo-caption-text {
           padding: 30px 0 0;
+          text-align: left;
           
           @include text-styles(1.125rem, 1.88, "Gordita");
+        }
+
+        .photo-credit-text {
+          display: block;
+          color: #fff;
+
+          @include text-styles(1rem, 1, "Gordita");
         }
       }
     }
@@ -155,7 +171,7 @@
 
 .c-image-component:not(.overlay-active) {
 
-  .image-component-image {
+  .image-component-image.inline {
 
     &.inline:hover {
       background-color: rgba(155, 155, 155, .73);
@@ -174,10 +190,10 @@
       .caption-arrow {
         background-color: initial;
       }
-  
-      .c-caption {
-        z-index: 2;
-      }
+    }
+
+    .c-caption {
+      display: none;
     }
   }
 }
