@@ -212,6 +212,8 @@ ArcAd.propTypes = {
   staticSlot: PropTypes.string,
   galleryTopics: PropTypes.array,
   lazyLoad: PropTypes.bool,
+  adSuffix: PropTypes.string,
+  customId: PropTypes.string,
 };
 
 ArcAd.defaultProps = {
