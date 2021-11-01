@@ -37,7 +37,11 @@ body.dark-mode #fusion-app {
   }
 
   &.dark-mode {
-    background: transparent;
+    background: #000;
+
+    @include breakpoint(tablet) {
+      background: transparent;
+    }
 
     .c-headerNav {
       @include between-breakpoints(mobile, tablet) {
