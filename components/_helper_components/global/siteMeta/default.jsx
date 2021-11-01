@@ -79,7 +79,7 @@ const SiteMeta = () => {
       <meta name="language" content="English" />
       {((!isNonContentPage && hideArticleFromSearch) || (noIndex === 'yes')) && <meta name="robots" content="noindex" />}
       {!isNonContentPage && <meta property="article:opinion" content={isOpinion.toString()} />}
-      {<meta name="story.meter" content={paywallStatus} />}
+      {paywallStatus && <meta name="story.meter" content={paywallStatus} />}
       {metaValue('topics') && <meta name="topics" content={metaValue('topics')} />}
     </>
   );
