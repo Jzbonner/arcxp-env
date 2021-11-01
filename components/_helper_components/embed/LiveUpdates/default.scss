@@ -151,7 +151,7 @@
     .c-liveUpdateNav {
       flex: 0 0 50px;
       align-self: flex-start;
-      max-height: calc(100vh - 60px);
+      max-height: calc(100vh - 175px);
       overflow: auto;
       margin-bottom: 20px;
       scrollbar-width: none; /* Firefox */
@@ -526,6 +526,15 @@
           letter-spacing: -.25px;
           font-size: 1.25rem;
           padding: 15px;
+        }
+      }
+
+      @include between-breakpoints(mobile, mobile-xl) {
+
+        #taboola-ajc-custom-feed[data-feed-main-container-id="taboola-ajc-custom-feed"].tbl-feed-full-width {
+          // overriding Taboola's inline stylesheet for small mobile (<480 in their code)
+          margin-left: auto !important;
+          margin-right: auto !important;
         }
       }
     }
