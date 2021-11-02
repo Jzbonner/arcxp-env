@@ -59,6 +59,10 @@
                 background: linear-gradient(95deg, rgba(0, 0, 0, 0) 37%, #000 86%), linear-gradient(267deg, rgba(0, 0, 0, 0) 77%, #000 98%), linear-gradient(177deg, rgba(0, 0, 0, 0) 53%, #000 88%), linear-gradient(to bottom, #000, transparent 8%, transparent);
               }
             }
+
+            @include between-breakpoints(tablet, desktop-xxl) {
+              height: calc(100vw * .5345);
+            }
           }
         }
       }
@@ -84,21 +88,21 @@
             margin-top: 0;
             margin-bottom: 0;
             left: 52%;
-            top: 15%;
+            top: 11%;
             width: auto;
           }
 
           @include breakpoint(desktop-sm) {
             max-width: calc(48% - 30px);
-            top: 25%;
+            top: 22%;
           }
 
           @include breakpoint(desktop-lg) {
-            top: 30%;
+            top: 25%;
           }
 
           @include breakpoint(desktop-xxl) {
-            top: 32%;
+            top: 28%;
           }
 
           &:after {
@@ -161,7 +165,7 @@
 
         @include breakpoint(tablet) {
           padding: 0 30px;
-          margin-top: -9rem;
+          margin-top: -2rem;
         }
 
         @include breakpoint(desktop-xxxl) {
