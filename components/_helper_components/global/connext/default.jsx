@@ -278,6 +278,10 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
   const userIsAuthenticatedClass = 'is-authenticated';
   const connextLSLookup = `connext_user_data_${siteCode}_${configCode}_${environment.toUpperCase()}`;
 
+  // Generate GUID for session id. Used for troubleshooting
+  const generatePart = () => Math.floor(65536 * (1 + Math.random())).toString(16).substring(1);
+  const sessionId = () => generatePart() + generatePart() + generatePart() + generatePart() + generatePart() + generatePart() + generatePart() + generatePart();
+
   return <script type='text/javascript' dangerouslySetInnerHTML={{
     __html: `
       const doc = window.document;
@@ -416,13 +420,6 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
         const connextLoggedIn = new Event('connextLoggedIn');
         const connextLoggedOut = new Event('connextLoggedOut');
         const connextIsSubscriber = new Event('connextIsSubscriber');
-        //Generate GUID for session id. Used for troubleshooting
-        const sessionId = (function() {
-          const generatePart = function() {
-            return Math.floor(65536 * (1 + Math.random())).toString(16).substring(1)
-          }
-          return generatePart() + generatePart() + generatePart() + generatePart() + generatePart() + generatePart() + generatePart() + generatePart();
-        })();
 
         //Function wrapping plugin initalization. Accepts plugin name(string) and initialization settings object. Returns promise
         const initializePlugin = function (pluginName, initSettings) {
@@ -444,7 +441,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           siteCode: "${siteCode}",
           environment: "${environment}",
           resourceUrl: "${environment === 'prod' ? siteDomainURL : siteDomainURL.replace('www', 'sandbox')}",
-          sessionId: sessionId
+          sessionId: "${sessionId()}"
         })
         .then(function() {
           return initializePlugin("G2Insights", {
@@ -456,7 +453,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
             layoutCode: "${siteCode}",
             siteCode: "${siteCode}",
             resourceUrl: "${environment === 'prod' ? siteDomainURL : siteDomainURL.replace('www', 'sandbox')}",
-            sessionId: sessionId
+            sessionId: "${sessionId()}"
           });
         })
         .then(function() {
@@ -468,7 +465,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
             debug: ${debug},
             silentmode: false,
             resourceUrl: "${environment === 'prod' ? siteDomainURL : siteDomainURL.replace('www', 'sandbox')}",
-            sessionId: sessionId,
+            sessionId: "${sessionId()}",
             publicEventHandlers: {
               onConversationDetermined: (e) => {
                 if (!bindConnextConversationDetermined) {
