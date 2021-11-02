@@ -987,24 +987,6 @@
       list-style-type: none;
     }
 
-    .nav-wrapper {
-      background: transparent;
-      content: " ";
-      height: 100%;
-      left: 0;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 10001;
-      background-color: #808080;
-      opacity: .55;
-      display: none;
-
-      &.isVisible {
-        display: flex;
-      }
-    }
-
     .login-menu {
       @include breakpoint(tablet) {
         background-color: #ededed;
