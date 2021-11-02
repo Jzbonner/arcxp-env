@@ -133,7 +133,7 @@ const Image = ({ customFields }) => {
         {explainerText && <div className="explainerText">{explainerText}</div>}
         {imageObj && <ImageGlobal
           src={imageObj}
-          imageType="isInlineImage"
+          imageType="isFeatureImage"
           useSrcSet={!isGif || isPartOfUbbn}
           srcSetSizes={srcSetSizes}
           noLazyLoad={doNotLazyLoad}
