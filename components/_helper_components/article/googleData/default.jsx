@@ -33,6 +33,16 @@ const GoogleStructuredData = (props) => {
     dateModified, articleDesc, metaTitle, metaDescription, stories, coverageEndTime,
   } = contentMeta;
 
+  const formatDateTime = (date) => {
+    // Need to manually convert to EST because new Date() in Fusion returns UTC time instead of local time.
+    const utcDate = new Date(date);
+    const localDateTimeString = utcDate.toLocaleString('en-US', { timeZone: 'America/New_York' });
+    const localDate = new Date(localDateTimeString);
+    const month = `${localDate.getMonth() + 1}`.padStart(2, '0');
+    const timeZoneOffset = utcDate.getHours() - localDate.getHours();
+    return `${localDate.getFullYear()}-${month}-${localDate.getDate()}T${localDate.getHours()}:${localDate.getMinutes()}:${localDate.getSeconds()}-0${timeZoneOffset}:00`;
+  };
+
   if (pageIsLive === 'true' || pageIsLive === 'yes') {
     const scriptData = {
       '@context': 'http://schema.org',
@@ -41,10 +51,19 @@ const GoogleStructuredData = (props) => {
       inLanguage: 'en_US',
       about: {
         '@type': 'Event',
-        startDate: stories[0]?.storyDateModified,
+        startDate: formatDateTime(stories[0]?.storyDateModified),
         name: metaTitle,
       },
-      coverageStartTime: stories[0]?.storyDateModified,
+      location: {
+        '@type': 'Place',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Atlanta',
+          addressRegion: 'GA',
+          addressCountry: 'US',
+        },
+      },
+      coverageStartTime: formatDateTime(stories[0]?.storyDateModified),
       coverageEndTime,
       headline: metaTitle,
       description: metaDescription,
@@ -75,7 +94,7 @@ const GoogleStructuredData = (props) => {
 
         return {
           '@type': 'BlogPosting',
-          datePublished: storyInitialPublishDate,
+          datePublished: formatDateTime(storyInitialPublishDate),
           headline: storyTitle,
           author: {
             '@type': 'Person',
