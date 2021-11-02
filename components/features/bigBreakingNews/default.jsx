@@ -49,7 +49,7 @@ const BigBreakingNews = (customFields = {}) => {
     const [, ...restOfItems] = data;
     return (
       <>
-        <h2>{truncateHeadline(headline, true)}</h2>
+        <h2><a href={leadItemURL}>{truncateHeadline(headline, true)}</a></h2>
         <div className="c-breakingContainer">
             <div className="leadItem">
               <a href={leadItemURL}>
