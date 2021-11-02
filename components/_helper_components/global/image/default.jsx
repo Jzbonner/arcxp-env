@@ -193,7 +193,7 @@ Image.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   imageMarginBottom: PropTypes.string,
-  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage', 'isGalleryImage']).isRequired,
+  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage', 'isGalleryImage', 'isFeatureImage']).isRequired,
   maxTabletViewWidth: PropTypes.number,
   teaseContentType: PropTypes.string,
   canonicalUrl: PropTypes.string,

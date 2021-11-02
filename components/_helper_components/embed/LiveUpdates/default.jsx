@@ -62,7 +62,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       case 3:
         response = <>
           <ArcAd
-            staticSlot={'RP01-LiveUpdates'}
+            staticSlot={'RP01 desktop'}
             key={`RP01-${index}`}
             lazyLoad={isMeteredStory}
           />
@@ -87,7 +87,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
           staticSlot={toggledAdSlot}
           key={`${toggledAdSlot}-${index}`}
           customId={`div-id-${toggledAdSlot}_${index}`}
-          lazyLoad={true}
+          lazyLoad={false}
         />;
         // we alternate HP03 & HP04 for all default slotnames, because there is a (slight) chance of two slots being visible at the same time
         toggledAdSlot = toggledAdSlot === 'HP03' ? 'HP04' : 'HP03';
@@ -329,12 +329,14 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       return <>
         <LazyLoad placeholder={<div className="c-placeholder-liveUpdate" />} height="100%" width="100%" offset={300} once={true} key={elId}>
           {updateContentOutput()}
+          {/* after we get through the "specialty" placeholder inserts, we want to lazyload ads as well as the other content */}
+          {(updateIndex > 10 && (updateIndex - 1) % 3 === 0) && renderAdOrPlaceholder(updateIndex - 1)}
         </LazyLoad>
         {/* we insert items (ads, placeholders, etc) at specific intervals.
           For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
           We also have one for the newsletter placeholder (after #6)
         */}
-        {(updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
+        {(updateIndex === 6 || (updateIndex > 3 && updateIndex <= 10 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
         {hashId && updateIndex === liveUpdates.length && handleNavTrigger(null, hashId)}
       </>;
     });

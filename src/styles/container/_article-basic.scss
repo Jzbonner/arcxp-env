@@ -8,7 +8,7 @@
 
 .c-gallery-basic,
 .c-video-basic {
-  
+
   #div-id-HP00 {
     @include breakpoint(desktop-sm) {
       margin-bottom: 30px;
@@ -273,6 +273,49 @@
 
     .serving {
       font-family: "Gordita-Bold";
+    }
+  }
+
+  .c-hp01-mp01,
+  .c-hp05-mp05 {
+
+    .arcad:not(:empty) {
+      padding: 1.125em 0 0;
+    }
+  }
+
+  .c-hp01-mp01 {
+    @include breakpoint(tablet) {
+      text-align: center;
+      margin: 0 -20px;
+    }
+
+    @include breakpoint(desktop-sm) {
+      margin: 0 -75px;
+      max-width: 970px;
+    }
+  }
+
+  @include breakpoint(desktop-sm) {
+
+    // ensure it only applies to non-teads (i.e. interscroller) since they both share the same placeholder div
+
+    .story-interscroller__placeholder > div:not([class^="teads"]) {
+      clear: both;
+    }
+  }
+
+  @include breakpoint(tablet) {
+
+    .MP01:empty {
+      display: none;
+    }
+  }
+
+  .RP01.c-rightRail,
+  .RP09.c-rightRail {
+    @include between-breakpoints(mobile, desktop-sm) {
+      display: none;
     }
   }
 }
