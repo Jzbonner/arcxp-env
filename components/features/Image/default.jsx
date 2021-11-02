@@ -68,9 +68,9 @@ const Image = ({ customFields }) => {
   }
 
   const srcSetSizes = isPartOfUbbn ? [
-    [1600, 0],
-    [1100, 0],
-    [475, 652],
+    [1600, 856],
+    [1100, 588],
+    [475, 475],
   ] : [];
 
   if (!isResizerOrAbsolute) {
