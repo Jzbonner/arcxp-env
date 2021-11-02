@@ -75,13 +75,14 @@
           position: relative;
           z-index: 2;
           margin-top: -9rem;
-          margin-bottom: 0;
+          margin-bottom: 25px;
 
           @include breakpoint(tablet) {
             position: absolute;
             padding: 0;
             margin-right: 20px;
             margin-top: 0;
+            margin-bottom: 0;
             left: 52%;
             top: 15%;
             width: auto;
