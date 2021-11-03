@@ -259,7 +259,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
-  const { connext } = getProperties(arcSite);
+  const { connext, siteName } = getProperties(arcSite);
   const {
     isEnabled = false,
     clientCode,
@@ -278,6 +278,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
   const userIsLoggedOutClass = 'is-loggedOut';
   const userIsAuthenticatedClass = 'is-authenticated';
   const connextLSLookup = `connext_user_data_${siteCode}_${configCode}_${environment.toUpperCase()}`;
+  const isAJCSite = siteName === 'AJC';
 
   return <script type='text/javascript' dangerouslySetInnerHTML={{
     __html: `
@@ -305,6 +306,18 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                 'event': loginEventToTrigger
               };
               dataLayer.push(userDataObj);
+              if(_cbq && ${!isAJCSite}){
+                switch(userTypeState) {
+                  case 'standard':
+                    _cbq.push(['_acct', 'lgdin']);
+                    break;
+                  case 'premium':
+                    _cbq.push(['_acct', 'paid']);
+                    break;
+                  default:
+                    // do nothing
+                };
+              };
               if (window?.sophi?.data) {
                 const sophiUserState = UserState === 'Subscribed' ? 'Subscribed' : 'Registered'
                 window.sophi.data.visitor = {
@@ -327,6 +340,9 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
             }
           };
           dataLayer.push(userDataObj);
+          if(_cbq && ${!isAJCSite}){
+            _cbq.push(['_acct', 'anon']);
+          };
           if (window?.sophi?.data) {
             window.sophi.data.visitor = {
               type: 'Anonymous',
