@@ -533,7 +533,6 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
               onDebugNote: (e) => { connextLogger('>> onDebugNote', e); }
               */
             }
-            //other settings if needed
           });
         })
         .catch(function(err) {
