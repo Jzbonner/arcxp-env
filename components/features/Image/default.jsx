@@ -46,7 +46,6 @@ const Image = ({ customFields }) => {
     explainerText,
     additionalText,
     doNotLazyLoad,
-    enableGradient,
   } = customFields;
 
   if (!src) {
@@ -148,10 +147,7 @@ const Image = ({ customFields }) => {
   if (!isResizerOrAbsolute && !fetchedImage) return null;
 
   return (
-    <div
-      className={`c-image-feature b-margin-bottom-d40-m20 ${enableGradient ? 'with-gradient' : ''}`}
-      style={{ '--width': width }}
-    >
+    <div className='c-image-feature b-margin-bottom-d40-m20' style={{ '--width': width }}>
       {link && <a href={link}>{getImage()}</a>}
       {!link && getImage()}
     </div>
@@ -209,11 +205,6 @@ Image.propTypes = {
     doNotLazyLoad: PropTypes.bool.tag({
       label: 'Disable lazy load',
       description: 'Check this box to turn off lazy loading of this image.',
-      value: '',
-    }),
-    enableGradient: PropTypes.bool.tag({
-      label: 'Enable css gradient',
-      description: 'Check this box to allow for a css gradient to be applied (if defined in code).',
       value: '',
     }),
   }),
