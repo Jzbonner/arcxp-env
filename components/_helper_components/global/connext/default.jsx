@@ -114,6 +114,8 @@ export const ConnextAuthTrigger = () => {
           siteCode, configCode, environment, 'Connext_CurrentConversations',
         ) || {};
         const { Metered: meteredConversationData = {} } = conversationsDataFromLocalStorage;
+        const { UserState } = GetConnextLocalStorageData(siteCode, configCode, environment, 'connext_user_data') || {};
+
         const {
           Id: meteredConversationId = '',
           Properties: meteredConversationLSProperties = {},
@@ -134,7 +136,7 @@ export const ConnextAuthTrigger = () => {
           || (
             articlesRemainingFromLocalStorage !== 0
             && viewedArticlesArray.length < articleLimitFromLocalStorage - 1
-          )
+          ) || (UserState === 'Subscribed')
         ) {
           logOutput(
             `connext debugging >> (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
