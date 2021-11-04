@@ -87,7 +87,6 @@ const RenderOutputType = (props) => {
         <Libs />
         {!noAds && <NativoScripts tags={tags} uuid={uuid} layout={layout} currentSite={currentSite} />}
         {!noAds && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
-        <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/NavigaAdBlockSlider.js`)}`}></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
       </head>

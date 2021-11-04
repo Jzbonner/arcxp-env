@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import LazyLoad from 'react-lazyload';
 import Caption from '../caption/default.jsx';
+import Overlay from '../overlay/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import setFocalCoords from '../../../../content/sources/helper_functions/setFocalCoords';
+import expandIcon from '../../../../resources/icons/expand.svg';
+import closeIcon from '../../../../resources/icons/close.svg';
 import './default.scss';
 
 /*
@@ -38,6 +41,8 @@ const Image = ({
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
   const isGalleryImage = imageType === 'isGalleryImage';
   let img = null;
+
+  const [toggle, setToggle] = useState(false);
 
   if (resizedObject && (resizedObject.src || resizedObject.length) && !squareImage) {
     img = resizedObject;
@@ -111,12 +116,14 @@ const Image = ({
           <img src={mImage.src} alt={altTextContent} />
         </picture>
       ) : (
-        <img
-          src={dataSrc}
-          alt={altTextContent}
-          className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`}
-          onClick={onClickRun}
-        />
+        <>
+          <img
+            src={dataSrc}
+            alt={altTextContent}
+            className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`}
+            onClick={onClickRun}
+          />
+        </>
       )}
     </>;
     const renderedImageOutput = () => <>
@@ -162,10 +169,16 @@ const Image = ({
     }
 
     return (
-      <div className={`c-image-component ${imageMarginBottom || ''}`}>
-        <div className={`image-component-image ${ampPage ? 'amp' : ''}`}>
+      <div className={`c-image-component ${toggle ? 'overlay-active' : ''} ${imageMarginBottom || ''}`}>
+        {imageType === 'isInlineImage' && renderCaption()}
+        <div className={`image-component-image ${ampPage ? 'amp' : ''} ${imageType === 'isInlineImage' ? 'inline' : ''}`}>
           {renderedImageOutput()}
           {imageType !== 'isHomepageImage' && renderCaption()}
+          { imageType === 'isInlineImage'
+          && <>
+          <img src={closeIcon} className='image-close' alt='icon to close expanded image' onClick={(e) => { e.preventDefault(); setToggle(false); }} />
+          <Overlay toggle={toggle} setToggle={setToggle}/>
+          <img src={expandIcon} className='image-expand' alt={'icon to expand image'} onClick={(e) => { e.preventDefault(); setToggle(true); }}/> </>}
         </div>
         {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
       </div>
@@ -180,7 +193,7 @@ Image.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   imageMarginBottom: PropTypes.string,
-  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage', 'isGalleryImage']).isRequired,
+  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage', 'isGalleryImage', 'isFeatureImage']).isRequired,
   maxTabletViewWidth: PropTypes.number,
   teaseContentType: PropTypes.string,
   canonicalUrl: PropTypes.string,

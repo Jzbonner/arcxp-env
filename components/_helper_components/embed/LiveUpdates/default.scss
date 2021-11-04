@@ -151,7 +151,7 @@
     .c-liveUpdateNav {
       flex: 0 0 50px;
       align-self: flex-start;
-      max-height: calc(100vh - 60px);
+      max-height: calc(100vh - 175px);
       overflow: auto;
       margin-bottom: 20px;
       scrollbar-width: none; /* Firefox */
@@ -172,6 +172,7 @@
       @include breakpoint(tablet) {
         flex-basis: 20%;
         max-width: 200px;
+        max-height: calc(100vh - 75px);
       }
 
       @include between-breakpoints(desktop-sm, desktop-lg) {
@@ -341,6 +342,11 @@
         &[class*="RP01"],
         &[class*="MP02"] {
           margin-bottom: 0;
+          border-top: none;
+
+          .arcad:not(:empty) {
+            border-top: 1px solid #cdcdcd;
+          }
         }
 
         @include between-breakpoints(mobile, mobile-lg) {
@@ -368,10 +374,6 @@
       .arcad {
         padding-top: 35px !important;
         padding-bottom: 30px !important;
-
-        &:not([class*="MP0"]) {
-          border-top: 1px solid #cdcdcd;
-        }
       }
 
       .story-newsletter_placeholder:not(:empty),
@@ -419,13 +421,13 @@
 
         @include between-breakpoints(tablet, desktop-lg) {
           font-size: 1.375rem;
-          line-height: 1.69;
+          line-height: 1.39;
           letter-spacing: -.28px;
         }
 
         @include breakpoint(desktop-lg) {
           font-size: 1.875rem;
-          line-height: 2.19;
+          line-height: 1.49;
           letter-spacing: -.38px;
         }
       }
@@ -484,10 +486,10 @@
       }
 
       .c-timestampByline {
-        margin-bottom: 9px;
+        margin: 9px 0;
 
         @include breakpoint(tablet) {
-          margin-bottom: 15px;
+          margin: 12px 0 15px;
         }
       }
 
@@ -526,6 +528,15 @@
           letter-spacing: -.25px;
           font-size: 1.25rem;
           padding: 15px;
+        }
+      }
+
+      @include between-breakpoints(mobile, mobile-xl) {
+
+        #taboola-ajc-custom-feed[data-feed-main-container-id="taboola-ajc-custom-feed"].tbl-feed-full-width {
+          // overriding Taboola's inline stylesheet for small mobile (<480 in their code)
+          margin-left: auto !important;
+          margin-right: auto !important;
         }
       }
     }

@@ -72,9 +72,11 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   }
 
   if (type === 'video') {
-    const { streams } = el || {};
+    const { streams, promo_image: promoImage } = el || {};
     const [{ url: inlineVideoURL }] = streams || {};
-    return `<embed type="raw"><iframe src=${inlineVideoURL} width="640" height="360" frameborder="0" allowfullscreen="allowfullscreen"></iframe></embed>`;
+    const { url: promoImageUrl } = promoImage;
+    return `<img src="${imageResizer(promoImageUrl, siteID)}" />
+            <embed type="raw"><iframe src=${inlineVideoURL} width="640" height="360" frameborder="0" allowfullscreen="allowfullscreen"></iframe></embed>`;
   }
 
   if (type === 'interstitial_link') {

@@ -46,7 +46,6 @@ const Image = ({ customFields }) => {
     explainerText,
     additionalText,
     doNotLazyLoad,
-    enableGradient,
   } = customFields;
 
   if (!src) {
@@ -68,9 +67,9 @@ const Image = ({ customFields }) => {
   }
 
   const srcSetSizes = isPartOfUbbn ? [
-    [1600, 0],
-    [1100, 0],
-    [475, 652],
+    [1600, 856],
+    [1100, 588],
+    [475, 475],
   ] : [];
 
   if (!isResizerOrAbsolute) {
@@ -133,7 +132,7 @@ const Image = ({ customFields }) => {
         {explainerText && <div className="explainerText">{explainerText}</div>}
         {imageObj && <ImageGlobal
           src={imageObj}
-          imageType="isInlineImage"
+          imageType="isFeatureImage"
           useSrcSet={!isGif || isPartOfUbbn}
           srcSetSizes={srcSetSizes}
           noLazyLoad={doNotLazyLoad}
@@ -148,10 +147,7 @@ const Image = ({ customFields }) => {
   if (!isResizerOrAbsolute && !fetchedImage) return null;
 
   return (
-    <div
-      className={`c-image-feature b-margin-bottom-d40-m20 ${enableGradient ? 'with-gradient' : ''}`}
-      style={{ '--width': width }}
-    >
+    <div className='c-image-feature b-margin-bottom-d40-m20' style={{ '--width': width }}>
       {link && <a href={link}>{getImage()}</a>}
       {!link && getImage()}
     </div>
@@ -209,11 +205,6 @@ Image.propTypes = {
     doNotLazyLoad: PropTypes.bool.tag({
       label: 'Disable lazy load',
       description: 'Check this box to turn off lazy loading of this image.',
-      value: '',
-    }),
-    enableGradient: PropTypes.bool.tag({
-      label: 'Enable css gradient',
-      description: 'Check this box to allow for a css gradient to be applied (if defined in code).',
       value: '',
     }),
   }),

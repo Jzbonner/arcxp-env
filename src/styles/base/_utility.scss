@@ -145,25 +145,6 @@
 @include amp-exclude {
 
   .arc_ad {
-    // hide HP0x & RP0x ads below tablet
-
-    @include between-breakpoints(mobile, tablet) {
-
-      &[class*="HP0"]:not(.HP02),
-      &[class*="RP0"]:not(.RP02) {
-        display: none;
-      }
-    }
-
-    // hide MP0x ads on tablet+
-
-    @include breakpoint(tablet) {
-
-      &[class*="MP0"] {
-        display: none;
-      }
-    }
-
     // for sticky (e.g. right rail) ads
 
     &.is-sticky {
@@ -190,6 +171,25 @@
         margin-bottom: 20px;
 
         @include advertisement-label;
+      }
+
+      // hide EMPTY HP0x & RP0x ads below tablet
+
+      @include between-breakpoints(mobile, tablet) {
+
+        &[class*="HP0"]:not(.HP02):empty,
+        &[class*="RP0"]:not(.RP02):empty {
+          display: none;
+        }
+      }
+
+      // hide EMPTY MP0x ads on tablet+
+
+      @include breakpoint(tablet) {
+
+        &[class*="MP0"]:empty {
+          display: none;
+        }
       }
     }
   }
@@ -266,5 +266,23 @@
 
   @include breakpoint(desktop-lg) {
     max-width: 1540px;
+  }
+}
+
+.b-overlay {
+  background: transparent;
+  content: " ";
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10001;
+  background-color: #808080;
+  opacity: .55;
+  display: none;
+
+  &.isVisible {
+    display: flex;
   }
 }
