@@ -337,10 +337,12 @@
           display: none;
         }
 
-        &[class*="HP01"],
-        &[class*="MP01"],
-        &[class*="RP01"],
-        &[class*="MP02"] {
+        &.HP01,
+        &.MP01,
+        &.RP01,
+        &.MP02,
+        &.HP03,
+        &.HP04 {
           margin-bottom: 0;
           border-top: none;
 
