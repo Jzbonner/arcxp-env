@@ -432,23 +432,25 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
         Since we can only read the userType in the body, we're initializing chartbeat from the body per chartbeat's documentation.
         https://docs.chartbeat.com/cbp/tracking/standard-websites/alternative-integrations-web
       */
-      (function() {
-        /** CONFIGURATION START **/
-        var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
-        var _cbq = window._cbq = (window._cbq || []);
-        _cbq = cbqArray
-
-        /** CONFIGURATION END **/
-        function loadChartbeat() {
-            var e = document.createElement('script');
-            var n = document.getElementsByTagName('script')[0];
-            e.type = 'text/javascript';
-            e.async = true;
-            e.src = '//static.chartbeat.com/js/chartbeat.js';
-            n.parentNode.insertBefore(e, n);
-        }
-        loadChartbeat();
-      })();
+     if(${!isAJCSite}){
+       (function() {
+         /** CONFIGURATION START **/
+         var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
+         var _cbq = window._cbq = (window._cbq || []);
+         _cbq = cbqArray
+ 
+         /** CONFIGURATION END **/
+         function loadChartbeat() {
+             var e = document.createElement('script');
+             var n = document.getElementsByTagName('script')[0];
+             e.type = 'text/javascript';
+             e.async = true;
+             e.src = '//static.chartbeat.com/js/chartbeat.js';
+             n.parentNode.insertBefore(e, n);
+         }
+         loadChartbeat();
+       })();
+     }
       doc.addEventListener('DOMContentLoaded', () => {
         const connextMeterLevelSet = new Event('connextMeterLevelSet');
         const connextConversationDetermined = new Event('connextConversationDetermined');
