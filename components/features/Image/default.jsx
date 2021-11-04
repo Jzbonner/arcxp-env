@@ -132,7 +132,7 @@ const Image = ({ customFields }) => {
         {explainerText && <div className="explainerText">{explainerText}</div>}
         {imageObj && <ImageGlobal
           src={imageObj}
-          imageType="isFeatureImage"
+          imageType={!isPartOfUbbn && (caption || credit) ? 'isInlineImage' : 'isFeatureImage'}
           useSrcSet={!isGif || isPartOfUbbn}
           srcSetSizes={srcSetSizes}
           noLazyLoad={doNotLazyLoad}
@@ -180,7 +180,7 @@ Image.propTypes = {
       defaultValue: '100%',
       description:
         'Sets width on desktop. On tablet and mobile width will be set to 100%.',
-    }).isRequired,
+    }),
     label: PropTypes.string.tag({
       name: 'Label',
     }),
