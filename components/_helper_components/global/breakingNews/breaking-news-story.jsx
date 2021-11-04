@@ -33,8 +33,7 @@ const BreakingNewsStory = () => {
   const breakingNewsLSLookup = `dismissed_breaking_news_${siteName}_${currentEnv.toUpperCase()}`;
   const dismissedCollectionStorage = JSON.parse(window.localStorage.getItem(breakingNewsLSLookup));
 
-  const hideBar = () => {
-    setVisibility(false);
+  const saveCollection = () => {
     if (!dismissedCollectionStorage) {
       const initialCollectionEntry = {
         collectionArray: [collectionId],
@@ -47,6 +46,11 @@ const BreakingNewsStory = () => {
       };
       window.localStorage.setItem(breakingNewsLSLookup, JSON.stringify(additionalCollectionEntry));
     }
+  };
+
+  const hideBar = () => {
+    setVisibility(false);
+    saveCollection();
   };
   const isCollectionDismissed = dismissedCollectionStorage?.collectionArray.some(id => id === collectionId);
   const isBannerDismissed = !isVisible || isCollectionDismissed;
