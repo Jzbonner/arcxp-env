@@ -20,7 +20,7 @@ export default {
   instagramURL: '//instagram.com/ajcnews',
   breakingNewsID: 'USNZPBNLV5EULFTENZZP52ECZQ',
   breakingLiveVideoID: '2UPLSZACARBEVG2PQVZLQLO7D4',
-  breakingNewsID_sandbox: 'QCDZ6FQW2BEE5JP43UN3XYUOVI',
+  breakingNewsID_sandbox: 'FFQQGJZMN5A3RHYWFUIESE3RYI',
   breakingLiveVideoID_sandbox: 'PI5DD6OFEVFMHNDHZKI3XU7SSQ',
   burgerWhiteLogo: '/resources/logos/AJC/sidebar-logo.png',
   domainTwitterURL: 'https://twitter.com/ajc',
