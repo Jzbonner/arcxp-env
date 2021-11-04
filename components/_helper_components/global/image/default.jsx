@@ -99,6 +99,7 @@ const Image = ({
   };
 
   const altTextContent = getAltText(altText, caption);
+  const outputCaptionAndCredit = imageType !== 'isHomepageImage' && imageType !== 'isFeatureImage';
 
   if (img) {
     const {
@@ -173,14 +174,14 @@ const Image = ({
         {imageType === 'isInlineImage' && renderCaption()}
         <div className={`image-component-image ${ampPage ? 'amp' : ''} ${imageType === 'isInlineImage' ? 'inline' : ''}`}>
           {renderedImageOutput()}
-          {imageType !== 'isHomepageImage' && renderCaption()}
-          { imageType === 'isInlineImage'
-          && <>
-          <img src={closeIcon} className='image-close' alt='icon to close expanded image' onClick={(e) => { e.preventDefault(); setToggle(false); }} />
-          <Overlay toggle={toggle} setToggle={setToggle}/>
-          <img src={expandIcon} className='image-expand' alt={'icon to expand image'} onClick={(e) => { e.preventDefault(); setToggle(true); }}/> </>}
+          {outputCaptionAndCredit && renderCaption()}
+          {imageType === 'isInlineImage' && <>
+            <img src={closeIcon} className='image-close' alt='icon to close expanded image' onClick={(e) => { e.preventDefault(); setToggle(false); }} />
+            <Overlay toggle={toggle} setToggle={setToggle}/>
+            <img src={expandIcon} className='image-expand' alt={'icon to expand image'} onClick={(e) => { e.preventDefault(); setToggle(true); }}/>
+          </>}
         </div>
-        {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
+        {outputCaptionAndCredit && <p className="photo-credit-text">{giveCredit}</p>}
       </div>
     );
   }
