@@ -428,10 +428,15 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           bindConnextNotAuthorized = false;
         }
       });
+      /*
+        Since we can only read the userType in the body, we're initializing chartbeat from the body per chartbeat's documentation.
+        https://docs.chartbeat.com/cbp/tracking/standard-websites/alternative-integrations-web
+      */
       (function() {
         /** CONFIGURATION START **/
         var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
-        var _cbq = cbqArray
+        var _cbq = window._cbq = (window._cbq || []);
+        _cbq = cbqArray
 
         /** CONFIGURATION END **/
         function loadChartbeat() {
