@@ -283,6 +283,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
   return <script type='text/javascript' dangerouslySetInnerHTML={{
     __html: `
       const doc = window.document;
+      var cbqArray = [];
       const docBody = doc.querySelector('body');
       const toggleUserState = (action) => {
         let dataLayer = window.dataLayer || [];
@@ -306,13 +307,13 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                 'event': loginEventToTrigger
               };
               dataLayer.push(userDataObj);
-              if(_cbq && ${!isAJCSite}){
+              if(cbqArray && ${!isAJCSite}){
                 switch(userTypeState) {
                   case 'standard':
-                    _cbq.push(['_acct', 'lgdin']);
+                    cbqArray.push(['_acct', 'lgdin']);
                     break;
                   case 'premium':
-                    _cbq.push(['_acct', 'paid']);
+                    cbqArray.push(['_acct', 'paid']);
                     break;
                   default:
                     // do nothing
@@ -340,8 +341,8 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
             }
           };
           dataLayer.push(userDataObj);
-          if(_cbq && ${!isAJCSite}){
-            _cbq.push(['_acct', 'anon']);
+          if(cbqArray && ${!isAJCSite}){
+            cbqArray.push(['_acct', 'anon']);
           };
           if (window?.sophi?.data) {
             window.sophi.data.visitor = {
@@ -427,6 +428,22 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           bindConnextNotAuthorized = false;
         }
       });
+      (function() {
+        /** CONFIGURATION START **/
+        var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
+        var _cbq = cbqArray
+
+        /** CONFIGURATION END **/
+        function loadChartbeat() {
+            var e = document.createElement('script');
+            var n = document.getElementsByTagName('script')[0];
+            e.type = 'text/javascript';
+            e.async = true;
+            e.src = '//static.chartbeat.com/js/chartbeat.js';
+            n.parentNode.insertBefore(e, n);
+        }
+        loadChartbeat();
+      })();
       doc.addEventListener('DOMContentLoaded', () => {
         const connextMeterLevelSet = new Event('connextMeterLevelSet');
         const connextConversationDetermined = new Event('connextConversationDetermined');
