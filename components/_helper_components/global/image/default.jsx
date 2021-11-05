@@ -171,7 +171,7 @@ const Image = ({
         <div className={`image-component-image ${ampPage ? 'amp' : ''} ${imageType === 'isInlineImage' ? 'inline' : ''}`}>
           {renderedImageOutput()}
           {imageType !== 'isHomepageImage' && renderCaption()}
-          { imageType === 'isInlineImage'
+          { imageType === 'isInlineImage' && screenSize.width > maxTabletViewWidth
           && <>
           <img src={closeIcon} className='image-close' alt='icon to close expanded image' onClick={(e) => { e.preventDefault(); setToggle(false); }} />
           <Overlay toggle={toggle} setToggle={setToggle}/>
@@ -192,6 +192,7 @@ Image.propTypes = {
   imageMarginBottom: PropTypes.string,
   imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage', 'isGalleryImage']).isRequired,
   maxTabletViewWidth: PropTypes.number,
+  minTabletViewWidth: PropTypes.number,
   teaseContentType: PropTypes.string,
   canonicalUrl: PropTypes.string,
   ampPage: PropTypes.bool,
