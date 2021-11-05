@@ -1193,6 +1193,10 @@
       @include breakpoint(desktop-sm) {
         padding-top: 15px;
       }
+
+      #inlineSubscribe .wrapper {
+        margin-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
+      }
     }
   }
 
