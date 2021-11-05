@@ -50,6 +50,10 @@
       position: relative;
       background: #fff;
 
+      .dark-mode & {
+        background: inherit;
+      }
+
       .Mg2-connext {
         display: none !important; /* stylelint-disable-line declaration-no-important */
       }

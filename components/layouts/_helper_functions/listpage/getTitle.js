@@ -1,13 +1,29 @@
 import React from 'react';
 
-const getTitle = (title, collectionTitle) => {
+const getTitle = ({ title, titleUrl, collectionTitle }) => {
+  const getLink = () => {
+    if (titleUrl.indexOf('http') === 0 || titleUrl.indexOf('/') === 0) {
+      return titleUrl;
+    }
+    return `//${titleUrl}`;
+  };
+
+  const buildTitle = () => {
+    if (titleUrl) {
+      return <a href={getLink()}>{title}</a>;
+    }
+
+    return title;
+  };
+
   if (title) {
     return (
       <div className="c-page-title">
-        <div className="c-title-content">{title}</div>
+        <div className="c-title-content">{buildTitle()}</div>
       </div>
     );
   }
+
 
   if (collectionTitle) {
     return (

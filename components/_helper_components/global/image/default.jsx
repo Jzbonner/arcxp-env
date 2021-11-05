@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useAppContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
@@ -30,10 +30,13 @@ const Image = ({
     resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, focal_point: rootFocalPoint, useSrcSet: hasSrcSet = false,
   } = src || {};
 
-  const fusionContext = useFusionContext();
-  const { arcSite, layout } = fusionContext;
   const appContext = useAppContext();
-  const { deployment, contextPath } = appContext;
+  const {
+    arcSite,
+    layout,
+    deployment,
+    contextPath,
+  } = appContext;
   const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
   const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
   const isGalleryImage = imageType === 'isGalleryImage';
@@ -100,9 +103,9 @@ const Image = ({
   if (img) {
     const {
       src: imgSrc = null,
-      0: dtImage = null,
-      1: tImage = null,
-      2: mImage = null,
+      0: dtImage = {},
+      1: tImage = {},
+      2: mImage = {},
     } = img;
     const dataSrc = imgSrc || url;
     const renderImgTag = () => <>
@@ -131,7 +134,7 @@ const Image = ({
           <LazyLoad
             placeholder={
               <img src={placeholder} style={{ width: '100%' }} data-placeholder={true} data-src={dataSrc} alt={altTextContent}
-                className={`${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`} />
+                className={`placeholder-image ${teaseContentType ? 'tease-image' : ''} ${additionalClasses}`} />
             }
             height="100%"
             width="100%"

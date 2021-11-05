@@ -57,6 +57,13 @@ const TopNavBreakingNews = ({
 
   useEffect(() => {
     if (windowExists) {
+      const docBody = document.querySelector('body');
+      const docBodyClass = docBody.getAttribute('class') || '';
+      // add the dark-mode class to ensure body bg is blacked out
+      if (enableDarkMode && docBodyClass.indexOf('dark-mode')
+ === -1) {
+        docBody.classList += ' dark-mode';
+      }
       document.onreadystatechange = () => {
         if (document.readyState === 'complete') {
           if (docHasWindowShade()) {

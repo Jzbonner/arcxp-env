@@ -13,7 +13,7 @@ const Lead = ({
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite, globalContent } = fusionContext;
-  const { _id: id = '' } = globalContent;
+  const { _id: id = '' } = globalContent || {};
 
   const {
     content: { contentService = 'collections-api', contentConfigValues } = {}, displayClass = '', title = '', columns = 1, moreURL,

@@ -1,4 +1,18 @@
+@import "./../../../../../src/styles/base/mixins";
 @import "./../../../../../src/styles/base/breakpoints";
+
+body.dark-mode,
+body.dark-mode #fusion-app {
+  background-image: linear-gradient(180deg, #000, #000 400px, #fff 400px, #fff);
+}
+
+@include amp-exclude {
+
+  body.dark-mode > :first-child div:empty {
+    // edge-case catch for window shade / half shade wrapper's inline background-color
+    background-color: inherit !important; // stylelint-disable declaration-no-important
+  }
+}
 
 .nav-breaking-news {
 
@@ -8,6 +22,10 @@
     width: 100%;
     z-index: 9999;
     background: #fff;
+
+    &.dark-mode {
+      background: #000;
+    }
   }
 
   &.with-half-shade:not(.is-above-shade) .c-breakingNews {
@@ -19,7 +37,11 @@
   }
 
   &.dark-mode {
-    background-color: #000;
+    background: #000;
+
+    @include breakpoint(tablet) {
+      background: transparent;
+    }
 
     .c-headerNav {
       @include between-breakpoints(mobile, tablet) {
@@ -61,6 +83,10 @@
       ul li:last-child a {
         color: #3299ad;
         font-family: "Gordita-Bold", "Arial", sans-serif;
+
+        &:hover {
+          color: #ededed;
+        }
       }
     }
 

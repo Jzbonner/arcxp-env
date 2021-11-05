@@ -90,7 +90,7 @@ const ListPage = ({
 
   return (
     <main className="c-listPage b-contentMaxWidth b-sectionHome-padding">
-      {getTitle(title, collectionTitle)}
+      {getTitle({ title, collectionTitle })}
       {getNewsTipText(textBox, 'mobile-tablet')}
       <div className="c-section with-rightRail">
 
