@@ -17,7 +17,7 @@
     }
   }
 
-  .c-Row {
+  .c-LiveUpdatePageHeader {
     margin-bottom: 0;
     position: relative;
     width: 100%;
@@ -111,8 +111,8 @@
         letter-spacing: -.62px;
       }
 
-      a,
-      a:hover {
+      .c-sectionContent & a[href],
+      .c-sectionContent & a[href]:hover {
         color: #fff5ec !important;
       }
     }
