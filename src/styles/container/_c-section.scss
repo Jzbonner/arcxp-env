@@ -5,6 +5,13 @@
   @include section();
 }
 
+.c-sectionContent {
+
+  .c-sectionHome {
+    padding-top: 15px;
+  }
+}
+
 .c-sectionHome {
   display: block;
   margin: 0 auto;
