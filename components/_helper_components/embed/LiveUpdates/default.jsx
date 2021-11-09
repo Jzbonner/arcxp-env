@@ -353,7 +353,12 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         {liveUpdatesMapper(firstLiveUpdate)}
         <div className='story-paygate_placeholder'>
           {liveUpdatesMapper(restOfLiveUpdates)}
-          {enableTaboola && <TaboolaFeed ampPage={false} lazyLoad={isMeteredStory} treatAsArticle={true} />}
+          {enableTaboola && <>
+            <TaboolaFeed ampPage={false} lazyLoad={isMeteredStory} treatAsArticle={true} />
+            <div className='taboola-split'>
+              <div className='story-nativo_placeholder--boap'></div>
+            </div>
+          </>}
         </div>
       </>;
     }
