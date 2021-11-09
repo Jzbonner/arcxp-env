@@ -55,7 +55,7 @@ const RenderOutputType = (props) => {
         <MetaTags />
         <SiteMeta />
         <GoogleStructuredData {...props} />
-        {!hasLeadGallery && <AmpRelLink type={type} noAmp={noAmp} site={website} url={articleURL} />}
+        {!hasLeadGallery && <AmpRelLink type={type} noAmp={noAmp} site={website || cdnSite || currentSite} url={articleURL || '/'} />}
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} as="font" type="font/woff2" />
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} as="font" type="font/woff2" />
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`} as="font" type="font/woff2" />
@@ -128,7 +128,7 @@ RenderOutputType.propTypes = {
   arcSite: PropTypes.string,
   children: PropTypes.node,
   contextPath: PropTypes.string,
-  CssLinks: PropTypes.object,
+  CssLinks: PropTypes.func,
   deployment: PropTypes.func,
   Fusion: PropTypes.func,
   globalContent: PropTypes.object,
@@ -136,8 +136,8 @@ RenderOutputType.propTypes = {
   metrics: PropTypes.object,
   layout: PropTypes.string,
   outputType: PropTypes.string,
-  Libs: PropTypes.array,
-  MetaTags: PropTypes.object,
+  Libs: PropTypes.func,
+  MetaTags: PropTypes.func,
 };
 
 export default RenderOutputType;

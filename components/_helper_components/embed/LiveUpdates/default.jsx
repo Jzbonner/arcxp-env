@@ -242,9 +242,16 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     };
   }, []);
 
-  const resizeObserver = new ResizeObserver(() => {
-    determineUpdateTopPositions(true);
-  });
+  let resizeObserver = {
+    observe: () => {},
+    unobserve: () => {},
+  }; // fallback for non-existence of ResizeObserver (i.e. SSR)
+
+  if (typeof ResizeObserver !== 'undefined') {
+    resizeObserver = new ResizeObserver(() => {
+      determineUpdateTopPositions(true);
+    });
+  }
 
   useEffect(() => {
     const liveUpdateContent = document.querySelector('.c-liveUpdateContent');

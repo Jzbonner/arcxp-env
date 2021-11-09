@@ -100,6 +100,7 @@ const Image = ({
 
   const altTextContent = getAltText(altText, caption);
   const outputCaptionAndCredit = imageType !== 'isHomepageImage' && imageType !== 'isFeatureImage';
+  const enableExpandableImage = imageType === 'isInlineImage' && layout === 'article-basic';
 
   if (img) {
     const {
@@ -171,11 +172,11 @@ const Image = ({
 
     return (
       <div className={`c-image-component ${toggle ? 'overlay-active' : ''} ${imageMarginBottom || ''}`}>
-        {imageType === 'isInlineImage' && renderCaption()}
-        <div className={`image-component-image ${ampPage ? 'amp' : ''} ${imageType === 'isInlineImage' ? 'inline' : ''}`}>
+        {enableExpandableImage && renderCaption()}
+        <div className={`image-component-image ${ampPage ? 'amp' : ''} ${enableExpandableImage ? 'inline' : ''}`}>
           {renderedImageOutput()}
           {outputCaptionAndCredit && renderCaption()}
-          {imageType === 'isInlineImage' && <>
+          {enableExpandableImage && <>
             <img src={closeIcon} className='image-close' alt='icon to close expanded image' onClick={(e) => { e.preventDefault(); setToggle(false); }} />
             <Overlay toggle={toggle} setToggle={setToggle}/>
             <img src={expandIcon} className='image-expand' alt={'icon to expand image'} onClick={(e) => { e.preventDefault(); setToggle(true); }}/>
