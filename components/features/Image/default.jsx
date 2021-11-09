@@ -16,20 +16,23 @@ const Image = ({ customFields }) => {
     renderables,
   } = appContext;
   let isPartOfUbbn = false;
+  let isPartOfLiveUpdates = false;
   if (renderables && renderables.length) {
     const chains = renderables.filter((item) => {
       const { collection } = item;
       return collection === 'chains';
     });
     if (chains.length) {
-      chains.map((chain) => {
+      chains.forEach((chain) => {
         const { children, props: chainProps } = chain || {};
         const imageFeature = children.filter(block => block.props.id === featureId);
-        if (chainProps.type === 'UBBN' && imageFeature) {
-          isPartOfUbbn = true;
-          return true;
+        if (imageFeature) {
+          if (chainProps.type === 'UBBN') {
+            isPartOfUbbn = true;
+          } else if (chainProps.type === 'LiveUpdatePageHeader') {
+            isPartOfLiveUpdates = true;
+          }
         }
-        return null;
       });
     }
   }
@@ -66,11 +69,21 @@ const Image = ({ customFields }) => {
     srcMobile = buildFullUrl(srcMobile);
   }
 
-  const srcSetSizes = isPartOfUbbn ? [
-    [1600, 856],
-    [1100, 588],
-    [475, 475],
-  ] : [];
+  let srcSetSizes = [];
+  if (isPartOfUbbn) {
+    srcSetSizes = [
+      [1600, 856],
+      [1100, 588],
+      [475, 475],
+    ];
+  }
+  if (isPartOfLiveUpdates) {
+    srcSetSizes = [
+      [1600, 278],
+      [1100, 191],
+      [475, 204],
+    ];
+  }
 
   if (!isResizerOrAbsolute) {
     // it's neither a resizer nor an absolute url, so process it as a photo ID & fetch from content API
@@ -79,7 +92,7 @@ const Image = ({ customFields }) => {
       query: {
         arcSite,
         id: src,
-        useSrcSet: isPartOfUbbn,
+        useSrcSet: isPartOfUbbn || isPartOfLiveUpdates,
         srcSetSizes,
       },
     });
@@ -121,7 +134,7 @@ const Image = ({ customFields }) => {
 
     if (!imageObj) return null;
 
-    if (isPartOfUbbn) {
+    if (isPartOfUbbn || isPartOfLiveUpdates) {
       delete imageObj.caption;
       delete imageObj.credits;
     }
@@ -132,8 +145,8 @@ const Image = ({ customFields }) => {
         {explainerText && <div className="explainerText">{explainerText}</div>}
         {imageObj && <ImageGlobal
           src={imageObj}
-          imageType={!isPartOfUbbn && (caption || credit) ? 'isInlineImage' : 'isFeatureImage'}
-          useSrcSet={!isGif || isPartOfUbbn}
+          imageType={!isPartOfUbbn && !isPartOfLiveUpdates && (caption || credit) ? 'isInlineImage' : 'isFeatureImage'}
+          useSrcSet={!isGif || isPartOfUbbn || isPartOfLiveUpdates}
           srcSetSizes={srcSetSizes}
           noLazyLoad={doNotLazyLoad}
         />}
