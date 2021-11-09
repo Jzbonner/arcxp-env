@@ -17,7 +17,7 @@
     }
   }
 
-  .c-Row {
+  .c-LiveUpdatePageHeader {
     margin-bottom: 0;
     position: relative;
     width: 100%;
@@ -110,6 +110,11 @@
         line-height: 3.44rem;
         letter-spacing: -.62px;
       }
+
+      .c-sectionContent & a[href],
+      .c-sectionContent & a[href]:hover {
+        color: #fff5ec !important;
+      }
     }
 
     .c-liveUpdatesStatus {
@@ -151,7 +156,7 @@
     .c-liveUpdateNav {
       flex: 0 0 50px;
       align-self: flex-start;
-      max-height: calc(100vh - 60px);
+      max-height: calc(100vh - 175px);
       overflow: auto;
       margin-bottom: 20px;
       scrollbar-width: none; /* Firefox */
@@ -172,6 +177,7 @@
       @include breakpoint(tablet) {
         flex-basis: 20%;
         max-width: 200px;
+        max-height: calc(100vh - 75px);
       }
 
       @include between-breakpoints(desktop-sm, desktop-lg) {
@@ -319,14 +325,14 @@
 
       > .c-liveUpdate:first-child {
         border-top: none;
-        margin-top: -8px;
-
-        @include between-breakpoints(tablet, desktop-lg) {
-          margin-top: -10px;
-        }
+        margin-top: -4px;
 
         @include breakpoint(desktop-lg) {
-          margin-top: -20px;
+          margin-top: -5px;
+        }
+
+        .c-headline {
+          margin-top: 0;
         }
       }
 
@@ -336,11 +342,18 @@
           display: none;
         }
 
-        &[class*="HP01"],
-        &[class*="MP01"],
-        &[class*="RP01"],
-        &[class*="MP02"] {
+        &.HP01,
+        &.MP01,
+        &.RP01,
+        &.MP02,
+        &.HP03,
+        &.HP04 {
           margin-bottom: 0;
+          border-top: none;
+
+          .arcad:not(:empty) {
+            border-top: 1px solid #cdcdcd;
+          }
         }
 
         @include between-breakpoints(mobile, mobile-lg) {
@@ -368,10 +381,6 @@
       .arcad {
         padding-top: 35px !important;
         padding-bottom: 30px !important;
-
-        &:not([class*="MP0"]) {
-          border-top: 1px solid #cdcdcd;
-        }
       }
 
       .story-newsletter_placeholder:not(:empty),
@@ -404,6 +413,7 @@
         display: flex;
         flex-direction: row;
         width: 100%;
+        margin-top: 10px;
 
         @include between-breakpoints(mobile, tablet) {
           margin-top: 12px;
@@ -415,17 +425,17 @@
         width: calc(100% - 35px);
         letter-spacing: -.25px;
 
-        @include text-styles(1.25rem, 1.5, "Lora-Bold");
+        @include text-styles(1.25rem, 1.5rem, "Lora-Bold");
 
         @include between-breakpoints(tablet, desktop-lg) {
           font-size: 1.375rem;
-          line-height: 1.69;
+          line-height: 1.6875rem;
           letter-spacing: -.28px;
         }
 
         @include breakpoint(desktop-lg) {
           font-size: 1.875rem;
-          line-height: 2.19;
+          line-height: 2rem;
           letter-spacing: -.38px;
         }
       }
@@ -434,14 +444,14 @@
         position: relative;
         width: 25px;
         height: 25px;
-        margin: 6px 0 0 10px;
+        margin: 2px 0 0 10px;
         border-radius: 2px;
         box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, .6);
         border: solid 1px #ececec;
         background: url("/pf/resources/icons/link-anchor.svg") center center no-repeat;
 
         @include breakpoint(desktop-lg) {
-          margin-top: 20px;
+          margin-top: 4px;
         }
 
         &:focus,
@@ -484,10 +494,10 @@
       }
 
       .c-timestampByline {
-        margin-bottom: 9px;
+        margin: 9px 0;
 
         @include breakpoint(tablet) {
-          margin-bottom: 15px;
+          margin: 10px 0 12px;
         }
       }
 
@@ -510,6 +520,15 @@
           letter-spacing: -.2px;
           margin-left: 12px;
         }
+
+        span:not(:last-child) {
+          display: inline-block;
+          padding-right: 5px;
+
+          &:after {
+            content: ", ";
+          }
+        }
       }
 
       .timestamp-time {
@@ -528,6 +547,15 @@
           padding: 15px;
         }
       }
+
+      @include between-breakpoints(mobile, mobile-xl) {
+
+        #taboola-ajc-custom-feed[data-feed-main-container-id="taboola-ajc-custom-feed"].tbl-feed-full-width {
+          // overriding Taboola's inline stylesheet for small mobile (<480 in their code)
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+      }
     }
 
     .c-liveUpdate {
@@ -543,10 +571,6 @@
 
         .c-headline {
           margin-top: 18px;
-
-          @include breakpoint(desktop-lg) {
-            margin-top: 4px;
-          }
         }
       }
 

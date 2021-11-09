@@ -149,8 +149,10 @@
 
     @include between-breakpoints(mobile, tablet) {
 
-      &[class*="HP0"]:not(.HP02),
-      &[class*="RP0"]:not(.RP02) {
+      main.c-homepageContent &[class*="HP0"]:not(.HP02),
+      main.c-homepageContent &[class*="RP0"]:not(.RP02),
+      main.c-sectionContent:not(.is-live):not(.not-live) &[class*="HP0"]:not(.HP02),
+      main.c-sectionContent:not(.is-live):not(.not-live) &[class*="RP0"]:not(.RP02) {
         display: none;
       }
     }
@@ -159,7 +161,8 @@
 
     @include breakpoint(tablet) {
 
-      &[class*="MP0"] {
+      main.c-homepageContent &[class*="MP0"],
+      main.c-sectionContent:not(.is-live):not(.not-live) &[class*="MP0"] {
         display: none;
       }
     }

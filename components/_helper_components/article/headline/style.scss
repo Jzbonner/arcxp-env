@@ -128,7 +128,7 @@
   }
 
   &.with-just-headline {
-    margin: 1.25rem 0;
+    margin: 15px 0;
 
     .headline-body {
       padding: 0;
@@ -143,8 +143,7 @@
     display: block;
 
     .headline-body {
-      padding-top: 0;
-
+      
       .headline-text {
         @include breakpoint(desktop-sm) {
           text-align: left;

@@ -15,7 +15,8 @@ const SectionOutput = ({
   layout,
   noHeaderAndFooter,
 }) => {
-  const { pageIsLive } = getContentMeta();
+  const { pageIsLive, paywallStatus } = getContentMeta();
+  const isMeteredStory = paywallStatus === 'premium';
   // if the `live` meta exists, we set the default class to `not-live`
   let liveIndicatorClass = pageIsLive ? 'not-live' : '';
   // then, if the `live` meta exists and is actually live, we re-set it to `is-live`
@@ -25,7 +26,7 @@ const SectionOutput = ({
   const isErrorPage = layout === 'section-basic';
   return (
     <>
-      {<GlobalAdSlots pbPage={true} />}
+      {<GlobalAdSlots pbPage={true} lazyLoad={isMeteredStory} />}
       {/* we omit breaking news on wraps */}
       {!noHeaderAndFooter && <TopNavBreakingNews type={layout} omitBreakingNews={layout.indexOf('wrap-') !== -1} />}
       {<main className={`c-sectionContent ${isErrorPage ? 'b-contentMaxWidth' : ''} ${liveIndicatorClass}`}>

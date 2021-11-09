@@ -62,7 +62,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       case 3:
         response = <>
           <ArcAd
-            staticSlot={'RP01-LiveUpdates'}
+            staticSlot={'RP01 desktop'}
             key={`RP01-${index}`}
             lazyLoad={isMeteredStory}
           />
@@ -87,7 +87,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
           staticSlot={toggledAdSlot}
           key={`${toggledAdSlot}-${index}`}
           customId={`div-id-${toggledAdSlot}_${index}`}
-          lazyLoad={true}
+          lazyLoad={false}
         />;
         // we alternate HP03 & HP04 for all default slotnames, because there is a (slight) chance of two slots being visible at the same time
         toggledAdSlot = toggledAdSlot === 'HP03' ? 'HP04' : 'HP03';
@@ -242,9 +242,16 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     };
   }, []);
 
-  const resizeObserver = new ResizeObserver(() => {
-    determineUpdateTopPositions(true);
-  });
+  let resizeObserver = {
+    observe: () => {},
+    unobserve: () => {},
+  }; // fallback for non-existence of ResizeObserver (i.e. SSR)
+
+  if (typeof ResizeObserver !== 'undefined') {
+    resizeObserver = new ResizeObserver(() => {
+      determineUpdateTopPositions(true);
+    });
+  }
 
   useEffect(() => {
     const liveUpdateContent = document.querySelector('.c-liveUpdateContent');
@@ -329,12 +336,14 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       return <>
         <LazyLoad placeholder={<div className="c-placeholder-liveUpdate" />} height="100%" width="100%" offset={300} once={true} key={elId}>
           {updateContentOutput()}
+          {/* after we get through the "specialty" placeholder inserts, we want to lazyload ads as well as the other content */}
+          {(updateIndex > 10 && (updateIndex - 1) % 3 === 0) && renderAdOrPlaceholder(updateIndex - 1)}
         </LazyLoad>
         {/* we insert items (ads, placeholders, etc) at specific intervals.
           For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
           We also have one for the newsletter placeholder (after #6)
         */}
-        {(updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
+        {(updateIndex === 6 || (updateIndex > 3 && updateIndex <= 10 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
         {hashId && updateIndex === liveUpdates.length && handleNavTrigger(null, hashId)}
       </>;
     });
@@ -344,7 +353,12 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         {liveUpdatesMapper(firstLiveUpdate)}
         <div className='story-paygate_placeholder'>
           {liveUpdatesMapper(restOfLiveUpdates)}
-          {enableTaboola && <TaboolaFeed ampPage={false} lazyLoad={isMeteredStory} treatAsArticle={true} />}
+          {enableTaboola && <>
+            <TaboolaFeed ampPage={false} lazyLoad={isMeteredStory} treatAsArticle={true} />
+            <div className='taboola-split'>
+              <div className='story-nativo_placeholder--boap'></div>
+            </div>
+          </>}
         </div>
       </>;
     }

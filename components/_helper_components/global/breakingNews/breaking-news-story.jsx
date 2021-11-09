@@ -9,15 +9,13 @@ import './default.scss';
 
 const BreakingNewsStory = () => {
   const [isVisible, setVisibility] = useState(true);
-  const hideBar = () => {
-    setVisibility(false);
-  };
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
   const {
     breakingNewsID_sandbox: breakingNewsSandbox,
     breakingNewsID,
+    siteName,
   } = getProperties(arcSite);
 
   const newsData = useContent({
@@ -31,12 +29,37 @@ const BreakingNewsStory = () => {
   });
 
   const [story] = get(newsData, 'content_elements', []);
+  const { _id: collectionId } = newsData || {};
+  const breakingNewsLSLookup = `dismissed_breaking_news_${siteName}_${currentEnv.toUpperCase()}`;
+  const dismissedCollectionStorage = JSON.parse(window.localStorage.getItem(breakingNewsLSLookup));
+
+  const saveCollection = () => {
+    if (!dismissedCollectionStorage) {
+      const initialCollectionEntry = {
+        collectionArray: [collectionId],
+      };
+      window.localStorage.setItem(breakingNewsLSLookup, JSON.stringify(initialCollectionEntry));
+    } else {
+      const { collectionArray } = dismissedCollectionStorage;
+      const additionalCollectionEntry = {
+        collectionArray: [collectionId, ...collectionArray],
+      };
+      window.localStorage.setItem(breakingNewsLSLookup, JSON.stringify(additionalCollectionEntry));
+    }
+  };
+
+  const hideBar = () => {
+    setVisibility(false);
+    saveCollection();
+  };
+  const isCollectionDismissed = dismissedCollectionStorage?.collectionArray.some(id => id === collectionId);
+  const isBannerDismissed = !isVisible || isCollectionDismissed;
 
   if (story) {
     const headline = get(story, 'headlines.basic', '');
     const url = get(story, 'canonical_url', '');
     return (
-      <div className={`c-breakingNews b-sectionHomeMaxWidth ${!isVisible ? 'is-hidden' : ''}`}>
+      <div className={`c-breakingNews b-sectionHomeMaxWidth ${isBannerDismissed ? 'is-hidden' : ''}`}>
         <a href={url} className="breakingURL">
           <div className="c-breakingNews-heading b-flexCenter">
             <span>Breaking</span>

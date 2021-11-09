@@ -99,6 +99,8 @@ const Image = ({
   };
 
   const altTextContent = getAltText(altText, caption);
+  const outputCaptionAndCredit = imageType !== 'isHomepageImage' && imageType !== 'isFeatureImage';
+  const enableExpandableImage = imageType === 'isInlineImage' && layout === 'article-basic';
 
   if (img) {
     const {
@@ -170,17 +172,17 @@ const Image = ({
 
     return (
       <div className={`c-image-component ${toggle ? 'overlay-active' : ''} ${imageMarginBottom || ''}`}>
-        {imageType === 'isInlineImage' && renderCaption()}
-        <div className={`image-component-image ${ampPage ? 'amp' : ''} ${imageType === 'isInlineImage' ? 'inline' : ''}`}>
+        {enableExpandableImage && renderCaption()}
+        <div className={`image-component-image ${ampPage ? 'amp' : ''} ${enableExpandableImage ? 'inline' : ''}`}>
           {renderedImageOutput()}
-          {imageType !== 'isHomepageImage' && renderCaption()}
-          { imageType === 'isInlineImage' && screenSize.width > maxTabletViewWidth
-          && <>
-          <img src={closeIcon} className='image-close' alt='icon to close expanded image' onClick={(e) => { e.preventDefault(); setToggle(false); }} />
-          <Overlay toggle={toggle} setToggle={setToggle}/>
-          <img src={expandIcon} className='image-expand' alt={'icon to expand image'} onClick={(e) => { e.preventDefault(); setToggle(true); }}/> </>}
+          {outputCaptionAndCredit && renderCaption()}
+          {enableExpandableImage && screenSize.width > maxTabletViewWidth && <>
+            <img src={closeIcon} className='image-close' alt='icon to close expanded image' onClick={(e) => { e.preventDefault(); setToggle(false); }} />
+            <Overlay toggle={toggle} setToggle={setToggle}/>
+            <img src={expandIcon} className='image-expand' alt={'icon to expand image'} onClick={(e) => { e.preventDefault(); setToggle(true); }}/>
+          </>}
         </div>
-        {imageType !== 'isHomepageImage' && <p className="photo-credit-text">{giveCredit}</p>}
+        {outputCaptionAndCredit && <p className="photo-credit-text">{giveCredit}</p>}
       </div>
     );
   }
@@ -193,7 +195,7 @@ Image.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   imageMarginBottom: PropTypes.string,
-  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage', 'isGalleryImage']).isRequired,
+  imageType: PropTypes.oneOf(['isLeadImage', 'isInlineImage', 'isHomepageImage', 'isGalleryImage', 'isFeatureImage']).isRequired,
   maxTabletViewWidth: PropTypes.number,
   minTabletViewWidth: PropTypes.number,
   teaseContentType: PropTypes.string,

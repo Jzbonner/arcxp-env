@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ContentElements from '../contentElements/default.jsx';
 import { isParagraph } from '../../../layouts/_helper_functions/Paragraph';
-import './styles.scss';
 
 const Section = ({
   insertedAds,
