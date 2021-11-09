@@ -107,6 +107,7 @@ const RenderOutputType = (props) => {
           <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${connextEnv}/ajc/loader.min.js`}></script>
+            <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/customJSForNavigaAdBlocker.js`)}`}></script>
             <ConnextInit triggerLoginModal={outputType && outputType === 'login'} />
           </>
         )}
