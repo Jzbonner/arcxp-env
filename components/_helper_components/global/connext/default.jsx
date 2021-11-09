@@ -433,23 +433,23 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
         https://docs.chartbeat.com/cbp/tracking/standard-websites/alternative-integrations-web
       */
      if(${!isAJCSite}){
-       (function() {
-         /** CONFIGURATION START **/
-         var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
-         var _cbq = window._cbq = (window._cbq || []);
-         _cbq = cbqArray
- 
-         /** CONFIGURATION END **/
-         function loadChartbeat() {
-             var e = document.createElement('script');
-             var n = document.getElementsByTagName('script')[0];
-             e.type = 'text/javascript';
-             e.async = true;
-             e.src = '//static.chartbeat.com/js/chartbeat.js';
-             n.parentNode.insertBefore(e, n);
-         }
-         loadChartbeat();
-       })();
+
+        /** CONFIGURATION START **/
+        var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
+        var _cbq = window._cbq = (window._cbq || []);
+        _cbq = cbqArray;
+        /** CONFIGURATION END **/
+
+        function loadChartbeat() {
+          var e = document.createElement('script');
+          var n = document.getElementsByTagName('script')[0];
+          e.type = 'text/javascript';
+          e.async = true;
+          e.src = '//static.chartbeat.com/js/chartbeat.js';
+          n.parentNode.insertBefore(e, n);
+        }
+        loadChartbeat();
+
      }
       doc.addEventListener('DOMContentLoaded', () => {
         const connextMeterLevelSet = new Event('connextMeterLevelSet');
