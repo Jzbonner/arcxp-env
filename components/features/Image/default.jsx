@@ -59,7 +59,8 @@ const Image = ({ customFields }) => {
 
   const buildFullUrl = imgSrc => `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${imgSrc}`;
 
-  const isResizerOrAbsolute = /resizer/.test(src) || src.indexOf('http') === 0 || src.indexOf('//') === 0;
+  const isAbsolute = src.indexOf('http') === 0 || src.indexOf('//') === 0;
+  const isResizerOrAbsolute = /resizer/.test(src) || isAbsolute;
 
   if (/resizer/.test(src)) {
     src = buildFullUrl(src);
@@ -124,7 +125,7 @@ const Image = ({ customFields }) => {
     }
 
     const imageObj = isResizerOrAbsolute ? {
-      resized_obj: suppliedImgObj,
+      resized_obj: isAbsolute ? suppliedImgObj : null,
       url: src,
       useSrcSet: !isGif,
       caption,
