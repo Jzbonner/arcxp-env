@@ -22,8 +22,9 @@ const LiveUpdateSnippets = (props) => {
   const imageCustomFields = props?.childProps.filter(
     childProp => childProp.type === 'Image/default',
   )[0];
-
-  const synopsisCustomFields = props?.childProps.find(childProp => childProp.type === 'Synopsis/default');
+  const synopsisCustomFields = props?.childProps.find(
+    childProp => childProp.type === 'Synopsis/default',
+  );
 
   const embedData = useContent({
     source: 'query-feed',
