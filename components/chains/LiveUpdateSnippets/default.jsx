@@ -6,6 +6,7 @@ import handleSiteName from '../../layouts/_helper_functions/handleSiteName';
 import fetchEnv from '../../_helper_components/global/utils/environment';
 import Image from '../../_helper_components/global/image/default';
 import PageTitle from '../../features/pageTitle/default';
+import Synopsis from '../../features/Synopsis/default';
 import './default.scss';
 
 const LiveUpdateSnippets = (props) => {
@@ -21,6 +22,9 @@ const LiveUpdateSnippets = (props) => {
   const imageCustomFields = props?.childProps.filter(
     childProp => childProp.type === 'Image/default',
   )[0];
+  const synopsisCustomFields = props?.childProps.find(
+    childProp => childProp.type === 'Synopsis/default',
+  );
 
   const embedData = useContent({
     source: 'query-feed',
@@ -79,6 +83,12 @@ const LiveUpdateSnippets = (props) => {
               return null;
             })}
           </div>
+          {synopsisCustomFields && <div
+          className='col col-3'
+          >
+            <Synopsis customFields={{ ...synopsisCustomFields?.customFields }} />
+          </div>
+          }
         </div>
       </div>
     );
