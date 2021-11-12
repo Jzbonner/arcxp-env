@@ -47,41 +47,43 @@ const LiveUpdateSnippets = (props) => {
           <div className="border border-horizontal"></div>
         </div>
         <div className="liveUpdateSnippets-body">
-          <div className="col col-1">
-            <PageTitle customFields={{ ...titleCustomFields?.customFields }} />
-            <Image
-              src={{
-                url: `https://${siteDomain}${imageCustomFields?.customFields?.src}`,
-                alt_text: imageCustomFields?.customFields?.alt,
-                credits: imageCustomFields?.customFields?.credit,
-                caption: imageCustomFields?.customFields?.caption,
-              }}
-              imageType="isHomepageImage"
-              layout="fixed"
-              width={500}
-              height={282}
-            />
-          </div>
-          <div className="col col-2">
-            {embedData.map((data, i) => {
-              if (i < maxSnippets) {
-                return (
-                  <div
-                    key={`liveUpdateSnippets-update-${i}`}
-                    className="liveUpdateSnippets-update"
-                  >
-                    <div className="header">
-                      <div className="glow"></div>
-                      <div className="border border-vertical"></div>
+          <div className='c-liveUpdatesContainer'>
+            <div className="col col-1">
+              <PageTitle customFields={{ ...titleCustomFields?.customFields }} />
+              <Image
+                src={{
+                  url: `https://${siteDomain}${imageCustomFields?.customFields?.src}`,
+                  alt_text: imageCustomFields?.customFields?.alt,
+                  credits: imageCustomFields?.customFields?.credit,
+                  caption: imageCustomFields?.customFields?.caption,
+                }}
+                imageType="isHomepageImage"
+                layout="fixed"
+                width={500}
+                height={282}
+              />
+            </div>
+            <div className="col col-2">
+              {embedData.map((data, i) => {
+                if (i < maxSnippets) {
+                  return (
+                    <div
+                      key={`liveUpdateSnippets-update-${i}`}
+                      className="liveUpdateSnippets-update"
+                    >
+                      <div className="header">
+                        <div className="glow"></div>
+                        <div className="border border-vertical"></div>
+                      </div>
+                      <a href={data.canonical_url} className="content">
+                        {data.headlines.basic}
+                      </a>
                     </div>
-                    <a href={data.canonical_url} className="content">
-                      {data.headlines.basic}
-                    </a>
-                  </div>
-                );
-              }
-              return null;
-            })}
+                  );
+                }
+                return null;
+              })}
+            </div>
           </div>
           {synopsisCustomFields && <div
           className='col col-3'
@@ -97,7 +99,7 @@ const LiveUpdateSnippets = (props) => {
 };
 
 LiveUpdateSnippets.propTypes = {
-  childProps: PropTypes.obj,
+  childProps: PropTypes.array,
   customFields: PropTypes.shape({
     live: PropTypes.bool.tag({
       name: 'Are these updates live?',
