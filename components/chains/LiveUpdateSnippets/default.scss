@@ -64,12 +64,16 @@
     gap: 1rem;
 
     @include breakpoint(tablet) {
-      flex-direction: row;
       gap: 2rem;
+      flex-flow: row wrap;
     }
 
     @include breakpoint(desktop-sm) {
       gap: 1rem;
+    }
+
+    @include breakpoint(desktop-lg) {
+      flex-flow: row nowrap;
     }
 
     .col {
@@ -81,56 +85,81 @@
       }
     }
 
-    .c-page-title {
-      margin: 0;
-
-      .c-title-content {
-        @include text-styles(1.56rem, 1.12, "Lora-Regular");
-
-        letter-spacing: -.31px;
-        margin: 0;
-        border: none;
-
-        @include breakpoint(tablet) {
-          @include text-styles(1.625rem, 1.12, "Lora-Regular");
-
-          letter-spacing: -.43px;
-        }
-
-        @include breakpoint(desktop-sm) {
-          @include text-styles(1.875rem, 1.13, "Lora-Regular");
-
-          letter-spacing: -.5px;
-        }
-      }
-    }
-
-    .c-image-feature {
-      margin: 0;
-    }
-
-    .liveUpdateSnippets-update {
+    .c-liveUpdatesContainer {
       display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-width: 66%;
 
-      @include text-styles(.875rem, 1.4, "Gordita");
+      @include breakpoint(tablet) {
+        flex-direction: row;
+        gap: 2rem;
+      }
 
-      .header {
+      @include breakpoint(desktop-sm) {
+        gap: 1rem;
+      }
+
+      .col {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        margin: 1px 8px 0 0;
+
+        @include breakpoint(tablet) {
+          width: 100%;
+        }
       }
 
-      .content {
-        color: inherit;
-        padding-bottom: 1.25rem;
-        margin-top: -1px;
+      .c-page-title {
+        margin: 0;
+
+        .c-title-content {
+          @include text-styles(1.56rem, 1.12, "Lora-Regular");
+
+          letter-spacing: -.31px;
+          margin: 0;
+          border: none;
+
+          @include breakpoint(tablet) {
+            @include text-styles(1.625rem, 1.12, "Lora-Regular");
+
+            letter-spacing: -.43px;
+          }
+
+          @include breakpoint(desktop-sm) {
+            @include text-styles(1.875rem, 1.13, "Lora-Regular");
+
+            letter-spacing: -.5px;
+          }
+        }
       }
 
-      &:last-child {
+      .c-image-feature {
+        margin: 0;
+      }
 
-        .border {
-          display: none;
+      .liveUpdateSnippets-update {
+        display: flex;
+
+        @include text-styles(.875rem, 1.4, "Gordita");
+
+        .header {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 1px 8px 0 0;
+        }
+
+        .content {
+          color: inherit;
+          padding-bottom: 1.25rem;
+          margin-top: -1px;
+        }
+
+        &:last-child {
+
+          .border {
+            display: none;
+          }
         }
       }
     }
