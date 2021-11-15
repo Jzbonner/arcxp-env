@@ -172,23 +172,25 @@
 .c-image-component:not(.overlay-active) {
 
   .image-component-image.inline {
+    @include breakpoint(desktop-sm) {
 
-    &:hover {
-      background-color: rgba(155, 155, 155, .73);
-  
-      .image-expand {
-        visibility: visible;
-        background-color: initial;
-        z-index: 1;
-      }
-  
-      .lazyload-wrapper {
-        z-index: -1;
-        opacity: .4;
-      }
-  
-      .caption-arrow {
-        background-color: initial;
+      &:hover {
+        background-color: rgba(155, 155, 155, .73);
+    
+        .image-expand {
+          visibility: visible;
+          background-color: initial;
+          z-index: 1;
+        }
+    
+        .lazyload-wrapper {
+          z-index: -1;
+          opacity: .4;
+        }
+    
+        .caption-arrow {
+          background-color: initial;
+        }
       }
     }
 
