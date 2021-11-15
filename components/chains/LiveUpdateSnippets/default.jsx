@@ -2,29 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
-import handleSiteName from '../../layouts/_helper_functions/handleSiteName';
-import fetchEnv from '../../_helper_components/global/utils/environment';
-import Image from '../../_helper_components/global/image/default';
-import PageTitle from '../../features/pageTitle/default';
-import Synopsis from '../../features/Synopsis/default';
 import './default.scss';
 
-const LiveUpdateSnippets = (props) => {
-  const contentConfigValues = props?.customFields?.content?.contentConfigValues;
-  const maxSnippets = props?.customFields?.maxSnippets || 5;
-  const isLive = props?.customFields?.live;
+const LiveUpdateSnippets = ({ children, customFields }) => {
+  const contentConfigValues = customFields?.content?.contentConfigValues;
+  const liveUpdatesURI = customFields?.liveUpdatesURI;
+  const maxSnippets = customFields?.maxSnippets || 5;
+  const isLive = customFields?.live;
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
-
-  const titleCustomFields = props?.childProps.filter(
-    childProp => childProp.type === 'pageTitle/default',
-  )[0];
-  const imageCustomFields = props?.childProps.filter(
-    childProp => childProp.type === 'Image/default',
-  )[0];
-  const synopsisCustomFields = props?.childProps.find(
-    childProp => childProp.type === 'Synopsis/default',
-  );
 
   const embedData = useContent({
     source: 'query-feed',
@@ -33,10 +19,6 @@ const LiveUpdateSnippets = (props) => {
       arcSite,
     },
   });
-
-  const siteDomain = `${
-    fetchEnv() === 'prod' ? 'www' : 'sandbox'
-  }.${handleSiteName(arcSite)}.com`;
 
   if (Array.isArray(embedData)) {
     return (
@@ -49,19 +31,10 @@ const LiveUpdateSnippets = (props) => {
         <div className="liveUpdateSnippets-body">
           <div className='c-liveUpdatesContainer'>
             <div className="col col-1">
-              <PageTitle customFields={{ ...titleCustomFields?.customFields }} />
-              <Image
-                src={{
-                  url: `https://${siteDomain}${imageCustomFields?.customFields?.src}`,
-                  alt_text: imageCustomFields?.customFields?.alt,
-                  credits: imageCustomFields?.customFields?.credit,
-                  caption: imageCustomFields?.customFields?.caption,
-                }}
-                imageType="isHomepageImage"
-                layout="fixed"
-                width={500}
-                height={282}
-              />
+            <a href={`/${liveUpdatesURI}`}>
+              {children[0]}
+              {children[1]}
+              </a>
             </div>
             <div className="col col-2">
               {embedData.map((data, i) => {
@@ -75,7 +48,7 @@ const LiveUpdateSnippets = (props) => {
                         <div className="glow"></div>
                         <div className="border border-vertical"></div>
                       </div>
-                      <a href={data.canonical_url} className="content">
+                      <a href={`/${liveUpdatesURI}/#${data._id}`} className="content">
                         {data.headlines.basic}
                       </a>
                     </div>
@@ -85,10 +58,8 @@ const LiveUpdateSnippets = (props) => {
               })}
             </div>
           </div>
-          {synopsisCustomFields && <div
-          className='col col-3'
-          >
-            <Synopsis customFields={{ ...synopsisCustomFields?.customFields }} />
+          {children[2] && <div className='col col-3'>
+           {children[2]}
           </div>
           }
         </div>
@@ -99,11 +70,14 @@ const LiveUpdateSnippets = (props) => {
 };
 
 LiveUpdateSnippets.propTypes = {
-  childProps: PropTypes.array,
+  children: PropTypes.array,
   customFields: PropTypes.shape({
     live: PropTypes.bool.tag({
       name: 'Are these updates live?',
       defaultValue: false,
+    }),
+    liveUpdatesURI: PropTypes.string.tag({
+      name: 'URI of Live Updates Page',
     }),
     maxSnippets: PropTypes.number.tag({
       name: 'Max Snippets to show:',

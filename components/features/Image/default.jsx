@@ -17,6 +17,7 @@ const Image = ({ customFields }) => {
   } = appContext;
   let isPartOfUbbn = false;
   let isPartOfLiveUpdates = false;
+  let isPartOfLiveUpdateSnippets = false;
   if (renderables && renderables.length) {
     const chains = renderables.filter((item) => {
       const { collection } = item;
@@ -31,6 +32,8 @@ const Image = ({ customFields }) => {
             isPartOfUbbn = true;
           } else if (chainProps.type === 'LiveUpdatePageHeader') {
             isPartOfLiveUpdates = true;
+          } else if (chainProps.type === 'LiveUpdateSnippets') {
+            isPartOfLiveUpdateSnippets = true;
           }
         }
       });
@@ -85,6 +88,14 @@ const Image = ({ customFields }) => {
       [475, 204],
     ];
   }
+  if (isPartOfLiveUpdateSnippets) {
+    // On smaller breakpoints the feature takes up a larger percentage of the screen.
+    srcSetSizes = [
+      [600, 338],
+      [500, 282],
+      [800, 451],
+    ];
+  }
 
   if (!isResizerOrAbsolute) {
     // it's neither a resizer nor an absolute url, so process it as a photo ID & fetch from content API
@@ -93,7 +104,7 @@ const Image = ({ customFields }) => {
       query: {
         arcSite,
         id: src,
-        useSrcSet: isPartOfUbbn || isPartOfLiveUpdates,
+        useSrcSet: isPartOfUbbn || isPartOfLiveUpdates || isPartOfLiveUpdateSnippets,
         srcSetSizes,
       },
     });
@@ -147,7 +158,7 @@ const Image = ({ customFields }) => {
         {imageObj && <ImageGlobal
           src={imageObj}
           imageType={!isPartOfUbbn && !isPartOfLiveUpdates && (caption || credit) ? 'isInlineImage' : 'isFeatureImage'}
-          useSrcSet={!isGif || isPartOfUbbn || isPartOfLiveUpdates}
+          useSrcSet={!isGif || isPartOfUbbn || isPartOfLiveUpdates || isPartOfLiveUpdateSnippets}
           srcSetSizes={srcSetSizes}
           noLazyLoad={doNotLazyLoad}
         />}
