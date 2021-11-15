@@ -79,6 +79,7 @@ const SiteMetrics = ({ isAmp }) => {
     blogName = '',
   } = contentMeta || {};
   const siteDomain = siteDomainURL || `https://www.${site}.com`;
+  const replaceQuotes = text => text.replace(/"/g, "'");
   if (isAmp) {
     const { ampGtmTriggers, ampGtmID } = metrics || {};
     const {
@@ -103,7 +104,7 @@ const SiteMetrics = ({ isAmp }) => {
               "pageSiteSection": "${topSection}",
               "pageCategory": "${nonPrimarySections}",
               "pageContentType": "instant article",
-              "pageTitle": "${seoTitle ? seoTitle.replace(/"/g, "'").toLowerCase() : pageTitle.replace(/"/g, "'").toLowerCase()}",
+              "pageTitle": "${seoTitle ? replaceQuotes(seoTitle).toLowerCase() : replaceQuotes(pageTitle).toLowerCase()}",
               "pageFlow": "",
               "pageNumber": "",
               "siteVersion": "instant",
@@ -127,7 +128,7 @@ const SiteMetrics = ({ isAmp }) => {
               "pageUrlStr": "",
               "pageMainSection": "${topSection}",
               "contentPaywallStatus": "${contentCode}",
-              "chartbeatTitle": "${pageTitle}"
+              "chartbeatTitle": "${replaceQuotes(pageTitle)}"
             },
             "triggers": {
               "accessLoginStarted": {
@@ -212,8 +213,8 @@ const SiteMetrics = ({ isAmp }) => {
             "pageMainSection": "${topSection}",
             "pageCategory": "${nonPrimarySections}",
             "pageContentType": "${typeOfPage || pageContentType}",
-            "pageTitle": "${seoTitle ? seoTitle.replace(/"/g, "'") : pageTitle.replace(/"/g, "'")}",
-            "chartbeatTitle": "${pageTitle}"
+            "pageTitle": "${seoTitle ? replaceQuotes(seoTitle) : replaceQuotes(pageTitle)}",
+            "chartbeatTitle": "${replaceQuotes(pageTitle)}"
           },
           "siteData": {
             "siteID": "${metrics && metrics.siteID ? metrics.siteID : site}",
@@ -233,7 +234,7 @@ const SiteMetrics = ({ isAmp }) => {
             "contentVendor": "${sourceType && sourceType === 'wires' && sourceSystem ? sourceSystem.toLowerCase() : ''}",
             "contentPublishDate": "${firstPublishDateConverted}",
             "blogName": "${pageContentType === 'blog' ? topSectionName : (blogName || '')}",
-            "galleryName": "${galleryHeadline.replace(/"/g, "'")}",
+            "galleryName": "${replaceQuotes(galleryHeadline)}",
             "contentPaywallStatus": "${contentCode}"
           }
         };
