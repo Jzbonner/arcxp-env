@@ -46,6 +46,7 @@ const fetch = (query) => {
     squareImageSize,
     useSquareImageAfter,
     feature,
+    excludeTheseStoryIds = [],
   } = query;
 
   const activeSite = arcSite || arcSiteAlt;
@@ -57,6 +58,7 @@ const fetch = (query) => {
   const newBody = buildBodyFromQuery(query);
 
   return getQueryData(activeSite, newBody, from, size, useFetch)
+    .then(data => data.filter(story => excludeTheseStoryIds.every(excludedStoryId => excludedStoryId !== story?._id)))
     .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
     .then(data => FilterElements(data, requiresImageEveryX, feature))
     .then(data => data.slice(0, size))

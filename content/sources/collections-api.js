@@ -31,6 +31,7 @@ const fetch = (query) => {
     srcSetSizes = [],
     squareImageSize,
     useSquareImageAfter,
+    excludeTheseStoryIds = [],
   } = query;
   const activeSite = arcSite || arcSiteAlt;
 
@@ -39,6 +40,7 @@ const fetch = (query) => {
   const requiresImageEveryX = getImageRequirements(displayClass, displayClassesRequiringImg);
   if (id) {
     return GetCollectionData(activeSite, id, size, from)
+      .then(data => data.filter(story => excludeTheseStoryIds.every(excludedStoryId => excludedStoryId !== story?._id)))
       .then(data => AddFirstInlineImage(data, displayClass, displayClassesRequiringImg))
       .then(data => FilterElements(data, requiresImageEveryX))
       .then(data => data.slice(0, size))
