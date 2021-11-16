@@ -50,7 +50,7 @@ const Lead = ({
   }
 
 
-  let data = useContent({
+  const data = useContent({
     source: contentService,
     query: {
       ...contentConfigValues,
@@ -60,12 +60,9 @@ const Lead = ({
       squareImageSize,
       useSquareImageAfter,
       feature,
+      excludeTheseStoryIds: filterData ? [id] : [],
     },
   });
-
-  if (filterData && Array.isArray(data)) {
-    data = data.filter(story => story?._id !== id);
-  }
 
   function getDisplayClassMap() {
     switch (actualDisplayClass) {
