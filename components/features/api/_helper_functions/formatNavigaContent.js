@@ -75,8 +75,9 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     const { streams, promo_image: promoImage } = el || {};
     const [{ url: inlineVideoURL }] = streams || {};
     const { url: promoImageUrl } = promoImage;
-    return `<img src="${imageResizer(promoImageUrl, siteID)}" />
-            <embed type="raw"><iframe src=${inlineVideoURL} width="640" height="360" frameborder="0" allowfullscreen="allowfullscreen"></iframe></embed>`;
+    return `<video width="640" height="384" controls poster="${imageResizer(promoImageUrl, siteID)}">
+              <source src=${inlineVideoURL} type="video/mp4"
+            </video>`;
   }
 
   if (type === 'interstitial_link') {
