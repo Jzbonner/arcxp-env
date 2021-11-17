@@ -1,14 +1,27 @@
 /* stylelint-disable value-no-vendor-prefix, property-no-vendor-prefix */
 @import "./../../../src/styles/base";
 
-.c-sectionHome .c-contentElements .c-synopsis {
-  @include breakpoint(tablet) {
-    width: 100%;
-  }
+.c-sectionHome {
 
-  @include breakpoint(desktop-lg) {
-    width: 48.5%;
-    margin-left: 3%;
+  .c-contentElements {
+
+    .liveUpdateSnippets-body {
+
+      .c-synopsis {
+        width: 100%;
+      }
+    }
+
+    .c-synopsis {
+      @include breakpoint(tablet) {
+        width: 100%;
+      }
+
+      @include breakpoint(desktop-lg) {
+        width: 48.5%;
+        margin-left: 3%;
+      }
+    }
   }
 }
 

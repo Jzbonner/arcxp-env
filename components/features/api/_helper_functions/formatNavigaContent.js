@@ -72,9 +72,12 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   }
 
   if (type === 'video') {
-    const { streams } = el || {};
+    const { streams, promo_image: promoImage, credits } = el || {};
     const [{ url: inlineVideoURL }] = streams || {};
-    return `<embed type="raw"><iframe src=${inlineVideoURL} width="640" height="360" frameborder="0" allowfullscreen="allowfullscreen"></iframe></embed>`;
+    const credit = credits?.afilliation?.[0]?.name || promoImage?.credits?.by?.[0]?.name || '';
+    return `<embed type="raw"><iframe src=${inlineVideoURL} width="640" height="360" frameborder="0" allowfullscreen="allowfullscreen"></iframe></embed>
+            <div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${credit}</div>
+            `;
   }
 
   if (type === 'interstitial_link') {
