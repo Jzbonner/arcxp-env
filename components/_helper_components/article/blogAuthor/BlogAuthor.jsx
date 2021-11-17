@@ -15,7 +15,45 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
     const appContext = useAppContext();
     const { deployment, contextPath } = appContext;
     const { _id: authorId } = authorData[0] || {};
-    const staffBioPageLink = `/staff/${authorId}/`;
+    const staffBioPageLink = authorId ? `staff/${authorId}/` : false;
+
+    const buildAuthorImage = (author) => {
+      if (staffBioPageLink) {
+        return (
+        <a
+          href={staffBioPageLink}
+          rel='author'
+        >
+          <div className="content-profileImage">
+            <Image src={author.image} ampPage={ampPage} imageType="isInlineImage" width={100} height={100} />
+          </div>
+        </a>
+        );
+      // eslint-disable-next-line no-else-return
+      } else {
+        return (
+          <div>
+            <Image src={author.image} ampPage={ampPage} imageType="isInlineImage" width={100} height={100} />
+          </div>
+        );
+      }
+    };
+
+    const buildAuthorName = (author) => {
+      if (staffBioPageLink) {
+        return (
+        <a
+          href={staffBioPageLink}
+          rel='author'
+        >
+          {author.name}
+        </a>
+        );
+      // eslint-disable-next-line no-else-return
+      } else {
+        return author.name;
+      }
+    };
 
     return (
       <div className={`c-blogAuthor b-margin-bottom-30 ${authorData.length > 1 ? 'multiple-authors' : ''}`}>
@@ -23,20 +61,9 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
         {authorData.map((author, index) => (
           <div key={`blog-author-${index}`} className="blog-author-content">
             <div className={`b-flexRow blog-author-content-heading ${author.image && author.image.url ? 'has-image' : ''}`}>
-              {author.image && author.image.url && (
-                <a
-                href={staffBioPageLink}
-                rel='author'
-                >
-                  <div className="content-profileImage">
-                    <Image src={author.image} ampPage={ampPage} imageType="isInlineImage" width={100} height={100} />
-                  </div>
-                </a>
-              )}
+              {author.image && author.image.url && buildAuthorImage(author)}
               <div className="content-authorName">
-                <a href={staffBioPageLink} rel='author'>
-                {author.name}
-                </a>
+                {buildAuthorName(author)}
                 {author.social_links && <div className="content-authorSocial">
                   {author.social_links.map((link) => {
                     const { site: network, url } = link;
