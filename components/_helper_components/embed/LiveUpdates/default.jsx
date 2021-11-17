@@ -334,7 +334,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       }
 
       return <>
-        <LazyLoad placeholder={<div className="c-placeholder-liveUpdate" />} height="100%" width="100%" offset={300} once={true} key={elId}>
+        <LazyLoad placeholder={<div className="c-placeholder-liveUpdate" />} height="100%" width="100%" offset={100} once={!isMeteredStory} overflow={isMeteredStory} key={elId}>
           {updateContentOutput()}
           {/* after we get through the "specialty" placeholder inserts, we want to lazyload ads as well as the other content */}
           {(updateIndex > 10 && (updateIndex - 1) % 3 === 0) && renderAdOrPlaceholder(updateIndex - 1)}
