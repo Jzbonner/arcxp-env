@@ -76,7 +76,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     const [{ url: inlineVideoURL }] = streams || {};
     const { url: promoImageUrl } = promoImage;
     return `<video width="640" height="384" controls poster="${imageResizer(promoImageUrl, siteID)}">
-              <source src=${inlineVideoURL} type="video/mp4" />
+              <source src=${inlineVideoURL} type="video/mp4" >
             </video>`;
   }
 
