@@ -73,7 +73,7 @@
       "adsPrebidEnabled": "false",
       "adsPrebidTimeout": "1500",
       "prebidJs": "prebid3.23.0.js",
-      "adsBreakpoints": [1024, 768, 0]
+      "adsBreakpoints": [1280, 1024, 768, 0]
     },
     "prod": {
       "adsA9Enabled": "false",
@@ -81,7 +81,7 @@
       "adsPrebidEnabled": "false",
       "adsPrebidTimeout": "1500",
       "prebidJs": "prebid3.23.0.js",
-      "adsBreakpoints": [1024, 768, 0]
+      "adsBreakpoints": [1280, 1024, 768, 0]
     }
   },
   "weatherPageUrl": "/weather/",
