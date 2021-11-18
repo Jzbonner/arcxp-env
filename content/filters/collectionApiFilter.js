@@ -74,4 +74,5 @@ export default [
   'type',
   'website_url',
   '_id',
+  'streams',
 ];
