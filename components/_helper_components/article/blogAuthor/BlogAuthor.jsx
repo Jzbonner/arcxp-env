@@ -15,7 +15,7 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
     const appContext = useAppContext();
     const { deployment, contextPath } = appContext;
     const { _id: authorId } = authorData[0] || {};
-    const staffBioPageLink = authorId ? `staff/${authorId}/` : false;
+    const staffBioPageLink = authorId ? `/staff/${authorId}/` : false;
 
     const buildAuthorImage = (author) => {
       if (staffBioPageLink) {
@@ -32,7 +32,7 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
       // eslint-disable-next-line no-else-return
       } else {
         return (
-          <div>
+          <div className="content-profileImage">
             <Image src={author.image} ampPage={ampPage} imageType="isInlineImage" width={100} height={100} />
           </div>
         );
