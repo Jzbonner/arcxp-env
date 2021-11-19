@@ -1,5 +1,5 @@
 import axios from 'axios';
-import pick from 'lodash/pick';
+import { pick, uniqBy } from 'lodash';
 import getProperties from 'fusion:properties';
 import { CHARTBEAT_KEY, CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import filterMostRead from './helper_functions/filterMostRead';
@@ -57,7 +57,7 @@ const fetch = (query = {}) => {
       return filterMostRead(data, hostBasedonEnv, blacklist);
     })
     .then((data) => {
-      mostReadContent = [...data];
+      mostReadContent = uniqBy(data, 'path');
       if (Array.isArray(data) && fetchStoryData) {
         const urls = [];
         data.map((element) => {
@@ -73,13 +73,15 @@ const fetch = (query = {}) => {
           }).then(({ data: finalData }) => {
             const { content_elements: contentElements = [] } = finalData || {};
             if (fetchStoryData && contentElements.length) {
-              const mostReadWithArcData = mostReadContent.map((element, i) => {
+              const mostReadWithArcData = mostReadContent.map((element) => {
                 const pathStart = element?.path.indexOf('/') || 0;
                 const path = element?.path.substr(pathStart) || null;
                 // checking the paths and merging the two array
-                if (path && contentElements[i] && contentElements[i].canonical_url === path) {
-                  const storyEl = pick(contentElements[i], filter);
-                  return Object.assign({}, element, storyEl);
+                for (let j = 0; j < contentElements.length; j += 1) {
+                  if (path && contentElements[j] && contentElements[j].canonical_url === path) {
+                    const storyEl = pick(contentElements[j], filter);
+                    return Object.assign({}, element, storyEl);
+                  }
                 }
                 return element;
               });

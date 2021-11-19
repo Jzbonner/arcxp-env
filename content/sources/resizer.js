@@ -15,7 +15,7 @@ function encodeSrc(src) {
 export default {
 
   fetch({
-    srcArray, src, height, width = 1000, srcSetSizes = [], originalHeight, originalWidth, smart, focalCoords, arcSite, isGallery = false,
+    srcArray, src, height, width = 1000, srcSetSizes = [], originalHeight, originalWidth, smart, focalCoords, arcSite = 'ajc', isGallery = false,
   }) {
     const fetchImageData = (
       imageSrc, imageHeight, imageWidth, imageSrcSetSizes, originalImageHeight, originalImageWidth, smartCrop, imageFocalCoords,
