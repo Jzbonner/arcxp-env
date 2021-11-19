@@ -1827,11 +1827,14 @@
                 width: 25%;
               }
 
-              @include between-breakpoints(mobile, tablet) {
+              @include between-breakpoints(mobile, desktop-sm) {
 
                 &:nth-child(1) {
                   display: none;
                 }
+              }
+
+              @include between-breakpoints(mobile, tablet) {
 
                 &:nth-child(2),
                 &:nth-child(4) {
