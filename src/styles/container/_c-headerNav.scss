@@ -1826,16 +1826,23 @@
               @include breakpoint(tablet) {
                 width: 25%;
               }
+
+              @include between-breakpoints(mobile, tablet) {
+
+                &:nth-child(1) {
+                  display: none;
+                }
+
+                &:nth-child(2),
+                &:nth-child(4) {
+                  padding-bottom: 9px;
+                }
+              }
             }
 
             @include between-breakpoints(mobile, tablet) {
               columns: 2;
               display: block;
-
-              .flyout-item:nth-child(1),
-              .flyout-item:nth-child(3) {
-                padding-bottom: 9px;
-              }
             }
           }
         }
