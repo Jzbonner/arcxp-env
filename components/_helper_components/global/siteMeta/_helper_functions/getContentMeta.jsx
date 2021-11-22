@@ -20,6 +20,7 @@ const getContentMeta = () => {
     template,
     deployment,
     contextPath,
+    renderables: renderedOutput,
   } = appContext;
   const {
     headlines,
@@ -81,17 +82,38 @@ const getContentMeta = () => {
       environ = 'debug';
     }
   }
-  const pageType = checkPageType(subtype || type, layout);
+  const pageType = checkPageType(subtype || type, layout, renderedOutput);
   const {
     isHome,
     isSection,
     isWrap,
+    isStaff,
+    isWeather,
+    isError,
+    isLiveUpdate,
+    isAuthor,
+    isTraffic,
+    isEnhancedList,
     type: typeOfPage = '',
     isNonContentPage,
   } = pageType || {};
   let pageContentType = typeOfPage === 'story' ? 'article' : typeOfPage.toLowerCase();
   if (isHome) {
     pageContentType = 'homepage';
+  } else if (isError) {
+    pageContentType = '404';
+  } else if (isLiveUpdate) {
+    pageContentType = 'liveupdates';
+  } else if (isAuthor) {
+    pageContentType = 'author';
+  } else if (isEnhancedList) {
+    pageContentType = 'enhancedList';
+  } else if (isStaff) {
+    pageContentType = 'staff';
+  } else if (isWeather) {
+    pageContentType = 'weather';
+  } else if (isTraffic) {
+    pageContentType = 'traffic';
   } else if (isSection) {
     pageContentType = 'section front';
   }
