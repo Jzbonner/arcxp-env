@@ -91,8 +91,8 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     return response;
   };
 
-  const highlightNavItem = (hashTarget) => {
-    if (hashTarget !== activeUpdate) {
+  const highlightNavItem = (hashTarget, highlightFromHash) => {
+    if (hashTarget !== activeUpdate || highlightFromHash) {
       const activeLink = document.querySelector(`a[href='#${activeUpdate}']`) || document.querySelector('.c-liveUpdateNav .is-active');
       if (activeLink) {
         activeLink.setAttribute('class', activeLink.className.replace('is-active', ''));
@@ -117,7 +117,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       }
       activeUpdate = hashTarget;
     } else if (document.querySelector('.c-liveUpdateNav .is-active') === null) {
-      const targetLink = document.querySelector(`.c-liveUpdateNav a[href='#${activeUpdate}']`);
+      const targetLink = document.querySelector(`a[href='#${activeUpdate}']`);
       if (targetLink) targetLink.className += ' is-active';
     }
   };
@@ -140,12 +140,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     const hashTarget = !target && hash ? hash : target && target.substr(target.indexOf('#') + 1);
     const targetUpdate = document.querySelector(`[name='${hashTarget}']`) || null;
     if (targetUpdate) {
-      // move to the selected update in the content area
-      // window.scrollTo({
-      //   top: targetUpdate.offsetTop - stickyHeaderAdjustment, // to handle sticky header
-      //   left: 0,
-      //   behavior: 'smooth',
-      // });
       targetUpdate.scrollIntoView(true);
     }
   };
@@ -240,6 +234,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       // we use a timeout to ensure enough time has passed for the snippets to (lazy) load, and the user is taken to the correct position on the page
       setTimeout(() => {
         document.querySelector(`[href='#${hashId}']`).click();
+        highlightNavItem(hashId, true);
       }, 1500);
     }
   }, [hashId]);
@@ -354,9 +349,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
           We also have one for the newsletter placeholder (after #6)
         */}
         {(updateIndex === 6 || (updateIndex > 3 && updateIndex <= 10 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
-        {/* hashId && updateIndex === liveUpdates.length && (
-          handleNavTrigger(null, hashId)
-        ) */}
       </>;
     });
 
