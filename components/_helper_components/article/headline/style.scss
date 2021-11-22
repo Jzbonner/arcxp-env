@@ -141,15 +141,6 @@
 
   &.with-video {
     display: block;
-
-    .headline-body {
-      
-      .headline-text {
-        @include breakpoint(desktop-sm) {
-          text-align: left;
-        }
-      }
-    }
   }
 }
 
