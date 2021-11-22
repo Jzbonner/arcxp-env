@@ -106,6 +106,7 @@ export const adSlots = {
       ], // lg desktop (1280+)
       [
         [728, 90],
+        [728, 315],
       ], // desktop
       [], // mobile & tablet
     ],
@@ -736,6 +737,7 @@ export const adSlots = {
     dimensions: [
       [], // desktop+
       [
+        [320, 150],
         [320, 50],
       ], // mobile & tablet
     ],

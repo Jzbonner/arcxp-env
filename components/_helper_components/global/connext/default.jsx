@@ -39,6 +39,7 @@ export const ConnextAuthTrigger = () => {
   if (typeof window !== 'undefined' && !window.connextAuthTriggerEnabled) {
     const loadDeferredItems = () => {
       const deferredItems = window.deferUntilKnownAuthState || [];
+      logOutput('connext logging >> inside loadDeferredItems, items:', deferredItems, 'loadedDeferredItemsRef.current', loadedDeferredItemsRef.current);
       if (deferredItems.length && !loadedDeferredItemsRef.current) {
         const adInstance = ArcAdLib.getInstance();
         const articleBodyContainer = document.querySelector('.c-articleBodyContainer');
@@ -85,6 +86,7 @@ export const ConnextAuthTrigger = () => {
         // image fix for APD-983
         const inlineImages = document.querySelectorAll('.lazyload-wrapper img');
         if (inlineImages.length) {
+          logOutput('connext logging >> inlineimages', inlineImages);
           inlineImages.forEach((img) => {
             const isPlaceholder = img.getAttribute('data-placeholder');
             const dataSrc = img.getAttribute('data-src');
