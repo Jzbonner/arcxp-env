@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
+import fetchEnv from '../../_helper_components/global/utils/environment';
 import './default.scss';
 
 const LiveUpdateSnippets = ({ children, customFields }) => {
@@ -11,6 +12,8 @@ const LiveUpdateSnippets = ({ children, customFields }) => {
   const isLive = customFields?.live;
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
+  const env = fetchEnv();
+  const domain = env !== 'prod' ? `?_website=${arcSite}` : '';
 
   const embedData = useContent({
     source: 'query-feed',
@@ -31,7 +34,7 @@ const LiveUpdateSnippets = ({ children, customFields }) => {
         <div className="liveUpdateSnippets-body">
           <div className='c-liveUpdatesContainer'>
             <div className="col col-1">
-            <a href={`/${liveUpdatesURI}`}>
+            <a href={`/${liveUpdatesURI}${domain}`}>
               {children[0]}
               {children[1]}
               </a>
@@ -48,7 +51,7 @@ const LiveUpdateSnippets = ({ children, customFields }) => {
                         <div className="glow"></div>
                         <div className="border border-vertical"></div>
                       </div>
-                      <a href={`/${liveUpdatesURI}/#${data._id}`} className="content">
+                      <a href={`/${liveUpdatesURI}/${domain}#${data._id}`} className="content">
                         {data.headlines.basic}
                       </a>
                     </div>
