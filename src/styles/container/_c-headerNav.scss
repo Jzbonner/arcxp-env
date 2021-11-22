@@ -1708,7 +1708,7 @@
 
     @include breakpoint(desktop-sm) {
       max-width: 416px;
-      padding: 114px 28px 30px;
+      padding: 67px 28px 30px;
     }
 
     &.mobile-nav-deactivated {
@@ -1826,16 +1826,26 @@
               @include breakpoint(tablet) {
                 width: 25%;
               }
+
+              @include between-breakpoints(mobile, desktop-sm) {
+
+                &:nth-child(1) {
+                  display: none;
+                }
+              }
+
+              @include between-breakpoints(mobile, tablet) {
+
+                &:nth-child(2),
+                &:nth-child(4) {
+                  padding-bottom: 9px;
+                }
+              }
             }
 
             @include between-breakpoints(mobile, tablet) {
               columns: 2;
               display: block;
-
-              .flyout-item:nth-child(1),
-              .flyout-item:nth-child(3) {
-                padding-bottom: 9px;
-              }
             }
           }
         }
