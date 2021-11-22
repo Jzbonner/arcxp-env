@@ -19,7 +19,7 @@ const AdSetup = ({
     adsA9Id,
     adsPrebidEnabled,
     adsBidding,
-    adsBreakpoints: adsBPs = [1024, 768, 0],
+    adsBreakpoints: adsBPs = [1280, 1024, 768, 0],
   } = adsProps[currentEnv] || {};
   const { adsPrebidSizeConfig } = adsBidding || {};
   if (prerender && typeof window !== 'undefined') {
