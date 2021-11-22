@@ -295,6 +295,10 @@
       }
     }
 
+    .c-placeholder-liveUpdate {
+      position: relative;
+    }
+
     .c-liveUpdateContent {
       width: calc(100% - 50px);
       box-sizing: border-box;
@@ -410,6 +414,14 @@
             display: block;
           }
         }
+      }
+
+      .snippet-anchor {
+        position: relative;
+        display: inline-block;
+        height: 0;
+        top: -60px;
+        left: 0;
       }
 
       .c-headline {
