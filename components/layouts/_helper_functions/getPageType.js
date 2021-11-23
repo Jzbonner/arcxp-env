@@ -7,22 +7,24 @@ const checkPageType = (type, layout, renderedOutput) => {
     page.isHomeOrSectionPage = false;
   } else if (layout) {
     const isSectionPage = layout.indexOf('section') > -1;
+    const pageTitleArray = [];
     const features = isSectionPage && Array.isArray(renderedOutput) && renderedOutput.map((element) => {
       if (element && element.collection === 'features' && element.type) {
+        if (element.type === 'pageTitle/default') {
+          pageTitleArray.push(element);
+        }
         return element.type;
       }
       return null;
     });
-
     // checking if page has thirdPartyFeature
     const isThirdPartyFeature = isSectionPage && Array.isArray(features)
-                           && features.includes('ThirdPartyTease/default');
-    const pageTitleElement = isThirdPartyFeature && renderedOutput.filter(element => element.collection === 'features'
-          && element.type && element.type === 'pageTitle/default');
-
+          && features.includes('ThirdPartyTease/default');
+    const pageTitleElement = isSectionPage && Array.isArray(features) && features.includes('pageTitle/default')
+          && pageTitleArray.length ? pageTitleArray[0] : null;
     // Retrieving the pageTitle from pageTitleElement
-    const { customFields: { pageTitle = '' } = {} } = Array.isArray(pageTitleElement)
-          && pageTitleElement[0] && pageTitleElement[0].props ? pageTitleElement[0].props : {};
+    const { customFields: { pageTitle = '' } = {} } = pageTitleElement
+          && pageTitleElement.props ? pageTitleElement.props : {};
     const isHome = layout.indexOf('home') > -1;
     const isSection = isSectionPage || layout.indexOf('wrap') > -1;
     const isList = layout.indexOf('list') > -1;
