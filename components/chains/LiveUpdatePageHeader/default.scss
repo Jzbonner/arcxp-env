@@ -1,0 +1,11 @@
+@import "./../../../src/styles/base";
+
+.c-LiveUpdatePageHeader {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+
+  @include breakpoint(desktop-sm) {
+    flex-direction: row;
+  }
+}

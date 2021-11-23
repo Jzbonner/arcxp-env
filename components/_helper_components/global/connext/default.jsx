@@ -114,6 +114,8 @@ export const ConnextAuthTrigger = () => {
           siteCode, configCode, environment, 'Connext_CurrentConversations',
         ) || {};
         const { Metered: meteredConversationData = {} } = conversationsDataFromLocalStorage;
+        const { UserState } = GetConnextLocalStorageData(siteCode, configCode, environment, 'connext_user_data') || {};
+
         const {
           Id: meteredConversationId = '',
           Properties: meteredConversationLSProperties = {},
@@ -134,7 +136,7 @@ export const ConnextAuthTrigger = () => {
           || (
             articlesRemainingFromLocalStorage !== 0
             && viewedArticlesArray.length < articleLimitFromLocalStorage - 1
-          )
+          ) || (UserState === 'Subscribed')
         ) {
           logOutput(
             `connext debugging >> (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
@@ -259,7 +261,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
-  const { connext } = getProperties(arcSite);
+  const { connext, siteName } = getProperties(arcSite);
   const {
     isEnabled = false,
     clientCode,
@@ -278,10 +280,12 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
   const userIsLoggedOutClass = 'is-loggedOut';
   const userIsAuthenticatedClass = 'is-authenticated';
   const connextLSLookup = `connext_user_data_${siteCode}_${configCode}_${environment.toUpperCase()}`;
+  const isAJCSite = siteName === 'AJC';
 
   return <script type='text/javascript' dangerouslySetInnerHTML={{
     __html: `
       const doc = window.document;
+      var cbqArray = [];
       const docBody = doc.querySelector('body');
       const toggleUserState = (action) => {
         let dataLayer = window.dataLayer || [];
@@ -305,6 +309,18 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                 'event': loginEventToTrigger
               };
               dataLayer.push(userDataObj);
+              if(cbqArray && ${!isAJCSite}){
+                switch(userTypeState) {
+                  case 'standard':
+                    cbqArray.push(['_acct', 'lgdin']);
+                    break;
+                  case 'premium':
+                    cbqArray.push(['_acct', 'paid']);
+                    break;
+                  default:
+                    // do nothing
+                };
+              };
               if (window?.sophi?.data) {
                 const sophiUserState = UserState === 'Subscribed' ? 'Subscribed' : 'Registered'
                 window.sophi.data.visitor = {
@@ -327,6 +343,9 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
             }
           };
           dataLayer.push(userDataObj);
+          if(cbqArray && ${!isAJCSite}){
+            cbqArray.push(['_acct', 'anon']);
+          };
           if (window?.sophi?.data) {
             window.sophi.data.visitor = {
               type: 'Anonymous',
@@ -411,6 +430,29 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           bindConnextNotAuthorized = false;
         }
       });
+      /*
+        Since we can only read the userType in the body, we're initializing chartbeat from the body per chartbeat's documentation.
+        https://docs.chartbeat.com/cbp/tracking/standard-websites/alternative-integrations-web
+      */
+     if(${!isAJCSite}){
+
+        /** CONFIGURATION START **/
+        var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
+        var _cbq = window._cbq = (window._cbq || []);
+        _cbq = cbqArray;
+        /** CONFIGURATION END **/
+
+        function loadChartbeat() {
+          var e = document.createElement('script');
+          var n = document.getElementsByTagName('script')[0];
+          e.type = 'text/javascript';
+          e.async = true;
+          e.src = '//static.chartbeat.com/js/chartbeat.js';
+          n.parentNode.insertBefore(e, n);
+        }
+        loadChartbeat();
+
+     }
       doc.addEventListener('DOMContentLoaded', () => {
         const connextMeterLevelSet = new Event('connextMeterLevelSet');
         const connextConversationDetermined = new Event('connextConversationDetermined');

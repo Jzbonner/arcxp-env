@@ -11,6 +11,7 @@
 
   @include breakpoint(tablet) {
     height: 40px;
+    width: calc(100% - 60px);
   }
 
   &.is-hidden {
@@ -71,7 +72,7 @@
 
   .c-breakingNews-heading {
     @include text-styles(.875rem, 1.29, "Gordita-Bold");
-    
+
     display: flex;
     flex-direction: row;
     height: 100%;
@@ -92,7 +93,7 @@
     @include breakpoint(desktop-sm) {
       @include text-styles(1rem, 1.29, "Gordita-Bold");
     }
-    
+
     :first-child {
       @include breakpoint(tablet) {
         margin-right: 5px;
@@ -115,18 +116,20 @@
     text-align: left;
     padding: 5px 40px 5px 10px;
     width: 70%;
-    height: min-content;
+    height: calc(100% - 10px);
+    overflow-y: hidden;
 
     @include text-styles(.75rem, 1.2, "Gordita");
 
     @include breakpoint(tablet) {
       padding: 10px 40px 10px 18px;
+      height: calc(100% - 20px);
       width: 75%;
     }
 
     @include breakpoint(desktop-sm) {
       @include text-styles(1rem, 1.2, "Gordita");
-      
+
       text-align: center;
       width: 80%;
     }
