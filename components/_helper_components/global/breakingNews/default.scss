@@ -9,7 +9,11 @@
   border: 1px solid #e74c3c;
   background-color: #fff;
 
-  @include breakpoint(tablet) {
+  @include between-breakpoints(tablet, desktop-sm) {
+    width: calc(100% - 80px);
+  }
+
+  @include breakpoint(desktop-sm) {
     height: 40px;
     width: calc(100% - 60px);
   }
