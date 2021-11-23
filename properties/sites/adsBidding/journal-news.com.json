@@ -31,6 +31,21 @@
       "labels": ["desktop3"]
     },
     {
+      "mediaQuery": "(min-width: 1280px)",
+      "sizesSupported": [
+        [970, 250],
+        [728, 90]
+      ],
+      "labels": ["desktop4"]
+    },
+    {
+      "mediaQuery": "(min-width: 1024px) and (max-width: 1279px)",
+      "sizesSupported": [
+        [728, 90]
+      ],
+      "labels": ["desktop5"]
+    },
+    {
       "mediaQuery": "(min-width: 768px) and (max-width: 1023px)",
       "sizesSupported": [
         [300, 250]
@@ -123,12 +138,22 @@
         "bids": [
           {
             "bidder": "appnexus",
-            "labels": ["desktop1", "desktop2"],
+            "labels": ["desktop4"],
             "params": {
               "publisher": "JN",
               "placementGroup": "ROS",
               "placementId": "23054556",
-              "placementName": "JN_ROS_LiveUpdates_Desktop_HP01"
+              "placementName": "JN_ROS_LiveUpdates_DesktopLarge_HP01"
+            }
+          },
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop5"],
+            "params": {
+              "publisher": "JN",
+              "placementGroup": "ROS",
+              "placementId": "23428962",
+              "placementName": "JN_ROS_LiveUpdates_DesktopSmall_HP01"
             }
           }
         ]
@@ -503,7 +528,7 @@
         "bids": [
           {
             "bidder": "appnexus",
-            "labels": ["phone"],
+            "labels": ["phone", "tablet2"],
             "params": {
               "publisher": "JN",
               "placementGroup": "ROS",

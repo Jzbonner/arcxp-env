@@ -151,7 +151,7 @@ const ArcAd = ({
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
       className={`arc_ad | ${slotName} b-margin-bottom-d30-m20
       ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
-      dimensions={ adConfig.dimensions || defaultAdSlot.dimensions }
+      dimensions={adConfig.dimensions || defaultAdSlot.dimensions}
       dfpId={dfpIdFormatted}
       display={adConfig.display || defaultAdSlot.display}
       id={`${customId}` || `${defaultAdSlot.name}${staticSlot || slot.replace(/ /g, '-').replace(/[()]/g, '')}${adSuffix}`}

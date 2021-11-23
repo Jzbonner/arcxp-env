@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
-import { useAppContext } from 'fusion:context';
 import ContentElements from '../../article/contentElements/default.jsx';
 import ArcAd from '../../../features/ads/default';
 import TaboolaFeed from '../../../features/taboolaFeed/default';
@@ -17,10 +16,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   const isMeteredStory = paywallStatus === 'premium';
   if (!liveUpdates) return <span><i>There are no Live Updates to display.</i></span>;
 
-  const appContext = useAppContext();
-  const { requestUri } = appContext;
-  const uriHasHash = requestUri.indexOf('#') > -1;
-  const hashId = uriHasHash ? requestUri.substr(requestUri.indexOf('#') + 1) : null;
+  const hashId = typeof window !== 'undefined' ? window.location.hash.substr(1) : null;
   let activeUpdate = hashId;
   let viewportHeight = 0;
   let lastScrollPos = 0;
@@ -32,8 +28,8 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
   const copyToClipboard = (e) => {
     e.preventDefault();
     let action = () => console.error('fallback in case Window or Navigator are unknown');
-    if (window && navigator && navigator.clipboard) {
-      const anchor = `${window.location.origin}${window.location.pathname}#${e.target.getAttribute('data-target')}`;
+    if (document && navigator && navigator.clipboard) {
+      const anchor = `${document.location.origin}${document.location.pathname}#${e.target.getAttribute('data-target')}`;
       action = navigator.clipboard.writeText(anchor).then(() => console.log(`Async: Copying ${anchor} to clipboard was successful!`), err => console.error('Async: Could not copy text: ', err)).then(() => {
         e.target.classList.value += ' is-clicked';
         setTimeout(() => {
@@ -74,13 +70,13 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         </>;
         break;
       case 5:
-        response = <div className='story-newsletter_placeholder'></div>;
+        response = <div className='story-newsletter_placeholder' key={`placeholder-${index}`}></div>;
         break;
       case 6:
-        response = <div className='story-nativo_placeholder--moap'></div>;
+        response = <div className='story-nativo_placeholder--moap' key={`placeholder-${index}`}></div>;
         break;
       case 9:
-        response = <div className='story-interscroller__placeholder c-contentElements'></div>;
+        response = <div className='story-interscroller__placeholder c-contentElements' key={`placeholder-${index}`}></div>;
         break;
       default:
         response = <ArcAd
@@ -95,13 +91,13 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     return response;
   };
 
-  const highlightNavItem = (hashTarget) => {
-    if (hashTarget !== activeUpdate) {
-      const activeLink = document.querySelector(`.c-liveUpdateNav a[href='#${activeUpdate}']`) || document.querySelector('.c-liveUpdateNav .is-active');
+  const highlightNavItem = (hashTarget, highlightFromHash) => {
+    if (hashTarget !== activeUpdate || highlightFromHash) {
+      const activeLink = document.querySelector(`a[href='#${activeUpdate}']`) || document.querySelector('.c-liveUpdateNav .is-active');
       if (activeLink) {
         activeLink.setAttribute('class', activeLink.className.replace('is-active', ''));
       }
-      const targetLink = document.querySelector(`.c-liveUpdateNav a[href='#${hashTarget}']`);
+      const targetLink = document.querySelector(`a[href='#${hashTarget}']`);
       if (targetLink) {
         const { top: targetLinkTop, bottom: targetLinkBottom } = targetLink.getBoundingClientRect();
         if (targetLink.className.indexOf('is-active') === -1) {
@@ -121,14 +117,17 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       }
       activeUpdate = hashTarget;
     } else if (document.querySelector('.c-liveUpdateNav .is-active') === null) {
-      const targetLink = document.querySelector(`.c-liveUpdateNav a[href='#${activeUpdate}']`);
+      const targetLink = document.querySelector(`a[href='#${activeUpdate}']`);
       if (targetLink) targetLink.className += ' is-active';
     }
   };
 
   const handleNavTrigger = (evt, hash) => {
-    evt.preventDefault();
-    let target = evt.target ? evt.target.getAttribute('href') : null;
+    let target = null;
+    if (evt) {
+      evt.preventDefault();
+      target = evt.target ? evt.target.getAttribute('href') : null;
+    }
     if (!target && evt) {
       // it's not the top-level link - but we do have an event - so we have to move up a level
       let parent = evt.target.parentNode;
@@ -141,12 +140,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     const hashTarget = !target && hash ? hash : target && target.substr(target.indexOf('#') + 1);
     const targetUpdate = document.querySelector(`[name='${hashTarget}']`) || null;
     if (targetUpdate) {
-      // move to the selected update in the content area
-      window.scrollTo({
-        top: targetUpdate.offsetTop - stickyHeaderAdjustment, // to handle sticky header
-        left: 0,
-        behavior: 'smooth',
-      });
+      targetUpdate.scrollIntoView(true);
     }
   };
 
@@ -222,20 +216,30 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       return currentTopPositions.push([
         updateBoundaries.top + lastScrollPos - stickyHeaderAdjustment,
         updateBoundaries.bottom - updateBoundaries.top,
-        update.getAttribute('name'),
+        update.querySelector('.snippet-anchor').getAttribute('name'),
       ]);
     });
     updateTopPositions = currentTopPositions;
   };
 
   useEffect(() => {
-    document.onreadystatechange = () => {
-      if (document.readyState === 'complete') {
-        return determineUpdateTopPositions();
-      }
-      return null;
-    };
+    determineUpdateTopPositions(true);
 
+    if (window.history.scrollRestoration) {
+      // prevent the browser from auto-scrolling to the last position on the page, if it's a refresh
+      window.history.scrollRestoration = 'manual';
+    }
+
+    if (hashId.length) {
+      // we use a timeout to ensure enough time has passed for the snippets to (lazy) load, and the user is taken to the correct position on the page
+      setTimeout(() => {
+        document.querySelector(`[href='#${hashId}']`).click();
+        highlightNavItem(hashId, true);
+      }, 1500);
+    }
+  }, [hashId]);
+
+  useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -309,7 +313,8 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       }
 
       const updateContentOutput = () => <>
-        <div className={`c-liveUpdate ${!isFirstUpdate && insertDateMarker ? 'with-date-marker' : ''}`} name={elId}>
+        <div className={`c-liveUpdate ${!isFirstUpdate && insertDateMarker ? 'with-date-marker' : ''}`} key={elId}>
+          <span name={elId} className='snippet-anchor'></span>
           {!isFirstUpdate && insertDateMarker && <div className='date-marker'>{timestampDate}</div>}
           <div className='c-headline'>
             <h2>{headline}</h2>
@@ -334,7 +339,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       }
 
       return <>
-        <LazyLoad placeholder={<div className="c-placeholder-liveUpdate" />} height="100%" width="100%" offset={300} once={true} key={elId}>
+        <LazyLoad placeholder={<div className="c-placeholder-liveUpdate"><span name={elId} className='snippet-anchor'></span></div>} height="100%" width="100%" offset={100 * updateIndex} once={true} overflow={false} key={`${elId}-lazy`}>
           {updateContentOutput()}
           {/* after we get through the "specialty" placeholder inserts, we want to lazyload ads as well as the other content */}
           {(updateIndex > 10 && (updateIndex - 1) % 3 === 0) && renderAdOrPlaceholder(updateIndex - 1)}
@@ -344,14 +349,13 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
           We also have one for the newsletter placeholder (after #6)
         */}
         {(updateIndex === 6 || (updateIndex > 3 && updateIndex <= 10 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
-        {hashId && updateIndex === liveUpdates.length && handleNavTrigger(null, hashId)}
       </>;
     });
 
     if (!isNav) {
       return <>
         {liveUpdatesMapper(firstLiveUpdate)}
-        <div className='story-paygate_placeholder'>
+        <div className='story-paygate_placeholder' key={'paygate'}>
           {liveUpdatesMapper(restOfLiveUpdates)}
           {enableTaboola && <>
             <TaboolaFeed ampPage={false} lazyLoad={isMeteredStory} treatAsArticle={true} />
