@@ -1981,7 +1981,7 @@
           }
         }
 
-        &:first-child {
+        &:nth-child(2) {
           border-top: 1px solid #4f4f4f;
 
           @include breakpoint(desktop-sm) {
