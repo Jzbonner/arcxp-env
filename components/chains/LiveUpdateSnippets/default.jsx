@@ -25,7 +25,7 @@ const LiveUpdateSnippets = ({ children, customFields }) => {
       <div className="c-liveUpdateSnippets b-margin-bottom-d40-m20">
         <div className="liveUpdateSnippets-header">
           <div className={`glow ${isLive ? 'is-live' : 'is-not-live'}`}></div>
-          <span className={`${isLive ? '' : 'is-not-live'}`}>Live</span>
+            <span className={`${isLive ? '' : 'is-not-live'}`}>LIVE</span>
           <div className="border border-horizontal"></div>
         </div>
         <div className="liveUpdateSnippets-body">
