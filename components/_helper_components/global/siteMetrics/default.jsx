@@ -77,6 +77,7 @@ const SiteMetrics = ({ isAmp }) => {
     firstPublishDateConverted,
     nonPrimarySet: nonPrimarySections,
     blogName = '',
+    paywallStatus,
   } = contentMeta || {};
   const siteDomain = siteDomainURL || `https://www.${site}.com`;
   const replaceQuotes = text => text.replace(/"/g, "'");
@@ -127,7 +128,7 @@ const SiteMetrics = ({ isAmp }) => {
               "pageNameStr": "",
               "pageUrlStr": "",
               "pageMainSection": "${topSection}",
-              "contentPaywallStatus": "${contentCode}",
+              "contentPaywallStatus": "${paywallStatus || contentCode}",
               "chartbeatTitle": "${replaceQuotes(pageTitle)}"
             },
             "triggers": {
@@ -235,7 +236,7 @@ const SiteMetrics = ({ isAmp }) => {
             "contentPublishDate": "${firstPublishDateConverted}",
             "blogName": "${pageContentType === 'blog' ? topSectionName : (blogName || '')}",
             "galleryName": "${replaceQuotes(galleryHeadline)}",
-            "contentPaywallStatus": "${contentCode}"
+            "contentPaywallStatus": "${paywallStatus || contentCode}"
           }
         };
         // we do a check just in case dataLayer has already been created

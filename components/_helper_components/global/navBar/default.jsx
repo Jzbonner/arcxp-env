@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import { useAppContext, useFusionContext } from 'fusion:context';
-import getDomain from '../../../layouts/_helper_functions/getDomain';
 import topNavFilter from '../../../../content/filters/top-nav';
 import Section from './section/default';
 import Logo from './logo/default';
@@ -34,10 +33,10 @@ const NavBar = ({
   const fusionContext = useFusionContext();
   const { arcSite, globalContent } = fusionContext;
   const {
-    logoRedesign, siteName, cdnSite, cdnOrg, weatherPageUrl, closeButton, burgerMenuBackground, burgerWhiteLogo,
+    logoRedesign, siteName, weatherPageUrl, closeButton, burgerMenuBackground, burgerWhiteLogo,
   } = getProperties(arcSite);
   const appContext = useAppContext();
-  const { deployment, contextPath, layout } = appContext;
+  const { deployment, contextPath } = appContext;
 
   const {
     taxonomy,
@@ -174,10 +173,10 @@ const NavBar = ({
             <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
               && mobileMenuToggled) ? 'not-visible' : ''} ${siteName.toLowerCase()}`} ref={logoRef} >
               <Logo
-                source={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoRedesign}`)}`}
+                source={`${deployment(`${contextPath}${logoRedesign}`)}`}
                 rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
                 darkMode={darkMode}
-                darkModeLogo={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
+                darkModeLogo={`${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
               />
             </div>
           <Login
@@ -199,12 +198,12 @@ const NavBar = ({
           isMobile={isMobile}
           hamburgerToggle={mobileMenuToggled}
           setToggle={setToggle}
-          whiteLogoRedesign={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
-          closeButton={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${closeButton}`)}`}
+          whiteLogoRedesign={`${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
+          closeButton={`${deployment(`${contextPath}${closeButton}`)}`}
           rootDirectory={rootDirectory}
           stickyActive={stickyNavVisibility}
           type={type}
-          burgerMenuBackground={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerMenuBackground}`)}`}
+          burgerMenuBackground={`${deployment(`${contextPath}${burgerMenuBackground}`)}`}
           siteName={siteName.toLowerCase()}/>
         { !darkMode && <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
           && mobileMenuToggled) || hasWindowShade ? 'not-visible' : ''} `}>
@@ -224,7 +223,7 @@ const NavBar = ({
           sections={redesignChildren}
           articleUrl={articleURL}
           darkMode={darkMode}
-          darkModeLogo={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
+          darkModeLogo={`${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
         />
       </div>
       <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>

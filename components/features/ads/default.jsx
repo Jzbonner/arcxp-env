@@ -33,6 +33,10 @@ const ArcAd = ({
   const { adsBidding } = adsProps[currentEnv] || {};
   const { adsPrebidSlots } = adsBidding || {};
 
+  let staticSlotFormatted = null;
+  if (staticSlot) {
+    staticSlotFormatted = staticSlot.replace(/ /g, '-').replace(/[()]/g, '');
+  }
   const slot = customFieldsSlot || staticSlot;
   // let randomIdMPG01 = '';
   let finalTopics = [];
@@ -53,8 +57,6 @@ const ArcAd = ({
   // use their slotname if given, otherwise default to the slot for this ad type
   const slotName = adConfig.slotName || slot;
   const slotBiddingName = adConfig.biddingName || adConfig.slotName || slot;
-
-  // if (staticSlot && staticSlot.includes('MPG01')) randomIdMPG01 = Math.floor(Math.random() * 999999);
 
   const targeting = adConfig.targeting || defaultAdSlot.targeting || {};
   // get global targeting values
@@ -151,7 +153,7 @@ const ArcAd = ({
       dimensions={adConfig.dimensions || defaultAdSlot.dimensions}
       dfpId={dfpIdFormatted}
       display={adConfig.display || defaultAdSlot.display}
-      id={`${customId}` || `${defaultAdSlot.name}${staticSlot || slot.replace(/ /g, '-').replace(/[()]/g, '')}${adSuffix}`}
+      id={`${customId}` || `${defaultAdSlot.name}${staticSlotFormatted || slot.replace(/ /g, '-').replace(/[()]/g, '')}${adSuffix}`}
       slotName={slotName}
       adSlotNameForArcAds={adSlotNameForArcAds}
       targeting={{ ...globalTargeting, ...targeting }}
