@@ -235,7 +235,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
       setTimeout(() => {
         document.querySelector(`[href='#${hashId}']`).click();
         highlightNavItem(hashId, true);
-      }, 1500);
+      }, 2000);
     }
   }, [hashId]);
 
