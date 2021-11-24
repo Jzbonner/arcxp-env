@@ -30,6 +30,7 @@ const SiteMetaAmp = () => {
     isOpinion,
     paywallStatus,
     noIndex,
+    typeOfPage,
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
 
@@ -40,6 +41,12 @@ const SiteMetaAmp = () => {
 
   const parsedDescription = safeHtml(description, { whiteList: {} });
 
+  let ogType = isNonContentPage ? 'website' : 'article';
+  if (typeOfPage === 'gallery') {
+    ogType = 'image';
+  } else if (typeOfPage === 'video') {
+    ogType = 'video';
+  }
   return (
     <>
       <link rel="apple-touch-icon" href={appleIconPath} />
@@ -58,7 +65,7 @@ const SiteMetaAmp = () => {
       <meta property="og:image:width" content={`${isNonContentPage
         || thumbnailImage.indexOf('/resources/logos/') > -1 ? '200' : '1200'}`} />
       <meta property="og:title" content={title} />
-      <meta property="og:type" content={`${isNonContentPage ? 'website' : 'article'}`} />
+      <meta property="og:type" content={ogType} />
       {!isNativoLandingPage && <meta property="og:url" content={url} />}
       <meta property="og:description" content={parsedDescription} />
       <meta property="og:site_name" content={site} />

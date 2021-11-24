@@ -81,7 +81,7 @@ const getContentMeta = () => {
       environ = 'debug';
     }
   }
-  const pageType = checkPageType(subtype || type, layout);
+  const pageType = checkPageType(type || subtype, layout);
   const {
     isHome,
     isSection,
