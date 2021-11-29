@@ -36,6 +36,10 @@ export const ConnextAuthTrigger = () => {
     configCode,
   } = connext[currentEnv] || {};
 
+  const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
+  const { UserState } = connextLocalStorageData;
+
+
   const loadDeferredItems = () => {
     const deferredItems = window.deferUntilKnownAuthState || [];
     if (deferredItems.length && (!loadedDeferredItemsRef.current || window.connextAuthTriggerEnabled)) {
@@ -113,7 +117,6 @@ export const ConnextAuthTrigger = () => {
         siteCode, configCode, environment, 'Connext_CurrentConversations',
       ) || {};
       const { Metered: meteredConversationData = {} } = conversationsDataFromLocalStorage;
-      const { UserState } = GetConnextLocalStorageData(siteCode, configCode, environment, 'connext_user_data') || {};
 
       const {
         Id: meteredConversationId = '',
@@ -236,14 +239,14 @@ export const ConnextAuthTrigger = () => {
   useEffect(() => {
     if (typeof window !== 'undefined' && !window.connextAuthTriggerEnabled) {
       window.addEventListener('connextConversationDetermined', () => {
-        const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
-        const { UserState } = connextLocalStorageData;
         if (isEnabled) {
           logOutput('connext logging >> isEnabled && !(UserState && ["subscriber", "subscribed"].indexOf(UserState.toLowerCase()) > -1))', 'isenabled', isEnabled, 'userState', UserState, 'is subscriber', ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1);
           try {
             const currentMeterLevel = window.Connext.Storage.GetCurrentMeterLevel();
+            console.log(currentMeterLevel);
+            console.log(UserState);
             logOutput('connext logging >> currentMeterLevel', currentMeterLevel);
-            if (currentMeterLevel === 1) {
+            if (currentMeterLevel === 1 || UserState === 'Subscribed') {
               // it's "free" content (per connext), so load everything
               loadDeferredItems();
             } else {
@@ -262,6 +265,12 @@ export const ConnextAuthTrigger = () => {
       // connext is enabled & the user is not authorized, wait for the connext auth callback
       window.connextAuthTriggerEnabled = true;
     }
+
+    document.onreadystatechange = () => {
+      if (document.readyState === 'complete' && UserState === 'Subscribed') {
+        loadDeferredItems();
+      }
+    };
   }, []);
 };
 
