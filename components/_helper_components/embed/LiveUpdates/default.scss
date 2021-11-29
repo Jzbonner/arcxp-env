@@ -383,6 +383,14 @@
             width: calc(100% + 12px);
           }
         }
+
+        @include between-breakpoints(mobile, desktop-sm) {
+
+          &.MP01,
+          &.MP02 {
+            display: block;
+          }
+        }
       }
 
       .arcad {

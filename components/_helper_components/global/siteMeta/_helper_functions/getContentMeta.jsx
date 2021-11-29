@@ -1,4 +1,4 @@
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getDomain from '../../../../layouts/_helper_functions/getDomain';
 import checkPageType from '../../../../layouts/_helper_functions/getPageType.js';
@@ -6,13 +6,9 @@ import fetchEnv from '../../utils/environment.js';
 import { formatTime, formatDate } from '../../../article/timestamp/_helper_functions/computeTimeStamp';
 
 const getContentMeta = () => {
-  const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
   const appContext = useAppContext();
   const {
-    siteName, favicon, cdnSite, appleIcon, cdnOrg,
-  } = getProperties(arcSite) || {};
-  const {
+    arcSite,
     globalContent,
     layout,
     metaValue,
@@ -22,6 +18,18 @@ const getContentMeta = () => {
     contextPath,
     renderables: renderedOutput,
   } = appContext;
+  const blogName = metaValue('blogname');
+  const noIndex = metaValue('no index');
+  const enableDarkMode = metaValue('dark mode') === 'true';
+  const inMemoriam = metaValue('in-memoriam') === 'true';
+  const pageIsLive = metaValue('live');
+  const pbPaywall = metaValue('story-meter');
+  const metaTitle = metaValue('title');
+  const metaDescription = metaValue('description');
+  const coverageEndTime = metaValue('coverage end time');
+  const {
+    siteName, favicon, cdnSite, appleIcon, cdnOrg,
+  } = getProperties(arcSite) || {};
   const {
     headlines,
     description,
@@ -82,7 +90,8 @@ const getContentMeta = () => {
       environ = 'debug';
     }
   }
-  const pageType = checkPageType(subtype || type, layout, renderedOutput);
+  const contentType = type === 'video' ? type : (subtype || type);
+  const pageType = checkPageType(contentType, layout, renderedOutput);
   const {
     isHome,
     isSection,
@@ -94,10 +103,10 @@ const getContentMeta = () => {
     isAuthor,
     isTraffic,
     isEnhancedList,
-    type: typeOfPage = '',
     isNonContentPage,
   } = pageType || {};
-  let pageContentType = typeOfPage === 'story' ? 'article' : typeOfPage.toLowerCase();
+  let { type: typeOfPage } = pageType || {};
+  let pageContentType = typeOfPage === 'story' ? 'article' : typeOfPage && typeOfPage.toLowerCase();
   if (isHome) {
     pageContentType = 'homepage';
   } else if (isError) {
@@ -116,6 +125,11 @@ const getContentMeta = () => {
     pageContentType = 'traffic';
   } else if (isSection) {
     pageContentType = 'section front';
+  }
+  if (pageIsLive) {
+    // placeholder logic for liveupdates categorization
+    typeOfPage = 'liveupdates';
+    pageContentType = 'liveupdates';
   }
   let topSection = primarySectionId;
   let secondarySection = '';
@@ -230,16 +244,6 @@ const getContentMeta = () => {
     storyInitialBodyText: getInitialBodyText(content?.content_elements),
     /* eslint-enable camelcase */
   })).reverse();
-
-  const blogName = metaValue('blogname');
-  const noIndex = metaValue('no index');
-  const enableDarkMode = metaValue('dark mode') === 'true';
-  const inMemoriam = metaValue('in-memoriam') === 'true';
-  const pageIsLive = metaValue('live');
-  const pbPaywall = metaValue('story-meter');
-  const metaTitle = metaValue('title');
-  const metaDescription = metaValue('description');
-  const coverageEndTime = metaValue('coverage end time');
 
   const faviconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${favicon}`)}`;
   const appleIconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;

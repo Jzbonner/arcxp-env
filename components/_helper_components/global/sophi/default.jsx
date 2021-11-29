@@ -29,8 +29,15 @@ const SophiTags = ({ isAmp }) => {
     initialPublishDate,
     firstPublishDate: lastModifiedDate,
     paywallStatus,
+    typeOfPage,
   } = contentMeta || {};
-  const sophiContentType = isNonContentPage ? 'section' : 'article';
+
+  let sophiContentType = isNonContentPage ? 'section' : 'article';
+  if (typeOfPage === 'gallery') {
+    sophiContentType = 'image';
+  } else if (typeOfPage === 'video') {
+    sophiContentType = 'video';
+  }
   let sophiSection = topSection.indexOf('/') === 0 ? topSection.substr(1) : topSection;
   const sophiMainSection = sophiSection.indexOf('/') > -1 ? sophiSection.substr(0, sophiSection.indexOf('/')) : sophiSection;
   sophiSection = sophiSection.replace(/\//g, ':');
