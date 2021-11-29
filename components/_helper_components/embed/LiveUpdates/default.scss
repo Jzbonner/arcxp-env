@@ -17,7 +17,7 @@
     }
   }
 
-  .c-Row {
+  .c-LiveUpdatePageHeader {
     margin-bottom: 0;
     position: relative;
     width: 100%;
@@ -110,6 +110,11 @@
         line-height: 3.44rem;
         letter-spacing: -.62px;
       }
+
+      .c-sectionContent & a[href],
+      .c-sectionContent & a[href]:hover {
+        color: #fff5ec !important;
+      }
     }
 
     .c-liveUpdatesStatus {
@@ -151,11 +156,12 @@
     .c-liveUpdateNav {
       flex: 0 0 50px;
       align-self: flex-start;
-      max-height: calc(100vh - 175px);
+      max-height: calc(100vh - 65px);
       overflow: auto;
       margin-bottom: 20px;
       scrollbar-width: none; /* Firefox */
       -ms-overflow-style: none;  /* Internet Explorer 10+ */
+      border-right: 1px solid #cdcdcd;
 
       &::-webkit-scrollbar { /* WebKit */
         width: 0;
@@ -289,11 +295,17 @@
       }
     }
 
+    .c-placeholder-liveUpdate {
+      position: relative;
+    }
+
     .c-liveUpdateContent {
       width: calc(100% - 50px);
       box-sizing: border-box;
       border-left: 1px solid #cdcdcd;
       padding-left: 12px;
+      position: relative;
+      left: -1px; // we do this to "collapse" its border with c-liveUpdateNav, ensuring we always have a separator that spans the entire height (i.e. when the paygate renders, causing c-liveUpdateContent to be unusually short)
 
       @include text-styles(1rem, 1.625, "Gordita");
 
@@ -320,14 +332,14 @@
 
       > .c-liveUpdate:first-child {
         border-top: none;
-        margin-top: -8px;
-
-        @include between-breakpoints(tablet, desktop-lg) {
-          margin-top: -10px;
-        }
+        margin-top: -4px;
 
         @include breakpoint(desktop-lg) {
-          margin-top: -20px;
+          margin-top: -5px;
+        }
+
+        .c-headline {
+          margin-top: 0;
         }
       }
 
@@ -337,10 +349,12 @@
           display: none;
         }
 
-        &[class*="HP01"],
-        &[class*="MP01"],
-        &[class*="RP01"],
-        &[class*="MP02"] {
+        &.HP01,
+        &.MP01,
+        &.RP01,
+        &.MP02,
+        &.HP03,
+        &.HP04 {
           margin-bottom: 0;
           border-top: none;
 
@@ -367,6 +381,14 @@
           .arcad[class*="MP0"] {
             margin: 0 -9px 0 -5px;
             width: calc(100% + 12px);
+          }
+        }
+
+        @include between-breakpoints(mobile, desktop-sm) {
+
+          &.MP01,
+          &.MP02 {
+            display: block;
           }
         }
       }
@@ -402,10 +424,19 @@
         }
       }
 
+      .snippet-anchor {
+        position: relative;
+        display: inline-block;
+        height: 0;
+        top: -60px;
+        left: 0;
+      }
+
       .c-headline {
         display: flex;
         flex-direction: row;
         width: 100%;
+        margin-top: 10px;
 
         @include between-breakpoints(mobile, tablet) {
           margin-top: 12px;
@@ -417,17 +448,17 @@
         width: calc(100% - 35px);
         letter-spacing: -.25px;
 
-        @include text-styles(1.25rem, 1.5, "Lora-Bold");
+        @include text-styles(1.25rem, 1.5rem, "Lora-Bold");
 
         @include between-breakpoints(tablet, desktop-lg) {
           font-size: 1.375rem;
-          line-height: 1.39;
+          line-height: 1.6875rem;
           letter-spacing: -.28px;
         }
 
         @include breakpoint(desktop-lg) {
           font-size: 1.875rem;
-          line-height: 1.49;
+          line-height: 2rem;
           letter-spacing: -.38px;
         }
       }
@@ -436,14 +467,14 @@
         position: relative;
         width: 25px;
         height: 25px;
-        margin: 6px 0 0 10px;
+        margin: 2px 0 0 10px;
         border-radius: 2px;
         box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, .6);
         border: solid 1px #ececec;
         background: url("/pf/resources/icons/link-anchor.svg") center center no-repeat;
 
         @include breakpoint(desktop-lg) {
-          margin-top: 20px;
+          margin-top: 4px;
         }
 
         &:focus,
@@ -489,13 +520,12 @@
         margin: 9px 0;
 
         @include breakpoint(tablet) {
-          margin: 12px 0 15px;
+          margin: 10px 0 12px;
         }
       }
 
       .byline {
         display: inline-block;
-        vertical-align: middle;
         margin-left: 8px;
         letter-spacing: -.15px;
 
@@ -511,6 +541,15 @@
           font-size: 1rem;
           letter-spacing: -.2px;
           margin-left: 12px;
+        }
+
+        span:not(:last-child) {
+          display: inline-block;
+          padding-right: 5px;
+
+          &:after {
+            content: ", ";
+          }
         }
       }
 
@@ -554,10 +593,6 @@
 
         .c-headline {
           margin-top: 18px;
-
-          @include breakpoint(desktop-lg) {
-            margin-top: 4px;
-          }
         }
       }
 

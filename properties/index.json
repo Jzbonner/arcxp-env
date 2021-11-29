@@ -73,7 +73,7 @@
       "adsPrebidEnabled": "false",
       "adsPrebidTimeout": "1500",
       "prebidJs": "prebid3.23.0.js",
-      "adsBreakpoints": [1024, 768, 0]
+      "adsBreakpoints": [1280, 1024, 768, 0]
     },
     "prod": {
       "adsA9Enabled": "false",
@@ -81,7 +81,7 @@
       "adsPrebidEnabled": "false",
       "adsPrebidTimeout": "1500",
       "prebidJs": "prebid3.23.0.js",
-      "adsBreakpoints": [1024, 768, 0]
+      "adsBreakpoints": [1280, 1024, 768, 0]
     }
   },
   "weatherPageUrl": "/weather/",
@@ -118,7 +118,9 @@
   },
   "allowedDimensions": [
     [1600, 0],
+    [1600, 278],
     [1600, 856],
+    [1100, 191],
     [1108,426],
     [1100, 588],
     [1100, 0],
@@ -128,8 +130,9 @@
     [770,296],
     [720,480],
     [500,282],
-    [475, 652],
+    [475, 204],
     [475, 475],
+    [475, 652],
     [408,300],
     [400, 0],
     [256,144],

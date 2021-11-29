@@ -9,8 +9,13 @@
   border: 1px solid #e74c3c;
   background-color: #fff;
 
-  @include breakpoint(tablet) {
+  @include between-breakpoints(tablet, desktop-sm) {
+    width: calc(100% - 80px);
+  }
+
+  @include breakpoint(desktop-sm) {
     height: 40px;
+    width: calc(100% - 60px);
   }
 
   &.is-hidden {
@@ -71,7 +76,7 @@
 
   .c-breakingNews-heading {
     @include text-styles(.875rem, 1.29, "Gordita-Bold");
-    
+
     display: flex;
     flex-direction: row;
     height: 100%;
@@ -92,7 +97,7 @@
     @include breakpoint(desktop-sm) {
       @include text-styles(1rem, 1.29, "Gordita-Bold");
     }
-    
+
     :first-child {
       @include breakpoint(tablet) {
         margin-right: 5px;
@@ -126,7 +131,7 @@
 
     @include breakpoint(desktop-sm) {
       @include text-styles(1rem, 1.2, "Gordita");
-      
+
       text-align: center;
       width: 80%;
     }
