@@ -34,9 +34,9 @@ const LiveUpdateSnippets = ({ children, customFields }) => {
         <div className="liveUpdateSnippets-body">
           <div className='c-liveUpdatesContainer'>
             <div className="col col-1">
-            <a href={`/${liveUpdatesURI}${domain}`}>
-              {children[0]}
-              {children[1]}
+              <a href={`/${liveUpdatesURI}${domain}`}>
+                {children[0]}
+                {children[1]}
               </a>
             </div>
             <div className="col col-2">
