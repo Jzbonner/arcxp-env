@@ -89,7 +89,8 @@ const getContentMeta = () => {
       environ = 'debug';
     }
   }
-  const pageType = checkPageType(subtype || type, layout);
+  const contentType = type === 'video' ? type : (subtype || type);
+  const pageType = checkPageType(contentType, layout);
   const {
     isHome,
     isSection,
