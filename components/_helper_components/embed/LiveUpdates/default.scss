@@ -156,11 +156,12 @@
     .c-liveUpdateNav {
       flex: 0 0 50px;
       align-self: flex-start;
-      max-height: calc(100vh - 175px);
+      max-height: calc(100vh - 65px);
       overflow: auto;
       margin-bottom: 20px;
       scrollbar-width: none; /* Firefox */
       -ms-overflow-style: none;  /* Internet Explorer 10+ */
+      border-right: 1px solid #cdcdcd;
 
       &::-webkit-scrollbar { /* WebKit */
         width: 0;
@@ -294,11 +295,17 @@
       }
     }
 
+    .c-placeholder-liveUpdate {
+      position: relative;
+    }
+
     .c-liveUpdateContent {
       width: calc(100% - 50px);
       box-sizing: border-box;
       border-left: 1px solid #cdcdcd;
       padding-left: 12px;
+      position: relative;
+      left: -1px; // we do this to "collapse" its border with c-liveUpdateNav, ensuring we always have a separator that spans the entire height (i.e. when the paygate renders, causing c-liveUpdateContent to be unusually short)
 
       @include text-styles(1rem, 1.625, "Gordita");
 
@@ -376,6 +383,14 @@
             width: calc(100% + 12px);
           }
         }
+
+        @include between-breakpoints(mobile, desktop-sm) {
+
+          &.MP01,
+          &.MP02 {
+            display: block;
+          }
+        }
       }
 
       .arcad {
@@ -407,6 +422,14 @@
             display: block;
           }
         }
+      }
+
+      .snippet-anchor {
+        position: relative;
+        display: inline-block;
+        height: 0;
+        top: -60px;
+        left: 0;
       }
 
       .c-headline {
@@ -503,7 +526,6 @@
 
       .byline {
         display: inline-block;
-        vertical-align: middle;
         margin-left: 8px;
         letter-spacing: -.15px;
 

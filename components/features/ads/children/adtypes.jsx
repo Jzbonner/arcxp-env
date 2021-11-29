@@ -106,6 +106,7 @@ export const adSlots = {
       ], // lg desktop (1280+)
       [
         [728, 90],
+        [728, 315],
       ], // desktop
       [], // mobile & tablet
     ],
@@ -736,12 +737,18 @@ export const adSlots = {
     dimensions: [
       [], // desktop+
       [
+        [320, 150],
         [320, 50],
-      ], // mobile & tablet
+      ], // tablet
+      [
+        [320, 150],
+        [320, 50],
+      ], // mobile
     ],
     breakpoints: [
       [1024, 0], // desktop+
-      [0, 0], // mobile & tablet
+      [768, 0], // tablet
+      [0, 0], // mobile
     ],
     bidding: {
       amazon: {
@@ -773,11 +780,15 @@ export const adSlots = {
       [], // desktop+
       [
         [300, 250],
-      ], // mobile & tablet
+      ], // tablet
+      [
+        [300, 250],
+      ], // mobile
     ],
     breakpoints: [
       [1024, 0], // desktop+
-      [0, 0], // mobile & tablet
+      [768, 0], // tablet
+      [0, 0], // mobile
     ],
     bidding: {
       amazon: {

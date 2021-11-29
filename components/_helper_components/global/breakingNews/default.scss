@@ -9,7 +9,11 @@
   border: 1px solid #e74c3c;
   background-color: #fff;
 
-  @include breakpoint(tablet) {
+  @include between-breakpoints(tablet, desktop-sm) {
+    width: calc(100% - 80px);
+  }
+
+  @include breakpoint(desktop-sm) {
     height: 40px;
     width: calc(100% - 60px);
   }
@@ -116,14 +120,12 @@
     text-align: left;
     padding: 5px 40px 5px 10px;
     width: 70%;
-    height: calc(100% - 10px);
-    overflow-y: hidden;
+    height: min-content;
 
     @include text-styles(.75rem, 1.2, "Gordita");
 
     @include breakpoint(tablet) {
       padding: 10px 40px 10px 18px;
-      height: calc(100% - 20px);
       width: 75%;
     }
 

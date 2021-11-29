@@ -391,6 +391,10 @@
       @include breakpoint(desktop-sm) {
         padding-right: 0;
       }
+
+      @include between-breakpoints(mobile, desktop-sm) {
+        display: none;
+      }
     }
 
     .nav-search {
@@ -1708,7 +1712,7 @@
 
     @include breakpoint(desktop-sm) {
       max-width: 416px;
-      padding: 114px 28px 30px;
+      padding: 67px 28px 30px;
     }
 
     &.mobile-nav-deactivated {
@@ -1977,7 +1981,7 @@
           }
         }
 
-        &:first-child {
+        &:nth-child(2) {
           border-top: 1px solid #4f4f4f;
 
           @include breakpoint(desktop-sm) {

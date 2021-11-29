@@ -38,6 +38,21 @@
       "labels": ["desktop4"]
     },
     {
+      "mediaQuery": "(min-width: 1280px)",
+      "sizesSupported": [
+        [970, 250],
+        [728, 90]
+      ],
+      "labels": ["desktop5"]
+    },
+    {
+      "mediaQuery": "(min-width: 1024px) and (max-width: 1279px)",
+      "sizesSupported": [
+        [728, 90]
+      ],
+      "labels": ["desktop6"]
+    },
+    {
       "mediaQuery": "(min-width: 768px) and (max-width: 1023px)",
       "sizesSupported": [
         [300, 250],
@@ -204,25 +219,43 @@
         "bids": [
           {
             "bidder": "appnexus",
-            "labels": ["desktop1", "desktop2"],
+            "labels": ["desktop5"],
             "params": {
               "publisher": "AJC",
               "placementGroup": "ROS",
               "placementId": "23054544",
-              "placementName": "AJC_ROS_LiveUpdates_Desktop_HP01"
+              "placementName": "AJC_ROS_LiveUpdates_DesktopLarge_HP01"
+            }
+          },
+          {
+            "bidder": "appnexus",
+            "labels": ["desktop6"],
+            "params": {
+              "publisher": "AJC",
+              "placementGroup": "ROS",
+              "placementId": "23428930",
+              "placementName": "AJC_ROS_LiveUpdates_DesktopSmall_HP01"
             }
           },
           {
             "bidder": "aol",
-            "labels": ["desktop1", "desktop2"],
+            "labels": ["desktop5"],
             "params": {
               "dcn": "8a9694fd01787821c15726c1118b018b",
               "pos": "8a969161017c7c9d3287a09eb6ce0083"
             }
           },
           {
+            "bidder": "aol",
+            "labels": ["desktop6"],
+            "params": {
+              "dcn": "8a9694fd01787821c15726c1118b018b",
+              "pos": "8a9699a8017d7d294f872a8eb2a60030"
+            }
+          },
+          {
             "bidder": "rubicon",
-            "labels": ["desktop1", "desktop2"],
+            "labels": ["desktop5"],
             "params": {
               "accountId": "23256",
               "siteId": "376980",
@@ -230,10 +263,27 @@
             }
           },
           {
+            "bidder": "rubicon",
+            "labels": ["desktop6"],
+            "params": {
+              "accountId": "23256",
+              "siteId": "376980",
+              "zoneId": "2223604"
+            }
+          },
+          {
             "bidder": "openx",
-            "labels": ["desktop1", "desktop2"],
+            "labels": ["desktop5"],
             "params": {
               "unit": "545727377",
+              "delDomain": "ajc-d.openx.net"
+            }
+          },
+          {
+            "bidder": "openx",
+            "labels": ["desktop6"],
+            "params": {
+              "unit": "551032369",
               "delDomain": "ajc-d.openx.net"
             }
           }
