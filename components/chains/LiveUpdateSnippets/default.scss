@@ -61,15 +61,10 @@
   .liveUpdateSnippets-body {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 
     @include breakpoint(tablet) {
-      gap: 2rem;
-      flex-flow: row wrap;
-    }
-
-    @include breakpoint(desktop-sm) {
       gap: 1rem;
+      flex-flow: row wrap;
     }
 
     @include breakpoint(desktop-lg) {
@@ -88,12 +83,34 @@
     .c-liveUpdatesContainer {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
       min-width: 66%;
+
+      .col-2 {
+        margin-bottom: 15px;
+
+        &:last-child {
+          border-bottom: 1px solid #cdcdcd;
+        }
+      }
+
+      @include between-breakpoints(mobile, desktop-sm) {
+
+        h1 {
+          padding-bottom: 0;
+        }
+      }
 
       @include breakpoint(tablet) {
         flex-direction: row;
         gap: 2rem;
+
+        .col-2 {
+          margin-bottom: 0;
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
       }
 
       @include breakpoint(desktop-sm) {
