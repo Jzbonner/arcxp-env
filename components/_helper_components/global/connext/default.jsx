@@ -243,8 +243,6 @@ export const ConnextAuthTrigger = () => {
           logOutput('connext logging >> isEnabled && !(UserState && ["subscriber", "subscribed"].indexOf(UserState.toLowerCase()) > -1))', 'isenabled', isEnabled, 'userState', UserState, 'is subscriber', ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1);
           try {
             const currentMeterLevel = window.Connext.Storage.GetCurrentMeterLevel();
-            console.log(currentMeterLevel);
-            console.log(UserState);
             logOutput('connext logging >> currentMeterLevel', currentMeterLevel);
             if (currentMeterLevel === 1 || UserState === 'Subscribed') {
               // it's "free" content (per connext), so load everything
