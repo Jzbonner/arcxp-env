@@ -108,6 +108,9 @@ const ArcAd = ({
     case 'video':
       objType = 'VideoProxy';
       break;
+    case 'instant article':
+      objType = ' story_amp';
+      break;
     case 'section front':
       objType = 'SectionPage';
       break;

@@ -213,7 +213,7 @@ const SiteMetrics = ({ isAmp }) => {
             "pageSiteSection": "${topSection}",
             "pageMainSection": "${topSection}",
             "pageCategory": "${nonPrimarySections}",
-            "pageContentType": "${typeOfPage || pageContentType}",
+            "pageContentType": "${pageContentType || typeOfPage}",
             "pageTitle": "${seoTitle ? replaceQuotes(seoTitle) : replaceQuotes(pageTitle)}",
             "chartbeatTitle": "${replaceQuotes(pageTitle)}"
           },
