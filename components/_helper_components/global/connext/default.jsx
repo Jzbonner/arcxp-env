@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
@@ -36,227 +36,240 @@ export const ConnextAuthTrigger = () => {
     configCode,
   } = connext[currentEnv] || {};
 
-  if (typeof window !== 'undefined' && !window.connextAuthTriggerEnabled) {
-    const loadDeferredItems = () => {
-      const deferredItems = window.deferUntilKnownAuthState || [];
-      logOutput('connext logging >> inside loadDeferredItems, items:', deferredItems, 'loadedDeferredItemsRef.current', loadedDeferredItemsRef.current);
-      if (deferredItems.length && !loadedDeferredItemsRef.current) {
-        const adInstance = ArcAdLib.getInstance();
-        const articleBodyContainer = document.querySelector('.c-articleBodyContainer');
-        if (articleBodyContainer && articleBodyContainer.getAttribute('class').indexOf('mark-text') > -1) {
-          // we override/remove the inline styles that are being added by Naviga/connext when the paywall renders
-          // specifically for APD-1223 (`overflow: hidden` was cropping the interscroller ad) but also because their inline styles suck
-          articleBodyContainer.setAttribute('style', '');
-        }
-        deferredItems.forEach((item) => {
-          Object.keys(item).forEach((key) => {
-            if (key === 'ad') {
-              // it's an ad, let's register/initialize it with ArcAds
-              const adSlotConfig = item[key];
-              adInstance.registerAd(adSlotConfig[0], adSlotConfig[1], adSlotConfig[2]);
-            } else if (key === 'script') {
-              // it's a script file, append it (e.g. taboola)
-              document.body.appendChild(item[key]);
-            } else if (key === 'video') {
-              // it's a video player
-              const videoPlayer = item[key][0];
-              const videoIsLead = item[key][1];
-              const videoBlocker = window.document.querySelector('.video-blocker');
-              if (videoIsLead) {
-                // it's a lead video (and thus already instantiated) so just trigger it to play
-                videoPlayer.play();
-                videoPlayer.showControls();
-                if (videoBlocker) {
-                  videoBlocker.style.display = 'none';
-                }
-              } else {
-                // it's an inline video, so change the className to `powa`...
-                const videoPlaceholder = document.querySelector('.powa-lazyLoad') || {};
-                videoPlaceholder.className = 'powa';
-                // ... and then instantiate the player (per https://arcpublishing.atlassian.net/wiki/spaces/POWA/overview)
-                window.powaBoot();
+  const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
+  const { UserState } = connextLocalStorageData;
+
+
+  const loadDeferredItems = () => {
+    const deferredItems = window.deferUntilKnownAuthState || [];
+    if (deferredItems.length && (!loadedDeferredItemsRef.current || window.connextAuthTriggerEnabled)) {
+      const adInstance = ArcAdLib.getInstance();
+      const articleBodyContainer = document.querySelector('.c-articleBodyContainer');
+      if (articleBodyContainer && articleBodyContainer.getAttribute('class').indexOf('mark-text') > -1) {
+        // we override/remove the inline styles that are being added by Naviga/connext when the paywall renders
+        // specifically for APD-1223 (`overflow: hidden` was cropping the interscroller ad) but also because their inline styles suck
+        articleBodyContainer.setAttribute('style', '');
+      }
+      deferredItems.forEach((item) => {
+        Object.keys(item).forEach((key) => {
+          if (key === 'ad') {
+            // it's an ad, let's register/initialize it with ArcAds
+            const adSlotConfig = item[key];
+            adInstance.registerAd(adSlotConfig[0], adSlotConfig[1], adSlotConfig[2]);
+          } else if (key === 'script') {
+            // it's a script file, append it (e.g. taboola)
+            document.body.appendChild(item[key]);
+          } else if (key === 'video') {
+            // it's a video player
+            const videoPlayer = item[key][0];
+            const videoIsLead = item[key][1];
+            const videoBlocker = window.document.querySelector('.video-blocker');
+            if (videoIsLead) {
+              // it's a lead video (and thus already instantiated) so just trigger it to play
+              videoPlayer.play();
+              videoPlayer.showControls();
+              if (videoBlocker) {
+                videoBlocker.style.display = 'none';
               }
             } else {
-              // eslint-disable-next-line no-console
-              console.error(`unsupported object (${key}) defined in window.deferUntilKnownAuthState:`, item[key]);
+              // it's an inline video, so change the className to `powa`...
+              const videoPlaceholder = document.querySelector('.powa-lazyLoad') || {};
+              videoPlaceholder.className = 'powa';
+              // ... and then instantiate the player (per https://arcpublishing.atlassian.net/wiki/spaces/POWA/overview)
+              window.powaBoot();
             }
-          });
+          } else {
+            // eslint-disable-next-line no-console
+            console.error(`unsupported object (${key}) defined in window.deferUntilKnownAuthState:`, item[key]);
+          }
         });
+      });
 
-        // image fix for APD-983
-        const inlineImages = document.querySelectorAll('.lazyload-wrapper img');
-        if (inlineImages.length) {
-          logOutput('connext logging >> inlineimages', inlineImages);
-          inlineImages.forEach((img) => {
-            const isPlaceholder = img.getAttribute('data-placeholder');
-            const dataSrc = img.getAttribute('data-src');
-            if (isPlaceholder && dataSrc) {
-              img.setAttribute('src', dataSrc);
-            }
-          });
-        }
-
-        // lead video fix for APD-1333
-        const storyHasLeadVideo = !!window.document.getElementsByClassName('article-headline-component with-video');
-
-        if (storyHasLeadVideo) {
-          const videoBlocker = window.document.querySelector('.video-blocker');
-
-          if (videoBlocker) videoBlocker.style.display = 'none';
-        }
-
-        // set state to `true` to ensure we only call `loadDeferredItems` once
-        setLoadedDeferredItems(true);
+      // image fix for APD-983
+      const inlineImages = document.querySelectorAll('.lazyload-wrapper img');
+      if (inlineImages.length) {
+        inlineImages.forEach((img) => {
+          const isPlaceholder = img.getAttribute('data-placeholder');
+          const dataSrc = img.getAttribute('data-src');
+          if (isPlaceholder && dataSrc) {
+            img.setAttribute('src', dataSrc);
+          }
+        });
       }
-    };
 
-    const localStorageAuthChecks = () => {
-      if (!localStorageAuthCheckCompleteRef.current) {
-        const conversationsDataFromLocalStorage = GetConnextLocalStorageData(
-          siteCode, configCode, environment, 'Connext_CurrentConversations',
-        ) || {};
-        const { Metered: meteredConversationData = {} } = conversationsDataFromLocalStorage;
-        const { UserState } = GetConnextLocalStorageData(siteCode, configCode, environment, 'connext_user_data') || {};
+      // lead video fix for APD-1333
+      const storyHasLeadVideo = !!window.document.getElementsByClassName('article-headline-component with-video');
 
+      if (storyHasLeadVideo) {
+        const videoBlocker = window.document.querySelector('.video-blocker');
+
+        if (videoBlocker) videoBlocker.style.display = 'none';
+      }
+
+      // set state to `true` to ensure we only call `loadDeferredItems` once
+      setLoadedDeferredItems(true);
+    }
+  };
+
+  const localStorageAuthChecks = () => {
+    if (!localStorageAuthCheckCompleteRef.current) {
+      const conversationsDataFromLocalStorage = GetConnextLocalStorageData(
+        siteCode, configCode, environment, 'Connext_CurrentConversations',
+      ) || {};
+      const { Metered: meteredConversationData = {} } = conversationsDataFromLocalStorage;
+
+      const {
+        Id: meteredConversationId = '',
+        Properties: meteredConversationLSProperties = {},
+      } = meteredConversationData;
+      const {
+        ArticleLeft: articlesRemainingFromLocalStorage,
+        PaywallLimit: articleLimitFromLocalStorage,
+      } = meteredConversationLSProperties;
+      const viewedArticlesFromLocalStorage = GetConnextLocalStorageData(
+        siteCode, configCode, environment, 'Connext_ViewedArticles',
+      ) || {};
+      const viewedArticlesArray = viewedArticlesFromLocalStorage[meteredConversationId] || [];
+
+      logOutput('connext logging >> localStorageAuthChecks - articlesRemainingFromLocalStorage', articlesRemainingFromLocalStorage, 'viewedArticlesArray.length', viewedArticlesArray.length, 'articleLimitFromLocalStorage - 1', articleLimitFromLocalStorage - 1, 'window.Connext.Storage.GetViewedArticles()', window.Connext.Storage.GetViewedArticles(), 'window.Connext.Storage.GetCurrentConversation()', window.Connext.Storage.GetCurrentConversation());
+
+      if (
+        (UserState === 'Subscribed')
+        || (
+          articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
+        || (
+          articlesRemainingFromLocalStorage !== 0
+          && viewedArticlesArray.length < articleLimitFromLocalStorage - 1
+        )
+      ) {
+        logOutput(
+          `connext debugging >> (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
+         || (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1)`,
+          (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0),
+          'or',
+          (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1),
+          'articlesRemainingFromLocalStorage',
+          articlesRemainingFromLocalStorage,
+          'viewedArticlesArray.length',
+          viewedArticlesArray.length,
+          'articleLimitFromLocalStorage - 1',
+          articleLimitFromLocalStorage - 1,
+          'viewedArticlesFromLocalStorage',
+          viewedArticlesFromLocalStorage,
+          'conversationsDataFromLocalStorage',
+          conversationsDataFromLocalStorage,
+        );
+        // there are > 0 articles remaining before hitting the limit
+        loadDeferredItems();
+      } else {
+        const numberOfArticlesViewed = window.Connext.Storage.GetViewedArticles();
+        const numberOfArticlesLeft = () => {
+          try {
+            return window.Connext.Storage.GetArticlesLeft();
+          } catch (err) {
+            // eslint-disable-next-line no-console
+            console.error('error calling `window.Connext.Storage.GetArticlesLeft()`', err);
+            return null;
+          }
+        };
+        const currentConversation = window.Connext.Storage.GetCurrentConversation();
+        const { Properties: currentConversationProperties = {} } = currentConversation;
         const {
-          Id: meteredConversationId = '',
-          Properties: meteredConversationLSProperties = {},
-        } = meteredConversationData;
-        const {
-          ArticleLeft: articlesRemainingFromLocalStorage,
-          PaywallLimit: articleLimitFromLocalStorage,
-        } = meteredConversationLSProperties;
-        const viewedArticlesFromLocalStorage = GetConnextLocalStorageData(
-          siteCode, configCode, environment, 'Connext_ViewedArticles',
-        ) || {};
-        const viewedArticlesArray = viewedArticlesFromLocalStorage[meteredConversationId] || [];
-
-        logOutput('connext logging >> localStorageAuthChecks - articlesRemainingFromLocalStorage', articlesRemainingFromLocalStorage, 'viewedArticlesArray.length', viewedArticlesArray.length, 'articleLimitFromLocalStorage - 1', articleLimitFromLocalStorage - 1, 'window.Connext.Storage.GetViewedArticles()', window.Connext.Storage.GetViewedArticles(), 'window.Connext.Storage.GetCurrentConversation()', window.Connext.Storage.GetCurrentConversation());
-
+          ArticleLeft: articlesRemainingFromConversation,
+          PaywallLimit: paywallArticleLimit,
+        } = currentConversationProperties;
         if (
-          (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
+          (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
           || (
-            articlesRemainingFromLocalStorage !== 0
-            && viewedArticlesArray.length < articleLimitFromLocalStorage - 1
-          ) || (UserState === 'Subscribed')
+            articlesRemainingFromConversation !== 0
+            && (numberOfArticlesLeft() === 'unlimited' || numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft() > 0)
+          )
         ) {
           logOutput(
-            `connext debugging >> (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0)
-           || (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1)`,
-            (articlesRemainingFromLocalStorage && articlesRemainingFromLocalStorage > 0),
+            'connext debugging >> (articlesRemainingFromConversation && articlesRemainingFromConversation > 0) || (articlesRemainingFromConversation !== 0 && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft > 0))',
+            '(articlesRemainingFromConversation',
+            articlesRemainingFromConversation,
+            'and',
+            articlesRemainingFromConversation > 0,
+            ') or',
+            articlesRemainingFromConversation !== 0,
+            'and (',
+            numberOfArticlesViewed.length < paywallArticleLimit - 1,
             'or',
-            (articlesRemainingFromLocalStorage !== 0 && viewedArticlesArray.length < articleLimitFromLocalStorage - 1),
-            'articlesRemainingFromLocalStorage',
-            articlesRemainingFromLocalStorage,
-            'viewedArticlesArray.length',
-            viewedArticlesArray.length,
-            'articleLimitFromLocalStorage - 1',
-            articleLimitFromLocalStorage - 1,
-            'viewedArticlesFromLocalStorage',
-            viewedArticlesFromLocalStorage,
-            'conversationsDataFromLocalStorage',
-            conversationsDataFromLocalStorage,
+            numberOfArticlesLeft() > 0,
+            ') currentConversation',
+            currentConversation,
+            'articlesRemainingFromConversation',
+            articlesRemainingFromConversation,
+            'numberOfArticlesViewed',
+            numberOfArticlesViewed,
+            'numberOfArticlesViewed.length',
+            numberOfArticlesViewed.length,
+            'paywallArticleLimit - 1',
+            paywallArticleLimit - 1,
+            'numberOfArticlesLeft',
+            numberOfArticlesLeft(),
           );
-          // there are > 0 articles remaining before hitting the limit
           loadDeferredItems();
-        } else {
-          const numberOfArticlesViewed = window.Connext.Storage.GetViewedArticles();
-          const numberOfArticlesLeft = () => {
-            try {
-              return window.Connext.Storage.GetArticlesLeft();
-            } catch (err) {
-              // eslint-disable-next-line no-console
-              console.error('error calling `window.Connext.Storage.GetArticlesLeft()`', err);
-              return null;
-            }
-          };
-          const currentConversation = window.Connext.Storage.GetCurrentConversation();
-          const { Properties: currentConversationProperties = {} } = currentConversation;
-          const {
-            ArticleLeft: articlesRemainingFromConversation,
-            PaywallLimit: paywallArticleLimit,
-          } = currentConversationProperties;
-          if (
-            (articlesRemainingFromConversation && articlesRemainingFromConversation > 0)
-            || (
-              articlesRemainingFromConversation !== 0
-              && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft() > 0)
-            )
-          ) {
-            logOutput(
-              'connext debugging >> (articlesRemainingFromConversation && articlesRemainingFromConversation > 0) || (articlesRemainingFromConversation !== 0 && (numberOfArticlesViewed.length < paywallArticleLimit - 1 || numberOfArticlesLeft > 0))',
-              '(articlesRemainingFromConversation',
-              articlesRemainingFromConversation,
-              'and',
-              articlesRemainingFromConversation > 0,
-              ') or',
-              articlesRemainingFromConversation !== 0,
-              'and (',
-              numberOfArticlesViewed.length < paywallArticleLimit - 1,
-              'or',
-              numberOfArticlesLeft() > 0,
-              ') currentConversation',
-              currentConversation,
-              'articlesRemainingFromConversation',
-              articlesRemainingFromConversation,
-              'numberOfArticlesViewed',
-              numberOfArticlesViewed,
-              'numberOfArticlesViewed.length',
-              numberOfArticlesViewed.length,
-              'paywallArticleLimit - 1',
-              paywallArticleLimit - 1,
-              'numberOfArticlesLeft',
-              numberOfArticlesLeft(),
-            );
-            loadDeferredItems();
-          } else if (window?.sophi) {
-            // the free limit has been exceeded and/or they are unauthorized; it's a paywall interaction, so trigger a Sophi event
-            window.sophi.sendEvent(
-              {
-                type: 'wall_hit',
-                data: {
-                  type: 'paywall-metered',
-                  name: 'regular',
-                },
+        } else if (window?.sophi) {
+          // the free limit has been exceeded and/or they are unauthorized; it's a paywall interaction, so trigger a Sophi event
+          window.sophi.sendEvent(
+            {
+              type: 'wall_hit',
+              data: {
+                type: 'paywall-metered',
+                name: 'regular',
               },
-            );
-          }
+            },
+          );
         }
-
-        // set state to `true` to ensure we only call `localStorageAuthChecks` once
-        setLocalStorageAuthCheckComplete(true);
       }
-    };
 
-    window.addEventListener('connextConversationDetermined', () => {
-      const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
-      const { UserState } = connextLocalStorageData;
-      if (isEnabled && !(UserState && ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1)) {
-        logOutput('connext logging >> isEnabled && !(UserState && ["subscriber", "subscribed"].indexOf(UserState.toLowerCase()) > -1))', 'isenabled', isEnabled, 'userState', UserState, 'is subscriber', ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1);
-        try {
-          const currentMeterLevel = window.Connext.Storage.GetCurrentMeterLevel();
-          logOutput('connext logging >> currentMeterLevel', currentMeterLevel);
-          if (currentMeterLevel === 1) {
-            // it's "free" content (per connext), so load everything
-            loadDeferredItems();
-          } else {
+      // set state to `true` to ensure we only call `localStorageAuthChecks` once
+      setLocalStorageAuthCheckComplete(true);
+    }
+  };
+
+  useEffect(() => {
+    if (window.connextAuthTriggerEnabled) {
+      window.addEventListener('connextIsSubscriber', loadDeferredItems);
+    }
+  }, [window.connextAuthTriggerEnabled]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !window.connextAuthTriggerEnabled) {
+      window.addEventListener('connextConversationDetermined', () => {
+        if (isEnabled) {
+          logOutput('connext logging >> isEnabled && !(UserState && ["subscriber", "subscribed"].indexOf(UserState.toLowerCase()) > -1))', 'isenabled', isEnabled, 'userState', UserState, 'is subscriber', ['subscriber', 'subscribed'].indexOf(UserState.toLowerCase()) > -1);
+          try {
+            const currentMeterLevel = window.Connext.Storage.GetCurrentMeterLevel();
+            logOutput('connext logging >> currentMeterLevel', currentMeterLevel);
+            if (currentMeterLevel === 1 || UserState === 'Subscribed') {
+              // it's "free" content (per connext), so load everything
+              loadDeferredItems();
+            } else {
+              localStorageAuthChecks();
+            }
+          } catch (err) {
+            // eslint-disable-next-line no-console
+            console.error('`window.Connext.Storage.GetCurrentMeterLevel()` error response:', err);
             localStorageAuthChecks();
           }
-        } catch (err) {
-          // eslint-disable-next-line no-console
-          console.error('`window.Connext.Storage.GetCurrentMeterLevel()` error response:', err);
-
-          localStorageAuthChecks();
+        } else {
+          // either connext is disabled or the user is a subscriber per localstorage.  Either way, proceed with loading
+          loadDeferredItems();
         }
-      } else {
-        // either connext is disabled or the user is a subscriber per localstorage.  Either way, proceed with loading
+      });
+      // connext is enabled & the user is not authorized, wait for the connext auth callback
+      window.connextAuthTriggerEnabled = true;
+    }
+
+    document.onreadystatechange = () => {
+      if (document.readyState === 'complete' && UserState === 'Subscribed') {
         loadDeferredItems();
       }
-    });
-    // connext is enabled & the user is not authorized, wait for the connext auth callback
-    window.addEventListener('connextIsSubscriber', loadDeferredItems);
-    window.connextAuthTriggerEnabled = true;
-  }
+    };
+  }, []);
 };
 
 const ConnextInit = ({ triggerLoginModal = false }) => {
