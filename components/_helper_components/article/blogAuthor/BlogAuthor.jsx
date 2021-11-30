@@ -6,7 +6,7 @@ import Image from '../../global/image/default.jsx';
 import './styles.scss';
 
 const BlogAuthor = ({ subtype, authorData, ampPage }) => {
-  if ((subtype === 'Blog' || subtype === 'Article') && authorData.length > 0) {
+  if ((subtype === 'Blog' || subtype === 'Article') && authorData && authorData.length > 0) {
     const fusionContext = useFusionContext();
     const { arcSite } = fusionContext;
     const {
