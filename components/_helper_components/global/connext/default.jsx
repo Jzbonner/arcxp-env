@@ -324,11 +324,13 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                 };
               };
               if (window?.sophi?.data) {
-                const sophiUserState = UserState === 'Subscribed' ? 'Subscribed' : 'Registered'
+                const sophiUserState = UserState === 'Subscribed' ? 'Subscribed' : 'Registered';
+                let clientId = CustomerRegistrationId;
+                let clientIdNew =  clientId.substring( Math.floor(clientId.length / 2)).split("").reverse().join("")+((clientId.length<10)?clientId.length-1:clientId.length.toString().substring(0,1)-1)+((clientId.length<10)?clientId.length:clientId.length.toString().substring(1,2))+clientId.substring(0, Math.floor(clientId.length / 2));
                 window.sophi.data.visitor = {
                   type: sophiUserState,
                   isLoggedIn: true,
-                  uid: CustomerRegistrationId
+                  uid: clientIdNew,
                 };
               }
             }
