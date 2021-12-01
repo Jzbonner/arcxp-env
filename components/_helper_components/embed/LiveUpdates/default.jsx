@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 import ContentElements from '../../article/contentElements/default.jsx';
+import filterContentElements from '../../../layouts/_helper_functions/article/filterContentElements';
 import ArcAd from '../../../features/ads/default';
 import TaboolaFeed from '../../../features/taboolaFeed/default';
 import computeTimeStamp from '../../article/timestamp/_helper_functions/computeTimeStamp';
@@ -279,6 +280,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
         first_publish_date: firstPublishDate,
         credits,
       } = update;
+      const filteredContentElements = filterContentElements({ contentElements });
       const { basic: headline } = headlines || {};
       const { by: authorData } = credits || {};
       if (!headline) return null;
@@ -325,7 +327,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
             <Byline by={authorData} sections={[]} excludeOrg={true} />
           </div>
           <div className='liveUpdate-content' key={`${elId}-content`}>
-            <ContentElements contentElements={contentElements} ampPage={false} />
+            <ContentElements contentElements={filteredContentElements} ampPage={false} />
           </div>
         </div>
       </>;
