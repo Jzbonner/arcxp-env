@@ -71,7 +71,7 @@ const getContentMeta = () => {
   if (tags) {
     tags.forEach((tag) => {
       if (tag && tag.text) {
-        topics.push(tag.text);
+        topics.push(tag.text.replace(/"/g, ''));
       }
     });
   }
