@@ -37,31 +37,17 @@
         margin-bottom: 0;
       }
 
-      .image-component-image:before {
-        content: " ";
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        top: 0;
-        left: 0;
-        z-index: 2;
-        background: #000;
-        opacity: 40%;
-      }
-
       picture {
         position: relative;
-        z-index: 1;
         right: 0;
         width: 100%;
         height: auto;
         display: block;
-        filter: grayscale(1);
       }
 
-      picture,
       img {
         height: 100%;
+        filter: brightness(.5) grayscale(1);
       }
     }
 
@@ -363,6 +349,13 @@
           }
         }
 
+        @include between-breakpoints(desktop-sm, desktop-lg) {
+
+          &.HP01 {
+            min-width: 728px;
+          }
+        }
+
         @include between-breakpoints(mobile, mobile-lg) {
           overflow: visible;
         }
@@ -425,7 +418,7 @@
       }
 
       .snippet-anchor {
-        position: absolute;
+        position: relative;
         display: inline-block;
         height: 0;
         top: -60px;
