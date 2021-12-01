@@ -24,12 +24,13 @@
     z-index: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    text-align: left;
     max-width: 100%;
 
     @include breakpoint(tablet) {
       margin: 0 auto;
+      text-align: center;
+      justify-content: center;
     }
   }
 
@@ -95,7 +96,6 @@
       border: none;
 
       .headline-body {
-        padding: 0 30px 20px;
         max-width: 1600px;
         text-align: center;
 
@@ -111,10 +111,7 @@
   &.with-image {
 
     .headline {
-      /* margin: -3.5vh auto 0; */
-      text-align: center;
       display: flex;
-      justify-content: center;
 
       @include breakpoint(desktop-sm) {
         flex: 1 0 33%;
@@ -139,6 +136,11 @@
   &.with-video {
     display: block;
   }
+}
+
+main > .c-header-gallery .article-headline-component.with-gallery .headline .headline-body {
+  // this specificity is to differentiate the gallery basic page from an article with lead gallery (in which case `.c-header-gallery` is a nested child of a `header` tag, ala `main > header > .c-header-gallery`)
+  padding: 0 30px 20px;
 }
 
 /////////////////
