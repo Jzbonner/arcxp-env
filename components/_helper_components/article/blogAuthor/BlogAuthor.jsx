@@ -15,13 +15,14 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
     const appContext = useAppContext();
     const { deployment, contextPath } = appContext;
     const { _id: authorId } = authorData[0] || {};
-    const staffBioPageLink = authorId ? `/staff/${authorId}/` : false;
+    const authorHasId = !!authorId;
 
     const buildAuthorImage = (author) => {
-      if (staffBioPageLink) {
+      // const authorHasId = `/staff/${author.id}/`
+      if (authorHasId) {
         return (
         <a
-          href={staffBioPageLink}
+          href={authorHasId}
           rel='author'
         >
           <div className="content-profileImage">
@@ -40,10 +41,10 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
     };
 
     const buildAuthorName = (author) => {
-      if (staffBioPageLink) {
+      if (authorHasId) {
         return (
         <a
-          href={staffBioPageLink}
+          href={authorHasId}
           rel='author'
         >
           {author.name}
