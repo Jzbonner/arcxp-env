@@ -80,7 +80,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
               <video style="width: 100%;" controls poster="${imageResizer(promoImageUrl, siteID)}">
                   <source src=${inlineVideoURL} type="video/mp4" >
                </video>
-               <div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${credit}</div>
+               <p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${credit}</p>
             </embed>
             `;
   }
