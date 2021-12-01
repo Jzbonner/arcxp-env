@@ -128,7 +128,7 @@ const SiteMetrics = ({ isAmp }) => {
               "pageNameStr": "",
               "pageUrlStr": "",
               "pageMainSection": "${topSection}",
-              "contentPaywallStatus": "${paywallStatus || contentCode}",
+              "contentPaywallStatus": "${paywallStatus || contentCode || 'free'}",
               "chartbeatTitle": "${replaceQuotes(pageTitle)}"
             },
             "triggers": {
@@ -236,7 +236,7 @@ const SiteMetrics = ({ isAmp }) => {
             "contentPublishDate": "${firstPublishDateConverted}",
             "blogName": "${pageContentType === 'blog' ? topSectionName : (blogName || '')}",
             "galleryName": "${replaceQuotes(galleryHeadline)}",
-            "contentPaywallStatus": "${paywallStatus || contentCode}"
+            "contentPaywallStatus": "${paywallStatus || contentCode || 'free'}"
           }
         };
         // we do a check just in case dataLayer has already been created

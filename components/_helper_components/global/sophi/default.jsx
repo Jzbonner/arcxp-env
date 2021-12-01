@@ -30,10 +30,13 @@ const SophiTags = ({ isAmp }) => {
     firstPublishDate: lastModifiedDate,
     paywallStatus,
     typeOfPage,
+    sophiType,
   } = contentMeta || {};
 
   let sophiContentType = isNonContentPage ? 'section' : 'article';
-  if (typeOfPage === 'gallery') {
+  if (sophiType === 'article') {
+    sophiContentType = 'article';
+  } else if (typeOfPage === 'gallery') {
     sophiContentType = 'image';
   } else if (typeOfPage === 'video') {
     sophiContentType = 'video';
