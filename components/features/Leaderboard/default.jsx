@@ -1,11 +1,10 @@
 /* eslint-disable */
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import './default.scss';
 
-const Leaderboard = () => {
-  const tour = 'pga';
-  const year = '2021';
+const Leaderboard = ({ year, tour }) => {
   let tournamentId;
   // const ref = useRef(null);
 
@@ -87,6 +86,11 @@ const Leaderboard = () => {
     );
   }
   return null;
+};
+
+Leaderboard.propTypes = {
+  year: PropTypes.number,
+  tour: PropTypes.string,
 };
 
 export default Leaderboard;
