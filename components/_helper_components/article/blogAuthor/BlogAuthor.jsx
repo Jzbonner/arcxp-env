@@ -18,11 +18,11 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
     const authorHasId = !!authorId;
 
     const buildAuthorImage = (author) => {
-      // const authorHasId = `/staff/${author.id}/`
+      const authorImageBioLink = `/staff/${author._id}/`;
       if (authorHasId) {
         return (
         <a
-          href={authorHasId}
+          href={authorImageBioLink}
           rel='author'
         >
           <div className="content-profileImage">
@@ -41,10 +41,11 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
     };
 
     const buildAuthorName = (author) => {
+      const authorNameBioLink = `/staff/${author._id}/`;
       if (authorHasId) {
         return (
         <a
-          href={authorHasId}
+          href={authorNameBioLink}
           rel='author'
         >
           {author.name}
