@@ -27,6 +27,7 @@ const getContentMeta = () => {
   const metaTitle = metaValue('title');
   const metaDescription = metaValue('description');
   const coverageEndTime = metaValue('coverage end time');
+  const sophiType = metaValue('sophi-type');
   const {
     siteName, favicon, cdnSite, appleIcon, cdnOrg,
   } = getProperties(arcSite) || {};
@@ -78,7 +79,7 @@ const getContentMeta = () => {
   }
   const pagebuilderTopics = metaValue('topics') || [];
   if (pagebuilderTopics.length) {
-    topics = [...topics, ...pagebuilderTopics.split(',')];
+    topics = [...topics, ...pagebuilderTopics.replace(/"/g, '').split(',')];
   }
 
   let environ = fetchEnv();
@@ -107,7 +108,9 @@ const getContentMeta = () => {
   } = pageType || {};
   let { type: typeOfPage } = pageType || {};
   let pageContentType = typeOfPage === 'story' ? 'article' : typeOfPage && typeOfPage.toLowerCase();
-  if (isHome) {
+  if (sophiType === 'article') {
+    pageContentType = 'article';
+  } else if (isHome) {
     pageContentType = 'homepage';
   } else if (isError) {
     pageContentType = '404';
@@ -288,6 +291,7 @@ const getContentMeta = () => {
     metaDescription,
     stories,
     coverageEndTime,
+    sophiType,
   };
 };
 
