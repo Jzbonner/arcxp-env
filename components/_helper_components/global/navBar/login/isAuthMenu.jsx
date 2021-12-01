@@ -60,6 +60,18 @@ const isAuthMenu = ({
     </button>
   );
 
+  const renderEpaperLink = () => {
+    if (arcSite === 'dayton') {
+      return null;
+    }
+
+    return <li className={'flyout-item'}>
+      <a href={`https://epaper.${handleSiteName(arcSite)}.com/default.aspx?acc=cmg&pub=${pubParam}&date=&EntitlementCode=epaperHTML5&custregid=${custRegId}`} target="_blank" rel="noopener noreferrer">
+        ePaper
+      </a>
+    </li>;
+  };
+
   if (isSidebar) {
     return (
     <div onClick={() => setShowUserMenu(!showUserMenu)}>
@@ -67,6 +79,7 @@ const isAuthMenu = ({
         <div data-mg2-action="logout" className='login-text-bmenu'>Log Out</div>
           <div className='subNav'>
             <ul className={`subNav-flyout itemCount-${links.length + (isNotAuthenticated ? 3 : 2)} logged-out`}>
+              {renderEpaperLink()}
               {RenderMenuLinks(links)}
             </ul>
           </div>
@@ -103,13 +116,7 @@ const isAuthMenu = ({
                   </a>
                 </li>
               )}
-              {arcSite !== 'dayton' && (
-                <li className={'flyout-item'}>
-                  <a href={`https://epaper.${handleSiteName(arcSite)}.com/default.aspx?acc=cmg&pub=${pubParam}&date=&EntitlementCode=epaperHTML5&custregid=${custRegId}`} target="_blank" rel="noopener noreferrer">
-                    ePaper
-                  </a>
-                </li>
-              )}
+              {renderEpaperLink()}
               {RenderMenuLinks(links)}
             </ul>
           </div>
