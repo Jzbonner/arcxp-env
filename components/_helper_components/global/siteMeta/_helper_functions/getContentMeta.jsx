@@ -78,7 +78,7 @@ const getContentMeta = () => {
   }
   const pagebuilderTopics = metaValue('topics') || [];
   if (pagebuilderTopics.length) {
-    topics = [...topics, ...pagebuilderTopics.split(',')];
+    topics = [...topics, ...pagebuilderTopics.replace(/"/g, '').split(',')];
   }
 
   let environ = fetchEnv();
