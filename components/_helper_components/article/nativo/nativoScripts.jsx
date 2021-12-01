@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function createNativoKeys(tags, uuid) {
   let values = [];
-  tags.forEach(tag => values.push(tag.text.split(' ').join('-')));
+  tags.forEach(tag => values.push(tag.trim().split(' ').join('-')));
   values = values.toString();
 
   const kvpMap = {};
