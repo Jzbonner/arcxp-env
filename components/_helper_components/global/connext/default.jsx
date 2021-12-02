@@ -463,7 +463,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           n.parentNode.insertBefore(e, n);
         }
         loadChartbeat();
-        
+
      }
       doc.addEventListener('DOMContentLoaded', () => {
         const connextMeterLevelSet = new Event('connextMeterLevelSet');
