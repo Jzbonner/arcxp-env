@@ -231,12 +231,6 @@ export const ConnextAuthTrigger = () => {
   };
 
   useEffect(() => {
-    if (window.connextAuthTriggerEnabled) {
-      window.addEventListener('connextIsSubscriber', loadDeferredItems);
-    }
-  }, [window.connextAuthTriggerEnabled]);
-
-  useEffect(() => {
     if (typeof window !== 'undefined' && !window.connextAuthTriggerEnabled) {
       window.addEventListener('connextConversationDetermined', () => {
         if (isEnabled) {
@@ -261,6 +255,7 @@ export const ConnextAuthTrigger = () => {
         }
       });
       // connext is enabled & the user is not authorized, wait for the connext auth callback
+      window.addEventListener('connextIsSubscriber', loadDeferredItems);
       window.connextAuthTriggerEnabled = true;
     }
 
@@ -447,29 +442,6 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
           bindConnextNotAuthorized = false;
         }
       });
-      /*
-        Since we can only read the userType in the body, we're initializing chartbeat from the body per chartbeat's documentation.
-        https://docs.chartbeat.com/cbp/tracking/standard-websites/alternative-integrations-web
-      */
-     if(${!isAJCSite}){
-
-        /** CONFIGURATION START **/
-        var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
-        var _cbq = window._cbq = (window._cbq || []);
-        _cbq = cbqArray;
-        /** CONFIGURATION END **/
-
-        function loadChartbeat() {
-          var e = document.createElement('script');
-          var n = document.getElementsByTagName('script')[0];
-          e.type = 'text/javascript';
-          e.async = true;
-          e.src = '//static.chartbeat.com/js/chartbeat.js';
-          n.parentNode.insertBefore(e, n);
-        }
-        loadChartbeat();
-
-     }
       doc.addEventListener('DOMContentLoaded', () => {
         const connextMeterLevelSet = new Event('connextMeterLevelSet');
         const connextConversationDetermined = new Event('connextConversationDetermined');
