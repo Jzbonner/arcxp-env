@@ -88,6 +88,19 @@ module.exports = env => {
           }
         }
       ]
+    },
+    {
+      test: /\.(txt|csv)(\?.*)?$/,
+      use: [
+        {
+          loader: "file-loader",
+          options: {
+            outputPath: "data",
+            publicPath: "/pf/resources/dist/data",
+            name: "[name].[ext]"
+          }
+        }
+      ]
     }
   ];
 };
