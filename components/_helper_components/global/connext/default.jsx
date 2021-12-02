@@ -231,12 +231,6 @@ export const ConnextAuthTrigger = () => {
   };
 
   useEffect(() => {
-    if (window.connextAuthTriggerEnabled) {
-      window.addEventListener('connextIsSubscriber', loadDeferredItems);
-    }
-  }, [window.connextAuthTriggerEnabled]);
-
-  useEffect(() => {
     if (typeof window !== 'undefined' && !window.connextAuthTriggerEnabled) {
       window.addEventListener('connextConversationDetermined', () => {
         if (isEnabled) {
@@ -261,6 +255,7 @@ export const ConnextAuthTrigger = () => {
         }
       });
       // connext is enabled & the user is not authorized, wait for the connext auth callback
+      window.addEventListener('connextIsSubscriber', loadDeferredItems);
       window.connextAuthTriggerEnabled = true;
     }
 
