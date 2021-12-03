@@ -90,14 +90,14 @@ module.exports = env => {
       ]
     },
     {
-      test: /\.(txt|csv)(\?.*)?$/,
+      test: /\.csv$/,
       use: [
         {
-          loader: "file-loader",
+          loader: "csv-loader",
           options: {
-            outputPath: "data",
-            publicPath: "/pf/resources/dist/data",
-            name: "[name].[ext]"
+            dynamicTyping: true,
+            header: true,
+            skipEmptyLines: true
           }
         }
       ]

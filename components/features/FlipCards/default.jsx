@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import localData from '../../../resources/data/2021AtlantaHomicidesMasterList-homicides.csv';
+import csvData from './data/2021AtlantaHomicidesMasterList-homicides.csv';
 import './default.scss';
 
 const FlipCards = ({ customFields = {} }) => {
@@ -22,8 +22,15 @@ const FlipCards = ({ customFields = {} }) => {
   });
 
   if (useLocalData) {
-    const data = localData;
-    console.error('dave, data:', typeof localData, localData);
+    const data = csvData || null;
+    // const data = Papa.parse('./data/2021AtlantaHomicidesMasterList-homicides.csv', {
+    //   worker: true,
+    //   header: true,
+    //   step: row => console.log('Row:', row.data),
+    //   complete: () => console.log('All done!'),
+    // });
+    // JSON.stringify(parsed.data);
+    console.error('dave, data:', typeof data, data);
     // const reader = new FileReader();
     // reader.onload = function (e) {
     //   const text = e.target.result;
@@ -31,7 +38,10 @@ const FlipCards = ({ customFields = {} }) => {
     // };
     // reader.readAsText(localData);
 
-    return <div className='c-cards'>{renderCards(data)}</div>;
+    return <div className='c-cards'>
+      <h1>CARDS:</h1>
+      {renderCards(data)}
+    </div>;
   }
 
   return <h1>FlipCards are still under construction</h1>;
