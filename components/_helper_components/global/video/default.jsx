@@ -392,7 +392,6 @@ const Video = ({
       if (!document.querySelector('#powaVideoScript')) {
         // the script hasn't already been loaded, so proceed
         const videoScript = document.createElement('script');
-        videoScript.type = 'text/javascript';
         videoScript.id = 'powaVideoScript';
         videoScript.src = `https://d328y0m0mtvzqc.cloudfront.net/${currentEnv}/powaBoot.js?org=${siteOfRecord}`;
         videoScript.async = true;

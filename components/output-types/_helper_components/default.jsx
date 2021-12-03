@@ -51,7 +51,7 @@ const RenderOutputType = (props) => {
   fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
 
   return (
-    <html>
+    <html lang = 'en'>
       <head>
         <MetaTags />
         <SiteMeta />
@@ -73,7 +73,6 @@ const RenderOutputType = (props) => {
             <SiteMetrics />
             {/* Google Tag Manager */}
             <script
-              type="text/javascript"
               dangerouslySetInnerHTML={{
                 /* eslint-disable-next-line max-len */
                 __html: gtmScript(arcSite, metrics.gtmContainerKey),
@@ -87,7 +86,7 @@ const RenderOutputType = (props) => {
         {!noAds && adsPrebidEnabled && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/${prebidJs}`)}`}></script>}
         <Libs />
         {!noAds && <NativoScripts tags={topics} uuid={contentId} layout={layout} currentSite={currentSite} />}
-        {!noAds && <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
+        {!noAds && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="fb:pages" content={fbPagesId} />
       </head>
@@ -107,8 +106,8 @@ const RenderOutputType = (props) => {
         {connextIsEnabled && (
           <>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script type="text/javascript" src={`https://loader-cdn.azureedge.net/${connextEnv}/ajc/loader.min.js`}></script>
-            <script type="text/javascript" src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/customJSForNavigaAdBlocker.js`)}`}></script>
+            <script src={`https://loader-cdn.azureedge.net/${connextEnv}/ajc/loader.min.js`}></script>
+            <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/customJSForNavigaAdBlocker.js`)}`}></script>
             <ConnextInit triggerLoginModal={outputType && outputType === 'login'} />
           </>
         )}
@@ -119,7 +118,7 @@ const RenderOutputType = (props) => {
         )}
         <div id="fb-root"></div>
         <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
-        {devconActive && <script id="ns_script_dc" data-key={devconKey || '2a1556f7-d788-4b8b-943a-dd77f5f0d472'} data-e="5" src="//includemodal.global.ssl.fastly.net/sp.js" type="text/javascript"></script>}
+        {devconActive && <script id="ns_script_dc" data-key={devconKey || '2a1556f7-d788-4b8b-943a-dd77f5f0d472'} data-e="5" src="//includemodal.global.ssl.fastly.net/sp.js"></script>}
       </body>
     </html>
   );
