@@ -33,7 +33,7 @@ const AmpVideoIframeOutputType = (props) => {
   const noAds = checkTags(tags, 'no-ads');
 
   return (
-    <html lang = 'en'>
+    <html lang='en'>
       <head>
         <MetaTags />
         <SiteMeta />

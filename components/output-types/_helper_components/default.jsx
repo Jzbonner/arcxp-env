@@ -51,7 +51,7 @@ const RenderOutputType = (props) => {
   fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
 
   return (
-    <html lang = 'en'>
+    <html lang='en'>
       <head>
         <MetaTags />
         <SiteMeta />

@@ -80,7 +80,7 @@ const WrapOutputType = (props) => {
 
   return (
     /* eslint-disable */
-    <html lang = 'en'>
+    <html lang='en'>
       <head>
         <MetaTags />
         <SiteMeta />
