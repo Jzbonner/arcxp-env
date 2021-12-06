@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "StarterPack PageBuilder Fusion features",
   "scripts": {
-    "build": "npm run clean && webpack --config ./config/webpack.base.js --env.prod",
+    "build": "npm run clean && webpack --config ./config/webpack.base.js --env.prod && npm run ampValidator",
     "clean": "node scripts/clean.js",
     "deploy": "node scripts/deploy.js",
     "dev": "npm run clean && webpack --watch --config ./config/webpack.base.js --env.dev --progress --debug",
@@ -14,7 +14,8 @@
     "stylelint": "stylelint 'src/**/*.scss' 'src/properties/**/*.scss', 'src/styles/**/*.scss', 'components/**/*.scss'",
     "test": "jest --coverage",
     "bundle": "npm run build && npm run zip",
-    "zip": "zip config/deploy/bundle.zip -r . -x .git/\\* node_modules/\\* coverage/\\* .github/\\* .fusion/\\* .circleci/\\* .dist/\\* .stylelintrc.json data/db/\\*"
+    "zip": "zip config/deploy/bundle.zip -r . -x .git/\\* node_modules/\\* coverage/\\* .github/\\* .fusion/\\* .circleci/\\* .dist/\\* .stylelintrc.json data/db/\\*",
+    "ampValidator" : "amphtml-validator http://localhost/news/apd-1502-test-hyperlocal-test-copy/D3SM2ZGULZDQDNLVOIHORDR53E/?_website=ajc&outputType=amp"
   },
   "devDependencies": {
     "@arc-fusion/cli": "^2.0.5",
@@ -30,7 +31,7 @@
     "@babel/plugin-syntax-import-meta": "^7.7.4",
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
-    "amphtml-validator": "^1.0.29",
+    "amphtml-validator": "^1.0.35",
     "autoprefixer": "^9.7.3",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
