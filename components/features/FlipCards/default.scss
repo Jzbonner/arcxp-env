@@ -47,45 +47,23 @@
       margin-bottom: 20px;
     }
 
-    .front,
-    .back {
-      z-index: 2;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      left: 0;
-      position: relative;
-      top: 0;
-      transform: rotateY(0deg);
-      transform-style: preserve-3d;
-      transition: all .6s ease 0s;
-      background: #666;
-    }
-
-    .back {
-      z-index: -1;
+    .date {
       position: absolute;
-      transform: rotateY(-180deg);
+      bottom: 15px;
+    }
+
+    @include flip-card();
+
+    .front {
+      background: #666;
+
+      h2 {
+        font-size: 2rem;
+      }
+    }
+
+    .back {
       background: #999;
-    }
-
-    .front h2 {
-      font-size: 2rem;
-    }
-
-    &.is-flipped {
-
-      .front {
-        z-index: -1;
-        transform: rotateY(-180deg);
-        position: absolute;
-      }
-
-      .back {
-        z-index: 2;
-        transform: rotateY(0deg);
-        position: relative;
-      }
     }
   }
 }

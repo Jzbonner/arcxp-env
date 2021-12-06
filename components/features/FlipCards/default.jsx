@@ -10,7 +10,11 @@ const FlipCards = ({ customFields = {} }) => {
   const [isFlipped, setFlipped] = useState(-1);
 
   const flipCard = (i) => {
-    setFlipped(i);
+    if (isFlipped === i) {
+      setFlipped(-1);
+    } else {
+      setFlipped(i);
+    }
   };
 
   const months = [

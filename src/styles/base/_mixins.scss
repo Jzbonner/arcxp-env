@@ -221,6 +221,50 @@
   }
 }
 
+/* flip cards */
+@mixin flip-card($speed: .6s) {
+  position: relative;
+
+  .front,
+  .back {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    left: 0;
+    position: relative;
+    top: 0;
+    transform: rotateY(0deg);
+    transform-style: preserve-3d;
+    transition: all $speed ease 0s;
+  }
+
+  .back {
+    z-index: -1;
+    position: absolute;
+    transform: rotateY(-180deg);
+  }
+
+  .front h2 {
+    font-size: 2rem;
+  }
+
+  &.is-flipped {
+
+    .front {
+      z-index: -1;
+      transform: rotateY(-180deg);
+      position: absolute;
+    }
+
+    .back {
+      z-index: 2;
+      transform: rotateY(0deg);
+      position: relative;
+    }
+  }
+}
+
 /* stylelint-disable */
 @mixin blinking-dot($size: 10px, $speed: 1s, $color: red) {
   -webkit-animation: $speed blink ease infinite;
