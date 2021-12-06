@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import csvData from './data/2021AtlantaHomicidesMasterList-homicides.csv';
+import AtlantaHomicidesMasterList2021 from './data/AtlantaHomicidesMasterList2021';
 import './default.scss';
 
 const FlipCards = ({ customFields = {} }) => {
@@ -8,38 +8,41 @@ const FlipCards = ({ customFields = {} }) => {
     useLocalData,
   } = customFields;
 
-  const renderCards = ({ data }) => data && data.map((cardData, i) => {
+  const renderCards = data => data && data?.items.map((cardData, i) => {
     if (!cardData) return null;
 
+    const {
+      'First name': fName = '',
+      'Last name': lName = '',
+      Image: imageUri,
+      Date: date,
+      Street: street,
+      City: city,
+      Latitude: lat,
+      Longitude: long,
+      Details: description,
+      Link: storyUri,
+    } = cardData || {};
+
+    // when attempting to create a template literal for combining fName & lName, I was running into an eslint error:
+    // TypeError: Cannot read property 'range' of null
+    // const name = `${fName} ${lName}`;
+
     return <div className='card' key={i}>
-      {cardData.image && <img src={cardData.image} alt={cardData.title} />}
-      <h2>{cardData.title}</h2>
-      <h3>{cardData.date}</h3>
-      <h3>{cardData.location}</h3>
-      <p>{cardData.description}</p>
-      {cardData.link && <a className='more-link' href={cardData.link}>full article</a>}
+      {imageUri && <img src={imageUri} alt={fName} />}
+      <h2>{fName} {lName}</h2>
+      {date && <h3>{date}</h3>}
+      <h3>{street} {city}</h3>
+      {lat && long && <p>coords: {lat}, {long}</p>}
+      {description && <p>{description}</p>}
+      {storyUri && <a className='more-link' href={storyUri}>full article</a>}
     </div>;
   });
 
   if (useLocalData) {
-    const data = csvData || null;
-    // const data = Papa.parse('./data/2021AtlantaHomicidesMasterList-homicides.csv', {
-    //   worker: true,
-    //   header: true,
-    //   step: row => console.log('Row:', row.data),
-    //   complete: () => console.log('All done!'),
-    // });
-    // JSON.stringify(parsed.data);
-    console.error('dave, data:', typeof data, data);
-    // const reader = new FileReader();
-    // reader.onload = function (e) {
-    //   const text = e.target.result;
-    //   console.error('dave, text:', text);
-    // };
-    // reader.readAsText(localData);
+    const data = AtlantaHomicidesMasterList2021;
 
     return <div className='c-cards'>
-      <h1>CARDS:</h1>
       {renderCards(data)}
     </div>;
   }

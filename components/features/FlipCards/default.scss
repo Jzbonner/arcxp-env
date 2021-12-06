@@ -1,0 +1,28 @@
+@import "./../../../src/styles/base";
+
+.c-cards {
+  display: flex;
+  width: auto;
+  max-width: 100%;
+  flex-flow: column wrap;
+  margin: 0 auto;
+  justify-content: center;
+
+  @include breakpoint(tablet) {
+    flex-flow: row wrap;
+  }
+
+  .card {
+    width: auto;
+    max-width: 100%;
+    border: 1px solid #cdcdcd;
+    margin: 0 0 15px;
+    padding: 15px;
+
+    @include breakpoint(tablet) {
+      width: 350px;
+      max-width: 350px;
+      margin-right: 1%;
+    }
+  }
+}
