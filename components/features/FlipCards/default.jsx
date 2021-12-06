@@ -44,9 +44,9 @@ const FlipCards = ({ customFields = {} }) => {
     // const name = `${fName} ${lName}`;
 
     let cardClass = 'card';
-    cardClass += isFlipped === i ? ' flipped' : '';
+    cardClass += isFlipped === i ? ' is-flipped' : '';
 
-    return <div className={cardClass} key={i} datacard={i} onClick={ () => flipCard(i) }>
+    return <div className={cardClass} key={i} onClick={ () => flipCard(i) }>
       <div className='front content'>
         <h2>{fName} {lName}</h2>
         <h3>Age: {age}</h3>
