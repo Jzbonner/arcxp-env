@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AtlantaHomicidesMasterList2021 from './data/AtlantaHomicidesMasterList2021';
 import './default.scss';
@@ -7,6 +7,15 @@ const FlipCards = ({ customFields = {} }) => {
   const {
     useLocalData,
   } = customFields;
+  const [isFlipped, setFlipped] = useState(-1);
+
+  const flipCard = (i) => {
+    setFlipped(i);
+  };
+
+  const months = [
+    'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec',
+  ];
 
   const renderCards = data => data && data?.items.map((cardData, i) => {
     if (!cardData) return null;
@@ -14,6 +23,8 @@ const FlipCards = ({ customFields = {} }) => {
     const {
       'First name': fName = '',
       'Last name': lName = '',
+      Age: age,
+      Agency: agency,
       Image: imageUri,
       Date: date,
       Street: street,
@@ -24,18 +35,33 @@ const FlipCards = ({ customFields = {} }) => {
       Link: storyUri,
     } = cardData || {};
 
-    // when attempting to create a template literal for combining fName & lName, I was running into an eslint error:
+    const dateMonth = date.split('-')[1];
+    const monthName = dateMonth ? months[dateMonth - 1] : '';
+
+    // when attempting to create a template literals, I'm running into an eslint error:
     // TypeError: Cannot read property 'range' of null
+    // happened for both the example immediately following this (name) and the className compilation
     // const name = `${fName} ${lName}`;
 
-    return <div className='card' key={i}>
-      {imageUri && <img src={imageUri} alt={fName} />}
-      <h2>{fName} {lName}</h2>
-      {date && <h3>{date}</h3>}
-      <h3>{street} {city}</h3>
-      {lat && long && <p>coords: {lat}, {long}</p>}
-      {description && <p>{description}</p>}
-      {storyUri && <a className='more-link' href={storyUri}>full article</a>}
+    let cardClass = 'card';
+    cardClass += isFlipped === i ? ' flipped' : '';
+
+    return <div className={cardClass} key={i} datacard={i} onClick={ () => flipCard(i) }>
+      <div className='front content'>
+        <h2>{fName} {lName}</h2>
+        <h3>Age: {age}</h3>
+        <div className='month' datamonth={dateMonth}>{monthName}</div>
+        {date && <h3 className='date'>Died:<br />{date}</h3>}
+      </div>
+      <div className='back content'>
+        {imageUri && <img src={imageUri} alt={fName} />}
+        <h2>{fName} {lName}</h2>
+        <h3>Age: {age}</h3>
+        <p className='location'>{street} {city} (coords: {lat}, {long})</p>
+        {agency && <p className='agency'>Agency: {agency}</p>}
+        {description && <p className='description'>{description}</p>}
+        {storyUri && <a className='more-link' href={storyUri}>Read the Article</a>}
+      </div>
     </div>;
   });
 
