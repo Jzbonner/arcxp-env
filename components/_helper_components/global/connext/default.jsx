@@ -292,7 +292,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
   const connextLSLookup = `connext_user_data_${siteCode}_${configCode}_${environment.toUpperCase()}`;
   const isAJCSite = siteName === 'AJC';
 
-  return <script type='text/javascript' dangerouslySetInnerHTML={{
+  return <script dangerouslySetInnerHTML={{
     __html: `
       const doc = window.document;
       var cbqArray = [];
@@ -457,7 +457,6 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
         function loadChartbeat() {
           var e = document.createElement('script');
           var n = document.getElementsByTagName('script')[0];
-          e.type = 'text/javascript';
           e.async = true;
           e.src = '//static.chartbeat.com/js/chartbeat.js';
           n.parentNode.insertBefore(e, n);
