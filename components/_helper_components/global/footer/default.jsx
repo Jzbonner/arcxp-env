@@ -74,7 +74,7 @@ const Footer = () => {
                       {linkCategory.children
                         && linkCategory.children.map((link, e) => {
                           const childListTitle = (link.navigation && link.navigation.nav_title) || '';
-                          const openInNewTab = link.site && link.site.section_url_open_new_tab === 'true' ? '_blank' : '';
+                          const openInNewTab = link.site && link.site.section_url_open_new_tab === 'true' ? '_blank' : '_self';
                           return (
                             <li key={`footerChildLink-${e}`} className="menu-body-links">
                               <a href={getLinkURL(link)} target={openInNewTab}>
