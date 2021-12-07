@@ -14,7 +14,7 @@ const TaboolaHeader = () => {
   const { layout } = appContext || {};
   if (layout) {
     return (
-      <script type='text/javascript' dangerouslySetInnerHTML={{
+      <script dangerouslySetInnerHTML={{
         __html: taboolaHeaderScript(layout, cdnLink),
       }}></script>
     );

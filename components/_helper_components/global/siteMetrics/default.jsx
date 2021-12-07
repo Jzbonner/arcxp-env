@@ -203,7 +203,7 @@ const SiteMetrics = ({ isAmp }) => {
   }
 
   return (
-    <script type='text/javascript' dangerouslySetInnerHTML={{
+    <script dangerouslySetInnerHTML={{
       __html: `
         const initialDataObj = {
           "connextActive": "${connextIsEnabled}",
