@@ -97,7 +97,6 @@
 
       .headline-body {
         max-width: 1600px;
-        text-align: center;
 
         .headline-text-long {
           @include breakpoint(tablet) {
@@ -141,6 +140,7 @@
 main > .c-header-gallery .article-headline-component.with-gallery .headline .headline-body {
   // this specificity is to differentiate the gallery basic page from an article with lead gallery (in which case `.c-header-gallery` is a nested child of a `header` tag, ala `main > header > .c-header-gallery`)
   padding: 0 30px 20px;
+  text-align: center;
 }
 
 /////////////////
