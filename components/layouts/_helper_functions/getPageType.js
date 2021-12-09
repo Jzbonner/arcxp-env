@@ -30,7 +30,8 @@ const checkPageType = (type, layout, renderedOutput) => {
     const isList = layout.indexOf('list') > -1;
     const isStaff = layout.includes('all-staff');
     const isWrap = layout.indexOf('wrap') > -1;
-    const isAuthor = layout.includes('staff-bio-basic');
+    const isAuthor = layout.includes('staff-bio-basic') || (isSectionPage
+          && features && features.includes('StaffBio/default'));
     const isError = isSectionPage && features && features.includes('404/default');
     const isLiveUpdate = isSectionPage && features && features.includes('ComposerEmbed/default');
     const isEnhancedList = isSectionPage && features && features.includes('ListEnhanced/default');
