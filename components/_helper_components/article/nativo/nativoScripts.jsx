@@ -16,7 +16,6 @@ function createNativoKeys(tags, uuid) {
 const NativoScripts = ({ tags, uuid }) => (
   <>
     <script
-      type="text/javascript"
       dangerouslySetInnerHTML={{
         __html: `window.ntvConfig = window.ntvConfig || {}; window.ntvConfig.keyValues = ${createNativoKeys(tags, uuid)};`,
       }}

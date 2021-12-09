@@ -23,7 +23,7 @@ const CustomMetricsScript = () => {
 
   const connextLSLookup = `connext_user_data_${siteCode}_${configCode}_${environment.toUpperCase()}`;
 
-  return <script type='text/javascript' dangerouslySetInnerHTML={{
+  return <script dangerouslySetInnerHTML={{
     __html: `
         const docu = window.document;
         const docuBody = docu.querySelector('body');

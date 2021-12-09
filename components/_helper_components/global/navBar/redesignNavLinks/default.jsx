@@ -48,6 +48,8 @@ const RedesignNavLinks = ({
       return link.endsWith('/') ? link : `${link}/`;
     }
 
+    if (!destination) return null;
+
     return (
     <li key={i}>
       <a href={destination?.indexOf('/') === 0 ? `${siteDomainURL}${checkTrailingSlash(destination)}` : checkTrailingSlash(destination)} target='_self' className={`nav-itemText ${isHighlighted ? 'active' : ''}${itemCount > 7 ? 'sm-text' : ''}`}>{title}</a>

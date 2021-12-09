@@ -5,15 +5,18 @@ import Schedule from '../Schedule/default';
 import Leaderboard from '../Leaderboard/default';
 
 const Golf = ({ customFields = {} }) => {
+  const currentYear = new Date().getFullYear();
+  const tour = 'pga';
   const {
     widgetName,
+    year = currentYear,
   } = customFields;
 
   switch (widgetName) {
     case 'Schedule':
-      return <Schedule />;
+      return <Schedule year={year} tour={tour} />;
     case 'Leaderboard':
-      return <Leaderboard />;
+      return <Leaderboard year={year} tour={tour} />;
     default:
       return <h1>{widgetName} is Under Construction</h1>;
   }

@@ -130,20 +130,20 @@
         margin: 0;
 
         .c-title-content {
-          @include text-styles(1.56rem, 1.12, "Lora-Regular");
+          @include text-styles(1.56rem, 1.12, "Lora-Bold");
 
           letter-spacing: -.31px;
           margin: 0;
           border: none;
 
           @include breakpoint(tablet) {
-            @include text-styles(1.625rem, 1.12, "Lora-Regular");
+            @include text-styles(1.625rem, 1.12, "Lora-Bold");
 
             letter-spacing: -.43px;
           }
 
           @include breakpoint(desktop-sm) {
-            @include text-styles(1.875rem, 1.13, "Lora-Regular");
+            @include text-styles(1.875rem, 1.13, "Lora-Bold");
 
             letter-spacing: -.5px;
           }
