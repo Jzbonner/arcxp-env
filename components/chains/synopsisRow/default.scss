@@ -16,11 +16,7 @@
 
   .c-homeLeadContainer {
     @include breakpoint(tablet) {
-      margin-bottom: $min-Msection-margin;
-    }
-
-    @include breakpoint(desktop-sm) {
-      margin-bottom: $min-DTsection-margin;
+      margin-bottom: 0;
     }
 
     .home-headline {
@@ -111,6 +107,11 @@
   }
 
   .c-synopsis {
+    margin-bottom: 20px;
+
+    @include breakpoint(desktop-sm) {
+      margin-bottom: 0;
+    }
 
     .c-homeList {
 
