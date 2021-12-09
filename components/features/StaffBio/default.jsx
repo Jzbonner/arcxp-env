@@ -46,7 +46,7 @@ const StaffBio = () => {
         <div className="b-flexRow b-flexCenter">
           {authorPhoto && (
             <div className="staff-image">
-              <img src={authorPhoto} />
+              <img src={authorPhoto} alt={`${byline} staff image`}/>
             </div>
           )}
           <div className="c-staffInfo">
@@ -71,12 +71,12 @@ const StaffBio = () => {
               <div className="staff-social-icons">
                 {facebook && (
                   <a href={facebook}>
-                    <img src={facebookIcon} alt="" />
+                    <img src={facebookIcon} alt="Facebook icon" />
                   </a>
                 )}
                 {twitter && (
                   <a href={twitter}>
-                    <img src={twitterIcon} alt="" />
+                    <img src={twitterIcon} alt="Twitter icon" />
                   </a>
                 )}
               </div>

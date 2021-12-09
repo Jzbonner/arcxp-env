@@ -5,6 +5,7 @@ import mostReadBlacklist from './mostReadBlacklist/ajc.com.json';
 
 export default {
   defaultSiteTitle: 'AJC',
+  siteName: 'ajc',
   fbPagesId: '13310147298',
   fbAppId: '366816260017522',
   siteTag: 'ajc',

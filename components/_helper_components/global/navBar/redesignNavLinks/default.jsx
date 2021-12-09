@@ -59,7 +59,7 @@ const RedesignNavLinks = ({
   return (
     <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
-        <img src={darkMode ? HamburgerDark : Hamburger}></img>
+        <img src={darkMode ? HamburgerDark : Hamburger} alt='Hamburger icon'></img>
       </div>
       <div className={`sticky-logo-homepage ${siteName}`}>
         <a href="/">
