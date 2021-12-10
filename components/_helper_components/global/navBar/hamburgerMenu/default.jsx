@@ -57,7 +57,7 @@ const HamburgerMenu = ({
     </ul>
     <div className='nav-menu-header'>
       <a href={rootDirectory}>
-        <img src={whiteLogoRedesign} className={`nav-menu-logo ${siteName}`}></img>
+        <img src={whiteLogoRedesign} className={`nav-menu-logo ${siteName}`} alt={`${siteName} logo in background`}></img>
       </a>
       <NavFooter navFooterContent={navFooterContent}/>
       <NavCopyright />

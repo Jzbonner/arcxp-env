@@ -157,7 +157,7 @@ const Slider = (customFields = {}) => {
       </div>
       <div className="c-slider-nav">
         <a className="c-slider-button" onClick={() => handleArrowClick(actions.LEFT)}>
-          <img src={LeftArrow} />
+          <img src={LeftArrow} alt="Left arrow"/>
         </a>
         <ScrollBar
           maxScrollLeft={maxScrollLeft}
@@ -166,7 +166,7 @@ const Slider = (customFields = {}) => {
           sliderContentElRef={contentRef}
         />
         <a className="c-slider-button is-right" onClick={() => handleArrowClick(actions.RIGHT)}>
-          <img src={RightArrow} />
+          <img src={RightArrow} alt="Right arrow"/>
         </a>
       </div>
     </div>

@@ -42,6 +42,7 @@ const SponsorBanner = ({ sponsorID, ampPage }) => {
           <img
             src={currentWidth < minTabletViewWidth ? checkForMobileBanner : desktopBanner}
             className="c-sponsorImg"
+            alt="Sponsor banner"
           />
         </div>
       );

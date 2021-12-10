@@ -4,7 +4,7 @@ import keyboardImage from '../../../resources/images/404_latest.svg';
 
 export const FourZeroFour = () => <div className="page-not-found-feature">
   <div>
-    <img className="background-image" src={keyboardImage} />
+    <img className="background-image" src={keyboardImage} alt="404 page not found image"/>
   </div>
   <div className="error-text">
     <span className="error-text-1">We can’t seem to find the page you’re looking for. </span>

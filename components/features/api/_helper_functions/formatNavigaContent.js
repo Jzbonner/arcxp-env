@@ -97,7 +97,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
 
     return `
       <embed type="raw">
-        <img src="${imageResizer(url, siteID)}" title="${imageCaption}" />
+        <img src="${imageResizer(url, siteID)}" title="${imageCaption}" alt="${imageCaption}"/>
       </embed>
     `;
   }
