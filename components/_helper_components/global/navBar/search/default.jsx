@@ -93,7 +93,8 @@ const Search = ({ isHeader, isSidebar }) => {
         }
         <button type="submit" className="c-search-icon">
           <img className='search-icon'
-            src={isSidebar ? searchBurger : searchIcon} />
+            src={isSidebar ? searchBurger : searchIcon}
+            alt='Search icon'/>
         </button>
       </form>
     </div>
