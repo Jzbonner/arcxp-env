@@ -15,7 +15,7 @@
     "test": "jest --coverage",
     "bundle": "npm run build && npm run zip",
     "zip": "zip config/deploy/bundle.zip -r . -x .git/\\* node_modules/\\* coverage/\\* .github/\\* .fusion/\\* .circleci/\\* .dist/\\* .stylelintrc.json data/db/\\*",
-    "ampValidator" : "amphtml-validator http://localhost/pf/news/apd-1502-test-hyperlocal-test-copy/D3SM2ZGULZDQDNLVOIHORDR53E/?_website=ajc&outputType=amp"
+    "ampValidator" : "amphtml-validator \"http://localhost/pf/news/apd-1502-test-hyperlocal-test-copy/D3SM2ZGULZDQDNLVOIHORDR53E/?_website=ajc&outputType=amp\""
   },
   "devDependencies": {
     "@arc-fusion/cli": "^2.0.5",
