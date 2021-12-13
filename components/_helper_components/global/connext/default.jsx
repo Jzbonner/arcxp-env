@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useAppContext } from 'fusion:context';
 import fetchEnv from '../utils/environment';
 import ArcAdLib from '../../../features/ads/src/children/ArcAdLib';
 import GetConnextLocalStorageData from './connextLocalStorage';
@@ -13,10 +13,8 @@ const logOutput = (msg, debug = false) => {
 };
 
 export const ConnextAuthTrigger = () => {
-  const fusionContext = useFusionContext();
   const appContext = useAppContext();
-  const { arcSite } = fusionContext;
-  const { globalContent } = appContext;
+  const { globalContent, arcSite } = appContext;
   const { promo_items: promoItems } = globalContent || {};
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
@@ -299,8 +297,8 @@ export const ConnextAuthTrigger = () => {
 };
 
 const ConnextInit = ({ triggerLoginModal = false }) => {
-  const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
+  const appContext = useAppContext();
+  const { arcSite } = appContext;
   const currentEnv = fetchEnv();
   const { connext, siteName } = getProperties(arcSite);
   const {
