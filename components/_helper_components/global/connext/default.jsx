@@ -41,7 +41,7 @@ export const ConnextAuthTrigger = () => {
 
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState } = connextLocalStorageData;
-  const deferredItems = window.deferUntilKnownAuthState || [];
+  const deferredItems = window?.deferUntilKnownAuthState || [];
   let leadVideoLoaded = false;
 
   const loadDeferredItems = () => {
