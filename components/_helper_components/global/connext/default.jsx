@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { useFusionContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import fetchEnv from '../utils/environment';
 import ArcAdLib from '../../../features/ads/src/children/ArcAdLib';
 import GetConnextLocalStorageData from './connextLocalStorage';
@@ -14,7 +14,12 @@ const logOutput = (msg, debug = false) => {
 
 export const ConnextAuthTrigger = () => {
   const fusionContext = useFusionContext();
+  const appContext = useAppContext();
   const { arcSite } = fusionContext;
+  const { globalContent } = appContext;
+  const { promo_items: promoItems } = globalContent || {};
+  const { basic: basicItems } = promoItems || {};
+  const { type: promoType = '' } = basicItems || {};
   const currentEnv = fetchEnv();
   const { connext } = getProperties(arcSite);
   const [loadedDeferredItems, _setLoadedDeferredItems] = useState(false);
@@ -38,10 +43,10 @@ export const ConnextAuthTrigger = () => {
 
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState } = connextLocalStorageData;
-
+  const deferredItems = window.deferUntilKnownAuthState || [];
+  let leadVideoLoaded = false;
 
   const loadDeferredItems = () => {
-    const deferredItems = window.deferUntilKnownAuthState || [];
     if (deferredItems.length && (!loadedDeferredItemsRef.current || window.connextAuthTriggerEnabled)) {
       const adInstance = ArcAdLib.getInstance();
       const articleBodyContainer = document.querySelector('.c-articleBodyContainer');
@@ -71,6 +76,7 @@ export const ConnextAuthTrigger = () => {
               if (videoBlocker) {
                 videoBlocker.style.display = 'none';
               }
+              leadVideoLoaded = true;
             } else {
               // it's an inline video, so change the className to `powa`...
               const videoPlaceholder = document.querySelector('.powa-lazyLoad') || {};
@@ -260,8 +266,33 @@ export const ConnextAuthTrigger = () => {
     }
 
     document.onreadystatechange = () => {
-      if (document.readyState === 'complete' && UserState === 'Subscribed') {
-        loadDeferredItems();
+      if (document.readyState === 'complete') {
+        if (UserState === 'Subscribed') {
+          loadDeferredItems();
+        }
+
+        // One last check in the deffered items for video since video isnt always available while rendering
+        if (!leadVideoLoaded && promoType === 'video') {
+          window.deferUntilKnownAuthState.forEach((item) => {
+            Object.keys(item).forEach((key) => {
+              if (key === 'video') {
+                // it's a video player
+                const videoPlayer = item[key][0];
+                const videoIsLead = item[key][1];
+                const videoBlocker = window.document.querySelector('.video-blocker');
+                if (videoIsLead) {
+                  // it's a lead video (and thus already instantiated) so just trigger it to play
+                  videoPlayer.play();
+                  videoPlayer.showControls();
+                  if (videoBlocker) {
+                    videoBlocker.style.display = 'none';
+                  }
+                  leadVideoLoaded = true;
+                }
+              }
+            });
+          });
+        }
       }
     };
   }, []);
