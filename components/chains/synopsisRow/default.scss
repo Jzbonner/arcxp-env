@@ -16,6 +16,10 @@
 
   .c-homeLeadContainer {
     @include breakpoint(tablet) {
+      margin-bottom: $min-Msection-margin;
+    }
+
+    @include breakpoint(desktop-lg) {
       margin-bottom: 0;
     }
 
