@@ -74,7 +74,10 @@ export default (arcSite, apiData, width, height, useSrcSet, srcSetSizes, squareI
     const newArrData = apiData;
 
     newArrData.forEach((el) => {
-      const imageEl = el.teaseImageObject || el.promo_items?.basic;
+      let imageEl = el.teaseImageObject || el.promo_items?.basic;
+      if (!imageEl && el.type === 'image') {
+        imageEl = el;
+      }
       imagesToFetch.push(imageEl);
     });
 

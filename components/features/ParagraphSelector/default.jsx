@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
+import ContentElements from '../../_helper_components/article/contentElements/default.jsx';
 import filterContentElements from '../../layouts/_helper_functions/article/filterContentElements';
 
 const ParagraphSelector = (props) => {
@@ -18,9 +19,10 @@ const ParagraphSelector = (props) => {
 
     const { content_elements: contentElements } = embedData;
     if (contentElements.length) {
+      const startIndex = start <= 0 ? 0 : start - 1;
       const filteredContentElements = filterContentElements({ contentElements });
-      const sectionContent = filteredContentElements.slice(start, start + length);
-      return sectionContent.map((el, i) => <p key={i}>{el.content}</p>);
+      const sectionContent = filteredContentElements.slice(startIndex, startIndex + length);
+      return <ContentElements contentElements={sectionContent} ampPage={false} />;
     }
     return null;
   };
