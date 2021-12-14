@@ -61,11 +61,11 @@ const RedesignNavLinks = ({
       <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
         <img src={darkMode ? HamburgerDark : Hamburger} alt='Hamburger icon'></img>
       </div>
-      <div className={`sticky-logo-homepage ${siteName}`}>
+      {logoPath && siteName && <div className={`sticky-logo-homepage ${siteName}`}>
         <a href="/">
           <img src={logoPath} className={siteName} alt={`${siteName} logo`} />
         </a>
-      </div>
+      </div>}
       <div className='stickyNav-homepage'>
         <ul>
           {items}
