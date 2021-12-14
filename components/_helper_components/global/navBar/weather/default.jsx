@@ -20,10 +20,10 @@ const Weather = ({ weatherPageUrl }) => {
 
   return (
     <div className="c-weather">
-      <li className={`nav-weather weather-icon weather-${icon}`} title={text}></li>
-      <li className='nav-itemText nav-weather weather-text'>
+      <div className={`nav-weather weather-icon weather-${icon}`} title={text}></div>
+      <div className='nav-itemText nav-weather weather-text'>
         {temp && <a href={weatherPageUrl}>{temp}&deg;</a>}
-      </li>
+      </div>
     </div>
   );
 };
