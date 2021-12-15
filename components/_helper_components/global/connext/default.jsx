@@ -283,7 +283,7 @@ export const ConnextAuthTrigger = () => {
             // it's a video player
             const videoPlayer = item[key][0];
             const videoIsLead = item[key][1];
-            const videoBlocker = window.document.querySelector('.video-blocker');
+            const videoBlocker = document.querySelector('.video-blocker');
             if (videoIsLead) {
               // it's a lead video (and thus already instantiated) so just trigger it to play
               videoPlayer.play();
