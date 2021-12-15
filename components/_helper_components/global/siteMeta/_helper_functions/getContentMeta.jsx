@@ -100,6 +100,7 @@ const getContentMeta = () => {
     isStaff,
     isWeather,
     isError,
+    isList,
     isLiveUpdate,
     isAuthor,
     isTraffic,
@@ -118,8 +119,8 @@ const getContentMeta = () => {
     pageContentType = 'liveupdates';
   } else if (isAuthor) {
     pageContentType = 'author';
-  } else if (isEnhancedList) {
-    pageContentType = 'enhancedList';
+  } else if (isEnhancedList || isList) {
+    pageContentType = 'list';
   } else if (isStaff) {
     pageContentType = 'staff';
   } else if (isWeather) {
