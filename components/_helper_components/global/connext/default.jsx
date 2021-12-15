@@ -20,6 +20,7 @@ export const ConnextAuthTrigger = () => {
   const { type: promoType = '' } = basicItems || {};
   const currentEnv = fetchEnv();
   const { connext } = getProperties(arcSite);
+  const [readyState, setReadyState] = useState(false);
   const [loadedDeferredItems, _setLoadedDeferredItems] = useState(false);
   const loadedDeferredItemsRef = React.useRef(loadedDeferredItems);
   const [localStorageAuthCheckComplete, _setLocalStorageAuthCheckComplete] = useState(false);
@@ -268,32 +269,35 @@ export const ConnextAuthTrigger = () => {
         if (UserState === 'Subscribed') {
           loadDeferredItems();
         }
-
-        // One last check in the deffered items for video since video isnt always available while rendering
-        if (!leadVideoLoaded && promoType === 'video') {
-          window.deferUntilKnownAuthState.forEach((item) => {
-            Object.keys(item).forEach((key) => {
-              if (key === 'video') {
-                // it's a video player
-                const videoPlayer = item[key][0];
-                const videoIsLead = item[key][1];
-                const videoBlocker = window.document.querySelector('.video-blocker');
-                if (videoIsLead) {
-                  // it's a lead video (and thus already instantiated) so just trigger it to play
-                  videoPlayer.play();
-                  videoPlayer.showControls();
-                  if (videoBlocker) {
-                    videoBlocker.style.display = 'none';
-                  }
-                  leadVideoLoaded = true;
-                }
-              }
-            });
-          });
-        }
+        setReadyState(true);
       }
     };
   }, []);
+
+  useEffect(() => {
+    // One last check in the deffered items for video since video isnt always available while rendering
+    if (!leadVideoLoaded && promoType === 'video' && readyState) {
+      deferredItems.forEach((item) => {
+        Object.keys(item).forEach((key) => {
+          if (key === 'video') {
+            // it's a video player
+            const videoPlayer = item[key][0];
+            const videoIsLead = item[key][1];
+            const videoBlocker = window.document.querySelector('.video-blocker');
+            if (videoIsLead) {
+              // it's a lead video (and thus already instantiated) so just trigger it to play
+              videoPlayer.play();
+              videoPlayer.showControls();
+              if (videoBlocker) {
+                videoBlocker.style.display = 'none';
+              }
+              leadVideoLoaded = true;
+            }
+          }
+        });
+      });
+    }
+  }, [readyState]);
 };
 
 const ConnextInit = ({ triggerLoginModal = false }) => {
