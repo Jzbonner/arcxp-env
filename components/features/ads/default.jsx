@@ -22,7 +22,7 @@ const ArcAd = ({
   const fusionContext = useFusionContext();
   const { isAdmin } = appContext;
   const { arcSite } = fusionContext;
-  const { slot: customFieldsSlot } = customFields || {};
+  const { slot: customFieldsSlot, lazy: lazyLoadedFromPb } = customFields || {};
   const currentEnv = fetchEnv();
   const {
     dfp_id: dfpid,
@@ -161,7 +161,7 @@ const ArcAd = ({
       adSlotNameForArcAds={adSlotNameForArcAds}
       targeting={{ ...globalTargeting, ...targeting }}
       bidding={adsPrebidSlots[slotBiddingName] || { prebid: false, amazon: false }}
-      lazyLoad={lazyLoad}
+      lazyLoad={lazyLoad || lazyLoadedFromPb}
     />
   );
 
@@ -182,6 +182,8 @@ ArcAd.propTypes = {
       'HP00',
       'HP01',
       'HP02',
+      'HP03',
+      'HP04',
       'HP05',
       'HS02',
       'MP01',
@@ -211,6 +213,11 @@ ArcAd.propTypes = {
     ]).tag({
       name: 'Slot ID',
       description: 'Select the ad slot to be inserted',
+      value: '',
+    }),
+    lazy: PropTypes.bool.tag({
+      label: 'Lazy load',
+      description: 'Check this box to mark this slot as lazy load-able (i.e. can render below the paygate).',
       value: '',
     }),
   }),
