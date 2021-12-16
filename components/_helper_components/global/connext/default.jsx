@@ -21,6 +21,7 @@ export const ConnextAuthTrigger = () => {
   const currentEnv = fetchEnv();
   const { connext } = getProperties(arcSite);
   const [readyState, setReadyState] = useState(false);
+  const [autoplayVideo, setAutoplayVideo] = useState(false);
   const [loadedDeferredItems, _setLoadedDeferredItems] = useState(false);
   const loadedDeferredItemsRef = React.useRef(loadedDeferredItems);
   const [localStorageAuthCheckComplete, _setLocalStorageAuthCheckComplete] = useState(false);
@@ -166,6 +167,7 @@ export const ConnextAuthTrigger = () => {
         );
         // there are > 0 articles remaining before hitting the limit
         loadDeferredItems();
+        setAutoplayVideo(true);
       } else {
         const numberOfArticlesViewed = window.Connext.Storage.GetViewedArticles();
         const numberOfArticlesLeft = () => {
@@ -216,6 +218,7 @@ export const ConnextAuthTrigger = () => {
             numberOfArticlesLeft(),
           );
           loadDeferredItems();
+          setAutoplayVideo(true);
         } else if (window?.sophi) {
           // the free limit has been exceeded and/or they are unauthorized; it's a paywall interaction, so trigger a Sophi event
           window.sophi.sendEvent(
@@ -276,7 +279,7 @@ export const ConnextAuthTrigger = () => {
 
   useEffect(() => {
     // One last check in the deffered items for video since video isnt always available while rendering
-    if (!leadVideoLoaded && promoType === 'video' && readyState) {
+    if (!leadVideoLoaded && promoType === 'video' && readyState && autoplayVideo) {
       deferredItems.forEach((item) => {
         Object.keys(item).forEach((key) => {
           if (key === 'video') {
