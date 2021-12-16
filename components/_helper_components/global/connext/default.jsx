@@ -249,6 +249,7 @@ export const ConnextAuthTrigger = () => {
             if (currentMeterLevel === 1 || UserState === 'Subscribed') {
               // it's "free" content (per connext), so load everything
               loadDeferredItems();
+              setAutoplayVideo(true);
             } else {
               localStorageAuthChecks();
             }
@@ -260,6 +261,7 @@ export const ConnextAuthTrigger = () => {
         } else {
           // either connext is disabled or the user is a subscriber per localstorage.  Either way, proceed with loading
           loadDeferredItems();
+          setAutoplayVideo(true);
         }
       });
       // connext is enabled & the user is not authorized, wait for the connext auth callback
