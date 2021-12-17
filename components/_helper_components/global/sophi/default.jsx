@@ -36,10 +36,8 @@ const SophiTags = ({ isAmp }) => {
   let sophiContentType = isNonContentPage ? 'section' : 'article';
   if (sophiType === 'article') {
     sophiContentType = 'article';
-  } else if (typeOfPage === 'gallery') {
-    sophiContentType = 'image';
-  } else if (typeOfPage === 'video') {
-    sophiContentType = 'video';
+  } else if (typeOfPage === 'gallery' || typeOfPage === 'video') {
+    sophiContentType = typeOfPage;
   }
   let sophiSection = topSection.indexOf('/') === 0 ? topSection.substr(1) : topSection;
   const sophiMainSection = sophiSection.indexOf('/') > -1 ? sophiSection.substr(0, sophiSection.indexOf('/')) : sophiSection;
