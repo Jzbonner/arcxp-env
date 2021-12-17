@@ -76,10 +76,11 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     const [{ url: inlineVideoURL }] = streams || {};
     const { url: promoImageUrl } = promoImage || {};
     const credit = credits?.afilliation?.[0]?.name || promoImage?.credits?.by?.[0]?.name || '';
-
-    return `<video width="640" height="384" controls poster="${imageResizer(promoImageUrl, siteID)}">
-              <source src=${inlineVideoURL} type="video/mp4" >
-            </video>
+    return `<embed type="raw">
+              <video style="width: 100%;" controls poster="${imageResizer(promoImageUrl, siteID)}">
+                  <source src=${inlineVideoURL} type="video/mp4" >
+               </video>
+            </embed>
             <p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${credit}</p>
             `;
   }
@@ -96,7 +97,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
 
     return `
       <embed type="raw">
-        <img src="${imageResizer(url, siteID)}" title="${imageCaption}" />
+        <img src="${imageResizer(url, siteID)}" title="${imageCaption}" alt="${imageCaption}"/>
       </embed>
     `;
   }
