@@ -89,6 +89,7 @@ const Image = ({
       || (imageType === 'isInlineImage' && !caption)
       || (imageType === 'isLeadImage' && giveCredit && !caption)
       || teaseContentType
+      || imageType === 'isAuthorImage'
     ) {
       return null;
     }
@@ -99,7 +100,7 @@ const Image = ({
   };
 
   const altTextContent = getAltText(altText, caption);
-  const outputCaptionAndCredit = imageType !== 'isHomepageImage' && imageType !== 'isFeatureImage';
+  const outputCaptionAndCredit = imageType !== 'isHomepageImage' && imageType !== 'isFeatureImage' && imageType !== 'isAuthorImage';
   const enableExpandableImage = imageType === 'isInlineImage' && layout === 'article-basic';
 
   if (img) {

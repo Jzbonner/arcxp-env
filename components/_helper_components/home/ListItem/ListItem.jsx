@@ -59,7 +59,7 @@ const ListItem = ({
   const [isMissingPromo, setIsMissingPromo] = useState('');
 
   const relativeURL = websiteUrl || canonicalUrl || '/';
-  const finalURL = canonicalSite && canonicalSite !== arcSite ? `//${fetchEnv() !== 'prod' ? 'sandbox' : 'www'}.${handleSiteName(canonicalSite)}.com${relativeURL}` : relativeURL;
+  const finalURL = canonicalSite && canonicalSite !== arcSite && arcSite === 'ajc' ? `//${fetchEnv() !== 'prod' ? 'sandbox' : 'www'}.${handleSiteName(canonicalSite)}.com${relativeURL}` : relativeURL;
   const isListPage = listPage ? 'listPage' : '';
   let defaultPromoWidth = 500;
   let defaultPromoHeight = 282;
