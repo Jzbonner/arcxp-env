@@ -24,7 +24,7 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
           rel='author'
         >
           <div className="content-profileImage">
-            <Image src={author.image} ampPage={ampPage} imageType="isInlineImage" width={100} height={100} />
+            <Image src={author.image} ampPage={ampPage} imageType="isAuthorImage" width={100} height={100} />
           </div>
         </a>
         );
@@ -32,7 +32,7 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
       } else {
         return (
           <div className="content-profileImage">
-            <Image src={author.image} ampPage={ampPage} imageType="isInlineImage" width={100} height={100} />
+            <Image src={author.image} ampPage={ampPage} imageType="isAuthorImage" width={100} height={100} />
           </div>
         );
       }
