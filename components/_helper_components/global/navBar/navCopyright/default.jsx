@@ -17,10 +17,10 @@ const NavCopyright = () => {
     <div className="nav-copyright">
         <div className="nav-social">
           <a href={domainFacebookURL} className="burger-fb" target="_blank" rel="noopener noreferrer">
-            <img src={facebookLogo} />
+            <img src={facebookLogo} alt='facebook logo' />
           </a>
           <a href={domainTwitterURL} className="burger-twitter" target="_blank" rel="noopener noreferrer">
-            <img src={twitterLogo} />
+            <img src={twitterLogo} alt='twitter logo' />
           </a>
         </div>
       <Copyright isSidebar/>

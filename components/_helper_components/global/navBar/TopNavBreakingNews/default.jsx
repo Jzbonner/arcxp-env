@@ -25,7 +25,10 @@ const TopNavBreakingNews = ({
   const windowExists = typeof window !== 'undefined';
   const { enableDarkMode, inMemoriam } = getContentMeta();
   const appContext = useAppContext();
-  const { isAdmin } = appContext;
+  const { isAdmin, globalContent } = appContext;
+  const { taxonomy } = globalContent || {};
+  const { tags = [] } = taxonomy || {};
+  const hasNoAdsTag = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
   const darkModeWithAds = !enableDarkMode || (enableDarkMode && !inMemoriam);
 
   const docHasWindowShade = (checkCollapse, checkHalfShade) => {
@@ -44,6 +47,8 @@ const TopNavBreakingNews = ({
     }
     return null;
   };
+
+  const storyHasShade = (docHasWindowShade(true) && !hasNoAdsTag) || (hasHalfShade && !hasNoAdsTag) ? 'with-half-shade' : '';
 
   const handleScroll = debounce(() => {
     const { scrollY } = window;
@@ -93,7 +98,7 @@ const TopNavBreakingNews = ({
   return (
     <>
       {!noAds && darkModeWithAds && !isAdmin && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
-      <div className={`nav-breaking-news ${enableDarkMode ? 'dark-mode' : ''} ${aboveWindowShade ? 'is-above-shade' : ''} ${docHasWindowShade(true) || hasHalfShade ? 'with-half-shade' : ''}`} >
+      <div className={`nav-breaking-news ${enableDarkMode ? 'dark-mode' : ''} ${aboveWindowShade ? 'is-above-shade' : ''} ${storyHasShade}`} >
         <WeatherAlerts />
         <NavBar
           articleURL={articleURL}

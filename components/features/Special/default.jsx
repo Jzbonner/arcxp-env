@@ -34,7 +34,7 @@ const Special = (customFields = {}) => {
              backgroundSize: 'cover',
            }}>
         <div className="c-call-to-action">
-          {icon ? <img className="action-icon" src={getIcon()} /> : null}
+          {icon ? <img className="action-icon" src={getIcon()} alt="Action icon"/> : null}
           {title ? <div className="action-text">
             <span>{`${title}`}</span>
           </div> : null}

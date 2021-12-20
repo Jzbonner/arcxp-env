@@ -82,7 +82,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
                </video>
             </embed>
             <p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${credit}</p>
-            `;
+          `;
   }
 
   if (type === 'interstitial_link') {

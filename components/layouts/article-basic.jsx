@@ -323,7 +323,7 @@ const StoryPageLayout = () => {
       </>}
       {ampPage && <Carousel storyId={uuid} taxonomy={taxonomy} />}
       {/* if it's a metered story, add the connext auth handlers to load deferred items (e.g. anything with `lazyLoad` above) */}
-      {isMeteredStory && ConnextAuthTrigger()}
+      {isMeteredStory && !ampPage && ConnextAuthTrigger()}
     </>
   );
 };

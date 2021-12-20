@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useAppContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import CustomInfoBox from '../../_helper_components/embed/CustomInfoBox/default';
 import LiveUpdates from '../../_helper_components/embed/LiveUpdates/default';
@@ -20,9 +20,7 @@ const ComposerEmbed = (props) => {
   const { customFields, composerHtml } = props;
   const { id, borderColor, taboola } = customFields || {};
   const appContext = useAppContext();
-  const { globalContent } = appContext;
-  const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
+  const { globalContent, arcSite } = appContext;
   let embedId = id;
   const renderEmbed = (embedData) => {
     /* function to actually pass the embed doc's data to the relevant child component */

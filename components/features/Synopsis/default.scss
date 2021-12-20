@@ -9,6 +9,10 @@
 
       .c-synopsis {
         width: 100%;
+
+        @include breakpoint(desktop-lg) {
+          margin-left: 0;
+        }
       }
     }
 

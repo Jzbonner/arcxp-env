@@ -698,16 +698,16 @@ const Gallery = (props) => {
           <div className="gallery-overlay hidden-large">{isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null}</div>
           <div className="gallery-count view-gallery">
             <div className="gallery-count-prev hidden-small hidden-medium" onClick={() => changeIndex(actions.PREV, null, false)}>
-              <img src={leftArrow} />
+              <img src={leftArrow} alt="Left arrow"/>
             </div>
             <div className="mobile-change">
               <a>
-                <img src={middleBox} className="icon-gallery" />
+                <img src={middleBox} className="icon-gallery" alt="Mobile gallery icon"/>
               </a>
               <div className="icon-text hidden-large">View Gallery</div>
             </div>
             <div className="gallery-count-next hidden-small hidden-medium" onClick={() => changeIndex(actions.NEXT, null, false)}>
-              <img src={rightArrow} />
+              <img src={rightArrow} alt="Right arrow"/>
             </div>
             <div className="count--box hidden-small hidden-medium">
               <span className="gallery-index">{currentIndex + 1} / </span>

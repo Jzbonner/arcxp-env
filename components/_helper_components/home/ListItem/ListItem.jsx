@@ -11,6 +11,8 @@ import ContributorBadge from '../../../_helper_components/global/contributorBadg
 import getSponsorData from '../../../layouts/_helper_functions/getSponsorData';
 import ListItemPreview from '../ListItemPreview/ListItemPreview';
 import getTeaseIcon from '../../global/image/_helper_functions/getTeaseIcon';
+import fetchEnv from '../../global/utils/environment';
+import handleSiteName from '../../../layouts/_helper_functions/handleSiteName';
 
 const ListItem = ({
   label,
@@ -19,6 +21,7 @@ const ListItem = ({
   display_date: displayDate,
   headlines = [],
   canonical_url: canonicalUrl,
+  canonical_website: canonicalSite,
   website_url: websiteUrl,
   listPage,
   type: contentType,
@@ -36,7 +39,7 @@ const ListItem = ({
   isStaffBioPage = false,
 }) => {
   const appContext = useAppContext();
-  const { requestUri } = appContext;
+  const { arcSite, requestUri } = appContext;
   const { tags = [], sections } = taxonomy || {};
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(
@@ -56,6 +59,7 @@ const ListItem = ({
   const [isMissingPromo, setIsMissingPromo] = useState('');
 
   const relativeURL = websiteUrl || canonicalUrl || '/';
+  const finalURL = canonicalSite && canonicalSite !== arcSite && arcSite === 'ajc' ? `//${fetchEnv() !== 'prod' ? 'sandbox' : 'www'}.${handleSiteName(canonicalSite)}.com${relativeURL}` : relativeURL;
   const isListPage = listPage ? 'listPage' : '';
   let defaultPromoWidth = 500;
   let defaultPromoHeight = 282;
@@ -110,12 +114,12 @@ const ListItem = ({
     return null;
   }
 
-  if (relativeURL === '/') return null;
+  if (finalURL === '/') return null;
 
   return (
     <div className={`c-homeList ${isListPage} ${isMissingPromo} ${hidePromo ? 'no-photo' : ''} ${isLeftPhotoNoPhotoItem && !hidePromo ? 'left-photo' : ''} ${isStaffBioPage ? 'staffBio-listItem' : ''} ${noBorder ? 'no-border-bottom' : ''}`}>
       {!hidePromo && getPromoItem() && !isDontMissFeature && !isSynopsis && (
-        <a href={relativeURL} className="homeList-image">
+        <a href={finalURL} className="homeList-image">
           <Image src={getPromoItem()} width={promoWidth} height={promoHeight} imageType="isHomepageImage" teaseContentType={contentType === 'video' || contentType === 'gallery' ? contentType : null} squareImage={isListPage === 'listPage'}/>
             {!isLeftPhotoNoPhotoItem && sponsorName && <div className="c-sponsorOverlay">{sponsorName}</div>}
           </a>
@@ -124,7 +128,7 @@ const ListItem = ({
         {!hidePromo && !isDontMissFeature && !isSynopsis && getTeaseIcon(contentType)}
         <div className="c-label-wrapper">{getLabelContent(sponsorName)}</div>
         <div className={`headline ${isListPage}`}>
-          <a href={relativeURL}>
+          <a href={finalURL}>
             {truncateHeadline(headlines.basic, !isSynopsis)}
           </a>
           {showPreview && <ListItemPreview id={id} />}
@@ -149,6 +153,7 @@ ListItem.propTypes = {
   listPage: PropTypes.bool,
   type: PropTypes.string,
   canonical_url: PropTypes.string,
+  canonical_website: PropTypes.string,
   website_url: PropTypes.string,
   showPreview: PropTypes.bool,
   _id: PropTypes.string,

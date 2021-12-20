@@ -236,7 +236,7 @@ class Api {
 
           return galleryXmlObject;
         }
-        if (item?.stats?.type && source === 'most-read') {
+        if (item?.stats?.type && source === 'most-read' && title) {
           const path = item.path ? item.path : '';
 
           const xmlObject = {

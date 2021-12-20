@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext, useComponentContext } from 'fusion:context';
 
@@ -7,11 +7,17 @@ const pageRefresh = () => {
   const componentContext = useComponentContext();
   const appContext = useAppContext();
   const { isAdmin } = appContext;
-  const { refreshActive, refreshInterval = 300 } = componentContext.customFields;
+  const { refreshActive, refreshInterval } = componentContext.customFields;
 
-  if (!isAdmin && refreshActive && refreshInterval) {
-    return <meta httpEquiv='refresh' content={refreshInterval} />;
-  }
+  useEffect(() => {
+    if (!isAdmin && refreshActive) {
+      const meta = document.createElement('meta');
+      meta.httpEquiv = 'refresh';
+      meta.content = refreshInterval || '300';
+      document.getElementsByTagName('head')[0].appendChild(meta);
+    }
+  }, []);
+
   return null;
 };
 

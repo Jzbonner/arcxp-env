@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ImageModal = ({ src = '', isVisible }) => (
     <div className={`c-image-modal ${isVisible ? 'image-modal-active' : ''}`}>
-     {src && <img src={src} />}
+     {src && <img src={src} alt='Gallery image modal' />}
     </div>
 );
 
