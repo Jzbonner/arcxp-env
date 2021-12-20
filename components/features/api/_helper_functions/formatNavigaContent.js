@@ -80,9 +80,9 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
               <video style="width: 100%;" controls poster="${imageResizer(promoImageUrl, siteID)}">
                   <source src=${inlineVideoURL} type="video/mp4" >
                </video>
-               <p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${credit}</p>
             </embed>
-            `;
+            <p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${credit}</p>
+          `;
   }
 
   if (type === 'interstitial_link') {
