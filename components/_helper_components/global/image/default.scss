@@ -118,6 +118,7 @@
     img {
       max-height: 60vh;
       width: auto;
+      justify-self: center;
     }
 
     .c-caption,
@@ -152,6 +153,7 @@
         .photo-credit-text {
           display: block;
           color: #fff;
+          text-align: left;
 
           @include text-styles(1rem, 1, "Gordita");
         }
