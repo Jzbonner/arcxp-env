@@ -22,6 +22,7 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
   return (
     <div className="c-contentElements" data-start-index={startIndex || null}>
       {contentElements.map((element, i) => {
+        const count = i + 1;
         switch (element.type) {
           case 'div':
             // returns inserted ads
@@ -37,7 +38,7 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
             return <Gallery src={element} key={`Gallery-${i}`} />;
           case 'raw_html':
             if (ampPage) return <AmpEmbedWrapper isHtml={true} element={element} key={`Raw_HTML-${i}`} />;
-            return <HTML src={element} key={`Raw_HTML-${i}`} index={i} />;
+            return <HTML src={element} key={`Raw_HTML-${i}`} index={count} />;
           case 'header':
             return <Header src={element} key={`Header-${i}`} />;
           case 'image':
@@ -55,7 +56,7 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
               />
             );
           case 'text':
-            return <Paragraph src={element} key={`Paragraph-${i}`} index={i} />;
+            return <Paragraph src={element} key={`Paragraph-${i}`} index={count} />;
           case 'interstitial_link':
             return <InterstitialLink src={element} key={`InterstitialLink-${i}`} />;
           case 'list':
@@ -64,7 +65,7 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
             return <Divider key={`Divider-${i}`} />;
           case 'oembed_response':
             if (ampPage) return <AmpEmbedWrapper element={element.raw_oembed} key={`Oembed-${i}`} />;
-            return <Oembed src={element} key={`Oembed-${i}`} index={i} />;
+            return <Oembed src={element} key={`Oembed-${i}`} index={count} />;
           case 'table':
             // See APD-451, this element will be worked at a later time.
             // return <Table src={element} key={`Table-${i}`} />;
@@ -76,7 +77,7 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
                 maxTabletViewWidth={maxTabletViewWidth}
                 inlineVideoPlayerRules={inlineVideoPlayerRules}
                 key={`Video-${i}`}
-                index={i}
+                index={count}
               />;
           default:
             if (
