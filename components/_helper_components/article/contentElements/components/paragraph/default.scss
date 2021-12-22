@@ -2,27 +2,3 @@
 @import "./../../../../../../src/styles/base/mixins";
 @import "./../../../../../../src/styles/base/breakpoints";
 
-.story-text,
-.c-customHTML {
-  width: 100%;
-  color: #313132;
-
-  a {
-    color: $blue-text;
-    padding-bottom: 1px;
-
-    &:hover {
-      border-bottom: 1px solid $blue-text;
-    }
-  }
-
-  @include text-styles(1rem, 1.625, "Gordita");
-
-  @include breakpoint(desktop-sm) {
-    @include text-styles(1rem, 1.625, "Gordita");
-  }
-}
-
-.story-text {
-  margin-bottom: 25px;
-}

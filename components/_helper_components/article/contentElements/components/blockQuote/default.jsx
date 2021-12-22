@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import List from '../list/default.jsx';
 import Paragraph from '../paragraph/default.jsx';
-import './styles.scss';
+// import './styles.scss';
 
 const Blockquote = ({ contentElements, citation }) => (
   <div className="blockquote b-margin-bottom-d40-m20">

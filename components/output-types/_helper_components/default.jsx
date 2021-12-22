@@ -66,6 +66,7 @@ const RenderOutputType = (props) => {
         {currentSite && <>
           <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}/css/style.css`)}`} />
           <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/${currentSite}-${isNonContentPage ? 'pb' : 'content'}/css/style.css`)}`} />
+          <link rel="stylesheet" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/default-resets/css/style.css`)}`} />
         </>}
         <SophiTags />
         {includeGtm && (

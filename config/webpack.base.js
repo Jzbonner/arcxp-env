@@ -3,6 +3,7 @@ const paths = require('./paths');
 const rules = require('./rules');
 const entries = require('./entries');
 const plugins = require('./plugins');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 console.log(entries);
 
@@ -18,6 +19,11 @@ module.exports = env => ({
   output: {
     path: paths.dist,
     filename: '[name]/js/index.js',
+  },
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin(),
+    ],
   },
   plugins: plugins(env, entries),
 });

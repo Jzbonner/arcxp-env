@@ -1,29 +1,2 @@
 @import "../../../../../../src/styles/base/breakpoints";
 @import "../../../../../../src/styles/base/mixins";
-
-.blockquote {
-  border-left: 10px solid #2e81b7;
-  padding-left: 20px;
-
-  .story-text,
-  li {
-    @include text-styles(1em, 1.6, "Gordita-Bold");
-
-    font-weight: 800;
-
-    @include breakpoint(desktop-sm) {
-      @include text-styles(1.25em, 2, "Gordita-Bold");
-    }
-  }
-
-  .blockquote-citation {
-    @include text-styles(.8em, .8, "Gordita");
-
-    color: #313132;
-    font-style: 400;
-
-    @include breakpoint(desktop-sm) {
-      @include text-styles(1em, 1, "Gordita");
-    }
-  }
-}

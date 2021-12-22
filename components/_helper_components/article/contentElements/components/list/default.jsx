@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SubList from '../list/default';
 import { safeHtml } from '../../../../global/utils/stringUtils';
-import './styles.scss';
+// import './styles.scss';
 
 const List = (props) => {
   const { src = {}, childList = false } = props;
