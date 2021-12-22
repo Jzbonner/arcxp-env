@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useAppContext } from 'fusion:context';
 import AdSetup from './src/index';
 import fetchEnv from '../../_helper_components/global/utils/environment.js';
 import { adSlots, defaultAdSlot } from './children/adtypes';
@@ -19,10 +19,25 @@ const ArcAd = ({
 }) => {
   const { temp, text: sky, precipitation: weather } = currentConditions() || {};
   const appContext = useAppContext();
-  const fusionContext = useFusionContext();
-  const { isAdmin } = appContext;
-  const { arcSite } = fusionContext;
-  const { slot: customFieldsSlot, lazy: lazyLoadedFromPb } = customFields || {};
+  const { isAdmin, arcSite, renderables } = appContext;
+  const { slot: customFieldsSlot, lazy: lazyLoadedFromPb, pbInternal_cloneId: pbCloneId } = customFields || {};
+  let pbAdIndex = '';
+  if (pbCloneId && renderables && renderables.length) {
+    const features = renderables.filter((item) => {
+      const { collection } = item;
+      return collection === 'features';
+    });
+    if (features.length) {
+      const ads = features.filter(feat => feat.type === 'ads/default');
+      ads.forEach((ad, i) => {
+        const { props: adProps } = ad || {};
+        const { customFields: adFields } = adProps || {};
+        if (adFields.slot === customFieldsSlot && adFields.pbInternal_cloneId !== pbCloneId) {
+          pbAdIndex = `-${i}`;
+        }
+      });
+    }
+  }
   const currentEnv = fetchEnv();
   const {
     dfp_id: dfpid,
@@ -138,7 +153,7 @@ const ArcAd = ({
   }
 
   if (isAdmin && adConfig.dimensions[0][0] !== 1) {
-    return <div style={{
+    return <div className={`arc_ad ${slotName}`} style={{
       background: '#efefef',
       fontSize: '30px',
       color: '#000',
@@ -156,7 +171,7 @@ const ArcAd = ({
       dimensions={adConfig.dimensions || defaultAdSlot.dimensions}
       dfpId={dfpIdFormatted}
       display={adConfig.display || defaultAdSlot.display}
-      id={`${customId}` || `${defaultAdSlot.name}${staticSlotFormatted || slot.replace(/ /g, '-').replace(/[()]/g, '')}${adSuffix}`}
+      id={`${customId}` || `${defaultAdSlot.name}${staticSlotFormatted || slot.replace(/ /g, '-').replace(/[()]/g, '')}${adSuffix || pbAdIndex}`}
       slotName={slotName}
       adSlotNameForArcAds={adSlotNameForArcAds}
       targeting={{ ...globalTargeting, ...targeting }}
