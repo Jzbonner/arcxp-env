@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../../../../../../src/styles/base/_utility.scss';
 
-const Oembed = ({ src }) => {
+const Oembed = ({ src, index }) => {
   const {
     raw_oembed: rawOembed,
+    alignment,
   } = src || {};
   const {
     type,
@@ -38,16 +39,15 @@ const Oembed = ({ src }) => {
   return (
     <div
       data-oembed-type={type}
-      className='b-flexRow b-flexCenter b-margin-bottom-d40-m20'
-      dangerouslySetInnerHTML={{ __html: filteredHtml }} />
+      className={`b-flexRow b-flexCenter b-margin-bottom-d40-m20 ${alignment ? `align-${alignment}` : ''}`}
+      dangerouslySetInnerHTML={{ __html: filteredHtml }}
+      data-index={index || null} />
   );
 };
 
 Oembed.propTypes = {
   src: PropTypes.object,
-  rawOembed: PropTypes.object,
-  type: PropTypes.string,
-  html: PropTypes.string,
+  index: PropTypes.number,
 };
 
 export default Oembed;

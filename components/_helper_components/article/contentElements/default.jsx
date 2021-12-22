@@ -37,7 +37,7 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
             return <Gallery src={element} key={`Gallery-${i}`} />;
           case 'raw_html':
             if (ampPage) return <AmpEmbedWrapper isHtml={true} element={element} key={`Raw_HTML-${i}`} />;
-            return <HTML src={element} key={`Raw_HTML-${i}`} />;
+            return <HTML src={element} key={`Raw_HTML-${i}`} index={i} />;
           case 'header':
             return <Header src={element} key={`Header-${i}`} />;
           case 'image':
@@ -55,7 +55,7 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
               />
             );
           case 'text':
-            return <Paragraph src={element} key={`Paragraph-${i}`} />;
+            return <Paragraph src={element} key={`Paragraph-${i}`} index={i} />;
           case 'interstitial_link':
             return <InterstitialLink src={element} key={`InterstitialLink-${i}`} />;
           case 'list':
@@ -64,7 +64,7 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
             return <Divider key={`Divider-${i}`} />;
           case 'oembed_response':
             if (ampPage) return <AmpEmbedWrapper element={element.raw_oembed} key={`Oembed-${i}`} />;
-            return <Oembed src={element} key={`Oembed-${i}`} />;
+            return <Oembed src={element} key={`Oembed-${i}`} index={i} />;
           case 'table':
             // See APD-451, this element will be worked at a later time.
             // return <Table src={element} key={`Table-${i}`} />;
@@ -76,6 +76,7 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
                 maxTabletViewWidth={maxTabletViewWidth}
                 inlineVideoPlayerRules={inlineVideoPlayerRules}
                 key={`Video-${i}`}
+                index={i}
               />;
           default:
             if (
