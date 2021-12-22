@@ -22,7 +22,7 @@ const ParagraphSelector = (props) => {
       const startIndex = start <= 0 ? 0 : start - 1;
       const filteredContentElements = filterContentElements({ contentElements });
       const sectionContent = filteredContentElements.slice(startIndex, startIndex + length);
-      return <ContentElements contentElements={sectionContent} ampPage={false} />;
+      return <ContentElements contentElements={sectionContent} ampPage={false} startIndex={startIndex} />;
     }
     return null;
   };

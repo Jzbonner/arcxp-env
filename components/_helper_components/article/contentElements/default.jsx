@@ -16,11 +16,11 @@ import AmpEmbedWrapper from '../../global/utils/amp-html/amp-embed-wrapper';
 // import Correction from './components/correction/default.jsx';
 // import Table from './components/table/default.jsx';
 
-const ContentElements = ({ contentElements, ampPage = false }) => {
+const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
   const { inlineVideoPlayerRules, maxTabletViewWidth } = getProperties();
 
   return (
-    <div className="c-contentElements">
+    <div className="c-contentElements" data-start-index={startIndex || null}>
       {contentElements.map((element, i) => {
         switch (element.type) {
           case 'div':
@@ -105,6 +105,7 @@ const ContentElements = ({ contentElements, ampPage = false }) => {
 ContentElements.propTypes = {
   contentElements: PropTypes.array,
   ampPage: PropTypes.boolean,
+  startIndex: PropTypes.number,
 };
 
 export default ContentElements;
