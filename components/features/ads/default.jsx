@@ -19,25 +19,10 @@ const ArcAd = ({
 }) => {
   const { temp, text: sky, precipitation: weather } = currentConditions() || {};
   const appContext = useAppContext();
-  const { isAdmin, arcSite, renderables } = appContext;
-  const { slot: customFieldsSlot, lazy: lazyLoadedFromPb, pbInternal_cloneId: pbCloneId } = customFields || {};
-  let pbAdIndex = '';
-  if (pbCloneId && renderables && renderables.length) {
-    const features = renderables.filter((item) => {
-      const { collection } = item;
-      return collection === 'features';
-    });
-    if (features.length) {
-      const ads = features.filter(feat => feat.type === 'ads/default');
-      ads.forEach((ad, i) => {
-        const { props: adProps } = ad || {};
-        const { customFields: adFields } = adProps || {};
-        if (adFields.slot === customFieldsSlot && adFields.pbInternal_cloneId !== pbCloneId) {
-          pbAdIndex = `-${i}`;
-        }
-      });
-    }
-  }
+  const { isAdmin, arcSite } = appContext;
+  const { slot: customFieldsSlot, lazy: lazyLoadedFromPb } = customFields || {};
+  // when setting ads as lazy loaded from pagebuilder, we apply a random suffix to ensure no duplicate div id's
+  const pbAdSuffix = lazyLoadedFromPb ? `-${Math.floor(Math.random() * 100000)}` : '';
   const currentEnv = fetchEnv();
   const {
     dfp_id: dfpid,
@@ -171,7 +156,7 @@ const ArcAd = ({
       dimensions={adConfig.dimensions || defaultAdSlot.dimensions}
       dfpId={dfpIdFormatted}
       display={adConfig.display || defaultAdSlot.display}
-      id={`${customId}` || `${defaultAdSlot.name}${staticSlotFormatted || slot.replace(/ /g, '-').replace(/[()]/g, '')}${adSuffix || pbAdIndex}`}
+      id={`${customId}` || `${defaultAdSlot.name}${staticSlotFormatted || slot.replace(/ /g, '-').replace(/[()]/g, '')}${adSuffix || pbAdSuffix}`}
       slotName={slotName}
       adSlotNameForArcAds={adSlotNameForArcAds}
       targeting={{ ...globalTargeting, ...targeting }}
