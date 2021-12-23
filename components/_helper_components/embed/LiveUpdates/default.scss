@@ -139,6 +139,13 @@
     max-width: 100%;
     margin: 20px auto 60px;
 
+    @include between-breakpoints(mobile, tablet) {
+
+      &.is-timeline .c-liveUpdateNav a .timestamp .timestamp-date {
+        display: block;
+      }
+    }
+
     .c-liveUpdateNav {
       flex: 0 0 50px;
       align-self: flex-start;
@@ -268,12 +275,12 @@
 
           .timestamp-date {
             display: none;
-            margin-right: 8px;
 
             @include breakpoint(tablet) {
 
               &:not(.same-day) {
                 display: inline-block;
+                margin-right: 8px;
               }
             }
           }
@@ -519,7 +526,6 @@
 
       .byline {
         display: inline-block;
-        margin-left: 8px;
         letter-spacing: -.15px;
 
         @include text-styles(.75rem, 1, "Gordita");
@@ -527,13 +533,11 @@
         @include between-breakpoints(tablet, desktop-lg) {
           font-size: .875rem;
           letter-spacing: -.18px;
-          margin-left: 12px;
         }
 
         @include breakpoint(desktop-lg) {
           font-size: 1rem;
           letter-spacing: -.2px;
-          margin-left: 12px;
         }
 
         span:not(:last-child) {
@@ -553,6 +557,7 @@
         text-align: center;
         display: inline-block;
         letter-spacing: -.18px;
+        margin-right: 8px;
 
         @include text-styles(.875rem, 1, "Lora-Bold");
 
@@ -560,6 +565,7 @@
           letter-spacing: -.25px;
           font-size: 1.25rem;
           padding: 15px;
+          margin-right: 12px;
         }
       }
 

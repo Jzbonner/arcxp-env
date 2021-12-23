@@ -18,7 +18,12 @@ import LiveUpdates from '../../_helper_components/embed/LiveUpdates/default';
 */
 const ComposerEmbed = (props) => {
   const { customFields, composerHtml } = props;
-  const { id, borderColor, taboola } = customFields || {};
+  const {
+    id,
+    borderColor,
+    taboola,
+    timeline,
+  } = customFields || {};
   const appContext = useAppContext();
   const { globalContent, arcSite } = appContext;
   let embedId = id;
@@ -27,7 +32,7 @@ const ComposerEmbed = (props) => {
     const { type, subtype } = embedData;
 
     if (!type && embedData.length) {
-      return <LiveUpdates data={embedData} enableTaboola={taboola} />;
+      return <LiveUpdates data={embedData} enableTaboola={taboola} isTimeline={timeline} />;
     }
 
     if (type !== 'story') return <p>this feature is only compatible with stories (and this is `&lsquo;${type}&rsquo;` content)</p>;
@@ -77,6 +82,11 @@ ComposerEmbed.propTypes = {
     taboola: PropTypes.bool.tag({
       label: 'Enable Taboola',
       description: 'Check this box to enable Taboola (applies to "Live Update" stories only)',
+      value: '',
+    }),
+    timeline: PropTypes.bool.tag({
+      label: 'Is this a timeline?',
+      description: 'Check this box to identify this embedded content as a timeline display (e.g. for live updates)',
       value: '',
     }),
     id: PropTypes.text.tag({
