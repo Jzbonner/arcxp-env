@@ -1,9 +1,6 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 module.exports = {
   components: ['components/layouts/*.jsx'],
   webpackConfig: {
-    plugins: [new MiniCssExtractPlugin()],
     module: {
       rules: [
         // Babel loader, will use your project’s .babelrc
