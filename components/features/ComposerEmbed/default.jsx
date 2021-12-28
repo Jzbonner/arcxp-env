@@ -32,7 +32,9 @@ const ComposerEmbed = (props) => {
     const { type, subtype } = embedData;
 
     if (!type && embedData.length) {
-      return <LiveUpdates data={embedData} enableTaboola={taboola} isTimeline={timeline} />;
+      // it's not an individual story but a collection, so process as live Updates
+      // for timelines, we reverse-order the data
+      return <LiveUpdates data={timeline ? embedData.reverse() : embedData} enableTaboola={taboola} isTimeline={timeline} />;
     }
 
     if (type !== 'story') return <p>this feature is only compatible with stories (and this is `&lsquo;${type}&rsquo;` content)</p>;
