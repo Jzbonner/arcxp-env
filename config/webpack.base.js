@@ -22,7 +22,16 @@ module.exports = env => ({
   },
   optimization: {
     minimizer: [
-      new CssMinimizerPlugin(),
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            "default",
+            {
+              discardDuplicates: true,
+            },
+          ],
+        },
+      }),
     ],
   },
   plugins: plugins(env, entries),
