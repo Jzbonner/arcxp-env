@@ -383,7 +383,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
 
   return <div className={`c-liveUpdates ${isTimeline ? 'is-timeline' : ''}`}>
     <div className='c-liveUpdateNav'>
-      <div className='c-navTitle'><span className='hidden-mobile'>Latest Updates</span></div>
+      <div className='c-navTitle'><span className='hidden-mobile'>{isTimeline ? 'Timeline' : 'Latest Updates'}</span></div>
       {loopThroughUpdates(true)}
     </div>
     <div className='c-liveUpdateContent'>
