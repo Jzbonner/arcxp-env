@@ -39,7 +39,7 @@ const LoadMoreButton = ({
 
   return (
     <button className={`btn-loadMore  b-margin-bottom-d30-m20 ${buttonState}`} onClick={handleBtnClick}>
-      {buttonState === 'default' && <>{'Load More'} <img className="arrow" src={arrow} /></>}
+      {buttonState === 'default' && <>{'Load More'} <img className="arrow" src={arrow} alt="Arrow to load more stories"/></>}
       {buttonState === 'data-max-reached' && 'No More Results'}
       {buttonState === 'data-loading' && (
         <>

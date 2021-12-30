@@ -32,7 +32,7 @@
 
     &.border-horizontal {
       height: 1px;
-      margin: 0 5px;
+      margin-left: 5px;
     }
 
     &.border-vertical {
@@ -61,15 +61,10 @@
   .liveUpdateSnippets-body {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 
     @include breakpoint(tablet) {
-      gap: 2rem;
-      flex-flow: row wrap;
-    }
-
-    @include breakpoint(desktop-sm) {
       gap: 1rem;
+      flex-flow: row wrap;
     }
 
     @include breakpoint(desktop-lg) {
@@ -88,12 +83,34 @@
     .c-liveUpdatesContainer {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
       min-width: 66%;
+
+      .col-2 {
+        margin-bottom: 15px;
+
+        &:last-child {
+          border-bottom: 1px solid #cdcdcd;
+        }
+      }
+
+      @include between-breakpoints(mobile, desktop-sm) {
+
+        h1 {
+          padding-bottom: 0;
+        }
+      }
 
       @include breakpoint(tablet) {
         flex-direction: row;
         gap: 2rem;
+
+        .col-2 {
+          margin-bottom: 0;
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
       }
 
       @include breakpoint(desktop-sm) {
@@ -113,20 +130,20 @@
         margin: 0;
 
         .c-title-content {
-          @include text-styles(1.56rem, 1.12, "Lora-Regular");
+          @include text-styles(1.56rem, 1.12, "Lora-Bold");
 
           letter-spacing: -.31px;
           margin: 0;
           border: none;
 
           @include breakpoint(tablet) {
-            @include text-styles(1.625rem, 1.12, "Lora-Regular");
+            @include text-styles(1.625rem, 1.12, "Lora-Bold");
 
             letter-spacing: -.43px;
           }
 
           @include breakpoint(desktop-sm) {
-            @include text-styles(1.875rem, 1.13, "Lora-Regular");
+            @include text-styles(1.875rem, 1.13, "Lora-Bold");
 
             letter-spacing: -.5px;
           }

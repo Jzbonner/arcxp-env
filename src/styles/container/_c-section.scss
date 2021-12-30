@@ -203,6 +203,7 @@
         margin: 0;
 
         @include breakpoint(tablet) {
+          display: none;
           margin: 0 auto;
 
           @include arc-ad-full-width;

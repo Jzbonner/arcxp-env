@@ -2,6 +2,7 @@
 // A pick function is used to filter data because a Sources Include parameter can't be used with the collection api.
 export default [
   'canonical_url',
+  'canonical_website',
   'content_elements',
   'credits.by',
   'credits.by[0]',
@@ -74,4 +75,5 @@ export default [
   'type',
   'website_url',
   '_id',
+  'streams',
 ];

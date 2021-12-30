@@ -31,7 +31,7 @@ const BreakingNewsStory = () => {
   const [story] = get(newsData, 'content_elements', []);
   const { _id: collectionId } = newsData || {};
   const breakingNewsLSLookup = `dismissed_breaking_news_${siteName}_${currentEnv.toUpperCase()}`;
-  const dismissedCollectionStorage = JSON.parse(window.localStorage.getItem(breakingNewsLSLookup));
+  const dismissedCollectionStorage = typeof window !== 'undefined' ? JSON.parse(window.localStorage.getItem(breakingNewsLSLookup)) : null;
 
   const saveCollection = () => {
     if (!dismissedCollectionStorage) {
@@ -40,7 +40,7 @@ const BreakingNewsStory = () => {
       };
       window.localStorage.setItem(breakingNewsLSLookup, JSON.stringify(initialCollectionEntry));
     } else {
-      const { collectionArray } = dismissedCollectionStorage;
+      const { collectionArray } = dismissedCollectionStorage || {};
       const additionalCollectionEntry = {
         collectionArray: [collectionId, ...collectionArray],
       };
@@ -59,7 +59,7 @@ const BreakingNewsStory = () => {
     const headline = get(story, 'headlines.basic', '');
     const url = get(story, 'canonical_url', '');
     return (
-      <div className={`c-breakingNews b-sectionHomeMaxWidth ${isBannerDismissed ? 'is-hidden' : ''}`}>
+      <div className={`c-breakingNews ${isBannerDismissed ? 'is-hidden' : ''}`}>
         <a href={url} className="breakingURL">
           <div className="c-breakingNews-heading b-flexCenter">
             <span>Breaking</span>

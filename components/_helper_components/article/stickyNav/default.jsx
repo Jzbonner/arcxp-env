@@ -118,8 +118,7 @@ const StickyNav = ({
       <div className={`stickyNav b-sectionHomeMaxWidth ${hasWindowShade || stickyVisibilityRef.current ? 'is-visible' : ''}`}>
         <div className='b-flexRow c-stickyLogin'>
           <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={darkMode && siteNameLower === 'ajc' ? darkModeLogo : logoPath} isNonShareablePage={isNonShareablePage} darkMode={darkMode} />
-          <ul className={`c-stickyNav-list ${siteNameLower}`}>
-            <div className={`stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
+          <ul className={`c-stickyNav-list ${siteNameLower} stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
               <li className="stickyNav-item fb-icon" >
                 <a href={shareLinkFacebook} target="__blank">
                   <FbIcon />
@@ -153,7 +152,6 @@ const StickyNav = ({
                   </a>
                 </li>
               ) : null}
-            </div>
           </ul>
           <div className={`${isNonShareablePage ? '' : 'hidden-mobile'}`}>
             <Login isMobile={isMobileVisibilityRef.current} isFlyout={false} isSticky={stickyVisibilityRef.current} darkMode={darkMode} />

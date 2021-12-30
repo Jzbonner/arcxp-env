@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import './default.scss';
 
@@ -32,9 +33,7 @@ const tournamentDate = (sDate, eDate) => {
   return tDate;
 };
 
-const Schedule = () => {
-  const tour = 'pga';
-  const year = '2021';
+const Schedule = ({ year, tour }) => {
   const scheduleData = useContent({
     source: 'sportradar-api',
     query: {
@@ -115,6 +114,11 @@ const Schedule = () => {
     );
   }
   return null;
+};
+
+Schedule.propTypes = {
+  year: PropTypes.number,
+  tour: PropTypes.string,
 };
 
 export default Schedule;

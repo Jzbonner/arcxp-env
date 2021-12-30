@@ -23,7 +23,7 @@ export default function getTeaseIcon(teaseContentType, isAmp) {
       <div className="c-tease-icon">
         {isAmp
           ? <amp-img width={18} height={18} src={iconToRender}></amp-img>
-          : <img className="tease-icon" src={iconToRender} />}
+          : <img className="tease-icon" src={iconToRender} alt='Tease icon'/>}
       </div>
     );
   }

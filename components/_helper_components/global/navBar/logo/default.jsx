@@ -6,7 +6,7 @@ const Logo = ({
   source, rootDirectory, topRef, siteName, darkMode, darkModeLogo,
 }) => (
     <a href={rootDirectory}>
-      <img src={ !darkMode ? source : darkModeLogo} className={`logo ${siteName}`} ref={topRef}></img>
+      <img src={ !darkMode ? source : darkModeLogo} className={`logo ${siteName}`} ref={topRef} alt={`${siteName} logo`}></img>
     </a>
 );
 

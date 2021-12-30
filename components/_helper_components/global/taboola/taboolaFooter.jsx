@@ -7,7 +7,7 @@ import { taboolaFooterScript } from '../../../../src/js/taboola/taboolaScripts';
 const TaboolaFooter = () => {
   const { appContext } = useAppContext();
   const { layout } = appContext || { layout: null };
-  return (<script type='text/javascript' dangerouslySetInnerHTML={{
+  return (<script dangerouslySetInnerHTML={{
     __html: taboolaFooterScript(layout),
   }}></script>
   );

@@ -1,0 +1,139 @@
+@import "./../../../src/styles/base";
+
+.c-cards {
+  display: flex;
+  width: auto;
+  max-width: 100%;
+  flex-flow: column wrap;
+  margin: 0 auto;
+  justify-content: center;
+
+  @include text-styles(1rem, 1.25, "Gordita-Medium");
+
+  @include breakpoint(tablet) {
+    flex-flow: row wrap;
+  }
+
+  .card {
+    width: auto;
+    max-width: 100%;
+    color: #fff;
+    position: relative;
+    margin: 0 0 15px;
+    height: 375px;
+    overflow: hidden;
+
+    @include breakpoint(tablet) {
+      width: 350px;
+      max-width: 350px;
+      margin-right: 1%;
+    }
+
+    a,
+    a:hover {
+      color: #fff;
+    }
+
+    .content {
+      padding: 15px;
+      box-sizing: border-box;
+      min-height: 100%;
+      max-height: 100%;
+    }
+
+    @include flip-card();
+
+    .front {
+      background: linear-gradient(153deg, #2b3b39 13%, #333c4c 55%, #635d5d 97%);
+      padding: 20px;
+
+      h2,
+      h3 {
+        @include text-styles(1.5rem, 1.25, "Gordita-Medium");
+
+        font-weight: 800;
+        color: #fff5ec;
+        margin-bottom: 5px;
+      }
+
+      h3 {
+        font-size: 1rem;
+      }
+    }
+
+    .back {
+      background: #3f4450;
+    }
+  }
+
+  h2,
+  h3 {
+    @include text-styles(.875rem, 1.25, "Gordita-Bold");
+  }
+
+  .details,
+  .location,
+  .agency,
+  .description {
+    margin-bottom: 20px;
+  }
+
+  .location {
+    font-family: "Gordita-Bold";
+
+    &:before {
+      content: " ";
+      width: 39px;
+      height: 39px;
+      margin: 0 15px 0 0;
+      padding: 7px;
+      border-radius: 6px;
+      background: #3299ad;
+    }
+  }
+
+  .date {
+    position: absolute;
+    bottom: 40px;
+    text-transform: capitalize;
+  }
+
+  .month {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 150px;
+    font-family: "Gordita-Bold";
+    text-transform: uppercase;
+    letter-spacing: -35px;
+
+    span {
+      mix-blend-mode: screen;
+      opacity: .2;
+    }
+  }
+
+  .description {
+    max-height: 205px;
+    overflow: auto;
+
+    @include text-styles(.875rem, 1.2, "Gordita");
+
+    &.condensed {
+      max-height: 165px;
+    }
+  }
+
+  .more-link {
+    background: #3299ad;
+    border-radius: 6px;
+    padding: 10px 0;
+    text-align: center;
+    color: #fff;
+    display: block;
+    width: 100%;
+
+    @include text-styles(1rem, 1.25, "Gordita-Bold");
+  }
+}

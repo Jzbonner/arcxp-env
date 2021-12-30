@@ -39,11 +39,11 @@ const MobileGallery = (props) => {
           <div>Captions</div>
         </div>
         <div className="gallery-count">
-          <img src={middleBox} className="icon-sticky"></img>
+          <img src={middleBox} className="icon-sticky" alt="Image gallery count"></img>
           <span className="gallery-index"> {currentIndex + 1}   /   {maxIndex + 1} </span>
         </div>
         <div onClick={handleStickyClose} className="gallery-immersive--close">
-          <img src={close} />
+          <img src={close} alt="Close gallery icon"/>
         </div>
       </div>
       <div id="MOBILE_GALLERY" ref={objectRef} className="gallery-full">

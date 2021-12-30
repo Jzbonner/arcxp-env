@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import getProperties from 'fusion:properties';
 import { useAppContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import ImageGlobal from '../../_helper_components/global/image/default';
-import getDomain from '../../layouts/_helper_functions/getDomain';
+import fetchEnv from '../../_helper_components/global/utils/environment';
+import handleSiteName from '../../layouts/_helper_functions/handleSiteName';
 import './default.scss';
 
 const Image = ({ customFields }) => {
   const appContext = useAppContext();
   const {
-    layout,
     arcSite,
     id: featureId,
     renderables,
@@ -39,7 +38,6 @@ const Image = ({ customFields }) => {
       });
     }
   }
-  const { cdnSite, cdnOrg } = getProperties(arcSite);
   let src = customFields?.src;
   let srcMobile = customFields?.srcMobile;
   const {
@@ -60,20 +58,24 @@ const Image = ({ customFields }) => {
 
   let fetchedImage = null;
 
-  const buildFullUrl = imgSrc => `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${imgSrc}`;
+  const buildFullUrl = imgSrc => `https://${fetchEnv() !== 'prod' ? 'sandbox' : 'www'}.${handleSiteName(arcSite)}.com${imgSrc}`;
 
   const isAbsolute = src.indexOf('http') === 0 || src.indexOf('//') === 0;
   const isResizerOrAbsolute = /resizer/.test(src) || isAbsolute;
 
-  if (/resizer/.test(src)) {
+  if (!isAbsolute && /resizer/.test(src)) {
     src = buildFullUrl(src);
   }
 
-  if (/resizer/.test(srcMobile)) {
+  if (!isAbsolute && /resizer/.test(srcMobile)) {
     srcMobile = buildFullUrl(srcMobile);
   }
 
-  let srcSetSizes = [];
+  let srcSetSizes = [
+    [1600, 0],
+    [800, 0],
+    [400, 0],
+  ];
   if (isPartOfUbbn) {
     srcSetSizes = [
       [1600, 856],

@@ -29,8 +29,16 @@ const SophiTags = ({ isAmp }) => {
     initialPublishDate,
     firstPublishDate: lastModifiedDate,
     paywallStatus,
+    typeOfPage,
+    sophiType,
   } = contentMeta || {};
-  const sophiContentType = isNonContentPage ? 'section' : 'article';
+
+  let sophiContentType = isNonContentPage ? 'section' : 'article';
+  if (sophiType === 'article') {
+    sophiContentType = 'article';
+  } else if (typeOfPage === 'gallery' || typeOfPage === 'video') {
+    sophiContentType = typeOfPage;
+  }
   let sophiSection = topSection.indexOf('/') === 0 ? topSection.substr(1) : topSection;
   const sophiMainSection = sophiSection.indexOf('/') > -1 ? sophiSection.substr(0, sophiSection.indexOf('/')) : sophiSection;
   sophiSection = sophiSection.replace(/\//g, ':');
@@ -162,7 +170,7 @@ const SophiTags = ({ isAmp }) => {
 
   return (
     <>
-      <script type='text/javascript' dangerouslySetInnerHTML={{
+      <script dangerouslySetInnerHTML={{
         __html: `// Sophi Data and Settings
           try {
             window.sophi = {
@@ -190,7 +198,7 @@ const SophiTags = ({ isAmp }) => {
           } catch(e) {}
         `,
       }}></script>
-      <script type='text/javascript' dangerouslySetInnerHTML={{
+      <script dangerouslySetInnerHTML={{
         __html: `// Sophi Tag
           !function(f,g){window.sophi=window.sophi||{};var c=window.sophi;c.q=c.q||[],c.sendEvent=function(a){c.q.push(a)},c.data=c.data||{},c.settings=c.settings||{};var b=c.settings,a;b.trackerName=b.trackerName||"sophiTag";try{window.localStorage&&((a=localStorage.getItem(b.trackerName+".tagCdn"))&&"string"==typeof a&&7<a.length||(a=void 0))}catch(e){a=void 0}b.loadFrom=a?a+"sophi.min.js":b.loadFrom||"https://cdn.sophi.io/latest/sophi.min.js",b.legacy=a?a+"sophi.legacy.min.js":b.loadFrom||"https://cdn.sophi.io/latest/sophi.legacy.min.js";try{eval('let id=Symbol("id"), a=[...new Set([0,1])].includes(0);')}catch(a){b.loadFrom=b.legacy}finally{if(!window[b.trackerName]){a=document.createElement("script");var d=document.getElementsByTagName("script")[0];a.async=1,a.src=b.loadFrom,d.parentNode.insertBefore(a,d)}}c.sendEvent({type:"page_view"})}();
             `,

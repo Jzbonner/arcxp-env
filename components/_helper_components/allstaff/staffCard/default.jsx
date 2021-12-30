@@ -20,7 +20,7 @@ export const StaffCard = ({ staffer = {} }) => {
         href={staffBioPageLink}
         className={'c-profile-picture'}
       >
-        <img src={image || missingStaffIcon} alt={'staff image'} className={'profile-picture'}/>
+        <img src={image || missingStaffIcon} alt={`${image ? `${name} profile picture` : 'silhoutte image'}`} className={'profile-picture'}/>
       </a>
       <div className={'c-staff-info'}>
         <a href={staffBioPageLink} className={'name'} rel="author">{name}</a>

@@ -48,6 +48,8 @@ const RedesignNavLinks = ({
       return link.endsWith('/') ? link : `${link}/`;
     }
 
+    if (!destination) return null;
+
     return (
     <li key={i}>
       <a href={destination?.indexOf('/') === 0 ? `${siteDomainURL}${checkTrailingSlash(destination)}` : checkTrailingSlash(destination)} target='_self' className={`nav-itemText ${isHighlighted ? 'active' : ''}${itemCount > 7 ? 'sm-text' : ''}`}>{title}</a>
@@ -57,13 +59,13 @@ const RedesignNavLinks = ({
   return (
     <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
-        <img src={darkMode ? HamburgerDark : Hamburger}></img>
+        <img src={darkMode ? HamburgerDark : Hamburger} alt='Hamburger icon'></img>
       </div>
-      <div className={`sticky-logo-homepage ${siteName}`}>
+      {logoPath && siteName && <div className={`sticky-logo-homepage ${siteName}`}>
         <a href="/">
           <img src={logoPath} className={siteName} alt={`${siteName} logo`} />
         </a>
-      </div>
+      </div>}
       <div className='stickyNav-homepage'>
         <ul>
           {items}

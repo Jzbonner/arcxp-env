@@ -1,11 +1,10 @@
 /* eslint-disable */
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import './default.scss';
 
-const Leaderboard = () => {
-  const tour = 'pga';
-  const year = '2021';
+const Leaderboard = ({ year, tour }) => {
   let tournamentId;
   // const ref = useRef(null);
 
@@ -18,7 +17,7 @@ const Leaderboard = () => {
   });
 
   let tournaments = scheduleData.tournaments;
-  for (let i = 28; i < tournaments.length; i++) {
+  for (let i = 0; i < tournaments.length; i++) {
     if (tournaments[i].status === "inprogress" || tournaments[i].status === "playoff" || tournaments[i].status === "complete" || tournaments[i].status === "closed") {
       if (tournaments[i].event_type === "stroke") {
         tournamentId = tournaments[i].id;
@@ -87,6 +86,11 @@ const Leaderboard = () => {
     );
   }
   return null;
+};
+
+Leaderboard.propTypes = {
+  year: PropTypes.number,
+  tour: PropTypes.string,
 };
 
 export default Leaderboard;
