@@ -34,6 +34,7 @@ const SiteMeta = () => {
     paywallStatus,
     syndication,
     noIndex,
+    treatPbPageAsArticle,
   } = contentMeta || {};
   const isNativoLandingPage = url === '/native/';
   const { external_distribution: extDistribution, search: visibleInSearch } = syndication || {};
@@ -62,7 +63,7 @@ const SiteMeta = () => {
       <meta name="twitter:image" content={thumbnailImage} />
       <meta name="twitter:site" content={`@${site}`} />
       <meta name="twitter:title" content={title} />
-      <meta name="twitter:url" content={url} />
+      <meta name="twitter:url" content={updatedURL} />
       <meta property="fb:app_id" content={fbAppId} />
       <meta property="og:image" content={thumbnailImage} />
       <meta property="og:image:secure_url" content={thumbnailImage} />
@@ -77,7 +78,7 @@ const SiteMeta = () => {
       <meta property="og:site_name" content={site} />
       <meta name="thumbnail" content={thumbnailImage} />
       <meta name="language" content="English" />
-      {((!isNonContentPage && hideArticleFromSearch) || (noIndex === 'yes')) && <meta name="robots" content="noindex" />}
+      {((!isNonContentPage && hideArticleFromSearch && !treatPbPageAsArticle) || noIndex === 'yes') && <meta name="robots" content="noindex" />}
       {!isNonContentPage && <meta property="article:opinion" content={isOpinion.toString()} />}
       {paywallStatus && <meta name="story.meter" content={paywallStatus} />}
       {metaValue('topics') && <meta name="topics" content={metaValue('topics')} />}
