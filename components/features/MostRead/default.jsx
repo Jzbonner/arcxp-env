@@ -14,7 +14,7 @@ const MostRead = () => {
   const { host } = chartbeat;
   const env = fetchEnv();
   const componentContext = useComponentContext();
-  const { section } = componentContext && componentContext.customFields;
+  const { section, title = '' } = componentContext && componentContext.customFields;
   const topStoriesData = useContent({
     source: 'most-read',
     query: {
@@ -27,7 +27,7 @@ const MostRead = () => {
 
   if (topStoriesData) {
     let counter = 0;
-    return <div className="c-mostRead"><div className="mostReadTitle">Most Read</div>
+    return <div className="c-mostRead"><div className="mostReadTitle">{`${title || 'Most Read'}`}</div>
       <div className="mostReadList"> {
         topStoriesData.map((el) => {
           if (el.title && counter < 5) {
@@ -47,6 +47,9 @@ MostRead.propTypes = {
   customFields: PropTypes.shape({
     section: PropTypes.string.tag({
       label: 'Add Section(s) Name',
+    }),
+    title: PropTypes.string.tag({
+      label: 'Replaces MostRead feature title',
     }),
   }),
 };
