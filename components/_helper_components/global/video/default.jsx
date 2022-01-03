@@ -15,13 +15,13 @@ import './default.scss';
 import '../../../../src/styles/base/_utility.scss';
 
 const Video = ({
-  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, pageTaxonomy = [], lazyLoad = false,
+  src, isLeadVideo, isInlineVideo, maxTabletViewWidth, featuredVideoPlayerRules, inlineVideoPlayerRules, pageTaxonomy = [], lazyLoad = false, index,
 }) => {
   const appContext = useAppContext();
   const { globalContent, requestUri, layout } = appContext;
   const fusionContext = useFusionContext();
   const {
-    credits, _id: videoID, videoPageId, taxonomy: videoTax = [], canonical_url: videoPageUrl,
+    credits, _id: videoID, videoPageId, taxonomy: videoTax = [], canonical_url: videoPageUrl, alignment,
   } = src || {};
   let pageTax = pageTaxonomy;
   if (layout === 'article-basic' && !pageTaxonomy.length) {
@@ -470,7 +470,7 @@ const Video = ({
     </>
   );
   return (
-    <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''}`}>
+    <div className={`c-video-component ${isInlineVideo ? videoMarginBottom : ''} ${alignment ? `align-${alignment}` : ''}`} data-index={index || null}>
       <div className="video-component">{isAmpOutput ? renderAmpPlayer() : renderPowaPlayer()}</div>
       {!isAmpOutput && (
         <>
@@ -490,5 +490,6 @@ Video.propTypes = {
   maxTabletViewWidth: PropTypes.number,
   pageTaxonomy: PropTypes.object,
   lazyLoad: PropTypes.bool,
+  index: PropTypes.number,
 };
 export default Video;

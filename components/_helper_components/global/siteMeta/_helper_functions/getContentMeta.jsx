@@ -28,6 +28,7 @@ const getContentMeta = () => {
   const metaDescription = metaValue('description');
   const coverageEndTime = metaValue('coverage end time');
   const sophiType = metaValue('sophi-type');
+  const treatPbPageAsArticle = sophiType === 'article';
   const {
     siteName, favicon, cdnSite, appleIcon, cdnOrg,
   } = getProperties(arcSite) || {};
@@ -100,6 +101,7 @@ const getContentMeta = () => {
     isStaff,
     isWeather,
     isError,
+    isList,
     isLiveUpdate,
     isAuthor,
     isTraffic,
@@ -108,7 +110,7 @@ const getContentMeta = () => {
   } = pageType || {};
   let { type: typeOfPage } = pageType || {};
   let pageContentType = typeOfPage === 'story' ? 'article' : typeOfPage && typeOfPage.toLowerCase();
-  if (sophiType === 'article') {
+  if (treatPbPageAsArticle) {
     pageContentType = 'article';
   } else if (isHome) {
     pageContentType = 'homepage';
@@ -118,8 +120,8 @@ const getContentMeta = () => {
     pageContentType = 'liveupdates';
   } else if (isAuthor) {
     pageContentType = 'author';
-  } else if (isEnhancedList) {
-    pageContentType = 'enhancedList';
+  } else if (isEnhancedList || isList) {
+    pageContentType = 'list';
   } else if (isStaff) {
     pageContentType = 'staff';
   } else if (isWeather) {
@@ -167,7 +169,7 @@ const getContentMeta = () => {
   let contentId = uuid;
   let pubDate = firstPublishDate;
   let uri = requestUri;
-  if (!canonicalUrl && uri) {
+  if ((!canonicalUrl || treatPbPageAsArticle) && uri) {
     // only jump through these hoops if canonical_url is undefined (i.e. pagebuilder pages)
     // remove query string & hashes from uri
     uri = uri.replace(/\?.*/g, '');
@@ -183,7 +185,7 @@ const getContentMeta = () => {
   }
   const newCanonicalUrl = distributor && distributor.subcategory === 'canonical'
     ? additionalProperties && additionalProperties.originalUrl : '';
-  const url = newCanonicalUrl || canonicalUrl || uri;
+  const url = newCanonicalUrl || (treatPbPageAsArticle ? uri : canonicalUrl) || uri;
   if (contentData) {
     // it's a list or list-type page, let's re-set some values
     const {
@@ -292,6 +294,7 @@ const getContentMeta = () => {
     stories,
     coverageEndTime,
     sophiType,
+    treatPbPageAsArticle,
   };
 };
 
