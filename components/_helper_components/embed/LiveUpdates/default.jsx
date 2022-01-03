@@ -12,7 +12,7 @@ import Byline from '../../article/byline/default';
 import './default.scss';
 
 /* this helper component renders the Custom Info Box as outlined in APD-1441 */
-const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
+const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = false }) => {
   const { paywallStatus } = getContentMeta();
   const isMeteredStory = paywallStatus === 'premium';
   if (!liveUpdates) return <span><i>There are no Live Updates to display.</i></span>;
@@ -43,6 +43,15 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
 
   const renderAdOrPlaceholder = (index) => {
     let response = '';
+
+    if (isTimeline) {
+      // we exclude all inline content except for newsletters, for timeline presentations
+      if (index === 5) {
+        return <div className='story-newsletter_placeholder' key={`placeholder-${index}`}></div>;
+      }
+      return null;
+    }
+
     switch (index) {
       case 0:
         response = <>
@@ -301,14 +310,14 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
           activeUpdate = elId;
         }
         return <>
-          {insertDateMarker && <a key={`${elId}-dateMarker`} className='date-marker' title={timestampDate}>
+          {!isTimeline && insertDateMarker && <a key={`${elId}-dateMarker`} className='date-marker' title={timestampDate}>
             <div className='timestamp'>{timestampDate.replace(',', '')}</div>
           </a>}
           <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger} className={activeUpdate === elId ? 'is-active' : ''} title={`${timestampTime}: ${headline.replace(/"/g, '\'')}`}>
             <div className='headline hidden-mobile'>{headline}</div>
             <div className='timestamp'>
               <span className={`timestamp-date ${isToday ? 'same-day' : ''}`}>{timestampDate} </span>
-              <span className='timestamp-time'>{timestampTime}</span>
+              {!isTimeline && <span className='timestamp-time'>{timestampTime}</span>}
             </div>
           </a>
         </>;
@@ -323,7 +332,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
             <span name={elId} className='snippet-anchor'></span>
           </div>
           <div className='c-timestampByline'>
-            <div className='timestamp-time'>{timestampTime}</div>
+            {!isTimeline && <div className='timestamp-time'>{timestampTime}</div>}
             <Byline by={authorData} sections={[]} excludeOrg={true} />
           </div>
           <div className='liveUpdate-content' key={`${elId}-content`}>
@@ -372,9 +381,9 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
     return liveUpdatesMapper(liveUpdates);
   };
 
-  return <div className='c-liveUpdates'>
+  return <div className={`c-liveUpdates ${isTimeline ? 'is-timeline' : ''}`}>
     <div className='c-liveUpdateNav'>
-      <div className='c-navTitle'><span className='hidden-mobile'>Latest Updates</span></div>
+      <div className='c-navTitle'><span className='hidden-mobile'>{isTimeline ? 'Timeline' : 'Latest Updates'}</span></div>
       {loopThroughUpdates(true)}
     </div>
     <div className='c-liveUpdateContent'>
@@ -389,6 +398,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false }) => {
 LiveUpdates.propTypes = {
   data: PropTypes.array,
   enableTaboola: PropTypes.bool,
+  isTimeline: PropTypes.bool,
 };
 LiveUpdates.defaultProps = {
   componentName: 'LiveUpdates',

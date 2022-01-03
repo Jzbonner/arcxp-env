@@ -24,10 +24,10 @@ import './default.scss';
 */
 const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, squareImage = false,
-  ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [], additionalClasses = '', noLazyLoad = false,
+  ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [], additionalClasses = '', noLazyLoad = false, index,
 }) => {
   const {
-    resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, focal_point: rootFocalPoint, useSrcSet: hasSrcSet = false,
+    resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, focal_point: rootFocalPoint, useSrcSet: hasSrcSet = false, alignment,
   } = src || {};
 
   const appContext = useAppContext();
@@ -172,7 +172,7 @@ const Image = ({
     }
 
     return (
-      <div className={`c-image-component ${toggle ? 'overlay-active' : ''} ${imageMarginBottom || ''}`}>
+      <div className={`c-image-component ${toggle ? 'overlay-active' : ''} ${imageMarginBottom || ''} ${alignment ? `align-${alignment}` : ''}`} data-index={index || null}>
         {enableExpandableImage && renderCaption()}
         <div className={`image-component-image ${ampPage ? 'amp' : ''} ${enableExpandableImage ? 'inline' : ''}`}>
           {renderedImageOutput()}
@@ -209,5 +209,6 @@ Image.propTypes = {
   additionalClasses: PropTypes.string,
   noLazyLoad: PropTypes.bool,
   squareImage: PropTypes.bool,
+  index: PropTypes.number,
 };
 export default Image;
