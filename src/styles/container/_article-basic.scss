@@ -1,6 +1,7 @@
 /* stylelint-disable declaration-no-important */
 @import "./../base/breakpoints";
 @import "./../base/mixins";
+@import "./../base/colors";
 
 .c-header {
   margin: 0 auto;
@@ -318,6 +319,213 @@
       display: none;
     }
   }
+}
+
+/* APD-1248: all content_element styles are globally here in order to prevent mulitple instance of the same stylesheet */
+/* stylelint-disable */
+.blockquote {
+  border-left: 10px solid #2e81b7;
+  padding-left: 20px;
+
+  .story-text,
+  li {
+    @include text-styles(1em, 1.6, "Gordita-Bold");
+
+    font-weight: 800;
+
+    @include breakpoint(desktop-sm) {
+      @include text-styles(1.25em, 2, "Gordita-Bold");
+    }
+  }
+
+  .blockquote-citation {
+    @include text-styles(.8em, .8, "Gordita");
+
+    color: #313132;
+    font-style: 400;
+
+    @include breakpoint(desktop-sm) {
+      @include text-styles(1em, 1, "Gordita");
+    }
+  }
+}
+
+hr.divider {
+  height: 0;
+  border: 0;
+  border-top: solid 1px #cdcdcd;
+}
+
+.after-divider p.story-text,
+hr.divider ~ p.story-text {
+  font-size: .75rem;
+  line-height: 1.75rem;
+  color: #707174;
+}
+
+.h1-heading {
+  color: #313132;
+  font-weight: 700;
+
+  @include text-styles(1.5rem, 1.5, "Gordita");
+
+  @include breakpoint(desktop-sm) {
+    @include text-styles(1.75rem, 1.67, "Gordita");
+  }
+}
+
+.h2-heading {
+  color: #313132;
+  font-weight: 700;
+
+  @include text-styles(1.25rem, 1.5, "Gordita");
+
+  @include breakpoint(desktop-sm) {
+    @include text-styles(1.5rem, 1.67, "Gordita");
+  }
+}
+
+.h3-heading {
+  color: #313132;
+  font-weight: 700;
+
+  @include text-styles(1.125rem, 1.56, "Gordita");
+
+  @include breakpoint(desktop-sm) {
+    @include text-styles(1.3125rem, 1.67, "Gordita");
+  }
+}
+
+.h4-heading {
+  color: #313132;
+  font-weight: 700;
+
+  @include text-styles(1rem, 1.625, "Gordita");
+
+  @include breakpoint(desktop-sm) {
+    @include text-styles(1.1875rem, 1.58, "Gordita");
+  }
+}
+
+.borders {
+  border-top: solid 1px #cdcdcd;
+  border-bottom: solid 1px #cdcdcd;
+  padding: 1.2em 0 1.2em 1.0625em;
+  display: flex;
+
+  @include amp-exclude {
+    height: auto !important;
+  }
+
+  @include breakpoint(tablet) {
+    padding-left: 1.4em;
+  }
+}
+
+.prefix {
+  display: flex;
+  align-items: center;
+  width: auto;
+  -webkit-text-stroke: .3px #000;
+  color: #313132;
+  word-break: keep-all;
+
+  @include text-styles(1.75rem, 1, "Average");
+
+  @include breakpoint(tablet) {
+    @include text-styles(2.5rem, 1, "Average");
+  }
+}
+
+.interstitial {
+  padding: 0 1.1em;
+  text-align: left;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  padding: 0 .875em 0 1.0625em;
+  letter-spacing: normal;
+  color: #000;
+
+  @include text-styles(1rem, 1.75, "Gordita");
+
+  @include breakpoint(tablet) {
+    @include text-styles(1.25rem, 1.75, "Gordita");
+
+    padding: 0 1.5em 0 2.3125em;
+  }
+}
+
+article .c-section a.link {
+  color: #000;
+}
+
+.list {
+  @include text-styles(1rem, 2.25, "Gordita");
+
+  ul,
+  ol,
+  li {
+    @include text-styles(1rem, 2.25, "Gordita");
+
+    padding-left: .3em;
+    list-style: none;
+  }
+
+  ul {
+    list-style-type: none;
+    margin-left: 2.3em;
+  }
+
+  ul li:before {
+    content: "-";
+    margin-right: .3em;
+    font-weight: 600;
+    margin-left: -.7em;
+  }
+
+  ol {
+    list-style: none;
+    margin-left: 2.3em;
+    counter-reset: item;
+  }
+
+  ol li {
+    counter-increment: item;
+  }
+
+  ol li:before {
+    content: counter(item) ". ";
+    font-weight: 600;
+    margin-left: -1.2em;
+  }
+}
+
+.story-text,
+.c-customHTML {
+  width: 100%;
+  color: #313132;
+
+  a {
+    color: $blue-text;
+    padding-bottom: 1px;
+
+    &:hover {
+      border-bottom: 1px solid $blue-text;
+    }
+  }
+
+  @include text-styles(1rem, 1.625, "Gordita");
+
+  @include breakpoint(desktop-sm) {
+    @include text-styles(1rem, 1.625, "Gordita");
+  }
+}
+
+.story-text {
+  margin-bottom: 25px;
 }
 
 @include amp-exclude {

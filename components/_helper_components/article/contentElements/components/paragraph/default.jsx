@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { safeHtml } from '../../../../global/utils/stringUtils';
-import './default.scss';
 
 const Paragraph = ({ src, index }) => {
   const { content } = src;
