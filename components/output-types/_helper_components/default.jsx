@@ -13,7 +13,6 @@ import AmpRelLink from '../../_helper_components/amp/AmpRelLink';
 import GoogleStructuredData from '../../_helper_components/article/googleData/default';
 import fetchEnv from '../../_helper_components/global/utils/environment';
 import gtmScript from '../helper_functions/gtmScript';
-import CustomMetricsScript from '../../_helper_components/global/abBlockDetection/helper_components/CustomMetricsScript';
 import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
 
 const RenderOutputType = (props) => {
@@ -109,11 +108,6 @@ const RenderOutputType = (props) => {
             <script src={`https://loader-cdn.azureedge.net/${connextEnv}/ajc/loader.min.js`}></script>
             <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/customJSForNavigaAdBlocker.js`)}`}></script>
             <ConnextInit triggerLoginModal={outputType && outputType === 'login'} />
-          </>
-        )}
-        {outputType !== 'amp' && (
-          <>
-            <CustomMetricsScript />
           </>
         )}
         <div id="fb-root"></div>
