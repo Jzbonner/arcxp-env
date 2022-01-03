@@ -2,8 +2,17 @@
 import axios from 'axios';
 import GetSophiBearerToken from './helper_functions/GetSophiBearerToken';
 
-const fetch = async ({ page = 'politics', widget = 'topstories' }) => {
+const ttl = 120;
+
+const params = {
+  page: 'text',
+  widget: 'text',
+};
+
+const fetch = async (query) => {
   const token = await GetSophiBearerToken();
+  const page = query?.page || 'politics';
+  const widget = query?.widget || 'topstories';
 
   return axios
     .get(
@@ -21,5 +30,7 @@ const fetch = async ({ page = 'politics', widget = 'topstories' }) => {
 };
 
 export default {
+  params,
   fetch,
+  ttl,
 };
