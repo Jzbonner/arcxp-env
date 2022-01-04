@@ -271,9 +271,6 @@ export const ConnextAuthTrigger = () => {
 
     document.onreadystatechange = () => {
       if (document.readyState === 'complete') {
-        if (UserState === 'Subscribed') {
-          loadDeferredItems();
-        }
         setReadyState(true);
       }
     };
