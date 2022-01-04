@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import axios from 'axios';
-import GetSophiBearerToken from './helper_functions/GetSophiBearerToken';
+import GetSophiBearerToken from './helper_functions/getSophiBearerToken.js';
 
 const ttl = 120;
 
