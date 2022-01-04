@@ -16,7 +16,7 @@ const ListItemPreview = ({ id }) => {
 
   if (storyData?.headlines?.web) {
     previewText = storyData.headlines.web;
-  } else if (storyData?.content_elements[0]?.type === 'text') {
+  } else if (storyData?.content_elements[0]?.type === 'text' && !storyData?.headlines?.web) {
     let previewData = storyData.content_elements[0].content;
     const secondaryContent = storyData?.content_elements[1]?.content || null;
     if (previewData.length < 90 && secondaryContent) {
