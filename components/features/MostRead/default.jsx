@@ -15,18 +15,16 @@ const MostRead = () => {
   const env = fetchEnv();
   const componentContext = useComponentContext();
   const { section, storyCount = null, title = '' } = componentContext && componentContext.customFields;
+  const storyLimit = storyCount || '10';
   const topStoriesData = useContent({
     source: 'most-read',
     query: {
       host,
-      limit: '10',
+      limit: storyLimit,
       section: section || '',
       arcSite,
     },
   });
-
-  console.log('arcSite', arcSite, 'host', host, 'wsection', section, 'storyCount', storyCount, 'title', title);
-  console.log('topStorueaData', topStoriesData);
 
   if (topStoriesData) {
     let counter = 0;
@@ -57,7 +55,6 @@ MostRead.propTypes = {
     }),
     storyCount: PropTypes.oneOf(['5', '10', '15', '20', '25', '30', '35', '40', '45', '50']).tag({
       name: 'Number of stories to display',
-      default: '5',
     }),
   }),
 };
