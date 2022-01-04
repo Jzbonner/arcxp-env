@@ -9,10 +9,12 @@ const params = {
   widget: 'text',
 };
 
-const fetch = async (query) => {
-  const token = await GetSophiBearerToken();
-  const page = query?.page || 'politics';
-  const widget = query?.widget || 'topstories';
+const fetch = async ({ page, widget }, { cachedCall }) => {
+  const token = await cachedCall(
+    'authentication',
+    GetSophiBearerToken,
+    { ttl: 86400, independent: true },
+  );
 
   return axios
     .get(
