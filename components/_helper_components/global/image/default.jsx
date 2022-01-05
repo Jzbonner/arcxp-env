@@ -86,7 +86,7 @@ const Image = ({
   const renderCaption = () => {
     if (
       (imageType === 'isLeadImage' && !giveCredit && !caption)
-      || (imageType === 'isInlineImage' && !caption)
+      || (imageType === 'isInlineImage' && !toggle && !caption)
       || (imageType === 'isLeadImage' && giveCredit && !caption)
       || teaseContentType
       || imageType === 'isAuthorImage'
