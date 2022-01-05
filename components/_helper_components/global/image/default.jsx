@@ -172,17 +172,17 @@ const Image = ({
 
     return (
       <div className={`c-image-component ${toggle ? 'overlay-active' : ''} ${imageMarginBottom || ''}`}>
+        {enableExpandableImage && renderCaption()}
         <div className={`image-component-image ${ampPage ? 'amp' : ''} ${enableExpandableImage ? 'inline' : ''}`}>
           {renderedImageOutput()}
-          {outputCaptionAndCredit && !toggle && renderCaption()}
-          {enableExpandableImage && toggle && <Caption imageType={imageType} src={src} />}
+          {outputCaptionAndCredit && renderCaption()}
           {enableExpandableImage && screenSize.width >= maxTabletViewWidth && <>
             <img src={closeIcon} className='image-close' alt='icon to close expanded image' onClick={(e) => { e.preventDefault(); setToggle(false); }} />
             <Overlay toggle={toggle} setToggle={setToggle}/>
             <img src={expandIcon} className='image-expand' alt={'icon to expand image'} onClick={(e) => { e.preventDefault(); setToggle(true); }}/>
           </>}
         </div>
-        {outputCaptionAndCredit && !toggle && <p className="photo-credit-text">{giveCredit}</p>}
+        {outputCaptionAndCredit && <p className="photo-credit-text">{giveCredit}</p>}
       </div>
     );
   }

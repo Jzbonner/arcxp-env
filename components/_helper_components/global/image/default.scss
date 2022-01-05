@@ -88,10 +88,7 @@
 
   &.overlay-active {
     overflow: visible;
-    position: fixed;
-    left: 0;
-    top: 15%;
-    z-index: 10000;
+    position: unset;
 
     .b-overlay {
       background-color: #212126;
@@ -102,14 +99,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: fixed;
+      left: 0;
+      top: 10%;
       width: 100%;
       box-sizing: border-box;
-      padding: 0;
+      padding: 0 12.5%;
       z-index: 4002;
-    }
-
-    .lazyload-wrapper {
-      min-width: 100%;
     }
 
     .lazyload-wrapper,
@@ -153,15 +149,15 @@
 
           @include text-styles(1.125rem, 1.88, "Gordita");
         }
+
+        .photo-credit-text {
+          display: block;
+          color: #fff;
+          text-align: left;
+
+          @include text-styles(1rem, 1, "Gordita");
+        }
       }
-    }
-
-    .photo-credit-text {
-      display: block;
-      color: #fff;
-      text-align: left;
-
-      @include text-styles(1rem, 1, "Gordita");
     }
 
     .image-close {
