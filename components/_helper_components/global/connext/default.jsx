@@ -364,7 +364,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                     cbqArray.push(['_acct', 'paid']);
                     break;
                   default:
-                    // do nothing
+                    cbqArray.push(['_acct', 'anon']);
                 };
               };
               if (window?.sophi?.data) {
