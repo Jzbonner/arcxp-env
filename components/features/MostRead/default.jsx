@@ -14,12 +14,13 @@ const MostRead = () => {
   const { host } = chartbeat;
   const env = fetchEnv();
   const componentContext = useComponentContext();
-  const { section } = componentContext && componentContext.customFields;
+  const { section, storyCount = null, title = '' } = componentContext && componentContext.customFields;
+  const storyLimit = storyCount || '10';
   const topStoriesData = useContent({
     source: 'most-read',
     query: {
       host,
-      limit: '10',
+      limit: storyLimit,
       section: section || '',
       arcSite,
     },
@@ -27,10 +28,11 @@ const MostRead = () => {
 
   if (topStoriesData) {
     let counter = 0;
-    return <div className="c-mostRead"><div className="mostReadTitle">Most Read</div>
+    const mapLimit = storyCount || 5;
+    return <div className="c-mostRead"><div className="mostReadTitle">{`${title || 'Most Read'}`}</div>
       <div className="mostReadList"> {
         topStoriesData.map((el) => {
-          if (el.title && counter < 5) {
+          if (el.title && counter < mapLimit) {
             counter += 1;
             return <a key={`Headline: ${el.title}`} href={`https://${env === 'prod' ? 'www.' : ''}${el.path}`} target="_self"><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>;
           }
@@ -47,6 +49,12 @@ MostRead.propTypes = {
   customFields: PropTypes.shape({
     section: PropTypes.string.tag({
       label: 'Add Section(s) Name',
+    }),
+    title: PropTypes.string.tag({
+      label: 'Replaces MostRead feature title',
+    }),
+    storyCount: PropTypes.oneOf(['5', '10', '15', '20', '25', '30', '35', '40', '45', '50']).tag({
+      name: 'Number of stories to display',
     }),
   }),
 };
