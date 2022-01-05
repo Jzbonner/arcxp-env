@@ -74,8 +74,8 @@ const CustomInfoBox = ({ data, borderColor }) => {
     return infoBoxContent;
   });
   // if there is a divider, we split the array accordingly
-  const shownContent = dividerIndex > 0 ? infoBoxContent.splice(0, dividerIndex) : infoBoxContent;
-  const hiddenContent = dividerIndex > 0 ? infoBoxContent.splice(dividerIndex) : [];
+  const shownContent = dividerIndex > 0 ? infoBoxContent.slice(0, dividerIndex) : infoBoxContent;
+  const hiddenContent = dividerIndex > 0 ? infoBoxContent.slice(dividerIndex + 1) : [];
   const hasHiddenContent = hiddenContent.length;
   const renderContent = (con) => {
     if (typeof con.content === 'string') {
