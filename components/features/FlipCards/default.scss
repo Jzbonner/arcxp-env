@@ -14,19 +14,24 @@
     flex-flow: row wrap;
   }
 
+  @include breakpoint(desktop-sm) {
+    width: 80.25%;
+    margin: auto;
+  }
+
   .card {
     width: auto;
     max-width: 100%;
     color: #fff;
     position: relative;
     margin: 0 0 15px;
-    height: 375px;
+    height: 350px;
     overflow: hidden;
 
     @include breakpoint(tablet) {
-      width: 350px;
-      max-width: 350px;
-      margin-right: 1%;
+      width: 300px;
+      max-width: 300px;
+      margin-right: 1.4%;
     }
 
     a,
@@ -63,6 +68,27 @@
 
     .back {
       background: #3f4450;
+
+      &.with-image {
+
+        .details {
+          height: 100px;
+
+          img {
+            float: left;
+            margin-right: 15px;
+          }
+        }
+
+        .description {
+          max-height: 165px;
+          height: 165px;
+
+          &.condensed {
+            max-height: 100px;
+          }
+        }
+      }
     }
   }
 
@@ -80,6 +106,7 @@
 
   .location {
     font-family: "Gordita-Bold";
+    clear: both;
 
     &:before {
       content: " ";
@@ -103,10 +130,10 @@
     right: 25px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 150px;
+    font-size: 130px;
     font-family: "Gordita-Bold";
     text-transform: uppercase;
-    letter-spacing: -35px;
+    letter-spacing: -33px;
 
     span {
       mix-blend-mode: screen;
@@ -121,7 +148,7 @@
     @include text-styles(.875rem, 1.2, "Gordita");
 
     &.condensed {
-      max-height: 165px;
+      max-height: 147px;
     }
   }
 

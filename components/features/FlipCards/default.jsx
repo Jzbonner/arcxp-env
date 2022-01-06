@@ -29,7 +29,7 @@ const FlipCards = ({ customFields = {} }) => {
       'Last name': lName = '',
       Age: age,
       Gender: gender,
-      Image: imageUri,
+      photo_url: imageUri,
       Date: date,
       Latitude: lat,
       Longitude: long,
@@ -46,15 +46,20 @@ const FlipCards = ({ customFields = {} }) => {
     const monthFullName = month ? months[month - 1] : '';
     const monthShortName = monthFullName.substr(0, 3);
 
-    // when attempting to create a template literals, I'm running into an eslint error:
+    // when attempting to populate className values with template literals, I was running into an eslint error:
     // TypeError: Cannot read property 'range' of null
-    // happened for both the example immediately following this (name) and the className compilation
+    // happened for all three of the example immediately following this (name) and the className compilation
     // const name = `${fName} ${lName}`;
 
     let cardClass = 'card ';
     cardClass += isFlipped === i ? 'is-flipped' : '';
     let descriptionClass = 'description ';
     descriptionClass += storyUri ? 'condensed' : '';
+    let cardBackContentClass = 'back content';
+    cardBackContentClass += imageUri ? 'with-image' : '';
+    let fullName = fName;
+    fullName += ' ';
+    fullName += lName;
 
     return <div className={cardClass} key={i} onClick={ () => flipCard(i) }>
       <div className='front content'>
@@ -66,10 +71,10 @@ const FlipCards = ({ customFields = {} }) => {
           <span>{monthShortName.substr(2, 1)}</span></div>
         {date && <h3 className='date'>Died:<br />{monthFullName} {day}, {year}</h3>}
       </div>
-      <div className='back content'>
+      <div className={cardBackContentClass}>
         <div className='details'>
-          {imageUri && <img src={imageUri} alt={fName} />}
-          <h2>{fName} {lName}</h2>
+          {imageUri && <img src={imageUri} alt={fullName} />}
+          <h2>{fullName}</h2>
           {age && <h3>Age: {age}</h3>}
           {gender && <h3>Gender: {gender}</h3>}
         </div>
