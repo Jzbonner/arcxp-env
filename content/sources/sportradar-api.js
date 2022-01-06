@@ -6,6 +6,7 @@ const { sportradarAPIkey, sportradarAPIVersion, sportradarAccessLevel } = requir
 const params = {
   tour: 'text',
   year: 'text',
+  tournamentId: 'text',
 };
 
 const fetch = (query) => {
@@ -25,7 +26,7 @@ const fetch = (query) => {
   }
 
   function getLeaderboardData() {
-    const golfLeaderboardAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/${tournamentId}/leaderboard.json?api_key=${sportradarAPIkey}`;  
+    const golfLeaderboardAPILink = `https://api.sportradar.us/golf/${sportradarAccessLevel}/${tour}/${sportradarAPIVersion}/en/${year}/tournaments/${tournamentId}/leaderboard.json?api_key=${sportradarAPIkey}`;
     return axios.get(golfLeaderboardAPILink, {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
