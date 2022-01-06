@@ -77,7 +77,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     const { url: promoImageUrl } = promoImage || {};
     const credit = credits?.afilliation?.[0]?.name || promoImage?.credits?.by?.[0]?.name || '';
     return `<embed type="raw">
-                <video style="width: 100%;" controls poster="${imageResizer(promoImageUrl, siteID)}">
+                <video width="100%" controls poster="${imageResizer(promoImageUrl, siteID)}">
                     <source src=${inlineVideoURL} type="video/mp4" >
                 </video>
                 <div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${credit}</div>
