@@ -27,8 +27,7 @@ const MostRead = () => {
   });
 
   /*
-    APD-1654: If the storyCount custom field is being used,
-    then we must map all stories into rows of 5 per UX request.
+    APD-1654: If the storyCount custom field is being used, then we must set all stories into rows of 5 per UX request.
     If not, then the old story-item handling logic will execute.
   */
 
@@ -65,9 +64,7 @@ const MostRead = () => {
 
   if (topStoriesData) {
     return <div className="c-mostRead"><div className="mostReadTitle">{`${title || 'Most Read'}`}</div>
-      <div className="mostReadList">
         {buildMostReadRows(storyCount)}
-      </div>
     </div>;
   }
   return null;
