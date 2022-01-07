@@ -147,13 +147,12 @@
           padding: 30px 0 0;
           text-align: left;
 
-          @include text-styles(1.125rem, 1.88, "Gordita");
+          @include text-styles(1rem, 1.88, "Gordita");
         }
 
         .photo-credit-text {
           display: block;
           color: #fff;
-          text-align: left;
 
           @include text-styles(1rem, 1, "Gordita");
         }
