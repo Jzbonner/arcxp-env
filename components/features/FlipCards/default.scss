@@ -20,7 +20,7 @@
   }
 
   .card {
-    width: auto;
+    width: 300px;
     max-width: 100%;
     color: #fff;
     position: relative;
@@ -29,7 +29,6 @@
     overflow: hidden;
 
     @include breakpoint(tablet) {
-      width: 300px;
       max-width: 300px;
       margin-right: 1.4%;
     }

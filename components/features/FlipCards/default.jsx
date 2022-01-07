@@ -56,7 +56,7 @@ const FlipCards = ({ customFields = {} }) => {
     let descriptionClass = 'description ';
     descriptionClass += storyUri ? 'condensed' : '';
     let cardBackContentClass = 'back content';
-    cardBackContentClass += imageUri ? 'with-image' : '';
+    cardBackContentClass += imageUri ? ' with-image' : '';
     let fullName = fName;
     fullName += ' ';
     fullName += lName;
