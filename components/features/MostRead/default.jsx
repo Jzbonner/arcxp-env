@@ -15,6 +15,7 @@ const MostRead = () => {
   const env = fetchEnv();
   const componentContext = useComponentContext();
   const { section, storyCount = null, title = '' } = componentContext && componentContext.customFields;
+
   const storyLimit = storyCount || '10';
   const topStoriesData = useContent({
     source: 'most-read',
@@ -37,8 +38,8 @@ const MostRead = () => {
     let counter = 0;
 
     if (storyCountConfig) {
-      topStoriesData.forEach((el) => {
-        if (counter === 4) {
+      topStoriesData.forEach((el, i) => {
+        if (counter === 4 || (counter < 4 && topStoriesData.length - 1 === i)) {
           storyRows.push(<div className="mostReadList">{storyItems}</div>);
           storyItems = [];
           counter = 0;
@@ -49,7 +50,6 @@ const MostRead = () => {
           storyItems.push(<a key={`Headline: ${el.title}`} href={`https://${env === 'prod' ? 'www.' : ''}${el.path}`} target="_self"><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>);
         }
       });
-
       return storyRows;
     }
 
