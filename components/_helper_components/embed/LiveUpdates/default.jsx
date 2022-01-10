@@ -68,7 +68,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
       case 3:
         response = <>
           <ArcAd
-            staticSlot={'RP01 desktop'}
+            staticSlot={'RP01-LiveUpdates'}
             key={`RP01-${index}`}
             lazyLoad={isMeteredStory}
           />
@@ -90,7 +90,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
         break;
       default:
         response = <ArcAd
-          staticSlot={toggledAdSlot}
+          staticSlot={`${toggledAdSlot}-LiveUpdates`}
           key={`${toggledAdSlot}-${index}`}
           customId={`div-id-${toggledAdSlot}_${index}`}
           lazyLoad={false}

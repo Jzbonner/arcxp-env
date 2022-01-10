@@ -350,7 +350,7 @@
         &.HP04 {
           margin-bottom: 0;
           border-top: none;
-          overflow: visible;
+          overflow: hidden;
 
           .arcad:not(:empty) {
             border-top: 1px solid #cdcdcd;
@@ -369,14 +369,12 @@
           width: calc(100% + 18px);
           max-width: calc(100% + 18px);
           text-align: center;
-          overflow: hidden;
         }
 
         @include between-breakpoints(mobile-sm, mobile-lg) {
           margin: 0 -9px 0 -5px;
           width: calc(100% + 14px);
           max-width: calc(100% + 14px);
-          overflow: hidden;
         }
 
         @include between-breakpoints(mobile, desktop-sm) {
