@@ -4,4 +4,5 @@ export default {
   CHARTBEAT_KEY: '8829d57bf1a1416ba9187bbf33e6fb81',
   SOPHI_CLIENT_ID: 'u4hKVNPrYMT58q4vjitD3rAInuvkqQhr',
   SOPHI_CLIENT_SECRET: '%{AQICAHiH7W8m/ZwSizPtJ5+e3MKEKRvPhAGdG3pC/jWLxGpnzgGOfU326AysleIiV7QOvcPhAAAAojCBnwYJKoZIhvcNAQcGoIGRMIGOAgEAMIGIBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDDs10vNoKsCnFD6seAIBEIBbguA8LtGcKYMqsfozI4v+pN10Sdf0HoLco4v/lJFZjhAAWGRJe0ftRctVPd947vzeXYXsTE/DSo1vnTTmE2yPTi/baG16HR6uVFBYqumySJPElwCkXczIx4FnGQ==}',
+  SOPHI_ENDPOINT: 'https://site-automation-api.ml.sophi.works/curatedHosts/www.ajc.com/curator',
 };

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import axios from 'axios';
-import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
+import { CONTENT_BASE, ARC_ACCESS_TOKEN, SOPHI_ENDPOINT } from 'fusion:environment';
 import GetSophiBearerToken from './helper_functions/getSophiBearerToken.js';
 
 const schemaName = 'sophi';
@@ -27,7 +27,7 @@ const fetch = async ({
 
   const storyIds = await axios
     .get(
-      `https://site-automation-api.ml.sophi.works/curatedHosts/www.${activeSite}.com/curator?page=${page}&widget=${widget}`,
+      `${SOPHI_ENDPOINT}?page=${page}&widget=${widget}`,
       {
         headers: {
           Authorization: `Bearer ${token.access_token}`,
@@ -39,7 +39,7 @@ const fetch = async ({
       console.log('AXIOS CATCH - get Sophi story IDs => ', error?.response?.data?.message);
     });
 
-  const bulkCallUrl = `${CONTENT_BASE}/content/v4/ids?ids=${storyIds}&website=${activeSite}&included_fields=canonical_url,canonical_website,credits,description,display_date,headlines,promo_items,taxonomy,teaseImageObject,type,_id`;
+  const bulkCallUrl = `${CONTENT_BASE}/content/v4/ids?ids=${storyIds}&website=${activeSite}&included_fields=content_elements,first_publish_date,last_updated_date,canonical_url,canonical_website,credits,description,display_date,headlines,promo_items,taxonomy,teaseImageObject,type,_id`;
 
   return axios
     .get(bulkCallUrl, {
