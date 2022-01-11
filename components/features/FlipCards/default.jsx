@@ -3,6 +3,27 @@ import PropTypes from 'prop-types';
 import AtlantaHomicidesMasterList2021 from './data/AtlantaHomicidesMasterList2021';
 import './default.scss';
 
+const initMap = () => {
+  if (typeof window !== 'undefined') {
+    const mapJs = window.document.querySelector('#mapJs');
+    if (mapJs && !mapJs.attr('data-loaded')) {
+      const accessToken = 'pk.eyJ1IjoibmV3c2FwcHNhamMiLCJhIjoiY2trNzVoM3RmMDliMTJ2bW9ndmsycmhjZCJ9.a37jVrQk_5FHFkUo0U-K6A';
+      const L = window.L || {};
+      const map = L.map('map').setView([51.505, -0.09], 13);
+      L.tileLayer(`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${accessToken}`, {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/light-v10',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken,
+      }).addTo(map);
+
+      mapJs.attr('data-loaded', true);
+    }
+  }
+};
+
 const FlipCards = ({ customFields = {} }) => {
   const {
     useLocalData,
@@ -100,8 +121,8 @@ const FlipCards = ({ customFields = {} }) => {
       <div id='map' className='c-map'></div>
       <div className='c-cards'>
         {renderCards(data)}
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossOrigin=""/>
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossOrigin=""></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossOrigin=""/ >
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" id="mapJs" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossOrigin="" onLoad={ initMap() }></script>
       </div>
     </>;
   }
