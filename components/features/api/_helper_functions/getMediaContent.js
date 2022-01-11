@@ -1,12 +1,12 @@
 /* eslint-disable no-nested-ternary */
 import getVideoAuthor from './getVideoAuthor';
 import mediaObj from './mediaObj';
+import getMediaCredit from './getMediaCredit';
 
 export const getMediaContent = (type, siteID, globalContent, promoItems, newsletterFeed = false, standardFeed = false) => {
   let formattedMediaContent = [];
   let formatterGalleryArray = [];
   let leadObject = {};
-
 
   const standaloneGallery = type === 'gallery';
   const { basic = {} } = promoItems || {};
@@ -29,14 +29,13 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     credits: basicGalleryCredits = '', url: basicGalleryUrl = '', caption: basicGalleryCaption = '', subtitle: basicGallerySubtitle = '',
   } = basicGalleryPromo || {};
 
-  const galleryMediaCredit = basicGalleryCredits && basicGalleryCredits.affiliation && basicGalleryCredits.affiliation[0] && basicGalleryCredits.affiliation[0].name && basicGalleryCredits.affiliation[0].name !== '' ? basicGalleryCredits.affiliation[0].name : basicGalleryCredits && basicGalleryCredits.by && basicGalleryCredits.by[0] && basicGalleryCredits.by[0].name
-    ? basicGalleryCredits.by[0].name : basicGalleryCredits && basicGalleryCredits.by && basicGalleryCredits.by[0] && basicGalleryCredits.by[0].referent && basicGalleryCredits.by[0].referent && basicGalleryCredits.by[0].referent.id ? basicGalleryCredits.by[0].referent.id : '';
+  const galleryMediaCredit = getMediaCredit(basicGalleryCredits);
   const { meta_title: metaTitle, basic: baseHeadline } = basicHeadlines || {};
   let mediaTitle = basicSubtitle;
   if (!mediaTitle) {
     mediaTitle = metaTitle || baseHeadline || '';
   }
-  const basicAuthor = basicCredits && basicCredits.affiliation && basicCredits.affiliation[0] && basicCredits.affiliation[0].name && basicCredits.affiliation[0].name !== '' ? basicCredits.affiliation[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].name ? basicCredits.by[0].name : basicCredits && basicCredits.by && basicCredits.by[0] && basicCredits.by[0].referent && basicCredits.by[0].referent.id ? basicCredits.by[0].referent.id : '';
+  const basicAuthor = getMediaCredit(basicCredits);
   if (promoItemsType === 'image' && !standaloneGallery) {
     leadObject = basicUrl && basicUrl !== '' ? mediaObj('image/JPEG', 'image', basicUrl, siteID, mediaTitle, basicCaption, basicAuthor, true, basicUrl, true) : basicGalleryPromo ? mediaObj('image/JPEG', 'image', basicGalleryUrl, siteID, basicGallerySubtitle, basicGalleryCaption, galleryMediaCredit, true, basicGalleryUrl, true) : {};
   }
@@ -109,8 +108,10 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         subtitle = '',
         credits: mediaCredits = {},
         streams: mediaStreams = [],
+        vanity_credits: vanityCredits,
       } = media || {};
-      const mediaAuthor = mediaCredits && mediaCredits.affiliation && mediaCredits.affiliation[0] && mediaCredits.affiliation[0].name && mediaCredits.affiliation[0].name !== '' ? mediaCredits.affiliation[0].name : mediaCredits.affiliation && mediaCredits.affiliation.by && mediaCredits.affiliation.by.name ? mediaCredits.affiliation.by.name : mediaCredits && mediaCredits.by && mediaCredits.by[0] && mediaCredits.by[0].name ? mediaCredits.by[0].name : '';
+
+      const mediaAuthor = vanityCredits ? getMediaCredit(vanityCredits) : getMediaCredit(mediaCredits);
       // per Surendra: For stories, we are not adding inline images to media:content.
       if (type === 'story') {
         return {};

@@ -1,4 +1,5 @@
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import getMediaCredit from './getMediaCredit';
 
 export const formatNavigaContent = (siteID, contentElements) => contentElements.map((el) => {
   const { type, content = '' } = el || {};
@@ -93,12 +94,16 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   }
 
   if (type === 'image') {
-    const { url = '', caption: imageCaption = '' } = el || {};
+    const {
+      url = '', caption: imageCaption = '', credits: mediaCredits = {}, vanity_credits: vanityCredits,
+    } = el || {};
 
     return `
       <embed type="raw">
         <img src="${imageResizer(url, siteID)}" title="${imageCaption}" alt="${imageCaption}"/>
       </embed>
+      <byline>Credit: ${vanityCredits ? getMediaCredit(vanityCredits) : getMediaCredit(mediaCredits)}
+      </byline>
     `;
   }
 
