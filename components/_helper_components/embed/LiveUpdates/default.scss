@@ -350,6 +350,7 @@
         &.HP04 {
           margin-bottom: 0;
           border-top: none;
+          overflow: hidden;
 
           .arcad:not(:empty) {
             border-top: 1px solid #cdcdcd;
@@ -363,25 +364,17 @@
           }
         }
 
-        @include between-breakpoints(mobile, mobile-lg) {
-          overflow: visible;
-        }
-
         @include between-breakpoints(mobile, mobile-sm) {
-
-          .arcad[class*="MP0"] {
-            margin: 0 -9px;
-            width: calc(100% + 16px);
-            text-align: center;
-          }
+          margin: 0 -9px;
+          width: calc(100% + 18px);
+          max-width: calc(100% + 18px);
+          text-align: center;
         }
 
         @include between-breakpoints(mobile-sm, mobile-lg) {
-
-          .arcad[class*="MP0"] {
-            margin: 0 -9px 0 -5px;
-            width: calc(100% + 12px);
-          }
+          margin: 0 -9px 0 -5px;
+          width: calc(100% + 14px);
+          max-width: calc(100% + 14px);
         }
 
         @include between-breakpoints(mobile, desktop-sm) {

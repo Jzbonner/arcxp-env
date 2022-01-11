@@ -3,6 +3,13 @@
 .c-liveUpdateSnippets {
   width: 100%;
 
+  @include breakpoint(desktop-sm) {
+
+    &.b-margin-bottom-d40-m20 {
+      margin-bottom: 0;
+    }
+  }
+
   .is-not-live {
     display: none;
   }
