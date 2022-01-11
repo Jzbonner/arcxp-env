@@ -47,7 +47,7 @@ LeftPhotoNoPhoto.propTypes = {
     moreURL: PropTypes.string.tag({
       name: 'More URL',
     }),
-    content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
+    content: PropTypes.contentConfig(['collections', 'query-feed', 'sophi']).tag({
       name: 'Content',
       moreURL: PropTypes.string.tag({
         name: 'More URL',

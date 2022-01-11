@@ -6,7 +6,7 @@ export default async () => {
   const currentEnv = fetchEnv();
 
   return axios
-    .post('https://sophi-works.auth0.com/oauth/token', {
+    .post(`https://${currentEnv === 'prod' ? 'login.sophi.io' : 'sophi-works.auth0.com'}/oauth/token`, {
       client_id: SOPHI_CLIENT_ID,
       client_secret: SOPHI_CLIENT_SECRET,
       audience: currentEnv === 'prod' ? 'https://api.sophi.io' : 'https://api.sophi.works',
