@@ -83,10 +83,10 @@ const ListItem = ({
           return promoItems.basic;
         }
       }
-      if (promoItems.basic.type === 'image') {
+      if (promoItems?.basic?.type === 'image') {
         return promoItems.basic || promoItems.lead_art.promo_items.basic;
       }
-      if (promoItems.basic.type === 'video' || promoItems.basic.type === 'gallery') {
+      if (promoItems?.basic?.type === 'video' || promoItems?.basic?.type === 'gallery') {
         if (promoItems.basic.promo_items && promoItems.basic.promo_items.basic) {
           return promoItems.basic.promo_items.basic;
         }
