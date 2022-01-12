@@ -36,18 +36,21 @@ const MostRead = () => {
     const storyRows = [];
     let storyItems = [];
     let counter = 0;
+    let totalCount = 0;
 
     if (storyCountConfig) {
       topStoriesData.forEach((el, i) => {
-        if (counter === 4 || (counter < 4 && topStoriesData.length - 1 === i)) {
+        if (counter === 5 || (counter < 5 && topStoriesData.length - 1 === i)) {
           storyRows.push(<div className="mostReadList">{storyItems}</div>);
           storyItems = [];
           counter = 0;
+          totalCount += 1;
         }
 
         if (el.title) {
           counter += 1;
-          storyItems.push(<a key={`Headline: ${el.title}`} href={`https://${env === 'prod' ? 'www.' : ''}${el.path}`} target="_self"><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>);
+          totalCount += 1;
+          storyItems.push(<a key={`Headline: ${el.title}`} href={`https://${env === 'prod' ? 'www.' : ''}${el.path}`} target="_self"><div className="mostReadRanking">{totalCount}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>);
         }
       });
       return storyRows;
