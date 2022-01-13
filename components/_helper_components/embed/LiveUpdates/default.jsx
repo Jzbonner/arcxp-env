@@ -112,12 +112,9 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
       },
     });
 
-    console.log('liveUpdateEvent', liveUpdateMetricsFired);
-
     document.dispatchEvent(liveUpdateMetricsFired);
   };
 
-/* set metrics dispatch here for scrolling */
   const highlightNavItem = (hashTarget, highlightFromHash) => {
     if (hashTarget !== activeUpdate || highlightFromHash) {
       const activeLink = document.querySelector(`a[href='#${activeUpdate}']`) || document.querySelector('.c-liveUpdateNav .is-active');
@@ -127,9 +124,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
       const targetLink = document.querySelector(`a[href='#${hashTarget}']`);
       const targetLinkTitle = targetLink && targetLink.getAttribute('title');
       const targetLinkIndex = targetLink && targetLink.getAttribute('index');
-      
-/*       console.log('target link 1 scroll', targetLink);
-      console.log('target link 1 title scroll', targetLink.getAttribute('title')); */
+
       if (targetLink) {
         const { top: targetLinkTop, bottom: targetLinkBottom } = targetLink.getBoundingClientRect();
         if (targetLink.className.indexOf('is-active') === -1) {
@@ -153,7 +148,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
       activeUpdate = hashTarget;
     } else if (document.querySelector('.c-liveUpdateNav .is-active') === null) {
       const targetLink = document.querySelector(`a[href='#${activeUpdate}']`);
-      console.log('target link 2', targetLink);
       if (targetLink) targetLink.className += ' is-active';
     }
   };
@@ -165,15 +159,9 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
 
     if (evt) {
       evt.preventDefault();
-      console.log('target', evt.target);
-      console.log('target', evt.target || 'no target');
       liveUpdateIndex = evt?.target?.getAttribute('index') || null;
       target = evt.target ? evt.target.getAttribute('href') : null;
       liveUpdateTitle = evt?.target?.textContent;
-      console.log('click index', liveUpdateIndex);
-      console.log('liveUpdateTitle', liveUpdateTitle);
-      
-      console.log('target update text', evt.target.textContent);
     }
 
     if (!target && evt) {
@@ -184,7 +172,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
         parent = parent.parentNode;
       }
 
-      console.log('click parent', parent);
       liveUpdateIndex = parent.getAttribute('index');
       target = parent.getAttribute('href');
     }
@@ -243,7 +230,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
             )
           ) {
             hasAMatch = true;
-            console.log('scrolling time hash', hash);
             return highlightNavItem(hash);
           }
           return false;
