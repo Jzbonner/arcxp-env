@@ -26,8 +26,8 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   let timeout;
   const stickyHeaderAdjustment = 80;
   let toggledAdSlot = 'HP03';
-  const windowExists = typeof window !== 'undefined';
-  const dataLayer = windowExists ? window.dataLayer : [];
+  // const windowExists = typeof window !== 'undefined';
+
   const copyToClipboard = (e) => {
     e.preventDefault();
     let action = () => console.error('fallback in case Window or Navigator are unknown');
@@ -103,6 +103,21 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     return response;
   };
 
+  const handleMetricsEventDispatch = (liveUpdateTitle, index) => {
+    const liveUpdateMetricsFired = new CustomEvent('liveUpdateMetricsFired', {
+      detail: {
+        title: liveUpdateTitle,
+        scrollDepth: window.scrollY,
+        index,
+      },
+    });
+
+    console.log('liveUpdateEvent', liveUpdateMetricsFired);
+
+    document.dispatchEvent(liveUpdateMetricsFired);
+  };
+
+/* set metrics dispatch here for scrolling */
   const highlightNavItem = (hashTarget, highlightFromHash) => {
     if (hashTarget !== activeUpdate || highlightFromHash) {
       const activeLink = document.querySelector(`a[href='#${activeUpdate}']`) || document.querySelector('.c-liveUpdateNav .is-active');
@@ -110,6 +125,11 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
         activeLink.setAttribute('class', activeLink.className.replace('is-active', ''));
       }
       const targetLink = document.querySelector(`a[href='#${hashTarget}']`);
+      const targetLinkTitle = targetLink && targetLink.getAttribute('title');
+      const targetLinkIndex = targetLink && targetLink.getAttribute('index');
+      
+/*       console.log('target link 1 scroll', targetLink);
+      console.log('target link 1 title scroll', targetLink.getAttribute('title')); */
       if (targetLink) {
         const { top: targetLinkTop, bottom: targetLinkBottom } = targetLink.getBoundingClientRect();
         if (targetLink.className.indexOf('is-active') === -1) {
@@ -126,10 +146,14 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
           // The top of the targetLink will be aligned to the top of the visible area of the scrollable ancestor
           targetLink.scrollIntoView(true);
         }
+
+        handleMetricsEventDispatch(targetLinkTitle, targetLinkIndex);
       }
+
       activeUpdate = hashTarget;
     } else if (document.querySelector('.c-liveUpdateNav .is-active') === null) {
       const targetLink = document.querySelector(`a[href='#${activeUpdate}']`);
+      console.log('target link 2', targetLink);
       if (targetLink) targetLink.className += ' is-active';
     }
   };
@@ -137,17 +161,21 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   const handleNavTrigger = (evt, hash) => {
     let target = null;
     let liveUpdateTitle = null;
+    let liveUpdateIndex = null;
 
     if (evt) {
       evt.preventDefault();
+      console.log('target', evt.target);
       console.log('target', evt.target || 'no target');
+      liveUpdateIndex = evt?.target?.getAttribute('index') || null;
       target = evt.target ? evt.target.getAttribute('href') : null;
       liveUpdateTitle = evt?.target?.textContent;
+      console.log('click index', liveUpdateIndex);
       console.log('liveUpdateTitle', liveUpdateTitle);
-      console.log('target', evt.target);
+      
       console.log('target update text', evt.target.textContent);
-
     }
+
     if (!target && evt) {
       // it's not the top-level link - but we do have an event - so we have to move up a level
       let parent = evt.target.parentNode;
@@ -155,25 +183,22 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
         // timestamps are grandchildren of the nav `A` element so we need to go up one more level
         parent = parent.parentNode;
       }
+
+      console.log('click parent', parent);
+      liveUpdateIndex = parent.getAttribute('index');
       target = parent.getAttribute('href');
     }
     const hashTarget = !target && hash ? hash : target && target.substr(target.indexOf('#') + 1);
     const targetUpdate = document.querySelector(`[name='${hashTarget}']`) || null;
 
     if (liveUpdateTitle) {
-      const liveUpdateDataObj = {
-        title: liveUpdateTitle,
-        event: 'leftNav_clicked',
-      };
-
-      dataLayer.push(liveUpdateDataObj);
+      handleMetricsEventDispatch(liveUpdateTitle, liveUpdateIndex);
     }
 
     if (targetUpdate) {
       targetUpdate.scrollIntoView(true);
     }
   };
-
 
   const handleScroll = () => {
     if (!isScrolling) {
@@ -218,6 +243,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
             )
           ) {
             hasAMatch = true;
+            console.log('scrolling time hash', hash);
             return highlightNavItem(hash);
           }
           return false;
@@ -273,15 +299,14 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   /* set the last dispact within the handleScroll func */
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-/*     const liveUpdatesMetrics = new Event('liveUpdatesMetrics'); */
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   let resizeObserver = {
-    observe: () => {},
-    unobserve: () => {},
+    observe: () => { },
+    unobserve: () => { },
   }; // fallback for non-existence of ResizeObserver (i.e. SSR)
 
   if (typeof ResizeObserver !== 'undefined') {
@@ -303,7 +328,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     const restOfLiveUpdates = liveUpdates.slice(1, liveUpdates.length);
     let updateIndex = 0;
     let mostRecentDate = null;
-    const liveUpdatesMapper = updates => updates.map((update) => {
+    const liveUpdatesMapper = updates => updates.map((update, i) => {
       const {
         headlines,
         _id: elId,
@@ -336,7 +361,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
           {!isTimeline && insertDateMarker && <a key={`${elId}-dateMarker`} className='date-marker' title={timestampDate}>
             <div className='timestamp'>{timestampDate.replace(',', '')}</div>
           </a>}
-          <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger} className={activeUpdate === elId ? 'is-active' : ''} title={`${timestampTime}: ${headline.replace(/"/g, '\'')}`}>
+          <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger} className={activeUpdate === elId ? 'is-active' : ''} index={`${i}`} title={`${timestampTime}: ${headline.replace(/"/g, '\'')}`}>
             <div className='headline hidden-mobile'>{headline}</div>
             <div className='timestamp'>
               <span className={`timestamp-date ${isToday ? 'same-day' : ''}`}>{timestampDate} </span>
