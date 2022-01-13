@@ -26,6 +26,8 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   let timeout;
   const stickyHeaderAdjustment = 80;
   let toggledAdSlot = 'HP03';
+  const windowExists = typeof window !== 'undefined';
+  const dataLayer = windowExists ? window.dataLayer : [];
   const copyToClipboard = (e) => {
     e.preventDefault();
     let action = () => console.error('fallback in case Window or Navigator are unknown');
@@ -134,9 +136,17 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
 
   const handleNavTrigger = (evt, hash) => {
     let target = null;
+    let liveUpdateTitle = null;
+
     if (evt) {
       evt.preventDefault();
+      console.log('target', evt.target || 'no target');
       target = evt.target ? evt.target.getAttribute('href') : null;
+      liveUpdateTitle = evt?.target?.textContent;
+      console.log('liveUpdateTitle', liveUpdateTitle);
+      console.log('target', evt.target);
+      console.log('target update text', evt.target.textContent);
+
     }
     if (!target && evt) {
       // it's not the top-level link - but we do have an event - so we have to move up a level
@@ -149,10 +159,21 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     }
     const hashTarget = !target && hash ? hash : target && target.substr(target.indexOf('#') + 1);
     const targetUpdate = document.querySelector(`[name='${hashTarget}']`) || null;
+
+    if (liveUpdateTitle) {
+      const liveUpdateDataObj = {
+        title: liveUpdateTitle,
+        event: 'leftNav_clicked',
+      };
+
+      dataLayer.push(liveUpdateDataObj);
+    }
+
     if (targetUpdate) {
       targetUpdate.scrollIntoView(true);
     }
   };
+
 
   const handleScroll = () => {
     if (!isScrolling) {
@@ -249,8 +270,10 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     }
   }, [hashId]);
 
+  /* set the last dispact within the handleScroll func */
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+/*     const liveUpdatesMetrics = new Event('liveUpdatesMetrics'); */
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
