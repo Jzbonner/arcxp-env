@@ -18,11 +18,11 @@ export default (headline, applyExtension = false) => {
           if (['.', ',', '?', ':', ';', '!', ' '].includes(newHeadline.slice(-1))) {
             newHeadline = newHeadline.substring(0, newHeadline.length - 1);
           }
-          // and if the new headline length is less than the limit, append an ellipsis
-          newHeadline = `${newHeadline}...`;
         }
       }
     });
+    // When the headline contains a punctuation it sometimes matches the charlimit
+    newHeadline = `${newHeadline}...`;
     return newHeadline;
   }
   return headline;
