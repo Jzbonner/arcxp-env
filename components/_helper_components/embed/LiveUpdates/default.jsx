@@ -26,7 +26,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   let timeout;
   const stickyHeaderAdjustment = 80;
   let toggledAdSlot = 'HP03';
-  // const windowExists = typeof window !== 'undefined';
 
   const copyToClipboard = (e) => {
     e.preventDefault();
