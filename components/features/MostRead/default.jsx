@@ -41,7 +41,7 @@ const MostRead = () => {
     if (storyCountConfig) {
       topStoriesData.forEach((el, i) => {
         if (counter === 5 || (counter < 5 && topStoriesData.length - 1 === i)) {
-          storyRows.push(<div className={`mostReadList ${storyRows.length >= 1 ? 'sub-row' : ''}`}mostReadList>{storyItems}</div>);
+          storyRows.push(<div className={`mostReadList ${storyRows.length >= 1 ? 'sub-row' : ''}`}>{storyItems}</div>);
           storyItems = [];
           counter = 0;
         }
