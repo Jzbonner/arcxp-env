@@ -41,10 +41,10 @@ const MostRead = () => {
     if (storyCountConfig) {
       topStoriesData.forEach((el, i) => {
         if (counter === 5 || (counter < 5 && topStoriesData.length - 1 === i)) {
-          storyRows.push(<div className="mostReadList">{storyItems}</div>);
+          storyRows.push(<div className={`mostReadList ${storyRows.length >= 1 ? 'sub-row' : ''}`}mostReadList>{storyItems}</div>);
           storyItems = [];
           counter = 0;
-          totalCount += 1;
+          // totalCount += 1;
         }
 
         if (el.title) {
@@ -81,7 +81,7 @@ MostRead.propTypes = {
     title: PropTypes.string.tag({
       label: 'Replaces MostRead title',
     }),
-    storyCount: PropTypes.oneOf(['5', '10', '15', '20', '25', '30', '35', '40', '45', '50']).tag({
+    storyCount: PropTypes.oneOf(['5', '10', '15', '20', '25', '30']).tag({
       name: 'Number of stories to display',
     }),
   }),
