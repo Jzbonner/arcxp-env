@@ -44,7 +44,6 @@ const MostRead = () => {
           storyRows.push(<div className={`mostReadList ${storyRows.length >= 1 ? 'sub-row' : ''}`}mostReadList>{storyItems}</div>);
           storyItems = [];
           counter = 0;
-          // totalCount += 1;
         }
 
         if (el.title) {
