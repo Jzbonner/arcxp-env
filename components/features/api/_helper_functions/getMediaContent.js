@@ -23,10 +23,9 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     content_elements: basicContentElements = [],
     description: basicDescription,
   } = basic || {};
-
   const { basic: basicGalleryPromo } = basicPromoItems || {};
   const {
-    credits: basicGalleryCredits = '', url: basicGalleryUrl = '', caption: basicGalleryCaption = '', subtitle: basicGallerySubtitle = '',
+    credits: basicGalleryCredits = {}, url: basicGalleryUrl = '', caption: basicGalleryCaption = '', subtitle: basicGallerySubtitle = '',
   } = basicGalleryPromo || {};
 
   const galleryMediaCredit = getMediaCredit(basicGalleryCredits);
@@ -72,9 +71,9 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     } else if (!standaloneGallery) {
       formatterGalleryArray = basicContentElements.map((item) => {
         const {
-          caption: itemCaption = '', url: itemUrl = '', credits: creditsArray = '', subtitle: itemTitle = '',
+          caption: itemCaption = '', url: itemUrl = '', credits: creditsObj = {}, subtitle: itemTitle = '',
         } = item || {};
-        const appFeedCredit = creditsArray && creditsArray.affiliation && creditsArray.affiliation[0] && creditsArray.affiliation[0].name && creditsArray.affiliation[0].name !== '' ? creditsArray.affiliation[0].name : creditsArray && creditsArray.by && creditsArray.by[0] && creditsArray.by[0].name ? creditsArray.by[0].name : creditsArray && creditsArray.by && creditsArray.by[0] && creditsArray.by[0].referent && creditsArray.by[0].referent.id ? creditsArray.by[0].referent.id : '';
+        const appFeedCredit = creditsObj && creditsObj.affiliation && creditsObj.affiliation[0] && creditsObj.affiliation[0].name && creditsObj.affiliation[0].name !== '' ? creditsObj.affiliation[0].name : creditsObj && creditsObj.by && creditsObj.by[0] && creditsObj.by[0].name ? creditsObj.by[0].name : creditsObj && creditsObj.by && creditsObj.by[0] && creditsObj.by[0].referent && creditsObj.by[0].referent.id ? creditsObj.by[0].referent.id : '';
 
         // Have to implement an additional check for collections to see if there isn't already a lead object (which is usually the case for collections)
         if (basicGalleryUrl === itemUrl && !Object.prototype.hasOwnProperty.call(leadObject, '_name')) {
@@ -86,9 +85,9 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
     } else {
       formatterGalleryArray = basicContentElements.map((item) => {
         const {
-          caption: itemCaption, url: itemUrl, credits: creditsArray = '', subtitle: itemTitle = '',
+          caption: itemCaption, url: itemUrl, credits: creditsObj = {}, subtitle: itemTitle = '',
         } = item || {};
-        const appFeedCredit = creditsArray.affiliation && creditsArray.affiliation.by && creditsArray.affiliation.by.name ? creditsArray.affiliation.by.name : creditsArray && creditsArray.by && creditsArray.by[0] && creditsArray.by[0].name ? creditsArray.by[0].name : '';
+        const appFeedCredit = creditsObj.affiliation && creditsObj.affiliation.by && creditsObj.affiliation.by.name ? creditsObj.affiliation.by.name : creditsObj && creditsObj.by && creditsObj.by[0] && creditsObj.by[0].name ? creditsObj.by[0].name : '';
         if (basicUrl === itemUrl) {
           leadObject = mediaObj('image/JPEG', 'image', itemUrl, siteID, itemTitle, itemCaption, appFeedCredit, true, basicUrl, true);
           return {};
@@ -108,10 +107,9 @@ export const getMediaContent = (type, siteID, globalContent, promoItems, newslet
         subtitle = '',
         credits: mediaCredits = {},
         streams: mediaStreams = [],
-        vanity_credits: vanityCredits,
+        vanity_credits: vanityCredits = {},
       } = media || {};
-
-      const mediaAuthor = vanityCredits ? getMediaCredit(vanityCredits) : getMediaCredit(mediaCredits);
+      const mediaAuthor = vanityCredits && getMediaCredit(vanityCredits) !== '' ? getMediaCredit(vanityCredits) : mediaCredits && getMediaCredit(mediaCredits) !== '' ? getMediaCredit(mediaCredits) : '';
       // per Surendra: For stories, we are not adding inline images to media:content.
       if (type === 'story') {
         return {};
