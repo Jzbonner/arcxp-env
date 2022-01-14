@@ -102,7 +102,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
       <embed type="raw">
         <img src="${imageResizer(url, siteID)}" title="${imageCaption}" alt="${imageCaption}"/>
       </embed>
-      ${(vanityCredits && getMediaCredit(vanityCredits) !== '' && `<small>Credit: ${getMediaCredit(vanityCredits)}</small>`) || (mediaCredits && getMediaCredit(mediaCredits) !== '' && `<small>Credit: ${getMediaCredit(mediaCredits)}</small>`)}}
+      ${(vanityCredits && getMediaCredit(vanityCredits) !== '' && `<div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(vanityCredits)}</div>`) || (mediaCredits && getMediaCredit(mediaCredits) !== '' && `<div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(mediaCredits)}</div>`)}
     `;
   }
 
