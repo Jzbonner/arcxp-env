@@ -34,12 +34,13 @@ const fetch = async ({
         },
       },
     )
-    .then(({ data }) => data.join(','))
+    .then(({ data }) => data.map((id, i) => ({ id, order: i })))
     .catch((error) => {
       console.log('AXIOS CATCH - get Sophi story IDs => ', error?.response?.data?.message);
     });
 
-  const bulkCallUrl = `${CONTENT_BASE}/content/v4/ids?ids=${storyIds}&website=${activeSite}&included_fields=content_elements,first_publish_date,last_updated_date,canonical_url,canonical_website,credits,description,display_date,headlines,promo_items,taxonomy,teaseImageObject,type,_id`;
+  const storyIdsStr = storyIds.map(id => id.id).join(',');
+  const bulkCallUrl = `${CONTENT_BASE}/content/v4/ids?ids=${storyIdsStr}&website=${activeSite}&included_fields=content_elements,first_publish_date,last_updated_date,canonical_url,canonical_website,credits,description,display_date,headlines,promo_items,taxonomy,teaseImageObject,type,_id`;
 
   return axios
     .get(bulkCallUrl, {
@@ -48,6 +49,8 @@ const fetch = async ({
       },
     })
     .then(({ data }) => data.content_elements)
+    .then(stories => stories.map(story => ({ ...story, order: storyIds.find(storyIdsStory => storyIdsStory.id === story._id).order })))
+    .then(stories => stories.sort((a, b) => a.order - b.order))
     .catch((error) => {
       console.log('AXIOS CATCH - get Sophi stories => ', error?.response?.data?.message);
     });
