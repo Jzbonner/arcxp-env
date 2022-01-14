@@ -1,34 +1,72 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import AtlantaHomicidesMasterList2021 from './data/AtlantaHomicidesMasterList2021';
 import './default.scss';
-
-const initMap = () => {
-  if (typeof window !== 'undefined') {
-    const mapJs = window.document.querySelector('#mapJs');
-    if (mapJs && !mapJs.attr('data-loaded')) {
-      const accessToken = 'pk.eyJ1IjoibmV3c2FwcHNhamMiLCJhIjoiY2trNzVoM3RmMDliMTJ2bW9ndmsycmhjZCJ9.a37jVrQk_5FHFkUo0U-K6A';
-      const L = window.L || {};
-      const map = L.map('map').setView([51.505, -0.09], 13);
-      L.tileLayer(`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${accessToken}`, {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox/light-v10',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken,
-      }).addTo(map);
-
-      mapJs.attr('data-loaded', true);
-    }
-  }
-};
 
 const FlipCards = ({ customFields = {} }) => {
   const {
     useLocalData,
   } = customFields;
   const [isFlipped, setFlipped] = useState(-1);
+  const mapData = [];
+  // const mapMarkers = [];
+  // let mapClick = e => e.preventDefault();
+  // let map = null;
+
+  useEffect(() => {
+    document.querySelector('.c-sectionContent').addEventListener('click', (e) => {
+      const clickTarget = e.target;
+      const flippedCard = document.querySelector('.card.is-flipped');
+      const flippedCardIndex = flippedCard ? flippedCard.getAttribute('data-index') : -1;
+      const parentCard = flippedCardIndex ? document.querySelector(`.card[data-index="${flippedCardIndex}"]`) : null;
+
+      if (parentCard && (!parentCard.contains(clickTarget) || parentCard !== clickTarget)) {
+        setFlipped(-1);
+      }
+    });
+  //
+  //   if (!window.document.querySelector('#mapJs')) {
+  //     // the leaflet script hasn't yet been added, proceed
+  //     const lScript = document.createElement('script');
+  //     lScript.id = 'mapJs';
+  //     lScript.crossOrigin = '';
+  //     lScript.src = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js';
+  //     lScript.async = true;
+  //     lScript.integrity = 'sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==';
+  //     lScript.addEventListener('load', () => {
+  //       const accessToken = 'pk.eyJ1IjoibmV3c2FwcHNhamMiLCJhIjoiY2trNzVoM3RmMDliMTJ2bW9ndmsycmhjZCJ9.a37jVrQk_5FHFkUo0U-K6A';
+  //       const L = window.L || {};
+  //       map = L.map('map', {
+  //         center: [33.75522308811217, -84.4239967],
+  //         zoom: 12,
+  //       });
+  //       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  //         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  //         maxZoom: 18,
+  //         id: 'mapbox/light-v10',
+  //         tileSize: 512,
+  //         zoomOffset: -1,
+  //         accessToken,
+  //       }).addTo(map);
+  //       mapData.forEach((tile) => {
+  //         const { lat, lon, name } = tile;
+  //         const marker = L.marker({ lat, lon }).bindPopup(name);
+  //         mapMarkers.push(marker);
+  //         return marker.addTo(map);
+  //       });
+  //     });
+  //     lScript.addEventListener('error', () => {
+  //       console.error('Error loading:', lScript);
+  //     });
+  //     document.getElementsByTagName('head')[0].appendChild(lScript);
+  //
+  //     mapClick = (e, i) => {
+  //       e.preventDefault();
+  //       console.error('dave, mapclick', mapMarkers[i], mapMarkers[i].getPopup());
+  //       map.openPopup(mapMarkers[i].getPopup());
+  //     };
+  //   }
+  }, []);
 
   const flipCard = (i) => {
     if (isFlipped === i) {
@@ -62,6 +100,7 @@ const FlipCards = ({ customFields = {} }) => {
         Details: description,
         Link: storyUri,
       } = cardData || {};
+      mapData.push({ lat: lat * 1, lon: long * 1, name: `${fName} ${lName}` });
 
       const dateArr = date.split('-');
       const {
@@ -81,13 +120,13 @@ const FlipCards = ({ customFields = {} }) => {
       cardClass += isFlipped === i ? 'is-flipped' : '';
       let descriptionClass = 'description ';
       descriptionClass += storyUri ? 'condensed' : '';
-      let cardBackContentClass = 'back content';
+      let cardBackContentClass = 'back content without-location';
       cardBackContentClass += imageUri ? ' with-image' : '';
       let fullName = fName;
       fullName += ' ';
       fullName += lName;
 
-      return <div className={cardClass} key={i} onClick={ () => flipCard(i) }>
+      return <div className={cardClass} data-index={i} key={i} onClick={ () => flipCard(i) }>
         <div className='front content'>
           <h2>{fName}<br />{lName}</h2>
           <h3>Age: {age}</h3>
@@ -104,9 +143,11 @@ const FlipCards = ({ customFields = {} }) => {
             {age && <h3>Age: {age}</h3>}
             {gender && <h3>Gender: {gender}</h3>}
           </div>
-          {lat && long && <p className='location'>
-            <a href='#' data-lat={lat} data-long={long}>Location of death</a>
-          </p>}
+          {
+            // {lat && long && <p className='location'>
+            //   <a href='#' data-lat={lat} data-long={long} data-marker={i} onClick={ e => mapClick(e, i) }>Location of death</a>
+            // </p>}
+          }
           {description && <p className={descriptionClass}>{description}</p>}
           {storyUri && <a className='more-link' href={storyUri}>Read the Article</a>}
         </div>
@@ -118,11 +159,14 @@ const FlipCards = ({ customFields = {} }) => {
     const data = AtlantaHomicidesMasterList2021;
 
     return <>
-      <div id='map' className='c-map'></div>
+      {
+        // <div className='c-map'>
+        //   <div id='map'></div>
+        // </div>
+      }
       <div className='c-cards'>
         {renderCards(data)}
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossOrigin=""/ >
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" id="mapJs" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossOrigin="" onLoad={ initMap() }></script>
       </div>
     </>;
   }
