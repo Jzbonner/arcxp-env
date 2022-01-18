@@ -73,15 +73,15 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   }
 
   if (type === 'video') {
-    const { streams, promo_image: promoImage, credits } = el || {};
+    const { streams, promo_image: promoImage = {}, credits = {} } = el || {};
     const [{ url: inlineVideoURL }] = streams || {};
-    const { url: promoImageUrl } = promoImage || {};
-    const credit = credits?.afilliation?.[0]?.name || promoImage?.credits?.by?.[0]?.name || '';
+    const { url: promoImageUrl, credits: promoImageCredits = {} } = promoImage || {};
+
     return `<embed type="raw">
                 <video style="width: 100%;" controls poster="${imageResizer(promoImageUrl, siteID)}">
                     <source src=${inlineVideoURL} type="video/mp4" >
                 </video>
-                <div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${credit}</div>
+                ${(credits && getMediaCredit(credits) !== '' && `<div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(credits)}</div>`) || (promoImageCredits && getMediaCredit(promoImageCredits) !== '' && `<div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(promoImageCredits)}</div>`)}
             </embed>
             `;
   }
@@ -95,7 +95,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
 
   if (type === 'image') {
     const {
-      url = '', caption: imageCaption = '', credits: mediaCredits = {}, vanity_credits: vanityCredits,
+      url = '', caption: imageCaption = '', credits: mediaCredits = {}, vanity_credits: vanityCredits = {},
     } = el || {};
 
     return `
