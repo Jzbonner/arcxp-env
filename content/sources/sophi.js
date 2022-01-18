@@ -51,7 +51,7 @@ const fetch = async ({
     .then(({ data }) => data.content_elements)
     .then(stories => stories.map(story => ({ ...story, order: storyIds.find(storyIdsStory => storyIdsStory.id === story._id).order })))
     .then(stories => stories.sort((a, b) => a.order - b.order))
-    .then(stories => stories.slice(from, from + size))
+    .then(stories => stories.slice(from - 1, from - 1 + size))
     .catch((error) => {
       console.log('AXIOS CATCH - get Sophi stories => ', error?.response?.data?.message);
     });
