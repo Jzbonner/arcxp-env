@@ -81,8 +81,8 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
                 <video width="100%" controls poster="${imageResizer(promoImageUrl, siteID)}">
                     <source src=${inlineVideoURL} type="video/mp4" >
                 </video>
-                ${(credits && getMediaCredit(credits) !== '' && `<div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(credits)}</div>`) || (promoImageCredits && getMediaCredit(promoImageCredits) !== '' && `<div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(promoImageCredits)}</div>`)}
             </embed>
+            ${(credits && getMediaCredit(credits) !== '' && `<div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(credits)}</div>`) || (promoImageCredits && getMediaCredit(promoImageCredits) !== '' && `<div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(promoImageCredits)}</div>`)}
             `;
   }
 
