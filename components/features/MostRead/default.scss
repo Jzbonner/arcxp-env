@@ -39,6 +39,19 @@
   display: flex;
   flex-direction: column;
 
+  &.sub-row {
+    @include breakpoint(tablet) {
+      margin-top: .938rem;
+    }
+
+    a {
+
+      &:first-child {
+        margin-right: 0;
+      }
+    }
+  }
+
   @include breakpoint(tablet) {
     flex-direction: row;
   }
