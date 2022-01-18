@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useAppContext } from 'fusion:context';
 import AdSetup from './src/index';
 import fetchEnv from '../../_helper_components/global/utils/environment.js';
 import { adSlots, defaultAdSlot } from './children/adtypes';
@@ -19,10 +19,10 @@ const ArcAd = ({
 }) => {
   const { temp, text: sky, precipitation: weather } = currentConditions() || {};
   const appContext = useAppContext();
-  const fusionContext = useFusionContext();
-  const { isAdmin } = appContext;
-  const { arcSite } = fusionContext;
-  const { slot: customFieldsSlot } = customFields || {};
+  const { isAdmin, arcSite } = appContext;
+  const { slot: customFieldsSlot, lazy: lazyLoadedFromPb } = customFields || {};
+  // when setting ads as lazy loaded from pagebuilder, we apply a random suffix to ensure no duplicate div id's
+  const pbAdSuffix = lazyLoadedFromPb ? `-${Math.floor(Math.random() * 100000)}` : '';
   const currentEnv = fetchEnv();
   const {
     dfp_id: dfpid,
@@ -138,7 +138,7 @@ const ArcAd = ({
   }
 
   if (isAdmin && adConfig.dimensions[0][0] !== 1) {
-    return <div style={{
+    return <div className={`arc_ad ${slotName}`} style={{
       background: '#efefef',
       fontSize: '30px',
       color: '#000',
@@ -156,12 +156,12 @@ const ArcAd = ({
       dimensions={adConfig.dimensions || defaultAdSlot.dimensions}
       dfpId={dfpIdFormatted}
       display={adConfig.display || defaultAdSlot.display}
-      id={`${customId}` || `${defaultAdSlot.name}${staticSlotFormatted || slot.replace(/ /g, '-').replace(/[()]/g, '')}${adSuffix}`}
+      id={`${customId}` || `${defaultAdSlot.name}${staticSlotFormatted || slot.replace(/ /g, '-').replace(/[()]/g, '')}${adSuffix || pbAdSuffix}`}
       slotName={slotName}
       adSlotNameForArcAds={adSlotNameForArcAds}
       targeting={{ ...globalTargeting, ...targeting }}
       bidding={adsPrebidSlots[slotBiddingName] || { prebid: false, amazon: false }}
-      lazyLoad={lazyLoad}
+      lazyLoad={lazyLoad || lazyLoadedFromPb}
     />
   );
 
@@ -182,6 +182,8 @@ ArcAd.propTypes = {
       'HP00',
       'HP01',
       'HP02',
+      'HP03',
+      'HP04',
       'HP05',
       'HS02',
       'MP01',
@@ -211,6 +213,11 @@ ArcAd.propTypes = {
     ]).tag({
       name: 'Slot ID',
       description: 'Select the ad slot to be inserted',
+      value: '',
+    }),
+    lazy: PropTypes.bool.tag({
+      label: 'Lazy load',
+      description: 'Check this box to mark this slot as lazy load-able (i.e. can render below the paygate).',
       value: '',
     }),
   }),

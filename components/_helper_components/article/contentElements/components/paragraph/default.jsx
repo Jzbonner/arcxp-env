@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { safeHtml } from '../../../../global/utils/stringUtils';
-import './default.scss';
 
-const Paragraph = ({ src }) => {
+const Paragraph = ({ src, index }) => {
   const { content } = src;
-  return <p className="story-text" dangerouslySetInnerHTML={{
+  return <p className="story-text" data-index={index || null} dangerouslySetInnerHTML={{
     __html: safeHtml(content, {
       whiteList: {
         p: [],
@@ -23,5 +22,6 @@ const Paragraph = ({ src }) => {
 
 Paragraph.propTypes = {
   src: PropTypes.object,
+  index: PropTypes.number,
 };
 export default Paragraph;

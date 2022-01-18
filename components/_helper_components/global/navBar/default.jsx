@@ -28,7 +28,7 @@ const NavBar = ({
   const paddingRef = React.useRef(null);
   const isMobileVisibilityRef = React.useRef(isMobile);
   const mobileBreakpoint = 767;
-  const darkMode = enableDarkMode && type.includes('homepage');
+  const darkMode = enableDarkMode;
 
   const fusionContext = useFusionContext();
   const { arcSite, globalContent } = fusionContext;

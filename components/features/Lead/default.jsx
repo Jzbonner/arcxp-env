@@ -165,7 +165,7 @@ Lead.propTypes = {
   limitOverride: PropTypes.number,
   displayClassOverride: PropTypes.string,
   customFields: PropTypes.shape({
-    content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
+    content: PropTypes.contentConfig(['collections', 'query-feed', 'sophi']).tag({
       name: 'Content',
     }),
     displayClass: PropTypes.oneOf(['5-Item Feature - Top Photo', '5-Item Feature - Left Photo', '5-Item Feature - No Photo', '5-Item Feature - Redesigned Lead - No Photo', '5-Item Feature - Center Lead Top Photo', '1 or 2 Item Feature']).tag({
