@@ -14,7 +14,7 @@ const params = {
 };
 
 const fetch = async ({
-  page, widget, arcSite, 'arc-site': arcSiteAlt,
+  page, widget, from = 0, size = 10, arcSite, 'arc-site': arcSiteAlt,
 }, { cachedCall }) => {
   const activeSite = arcSite || arcSiteAlt;
   if (!activeSite) return [];
@@ -51,6 +51,7 @@ const fetch = async ({
     .then(({ data }) => data.content_elements)
     .then(stories => stories.map(story => ({ ...story, order: storyIds.find(storyIdsStory => storyIdsStory.id === story._id).order })))
     .then(stories => stories.sort((a, b) => a.order - b.order))
+    .then(stories => stories.slice(from, from + size))
     .catch((error) => {
       console.log('AXIOS CATCH - get Sophi stories => ', error?.response?.data?.message);
     });
