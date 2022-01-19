@@ -77,15 +77,14 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     const [{ url: inlineVideoURL }] = streams || {};
     const { credits: promoImageCredits = {}, url: promoImageUrl } = promoImage || {};
 
-    return `<p>empty div added</p>
-             <embed type="raw">
+    return `<embed type="raw">
               <div>
                 <video width="100%" controls poster="${imageResizer(promoImageUrl, siteID)}">
                   <source src=${inlineVideoURL} type="video/mp4" >
                 </video>
               </div>
             </embed>
-            ${(credits && getMediaCredit(credits) !== '' && `<p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(credits)}</p>`) || (promoImageCredits && getMediaCredit(promoImageCredits) !== '' && `<p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(promoImageCredits)}</p>`)}
+            ${(credits && getMediaCredit(credits) !== '' && `<p class="text" style="font-size: 0.75rem; margin-top: -0.25rem; text-align: right">Credit: ${getMediaCredit(credits)}</p>`) || (promoImageCredits && getMediaCredit(promoImageCredits) !== '' && `<p class="text" style="font-size: 0.75rem; margin-top: -0.25rem; text-align: right">Credit: ${getMediaCredit(promoImageCredits)}</p>`)}
             `;
   }
 
@@ -105,7 +104,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
       <embed type="raw">
         <img src="${imageResizer(url, siteID)}" title="${imageCaption}" alt="${imageCaption}"/>
       </embed>
-      ${(vanityCredits && getMediaCredit(vanityCredits) !== '' && `<p>Credit: ${getMediaCredit(vanityCredits)}</p>`) || (mediaCredits && getMediaCredit(mediaCredits) !== '' && `<p>Credit: ${getMediaCredit(mediaCredits)}</p>`)}
+      ${(vanityCredits && getMediaCredit(vanityCredits) !== '' && `<p class="text" style="font-size: 0.75rem; margin-top: -0.25rem; text-align: right">Credit: ${getMediaCredit(vanityCredits)}</p>`) || (mediaCredits && getMediaCredit(mediaCredits) !== '' && `<p class="text" style="font-size: 0.75rem; margin-top: -0.25rem; text-align: right">Credit: ${getMediaCredit(mediaCredits)}</p>`)}
     `;
   }
 
