@@ -19,6 +19,13 @@
   .image-component-image {
     position: relative;
 
+    .enlargeImage-wrapper {
+
+      .photo-credit-text {
+        display: none;
+      }
+    }
+
     img {
       width: 100%;
     }
@@ -108,11 +115,25 @@
       z-index: 4002;
     }
 
+    .enlargeImage-wrapper {
+      z-index: 100000;
+
+      .photo-credit-text {
+        display: block;
+        color: #fff;
+
+        @include text-styles(1rem, 1, "Gordita");
+      }
+    }
+
     .lazyload-wrapper,
     .c-caption {
       position: unset;
-      width: 100%;
-      max-width: 80%;
+    }
+
+    .enlargeImage-wrapper,
+    .lazyload-wrapper {
+      width: fit-content;
     }
 
     img {
@@ -130,6 +151,8 @@
 
     .c-caption {
       display: flex;
+      align-self: flex-start;
+      width: 100%;
 
       .photo-caption-btn {
         display: none;
@@ -152,10 +175,7 @@
         }
 
         .photo-credit-text {
-          display: block;
-          color: #fff;
-
-          @include text-styles(1rem, 1, "Gordita");
+          display: none;
         }
       }
     }

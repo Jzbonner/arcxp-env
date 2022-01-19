@@ -174,7 +174,10 @@ const Image = ({
       <div className={`c-image-component ${toggle ? 'overlay-active' : ''} ${imageMarginBottom || ''} ${alignment ? `align-${alignment}` : ''}`} data-index={index || null}>
         {enableExpandableImage && renderCaption()}
         <div className={`image-component-image ${ampPage ? 'amp' : ''} ${enableExpandableImage ? 'inline' : ''}`}>
-          {renderedImageOutput()}
+          <div className='enlargeImage-wrapper'>
+            {renderedImageOutput()}
+            <p className="photo-credit-text">{giveCredit}</p>
+          </div>
           {outputCaptionAndCredit && renderCaption()}
           {enableExpandableImage && screenSize.width >= maxTabletViewWidth && <>
             <img src={closeIcon} className='image-close' alt='icon to close expanded image' onClick={(e) => { e.preventDefault(); setToggle(false); }} />
