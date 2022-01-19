@@ -75,14 +75,26 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   if (type === 'video') {
     const { streams, promo_image: promoImage = {}, credits = {} } = el || {};
     const [{ url: inlineVideoURL }] = streams || {};
-    const { credits: promoImageCredits = {} } = promoImage || {};
+    const { credits: promoImageCredits = {}, url: promoImageUrl } = promoImage || {};
 
-    return `<embed type="raw">
+    return `<p>With Video Element</p>
+             <embed type="raw">
+              <div class="asdf-video">
+              <video width="100%" controls poster="${imageResizer(promoImageUrl, siteID)}">
+                <source src=${inlineVideoURL} type="video/mp4" >
+              </video>
+              </div>
+            </embed>
+            ${(credits && getMediaCredit(credits) !== '' && `<p>Credit: ${getMediaCredit(credits)}</p>`) || (promoImageCredits && getMediaCredit(promoImageCredits) !== '' && `<p>Credit: ${getMediaCredit(promoImageCredits)}</p>`)}
+
+            <p>&nbsp;</p>
+            <p>With Iframe</p>
+            <embed type="raw">
               <div class="asdf-video">
                 <iframe src="${inlineVideoURL}" frameborder="0" allowfullscreen></iframe>
               </div>
             </embed>
-            <p>&nbsp;</p>
+
             ${(credits && getMediaCredit(credits) !== '' && `<p>Credit: ${getMediaCredit(credits)}</p>`) || (promoImageCredits && getMediaCredit(promoImageCredits) !== '' && `<p>Credit: ${getMediaCredit(promoImageCredits)}</p>`)}
             `;
   }
