@@ -78,11 +78,9 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     const { credits: promoImageCredits = {}, url: promoImageUrl } = promoImage || {};
 
     return `<embed type="raw">
-              <div class="asdf-video">
               <video width="100%" controls poster="${imageResizer(promoImageUrl, siteID)}">
                 <source src=${inlineVideoURL} type="video/mp4" >
               </video>
-              </div>
             </embed>
             ${(credits && getMediaCredit(credits) !== '' && `<p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(credits)}</p>`) || (promoImageCredits && getMediaCredit(promoImageCredits) !== '' && `<p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(promoImageCredits)}</p>`)}
             `;
