@@ -268,7 +268,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('connextLoggedIn', () => {
-      hashBeforeLogin.scrollIntoView(true);
+      if (hashBeforeLogin) hashBeforeLogin.scrollIntoView(true);
     });
     return () => {
       window.removeEventListener('scroll', handleScroll);
