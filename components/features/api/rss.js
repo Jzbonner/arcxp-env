@@ -96,7 +96,7 @@ class Api {
 
         if (type === 'story') {
           const formatContentElements = formatNavigaContent(siteID, contentElements);
-          const outputContent = noHeaderAndFooter || newsletterFeed ? `<![CDATA[${formatContentElements.join('')} <style> .credits { font-size: .75rem; text-align: right}</style>]]>` : formattedDescription;
+          const outputContent = noHeaderAndFooter || newsletterFeed ? `<![CDATA[${formatContentElements.join('')}]]>` : formattedDescription;
 
           const mediaArray = getMediaContent(type, siteID, contentElements, promoItems, newsletterFeed, standardFeed);
 
