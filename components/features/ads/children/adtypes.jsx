@@ -152,9 +152,9 @@ export const adSlots = {
     dimensions: [
       [
         [728, 90],
-      ], // desktop
+      ], // tablet+
       [
-        [300, 250], // mobile & tablet
+        [300, 250], // mobile
       ],
     ],
     breakpoints: [
@@ -163,6 +163,7 @@ export const adSlots = {
     ],
   },
   'HP03-LiveUpdates': {
+    slotName: 'HP03',
     dimensions: [
       [
         [728, 90],
@@ -172,8 +173,8 @@ export const adSlots = {
       ],
     ],
     breakpoints: [
-      [1024, 0], // desktop
-      [0, 0], // mobile & tablet
+      [768, 0], // tablet+
+      [0, 0], // mobile
     ],
   },
   HP04: {
@@ -191,6 +192,7 @@ export const adSlots = {
     ],
   },
   'HP04-LiveUpdates': {
+    slotName: 'HP04',
     dimensions: [
       [
         [728, 90],

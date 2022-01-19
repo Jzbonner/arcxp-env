@@ -26,6 +26,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   let timeout;
   const stickyHeaderAdjustment = 80;
   let toggledAdSlot = 'HP03';
+
   const copyToClipboard = (e) => {
     e.preventDefault();
     let action = () => console.error('fallback in case Window or Navigator are unknown');
@@ -68,7 +69,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
       case 3:
         response = <>
           <ArcAd
-            staticSlot={'RP01 desktop'}
+            staticSlot={'RP01-LiveUpdates'}
             key={`RP01-${index}`}
             lazyLoad={isMeteredStory}
           />
@@ -90,15 +91,27 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
         break;
       default:
         response = <ArcAd
-          staticSlot={toggledAdSlot}
+          staticSlot={`${toggledAdSlot}-LiveUpdates`}
           key={`${toggledAdSlot}-${index}`}
           customId={`div-id-${toggledAdSlot}_${index}`}
-          lazyLoad={false}
+          lazyLoad={isMeteredStory}
         />;
         // we alternate HP03 & HP04 for all default slotnames, because there is a (slight) chance of two slots being visible at the same time
         toggledAdSlot = toggledAdSlot === 'HP03' ? 'HP04' : 'HP03';
     }
     return response;
+  };
+
+  const handleMetricsEventDispatch = (liveUpdateTitle, index) => {
+    const liveUpdateMetricsFired = new CustomEvent('liveUpdateMetricsFired', {
+      detail: {
+        title: liveUpdateTitle,
+        scrollDepth: window.scrollY,
+        index,
+      },
+    });
+
+    document.dispatchEvent(liveUpdateMetricsFired);
   };
 
   const highlightNavItem = (hashTarget, highlightFromHash) => {
@@ -108,6 +121,9 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
         activeLink.setAttribute('class', activeLink.className.replace('is-active', ''));
       }
       const targetLink = document.querySelector(`a[href='#${hashTarget}']`);
+      const targetLinkTitle = targetLink && targetLink.getAttribute('title');
+      const targetLinkIndex = targetLink && targetLink.getAttribute('index');
+
       if (targetLink) {
         const { top: targetLinkTop, bottom: targetLinkBottom } = targetLink.getBoundingClientRect();
         if (targetLink.className.indexOf('is-active') === -1) {
@@ -124,7 +140,10 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
           // The top of the targetLink will be aligned to the top of the visible area of the scrollable ancestor
           targetLink.scrollIntoView(true);
         }
+
+        handleMetricsEventDispatch(targetLinkTitle, targetLinkIndex);
       }
+
       activeUpdate = hashTarget;
     } else if (document.querySelector('.c-liveUpdateNav .is-active') === null) {
       const targetLink = document.querySelector(`a[href='#${activeUpdate}']`);
@@ -134,10 +153,16 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
 
   const handleNavTrigger = (evt, hash) => {
     let target = null;
+    let liveUpdateTitle = null;
+    let liveUpdateIndex = null;
+
     if (evt) {
       evt.preventDefault();
+      liveUpdateIndex = evt?.target?.getAttribute('index') || null;
       target = evt.target ? evt.target.getAttribute('href') : null;
+      liveUpdateTitle = evt?.target?.textContent;
     }
+
     if (!target && evt) {
       // it's not the top-level link - but we do have an event - so we have to move up a level
       let parent = evt.target.parentNode;
@@ -145,10 +170,17 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
         // timestamps are grandchildren of the nav `A` element so we need to go up one more level
         parent = parent.parentNode;
       }
+
+      liveUpdateIndex = parent.getAttribute('index');
       target = parent.getAttribute('href');
     }
     const hashTarget = !target && hash ? hash : target && target.substr(target.indexOf('#') + 1);
     const targetUpdate = document.querySelector(`[name='${hashTarget}']`) || null;
+
+    if (liveUpdateTitle) {
+      handleMetricsEventDispatch(liveUpdateTitle, liveUpdateIndex);
+    }
+
     if (targetUpdate) {
       targetUpdate.scrollIntoView(true);
     }
@@ -249,6 +281,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     }
   }, [hashId]);
 
+  /* set the last dispact within the handleScroll func */
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -257,8 +290,8 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   }, []);
 
   let resizeObserver = {
-    observe: () => {},
-    unobserve: () => {},
+    observe: () => { },
+    unobserve: () => { },
   }; // fallback for non-existence of ResizeObserver (i.e. SSR)
 
   if (typeof ResizeObserver !== 'undefined') {
@@ -280,7 +313,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     const restOfLiveUpdates = liveUpdates.slice(1, liveUpdates.length);
     let updateIndex = 0;
     let mostRecentDate = null;
-    const liveUpdatesMapper = updates => updates.map((update) => {
+    const liveUpdatesMapper = updates => updates.map((update, i) => {
       const {
         headlines,
         _id: elId,
@@ -313,7 +346,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
           {!isTimeline && insertDateMarker && <a key={`${elId}-dateMarker`} className='date-marker' title={timestampDate}>
             <div className='timestamp'>{timestampDate.replace(',', '')}</div>
           </a>}
-          <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger} className={activeUpdate === elId ? 'is-active' : ''} title={`${timestampTime}: ${headline.replace(/"/g, '\'')}`}>
+          <a href={`#${elId}`} key={`${elId}-anchor`} onClick={handleNavTrigger} className={activeUpdate === elId ? 'is-active' : ''} index={`${i}`} title={`${timestampTime}: ${headline.replace(/"/g, '\'')}`}>
             <div className='headline hidden-mobile'>{headline}</div>
             <div className='timestamp'>
               <span className={`timestamp-date ${isToday ? 'same-day' : ''}`}>{timestampDate} </span>
@@ -352,14 +385,12 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
       return <>
         <LazyLoad placeholder={<div className="c-placeholder-liveUpdate"><span name={elId} className='snippet-anchor'></span></div>} height="100%" width="100%" offset={100 * updateIndex} once={true} overflow={false} key={`${elId}-lazy`}>
           {updateContentOutput()}
-          {/* after we get through the "specialty" placeholder inserts, we want to lazyload ads as well as the other content */}
-          {(updateIndex > 10 && (updateIndex - 1) % 3 === 0) && renderAdOrPlaceholder(updateIndex - 1)}
         </LazyLoad>
         {/* we insert items (ads, placeholders, etc) at specific intervals.
           For ads, it's after the first and every 3rd item after that (thus the "updateIndex - 1 is divisible by 3" logic -- for the 4th, 7th, 10th, etc instances)
           We also have one for the newsletter placeholder (after #6)
         */}
-        {(updateIndex === 6 || (updateIndex > 3 && updateIndex <= 10 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
+        {(updateIndex === 6 || (updateIndex > 3 && (updateIndex - 1) % 3 === 0)) && renderAdOrPlaceholder(updateIndex - 1)}
       </>;
     });
 
