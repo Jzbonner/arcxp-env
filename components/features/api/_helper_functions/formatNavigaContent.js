@@ -75,13 +75,14 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   if (type === 'video') {
     const { streams, promo_image: promoImage = {}, credits = {} } = el || {};
     const [{ url: inlineVideoURL }] = streams || {};
-    const { url: promoImageUrl, credits: promoImageCredits = {} } = promoImage || {};
+    const { credits: promoImageCredits = {} } = promoImage || {};
 
     return `<embed type="raw">
-                <video width="100%" controls poster="${imageResizer(promoImageUrl, siteID)}">
-                    <source src=${inlineVideoURL} type="video/mp4" >
-                </video>
+              <div class="asdf-video">
+                <iframe src="${inlineVideoURL}" frameborder="0" allowfullscreen></iframe>
+              </div>
             </embed>
+            <p>&nbsp;</p>
             ${(credits && getMediaCredit(credits) !== '' && `<p>Credit: ${getMediaCredit(credits)}</p>`) || (promoImageCredits && getMediaCredit(promoImageCredits) !== '' && `<p>Credit: ${getMediaCredit(promoImageCredits)}</p>`)}
             `;
   }
