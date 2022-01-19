@@ -55,13 +55,18 @@ const MostRead = () => {
       return storyRows;
     }
 
-    return topStoriesData.map((el) => {
+    /* mostRead logic for default max of 5 visible items */
+    topStoriesData.forEach((el) => {
       if (el.title && counter < 5) {
         counter += 1;
-        return <a key={`Headline: ${el.title}`} href={`https://${env === 'prod' ? 'www.' : ''}${el.path}`} target="_self"><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>;
+        storyItems.push(<a key={`Headline: ${el.title}`} href={`https://${env === 'prod' ? 'www.' : ''}${el.path}`} target="_self"><div className="mostReadRanking">{counter}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>);
       }
       return null;
     });
+
+    storyRows.push(<div className="mostReadList">{storyItems}</div>);
+
+    return storyRows;
   };
 
   if (topStoriesData) {
