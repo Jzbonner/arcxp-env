@@ -44,7 +44,7 @@ const StickyNav = ({
   }
 
   const shareLinkFacebook = `${facebookURL}${articleShareUrl}`;
-  const shareLinkTwitter = `${twitterURL}${articleShareUrl}&text=${articleHeadline}`;
+  const shareLinkTwitter = `${twitterURL}${articleShareUrl}&text=${encodeURIComponent(articleHeadline)}`;
   const shareLinkPinterest = `${pinterestURL}${articleShareUrl}&media=${renderImage().indexOf('/resources/logos/') > -1
     ? pinterestShareLogo : renderImage()}&description=${articleHeadline}`;
   const shareLinkReddit = `${redditURL}${articleShareUrl}&title=${articleHeadline}`;

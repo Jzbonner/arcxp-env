@@ -1,8 +1,23 @@
 @import "./../../../src/styles/base";
 
+.c-map {
+  width: 100%;
+  height: 350px;
+  margin-bottom: 30px;
+
+  #map {
+    height: 100%;
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: 80.25%;
+    height: 500px;
+  }
+}
+
 .c-cards {
   display: flex;
-  width: auto;
+  width: 100%;
   max-width: 100%;
   flex-flow: column wrap;
   margin: 0 auto;
@@ -14,19 +29,27 @@
     flex-flow: row wrap;
   }
 
+  @include breakpoint(desktop-sm) {
+    width: 80.25%;
+    margin: auto;
+  }
+
   .card {
-    width: auto;
+    width: 100%;
     max-width: 100%;
     color: #fff;
     position: relative;
     margin: 0 0 15px;
-    height: 375px;
+    height: 350px;
     overflow: hidden;
 
     @include breakpoint(tablet) {
-      width: 350px;
-      max-width: 350px;
-      margin-right: 1%;
+      max-width: 31%;
+      margin-right: 1.4%;
+    }
+
+    @include breakpoint(desktop-lg) {
+      max-width: 300px;
     }
 
     a,
@@ -46,6 +69,7 @@
     .front {
       background: linear-gradient(153deg, #2b3b39 13%, #333c4c 55%, #635d5d 97%);
       padding: 20px;
+      cursor: pointer;
 
       h2,
       h3 {
@@ -63,6 +87,59 @@
 
     .back {
       background: #3f4450;
+
+      &.with-image {
+
+        .details {
+          height: 100px;
+
+          img {
+            float: left;
+            margin-right: 15px;
+
+            @include between-breakpoints(tablet, desktop-sm) {
+              max-width: 50%;
+            }
+          }
+        }
+
+        .description {
+          max-height: 165px;
+          height: 165px;
+
+          &.condensed {
+            max-height: 100px;
+          }
+        }
+      }
+
+      // no location (base, without image)
+
+      &.without-location {
+
+        .description {
+          max-height: 245px;
+          height: 245px;
+
+          &.condensed {
+            max-height: 187px;
+          }
+        }
+
+        // no location WITH image
+
+        &.with-image {
+
+          .description {
+            max-height: 205px;
+            height: 205px;
+
+            &.condensed {
+              max-height: 140px;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -80,6 +157,7 @@
 
   .location {
     font-family: "Gordita-Bold";
+    clear: both;
 
     &:before {
       content: " ";
@@ -103,10 +181,18 @@
     right: 25px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 150px;
+    font-size: 130px;
     font-family: "Gordita-Bold";
     text-transform: uppercase;
-    letter-spacing: -35px;
+    letter-spacing: -33px;
+
+    @include between-breakpoints(tablet, desktop-sm) {
+      font-size: 110px;
+    }
+
+    @include between-breakpoints(desktop-sm, desktop-lg) {
+      font-size: 120px;
+    }
 
     span {
       mix-blend-mode: screen;
@@ -121,7 +207,7 @@
     @include text-styles(.875rem, 1.2, "Gordita");
 
     &.condensed {
-      max-height: 165px;
+      max-height: 147px;
     }
   }
 

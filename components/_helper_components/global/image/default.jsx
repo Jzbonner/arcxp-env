@@ -8,7 +8,6 @@ import Caption from '../caption/default.jsx';
 import Overlay from '../overlay/default.jsx';
 import checkWindowSize from '../utils/check_window_size/default';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
-import getDomain from '../../../layouts/_helper_functions/getDomain';
 import setFocalCoords from '../../../../content/sources/helper_functions/setFocalCoords';
 import expandIcon from '../../../../resources/icons/expand.svg';
 import closeIcon from '../../../../resources/icons/close.svg';
@@ -24,10 +23,10 @@ import './default.scss';
 */
 const Image = ({
   width, height, src, imageMarginBottom, imageType, maxTabletViewWidth, teaseContentType, squareImage = false,
-  ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [], additionalClasses = '', noLazyLoad = false,
+  ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [], additionalClasses = '', noLazyLoad = false, index,
 }) => {
   const {
-    resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, focal_point: rootFocalPoint, useSrcSet: hasSrcSet = false,
+    resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, focal_point: rootFocalPoint, useSrcSet: hasSrcSet = false, alignment,
   } = src || {};
 
   const appContext = useAppContext();
@@ -37,8 +36,8 @@ const Image = ({
     deployment,
     contextPath,
   } = appContext;
-  const { logoPlaceholder, cdnSite, cdnOrg } = getProperties(arcSite);
-  const placeholder = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoPlaceholder}`)}`;
+  const { logoPlaceholder } = getProperties(arcSite);
+  const placeholder = deployment(`${contextPath}${logoPlaceholder}`);
   const isGalleryImage = imageType === 'isGalleryImage';
   let img = null;
 
@@ -86,7 +85,7 @@ const Image = ({
   const renderCaption = () => {
     if (
       (imageType === 'isLeadImage' && !giveCredit && !caption)
-      || (imageType === 'isInlineImage' && !caption)
+      || (imageType === 'isInlineImage' && !toggle && !caption)
       || (imageType === 'isLeadImage' && giveCredit && !caption)
       || teaseContentType
       || imageType === 'isAuthorImage'
@@ -172,10 +171,13 @@ const Image = ({
     }
 
     return (
-      <div className={`c-image-component ${toggle ? 'overlay-active' : ''} ${imageMarginBottom || ''}`}>
+      <div className={`c-image-component ${toggle ? 'overlay-active' : ''} ${imageMarginBottom || ''} ${alignment ? `align-${alignment}` : ''}`} data-index={index || null}>
         {enableExpandableImage && renderCaption()}
         <div className={`image-component-image ${ampPage ? 'amp' : ''} ${enableExpandableImage ? 'inline' : ''}`}>
-          {renderedImageOutput()}
+          <div className='enlargeImage-wrapper'>
+            {renderedImageOutput()}
+            <p className="photo-credit-text">{giveCredit}</p>
+          </div>
           {outputCaptionAndCredit && renderCaption()}
           {enableExpandableImage && screenSize.width >= maxTabletViewWidth && <>
             <img src={closeIcon} className='image-close' alt='icon to close expanded image' onClick={(e) => { e.preventDefault(); setToggle(false); }} />
@@ -209,5 +211,6 @@ Image.propTypes = {
   additionalClasses: PropTypes.string,
   noLazyLoad: PropTypes.bool,
   squareImage: PropTypes.bool,
+  index: PropTypes.number,
 };
 export default Image;

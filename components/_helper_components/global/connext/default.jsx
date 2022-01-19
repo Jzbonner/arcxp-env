@@ -43,10 +43,10 @@ export const ConnextAuthTrigger = () => {
 
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState } = connextLocalStorageData;
-  const deferredItems = window?.deferUntilKnownAuthState || [];
   let leadVideoLoaded = false;
 
   const loadDeferredItems = () => {
+    const deferredItems = window?.deferUntilKnownAuthState || [];
     if (deferredItems.length && (!loadedDeferredItemsRef.current || window.connextAuthTriggerEnabled)) {
       const adInstance = ArcAdLib.getInstance();
       const articleBodyContainer = document.querySelector('.c-articleBodyContainer');
@@ -271,9 +271,6 @@ export const ConnextAuthTrigger = () => {
 
     document.onreadystatechange = () => {
       if (document.readyState === 'complete') {
-        if (UserState === 'Subscribed') {
-          loadDeferredItems();
-        }
         setReadyState(true);
       }
     };
@@ -282,6 +279,7 @@ export const ConnextAuthTrigger = () => {
   useEffect(() => {
     // One last check in the deffered items for video since video isnt always available while rendering
     if (!leadVideoLoaded && promoType === 'video' && readyState && autoplayVideo) {
+      const deferredItems = window?.deferUntilKnownAuthState || [];
       deferredItems.forEach((item) => {
         Object.keys(item).forEach((key) => {
           if (key === 'video') {
@@ -366,7 +364,7 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                     cbqArray.push(['_acct', 'paid']);
                     break;
                   default:
-                    // do nothing
+                    cbqArray.push(['_acct', 'anon']);
                 };
               };
               if (window?.sophi?.data) {

@@ -1,4 +1,5 @@
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import getMediaCredit from './getMediaCredit';
 
 export const formatNavigaContent = (siteID, contentElements) => contentElements.map((el) => {
   const { type, content = '' } = el || {};
@@ -72,16 +73,17 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   }
 
   if (type === 'video') {
-    const { streams, promo_image: promoImage, credits } = el || {};
+    const { streams, promo_image: promoImage = {}, credits = {} } = el || {};
     const [{ url: inlineVideoURL }] = streams || {};
-    const credit = credits?.afilliation?.[0]?.name || promoImage?.credits?.by?.[0]?.name || '';
+    const { credits: promoImageCredits = {} } = promoImage || {};
+
     return `<embed type="raw">
               <div class="asdf-video">
                 <iframe src="${inlineVideoURL}" frameborder="0" allowfullscreen></iframe>
               </div>
             </embed>
             <p>&nbsp;</p>
-            <p>Credit: ${credit}</p>
+            ${(credits && getMediaCredit(credits) !== '' && `<p>Credit: ${getMediaCredit(credits)}</p>`) || (promoImageCredits && getMediaCredit(promoImageCredits) !== '' && `<p>Credit: ${getMediaCredit(promoImageCredits)}</p>`)}
             `;
   }
 
@@ -93,12 +95,15 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   }
 
   if (type === 'image') {
-    const { url = '', caption: imageCaption = '' } = el || {};
+    const {
+      url = '', caption: imageCaption = '', credits: mediaCredits = {}, vanity_credits: vanityCredits = {},
+    } = el || {};
 
     return `
       <embed type="raw">
         <img src="${imageResizer(url, siteID)}" title="${imageCaption}" alt="${imageCaption}"/>
       </embed>
+      ${(vanityCredits && getMediaCredit(vanityCredits) !== '' && `<div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(vanityCredits)}</div>`) || (mediaCredits && getMediaCredit(mediaCredits) !== '' && `<div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(mediaCredits)}</div>`)}
     `;
   }
 

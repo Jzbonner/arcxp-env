@@ -54,7 +54,7 @@ const ListOrderedUnordered = (customFields = {}) => {
 
 ListOrderedUnordered.propTypes = {
   customFields: PropTypes.shape({
-    content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
+    content: PropTypes.contentConfig(['collections', 'query-feed', 'sophi']).tag({
       name: 'Content',
     }),
     displayClass: PropTypes.oneOf(['Ordered List', 'Un-ordered List']).tag({

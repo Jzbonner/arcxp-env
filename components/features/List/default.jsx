@@ -91,7 +91,7 @@ const List = (customFields = {}) => {
 
 List.propTypes = {
   customFields: PropTypes.shape({
-    content: PropTypes.contentConfig(['collections', 'query-feed']).tag({
+    content: PropTypes.contentConfig(['collections', 'query-feed', 'sophi']).tag({
       name: 'Content',
     }),
     displayClass: PropTypes.oneOf(['Top Photo', 'Left Photo', 'Left Photo Small', 'No Photo', 'Link']).tag({

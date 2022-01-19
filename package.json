@@ -15,7 +15,7 @@
     "test": "jest --coverage",
     "bundle": "npm run build && npm run zip",
     "zip": "zip config/deploy/bundle.zip -r . -x .git/\\* node_modules/\\* coverage/\\* .github/\\* .fusion/\\* .circleci/\\* .dist/\\* .stylelintrc.json data/db/\\*",
-    "ampValidator" : "amphtml-validator \"http://localhost/pf/news/apd-1502-test-hyperlocal-test-copy/D3SM2ZGULZDQDNLVOIHORDR53E/?_website=ajc&outputType=amp\""
+    "ampValidator": "amphtml-validator \"http://localhost/pf/news/apd-1502-test-hyperlocal-test-copy/D3SM2ZGULZDQDNLVOIHORDR53E/?_website=ajc&outputType=amp\""
   },
   "devDependencies": {
     "@arc-fusion/cli": "^2.0.5",
@@ -43,7 +43,10 @@
     "chalk": "^2.4.1",
     "clean-webpack-plugin": "^1.0.1",
     "css-loader": "^2.1.0",
+    "css-minimizer-webpack-plugin": "^3.3.1",
     "css-mqpacker": "^7.0.0",
+    "cssnano": "^5.0.14",
+    "cssnano-preset-default": "^5.1.9",
     "cypress": "^6.3.0",
     "dotenv": "^10.0.0",
     "enzyme": "^3.11.0",
@@ -69,6 +72,9 @@
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.13.1",
     "node-sass-glob-importer": "5.3.0",
+    "optimize-css-assets-webpack-plugin": "^6.0.1",
+    "postcss": "^8.4.5",
+    "postcss-discard-duplicates": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.19.1",
     "prettier-eslint": "^8.8.2",
