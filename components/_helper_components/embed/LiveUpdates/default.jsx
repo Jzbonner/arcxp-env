@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
+import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 import ContentElements from '../../article/contentElements/default.jsx';
 import filterContentElements from '../../../layouts/_helper_functions/article/filterContentElements';
 import ArcAd from '../../../features/ads/default';
+import fetchEnv from '../../global/utils/environment';
 import TaboolaFeed from '../../../features/taboolaFeed/default';
 import computeTimeStamp from '../../article/timestamp/_helper_functions/computeTimeStamp';
 import getContentMeta from '../../global/siteMeta/_helper_functions/getContentMeta';
+import GetConnextLocalStorageData from '../../global/connext/connextLocalStorage';
 import { ConnextAuthTrigger } from '../../global/connext/default';
 import Byline from '../../article/byline/default';
 import './default.scss';
@@ -18,6 +22,15 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   if (!liveUpdates) return <span><i>There are no Live Updates to display.</i></span>;
 
   const hashId = typeof window !== 'undefined' ? window.location.hash.substr(1) : null;
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const { connext } = getProperties(arcSite);
+  const currentEnv = fetchEnv();
+  const { siteCode, configCode, environment } = connext[currentEnv] || {};
+  const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
+  const { UserState: userState } = connextLocalStorageData;
+  const isLoggedOut = userState.toLowerCase() === 'logged out';
+  let hashBeforeLogin;
   let activeUpdate = hashId;
   let viewportHeight = 0;
   let lastScrollPos = 0;
@@ -176,11 +189,15 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     }
     const hashTarget = !target && hash ? hash : target && target.substr(target.indexOf('#') + 1);
     const targetUpdate = document.querySelector(`[name='${hashTarget}']`) || null;
-
+    
     if (liveUpdateTitle) {
       handleMetricsEventDispatch(liveUpdateTitle, liveUpdateIndex);
     }
-
+    
+    if (isLoggedOut) {
+      hashBeforeLogin = targetUpdate;
+    }
+    
     if (targetUpdate) {
       targetUpdate.scrollIntoView(true);
     }
@@ -284,8 +301,12 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   /* set the last dispact within the handleScroll func */
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('connextLoggedIn', () => {
+      if (hashBeforeLogin) hashBeforeLogin.scrollIntoView(true);
+    });
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('connextLoggedIn');
     };
   }, []);
 
