@@ -83,8 +83,8 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
                   <source src=${inlineVideoURL} type="video/mp4" >
                 </video>
               </div>
+              ${(credits && getMediaCredit(credits) && `<p class="text" style="font-size: 0.75rem; margin-top: -0.25rem; text-align: right">Credit: ${getMediaCredit(credits)}</p>`) || (promoImageCredits && getMediaCredit(promoImageCredits) && `<p class="text" style="font-size: 0.75rem; margin-top: -0.25rem; text-align: right">Credit: ${getMediaCredit(promoImageCredits)}</p>`)}
             </embed>
-            ${(credits && getMediaCredit(credits) && `<p class="text" style="font-size: 0.75rem; margin-top: -0.25rem; text-align: right">Credit: ${getMediaCredit(credits)}</p>`) || (promoImageCredits && getMediaCredit(promoImageCredits) && `<p class="text" style="font-size: 0.75rem; margin-top: -0.25rem; text-align: right">Credit: ${getMediaCredit(promoImageCredits)}</p>`)}
             `;
   }
 
@@ -103,8 +103,8 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     return `
       <embed type="raw">
         <img src="${imageResizer(url, siteID)}" title="${imageCaption}" alt="${imageCaption}"/>
+        ${(vanityCredits && getMediaCredit(vanityCredits) && `<p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(vanityCredits)}</p>`) || (mediaCredits && getMediaCredit(mediaCredits) && `<p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(mediaCredits)}</p>`)}
       </embed>
-      ${(vanityCredits && getMediaCredit(vanityCredits) && `<p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(vanityCredits)}</p>`) || (mediaCredits && getMediaCredit(mediaCredits) && `<p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(mediaCredits)}</p>`)}
     `;
   }
 
