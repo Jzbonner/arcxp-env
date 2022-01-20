@@ -5,4 +5,6 @@ export default {
   SOPHI_CLIENT_ID: 'u4hKVNPrYMT58q4vjitD3rAInuvkqQhr',
   SOPHI_CLIENT_SECRET: '%{AQICAHiH7W8m/ZwSizPtJ5+e3MKEKRvPhAGdG3pC/jWLxGpnzgFXl2b4Exy1JX68wglAEgioAAAAojCBnwYJKoZIhvcNAQcGoIGRMIGOAgEAMIGIBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDARJbs6wETt6woUOtwIBEIBbcDWTGUsICKl1pETMGJBUUUYDC7xLaMy28buZ7jCK4mqY6R1fcPhqBYgeeJ2ONx+GdpcArAW1DbloYwOcUEg0fWGwDc+faeR+NQedTIblX7ddTcsHiQymzt5+aw==}',
   SOPHI_ENDPOINT: 'https://site-automation-api.ml.sophi.works/curatedHosts/www.ajc.com/curator',
+  SOPHI_TOKEN_URL: 'https://sophi-works.auth0.com/oauth/token',
+  SOPHI_TOKEN_AUDIENCE: 'https://api.sophi.works',
 };

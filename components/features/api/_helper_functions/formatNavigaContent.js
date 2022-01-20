@@ -1,4 +1,5 @@
 import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import getMediaCredit from './getMediaCredit';
 
 export const formatNavigaContent = (siteID, contentElements) => contentElements.map((el) => {
   const { type, content = '' } = el || {};
@@ -72,16 +73,29 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   }
 
   if (type === 'video') {
-    const { streams, promo_image: promoImage, credits } = el || {};
+    const { streams, promo_image: promoImage = {}, credits = {} } = el || {};
     const [{ url: inlineVideoURL }] = streams || {};
-    const { url: promoImageUrl } = promoImage || {};
-    const credit = credits?.afilliation?.[0]?.name || promoImage?.credits?.by?.[0]?.name || '';
-    return `<embed type="raw">
-                <video width="100%" controls poster="${imageResizer(promoImageUrl, siteID)}">
-                    <source src=${inlineVideoURL} type="video/mp4" >
-                </video>
-                <div class="text" style="font-size: 0.75rem; text-align: right">Credit: ${credit}</div>
+    const { credits: promoImageCredits = {}, url: promoImageUrl } = promoImage || {};
+
+    return `<p>With Video Element</p>
+             <embed type="raw">
+              <div class="asdf-video">
+              <video width="100%" controls poster="${imageResizer(promoImageUrl, siteID)}">
+                <source src=${inlineVideoURL} type="video/mp4" >
+              </video>
+              </div>
             </embed>
+            ${(credits && getMediaCredit(credits) !== '' && `<p>Credit: ${getMediaCredit(credits)}</p>`) || (promoImageCredits && getMediaCredit(promoImageCredits) !== '' && `<p>Credit: ${getMediaCredit(promoImageCredits)}</p>`)}
+
+            <p>&nbsp;</p>
+            <p>With Iframe</p>
+            <embed type="raw">
+              <div class="asdf-video">
+                <iframe src="${inlineVideoURL}" frameborder="0" allowfullscreen></iframe>
+              </div>
+            </embed>
+
+            ${(credits && getMediaCredit(credits) !== '' && `<p>Credit: ${getMediaCredit(credits)}</p>`) || (promoImageCredits && getMediaCredit(promoImageCredits) !== '' && `<p>Credit: ${getMediaCredit(promoImageCredits)}</p>`)}
             `;
   }
 
@@ -93,12 +107,15 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
   }
 
   if (type === 'image') {
-    const { url = '', caption: imageCaption = '' } = el || {};
+    const {
+      url = '', caption: imageCaption = '', credits: mediaCredits = {}, vanity_credits: vanityCredits = {},
+    } = el || {};
 
     return `
       <embed type="raw">
         <img src="${imageResizer(url, siteID)}" title="${imageCaption}" alt="${imageCaption}"/>
       </embed>
+      ${(vanityCredits && getMediaCredit(vanityCredits) !== '' && `<p>Credit: ${getMediaCredit(vanityCredits)}</p>`) || (mediaCredits && getMediaCredit(mediaCredits) !== '' && `<p>Credit: ${getMediaCredit(mediaCredits)}</p>`)}
     `;
   }
 
