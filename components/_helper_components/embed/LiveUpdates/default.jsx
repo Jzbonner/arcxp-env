@@ -189,15 +189,15 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     }
     const hashTarget = !target && hash ? hash : target && target.substr(target.indexOf('#') + 1);
     const targetUpdate = document.querySelector(`[name='${hashTarget}']`) || null;
-    
+
     if (liveUpdateTitle) {
       handleMetricsEventDispatch(liveUpdateTitle, liveUpdateIndex);
     }
-    
+
     if (isLoggedOut) {
       hashBeforeLogin = targetUpdate;
     }
-    
+
     if (targetUpdate) {
       targetUpdate.scrollIntoView(true);
     }
