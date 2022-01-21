@@ -41,6 +41,7 @@ const RenderOutputType = (props) => {
   const pageType = checkPageType(type, layout);
   const { isNonContentPage } = pageType || {};
   const contentMeta = getContentMeta() || {};
+  console.log('contentMeta', contentMeta);
   const { topics = [], contentId = '' } = contentMeta;
   const noAds = checkTags(topics, 'no-ads');
   const noAmp = checkTags(topics, 'no-amp');
@@ -55,7 +56,7 @@ const RenderOutputType = (props) => {
         <MetaTags />
         <SiteMeta />
         <GoogleStructuredData {...props} />
-        {!hasLeadGallery && <AmpRelLink type={type} noAmp={noAmp} site={website || cdnSite || currentSite} url={articleURL || '/'} />}
+        {!hasLeadGallery && noAmp && <AmpRelLink type={type} noAmp={noAmp} site={website || cdnSite || currentSite} url={articleURL || '/'} />}
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} as="font" type="font/woff2" />
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} as="font" type="font/woff2" />
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`} as="font" type="font/woff2" />
