@@ -41,7 +41,6 @@ const RenderOutputType = (props) => {
   const pageType = checkPageType(type, layout);
   const { isNonContentPage } = pageType || {};
   const contentMeta = getContentMeta() || {};
-  console.log('contentMeta', contentMeta);
   const { topics = [], contentId = '' } = contentMeta;
   const noAds = checkTags(topics, 'no-ads');
   const noAmp = checkTags(topics, 'no-amp');
