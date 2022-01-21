@@ -29,8 +29,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   const { siteCode, configCode, environment } = connext[currentEnv] || {};
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState: userState } = connextLocalStorageData;
-  // eslint-disable-next-line no-mixed-operators
-  const isLoggedOut = userState && userState.toLowerCase() === 'logged out' || true;
+  const isLoggedOut = (userState && userState.toLowerCase() === 'logged out') || true;
   let hashBeforeLogin;
   let activeUpdate = hashId;
   let viewportHeight = 0;
