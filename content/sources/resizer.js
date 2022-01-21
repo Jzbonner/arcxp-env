@@ -1,5 +1,5 @@
 import Thumbor from 'thumbor-lite';
-import { RESIZER_SECRET_KEY } from 'fusion:environment';
+import { RESIZER_SECRET_KEY, RESIZER_ALLOWED_DOMAINS } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../components/_helper_components/global/utils/environment';
 
@@ -22,7 +22,10 @@ export default {
     ) => {
       const { cdnSite, allowedDimensions } = getProperties(arcSite);
       const thumborKey = RESIZER_SECRET_KEY;
-      if (!imageSrc || !thumborKey) return null;
+      const allowedDomains = RESIZER_ALLOWED_DOMAINS || [];
+      const testSrcAgainstAllowedDomains = domain => imageSrc && imageSrc.indexOf(domain) > -1;
+      // return null if there is no image src, thumbor key, or the requested src doesn't match approved domains (the latter is re: APD-1698)
+      if (!imageSrc || !thumborKey || !allowedDomains.filter(testSrcAgainstAllowedDomains)) return null;
       let reqWidth = imageWidth;
       let reqHeight = imageHeight;
 
