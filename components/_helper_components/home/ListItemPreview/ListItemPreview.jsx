@@ -17,10 +17,10 @@ const ListItemPreview = ({ id }) => {
   if (storyData?.headlines?.web) {
     previewText = storyData.headlines.web;
   } else if (storyData?.content_elements && !storyData?.headlines?.web) {
-    const previewData = storyData?.content_elements.find(content => content.type === 'text');
-    const { _id: primaryContentId } = previewData;
-    let { content: primaryContentText } = previewData;
-    const secondaryContentText = storyData?.content_elements.find(content => content.type === 'text' && content._id !== primaryContentId).content || null;
+    const previewData = storyData?.content_elements?.find(content => content.type === 'text');
+    const { _id: primaryContentId } = previewData || {};
+    let { content: primaryContentText } = previewData || {};
+    const secondaryContentText = storyData?.content_elements?.find(content => content.type === 'text' && content._id !== primaryContentId).content || null;
 
     if (primaryContentText.length < 90 && secondaryContentText) {
       primaryContentText = `${primaryContentText} ${secondaryContentText}`;
