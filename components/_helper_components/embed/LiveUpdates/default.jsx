@@ -29,7 +29,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   const { siteCode, configCode, environment } = connext[currentEnv] || {};
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState: userState } = connextLocalStorageData;
-  const isLoggedOut = userState.toLowerCase() === 'logged out';
+  const isLoggedOut = (userState && userState.toLowerCase() === 'logged out') || true;
   let hashBeforeLogin;
   let activeUpdate = hashId;
   let viewportHeight = 0;
@@ -189,15 +189,15 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     }
     const hashTarget = !target && hash ? hash : target && target.substr(target.indexOf('#') + 1);
     const targetUpdate = document.querySelector(`[name='${hashTarget}']`) || null;
-    
+
     if (liveUpdateTitle) {
       handleMetricsEventDispatch(liveUpdateTitle, liveUpdateIndex);
     }
-    
+
     if (isLoggedOut) {
       hashBeforeLogin = targetUpdate;
     }
-    
+
     if (targetUpdate) {
       targetUpdate.scrollIntoView(true);
     }
