@@ -528,6 +528,10 @@ article .c-section a.link {
   margin-bottom: 25px;
 }
 
+.story-text b {
+  @include text-styles(1rem, 1.625, "Gordita-Medium");
+}
+
 @include amp-exclude {
 
   body .c-articleContent .c-articleBodyContainer {
