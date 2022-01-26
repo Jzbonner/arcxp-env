@@ -26,7 +26,6 @@ const getContentMeta = () => {
   const pbPaywall = metaValue('story-meter');
   const metaTitle = metaValue('title');
   const metaDescription = metaValue('description');
-  const coverageEndTime = metaValue('coverage end time');
   const sophiType = metaValue('sophi-type');
   const treatPbPageAsArticle = sophiType === 'article';
   const {
@@ -247,6 +246,7 @@ const getContentMeta = () => {
     storyPromoItems: content?.promo_items,
     storyCredits: content?.credits,
     storyInitialBodyText: getInitialBodyText(content?.content_elements),
+    storyId: content?._id,
     /* eslint-enable camelcase */
   })).reverse();
 
@@ -292,7 +292,6 @@ const getContentMeta = () => {
     metaTitle,
     metaDescription,
     stories,
-    coverageEndTime,
     sophiType,
     treatPbPageAsArticle,
   };
