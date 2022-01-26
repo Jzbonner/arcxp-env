@@ -30,46 +30,53 @@ const GoogleStructuredData = (props) => {
 
   const {
     pageIsLive, title, pageContentType, initialPublishDate, url, topSectionName, promoItems, credits,
-    dateModified, articleDesc, metaTitle, metaDescription, stories, coverageEndTime,
+    dateModified, articleDesc, metaTitle, metaDescription, stories,
   } = contentMeta;
 
-  const formatDateTime = (date) => {
-    // Need to manually convert to EST because new Date() in Fusion returns UTC time instead of local time.
-    const utcDate = new Date(date);
-    const localDateTimeString = utcDate.toLocaleString('en-US', { timeZone: 'America/New_York' });
-    const localDate = new Date(localDateTimeString);
-    const month = `${localDate.getMonth() + 1}`.padStart(2, '0');
-    const timeZoneOffset = utcDate.getHours() - localDate.getHours();
-    return `${localDate.getFullYear()}-${month}-${localDate.getDate()}T${localDate.getHours()}:${localDate.getMinutes()}:${localDate.getSeconds()}-0${timeZoneOffset}:00`;
-  };
-
   if (pageIsLive === 'true' || pageIsLive === 'yes') {
+    const today = new Date();
     const scriptData = {
       '@context': 'http://schema.org',
       '@type': 'LiveBlogPosting',
-      '@id': `${websiteURL}${requestUri}`,
-      inLanguage: 'en_US',
-      about: {
-        '@type': 'Event',
-        startDate: formatDateTime(stories[0]?.storyDateModified),
-        name: metaTitle,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `${websiteURL}${requestUri}`,
       },
-      location: {
-        '@type': 'Place',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Atlanta',
-          addressRegion: 'GA',
-          addressCountry: 'US',
+      headline: metaTitle,
+      datePublished: stories[0]?.storyDateModified,
+      dateModified: stories[stories.length - 1]?.storyDateModified,
+      description: metaDescription,
+      author: stories.reduce(
+        (liveBlogAuthors, story) => {
+          if (story.storyCredits.by.length) {
+            story.storyCredits.by.forEach((author) => {
+              if (!liveBlogAuthors.find(liveBlogStory => liveBlogStory.name === author.name)) {
+                liveBlogAuthors.push({ '@type': 'Person', name: author.name });
+              }
+            });
+          }
+          return liveBlogAuthors;
+        },
+        [],
+      ),
+      publisher: {
+        '@id': 'ajc.com',
+        '@type': 'NewsMediaOrganization',
+        name: 'The Atlanta Journal-Constitution',
+        logo: {
+          '@type': 'ImageObject',
+          url: `${websiteURL}${deployment(`${contextPath}${websiteLogo}`)}`,
+          width: 250,
+          height: 250,
         },
       },
-      coverageStartTime: formatDateTime(stories[0]?.storyDateModified),
-      coverageEndTime,
-      headline: metaTitle,
-      description: metaDescription,
+      coverageStartTime: stories[0]?.storyInitialPublishDate,
+      // All this structured data only shows if the coverage is currently live so
+      // we just set the coverageEndTime to 1 day in the future from now.
+      coverageEndTime: new Date(today.setDate(today.getDate() + 1)),
       liveBlogUpdate: stories.map((story) => {
         const {
-          storyTitle, storyInitialPublishDate, storyPromoItems, storyCredits, storyInitialBodyText,
+          storyTitle, storyInitialPublishDate, storyDateModified, storyPromoItems, storyInitialBodyText, storyId,
         } = story;
 
         const { url: featuredIMG } = storyPromoItems && storyPromoItems.basic && storyPromoItems.basic.url ? storyPromoItems.basic : {};
@@ -84,27 +91,34 @@ const GoogleStructuredData = (props) => {
         if (articleIMG.indexOf('/resources/') > -1) {
           articleIMG = `${websiteURL}${deployment(`${contextPath}${articleIMG}`)}`;
         }
-        // if multiple authors are listed, display all of them
-        let author;
-        if (storyCredits?.by?.length > 1) {
-          author = storyCredits.by.map(eachAuthor => eachAuthor.name).join(', ');
-        } else {
-          author = storyCredits?.by[0]?.name;
-        }
 
         return {
           '@type': 'BlogPosting',
-          datePublished: formatDateTime(storyInitialPublishDate),
           headline: storyTitle,
-          author: {
-            '@type': 'Person',
-            name: author,
+          url: `${websiteURL}${requestUri}/#${storyId}`,
+          datePublished: storyInitialPublishDate,
+          dateModified: storyDateModified,
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': `${websiteURL}${requestUri}/#${storyId}`,
           },
-          image: {
-            '@type': 'ImageObject',
-            url: articleIMG,
+          publisher: {
+            '@id': 'ajc.com',
+            '@type': 'NewsMediaOrganization',
+            name: 'The Atlanta Journal-Constitution',
+            logo: {
+              '@type': 'ImageObject',
+              url: `${websiteURL}${deployment(`${contextPath}${websiteLogo}`)}`,
+              width: 250,
+              height: 250,
+            },
+          },
+          author: {
+            '@type': 'Organization',
+            name: 'The Atlanta Journal-Constitution',
           },
           articleBody: storyInitialBodyText,
+          image: articleIMG,
         };
       }),
     };
