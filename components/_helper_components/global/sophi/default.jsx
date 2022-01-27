@@ -31,6 +31,7 @@ const SophiTags = ({ isAmp }) => {
     paywallStatus,
     typeOfPage,
     sophiType,
+    isABTest,
   } = contentMeta || {};
 
   let sophiContentType = isNonContentPage ? 'section' : 'article';
@@ -195,6 +196,19 @@ const SophiTags = ({ isAmp }) => {
                 }
               }
             };
+            document.addEventListener('DOMContentLoaded', () => {
+              if (${isABTest} || (${isABTest && isABTest.toLowerCase()})) {
+                window.sophi.sendEvent({
+                  type: 'ab_tests',
+                  data: {
+                    tests: [{
+                      testId: '${sophiSection}',
+                      variantName: '${sophiSection}',
+                    }],
+                  },
+                });
+              }
+            });
           } catch(e) {}
         `,
       }}></script>
