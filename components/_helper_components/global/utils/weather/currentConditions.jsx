@@ -1,8 +1,11 @@
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 
 const currentConditions = () => {
-  const { weatherLocationId } = getProperties();
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
+  const { weatherLocationId } = getProperties(arcSite);
   const weatherData = useContent({
     source: 'weather',
     query: {
