@@ -167,9 +167,14 @@ const getContentMeta = () => {
   let desc = description ? description.basic : metaValue('description') || '';
   let contentId = uuid;
   let pubDate = firstPublishDate;
-  let uri = requestUri;
+  /*
+    if a canonical meta value is defined in PB, defer to it.  This is especially important/necessary for A/B tests, where the "B" test has its own unique requestUri (because it's a separate page in PB) but we want to ensure its metadata matches the "A" page (i.e. url in the browser).  Otherwise, use the requestUri.
+  */
+  let uri = metaValue('canonical') || requestUri;
   if ((!canonicalUrl || treatPbPageAsArticle) && uri) {
-    // only jump through these hoops if canonical_url is undefined (i.e. pagebuilder pages)
+    /*
+      only jump through these hoops if canonical_url is undefined (i.e. pagebuilder pages) or we want to treat the PB page as an article (e.g. Covid, Stop the Steal, etc)
+    */
     // remove query string & hashes from uri
     uri = uri.replace(/\?.*/g, '');
     uri = uri.replace(/#.*/g, '');
@@ -282,6 +287,7 @@ const getContentMeta = () => {
     appleIconPath,
     nonPrimarySet,
     isOpinion,
+    isABTest: metaValue('AB test'),
     blogName,
     paywallStatus: pbPaywall || paywallStatus,
     syndication,
