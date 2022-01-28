@@ -42,7 +42,7 @@ const RenderOutputType = (props) => {
   const { isNonContentPage } = pageType || {};
   const contentMeta = getContentMeta() || {};
   const { topics = [], contentId = '' } = contentMeta;
-  const noAds = checkTags(topics, 'no-ads', website);
+  const noAds = checkTags(topics, 'no-ads');
   const noAmp = useCallback(() => checkTags(topics, 'no-amp'), [topics]);
   const includeGtm = metrics && metrics.gtmContainerKey;
   let fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${cdnSite || currentSite}.com` : '';

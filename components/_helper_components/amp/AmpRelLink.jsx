@@ -16,8 +16,8 @@ export const AmpRelLink = ({
 AmpRelLink.propTypes = {
   type: PropTypes.string,
   noAmp: PropTypes.bool,
-  site: PropTypes.string,
-  url: PropTypes.string,
+  site: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default AmpRelLink;
