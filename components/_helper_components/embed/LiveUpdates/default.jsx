@@ -30,7 +30,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState: userState } = connextLocalStorageData;
   const isLoggedOut = (userState && userState.toLowerCase() === 'logged out') || true;
-  const hashBeforeLogin = useRef(null);
+  const hashBeforeLogin = useRef('empty');
   let activeUpdate = hashId;
   let viewportHeight = 0;
   let lastScrollPos = 0;
@@ -195,7 +195,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     }
 
     if (isLoggedOut) {
-      hashBeforeLogin.current = targetUpdate;
+      hashBeforeLogin.current = hashTarget;
     }
 
     if (targetUpdate) {
@@ -302,7 +302,9 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('connextLoggedIn', () => {
-      if (hashBeforeLogin) hashBeforeLogin.current.scrollIntoView(true);
+      if (hashBeforeLogin.current) {
+        document.querySelector(`[href='#${hashBeforeLogin.current}']`).click();
+      }
     });
     return () => {
       window.removeEventListener('scroll', handleScroll);
