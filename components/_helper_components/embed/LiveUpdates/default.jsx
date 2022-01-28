@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 import getProperties from 'fusion:properties';
@@ -30,7 +30,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState: userState } = connextLocalStorageData;
   const isLoggedOut = (userState && userState.toLowerCase() === 'logged out') || true;
-  let hashBeforeLogin;
+  const hashBeforeLogin = useRef(null);
   let activeUpdate = hashId;
   let viewportHeight = 0;
   let lastScrollPos = 0;
@@ -195,7 +195,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     }
 
     if (isLoggedOut) {
-      hashBeforeLogin = targetUpdate;
+      hashBeforeLogin.current = targetUpdate;
     }
 
     if (targetUpdate) {
@@ -302,11 +302,11 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('connextLoggedIn', () => {
-      if (hashBeforeLogin) hashBeforeLogin.scrollIntoView(true);
+      if (hashBeforeLogin) hashBeforeLogin.current.scrollIntoView(true);
     });
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('connextLoggedIn');
+      window.removeEventListener('connextLoggedIn', null);
     };
   }, []);
 
