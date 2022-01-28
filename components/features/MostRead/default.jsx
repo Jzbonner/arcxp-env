@@ -26,6 +26,11 @@ const MostRead = () => {
       arcSite,
     },
   });
+  console.log('host', host);
+  console.log('arcsite', arcSite);
+  console.log('topStoriesData', topStoriesData);
+  console.log('storyCount custom field', storyCount);
+  console.log('story limit var', storyLimit);
 
   /*
     APD-1654: If the storyCount custom field is being used, then we must set all stories into rows of 5 per UX request.
@@ -38,8 +43,11 @@ const MostRead = () => {
     let counter = 0;
     let totalCount = 0;
 
+    console.log('storyCountConfig', storyCountConfig);
+
     if (storyCountConfig) {
       topStoriesData.forEach((el, i) => {
+        console.log('index', i, 'el', el);
         if (counter === 5 || (counter < 5 && topStoriesData.length - 1 === i)) {
           storyRows.push(<div className={`mostReadList ${storyRows.length >= 1 ? 'sub-row' : ''}`}>{storyItems}</div>);
           storyItems = [];

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
@@ -14,6 +14,7 @@ import GoogleStructuredData from '../../_helper_components/article/googleData/de
 import fetchEnv from '../../_helper_components/global/utils/environment';
 import gtmScript from '../helper_functions/gtmScript';
 import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
+import log from '../../_helper_components/amp/log';
 
 const RenderOutputType = (props) => {
   const {
@@ -42,20 +43,32 @@ const RenderOutputType = (props) => {
   const { isNonContentPage } = pageType || {};
   const contentMeta = getContentMeta() || {};
   const { topics = [], contentId = '' } = contentMeta;
-  const noAds = checkTags(topics, 'no-ads');
-  const noAmp = checkTags(topics, 'no-amp');
+  /* const noAmp = checkTags(topics, 'no-amp'); */
+  // console.log(checkTags(topics, 'no-amp'));
+  console.log('type', type);
+  console.log('website', website);
+  console.log('articleUrl', articleURL);
+  console.log('cdnSite', cdnSite);
+  console.log('currentSite', currentSite);
+  console.log('leadGal', hasLeadGallery);
+  const noAds = checkTags(topics, 'no-ads', website);
+  const noAmp = useCallback(() => checkTags(topics, 'no-amp'), [topics]);
+  console.log('noAmpMemo', noAmp);
+
+  console.log(log(type, checkTags(topics, 'no-amp'), website, cdnSite));
+
   const includeGtm = metrics && metrics.gtmContainerKey;
   let fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${cdnSite || currentSite}.com` : '';
   /* eslint-disable-next-line max-len */
   fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
-
+  console.log('noAmp', noAmp);
   return (
     <html lang='en'>
       <head>
         <MetaTags />
         <SiteMeta />
         <GoogleStructuredData {...props} />
-        {!hasLeadGallery && noAmp && <AmpRelLink type={type} noAmp={noAmp} site={website || cdnSite || currentSite} url={articleURL || '/'} />}
+        {!hasLeadGallery && !noAmp && <AmpRelLink type={type} noAmp={noAmp} site={website || cdnSite || currentSite} url={articleURL || '/'} />}
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} as="font" type="font/woff2" />
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} as="font" type="font/woff2" />
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`} as="font" type="font/woff2" />
