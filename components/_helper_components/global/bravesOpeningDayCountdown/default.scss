@@ -1,0 +1,89 @@
+@import "../../../../src/styles/base/mixins.scss";
+@import "../../../../src/styles/base/breakpoints.scss";
+
+.BraveOpeningDayCountdown {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 88px;
+    width: 100%;
+    background-color: #fff;
+    padding: 9px;
+
+    @include breakpoint(tablet) {
+        height: 103px;
+        width: 458px;
+        border-radius: 6px;
+        left: 10px;
+        bottom: 10px;
+        box-shadow: 0 20px 60px 0 #132e48;
+    }
+
+    .bravesLogo {
+        display: flex;
+        justify-content: center;
+        width: 32.8205%; 
+
+        @include breakpoint(tablet) {
+            max-width: 150px;
+        }
+        
+        img {
+            width: 100%;
+            height: auto;
+            max-width: 200px;
+        }
+    }
+
+    .countdown {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 47.69230769230769%;
+
+        @include breakpoint(tablet) {
+            width: 236px;
+        }
+        
+        img {
+            width: 100%;
+            height: auto;
+            max-width: 230px;
+        }
+
+        .opening-day {
+            display: flex;
+            font-family: Gordita;
+            font-size: 13.6px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: -0.21px;
+            text-align: center;
+            color: #fff;
+            position: absolute;
+            text-transform: uppercase;
+            bottom: 20%;
+
+            @include breakpoint(tablet) {
+                bottom:20px;
+            }
+
+            span {
+                width: 16px;
+            }
+        }
+    }
+
+    .ad {
+        width: 17.692307692307693%;
+    }
+
+    .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
