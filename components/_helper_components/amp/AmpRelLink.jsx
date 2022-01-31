@@ -7,7 +7,7 @@ export const AmpRelLink = ({
 }) => {
   if (type === 'story' && !noAmp && site && url) {
     return (
-      <link rel="amphtml" href={`https://www.${handleSiteName(site)}.com${url}?outputType=amp`}/>
+      <link rel="amphtml" href={`https://www.${handleSiteName(site)}.com${url}?outputType=amp`} />
     );
   }
   return null;
