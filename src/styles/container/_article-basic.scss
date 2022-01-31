@@ -7,9 +7,16 @@
   margin: 0 auto;
 }
 
-main > .c-gallery-basic.b-contentMaxWidth {
-  //Standalone gallery page
-  margin-top: 2.5rem;
+main > .c-gallery-basic {
+  
+  &.b-contentMaxWidth {
+    //Standalone gallery page
+    margin-top: 2.5rem;
+  }
+
+  & .c-sectionHome.border-top {
+    border: none;
+  }
 }
 
 .c-gallery-basic,
