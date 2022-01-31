@@ -30,7 +30,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState: userState } = connextLocalStorageData;
   const isLoggedOut = (userState && userState.toLowerCase() === 'logged out') || true;
-  const hashBeforeLogin = useRef('empty');
+  const hashBeforeLogin = useRef('');
   let activeUpdate = hashId;
   let viewportHeight = 0;
   let lastScrollPos = 0;
