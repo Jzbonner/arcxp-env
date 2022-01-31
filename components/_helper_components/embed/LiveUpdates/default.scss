@@ -420,6 +420,11 @@
         height: 0;
         top: -60px;
         left: 0;
+
+        @include between-breakpoints(tablet, desktop-sm) {
+          scroll-margin-top: 25px;
+          margin-top: -25px;
+        }
       }
 
       .c-headline {
