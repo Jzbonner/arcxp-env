@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
@@ -43,19 +43,18 @@ const RenderOutputType = (props) => {
   const contentMeta = getContentMeta() || {};
   const { topics = [], contentId = '' } = contentMeta;
   const noAds = checkTags(topics, 'no-ads');
-  const noAmp = checkTags(topics, 'no-amp');
+  const noAmp = useCallback(() => checkTags(topics, 'no-amp'), [topics]);
   const includeGtm = metrics && metrics.gtmContainerKey;
   let fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${cdnSite || currentSite}.com` : '';
   /* eslint-disable-next-line max-len */
   fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
-
   return (
     <html lang='en'>
       <head>
         <MetaTags />
         <SiteMeta />
         <GoogleStructuredData {...props} />
-        {!hasLeadGallery && noAmp && <AmpRelLink type={type} noAmp={noAmp} site={website || cdnSite || currentSite} url={articleURL || '/'} />}
+        {!hasLeadGallery && !noAmp && <AmpRelLink type={type} noAmp={noAmp} site={website || cdnSite || currentSite} url={articleURL || '/'} />}
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditaregular-webfont.woff2`)}`} as="font" type="font/woff2" />
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditabold-webfont.woff2`)}`} as="font" type="font/woff2" />
         <link rel="preload" href={`${fullPathDomain}${deployment(`${contextPath}/resources/dist/fonts/gorditamedium-webfont.woff2`)}`} as="font" type="font/woff2" />
