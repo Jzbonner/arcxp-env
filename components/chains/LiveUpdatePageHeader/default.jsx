@@ -21,7 +21,7 @@ const LiveUpdatePageHeader = ({ children }) => {
       statusContent = displayDate ? formatTime(displayDate) : formatTime(firstPublishDate);
     }
   }
-  return <div className="c-LiveUpdatePageHeader">
+  return <div className={`c-LiveUpdatePageHeader ${!pageIsLive ? 'titleWithoutLiveStatus' : ''}`}>
     {children}
     {pageIsLive && <div className='c-liveUpdatesStatus'>{statusContent}</div>}
   </div>;
