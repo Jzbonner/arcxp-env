@@ -541,7 +541,9 @@ article .c-section a.link {
 }
 
 .story-text b {
-  @include text-styles(1rem, 1.625, "Gordita-Medium");
+  @include text-styles(1rem, 1.625, "Gordita-Bold");
+
+  font-weight: 400;
 }
 
 @include amp-exclude {
