@@ -2,69 +2,73 @@
 @import "../../../../src/styles/base/breakpoints.scss";
 
 .c-countdown {
+  display: flex;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  height: 30px;
+  position: absolute;
+  top: 20%;
+
+  @include breakpoint(tablet) {
+    top: 20px;
+  }
+
+  .card {
+    width: 35px;
+    position: relative;
     display: flex;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    height: 30px;
-    position: absolute;
-    top: 20%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
-    @include breakpoint(tablet) {
-        top: 20px;
+    &:after {
+      content: ":";
+      position: absolute;
+      top: 4px;
+      right: -2px;
+      font-family: "Gordita";
+      font-size: 8.5px;
+      color: #fff;
     }
 
-    .card {
-      width: 35px;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-
-      &:after {
-        content: ':';
-        position: absolute;
-        top: 4px;
-        right: -2px;
-        font-family: Gordita;
-        font-size: 8.5px;
-        color: #fff;
-      }
-      &:last-child:after {
-        display: none;
-      }
-      &:nth-last-child(2):after {
-        display: none;
-      }
-      
-      .time {
-        width: 22px;
-        height: 19px;
-        font-family: Gordita;
-        font-size: 14px;
-        font-weight: bold;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: normal;
-        letter-spacing: -0.22px;
-        text-align: center;
-        color: #fff;
-      }
-      .label {
-        width: 12px;
-        height: 9px;
-        font-family: Gordita;
-        font-size: 7px;
-        font-weight: bold;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: normal;
-        letter-spacing: -0.11px;
-        text-align: center;
-        color: #fff;
-      }
+    &:last-child:after {
+      display: none;
     }
-    .spacer {
-        width: 17px;
+
+    &:nth-last-child(2):after {
+      display: none;
+    }
+
+    .time {
+      width: 22px;
+      height: 19px;
+      font-family: "Gordita";
+      font-size: 14px;
+      font-weight: 600;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: -.22px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .label {
+      width: 12px;
+      height: 9px;
+      font-family: "Gordita";
+      font-size: 7px;
+      font-weight: 600;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: -.11px;
+      text-align: center;
+      color: #fff;
     }
   }
+
+  .spacer {
+    width: 17px;
+  }
+}

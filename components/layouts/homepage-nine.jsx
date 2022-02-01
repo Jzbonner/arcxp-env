@@ -8,6 +8,7 @@ import SectionHome from '../_helper_components/home/SectionHome/SectionHome';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
+import BravesOpeningDayCountdown from '../_helper_components/global/bravesOpeningDayCountdown/default';
 
 const HomePageNineLayout = (props) => {
   const [
@@ -31,7 +32,7 @@ const HomePageNineLayout = (props) => {
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
-
+  console.log('we are using this carlos');
   return (
     <>
       <GlobalAdSlots pbPage={true} />
@@ -50,6 +51,7 @@ const HomePageNineLayout = (props) => {
       {!noHeaderAndFooter && <>
         <Footer />
         <Copyright />
+        <BravesOpeningDayCountdown />
       </>}
     </>
   );

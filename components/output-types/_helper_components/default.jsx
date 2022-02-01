@@ -14,7 +14,6 @@ import GoogleStructuredData from '../../_helper_components/article/googleData/de
 import fetchEnv from '../../_helper_components/global/utils/environment';
 import gtmScript from '../helper_functions/gtmScript';
 import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
-import BravesOpeningDayCountdown from '../../_helper_components/global/bravesOpeningDayCountdown/default';
 
 const RenderOutputType = (props) => {
   const {
@@ -114,7 +113,6 @@ const RenderOutputType = (props) => {
         <div id="fb-root"></div>
         <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
         {devconActive && <script id="ns_script_dc" data-key={devconKey || '2a1556f7-d788-4b8b-943a-dd77f5f0d472'} data-e="5" src="//includemodal.global.ssl.fastly.net/sp.js"></script>}
-        <BravesOpeningDayCountdown />
       </body>
     </html>
   );
