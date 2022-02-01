@@ -598,5 +598,173 @@
     "accountId": "1166984029",
     "relationshipType": "RESELLER",
     "certId": ""
+  },
+  {
+    "domain": "google.com",
+    "accountId": "pub-1995032544933848",
+    "relationshipType": "DIRECT",
+    "certId": "f08c47fec0942fa0"
+  },
+  {
+    "domain": "google.com",
+    "accountId": "pub-1748410580814249",
+    "relationshipType": "DIRECT",
+    "certId": "f08c47fec0942fa0"
+  },
+  {
+    "domain": "spotxchange.com",
+    "accountId": "108371",
+    "relationshipType": "RESELLER",
+    "certId": "7842df1d2fe2db34"
+  },
+  {
+    "domain": "yahoo.com",
+    "accountId": "57385",
+    "relationshipType": "RESELLER",
+    "certId": ""
+  },
+  {
+    "domain": "advertising.com",
+    "accountId": "28615",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "smartadserver.com",
+    "accountId": "3660",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "159272",
+    "relationshipType": "DIRECT",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "pubmatic.com",
+    "accountId": "159271",
+    "relationshipType": "DIRECT",
+    "certId": "5d62403b186f2ace"
+  },
+  {
+    "domain": "sonobi.com",
+    "accountId": "388d945b92",
+    "relationshipType": "DIRECT",
+    "certId": "d1a215d9eb5aee9e"
+  },
+  {
+    "domain": "rhythmone.com",
+    "accountId": "1059622079",
+    "relationshipType": "RESELLER",
+    "certId": "a670c89d4a324e47"
+  },
+  {
+    "domain": "contextweb.com",
+    "accountId": "560606",
+    "relationshipType": "RESELLER",
+    "certId": "89ff185a4c4e857c"
+  },
+  {
+    "domain": "yieldmo.com",
+    "accountId": "2.45E+18",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "Yieldmo.com",
+    "accountId": "2.46E+18",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "rhythmone.com",
+    "accountId": "326706738",
+    "relationshipType": "DIRECT",
+    "certId": "a670c89d4a324e47"
+  },
+  {
+    "domain": "video.unrulymedia.com",
+    "accountId": "326706738",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "rhythmone.com",
+    "accountId": "2267301808",
+    "relationshipType": "DIRECT",
+    "certId": "a670c89d4a324e47"
+  },
+  {
+    "domain": "video.unrulymedia.com",
+    "accountId": "2267301808",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "media.net",
+    "accountId": "8CUCEIM31",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "loopme.com",
+    "accountId": "11292",
+    "relationshipType": "DIRECT",
+    "certId": "6c8d5f95897a5a3b"
+  },
+  {
+    "domain": "33across.com",
+    "accountId": "0010b00002bSvuPAAS",
+    "relationshipType": "DIRECT",
+    "certId": "bbea06d9c4d2853c"
+  },
+  {
+    "domain": "improvedigital.com",
+    "accountId": "1812",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "smaato.com",
+    "accountId": "1100047548",
+    "relationshipType": "DIRECT",
+    "certId": "07bcf65f187117b4"
+  },
+  {
+    "domain": "amxrtb.com",
+    "accountId": "105199374",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "Media.net",
+    "accountId": "8CU47NT30",
+    "relationshipType": "DIRECT",
+    "certId": ""
+  },
+  {
+    "domain": "teads.tv",
+    "accountId": "22219",
+    "relationshipType": "DIRECT",
+    "certId": "15a9c44f6d26cbe1"
+  },
+  {
+    "domain": "synacor.com",
+    "accountId": "82437",
+    "relationshipType": "DIRECT",
+    "certId": "e108f11b2cdf7d5b"
+  },
+  {
+    "domain": "triplelift.com",
+    "accountId": "4260",
+    "relationshipType": "DIRECT",
+    "certId": "6c33edb13117fd86"
+  },
+  {
+    "domain": "risecodes.com",
+    "accountId": "60d9ab656a43ad00010a56ed",
+    "relationshipType": "DIRECT",
+    "certId": ""
   }
 ]
