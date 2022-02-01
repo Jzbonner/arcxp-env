@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useComponentContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
@@ -15,6 +15,7 @@ const MostRead = () => {
   const env = fetchEnv();
   const componentContext = useComponentContext();
   const { section, storyCount = null, title = '' } = componentContext && componentContext.customFields;
+  const [topStoriesState, setTopStoriesState] = useState(null);
 
   const storyLimit = storyCount || '10';
   const topStoriesData = useContent({
@@ -49,7 +50,7 @@ const MostRead = () => {
         if (el.title) {
           counter += 1;
           totalCount += 1;
-          storyItems.push(<a key={`Headline: ${el.title}`} href={`https://${env === 'prod' ? 'www.' : ''}${el.path}`} target="_self"><div className="mostReadRanking">{totalCount}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>);
+          storyItems.push(<a key={`Headline: ${el.title}`} href={`https://${env === 'prod' ? 'www.' : ''}${el.path}`} target="_self"><div className={`mostReadRanking ${totalCount >= 10 ? 'multi-digit' : ''}`}>{totalCount}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>);
         }
       });
       return storyRows;
@@ -69,9 +70,20 @@ const MostRead = () => {
     return storyRows;
   };
 
-  if (topStoriesData) {
+  useEffect(() => {
+    if (topStoriesData) {
+      setTopStoriesState(buildMostReadRows(storyCount));
+    }
+  }, [topStoriesData]);
+
+  if (topStoriesState) {
     return <div className="c-mostRead"><div className="mostReadTitle">{`${title || 'Most Read'}`}</div>
-        {buildMostReadRows(storyCount)}
+      {topStoriesState.map((el, i) => {
+        if (i <= storyLimit - 1) {
+          return el;
+        }
+        return null;
+      })}
     </div>;
   }
   return null;

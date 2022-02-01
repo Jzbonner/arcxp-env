@@ -115,6 +115,15 @@
     letter-spacing: -.5px;
     margin: 0 10px 4px;
   }
+
+  &.multi-digit {
+    white-space: nowrap;
+    padding-right: 10px;
+
+    @include breakpoint(tablet) {
+      padding-right: 15px;
+    }
+  }
 }
 
 .mostReadRanking:first-child {
