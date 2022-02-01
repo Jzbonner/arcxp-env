@@ -31,7 +31,6 @@ const HomePageNineLayout = (props) => {
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
-  console.log('we are using this carlos');
   return (
     <>
       <GlobalAdSlots pbPage={true} />
