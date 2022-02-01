@@ -48,7 +48,7 @@ const GoogleStructuredData = (props) => {
       description: metaDescription,
       author: stories.reduce(
         (liveBlogAuthors, story) => {
-          if (story.storyCredits.by.length) {
+          if (story?.storyCredits?.by?.length) {
             story.storyCredits.by.forEach((author) => {
               if (!liveBlogAuthors.find(liveBlogStory => liveBlogStory.name === author.name)) {
                 liveBlogAuthors.push({ '@type': 'Person', name: author.name });
