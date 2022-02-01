@@ -55,6 +55,30 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     return action;
   };
 
+  const scrollLazyLoadedTargetIntoView = (target, TargetOrientedToTop = true) => {
+    if (!target) {
+      return null;
+    }
+
+    target.scrollIntoView(TargetOrientedToTop);
+
+    const intervalId = setInterval(() => {
+      target.scrollIntoView(TargetOrientedToTop);
+    }, 500);
+
+    const observer = new IntersectionObserver(() => {
+      observer.unobserve(target);
+      setTimeout(() => {
+        clearInterval(intervalId);
+        target.scrollIntoView(TargetOrientedToTop);
+      }, 500);
+    });
+
+    observer.observe(target);
+
+    return null;
+  };
+
   const renderAdOrPlaceholder = (index) => {
     let response = '';
 
@@ -145,13 +169,13 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
         // targetLink is outside the viewport from the bottom
         if (targetLinkBottom > viewportHeight + 10) {
           // The bottom of the targetLink will be aligned to the bottom of the visible area of the scrollable ancestor.
-          targetLink.scrollIntoView(false);
+          scrollLazyLoadedTargetIntoView(targetLink, false);
         }
 
         // Target is outside the view from the top
         if (targetLinkTop < 10) {
           // The top of the targetLink will be aligned to the top of the visible area of the scrollable ancestor
-          targetLink.scrollIntoView(true);
+          scrollLazyLoadedTargetIntoView(targetLink, true);
         }
 
         handleMetricsEventDispatch(targetLinkTitle, targetLinkIndex);
@@ -199,7 +223,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     }
 
     if (targetUpdate) {
-      targetUpdate.scrollIntoView(true);
+      scrollLazyLoadedTargetIntoView(targetUpdate, true);
     }
   };
 
