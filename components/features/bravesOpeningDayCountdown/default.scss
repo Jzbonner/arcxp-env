@@ -1,5 +1,5 @@
-@import "../../../../src/styles/base/mixins.scss";
-@import "../../../../src/styles/base/breakpoints.scss";
+@import "../../../src/styles/base/mixins.scss";
+@import "../../../src/styles/base/breakpoints.scss";
 
 .BraveOpeningDayCountdown {
   display: flex;
@@ -91,7 +91,7 @@
   }
 
   .c-WCC01 {
-    
+
     .b-margin-bottom-d30-m20 {
       margin-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
     }
@@ -101,6 +101,7 @@
     }
 
     .WCC01 {
+      padding-top: 0 !important; /* stylelint-disable-line declaration-no-important */
       margin-bottom: none;
 
       &:before {

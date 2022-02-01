@@ -8,7 +8,6 @@ import SectionHome from '../_helper_components/home/SectionHome/SectionHome';
 import Footer from '../_helper_components/global/footer/default';
 import Copyright from '../_helper_components/global/copyright/default';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
-import BravesOpeningDayCountdown from '../_helper_components/global/bravesOpeningDayCountdown/default';
 
 const HomePageNineLayout = (props) => {
   const [
@@ -51,7 +50,6 @@ const HomePageNineLayout = (props) => {
       {!noHeaderAndFooter && <>
         <Footer />
         <Copyright />
-        <BravesOpeningDayCountdown />
       </>}
     </>
   );
