@@ -49,7 +49,7 @@ const MostRead = () => {
         if (el.title) {
           counter += 1;
           totalCount += 1;
-          storyItems.push(<a key={`Headline: ${el.title}`} href={`https://${env === 'prod' ? 'www.' : ''}${el.path}`} target="_self"><div className="mostReadRanking">{totalCount}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>);
+          storyItems.push(<a key={`Headline: ${el.title}`} href={`https://${env === 'prod' ? 'www.' : ''}${el.path}`} target="_self"><div className={`mostReadRanking ${totalCount >= 10 ? 'multi-digit' : ''}`}>{totalCount}</div><div></div><div className="mostReadHeadline">{truncateHeadline(el.title)}</div></a>);
         }
       });
       return storyRows;
@@ -71,7 +71,7 @@ const MostRead = () => {
 
   if (topStoriesData) {
     return <div className="c-mostRead"><div className="mostReadTitle">{`${title || 'Most Read'}`}</div>
-        {buildMostReadRows(storyCount)}
+      {buildMostReadRows(storyCount)}
     </div>;
   }
   return null;
