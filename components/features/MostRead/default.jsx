@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useComponentContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
@@ -15,7 +15,6 @@ const MostRead = () => {
   const env = fetchEnv();
   const componentContext = useComponentContext();
   const { section, storyCount = null, title = '' } = componentContext && componentContext.customFields;
-  const [topStoriesState, setTopStoriesState] = useState(null);
 
   const storyLimit = storyCount || '10';
   const topStoriesData = useContent({
@@ -70,20 +69,9 @@ const MostRead = () => {
     return storyRows;
   };
 
-  useEffect(() => {
-    if (topStoriesData) {
-      setTopStoriesState(buildMostReadRows(storyCount));
-    }
-  }, [topStoriesData]);
-
-  if (topStoriesState) {
+  if (topStoriesData) {
     return <div className="c-mostRead"><div className="mostReadTitle">{`${title || 'Most Read'}`}</div>
-      {topStoriesState.map((el, i) => {
-        if (i <= storyLimit - 1) {
-          return el;
-        }
-        return null;
-      })}
+      {buildMostReadRows(storyCount)}
     </div>;
   }
   return null;
