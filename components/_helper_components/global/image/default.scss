@@ -206,7 +206,7 @@
 
     .image-component-image.image-portrait {
       flex-direction: row;
-      gap: 75px;
+      gap: 5%;
 
       .c-caption {
         width: 40%;
@@ -217,7 +217,7 @@
       }
 
       img {
-        max-height: 85vh;
+        max-height: 80vh;
       }
     }
   }
