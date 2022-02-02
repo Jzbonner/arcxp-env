@@ -1,0 +1,124 @@
+@import "../../../src/styles/base/mixins.scss";
+@import "../../../src/styles/base/breakpoints.scss";
+
+.BraveOpeningDayCountdown {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 88px;
+  width: 100%;
+  background-color: #fff;
+  padding: 9px;
+  box-shadow: 0 17px 51px 0 rgba(19, 46, 72, .23);
+
+  @include breakpoint(tablet) {
+    height: 103px;
+    width: 458px;
+    border-radius: 6px;
+    left: 10px;
+    bottom: 10px;
+    box-shadow: 0 20px 60px 0 #132e48;
+  }
+
+  .bravesLogo {
+    display: flex;
+    justify-content: center;
+    width: 22.8205%;
+
+    @include breakpoint(tablet) {
+      max-width: 150px;
+      width: 32.8205%;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 200px;
+    }
+  }
+
+  .countdown {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 47.6923%;
+
+    @include breakpoint(tablet) {
+      width: 236px;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 230px;
+    }
+
+    .opening-day {
+      display: flex;
+      font-family: "Gordita";
+      font-size: 12.6px;
+      font-weight: 600;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: -.21px;
+      text-align: center;
+      color: #fff;
+      position: absolute;
+      text-transform: uppercase;
+      bottom: 22%;
+
+      @include breakpoint(tablet) {
+        bottom: 20px;
+      }
+
+      span {
+        width: 16px;
+      }
+    }
+  }
+
+  .ad {
+    width: 17.6923%;
+    min-width: 89px;
+  }
+
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .c-WCC01 {
+
+    .b-margin-bottom-d30-m20 {
+      margin-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
+    }
+
+    .b-margin-bottom-d40-m20 {
+      margin-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
+    }
+
+    .WCC01 {
+      padding-top: 0 !important; /* stylelint-disable-line declaration-no-important */
+      margin-bottom: none;
+
+      &:before {
+        display: none;
+      }
+    }
+  }
+
+  .closing-icon {
+    position: absolute;
+    height: 9px;
+    width: auto;
+    filter: invert(1) grayscale(1);
+    right: 35px;
+
+    @include breakpoint(tablet) {
+      right: 10px;
+    }
+  }
+}
