@@ -69,9 +69,11 @@ const MostRead = () => {
     return storyRows;
   };
 
-  if (topStoriesData) {
-    return <div className="c-mostRead"><div className="mostReadTitle">{`${title || 'Most Read'}`}</div>
-      {buildMostReadRows(storyCount)}
+  const mostReadRows = topStoriesData ? buildMostReadRows(storyCount) : null;
+
+  if (mostReadRows) {
+    return <div className={`c-mostRead-feature ${mostReadRows.length > 1 ? 'has-multi-rows' : ''}`}><div className="mostReadTitle">{`${title || 'Most Read'}`}</div>
+      {mostReadRows}
     </div>;
   }
   return null;
