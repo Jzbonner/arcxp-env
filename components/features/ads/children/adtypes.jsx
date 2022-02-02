@@ -922,4 +922,10 @@ export const adSlots = {
       [88, 31],
     ],
   },
+  WCC01: {
+    slotName: 'WCC01',
+    dimensions: [
+      [86, 49],
+    ],
+  },
 };

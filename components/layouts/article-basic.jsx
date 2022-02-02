@@ -43,6 +43,7 @@ import NonSubPremiumMessage from '../_helper_components/amp/nonSubPremiumMessage
 import PaywallLimitMessage from '../_helper_components/amp/paywallLimitMessage/default';
 import SponsorRelatedBoxAMP from '../_helper_components/article/sponsorRelatedBox/amp';
 import PartnerBadge from '../_helper_components/article/partnerBadge/default';
+import BravesOpeningDayCountdown from '../features/bravesOpeningDayCountdown/default';
 
 const start = 3;
 
@@ -324,6 +325,7 @@ const StoryPageLayout = () => {
       {ampPage && <Carousel storyId={uuid} taxonomy={taxonomy} />}
       {/* if it's a metered story, add the connext auth handlers to load deferred items (e.g. anything with `lazyLoad` above) */}
       {isMeteredStory && !ampPage && ConnextAuthTrigger()}
+      <BravesOpeningDayCountdown tags={tags} storyPage={true} />
     </>
   );
 };
