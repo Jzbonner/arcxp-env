@@ -104,12 +104,13 @@
 
     .image-component-image.inline {
       display: flex;
-      flex-direction: column;
       align-items: center;
+      justify-content: center;
       position: fixed;
       left: 0;
-      top: 10%;
+      top: 0;
       width: 100%;
+      height: 100%;
       box-sizing: border-box;
       padding: 0 12.5%;
       z-index: 4002;
@@ -137,7 +138,6 @@
     }
 
     img {
-      max-height: 60vh;
       max-width: 100%;
       width: auto;
       justify-self: center;
@@ -151,7 +151,6 @@
 
     .c-caption {
       display: flex;
-      align-self: flex-start;
       width: 100%;
 
       .photo-caption-btn {
@@ -168,7 +167,6 @@
         flex-direction: column-reverse;
 
         .photo-caption-text {
-          padding: 30px 0 0;
           text-align: left;
 
           @include text-styles(1rem, 1.88, "Gordita");
@@ -187,6 +185,40 @@
       right: 20px;
       width: 50px;
       cursor: pointer;
+    }
+
+    .image-component-image.image-landscape {
+      flex-direction: column;
+
+      .c-caption {
+        width: 100%;
+        align-self: flex-start;
+
+        .photo-caption-text {
+          padding: 30px 0 0;
+        }
+      }
+
+      img {
+        max-height: 60vh;
+      }
+    }
+
+    .image-component-image.image-portrait {
+      flex-direction: row;
+      gap: 75px;
+
+      .c-caption {
+        width: 40%;
+
+        .photo-caption-text {
+          padding: 0;
+        }
+      }
+
+      img {
+        max-height: 85vh;
+      }
     }
   }
 
