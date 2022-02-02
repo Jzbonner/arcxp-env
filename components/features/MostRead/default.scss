@@ -1,6 +1,7 @@
 @import "./../../../src/styles/base";
 
-.c-mostRead {
+.c-mostRead,
+.c-mostRead-feature {
   display: flex;
   flex-direction: column;
   margin-bottom: $min-Msection-margin;
@@ -8,6 +9,19 @@
 
   @include breakpoint(desktop-sm) {
     margin-bottom: $min-DTsection-margin;
+  }
+
+  .mostReadList {
+
+    &.has-multi-rows {
+
+      a:not(:last-child) {
+        @include breakpoint(tablet) {
+          margin-right: 0;
+          padding-right: 10px;
+        }
+      }
+    }
   }
 }
 
