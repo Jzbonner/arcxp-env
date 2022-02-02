@@ -77,23 +77,20 @@
       text-align: center;
       letter-spacing: -.31px;
 
-      @include text-styles(1.5625rem, 1.75, "Lora-Bold");
+      @include text-styles(1.5625rem, 1.1, "Lora-Bold");
 
       @include between-breakpoints(tablet, desktop-sm) {
         font-size: 1.875rem;
-        line-height: 1.9375rem;
         letter-spacing: -.38px;
       }
 
       @include between-breakpoints(desktop-sm, desktop-lg) {
         font-size: 2.43rem;
-        line-height: 2.5rem;
         letter-spacing: -.49px;
       }
 
       @include breakpoint(desktop-lg) {
         font-size: 3.125rem;
-        line-height: 3.44rem;
         letter-spacing: -.62px;
       }
 
@@ -104,7 +101,7 @@
     }
 
     .c-liveUpdatesStatus {
-      top: 70%;
+      top: 80%;
       width: auto;
 
       @include text-styles(.75rem, 1, "Gordita-Bold");
@@ -122,8 +119,8 @@
         font-size: .975rem;
       }
 
-      @include breakpoint(desktop-sm) {
-        top: 75%;
+      @include between-breakpoints(mobile-xl, tablet) {
+        top: 70%;
       }
 
       @include breakpoint(desktop-lg) {
@@ -423,6 +420,11 @@
         height: 0;
         top: -60px;
         left: 0;
+
+        @include between-breakpoints(tablet, desktop-sm) {
+          scroll-margin-top: 25px;
+          margin-top: -25px;
+        }
       }
 
       .c-headline {

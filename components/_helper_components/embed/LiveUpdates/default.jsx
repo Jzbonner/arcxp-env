@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 import getProperties from 'fusion:properties';
@@ -30,7 +30,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState: userState } = connextLocalStorageData;
   const isLoggedOut = (userState && userState.toLowerCase() === 'logged out') || true;
-  let hashBeforeLogin;
+  const hashBeforeLogin = useRef('');
   let activeUpdate = hashId;
   let viewportHeight = 0;
   let lastScrollPos = 0;
@@ -53,6 +53,30 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
       });
     }
     return action;
+  };
+
+  const scrollLazyLoadedTargetIntoView = (target, TargetOrientedToTop = true) => {
+    if (!target) {
+      return null;
+    }
+
+    target.scrollIntoView(TargetOrientedToTop);
+
+    const intervalId = setInterval(() => {
+      target.scrollIntoView(TargetOrientedToTop);
+    }, 500);
+
+    const observer = new IntersectionObserver(() => {
+      observer.unobserve(target);
+      setTimeout(() => {
+        clearInterval(intervalId);
+        target.scrollIntoView(TargetOrientedToTop);
+      }, 500);
+    });
+
+    observer.observe(target);
+
+    return null;
   };
 
   const renderAdOrPlaceholder = (index) => {
@@ -145,13 +169,13 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
         // targetLink is outside the viewport from the bottom
         if (targetLinkBottom > viewportHeight + 10) {
           // The bottom of the targetLink will be aligned to the bottom of the visible area of the scrollable ancestor.
-          targetLink.scrollIntoView(false);
+          scrollLazyLoadedTargetIntoView(targetLink, false);
         }
 
         // Target is outside the view from the top
         if (targetLinkTop < 10) {
           // The top of the targetLink will be aligned to the top of the visible area of the scrollable ancestor
-          targetLink.scrollIntoView(true);
+          scrollLazyLoadedTargetIntoView(targetLink, true);
         }
 
         handleMetricsEventDispatch(targetLinkTitle, targetLinkIndex);
@@ -195,11 +219,11 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     }
 
     if (isLoggedOut) {
-      hashBeforeLogin = targetUpdate;
+      hashBeforeLogin.current = hashTarget;
     }
 
     if (targetUpdate) {
-      targetUpdate.scrollIntoView(true);
+      scrollLazyLoadedTargetIntoView(targetUpdate, true);
     }
   };
 
@@ -302,11 +326,13 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('connextLoggedIn', () => {
-      if (hashBeforeLogin) hashBeforeLogin.scrollIntoView(true);
+      if (hashBeforeLogin.current) {
+        document.querySelector(`[href='#${hashBeforeLogin.current}']`).click();
+      }
     });
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('connextLoggedIn');
+      window.removeEventListener('connextLoggedIn', null);
     };
   }, []);
 
