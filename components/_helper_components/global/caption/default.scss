@@ -21,15 +21,34 @@
   }
 
   &.is-active {
-
-    .photo-caption {
-      display: block;
-    }
+    z-index: 2;
 
     .photo-caption-btn .caption-arrow {
       transform: rotate(180deg);
     }
+
+    .photo-caption {
+      display: block;
+    }
+    // &:focus {
+    //   z-index: 2;
+  
+    // }
   }
+
+  // &:not(.is-active) {
+
+  //   &:not(:focus) {
+
+  //     .photo-caption {
+  //       display: none;
+  //     }
+
+  //     .photo-caption-btn .caption-arrow {
+  //       transform: rotate(-180deg);
+  //     }
+  //   }
+  // }
 
   .photo-caption-btn {
     position: absolute;
@@ -95,8 +114,9 @@
     background-color: rgba(0, 0, 0, .8);
     box-shadow: 0 2px 26px 4px rgba(0, 0, 0, .1);
     transition: opacity .75s;
-    padding: 10px;
+    padding: 20px;
     display: none;
+    text-align: left;
 
     .photo-caption-text {
       color: #fff;
@@ -107,9 +127,7 @@
       @include text-styles(.875rem, 1.58, "Gordita");
 
       @include breakpoint(tablet) {
-        @include text-styles(1rem, 1.5, "Gordita");
-
-        padding: 20px;
+        padding: 30px;
       }
     }
 

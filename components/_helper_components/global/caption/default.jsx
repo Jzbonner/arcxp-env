@@ -16,10 +16,24 @@ const Caption = (
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
 
+  // useEffect(() => {
+  //   if (toggleButton) {
+  //     setInactive(false);
+  //   }
+  // }, [toggleButton]);
+
+  // useEffect(() => {
+  //   if (inactive === '' && !toggleButton) {
+  //     setInactive(true);
+  //   }
+  // }, [inactive]);
+
 
   const toggle = (e) => {
-    e.preventDefault();
-    setToggle(!toggleButton);
+    if (e.currentTarget === e.target) {
+      setToggle(!toggleButton);
+    }
+    console.log('toggled');
   };
 
   let captionContent = caption;
@@ -60,7 +74,7 @@ const Caption = (
       role="button"
       tabIndex="0"
     >
-      <div className="photo-caption-btn" onClick={toggle}>
+      <div className="photo-caption-btn" onFocus={toggle}>
         { ampPage ? <amp-img class='amp-arrow' id='amp-arrow' src={`${deployment(`${contextPath}/resources/icons/slider/left-arrow.svg`)}`} height='9px' width='11px' alt='caption arrow'></amp-img> : <img className="caption-arrow" src={LeftArrow} alt='caption arrow'/>}
         <span>Caption</span>
       </div>
