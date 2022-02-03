@@ -1916,11 +1916,11 @@
             display: block;
 
             a {
-              @include text-styles(1.125rem, 1, "Gordita");
+              @include text-styles(1.125rem, 1, "Gordita-Bold");
 
               display: flex;
               color: #fff;
-              font-weight: 800;
+              font-weight: 400;
             }
           }
 
