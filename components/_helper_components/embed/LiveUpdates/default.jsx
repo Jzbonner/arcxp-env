@@ -408,7 +408,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
           {!isFirstUpdate && insertDateMarker && <div className='date-marker'>{timestampDate}</div>}
           <div className='c-headline'>
             <h2>{headline}</h2>
-            <a className='link-anchor' href='#' data-target={elId} title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
+            <a className='link-anchor' href='#' data-target={elId} tabIndex="0" title='Click here to copy the link for this update to your clipboard.' onClick={e => copyToClipboard(e)}></a>
             <span name={elId} className='snippet-anchor'></span>
           </div>
           <div className='c-timestampByline'>
