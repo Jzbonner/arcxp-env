@@ -16,10 +16,13 @@ const Caption = (
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
 
-
   const toggle = (e) => {
     e.preventDefault();
-    setToggle(!toggleButton);
+    if (e.type === 'click') {
+      setToggle(!toggleButton);
+    } else if (e.type === 'blur') {
+      setToggle(false);
+    }
   };
 
   let captionContent = caption;
@@ -60,7 +63,7 @@ const Caption = (
       role="button"
       tabIndex="0"
     >
-      <div className="photo-caption-btn" onClick={toggle}>
+      <div tabIndex='1' className="photo-caption-btn" onClick={toggle} onBlur={toggle}>
         { ampPage ? <amp-img class='amp-arrow' id='amp-arrow' src={`${deployment(`${contextPath}/resources/icons/slider/left-arrow.svg`)}`} height='9px' width='11px' alt='caption arrow'></amp-img> : <img className="caption-arrow" src={LeftArrow} alt='caption arrow'/>}
         <span>Caption</span>
       </div>

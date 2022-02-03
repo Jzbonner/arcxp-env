@@ -258,6 +258,13 @@
   }
 }
 
+.c-articleContent {
+  
+  .c-image-component {
+    overflow: visible;
+  }
+}
+
 ///////////////
 //styles for when images are on other areas besides main content. For example, the headline.
 ///////////////
@@ -266,6 +273,7 @@
 
   .c-image-component {
     position: relative;
+    overflow: visible;
 
     .photo-credit-text {
       position: absolute;
