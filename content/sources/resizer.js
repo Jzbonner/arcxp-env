@@ -23,7 +23,17 @@ export default {
       const { cdnSite, allowedDimensions } = getProperties(arcSite);
       const thumborKey = RESIZER_SECRET_KEY;
       const allowedDomains = RESIZER_ALLOWED_DOMAINS || [];
-      const testSrcAgainstAllowedDomains = domain => imageSrc && imageSrc.indexOf(domain) > -1;
+      const testSrcAgainstAllowedDomains = (domain) => {
+        if (!imageSrc) return false;
+
+        const imageSrcParts = imageSrc.replace(/http(s?):\/\//, '').split('/');
+        // we've removed the protocol & split the image's src url into separate parts, by "/"
+        const imageDomain = imageSrcParts[0].split('.');
+        // now we take that first "part" (the domain) and split it by "."
+        const imageParentDomain = `.${imageDomain[imageDomain.length - 2]}.${imageDomain[imageDomain.length - 1]}`;
+        // and finally we piece back together the TLD (top level domain), ignoring any subdomain(s), and test it against the whitelisted TLDs
+        return imageParentDomain === domain;
+      };
       // return null if there is no image src, thumbor key, or the requested src doesn't match approved domains (the latter is re: APD-1698)
       if (!imageSrc || !thumborKey || !allowedDomains.filter(testSrcAgainstAllowedDomains)) return null;
       let reqWidth = imageWidth;
