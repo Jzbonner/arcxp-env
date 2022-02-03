@@ -23,33 +23,15 @@
   &.is-active {
     z-index: 2;
 
-    .photo-caption-btn .caption-arrow {
-      transform: rotate(180deg);
-    }
-
     .photo-caption {
       display: block;
     }
-    // &:focus {
-    //   z-index: 2;
-  
-    // }
+    
+    .photo-caption-btn .caption-arrow {
+      transform: rotate(180deg);
+    }
   }
-
-  // &:not(.is-active) {
-
-  //   &:not(:focus) {
-
-  //     .photo-caption {
-  //       display: none;
-  //     }
-
-  //     .photo-caption-btn .caption-arrow {
-  //       transform: rotate(-180deg);
-  //     }
-  //   }
-  // }
-
+  
   .photo-caption-btn {
     position: absolute;
     width: 69px;

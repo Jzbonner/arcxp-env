@@ -211,7 +211,7 @@ const SiteMetrics = ({ isAmp }) => {
             "pageName": "${url}",
             "pageURL": "${url.indexOf('http:') > -1 || url.indexOf('https:') > -1 ? '' : siteDomain}${url}",
             "pageSiteSection": "${topSection}",
-            "pageMainSection": "${topSection}",
+            "pageMainlSection": "${topSection}",
             "pageCategory": "${nonPrimarySections}",
             "pageContentType": "${pageContentType || typeOfPage}",
             "pageTitle": "${seoTitle ? replaceQuotes(seoTitle) : replaceQuotes(pageTitle)}",
