@@ -12,6 +12,7 @@
   background-color: #fff;
   padding: 9px;
   box-shadow: 0 17px 51px 0 rgba(19, 46, 72, .23);
+  z-index: 10000;
 
   @include breakpoint(tablet) {
     height: 103px;
