@@ -26,7 +26,17 @@ const Image = ({
   ampPage = false, onClickRun, useSrcSet = false, srcSetSizes = [], additionalClasses = '', noLazyLoad = false, index,
 }) => {
   const {
-    resized_obj: resizedObject = null, url, height: originalHeight, width: originalWidth, caption, credits, alt_text: altText, additional_properties: additionalProperties, focal_point: rootFocalPoint, useSrcSet: hasSrcSet = false, alignment,
+    resized_obj: resizedObject = null,
+    url,
+    height: originalHeight,
+    width: originalWidth,
+    caption, credits,
+    alt_text: altText,
+    additional_properties: additionalProperties,
+    focal_point: rootFocalPoint,
+    useSrcSet: hasSrcSet = false,
+    alignment,
+    vanity_credits: vanityCredits,
   } = src || {};
 
   const appContext = useAppContext();
@@ -69,17 +79,27 @@ const Image = ({
   const screenSize = checkWindowSize();
 
   let mainCredit;
-  let secondaryCredit;
+  let mainCreditPhotographer;
+  let vanityCredit;
+  let vanityCreditPhotographer;
   if (credits) {
     mainCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
-    secondaryCredit = credits.by && credits.by.length && credits.by[0] && credits.by[0].name ? credits.by[0].name : null;
+    mainCreditPhotographer = credits.by && credits.by.length && credits.by[0] && credits.by[0].byline ? credits.by[0].byline : null;
+  }
+  if (vanityCredits) {
+    vanityCredit = vanityCredits.affiliation && vanityCredits.affiliation[0] && vanityCredits.affiliation[0].name ? vanityCredits.affiliation[0].name : null;
+    vanityCreditPhotographer = vanityCredits.by && vanityCredits.by.length && vanityCredits.by[0] && vanityCredits.by[0].name ? vanityCredits.by[0].name : null;
   }
 
   let giveCredit;
-  if (mainCredit) {
+  if (vanityCredit) {
+    giveCredit = `Credit: ${vanityCredit}`;
+  } else if (vanityCreditPhotographer) {
+    giveCredit = `Credit: ${vanityCreditPhotographer}`;
+  } else if (mainCredit) {
     giveCredit = `Credit: ${mainCredit}`;
-  } else if (secondaryCredit) {
-    giveCredit = `Credit: ${secondaryCredit}`;
+  } else if (mainCreditPhotographer) {
+    giveCredit = `Credit: ${mainCreditPhotographer}`;
   }
 
   const renderCaption = () => {
