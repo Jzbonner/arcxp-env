@@ -84,7 +84,7 @@ const Image = ({
   let vanityCreditPhotographer;
   if (credits) {
     mainCredit = credits.affiliation && credits.affiliation[0] && credits.affiliation[0].name ? credits.affiliation[0].name : null;
-    mainCreditPhotographer = credits.by && credits.by.length && credits.by[0] && credits.by[0].byline ? credits.by[0].byline : null;
+    mainCreditPhotographer = credits.by && credits.by.length && credits.by[0] && credits.by[0].name ? credits.by[0].name : null;
   }
   if (vanityCredits) {
     vanityCredit = vanityCredits.affiliation && vanityCredits.affiliation[0] && vanityCredits.affiliation[0].name ? vanityCredits.affiliation[0].name : null;
