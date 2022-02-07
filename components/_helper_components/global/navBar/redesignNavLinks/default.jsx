@@ -6,7 +6,7 @@ import Hamburger from '../../../../../resources/icons/global/hamburger.svg';
 import HamburgerDark from '../../../../../resources/icons/global/hamburgerDark.svg';
 
 const RedesignNavLinks = ({
-  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, darkMode,
+  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, darkMode, omitHeaderItems,
 }) => {
   const { siteDomainURL, darkModeSubscribe } = getProperties(arcSite);
   const itemCount = sections.length;
@@ -58,9 +58,11 @@ const RedesignNavLinks = ({
   });
   return (
     <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
-      <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
+      { !omitHeaderItems
+      && <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
         <img src={darkMode ? HamburgerDark : Hamburger} alt='Hamburger icon'></img>
       </div>
+      }
       {logoPath && siteName && <div className={`sticky-logo-homepage ${siteName}`}>
         <a href="/">
           <img src={logoPath} className={siteName} alt={`${siteName} logo`} />
@@ -87,6 +89,7 @@ RedesignNavLinks.propTypes = {
   animationVisibility: PropTypes.bool,
   primarySectionID: PropTypes.string,
   darkMode: PropTypes.bool,
+  omitHeaderItems: PropTypes.bool,
 };
 
 export default RedesignNavLinks;
