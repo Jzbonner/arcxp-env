@@ -18,7 +18,7 @@ const Investigations = ({ collectionId }) => {
 
   return (
     <div className="endOfStory">
-        <div className="mostReadTitle">Investigations</div>
+        <div className="mostReadTitle">Featured</div>
         <Lead customFields={customFields} limitOverride={3} displayClassOverride={'Redesign Feature - Left Photo No Photo'} />
     </div>
   );

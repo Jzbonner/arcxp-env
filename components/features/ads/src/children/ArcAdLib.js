@@ -48,6 +48,10 @@ export default class ArcAdLib {
           if (slotId.indexOf('PG01') > -1 && window) {
             window.pg01 = event.slot;
           }
+          if (slotId.indexOf('WCC01') > -1) {
+            const evt = new Event('WCC01_Flighted');
+            document.dispatchEvent(evt);
+          }
         }
       });
       window.arcBiddingReady = true;
