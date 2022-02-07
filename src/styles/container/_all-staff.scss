@@ -12,6 +12,24 @@
   align-items: center;
   position: relative;
 
+  .arcad {
+    margin-top: 2%;
+
+    &:not(:empty) {
+
+      &:before {
+        top: 2%;
+      }
+    }
+
+    &.HS02:empty {
+
+      &:before {
+        top: 2%;
+      }
+    }
+  }
+
   .c-sectionHome.border-top {
     border-top: none;
   }
