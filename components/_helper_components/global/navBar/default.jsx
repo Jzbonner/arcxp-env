@@ -24,6 +24,7 @@ const NavBar = ({
   const [isMobile, setMobile] = useState(false);
   const [activeSection, setSection] = useState(-1);
   const [stickyNavVisibility, setStickyNavVisibility] = useState(false);
+  const [omitHeaderItems, setOmitHeaderItems] = useState(false);
   const logoRef = useRef(null);
   const paddingRef = React.useRef(null);
   const isMobileVisibilityRef = React.useRef(isMobile);
@@ -31,7 +32,7 @@ const NavBar = ({
   const darkMode = enableDarkMode;
 
   const fusionContext = useFusionContext();
-  const { arcSite, globalContent } = fusionContext;
+  const { arcSite, globalContent, outputType } = fusionContext;
   const {
     logoRedesign, siteName, weatherPageUrl, closeButton, burgerMenuBackground, burgerWhiteLogo,
   } = getProperties(arcSite);
@@ -93,6 +94,10 @@ const NavBar = ({
     if (window.innerWidth <= mobileBreakpoint) {
       setMobile(true);
       setStickyMobileRef(true);
+    }
+
+    if (outputType === 'wrap' && window.location.href.includes('events.ajc.com')) {
+      setOmitHeaderItems(true);
     }
   }, []);
 
@@ -169,7 +174,7 @@ const NavBar = ({
         <div className={`c-logoAndLinks nav-logo
         ${stickyNavVisibility || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
           <div className='c-topNavItems'>
-            <Weather weatherPageUrl={weatherPageUrl}/>
+          { !omitHeaderItems && <Weather weatherPageUrl={weatherPageUrl}/> }
             <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
               && mobileMenuToggled) ? 'not-visible' : ''} ${siteName.toLowerCase()}`} ref={logoRef} >
               <Logo
@@ -190,6 +195,7 @@ const NavBar = ({
             animationVisibility={stickyNavVisibility}
             primarySectionID={primarySectionID}
             darkMode={darkMode}
+            omitHeaderItems={omitHeaderItems}
             />
         </div>
         <HamburgerMenu
