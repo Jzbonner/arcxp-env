@@ -190,6 +190,10 @@
         font-weight: 800;
         font-size: .6875rem;
 
+        .hidden-mobile {
+          font-family: "Gordita-Bold";
+        }
+
         @include between-breakpoints(mobile, tablet) {
           display: none;
         }
