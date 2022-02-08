@@ -100,9 +100,12 @@
     display: none;
     text-align: left;
 
+    @include breakpoint(tablet) {
+      padding: 30px;
+    }
+
     .photo-caption-text {
       color: #fff;
-      padding: 5px;
       letter-spacing: normal;
       line-height: 1.5;
 
