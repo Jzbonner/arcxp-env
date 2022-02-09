@@ -10,6 +10,7 @@ import checkTags from './_helper_functions/checkTags';
 import getGalleryTopics from './_helper_functions/getGalleryTopics';
 import getQueryParams from './_helper_functions/getQueryParams';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
+import BravesOpeningDayCountdown from '../features/bravesOpeningDayCountdown/default';
 
 const GalleryPageLayout = () => {
   const appContext = useAppContext();
@@ -81,6 +82,7 @@ const GalleryPageLayout = () => {
       <Footer />
       <Copyright />
       </>}
+      <BravesOpeningDayCountdown tags={tags} storyPage={true} />
     </>
   );
 };
