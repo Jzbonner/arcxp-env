@@ -38,19 +38,19 @@
   @include breakpoint(tablet) {
 
     .arcad {
-      margin-top: 1.5%;
+      margin-top: 30px;
 
       &:not(:empty) {
 
         &:before {
-          top: 2%;
+          top: 0%;
         }
       }
 
       &.HS02:empty {
 
         &:before {
-          top: 2%;
+          top: 0%;
         }
       }
     }
