@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../../../../../src/styles/container/_c-headerNav.scss';
 import currentConditions from '../../utils/weather/currentConditions';
 
-const Weather = ({ weatherPageUrl }) => {
+const Weather = ({ weatherPageUrl, omit }) => {
   const { temp = '', icon = '', text = '' } = currentConditions() || {};
 
   if (weatherPageUrl) {
@@ -18,6 +18,9 @@ const Weather = ({ weatherPageUrl }) => {
     }, []);
   }
 
+  if (omit) {
+    return null;
+  }
   return (
     <div className="c-weather">
       <div className={`nav-weather weather-icon weather-${icon}`} title={text}></div>
@@ -30,6 +33,7 @@ const Weather = ({ weatherPageUrl }) => {
 
 Weather.propTypes = {
   weatherPageUrl: PropTypes.string,
+  omit: PropTypes.bool,
 };
 
 export default Weather;

@@ -59,9 +59,8 @@ const WrapOutputType = (props) => {
   if (type === 'story') {
     hasLeadGallery = promoItems?.basic?.type === 'gallery';
   }
-  /* eslint-disable-next-line max-len */
-
-  const parseCss = ({ data }) => {
+  const mainCssData = <Resource path={'resources/dist/ajc/css/style.css'} encoding='utf8'>
+  {({ data }) => {
     if (!data) return null;
     const css = data.replace(/url\(([^\s<>{}|\\^~)'"`]+)\)/g, (_, uri) => {
       // any url that starts with a `..`
@@ -70,12 +69,19 @@ const WrapOutputType = (props) => {
       return `url(${deployment(parsedUrl)})`;
     });
     return <style dangerouslySetInnerHTML={{ __html: css }}></style>;
-  };
-  const mainCssData = <Resource path={'resources/dist/ajc/css/style.css'} encoding='utf8'>
-  {({ data }) => parseCss(data)}
+  }}
   </Resource>;
   const pbCssData = <Resource path={'resources/dist/ajc-pb/css/style.css'} encoding='utf8'>
-  {({ data }) => parseCss(data)}
+  {({ data }) => {
+    if (!data) return null;
+    const css = data.replace(/url\(([^\s<>{}|\\^~)'"`]+)\)/g, (_, uri) => {
+      // any url that starts with a `..`
+      const trimmedUri = uri ? uri.replace(/\.\.\//g, '') : uri;
+      const parsedUrl = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${trimmedUri}`;
+      return `url(${deployment(parsedUrl)})`;
+    });
+    return <style dangerouslySetInnerHTML={{ __html: css }}></style>;
+  }}
   </Resource>;
 
   return (
