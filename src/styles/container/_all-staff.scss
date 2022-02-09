@@ -39,20 +39,6 @@
 
     .arcad {
       margin-top: 30px;
-
-      &:not(:empty) {
-
-        &:before {
-          top: 0%;
-        }
-      }
-
-      &.HS02:empty {
-
-        &:before {
-          top: 0%;
-        }
-      }
     }
   }
 
