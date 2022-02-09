@@ -185,7 +185,7 @@ const NavBar = ({
               />
             </div>
           <Login
-            isMobile={isMobileVisibilityRef.current} isSticky={stickyNavVisibility} darkMode={darkMode}
+            isMobile={isMobileVisibilityRef.current} isSticky={stickyNavVisibility} darkMode={darkMode} omit={omitHeaderItems}
           />
           </div>
           <RedesignNavLinks
