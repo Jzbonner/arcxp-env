@@ -100,16 +100,19 @@
     display: none;
     text-align: left;
 
+    @include breakpoint(tablet) {
+      padding: 30px;
+    }
+
     .photo-caption-text {
       color: #fff;
-      padding: 5px;
       letter-spacing: normal;
       line-height: 1.5;
 
-      @include text-styles(.875rem, 1.58, "Gordita");
+      @include text-styles(.75rem, 1.58, "Gordita");
 
       @include breakpoint(tablet) {
-        padding: 30px;
+        @include text-styles(.875rem, 1.58, "Gordita");
       }
     }
 
