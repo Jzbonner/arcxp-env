@@ -35,6 +35,27 @@
     @include text-styles(1.875rem, normal, "Gordita-Bold");
   }
 
+  @include breakpoint(tablet) {
+
+    .arcad {
+      margin-top: 1.5%;
+
+      &:not(:empty) {
+
+        &:before {
+          top: 2%;
+        }
+      }
+
+      &.HS02:empty {
+
+        &:before {
+          top: 2%;
+        }
+      }
+    }
+  }
+
   @include between-breakpoints(tablet, desktop-sm) {
     width: 90%;
   }
