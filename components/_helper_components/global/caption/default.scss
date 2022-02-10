@@ -165,6 +165,15 @@
   }
 
   .c-caption {
+    @include between-breakpoints(mobile, tablet) {
+      width: calc(100vw - 2.5rem);
+      right: 1.25rem;
+
+      .photo-caption-btn {
+        right: .5rem;
+      }
+    }
+
     @include breakpoint(desktop-sm) {
       // 100% reduces caption to match the width of the image component
       // 3.5rem accounts for the  right: 3.5em positioning of the caption
