@@ -8,7 +8,7 @@
 }
 
 main > .c-gallery-basic {
-  
+
   &.b-contentMaxWidth {
     //Standalone gallery page
     margin-top: 2.5rem;
@@ -25,6 +25,13 @@ main > .c-gallery-basic {
   #div-id-HP00 {
     @include breakpoint(desktop-sm) {
       margin-bottom: 30px;
+    }
+  }
+
+  @include breakpoint(tablet) {
+
+    .c-MP01 {
+      display: none;
     }
   }
 }
