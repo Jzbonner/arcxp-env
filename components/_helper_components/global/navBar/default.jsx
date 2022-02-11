@@ -96,7 +96,7 @@ const NavBar = ({
       setStickyMobileRef(true);
     }
 
-    if (outputType === 'wrap' && window.location.href.includes('events.ajc.com')) {
+    if (outputType === 'wraps' && window.location.href.includes('events.ajc.com')) {
       setOmitHeaderItems(true);
     }
   }, []);
@@ -174,7 +174,7 @@ const NavBar = ({
         <div className={`c-logoAndLinks nav-logo
         ${stickyNavVisibility || (stickyNavVisibility && mobileMenuToggled) ? 'not-visible' : ''}`}>
           <div className='c-topNavItems'>
-          { !omitHeaderItems && <Weather weatherPageUrl={weatherPageUrl}/> }
+          <Weather weatherPageUrl={weatherPageUrl} omit={omitHeaderItems}/>
             <div className={`nav-mobile-logo ${stickyNavVisibility || (stickyNavVisibility
               && mobileMenuToggled) ? 'not-visible' : ''} ${siteName.toLowerCase()}`} ref={logoRef} >
               <Logo
@@ -185,7 +185,7 @@ const NavBar = ({
               />
             </div>
           <Login
-            isMobile={isMobileVisibilityRef.current} isSticky={stickyNavVisibility} darkMode={darkMode}
+            isMobile={isMobileVisibilityRef.current} isSticky={stickyNavVisibility} darkMode={darkMode} omit={omitHeaderItems}
           />
           </div>
           <RedesignNavLinks

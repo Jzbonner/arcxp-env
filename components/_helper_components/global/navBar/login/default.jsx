@@ -9,7 +9,7 @@ import NotAuthMenu from './notAuthMenu';
 import IsAuthMenu from './isAuthMenu';
 
 const Login = ({
-  isMobile, isFlyout, isSticky, isSidebar, darkMode,
+  isMobile, isFlyout, isSticky, isSidebar, darkMode, omit,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -22,7 +22,7 @@ const Login = ({
     environment,
   } = connext[currentEnv] || {};
 
-  if (!isEnabled) {
+  if (!isEnabled || omit) {
     return null;
   }
 
@@ -123,6 +123,7 @@ Login.propTypes = {
   isSticky: PropTypes.bool,
   isSidebar: PropTypes.bool,
   darkMode: PropTypes.bool,
+  omit: PropTypes.bool,
 };
 
 export default Login;
