@@ -1,0 +1,34 @@
+@import "./../../../src/styles/base";
+
+.c-topPhotoFourSlotRow {
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @include breakpoint(tablet) {
+      flex-wrap: nowrap;
+    }
+
+    .c-homeListContainer .c-homeList {
+      @include breakpoint(tablet) {
+        width: 348px;
+        height: 193px;
+      }
+      @include breakpoint(desktop-sm) {
+        width: 358px;
+        height: 199px;
+      }
+
+      .homeList-image {
+        width: 350px;
+        height: 197px;
+
+        @include between-breakpoints(tablet, desktop-sm) {
+          width: 348px;
+          height: 193px;
+        }
+      }
+    }
+  }
+}
