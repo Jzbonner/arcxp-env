@@ -1,5 +1,4 @@
 export default {
   RESIZER_SECRET_KEY: '%{AQICAHgepo+1ZBMbkOR/rGy+iDRMCgUcyeboZY90NRaGClIlNwHPGt8qypLqxIou0F1VA1wbAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMwHg7aMLrK2Ro9dnFAgEQgDswQ6cG6VnVcBxO8UDMlkbH3OvG3C2tZP2HYYgIn+T+uJRWBc8MtIrMmcgVeoPyTml06fRw5nMAv6/Adw==}',
-  RESIZER_SECRET_KEY_OLD: 'Fmkgru2rZ2uPZ5wXs7B2HbVDHS2SZuA7', // only galleryItem is using this right now temporarily until that component can be upgraded.
-  CHARTBEAT_KEY: '7b12d4da2a1f427c5123cec839c41196',
+  CHARTBEAT_KEY: '%{AQICAHiH7W8m/ZwSizPtJ5+e3MKEKRvPhAGdG3pC/jWLxGpnzgEf6JtqrXp54M/+hxO2ELQBAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM5pEYp5bMvciMR9/sAgEQgDuY4ZqdbYRraHq59gcLPFiQM1p38ax+/AbeGShBMrAMMX/DSYG87lSxEENoM1PqfATFw7ViYAm/LLQt2g==}',
 };

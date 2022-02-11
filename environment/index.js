@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
 module.exports = {
   RESIZER_SECRET_KEY: '%{AQICAHiH7W8m/ZwSizPtJ5+e3MKEKRvPhAGdG3pC/jWLxGpnzgEx7b893/kSldl70xSYlj1SAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMyxMUVNeEzjNyzc0mAgEQgDvFEJDjgCH1DkBHtgunICQMa5w+sbayFV01ZH09BGNqvAbmReY2L29S3LChDHfC4nKfzTXCIqedZ/URDA==}',
-  weatherAlertsAPIkey: 'dJWlnHeXb06XuqExRDXpJ3fk4vOTzxyg4Um7TG5Z',
-  RESIZER_SECRET_KEY_OLD: 'Fmkgru2rZ2uPZ5wXs7B2HbVDHS2SZuA7', // only galleryItem is using this right now temporarily until that component can be upgraded.
-  CHARTBEAT_KEY: '8829d57bf1a1416ba9187bbf33e6fb81',
-  sportradarAPIkey: 'mmwnrjmhcnx9wp87ptf4mqf5',
+  weatherAlertsAPIkey: '%{AQICAHiH7W8m/ZwSizPtJ5+e3MKEKRvPhAGdG3pC/jWLxGpnzgHmROASmdyRMWn5P2kc+2jaAAAAhzCBhAYJKoZIhvcNAQcGoHcwdQIBADBwBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDHUDtl1L7vH6SnVrZwIBEIBDUgrmgIcG+cfhKwfMWUTAM8yTlzV0riGjk4RdjdqJy45rPYgX9DQkBM7ao2IkDD4hEIcTCqyrMlYmfX8kLX9LfRaysQ==}',
+  // RESIZER_SECRET_KEY_OLD: 'Fmkgru2rZ2uPZ5wXs7B2HbVDHS2SZuA7', // only galleryItem is using this right now temporarily until that component can be upgraded.
+  CHARTBEAT_KEY: '%{AQICAHiH7W8m/ZwSizPtJ5+e3MKEKRvPhAGdG3pC/jWLxGpnzgHGgnG7SWrTSPbNmokI5EV/AAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMj5kkSufxJyxG8E9NAgEQgDskkHuKt9hg6lJKX8MPNOo2Tdjo/B2sWYd3l7F6TwjT4C30zN4jm+eKFZLdoCUebRQQz4/FIvIp1S/lBA==}',
+  sportradarAPIkey: '%{AQICAHiH7W8m/ZwSizPtJ5+e3MKEKRvPhAGdG3pC/jWLxGpnzgEXZK5ZqoDa/RgM4+jPHvCFAAAAdjB0BgkqhkiG9w0BBwagZzBlAgEAMGAGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMn7hyzaBnN73MMaZXAgEQgDOKSTw4QGQX3SilDO1hnY4/aHmWbSKHxuLfV+uscoDqp+XYhLK81XC8/cG+1tRsOmSKHno=}',
   sportradarAPIVersion: 'v3',
   sportradarAccessLevel: 'production',
   SEARCH_PAGE_KEY_AJC: '%{AQICAHiH7W8m/ZwSizPtJ5+e3MKEKRvPhAGdG3pC/jWLxGpnzgHjYwEIrhHOIkf+YZa3ZueDAAAAhzCBhAYJKoZIhvcNAQcGoHcwdQIBADBwBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDKDDhc94xAubMtFkaAIBEIBDcxHre9Szx5xtWL6jkN9utfxtHwwv8lDQTlBqhjlQj0FrO0ib/hJJSQWDqjZB8kb0ZFNy0kVR+RiGdhIEnHZdLqY5WA==}',

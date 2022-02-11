@@ -4,7 +4,7 @@ import { CONTENT_BASE, ARC_ACCESS_TOKEN, SOPHI_ENDPOINT } from 'fusion:environme
 import GetSophiBearerToken from './helper_functions/getSophiBearerToken.js';
 
 const schemaName = 'sophi';
-const ttl = 120;
+const ttl = 0;
 
 const params = {
   page: 'text',

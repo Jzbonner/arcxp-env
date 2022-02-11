@@ -2,7 +2,7 @@ import getProperties from 'fusion:properties';
 import fetchEnv from '../../_helper_components/global/utils/environment.js';
 
 const Thumbor = require('thumbor-lite');
-const { RESIZER_SECRET_KEY_OLD } = require('../../../environment/index');
+const { RESIZER_SECRET_KEY } = require('../../../environment/index');
 
 const currentEnv = fetchEnv();
 
@@ -16,7 +16,7 @@ export default function (url, arcSite = 'ajc', width = 1000, height = 600) {
     }
 
     const thumbor = new Thumbor(
-      RESIZER_SECRET_KEY_OLD,
+      RESIZER_SECRET_KEY,
       `https://${siteDomain}/resizer`,
     );
 
