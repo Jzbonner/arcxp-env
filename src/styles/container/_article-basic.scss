@@ -23,7 +23,7 @@ main > .c-gallery-basic {
 .c-video-basic {
 
   #div-id-HP00 {
-    @include breakpoint(desktop-sm) {
+    @include breakpoint(tablet) {
       margin-bottom: 30px;
     }
   }

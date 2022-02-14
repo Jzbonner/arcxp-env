@@ -82,7 +82,7 @@
 .b-margin-bottom-d30-m20 {
   margin-bottom: 1.25rem;
 
-  @include breakpoint(tablet) {
+  @include breakpoint(desktop-sm) {
     margin-bottom: 1.88rem;
   }
 }
@@ -98,8 +98,8 @@
 .b-margin-bottom-d40-m20 {
   margin-bottom: 1.25rem;
 
-  @include breakpoint(tablet) {
-    margin-bottom: 1.88rem;
+  @include breakpoint(desktop-sm) {
+    margin-bottom: $min-DTsection-margin;
   }
 }
 
