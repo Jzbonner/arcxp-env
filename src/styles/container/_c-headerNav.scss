@@ -452,6 +452,7 @@
       @include breakpoint(tablet) {
         height: 14px;
         display: flex;
+        background: inherit;
       }
 
       @include breakpoint(desktop-sm) {
