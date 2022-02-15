@@ -37,7 +37,7 @@
     width: 69px;
     height: 26px;
     border-radius: 5px;
-    background: #ececec;
+    background: #fff;
     top: -875rem;
     right: -1.25rem;
     z-index: 1;
@@ -55,6 +55,7 @@
     @include breakpoint(desktop-sm) {
       width: 69px;
       height: 26px;
+      top: -1rem;
     }
 
     .amp-arrow {
