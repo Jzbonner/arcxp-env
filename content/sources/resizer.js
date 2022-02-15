@@ -45,15 +45,30 @@ export default {
         const focalPoints = {};
 
         if (useFocalCrop) {
-          const { 1: focalY } = imageFocalCoords;
-          // let's figure out how much to crop to keep the FP centered
-          const topCrop = focalY / originalImageHeight;
-          // let's figure out how much to crop to match
-          const cropHeight = Math.round(originalImageHeight - (originalImageWidth * h / w));
-          focalPoints.left = 0;
-          focalPoints.right = originalImageWidth;
-          focalPoints.top = cropHeight >= 0 ? Math.round(cropHeight * topCrop) : 0;
-          focalPoints.bottom = cropHeight - focalPoints.top > originalImageHeight ? cropHeight : originalImageHeight - (cropHeight - focalPoints.top);
+          const { 0: focalX, 1: focalY } = imageFocalCoords;
+
+          // Value of 1.75 means we initially crop a rectangle 1.75x as large as the target image size.
+          // The focal point will be at the center of this rectangle or if the focal point is along the edge of the original image,
+          // the coordinates of the rectangle will be adjusted so that a rectangle 1.75x as large as the target image size still gets cropped.
+          // Decrease this number to get a tighter crop around the focal point.
+          const focalCropMultiplier = 1.75;
+
+          // Set the min values to 814x458 so that tease images have the same crop as their corresponding lead images on the story pages
+          const focalLeftAdjustment = focalX - (Math.max(w, 814) * 0.5 * focalCropMultiplier);
+          const focalRightAdjustment = focalX + (Math.max(w, 814) * 0.5 * focalCropMultiplier);
+          const focalTopAdjustment = focalY - (Math.max(h, 458) * 0.5 * focalCropMultiplier);
+          const focalBottomAdjustment = focalY + (Math.max(h, 458) * 0.5 * focalCropMultiplier);
+
+          // Crop adjustments if focal point is set along edge of the image
+          const focalLeftAdjustmentOver = focalLeftAdjustment < 0 ? Math.abs(focalLeftAdjustment) : 0;
+          const focalTopAdjustmentOver = focalTopAdjustment < 0 ? Math.abs(focalTopAdjustment) : 0;
+          const focalRightAdjustmentOver = focalRightAdjustment > originalImageWidth ? Math.abs(originalImageWidth - focalRightAdjustment) : 0;
+          const focalBottomAdjustmentOver = focalBottomAdjustment > originalImageHeight ? Math.abs(originalImageHeight - focalBottomAdjustment) : 0;
+
+          focalPoints.left = Math.max(Math.round(focalLeftAdjustment - focalRightAdjustmentOver), 0);
+          focalPoints.right = Math.min(Math.round(focalRightAdjustment + focalLeftAdjustmentOver), originalImageWidth);
+          focalPoints.top = Math.max(Math.round(focalTopAdjustment - focalBottomAdjustmentOver), 0);
+          focalPoints.bottom = Math.min(Math.round(focalBottomAdjustment + focalTopAdjustmentOver), originalImageHeight);
         }
 
         const connextSite = cdnSite.replace(/-/g, '');
@@ -136,5 +151,5 @@ export default {
     arcSite: 'text',
     isGallery: 'boolean',
   },
-  ttl: 86400,
+  ttl: 120,
 };
