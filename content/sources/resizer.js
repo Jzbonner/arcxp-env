@@ -151,5 +151,5 @@ export default {
     arcSite: 'text',
     isGallery: 'boolean',
   },
-  ttl: 120,
+  ttl: 86400,
 };
