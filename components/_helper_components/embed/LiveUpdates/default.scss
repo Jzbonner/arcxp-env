@@ -648,5 +648,22 @@
         }
       }
     }
+
+    .new-updates-button {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 160px;
+      height: 42px;
+      border-radius: 21px;
+      box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, 0.6);
+      border: solid 0.9px #ececec;
+      background-color: #9b9b9b;
+      z-index: 10000;
+    }
   }
 }

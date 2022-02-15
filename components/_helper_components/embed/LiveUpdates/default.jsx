@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
+import { parse } from 'rss-to-json';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import ContentElements from '../../article/contentElements/default.jsx';
@@ -19,7 +20,7 @@ import './default.scss';
 const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = false }) => {
   const { paywallStatus } = getContentMeta();
   const isMeteredStory = paywallStatus === 'premium';
-  if (!liveUpdates) return <span><i>There are no Live Updates to display.</i></span>;
+  if (!liveUpdates) return <span><i>There are no Live Updates to display.</i></span>
 
   const hashId = typeof window !== 'undefined' ? window.location.hash.substr(1) : null;
   const fusionContext = useFusionContext();
@@ -31,6 +32,8 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   const { UserState: userState } = connextLocalStorageData;
   const isLoggedOut = (userState && userState.toLowerCase() === 'logged out') || true;
   const hashBeforeLogin = useRef('');
+  const [numberOfLiveUpdates, setNumberOfLiveUpdates] = useState(liveUpdates.length);
+  const [displayNewUpdatesButton, setDisplayNewUpdatesButton] = useState({display: false, offset: 0});
   let activeUpdate = hashId;
   let viewportHeight = 0;
   let lastScrollPos = 0;
@@ -355,6 +358,20 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     };
   }, []);
 
+  useEffect(() => {
+    const newItemCheckingInterval = setInterval(async () => {
+      const rssToJsonData = await parse('https://sandbox.ajc.com/test-live-updates/?outputType=rss');
+      console.log('carlos data from timeout', rssToJsonData);
+      if (rssToJsonData?.items?.length !== numberOfLiveUpdates) {
+          setDisplayNewUpdatesButton({display: true, offset: (rssToJsonData?.items?.length - numberOfLiveUpdates)});
+      }
+
+      console.log('carlos displayNewUpdatesButton', displayNewUpdatesButton);
+    }, 60000);
+
+    return () => clearInterval(newItemCheckingInterval);
+  }, []);
+
   const loopThroughUpdates = (isNav = false) => {
     const firstLiveUpdate = liveUpdates.slice(0, 1);
     const restOfLiveUpdates = liveUpdates.slice(1, liveUpdates.length);
@@ -468,6 +485,9 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
       {loopThroughUpdates()}
       {/* if it's a metered story, add the connext auth handlers to load deferred items (e.g. anything with `lazyLoad` above) */}
       {isMeteredStory && ConnextAuthTrigger()}
+    </div>
+    <div className='new-updates-button'>
+      {displayNewUpdatesButton.offset} New Updates
     </div>
   </div>;
 };
