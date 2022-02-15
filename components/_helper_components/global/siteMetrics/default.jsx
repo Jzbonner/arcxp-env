@@ -38,13 +38,15 @@ const SiteMetrics = ({ isAmp }) => {
   if (authorData) {
     authorData.forEach((author) => {
       const { _id: authorID, name: authorName = '', type } = author || {};
+      let formattedAuthorName = authorName.replace(/"/g, "'");
+      formattedAuthorName = formattedAuthorName.replace(/<.+?>/g, '');
       if (isAmp) {
         // eslint-disable-next-line quote-props
-        ampAuthors.push(`{ "_id": "${authorID}", "name": "${authorName}", "type": "${type}"}`);
-        ampAuthorNames.push(`"${authorName.toLowerCase()}"`);
+        ampAuthors.push(`{ "_id": "${authorID}", "name": "${formattedAuthorName}", "type": "${type}"}`);
+        ampAuthorNames.push(`"${formattedAuthorName.toLowerCase()}"`);
       }
       // eslint-disable-next-line no-useless-escape
-      authors.push(authorName.toLowerCase().replace(/'/g, "\'"));
+      authors.push(formattedAuthorName.toLowerCase().replace(/'/g, "\'"));
     });
   }
 
