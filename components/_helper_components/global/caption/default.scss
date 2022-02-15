@@ -38,7 +38,7 @@
     height: 26px;
     border-radius: 5px;
     background: #ececec;
-    top: -1.25rem;
+    top: -875rem;
     right: -1.25rem;
     z-index: 1;
     cursor: pointer;
@@ -50,7 +50,7 @@
     justify-content: center;
     align-items: center;
 
-    @include text-styles(11px, 1, "Gordita");
+    @include text-styles(11px, 1, "Gordita-Medium");
 
     @include breakpoint(desktop-sm) {
       width: 69px;
