@@ -1,0 +1,79 @@
+@import "./../../../src/styles/base";
+
+.c-topPhotoFourSlotRow {
+  @include breakpoint(desktop-sm) {
+    width: 94.8vw;
+    max-width: 1540px;
+  }
+
+  @include breakpoint(desktop-nav) {
+    width: 95.3vw;
+  }
+
+  @include breakpoint(desktop-xl) {
+    width: 96vw;
+  }
+
+  @include breakpoint(desktop-xxl) {
+    width: 97vw;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @include breakpoint(tablet) {
+      flex-wrap: wrap;
+    }
+
+    @include breakpoint(desktop-sm) {
+      flex-wrap: nowrap;
+      width: 100%;
+    }
+
+    .b-margin-bottom-d40-m20 {
+      @include between-breakpoints(mobile, tablet) {
+        margin-bottom: .75rem;
+      }
+
+      &:nth-child(4n) {
+
+        .c-homeList {
+          @include breakpoint(desktop-sm) {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    .c-homeListContainer {
+      @include between-breakpoints(tablet, desktop-sm) {
+        width: 43vw;
+      }
+
+      .c-homeList {
+
+        .homeList-text {
+          @include between-breakpoints(mobile, tablet) {
+
+            .headline {
+              padding-top: .625rem;
+              margin-bottom: .313rem;
+            }
+          }
+        }
+
+        @include breakpoint(tablet) {
+          width: 100%;
+        }
+  
+        @include breakpoint(desktop-sm) {
+          width: 100%;
+          height: auto;
+          margin-right: 2.18rem;
+        }
+      }
+    }
+  }
+}
