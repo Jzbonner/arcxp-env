@@ -45,15 +45,31 @@ export default {
         const focalPoints = {};
 
         if (useFocalCrop) {
-          const { 1: focalY } = imageFocalCoords;
-          // let's figure out how much to crop to keep the FP centered
-          const topCrop = focalY / originalImageHeight;
-          // let's figure out how much to crop to match
-          const cropHeight = Math.round(originalImageHeight - (originalImageWidth * h / w));
-          focalPoints.left = 0;
-          focalPoints.right = originalImageWidth;
-          focalPoints.top = cropHeight >= 0 ? Math.round(cropHeight * topCrop) : 0;
-          focalPoints.bottom = cropHeight - focalPoints.top > originalImageHeight ? cropHeight : originalImageHeight - (cropHeight - focalPoints.top);
+          const { 0: focalX, 1: focalY } = imageFocalCoords;
+
+          // 0.5 means the focal crop will have 50% of the width and 50% of the height of the original image resulting in an image 25% smaller.
+          // The focal point will be at the center of this crop or if the focal point is along the edge of the original image,
+          // the coordinates of the crop will be adjusted so that a crop 25% smaller than the original image still gets cropped.
+
+          const focalCropPercent = 0.75;
+
+          // Set focal crop to percentage of original image size around focal point
+          // Focal crop won't be smaller then target image size
+          const focalLeftAdjustment = focalX - (Math.max(originalImageWidth * focalCropPercent, w) * 0.5);
+          const focalRightAdjustment = focalX + (Math.max(originalImageWidth * focalCropPercent, w) * 0.5);
+          const focalTopAdjustment = focalY - (Math.max(originalImageHeight * focalCropPercent, h) * 0.5);
+          const focalBottomAdjustment = focalY + (Math.max(originalImageHeight * focalCropPercent, h) * 0.5);
+
+          // Crop adjustments if focal point is set along edge of the image
+          const focalLeftAdjustmentOver = focalLeftAdjustment < 0 ? Math.abs(focalLeftAdjustment) : 0;
+          const focalTopAdjustmentOver = focalTopAdjustment < 0 ? Math.abs(focalTopAdjustment) : 0;
+          const focalRightAdjustmentOver = focalRightAdjustment > originalImageWidth ? Math.abs(originalImageWidth - focalRightAdjustment) : 0;
+          const focalBottomAdjustmentOver = focalBottomAdjustment > originalImageHeight ? Math.abs(originalImageHeight - focalBottomAdjustment) : 0;
+
+          focalPoints.left = Math.max(Math.round(focalLeftAdjustment - focalRightAdjustmentOver), 0);
+          focalPoints.right = Math.min(Math.round(focalRightAdjustment + focalLeftAdjustmentOver), originalImageWidth);
+          focalPoints.top = Math.max(Math.round(focalTopAdjustment - focalBottomAdjustmentOver), 0);
+          focalPoints.bottom = Math.min(Math.round(focalBottomAdjustment + focalTopAdjustmentOver), originalImageHeight);
         }
 
         const connextSite = cdnSite.replace(/-/g, '');
