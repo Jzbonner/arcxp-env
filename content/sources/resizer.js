@@ -47,17 +47,18 @@ export default {
         if (useFocalCrop) {
           const { 0: focalX, 1: focalY } = imageFocalCoords;
 
-          // Value of 1.75 means we initially crop a rectangle 1.75x as large as the target image size.
-          // The focal point will be at the center of this rectangle or if the focal point is along the edge of the original image,
-          // the coordinates of the rectangle will be adjusted so that a rectangle 1.75x as large as the target image size still gets cropped.
-          // Decrease this number to get a tighter crop around the focal point.
-          const focalCropMultiplier = 1.75;
+          // 0.5 means the focal crop will have 50% of the width and 50% of the height of the original image resulting in an image 25% smaller.
+          // The focal point will be at the center of this crop or if the focal point is along the edge of the original image,
+          // the coordinates of the crop will be adjusted so that a crop 25% smaller than the original image still gets cropped.
 
-          // Set the min values to 814x458 so that tease images have the same crop as their corresponding lead images on the story pages
-          const focalLeftAdjustment = focalX - (Math.max(w, 814) * 0.5 * focalCropMultiplier);
-          const focalRightAdjustment = focalX + (Math.max(w, 814) * 0.5 * focalCropMultiplier);
-          const focalTopAdjustment = focalY - (Math.max(h, 458) * 0.5 * focalCropMultiplier);
-          const focalBottomAdjustment = focalY + (Math.max(h, 458) * 0.5 * focalCropMultiplier);
+          const focalCropPercent = 0.75;
+
+          // Set focal crop to percentage of original image size around focal point
+          // Focal crop won't be smaller then target image size
+          const focalLeftAdjustment = focalX - (Math.max(originalImageWidth * focalCropPercent, w) * 0.5);
+          const focalRightAdjustment = focalX + (Math.max(originalImageWidth * focalCropPercent, w) * 0.5);
+          const focalTopAdjustment = focalY - (Math.max(originalImageHeight * focalCropPercent, h) * 0.5);
+          const focalBottomAdjustment = focalY + (Math.max(originalImageHeight * focalCropPercent, h) * 0.5);
 
           // Crop adjustments if focal point is set along edge of the image
           const focalLeftAdjustmentOver = focalLeftAdjustment < 0 ? Math.abs(focalLeftAdjustment) : 0;
