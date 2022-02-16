@@ -10,6 +10,10 @@ const SiteMetrics = ({ isAmp }) => {
   const { arcSite } = fusionContext;
   const appContext = useAppContext();
   const { globalContent } = appContext;
+
+  const replaceQuotes = text => text.replace(/"/g, "'");
+  const replaceTags = text => text.replace(/<.+?>/g, '');
+
   const {
     source,
     credits,
@@ -38,13 +42,15 @@ const SiteMetrics = ({ isAmp }) => {
   if (authorData) {
     authorData.forEach((author) => {
       const { _id: authorID, name: authorName = '', type } = author || {};
+      let formattedAuthorName = replaceQuotes(authorName);
+      formattedAuthorName = replaceTags(formattedAuthorName);
       if (isAmp) {
         // eslint-disable-next-line quote-props
-        ampAuthors.push(`{ "_id": "${authorID}", "name": "${authorName}", "type": "${type}"}`);
-        ampAuthorNames.push(`"${authorName.toLowerCase()}"`);
+        ampAuthors.push(`{ "_id": "${authorID}", "name": "${formattedAuthorName}", "type": "${type}"}`);
+        ampAuthorNames.push(`"${formattedAuthorName.toLowerCase()}"`);
       }
       // eslint-disable-next-line no-useless-escape
-      authors.push(authorName.toLowerCase().replace(/'/g, "\'"));
+      authors.push(formattedAuthorName.toLowerCase().replace(/'/g, "\'"));
     });
   }
 
@@ -79,8 +85,8 @@ const SiteMetrics = ({ isAmp }) => {
     blogName = '',
     paywallStatus,
   } = contentMeta || {};
+  const formattedPageTitle = replaceTags(pageTitle);
   const siteDomain = siteDomainURL || `https://www.${site}.com`;
-  const replaceQuotes = text => text.replace(/"/g, "'");
   if (isAmp) {
     const { ampGtmTriggers, ampGtmID } = metrics || {};
     const {
@@ -105,7 +111,7 @@ const SiteMetrics = ({ isAmp }) => {
               "pageSiteSection": "${topSection}",
               "pageCategory": "${nonPrimarySections}",
               "pageContentType": "instant article",
-              "pageTitle": "${seoTitle ? replaceQuotes(seoTitle).toLowerCase() : replaceQuotes(pageTitle).toLowerCase()}",
+              "pageTitle": "${seoTitle ? replaceQuotes(seoTitle).toLowerCase() : replaceQuotes(formattedPageTitle).toLowerCase()}",
               "pageFlow": "",
               "pageNumber": "",
               "siteVersion": "instant",
@@ -129,7 +135,7 @@ const SiteMetrics = ({ isAmp }) => {
               "pageUrlStr": "",
               "pageMainSection": "${topSection}",
               "contentPaywallStatus": "${paywallStatus || contentCode || 'free'}",
-              "chartbeatTitle": "${replaceQuotes(pageTitle)}"
+              "chartbeatTitle": "${replaceQuotes(formattedPageTitle)}"
             },
             "triggers": {
               "accessLoginStarted": {
@@ -214,8 +220,8 @@ const SiteMetrics = ({ isAmp }) => {
             "pageMainSection": "${topSection}",
             "pageCategory": "${nonPrimarySections}",
             "pageContentType": "${pageContentType || typeOfPage}",
-            "pageTitle": "${seoTitle ? replaceQuotes(seoTitle) : replaceQuotes(pageTitle)}",
-            "chartbeatTitle": "${replaceQuotes(pageTitle)}"
+            "pageTitle": "${seoTitle ? replaceQuotes(seoTitle) : replaceQuotes(formattedPageTitle)}",
+            "chartbeatTitle": "${replaceQuotes(formattedPageTitle)}"
           },
           "siteData": {
             "siteID": "${metrics && metrics.siteID ? metrics.siteID : site}",
