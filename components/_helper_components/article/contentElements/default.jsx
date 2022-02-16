@@ -13,6 +13,7 @@ import Video from '../../global/video/default';
 import Header from './components/header/default.jsx';
 import Divider from './components/divider/default.jsx';
 import AmpEmbedWrapper from '../../global/utils/amp-html/amp-embed-wrapper';
+import Table from './components/table/default';
 // import Correction from './components/correction/default.jsx';
 // import Table from './components/table/default.jsx';
 
@@ -23,6 +24,7 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
     <div className="c-contentElements" data-start-index={startIndex || null}>
       {contentElements.map((element, i) => {
         const count = i + 1;
+        console.log(element);
         switch (element.type) {
           case 'div':
             // returns inserted ads
@@ -67,9 +69,7 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
             if (ampPage) return <AmpEmbedWrapper element={element.raw_oembed} key={`Oembed-${i}`} />;
             return <Oembed src={element} key={`Oembed-${i}`} index={count} />;
           case 'table':
-            // See APD-451, this element will be worked at a later time.
-            // return <Table src={element} key={`Table-${i}`} />;
-            return null;
+            return <Table src={element} key={`Table-${i}`} />;
           case 'video':
             return <Video
                 src={element}
