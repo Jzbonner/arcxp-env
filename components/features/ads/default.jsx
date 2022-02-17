@@ -99,7 +99,6 @@ const ArcAd = ({
   let objType;
   switch (pageContentType) {
     case 'article':
-      if (treatPbPageAsArticle) objType = 'specialpresentation';
       break;
     case 'wire':
     case 'story':
@@ -120,6 +119,8 @@ const ArcAd = ({
     default:
       objType = pageContentType;
   }
+
+  if (treatPbPageAsArticle) objType = 'specialpresentation';
 
   const globalTargeting = {
     uuid: contentId,
