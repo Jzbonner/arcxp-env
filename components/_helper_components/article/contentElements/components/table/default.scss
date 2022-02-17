@@ -1,0 +1,58 @@
+@import "../../../../../../src/styles/base/mixins";
+
+.c-table {
+
+  thead {
+
+    tr {
+      border-top: solid 2px #212126;
+    }
+
+    th {
+      @include text-styles(.75rem, 1.33, "Gordita-Bold");
+    }
+  }
+
+  tbody {
+
+    tr {
+      border-bottom: solid 1px #cdcdcd;
+
+      &:first-child {
+        border-top: solid 1px rgba(0, 0, 0, .5);
+      }
+
+      &:nth-child(even) {
+        background-color: rgba(255, 245, 236, .5);
+      }
+    }
+
+    td {
+      @include text-styles(.75rem, 1.33, "Gordita");
+    }
+  }
+
+  tr {
+    display: flex;
+    justify-content: space-evenly;
+
+    th,
+    td {
+      width: 100%;
+      border-left: solid 1px #cdcdcd;
+      border-right: solid 1px #cdcdcd;
+      padding: 15px 10px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+    }
+
+    :first-child {
+      border-left: none;
+    }
+
+    :last-child {
+      border-right: none;
+    }
+  }
+}
