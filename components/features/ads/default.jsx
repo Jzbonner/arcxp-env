@@ -71,6 +71,7 @@ const ArcAd = ({
     site,
     topics = [],
     contentId,
+    treatPbPageAsArticle,
   } = contentMeta || {};
   const dfpIdFormatted = `${dfpid}/${currentEnv !== 'prod' ? 'TEST_' : ''}${adsPath}`;
   let adSlotNameForArcAds = url === '/homepage' || url === '/' ? 'home' : topSection.replace(/-/g, '_');
@@ -98,7 +99,7 @@ const ArcAd = ({
   let objType;
   switch (pageContentType) {
     case 'article':
-      objType = 'specialpresentation';
+      if (treatPbPageAsArticle) objType = 'specialpresentation';
       break;
     case 'wire':
     case 'story':
@@ -119,6 +120,8 @@ const ArcAd = ({
     default:
       objType = pageContentType;
   }
+
+  console.log('objType', objType);
 
   const globalTargeting = {
     uuid: contentId,

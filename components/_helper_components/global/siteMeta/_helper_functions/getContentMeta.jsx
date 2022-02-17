@@ -18,6 +18,7 @@ const getContentMeta = () => {
     contextPath,
     renderables: renderedOutput,
   } = appContext;
+  console.log('appContext', appContext);
   const blogName = metaValue('blogname');
   const noIndex = metaValue('no index');
   const enableDarkMode = metaValue('dark mode') === 'true';
