@@ -98,6 +98,8 @@ const ArcAd = ({
   let objType;
   switch (pageContentType) {
     case 'article':
+      objType = 'specialpresentation';
+      break;
     case 'wire':
     case 'story':
       objType = 'story';
