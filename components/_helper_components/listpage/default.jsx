@@ -17,7 +17,7 @@ import LoadMoreButton from '../loadMoreBtn/default';
 const RP01 = () => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'}/>;
 const RP09 = i => <ArcAd staticSlot={'RP09 sticky listPage'} key={`RP09-List-Page-${i}`} customId={`div-id-RP09_${i}`}/>;
 const MP05 = i => <ArcAd staticSlot={'MP05'} key={`MP05-${i / 10}`} customId={`div-id-MP05_${i / 10}`} />;
-const HP05 = i => <ArcAd staticSlot={'HP05'} key={`HP05-${i / 10}`} customId={`div-id-HP05_${i / 10}`} />;
+const HP05 = i => <ArcAd staticSlot={'HP05-listPage'} key={`HP05-${i / 10}`} customId={`div-id-HP05_${i / 10}`} />;
 
 const ListPage = ({
   globalContent,
