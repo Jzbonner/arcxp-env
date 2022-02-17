@@ -24,7 +24,6 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
     <div className="c-contentElements" data-start-index={startIndex || null}>
       {contentElements.map((element, i) => {
         const count = i + 1;
-        console.log(element);
         switch (element.type) {
           case 'div':
             // returns inserted ads
