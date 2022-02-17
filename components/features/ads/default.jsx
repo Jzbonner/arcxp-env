@@ -121,8 +121,6 @@ const ArcAd = ({
       objType = pageContentType;
   }
 
-  console.log('objType', objType);
-
   const globalTargeting = {
     uuid: contentId,
     obj_type: objType,
