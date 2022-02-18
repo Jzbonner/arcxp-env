@@ -144,7 +144,7 @@ const ListEnhanced = ({ customFields = {} }) => {
                       customId={`div-id-MP05_${sectionIndex + 1}`}
                     />
                     <ArcAd
-                      staticSlot={'HP05'}
+                      staticSlot={'HP05-listPage'}
                       key={`HP05-${sectionIndex + 1}`}
                       customId={`div-id-HP05_${sectionIndex + 1}`}
                     />
