@@ -44,7 +44,7 @@ export const ConnextAuthTrigger = () => {
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState } = connextLocalStorageData;
   let leadVideoLoaded = false;
-  let includeVideoInDeferredLoad = false;
+  let leadVideoPlayed = false;
 
   const loadDeferredItems = () => {
     const deferredItems = window?.deferUntilKnownAuthState || [];
@@ -70,8 +70,9 @@ export const ConnextAuthTrigger = () => {
             const videoPlayer = item[key][0];
             const videoIsLead = item[key][1];
             const videoBlocker = window.document.querySelector('.video-blocker');
-            if (videoIsLead && includeVideoInDeferredLoad) {
+            if (videoIsLead && !leadVideoPlayed) {
               videoPlayer.play();
+              leadVideoPlayed = false;
               videoPlayer.showControls();
               if (videoBlocker) {
                 videoBlocker.style.display = 'none';
@@ -220,8 +221,6 @@ export const ConnextAuthTrigger = () => {
           loadDeferredItems();
           setAutoplayVideo(true);
         } else if (window?.sophi) {
-          // set the flag so that video loads during loadDeferredItems() callback.  If we don't flag it, video can be triggered twice
-          includeVideoInDeferredLoad = true;
           // the free limit has been exceeded and/or they are unauthorized; it's a paywall interaction, so trigger a Sophi event
           window.sophi.sendEvent(
             {
@@ -289,9 +288,10 @@ export const ConnextAuthTrigger = () => {
             const videoPlayer = item[key][0];
             const videoIsLead = item[key][1];
             const videoBlocker = document.querySelector('.video-blocker');
-            if (videoIsLead && !videoPlayer?.get$video()?.started) {
+            if (videoIsLead && !leadVideoPlayed) {
               // it's a lead video (and thus already instantiated) so just trigger it to play
               videoPlayer.play();
+              leadVideoPlayed = true;
               videoPlayer.showControls();
               if (videoBlocker) {
                 videoBlocker.style.display = 'none';
