@@ -8,7 +8,7 @@ const Table = ({ src }) => {
     <div className="b-margin-bottom-d30-m20">
       <table className='c-table b-flexRow b-flexColumn'>
           { header.length > 0 && <thead><tr>
-            { header.map((cells, i) => <th key={`table-header-${i}`}><span>{cells.content}</span></th>)}
+            { header.map((cells, i) => i < 4 && <th key={`table-header-${i}`}><span>{cells.content}</span></th>)}
           </tr></thead>
           }
         <tbody>
