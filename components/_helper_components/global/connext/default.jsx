@@ -72,7 +72,7 @@ export const ConnextAuthTrigger = () => {
             const videoBlocker = window.document.querySelector('.video-blocker');
             if (videoIsLead && !leadVideoPlayed) {
               videoPlayer.play();
-              leadVideoPlayed = false;
+              leadVideoPlayed = true;
               videoPlayer.showControls();
               if (videoBlocker) {
                 videoBlocker.style.display = 'none';
