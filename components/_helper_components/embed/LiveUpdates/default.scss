@@ -649,10 +649,21 @@
       }
     }
 
+    @keyframes newUpdatesButtonAnimantion {
+      
+      from {
+        bottom: -50px;
+      }
+    
+      to {
+        bottom: 20px;
+      }
+    }
+
     .new-updates-button {
       position: fixed;
-      bottom: 20px;
       left: 50%;
+      bottom: 20px;
       transform: translate(-50%, 0);
       display: flex;
       justify-content: center;
@@ -660,10 +671,26 @@
       width: 160px;
       height: 42px;
       border-radius: 21px;
-      box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, 0.6);
-      border: solid 0.9px #ececec;
+      box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, .6);
+      border: solid .9px #ececec;
       background-color: #9b9b9b;
       z-index: 10000;
+      animation: 1s ease-in 0s 1 newUpdatesButtonAnimantion;
+      cursor: pointer;
+      font-family: "Gordita";
+      font-size: 12px;
+      font-weight: 600;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: .72px;
+      color: #fff5ec;
+
+      img {
+        height: 9px;
+        width: 9px;
+        margin-right: 6px;
+      }
     }
   }
 }
