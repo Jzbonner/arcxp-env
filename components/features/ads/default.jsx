@@ -168,7 +168,7 @@ const ArcAd = ({
     />
   );
 
-  if (slotName === 'HS02' || 'WCC01') {
+  if (slotName === 'HS02' || slotName === 'WCC01') {
     return (
       <>
         <div className={`c-${slotName}`}>{arcad}</div>
