@@ -15,7 +15,7 @@ import getQueryParams from '../../layouts/_helper_functions/getQueryParams';
 const RP01 = s => <ArcAd staticSlot={'RP01-List-Page'} key={'RP01-List-Page'} customId={`div-id-RP01_${s}`} />;
 const RP09 = (i, s) => <ArcAd staticSlot={'RP09 sticky listPage'} key={`RP09-List-Page-${i}`} customId={`div-id-RP09_${s}_${i}`} />;
 const MP05 = (i, s) => <ArcAd staticSlot={'MP05'} key={`MP05-${i}`} customId={`div-id-MP05_${s}_${i}`} />;
-const HP05 = (i, s) => <ArcAd staticSlot={'HP05'} key={`HP05-${i}`} customId={`div-id-HP05_${s}_${i}`} />;
+const HP05 = (i, s) => <ArcAd staticSlot={'HP05-listPage'} key={`HP05-${i}`} customId={`div-id-HP05_${s}_${i}`} />;
 
 const SearchPage = ({
   globalContent,

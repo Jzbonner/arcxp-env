@@ -208,6 +208,20 @@ export const adSlots = {
   },
   HP05: {
     dimensions: [
+      [728, 90], // tablet+
+    ],
+    breakpoints: [
+      [768, 0], // tablet+
+    ],
+    bidding: {
+      amazon: {
+        enabled: true,
+      },
+    },
+  },
+  'HP05-listPage': {
+    slotName: 'HP05',
+    dimensions: [
       [], // desktop
       [728, 90], // tablet+
     ],
