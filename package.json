@@ -234,6 +234,7 @@
     "react-dom": "^17.0.1",
     "react-lazyload": "^3.0.0",
     "react-swipeable": "^6.1.0",
+    "rss-to-json": "^2.0.2",
     "scriptjs": "^2.5.9",
     "thumbor-lite": "^0.1.8",
     "xss": "^1.0.8"
