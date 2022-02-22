@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
+import { parse } from 'rss-to-json';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import ContentElements from '../../article/contentElements/default.jsx';
 import filterContentElements from '../../../layouts/_helper_functions/article/filterContentElements';
+import getDomain from '../../../layouts/_helper_functions/getDomain.js';
 import ArcAd from '../../../features/ads/default';
 import fetchEnv from '../../global/utils/environment';
 import TaboolaFeed from '../../../features/taboolaFeed/default';
@@ -13,6 +15,7 @@ import getContentMeta from '../../global/siteMeta/_helper_functions/getContentMe
 import GetConnextLocalStorageData from '../../global/connext/connextLocalStorage';
 import { ConnextAuthTrigger } from '../../global/connext/default';
 import Byline from '../../article/byline/default';
+import whiteUpArrow from '../../../../resources/icons/global/white-up-arrow.svg';
 import './default.scss';
 
 /* this helper component renders the Custom Info Box as outlined in APD-1441 */
@@ -23,14 +26,15 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
 
   const hashId = typeof window !== 'undefined' ? window.location.hash.substr(1) : null;
   const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
-  const { connext } = getProperties(arcSite);
+  const { arcSite, requestUri } = fusionContext;
+  const { connext, cdnSite, cdnOrg } = getProperties(arcSite);
   const currentEnv = fetchEnv();
   const { siteCode, configCode, environment } = connext[currentEnv] || {};
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
   const { UserState: userState } = connextLocalStorageData;
   const isLoggedOut = (userState && userState.toLowerCase() === 'logged out') || true;
   const hashBeforeLogin = useRef('');
+  const [displayNewUpdatesButton, setDisplayNewUpdatesButton] = useState({ display: false, offset: 0 });
   let activeUpdate = hashId;
   let viewportHeight = 0;
   let lastScrollPos = 0;
@@ -39,6 +43,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   let timeout;
   const stickyHeaderAdjustment = 80;
   let toggledAdSlot = 'HP03';
+  const liveButtonCheckDomain = `${getDomain('', cdnSite, cdnOrg, arcSite)}${requestUri}&outputType=rss`;
 
   const copyToClipboard = (e) => {
     e.preventDefault();
@@ -355,6 +360,19 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
     };
   }, []);
 
+  useEffect(() => {
+    const newItemCheckingInterval = setInterval(async () => {
+      const rssToJsonData = await parse(liveButtonCheckDomain);
+      if (rssToJsonData?.items?.length > liveUpdates.length) {
+        setDisplayNewUpdatesButton({ display: true, offset: (rssToJsonData?.items?.length - liveUpdates.length) });
+      } else {
+        setDisplayNewUpdatesButton({ display: false, offset: 0 });
+      }
+    }, 60000);
+
+    return () => clearInterval(newItemCheckingInterval);
+  }, []);
+
   const loopThroughUpdates = (isNav = false) => {
     const firstLiveUpdate = liveUpdates.slice(0, 1);
     const restOfLiveUpdates = liveUpdates.slice(1, liveUpdates.length);
@@ -469,6 +487,15 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
       {/* if it's a metered story, add the connext auth handlers to load deferred items (e.g. anything with `lazyLoad` above) */}
       {isMeteredStory && ConnextAuthTrigger()}
     </div>
+    {
+      displayNewUpdatesButton.display
+      && <div
+          className='new-updates-button'
+          onClick={() => window?.location?.reload()}>
+            <img src={whiteUpArrow} alt='up arrow' />
+            {displayNewUpdatesButton.offset} New Update{displayNewUpdatesButton.offset > 1 ? 's' : ''}
+        </div>
+    }
   </div>;
 };
 
