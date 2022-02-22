@@ -139,6 +139,9 @@ const ArcAd = ({
     globalTargeting.wrap_token = window.location.pathname.split('/');
     globalTargeting.wrap_url = window.location.hostname;
   }
+  if (arcSite === 'ajc') {
+    globalTargeting.zeus = 'notapplied';
+  }
 
   if (isAdmin && adConfig.dimensions[0][0] !== 1) {
     return <div className={`arc_ad ${slotName}`} style={{
