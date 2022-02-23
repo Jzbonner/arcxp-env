@@ -190,6 +190,12 @@ const SearchPage = ({
 
   const handleButtonClick = (e) => {
     e.preventDefault();
+    const dataLayer = window.dataLayer || [];
+
+    if (dataLayer) {
+      dataLayer.push({ event: 'search', searchInput });
+    }
+
     if (searchInput === '') {
       // empty search term
       resetStates();
