@@ -161,14 +161,19 @@ export default () => ({
         id: 8,
       },
       {
+        name: 'Staff Writers',
+        tag: 'staff-writers',
+        id: 9,
+      },
+      {
         name: 'News Reporters',
         tag: 'news-reporters',
-        id: 9,
+        id: 10,
       },
       {
         name: 'Visuals',
         tag: 'visuals',
-        id: 10,
+        id: 11,
       },
     ],
   },
