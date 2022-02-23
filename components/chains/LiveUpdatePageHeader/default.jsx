@@ -25,7 +25,7 @@ const LiveUpdatePageHeader = ({ children }) => {
   }
   return <div className={`c-LiveUpdatePageHeader ${!pageIsLive ? 'titleWithoutLiveStatus' : ''}`}>
     {backgroundImage}
-    <div className='test'>
+    <div className='c-liveUpdatesHeaderContainer'>
       <div className='c-liveUpdatesTitle'>
         {pageTitle}
       </div>
