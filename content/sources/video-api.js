@@ -2,8 +2,6 @@ import videoFilter from '../filters/video-api-filter';
 
 const schemaName = 'video';
 
-const ttl = 259200;
-
 const params = {
   uuid: 'text',
 };
@@ -15,7 +13,6 @@ const resolve = (query) => {
 };
 
 export default {
-  ttl,
   resolve,
   params,
   schemaName,
