@@ -22,6 +22,10 @@
     position: relative;
     width: 100%;
 
+    @include between-breakpoints(mobile, tablet) {
+      left: -15px;
+    }
+
     .c-image-feature {
       margin: 0;
       position: relative;
@@ -35,6 +39,10 @@
 
       .c-image-component {
         margin-bottom: 0;
+
+        @include between-breakpoints(mobile, tablet) {
+          width: 100vw;
+        }
       }
 
       picture {
@@ -306,6 +314,22 @@
       @include between-breakpoints(mobile, mobile-sm) {
         padding-left: 10px;
         width: calc(100% - 54px);
+      }
+
+      @include between-breakpoints(mobile, tablet) {
+
+        div[data-oembed-type="youtube"],
+        div[data-oembed-type="facebook-post"],
+        div[data-oembed-type="twitter"] {
+
+          iframe {
+            width: 100% !important;
+          }
+        }
+
+        div[data-oembed-type="facebook-post"] .fb-post > span {
+          width: 100% !important;
+        }
       }
 
       @include breakpoint(tablet) {
