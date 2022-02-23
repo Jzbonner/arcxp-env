@@ -8,6 +8,8 @@ import './default.scss';
 const LiveUpdatePageHeader = ({ children }) => {
   const { pageIsLive } = getContentMeta();
   let statusContent = '';
+  const pageTitle = children[0];
+  const backgroundImage = children[1];
   if (pageIsLive) {
     const appContext = useAppContext();
     const { globalContent = [] } = appContext;
@@ -22,8 +24,13 @@ const LiveUpdatePageHeader = ({ children }) => {
     }
   }
   return <div className={`c-LiveUpdatePageHeader ${!pageIsLive ? 'titleWithoutLiveStatus' : ''}`}>
-    {children}
-    {pageIsLive && <div className='c-liveUpdatesStatus'>{statusContent}</div>}
+    {backgroundImage}
+    <div className='test'>
+      <div className='c-liveUpdatesTitle'>
+        {pageTitle}
+      </div>
+      <span className='c-liveUpdatesStatus'>{statusContent}</span>
+    </div>
   </div>;
 };
 

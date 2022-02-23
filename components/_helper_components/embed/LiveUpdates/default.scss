@@ -51,16 +51,38 @@
       }
     }
 
-    .c-page-title,
-    .c-liveUpdatesStatus {
+    .test {
       position: absolute;
       z-index: 3;
-      top: 50%;
+      top: 52%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 95%;
       max-width: 95%;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .c-page-title {
+        margin: 0;
+      }
+
+      .c-liveUpdatesTitle {
+        margin-bottom: 9px;
+
+        @include breakpoint(tablet) {
+          margin-bottom: 10px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          margin-bottom: 13px;
+        }
+
+        @include breakpoint(desktop-lg) {
+          margin-bottom: 26px;
+        }
+      }
     }
 
     @include breakpoint(desktop-sm) {
@@ -70,12 +92,13 @@
       }
     }
 
-    .c-page-title .c-title-content {
+    .test .c-title-content {
       border: none;
       color: #fff5ec;
       display: block;
       text-align: center;
       letter-spacing: -.31px;
+      padding-bottom: 0;
 
       @include text-styles(1.5625rem, 1.1, "Lora-Bold");
 
@@ -101,7 +124,7 @@
     }
 
     .c-liveUpdatesStatus {
-      top: 80%;
+      position: relative;
       width: auto;
 
       @include text-styles(.75rem, 1, "Gordita-Bold");
@@ -650,11 +673,11 @@
     }
 
     @keyframes newUpdatesButtonAnimantion {
-      
+
       from {
         bottom: -50px;
       }
-    
+
       to {
         bottom: 20px;
       }
