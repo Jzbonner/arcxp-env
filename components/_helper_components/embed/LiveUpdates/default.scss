@@ -22,7 +22,7 @@
     position: relative;
     width: 100%;
 
-    @include between-breakpoints(mobile, tablet) {
+    @include between-breakpoints(mobile-sm, tablet) {
       left: -20px;
     }
 
