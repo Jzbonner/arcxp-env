@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import BlockQuote from './components/blockQuote/default.jsx';
-import Gallery from './components/gallery/default.jsx';
+import Gallery from '../../../features/gallery/default.jsx';
 import HTML from './components/html/default.jsx';
 import Image from '../../global/image/default.jsx';
 import InterstitialLink from './components/interstitial_link/default.jsx';
@@ -36,7 +36,7 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
             return null;
           case 'gallery':
             if (ampPage) return null;
-            return <Gallery src={element} key={`Gallery-${i}`} />;
+            return <Gallery promoItems={element} pageType='story' key={`gallery-${i}`} />;
           case 'raw_html':
             if (ampPage) return <AmpEmbedWrapper isHtml={true} element={element} key={`Raw_HTML-${i}`} />;
             return <HTML src={element} key={`Raw_HTML-${i}`} index={count} />;
