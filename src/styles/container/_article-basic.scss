@@ -535,7 +535,9 @@ article .c-section a.link {
 }
 
 .c-articleContent i {
-  @include text-styles(1rem, 1.625, "Gordita")
+  display: inline-block;
+  transform: skewX(347deg);
+-webkit-transform: skewX(347deg);
 }
 
 @include amp-exclude {
