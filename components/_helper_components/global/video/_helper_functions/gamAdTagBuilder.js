@@ -50,7 +50,7 @@ const gamAdTagBuilder = (pageTax = {}, videoTax = {}, videoId, currentEnv, video
   const gamUrl = 'https://securepubads.g.doubleclick.net/gampad/ads';
   const size = 'sz=400x300';
   const pageUuid = contentId || videoId;
-  const kw = pagebuilderTopics.length ? videoTopics.concat(pageTopics, pagebuilderTopics.replace(/ /g, '').split(',')) : videoTopics.concat(pageTopics);
+  const kw = pagebuilderTopics.length ? videoTopics.concat(pageTopics, pagebuilderTopics.replace(/ |"/g, '').split(',')) : videoTopics.concat(pageTopics);
   let descriptionUrl = `${typeof window !== 'undefined' ? `https://${window.location.hostname}` : ''}${videoPageUrl}`;
   descriptionUrl = encodeURIComponent(descriptionUrl);
 
