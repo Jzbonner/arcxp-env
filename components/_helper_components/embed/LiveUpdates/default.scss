@@ -72,6 +72,10 @@
       flex-direction: column;
       align-items: center;
 
+      @include between-breakpoints(mobile-sm, tablet) {
+        left: 55%;
+      }
+
       .c-page-title {
         margin: 0;
       }
