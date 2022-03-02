@@ -43,7 +43,8 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   let timeout;
   const stickyHeaderAdjustment = 80;
   let toggledAdSlot = 'HP03';
-  const liveButtonCheckDomain = `${getDomain('', cdnSite, cdnOrg, arcSite)}${requestUri}&outputType=rss`;
+  const outputTypeString = requestUri.split('').indexOf('?') ? '&outputType=rss' : '?outputType=rss';
+  const liveButtonCheckDomain = `${getDomain('', cdnSite, cdnOrg, arcSite)}${requestUri}${outputTypeString}`;
 
   const copyToClipboard = (e) => {
     e.preventDefault();
