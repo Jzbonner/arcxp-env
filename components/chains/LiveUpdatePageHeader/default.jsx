@@ -20,7 +20,9 @@ const LiveUpdatePageHeader = ({ children }) => {
         display_date: displayDate,
         first_publish_date: firstPublishDate,
       } = globalContent[0] || {};
-      statusContent = displayDate ? formatTime(displayDate) : formatTime(firstPublishDate);
+      const cleanDisplayDate = new Date(displayDate);
+      const cleanFirstPublishDate = new Date(firstPublishDate);
+      statusContent = displayDate ? formatTime(cleanDisplayDate) : formatTime(cleanFirstPublishDate);
     }
   }
   return <div className={`c-LiveUpdatePageHeader ${!pageIsLive ? 'titleWithoutLiveStatus' : ''}`}>
