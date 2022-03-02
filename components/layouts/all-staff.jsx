@@ -32,7 +32,7 @@ export const AllStaffPage = () => {
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
   const isProd = fetchEnv() === 'prod';
   const pageUri = 'newsroom';
-
+  console.log('selected staff', selectedStaff);
   const setStaffFilter = () => {
     setLeftMenuVisibility(false);
   };
@@ -83,6 +83,7 @@ export const AllStaffPage = () => {
 
   useEffect(() => {
     updateStaffers(query.id);
+    console.log('query id', query.id);
     const selectedArea = findArea(query.id, arcSite);
     if (selectedArea && selectedArea.name !== 'All') {
       setSelectedLeftMenuItem(selectedArea);
