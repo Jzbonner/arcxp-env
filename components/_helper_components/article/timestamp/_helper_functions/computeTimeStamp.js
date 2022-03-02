@@ -14,7 +14,7 @@ const formatTime = (date, showSeconds = false, milTime = false) => {
     dateOptions.second = 'numeric';
   }
   const hourFormat = milTime ? 'en-UK' : 'en-US';
-  return new Intl.DateTimeFormat(hourFormat, dateOptions).format(new Date(date));
+  return new Intl.DateTimeFormat(hourFormat, dateOptions).format(date);
 };
 
 const formatDate = date => (date.getDate() < 10 ? `0${date.getDate()}` : date.getDate());
