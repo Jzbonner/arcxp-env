@@ -43,9 +43,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   let timeout;
   const stickyHeaderAdjustment = 80;
   let toggledAdSlot = 'HP03';
-  console.log('carlos requestUri', requestUri);
-  const outputTypeString = requestUri.split('').indexOf('?') ? '&outputType=rss' : '?outputType=rss';
-  console.log('carlos outputTypeString', outputTypeString);
+  const outputTypeString = requestUri.split('').indexOf('?') === -1 ? '?outputType=rss' : '&outputType=rss';
   const liveButtonCheckDomain = `${getDomain('', cdnSite, cdnOrg, arcSite)}${requestUri}${outputTypeString}`;
   console.log('carlos liveButtonCheckDomain', liveButtonCheckDomain);
 
