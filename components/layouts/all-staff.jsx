@@ -33,8 +33,6 @@ export const AllStaffPage = () => {
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
   const isProd = fetchEnv() === 'prod';
   const pageUri = 'newsroom';
-  console.log('selected staff', selectedStaff);
-  console.log('glboalContent', globalContent);
   const setStaffFilter = () => {
     setLeftMenuVisibility(false);
   };
@@ -46,7 +44,6 @@ export const AllStaffPage = () => {
 
     if (selectedArea && selectedArea.name !== 'All') {
       const staffers = allStaffBySite.filter((staff) => {
-        console.log('AllStaffBySITE FILTER', staff);
         if (!staff) return false;
         if (!staff.status) {
           return false;
@@ -61,7 +58,6 @@ export const AllStaffPage = () => {
       setSelectedStaff(staffers);
     } else {
       const staffers = allStaffBySite.filter((staff) => {
-        console.log('AllStaffBySITE FILTER', staff);
         if (!staff) return false;
         if (!staff.status) {
           return false;
@@ -86,7 +82,6 @@ export const AllStaffPage = () => {
   useEffect(() => {
     if (globalContent && allStaffBySite.length < 1) {
       const filteredStaffersBySite = filterAuthorsBySite(globalContent, arcSite);
-      console.log('filterStafferBySite', filteredStaffersBySite);
       setAllStaffBySite(filteredStaffersBySite);
     }
   }, []);
@@ -110,8 +105,6 @@ export const AllStaffPage = () => {
     setLeftMenuVisibility(false);
     window.history.pushState({}, null, `${contextPath}/${pageUri}/${area.tag}/${!isProd && `?_website=${arcSite}`}`);
   };
-
-  console.log('filtered', allStaffBySite);
 
   return (
     <>
