@@ -1,5 +1,5 @@
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
-import filterAuthorsBySite from './filterAuthorBySite';
+import filterAuthorsBySite from '../../../components/layouts/_helper_functions/staffpage/filterAuthorsBySite';
 
 const fetchAllStaffData = () => {
   const requestUri = '/author/v1/author-service/';
@@ -7,7 +7,7 @@ const fetchAllStaffData = () => {
   let filteredAllStaffData = null;
 
   // eslint-disable-next-line no-unused-vars
-  const promise = fetch(requestUri, {
+  fetch(requestUri, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
