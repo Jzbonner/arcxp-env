@@ -1,7 +1,7 @@
 // This param needs to be declared here so it can be accessed
 // by globalContentConfig in the all-staff layout
 
-const ttl = 1;
+const ttl = 43200;
 const params = {
   id: 'text',
 };
