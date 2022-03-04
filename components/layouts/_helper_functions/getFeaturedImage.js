@@ -1,14 +1,23 @@
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useAppContext } from 'fusion:context';
+import { RESIZER_SECRET_KEY } from 'fusion:environment';
 import getProperties from 'fusion:properties';
+import Thumbor from 'thumbor-lite';
 import getDomain from './getDomain';
-import imageResizer from './Thumbor';
+import fetchEnv from '../../_helper_components/global/utils/environment';
+
+const currentEnv = fetchEnv();
+
+function encodeSrc(src) {
+  return src
+    .replace(/^https?:\/\//, '')
+    .replace(' ', '%20')
+    .replace('?', '%3F');
+}
 
 const renderImage = () => {
-  const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
-
   const appContext = useAppContext();
   const {
+    arcSite,
     globalContent,
     deployment,
     contextPath,
@@ -67,7 +76,16 @@ const renderImage = () => {
   }
 
   if (ogContentImage) {
-    return imageResizer(ogContentImage, arcSite, 1200, 630);
+    const connextSite = cdnSite.replace(/-/g, '');
+    const siteDomain = `${currentEnv === 'prod' ? 'www' : 'sandbox'}.${connextSite === 'journalnews' ? 'journal-news' : connextSite}.com`;
+
+    const resizerUrl = `https://${siteDomain}/resizer`;
+    const imageUrl = ogContentImage.substring(ogContentImage.indexOf('//') + 2);
+    const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerUrl);
+    if (!imageUrl) return null;
+    const imagePath = thumbor.setImagePath(encodeSrc(imageUrl));
+    const resizedUrl = imagePath.resize(1200, 630);
+    return resizedUrl.buildUrl();
   }
   return `${getDomain(layout, cdnSite, arcSite, cdnOrg)}${deployment(`${contextPath}${logoOgImage}`)}`;
 };
