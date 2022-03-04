@@ -183,6 +183,12 @@
         }
       }
 
+      &.dayton-daily-news {
+        @include between-breakpoints(mobile-sm, desktop-sm) {
+          height: 39px;
+        }
+      }
+
       &.not-visible {
         display: none;
       }
@@ -262,6 +268,10 @@
       }
 
       &.dayton-daily-news {
+        @include between-breakpoints(mobile-sm, desktop-sm) {
+          max-height: 39px;
+        }
+
         @include breakpoint(desktop-sm) {
           width: 400px;
           max-width: 400px;
