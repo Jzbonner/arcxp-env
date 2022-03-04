@@ -45,7 +45,6 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   let toggledAdSlot = 'HP03';
   const outputTypeString = requestUri.split('').indexOf('?') === -1 ? '?outputType=rss' : '&outputType=rss';
   const liveButtonCheckDomain = `${getDomain('', cdnSite, cdnOrg, arcSite)}${requestUri}${outputTypeString}`;
-  console.log('carlos liveButtonCheckDomain', liveButtonCheckDomain);
 
   const copyToClipboard = (e) => {
     e.preventDefault();
