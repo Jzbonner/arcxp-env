@@ -6,4 +6,5 @@ export default {
   SOPHI_ENDPOINT: 'https://site-automation-api.ml.sophi.io/curatedHosts/www.ajc.com/curator',
   SOPHI_TOKEN_URL: 'https://sophi-prod.auth0.com/oauth/token',
   SOPHI_TOKEN_AUDIENCE: 'https://api.sophi.io',
+  weatherAlertsAPIkey: '%{AQICAHiH7W8m/ZwSizPtJ5+e3MKEKRvPhAGdG3pC/jWLxGpnzgECmIlzEHK44eJfaLIW/pQIAAAAhzCBhAYJKoZIhvcNAQcGoHcwdQIBADBwBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDIOp7MGb3ha5ELy0MQIBEIBDxahOOZTjYFVniKOmAmJu/QD88jh+Q8Phm7yD+QxadzNUWXE9zx0aDpH6EcuWfdtFzwVNae7aC9EMqNjvYxTk2Qpwkg==}',
 };
