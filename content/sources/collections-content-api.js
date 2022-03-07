@@ -30,6 +30,7 @@ const fetch = (query) => {
       .then(data => data.slice(0, size))
       .catch((error) => {
         console.error('Error: ', error);
+        return error;
       });
   }
   return null;

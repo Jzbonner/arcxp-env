@@ -66,6 +66,7 @@ const fetch = (query) => {
     .then(data => FilterGallery(data))
     .catch((error) => {
       console.error(error);
+      return error;
     });
 };
 

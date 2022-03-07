@@ -54,7 +54,9 @@ const fetch = async (query) => {
     queryData = await getQueryData(arcSite, newBody, bodyQuery.from, bodyQuery.size, bodyQuery.useFetch);
     boxContent = getSponsorContent(5, queryData, { ...Sponsor }, query.uuid);
   } catch (e) {
-    console.log('sponsor-box-amp error: ', e);
+    /* eslint-disable no-console */
+    console.error('sponsor-box-amp error: ', e);
+    return e;
   }
 
   return {

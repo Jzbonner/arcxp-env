@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 
-const { weatherAlertsAPIkey } = require('../../environment/index');
+import { weatherAlertsAPIkey } from 'fusion:environment';
 
 const params = {
   endpoint: 'text',
@@ -26,7 +26,8 @@ const fetch = (query) => {
     })
     .then(({ data }) => data)
     .catch((error) => {
-      console.log('AXIOS CATCH - weather => ', error);
+      console.error('AXIOS CATCH - weather => ', error);
+      return error;
     });
 };
 

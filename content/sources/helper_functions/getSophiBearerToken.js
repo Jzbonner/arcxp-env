@@ -11,4 +11,4 @@ export default async () => axios
     grant_type: 'client_credentials',
   })
   .then(({ data }) => data)
-  .catch(err => console.log(err));
+  .catch(err => console.error(err));
