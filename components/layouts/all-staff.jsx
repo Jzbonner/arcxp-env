@@ -81,8 +81,12 @@ export const AllStaffPage = () => {
 
   useEffect(() => {
     if (globalContent && allStaffBySite.length < 1) {
-      const filteredStaffersBySite = filterAuthorsBySite(globalContent, arcSite);
-      setAllStaffBySite(filteredStaffersBySite);
+      if (arcSite === 'ajc' && globalContent.q_results) {
+        setAllStaffBySite(globalContent.q_results);
+      } else {
+        const filteredStaffersBySite = filterAuthorsBySite(globalContent, arcSite);
+        setAllStaffBySite(filteredStaffersBySite);
+      }
     }
   }, []);
 
