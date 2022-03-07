@@ -28,7 +28,8 @@ const fetch = (query = {}) => {
     })
     .then(({ data }) => FetchResizedImages(arcSite, data, 720, 480, false, null, null, null, true))
     .catch((error) => {
-      console.log('AXIOS CATCH - gallery => ', error);
+      console.error('AXIOS CATCH - gallery => ', error);
+      return error;
     });
 };
 

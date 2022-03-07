@@ -1,7 +1,6 @@
 /* eslint-disable */
 import axios from 'axios';
-
-const { sportradarAPIkey, sportradarAPIVersion, sportradarAccessLevel } = require('../../environment/index');
+import { sportradarAPIkey, sportradarAPIVersion, sportradarAccessLevel } from 'fusion:environment';
 
 const params = {
   tour: 'text',

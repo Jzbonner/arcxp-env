@@ -48,6 +48,7 @@ const fetch = (query) => {
       .then(data => data.map(el => pick(el, filter)))
       .catch((error) => {
         console.error(error);
+        return error;
       });
   }
   return null;
