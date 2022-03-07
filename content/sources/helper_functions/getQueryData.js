@@ -48,7 +48,8 @@ export default (arcSite, newBody, from = 0, size = 10, useFetch = false) => {
           contentElements.push({ data: data.content_elements });
         })
         .catch((error) => {
-          console.log('FETCH API CATCH - getQueryData => ', error);
+          console.error('FETCH API CATCH - getQueryData => ', error);
+          return error;
         });
     } else {
       promise = axios
@@ -62,7 +63,8 @@ export default (arcSite, newBody, from = 0, size = 10, useFetch = false) => {
           contentElements.push({ id: config.id, data: data.content_elements });
         })
         .catch((error) => {
-          console.log('AXIOS CATCH - getQueryData => ', error);
+          console.error('AXIOS CATCH - getQueryData => ', error);
+          return error;
         });
     }
 

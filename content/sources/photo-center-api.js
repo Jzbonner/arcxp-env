@@ -27,7 +27,9 @@ const fetch = (query = {}) => {
     })
     .then(({ data }) => FetchResizedImages(arcSite, data, 1600, 0, useSrcSet, srcSetSizes, null, null, false))
     .catch((error) => {
-      console.log('AXIOS CATCH - photo (individual) fetch => ', error);
+      /* eslint-disable no-console */
+      console.error('AXIOS CATCH - photo (individual) fetch => ', error);
+      return error;
     });
 };
 

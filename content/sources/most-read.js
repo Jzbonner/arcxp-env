@@ -96,6 +96,7 @@ const fetch = (query = {}) => {
     .catch((error) => {
       /* eslint-disable no-console */
       console.error('Error: ', error);
+      return error;
     });
   return promiseData;
 };

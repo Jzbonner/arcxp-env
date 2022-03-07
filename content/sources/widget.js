@@ -7,7 +7,8 @@ const fetch = (query) => {
     .get(url)
     .then(({ data }) => data)
     .catch((error) => {
-      console.log('AXIOS CATCH - widget => ', error);
+      console.error('AXIOS CATCH - widget => ', error);
+      return error;
     });
 };
 
