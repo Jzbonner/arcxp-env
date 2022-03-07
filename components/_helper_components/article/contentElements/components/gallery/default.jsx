@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Gallery from '../../../../../features/gallery/default';
 
-const Gallery = ({ src }) => (
-  <div className="b-margin-bottom-d40-m20">
-    <p>Content Element Type: <strong>Gallery</strong> Not Worked. Content: {src.content}</p>
-  </div>
-);
+const GalleryEmbed = ({ src }) => {
+  console.log('src galley', src);
+  return (<div className="b-margin-bottom-d40-m20">
+    <Gallery />
+  </div>);
+};
 
-Gallery.propTypes = {
+GalleryEmbed.propTypes = {
   src: PropTypes.object,
 };
 
-export default Gallery;
+export default GalleryEmbed;
