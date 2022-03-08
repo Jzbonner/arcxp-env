@@ -139,7 +139,7 @@ const NavBar = ({
       section_url_open_new_tab: newTab,
     } = site || {};
 
-    const sectionIndex = children?.indexOf(section);
+    const sectionIndex = children.indexOf(section);
     const destination = id.includes('/configsection') ? siteURL : id;
 
     // return a section followed by the vertical separator bar
