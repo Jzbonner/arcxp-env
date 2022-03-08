@@ -12,7 +12,7 @@ import plus from '../../resources/icons/staff/plus.svg';
 import AREAS_OF_EXPERTISE from './_helper_functions/staffpage/AREAS_OF_EXPERTISE';
 import getQueryParams from './_helper_functions/getQueryParams';
 import fetchEnv from '../_helper_components/global/utils/environment';
-
+import filterAuthorsBySite from './_helper_functions/staffpage/filterAuthorsBySite';
 import '../../src/styles/container/_all-staff.scss';
 
 export const AllStaffPage = () => {
@@ -27,12 +27,12 @@ export const AllStaffPage = () => {
   const [leftMenuMenuVisibility, setLeftMenuVisibility] = useState(false);
   const [selectedLeftMenuItem, setSelectedLeftMenuItem] = useState({});
   const [selectedStaff, setSelectedStaff] = useState([]);
+  const [allStaffBySite, setAllStaffBySite] = useState([]);
   const queryParams = getQueryParams(requestUri);
   const outPutTypePresent = Object.keys(queryParams).some(paramKey => paramKey === 'outputType');
   const noHeaderAndFooter = outPutTypePresent && queryParams.outputType === 'wrap';
   const isProd = fetchEnv() === 'prod';
   const pageUri = 'newsroom';
-
   const setStaffFilter = () => {
     setLeftMenuVisibility(false);
   };
@@ -43,45 +43,55 @@ export const AllStaffPage = () => {
     const selectedArea = findArea(selectedAreaTag, arcSite);
 
     if (selectedArea && selectedArea.name !== 'All') {
-      const staffers = globalContent
-        && globalContent.q_results
-        && globalContent.q_results.filter((staff) => {
-          if (!staff.status) {
-            return false;
-          }
-          if (staff.expertise) {
-            return staff.expertise
-              .split(',')
-              .some(ext => parseInt(ext.trim(), 10) === parseInt(selectedArea.id, 10));
-          }
+      const staffers = allStaffBySite.filter((staff) => {
+        if (!staff) return false;
+        if (!staff.status) {
           return false;
-        });
+        }
+        if (staff.expertise) {
+          return staff.expertise
+            .split(',')
+            .some(ext => parseInt(ext.trim(), 10) === parseInt(selectedArea.id, 10));
+        }
+        return false;
+      });
       setSelectedStaff(staffers);
     } else {
-      const staffers = globalContent
-        && globalContent.q_results
-        && globalContent.q_results.filter((staff) => {
-          if (!staff.status) {
+      const staffers = allStaffBySite.filter((staff) => {
+        if (!staff) return false;
+        if (!staff.status) {
+          return false;
+        }
+        if (staff.expertise) {
+          return staff.expertise.split(',').every((expertise) => {
+            // filters out Hyperlocal and all types of Community Contributors from the 'All' tab
+            if (
+              [8, 17].indexOf(parseInt(expertise.trim(), 10)) === -1
+            ) {
+              return true;
+            }
             return false;
-          }
-          if (staff.expertise) {
-            return staff.expertise.split(',').every((expertise) => {
-              // filters out Hyperlocal and all types of Community Contributors from the 'All' tab
-              if (
-                [8, 17].indexOf(parseInt(expertise.trim(), 10)) === -1
-              ) {
-                return true;
-              }
-              return false;
-            });
-          }
-          return true;
-        });
+          });
+        }
+        return true;
+      });
       setSelectedStaff(staffers);
     }
   };
 
   useEffect(() => {
+    if (globalContent && allStaffBySite.length < 1) {
+      if (arcSite === 'ajc' && globalContent.q_results) {
+        setAllStaffBySite(globalContent.q_results);
+      } else {
+        const filteredStaffersBySite = filterAuthorsBySite(globalContent, arcSite);
+        setAllStaffBySite(filteredStaffersBySite);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (allStaffBySite.length < 1) return null;
     updateStaffers(query.id);
     const selectedArea = findArea(query.id, arcSite);
     if (selectedArea && selectedArea.name !== 'All') {
@@ -89,7 +99,8 @@ export const AllStaffPage = () => {
     } else {
       setSelectedLeftMenuItem({ name: 'All', id: 0 });
     }
-  }, []);
+    return null;
+  }, [allStaffBySite]);
 
   const setCategory = (e, area) => {
     e.preventDefault();
@@ -127,10 +138,10 @@ export const AllStaffPage = () => {
           >
             <img src={plus} alt={'plus sign'} />
           </button>
-          <header className={'c-staffers-header'}>
-            <h3>{selectedLeftMenuItem.name}</h3>
-            <span className="border"></span>
-          </header></>}
+            <header className={'c-staffers-header'}>
+              <h3>{selectedLeftMenuItem.name}</h3>
+              <span className="border"></span>
+            </header></>}
           {Array.isArray(selectedStaff)
             && selectedStaff
               .sort((a = { lastName: '' }, b = { lastName: '' }) => a.lastName.localeCompare(b.lastName))
