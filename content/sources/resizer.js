@@ -22,7 +22,7 @@ export default {
     ) => {
       const { cdnSite, allowedDimensions } = getProperties(arcSite);
       const thumborKey = RESIZER_SECRET_KEY;
-      const allowedDomains = RESIZER_ALLOWED_DOMAINS || [];
+      const allowedDomains = RESIZER_ALLOWED_DOMAINS || ['images.arcpublishing.com', 'd1fegwn2wjh0cs.cloudfront.net'];
       const testSrcAgainstAllowedDomains = (domain) => {
         if (!imageSrc) return false;
 
