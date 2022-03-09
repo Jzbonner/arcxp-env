@@ -124,14 +124,10 @@ const NavBar = ({
     _id: rootDirectory,
   } = sections || {};
 
-  if (!children) {
-    return null;
-  }
+  const verticalBarIndex = children?.length - 2;
+  const finalIndex = children?.length - 1;
 
-  const verticalBarIndex = children.length - 2;
-  const finalIndex = children.length - 1;
-
-  const sectionLi = children.map((section, i) => {
+  const sectionLi = children?.map((section, i) => {
     const {
       _id: id,
       children: childSections,
