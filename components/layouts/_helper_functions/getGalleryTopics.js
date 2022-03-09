@@ -5,7 +5,7 @@ const getGalleryTopics = (promoItems = {}, taxonomy = {}) => {
 
   const { tags = [] } = taxonomy;
 
-  const finalTaxonomyTags = tags.map(tag => tag && tag.text);
+  const finalTaxonomyTags = tags.map(tag => (tag && tag.name ? tag.name : tag.text));
 
   return [...new Set([...finalTaxonomyTags, ...keywords])];
 };

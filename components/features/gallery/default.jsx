@@ -146,7 +146,7 @@ const Gallery = (props) => {
   }
 
   if (finalTaxonomyTopics.length) {
-    finalTaxonomyTopics = finalTaxonomyTopics.map(tag => tag && tag.text);
+    finalTaxonomyTopics = finalTaxonomyTopics.map(tag => (tag && tag.name ? tag.name : tag.text));
   }
 
   const galleryTopics = [...new Set([...finalTaxonomyTopics, ...finalPromoItemTopics])];

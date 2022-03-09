@@ -72,7 +72,9 @@ const getContentMeta = () => {
   let topics = [];
   if (tags) {
     tags.forEach((tag) => {
-      if (tag && tag.text) {
+      if (tag && tag.name) {
+        topics.push(tag.name.replace(/"/g, ''));
+      } else if (tag && tag.text) {
         topics.push(tag.text.replace(/"/g, ''));
       }
     });
