@@ -1,7 +1,21 @@
-import imageResizer from '../../../layouts/_helper_functions/Thumbor';
+import { RESIZER_SECRET_KEY } from 'fusion:environment';
+import Thumbor from 'thumbor-lite';
 import getMediaCredit from './getMediaCredit';
+import fetchEnv from '../../../_helper_components/global/utils/environment';
+
+const currentEnv = fetchEnv();
+function encodeSrc(src) {
+  return src
+    .replace(/^https?:\/\//, '')
+    .replace(' ', '%20')
+    .replace('?', '%3F');
+}
 
 export const formatNavigaContent = (siteID, contentElements) => contentElements.map((el) => {
+  const siteDomain = `${currentEnv === 'prod' ? 'www' : 'sandbox'}.${siteID === 'journalnews' ? 'journal-news' : siteID}.com`;
+  const resizerUrl = `https://${siteDomain}/resizer`;
+  const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerUrl);
+
   const { type, content = '' } = el || {};
 
   if (type === 'text' && content !== '<br/>') {
@@ -76,10 +90,12 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     const { streams, promo_image: promoImage = {}, credits = {} } = el || {};
     const [{ url: inlineVideoURL }] = streams || {};
     const { credits: promoImageCredits = {}, url: promoImageUrl } = promoImage || {};
+    const imagePath = thumbor.setImagePath(encodeSrc(promoImageUrl));
+    const resizedUrl = imagePath.resize(1200, 630);
 
     return `<embed type="raw">
               <div>
-                <video width="100%" controls poster="${imageResizer(promoImageUrl, siteID)}">
+                <video width="100%" controls poster="${resizedUrl.buildUrl()}">
                   <source src=${inlineVideoURL} type="video/mp4" >
                 </video>
               </div>
@@ -99,10 +115,12 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     const {
       url = '', caption: imageCaption = '', credits: mediaCredits = {}, vanity_credits: vanityCredits = {},
     } = el || {};
+    const imagePath = thumbor.setImagePath(encodeSrc(url));
+    const resizedUrl = imagePath.resize(1200, 630);
 
     return `
       <embed type="raw">
-        <img src="${imageResizer(url, siteID)}" title="${imageCaption}" alt="${imageCaption}"/>
+        <img src="${resizedUrl.buildUrl()}" title="${imageCaption}" alt="${imageCaption}"/>
         ${(vanityCredits && getMediaCredit(vanityCredits) && `<p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(vanityCredits)}</p>`) || (mediaCredits && getMediaCredit(mediaCredits) && `<p class="text" style="font-size: 0.75rem; text-align: right">Credit: ${getMediaCredit(mediaCredits)}</p>`)}
       </embed>
     `;
