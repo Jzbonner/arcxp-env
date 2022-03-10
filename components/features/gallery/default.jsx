@@ -32,7 +32,8 @@ const Gallery = (props) => {
   const appContext = useAppContext();
   const { isAdmin, arcSite = 'ajc' } = appContext;
   const isStory = pageType === 'story';
-
+  console.log('contentEls', contentElements);
+  console.log('taxonomy', taxonomy);
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
   const [mobileElementData, setMobileElementData] = useState(null);
@@ -602,6 +603,7 @@ const Gallery = (props) => {
     let galleryContentElements = null;
     let fetchedContentElements = null;
     let featuredContentElements = null;
+    console.log('initlizing', contentElements);
     if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements(contentElements);
     if (leafContentElements.length > 0) {
       galleryContentElements = leafContentElements;
@@ -612,6 +614,8 @@ const Gallery = (props) => {
     } else if (!relevantGalleryData) {
       return null;
     }
+
+    console.log('relevannt gallery data', relevantGalleryData);
 
     if (relevantGalleryData && !galleryContentElements) galleryContentElements = relevantGalleryData.content_elements;
 
