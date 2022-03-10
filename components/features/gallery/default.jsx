@@ -125,6 +125,7 @@ const Gallery = (props) => {
 
   let finalPromoItemTopics = [];
   let finalTaxonomyTopics = [];
+  const finalTaxonomyTags = [];
 
   const { taxonomy: fetchedTaxonomy = {}, promo_items: fetchedPromoItems = {} } = fetchedGalleryData || {};
   const { taxonomy: featuredTaxonomy = {}, promo_items: featuredPromoItems = {} } = featuredGalleryData || {};
@@ -146,10 +147,11 @@ const Gallery = (props) => {
   }
 
   if (finalTaxonomyTopics.length) {
-    finalTaxonomyTopics = finalTaxonomyTopics.map(tag => (tag && tag.name ? tag.name : tag.text));
+    finalTaxonomyTopics.forEach(tag => (tag?.name ? finalTaxonomyTags.push(tag.name)
+      : tag?.text && finalTaxonomyTags.push(tag.text)));
   }
 
-  const galleryTopics = [...new Set([...finalTaxonomyTopics, ...finalPromoItemTopics])];
+  const galleryTopics = [...new Set([...finalTaxonomyTags, ...finalPromoItemTopics])];
 
   // push headline for home/section galleries
   if (!galHeadline && !headline && !isContentDataHeadlineFilled && fetchedHeadline) {
