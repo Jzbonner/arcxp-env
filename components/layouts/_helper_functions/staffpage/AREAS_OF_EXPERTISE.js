@@ -91,26 +91,26 @@ export default () => ({
         tag: 'community-contributor',
         id: 17,
       },
-      {
-        name: 'Alpharetta',
-        tag: 'alpharetta',
-        id: 18,
-      },
-      {
-        name: 'Dunwoody',
-        tag: 'dunwoody',
-        id: 19,
-      },
-      {
-        name: 'Roswell',
-        tag: 'roswell',
-        id: 20,
-      },
-      {
-        name: 'Sandy Springs',
-        tag: 'sandy-springs',
-        id: 21,
-      },
+      // {
+      //   name: 'Alpharetta',
+      //   tag: 'alpharetta',
+      //   id: 18,
+      // },
+      // {
+      //   name: 'Dunwoody',
+      //   tag: 'dunwoody',
+      //   id: 19,
+      // },
+      // {
+      //   name: 'Roswell',
+      //   tag: 'roswell',
+      //   id: 20,
+      // },
+      // {
+      //   name: 'Sandy Springs',
+      //   tag: 'sandy-springs',
+      //   id: 21,
+      // },
     ],
   },
   'dayton-daily-news': {
