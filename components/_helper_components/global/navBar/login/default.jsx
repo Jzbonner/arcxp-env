@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import fetchEnv from '../../utils/environment';
@@ -25,6 +26,21 @@ const Login = ({
   if (!isEnabled || omit) {
     return null;
   }
+
+  const LoggedOutContent = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'LoggedOutMenu',
+    },
+  });
+
+  const LoggedInContent = useContent({
+    source: 'site-api',
+    query: {
+      hierarchy: 'LoggedInMenu',
+    },
+  });
+
 
   let connextSite = cdnSite;
   if (arcSite === 'dayton') {
@@ -90,7 +106,8 @@ const Login = ({
   return (
     <div className={`${isSidebar ? 'c-login-bmenu' : `c-login ${isSticky ? 'isSticky' : ''}`} ${connextSite}`}>
       {(userStateRef.current === 'logged-in'
-      || userStateRef.current === 'authenticated') && (
+      || userStateRef.current === 'authenticated'
+      || userStateRef.current === 'Subscribed') && (
         <IsAuthMenu
           isMobile={isMobile}
           isFlyout={isFlyout}
@@ -100,6 +117,7 @@ const Login = ({
           custRegId={CustomerRegistrationId}
           isSidebar={isSidebar}
           darkMode={darkMode}
+          siteContent={LoggedInContent}
         />
       )}
       {userStateRef.current === 'logged-out' && (
@@ -111,6 +129,7 @@ const Login = ({
           arcSite={arcSite}
           isSidebar={isSidebar}
           darkMode={darkMode}
+          siteContent={LoggedOutContent}
         />
       )}
     </div>
