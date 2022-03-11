@@ -563,9 +563,8 @@ article .c-section a.link {
 }
 
 .c-articleContent i {
-  display: inline-block;
-  transform: skewX(347deg);
--webkit-transform: skewX(347deg);
+  font-family: Helvetica;
+  font-style: oblique;
 }
 
 @include amp-exclude {
