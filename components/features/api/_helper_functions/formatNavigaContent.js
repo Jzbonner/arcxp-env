@@ -91,7 +91,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
     const [{ url: inlineVideoURL }] = streams || {};
     const { credits: promoImageCredits = {}, url: promoImageUrl } = promoImage || {};
     const imagePath = thumbor.setImagePath(encodeSrc(promoImageUrl));
-    const resizedUrl = imagePath.resize(1200, 630);
+    const resizedUrl = imagePath.resize(1000, 600);
 
     return `<embed type="raw">
               <div>
@@ -116,7 +116,7 @@ export const formatNavigaContent = (siteID, contentElements) => contentElements.
       url = '', caption: imageCaption = '', credits: mediaCredits = {}, vanity_credits: vanityCredits = {},
     } = el || {};
     const imagePath = thumbor.setImagePath(encodeSrc(url));
-    const resizedUrl = imagePath.resize(1200, 630);
+    const resizedUrl = imagePath.resize(1000, 600);
 
     return `
       <embed type="raw">
