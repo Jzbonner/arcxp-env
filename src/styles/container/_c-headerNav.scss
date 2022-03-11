@@ -90,6 +90,7 @@
       display: flex;
       width: 100%;
       order: 2;
+      position: relative;
 
       @include breakpoint(tablet) {
         order: 1;
@@ -163,6 +164,11 @@
       justify-content: center;
       align-items: center;
       min-height: 29px;
+      margin-right: 35px;
+
+      @include breakpoint(tablet) {
+        margin-right: 92.5px;
+      }
 
       &.ajc {
 
@@ -220,7 +226,7 @@
       .isSticky {
         padding: 0;
 
-        img {
+        svg {
           height: 27px;
           width: 27px;
         }
@@ -725,16 +731,21 @@
     .c-login {
       display: flex;
       align-items: center;
+      position: absolute;
+      right: 0;
+      top: 0;
 
       :first-child {
         display: flex;
       }
 
-      img {
+      svg {
         height: 26px;
+        width: 26px;
 
         @include breakpoint(desktop-sm) {
           height: 36px;
+          width: 36px;
         }
       }
 
@@ -745,6 +756,7 @@
       }
 
       &.isSticky {
+        position: static;
 
         .subNav {
           top: 31px;
@@ -779,6 +791,7 @@
 
       @include breakpoint(tablet) {
         display: flex;
+        top: 10%;
 
         a {
           color: #212126;
@@ -821,6 +834,10 @@
             top: 54px;
           }
         }
+      }
+
+      @include breakpoint(desktop-sm) {
+        top: 15%;
       }
 
       .btn-profile {
@@ -1176,9 +1193,10 @@
 
       .login-menu {
 
-        img {
+        svg {
           @include between-breakpoints(tablet, desktop-sm) {
             height: 26px;
+            width: 26px;
           }
         }
       }
@@ -1764,7 +1782,7 @@
       display: block !important; /* stylelint-disable-line declaration-no-important */
       order: -1;
 
-      img {
+      svg {
         width: 44px;
         height: 43px;
       }
