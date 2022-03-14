@@ -1231,8 +1231,7 @@
 
     svg {
       @include between-breakpoints(tablet, desktop-sm) {
-        width: 19px;
-        transform: scale(.7);
+        width: 14px;
       }
     }
   }
