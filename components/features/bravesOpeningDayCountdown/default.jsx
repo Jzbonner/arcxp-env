@@ -13,7 +13,7 @@ export const BravesOpeningDayCountdown = ({ tags = [], storyPage = false }) => {
   const [display, setDisplay] = useState(true);
   const [displayAd, setDisplayAd] = useState(false);
 
-  const openingDay = new Date('2022-04-07 19:20:00'); // per AS3-52
+  const openingDay = new Date('2022-04-07 19:20:00-04:00'); // per AS3-52
   const countDownTime = openingDay.getTime();
   const now = new Date();
 
