@@ -55,4 +55,10 @@
       border-right: none;
     }
   }
+
+  b {
+    @include text-styles(.75rem, 1.33, "Gordita-Bold");
+  
+    font-weight: 400;
+  }
 }
