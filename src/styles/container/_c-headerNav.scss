@@ -1227,10 +1227,9 @@
 
     @include between-breakpoints(tablet, desktop-sm) {
       min-width: 14px;
-      height: 14px;
     }
 
-    img {
+    svg {
       @include between-breakpoints(tablet, desktop-sm) {
         width: 14px;
       }
