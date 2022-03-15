@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import Search from '../search/default';
-import Hamburger from '../../../../../resources/icons/global/hamburger.svg';
-import HamburgerDark from '../../../../../resources/icons/global/hamburgerDark.svg';
+import Hamburger from '../../../../../resources/icons/global/hamburger';
+import HamburgerDark from '../../../../../resources/icons/global/hamburgerDark';
 
 const RedesignNavLinks = ({
   sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, darkMode, omitHeaderItems,
@@ -60,7 +60,7 @@ const RedesignNavLinks = ({
     <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       { !omitHeaderItems
       && <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
-        <img src={darkMode ? HamburgerDark : Hamburger} alt='Hamburger icon'></img>
+       {darkMode ? <HamburgerDark/> : <Hamburger/>}
       </div>
       }
       {logoPath && siteName && <div className={`sticky-logo-homepage ${siteName}`}>
