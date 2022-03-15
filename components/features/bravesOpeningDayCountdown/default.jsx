@@ -13,11 +13,11 @@ export const BravesOpeningDayCountdown = ({ tags = [], storyPage = false }) => {
   const [display, setDisplay] = useState(true);
   const [displayAd, setDisplayAd] = useState(false);
 
-  // 4/7/2022 4:30 pm. the time was a guess.
-  const countDownTime = 1649363400000;
+  const openingDay = new Date('2022-04-07 19:20:00'); // per AS3-52
+  const countDownTime = openingDay.getTime();
   const now = new Date();
 
-  if (Math.round((countDownTime - now) / 1000) < 0) {
+  if (Math.round((countDownTime - now) / 1000) <= 0) {
     return null;
   }
 
