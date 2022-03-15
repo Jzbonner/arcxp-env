@@ -20,7 +20,7 @@ const BlogAuthor = ({ subtype, authorData, ampPage }) => {
       if (author._id) {
         return (
         <a
-          href={`/staff/${author._id}/`}
+          href={`/staff/${author._id}/` }
           rel='author'
         >
           <div className="content-profileImage">
