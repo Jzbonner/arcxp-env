@@ -726,8 +726,8 @@ const Gallery = (props) => {
         </div>
       ) : null}
       <div ref={galleryEl} className={`gallery-wrapper ${!isEmbed && isMobile && !isStickyVisible ? 'mobile-display' : ''}`} >
-        {(!isMobile || !isEmbed) && galHeadline && isStory ? (
-          <div className="gallery-headline">
+        {(!isMobile && galHeadline && isStory && !isEmbed) ? (
+          <div className={`gallery-headline ${isEmbed ? 'hide' : ''}`}>
             <a href={canonicalUrl || null}>{galHeadline}</a>
           </div>
         ) : null}
@@ -761,7 +761,7 @@ const Gallery = (props) => {
   const galleryHeadlineAdOutput = () => (
     <>
       {(isMobile || !isStory) && galHeadline ? (
-        <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}>
+        <div className={`gallery-headline ${isMobile ? '' : 'with-ad'} ${isEmbed ? 'hide' : ''}`}>
           <a href={canonicalUrl || null}>{galHeadline}</a>
         </div>
       ) : null}
