@@ -22,9 +22,14 @@
       max-height: none;
       max-width: 90vw;
     }
+
     @include breakpoint(tablet) {
       height: 100%;
-      width: 100%;
+      width: 100vw;
+    }
+
+    @include breakpoint(desktop-sm) {
+      width: 487px;
     }
 
     .gallery-headline {
@@ -36,6 +41,7 @@
 
       .gallery-credit {
         text-align: right;
+
         @include text-styles(.75rem, normal, "Gordita");
   
         @include breakpoint(tablet) {
@@ -53,12 +59,12 @@
         @include breakpoint(tablet) {
           font-size: 1rem;
         }
-        @include breakpoint(desktop-sm){
+
+        @include breakpoint(desktop-sm) {
           font-size: .75rem;
         }
       }
     }
-
 
     .gallery-caption-icons-box {
       position: relative;
@@ -70,7 +76,7 @@
       @include between-breakpoints(mobile, tablet) {
         height: 50px;
         top: -27px;
-        margin: 0.688rem auto 0;
+        margin: .688rem auto 0;
       }
 
       .gallery-count {
@@ -85,7 +91,7 @@
         text-size-adjust: 100%;
         text-rendering: optimizeLegibility;
 
-        @include between-breakpoints(mobile, tablet){
+        @include between-breakpoints(mobile, tablet) {
           @include text-styles(.8rem, normal, "Gordita-Medium");
         }
 
@@ -125,12 +131,17 @@
             top: 10px;
           }
 
+          @include breakpoint(tablet) {
+            top: 5px;
+          }
+
           .img {
             @include between-breakpoints(mobile, tablet) {
               height: 15px;
             }
           }
         }
+
         .gallery-count-prev {
           @include between-breakpoints(mobile, tablet) {
             left: 10px;
@@ -149,6 +160,18 @@
             position: relative;
             top: -41px;
           }
+
+          span {
+            letter-spacing: -.16px;
+
+            @include breakpoint(tablet) {
+              letter-spacing: -.2px;
+            }
+
+            @include breakpoint(desktop-sm) {
+              letter-spacing: -.16px;
+            }
+          }
         }
       }
     }
@@ -165,23 +188,12 @@
 
       .gallery-image {
         background: none;
-/*         width: 350px;
-        height: 227px; */
-
-        @include breakpoint(tablet) {
-/*           width: 730px;
-          height: 474px; */
-        }
 
         .is-focused {
           opacity: 1;
         }
       }
     }
-  }
-
-  @include breakpoint(tablet) {
-
   }
 
   @include breakpoint(desktop-sm) {

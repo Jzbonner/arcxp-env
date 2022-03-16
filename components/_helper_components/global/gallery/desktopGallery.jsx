@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 const DesktopGallery = (props) => {
   const { data, translateX, handlers } = props;
 
-  console.log('desktopGallery', data);
-
   useEffect(() => {
     if (typeof translateX !== 'number') {
       // fallback for initial load when the passed-in translateX hasn't yet been calculated

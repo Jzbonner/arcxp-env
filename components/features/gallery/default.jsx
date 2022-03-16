@@ -117,8 +117,6 @@ const Gallery = (props) => {
 
   const [, forceUpdate] = useReducer(x => x + 1, 0);
 
-  console.log('isEMBED', isEmbed);
-
   const featuredGalleryData = Object.keys(promoItems).length > 0 ? promoItems : null;
   const { headlines = {} } = featuredGalleryData || contentElements || fetchedGalleryData;
   let headline = headlines.basic || leafHeadline ? headlines.basic || leafHeadline : null;
@@ -165,8 +163,6 @@ const Gallery = (props) => {
     setContentDataHeadlineState(true);
   }
 
-  console.log('element data state', elementData);
-
   if (!maxIndex) {
     if (elementData && elementData.length > 1) {
       setMaxIndex(elementData.length - 1);
@@ -178,22 +174,11 @@ const Gallery = (props) => {
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
     if (isMobile && !isEmbed) return;
-    console.log('isEmbed', isEmbed);
     let translateAmount;
     const focusElement = isAdVisible ? PG01Ref.current : document.getElementById(`gallery-item-${currentIndex}`) || null;
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
-    console.log('galleryFullWidth', galleryFullWidth);
-    console.log('gallery-item', focusElement.offsetWidth);
     if (galleryEl.current && focusElement) {
-      // fixes initializing translate bug...?
-
-      if (isEmbed) {
-        translateAmount = parseInt(galleryFullWidth, 10) / 2 - parseInt(focusElement.offsetWidth, 10) / 2 - parseInt(focusElement.offsetLeft, 10);
-      } else {
-        translateAmount = parseInt(galleryFullWidth, 10) / 2 - parseInt(focusElement.offsetWidth, 10) / 2 - parseInt(focusElement.offsetLeft, 10);
-      }
-      
-      console.log('translate amount', translateAmount);
+      translateAmount = parseInt(galleryFullWidth, 10) / 2 - parseInt(focusElement.offsetWidth, 10) / 2 - parseInt(focusElement.offsetLeft, 10);
       setTranslateX(translateAmount);
       // The gallery component needs to re-render every time this function is called.
       forceUpdate();
@@ -234,7 +219,6 @@ const Gallery = (props) => {
   };
 
   const changeIndex = (action, maxNumber, isPhoto = true) => {
-    console.log('changing index');
     const targetIndex = isPhoto ? 0 : 1;
     if (!hasOpened && (currentIndex === targetIndex || currentIndex === maxIndex)) dispatchGalleryOpenEvent();
 
@@ -423,8 +407,6 @@ const Gallery = (props) => {
   const handlePrevious = (arr, returnOnly = false) => {
     const newArr = [...arr];
     newArr.unshift(newArr.pop());
-    console.log('handles PRev');
-
     if (returnOnly) {
       return newArr;
     }
@@ -624,16 +606,10 @@ const Gallery = (props) => {
     let galleryContentElements = null;
     let fetchedContentElements = null;
     let featuredContentElements = null;
-    // console.log('initlizing', contentElements);
-    // console.log('leafContentEls > 0', leafContentElements.length > 0);
-    // console.log('contentElements > 0', contentElements.length > 0);
-    // console.log('contentElements length', contentElements.length);
-
 
     if ((contentElements.length > 0 || contentElements?.content_elements.length > 0) && leafContentElements.length <= 0) {
       relevantGalleryData = handlePropContentElements(contentElements);
-      // console.log('relevantGalleryData', relevantGalleryData);
-    } 
+    }
 
     if (leafContentElements.length > 0) {
       galleryContentElements = leafContentElements;
@@ -644,8 +620,6 @@ const Gallery = (props) => {
     } else if (!relevantGalleryData) {
       return null;
     }
-
-    console.log('relevannt gallery data', relevantGalleryData);
 
     if (relevantGalleryData && !galleryContentElements) galleryContentElements = relevantGalleryData.content_elements;
 
@@ -714,10 +688,6 @@ const Gallery = (props) => {
     }
   }
 
-  console.log('mobile element data', mobileElementData);
-  console.log('isMobile', isMobile);
-  console.log('current action', currentAction);
-
   const galleryOutput = () => (
     <div className={`${!isStory && !isEmbed ? 'c-gallery-homeSection' : ''} ${isEmbed ? 'c-gallery-embed' : ''}`}>
       {!isMobile ? (
@@ -734,6 +704,7 @@ const Gallery = (props) => {
         {isStickyVisible && !isEmbed ? <MobileGallery objectRef={galleryMobileEl} data={mobileElemData} states={mobileState} funcs={mobileFuncs} /> : null}
         {!isMobile || isEmbed ? <DesktopGallery data={elementData} translateX={translateX} handlers={handlers}/> : null}
         <div onClick={handleStickyOpen} className={`gallery-caption-icons-box ${!isEmbed && !isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
+        {!isEmbed && <div className="gallery-overlay hidden-large">{isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null}</div>}
           <div className="gallery-count view-gallery">
             <div className={`gallery-count-prev ${!isEmbed ? 'hidden-small hidden-medium' : ''}`} onClick={() => changeIndex(actions.PREV, null, false)}>
               <img src={leftArrow} alt="Left arrow"/>
@@ -765,7 +736,7 @@ const Gallery = (props) => {
           <a href={canonicalUrl || null}>{galHeadline}</a>
         </div>
       ) : null}
-      {!isStory && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
+      {!isStory && !isMobile && !isEmbed ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
     </>
   );
 

@@ -19,15 +19,9 @@ const GalleryItem = ({
   let affiliationCredit = affiliation[0] && affiliation[0].name ? affiliation[0].name : null;
 
   if (affiliationCredit && !affiliationCredit.includes('Credit:')) affiliationCredit = `Credit: ${affiliationCredit}`;
-  /* 
-    const finalWidth = isEmbed ? 405 : 720;
-    const finalHeight = isEmbed ? 263 : 480; */
 
   const finalWidth = getFinalDimensionsForGalleryImages(isEmbed, true);
   const finalHeight = getFinalDimensionsForGalleryImages(isEmbed, false);
-
-  console.log('final height', finalHeight);
-
   const imageProps = {
     width: finalWidth,
     height: finalHeight,
@@ -56,23 +50,15 @@ const GalleryItem = ({
     if (isEmbed && typeof window !== 'undefined') {
       if (window.innerWidth > 1023) {
         calculatedWidth = '405px';
-        console.log('its a desktop');
       } else if (window.innerWidth < 1023 && window.innerWidth > 768) {
         calculatedWidth = '730px';
-        console.log('its a tablet');
       }
     }
   }
 
   if (isMobile && isEmbed && typeof window !== 'undefined') {
     calculatedWidth = '390px';
-    console.log('its mobile');
   }
-
-  console.log('embed', isEmbed);
-  // debugger;
-
-  console.log('calculated width', calculatedWidth);
 
   return (
     <div

@@ -14,14 +14,13 @@ const getFinalDimensionsForGalleryImages = (isEmbed, isWidth) => {
       }
     }
 
-    // is isWidth is falsy, then we'll calculate height.
+    // is isWidth is falsy, then we'll calculate height..
 
     if (window.innerWidth > 1023) {
       return 263;
     }
 
     if (window.innerWidth < 1023 && window.innerWidth > 768) {
-      console.log('this is height for tablet images');
       return 474;
     }
 
