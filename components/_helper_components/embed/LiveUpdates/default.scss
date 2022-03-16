@@ -22,6 +22,10 @@
     position: relative;
     width: 100%;
 
+    @include between-breakpoints(mobile-sm, tablet) {
+      left: -20px;
+    }
+
     .c-image-feature {
       margin: 0;
       position: relative;
@@ -34,7 +38,11 @@
       }
 
       .c-image-component {
-        margin-bottom: 0;
+        margin: 0;
+
+        @include between-breakpoints(mobile, tablet) {
+          width: 100vw;
+        }
       }
 
       picture {
@@ -51,16 +59,42 @@
       }
     }
 
-    .c-page-title,
-    .c-liveUpdatesStatus {
+    .c-liveUpdatesHeaderContainer {
       position: absolute;
       z-index: 3;
-      top: 50%;
+      top: 52%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 95%;
       max-width: 95%;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @include between-breakpoints(mobile-sm, tablet) {
+        left: 55%;
+      }
+
+      .c-page-title {
+        margin: 0;
+      }
+
+      .c-liveUpdatesTitle {
+        margin-bottom: 9px;
+
+        @include breakpoint(tablet) {
+          margin-bottom: 10px;
+        }
+
+        @include breakpoint(desktop-sm) {
+          margin-bottom: 13px;
+        }
+
+        @include breakpoint(desktop-lg) {
+          margin-bottom: 26px;
+        }
+      }
     }
 
     @include breakpoint(desktop-sm) {
@@ -70,12 +104,13 @@
       }
     }
 
-    .c-page-title .c-title-content {
+    .c-liveUpdatesHeaderContainer .c-title-content {
       border: none;
       color: #fff5ec;
       display: block;
       text-align: center;
       letter-spacing: -.31px;
+      padding-bottom: 0;
 
       @include text-styles(1.5625rem, 1.1, "Lora-Bold");
 
@@ -101,8 +136,9 @@
     }
 
     .c-liveUpdatesStatus {
-      top: 80%;
+      position: relative;
       width: auto;
+      color: #fff5ec;
 
       @include text-styles(.75rem, 1, "Gordita-Bold");
 
@@ -306,6 +342,22 @@
       @include between-breakpoints(mobile, mobile-sm) {
         padding-left: 10px;
         width: calc(100% - 54px);
+      }
+
+      @include between-breakpoints(mobile, tablet) {
+
+        div[data-oembed-type="youtube"],
+        div[data-oembed-type="facebook-post"],
+        div[data-oembed-type="twitter"] {
+
+          iframe {
+            width: 100% !important;
+          }
+        }
+
+        div[data-oembed-type="facebook-post"] .fb-post > span {
+          width: 100% !important;
+        }
       }
 
       @include breakpoint(tablet) {
@@ -650,11 +702,11 @@
     }
 
     @keyframes newUpdatesButtonAnimantion {
-      
+
       from {
         bottom: -50px;
       }
-    
+
       to {
         bottom: 20px;
       }
@@ -674,7 +726,7 @@
       box-shadow: 4px 4px 6px 0 rgba(229, 229, 229, .6);
       border: solid .9px #ececec;
       background-color: #9b9b9b;
-      z-index: 10000;
+      z-index: 1000;
       animation: 1s ease-in 0s 1 newUpdatesButtonAnimantion;
       cursor: pointer;
       font-family: "Gordita";

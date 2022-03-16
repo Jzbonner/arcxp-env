@@ -49,7 +49,10 @@ class ScriptWrapper extends PureComponent {
 
   render() {
     if (this.props.render) return this.props.render();
-    return <div dangerouslySetInnerHTML={{ __html: this.props.html }} />;
+    let html = this.props.html || '';
+    // strip out the original script from the rendered HTML, since it will be added via componentDidMount above
+    html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+    return <div dangerouslySetInnerHTML={{ __html: html }} />;
   }
 }
 

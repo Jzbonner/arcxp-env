@@ -40,7 +40,8 @@ export default (site = 'ajc', contentElements) => {
             storyData.push(data);
           })
           .catch((error) => {
-            console.log('AXIOS CATCH - getStoryData => ', error);
+            console.error('AXIOS CATCH - getStoryData => ', error);
+            return error;
           });
         promiseArray.push(promise);
       }

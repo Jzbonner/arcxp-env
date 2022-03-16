@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 
-const { weatherAlertsAPIkey } = require('../../environment/index');
+import { WEATHER_ALERTS_KEY } from 'fusion:environment';
 
 const params = {
   endpoint: 'text',
@@ -11,7 +11,7 @@ const params = {
 const fetch = (query) => {
   const { endpoint, lookup } = query;
 
-  if (!endpoint || !lookup || !weatherAlertsAPIkey) {
+  if (!endpoint || !lookup || !WEATHER_ALERTS_KEY) {
     return null;
   }
 
@@ -21,12 +21,13 @@ const fetch = (query) => {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'X-Api-Key': `${weatherAlertsAPIkey}`,
+        'X-Api-Key': `${WEATHER_ALERTS_KEY}`,
       },
     })
     .then(({ data }) => data)
     .catch((error) => {
-      console.log('AXIOS CATCH - weather => ', error);
+      console.error('AXIOS CATCH - weather => ', error);
+      return error;
     });
 };
 

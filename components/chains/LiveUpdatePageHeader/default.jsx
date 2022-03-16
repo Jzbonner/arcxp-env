@@ -8,6 +8,8 @@ import './default.scss';
 const LiveUpdatePageHeader = ({ children }) => {
   const { pageIsLive } = getContentMeta();
   let statusContent = '';
+  const pageTitle = children[0];
+  const backgroundImage = children[1];
   if (pageIsLive) {
     const appContext = useAppContext();
     const { globalContent = [] } = appContext;
@@ -18,12 +20,19 @@ const LiveUpdatePageHeader = ({ children }) => {
         display_date: displayDate,
         first_publish_date: firstPublishDate,
       } = globalContent[0] || {};
-      statusContent = displayDate ? formatTime(displayDate) : formatTime(firstPublishDate);
+      const cleanDisplayDate = new Date(displayDate);
+      const cleanFirstPublishDate = new Date(firstPublishDate);
+      statusContent = displayDate ? formatTime(cleanDisplayDate) : formatTime(cleanFirstPublishDate);
     }
   }
   return <div className={`c-LiveUpdatePageHeader ${!pageIsLive ? 'titleWithoutLiveStatus' : ''}`}>
-    {children}
-    {pageIsLive && <div className='c-liveUpdatesStatus'>{statusContent}</div>}
+    {backgroundImage}
+    <div className='c-liveUpdatesHeaderContainer'>
+      <div className='c-liveUpdatesTitle'>
+        {pageTitle}
+      </div>
+      <span className='c-liveUpdatesStatus'>{statusContent}</span>
+    </div>
   </div>;
 };
 

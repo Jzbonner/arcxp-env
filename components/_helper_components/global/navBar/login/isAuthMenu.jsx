@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
-import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../../utils/environment';
 import RenderMenuLinks from './_helper_functions/renderMenuLinks';
 import handleSiteName from '../../../../layouts/_helper_functions/handleSiteName';
-import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
-import userIconDark from '../../../../../resources/icons/login/user-icon-dark.svg';
+import UserIconWhite from '../../../../../resources/icons/login/UserIconWhite.jsx';
+import UserIconDark from '../../../../../resources/icons/login/UserIconDark.jsx';
 
 const isAuthMenu = ({
-  isMobile, isFlyout, showUserMenu, setShowUserMenu, userStateRef, custRegId, isSidebar, darkMode,
+  isMobile, isFlyout, showUserMenu, setShowUserMenu, userStateRef, custRegId, isSidebar, darkMode, siteContent,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -18,12 +17,7 @@ const isAuthMenu = ({
   const { connext, cdnSite } = getProperties(arcSite);
   const { siteCode, pubParam } = connext[currentEnv] || {};
 
-  let source;
-  if (isFlyout || darkMode) {
-    source = userIconWhite;
-  } else {
-    source = userIconDark;
-  }
+  const source = (isFlyout || darkMode) ? <UserIconWhite /> : <UserIconDark />;
 
   let connextSite = cdnSite;
   if (arcSite === 'dayton') {
@@ -31,14 +25,6 @@ const isAuthMenu = ({
   } else if (arcSite === 'dayton-daily-news' || arcSite === 'springfield-news-sun') {
     connextSite = connextSite.replace(/-/g, '');
   }
-
-  const siteContent = useContent({
-    source: 'site-api',
-    query: {
-      hierarchy: 'LoggedInMenu',
-    },
-  });
-
   const { children: links = [] } = siteContent || [];
 
   const accountSubdomain = `//${currentEnv !== 'prod' ? 'test-' : ''}myaccount`;
@@ -75,7 +61,7 @@ const isAuthMenu = ({
   if (isSidebar) {
     return (
     <div onClick={() => setShowUserMenu(!showUserMenu)}>
-      <img src={userIconDark} alt='Logged in user icon'/>
+        <UserIconDark />
         <div data-mg2-action="logout" className='login-text-bmenu'>Log Out</div>
           <div className='subNav'>
             <ul className={`subNav-flyout itemCount-${links.length + (isNotAuthenticated ? 3 : 2)} logged-out`}>
@@ -90,13 +76,13 @@ const isAuthMenu = ({
   return (
     <>
       <div onClick={() => setShowUserMenu(true)}>
-        <img src={source} alt="User icon"/>
+       {source}
         <div className='login-text'>Log Out</div>
       </div>
         <div className={`section login-menu ${!isMobile && showUserMenu ? 'isVisible' : ''}`}>
           <div className={'section-item'}>
             <a href={profileLink}>
-              <img src={source} alt='User icon' />
+            {source}
             </a>
             <div className="login-text">Log Out</div>
           </div>
@@ -134,6 +120,7 @@ isAuthMenu.propTypes = {
   custRegId: PropTypes.string,
   isSidebar: PropTypes.bool,
   darkMode: PropTypes.bool,
+  siteContent: PropTypes.object,
 };
 
 export default isAuthMenu;

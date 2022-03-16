@@ -36,7 +36,8 @@ const fetch = async ({
     )
     .then(({ data }) => data.map((id, i) => ({ id, order: i })))
     .catch((error) => {
-      console.log('AXIOS CATCH - get Sophi story IDs => ', error?.response?.data?.message);
+      console.error('AXIOS CATCH - get Sophi story IDs => ', error?.response?.data?.message);
+      return error;
     });
 
   const storyIdsStr = storyIds.map(id => id.id).join(',');
@@ -53,7 +54,8 @@ const fetch = async ({
     .then(stories => stories.sort((a, b) => a.order - b.order))
     .then(stories => stories.slice(from - 1, from - 1 + size))
     .catch((error) => {
-      console.log('AXIOS CATCH - get Sophi stories => ', error?.response?.data?.message);
+      console.error('AXIOS CATCH - get Sophi stories => ', error?.response?.data?.message);
+      return error;
     });
 };
 

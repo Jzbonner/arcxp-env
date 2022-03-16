@@ -1,10 +1,12 @@
 import getProperties from 'fusion:properties';
-import { useFusionContext } from 'fusion:context';
+import { useFusionContext, useAppContext } from 'fusion:context';
 import getContentMeta from '../../siteMeta/_helper_functions/getContentMeta';
 import checkTags from '../../../../layouts/_helper_functions/checkTags';
 
 const gamAdTagBuilder = (pageTax = {}, videoTax = {}, videoId, currentEnv, videoPageUrl) => {
   const fusionContext = useFusionContext();
+  const appContext = useAppContext();
+  const { metaValue } = appContext;
   const { arcSite } = fusionContext;
   const { dfp_id: dfpId, adsPath, video } = getProperties(arcSite);
   const { primary_section: primarySection, tags: pageTags } = pageTax || {};
@@ -38,6 +40,7 @@ const gamAdTagBuilder = (pageTax = {}, videoTax = {}, videoId, currentEnv, video
       }
     });
   }
+  const pagebuilderTopics = metaValue('topics') || [];
   const contentMeta = getContentMeta();
   const {
     environ = '',
@@ -47,7 +50,7 @@ const gamAdTagBuilder = (pageTax = {}, videoTax = {}, videoId, currentEnv, video
   const gamUrl = 'https://securepubads.g.doubleclick.net/gampad/ads';
   const size = 'sz=400x300';
   const pageUuid = contentId || videoId;
-  const kw = videoTopics.concat(pageTopics);
+  const kw = pagebuilderTopics.length ? videoTopics.concat(pageTopics, pagebuilderTopics.trim().replace(/"/g, '').replace(/\s*,\s*/ig, ',').split(',')) : videoTopics.concat(pageTopics);
   let descriptionUrl = `${typeof window !== 'undefined' ? `https://${window.location.hostname}` : ''}${videoPageUrl}`;
   descriptionUrl = encodeURIComponent(descriptionUrl);
 

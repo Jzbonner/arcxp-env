@@ -1,29 +1,16 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useContent } from 'fusion:content';
 import RenderMenuLinks from './_helper_functions/renderMenuLinks';
 import triggerGtmEvent from '../../siteMetrics/_helper_functions/triggerGtmEvent';
-import userIcon from '../../../../../resources/icons/login/user-icon.svg';
-import userIconWhite from '../../../../../resources/icons/login/user-icon-white.svg';
+import UserIcon from '../../../../../resources/icons/login/UserIcon.jsx';
+import UserIconWhite from '../../../../../resources/icons/login/UserIconWhite.jsx';
 
 const NotAuthMenu = ({
-  isMobile, isFlyout, showUserMenu, setShowUserMenu, arcSite, isSidebar, darkMode,
+  isMobile, isFlyout, showUserMenu, setShowUserMenu, arcSite, isSidebar, darkMode, siteContent,
 }) => {
   const loginEl = useRef(null);
 
-  let source;
-  if (isFlyout || darkMode) {
-    source = userIconWhite;
-  } else {
-    source = userIcon;
-  }
-
-  const siteContent = useContent({
-    source: 'site-api',
-    query: {
-      hierarchy: 'LoggedOutMenu',
-    },
-  });
+  const source = (isFlyout || darkMode) ? <UserIconWhite /> : <UserIcon />;
 
   const { children: links = [] } = siteContent || [];
 
@@ -73,7 +60,7 @@ const NotAuthMenu = ({
   if (isSidebar) {
     return (
       <div onClick={() => setShowUserMenu(!showUserMenu)}>
-        <img src={userIconWhite} alt='Logged out user icon'/>
+        <UserIconWhite />
         <div data-mg2-action="login" className='login-text-bmenu'>Log In</div>
         <div className="subNav">
           <ul className={`subNav-flyout itemCount-${links.length} logged-in`}>{RenderMenuLinks(links)}</ul>
@@ -85,13 +72,13 @@ const NotAuthMenu = ({
   return (
     <>
       <div onClick={() => setShowUserMenu(!showUserMenu)} data-mg2-action={isMobile ? 'login' : ''}>
-        <img src={source} alt='User icon' />
+          {source}
         <div className='login-text'>Log In</div>
       </div>
       <div ref={loginEl} className={`section login-menu ${!isMobile && showUserMenu ? '' : ''}`}>
         <div className={'section-item'}>
           <a>
-            <img src={userIcon} alt='User icon'/>
+            <UserIcon />
             <div className='login-text'>Log In</div>
           </a>
         </div>
@@ -115,6 +102,7 @@ NotAuthMenu.propTypes = {
   arcSite: PropTypes.string,
   isSidebar: PropTypes.bool,
   darkMode: PropTypes.bool,
+  siteContent: PropTypes.object,
 };
 
 export default NotAuthMenu;

@@ -18,7 +18,7 @@ const SectionOutput = ({
   const { pageIsLive, paywallStatus } = getContentMeta();
   const isMeteredStory = paywallStatus === 'premium';
   // if the `live` meta exists, we set the default class to `not-live`
-  let liveIndicatorClass = pageIsLive ? 'not-live' : '';
+  let liveIndicatorClass = pageIsLive ? 'is-live' : 'not-live';
   // then, if the `live` meta exists and is actually live, we re-set it to `is-live`
   if (pageIsLive === 'true' || pageIsLive === 'yes') {
     liveIndicatorClass = 'is-live';
