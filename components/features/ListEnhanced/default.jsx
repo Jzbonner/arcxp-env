@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext, useAppContext } from 'fusion:context';
@@ -28,7 +28,6 @@ const ListEnhanced = ({ customFields = {} }) => {
 
   const storiesPerLoadMoreBtnClick = 10;
   const [storiesCount, setStoryCount] = useState(storiesPerLoadMoreBtnClick);
-  const [data, setData] = useState([]);
   const isStaffBio = globalContentContentSource === 'author-search';
 
   if (isStaffBio) {
@@ -51,8 +50,9 @@ const ListEnhanced = ({ customFields = {} }) => {
     },
   });
 
+  const isCollection = customFieldsQuery?.id?.length === 26 || globalContentQuery?.id?.length === 26;
   const collectionMetaData = useContent({
-    source: 'collection-meta-data',
+    source: isCollection ? 'collection-meta-data' : null,
     query: {
       id: customFieldsQuery?.id || globalContentQuery?.id,
       arcSite,
@@ -62,27 +62,21 @@ const ListEnhanced = ({ customFields = {} }) => {
 
   const totalStories = contentData?.count;
 
-  useEffect(() => {
-    if (isStaffBio) {
-      setData([...data, ...contentData]);
-    } else {
-      setData(contentData);
-    }
-  }, [contentData]);
-
   if (!Array.isArray(contentData)) {
-    if (contentData && Array.isArray(contentData.content_elements)) {
+    if (Array.isArray(contentData?.content_elements)) {
       contentData = contentData.content_elements;
     } else {
       return null;
     }
   }
 
-  const storiesPerSection = Math.min(storiesPerLoadMoreBtnClick, data?.length);
+
+  const storiesPerSection = Math.min(storiesPerLoadMoreBtnClick, contentData?.length);
+
   const collectionTitle = collectionMetaData?.headlines?.basic;
-  const filteredStories = data?.slice(0, storiesCount);
-  const moreStoriesToLoad = (!isStaffBio && !!(data?.length - filteredStories?.length)) || (isStaffBio && totalStories > filteredStories?.length);
-  const sections = Math.ceil(filteredStories?.length / storiesPerSection);
+  const filteredStories = contentData?.slice(0, storiesCount);
+  const moreStoriesToLoad = (!isStaffBio && !!(contentData?.length - filteredStories?.length)) || (isStaffBio && totalStories > filteredStories?.length);
+  const sections = Math.ceil(filteredStories?.length / storiesPerSection) || 0;
 
   let filteredTeases = AddFirstInlineImage(filteredStories, 'list', ['list']);
   filteredTeases = updateImageRefs(filteredTeases);
