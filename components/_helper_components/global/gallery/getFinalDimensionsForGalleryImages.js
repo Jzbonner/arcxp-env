@@ -14,7 +14,7 @@ const getFinalDimensionsForGalleryImages = (isEmbed, isWidth) => {
       }
     }
 
-    // is isWidth is falsy, then we'll calculate height..
+    // if isWidth is falsy, then we'll calculate height..
 
     if (window.innerWidth > 1023) {
       return 263;
