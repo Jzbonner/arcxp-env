@@ -397,7 +397,6 @@ const Gallery = (props) => {
   const handleNext = (arr, returnOnly = false) => {
     const newArr = [...arr];
     newArr.push(newArr.shift());
-    console.log('handle next', handleNext);
     if (returnOnly) {
       return newArr;
     }
