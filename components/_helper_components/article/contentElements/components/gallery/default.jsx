@@ -5,7 +5,7 @@ import Gallery from '../../../../../features/gallery/default';
 const GalleryEmbed = ({ src }) => {
   console.log('src galley', src);
   return (<div className="b-margin-bottom-d40-m20">
-    <Gallery contentElements={src} taxonomy={src?.taxonomy} />
+    <Gallery isEmbed={true} contentElements={src} taxonomy={src?.taxonomy} />
   </div>);
 };
 

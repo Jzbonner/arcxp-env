@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Image from '../image/default';
+import getFinalDimensionsForGalleryImages from './getFinalDimensionsForGalleryImages';
+
 
 const GalleryItem = ({
-  data, func, modalFunc, isMobileGallery = false,
+  data, func, modalFunc, isMobileGallery = false, isEmbed,
 }) => {
   const {
     url, width, height, focal_point: focalPoint, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass, resized_obj: resizedObj,
@@ -17,9 +19,14 @@ const GalleryItem = ({
   let affiliationCredit = affiliation[0] && affiliation[0].name ? affiliation[0].name : null;
 
   if (affiliationCredit && !affiliationCredit.includes('Credit:')) affiliationCredit = `Credit: ${affiliationCredit}`;
+  /* 
+    const finalWidth = isEmbed ? 405 : 720;
+    const finalHeight = isEmbed ? 263 : 480; */
 
-  const finalWidth = 720;
-  const finalHeight = 480;
+  const finalWidth = getFinalDimensionsForGalleryImages(isEmbed, true);
+  const finalHeight = getFinalDimensionsForGalleryImages(isEmbed, false);
+
+  console.log('final height', finalHeight);
 
   const imageProps = {
     width: finalWidth,
@@ -41,11 +48,31 @@ const GalleryItem = ({
     // we go ahead and determine what the width of the vertical images will be based on a scaling of height to final height ratio and then set that as the min-width style of each gallery item, to ensure that positioning & overall gallery width is properly calculated (prior to lazyloading of images)
     calculatedWidth = `${height > width ? Math.floor(width * (finalHeight / height)) : finalWidth}px`;
 
-    if (typeof window !== 'undefined' && window.innerWidth < 950 && calculatedWidth === '720px') {
+    if (!isEmbed && typeof window !== 'undefined' && window.innerWidth < 950 && calculatedWidth === '720px') {
       // 950 is a somewhat arbitrary value but it's based on the amount of fore/aft images visible with a full-width landscape photo centered
       calculatedWidth = '620px';
     }
+
+    if (isEmbed && typeof window !== 'undefined') {
+      if (window.innerWidth > 1023) {
+        calculatedWidth = '405px';
+        console.log('its a desktop');
+      } else if (window.innerWidth < 1023 && window.innerWidth > 768) {
+        calculatedWidth = '730px';
+        console.log('its a tablet');
+      }
+    }
   }
+
+  if (isMobile && isEmbed && typeof window !== 'undefined') {
+    calculatedWidth = '390px';
+    console.log('its mobile');
+  }
+
+  console.log('embed', isEmbed);
+  // debugger;
+
+  console.log('calculated width', calculatedWidth);
 
   return (
     <div
@@ -53,12 +80,12 @@ const GalleryItem = ({
       data-index={index}
       key={url}
       onClick={func}
-      className={`${isStickyVisible ? `gallery-full-item ${isCaptionOn ? lastItemClass : ''}` : 'gallery-image'} ${lastItemClass && isStickyVisible && !isCaptionOn ? 'last-item-height-fix-no-caption' : ''} ${!isStickyVisible && isMobile ? 'mosaic-container' : ''} ${!isMobile ? 'desktop-image' : ''}`}
+      className={`${isStickyVisible && !isEmbed ? `gallery-full-item ${isCaptionOn ? lastItemClass : ''}` : 'gallery-image'} ${!isEmbed && lastItemClass && isStickyVisible && !isCaptionOn ? 'last-item-height-fix-no-caption' : ''} ${!isEmbed && !isStickyVisible && isMobile ? 'mosaic-container' : ''} ${!isMobile ? 'desktop-image' : ''}`}
       style={{ minWidth: calculatedWidth }}
     >
       {url && <Image
         {...imageProps}
-        additionalClasses={`${!isStickyVisible && isMobile ? 'mosaic-image' : ''} ${(isFocused && !isAdVisible) ? 'is-focused' : ''}`}
+        additionalClasses={`${!isEmbed && !isStickyVisible && isMobile ? 'mosaic-image' : ''} ${(isFocused && !isAdVisible) ? 'is-focused' : ''}`}
         onClickRun={modalFunc ? () => modalFunc(url, isModalVisible) : null}
       />}
       {
@@ -99,6 +126,7 @@ GalleryItem.propTypes = {
   lastItemClass: PropTypes.string,
   modalFunc: PropTypes.func,
   isMobileGallery: PropTypes.bool,
+  isEmbed: PropTypes.bool,
 };
 
 export default GalleryItem;

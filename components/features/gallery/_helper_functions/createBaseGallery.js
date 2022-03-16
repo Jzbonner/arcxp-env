@@ -2,7 +2,7 @@ import React from 'react';
 import GalleryItem from '../../../_helper_components/global/gallery/galleryItem.jsx';
 import getAltText from '../../../layouts/_helper_functions/getAltText';
 
-const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {}) => {
+const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {}, isEmbed = false) => {
   const {
     isStickyVisible, isMobile, isCaptionOn, currentIndex, modalVisible,
   } = states;
@@ -73,6 +73,7 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
           data={galleryItem}
           func={functionToPass}
           modalFunc={isFocused ? modal : null}
+          isEmbed={isEmbed}
         />
       );
     });
