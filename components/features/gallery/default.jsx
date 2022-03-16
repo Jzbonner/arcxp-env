@@ -32,8 +32,7 @@ const Gallery = (props) => {
   const appContext = useAppContext();
   const { isAdmin, arcSite = 'ajc' } = appContext;
   const isStory = pageType === 'story';
-  // console.log('contentEls', contentElements);
-  // console.log('taxonomy', taxonomy);
+
   // holds Gallery items
   const [elementData, setElementData] = useState(null);
   const [mobileElementData, setMobileElementData] = useState(null);
