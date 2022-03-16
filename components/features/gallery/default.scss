@@ -68,9 +68,9 @@
         .gallery-count-prev,
         .gallery-count-next {
           position: absolute;
-          top: 0;
           transform: none;
           cursor: pointer;
+          pointer-events: initial;
           border-radius: 15px;
           box-shadow: 4px 4px 6px 0 rgb(229 229 229 / 60%);
           border: solid 1px #ececec;
@@ -83,6 +83,7 @@
             width: 40px;
             height: 41px;
             padding: 0;
+            top: 10px;
           }
 
           .img {
@@ -131,6 +132,10 @@
         @include breakpoint(tablet) {
 /*           width: 730px;
           height: 474px; */
+        }
+
+        .is-focused {
+          opacity: 1;
         }
       }
     }

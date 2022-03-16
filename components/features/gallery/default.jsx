@@ -178,6 +178,7 @@ const Gallery = (props) => {
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
     if (isMobile && !isEmbed) return;
+    console.log('isEmbed', isEmbed);
     let translateAmount;
     const focusElement = isAdVisible ? PG01Ref.current : document.getElementById(`gallery-item-${currentIndex}`) || null;
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
@@ -192,6 +193,7 @@ const Gallery = (props) => {
         translateAmount = parseInt(galleryFullWidth, 10) / 2 - parseInt(focusElement.offsetWidth, 10) / 2 - parseInt(focusElement.offsetLeft, 10);
       }
       
+      console.log('translate amount', translateAmount);
       setTranslateX(translateAmount);
       // The gallery component needs to re-render every time this function is called.
       forceUpdate();
@@ -232,17 +234,18 @@ const Gallery = (props) => {
   };
 
   const changeIndex = (action, maxNumber, isPhoto = true) => {
+    console.log('changing index');
     const targetIndex = isPhoto ? 0 : 1;
     if (!hasOpened && (currentIndex === targetIndex || currentIndex === maxIndex)) dispatchGalleryOpenEvent();
 
     if (!isMobile && (currentIndex === 0 || clickCount % 3 !== 0)) {
       dispatchPhotoViewedEvent();
-    } else if (isMobile) {
+    } else if (isMobile && !isEmbed) {
       dispatchPhotoViewedEvent();
     }
 
     const currentClickCount = clickCount;
-    if (!isMobile) handleClickCount();
+    if (!isMobile || isEmbed) handleClickCount();
     setPreviousClickAction(currentAction);
 
     if ((!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0)) || (isAdVisible && currentClickCount === 4)) {
@@ -410,7 +413,7 @@ const Gallery = (props) => {
   const handleNext = (arr, returnOnly = false) => {
     const newArr = [...arr];
     newArr.push(newArr.shift());
-
+    console.log('handle next', handleNext);
     if (returnOnly) {
       return newArr;
     }
@@ -420,6 +423,7 @@ const Gallery = (props) => {
   const handlePrevious = (arr, returnOnly = false) => {
     const newArr = [...arr];
     newArr.unshift(newArr.pop());
+    console.log('handles PRev');
 
     if (returnOnly) {
       return newArr;
@@ -442,7 +446,7 @@ const Gallery = (props) => {
   };
 
   const getInitWindowSize = () => {
-    if (windowExists && window.innerWidth <= mobileBreakPoint) {
+    if (!isEmbed && windowExists && window.innerWidth <= mobileBreakPoint) {
       setMobileState(true);
     } else {
       setMobileState(false);
@@ -556,7 +560,7 @@ const Gallery = (props) => {
 
   // handles ad insertions and removals for desktop gallery
   useEffect(() => {
-    if (!isMobile) {
+    if (!isMobile || isEmbed) {
       if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
         const adInsertedElementArray = insertDesktopGalleryAd();
@@ -711,6 +715,8 @@ const Gallery = (props) => {
   }
 
   console.log('mobile element data', mobileElementData);
+  console.log('isMobile', isMobile);
+  console.log('current action', currentAction);
 
   const galleryOutput = () => (
     <div className={`${!isStory && !isEmbed ? 'c-gallery-homeSection' : ''} ${isEmbed ? 'c-gallery-embed' : ''}`}>
@@ -720,7 +726,7 @@ const Gallery = (props) => {
         </div>
       ) : null}
       <div ref={galleryEl} className={`gallery-wrapper ${!isEmbed && isMobile && !isStickyVisible ? 'mobile-display' : ''}`} >
-        {!isMobile && galHeadline && isStory ? (
+        {(!isMobile || !isEmbed) && galHeadline && isStory ? (
           <div className="gallery-headline">
             <a href={canonicalUrl || null}>{galHeadline}</a>
           </div>
@@ -736,7 +742,7 @@ const Gallery = (props) => {
               <a>
                 <img src={middleBox} className="icon-gallery" alt="Mobile gallery icon"/>
               </a>
-              {/* <div className="icon-text hidden-large">View Gallery</div> */}
+              {!isEmbed && <div className="icon-text hidden-large">View Gallery</div>}
             </div>}
             <div className={`gallery-count-next ${!isEmbed ? 'hidden-small hidden-medium' : ''}`} onClick={() => changeIndex(actions.NEXT, null, false)}>
               <img src={rightArrow} alt="Right arrow"/>
