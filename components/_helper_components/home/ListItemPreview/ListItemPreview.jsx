@@ -20,10 +20,10 @@ const ListItemPreview = ({ id, storyData }) => {
   if (headlines?.web) {
     previewText = headlines.web;
   } else if (contentElements && !headlines?.web) {
-    const previewData = contentElements?.find(content => content.type === 'text');
+    const previewData = contentElements?.find(content => content?.type === 'text');
     const { _id: primaryContentId } = previewData || {};
     let { content: primaryContentText } = previewData || {};
-    const secondaryContentText = contentElements?.find(content => content.type === 'text' && content._id !== primaryContentId).content || null;
+    const secondaryContentText = contentElements?.find(content => content?.type === 'text' && content?._id !== primaryContentId)?.content || null;
 
     if (primaryContentText.length < 90 && secondaryContentText) {
       primaryContentText = `${primaryContentText} ${secondaryContentText}`;
