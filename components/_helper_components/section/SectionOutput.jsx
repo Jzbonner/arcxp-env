@@ -14,14 +14,18 @@ const SectionOutput = ({
   zones,
   layout,
   noHeaderAndFooter,
+  isSectionSpecialOne = false,
 }) => {
   const { pageIsLive, paywallStatus } = getContentMeta();
   const isMeteredStory = paywallStatus === 'premium';
-  // if the `live` meta exists, we set the default class to `not-live`
-  let liveIndicatorClass = pageIsLive ? 'is-live' : 'not-live';
+  // we initialize the liveIndicatorClass with no value (to ensure it's only applied to Live Updates pages)
+  let liveIndicatorClass = '';
   // then, if the `live` meta exists and is actually live, we re-set it to `is-live`
   if (pageIsLive === 'true' || pageIsLive === 'yes') {
     liveIndicatorClass = 'is-live';
+  } else if (isSectionSpecialOne || pageIsLive) {
+    // the `pageIsLive` meta exists or it's section-special-one layout - so it is (or could be) a live updates page - but is in a not-live state
+    liveIndicatorClass = 'not-live';
   }
   const isErrorPage = layout === 'section-basic';
   return (
@@ -56,6 +60,7 @@ SectionOutput.propTypes = {
   zones: PropTypes.array,
   layout: PropTypes.string,
   noHeaderAndFooter: PropTypes.bool,
+  isSectionSpecialOne: PropTypes.bool,
 };
 
 export default SectionOutput;
