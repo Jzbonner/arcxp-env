@@ -43,17 +43,25 @@
     .gallery-caption-container {
       margin-bottom: 0 auto 35px;
 
+      @include between-breakpoints(tablet, desktop-sm) {
+        width: calc(100% - 100px);
+      }
+
       .gallery-credit {
         text-align: right;
+        margin-bottom: .5rem;
 
         @include text-styles(.75rem, normal, "Gordita");
   
         @include breakpoint(tablet) {
           font-size: .875rem;
+          margin-bottom: .188rem;
+          width: 100%;
         }
-        
+
         @include breakpoint(desktop-sm) {
           font-size: .75rem;
+          margin-bottom: .5rem;
         }
       }
   
@@ -62,6 +70,12 @@
   
         @include breakpoint(tablet) {
           font-size: 1rem;
+        }
+
+        @include between-breakpoints(tablet, desktop-sm) {
+          line-height: 1.56;
+          width: 100%;
+          margin: 0;
         }
 
         @include breakpoint(desktop-sm) {
@@ -81,6 +95,10 @@
         height: 50px;
         top: -27px;
         margin: .688rem auto 0;
+      }
+
+      @include between-breakpoints(tablet, desktop-sm) {
+        margin-top: 1rem;
       }
 
       .gallery-count {
@@ -109,6 +127,11 @@
               height: 32px;
               width: 38px;
               margin-bottom: 4px;
+            }
+
+            @include breakpoint(desktop-sm) {
+              width: 38px;
+              height: 32px;
             }
           }
         }
@@ -166,14 +189,16 @@
           }
 
           span {
-            letter-spacing: -.16px;
+            @include text-styles(.8rem, -.16, "Gordita-Medium");
 
             @include breakpoint(tablet) {
               letter-spacing: -.2px;
+              font-size: 1rem;
             }
 
             @include breakpoint(desktop-sm) {
               letter-spacing: -.16px;
+              font-size: .8rem;
             }
           }
         }
@@ -198,12 +223,10 @@
         }
 
         img {
+          height: 100%;
+
           @include between-breakpoints(tablet, desktop-sm) {
             min-height: 474px;
-          }
-
-          @include breakpoint(tablet) {
-            height: 100%;
           }
         }
       }
@@ -734,6 +757,10 @@
     height: auto;
     width: 180px;
     margin: 1.875rem auto .5rem;
+
+    @include breakpoint(desktop-sm) {
+      margin: 9px auto 0;
+    }
   }
 
   .gallery-caption-container {
@@ -775,10 +802,18 @@
 
     .gallery-count-prev {
       left: 0;
+
+      @include breakpoint(desktop-sm) {
+        left: 7px;
+      }
     }
 
     .gallery-count-next {
       right: 0;
+
+      @include breakpoint(desktop-sm) {
+        right: 7px;
+      }
     }
   }
 
