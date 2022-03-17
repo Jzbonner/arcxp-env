@@ -1,9 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { safeHtml } from '../../../../global/utils/stringUtils';
 import './default.scss';
 
 const Table = ({ src }) => {
   const { header = [], rows = [] } = src || {};
+
+  const tableRow = (index, output, cellNumber) => <td key={`table-row-${index + 1}-cell-${cellNumber}`}>
+    <span dangerouslySetInnerHTML={{
+      __html: safeHtml(output, {
+        whiteList: {
+          p: [],
+          span: ['class', 'style'],
+          a: ['href', 'data-*', 'target', 'class', 'on'],
+          br: [],
+          b: [],
+          i: [],
+          u: [],
+          strong: [],
+        },
+      }),
+    }}/></td>;
+
   return (
     <div className="b-margin-bottom-d30-m20">
       <table className='c-table b-flexRow b-flexColumn'>
@@ -13,10 +31,10 @@ const Table = ({ src }) => {
           }
         <tbody>
           { rows.map((row, i) => <tr key={`table-row-${i}`}>
-              {row[0] && <td key={`table-row-${i + 1}-cell-1`}><span>{row[0].content}</span></td>}
-              {row[1] && <td key={`table-row-${i + 1}-cell-2`}><span>{row[1].content}</span></td>}
-              {row[2] && <td key={`table-row-${i + 1}-cell-3`}><span>{row[2].content}</span></td>}
-              {row[3] && <td key={`table-row-${i + 1}-cell-4`}><span>{row[3].content}</span></td>}
+              {row[0] && tableRow(i, row[0].content, 1)}
+              {row[1] && tableRow(i, row[1].content, 2)}
+              {row[2] && tableRow(i, row[2].content, 3)}
+              {row[3] && tableRow(i, row[3].content, 4)}
           </tr>)}
         </tbody>
       </table>
