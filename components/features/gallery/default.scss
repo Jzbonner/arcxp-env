@@ -28,6 +28,10 @@
       width: 100vw;
     }
 
+    @include between-breakpoints(tablet, desktop-sm) {
+      margin-left: -40px;
+    }
+
     @include breakpoint(desktop-sm) {
       width: 487px;
     }
@@ -191,6 +195,12 @@
 
         .is-focused {
           opacity: 1;
+        }
+
+        img {
+          @include between-breakpoints(tablet, desktop-sm) {
+            min-height: 474px;
+          }
         }
       }
     }
