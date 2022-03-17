@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import podcast from '../../../resources/icons/special/podcast.svg';
+import Podcast from '../../../resources/icons/special/Podcast';
 import './default.scss';
 
 
@@ -14,7 +14,7 @@ const Special = (customFields = {}) => {
   const getIcon = () => {
     switch (icon) {
       case 'Podcast':
-        return podcast;
+        return <Podcast />;
       default:
         break;
     }
@@ -34,7 +34,7 @@ const Special = (customFields = {}) => {
              backgroundSize: 'cover',
            }}>
         <div className="c-call-to-action">
-          {icon ? <img className="action-icon" src={getIcon()} alt="Action icon"/> : null}
+          {icon ? <span className="action-icon">{getIcon()}</span> : null}
           {title ? <div className="action-text">
             <span>{`${title}`}</span>
           </div> : null}

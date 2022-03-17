@@ -37,7 +37,7 @@
       height: 209px;
     }
 
-    .action-icon {
+    .action-icon svg {
       width: 54px;
       height: 66px;
 
@@ -80,7 +80,7 @@
       width: 265px;
     }
 
-    .action-icon {
+    .action-icon svg {
       @include breakpoint(tablet) {
         width: 44px;
         height: 66px;
