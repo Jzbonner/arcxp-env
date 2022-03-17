@@ -26,9 +26,14 @@
       position: absolute;
       top: 4px;
       right: -2px;
-      font-family: "Gordita";
-      font-size: 8.5px;
+      font: 8.5px "Gordita-Bold";
+      letter-spacing: -.05px;
       color: #fff;
+
+      @include breakpoint(tablet) {
+        font-size: 10px;
+        letter-spacing: -.06px;
+      }
     }
 
     &:last-child:after {
@@ -42,12 +47,7 @@
     .time {
       width: 22px;
       height: 19px;
-      font-family: "Gordita";
-      font-size: 14px;
-      font-weight: 600;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: normal;
+      font: 14px "Gordita-Bold";
       letter-spacing: -.22px;
       text-align: center;
       color: #fff;
@@ -56,15 +56,23 @@
     .label {
       width: 12px;
       height: 9px;
-      font-family: "Gordita";
-      font-size: 7px;
-      font-weight: 600;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: normal;
+      font: 7px "Gordita-Bold";
       letter-spacing: -.11px;
       text-align: center;
       color: #fff;
+    }
+
+    @include breakpoint(tablet) {
+
+      .time {
+        font-size: 16px;
+        letter-spacing: -.25px;
+      }
+
+      .label {
+        font-size: 8px;
+        letter-spacing: -.12px;
+      }
     }
   }
 
