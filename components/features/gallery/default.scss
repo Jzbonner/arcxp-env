@@ -201,6 +201,10 @@
           @include between-breakpoints(tablet, desktop-sm) {
             min-height: 474px;
           }
+
+          @include breakpoint(tablet) {
+            height: 100%;
+          }
         }
       }
     }
