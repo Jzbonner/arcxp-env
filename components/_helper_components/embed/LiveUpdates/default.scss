@@ -729,7 +729,7 @@
       z-index: 1000;
       animation: 1s ease-in 0s 1 newUpdatesButtonAnimantion;
       cursor: pointer;
-      font-family: "Gordita";
+      font-family: "Gordita-Bold";
       font-size: 12px;
       font-weight: 600;
       font-stretch: normal;
@@ -737,6 +737,7 @@
       line-height: normal;
       letter-spacing: .72px;
       color: #fff5ec;
+      text-transform: uppercase;
 
       img {
         height: 9px;
