@@ -11,6 +11,234 @@
   }
 }
 
+.hide {
+  display: none;
+}
+
+.c-gallery-embed {
+
+  .gallery-wrapper {
+    @include between-breakpoints(mobile, tablet) {
+      max-height: none;
+      max-width: 90vw;
+    }
+
+    @include breakpoint(tablet) {
+      height: 100%;
+      width: 100vw;
+    }
+
+    @include between-breakpoints(tablet, desktop-sm) {
+      margin-left: -40px;
+    }
+
+    @include breakpoint(desktop-sm) {
+      width: 487px;
+    }
+
+    .gallery-headline {
+      display: none;
+    }
+
+    .gallery-caption-container {
+      margin-bottom: 0 auto 35px;
+
+      @include between-breakpoints(tablet, desktop-sm) {
+        width: calc(100% - 100px);
+      }
+
+      .gallery-credit {
+        text-align: right;
+        margin-bottom: .5rem;
+
+        @include text-styles(.75rem, normal, "Gordita");
+  
+        @include breakpoint(tablet) {
+          font-size: .875rem;
+          margin-bottom: .188rem;
+          width: 100%;
+        }
+
+        @include breakpoint(desktop-sm) {
+          font-size: .75rem;
+          margin-bottom: .5rem;
+        }
+      }
+  
+      .gallery-caption {
+        @include text-styles(.75rem, normal, "Gordita");
+  
+        @include breakpoint(tablet) {
+          font-size: 1rem;
+        }
+
+        @include between-breakpoints(tablet, desktop-sm) {
+          line-height: 1.56;
+          width: 100%;
+          margin: 0;
+        }
+
+        @include breakpoint(desktop-sm) {
+          font-size: .75rem;
+        }
+      }
+    }
+
+    .gallery-caption-icons-box {
+      position: relative;
+      top: auto;
+      bottom: 0;
+      height: auto;
+      width: 180px;
+
+      @include between-breakpoints(mobile, tablet) {
+        height: 50px;
+        top: -27px;
+        margin: .688rem auto 0;
+      }
+
+      @include between-breakpoints(tablet, desktop-sm) {
+        margin-top: 1rem;
+      }
+
+      .gallery-count {
+        width: 100px;
+        letter-spacing: -.2px;
+        text-align: center;
+        color: #212126;
+        top: 0;
+        left: 0;
+        margin: 0 auto;
+        line-height: normal;
+        text-size-adjust: 100%;
+        text-rendering: optimizeLegibility;
+
+        @include between-breakpoints(mobile, tablet) {
+          @include text-styles(.8rem, normal, "Gordita-Medium");
+        }
+
+        .mobile-change {
+          background: none;
+
+          img {
+            filter: none;
+
+            @include between-breakpoints(mobile, tablet) {
+              height: 32px;
+              width: 38px;
+              margin-bottom: 4px;
+            }
+
+            @include breakpoint(desktop-sm) {
+              width: 38px;
+              height: 32px;
+            }
+          }
+        }
+
+        .gallery-count-prev,
+        .gallery-count-next {
+          position: absolute;
+          transform: none;
+          cursor: pointer;
+          pointer-events: initial;
+          border-radius: 15px;
+          box-shadow: 4px 4px 6px 0 rgb(229 229 229 / 60%);
+          border: solid 1px #ececec;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+          z-index: 99999;
+
+          @include between-breakpoints(mobile, tablet) {
+            width: 40px;
+            height: 41px;
+            padding: 0;
+            top: 10px;
+          }
+
+          @include breakpoint(tablet) {
+            top: 5px;
+          }
+
+          .img {
+            @include between-breakpoints(mobile, tablet) {
+              height: 15px;
+            }
+          }
+        }
+
+        .gallery-count-prev {
+          @include between-breakpoints(mobile, tablet) {
+            left: 10px;
+          }
+        }
+
+        .gallery-count-next {
+          @include between-breakpoints(mobile, tablet) {
+            right: 10px;
+          }
+        }
+
+        .count--box {
+          @include between-breakpoints(mobile, tablet) {
+            text-align: center;
+            position: relative;
+            top: -41px;
+          }
+
+          span {
+            @include text-styles(.8rem, -.16, "Gordita-Medium");
+
+            @include breakpoint(tablet) {
+              letter-spacing: -.2px;
+              font-size: 1rem;
+            }
+
+            @include breakpoint(desktop-sm) {
+              letter-spacing: -.16px;
+              font-size: .8rem;
+            }
+          }
+        }
+      }
+    }
+    
+    .gallery-container {
+      @include between-breakpoints(mobile, tablet) {
+        height: auto;
+        visibility: visible;
+      }
+
+      @include breakpoint(desktop-sm) {
+        height: 270px;
+      }
+
+      .gallery-image {
+        background: none;
+
+        .is-focused {
+          opacity: 1;
+        }
+
+        img {
+          height: 100%;
+
+          @include between-breakpoints(tablet, desktop-sm) {
+            min-height: 474px;
+          }
+        }
+      }
+    }
+  }
+
+  @include breakpoint(desktop-sm) {
+    width: 487px;
+    height: auto;
+  }
+}
+
 .c-gallery-homeSection {
   width: 100vw;
   max-width: 1540px;
@@ -529,6 +757,10 @@
     height: auto;
     width: 180px;
     margin: 1.875rem auto .5rem;
+
+    @include breakpoint(desktop-sm) {
+      margin: 9px auto 0;
+    }
   }
 
   .gallery-caption-container {
@@ -570,10 +802,18 @@
 
     .gallery-count-prev {
       left: 0;
+
+      @include breakpoint(desktop-sm) {
+        left: 7px;
+      }
     }
 
     .gallery-count-next {
       right: 0;
+
+      @include breakpoint(desktop-sm) {
+        right: 7px;
+      }
     }
   }
 
