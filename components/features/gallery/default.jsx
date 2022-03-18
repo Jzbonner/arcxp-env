@@ -607,7 +607,7 @@ const Gallery = (props) => {
     let fetchedContentElements = null;
     let featuredContentElements = null;
 
-    if ((contentElements.length > 0 || contentElements?.content_elements.length > 0) && leafContentElements.length <= 0) {
+    if ((contentElements.length > 0 || contentElements?.content_elements?.length > 0) && leafContentElements.length <= 0) {
       relevantGalleryData = handlePropContentElements(contentElements);
     }
 
