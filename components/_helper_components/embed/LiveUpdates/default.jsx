@@ -6,7 +6,6 @@ import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import ContentElements from '../../article/contentElements/default.jsx';
 import filterContentElements from '../../../layouts/_helper_functions/article/filterContentElements';
-import getDomain from '../../../layouts/_helper_functions/getDomain.js';
 import ArcAd from '../../../features/ads/default';
 import fetchEnv from '../../global/utils/environment';
 import TaboolaFeed from '../../../features/taboolaFeed/default';
@@ -27,7 +26,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   const hashId = typeof window !== 'undefined' ? window.location.hash.substr(1) : null;
   const fusionContext = useFusionContext();
   const { arcSite, requestUri } = fusionContext;
-  const { connext, cdnSite, cdnOrg } = getProperties(arcSite);
+  const { connext } = getProperties(arcSite);
   const currentEnv = fetchEnv();
   const { siteCode, configCode, environment } = connext[currentEnv] || {};
   const connextLocalStorageData = GetConnextLocalStorageData(siteCode, configCode, environment) || {};
@@ -44,7 +43,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
   const stickyHeaderAdjustment = 80;
   let toggledAdSlot = 'HP03';
   const outputTypeString = requestUri.split('').indexOf('?') === -1 ? '?outputType=rss' : '&outputType=rss';
-  const liveButtonCheckDomain = `${getDomain('', cdnSite, cdnOrg, arcSite)}${requestUri}${outputTypeString}`;
+  const liveButtonCheckPath = `${requestUri}${outputTypeString}`;
 
   const copyToClipboard = (e) => {
     e.preventDefault();
@@ -363,7 +362,7 @@ const LiveUpdates = ({ data: liveUpdates, enableTaboola = false, isTimeline = fa
 
   useEffect(() => {
     const newItemCheckingInterval = setInterval(async () => {
-      const rssToJsonData = await parse(liveButtonCheckDomain);
+      const rssToJsonData = await parse(`${window.document.location.origin}${liveButtonCheckPath}`);
       if (rssToJsonData?.items?.length > liveUpdates.length) {
         setDisplayNewUpdatesButton({ display: true, offset: (rssToJsonData?.items?.length - liveUpdates.length) });
       } else {
