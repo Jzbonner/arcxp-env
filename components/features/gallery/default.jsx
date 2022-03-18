@@ -26,7 +26,7 @@ const PG02 = galleryTopics => <ArcAd staticSlot={'PG02'} key={'PG02'} galleryTop
 
 const Gallery = (props) => {
   const {
-    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '', leafHeadline = '', taxonomy = {},
+    contentElements = [], leafContentElements = [], promoItems = {}, customFields = {}, pageType = '', leafHeadline = '', taxonomy = {}, isEmbed = false,
   } = props;
 
   const appContext = useAppContext();
@@ -174,12 +174,11 @@ const Gallery = (props) => {
 
   /* applies transform: translateX to center on the focused image */
   const calculateTranslateX = () => {
-    if (isMobile) return;
+    if (isMobile && !isEmbed) return;
     let translateAmount;
     const focusElement = isAdVisible ? PG01Ref.current : document.getElementById(`gallery-item-${currentIndex}`) || null;
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
     if (galleryEl.current && focusElement) {
-      // fixes initializing translate bug...?
       translateAmount = parseInt(galleryFullWidth, 10) / 2 - parseInt(focusElement.offsetWidth, 10) / 2 - parseInt(focusElement.offsetLeft, 10);
       setTranslateX(translateAmount);
       // The gallery component needs to re-render every time this function is called.
@@ -226,12 +225,12 @@ const Gallery = (props) => {
 
     if (!isMobile && (currentIndex === 0 || clickCount % 3 !== 0)) {
       dispatchPhotoViewedEvent();
-    } else if (isMobile) {
+    } else if (isMobile && !isEmbed) {
       dispatchPhotoViewedEvent();
     }
 
     const currentClickCount = clickCount;
-    if (!isMobile) handleClickCount();
+    if (!isMobile || isEmbed) handleClickCount();
     setPreviousClickAction(currentAction);
 
     if ((!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0)) || (isAdVisible && currentClickCount === 4)) {
@@ -388,6 +387,7 @@ const Gallery = (props) => {
         modalVisible,
       },
       clickFuncs,
+      isEmbed,
     );
 
     setElementData(preRenderEls);
@@ -398,7 +398,6 @@ const Gallery = (props) => {
   const handleNext = (arr, returnOnly = false) => {
     const newArr = [...arr];
     newArr.push(newArr.shift());
-
     if (returnOnly) {
       return newArr;
     }
@@ -408,7 +407,6 @@ const Gallery = (props) => {
   const handlePrevious = (arr, returnOnly = false) => {
     const newArr = [...arr];
     newArr.unshift(newArr.pop());
-
     if (returnOnly) {
       return newArr;
     }
@@ -417,17 +415,20 @@ const Gallery = (props) => {
 
   const handleResizeEvent = () => {
     calculateTranslateX();
-    if (windowExists && window.innerWidth <= mobileBreakPoint) {
-      setMobileState(true);
-    } else {
-      setMobileState(false);
+
+    if (!isEmbed) {
+      if (windowExists && window.innerWidth <= mobileBreakPoint) {
+        setMobileState(true);
+      } else {
+        setMobileState(false);
+      }
     }
 
     setCurrentAction(actions.RESIZE);
   };
 
   const getInitWindowSize = () => {
-    if (windowExists && window.innerWidth <= mobileBreakPoint) {
+    if (!isEmbed && windowExists && window.innerWidth <= mobileBreakPoint) {
       setMobileState(true);
     } else {
       setMobileState(false);
@@ -541,7 +542,7 @@ const Gallery = (props) => {
 
   // handles ad insertions and removals for desktop gallery
   useEffect(() => {
-    if (!isMobile) {
+    if (!isMobile || isEmbed) {
       if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
         const adInsertedElementArray = insertDesktopGalleryAd();
@@ -572,6 +573,7 @@ const Gallery = (props) => {
             modalVisible,
           },
           clickFuncs,
+          isEmbed,
         );
 
         setElementData(finalizedElements);
@@ -604,7 +606,11 @@ const Gallery = (props) => {
     let galleryContentElements = null;
     let fetchedContentElements = null;
     let featuredContentElements = null;
-    if (contentElements.length > 0 && !leafContentElements.length > 0) relevantGalleryData = handlePropContentElements(contentElements);
+
+    if ((contentElements.length > 0 || contentElements?.content_elements?.length > 0) && leafContentElements.length <= 0) {
+      relevantGalleryData = handlePropContentElements(contentElements);
+    }
+
     if (leafContentElements.length > 0) {
       galleryContentElements = leafContentElements;
     } else if (featuredGalleryData) {
@@ -643,17 +649,18 @@ const Gallery = (props) => {
         next: () => changeIndex(actions.NEXT),
         modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
       },
+      isEmbed,
     );
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData || {};
 
-    if (!isMobile) {
+    if (!isMobile || isEmbed) {
       if (!elementData) {
         const finalizedGalleryItems = reorganizeElements([...galleryData]);
         setElementData(finalizedGalleryItems);
       }
 
       if (!baseCaptionData) setBaseCaptionData(desktopCaptionData);
-    } else if (!mobileElementData || currentAction === actions.AD_RESET) {
+    } else if ((!mobileElementData && !isEmbed) || currentAction === actions.AD_RESET) {
       const baseElementsForMobile = [...galleryData];
       if (!isMobile) setMobileState(true);
       setMobileElementData(baseElementsForMobile);
@@ -662,7 +669,7 @@ const Gallery = (props) => {
     }
   }
 
-  if (isStickyVisible || isMobile) {
+  if (isStickyVisible || (isMobile && !isEmbed)) {
     mobileFuncs = {
       handleStickyClose,
       captionOn: () => handleCaptionToggle(actions.ON),
@@ -682,36 +689,36 @@ const Gallery = (props) => {
   }
 
   const galleryOutput = () => (
-    <div className={`${!isStory ? 'c-gallery-homeSection' : ''}`}>
+    <div className={`${!isStory && !isEmbed ? 'c-gallery-homeSection' : ''} ${isEmbed ? 'c-gallery-embed' : ''}`}>
       {!isMobile ? (
         <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
           <ImageModal src={currentImageSrc} isVisible={modalVisible} />
         </div>
       ) : null}
-      <div ref={galleryEl} className={`gallery-wrapper ${isMobile && !isStickyVisible ? 'mobile-display' : ''}`} >
-        {!isMobile && galHeadline && isStory ? (
-          <div className="gallery-headline">
+      <div ref={galleryEl} className={`gallery-wrapper ${!isEmbed && isMobile && !isStickyVisible ? 'mobile-display' : ''}`} >
+        {(!isMobile && galHeadline && isStory && !isEmbed) ? (
+          <div className={`gallery-headline ${isEmbed ? 'hide' : ''}`}>
             <a href={canonicalUrl || null}>{galHeadline}</a>
           </div>
         ) : null}
-        {isStickyVisible ? <MobileGallery objectRef={galleryMobileEl} data={mobileElemData} states={mobileState} funcs={mobileFuncs} /> : null}
-        {!isMobile ? <DesktopGallery data={elementData} translateX={translateX} handlers={handlers}/> : null}
-        <div onClick={handleStickyOpen} className={`gallery-caption-icons-box ${!isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
-          <div className="gallery-overlay hidden-large">{isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null}</div>
+        {isStickyVisible && !isEmbed ? <MobileGallery objectRef={galleryMobileEl} data={mobileElemData} states={mobileState} funcs={mobileFuncs} /> : null}
+        {!isMobile || isEmbed ? <DesktopGallery data={elementData} translateX={translateX} handlers={handlers}/> : null}
+        <div onClick={handleStickyOpen} className={`gallery-caption-icons-box ${!isEmbed && !isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
+        {!isEmbed && <div className="gallery-overlay hidden-large">{isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null}</div>}
           <div className="gallery-count view-gallery">
-            <div className="gallery-count-prev hidden-small hidden-medium" onClick={() => changeIndex(actions.PREV, null, false)}>
+            <div className={`gallery-count-prev ${!isEmbed ? 'hidden-small hidden-medium' : ''}`} onClick={() => changeIndex(actions.PREV, null, false)}>
               <img src={leftArrow} alt="Left arrow"/>
             </div>
-            <div className="mobile-change">
+            {<div className="mobile-change">
               <a>
                 <img src={middleBox} className="icon-gallery" alt="Mobile gallery icon"/>
               </a>
-              <div className="icon-text hidden-large">View Gallery</div>
-            </div>
-            <div className="gallery-count-next hidden-small hidden-medium" onClick={() => changeIndex(actions.NEXT, null, false)}>
+              {!isEmbed && <div className="icon-text hidden-large">View Gallery</div>}
+            </div>}
+            <div className={`gallery-count-next ${!isEmbed ? 'hidden-small hidden-medium' : ''}`} onClick={() => changeIndex(actions.NEXT, null, false)}>
               <img src={rightArrow} alt="Right arrow"/>
             </div>
-            <div className="count--box hidden-small hidden-medium">
+            <div className={`count--box ${!isEmbed ? 'hidden-small hidden-medium' : ''}`}>
               <span className="gallery-index">{currentIndex + 1} / </span>
               <span>{maxIndex && maxIndex + 1}</span>
             </div>
@@ -725,11 +732,11 @@ const Gallery = (props) => {
   const galleryHeadlineAdOutput = () => (
     <>
       {(isMobile || !isStory) && galHeadline ? (
-        <div className={`gallery-headline ${isMobile ? '' : 'with-ad'}`}>
+        <div className={`gallery-headline ${isMobile ? '' : 'with-ad'} ${isEmbed ? 'hide' : ''}`}>
           <a href={canonicalUrl || null}>{galHeadline}</a>
         </div>
       ) : null}
-      {!isStory && !isMobile ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
+      {!isStory && !isMobile && !isEmbed ? <div className="gallery-ads-PG02">{PG02 && PG02(galleryTopics)}</div> : null}
     </>
   );
 
@@ -760,6 +767,7 @@ Gallery.propTypes = {
   pageType: PropTypes.string,
   leafHeadline: PropTypes.string,
   taxonomy: PropTypes.object,
+  isEmbed: PropTypes.bool,
   customFields: PropTypes.shape({
     galleryUrl: PropTypes.string.tag({
       label: 'Gallery URL',
