@@ -29,7 +29,6 @@ const ListItem = ({
   firstInlineImage,
   teaseImageObject,
   showPreview,
-  _id: id,
   isSynopsis = false,
   displayClass,
   hidePromo,
@@ -37,6 +36,7 @@ const ListItem = ({
   isTTDFeature = false,
   noBorder = false,
   isStaffBioPage = false,
+  content_elements: contentElements,
 }) => {
   const appContext = useAppContext();
   const { arcSite, requestUri } = appContext;
@@ -131,7 +131,7 @@ const ListItem = ({
           <a href={finalURL}>
             {truncateHeadline(headlines.basic, !isSynopsis)}
           </a>
-          {showPreview && <ListItemPreview id={id} />}
+          {showPreview && <ListItemPreview storyData={{ contentElements, headlines }} />}
         </div>
         {!isDontMissFeature && <TimeStamp
             firstPublishDate={firstPublishDate}
@@ -167,6 +167,7 @@ ListItem.propTypes = {
   teaseImageObject: PropTypes.object,
   noBorder: PropTypes.bool,
   isStaffBioPage: PropTypes.bool,
+  content_elements: PropTypes.object,
 };
 
 export default ListItem;
