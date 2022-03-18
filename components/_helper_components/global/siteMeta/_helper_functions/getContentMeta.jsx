@@ -7,6 +7,7 @@ import { formatTime, formatDate } from '../../../article/timestamp/_helper_funct
 
 const getContentMeta = () => {
   const appContext = useAppContext();
+  let paywallStatus;
   const {
     arcSite,
     globalContent,
@@ -29,7 +30,7 @@ const getContentMeta = () => {
   const sophiType = metaValue('sophi-type');
   const treatPbPageAsArticle = sophiType === 'article';
   const {
-    siteName, favicon, cdnSite, appleIcon, cdnOrg,
+    siteName, favicon, cdnSite, appleIcon, cdnOrg, enableSophiPaywall,
   } = getProperties(arcSite) || {};
   const {
     headlines,
@@ -50,6 +51,7 @@ const getContentMeta = () => {
     content_elements: contentElements = [],
     content_restrictions: contentRestrictions,
     syndication,
+    label,
   } = globalContent || {};
   const articleDesc = description;
   const {
@@ -260,7 +262,15 @@ const getContentMeta = () => {
   const faviconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${favicon}`)}`;
   const appleIconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
 
-  const { content_code: paywallStatus } = contentRestrictions || {};
+  const { content_code: contentPaywallStatus } = contentRestrictions || {};
+  const { sophi_paywall: sophiPaywall } = label || {};
+
+  if (enableSophiPaywall) {
+    paywallStatus = 'free';
+    if (sophiPaywall && sophiPaywall.text) paywallStatus = sophiPaywall.text;
+  } else {
+    paywallStatus = contentPaywallStatus;
+  }
   // return page content metadata values
   return {
     url,
