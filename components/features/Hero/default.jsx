@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import truncateHeadline from '../../layouts/_helper_functions/homepage/truncateHeadline';
-import getTeaseIcon from '../../_helper_components/global/image/_helper_functions/getTeaseIcon';
 import './default.scss';
 
 const Hero = (customFields = {}) => {
@@ -31,7 +30,6 @@ const Hero = (customFields = {}) => {
     const singleItem = data[0];
     const { basic: headline = '' } = singleItem && singleItem.headlines ? singleItem.headlines : {};
     const { canonical_url: heroURL = '' } = singleItem || {};
-    const contentType = singleItem?.type || null;
     const heroBackground = singleItem?.teaseImageObject?.url;
 
     if (data) {
@@ -43,7 +41,6 @@ const Hero = (customFields = {}) => {
             <div className="hero-headline">
               <h2 className="headline-text">{truncateHeadline(headline, true)}</h2>
             </div>
-            {contentType === 'gallery' || contentType === 'video' ? getTeaseIcon(contentType, heroURL) : null}
           </div>
         </div>
       );

@@ -1,29 +1,27 @@
 import React from 'react';
-import galleryIcon from '../../../../../resources/icons/tease/redesign/camera-icon.svg';
-import videoIcon from '../../../../../resources/icons/tease/redesign/video.svg';
-import docIcon from '../../../../../resources/icons/tease/redesign/documents.svg';
-import podcastIcon from '../../../../../resources/icons/tease/redesign/podcast.svg';
+import CameraIcon from '../../../../../resources/icons/tease/redesign/CameraIcon';
+import VideoIcon from '../../../../../resources/icons/tease/redesign/VideoIcon';
+import DocumentIcon from '../../../../../resources/icons/tease/redesign/DocumentIcon';
+import PodcastIcon from '../../../../../resources/icons/tease/redesign/PodcastIcon';
 import '../default.scss';
 
-export default function getTeaseIcon(teaseContentType, isAmp) {
+export default function getTeaseIcon(teaseContentType) {
   let iconToRender = null;
 
   if (teaseContentType && teaseContentType.toLowerCase() === 'video') {
-    iconToRender = videoIcon;
+    iconToRender = <VideoIcon />;
   } else if (teaseContentType && teaseContentType.toLowerCase() === 'gallery') {
-    iconToRender = galleryIcon;
+    iconToRender = <CameraIcon />;
   } else if (teaseContentType && teaseContentType.toLowerCase() === 'document') {
-    iconToRender = docIcon;
+    iconToRender = <DocumentIcon />;
   } else if (teaseContentType && teaseContentType.toLowerCase() === 'podcast') {
-    iconToRender = podcastIcon;
+    iconToRender = <PodcastIcon />;
   }
 
   if (iconToRender) {
     return (
       <div className="c-tease-icon">
-        {isAmp
-          ? <amp-img width={18} height={18} src={iconToRender}></amp-img>
-          : <img className="tease-icon" src={iconToRender} alt='Tease icon'/>}
+        <span className="tease-icon">{iconToRender}</span>
       </div>
     );
   }
