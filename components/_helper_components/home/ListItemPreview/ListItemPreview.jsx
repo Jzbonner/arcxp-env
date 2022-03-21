@@ -8,14 +8,14 @@ const ListItemPreview = ({ id, storyData }) => {
   let previewText = '';
 
   const data = useContent({
-    source: !storyData.contentElements ? 'content-api' : null,
+    source: !storyData?.contentElements ? 'content-api' : null,
     query: {
       id,
     },
   });
 
-  const headlines = storyData?.headlines || data.headlines;
-  const contentElements = storyData?.contentElements || data.content_elements;
+  const headlines = storyData?.headlines || data?.headlines;
+  const contentElements = storyData?.contentElements || data?.content_elements;
 
   if (headlines?.web) {
     previewText = headlines.web;
