@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './default.scss';
-import arrow from '../../../resources/icons/slider/left-arrow.svg';
+import LeftArrow from '../../../resources/icons/global/LeftArrow';
 
 const LoadMoreButton = ({
   numberOfTotalStories = 0, handleOnClick, newStories,
@@ -39,7 +39,7 @@ const LoadMoreButton = ({
 
   return (
     <button className={`btn-loadMore  b-margin-bottom-d30-m20 ${buttonState}`} onClick={handleBtnClick}>
-      {buttonState === 'default' && <>{'Load More'} <img className="arrow" src={arrow} alt="Arrow to load more stories"/></>}
+      {buttonState === 'default' && <>{'Load More'} <LeftArrow /></>}
       {buttonState === 'data-max-reached' && 'No More Results'}
       {buttonState === 'data-loading' && (
         <>

@@ -14,7 +14,7 @@
 
   @include text-styles(1rem, 1, "Gordita-Bold");
 
-  .arrow {
+  svg {
     transform: rotate(270deg) translateY(10px);
   }
 
