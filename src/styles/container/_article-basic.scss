@@ -567,6 +567,12 @@ article .c-section a.link {
   font-style: oblique;
 }
 
+.c-articleContent i b,
+.c-articleContent b i {
+  font-family: Helvetica;
+  font-weight: bold;
+}
+
 @include amp-exclude {
 
   body .c-articleContent .c-articleBodyContainer {
