@@ -10,12 +10,12 @@ const Synopsis = (customFields = {}) => {
   const { arcSite } = fusionContext;
   const {
     customFields: {
-      content: { contentService = 'collections-api', contentConfigValues } = {},
+      content: { contentService = 'collections-content-api', contentConfigValues } = {},
     },
   } = customFields;
 
   const data = useContent({
-    source: contentService,
+    source: contentService === 'collections-api' ? 'collections-content-api' : contentService,
     query: {
       ...contentConfigValues,
       arcSite,
