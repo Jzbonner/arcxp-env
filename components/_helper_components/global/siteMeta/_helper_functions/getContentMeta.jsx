@@ -265,9 +265,9 @@ const getContentMeta = () => {
   const { content_code: contentPaywallStatus } = contentRestrictions || {};
   const { sophi_paywall: sophiPaywall } = label || {};
 
-  if (enableSophiPaywall) {
-    paywallStatus = 'free';
-    if (sophiPaywall && sophiPaywall.text) paywallStatus = sophiPaywall.text;
+
+  if (enableSophiPaywall && sophiPaywall) {
+    paywallStatus = sophiPaywall.text ? sophiPaywall.text : 'free';
   } else {
     paywallStatus = contentPaywallStatus;
   }
