@@ -13,8 +13,7 @@ export const BravesOpeningDayCountdown = ({ tags = [], storyPage = false }) => {
   const [display, setDisplay] = useState(true);
   const [displayAd, setDisplayAd] = useState(false);
 
-  const openingDay = new Date('2022-04-07 19:20:00-04:00'); // per AS3-52
-  const countDownTime = openingDay.getTime();
+  const countDownTime = 1649373600000; // equivalent to `Date('2022-04-07 19:20:00-04:00').getTime()` but that format is invalid for iOS Safari (because of course) so I'm just using the timestamp directly
   const now = new Date();
 
   if (Math.round((countDownTime - now) / 1000) <= 0) {
