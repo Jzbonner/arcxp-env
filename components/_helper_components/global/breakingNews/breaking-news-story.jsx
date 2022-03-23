@@ -29,20 +29,20 @@ const BreakingNewsStory = () => {
   });
 
   const [story] = get(newsData, 'content_elements', []);
-  const { _id: collectionId } = newsData || {};
+  const { _id: storyId } = story || {};
   const breakingNewsLSLookup = `dismissed_breaking_news_${siteName}_${currentEnv.toUpperCase()}`;
   const dismissedCollectionStorage = typeof window !== 'undefined' ? JSON.parse(window.localStorage.getItem(breakingNewsLSLookup)) : null;
 
   const saveCollection = () => {
     if (!dismissedCollectionStorage) {
       const initialCollectionEntry = {
-        collectionArray: [collectionId],
+        collectionArray: [storyId],
       };
       window.localStorage.setItem(breakingNewsLSLookup, JSON.stringify(initialCollectionEntry));
     } else {
       const { collectionArray } = dismissedCollectionStorage || {};
       const additionalCollectionEntry = {
-        collectionArray: [collectionId, ...collectionArray],
+        collectionArray: [storyId, ...collectionArray],
       };
       window.localStorage.setItem(breakingNewsLSLookup, JSON.stringify(additionalCollectionEntry));
     }
@@ -52,7 +52,7 @@ const BreakingNewsStory = () => {
     setVisibility(false);
     saveCollection();
   };
-  const isCollectionDismissed = dismissedCollectionStorage?.collectionArray.some(id => id === collectionId);
+  const isCollectionDismissed = dismissedCollectionStorage?.collectionArray.some(id => id === storyId);
   const isBannerNotDismissed = isVisible && !isCollectionDismissed && typeof window !== 'undefined';
 
   if (story) {
