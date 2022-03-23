@@ -16,11 +16,18 @@
 }
 
 .c-gallery-embed {
+  @include between-breakpoints(mobile, tablet) {
+    position: relative;
+    left: -15px;
+    width: 100%;
+  }
 
   .gallery-wrapper {
     @include between-breakpoints(mobile, tablet) {
       max-height: none;
-      max-width: 90vw;
+      max-width: 100vw;
+      margin-left: -8px;
+      padding-right: 8px;
     }
 
     @include breakpoint(tablet) {
@@ -41,7 +48,11 @@
     }
 
     .gallery-caption-container {
-      margin-bottom: 0 auto 35px;
+      margin-top: 0;
+
+      @include between-breakpoints(mobile, tablet) {
+        margin-bottom: 15px;
+      }
 
       @include between-breakpoints(tablet, desktop-sm) {
         width: calc(100% - 100px);
@@ -50,6 +61,10 @@
       .gallery-credit {
         text-align: right;
         margin-bottom: .5rem;
+
+        @include between-breakpoints(mobile, tablet) {
+          margin-right: 20px;
+        }
 
         @include text-styles(.75rem, normal, "Gordita");
   
@@ -67,6 +82,12 @@
   
       .gallery-caption {
         @include text-styles(.75rem, normal, "Gordita");
+
+        line-height: 1.75;
+
+        @include between-breakpoints(mobile, tablet) {
+          margin-left: 26px;
+        }
   
         @include breakpoint(tablet) {
           font-size: 1rem;
@@ -94,7 +115,7 @@
       @include between-breakpoints(mobile, tablet) {
         height: 50px;
         top: -27px;
-        margin: .688rem auto 0;
+        margin: 2.4rem auto 0;
       }
 
       @include between-breakpoints(tablet, desktop-sm) {
@@ -149,7 +170,7 @@
           justify-content: center;
           align-items: center;
           -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-          z-index: 99999;
+          z-index: 4000;
 
           @include between-breakpoints(mobile, tablet) {
             width: 40px;
@@ -218,12 +239,23 @@
       .gallery-image {
         background: none;
 
+        .lazyload-wrapper {
+          @include between-breakpoints(mobile, tablet) {
+            padding-left: 10px;
+          }
+        }
+
         .is-focused {
           opacity: 1;
         }
 
         img {
           height: 100%;
+          min-height: 227px;
+
+          @include between-breakpoints(mobile, tablet) {
+            min-height: 227px;
+          }
 
           @include between-breakpoints(tablet, desktop-sm) {
             min-height: 474px;
