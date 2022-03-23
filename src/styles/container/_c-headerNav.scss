@@ -2188,6 +2188,7 @@
 
     &.is-visible {
       display: flex;
+      z-index: 9999;
     }
   }
 }

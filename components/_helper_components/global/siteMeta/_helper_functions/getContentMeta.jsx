@@ -21,8 +21,7 @@ const getContentMeta = () => {
   } = appContext;
   const blogName = metaValue('blogname');
   const noIndex = metaValue('no index');
-  const specialPresentationDark = metaValue('dark mode') === 'true';
-  const darkModeToggleButton = metaValue('dark mode toggle') === 'true';
+  const darkMode = metaValue('dark mode') === 'true';
   const inMemoriam = metaValue('in-memoriam') === 'true';
   const pageIsLive = metaValue('live');
   const pbPaywall = metaValue('story-meter');
@@ -305,8 +304,7 @@ const getContentMeta = () => {
     paywallStatus: pbPaywall || paywallStatus,
     syndication,
     noIndex,
-    specialPresentationDark,
-    darkModeToggleButton,
+    darkMode,
     inMemoriam,
     pageIsLive,
     metaTitle,

@@ -6,7 +6,7 @@ import Hamburger from '../../../../../resources/icons/global/hamburger';
 import HamburgerDark from '../../../../../resources/icons/global/hamburgerDark';
 
 const RedesignNavLinks = ({
-  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, darkMode, omitHeaderItems,
+  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, darkMode, omitHeaderItems, enableDarkMode,
 }) => {
   const { siteDomainURL, darkModeSubscribe } = getProperties(arcSite);
   const itemCount = sections.length;
@@ -23,7 +23,7 @@ const RedesignNavLinks = ({
   }, [animationVisibility]);
 
   const items = sections.map((section, i) => {
-    if (darkMode && i > 5) {
+    if (enableDarkMode && i > 5) {
       return null;
     }
 
@@ -57,7 +57,6 @@ const RedesignNavLinks = ({
     );
   });
 
-  console.log('hamburger icon should be dark: ', darkMode);
   return (
     <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       { !omitHeaderItems
@@ -73,7 +72,7 @@ const RedesignNavLinks = ({
       <div className='stickyNav-homepage'>
         <ul>
           {items}
-          {darkMode && <li><a href={darkModeSubscribe} targe='_self' className='nav-itemText'>Subscribe Today</a></li>}
+          {enableDarkMode && <li><a href={darkModeSubscribe} targe='_self' className='nav-itemText'>Subscribe Today</a></li>}
         </ul>
         <Search isHeader={true}/>
       </div>
@@ -92,6 +91,7 @@ RedesignNavLinks.propTypes = {
   primarySectionID: PropTypes.string,
   darkMode: PropTypes.bool,
   omitHeaderItems: PropTypes.bool,
+  enableDarkMode: PropTypes.bool,
 };
 
 export default RedesignNavLinks;

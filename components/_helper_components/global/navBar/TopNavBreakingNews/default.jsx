@@ -24,16 +24,13 @@ const TopNavBreakingNews = ({
   const [hasHalfShade, setHasHalfShade] = useState(false);
   const [darkModeToggled, setDarkModeToggle] = useState('');
   const windowExists = typeof window !== 'undefined';
-  const { specialPresentationDark, inMemoriam, darkModeToggleButton } = getContentMeta();
+  const { darkMode, inMemoriam } = getContentMeta();
   const appContext = useAppContext();
   const { isAdmin, globalContent } = appContext;
   const { taxonomy } = globalContent || {};
   const { tags = [] } = taxonomy || {};
   const hasNoAdsTag = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
-  const darkModeWithAds = !specialPresentationDark || (specialPresentationDark && !inMemoriam);
-  const darkMode = specialPresentationDark || darkModeToggled;
-
-  console.log(darkMode);
+  const darkModeWithAds = !darkMode || (darkMode && !inMemoriam);
 
   const docHasWindowShade = (checkCollapse, checkHalfShade) => {
     if (windowExists) {
@@ -69,14 +66,13 @@ const TopNavBreakingNews = ({
       const docBody = document.querySelector('body');
       const docBodyClass = docBody.getAttribute('class') || '';
       // add the dark-mode class to ensure body bg is blacked out
-      if ((darkModeToggled || specialPresentationDark) && docBodyClass.indexOf('dark-mode')
+      if (inMemoriam && docBodyClass.indexOf('special') === -1) {
+        docBody.classList += ' special';
+      }
+      if (darkModeToggled && darkMode && docBodyClass.indexOf('dark-mode')
  === -1) {
         docBody.classList += ' dark-mode';
-        if (specialPresentationDark) {
-          docBody.classList += ' special';
-        }
-        docBody.classList += ' dark-mode';
-      } else if (!darkMode && docBodyClass.indexOf('dark-mode') !== -1) {
+      } else if (!darkModeToggled && darkMode && docBodyClass.indexOf('dark-mode') !== -1) {
         docBody.classList.remove('dark-mode');
       }
       document.onreadystatechange = () => {
@@ -108,7 +104,7 @@ const TopNavBreakingNews = ({
   return (
     <>
       {!noAds && darkModeWithAds && !isAdmin && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
-      <div className={`nav-breaking-news ${darkMode ? 'dark-mode' : ''} ${aboveWindowShade ? 'is-above-shade' : ''} ${storyHasShade}`} >
+      <div className={`nav-breaking-news ${darkModeToggled ? 'dark-mode' : ''} ${aboveWindowShade ? 'is-above-shade' : ''} ${storyHasShade}`} >
         <WeatherAlerts />
         <NavBar
           articleURL={articleURL}
@@ -119,10 +115,9 @@ const TopNavBreakingNews = ({
           hasWindowShade={aboveWindowShade}
           omitBreakingNews={omitBreakingNews}
           enableDarkMode={darkMode}
-          darkModeToggleButton={darkModeToggleButton}
           darkModeToggled={darkModeToggled}
           setDarkModeToggle={setDarkModeToggle}
-          specialPresentationDark={specialPresentationDark}
+          inMemoriam={inMemoriam}
         />
       </div>
     </>
