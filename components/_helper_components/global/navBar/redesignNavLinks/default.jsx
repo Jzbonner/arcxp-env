@@ -56,6 +56,8 @@ const RedesignNavLinks = ({
     </li>
     );
   });
+
+  console.log('hamburger icon should be dark: ', darkMode);
   return (
     <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       { !omitHeaderItems

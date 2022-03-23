@@ -6,11 +6,28 @@ body.dark-mode #fusion-app {
   background-image: linear-gradient(180deg, #000, #000 400px, #fff 400px, #fff);
 }
 
+.dark-mode:not(.special) {
+
+  main {
+    background-color: #000;
+  }
+}
+
+.dark-mode {
+
+  p.story-text,
+  b,
+  main a,
+  main .section-title {
+    color: #fff !important; // stylelint-disable-line declaration-no-important
+  }
+}
+
 @include amp-exclude {
 
   body.dark-mode > :first-child div:empty {
     // edge-case catch for window shade / half shade wrapper's inline background-color
-    background-color: inherit !important; // stylelint-disable declaration-no-important
+    background-color: inherit !important; // stylelint-disable-line declaration-no-important
   }
 }
 
@@ -52,10 +69,6 @@ body.dark-mode #fusion-app {
       .logo {
         @include between-breakpoints(mobile, tablet) {
           max-width: 176px;
-        }
-
-        @include between-breakpoints(tablet, desktop-lg) {
-          max-width: 224px;
         }
 
         @include breakpoint(desktop-lg) {

@@ -13,10 +13,12 @@ import AmpNavBar from './amp';
 import Weather from './weather/default';
 import BreakingNews from '../breakingNews/default';
 import Login from './login/default';
+import DarkModeToggle from '../../../../resources/icons/global/darkMode';
 
 const NavBar = ({
-  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false, enableDarkMode,
+  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false, enableDarkMode, darkModeToggleButton, darkModeToggled, setDarkModeToggle, specialPresentationDark,
 }) => {
+  // console.log(darkModeToggle);
   // amp hijack
   if (ampPage) return <AmpNavBar />;
 
@@ -119,6 +121,12 @@ const NavBar = ({
     };
   }, [isMobile]);
 
+  useEffect(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setDarkModeToggle(true);
+    }
+  }, []);
+
   const {
     children,
     _id: rootDirectory,
@@ -162,7 +170,7 @@ const NavBar = ({
 
   return (
     <header className='c-nav'>
-      {!omitBreakingNews && !darkMode && <BreakingNews />}
+      {!omitBreakingNews && !specialPresentationDark && <BreakingNews />}
       <div className={`c-headerNav b-sectionHome-padding
         ${stickyNavVisibility ? 'stickyActive' : ''}
         ${hasWindowShade ? 'above-shade' : ''}
@@ -229,6 +237,7 @@ const NavBar = ({
         />
       </div>
       <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
+      <div className={`darkModeToggle ${darkModeToggleButton && 'is-visible'}`} onClick={(e) => { e.preventDefault(); setDarkModeToggle(!darkModeToggled); }}>{<DarkModeToggle toggle={darkModeToggled}/>}</div>
     </header>
   );
 };
@@ -243,6 +252,10 @@ NavBar.propTypes = {
   hasWindowShade: PropTypes.bool,
   omitBreakingNews: PropTypes.bool,
   enableDarkMode: PropTypes.bool,
+  darkModeToggleButton: PropTypes.bool,
+  darkModeToggled: PropTypes.bool,
+  setDarkModeToggle: PropTypes.func,
+  specialPresentationDark: PropTypes.bool,
 };
 
 export default NavBar;
