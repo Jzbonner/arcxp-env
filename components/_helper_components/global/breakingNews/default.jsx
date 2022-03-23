@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import BreakingNewsStory from './breaking-news-story';
 import BreakingNewsVideo from './breaking-news-video';
 
@@ -9,4 +9,4 @@ const BreakingNews = () => (
   </>
 );
 
-export default BreakingNews;
+export default memo(BreakingNews);
