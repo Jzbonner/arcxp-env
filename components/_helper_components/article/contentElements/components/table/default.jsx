@@ -22,11 +22,18 @@ const Table = ({ src }) => {
       }),
     }}/></td>;
 
+  const tableHeader = (index, output) => <th key={`table-header-${index + 1}`}>
+    <span dangerouslySetInnerHTML={{
+      __html: safeHtml(output, {
+        whiteList: {},
+      }),
+    }}/></th>;
+
   return (
     <div className="b-margin-bottom-d30-m20">
       <table className='c-table b-flexRow b-flexColumn'>
           { header.length > 0 && <thead><tr>
-            { header.map((cells, i) => i < 4 && <th key={`table-header-${i}`}><span>{cells.content}</span></th>)}
+            { header.map((cells, i) => i < 4 && tableHeader(i, cells.content))}
           </tr></thead>
           }
         <tbody>
