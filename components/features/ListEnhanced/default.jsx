@@ -32,9 +32,8 @@ const ListEnhanced = ({ customFields = {} }) => {
 
   if (isStaffBio) {
     source = 'author-stories-list';
-    // Loading 2x the number of storiesPerLoadMoreBtnClick basically preloads the next set.
-    globalContentQuery.size = storiesPerLoadMoreBtnClick * 2;
-    globalContentQuery.from = storiesCount - storiesPerLoadMoreBtnClick;
+    // Loading 10+ the number of storiesPerLoadMoreBtnClick basically preloads the next set.
+    globalContentQuery.size = storiesCount + 10;
   } else if (customFieldContentSource) {
     source = customFieldContentSource;
   } else if (globalContentContentSource) {
