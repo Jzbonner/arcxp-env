@@ -252,7 +252,6 @@
 
         img {
           height: 100%;
-          min-height: 227px;
 
           @include between-breakpoints(mobile, tablet) {
             min-height: 227px;
