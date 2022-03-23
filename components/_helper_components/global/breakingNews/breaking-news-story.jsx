@@ -53,13 +53,13 @@ const BreakingNewsStory = () => {
     saveCollection();
   };
   const isCollectionDismissed = dismissedCollectionStorage?.collectionArray.some(id => id === collectionId);
-  const isBannerDismissed = !isVisible || isCollectionDismissed;
+  const isBannerNotDismissed = isVisible && !isCollectionDismissed && typeof window !== 'undefined';
 
   if (story) {
     const headline = get(story, 'headlines.basic', '');
     const url = get(story, 'canonical_url', '');
     return (
-      <div className={`c-breakingNews ${isBannerDismissed ? 'is-hidden' : ''}`}>
+      <div className={`c-breakingNews ${isBannerNotDismissed ? 'is-visible' : ''}`}>
         <a href={url} className="breakingURL">
           <div className="c-breakingNews-heading b-flexCenter">
             <span>Breaking</span>
