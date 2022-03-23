@@ -10,6 +10,7 @@
   border: 1px solid #e74c3c;
   background-color: #fff;
   box-sizing: border-box;
+  display: none;
 
   @include breakpoint(tablet) {
     height: 40px;
@@ -31,8 +32,8 @@
     width: 100%;
   }
 
-  &.is-hidden {
-    display: none;
+  &.is-visible {
+    display: block;
   }
 
   .breakingURL {
