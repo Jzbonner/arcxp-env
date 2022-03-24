@@ -81,17 +81,19 @@ const ListEnhanced = ({ customFields = {} }) => {
   let filteredTeases = AddFirstInlineImage(filteredStories, 'list', ['list']);
   filteredTeases = updateImageRefs(filteredTeases);
 
-  filteredTeases = filteredTeases
-    .filter(element => element.sections
-      .some(subElement => !subElement.toLowerCase().includes('live')))
-    .map((element) => {
-      const n = Object.assign({}, element, {
-        sections: element.sections.filter(
-          subElement => !subElement.toLowerCase().includes('live'),
-        ),
+  if (source === 'most-read') {
+    filteredTeases = filteredTeases
+      .filter(element => element.sections
+        .some(subElement => !subElement.toLowerCase().includes('live')))
+      .map((element) => {
+        const n = Object.assign({}, element, {
+          sections: element.sections.filter(
+            subElement => !subElement.toLowerCase().includes('live'),
+          ),
+        });
+        return n;
       });
-      return n;
-    });
+  }
 
   if (!Array.isArray(filteredTeases) || !filteredTeases?.length) {
     return null;
