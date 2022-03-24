@@ -9,6 +9,12 @@
 
     .c-section {
 
+      .c-contentElements {
+        @include breakpoint(desktop-sm) {
+          width: 100%;
+        }
+      }
+
       .c-customHTML {
         float: none;
 

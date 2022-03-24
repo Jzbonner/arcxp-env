@@ -31,7 +31,8 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
   // Both checks return true if the tag is present and false if not.
   const hasNoAdsTag = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
   const hasNoRightRailTag = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-right-rail');
-  const removeFloat = hasNoRightRailTag ? 'float-none' : null;
+
+  // console.log('HERE', hasNoRightRailTag, hasNoAdsTag);
 
   const filteredContentElements = contentElements.filter(element => element && element.type && element.type === 'raw_html');
 
@@ -42,7 +43,7 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
         <TopNavBreakingNews articleURL={articleURL} headlines={headlines} comments={comments} type={type} subtype={subtype} noAds={hasNoAdsTag} />
       )}
       <main className="c-flatpage b-sectionHomeMaxWidth">
-        <article className={removeFloat}>
+        <article className='float-none'>
           {
             !hasNoAdsTag
             && <div className="c-hp01-mp01">
