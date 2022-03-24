@@ -59,12 +59,7 @@
 
     .opening-day {
       display: flex;
-      font-family: "Gordita";
-      font-size: 12.6px;
-      font-weight: 600;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: normal;
+      font: 13.6px "Gordita-Bold";
       letter-spacing: -.21px;
       text-align: center;
       color: #fff;
@@ -73,7 +68,9 @@
       bottom: 22%;
 
       @include breakpoint(tablet) {
-        bottom: 20px;
+        font-size: 16px;
+        letter-spacing: -.25px;
+        bottom: 24px;
       }
 
       span {
