@@ -359,7 +359,7 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
-    isSticky: false,
+    isSticky: true,
     bidding: {
       amazon: {
         enabled: true,
@@ -378,7 +378,7 @@ export const adSlots = {
     breakpoints: [
       [1024, 0], // desktop+
     ],
-    isSticky: false,
+    isSticky: true,
     bidding: {
       amazon: {
         enabled: true,
@@ -552,7 +552,7 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
-    isSticky: false,
+    isSticky: true,
     bidding: {
       amazon: {
         enabled: true,
@@ -571,7 +571,7 @@ export const adSlots = {
     breakpoints: [
       [1024, 0], // desktop+
     ],
-    isSticky: false,
+    isSticky: true,
     bidding: {
       amazon: {
         enabled: true,
@@ -691,7 +691,7 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
-    isSticky: false,
+    isSticky: true,
     bidding: {
       amazon: {
         enabled: true,
@@ -710,7 +710,7 @@ export const adSlots = {
     breakpoints: [
       [1024, 0], // desktop+
     ],
-    isSticky: false,
+    isSticky: true,
     bidding: {
       amazon: {
         enabled: true,
@@ -728,7 +728,7 @@ export const adSlots = {
     breakpoints: [
       [1024, 0], // desktop+
     ],
-    isSticky: false,
+    isSticky: true,
     bidding: {
       amazon: {
         enabled: true,
