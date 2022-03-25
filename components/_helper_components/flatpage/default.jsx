@@ -26,13 +26,9 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
 
   const { tags = [] } = taxonomy || {};
 
-  const RP01StoryFlatPage = () => <ArcAd staticSlot={'RP01-Story-FlatPage'} key={'RP01-Story-FlatPage'} />;
-
   // Both checks return true if the tag is present and false if not.
   const hasNoAdsTag = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
   const hasNoRightRailTag = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-right-rail');
-
-  // console.log('HERE', hasNoRightRailTag, hasNoAdsTag);
 
   const filteredContentElements = contentElements.filter(element => element && element.type && element.type === 'raw_html');
 
@@ -64,7 +60,6 @@ const FlatPage = ({ globalContent, noHeaderAndFooter }) => {
             !hasNoRightRailTag && !hasNoAdsTag
             && <Section
               elements={filteredContentElements}
-              rightRail={{ insertBeforeParagraph: 1, ad: RP01StoryFlatPage }}
             />
           }
 
