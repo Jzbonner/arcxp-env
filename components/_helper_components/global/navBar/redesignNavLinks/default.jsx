@@ -68,11 +68,11 @@ const RedesignNavLinks = ({
         <a href="/">
           <img src={logoPath} className={siteName} alt={`${siteName} logo`} />
         </a>
-      </div>}
+      </div> }
       <div className='stickyNav-homepage'>
         <ul>
           {items}
-          {enableDarkMode && <li><a href={darkModeSubscribe} targe='_self' className='nav-itemText'>Subscribe Today</a></li>}
+          {enableDarkMode && <li><a href={darkModeSubscribe} target='_self' className='nav-itemText'>Subscribe Today</a></li>}
         </ul>
         <Search isHeader={true}/>
       </div>

@@ -1,6 +1,8 @@
 @import "./../../../../../src/styles/base/mixins";
 @import "./../../../../../src/styles/base/breakpoints";
 
+// Dark Mode styling //
+
 body.dark-mode.special,
 body.dark-mode.special #fusion-app {
   background-image: linear-gradient(180deg, #000, #000 400px, #fff 400px, #fff);
@@ -10,20 +12,157 @@ body.dark-mode:not(.special) {
   background-color: #000;
 }
 
-.dark-mode:not(.special) {
+body.dark-mode .nav-breaking-news.is-above-shade {
+  background: #000;
+}
 
-  main {
-    background-color: #000;
+body.dark-mode .nav-breaking-news {
+  background: #000;
+
+  @include breakpoint(tablet) {
+    background: transparent;
   }
 
-  p.story-text,
-  b,
-  main a,
-  main .section-title,
-  .c-sectionTitle {
-    color: #fff !important; // stylelint-disable-line declaration-no-important
+  .c-headerNav {
+    @include between-breakpoints(mobile, tablet) {
+      border-bottom: 1px solid #fff;
+    }
+
+    .logo {
+      fill: #fff;
+    }
+
+    &.stickyActive {
+      background-color: #000;
+
+      .c-topNavLinks {
+        @include breakpoint(tablet) {
+          border: none;
+          width: 100%;
+          order: initial;
+        }
+      }
+    }
+
+    .nav-itemText {
+      @media only screen and(min-width: 768px) and(max-width: 820px) {
+        font-size: .65rem;
+      }
+    }
+  }
+
+  .c-topNavLinks {
+    @include breakpoint(tablet) {
+      border-bottom: solid 1px #dadada;
+      border-top: solid 1px #dadada;
+    }
+
+    ul li:last-child a {
+      color: #3299ad;
+      font-family: "Gordita-Bold", "Arial", sans-serif;
+
+      &:hover {
+        color: #ededed;
+      }
+    }
+  }
+
+  .nav-itemText,
+  .c-login .login-text,
+  .weather-text a,
+  .c-weather :before {
+    color: #fff;
+  }
+
+  .c-login .section-item .login-text {
+    color: #212126;
+  }
+
+  .search-icon {
+
+    path {
+      fill: #fff;
+    }
   }
 }
+
+@media (prefers-color-scheme: dark) {
+
+  body {
+
+    .special:not(.dark-mode),
+    .special:not(.dark-mode) #fusion-app {
+      background-image: linear-gradient(180deg, #000, #000 400px, #fff 400px, #fff);
+    }
+  
+    #fusion-app,
+    #fusion-app main,
+    .dark-mode:not(.special) {
+      background-color: #000;
+    }
+  
+    .dark-mode:not(.special) {
+
+      #fusion-app,
+      #fusion-app main {
+        background-color: #000;
+      }
+  
+      p.story-text,
+      b,
+      main a,
+      main .section-title,
+      .c-sectionTitle {
+        color: #fff !important; // stylelint-disable-line declaration-no-important
+      }
+    }
+  
+    .dark-mode #fusion-app {
+      background-color: #000;
+    }
+  
+    :not(.dark-mode) {
+  
+      #fusion-app,
+      #fusion-app main {
+        background-color: #fff;
+      }
+  
+      p.story-text,
+      b,
+      main a,
+      main .section-title,
+      .c-sectionTitle {
+        color: initial !important; // stylelint-disable-line declaration-no-important
+      }
+    }
+  }
+}
+
+@media (prefers-color-scheme: light) {
+
+  body {
+    background-color: #fff;
+  }
+
+  body.dark-mode {
+
+    #fusion-app,
+    #fusion-app main {
+      background-color: #000;
+    }
+
+    p.story-text,
+    b,
+    main a,
+    main .section-title,
+    .c-sectionTitle {
+      color: #fff !important; // stylelint-disable-line declaration-no-important
+    }
+  }
+}
+
+// Dark mode styling end
 
 @include amp-exclude {
 
@@ -41,10 +180,6 @@ body.dark-mode:not(.special) {
     width: 100%;
     z-index: 9999;
     background: #fff;
-
-    &.dark-mode {
-      background: #000;
-    }
   }
 
   &.with-half-shade:not(.is-above-shade) .c-breakingNews {
@@ -52,75 +187,6 @@ body.dark-mode:not(.special) {
 
     @include breakpoint(desktop-sm) {
       margin-top: 20px;
-    }
-  }
-
-  &.dark-mode {
-    background: #000;
-
-    @include breakpoint(tablet) {
-      background: transparent;
-    }
-
-    .c-headerNav {
-      @include between-breakpoints(mobile, tablet) {
-        border-bottom: 1px solid #fff;
-        padding-bottom: 0;
-      }
-
-      .logo {
-        @include between-breakpoints(mobile, tablet) {
-          max-width: 176px;
-        }
-
-        @include breakpoint(desktop-lg) {
-          max-width: 346px;
-        }
-      }
-
-      &.stickyActive {
-        background-color: #000;
-      }
-
-      .nav-itemText {
-        @media only screen and(min-width: 768px) and(max-width: 820px) {
-          font-size: .65rem;
-        }
-      }
-    }
-
-    .c-topNavLinks {
-      @include breakpoint(tablet) {
-        border-bottom: solid 1px #dadada;
-        border-top: solid 1px #dadada;
-      }
-
-      ul li:last-child a {
-        color: #3299ad;
-        font-family: "Gordita-Bold", "Arial", sans-serif;
-
-        &:hover {
-          color: #ededed;
-        }
-      }
-    }
-
-    .nav-itemText,
-    .c-login .login-text,
-    .weather-text a,
-    .c-weather :before {
-      color: #fff;
-    }
-
-    .c-login .section-item .login-text {
-      color: #212126;
-    }
-
-    .search-icon {
-
-      path {
-        fill: #fff;
-      }
     }
   }
 }

@@ -99,6 +99,14 @@ const RenderOutputType = (props) => {
           ></noscript>
           /* End Google Tag Manager (noscript) */
         )}
+        <script dangerouslySetInnerHTML={{
+          __html:
+          `(function() { try { var mode = localStorage.getItem('${arcSite}_dark-mode'); var
+          supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          === true; if (mode === 'enabled') document.body.classList.add('dark-mode'); if (mode === 'enabled' && supportDarkMode) document.body.classList.add('dark-mode');
+          if (!mode) return;
+          } catch (e) {} })();`,
+        }} />
         <div id="fusion-app">{children}</div>
         <Fusion />
         {connextIsEnabled && (

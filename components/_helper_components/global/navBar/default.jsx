@@ -18,7 +18,6 @@ import DarkModeToggle from '../../../../resources/icons/global/darkMode';
 const NavBar = ({
   articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false, enableDarkMode, darkModeToggled, setDarkModeToggle, inMemoriam,
 }) => {
-  console.log(enableDarkMode);
   // amp hijack
   if (ampPage) return <AmpNavBar />;
 
@@ -32,12 +31,13 @@ const NavBar = ({
   const isMobileVisibilityRef = React.useRef(isMobile);
   const mobileBreakpoint = 767;
   const darkMode = darkModeToggled;
-
   const fusionContext = useFusionContext();
   const { arcSite, globalContent, outputType } = fusionContext;
   const {
     logoRedesign, siteName, weatherPageUrl, closeButton, burgerMenuBackground, burgerWhiteLogo,
   } = getProperties(arcSite);
+  const darkModeSite = `${arcSite}_dark-mode`;
+
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
 
@@ -121,14 +121,6 @@ const NavBar = ({
     };
   }, [isMobile]);
 
-  useEffect(() => {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setDarkModeToggle(true);
-    } else {
-      setDarkModeToggle(false);
-    }
-  }, []);
-
   const {
     children,
     _id: rootDirectory,
@@ -186,8 +178,6 @@ const NavBar = ({
               <Logo
                 source={`${deployment(`${contextPath}${logoRedesign}`)}`}
                 rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
-                darkMode={darkMode}
-                darkModeLogo={`${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
               />
             </div>
           <Login
@@ -241,7 +231,20 @@ const NavBar = ({
         />
       </div>
       <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
-      <div className={`darkModeToggle ${enableDarkMode && !inMemoriam ? 'is-visible' : ''}`} onClick={(e) => { e.preventDefault(); setDarkModeToggle(!darkModeToggled); }}>{<DarkModeToggle toggle={darkModeToggled}/>}</div>
+      <div className={`darkModeToggle ${enableDarkMode && !inMemoriam ? 'is-visible' : ''}`} onClick={(e) => {
+        e.preventDefault();
+        if (typeof window !== 'undefined') {
+          const docBody = document.querySelector('body');
+          if (darkModeToggled === false) {
+            docBody.classList += ' dark-mode';
+            window.localStorage.setItem(darkModeSite, 'enabled');
+          } else if (darkModeToggled === true) {
+            window.localStorage.setItem(darkModeSite, 'disabled');
+            docBody.classList.remove('dark-mode');
+          }
+        }
+        setDarkModeToggle(!darkModeToggled);
+      }}>{<DarkModeToggle toggle={darkModeToggled}/>}</div>
     </header>
   );
 };

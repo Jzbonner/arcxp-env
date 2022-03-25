@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import NavBar from '../default';
 import ArcAd from '../../../../features/ads/default';
 import WeatherAlerts from '../../weatherAlerts/default';
@@ -26,16 +26,18 @@ const TopNavBreakingNews = ({
   const windowExists = typeof window !== 'undefined';
   const { darkMode, inMemoriam } = getContentMeta();
   const appContext = useAppContext();
+  const fusionContext = useFusionContext();
+  const { arcSite } = fusionContext;
   const { isAdmin, globalContent } = appContext;
   const { taxonomy } = globalContent || {};
   const { tags = [] } = taxonomy || {};
   const hasNoAdsTag = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
   const darkModeWithAds = !darkMode || (darkMode && !inMemoriam);
+  const darkModeSite = `${arcSite}_dark-mode`;
 
   const docHasWindowShade = (checkCollapse, checkHalfShade) => {
     if (windowExists) {
       const docBody = document.querySelector('body');
-
       if (checkCollapse) {
         return docBody.classList.contains('window-shade-collapsed');
       }
@@ -67,14 +69,9 @@ const TopNavBreakingNews = ({
       const docBodyClass = docBody.getAttribute('class') || '';
       // add the dark-mode class to ensure body bg is blacked out
       if (inMemoriam && docBodyClass.indexOf('special') === -1) {
-        docBody.classList += ' special';
+        docBody.classList += ' dark special';
       }
-      if (darkModeToggled && darkMode && docBodyClass.indexOf('dark-mode')
- === -1) {
-        docBody.classList += ' dark-mode';
-      } else if (!darkModeToggled && darkMode && docBodyClass.indexOf('dark-mode') !== -1) {
-        docBody.classList.remove('dark-mode');
-      }
+
       document.onreadystatechange = () => {
         if (document.readyState === 'complete') {
           if (docHasWindowShade()) {
@@ -88,7 +85,7 @@ const TopNavBreakingNews = ({
         }
       };
     }
-  }, [aboveWindowShade, hasHalfShade, darkModeToggled]);
+  }, [aboveWindowShade, hasHalfShade]);
 
   useEffect(() => {
     if (windowExists) {
@@ -100,6 +97,25 @@ const TopNavBreakingNews = ({
 
     return null;
   }, [aboveWindowShade]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Dark/ Light mode already saved in local storage
+      if (window.localStorage.getItem(darkModeSite) === 'enabled') {
+        setDarkModeToggle(true);
+      } else if (window.localStorage.getItem(darkModeSite) === 'disabled') {
+        setDarkModeToggle(false);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && window.localStorage.getItem(darkModeSite) === 'enabled') {
+        setDarkModeToggle(true);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setDarkModeToggle(true);
+        window.localStorage.setItem(darkModeSite, 'enabled');
+      } else {
+        setDarkModeToggle(false);
+        window.localStorage.setItem(darkModeSite, 'disabled');
+      }
+    }
+  }, []);
 
   return (
     <>
