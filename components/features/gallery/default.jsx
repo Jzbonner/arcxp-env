@@ -141,8 +141,6 @@ const Gallery = (props) => {
     finalPromoItemTopics = promoItems.additional_properties.keywords;
   }
 
-  console.log('gallery taxonomy', taxonomy);
-
   if (fetchedTaxonomy.tags && fetchedTaxonomy.tags.length) {
     finalTaxonomyTopics = fetchedTaxonomy.tags;
   } else if (featuredTaxonomy.tags && featuredTaxonomy.tags.length) {
@@ -238,7 +236,7 @@ const Gallery = (props) => {
     if (!isMobile || isEmbed) handleClickCount();
     setPreviousClickAction(currentAction);
 
-    if ((!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0)) || (isAdVisible && currentClickCount === 4)) {
+    if (noAds || (!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0)) || (isAdVisible && currentClickCount === 4)) {
       // change current image index by -1
       if (action === actions.PREV) {
         setCurrentAction(action);
@@ -250,7 +248,7 @@ const Gallery = (props) => {
             } else {
               setCurrentIndex(maxIndex);
             }
-          } else if (isAdVisible && previousClickAction === actions.NEXT) {
+          } else if (!noAds && isAdVisible && previousClickAction === actions.NEXT) {
             setCurrentIndex(currentIndex);
           } else {
             setCurrentIndex(currentIndex - 1);
@@ -263,7 +261,7 @@ const Gallery = (props) => {
         if (!isAdVisible || currentClickCount % 4 === 0) {
           if (currentIndex === maxIndex) {
             setCurrentIndex(0);
-          } else if (isAdVisible && previousClickAction === actions.PREV) {
+          } else if (!noAds && isAdVisible && previousClickAction === actions.PREV) {
             setCurrentIndex(currentIndex);
           } else {
             setCurrentIndex(currentIndex + 1);
@@ -547,7 +545,7 @@ const Gallery = (props) => {
 
   // handles ad insertions and removals for desktop gallery
   useEffect(() => {
-    if ((!isMobile || isEmbed) && !noAds) {
+    if (!noAds && (!isMobile || isEmbed)) {
       if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
         const adInsertedElementArray = insertDesktopGalleryAd();
@@ -586,7 +584,7 @@ const Gallery = (props) => {
         renderCaptionByCurrentIndex();
       }
     }
-  }, [isAdVisible, clickCount]);
+  }, [isAdVisible, clickCount, noAds]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScrollEvent, true);
