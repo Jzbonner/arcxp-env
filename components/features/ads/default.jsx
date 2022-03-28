@@ -153,12 +153,13 @@ const ArcAd = ({
       width: 'auto',
     }}>{slotName} placeholder</div>;
   }
+
   const arcad = (
     <AdSetup
       refresh={false}
       breakpoints={adConfig.breakpoints || defaultAdSlot.breakpoints}
       className={`arc_ad | ${slotName} b-margin-bottom-d30-m20
-      ${adConfig.isRightRailAd ? 'c-rightRail' : ''} ${adConfig.isSticky ? 'is-sticky' : ''}`}
+       ${adConfig.isSticky ? 'is-sticky' : ''}`}
       dimensions={adConfig.dimensions || defaultAdSlot.dimensions}
       dfpId={dfpIdFormatted}
       display={adConfig.display || defaultAdSlot.display}
