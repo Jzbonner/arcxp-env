@@ -266,7 +266,7 @@ const getContentMeta = () => {
   const { sophi_paywall: sophiPaywall } = label || {};
 
 
-  if (enableSophiPaywall) {
+  if (enableSophiPaywall && subtype) {
     paywallStatus = sophiPaywall && sophiPaywall.text ? sophiPaywall.text : 'free';
   } else {
     paywallStatus = contentPaywallStatus;
