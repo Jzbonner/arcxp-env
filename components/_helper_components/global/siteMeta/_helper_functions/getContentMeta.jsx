@@ -1,4 +1,5 @@
 import { useAppContext } from 'fusion:context';
+import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import getDomain from '../../../../layouts/_helper_functions/getDomain';
 import checkPageType from '../../../../layouts/_helper_functions/getPageType.js';
@@ -7,7 +8,7 @@ import { formatTime, formatDate } from '../../../article/timestamp/_helper_funct
 
 const getContentMeta = () => {
   const appContext = useAppContext();
-  let paywallStatus;
+  let paywallStatus = 'free';
   const {
     arcSite,
     globalContent,
@@ -51,7 +52,6 @@ const getContentMeta = () => {
     content_elements: contentElements = [],
     content_restrictions: contentRestrictions,
     syndication,
-    label,
   } = globalContent || {};
   const articleDesc = description;
   const {
@@ -263,11 +263,22 @@ const getContentMeta = () => {
   const appleIconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
 
   const { content_code: contentPaywallStatus } = contentRestrictions || {};
-  const { sophi_paywall: sophiPaywall } = label || {};
 
 
-  if (enableSophiPaywall && subtype) {
-    paywallStatus = sophiPaywall && sophiPaywall.text ? sophiPaywall.text : 'free';
+  if (enableSophiPaywall && subtype && uuid) {
+    // we make a call to sophi's paywall endpoint for this story, to get the paywall status
+    const sophiPaywallStatusMap = {
+      METERED: 'premium',
+      PAYWALL: 'subscriberonly',
+      NOWALL: 'free',
+    };
+    const sophiStatus = useContent({
+      source: 'sophi-paywall',
+      query: {
+        ids: uuid,
+      },
+    }) || '';
+    paywallStatus = sophiPaywallStatusMap[sophiStatus] || paywallStatus;
   } else {
     paywallStatus = contentPaywallStatus;
   }
