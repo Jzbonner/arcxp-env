@@ -76,7 +76,7 @@ main > .c-gallery-basic {
 
 .gallery-caption-container {
   margin: 5px auto 35px;
-  max-width: 820px;
+  max-width: 728px;
 
   @include between-breakpoints(tablet,desktop-sm) {
     width: calc(100% - 140px);
@@ -195,7 +195,7 @@ main > .c-gallery-basic {
 
 .c-articleContent {
   @include breakpoint(desktop-sm) {
-    max-width: 820px;
+    max-width: 728px;
     margin: 0 auto;
   }
 
@@ -226,6 +226,10 @@ main > .c-gallery-basic {
 
   &.b-contentMaxWidth {
     padding-top: 0;
+
+    @include breakpoint(desktop-sm) {
+      max-width: 728px;
+    }
   }
 
   .c-customHTML {
