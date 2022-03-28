@@ -435,7 +435,6 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
-    isRightRailAd: true,
     bidding: {
       amazon: {
         enabled: true,
@@ -455,8 +454,7 @@ export const adSlots = {
       [1024, 0], // desktop
       [768, 0], // tablet
     ],
-    isRightRailAd: true,
-    isSticky: true,
+    isSticky: false,
     bidding: {
       amazon: {
         enabled: true,
@@ -613,8 +611,7 @@ export const adSlots = {
       [1024, 0], // desktop
       [0, 0], // tablet
     ],
-    isRightRailAd: true,
-    isSticky: true,
+    isSticky: false,
     bidding: {
       amazon: {
         enabled: true,

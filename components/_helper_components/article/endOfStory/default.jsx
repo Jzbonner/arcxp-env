@@ -42,8 +42,6 @@ const EndOfStory = ({ arcSite, taxonomy, uuid }) => {
   if (data && data.content_elements && data.content_elements.length > 1) {
     contentData = filterDuplicateStory(data.content_elements, uuid);
     primaryData = filterByPrimarySection(contentData, formattedPath);
-  } else {
-    return null;
   }
 
   return (
@@ -53,7 +51,7 @@ const EndOfStory = ({ arcSite, taxonomy, uuid }) => {
         <div className="endOfStory">
           <div className="mostReadTitle">The Latest</div>
           <div className="c-homeLeadContainer left-photo-no-photo-display-class one-column">
-            <div className="column-1">{getLists(primaryData, 0, 3, 3, true, 'Redesign Feature - Left Photo No Photo', false)}</div>
+            <div className="column-1">{primaryData && getLists(primaryData, 0, 3, 3, true, 'Redesign Feature - Left Photo No Photo', false)}</div>
           </div>
         </div>
         <Investigations arcSite={arcSite} collectionId={investigationsId}/>

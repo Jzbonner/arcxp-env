@@ -27,7 +27,7 @@ export default {
   domainTwitterURL: 'https://twitter.com/ajc',
   domainFacebookURL: 'https://facebook.com/ajc',
   domainBlockerTracking: 'https://rtwa.ajc.com',
-  enableSophiPaywall: true,
+  enableSophiPaywall: false,
   metrics: {
     siteID: 'ajc',
     siteMetro: 'ga: atlanta',

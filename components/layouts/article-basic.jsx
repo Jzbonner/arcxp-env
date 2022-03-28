@@ -157,7 +157,7 @@ const StoryPageLayout = () => {
       stopIndex={3}
       rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null}
       insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [RP01StoryTablet, MP02] : [ampMP02] }] : null}
-      fullWidth={noAds}
+      fullWidth={true}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
       ampPage={ampPage}
     />
@@ -180,7 +180,7 @@ const StoryPageLayout = () => {
       elements={filteredContentElements}
       startIndex={start}
       stopIndex={stop}
-      fullWidth={noAds}
+      fullWidth={true}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
       ampPage={ampPage}
       insertedAds={ampPage && maxNumberOfParagraphs >= 4 && paywallStatus !== 'free' ? [{ insertAfterParagraph: 4, adArray: [connextThankYouMessage] }] : null}
@@ -201,7 +201,7 @@ const StoryPageLayout = () => {
       startIndex={stop}
       rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
       insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [RP09StoryTablet, MP03] : [ampMP03] }] : null}
-      fullWidth={noAds}
+      fullWidth={true}
       insertAtSectionEnd={insertAtEndOfStory}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
       ampPage={ampPage}
