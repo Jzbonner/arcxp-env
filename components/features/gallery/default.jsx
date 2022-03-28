@@ -13,6 +13,7 @@ import {
 import {
   debounce, createBaseGallery, handleImageFocus, reorganizeElements, handlePropContentElements,
 } from './_helper_functions/index';
+import checkTags from '../../layouts/_helper_functions/checkTags';
 import ArcAd from '../ads/default';
 import PGO1Element from '../../_helper_components/global/ads/pg01/default';
 import MPGO1Element from '../../_helper_components/global/ads/mpg01/default';
@@ -129,6 +130,8 @@ const Gallery = (props) => {
 
   const { taxonomy: fetchedTaxonomy = {}, promo_items: fetchedPromoItems = {} } = fetchedGalleryData || {};
   const { taxonomy: featuredTaxonomy = {}, promo_items: featuredPromoItems = {} } = featuredGalleryData || {};
+  const { tags = [] } = taxonomy || {};
+  const noAds = checkTags(tags, 'no-ads');
 
   if (fetchedPromoItems?.basic?.additional_properties?.keywords) {
     finalPromoItemTopics = fetchedPromoItems.basic.additional_properties.keywords;
@@ -137,6 +140,8 @@ const Gallery = (props) => {
   } else if (promoItems?.additional_properties?.keywords) {
     finalPromoItemTopics = promoItems.additional_properties.keywords;
   }
+
+  console.log('gallery taxonomy', taxonomy);
 
   if (fetchedTaxonomy.tags && fetchedTaxonomy.tags.length) {
     finalTaxonomyTopics = fetchedTaxonomy.tags;
@@ -542,7 +547,7 @@ const Gallery = (props) => {
 
   // handles ad insertions and removals for desktop gallery
   useEffect(() => {
-    if (!isMobile || isEmbed) {
+    if ((!isMobile || isEmbed) && !noAds) {
       if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
         const adInsertedElementArray = insertDesktopGalleryAd();
