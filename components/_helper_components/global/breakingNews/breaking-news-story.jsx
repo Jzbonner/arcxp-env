@@ -29,31 +29,32 @@ const BreakingNewsStory = () => {
   });
 
   const [story] = get(newsData, 'content_elements', []);
-  const { _id: collectionId } = newsData || {};
-  const breakingNewsLSLookup = `dismissed_breaking_news_${siteName}_${currentEnv.toUpperCase()}`;
-  const dismissedCollectionStorage = typeof window !== 'undefined' ? JSON.parse(window.localStorage.getItem(breakingNewsLSLookup)) : null;
 
-  const saveCollection = () => {
-    if (!dismissedCollectionStorage) {
-      const initialCollectionEntry = {
-        collectionArray: [collectionId],
+  const storyId = story?._id;
+  const breakingNewsLSLookup = `dismissed_breaking_news_${siteName}_${currentEnv.toUpperCase()}`;
+  const dismissedStoryStorage = typeof window !== 'undefined' ? JSON.parse(window.localStorage.getItem(breakingNewsLSLookup)) : null;
+
+  const saveStory = () => {
+    if (!dismissedStoryStorage) {
+      const initialStoryEntry = {
+        storyArray: [storyId],
       };
-      window.localStorage.setItem(breakingNewsLSLookup, JSON.stringify(initialCollectionEntry));
+      window.localStorage.setItem(breakingNewsLSLookup, JSON.stringify(initialStoryEntry));
     } else {
-      const { collectionArray } = dismissedCollectionStorage || {};
-      const additionalCollectionEntry = {
-        collectionArray: [collectionId, ...collectionArray],
+      const { storyArray } = dismissedStoryStorage || {};
+      const additionalStoryEntry = {
+        storyArray: [storyId, ...storyArray],
       };
-      window.localStorage.setItem(breakingNewsLSLookup, JSON.stringify(additionalCollectionEntry));
+      window.localStorage.setItem(breakingNewsLSLookup, JSON.stringify(additionalStoryEntry));
     }
   };
 
   const hideBar = () => {
     setVisibility(false);
-    saveCollection();
+    saveStory();
   };
-  const isCollectionDismissed = dismissedCollectionStorage?.collectionArray.some(id => id === collectionId);
-  const isBannerNotDismissed = isVisible && !isCollectionDismissed && typeof window !== 'undefined';
+  const isStoryDismissed = dismissedStoryStorage?.storyArray?.some(id => id === storyId);
+  const isBannerNotDismissed = isVisible && !isStoryDismissed && typeof window !== 'undefined';
 
   if (story) {
     const headline = get(story, 'headlines.basic', '');

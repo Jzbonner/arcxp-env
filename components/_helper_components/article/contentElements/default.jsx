@@ -54,6 +54,8 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
                 imageMarginBottom="b-margin-bottom-d40-m20"
                 maxTabletViewWidth={maxTabletViewWidth}
                 key={`Image-${i}`}
+                useSrcSet={true}
+                srcSetSizes={[[1022, 0], [1022, 0], [800, 0]]}
               />
             );
           case 'text':

@@ -259,9 +259,19 @@
 }
 
 .c-articleContent {
-  
+
   .c-image-component {
     overflow: visible;
+  }
+
+  .c-contentElements {
+
+    .image-landscape {
+      @include breakpoint(desktop-sm) {
+        width: 1022px;
+        left: -147px;
+      }
+    }
   }
 }
 
