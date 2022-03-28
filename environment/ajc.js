@@ -7,4 +7,8 @@ export default {
   SOPHI_ENDPOINT: 'https://site-automation-api.ml.sophi.io/curatedHosts/www.ajc.com/curator',
   SOPHI_TOKEN_URL: 'https://sophi-prod.auth0.com/oauth/token',
   SOPHI_TOKEN_AUDIENCE: 'https://api.sophi.io',
+  SOPHI_PAYWALL_CLIENT_ID: '%{AQICAHiH7W8m/ZwSizPtJ5+e3MKEKRvPhAGdG3pC/jWLxGpnzgFH2slMAzsjsdgFN1UjPZ8pAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMJuuWnIZs4/bP94qNAgEQgDu29BeURH4Dv7Lyabfp3Vv2Hl0MR46svG79suFxdZEm0inXVU6Q90KsgxWzFj+uiUhCcWZMlKMA7K7lug==}',
+  SOPHI_PAYWALL_CLIENT_SECRET: '%{AQICAHiH7W8m/ZwSizPtJ5+e3MKEKRvPhAGdG3pC/jWLxGpnzgHATglOe7cudMDD8Rf6f/aJAAAAojCBnwYJKoZIhvcNAQcGoIGRMIGOAgEAMIGIBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDIkOJCs/JHxKih501gIBEIBbgvwjUSEnhLxflPNpNYBPvX+0TDqu0fyjRR1tjHt/Y/9EdbAnQJDUABk1xTXppGM7Rxj77f/kEt2VDN2xGff/NmNwisrNK1bY+Dn2mTnWe3J2OFcj0YjY+VAEKg==}',
+  SOPHI_PAYWALL_ENDPOINT: 'https://scp-api-ajc.ml.sophi.io/v1/hosts/www.ajc.com/paywallStatus',
+  SOPHI_PAYWALL_TOKEN_AUDIENCE: 'https://scp-inference-api.sophi.io',
 };
