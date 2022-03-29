@@ -4,8 +4,8 @@
 // Dark Mode styling //
 // "Special" dark mode for when there's an obit or special event
 
-body.dark-mode.special,
-body.dark-mode.special #fusion-app {
+body.special,
+body.special #fusion-app {
   background-image: linear-gradient(180deg, #000, #000 400px, #fff 400px, #fff);
 }
 
@@ -15,18 +15,22 @@ body.special .copyright-wrapper {
 }
 // Dark mode base background styling overrides
 
-body.dark-mode .nav-breaking-news.is-above-shade,
-body.dark-mode:not(.special),
-body.dark-mode .c-footer,
-body.dark-mode .copyright-wrapper,
-body.dark-mode .copyright-wrapper .c-copyright,
-body.dark-mode .footer-wrapper {
-  background-color: #000;
+body.dark-mode,
+body.special {
+
+  .nav-breaking-news.is-above-shade,
+  .c-footer,
+  .copyright-wrapper,
+  .copyright-wrapper .c-copyright,
+  .footer-wrapper {
+    background-color: #000;
+  }
 }
 
 // Dark mode base header styling
 
-body.dark-mode .nav-breaking-news {
+body.dark-mode .nav-breaking-news,
+body.special .nav-breaking-news {
   background-color: #000;
 
   @include breakpoint(tablet) {
@@ -41,7 +45,7 @@ body.dark-mode .nav-breaking-news {
     .logo,
     .nav-menu-toggle g,
     .c-login path {
-      fill: #fff;
+      fill: #fff !important; // stylelint-disable-line declaration-no-important
     }
 
     &.stickyActive {
@@ -83,7 +87,7 @@ body.dark-mode .nav-breaking-news {
   .c-login .login-text,
   .weather-text a,
   .c-weather :before {
-    color: #fff;
+    color: #fff !important; // stylelint-disable-line declaration-no-important
   }
 
   .c-login .section-item .login-text {
@@ -195,9 +199,26 @@ body.dark-mode .nav-breaking-news {
         }
       }
     }
+
+    &:not(.special) {
+
+      #fusion-app,
+      #fusion-app main {
+        background-color: transparent;
+      }
+    }
     // Default styling for when user has dark scheme on their end
 
-    &.dark-mode {
+    &.special {
+
+      #fusion-app,
+      #fusion-app main {
+        background-color: transparent !important; // stylelint-disable-line declaration-no-important
+      }
+    }
+    
+    &.dark-mode,
+    &.special {
 
       .c-copyright,
       .menu-body-links a,
@@ -207,7 +228,7 @@ body.dark-mode .nav-breaking-news {
     }
     // Dark mode styling, not memoriam or special
 
-    &.dark-mode:not(.special) {
+    &.dark-mode {
       background-color: #000;
 
       #fusion-app,

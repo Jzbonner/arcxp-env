@@ -32,6 +32,7 @@ const TopNavBreakingNews = ({
   const hasNoAdsTag = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
   const darkModeWithAds = !darkMode || (darkMode && !inMemoriam);
   const darkModeSite = `${arcSite}_dark-mode`;
+  const darkModeStyling = darkMode || inMemoriam || darkHeaderFooter;
 
   const docHasWindowShade = (checkCollapse, checkHalfShade) => {
     if (windowExists) {
@@ -122,7 +123,7 @@ const TopNavBreakingNews = ({
   return (
     <>
       {!noAds && darkModeWithAds && !isAdmin && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
-      <div className={`nav-breaking-news ${darkMode ? 'dark-mode' : ''} ${aboveWindowShade ? 'is-above-shade' : ''} ${storyHasShade}`} >
+      <div className={`nav-breaking-news ${darkModeStyling ? 'dark-mode' : ''} ${aboveWindowShade ? 'is-above-shade' : ''} ${storyHasShade}`} >
         <WeatherAlerts />
         <NavBar
           articleURL={articleURL}

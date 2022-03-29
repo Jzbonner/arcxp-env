@@ -41,7 +41,7 @@ const RenderOutputType = (props) => {
   const pageType = checkPageType(type, layout);
   const { isNonContentPage } = pageType || {};
   const contentMeta = getContentMeta() || {};
-  const { topics = [], contentId = '' } = contentMeta;
+  const { topics = [], contentId = '', darkMode } = contentMeta;
   const noAds = checkTags(topics, 'no-ads');
   const noAmp = checkTags(topics, 'no-amp');
   const includeGtm = metrics && metrics.gtmContainerKey;
@@ -103,7 +103,7 @@ const RenderOutputType = (props) => {
           __html:
           `(function() { try { var mode = localStorage.getItem('${arcSite}_dark-mode'); var
           supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-          === true; if (mode === 'enabled') document.body.classList.add('dark-mode'); if (mode === 'enabled' && supportDarkMode) document.body.classList.add('dark-mode');
+          === true; if ((${darkMode} && mode === 'enabled' || ${darkMode} && !mode && supportDarkMode)) document.body.classList.add('dark-mode');
           if (!mode) return;
           } catch (e) {} })();`,
         }} />
