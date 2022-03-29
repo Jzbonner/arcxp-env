@@ -15,6 +15,58 @@
   display: none;
 }
 
+/* overrides when an embedded gallery exists within a special presentation story */
+
+.dark-mode {
+
+  .story-paygate_placeholder {
+
+    .c-gallery-embed {
+      width: 100vw;
+      margin: 0 auto;
+      max-width: 1540px;
+
+      .gallery-wrapper {
+        @include breakpoint(tablet) {
+          width: 100%;
+          position: initial;
+        }
+
+        .gallery-caption-icons-box {
+          @include breakpoint(desktop-sm) {
+            margin: 30px auto 0;
+          }
+
+          .gallery-count {
+
+            .gallery-count-next,
+            .gallery-count-prev {
+              background: #fff;
+              box-shadow: none;
+            }
+  
+            .mobile-change img {
+              filter: brightness(10);
+            }
+  
+            .count--box {
+              color: #fff;
+            }
+          }
+        }
+
+        .gallery-caption-container .gallery-caption {
+          color: #fff;
+
+          @include breakpoint(desktop-sm) {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
 .c-gallery-embed {
   @include between-breakpoints(mobile, tablet) {
     position: relative;
