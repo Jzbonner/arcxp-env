@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useAppContext } from 'fusion:context';
 import NavBar from '../default';
 import ArcAd from '../../../../features/ads/default';
 import WeatherAlerts from '../../weatherAlerts/default';
@@ -26,9 +26,7 @@ const TopNavBreakingNews = ({
   const windowExists = typeof window !== 'undefined';
   const { darkMode, inMemoriam, darkHeaderFooter } = getContentMeta();
   const appContext = useAppContext();
-  const fusionContext = useFusionContext();
-  const { arcSite } = fusionContext;
-  const { isAdmin, globalContent } = appContext;
+  const { isAdmin, globalContent, arcSite } = appContext;
   const { taxonomy } = globalContent || {};
   const { tags = [] } = taxonomy || {};
   const hasNoAdsTag = tags.some(tag => tag && tag.text && tag.text.toLowerCase() === 'no-ads');
