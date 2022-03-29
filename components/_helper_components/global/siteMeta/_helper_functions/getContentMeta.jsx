@@ -23,6 +23,7 @@ const getContentMeta = () => {
   const noIndex = metaValue('no index');
   const darkMode = metaValue('dark mode') === 'true';
   const inMemoriam = metaValue('in-memoriam') === 'true';
+  const darkHeaderFooter = metaValue('dark header footer') === 'true';
   const pageIsLive = metaValue('live');
   const pbPaywall = metaValue('story-meter');
   const metaTitle = metaValue('title');
@@ -306,6 +307,7 @@ const getContentMeta = () => {
     noIndex,
     darkMode,
     inMemoriam,
+    darkHeaderFooter,
     pageIsLive,
     metaTitle,
     metaDescription,

@@ -7,7 +7,6 @@ const Logo = ({
   source, rootDirectory, topRef, siteName, darkMode, darkModeLogo,
 }) => {
   if (siteName === 'ajc') {
-    console.log('Hello');
     return <LogoFullRedesign/>;
   }
   return (

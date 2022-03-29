@@ -24,7 +24,7 @@ const TopNavBreakingNews = ({
   const [hasHalfShade, setHasHalfShade] = useState(false);
   const [darkModeToggled, setDarkModeToggle] = useState('');
   const windowExists = typeof window !== 'undefined';
-  const { darkMode, inMemoriam } = getContentMeta();
+  const { darkMode, inMemoriam, darkHeaderFooter } = getContentMeta();
   const appContext = useAppContext();
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -68,8 +68,8 @@ const TopNavBreakingNews = ({
       const docBody = document.querySelector('body');
       const docBodyClass = docBody.getAttribute('class') || '';
       // add the dark-mode class to ensure body bg is blacked out
-      if (inMemoriam && docBodyClass.indexOf('special') === -1) {
-        docBody.classList += ' dark special';
+      if ((inMemoriam || darkHeaderFooter) && docBodyClass.indexOf('special') === -1) {
+        docBody.classList += ' special';
       }
 
       document.onreadystatechange = () => {
@@ -99,18 +99,22 @@ const TopNavBreakingNews = ({
   }, [aboveWindowShade]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && darkMode) {
       // Dark/ Light mode already saved in local storage
       if (window.localStorage.getItem(darkModeSite) === 'enabled') {
         setDarkModeToggle(true);
       } else if (window.localStorage.getItem(darkModeSite) === 'disabled') {
         setDarkModeToggle(false);
+        // Dark scheme on user machine settings but previously toggled AJC dark mode
       } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && window.localStorage.getItem(darkModeSite) === 'enabled') {
         setDarkModeToggle(true);
+        // Dark scheme on user machine settings, set local storage preference to dark and add dark mode styling
       } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         setDarkModeToggle(true);
         window.localStorage.setItem(darkModeSite, 'enabled');
+        document.querySelector('body').classList += ' dark-mode';
       } else {
+        // Light mode or no preference, no AJC dark mode
         setDarkModeToggle(false);
         window.localStorage.setItem(darkModeSite, 'disabled');
       }
@@ -120,7 +124,7 @@ const TopNavBreakingNews = ({
   return (
     <>
       {!noAds && darkModeWithAds && !isAdmin && <div className={`${docHasWindowShade() ? 'leave-behind' : 'b-hidden'}`}>{HS01(galleryTopics)}</div>}
-      <div className={`nav-breaking-news ${darkModeToggled ? 'dark-mode' : ''} ${aboveWindowShade ? 'is-above-shade' : ''} ${storyHasShade}`} >
+      <div className={`nav-breaking-news ${darkMode ? 'dark-mode' : ''} ${aboveWindowShade ? 'is-above-shade' : ''} ${storyHasShade}`} >
         <WeatherAlerts />
         <NavBar
           articleURL={articleURL}

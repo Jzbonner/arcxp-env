@@ -2,22 +2,32 @@
 @import "./../../../../../src/styles/base/breakpoints";
 
 // Dark Mode styling //
+// "Special" dark mode for when there's an obit or special event
 
 body.dark-mode.special,
 body.dark-mode.special #fusion-app {
   background-image: linear-gradient(180deg, #000, #000 400px, #fff 400px, #fff);
 }
 
-body.dark-mode:not(.special) {
+body.special .footer-wrapper,
+body.special .copyright-wrapper {
+  max-width: none;
+}
+// Dark mode base background styling overrides
+
+body.dark-mode .nav-breaking-news.is-above-shade,
+body.dark-mode:not(.special),
+body.dark-mode .c-footer,
+body.dark-mode .copyright-wrapper,
+body.dark-mode .copyright-wrapper .c-copyright,
+body.dark-mode .footer-wrapper {
   background-color: #000;
 }
 
-body.dark-mode .nav-breaking-news.is-above-shade {
-  background: #000;
-}
+// Dark mode base header styling
 
 body.dark-mode .nav-breaking-news {
-  background: #000;
+  background-color: #000;
 
   @include breakpoint(tablet) {
     background: transparent;
@@ -28,7 +38,9 @@ body.dark-mode .nav-breaking-news {
       border-bottom: 1px solid #fff;
     }
 
-    .logo {
+    .logo,
+    .nav-menu-toggle g,
+    .c-login path {
       fill: #fff;
     }
 
@@ -87,21 +99,116 @@ body.dark-mode .nav-breaking-news {
 }
 
 @media (prefers-color-scheme: dark) {
+  // Special obit or event meta tag styling for header/footer
 
   body {
 
-    .special:not(.dark-mode),
-    .special:not(.dark-mode) #fusion-app {
+    &.special:not(.dark-mode),
+    &.special:not(.dark-mode) #fusion-app {
       background-image: linear-gradient(180deg, #000, #000 400px, #fff 400px, #fff);
     }
+    // Light mode override for when a user has dark scheme on their device but switches to AJC light mode
+
+    &:not(.dark-mode) {
+
+      #fusion-app,
+      #fusion-app main {
+        background-color: #fff;
+      }
   
-    #fusion-app,
-    #fusion-app main,
-    .dark-mode:not(.special) {
-      background-color: #000;
+      p.story-text,
+      b,
+      main a,
+      main .section-title,
+      .c-sectionTitle {
+        color: initial !important; // stylelint-disable-line declaration-no-important
+      }
+      // Light mode override header styling
+
+      .nav-breaking-news {
+        background-color: #fff;
+      
+        @include breakpoint(tablet) {
+          background: transparent;
+        }
+      
+        .c-headerNav {
+          @include between-breakpoints(mobile, tablet) {
+            border-bottom: 1px solid #000;
+          }
+      
+          .logo {
+            fill: #000;
+          }
+      
+          &.stickyActive {
+            background-color: #fff;
+      
+            .c-topNavLinks {
+              @include breakpoint(tablet) {
+                border: none;
+                width: 100%;
+                order: initial;
+              }
+            }
+          }
+      
+          .nav-itemText {
+            @media only screen and(min-width: 768px) and(max-width: 820px) {
+              font-size: .65rem;
+            }
+          }
+        }
+      
+        .c-topNavLinks {
+          @include breakpoint(tablet) {
+            border-bottom: solid 1px #dadada;
+            border-top: solid 1px #dadada;
+          }
+      
+          ul li:last-child a {
+            color: #3299ad;
+            font-family: "Gordita-Bold", "Arial", sans-serif;
+      
+            &:hover {
+              color: #ededed;
+            }
+          }
+        }
+      
+        .nav-itemText,
+        .c-login .login-text,
+        .weather-text a,
+        .c-weather :before {
+          color: #212126;
+        }
+      
+        .c-login .section-item .login-text {
+          color: #212126;
+        }
+      
+        .search-icon {
+      
+          path {
+            fill: #000;
+          }
+        }
+      }
     }
-  
-    .dark-mode:not(.special) {
+    // Default styling for when user has dark scheme on their end
+
+    &.dark-mode {
+
+      .c-copyright,
+      .menu-body-links a,
+      .menu-header {
+        color: #fff;
+      }
+    }
+    // Dark mode styling, not memoriam or special
+
+    &.dark-mode:not(.special) {
+      background-color: #000;
 
       #fusion-app,
       #fusion-app main {
@@ -116,39 +223,21 @@ body.dark-mode .nav-breaking-news {
         color: #fff !important; // stylelint-disable-line declaration-no-important
       }
     }
-  
-    .dark-mode #fusion-app {
-      background-color: #000;
-    }
-  
-    :not(.dark-mode) {
-  
-      #fusion-app,
-      #fusion-app main {
-        background-color: #fff;
-      }
-  
-      p.story-text,
-      b,
-      main a,
-      main .section-title,
-      .c-sectionTitle {
-        color: initial !important; // stylelint-disable-line declaration-no-important
-      }
-    }
   }
 }
-
+// light scheme default styling
 @media (prefers-color-scheme: light) {
 
   body {
     background-color: #fff;
   }
+  // Dark mode override for light scheme
 
   body.dark-mode {
 
     #fusion-app,
-    #fusion-app main {
+    #fusion-app main,
+    body .c-footer {
       background-color: #000;
     }
 
@@ -156,7 +245,14 @@ body.dark-mode .nav-breaking-news {
     b,
     main a,
     main .section-title,
-    .c-sectionTitle {
+    .c-sectionTitle,
+    .c-copyright,
+    .menu-body-links a,
+    .menu-header,
+    .rights,
+    .privacy,
+    .learn-more,
+    .c-backToTop {
       color: #fff !important; // stylelint-disable-line declaration-no-important
     }
   }

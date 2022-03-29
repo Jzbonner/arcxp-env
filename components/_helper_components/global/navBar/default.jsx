@@ -259,7 +259,7 @@ NavBar.propTypes = {
   hasWindowShade: PropTypes.bool,
   omitBreakingNews: PropTypes.bool,
   enableDarkMode: PropTypes.bool,
-  darkModeToggled: PropTypes.bool,
+  darkModeToggled: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   setDarkModeToggle: PropTypes.func,
   specialPresentationDark: PropTypes.bool,
   inMemoriam: PropTypes.bool,
