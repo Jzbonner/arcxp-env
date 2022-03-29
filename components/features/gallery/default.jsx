@@ -13,6 +13,7 @@ import {
 import {
   debounce, createBaseGallery, handleImageFocus, reorganizeElements, handlePropContentElements,
 } from './_helper_functions/index';
+import checkTags from '../../layouts/_helper_functions/checkTags';
 import ArcAd from '../ads/default';
 import PGO1Element from '../../_helper_components/global/ads/pg01/default';
 import MPGO1Element from '../../_helper_components/global/ads/mpg01/default';
@@ -129,6 +130,8 @@ const Gallery = (props) => {
 
   const { taxonomy: fetchedTaxonomy = {}, promo_items: fetchedPromoItems = {} } = fetchedGalleryData || {};
   const { taxonomy: featuredTaxonomy = {}, promo_items: featuredPromoItems = {} } = featuredGalleryData || {};
+  const { tags = [] } = taxonomy || {};
+  const noAds = checkTags(tags, 'no-ads');
 
   if (fetchedPromoItems?.basic?.additional_properties?.keywords) {
     finalPromoItemTopics = fetchedPromoItems.basic.additional_properties.keywords;
@@ -233,7 +236,7 @@ const Gallery = (props) => {
     if (!isMobile || isEmbed) handleClickCount();
     setPreviousClickAction(currentAction);
 
-    if ((!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0)) || (isAdVisible && currentClickCount === 4)) {
+    if (noAds || (!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0)) || (isAdVisible && currentClickCount === 4)) {
       // change current image index by -1
       if (action === actions.PREV) {
         setCurrentAction(action);
@@ -245,7 +248,7 @@ const Gallery = (props) => {
             } else {
               setCurrentIndex(maxIndex);
             }
-          } else if (isAdVisible && previousClickAction === actions.NEXT) {
+          } else if (!noAds && isAdVisible && previousClickAction === actions.NEXT) {
             setCurrentIndex(currentIndex);
           } else {
             setCurrentIndex(currentIndex - 1);
@@ -258,7 +261,7 @@ const Gallery = (props) => {
         if (!isAdVisible || currentClickCount % 4 === 0) {
           if (currentIndex === maxIndex) {
             setCurrentIndex(0);
-          } else if (isAdVisible && previousClickAction === actions.PREV) {
+          } else if (!noAds && isAdVisible && previousClickAction === actions.PREV) {
             setCurrentIndex(currentIndex);
           } else {
             setCurrentIndex(currentIndex + 1);
@@ -542,7 +545,7 @@ const Gallery = (props) => {
 
   // handles ad insertions and removals for desktop gallery
   useEffect(() => {
-    if (!isMobile || isEmbed) {
+    if (!noAds && (!isMobile || isEmbed)) {
       if (clickCount !== 0 && clickCount % 4 === 0) setAdVisibleState(true);
       if (!isAdVisible && clickCount && clickCount % 4 === 0) {
         const adInsertedElementArray = insertDesktopGalleryAd();
@@ -581,7 +584,7 @@ const Gallery = (props) => {
         renderCaptionByCurrentIndex();
       }
     }
-  }, [isAdVisible, clickCount]);
+  }, [isAdVisible, clickCount, noAds]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScrollEvent, true);
