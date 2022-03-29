@@ -5,6 +5,10 @@ import GetSophiPaywallBearerToken from './helper_functions/getSophiPaywallBearer
 
 const ttl = 0;
 
+const params = {
+  ids: 'text',
+};
+
 const fetch = async ({ ids }, { cachedCall }) => {
   const token = await cachedCall(
     'sophi bearer token',
@@ -40,5 +44,6 @@ const fetch = async ({ ids }, { cachedCall }) => {
 
 export default {
   fetch,
+  params,
   ttl,
 };
