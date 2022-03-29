@@ -19,7 +19,7 @@ import '../../../../src/styles/container/_c-headerNav.scss';
 
 const StickyNav = ({
   headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
-  isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections, articleUrl, hasWindowShade = false, darkMode, darkModeLogo,
+  isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections, articleUrl, hasWindowShade = false, darkMode, darkModeLogo, enableDarkMode,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -117,7 +117,7 @@ const StickyNav = ({
     <>
       <div className={`stickyNav b-sectionHomeMaxWidth ${hasWindowShade || stickyVisibilityRef.current ? 'is-visible' : ''}`}>
         <div className='b-flexRow c-stickyLogin'>
-          <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={darkMode && siteNameLower === 'ajc' ? darkModeLogo : logoPath} isNonShareablePage={isNonShareablePage} darkMode={darkMode} />
+          <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={darkMode && siteNameLower === 'ajc' ? darkModeLogo : logoPath} isNonShareablePage={isNonShareablePage} enableDarkMode={enableDarkMode}/>
           <ul className={`c-stickyNav-list ${siteNameLower} stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
               <li className="stickyNav-item fb-icon" >
                 <a href={shareLinkFacebook} target="__blank">
@@ -184,6 +184,7 @@ StickyNav.propTypes = {
   hasWindowShade: PropTypes.bool,
   darkMode: PropTypes.bool,
   darkModeLogo: PropTypes.string,
+  enableDarkMode: PropTypes.bool,
 };
 
 export default StickyNav;

@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import Search from '../search/default';
 import Hamburger from '../../../../../resources/icons/global/hamburger';
-import HamburgerDark from '../../../../../resources/icons/global/hamburgerDark';
 
 const RedesignNavLinks = ({
-  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, darkMode, omitHeaderItems,
+  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, omitHeaderItems, enableDarkMode,
 }) => {
   const { siteDomainURL, darkModeSubscribe } = getProperties(arcSite);
   const itemCount = sections.length;
@@ -23,7 +22,7 @@ const RedesignNavLinks = ({
   }, [animationVisibility]);
 
   const items = sections.map((section, i) => {
-    if (darkMode && i > 5) {
+    if (enableDarkMode && i > 5) {
       return null;
     }
 
@@ -56,22 +55,23 @@ const RedesignNavLinks = ({
     </li>
     );
   });
+
   return (
     <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       { !omitHeaderItems
       && <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
-       {darkMode ? <HamburgerDark/> : <Hamburger/>}
+       <Hamburger/>
       </div>
       }
       {logoPath && siteName && <div className={`sticky-logo-homepage ${siteName}`}>
         <a href="/">
           <img src={logoPath} className={siteName} alt={`${siteName} logo`} />
         </a>
-      </div>}
+      </div> }
       <div className='stickyNav-homepage'>
         <ul>
           {items}
-          {darkMode && <li><a href={darkModeSubscribe} targe='_self' className='nav-itemText'>Subscribe Today</a></li>}
+          {enableDarkMode && <li><a href={darkModeSubscribe} target='_self' className='nav-itemText'>Subscribe Today</a></li>}
         </ul>
         <Search isHeader={true}/>
       </div>
@@ -88,8 +88,8 @@ RedesignNavLinks.propTypes = {
   isNonShareablePage: PropTypes.bool,
   animationVisibility: PropTypes.bool,
   primarySectionID: PropTypes.string,
-  darkMode: PropTypes.bool,
   omitHeaderItems: PropTypes.bool,
+  enableDarkMode: PropTypes.bool,
 };
 
 export default RedesignNavLinks;

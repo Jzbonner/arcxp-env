@@ -2178,4 +2178,17 @@
       }
     }
   }
+
+  .darkModeToggle {
+    display: none;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+
+    &.is-visible {
+      display: flex;
+      z-index: 9999;
+    }
+  }
 }

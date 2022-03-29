@@ -13,9 +13,10 @@ import AmpNavBar from './amp';
 import Weather from './weather/default';
 import BreakingNews from '../breakingNews/default';
 import Login from './login/default';
+import DarkModeToggle from '../../../../resources/icons/global/darkMode';
 
 const NavBar = ({
-  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false, enableDarkMode,
+  articleURL, headlines, comments, type, subtype, ampPage = false, hasWindowShade = false, omitBreakingNews = false, enableDarkMode, darkModeToggled, setDarkModeToggle, inMemoriam,
 }) => {
   // amp hijack
   if (ampPage) return <AmpNavBar />;
@@ -29,13 +30,14 @@ const NavBar = ({
   const paddingRef = React.useRef(null);
   const isMobileVisibilityRef = React.useRef(isMobile);
   const mobileBreakpoint = 767;
-  const darkMode = enableDarkMode;
-
+  const darkMode = darkModeToggled;
   const fusionContext = useFusionContext();
   const { arcSite, globalContent, outputType } = fusionContext;
   const {
     logoRedesign, siteName, weatherPageUrl, closeButton, burgerMenuBackground, burgerWhiteLogo,
   } = getProperties(arcSite);
+  const darkModeSite = `${arcSite}_dark-mode`;
+
   const appContext = useAppContext();
   const { deployment, contextPath } = appContext;
 
@@ -162,7 +164,7 @@ const NavBar = ({
 
   return (
     <header className='c-nav'>
-      {!omitBreakingNews && !darkMode && <BreakingNews />}
+      {!omitBreakingNews && enableDarkMode && <BreakingNews />}
       <div className={`c-headerNav b-sectionHome-padding
         ${stickyNavVisibility ? 'stickyActive' : ''}
         ${hasWindowShade ? 'above-shade' : ''}
@@ -176,8 +178,6 @@ const NavBar = ({
               <Logo
                 source={`${deployment(`${contextPath}${logoRedesign}`)}`}
                 rootDirectory={rootDirectory} siteName={siteName.toLowerCase()}
-                darkMode={darkMode}
-                darkModeLogo={`${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
               />
             </div>
           <Login
@@ -192,6 +192,7 @@ const NavBar = ({
             primarySectionID={primarySectionID}
             darkMode={darkMode}
             omitHeaderItems={omitHeaderItems}
+            enableDarkMode={enableDarkMode}
             />
         </div>
         <HamburgerMenu
@@ -207,7 +208,7 @@ const NavBar = ({
           type={type}
           burgerMenuBackground={`${deployment(`${contextPath}${burgerMenuBackground}`)}`}
           siteName={siteName.toLowerCase()}/>
-        { !darkMode && <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
+        { !enableDarkMode && <div className={`connext-subscribe ${stickyNavVisibility || (stickyNavVisibility
           && mobileMenuToggled) || hasWindowShade ? 'not-visible' : ''} `}>
         </div>}
          <StickyNav
@@ -226,9 +227,24 @@ const NavBar = ({
           articleUrl={articleURL}
           darkMode={darkMode}
           darkModeLogo={`${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
+          enableDarkMode={enableDarkMode}
         />
       </div>
       <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
+      <div className={`darkModeToggle ${enableDarkMode && !inMemoriam ? 'is-visible' : ''}`} onClick={(e) => {
+        e.preventDefault();
+        if (typeof window !== 'undefined') {
+          const docBody = document.querySelector('body');
+          if (darkModeToggled === false) {
+            docBody.classList += ' dark-mode';
+            window.localStorage.setItem(darkModeSite, 'enabled');
+          } else if (darkModeToggled === true) {
+            window.localStorage.setItem(darkModeSite, 'disabled');
+            docBody.classList.remove('dark-mode');
+          }
+        }
+        setDarkModeToggle(!darkModeToggled);
+      }}>{<DarkModeToggle toggle={darkModeToggled}/>}</div>
     </header>
   );
 };
@@ -243,6 +259,10 @@ NavBar.propTypes = {
   hasWindowShade: PropTypes.bool,
   omitBreakingNews: PropTypes.bool,
   enableDarkMode: PropTypes.bool,
+  darkModeToggled: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  setDarkModeToggle: PropTypes.func,
+  specialPresentationDark: PropTypes.bool,
+  inMemoriam: PropTypes.bool,
 };
 
 export default NavBar;
