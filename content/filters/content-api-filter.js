@@ -35,6 +35,10 @@ const socialShareFilter = [
   'canonical_url',
 ];
 
+const webHeadlineFilter = [
+  'headlines.web',
+];
+
 const subHeadlineFilter = [
   'subheadlines.basic',
 ];
@@ -74,6 +78,7 @@ export default [...new Set([
   ...bylineFilter,
   ...timestampFilter,
   ...socialShareFilter,
+  ...webHeadlineFilter,
   ...subHeadlineFilter,
   ...ampAdFilter,
   ...sponsorStoryMessage,
