@@ -3,7 +3,7 @@ import axios from 'axios';
 import { SOPHI_PAYWALL_ENDPOINT } from 'fusion:environment';
 import GetSophiPaywallBearerToken from './helper_functions/getSophiPaywallBearerToken.js';
 
-const ttl = 0;
+const ttl = 21600; // 6 hour cache time
 
 const params = {
   ids: 'text',
