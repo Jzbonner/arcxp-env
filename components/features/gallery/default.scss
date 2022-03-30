@@ -175,6 +175,10 @@
         margin-top: 1rem;
       }
 
+      @include breakpoint(desktop-sm) {
+        margin: 9px auto 0;
+      }
+
       .gallery-count {
         width: 100px;
         letter-spacing: -.2px;
@@ -841,10 +845,6 @@
     height: auto;
     width: 180px;
     margin: 1.875rem auto .5rem;
-
-    @include breakpoint(desktop-sm) {
-      margin: 9px auto 0;
-    }
   }
 
   .gallery-caption-container {
