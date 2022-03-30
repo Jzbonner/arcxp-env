@@ -294,12 +294,10 @@
       }
 
       .gallery-image {
-        background: none;
+        background: #efefef;
 
-        .lazyload-wrapper {
-          @include between-breakpoints(mobile, tablet) {
-            padding-left: 10px;
-          }
+        @include between-breakpoints(mobile, tablet) {
+          margin-right: 10px;
         }
 
         .is-focused {
