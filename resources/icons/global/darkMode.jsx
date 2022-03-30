@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const DarkModeToggle = ({ toggle }) => {
-  if (toggle === true) {
+  if (toggle === false) {
     return (
       <svg width="70px" height="70px" viewBox="0 0 70 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
       <title>Dark Mode Toggle</title>
@@ -32,7 +32,7 @@ const DarkModeToggle = ({ toggle }) => {
     );
   }
 
-  if (toggle === false) {
+  if (toggle === true) {
     return (
       <svg width="70px" height="70px" viewBox="0 0 70 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
       <title>Light Mode Toggle</title>

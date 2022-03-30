@@ -122,7 +122,8 @@ body.special .nav-breaking-news {
 
       #fusion-app,
       #fusion-app main,
-      .special-nav {
+      .special-nav,
+      .editors-note {
         background-color: #fff;
       }
   
@@ -273,9 +274,17 @@ body.special .nav-breaking-news {
 @media (prefers-color-scheme: light) {
 
   body,
-  .special-nav {
+  body:not(.special),
+  body:not(.dark-mode) .special-nav {
     background-color: #fff;
   }
+
+  .how g,
+  .footer-logo path,
+  .footer-logo polygon {
+    fill: #000;
+  }
+  
   // Dark mode override for light scheme
 
   body.dark-mode {
@@ -301,6 +310,45 @@ body.special .nav-breaking-news {
     .learn-more,
     .c-backToTop {
       color: #fff !important; // stylelint-disable-line declaration-no-important
+    }
+
+    .how g,
+    .footer-logo path,
+    .footer-logo polygon {
+      fill: #fff;
+    }
+  }
+
+  body.special {
+  
+    .footer-logo path,
+    .footer-logo polygon {
+      fill: #fff;
+    }
+
+    .menu-body-links a,
+    .copyright.in-footer,
+    .c-backToTop {
+      color: #fff;
+    }
+  }
+
+  body:not(.dark-mode):not(.special) {
+
+    #fusion-app,
+    #fusion-app main,
+    .editors-note,
+    .special-nav {
+      background-color: #fff;
+    }
+
+    p.story-text,
+    b,
+    main a,
+    main .section-title,
+    .c-sectionTitle,
+    .how p {
+      color: #000 !important; // stylelint-disable-line declaration-no-important
     }
   }
 }
