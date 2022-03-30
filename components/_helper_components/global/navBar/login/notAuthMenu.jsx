@@ -78,7 +78,7 @@ const NotAuthMenu = ({
       <div ref={loginEl} className={`section login-menu ${!isMobile && showUserMenu ? '' : ''}`}>
         <div className={'section-item'}>
           <a>
-            <UserIcon />
+            { darkMode ? <UserIconWhite/> : <UserIcon/>}
             <div className='login-text'>Log In</div>
           </a>
         </div>
