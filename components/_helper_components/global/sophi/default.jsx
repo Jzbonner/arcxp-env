@@ -48,7 +48,16 @@ const SophiTags = ({ isAmp }) => {
     sophiSection = sophiSection.substr(0, sectionLength);
   }
 
-  const accessCategory = paywallStatus === 'premium' ? 'metered views' : 'free access';
+  const accessCategory = () => {
+    switch (paywallStatus) {
+      case 'premium':
+        return 'metered views';
+      case 'subscriberonly':
+        return 'subscribers only';
+      default:
+        return 'free access';
+    }
+  };
 
   const sophiContentObj = isNonContentPage ? {} : {
     type: `${sophiContentType}`,
