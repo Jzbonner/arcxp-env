@@ -49,6 +49,10 @@ body.special .nav-breaking-news {
       fill: #fff !important; // stylelint-disable-line declaration-no-important
     }
 
+    .c-login:hover path {
+      fill: #000 !important; // stylelint-disable-line declaration-no-important
+    }
+
     &.stickyActive {
       background-color: #000;
 
@@ -95,8 +99,8 @@ body.special .nav-breaking-news {
     color: #fff !important; // stylelint-disable-line declaration-no-important
   }
 
-  .c-login .section-item .login-text {
-    color: #212126;
+  .c-login:hover .section-item .login-text {
+    color: #212126 !important; // stylelint-disable-line declaration-no-important
   }
 
   .search-icon {
@@ -261,7 +265,6 @@ body.special .nav-breaking-news {
   
       p.story-text,
       b,
-      main a,
       main .section-title,
       .c-sectionTitle,
       .how p {
@@ -299,8 +302,6 @@ body.special .nav-breaking-news {
 
     p.story-text,
     b,
-    main a,
-    main .section-title,
     .c-sectionTitle,
     .c-copyright,
     .menu-body-links a,
@@ -316,6 +317,10 @@ body.special .nav-breaking-news {
     .footer-logo path,
     .footer-logo polygon {
       fill: #fff;
+    }
+
+    .c-login:hover path {
+      fill: #000 !important; // stylelint-disable-line declaration-no-important
     }
   }
 
