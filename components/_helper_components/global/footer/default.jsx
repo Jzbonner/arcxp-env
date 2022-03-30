@@ -7,6 +7,7 @@ import getLinkURL from '../../../layouts/_helper_functions/getLinkUrl';
 import getDomain from '../../../layouts/_helper_functions/getDomain';
 import ConnextBottomNavSubPromo from '../ConnextBottomNavSubPromo/default';
 import Copyright from '../copyright/default';
+import LogoFullRedesign from '../../../../resources/logos/AJC/logo-full-redesign';
 import '../../../../src/styles/container/_c-footer.scss';
 
 
@@ -28,6 +29,8 @@ const Footer = () => {
     logoRedesign, siteName, cdnSite, cdnOrg,
   } = getProperties(arcSite);
 
+  console.log(arcSite);
+
   const { children: linkCategories } = siteNavigation || {};
 
   const [openMenu, setOpenMenu] = useState('');
@@ -46,10 +49,13 @@ const Footer = () => {
         <div className="logo-row">
           <div className="col">
             <a href="/">
-              <img
+              {
+                siteName === 'ajc' ? <div className='footer-logo ajc'><LogoFullRedesign /></div>
+                  : <img
                 className={`footer-logo ${siteName.toLowerCase()}`}
                 src={`${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${logoRedesign}`)}`} alt="logo"
               />
+              }
             </a>
           </div>
           <ConnextBottomNavSubPromo />
