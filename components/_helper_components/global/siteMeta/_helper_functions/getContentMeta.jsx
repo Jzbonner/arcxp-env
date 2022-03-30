@@ -52,6 +52,7 @@ const getContentMeta = () => {
     content_elements: contentElements = [],
     content_restrictions: contentRestrictions,
     syndication,
+    label,
   } = globalContent || {};
   const articleDesc = description;
   const {
@@ -263,22 +264,27 @@ const getContentMeta = () => {
   const appleIconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
 
   const { content_code: contentPaywallStatus } = contentRestrictions || {};
-
+  const { sophi_paywall: sophiPaywall } = label || {};
 
   if (enableSophiPaywall && subtype && uuid) {
-    // we make a call to sophi's paywall endpoint for this story, to get the paywall status
-    const sophiPaywallStatusMap = {
-      METERED: 'premium',
-      PAYWALL: 'subscriberonly',
-      NOWALL: 'free',
-    };
-    const sophiStatus = useContent({
-      source: 'sophi-paywall',
-      query: {
-        ids: uuid,
-      },
-    }) || '';
-    paywallStatus = sophiPaywallStatusMap[sophiStatus] || paywallStatus;
+    if (sophiPaywall?.text) {
+      // if the label already exists, we use it and avoid the API call
+      paywallStatus = sophiPaywall.text;
+    } else {
+      // otherwise, we make a call to sophi's paywall endpoint for this story, to get the paywall status
+      const sophiPaywallStatusMap = {
+        METERED: 'premium',
+        PAYWALL: 'subscriberonly',
+        NOWALL: 'free',
+      };
+      const sophiStatus = useContent({
+        source: 'sophi-paywall',
+        query: {
+          ids: uuid,
+        },
+      }) || '';
+      paywallStatus = sophiPaywallStatusMap[sophiStatus] || paywallStatus;
+    }
   } else {
     paywallStatus = contentPaywallStatus;
   }
