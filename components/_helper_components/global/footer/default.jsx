@@ -29,8 +29,6 @@ const Footer = () => {
     logoRedesign, siteName, cdnSite, cdnOrg,
   } = getProperties(arcSite);
 
-  console.log(arcSite);
-
   const { children: linkCategories } = siteNavigation || {};
 
   const [openMenu, setOpenMenu] = useState('');
