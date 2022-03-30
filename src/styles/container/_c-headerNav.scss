@@ -11,6 +11,10 @@
     }
   }
 
+  .dark-mode .nav-menu-toggle {
+    filter: brightness(10);
+  }
+
   .c-headerNav.b-sectionHome-padding {
     @include between-breakpoints(mobile, tablet) {
       padding: 0 0 15px;
