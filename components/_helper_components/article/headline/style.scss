@@ -49,23 +49,21 @@
     }
 
     .headline-text {
-      @include text-styles(1.56rem, 1.15, "Lora-Bold");
+      @include text-styles(1.56rem, 1.12, "Lora-Bold");
 
-      letter-spacing: -.3px;
+      letter-spacing: -.31px;
       margin: 0;
 
       @include breakpoint(tablet) {
-        @include text-styles(1.875rem, 1.12, "Lora-Bold");
+        @include text-styles(1.875rem, 1.03, "Lora-Bold");
+
+        letter-spacing: -.38px;
       }
 
       @include breakpoint(desktop-sm) {
-        @include text-styles(2.188rem, 1.12, "Lora-Bold");
+        @include text-styles(2.188rem, 1.15, "Lora-Bold");
 
         letter-spacing: -.5px;
-      }
-
-      @include breakpoint(desktop-lg) {
-        @include text-styles(2.5rem, 1.12, "Lora-Bold");
       }
     }
   }
