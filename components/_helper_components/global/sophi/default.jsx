@@ -62,7 +62,7 @@ const SophiTags = ({ isAmp }) => {
   const sophiContentObj = isNonContentPage ? {} : {
     type: `${sophiContentType}`,
     contentId: `${contentId || ''}`,
-    accessCategory,
+    accessCategory: accessCategory(),
   };
   const sophiPageObj = {
     type: `${sophiContentType}`,
