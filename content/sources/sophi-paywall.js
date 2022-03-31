@@ -31,14 +31,16 @@ const fetch = async ({ ids }, { cachedCall }) => {
     )
     .then(({ data }) => data.map((resp) => {
       if (!resp) {
-        throw new Error(`SOPHI ERROR - Sophi paywall status for ${idString} is unavailable or empty.  Endpoint: ${SOPHI_PAYWALL_ENDPOINT}.  Token: ${token}.`);
+        throw new Error(`SOPHI ERROR - Sophi paywall status for ${idString} is unavailable or empty.  Endpoint: ${SOPHI_PAYWALL_ENDPOINT}.`);
       }
 
       return resp?.paywallStatus;
     }))
     .catch((error) => {
-      console.error(`AXIOS CATCH - get Sophi paywall status for ${idString} =>`, error?.response?.data);
-      return error;
+      const newError = error;
+      newError.status = 404;
+      console.error(`AXIOS CATCH - get Sophi paywall status for ${idString} =>`, newError);
+      return newError;
     });
 };
 
