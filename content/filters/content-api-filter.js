@@ -43,6 +43,10 @@ const subHeadlineFilter = [
   'subheadlines.basic',
 ];
 
+const redirectUrlFilter = [
+  'redirect_url',
+];
+
 const ampAdFilter = [
   'taxonomy.primary_section.path',
   'taxonomy.tags',
@@ -80,6 +84,7 @@ export default [...new Set([
   ...socialShareFilter,
   ...webHeadlineFilter,
   ...subHeadlineFilter,
+  ...redirectUrlFilter,
   ...ampAdFilter,
   ...sponsorStoryMessage,
   ...relatedListFilter,
