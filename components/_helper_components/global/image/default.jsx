@@ -192,9 +192,9 @@ const Image = ({
     }
 
     return (
-      <div className={`c-image-component ${toggle ? 'overlay-active' : ''} ${imageMarginBottom || ''} ${alignment ? `align-${alignment}` : ''}`} data-index={index || null}>
+      <div className={`c-image-component ${toggle ? 'overlay-active' : ''} ${imageMarginBottom || ''} ${alignment ? `align-${alignment}` : ''} ${originalHeight >= originalWidth ? 'image-portrait' : 'image-landscape'}`} data-index={index || null}>
         {enableExpandableImage && renderCaption()}
-        <div className={`image-component-image ${ampPage ? 'amp' : ''} ${enableExpandableImage ? 'inline' : ''} ${originalHeight >= originalWidth ? 'image-portrait' : 'image-landscape'}`}>
+        <div className={`image-component-image ${ampPage ? 'amp' : ''} ${enableExpandableImage ? 'inline' : ''}`}>
           <div className='enlargeImage-wrapper'>
             {renderedImageOutput()}
             <p className="photo-credit-text">{giveCredit}</p>
