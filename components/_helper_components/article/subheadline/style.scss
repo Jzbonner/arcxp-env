@@ -23,4 +23,8 @@
     font-style: normal;
     letter-spacing: -.84px;
   }
+
+  @include breakpoint(desktop-sm) {
+    max-width: 728px;
+  }
 }
