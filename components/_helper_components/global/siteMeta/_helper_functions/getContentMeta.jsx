@@ -1,4 +1,5 @@
 import { useAppContext } from 'fusion:context';
+import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import getDomain from '../../../../layouts/_helper_functions/getDomain';
 import checkPageType from '../../../../layouts/_helper_functions/getPageType.js';
@@ -7,7 +8,7 @@ import { formatTime, formatDate } from '../../../article/timestamp/_helper_funct
 
 const getContentMeta = () => {
   const appContext = useAppContext();
-  let paywallStatus;
+  let paywallStatus = 'free';
   const {
     arcSite,
     globalContent,
@@ -21,8 +22,9 @@ const getContentMeta = () => {
   } = appContext;
   const blogName = metaValue('blogname');
   const noIndex = metaValue('no index');
-  const enableDarkMode = metaValue('dark mode') === 'true';
+  const darkMode = metaValue('dark mode') === 'true';
   const inMemoriam = metaValue('in-memoriam') === 'true';
+  const darkHeaderFooter = metaValue('dark header footer') === 'true';
   const pageIsLive = metaValue('live');
   const pbPaywall = metaValue('story-meter');
   const metaTitle = metaValue('title');
@@ -265,9 +267,25 @@ const getContentMeta = () => {
   const { content_code: contentPaywallStatus } = contentRestrictions || {};
   const { sophi_paywall: sophiPaywall } = label || {};
 
-
-  if (enableSophiPaywall && subtype) {
-    paywallStatus = sophiPaywall && sophiPaywall.text ? sophiPaywall.text : 'free';
+  if (enableSophiPaywall && subtype && uuid) {
+    if (sophiPaywall?.text) {
+      // if the label already exists, we use it and avoid the API call
+      paywallStatus = sophiPaywall.text;
+    } else {
+      // otherwise, we make a call to sophi's paywall endpoint for this story, to get the paywall status
+      const sophiPaywallStatusMap = {
+        METERED: 'premium',
+        PAYWALL: 'subscriberonly',
+        NOWALL: 'free',
+      };
+      const sophiStatus = useContent({
+        source: 'sophi-paywall',
+        query: {
+          ids: uuid,
+        },
+      }) || '';
+      paywallStatus = sophiPaywallStatusMap[sophiStatus] || paywallStatus;
+    }
   } else {
     paywallStatus = contentPaywallStatus;
   }
@@ -304,8 +322,9 @@ const getContentMeta = () => {
     paywallStatus: pbPaywall || paywallStatus,
     syndication,
     noIndex,
-    enableDarkMode,
+    darkMode,
     inMemoriam,
+    darkHeaderFooter,
     pageIsLive,
     metaTitle,
     metaDescription,

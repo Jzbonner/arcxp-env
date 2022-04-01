@@ -35,8 +35,16 @@ const socialShareFilter = [
   'canonical_url',
 ];
 
+const webHeadlineFilter = [
+  'headlines.web',
+];
+
 const subHeadlineFilter = [
   'subheadlines.basic',
+];
+
+const redirectUrlFilter = [
+  'redirect_url',
 ];
 
 const ampAdFilter = [
@@ -74,7 +82,9 @@ export default [...new Set([
   ...bylineFilter,
   ...timestampFilter,
   ...socialShareFilter,
+  ...webHeadlineFilter,
   ...subHeadlineFilter,
+  ...redirectUrlFilter,
   ...ampAdFilter,
   ...sponsorStoryMessage,
   ...relatedListFilter,

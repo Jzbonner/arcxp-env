@@ -11,6 +11,10 @@
     }
   }
 
+  .dark-mode .nav-menu-toggle {
+    filter: brightness(10);
+  }
+
   .c-headerNav.b-sectionHome-padding {
     @include between-breakpoints(mobile, tablet) {
       padding: 0 0 15px;
@@ -2176,6 +2180,19 @@
           }
         }
       }
+    }
+  }
+
+  .darkModeToggle {
+    display: none;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+
+    &.is-visible {
+      display: flex;
+      z-index: 9999;
     }
   }
 }
