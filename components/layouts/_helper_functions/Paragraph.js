@@ -1,6 +1,6 @@
 import isNotBR from './BR';
 
-const paragraphTypes = ['text', 'video', 'image', 'raw_html', 'table', 'gallery', 'oembed_response', 'list'];
+const paragraphTypes = ['text', 'video', 'image', 'raw_html', 'table', 'gallery', 'oembed_response', 'list', 'aligned_elements'];
 
 export const isParagraph = type => paragraphTypes.includes(type);
 

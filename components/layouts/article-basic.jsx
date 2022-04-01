@@ -92,12 +92,10 @@ const StoryPageLayout = () => {
 
   const ampMP02 = () => <AmpAd adSlot="MP02" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />;
   const ampMP03 = () => <AmpAd adSlot="MP03" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />;
-  const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP01-Story-Desktop'} />;
-  const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP01-Story-Tablet'} />;
   const MP02 = () => <ArcAd staticSlot={'MP02'} lazyLoad={isMeteredStory} key={'MP02'} />;
   const MP03 = () => <ArcAd staticSlot={'MP03'} lazyLoad={isMeteredStory} key={'MP03'} />;
-  const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP09-Story-Desktop'} />;
-  const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP09-Story-Tablet'} />;
+  const HP01_2 = () => <ArcAd staticSlot={'HP01'} lazyLoad={isMeteredStory} key={'HP01'} adSuffix="_2"/>;
+  const HP01_3 = () => <ArcAd staticSlot={'HP01'} lazyLoad={isMeteredStory} key={'HP01'} adSuffix="_3"/>;
   const connextThankYouMessage = () => <ConnextThankYouMessage isAmp={ampPage} siteFullname={siteFullname} />;
 
   const windowExists = typeof window !== 'undefined';
@@ -155,8 +153,7 @@ const StoryPageLayout = () => {
       elements={filteredContentElements}
       startIndex={1}
       stopIndex={3}
-      rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null}
-      insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [RP01StoryTablet, MP02] : [ampMP02] }] : null}
+      insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [HP01_2, MP02] : [ampMP02] }] : null}
       fullWidth={true}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
       ampPage={ampPage}
@@ -199,8 +196,7 @@ const StoryPageLayout = () => {
     <Section
       elements={filteredContentElements}
       startIndex={stop}
-      rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
-      insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [RP09StoryTablet, MP03] : [ampMP03] }] : null}
+      insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [HP01_3, MP03] : [ampMP03] }] : null}
       fullWidth={true}
       insertAtSectionEnd={insertAtEndOfStory}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}

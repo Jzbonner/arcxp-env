@@ -1,0 +1,38 @@
+@import "../../../../../../src/styles/base/breakpoints";
+
+.c-aligned-elements {
+  @include breakpoint(tablet) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    & > .align-left,
+    & > .align-right {
+      width: calc((100% - 1rem) / 2);
+      max-width: calc((100% - 1rem) / 2);
+    }
+
+    .align-left {
+      margin-right: auto;
+    }
+
+    .align-right {
+      margin-left: auto;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      height: fit-content;
+    }
+
+    .c-image-component {
+      min-width: unset;
+
+      .image-component-image {
+        width: auto;
+        left: unset;
+      }
+    }
+  }
+}
