@@ -185,8 +185,11 @@
       width: 50px;
       cursor: pointer;
     }
+  }
 
-    .image-component-image.image-landscape {
+  &.overlay-active.image-landscape {
+
+    .image-component-image {
       flex-direction: column;
       padding: 0 12.5%;
 
@@ -203,8 +206,11 @@
         max-height: 60vh;
       }
     }
+  }
 
-    .image-component-image.image-portrait {
+  &.overlay-active.image-portrait {
+
+    .image-component-image {
       flex-direction: row;
       gap: 5%;
 
@@ -266,7 +272,7 @@
 
   .c-contentElements {
 
-    .image-landscape {
+    .c-image-component.image-landscape:not(.overlay-active) {
       @include breakpoint(desktop-sm) {
         width: 1022px;
         left: -147px;
