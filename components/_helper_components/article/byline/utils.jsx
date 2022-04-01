@@ -54,9 +54,9 @@ const handleAuthors = (authors = []) => {
 
     // initial filter to remove numbers (in the case of a single numeric value in Affiliations, which is "true" in this test)
     let finalOrg = (org * 1 > -1) ? null : org;
-    if (finalOrg.indexOf(',') > -1) {
+    if (finalOrg && finalOrg.indexOf(',') > -1) {
       // secondary test for when there are multiple entries; we split & remove those that are numbers ONLY, but allow letters or mixed values to pass through to rendering
-      let orgArray = org.split(',');
+      let orgArray = finalOrg.split(',');
       orgArray = orgArray.filter(orgPart => orgPart.replace(/[ 0-9]/gi, '').length > 0);
       // if all values were numeric then orgArray is now empty, so we don't want anything to proceed.  otherwise, we rejoin the array of values
       finalOrg = orgArray.length ? orgArray.join(',') : null;
