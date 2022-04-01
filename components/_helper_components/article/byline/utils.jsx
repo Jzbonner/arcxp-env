@@ -52,13 +52,24 @@ const handleAuthors = (authors = []) => {
 
     if (!name) return null;
 
+    // initial filter to remove numbers (in the case of a single numeric value in Affiliations, which is "true" in this test)
+    let finalOrg = (org * 1 > -1) ? null : org;
+    if (finalOrg.indexOf(',') > -1) {
+      // secondary test for when there are multiple entries; we split & remove those that are numbers ONLY, but allow letters or mixed values to pass through to rendering
+      let orgArray = org.split(',');
+      orgArray = orgArray.filter(orgPart => orgPart.replace(/[ 0-9]/gi, '').length > 0);
+      // if all values were numeric then orgArray is now empty, so we don't want anything to proceed.  otherwise, we rejoin the array of values
+      finalOrg = orgArray.length ? orgArray.join(',') : null;
+    }
+
     const authorUrl = `/staff/${id}/`;
 
     return <span key={name}>
       {i === 0 && !name.includes('By ') && 'By '}
       {authorUrl && status && <a href={authorUrl} rel="author">{name}</a>}
       {(!authorUrl || !status) && name}
-      {org ? `${authors.length > 1 ? ' - ' : ', '}${org}` : null}
+      {/* (org * 1 > -1) is a bit of a hack to rule out the use of affiliations for Ohio filtering; AS1-3 */}
+      {finalOrg && `${authors.length > 1 ? ' - ' : ', '}${finalOrg}`}
     </span>;
   });
   return bylineData;
