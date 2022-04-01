@@ -49,8 +49,16 @@ const handleAuthors = (authors = []) => {
     const {
       id, org, name, status,
     } = author || {};
+    let finalOrg = (org * 1 > -1) ? org : null;
 
     if (!name) return null;
+
+    if (org.indexOf(',') > -1) {
+      // there are multiple entries, we must split & remove those that are numbers ONLY individually
+      let orgArray = org.split(',');
+      orgArray = orgArray.filter(orgPart => orgPart.replace(/[ 0-9]/gi, '').length > 0);
+      finalOrg = orgArray.join(',');
+    }
 
     const authorUrl = `/staff/${id}/`;
 
@@ -59,7 +67,7 @@ const handleAuthors = (authors = []) => {
       {authorUrl && status && <a href={authorUrl} rel="author">{name}</a>}
       {(!authorUrl || !status) && name}
       {/* (org * 1 > -1) is a bit of a hack to rule out the use of affiliations for Ohio filtering; AS1-3 */}
-      {org && (org * 1 > -1) ? `${authors.length > 1 ? ' - ' : ', '}${org}` : null}
+      {finalOrg && `${authors.length > 1 ? ' - ' : ', '}${finalOrg}`}
     </span>;
   });
   return bylineData;
