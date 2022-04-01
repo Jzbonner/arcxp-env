@@ -58,7 +58,8 @@ const handleAuthors = (authors = []) => {
       {i === 0 && !name.includes('By ') && 'By '}
       {authorUrl && status && <a href={authorUrl} rel="author">{name}</a>}
       {(!authorUrl || !status) && name}
-      {org ? `${authors.length > 1 ? ' - ' : ', '}${org}` : null}
+      {/* (org * 1 > -1) is a bit of a hack to rule out the use of affiliations for Ohio filtering; AS1-3 */}
+      {org && (org * 1 > -1) ? `${authors.length > 1 ? ' - ' : ', '}${org}` : null}
     </span>;
   });
   return bylineData;
