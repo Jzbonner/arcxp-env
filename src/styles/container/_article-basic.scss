@@ -228,6 +228,15 @@ main > .c-gallery-basic {
     }
   }
 
+  .arc_ad[class*="HP01"] {
+    display: flex;
+    justify-content: center;
+
+    .arcad {
+      margin-bottom: 0;
+    }
+  }
+
   &.b-contentMaxWidth {
     padding-top: 0;
 
