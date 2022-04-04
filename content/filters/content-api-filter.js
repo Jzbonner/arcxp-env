@@ -44,6 +44,7 @@ const subHeadlineFilter = [
 ];
 
 const redirectUrlFilter = [
+  'related_content.redirect',
   'redirect_url',
 ];
 
