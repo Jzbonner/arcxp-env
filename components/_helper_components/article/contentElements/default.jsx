@@ -14,6 +14,7 @@ import Header from './components/header/default.jsx';
 import Divider from './components/divider/default.jsx';
 import AmpEmbedWrapper from '../../global/utils/amp-html/amp-embed-wrapper';
 import Table from './components/table/default';
+import AlignedElements from './components/alignedElements/default.jsx';
 // import Correction from './components/correction/default.jsx';
 // import Table from './components/table/default.jsx';
 
@@ -80,6 +81,8 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
                 key={`Video-${i}`}
                 index={count}
               />;
+          case 'aligned_elements':
+            return <AlignedElements src={element} ampPage={ampPage} index={count} />;
           default:
             if (
               element.props

@@ -278,6 +278,16 @@
         left: -147px;
       }
     }
+
+    .c-aligned-elements {
+
+      .c-image-component.image-landscape:not(.overlay-active) {
+        @include breakpoint(desktop-sm) {
+          width: unset;
+          left: unset;
+        }
+      }
+    }
   }
 }
 
