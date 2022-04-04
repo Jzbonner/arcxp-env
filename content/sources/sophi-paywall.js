@@ -39,7 +39,7 @@ const fetch = async ({ ids }, { cachedCall }) => {
     .catch((error) => {
       ttl = 0; // manually re-set the TTL to 0 so that we don't cache this errant response (for some reason the 21600 value was still being respected, even when we reject the promise)
       console.error(`AXIOS CATCH - get Sophi paywall status for ${idString} =>`, error);
-      return error;
+      return null;
     });
 };
 
