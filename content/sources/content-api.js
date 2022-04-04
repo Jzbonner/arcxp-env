@@ -28,7 +28,6 @@ const transform = (json) => {
   contentElements.forEach((element, i) => {
     if (
       !element.alignment
-      || element.alignment === 'center'
       || (element.alignment
         && !element.type === 'text'
         && !element.type === 'image')
@@ -43,11 +42,15 @@ const transform = (json) => {
       }
       newContentElements.push(element);
     } else if (element.alignment) {
-      // The current element is aligned but it is aligned left while the previous one is aligned right,
+      // The current element is aligned but
+      //   1. it or the previous element is aligned center or
+      //   2. it is aligned left while the previous one is aligned right
       // indicating it belongs in a new block of aligned elements.
-      if (
-        contentElements?.[i - 1]?.alignment === 'right'
-        && element.alignment === 'left'
+      //
+      // Separating rows of aligned elements into separate aligned_element elements
+      // is important so that ads can be inserted between each row.
+      if ((contentElements?.[i - 1]?.alignment === 'center' || element.alignment === 'center')
+         || (contentElements?.[i - 1]?.alignment === 'right' && element.alignment === 'left')
       ) {
         newContentElements.push({
           type: 'aligned_elements',

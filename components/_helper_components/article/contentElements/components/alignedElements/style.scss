@@ -1,6 +1,11 @@
 @import "../../../../../../src/styles/base/breakpoints";
 
 .c-aligned-elements {
+
+  .align-center {
+    text-align: center;
+  }
+
   @include breakpoint(tablet) {
     display: flex;
     flex-wrap: wrap;
