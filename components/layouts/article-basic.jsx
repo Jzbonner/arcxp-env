@@ -1,6 +1,7 @@
 /*  /components/layouts/article-basic.jsx  */
 import React from 'react';
 import { useAppContext, useFusionContext } from 'fusion:context';
+import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../_helper_components/global/utils/environment';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
@@ -53,7 +54,7 @@ const StoryPageLayout = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
-  const { connext, siteFullname } = getProperties(arcSite);
+  const { connext, siteFullname, enableSophiPaywall } = getProperties(arcSite);
   const { allowMeter = false } = connext[currentEnv] || {};
 
   if (!globalContent) return null;
@@ -72,7 +73,7 @@ const StoryPageLayout = () => {
     subheadlines,
     credits,
     type,
-    content_restrictions: contentRestrictions,
+    contentRestrictions,
   } = globalContent || {};
 
   const queryParams = getQueryParams(requestUri);
@@ -84,7 +85,30 @@ const StoryPageLayout = () => {
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
-  const { content_code: paywallStatus } = contentRestrictions || {};
+  const { content_code: contentPaywallStatus } = contentRestrictions || {};
+  const { sophi_paywall: sophiPaywall } = label || {};
+
+  let paywallStatus = contentPaywallStatus;
+  if (enableSophiPaywall) {
+    if (sophiPaywall?.text) {
+      // if the label already exists, we use it and avoid the API call
+      paywallStatus = sophiPaywall.text;
+    } else {
+      // otherwise, we make a call to sophi's paywall endpoint for this story, to get the paywall status
+      const sophiPaywallStatusMap = {
+        METERED: 'premium',
+        PAYWALL: 'subscriberonly',
+        NOWALL: 'free',
+      };
+      const sophiStatus = useContent({
+        source: 'sophi-paywall',
+        query: {
+          ids: uuid,
+        },
+      }) || '';
+      paywallStatus = sophiPaywallStatusMap[sophiStatus] || paywallStatus;
+    }
+  }
   const isMeteredStory = allowMeter
     && paywallStatus
     && paywallStatus.toLowerCase() !== 'free'
