@@ -1,14 +1,13 @@
 import { useAppContext } from 'fusion:context';
-import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import getDomain from '../../../../layouts/_helper_functions/getDomain';
 import checkPageType from '../../../../layouts/_helper_functions/getPageType.js';
 import fetchEnv from '../../utils/environment.js';
+import getPaywallStatus from './getPaywallStatus';
 import { formatTime, formatDate } from '../../../article/timestamp/_helper_functions/computeTimeStamp';
 
 const getContentMeta = () => {
   const appContext = useAppContext();
-  let paywallStatus = 'free';
   const {
     arcSite,
     globalContent,
@@ -32,7 +31,7 @@ const getContentMeta = () => {
   const sophiType = metaValue('sophi-type');
   const treatPbPageAsArticle = sophiType === 'article';
   const {
-    siteName, favicon, cdnSite, appleIcon, cdnOrg, enableSophiPaywall,
+    siteName, favicon, cdnSite, appleIcon, cdnOrg,
   } = getProperties(arcSite) || {};
   const {
     headlines,
@@ -51,9 +50,7 @@ const getContentMeta = () => {
     data: contentData,
     additional_properties: additionalProperties,
     content_elements: contentElements = [],
-    content_restrictions: contentRestrictions,
     syndication,
-    label,
   } = globalContent || {};
   const articleDesc = description;
   const {
@@ -264,31 +261,6 @@ const getContentMeta = () => {
   const faviconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${favicon}`)}`;
   const appleIconPath = `${getDomain(layout, cdnSite, cdnOrg, arcSite)}${deployment(`${contextPath}${appleIcon}`)}`;
 
-  const { content_code: contentPaywallStatus } = contentRestrictions || {};
-  const { sophi_paywall: sophiPaywall } = label || {};
-
-  if (enableSophiPaywall && subtype && uuid) {
-    if (sophiPaywall?.text) {
-      // if the label already exists, we use it and avoid the API call
-      paywallStatus = sophiPaywall.text;
-    } else {
-      // otherwise, we make a call to sophi's paywall endpoint for this story, to get the paywall status
-      const sophiPaywallStatusMap = {
-        METERED: 'premium',
-        PAYWALL: 'subscriberonly',
-        NOWALL: 'free',
-      };
-      const sophiStatus = useContent({
-        source: 'sophi-paywall',
-        query: {
-          ids: uuid,
-        },
-      }) || '';
-      paywallStatus = sophiPaywallStatusMap[sophiStatus] || paywallStatus;
-    }
-  } else {
-    paywallStatus = contentPaywallStatus;
-  }
   // return page content metadata values
   return {
     url,
@@ -319,7 +291,7 @@ const getContentMeta = () => {
     isOpinion,
     isABTest: metaValue('AB test'),
     blogName,
-    paywallStatus: pbPaywall || paywallStatus,
+    paywallStatus: pbPaywall || getPaywallStatus(),
     syndication,
     noIndex,
     darkMode,

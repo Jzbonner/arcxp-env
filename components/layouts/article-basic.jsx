@@ -1,7 +1,6 @@
 /*  /components/layouts/article-basic.jsx  */
 import React from 'react';
 import { useAppContext, useFusionContext } from 'fusion:context';
-import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import fetchEnv from '../_helper_components/global/utils/environment';
 import GlobalAdSlots from '../_helper_components/global/ads/default';
@@ -37,6 +36,7 @@ import InterscrollerPlaceholder from '../_helper_components/article/interscrolle
 import SponsorStoryMessage from '../_helper_components/article/sponsorStoryMessage/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
+import getPaywallStatus from '../_helper_components/global/siteMeta/_helper_functions/getPaywallStatus';
 import RelatedList from '../_helper_components/article/relatedList/default';
 import EndOfStory from '../_helper_components/article/endOfStory/default';
 import ConnextThankYouMessage from '../_helper_components/global/ConnextThankYouMessage/amp';
@@ -54,7 +54,7 @@ const StoryPageLayout = () => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
   const currentEnv = fetchEnv();
-  const { connext, siteFullname, enableSophiPaywall } = getProperties(arcSite);
+  const { connext, siteFullname } = getProperties(arcSite);
   const { allowMeter = false } = connext[currentEnv] || {};
 
   if (!globalContent) return null;
@@ -73,7 +73,6 @@ const StoryPageLayout = () => {
     subheadlines,
     credits,
     type,
-    contentRestrictions,
   } = globalContent || {};
 
   const queryParams = getQueryParams(requestUri);
@@ -85,30 +84,8 @@ const StoryPageLayout = () => {
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
-  const { content_code: contentPaywallStatus } = contentRestrictions || {};
-  const { sophi_paywall: sophiPaywall } = label || {};
 
-  let paywallStatus = contentPaywallStatus;
-  if (enableSophiPaywall) {
-    if (sophiPaywall?.text) {
-      // if the label already exists, we use it and avoid the API call
-      paywallStatus = sophiPaywall.text;
-    } else {
-      // otherwise, we make a call to sophi's paywall endpoint for this story, to get the paywall status
-      const sophiPaywallStatusMap = {
-        METERED: 'premium',
-        PAYWALL: 'subscriberonly',
-        NOWALL: 'free',
-      };
-      const sophiStatus = useContent({
-        source: 'sophi-paywall',
-        query: {
-          ids: uuid,
-        },
-      }) || '';
-      paywallStatus = sophiPaywallStatusMap[sophiStatus] || paywallStatus;
-    }
-  }
+  const paywallStatus = getPaywallStatus();
   const isMeteredStory = allowMeter
     && paywallStatus
     && paywallStatus.toLowerCase() !== 'free'
