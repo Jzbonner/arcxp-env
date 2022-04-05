@@ -113,20 +113,26 @@
       align-items: center;
     }
 
+    a:nth-child(2) {
+      @include between-breakpoints(mobile, tablet) {
+        margin-left: -20px;
+      }
+    }
+
     a:first-child {
-      margin-right: 12px;
+      margin-left: -14px;
 
       @include breakpoint(tablet) {
-        margin-right: 25px;
+        margin-right: 16px;
       }
 
       @include breakpoint(desktop-sm) {
         height: 33px;
-        margin-right: 34px;
+        margin-right: 24px;
       }
     }
 
-    img {
+    svg {
       height: 17px;
 
       @include breakpoint(tablet) {

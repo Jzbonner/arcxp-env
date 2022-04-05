@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import facebookIcon from '../../../resources/icons/staff/staff-facebook-icon.svg';
-import twitterIcon from '../../../resources/icons/staff/staff-twitter-icon.svg';
+import FacebookIcon from '../../../resources/icons/staff/StaffFacebookIcon';
+import TwitterIcon from '../../../resources/icons/staff/StaffTwitterIcon';
 import contributorArray from '../../layouts/_helper_functions/contributorBadges';
 import ContributorBadge from '../../_helper_components/global/contributorBadge/default';
 import './default.scss';
@@ -71,12 +71,12 @@ const StaffBio = () => {
               <div className="staff-social-icons">
                 {facebook && (
                   <a href={facebook}>
-                    <img src={facebookIcon} alt="Facebook icon" />
+                    <FacebookIcon />
                   </a>
                 )}
                 {twitter && (
                   <a href={twitter}>
-                    <img src={twitterIcon} alt="Twitter icon" />
+                    <TwitterIcon />
                   </a>
                 )}
               </div>
