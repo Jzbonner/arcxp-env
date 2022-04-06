@@ -50,7 +50,8 @@
 
         .gallery-caption-container {
 
-          .gallery-credit {
+          .gallery-credit,
+          .gallery-caption {
             color: #000;
           }
 
@@ -65,7 +66,7 @@
   }
 }
 
-.dark-mode .c-sectionHome .c-gallery-embed .gallery-wrapper {
+body.dark-mode .c-sectionHome .c-gallery-embed .gallery-wrapper {
 
   .gallery-count {
 
