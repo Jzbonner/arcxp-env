@@ -36,6 +36,7 @@ import InterscrollerPlaceholder from '../_helper_components/article/interscrolle
 import SponsorStoryMessage from '../_helper_components/article/sponsorStoryMessage/default';
 import { paragraphCounter, isParagraph } from './_helper_functions/Paragraph';
 import TopNavBreakingNews from '../_helper_components/global/navBar/TopNavBreakingNews/default';
+import getPaywallStatus from '../_helper_components/global/siteMeta/_helper_functions/getPaywallStatus';
 import RelatedList from '../_helper_components/article/relatedList/default';
 import EndOfStory from '../_helper_components/article/endOfStory/default';
 import ConnextThankYouMessage from '../_helper_components/global/ConnextThankYouMessage/amp';
@@ -72,7 +73,6 @@ const StoryPageLayout = () => {
     subheadlines,
     credits,
     type,
-    content_restrictions: contentRestrictions,
   } = globalContent || {};
 
   const queryParams = getQueryParams(requestUri);
@@ -84,7 +84,8 @@ const StoryPageLayout = () => {
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
-  const { content_code: paywallStatus } = contentRestrictions || {};
+
+  const paywallStatus = getPaywallStatus();
   const isMeteredStory = allowMeter
     && paywallStatus
     && paywallStatus.toLowerCase() !== 'free'
