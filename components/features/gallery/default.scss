@@ -17,7 +17,7 @@
 
 /* overrides when an embedded gallery exists within a special presentation story */
 
-.dark-mode {
+.c-sectionHome {
 
   .story-paygate_placeholder {
 
@@ -30,6 +30,16 @@
         @include breakpoint(tablet) {
           width: 100%;
           position: initial;
+        }
+
+        @include between-breakpoints(tablet, desktop-sm) {
+          margin-left: 0;
+        }
+
+        .gallery-container {
+          @include between-breakpoints(mobile, tablet) {
+            height: 227px;
+          }
         }
 
         .gallery-caption-icons-box {
