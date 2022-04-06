@@ -17,7 +17,7 @@
 
 /* overrides when an embedded gallery exists within a special presentation story */
 
-.dark-mode {
+.c-sectionHome {
 
   .story-paygate_placeholder {
 
@@ -32,38 +32,62 @@
           position: initial;
         }
 
+        @include between-breakpoints(tablet, desktop-sm) {
+          margin-left: 0;
+        }
+
+        .gallery-container {
+          @include between-breakpoints(mobile, tablet) {
+            height: 227px;
+          }
+        }
+
         .gallery-caption-icons-box {
           @include breakpoint(desktop-sm) {
             margin: 30px auto 15px;
           }
-
-          .gallery-count {
-
-            .gallery-count-next,
-            .gallery-count-prev {
-              background: #fff;
-              box-shadow: none;
-            }
-  
-            .mobile-change img {
-              filter: brightness(10);
-            }
-  
-            .count--box {
-              color: #fff;
-            }
-          }
         }
 
-        .gallery-caption-container .gallery-caption {
-          color: #fff;
+        .gallery-caption-container {
 
-          @include breakpoint(desktop-sm) {
-            font-size: 16px;
+          .gallery-credit,
+          .gallery-caption {
+            color: #000;
+          }
+
+          .gallery-caption {
+            @include breakpoint(desktop-sm) {
+              font-size: 16px;
+            }
           }
         }
       }
     }
+  }
+}
+
+body.dark-mode .c-sectionHome .c-gallery-embed .gallery-wrapper {
+
+  .gallery-count {
+
+    .gallery-count-next,
+    .gallery-count-prev {
+      background: #fff;
+      box-shadow: none;
+    }
+
+    .mobile-change img {
+      filter: brightness(10);
+    }
+
+    .count--box {
+      color: #fff;
+    }
+  }
+
+  .gallery-caption-container .gallery-caption,
+  .gallery-caption-container .gallery-credit {
+    color: #fff;
   }
 }
 
