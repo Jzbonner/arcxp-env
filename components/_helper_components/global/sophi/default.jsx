@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import getPaywallStatus from '../siteMeta/_helper_functions/getPaywallStatus';
 import getContentMeta from '../siteMeta/_helper_functions/getContentMeta';
 import fetchEnv from '../utils/environment';
 
@@ -28,7 +29,6 @@ const SophiTags = ({ isAmp }) => {
     contentId,
     initialPublishDate,
     firstPublishDate: lastModifiedDate,
-    paywallStatus,
     typeOfPage,
     sophiType,
     isABTest,
@@ -49,7 +49,7 @@ const SophiTags = ({ isAmp }) => {
   }
 
   const accessCategory = () => {
-    switch (paywallStatus) {
+    switch (getPaywallStatus()) {
       case 'premium':
         return 'metered views';
       case 'subscriberonly':

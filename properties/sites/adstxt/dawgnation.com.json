@@ -268,5 +268,11 @@
     "accountId": "1166984029",
     "relationshipType": "RESELLER",
     "certId": ""
+  },
+  {
+    "domain": "liveintent.com",
+    "accountId": "65374",
+    "relationshipType": "DIRECT",
+    "certId": ""
   }
 ]
