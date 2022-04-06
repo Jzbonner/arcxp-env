@@ -20,7 +20,7 @@ import AlignedElements from './components/alignedElements/default.jsx';
 
 const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
   const { inlineVideoPlayerRules, maxTabletViewWidth } = getProperties();
-  console.log('contentElements main', contentElements);
+
   return (
     <div className="c-contentElements" data-start-index={startIndex || null}>
       {contentElements.map((element, i) => {
