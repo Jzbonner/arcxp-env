@@ -21,7 +21,7 @@
       display: block;
     }
     
-    .photo-caption-btn .caption-arrow {
+    .photo-caption-btn .caption-arrow svg {
       transform: rotate(180deg);
     }
   }
@@ -55,11 +55,12 @@
       transition: .5s;
     }
 
-    .caption-arrow {
+    .caption-arrow svg {
       width: 9px;
       height: 11px;
       margin-right: 2px;
       transition: transform .5s;
+      margin-top: 2px;
     }
 
     .fill-line {
