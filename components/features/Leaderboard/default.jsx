@@ -74,7 +74,7 @@ const Leaderboard = ({ year, tour, manualTournamentId }) => {
                 <td className="player-round">{player.rounds[2] ? player.rounds[2].strokes : '-'}</td>
                 <td className="player-round">{player.rounds[3] ? player.rounds[3].strokes : '-'}</td>
                 <td className="player-strokes">{player.score} ({player.strokes})</td>
-                <td className="player-thru">{player.rounds[player.rounds.length - 1].thru === 18 ? 'F' : player.rounds[player.rounds.length -1].thru === 0 && player.rounds[player.rounds.length -2].thru === 18 ? 'F' : player.rounds[player.rounds.length -1].thru === 0 ? player.rounds[player.rounds.length -2].thru : player.rounds[player.rounds.length - 1].thru}</td>
+                <td className="player-thru">{player.rounds[player.rounds?.length - 1]?.thru === 18 ? 'F' : player.rounds[player.rounds?.length -1]?.thru === 0 && player.rounds[player.rounds?.length -2]?.thru === 18 ? 'F' : player.rounds[player.rounds?.length -1]?.thru === 0 ? player.rounds[player.rounds?.length -2]?.thru : player.rounds[player.rounds?.length - 1]?.thru}</td>
               </tr>
             ))}
           </tbody>
