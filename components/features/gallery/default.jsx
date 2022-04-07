@@ -31,7 +31,8 @@ const Gallery = (props) => {
   } = props;
 
   const appContext = useAppContext();
-  const { isAdmin, arcSite = 'ajc' } = appContext;
+  const { isAdmin, arcSite = 'ajc', globalContent } = appContext;
+  const { taxonomy: globalTaxonomy } = globalContent || {};
   const isStory = pageType === 'story';
 
   // holds Gallery items
@@ -130,7 +131,7 @@ const Gallery = (props) => {
 
   const { taxonomy: fetchedTaxonomy = {}, promo_items: fetchedPromoItems = {} } = fetchedGalleryData || {};
   const { taxonomy: featuredTaxonomy = {}, promo_items: featuredPromoItems = {} } = featuredGalleryData || {};
-  const { tags = [] } = taxonomy || {};
+  const { tags = [] } = globalTaxonomy || {};
   const noAds = checkTags(tags, 'no-ads');
 
   if (fetchedPromoItems?.basic?.additional_properties?.keywords) {
