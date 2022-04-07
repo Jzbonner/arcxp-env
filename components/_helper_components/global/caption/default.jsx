@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAppContext } from 'fusion:context';
 import PropTypes from 'prop-types';
 import createID from '../../../layouts/_helper_functions/createID';
-import LeftArrow from '../../../../resources/icons/slider/left-arrow.svg';
+import LeftArrowIcon from '../../../../resources/icons/slider/LeftArrowIcon';
 import './default.scss';
 
 const Caption = (
@@ -64,7 +64,7 @@ const Caption = (
       tabIndex="0"
     >
       <div tabIndex='1' className="photo-caption-btn" onClick={toggle} onBlur={toggle}>
-        { ampPage ? <amp-img class='amp-arrow' id='amp-arrow' src={`${deployment(`${contextPath}/resources/icons/slider/left-arrow.svg`)}`} height='9px' width='11px' alt='caption arrow'></amp-img> : <img className="caption-arrow" src={LeftArrow} alt='caption arrow'/>}
+        { ampPage ? <amp-img class='amp-arrow' id='amp-arrow' src={`${deployment(`${contextPath}/resources/icons/slider/left-arrow.svg`)}`} height='9px' width='11px' alt='caption arrow'></amp-img> : <span className="caption-arrow"><LeftArrowIcon /></span>}
         <span>Caption</span>
       </div>
       <div className="photo-caption">
