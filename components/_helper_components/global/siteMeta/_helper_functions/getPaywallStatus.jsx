@@ -33,7 +33,7 @@ const getPaywallStatus = () => {
           ids: uuid,
         },
       }) || '';
-      paywallStatus = sophiPaywallStatusMap[sophiStatus] || paywallStatus;
+      paywallStatus = sophiPaywallStatusMap[sophiStatus] || 'free';
     }
   }
   return paywallStatus;
