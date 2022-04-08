@@ -2,6 +2,7 @@ import { RESIZER_SECRET_KEY } from 'fusion:environment';
 import Thumbor from 'thumbor-lite';
 import getMediaCredit from './getMediaCredit';
 import fetchEnv from '../../../_helper_components/global/utils/environment';
+import handleSiteName from '../../../layouts/_helper_functions/handleSiteName';
 
 const currentEnv = fetchEnv();
 function encodeSrc(src) {
@@ -12,7 +13,7 @@ function encodeSrc(src) {
 }
 
 export const formatNavigaContent = (siteID, contentElements) => contentElements.map((el) => {
-  const siteDomain = `${currentEnv === 'prod' ? 'www' : 'sandbox'}.${siteID === 'journalnews' ? 'journal-news' : siteID}.com`;
+  const siteDomain = `${currentEnv === 'prod' ? 'www' : 'sandbox'}.${siteID === 'journalnews' ? 'journal-news' : handleSiteName(siteID)}.com`;
   const resizerUrl = `https://${siteDomain}/resizer`;
   const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerUrl);
 
