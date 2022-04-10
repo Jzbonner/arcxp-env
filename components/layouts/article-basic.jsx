@@ -153,7 +153,8 @@ const StoryPageLayout = () => {
       elements={filteredContentElements}
       startIndex={1}
       stopIndex={3}
-      insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [HP01_2, MP02] : [ampMP02] }] : null}
+      insertedMobileAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [MP02] : [ampMP02] }] : null}
+      insertedDesktopAds={!noAds ? [{ insertAfterParagraph: 2, adArray: [HP01_2] }] : null}
       fullWidth={true}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
       ampPage={ampPage}
@@ -180,9 +181,10 @@ const StoryPageLayout = () => {
       fullWidth={true}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
       ampPage={ampPage}
-      insertedAds={ampPage && maxNumberOfParagraphs >= 4 && paywallStatus !== 'free' ? [{ insertAfterParagraph: 4, adArray: [connextThankYouMessage] }] : null}
+      insertedMobileAds={ampPage && maxNumberOfParagraphs >= 4 && paywallStatus !== 'free' ? [{ insertAfterParagraph: 4, adArray: [connextThankYouMessage] }] : null}
+      insertedDesktopAds={ampPage && maxNumberOfParagraphs >= 4 && paywallStatus !== 'free' ? [{ insertAfterParagraph: 4, adArray: [connextThankYouMessage] }] : null}
     />
-    {!noAds && maxNumberOfParagraphs >= 4
+  {!noAds && maxNumberOfParagraphs >= 4
       && <>
         {ampPage && isMeteredStory && <NonSubPremiumMessage siteFullname={siteFullname} />}
         <InterscrollerPlaceholder
@@ -196,7 +198,8 @@ const StoryPageLayout = () => {
     <Section
       elements={filteredContentElements}
       startIndex={stop}
-      insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [HP01_3, MP03] : [ampMP03] }] : null}
+      insertedMobileAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [MP03] : [ampMP03] }] : null}
+      insertedDesktopAds={!noAds ? [{ insertAfterParagraph: 8, adArray: [HP01_3] }] : null}
       fullWidth={true}
       insertAtSectionEnd={insertAtEndOfStory}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
