@@ -11,12 +11,18 @@ const getPaywallStatus = () => {
     subtype,
     content_restrictions: contentRestrictions,
     label,
+    taxonomy,
   } = globalContent || {};
   const { content_code: contentPaywallStatus } = contentRestrictions || {};
   const { sophi_paywall: sophiPaywall } = label || {};
-  let paywallStatus = contentPaywallStatus || 'free';
+  const { tags = [] } = taxonomy || {};
+  const alwaysTreatAsFreeTags = ['newsroom-free', 'reportforamerica', 'urgent-weather', 'rct-content', 'philanthropic-ajc', 'presson'];
+  const alwaysTreatAsFree = tags.some(tag => alwaysTreatAsFreeTags.includes(tag));
 
-  if (enableSophiPaywall && subtype && uuid) {
+  let paywallStatus = contentPaywallStatus || 'free';
+  if (alwaysTreatAsFree) {
+    paywallStatus = 'free';
+  } else if (enableSophiPaywall && subtype && uuid) {
     if (sophiPaywall?.text) {
       // if the label already exists, we use it and avoid the API call
       paywallStatus = sophiPaywall.text;
