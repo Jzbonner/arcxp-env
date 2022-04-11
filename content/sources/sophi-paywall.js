@@ -1,23 +1,20 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 import { SOPHI_PAYWALL_ENDPOINT } from 'fusion:environment';
-import GetSophiPaywallBearerToken from './helper_functions/getSophiPaywallBearerToken.js';
+import sophiToken from './sophi-token';
 
 const ttl = 21600; // 6 hour cache time
-const serveStaleCache = false; // prevent using cached (empty) response in the case of 404's
+const serveStaleCache = false;
+const backoff = {
+  enabled: false,
+};
 
 const params = {
   ids: 'text',
 };
 
-const fetch = async ({ ids }, { cachedCall }) => {
-  const token = await cachedCall(
-    'sophi bearer token',
-    GetSophiPaywallBearerToken,
-    { ttl: 86400, independent: true },
-  );
-
-  if (!ids) return null;
+const fetch = async ({ ids }) => {
+  const token = await sophiToken.fetch('paywall');
 
   const idString = typeof ids === 'object' ? ids.join(',') : ids;
 
@@ -43,4 +40,5 @@ export default {
   params,
   ttl,
   serveStaleCache,
+  backoff,
 };
