@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 import { CONTENT_BASE, ARC_ACCESS_TOKEN, SOPHI_ENDPOINT } from 'fusion:environment';
-import GetSophiBearerToken from './helper_functions/getSophiBearerToken.js';
+import sophiToken from './sophi-token';
 
 const schemaName = 'sophi';
 const ttl = 0;
@@ -15,15 +15,11 @@ const params = {
 
 const fetch = async ({
   page, widget, from = 0, size = 10, arcSite, 'arc-site': arcSiteAlt,
-}, { cachedCall }) => {
+}) => {
   const activeSite = arcSite || arcSiteAlt;
   if (!activeSite) return [];
 
-  const token = await cachedCall(
-    'sophi bearer token',
-    GetSophiBearerToken,
-    { ttl: 86400, independent: true },
-  );
+  const token = await sophiToken.fetch();
 
   const storyIds = await axios
     .get(
