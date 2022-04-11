@@ -6,10 +6,6 @@
     text-align: center;
   }
 
-  &:last-child .story-text {
-    margin-bottom: 0;
-  }
-
   @include breakpoint(tablet) {
     display: flex;
     flex-wrap: wrap;
