@@ -17,8 +17,6 @@ const fetch = async ({ ids }, { cachedCall }) => {
     { ttl: 86400, independent: true },
   );
 
-  if (!ids) return null;
-
   const idString = typeof ids === 'object' ? ids.join(',') : ids;
 
   return axios
