@@ -1,6 +1,5 @@
 import React from 'react';
 import './default.scss';
-// import TopArrow from '../../../resources/icons/global/TopArrow.svg';
 
 const BackToTop = () => {
   const scrollToTop = () => {
