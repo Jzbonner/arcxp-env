@@ -24,6 +24,7 @@
   .top-arrow-icon {
     height: 52px;
     width: 36px;
+    transition: background-image .2s;
     background-image: url("../../../resources/icons/global/TopArrow.svg");
   }
 

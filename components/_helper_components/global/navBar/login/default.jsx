@@ -141,7 +141,7 @@ Login.propTypes = {
   isFlyout: PropTypes.bool,
   isSticky: PropTypes.bool,
   isSidebar: PropTypes.bool,
-  darkMode: PropTypes.bool,
+  darkMode: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   omit: PropTypes.bool,
 };
 
