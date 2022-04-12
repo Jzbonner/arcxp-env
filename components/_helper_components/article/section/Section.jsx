@@ -72,22 +72,22 @@ const Section = ({
 
   // Transform consecutive aligned elements into an aligned block
   contentElementsWithMobileAds.forEach((element, i) => {
+    // Usually only text and image elements aligned left or right count as 'aligned' elements
+    // Ad elements sometimes count as aligned if they are between other aligned elements, see lines 97-104
     if (
       (!element.alignment && element?.props?.componentName !== 'ArcAd')
       || (element.alignment
         && !element.type === 'text'
         && !element.type === 'image')
+        || element.alignment === 'center'
     ) {
       // The current element is not aligned and not an ad, indicating the preceding group of aligned elements has ended.
       pushRowOfAlignedElements();
       contentElementsWithAlignedBlock.push(element);
     } else if (element.alignment) {
-      if ((contentElementsWithMobileAds?.[i - 1]?.alignment === 'center' || element.alignment === 'center')
-         || (contentElementsWithMobileAds?.[i - 1]?.alignment === 'right' && element.alignment === 'left')
-      ) {
+      if (contentElementsWithMobileAds?.[i - 1]?.alignment === 'right' && element.alignment === 'left') {
         // The current element is aligned but
-        //   1. it or the previous element is aligned center or
-        //   2. it is aligned left while the previous one is aligned right
+        //    - it is aligned left while the previous one is aligned right
         // indicating it belongs in a new block of aligned elements.
         //
         // So first reset the current block of aligned elements.
