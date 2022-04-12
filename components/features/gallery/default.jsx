@@ -55,6 +55,7 @@ const Gallery = (props) => {
   const [modalVisible, setModalVisibility] = useState(false);
   const [currentImageSrc, setCurrectImageSrc] = useState('');
 
+
   /* Ads */
   const [clickCount, setClickCount] = useState(0);
   const [isAdVisible, setAdVisibleState] = useState(false);
@@ -77,6 +78,9 @@ const Gallery = (props) => {
   const [isContentDataHeadlineFilled, setContentDataHeadlineState] = useState(false);
   const windowExists = typeof window !== 'undefined';
 
+  /* Special presentation gallery */
+  const [previousIndex, setPreviousIndex] = useState(0);
+
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
   const PG01Ref = useRef(null);
@@ -91,6 +95,8 @@ const Gallery = (props) => {
     AD_REMOVED: 'AD_REMOVED',
     AD_RESET: 'AD_RESET',
     UPDATE_CLICK_FUNCS: 'UPDATE_CLICK_FUNCS',
+    NEXT_WITH_INTEGER: 'NEXT_WITH_INTEGER',
+    PREV_WITH_INTEGER: 'PREV_WITH_INTEGER',
   };
 
   const types = {
@@ -223,7 +229,7 @@ const Gallery = (props) => {
     }
   };
 
-  const changeIndex = (action, maxNumber, isPhoto = true) => {
+  const changeIndex = (event, action, maxNumber, isPhoto = true) => {
     const targetIndex = isPhoto ? 0 : 1;
     if (!hasOpened && (currentIndex === targetIndex || currentIndex === maxIndex)) dispatchGalleryOpenEvent();
 
@@ -237,7 +243,27 @@ const Gallery = (props) => {
     if (!isMobile || isEmbed) handleClickCount();
     setPreviousClickAction(currentAction);
 
-    if (noAds || (!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0)) || (isAdVisible && currentClickCount === 4)) {
+    /* if an index integer is suppied, then the gallery will jump to whatever index is passed. This is only used when non-adajcent images are clicked.  */
+    if (typeof action === 'number') {
+      setPreviousIndex(currentIndex);
+      setCurrentIndex(action);
+      if (currentIndex === 0) {
+        const middleIndex = maxIndex / 2;
+        if (action > middleIndex) {
+          setCurrentAction(actions.PREV_WITH_INTEGER);
+          setClickDirection(actions.PREV);
+        } else {
+          setCurrentAction(actions.NEXT_WITH_INTEGER);
+          setClickDirection(actions.NEXT);
+        }
+      } else if (action > currentIndex) {
+        setCurrentAction(actions.NEXT_WITH_INTEGER);
+        setClickDirection(actions.NEXT);
+      } else if (action < currentIndex) {
+        setCurrentAction(actions.PREV_WITH_INTEGER);
+        setClickDirection(actions.PREV);
+      }
+    } else if (noAds || (!isAdVisible && (currentClickCount === 0 || currentClickCount % 3 !== 0)) || (isAdVisible && currentClickCount === 4)) {
       // change current image index by -1
       if (action === actions.PREV) {
         setCurrentAction(action);
@@ -283,8 +309,9 @@ const Gallery = (props) => {
   };
 
   const clickFuncs = {
-    prev: () => changeIndex(actions.PREV, null, true, hasOpened),
-    next: () => changeIndex(actions.NEXT, null, true, hasOpened),
+    prev: () => changeIndex(null, actions.PREV, null, true, hasOpened),
+    next: () => changeIndex(null, actions.NEXT, null, true, hasOpened),
+    nonAdjacent: (event, actionIndex) => changeIndex(event, actionIndex, null, true, hasOpened),
     modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
     calculateTranslateX: () => calculateTranslateX(),
   };
@@ -401,7 +428,17 @@ const Gallery = (props) => {
 
   const handleNext = (arr, returnOnly = false) => {
     const newArr = [...arr];
-    newArr.push(newArr.shift());
+
+    if (currentAction === actions.NEXT_WITH_INTEGER) {
+      const difference = Math.abs(currentIndex - previousIndex);
+
+      for (let i = 0; i < difference; i += 1) {
+        newArr.push(newArr.shift());
+      }
+    } else {
+      newArr.push(newArr.shift());
+    }
+
     if (returnOnly) {
       return newArr;
     }
@@ -410,7 +447,24 @@ const Gallery = (props) => {
 
   const handlePrevious = (arr, returnOnly = false) => {
     const newArr = [...arr];
-    newArr.unshift(newArr.pop());
+    let difference = null;
+
+    if (currentAction === actions.PREV_WITH_INTEGER) {
+      if (previousIndex === 0 && maxIndex !== currentIndex) {
+        difference = Math.abs((maxIndex - currentIndex) + 1);
+      } else if (previousIndex === 0 && maxIndex === currentIndex) {
+        difference = 1;
+      } else {
+        difference = Math.abs(currentIndex - previousIndex);
+      }
+
+      for (let i = 0; i < difference; i += 1) {
+        newArr.unshift(newArr.pop());
+      }
+    } else {
+      newArr.unshift(newArr.pop());
+    }
+
     if (returnOnly) {
       return newArr;
     }
@@ -649,8 +703,9 @@ const Gallery = (props) => {
       },
       isMobile,
       {
-        prev: () => changeIndex(actions.PREV, baseGalleryData.length - 1),
-        next: () => changeIndex(actions.NEXT),
+        prev: event => changeIndex(event, actions.PREV, baseGalleryData.length - 1),
+        next: event => changeIndex(event, actions.NEXT),
+        nonAdjacent: (event, actionIndex) => changeIndex(event, actionIndex, null, true, hasOpened),
         modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
       },
       isEmbed,
@@ -706,21 +761,21 @@ const Gallery = (props) => {
           </div>
         ) : null}
         {isStickyVisible && !isEmbed ? <MobileGallery objectRef={galleryMobileEl} data={mobileElemData} states={mobileState} funcs={mobileFuncs} /> : null}
-        {!isMobile || isEmbed ? <DesktopGallery data={elementData} translateX={translateX} handlers={handlers}/> : null}
+        {!isMobile || isEmbed ? <DesktopGallery data={elementData} translateX={translateX} handlers={handlers} /> : null}
         <div onClick={handleStickyOpen} className={`gallery-caption-icons-box ${!isEmbed && !isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
-        {!isEmbed && <div className="gallery-overlay hidden-large">{isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null}</div>}
+          {!isEmbed && <div className="gallery-overlay hidden-large">{isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null}</div>}
           <div className="gallery-count view-gallery">
-            <div className={`gallery-count-prev ${!isEmbed ? 'hidden-small hidden-medium' : ''}`} onClick={() => changeIndex(actions.PREV, null, false)}>
-              <img src={leftArrow} alt="Left arrow"/>
+            <div className={`gallery-count-prev ${!isEmbed ? 'hidden-small hidden-medium' : ''}`} onClick={event => changeIndex(event, actions.PREV, null, false)}>
+              <img src={leftArrow} alt="Left arrow" />
             </div>
             {<div className="mobile-change">
               <a>
-                <img src={middleBox} className="icon-gallery" alt="Mobile gallery icon"/>
+                <img src={middleBox} className="icon-gallery" alt="Mobile gallery icon" />
               </a>
               {!isEmbed && <div className="icon-text hidden-large">View Gallery</div>}
             </div>}
-            <div className={`gallery-count-next ${!isEmbed ? 'hidden-small hidden-medium' : ''}`} onClick={() => changeIndex(actions.NEXT, null, false)}>
-              <img src={rightArrow} alt="Right arrow"/>
+            <div className={`gallery-count-next ${!isEmbed ? 'hidden-small hidden-medium' : ''}`} onClick={event => changeIndex(event, actions.NEXT, null, false)}>
+              <img src={rightArrow} alt="Right arrow" />
             </div>
             <div className={`count--box ${!isEmbed ? 'hidden-small hidden-medium' : ''}`}>
               <span className="gallery-index">{currentIndex + 1} / </span>

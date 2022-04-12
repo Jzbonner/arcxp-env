@@ -53,7 +53,7 @@ const GalleryItem = ({
       id={id}
       data-index={index}
       key={url}
-      onClick={func}
+      onClick={e => func(e, index)}
       className={`${isStickyVisible && !isEmbed ? `gallery-full-item ${isCaptionOn ? lastItemClass : ''}` : 'gallery-image'} ${!isEmbed && lastItemClass && isStickyVisible && !isCaptionOn ? 'last-item-height-fix-no-caption' : ''} ${!isEmbed && !isStickyVisible && isMobile ? 'mosaic-container' : ''} ${!isMobile ? 'desktop-image' : ''}`}
       style={{ minWidth: calculatedWidth }}
     >
