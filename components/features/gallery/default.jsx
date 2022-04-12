@@ -309,8 +309,8 @@ const Gallery = (props) => {
   };
 
   const clickFuncs = {
-    prev: () => changeIndex(null, actions.PREV, null, true, hasOpened),
-    next: () => changeIndex(null, actions.NEXT, null, true, hasOpened),
+    prev: () => changeIndex(actions.PREV, null, true, hasOpened),
+    next: () => changeIndex(actions.NEXT, null, true, hasOpened),
     nonAdjacent: actionIndex => changeIndex(actionIndex, null, true, hasOpened),
     modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
     calculateTranslateX: () => calculateTranslateX(),
