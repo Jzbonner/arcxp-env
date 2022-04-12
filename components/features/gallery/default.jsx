@@ -229,7 +229,7 @@ const Gallery = (props) => {
     }
   };
 
-  const changeIndex = (event, action, maxNumber, isPhoto = true) => {
+  const changeIndex = (action, maxNumber, isPhoto = true) => {
     const targetIndex = isPhoto ? 0 : 1;
     if (!hasOpened && (currentIndex === targetIndex || currentIndex === maxIndex)) dispatchGalleryOpenEvent();
 
