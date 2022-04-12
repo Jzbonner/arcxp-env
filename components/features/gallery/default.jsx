@@ -311,7 +311,7 @@ const Gallery = (props) => {
   const clickFuncs = {
     prev: () => changeIndex(null, actions.PREV, null, true, hasOpened),
     next: () => changeIndex(null, actions.NEXT, null, true, hasOpened),
-    nonAdjacent: (event, actionIndex) => changeIndex(event, actionIndex, null, true, hasOpened),
+    nonAdjacent: actionIndex => changeIndex(actionIndex, null, true, hasOpened),
     modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
     calculateTranslateX: () => calculateTranslateX(),
   };
@@ -703,9 +703,9 @@ const Gallery = (props) => {
       },
       isMobile,
       {
-        prev: event => changeIndex(event, actions.PREV, baseGalleryData.length - 1),
-        next: event => changeIndex(event, actions.NEXT),
-        nonAdjacent: (event, actionIndex) => changeIndex(event, actionIndex, null, true, hasOpened),
+        prev: () => changeIndex(actions.PREV, baseGalleryData.length - 1),
+        next: () => changeIndex(actions.NEXT),
+        nonAdjacent: actionIndex => changeIndex(actionIndex, null, true, hasOpened),
         modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
       },
       isEmbed,
@@ -765,7 +765,7 @@ const Gallery = (props) => {
         <div onClick={handleStickyOpen} className={`gallery-caption-icons-box ${!isEmbed && !isStickyVisible && isMobile ? 'mosaic-gallery' : ''}`}>
           {!isEmbed && <div className="gallery-overlay hidden-large">{isMobile ? <OverlayMosiac data={mobileElemData} arcSite={arcSite} /> : null}</div>}
           <div className="gallery-count view-gallery">
-            <div className={`gallery-count-prev ${!isEmbed ? 'hidden-small hidden-medium' : ''}`} onClick={event => changeIndex(event, actions.PREV, null, false)}>
+            <div className={`gallery-count-prev ${!isEmbed ? 'hidden-small hidden-medium' : ''}`} onClick={() => changeIndex(actions.PREV, null, false)}>
               <img src={leftArrow} alt="Left arrow" />
             </div>
             {<div className="mobile-change">
@@ -774,7 +774,7 @@ const Gallery = (props) => {
               </a>
               {!isEmbed && <div className="icon-text hidden-large">View Gallery</div>}
             </div>}
-            <div className={`gallery-count-next ${!isEmbed ? 'hidden-small hidden-medium' : ''}`} onClick={event => changeIndex(event, actions.NEXT, null, false)}>
+            <div className={`gallery-count-next ${!isEmbed ? 'hidden-small hidden-medium' : ''}`} onClick={() => changeIndex(actions.NEXT, null, false)}>
               <img src={rightArrow} alt="Right arrow" />
             </div>
             <div className={`count--box ${!isEmbed ? 'hidden-small hidden-medium' : ''}`}>

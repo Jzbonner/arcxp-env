@@ -16,7 +16,7 @@ const reorganizeElements = (arr = []) => {
       temp.push(elemArray[i]);
     }
   }
-  // debugger;
+
   return temp;
 };
 
