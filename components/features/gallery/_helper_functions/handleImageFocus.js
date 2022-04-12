@@ -7,7 +7,7 @@ const handleImageFocus = (arr = [], states = {}, funcs = {}, isEmbed) => {
     isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction, hasOpened, isModalVisible,
   } = states;
   const {
-    prev, next, modal, calculateTranslateX,
+    prev, next, modal, calculateTranslateX, nonAdjacent,
   } = funcs;
 
   let prevIndex = null;
@@ -44,6 +44,8 @@ const handleImageFocus = (arr = [], states = {}, funcs = {}, isEmbed) => {
       functionToPass = prev;
     } else if (element.props.data.index === nextIndex) {
       functionToPass = next;
+    } else {
+      functionToPass = nonAdjacent;
     }
 
     elementItemData.states = { ...parentStates };
