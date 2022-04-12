@@ -3,19 +3,11 @@
     <title>Top</title>
     <defs>
         <rect id="path-1" x="0" y="0" width="33" height="33" rx="11"></rect>
-        <filter x="-22.7%" y="-22.7%" width="169.7%" height="169.7%" filterUnits="objectBoundingBox" id="filter-2">
-            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
-            <feOffset dx="4" dy="4" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
-            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
-            <feColorMatrix values="0 0 0 0 0.896767437   0 0 0 0 0.896767437   0 0 0 0 0.896767437  0 0 0 0.599835824 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
-        </filter>
     </defs>
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Back-DT" transform="translate(-77.000000, 11.000000)">
             <g id="Top" transform="translate(96.500000, 16.500000) rotate(-90.000000) translate(-96.500000, -16.500000) translate(80.000000, 0.000000)">
                 <g id="Rectangle">
-                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
                     <use stroke="#ECECEC" stroke-width="1" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
                 </g>
                 <path d="M18.645,11.88 C19.2828889,11.88 19.8,12.3971111 19.8,13.035 C19.8,13.6728889 19.2828889,14.19 18.645,14.19 L12.869,14.19 L12.87,19.965 C12.87,20.6028889 12.3528889,21.12 11.715,21.12 C11.0771111,21.12 10.56,20.6028889 10.56,19.965 L10.56,13.035 C10.56,12.3971111 11.0771111,11.88 11.715,11.88 L18.645,11.88 Z" id="top-arrow-icon-hover" fill="#2e81b7" transform="translate(15.180000, 16.500000) scale(-1, 1) rotate(-45.000000) translate(-15.180000, -16.500000) "></path>

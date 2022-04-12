@@ -182,7 +182,7 @@ StickyNav.propTypes = {
   sections: PropTypes.array,
   articleUrl: PropTypes.string,
   hasWindowShade: PropTypes.bool,
-  darkMode: PropTypes.bool,
+  darkMode: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   darkModeLogo: PropTypes.string,
   enableDarkMode: PropTypes.bool,
 };
