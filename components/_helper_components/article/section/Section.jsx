@@ -10,7 +10,6 @@ const Section = ({
   insertAtSectionEnd,
   startIndex = 0,
   stopIndex = elements.length,
-  fullWidth = false,
   comesAfterDivider = false,
   ampPage = false,
 }) => {
@@ -45,17 +44,14 @@ const Section = ({
     if (insertedMobileAds) {
       let insertIndex;
       if (stopIndex === elements.length || isLastItemInSection) {
-        insertIndex = insertedMobileAds.findIndex(el => paragraphCounter + 1 === el.insertAfterParagraph);
+        insertIndex = insertedMobileAds.findIndex(el => paragraphCounter + 1 === el.insertAfterMobileParagraph);
       } else {
-        insertIndex = insertedMobileAds.findIndex(el => paragraphCounter === el.insertAfterParagraph);
+        insertIndex = insertedMobileAds.findIndex(el => paragraphCounter === el.insertAfterMobileParagraph);
       }
       if (insertIndex > -1) {
         insertedMobileAds[insertIndex].adArray.forEach((el) => {
           newContentElements1.push(el());
         });
-
-        // removes the ad from the array to make sure we don't accidentally display it again
-        insertedMobileAds.splice(insertIndex, 1);
       }
     }
     // it's not last (and thus hasn't already been added) so add it to the array
@@ -72,7 +68,7 @@ const Section = ({
     return null;
   });
 
-  // Transforms consecutive aligned elements into an aligned block
+  // Transform consecutive aligned elements into an aligned block
   newContentElements1.forEach((element, i) => {
     if (
       (!element.alignment && element?.props?.componentName !== 'ArcAd')
@@ -111,20 +107,20 @@ const Section = ({
   // Inserts desktop ads
   paragraphCounter = 0;
   newContentElements2.forEach((element, i) => {
-    const isLastItemInSection = incompleteSectionSegment && i === elements.length - 1;
+    const isLastItemInSection = incompleteSectionSegment && i === newContentElements2.length - 1;
     // filters the paragraphs to only show the ones inside the range specified by startIndex and stopIndex
 
     if (startIndex <= paragraphCounter && paragraphCounter < stopIndex) {
-      if (stopIndex === elements.length || isLastItemInSection) {
+      if (stopIndex === newContentElements2.length || isLastItemInSection) {
         newContentElements3.push(element);
       }
       // handle ads, if there are any
       if (insertedDesktopAds) {
         let insertIndex;
-        if (stopIndex === elements.length || isLastItemInSection) {
-          insertIndex = insertedDesktopAds.findIndex(el => paragraphCounter + 1 === el.insertAfterParagraph);
+        if (stopIndex === newContentElements2.length || isLastItemInSection) {
+          insertIndex = insertedDesktopAds.findIndex(el => paragraphCounter + 1 === el.insertAfterDesktopParagraph);
         } else {
-          insertIndex = insertedDesktopAds.findIndex(el => paragraphCounter === el.insertAfterParagraph);
+          insertIndex = insertedDesktopAds.findIndex(el => paragraphCounter === el.insertAfterDesktopParagraph);
         }
         if (insertIndex > -1) {
           insertedDesktopAds[insertIndex].adArray.forEach((el) => {
@@ -136,7 +132,7 @@ const Section = ({
         }
       }
       // it's not last (and thus hasn't already been added) so add it to the array
-      if (stopIndex !== elements.length && !isLastItemInSection) {
+      if (stopIndex !== newContentElements2.length && !isLastItemInSection) {
         newContentElements3.push(element);
       }
     }
@@ -166,7 +162,7 @@ const Section = ({
     return (
       <div className={
           `c-section b-sectionHome-padding
-          ${fullWidth ? 'full-width b-clear-both' : ''}
+          full-width b-clear-both
           b-margin-bottom-d40-m20
           ${comesAfterDivider ? 'after-divider' : ''}`
         }>
@@ -182,8 +178,6 @@ Section.propTypes = {
   elements: PropTypes.array,
   startIndex: PropTypes.number,
   stopIndex: PropTypes.number,
-  fullWidth: PropTypes.boolean,
-  rightRail: PropTypes.object,
   insertedMobileAds: PropTypes.array,
   insertedDesktopAds: PropTypes.array,
   insertAtSectionEnd: PropTypes.array,

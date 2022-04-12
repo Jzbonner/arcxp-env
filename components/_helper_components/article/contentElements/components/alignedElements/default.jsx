@@ -1,4 +1,4 @@
-import React, { createElement } from 'react';
+import React, { createElement, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import Image from '../../../../global/image/default.jsx';
@@ -37,7 +37,7 @@ const AlignedElements = ({ src, ampPage, index }) => {
         );
       default:
         if (element?.props?.componentName === 'ArcAd') {
-          return element;
+          return <Fragment key={`test-${i}`}>{element}</Fragment>;
         }
         return null;
     }
@@ -68,7 +68,7 @@ const AlignedElements = ({ src, ampPage, index }) => {
       // then put these inside a div inside the new aligned elements block
       if (columnArray.length > 0) {
         newAlignedElements.push(
-          createElement('div', { className: `column align-${alignDirection}` }, columnArray),
+          createElement('div', { key: `column-${i}`, className: `column align-${alignDirection}` }, columnArray),
         );
         columnArray = [];
         alignDirection = '';
@@ -81,7 +81,7 @@ const AlignedElements = ({ src, ampPage, index }) => {
   // This happens if the last element in this group of aligned elements is aligned the same way as the previous element.
   if (columnArray.length > 0) {
     newAlignedElements.push(
-      createElement('div', { className: `column align-${alignDirection}` }, columnArray),
+      createElement('div', { key: `column-${columnArray.length}`, className: `column align-${alignDirection}` }, columnArray),
     );
   }
 

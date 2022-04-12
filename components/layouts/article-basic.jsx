@@ -148,14 +148,25 @@ const StoryPageLayout = () => {
     insertAtEndOfStory.push(<ConnextHyperLocalSubscription />, <ConnextEndOfStory />);
   }
 
+  // All mobile ads need to be passed into each section because it is not predictable anymore
+  // which elements each section will output since elements that are aligned get transformed into a single aligned row
+
+  // Mobile and Desktop "paragraphs" are slightly different.
+  // Desktop Paragraphs are what is left after aligned elements are transformed into a single row.
+  // This happens in the section component, lines 72-105
+  const insertedMobileAds = [
+    { insertAfterMobileParagraph: 2, adArray: !ampPage ? [MP02] : [ampMP02] },
+    { insertAfterMobileParagraph: 4, adArray: ampPage && maxNumberOfParagraphs >= 4 && paywallStatus !== 'free' ? [connextThankYouMessage] : [] },
+    { insertAfterMobileParagraph: 8, adArray: !ampPage ? [MP03] : [ampMP03] },
+  ];
+
   const storyContentOutput = () => <>
     <Section
       elements={filteredContentElements}
       startIndex={1}
       stopIndex={3}
-      insertedMobileAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [MP02] : [ampMP02] }] : null}
-      insertedDesktopAds={!noAds ? [{ insertAfterParagraph: 2, adArray: [HP01_2] }] : null}
-      fullWidth={true}
+      insertedMobileAds={insertedMobileAds}
+      insertedDesktopAds={!noAds ? [{ insertAfterDesktopParagraph: 2, adArray: [HP01_2] }] : null}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
       ampPage={ampPage}
     />
@@ -178,11 +189,9 @@ const StoryPageLayout = () => {
       elements={filteredContentElements}
       startIndex={start}
       stopIndex={stop}
-      fullWidth={true}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
       ampPage={ampPage}
-      insertedMobileAds={ampPage && maxNumberOfParagraphs >= 4 && paywallStatus !== 'free' ? [{ insertAfterParagraph: 4, adArray: [connextThankYouMessage] }] : null}
-      insertedDesktopAds={ampPage && maxNumberOfParagraphs >= 4 && paywallStatus !== 'free' ? [{ insertAfterParagraph: 4, adArray: [connextThankYouMessage] }] : null}
+      insertedMobileAds={insertedMobileAds}
     />
   {!noAds && maxNumberOfParagraphs >= 4
       && <>
@@ -198,9 +207,8 @@ const StoryPageLayout = () => {
     <Section
       elements={filteredContentElements}
       startIndex={stop}
-      insertedMobileAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [MP03] : [ampMP03] }] : null}
-      insertedDesktopAds={!noAds ? [{ insertAfterParagraph: 8, adArray: [HP01_3] }] : null}
-      fullWidth={true}
+      insertedMobileAds={insertedMobileAds}
+      insertedDesktopAds={!noAds ? [{ insertAfterDesktopParagraph: 8, adArray: [HP01_3] }] : null}
       insertAtSectionEnd={insertAtEndOfStory}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
       ampPage={ampPage}
@@ -303,7 +311,6 @@ const StoryPageLayout = () => {
             <Section
               elements={filteredContentElements}
               stopIndex={1}
-              fullWidth={true}
               comesAfterDivider={infoBoxIndex && infoBoxIndex === 0}
               ampPage={ampPage}
             />
