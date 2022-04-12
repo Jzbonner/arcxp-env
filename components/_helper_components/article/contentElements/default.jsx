@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import BlockQuote from './components/blockQuote/default.jsx';
@@ -82,7 +82,7 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
                 index={count}
               />;
           case 'aligned_elements':
-            return <AlignedElements src={element} ampPage={ampPage} index={count} />;
+            return <AlignedElements key={`AlignedElement-${i}`} src={element} ampPage={ampPage} index={count} />;
           default:
             if (
               element.props
@@ -98,7 +98,7 @@ const ContentElements = ({ contentElements, ampPage = false, startIndex }) => {
                 || element.props.componentName === 'SponsorRelatedBoxAMP'
               )
             ) {
-              return element;
+              return <Fragment key={i}>{element}</Fragment>;
             }
             return null;
         }

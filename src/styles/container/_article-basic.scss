@@ -228,9 +228,17 @@ main > .c-gallery-basic {
     }
   }
 
+  .story-text + .arc_ad[class*="HP01"] {
+    margin-top: 40px;
+  }
+
   .arc_ad[class*="HP01"] {
-    display: flex;
-    justify-content: center;
+    display: none;
+
+    @include breakpoint(tablet) {
+      display: flex;
+      justify-content: center;
+    }
 
     .arcad {
       margin-bottom: 0;
