@@ -7,7 +7,7 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
     isStickyVisible, isMobile, isCaptionOn, currentIndex, modalVisible,
   } = states;
   const {
-    prev, next, modal,
+    prev, next, modal, nonAdjacent,
   } = funcs;
 
   let galleryData = null;
@@ -30,6 +30,7 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
 
       isNext = (i === 1);
       isPrev = (i === elements.length - 1);
+
       const lastItemClass = i === elements.length - 1 ? ' last-item-height-fix' : '';
 
       const galleryItem = {
@@ -65,6 +66,8 @@ const createBaseGallery = (elements = [], states = {}, isWindowMobile, funcs = {
         functionToPass = prev;
       } else if (isNext) {
         functionToPass = next;
+      } else {
+        functionToPass = nonAdjacent;
       }
 
       return (
