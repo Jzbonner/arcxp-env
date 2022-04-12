@@ -63,7 +63,7 @@ const DarkModeToggle = ({ toggle }) => {
 };
 
 DarkModeToggle.propTypes = {
-  toggle: PropTypes.bool,
+  toggle: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 export default DarkModeToggle;

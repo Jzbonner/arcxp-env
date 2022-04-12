@@ -19,12 +19,16 @@ body.dark-mode,
 body.special {
 
   .nav-breaking-news.is-above-shade,
-  .c-footer,
-  .copyright-wrapper,
-  .copyright-wrapper .c-copyright,
   .footer-wrapper,
-  .special-nav {
+  .special-nav,
+  .copyright-wrapper {
     background-color: #000;
+  }
+
+  .c-footer,
+  .copyright-wrapper .c-copyright,
+  .logo-row .copyright-wrapper {
+    background-color: #212126;
   }
 }
 
@@ -132,11 +136,12 @@ body.special .nav-breaking-news {
       }
   
       p.story-text,
+      h1,
       b,
-      main a,
       main .section-title,
       .c-sectionTitle,
-      .how p {
+      .how p,
+      .byline .names {
         color: initial !important; // stylelint-disable-line declaration-no-important
       }
       // Light mode override header styling
@@ -241,9 +246,10 @@ body.special .nav-breaking-news {
     &.dark-mode,
     &.special {
 
-      .c-copyright,
+      .c-copyright .c-backToTop,
       .menu-body-links a,
-      .menu-header {
+      .menu-header,
+      .copyright.in-footer {
         color: #fff;
       }
 
@@ -264,10 +270,13 @@ body.special .nav-breaking-news {
       }
   
       p.story-text,
+      h1,
       b,
       main .section-title,
       .c-sectionTitle,
-      .how p {
+      .how p,
+      .byline .names,
+      .copyright.in-footer {
         color: #fff !important; // stylelint-disable-line declaration-no-important
       }
     }
@@ -294,22 +303,31 @@ body.special .nav-breaking-news {
 
     #fusion-app,
     #fusion-app main,
-    .c-footer,
     .footer-wrapper,
-    .special-nav {
+    .special-nav,
+    .copyright-wrapper {
       background-color: #000;
     }
 
+    .c-footer,
+    .c-copyright,
+    .logo-row .copyright-wrapper {
+      background-color: #212126;
+    }
+
     p.story-text,
+    h1,
     b,
     .c-sectionTitle,
-    .c-copyright,
+    .c-copyright .c-backToTop,
     .menu-body-links a,
     .menu-header,
     .rights,
     .privacy,
     .learn-more,
-    .c-backToTop {
+    .c-backToTop,
+    .byline .names,
+    .copyright.in-footer {
       color: #fff !important; // stylelint-disable-line declaration-no-important
     }
 
@@ -348,11 +366,13 @@ body.special .nav-breaking-news {
     }
 
     p.story-text,
+    h1,
     b,
-    main a,
     main .section-title,
     .c-sectionTitle,
-    .how p {
+    .how p,
+    .byline .names,
+    .copyright.in-footer {
       color: #000 !important; // stylelint-disable-line declaration-no-important
     }
   }
