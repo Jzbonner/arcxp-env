@@ -166,9 +166,10 @@ const StoryPageLayout = () => {
       startIndex={1}
       stopIndex={3}
       insertedMobileAds={insertedMobileAds}
-      insertedDesktopAds={!noAds ? [{ insertAfterDesktopParagraph: 2, adArray: [HP01_2] }] : null}
+      insertedDesktopAds={[{ insertAfterDesktopParagraph: 2, adArray: [HP01_2] }]}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
       ampPage={ampPage}
+      noAds={noAds}
     />
     {!noAds && maxNumberOfParagraphs === 3 && <InterscrollerPlaceholder
       ampPage={ampPage}
@@ -192,6 +193,7 @@ const StoryPageLayout = () => {
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= start}
       ampPage={ampPage}
       insertedMobileAds={insertedMobileAds}
+      noAds={noAds}
     />
   {!noAds && maxNumberOfParagraphs >= 4
       && <>
@@ -208,10 +210,11 @@ const StoryPageLayout = () => {
       elements={filteredContentElements}
       startIndex={stop}
       insertedMobileAds={insertedMobileAds}
-      insertedDesktopAds={!noAds ? [{ insertAfterDesktopParagraph: 8, adArray: [HP01_3] }] : null}
+      insertedDesktopAds={[{ insertAfterDesktopParagraph: 8, adArray: [HP01_3] }]}
       insertAtSectionEnd={insertAtEndOfStory}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
       ampPage={ampPage}
+      noAds={noAds}
     />
       {(!sponsorSectionID || disableSponsorRelatedBox === 'true') && !hideRelatedList && arcSite !== 'ajc' && (
      <div className="c-section full-width b-clear-both">

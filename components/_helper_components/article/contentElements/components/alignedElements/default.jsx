@@ -12,7 +12,7 @@ const AlignedElements = ({ src, ampPage, index }) => {
   let columnArray = [];
   let alignDirection = '';
 
-  const component = (element, i) => {
+  const getComponent = (element, i) => {
     switch (element.type) {
       case 'text':
         return (
@@ -51,16 +51,16 @@ const AlignedElements = ({ src, ampPage, index }) => {
       || element.alignment === elements?.[i - 1]?.alignment
     ) {
       alignDirection = element.alignment;
-      columnArray.push(component(element, i));
+      columnArray.push(getComponent(element, i));
     } else if (
       // If element is next to an ad and matches certain other conditions, then it belongs in a column div inside the aligned elements block
       (!alignDirection && element.alignment && elements?.[i + 1]?.props?.componentName === 'ArcAd')
       || (alignDirection && element.alignment === alignDirection && elements?.[i - 1]?.props?.componentName === 'ArcAd')) {
       alignDirection = element.alignment;
-      columnArray.push(component(element, i));
+      columnArray.push(getComponent(element, i));
     } else if (element?.props?.componentName === 'ArcAd') {
       if (elements?.[i - 1]?.alignment && elements?.[i + 1]?.alignment) {
-        columnArray.push(component(element, i));
+        columnArray.push(getComponent(element, i));
       }
     } else {
       // We've reached the end of the consecutively aligned elements,
@@ -73,7 +73,7 @@ const AlignedElements = ({ src, ampPage, index }) => {
         columnArray = [];
         alignDirection = '';
       }
-      newAlignedElements.push(component(element, i));
+      newAlignedElements.push(getComponent(element, i));
     }
   });
 
