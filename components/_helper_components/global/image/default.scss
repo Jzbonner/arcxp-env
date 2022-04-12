@@ -272,7 +272,7 @@
 
   .c-contentElements {
 
-    .c-image-component.image-landscape:not(.overlay-active) {
+    .c-image-component.image-landscape.align-center:not(.overlay-active) {
       @include breakpoint(desktop-sm) {
         width: 1022px;
         left: -147px;
@@ -281,7 +281,7 @@
 
     .c-aligned-elements {
 
-      .c-image-component.image-landscape:not(.overlay-active) {
+      .c-image-component.image-landscape.align-center:not(.overlay-active) {
         @include breakpoint(desktop-sm) {
           width: unset;
           left: unset;
