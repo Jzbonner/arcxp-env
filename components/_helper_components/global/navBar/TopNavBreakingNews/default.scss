@@ -141,7 +141,8 @@ body.special .nav-breaking-news {
       main .section-title,
       .c-sectionTitle,
       .how p,
-      .byline .names {
+      .byline .names,
+      .special-nav li:not(.active) a {
         color: initial !important; // stylelint-disable-line declaration-no-important
       }
       // Light mode override header styling
@@ -299,7 +300,7 @@ body.special .nav-breaking-news {
   
   // Dark mode override for light scheme
 
-  body.dark-mode {
+  body.dark-mode:not(.special) {
 
     #fusion-app,
     #fusion-app main,
@@ -372,8 +373,9 @@ body.special .nav-breaking-news {
     .c-sectionTitle,
     .how p,
     .byline .names,
-    .copyright.in-footer {
-      color: #000 !important; // stylelint-disable-line declaration-no-important
+    .copyright.in-footer,
+    .special-nav li:not(.active) a {
+      color: #212126 !important; // stylelint-disable-line declaration-no-important
     }
   }
 }
