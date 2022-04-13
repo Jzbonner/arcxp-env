@@ -136,6 +136,8 @@ export default {
       activateUrl: 'https://test-subscribe.daytondailynews.com/',
       activateAmpPaywallUrl: 'https://test-subscribe.daytondailynews.com/ohpaywall',
       activateAmpInlineUrl: 'https://test-subscribe.daytondailynews.com/ohpaywall',
+      authClientId: 'JTGMjyrq8xAEcoNqfehXaZ9Viurb9v14',
+      authDomainName: 'ajc-dev',
     },
     prod: {
       isEnabled: true,

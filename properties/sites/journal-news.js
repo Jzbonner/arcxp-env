@@ -136,6 +136,8 @@ export default {
       activateUrl: 'https://test-subscribe.journal-news.com/',
       activateAmpPaywallUrl: 'https://test-subscribe.journal-news.com/ohpaywall',
       activateAmpInlineUrl: 'https://test-subscribe.journal-news.com/ohpaywall',
+      authClientId: '75tPgxqA9O1p6p4uSC2qlfq6nGmkEnQs',
+      authDomainName: 'ajc-dev',
     },
     prod: {
       isEnabled: true,

@@ -5,6 +5,7 @@ import { useAppContext } from 'fusion:context';
 import fetchEnv from '../utils/environment';
 import ArcAdLib from '../../../features/ads/src/children/ArcAdLib';
 import GetConnextLocalStorageData from './connextLocalStorage';
+import handleSiteName from '../../../layouts/_helper_functions/handleSiteName.js';
 
 const logOutput = (msg, debug = false) => {
   if (debug || (typeof window !== 'undefined' && window?.location?.search?.indexOf('connextDebug') > -1)) {
@@ -20,6 +21,7 @@ export const ConnextAuthTrigger = () => {
   const { type: promoType = '' } = basicItems || {};
   const currentEnv = fetchEnv();
   const { connext } = getProperties(arcSite);
+  console.log('>>Arctsite', arcSite, connext);
   const [readyState, setReadyState] = useState(false);
   const [autoplayVideo, setAutoplayVideo] = useState(false);
   const [loadedDeferredItems, _setLoadedDeferredItems] = useState(false);
@@ -320,6 +322,8 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
     tagManager,
     containerId,
     userAuthenticationTime: userAuthTime = 9999,
+    authClientId,
+    authDomainName,
   } = connext[currentEnv] || {};
 
   if (!isEnabled) return null;
@@ -537,6 +541,11 @@ const ConnextInit = ({ triggerLoginModal = false }) => {
                 userAuthenticationTime: ${userAuthTime},
                 debug: ${debug},
                 silentmode: false,
+                authSettings: {
+                  domain: '${authDomainName}',
+                  client_id: '${authClientId}',
+                  redirect_uri: 'https://${currentEnv === 'prod' ? 'www' : 'sandbox'}.${handleSiteName(siteName)}.com/auth0-redirect/',
+                },
                 publicEventHandlers: {
                   onConversationDetermined: (e) => {
                     if (!bindConnextConversationDetermined) {
