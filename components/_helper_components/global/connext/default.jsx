@@ -21,7 +21,6 @@ export const ConnextAuthTrigger = () => {
   const { type: promoType = '' } = basicItems || {};
   const currentEnv = fetchEnv();
   const { connext } = getProperties(arcSite);
-  console.log('>>Arctsite', arcSite, connext);
   const [readyState, setReadyState] = useState(false);
   const [autoplayVideo, setAutoplayVideo] = useState(false);
   const [loadedDeferredItems, _setLoadedDeferredItems] = useState(false);
