@@ -10,7 +10,7 @@ import SocialShare from '../_helper_components/article/socialShare/amp.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
-import Section from '../_helper_components/article/section/Section';
+import SectionMobile from '../_helper_components/article/section/Section-Mobile';
 import TaboolaFeed from '../features/taboolaFeed/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
@@ -150,7 +150,7 @@ const StoryPageLayout = () => {
   }
 
   const storyContentOutput = () => <>
-    <Section
+    <SectionMobile
       elements={filteredContentElements}
       startIndex={1}
       stopIndex={3}
@@ -174,7 +174,7 @@ const StoryPageLayout = () => {
         isMeteredStory={isMeteredStory}
       />
     )}
-    <Section
+    <SectionMobile
       elements={filteredContentElements}
       startIndex={start}
       stopIndex={stop}
@@ -194,7 +194,7 @@ const StoryPageLayout = () => {
         />
       </>
     }
-    <Section
+    <SectionMobile
       elements={filteredContentElements}
       startIndex={stop}
       insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [HP01_3, MP03] : [ampMP03] }] : null}
@@ -298,7 +298,7 @@ const StoryPageLayout = () => {
             )}
 
             <SponsorStoryMessage sponsorID={sponsorSectionID} paywallStatus={paywallStatus} isAmp={ampPage} siteFullname={siteFullname} />
-            <Section
+            <SectionMobile
               elements={filteredContentElements}
               stopIndex={1}
               fullWidth={true}
