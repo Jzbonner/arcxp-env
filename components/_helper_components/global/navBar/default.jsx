@@ -190,7 +190,6 @@ const NavBar = ({
             setToggle={setToggle}
             animationVisibility={stickyNavVisibility}
             primarySectionID={primarySectionID}
-            darkMode={darkMode}
             omitHeaderItems={omitHeaderItems}
             enableDarkMode={enableDarkMode}
             />

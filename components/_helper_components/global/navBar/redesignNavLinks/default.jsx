@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import Search from '../search/default';
 import Hamburger from '../../../../../resources/icons/global/hamburger';
+import HamburgerDark from '../../../../../resources/icons/global/hamburgerDark';
 
 const RedesignNavLinks = ({
-  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, omitHeaderItems, enableDarkMode,
+  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, omitHeaderItems, enableDarkMode, darkModeToggled,
 }) => {
   const { siteDomainURL, darkModeSubscribe } = getProperties(arcSite);
   const itemCount = sections.length;
@@ -60,7 +61,7 @@ const RedesignNavLinks = ({
     <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       { !omitHeaderItems
       && <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
-       <Hamburger/>
+       {darkModeToggled ? <HamburgerDark/> : <Hamburger/>}
       </div>
       }
       {logoPath && siteName && <div className={`sticky-logo-homepage ${siteName}`}>
@@ -71,7 +72,7 @@ const RedesignNavLinks = ({
       <div className='stickyNav-homepage'>
         <ul>
           {items}
-          {enableDarkMode && <li><a href={darkModeSubscribe} target='_self' className='nav-itemText'>Subscribe Today</a></li>}
+          {enableDarkMode && <li><a href={darkModeSubscribe} target='_self' className='nav-itemText dark-mode'>Subscribe Today</a></li>}
         </ul>
         <Search isHeader={true}/>
       </div>
@@ -90,6 +91,7 @@ RedesignNavLinks.propTypes = {
   primarySectionID: PropTypes.string,
   omitHeaderItems: PropTypes.bool,
   enableDarkMode: PropTypes.bool,
+  darkModeToggled: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 export default RedesignNavLinks;

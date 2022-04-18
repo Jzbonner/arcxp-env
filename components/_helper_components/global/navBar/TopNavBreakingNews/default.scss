@@ -48,7 +48,6 @@ body.special .nav-breaking-news {
     }
 
     .logo,
-    .nav-menu-toggle g,
     .c-login path {
       fill: #fff !important; // stylelint-disable-line declaration-no-important
     }
@@ -82,7 +81,7 @@ body.special .nav-breaking-news {
       border-top: solid 1px #dadada;
     }
 
-    ul li:not(:last-child) a {
+    ul li:not(:last-child) a:not(:hover) {
       color: #fff;
     }
 
@@ -96,7 +95,7 @@ body.special .nav-breaking-news {
     }
   }
 
-  .stickyNav-homepage ul li:not(:last-child) a,
+  .stickyNav-homepage ul li:not(:last-child) a:not(:hover),
   .c-login .login-text,
   .weather-text a,
   .c-weather :before {
@@ -248,7 +247,7 @@ body.special .nav-breaking-news {
     &.special {
 
       .c-copyright .c-backToTop,
-      .menu-body-links a,
+      .menu-body-links a:not(:hover),
       .menu-header,
       .copyright.in-footer {
         color: #fff;
@@ -321,8 +320,9 @@ body.special .nav-breaking-news {
     b,
     .c-sectionTitle,
     .c-copyright .c-backToTop,
-    .menu-body-links a,
+    .menu-body-links a:not(:hover),
     .menu-header,
+    .copyright,
     .rights,
     .privacy,
     .learn-more,
@@ -350,7 +350,7 @@ body.special .nav-breaking-news {
       fill: #fff;
     }
 
-    .menu-body-links a,
+    .menu-body-links a:not(:hover),
     .copyright.in-footer,
     .c-backToTop {
       color: #fff;
@@ -367,7 +367,7 @@ body.special .nav-breaking-news {
     }
 
     p.story-text,
-    h1,
+    :not(.header--special) h1,
     b,
     main .section-title,
     .c-sectionTitle,
