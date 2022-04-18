@@ -367,7 +367,7 @@ body.special .nav-breaking-news {
     }
 
     p.story-text,
-    :not(.header--special) h1,
+    header:not(.header--special) h1,
     b,
     main .section-title,
     .c-sectionTitle,

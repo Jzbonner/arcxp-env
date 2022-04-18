@@ -1233,10 +1233,6 @@
     height: 20px;
     cursor: pointer;
 
-    g {
-      fill: #212126;
-    }
-
     @include between-breakpoints(tablet, desktop-sm) {
       min-width: 14px;
     }
