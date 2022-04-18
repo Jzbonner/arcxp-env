@@ -192,6 +192,7 @@ const NavBar = ({
             primarySectionID={primarySectionID}
             omitHeaderItems={omitHeaderItems}
             enableDarkMode={enableDarkMode}
+            darkModeToggled={darkModeToggled}
             />
         </div>
         <HamburgerMenu
