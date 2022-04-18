@@ -13,6 +13,7 @@ import {
 import {
   debounce, createBaseGallery, handleImageFocus, reorganizeElements, handlePropContentElements,
 } from './_helper_functions/index';
+import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
 import checkTags from '../../layouts/_helper_functions/checkTags';
 import ArcAd from '../ads/default';
 import PGO1Element from '../../_helper_components/global/ads/pg01/default';
@@ -33,6 +34,8 @@ const Gallery = (props) => {
   const appContext = useAppContext();
   const { isAdmin, arcSite = 'ajc', globalContent } = appContext;
   const { taxonomy: globalTaxonomy } = globalContent || {};
+  const contentMeta = getContentMeta();
+  const { treatPbPageAsArticle } = contentMeta || {};
   const isStory = pageType === 'story';
 
   // holds Gallery items
@@ -419,6 +422,7 @@ const Gallery = (props) => {
       },
       clickFuncs,
       isEmbed,
+      treatPbPageAsArticle,
     );
 
     setElementData(preRenderEls);
@@ -632,6 +636,7 @@ const Gallery = (props) => {
           },
           clickFuncs,
           isEmbed,
+          treatPbPageAsArticle,
         );
 
         setElementData(finalizedElements);
@@ -709,6 +714,7 @@ const Gallery = (props) => {
         modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
       },
       isEmbed,
+      treatPbPageAsArticle,
     );
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData || {};
 
@@ -748,12 +754,13 @@ const Gallery = (props) => {
   }
 
   const galleryOutput = () => (
-    <div className={`${!isStory && !isEmbed ? 'c-gallery-homeSection' : ''} ${isEmbed ? 'c-gallery-embed' : ''}`}>
+    <div className={`${!isStory && !isEmbed ? 'c-gallery-homeSection' : ''} ${isEmbed ? 'c-gallery-embed' : ''} ${isEmbed && treatPbPageAsArticle ? 'pb-article-gallery' : ''}`}>
       {!isMobile ? (
         <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
           <ImageModal src={currentImageSrc} isVisible={modalVisible} />
         </div>
       ) : null}
+      <div className='top-rule'></div>
       <div ref={galleryEl} className={`gallery-wrapper ${!isEmbed && isMobile && !isStickyVisible ? 'mobile-display' : ''}`} >
         {(!isMobile && galHeadline && isStory && !isEmbed) ? (
           <div className={`gallery-headline ${isEmbed ? 'hide' : ''}`}>

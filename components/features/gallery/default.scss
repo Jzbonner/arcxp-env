@@ -26,6 +26,23 @@
       margin: 0 auto;
       max-width: 1540px;
 
+      &.pb-article-gallery {
+
+        .gallery-wrapper {
+          margin: 0 auto;
+
+          .gallery-container {
+            @include breakpoint(desktop-sm) {
+              height: 393px;
+            }
+          }
+        }
+      }
+
+      .top-rule {
+        display: none;
+      }
+
       .gallery-wrapper {
         border-top: none;
         border-bottom: none;
@@ -38,6 +55,10 @@
 
         @include between-breakpoints(tablet, desktop-sm) {
           margin-left: 0;
+        }
+
+        @include breakpoint(desktop-sm) {
+          max-width: 967px;
         }
 
         .gallery-container {
@@ -53,6 +74,11 @@
         }
 
         .gallery-caption-container {
+          border-bottom: none;
+
+          &:after {
+            display: none;
+          }
 
           .gallery-credit,
           .gallery-caption {
@@ -102,11 +128,30 @@ body.dark-mode .c-sectionHome .c-gallery-embed .gallery-wrapper {
     width: 100%;
   }
 
-  .gallery-wrapper {
+  .top-rule {
+    padding-bottom: 15px;
     border-top: 1px solid #cdcdcd;
-    border-bottom: 1px solid #cdcdcd;
-    padding-top: 15px;
-  
+    margin: 0 20px;
+
+    @include between-breakpoints(mobile, tablet) {
+      width: 89.5%;
+      position: relative;
+      margin: 0 auto;
+      left: -4px;
+    }
+
+    @include between-breakpoints(tablet, desktop-sm) {
+      max-width: 730px;
+      position: relative;
+      left: 4.5px;
+    }
+
+    @include breakpoint(tablet) {
+      margin: 0;
+    }
+  }
+
+  .gallery-wrapper {
     @include between-breakpoints(mobile, tablet) {
       max-height: none;
       max-width: 100vw;
@@ -135,8 +180,23 @@ body.dark-mode .c-sectionHome .c-gallery-embed .gallery-wrapper {
       margin-top: 0;
       margin-bottom: 0;
 
-      @include between-breakpoints(mobile, tablet) {
-        margin-bottom: 15px;
+      &:after {
+        content: " ";
+        display: block;
+        width: calc(100vw - 40px);
+        height: 1px;
+        border-bottom: 1px solid #cdcdcd;
+        padding-top: 15px;
+        margin: 0 26px auto;
+
+        @include breakpoint(tablet) {
+          display: none;
+        }
+      }
+
+      @include breakpoint(tablet) {
+        border-bottom: 1px solid #cdcdcd;
+        padding-bottom: 10px;
       }
 
       @include between-breakpoints(tablet, desktop-sm) {

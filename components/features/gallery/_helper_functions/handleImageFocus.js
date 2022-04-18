@@ -2,7 +2,7 @@ import React from 'react';
 import GalleryItem from '../../../_helper_components/global/gallery/galleryItem.jsx';
 
 // adds focus class to current gallery-item element
-const handleImageFocus = (arr = [], states = {}, funcs = {}, isEmbed) => {
+const handleImageFocus = (arr = [], states = {}, funcs = {}, isEmbed, isPbArticle) => {
   const {
     isStickyVisible, isMobile, isCaptionOn, currentIndex, maxIndex, isAdVisible, currentAction, hasOpened, isModalVisible,
   } = states;
@@ -60,6 +60,7 @@ const handleImageFocus = (arr = [], states = {}, funcs = {}, isEmbed) => {
       modalFunc={currentIndex === element.props.data.index ? modal : null}
       calculateTranslateX={calculateTranslateX}
       isEmbed={isEmbed}
+      isPbArticle={isPbArticle}
       />
     );
   });
