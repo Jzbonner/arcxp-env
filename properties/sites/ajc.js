@@ -126,6 +126,8 @@ export default {
       activateUrl: 'https://test-subscribe.ajc.com/',
       activateAmpPaywallUrl: 'https://test-subscribe.ajc.com/startgwamp',
       activateAmpInlineUrl: 'https://test-subscribe.ajc.com/startamp',
+      authClientId: 'fPa1b3KLfGmHfZXfYKc0WtQQ9X37pwYu',
+      authDomainName: 'ajc-dev',
     },
     prod: {
       isEnabled: true,

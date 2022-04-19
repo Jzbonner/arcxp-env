@@ -130,6 +130,8 @@ export default {
       debug: false,
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
+      authClientId: 'JTGMjyrq8xAEcoNqfehXaZ9Viurb9v14',
+      authDomainName: 'ajc-dev',
     },
     prod: {
       isEnabled: true,

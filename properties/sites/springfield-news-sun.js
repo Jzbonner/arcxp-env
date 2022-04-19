@@ -134,6 +134,8 @@ export default {
       activateUrl: 'https://test-subscribe.springfieldnewssun.com/',
       activateAmpPaywallUrl: 'https://test-subscribe.springfieldnewssun.com/ohpaywall',
       activateAmpInlineUrl: 'https://test-subscribe.springfieldnewssun.com/ohpaywall',
+      authClientId: 'osxgXLnLyH8UQDKML8sCr8TdgR7R7vA2',
+      authDomainName: 'ajc-dev',
     },
     prod: {
       isEnabled: true,
