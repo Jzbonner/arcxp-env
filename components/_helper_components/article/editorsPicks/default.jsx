@@ -5,12 +5,14 @@ import '../relatedList/default.scss';
 import '../../../features/MostRead/default.scss';
 
 const EditorsPicks = ({ collectionId }) => {
+  const useSophi = true;
+
   const customFields = {
     content: {
       contentConfigValues: {
-        from: 0, size: 5, id: collectionId,
+        from: useSophi ? 1 : 0, size: 5, id: collectionId, page: 'home', widget: 'local',
       },
-      contentService: 'collections-api',
+      contentService: useSophi ? 'sophi' : 'collections-api',
     },
   };
 
