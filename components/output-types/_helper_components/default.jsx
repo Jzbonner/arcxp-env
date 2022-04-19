@@ -53,7 +53,12 @@ const RenderOutputType = (props) => {
   return (
     <html lang='en'>
       <head>
-        {isZeus && <script src={`https://${handleSiteName(currentSite)}${currentEnv === 'sandbox' ? '-test' : ''}.zeustechnology.io/main.js`} async='true'></script>}
+        {isZeus && <>
+            <script dangerouslySetInnerHTML={{
+              __html: 'window.zeusAdUnitPath = "/{{gamId}}/{{slotId}}/";',
+            }}></script>
+            <script src={`https://${handleSiteName(currentSite)}${currentEnv === 'sandbox' ? '-test' : ''}.zeustechnology.io/main.js`} async='true'></script>
+        </>}
         <MetaTags />
         <SiteMeta />
         <GoogleStructuredData {...props} />
