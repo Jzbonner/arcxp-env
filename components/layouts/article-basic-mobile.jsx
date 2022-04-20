@@ -10,7 +10,7 @@ import SocialShare from '../_helper_components/article/socialShare/amp.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
-import SectionMobile from '../_helper_components/article/section/Section-Mobile';
+import SectionMobile from '../_helper_components/article/section/SectionMobile';
 import TaboolaFeed from '../features/taboolaFeed/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
