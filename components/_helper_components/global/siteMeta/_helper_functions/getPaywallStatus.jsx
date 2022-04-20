@@ -1,11 +1,14 @@
 import { useAppContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
+import fetchEnv from '../../utils/environment.js';
 
 const getPaywallStatus = () => {
   const appContext = useAppContext();
   const { arcSite, globalContent } = appContext;
-  const { enableSophiPaywall } = getProperties(arcSite) || {};
+  const currentEnv = fetchEnv();
+  const { sophi } = getProperties(arcSite) || {};
+  const { enableSophiPaywall } = sophi[currentEnv] || {};
   const {
     _id: uuid,
     subtype,
