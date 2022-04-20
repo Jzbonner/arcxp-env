@@ -222,11 +222,13 @@ export const ConnextAuthTrigger = () => {
           setAutoplayVideo(true);
         } else if (window?.sophi) {
           // the free limit has been exceeded and/or they are unauthorized; it's a paywall interaction, so trigger a Sophi event
+          // but first we need to find if it's a metered or subscriberonly hit
+          const accessCategory = window.sophi?.data?.content?.accessCategory;
           window.sophi.sendEvent(
             {
               type: 'wall_hit',
               data: {
-                type: 'paywall-metered',
+                type: `paywall-${accessCategory === 'subscribers only' ? 'hard' : 'metered'}`,
                 name: 'regular',
               },
             },
