@@ -43,7 +43,7 @@ const RenderOutputType = (props) => {
   const { isNonContentPage } = pageType || {};
   const contentMeta = getContentMeta() || {};
   const { topics = [], contentId = '', darkMode } = contentMeta;
-  const noAds = checkTags(topics, 'no-ads');
+  const noAds = checkTags(topics, 'no-ads') || (outputType && outputType === 'sq3perfbaseline');
   const noAmp = checkTags(topics, 'no-amp');
   const includeGtm = metrics && metrics.gtmContainerKey;
   const isZeus = outputType && outputType === 'zeus';
