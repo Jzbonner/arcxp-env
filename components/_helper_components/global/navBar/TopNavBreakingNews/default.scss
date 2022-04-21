@@ -125,7 +125,7 @@ body.special .nav-breaking-news {
     }
     // Light mode override for when a user has dark scheme on their device but switches to AJC light mode
 
-    &:not(.dark-mode) {
+    &:not(.dark-mode):not(.special) {
 
       #fusion-app,
       #fusion-app main,
@@ -261,7 +261,7 @@ body.special .nav-breaking-news {
     }
     // Dark mode styling, not memoriam or special
 
-    &.dark-mode {
+    &.dark-mode:not(.special) {
       background-color: #000;
 
       #fusion-app,

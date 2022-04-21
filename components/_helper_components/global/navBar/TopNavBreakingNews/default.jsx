@@ -136,7 +136,7 @@ const TopNavBreakingNews = ({
           enableDarkMode={darkMode}
           darkModeToggled={darkModeToggled}
           setDarkModeToggle={setDarkModeToggle}
-          inMemoriam={inMemoriam}
+          inMemoriam={inMemoriam || darkHeaderFooter}
         />
       </div>
     </>
