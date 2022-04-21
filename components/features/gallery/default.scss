@@ -123,6 +123,15 @@ body.dark-mode .c-sectionHome .c-gallery-embed .gallery-wrapper {
     width: 100%;
   }
 
+  &.embed-ad-enabled {
+
+    .gallery-wrapper .gallery-container .gallery-image {
+      @include between-breakpoints(mobile, tablet) {
+        visibility: hidden;
+      }
+    }
+  }
+
   .top-rule {
     padding-bottom: 15px;
     border-top: 1px solid #cdcdcd;

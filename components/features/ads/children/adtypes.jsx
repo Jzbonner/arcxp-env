@@ -927,17 +927,6 @@ export const adSlots = {
       [0, 0], // mobile
     ],
   },
-  'MPG01-Embed': {
-    slotName: 'MPG01',
-    dimensions: [
-      [], // desktop
-      [200, 150], // mobile+
-    ],
-    breakpoints: [
-      [1024, 0], // desktop
-      [0, 0], // mobile
-    ],
-  },
   SP01: {
     slotName: 'SP01',
     dimensions: [

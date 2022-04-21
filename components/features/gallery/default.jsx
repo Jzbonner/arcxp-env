@@ -769,7 +769,7 @@ const Gallery = (props) => {
   }
 
   const galleryOutput = () => (
-    <div className={`${!isStory && !isEmbed ? 'c-gallery-homeSection' : ''} ${isEmbed ? 'c-gallery-embed' : ''} ${isEmbed && treatPbPageAsArticle ? 'pb-article-gallery' : ''}`}>
+    <div className={`${!isStory && !isEmbed ? 'c-gallery-homeSection' : ''} ${isEmbed ? 'c-gallery-embed' : ''} ${isEmbed && treatPbPageAsArticle ? 'pb-article-gallery' : ''} ${isEmbed && isAdVisible ? 'embed-ad-enabled' : ''}`}>
       {!isMobile ? (
         <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
           <ImageModal src={currentImageSrc} isVisible={modalVisible} />
