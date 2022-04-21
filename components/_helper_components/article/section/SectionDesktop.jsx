@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ContentElements from '../contentElements/default.jsx';
 import { isParagraph } from '../../../layouts/_helper_functions/Paragraph';
 
-const Section = ({
+const SectionDesktop = ({
   insertedAds,
   elements,
   insertAtSectionEnd,
@@ -94,7 +94,7 @@ const Section = ({
   return null;
 };
 
-Section.propTypes = {
+SectionDesktop.propTypes = {
   elements: PropTypes.array,
   startIndex: PropTypes.number,
   stopIndex: PropTypes.number,
@@ -106,4 +106,4 @@ Section.propTypes = {
   ampPage: PropTypes.boolean,
 };
 
-export default Section;
+export default SectionDesktop;
