@@ -7,7 +7,7 @@ const MPGO1Element = ({
   refHook,
   galleryTopics = [],
 }) => (
-    <div ref={refHook} className="ad-mpg01-parent b-margin-bottom-5">
+    <div ref={refHook} className={`ad-mpg01-parent b-margin-bottom-5 ${refHook ? 'is-embed' : ''}`}>
       {adSlot && adSlot(adCount, galleryTopics)}
     </div>
 );

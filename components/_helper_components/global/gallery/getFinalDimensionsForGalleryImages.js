@@ -33,7 +33,7 @@ const getFinalDimensionsForGalleryImages = (isEmbed, isWidth, isPbArticle) => {
     }
 
     if (window.innerWidth < 768) {
-      return 227;
+      return 280;
     }
   }
 
