@@ -10,7 +10,7 @@ import SocialShare from '../_helper_components/article/socialShare/amp.jsx';
 import Headline from '../_helper_components/article/headline/default.jsx';
 import SubHeadline from '../_helper_components/article/subheadline/default.jsx';
 import SectionLabel from '../_helper_components/global/sectionLabel/default.jsx';
-import SectionMobile from '../_helper_components/article/section/SectionMobile';
+import SectionDesktop from '../_helper_components/article/section/SectionDesktop';
 import TaboolaFeed from '../features/taboolaFeed/default';
 import Nativo from '../_helper_components/article/nativo/nativo.jsx';
 import BlogAuthor from '../_helper_components/article/blogAuthor/BlogAuthor';
@@ -84,7 +84,6 @@ const StoryPageLayout = () => {
   const { by: authorData } = credits || {};
   const { basic: basicItems } = promoItems || {};
   const { type: promoType = '' } = basicItems || {};
-
   const paywallStatus = getPaywallStatus();
   const isMeteredStory = allowMeter
     && paywallStatus
@@ -93,10 +92,12 @@ const StoryPageLayout = () => {
 
   const ampMP02 = () => <AmpAd adSlot="MP02" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />;
   const ampMP03 = () => <AmpAd adSlot="MP03" uuid={uuid} width={'300'} height={'250'} taxonomy={taxonomy} componentName={'ArcAd'} isMeteredStory={isMeteredStory} />;
+  const RP01StoryDesktop = () => <ArcAd staticSlot={'RP01-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP01-Story-Desktop'} />;
+  const RP01StoryTablet = () => <ArcAd staticSlot={'RP01-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP01-Story-Tablet'} />;
   const MP02 = () => <ArcAd staticSlot={'MP02'} lazyLoad={isMeteredStory} key={'MP02'} />;
   const MP03 = () => <ArcAd staticSlot={'MP03'} lazyLoad={isMeteredStory} key={'MP03'} />;
-  const HP01_2 = () => <ArcAd staticSlot={'HP01'} lazyLoad={isMeteredStory} key={'HP01'} adSuffix="_2"/>;
-  const HP01_3 = () => <ArcAd staticSlot={'HP01'} lazyLoad={isMeteredStory} key={'HP01'} adSuffix="_3"/>;
+  const RP09StoryDesktop = () => <ArcAd staticSlot={'RP09-Story-Desktop'} lazyLoad={isMeteredStory} key={'RP09-Story-Desktop'} />;
+  const RP09StoryTablet = () => <ArcAd staticSlot={'RP09-Story-Tablet'} lazyLoad={isMeteredStory} key={'RP09-Story-Tablet'} />;
   const connextThankYouMessage = () => <ConnextThankYouMessage isAmp={ampPage} siteFullname={siteFullname} />;
 
   const windowExists = typeof window !== 'undefined';
@@ -150,11 +151,12 @@ const StoryPageLayout = () => {
   }
 
   const storyContentOutput = () => <>
-    <SectionMobile
+    <SectionDesktop
       elements={filteredContentElements}
       startIndex={1}
       stopIndex={3}
-      insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [HP01_2, MP02] : [ampMP02] }] : null}
+      rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 2, ad: RP01StoryDesktop } : null}
+      insertedAds={!noAds ? [{ insertAfterParagraph: 2, adArray: !noAds && !ampPage ? [RP01StoryTablet, MP02] : [ampMP02] }] : null}
       fullWidth={true}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= 1}
       ampPage={ampPage}
@@ -174,7 +176,7 @@ const StoryPageLayout = () => {
         isMeteredStory={isMeteredStory}
       />
     )}
-    <SectionMobile
+    <SectionDesktop
       elements={filteredContentElements}
       startIndex={start}
       stopIndex={stop}
@@ -194,10 +196,11 @@ const StoryPageLayout = () => {
         />
       </>
     }
-    <SectionMobile
+    <SectionDesktop
       elements={filteredContentElements}
       startIndex={stop}
-      insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [HP01_3, MP03] : [ampMP03] }] : null}
+      rightRail={!noAds && !ampPage ? { insertBeforeParagraph: 8, ad: RP09StoryDesktop } : null}
+      insertedAds={!noAds ? [{ insertAfterParagraph: 8, adArray: !noAds && !ampPage ? [RP09StoryTablet, MP03] : [ampMP03] }] : null}
       fullWidth={true}
       insertAtSectionEnd={insertAtEndOfStory}
       comesAfterDivider={infoBoxIndex && infoBoxIndex <= stop}
@@ -298,7 +301,7 @@ const StoryPageLayout = () => {
             )}
 
             <SponsorStoryMessage sponsorID={sponsorSectionID} paywallStatus={paywallStatus} isAmp={ampPage} siteFullname={siteFullname} />
-            <SectionMobile
+            <SectionDesktop
               elements={filteredContentElements}
               stopIndex={1}
               fullWidth={true}
