@@ -19,7 +19,7 @@ import '../../../../src/styles/container/_c-headerNav.scss';
 
 const StickyNav = ({
   headlines, comments = false, setStickyNavVisibility, stickyNavVisibility,
-  isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections, articleUrl, hasWindowShade = false, darkMode, darkModeLogo, enableDarkMode,
+  isMobileVisibilityRef, logoRef, setToggle, paddingRef, type, sections, articleUrl, hasWindowShade = false, darkMode, darkModeLogo, enableDarkMode, inMemoriam,
 }) => {
   const fusionContext = useFusionContext();
   const { arcSite } = fusionContext;
@@ -117,7 +117,7 @@ const StickyNav = ({
     <>
       <div className={`stickyNav b-sectionHomeMaxWidth ${hasWindowShade || stickyVisibilityRef.current ? 'is-visible' : ''}`}>
         <div className='b-flexRow c-stickyLogin'>
-          <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={darkMode && siteNameLower === 'ajc' ? darkModeLogo : logoPath} isNonShareablePage={isNonShareablePage} enableDarkMode={enableDarkMode} darkModeToggled={darkMode}/>
+          <RedesignNavLinks sections={sections} arcSite={arcSite} setToggle={setToggle} siteName={siteNameLower} logoPath={darkMode && siteNameLower === 'ajc' ? darkModeLogo : logoPath} isNonShareablePage={isNonShareablePage} enableDarkMode={enableDarkMode} darkModeToggled={darkMode} inMemoriam={inMemoriam}/>
           <ul className={`c-stickyNav-list ${siteNameLower} stickyNav-social ${isNonShareablePage ? 'hidden' : ''}`}>
               <li className="stickyNav-item fb-icon" >
                 <a href={shareLinkFacebook} target="__blank">
@@ -185,6 +185,7 @@ StickyNav.propTypes = {
   darkMode: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   darkModeLogo: PropTypes.string,
   enableDarkMode: PropTypes.bool,
+  inMemoriam: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 export default StickyNav;

@@ -193,6 +193,7 @@ const NavBar = ({
             omitHeaderItems={omitHeaderItems}
             enableDarkMode={enableDarkMode}
             darkModeToggled={darkModeToggled}
+            inMemoriam={inMemoriam}
             />
         </div>
         <HamburgerMenu
@@ -228,6 +229,7 @@ const NavBar = ({
           darkMode={darkMode}
           darkModeLogo={`${deployment(`${contextPath}${burgerWhiteLogo}`)}`}
           enableDarkMode={enableDarkMode}
+          inMemoriam={inMemoriam}
         />
       </div>
       <div className={ `sticky-padding ${stickyNavVisibility ? 'is-visible' : ''}`} ref={paddingRef}></div>
@@ -262,7 +264,7 @@ NavBar.propTypes = {
   darkModeToggled: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   setDarkModeToggle: PropTypes.func,
   specialPresentationDark: PropTypes.bool,
-  inMemoriam: PropTypes.bool,
+  inMemoriam: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 export default NavBar;

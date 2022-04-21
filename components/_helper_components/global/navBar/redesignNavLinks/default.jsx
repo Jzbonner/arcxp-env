@@ -6,7 +6,7 @@ import Hamburger from '../../../../../resources/icons/global/hamburger';
 import HamburgerDark from '../../../../../resources/icons/global/hamburgerDark';
 
 const RedesignNavLinks = ({
-  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, omitHeaderItems, enableDarkMode, darkModeToggled,
+  sections = [], arcSite, setToggle, siteName, logoPath, isNonShareablePage, animationVisibility = false, primarySectionID, omitHeaderItems, enableDarkMode, darkModeToggled, inMemoriam,
 }) => {
   const { siteDomainURL, darkModeSubscribe } = getProperties(arcSite);
   const itemCount = sections.length;
@@ -61,7 +61,7 @@ const RedesignNavLinks = ({
     <div className={`c-topNavLinks ${isNonShareablePage ? '' : 'content'}`}>
       { !omitHeaderItems
       && <div ref={hamburgerRef}className='nav-menu-toggle pulse' onClick={() => { setToggle(true); }}>
-       {darkModeToggled ? <HamburgerDark/> : <Hamburger/>}
+       {(darkModeToggled || inMemoriam) ? <HamburgerDark/> : <Hamburger/>}
       </div>
       }
       {logoPath && siteName && <div className={`sticky-logo-homepage ${siteName}`}>
@@ -92,6 +92,7 @@ RedesignNavLinks.propTypes = {
   omitHeaderItems: PropTypes.bool,
   enableDarkMode: PropTypes.bool,
   darkModeToggled: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  inMemoriam: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 export default RedesignNavLinks;
