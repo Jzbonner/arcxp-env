@@ -13,6 +13,7 @@ import {
 import {
   debounce, createBaseGallery, handleImageFocus, reorganizeElements, handlePropContentElements,
 } from './_helper_functions/index';
+import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
 import checkTags from '../../layouts/_helper_functions/checkTags';
 import ArcAd from '../ads/default';
 import PGO1Element from '../../_helper_components/global/ads/pg01/default';
@@ -33,6 +34,8 @@ const Gallery = (props) => {
   const appContext = useAppContext();
   const { isAdmin, arcSite = 'ajc', globalContent } = appContext;
   const { taxonomy: globalTaxonomy } = globalContent || {};
+  const contentMeta = getContentMeta();
+  const { treatPbPageAsArticle } = contentMeta || {};
   const isStory = pageType === 'story';
 
   // holds Gallery items
@@ -80,10 +83,12 @@ const Gallery = (props) => {
 
   /* Special presentation gallery */
   const [previousIndex, setPreviousIndex] = useState(0);
+  const [embedAdCount, setEmbedAdCount] = useState(0);
 
   const galleryEl = useRef(null);
   const galleryMobileEl = useRef(null);
   const PG01Ref = useRef(null);
+  const MPG01Ref = useRef(null);
   const mobileBreakPoint = 767;
 
   const actions = {
@@ -186,7 +191,16 @@ const Gallery = (props) => {
   const calculateTranslateX = () => {
     if (isMobile && !isEmbed) return;
     let translateAmount;
-    const focusElement = isAdVisible ? PG01Ref.current : document.getElementById(`gallery-item-${currentIndex}`) || null;
+    let targetedAd = null;
+    const insertMPG01 = !!(isEmbed && window.innerWidth <= mobileBreakPoint);
+
+    if (isAdVisible && !insertMPG01) {
+      targetedAd = PG01Ref.current;
+    } else if (isAdVisible && isEmbed && insertMPG01) {
+      targetedAd = MPG01Ref.current;
+    }
+
+    const focusElement = isAdVisible ? targetedAd : document.getElementById(`gallery-item-${currentIndex}`) || null;
     const galleryFullWidth = galleryEl.current ? galleryEl.current.offsetWidth : null;
     if (galleryEl.current && focusElement) {
       translateAmount = parseInt(galleryFullWidth, 10) / 2 - parseInt(focusElement.offsetWidth, 10) / 2 - parseInt(focusElement.offsetLeft, 10);
@@ -318,14 +332,20 @@ const Gallery = (props) => {
 
   const insertDesktopGalleryAd = () => {
     const elements = [...elementData];
-
-    const insertionBuffer = currentAction === actions.PREV ? 0 : 1;
+    const insertMPG01 = !!(isEmbed && window.innerWidth <= mobileBreakPoint);
+    const insertionBuffer = currentAction === actions.PREV || insertMPG01 ? 0 : 1;
 
     elementData.forEach((element, i) => {
-      // inserts add after current photo
+      // inserts ad after current photo
+      // Embedded galleries must have MPG01 on mobile breakpoints
+      const MPG01 = (adCount, mpg01GalleryTopics) => <ArcAd staticSlot={'MPG01'} adSuffix={`_${adCount}`} key={'MPG01'} galleryTopics={mpg01GalleryTopics} />;
+
       if (element.props.data.states.isFocused) {
-        elements.splice(i + insertionBuffer, 0, <PGO1Element refHook={PG01Ref} adSlot={PG01} key={`${i}-PG01`} galleryTopics={galleryTopics} />);
+        elements.splice(i + insertionBuffer, 0,
+          insertMPG01 ? <MPGO1Element refHook={MPG01Ref} adSlot={MPG01} adCount={embedAdCount} key={`${i}-MPG01`} galleryTopics={galleryTopics} /> : <PGO1Element refHook={PG01Ref} adSlot={PG01} key={`${i}-PG01`} galleryTopics={galleryTopics} />);
       }
+
+      if (insertMPG01) setEmbedAdCount(embedAdCount + 1);
     });
 
     return elements;
@@ -419,6 +439,7 @@ const Gallery = (props) => {
       },
       clickFuncs,
       isEmbed,
+      treatPbPageAsArticle,
     );
 
     setElementData(preRenderEls);
@@ -473,7 +494,6 @@ const Gallery = (props) => {
 
   const handleResizeEvent = () => {
     calculateTranslateX();
-
     if (!isEmbed) {
       if (windowExists && window.innerWidth <= mobileBreakPoint) {
         setMobileState(true);
@@ -481,7 +501,6 @@ const Gallery = (props) => {
         setMobileState(false);
       }
     }
-
     setCurrentAction(actions.RESIZE);
   };
 
@@ -583,7 +602,7 @@ const Gallery = (props) => {
         setCurrentAction('');
       }
     }
-  }, [isAdVisible, currentIndex, currentAction, translateX, elementData, captionData, galleryEl, hasOpened, modalVisible]);
+  }, [isAdVisible, currentIndex, currentAction, translateX, elementData, captionData, galleryEl, hasOpened, modalVisible, embedAdCount, isAdVisible]);
 
   useEffect(() => {
     if (!isAdVisible && !isMobile) renderCaptionByCurrentIndex();
@@ -632,6 +651,7 @@ const Gallery = (props) => {
           },
           clickFuncs,
           isEmbed,
+          treatPbPageAsArticle,
         );
 
         setElementData(finalizedElements);
@@ -709,6 +729,7 @@ const Gallery = (props) => {
         modal: (src, isModalVisible) => handelImageModalView(src, isModalVisible),
       },
       isEmbed,
+      treatPbPageAsArticle,
     );
     const { galleryData = [], desktopCaptionData = [] } = captionAndGalleryData || {};
 
@@ -748,12 +769,13 @@ const Gallery = (props) => {
   }
 
   const galleryOutput = () => (
-    <div className={`${!isStory && !isEmbed ? 'c-gallery-homeSection' : ''} ${isEmbed ? 'c-gallery-embed' : ''}`}>
+    <div className={`${!isStory && !isEmbed ? 'c-gallery-homeSection' : ''} ${isEmbed ? 'c-gallery-embed' : ''} ${isEmbed && treatPbPageAsArticle ? 'pb-article-gallery' : ''} ${isEmbed && isAdVisible ? 'embed-ad-enabled' : ''}`}>
       {!isMobile ? (
         <div onClick={() => handelImageModalView(currentImageSrc, modalVisible)}>
           <ImageModal src={currentImageSrc} isVisible={modalVisible} />
         </div>
       ) : null}
+      <div className='top-rule'></div>
       <div ref={galleryEl} className={`gallery-wrapper ${!isEmbed && isMobile && !isStickyVisible ? 'mobile-display' : ''}`} >
         {(!isMobile && galHeadline && isStory && !isEmbed) ? (
           <div className={`gallery-headline ${isEmbed ? 'hide' : ''}`}>

@@ -1,7 +1,11 @@
-const getFinalDimensionsForGalleryImages = (isEmbed, isWidth) => {
+const getFinalDimensionsForGalleryImages = (isEmbed, isWidth, isPbArticle) => {
   if (isEmbed && typeof window !== 'undefined') {
     if (isWidth) {
-      if (window.innerWidth > 1023) {
+      if (window.innerWidth > 1023 && isPbArticle) {
+        return 647;
+      }
+
+      if (window.innerWidth > 1023 && !isPbArticle) {
         return 405;
       }
 
@@ -16,7 +20,11 @@ const getFinalDimensionsForGalleryImages = (isEmbed, isWidth) => {
 
     // if isWidth is falsy, then we'll calculate height..
 
-    if (window.innerWidth > 1023) {
+    if (window.innerWidth > 1023 && isPbArticle) {
+      return 393;
+    }
+
+    if (window.innerWidth > 1023 && !isPbArticle) {
       return 263;
     }
 
@@ -25,7 +33,7 @@ const getFinalDimensionsForGalleryImages = (isEmbed, isWidth) => {
     }
 
     if (window.innerWidth < 768) {
-      return 227;
+      return 280;
     }
   }
 

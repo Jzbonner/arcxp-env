@@ -5,7 +5,7 @@ import getFinalDimensionsForGalleryImages from './getFinalDimensionsForGalleryIm
 
 
 const GalleryItem = ({
-  data, func, modalFunc, isMobileGallery = false, isEmbed,
+  data, func, modalFunc, isMobileGallery = false, isEmbed, isPbArticle,
 }) => {
   const {
     url, width, height, focal_point: focalPoint, alt, index, id, by = [], captionObj = {}, states = {}, lastItemClass, resized_obj: resizedObj,
@@ -20,8 +20,9 @@ const GalleryItem = ({
 
   if (affiliationCredit && !affiliationCredit.includes('Credit:')) affiliationCredit = `Credit: ${affiliationCredit}`;
 
-  const finalWidth = getFinalDimensionsForGalleryImages(isEmbed, true);
-  const finalHeight = getFinalDimensionsForGalleryImages(isEmbed, false);
+  const finalWidth = getFinalDimensionsForGalleryImages(isEmbed, true, isPbArticle);
+  const finalHeight = getFinalDimensionsForGalleryImages(isEmbed, false, isPbArticle);
+
   const imageProps = {
     width: finalWidth,
     height: finalHeight,
@@ -101,6 +102,7 @@ GalleryItem.propTypes = {
   modalFunc: PropTypes.func,
   isMobileGallery: PropTypes.bool,
   isEmbed: PropTypes.bool,
+  isPbArticle: PropTypes.bool,
 };
 
 export default GalleryItem;

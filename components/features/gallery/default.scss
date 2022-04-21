@@ -25,6 +25,28 @@
       width: 100vw;
       margin: 0 auto;
       max-width: 1540px;
+      overflow: hidden;
+
+      &.pb-article-gallery {
+
+        .gallery-wrapper {
+          margin: 0 auto;
+
+          @include breakpoint(desktop-sm) {
+            width: 70%;
+          }
+
+          .gallery-container {
+            @include breakpoint(desktop-sm) {
+              height: 393px;
+            }
+          }
+        }
+      }
+
+      .top-rule {
+        display: none;
+      }
 
       .gallery-wrapper {
         border-top: none;
@@ -40,12 +62,6 @@
           margin-left: 0;
         }
 
-        .gallery-container {
-          @include between-breakpoints(mobile, tablet) {
-            height: 227px;
-          }
-        }
-
         .gallery-caption-icons-box {
           @include breakpoint(desktop-sm) {
             margin: 30px auto 15px;
@@ -53,6 +69,11 @@
         }
 
         .gallery-caption-container {
+          border-bottom: none;
+
+          &:after {
+            display: none;
+          }
 
           .gallery-credit,
           .gallery-caption {
@@ -102,11 +123,39 @@ body.dark-mode .c-sectionHome .c-gallery-embed .gallery-wrapper {
     width: 100%;
   }
 
-  .gallery-wrapper {
+  &.embed-ad-enabled {
+
+    .gallery-wrapper .gallery-container .gallery-image {
+      @include between-breakpoints(mobile, tablet) {
+        visibility: hidden;
+      }
+    }
+  }
+
+  .top-rule {
+    padding-bottom: 15px;
     border-top: 1px solid #cdcdcd;
-    border-bottom: 1px solid #cdcdcd;
-    padding-top: 15px;
-  
+    margin: 0 20px;
+
+    @include between-breakpoints(mobile, tablet) {
+      width: 89.5%;
+      position: relative;
+      margin: 0 auto;
+      left: -4px;
+    }
+
+    @include between-breakpoints(tablet, desktop-sm) {
+      max-width: 730px;
+      position: relative;
+      left: 4.5px;
+    }
+
+    @include breakpoint(tablet) {
+      margin: 0;
+    }
+  }
+
+  .gallery-wrapper {
     @include between-breakpoints(mobile, tablet) {
       max-height: none;
       max-width: 100vw;
@@ -132,11 +181,26 @@ body.dark-mode .c-sectionHome .c-gallery-embed .gallery-wrapper {
     }
 
     .gallery-caption-container {
-      margin-top: 0;
+      margin-top: 15px;
       margin-bottom: 0;
 
-      @include between-breakpoints(mobile, tablet) {
-        margin-bottom: 15px;
+      &:after {
+        content: " ";
+        display: block;
+        width: calc(100vw - 40px);
+        height: 1px;
+        border-bottom: 1px solid #cdcdcd;
+        padding-top: 15px;
+        margin: 0 26px auto;
+
+        @include breakpoint(tablet) {
+          display: none;
+        }
+      }
+
+      @include breakpoint(tablet) {
+        border-bottom: 1px solid #cdcdcd;
+        padding-bottom: 10px;
       }
 
       @include between-breakpoints(tablet, desktop-sm) {
@@ -173,6 +237,7 @@ body.dark-mode .c-sectionHome .c-gallery-embed .gallery-wrapper {
 
         @include between-breakpoints(mobile, tablet) {
           margin-left: 26px;
+          max-width: 90%;
         }
   
         @include breakpoint(tablet) {
@@ -200,8 +265,7 @@ body.dark-mode .c-sectionHome .c-gallery-embed .gallery-wrapper {
 
       @include between-breakpoints(mobile, tablet) {
         height: 50px;
-        top: -27px;
-        margin: 2.4rem auto 0;
+        margin: 20px auto 0;
       }
 
       @include between-breakpoints(tablet, desktop-sm) {
@@ -317,6 +381,14 @@ body.dark-mode .c-sectionHome .c-gallery-embed .gallery-wrapper {
     }
     
     .gallery-container {
+
+      .ad-mpg01-parent.is-embed {
+        margin-right: 10px;
+        max-height: 280px;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+
       @include between-breakpoints(mobile, tablet) {
         height: auto;
         visibility: visible;
@@ -341,7 +413,7 @@ body.dark-mode .c-sectionHome .c-gallery-embed .gallery-wrapper {
           height: 100%;
 
           @include between-breakpoints(mobile, tablet) {
-            min-height: 227px;
+            min-height: 280px;
           }
 
           @include between-breakpoints(tablet, desktop-sm) {
