@@ -3,7 +3,7 @@ const GetConnextLocalStorageData = (siteCode, configCode, environment, localStor
   let lsResponse = {};
   if (typeof window !== 'undefined' && window.localStorage !== 'undefined') {
     const connextLS = window.localStorage.getItem(connextLSLookup);
-    if (connextLS) {
+    if (connextLS && connextLS.indexOf('{') === 0) {
       lsResponse = JSON.parse(connextLS);
     }
   }

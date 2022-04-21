@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import { useAppContext } from 'fusion:context';
 import AdSetup from './src/index';
+import Zeus from './zeus/default';
 import fetchEnv from '../../_helper_components/global/utils/environment.js';
 import { adSlots, defaultAdSlot } from './children/adtypes';
 import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
@@ -19,7 +20,8 @@ const ArcAd = ({
 }) => {
   const { temp, text: sky, precipitation: weather } = currentConditions() || {};
   const appContext = useAppContext();
-  const { isAdmin, arcSite } = appContext;
+  const { isAdmin, arcSite, outputType } = appContext;
+
   const { slot: customFieldsSlot, lazy: lazyLoadedFromPb } = customFields || {};
   // when setting ads as lazy loaded from pagebuilder, we apply a random suffix to ensure no duplicate div id's
   const pbAdSuffix = lazyLoadedFromPb ? `-${Math.floor(Math.random() * 100000)}` : '';
@@ -59,6 +61,10 @@ const ArcAd = ({
   const slotBiddingName = adConfig.biddingName || adConfig.slotName || slot;
 
   const targeting = adConfig.targeting || defaultAdSlot.targeting || {};
+
+  // if Zeus, abort & load the zeus package instead
+  if (outputType === 'zeus') return <Zeus slotName={slotName} galleryTopics={galleryTopics} />;
+
   // get global targeting values
 
   const contentMeta = getContentMeta();

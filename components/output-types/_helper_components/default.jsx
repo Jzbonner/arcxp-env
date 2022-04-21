@@ -14,6 +14,7 @@ import GoogleStructuredData from '../../_helper_components/article/googleData/de
 import fetchEnv from '../../_helper_components/global/utils/environment';
 import gtmScript from '../helper_functions/gtmScript';
 import getContentMeta from '../../_helper_components/global/siteMeta/_helper_functions/getContentMeta';
+import handleSiteName from '../../layouts/_helper_functions/handleSiteName';
 
 const RenderOutputType = (props) => {
   const {
@@ -42,15 +43,22 @@ const RenderOutputType = (props) => {
   const { isNonContentPage } = pageType || {};
   const contentMeta = getContentMeta() || {};
   const { topics = [], contentId = '', darkMode } = contentMeta;
-  const noAds = checkTags(topics, 'no-ads');
+  const noAds = checkTags(topics, 'no-ads') || (outputType && outputType === 'sq3perfbaseline');
   const noAmp = checkTags(topics, 'no-amp');
   const includeGtm = metrics && metrics.gtmContainerKey;
+  const isZeus = outputType && outputType === 'zeus';
   let fullPathDomain = layout.indexOf('wrap-') !== -1 ? `https://www.${cdnSite || currentSite}.com` : '';
   /* eslint-disable-next-line max-len */
   fullPathDomain = ['dayton-daily-news', 'springfield-news-sun'].indexOf(cdnSite) > -1 ? fullPathDomain.replace(/-/g, '') : fullPathDomain;
   return (
     <html lang='en'>
       <head>
+        {isZeus && <>
+            <script dangerouslySetInnerHTML={{
+              __html: 'window.zeusAdUnitPath = "/{{gamId}}/{{slotId}}/";',
+            }}></script>
+            <script src={`https://${handleSiteName(currentSite)}${currentEnv === 'sandbox' ? '-test' : ''}.zeustechnology.io/main.js`} async='true'></script>
+        </>}
         <MetaTags />
         <SiteMeta />
         <GoogleStructuredData {...props} />
@@ -79,9 +87,9 @@ const RenderOutputType = (props) => {
             {/* End Google Tag Manager */}
           </>
         )}
-        {!noAds && <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>}
-        {!noAds && adsA9Enabled && <script src="https://c.amazon-adsystem.com/aax2/apstag.js"></script>}
-        {!noAds && adsPrebidEnabled && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/${prebidJs}`)}`}></script>}
+        {!noAds && !isZeus && <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>}
+        {!noAds && !isZeus && adsA9Enabled && <script src="https://c.amazon-adsystem.com/aax2/apstag.js"></script>}
+        {!noAds && !isZeus && adsPrebidEnabled && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/${prebidJs}`)}`}></script>}
         <Libs />
         {!noAds && <NativoScripts tags={topics} uuid={contentId} layout={layout} currentSite={currentSite} />}
         {!noAds && <script src={`${fullPathDomain}${deployment(`${contextPath}/resources/scripts/nativo.js`)}`}></script>}
