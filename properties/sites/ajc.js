@@ -134,7 +134,7 @@ export default {
       activateAmpPaywallUrl: 'https://test-subscribe.ajc.com/startgwamp',
       activateAmpInlineUrl: 'https://test-subscribe.ajc.com/startamp',
       authClientId: 'fPa1b3KLfGmHfZXfYKc0WtQQ9X37pwYu',
-      authDomainName: 'ajc-dev',
+      authDomainName: 'ajc-dev.us.auth0.com',
     },
     prod: {
       isEnabled: true,

@@ -131,7 +131,7 @@ export default {
       tagManager: 'GTM',
       containerId: 'GTM-W3VLHBK',
       authClientId: 'JTGMjyrq8xAEcoNqfehXaZ9Viurb9v14',
-      authDomainName: 'ajc-dev',
+      authDomainName: 'ajc-dev.us.auth0.com',
     },
     prod: {
       isEnabled: true,
