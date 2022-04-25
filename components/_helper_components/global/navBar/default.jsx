@@ -164,7 +164,7 @@ const NavBar = ({
 
   return (
     <header className='c-nav'>
-      {!omitBreakingNews && enableDarkMode && <BreakingNews />}
+      {!omitBreakingNews && !enableDarkMode && <BreakingNews />}
       <div className={`c-headerNav b-sectionHome-padding
         ${stickyNavVisibility ? 'stickyActive' : ''}
         ${hasWindowShade ? 'above-shade' : ''}
